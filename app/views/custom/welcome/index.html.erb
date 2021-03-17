@@ -16,16 +16,18 @@
 <%= render "header", header: @header %>
 
 <main>
-  <%= render "feeds" %>
 
   <div class='row'>
+    <div class='official-logo-wrapper'>
+      <%= svg_tag "official_logo", class: 'official-logo' %>
+    </div>
+  </div>
+
+  <%= render "feeds" %>
+
+  <div class='row clear'>
     <div class='small-12 medium-9 column'>
       <%=render_custom_block 'home_page_welcome' %>
-    </div>
-    <div class="small-12 medium-3 column">
-      <div class='official-logo-wrapper'>
-        <%= svg_tag "official_logo", class: 'official-logo' %>
-      </div>
     </div>
   </div>
 
