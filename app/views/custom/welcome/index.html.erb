@@ -18,6 +18,17 @@
 <main>
   <%= render "feeds" %>
 
+  <div class='row'>
+    <div class='small-12 medium-9 column'>
+      <%=render_custom_block 'home_page_welcome' %>
+    </div>
+    <div class="small-12 medium-3 column">
+      <div class='official-logo-wrapper'>
+        <%= svg_tag "official_logo", class: 'official-logo' %>
+      </div>
+    </div>
+  </div>
+
   <div class="row">
     <div class="small-12 medium-9 column">
       <% page = SiteCustomization::Page.find_by slug: "indexdt" %>
