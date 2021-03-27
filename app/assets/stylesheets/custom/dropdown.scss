@@ -1,64 +1,67 @@
 // setup_project
 // Dropdown
-.main-nav,
-.drop-nav {
-  background: $dropdownbackground;
-}
-.main-nav {
-  float: left;
-}
-  .main-nav > li {
-    float: left;
-  }
-  .main-nav li:first-child {
-    border-left: none;
-  }
-  .main-nav a {
-    color: $dropdowntextcolor;
+
+#navigation_bar {
+
+  li.nav-element-projekt:hover > ul.flyout-projekts {
     display: block;
-    text-decoration: none;
   }
-.drop,
-.flyout {
-  position: relative;
-  z-index: 1000;
-}
-.drop-nav,
-.flyout-nav {
-  position: absolute;
-  display: none;
-  padding-left: 25px;
-  z-index: 2000;
-}
-// width of the list items
-.drop-nav li {
-  border-bottom: 1px solid $dropdownbordercolor;
-  width: $dropdownwidth;
-}
-.drop:hover > .drop-nav,
-.flyout:hover > .flyout-nav {
-  display: block;
-}
-.flyout-nav {
-  left: 100%;
-  top: 0;
-}
-.flyout:hover a,
-.flyout-nav {
-  background: $dropdownbackground;
-}
-.subnavigation {
-  background: $dropdownbackground;
-}
-#alert {
-  z-index: 3000;
-  position: absolute;
-}
-#notice {
-  z-index: 3000;
-  position: absolute;
-}
-.dropdown {
-  z-index: 3000;
-  position: relative;
+
+  ul.flyout-projekts {
+    left: 100%;
+    top: -1px;
+    display: none;
+    position: absolute;
+  }
+
+  li.static-projekt > ul.flyout-projekts {
+    left: 0;
+    top: 100%;
+  }
+
+  li {
+    position: relative;
+    z-index: 1;
+  }
+
+  li.flyout-projekt {
+    width: 300px;
+    background: #ececec;
+    padding-left: 1em;
+    border-top: 1px solid $brand;
+    border-bottom: 1px solid $brand;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  li.flyout-projekt ~ li.flyout-projekt {
+    border-top: none;
+  }
+
+  .projekt-name {
+    color: #222;
+    font-weight: bold;
+    position: relative;
+    line-height: 3rem;
+  }
+
+  li.flyout-projekt > .projekt-name {
+    width: 67%;
+  }
+
+  .projekt-modules-icons {
+    padding-top: 15px;
+    padding-right: 1em;
+    display: flex;
+    justify-content: flex-end;
+
+    .module-icon-link {
+      display: inline-block;
+      line-height: initial;
+    }
+
+    .module-icon {
+      width: 20px;
+    }
+  }
 }

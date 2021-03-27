@@ -1,0 +1,73 @@
+<h2><%= @projekt.name %>  </h2>
+<%= form_for(@projekt, url: admin_projekt_path, as: :projekt) do |f| %>
+
+  <h2><%= t('custom.admin.projekts.index.projekt_list') %>  </h2>
+  <table class='edit-projekt'>
+    <thead>
+      <th scope="col" class="small-3"><%= t("custom.admin.projekts.edit.phase_name") %></th>
+      <th scope="col" class="small-3"><%= t("custom.admin.projekts.edit.beginning") %></th>
+      <th scope="col" class="small-3"><%= t("custom.admin.projekts.edit.ending") %></th>
+      <th scope="col" class="small-3"><%= t("custom.admin.projekts.edit.actions") %></th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <%= t("custom.admin.projekts.edit.projekt_duration") %>
+        </td>
+        <td>
+          <%= f.date_field :total_duration_start %>
+        </td>
+        <td>
+          <%= f.date_field :total_duration_end %>
+        </td>
+        <td>
+          <%= f.check_box :total_duration_active, { label: t("custom.admin.projekts.edit.activate") }  %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= t("custom.admin.projekts.edit.debate_phase") %>
+        </td>
+        <td>
+          <%= f.date_field :debate_phase_start %>
+        </td>
+        <td>
+          <%= f.date_field :debate_phase_end %>
+        </td>
+        <td>
+          <%= f.check_box :debate_phase_active, { label: t("custom.admin.projekts.edit.activate") } %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= t("custom.admin.projekts.edit.proposal_phase") %>
+        </td>
+        <td>
+          <%= f.date_field :proposal_phase_start %>
+        </td>
+        <td>
+          <%= f.date_field :proposal_phase_end %>
+        </td>
+        <td>
+          <%= f.check_box :proposal_phase_active, { label: t("custom.admin.projekts.edit.activate") }  %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= t("custom.admin.projekts.edit.voting_phase") %>
+        </td>
+        <td colspan='3'>
+          <%= link_to t("custom.admin.projekts.edit.voting_manage"), admin_polls_path  %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class='projekt-options'>
+    <%= f.check_box :show_in_navigation, { label: t('custom.admin.projekts.edit.show_in_navigation_checkbox') } %>
+  </div>
+
+  <div>
+    <%= f.submit(t("custom.admin.projekts.edit.update"), class: "button success") %>
+  </div>
+<% end %>

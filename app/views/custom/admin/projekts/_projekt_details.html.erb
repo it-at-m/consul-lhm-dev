@@ -1,0 +1,41 @@
+<tr class='projekt-details'>
+  <td colspan="5">
+    <div class='projekt-link'>               
+      <%= link_to t("custom.admin.projekts.index.edit_page"), edit_admin_site_customization_page_path(projekt.page) %>
+      <% page_status = projekt.page.status %>
+      <%= "(#{page_status})" %>
+      <%= link_to t("custom.admin.projekts.index.page_link"), projekt.page.url if page_status == 'published' %>
+    </div>
+
+    <div class='projekt-dates'>               
+      <div>
+        <%= t("custom.admin.projekts.edit.projekt_duration") %>
+      </div>
+      <div>
+        <%= "#{projekt.total_duration_start} - #{projekt.total_duration_end}" %>
+      </div>
+
+      <div>
+        <%= t("custom.admin.projekts.edit.debate_phase") %>
+      </div>
+      <div>
+        <%= "#{projekt.debate_phase_start} - #{projekt.debate_phase_end}" %>
+      </div>
+
+      <div>
+        <%= t("custom.admin.projekts.edit.proposal_phase") %>
+      </div>
+      <div>
+        <%= "#{projekt.proposal_phase_start} - #{projekt.proposal_phase_end}" %>
+      </div>
+
+      <div>
+        <%= t("custom.admin.projekts.edit.show_in_navigation_checkbox") %>
+      </div>
+      <div>
+        <%= projekt.show_in_navigation ? t("custom.admin.projekts.edit.show_in_navigation")[true] : t("custom.admin.projekts.edit.show_in_navigation")[false] %>
+      </div>
+
+    </div>
+  </td>
+</tr>

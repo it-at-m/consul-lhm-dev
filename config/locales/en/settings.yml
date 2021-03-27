@@ -83,6 +83,10 @@ en:
     direct_message_max_per_day: "Direct Message max number per day"
     direct_message_max_per_day_description: "Number max of direct messages one user can send per day"
     feature:
+      enable_categories: "Categories"
+      enable_categories_description: "Enable categories for proposals, debates and polls"
+      enable_custom_tags: "Custom tags"
+      enable_custom_tags_description: "Enable custom tags for proposals, debates and polls"
       twitter_login: "Twitter login"
       twitter_login_description: "Allow users to sign up with their Twitter account"
       facebook_login: "Facebook login"

@@ -9,9 +9,15 @@ class Projekt < ApplicationRecord
 
   has_one :page, class_name: "SiteCustomization::Page", dependent: :destroy
 
-  after_create :create_corresponding_page
+  validates :name, uniqueness: true
+
+  after_create :create_corresponding_page, :set_order
+  after_destroy :ensure_order_integrity
 
   scope :top_level, -> { where(parent: nil) }
+  scope :with_order_number, -> { where.not(order_number: nil).order(order_number: :asc) }
+  scope :top_level_active, -> { top_level.with_order_number.where( "total_duration_active = ? and total_duration_start < ? and total_duration_end > ?", true, Date.today, Date.today) }
+  scope :top_level_archived, -> { top_level.with_order_number.where( "total_duration_active = ? and total_duration_start < ? and total_duration_end < ?", true, Date.today, Date.today) }
 
   def all_children_ids(all_children_ids = [])
     if self.children.any?
@@ -22,6 +28,40 @@ class Projekt < ApplicationRecord
     end
 
     all_children_ids
+  end
+
+  def top_parent
+    return self if self.parent.blank?
+    self.parent.top_parent
+  end
+
+  def siblings
+    if parent.present?
+      parent.children
+    else
+      Projekt.top_level
+    end
+  end
+
+  def order_up
+    set_order && return if order_number.blank?
+    return if order_number == 1
+    swap_order_numbers_up
+    ensure_order_integrity
+  end
+
+  def order_down
+    set_order && return if order_number.blank?
+    return if order_number > siblings.maximum(:order_number)
+    swap_order_numbers_down
+    ensure_order_integrity
+  end
+
+  def update_order
+    unless siblings.with_order_number.pluck(:order_number).first == 1 && siblings.with_order_number.pluck(:order_number).each_cons(2).all? { |a, b| b == a + 1 }
+      update(order_number: nil)
+      set_order
+    end
   end
 
   private
@@ -35,6 +75,45 @@ class Projekt < ApplicationRecord
     
     if page.save
       self.page = page
+    end
+  end
+
+  def set_order
+    if self.siblings.with_order_number.any?
+      ordered_siblings_count = self.siblings.with_order_number.last.order_number
+      self.update(order_number: ordered_siblings_count + 1)
+    else
+      self.update(order_number: 1)
+    end
+  end
+
+  def swap_order_numbers_up
+    if siblings.with_order_number.where("order_number < ?", order_number).any?
+      preceding_sibling_order_number = siblings.with_order_number.where("order_number < ?", order_number).last.order_number
+      preceding_sibling = siblings.find_by(order_number: preceding_sibling_order_number)
+
+      preceding_sibling.update(order_number: order_number)
+      self.update(order_number: preceding_sibling_order_number)     
+    end
+  end
+
+  def swap_order_numbers_down
+    if siblings.with_order_number.where("order_number > ?", order_number).any?
+      following_sibling_order_number = siblings.with_order_number.where("order_number > ?", order_number).first.order_number
+      following_sibling = siblings.find_by(order_number: following_sibling_order_number)
+
+      following_sibling.update(order_number: order_number)
+      self.update(order_number: following_sibling_order_number)     
+    end
+  end
+
+  def ensure_order_integrity
+    unless siblings.with_order_number.pluck(:order_number).first == 1 && siblings.with_order_number.pluck(:order_number).each_cons(2).all? { |a, b| b == a + 1 }
+      new_order = 1
+      siblings.with_order_number.each do |projekt|
+        projekt.update(order_number: new_order)
+        new_order += 1
+      end
     end
   end
 end

@@ -1,0 +1,34 @@
+<h2><%= t('custom.admin.projekts.index.add_projekt') %>  </h2>
+<%= form_for(@projekt, url: admin_projekts_path, as: :projekt) do |f| %>
+  <div class='small-12 medium-7'>
+    <%= f.text_field :name, {label: t("custom.admin.projekts.index.enter_name") } %>
+  </div>
+
+  <div class='small-12 medium-7'>
+    <% projekts = Projekt.all %>
+    <%= f.select :parent_id, projekts.pluck(:name, :id), 
+                 { include_blank: true, label: t('custom.admin.projekts.index.choose_parent') } %>
+  </div>
+
+  <div>
+    <%= f.submit(t("custom.admin.projekts.index.create"), class: "button success") %>
+  </div>
+<% end %>
+
+<hr>
+
+<h2><%= t('custom.admin.projekts.index.projekt_list') %>  </h2>
+<table class='projekts'>
+  <thead>
+    <th scope="col" class="small-1"><%= t("custom.admin.projekts.index.level") %></th>
+    <th scope="col" class="small-1"><%= t("custom.admin.projekts.index.position") %></th>
+    <th scope="col" class="small-3"><%= t("custom.admin.projekts.index.parent") %></th>
+    <th scope="col" class="small-3"><%= t("custom.admin.projekts.index.name") %></th>
+    <th scope="col"><%= t("admin.actions.actions") %></th>
+  </thead>
+  <tbody>
+  <% @projekts.order(order_number: :asc).each do |projekt| %>
+    <%= render partial: projekt, locals: { projekt: projekt }  %>
+  <% end %>
+  </tbody>
+</table>

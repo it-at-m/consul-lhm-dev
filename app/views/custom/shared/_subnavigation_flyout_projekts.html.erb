@@ -1,0 +1,34 @@
+<ul class="flyout-projekts">
+  <% projekts.each do |projekt| %>
+    <li class='nav-element-projekt flyout-projekt'>
+      <div class='projekt-name'>
+        <%= prepare_projekt_name(projekt) %>
+      </div>
+
+      <div class='projekt-modules-icons'>
+
+        <% if debate_phase_active?(projekt) %>
+          <%= link_to (debates_path + "?projekts=#{projekt.all_children_ids.push(projekt.id).join(',')}"), class: 'module-icon-link' do  %>
+            <%= image_tag "help/help_icon_debates.png", alt: t("debates.icon_alt"), class: "module-icon" %>
+          <% end %>
+        <% end %>
+
+        <% if proposal_phase_active?(projekt) %>
+          <%= link_to (proposals_path + "?projekts=#{projekt.all_children_ids.push(projekt.id).join(',')}"), class: 'module-icon-link' do  %>
+            <%= image_tag "help/help_icon_proposals.png", alt: t("proposals.icon_alt"), class: "module-icon" %>
+          <% end %>
+        <% end %>
+
+        <% if related_polls_exist?(projekt) %>
+          <%= link_to (polls_path + "?projekts=#{projekt.all_children_ids.push(projekt.id).join(',')}"), class: 'module-icon-link' do  %>
+            <%= image_tag "help/help_icon_polls.png", alt: t("polls.icon_alt"), class: "module-icon" %>
+          <% end %>
+        <% end %>
+
+      </div>
+      
+      <%= render partial: 'shared/subnavigation_flyout_projekts', locals: { projekts: projekt.children.with_order_number } if projekt.children.any? %>
+    </li>
+  <% end %>
+</ul>
+

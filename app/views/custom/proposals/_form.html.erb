@@ -72,39 +72,32 @@
     </div>
 
 
-    <%tags = params[:tags].present? ? params[:tags]&.map{|t| Tag.find_by(name: t)} : @proposal.tags %>
 
-    <%tag_list_o = @proposal.new_record? && @proposal.errors.empty? ? tags : @proposal.tag_list&.map{|t| Tag.find_by(name: t)} %>
 
-    <%categories = tag_list_o.select { |t| t.kind == 'category' }%>
-    <%subcategories = tag_list_o.select { |t| t.kind == 'subcategory' }%>
-
-    <%if params[:tags].present?%>
-      <%=f.hidden_field :tags, value: params[:tags].join(',') %>
+    <%if Setting["feature.enable_categories"]%>
+      <div class="small-12 column">
+        <%if @categories.any? %>
+          <div id="category_tags" class="tags">
+            <%= f.label :category_tag_list, t("proposals.form.tag_category_label") %>
+            <% @categories.each do |tag| %>
+              <a class="js-add-tag-link category-tag"><%= tag.name %></a>
+            <% end %>
+          </div>
+        <%end%>
+      </div>
+      <%=f.hidden_field :tag_list_predefined, value: @proposal.tags.reject{|t| !['category'].include?(t.kind)}.map(&:name).join(","), class: "js-tag-list list-tags predefined"%>
     <%end%>
 
-    <% selected_category = categories.first %>
+    <%if Setting["feature.enable_custom_tags"]%>
+      <div class="small-12 column">
+        <%= f.text_field :tag_list_custom, value: @proposal.tags.where(kind: nil).map{|c| c.name}.join(","),
+          label: t("debates.form.tags_custom"),
+          placeholder: t("debates.form.tags_placeholder"),
+          data: { js_url: suggest_tags_path },
+          class: "tag-autocomplete list-categories" %>
+      </div>
+    <%end%>
 
-    <div class="small-12 column">
-      <%if @categories.any? %>
-        <div id="category_tags" class="tags">
-          <%= f.label :category_tag_list, t("proposals.form.tag_category_label") %>
-          <% @categories.each do |tag| %>
-            <a class="js-add-tag-link category-tag"><%= tag.name %></a>
-          <% end %>
-        </div>
-      <%end%>
-    </div>
-
-    <div class="small-12 column">
-      <%= f.text_field :tag_list_custom, value: @proposal.tags.where(kind: nil).map{|c| c.name}.join(","),
-        label: t("debates.form.tags_custom"),
-        placeholder: t("debates.form.tags_placeholder"),
-        data: { js_url: suggest_tags_path },
-        class: "tag-autocomplete list-categories" %>
-    </div>
-
-      <%=f.hidden_field :tag_list_predefined, value: tags.reject{|t| !['category', 'subcategory'].include?(t.kind)}.map(&:name).join(","), class: "js-tag-list list-tags predefined"%>
 
     <% if current_user.unverified? %>
       <div class="small-12 column">

@@ -1,35 +1,13 @@
-<h2><%= t("custom.admin.projekts.index.name_plural") %></h2>
-<p><%= t("custom.admin.projekts.index.description") %></p>
+<h1><%= t("custom.admin.projekts.index.name_plural") %></h1>
 
-<%= form_for(@projekt, url: admin_projekts_path, as: :projekt) do |f| %>
-  <div class='small-12 medium-5'>
-    <%= f.text_field :name %>
+<div class="tabs-content" data-tabs-content="projekts-tabs">
+  <%= render "filter_subnav" %>
+
+  <div class="tabs-panel is-active" id="tab-projekt-configuration">
+    <%= render "projekt_configuration_tab" %>
   </div>
 
-  <div class='small-12 medium-5'>
-    <% projekts = Projekt.all.to_a %>
-    <%= f.select :parent_id, projekts.pluck(:name, :id), 
-                 { include_blank: true, label: t('custom.admin.projekts.index.parent') } %>
+  <div class="tabs-panel" id="tab-projekts-settings">
+    <%= render "projekts_settings_tab" %>
   </div>
-
-  <div>
-    <%= f.submit(t("custom.admin.projekts.index.create"), class: "button success") %>
-  </div>
-<% end %>
-
-<hr>
-
-<table>
-  <thead>
-    <th scope="col" class="small-3"><%= t("custom.admin.projekts.index.name") %></th>
-    <th scope="col" class="small-3"><%= t("custom.admin.projekts.index.parent") %></th>
-    <th scope="col"><%= t("admin.actions.actions") %></th>
-  </thead>
-  <tbody>
-  <% @projekts.each do |projekt| %>
-    <%= render partial: projekt, locals: { projekt: projekt }  %>
-  <% end %>
-  </tbody>
-</table>
-
-<%= paginate @projekts %>
+</div>

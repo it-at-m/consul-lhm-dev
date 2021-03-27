@@ -1208,7 +1208,7 @@ de:
         selected: Vorschläge auswählen
         milestones: Meilensteine
         no_proposals: Keine Vorschläge vorhanden.
-        tags: Kategorien
+        tags: Tags
       show:
         create_question: Fügen Sie diesen Vorschlag zu einer Abstimmung hinzu, über die abgestimmt werden soll
       form:

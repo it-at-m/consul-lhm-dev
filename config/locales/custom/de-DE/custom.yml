@@ -1,19 +1,56 @@
 de:
   custom:
+    settings:
+      projekts:
+        connected_resources: Verpflichtende Zuordnung von Diskussionen & Vorschläge zu Projekten
+        connected_resources_description: Diskussionen & Vorschläge können ohne Projektzuordnung nicht erstellt werden
+        predefined: Projektvorauswahl treffen
+        predefined_description: Die gefilterten Projekte beim Erstellen von Diskussionen & Vorschlägen vorauswählen
+        show_archived:
+          navigation: Archivierte Projekte in Navigation anzeigen
+          navigation_description: Zeigt archivierte Projekte in der Navigationsleiste wenn aktiviert
+          sidebar: Archivierte Projekte in Projektseitenleiste  anzeigen
+          sidebar_description: Zeigt archivierte Projekte in der Projektseitenleiste wenn aktiviert
     admin:
       menu:
         projekts: Projekte
       projekts:
+        tabs:
+          configuration: Konfigurationseinstellungen
+          settings: Funktionen
         index:
           name_plural: Projekte
           name_singular: Projekt
+          add_projekt: Neues Projekt hinzufügen
+          level: Ebene
+          position: Position
+          enter_name: Geben Sie den Namen des Projektes an
+          choose_parent: Verknüpfen Sie dieses Projekt mit einem übergeordnetem Projekt
           create: Projekt erstellen
-          parent: Parent projekt
+          projekt_list: Projektliste
+          parent: Übergeordnetes Projekt
+          name: Projektname
           page: Seite
           edit_page: Seite bearbeiten
           page_link: Seite öffnen 
-
-        destroy: Projekt löschen
+        edit_projekt: Editieren
+        destroy: Löschen
+        edit:
+          phase_name: Phase
+          beginning: Anfangsdatum
+          ending: Enddatum
+          actions: Aktionen
+          activate: Aktiviert
+          projekt_duration: Gesamtdauer des Projekts
+          debate_phase: Diskussionsphase
+          proposal_phase: Vorschlagsphase
+          voting_phase: Abstimmungsphase
+          voting_manage: Umfragen verwalten
+          show_in_navigation_checkbox: Projekt in Navigation anzeigen
+          show_in_navigation:
+            yes: Ja
+            no: Nein 
+          update: Projekteinstellungen aktualisieren
     projekts:
       new:
         first_level: 'Erste Projektebene'
@@ -21,8 +58,12 @@ de:
         third_level: 'Dritte Projektebene'
         fourth_level: 'Vierte Projektebene'
       sidebar_filter:
+        title: 'Projekte'
+        title_active: 'Aktive Projekte'
+        title_archived: 'Abgelaufene Projekte'
         filter_button: 'Projekte filtern'
-
+      errors:
+        presence: 'Bitte wählen Sie ein Projekt'
     polls:
       show:
         results_menu: Zwischenergebnisse für Admins

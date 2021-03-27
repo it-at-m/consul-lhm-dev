@@ -6,7 +6,8 @@
 
     toggleChildProjekts: function($label) {
       var projektId = $label.data()['projektId']
-      var $childrenProjektsGroup = $(`[data-parent="${projektId}"]`)
+      var dataParentIdentifierString = "[data-parent=\"" + projektId + "\"]"
+      var $childrenProjektsGroup = $( dataParentIdentifierString )
 
       if ( $childrenProjektsGroup.is(":hidden") ) {
         App.Projekts.resetSelectedChildren($label);
@@ -71,7 +72,8 @@
     },
 
     removeCheckboxChip: function(projektId) {
-      var $projektChip = $(`#projekt-chip-${projektId}`).parent();
+      var projektChipId = "#projekt-chip-" + projektId
+      var $projektChip = $(projektChipId).parent();
       $projektChip.remove();
     },
 
@@ -82,7 +84,7 @@
       var chipToAdd = '<div class="projekt-chip">'
 
       chipToAdd += projektName
-      chipToAdd += `<span id=${projektId} class="js-deselect-projekt close"></span>`
+      chipToAdd += '<span id=' + projektId + ' class="js-deselect-projekt close"></span>'
       chipToAdd += '</div>'
 
 
@@ -145,7 +147,7 @@
         $filterArrow.css('border-color', '#C6C6C6')
       }
 
-      var uniqueProjektIds = selectedProjektIds.filter((v, i, a) => a.indexOf(v) === i);
+      var uniqueProjektIds = selectedProjektIds;
 
       if ( uniqueProjektIds.length > 0) {
         url.searchParams.set('projekts', uniqueProjektIds.join(','))
@@ -192,7 +194,7 @@
           window.location.href = currentPageUrl;
         } else {
           currentProjektIds.push(newProjektId)
-          currentProjektIds = currentProjektIds.filter( element => element !== '' )
+          currentProjektIds = currentProjektIds.filter( function(element) { element !== '' } )
           currentPageUrl.searchParams.set('projekts', currentProjektIds.join(','))
           window.history.pushState('', '', currentPageUrl)
           window.location.href = currentPageUrl.href;
@@ -253,7 +255,8 @@
 
       $("body").on("click", ".js-deselect-projekt", function() {
         var projektId = this.id.split('-').pop()
-        var $correspondingLabel = $(`[data-projekt-id="${projektId}"]`)
+        var correspoindLabelIdentifierString = "[data-projekt-id=\"" + projektId + "\"]"
+        var $correspondingLabel = $(correspoindLabelIdentifierString)
         var $checkbox = $correspondingLabel.find('input')
 
         $checkbox.prop( "checked", false);

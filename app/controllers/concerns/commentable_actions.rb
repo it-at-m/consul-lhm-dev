@@ -87,7 +87,7 @@ module CommentableActions
     end
 
     def tag_cloud
-      TagCloud.new(resource_model, params[:search])
+      TagCloud.new(resource_model, params[:tags])
     end
 
     def load_geozones

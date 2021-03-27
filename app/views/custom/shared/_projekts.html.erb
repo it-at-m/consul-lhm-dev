@@ -1,7 +1,18 @@
-<% projekts = Projekt.top_level %>
+<% if current_user && current_user.administrator? %>
+  <% projekts = Projekt.top_level %>
+<% else %>
+  <% projekts = Projekt.top_level_active %>
+<% end %>
 
 <div id="projekt-tags">
   <%= label_tag 'Projekte'  %>
+
+  <% if model.errors.full_messages.any? { |error| error.include? 'Projekt' } %>
+    <br>
+    <small class='form-error is-visible'>
+      <%= t('custom.projekts.errors.presence') %>
+    </small>
+  <% end %>
 
   <div id="projekt-chips">
 

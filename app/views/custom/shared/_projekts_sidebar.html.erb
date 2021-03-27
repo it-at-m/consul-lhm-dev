@@ -1,9 +1,27 @@
 <div class="sidebar-divider"></div>
-<h2 class="sidebar-title"><%= t("shared.tags_cloud.projekts") %></h2>
-<br>
+
+<h2 class="sidebar-title"><%= t("custom.projekts.sidebar_filter.title") %></h2>
+
+<% if show_archived_projekts_in_sidebar? && Projekt.top_level_archived.any? %>
+  <div class='sidebar-projekt-group-name'>
+		<%= t("custom.projekts.sidebar_filter.title_active") %>
+  </div>
+<% end %>
 
 <div id='filter-projekts'>
-  <%= render "shared/projekts_filter" %>
-
-  <%= link_to t('custom.projekts.sidebar_filter.filter_button'), '#', class: 'js-apply-projekts-filter filter-projekts-button' %>
+  <%= render partial: "shared/projekts_filter", locals: { projekts: Projekt.top_level_active } %>
 </div>
+
+
+<% if show_archived_projekts_in_sidebar? && Projekt.top_level_archived.any? %>
+
+  <div class='sidebar-projekt-group-name'>
+    <%= t("custom.projekts.sidebar_filter.title_archived") %>
+  </div>
+
+  <div id='filter-projekts'>
+    <%= render partial: "shared/projekts_filter", locals: { projekts: Projekt.top_level_archived } %>
+  </div>
+<% end %>
+
+<%= link_to t('custom.projekts.sidebar_filter.filter_button'), '#', class: 'js-apply-projekts-filter filter-projekts-button' %>

@@ -94,7 +94,6 @@ de:
       tags_instructions: Diskussion markieren.
       tags_placeholder: "Trennen Sie die Tags mit einem Komma (',')"
       tags_categories: "Eigene Kategorie(n) hinzufügen"
-      tags_subcategories: "Eigene Unterkategorie(n) hinzufügen"
     index:
       featured_debates: Hervorgehoben
       orders:
@@ -339,8 +338,7 @@ de:
       proposal_responsible_name_note: "(Einzelperson oder Vertreter/in eines Kollektivs; wird nicht öffentlich angezeigt)"
       proposal_summary_note: "(maximal 200 Zeichen)"
       proposal_video_url_note: Füge einen YouTube oder Vimeo Link hinzu
-      tag_category_label: "Kategorien"
-      tag_subcategory_label: "Unterkategorien"
+      tag_category_label: "Tags"
       tags_instructions: "Diesen Vorschlag markieren. Sie können aus vorgeschlagenen Tags wählen, oder Ihre eigenen hinzufügen"
       tags_label: Verschlagwortung
       tags_placeholder: "Klicken Sie auf einen oder mehrere vorgeschlagene(n) Tag(s) oder geben Sie eigene Tags komma-getrennt ein."
@@ -752,8 +750,7 @@ de:
       projekts: Projekte
       districts: "Bereiche"
       districts_list: "Liste der Bereiche"
-      categories: Kategorien
-      subcategories: "Unterkategorien"
+      categories: Tags
       tags: Tags von Nutzern
     target_blank: " (Link öffnet im neuen Fenster)"
     you_are_in: "Sie befinden sich in"

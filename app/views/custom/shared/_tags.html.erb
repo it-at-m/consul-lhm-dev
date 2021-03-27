@@ -13,7 +13,9 @@
   </div>
 <% end %>
 
-<% if taggable.tags.category.any? %>
+
+
+<% if Setting["feature.enable_categories"] && taggable.tags.category.any? %>
   <ul id="tags_<%= dom_id(taggable) %>" class="no-bullet tags">
     <% taggable.tags.category.each do |tag| %>
       <%-selected = params[:tags]&.split(",")&.include?(tag.name)%>
@@ -21,6 +23,16 @@
         <%= link_to sanitize(tag.name),
           taggables_path(taggable.class.name.underscore, tag.name), class: selected ? "selected js-projekt-tag-filter-link" : "js-projekt-tag-filter-link" %></li>
     <% end %>
+  </ul>
+<%end%>
 
+<% if Setting["feature.enable_custom_tags"] && taggable.tags.where(kind: nil).any? %>
+  <ul id="custom_tags_<%= dom_id(taggable) %>" class="no-bullet tags">
+    <% taggable.tags.where(kind: nil).each do |tag| %>
+      <%-selected = params[:tags]&.split(",")&.include?(tag.name)%>
+      <li class="inline-block">
+        <%= link_to sanitize(tag.name),
+          taggables_path(taggable.class.name.underscore, tag.name), class: selected ? "selected js-projekt-tag-filter-link" : "js-projekt-tag-filter-link" %></li>
+    <% end %>
   </ul>
 <% end %>

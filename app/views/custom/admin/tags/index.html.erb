@@ -15,7 +15,6 @@
 <table>
   <thead>
     <th scope="col" class="small-3"><%= t("admin.tags.index.topic") %></th>
-    <th scope="col"><%= t("admin.tags.index.scope") %></th>
     <th scope="col"><%= t("admin.actions.actions") %></th>
   </thead>
   <tbody>
@@ -28,10 +27,6 @@
 
         <td class='small-3 tag-name-field'>
             <%=f.text_field :name %>
-        </td>
-
-        <td>
-          <%=tag_kind_name(tag.kind)%>
         </td>
 
         <td class='small-6' id="tag_<%= tag.id %>">
