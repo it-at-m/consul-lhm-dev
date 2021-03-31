@@ -95,7 +95,8 @@
       };
       mapCenterLatLng = new L.LatLng(mapCenterLatitude, mapCenterLongitude);
       map = L.map(element.id).setView(mapCenterLatLng, zoom);
-      L.tileLayer(mapTilesProvider, {
+      L.tileLayer.wms(mapTilesProvider, {
+        layers: 'g_stadtkarte_gesamt',
         attribution: mapAttribution
       }).addTo(map);
       if (markerLatitude && markerLongitude && !addMarker) {
