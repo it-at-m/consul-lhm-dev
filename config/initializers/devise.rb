@@ -250,6 +250,28 @@ Devise.setup do |config|
                   strategy_class: OmniAuth::Strategies::Wordpress,
                   client_options: { site: Rails.application.secrets.wordpress_oauth2_site }
 
+  #START Ergänzung für Keycloak-Anbindung
+  config.omniauth :openid_connect, {
+	  name: :openid_connect,
+          discovery: Rails.application.secrets.openid_connect_discovery,
+          issuer: Rails.application.secrets.openid_connect_issuer,
+	  scope: [:openid, :email, :profile, :address],
+	  response_type: :code,
+	  uid_field: "preferred_username",
+	  client_options: {
+	    port: Rails.application.secrets.openid_connect_port,
+	    scheme: Rails.application.secrets.openid_connect_scheme,
+      host: Rails.application.secrets.openid_connect_host,
+      identifier: Rails.application.secrets.openid_connect_key,
+      secret: Rails.application.secrets.openid_connect_secret,
+      authorization_endpoint: "/auth/realms/" + Rails.application.secrets.openid_connect_realm + "/protocol/openid-connect/auth",
+      token_endpoint: "/auth/realms/" + Rails.application.secrets.openid_connect_realm + "/protocol/openid-connect/token",
+      userinfo_endpoint: "/auth/realms/" + Rails.application.secrets.openid_connect_realm + "/protocol/openid-connect/userinfo",
+      jwks_uri: "/auth/realms/" + Rails.application.secrets.openid_connect_realm + "/protocol/openid-connect/certs",
+      redirect_uri: Rails.application.secrets.openid_connect_redirect_uri,
+	  },
+	  #ENDE Ergänzung für Keycloak-Anbindung
+  }
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
