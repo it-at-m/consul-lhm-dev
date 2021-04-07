@@ -5,7 +5,6 @@
 
   <div class="top-links">
     <div class="row">
-      <%= render "shared/locale_switcher" %>
       <div class="hide-for-small-only">
         <%= render "shared/top_links" %>
       </div>
@@ -20,9 +19,15 @@
         <%= t("application.menu") %>
       </span>
 
-      <div class="top-bar-title">
+      <div class='logo-image'>
+        <%= link_to root_path do %>
+          <%= svg_tag 'logo' %>
+        <% end %>
+      </div>
+
+      <div class="logo-text">
         <%= link_to root_path, accesskey: "0" do %>
-          <%= image_tag(image_path_for("logo_header.png"), class: "float-left", alt: t("layouts.header.logo")) %>
+          <%= image_tag(image_path_for("logo_text.png"), class: "float-left", alt: t("layouts.header.logo")) %>
         <% end %>
       </div>
 

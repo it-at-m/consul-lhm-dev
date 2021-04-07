@@ -1,0 +1,63 @@
+<% content_for :body_class, "home-page" %>
+
+<% content_for :canonical do %>
+  <%= render "shared/canonical", href: root_url %>
+<% end %>
+
+<% if has_banners? %>
+  <%= render "shared/banner" %>
+<% end %>
+
+<% provide :social_media_meta_tags do %>
+  <%= render "shared/social_media_meta_tags",
+              social_url: root_url %>
+<% end %>
+
+<%= render "header", header: @header %>
+
+<main>
+
+  <div class='row'>
+    <div class='official-logo-wrapper'>
+      <%= svg_tag "official_logo", class: 'official-logo' %>
+    </div>
+  </div>
+
+  <%= render "feeds" %>
+
+  <div class='row clear'>
+    <div class='small-12 medium-9 column'>
+      <%=render_custom_block 'home_page_welcome' %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-12 medium-9 column">
+      <% page = SiteCustomization::Page.find_by slug: "indexdt" %>
+      <% if page %>
+        <h4 class="welcometitle"><%= page.title %></h4>
+        <%= auto_link_already_sanitized_html AdminWYSIWYGSanitizer.new.sanitize(page.content) %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <% if @cards.any? %>
+      <div class="small-12 column <%= "large-8" if feed_processes_enabled? %>">
+        <%= render "cards" %>
+      </div>
+    <% end %>
+
+    <% if feed_processes_enabled? %>
+      <div class="small-12 large-4 column">
+        <%= render "processes" %>
+      </div>
+    <% end %>
+  </div>
+
+  <% if feature?("user.recommendations") && (@recommended_debates.present? || @recommended_proposals.present?) %>
+    <%= render "recommended",
+                recommended_debates: @recommended_debates,
+                recommended_proposals: @recommended_proposals %>
+  <% end %>
+</main>
