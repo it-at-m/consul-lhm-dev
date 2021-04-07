@@ -37,14 +37,15 @@
                                              namespace: "debates" %>
     <% end %>
 
-    <%tags = []%>
-
-    <%tag_categories = @selected_tags&.select{ |tag| tag.kind == 'category' }   %>
+    <%tags = @selected_tags&.select{ |tag| tag.kind == 'category' }   %>
     <%can_create = true  %>
-    <%tags += tag_categories if tag_categories %>
 
     <div class="row">
       <div id="debates" class="debates-list small-12 medium-9 column">
+
+        <% if extended_feature?(:intro_text_for_debates) %>
+          <%=render_custom_block 'debates_welcome' %>
+        <% end %>
 
         <%= render "shared/banner" %>
 
@@ -63,9 +64,6 @@
         <%= render "shared/order_links", i18n_namespace: "debates.index" %>
 
         <div class="show-for-small-only">
-
-
-
           <%= link_to t("debates.index.start_debate"), new_debate_path(tags: tags.any? ? tags.map{|t| t.name} : nil), class: "button expanded", onclick: can_create ? "return true" : "alert('#{t("alerts.select_one_category", model: t("activerecord.models.debate.one"))}'); return false;" , disabled: !can_create %>
         </div>
 
@@ -98,10 +96,9 @@
 
       <div class="small-12 medium-3 column">
         <aside class="margin-bottom">
-
           <%= link_to t("debates.index.start_debate"), new_debate_path(tags: tags.any? ? tags.map{|t| t.name} : nil), class: "button expanded", onclick: can_create ? "return true" : "alert('#{t("alerts.select_one_category", model: t("activerecord.models.debate.one"))}'); return false;" , disabled: !can_create %>
           <%= render "shared/projekts_sidebar" %>
-          <%= render "shared/categories", model: "debate" %>
+          <%= render "shared/categories", taggable: "debate" %>
           <%= render "shared/tag_cloud", taggable: "debate" %>
         </aside>
       </div>

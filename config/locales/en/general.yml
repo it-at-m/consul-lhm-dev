@@ -122,7 +122,7 @@ en:
       title: Debates
       section_header:
         icon_alt: Debates icon
-        title: "%{project_name} Debates"
+        title: "Debates"
         help: Help about debates
       section_footer:
         title: Help about debates
@@ -390,7 +390,7 @@ en:
       top_link_proposals: The most supported proposals by category
       section_header:
         icon_alt: Proposals icon
-        title: "%{project_name} Proposals"
+        title: "Proposals"
         help: Help about proposals
       section_footer:
         title: Help about proposals
@@ -621,7 +621,7 @@ en:
       cant_answer: "This poll is not available on your geozone"
       section_header:
         icon_alt: Voting icon
-        title: "%{project_name} Voting"
+        title: "Voting"
         help: Help about voting
       section_footer:
         title: Help about voting
@@ -964,5 +964,3 @@ en:
     create:
       enqueue_remote_translation: Translations have been correctly requested.
     button: Translate page
-  tag_names:
-    general: General

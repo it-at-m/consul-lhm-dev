@@ -1,0 +1,5 @@
+en:
+  settings:
+    features:
+      elasticsearch: "Elasticsearch"
+      elasticsearch_description: "Elasticsearch is the leading distributed, RESTful, open source search and analytics engine designed for speed, horizontal scalability, reliability, and easy management."

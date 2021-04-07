@@ -5,3 +5,17 @@
   height: auto !important;
 }
 
+@media screen and (min-width: 40em) {
+  .one-cols {
+    column-count: 1;
+  }
+
+  .two-cols {
+    column-count: 2;
+  }
+
+  .three-cols {
+    column-count: 3;
+  }
+}
+

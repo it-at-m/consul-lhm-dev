@@ -17,8 +17,7 @@ class Admin::TagsController < Admin::BaseController
   end
 
   def create
-    kind = 'category'
-    Tag.find_or_create_by!(name: tag_params["name"]).update!(kind: kind)
+    Tag.find_or_create_by!(name: tag_params["name"]).update!(kind: 'category')
 
     redirect_to admin_tags_path
   end
@@ -35,6 +34,6 @@ class Admin::TagsController < Admin::BaseController
     end
 
     def find_tag
-      @tag = Tag.where(kind: 'category').find(params[:id])
+      @tag = Tag.category.find(params[:id])
     end
 end

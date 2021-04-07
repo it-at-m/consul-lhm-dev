@@ -30,7 +30,7 @@
       <div class="small-12 column">
         <%= translations_form.text_area :description,
                                         maxlength: Proposal.description_max_length,
-                                        class: "html-area" %>
+                                        class: "html-area #{ck_editor_class(current_user)}" %>
       </div>
     <% end %>
 
@@ -46,10 +46,12 @@
       </div>
     <% end %>
 
-    <div class="small-12 medium-6 column">
-      <%= f.select :geozone_id, geozone_select_options,
-        include_blank: t("geozones.none") %>
-    </div>
+    <!--
+      <div class="small-12 medium-6 column">
+        <% f.select :geozone_id, geozone_select_options,
+          include_blank: t("geozones.none") %>
+      </div>
+    -->
 
     <% if feature?(:map) %>
       <div class="small-12 column">
@@ -66,15 +68,11 @@
       </div>
     <% end %>
 
-
     <div class="small-12 column">
       <%= render partial: "shared/projekts", locals: { f: f, model: @proposal }  %>
     </div>
 
-
-
-
-    <%if Setting["feature.enable_categories"]%>
+    <%if extended_feature?("enable_categories") %>
       <div class="small-12 column">
         <%if @categories.any? %>
           <div id="category_tags" class="tags">
@@ -88,7 +86,7 @@
       <%=f.hidden_field :tag_list_predefined, value: @proposal.tags.reject{|t| !['category'].include?(t.kind)}.map(&:name).join(","), class: "js-tag-list list-tags predefined"%>
     <%end%>
 
-    <%if Setting["feature.enable_custom_tags"]%>
+    <%if extended_feature?("enable_custom_tags") %>
       <div class="small-12 column">
         <%= f.text_field :tag_list_custom, value: @proposal.tags.where(kind: nil).map{|c| c.name}.join(","),
           label: t("debates.form.tags_custom"),
@@ -97,7 +95,6 @@
           class: "tag-autocomplete list-categories" %>
       </div>
     <%end%>
-
 
     <% if current_user.unverified? %>
       <div class="small-12 column">

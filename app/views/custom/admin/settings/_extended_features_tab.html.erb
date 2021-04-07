@@ -1,0 +1,7 @@
+<h2><%= t("custom.admin.settings.index.extended_features") %></h2>
+
+<%= render "extended_features_table", features: @extended_feature_settings, options: @extended_option_settings, tab: "#tab-extended-features" %>
+
+<h2><%= t("custom.admin.settings.index.extended_options") %></h2>
+
+<%= render "extended_options_table", settings: @extended_option_settings, setting_name: "setting", tab: "#tab-extended-options" %>

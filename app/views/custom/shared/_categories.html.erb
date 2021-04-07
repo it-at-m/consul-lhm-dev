@@ -1,20 +1,16 @@
-<%if @categories.any? && Setting["feature.enable_categories"]%>
+<%if @categories.any? && extended_feature?("enable_categories") %>
   <div class="sidebar-divider"></div>
   <h2 class="sidebar-title"><%= t("shared.tags_cloud.categories") %></h2>
   <br>
 
   <ul id="categories" class="no-bullet categories">
-    <%tag_names = @categories.map &:name%>
-    <%selected_categories = []%>
+    <% selected_categories = params[:tags] ? params[:tags].split(',') : []%>
     <% @categories.each do |category| %>
       <li class="inline-block">
-        <%tag_selected = params[:tags] && params[:tags].split(',').include?(category.name)%>
-        <%selected_categories << category.name if tag_selected%>
-        <%tag_selected ? css_class = { class: "is-active js-projekt-tag-filter-link" } : css_class = { class: "js-projekt-tag-filter-link" } %>
-        <%tags = params[:tags] ? params[:tags].split(',') : []%>
-        <%tags.delete_if do |t| !tag_names.include?(t) && !tag_selected end%>
-        <%tag_selected ? tags.delete(category.name) : tags << category.name%>
-        <%= link_to category.name, send("#{model.pluralize}_path") + "?tags=#{category.name}", css_class || {} %>
+        <% selected_categories.include?(category.name) ? css_class = { class: "is-active js-projekt-tag-filter-link" } : css_class = { class: "js-projekt-tag-filter-link" }  %>
+        <%= link_to taggables_path(taggable, category.name), css_class do %>
+          <span class="tag"><%= category.name %></span>
+        <% end %>
       </li>
     <% end %>
   </ul>

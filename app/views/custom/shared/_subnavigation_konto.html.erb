@@ -1,0 +1,13 @@
+<li class="nav-element top-level-item">
+
+  <%= link_to account_path do %>
+    <%= t('custom.menu.account') %>
+  <% end %>
+
+  <div class='nav-toggle-arrow js-toggle-mobile-flyout-item'></div>
+
+  <ul class="nav-flyout-block">
+    <%= render "layouts/notification_item" %>
+    <%= render "devise/menu/login_items" %>
+  </ul>
+</li>

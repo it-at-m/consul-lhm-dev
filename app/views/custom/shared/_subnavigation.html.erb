@@ -2,32 +2,8 @@
   <ul>
     <%= raw content_block("subnavigation_left", I18n.locale) %>
 
-    <% active_projekts = Projekt.top_level_active.where(show_in_navigation: true) %>
-    <% archived_projekts = Projekt.top_level_archived %>
-
-    <% active_projekts.each do |active_projekt| %>
-      <li class='nav-element-projekt static-projekt'>
-
-        <div class='projekt-name'>
-          <%= prepare_projekt_name(active_projekt) %>
-        </div>
-
-        <%= render partial: 'shared/subnavigation_flyout_projekts', locals: { projekts: active_projekt.children.with_order_number } if active_projekt.children.any? %>
-
-      </li>
-    <% end %>
-
-    <% if show_archived_projekts_in_menu? && archived_projekts.any? %>
-      <li class='nav-element-projekt static-projekt'>
-
-        <div class='projekt-name'>
-          <%= t('custom.archived') %>
-        </div>
-
-        <%= render partial: 'shared/subnavigation_flyout_projekts', locals: { projekts: archived_projekts } %>
-      </li>
-    <% end %>
-
+    <%= render partial: 'shared/subnavigation_projekts' %>
+    <%= render partial: 'shared/subnavigation_konto' %>
 
     <!--
     <% if feature?(:debates) %>

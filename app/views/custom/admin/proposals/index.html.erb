@@ -14,6 +14,7 @@
       <tr>
         <th class="text-center"><%= t("admin.proposals.index.id") %></th>
         <th><%= t("admin.proposals.index.title") %></th>
+        <th><%= t("custom.proposals.index.projekts") %></th>
         <th><%= t("admin.proposals.index.tags") %></th>
         <th><%= t("admin.proposals.index.author") %></th>
         <th><%= t("admin.proposals.index.milestones") %></th>
@@ -26,6 +27,7 @@
         <tr id="<%= dom_id(proposal) %>" class="proposal">
           <td class="text-center"><%= proposal.id %></td>
           <td><%= link_to proposal.title, admin_proposal_path(proposal) %></td>
+          <td><%= proposal.projekts.pluck(:name).join(', ') %> <%=link_to t("admin.actions.edit"), admin_proposal_path(proposal)%>  </td>
           <td><%= proposal.tag_list %> <%=link_to t("admin.actions.edit"), admin_proposal_path(proposal)%>  </td>
           <td><%= proposal.author.username %></td>
           <td><%= proposal.milestones.count %></td>

@@ -70,6 +70,7 @@ module Consul
 
     config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**[^custom]*", "*.{rb,yml}")]
     config.i18n.load_path += Dir[Rails.root.join("config", "locales", "custom", "**", "*.{rb,yml}")]
+    config.i18n.load_path += Dir[Rails.root.join("config", "locales", "cli", "**", "*.{rb,yml}")]
 
     config.after_initialize do
       Globalize.set_fallbacks_to_all_available_locales
@@ -91,6 +92,7 @@ module Consul
     config.autoload_paths << "#{Rails.root}/app/controllers/custom"
     config.autoload_paths << "#{Rails.root}/app/models/custom"
     config.paths["app/views"].unshift(Rails.root.join("app", "views", "custom"))
+    config.paths["app/views"].unshift(Rails.root.join("app", "views", "cli"))
   end
 end
 

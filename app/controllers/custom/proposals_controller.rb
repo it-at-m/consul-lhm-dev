@@ -17,6 +17,22 @@ class ProposalsController
     take_only_by_tag_names
     take_by_projekts
     @proposals_coordinates = all_proposal_map_locations
+    @selected_tags = all_selected_tags
+  end
+
+  def new
+    redirect_to proposals_path if proposal_limit_exceeded?(current_user)
+    @resource = resource_model.new
+    set_geozone
+    set_resource_instance
+    @projekts = Projekt.top_level
+  end
+
+  def unvote
+    @follow = Follow.find_by(user: current_user, followable: @proposal)
+    @follow.destroy if @follow
+    @proposal.unvote_by(current_user)
+    set_proposal_votes(@proposal)
   end
 
   private
@@ -58,5 +74,8 @@ class ProposalsController
       translations_attributes = translation_params(Proposal, except: :retired_explanation)
       params.require(:proposal).permit(attributes, translations_attributes)
     end
-end
 
+    def proposal_limit_exceeded?(user)
+      user.proposals.where(retired_at: nil).count >= Setting['extended_option.max_active_proposals_per_user'].to_i
+    end
+end

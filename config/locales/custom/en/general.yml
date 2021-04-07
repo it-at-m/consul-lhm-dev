@@ -1,17 +1,23 @@
 en:
-  debates:
-    form:
-      tags_categories: "Add custom categories"
-      tags_subcategories: "Add custom subcategories"
-    new:
-      start_new_in: Start a debate in %{category}
-  proposals:
-    form:
-      tag_subcategory_label: "Subcategories"
-    new:
-      start_new_in: Create new proposal in %{category}
-  shared:
-    tags_cloud:
-      subcategories: "Subcategories"
-  alerts:
-    select_one_category: "Please select one category to create a %{model}"
+  search:
+    go_to_discusstion: "open discussion..."
+    search_form:
+      placeholder: "Search..."
+      button: "Search"
+    tabs:
+      all: "All results %{doc_count}"
+      debate: "Debates %{doc_count}"
+      proposal: "Proposals %{doc_count}"
+      poll: "Votings %{doc_count}"
+      budget_investment: "Budgets %{doc_count}"
+      legislation_proposal: "Legislations %{doc_count}"
+      comment: "Comments %{doc_count}"
+      site_customization_page: "Pages %{doc_count}"
+    result_tag:
+      de: "d"
+      pr: "p"
+      po: "P"
+      bu: "b"
+      le: "L"
+      co: "c"
+      si: "s"

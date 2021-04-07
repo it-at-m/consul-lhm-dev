@@ -9,15 +9,13 @@ class Projekt < ApplicationRecord
 
   has_one :page, class_name: "SiteCustomization::Page", dependent: :destroy
 
-  validates :name, uniqueness: true
-
   after_create :create_corresponding_page, :set_order
   after_destroy :ensure_order_integrity
 
   scope :top_level, -> { where(parent: nil) }
   scope :with_order_number, -> { where.not(order_number: nil).order(order_number: :asc) }
-  scope :top_level_active, -> { top_level.with_order_number.where( "total_duration_active = ? and total_duration_start < ? and total_duration_end > ?", true, Date.today, Date.today) }
-  scope :top_level_archived, -> { top_level.with_order_number.where( "total_duration_active = ? and total_duration_start < ? and total_duration_end < ?", true, Date.today, Date.today) }
+  scope :top_level_active, -> { top_level.with_order_number.where( "total_duration_active = ? and (total_duration_end IS NULL OR total_duration_end > ?)", true, Date.today) }
+  scope :top_level_archived, -> { top_level.with_order_number.where( "total_duration_active = ? and total_duration_end < ?", true, Date.today) }
 
   def all_children_ids(all_children_ids = [])
     if self.children.any?
@@ -68,9 +66,16 @@ class Projekt < ApplicationRecord
 
   def create_corresponding_page
     page_title = self.name
-    last_page_id = SiteCustomization::Page.last.id
     clean_slug = self.name.downcase.gsub(/[^a-z0-9\s]/, '').gsub(/\s+/, '-')
-    page_slug = "#{clean_slug}_#{last_page_id}"
+    pages_with_similar_slugs = SiteCustomization::Page.where("slug ~ ?", "^#{clean_slug}(-[0-9]+$|$)").order(id: :asc)
+
+    if pages_with_similar_slugs.any? && pages_with_similar_slugs.last.slug.match?(/-\d+$/)
+      page_slug = clean_slug + '-' + (pages_with_similar_slugs.last.slug.split('-')[-1].to_i + 1).to_s
+    elsif pages_with_similar_slugs.any?
+      page_slug = clean_slug + '-2'
+    else
+      page_slug = clean_slug
+    end
     page = SiteCustomization::Page.new(title: page_title, slug: page_slug, projekt: self)
     
     if page.save

@@ -15,7 +15,7 @@
 
 
 
-<% if Setting["feature.enable_categories"] && taggable.tags.category.any? %>
+<% if extended_feature?("enable_categories") && taggable.tags.category.any? %>
   <ul id="tags_<%= dom_id(taggable) %>" class="no-bullet tags">
     <% taggable.tags.category.each do |tag| %>
       <%-selected = params[:tags]&.split(",")&.include?(tag.name)%>
@@ -26,7 +26,7 @@
   </ul>
 <%end%>
 
-<% if Setting["feature.enable_custom_tags"] && taggable.tags.where(kind: nil).any? %>
+<% if extended_feature?("enable_custom_tags") && taggable.tags.where(kind: nil).any? %>
   <ul id="custom_tags_<%= dom_id(taggable) %>" class="no-bullet tags">
     <% taggable.tags.where(kind: nil).each do |tag| %>
       <%-selected = params[:tags]&.split(",")&.include?(tag.name)%>
