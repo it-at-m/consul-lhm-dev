@@ -44,15 +44,16 @@
     text-decoration: none;
   }
 
-  .main-menu .content-items {
+  .main-menu .content-items,
+  .main-menu .account-admin-items .nav-flyout-block {
 
-    .top-level-item a {
+    a {
       line-height: initial;
       padding-bottom: 4px;
       display: inline-block;
     }
 
-    .top-level-item a:hover {
+    a:hover {
       padding-bottom: 2px;
       border-bottom: 2px solid $yellow;
     }
@@ -90,6 +91,10 @@
     font-weight: normal;
     padding-left: 3px;
     padding-right: 3px;
+  }
+
+  .main-menu .account-admin-items li.nav-element.top-level-item > ul.nav-flyout-block {
+    top: 42px;
   }
 
   //Offset for icon
