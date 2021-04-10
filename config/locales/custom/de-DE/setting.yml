@@ -24,9 +24,15 @@ de:
         intro_text_for_polls_description: Aktievieren Sie einen individuellen Einleitungstext oberhalb der Abstimmungsübersicht
         intermediate_poll_results_for_admins: Zwischenergebnisse von Abstimmungen für Admins anzeigen
         intermediate_poll_results_for_admins_description: Aktivieren Sie die Einsicht in Zwischenergebnisse zu Abstimmungen für Administratoren
+        hide_comment_replies_by_default: Antworten auf Kommentare standardmäßig einklappen
+        hide_comment_replies_by_default_description: Aktivieren Sie das standardmäßige Einklappen von Kommentaren, um Übersichtlichkeit zu schaffen
       extended_option:
         max_active_proposals_per_user: Maximale Anzahl aktiver Vorschläge pro Benutzer
         max_active_proposals_per_user_description: Maximale Anzahl aktiver Vorschläge pro Benutzer beschreibung
+        description_max_length: Maximale Zeichenanzahl für die Vorschlagsbeschreibung
+        description_max_length_description: Legen Sie fest, wie viele Zeichen für Vorschläge maximal verwendet werden dürfen
+
+
       projekts:
         connected_resources: Verpflichtende Zuordnung von Diskussionen & Vorschläge zu Projekten
         connected_resources_description: Diskussionen & Vorschläge können ohne Projektzuordnung nicht erstellt werden

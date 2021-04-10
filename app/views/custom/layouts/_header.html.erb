@@ -15,9 +15,8 @@
   <div class="row">
     <div class="top-bar">
 
-      <span data-responsive-toggle="responsive-menu" data-hide-for="medium" class="float-right">
+      <span data-responsive-toggle="responsive-menu" data-hide-for="medium" class="hamburger-menu">
         <span class="menu-icon dark" data-toggle></span>
-        <%= t("application.menu") %>
       </span>
 
       <div class="top-bar-title">
@@ -28,12 +27,11 @@
 
       <div id="responsive-menu">
         <div class="top-bar-right">
-          <ul class="menu" data-responsive-menu="medium-dropdown">
-            <%= render "shared/admin_login_items" %>
-          </ul>
-
           <div class="show-for-small-only">
             <div class="subnavigation row">
+
+              <h2 class='city-name'>Name der Stadt</h2>
+
               <%= render "shared/subnavigation" %>
               <div class="small-12 column">
                 <%= render "shared/top_links" %>
@@ -49,9 +47,6 @@
     <div class="row">
       <div class="hide-for-small-only">
         <%= render "shared/subnavigation" %>
-      </div>
-      <div class="small-12 medium-3 column">
-        <%= yield :header_addon %>
       </div>
     </div>
   </div>

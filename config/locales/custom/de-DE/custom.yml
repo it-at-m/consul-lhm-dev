@@ -3,6 +3,9 @@ de:
     menu:
       archived: Abgelaufene Projekte
       account: Konto
+      debates: Diskussionen
+      proposals: Vorschläge
+      polls: Abstimmungen
     admin:
       settings:
         index:

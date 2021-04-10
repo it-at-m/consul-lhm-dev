@@ -1,6 +1,10 @@
 <li class="nav-element top-level-item">
 
-  <%= link_to account_path do %>
+  <%= link_to account_path, class: 'account-items-icon' do %>
+    <%= svg_tag 'account-menu-icon', class: "account-icon" %>
+  <% end %>
+
+  <%= link_to account_path, class: 'account-items-link' do %>
     <%= t('custom.menu.account') %>
   <% end %>
 

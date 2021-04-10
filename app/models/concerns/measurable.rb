@@ -15,7 +15,7 @@ module Measurable
     end
 
     def description_max_length
-      6000
+      Setting["extended_option.description_max_length"].to_i
     end
   end
 end

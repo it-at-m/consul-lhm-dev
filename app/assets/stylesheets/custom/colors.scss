@@ -1,0 +1,19 @@
+// Menu variables
+
+$dark:                                            #222;
+$white:                                           #fff;
+
+
+$top-level-menu-item-text-color:                  $dark;
+$top-level-menu-background-color:                 $white;
+$flyout-item-text-color:                          $dark;
+$flyout-item-bg-color:                            $white;
+$flyout-block-border-color:                       #dee0e3;
+$flyout-item-divider-color:                       lighten($flyout-block-border-color, 5%);
+$flyout-item-projekt-modules-links-color:         $flyout-item-text-color;
+
+$flyout-item-line-height:                         1.5rem;
+$flyout-item-projekt-min-height:                  60px;
+
+$responsive-menu-text-color:                      $white;
+$responsive-menu-background-color:                crimson;

@@ -1,0 +1,20 @@
+<% if show_admin_menu?(current_user) %>
+
+  <li class="nav-element top-level-item">
+
+    <%= link_to admin_root_path, class: 'admin-items-icon' do %>
+      <%= svg_tag 'admin-menu-icon', class: "admin-icon" %>
+    <% end %>
+
+    <%= link_to admin_root_path, class: 'admin-items-link' do %>
+      <%= t('layouts.header.administration_menu') %>
+    <% end %>
+
+    <div class='nav-toggle-arrow js-toggle-mobile-flyout-item'></div>
+
+    <ul class="nav-flyout-block">
+      <%= render "shared/admin_login_items" %>
+    </ul>
+  </li>
+
+<% end %>
