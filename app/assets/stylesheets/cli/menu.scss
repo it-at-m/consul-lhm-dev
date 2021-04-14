@@ -1,0 +1,111 @@
+// Styling images in the top bar
+
+.top-bar {
+   height: 72px;
+   justify-content: flex-start;
+
+  .logo-image {
+    align-self: flex-end;
+    width: 110px;
+    margin-bottom: -5px;
+
+    a {
+      display: flex;
+    }
+  }
+
+  .top-bar-title {
+    width: 185px;
+  }
+}
+
+.logo-image {
+  display: none;
+}
+
+
+// Extra styling for responsive menu
+
+#responsive-menu {
+  .subnavigation {
+    margin-left: -18px;
+  }
+  .subnavigation ul.main-menu {
+    padding-top: 1em;
+  }
+}
+
+@media screen and (max-width: 39.9375em) {
+  .top-bar-title {
+    margin: 1.15rem auto;
+  }
+}
+
+// Extra styling for desktop menu
+
+@media screen and (min-width: 40em) {
+
+  a:hover {
+    text-decoration: none;
+  }
+
+  .main-menu .content-items,
+  .main-menu .account-admin-items .nav-flyout-block {
+
+    a {
+      line-height: initial;
+      padding-bottom: 4px;
+      display: inline-block;
+    }
+
+    a:hover {
+      padding-bottom: 2px;
+      border-bottom: 2px solid $yellow;
+    }
+
+    .top-level-item > a,
+    .top-level-item > .projekt-name > a {
+      margin-top: 12px;
+      margin-bottom: 8px;
+    }
+  }
+
+  .top-bar {
+    .logo-image {
+      display: block;
+    }
+
+    .top-bar-title {
+      margin-left: .5em;
+    }
+  }
+
+  .account-admin-items {
+    .account-icon,
+    .admin-icon {
+      top: -10px;
+    }
+  } 
+
+  .subnavigation ul li {
+    margin-right: 0;
+  }
+
+  .subnavigation ul.main-menu .projekt-name, 
+  .subnavigation ul.main-menu li.nav-element a {
+    font-weight: normal;
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+
+  .main-menu .account-admin-items li.nav-element.top-level-item > ul.nav-flyout-block {
+    top: 42px;
+  }
+
+  //Offset for icon
+
+  #navigation_bar {
+    border-top: 2px solid $brand-dark;
+  }
+
+}

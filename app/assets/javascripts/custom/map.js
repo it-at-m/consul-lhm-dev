@@ -1,6 +1,7 @@
 (function() {
   "use strict";
   App.Map = {
+    maps: [],
     initialize: function() {
       $("*[data-map]").each(function() {
         App.Map.initializeMap(this);
@@ -10,6 +11,13 @@
           App.Map.toggleMap();
         }
       });
+    },
+    destroy: function() {
+      App.Map.maps.forEach(function(map) {
+        map.off();
+        map.remove();
+      });
+      App.Map.maps = [];
     },
     initializeMap: function(element) {
       var addMarker, clearFormfields, createMarker, editable, getPopupContent, latitudeInputSelector, longitudeInputSelector, map, mapAttribution, mapCenterLatLng, mapCenterLatitude, mapCenterLongitude, mapTilesProvider, marker, markerIcon, markerLatitude, markerLongitude, moveOrPlaceMarker, openMarkerPopup, removeMarker, removeMarkerSelector, updateFormfields, zoom, zoomInputSelector, process;

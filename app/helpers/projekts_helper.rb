@@ -15,6 +15,28 @@ module ProjektsHelper
     end
   end
 
+  def prepare_projekt_modules_links(projekt)
+
+    module_links = []
+
+    if debate_phase_active?(projekt)
+      link = link_to t('custom.menu.debates'), (debates_path + "?projekts=#{projekt.all_children_ids.push(projekt.id).join(',')}"), class: 'projekt-module-link'
+      module_links.push(link)
+    end
+
+    if proposal_phase_active?(projekt)
+      link = link_to t('custom.menu.proposals'), (proposals_path + "?projekts=#{projekt.all_children_ids.push(projekt.id).join(',')}"), class: 'projekt-module-link'
+      module_links.push(link)
+    end
+
+    if related_polls_exist?(projekt)
+      link = link_to t('custom.menu.polls'), (polls_path + "?projekts=#{projekt.all_children_ids.push(projekt.id).join(',')}"), class: 'projekt-module-link'
+      module_links.push(link)
+    end
+
+    module_links.join(' | ').html_safe
+  end
+
   def debate_phase_active?(projekt)
     top_parent = projekt.top_parent
 

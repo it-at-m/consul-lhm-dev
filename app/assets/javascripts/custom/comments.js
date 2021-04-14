@@ -40,7 +40,7 @@
         return false;
     },
     initialize: function() {
-      $("body .js-toggle-children").each(function() {
+      $("body .js-hide-comment-replies-by-default").each(function() {
         App.Comments.toggle_comments( this );
       });
 
