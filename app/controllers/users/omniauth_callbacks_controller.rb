@@ -23,6 +23,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
+  def openid_connect
+    super
+  end
+
   private
 
     def sign_in_with(feature, provider)
