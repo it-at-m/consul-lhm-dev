@@ -255,7 +255,8 @@ Devise.setup do |config|
 	  name: :openid_connect,
           discovery: Rails.application.secrets.openid_connect_discovery,
           issuer: Rails.application.secrets.openid_connect_issuer,
-	  scope: [:openid, :email, :profile, :address],
+          client_auth_method: 'basic',
+	  scope: [:openid, :email],
 	  response_type: :code,
 	  uid_field: "preferred_username",
 	  client_options: {
