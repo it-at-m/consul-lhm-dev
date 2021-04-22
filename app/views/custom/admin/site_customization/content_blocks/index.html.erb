@@ -14,9 +14,29 @@
 <p><%= t("admin.site_customization.content_blocks.html_format") %></p>
 
 <p>
-  <code><%= '<li><a href="http://site1.com">Site 1</a></li>' %></code><br>
-  <code><%= '<li><a href="http://site2.com">Site 2</a></li>' %></code><br>
-  <code><%= '<li><a href="http://site3.com">Site 3</a></li>' %></code><br>
+
+  <code>                             <%= '<li class="nav-element top-level-item">' %>                                          </code><br>
+  <code style="margin-left: 20px;">  <%= '  <a href="#">Rathaus</a>' %>                                                        </code><br>
+  <code style="margin-left: 20px;">  <%= '  <div class="nav-toggle-arrow js-toggle-mobile-flyout-item"></div>' %>              </code><br>
+  <code style="margin-left: 20px;">  <%= '  <ul class="nav-flyout-block">' %>                                                  </code><br>
+  <code style="margin-left: 40px;">  <%= '    <li class="nav-element flyout-item">' %>                                         </code><br>
+  <code style="margin-left: 60px;">  <%= '      <a class="flyout-item-name" href="#">Start</a>' %>                             </code><br>
+  <code style="margin-left: 40px;">  <%= '    </li>' %>                                                                        </code><br>
+  <code style="margin-left: 40px;">  <%= '    <li class="nav-element flyout-item">' %>                                         </code><br>
+  <code style="margin-left: 60px;">  <%= '      <a class="flyout-item-name" href="#">Smart City</a>' %>                        </code><br>
+  <code style="margin-left: 60px;">  <%= '      <div class="nav-toggle-arrow js-toggle-mobile-flyout-item"></div>' %>          </code><br>
+  <code style="margin-left: 60px;">  <%= '      <ul class="nav-flyout-block">' %>                                              </code><br>
+  <code style="margin-left: 80px;">  <%= '        <li class="nav-element flyout-item">' %>                                     </code><br>
+  <code style="margin-left: 100px;"> <%= '          <a class="flyout-item-name" href="#">Projekt1</a>' %>                      </code><br>
+  <code style="margin-left: 80px;">  <%= '        </li>' %>                                                                    </code><br>
+  <code style="margin-left: 60px;">  <%= '      </ul>' %>                                                                      </code><br>
+  <code style="margin-left: 40px;">  <%= '    </li>' %>                                                                        </code><br>
+  <code style="margin-left: 20px;">  <%= '  </ul>' %>                                                                          </code><br>
+  <code>                             <%= '</li>' %>                                                                            </code><br>
+  <code>                             <%= '<li class="nav-element top-level-item">' %>                                          </code><br>
+  <code style="margin-left: 20px;">  <%= '  <a href="#">Branchenbuch</a>' %>                                                   </code><br>
+  <code>                             <%= '</li>' %>                                                                            </code><br>
+
 </p>
 
 <% if @content_blocks.any? || @headings_content_blocks.any? %>

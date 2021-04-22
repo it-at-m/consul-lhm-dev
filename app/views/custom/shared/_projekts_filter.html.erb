@@ -21,7 +21,7 @@
     </li>
 
     <% if projekt.children.any? %>
-      <%= render partial: "shared/projekts_filter", locals: { projekts: projekt.children } %>
+      <%= render partial: "shared/projekts_filter", locals: { projekts: projekt.children.with_order_number } %>
     <% end %>
 
   <% end %>

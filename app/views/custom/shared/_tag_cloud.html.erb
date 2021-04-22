@@ -1,12 +1,14 @@
-<%if @tag_cloud.tags.any? && Setting["feature.enable_custom_tags"]%>
+<%if @tag_cloud.tags.any? && extended_feature?("enable_custom_tags") %>
   <div id="tag-cloud">
     <div class="sidebar-divider"></div>
     <h2 class="sidebar-title"><%= t("shared.tags_cloud.tags") %></h2>
     <br>
-    <ul class="no-bullet tag-cloud">
+    <ul class="no-bullet categories">
+      <% selected_tags = params[:tags] ? params[:tags].split(',') : [] %>
       <% @tag_cloud.tags.each do |tag| %>
         <li class="inline-block">
-          <%= link_to taggables_path(taggable, tag.name) do %>
+          <% selected_tags.include?(tag.name) ? css_class = { class: "is-active js-projekt-tag-filter-link" } : css_class = { class: "js-projekt-tag-filter-link" } %>
+          <%= link_to taggables_path(taggable, tag.name), css_class do %>
             <span class="tag"><%= tag.name %></span>
           <% end %>
         </li>

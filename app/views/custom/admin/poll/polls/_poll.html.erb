@@ -2,6 +2,7 @@
   <td>
     <strong><%= poll.name %></strong>
   </td>
+  <td><%= poll.projekts.pluck(:name).join(', ') %> </td>
   <td><%= poll.tag_list %></td>
   <td class="text-center">
     <%= l poll.starts_at.to_date %>

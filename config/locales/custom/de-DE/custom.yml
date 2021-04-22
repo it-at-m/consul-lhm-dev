@@ -1,17 +1,18 @@
 de:
   custom:
-    settings:
-      projekts:
-        connected_resources: Verpflichtende Zuordnung von Diskussionen & Vorschläge zu Projekten
-        connected_resources_description: Diskussionen & Vorschläge können ohne Projektzuordnung nicht erstellt werden
-        predefined: Projektvorauswahl treffen
-        predefined_description: Die gefilterten Projekte beim Erstellen von Diskussionen & Vorschlägen vorauswählen
-        show_archived:
-          navigation: Archivierte Projekte in Navigation anzeigen
-          navigation_description: Zeigt archivierte Projekte in der Navigationsleiste wenn aktiviert
-          sidebar: Archivierte Projekte in Projektseitenleiste  anzeigen
-          sidebar_description: Zeigt archivierte Projekte in der Projektseitenleiste wenn aktiviert
+    menu:
+      archived: Abgelaufene Projekte
+      account: Konto
+      debates: Diskussionen
+      proposals: Vorschläge
+      polls: Abstimmungen
     admin:
+      settings:
+        index:
+          extended_settings: Erweiterte Einstellungen
+          extended_features: Erweiterte Funktionen
+          extended_options: Erweiterte Konfigurationseinstellungen
+
       menu:
         projekts: Projekte
       projekts:
@@ -33,6 +34,7 @@ de:
           page: Seite
           edit_page: Seite bearbeiten
           page_link: Seite öffnen 
+          add_cards: Kacheln erstellen
         edit_projekt: Editieren
         destroy: Löschen
         edit:
@@ -40,12 +42,14 @@ de:
           beginning: Anfangsdatum
           ending: Enddatum
           actions: Aktionen
+          start_date: Anfangsdatum
+          end_date: Enddatum
           activate: Aktiviert
           projekt_duration: Gesamtdauer des Projekts
           debate_phase: Diskussionsphase
           proposal_phase: Vorschlagsphase
           voting_phase: Abstimmungsphase
-          voting_manage: Umfragen verwalten
+          voting_manage: Abstimmungen verwalten
           show_in_navigation_checkbox: Projekt in Navigation anzeigen
           show_in_navigation:
             yes: Ja
@@ -64,10 +68,21 @@ de:
         filter_button: 'Projekte filtern'
       errors:
         presence: 'Bitte wählen Sie ein Projekt'
+    proposals:
+      index:
+        max_number_reached: "Du hast die maximale Anzahl (%{max_number}) an Vorschlägen pro Nutzer erreicht. Bevor du einen weiteren Vorschlag erstellen kannst, musst du einen aktiven Vorschlag zurückziehen."
+        projekts: Projekte
+      proposal:
+        unsupport: Zurückziehen
     polls:
+      index:
+        projekts: Projekte
       show:
         results_menu: Zwischenergebnisse für Admins
         info_menu: Abstimmung
+    debates:
+      index:
+        projekts: Projekte
     comments:
       reply_form:
         leave_comment: 'Schreiben Sie eine Antwort'

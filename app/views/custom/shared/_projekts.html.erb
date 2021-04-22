@@ -1,5 +1,5 @@
 <% if current_user && current_user.administrator? %>
-  <% projekts = Projekt.top_level %>
+  <% projekts = Projekt.top_level.with_order_number %>
 <% else %>
   <% projekts = Projekt.top_level_active %>
 <% end %>
@@ -28,7 +28,9 @@
   <div id="projekt-tags-selector">
 
     <div class="projekt-tags-column">
-      <h6><%= t('custom.projekts.new.first_level') %></h6>
+      <% if projekts.any? { |projekt| projekt.children.any? } %>
+        <h6><%= t('custom.projekts.new.first_level') %></h6>
+      <% end %>
 
       <div class="projekt-group"  >
         <%= f.collection_check_boxes :projekt_ids, projekts, :id, :name do |cb| %>
@@ -45,18 +47,20 @@
 
 
     <div class="projekt-tags-column">
-      <h6><%= t('custom.projekts.new.second_level') %></h6>
+      <% if projekts.any? { |projekt| projekt.children.any? } %>
+        <h6><%= t('custom.projekts.new.second_level') %></h6>
+      <% end %>
 
       <% projekts.each do |projekt| %>
         <% if projekt.children.any? %>
           <div class="projekt-group js-show-children-projekts" data-parent=<%= projekt.id %> >
-            <%= f.collection_check_boxes :projekt_ids, projekt.children, :id, :name do |cb| %>
+            <%= f.collection_check_boxes :projekt_ids, projekt.children.with_order_number, :id, :name do |cb| %>
               <% cb.object.children.any? ? arrow = 'show-arrow' : arrow = ''  %>
               <% cb.label(class: "js-show-children-projekts #{arrow}", data: {projekt_id: cb.object.id} ) do  %>
                 <%= cb.check_box %>
                 <%= cb.text %>
                 <span class="checkmark js-select-projekt"></span>
-                <div class="checkmark-before"></div>
+                <div class="checkmark-before js-select-projekt"></div>
               <% end %>
             <% end %>
           </div>
@@ -66,20 +70,22 @@
 
 
     <div class="projekt-tags-column">
-      <h6><%= t('custom.projekts.new.third_level') %></h6>
+      <% if projekts.any? { |projekt| projekt.children.any? { |projekt| projekt.children.any? } } %>
+        <h6><%= t('custom.projekts.new.third_level') %></h6>
+      <% end %>
 
       <% projekts.each do |projekt| %>
         <% if projekt.children.any? %>
           <% projekt.children.each do |projekt| %>
             <% if projekt.children.any? %>
               <div class="projekt-group js-show-children-projekts" data-parent=<%= projekt.id %> >
-                <%= f.collection_check_boxes :projekt_ids, projekt.children, :id, :name do |cb| %>
+                <%= f.collection_check_boxes :projekt_ids, projekt.children.with_order_number, :id, :name do |cb| %>
                   <% cb.object.children.any? ? arrow = 'show-arrow' : arrow = ''  %>
                   <% cb.label(class: "js-show-children-projekts #{arrow}", data: {projekt_id: cb.object.id} ) do  %>
                     <%= cb.check_box %>
                     <%= cb.text %>
                     <span class="checkmark js-select-projekt"></span>
-                    <div class="checkmark-before"></div>
+                    <div class="checkmark-before js-select-projekt"></div>
                   <% end %>
                 <% end %>
               </div>
@@ -89,8 +95,12 @@
       <% end %>
     </div>
 
+    <% if false %>
+
     <div class="projekt-tags-column">
-      <h6><%= t('custom.projekts.new.fourth_level') %></h6>
+      <% if projekts.any? { |projekt| projekt.children.any? { |projekt| projekt.children.any? { |projekt| projekt.children.any? } } } %>
+        <h6><%= t('custom.projekts.new.fourth_level') %></h6>
+      <% end %>
 
       <% projekts.each do |projekt| %>
         <% if projekt.children.any? %>
@@ -99,7 +109,7 @@
               <% projekt.children.each do |projekt| %>
                 <% if projekt.children.any? %>
                   <div class="projekt-group js-show-children-projekts" data-parent=<%= projekt.id %> >
-                    <%= f.collection_check_boxes :projekt_ids, projekt.children, :id, :name do |cb| %>
+                    <%= f.collection_check_boxes :projekt_ids, projekt.children.with_order_number, :id, :name do |cb| %>
                       <% cb.object.children.any? ? arrow = 'show-arrow' : arrow = ''  %>
                       <% cb.label(class: "js-show-children-projekts #{arrow}", data: {projekt_id: cb.object.id} ) do  %>
                         <%= cb.check_box %>
@@ -116,5 +126,8 @@
         <% end %>
       <% end %>
     </div>
+
+    <% end %>
+
   </div>
 </div>

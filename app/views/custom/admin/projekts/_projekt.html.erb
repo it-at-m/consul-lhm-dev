@@ -47,14 +47,17 @@
       <%= f.text_field :name, 
                        id: "projekt_name_#{projekt.id}", 
                        label: t('custom.admin.projekts.index.name_singular') %>
-      <% unless projekt.in?(@projekts) %>
-        <div class='projekt-link-no-details'>               
+      <div class='projekt-link'>
+        <% if projekt.page.present?  %>
           <%= link_to t("custom.admin.projekts.index.edit_page"), edit_admin_site_customization_page_path(projekt.page) %>
-          <% page_status = projekt.page.status %>
-          <%= "(#{page_status})" %>
-          <%= link_to t("custom.admin.projekts.index.page_link"), projekt.page.url if page_status == 'published' %>
-        </div>
-      <% end %>
+          <% if projekt.page.published? %>
+            <br>
+            <%= link_to t("custom.admin.projekts.index.page_link"), projekt.page.url %>
+          <% end %>
+          <br>
+          <%= link_to t("custom.admin.projekts.index.add_cards"), admin_site_customization_page_cards_path(projekt.page) %>
+        <% end %>
+      </div>
     </td>
 
 

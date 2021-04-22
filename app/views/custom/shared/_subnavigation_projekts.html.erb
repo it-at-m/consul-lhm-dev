@@ -1,0 +1,33 @@
+<% active_projekts = Projekt.top_level_active.where(show_in_navigation: true) %>
+<% archived_projekts = Projekt.top_level_archived %>
+
+<% active_projekts.each do |active_projekt| %>
+  <li class='nav-element top-level-item'>
+
+    <div class='flyout-item-name projekt-name'>
+      <%= prepare_projekt_name(active_projekt) %>
+    </div>
+
+    <% if active_projekt.children.any? %>
+      <div class='nav-toggle-arrow js-toggle-mobile-flyout-item'>
+      </div>
+    <% end %>
+
+    <%= render partial: 'shared/subnavigation_flyout_projekts', locals: { projekts: active_projekt.children.with_order_number } if active_projekt.children.any? %>
+
+  </li>
+<% end %>
+
+<% if show_archived_projekts_in_menu? && archived_projekts.any? %>
+  <li class='nav-element top-level-item'>
+
+    <div class='flyout-item-name projekt-name'>
+      <%= t('custom.menu.archived') %>
+    </div>
+
+    <div class='nav-toggle-arrow js-toggle-mobile-flyout-item'>
+    </div>
+
+    <%= render partial: 'shared/subnavigation_flyout_projekts', locals: { projekts: archived_projekts } %>
+  </li>
+<% end %>

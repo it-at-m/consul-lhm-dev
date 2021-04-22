@@ -13,6 +13,7 @@
     <thead>
       <th class="text-center"><%= t("admin.debates.index.id") %></th>
       <th><%= t("admin.debates.index.title") %></th>
+      <th><%= t("custom.debates.index.projekts") %></th>
       <th><%= t("admin.proposals.index.tags") %></th>
       <th><%= t("admin.debates.index.author") %></th>
     </thead>
@@ -21,6 +22,7 @@
         <tr id="<%= dom_id(debate) %>" class="debates">
           <td class="text-center"><%= debate.id %></td>
           <td><%= link_to debate.title, admin_debate_path(debate) %></td>
+          <td><%= debate.projekts.pluck(:name).join(', ') %> <%=link_to t("admin.actions.edit"), admin_debate_path(debate)%>  </td>
           <td><%= debate.tag_list %> <%=link_to t("admin.actions.edit"), admin_debate_path(debate)%>  </td>
           <td><%= debate.author.username %></td>
         </tr>

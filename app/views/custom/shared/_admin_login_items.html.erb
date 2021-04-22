@@ -1,0 +1,32 @@
+<% if show_admin_menu?(current_user) %>
+  <% if current_user.administrator? %>
+    <li class='nav-element flyout-item'>
+      <%= link_to t("layouts.header.administration"), admin_root_path %>
+    </li>
+  <% end %>
+
+  <% if current_user.administrator? || current_user.moderator? %>
+    <li class='nav-element flyout-item'>
+      <%= link_to t("layouts.header.moderation"), moderation_root_path %>
+    </li>
+  <% end %>
+
+  <% if feature?(:budgets) &&
+        (current_user.administrator? || current_user.valuator?) %>
+    <li class='nav-element flyout-item'>
+      <%= link_to t("layouts.header.valuation"), valuation_root_path %>
+    </li>
+  <% end %>
+
+  <% if current_user.administrator? || current_user.manager? %>
+    <li class='nav-element flyout-item'>
+      <%= link_to t("layouts.header.management"), management_sign_in_path %>
+    </li>
+  <% end %>
+
+  <% if current_user.poll_officer? && Poll.current.any? %>
+    <li class='nav-element flyout-item'>
+      <%= link_to t("layouts.header.officing"), officing_root_path %>
+    </li>
+  <% end %>
+<% end %>

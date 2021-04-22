@@ -25,7 +25,7 @@
       <div class="small-12 column">
         <%= translations_form.text_area :description,
               maxlength: Debate.description_max_length,
-              class: "html-area" %>
+              class: "html-area #{ck_editor_class(current_user)}" %>
       </div>
     <% end %>
 
@@ -35,8 +35,7 @@
       <%= render partial: "shared/projekts", locals: { f: f, model: @debate }  %>
     </div>
 
-
-    <%if Setting["feature.enable_categories"]%>
+    <%if extended_feature?("enable_categories") %>
       <div class="small-12 column">
         <%if @categories.any? %>
           <div id="category_tags" class="tags">
@@ -50,7 +49,7 @@
       <%=f.hidden_field :tag_list_predefined, value: @debate.tags.reject{|t| !['category'].include?(t.kind)}.map(&:name).join(","), class: "js-tag-list list-tags predefined"%>
     <%end%>
 
-    <%if Setting["feature.enable_custom_tags"]%>
+    <%if extended_feature?("enable_custom_tags") %>
       <div class="small-12 column">
         <%= f.text_field :tag_list_custom, value: @debate.tags.where(kind: nil).map{|c| c.name}.join(","),
           label: t("debates.form.tags_custom"),
@@ -79,4 +78,3 @@
   </div>
 
 <% end %>
-

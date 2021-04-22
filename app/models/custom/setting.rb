@@ -7,6 +7,10 @@ class Setting < ApplicationRecord
       prefix
     elsif %w[remote_census].include? prefix
       key.rpartition(".").first
+    elsif %w[extended_feature].include? prefix
+      key.rpartition(".").first
+    elsif %w[extended_option].include? prefix
+      key.rpartition(".").first
     else
       "configuration"
     end
@@ -128,7 +132,21 @@ class Setting < ApplicationRecord
         "projekts.connected_resources": false,
         "projekts.predefined": false,
         "projekts.show_archived.navigation": true,
-        "projekts.show_archived.sidebar": true
+        "projekts.show_archived.sidebar": true,
+        "extended_feature.enable_categories": nil,
+        "extended_feature.enable_custom_tags": nil,
+        "extended_feature.enable_proposal_support_withdrawal": nil,
+        "extended_feature.map_above_proposals": false,
+        "extended_feature.extended_editor_for_admins": false,
+        "extended_feature.extended_editor_for_users": false,
+        "extended_feature.intermediate_poll_results_for_admins": false,
+        "extended_feature.hide_comment_replies_by_default": false,
+        # "extended_feature.elasticsearch": false,
+        "extended_feature.intro_text_for_debates": false,
+        "extended_feature.intro_text_for_proposals": false,
+        "extended_feature.intro_text_for_polls": false,
+        "extended_option.max_active_proposals_per_user": 100,
+        "extended_option.description_max_length": 6000
       }
     end
 
@@ -136,9 +154,14 @@ class Setting < ApplicationRecord
       defaults.each { |name, value| self[name] = value }
     end
 
-    def init_tags_setting
-      self["feature.enable_categories"] = true
-      self["feature.enable_custom_tags"] = true
+    def force_presence_date_of_birth?
+      Setting["feature.remote_census"].present? &&
+        Setting["remote_census.request.date_of_birth"].present?
+    end
+
+    def force_presence_postal_code?
+      Setting["feature.remote_census"].present? &&
+        Setting["remote_census.request.postal_code"].present?
     end
   end
 end

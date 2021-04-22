@@ -1,0 +1,45 @@
+de:
+  custom:
+    settings:
+      extended_feature:
+        enable_categories: Tags aktivieren
+        enable_categories_description: Aktivieren Sie die Auswahl vordefinierter Tags
+        enable_custom_tags: Nutzer-Tags aktivieren
+        enable_custom_tags_description: Aktivieren Sie die Eingabe individueller Nutzer-Tags
+        enable_proposal_support_withdrawal: Aktivieren Sie die Rücknahme der Angebotsunterstützung
+        enable_proposal_support_withdrawal_description: Aktivieren Sie die Rücknahme der Angebotsunterstützung beschreibung
+        elasticsearch: "Elasticsearch"
+        elasticsearch_description: "Elasticsearch ist die führende verteilte, RESTful, Open-Source-Such- und Analyse-Engine, die auf Geschwindigkeit, horizontale Skalierbarkeit, Zuverlässigkeit und einfache Verwaltung ausgelegt ist."
+        map_above_proposals: Kartenübersicht für Vorschläge
+        map_above_proposals_description: Aktivieren Sie die Kartenübersicht oberhalb der Vorschlagsliste
+        extended_editor_for_admins: Erweiterter Editor für den Admin-Panel
+        extended_editor_for_admins_description: Aktivieren Sie den erweiterten Editor für Inhalte, die im Admin-Panel erstellt werden
+        extended_editor_for_users: Erweiterter Editor für Nutzer im Frontend
+        extended_editor_for_users_description: Aktivieren Sie den erweiterten Editor für Inhalte, die im Frontend von Nutzern erstellt werden
+        intro_text_for_debates: Einleitungstext für Diskussionen
+        intro_text_for_debates_description: Aktievieren Sie einen individuellen Einleitungstext oberhalb der Diskussionsübersicht
+        intro_text_for_proposals: Einleitungstext für Vorschläge
+        intro_text_for_proposals_description: Aktievieren Sie einen individuellen Einleitungstext oberhalb der Vorschlagsübersicht
+        intro_text_for_polls: Einleitungstext für Abstimmungen
+        intro_text_for_polls_description: Aktievieren Sie einen individuellen Einleitungstext oberhalb der Abstimmungsübersicht
+        intermediate_poll_results_for_admins: Zwischenergebnisse von Abstimmungen für Admins anzeigen
+        intermediate_poll_results_for_admins_description: Aktivieren Sie die Einsicht in Zwischenergebnisse zu Abstimmungen für Administratoren
+        hide_comment_replies_by_default: Antworten auf Kommentare standardmäßig einklappen
+        hide_comment_replies_by_default_description: Aktivieren Sie das standardmäßige Einklappen von Kommentaren, um Übersichtlichkeit zu schaffen
+      extended_option:
+        max_active_proposals_per_user: Maximale Anzahl aktiver Vorschläge pro Benutzer
+        max_active_proposals_per_user_description: Maximale Anzahl aktiver Vorschläge pro Benutzer beschreibung
+        description_max_length: Maximale Zeichenanzahl für die Vorschlagsbeschreibung
+        description_max_length_description: Legen Sie fest, wie viele Zeichen für Vorschläge maximal verwendet werden dürfen
+
+
+      projekts:
+        connected_resources: Verpflichtende Zuordnung von Diskussionen & Vorschläge zu Projekten
+        connected_resources_description: Diskussionen & Vorschläge können ohne Projektzuordnung nicht erstellt werden
+        predefined: Projektvorauswahl treffen
+        predefined_description: Die gefilterten Projekte beim Erstellen von Diskussionen & Vorschlägen vorauswählen
+        show_archived:
+          navigation: Archivierte Projekte in Navigation anzeigen
+          navigation_description: Zeigt archivierte Projekte in der Navigationsleiste wenn aktiviert
+          sidebar: Archivierte Projekte in Projektseitenleiste  anzeigen
+          sidebar_description: Zeigt archivierte Projekte in der Projektseitenleiste wenn aktiviert

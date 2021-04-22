@@ -34,6 +34,14 @@ table.projekts {
   font-size: 0.875em;
 }
 
+.projekt-link {
+  margin-top: -1em;
+
+  a {
+    margin-left: 0 !important;
+  }
+}
+
 .projekt-dates {
   display: grid;
   grid-template-columns: 250px 300px;
@@ -102,7 +110,7 @@ table.edit-projekt {
 #projekt-tags-selector {
 
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   column-gap: 1em;
   row-gap: 1em;
 

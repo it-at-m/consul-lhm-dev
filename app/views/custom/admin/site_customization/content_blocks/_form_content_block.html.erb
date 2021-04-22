@@ -19,7 +19,7 @@
   <%end%>
 
   <div class="small-12 column">
-    <%= f.text_area :body, rows: 10, class: @content_block.custom? ? "html-area admin" : "" %>
+    <%= f.text_area :body, rows: 10, class: @content_block.custom? ? "html-area #{ck_editor_class(current_user)}" : "" %>
     <div class="small-12 medium-6 large-3">
       <%= f.submit class: "button success expanded" %>
     </div>

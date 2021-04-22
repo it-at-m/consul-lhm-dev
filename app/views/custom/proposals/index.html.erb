@@ -51,13 +51,11 @@
                                              namespace: "proposals" %>
     <% end %>
 
-    <%tags = []%>
-    <%tag_categories = @selected_tags&.select{ |tag| tag.kind == 'category' } %>
+    <%tags = @selected_tags&.select{ |tag| tag.kind == 'category' } %>
     <%can_create = true %>
-    <%tags += tag_categories if tag_categories %>
 
     <div class="row">
-      <% if feature?(:map) %>
+      <% if extended_feature?(:map_above_proposals) %>
         <div class="map inline">
           <h3><%= t("proposals.index.map") %></h3>
           <%= render_map(nil, "proposals", false, nil, @proposals_coordinates) %>
@@ -69,7 +67,11 @@
         <% if has_banners? %>
           <%= render "shared/banner" %>
         <% end %>
-        <%=render_custom_block 'proposals_welcome' %>
+
+
+        <% if extended_feature?(:intro_text_for_proposals) %>
+          <%=render_custom_block 'proposals_welcome' %>
+        <% end %>
 
         <% if show_featured_proposals? %>
           <div id="featured-proposals" class="row featured-proposals">
@@ -87,6 +89,7 @@
           <div class="row">
             <div class="small-12 column">
               <%= render "view_mode" %>
+              <%= yield :header_addon %>
             </div>
           </div>
         <% end %>
@@ -98,10 +101,16 @@
           <%= render "shared/order_links", i18n_namespace: "proposals.index" %>
         <% end %>
           <div class="show-for-small-only">
-          <%= link_to t("proposals.index.start_proposal"), new_proposal_path(tags: tags.any? ? tags.map{|t| t.name} : nil),
-            class: "button expanded",
-            onclick: can_create ? "return true" : "alert('#{t("alerts.select_one_category", model: t("activerecord.models.proposal.one"))}'); return false;",
-            disabled: !can_create %>
+            <% if current_user && proposal_limit_exceeded?(current_user) %>
+							<div class='max-proposals-exceeded'>
+								<%= t('custom.proposals.index.max_number_reached', max_number: Setting['extended_option.max_active_proposals_per_user']) %>
+							</div>
+						<% else %>
+							<%= link_to t("proposals.index.start_proposal"), new_proposal_path(tags: tags.any? ? tags.map{|t| t.name} : nil),
+								class: "button expanded",
+								onclick: can_create ? "return true" : "alert('#{t("alerts.select_one_category", model: t("activerecord.models.proposal.one"))}'); return false;",
+								disabled: !can_create %>
+            <% end %>
           </div>
         <div id="proposals-list">
           <% if @proposals.any? || current_user.blank? %>
@@ -128,10 +137,16 @@
       </div>
       <div class="small-12 medium-3 column">
         <aside class="margin-bottom">
-          <%= link_to t("proposals.index.start_proposal"), new_proposal_path(tags: tags.any? ? tags.map{|t| t.name} : nil),
-            class: "button expanded",
-            onclick: can_create ? "return true" : "alert('#{t("alerts.select_one_category", model: t("activerecord.models.proposal.one"))}'); return false;",
-            disabled: !can_create %>
+					<% if current_user && proposal_limit_exceeded?(current_user) %>
+						<div class='max-proposals-exceeded'>
+							<%= t('custom.proposals.index.max_number_reached', max_number: Setting['extended_option.max_active_proposals_per_user']) %>
+						</div>
+					<% else %>
+						<%= link_to t("proposals.index.start_proposal"), new_proposal_path(tags: tags.any? ? tags.map{|t| t.name} : nil),
+							class: "button expanded",
+							onclick: can_create ? "return true" : "alert('#{t("alerts.select_one_category", model: t("activerecord.models.proposal.one"))}'); return false;",
+							disabled: !can_create %>
+          <% end %>
           <div class="sidebar-divider"></div>
           <h2 class="sidebar-title"><%= t("proposals.index.selected_proposals") %></h2>
           <br>
@@ -140,7 +155,7 @@
           </p>
           <% if params[:retired].blank? %>
 					  <%= render "shared/projekts_sidebar" %>
-            <%= render "shared/categories", model: "proposal" %>
+            <%= render "shared/categories", taggable: "proposal" %>
             <%= render "shared/tag_cloud", taggable: "proposal" %>
             <%= render "geozones" %>
           <% end %>

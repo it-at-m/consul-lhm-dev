@@ -10,6 +10,7 @@ class DebatesController < ApplicationController
     @featured_debates = @debates.featured
     take_only_by_tag_names
     take_by_projekts
+    @selected_tags = all_selected_tags
   end
 
   private

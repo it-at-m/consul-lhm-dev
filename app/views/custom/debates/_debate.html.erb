@@ -1,4 +1,4 @@
-<% cache [locale_and_user_status, debate, @debate_votes[debate.id], params[:tags]] do %>
+<% cache [locale_and_user_status, debate, @debate_votes[debate.id], params[:tags], params[:projekts]] do %>
   <div id="<%= dom_id(debate) %>" class="debate clear" data-type="debate">
     <div class="panel">
      <% if debate.image.present? %>

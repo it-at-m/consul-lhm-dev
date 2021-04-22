@@ -12,6 +12,11 @@
   
     <div class="row">
       <div class="small-12 medium-9 column">
+
+      <% if extended_feature?(:intro_text_for_polls) %>
+        <%=render_custom_block 'polls_welcome' %>
+      <% end %>
+
       <% if show_polls_description? %>
         <div class="polls-description">
           <%= auto_link_already_sanitized_html wysiwyg(@active_poll.description) %>
@@ -55,7 +60,7 @@
       <div class="small-12 medium-3 column">
         <aside class="margin-bottom">
           <%= render "shared/projekts_sidebar" %>
-          <%= render "shared/categories", model: "poll" %>
+          <%= render "shared/categories", taggable: "poll" %>
           <%= render "shared/tag_cloud", taggable: "poll" %>
         </aside>
     </div>

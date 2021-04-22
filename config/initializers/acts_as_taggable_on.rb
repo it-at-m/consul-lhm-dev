@@ -23,74 +23,13 @@ module ActsAsTaggableOn
     def decrement_tag_custom_counter
       tag.decrement_custom_counter_for(taggable_type)
     end
-
   end
 
   Tag.class_eval do
     scope :category, -> { where(kind: "category") }
-    scope :subcategory, -> { where(kind: "subcategory") }
-    scope :project, -> { where(kind: "project") }
-
-    MANAGE_CATEGORIES    = 0b111
-    MANAGE_SUBCATEGORIES = 0b011
-
-    TAGS_PREDEFINED = 0b001
-    TAGS_CLOUD      = 0b010
-    TAGS_CUSTOM     = 0b100
-
-    def self.manage_categories
-      MANAGE_CATEGORIES
-    end
-
-    def self.manage_subcategories
-      MANAGE_SUBCATEGORIES
-    end
-
-    def self.tags_predefined
-      TAGS_PREDEFINED
-    end
-
-    def self.tags_cloud
-      TAGS_CLOUD
-    end
-
-    def self.tags_custom
-      TAGS_CUSTOM
-    end
-
-
-    def self.category_predefined?
-      MANAGE_CATEGORIES & TAGS_PREDEFINED > 0
-    end
-
-    def self.subcategory_predefined?
-      MANAGE_SUBCATEGORIES & TAGS_PREDEFINED > 0
-    end
-
-    def self.sync_tag_config
-      where(kind: ['category', 'subcategory']).each do |tag|
-        tag.update_attributes(custom_logic_category_code: MANAGE_CATEGORIES, custom_logic_subcategory_code: MANAGE_SUBCATEGORIES);
-      end
-    end
-
-    def self.general_project
-      find_or_create_by kind: "category", name: "General"
-    end
-
-    def tag_name
-      if attributes["name"] == 'General'
-        I18n.t("tag_names.general")
-      else
-        name
-      end
-    end
 
     def category?
       kind == "category"
-    end
-
-    def project?
-      kind == "project"
     end
 
     include Graphqlable

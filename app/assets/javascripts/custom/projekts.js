@@ -147,7 +147,7 @@
         $filterArrow.css('border-color', '#C6C6C6')
       }
 
-      var uniqueProjektIds = selectedProjektIds;
+      var uniqueProjektIds = selectedProjektIds.filter( function(v, i, a) { return  a.indexOf(v) === i } );
 
       if ( uniqueProjektIds.length > 0) {
         url.searchParams.set('projekts', uniqueProjektIds.join(','))
@@ -177,6 +177,10 @@
         currentTags = [];
       }
 
+      if (currentPageUrl.searchParams.get('page')) {
+        currentPageUrl.searchParams.delete('page');
+      }
+
       var clickedUrl = new URL(clickedLink);
       var newProjektId;
       var newTag;
@@ -194,7 +198,7 @@
           window.location.href = currentPageUrl;
         } else {
           currentProjektIds.push(newProjektId)
-          currentProjektIds = currentProjektIds.filter( function(element) { element !== '' } )
+          currentProjektIds = currentProjektIds.filter( function(element) { return element !== '' } )
           currentPageUrl.searchParams.set('projekts', currentProjektIds.join(','))
           window.history.pushState('', '', currentPageUrl)
           window.location.href = currentPageUrl.href;
@@ -286,6 +290,11 @@
       $("body").on("click", ".js-apply-projekts-filter", function(event) {
         event.preventDefault();
         var url = new URL(window.location.href);
+
+        if (url.searchParams.get('page')) {
+          url.searchParams.delete('page');
+        }
+
         window.location.href = url;
       });
 

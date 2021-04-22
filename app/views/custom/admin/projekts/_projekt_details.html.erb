@@ -1,11 +1,5 @@
 <tr class='projekt-details'>
   <td colspan="5">
-    <div class='projekt-link'>               
-      <%= link_to t("custom.admin.projekts.index.edit_page"), edit_admin_site_customization_page_path(projekt.page) %>
-      <% page_status = projekt.page.status %>
-      <%= "(#{page_status})" %>
-      <%= link_to t("custom.admin.projekts.index.page_link"), projekt.page.url if page_status == 'published' %>
-    </div>
 
     <div class='projekt-dates'>               
       <div>
@@ -34,6 +28,13 @@
       </div>
       <div>
         <%= projekt.show_in_navigation ? t("custom.admin.projekts.edit.show_in_navigation")[true] : t("custom.admin.projekts.edit.show_in_navigation")[false] %>
+      </div>
+
+      <div>
+        <%= t("admin.geozones.index.title") %>
+      </div>
+      <div>
+        <%= t("geozones.none") %>
       </div>
 
     </div>
