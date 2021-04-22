@@ -23,9 +23,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
-  def openid_connect
-    super
-  end
 
   private
 
