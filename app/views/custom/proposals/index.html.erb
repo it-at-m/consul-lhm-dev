@@ -57,7 +57,6 @@
     <div class="row">
       <% if extended_feature?(:map_above_proposals) %>
         <div class="map inline">
-          <h3><%= t("proposals.index.map") %></h3>
           <%= render_map(nil, "proposals", false, nil, @proposals_coordinates) %>
         </div>
         <div class="no-bullet margin-top">
@@ -147,20 +146,30 @@
 							onclick: can_create ? "return true" : "alert('#{t("alerts.select_one_category", model: t("activerecord.models.proposal.one"))}'); return false;",
 							disabled: !can_create %>
           <% end %>
-          <div class="sidebar-divider"></div>
-          <h2 class="sidebar-title"><%= t("proposals.index.selected_proposals") %></h2>
-          <br>
-          <p class="small">
-            <%= link_to t("proposals.index.selected_proposals_link"), proposals_path(selected: "all") %>
-          </p>
+
+          <% if extended_feature?('show_selected_proposals_in_proposal_sidebar') %>
+            <div class="sidebar-divider"></div>
+            <h2 class="sidebar-title"><%= t("proposals.index.selected_proposals") %></h2>
+            <br>
+            <p class="small">
+              <%= link_to t("proposals.index.selected_proposals_link"), proposals_path(selected: "all") %>
+            </p>
+          <% end %>
+
           <% if params[:retired].blank? %>
 					  <%= render "shared/projekts_sidebar" %>
             <%= render "shared/categories", taggable: "proposal" %>
             <%= render "shared/tag_cloud", taggable: "proposal" %>
-            <%= render "geozones" %>
+
+            <% if extended_feature?('show_geozones_in_proposal_sidebar') %>
+              <%= render "geozones" %>
+            <% end %>
           <% end %>
           <%= render "retired" %>
-          <%= render "proposals_lists" %>
+
+          <% if extended_feature?('show_suggested_proposals_in_proposal_sidebar') %>
+            <%= render "proposals_lists" %>
+          <% end %>
         </aside>
       </div>
     </div>

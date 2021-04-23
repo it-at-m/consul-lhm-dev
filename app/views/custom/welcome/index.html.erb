@@ -13,8 +13,6 @@
               social_url: root_url %>
 <% end %>
 
-<%= render "header", header: @header %>
-
 <main>
 
   <div class='row'>
@@ -23,6 +21,7 @@
     </div>
   </div>
 
+  <%= render "header", header: @header %>
   <%= render "feeds" %>
 
   <div class='row clear'>

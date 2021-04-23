@@ -25,6 +25,10 @@
 
 // styling mobile menu
 
+.subnavigation a.home-items-icon {
+  display: none;
+}
+
 .subnavigation ul.main-menu {
   margin-left: 1em;
   padding-bottom: 1em;
@@ -54,7 +58,7 @@
 }
 
 .nav-element {
-	position: relative;
+  position: relative;
 }
 
 .external-links {
@@ -156,9 +160,24 @@
 
 @media screen and (min-width: 40em) {
 
+   #responsive-menu {
+     display: none !important;
+   }
+
    #navigation_bar {
      background-color: $top-level-menu-background-color;
    }
+
+  .subnavigation a.home-items-icon {
+    display: inline-block;
+    width: 19px;
+  }
+
+  .home-icon {
+    top: -5px;
+    right: 0;
+    position: absolute;
+  }
 
   .subnavigation ul.main-menu {
     display: flex;
@@ -176,7 +195,18 @@
     }
   }
 
+  .content-items {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   .account-admin-items {
+    display: flex;
+    justify-content: space-between;
+
+    .top-level-item {
+      padding-left: 1.5em;
+    }
 
     .account-items-icon,
     .admin-items-icon {
@@ -208,6 +238,19 @@
   .external-links {
     display: block;
   }
+
+
+  //  Height of the top menu
+  
+  .top-level-item > .flyout-item-name,
+  .top-level-item > .flyout-item-name > .subnavigation a {
+    line-height: 3rem;
+  }
+
+  ul.main-menu {
+    min-height: 3rem
+  }
+
 
 
   // Styling flyout items

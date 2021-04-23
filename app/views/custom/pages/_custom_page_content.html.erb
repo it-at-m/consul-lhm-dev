@@ -1,0 +1,9 @@
+<%= auto_link_already_sanitized_html AdminWYSIWYGSanitizer.new.sanitize(@custom_page.content) %>
+
+<% if @custom_page.print_content_flag %>
+  <%= render "/shared/print" %>
+<% end %>
+
+<% if @cards.any? %>
+  <%= render "shared/cards" %>
+<% end %>

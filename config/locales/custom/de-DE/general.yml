@@ -20,7 +20,7 @@ de:
       user_permission_support_proposal: Vorschläge unterstützen
       user_permission_title: Teilnahme
       user_permission_verify: Damit Sie alle Funktionen nutzen können, müssen Sie ihr Konto verifizieren.
-      user_permission_verify_info: "* Nur für in der Volkszählung registrierte Nutzer."
+      user_permission_verify_info: "* Nur verifizierte Nutzer"
       user_permission_votes: An finaler Abstimmung teilnehmen
       username_label: Benutzer*innenname
       verified_account: Konto verifiziert
@@ -97,7 +97,7 @@ de:
     index:
       featured_debates: Hervorgehoben
       orders:
-        confidence_score: Am besten bewertet
+        confidence_score: Am meisten bewertet
         created_at: Neuste
         hot_score: Aktivste
         most_commented: Am meisten kommentiert
@@ -218,7 +218,7 @@ de:
     footer:
       accessibility: Barrierefreiheit
       conditions: Allgemeine Nutzungsbedingungen
-      consul: CONSUL Anwendung
+      consul: CONSUL
       consul_url: https://github.com/consul/consul
       contact_us: Für technische Unterstützung geben Sie ein
       copyright: CONSUL, %{year}

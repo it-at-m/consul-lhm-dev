@@ -5,7 +5,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 CKEDITOR.editorConfig = function( config )
 {
-  config.extraPlugins = 'widget,lineutils,mjAccordion';
+  config.extraPlugins = 'widget,lineutils,mjAccordion,youtube';
   config.filebrowserImageBrowseLinkUrl = "/ckeditor/pictures";
   config.filebrowserImageBrowseUrl = "/ckeditor/pictures";
   config.filebrowserImageUploadUrl = "/ckeditor/pictures?";
@@ -110,7 +110,7 @@ CKEDITOR.editorConfig = function( config )
     { name: "styles", items: [ "Format", "Font", "FontSize", "Styles" ] },
     { name: "basicstyles", groups: [ "basicstyles", "cleanup" ], items: [ "Bold", "Italic", "Underline", "Strike", "Subscript", "Superscript", "-", "RemoveFormat" ] },
     { name: "colors", items: [ "TextColor", "BGColor" ] },
-    { name: "insert", items: [ "Image", "Table", "MJAccordion", "Source", "HorizontalRule", "SpecialChar" ] },
+    { name: "insert", items: [ "Image", "Table", "MJAccordion", "Source", "HorizontalRule", "SpecialChar", 'Iframe', 'Youtube'  ] },
   ];
 
   config.toolbar = "mini";

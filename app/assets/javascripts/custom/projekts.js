@@ -35,7 +35,6 @@
       })
     },
 
-
     restyleHidingElements: function($label) {
       $label.css('background', '#fff')
       $label.css('color', '#C6C6C6');
@@ -93,31 +92,10 @@
 
     // Functions for selectors in sidebar
 
-    toggleProjektChildrenInSidebarFilter: function(filterArrow) {
-        var $correspondingUlContainer = $(filterArrow).parent().next()
-
-        if ( $correspondingUlContainer.hasClass('children-visible') ) {
-
-          $correspondingUlContainer.removeClass('children-visible');
-          $correspondingUlContainer.find('li').each( function() {
-            $(this).hide();
-          })
-
-          $(filterArrow).css('transform', 'rotate(45deg)')
-          $(filterArrow).css('background', '#fff')
-          $(filterArrow).css('top', '7px')
-
-        } else {
-
-          $correspondingUlContainer.addClass('children-visible');
-          $correspondingUlContainer.children('li').each( function() {
-            $(this).show();
-          })
-
-          $(filterArrow).css('transform', 'rotate(225deg)')
-          $(filterArrow).css('background', '#fff')
-          $(filterArrow).css('top', '10px')
-        }
+    toggleChildrenInSidebar: function($label) {
+      $label.attr('aria-expanded', function (i, attr) {
+        return attr == 'true' ? 'false' : 'true'
+      });
     },
 
     formNewFilterProjektsRequest: function($checkbox) {
@@ -268,10 +246,6 @@
         App.Projekts.removeCheckboxChip(projektId);
       });
 
-      $("body").on("click", ".js-show-children-projekts-in-filter", function() {
-        App.Projekts.toggleProjektChildrenInSidebarFilter(this);
-      });
-
       $("body").on("click", ".js-filter-projekt", function() {
         var $checkbox = $(this);
         App.Projekts.formNewFilterProjektsRequest($checkbox);
@@ -302,6 +276,12 @@
         event.preventDefault()
         var clickedLink = this.href
         App.Projekts.modifyFilterParams(clickedLink);
+      });
+
+
+      $("body").on("click", ".js-icon-toggle-child-projekts", function(event) {
+        var $label = $(this).parent();
+        App.Projekts.toggleChildrenInSidebar($label);
       });
 
     }

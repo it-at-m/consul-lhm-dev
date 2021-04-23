@@ -71,8 +71,8 @@ td.projekt-order {
 
   .projekt-order-arrow-controls {
     position: absolute;
-		top: 40px;
-		left: 12px;
+    top: 40px;
+    left: 12px;
   }
 
   .order-number {
@@ -137,42 +137,42 @@ table.edit-projekt {
     border-radius: 2px;
   }
 
-	input:checked ~ .checkmark-before {
-		display: block;
-	}
+  input:checked ~ .checkmark-before {
+    display: block;
+  }
 
-	input:checked ~ .checkmark {
+  input:checked ~ .checkmark {
     background: #06408E;
     border: 1.5px solid #06408E;
-	}
+  }
 
-	.checkmark-before {
-		content: "";
-		position: absolute;
-		display: none;
-		left: 17px;
-		top: 21px;
-		width: 4px;
-		height: 7px;
-		border: 1.5px solid #fff;
-		border-width: 0 2px 2px 0;
-		transform: rotate(45deg);
-	}
+  .checkmark-before {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 17px;
+    top: 21px;
+    width: 4px;
+    height: 7px;
+    border: 1.5px solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
 
-	label {
-		display: block;
-		margin-bottom: 0;
-		position: relative;
-		cursor: pointer;
-		user-select: none;
+  label {
+    display: block;
+    margin-bottom: 0;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
 
     font-size: 1em;
     font-weight: initial;
     line-height: 1.5rem;
 
-		padding-top: 1em;
+    padding-top: 1em;
     padding-bottom: 1em;
-		padding-left: 2.2em;
+    padding-left: 2.2em;
 
     color: #878787;
     font-weight: 500;
@@ -180,7 +180,7 @@ table.edit-projekt {
     padding-right: 20%;
 
     border-left: 1px solid #ECF2FB;
-	}
+  }
 
   label.show-arrow:after {
     content: '';
@@ -190,17 +190,17 @@ table.edit-projekt {
     width: 7px;
     height: 7px;
     border: 1.5px solid #C6C6C6;
-		border-width: 0 2px 2px 0;
-		transform: rotate(-45deg);
+    border-width: 0 2px 2px 0;
+    transform: rotate(-45deg);
   }
 
-	input[type='checkbox'] {
-	  position: absolute;
-		opacity: 0;
-		cursor: pointer;
-		height: 0;
-		width: 0;
-	}
+  input[type='checkbox'] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
 
 }
 
@@ -238,57 +238,88 @@ table.edit-projekt {
     margin-right: .5em;
   }
 
-	.close {
-		position: absolute;
-		top: 50%;
-		right: 0;
-		width: 14px;
-		height: 14px;
+  .close {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 14px;
+    height: 14px;
     transform: translate(-50%, -50%);
-		cursor: pointer;
-	}
-	.close:hover {
-		opacity: 1;
-	}
-	.close:before, .close:after {
-		position: absolute;
-		left: 40%;
-		content: '';
-		height: 14px;
-		width: 1px;
-		background-color: #06408E;
-	}
-	.close:before {
-		transform: rotate(45deg);
-	}
-	.close:after {
-		transform: rotate(-45deg);
-	}
+    cursor: pointer;
+  }
+  .close:hover {
+    opacity: 1;
+  }
+  .close:before, .close:after {
+    position: absolute;
+    left: 40%;
+    content: '';
+    height: 14px;
+    width: 1px;
+    background-color: #06408E;
+  }
+  .close:before {
+    transform: rotate(45deg);
+  }
+  .close:after {
+    transform: rotate(-45deg);
+  }
 
 }
 
 #filter-projekts {
 
   ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    padding-left: 1.2em;
-  }
-
-  ul ul li {
-    display: none;
-  }
-
-  li.show-projekt {
-    display: flex;
+    list-style-type: none;
+    margin-bottom: 0;
   }
 
   li {
-    display: flex;
-    justify-content: space-between;
     position: relative;
+
+    &~ul {
+      display: none;
+    }
+
+    span.toggle-arrow {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 14px;
+      cursor: pointer;
+      color: #878787;
+    }
+
+    span.toggle-arrow::after {
+      content: "\f107";
+      font-family: "Font Awesome 5 Free";
+      font-weight: bold;
+      display: inline-block;
+      transition: 0.25s;
+    }
   }
+
+  li[aria-expanded="true"] {
+    &~ul {
+      display: block;
+    }
+
+    span.toggle-arrow::after {
+      transform: rotate(180deg);
+    }
+  }
+
+  li[aria-expanded="false"] {
+    &~ul.projekt-navigator {
+      display: none;
+    }
+
+    span.toggle-arrow::after {
+      transform: rotate(0deg);
+    }
+  }
+
+
 
   label {
     cursor: pointer;
@@ -297,25 +328,13 @@ table.edit-projekt {
     margin-right: 2em;
   }
 
-  .projekt-arrow {
+  input[type='checkbox'] {
     position: absolute;
-		width: 8px;
-		height: 8px;
-    right: 5px;
-    top: 10px;
-		border: 1.5px solid #C6C6C6;
-		border-width: 0 2px 2px 0;
-		transform: rotate(45deg);
+    opacity: 0;
     cursor: pointer;
+    height: 0;
+    width: 0;
   }
-
-	input[type='checkbox'] {
-	  position: absolute;
-		opacity: 0;
-		cursor: pointer;
-		height: 0;
-		width: 0;
-	}
 
   .checkmark {
     position: absolute;
@@ -327,32 +346,32 @@ table.edit-projekt {
     border-radius: 2px;
   }
 
-	input:checked ~ .checkmark:before {
-		display: block;
-	}
+  input:checked ~ .checkmark:before {
+    display: block;
+  }
 
-	input:checked ~ .checkmark {
+  input:checked ~ .checkmark {
     background: #06408E;
     border: 1.5px solid #06408E;
-	}
+  }
 
-	.label-selected {
+  .label-selected {
     color: #06408E;
     border-color: #06408E;
-	}
+  }
 
-	.checkmark:before {
-		content: "";
-		position: absolute;
-		display: none;
-		left: 4px;
-		top: 1px;
-		width: 4px;
-		height: 7px;
-		border: 1.5px solid #fff;
-		border-width: 0 2px 2px 0;
-		transform: rotate(45deg);
-	}
+  .checkmark:before {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 4px;
+    top: 1px;
+    width: 4px;
+    height: 7px;
+    border: 1.5px solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
 
 }
 

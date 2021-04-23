@@ -1,10 +1,10 @@
 class WYSIWYGSanitizer
   def allowed_tags
-    %w[p ul ol li strong em u s a h2 h3 h4 h5 h6 div span img]
+    %w[p ul ol li strong em u s a h2 h3 h4 h5 h6 div span img iframe]
   end
 
   def allowed_attributes
-    %w[href style class id target onclick]
+    %w[href style class id target onclick width height]
   end
 
   def sanitize(html)
