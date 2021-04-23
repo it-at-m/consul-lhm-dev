@@ -25,6 +25,9 @@ class Setting < ApplicationRecord
         "feature.google_login": true,
         "feature.twitter_login": true,
         "feature.wordpress_login": false,
+        #START Ergänzung für Keycloak-Anbindung
+        "feature.openid_connect_login": true,
+        #ENDE Ergänzung für Keycloak-Anbindung
         "feature.public_stats": true,
         "feature.signature_sheets": true,
         "feature.user.recommendations": true,
