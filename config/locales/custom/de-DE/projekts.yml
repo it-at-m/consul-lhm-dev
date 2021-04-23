@@ -1,0 +1,16 @@
+de:
+  custom:
+    projekt:
+      page:
+        breadcrumbs:
+          homepage: Startseite
+        sidebar:
+          phases:
+            title: Projektphasen
+            projekt_duration: Gesamtdauer
+            debate_phase: Diskussionsphase
+            proposal_phase: Vorschlagsphase
+            voting_phase: Abstimmungsphase
+          navigator:
+            title: Projektverzeichnis
+

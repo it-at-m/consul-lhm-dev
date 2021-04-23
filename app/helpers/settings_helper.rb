@@ -4,7 +4,10 @@ module SettingsHelper
       (:twitter if feature?(:twitter_login)),
       (:facebook if feature?(:facebook_login)),
       (:google_oauth2 if feature?(:google_login)),
-      (:wordpress_oauth2 if feature?(:wordpress_login))
+      (:wordpress_oauth2 if feature?(:wordpress_login)),
+      #START Ergänzung für Keycloak-Anbindung
+      (:openid_connect if feature?(:openid_connect_login))
+      #ENDE Ergänzung für Keycloak-Anbindung
     ].compact
   end
 

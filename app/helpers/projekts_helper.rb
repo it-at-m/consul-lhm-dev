@@ -66,4 +66,31 @@ module ProjektsHelper
   def related_polls_exist?(projekt)
     Poll.joins(:projekts).where(projekts: { id: projekt.all_children_ids.push(projekt.id) }).any?
   end
+
+  def format_date(date)
+    return '' if date.blank?
+    date.strftime("%d.%m.%Y")
+  end
+
+  def format_date_range(start_date=nil, end_date=nil)
+    if start_date && end_date
+      "#{format_date(start_date)} - #{format_date(end_date)}"
+    elsif start_date && !end_date
+      "Start #{format_date(start_date)}"
+    elsif !start_date && end_date
+      "bis #{format_date(end_date)}"
+    else
+      'Ohne zeitliche Beschränkung'
+    end
+  end
+
+  def format_polls_range(projekt)
+    matching_polls = Poll.joins(:projekts).where(projekts: {id: projekt.all_children_ids.push(projekt.id) }).distinct
+
+    if matching_polls.count == 1
+      return format_date_range(matching_polls.first.starts_at, matching_polls.first.ends_at)
+    else
+      return "#{matching_polls.count} aktive"
+    end
+  end
 end

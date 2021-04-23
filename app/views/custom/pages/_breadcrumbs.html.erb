@@ -12,4 +12,11 @@
   <div class='breadcrumbs-divider'>
     <%= " / " %>
   </div>
+<% else %>
+  <div class='breadcrumbs-item'>
+    <%= link_to t('custom.projekt.page.breadcrumbs.homepage'), root_path %>
+  </div>
+  <div class='breadcrumbs-divider'>
+    <%= " / " %>
+  </div>
 <% end %>

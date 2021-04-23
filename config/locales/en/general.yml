@@ -297,6 +297,10 @@ en:
       sign_in: Sign in with Twitter
       sign_up: Sign up with Twitter
       name: Twitter
+    openid_connect:
+      sign_in: Sign in with Keycloak
+      sign_up: Sign up with Keycloak
+      name: Keycloak
     info:
       sign_in: "Sign in with:"
       sign_up: "Sign up with:"

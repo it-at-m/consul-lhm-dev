@@ -1,0 +1,19 @@
+<% projekts.each do |projekt| %>
+  <% current_projekt_class = current_projekt == projekt ? 'current-projekt' : '' %>
+  <% toggle_projekt = projekt.all_children_ids.push(projekt.id).include?(current_projekt.id) ? true : false  %>
+
+  <ul class='projekt-navigator'>
+    <li class="projekt-navigator <%= current_projekt_class %>" aria-expanded=<%= toggle_projekt %>>
+      <%= prepare_projekt_name(projekt) %>
+
+      <% if projekt.children.any? %>
+        <span class='js-icon-toggle-child-projekts'></span>
+      <% end %>
+
+    </li>
+
+    <% if projekt.children.any? %>
+      <%= render partial: 'pages/sidebar/projekt_list', locals: { projekts: projekt.children, current_projekt: current_projekt } %>
+    <% end %>
+  </ul>
+<% end %>

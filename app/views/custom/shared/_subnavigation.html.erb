@@ -1,6 +1,7 @@
 <div class="column">
   <ul class="main-menu">
     <div class="content-items">
+      <%= render partial: 'shared/subnavigation_home' %>
       <%= raw content_block("subnavigation_left", I18n.locale) %>
       <%= render partial: 'shared/subnavigation_projekts' %>
       <%= raw content_block("subnavigation_right", I18n.locale) %>
