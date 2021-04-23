@@ -1,4 +1,9 @@
 de:
+  omniauth:
+    openid_connect:
+      sign_in: Anmelden mit BayernID
+      sign_up: Registrieren mit BayernID
+      name: BayernID
   custom:
     layouts:
       footer:
