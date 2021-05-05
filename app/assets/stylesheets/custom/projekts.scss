@@ -13,7 +13,8 @@ span.icon-projekts::before {
   }
 }
 
-table.projekts {
+table.projekts,
+table.edit-projekt {
   
   tr:nth-child(even),
   tr:hover {
@@ -27,25 +28,77 @@ table.projekts {
   tr.projekt-details {
     border-top: none;
   }
+
+  tr.projekt-row[aria-expanded="false"] {
+    .info-arrow {
+      transform: rotate(0deg);
+    }
+
+    &+tr.projekt-details {
+      display: none;
+    }
+	}
+
+  tr.projekt-row[aria-expanded="true"] {
+    .info-arrow {
+      transform: rotate(180deg);
+    }
+
+    &+tr.projekt-details {
+      display: table-row;
+    }
+	}
 }
 
-.projekt-link,
-.projekt-dates {
+#edit_projekt {
+  tr.projekt_phase_settings {
+    border-bottom: none;
+  }
+
+  tr.projekt_phase_geozones {
+    border-top: none;
+  }
+
+  div[id^="geozones_for"] {
+    .geozone-check-box {
+      float: left;
+    }
+  }
+
+  .fieldset-disabled {
+    opacity: 0.3;
+  }
+}
+
+.projekt-summary {
+  display: grid;
+  grid-template-columns: 250px 300px;
+  margin-bottom: 2em;
   font-size: 0.875em;
-}
 
-.projekt-link {
-  margin-top: -1em;
+  .section-title,
+  .debate-phase,
+  .proposal-phase {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+
+  .debate-phase,
+  .proposal-phase {
+    display: grid;
+    grid-template-columns: 250px 300px;
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
+
+  .margin-top {
+    margin-top: 1rem;
+  }
 
   a {
     margin-left: 0 !important;
   }
-}
 
-.projekt-dates {
-  display: grid;
-  grid-template-columns: 250px 300px;
-  margin-bottom: 2em;
 }
 
 form select {
@@ -56,6 +109,31 @@ form select {
 
 tr.projekt-row td {
   vertical-align: top;
+}
+
+td.projekt-info {
+  label {
+    padding-left: 12px;
+  }
+
+  .info-arrow {
+    position: relative;
+    width: 50px;
+    height: 40px;
+    cursor: pointer;
+  }
+
+  .info-arrow:after {
+    content: "\f078";
+    font-family: "Font Awesome 5 Free";
+    font-weight: bold;
+    height: auto;
+    position: absolute;
+    transition: 0.25s; 
+    font-size: 24px;
+    left: 14px;
+    top: 10px;
+  }
 }
 
 td.projekt-level {
@@ -103,6 +181,52 @@ table.edit-projekt {
 
 // Index and new views
 
+
+.projekt-phase-button {
+  padding: 0.3rem 0.5rem;
+  display: inline-block;
+  background: $brand;
+  color: $white;
+  text-decoration: none !important;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  width: 190px;
+  text-align: center;
+  margin-top: 0.5em;
+
+  &:hover {
+    color: $white;
+  }
+
+  &:focus {
+    color: $white;
+    outline: none;
+  }
+}
+
+
+.projekt-chip {
+  display: inline-block;
+  font-size: 0.875em;
+  background: #ececec;
+  color: #222;
+  padding: 5px 1em;
+  margin-bottom: .5em;
+
+  a {
+    color: #222;
+  }
+
+  &.filtered-projekt {
+    background: #06408E;
+
+    a {
+      color: #fff;
+    }
+  }
+}
+
+
 #projekt-tags {
   margin: 1em 0;
 }
@@ -127,36 +251,31 @@ table.edit-projekt {
     color: #878787;
   }
 
+  .checkmark-wrapper {
+    position: absolute;
+    top: 16px;
+    left: 12px;
+    height: 25px;
+    width: 30px;
+  }
+
   .checkmark {
     position: absolute;
-    top: 19px;
-    left: 12px;
+    top: 3px;
+    left: 3px;
     height: 14px;
     width: 14px;
+    border-radius: 50%;
+  }
+
+  input:not(:checked) ~ .checkmark-wrapper > .checkmark {
+    background: #fff;
     border: 1.5px solid #C6C6C6;
-    border-radius: 2px;
   }
 
-  input:checked ~ .checkmark-before {
-    display: block;
-  }
-
-  input:checked ~ .checkmark {
+  input:checked ~ .checkmark-wrapper > .checkmark {
     background: #06408E;
     border: 1.5px solid #06408E;
-  }
-
-  .checkmark-before {
-    content: "";
-    position: absolute;
-    display: none;
-    left: 17px;
-    top: 21px;
-    width: 4px;
-    height: 7px;
-    border: 1.5px solid #fff;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
   }
 
   label {
@@ -165,28 +284,28 @@ table.edit-projekt {
     position: relative;
     cursor: pointer;
     user-select: none;
-
     font-size: 1em;
     font-weight: initial;
     line-height: 1.5rem;
-
     padding-top: 1em;
     padding-bottom: 1em;
-    padding-left: 2.2em;
-
-    color: #878787;
-    font-weight: 500;
+    padding-left: 2.5em;
+    color: #222;
+    font-weight: 800;
     font-size: 0.875em;
     padding-right: 20%;
-
     border-left: 1px solid #ECF2FB;
+  }
+
+  label.highlighted {
+    background: #ECF2FB;
   }
 
   label.show-arrow:after {
     content: '';
     position: absolute;
     right: 18px;
-    top: 41%;
+    top: 23px;
     width: 7px;
     height: 7px;
     border: 1.5px solid #C6C6C6;
@@ -194,7 +313,15 @@ table.edit-projekt {
     transform: rotate(-45deg);
   }
 
-  input[type='checkbox'] {
+  label.projekt-phase-disabled {
+    color: #878787;
+
+    .checkmark-wrapper:hover {
+      cursor: not-allowed;
+    }
+  }
+
+  input[type='radio'] {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -202,29 +329,14 @@ table.edit-projekt {
     width: 0;
   }
 
-}
-
-
-.projekt-chip {
-  display: inline-block;
-  font-size: 0.875em;
-  background: #ececec;
-  color: #222;
-  padding: 5px 1em;
-  margin-bottom: .5em;
-
-  a {
-    color: #222;
+  .projekt-phase-details {
+    font-weight: 400;
+    line-height: 1.4;
+    font-size: 0.75rem;
   }
 
-  &.filtered-projekt {
-    background: #06408E;
-
-    a {
-      color: #fff;
-    }
-  }
 }
+
 
 #projekt-tags {
 
@@ -400,4 +512,11 @@ table.edit-projekt {
 
 .projekt-options {
   margin: 2em 0;
+}
+
+span.projekt-backlink:before {
+  content: "\f126";
+  font-weight: bold;
+  font-family: 'Font Awesome 5 Free';
+  opacity: 0.9;
 }

@@ -13,7 +13,7 @@
     </li>
 
     <% if projekt.children.any? %>
-      <%= render partial: 'pages/sidebar/projekt_list', locals: { projekts: projekt.children, current_projekt: current_projekt } %>
+      <%= render partial: 'pages/sidebar/projekt_list', locals: { projekts: projekt.children.with_order_number, current_projekt: current_projekt } %>
     <% end %>
   </ul>
 <% end %>

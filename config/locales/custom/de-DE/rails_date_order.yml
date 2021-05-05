@@ -1,6 +1,0 @@
-de:
-  date:
-    order:
-      - :Jahr
-      - :Monat
-      - :Tag

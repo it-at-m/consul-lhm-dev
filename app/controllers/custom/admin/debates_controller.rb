@@ -31,6 +31,6 @@ class Admin::DebatesController < Admin::BaseController
     end
 
     def debate_params
-      params.require(:debate).permit(:tag_list, { projekt_ids: [] })
+      params.require(:debate).permit(:tag_list, :projekt_id)
     end
 end

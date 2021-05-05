@@ -1,40 +1,93 @@
 <tr class='projekt-details'>
   <td colspan="5">
 
-    <div class='projekt-dates'>               
-      <div>
-        <%= t("custom.admin.projekts.edit.projekt_duration") %>
-      </div>
-      <div>
-        <%= "#{projekt.total_duration_start} - #{projekt.total_duration_end}" %>
-      </div>
+    <div class='projekt-summary'>               
 
-      <div>
-        <%= t("custom.admin.projekts.edit.debate_phase") %>
+      <div class='section-title'>
+      <strong>
+        <%= t("custom.admin.projekts.edit.projekt_status") %>
+      </strong>
       </div>
       <div>
-        <%= "#{projekt.debate_phase_start} - #{projekt.debate_phase_end}" %>
-      </div>
-
+        <%= t("custom.admin.projekts.edit.projekt_activated") %>
+      </div> 
       <div>
-        <%= t("custom.admin.projekts.edit.proposal_phase") %>
-      </div>
-      <div>
-        <%= "#{projekt.proposal_phase_start} - #{projekt.proposal_phase_end}" %>
-      </div>
+        <%= t("custom.admin.projekts.edit.show_in_navigation")[projekt.total_duration_active] %>
+      </div> 
 
       <div>
         <%= t("custom.admin.projekts.edit.show_in_navigation_checkbox") %>
-      </div>
+      </div> 
       <div>
-        <%= projekt.show_in_navigation ? t("custom.admin.projekts.edit.show_in_navigation")[true] : t("custom.admin.projekts.edit.show_in_navigation")[false] %>
+        <%= t("custom.admin.projekts.edit.show_in_navigation")[projekt.show_in_navigation] %>
+      </div> 
+
+
+      <div class='margin-top section-title'>
+        <strong>
+          <%= t("custom.admin.projekts.edit.projekt_page") %>
+        </strong>
       </div>
 
       <div>
-        <%= t("admin.geozones.index.title") %>
+        <% if projekt.page.present?  %>
+          <%= link_to t("custom.admin.projekts.index.edit_page"), edit_admin_site_customization_page_path(projekt.page) %>
+          <% if projekt.page.published? %>
+            <br>
+            <%= link_to t("custom.admin.projekts.index.page_link"), projekt.page.url %>
+          <% end %>
+          <br>
+          <%= link_to t("custom.admin.projekts.index.add_cards"), admin_site_customization_page_cards_path(projekt.page) %>
+        <% end %>
       </div>
+
       <div>
-        <%= t("geozones.none") %>
+      </div> 
+
+
+      <div class='margin-top section-title'>
+      <strong>
+        <%= t("custom.admin.projekts.edit.projekt_phasen") %>
+      </strong>
+      </div>
+
+      <div>
+        <%= t("custom.admin.projekts.edit.projekt_duration") %>
+      </div>
+
+      <div>
+        <%=  format_date_range(projekt.total_duration_start, projekt.total_duration_end) %>
+      </div>
+
+      <div class='debate-phase'>
+        <div>
+          <%= t("custom.admin.projekts.edit.debate_phase") %>
+        </div>
+        <div>
+          <%=  get_projekt_phase_duration(projekt&.debate_phase) %>
+        </div>
+
+        <div>
+          <%= t("custom.admin.projekts.edit.projekt_phase_limitation") %>
+        </div>
+        <div>
+          <%=  get_projekt_phase_limitations(projekt&.debate_phase) %>
+        </div>
+      </div>
+
+      <div class='proposal-phase'>
+        <div>
+          <%= t("custom.admin.projekts.edit.proposal_phase") %>
+        </div>
+        <div>
+          <%=  get_projekt_phase_duration(projekt&.proposal_phase) %>
+        </div>
+        <div>
+          <%= t("custom.admin.projekts.edit.projekt_phase_limitation") %>
+        </div>
+        <div>
+          <%=  get_projekt_phase_limitations(projekt&.debate_phase) %>
+        </div>
       </div>
 
     </div>

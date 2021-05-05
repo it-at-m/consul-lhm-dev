@@ -1,0 +1,52 @@
+<% projekts = Projekt.top_level_active %>
+
+<div id="projekt-tags" class="margin-top margin-bottom">
+
+  <% if model.errors.full_messages.any? { |error| error.include? 'Projekt' } %>
+    <br>
+    <small class='form-error is-visible'>
+      <%= t('custom.projekts.errors.presence') %>
+    </small>
+  <% end %>
+
+  <div id="projekt-tags-selector">
+
+    <div class="projekt-tags-column">
+      <% if projekts.any? { |projekt| projekt.children.any? } %>
+        <h6><%= t('custom.projekts.new.first_level') %></h6>
+      <% end %>
+
+      <%= render partial: 'shared/projekt_selector/projekt_group', locals: { f:f, projekts: projekts }  %>
+    </div>
+
+    <div class="projekt-tags-column">
+      <% if projekts.any? { |projekt| projekt.children.any? } %>
+        <h6><%= t('custom.projekts.new.second_level') %></h6>
+      <% end %>
+
+      <% projekts.each do |projekt| %>
+        <% if projekt.children.any? %>
+          <%= render partial: 'shared/projekt_selector/projekt_group', locals: { f:f, projekts: projekt.children, parent_projekt_id: projekt.id }  %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="projekt-tags-column">
+      <% if projekts.any? { |projekt| projekt.children.any? { |projekt| projekt.children.any? } } %>
+        <h6><%= t('custom.projekts.new.third_level') %></h6>
+      <% end %>
+
+      <% projekts.each do |projekt| %>
+        <% if projekt.children.any? %>
+          <% projekt.children.each do |projekt| %>
+            <% if projekt.children.any? %>
+              <%= render partial: 'shared/projekt_selector/projekt_group', locals: { f:f, projekts: projekt.children, parent_projekt_id: projekt.id }  %>
+
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+
+  </div>
+</div>

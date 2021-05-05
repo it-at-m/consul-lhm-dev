@@ -1,0 +1,42 @@
+<% parent_projekt_id ||= 0 %>
+<% phase_name = 'debate_phase' if controller.controller_name == 'debates' %>
+<% phase_name = 'proposal_phase' if controller.controller_name == 'proposals' %>
+
+
+<div class="projekt-group" <%= "data-parent=#{parent_projekt_id}" %> <%= 'style=display:block;' if show_projekt_group_in_selector?(projekts) %> >
+  <%= f.collection_radio_buttons :projekt_id, projekts, :id, :name, {include_hidden: false} do |rb| %>
+
+    <% @projekt_phase = rb.object.send(phase_name) if phase_name %>
+
+    <% disable_radio_button = ((can?(:select, @projekt_phase) || ((current_user.administrator?) && controller.controller_name == 'polls') ) ? false : true)  %>
+    <% disabled_class = ((can?(:select, @projekt_phase) || ((current_user.administrator?) && controller.controller_name == 'polls') ) ? '' : 'projekt-phase-disabled') %>
+
+
+    <% rb.object.children.any? ? arrow = 'show-arrow' : arrow = ''  %>
+    <% rb.label(class: "js-show-children-projekts #{arrow} #{disabled_class} #{highlight_projekt_in_selector?(rb.object)}", data: {projekt_id: rb.object.id} ) do  %>
+
+      <%= rb.radio_button(disabled: disable_radio_button, checked: check_radio_button?(rb.object.id)) %>
+      <%= rb.text %>
+
+      <% if phase_name && projekt_phase_active?(rb.object, phase_name) %>
+        <div class='projekt-phase-details js-show-children-projekts'>
+          <%= get_projekt_phase_duration(rb.object.send(phase_name)) %>
+
+          <% if Setting["feature.user.skip_verification"].blank? %>
+            <br>
+            <%= get_projekt_phase_limitations(rb.object.send(phase_name)) %>
+          <% end %>
+        </div>
+      <% elsif phase_name %>
+        <div class='projekt-phase-details'>
+          <%= t('custom.projekt.page.sidebar.phases.debate_phase_not_active') if phase_name == 'debate_phase' %>
+          <%= t('custom.projekt.page.sidebar.phases.proposal_phase_not_active') if phase_name == 'proposal_phase' %>
+        </div>
+      <% end %>
+
+      <div class="checkmark-wrapper js-select-projekt">
+        <span class="checkmark "></span>
+      </div>
+    <% end %>
+  <% end %>
+</div>

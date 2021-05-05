@@ -395,7 +395,7 @@ de:
         help: Hilfe zu Vorschlägen
       section_footer:
         title: Hilfe zu Vorschlägen
-        description: Vorschläge können, abhängig vom eingestellten Verifizierungsverfahren, von jedem Benutzer eingebracht werden. Sie bieten eine einfache Möglichkeit eigenen Ideen oder Verbesserungsvorschläge einzubringen und für deren Unterstützung zu werben.
+        description: Vorschläge können, abhängig vom eingestellten Verifizierungsverfahren, von jeder Benutzerin und jedem Benutzer eingebracht werden. Sie bieten eine einfache Möglichkeit, eigene Ideen oder Verbesserungsvorschläge einzubringen und für deren Unterstützung zu werben.
     new:
       form:
         submit_button: Vorschlag erstellen

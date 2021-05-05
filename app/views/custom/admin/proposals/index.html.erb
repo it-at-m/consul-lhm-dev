@@ -27,7 +27,7 @@
         <tr id="<%= dom_id(proposal) %>" class="proposal">
           <td class="text-center"><%= proposal.id %></td>
           <td><%= link_to proposal.title, admin_proposal_path(proposal) %></td>
-          <td><%= proposal.projekts.pluck(:name).join(', ') %> <%=link_to t("admin.actions.edit"), admin_proposal_path(proposal)%>  </td>
+          <td><%= proposal.projekt.name if proposal.projekt %> <%=link_to t("admin.actions.edit"), admin_proposal_path(proposal)%>  </td>
           <td><%= proposal.tag_list %> <%=link_to t("admin.actions.edit"), admin_proposal_path(proposal)%>  </td>
           <td><%= proposal.author.username %></td>
           <td><%= proposal.milestones.count %></td>

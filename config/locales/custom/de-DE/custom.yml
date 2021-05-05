@@ -5,6 +5,19 @@ de:
       sign_up: Registrieren mit BayernID
       name: BayernID
   custom:
+    pages:
+      social_share:
+        share: Teilen
+      impressum:
+        title: Impressum
+    users:
+      verify_account_link_short: verifizieren
+      login_to_vote: "Sie müssen sich %{signin} oder %{signup}, um teilnehmen zu können"
+    votes:
+      not_verified: "Sie müssen sich %{verify_account}, um teilnehmen zu können"
+      geo_restricted: Sie sind aufgrund von Gebiets- beschränkungen nicht berechtigt teilzunehmen.
+      phase_expired: Die Phase ist bereits abgeschlossen. Dieser Vorschlag kann nich mehr unterschtützt werden
+
     layouts:
       footer:
         impressum: Impressum
@@ -44,6 +57,7 @@ de:
           configuration: Konfigurationseinstellungen
           settings: Funktionen
         index:
+          info: Info
           name_plural: Projekte
           name_singular: Projekt
           add_projekt: Neues Projekt hinzufügen
@@ -74,11 +88,22 @@ de:
           proposal_phase: Vorschlagsphase
           voting_phase: Abstimmungsphase
           voting_manage: Abstimmungen verwalten
+          geozone_restricted: Nur verifizierte Nutzer
           show_in_navigation_checkbox: Projekt in Navigation anzeigen
           show_in_navigation:
             yes: Ja
             no: Nein 
           update: Projekteinstellungen aktualisieren
+          projekt_status: Projektstatus
+          projekt_activated: Projekt active
+          projekt_active: 
+            yes: Ja
+            no: Nein
+          projekt_page: Projektseite
+          projekt_phases: Projektphasen
+          projekt_phase_limitation: Beschränkung
+
+
     projekts:
       new:
         first_level: 'Erste Projektebene'
@@ -92,10 +117,15 @@ de:
         filter_button: 'Projekte filtern'
       errors:
         presence: 'Bitte wählen Sie ein Projekt'
+      backlink: Zur Projektübersicht
     proposals:
       form:
         tags_custom: Nutzer-Tags
         tags_placeholder: Trennen Sie die Tags mit einem Komma (',')
+      created:
+        dashboard: 'Als Entwurf speichern und später veröffentlichen'
+        publish: 'Vorschlag jetzt veröffentlichen'
+
       index:
         max_number_reached: "Du hast die maximale Anzahl (%{max_number}) an Vorschlägen pro Nutzer erreicht. Bevor du einen weiteren Vorschlag erstellen kannst, musst du einen aktiven Vorschlag zurückziehen."
         projekts: Projekte
@@ -115,6 +145,12 @@ de:
     comments:
       reply_form:
         leave_comment: 'Schreiben Sie eine Antwort'
+      restricted:
+        geo_limitation: 'Dieses projekt ist auf die folgende Gebiete beschränkt: %{geozones}'
+        debate_phase_expired: Die Diskussionsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
+        proposal_phase_expired: Die Vorschlagsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
+        poll_phase_expired: Die Abstimmungsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
+
     images:
       form:
         image_name: 'Name des Titelbildes'

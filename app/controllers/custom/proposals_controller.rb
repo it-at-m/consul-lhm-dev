@@ -28,6 +28,19 @@ class ProposalsController
     @projekts = Projekt.top_level
   end
 
+  def show
+    super
+    @projekt = @proposal.projekt
+    @notifications = @proposal.notifications
+    @notifications = @proposal.notifications.not_moderated
+    @related_contents = Kaminari.paginate_array(@proposal.relationed_contents)
+                                .page(params[:page]).per(5)
+
+    if request.path != proposal_path(@proposal)
+      redirect_to proposal_path(@proposal), status: :moved_permanently
+    end
+  end
+
   def unvote
     @follow = Follow.find_by(user: current_user, followable: @proposal)
     @follow.destroy if @follow
@@ -60,13 +73,13 @@ class ProposalsController
 
     def take_by_projekts
       if params[:projekts].present?
-        @resources = @resources.joins(:projekts).where(projekts: { id: [params[:projekts].split(',')] } ).distinct
+        @resources = @resources.where(projekt_id: params[:projekts].split(',')).distinct
       end
     end
 
     def proposal_params
       attributes = [:video_url, :responsible_name, :tag_list,
-                    :terms_of_service, :geozone_id, :skip_map, { projekt_ids: [] },
+                    :terms_of_service, :geozone_id, :skip_map, :projekt_id,
                     image_attributes: image_attributes,
                     documents_attributes: [:id, :title, :attachment, :cached_attachment,
                                            :user_id, :_destroy],

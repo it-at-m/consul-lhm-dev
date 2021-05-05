@@ -1,2 +1,12 @@
+<% if projekt.page && projekt.page.published? %>
+  <%= render "shared/social_share",
+      share_title: t("custom.pages.social_share.share"),
+      title: projekt.page.title,
+      url: page_url(projekt.page),
+      description: strip_tags(projekt.page.content[0..100] + '...'),
+      mobile: projekt.page.title
+  %>
+<% end %>
+
 <%= render partial: 'pages/sidebar/projekt_phases', locals: { projekt: projekt } %>
 <%= render partial: 'pages/sidebar/projekts_navigator', locals: { projekt: projekt } %>

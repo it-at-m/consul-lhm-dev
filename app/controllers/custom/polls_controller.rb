@@ -38,7 +38,7 @@ class PollsController < ApplicationController
 
   def take_by_projekts
     if params[:projekts].present?
-      @polls = @polls.joins(:projekts).where(projekts: { id: [params[:projekts].split(',')] } ).distinct
+      @polls = @polls.where(projekt_id: params[:projekts].split(',') ).distinct
     end
   end
 end

@@ -1,0 +1,27 @@
+<div class="jumbo light">
+  <div id="<%= dom_id(@proposal) %>" class="row">
+    <div class="small-12 column">
+      <h2><%= t("proposals.created.title") %></h2>
+
+      <% if can?(:dashboard, @proposal) %>
+        <%= link_to t("custom.proposals.created.dashboard"),
+                    progress_proposal_dashboard_path(@proposal),
+                    class: "button" %>
+      <% end %>
+
+      <% if can?(:publish, @proposal) %>
+        <%= link_to t("custom.proposals.created.publish"),
+                    publish_proposal_path(@proposal),
+                    method: :patch, class: "button" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-12 column">
+    <h3><%= t("proposals.created.preview_title") %></h3>
+  </div>
+</div>
+
+<%= render file: "proposals/show.html.erb", locals: { preview: true } %>

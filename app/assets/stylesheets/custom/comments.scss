@@ -11,3 +11,16 @@
 .comment-body .comment-user.is-admin {
   background: #F7EED0;
 }
+
+.commenting-not-allowed {
+  width: 100%;
+  background: #F82301;
+  display: inline-block;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  color: white;
+
+  ul {
+    margin-bottom: 0;
+  }
+}
