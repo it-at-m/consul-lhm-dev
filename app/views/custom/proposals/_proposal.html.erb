@@ -52,7 +52,15 @@
                   <%= t("shared.collective") %>
                 </span>
               <% end %>
+
+              <% if proposal.projekt && proposal.projekt.page.published? %>
+                  <br/>
+                  <span class='projekt-backlink'>
+                  </span>
+                  <%= prepare_projekt_name(proposal.projekt) %>
+              <% end %>
             </p>
+
             <div class="proposal-description">
               <p><%= proposal.summary %></p>
               <div class="truncate"></div>

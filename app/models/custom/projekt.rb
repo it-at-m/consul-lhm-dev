@@ -2,19 +2,26 @@ class Projekt < ApplicationRecord
   has_many :children, class_name: 'Projekt', foreign_key: 'parent_id'
   belongs_to :parent, class_name: 'Projekt', optional: true
 
-  has_and_belongs_to_many :debates
-  has_and_belongs_to_many :polls
-  has_and_belongs_to_many :proposals
-  has_and_belongs_to_many :budgets
+  has_many :debates, dependent: :nullify
+  has_many :proposals, dependent: :nullify
+  has_many :polls, dependent: :nullify
 
   has_one :page, class_name: "SiteCustomization::Page", dependent: :destroy
 
-  after_create :create_corresponding_page, :set_order
+  has_many :projekt_phases, dependent: :destroy
+  has_one :debate_phase, class_name: 'ProjektPhase::DebatePhase'
+  has_one :proposal_phase, class_name: 'ProjektPhase::ProposalPhase'
+  has_many :geozones, through: :projekt_phase
+
+  accepts_nested_attributes_for :debate_phase, :proposal_phase
+
+  after_create :create_corresponding_page, :set_order, :create_projekt_phases
   after_destroy :ensure_order_integrity
 
   scope :top_level, -> { where(parent: nil) }
   scope :with_order_number, -> { where.not(order_number: nil).order(order_number: :asc) }
-  scope :top_level_active, -> { top_level.with_order_number.where( "total_duration_active = ? and (total_duration_end IS NULL OR total_duration_end > ?)", true, Date.today) }
+
+  scope :top_level_active, -> { top_level.with_order_number.where( "total_duration_active = ? and (total_duration_end IS NULL OR total_duration_end >= ?)", true, Date.today) }
   scope :top_level_archived, -> { top_level.with_order_number.where( "total_duration_active = ? and total_duration_end < ?", true, Date.today) }
 
   def all_children_ids(all_children_ids = [])
@@ -26,6 +33,10 @@ class Projekt < ApplicationRecord
     end
 
     all_children_ids
+  end
+
+  def top_level?
+    self.parent.blank?
   end
 
   def top_parent
@@ -62,6 +73,13 @@ class Projekt < ApplicationRecord
     end
   end
 
+  def self.ensure_projekt_phases
+    all.each do |projekt|
+      projekt.debate_phase = ProjektPhase::DebatePhase.create unless projekt.debate_phase
+      projekt.proposal_phase = ProjektPhase::ProposalPhase.create unless projekt.proposal_phase
+    end
+  end
+
   private
 
   def create_corresponding_page
@@ -90,6 +108,11 @@ class Projekt < ApplicationRecord
     else
       self.update(order_number: 1)
     end
+  end
+
+  def create_projekt_phases
+    self.debate_phase = ProjektPhase::DebatePhase.create
+    self.proposal_phase = ProjektPhase::ProposalPhase.create
   end
 
   def swap_order_numbers_up

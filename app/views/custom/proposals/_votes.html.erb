@@ -1,3 +1,5 @@
+<% proposal_phase = proposal.projekt.present? ? proposal.projekt.proposal_phase : nil %>
+
 <div class="supports text-center">
   <%= render "proposals/supports", proposal: proposal %>
 
@@ -7,11 +9,11 @@
         <%= t("proposals.proposal.already_supported") %>
       </div>
       <% if withdraw_proposal_support_on? %>
-				<%= link_to unvote_proposal_url(proposal),
-						class: "button button-support small expanded",
-						title: t("proposals.proposal.support_title"), method: "post", remote: true do %>
-					<%= t("custom.proposals.proposal.unsupport") %>
-				<% end %>
+        <%= link_to unvote_proposal_url(proposal),
+            class: "button button-support small expanded",
+            title: t("proposals.proposal.support_title"), method: "post", remote: true do %>
+          <%= t("custom.proposals.proposal.unsupport") %>
+        <% end %>
       <% end %>
     <% elsif user_signed_in? && proposal.votable_by?(current_user) %>
       <%= link_to vote_url,
@@ -32,6 +34,27 @@
         <%= t("votes.organizations") %>
       </p>
     </div>
+
+  <% elsif user_signed_in? && !current_user.level_two_or_three_verified? %>
+    <div class="participation-not-allowed" style="display:none" aria-hidden="false">
+      <p>
+        <%= sanitize(t("custom.votes.not_verified", verify_account: link_to_verify_account_short)) %>
+      </p>
+    </div>
+
+  <% elsif user_signed_in? && proposal_phase && proposal_phase.geozone_restricted && ((proposal_phase.geozones.any? && !proposal_phase.geozones.include?(current_user.geozone)) || current_user.geozone.blank? ) %>
+    <div class="participation-not-allowed" style="display:none" aria-hidden="false">
+      <p>
+        <%= sanitize(t("custom.votes.geo_restricted")) %>
+      </p>
+    </div>
+
+  <% elsif user_signed_in? && proposal_phase && proposal_phase.expired? %>
+    <div class="participation-not-allowed" style="display:none" aria-hidden="false">
+      <p>
+        <%= sanitize(t("custom.votes.phase_expired")) %>
+      </p>
+
   <% elsif user_signed_in? && !proposal.votable_by?(current_user) %>
     <div tabindex="0">
       <div class="participation-not-allowed" style="display:none" aria-hidden="false">
@@ -40,6 +63,7 @@
         </p>
       </div>
     </div>
+
   <% elsif !user_signed_in? %>
     <div tabindex="0">
       <%= render "shared/login_to_vote" %>

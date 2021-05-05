@@ -3,10 +3,19 @@
 .projekt-phase {
   margin-bottom: 1em;
   font-size: 0.875em;
+  line-height: 1.75;
 
   a {
     text-decoration: underline;
   }
+
+  a.projekt-phase-link {
+    color: #CE003E;
+  }
+}
+
+.debate-phase, .proposals-phase {
+  margin-bottom: 2em;
 }
 
 .link-icon {

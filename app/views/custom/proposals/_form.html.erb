@@ -68,8 +68,17 @@
       </div>
     <% end %>
 
-    <div class="small-12 column">
-      <%= render partial: "shared/projekts", locals: { f: f, model: @proposal }  %>
+    <div class="small-12 column margin-top">
+
+      <h5>Zuordnung des Vorschlags zu einem Projekt</h5>
+      <div>
+        <small>
+          Bitte ordnen Sie Ihren Vorschlag einem der nachfolgenden Projekte oder Unterprojekte zu. Dies dient dazu, dass die Vorschläge in der Vorschlagsübersicht besser auffindbar sind.
+        </small>
+      </div>
+
+
+      <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: @proposal }  %>
     </div>
 
     <%if extended_feature?("enable_categories") %>

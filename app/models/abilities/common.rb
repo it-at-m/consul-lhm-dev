@@ -120,6 +120,10 @@ module Abilities
       can [:update, :destroy], Topic, author_id: user.id
 
       can :disable_recommendations, [Debate, Proposal]
+
+      can :select, ProjektPhase do |projekt_phase|
+        projekt_phase.selectable_by?(user)
+      end
     end
   end
 end

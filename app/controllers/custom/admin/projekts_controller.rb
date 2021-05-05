@@ -1,5 +1,6 @@
 class Admin::ProjektsController < Admin::BaseController
   before_action :find_projekt, only: [:update, :destroy]
+  before_action :load_geozones, only: [:new, :create, :edit, :update]
 
   def index
     @projekts = Projekt.top_level
@@ -9,6 +10,12 @@ class Admin::ProjektsController < Admin::BaseController
 
   def edit
     @projekt = Projekt.find(params[:id])
+
+    @projekt.build_debate_phase if @projekt.debate_phase.blank?
+    @projekt.debate_phase.geozones.build
+
+    @projekt.build_proposal_phase if @projekt.proposal_phase.blank?
+    @projekt.proposal_phase.geozones.build
   end
 
   def update
@@ -53,11 +60,17 @@ class Admin::ProjektsController < Admin::BaseController
 
   private
 
-	def projekt_params
-    params.require(:projekt).permit(:name, :parent_id, :total_duration_active, :total_duration_start, :total_duration_end, :debate_phase_active, :debate_phase_start, :debate_phase_end, :proposal_phase_active, :proposal_phase_start, :proposal_phase_end, :show_in_navigation )
-	end
+  def projekt_params
+    params.require(:projekt).permit(:name, :parent_id, :total_duration_active, :total_duration_start, :total_duration_end, :show_in_navigation,
+                                    debate_phase_attributes: [:start_date, :end_date, :active, :geozone_restricted, geozone_ids: [] ],
+                                    proposal_phase_attributes: [:start_date, :end_date, :active, :geozone_restricted, geozone_ids: [] ])
+  end
 
-	def find_projekt
-		@projekt = Projekt.find(params[:id])
-	end
+  def find_projekt
+    @projekt = Projekt.find(params[:id])
+  end
+
+  def load_geozones
+    @geozones = Geozone.all.order(:name)
+  end
 end

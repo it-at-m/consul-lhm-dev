@@ -163,6 +163,10 @@ class Setting < ApplicationRecord
       defaults.each { |name, value| self[name] = value }
     end
 
+    def create_missing
+      defaults.each { |key, value| self[key] = value unless Setting.find_by(key: key).present? }
+    end
+
     def force_presence_date_of_birth?
       Setting["feature.remote_census"].present? &&
         Setting["remote_census.request.date_of_birth"].present?

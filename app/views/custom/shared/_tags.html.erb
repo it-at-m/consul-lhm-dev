@@ -1,15 +1,14 @@
 <%- limit ||= nil %>
+<% filter_class = controller.action_name == 'index' ? 'js-projekt-tag-filter-link' : ''  %>
 
 <% params[:projekts].present? ? filtered_projekt_ids = params[:projekts].split(',') : filtered_projekt_ids = [] %>
 
-<% if taggable.projekts.any? %>
+<% if taggable.projekt.present? %>
   <div class="taggable_projekts">
-    <% taggable.projekts.each do |projekt| %>
-      <% projekt.id.to_s.in?(filtered_projekt_ids) ? filtered_projekt_class = 'filtered-projekt' : filtered_projekt_class = ''  %>
-      <div class="projekt-chip <%= filtered_projekt_class %>">
-        <%= link_to sanitize(projekt.name), (taggables_path(taggable.class.name.underscore, '') + "&projekts=#{projekt.id}" ), class: 'js-projekt-tag-filter-link' %>
-      </div>
-    <% end %>
+    <% taggable.projekt.id.to_s.in?(filtered_projekt_ids) ? filtered_projekt_class = 'filtered-projekt' : filtered_projekt_class = ''  %>
+    <div class="projekt-chip <%= filtered_projekt_class %>">
+      <%= link_to sanitize(taggable.projekt.name), (taggables_path(taggable.class.name.underscore, '') + "&projekts=#{taggable.projekt.id}" ), class: filter_class %>
+    </div>
   </div>
 <% end %>
 
@@ -21,7 +20,7 @@
       <%-selected = params[:tags]&.split(",")&.include?(tag.name)%>
       <li class="inline-block">
         <%= link_to sanitize(tag.name),
-          taggables_path(taggable.class.name.underscore, tag.name), class: selected ? "selected js-projekt-tag-filter-link" : "js-projekt-tag-filter-link" %></li>
+          taggables_path(taggable.class.name.underscore, tag.name), class: selected ? "selected #{filter_class}" : filter_class %></li>
     <% end %>
   </ul>
 <%end%>
@@ -32,7 +31,7 @@
       <%-selected = params[:tags]&.split(",")&.include?(tag.name)%>
       <li class="inline-block">
         <%= link_to sanitize(tag.name),
-          taggables_path(taggable.class.name.underscore, tag.name), class: selected ? "selected js-projekt-tag-filter-link" : "js-projekt-tag-filter-link" %></li>
+          taggables_path(taggable.class.name.underscore, tag.name), class: selected ? "selected #{filter_class}" : filter_class %></li>
     <% end %>
   </ul>
 <% end %>

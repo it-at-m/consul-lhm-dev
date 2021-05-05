@@ -19,17 +19,17 @@ module ProjektsHelper
 
     module_links = []
 
-    if debate_phase_active?(projekt)
+    if projekt_phase_show_in_navigation?(projekt, 'debate_phase')
       link = link_to t('custom.menu.debates'), (debates_path + "?projekts=#{projekt.all_children_ids.push(projekt.id).join(',')}"), class: 'projekt-module-link'
       module_links.push(link)
     end
 
-    if proposal_phase_active?(projekt)
+    if projekt_phase_show_in_navigation?(projekt, 'proposal_phase')
       link = link_to t('custom.menu.proposals'), (proposals_path + "?projekts=#{projekt.all_children_ids.push(projekt.id).join(',')}"), class: 'projekt-module-link'
       module_links.push(link)
     end
 
-    if related_polls_exist?(projekt)
+    if related_polls(projekt).any?
       link = link_to t('custom.menu.polls'), (polls_path + "?projekts=#{projekt.all_children_ids.push(projekt.id).join(',')}"), class: 'projekt-module-link'
       module_links.push(link)
     end
@@ -37,34 +37,19 @@ module ProjektsHelper
     module_links.join(' | ').html_safe
   end
 
-  def debate_phase_active?(projekt)
-    top_parent = projekt.top_parent
-
-    return false unless ( top_parent.debate_phase_start || top_parent.total_duration_start )
-    return false unless ( top_parent.debate_phase_end || top_parent.total_duration_end )
-
-    if top_parent.debate_phase_active && (top_parent.debate_phase_start || top_parent.total_duration_start) < Date.today && (top_parent.debate_phase_end || top_parent.total_duration_end ) > Date.today
-			return true
-    else
-			return false
-    end
+  def projekt_phase_active?(projekt, phase_name)
+    projekt.send(phase_name).active
   end
 
-  def proposal_phase_active?(projekt)
-    top_parent = projekt.top_parent
-
-    return false unless ( top_parent.proposal_phase_start || top_parent.total_duration_start )
-    return false unless ( top_parent.proposal_phase_end || top_parent.total_duration_end )
-
-    if top_parent.proposal_phase_active && (top_parent.proposal_phase_start || top_parent.total_duration_start) < Date.today && (top_parent.proposal_phase_end || top_parent.total_duration_end ) > Date.today
-			return true
-    else
-			return false
-    end
+  def projekt_phase_selectable?(projekt, phase_name)
+    projekt.send(phase_name).active &&
+      ((projekt.send(phase_name).start_date <= Date.today if projekt.send(phase_name).start_date) || projekt.send(phase_name).start_date.blank? ) &&
+      ((projekt.send(phase_name).end_date >= Date.today if projekt.send(phase_name).end_date) || projekt.send(phase_name).end_date.blank? )
   end
 
-  def related_polls_exist?(projekt)
-    Poll.joins(:projekts).where(projekts: { id: projekt.all_children_ids.push(projekt.id) }).any?
+  def projekt_phase_show_in_navigation?(projekt, phase_name)
+    projekt.send(phase_name).active &&
+      ((projekt.send(phase_name).start_date <= Date.today if projekt.send(phase_name).start_date) || projekt.send(phase_name).start_date.blank? )
   end
 
   def format_date(date)
@@ -84,13 +69,80 @@ module ProjektsHelper
     end
   end
 
-  def format_polls_range(projekt)
-    matching_polls = Poll.joins(:projekts).where(projekts: {id: projekt.all_children_ids.push(projekt.id) }).distinct
-
-    if matching_polls.count == 1
-      return format_date_range(matching_polls.first.starts_at, matching_polls.first.ends_at)
+  def get_projekt_phase_duration(phase)
+    if phase
+      format_date_range(phase.start_date, phase.end_date)
     else
-      return "#{matching_polls.count} aktive"
+      format_date_range
+    end
+  end
+
+  def get_projekt_phase_limitations(phase)
+    if phase
+      return phase.geozones.names.join(', ') if phase.geozones.any? && phase.geozone_restricted
+      return 'Alle Bürger der Stadt' if phase.geozone_restricted
+    end
+    'Alle Nutzer der Plattform'
+  end
+
+  def related_polls(projekt, timestamp = Date.current.beginning_of_day)
+    Poll.where(projekt_id: projekt.all_children_ids.push(projekt.id)).where("starts_at <= ? AND ? <= ends_at", timestamp, timestamp)
+  end
+
+  def check_radio_button?(current_projekt_id)
+    resource = @debate || @proposal || @poll
+    
+    if resource && resource.projekt.present?
+      selected_projekt_id = resource.projekt.id
+    elsif params[:projekt].present?
+      selected_projekt_id = params[:projekt].to_i
+    else
+      selected_projekt_id = nil
+    end
+
+    (selected_projekt_id == current_projekt_id) && (can?(:select, @projekt_phase) || (current_user.administrator  && controller.controller_name == 'polls')) ?  'checked' : ''
+  end
+
+  def highlight_projekt_in_selector?(current_projekt)
+    resource = @debate || @proposal
+
+    if resource && resource.projekt.present?
+      selected_projekt_id = resource.projekt.id
+    elsif params[:projekt].present?
+      selected_projekt_id = params[:projekt].to_i
+    else
+      selected_projekt_id = nil
+    end
+
+    if selected_projekt_id && selected_projekt = Projekt.find_by(id: selected_projekt_id)
+      case resource.class.name
+      when "Debate"
+        phase_name = 'debate_phase'
+        selected_projekt_projekt_phase = selected_projekt.send(phase_name)
+      when "Proposal"
+        phase_name = 'proposal_phase'
+        selected_projekt_projekt_phase = selected_projekt.send(phase_name)
+      end
+    end
+
+    if selected_projekt_projekt_phase && ( can?(:select, selected_projekt_projekt_phase) || (current_user.administrator && controller.controller_name == 'polls'))
+      current_projekt.all_children_ids.push(current_projekt.id).include?(selected_projekt_id) ? 'highlighted' : '' 
+    end
+  end
+
+  def show_projekt_group_in_selector?(projekts)
+    resource = @debate || @proposal || @poll
+
+    if resource && resource.projekt.present?
+      selected_projekt_id = resource.projekt.id
+    elsif params[:projekt].present?
+      selected_projekt_id = params[:projekt].to_i
+    else
+      selected_projekt_id = nil
+    end
+
+    if selected_projekt_id
+      (projekts.ids + projekts.map{ |projekt| projekt.all_children_ids }.flatten).include?(selected_projekt_id)
     end
   end
 end

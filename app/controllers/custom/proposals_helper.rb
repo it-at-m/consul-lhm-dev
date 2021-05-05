@@ -3,14 +3,19 @@ require_dependency Rails.root.join("app", "helpers", "proposals_helper").to_s
 module ProposalsHelper
 
   def all_proposal_map_locations
-    ids = if params[:search]
-      Proposal.search(params[:search]).pluck(:id)
-    elsif params[:tags]
-      Proposal.not_archived.published.tagged_with(params[:tags].split(","), all: true)
-    else
-      Proposal.not_archived.published.pluck(:id)
+    proposals_for_map = Proposal.not_archived.published
+
+    if params[:tags].present?
+      proposals_for_map = proposals_for_map.tagged_with(params[:tags].split(","), all: true)
     end
-      MapLocation.where(proposal_id: ids).map(&:json_data)
+
+    if params[:projekts].present?
+      proposals_for_map = proposals_for_map.where(projekt_id: params[:projekts].split(',')).distinct
+    end
+
+    ids = proposals_for_map.pluck(:id).uniq
+
+    MapLocation.where(proposal_id: ids).map(&:json_data)
   end
 
   def json_data

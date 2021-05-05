@@ -44,6 +44,12 @@
                 </span>
               <% end %>
 
+              <% if debate.projekt && debate.projekt.page.published? %>
+                  <br/>
+                  <span class='projekt-backlink'>
+                  </span>
+                  <%= prepare_projekt_name(debate.projekt) %>
+              <% end %>
             </p>
             <div class="debate-description">
               <%= wysiwyg(debate.description) %>

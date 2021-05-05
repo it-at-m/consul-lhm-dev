@@ -16,4 +16,8 @@ module LinksHelper
   def link_to_verify_account
     link_to t("users.verify_account"), verification_path
   end
+
+  def link_to_verify_account_short
+    link_to t("custom.users.verify_account_link_short"), verification_path
+  end
 end

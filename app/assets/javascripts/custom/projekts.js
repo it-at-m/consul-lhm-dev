@@ -10,84 +10,29 @@
       var $childrenProjektsGroup = $( dataParentIdentifierString )
 
       if ( $childrenProjektsGroup.is(":hidden") ) {
-        App.Projekts.resetSelectedChildren($label);
+        App.Projekts.hideCurrentlyVisibleChildProjekts($label);
         $childrenProjektsGroup.show()
       } else {
-        App.Projekts.resetSelectedChildren($label);
+        App.Projekts.hideCurrentlyVisibleChildProjekts($label);
       }
     },
 
-    resetSelectedChildren: function($label) {
+    highlightLabel: function($label) {
+      $label.closest('.projekt-tags-column').find('label').each( function() {
+        $(this).removeClass('highlighted')
+      })
+      $label.addClass('highlighted')
+    },
+
+    hideCurrentlyVisibleChildProjekts: function($label) {
       var $currentProjektGroup = $label.parent();
       var $currentColumn = $label.parent().parent()
 
-      $currentProjektGroup.find('label').each(function() {
-        App.Projekts.restyleHidingElements($(this));
-      });
-
       $currentColumn.nextAll().each(function() {
         $(this).find(".projekt-group").each( function() {
-          $(this).find('label').each(function() {
-            App.Projekts.restyleHidingElements($(this));
-          })
           $(this).hide();
         })
       })
-    },
-
-    restyleHidingElements: function($label) {
-      $label.css('background', '#fff')
-      $label.css('color', '#C6C6C6');
-      $label.find('.checkmark').css('border-color', '#C6C6C6')
-
-      if ( $label.find('input').first().is(':checked') ) {
-        App.Projekts.showCheckmark($label);
-      };
-    },
-
-    styleSelectedProjekt: function($label) {
-      $label.css('background', '#ECF2FB');
-      $label.css('color', '#06408E');
-      $label.find('.checkmark').css('border', '1.5px solid #06408E')
-
-      if ( $label.find('input').first().is(':checked') ) {
-        $label.find('.checkmark').css('background', '#06408E')
-        $label.find('.checkmark-before').show()
-      };
-    },
-
-    hideCheckmark: function($label) {
-      $label.find('.checkmark-before').hide()
-      $label.find('.checkmark').css('background', 'inherit')
-      $label.find('.checkmark').css('border', '1.5px solid #C6C6C6')
-      $label.css('color', '#C6C6C6');
-    },
-
-    showCheckmark: function($label) {
-      $label.find('.checkmark-before').show()
-      $label.find('.checkmark').css('background', '#06408E')
-      $label.find('.checkmark').css('border', '1.5px solid #06408E')
-      $label.css('color', '#06408E');
-    },
-
-    removeCheckboxChip: function(projektId) {
-      var projektChipId = "#projekt-chip-" + projektId
-      var $projektChip = $(projektChipId).parent();
-      $projektChip.remove();
-    },
-
-    addCheckboxChip: function($label) {
-      var projektId = 'projekt-chip-' + $label.data()['projektId']
-      var projektName = $label.text()
-
-      var chipToAdd = '<div class="projekt-chip">'
-
-      chipToAdd += projektName
-      chipToAdd += '<span id=' + projektId + ' class="js-deselect-projekt close"></span>'
-      chipToAdd += '</div>'
-
-
-      $('#projekt-chips').append(chipToAdd)
     },
 
     // Functions for selectors in sidebar
@@ -211,48 +156,43 @@
     initialize: function() {
       $("body").on("click", ".js-show-children-projekts", function(event) {
         event.preventDefault();
-        if ( event.target.classList.contains('js-show-children-projekts') ) {
+
+        if ( event.target.tagName == 'LABEL' ) {
           var $label = $(this)
-          App.Projekts.toggleChildProjekts($label);
-          App.Projekts.styleSelectedProjekt($label);
-          return false;
+        } else {
+          var $label = $(this).parent()
         }
+
+        App.Projekts.toggleChildProjekts($label);
+        App.Projekts.highlightLabel($label);
+        return false;
       });
 
       $("body").on("click", ".js-select-projekt", function() {
         var $label = $(this).parent()
-        var $checkbox = $label.find("input").first()
-        var projektId = $(this).parent().data()['projektId']
 
-        if ( $checkbox.is(":checked") ) {
-          $checkbox.prop( "checked", false);
-          App.Projekts.hideCheckmark($label);
-          App.Projekts.removeCheckboxChip(projektId)
-        } else {
-          $checkbox.prop( "checked", true );
-          App.Projekts.showCheckmark($label);
-          App.Projekts.addCheckboxChip($label)
+        if ( $label.hasClass('projekt-phase-disabled')) {
+          return false;
         }
-      });
 
-      $("body").on("click", ".js-deselect-projekt", function() {
-        var projektId = this.id.split('-').pop()
-        var correspoindLabelIdentifierString = "[data-projekt-id=\"" + projektId + "\"]"
-        var $correspondingLabel = $(correspoindLabelIdentifierString)
-        var $checkbox = $correspondingLabel.find('input')
+        var $radioButton = $label.find(":radio").first()
+        App.Projekts.highlightLabel($label);
 
-        $checkbox.prop( "checked", false);
-        App.Projekts.hideCheckmark($correspondingLabel);
-        App.Projekts.removeCheckboxChip(projektId);
+        if ( $radioButton.is(":checked") ) {
+          $radioButton.prop( "checked", false);
+        } else {
+          $radioButton.prop( "checked", true );
+        }
       });
 
       $("body").on("click", ".js-filter-projekt", function() {
         var $checkbox = $(this);
         App.Projekts.formNewFilterProjektsRequest($checkbox);
+
         var $parentProjekt = $(this).closest('li');
 
         if ( $parentProjekt.next().prop("tagName")  === 'UL' && $checkbox.is(':checked')  ) {
-          var $childrentCheckboxes = $parentProjekt.next().find('.js-filter-projekt');
+          var $childrentCheckboxes = $parentProjekt.siblings().find('.js-filter-projekt');
 
           $childrentCheckboxes.each( function() {
             $(this).prop( "checked", true )
@@ -283,6 +223,12 @@
         var $label = $(this).parent();
         App.Projekts.toggleChildrenInSidebar($label);
       });
+
+      $("body").on("click", ".js-toggle-edit-projekt-info", function(event) {
+        var $row = $(this).closest('tr');
+        App.Projekts.toggleChildrenInSidebar($row);
+
+      })
 
     }
   };

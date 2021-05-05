@@ -32,7 +32,15 @@
     <%= f.invisible_captcha :subtitle %>
 
     <div class="small-12 column">
-      <%= render partial: "shared/projekts", locals: { f: f, model: @debate }  %>
+
+      <h5>Zuordnung der Diskussion zu einem Projekt</h5>
+      <div>
+        <small>
+          Bitte ordnen Sie Ihre Diskussion einem der nachfolgenden Projekte oder Unterprojekte zu. Dies dient dazu, dass die Diskussionen in der Diskussionsübersicht besser auffindbar sind.
+        </small>
+      </div>
+
+      <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: @debate }  %>
     </div>
 
     <%if extended_feature?("enable_categories") %>
