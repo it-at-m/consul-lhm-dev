@@ -1,176 +1,205 @@
 <% provide :title do %><%= t("proposals.index.title") %><% end %>
-  <% content_for :header_addon do %>
-    <%= render "shared/search_form",
-               search_path: proposals_path(page: 1),
-               i18n_namespace: "proposals.index.search_form" %>
-  <% end %>
-  <% content_for :canonical do %>
-    <%= render "shared/canonical", href: proposals_url %>
-  <% end %>
-  <main>
-    <% if [
-            @search_terms,
-            @advanced_search_terms,
-            @tag_filter,
-            params[:retired].present?,
-            params[:selected].present?
-          ].any? %>
-      <div class="highlight no-margin-top padding margin-bottom">
-        <div class="row">
-          <div class="small-12 column">
-            <% if @search_terms || @advanced_search_terms %>
-              <h2><%= t("shared.search_results") %></h2>
-              <p>
-                <%= page_entries_info @proposals %>
-                <% if !@advanced_search_terms %>
-                  <%= sanitize(
-                    t("proposals.index.search_results", count: @proposals.size, search_term: @search_terms)
-                  ) %>
-                <% end %>
-              <p>
-            <% elsif @tag_filter %>
-              <h2><%= t("shared.search_results") %></h2>
-              <p>
-                <%= page_entries_info @proposals %>
-                <%= t("proposals.index.filter_topic", count: @proposals.size, topic: @tag_filter) %>
-              </p>
-            <% elsif params[:retired].present? %>
-              <h2><%= t("proposals.index.retired_proposals") %></h2>
-            <% elsif params[:selected].present? %>
-              <h2><%= t("proposals.index.selected_proposals") %></h2>
-            <% end %>
-          </div>
+<% content_for :header_addon do %>
+  <%= render "shared/search_form",
+             search_path: proposals_path(page: 1),
+             i18n_namespace: "proposals.index.search_form" %>
+<% end %>
+<% content_for :canonical do %>
+  <%= render "shared/canonical", href: proposals_url %>
+<% end %>
+
+<main>
+  <% if [
+          @search_terms,
+          @advanced_search_terms,
+          @tag_filter,
+          params[:retired].present?,
+          params[:selected].present?
+        ].any? %>
+    <div class="highlight no-margin-top padding margin-bottom">
+      <div class="row">
+        <div class="small-12 column">
+          <% if @search_terms || @advanced_search_terms %>
+            <h2><%= t("shared.search_results") %></h2>
+            <p>
+              <%= page_entries_info @proposals %>
+              <% if !@advanced_search_terms %>
+                <%= sanitize(
+                  t("proposals.index.search_results", count: @proposals.size, search_term: @search_terms)
+                ) %>
+              <% end %>
+            <p>
+          <% elsif @tag_filter %>
+            <h2><%= t("shared.search_results") %></h2>
+            <p>
+              <%= page_entries_info @proposals %>
+              <%= t("proposals.index.filter_topic", count: @proposals.size, topic: @tag_filter) %>
+            </p>
+          <% elsif params[:retired].present? %>
+            <h2><%= t("proposals.index.retired_proposals") %></h2>
+          <% elsif params[:selected].present? %>
+            <h2><%= t("proposals.index.selected_proposals") %></h2>
+          <% end %>
         </div>
       </div>
-    <% else %>
-      <%= render "shared/section_header", i18n_namespace: "proposals.index.section_header", image: "proposals" %>
-    <% end %>
-    <% if show_recommended_proposals? %>
-      <%= render "shared/recommended_index", recommended: @recommended_proposals,
-                                             disable_recommendations_path: recommendations_disable_proposals_path,
-                                             namespace: "proposals" %>
-    <% end %>
+    </div>
+  <% else %>
+    <%= render "shared/section_header", i18n_namespace: "proposals.index.section_header", image: "proposals" %>
+  <% end %>
 
-    <%tags = @selected_tags&.select{ |tag| tag.kind == 'category' } %>
-    <%can_create = true %>
+  <% if show_recommended_proposals? %>
+    <%= render "shared/recommended_index", recommended: @recommended_proposals,
+                                           disable_recommendations_path: recommendations_disable_proposals_path,
+                                           namespace: "proposals" %>
+  <% end %>
 
-    <div class="row">
-      <% if extended_feature?(:map_above_proposals) %>
-        <div class="map inline">
-          <%= render_map(nil, "proposals", false, nil, @proposals_coordinates) %>
-        </div>
-        <div class="no-bullet margin-top">
-        </div>
-      <%end%>
-      <div id="proposals" class="proposals-list small-12 medium-9 column">
-        <% if has_banners? %>
-          <%= render "shared/banner" %>
-        <% end %>
+  <%tags = @selected_tags&.select{ |tag| tag.kind == 'category' } %>
+  <%can_create = true %>
 
+  <% if extended_feature?(:map_above_proposals) %>
+    <div class="map inline">
+      <%= render_map(nil, "proposals", false, nil, @proposals_coordinates) %>
+    </div>
+    <div class="no-bullet margin-top">
+    </div>
+  <%end%>
 
-        <% if extended_feature?(:intro_text_for_proposals) %>
-          <%=render_custom_block 'proposals_welcome' %>
-        <% end %>
+  <div class="row">
+    <div id="proposals" class="proposals-list small-12 medium-9 column">
 
-        <% if show_featured_proposals? %>
-          <div id="featured-proposals" class="row featured-proposals">
-            <div class="small-12 column">
-              <h2>
-                <%= t("proposals.index.featured_proposals") %>
-              </h2>
-            </div>
-            <% @featured_proposals.each do |featured_proposal| %>
-              <%= render "featured_proposal", proposal: featured_proposal %>
-            <% end %>
+      <%= render Shared::BannerComponent.new("proposals") %>
+
+      <% if extended_feature?(:intro_text_for_proposals) %>
+        <%=render_custom_block 'proposals_welcome' %>
+      <% end %>
+
+      <% if show_featured_proposals? %>
+        <div id="featured-proposals" class="row featured-proposals">
+          <div class="small-12 column">
+            <h2>
+              <%= t("proposals.index.featured_proposals") %>
+            </h2>
           </div>
-        <% end %>
-        <% unless params[:selected].present? %>
-          <div class="row">
-            <div class="small-12 column">
-              <%= render "view_mode" %>
-              <%= yield :header_addon %>
-            </div>
-          </div>
-        <% end %>
-        <% unless params[:retired].present? || params[:selected].present? %>
-          <%= render "shared/advanced_search",
-                     search_path: proposals_path(page: 1) %>
-        <% end %>
-        <% unless params[:selected].present? %>
-          <%= render "shared/order_links", i18n_namespace: "proposals.index" %>
-        <% end %>
-          <div class="show-for-small-only">
-            <% if current_user && proposal_limit_exceeded?(current_user) %>
-							<div class='max-proposals-exceeded'>
-								<%= t('custom.proposals.index.max_number_reached', max_number: Setting['extended_option.max_active_proposals_per_user']) %>
-							</div>
-						<% else %>
-							<%= link_to t("proposals.index.start_proposal"), new_proposal_path(tags: tags.any? ? tags.map{|t| t.name} : nil),
-								class: "button expanded",
-								onclick: can_create ? "return true" : "alert('#{t("alerts.select_one_category", model: t("activerecord.models.proposal.one"))}'); return false;",
-								disabled: !can_create %>
-            <% end %>
-          </div>
-        <div id="proposals-list">
-          <% if @proposals.any? || current_user.blank? %>
-            <% if proposals_default_view? %>
-              <%= render partial: "proposals/proposal", collection: @proposals %>
-            <% else %>
-              <% @proposals.each do |proposal| %>
-                <%= render "/proposals/proposal_minimal", proposal: proposal %>
-              <% end %>
-            <% end %>
-          <% else %>
-            <%= empty_recommended_proposals_message_text(current_user) %>
+          <% @featured_proposals.each do |featured_proposal| %>
+            <%= render "featured_proposal", proposal: featured_proposal %>
           <% end %>
-          <%= paginate @proposals %>
-          <% unless @search_terms || @advanced_search_terms || @tag_filter %>
-            <div id="section_help" class="margin" data-magellan-target="section_help">
+        </div>
+      <% end %>
+
+      <% unless params[:selected].present? %>
+        <div class="row">
+          <div class="small-12 column">
+            <%= render "view_mode" %>
+            <%= yield :header_addon %>
+          </div>
+        </div>
+      <% end %>
+
+      <% unless params[:retired].present? || params[:selected].present? %>
+        <%= render Shared::AdvancedSearchComponent.new %>
+      <% end %>
+
+      <% unless params[:selected].present? %>
+        <%= render "shared/order_links", i18n_namespace: "proposals.index" %>
+
+        <div class='row'>
+          <div class='small-12 medium-9 column small'>
+            <%= link_to t('proposals.index.section_header.help'), '#section_help' %>
+          </div>
+
+          <div class='small-12 medium-3 column small'>
+            <% if extended_feature?('show_number_of_entries_in_modules') %>
+              <div class='float-right'>
+                <%= @proposals.except(:limit, :offset).count %>
+                <%= t('activerecord.models.proposal', count: @proposals.except(:limit, :offset).count) %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="show-for-small-only margin-top">
+        <% if @proposals.any? && current_user && proposal_limit_exceeded?(current_user) %>
+          <div class='max-proposals-exceeded'>
+            <%= t('custom.proposals.index.max_number_reached', max_number: Setting['extended_option.max_active_proposals_per_user']) %>
+          </div>
+        <% else %>
+          <%= link_to t("proposals.index.start_proposal"), new_proposal_path(tags: tags.any? ? tags.map{|t| t.name} : nil),
+            class: "button expanded",
+            onclick: can_create ? "return true" : "alert('#{t("alerts.select_one_category", model: t("activerecord.models.proposal.one"))}'); return false;",
+            disabled: !can_create %>
+        <% end %>
+      </div>
+
+      <div id="proposals-list">
+        <% if @proposals.any? || current_user.blank? %>
+          <% if proposals_default_view? %>
+            <%= render partial: "proposals/proposal", collection: @proposals %>
+          <% else %>
+            <% @proposals.each do |proposal| %>
+              <%= render "/proposals/proposal_minimal", proposal: proposal %>
+            <% end %>
+          <% end %>
+        <% else %>
+          <%= empty_recommended_proposals_message_text(current_user) %>
+        <% end %>
+        <%= paginate @proposals %>
+
+        <% unless @search_terms || @advanced_search_terms || @tag_filter %>
+          <div id="section_help" class="margin" data-magellan-target="section_help">
+            <% if extended_feature?('custom_help_text_in_modules') %>
+              <%=render_custom_block 'proposals_help' %>
+            <% else %>
               <p class="lead">
                 <strong><%= t("proposals.index.section_footer.title") %></strong>
               </p>
               <p><%= t("proposals.index.section_footer.description") %></p>
-            </div>
-          <% end %>
-        </div>
-      </div>
-      <div class="small-12 medium-3 column">
-        <aside class="margin-bottom">
-					<% if current_user && proposal_limit_exceeded?(current_user) %>
-						<div class='max-proposals-exceeded'>
-							<%= t('custom.proposals.index.max_number_reached', max_number: Setting['extended_option.max_active_proposals_per_user']) %>
-						</div>
-					<% else %>
-						<%= link_to t("proposals.index.start_proposal"), new_proposal_path(tags: tags.any? ? tags.map{|t| t.name} : nil),
-							class: "button expanded",
-							onclick: can_create ? "return true" : "alert('#{t("alerts.select_one_category", model: t("activerecord.models.proposal.one"))}'); return false;",
-							disabled: !can_create %>
-          <% end %>
-
-          <% if extended_feature?('show_selected_proposals_in_proposal_sidebar') %>
-            <div class="sidebar-divider"></div>
-            <h2 class="sidebar-title"><%= t("proposals.index.selected_proposals") %></h2>
-            <br>
-            <p class="small">
-              <%= link_to t("proposals.index.selected_proposals_link"), proposals_path(selected: "all") %>
-            </p>
-          <% end %>
-
-          <% if params[:retired].blank? %>
-					  <%= render "shared/projekts_sidebar" %>
-            <%= render "shared/categories", taggable: "proposal" %>
-            <%= render "shared/tag_cloud", taggable: "proposal" %>
-
-            <% if extended_feature?('show_geozones_in_proposal_sidebar') %>
-              <%= render "geozones" %>
             <% end %>
-          <% end %>
-          <%= render "retired" %>
-
-          <% if extended_feature?('show_suggested_proposals_in_proposal_sidebar') %>
-            <%= render "proposals_lists" %>
-          <% end %>
-        </aside>
+          </div>
+        <% end %>
       </div>
     </div>
-  </main>
+
+    <div class="small-12 medium-3 column">
+      <aside class="margin-bottom">
+        <% if current_user && proposal_limit_exceeded?(current_user) %>
+          <div class='max-proposals-exceeded'>
+            <%= t('custom.proposals.index.max_number_reached', max_number: Setting['extended_option.max_active_proposals_per_user']) %>
+          </div>
+        <% else %>
+          <%= link_to t("proposals.index.start_proposal"), new_proposal_path(tags: tags.any? ? tags.map{|t| t.name} : nil),
+            class: "button expanded",
+            onclick: can_create ? "return true" : "alert('#{t("alerts.select_one_category", model: t("activerecord.models.proposal.one"))}'); return false;",
+            disabled: !can_create %>
+        <% end %>
+
+        <% if extended_feature?('show_selected_proposals_in_proposal_sidebar') %>
+          <div class="sidebar-divider"></div>
+          <h2 class="sidebar-title"><%= t("proposals.index.selected_proposals") %></h2>
+          <br>
+          <p class="small">
+            <%= link_to t("proposals.index.selected_proposals_link"), proposals_path(selected: "all") %>
+          </p>
+        <% end %>
+
+        <% if params[:retired].blank? %>
+          <%= render "shared/projekts_sidebar" %>
+          <%= render "shared/categories", taggable: "proposal" %>
+          <%= render "shared/tag_cloud", taggable: "proposal" %>
+          <%= render SDG::Goals::TagCloudComponent.new("Proposal") %>
+
+          <% if extended_feature?('show_geozones_in_proposal_sidebar') %>
+            <%= render "geozones" %>
+          <% end %>
+        <% end %>
+        <%= render "retired" %>
+
+        <% if extended_feature?('show_suggested_proposals_in_proposal_sidebar') %>
+          <%= render "proposals_lists" %>
+        <% end %>
+
+      </aside>
+    </div>
+
+  </div>
+</main>

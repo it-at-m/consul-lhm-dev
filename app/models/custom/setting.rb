@@ -3,7 +3,7 @@ require_dependency Rails.root.join("app", "models", "setting").to_s
 class Setting < ApplicationRecord
 
   def type
-    if %w[feature process proposals map html homepage uploads projekts].include? prefix
+    if %w[feature process proposals map html homepage uploads projekts sdg].include? prefix
       prefix
     elsif %w[remote_census].include? prefix
       key.rpartition(".").first
@@ -44,6 +44,7 @@ class Setting < ApplicationRecord
         "feature.remote_census": nil,
         "feature.valuation_comment_notification": true,
         "feature.graphql_api": true,
+        "feature.sdg": false, 
         "homepage.widgets.feeds.debates": true,
         "homepage.widgets.feeds.processes": true,
         "homepage.widgets.feeds.proposals": true,
@@ -129,10 +130,20 @@ class Setting < ApplicationRecord
         "remote_census.response.name": "",
         "remote_census.response.surname": "",
         "remote_census.response.valid": "",
+        "sdg.process.debates": true,
+        "sdg.process.proposals": true,
+        "sdg.process.polls": true,
+        "sdg.process.budgets": true,
+        "sdg.process.legislation": true,
         "projekts.connected_resources": false,
-        "projekts.predefined": false,
+        "projekts.projekt_page_sharing": false,
         "projekts.show_archived.navigation": true,
         "projekts.show_archived.sidebar": true,
+        "projekts.show_phases_in_projekt_page_sidebar": true,
+        "projekts.show_total_duration_in_projekts_page_sidebar": true,
+        "projekts.show_not_active_phases_in_projekts_page_sidebar": true,
+        "projekts.show_navigator_in_projekts_page_sidebar": true,
+        "projekts.show_module_links_in_flyout_menu": true,
         "extended_feature.gdpr_conformity": false,
         "extended_feature.link_out_warning": false,
         "extended_feature.two_click_iframe_solution": false,
@@ -144,7 +155,6 @@ class Setting < ApplicationRecord
         "extended_feature.head_image_for_debates": false,
         "extended_feature.intro_text_for_proposals": false,
         "extended_feature.map_above_proposals": false,
-
         "extended_feature.quorum_for_proposals": true,
         "extended_feature.enable_proposal_support_withdrawal": false,
         "extended_feature.show_selected_proposals_in_proposal_sidebar": true,
@@ -153,6 +163,8 @@ class Setting < ApplicationRecord
         "extended_feature.intro_text_for_polls": false,
         "extended_feature.intermediate_poll_results_for_admins": false,
         "extended_feature.hide_comment_replies_by_default": false,
+        "extended_feature.custom_help_text_in_modules": false,
+        "extended_feature.show_number_of_entries_in_modules": false,
         # "extended_feature.elasticsearch": false,
         "extended_option.max_active_proposals_per_user": 100,
         "extended_option.description_max_length": 6000

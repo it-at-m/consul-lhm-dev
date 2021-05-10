@@ -36,7 +36,17 @@
               <span class="bullet">&nbsp;&bull;&nbsp;</span>
               <span class="icon-comments"></span>&nbsp;
               <%= link_to t("debates.show.comments", count: @debate.comments_count), "#comments" %>
-              <span class="bullet">&nbsp;&bull;&nbsp;</span>
+
+              <% if @debate.projekt && @debate.projekt.page.published? %>
+                <span class="bullet">&nbsp;&bull;&nbsp;</span>
+                <span class='projekt-backlink'>
+                </span>
+                <%= link_to @debate.projekt.page.title, @debate.projekt.page.url %>
+              <% end %>
+
+              <% unless @debate.author == current_user %>
+                <span class="bullet">&nbsp;&bull;&nbsp;</span>
+              <% end %>
               <span class="js-flag-actions">
                 <%= render "shared/flag_actions", flaggable: @debate %>
               </span>

@@ -7,6 +7,10 @@
         <%= link_to t("polls.poll_header.back_to_proposal"), [@poll.related] %>
       <% end %>
 
+      <% if @poll.projekt.present? && @poll.projekt.page.published? %>
+        <%= link_to t("custom.projekt.back_to_projekt_overview"), @poll.projekt.page.url, class: 'back' %>
+      <% end %>
+
       <h1><%= @poll.name %></h1>
 
       <%= auto_link_already_sanitized_html simple_format(@poll.summary) %>
@@ -18,6 +22,7 @@
           <% end %>
         </ul>
       <% end %>
+      <%= render SDG::TagListComponent.new(@poll, linkable: false) %>
     </div>
 
     <aside class="small-12 medium-3 column margin-top">

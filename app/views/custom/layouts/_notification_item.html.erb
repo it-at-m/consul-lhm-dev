@@ -1,10 +1,7 @@
 <% if user_signed_in? %>
-  <li id="notifications" class='nav-element flyout-item'>
+  <li id="notifications" class='nav-element'>
     <%= link_to notifications_path, rel: "nofollow",
                 class: "notifications" do %>
-      <span class="show-for-sr">
-        <%= t("layouts.header.notification_item.notifications") %>
-      </span>
 
       <% if current_user.notifications.unread.count > 0 %>
         <span class="icon-circle" aria-hidden="true"></span>

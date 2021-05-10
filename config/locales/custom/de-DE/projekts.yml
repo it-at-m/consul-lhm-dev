@@ -1,6 +1,7 @@
 de:
   custom:
     projekt:
+      back_to_projekt_overview: zurück zur Projektübersicht
       page:
         breadcrumbs:
           homepage: Startseite

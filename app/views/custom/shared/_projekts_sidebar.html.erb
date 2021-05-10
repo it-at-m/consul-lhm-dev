@@ -1,27 +1,38 @@
-<div class="sidebar-divider"></div>
+<% if Projekt.top_level.with_order_number.any? %>
+  <div class="sidebar-divider"></div>
 
-<h2 class="sidebar-title"><%= t("custom.projekts.sidebar_filter.title") %></h2>
+  <h2 class="sidebar-title projekt-tag-chip-projekt projekt-tag-chip-icon"><%= t("custom.projekts.sidebar_filter.title") %></h2>
 
-<% if show_archived_projekts_in_sidebar? && Projekt.top_level_archived.any? %>
-  <div class='sidebar-projekt-group-name'>
-		<%= t("custom.projekts.sidebar_filter.title_active") %>
+  <div id='filter-projekts-all'>
+
+    <% if show_archived_projekts_in_sidebar? && Projekt.top_level_archived.any? %>
+      <div class='sidebar-projekt-group-name'>
+        <%= t("custom.projekts.sidebar_filter.title_active") %>
+      </div>
+    <% end %>
+
+    <div id='filter-projekts-active'>
+      <%= render partial: "shared/projekts_filter", locals: { projekts: Projekt.top_level_active } %>
+    </div>
+
+
+    <% if show_archived_projekts_in_sidebar? && Projekt.top_level_archived.any? %>
+
+      <div class='sidebar-projekt-group-name'>
+        <%= t("custom.projekts.sidebar_filter.title_archived") %>
+      </div>
+
+      <div id='filter-projekts-archived'>
+        <%= render partial: "shared/projekts_filter", locals: { projekts: Projekt.top_level_archived } %>
+      </div>
+    <% end %>
+
+    <div class="sidebar-filter-group">
+      <div class='js-apply-projekts-filter sidebar-filter-button' >
+        <%= t('custom.projekts.sidebar_filter.filter_button') %>
+      </div>
+      <div class='js-reset-projekts-filter sidebar-reset-filter-button' >
+      </div>
+    </div>
   </div>
 <% end %>
-
-<div id='filter-projekts'>
-  <%= render partial: "shared/projekts_filter", locals: { projekts: Projekt.top_level_active } %>
-</div>
-
-
-<% if show_archived_projekts_in_sidebar? && Projekt.top_level_archived.any? %>
-
-  <div class='sidebar-projekt-group-name'>
-    <%= t("custom.projekts.sidebar_filter.title_archived") %>
-  </div>
-
-  <div id='filter-projekts'>
-    <%= render partial: "shared/projekts_filter", locals: { projekts: Projekt.top_level_archived } %>
-  </div>
-<% end %>
-
-<%= link_to t('custom.projekts.sidebar_filter.filter_button'), '#', class: 'js-apply-projekts-filter filter-projekts-button' %>

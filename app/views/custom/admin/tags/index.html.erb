@@ -20,20 +20,18 @@
   <tbody>
   <% @tags.each do |tag| %>
     <tr>
+      <td class='small-9 tag-name-field'>
         <%= form_for(tag,
             url: admin_tag_path(tag),
             as: :tag,
             html: { id: "edit_tag_#{tag.id}" }) do |f| %>
 
-        <td class='small-3 tag-name-field'>
-            <%=f.text_field :name %>
-        </td>
-
-        <td class='small-6' id="tag_<%= tag.id %>">
-            <%= f.submit(t("admin.actions.update"), class: "button success") %>
-          <%= link_to t("admin.tags.destroy"), admin_tag_path(tag), method: :delete, class: "button hollow alert" %>
-        </td>
-      <% end %>
+            <strong><%= tag.name %></strong>
+        <% end %>
+      </td>
+      <td class='small-3' id="tag_<%= tag.id %>">
+        <%= render Admin::TableActionsComponent.new(tag, actions: [:destroy], destroy_text: t("admin.tags.destroy")) %>
+      </td>
     </tr>
   <% end %>
   </tbody>

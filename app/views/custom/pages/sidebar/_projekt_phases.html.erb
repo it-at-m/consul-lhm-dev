@@ -2,7 +2,7 @@
 
 <h2 class="sidebar-title"><%= t("custom.projekt.page.sidebar.phases.title") %></h2>
 
-<% if projekt.top_level? %>
+<% if projekt.top_level? && Setting["projekts.show_total_duration_in_projekts_page_sidebar"].present? %>
   <div class='projekt-phase'>
     <strong><%= t("custom.projekt.page.sidebar.phases.projekt_duration") %></strong>
     <br>
@@ -10,7 +10,7 @@
   </div>
 <% end %>
 
-<% if projekt.debate_phase.present? %>
+<% if projekt.debate_phase.present? && ( Setting["projekts.show_not_active_phases_in_projekts_page_sidebar"].present? || projekt_phase_active?(projekt, 'debate_phase') )  %>
   <div class='projekt-phase debate-phase'>
 
     <strong><%= t("custom.projekt.page.sidebar.phases.debate_phase") %></strong>
@@ -44,7 +44,7 @@
   </div>
 <% end %>
 
-<% if projekt.proposal_phase.present? %>
+<% if projekt.proposal_phase.present? && ( Setting["projekts.show_not_active_phases_in_projekts_page_sidebar"].present? || projekt_phase_active?(projekt, 'proposal_phase') )  %>
   <div class='projekt-phase proposals-phase'>
 
     <strong><%= t("custom.projekt.page.sidebar.phases.proposal_phase") %></strong>
@@ -78,18 +78,20 @@
   </div>
 <% end %>
 
-<div class='projekt-phase voting-phase'>
+<% if Setting["projekts.show_not_active_phases_in_projekts_page_sidebar"].present? || related_polls(projekt).count > 0 %>
+  <div class='projekt-phase voting-phase'>
 
-  <strong><%= t("custom.projekt.page.sidebar.phases.voting_phase") %></strong>
-  <br>
+    <strong><%= t("custom.projekt.page.sidebar.phases.voting_phase") %></strong>
+    <br>
 
-  <%= t("custom.projekt.page.sidebar.phases.voting_phase_active_count", count: related_polls(projekt).count) %>
-  <br>
+    <%= t("custom.projekt.page.sidebar.phases.voting_phase_active_count", count: related_polls(projekt).count) %>
+    <br>
 
-  <%if related_polls(projekt).count > 0 %>
-    <%= link_to polls_path + "?projekts=#{projekt.all_children_ids.push(projekt.id).join(',')}" do %>
-      <%= t("custom.projekt.page.sidebar.phases.voting_phase_link") %>
+    <%if related_polls(projekt).count > 0 %>
+      <%= link_to polls_path + "?projekts=#{projekt.all_children_ids.push(projekt.id).join(',')}" do %>
+        <%= t("custom.projekt.page.sidebar.phases.voting_phase_link") %>
+      <% end %>
     <% end %>
-  <% end %>
 
-</div>
+  </div>
+<% end %>

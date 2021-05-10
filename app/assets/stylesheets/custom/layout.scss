@@ -3,33 +3,6 @@ main {
   padding-top: 25px;
 }
 
-.ssb-linkedin{
-  background: #0e76a8;
-  background-image: none !important;
-  color: #fff;
-  height: $line-height * 2 !important;
-  position: relative;
-  width: $line-height * 2 !important;
-  &::before {
-    content: '#';
-    font-family: "icons" !important;
-    font-size: 1.5rem;
-    left: 50%;
-    line-height: 3rem;
-    margin-left: -0.6875rem;
-    position: absolute;
-    top: 0;
-  }
-  &:hover,
-  &:focus {
-    background: #fff;
-    color: #0e76a8;
-  }
-}
-
-@include breakpoint(medium) {	
-  .button.button-telegram,	
-  .ssb-telegram {	
-    display: inline-block !important;	
-  }	
+.debate .panel, .proposal .panel, .investment-project .panel, .budget-investment .panel, .legislation .panel, .communities-show .panel, .process-summary .debate-summary, .process-summary .proposal-summary, .process-summary .annotation-summary {
+  background-color: $module-index-panel-background;
 }

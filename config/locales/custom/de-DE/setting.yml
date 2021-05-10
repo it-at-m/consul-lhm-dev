@@ -42,6 +42,12 @@ de:
         gdpr_conformity_description: "Aktivieren Sie die DSGVO-konforme Voreinstellungen, um \"privacy by design\" zu gewähren"
         quorum_for_proposals: Quorum für Vorschläge
         quorum_for_proposals_description: Aktivieren Sie ein Quorum für Vorschläge
+        custom_help_text_in_modules: Individuelle Hilfstexte zu Modulen
+        custom_help_text_in_modules_description: Am unteren Ende der Modulübersicht können individuelle Hilfstexte platziert werden
+        show_number_of_entries_in_modules: Anzahl der Beteiligungen anzeigen
+        show_number_of_entries_in_modules_description: Zeigt die Anzahl der Diskussionsbeiträge, Vorschläge und Abstimmungen an
+
+
       extended_option:
         max_active_proposals_per_user: Maximale Anzahl aktiver Vorschläge pro Benutzer
         max_active_proposals_per_user_description: Legen Sie die maximale Anzahl an aktiven Vorschlägen pro Nutzer fest
@@ -52,10 +58,20 @@ de:
       projekts:
         connected_resources: Verpflichtende Zuordnung von Diskussionen & Vorschläge zu Projekten
         connected_resources_description: Diskussionen & Vorschläge können ohne Projektzuordnung nicht erstellt werden
-        predefined: Projektvorauswahl treffen
-        predefined_description: Die gefilterten Projekte beim Erstellen von Diskussionen & Vorschlägen vorauswählen
+        projekt_page_sharing: Teilen-Funktion in Projektseite
+        projekt_page_sharing_description: Aktivieren Sie die Teilen-Funktion in der rechten Seitenleiste der Projektseite
         show_archived:
           navigation: Archivierte Projekte in Navigation anzeigen
           navigation_description: Zeigt archivierte Projekte in der Navigationsleiste wenn aktiviert
           sidebar: Archivierte Projekte in Projektseitenleiste  anzeigen
           sidebar_description: Zeigt archivierte Projekte in der Projektseitenleiste wenn aktiviert
+        show_phases_in_projekt_page_sidebar: Projektphasen in Projektseite
+        show_phases_in_projekt_page_sidebar_description: Aktivieren Sie die Projektphasen in der rechten Seitenleiste der Projektseite
+        show_total_duration_in_projekts_page_sidebar: Gesamtdauer in Projektphasen
+        show_total_duration_in_projekts_page_sidebar_description: "Zeigt die Phase \"Gesamtdauer\" in den Projektphasen in der rechten Seitenleiste der Projektseite an"
+        show_not_active_phases_in_projekts_page_sidebar: Nicht aktive Teilnahmephasen
+        show_not_active_phases_in_projekts_page_sidebar_description: "Zeigt die Phasen \"Diskussionen\", \"Vorschläge\" und \"Abstimmungen an, auch wenn diese nicht aktiviert sind"
+        show_navigator_in_projekts_page_sidebar: Projektnavigation in Projektseite
+        show_navigator_in_projekts_page_sidebar_description: Zeigt die Projektnavigation in der rechten Seitenleiste der Projektseiten an
+        show_module_links_in_flyout_menu: Modul-Links in den Dropdowns
+        show_module_links_in_flyout_menu_description: Zeigt die die Modul-Links unterhalb einzelner Dropdown-Einträge an

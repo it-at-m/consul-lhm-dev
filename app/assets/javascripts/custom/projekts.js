@@ -212,6 +212,19 @@
         window.location.href = url;
       });
 
+      $("body").on("click", ".js-reset-projekts-filter", function(event) {
+        $('#filter-projekts-all input').each(
+          function() {
+            $(this).prop('checked', false)
+          }
+        )
+
+        var url = new URL(window.location.href);
+        url.searchParams.delete('projekts')
+        window.history.pushState('', '', url)
+
+      });
+
       $("body").on("click", ".js-projekt-tag-filter-link", function(event) {
         event.preventDefault()
         var clickedLink = this.href

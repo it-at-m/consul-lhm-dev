@@ -1,6 +1,7 @@
 <%= form_for [:admin, @content_block], html: { class: "edit_page" } do |f| %>
 
   <%= render "shared/errors", resource: @content_block %>
+
   <%if @content_block.custom?%>
     <div class="small-12 medium-6 column">
       <%=t("admin.site_customization.content_blocks.content_block.key") %>

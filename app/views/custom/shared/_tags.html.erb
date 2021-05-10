@@ -1,37 +1,32 @@
 <%- limit ||= nil %>
-<% filter_class = controller.action_name == 'index' ? 'js-projekt-tag-filter-link' : ''  %>
+<% tag_filter_class = controller.action_name == 'index' ? 'js-projekt-tag-filter-link' : ''  %>
 
-<% params[:projekts].present? ? filtered_projekt_ids = params[:projekts].split(',') : filtered_projekt_ids = [] %>
+<%= render SDG::TagListComponent.new(taggable, limit: limit) %>
 
 <% if taggable.projekt.present? %>
-  <div class="taggable_projekts">
-    <% taggable.projekt.id.to_s.in?(filtered_projekt_ids) ? filtered_projekt_class = 'filtered-projekt' : filtered_projekt_class = ''  %>
-    <div class="projekt-chip <%= filtered_projekt_class %>">
-      <%= link_to sanitize(taggable.projekt.name), (taggables_path(taggable.class.name.underscore, '') + "&projekts=#{taggable.projekt.id}" ), class: filter_class %>
-    </div>
+  <% params[:projekts].present? ? active_projekt_ids = params[:projekts].split(',') : active_projekt_ids = [] %>
+  <% taggable.projekt.id.to_s.in?(active_projekt_ids) ? active_projekt_class = 'filtered-projekt' : active_projekt_class = ''  %>
+  <div class="projekt-tag-chip <%= active_projekt_class %>">
+    <%= link_to sanitize(taggable.projekt.name), (taggables_path(taggable.class.name.underscore, '') + "&projekts=#{taggable.projekt.id}" ), class: "#{tag_filter_class} projekt-tag-chip-icon projekt-tag-chip-projekt" %>
   </div>
 <% end %>
 
 
 
 <% if extended_feature?("enable_categories") && taggable.tags.category.any? %>
-  <ul id="tags_<%= dom_id(taggable) %>" class="no-bullet tags">
-    <% taggable.tags.category.each do |tag| %>
-      <%-selected = params[:tags]&.split(",")&.include?(tag.name)%>
-      <li class="inline-block">
-        <%= link_to sanitize(tag.name),
-          taggables_path(taggable.class.name.underscore, tag.name), class: selected ? "selected #{filter_class}" : filter_class %></li>
-    <% end %>
-  </ul>
+  <% taggable.tags.category.each do |category| %>
+    <% active_projekt_class = params[:tags]&.split(",")&.include?(category.name) ? active_projekt_class = 'filtered-projekt' : active_projekt_class = '' %>
+    <div class="projekt-tag-chip <%= active_projekt_class %>">
+      <%= link_to sanitize(category.name), taggables_path(taggable.class.name.underscore, category.name), class: "#{tag_filter_class} projekt-tag-chip-icon projekt-tag-chip-category" %></li>
+    </div>
+  <% end %>
 <%end%>
 
 <% if extended_feature?("enable_custom_tags") && taggable.tags.where(kind: nil).any? %>
-  <ul id="custom_tags_<%= dom_id(taggable) %>" class="no-bullet tags">
-    <% taggable.tags.where(kind: nil).each do |tag| %>
-      <%-selected = params[:tags]&.split(",")&.include?(tag.name)%>
-      <li class="inline-block">
-        <%= link_to sanitize(tag.name),
-          taggables_path(taggable.class.name.underscore, tag.name), class: selected ? "selected #{filter_class}" : filter_class %></li>
-    <% end %>
-  </ul>
+  <% taggable.tags.where(kind: nil).each do |tag| %>
+    <% active_projekt_class = params[:tags]&.split(",")&.include?(tag.name) ? active_projekt_class = 'filtered-projekt' : active_projekt_class = '' %>
+    <div class="projekt-tag-chip <%= active_projekt_class %>" >
+      <%= link_to sanitize(tag.name), taggables_path(taggable.class.name.underscore, tag.name), class: "#{tag_filter_class} projekt-tag-chip-icon projekt-tag-chip-tag" %></li>
+    </div>
+  <% end %>
 <% end %>

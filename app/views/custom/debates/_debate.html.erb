@@ -46,14 +46,13 @@
 
               <% if debate.projekt && debate.projekt.page.published? %>
                   <br/>
-                  <span class='projekt-backlink'>
+                  <span class='projekt-backlink'>&nbsp;
                   </span>
-                  <%= prepare_projekt_name(debate.projekt) %>
+                  <%= link_to debate.projekt.page.title, debate.projekt.page.url %>
               <% end %>
             </p>
             <div class="debate-description">
               <%= wysiwyg(debate.description) %>
-              <div class="truncate"></div>
             </div>
             <%= render "shared/tags", taggable: debate, limit: 5 %>
           </div>

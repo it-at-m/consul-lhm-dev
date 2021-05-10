@@ -28,6 +28,22 @@
       <%= render "shared/filter_subnav", i18n_namespace: "polls.index" %>
 
       <% if @polls.any? %>
+
+        <div class='row'>
+          <div class='small-12 medium-9 column small'>
+            <%= link_to t('polls.index.section_header.help'), '#section_help' %>
+          </div>
+          <div class='small-12 medium-3 column small'>
+            <% if extended_feature?('show_number_of_entries_in_modules') %>
+              <div class='float-right'>
+                <%= @all_polls.count %>
+                <%= t('activerecord.models.poll', count: @all_polls.count) %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+
         <% polls_by_geozone_restriction = @polls.group_by(&:geozone_restricted) %>
 
         <% if polls_by_geozone_restriction[false].present? %>
@@ -52,10 +68,14 @@
       <% end %>
 
       <div id="section_help" class="margin" data-magellan-target="section_help">
-        <p class="lead">
-          <strong><%= t("polls.index.section_footer.title") %></strong>
-        </p>
-        <p><%= t("polls.index.section_footer.description") %></p>
+        <% if extended_feature?('custom_help_text_in_modules')  %>
+          <%=render_custom_block 'polls_help' %>
+        <% else %>
+          <p class="lead">
+            <strong><%= t("polls.index.section_footer.title") %></strong>
+          </p>
+          <p><%= t("polls.index.section_footer.description") %></p>
+        <% end %>
         <%= render_custom_partial "footer" %>
       </div>
     </div>
@@ -65,6 +85,7 @@
         <%= render "shared/projekts_sidebar" %>
         <%= render "shared/categories", taggable: "poll" %>
         <%= render "shared/tag_cloud", taggable: "poll" %>
+        <%= render SDG::Goals::TagCloudComponent.new("Poll") %>
       </aside>
     </div>
   </div>
