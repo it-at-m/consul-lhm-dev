@@ -4,7 +4,6 @@ class ProposalsController
 
   include ProposalsHelper
 
-  before_action :authenticate_user!, except: [:index, :show, :map, :summary, :json_data]
   before_action :process_tags, only: [:create, :update]
 
   def index_customization
@@ -79,7 +78,7 @@ class ProposalsController
 
     def proposal_params
       attributes = [:video_url, :responsible_name, :tag_list,
-                    :terms_of_service, :geozone_id, :skip_map, :projekt_id,
+                    :terms_of_service, :geozone_id, :skip_map, :projekt_id, :related_sdg_list,
                     image_attributes: image_attributes,
                     documents_attributes: [:id, :title, :attachment, :cached_attachment,
                                            :user_id, :_destroy],

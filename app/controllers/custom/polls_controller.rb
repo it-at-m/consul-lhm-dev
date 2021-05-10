@@ -15,6 +15,8 @@ class PollsController < ApplicationController
     take_only_by_tag_names
     take_by_projekts
 
+    @all_polls = @polls
+
     @polls = Kaminari.paginate_array(
       @polls.created_by_admin.not_budget.send(@current_filter).includes(:geozones).sort_for_list
     ).page(params[:page])

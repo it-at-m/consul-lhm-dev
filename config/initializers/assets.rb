@@ -12,10 +12,14 @@ Rails.application.config.assets.version = "1.0"
 Rails.application.config.assets.precompile += %w[ckeditor/config.js]
 Rails.application.config.assets.precompile += %w[ckeditor/plugins/lineutils/*]
 Rails.application.config.assets.precompile += %w[ckeditor/plugins/mjAccordion/*]
+Rails.application.config.assets.precompile += %w[ckeditor/plugins/youtube/*]
+Rails.application.config.assets.precompile += %w[ckeditor/plugins/iframe/*]
 Rails.application.config.assets.precompile += %w[ckeditor/plugins/widget/*]
 Rails.application.config.assets.precompile += %w[stat_graphs.js]
 Rails.application.config.assets.precompile += %w[dashboard_graphs.js]
 Rails.application.config.assets.precompile += %w[print.css]
 Rails.application.config.assets.precompile += %w[pdf_fonts.css]
+Rails.application.config.assets.precompile += %w[sdg/*.png]
+Rails.application.config.assets.precompile += %w[sdg/**/*.png]
 
 # Loads custom images and custom fonts before app/assets/images and app/assets/fonts

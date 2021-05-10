@@ -3,12 +3,12 @@
     <div id="comments" class="small-12 column">
       <%= render "shared/wide_order_selector", i18n_namespace: "comments" %>
 
-      <% comments_allowed = true %>
+      <% comments_allowed = 'allowed' %>
       <% if user_signed_in? && @projekt && can?(:select, @projekt.proposal_phase) %>
         <%= render "comments/form", { commentable: @proposal, parent_id: nil } %>
 
       <% elsif user_signed_in? && @projekt %>
-        <% comments_allowed = false %>
+        <% comments_allowed = 'not_allowed' %>
 
         <div class='commenting-not-allowed'>
           <ul>

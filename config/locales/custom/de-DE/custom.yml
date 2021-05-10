@@ -5,6 +5,10 @@ de:
       sign_up: Registrieren mit BayernID
       name: BayernID
   custom:
+    sdg:
+      goals:
+        filter:
+          heading: ZIELE FÜR NACHHALTIGE ENTWICKLUNG
     pages:
       social_share:
         share: Teilen

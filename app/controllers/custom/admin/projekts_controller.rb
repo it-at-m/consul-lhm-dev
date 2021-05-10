@@ -42,6 +42,15 @@ class Admin::ProjektsController < Admin::BaseController
     @projekt.children.each do |child|
       child.update(parent: nil)
     end
+    @projekt.debates.unscope(where: :hidden_at).each do |debate|
+      debate.update(projekt_id: nil)
+    end
+    @projekt.proposals.unscope(where: :hidden_at).each do |proposal|
+      proposal.update(projekt_id: nil)
+    end
+    @projekt.polls.unscope(where: :hidden_at).each do |poll|
+      poll.update(projekt_id: nil)
+    end
     @projekt.destroy!
     redirect_to admin_projekts_path
   end

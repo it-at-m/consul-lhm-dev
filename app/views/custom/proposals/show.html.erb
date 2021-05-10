@@ -74,6 +74,13 @@
               </div>
             <% end %>
 
+            <% if can?(:publish, @proposal) %>
+              <%= link_to t("dashboard.index.publish"),
+                          publish_proposal_path(@proposal),
+                          class: "button hollow expanded",
+                          method: :patch %>
+            <% end %>
+
             <%= render "proposals/support_status", proposal: @proposal %>
 
             <%= render "proposals/social_share", proposal: @proposal, share_title: t("proposals.show.share") %>

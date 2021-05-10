@@ -25,6 +25,22 @@
 
 // styling mobile menu
 
+
+ul.main-menu a:focus {
+  outline: none;
+}
+
+span.icon-circle {
+  color: yellow;
+  position: absolute;
+  font-size: 0.5em;
+}
+
+span.icon-notification,
+span.icon-no-notification {
+  font-size: 19px;
+}
+
 .subnavigation a.home-items-icon {
   display: none;
 }
@@ -35,6 +51,10 @@
 }
 
 .account-admin-items {
+  li#notifications {
+    margin-right: 0;
+  }
+
   a {
     display: inline-block;
   }
@@ -170,11 +190,11 @@
 
   .subnavigation a.home-items-icon {
     display: inline-block;
-    width: 19px;
+    width: 22px;
   }
 
   .home-icon {
-    top: -5px;
+    top: -6px;
     right: 0;
     position: absolute;
   }
@@ -213,19 +233,23 @@
       width: 22px;
     }
 
+    .icon-no-notification::before {
+      font-size: 22px;
+    }
+
     .account-items-link,
     .admin-items-link {
       display: none;
     }
 
     .admin-icon {
-      top: -5px;
+      top: -6px;
       right: 0;
       padding-bottom: 14px;
     }
 
     .account-icon {
-      top: -5px;
+      top: -6px;
       right: 0;
       padding-bottom: 14px;
     }
@@ -336,6 +360,35 @@
       }
     }
 
+  }
+
+
+  // Styling notification 
+
+  .account-admin-items {
+    li#notifications {
+      margin-right: 0;
+      margin-left: 1.5rem;
+      width: 22px;
+      line-height: normal;
+
+      a.notifications {
+        position: absolute;
+      }
+
+      span.icon-notification {
+          position: absolute;
+          font-size: 1.5rem;
+      }
+
+      span.icon-circle {
+        position: absolute;
+        color: yellow;
+        z-index: 1;
+        font-size: 0.75em;
+        top: 5px;
+      }
+    }
   }
 
 }

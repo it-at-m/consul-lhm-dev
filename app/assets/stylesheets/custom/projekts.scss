@@ -205,27 +205,6 @@ table.edit-projekt {
 }
 
 
-.projekt-chip {
-  display: inline-block;
-  font-size: 0.875em;
-  background: #ececec;
-  color: #222;
-  padding: 5px 1em;
-  margin-bottom: .5em;
-
-  a {
-    color: #222;
-  }
-
-  &.filtered-projekt {
-    background: #06408E;
-
-    a {
-      color: #fff;
-    }
-  }
-}
-
 
 #projekt-tags {
   margin: 1em 0;
@@ -337,49 +316,7 @@ table.edit-projekt {
 
 }
 
-
-#projekt-tags {
-
-  #projekt-chips {
-    margin: 1em 0;
-  }
-
-  .projekt-chip {
-    padding-right: 2.25em;
-    position: relative;
-    margin-right: .5em;
-  }
-
-  .close {
-    position: absolute;
-    top: 50%;
-    right: 0;
-    width: 14px;
-    height: 14px;
-    transform: translate(-50%, -50%);
-    cursor: pointer;
-  }
-  .close:hover {
-    opacity: 1;
-  }
-  .close:before, .close:after {
-    position: absolute;
-    left: 40%;
-    content: '';
-    height: 14px;
-    width: 1px;
-    background-color: #06408E;
-  }
-  .close:before {
-    transform: rotate(45deg);
-  }
-  .close:after {
-    transform: rotate(-45deg);
-  }
-
-}
-
-#filter-projekts {
+#filter-projekts-all {
 
   ul {
     list-style-type: none;
@@ -487,24 +424,6 @@ table.edit-projekt {
 
 }
 
-.filter-projekts-button {
-  display: inline-block;
-  background: #06408E;
-  color: #fefefe;
-  padding: 0.5em;
-  text-decoration: none;
-  border-radius: 2px;
-  margin-top: 1em;
-}
-
-.filter-projekts-button:hover,
-.filter-projekts-button:focus {
-  color: #fff;
-  background: #14679e;
-  text-decoration:none;
-  cursor:pointer;
-}
-
 .sidebar-projekt-group-name {
   margin: .5em 0;
   font-size: 0.875em;
@@ -515,8 +434,8 @@ table.edit-projekt {
 }
 
 span.projekt-backlink:before {
-  content: "\f126";
-  font-weight: bold;
+  content: "\f2d0";
+  font-weight: normal;
   font-family: 'Font Awesome 5 Free';
   opacity: 0.9;
 }

@@ -31,6 +31,11 @@
         <div class="dates"></div>
           <h4><%= link_to_poll poll.name, poll %></h4>
           <%= poll_dates(poll) %>
+          <% if poll.projekt.present? && poll.projekt.page.published? %>
+            <br>
+            <%= link_to t("custom.projekt.back_to_projekt_overview"), poll.projekt.page.url, class: 'back' %>
+          <% end %>
+
 
         <ul class="margin-top">
           <% poll.questions.each do |question| %>
@@ -43,7 +48,6 @@
           </p>
         <% end %>
         <%= render "shared/tags", taggable: poll, limit: 5 %>
-
       </div>
       <div class="small-12 medium-3 column table" data-equalizer-watch>
         <div class="table-cell align-middle">

@@ -13,9 +13,11 @@
         <% end %>
       </div>
 
-      <div class='projekt-modules-links'>
-        <%= prepare_projekt_modules_links(projekt) %>
-      </div>
+      <% if Setting["projekts.show_module_links_in_flyout_menu"].present? %>
+        <div class='projekt-modules-links'>
+          <%= prepare_projekt_modules_links(projekt) %>
+        </div>
+      <% end %>
 
       
       <%= render partial: 'shared/subnavigation_flyout_projekts', locals: { projekts: projekt.children.with_order_number } if projekt.children.any? %>

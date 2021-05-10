@@ -1,1 +1,4 @@
-Setting.create_missing
+begin
+  Setting.create_missing
+rescue
+end

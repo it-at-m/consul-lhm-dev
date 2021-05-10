@@ -1,6 +1,7 @@
 <%= render "shared/globalize_locales", resource: @debate %>
 
 <%= translatable_form_for(@debate, html: {class: "debate-form"}) do |f| %>
+
   <%= render "shared/errors", resource: @debate %>
 
   <div class="row column">
@@ -9,18 +10,15 @@
         <%= translations_form.text_field :title,
               maxlength: Debate.title_max_length,
               placeholder: t("debates.form.debate_title"),
-              data: { js_suggest_result: "js_suggest_result",
-                      js_suggest: ".js-suggest",
-                      js_url: suggest_debates_path } %>
+              data: suggest_data(@debate) %>
       </div>
+      <div class="js-suggest" data-locale="<%= translations_form.locale %>"></div>
 
       <% if extended_feature?(:head_image_for_debates) %>
         <div class="images small-12 column">
           <%= render "images/nested_image", imageable: @debate, f: f %>
         </div>
       <% end %>
-
-      <div class="js-suggest" data-locale="<%= translations_form.locale %>"></div>
 
       <div class="small-12 column">
         <%= translations_form.text_area :description,
@@ -68,17 +66,18 @@
     <%end%>
 
 
+    <%= render SDG::RelatedListSelectorComponent.new(f) %>
 
-<div class="small-12 column">
-  <% if @debate.new_record? %>
-    <%= f.check_box :terms_of_service,
-      title: t("form.accept_terms_title"),
-      label: t("form.accept_terms",
-               policy: link_to(t("form.policy"), "/privacy", target: "blank"),
-               conditions: link_to(t("form.conditions"), "/conditions", target: "blank")
-              ) %>
-          <% end %>
-</div>
+    <div class="small-12 column">
+      <% if @debate.new_record? %>
+        <%= f.check_box :terms_of_service,
+          title: t("form.accept_terms_title"),
+          label: t("form.accept_terms",
+                   policy: link_to(t("form.policy"), "/privacy", target: "blank"),
+                   conditions: link_to(t("form.conditions"), "/conditions", target: "blank")
+                  ) %>
+              <% end %>
+    </div>
 
     <div class="actions small-12 column">
       <%= f.submit(class: "button", value: t("debates.#{action_name}.form.submit_button")) %>

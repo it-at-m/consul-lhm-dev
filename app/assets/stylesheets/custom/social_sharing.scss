@@ -1,52 +1,72 @@
-.ssb-whatsapp {
-  background: #25D366;
+.ssb-whatsapp,
+.ssb-facebook,
+.ssb-twitter,
+.ssb-telegram,
+.ssb-linkedin,
+.ssb-email {
+  margin-bottom: 0.25rem;
+  vertical-align: middle;
+}
+
+
+
+.ssb-whatsapp,
+.ssb-linkedin,
+.ssb-email {
   background-image: none !important;
   color: #fff;
-  height: $line-height * 2 !important;
   position: relative;
+  height: $line-height * 2 !important;
   width: $line-height * 2 !important;
+  vertical-align: middle;
 
   &::before {
-    content: "P";
     font-family: "icons" !important;
-    font-size: rem-calc(24);
-    left: 50%;
-    line-height: $line-height * 2;
-    margin-left: rem-calc(-11);
-    position: absolute;
-    top: 0;
   }
 
   &:hover,
   &:focus {
     background: #fff;
+    text-decoration: none;
+  }
+}
+
+
+.ssb-whatsapp {
+  background: #25D366;
+
+  &::before {
+    content: "P";
+  }
+
+  &:hover,
+  &:focus {
     color: #075E54;
   }
 }
 
 .ssb-email {
   background: red;
-  background-image: none !important;
-  color: #fff;
-  height: $line-height * 2 !important;
-  position: relative;
-  width: $line-height * 2 !important;
 
   &::before {
     content: "L";
-    font-family: "icons" !important;
-    font-size: rem-calc(24);
-    left: 50%;
-    line-height: $line-height * 2;
-    margin-left: rem-calc(-11);
-    position: absolute;
-    top: 0;
   }
 
   &:hover,
   &:focus {
-    background: #fff;
     color: red;
+  }
+}
+
+.ssb-linkedin {
+  background: #0e76a8;
+
+  &::before {
+    content: '#';
+  }
+  &:hover,
+  &:focus {
+    color: #0e76a8;
   }
 }
 
@@ -67,11 +87,15 @@
   }
 }
 
-.custom-page .social-share-full .social-share-button {
+.social-share-full .social-share-button {
   display: inline;
 }
 
 .featured-proposals {
+
+  .social-share-full {
+    margin-bottom: 1rem;
+  }
 
   .share-supported {
 
@@ -92,12 +116,8 @@
       }
     }
 
-    .ssb-linkedin {
-      &::before {
-        content: url(linkedin-icon-black.svg);
-        top: 1px;
-        margin-left: -0.65rem;
-      }
+    .social-share-button .ssb-icon::before {
+       vertical-align: baseline;
     }
   }
 }

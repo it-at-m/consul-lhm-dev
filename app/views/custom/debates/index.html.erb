@@ -37,9 +37,6 @@
                                              namespace: "debates" %>
     <% end %>
 
-    <%tags = @selected_tags&.select{ |tag| tag.kind == 'category' }   %>
-    <%can_create = true  %>
-
     <div class="row">
       <div id="debates" class="debates-list small-12 medium-9 column">
 
@@ -47,7 +44,7 @@
           <%=render_custom_block 'debates_welcome' %>
         <% end %>
 
-        <%= render "shared/banner" %>
+        <%= render Shared::BannerComponent.new("debates") %>
 
         <% unless @search_terms || !has_featured? %>
           <%= render "featured_debates" %>
@@ -60,12 +57,26 @@
           </div>
         </div>
 
-        <%= render "shared/advanced_search", search_path: debates_path(page: 1) %>
+        <%= render Shared::AdvancedSearchComponent.new %>
 
         <%= render "shared/order_links", i18n_namespace: "debates.index" %>
 
+        <div class='row'>
+          <div class='small-12 medium-9 column small'>
+            <%= link_to t('debates.index.section_header.help'), '#section_help' %>
+          </div>
+          <div class='small-12 medium-3 column small'>
+            <% if extended_feature?('show_number_of_entries_in_modules') %>
+              <div class='float-right'>
+                <%= @debates.except(:limit, :offset).count %>
+                <%= t('activerecord.models.debate', count: @debates.except(:limit, :offset).count) %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
         <div class="show-for-small-only">
-          <%= link_to t("debates.index.start_debate"), new_debate_path(tags: tags.any? ? tags.map{|t| t.name} : nil), class: "button expanded", onclick: can_create ? "return true" : "alert('#{t("alerts.select_one_category", model: t("activerecord.models.debate.one"))}'); return false;" , disabled: !can_create %>
+          <%= link_to t("debates.index.start_debate"), new_debate_path, class: "button expanded" %>
         </div>
 
         <% if @debates.any? || current_user.blank? %>
@@ -83,24 +94,29 @@
 
         <% unless @search_terms || @advanced_search_terms %>
           <div id="section_help" class="margin" data-magellan-target="section_help">
-            <p class="lead">
-              <strong><%= t("debates.index.section_footer.title") %></strong>
-            </p>
-            <p><%= t("debates.index.section_footer.description") %></p>
-            <p><%= t("debates.index.section_footer.help_text_1") %></p>
-            <p><%= sanitize(t("debates.index.section_footer.help_text_2",
-                      org: link_to(setting["org_name"], new_user_registration_path))) %></p>
-            </p>
+            <% if extended_feature?('custom_help_text_in_modules') %>
+              <%=render_custom_block 'debates_help' %>
+            <% else %>
+              <p class="lead">
+                <strong><%= t("debates.index.section_footer.title") %></strong>
+              </p>
+              <p><%= t("debates.index.section_footer.description") %></p>
+              <p><%= t("debates.index.section_footer.help_text_1") %></p>
+              <p><%= sanitize(t("debates.index.section_footer.help_text_2",
+                        org: link_to(setting["org_name"], new_user_registration_path))) %></p>
+              </p>
+            <% end %>
           </div>
         <% end %>
       </div>
 
       <div class="small-12 medium-3 column">
         <aside class="margin-bottom">
-          <%= link_to t("debates.index.start_debate"), new_debate_path(tags: tags.any? ? tags.map{|t| t.name} : nil), class: "button expanded", onclick: can_create ? "return true" : "alert('#{t("alerts.select_one_category", model: t("activerecord.models.debate.one"))}'); return false;" , disabled: !can_create %>
+          <%= link_to t("debates.index.start_debate"), new_debate_path, class: "button expanded" %>
           <%= render "shared/projekts_sidebar" %>
           <%= render "shared/categories", taggable: "debate" %>
           <%= render "shared/tag_cloud", taggable: "debate" %>
+          <%= render SDG::Goals::TagCloudComponent.new("Debate") %>
         </aside>
       </div>
 

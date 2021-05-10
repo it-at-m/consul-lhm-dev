@@ -1,0 +1,96 @@
+// Shared tags icons
+
+.projekt-tag-chip {
+  display: inline-block;
+  font-size: 0.875em;
+  background: #ececec;
+  color: #222;
+  padding: 5px 1em;
+  margin-bottom: .5em;
+
+  a {
+    color: #222;
+  }
+
+  &.filtered-projekt {
+    background: #06408E;
+
+    a {
+      color: #fff;
+    }
+  }
+}
+
+.projekt-tag-chip-icon:before {
+  font-weight: bold;
+  font-family: "Font Awesome 5 Free";
+  color: inherit;
+  margin-right: 0.5em;
+}
+
+.projekt-tag-chip-projekt.projekt-tag-chip-icon:before {
+  content: "\f126";
+}
+
+.projekt-tag-chip-category.projekt-tag-chip-icon:before {
+  content: "\f02b";
+}
+
+.projekt-tag-chip-tag.projekt-tag-chip-icon:before {
+  content: "\f507";
+}
+
+
+// Sidebar filter buttons group
+
+.sidebar-filter-group {
+  display: flex;
+	margin-top: 1em;
+
+	.sidebar-filter-button {
+		flex-grow: 1;
+		background: #d4e5fb;
+		color: $brand;
+		border-radius: 3px;
+    margin-right: 0.5rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    text-align: center;
+	}
+
+	.sidebar-filter-button:hover,
+	.sidebar-filter-button:focus {
+		color: #fff;
+		background: $brand;
+		text-decoration:none;
+		cursor:pointer;
+	}
+
+	.sidebar-reset-filter-button {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background: #ececec;
+    cursor: pointer;
+		border-radius: 3px;
+    height: 2.5rem;
+    width: 2.5rem;
+    color: #9a9a9a;
+	}
+
+	.sidebar-reset-filter-button:hover,
+	.sidebar-reset-filter-button:focus {
+    background: #ddd;
+  }
+
+	.sidebar-reset-filter-button:before {
+		content: "\f2ed";
+		font-weight: bold;
+		font-family: "Font Awesome 5 Free";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	}
+
+}
