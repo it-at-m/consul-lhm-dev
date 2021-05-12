@@ -5,5 +5,5 @@
 <% end %>
 
 <% if @cards.any? %>
-  <%= render "shared/cards" %>
+  <%= render "shared/cards", cards: @cards %>
 <% end %>
