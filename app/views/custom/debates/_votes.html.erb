@@ -46,43 +46,40 @@
     <%= t("debates.debate.votes", count: debate.votes_score) %>
   </span>
 
-  <% if user_signed_in? && current_user.organization? %>
-    <div class="participation-not-allowed" style="display:none" aria-hidden="false">
-      <p>
-        <%= t("votes.organizations") %>
-      </p>
-    </div>
+  <% unless debate.votable_by?(current_user) %>
+    <% if user_signed_in? && current_user.organization? %>
+      <div class="participation-not-allowed" style="display:none" aria-hidden="false">
+        <p>
+          <%= t("votes.organizations") %>
+        </p>
+      </div>
 
-  <% elsif user_signed_in? && !current_user.level_two_or_three_verified? %>
-    <div class="participation-not-allowed" style="display:none" aria-hidden="false">
-      <p>
-        <%= sanitize(t("custom.votes.not_verified", verify_account: link_to_verify_account_short)) %>
-      </p>
-    </div>
+    <% elsif user_signed_in? && !current_user.level_two_or_three_verified? %>
+      <div class="participation-not-allowed" style="display:none" aria-hidden="false">
+        <p>
+          <%= sanitize(t("custom.votes.not_verified", verify_account: link_to_verify_account_short)) %>
+        </p>
+      </div>
 
-  <% elsif user_signed_in? && debate_phase && debate_phase.geozone_restricted && ((debate_phase.geozones.any? && !debate_phase.geozones.include?(current_user.geozone)) || current_user.geozone.blank? ) %>
-    <div class="participation-not-allowed" style="display:none" aria-hidden="false">
-      <p>
-        <%= sanitize(t("custom.votes.geo_restricted")) %>
-      </p>
-    </div>
+    <% elsif user_signed_in? && debate_phase &&
+      (debate_phase.geozones.any? && !debate_phase.geozones.include?(current_user.geozone)) %>
+      <div class="participation-not-allowed" style="display:none" aria-hidden="false">
+        <p>
+          <%= sanitize(t("custom.votes.geo_restricted")) %>
+        </p>
+      </div>
 
-  <% elsif user_signed_in? && debate_phase && debate_phase.expired? %>
-    <div class="participation-not-allowed" style="display:none" aria-hidden="false">
-      <p>
-        <%= sanitize(t("custom.votes.phase_expired")) %>
-      </p>
+    <% elsif user_signed_in? && debate_phase && debate_phase.expired? %>
+      <div class="participation-not-allowed" style="display:none" aria-hidden="false">
+        <p>
+          <%= sanitize(t("custom.votes.phase_expired")) %>
+        </p>
 
-  <% elsif user_signed_in? && !debate.votable_by?(current_user) %>
-    <div class="participation-not-allowed" style="display:none" aria-hidden="false">
-      <p>
-        <%= sanitize(t("votes.anonymous", verify_account: link_to_verify_account)) %>
-      </p>
-    </div>
+    <% elsif !user_signed_in? %>
+      <div tabindex="0">
+        <%= render "shared/login_to_vote" %>
+      </div>
+    <% end %>
 
-  <% elsif !user_signed_in? %>
-    <div tabindex="0">
-      <%= render "shared/login_to_vote" %>
-    </div>
-  <% end %>
+<% end %>
 </div>

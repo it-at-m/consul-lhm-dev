@@ -80,7 +80,7 @@
     </div>
 
     <%if extended_feature?("enable_categories") %>
-      <div class="small-12 column">
+      <div class="small-12 column margin-bottom">
         <%if @categories.any? %>
           <div id="category_tags" class="tags">
             <%= f.label :category_tag_list, t("proposals.form.tag_category_label") %>
@@ -94,7 +94,7 @@
     <%end%>
 
     <%if extended_feature?("enable_custom_tags") %>
-      <div class="small-12 column">
+      <div class="small-12 column margin-bottom">
         <%= f.text_field :tag_list_custom, value: @proposal.tags.where(kind: nil).map{|c| c.name}.join(","),
           label: t("custom.proposals.form.tags_custom"),
           placeholder: t("custom.proposals.form.tags_placeholder"),

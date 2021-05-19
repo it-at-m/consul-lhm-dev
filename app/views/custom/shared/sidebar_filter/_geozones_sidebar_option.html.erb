@@ -1,0 +1,9 @@
+<% show_geozone = ( selected_geozones.any? && !selected_geozones.include?(geozone.id) ) ? 'hide' : '' %>
+
+<li <%= "class=#{show_geozone}" %>>
+  <%= label_tag geozone.name, class: 'label_class' do %>
+    <%= check_box_tag geozone.name, geozone.id, selected_geozones.include?(geozone.id), { class: 'js-filter-geozones' }  %>
+    <%= geozone.name %>
+    <span class="checkmark"></span>
+  <% end %>
+</li>

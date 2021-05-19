@@ -1,6 +1,6 @@
 class SDG::FilterLinksComponent < ApplicationComponent
   attr_reader :records, :related_model, :see_more_link
-  delegate :link_list, to: :helpers
+  delegate :link_list, :link_list_sdg_tags, to: :helpers
 
   def initialize(records, related_model, see_more_link: nil)
     @records = records

@@ -17,11 +17,11 @@ de:
     max_votes_for_proposal_edit: "Anzahl von Stimmen bei der ein Vorschlag nicht länger bearbeitet werden kann"
     max_votes_for_proposal_edit_description: "Ab dieser Anzahl von Unterstützungen kann der Autor eines Vorschlags diesen nicht mehr bearbeiten"
     max_votes_for_debate_edit: "Anzahl von Stimmen bei der eine Diskussion nicht länger bearbeitet werden kann"
-    max_votes_for_debate_edit_description: "Ab dieser Anzahl von Unterstützungen kann der Autor einer Diskussion diese nicht länger ändern"
+    max_votes_for_debate_edit_description: "Ab dieser Anzahl von Unterstützungen kann der Autor einer Debatte diese nicht länger ändern"
     proposal_code_prefix: "Präfix für Vorschlag-Codes"
     proposal_code_prefix_description: "Dieses Präfix wird in den Vorschlägen vor dem Erstellungsdatum und der ID angezeigt"
-    featured_proposals_number: "Zahl der veröffentlichten Vorschläge"
-    featured_proposals_number_description: "Anzahl der veröffentlichten Vorschläge, die angezeigt werden, wenn die Funktion Veröffentlichte Vorschläge aktiv ist"
+    featured_proposals_number: "Zahl der hervorgehobenen Vorschläge"
+    featured_proposals_number_description: "Anzahl der hervorgehobenen Vorschläge, die angezeigt werden, wenn die Funktion hervorgehobene Vorschläge aktiv ist"
     votes_for_proposal_success: "Anzahl der notwendigen Stimmen zur Genehmigung eines Vorschlags"
     votes_for_proposal_success_description: "Wenn ein Vorschlag diese Anzahl von Unterstützungen erreicht, kann er nicht mehr mehr unterstützt werden und gilt als erfolgreich"
     months_to_archive_proposals: "Anzahl der Monate, um Vorschläge zu archivieren"
@@ -42,10 +42,10 @@ de:
     instagram_handle_description: "Falls ausgefüllt, wird es in der Fußzeile erscheinen"
     url: "Haupt-URL"
     url_description: "Haupt-URL Ihrer Website"
-    org_name: "Name der Organisation"
-    org_name_description: "Name Ihrer Organisation"
-    related_content_score_threshold: "Punktzahl-Grenze für verwandte Inhalte"
-    related_content_score_threshold_description: "Inhalte, die Benutzer als zusammenhangslos markiert haben"
+    org_name: "Name der Applikation"
+    org_name_description: "Der Name wird u.a. im Browser-Tab angezeigt"
+    related_content_score_threshold: "Schwellenwert für die Bewertung verwandter Inhalte"
+    related_content_score_threshold_description: "Blendet Inhalte aus, die von Nutzern als nicht verwandt markiert wurden, basierende auf den jeweiligen Bewertungen anderer Nutzer"
     hot_score_period_in_days: "Zeitrahmen (Tage), der für den Filter \"am Aktivsten\" verwendet wird"
     hot_score_period_in_days_description: "Der in mehreren Sektionen verwendete Filter \"Am Aktivsten\" basiert auf den Stimmen der letzten X Tage"
     mailer_from_name: "Absender E-Mail-Name"
@@ -53,20 +53,20 @@ de:
     mailer_from_address: "Absender E-Mail-Adresse"
     mailer_from_address_description: "Diese E-Mail-Adresse wird in E-Mails angezeigt, die von dieser Anwendung versendet werden"
     meta_title: "Seiten-Titel (SEO)"
-    meta_title_description: "Titel für die Seite <title>, zur Verbesserung der SEO"
+    meta_title_description: "Titel für die Seite <title>, zur Verbesserung der Auffindbarkeit in Suchmaschinen"
     meta_description: "Seiten-Beschreibung (SEO)"
-    meta_description_description: 'Website-Beschreibung <meta name="description">, zur Verbesserung der SEO'
+    meta_description_description: 'Website-Beschreibung <meta name="description">, zur Verbesserung der Auffindbarkeit in Suchmaschinen'
     meta_keywords: "Stichwörter (SEO)"
-    meta_keywords_description: 'Stichwörter <meta name="keywords">, zur Verbesserung der SEO'
+    meta_keywords_description: 'Stichwörter <meta name="keywords">, zur Verbesserung der Auffindbarkeit in Suchmaschinen'
     min_age_to_participate: erforderliches Mindestalter zur Teilnahme
     min_age_to_participate_description: "Nutzer ab diesem Alter können an allen Prozessen teilnehmen"
     proposals:
       successful_proposal_id: Erfolgreicher Vorschlag
       successful_proposal_id_description: Dieser Vorschlag wird als Referenz für einen erfolgreichen Vorschlag in der Unterstützungs-Anzahl verwendet und im Dashboard-Diagramm angezeigt.
       poll_short_title: Abstimmungen
-      poll_short_title_description: Kurze Beschreibung der Abstimmung-Funktion. Erlaubt Benutzer*innen Abstimmungen zu einem Vorschlag zu erstellen
+      poll_short_title_description: Kurze Beschreibung der Umfrage-Funktion. Erlaubt Benutzer*innen Umfragen zu einem Vorschlag zu erstellen
       poll_description: Beschreibung Abstimmung
-      poll_description_description: Detaillierte Beschreibung der Abstimmung-Funktion
+      poll_description_description: Detaillierte Beschreibung der Umfrage-Funktion
       poll_link: Weitere Informationen Link
       poll_link_description: Füge einen zusätzlichen Informationslink zur Funktionaliät der Abstimmung in der Kontrollanzeige hinzu
       email_short_title: E-Mail
@@ -83,55 +83,55 @@ de:
     direct_message_max_per_day: "Maximale Anzahl direkter Nachrichten per Tag"
     direct_message_max_per_day_description: "Maximale Anzahl direkter Nachrichten, die Benutzer*innen am Tag senden können"
     feature:
-      twitter_login: "Twitter login"
+      twitter_login: "Twitter Login"
       twitter_login_description: "Anmeldung mit Twitter-Account erlauben"
-      facebook_login: "Facebook login"
+      facebook_login: "Facebook Login"
       facebook_login_description: "Anmeldung mit Facebook-Account erlauben"
-      google_login: "Google login"
+      google_login: "Google Login"
       google_login_description: "Anmeldung mit Google-Account erlauben"
-      wordpress_login: "Wordpress login"
+      wordpress_login: "Wordpress Login"
       wordpress_login_description: "Anmeldung mit Wordpress-Account erlauben"
-      featured_proposals: "Veröffentlichte Vorschläge"
-      featured_proposals_description: "Zeigt veröffentlichte Vorschläge auf der Index Vorschlags-Seite"
+      featured_proposals: "Hervorgehobene Vorschläge"
+      featured_proposals_description: "Zeigt hervorgehobene Vorschläge auf der Index Vorschlags-Seite an"
       signature_sheets: "Unterschriftenbögen"
-      signature_sheets_description: "Es ermöglicht das Hinzufügen von vor Ort gesammelten Unterschriften aus dem Administrationspanel zu Vorschlägen und Investitionsprojekten des Budgets"
+      signature_sheets_description: "Das Hinzufügen von offline-Unterschriften zu (Investitions-)Vorschlägen wird ermöglicht."
       user:
-        recommendations: "Empfehlungen"
-        recommendations_description: "Zeigt Nutzerempfehlungen auf der Startseite auf Grundlage der Tags aus den folgenden Objekten"
-        skip_verification: "Benutzer*überprüfung überspringen"
-        skip_verification_description: "Dies wird die Nutzerüberprüfung deaktivieren und alle registrierten Nutzer werden fähig sein, an allen Prozessen teilzunehmen"
+        recommendations: "Empfehlungen auf Startseite"
+        recommendations_description: "Zeigt auf Basis des Nutzerverhaltens Empfehlungen zu Vorschlägen und Diskussionen auf der Startseite an"
+        skip_verification: "Verifizierung von Benutzern überspringen"
+        skip_verification_description: "Die Verifizierung der Benutzer wird deaktiviert. Alle Benutzer können alle Module ohne Einschränkung nutzen."
         recommendations_on_debates: "Empfehlungen für Diskussionen"
-        recommendations_on_debates_description: "Zeigt Nutzern Empfehlungen für Diskussionenseiten an, basierend auf den Tags und den Objekten, denen sie folgen"
+        recommendations_on_debates_description: "Zeigt Diskussions-Empfehlungen auf der Diskussionsübersichtsseite an, basierend auf dem Nutzerverhalten."
         recommendations_on_proposals: "Empfehlungen für Vorschläge"
-        recommendations_on_proposals_description: "Zeigt Nutzern Empfehlungen für Vorschlagsseiten an, basierend auf den Tags und den Objekten, denen sie folgen"
-      community: "Community für Vorschläge und Investitionen"
+        recommendations_on_proposals_description: "Zeigt Vorschlags-Empfehlungen auf der Vorschlagssübersichtsseite an, basierend auf dem Nutzerverhalten."
+      community: "Community für Vorschläge und Investitionsvorschläge"
       community_description: "Schaltet den Community-Bereich in der Rubrik Vorschläge und Investitionsprojekte der Budgets ein"
-      map: "Standort des Antrages und der Budgetinvestition"
+      map: "Der Standordt von Vorschlägen und Investitonsvorschlägen wird angezeigt"
       map_description: "Ermöglicht die Geolokalisierung der Vorschläge und Investitionsprojekte"
       allow_images: "Upload und Anzeigen von Bildern erlauben"
-      allow_images_description: "Ermöglicht Nutzern das Hochladen von Bildern, wenn Vorschläge und Investitionsprojekte von partizipativen Budgets erstellt werden"
+      allow_images_description: "Ermöglicht Nutzern das Hochladen von Bildern für Vorschläge und Investitionsvorschlägen"
       allow_attached_documents: "Upload und Anzeigen von angehängten Dokumenten erlauben"
-      allow_attached_documents_description: "Ermöglicht Nutzern das Hochladen von Dokumenten, wenn Vorschläge und Investitionsprojekte von partizipativen Budgets erstellt werden"
-      guides: "Anleitungen zum Erstellen von Anträgen und Investitionsprojekten"
+      allow_attached_documents_description: "Ermöglicht Nutzern das Hochladen von Dokumenten für Vorschläge und Investitionsvorschlägen"
+      guides: "Anleitungen zum Erstellen von Vorschlägen und Investitionsprojekten"
       guides_description: "Zeigt eine Anleitung an, um Vorschlägen von Investitionsprojekten zu unterscheiden, falls es ein aktives partipatives Budget gibt"
-      public_stats: "Öffentliche Statistiken"
-      public_stats_description: "Öffentliche Statistiken im Administrationsbereich anzeigen"
+      public_stats: "Statistiken"
+      public_stats_description: "Statistiken im Administrationsbereich anzeigen"
       help_page: "Hilfeseite"
-      help_page_description: 'Zeigt ein "Hilfe"-Menü an, das eine Seite mit Informationen über die einzelnen aktivierten Funktionen enthält'
+      help_page_description: 'Zeigt eine Hilfeseite zu den aktivieren Modulen'
       remote_translations: "Übersetzung ablegen"
       remote_translations_description: "Zeigt eine Schaltfläche an, mit der Benutzer eine Übersetzung anfordern können, wenn keine Inhalte in ihrer Sprache existieren."
       translation_interface: "Übersetzung Interface"
-      translation_interface_description: "Zeigt die manuelle Übersetzungsoberfläche an, mit der Benutzer*innen ihren Inhalt in allen verfügbaren Sprachen der Anwendung eingeben können. Diese Option wirkt sich nur auf Benutzeranwendungsformulare aus und ist unabhängig davon immer im Administrationsbereich aktiv."
-      remote_census: "Konfigurieren Sie die Verbindung zum abgelegten Zensus (SOAP)"
-      remote_census_description: "Ermöglicht die Konfiguration der Verbindung zum abgewählten Zensus jeder Institution"
-      valuation_comment_notification: "Bewertung Kommentar Benachrichtigung"
-      valuation_comment_notification_description: "Senden Sie eine E-Mail an alle verbundenen Benutzer*innen, wenn ein neuer Bewertungskommentar erstellt wird - mit Ausnahme des Bewertungskommentars für Budgetinvestitionen"
+      translation_interface_description: "Ermöglicht es Nutzern ihre Inhalte in mehreren Sprachen zu erstellen"
+      remote_census: "Konfigurieren Sie die Verbindung zu einem Melderegister per API (SOAP)"
+      remote_census_description: "Ermöglicht den Nutzer-Abgleich per API"
+      valuation_comment_notification: "Benachrichtigung bei Gutachterbewertungen"
+      valuation_comment_notification_description: "E-Mailversand bei Gutachterbewertungen von Investitionsvorschlägen an alle Nutzer:innen, die in Zusammenhang mit dem Investitionsvorschlag stehen"
       graphql_api: "GraphQL API"
-      elasticsearch: "Elasticsearch"
-      elasticsearch_description: "Elasticsearch ist die führende verteilte, RESTful, open-source Such- und Analyse-Engine, die für Geschwindigkeit, horizontale Skalierbarkeit, Zuverlässigkeit und einfach Verwaltung entwicklet wurde."
       dashboard:
-        notification_emails: "Dashboard Benachrichtigungs-Emails"
-        notification_emails_description: "Aktivieren Sie das Senden von Dashboard Benachrichtigungs-Emails an die Autoren von Vorschlägen."
+        notification_emails: "Dashboard Email-Benachrichtigungen"
+        notification_emails_description: "Aktivieren Sie das Senden von Dashboard-E-Mail-Benachrichtigungen an die Autoren von Vorschlägen"
+      sdg: SDG
+      sdg_description: Aktivieren Sie die Abschnitte "Sustainable Development Goals" im Administrationsmenü und in den Globalen Einstellungen.
     remote_census:
       general:
         endpoint: "Endpunkt"
@@ -154,8 +154,8 @@ de:
         date_of_birth_description: "In welchem Antwortpfad befindet sich das Geburtsdatum des Benutzers?"
         postal_code: "Pfad für Postleitzahl"
         postal_code_description: "In welchem Antwortpfad befindet sich die Postleitzahl des Benutzers?"
-        district: "Pfad für Gebiet"
-        district_description: "In welchem Antwortpfad befindet sich der Gebiet des Benutzers?"
+        district: "Pfad für Bezirk"
+        district_description: "In welchem Antwortpfad befindet sich der Bezirk des Benutzers?"
         gender: "Pfad für Geschlecht"
         gender_description: "In welchem Antwortpfad befindet sich das Geschlecht des Benutzers?"
         name: "Pfad für Vornamen"
@@ -172,14 +172,14 @@ de:
       zoom: "Zoom"
       zoom_description: "Zoomen, um die Kartenposition anzuzeigen"
     process:
-      debates: "Diskussionen"
-      debates_description: "Der Diskussionenraum der Bürger richtet sich an alle, die Themen präsentieren können, die sie betreffen und zu denen sie ihre Ansichten mit anderen teilen wollen"
+      debates: "Debatten"
+      debates_description: "Der Debattenraum der Bürger richtet sich an alle, die Themen präsentieren können, die sie betreffen und zu denen sie ihre Ansichten mit anderen teilen wollen"
       proposals: "Vorschläge"
       proposals_description: "Die Vorschläge der Bürger sind eine Möglichkeit für Nachbarn und Kollektive direkt zu entscheiden, wie sie ihre Stadt gestalten wollen, nachdem sie ausreichende Unterstützung erhalten und sich einer Bürgerabstimmung unterzogen haben"
       polls: "Abstimmungen"
       polls_description: "Bürgerabstimmungen sind ein partizipatorischer Mechanismus, mit dem Bürger mit Wahlrecht direkte Entscheidungen treffen können"
-      budgets: "Budget"
-      budgets_description: "Bei Budgets entscheiden die Bürger, welche von ihren Nachbarn vorgestellten Projekte einen Teil des Budgets erhalten"
+      budgets: "Bürgerhaushalt"
+      budgets_description: "Bei Bürgerhaushalten entscheiden die Bürger, welche von ihren Nachbarn vorgestellten Projekte einen Teil des Budgets erhalten"
       legislation: "Kollaborative Gesetzgebung"
       legislation_description: "In partizipativen Prozessen wird den Bürgern die Möglichkeit geboten, sich an der Ausarbeitung und Änderung von Vorschriften, die die Gesellschaft betreffen, zu beteiligen und ihre Meinung zu bestimmten geplanten Aktionen abzugeben"
     html:
@@ -209,6 +209,15 @@ de:
         max_size_description: "Zulässige maximale Größe für upload eines Dokuments (in Megabytes/MB)"
         content_types: "Akzeptierte Inhaltstypen für Dokumente"
         content_types_description: "Wählen Sie alle Inhaltsarten, die zum Upload für Dokumente erlaubt sind"
-    features:
-      elasticsearch: "Elasticsearch"
-      elasticsearch_description: "Elasticsearch ist die führende verteilte, RESTful, Open-Source-Such- und Analyse-Engine, die auf Geschwindigkeit, horizontale Skalierbarkeit, Zuverlässigkeit und einfache Verwaltung ausgelegt ist."
+    sdg:
+      process:
+        debates: Mit Diskussionen zusammenhängende SDGs
+        debates_description: Das Verknüpfen von Diskussionen und SDGs erlauben.
+        proposals: Mit Vorschlägen zusammenhängende SDGs
+        proposals_description: Das Verknüpfen von Vorschlägen und SDGs erlauben.
+        polls: Mit Abstimmungen zusammenhängende SDGs
+        polls_description: Das Verknüpfen von Abstimmungen und SDGs erlauben.
+        budgets: Mit Budgets zusammenhängende SDGs
+        budgets_description: Das Verknüpfen von Budgets und SDGs erlauben.
+        legislation: Mit Beteiligungsverfahren zusammenhängende SDGs
+        legislation_description: Das Verknüpfen von Beteiligungsverfahren und SDGs erlauben.

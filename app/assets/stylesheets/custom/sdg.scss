@@ -4,3 +4,106 @@
      position: relative;
   }
 }
+
+
+// Styling goals
+.panel {
+  li.unselected-goal {
+    a {
+      background-color: #ececec !important;
+      color: #222 !important;
+    }
+  }
+}
+
+li.unselected-goal a:hover img {
+  opacity: 1 !important;
+  filter: grayscale(0);
+}
+
+
+li.unselected-goal {
+
+  img {
+    filter: grayscale(1);
+  }
+
+  a[data-code='1'] img {
+    opacity: 40%;
+  }
+
+  a[data-code='2'] img {
+    opacity: 85%;
+  }
+
+  a[data-code='3'] img {
+    opacity: 60%;
+  }
+
+  a[data-code='4'] img {
+    opacity: 40%;
+  }
+
+  a[data-code='5'] img {
+    opacity: 50%;
+  }
+
+  a[data-code='6'] img {
+    opacity: 70%;
+  }
+
+  a[data-code='7'] img {
+    opacity: 100%;
+  }
+
+  a[data-code='8'] img {
+    opacity: 35%;
+  }
+
+  a[data-code='9'] img {
+    opacity: 60%;
+  }
+
+  a[data-code='10'] img {
+    opacity: 40%;
+  }
+
+  a[data-code='11'] img {
+    opacity: 80%;
+  }
+
+  a[data-code='12'] img {
+    opacity: 60%;
+  }
+
+  a[data-code='13'] img {
+    opacity: 50%;
+  }
+
+  a[data-code='14'] img {
+    opacity: 50%;
+  }
+
+  a[data-code='15'] img {
+    opacity: 70%;
+  }
+
+  a[data-code='16'] img {
+    opacity: 40%;
+  }
+
+  a[data-code='17'] img {
+    opacity: 35%;
+  }
+}
+
+// Styling sdg-related-list-selector
+
+.sdg-related-list-selector .goals legend {
+  font-size: 0.875em;
+  font-style: normal !important;
+}
+
+input.sdg-related-list-selector-input {
+  margin-top: 0.5em;
+}
