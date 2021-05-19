@@ -62,10 +62,10 @@
         <%= render "shared/order_links", i18n_namespace: "debates.index" %>
 
         <div class='row'>
-          <div class='small-12 medium-9 column small'>
+          <div class='small-6 column small'>
             <%= link_to t('debates.index.section_header.help'), '#section_help' %>
           </div>
-          <div class='small-12 medium-3 column small'>
+          <div class='small-6 column small'>
             <% if extended_feature?('show_number_of_entries_in_modules') %>
               <div class='float-right'>
                 <%= @debates.except(:limit, :offset).count %>
@@ -114,6 +114,9 @@
         <aside class="margin-bottom">
           <%= link_to t("debates.index.start_debate"), new_debate_path, class: "button expanded" %>
           <%= render "shared/projekts_sidebar" %>
+          <% if extended_feature?('show_geozone_filter_in_sidebar') %>
+            <%= render "shared/sidebar_filter/geozones_sidebar" %>
+          <% end %>
           <%= render "shared/categories", taggable: "debate" %>
           <%= render "shared/tag_cloud", taggable: "debate" %>
           <%= render SDG::Goals::TagCloudComponent.new("Debate") %>

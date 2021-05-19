@@ -40,6 +40,27 @@
   content: "\f507";
 }
 
+.projekt-tag-chip-geozones.projekt-tag-chip-icon:before {
+  content: "\f21d";
+}
+
+.sdg-tag-icon {
+  position: relative;
+  padding-left: 22px;
+}
+
+.sdg-tag-icon:before{
+  content: '';
+  background: url(custom/sdg_logo.svg);
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  margin-right: 0.5rem;
+  position: absolute;
+  top: 7px;
+  left: 0;
+}
+
 
 // Sidebar filter buttons group
 
@@ -93,4 +114,16 @@
     transform: translate(-50%, -50%);
 	}
 
+}
+
+// Edit Custom Block link
+
+.edit-custom-block-link {
+  margin-left: .5em;
+}
+
+.edit-custom-block-link::before {
+  content: '\f044';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: normal;
 }

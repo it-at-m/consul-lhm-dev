@@ -80,9 +80,9 @@ module ProjektsHelper
   def get_projekt_phase_limitations(phase)
     if phase
       return phase.geozones.names.join(', ') if phase.geozones.any? && phase.geozone_restricted
-      return 'Alle Bürger der Stadt' if phase.geozone_restricted
+      return 'Nur Bürger der Stadt' if phase.geozone_restricted
     end
-    'Alle Nutzer der Plattform'
+    ''
   end
 
   def related_polls(projekt, timestamp = Date.current.beginning_of_day)

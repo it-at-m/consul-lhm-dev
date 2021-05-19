@@ -46,6 +46,8 @@ de:
         custom_help_text_in_modules_description: Am unteren Ende der Modulübersicht können individuelle Hilfstexte platziert werden
         show_number_of_entries_in_modules: Anzahl der Beteiligungen anzeigen
         show_number_of_entries_in_modules_description: Zeigt die Anzahl der Diskussionsbeiträge, Vorschläge und Abstimmungen an
+        show_geozone_filter_in_sidebar: Filter nach Gebieten
+        show_geozone_filter_in_sidebar_description: Aktivieren Sie Gebietsfilter in der rechten Seitenleiste für Diskussionen, Vorschläge und Abstimmungen
 
 
       extended_option:

@@ -1,9 +1,14 @@
 <fieldset class="sdg-related-list-selector">
-  <legend><%= t("sdg.related_list_selector.title") %></legend>
+  <legend><%= t("custom.sdg.related_list_selector.title") %></legend>
 
   <div class="input-section">
     <fieldset class="goals">
-      <legend><%= t("sdg.related_list_selector.goal_list", record: relatable_name) %></legend>
+      <legend><%= sanitize(t("custom.sdg.related_list_selector.goal_list",
+                                   link: link_to(t("sdg.related_list_selector.help.text"),
+                                                   sdg_help_path,
+                                                   title: t("shared.target_blank"),
+                                                   target: "_blank"))) %>
+      </legend>
       <div class="goal-list">
         <%= f.collection_check_boxes(:sdg_goal_ids, goals, :id, :code) do |checkbox_form| %>
           <%= goal_field(checkbox_form) %>
@@ -14,12 +19,6 @@
     <%= f.text_field :related_sdg_list,
                       class: "input",
                       placeholder: t("sdg.related_list_selector.placeholder"),
-                      hint: sanitize(t("sdg.related_list_selector.hint",
-                                      link: link_to(t("sdg.related_list_selector.help.text"),
-                                                      sdg_help_path,
-                                                      title: t("shared.target_blank"),
-                                                      target: "_blank")),
-                                     attributes: %w[href title target]),
                       data: { "suggestions-list": sdg_related_suggestions,
                               "remove-tag-text": t("sdg.related_list_selector.remove_tag") } %>
   </div>

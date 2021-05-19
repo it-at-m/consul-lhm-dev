@@ -165,6 +165,7 @@ class Setting < ApplicationRecord
         "extended_feature.hide_comment_replies_by_default": false,
         "extended_feature.custom_help_text_in_modules": false,
         "extended_feature.show_number_of_entries_in_modules": false,
+        "extended_feature.show_geozone_filter_in_sidebar": false,
         # "extended_feature.elasticsearch": false,
         "extended_option.max_active_proposals_per_user": 100,
         "extended_option.description_max_length": 6000

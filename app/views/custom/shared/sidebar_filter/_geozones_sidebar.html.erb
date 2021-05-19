@@ -1,0 +1,43 @@
+<% resource_name = @resource_name.capitalize.constantize.model_name.human(count: :other) %>
+
+<div class="sidebar-divider"></div>
+
+<h2 class="sidebar-title projekt-tag-chip-geozones projekt-tag-chip-icon"><%= t("custom.geozones.sidebar_filter.title") %></h2>
+
+<div id='filter-geozones'>
+
+  <ul>
+    <li <%= "class=label-selected" if (@selected_geozone_restriction == 'all_resources') || (@selected_geozone_restriction == '') %> >
+      <%= label_tag 'geozone_restriction_all_resources', class: 'label_class' do %>
+        <%= radio_button_tag :geozone_restriction, 'all_resources', (@selected_geozone_restriction == 'all_resources') || (@selected_geozone_restriction == ''), { class: 'js-filter-geozone-restriction' }  %>
+        <%= t('custom.geozones.sidebar_filter.all_resources', resource_name: resource_name) %>
+        <span class="checkmark"></span>
+      <% end %>
+    </li>
+
+    <li <%= "class=label-selected" if @selected_geozone_restriction == 'only_citizens' %> >
+      <%= label_tag 'geozone_restriction_only_citizens', class: 'label_class toggle-geozones-list' do %>
+        <%= radio_button_tag :geozone_restriction, 'only_citizens', @selected_geozone_restriction == 'only_citizens', { class: 'js-filter-geozone-restriction' }  %>
+        <%= t('custom.geozones.sidebar_filter.only_citizens') %>
+        <span class="checkmark"></span>
+      <% end %>
+    </li>
+
+    <ul id="geozones-list">
+      <% @geozones.each do |geozone| %>
+        <%= render partial: "shared/sidebar_filter/geozones_sidebar_option", locals: { geozone: geozone, selected_geozones: @selected_geozones } %>
+      <% end  %>
+      <small <%= "class=hide" unless @selected_geozones.any?  %>>
+        <%= link_to t('custom.geozones.sidebar_filter.show_more'), '#', class: 'js-show-all-geozones'  %>
+      </small>
+    </ul>
+  </ul>
+
+  <div class="sidebar-filter-group">
+    <div class='js-apply-geozone-filter sidebar-filter-button' >
+      <%= t('custom.geozones.sidebar_filter.filter_button') %>
+    </div>
+    <div class='js-reset-geozone-filter sidebar-reset-filter-button' >
+    </div>
+  </div>
+</div>

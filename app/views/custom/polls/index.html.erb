@@ -30,10 +30,10 @@
       <% if @polls.any? %>
 
         <div class='row'>
-          <div class='small-12 medium-9 column small'>
+          <div class='small-6 column small'>
             <%= link_to t('polls.index.section_header.help'), '#section_help' %>
           </div>
-          <div class='small-12 medium-3 column small'>
+          <div class='small-6 column small'>
             <% if extended_feature?('show_number_of_entries_in_modules') %>
               <div class='float-right'>
                 <%= @all_polls.count %>
@@ -83,6 +83,9 @@
     <div class="small-12 medium-3 column">
       <aside class="margin-bottom">
         <%= render "shared/projekts_sidebar" %>
+        <% if extended_feature?('show_geozone_filter_in_sidebar') %>
+          <%= render "shared/sidebar_filter/geozones_sidebar" %>
+        <% end %>
         <%= render "shared/categories", taggable: "poll" %>
         <%= render "shared/tag_cloud", taggable: "poll" %>
         <%= render SDG::Goals::TagCloudComponent.new("Poll") %>

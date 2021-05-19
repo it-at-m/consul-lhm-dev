@@ -118,6 +118,8 @@
 //= require responsive_menu
 //= require click_out_warning
 //= require iframe_filter
+//= require sdg_custom
+//= require geozones
 //= require_tree ./sdg
 //= require_tree ./sdg_management
 
@@ -179,6 +181,8 @@ var initialize_modules = function() {
   App.IframeFilter.initialize();
   App.SDGRelatedListSelector.initialize();
   App.SDGManagementRelationSearch.initialize();
+  App.SDGCustom.initialize();
+  App.Geozones.initialize();
 };
 
 var destroy_non_idempotent_modules = function() {

@@ -8,7 +8,14 @@ de:
     sdg:
       goals:
         filter:
-          heading: ZIELE FÜR NACHHALTIGE ENTWICKLUNG
+          heading: UN-Nachhaltigkeitsziele
+      targets:
+        label: "Filter für Unterziele (%{more_link})"
+        more_link_text: Mehr Info
+        select: Unterziel auswählen
+      related_list_selector:
+        title: UN-Nachhaltigkeitsziele
+        goal_list: Sie können ein oder mehrere SDGs wählenoder im nachfolgenden Feld nach bestimmten Zielen und Unterzielen suchen. Für mehr Infos besuchen Sie die %{link}.
     pages:
       social_share:
         share: Teilen
@@ -33,10 +40,10 @@ de:
         public_activity: Meine Aktivität veröffentlichen
         public_interests: Vorschläge, denen ich folge, veröffentlichen
 
-        email_on_comment: Benachrichtigung erhalten, bei Kommentare zu meinen Aktivitäten
-        email_on_comment_reply: Benachrichtigung erhalten, bei Antworten auf meine Kommentare
-        newsletter: Benachrichtigung erhalten, bei wichtigen System-Infos zur Plattform
-        email_digest: Erhalten Sie eine Zusammenfassung Benachrichtigungen zu Vorschlägen
+        email_on_comment: E-Mail-Benachrichtigung erhalten, bei Kommentare zu meinen Aktivitäten
+        email_on_comment_reply: E-Mail-Benachrichtigung erhalten, bei Antworten auf meine Kommentare
+        newsletter: E-Mail-Benachrichtigung erhalten, bei wichtigen System-Infos
+        email_digest: E-Mail-Benachrichtigung erhalten, bei wichtigen System-Infos
         email_on_direct_message: Private Nachrichten per Mail zulassen
 
       show:
@@ -92,7 +99,7 @@ de:
           proposal_phase: Vorschlagsphase
           voting_phase: Abstimmungsphase
           voting_manage: Abstimmungen verwalten
-          geozone_restricted: Nur verifizierte Nutzer
+          geozone_restricted: Nur Bürger der Stadt 
           show_in_navigation_checkbox: Projekt in Navigation anzeigen
           show_in_navigation:
             yes: Ja
@@ -122,6 +129,13 @@ de:
       errors:
         presence: 'Bitte wählen Sie ein Projekt'
       backlink: Zur Projektübersicht
+    geozones:
+      sidebar_filter:
+        all_resources: "Alle %{resource_name}"
+        only_citizens: Nur Bürger der Stadt
+        show_more: Mehr anzeigen
+        title: Gebiete
+        filter_button: Gebiete filtern
     proposals:
       form:
         tags_custom: Nutzer-Tags
