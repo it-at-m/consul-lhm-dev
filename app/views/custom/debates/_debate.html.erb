@@ -1,16 +1,18 @@
 <% cache [locale_and_user_status, debate, @debate_votes[debate.id], params[:tags], params[:projekts]] do %>
   <div id="<%= dom_id(debate) %>" class="debate clear" data-type="debate">
     <div class="panel">
-     <% if debate.image.present? %>
-       <div class="row">
-         <div class="small-12 medium-3 large-2 column text-center">
-           <%= image_tag debate.image_url(:thumb),
-             alt: debate.image.title.unicode_normalize %>
-       </div>
-     <% else %>
-       <div class="row">
-       <% end %>
+      <div class="row">
+
+        <% if debate.image.present? %>
+        <div class="small-12 medium-3 large-2 column text-center">
+          <%= image_tag debate.image_url(:thumb),
+            alt: debate.image.title.unicode_normalize %>
+        </div>
         <div class="small-12 medium-5 large-7 column">
+        <% else %>
+        <div class="small-12 medium-9 large-9 column">
+        <% end %>
+
           <div class="debate-content">
             <h3><%= link_to debate.title, debate %></h3>
             <p class="debate-info">
@@ -58,7 +60,7 @@
           </div>
         </div>
 
-        <div id="<%= dom_id(debate) %>_votes" class="small-12 medium-4 large-3 column">
+        <div id="<%= dom_id(debate) %>_votes" class="small-12 medium-3 large-3 column">
             <%= render "debates/votes", debate: debate %>
         </div>
 
