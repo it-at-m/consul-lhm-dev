@@ -69,11 +69,15 @@ class PollsController < ApplicationController
     case @selected_geozone_restriction
     when 'all_resources'
       @polls
+    when 'no_restriction'
+      @polls = @polls.left_outer_joins(:geozones_polls).where("geozone_restricted = ? AND geozones_polls.geozone_id IS NULL", false).distinct
     when 'only_citizens'
-      if @selected_geozones.blank?
-        @polls = @polls.where( geozone_restricted: true )
+      @polls = @polls.left_outer_joins(:geozones_polls).where("polls.geozone_restricted = ? AND geozones_polls.geozone_id IS NULL", true)
+    when 'only_geozones'
+      if @selected_geozones.present?
+        @polls = @polls.left_outer_joins(:geozones_polls).where("polls.geozone_restricted = ? AND geozones_polls.geozone_id IN (?)", true, @selected_geozones)
       else
-        @polls = @polls.where( geozone_restricted: true ).joins(:geozones).where( geozones: { id: @selected_geozones } )
+        @polls = @polls.left_outer_joins(:geozones_polls).where("polls.geozone_restricted = ? AND geozones_polls.geozone_id IS NOT NULL", true)
       end
     end
   end

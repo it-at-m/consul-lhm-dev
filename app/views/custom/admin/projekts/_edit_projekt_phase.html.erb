@@ -15,25 +15,9 @@
   </tr>
 
   <tr class="projekt_phase_geozones">
-    <td colspan="4">
-      <div class="small-6 medium-6">
-        <%= phase_form.check_box :geozone_restricted, { label: t("custom.admin.projekts.edit.geozone_restricted") , data: { checkbox_toggle: "#geozones_for_#{phase_name}" } } %>
-      </div>
-
-      <div id='<%= "geozones_for_#{phase_name}" %>' style="<%= projekt_phase.geozone_restricted? ? "" : "display:none" %>">
-        <div class="row">
-          <div class="clear">
-            <%= phase_form.collection_check_boxes(:geozone_ids, @geozones, :id, :name) do |b| %>
-              <div class="small-6 medium-3 geozone-check-box">
-                <%= b.label do %>
-                  <%= b.check_box + b.text %>
-                <% end %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
-
+    <td></td>
+    <td colspan="3">
+      <%= render partial: 'phase_geozone_restriction', locals: { phase_form: phase_form, projekt_phase: projekt_phase, phase_name: phase_name } %>
     </td>
   </tr>
 <% end %>

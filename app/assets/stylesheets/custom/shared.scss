@@ -1,5 +1,10 @@
 // Shared tags icons
 
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .projekt-tag-chip {
   display: inline-block;
   font-size: 0.875em;
@@ -7,6 +12,7 @@
   color: #222;
   padding: 5px 1em;
   margin-bottom: .5em;
+  margin-right: .3em;
 
   a {
     color: #222;
@@ -40,7 +46,7 @@
   content: "\f507";
 }
 
-.projekt-tag-chip-geozones.projekt-tag-chip-icon:before {
+.projekt-tag-chip-geozone.projekt-tag-chip-icon:before {
   content: "\f21d";
 }
 
@@ -126,4 +132,15 @@
   content: '\f044';
   font-family: 'Font Awesome 5 Free';
   font-weight: normal;
+}
+
+
+// Summary styling
+
+.debate-show blockquote, .proposal-show blockquote, .poll-question-show blockquote, .budget-investment-show blockquote, .polls-show blockquote, .debate-quiz blockquote, .budget-investment-show blockquote, .draft-panels blockquote, .debate-questions blockquote, .communities-show blockquote, .topic-show blockquote, .milestone-content blockquote {
+  background-color: lighten($brand, 70%);
+  font-size: 1.25em;
+	padding-top: 10px;
+	padding-bottom: 8px;
+	color: $black;
 }

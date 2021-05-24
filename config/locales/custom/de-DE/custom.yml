@@ -132,7 +132,9 @@ de:
     geozones:
       sidebar_filter:
         all_resources: "Alle %{resource_name}"
-        only_citizens: Nur Bürger der Stadt
+        no_restriction: Ohne Gebietszuordnung
+        only_citizens: Ganze Stadt
+        only_geozones: Zuordnung zu Stadtteilen
         show_more: Mehr anzeigen
         title: Gebiete
         filter_button: Gebiete filtern

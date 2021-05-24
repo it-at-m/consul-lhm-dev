@@ -13,6 +13,17 @@
     </div>
   <% end %>
 
+  <% if taggable.projekt.present? && @resource_name != 'poll' && taggable.projekt.send("#{@resource_name}_phase").present?%>
+    <%= prepare_geo_restriction_tag(taggable, @resource_name, tag_filter_class) %>
+  <% elsif @resource_name == 'poll' %>
+    <%= prepare_geo_restriction_tag_for_polls(taggable, tag_filter_class) %>
+  <% else %>
+    <% active_projekt_class = params[:geozone_restriction] == 'no_restriction' ? 'filtered-projekt' : ''%>
+    <div class="projekt-tag-chip <%= active_projekt_class %>">
+      <%= link_to t( "custom.geozones.sidebar_filter.no_restriction" ), (taggables_path(taggable.class.name.underscore, '') + "&geozone_restriction=no_restriction" ), class: "#{tag_filter_class} projekt-tag-chip-icon projekt-tag-chip-geozone" %>
+    </div>
+  <% end %>
+
   <% if extended_feature?("enable_categories") && taggable.tags.category.any? %>
     <% taggable.tags.category.each do |category| %>
       <% active_projekt_class = params[:tags]&.split(",")&.include?(category.name) ? active_projekt_class = 'filtered-projekt' : active_projekt_class = '' %>

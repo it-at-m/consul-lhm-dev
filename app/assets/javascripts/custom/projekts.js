@@ -86,12 +86,26 @@
     modifyFilterParams: function(clickedLink) {
       var currentPageUrl = new URL(window.location.href);
       var currentProjektIds;
+      var currentGeoZoneRestriction;
+      var currentGeoZoneIds;
       var currentTags;
 
       if (currentPageUrl.searchParams.get('projekts')) {
         currentProjektIds = currentPageUrl.searchParams.get('projekts').split(',');
       } else {
         currentProjektIds = [];
+      }
+
+      if (currentPageUrl.searchParams.get('geozone_restriction')) {
+        currentGeoZoneRestriction = currentPageUrl.searchParams.get('geozone_restriction');
+      } else {
+        currentGeoZoneRestriction = '';
+      }
+
+      if (currentPageUrl.searchParams.get('geozones')) {
+        currentGeoZoneIds = currentPageUrl.searchParams.get('geozones').split(',');
+      } else {
+        currentGeoZoneIds = [];
       }
 
       if (currentPageUrl.searchParams.get('tags')) {
@@ -106,6 +120,8 @@
 
       var clickedUrl = new URL(clickedLink);
       var newProjektId;
+      var newGeoZoneRestriction;
+      var newGeoZoneId;
       var newTag;
 
       if (clickedUrl.searchParams.get('projekts')) {
@@ -117,17 +133,40 @@
             currentProjektIds.splice(index, 1);
           }
           currentPageUrl.searchParams.set('projekts', currentProjektIds.join(','))
-          window.history.pushState('', '', currentPageUrl)
-          window.location.href = currentPageUrl;
         } else {
           currentProjektIds.push(newProjektId)
           currentProjektIds = currentProjektIds.filter( function(element) { return element !== '' } )
           currentPageUrl.searchParams.set('projekts', currentProjektIds.join(','))
-          window.history.pushState('', '', currentPageUrl)
-          window.location.href = currentPageUrl.href;
         }
       }
 
+      if (clickedUrl.searchParams.get('geozone_restriction')) {
+        newGeoZoneRestriction = clickedUrl.searchParams.get('geozone_restriction');
+
+        if (currentGeoZoneRestriction == newGeoZoneRestriction) {
+          currentPageUrl.searchParams.set('geozone_restriction', '')
+        } else {
+          currentPageUrl.searchParams.set('geozone_restriction', newGeoZoneRestriction)
+        }
+      }
+
+      if (clickedUrl.searchParams.get('geozones')) {
+        newGeoZoneId = clickedUrl.searchParams.get('geozones').split(',')[0];
+
+        if (currentGeoZoneIds.includes(newGeoZoneId)) {
+          var index = currentGeoZoneIds.indexOf(newGeoZoneId);
+          if (index > -1) {
+            currentGeoZoneIds.splice(index, 1);
+          }
+          currentPageUrl.searchParams.set('geozones', currentGeoZoneIds.join(','))
+          currentPageUrl.searchParams.set('geozone_restriction', 'only_geozones')
+        } else {
+          currentGeoZoneIds.push(newGeoZoneId)
+          currentGeoZoneIds = currentGeoZoneIds.filter( function(element) { return element !== '' } )
+          currentPageUrl.searchParams.set('geozones', currentGeoZoneIds.join(','))
+          currentPageUrl.searchParams.set('geozone_restriction', 'only_geozones')
+        }
+      }
 
       if (clickedUrl.searchParams.get('tags')) {
         newTag = clickedUrl.searchParams.get('tags').split(',')[0];
@@ -138,15 +177,15 @@
             currentTags.splice(index, 1);
           }
           currentPageUrl.searchParams.set('tags', currentTags.join(','))
-          window.history.pushState('', '', currentPageUrl)
-          window.location.href = currentPageUrl;
         } else {
           currentTags.push(newTag)
           currentPageUrl.searchParams.set('tags', currentTags.join(','))
-          window.history.pushState('', '', currentPageUrl)
-          window.location.href = currentPageUrl.href;
         }
       }
+
+
+      window.history.pushState('', '', currentPageUrl)
+      window.location.href = currentPageUrl.href;
 
     },
 

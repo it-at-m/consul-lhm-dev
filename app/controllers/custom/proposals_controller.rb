@@ -100,11 +100,17 @@ class ProposalsController
       case @selected_geozone_restriction
       when 'all_resources'
         @resources
+      when 'no_restriction'
+        query_string = "projekt_phases.geozone_restricted = ? OR proposals.projekt_id IS NULL"
+        @resources = @resources.left_outer_joins(:proposal_phase).where(query_string,  @selected_geozone_restriction )
       when 'only_citizens'
-        if @selected_geozones.blank?
-          @resources = @resources.joins(:debate_phase).where(projekt_phases: { geozone_restricted: true })
+        @resources = @resources.joins(:proposal_phase).where(projekt_phases: { geozone_restricted: @selected_geozone_restriction }).distinct
+      when 'only_geozones'
+        @resources = @resources.joins(:proposal_phase).where(projekt_phases: { geozone_restricted: @selected_geozone_restriction }).distinct
+        if @selected_geozones.present?
+          @resources = @resources.joins(:geozones).where(geozones: { id: @selected_geozones }).distinct
         else
-          @resources = @resources.joins(:geozones).where(projekt_phases: { geozone_restricted: true }).where(geozones: { id: @selected_geozones })
+          @resources = @resources.joins(:geozones).where.not(geozones: { id: nil }).distinct
         end
       end
     end

@@ -19,10 +19,14 @@ class Debate
     user.level_two_or_three_verified? &&
     (
       Setting['feature.user.skip_verification'].present? ||
+      projekt.blank? ||
       debate_phase && debate_phase.geozones.blank? ||
       (debate_phase && debate_phase.geozones.any? && debate_phase.geozones.include?(user.geozone) )
     ) &&
-    debate_phase && !debate_phase.expired?
+    (
+      projekt.blank? ||
+      debate_phase && !debate_phase.expired?
+    )
 
     #  user.voted_for?(self)
   end
