@@ -56,6 +56,10 @@ class ProposalsController
     set_proposal_votes(@proposal)
   end
 
+  def created
+    @resource_name = 'proposal'
+  end
+
   private
     def process_tags
       if params[:proposal][:tags]
