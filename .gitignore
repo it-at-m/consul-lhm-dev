@@ -23,6 +23,7 @@
 /config/deploy-secrets-cli_auf.yml
 /config/deploy-secrets-cli_demo.yml
 /config/deploy-secrets-cli_wit.yml
+/config/deploy-secrets/*
 /config/maintenance.yml
 
 /coverage
