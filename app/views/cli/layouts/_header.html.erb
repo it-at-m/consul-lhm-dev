@@ -1,25 +1,17 @@
 <header>
-  <% if display_remote_translation_info?(@remote_translations, I18n.locale) %>
-    <%= render "shared/remote_translations_button", remote_translations: @remote_translations %>
-  <% end %>
-
   <div class="row">
     <div class="column">
       <div class="top-bar">
 
-        <span data-responsive-toggle="responsive-menu" data-hide-for="medium" class="float-right">
+        <h2 class='header-title'>Öffentlichkeitsbeteiligung der<br><span>Landeshauptstadt München</span></h2>
+
+        <span data-responsive-toggle="responsive-menu" data-hide-for="medium" class="hamburger-menu">
           <span class="menu-icon dark" data-toggle></span>
         </span>
 
-        <div class='logo-image'>
-          <%= link_to root_path do %>
-            <%= svg_tag 'logo' %>
-          <% end %>
-        </div>
-
         <div class="top-bar-title">
           <%= link_to root_path, accesskey: "0" do %>
-            <%= image_tag(image_path_for("logo_text.png"), class: "float-left", alt: t("layouts.header.logo")) %>
+            <%= image_tag(image_path_for("logo_header.png"), class: "float-left", alt: t("layouts.header.logo")) %>
           <% end %>
         </div>
 
@@ -27,6 +19,9 @@
           <div class="top-bar-right">
             <div class="show-for-small-only">
               <div class="subnavigation row">
+
+                <h2 class='city-name'>"Öffentlichkeitsbeteiligung der Landeshauptstadt München"></h2>
+
                 <%= render "shared/subnavigation" %>
                 <div class="small-12 column">
                   <%= render "shared/top_links" %>
@@ -35,6 +30,8 @@
             </div>
           </div>
         </div>
+
+
       </div>
     </div>
   </div>
