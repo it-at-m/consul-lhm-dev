@@ -1,0 +1,20 @@
+.pagination .current, body > header,
+.wrapper > header, .top-bar, .categories a:hover, .categories a.is-active,
+.geozone a:hover,
+.geozone a.is-active, .budget-header, .jumbo-budget .button, .debate-questions .quiz-header .quiz-next:hover, .debate-questions .quiz-header .quiz-next:active, .ui-datepicker-header, .ui-datepicker-calendar .ui-state-hover,
+.ui-datepicker-calendar .ui-state-active, .budget-phases .tabs-controls .budget-prev-phase,
+.budget-phases .tabs-controls .budget-next-phase,
+.budget-phases .tabs-controls .budget-prev-phase-disabled,
+.budget-phases .tabs-controls .budget-next-phase-disabled {
+  background-color: $white;
+  color: $dark;
+}
+
+.top-bar {
+  margin-top: 1em;
+  margin-bottom: .5em;
+}
+
+.top-bar .top-bar-title a img {
+  width: 250px;
+}

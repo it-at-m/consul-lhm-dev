@@ -1,10 +1,9 @@
 // brand_color
-$brand:                                           #004a83;
+$brand:                                           #005a9f;
 $secondary:                                       lighten($brand, 70%);
 $tertiary:                                        lighten($brand, 50%);
 $dark:                                            darken($brand, 10%);
 
-$brand-dark:                                      #005a9f;
 $yellow:                                          #FFE400;
 
 // Menu variables
@@ -14,9 +13,9 @@ $white:                                           #fff;
 
 
 $top-level-menu-item-text-color:                  $white;
-$top-level-menu-background-color:                 $brand-dark;
+$top-level-menu-background-color:                 $brand;
 $flyout-item-text-color:                          $white;
-$flyout-item-bg-color:                            $brand-dark;
+$flyout-item-bg-color:                            $brand;
 $flyout-block-border-color:                       #dee0e3;
 $flyout-item-divider-color:                       lighten($flyout-block-border-color, 5%);
 $flyout-item-projekt-modules-links-color:         $flyout-item-text-color;
@@ -26,7 +25,7 @@ $flyout-item-line-height:                         1.5rem;
 $flyout-item-projekt-min-height:                  60px;
 
 $responsive-menu-text-color:                      $white;
-$responsive-menu-background-color:                $brand-dark;
+$responsive-menu-background-color:                $brand;
 
 $module-index-panel-background:                   lighten($brand, 70%);
 
