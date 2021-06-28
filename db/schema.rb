@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_19_153925) do
+ActiveRecord::Schema.define(version: 2021_06_22_130103) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -69,17 +69,54 @@ ActiveRecord::Schema.define(version: 2021_05_19_153925) do
     t.index ["user_id"], name: "index_administrators_on_user_id"
   end
 
-  create_table "ahoy_events", id: :uuid, default: nil, force: :cascade do |t|
+  create_table "ahoy_events", force: :cascade do |t|
+    t.bigint "visit_id"
+    t.bigint "user_id"
+    t.string "name"
+    t.jsonb "properties"
+    t.datetime "time"
+    t.index ["name", "time"], name: "index_ahoy_events_on_name_and_time"
+    t.index ["properties"], name: "index_ahoy_events_on_properties_jsonb_path_ops", opclass: :jsonb_path_ops, using: :gin
+    t.index ["user_id"], name: "index_ahoy_events_on_user_id"
+    t.index ["visit_id"], name: "index_ahoy_events_on_visit_id"
+  end
+
+  create_table "ahoy_events_old", id: :uuid, default: nil, force: :cascade do |t|
     t.uuid "visit_id"
     t.integer "user_id"
     t.string "name"
     t.jsonb "properties"
     t.datetime "time"
     t.string "ip"
-    t.index ["name", "time"], name: "index_ahoy_events_on_name_and_time"
-    t.index ["time"], name: "index_ahoy_events_on_time"
-    t.index ["user_id"], name: "index_ahoy_events_on_user_id"
-    t.index ["visit_id"], name: "index_ahoy_events_on_visit_id"
+    t.index ["name", "time"], name: "index_ahoy_events_old_on_name_and_time"
+    t.index ["time"], name: "index_ahoy_events_old_on_time"
+    t.index ["user_id"], name: "index_ahoy_events_old_on_user_id"
+    t.index ["visit_id"], name: "index_ahoy_events_old_on_visit_id"
+  end
+
+  create_table "ahoy_visits", force: :cascade do |t|
+    t.string "visit_token"
+    t.string "visitor_token"
+    t.bigint "user_id"
+    t.string "ip"
+    t.text "user_agent"
+    t.text "referrer"
+    t.string "referring_domain"
+    t.text "landing_page"
+    t.string "browser"
+    t.string "os"
+    t.string "device_type"
+    t.string "country"
+    t.string "region"
+    t.string "city"
+    t.string "utm_source"
+    t.string "utm_medium"
+    t.string "utm_term"
+    t.string "utm_content"
+    t.string "utm_campaign"
+    t.datetime "started_at"
+    t.index ["user_id"], name: "index_ahoy_visits_on_user_id"
+    t.index ["visit_token"], name: "index_ahoy_visits_on_visit_token", unique: true
   end
 
   create_table "audits", id: :serial, force: :cascade do |t|
@@ -609,6 +646,12 @@ ActiveRecord::Schema.define(version: 2021_05_19_153925) do
     t.index ["poll_id"], name: "index_geozones_polls_on_poll_id"
   end
 
+  create_table "geozones_projekts", id: false, force: :cascade do |t|
+    t.bigint "geozone_id", null: false
+    t.bigint "projekt_id", null: false
+    t.index ["projekt_id", "geozone_id"], name: "index_geozones_projekts_on_projekt_id_and_geozone_id", unique: true
+  end
+
   create_table "i18n_content_translations", id: :serial, force: :cascade do |t|
     t.integer "i18n_content_id", null: false
     t.string "locale", null: false
@@ -884,7 +927,10 @@ ActiveRecord::Schema.define(version: 2021_05_19_153925) do
     t.integer "zoom"
     t.integer "proposal_id"
     t.integer "investment_id"
+    t.bigint "projekt_id"
+    t.string "pin_color"
     t.index ["investment_id"], name: "index_map_locations_on_investment_id"
+    t.index ["projekt_id"], name: "index_map_locations_on_projekt_id"
     t.index ["proposal_id"], name: "index_map_locations_on_proposal_id"
   end
 
@@ -1198,6 +1244,15 @@ ActiveRecord::Schema.define(version: 2021_05_19_153925) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "projekt_notifications", force: :cascade do |t|
+    t.bigint "projekt_id"
+    t.string "title"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["projekt_id"], name: "index_projekt_notifications_on_projekt_id"
+  end
+
   create_table "projekt_phase_geozones", force: :cascade do |t|
     t.bigint "projekt_phase_id"
     t.bigint "geozone_id"
@@ -1219,16 +1274,27 @@ ActiveRecord::Schema.define(version: 2021_05_19_153925) do
     t.index ["projekt_id"], name: "index_projekt_phases_on_projekt_id"
   end
 
+  create_table "projekt_settings", force: :cascade do |t|
+    t.bigint "projekt_id"
+    t.string "key"
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["projekt_id"], name: "index_projekt_settings_on_projekt_id"
+  end
+
   create_table "projekts", force: :cascade do |t|
     t.string "name"
     t.bigint "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "order_number"
-    t.boolean "total_duration_active"
     t.date "total_duration_start"
     t.date "total_duration_end"
-    t.boolean "show_in_navigation"
+    t.integer "comments_count", default: 0
+    t.datetime "hidden_at"
+    t.integer "author_id"
+    t.string "geozone_affiliated"
     t.index ["parent_id"], name: "index_projekts_on_parent_id"
   end
 
@@ -1599,7 +1665,7 @@ ActiveRecord::Schema.define(version: 2021_05_19_153925) do
     t.datetime "date_of_birth"
     t.boolean "email_on_proposal_notification", default: true
     t.boolean "email_digest", default: true
-    t.boolean "email_on_direct_message", default: true
+    t.boolean "email_on_direct_message", default: false
     t.boolean "official_position_badge", default: false
     t.datetime "password_changed_at", default: "2015-01-01 01:01:01", null: false
     t.boolean "created_from_signature", default: false
@@ -1609,6 +1675,8 @@ ActiveRecord::Schema.define(version: 2021_05_19_153925) do
     t.boolean "public_interests", default: false
     t.boolean "recommended_debates", default: true
     t.boolean "recommended_proposals", default: true
+    t.string "plz"
+    t.boolean "plz_consent"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["geozone_id"], name: "index_users_on_geozone_id"
@@ -1751,6 +1819,7 @@ ActiveRecord::Schema.define(version: 2021_05_19_153925) do
   add_foreign_key "legislation_proposals", "legislation_processes"
   add_foreign_key "locks", "users"
   add_foreign_key "managers", "users"
+  add_foreign_key "map_locations", "projekts"
   add_foreign_key "moderators", "users"
   add_foreign_key "notifications", "users"
   add_foreign_key "organizations", "users"
@@ -1771,9 +1840,11 @@ ActiveRecord::Schema.define(version: 2021_05_19_153925) do
   add_foreign_key "poll_voters", "polls"
   add_foreign_key "polls", "budgets"
   add_foreign_key "polls", "projekts"
+  add_foreign_key "projekt_notifications", "projekts"
   add_foreign_key "projekt_phase_geozones", "geozones"
   add_foreign_key "projekt_phase_geozones", "projekt_phases"
   add_foreign_key "projekt_phases", "projekts"
+  add_foreign_key "projekt_settings", "projekts"
   add_foreign_key "projekts", "projekts", column: "parent_id"
   add_foreign_key "proposals", "communities"
   add_foreign_key "proposals", "projekts"

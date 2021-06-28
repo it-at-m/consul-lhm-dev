@@ -1,16 +1,19 @@
+// Privacy
+
+span.replace-highlighted {
+  background: yellow;
+}
+
+
 // Sidebar
 
 .projekt-phase {
   margin-bottom: 1em;
-  font-size: 0.875em;
   line-height: 1.75;
 
-  a {
-    text-decoration: underline;
-  }
 
-  a.projekt-phase-link {
-    color: #CE003E;
+  .projekt-phase-button {
+    margin-top: 0.5em;
   }
 }
 
@@ -54,11 +57,48 @@ li.projekt-navigator.current-projekt::before {
 }
 
 
+
+// Sidebar icons 
+
+span.time-icon,
+span.geo-restriction-icon,
+span.geo-affiliation-icon {
+  margin-left: 23px;
+  position: relative;
+}
+
+span.time-icon:before,
+span.geo-restriction-icon:before,
+span.geo-affiliation-icon:before {
+  font-weight: bold;
+  font-family: "Font Awesome 5 Free";
+  position: absolute;
+  left: -23px;
+  color: $brand;
+}
+
+span.time-icon:before {
+  content: "\f017";
+}
+
+span.geo-restriction-icon:before {
+  content: "\f4fc";
+}
+
+span.geo-affiliation-icon:before {
+  content: "\f279";
+}
+
 // Toggling projekt lists in page sidebar
 
 li.projekt-navigator {
   position: relative;
   padding-right: 14px;
+  color: #878787;
+
+  a { 
+    color: $brand !important;
+  }
 
   &~ul.projekt-navigator {
     display: none;

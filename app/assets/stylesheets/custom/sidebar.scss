@@ -1,4 +1,4 @@
-#filter-geozones {
+.geozone-filter {
 
   ul {
     list-style-type: none;
@@ -13,8 +13,8 @@
   }
 
   li.label-selected label {
-    color: #06408E;
-    border-color: #06408E;
+    color: $brand;
+    font-weight: bold;
   }
 
   input[type='checkbox'],
@@ -32,71 +32,62 @@
     top: 0;
   }
 
-  span.checkmark::before {
+  .checkmark::before {
      content: "\f111";
      font-family: 'Font Awesome 5 Free';
      font-weight: normal;
   }
 
-  input:checked ~ span.checkmark::before {
+  input:checked ~ .checkmark::before {
      content: "\f192";
   }
 
-  li + ul#geozones-list {
+  li + ul.geozones-list {
     display: none;
   }
 
-  li.label-selected + ul#geozones-list {
+  li[aria-expanded='true'] + ul.geozones-list {
     display: block;
   }
 
-  #geozones-list {
-    .checkmark {
-      position: absolute;
-      top: 5px;
-      left: -19px;
-      height: 14px;
-      width: 14px;
-      border: 1.5px solid #C6C6C6;
-      border-radius: 2px;
-    }
+  li[aria-expanded='false'] + ul.geozones-list {
+    display: none;
+  }
 
-    .checkmark:before {
-      content: "";
-      position: absolute;
-      display: none;
-      left: 4px;
-      top: 1px;
-      width: 4px;
-      height: 7px;
-      border: 1.5px solid #fff;
-      border-width: 0 2px 2px 0;
-      transform: rotate(45deg);
-    }
+  li.label-selected label.toggle-geozones-list {
+    color: #878787;
+  }
 
-    input:checked ~ .checkmark {
-      background: #06408E;
-      border: 1.5px solid #06408E;
-    }
+  .toggle-geozones-list {
+    position: relative;
+  }
 
-    .checkmark:before {
-      content: "";
-      position: absolute;
-      display: none;
-      left: 4px;
-      top: 1px;
-      width: 4px;
-      height: 7px;
-      border: 1.5px solid #fff;
-      border-width: 0 2px 2px 0;
-      transform: rotate(45deg);
-    }
+  .toggle-geozones-list:before {
+    content: '\f078';
+    font-weight: bold;
+    font-family: 'Font Awesome 5 Free';
+    position: absolute;
+    left: -18px;
+    transform: rotate(0deg);
+  }
 
+  li[aria-expanded='true'] .toggle-geozones-list:before {
+    transform: rotate(180deg);
+    top: -2px;
+  }
 
+  .js-show-all-geozones {
+    position: relative;
+    color: #878787;
+  }
 
-    input:checked ~ .checkmark:before {
-      display: block;
-    }
+  .js-show-all-geozones:after {
+    content: "\f078";
+    font-weight: bold;
+    font-family: 'Font Awesome 5 Free';
+    position: absolute;
+    right: -15px;
+    top: -2px;
   }
 
 }

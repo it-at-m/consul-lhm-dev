@@ -6,9 +6,13 @@ de:
         breadcrumbs:
           homepage: Startseite
         sidebar:
+          general:
+            title: Projektinformation
+            projekt_duration: Gesamtdauer
+            affiliation: Gebietszuordnung
+
           phases:
             title: Projektphasen
-            projekt_duration: Gesamtdauer
             debate_phase: Diskussionsphase
             debate_phase_link: Zu den aktuellen Diskussionen
             debate_phase_button: Starten Sie eine Diskussion
@@ -25,4 +29,20 @@ de:
               other: "%{count} aktive Abstimmungen"
           navigator:
             title: Projektverzeichnis
-
+      footer:
+        show:
+          activities_tab: Aktivität
+          comments_tab: Kommentare
+          notifications_tab: Benachrichtigungen
+          milestones_tab: Meilensteine
+          newsfeed_tab: News-Feed
+          most_active_debates: "Aktivste Diskussionen"
+          most_active_proposals: "Aktivste Vorschläge"
+          latest_polls: 'Aktive Abstimmungen'
+          debate_phase_not_started: Die Diskussionsphase ist noch nicht eröffnet.
+          debate_phase_expired: Die Diskussionsphase ist bereits abgeschlossen.
+          proposal_phase_not_started: Die Vorschlasphase ist noch nicht eröffnet.
+          proposal_phase_expired: Die Vorschlagsphase ist bereits abgeschlossen.
+          no_proposals: Bislang wurden noch keine Vorschläge erstellt. Erstellen Sie als Erste(r) einen Vorschlag!
+          no_debates: Bislang wurden noch keine Diskussionen gestartet. Starten Sie als Erste(r) eine Diskussion!
+          no_polls: Bislang wurden noch keine Abstimmungen durchgeführt. Schauen Sie doch bei Gelegenheit wieder vorbei, um an künftigen Abstimmungen teilzunehmen.

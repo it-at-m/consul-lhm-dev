@@ -1,0 +1,1 @@
+resources :projekts, only: :show

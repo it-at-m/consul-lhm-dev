@@ -11,8 +11,12 @@ class ProposalsController
     @filtered_target = params[:sdg_targets].present? ? params[:sdg_targets].split(',')[0] : nil
 
     @geozones = Geozone.all
-    @selected_geozone_restriction = params[:geozone_restriction] || ''
-    @selected_geozones = (params[:geozones] || '').split(',').map(&:to_i)
+
+    @selected_geozone_affiliation = params[:geozone_affiliation] || 'all_resources'
+    @affiliated_geozones = (params[:affiliated_geozones] || '').split(',').map(&:to_i)
+
+    @selected_geozone_restriction = params[:geozone_restriction] || 'no_restriction'
+    @restricted_geozones = (params[:restricted_geozones] || '').split(',').map(&:to_i)
 
     discard_draft
     discard_archived
@@ -23,8 +27,9 @@ class ProposalsController
     take_only_by_tag_names
     take_by_projekts
     take_by_sdgs
-    take_by_geozones
-    @proposals_coordinates = all_proposal_map_locations
+    take_by_geozone_affiliations
+    take_by_geozone_restrictions
+    @proposals_coordinates = all_proposal_map_locations(@resources)
     @selected_tags = all_selected_tags
   end
 
@@ -34,6 +39,12 @@ class ProposalsController
     set_geozone
     set_resource_instance
     @projekts = Projekt.top_level
+
+    @selected_projekt = Projekt.find(params[:projekt]) if params[:projekt]
+  end
+
+  def edit
+    @selected_projekt = @proposal.projekt
   end
 
   def show
@@ -47,6 +58,9 @@ class ProposalsController
     if request.path != proposal_path(@proposal)
       redirect_to proposal_path(@proposal), status: :moved_permanently
     end
+
+    @affiliated_geozones = (params[:affiliated_geozones] || '').split(',').map(&:to_i)
+    @restricted_geozones = (params[:restricted_geozones] || '').split(',').map(&:to_i)
   end
 
   def unvote
@@ -100,28 +114,48 @@ class ProposalsController
       end
     end
 
-    def take_by_geozones
-      case @selected_geozone_restriction
+    def take_by_geozone_affiliations
+      case @selected_geozone_affiliation
       when 'all_resources'
         @resources
-      when 'no_restriction'
-        query_string = "projekt_phases.geozone_restricted = ? OR proposals.projekt_id IS NULL"
-        @resources = @resources.left_outer_joins(:proposal_phase).where(query_string,  @selected_geozone_restriction )
-      when 'only_citizens'
-        @resources = @resources.joins(:proposal_phase).where(projekt_phases: { geozone_restricted: @selected_geozone_restriction }).distinct
+      when 'no_affiliation'
+        @resources = @resources.joins(:projekt).where( projekts: { geozone_affiliated: 'no_affiliation' } ).distinct
+      when 'entire_city'
+        @resources = @resources.joins(:projekt).where(projekts: { geozone_affiliated: 'entire_city' } ).distinct
       when 'only_geozones'
-        @resources = @resources.joins(:proposal_phase).where(projekt_phases: { geozone_restricted: @selected_geozone_restriction }).distinct
-        if @selected_geozones.present?
-          @resources = @resources.joins(:geozones).where(geozones: { id: @selected_geozones }).distinct
+        @resources = @resources.joins(:projekt).where(projekts: { geozone_affiliated: 'only_geozones' } ).distinct
+        if @affiliated_geozones.present?
+          @resources = @resources.joins(:geozone_affiliations).where(geozones: { id: @affiliated_geozones }).distinct
         else
-          @resources = @resources.joins(:geozones).where.not(geozones: { id: nil }).distinct
+          @resources = @resources.joins(:geozone_affiliations).where.not(geozones: { id: nil }).distinct
+        end
+      end
+    end
+
+    def take_by_geozone_restrictions
+      case @selected_geozone_restriction
+      when 'no_restriction'
+        @resources = @resources.joins(:proposal_phase).distinct
+      when 'only_citizens'
+        @resources = @resources.joins(:proposal_phase).where(projekt_phases: { geozone_restricted: ['only_citizens', 'only_geozones'] }).distinct
+      when 'only_geozones'
+        @resources = @resources.joins(:proposal_phase).where(projekt_phases: { geozone_restricted: 'only_geozones' }).distinct
+
+        if @restricted_geozones.present?
+          sql_query = "
+            INNER JOIN projekts AS projekts_proposals_join_for_restrictions ON projekts_proposals_join_for_restrictions.hidden_at IS NULL AND projekts_proposals_join_for_restrictions.id = proposals.projekt_id
+            INNER JOIN projekt_phases AS proposal_phases_proposals_join_for_restrictions ON proposal_phases_proposals_join_for_restrictions.projekt_id = projekts_proposals_join_for_restrictions.id AND proposal_phases_proposals_join_for_restrictions.type IN ('ProjektPhase::ProposalPhase')
+            INNER JOIN projekt_phase_geozones ON projekt_phase_geozones.projekt_phase_id = proposal_phases_proposals_join_for_restrictions.id
+            INNER JOIN geozones AS geozone_restrictions ON geozone_restrictions.id = projekt_phase_geozones.geozone_id
+          "
+          @resources = @resources.joins(sql_query).where(geozone_restrictions: { id: @restricted_geozones }).distinct
         end
       end
     end
 
     def proposal_params
       attributes = [:video_url, :responsible_name, :tag_list,
-                    :terms_of_service, :geozone_id, :skip_map, :projekt_id, :related_sdg_list,
+                    :terms_of_service, :geozone_id, :projekt_id, :related_sdg_list,
                     image_attributes: image_attributes,
                     documents_attributes: [:id, :title, :attachment, :cached_attachment,
                                            :user_id, :_destroy],
@@ -131,6 +165,6 @@ class ProposalsController
     end
 
     def proposal_limit_exceeded?(user)
-      user.proposals.where(retired_at: nil).count >= Setting['extended_option.max_active_proposals_per_user'].to_i
+      user.proposals.where(retired_at: nil).count >= Setting['extended_option.proposals.max_active_proposals_per_user'].to_i
     end
 end

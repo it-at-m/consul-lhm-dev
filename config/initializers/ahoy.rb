@@ -1,14 +1,17 @@
-Ahoy.geocode = false
+class Ahoy::Store < Ahoy::DatabaseStore
 
-class Ahoy::Store < Ahoy::Stores::ActiveRecordStore
-  # Track user IP
-  def track_event(name, properties, options)
-    super do |event|
-      event.ip = request.ip
-    end
+  def visit_model
+    Ahoy::Visit
   end
 
-  def exclude?
-    false
+  def authenticate(data)
+    # disables automatic linking of visits and users
   end
 end
+
+# set to true for JavaScript tracking
+Ahoy.api = true
+Ahoy.server_side_visits = :when_needed
+
+# better user agent parsing
+Ahoy.user_agent_parser = :device_detector

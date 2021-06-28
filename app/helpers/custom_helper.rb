@@ -21,4 +21,12 @@ module CustomHelper
 
     doc.to_html.html_safe
   end
+
+  def all_projekt_proposals_map_locations(projekt)
+    proposals_for_map = projekt.proposals.not_archived.published
+
+    ids = proposals_for_map.pluck(:id).uniq
+
+    MapLocation.where(proposal_id: ids).map(&:json_data)
+  end
 end

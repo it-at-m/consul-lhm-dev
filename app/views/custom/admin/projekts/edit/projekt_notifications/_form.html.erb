@@ -1,0 +1,15 @@
+<%= form_for(notification, url: url) do |f| %>
+  <div class='small-12 medium-7'>
+    <%= f.text_field :title, {label: t("custom.admin.projekts.edit.projekt_notifications_tab.notification_title") } %>
+  </div>
+
+  <div class='small-12 medium-7'>
+    <%= f.text_field :body, {label: t("custom.admin.projekts.edit.projekt_notifications_tab.notification_body") } %>
+  </div>
+
+  <%= f.hidden_field :tab, value: "#tab-projekt-notifications" %>
+
+  <div>
+    <%= f.submit(t("custom.admin.projekts.edit.projekt_notifications_tab.button"), class: "button") %>
+  </div>
+<% end %>

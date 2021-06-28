@@ -1,4 +1,4 @@
-<% cache [locale_and_user_status, debate, @debate_votes[debate.id], params[:tags], params[:projekts]] do %>
+<% cache [locale_and_user_status, debate, @debate_votes[debate.id], params[:tags], params[:projekts], params[:geozone_affiliation], params[:affiliated_geozones], params[:geozone_restriction], params[:restricted_geozones]] do %>
   <div id="<%= dom_id(debate) %>" class="debate clear" data-type="debate">
     <div class="panel">
       <div class="row">

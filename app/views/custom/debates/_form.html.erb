@@ -14,7 +14,7 @@
       </div>
       <div class="js-suggest" data-locale="<%= translations_form.locale %>"></div>
 
-      <% if extended_feature?(:head_image_for_debates) %>
+      <% if extended_feature?("debates.head_image_for_debates") %>
         <div class="images small-12 column">
           <%= render "images/nested_image", imageable: @debate, f: f %>
         </div>
@@ -31,17 +31,10 @@
 
     <div class="small-12 column">
 
-      <h5>Zuordnung der Diskussion zu einem Projekt</h5>
-      <div>
-        <small>
-          Bitte ordnen Sie Ihre Diskussion einem der nachfolgenden Projekte oder Unterprojekte zu. Dies dient dazu, dass die Diskussionen in der Diskussionsübersicht besser auffindbar sind.
-        </small>
-      </div>
-
       <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: @debate }  %>
     </div>
 
-    <%if extended_feature?("enable_categories") %>
+    <%if extended_feature?("modulewide.enable_categories") %>
       <div class="small-12 column margin-bottom">
         <%if @categories.any? %>
           <div id="category_tags" class="tags">
@@ -55,7 +48,7 @@
       <%=f.hidden_field :tag_list_predefined, value: @debate.tags.reject{|t| !['category'].include?(t.kind)}.map(&:name).join(","), class: "js-tag-list list-tags predefined"%>
     <%end%>
 
-    <%if extended_feature?("enable_custom_tags") %>
+    <%if extended_feature?("modulewide.enable_custom_tags") %>
       <div class="small-12 column margin-bottom">
         <%= f.text_field :tag_list_custom, value: @debate.tags.where(kind: nil).map{|c| c.name}.join(","),
           label: t("custom.debates.form.tags_custom"),

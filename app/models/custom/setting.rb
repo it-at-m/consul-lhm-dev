@@ -135,40 +135,41 @@ class Setting < ApplicationRecord
         "sdg.process.polls": true,
         "sdg.process.budgets": true,
         "sdg.process.legislation": true,
-        "projekts.connected_resources": false,
-        "projekts.projekt_page_sharing": false,
+        "projekts.connected_resources": true,
         "projekts.show_archived.navigation": true,
         "projekts.show_archived.sidebar": true,
-        "projekts.show_phases_in_projekt_page_sidebar": true,
-        "projekts.show_total_duration_in_projekts_page_sidebar": true,
-        "projekts.show_not_active_phases_in_projekts_page_sidebar": true,
-        "projekts.show_navigator_in_projekts_page_sidebar": true,
         "projekts.show_module_links_in_flyout_menu": true,
-        "extended_feature.gdpr_conformity": false,
-        "extended_feature.link_out_warning": false,
-        "extended_feature.two_click_iframe_solution": false,
-        "extended_feature.extended_editor_for_admins": false,
-        "extended_feature.extended_editor_for_users": false,
-        "extended_feature.enable_categories": false,
-        "extended_feature.enable_custom_tags": false,
-        "extended_feature.intro_text_for_debates": false,
-        "extended_feature.head_image_for_debates": false,
-        "extended_feature.intro_text_for_proposals": false,
-        "extended_feature.map_above_proposals": false,
-        "extended_feature.quorum_for_proposals": true,
-        "extended_feature.enable_proposal_support_withdrawal": false,
-        "extended_feature.show_selected_proposals_in_proposal_sidebar": true,
-        "extended_feature.show_geozones_in_proposal_sidebar": true,
-        "extended_feature.show_suggested_proposals_in_proposal_sidebar": true,
-        "extended_feature.intro_text_for_polls": false,
-        "extended_feature.intermediate_poll_results_for_admins": false,
-        "extended_feature.hide_comment_replies_by_default": false,
-        "extended_feature.custom_help_text_in_modules": false,
-        "extended_feature.show_number_of_entries_in_modules": false,
-        "extended_feature.show_geozone_filter_in_sidebar": false,
-        # "extended_feature.elasticsearch": false,
-        "extended_option.max_active_proposals_per_user": 100,
-        "extended_option.description_max_length": 6000
+        "projekts.show_affiliation_filter_in_index_sidebar": true,
+        # "extended_feature.general.elasticsearch": false,
+        "extended_feature.general.extended_editor_for_admins": false,
+        "extended_feature.general.extended_editor_for_users": false,
+        "extended_feature.gdpr.gdpr_conformity": false,
+        "extended_feature.gdpr.show_cookie_banner": true,
+        "extended_feature.gdpr.link_out_warning": false,
+        "extended_feature.gdpr.two_click_iframe_solution": false,
+        "extended_option.gdpr.devise_timeout_min": 30,
+        "extended_option.gdpr.devise_verification_token_validity_days": 3,
+        "extended_feature.modulewide.enable_categories": false,
+        "extended_feature.modulewide.enable_custom_tags": false,
+        "extended_feature.modulewide.show_number_of_entries_in_modules": false,
+
+        "extended_feature.modulewide.hide_comment_replies_by_default": false,
+        "extended_feature.modulewide.custom_help_text_in_modules": false,
+        "extended_feature.debates.intro_text_for_debates": false,
+        "extended_feature.debates.head_image_for_debates": false,
+        "extended_feature.proposals.intro_text_for_proposals": false,
+
+        "extended_feature.proposals.quorum_for_proposals": true,
+        "extended_feature.proposals.enable_proposal_support_withdrawal": false,
+        "extended_feature.proposals.show_selected_proposals_in_proposal_sidebar": true,
+
+        "extended_feature.proposals.show_suggested_proposals_in_proposal_sidebar": true,
+        "extended_feature.proposals.enable_proposal_notifications_tab": true,
+        "extended_feature.proposals.enable_proposal_milestones_tab": true,
+        "extended_option.proposals.max_active_proposals_per_user": 100,
+        "extended_option.proposals.description_max_length": 6000,
+        "extended_feature.polls.intro_text_for_polls": false,
+        "extended_feature.polls.intermediate_poll_results_for_admins": false,
       }
     end
 
@@ -176,18 +177,9 @@ class Setting < ApplicationRecord
       defaults.each { |name, value| self[name] = value }
     end
 
-    def create_missing
-      defaults.each { |key, value| self[key] = value unless Setting.find_by(key: key).present? }
+    def destroy_obsolete
+      Setting.all.each{ |setting| setting.destroy unless defaults.keys.include?(setting.key.to_sym) }
     end
 
-    def force_presence_date_of_birth?
-      Setting["feature.remote_census"].present? &&
-        Setting["remote_census.request.date_of_birth"].present?
-    end
-
-    def force_presence_postal_code?
-      Setting["feature.remote_census"].present? &&
-        Setting["remote_census.request.postal_code"].present?
-    end
   end
 end

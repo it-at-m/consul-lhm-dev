@@ -1,8 +1,8 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="external-links" content=<%= setting["extended_feature.link_out_warning"] %> />
-<meta name="two-click-iframes" content=<%= setting["extended_feature.two_click_iframe_solution"] %> />
+<meta name="external-links" content=<%= Setting["extended_feature.gdpr.link_out_warning"] %> />
+<meta name="two-click-iframes" content=<%= Setting["extended_feature.gdpr.two_click_iframe_solution"] %> />
 <title><%= content_for?(:title) ? yield(:title) : default_title %></title>
 <%= stylesheet_link_tag "application" %>
 <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>

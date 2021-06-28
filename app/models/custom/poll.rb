@@ -6,6 +6,7 @@ class Poll < ApplicationRecord
   scope :last_week, -> { where("polls.created_at >= ?", 7.days.ago) }
 
   belongs_to :projekt, optional: true
+  has_many :geozone_affiliations, through: :projekt
 
   def answerable_by?(user)
     user.present? &&

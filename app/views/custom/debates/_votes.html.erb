@@ -62,7 +62,7 @@
       </div>
 
     <% elsif user_signed_in? && debate_phase &&
-      (debate_phase.geozones.any? && !debate_phase.geozones.include?(current_user.geozone)) %>
+      (debate_phase.geozone_restrictions.any? && !debate_phase.geozone_restrictions.include?(current_user.geozone)) %>
       <div class="participation-not-allowed" style="display:none" aria-hidden="false">
         <p>
           <%= sanitize(t("custom.votes.geo_restricted")) %>

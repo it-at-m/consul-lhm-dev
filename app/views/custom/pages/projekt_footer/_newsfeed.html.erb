@@ -1,0 +1,22 @@
+<div class="tabs-panel <%= active_tab_in_projekt_footer?(projekt, 'footer.show_newsfeed_in_projekt_footer') %>" id="tab-newsfeed">
+  <div class="row">
+    <div class="column">
+      <div id='newsfeed-placeholder' data-rss-id=<%= @rss_id %> data-rss-type=<%= @rss_type %>>
+        <% if @rss_type == 'wall' %>
+          <rssapp-wall id=<%= @rss_id %>></rssapp-wall>
+        <% elsif @rss_type == 'list'%>
+          <rssapp-list id=<%= @rss_id %>></rssapp-list>
+        <% elsif @rss_type == 'feed'%>
+          <rssapp-feed id=<%= @rss_id %>></rssapp-feed>
+        <% elsif @rss_type == 'carousel'%>
+          <rssapp-carousel id=<%= @rss_id %>></rssapp-carousel>
+        <% elsif @rss_type == 'ticker'%>
+          <rssapp-ticker id=<%= @rss_id %>></rssapp-ticker>
+        <% elsif @rss_type == 'magazine'%>
+          <rssapp-magazine id=<%= @rss_id %>></rssapp-magazine>
+        <% end %>
+        <script src="https://widget.rss.app/v1/<%= @rss_type %>.js" type="text/javascript" async></script>
+      </div>
+    </div>
+  </div>
+</div>

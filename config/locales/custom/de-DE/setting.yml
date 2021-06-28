@@ -1,79 +1,139 @@
 de:
   custom:
     settings:
+      map_latitude: Breitengrad
+      map_latitude_description: Breitengrad zur Anzeige der Kartenposition
+      map_longitude: Längengrad
+      map_longitude_description: Längengrad, um die Position der Karte zu zeigen
+      map_zoom: Zoom
+      map_zoom_description: Zoomen, um die Kartenposition anzuzeigen
+      map_pin_color: Farbe der Kartenmarkierung ändern
+      map_pin_color_description: Bitte den Farbwert als HEX-code eingeben
+      feature:
+        map: Karten anzeigen
+        map_description: Zeigt die Standardkarte oder die individuellen Karten in der Projektfußzeile und der Vorschlagsübersicht
+        user:
+          skip_verification: Standardmäßige Partizipation für alle Nutzer:innen der Plattform
+          skip_verification_description: Nutzer:innen können ohne Verifizierung am Beteiligungsprozess teilnehmen
       extended_feature:
-        enable_categories: Tags
-        enable_categories_description: Aktivieren Sie die Auswahl vordefinierter Tags
-        enable_custom_tags: Nutzer-Tags
-        enable_custom_tags_description: Aktivieren Sie die Eingabe individueller Nutzer-Tags
-        enable_proposal_support_withdrawal: Vorschlagsunterstützung zurückziehen 
-        enable_proposal_support_withdrawal_description: Aktivieren Sie die Rücknahme der Vorschlagsunterstützung
-        elasticsearch: "Elasticsearch"
-        elasticsearch_description: "Elasticsearch ist die führende verteilte, RESTful, Open-Source-Such- und Analyse-Engine, die auf Geschwindigkeit, horizontale Skalierbarkeit, Zuverlässigkeit und einfache Verwaltung ausgelegt ist."
-        map_above_proposals: Kartenübersicht für Vorschläge
-        map_above_proposals_description: Aktivieren Sie die Kartenübersicht oberhalb der Vorschlagsliste
-        head_image_for_debates: Titelbild für Diskussionen
-        head_image_for_debates_description: Aktivieren Sie das Hinzufügen eines Titelbildes für Diskussionen
-        extended_editor_for_admins: Erweiterter Editor für den Admin-Panel
-        extended_editor_for_admins_description: Aktivieren Sie den erweiterten Editor für Inhalte, die im Admin-Panel erstellt werden
-        extended_editor_for_users: Erweiterter Editor für Nutzer im Frontend
-        extended_editor_for_users_description: Aktivieren Sie den erweiterten Editor für Inhalte, die im Frontend von Nutzern erstellt werden
-        intro_text_for_debates: Einleitungstext für Diskussionen
-        intro_text_for_debates_description: Aktivieren Sie einen individuellen Einleitungstext oberhalb der Diskussionsübersicht
-        intro_text_for_proposals: Einleitungstext für Vorschläge
-        intro_text_for_proposals_description: Aktivieren Sie einen individuellen Einleitungstext oberhalb der Vorschlagsübersicht
-        intro_text_for_polls: Einleitungstext für Abstimmungen
-        intro_text_for_polls_description: Aktivieren Sie einen individuellen Einleitungstext oberhalb der Abstimmungsübersicht
-        intermediate_poll_results_for_admins: Zwischenergebnisse von Abstimmungen für Admins
-        intermediate_poll_results_for_admins_description: Aktivieren Sie die Einsicht in Zwischenergebnisse zu Abstimmungen für Administratoren
-        hide_comment_replies_by_default: Antworten auf Kommentare standardmäßig einklappen
-        hide_comment_replies_by_default_description: Aktivieren Sie das standardmäßige Einklappen von Kommentaren, um Übersichtlichkeit zu schaffen
-        link_out_warning: Warnung für Linkouts
-        link_out_warning_description: Aktivieren Sie ein Popup, in dem der Nutzer bevor eines Linkouts zu einer externen Webseite gewarnt wird
-        show_selected_proposals_in_proposal_sidebar: Ausgewählte Vorschläge
-        show_selected_proposals_in_proposal_sidebar_description: "Aktivieren Sie \"Ausgewählte Vorschläge\", um Vorschläge hervorzuheben"
-        show_geozones_in_proposal_sidebar: Kleine Karten-Navigation in Vorschlägen
-        show_geozones_in_proposal_sidebar_description: Aktivieren Sie die Navigation über eine kleine Karten-Übersicht
-        show_suggested_proposals_in_proposal_sidebar: Weitere Vorschlagslisten
-        show_suggested_proposals_in_proposal_sidebar_description: "Aktivieren Sie \"Weitere Vorschlagslisten\", um zusätzliche Vorschlagslisten anzuzeigen"
-        two_click_iframe_solution: Zwei-Klick-Lösung für IFrames
-        two_click_iframe_solution_description: Aktivieren Sie die Zwei-Klick-Lösung für IFrames, um einen Blur-Effekt hinzuzufügen
-        gdpr_conformity: DSGVO-konforme Voreinstellungen
-        gdpr_conformity_description: "Aktivieren Sie die DSGVO-konforme Voreinstellungen, um \"privacy by design\" zu gewähren"
-        quorum_for_proposals: Quorum für Vorschläge
-        quorum_for_proposals_description: Aktivieren Sie ein Quorum für Vorschläge
-        custom_help_text_in_modules: Individuelle Hilfstexte zu Modulen
-        custom_help_text_in_modules_description: Am unteren Ende der Modulübersicht können individuelle Hilfstexte platziert werden
-        show_number_of_entries_in_modules: Anzahl der Beteiligungen anzeigen
-        show_number_of_entries_in_modules_description: Zeigt die Anzahl der Diskussionsbeiträge, Vorschläge und Abstimmungen an
-        show_geozone_filter_in_sidebar: Filter nach Gebieten
-        show_geozone_filter_in_sidebar_description: Aktivieren Sie Gebietsfilter in der rechten Seitenleiste für Diskussionen, Vorschläge und Abstimmungen
-
+        general:
+          elasticsearch: "Elasticsearch"
+          elasticsearch_description: "Elasticsearch ist die führende verteilte, RESTful, Open-Source-Such- und Analyse-Engine, die auf Geschwindigkeit, horizontale Skalierbarkeit, Zuverlässigkeit und einfache Verwaltung ausgelegt ist."
+          extended_editor_for_admins: Erweiterter Editor für den Admin-Panel
+          extended_editor_for_admins_description: Aktivieren Sie den erweiterten Editor für Inhalte, die im Admin-Panel erstellt werden
+          extended_editor_for_users: Erweiterter Editor für Nutzer im Frontend
+          extended_editor_for_users_description: Aktivieren Sie den erweiterten Editor für Inhalte, die im Frontend von Nutzern erstellt werden
+        gdpr:
+          gdpr_conformity: DSGVO-konforme Voreinstellungen
+          gdpr_conformity_description: "Aktivieren Sie die DSGVO-konforme Voreinstellungen, um \"privacy by design\" zu gewähren"
+          show_cookie_banner: Cookies Banner anzeigen
+          show_cookie_banner_description: Aktivieren Sie den Cookie-Banner, um Nutzer:innen auf Tracking hinzuweisen
+          link_out_warning: Warnung für Linkouts
+          link_out_warning_description: Aktivieren Sie ein Popup, in dem der Nutzer bevor eines Linkouts zu einer externen Webseite gewarnt wird
+          two_click_iframe_solution: Zwei-Klick-Lösung für IFrames
+          two_click_iframe_solution_description: Aktivieren Sie die Zwei-Klick-Lösung für IFrames, um einen Blur-Effekt hinzuzufügen
+        modulewide:
+          enable_categories: Tags
+          enable_categories_description: Aktivieren Sie die Auswahl vordefinierter Tags
+          enable_custom_tags: Nutzer-Tags
+          enable_custom_tags_description: Aktivieren Sie die Eingabe individueller Nutzer-Tags
+          show_number_of_entries_in_modules: Anzahl der Beteiligungen anzeigen
+          show_number_of_entries_in_modules_description: Zeigt die Anzahl der Diskussionsbeiträge, Vorschläge und Abstimmungen an
+          hide_comment_replies_by_default: Antworten auf Kommentare standardmäßig einklappen
+          hide_comment_replies_by_default_description: Aktivieren Sie das standardmäßige Einklappen von Kommentaren, um Übersichtlichkeit zu schaffen
+          custom_help_text_in_modules: Individuelle Hilfstexte zu Modulen
+          custom_help_text_in_modules_description: Am unteren Ende der Modulübersicht können individuelle Hilfstexte platziert werden
+        debates:
+          intro_text_for_debates: Einleitungstext für Diskussionen
+          intro_text_for_debates_description: Aktivieren Sie einen individuellen Einleitungstext oberhalb der Diskussionsübersicht
+          head_image_for_debates: Titelbild für Diskussionen
+          head_image_for_debates_description: Aktivieren Sie das Hinzufügen eines Titelbildes für Diskussionen
+        proposals:
+          intro_text_for_proposals: Einleitungstext für Vorschläge
+          intro_text_for_proposals_description: Aktivieren Sie einen individuellen Einleitungstext oberhalb der Vorschlagsübersicht
+          quorum_for_proposals: Quorum für Vorschläge
+          quorum_for_proposals_description: Aktivieren Sie ein Quorum für Vorschläge
+          enable_proposal_support_withdrawal: Vorschlagsunterstützung zurückziehen 
+          enable_proposal_support_withdrawal_description: Aktivieren Sie die Rücknahme der Vorschlagsunterstützung
+          show_selected_proposals_in_proposal_sidebar: Ausgewählte Vorschläge
+          show_selected_proposals_in_proposal_sidebar_description: "Aktivieren Sie \"Ausgewählte Vorschläge\", um Vorschläge hervorzuheben"
+          show_suggested_proposals_in_proposal_sidebar: Weitere Vorschlagslisten
+          show_suggested_proposals_in_proposal_sidebar_description: "Aktivieren Sie \"Weitere Vorschlagslisten\", um zusätzliche Vorschlagslisten anzuzeigen"
+          enable_proposal_notifications_tab: Benachrichtigungen des Autors zu Vorschlägen
+          enable_proposal_notifications_tab_description: Aktivieren Sie die Benachrichtigungen von Autoren zu eigenen Vorschlägen
+          enable_proposal_milestones_tab: Meilensteine in Vorschlägen
+          enable_proposal_milestones_tab_description: Aktivieren Sie "Meilensteine" in Vorschlägen, die von der Verwaltung angelegt werden müssen
+        polls:
+          intro_text_for_polls: Einleitungstext für Abstimmungen
+          intro_text_for_polls_description: Aktivieren Sie einen individuellen Einleitungstext oberhalb der Abstimmungsübersicht
+          intermediate_poll_results_for_admins: Zwischenergebnisse von Abstimmungen für Admins
+          intermediate_poll_results_for_admins_description: Aktivieren Sie die Einsicht in Zwischenergebnisse zu Abstimmungen für Administratoren
 
       extended_option:
-        max_active_proposals_per_user: Maximale Anzahl aktiver Vorschläge pro Benutzer
-        max_active_proposals_per_user_description: Legen Sie die maximale Anzahl an aktiven Vorschlägen pro Nutzer fest
-        description_max_length: Maximale Zeichenanzahl für die Vorschlagsbeschreibung
-        description_max_length_description: Legen Sie fest, wie viele Zeichen für Vorschläge maximal verwendet werden dürfen
-
+        gdpr:
+          devise_timeout_min: Dauer von Nutzer-Sitzungen
+          devise_timeout_min_description: Legen Sie fest, wie lange ein Nutzer pro Sitzung eingeloggt bleiben soll in Minuten
+          devise_verification_token_validity_days: Gültigkeit des Verifikationslinks in Tagen
+          devise_verification_token_validity_days_description: Legen Sie fest, wie lange der Verifikationslink gültig ist
+        proposals:
+          max_active_proposals_per_user: Maximale Anzahl aktiver Vorschläge pro Benutzer
+          max_active_proposals_per_user_description: Legen Sie die maximale Anzahl an aktiven Vorschlägen pro Nutzer fest
+          description_max_length: Maximale Zeichenanzahl für die Vorschlagsbeschreibung
+          description_max_length_description: Legen Sie fest, wie viele Zeichen für Vorschläge maximal verwendet werden dürfen
 
       projekts:
         connected_resources: Verpflichtende Zuordnung von Diskussionen & Vorschläge zu Projekten
         connected_resources_description: Diskussionen & Vorschläge können ohne Projektzuordnung nicht erstellt werden
-        projekt_page_sharing: Teilen-Funktion in Projektseite
-        projekt_page_sharing_description: Aktivieren Sie die Teilen-Funktion in der rechten Seitenleiste der Projektseite
         show_archived:
           navigation: Archivierte Projekte in Navigation anzeigen
           navigation_description: Zeigt archivierte Projekte in der Navigationsleiste wenn aktiviert
           sidebar: Archivierte Projekte in Projektseitenleiste  anzeigen
           sidebar_description: Zeigt archivierte Projekte in der Projektseitenleiste wenn aktiviert
-        show_phases_in_projekt_page_sidebar: Projektphasen in Projektseite
-        show_phases_in_projekt_page_sidebar_description: Aktivieren Sie die Projektphasen in der rechten Seitenleiste der Projektseite
-        show_total_duration_in_projekts_page_sidebar: Gesamtdauer in Projektphasen
-        show_total_duration_in_projekts_page_sidebar_description: "Zeigt die Phase \"Gesamtdauer\" in den Projektphasen in der rechten Seitenleiste der Projektseite an"
-        show_not_active_phases_in_projekts_page_sidebar: Nicht aktive Teilnahmephasen
-        show_not_active_phases_in_projekts_page_sidebar_description: "Zeigt die Phasen \"Diskussionen\", \"Vorschläge\" und \"Abstimmungen an, auch wenn diese nicht aktiviert sind"
-        show_navigator_in_projekts_page_sidebar: Projektnavigation in Projektseite
-        show_navigator_in_projekts_page_sidebar_description: Zeigt die Projektnavigation in der rechten Seitenleiste der Projektseiten an
         show_module_links_in_flyout_menu: Modul-Links in den Dropdowns
         show_module_links_in_flyout_menu_description: Zeigt die die Modul-Links unterhalb einzelner Dropdown-Einträge an
+        show_affiliation_filter_in_index_sidebar: Gebietsfilter anzeigen
+        show_affiliation_filter_in_index_sidebar_description: Zeigt den Gebietsfilter in der rechten Seitenleiste der einzelnen Module
+
+      projekt_feature:
+        main:
+          activate: Projekt aktivieren
+          activate_description: Aktivieren Sie das Projekt, sodass es in der Applikation sichtbar ist
+        general:
+          show_in_navigation: Projekt in Navigation anzeigen
+          show_in_navigation_description: Zeigt das Projekt in der Top-Navigation der Webseite an (nur für Top-Level-Projekte)
+          show_not_active_phases_in_projekts_page_sidebar: Nicht aktive Teilnahmephasen verbergen
+          show_not_active_phases_in_projekts_page_sidebar_description: Verbirgt die Teilnahmephasen in der rechten Seitenleiste der Projektseite und in der Projektauswahl
+          show_map: Karte einblenden
+          show_map_description: Zeigt die Karte sowie die Gebietszuordnung in der Applikation an
+        sidebar:
+          projekt_page_sharing: Teilen-Funktion
+          projekt_page_sharing_description: Aktivieren Sie die Teilen-Funktion in der rechten Seitenleiste der Projektseite
+          show_phases_in_projekt_page_sidebar: Projektphasen
+          show_phases_in_projekt_page_sidebar_description: Aktivieren Sie die Projektphasen in der rechten Seitenleiste der Projektseite
+          show_total_duration_in_projekts_page_sidebar: Projektinformation
+          show_total_duration_in_projekts_page_sidebar_description: Zeigt das Projektverzeichnis in der rechten Seitenleiste der Projektseiten an
+          show_navigator_in_projekts_page_sidebar: Projektverzeichnis
+          show_navigator_in_projekts_page_sidebar_description: Zeigt die Projektverzeichnis in der rechten Seitenleiste der Projektseiten an
+        footer:
+          show_projekt_footer: Fußzeile aktivieren
+          show_projekt_footer_description: Aktiviert die Fußzeile am unteren Ende des Projektes
+          show_activity_in_projekt_footer: Aktivität
+          show_activity_in_projekt_footer_description: Aktiviert die Aktivität in der Fußzeile eines Projektes
+          show_comments_in_projekt_footer: Kommentare
+          show_comments_in_projekt_footer_description: Aktiviert die Kommentarfunktion in der Fußzeile eines Projekts
+          show_notifications_in_projekt_footer: Benachrichtigungen
+          show_notifications_in_projekt_footer_description: Aktiviert die Benachrichtigungsfunktion in der Fußzeile eines Projekts
+          show_milestones_in_projekt_footer: Meilensteine
+          show_milestones_in_projekt_footer_description: Aktiviert die Meilensteinfunktion in der Fußzeile eines Projekts
+          show_newsfeed_in_projekt_footer: News-Feed
+          show_newsfeed_in_projekt_footer_description: Aktiviert den News-Feed in der Fußzeile eines Projekts
+
+      projekt_newsfeed:
+        id: Newsfeed ID 
+        id_description:  
+        type: Newsfeed Type
+        type_description: 
+
+      projekt_custom_feature:
+        default_footer_tab: Standard-Element
+        default_footer_tab_description: Wählen Sie ein Standard-Element aus, welches beim Öffnen der Seite angezeigt wird

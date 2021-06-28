@@ -1,0 +1,44 @@
+<div class="sidebar-divider"></div>
+
+<h2 class="sidebar-title projekt-tag-chip-geozone-restriction projekt-tag-chip-icon"><%= t("custom.geozones.sidebar_filter.restrictions.title") %></h2>
+
+<div id='geozone_restriction' class='geozone-filter'>
+
+  <ul>
+    <li <%= "class=label-selected" if @selected_geozone_restriction == 'no_restriction' || @selected_geozone_restriction == '' %> >
+      <%= label_tag 'geozone_restriction_no_restriction', class: 'label_class' do %>
+        <%= radio_button_tag :geozone_restriction, 'no_restriction', (@selected_geozone_restriction == 'no_restriction' || @selected_geozone_restriction == ''), { class: 'js-filter-geozone-restriction' }  %>
+        <%= t('custom.geozones.sidebar_filter.restrictions.no_restriction' ) %>
+        <span class="checkmark"></span>
+      <% end %>
+    </li>
+
+    <li <%= "class=label-selected" if @selected_geozone_restriction == 'only_citizens' %> >
+      <%= label_tag 'geozone_restriction_only_citizens', class: 'label_class' do %>
+        <%= radio_button_tag :geozone_restriction, 'only_citizens', @selected_geozone_restriction == 'only_citizens', { class: 'js-filter-geozone-restriction' }  %>
+        <%= t('custom.geozones.sidebar_filter.restrictions.only_citizens') %>
+        <span class="checkmark"></span>
+      <% end %>
+    </li>
+
+    <li <%= "class=label-selected aria-expanded=true" if @selected_geozone_restriction == 'only_geozones' %> >
+      <%= label_tag 'geozone_restriction_only_geozones', class: 'label_class toggle-geozones-list' do %>
+        <%= radio_button_tag :geozone_restriction, 'only_geozones', @selected_geozone_restriction == 'only_geozones', { class: 'js-toggle-geozones' }  %>
+        <%= t('custom.geozones.sidebar_filter.restrictions.only_geozones') %>
+      <% end %>
+    </li>
+
+    <ul id='restricted_geozones' class="geozones-list">
+      <% @geozones.each do |geozone| %>
+        <%= render partial: "shared/sidebar_filter/geozones_sidebar_option", locals: { geozone: geozone, filter_block: 'restriction', selected_geozones: @restricted_geozones } %>
+      <% end  %>
+
+      <% if @restricted_geozones.any? && @restricted_geozones.size != @geozones.size %>
+        <small>
+          <%= link_to t('custom.geozones.sidebar_filter.restrictions.show_more'), '#', class: 'js-show-all-geozones'  %>
+        </small>
+      <% end %>
+
+    </ul>
+  </ul>
+</div>

@@ -1,0 +1,17 @@
+<tr>
+  <td class="small-8">
+    <strong><%= t("custom.settings.projekt_custom_feature.default_footer_tab") %></strong>
+    <br>
+    <span class="small">
+      <%= t("custom.settings.projekt_custom_feature.default_footer_tab_description", default: t("admin.settings.no_description")) %>
+    </span>
+  </td>
+  <td colspan=2>
+    <div class='small-12 medium-7'>
+      <%= form_for(@default_footer_tab_setting, url: update_default_projekt_footer_tab_admin_projekt_projekt_setting_path(@projekt, @default_footer_tab_setting)) do |f| %>
+        <%= f.hidden_field :tab, value: "#tab-projekt-settings" %>
+        <%= f.select :value, @default_footer_tab_options.collect{ |option| [option.short_name, option.id] }, { include_blank: t("custom.admin.projekts.edit.projekt_settings_tab.select_an_element"), label: false }, {onchange: 'this.form.submit()', class: 'setting-table-select-field', disabled: ( @default_footer_tab_options.empty? ) } %>
+      <% end %>
+    </div>
+  </td>
+</tr>

@@ -7,8 +7,14 @@ module ProjektsHelper
     Setting["projekts.show_archived.navigation"].present? ? true : false
   end
 
-  def prepare_projekt_name(projekt)
-    if projekt.page.published?
+  def show_affiliation_filter_in_sidebar?
+    Setting["projekts.show_affiliation_filter_in_index_sidebar"].present? ? true : false
+  end
+
+  def prepare_projekt_name(projekt, accesskey=nil)
+    if projekt.page.published? && accesskey
+      link_to projekt.name, projekt.page.url, accesskey: accesskey
+    elsif projekt.page.published?
       link_to projekt.name, projekt.page.url
     else
       projekt.name
@@ -47,6 +53,14 @@ module ProjektsHelper
       ((projekt.send(phase_name).end_date >= Date.today if projekt.send(phase_name).end_date) || projekt.send(phase_name).end_date.blank? )
   end
 
+  def projekt_phase_not_started_yet?(projekt, phase_name)
+    projekt.send(phase_name).start_date > Date.today if projekt.send(phase_name).start_date
+  end
+
+  def projekt_phase_expired?(projekt, phase_name)
+    projekt.send(phase_name).end_date < Date.today if projekt.send(phase_name).end_date
+  end
+
   def projekt_phase_show_in_navigation?(projekt, phase_name)
     projekt.send(phase_name).active &&
       ((projekt.send(phase_name).start_date <= Date.today if projekt.send(phase_name).start_date) || projekt.send(phase_name).start_date.blank? )
@@ -77,12 +91,26 @@ module ProjektsHelper
     end
   end
 
-  def get_projekt_phase_limitations(phase)
-    if phase
-      return phase.geozones.names.join(', ') if phase.geozones.any? && phase.geozone_restricted
-      return 'Nur Bürger der Stadt' if phase.geozone_restricted
+  def get_projekt_affiliation_name(projekt)
+    affiliation_name = projekt.geozone_affiliated || "no_affiliation"
+    geozone_affiliations = projekt.geozone_affiliations
+
+    if geozone_affiliations.exists? && affiliation_name == 'only_geozones'
+      return geozone_affiliations.pluck(:name).join(', ')
     end
-    ''
+
+    t("custom.geozones.projekt_selector.affiliations.#{affiliation_name}" )
+  end
+
+  def get_projekt_phase_restriction_name(projekt_phase)
+    restriction_name = projekt_phase.geozone_restricted || "no_restriction"
+    geozone_restrictions = projekt_phase.geozone_restrictions
+
+    if geozone_restrictions.exists? && restriction_name == 'only_geozones'
+      return geozone_restrictions.pluck(:name).join(', ')
+    end
+
+    t("custom.geozones.sidebar_filter.restrictions.#{restriction_name}" )
   end
 
   def related_polls(projekt, timestamp = Date.current.beginning_of_day)

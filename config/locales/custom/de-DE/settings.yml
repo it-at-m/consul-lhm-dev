@@ -106,7 +106,7 @@ de:
         recommendations_on_proposals_description: "Zeigt Vorschlags-Empfehlungen auf der Vorschlagssübersichtsseite an, basierend auf dem Nutzerverhalten."
       community: "Community für Vorschläge und Investitionsvorschläge"
       community_description: "Schaltet den Community-Bereich in der Rubrik Vorschläge und Investitionsprojekte der Budgets ein"
-      map: "Der Standordt von Vorschlägen und Investitonsvorschlägen wird angezeigt"
+      map: "Der Standort von Vorschlägen und Investitonsvorschlägen wird angezeigt"
       map_description: "Ermöglicht die Geolokalisierung der Vorschläge und Investitionsprojekte"
       allow_images: "Upload und Anzeigen von Bildern erlauben"
       allow_images_description: "Ermöglicht Nutzern das Hochladen von Bildern für Vorschläge und Investitionsvorschlägen"

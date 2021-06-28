@@ -1,0 +1,16 @@
+<div class='projekt-phase-geozone-restriction-selector'>
+
+  <%= f.radio_button :geozone_affiliated, 'no_affiliation',
+                     label: t('custom.geozones.sidebar_filter.affiliations.no_affiliation' ),
+                     checked: ( @projekt.geozone_affiliated.blank? || @projekt.geozone_affiliated == 'no_affiliation' ) %>
+  <br>
+
+  <%= f.radio_button :geozone_affiliated, 'entire_city', label: t('custom.geozones.sidebar_filter.affiliations.entire_city_short') %>
+  <br>
+
+  <%= f.radio_button :geozone_affiliated, 'only_geozones', label: t('custom.geozones.sidebar_filter.affiliations.only_geozones'), class: "projekt_only_geozones" %>
+
+  <div class="projekt-phase-geozone-selector">
+    <%= f.collection_check_boxes(:geozone_affiliation_ids, Geozone.all, :id, :name) %>
+  </div>
+</div>

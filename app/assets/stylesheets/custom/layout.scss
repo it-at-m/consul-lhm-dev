@@ -6,3 +6,7 @@ main {
 .debate .panel, .proposal .panel, .investment-project .panel, .budget-investment .panel, .legislation .panel, .communities-show .panel, .process-summary .debate-summary, .process-summary .proposal-summary, .process-summary .annotation-summary {
   background-color: $module-index-panel-background;
 }
+
+.margin-top-25 {
+  margin-top: 2.5em !important;
+}

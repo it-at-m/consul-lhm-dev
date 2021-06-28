@@ -5,4 +5,4 @@ de:
       progress: Fortschritte
     show:
       publication_date: "Veröffentlicht %{publication_date}"
-      status_changed: Investitionsstatus geändert zu
+      status_changed: Status geändert zu

@@ -56,10 +56,18 @@
   <%tags = @selected_tags&.select{ |tag| tag.kind == 'category' } %>
   <%can_create = true %>
 
-  <% if extended_feature?(:map_above_proposals) %>
+  <% if feature?(:map) %>
     <div class="map inline">
-      <%= render_map(nil, "proposals", false, nil, @proposals_coordinates) %>
+      <% if filtered_projekt %>
+        <%= render_map(filtered_projekt.map_location, "proposals", false, nil, @proposals_coordinates) %>
+      <% else %>
+        <%= render_map(nil, "proposals", false, nil, @proposals_coordinates) %>
+      <% end %>
     </div>
+    <div class='expand-proposals-overview-map small js-expand-proposals-overview-map'>
+      <%= t('custom.proposals.index.show_larger_map') %>
+    </div>
+    <div class="clear"></div>
     <div class="no-bullet margin-top">
     </div>
   <%end%>
@@ -69,7 +77,7 @@
 
       <%= render Shared::BannerComponent.new("proposals") %>
 
-      <% if extended_feature?(:intro_text_for_proposals) %>
+      <% if extended_feature?("proposals.intro_text_for_proposals") %>
         <%=render_custom_block 'proposals_welcome' %>
       <% end %>
 
@@ -108,7 +116,7 @@
           </div>
 
           <div class='small-6 column small'>
-            <% if extended_feature?('show_number_of_entries_in_modules') %>
+            <% if extended_feature?('modulewide.show_number_of_entries_in_modules') %>
               <div class='float-right'>
                 <%= @proposals.except(:limit, :offset).count %>
                 <%= t('activerecord.models.proposal', count: @proposals.except(:limit, :offset).count) %>
@@ -121,7 +129,7 @@
       <div class="show-for-small-only margin-top">
         <% if @proposals.any? && current_user && proposal_limit_exceeded?(current_user) %>
           <div class='max-proposals-exceeded'>
-            <%= t('custom.proposals.index.max_number_reached', max_number: Setting['extended_option.max_active_proposals_per_user']) %>
+            <%= t('custom.proposals.index.max_number_reached', max_number: Setting['extended_option.proposals.max_active_proposals_per_user']) %>
           </div>
         <% else %>
           <%= link_to t("proposals.index.start_proposal"), new_proposal_path(tags: tags.any? ? tags.map{|t| t.name} : nil),
@@ -147,7 +155,7 @@
 
         <% unless @search_terms || @advanced_search_terms || @tag_filter %>
           <div id="section_help" class="margin" data-magellan-target="section_help">
-            <% if extended_feature?('custom_help_text_in_modules') %>
+            <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
               <%=render_custom_block 'proposals_help' %>
             <% else %>
               <p class="lead">
@@ -164,7 +172,7 @@
       <aside class="margin-bottom">
         <% if current_user && proposal_limit_exceeded?(current_user) %>
           <div class='max-proposals-exceeded'>
-            <%= t('custom.proposals.index.max_number_reached', max_number: Setting['extended_option.max_active_proposals_per_user']) %>
+            <%= t('custom.proposals.index.max_number_reached', max_number: Setting['extended_option.proposals.max_active_proposals_per_user']) %>
           </div>
         <% else %>
           <%= link_to t("proposals.index.start_proposal"), new_proposal_path(tags: tags.any? ? tags.map{|t| t.name} : nil),
@@ -173,7 +181,7 @@
             disabled: !can_create %>
         <% end %>
 
-        <% if extended_feature?('show_selected_proposals_in_proposal_sidebar') %>
+        <% if extended_feature?('proposals.show_selected_proposals_in_proposal_sidebar') %>
           <div class="sidebar-divider"></div>
           <h2 class="sidebar-title"><%= t("proposals.index.selected_proposals") %></h2>
           <br>
@@ -184,8 +192,11 @@
 
         <% if params[:retired].blank? %>
           <%= render "shared/projekts_sidebar" %>
-          <% if extended_feature?('show_geozone_filter_in_sidebar') %>
-            <%= render "shared/sidebar_filter/geozones_sidebar" %>
+          <% if feature?(:map) %>
+            <%= render "shared/sidebar_filter/geozone_affiliations" %>
+          <% end %>
+          <% unless skip_user_verification? %>
+            <%= render "shared/sidebar_filter/geozone_restrictions" %>
           <% end %>
           <%= render "shared/categories", taggable: "proposal" %>
           <%= render "shared/tag_cloud", taggable: "proposal" %>
@@ -193,7 +204,7 @@
         <% end %>
         <%= render "retired" %>
 
-        <% if extended_feature?('show_suggested_proposals_in_proposal_sidebar') %>
+        <% if extended_feature?('proposals.show_suggested_proposals_in_proposal_sidebar') %>
           <%= render "proposals_lists" %>
         <% end %>
 

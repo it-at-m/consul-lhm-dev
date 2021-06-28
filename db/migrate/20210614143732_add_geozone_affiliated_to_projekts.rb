@@ -1,0 +1,5 @@
+class AddGeozoneAffiliatedToProjekts < ActiveRecord::Migration[5.2]
+  def change
+    add_column :projekts, :geozone_affiliated, :string
+  end
+end

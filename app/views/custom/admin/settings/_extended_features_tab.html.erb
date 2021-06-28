@@ -1,7 +1,28 @@
-<h2><%= t("custom.admin.settings.index.extended_features") %></h2>
+<h2><%= t("custom.admin.settings.index.extended_features.general") %></h2>
+<%= render "extended_features_table", features: @extended_feature_general, options: @extended_option_settings, tab: "#tab-extended-features" %>
 
-<%= render "extended_features_table", features: @extended_feature_settings, options: @extended_option_settings, tab: "#tab-extended-features" %>
+<h2><%= t("custom.admin.settings.index.extended_features.gdpr") %></h2>
+<%= render "extended_features_table", features: @extended_feature_gdpr, options: @extended_option_settings, tab: "#tab-extended-features" %>
+<%= render "extended_options_table_no_header", settings: @extended_option_gdpr, setting_name: "setting", tab: "#tab-extended-options" %>
 
-<h2><%= t("custom.admin.settings.index.extended_options") %></h2>
+<h2><%= t("custom.admin.settings.index.extended_features.modulewide") %></h2>
+<%= render "extended_features_table", features: @extended_feature_modulewide, options: @extended_option_settings, tab: "#tab-extended-features" %>
 
-<%= render "extended_options_table", settings: @extended_option_settings, setting_name: "setting", tab: "#tab-extended-options" %>
+<h2><%= t("custom.admin.settings.index.extended_features.debates") %></h2>
+<%= render "extended_features_table", features: @extended_feature_debates, options: @extended_option_settings, tab: "#tab-extended-features" %>
+
+
+<h2><%= t("custom.admin.settings.index.extended_features.proposals") %></h2>
+<%= render "extended_features_table", features: @extended_feature_proposals, options: @extended_option_settings, tab: "#tab-extended-features" %>
+<%= render "extended_options_table_no_header", settings: @extended_option_proposals, setting_name: "setting", tab: "#tab-extended-options" %>
+
+<h2><%= t("custom.admin.settings.index.extended_features.polls") %></h2>
+<%= render "extended_features_table", features: @extended_feature_polls, options: @extended_option_settings, tab: "#tab-extended-features" %>
+
+
+
+
+
+
+
+

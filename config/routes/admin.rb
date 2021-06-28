@@ -2,12 +2,21 @@ namespace :admin do
   root to: "dashboard#index"
 
   # custom routes
-  resources :projekts, only: [:index, :create, :update, :destroy] do
+  resources :projekts, only: [:index, :show, :create, :update, :destroy] do
+    resources :projekt_settings, only: [:update] do
+      member do
+        patch :update_default_projekt_footer_tab
+      end
+    end
+    resources :projekt_notifications, only: [:create, :update, :destroy]
+    resources :milestones, controller: "projekt_milestones"
+    resources :progress_bars, except: :show, controller: "projekt_progress_bars"
     member do
       get :order_up
       get :order_down
       get :edit
     end
+    put :update_map, to: "projekts#update_map"
   end
 
   resources :organizations, only: :index do

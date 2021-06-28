@@ -1,4 +1,9 @@
 class Projekt < ApplicationRecord
+  include Milestoneable
+  acts_as_paranoid column: :hidden_at
+  include ActsAsParanoidAliases
+  include Mappable
+
   has_many :children, class_name: 'Projekt', foreign_key: 'parent_id'
   belongs_to :parent, class_name: 'Projekt', optional: true
 
@@ -11,18 +16,31 @@ class Projekt < ApplicationRecord
   has_many :projekt_phases, dependent: :destroy
   has_one :debate_phase, class_name: 'ProjektPhase::DebatePhase'
   has_one :proposal_phase, class_name: 'ProjektPhase::ProposalPhase'
-  has_many :geozones, through: :projekt_phase
+  has_many :geozone_limitations, through: :projekt_phases
+  has_and_belongs_to_many :geozone_affiliations, through: :geozones_projekts, class_name: 'Geozone'
 
-  accepts_nested_attributes_for :debate_phase, :proposal_phase
+  has_many :projekt_settings, dependent: :destroy
+  has_many :projekt_notifications, dependent: :destroy
 
-  after_create :create_corresponding_page, :set_order, :create_projekt_phases
+  has_many :comments, as: :commentable, inverse_of: :commentable, dependent: :destroy
+  belongs_to :author, -> { with_hidden }, class_name: "User", inverse_of: :projekts
+
+  accepts_nested_attributes_for :debate_phase, :proposal_phase, :projekt_notifications
+
+  after_create :create_corresponding_page, :set_order, :create_projekt_phases, :create_default_settings, :create_map_location
   after_destroy :ensure_order_integrity
 
   scope :top_level, -> { where(parent: nil) }
   scope :with_order_number, -> { where.not(order_number: nil).order(order_number: :asc) }
 
-  scope :top_level_active, -> { top_level.with_order_number.where( "total_duration_active = ? and (total_duration_end IS NULL OR total_duration_end >= ?)", true, Date.today) }
-  scope :top_level_archived, -> { top_level.with_order_number.where( "total_duration_active = ? and total_duration_end < ?", true, Date.today) }
+  scope :top_level_active, -> { top_level.with_order_number.where( "total_duration_end IS NULL OR total_duration_end >= ?", Date.today).joins(:projekt_settings).where( projekt_settings: { key: 'projekt_feature.main.activate', value: 'active' }) }
+  scope :top_level_archived, -> { top_level.with_order_number.where( "total_duration_end < ?", Date.today).joins(:projekt_settings).where( projekt_settings: { key: 'projekt_feature.main.activate', value: '' }) }
+
+  scope :top_level_active_top_menu, -> { top_level.with_order_number.
+                                         where("total_duration_end IS NULL OR total_duration_end >= ?", Date.today).
+                                         joins('INNER JOIN projekt_settings a ON projekts.id = a.projekt_id').
+                                         joins('INNER JOIN projekt_settings b ON projekts.id = b.projekt_id').
+                                         where("a.key": "projekt_feature.main.activate", "a.value": "active", "b.key": "projekt_feature.general.show_in_navigation", "b.value": "active").distinct }
 
   def all_children_ids(all_children_ids = [])
     if self.children.any?
@@ -73,11 +91,23 @@ class Projekt < ApplicationRecord
     end
   end
 
+  def create_default_settings
+    ProjektSetting.defaults.each do |name, value|
+      unless ProjektSetting.find_by(key: name, projekt_id: self.id)
+        ProjektSetting.create(key: name, value: value, projekt_id: self.id)
+      end
+    end
+  end
+
   def self.ensure_projekt_phases
     all.each do |projekt|
       projekt.debate_phase = ProjektPhase::DebatePhase.create unless projekt.debate_phase
       projekt.proposal_phase = ProjektPhase::ProposalPhase.create unless projekt.proposal_phase
     end
+  end
+
+  def title
+    name
   end
 
   private
@@ -142,6 +172,17 @@ class Projekt < ApplicationRecord
         projekt.update(order_number: new_order)
         new_order += 1
       end
+    end
+  end
+
+  def create_map_location
+    unless map_location.present?
+      MapLocation.create(
+        latitude: Setting['map.latitude'],
+        longitude: Setting['map.longitude'],
+        zoom: Setting['map.zoom'],
+        projekt_id: self.id
+      )
     end
   end
 end

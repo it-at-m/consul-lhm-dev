@@ -1,0 +1,19 @@
+<tr>
+  <td class="small-6">
+    <strong><%= t("custom.settings.map_#{attribute.to_s}") %></strong>
+    <br>
+    <span class="small">
+      <%= t("custom.settings.map_#{attribute.to_s}_description", default: t("admin.settings.no_description")) %>
+    </span>
+  </td>
+  <td class="small-6">
+
+    <div class="small-12 medium-6 large-8 column">
+      <%= map_location_form.text_area attribute, label: false, lines: 1 %>
+    </div>
+    <div class="small-12 medium-6 large-4 column">
+      <%= map_location_form.submit(t("admin.settings.index.update_setting"), class: "button hollow expanded") %>
+    </div>
+
+  </td>
+</tr>

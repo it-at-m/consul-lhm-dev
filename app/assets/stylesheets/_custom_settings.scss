@@ -1,40 +1,43 @@
 // brand_color
-$brand:                     #1b98d5;
-$dark:                      #005A9F;
-// fonts
-$body-font-family: 'sourcesanspro-regular-webfont', 'sourcesanspro-bold-webfont', 'PT_Serif_Web-Regular', sans-serif !important;
-$header-font-family: 'sourcesanspro-regular-webfont', 'sourcesanspro-bold-webfont', 'PT_Serif_Web-Regular', sans-serif !important;
-$base-font-size:      16px;
-    // Regular 
-    @font-face {
-      font-family: "sourcesanspro-regular-webfont";
-      src: font-url("sourcesanspro-regular-webfont.ttf") format("ttf"), font-url("custom/DMSans-Regular.ttf") format("ttf");
-      font-weight: 100;
-      font-style: normal; }
-    // Bold 
-    @font-face {
-      font-family: "sourcesanspro-bold-webfont";
-      src: font-url("sourcesanspro-bold-webfont.ttf") format("ttf"), font-url("custom/DMSans-Bold.ttf") format("ttf");
-      font-weight: 100;
-      font-style: bold; }
-    // Fallback
-    @font-face {
-      font-family: "PT_Serif_Web-Regular";
-      src: font-url("custom/PT_Serif_Web-Regular.ttf") format("ttf"), font-url("custom/PT_Serif_Web-Regular.ttf") format("ttf");
-      font-weight: 100;
-      font-style: normal; }
-$base-font-size:      16px;
-// custom_settings
-$light:                       lighten($brand, 70%);
-$welcomebgcolor:              $white;
+$brand:                                           #004a83;
+$secondary:                                       lighten($brand, 70%);
+$tertiary:                                        lighten($brand, 50%);
+$dark:                                            darken($brand, 10%);
+
+$brand-dark:                                      #005a9f;
+$yellow:                                          #FFE400;
+
+// Menu variables
+
+$dark:                                            #222;
+$white:                                           #fff;
+
+
+$top-level-menu-item-text-color:                  $white;
+$top-level-menu-background-color:                 $brand-dark;
+$flyout-item-text-color:                          $white;
+$flyout-item-bg-color:                            $brand-dark;
+$flyout-block-border-color:                       #dee0e3;
+$flyout-item-divider-color:                       lighten($flyout-block-border-color, 5%);
+$flyout-item-projekt-modules-links-color:         $flyout-item-text-color;
+
+
+$flyout-item-line-height:                         1.5rem;
+$flyout-item-projekt-min-height:                  60px;
+
+$responsive-menu-text-color:                      $white;
+$responsive-menu-background-color:                $brand-dark;
+
+$module-index-panel-background:                   lighten($brand, 70%);
+
+
+
+
+//  Review these variables
+$tagsbackgroundcolor:         lighten($brand, 65%);
+$tagstextcolor:               $brand;
 $welcomebgposition:           top;
-$welcometextpositionsmall:    rem-calc(15);
-$welcometextpositionmedium:   rem-calc(20);     
-$welcometextpositionlarge:    rem-calc(25);          
-// text_center / line 30 & 34
-// <div class="small-12 medium-6 column <%= "medium-9 small-centered text-center" unless header.image.present? %>">
-// <div class="small-12 medium-6 large-4 <%= "small-centered text-center" unless header.image.present? %>">      
-$welcomespan:                 $brand;
+$welcomebgcolor:              $white;
 $welcomeheadline:             $brand;
 $welcomelead:                 $brand;
 $welcomebuttonbg:             $brand;
@@ -42,7 +45,32 @@ $welcomebuttontext:           $white;
 $welcometitle:                $brand;
 $dropdownbackground:          $white;
 $dropdowntextcolor:           $black;
-$dropdownbordercolor:         darken($dropdownbackground, 5%);
-$dropdownwidth:               300px;
-$tagsbackgroundcolor:         lighten($brand, 65%);
-$tagstextcolor:               $brand;
+$welcometextpositionmedium:   rem-calc(20);
+$welcometextpositionlarge:    rem-calc(25); 
+$welcomespan:                 $brand;
+
+
+
+// fonts
+$body-font-family: 'sourcesanspro-regular-webfont', 'sourcesanspro-bold-webfont', 'PT_Serif_Web-Regular', sans-serif !important;
+$header-font-family: 'sourcesanspro-regular-webfont', 'sourcesanspro-bold-webfont', 'PT_Serif_Web-Regular', sans-serif !important;
+$base-font-size:      16px;
+
+// Regular 
+@font-face {
+  font-family: "sourcesanspro-regular-webfont";
+  src: font-url("sourcesanspro-regular-webfont.ttf") format("ttf"), font-url("custom/DMSans-Regular.ttf") format("ttf");
+  font-weight: 100;
+  font-style: normal; }
+// Bold 
+@font-face {
+  font-family: "sourcesanspro-bold-webfont";
+  src: font-url("sourcesanspro-bold-webfont.ttf") format("ttf"), font-url("custom/DMSans-Bold.ttf") format("ttf");
+  font-weight: 100;
+  font-style: bold; }
+// Fallback
+@font-face {
+  font-family: "PT_Serif_Web-Regular";
+  src: font-url("custom/PT_Serif_Web-Regular.ttf") format("ttf"), font-url("custom/PT_Serif_Web-Regular.ttf") format("ttf");
+  font-weight: 100;
+  font-style: normal; }

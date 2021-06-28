@@ -20,13 +20,14 @@
       App.Map.maps = [];
     },
     initializeMap: function(element) {
-      var addMarker, clearFormfields, createMarker, editable, getPopupContent, latitudeInputSelector, longitudeInputSelector, map, mapAttribution, mapCenterLatLng, mapCenterLatitude, mapCenterLongitude, mapTilesProvider, marker, markerIcon, markerLatitude, markerLongitude, moveOrPlaceMarker, openMarkerPopup, removeMarker, removeMarkerSelector, updateFormfields, zoom, zoomInputSelector, process;
+      var addMarker, clearFormfields, createMarker, editable, getPopupContent, latitudeInputSelector, longitudeInputSelector, map, mapAttribution, mapCenterLatLng, mapCenterLatitude, mapCenterLongitude, mapTilesProvider, marker, markerIcon, markerLatitude, markerLongitude, markerColor, moveOrPlaceMarker, openMarkerPopup, removeMarker, removeMarkerSelector, updateFormfields, zoom, zoomInputSelector, process;
       process = $(element).data("parent-class");
       App.Map.cleanCoordinates(element);
       mapCenterLatitude = $(element).data("map-center-latitude");
       mapCenterLongitude = $(element).data("map-center-longitude");
       markerLatitude = $(element).data("marker-latitude");
       markerLongitude = $(element).data("marker-longitude");
+      markerColor = $(element).data("marker-color");
       zoom = $(element).data("map-zoom");
       mapTilesProvider = $(element).data("map-tiles-provider");
       mapAttribution = $(element).data("map-tiles-provider-attribution");
@@ -43,9 +44,14 @@
         iconAnchor: [15, 40],
         html: '<div class="map-icon"></div>'
       });
-      createMarker = function(latitude, longitude) {
+      createMarker = function(latitude, longitude, color) {
         var markerLatLng;
         markerLatLng = new L.LatLng(latitude, longitude);
+
+        if ( color ) {
+          markerIcon.options.html = '<div class="map-icon" style="background-color: ' + color + '"></div>'
+        }
+
         marker = L.marker(markerLatLng, {
           icon: markerIcon,
           draggable: editable
@@ -103,14 +109,16 @@
       };
       mapCenterLatLng = new L.LatLng(mapCenterLatitude, mapCenterLongitude);
       map = L.map(element.id).setView(mapCenterLatLng, zoom);
+      App.Map.maps.push(map);
       L.tileLayer.wms(mapTilesProvider, {
         layers: 'g_stadtkarte_gesamt',
         attribution: mapAttribution
       }).addTo(map);
       if (markerLatitude && markerLongitude && !addMarker) {
-        marker = createMarker(markerLatitude, markerLongitude);
+        marker = createMarker(markerLatitude, markerLongitude, markerColor);
       }
       if (editable) {
+        $('.js-select-projekt').on("click", removeMarker);
         $(removeMarkerSelector).on("click", removeMarker);
         map.on("zoomend", function() {
           if (marker) {
@@ -122,7 +130,7 @@
       if (addMarker) {
         addMarker.forEach(function(coordinates) {
           if (App.Map.validCoordinates(coordinates)) {
-            marker = createMarker(coordinates.lat, coordinates.long);
+            marker = createMarker(coordinates.lat, coordinates.long, coordinates.color);
             marker.options.id = (process == "proposals" ? coordinates.proposal_id : coordinates.investment_id);
             marker.on("click", openMarkerPopup);
           }

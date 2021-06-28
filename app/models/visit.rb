@@ -1,4 +1,5 @@
-class Visit < ApplicationRecord
-  has_many :ahoy_events, class_name: "Ahoy::Event"
-  belongs_to :user
-end
+# replaced with Ahoy::Visit
+# class Visit < ApplicationRecord
+#   has_many :ahoy_events, class_name: "Ahoy::Event"
+#   belongs_to :user
+# end

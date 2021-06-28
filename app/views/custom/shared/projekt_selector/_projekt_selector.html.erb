@@ -1,52 +1,66 @@
 <% projekts = Projekt.top_level_active %>
+<% current_model_name = model.class.name.downcase %>
 
-<div id="projekt-tags" class="margin-top margin-bottom">
+<% if projekts.exists?  %>
 
-  <% if model.errors.full_messages.any? { |error| error.include? 'Projekt' } %>
-    <br>
-    <small class='form-error is-visible'>
-      <%= t('custom.projekts.errors.presence') %>
-    </small>
+  <% if current_model_name == 'debate' || current_model_name == 'proposal' %>
+    <h5><%= t("custom.projekts.selector.connected_resources.#{current_model_name}_title") %></h5>
+    <div>
+      <small><%= t("custom.projekts.selector.connected_resources.#{current_model_name}_description") %></small>
+    </div>
   <% end %>
 
-  <div id="projekt-tags-selector">
+  <div id="projekt-tags" class="margin-top margin-bottom">
 
-    <div class="projekt-tags-column">
-      <% if projekts.any? { |projekt| projekt.children.any? } %>
-        <h6><%= t('custom.projekts.new.first_level') %></h6>
-      <% end %>
+    <% if model.errors.full_messages.any? { |error| error.include? 'Projekt' } %>
+      <br>
+      <small class='form-error is-visible'>
+        <%= t('custom.projekts.errors.presence') %>
+      </small>
+    <% end %>
 
-      <%= render partial: 'shared/projekt_selector/projekt_group', locals: { f:f, projekts: projekts }  %>
-    </div>
+    <div id="projekt-tags-selector"
+         data-default-map-latitude=<%= Setting["map.latitude"] %>
+         data-default-map-longitude=<%= Setting["map.longitude"] %>
+         data-default-map-zoom=<%= Setting["map.zoom"] %>    >
 
-    <div class="projekt-tags-column">
-      <% if projekts.any? { |projekt| projekt.children.any? } %>
-        <h6><%= t('custom.projekts.new.second_level') %></h6>
-      <% end %>
-
-      <% projekts.each do |projekt| %>
-        <% if projekt.children.any? %>
-          <%= render partial: 'shared/projekt_selector/projekt_group', locals: { f:f, projekts: projekt.children, parent_projekt_id: projekt.id }  %>
+      <div class="projekt-tags-column">
+        <% if projekts.any? { |projekt| projekt.children.any? } %>
+          <h6><%= t('custom.projekts.new.first_level') %></h6>
         <% end %>
-      <% end %>
-    </div>
 
-    <div class="projekt-tags-column">
-      <% if projekts.any? { |projekt| projekt.children.any? { |projekt| projekt.children.any? } } %>
-        <h6><%= t('custom.projekts.new.third_level') %></h6>
-      <% end %>
+        <%= render partial: 'shared/projekt_selector/projekt_group', locals: { f:f, projekts: projekts }  %>
+      </div>
 
-      <% projekts.each do |projekt| %>
-        <% if projekt.children.any? %>
-          <% projekt.children.each do |projekt| %>
-            <% if projekt.children.any? %>
-              <%= render partial: 'shared/projekt_selector/projekt_group', locals: { f:f, projekts: projekt.children, parent_projekt_id: projekt.id }  %>
+      <div class="projekt-tags-column">
+        <% if projekts.any? { |projekt| projekt.children.any? } %>
+          <h6><%= t('custom.projekts.new.second_level') %></h6>
+        <% end %>
 
+        <% projekts.each do |projekt| %>
+          <% if projekt.children.any? %>
+            <%= render partial: 'shared/projekt_selector/projekt_group', locals: { f:f, projekts: projekt.children.with_order_number, parent_projekt_id: projekt.id }  %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="projekt-tags-column">
+        <% if projekts.any? { |projekt| projekt.children.any? { |projekt| projekt.children.any? } } %>
+          <h6><%= t('custom.projekts.new.third_level') %></h6>
+        <% end %>
+
+        <% projekts.each do |projekt| %>
+          <% if projekt.children.any? %>
+            <% projekt.children.each do |projekt| %>
+              <% if projekt.children.any? %>
+                <%= render partial: 'shared/projekt_selector/projekt_group', locals: { f:f, projekts: projekt.children.with_order_number, parent_projekt_id: projekt.id }  %>
+
+              <% end %>
             <% end %>
           <% end %>
         <% end %>
-      <% end %>
-    </div>
+      </div>
 
+    </div>
   </div>
-</div>
+<% end %>

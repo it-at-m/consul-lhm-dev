@@ -1,0 +1,31 @@
+<h2><%= t("admin.settings.index.map.title") %></h2>
+
+<%= form_for(@projekt, url: admin_projekt_path, as: :projekt) do |f| %>
+  <%= hidden_field_tag :tab, '#tab-projekt-map' %>
+
+  <%= f.fields_for :map_location do |map_location_form| %>
+
+    <table>
+      <thead>
+        <tr>
+          <th><%= t("admin.settings.setting") %></th>
+          <th><%= t("admin.settings.setting_value") %></th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <%= render partial: 'custom/admin/projekts/edit/projekt_map/map_settings_form', locals: { map_location_form: map_location_form, attribute: :latitude}%>
+        <%= render partial: 'custom/admin/projekts/edit/projekt_map/map_settings_form', locals: { map_location_form: map_location_form, attribute: :longitude }%>
+        <%= render partial: 'custom/admin/projekts/edit/projekt_map/map_settings_form', locals: { map_location_form: map_location_form, attribute: :zoom }%>
+        <%= render partial: 'custom/admin/projekts/edit/projekt_map/map_settings_form', locals: { map_location_form: map_location_form, attribute: :pin_color }%>
+
+      </tbody>
+    </table>
+
+  <% end %>
+
+<% end %>
+
+<p><%= t("admin.settings.index.map.help") %></p>
+
+<%= render 'custom/admin/projekts/edit/projekt_map/map_form', map_location: @projekt.map_location %>

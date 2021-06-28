@@ -29,6 +29,8 @@ de:
     close: Schließen
     menu: Menü
   comments:
+    actions:
+      delete: Löschen
     comments_closed: Kommentare sind geschlossen
     verified_only: Zur Teilnahme %{verify_account}
     comment:

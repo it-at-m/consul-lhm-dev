@@ -15,7 +15,7 @@
   <div class="row">
     <div class="small-12 medium-9 column">
 
-      <% if extended_feature?(:intro_text_for_polls) %>
+      <% if extended_feature?('polls.intro_text_for_polls') %>
         <%=render_custom_block 'polls_welcome' %>
       <% end %>
 
@@ -34,7 +34,7 @@
             <%= link_to t('polls.index.section_header.help'), '#section_help' %>
           </div>
           <div class='small-6 column small'>
-            <% if extended_feature?('show_number_of_entries_in_modules') %>
+            <% if extended_feature?('modulewide.show_number_of_entries_in_modules') %>
               <div class='float-right'>
                 <%= @all_polls.count %>
                 <%= t('activerecord.models.poll', count: @all_polls.count) %>
@@ -44,21 +44,9 @@
         </div>
 
 
-        <% polls_by_geozone_restriction = @polls.group_by(&:geozone_restricted) %>
-
-        <% if polls_by_geozone_restriction[false].present? %>
-          <h3 class="section-title-divider">
-            <span><%= t("polls.index.no_geozone_restricted") %></span>
-          </h3>
-          <%= render "poll_group", poll_group: polls_by_geozone_restriction[false] %>
-        <% end %>
-
-        <% if polls_by_geozone_restriction[true].present? %>
-          <h3 class="section-title-divider">
-            <span><%= t("polls.index.geozone_restricted") %></span>
-          </h3>
-          <%= render "poll_group", poll_group: polls_by_geozone_restriction[true] %>
-        <% end %>
+        <div class='margin-top'>
+        <%= render "poll_group", poll_group: @polls %>
+        </div>
 
         <%= paginate @polls %>
       <% else %>
@@ -68,7 +56,7 @@
       <% end %>
 
       <div id="section_help" class="margin" data-magellan-target="section_help">
-        <% if extended_feature?('custom_help_text_in_modules')  %>
+        <% if extended_feature?('modulewide.custom_help_text_in_modules')  %>
           <%=render_custom_block 'polls_help' %>
         <% else %>
           <p class="lead">
@@ -83,8 +71,11 @@
     <div class="small-12 medium-3 column">
       <aside class="margin-bottom">
         <%= render "shared/projekts_sidebar" %>
-        <% if extended_feature?('show_geozone_filter_in_sidebar') %>
-          <%= render "shared/sidebar_filter/geozones_sidebar" %>
+        <% if feature?(:map) %>
+          <%= render "shared/sidebar_filter/geozone_affiliations" %>
+        <% end %>
+        <% unless skip_user_verification? %>
+          <%= render "shared/sidebar_filter/geozone_restrictions" %>
         <% end %>
         <%= render "shared/categories", taggable: "poll" %>
         <%= render "shared/tag_cloud", taggable: "poll" %>

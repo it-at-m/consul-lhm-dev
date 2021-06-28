@@ -1,0 +1,7 @@
+<h2><%= t("admin.settings.index.map.title") %></h2>
+
+<%= render "admin/settings/settings_table", settings: @map_configuration_settings, setting_name: "setting", tab: "#tab-projekts-map" %>
+
+<p><%= t("admin.settings.index.map.help") %></p>
+
+<%= render "admin/settings/map_form" %>

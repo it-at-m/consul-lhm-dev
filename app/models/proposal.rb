@@ -43,7 +43,7 @@ class Proposal < ApplicationRecord
   has_many :polls, as: :related, inverse_of: :related
 
   validates_translation :title, presence: true, length: { in: 4..Proposal.title_max_length }
-  validates_translation :description, length: { maximum: Proposal.description_max_length }
+  # validates_translation :description, length: { maximum: Proposal.description_max_length }
   validates_translation :summary, presence: true
   validates_translation :retired_explanation, presence: true, unless: -> { retired_at.blank? }
 

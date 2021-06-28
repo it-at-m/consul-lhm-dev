@@ -1,0 +1,54 @@
+<% resource_name = @resource_name.capitalize.constantize.model_name.human count: :other %>
+
+<div class="sidebar-divider"></div>
+
+<h2 class="sidebar-title projekt-tag-chip-geozone-affiliation projekt-tag-chip-icon"><%= t("custom.geozones.sidebar_filter.affiliations.title") %></h2>
+
+<div id='geozone_affiliation' class='geozone-filter'>
+
+  <ul>
+    <li <%= "class=label-selected" if @selected_geozone_affiliation == 'all_resources' %> >
+      <%= label_tag 'geozone_affiliation_all_resources', class: 'label_class' do %>
+        <%= radio_button_tag :geozone_affiliation, 'all_resources', @selected_geozone_affiliation == 'all_resources', { class: 'js-filter-geozone-affiliation' }  %>
+        <%= t('custom.geozones.sidebar_filter.affiliations.all_resources', resource_name: resource_name ) %>
+        <span class="checkmark"></span>
+      <% end %>
+    </li>
+
+    <li <%= "class=label-selected" if (@selected_geozone_affiliation == 'no_affiliation') %> >
+      <%= label_tag 'geozone_affiliation_no_affiliation', class: 'label_class' do %>
+        <%= radio_button_tag :geozone_affiliation, 'no_affiliation', @selected_geozone_affiliation == 'no_affiliation', { class: 'js-filter-geozone-affiliation' }  %>
+        <%= t('custom.geozones.sidebar_filter.affiliations.no_affiliation' ) %>
+        <span class="checkmark"></span>
+      <% end %>
+    </li>
+
+    <li <%= "class=label-selected" if @selected_geozone_affiliation == 'entire_city' %> >
+      <%= label_tag 'geozone_affiliation_entire_city', class: 'label_class' do %>
+        <%= radio_button_tag :geozone_affiliation, 'entire_city', @selected_geozone_affiliation == 'entire_city', { class: 'js-filter-geozone-affiliation' }  %>
+        <%= t('custom.geozones.sidebar_filter.affiliations.entire_city', resource_name: resource_name ) %>
+        <span class="checkmark"></span>
+      <% end %>
+    </li>
+
+    <li <%= "class=label-selected aria-expanded=true" if @selected_geozone_affiliation == 'only_geozones' %> >
+      <%= label_tag 'geozone_affiliation_only_geozones', class: 'label_class toggle-geozones-list' do %>
+        <%= radio_button_tag :geozone_affiliation, 'only_geozones', @selected_geozone_affiliation == 'only_geozones', { class: 'js-toggle-geozones' }  %>
+        <%= t('custom.geozones.sidebar_filter.affiliations.only_geozones') %>
+      <% end %>
+    </li>
+
+    <ul id='affiliated_geozones' class="geozones-list">
+      <% @geozones.each do |geozone| %>
+        <%= render partial: "shared/sidebar_filter/geozones_sidebar_option", locals: { geozone: geozone, filter_block: 'affiliation', selected_geozones: @affiliated_geozones } %>
+      <% end  %>
+
+      <% if @affiliated_geozones.any? && @affiliated_geozones.size != @geozones.size %>
+        <small <%= "class=hide" unless @affiliated_geozones.any?  %>>
+          <%= link_to t('custom.geozones.sidebar_filter.affiliations.show_more'), '#', class: 'js-show-all-geozones'  %>
+        </small>
+      <% end  %>
+
+    </ul>
+  </ul>
+</div>

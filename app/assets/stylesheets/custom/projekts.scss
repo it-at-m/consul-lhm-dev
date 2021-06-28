@@ -13,6 +13,12 @@ span.icon-projekts::before {
   }
 }
 
+.geo-affiliation-title,
+.geo-restriction-title {
+  display: block;
+  margin-bottom: 1em;
+}
+
 table.projekts,
 table.edit-projekt {
   
@@ -84,17 +90,18 @@ table.edit-projekt {
 
   .section-title,
   .debate-phase,
-  .proposal-phase {
+  .proposal-phase,
+  .voting-phase {
     grid-column-start: 1;
     grid-column-end: 3;
   }
 
   .debate-phase,
-  .proposal-phase {
+  .proposal-phase,
+  .voting-phase {
     display: grid;
     grid-template-columns: 250px 300px;
-    margin-top: 1rem;
-    margin-bottom: 0;
+    margin-bottom: 1rem;
   }
 
   .margin-top {
@@ -174,6 +181,10 @@ td.projekt-order {
     margin-right: 0.75em !important;
     margin-left: 0 !important;
   }
+
+  .destroy-link {
+    color: #cc4b37;
+  }
 }
 
 
@@ -214,35 +225,14 @@ div.projekt-phase-geozone-restriction-selector {
   input.proposal_phase_only_geozones:checked ~ .projekt-phase-geozone-selector.proposal_phase {
     display: block;
   }
+
+  input#projekt_geozone_affiliated_only_geozones:checked ~ .projekt-phase-geozone-selector {
+    display: block;
+  }
 }
 
 
 // Index and new views
-
-
-.projekt-phase-button {
-  padding: 0.3rem 0.5rem;
-  display: inline-block;
-  background: $brand;
-  color: $white;
-  text-decoration: none !important;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  width: 190px;
-  text-align: center;
-  margin-top: 0.5em;
-
-  &:hover {
-    color: $white;
-  }
-
-  &:focus {
-    color: $white;
-    outline: none;
-  }
-}
-
-
 
 #projekt-tags {
   margin: 1em 0;
@@ -288,11 +278,24 @@ div.projekt-phase-geozone-restriction-selector {
   input:not(:checked) ~ .checkmark-wrapper > .checkmark {
     background: #fff;
     border: 1.5px solid #C6C6C6;
-  }
+	}
 
   input:checked ~ .checkmark-wrapper > .checkmark {
-    background: #06408E;
-    border: 1.5px solid #06408E;
+    background: #fff;
+    border: 1.5px solid $brand;
+  }
+
+  input:checked ~ .checkmark-wrapper > .checkmark::after {
+    background: $brand;
+    border: 1.5px solid $brand;
+    content: "";
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
   }
 
   label {
@@ -315,7 +318,7 @@ div.projekt-phase-geozone-restriction-selector {
   }
 
   label.highlighted {
-    background: #ECF2FB;
+    background: $secondary;
   }
 
   label.show-arrow:after {
@@ -325,7 +328,7 @@ div.projekt-phase-geozone-restriction-selector {
     top: 23px;
     width: 7px;
     height: 7px;
-    border: 1.5px solid #C6C6C6;
+    border: 1.5px solid #222;
     border-width: 0 2px 2px 0;
     transform: rotate(-45deg);
   }
@@ -423,6 +426,15 @@ div.projekt-phase-geozone-restriction-selector {
     width: 0;
   }
 
+  #filter-projekts-active > ul,
+  #filter-projekts-archived > ul {
+    margin-left: 27px;
+  }
+
+  ul {
+    margin-left: 16px;
+  }
+
   .checkmark {
     position: absolute;
     top: 5px;
@@ -433,18 +445,25 @@ div.projekt-phase-geozone-restriction-selector {
     border-radius: 2px;
   }
 
+  .color-code {
+    position: absolute;
+    top: 5px;
+    left: -27px;
+    height: 14px;
+    width: 4px;
+    border-radius: 2px;
+  }
+
   input:checked ~ .checkmark:before {
     display: block;
   }
 
   input:checked ~ .checkmark {
-    background: #06408E;
-    border: 1.5px solid #06408E;
+    background: #878787;
+    border: 1.5px solid #878787;
   }
 
   .label-selected {
-    color: #06408E;
-    border-color: #06408E;
   }
 
   .checkmark:before {
@@ -476,4 +495,76 @@ span.projekt-backlink:before {
   font-weight: normal;
   font-family: 'Font Awesome 5 Free';
   opacity: 0.9;
+}
+
+
+
+// Projekt notifications
+
+.admin .projekt-notification {
+  position: relative;
+
+  input[type='checkbox'] {
+    display: none;
+  }
+
+  .edit-projekt-notification-form {
+    display: none;
+  }
+
+  input:checked ~ .projekt-notification-content {
+    display: none;
+  }
+
+  input:checked ~ .edit-projekt-notification-form {
+    display: block;
+  }
+  
+  .edit-projekt-notification {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .edit-projekt-notification::before {
+    content: "\f044";
+    font-weight: normal;
+    font-family: 'Font Awesome 5 Free';
+    color: #004a83;
+  }
+
+  .delete-projekt-notification {
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .delete-projekt-notification::before {
+    content: "\f2ed";
+    font-weight: normal;
+    font-family: 'Font Awesome 5 Free';
+    color: #cc4b37;
+  }
+}
+
+// Projekt page footer
+
+.projekt-footer {
+  margin-top: 5em;
+}
+
+#tab-activities .most-active-resources {
+  .tabs-panel {
+    padding: 0;
+  }
+
+  .all-projekt-resources-link {
+    float: right;
+    color: #CE003E;
+    padding-top: 0.5rem;
+  }
 }

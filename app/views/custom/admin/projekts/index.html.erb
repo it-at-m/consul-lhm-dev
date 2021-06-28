@@ -1,4 +1,4 @@
-<h1><%= t("custom.admin.projekts.index.name_plural") %></h1>
+<h1><%= t("custom.admin.projekts.index.page_name") %></h1>
 
 <div class="tabs-content" data-tabs-content="projekts-tabs">
   <%= render "filter_subnav" %>
@@ -9,5 +9,13 @@
 
   <div class="tabs-panel" id="tab-projekts-settings">
     <%= render "projekts_settings_tab" %>
+  </div>
+
+  <div class="tabs-panel" id="tab-projekt-map">
+    <%= render "projekts_map_tab" %>
+  </div>
+
+  <div class="tabs-panel" id="tab-projekts-geozones">
+    <%= render "projekts_geozones_tab" %>
   </div>
 </div>

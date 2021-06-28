@@ -278,7 +278,7 @@ de:
         new_milestone: Neuen Meilenstein erstellen
         milestone_tags: Status des Investitionsvorschlags
       form:
-        admin_statuses: Status des Investitionsvorschlags verwalten
+        admin_statuses: Status verwalten
         no_statuses_defined: Es wurde noch kein Status für diese Investitionsvorschläge definiert
       new:
         creating: Meilenstein erstellen

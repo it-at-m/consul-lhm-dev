@@ -33,7 +33,9 @@
           <%= poll_dates(poll) %>
           <% if poll.projekt.present? && poll.projekt.page.published? %>
             <br>
-            <%= link_to t("custom.projekt.back_to_projekt_overview"), poll.projekt.page.url, class: 'back' %>
+            <% unless params[:controller] == "pages" %>
+              <%= link_to t("custom.projekt.back_to_projekt_overview"), poll.projekt.page.url, class: 'back' %>
+            <% end %>
           <% end %>
 
 

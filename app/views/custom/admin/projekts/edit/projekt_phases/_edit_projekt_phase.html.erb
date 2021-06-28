@@ -1,0 +1,24 @@
+<%= f.fields_for phase_name.to_s do |phase_form| %>
+  <tr class="projekt_phase_settings">
+    <td>
+      <%= t("custom.admin.projekts.edit.projekt_phases_tab.#{phase_name}") %>
+    </td>
+    <td>
+      <%= phase_form.date_field :start_date, label: t("custom.admin.projekts.edit.projekt_phases_tab.start_date")  %>
+    </td>
+    <td>
+      <%= phase_form.date_field :end_date, label: t("custom.admin.projekts.edit.projekt_phases_tab.end_date") %>
+    </td>
+    <td>
+      <%= phase_form.check_box :active, { label: t("custom.admin.projekts.edit.projekt_phases_tab.activate") } %>
+    </td>
+  </tr>
+
+  <tr class="projekt_phase_geozones">
+    <td></td>
+    <td colspan="3">
+      <strong class='geo-restriction-title'><span class='geo-restriction-icon'><%= t("custom.admin.projekts.edit.projekt_phases_tab.restriction") %></span></strong>
+      <%= render partial: 'custom/admin/projekts/edit/projekt_phases/phase_geozone_restriction', locals: { phase_form: phase_form, projekt_phase: projekt_phase, phase_name: phase_name } %>
+    </td>
+  </tr>
+<% end %>

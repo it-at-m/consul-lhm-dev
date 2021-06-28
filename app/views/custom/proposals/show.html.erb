@@ -115,8 +115,13 @@
         <%= render "proposals/comments" %>
       </div>
 
-      <%= render "proposals/notifications" %>
-      <%= render "milestones/milestones", milestoneable: @proposal %>
+      <% if extended_feature?('proposals.enable_proposal_notifications_tab') %>
+        <%= render "proposals/notifications" %>
+      <% end %>
+
+      <% if extended_feature?('proposals.enable_proposal_milestones_tab') %>
+        <%= render "milestones/milestones", milestoneable: @proposal %>
+      <% end %>
     </div>
   <% end %>
 </main>

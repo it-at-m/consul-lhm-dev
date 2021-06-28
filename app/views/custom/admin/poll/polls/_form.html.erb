@@ -55,7 +55,7 @@
     </div>
   </div>
 
-  <%if extended_feature?("enable_categories") %>
+  <%if extended_feature?("modulewide.enable_categories") %>
     <div class="row">
       <hr>
       <div class="small-12 column">
@@ -80,7 +80,7 @@
 
   <div class="row">
     <div class="clear">
-      <div class="small-12 medium-4 large-2 column">
+      <div class="small-12 medium-4 large-3 column">
         <%= f.submit t("admin.polls.#{admin_submit_action(@poll)}.submit_button"),
                      class: "button success expanded margin-top" %>
       </div>

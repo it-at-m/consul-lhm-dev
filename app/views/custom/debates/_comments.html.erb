@@ -17,8 +17,8 @@
 
         <div class='commenting-not-allowed'>
           <ul>
-            <% if current_user.geozone && @projekt.debate_phase.geozones.any? && !@projekt.debate_phase.geozone_ids.include?(current_user.geozone.id) %>
-							<li><%= t('custom.comments.restricted.geo_limitation', geozones: @projekt.debate_phase.geozones.names.join(', ')) %></li>
+            <% if current_user.geozone && @projekt.debate_phase.geozone_restrictions.any? && !@projekt.debate_phase.geozone_restriction_ids.include?(current_user.geozone.id) %>
+							<li><%= t('custom.comments.restricted.geo_limitation', geozones: @projekt.debate_phase.geozone_restrictions.names.join(', ')) %></li>
             <% end %>
 
             <% if @projekt.debate_phase.active && @projekt.debate_phase.expired? %>

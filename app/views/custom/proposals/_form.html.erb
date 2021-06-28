@@ -26,9 +26,14 @@
       </div>
 
       <div class="small-12 column">
+        <%= translations_form.label :description, nil, class: label_error_class?(:description) %>
         <%= translations_form.text_area :description,
                                         maxlength: Proposal.description_max_length,
-                                        class: "html-area #{ck_editor_class(current_user)}" %>
+                                        class: "html-area #{ck_editor_class(current_user)}",
+                                        label: false %>
+        <% if error_text(:description).present? %>
+          <small class='form-error is-visible'><%= error_text(:description) %></small>
+        <% end %>
       </div>
     <% end %>
 
@@ -51,35 +56,24 @@
       </div>
     -->
 
-    <% if feature?(:map) %>
-      <div class="small-12 column">
-
-        <%= render "map_locations/form_fields",
-                   form:     f,
-                   map_location: @proposal.map_location || MapLocation.new,
-                   label:    t("proposals.form.map_location"),
-                   help:     t("proposals.form.map_location_instructions"),
-                   remove_marker_label: t("proposals.form.map_remove_marker"),
-                   parent_class: "proposal",
-                   i18n_namespace: "proposals" %>
-
-      </div>
-    <% end %>
-
     <div class="small-12 column margin-top">
-
-      <h5>Zuordnung des Vorschlags zu einem Projekt</h5>
-      <div>
-        <small>
-          Bitte ordnen Sie Ihren Vorschlag einem der nachfolgenden Projekte oder Unterprojekte zu. Dies dient dazu, dass die Vorschläge in der Vorschlagsübersicht besser auffindbar sind.
-        </small>
-      </div>
-
-
       <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: @proposal }  %>
     </div>
 
-    <%if extended_feature?("enable_categories") %>
+    <div class="small-12 column <%= show_map_in_form?(@selected_projekt) %>" id='map-for-new-proposal'>
+
+      <%= render "map_locations/form_fields",
+                 form:     f,
+                 map_location: @proposal.map_location || filtered_projekt&.map_location || MapLocation.new,
+                 label:    t("proposals.form.map_location"),
+                 help:     t("proposals.form.map_location_instructions"),
+                 remove_marker_label: t("proposals.form.map_remove_marker"),
+                 parent_class: "proposal",
+                 i18n_namespace: "proposals" %>
+
+    </div>
+
+    <%if extended_feature?("modulewide.enable_categories") %>
       <div class="small-12 column margin-bottom">
         <%if @categories.any? %>
           <div id="category_tags" class="tags">
@@ -93,7 +87,7 @@
       <%=f.hidden_field :tag_list_predefined, value: @proposal.tags.reject{|t| !['category'].include?(t.kind)}.map(&:name).join(","), class: "js-tag-list list-tags predefined"%>
     <%end%>
 
-    <%if extended_feature?("enable_custom_tags") %>
+    <%if extended_feature?("modulewide.enable_custom_tags") %>
       <div class="small-12 column margin-bottom">
         <%= f.text_field :tag_list_custom, value: @proposal.tags.where(kind: nil).map{|c| c.name}.join(","),
           label: t("custom.proposals.form.tags_custom"),

@@ -1,0 +1,43 @@
+<ul class="tabs"
+    id="edit-projekt-tabs"
+    data-deep-link="true"
+    data-update-history="true"
+    data-deep-link-smudge="true"
+    data-deep-link-smudge-delay="500"
+    data-tabs>
+  <li class="tabs-title is-active" id="projekt-phases-tab">
+    <%= link_to "#tab-projekt-phases" do %>
+      <%= t("custom.admin.projekts.edit.projekt_phases_tab.name") %>
+    <% end %>
+  </li>
+
+  <li class="tabs-title" id="projekt-settings-tab">
+    <%= link_to "#tab-projekt-settings" do %>
+      <%= t("custom.admin.projekts.edit.projekt_settings_tab.name") %>
+    <% end %>
+  </li>
+
+  <li class="tabs-title" id="projekt-map-tab">
+    <%= link_to "#tab-projekt-map" do %>
+      <%= t("custom.admin.projekts.edit.projekt_map_tab.name") %>
+    <% end %>
+  </li>
+
+  <li class="tabs-title" id="projekt-notifications-tab">
+    <%= link_to "#tab-projekt-notifications" do %>
+      <%= t("custom.admin.projekts.edit.projekt_notifications_tab.name") %>
+    <% end %>
+  </li>
+
+  <li class="tabs-title" id="projekt-milestones-tab">
+    <%= link_to "#tab-projekt-milestones" do %>
+      <%= t("custom.admin.projekts.edit.projekt_milestones_tab.name") %>
+    <% end %>
+  </li>
+
+  <li class="tabs-title" id="projekts-news-tab">
+    <%= link_to "#tab-projekt-news", class: 'paid-feature' do %>
+      <%= t("custom.admin.projekts.edit.projekt_news_tab.name") %>
+    <% end %>
+  </li>
+</ul>

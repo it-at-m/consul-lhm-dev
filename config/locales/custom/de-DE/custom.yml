@@ -4,7 +4,19 @@ de:
       sign_in: Anmelden mit BayernID
       sign_up: Registrieren mit BayernID
       name: BayernID
+  activerecord:
+    errors:
+      models:
+        proposal:
+          attributes:
+            description:
+              too_long: 'is too long'
   custom:
+    gdpr_notice:
+      title: Verwendung von Cookies
+      message: "<p>Die Applikation verwendet Cookies und ähnliche Technologien zur Bereitstellung, Aufrechterhaltung und Verbesserung unserer Dienste.</p><p>Mit der Nutzung dieser Website erklären Sie sich damit einverstanden, dass wir Cookies verwenden. Sie dienen dazu, Ihnen bestmögliche Funktionalität bieten zu können. %{link}</p>"
+      link_text: Mehr Infos
+      accept: Akzeptieren
     sdg:
       goals:
         filter:
@@ -43,7 +55,7 @@ de:
         email_on_comment: E-Mail-Benachrichtigung erhalten, bei Kommentare zu meinen Aktivitäten
         email_on_comment_reply: E-Mail-Benachrichtigung erhalten, bei Antworten auf meine Kommentare
         newsletter: E-Mail-Benachrichtigung erhalten, bei wichtigen System-Infos
-        email_digest: E-Mail-Benachrichtigung erhalten, bei wichtigen System-Infos
+        email_digest: Erhalten Sie eine Zusammenfassung der Benachrichtigungen zu Vorschlägen
         email_on_direct_message: Private Nachrichten per Mail zulassen
 
       show:
@@ -58,16 +70,32 @@ de:
       settings:
         index:
           extended_settings: Erweiterte Einstellungen
-          extended_features: Erweiterte Funktionen
           extended_options: Erweiterte Konfigurationseinstellungen
+          features:
+            activate:
+              enabled: Projekt aktiviert
+              disabled: Projekt deaktiviert
+          extended_features: 
+            general: Allgemeines & Features
+            gdpr: DSGVO
+            modulewide: Modulübergreifende Funktionen
+            debates: Diskussionen
+            proposals: Vorschläge
+            polls: Abstimmungen
 
       menu:
         projekts: Projekte
+      progress_bars:
+        index:
+          progress_bar: Fortschrittsbalken
       projekts:
         tabs:
           configuration: Konfigurationseinstellungen
           settings: Funktionen
+          map_settings: Standard-Kartenkonfiguration
+          geozones: Geozonen verwalten
         index:
+          page_name: Globale Projekt-Einstellungen
           info: Info
           name_plural: Projekte
           name_singular: Projekt
@@ -83,30 +111,65 @@ de:
           page: Seite
           edit_page: Seite bearbeiten
           page_link: Seite öffnen 
-          add_cards: Kacheln erstellen
-        edit_projekt: Editieren
-        destroy: Löschen
-        edit:
-          phase_name: Phase
-          beginning: Anfangsdatum
-          ending: Enddatum
-          actions: Aktionen
-          start_date: Anfangsdatum
-          end_date: Enddatum
-          activate: Aktiviert
+          add_cards: Kacheln erstellen/bearbeiten
+          projekt_information: Projektinformationen
           projekt_duration: Gesamtdauer des Projekts
+          projekt_affiliation: Gebietszuordnung
           debate_phase: Diskussionsphase
           proposal_phase: Vorschlagsphase
           voting_phase: Abstimmungsphase
-          voting_manage: Abstimmungen verwalten
-          geozone_restricted: Nur Bürger der Stadt 
+          projekt_phase_limitation: Partizipationsbeschränkung
+        edit_projekt: Editieren
+        destroy: Löschen
+        edit:
+          projekt_phases_tab:
+            name: Projekteinstellungen
+            main_block_title: Projektstatus
+            page_block_title: Projektseite
+            information_block_title: Projektinformationen
+            phases_block_title: Projektphasen
+            affiliation: Gebietszuordnung
+            restriction: Partizipationsbeschränkung
+            phase_name: Phase
+            beginning: Anfangsdatum
+            ending: Enddatum
+            actions: Aktionen
+            start_date: Anfangsdatum
+            end_date: Enddatum
+            activate: Aktiviert
+            projekt_duration: Projektinformationen
+            debate_phase: Diskussionsphase
+            proposal_phase: Vorschlagsphase
+            voting_phase: Abstimmungsphase
+            voting_manage: Abstimmungen verwalten
+          projekt_settings_tab:
+            name: Projektfunktionen
+            general_settings: Allgemein
+            sidebar_settings: Seitenleiste
+            footer_settings: Fußzeile
+            select_an_element: auswählen
+          projekt_map_tab:
+            name: Ind. Kartenkonfiguration
+          projekt_notifications_tab:
+            name: Benachrichtigungen
+            page_title: Nachricht senden
+            title: Nachricht senden
+            notification_title: Titel
+            notification_body: Nachricht
+            button: Nachricht senden
+          projekt_milestones_tab:
+            name: Fortschritt & Meilensteine
+          projekt_news_tab:
+            name: News-Feed
           show_in_navigation_checkbox: Projekt in Navigation anzeigen
           show_in_navigation:
+          show_footer: Projekt Fußzeile
+          setting_indicator:
             yes: Ja
             no: Nein 
           update: Projekteinstellungen aktualisieren
           projekt_status: Projektstatus
-          projekt_activated: Projekt active
+          projekt_activated: Projekt aktiv
           projekt_active: 
             yes: Ja
             no: Nein
@@ -125,19 +188,43 @@ de:
         title: 'Projekte'
         title_active: 'Aktive Projekte'
         title_archived: 'Abgelaufene Projekte'
-        filter_button: 'Projekte filtern'
+        filter_button: Nach Projekte filtern
       errors:
         presence: 'Bitte wählen Sie ein Projekt'
       backlink: Zur Projektübersicht
+      selector:
+        connected_resources:
+          debate_title: Zuordnung der Diskussion zu einem Projekt
+          debate_description: Bitte ordnen Sie Ihre Diskussion einem der nachfolgenden Projekte oder Unterprojekte zu. Dies dient dazu, dass die Diskussionen in der Diskussionsübersicht besser auffindbar sind.
+          proposal_title: Zuordnung des Vorschlags zu einem Projekt
+          proposal_description: Bitte ordnen Sie Ihren Vorschlag einem der nachfolgenden Projekte oder Unterprojekte zu. Dies dient dazu, dass die Vorschläge in der Vorschlagsübersicht besser auffindbar sind.
     geozones:
       sidebar_filter:
-        all_resources: "Alle %{resource_name}"
-        no_restriction: Ohne Gebietszuordnung
-        only_citizens: Ganze Stadt
-        only_geozones: Zuordnung zu Stadtteilen
-        show_more: Mehr anzeigen
-        title: Gebiete
-        filter_button: Gebiete filtern
+        affiliations:
+          title: Gebiete
+          all_resources: "Alle %{resource_name}"
+          no_affiliation: Keine Gebietszuordnung
+          entire_city: "Stadtweite %{resource_name}"
+          entire_city_short: "Stadtweit"
+          only_geozones: Zuordnung zu Stadtteil
+          show_more: Mehr anzeigen
+          filter_button: Nach Gebiete filtern
+        restrictions:
+          title: Partizipation
+          no_restriction: Alle Nutzer:innen der Plattform
+          only_citizens: Nur Bürger:innen der Stadt
+          only_geozones: Nur Bürger:innen des Stadtteils
+          show_more: Mehr anzeigen
+          filter_button: Nach Partizipation filtern
+      projekt_selector:
+        affiliations:
+          no_affiliation: Keine Gebietszuordnung
+          entire_city: "Stadtweit"
+          only_geozones: Zuordnung zu Stadtteil
+        restrictions:
+          no_restriction: Alle Nutzer:innen der Plattform
+          only_citizens: Nur Bürger:innen der Stadt
+          only_geozones: Nur Bürger:innen des Stadtteils
     proposals:
       form:
         tags_custom: Nutzer-Tags
@@ -147,6 +234,8 @@ de:
         publish: 'Vorschlag jetzt veröffentlichen'
 
       index:
+        show_larger_map: Mehr anzeigen
+        show_smaller_map: Weniger anzeigen
         max_number_reached: "Du hast die maximale Anzahl (%{max_number}) an Vorschlägen pro Nutzer erreicht. Bevor du einen weiteren Vorschlag erstellen kannst, musst du einen aktiven Vorschlag zurückziehen."
         projekts: Projekte
       proposal:
