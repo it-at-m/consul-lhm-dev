@@ -7,7 +7,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     info = request.env["omniauth.auth"].info
     email = info["email"]
-    username = info["nickname"]
+    username = info["name"]
     authlevel = extra.raw_info[:authlevel]
 
     user = User.find_by username: username, email: email
