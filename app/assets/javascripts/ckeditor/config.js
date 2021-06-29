@@ -110,7 +110,7 @@ CKEDITOR.editorConfig = function( config )
     { name: "styles", items: [ "Format", "Font", "FontSize", "Styles" ] },
     { name: "basicstyles", groups: [ "basicstyles", "cleanup" ], items: [ "Bold", "Italic", "Underline", "Strike", "Subscript", "Superscript", "-", "RemoveFormat" ] },
     { name: "colors", items: [ "TextColor", "BGColor" ] },
-    { name: "insert", items: [ "Image", "Table", "MJAccordion", "Source", "HorizontalRule", "SpecialChar", 'Iframe', 'Youtube'  ] },
+    { name: "insert", items: [ "Image", "Table", "MJAccordion", "Source", "HorizontalRule", 'Iframe', 'Youtube'  ] },
   ];
 
   config.toolbar = "mini";
