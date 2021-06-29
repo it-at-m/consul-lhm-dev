@@ -23,8 +23,16 @@ h2.header-title {
   display: none;
 }
 
+#responsive-menu div.subnavigation.row {
+  left: 8px;
+}
+
 @media screen and (min-width: 40em) {
   h2.header-title {
     display: block;
+  }
+
+  .top-bar-title {
+    margin-right: 0;
   }
 }

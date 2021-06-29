@@ -9,13 +9,23 @@
               social_url: root_url %>
 <% end %>
 
-<%= render "header", header: @header %>
-
 <main>
 
-  <div class='row'>
-    <div class='official-logo-wrapper'>
-      <%= svg_tag "official_logo", class: 'official-logo' %>
+  <div class='hero-wrapper'>
+    <%= video_tag 'munich.mp4', autoplay: true, loop: true, muted: true %>
+
+    <div class='hero-content'>
+      <div class='row'>
+        <div class='column position-relative'>
+          <div class='hero-text'>
+            <span><%= t('cli.welcome.hero.url') %></span>
+            <%= t('cli.welcome.hero.text') %>
+          </div>
+          <div class='hero-cta'>
+            <%= t('cli.welcome.hero.cta') %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

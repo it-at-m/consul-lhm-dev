@@ -1,0 +1,49 @@
+.position-relative {
+  position: relative;
+}
+
+.hero-wrapper {
+  position: relative;
+
+  .hero-content {
+    position: absolute;
+    width: 100%;
+    top: 10%;
+
+    @media screen and (min-width: 40em) {
+      top: 30%;
+    }
+  }
+
+  video {
+    margin-top: -25px;
+    width: 100%;
+  }
+
+  .hero-text,
+  .hero-cta {
+    position: absolute;
+    padding: 0.5em 1em;
+    font-size: 1.5rem;
+    border-radius: 5px;
+
+    @media screen and (min-width: 64em) {
+    left: -0.5em;
+    }
+  }
+
+  .hero-text {
+    background: #FFFFFF80;
+    color: $brand;
+
+    span {
+      display: block
+    }
+  }
+
+  .hero-cta {
+    background: $brand;
+    color: $white;
+    top: 140px;
+  }
+}
