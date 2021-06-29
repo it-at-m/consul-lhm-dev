@@ -81,7 +81,7 @@
 	.sidebar-filter-button {
 		flex-grow: 1;
 		background: $secondary;
-		color: $brand;
+		color: $white;
 		border-radius: 3px;
     margin-right: 0.5rem;
     height: 2.5rem;
@@ -142,11 +142,11 @@
 // Summary styling
 
 .debate-show blockquote, .proposal-show blockquote, .poll-question-show blockquote, .budget-investment-show blockquote, .polls-show blockquote, .debate-quiz blockquote, .budget-investment-show blockquote, .draft-panels blockquote, .debate-questions blockquote, .communities-show blockquote, .topic-show blockquote, .milestone-content blockquote {
-  background-color: lighten($brand, 70%);
+  background-color: $secondary;
   font-size: 1.25em;
 	padding-top: 10px;
 	padding-bottom: 8px;
-	color: $black;
+	color: $white;
 }
 
 
@@ -168,16 +168,20 @@
 
 .button:hover, .button:focus {
   background-color: $secondary;
-  color: $brand
+  color: $white;
 }
 
 .callout.primary {
   background-color: $secondary;
-  color: $black;
+  color: $white;
 }
 
 .additional-content .filter-subnav {
   background: $secondary;
+
+  a {
+    color: $white;
+  }
 }
 
 .comment-body .comment-user.is-author, .comment-body .comment-user.is-admin, .comment-body .comment-user.is-moderator, .notification-body .comment-user.is-author, .notification-body .comment-user.is-admin, .notification-body .comment-user.is-moderator {
@@ -187,4 +191,25 @@
 
 .comment-body .comment-user.level-1, .comment-body .comment-user.level-2, .comment-body .comment-user.level-3, .comment-body .comment-user.level-4, .comment-body .comment-user.level-5, .comment-body .comment-user.is-author, .comment-body .comment-user.is-admin, .comment-body .comment-user.is-moderator, .notification-body .comment-user.level-1, .notification-body .comment-user.level-2, .notification-body .comment-user.level-3, .notification-body .comment-user.level-4, .notification-body .comment-user.level-5, .notification-body .comment-user.is-author, .notification-body .comment-user.is-admin, .notification-body .comment-user.is-moderator {
   background: $secondary;
+}
+
+.tabs .tabs-title > a[aria-selected="true"],
+.tabs .tabs-title > a:hover,
+.tabs .tabs-title > a.is-active {
+  color: $brand;
+}
+
+#projekt-footer-tabs.tabs .tabs-title > a[aria-selected="true"],
+#projekt-footer-tabs.tabs .tabs-title > a:hover,
+#projekt-footer-tabs.tabs .tabs-title > a.is-active {
+  color: $tertiary;
+}
+
+.tabs .tabs-title > a[aria-selected="true"]::after, 
+.tabs .tabs-title > a.is-active::after {
+  border-bottom: none;
+}
+
+.level-1, .level-2, .level-3, .level-4, .level-5, .is-author, .is-association {
+  color: $white;
 }
