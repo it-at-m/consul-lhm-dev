@@ -18,6 +18,7 @@ class Projekt < ApplicationRecord
   has_one :proposal_phase, class_name: 'ProjektPhase::ProposalPhase'
   has_many :geozone_limitations, through: :projekt_phases
   has_and_belongs_to_many :geozone_affiliations, through: :geozones_projekts, class_name: 'Geozone'
+  has_one :map_location, dependent: :destroy
 
   has_many :projekt_settings, dependent: :destroy
   has_many :projekt_notifications, dependent: :destroy
@@ -103,6 +104,16 @@ class Projekt < ApplicationRecord
     all.each do |projekt|
       projekt.debate_phase = ProjektPhase::DebatePhase.create unless projekt.debate_phase
       projekt.proposal_phase = ProjektPhase::ProposalPhase.create unless projekt.proposal_phase
+    end
+  end
+
+  def self.ensure_map_existence
+    all.each do |projekt|
+      projekt.map_location = MapLocation.create(
+        latitude: Setting['map.latitude'],
+        longitude: Setting['map.longitude'],
+        zoom: Setting['map.zoom']
+      ) unless projekt.map_location.present?
     end
   end
 
