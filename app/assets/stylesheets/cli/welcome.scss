@@ -23,27 +23,39 @@
   .hero-text,
   .hero-cta {
     position: absolute;
-    padding: 0.5em 1em;
+    padding: 0.5rem 2rem;
     font-size: 1.5rem;
     border-radius: 5px;
+    left: initial;
 
     @media screen and (min-width: 64em) {
-    left: -0.5em;
+      font-size: 2.5rem;
+    }
+
+    @media screen and (min-width: 1260px) {
+      left: -0.5em;
     }
   }
 
   .hero-text {
-    background: #FFFFFF80;
+    background: #FFFFFFAA;
     color: $brand;
+    font-weight: bold;
 
     span {
-      display: block
+      display: block;
+      font-weight: normal;
     }
   }
 
   .hero-cta {
     background: $brand;
     color: $white;
-    top: 140px;
+    padding: 0.1rem 2rem;
+    top: 120px;
+
+    @media screen and (min-width: 64em) {
+      top: 180px;
+    }
   }
 }
