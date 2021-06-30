@@ -29,6 +29,8 @@ de:
     close: Schließen
     menu: Menü
   comments:
+    actions:
+      confirm_delete: Sind Sie sicher? Diese Aktion löscht den Kommentar. Sie können die Aktion nicht rückgängig machen.
     comments_closed: Kommentare sind geschlossen
     verified_only: Zur Teilnahme %{verify_account}
     comment:

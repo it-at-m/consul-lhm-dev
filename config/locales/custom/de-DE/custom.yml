@@ -12,6 +12,12 @@ de:
             description:
               too_long: 'is too long'
   custom:
+    devise_views:
+      users:
+        registrations:
+          new:
+            terms: "Mit der Registrierung akzeptieren Sie die %{terms} und %{privacy}"
+            privacy_link: "Datenschutzbestimmung"
     gdpr_notice:
       title: Verwendung von Cookies
       message: "<p>Die Applikation verwendet Cookies und ähnliche Technologien zur Bereitstellung, Aufrechterhaltung und Verbesserung unserer Dienste.</p><p>Mit der Nutzung dieser Website erklären Sie sich damit einverstanden, dass wir Cookies verwenden. Sie dienen dazu, Ihnen bestmögliche Funktionalität bieten zu können. %{link}</p>"
