@@ -13,7 +13,7 @@
       <%= link_to sanitize(taggable.projekt.name), (taggables_path(taggable.class.name.underscore, '') + "&projekts=#{taggable.projekt.id}" ), class: "#{tag_filter_class} projekt-tag-chip-icon projekt-tag-chip-projekt" %>
     </div>
 
-    <% if feature?(:map) %>
+    <% if show_affiliation_filter_in_sidebar? %>
       <%= prepare_geo_affiliation_tag(taggable, resource_name, tag_filter_class) %>
     <% end %>
   <% end %>

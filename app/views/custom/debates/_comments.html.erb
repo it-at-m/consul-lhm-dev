@@ -17,6 +17,10 @@
 
         <div class='commenting-not-allowed'>
           <ul>
+            <% if !skip_user_verification? && !current_user.level_two_or_three_verified? %>
+              <li><%= t('custom.comments.restricted.not_verified', verify_account: link_to_verify_account).html_safe %></li>
+            <% end %>
+
             <% if current_user.geozone && @projekt.debate_phase.geozone_restrictions.any? && !@projekt.debate_phase.geozone_restriction_ids.include?(current_user.geozone.id) %>
 							<li><%= t('custom.comments.restricted.geo_limitation', geozones: @projekt.debate_phase.geozone_restrictions.names.join(', ')) %></li>
             <% end %>

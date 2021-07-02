@@ -192,7 +192,7 @@
 
         <% if params[:retired].blank? %>
           <%= render "shared/projekts_sidebar" %>
-          <% if feature?(:map) %>
+          <% if show_affiliation_filter_in_sidebar? %>
             <%= render "shared/sidebar_filter/geozone_affiliations" %>
           <% end %>
           <% unless skip_user_verification? %>

@@ -71,7 +71,7 @@
     <div class="small-12 medium-3 column">
       <aside class="margin-bottom">
         <%= render "shared/projekts_sidebar" %>
-        <% if feature?(:map) %>
+        <% if show_affiliation_filter_in_sidebar? %>
           <%= render "shared/sidebar_filter/geozone_affiliations" %>
         <% end %>
         <% unless skip_user_verification? %>

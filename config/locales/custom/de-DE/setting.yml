@@ -43,6 +43,8 @@ de:
           hide_comment_replies_by_default_description: Aktivieren Sie das standardmäßige Einklappen von Kommentaren, um Übersichtlichkeit zu schaffen
           custom_help_text_in_modules: Individuelle Hilfstexte zu Modulen
           custom_help_text_in_modules_description: Am unteren Ende der Modulübersicht können individuelle Hilfstexte platziert werden
+          show_affiliation_filter_in_index_sidebar: Gebietsfilter anzeigen
+          show_affiliation_filter_in_index_sidebar_description: Zeigt den Gebietsfilter in der rechten Seitenleiste der einzelnen Module
         debates:
           intro_text_for_debates: Einleitungstext für Diskussionen
           intro_text_for_debates_description: Aktivieren Sie einen individuellen Einleitungstext oberhalb der Diskussionsübersicht
@@ -91,8 +93,6 @@ de:
           sidebar_description: Zeigt archivierte Projekte in der Projektseitenleiste wenn aktiviert
         show_module_links_in_flyout_menu: Modul-Links in den Dropdowns
         show_module_links_in_flyout_menu_description: Zeigt die die Modul-Links unterhalb einzelner Dropdown-Einträge an
-        show_affiliation_filter_in_index_sidebar: Gebietsfilter anzeigen
-        show_affiliation_filter_in_index_sidebar_description: Zeigt den Gebietsfilter in der rechten Seitenleiste der einzelnen Module
 
       projekt_feature:
         main:

@@ -8,7 +8,7 @@ module ProjektsHelper
   end
 
   def show_affiliation_filter_in_sidebar?
-    Setting["projekts.show_affiliation_filter_in_index_sidebar"].present? ? true : false
+    Setting["extended_feature.modulewide.show_affiliation_filter_in_index_sidebar"].present? ? true : false
   end
 
   def prepare_projekt_name(projekt, accesskey=nil)

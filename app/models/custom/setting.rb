@@ -139,7 +139,6 @@ class Setting < ApplicationRecord
         "projekts.show_archived.navigation": true,
         "projekts.show_archived.sidebar": true,
         "projekts.show_module_links_in_flyout_menu": true,
-        "projekts.show_affiliation_filter_in_index_sidebar": true,
         # "extended_feature.general.elasticsearch": false,
         "extended_feature.general.extended_editor_for_admins": false,
         "extended_feature.general.extended_editor_for_users": false,
@@ -152,7 +151,7 @@ class Setting < ApplicationRecord
         "extended_feature.modulewide.enable_categories": false,
         "extended_feature.modulewide.enable_custom_tags": false,
         "extended_feature.modulewide.show_number_of_entries_in_modules": false,
-
+        "extended_feature.modulewide.show_affiliation_filter_in_index_sidebar": true,
         "extended_feature.modulewide.hide_comment_replies_by_default": false,
         "extended_feature.modulewide.custom_help_text_in_modules": false,
         "extended_feature.debates.intro_text_for_debates": false,

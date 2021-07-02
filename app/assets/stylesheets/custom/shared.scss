@@ -185,7 +185,7 @@
 }
 
 .comment-body .comment-user.is-author, .comment-body .comment-user.is-admin, .comment-body .comment-user.is-moderator, .notification-body .comment-user.is-author, .notification-body .comment-user.is-admin, .notification-body .comment-user.is-moderator {
-  background: $tertiary;
+  background: $accent;
 }
 
 
@@ -202,7 +202,7 @@
 #projekt-footer-tabs.tabs .tabs-title > a[aria-selected="true"],
 #projekt-footer-tabs.tabs .tabs-title > a:hover,
 #projekt-footer-tabs.tabs .tabs-title > a.is-active {
-  color: $tertiary;
+  color: $accent;
 }
 
 .tabs .tabs-title > a[aria-selected="true"]::after, 

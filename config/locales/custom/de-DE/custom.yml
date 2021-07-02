@@ -261,6 +261,7 @@ de:
       reply_form:
         leave_comment: 'Schreiben Sie eine Antwort'
       restricted:
+        not_verified: "Bitte %{verify_account}, um teilnehmen zu können"
         geo_limitation: 'Dieses projekt ist auf die folgende Gebiete beschränkt: %{geozones}'
         debate_phase_expired: Die Diskussionsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
         proposal_phase_expired: Die Vorschlagsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
