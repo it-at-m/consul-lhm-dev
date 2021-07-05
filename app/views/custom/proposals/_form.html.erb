@@ -64,7 +64,7 @@
 
       <%= render "map_locations/form_fields",
                  form:     f,
-                 map_location: @proposal.map_location || filtered_projekt&.map_location || MapLocation.new,
+                 map_location: @proposal.map_location || @selected_projekt&.map_location || MapLocation.new,
                  label:    t("proposals.form.map_location"),
                  help:     t("proposals.form.map_location_instructions"),
                  remove_marker_label: t("proposals.form.map_remove_marker"),
