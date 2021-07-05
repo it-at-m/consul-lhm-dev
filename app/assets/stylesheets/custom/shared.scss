@@ -199,9 +199,9 @@
   color: $brand;
 }
 
-#projekt-footer-tabs.tabs .tabs-title > a[aria-selected="true"],
-#projekt-footer-tabs.tabs .tabs-title > a:hover,
-#projekt-footer-tabs.tabs .tabs-title > a.is-active {
+.additional-content .tabs .tabs-title > a[aria-selected="true"],
+.additional-content .tabs .tabs-title > a:hover,
+.additional-content .tabs .tabs-title > a.is-active {
   color: $accent;
 }
 
