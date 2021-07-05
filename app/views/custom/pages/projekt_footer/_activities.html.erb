@@ -81,9 +81,7 @@
               <%= t("custom.projekt.footer.show.no_proposals") %>
             <% elsif @most_active_proposals.exists? %>
               <%= render partial: "proposals/proposal", collection: @most_active_proposals %>
-              <%= link_to proposals_path + "?projekts=#{projekt.all_children_ids.push(projekt.id).join(',')}", class: 'all-projekt-resources-link' do %>
-                <%= t("custom.projekt.page.sidebar.phases.proposal_phase_link") %>
-              <% end %>
+              <%= proposals_overview_link( t("custom.projekt.page.sidebar.phases.proposal_phase_link"), projekt, 'all-projekt-resources-link' ) %>
             <% end %>
 
           <% else %>
@@ -117,9 +115,7 @@
               <%= t("custom.projekt.footer.show.no_debates") %>
             <% elsif @most_active_debates.exists? %>
               <%= render partial: "debates/debate", collection: @most_active_debates %>
-              <%= link_to debates_path + "?projekts=#{projekt.all_children_ids.push(projekt.id).join(',')}", class: 'all-projekt-resources-link' do %>
-                <%= t("custom.projekt.page.sidebar.phases.debate_phase_link") %>
-              <% end %>
+              <%= debates_overview_link( t("custom.projekt.page.sidebar.phases.debate_phase_link"), projekt, 'all-projekt-resources-link' ) %>
             <% end %>
 
           <% else %>
@@ -132,9 +128,7 @@
 
           <% if @latest_polls.exists? %>
             <%= render partial: "polls/poll_group", locals: { poll_group: @latest_polls } %>
-            <%= link_to polls_path + "?projekts=#{projekt.all_children_ids.push(projekt.id).join(',')}", class: 'all-projekt-resources-link' do %>
-              <%= t("custom.projekt.page.sidebar.phases.voting_phase_link") %>
-            <% end %>
+            <%= polls_overview_link( t("custom.projekt.page.sidebar.phases.voting_phase_link"), projekt, 'all-projekt-resources-link' ) %>
           <% else %>
             <%= t("custom.projekt.footer.show.no_polls") %>
           <% end %>

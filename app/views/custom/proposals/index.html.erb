@@ -58,8 +58,8 @@
 
   <% if feature?(:map) %>
     <div class="map inline">
-      <% if filtered_projekt %>
-        <%= render_map(filtered_projekt.map_location, "proposals", false, nil, @proposals_coordinates) %>
+      <% if @selected_parent_projekt %>
+        <%= render_map(@selected_parent_projekt.map_location, "proposals", false, nil, @proposals_coordinates) %>
       <% else %>
         <%= render_map(nil, "proposals", false, nil, @proposals_coordinates) %>
       <% end %>

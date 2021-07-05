@@ -276,10 +276,10 @@ de:
         documents: "Dokumente"
         milestone: Meilenstein
         new_milestone: Neuen Meilenstein erstellen
-        milestone_tags: Status des Investitionsvorschlags
+        milestone_tags: Status des Vorschlags
       form:
         admin_statuses: Status verwalten
-        no_statuses_defined: Es wurde noch kein Status für diese Investitionsvorschläge definiert
+        no_statuses_defined: Es wurde noch kein Status für diese Vorschläge definiert
       new:
         creating: Meilenstein erstellen
       edit:

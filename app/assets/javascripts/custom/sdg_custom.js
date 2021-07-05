@@ -34,6 +34,8 @@
         url.searchParams.delete('sdg_targets')
       }
 
+      url.searchParams.delete('search')
+
       window.history.pushState('', '', url);
       window.location.href = url.href;
     },
@@ -57,6 +59,8 @@
       if ( currentSDGTargetCodes.length == 0 ) {
         url.searchParams.delete('sdg_targets')
       };
+
+      url.searchParams.delete('search')
 
       window.history.pushState('', '', url);
       window.location.href = url.href;

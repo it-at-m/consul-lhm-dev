@@ -23,8 +23,8 @@ de:
         one: "Meilenstein"
         other: "Meilensteine"
       milestone/status:
-        one: "Status des Ausgabenvorschlags"
-        other: "Status der Ausgabenvorschläge"
+        one: "Status des Vorschlags"
+        other: "Status der Vorschläge"
       progress_bar:
         one: "Fortschrittsbalken"
         other: "Fortschrittsbalken"
@@ -177,7 +177,7 @@ de:
         feasibility_undecided: "Undefiniert"
         feasibility_unfeasible: "Undurchführbar"
         incompatible: "Als inkompatibel markieren"
-        milestone_tag_list: "Status des Ausgabenvorschlags"
+        milestone_tag_list: "Status des Vorschlags"
         price_explanation: "Erläuterung der Kosten"
         selected: "Als ausgewählt markieren"
         selected_true: "Ausgewählt"

@@ -52,6 +52,36 @@
       });
     },
 
+    updateProjektFilterToggleIds: function($label) {
+      var resourceName;
+      if (window.location.href.includes('proposals')) {
+        resourceName = 'proposals' + 'ProjektFilterToggleIds'
+      } else if (window.location.href.includes('debates')) {
+        resourceName = 'debates' + 'ProjektFilterToggleIds'
+      } else if (window.location.href.includes('polls')) {
+        resourceName = 'polls' + 'ProjektFilterToggleIds'
+      }
+
+      var currentToggleProjekts = window.localStorage.getItem(resourceName)
+      var currentToggleProjektIds;
+
+      if (currentToggleProjekts) {
+        currentToggleProjektIds = currentToggleProjekts.split(',')
+      } else {
+        currentToggleProjektIds = [];
+      }
+
+      var toggledProjektId = $label.find('input').first().val()
+
+      if ( !currentToggleProjektIds.includes(toggledProjektId) ) {
+        currentToggleProjektIds.push(toggledProjektId)
+      } else {
+        currentToggleProjektIds.splice(currentToggleProjektIds.indexOf(toggledProjektId), 1);
+      }
+
+      window.localStorage.setItem(resourceName, currentToggleProjektIds.join(','));
+    },
+
     formNewFilterProjektsRequest: function($checkbox) {
 
       var url = new URL(window.location.href);
@@ -86,6 +116,8 @@
       }  else {
         url.searchParams.delete('projekts')
       }
+
+      url.searchParams.delete('search')
 
       window.history.pushState('', '', url)
     },
@@ -235,6 +267,7 @@
         }
       }
 
+      currentPageUrl.searchParams.delete('search')
 
       window.history.pushState('', '', currentPageUrl)
       window.location.href = currentPageUrl.href;
@@ -259,6 +292,35 @@
         App.Map.maps[0].setView([defaultLat, defaultLng], defaultZoom).invalidateSize()
       }
 
+    },
+
+    setDefaultToggleProjektsIds: function() {
+      if (
+        !window.localStorage.getItem('proposalsProjektFilterToggleIds') ||
+        !window.localStorage.getItem('debatesProjektFilterToggleIds') ||
+        !window.localStorage.getItem('pollsProjektFilterToggleIds')
+      ) {
+        var topProjekts = $('#filter-projekts-active > ul > li > label > input')
+        var topProjektIds = $.map(topProjekts, function(n) { return $(n).val() }).join(',')
+      }
+
+      if (
+        !window.localStorage.getItem('proposalsProjektFilterToggleIds')
+      ) {
+        window.localStorage.setItem('proposalsProjektFilterToggleIds', topProjektIds)
+      }
+
+      if (
+        !window.localStorage.getItem('debatesProjektFilterToggleIds')
+      ) {
+        window.localStorage.setItem('debatesProjektFilterToggleIds', topProjektIds)
+      }
+
+      if (
+        !window.localStorage.getItem('pollsProjektFilterToggleIds')
+      ) {
+        window.localStorage.setItem('pollsProjektFilterToggleIds', topProjektIds)
+      }
     },
 
 
@@ -302,13 +364,20 @@
 
         var $parentProjekt = $(this).closest('li');
 
-        if ( $parentProjekt.next().prop("tagName")  === 'UL' && $checkbox.is(':checked')  ) {
+        if ( $parentProjekt.next().prop("tagName")  === 'UL') {
           var $childrentCheckboxes = $parentProjekt.siblings().find('.js-filter-projekt');
 
-          $childrentCheckboxes.each( function() {
-            $(this).prop( "checked", true )
-            App.Projekts.formNewFilterProjektsRequest($(this));
-          });
+          if ( $checkbox.is(':checked') ) {
+            $childrentCheckboxes.each( function() {
+              $(this).prop( "checked", true )
+              App.Projekts.formNewFilterProjektsRequest($(this));
+            });
+          } else {
+            $childrentCheckboxes.each( function() {
+              $(this).prop( "checked", false)
+              App.Projekts.formNewFilterProjektsRequest($(this));
+            });
+          }
         }
       });
 
@@ -330,9 +399,17 @@
           }
         )
 
+        window.localStorage.removeItem('proposalsProjektFilterToggleIds')
+        window.localStorage.removeItem('debatesProjektFilterToggleIds')
+        window.localStorage.removeItem('pollsProjektFilterToggleIds')
+
+        App.Projekts.setDefaultToggleProjektsIds();
+
         var url = new URL(window.location.href);
         url.searchParams.delete('projekts')
         window.history.pushState('', '', url)
+        window.location.href = url;
+
 
       });
 
@@ -346,13 +423,40 @@
       $("body").on("click", ".js-icon-toggle-child-projekts", function(event) {
         var $label = $(this).parent();
         App.Projekts.toggleChildrenInSidebar($label);
+        App.Projekts.updateProjektFilterToggleIds($label)
       });
 
       $("body").on("click", ".js-toggle-edit-projekt-info", function(event) {
         var $row = $(this).closest('tr');
         App.Projekts.toggleChildrenInSidebar($row);
 
-      })
+      });
+
+      $("body").on("click", ".js-reset-projekt-filter-toggle-status", function(event) {
+        var resourceName = $(this).data('resources') + 'ProjektFilterToggleIds';
+        var projektIds = $(this).data('projekts')
+        window.localStorage.setItem(resourceName, projektIds);
+      });
+
+      App.Projekts.setDefaultToggleProjektsIds();
+
+      $('#filter-projekts-all').find('li').each( function() {
+        var resourceName;
+        if (window.location.href.includes('proposals')) {
+          resourceName = 'proposals' + 'ProjektFilterToggleIds'
+        } else if (window.location.href.includes('debates')) {
+          resourceName = 'debates' + 'ProjektFilterToggleIds'
+        } else if (window.location.href.includes('polls')) {
+          resourceName = 'polls' + 'ProjektFilterToggleIds'
+        }
+
+        var projektId = $(this).children('label').children('input').val()
+
+        if ( window.localStorage.getItem(resourceName) && window.localStorage.getItem(resourceName).split(',').includes(projektId) ) {
+          $(this).attr('aria-expanded', 'true')
+        }
+
+      });
 
     }
   };

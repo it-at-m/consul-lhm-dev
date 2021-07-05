@@ -43,6 +43,20 @@ class Projekt < ApplicationRecord
                                          joins('INNER JOIN projekt_settings b ON projekts.id = b.projekt_id').
                                          where("a.key": "projekt_feature.main.activate", "a.value": "active", "b.key": "projekt_feature.general.show_in_navigation", "b.value": "active").distinct }
 
+  def level(counter = 1)
+    return counter if self.parent.blank?
+    self.parent.level(counter+1)
+  end
+
+  def all_parent_ids(all_parent_ids = [])
+    if self.parent.present?
+      all_parent_ids.push(parent.id)
+      parent.all_parent_ids(all_parent_ids)
+    end
+
+    all_parent_ids
+  end
+
   def all_children_ids(all_children_ids = [])
     if self.children.any?
       self.children.each do |child|

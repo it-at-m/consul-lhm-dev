@@ -210,7 +210,7 @@ de:
           label: "Aktueller Stand des Projekts"
           all: "Alle (%{count})"
         milestone_tag:
-          label: "Status des Investitionsvorschlags"
+          label: "Status des Vorschlags"
           all: "Alle (%{count})"
     phases:
       errors:

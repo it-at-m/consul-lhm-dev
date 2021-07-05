@@ -15,6 +15,7 @@
       var selection = $('input[name="geozone_affiliation"]:checked').val();
       url.searchParams.set('geozone_affiliation', selection)
       url.searchParams.delete('affiliated_geozones')
+      url.searchParams.delete('search')
       window.history.pushState('', '', url)
       window.location.href = url;
     },
@@ -24,6 +25,7 @@
       var selection = $('input[name="geozone_restriction"]:checked').val();
       url.searchParams.set('geozone_restriction', selection)
       url.searchParams.delete('restricted_geozones')
+      url.searchParams.delete('search')
       window.history.pushState('', '', url)
       window.location.href = url;
     },
@@ -34,6 +36,7 @@
       var url = new URL(window.location.href);
       url.searchParams.set(geozone_filter, $radiobutton.val());
       url.searchParams.set(geozone_filter_type, 'only_geozones')
+      url.searchParams.delete('search')
       window.history.pushState('', '', url);
       window.location.href = url;
     },

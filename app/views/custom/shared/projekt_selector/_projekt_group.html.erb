@@ -44,7 +44,7 @@
         </div>
       <% end %>
 
-      <% if (phase_name && projekt_phase_active?(rb.object, phase_name)) || !projekt_feature?(rb.object, 'general.show_not_active_phases_in_projekts_page_sidebar') %>
+      <% if (phase_name && projekt_phase_active?(rb.object, phase_name)) || !projekt_feature?(rb.object, 'general.show_not_active_phases_in_projekts_page_sidebar') || controller.controller_name == 'polls' %>
         <div class="checkmark-wrapper">
           <span class="checkmark "></span>
         </div>

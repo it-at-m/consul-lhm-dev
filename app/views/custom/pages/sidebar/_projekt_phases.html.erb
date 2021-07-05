@@ -28,9 +28,7 @@
       <% end %>
 
       <% if @most_active_debates.exists? %>
-        <%= link_to debates_path + "?projekts=#{projekt.all_children_ids.push(projekt.id).join(',')}", class: 'projekt-phase-link' do %>
-          <%= t("custom.projekt.page.sidebar.phases.debate_phase_link") %>
-        <% end %>
+        <%= debates_overview_link( t("custom.projekt.page.sidebar.phases.debate_phase_link"), projekt, 'projekt-phase-link' ) %>
       <% end %>
     <% else %>
       <%= t('custom.projekt.page.sidebar.phases.debate_phase_not_active') %>
@@ -65,9 +63,7 @@
       <% end %>
 
       <% if @most_active_proposals.exists? %>
-        <%= link_to proposals_path + "?projekts=#{projekt.all_children_ids.push(projekt.id).join(',')}", class: 'projekt-phase-link' do %>
-          <%= t("custom.projekt.page.sidebar.phases.proposal_phase_link") %>
-        <% end %>
+        <%= proposals_overview_link( t("custom.projekt.page.sidebar.phases.proposal_phase_link"), projekt, 'projekt-phase-link' ) %>
       <% end %>
     <% else %>
       <%= t('custom.projekt.page.sidebar.phases.proposal_phase_not_active') %>
@@ -86,9 +82,7 @@
     <br>
 
     <%if related_polls(projekt).count > 0 %>
-      <%= link_to polls_path + "?projekts=#{projekt.all_children_ids.push(projekt.id).join(',')}", class: "button expanded projekt-phase-button" do %>
-        <%= t("custom.projekt.page.sidebar.phases.voting_phase_link") %>
-      <% end %>
+      <%= polls_overview_link( t("custom.projekt.page.sidebar.phases.voting_phase_link"), projekt, 'button expanded projekt-phase-button' ) %>
     <% end %>
 
   </div>

@@ -16,6 +16,20 @@ class PollsController < ApplicationController
     @filtered_goals = params[:sdg_goals].present? ? params[:sdg_goals].split(',').map{ |code| code.to_i } : nil
     @filtered_target = params[:sdg_targets].present? ? params[:sdg_targets].split(',')[0] : nil
 
+    if params[:projekts]
+      @selected_projekts_ids = params[:projekts].split(',')
+      selected_projekts = Projekt.where(id: @selected_projekts_ids)
+      highest_level_selected_projekts = selected_projekts.sort { |a, b| a.level <=> b.level }.group_by(&:level).first[1]
+
+      if highest_level_selected_projekts.size == 1
+        highest_level_selected_projekt = highest_level_selected_projekts.first
+      end
+
+      if highest_level_selected_projekt && (@selected_projekts_ids.map(&:to_i) - highest_level_selected_projekt.all_children_ids.push(highest_level_selected_projekt.id) )
+        @selected_parent_projekt = highest_level_selected_projekts.first
+      end
+    end
+
     @geozones = Geozone.all
 
     @selected_geozone_affiliation = params[:geozone_affiliation] || 'all_resources'
@@ -25,11 +39,14 @@ class PollsController < ApplicationController
     @restricted_geozones = (params[:restricted_geozones] || '').split(',').map(&:to_i)
 
     @polls = @polls.created_by_admin.not_budget.send(@current_filter).includes(:geozones)
-    take_only_by_tag_names
-    take_by_projekts
-    take_by_sdgs
-    take_by_geozone_affiliations
-    take_by_geozone_restrictions
+
+    unless params[:search].present?
+      take_only_by_tag_names
+      take_by_projekts
+      take_by_sdgs
+      take_by_geozone_affiliations
+      take_by_geozone_restrictions
+    end
 
     @all_polls = @polls
 
