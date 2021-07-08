@@ -227,6 +227,11 @@ span.icon-no-notification {
 
     .top-level-item {
       padding-left: 1.5em;
+      padding-right: 5px;
+    }
+
+		li#notifications {
+			margin-right: 5px !important;
     }
 
     .account-items-icon,
@@ -259,6 +264,10 @@ span.icon-no-notification {
       margin-right: 0;
     }
   }
+
+	.main-menu .account-admin-items li.nav-element.top-level-item > ul.nav-flyout-block {
+    right: -5px;
+	}
 
   .external-links {
     display: block;
