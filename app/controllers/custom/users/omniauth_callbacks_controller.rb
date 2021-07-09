@@ -9,17 +9,17 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     email = info["email"]
     username = info["name"]
     authlevel = extra.raw_info[:authlevel]
-    keycloak_link = info["preferred_username"]
+    keycloak_link = extra.raw_info["preferred_username"]
 
     user = User.find_by keycloak_link: keycloak_link
 
     unless user
       password = SecureRandom.base64(15)
       user = User.new({ email: email, username: username, oauth_email: email, terms_of_service: true, password:  password, password_confirmation: password, keycloak_link: keycloak_link })
-      if extra.raw_info.email_verified
-        user.skip_confirmation!
-        user.verified_at = Time.now
-      end
+
+      user.skip_confirmation!
+      user.verified_at = Time.now
+
       if user.save
         sign_in user
       end
