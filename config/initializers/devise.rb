@@ -269,7 +269,7 @@ Devise.setup do |config|
       authorization_endpoint: "/auth/realms/" + Rails.application.secrets.openid_connect_realm + "/protocol/openid-connect/auth",
       token_endpoint: "/auth/realms/" + Rails.application.secrets.openid_connect_realm + "/protocol/openid-connect/token",
       userinfo_endpoint: "/auth/realms/" + Rails.application.secrets.openid_connect_realm + "/protocol/openid-connect/userinfo",
-      jwks_uri: "/auth/realms/" + Rails.application.secrets.openid_connect_realm + "/protocol/openid-connect/certs",
+      jwks_uri: 'http://localhost:8080' + "/auth/realms/" + Rails.application.secrets.openid_connect_realm + "/protocol/openid-connect/certs",
       redirect_uri: Rails.application.secrets.openid_connect_redirect_uri,
 	  },
 	  #ENDE Ergänzung für Keycloak-Anbindung

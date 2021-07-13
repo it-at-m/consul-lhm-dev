@@ -170,7 +170,7 @@ de:
     direct_message: Private Nachricht
     error: Fehler
     errors: Fehler
-    not_saved: "verhinderte das Speichern dieser %{resource}. <br>Bitte überprüfen Sie die gekennzeichneten Felder, um herauszufinden wie diese korrigiert werden können:"
+    not_saved: "verhinderte das Speichern. <br>Bitte überprüfen Sie die gekennzeichneten Felder, um herauszufinden wie diese korrigiert werden können:"
     policy: Datenschutzbestimmungen
     banner: Banner
     proposal: Vorschlag
@@ -287,7 +287,7 @@ de:
       name: Facebook
     finish_signup:
       title: "Weitere Details"
-      username_warning: "Aufgrund einer Änderung in der Art und Weise, wie wir mit sozialen Netzwerken umgehen, ist es möglich, dass Ihr Benutzername nun als 'bereits in Verwendung' erscheint. Wenn dies der Fall ist, wählen Sie bitte einen anderen Benutzernamen."
+      username_warning: "Wir möchten die Beiträge der Nutzer klar unterscheidbar machen. Aus diesem Grund müssen die Nutzer:innen-Namen einzigartig sein. Bitte wählen Sie einen alternativen Nutzer:innen-Namen."
     google_oauth2:
       sign_in: Anmelden mit Google
       sign_up: Registrierung mit Google

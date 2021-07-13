@@ -5,5 +5,7 @@ de:
         url: unser.muenchen.de
         text: Wir gestalten unser München
         cta: Machen Sie Mit!
+    account:
+      email_taken: Konto mit dieser E-Mail-Adresse existiert bereits.
       
 

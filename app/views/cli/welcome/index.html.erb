@@ -12,7 +12,13 @@
 <main>
 
   <div class='hero-wrapper'>
-    <%= video_tag 'munich.mp4', autoplay: true, loop: true, muted: true %>
+    <%= video_tag 'munich.mp4',
+      autoplay: true,
+      loop: true,
+      muted: true,
+      controls: true,
+      controlsList: "nodownload nofullscreen noremoteplayback",
+      disablepictureinpicture: true  %>
 
     <div class='hero-content'>
       <div class='row'>

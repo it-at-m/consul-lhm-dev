@@ -15,10 +15,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     unless user
       password = SecureRandom.base64(15)
-      user = User.new({ email: email, username: username, oauth_email: email, terms_of_service: true, password:  password, password_confirmation: password, keycloak_link: keycloak_link })
+      user = User.new({ email: email, username: username, oauth_email: email, terms_of_service: true, password:  password, password_confirmation: password, keycloak_link: keycloak_link, registering_with_oauth: true })
 
       user.skip_confirmation!
       user.verified_at = Time.now
+
+      if User.find_by(email: email)
+        redirect_to new_user_session_path, alert: t('cli.account.email_taken') and return
+      end
 
       if user.save
         sign_in user
