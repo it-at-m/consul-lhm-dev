@@ -28,6 +28,16 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         sign_in user
       end
     else
+      if user.email != email
+        if User.find_by(email: email)
+          redirect_to new_user_session_path, alert: t('cli.account.email_taken') and return
+        else
+          user.assign_attributes(email: email)
+          user.skip_reconfirmation!
+          user.save
+        end
+      end
+
       if user.administrator? && ["STORK-QAA-Level-3", "STORK-QAA-Level-4"].include?(authlevel)
         sign_in user
       elsif !user.administrator?
