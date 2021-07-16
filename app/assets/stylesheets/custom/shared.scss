@@ -81,7 +81,7 @@
 	.sidebar-filter-button {
 		flex-grow: 1;
 		background: $secondary;
-		color: $white;
+		color: $black;
 		border-radius: 3px;
     margin-right: 0.5rem;
     height: 2.5rem;
@@ -168,7 +168,7 @@
 
 .button:hover, .button:focus {
   background-color: $secondary;
-  color: $white;
+  color: $black;
 }
 
 .callout.primary {
@@ -176,11 +176,19 @@
   color: $white;
 }
 
-.additional-content .filter-subnav {
-  background: $secondary;
+.additional-content {
+  .filter-subnav {
+    background: $secondary;
 
-  a {
-    color: $white;
+    a {
+      color: $black;
+    }
+  }
+
+  .tabs .tabs-title > a[aria-selected="true"],
+  .tabs .tabs-title > a:hover,
+  .tabs .tabs-title > a.is-active {
+    color: $brand;
   }
 }
 
@@ -197,12 +205,6 @@
 .tabs .tabs-title > a:hover,
 .tabs .tabs-title > a.is-active {
   color: $brand;
-}
-
-.additional-content .tabs .tabs-title > a[aria-selected="true"],
-.additional-content .tabs .tabs-title > a:hover,
-.additional-content .tabs .tabs-title > a.is-active {
-  color: $accent;
 }
 
 .tabs .tabs-title > a[aria-selected="true"]::after, 
