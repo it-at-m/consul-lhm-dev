@@ -16,7 +16,6 @@
       <%= auto_link_already_sanitized_html simple_format(@poll.summary) %>
 
       <%= render "shared/tags", taggable: @poll %>
-      <%= render SDG::TagListComponent.new(@poll, linkable: false) %>
     </div>
 
     <aside class="small-12 medium-3 column margin-top">

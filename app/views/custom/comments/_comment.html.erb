@@ -90,8 +90,7 @@
           </span>
 
           <% if user_signed_in? && !comments_closed_for_commentable?(comment.commentable) && !require_verified_resident_for_commentable?(comment.commentable, current_user) %>
-            <% comments_allowed ||= 'allowed' %>
-            <% if comments_allowed == 'allowed' %>
+            <% if @commentable.comments_allowed?(current_user) %>
               <span class="divider">&nbsp;|&nbsp;</span>
               <%= link_to(comment_link_text(comment), "",
                           class: "js-add-comment-link", data: { "id": dom_id(comment) }) %>
@@ -112,6 +111,6 @@
       <% end %>
     </div>
 
-    <%= render "comments/comment_list", comments: child_comments_of(comment), valuation: valuation, comments_allowed: comments_allowed %>
+    <%= render "comments/comment_list", comments: child_comments_of(comment), valuation: valuation  %>
   </div>
 <% end %>

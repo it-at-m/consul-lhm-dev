@@ -2,8 +2,9 @@
 
 <tr class='projekt-row' aria-expanded=false>
   <%= form_for(projekt,
-        url: admin_projekt_path(projekt),
+        url: quick_update_admin_projekt_path(projekt),
         as: :projekt,
+        method: :patch,
         html: { id: "edit_projekt_#{projekt.id}" }) do |f| %>
 
     <td class='projekt-info'>
@@ -65,7 +66,7 @@
           <%= icon('far', 'edit') %>
         <% end %>
 
-        <%= button_tag( type: 'submit', class: "configure-link update-projekt-link", title: t("admin.actions.update")) do %>
+        <%= link_to '#', class: "configure-link update-projekt-link js-quick-projekt-update", title: t("admin.actions.update") do %>
           <%= icon('fas', 'sync') %>
         <% end %>
 

@@ -176,7 +176,7 @@
           </div>
         <% else %>
           <%= link_to t("proposals.index.start_proposal"), new_proposal_path(tags: tags.any? ? tags.map{|t| t.name} : nil),
-            class: "button expanded",
+            class: "button expanded js-preselect-projekt",
             onclick: can_create ? "return true" : "alert('#{t("alerts.select_one_category", model: t("activerecord.models.proposal.one"))}'); return false;",
             disabled: !can_create %>
         <% end %>

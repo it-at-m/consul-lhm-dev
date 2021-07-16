@@ -1,9 +1,8 @@
 <h2><%= t("admin.settings.index.map.title") %></h2>
 
-<%= form_for(@projekt, url: admin_projekt_path, as: :projekt) do |f| %>
+<%= form_for(@projekt.map_location, url: admin_projekt_update_map_path(@projekt)) do |f| %>
   <%= hidden_field_tag :tab, '#tab-projekt-map' %>
 
-  <%= f.fields_for :map_location do |map_location_form| %>
 
     <table>
       <thead>
@@ -14,15 +13,14 @@
       </thead>
       <tbody>
 
-        <%= render partial: 'custom/admin/projekts/edit/projekt_map/map_settings_form', locals: { map_location_form: map_location_form, attribute: :latitude}%>
-        <%= render partial: 'custom/admin/projekts/edit/projekt_map/map_settings_form', locals: { map_location_form: map_location_form, attribute: :longitude }%>
-        <%= render partial: 'custom/admin/projekts/edit/projekt_map/map_settings_form', locals: { map_location_form: map_location_form, attribute: :zoom }%>
-        <%= render partial: 'custom/admin/projekts/edit/projekt_map/map_settings_form', locals: { map_location_form: map_location_form, attribute: :pin_color }%>
+        <%= render partial: 'custom/admin/projekts/edit/projekt_map/map_settings_form', locals: { map_location_form: f, attribute: :latitude}%>
+        <%= render partial: 'custom/admin/projekts/edit/projekt_map/map_settings_form', locals: { map_location_form: f, attribute: :longitude }%>
+        <%= render partial: 'custom/admin/projekts/edit/projekt_map/map_settings_form', locals: { map_location_form: f, attribute: :zoom }%>
+        <%= render partial: 'custom/admin/projekts/edit/projekt_map/map_settings_form', locals: { map_location_form: f, attribute: :pin_color }%>
 
       </tbody>
     </table>
 
-  <% end %>
 
 <% end %>
 

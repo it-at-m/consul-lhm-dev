@@ -32,5 +32,7 @@ class Debate
     #  user.voted_for?(self)
   end
 
-
+  def comments_allowed?(user)
+    projekt.present? ? debate_phase.selectable_by?(user) : false
+  end
 end

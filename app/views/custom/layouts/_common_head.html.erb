@@ -3,6 +3,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="external-links" content=<%= Setting["extended_feature.gdpr.link_out_warning"] %> />
 <meta name="two-click-iframes" content=<%= Setting["extended_feature.gdpr.two_click_iframe_solution"] %> />
+<meta name="expand-active-projekts" content=<%= Setting["projekts.second_level_projekts_in_active_filter"] %> />
+<meta name="expand-archived-projekts" content=<%= Setting["projekts.second_level_projekts_in_archived_filter"] %> />
 <title><%= content_for?(:title) ? yield(:title) : default_title %></title>
 <%= stylesheet_link_tag "application" %>
 <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>

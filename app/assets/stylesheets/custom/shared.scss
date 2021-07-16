@@ -154,10 +154,12 @@
   color: #c2c2c2;
 }
 
-.paid-feature:after {
+.paid-feature:before {
   content: "\f3d1";
   font-weight: bold;
   font-family: "Font Awesome 5 Free";
+  position: absolute;
+  right: -30px;
 }
 
 // Overriding foundation

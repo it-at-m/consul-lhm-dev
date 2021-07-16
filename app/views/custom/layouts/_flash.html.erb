@@ -1,3 +1,4 @@
+<% flash.delete("timedout") %>
 <% flash.each do |flash_key, flash_message| %>
   <div id="<%= flash_key %>" data-alert class="notice-container callout-slide" data-closable>
     <div class="callout notice <%= flash_key %>">

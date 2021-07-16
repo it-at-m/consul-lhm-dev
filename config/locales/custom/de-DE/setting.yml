@@ -93,6 +93,10 @@ de:
           sidebar_description: Zeigt archivierte Projekte in der Projektseitenleiste wenn aktiviert
         show_module_links_in_flyout_menu: Modul-Links in den Dropdowns
         show_module_links_in_flyout_menu_description: Zeigt die die Modul-Links unterhalb einzelner Dropdown-Einträge an
+        second_level_projekts_in_active_filter: Zweite Ebene für aktive Projekte anzeigen
+        second_level_projekts_in_active_filter_description: Zeigt eine zweite Ebene im Projektfilter für aktive Projekte standardmäßig an
+        second_level_projekts_in_archived_filter: Zweite Ebene für archivierte Projekte anzeigen
+        second_level_projekts_in_archived_filter_description: Zeigt eine zweite Ebene im Projektfilter für archivierte Projekte standardmäßig an
 
       projekt_feature:
         main:

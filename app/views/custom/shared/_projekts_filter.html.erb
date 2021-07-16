@@ -1,7 +1,7 @@
 <% projekts.each do |projekt| %>
   <% label_class =  ( @selected_projekts_ids && projekt.id.to_s.in?(@selected_projekts_ids) ) ? 'label-selected' : 'label_regular' %>
   <% checkbox_checked = @selected_projekts_ids && projekt.id.to_s.in?(@selected_projekts_ids)  %>
-  <% projekt_color = projekt&.map_location&.pin_color || '#00cae9' %>
+  <% projekt_color = projekt&.map_location&.pin_color.present? ? projekt&.map_location&.pin_color : '#00cae9' %>
 
   <ul>
     <li class=''>

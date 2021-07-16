@@ -1,6 +1,6 @@
 <% valuation = local_assigns.fetch(:valuation, false) %>
 <%= tag.ul class: "no-bullet comment-list" do %>
   <% comments.each do |comment| %>
-    <%= tag.li render("comments/comment", { comment: comment, valuation: valuation, comments_allowed: comments_allowed }) %>
+    <%= tag.li render("comments/comment", { comment: comment, valuation: valuation }) %>
   <% end %>
 <% end %>

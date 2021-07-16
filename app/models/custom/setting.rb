@@ -139,6 +139,8 @@ class Setting < ApplicationRecord
         "projekts.show_archived.navigation": true,
         "projekts.show_archived.sidebar": true,
         "projekts.show_module_links_in_flyout_menu": true,
+        "projekts.second_level_projekts_in_active_filter": false,
+        "projekts.second_level_projekts_in_archived_filter": false,
         # "extended_feature.general.elasticsearch": false,
         "extended_feature.general.extended_editor_for_admins": false,
         "extended_feature.general.extended_editor_for_users": false,

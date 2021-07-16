@@ -35,7 +35,7 @@ class Projekt < ApplicationRecord
   scope :with_order_number, -> { where.not(order_number: nil).order(order_number: :asc) }
 
   scope :top_level_active, -> { top_level.with_order_number.where( "total_duration_end IS NULL OR total_duration_end >= ?", Date.today).joins(:projekt_settings).where( projekt_settings: { key: 'projekt_feature.main.activate', value: 'active' }) }
-  scope :top_level_archived, -> { top_level.with_order_number.where( "total_duration_end < ?", Date.today).joins(:projekt_settings).where( projekt_settings: { key: 'projekt_feature.main.activate', value: '' }) }
+  scope :top_level_archived, -> { top_level.with_order_number.where( "total_duration_end < ?", Date.today).joins(:projekt_settings).where( projekt_settings: { key: 'projekt_feature.main.activate', value: 'active' }) }
 
   scope :top_level_active_top_menu, -> { top_level.with_order_number.
                                          where("total_duration_end IS NULL OR total_duration_end >= ?", Date.today).

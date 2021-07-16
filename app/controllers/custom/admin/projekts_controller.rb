@@ -1,7 +1,7 @@
 class Admin::ProjektsController < Admin::BaseController
   include MapLocationAttributes
 
-  before_action :find_projekt, only: [:update, :destroy]
+  before_action :find_projekt, only: [:update, :destroy, :quick_update]
   before_action :load_geozones, only: [:new, :create, :edit, :update]
 
   def index
@@ -49,6 +49,11 @@ class Admin::ProjektsController < Admin::BaseController
     @default_footer_tab_options = get_default_footer_tab_selection_options(@projekt)
   end
 
+  def quick_update
+    @projekt.update_attributes(projekt_params)
+    redirect_back(fallback_location: admin_projekts_path)
+  end
+
   def update
     if @projekt.update_attributes(projekt_params)
       @projekt.update_order
@@ -60,7 +65,7 @@ class Admin::ProjektsController < Admin::BaseController
 
   def update_map
     map_location = MapLocation.find_by(projekt: params[:projekt_id])
-    map_location.update(latitude: params[:latitude], longitude: params[:longitude], zoom: params[:zoom])
+    map_location.update(map_location_params)
 
     redirect_to edit_admin_projekt_path(params[:projekt_id]) + '#tab-projekt-map', notice: t("admin.settings.index.map.flash.update")
   end
@@ -113,6 +118,14 @@ class Admin::ProjektsController < Admin::BaseController
                                     proposal_phase_attributes: [:start_date, :end_date, :active, :geozone_restricted, geozone_restriction_ids: [] ],
                                     map_location_attributes: map_location_attributes,
                                     projekt_notifications: [:title, :body])
+  end
+
+  def map_location_params
+    if params[:map_location]
+      params.require(:map_location).permit(map_location_attributes)
+    else
+      params.permit(map_location_attributes)
+    end
   end
 
   def find_projekt

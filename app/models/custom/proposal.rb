@@ -29,6 +29,10 @@ class Proposal < ApplicationRecord
       )
   end
 
+  def comments_allowed?(user)
+    projekt.present? ? proposal_phase.selectable_by?(user) : false
+  end
+
   def description_sanitized
     sanitized_description = ActionController::Base.helpers.strip_tags(description).gsub("\n", '').gsub("\r", '').gsub(" ", '').gsub(/^$\n/, '').gsub(/[\u202F\u00A0\u2000\u2001\u2003]/, "")
     errors.add(:description, :too_long, message: 'too long text') if

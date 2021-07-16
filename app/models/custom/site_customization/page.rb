@@ -16,4 +16,8 @@ class SiteCustomization::Page < ApplicationRecord
   def comments_count
     comments.count
   end
+
+  def full_url
+    Setting['url'].chomp('/') + "/#{slug}"
+  end
 end

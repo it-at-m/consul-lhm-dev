@@ -112,7 +112,7 @@
 
       <div class="small-12 medium-3 column">
         <aside class="margin-bottom">
-          <%= link_to t("debates.index.start_debate"), new_debate_path, class: "button expanded" %>
+          <%= link_to t("debates.index.start_debate"), new_debate_path, class: "button expanded js-preselect-projekt" %>
           <%= render "shared/projekts_sidebar" %>
           <% if show_affiliation_filter_in_sidebar? %>
             <%= render "shared/sidebar_filter/geozone_affiliations" %>
