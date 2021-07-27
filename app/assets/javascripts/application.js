@@ -204,3 +204,5 @@ var destroy_non_idempotent_modules = function() {
 
 $(document).on("turbolinks:load", initialize_modules);
 $(document).on("turbolinks:before-cache", destroy_non_idempotent_modules);
+
+ahoy.configure({cookies: false});
