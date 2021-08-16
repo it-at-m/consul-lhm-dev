@@ -111,7 +111,7 @@
       map = L.map(element.id).setView(mapCenterLatLng, zoom);
       App.Map.maps.push(map);
       L.tileLayer.wms(mapTilesProvider, {
-        layers: 'g_stadtkarte_gesamt',
+        layers: 'gsm:g_stadtkarte_gesamt',
         attribution: mapAttribution
       }).addTo(map);
       if (markerLatitude && markerLongitude && !addMarker) {
