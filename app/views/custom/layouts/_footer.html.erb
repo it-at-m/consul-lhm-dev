@@ -88,14 +88,16 @@
   </div>
 </footer>
 
-<div class='gdpr-notice js-gdpr-notice'>
-  <div class="row">
-    <div class="column">
-      <h3><%= t('custom.gdpr_notice.title') %></h3>
-       <%= sanitize t('custom.gdpr_notice.message', link: link_to(t('custom.gdpr_notice.link_text'), page_path("privacy"))) %>
-      <div>
-        <%= link_to t('custom.gdpr_notice.accept'), '#', class: 'button success js-accept-gdpr-notice' %>
+<% if extended_feature?("gdpr.show_cookie_banner") %>
+  <div class='gdpr-notice js-gdpr-notice'>
+    <div class="row">
+      <div class="column">
+        <h3><%= t('custom.gdpr_notice.title') %></h3>
+         <%= sanitize t('custom.gdpr_notice.message', link: link_to(t('custom.gdpr_notice.link_text'), page_path("privacy"))) %>
+        <div>
+          <%= link_to t('custom.gdpr_notice.accept'), '#', class: 'button success js-accept-gdpr-notice' %>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>

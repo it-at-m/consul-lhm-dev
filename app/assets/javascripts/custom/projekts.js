@@ -9,12 +9,26 @@
       var dataParentIdentifierString = "[data-parent=\"" + projektId + "\"]"
       var $childrenProjektsGroup = $( dataParentIdentifierString )
 
-      if ( $childrenProjektsGroup.is(":hidden") ) {
+      if ( $childrenProjektsGroup.is(":visible") ) {
         App.Projekts.hideCurrentlyVisibleChildProjekts($label);
-        $childrenProjektsGroup.show()
       } else {
         App.Projekts.hideCurrentlyVisibleChildProjekts($label);
+        $childrenProjektsGroup.show()
       }
+    },
+
+    toggleChildProjektsMobile: function($label) {
+      var projektId = $label.data()['projektId']
+      var $projektChildren = $('[data-parent=' + projektId + ']')
+
+      $projektChildren.toggle()
+
+      if ( $projektChildren.is(':hidden') ) {
+        $projektChildren.find('label').each( function() {
+          $(this).removeClass('highlighted')
+        })
+      }
+
     },
 
     highlightLabel: function($label) {
@@ -353,6 +367,32 @@
       });
     },
 
+    updateSelectedParentProjekt: function() {
+      var selected_projekt_ids = $('#filter-projekts-active input:checked').map( function() {
+        return $(this).val()
+      }).get();
+
+      var current_url = $('.js-preselect-projekt:visible').first().attr('href').split('?')[0]
+      var $visibleButton = $('.js-preselect-projekt:visible').first()
+      if ( selected_projekt_ids.length > 0 ) {
+        $.ajax({
+          url: "/update_selected_parent_projekt",
+          method: "post",
+          data: { selected_projekts_ids: selected_projekt_ids },
+          success: function(result) {
+            if (result["selected_parent_projekt_id"] != null) {
+              var new_url = current_url + '?projekt=' + result["selected_parent_projekt_id"]
+              $visibleButton.attr('href', new_url)
+            } else {
+              $visibleButton.attr('href', current_url)
+            }
+          }
+        });
+      } else {
+        $visibleButton.attr('href', current_url)
+      }
+    },
+
 
     // Initializer
  
@@ -371,7 +411,17 @@
         return false;
       });
 
+      $("body").on("click", ".js-show-children-projekts-mobile", function(event) {
+        event.preventDefault();
+
+        var $label = $(this).closest('label')
+
+        App.Projekts.toggleChildProjektsMobile($label);
+        return false;
+      });
+
       $("body").on("click", ".js-select-projekt", function() {
+        event.preventDefault();
         var $label = $(this).closest('label')
 
         if ( $label.hasClass('projekt-phase-disabled')) {
@@ -382,8 +432,14 @@
 
         $radioButton.prop( "checked", !$radioButton.prop( "checked") );
 
-        $label.toggleClass('selected')
-        App.Projekts.highlightLabel($label);
+        // $label.toggleClass('selected')
+
+        if ( $(this).closest('#projekt-tags-selector-mobile').length ) {
+          $(this).closest('#projekt-tags-selector-mobile').find('label').removeClass('highlighted')
+          $label.addClass('highlighted')
+        } else {
+          App.Projekts.highlightLabel($label);
+        }
 
         App.Projekts.replaceProjektMapOnProposalCreation($label, $radioButton)
       });
@@ -409,6 +465,8 @@
             });
           }
         }
+
+        App.Projekts.updateSelectedParentProjekt();
       });
 
       $("body").on("click", ".js-apply-projekts-filter", function(event) {
@@ -475,18 +533,6 @@
         event.preventDefault();
         $(this).closest('tr').find('form').submit()
       });
-
-      $("body").on("click", ".js-preselect-projekt", function(event) {
-        event.preventDefault();
-        var filteredProjekts = (new URL(document.location)).searchParams.get('projekts')
-        if ( filteredProjekts && filteredProjekts.split(',').length == 1 ) {
-          var current_url = $(this).attr('href')
-          $(this).attr('href', current_url + '?projekt=' + filteredProjekts.split(',')[0])
-        }
-
-        window.location.href = $(this).attr('href');
-      });
-
     }
   };
 }).call(this);

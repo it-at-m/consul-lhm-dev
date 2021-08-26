@@ -70,6 +70,12 @@ de:
           intro_text_for_polls_description: Aktivieren Sie einen individuellen Einleitungstext oberhalb der Abstimmungsübersicht
           intermediate_poll_results_for_admins: Zwischenergebnisse von Abstimmungen für Admins
           intermediate_poll_results_for_admins_description: Aktivieren Sie die Einsicht in Zwischenergebnisse zu Abstimmungen für Administratoren
+          enable_comments: Kommentare
+          enable_comments_description: Aktivieren Sie "Kommentare" für das Abstimmungsmodul 
+          additional_information: Erweiterte Informationen
+          additional_information_description: Aktivieren Sie "Erweiterete Informationen" für das Abstimmungsmodul
+          additional_info_for_each_answer: Zusätzliche Informationen je Antwort
+          additional_info_for_each_answer_description: Zeigt die "Zusätzliche Informationen" je Antwort an
 
       extended_option:
         gdpr:

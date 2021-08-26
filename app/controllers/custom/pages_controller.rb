@@ -12,6 +12,7 @@ class PagesController < ApplicationController
 
     @commentable = @custom_page
     @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
+    set_comment_flags(@comment_tree.comments)
     set_resource_instance
 
 

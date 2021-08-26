@@ -11,7 +11,17 @@ de:
           attributes:
             description:
               too_long: 'is too long'
+    attributes:
+      poll/answer:
+        open_answer_text: Offene Antwort
+      widget/card:
+        card_category: Kategorie
   custom:
+    welcome:
+      active_projekt_cards:
+        title: Aktive Beteiligungsprozesse
+      archived_projekt_cards:
+        title: Abgeschlossene Beteiligungsprozesse
     devise_views:
       users:
         registrations:
@@ -73,6 +83,16 @@ de:
       proposals: Vorschläge
       polls: Abstimmungen
     admin:
+      homepage:
+        active_projekts_title: Aktive Beteiligungsprozesse
+        archived_projekts_title: Abgeschlossene Beteiligungsprozesse
+      widget:
+        card:
+          category_options:
+            active_projekt: Aktiver Beteiligungsprozess
+            archived_projekt: Abgeschlossener Beteiligungsprozess
+
+
       settings:
         index:
           extended_settings: Erweiterte Einstellungen
@@ -88,6 +108,20 @@ de:
             debates: Diskussionen
             proposals: Vorschläge
             polls: Abstimmungen
+      polls:
+        questions:
+          show_images: Bilder für Antworten anzeigen
+          answers:
+            open_answer_html: Offene Antwort <small><em>(Nur eine erlaubt)</em></small>
+            notice:
+              delete:
+                success: Antwort erfolgreich gelöscht.
+                error: Für diese Abstimmung wurden schon Stimmen abgegeben. Sie können die Antwort deshalb nicht mehr löschen.
+                confirmation: Sind Sie sicher?
+              open_answer_saved: Vielen Dank! Ihre Antwort wurde erfolgreich gespeichert.
+        settings:
+          show_open_answer_with_username: Offene Antworten mit Nutzer:innen-Name anzeigen
+          show_open_answer_without_username: Offene Antworten anonym anzeigen
 
       menu:
         projekts: Projekte
@@ -228,8 +262,8 @@ de:
           entire_city: "Stadtweit"
           only_geozones: Zuordnung zu Stadtteil
         restrictions:
-          no_restriction: Alle Nutzer:innen der Plattform
-          only_citizens: Nur Bürger:innen der Stadt
+          no_restriction: Alle Nutzer:innen
+          only_citizens: Nur Bürger:innen
           only_geozones: Nur Bürger:innen des Stadtteils
     proposals:
       form:
@@ -240,6 +274,7 @@ de:
         publish: 'Vorschlag jetzt veröffentlichen'
 
       index:
+        no_active_projekt: Aktuell kein Beteiligungsverfahren
         show_larger_map: Mehr anzeigen
         show_smaller_map: Weniger anzeigen
         max_number_reached: "Du hast die maximale Anzahl (%{max_number}) an Vorschlägen pro Nutzer erreicht. Bevor du einen weiteren Vorschlag erstellen kannst, musst du einen aktiven Vorschlag zurückziehen."
@@ -252,10 +287,18 @@ de:
       show:
         results_menu: Zwischenergebnisse für Admins
         info_menu: Abstimmung
+      questions:
+        answers:
+          more_info: Mehr Infos
+          save_open_answer: Antwort speichern
+          update_open_answer: Antwort editieren
+      results:
+        open_answers: Offene Antworten
     debates:
       form:
         tags_custom: Nutzer-Tags
       index:
+        no_active_projekt: Aktuell kein Beteiligungsverfahren
         projekts: Projekte
     comments:
       reply_form:
@@ -266,6 +309,7 @@ de:
         debate_phase_expired: Die Diskussionsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
         proposal_phase_expired: Die Vorschlagsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
         poll_phase_expired: Die Abstimmungsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
+        other: Die Kommentarfunktion ist nicht verfügbar
 
     images:
       form:

@@ -10,6 +10,11 @@ class Geozone < ApplicationRecord
     Geozone.reflect_on_all_associations(:has_many).all? do |association|
       if association.klass.name == 'User' || association.klass.name == 'ProjektPhaseGeozone'
         association.klass.where(geozone: self).empty?
+      elsif association.klass.name.in? ['Proposal', 'Debate', 'Projekt']
+        association.klass.joins(:geozone_restrictions).where('geozones.id = ?', self.id).empty? &&
+          association.klass.joins(:geozone_affiliations).where('geozones.id = ?', self.id).empty?
+      elsif association.klass.name.in? ['ProjektPhase' ]
+        association.klass.joins(:geozone_restrictions).where('geozones.id = ?', self.id).empty?
       else
         association.klass.joins(:geozones).where('geozones.id = ?', self.id).empty?
       end

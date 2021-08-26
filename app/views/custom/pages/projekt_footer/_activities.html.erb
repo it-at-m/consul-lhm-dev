@@ -60,7 +60,7 @@
             <% end %>
 
             <div class="row">
-              <% if projekt_phase_selectable?(projekt, 'proposal_phase') %>
+              <% if !user_signed_in? || projekt.proposal_phase.selectable_by?(current_user) %>
                 <div class="column medium-3">
                   <%= link_to new_proposal_path + "?projekt=#{projekt.id}", class: 'button expanded' do %>
                     <%= t("custom.projekt.page.sidebar.phases.proposal_phase_button") %>
@@ -77,7 +77,7 @@
               <% end %>
             </div>
 
-            <% if @most_active_proposals.empty? && projekt_phase_selectable?(projekt, 'proposal_phase') %>
+            <% if @most_active_proposals.empty? && projekt.proposal_phase.selectable_by?(current_user)  %>
               <%= t("custom.projekt.footer.show.no_proposals") %>
             <% elsif @most_active_proposals.exists? %>
               <%= render partial: "proposals/proposal", collection: @most_active_proposals %>
@@ -94,7 +94,7 @@
           <% if projekt_phase_active?(projekt, 'debate_phase') %>
 
             <div class="row">
-              <% if projekt_phase_selectable?(projekt, 'debate_phase') %>
+              <% if !user_signed_in? || projekt.debate_phase.selectable_by?(current_user) %>
                 <div class="column medium-3">
                   <%= link_to new_debate_path + "?projekt=#{projekt.id}", class: 'button expanded' do %>
                     <%= t("custom.projekt.page.sidebar.phases.debate_phase_button") %>
@@ -111,7 +111,7 @@
               <% end %>
             </div>
 
-            <% if @most_active_debates.empty? && projekt_phase_selectable?(projekt, 'debate_phase') %>
+            <% if @most_active_debates.empty? && projekt.debate_phase.selectable_by?(current_user) %>
               <%= t("custom.projekt.footer.show.no_debates") %>
             <% elsif @most_active_debates.exists? %>
               <%= render partial: "debates/debate", collection: @most_active_debates %>

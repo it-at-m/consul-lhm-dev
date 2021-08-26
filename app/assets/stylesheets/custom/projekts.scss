@@ -238,12 +238,40 @@ div.projekt-phase-geozone-restriction-selector {
   margin: 1em 0;
 }
 
-#projekt-tags-selector {
-
+#projekt-tags-selector{
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   column-gap: 1em;
   row-gap: 1em;
+}
+
+#projekt-tags-selector-mobile {
+  .projekt-mobile {
+  }
+
+  .projekt-mobile.projekt-level-2 {
+    width: 95%;
+    margin-left: 5%;
+  }
+
+  .projekt-mobile.projekt-level-3 {
+    width: 90%;
+    margin-left: 10%;
+  }
+
+  .show-children-projekts-mobile {
+    background-color: #dbe9f5;
+    width: 85px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+
+#projekt-tags-selector,
+#projekt-tags-selector-mobile {
 
   .projekt-tags-column:not(:first-child) {
     .projekt-group {
@@ -452,6 +480,7 @@ div.projekt-phase-geozone-restriction-selector {
     height: 14px;
     width: 4px;
     border-radius: 2px;
+    background-color: $brand;
   }
 
   input:checked ~ .checkmark:before {

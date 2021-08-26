@@ -1,0 +1,17 @@
+<%= form_for [:admin, @poll], action: "update" do |f| %>
+  <%= render "admin/shared/show_results_fields", form: f %>
+
+  <div class='show-user-name-with-open-answers'>
+
+    <% checkbox_options = [[t('custom.admin.polls.settings.show_open_answer_with_username'), true ], [t('custom.admin.polls.settings.show_open_answer_without_username'), false]] %>
+    <%= f.collection_radio_buttons :show_open_answer_author_name, checkbox_options, :second, :first do |rb| %>
+      <%= rb.label { rb.radio_button + rb.text } %>
+
+    <% end %>
+  </div>
+
+  <div class="small-12 medium-4 large-2">
+    <%= f.submit t("admin.polls.#{admin_submit_action(@poll)}.submit_button"),
+                 class: "button success expanded" %>
+  </div>
+<% end %>

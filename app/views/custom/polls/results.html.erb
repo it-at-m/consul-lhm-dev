@@ -1,0 +1,85 @@
+<% provide :title do %><%= @poll.name %><% end %>
+
+<div class="polls-results-stats">
+  <%= render "poll_header" %>
+
+  <%= render "poll_subnav" %>
+
+  <div class="row margin" data-equalizer data-equalize-on="medium">
+    <div class="small-12 medium-3 column sidebar" data-equalizer-watch>
+      <p><strong><%= t("polls.show.results.title") %></strong></p>
+      <ul class="menu vertical">
+        <%- @poll.questions.each do |question| %>
+          <li><%= link_to question.title, "##{question.title.parameterize}" %></li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="small-12 medium-9 column" data-equalizer-watch>
+      <%- @poll.questions.each do |question| %>
+        <% most_voted_answer_votes = question.most_voted_answer_votes %>
+        <h3 id="<%= question.title.parameterize %>">
+          <%= question.title %>
+          <% if question.multiple %>
+            <small>
+              (<%= t("poll_questions.show.question.multiple") %>)
+            </small>
+          <% end %>
+        </h3>
+        <table id="question_<%= question.id %>_results_table">
+          <thead>
+            <tr>
+              <%- question.question_answers.each do |answer| %>
+                <th scope="col" <%= answer.total_votes == most_voted_answer_votes ? "class=win" : "" %>>
+                  <% if answer.total_votes == most_voted_answer_votes %>
+                    <span class="show-for-sr"><%= t("polls.show.results.most_voted_answer") %></span>
+                  <% end %>
+                  <%= answer.title %>
+                </th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <%- question.question_answers.each do |answer| %>
+                <td id="answer_<%= answer.id %>_result" <%= answer.total_votes == most_voted_answer_votes ? "class=win" : "" %>>
+                  <%= answer.total_votes %>
+                  (<%= answer.total_votes_percentage.round(2) %>%)
+                </td>
+              <% end %>
+            </tr>
+          </tbody>
+        </table>
+
+        <% if question.open_question_answer %>
+          <div class='poll-results-open-answers' aria-hidden="true">
+            <div class='open-answers-title js-show-open-answers'>
+              <%= t('custom.polls.results.open_answers') %>
+            </div>
+            <div class='poll-results-open-answers-list'>
+              <% question.open_question_answer.all_open_answers.each do |open_answer| %>
+                <div class='poll-results-open-answer'>
+                  <div class='open-answer-info'>
+                      <%= avatar_image(open_answer.author, size: 32, class: "float-left user-avatar") %>
+                      <span class='user-name'>
+                        <% if question.poll.show_open_answer_author_name %>
+                          <%= open_answer.author.username %></span>
+                        <% else %>
+                          <%= 'anonymisiert' %></span>
+                        <% end %>
+                      &nbsp;&bull;&nbsp;
+                    <span><%= open_answer.created_at.localtime.strftime '%Y-%m-%d %H:%M:%S'%></span>
+                  </div>
+                  <div class='open-answer-text'>
+                    <%= open_answer.open_answer_text %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+
+      <% end %>
+    </div>
+  </div>
+</div>

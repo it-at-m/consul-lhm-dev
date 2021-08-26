@@ -114,8 +114,8 @@ class Admin::ProjektsController < Admin::BaseController
 
   def projekt_params
     params.require(:projekt).permit(:name, :parent_id, :total_duration_start, :total_duration_end, :geozone_affiliated, geozone_affiliation_ids: [],
-                                    debate_phase_attributes: [:start_date, :end_date, :active, :geozone_restricted, geozone_restriction_ids: [] ],
-                                    proposal_phase_attributes: [:start_date, :end_date, :active, :geozone_restricted, geozone_restriction_ids: [] ],
+                                    debate_phase_attributes: [:id, :start_date, :end_date, :active, :geozone_restricted, geozone_restriction_ids: [] ],
+                                    proposal_phase_attributes: [:id, :start_date, :end_date, :active, :geozone_restricted, geozone_restriction_ids: [] ],
                                     map_location_attributes: map_location_attributes,
                                     projekt_notifications: [:title, :body])
   end

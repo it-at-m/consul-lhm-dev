@@ -56,12 +56,6 @@ module ProjektsHelper
     projekt.send(phase_name).active
   end
 
-  def projekt_phase_selectable?(projekt, phase_name)
-    projekt.send(phase_name).active &&
-      ((projekt.send(phase_name).start_date <= Date.today if projekt.send(phase_name).start_date) || projekt.send(phase_name).start_date.blank? ) &&
-      ((projekt.send(phase_name).end_date >= Date.today if projekt.send(phase_name).end_date) || projekt.send(phase_name).end_date.blank? )
-  end
-
   def projekt_phase_not_started_yet?(projekt, phase_name)
     projekt.send(phase_name).start_date > Date.today if projekt.send(phase_name).start_date
   end
@@ -88,7 +82,7 @@ module ProjektsHelper
     elsif !start_date && end_date
       "bis #{format_date(end_date)}"
     else
-      'Ohne zeitliche Beschränkung'
+      'Zeitlich nicht beschränkt'
     end
   end
 
@@ -111,7 +105,7 @@ module ProjektsHelper
     t("custom.geozones.projekt_selector.affiliations.#{affiliation_name}" )
   end
 
-  def get_projekt_phase_restriction_name(projekt_phase)
+  def get_projekt_phase_restriction_name(projekt_phase, destination=nil)
     restriction_name = projekt_phase.geozone_restricted || "no_restriction"
     geozone_restrictions = projekt_phase.geozone_restrictions
 
@@ -119,7 +113,11 @@ module ProjektsHelper
       return geozone_restrictions.pluck(:name).join(', ')
     end
 
-    t("custom.geozones.sidebar_filter.restrictions.#{restriction_name}" )
+    if destination == 'projekt_selector'
+      t("custom.geozones.projekt_selector.restrictions.#{restriction_name}" )
+    else
+      t("custom.geozones.sidebar_filter.restrictions.#{restriction_name}" )
+    end
   end
 
   def related_polls(projekt, timestamp = Date.current.beginning_of_day)
@@ -168,6 +166,8 @@ module ProjektsHelper
   end
 
   def show_projekt_group_in_selector?(projekts)
+    return true if projekts.first&.parent&.id.to_s == params[:projekt]
+
     resource = @debate || @proposal || @poll
 
     if resource && resource.projekt.present?
@@ -179,7 +179,7 @@ module ProjektsHelper
     end
 
     if selected_projekt_id
-      (projekts.ids + projekts.map{ |projekt| projekt.all_children_ids }.flatten).include?(selected_projekt_id)
+      (projekts.pluck(:id) + projekts.map{ |projekt| projekt.all_children_ids }.flatten).include?(selected_projekt_id)
     end
   end
 end

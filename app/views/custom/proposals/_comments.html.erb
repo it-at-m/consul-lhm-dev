@@ -12,18 +12,14 @@
           <ul>
             <% if !skip_user_verification? && !current_user.level_two_or_three_verified? %>
               <li><%= t('custom.comments.restricted.not_verified', verify_account: link_to_verify_account).html_safe %></li>
-            <% end %>
-
-            <% if current_user.geozone && @projekt.proposal_phase.geozone_restrictions.any? && !@projekt.proposal_phase.geozone_restriction_ids.include?(current_user.geozone.id) %>
+            <% elsif current_user.geozone && @projekt.proposal_phase.geozone_restrictions.any? && !@projekt.proposal_phase.geozone_restriction_ids.include?(current_user.geozone.id) %>
               <li><%= t('custom.comments.restricted.geo_limitation', geozones: @projekt.proposal_phase.geozone_restrictions.names.join(', ')) %></li>
-            <% end %>
-
-            <% if @projekt.proposal_phase.active && @projekt.proposal_phase.end_date && @projekt.proposal_phase.end_date < Date.today %>
+            <% elsif @projekt.proposal_phase.active && @projekt.proposal_phase.end_date && @projekt.proposal_phase.end_date < Date.today %>
               <li><%= t('custom.comments.restricted.proposal_phase_expired')%></li>
-            <% end %>
-
-            <% if !@projekt.proposal_phase.active %>
+            <% elsif !@projekt.proposal_phase.active %>
               <li><%= t('custom.comments.restricted.proposal_phase_expired')%></li>
+           <% else %>
+             <li><%= t('custom.comments.restricted.other')%></li>
             <% end %>
 
           </ul>

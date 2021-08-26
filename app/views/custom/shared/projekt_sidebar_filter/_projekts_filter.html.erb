@@ -1,15 +1,18 @@
 <% projekts.each do |projekt| %>
+
+
   <% label_class =  ( @selected_projekts_ids && projekt.id.to_s.in?(@selected_projekts_ids) ) ? 'label-selected' : 'label_regular' %>
   <% checkbox_checked = @selected_projekts_ids && projekt.id.to_s.in?(@selected_projekts_ids)  %>
-  <% projekt_color = projekt&.map_location&.pin_color.present? ? projekt&.map_location&.pin_color : '#00cae9' %>
+  <% projekt_color = projekt&.map_location&.pin_color.present? ? projekt&.map_location&.pin_color : nil %>
 
   <ul>
     <li class=''>
       <%= label_tag dom_id(projekt), class: label_class do %>
         <%= check_box_tag dom_id(projekt), projekt.id, checkbox_checked, { class: 'js-filter-projekt' }  %>
         <%= projekt.name %>
+        <%= "(#{projekt.count_resources(params[:controller])})" %>
         <span class="checkmark"></span>
-        <span class="color-code" style="background-color: <%= projekt_color %>" ></span>
+        <span class="color-code" <%= "style=background-color: #{projekt_color}" if projekt_color.present? %> ></span>
       <% end %>
 
       <% if projekt.children.any? %>
@@ -18,8 +21,9 @@
     </li>
 
     <% if projekt.children.any? %>
-      <%= render partial: "shared/projekts_filter", locals: { projekts: projekt.children.with_order_number } %>
+      <%= render partial: "shared/projekt_sidebar_filter/projekts_filter", locals: { projekts: projekt.children.with_order_number } %>
     <% end %>
 
   </ul>
+
 <% end %>

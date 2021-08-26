@@ -16,7 +16,7 @@ class Projekt < ApplicationRecord
   has_many :projekt_phases, dependent: :destroy
   has_one :debate_phase, class_name: 'ProjektPhase::DebatePhase'
   has_one :proposal_phase, class_name: 'ProjektPhase::ProposalPhase'
-  has_many :geozone_limitations, through: :projekt_phases
+  has_many :geozone_restrictions, through: :projekt_phases
   has_and_belongs_to_many :geozone_affiliations, through: :geozones_projekts, class_name: 'Geozone'
   has_one :map_location, dependent: :destroy
 
@@ -34,14 +34,23 @@ class Projekt < ApplicationRecord
   scope :top_level, -> { where(parent: nil) }
   scope :with_order_number, -> { where.not(order_number: nil).order(order_number: :asc) }
 
-  scope :top_level_active, -> { top_level.with_order_number.where( "total_duration_end IS NULL OR total_duration_end >= ?", Date.today).joins(:projekt_settings).where( projekt_settings: { key: 'projekt_feature.main.activate', value: 'active' }) }
-  scope :top_level_archived, -> { top_level.with_order_number.where( "total_duration_end < ?", Date.today).joins(:projekt_settings).where( projekt_settings: { key: 'projekt_feature.main.activate', value: 'active' }) }
+  scope :top_level_active, -> { top_level.with_order_number.
+                                           where( "total_duration_end IS NULL OR total_duration_end >= ?", Date.today).
+                                           joins(' INNER JOIN projekt_settings a ON projekts.id = a.projekt_id').
+                                           where( 'a.key': 'projekt_feature.main.activate', 'a.value': 'active' ).
+                                           select('DISTINCT ON ("projekts"."order_number") "projekts".*') }
+
+  scope :top_level_archived, -> { top_level.with_order_number.
+                                           where( "total_duration_end < ?", Date.today).
+                                           joins(' INNER JOIN projekt_settings a ON projekts.id = a.projekt_id').
+                                           where( 'a.key': 'projekt_feature.main.activate', 'a.value': 'active' ).
+                                           select('DISTINCT ON ("projekts"."order_number") "projekts".*') }
 
   scope :top_level_active_top_menu, -> { top_level.with_order_number.
-                                         where("total_duration_end IS NULL OR total_duration_end >= ?", Date.today).
-                                         joins('INNER JOIN projekt_settings a ON projekts.id = a.projekt_id').
-                                         joins('INNER JOIN projekt_settings b ON projekts.id = b.projekt_id').
-                                         where("a.key": "projekt_feature.main.activate", "a.value": "active", "b.key": "projekt_feature.general.show_in_navigation", "b.value": "active").distinct }
+                                           where("total_duration_end IS NULL OR total_duration_end >= ?", Date.today).
+                                           joins('INNER JOIN projekt_settings a ON projekts.id = a.projekt_id').
+                                           joins('INNER JOIN projekt_settings b ON projekts.id = b.projekt_id').
+                                           where("a.key": "projekt_feature.main.activate", "a.value": "active", "b.key": "projekt_feature.general.show_in_navigation", "b.value": "active").distinct }
 
   def level(counter = 1)
     return counter if self.parent.blank?
@@ -66,6 +75,32 @@ class Projekt < ApplicationRecord
     end
 
     all_children_ids
+  end
+
+  def all_children_projekts(all_children_projekts = [])
+    if self.children.any?
+      self.children.each do |child|
+        all_children_projekts.push(child)
+        child.all_children_projekts(all_children_projekts)
+      end
+    end
+
+    all_children_projekts
+  end
+
+  def has_active_phase?(controller_name)
+    case controller_name
+    when 'proposals'
+      proposal_phase.currently_active?
+    when 'debates'
+      debate_phase.currently_active?
+    when 'polls'
+      polls.any?
+    end
+  end
+
+  def count_resources(controller_name)
+    self.send(controller_name).count
   end
 
   def top_level?

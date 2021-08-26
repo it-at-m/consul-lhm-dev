@@ -54,7 +54,7 @@
   <% end %>
 
   <%tags = @selected_tags&.select{ |tag| tag.kind == 'category' } %>
-  <%can_create = true %>
+  <%can_create = @top_level_active_projekts.blank? %>
 
   <% if feature?(:map) %>
     <div class="map inline">
@@ -127,15 +127,17 @@
       <% end %>
 
       <div class="show-for-small-only margin-top">
-        <% if @proposals.any? && current_user && proposal_limit_exceeded?(current_user) %>
+        <% if current_user && proposal_limit_exceeded?(current_user) %>
           <div class='max-proposals-exceeded'>
             <%= t('custom.proposals.index.max_number_reached', max_number: Setting['extended_option.proposals.max_active_proposals_per_user']) %>
           </div>
         <% else %>
-          <%= link_to t("proposals.index.start_proposal"), new_proposal_path(tags: tags.any? ? tags.map{|t| t.name} : nil),
-            class: "button expanded",
-            onclick: can_create ? "return true" : "alert('#{t("alerts.select_one_category", model: t("activerecord.models.proposal.one"))}'); return false;",
-            disabled: !can_create %>
+          <% if @top_level_active_projekts.any? %>
+            <%= link_to t("proposals.index.start_proposal"), new_proposal_path(tags: tags.any? ? tags.map{|t| t.name} : nil, projekt: @selected_parent_projekt),
+              class: "button expanded js-preselect-projekt" %>
+          <% else %>
+            <%= link_to t("custom.proposals.index.no_active_projekt"), '#', class: "button expanded disabled-no-active-projekt", disabled: true %>
+          <% end %>
         <% end %>
       </div>
 
@@ -175,10 +177,12 @@
             <%= t('custom.proposals.index.max_number_reached', max_number: Setting['extended_option.proposals.max_active_proposals_per_user']) %>
           </div>
         <% else %>
-          <%= link_to t("proposals.index.start_proposal"), new_proposal_path(tags: tags.any? ? tags.map{|t| t.name} : nil),
-            class: "button expanded js-preselect-projekt",
-            onclick: can_create ? "return true" : "alert('#{t("alerts.select_one_category", model: t("activerecord.models.proposal.one"))}'); return false;",
-            disabled: !can_create %>
+          <% if @top_level_active_projekts.any? %>
+            <%= link_to t("proposals.index.start_proposal"), new_proposal_path(tags: tags.any? ? tags.map{|t| t.name} : nil, projekt: @selected_parent_projekt),
+              class: "button expanded js-preselect-projekt" %>
+          <% else %>
+            <%= link_to t("custom.proposals.index.no_active_projekt"), '#', class: "button expanded disabled-no-active-projekt", disabled: true %>
+          <% end %>
         <% end %>
 
         <% if extended_feature?('proposals.show_selected_proposals_in_proposal_sidebar') %>
@@ -191,7 +195,7 @@
         <% end %>
 
         <% if params[:retired].blank? %>
-          <%= render "shared/projekts_sidebar" %>
+          <%= render "shared/projekt_sidebar_filter/projekts_sidebar" %>
           <% if show_affiliation_filter_in_sidebar? %>
             <%= render "shared/sidebar_filter/geozone_affiliations" %>
           <% end %>

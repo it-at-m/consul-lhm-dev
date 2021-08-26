@@ -2,7 +2,7 @@
 
 <h2 class="sidebar-title"><%= t("custom.projekt.page.sidebar.navigator.title") %></h2>
 
-<% if show_archived_projekts_in_sidebar? && Projekt.top_level_archived.any? && Projekt.top_level_active.any? %>
+<% if show_archived_projekts_in_sidebar? && Projekt.top_level_active.any? && Projekt.top_level_archived.any? %>
   <div class='sidebar-projekt-group-name'>
 		<%= t("custom.projekts.sidebar_filter.title_active") %>
   </div>

@@ -108,10 +108,10 @@ module Abilities
         can :create, DirectMessage
         can :show, DirectMessage, sender_id: user.id
 
-        can :answer, Poll do |poll|
+        can [:answer, :unanswer], Poll do |poll|
           poll.answerable_by?(user)
         end
-        can :answer, Poll::Question do |question|
+        can [:answer, :unanswer, :update_open_answer], Poll::Question do |question|
           question.answerable_by?(user)
         end
       end

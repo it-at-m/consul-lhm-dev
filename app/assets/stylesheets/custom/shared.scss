@@ -229,3 +229,9 @@ input.checkbox-label + span {
   display: inline;
   margin-bottom: 0.5rem;
 }
+
+.disabled-no-active-projekt {
+  background-color: gray !important;
+  color: #222 !important;
+  opacity: 0.8 !important;
+}

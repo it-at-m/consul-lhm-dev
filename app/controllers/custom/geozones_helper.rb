@@ -74,7 +74,7 @@ module GeozonesHelper
     end
 
 
-    tag_name = t("custom.geozones.sidebar_filter.#{geo_restriction_name}" )
+    tag_name = t("custom.geozones.sidebar_filter.restrictions.#{geo_restriction_name}" )
     tag_type = 'restriction'
     url_params_string = "&geozone_restriction=#{geo_restriction_name}"
     active_class = ''

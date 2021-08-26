@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_08_115335) do
+ActiveRecord::Schema.define(version: 2021_08_26_123714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1005,6 +1005,7 @@ ActiveRecord::Schema.define(version: 2021_07_08_115335) do
     t.string "answer"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string "open_answer_text"
     t.index ["author_id"], name: "index_poll_answers_on_author_id"
     t.index ["question_id", "answer"], name: "index_poll_answers_on_question_id_and_answer"
     t.index ["question_id"], name: "index_poll_answers_on_question_id"
@@ -1101,6 +1102,7 @@ ActiveRecord::Schema.define(version: 2021_07_08_115335) do
     t.integer "question_id"
     t.integer "given_order", default: 1
     t.boolean "most_voted", default: false
+    t.boolean "open_answer", default: false
     t.index ["question_id"], name: "index_poll_question_answers_on_question_id"
   end
 
@@ -1127,6 +1129,8 @@ ActiveRecord::Schema.define(version: 2021_07_08_115335) do
     t.datetime "updated_at"
     t.tsvector "tsv"
     t.string "video_url"
+    t.boolean "show_images", default: false
+    t.boolean "multiple", default: false
     t.index ["author_id"], name: "index_poll_questions_on_author_id"
     t.index ["poll_id"], name: "index_poll_questions_on_poll_id"
     t.index ["proposal_id"], name: "index_poll_questions_on_proposal_id"
@@ -1219,6 +1223,7 @@ ActiveRecord::Schema.define(version: 2021_07_08_115335) do
     t.integer "related_id"
     t.tsvector "tsv"
     t.bigint "projekt_id"
+    t.boolean "show_open_answer_author_name"
     t.index ["budget_id"], name: "index_polls_on_budget_id", unique: true
     t.index ["projekt_id"], name: "index_polls_on_projekt_id"
     t.index ["related_type", "related_id"], name: "index_polls_on_related_type_and_related_id"
@@ -1675,6 +1680,9 @@ ActiveRecord::Schema.define(version: 2021_07_08_115335) do
     t.boolean "public_interests", default: false
     t.boolean "recommended_debates", default: true
     t.boolean "recommended_proposals", default: true
+    t.string "keycloak_link"
+    t.string "first_name"
+    t.string "last_name"
     t.string "plz"
     t.boolean "plz_consent"
     t.string "keycloak_link"
@@ -1787,6 +1795,7 @@ ActiveRecord::Schema.define(version: 2021_07_08_115335) do
     t.integer "cardable_id"
     t.integer "columns", default: 4
     t.string "cardable_type", default: "SiteCustomization::Page"
+    t.string "card_category", default: ""
     t.index ["cardable_id"], name: "index_widget_cards_on_cardable_id"
   end
 

@@ -97,13 +97,6 @@
       </div>
     <%end%>
 
-    <% if current_user.unverified? %>
-      <div class="small-12 column">
-        <%= f.text_field :responsible_name,
-          hint: t("proposals.form.proposal_responsible_name_note") %>
-      </div>
-    <% end %>
-
     <%= render SDG::RelatedListSelectorComponent.new(f) %>
 
     <div class="small-12 column">

@@ -1,0 +1,30 @@
+<% phase_name = 'debate_phase' if controller.controller_name == 'debates' %>
+<% phase_name = 'proposal_phase' if controller.controller_name == 'proposals' %>
+
+<% @projekt_phase = projekt.send(phase_name) if phase_name %>
+
+<% disable_radio_button = ((can?(:select, @projekt_phase) || ((current_user.administrator?) && controller.controller_name == 'polls') ) ? false : true)  %>
+<% disabled_class = ((can?(:select, @projekt_phase) || ((current_user.administrator?) && controller.controller_name == 'polls') || projekt_feature?(projekt, 'general.show_not_active_phases_in_projekts_page_sidebar')  ) ? '' : 'projekt-phase-disabled') %>
+<% hide_map_class = projekt_feature?(projekt, "general.show_map") ? '' : 'hide-map'  %>
+<% arrow = projekt.all_children_projekts.any? { |projekt|  projekt.has_active_phase?(params[:controller]) } ? 'show-arrow' : ''  %>
+
+<%= f.label :projekt_id, nil,  class: "js-select-projekt #{arrow} #{disabled_class} #{highlight_projekt_in_selector?(projekt)} #{hide_map_class} projekt-mobile projekt-level-#{projekt.level}", data: { projekt_id: projekt.id, latitude: projekt.map_location.latitude, longitude: projekt.map_location.longitude, zoom: projekt.map_location.zoom, maplocation: projekt.map_location.id } do %>
+  <%= f.radio_button :projekt_id, projekt.id, {label: false} %>
+  <div class=''>
+    <%= projekt.name %>
+  </div>
+
+  <%= render partial: "shared/projekt_selector/shared/projekt_info", locals: { projekt: projekt, phase_name: phase_name  } %>
+  <%= render partial: "shared/projekt_selector/shared/checkmark", locals: { projekt: projekt, phase_name: phase_name  } %>
+
+  <% unless arrow.blank? %>
+    <div class='js-show-children-projekts-mobile show-children-projekts-mobile'></div>
+  <% end %>
+<% end %>
+
+
+<% projekt.children.each do |child_projekt| %>
+  <div data-parent=<%= projekt.id %> style="display: none;" >
+  <%= render partial: "shared/projekt_selector/projekt_mobile", locals: { f:f, projekt: child_projekt } %>
+  </div>
+<% end %>

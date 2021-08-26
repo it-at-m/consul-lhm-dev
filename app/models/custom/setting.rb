@@ -171,6 +171,9 @@ class Setting < ApplicationRecord
         "extended_option.proposals.description_max_length": 6000,
         "extended_feature.polls.intro_text_for_polls": false,
         "extended_feature.polls.intermediate_poll_results_for_admins": false,
+        "extended_feature.polls.enable_comments": true,
+        "extended_feature.polls.additional_information": true,
+        "extended_feature.polls.additional_info_for_each_answer": false
       }
     end
 

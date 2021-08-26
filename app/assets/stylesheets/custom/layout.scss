@@ -10,3 +10,10 @@ main {
 .margin-top-25 {
   margin-top: 2.5em !important;
 }
+
+
+// Fix for Reveal modal bug
+
+html.is-reveal-open body {
+  overflow-y: visible !important;
+}

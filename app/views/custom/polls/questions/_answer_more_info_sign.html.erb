@@ -1,0 +1,19 @@
+<% if extended_feature?("polls.additional_info_for_each_answer") && question.show_images? %>
+	<div class='poll-answer-thumbnail'
+			 <%= "data-open=model-question-#{answer.id}" if answer_with_description?(answer) %>>
+
+		<% if answer_with_description?(answer) %>
+			<div class='poll-answer-more-info'>
+				<%= t('custom.polls.questions.answers.more_info')  %>
+			</div>
+		<% end %>
+
+		<% if answer.images.any? %>
+			<%= image_tag answer.images.first.attachment.url %>
+		<% end %>
+	</div>
+<% elsif extended_feature?('polls.additional_info_for_each_answer') && answer_with_description?(answer) %>
+	<div class='poll-answer-more-info-link' data-open='model-question-<%= answer.id %>'>
+		<%= t('custom.polls.questions.answers.more_info')  %>
+	</div>
+<% end %>

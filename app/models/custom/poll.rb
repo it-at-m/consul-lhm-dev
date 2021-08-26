@@ -9,13 +9,25 @@ class Poll < ApplicationRecord
   has_many :geozone_affiliations, through: :projekt
 
   def answerable_by?(user)
-    user.present? &&
-      user.level_two_or_three_verified? &&
+    user &&
+      !user.organization? &&
+      user.level_three_verified? &&
       current? &&
-      (!geozone_restricted || geozone_ids.include?(user.geozone_id) || Setting['feature.user.skip_verification'])
+      (!geozone_restricted || ( geozone_restricted && geozone_ids.blank? && user.geozone.present? ) || (geozone_restricted && geozone_ids.include?(user.geozone_id)))
   end
 
   def comments_allowed?(user)
     answerable_by?(user)
+  end
+
+  def find_or_create_stats_version
+    if !expired? && stats_version && stats_version.created_at.to_date != Date.today.to_date
+      stats_version.destroy
+    end
+    super
+  end
+
+  def safe_to_delete_answer?
+    voters.count == 0
   end
 end

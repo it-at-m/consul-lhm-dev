@@ -4,7 +4,12 @@
   <%= render "proposals/supports", proposal: proposal %>
 
   <div class="in-favor">
-    <% if voted_for?(@proposal_votes, proposal) %>
+    <% if user_signed_in? && proposal_phase && proposal_phase.expired? %>
+      <div class="supported callout warning">
+          <%= sanitize(t("custom.votes.phase_expired")) %>
+      </div>
+
+    <% elsif voted_for?(@proposal_votes, proposal) %>
       <div class="supported callout success">
         <%= t("proposals.proposal.already_supported") %>
       </div>
@@ -15,12 +20,14 @@
           <%= t("custom.proposals.proposal.unsupport") %>
         <% end %>
       <% end %>
+
     <% elsif user_signed_in? && proposal.votable_by?(current_user) %>
       <%= link_to vote_url,
           class: "button button-support small expanded",
           title: t("proposals.proposal.support_title"), method: "post", remote: true do %>
         <%= t("proposals.proposal.support") %>
       <% end %>
+
     <% else %>
       <div class="button button-support small expanded">
         <%= t("proposals.proposal.support") %>
@@ -48,13 +55,6 @@
       <div class="participation-not-allowed" style="display:none" aria-hidden="false">
         <p>
           <%= sanitize(t("custom.votes.geo_restricted")) %>
-        </p>
-      </div>
-
-    <% elsif user_signed_in? && proposal_phase && proposal_phase.expired? %>
-      <div class="participation-not-allowed" style="display:none" aria-hidden="false">
-        <p>
-          <%= sanitize(t("custom.votes.phase_expired")) %>
         </p>
       </div>
 
