@@ -37,8 +37,8 @@ class DebatesController < ApplicationController
 
     @selected_tags = all_selected_tags
 
-    @top_level_active_projekts = Projekt.top_level_active
-    @top_level_archived_projekts = Projekt.top_level_archived
+    @top_level_active_projekts = Projekt.top_level_active.select{ |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.has_active_phase?('debates') || p.debates.any? } }
+    @top_level_archived_projekts = Projekt.top_level_archived.select{ |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.has_active_phase?('debates') || p.debates.any? } }
   end
 
   def show
