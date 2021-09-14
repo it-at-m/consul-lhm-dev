@@ -25,7 +25,7 @@ class PagesController < ApplicationController
       @most_active_debates = Debate.where(projekt: @custom_page.projekt).sort_by_hot_score.limit(3)
       set_debate_votes(@most_active_debates)
 
-      @latest_polls = Poll.where(projekt: @custom_page.projekt.all_children_ids.push(@custom_page.projekt.id)).current.order(created_at: :asc).limit(3)
+      @latest_polls = Poll.where(projekt: @custom_page.projekt.all_children_ids.push(@custom_page.projekt.id)).order(created_at: :asc).limit(3)
 
       @cards = @custom_page.cards
 

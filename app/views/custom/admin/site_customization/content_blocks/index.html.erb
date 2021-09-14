@@ -14,28 +14,46 @@
 <p><%= t("admin.site_customization.content_blocks.html_format") %></p>
 
 <p>
+  <code>                             <%= '<li class="nav-element top-level-item js-access-top-level-menu js-prevent-key-scroll"
+                                              tabindex="0" aria-label="Ihre Beiträge" aria-expanded="false" aria-haspopup="true">' %>                                                </code><br>
+  <code style="margin-left: 20px;">  <%= '<div class="flyout-item-name projekt-name">Ihre Beiträge</div>' %>                                                                         </code><br>
+  <code style="margin-left: 20px;">  <%= '<ul class="nav-flyout-block">' %>                                                                                                          </code><br>
 
-  <code>                             <%= '<li class="nav-element top-level-item">' %>                                          </code><br>
-  <code style="margin-left: 20px;">  <%= '  <a href="#">Rathaus</a>' %>                                                        </code><br>
-  <code style="margin-left: 20px;">  <%= '  <div class="nav-toggle-arrow js-toggle-mobile-flyout-item"></div>' %>              </code><br>
-  <code style="margin-left: 20px;">  <%= '  <ul class="nav-flyout-block">' %>                                                  </code><br>
-  <code style="margin-left: 40px;">  <%= '    <li class="nav-element flyout-item">' %>                                         </code><br>
-  <code style="margin-left: 60px;">  <%= '      <a class="flyout-item-name" href="#">Start</a>' %>                             </code><br>
-  <code style="margin-left: 40px;">  <%= '    </li>' %>                                                                        </code><br>
-  <code style="margin-left: 40px;">  <%= '    <li class="nav-element flyout-item">' %>                                         </code><br>
-  <code style="margin-left: 60px;">  <%= '      <a class="flyout-item-name" href="#">Smart City</a>' %>                        </code><br>
-  <code style="margin-left: 60px;">  <%= '      <div class="nav-toggle-arrow js-toggle-mobile-flyout-item"></div>' %>          </code><br>
-  <code style="margin-left: 60px;">  <%= '      <ul class="nav-flyout-block">' %>                                              </code><br>
-  <code style="margin-left: 80px;">  <%= '        <li class="nav-element flyout-item">' %>                                     </code><br>
-  <code style="margin-left: 100px;"> <%= '          <a class="flyout-item-name" href="#">Projekt1</a>' %>                      </code><br>
-  <code style="margin-left: 80px;">  <%= '        </li>' %>                                                                    </code><br>
-  <code style="margin-left: 60px;">  <%= '      </ul>' %>                                                                      </code><br>
-  <code style="margin-left: 40px;">  <%= '    </li>' %>                                                                        </code><br>
-  <code style="margin-left: 20px;">  <%= '  </ul>' %>                                                                          </code><br>
-  <code>                             <%= '</li>' %>                                                                            </code><br>
-  <code>                             <%= '<li class="nav-element top-level-item">' %>                                          </code><br>
-  <code style="margin-left: 20px;">  <%= '  <a href="#">Branchenbuch</a>' %>                                                   </code><br>
-  <code>                             <%= '</li>' %>                                                                            </code><br>
+  <code style="margin-left: 40px;">  <%= '<li class="nav-element flyout-item js-access-flyout-menu-item focusable" tabindex="0" aria-label="Diskussionen">' %>                       </code><br>
+  <code style="margin-left: 60px;">  <%= '<a href="/debates" tabindex="-1" aria-hidden="true">Diskussionen</a>' %>                                                                  </code><br>
+  <code style="margin-left: 40px;">  <%= '</li>' %>                                                                                                                                  </code><br>
+
+  <code style="margin-left: 40px;">  <%= '<li class="nav-element flyout-item js-access-flyout-menu-item focusable" tabindex="0" aria-label="Vorschläge">' %>                         </code><br>
+  <code style="margin-left: 60px;">  <%= '<a href="/proposals" tabindex="-1" aria-hidden="true">Vorschläge</a>' %>                                                                  </code><br>
+  <code style="margin-left: 40px;">  <%= '</li>' %>                                                                                                                                  </code><br>
+
+  <code style="margin-left: 40px;">  <%= '<li class="nav-element flyout-item js-access-flyout-menu-item focusable" tabindex="0" aria-label="Abstimmungen">' %>                       </code><br>
+  <code style="margin-left: 60px;">  <%= '<a href="/polls" tabindex="-1" aria-hidden="true">Abstimmungen</a>' %>                                                                     </code><br>
+  <code style="margin-left: 40px;">  <%= '</li>' %>                                                                                                                                  </code><br>
+
+  <code style="margin-left: 20px;">  <%= '</ul>' %>                                                                                                                                  </code><br>
+  <code>                             <%= '</li>' %>                                                                                                                                  </code><br>
+
+ -----
+
+  <code>                             <%= '<li class="nav-element top-level-item js-access-top-level-menu js-prevent-key-scroll" aria-expanded="false">' %>                           </code><br>
+  <code style="margin-left: 20px;">  <%= '<div class="flyout-item-name projekt-name">Ihre Beiträge</div>' %>                                                                         </code><br>
+  <code style="margin-left: 20px;">  <%= '<div class="nav-toggle-arrow js-toggle-mobile-flyout-item" tabindex="0" aria-label="Ihre Beiträge anzeigen"
+                                               aria-haspopup="true aria-expanded="false"></div>' %>                                                                                  </code><br>
+  <code style="margin-left: 20px;">  <%= '<ul class="nav-flyout-block">' %>                                                                                                          </code><br>
+
+  <code style="margin-left: 40px;">  <%= '<li class="nav-element flyout-item">' %>                                                                                                   </code><br>
+  <code style="margin-left: 60px;">  <%= '<a href="/debates">Diskussionen</a>' %>                                                                                                    </code><br>
+  <code style="margin-left: 40px;">  <%= '</li>' %>                                                                                                                                  </code><br>
+
+  <code style="margin-left: 40px;">  <%= '<li class="nav-element flyout-item">' %>                                                                                                   </code><br>
+  <code style="margin-left: 60px;">  <%= '<a href="/proposals">Vorschläge</a>' %>                                                                                                    </code><br>
+  <code style="margin-left: 40px;">  <%= '</li>' %>                                                                                                                                  </code><br>
+  <code style="margin-left: 40px;">  <%= '<li class="nav-element flyout-item">' %>                                                                                                   </code><br>
+  <code style="margin-left: 60px;">  <%= '<a href="/polls">Abstimmungen</a>' %>                                                                                                      </code><br>
+  <code style="margin-left: 40px;">  <%= '</li>' %>                                                                                                                                  </code><br>
+  <code style="margin-left: 20px;">  <%= '</ul>' %>                                                                                                                                  </code><br>
+  <code>                             <%= '</li>' %>                                                                                                                                  </code><br>
 
 </p>
 

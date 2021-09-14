@@ -1,6 +1,6 @@
 <section id="feed_<%= kind %>" class="widget-feed feed-<%= kind %>">
   <header>
-    <h2 class="title"><%= t("welcome.feed.most_active.#{kind}") %></h2>
+    <h2 class="title" aria-label="<%= t('custom.links.welcome.feeds.title') %>"><%= t("welcome.feed.most_active.#{kind}") %></h2>
   </header>
 
   <% if feed.items.any? %>

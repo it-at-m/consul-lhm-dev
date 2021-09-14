@@ -1,31 +1,46 @@
 <% if user_signed_in? %>
-  <li class='nav-element flyout-item'>
+  <li class='nav-element flyout-item js-access-flyout-menu-item focusable'
+      tabindex="0"
+      aria-label='<%= t("layouts.header.my_activity_link") %>'
+      >
     <%= layout_menu_link_to t("layouts.header.my_activity_link"),
                               user_path(current_user),
                               false,
                               rel: "nofollow",
                               title: t("shared.go_to_page") +
-                                     t("layouts.header.my_activity_link") %>
+                                     t("layouts.header.my_activity_link"), tabindex: "-1", aria: { hidden: true } %>
   </li>
-  <li class='nav-element flyout-item'>
+  <li class='nav-element flyout-item js-access-flyout-menu-item focusable'
+      tabindex="0"
+      aria-label='<%= t("layouts.header.my_account_link") %>'
+      >
     <%= layout_menu_link_to t("layouts.header.my_account_link"),
                               account_path,
                               false,
                               rel: "nofollow",
                               title: t("shared.go_to_page") +
-                                     t("layouts.header.my_account_link") %>
+                                     t("layouts.header.my_account_link"), tabindex: "-1", aria: { hidden: true } %>
   </li>
-  <li class='nav-element flyout-item'>
+  <li class='nav-element flyout-item js-access-flyout-menu-item focusable'
+      tabindex="0"
+      aria-label='<%= t("devise_views.menu.login_items.logout") %>'
+      >
     <%= link_to t("devise_views.menu.login_items.logout"),
-                destroy_user_session_path, rel: "nofollow", method: :delete %>
+                destroy_user_session_path, rel: "nofollow", method: :delete, tabindex: "-1", aria: { hidden: true } %>
   </li>
 <% else %>
-  <li class='nav-element flyout-item'>
+  <li class='nav-element flyout-item js-access-flyout-menu-item focusable'
+      tabindex="0"
+      aria-label='<%= t("devise_views.menu.login_items.login") %>'
+      >
     <%= link_to t("devise_views.menu.login_items.login"),
-                new_user_session_path, rel: "nofollow" %>
+                new_user_session_path, rel: "nofollow", tabindex: "-1", aria: { hidden: true } %>
   </li>
-  <li class='nav-element flyout-item'>
+  <li class='nav-element flyout-item js-access-flyout-menu-item focusable'
+      tabindex="0"
+      aria-label='<%= t("devise_views.menu.login_items.signup") %>'
+      >
     <%= link_to t("devise_views.menu.login_items.signup"),
-                new_user_registration_path, rel: "nofollow" %>
+                new_user_registration_path, rel: "nofollow", tabindex: "-1", aria: { hidden: true } %>
   </li>
 <% end %>

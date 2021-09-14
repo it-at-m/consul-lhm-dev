@@ -55,7 +55,7 @@ de:
     votes:
       not_verified: "Sie müssen sich %{verify_account}, um teilnehmen zu können"
       geo_restricted: Sie sind aufgrund von Gebiets- beschränkungen nicht berechtigt teilzunehmen.
-      phase_expired: Die Phase ist bereits abgeschlossen. Dieser Vorschlag kann nich mehr unterschtützt werden
+      phase_expired: Die Phase ist bereits abgeschlossen. Dieser Vorschlag kann nicht mehr unterschtützt werden
 
     layouts:
       footer:
@@ -86,6 +86,10 @@ de:
       homepage:
         active_projekts_title: Aktive Beteiligungsprozesse
         archived_projekts_title: Abgeschlossene Beteiligungsprozesse
+      site_customization:
+        pages:
+          destroy:
+            cannot_notice: Diese Seite kann nicht gelöscht werden. Bitte löschen Sie das zugehörige Projekt zuvor.
       widget:
         card:
           category_options:

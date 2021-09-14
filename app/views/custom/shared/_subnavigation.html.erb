@@ -1,16 +1,17 @@
 <div class="column">
   <ul class="main-menu">
     <div class="content-items">
-      <%= render partial: 'shared/subnavigation_home' %>
+      <%= render partial: 'shared/subnavigation_home', locals: { placement: placement } %>
       <%= raw content_block("subnavigation_left", I18n.locale) %>
-      <%= render partial: 'shared/subnavigation_projekts' %>
-      <%= raw content_block("subnavigation_right", I18n.locale) %>
+      <%= render partial: 'shared/subnavigation_projekts', locals: { placement: placement } %>
+      <%= raw content_block("subnavigation_right_desktop", I18n.locale) if placement == 'desktop' %>
+      <%= raw content_block("subnavigation_right_mobile", I18n.locale) if placement == 'mobile' %>
     </div>
 
     <div class="account-admin-items">
-      <%= render "layouts/notification_item" %>
-      <%= render partial: 'shared/subnavigation_konto' %>
-      <%= render partial: 'shared/subnavigation_admin' %>
+      <%= render partial: "layouts/notification_item", locals: { placement: placement } %>
+      <%= render partial: 'shared/subnavigation_konto', locals: { placement: placement } %>
+      <%= render partial: 'shared/subnavigation_admin', locals: { placement: placement } %>
     </div>
   </ul>
 </div>

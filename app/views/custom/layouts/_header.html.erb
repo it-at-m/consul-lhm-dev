@@ -1,40 +1,38 @@
 <header>
-  <% if display_remote_translation_info?(@remote_translations, I18n.locale) %>
-    <%= render "shared/remote_translations_button", remote_translations: @remote_translations %>
-  <% end %>
-
-  <div class="top-links">
-    <div class="row">
-      <%= render "shared/locale_switcher" %>
-      <div class="hide-for-small-only">
-        <%= render "shared/top_links" %>
-      </div>
-    </div>
-  </div>
-
   <div class="row">
-    <div class="top-bar">
+    <div class="column">
+      <div class="top-bar">
 
-      <span data-responsive-toggle="responsive-menu" data-hide-for="medium" class="hamburger-menu">
-        <span class="menu-icon dark" data-toggle></span>
-      </span>
+        <h2 class='header-title show-for-medium'>Öffentlichkeitsbeteiligung<br><span>in <%= Setting['org_name'] %></span></h2>
 
-      <div class="top-bar-title">
-        <%= link_to root_path, accesskey: "0" do %>
-          <%= image_tag(image_path_for("logo_header.png"), class: "float-left", alt: t("layouts.header.logo")) %>
-        <% end %>
-      </div>
+        <span data-responsive-toggle="responsive-menu"
+              data-hide-for="medium"
+              class="hamburger-menu focusable js-toggle-mobile-menu js-prevent-key-scroll"
+              role="button"
+              tabindex="0"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-label='<%= t('custom.links.menu.mobile.menu_label') %>' >
+          <span class="menu-icon dark" data-toggle></span>
+        </span>
 
-      <div id="responsive-menu">
-        <div class="top-bar-right">
-          <div class="show-for-small-only">
-            <div class="subnavigation row">
+        <div class="top-bar-title">
+          <%= link_to root_path do %>
+            <%= image_tag(image_path_for("logo_header.png"), class: "", alt: t("layouts.header.logo")) %>
+          <% end %>
+        </div>
 
-              <h2 class='city-name'><%= Setting['org_name'] %></h2>
+        <div id="responsive-menu">
+          <div class="top-bar-right">
+            <div class="show-for-small-only">
+              <div class="subnavigation row">
 
-              <%= render "shared/subnavigation" %>
-              <div class="small-12 column">
-                <%= render "shared/top_links" %>
+                <h2 class='city-name'>Öffentlichkeitsbeteiligung in <%= Setting['org_name'] %></h2>
+
+                <%= render partial: "shared/subnavigation", locals: { placement: 'mobile' } %>
+                <div class="small-12 column">
+                  <%= render "shared/top_links" %>
+                </div>
               </div>
             </div>
           </div>
@@ -46,7 +44,7 @@
   <div id="navigation_bar" class="subnavigation expanded">
     <div class="row">
       <div class="hide-for-small-only">
-        <%= render "shared/subnavigation" %>
+        <%= render partial: "shared/subnavigation", locals: { placement: 'desktop' } %>
       </div>
     </div>
   </div>

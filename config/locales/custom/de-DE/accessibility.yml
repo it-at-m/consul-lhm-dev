@@ -1,0 +1,27 @@
+de:
+  custom:
+    links:
+      menu:
+        home_icon: Startseiten Link
+        konto_icon: Mein Konto Link
+        admin_icon: Adminmenü Link"
+        notification_icon: Benachrichtigungen
+        projekt_name_label: "Projekt Name: %{projekt_name} "
+        archived_projekts_label: Archivierte Projekte
+        mobile:
+          arrow_projekts: Untermenü umschalten
+          arrow_account: Kontomenü umschalten
+          arrow_admin: Adminmenü umschalten
+          arrow_archived_projekts: Archivierte Projekte umschalten
+          menu_label: Mobil Menü
+      comments:
+        expand_replies: Antworten anzeigen
+        hide_replies: Antworten einklappen
+        comment_tree: Kommentarbaum
+      projekts_filter:
+        arrow_label: Unterprojekte unschalten
+        projekt_name: "Projekt Name: %{projekt_name}"
+        resource_count: "Anzahl der Beitrage: %{resource_count}"
+      welcome:
+        feeds:
+          title: Nutzerinhalt

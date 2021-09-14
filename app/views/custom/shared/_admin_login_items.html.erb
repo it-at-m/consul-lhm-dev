@@ -1,38 +1,56 @@
 <% if show_admin_menu?(current_user) %>
   <% if current_user.administrator? %>
-    <li class='nav-element flyout-item'>
-      <%= link_to t("layouts.header.administration"), admin_root_path %>
+    <li class='nav-element flyout-item js-access-flyout-menu-item focusable'
+        tabindex="0"
+        aria-label='<%= t("layouts.header.administration") %>'
+        >
+      <%= link_to t("layouts.header.administration"), admin_root_path, tabindex: "-1", aria: { hidden: true } %>
     </li>
   <% end %>
 
   <% if current_user.administrator? || current_user.moderator? %>
-    <li class='nav-element flyout-item'>
-      <%= link_to t("layouts.header.moderation"), moderation_root_path %>
+    <li class='nav-element flyout-item js-access-flyout-menu-item focusable'
+        tabindex="0"
+        aria-label='<%= t("layouts.header.moderation") %>'
+        >
+      <%= link_to t("layouts.header.moderation"), moderation_root_path, tabindex: "-1", aria: { hidden: true } %>
     </li>
   <% end %>
 
   <% if feature?(:budgets) &&
         (current_user.administrator? || current_user.valuator?) %>
-    <li class='nav-element flyout-item'>
-      <%= link_to t("layouts.header.valuation"), valuation_root_path %>
+    <li class='nav-element flyout-item js-access-flyout-menu-item focusable'
+        tabindex="0"
+        aria-label='<%= t("layouts.header.valuation") %>'
+        >
+      <%= link_to t("layouts.header.valuation"), valuation_root_path, tabindex: "-1", aria: { hidden: true } %>
     </li>
   <% end %>
 
   <% if current_user.administrator? || current_user.manager? %>
-    <li class='nav-element flyout-item'>
-      <%= link_to t("layouts.header.management"), management_sign_in_path %>
+    <li class='nav-element flyout-item js-access-flyout-menu-item focusable'
+        tabindex="0"
+        aria-label='<%= t("layouts.header.management") %>'
+        >
+      <%= link_to t("layouts.header.management"), management_sign_in_path, tabindex: "-1", aria: { hidden: true } %>
     </li>
   <% end %>
 
   <% if current_user.poll_officer? && Poll.current.any? %>
-    <li class='nav-element flyout-item'>
-      <%= link_to t("layouts.header.officing"), officing_root_path %>
+    <li class='nav-element flyout-item js-access-flyout-menu-item focusable'
+        tabindex="0"
+        aria-label='<%= t("layouts.header.officing") %>'
+        >
+      <%= link_to t("layouts.header.officing"), officing_root_path, tabindex: "-1", aria: { hidden: true } %>
     </li>
   <% end %>
 
   <% if feature?(:sdg) && (current_user.administrator? || current_user.sdg_manager?) %>
-    <li class='nav-element flyout-item'>
-      <%= link_to t("sdg_management.header.title"), sdg_management_root_path %>
+    <li class='nav-element flyout-item js-access-flyout-menu-item focusable'
+        tabindex="0"
+        aria-label='<%= t("sdg_management.header.title") %>'
+        >
+      <%= link_to t("sdg_management.header.title"), sdg_management_root_path, tabindex: "-1", aria: { hidden: true } %>
     </li>
   <% end %>
 <% end %>

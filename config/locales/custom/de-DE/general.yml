@@ -612,7 +612,8 @@ de:
     final_date: "Endgültige Nachzählungen/Ergebnisse"
     index:
       filters:
-        current: "Offen"
+        all: Alle Abstimmungen
+        current: Nur aktive Abstimmungen
         expired: "Abgelaufen"
       title: "Abstimmungen"
       participate_button: "An dieser Abstimmung teilnehmen"

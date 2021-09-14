@@ -1,16 +1,29 @@
 <% if show_admin_menu?(current_user) %>
 
-  <li class="nav-element top-level-item">
+  <li class="nav-element top-level-item top-level-item js-access-top-level-menu js-prevent-key-scroll"
+      aria-label='<%= t('custom.links.menu.admin_icon') if placement == 'desktop' %>'
+      aria-expanded='false'
+      <%= "aria-haspopup=true" if placement == 'desktop' %>
+      <%= "tabindex=0" if placement == 'desktop' %>
+  >
 
-    <%= link_to admin_root_path, class: 'admin-items-icon' do %>
+    <%= link_to admin_root_path, class: 'admin-items-icon', tabindex: "-1", aria: { hidden: true } do %>
       <%= svg_tag 'admin-menu-icon', class: "admin-icon" %>
     <% end %>
 
-    <%= link_to admin_root_path, class: 'admin-items-link' do %>
-      <%= t('layouts.header.administration_menu') %>
-    <% end %>
+    <% if placement == 'mobile' %>
+      <%= link_to admin_root_path, class: 'admin-items-link' do %>
+        <%= t('layouts.header.administration_menu') %>
+      <% end %>
 
-    <div class='nav-toggle-arrow js-toggle-mobile-flyout-item'></div>
+      <div class='nav-toggle-arrow js-toggle-mobile-flyout-item'
+           tabindex='0'
+           aria-label='<%= t('custom.links.menu.mobile.arrow_admin')  %>'
+           aria-haspopup=true
+           aria-expanded=false
+      >
+      </div>
+    <% end %>
 
     <ul class="nav-flyout-block">
       <%= render "shared/admin_login_items" %>

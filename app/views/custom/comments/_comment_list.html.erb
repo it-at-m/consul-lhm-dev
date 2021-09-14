@@ -1,5 +1,7 @@
 <% valuation = local_assigns.fetch(:valuation, false) %>
-<%= tag.ul class: "no-bullet comment-list" do %>
+<%= tag.ul class: "no-bullet comment-list",
+           aria: { live: "polite", label: t('custom.links.comments.comment_tree')  },
+           id: "tree_for_comment_#{comments.first&.parent&.id || 'root'}" do %>
   <% comments.each do |comment| %>
     <%= tag.li render("comments/comment", { comment: comment, valuation: valuation }) %>
   <% end %>

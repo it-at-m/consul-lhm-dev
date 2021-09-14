@@ -1,7 +1,15 @@
 <% if count > 0 %>
-  <%= link_to "", class: "js-toggle-children#{hide_comment_replies_by_default?}" do %>
-    <span class="show-children"><%= t("comments.comment.responses_show", count: count) %></span>
-    <span class="collapse-children"><%= t("comments.comment.responses_collapse", count: count) %></span>
+  <%= button_tag "", class: "js-toggle-children#{hide_comment_replies_by_default?} link_to_button" do %>
+    <span class="show-children"
+          aria-expanded="false" aria-controls=<%= "tree_for_comment_#{comment.id || 'root'}"  %> 
+          aria-label=<%= t('custom.links.comments.expand_replies') %> >
+      <%= t("comments.comment.responses_show", count: count) %>
+    </span>
+    <span class="collapse-children"
+          aria-expanded="true"
+          aria-label=<%= t('custom.links.comments.hide_replies')%>>
+      <%= t("comments.comment.responses_collapse", count: count) %>
+    </span>
   <% end %>
 <% else %>
   <%= t("comments.comment.responses", count: 0) %>

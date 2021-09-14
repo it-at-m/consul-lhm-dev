@@ -40,15 +40,10 @@
 
 
         <ul class="margin-top">
-          <% poll.questions.each do |question| %>
+          <% poll.questions.joins(:translations).order('poll_question_translations.title').each do |question| %>
             <li><%= question.title %></li>
           <% end %>
         </ul>
-        <% if poll.geozones.any? %>
-          <p>
-            <small><%= t("polls.index.geozone_info") %></small>
-          </p>
-        <% end %>
         <%= render "shared/tags", taggable: poll, limit: 5 %>
       </div>
       <div class="small-12 medium-3 column table" data-equalizer-watch>

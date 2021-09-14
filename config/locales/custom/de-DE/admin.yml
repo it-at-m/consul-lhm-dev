@@ -1507,6 +1507,8 @@ de:
             footer: Fußzeile
             subnavigation_left: Haupt Navigation Links
             subnavigation_right: Haupt Navigation Rechts
+            subnavigation_right_desktop: Haupt Navigation Rechts Desktop
+            subnavigation_right_mobile: Haupt Navigation Rechts Mobile
       images:
         index:
           title: Bilder

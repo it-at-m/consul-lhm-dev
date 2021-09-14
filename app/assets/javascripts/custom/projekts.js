@@ -64,6 +64,8 @@
       $label.attr('aria-expanded', function (i, attr) {
         return attr == 'true' ? 'false' : 'true'
       });
+
+      $label.children('.toggle-arrow').attr('aria-expanded', $label.attr('aria-expanded'))
     },
 
     updateProjektFilterToggleIds: function($label) {
@@ -362,6 +364,7 @@
 
         if ( window.localStorage.getItem(resourceName) && window.localStorage.getItem(resourceName).split(',').includes(projektId) ) {
           $(this).attr('aria-expanded', 'true')
+          $(this).children('.toggle-arrow').attr('aria-expanded', $(this).attr('aria-expanded'))
         }
 
       });
@@ -393,6 +396,34 @@
       }
     },
 
+    selectProjekt: function($label) {
+
+      if ( $label.hasClass('projekt-phase-disabled')) {
+        return false;
+      }
+
+      var $radioButton = $label.find(":radio").first()
+
+      $radioButton.prop( "checked", !$radioButton.prop( "checked") );
+
+      // $label.toggleClass('selected')
+
+      if ( $(this).closest('#projekt-tags-selector-mobile').length ) {
+        $(this).closest('#projekt-tags-selector-mobile').find('label').removeClass('highlighted')
+        $label.addClass('highlighted')
+      } else {
+        App.Projekts.highlightLabel($label);
+      }
+
+      App.Projekts.replaceProjektMapOnProposalCreation($label, $radioButton)
+    },
+
+    showChildProjektGroupinSelector: function($label) {
+      App.Projekts.toggleChildProjekts($label);
+      App.Projekts.highlightLabel($label);
+      return false;
+    },
+
 
     // Initializer
  
@@ -406,9 +437,7 @@
           var $label = $(this).parent()
         }
 
-        App.Projekts.toggleChildProjekts($label);
-        App.Projekts.highlightLabel($label);
-        return false;
+        App.Projekts.showChildProjektGroupinSelector($label)
       });
 
       $("body").on("click", ".js-show-children-projekts-mobile", function(event) {
@@ -423,25 +452,7 @@
       $("body").on("click", ".js-select-projekt", function() {
         event.preventDefault();
         var $label = $(this).closest('label')
-
-        if ( $label.hasClass('projekt-phase-disabled')) {
-          return false;
-        }
-
-        var $radioButton = $label.find(":radio").first()
-
-        $radioButton.prop( "checked", !$radioButton.prop( "checked") );
-
-        // $label.toggleClass('selected')
-
-        if ( $(this).closest('#projekt-tags-selector-mobile').length ) {
-          $(this).closest('#projekt-tags-selector-mobile').find('label').removeClass('highlighted')
-          $label.addClass('highlighted')
-        } else {
-          App.Projekts.highlightLabel($label);
-        }
-
-        App.Projekts.replaceProjektMapOnProposalCreation($label, $radioButton)
+        App.Projekts.selectProjekt($label);
       });
 
       $("body").on("click", ".js-filter-projekt", function() {

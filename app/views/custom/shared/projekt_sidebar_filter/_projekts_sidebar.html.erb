@@ -30,11 +30,8 @@
     <% end %>
 
     <div class="sidebar-filter-group">
-      <div class='js-apply-projekts-filter sidebar-filter-button' >
-        <%= t('custom.projekts.sidebar_filter.filter_button') %>
-      </div>
-      <div class='js-reset-projekts-filter sidebar-reset-filter-button' >
-      </div>
+      <%= button_tag t('custom.projekts.sidebar_filter.filter_button'), class: 'js-apply-projekts-filter sidebar-filter-button' %>
+      <%= button_tag '', class: 'js-reset-projekts-filter sidebar-reset-filter-button' %>
     </div>
   </div>
 <% end %>

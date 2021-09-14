@@ -50,6 +50,8 @@
 
         if ( color ) {
           markerIcon.options.html = '<div class="map-icon" style="background-color: ' + color + '"></div>'
+        } else {
+          markerIcon.options.html = '<div class="map-icon"></div>'
         }
 
         marker = L.marker(markerLatLng, {

@@ -3,6 +3,37 @@ main {
   padding-top: 25px;
 }
 
+.top-bar .top-bar-title a img {
+  width: 300px;
+  height: auto;
+}
+
+.top-bar-title {
+  margin-right: 0;
+}
+
+body>header, .wrapper>header, .top-bar {
+  background-color: $white;
+  color: $dark;
+}
+
+
+.top-bar {
+  h2.header-title {
+    line-height: 1em;
+    text-transform: uppercase;
+    font-size: 28px;
+    color: $dark;
+    margin-bottom: 1em;
+    margin-top: 1em;
+
+    span {
+      font-weight: 100;
+    }
+  }
+}
+
+
 .debate .panel, .proposal .panel, .investment-project .panel, .budget-investment .panel, .legislation .panel, .communities-show .panel, .process-summary .debate-summary, .process-summary .proposal-summary, .process-summary .annotation-summary {
   background-color: $module-index-panel-background;
 }

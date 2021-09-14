@@ -60,7 +60,7 @@
         <div class="row padding">
           <% @poll_questions_answers.each do |answer| %>
             <div class="small-12 medium-6 column end answer <%= cycle("first", "") %>" id="answer_<%= answer.id %>">
-              <%= render "polls/questions/answer_more_info", answer: answer %>
+              <%= render "polls/questions/answer_more_info_modal_content", answer: answer %>
             </div>
           <% end %>
         </div>

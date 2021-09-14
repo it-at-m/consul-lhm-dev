@@ -1,0 +1,63 @@
+label > [type='checkbox'],
+label > [type='radio'] {
+  margin: 0;
+  margin-right: 0.5rem;
+  margin-bottom: 1rem;
+  margin-top: 5px;
+  vertical-align: top;
+}
+
+label > span.checkbox {
+  width: 90%;
+}
+
+
+// Style buttons as links
+
+button.link_to_button {
+  cursor: pointer;
+  color: #004a83;
+}
+
+form.button_to {
+  display: inline;
+
+  input.link_to_button {
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+}
+
+
+// Comments
+
+.comment-votes {
+  button {
+    color: #bfbfbf;
+    display: inline-block;
+    vertical-align: top;
+    cursor: pointer;
+  }
+
+  button:hover .icon-like {
+    color: #7bd2a8;
+  }
+
+  button:hover .icon-unlike {
+    color: #ef8585;
+  }
+}
+
+
+// Add outline to labels
+.focusable:focus {
+  outline: $outline-focus
+}
+
+
+// Menu styling fixes
+
+#responsive-menu .subnavigation a {
+  width: initial;
+}

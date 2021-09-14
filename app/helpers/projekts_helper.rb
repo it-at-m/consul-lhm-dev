@@ -11,10 +11,10 @@ module ProjektsHelper
     Setting["extended_feature.modulewide.show_affiliation_filter_in_index_sidebar"].present? ? true : false
   end
 
-  def prepare_projekt_name(projekt, accesskey=nil)
-    if projekt.page.published? && accesskey
-      link_to projekt.name, projekt.page.url, accesskey: accesskey
-    elsif projekt.page.published?
+  def prepare_projekt_name(projekt, placement=nil)
+    if projekt.page.published? && placement == 'desktop'
+      link_to projekt.name, projekt.page.url, tabindex: '-1', aria: { hidden: true }
+    elsif  projekt.page.published? && placement == 'mobile'
       link_to projekt.name, projekt.page.url
     else
       projekt.name
@@ -121,7 +121,7 @@ module ProjektsHelper
   end
 
   def related_polls(projekt, timestamp = Date.current.beginning_of_day)
-    Poll.where(projekt_id: projekt.all_children_ids.push(projekt.id)).where("starts_at <= ? AND ? <= ends_at", timestamp, timestamp)
+    Poll.where(projekt_id: projekt.all_children_ids.push(projekt.id))
   end
 
   def check_radio_button?(current_projekt_id)

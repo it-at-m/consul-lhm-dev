@@ -11,7 +11,7 @@
               maxlength: Proposal.title_max_length,
               data: suggest_data(@proposal) %>
       </div>
-      <div class="js-suggest" data-locale="<%= translations_form.locale %>"></div>
+      <div class="js-suggest" data-locale="<%= translations_form.locale %>" role="alert" aria-live="assertive"></div>
 
       <% if feature?(:allow_images) %>
         <div class="images small-12 column">
@@ -40,7 +40,7 @@
     <%= f.invisible_captcha :subtitle %>
 
     <div class="small-12 column">
-      <%= f.text_field :video_url, hint: t("proposals.form.proposal_video_url_note") %>
+      <%= f.text_field :video_url, hint: t("proposals.form.proposal_video_url_note"), type: 'url' %>
     </div>
 
     <% if feature?(:allow_attached_documents) %>

@@ -1,4 +1,4 @@
-<% projekts = Projekt.top_level_active.select{ |projekt| projekt.has_active_phase?(params[:controller]) || projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } }%>
+<% projekts ||= Projekt.top_level_active.select{ |projekt| params[:controller].include?('polls') || projekt.has_active_phase?(params[:controller]) || projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } }%>
 <% current_model_name = model.class.name.downcase %>
 
 <% if projekts.any?  %>
@@ -19,9 +19,6 @@
       </small>
     <% end %>
 
-
-
-
     <div class='show-for-medium'>
       <div id="projekt-tags-selector"
            data-default-map-latitude=<%= Setting["map.latitude"] %>
@@ -29,7 +26,7 @@
            data-default-map-zoom=<%= Setting["map.zoom"] %>    >
 
         <div class="projekt-tags-column">
-          <% if projekts.any? do |projekt|
+          <% if params[:controller].include?('polls') || projekts.any? do |projekt|
               projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } ||
               projekt.all_children_projekts.any? { |projekt| projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } }
           end %>
@@ -40,7 +37,7 @@
         </div>
 
         <div class="projekt-tags-column">
-          <% if projekts.any? do |projekt|
+          <% if params[:controller].include?('polls') || projekts.any? do |projekt|
               projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } ||
               projekt.all_children_projekts.any? { |projekt| projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } }
           end %>
@@ -48,14 +45,14 @@
           <% end %>
 
           <% projekts.each do |projekt| %>
-            <% if projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } %>
-              <%= render partial: 'shared/projekt_selector/projekt_group', locals: { f:f, projekts: projekt.children.with_order_number.select{ |projekt| projekt.has_active_phase?(params[:controller]) || projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } } , parent_projekt_id: projekt.id }  %>
+            <% if params[:controller].include?('polls') || projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } %>
+              <%= render partial: 'shared/projekt_selector/projekt_group', locals: { f:f, projekts: projekt.children.with_order_number.select{ |projekt| params[:controller].include?('polls') || projekt.has_active_phase?(params[:controller]) || projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } } , parent_projekt_id: projekt.id }  %>
             <% end %>
           <% end %>
         </div>
 
         <div class="projekt-tags-column">
-          <% if projekts.any? do |projekt|
+          <% if params[:controller].include?('polls') || projekts.any? do |projekt|
               projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } ||
               projekt.all_children_projekts.any? { |projekt| projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } }
           end %>
@@ -63,10 +60,10 @@
           <% end %>
 
           <% projekts.each do |projekt| %>
-            <% if projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } %>
+            <% if params[:controller].include?('polls') || projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } %>
               <% projekt.all_children_projekts.each do |projekt| %>
-                <% if projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } %>
-                  <%= render partial: 'shared/projekt_selector/projekt_group', locals: { f:f, projekts: projekt.children.with_order_number.select{ |projekt| projekt.has_active_phase?(params[:controller]) || projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } } , parent_projekt_id: projekt.id }  %>
+                <% if params[:controller].include?('polls') || projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } %>
+                  <%= render partial: 'shared/projekt_selector/projekt_group', locals: { f:f, projekts: projekt.children.with_order_number.select{ |projekt| params[:controller].include?('polls') || projekt.has_active_phase?(params[:controller]) || projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } } , parent_projekt_id: projekt.id }  %>
 
                 <% end %>
               <% end %>

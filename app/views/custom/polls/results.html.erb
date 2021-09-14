@@ -16,7 +16,7 @@
     </div>
 
     <div class="small-12 medium-9 column" data-equalizer-watch>
-      <%- @poll.questions.each do |question| %>
+      <%- @poll.questions.joins(:translations).order("poll_question_translations.title": :asc).each do |question| %>
         <% most_voted_answer_votes = question.most_voted_answer_votes %>
         <h3 id="<%= question.title.parameterize %>">
           <%= question.title %>
@@ -52,12 +52,14 @@
         </table>
 
         <% if question.open_question_answer %>
-          <div class='poll-results-open-answers' aria-hidden="true">
+          <% open_answers = question.open_question_answer.all_open_answers %>
+          <div class='poll-results-open-answers show-open-answers' id='<%= dom_id(question, :open_answers)  %>'>
             <div class='open-answers-title js-show-open-answers'>
               <%= t('custom.polls.results.open_answers') %>
             </div>
             <div class='poll-results-open-answers-list'>
-              <% question.open_question_answer.all_open_answers.each do |open_answer| %>
+              <% page_name = ("page_q" + question.id.to_s).to_sym %>
+              <% open_answers.page(params[page_name]).per(5).each do |open_answer| %>
                 <div class='poll-results-open-answer'>
                   <div class='open-answer-info'>
                       <%= avatar_image(open_answer.author, size: 32, class: "float-left user-avatar") %>
@@ -75,6 +77,7 @@
                   </div>
                 </div>
               <% end %>
+              <%= paginate open_answers.page(params[page_name]).per(5), param_name: page_name %>
             </div>
           </div>
         <% end %>

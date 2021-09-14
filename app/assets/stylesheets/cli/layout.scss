@@ -6,3 +6,8 @@
 .callout.primary {
   color: #222;
 }
+
+.js-access-top-level-menu:focus,
+.js-access-flyout-menu-item:focus {
+  outline: 3px solid #ffbf47 !important;
+}

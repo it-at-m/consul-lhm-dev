@@ -24,9 +24,9 @@ de:
             voting_phase: Abstimmungsphase
             voting_phase_link: Zu den Abstimmungen
             voting_phase_active_count:
-              zero: "Keine aktiven Abstimmungen"
-              one: "%{count} aktive Abstimmung"
-              other: "%{count} aktive Abstimmungen"
+              zero: "Keine Abstimmungen"
+              one: "%{count} Abstimmung"
+              other: "%{count} Abstimmungen"
           navigator:
             title: Projektverzeichnis
       footer:
@@ -36,9 +36,9 @@ de:
           notifications_tab: Benachrichtigungen
           milestones_tab: Meilensteine
           newsfeed_tab: News-Feed
-          most_active_debates: "Aktivste Diskussionen"
-          most_active_proposals: "Aktivste Vorschläge"
-          latest_polls: 'Aktive Abstimmungen'
+          most_active_debates: Aktivste Diskussionen
+          most_active_proposals: Aktivste Vorschläge
+          latest_polls: Abstimmungen
           debate_phase_not_started: Die Diskussionsphase ist noch nicht eröffnet.
           debate_phase_expired: Die Diskussionsphase ist bereits abgeschlossen.
           proposal_phase_not_started: Die Vorschlasphase ist noch nicht eröffnet.

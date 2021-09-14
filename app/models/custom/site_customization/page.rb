@@ -20,4 +20,8 @@ class SiteCustomization::Page < ApplicationRecord
   def full_url
     Setting['url'].chomp('/') + "/#{slug}"
   end
+
+  def safe_to_destroy?
+    projekt.blank?
+  end
 end

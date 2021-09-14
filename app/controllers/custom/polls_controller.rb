@@ -3,11 +3,13 @@ require_dependency Rails.root.join("app", "controllers", "polls_controller").to_
 class PollsController < ApplicationController
 
   include CommentableActions
+  include ProjektControllerHelper
 
   before_action :load_categories, only: [:index]
   before_action :set_geo_limitations, only: [:show]
 
   helper_method :resource_model, :resource_name
+  has_filters %w[all current]
 
   def index
     @resource_name = 'poll'
@@ -17,17 +19,9 @@ class PollsController < ApplicationController
     @filtered_target = params[:sdg_targets].present? ? params[:sdg_targets].split(',')[0] : nil
 
     if params[:projekts]
-      @selected_projekts_ids = params[:projekts].split(',')
-      selected_projekts = Projekt.where(id: @selected_projekts_ids)
-      highest_level_selected_projekts = selected_projekts.sort { |a, b| a.level <=> b.level }.group_by(&:level).first[1]
-
-      if highest_level_selected_projekts.size == 1
-        highest_level_selected_projekt = highest_level_selected_projekts.first
-      end
-
-      if highest_level_selected_projekt && (@selected_projekts_ids.map(&:to_i) - highest_level_selected_projekt.all_children_ids.push(highest_level_selected_projekt.id) )
-        @selected_parent_projekt = highest_level_selected_projekts.first
-      end
+      @selected_projekts_ids = params[:projekts].split(',').select{ |id| Projekt.find_by(id: id).present? }
+      selected_parent_projekt_id = get_highest_unique_parent_projekt_id(@selected_projekts_ids)
+      @selected_parent_projekt = Projekt.find_by(id: selected_parent_projekt_id)
     end
 
     @geozones = Geozone.all
@@ -64,6 +58,27 @@ class PollsController < ApplicationController
 
     @selected_geozone_restriction = params[:geozone_restriction] || 'no_restriction'
     @restricted_geozones = (params[:restricted_geozones] || '').split(',').map(&:to_i)
+  end
+
+  def show
+    @questions = @poll.questions.for_render.joins(:translations).order(Arel.sql("poll_questions.proposal_id IS NULL"), "poll_question_translations.title")
+    @token = poll_voter_token(@poll, current_user)
+    @poll_questions_answers = Poll::Question::Answer.where(question: @poll.questions)
+                                                    .where.not(description: "").order(:given_order)
+
+    @answers_by_question_id = {}
+
+    @questions.each do |question|
+     @answers_by_question_id[question.id] = []
+    end
+
+    poll_answers = ::Poll::Answer.by_question(@poll.question_ids).by_author(current_user&.id)
+    poll_answers.each do |answer|
+      @answers_by_question_id[answer.question_id] = @answers_by_question_id.has_key?(answer.question_id) ? @answers_by_question_id[answer.question_id].push(answer.answer) : [answer.answer]
+    end
+
+    @commentable = @poll
+    @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
   end
 
   private

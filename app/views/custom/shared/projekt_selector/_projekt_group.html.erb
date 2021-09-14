@@ -11,12 +11,12 @@
     <% disable_radio_button = ((can?(:select, @projekt_phase) || ((current_user.administrator?) && controller.controller_name == 'polls') ) ? false : true)  %>
     <% disabled_class = ((can?(:select, @projekt_phase) || ((current_user.administrator?) && controller.controller_name == 'polls') || projekt_feature?(rb.object, 'general.show_not_active_phases_in_projekts_page_sidebar')  ) ? '' : 'projekt-phase-disabled') %>
     <% hide_map_class = projekt_feature?(rb.object, "general.show_map") ? '' : 'hide-map'  %>
-    <% arrow = rb.object.all_children_projekts.any? { |projekt|  projekt.has_active_phase?(params[:controller]) } ? 'show-arrow' : ''  %>
+    <% arrow = rb.object.all_children_projekts.any? { |projekt| params[:controller].include?('polls') || projekt.has_active_phase?(params[:controller]) } ? 'show-arrow js-show-children-projekts' : ''  %>
 
 
-    <% rb.label(class: "js-show-children-projekts #{arrow} #{disabled_class} #{highlight_projekt_in_selector?(rb.object)} #{hide_map_class} js-select-projekt", data: {projekt_id: rb.object.id, latitude: rb.object.map_location.latitude, longitude: rb.object.map_location.longitude, zoom: rb.object.map_location.zoom, maplocation: rb.object.map_location.id } ) do  %>
+    <% rb.label(class: "js-prevent-key-scroll focusable #{arrow} #{disabled_class} #{highlight_projekt_in_selector?(rb.object)} #{hide_map_class} js-select-projekt", data: {projekt_id: rb.object.id, latitude: rb.object.map_location.latitude, longitude: rb.object.map_location.longitude, zoom: rb.object.map_location.zoom, maplocation: rb.object.map_location.id }, tabindex: "0" ) do  %>
 
-      <%= rb.radio_button(disabled: disable_radio_button, checked: check_radio_button?(rb.object.id)) %>
+      <%= rb.radio_button(disabled: disable_radio_button, checked: check_radio_button?(rb.object.id), tabindex: "-1") %>
       <%= rb.text %>
 
       <%= render partial: "shared/projekt_selector/shared/projekt_info", locals: { projekt: rb.object, phase_name: phase_name  } %>
