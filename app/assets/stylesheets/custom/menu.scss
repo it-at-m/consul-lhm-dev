@@ -41,6 +41,11 @@ body > header .locale.locale-custom,
   .top-bar-title {
     margin: 0.5rem auto;
   }
+
+  .subnavigation .account-admin-items a.account-items-icon,
+  .subnavigation .account-admin-items a.admin-items-icon {
+    display: none;
+  }
 }
 
 
