@@ -9,10 +9,11 @@
     </div>
 
     <div class="account-admin-items">
-      <%= render partial: 'shared/subnavigation_locale' if placement == 'desktop' %>
+      <%= render partial: 'shared/subnavigation_locale', locals: { placement: placement } if placement == 'desktop' %>
       <%= render partial: "layouts/notification_item", locals: { placement: placement } %>
       <%= render partial: 'shared/subnavigation_konto', locals: { placement: placement } %>
       <%= render partial: 'shared/subnavigation_admin', locals: { placement: placement } %>
+      <%= render partial: 'shared/subnavigation_locale', locals: { placement: placement } if placement == 'mobile' %>
     </div>
   </ul>
 </div>
