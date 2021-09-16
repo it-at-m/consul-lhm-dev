@@ -3,6 +3,7 @@
 body > header .locale.locale-custom,
 .wrapper > header .locale.locale-custom {
   height: 2.5rem;
+  margin-left: 0;
 
   &::after {
     display: none;
