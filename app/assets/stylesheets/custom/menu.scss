@@ -200,14 +200,17 @@ span.icon-no-notification {
 // Styling main menu layout in desktop
 
 @media screen and (min-width: 40em) {
+  .subnavigation ul.main-menu li.top-level-item > ul.nav-flyout-block {
+    border-top: none;
+  }
 
-   #responsive-menu {
-     display: none !important;
-   }
+  #responsive-menu {
+    display: none !important;
+  }
 
-   #navigation_bar {
-     background-color: $top-level-menu-background-color;
-   }
+  #navigation_bar {
+    background-color: $top-level-menu-background-color;
+  }
 
   .subnavigation a.home-items-icon {
     display: inline-block;
@@ -360,7 +363,7 @@ span.icon-no-notification {
       padding-bottom: calc(1rem - 1px);
 
       &:first-child {
-        border-top: none;
+        border-top: 1px solid $flyout-item-divider-color;
       }
 
       &:last-child {

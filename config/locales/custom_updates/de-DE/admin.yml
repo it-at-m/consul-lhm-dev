@@ -1,0 +1,137 @@
+de:
+  custom:
+    admin:
+      homepage:
+        active_projekts_title: Aktive Beteiligungsprozesse
+        archived_projekts_title: Abgeschlossene Beteiligungsprozesse
+      menu:
+        projekts: Projekte
+      polls:
+        questions:
+          answers:
+            notice:
+              delete:
+                confirmation: Sind Sie sicher?
+                error: Für diese Abstimmung wurden schon Stimmen abgegeben. Sie können die Antwort deshalb nicht mehr löschen.
+                success: Antwort erfolgreich gelöscht.
+              open_answer_saved: Vielen Dank! Ihre Antwort wurde erfolgreich gespeichert.
+            open_answer_html: Offene Antwort <small><em>(Nur eine erlaubt)</em></small>
+          show_images: Bilder für Antworten anzeigen
+        settings:
+          show_open_answer_with_username: Offene Antworten mit Nutzer:innen-Name anzeigen
+          show_open_answer_without_username: Offene Antworten anonym anzeigen
+      progress_bars:
+        index:
+          progress_bar: Fortschrittsbalken
+      projekts:
+        destroy: Löschen
+        edit:
+          projekt_activated: Projekt aktiv
+          projekt_active:
+            'no': Nein
+            'yes': Ja
+          projekt_map_tab:
+            name: Ind. Kartenkonfiguration
+          projekt_milestones_tab:
+            name: Fortschritt & Meilensteine
+          projekt_news_tab:
+            name: News-Feed
+          projekt_notifications_tab:
+            button: Nachricht senden
+            name: Benachrichtigungen
+            notification_body: Nachricht
+            notification_title: Titel
+            page_title: Nachricht senden
+            title: Nachricht senden
+          projekt_page: Projektseite
+          projekt_phase_limitation: Beschränkung
+          projekt_phases: Projektphasen
+          projekt_phases_tab:
+            actions: Aktionen
+            activate: Aktiviert
+            affiliation: Gebietszuordnung
+            beginning: Anfangsdatum
+            debate_phase: Diskussionsphase
+            end_date: Enddatum
+            ending: Enddatum
+            information_block_title: Projektinformationen
+            main_block_title: Projektstatus
+            name: Projekteinstellungen
+            page_block_title: Projektseite
+            phase_name: Phase
+            phases_block_title: Projektphasen
+            projekt_duration: Projektinformationen
+            proposal_phase: Vorschlagsphase
+            restriction: Partizipationsbeschränkung
+            start_date: Anfangsdatum
+            voting_manage: Abstimmungen verwalten
+            voting_phase: Abstimmungsphase
+          projekt_settings_tab:
+            footer_settings: Fußzeile
+            general_settings: Allgemein
+            name: Projektfunktionen
+            select_an_element: auswählen
+            sidebar_settings: Seitenleiste
+          projekt_status: Projektstatus
+          setting_indicator:
+            'no': Nein
+            'yes': Ja
+          show_footer: Projekt Fußzeile
+          show_in_navigation: null
+          show_in_navigation_checkbox: Projekt in Navigation anzeigen
+          update: Projekteinstellungen aktualisieren
+        edit_projekt: Editieren
+        index:
+          add_cards: Kacheln erstellen/bearbeiten
+          add_projekt: Neues Projekt hinzufügen
+          choose_parent: Verknüpfen Sie dieses Projekt mit einem übergeordnetem Projekt
+          create: Projekt erstellen
+          debate_phase: Diskussionsphase
+          edit_page: Seite bearbeiten
+          enter_name: Geben Sie den Namen des Projektes an
+          info: Info
+          level: Ebene
+          name: Projektname
+          name_plural: Projekte
+          name_singular: Projekt
+          page: Seite
+          page_link: Seite öffnen
+          page_name: Globale Projekt-Einstellungen
+          parent: Übergeordnetes Projekt
+          position: Position
+          projekt_affiliation: Gebietszuordnung
+          projekt_duration: Gesamtdauer des Projekts
+          projekt_information: Projektinformationen
+          projekt_list: Projektliste
+          projekt_phase_limitation: Partizipationsbeschränkung
+          proposal_phase: Vorschlagsphase
+          voting_phase: Abstimmungsphase
+        tabs:
+          configuration: Konfigurationseinstellungen
+          geozones: Geozonen verwalten
+          map_settings: Standard-Kartenkonfiguration
+          settings: Funktionen
+      settings:
+        index:
+          extended_features:
+            debates: Diskussionen
+            gdpr: DSGVO
+            general: Allgemeines & Features
+            modulewide: Modulübergreifende Funktionen
+            polls: Abstimmungen
+            proposals: Vorschläge
+          extended_options: Erweiterte Konfigurationseinstellungen
+          extended_settings: Erweiterte Einstellungen
+          features:
+            activate:
+              disabled: Projekt deaktiviert
+              enabled: Projekt aktiviert
+      site_customization:
+        pages:
+          destroy:
+            cannot_notice: Diese Seite kann nicht gelöscht werden. Bitte löschen Sie das zugehörige Projekt zuvor.
+      widget:
+        card:
+          category_options:
+            active_projekt: Aktiver Beteiligungsprozess
+            archived_projekt: Abgeschlossener Beteiligungsprozess

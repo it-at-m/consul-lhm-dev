@@ -12,4 +12,14 @@ module PollsHelper
   def can_answer_be_open?(question)
     question.question_answers.pluck(:open_answer).count(true) < 1
   end
+
+  def link_to_poll(text, poll)
+    if can?(:results, poll)
+      link_to text, results_poll_path(id: poll.slug || poll.id), data: { turbolinks: false }
+    elsif can?(:stats, poll)
+      link_to text, stats_poll_path(id: poll.slug || poll.id)
+    else
+      link_to text, poll_path(id: poll.slug || poll.id)
+    end
+  end
 end

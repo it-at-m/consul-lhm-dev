@@ -2,24 +2,18 @@
   "use strict";
   App.PollsCustom = {
 
-    hideOpenAnswers: function() {
+    showOpenAnswers: function() {
       $('.poll-results-open-answers').each( function() {
         if ( sessionStorage.getItem($(this).attr('id')) !== 'true' ) {
-          sessionStorage.setItem( $(this).attr('id'), 'false');
-          $(this).removeClass('show-open-answers')
-        }
-      })
-
-      $('.poll-results-open-answers-list').each( function() {
-        var sessionStorageItemId = $(this).closest('.poll-results-open-answers').attr('id')
-        if ( sessionStorage.getItem(sessionStorageItemId) !== 'true' ) {
-          $(this).hide();
+          $(this).addClass('hide-open-answers')
+        } else {
+          $(this).addClass('rotate-toggle-arrow')
         }
       })
     },
 
     initialize: function() {
-      App.PollsCustom.hideOpenAnswers()
+      App.PollsCustom.showOpenAnswers()
 
       $("body").on("click", ".js-show-open-answers", function() {
         var $wrapper = $(this).closest('.poll-results-open-answers')
@@ -27,13 +21,13 @@
         var currentSessionStorageWrapperValue = sessionStorage.getItem($wrapper.attr('id'))
 
         if ( currentSessionStorageWrapperValue === 'true' ) {
-          sessionStorage.setItem( $wrapper.attr('id'), 'false' )
-          $wrapper.removeClass('show-open-answers')
-          $questionList.hide();
+          sessionStorage.setItem( $wrapper.attr('id'), 'false' );
+          $wrapper.removeClass('rotate-toggle-arrow')
+          $questionList.hide('fast');
         } else {
           sessionStorage.setItem( $wrapper.attr('id'), 'true' )
-          $wrapper.addClass('show-open-answers')
-          $questionList.show();
+          $wrapper.addClass('rotate-toggle-arrow')
+          $questionList.show('fast');
         }
 
       });

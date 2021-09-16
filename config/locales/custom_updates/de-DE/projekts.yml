@@ -1,0 +1,22 @@
+de:
+  custom:    
+    projekts:
+      backlink: Zur Projektübersicht
+      errors:
+        presence: Bitte wählen Sie ein Projekt
+      new:
+        first_level: Erste Projektebene
+        fourth_level: Vierte Projektebene
+        second_level: Zweite Projektebene
+        third_level: Dritte Projektebene
+      selector:
+        connected_resources:
+          debate_description: Bitte ordnen Sie Ihre Diskussion einem der nachfolgenden Projekte oder Unterprojekte zu. Dies dient dazu, dass die Diskussionen in der Diskussionsübersicht besser auffindbar sind.
+          debate_title: Zuordnung der Diskussion zu einem Projekt
+          proposal_description: Bitte ordnen Sie Ihren Vorschlag einem der nachfolgenden Projekte oder Unterprojekte zu. Dies dient dazu, dass die Vorschläge in der Vorschlagsübersicht besser auffindbar sind.
+          proposal_title: Zuordnung des Vorschlags zu einem Projekt
+      sidebar_filter:
+        filter_button: Nach Projekte filtern
+        title: Projekte
+        title_active: Aktive Projekte
+        title_archived: Abgelaufene Projekte

@@ -1,0 +1,8 @@
+en:
+  custom:    
+    debates:
+      form:
+        tags_custom: User tags
+      index:
+        no_active_projekt: Currently no participation procedure
+        projekts: Projects

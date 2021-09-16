@@ -1,0 +1,17 @@
+en:
+  custom:
+    proposals:
+      created:
+        dashboard: Save as draft and publish later
+        publish: Publish proposal now
+      form:
+        tags_custom: User tags
+        tags_placeholder: Separate the tags with a comma (',')
+      index:
+        max_number_reached: You have reached the maximum number (%{max_number}) of proposals per user. Before you can create another suggestion, you must withdraw an active suggestion.
+        no_active_projekt: Currently no participation procedure
+        projekts: Projects
+        show_larger_map: Show more
+        show_smaller_map: Show less
+      proposal:
+        unsupport: Withdraw

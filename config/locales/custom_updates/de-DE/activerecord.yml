@@ -1,0 +1,13 @@
+de:
+  activerecord:
+    errors:
+      models:
+        proposal:
+          attributes:
+            description:
+              too_long: 'is too long'
+    attributes:
+      poll/answer:
+        open_answer_text: Offene Antwort111
+      widget/card:
+        card_category: Kategorie

@@ -26,61 +26,53 @@
             </small>
           <% end %>
         </h3>
-        <table id="question_<%= question.id %>_results_table">
-          <thead>
-            <tr>
-              <%- question.question_answers.each do |answer| %>
-                <th scope="col" <%= answer.total_votes == most_voted_answer_votes ? "class=win" : "" %>>
-                  <% if answer.total_votes == most_voted_answer_votes %>
-                    <span class="show-for-sr"><%= t("polls.show.results.most_voted_answer") %></span>
-                  <% end %>
-                  <%= answer.title %>
-                </th>
-              <% end %>
-            </tr>
-          </thead>
+        <table id="question_<%= question.id %>_results_table" class='results-table'>
           <tbody>
-            <tr>
-              <%- question.question_answers.each do |answer| %>
-                <td id="answer_<%= answer.id %>_result" <%= answer.total_votes == most_voted_answer_votes ? "class=win" : "" %>>
+            <%- question.question_answers.each do |answer| %>
+              <tr>
+                <td id="answer_<%= answer.id %>_result" class='results-column <%= answer.total_votes == most_voted_answer_votes ? "win" : "" %>' >
                   <%= answer.total_votes %>
                   (<%= answer.total_votes_percentage.round(2) %>%)
                 </td>
-              <% end %>
-            </tr>
+                <td class='answers-column <%= answer.total_votes == most_voted_answer_votes ? "win" : "" %>' >
+                  <% if question.open_question_answer == answer %>
+                    <% open_answers = answer.all_open_answers %>
+                    <div class='poll-results-open-answers' id='<%= dom_id(answer, :open_answers)  %>'>
+                      <div class='open-answers-title js-show-open-answers'>
+                        <%= answer.title %>
+                      </div>
+                      <div class='poll-results-open-answers-list'>
+                        <% page_name = ("page_a" + answer.id.to_s).to_sym %>
+                        <% open_answers.page(params[page_name]).per(5).each do |open_answer| %>
+                          <div class='poll-results-open-answer'>
+                            <div class='open-answer-info'>
+                                <%= avatar_image(open_answer.author, size: 32, class: "float-left user-avatar") %>
+                                <span class='user-name'>
+                                  <% if question.poll.show_open_answer_author_name %>
+                                    <%= open_answer.author.username %></span>
+                                  <% else %>
+                                    <%= 'anonymisiert' %></span>
+                                  <% end %>
+                                &nbsp;&bull;&nbsp;
+                              <span><%= open_answer.created_at.localtime.strftime '%Y-%m-%d %H:%M:%S'%></span>
+                            </div>
+                            <div class='open-answer-text'>
+                              <%= open_answer.open_answer_text %>
+                            </div>
+                          </div>
+                        <% end %>
+                        <%= paginate open_answers.page(params[page_name]).per(5), param_name: page_name %>
+                      </div>
+                    </div>
+                  <% else %>
+                    <%= answer.title %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
           </tbody>
         </table>
 
-        <% if question.open_question_answer %>
-          <% open_answers = question.open_question_answer.all_open_answers %>
-          <div class='poll-results-open-answers show-open-answers' id='<%= dom_id(question, :open_answers)  %>'>
-            <div class='open-answers-title js-show-open-answers'>
-              <%= t('custom.polls.results.open_answers') %>
-            </div>
-            <div class='poll-results-open-answers-list'>
-              <% page_name = ("page_q" + question.id.to_s).to_sym %>
-              <% open_answers.page(params[page_name]).per(5).each do |open_answer| %>
-                <div class='poll-results-open-answer'>
-                  <div class='open-answer-info'>
-                      <%= avatar_image(open_answer.author, size: 32, class: "float-left user-avatar") %>
-                      <span class='user-name'>
-                        <% if question.poll.show_open_answer_author_name %>
-                          <%= open_answer.author.username %></span>
-                        <% else %>
-                          <%= 'anonymisiert' %></span>
-                        <% end %>
-                      &nbsp;&bull;&nbsp;
-                    <span><%= open_answer.created_at.localtime.strftime '%Y-%m-%d %H:%M:%S'%></span>
-                  </div>
-                  <div class='open-answer-text'>
-                    <%= open_answer.open_answer_text %>
-                  </div>
-                </div>
-              <% end %>
-              <%= paginate open_answers.page(params[page_name]).per(5), param_name: page_name %>
-            </div>
-          </div>
-        <% end %>
 
       <% end %>
     </div>

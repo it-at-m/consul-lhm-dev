@@ -1,0 +1,106 @@
+de:
+  custom:
+    account:
+      settings:
+        email_digest: Erhalten Sie eine Zusammenfassung der Benachrichtigungen zu Vorschlägen
+        email_on_comment: E-Mail-Benachrichtigung erhalten, bei Kommentare zu meinen Aktivitäten
+        email_on_comment_reply: E-Mail-Benachrichtigung erhalten, bei Antworten auf meine Kommentare
+        email_on_direct_message: Private Nachrichten per Mail zulassen
+        newsletter: E-Mail-Benachrichtigung erhalten, bei wichtigen System-Infos
+        public_activity: Meine Aktivität veröffentlichen
+        public_interests: Vorschläge, denen ich folge, veröffentlichen
+      show:
+        user_permission_votes: An Abstimmungen teilnehmen
+    comments:
+      reply_form:
+        leave_comment: Schreiben Sie eine Antwort
+      restricted:
+        debate_phase_expired: Die Diskussionsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
+        geo_limitation: 'Dieses projekt ist auf die folgende Gebiete beschränkt: %{geozones}'
+        not_verified: Bitte %{verify_account}, um teilnehmen zu können
+        other: Die Kommentarfunktion ist nicht verfügbar
+        poll_phase_expired: Die Abstimmungsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
+        proposal_phase_expired: Die Vorschlagsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
+    devise_views:
+      users:
+        registrations:
+          new:
+            privacy_link: Datenschutzbestimmung
+            terms: Mit der Registrierung akzeptieren Sie die %{terms} und %{privacy}
+    gdpr_notice:
+      accept: Akzeptieren
+      link_text: Mehr Infos
+      message: <p>Die Applikation verwendet Cookies und ähnliche Technologien zur Bereitstellung, Aufrechterhaltung und Verbesserung unserer Dienste.</p><p>Mit der Nutzung dieser Website erklären Sie sich damit einverstanden, dass wir Cookies verwenden. Sie dienen dazu, Ihnen bestmögliche Funktionalität bieten zu können. %{link}</p>
+      title: Verwendung von Cookies
+    geozones:
+      projekt_selector:
+        affiliations:
+          entire_city: Stadtweit
+          no_affiliation: Keine Gebietszuordnung
+          only_geozones: Zuordnung zu Stadtteil
+        restrictions:
+          no_restriction: Alle Nutzer:innen
+          only_citizens: Nur Bürger:innen
+          only_geozones: Nur Bürger:innen des Stadtteils
+      sidebar_filter:
+        affiliations:
+          all_resources: Alle %{resource_name}
+          entire_city: Stadtweite %{resource_name}
+          entire_city_short: Stadtweit
+          filter_button: Nach Gebiete filtern
+          no_affiliation: Keine Gebietszuordnung
+          only_geozones: Zuordnung zu Stadtteil
+          show_more: Mehr anzeigen
+          title: Gebiete
+        restrictions:
+          filter_button: Nach Partizipation filtern
+          no_restriction: Alle Nutzer:innen der Plattform
+          only_citizens: Nur Bürger:innen der Stadt
+          only_geozones: Nur Bürger:innen des Stadtteils
+          show_more: Mehr anzeigen
+          title: Partizipation
+    images:
+      form:
+        image_name: Name des Titelbildes
+    layouts:
+      footer:
+        demokratie: demokratie.today
+        demokratie_url: https://www.demokratie.today/
+        description: Die Plattform basiert auf %{consul}, einer %{open_source} und wurde von %{demokratie} modifiziert.
+        impressum: Impressum
+    menu:
+      account: Konto
+      archived: Abgelaufene Projekte
+      debates: Diskussionen
+      polls: Abstimmungen
+      proposals: Vorschläge
+    pages:
+      impressum:
+        title: Impressum
+      social_share:
+        share: Teilen
+    sdg:
+      goals:
+        filter:
+          heading: UN-Nachhaltigkeitsziele
+      related_list_selector:
+        goal_list: Sie können ein oder mehrere SDGs wählenoder im nachfolgenden Feld nach bestimmten Zielen und Unterzielen suchen. Für mehr Infos besuchen Sie die %{link}.
+        title: UN-Nachhaltigkeitsziele
+      targets:
+        label: Filter für Unterziele (%{more_link})
+        more_link_text: Mehr Info
+        select: Unterziel auswählen
+    users:
+      login_to_vote: Sie müssen sich %{signin} oder %{signup}, um teilnehmen zu können
+      verify_account_link_short: verifizieren
+    votes:
+      geo_restricted: Sie sind aufgrund von Gebiets- beschränkungen nicht berechtigt teilzunehmen.
+      not_verified: Sie müssen sich %{verify_account}, um teilnehmen zu können
+      phase_expired: Die Phase ist bereits abgeschlossen. Dieser Vorschlag kann nicht mehr unterschtützt werden
+    welcome:
+      active_projekt_cards:
+        title: Aktive Beteiligungsprozesse
+      archived_projekt_cards:
+        title: Abgeschlossene Beteiligungsprozesse
+  tag_names:
+    general: General

@@ -6,7 +6,7 @@ class PollsController < ApplicationController
   include ProjektControllerHelper
 
   before_action :load_categories, only: [:index]
-  before_action :set_geo_limitations, only: [:show]
+  before_action :set_geo_limitations, only: [:show, :results, :stats]
 
   helper_method :resource_model, :resource_name
   has_filters %w[all current]

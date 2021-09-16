@@ -1,0 +1,15 @@
+en:
+  custom:    
+    polls:
+      index:
+        projekts: Projects
+      questions:
+        answers:
+          more_info: More info
+          save_open_answer: Save answer
+          update_open_answer: Edit answer
+      results:
+        open_answers: Open answers
+      show:
+        info_menu: Poll
+        results_menu: Intermediate results for admins

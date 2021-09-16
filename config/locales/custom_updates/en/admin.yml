@@ -1,0 +1,137 @@
+en:
+  custom:
+    admin:
+      homepage:
+        active_projekts_title: Active participatory processes
+        archived_projekts_title: Completed participation processes
+      menu:
+        projekts: Projects
+      polls:
+        questions:
+          answers:
+            notice:
+              delete:
+                confirmation: Are you sure?
+                error: Votes have already been cast for this poll. Therefore, you can no longer delete the answer.
+                success: Answer successfully deleted.
+              open_answer_saved: Thank you very much! Your answer was successfully saved.
+            open_answer_html: Open answer  <small><em>(Only one allowed)</em></small>
+          show_images: Show preview images for answers
+        settings:
+          show_open_answer_with_username: Show open answers with user name
+          show_open_answer_without_username: Show open answers anonymously
+      progress_bars:
+        index:
+          progress_bar: Progress bar
+      projekts:
+        destroy: Delete
+        edit:
+          projekt_activated: Project active
+          projekt_active:
+            'no': "No"
+            'yes': "Yes"
+          projekt_map_tab:
+            name: Ind. card configuration
+          projekt_milestones_tab:
+            name: Progress & Milestones
+          projekt_news_tab:
+            name: News-Feed
+          projekt_notifications_tab:
+            button: Send message
+            name: Notifications
+            notification_body: Message
+            notification_title: Title
+            page_title: Send message
+            title: Send message
+          projekt_page: Project page
+          projekt_phase_limitation: Restriction
+          projekt_phases: Project phases
+          projekt_phases_tab:
+            actions: Actions
+            activate: Enabled
+            affiliation: Area allocation
+            beginning: Start date
+            debate_phase: Discussion phase
+            end_date: End date
+            ending: End date
+            information_block_title: Project information
+            main_block_title: Project status
+            name: Project settings
+            page_block_title: Project page
+            phase_name: Phase
+            phases_block_title: Project phases
+            projekt_duration: Project information
+            proposal_phase: Proposal phase
+            restriction: Participation restriction
+            start_date: Start date
+            voting_manage: Manage polls
+            voting_phase: Voting phase
+          projekt_settings_tab:
+            footer_settings: Footer
+            general_settings: General
+            name: Project functions
+            select_an_element: select
+            sidebar_settings: Sidebar
+          projekt_status: Project status
+          setting_indicator:
+            'no': "No"
+            'yes': "Yes"
+          show_footer: Project footer
+          show_in_navigation: null
+          show_in_navigation_checkbox: Show project in navigation
+          update: Update project settings
+        edit_projekt: Edit
+        index:
+          add_cards: Create/edit tiles
+          add_projekt: Add new project
+          choose_parent: Link this project to a parent project
+          create: Create project
+          debate_phase: Discussion phase
+          edit_page: Edit page
+          enter_name: Specify the name of the project
+          info: Info
+          level: Level
+          name: Project name
+          name_plural: Projects
+          name_singular: Projects
+          page: Page
+          page_link: Open page
+          page_name: Global project settings
+          parent: Superordinate project
+          position: Position
+          projekt_affiliation: Area allocation
+          projekt_duration: Total duration of the project
+          projekt_information: Project information
+          projekt_list: Project list
+          projekt_phase_limitation: Participation restriction
+          proposal_phase: Proposal phase
+          voting_phase: Voting phase
+        tabs:
+          configuration: Configuration settings
+          geozones: Manage geozones
+          map_settings: Standard card configuration
+          settings: Functions
+      settings:
+        index:
+          extended_features:
+            debates: Discussions
+            gdpr: DSGVO
+            general: General & Features
+            modulewide: Cross-module functions
+            polls: Polls
+            proposals: Proposals
+          extended_options: Advanced configuration settings
+          extended_settings: Advanced settings
+          features:
+            activate:
+              disabled: Project disabled
+              enabled: Project activated
+      site_customization:
+        pages:
+          destroy:
+            cannot_notice: This page cannot be deleted. Please delete the associated project beforehand.
+      widget:
+        card:
+          category_options:
+            active_projekt: Active participation process
+            archived_projekt: Completed participation process

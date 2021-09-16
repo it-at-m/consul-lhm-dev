@@ -1,0 +1,98 @@
+en:
+  custom:
+    account:
+      show:
+        user_permission_votes: Participate in polls
+    comments:
+      reply_form:
+        leave_comment: Write a reply
+      restricted:
+        debate_phase_expired: The discussion phase has already expired. New comments can no longer be added.
+        geo_limitation: 'This project is limited to the following areas: %{geozones}'
+        not_verified: Please %{verify_account} to participate
+        other: The comment function is not available
+        poll_phase_expired: The voting period has already expired. New comments can no longer be added.
+        proposal_phase_expired: The proposal phase has already expired. New comments can no longer be added.
+    devise_views:
+      users:
+        registrations:
+          new:
+            privacy_link: Privacy policy
+            terms: With the registration you accept the %{terms} and %{privacy}
+    gdpr_notice:
+      accept: Accept
+      link_text: More info
+      message: <p>The application uses cookies and similar technologies to provide, maintain and improve our services.</p><p>By using this website, you agree that we use cookies. They are used to provide you with the best possible functionality. %{link}</p>
+      title: Cookies use
+    geozones:
+      projekt_selector:
+        affiliations:
+          entire_city: Citywide
+          no_affiliation: No area allocation
+          only_geozones: Allocation to district
+        restrictions:
+          no_restriction: All users
+          only_citizens: Citizens only
+          only_geozones: Only citizens of the district
+      sidebar_filter:
+        affiliations:
+          all_resources: All %{resource_name}
+          entire_city: Citywide %{resource_name}
+          entire_city_short: Citywide
+          filter_button: Filter by areas
+          no_affiliation: No area allocation
+          only_geozones: Allocation to district
+          show_more: Show more
+          title: Districts
+        restrictions:
+          filter_button: Filter by participation
+          no_restriction: All users of the platform
+          only_citizens: Only citizens of the city
+          only_geozones: Only citizens of the district
+          show_more: Show more
+          title: Participation
+    images:
+      form:
+        image_name: Title image name
+    layouts:
+      footer:
+        demokratie: demokratie.today
+        demokratie_url: https://www.demokratie.today/
+        description: The platform is based on %{consul}, a %{open_source} and is modified by %{demokratie}.
+        impressum: Imprint
+    menu:
+      account: Account
+      archived: Expired projects
+      debates: Discussions
+      polls: Polls
+      proposals: Proposals
+    pages:
+      impressum:
+        title: Imprint
+      social_share:
+        share: Share
+    sdg:
+      goals:
+        filter:
+          heading: UN SDGs
+      related_list_selector:
+        goal_list: You can select one or more SDGs or search for specific goals and subgoals in the box below. For more info, visit the %{link}.
+        title: UN SDGs
+      targets:
+        label: Filter for targets (%{more_link})
+        more_link_text: More info
+        select: Select target
+    users:
+      login_to_vote: You must %{signin} or %{signup} to be able to participate
+      verify_account_link_short: verify
+    votes:
+      geo_restricted: You are not eligible to participate due to territorial restrictions.
+      not_verified: You must %{verify_account} to be able to participate
+      phase_expired: The phase is already completed. This proposal can no longer be supported.
+    welcome:
+      active_projekt_cards:
+        title: Active participation processes
+      archived_projekt_cards:
+        title: Completed participation processes
+  tag_names:
+    general: General

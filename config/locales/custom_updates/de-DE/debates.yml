@@ -1,0 +1,8 @@
+de:
+  custom:    
+    debates:
+      form:
+        tags_custom: Nutzer-Tags
+      index:
+        no_active_projekt: Aktuell kein Beteiligungsverfahren
+        projekts: Projekte

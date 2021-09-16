@@ -1,0 +1,22 @@
+en:
+  custom:    
+    projekts:
+      backlink: To the project overview
+      errors:
+        presence: Please select a project
+      new:
+        first_level: First project level
+        fourth_level: Fourth project level
+        second_level: Second project level
+        third_level: Third project level
+      selector:
+        connected_resources:
+          debate_description: Please assign your discussion to one of the following projects or subprojects. This serves to make the discussions easier to find in the discussion overview.
+          debate_title: Assignment of the discussion to a project
+          proposal_description: Please assign your proposal to one of the following projects or sub-projects. This serves to make the proposals easier to find in the proposal overview.
+          proposal_title: Assignment of the proposal to a project
+      sidebar_filter:
+        filter_button: Filter by projects
+        title: Projects
+        title_active: Active projects
+        title_archived: Expired projects
