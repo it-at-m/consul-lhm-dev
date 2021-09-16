@@ -27,15 +27,13 @@
             <span><%= t('cli.welcome.hero.url') %></span>
             <%= t('cli.welcome.hero.text') %>
           </div>
-          <div class='hero-cta'>
-            <%= t('cli.welcome.hero.cta') %>
-          </div>
+          <%= link_to t('cli.welcome.hero.cta'), "#welcome_block", class: "hero-cta", role: "button" %>
         </div>
       </div>
     </div>
   </div>
 
-  <div class='row margin-top'>
+  <div class='row margin-top' id='welcome_block'>
     <div class='column medium-8 small-centered'>
       <%= render_custom_block 'home_page_1' %>
     </div>

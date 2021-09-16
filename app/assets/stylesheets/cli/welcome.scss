@@ -62,6 +62,8 @@
     color: $white;
     padding: 0.1rem 2rem;
     top: 120px;
+    cursor: pointer;
+    text-decoration: none;
 
     @media screen and (min-width: 64em) {
       top: 180px;
