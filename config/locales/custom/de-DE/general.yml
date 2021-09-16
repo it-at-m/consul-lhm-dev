@@ -637,7 +637,7 @@ de:
       already_voted_in_booth: "Sie haben bereits in einer physischen Wahlkabine teilgenommen. Sie können nicht nochmal teilnehmen."
       already_voted_in_web: "Sie haben bereits an der Abstimmung teilgenommen. Falls Sie erneut abstimmen, wird Ihre Wahl überschrieben."
       back: Zurück zu Abstimmungen
-      cant_answer_not_logged_in: "Sie müssen %{signin} oder %{signup}, um teilzunehmen."
+      cant_answer_not_logged_in: "Sie müssen sich %{signin} oder %{signup}, um teilzunehmen."
       comments_tab: Kommentare
       cant_answer_verify: "Sie müssen %{verify_link}, um zu antworten."
       verify_link: "Verifizieren Sie Ihr Benutzerkonto"
