@@ -63,6 +63,8 @@ de:
       form:
         image_name: Name des Titelbildes
     layouts:
+      header:
+        title_html: "Öffentlichkeitsbeteiligung<br><span>in der Stadt"
       footer:
         demokratie: demokratie.today
         demokratie_url: https://www.demokratie.today/

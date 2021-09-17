@@ -55,6 +55,8 @@ en:
       form:
         image_name: Title image name
     layouts:
+      header:
+        title_html: "Public Participation<br><span>in the city of"
       footer:
         demokratie: demokratie.today
         demokratie_url: https://www.demokratie.today/

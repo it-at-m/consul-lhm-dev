@@ -3,7 +3,7 @@
     <div class="column">
       <div class="top-bar">
 
-        <h2 class='header-title show-for-medium'>Öffentlichkeitsbeteiligung<br><span>in <%= Setting['org_name'] %></span></h2>
+        <h2 class='header-title show-for-medium'><%= t('custom.layouts.header.title_html') %>  <%= Setting['org_name'] %></span></h2>
 
         <span data-responsive-toggle="responsive-menu"
               data-hide-for="medium"
@@ -27,7 +27,7 @@
             <div class="show-for-small-only">
               <div class="subnavigation row">
 
-                <h2 class='city-name'>Öffentlichkeitsbeteiligung in <%= Setting['org_name'] %></h2>
+                <h2 class='city-name'><%= t('custom.layouts.header.title_html') %> <%= Setting['org_name'] %></h2>
 
                 <%= render partial: "shared/subnavigation", locals: { placement: 'mobile' } %>
                 <div class="small-12 column">
