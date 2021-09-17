@@ -8,6 +8,6 @@ en:
               too_long: 'is too long'
     attributes:
       poll/answer:
-        open_answer_text: Offene Antwort
+        open_answer_text: Open Answer
       widget/card:
-        card_category: Kategorie
+        card_category: Category

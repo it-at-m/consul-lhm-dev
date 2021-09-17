@@ -5,9 +5,9 @@ de:
         proposal:
           attributes:
             description:
-              too_long: 'is too long'
+              too_long: 'ist zu lange'
     attributes:
       poll/answer:
-        open_answer_text: Offene Antwort111
+        open_answer_text: Offene Antwort
       widget/card:
         card_category: Kategorie

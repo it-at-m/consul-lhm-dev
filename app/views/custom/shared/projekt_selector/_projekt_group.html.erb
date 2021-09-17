@@ -17,7 +17,7 @@
     <% rb.label(class: "js-prevent-key-scroll focusable #{arrow} #{disabled_class} #{highlight_projekt_in_selector?(rb.object)} #{hide_map_class} js-select-projekt", data: {projekt_id: rb.object.id, latitude: rb.object.map_location.latitude, longitude: rb.object.map_location.longitude, zoom: rb.object.map_location.zoom, maplocation: rb.object.map_location.id }, tabindex: "0" ) do  %>
 
       <%= rb.radio_button(disabled: disable_radio_button, checked: check_radio_button?(rb.object.id), tabindex: "-1") %>
-      <%= rb.text %>
+      <%= rb.object.page.title %>
 
       <%= render partial: "shared/projekt_selector/shared/projekt_info", locals: { projekt: rb.object, phase_name: phase_name  } %>
       <%= render partial: "shared/projekt_selector/shared/checkmark", locals: { projekt: rb.object, phase_name: phase_name  } %>

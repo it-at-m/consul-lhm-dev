@@ -1,4 +1,9 @@
 de:
+  polls:
+    index:
+      filters:
+        all: Alle Abstimmungen
+        currrent: Nur aktive Abstimmungen
   custom:    
     polls:
       index:

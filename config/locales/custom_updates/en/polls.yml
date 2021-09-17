@@ -1,4 +1,9 @@
 en:
+  polls:
+    index:
+      filters:
+        all: All Polls
+        current: Only active Polls
   custom:    
     polls:
       index:

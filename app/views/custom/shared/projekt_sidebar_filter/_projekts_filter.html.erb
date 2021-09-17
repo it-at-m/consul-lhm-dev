@@ -8,7 +8,7 @@
     <li class=''>
       <%= label_tag dom_id(projekt), class: label_class do %>
         <%= check_box_tag dom_id(projekt), projekt.id, checkbox_checked, { class: 'js-filter-projekt', tabindex: "-1" }  %>
-        <span aria-label="<%= t('custom.links.projekts_filter.projekt_name', projekt_name: projekt.name ) %>" ><%= projekt.name %></span>
+        <span aria-label="<%= t('custom.links.projekts_filter.projekt_name', projekt_name: projekt.page.title ) %>" ><%= projekt.page.title %></span>
         <% resource_count = projekt.count_resources(params[:controller]) %>
         <span aria-label="<%= t('custom.links.projekts_filter.resource_count', resource_count: resource_count) %>"> <%= "(#{resource_count})" %> </span>
         <span class="checkmark focusable js-prevent-key-scroll js-access-toggle-projekt-filter-checkbox" tabindex="0"></span>

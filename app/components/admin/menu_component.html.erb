@@ -34,7 +34,7 @@
   <% end %>
 
   <li class="section-title <%= "is-active" if controller_name == "projekts" %>">
-    <%= link_to admin_projekts_path do %>
+    <%= link_to admin_projekts_path, data: { turbolinks: "false" } do %>
       <span class="icon-projekts"></span>
       <strong><%= t("custom.admin.menu.projekts") %></strong>
     <% end %>

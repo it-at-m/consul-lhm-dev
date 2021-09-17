@@ -9,11 +9,18 @@ body > header .locale.locale-custom,
     display: none;
   }
 
-  .locale-form .locale-switcher {
-    margin-top: 0.5rem;
+  .locale-form {
 
-    &:focus {
-      outline: 3px solid #ffbf47 !important
+    label {
+      color: $dark
+    }
+  
+    .locale-switcher {
+      margin-top: 0.5rem;
+
+      &:focus {
+        outline: 3px solid #ffbf47 !important
+      }
     }
   }
 }

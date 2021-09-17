@@ -3,7 +3,7 @@
   <% accesskey += 1 %>
   <li class='nav-element top-level-item js-access-top-level-menu js-prevent-key-scroll'
       <%= "tabindex=0" if placement == "desktop" %>
-      aria-label='<%= t('custom.links.menu.projekt_name_label', projekt_name: active_projekt.name) if placement == "desktop" %>'
+      aria-label='<%= t('custom.links.menu.projekt_name_label', projekt_name: active_projekt.page.title) if placement == "desktop" %>'
       <%= "aria-expanded=false" if active_projekt.children.any? %>
       <%= "aria-haspopup=true" if active_projekt.children.any? && placement == "desktop" %>
       <%= "accesskey=#{accesskey}" if accesskey < 9 && placement == "desktop" %> >

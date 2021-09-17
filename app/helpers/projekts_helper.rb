@@ -13,11 +13,11 @@ module ProjektsHelper
 
   def prepare_projekt_name(projekt, placement=nil)
     if projekt.page.published? && placement == 'desktop'
-      link_to projekt.name, projekt.page.url, tabindex: '-1', aria: { hidden: true }
+      link_to projekt.page.title, projekt.page.url, tabindex: '-1', aria: { hidden: true }
     elsif  projekt.page.published? && placement == 'mobile'
-      link_to projekt.name, projekt.page.url
+      link_to projekt.page.title, projekt.page.url
     else
-      projekt.name
+      projekt.page.title
     end
   end
 
