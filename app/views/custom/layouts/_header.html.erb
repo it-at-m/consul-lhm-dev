@@ -16,9 +16,15 @@
           <span class="menu-icon dark" data-toggle></span>
         </span>
 
-        <div class="top-bar-title">
-          <%= link_to root_path do %>
+        <div class="top-bar-title show-for-medium">
+          <%= link_to 'https://www.muenchen.de/rathaus/' do %>
             <%= image_tag(image_path_for("logo_header.png"), class: "", alt: t("layouts.header.logo")) %>
+          <% end %>
+        </div>
+
+        <div class="top-bar-title show-for-small-only">
+          <%= link_to 'https://www.muenchen.de/rathaus/' do %>
+            <%= image_tag(image_path_for("logo_header_mobile.png"), class: "", alt: t("layouts.header.logo"), style: "width: 70px;") %>
           <% end %>
         </div>
 

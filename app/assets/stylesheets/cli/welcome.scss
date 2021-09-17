@@ -4,6 +4,16 @@
 
 .hero-wrapper {
   position: relative;
+  height: 250px;
+  margin-top: -24px;
+	background-image: url(lhm.jpg);
+	background-position: center;
+	background-size: cover;
+
+	@media screen and (min-width: 40em) {
+		background-image: none;
+		height: initial;
+	}
 
   .hero-content {
     position: absolute;
@@ -16,8 +26,14 @@
   }
 
   video {
-    margin-top: -24px;
     width: 100%;
+    display: none;
+
+    @media screen and (min-width: 40em) {
+      display: block;
+    }
+
+
   }
 
   video::-webkit-media-controls-timeline,
@@ -50,6 +66,11 @@
     background: #FFFFFFAA;
     color: $brand;
     font-weight: bold;
+    margin-right: 55px;
+
+    @media screen and (min-width: 40em) {
+			margin-right: initial;
+    }
 
     span {
       display: block;
@@ -64,6 +85,11 @@
     top: 120px;
     cursor: pointer;
     text-decoration: none;
+    display: none;
+
+    @media screen and (min-width: 40em) {
+      display: block;
+    }
 
     @media screen and (min-width: 64em) {
       top: 180px;

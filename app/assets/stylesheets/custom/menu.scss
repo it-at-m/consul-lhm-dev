@@ -12,7 +12,7 @@ body > header .locale.locale-custom,
   .locale-form {
 
     label {
-      color: $dark
+      color: $white;
     }
   
     .locale-switcher {
@@ -47,7 +47,7 @@ body > header .locale.locale-custom,
   }
 
   .top-bar-title {
-    margin: 0.5rem auto;
+    margin: auto;
   }
 
   .subnavigation .account-admin-items a.account-items-icon,
