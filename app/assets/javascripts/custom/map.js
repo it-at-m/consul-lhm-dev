@@ -117,8 +117,49 @@
 		return "<a href='/budgets/" + data.budget_id + "/investments/" + data.investment_id + "'>" + data.investment_title + "</a>";
 	      }
       };
+
+
+      var baseLayerGesamt = L.tileLayer.wms(mapTilesProvider, {
+        attribution: mapAttribution,
+				layers: 'gsm:g_stadtkarte_gesamt'
+      });
+
+      var baseLayerLuftbild = L.tileLayer.wms(mapTilesProvider, {
+        attribution: mapAttribution,
+        layers: 'gsm:g_luftbild'
+      });
+
+      var overlayStadtRadeln = L.tileLayer.wms(mapTilesProvider, {
+        attribution: mapAttribution,
+        layers: 'gsm:aktion_stadtradeln',
+        format: 'image/png',
+        transparent: true
+      });
+
+      var overlayStadtSpaziergaenge = L.tileLayer.wms(mapTilesProvider, {
+        attribution: mapAttribution,
+        layers: 'gsm:g_stadtspaziergaenge_smarter_together',
+        format: 'image/png',
+        transparent: true
+      });
+
+      var baseMaps = {
+        "Gesamt": baseLayerGesamt,
+        "Luftbild": baseLayerLuftbild
+      };
+
+      var overlayMaps = {
+        "Radeln": overlayStadtRadeln,
+        "Spazieren": overlayStadtSpaziergaenge
+      };
+
+
       mapCenterLatLng = new L.LatLng(mapCenterLatitude, mapCenterLongitude);
+
       map = L.map(element.id).setView(mapCenterLatLng, zoom);
+      baseMaps['Gesamt'].addTo(map);
+
+      L.control.layers(baseMaps, overlayMaps).addTo(map);
 
       if ( !editable ) {
         map._layersMaxZoom = 19;
@@ -126,10 +167,7 @@
       }
 
       App.Map.maps.push(map);
-      L.tileLayer.wms(mapTilesProvider, {
-        layers: 'gsm:g_stadtkarte_gesamt',
-        attribution: mapAttribution
-      }).addTo(map);
+
       if (markerLatitude && markerLongitude && !addMarker) {
         marker = createMarker(markerLatitude, markerLongitude, markerColor);
       }
