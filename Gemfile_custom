@@ -10,3 +10,7 @@ end
 
 gem "sentry-ruby"
 gem "sentry-rails"
+
+source "https://rails-assets.org" do
+  gem "rails-assets-leaflet.markercluster"
+end

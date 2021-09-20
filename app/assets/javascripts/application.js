@@ -125,6 +125,7 @@
 //= require map_refresh
 //= require accessibility_fixes
 //= require polls_custom
+//= require leaflet.markercluster
 //= require_tree ./sdg
 //= require_tree ./sdg_management
 

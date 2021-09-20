@@ -20,7 +20,7 @@
       App.Map.maps = [];
     },
     initializeMap: function(element) {
-      var addMarker, clearFormfields, createMarker, editable, getPopupContent, latitudeInputSelector, longitudeInputSelector, map, mapAttribution, mapCenterLatLng, mapCenterLatitude, mapCenterLongitude, mapTilesProvider, marker, markerIcon, markerLatitude, markerLongitude, markerColor, moveOrPlaceMarker, openMarkerPopup, removeMarker, removeMarkerSelector, updateFormfields, zoom, zoomInputSelector, process;
+      var addMarker, clearFormfields, createMarker, editable, getPopupContent, latitudeInputSelector, longitudeInputSelector, map, mapAttribution, mapCenterLatLng, mapCenterLatitude, mapCenterLongitude, mapTilesProvider, marker, markerIcon, markerLatitude, markerLongitude, markerColor, moveOrPlaceMarker, openMarkerPopup, removeMarker, removeMarkerSelector, updateFormfields, zoom, zoomInputSelector, process, markersGroup;
       process = $(element).data("parent-class");
       App.Map.cleanCoordinates(element);
       mapCenterLatitude = $(element).data("map-center-latitude");
@@ -38,15 +38,18 @@
       addMarker = $(element).data("marker-process-coordinates");
       editable = $(element).data("marker-editable");
       marker = null;
-      markerIcon = L.divIcon({
-        className: "map-marker",
-        iconSize: [30, 30],
-        iconAnchor: [15, 40],
-        html: '<div class="map-icon"></div>'
-      });
+      markersGroup = L.markerClusterGroup();
+
       createMarker = function(latitude, longitude, color) {
         var markerLatLng;
         markerLatLng = new L.LatLng(latitude, longitude);
+
+        markerIcon = L.divIcon({
+          className: "map-marker",
+          iconSize: [30, 30],
+          iconAnchor: [15, 40],
+          html: '<div class="map-icon"></div>'
+        });
 
         if ( color ) {
           markerIcon.options.html = '<div class="map-icon" style="background-color: ' + color + '"></div>'
@@ -58,12 +61,17 @@
           icon: markerIcon,
           draggable: editable
         });
+
         if (editable) {
           marker.on("dragend", updateFormfields);
+          marker.addTo(map);
+        } else {
+          markersGroup.addLayer(marker);
         }
-        marker.addTo(map);
+
         return marker;
       };
+
       removeMarker = function(e) {
         e.preventDefault();
         if (marker) {
@@ -111,6 +119,12 @@
       };
       mapCenterLatLng = new L.LatLng(mapCenterLatitude, mapCenterLongitude);
       map = L.map(element.id).setView(mapCenterLatLng, zoom);
+
+      if ( !editable ) {
+        map._layersMaxZoom = 19;
+        map.addLayer(markersGroup);
+      }
+
       App.Map.maps.push(map);
       L.tileLayer.wms(mapTilesProvider, {
         layers: 'gsm:g_stadtkarte_gesamt',
