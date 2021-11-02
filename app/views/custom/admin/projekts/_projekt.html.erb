@@ -33,12 +33,12 @@
       </h2>
       <div class='projekt-order-arrow-controls'>
         <div class='projekt-order-arrow-up'>
-          <%= link_to order_up_admin_projekt_path(projekt.id) do %>
+          <%= link_to order_up_admin_projekt_path(projekt.id), data: { turbolinks: "false" } do %>
             <%= svg_tag "arrow-up-solid", height: 15 %>
           <% end %>
         </div>
         <div class='projekt-order-arrow-up'>
-          <%= link_to order_down_admin_projekt_path(projekt.id) do %>
+          <%= link_to order_down_admin_projekt_path(projekt.id), data: { turbolinks: "false" } do %>
             <%= svg_tag "arrow-down-solid", height: 15 %>
           <% end %>
         </div>

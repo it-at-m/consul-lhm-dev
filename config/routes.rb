@@ -48,5 +48,7 @@ Rails.application.routes.draw do
   resources :pages, path: "/", only: [:show]
 
   # Post open answers
-  post  "polls/questions/:id/answers/update_open_answer",   to: "polls/questions#update_open_answer", as: :update_open_answer
+  post "polls/questions/:id/answers/update_open_answer",   to: "polls/questions#update_open_answer", as: :update_open_answer
+  # Confirm poll participation
+  post "polls/:id/confirm_participation",                  to: "polls#confirm_participation",        as: :poll_confirm_participation
 end

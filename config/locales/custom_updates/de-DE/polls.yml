@@ -18,3 +18,6 @@ de:
       show:
         info_menu: Abstimmung
         results_menu: Zwischenergebnisse für Admins
+        vote_counted: Ihre Stimme wurde gezählt!
+        confirm_participation_button: Meine Abstimmung bestätigen
+        confirm_participation_notice: Sie haben erfolgreich an der Abstimmung teilgenommen.

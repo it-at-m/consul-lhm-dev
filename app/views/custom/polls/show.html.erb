@@ -44,6 +44,14 @@
       </div>
     </div>
 
+    <div class='row margin'>
+      <div class='column small-12 medium-9'>
+        <div id="confirm-poll-participation">
+          <%= button_to t('custom.polls.show.confirm_participation_button'), poll_confirm_participation_path(@poll), method: :post, remote: true, class: 'button success' %>
+        </div>
+      </div>
+    </div>
+
     <% if extended_feature?("polls.additional_information") %>
       <div class="expanded poll-more-info">
         <div class="row margin">

@@ -11,11 +11,14 @@
       <%end%>
     </h1>
 
-    <div data-alert class="callout primary">
-      <%= link_to help_path(anchor: "proposals"), title: t("shared.target_blank"), target: "_blank" do %>
-        <%= t("proposals.new.more_info") %>
-      <% end %>
-    </div>
+    <% if feature?("help_page")  %>
+      <div data-alert class="callout primary">
+        <%= link_to help_path(anchor: "proposals"), title: t("shared.target_blank"), target: "_blank" do %>
+          <%= t("proposals.new.more_info") %>
+        <% end %>
+      </div>
+    <% end %>
+
     <%= render "proposals/form", form_url: proposals_path %>
   </div>
 

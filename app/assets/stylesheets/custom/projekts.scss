@@ -456,11 +456,15 @@ div.projekt-phase-geozone-restriction-selector {
 
   #filter-projekts-active > ul,
   #filter-projekts-archived > ul {
-    margin-left: 27px;
+    margin-left: 20px;
   }
 
   ul {
     margin-left: 16px;
+  }
+
+  .projekt-filter-icon {
+    color: $brand;
   }
 
   .checkmark {
@@ -471,16 +475,6 @@ div.projekt-phase-geozone-restriction-selector {
     width: 14px;
     border: 1.5px solid #C6C6C6;
     border-radius: 2px;
-  }
-
-  .color-code {
-    position: absolute;
-    top: 5px;
-    left: -27px;
-    height: 14px;
-    width: 4px;
-    border-radius: 2px;
-    background-color: $brand;
   }
 
   input:checked ~ .checkmark:before {

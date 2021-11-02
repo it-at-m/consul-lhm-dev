@@ -7,8 +7,8 @@ de:
       map_longitude_description: Längengrad, um die Position der Karte zu zeigen
       map_zoom: Zoom
       map_zoom_description: Zoomen, um die Kartenposition anzuzeigen
-      map_pin_color: Farbe der Kartenmarkierung ändern
-      map_pin_color_description: Bitte den Farbwert als HEX-code eingeben
+      map_color: Farbe der Kartenmarkierung ändern
+      map_color_description: Bitte den Farbwert als HEX-code eingeben
       feature:
         map: Karten anzeigen
         map_description: Zeigt die Standardkarte oder die individuellen Karten in der Projektfußzeile und der Vorschlagsübersicht

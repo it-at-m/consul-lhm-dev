@@ -39,7 +39,7 @@
         <%= f.hidden_field :answer %>
         <% if open_answer.open_answer_text.present? %>
           <%= f.submit t('custom.polls.questions.answers.update_open_answer'), class: "button open-answer" %>
-          <% if @answer_updated %>
+          <% if @open_answer_updated %>
             <div class='open-answer-saved-notice'>
               <%= t('custom.admin.polls.questions.answers.notice.open_answer_saved')  %>
             </div>
@@ -73,3 +73,9 @@
     <% end %>
   <% end %>
 </div>
+
+<% if @answer_updated %>
+  <div class="answer-counted">
+    <%= t('custom.polls.show.vote_counted') %>
+  </div>
+<% end %>

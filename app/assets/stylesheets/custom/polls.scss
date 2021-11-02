@@ -37,6 +37,10 @@ td.answers-column  {
   }
 }
 
+.open-answers-title.no-open-answers::after {
+  display: none;
+}
+
 .rotate-toggle-arrow {
   .open-answers-title::after {
     transform: rotate(90deg);
@@ -69,6 +73,7 @@ td.answers-column  {
     margin-top: 0.375rem;
     padding: 0.375rem 0;
     padding-right: 0.75rem;
+    font-weight: normal;
   }
 }
 
@@ -88,6 +93,15 @@ td.answers-column  {
 @keyframes fadeOut {
   from {opacity:1;}
   to {opacity:0;}
+}
+
+.answer-counted {
+  color: #92ba48;
+  display: inline-block;
+  animation-name: fadeOut;
+  animation-duration: 2s;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
 }
 
 

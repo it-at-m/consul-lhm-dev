@@ -38,9 +38,11 @@
                   <% if question.open_question_answer == answer %>
                     <% open_answers = answer.all_open_answers %>
                     <div class='poll-results-open-answers' id='<%= dom_id(answer, :open_answers)  %>'>
-                      <div class='open-answers-title js-show-open-answers'>
+                      <div class='open-answers-title js-show-open-answers <%= "no-open-answers" if open_answers.count == 0 %>'>
                         <%= answer.title %>
                       </div>
+
+                      <% if open_answers.count > 0 %>
                       <div class='poll-results-open-answers-list'>
                         <% page_name = ("page_a" + answer.id.to_s).to_sym %>
                         <% open_answers.page(params[page_name]).per(5).each do |open_answer| %>
@@ -63,6 +65,8 @@
                         <% end %>
                         <%= paginate open_answers.page(params[page_name]).per(5), param_name: page_name %>
                       </div>
+                      <% end %>
+
                     </div>
                   <% else %>
                     <%= answer.title %>

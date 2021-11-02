@@ -13,4 +13,5 @@ gem "sentry-rails"
 
 source "https://rails-assets.org" do
   gem "rails-assets-leaflet.markercluster"
+  gem 'rails-assets-leaflet.locatecontrol'
 end

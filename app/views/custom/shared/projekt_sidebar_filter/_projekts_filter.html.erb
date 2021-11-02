@@ -2,17 +2,16 @@
 
   <% label_class =  ( @selected_projekts_ids && projekt.id.to_s.in?(@selected_projekts_ids) ) ? 'label-selected' : 'label_regular' %>
   <% checkbox_checked = @selected_projekts_ids && projekt.id.to_s.in?(@selected_projekts_ids)  %>
-  <% projekt_color = projekt&.map_location&.pin_color.present? ? projekt&.map_location&.pin_color : nil %>
 
   <ul aria-live="polite" >
     <li class=''>
       <%= label_tag dom_id(projekt), class: label_class do %>
         <%= check_box_tag dom_id(projekt), projekt.id, checkbox_checked, { class: 'js-filter-projekt', tabindex: "-1" }  %>
+        <i class="projekt-filter-icon fas fa-<%= projekt.icon || "map-marker-alt" %>" <%= "style=color:#{projekt.color}" if projekt.color.present? %> ></i>
         <span aria-label="<%= t('custom.links.projekts_filter.projekt_name', projekt_name: projekt.page.title ) %>" ><%= projekt.page.title %></span>
         <% resource_count = projekt.count_resources(params[:controller]) %>
         <span aria-label="<%= t('custom.links.projekts_filter.resource_count', resource_count: resource_count) %>"> <%= "(#{resource_count})" %> </span>
         <span class="checkmark focusable js-prevent-key-scroll js-access-toggle-projekt-filter-checkbox" tabindex="0"></span>
-        <span class="color-code" <%= "style=background-color:#{projekt_color}" if projekt_color.present? %> ></span>
       <% end %>
 
       <% if projekt.children.any? %>

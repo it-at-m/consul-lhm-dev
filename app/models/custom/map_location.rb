@@ -9,16 +9,33 @@ class MapLocation < ApplicationRecord
       projekt_id: projekt_id,
       lat: latitude,
       long: longitude,
-      color: get_pin_color(proposal_id)
+      color: get_pin_color,
+      fa_icon_class: get_fa_icon_class
     }
   end
 
   private
 
-  def get_pin_color(proposal_id)
-    if proposal_id.present?
-      proposal = Proposal.find_by(id: proposal_id)
-      proposal.projekt&.map_location&.pin_color
+  def get_pin_color
+    set_object
+    if @proposal.present? && @proposal.projekt.present?
+      @proposal.projekt.color
+    elsif @projekt.present?
+      @projekt.color
     end
+  end
+
+  def get_fa_icon_class
+    set_object
+    if @proposal.present? && @proposal.projekt.present?
+      @proposal.projekt.icon
+    elsif @projekt.present?
+      @projekt.icon
+    end
+  end
+
+  def set_object
+    @projekt = Projekt.find_by(id: projekt_id) if projekt_id.present?
+    @proposal = Proposal.find_by(id: proposal_id) if proposal_id.present?
   end
 end

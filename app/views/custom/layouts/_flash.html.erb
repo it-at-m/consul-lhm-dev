@@ -6,10 +6,7 @@
         <span aria-hidden="true">&times;</span>
       </button>
       <div class="notice-text" role="alert" aria-live="assertive">
-        <%= sanitize(flash[:alert]) %>
-        <%= sanitize(flash[:notice]) %>
-        <%= sanitize(flash[:success]) %>
-        <%= sanitize(flash[:error]) %>
+        <%= sanitize(flash_message) if flash_key.to_sym.in?([:notice, :alert, :success, :error]) %>
       </div>
     </div>
   </div>

@@ -25,6 +25,11 @@ class Admin::ProjektsController < Admin::BaseController
   def edit
     @projekt = Projekt.find(params[:id])
 
+    if @projekt.map_location.nil?
+      @projekt.send(:create_map_location)
+      @projekt.reload
+    end
+
     @projekt.build_debate_phase if @projekt.debate_phase.blank?
     @projekt.debate_phase.geozone_restrictions.build
 
@@ -51,12 +56,14 @@ class Admin::ProjektsController < Admin::BaseController
 
   def quick_update
     @projekt.update_attributes(projekt_params)
+    @projekt.send(:set_order)
+    Projekt.ensure_order_integrity
+
     redirect_back(fallback_location: admin_projekts_path)
   end
 
   def update
     if @projekt.update_attributes(projekt_params)
-      @projekt.update_order
       redirect_to edit_admin_projekt_path(params[:id]) + params[:tab].to_s, notice: t("admin.settings.index.map.flash.update")
     else
       render action: :edit
@@ -113,7 +120,7 @@ class Admin::ProjektsController < Admin::BaseController
   private
 
   def projekt_params
-    params.require(:projekt).permit(:name, :parent_id, :total_duration_start, :total_duration_end, :geozone_affiliated, geozone_affiliation_ids: [],
+    params.require(:projekt).permit(:name, :parent_id, :total_duration_start, :total_duration_end, :color, :icon, :geozone_affiliated, geozone_affiliation_ids: [],
                                     debate_phase_attributes: [:id, :start_date, :end_date, :active, :geozone_restricted, geozone_restriction_ids: [] ],
                                     proposal_phase_attributes: [:id, :start_date, :end_date, :active, :geozone_restricted, geozone_restriction_ids: [] ],
                                     map_location_attributes: map_location_attributes,

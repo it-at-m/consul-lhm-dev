@@ -29,7 +29,13 @@
   <div class="row">
     <div class="small-12 column">
       <hr>
+
+      <div class="images small-12 column">
+        <%= render "nested_image", imageable: @page, f: f %>
+      </div>
+
       <%= f.translatable_fields do |translations_form| %>
+
         <div class="small-12 column end">
           <%= translations_form.text_field :title %>
         </div>

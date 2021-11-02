@@ -29,7 +29,7 @@ class Projekt < ApplicationRecord
   accepts_nested_attributes_for :debate_phase, :proposal_phase, :projekt_notifications
 
   after_create :create_corresponding_page, :set_order, :create_projekt_phases, :create_default_settings, :create_map_location
-  after_destroy :ensure_order_integrity
+  after_destroy :ensure_projekt_order_integrity
 
   scope :top_level, -> { where(parent: nil) }
   scope :with_order_number, -> { where.not(order_number: nil).order(order_number: :asc) }
@@ -126,20 +126,19 @@ class Projekt < ApplicationRecord
     set_order && return if order_number.blank?
     return if order_number == 1
     swap_order_numbers_up
-    ensure_order_integrity
+    ensure_projekt_order_integrity
   end
 
   def order_down
     set_order && return if order_number.blank?
     return if order_number > siblings.maximum(:order_number)
     swap_order_numbers_down
-    ensure_order_integrity
+    ensure_projekt_order_integrity
   end
 
-  def update_order
-    unless siblings.with_order_number.pluck(:order_number).first == 1 && siblings.with_order_number.pluck(:order_number).each_cons(2).all? { |a, b| b == a + 1 }
-      update(order_number: nil)
-      set_order
+  def self.ensure_order_integrity
+    all.each do |projekt|
+      projekt.send(:ensure_projekt_order_integrity)
     end
   end
 
@@ -194,9 +193,12 @@ class Projekt < ApplicationRecord
   end
 
   def set_order
-    if self.siblings.with_order_number.any?
+    if self.siblings.with_order_number.any? && siblings.with_order_number.pluck(:order_number).first == 1 && siblings.with_order_number.pluck(:order_number).each_cons(2).all? { |a, b| b == a + 1 }
       ordered_siblings_count = self.siblings.with_order_number.last.order_number
       self.update(order_number: ordered_siblings_count + 1)
+    elsif self.siblings.with_order_number.any?
+      self.update(order_number: 0)
+      ensure_projekt_order_integrity
     else
       self.update(order_number: 1)
     end
@@ -227,7 +229,7 @@ class Projekt < ApplicationRecord
     end
   end
 
-  def ensure_order_integrity
+  def ensure_projekt_order_integrity
     unless siblings.with_order_number.pluck(:order_number).first == 1 && siblings.with_order_number.pluck(:order_number).each_cons(2).all? { |a, b| b == a + 1 }
       new_order = 1
       siblings.with_order_number.each do |projekt|

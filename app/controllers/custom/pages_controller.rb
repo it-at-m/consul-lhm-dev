@@ -9,6 +9,7 @@ class PagesController < ApplicationController
 
   def show
     @custom_page = SiteCustomization::Page.published.find_by(slug: params[:id])
+    @custom_page = SiteCustomization::Page.published.find_by(slug: 'help') if params[:id] == "help/index"
 
     @commentable = @custom_page
     @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
