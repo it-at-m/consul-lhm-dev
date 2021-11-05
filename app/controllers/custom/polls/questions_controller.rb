@@ -11,7 +11,7 @@ class Polls::QuestionsController < ApplicationController
     end
 
     unless providing_an_open_answer?(answer)
-      @answer_updated = true
+      @answer_updated = 'answered'
     end
 
     @answers_by_question_id = { @question.id => @question.answers.where(author: current_user).map { |answer| answer.answer } }
@@ -20,12 +20,11 @@ class Polls::QuestionsController < ApplicationController
   def unanswer
     answer = @question.answers.find_or_initialize_by(author: current_user, answer: params[:answer])
 
-    if @question.multiple
-      @question.answers.where(author: current_user, answer: params[:answer]).delete_all
-    end
+    @question.answers.where(author: current_user, answer: params[:answer]).delete_all
+    @question.poll.delete_voter_participation_if_no_votes(params[:token])
 
     unless providing_an_open_answer?(answer)
-      @answer_updated = true
+      @answer_updated = 'unanswered'
     end
 
     @answers_by_question_id = { @question.id => @question.answers.where(author: current_user).map { |answer| answer.answer } }

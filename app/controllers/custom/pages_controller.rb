@@ -18,6 +18,7 @@ class PagesController < ApplicationController
 
 
     if @custom_page.present? && @custom_page.projekt.present?
+      @projekt = @custom_page.projekt
       @proposals_coordinates = all_projekt_proposals_map_locations(@custom_page.projekt)
 
       @most_active_proposals = Proposal.published.not_archived.where(projekt: @custom_page.projekt).sort_by_hot_score.limit(3)

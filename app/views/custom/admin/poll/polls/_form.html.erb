@@ -78,6 +78,13 @@
     <%= render SDG::RelatedListSelectorComponent.new(f) %>
   </div>
 
+  <div class='row'>
+    <div class='column'>
+      <%= f.check_box :show_summary_instead_of_questions, label: t('custom.admin.polls.settings.show_summary_instead_of_questions') %>
+    </div>
+  </div>
+
+
   <div class="row">
     <div class="clear">
       <div class="small-12 medium-4 large-3 column">

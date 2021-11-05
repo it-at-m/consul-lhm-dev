@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_22_100940) do
+ActiveRecord::Schema.define(version: 2021_11_04_161711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1314,6 +1314,7 @@ ActiveRecord::Schema.define(version: 2021_10_22_100940) do
     t.tsvector "tsv"
     t.bigint "projekt_id"
     t.boolean "show_open_answer_author_name"
+    t.boolean "show_summary_instead_of_questions", default: false
     t.index ["budget_id"], name: "index_polls_on_budget_id", unique: true
     t.index ["projekt_id"], name: "index_polls_on_projekt_id"
     t.index ["related_type", "related_id"], name: "index_polls_on_related_type_and_related_id"

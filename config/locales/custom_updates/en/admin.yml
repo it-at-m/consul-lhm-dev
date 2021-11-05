@@ -20,6 +20,7 @@ en:
         settings:
           show_open_answer_with_username: Show open answers with user name
           show_open_answer_without_username: Show open answers anonymously
+          show_summary_instead_of_questions: Show summary instead of list of questions
       progress_bars:
         index:
           progress_bar: Progress bar
@@ -80,6 +81,9 @@ en:
           show_in_navigation: null
           show_in_navigation_checkbox: Show project in navigation
           update: Update project settings
+          design:
+            icon: Icon
+            submit_button: Submit
         edit_projekt: Edit
         index:
           add_cards: Create/edit tiles
@@ -130,6 +134,11 @@ en:
         pages:
           destroy:
             cannot_notice: This page cannot be deleted. Please delete the associated project beforehand.
+          images:
+            form:
+              title: Banner for the website
+              note: "The banner should be at least 200 pixels high and 1920 pixels wide. You can upload an image of the following format: %{accepted_content_types}, up to %{max_file_size} MB."
+              add_new_image: Add banner
       widget:
         card:
           category_options:

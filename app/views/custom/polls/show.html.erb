@@ -32,11 +32,9 @@
           <% end %>
         <% end %>
 
-        <% if @questions.filter { |question| question.multiple }.length > 0 %>
-          <div class="callout primary">
-            <%= t("poll_questions.show.multiple_answers") %>
-          </div>
-        <% end %>
+        <div class="callout primary">
+          <%= t("poll_questions.show.withdraw_answers_hint") %>
+        </div>
 
         <% @questions.each do |question| %>
           <%= render "polls/questions/question", question: question, token: @token %>
@@ -46,8 +44,12 @@
 
     <div class='row margin'>
       <div class='column small-12 medium-9'>
-        <div id="confirm-poll-participation">
-          <%= button_to t('custom.polls.show.confirm_participation_button'), poll_confirm_participation_path(@poll), method: :post, remote: true, class: 'button success' %>
+        <div id='confirm-poll-participation-outer-wrapper'>
+          <div class='confirm-poll-participation-inner-wrapper'>
+            <div id="confirm-poll-participation">
+              <%= button_to t('custom.polls.show.confirm_participation_button'), poll_confirm_participation_path(@poll), method: :post, remote: true, class: 'button success' %>
+            </div>
+          </div>
         </div>
       </div>
     </div>

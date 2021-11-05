@@ -15,12 +15,16 @@ de:
       reply_form:
         leave_comment: Schreiben Sie eine Antwort
       restricted:
-        debate_phase_expired: Die Diskussionsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
         geo_limitation: 'Dieses projekt ist auf die folgende Gebiete beschränkt: %{geozones}'
         not_verified: Bitte %{verify_account}, um teilnehmen zu können
         other: Die Kommentarfunktion ist nicht verfügbar
-        poll_phase_expired: Die Abstimmungsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
+        debate_phase_expired: Die Diskussionsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
         proposal_phase_expired: Die Vorschlagsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
+        poll_phase_expired: Die Abstimmungsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
+        debate_phase_not_active: Die Diskussionsphase ist nicht aktiv
+        proposal_phase_not_active: Die Vorschlagsphase ist nich aktiv
+        projekt_not_active: Das Projekt ist nicht aktiv
+
     devise_views:
       users:
         registrations:

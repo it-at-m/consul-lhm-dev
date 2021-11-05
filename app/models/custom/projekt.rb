@@ -52,6 +52,18 @@ class Projekt < ApplicationRecord
                                            joins('INNER JOIN projekt_settings b ON projekts.id = b.projekt_id').
                                            where("a.key": "projekt_feature.main.activate", "a.value": "active", "b.key": "projekt_feature.general.show_in_navigation", "b.value": "active").distinct }
 
+
+  def current?(timestamp = Date.current.beginning_of_day)
+    ( total_duration_start.nil? || total_duration_start <= timestamp ) &&
+      ( total_duration_end.nil? || timestamp <= total_duration_end ) &&
+      ( projekt_settings.find_by(key: 'projekt_feature.main.activate').value == 'active' )
+  end
+
+  def comments_allowed?(current_user)
+    current_user.level_two_or_three_verified? &&
+      current?
+  end
+
   def level(counter = 1)
     return counter if self.parent.blank?
     self.parent.level(counter+1)

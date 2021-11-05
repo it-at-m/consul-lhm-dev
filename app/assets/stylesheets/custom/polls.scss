@@ -97,11 +97,12 @@ td.answers-column  {
 
 .answer-counted {
   color: #92ba48;
-  display: inline-block;
+  display: block;
   animation-name: fadeOut;
-  animation-duration: 2s;
+  animation-duration: 3s;
   animation-delay: 1s;
   animation-fill-mode: forwards;
+  height: 24px;
 }
 
 
@@ -228,4 +229,24 @@ td.answers-column  {
 .poll.with-image .image-container img {
   height: auto;
   max-width: 100%;
+}
+
+
+.multiple-answers-hint {
+  display: block;
+  margin-top: 0.75rem;
+}
+
+
+#confirm-poll-participation-outer-wrapper {
+  padding: 0 25px;
+}
+
+.confirm-poll-participation-inner-wrapper {
+  width: 85%;
+}
+
+#confirm-poll-participation {
+  width: 250px;
+  margin: 0 auto;
 }

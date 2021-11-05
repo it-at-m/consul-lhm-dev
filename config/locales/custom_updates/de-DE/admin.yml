@@ -20,6 +20,7 @@ de:
         settings:
           show_open_answer_with_username: Offene Antworten mit Nutzer:innen-Name anzeigen
           show_open_answer_without_username: Offene Antworten anonym anzeigen
+          show_summary_instead_of_questions: Zusammenfassung statt Liste aller Fragen in der Abstimmungsübersicht anzeigen
       progress_bars:
         index:
           progress_bar: Fortschrittsbalken
@@ -83,8 +84,6 @@ de:
           design:
             icon: Icon
             submit_button: Submit
-
-
         edit_projekt: Editieren
         index:
           add_cards: Kacheln erstellen/bearbeiten

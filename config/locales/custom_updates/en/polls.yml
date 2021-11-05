@@ -18,3 +18,8 @@ en:
       show:
         info_menu: Poll
         results_menu: Intermediate results for admins
+        vote_counted: Your vote was counted!
+        vote_uncounted: Your vote was withdrawn
+        confirm_participation_button: Confirm my vote
+        confirm_participation_notice: You have successfully participated in the poll.
+        cant_answer_not_started_yet: This poll runs from %{start_date} till %{end_date}
