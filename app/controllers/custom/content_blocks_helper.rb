@@ -10,6 +10,6 @@ module ContentBlocksHelper
     if edit_link
       res << edit_link ? "<br>#{edit_link}" : ""
     end
-    raw res
+    AdminWYSIWYGSanitizer.new.sanitize(res)
   end
 end

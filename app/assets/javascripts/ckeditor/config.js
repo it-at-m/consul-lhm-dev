@@ -11,9 +11,10 @@ CKEDITOR.editorConfig = function( config )
   config.filebrowserImageUploadUrl = "/ckeditor/pictures?";
   config.filebrowserUploadMethod = "form";
   CKEDITOR.dtd.$removeEmpty.span = 0;
+  CKEDITOR.dtd.$removeEmpty.i = 0;
 
   config.allowedContent = true;
-  config.format_tags = "p;h1;h2;h3;h4;h5;h6";
+  config.format_tags = "p;h2;h3;h4;h5;h6";
 
   config.stylesSet = 'columns';
   config.enterMode = CKEDITOR.ENTER_BR;
