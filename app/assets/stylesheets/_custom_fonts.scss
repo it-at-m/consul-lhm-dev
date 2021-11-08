@@ -1,0 +1,22 @@
+$body-font-family: 'sourcesanspro-regular-webfont', 'sourcesanspro-bold-webfont', 'PT_Serif_Web-Regular', sans-serif !important;
+$header-font-family: 'sourcesanspro-regular-webfont', 'sourcesanspro-bold-webfont', 'PT_Serif_Web-Regular', sans-serif !important;
+$base-font-size:      16px;
+
+// Regular 
+@font-face {
+  font-family: "sourcesanspro-regular-webfont";
+  src: font-url("sourcesanspro-regular-webfont.ttf") format("ttf"), font-url("custom/DMSans-Regular.ttf") format("ttf");
+  font-weight: 100;
+  font-style: normal; }
+// Bold 
+@font-face {
+  font-family: "sourcesanspro-bold-webfont";
+  src: font-url("sourcesanspro-bold-webfont.ttf") format("ttf"), font-url("custom/DMSans-Bold.ttf") format("ttf");
+  font-weight: 100;
+  font-style: bold; }
+// Fallback
+@font-face {
+  font-family: "PT_Serif_Web-Regular";
+  src: font-url("custom/PT_Serif_Web-Regular.ttf") format("ttf"), font-url("custom/PT_Serif_Web-Regular.ttf") format("ttf");
+  font-weight: 100;
+  font-style: normal; }

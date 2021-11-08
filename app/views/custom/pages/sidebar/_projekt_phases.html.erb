@@ -1,9 +1,9 @@
-<div class="sidebar-divider"></div>
+<div class="sidebar-divider hide-for-small-only"></div>
 
-<h2 class="sidebar-title"><%= t("custom.projekt.page.sidebar.phases.title") %></h2>
+<h2 class="sidebar-title hide-for-small-only"><%= t("custom.projekt.page.sidebar.phases.title") %></h2>
 
 <% if projekt.debate_phase.present? && ( projekt_feature?(projekt, "general.show_not_active_phases_in_projekts_page_sidebar") || projekt_phase_active?(projekt, 'debate_phase') )  %>
-  <div class='projekt-phase debate-phase'>
+  <div class='projekt-phase debate-phase hide-for-small-only'>
 
     <strong><%= t("custom.projekt.page.sidebar.phases.debate_phase") %></strong>
     <br>
@@ -38,7 +38,7 @@
 <% end %>
 
 <% if projekt.proposal_phase.present? && ( projekt_feature?(projekt, "general.show_not_active_phases_in_projekts_page_sidebar") || projekt_phase_active?(projekt, 'proposal_phase') )  %>
-  <div class='projekt-phase proposals-phase'>
+  <div class='projekt-phase proposals-phase hide-for-small-only'>
 
     <strong><%= t("custom.projekt.page.sidebar.phases.proposal_phase") %></strong>
     <br>
@@ -73,7 +73,7 @@
 <% end %>
 
 <% if projekt_feature?(projekt, "general.show_not_active_phases_in_projekts_page_sidebar") || related_polls(projekt).count > 0 %>
-  <div class='projekt-phase voting-phase'>
+  <div class='projekt-phase voting-phase hide-for-small-only'>
 
     <strong><%= t("custom.projekt.page.sidebar.phases.voting_phase") %></strong>
     <br>

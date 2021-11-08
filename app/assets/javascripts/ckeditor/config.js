@@ -10,6 +10,7 @@ CKEDITOR.editorConfig = function( config )
   config.filebrowserImageBrowseUrl = "/ckeditor/pictures";
   config.filebrowserImageUploadUrl = "/ckeditor/pictures?";
   config.filebrowserUploadMethod = "form";
+  CKEDITOR.dtd.$removeEmpty.span = 0;
 
   config.allowedContent = true;
   config.format_tags = "p;h1;h2;h3;h4;h5;h6";
