@@ -1,7 +1,12 @@
 .custom-page-banner {
-  margin-top: -25px;
-  margin-bottom: 25px;
-  height: 250px;
+  display: none;
+
+  @media screen and (min-width: 40em) {
+    display: block;
+    margin-top: -25px;
+    margin-bottom: 25px;
+    height: 250px;
+  }
 }
 
 // Privacy
