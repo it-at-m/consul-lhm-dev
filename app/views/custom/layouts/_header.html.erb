@@ -16,10 +16,19 @@
           <span class="menu-icon dark" data-toggle></span>
         </span>
 
-        <div class="top-bar-title show-for-medium">
-          <%= link_to 'https://www.muenchen.de/rathaus/' do %>
-            <%= image_tag(image_path_for("logo_header.png"), class: "", alt: t("layouts.header.logo")) %>
+        <div class='header-right-group'>
+          <% unless current_user %>
+            <div class='account-buttons show-for-large'>
+              <%= link_to t('devise_views.menu.login_items.login'), new_user_session_path, class: 'sign-in-button', role: 'button' %>
+              <%= link_to t('devise_views.menu.login_items.signup') , new_user_registration_path, class: 'sign-up-button', role: 'button'  %>
+            </div>
           <% end %>
+
+          <div class="top-bar-title show-for-medium">
+            <%= link_to 'https://www.muenchen.de/rathaus/' do %>
+              <%= image_tag(image_path_for("logo_header.png"), class: "", alt: t("layouts.header.logo")) %>
+            <% end %>
+          </div>
         </div>
 
         <div class="top-bar-title show-for-small-only">

@@ -3,7 +3,7 @@ require_dependency Rails.root.join("app", "controllers", "application_controller
 
 class ApplicationController < ActionController::Base
 
-  before_action :set_active_and_archived_projekts, :set_default_social_media_images
+  before_action :set_top_level_active_and_archived_projekts_for_menu, :set_default_social_media_images
 
   private
 
@@ -15,9 +15,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def set_active_and_archived_projekts
-    @active_projekts = Projekt.top_level_active_top_menu
-    @archived_projekts = Projekt.top_level_archived
+  def set_top_level_active_and_archived_projekts_for_menu
+    @top_level_active_projekts_for_menu = Projekt.top_level.active.visible_in_menu
+    @top_level_archived_projekts_for_menu = Projekt.top_level.archived.visible_in_menu
   end
 
   def set_default_social_media_images
@@ -26,5 +26,13 @@ class ApplicationController < ActionController::Base
     @social_media_icon_path = social_media_icon_path.include?('missing') ? nil : social_media_icon_path
     social_media_icon_twitter_path = SiteCustomization::Image.all.find_by(name: 'social_media_icon_twitter').image.url.split('?')[0]
     @social_media_icon_twitter_path = social_media_icon_twitter_path.include?('missing') ? nil : social_media_icon_twitter_path
+  end
+
+  def set_deficiency_report_votes(deficiency_reports)
+    @deficiency_report_votes = current_user ? current_user.deficiency_report_votes(deficiency_reports) : {}
+  end
+
+  def set_projekts_for_selector
+    @projekts = Projekt.top_level
   end
 end

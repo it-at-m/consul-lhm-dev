@@ -1,0 +1,149 @@
+<%= content_for :body_class, "" %>
+<% provide :title do %><%= @deficiency_report.title %><% end %>
+<% content_for :meta_description do %><%= @deficiency_report.summary %><% end %>
+<% provide :social_media_meta_tags do %>
+  <%= render "shared/social_media_meta_tags",
+              social_url: deficiency_report_url(@deficiency_report),
+              social_title: @deficiency_report.title,
+              social_description: @deficiency_report.summary,
+              twitter_image_url: (@deficiency_report.image.present? ? @deficiency_report.image_url(:thumb) : nil),
+              og_image_url: (@deficiency_report.image.present? ? @deficiency_report.image_url(:thumb) : nil) %>
+<% end %>
+<% content_for :canonical do %>
+  <%= render "shared/canonical", href: deficiency_report_url(@deficiency_report) %>
+<% end %>
+
+<main>
+  <div class="deficiency-report-show">
+    <div id="<%= dom_id(@deficiency_report) %>" class="row">
+      <div class="small-12 medium-9 column deficinecy-report-show-main-column">
+        <% cache [locale_and_user_status(@deficiency_report),
+                  @deficiency_report,
+                  @deficiency_report.image,
+                  @deficiency_report.author,
+                  @deficiency_report.category,
+                  @deficiency_report.officer,
+                  @deficiency_report.status,
+                  @deficiency_report_votes ] do %>
+          <%= back_link_to deficiency_reports_path %>
+
+          <h1><%= @deficiency_report.title %></h1>
+
+          <%= render "deficiency_reports/info", deficiency_report: @deficiency_report %>
+
+
+          <% if @deficiency_report.can_be_published? %>
+            <div class="deficiency-report-official-answer">
+              <h3><%= t('custom.deficiency_reports.show.official_answer') %></h3>
+              <%= @deficiency_report.official_answer %>
+            </div>
+          <% end %>
+        <% end %>
+
+        <% if show_official_reply_form?(@deficiency_report) %>
+          <%= render "shared/globalize_locales", resource: @deficiency_report %>
+          <%= translatable_form_for @deficiency_report, url: update_official_answer_deficiency_report_path do |f| %>
+            <%= f.translatable_fields do |translations_form| %>
+              <div class="small-12 column" >
+                <%= translations_form.label :official_answer, t('custom.deficiency_reports.show.official_answer') %>
+                <%= translations_form.text_field :official_answer, label: false %>
+              </div>
+
+              <div class="actions small-12 column">
+                <%= f.submit(class: "button", value: t('custom.deficiency_reports.show.submit_official_answer_button')) %>
+              </div>
+            <% end %>
+          <% end %>
+
+          <% if shall_be_approved?(@deficiency_report) %>
+            <%= button_to t('custom.deficiency_reports.show.approve_official_answer'), approve_official_answer_deficiency_report_path, class: 'button success approve-defficiciency-report-button', method: :patch %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <aside class="small-12 medium-3 column">
+        <% if @deficiency_report.can_be_deleted_by?(current_user)  %>
+          <div class="show-actions-menu">
+            <%= link_to deficiency_report_path(@deficiency_report),
+                        class: "button hollow expanded",
+                        method: :delete do %>
+              <i class="fas fa-trash-alt"></i>
+              <%= t("custom.deficiency_reports.show.sidebar.delete") %>
+            <% end %>
+          </div>
+        <% end %>
+
+        <% if deficiency_reports_feature?('allow_voting') %>
+          <div class="sidebar-divider"></div>
+          <h2><%= t("custom.deficiency_reports.show.sidebar.vote") %></h2>
+          <div id="<%= dom_id(@deficiency_report) %>_votes">
+            <%= render "deficiency_reports/votes", deficiency_report: @deficiency_report %>
+          </div>
+        <% end %>
+
+        <div class="sidebar-divider"></div>
+        <h2><%= t("custom.deficiency_reports.show.sidebar.status") %></h2>
+        <%= render "deficiency_reports/status", deficiency_report: @deficiency_report %>
+
+        <% if @deficiency_report.updateable_by_user?(current_user) %>
+          <%= form_for @deficiency_report, url: update_status_deficiency_report_path do |f| %>
+            <%= f.select :deficiency_report_status_id, DeficiencyReport::Status.all.collect{ |df| [df.title, df.id] }, { label: false  }, {onchange: "this.form.submit();" } %>
+          <% end %>
+        <% end %>
+
+        <div class="sidebar-divider"></div>
+        <h2><%= t("custom.deficiency_reports.show.sidebar.category") %></h2>
+        <%= render "deficiency_reports/category", deficiency_report: @deficiency_report %>
+
+        <% if @deficiency_report.updateable_by_user?(current_user) %>
+          <%= form_for @deficiency_report, url: update_category_deficiency_report_path do |f| %>
+            <%= f.select :deficiency_report_category_id, DeficiencyReport::Category.all.collect{ |df| [df.name, df.id] }, { label: false }, { onchange: "this.form.submit();" } %>
+          <% end %>
+        <% end %>
+
+        <% if @deficiency_report.officer.present? || (current_user && current_user.administrator?)  %>
+          <div class="sidebar-divider"></div>
+          <h2><%= t("custom.deficiency_reports.show.sidebar.officer") %></h2>
+          <% if @deficiency_report.officer.present? %>
+            <div class="deficiency-report-officer">
+              <%= @deficiency_report.officer.name %>
+            </div>
+          <% end %>
+        <% end %>
+
+        <% if current_user && current_user.administrator?  %>
+          <%= form_for @deficiency_report, url: update_officer_deficiency_report_path do |f| %>
+            <%= f.select :deficiency_report_officer_id, DeficiencyReport::Officer.all.collect{ |df| [df.name, df.id] }, { label: false, prompt: t('custom.deficiency_reports.show.sidebar.select_officer') }, { onchange: "this.form.submit();" } %>
+          <% end %>
+        <% end %>
+
+        <%= render "shared/social_share",
+          share_title: t("custom.deficiency_reports.show.sidebar.social_share"),
+          title: @deficiency_report.title,
+          url: deficiency_report_url(@deficiency_report),
+          description: @deficiency_report.title,
+          mobile: @deficiency_report.title
+        %>
+      </aside>
+
+    </div>
+  </div>
+
+  <% if deficiency_reports_feature?('enable_comments') %>
+    <div class="additional-content">
+      <div class="filter-subnav">
+        <div class="row">
+          <div class="small-12 column">
+            <%= render "deficiency_reports/filter_subnav" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabs-content" data-tabs-content="deficiency_reports_tabs">
+      <div class="tabs-panel is-active" id="tab-comments">
+        <%= render "deficiency_reports/comments" %>
+      </div>
+    </div>
+  <% end %>
+</main>

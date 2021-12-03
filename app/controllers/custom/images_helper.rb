@@ -24,5 +24,8 @@ module ImagesHelper
                          nested_document: true
                        }
   end
-end
 
+  def show_image_thumbnail?(resource)
+    resource.image.present? && !resource.image.concealed?
+  end
+end

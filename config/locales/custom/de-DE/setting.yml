@@ -25,6 +25,8 @@ de:
           extended_editor_for_users_description: Aktivieren Sie den erweiterten Editor für Inhalte, die im Frontend von Nutzern erstellt werden
           language_switcher_in_menu: Sprachumschalter in Navigation anbieten
           language_switcher_in_menu_description: Aktivieren Sie den Umschalter für weitere Sprachen in der Navigationsleiste
+          links_to_create_resources_in_menu: Button "+ Beitrag erstellen" in Navigation anzeigen
+          links_to_create_resources_in_menu_description: Zeigt den Button "+ Beitrag erstellen" in der Hauptnavigation an
         gdpr:
           gdpr_conformity: DSGVO-konforme Voreinstellungen
           gdpr_conformity_description: "Aktivieren Sie die DSGVO-konforme Voreinstellungen, um \"privacy by design\" zu gewähren"
@@ -113,6 +115,8 @@ de:
         general:
           show_in_navigation: Projekt in Navigation anzeigen
           show_in_navigation_description: Zeigt das Projekt in der Top-Navigation der Webseite an (nur für Top-Level-Projekte)
+          hide_additional_info_in_projekt_selector: Zusätzliche Projektinformationen im Projekt-Selektor ausblenden
+          hide_additional_info_in_projekt_selector_description: Verbirgt die zusätzlichen Projektinformationen wie Gebiet, Dauer und Partizipationsberechtigung im Projekt-Selektor
           show_not_active_phases_in_projekts_page_sidebar: Nicht aktive Teilnahmephasen verbergen
           show_not_active_phases_in_projekts_page_sidebar_description: Verbirgt die Teilnahmephasen in der rechten Seitenleiste der Projektseite und in der Projektauswahl
           show_map: Karte einblenden
@@ -139,6 +143,18 @@ de:
           show_milestones_in_projekt_footer_description: Aktiviert die Meilensteinfunktion in der Fußzeile eines Projekts
           show_newsfeed_in_projekt_footer: News-Feed
           show_newsfeed_in_projekt_footer_description: Aktiviert den News-Feed in der Fußzeile eines Projekts
+
+      deficiency_reports:
+        show_in_main_menu: Mängelmelder in Navigation anzeigen
+        show_in_main_menu_description: Zeigt den Mängelmelder in der Hauptnavigation an
+        admins_must_assign_officer: Admins müssen Sachbearbeiter*in zuweisen
+        admins_must_assign_officer_description: Administratoren weisen Mangel an Sachbearbeiter*in zu
+        admins_must_approved_officer_answer: Admins müssen Antwort der Sachbearbeiter*innen freigeben
+        admins_must_approved_officer_answer_description: Administratoren geben die Antwort der Sachbearbeiter*in vor Veröffentlichung frei
+        allow_voting: Nutzer*innen Bewertung pro Mangel
+        allow_voting_description: Aktiviert die Nutzer*innen-Bewertung für den Mängelmelder
+        enable_comments: Kommentarfunktion
+        enable_comments_description: Nutzer*innen können unterhalb eines Mangels kommentieren
 
       projekt_newsfeed:
         id: Newsfeed ID 

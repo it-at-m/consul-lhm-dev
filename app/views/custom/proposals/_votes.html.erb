@@ -1,18 +1,14 @@
 <% proposal_phase = proposal.projekt.present? ? proposal.projekt.proposal_phase : nil %>
 
 <div class="supports text-center">
-  <%= render "proposals/supports", proposal: proposal %>
 
   <div class="in-favor">
     <% if user_signed_in? && proposal_phase && proposal_phase.expired? %>
       <div class="supported callout warning">
-          <%= sanitize(t("custom.votes.phase_expired")) %>
+          <%= sanitize(t("custom.votes.proposal_phase_expired")) %>
       </div>
 
     <% elsif voted_for?(@proposal_votes, proposal) %>
-      <div class="supported callout success">
-        <%= t("proposals.proposal.already_supported") %>
-      </div>
       <% if withdraw_proposal_support_on? %>
         <%= link_to unvote_proposal_url(proposal),
             class: "button button-support small expanded",
@@ -25,7 +21,7 @@
       <%= link_to vote_url,
           class: "button button-support small expanded",
           title: t("proposals.proposal.support_title"), method: "post", remote: true do %>
-        <%= t("proposals.proposal.support") %>
+        <%= t("custom.proposals.proposal.support") %>
       <% end %>
 
     <% else %>
@@ -64,6 +60,8 @@
       </div>
     <% end %>
   <% end %>
+
+  <%= render "proposals/supports", proposal: proposal %>
 
   <% if voted_for?(@proposal_votes, proposal) && setting["twitter_handle"] %>
     <div class="share-supported">

@@ -4,8 +4,9 @@ class DebatesController < ApplicationController
   include ImageAttributes
   include ProjektControllerHelper
 
-  before_action :load_categories, only: [:index, :new, :create, :edit, :map, :summary]
+  before_action :load_categories, only: [:index, :create, :edit, :map, :summary]
   before_action :process_tags, only: [:create, :update]
+  before_action :set_projekts_for_selector, only: [:new, :edit, :create, :update]
 
   def index_customization
     @filtered_goals = params[:sdg_goals].present? ? params[:sdg_goals].split(',').map{ |code| code.to_i } : nil
@@ -27,6 +28,8 @@ class DebatesController < ApplicationController
 
     @featured_debates = @debates.featured
 
+    remove_where_projekt_not_active
+
     unless params[:search].present?
       take_only_by_tag_names
       take_by_projekts
@@ -37,8 +40,8 @@ class DebatesController < ApplicationController
 
     @selected_tags = all_selected_tags
 
-    @top_level_active_projekts = Projekt.top_level_active.select{ |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.has_active_phase?('debates') || p.debates.any? } }
-    @top_level_archived_projekts = Projekt.top_level_archived.select{ |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.has_active_phase?('debates') || p.debates.any? } }
+    @top_level_active_projekts = Projekt.top_level.active.selectable_in_sidebar_active('debates')
+    @top_level_archived_projekts = Projekt.top_level.archived.selectable_in_sidebar_archived('debates')
   end
 
   def show
@@ -59,6 +62,11 @@ class DebatesController < ApplicationController
   end
 
   private
+
+    def remove_where_projekt_not_active
+      active_projekts_ids = Projekt.all.joins(:projekt_settings).where(projekt_settings: { key: 'projekt_feature.main.activate', value: 'active' }).pluck(:id)
+      @resources = @resources.joins(:projekt).where(projekts: { id: active_projekts_ids })
+    end
 
   def debate_params
     attributes = [:tag_list, :terms_of_service, :projekt_id, :related_sdg_list,

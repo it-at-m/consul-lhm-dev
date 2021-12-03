@@ -7,8 +7,10 @@ class Admin::ProposalsController < Admin::BaseController
   has_orders %w[created_at]
 
   before_action :load_proposal, except: :index
+  before_action :set_projekts_for_selector, only: [:update, :show]
 
   def show
+     @affiliated_geozones = (params[:affiliated_geozones] || '').split(',').map(&:to_i)
   end
 
   def update
@@ -22,6 +24,11 @@ class Admin::ProposalsController < Admin::BaseController
   def toggle_selection
     @proposal.toggle :selected
     @proposal.save!
+  end
+
+  def toggle_image
+    @proposal.image.toggle!(:concealed)
+    redirect_to admin_proposal_path(@proposal)
   end
 
   private

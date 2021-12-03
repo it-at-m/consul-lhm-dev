@@ -16,7 +16,7 @@ body > header .locale.locale-custom,
     }
   
     .locale-switcher {
-      margin-top: 0.5rem;
+      margin-top: 0.75rem;
 
       &:focus {
         outline: 3px solid #ffbf47 !important
@@ -237,7 +237,7 @@ span.icon-no-notification {
   }
 
   .home-icon {
-    top: 9px;
+    top: 14px;
     right: 0;
     position: absolute;
   }
@@ -254,7 +254,11 @@ span.icon-no-notification {
     .projekt-name,
     li.nav-element a {
       color: $top-level-menu-item-text-color;
-      font-weight: bold;
+    }
+
+
+    .nav-flyout-block li.nav-element a {
+      color: $flyout-item-text-color;
     }
   }
 
@@ -292,13 +296,13 @@ span.icon-no-notification {
     }
 
     .admin-icon {
-      top: 9px;
+      top: 14px;
       right: 0;
       padding-bottom: 14px;
     }
 
     .account-icon {
-      top: 9px;
+      top: 14px;
       right: 0;
       padding-bottom: 14px;
     }
@@ -323,15 +327,16 @@ span.icon-no-notification {
   #navigation_bar .top-level-item > .flyout-item-name > a,
   #navigation_bar .top-level-item > .flyout-item-name,
   .subnavigation a {
-    line-height: 2.5rem;
+    line-height: 3rem;
+    font-weight: normal;
   }
 
   #navigation_bar .top-level-item {
-    height: 2.5rem;
+    height: 3rem;
   }
 
   #navigation_bar .account-admin-items li.nav-element.top-level-item > ul.nav-flyout-block {
-    top: 2.5rem;
+    top: 3rem;
   }
 
   // Styling flyout items
@@ -390,7 +395,6 @@ span.icon-no-notification {
       a,
       .projekt-name {
         color: $flyout-item-text-color;
-        font-weight: bold;
         line-height: $flyout-item-line-height;
       }
     }

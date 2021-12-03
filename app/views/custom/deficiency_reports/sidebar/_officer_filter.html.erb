@@ -1,0 +1,22 @@
+<div class="sidebar-divider"></div>
+
+<h2 class="sidebar-title projekt-tag-chip-projekt projekt-tag-chip-icon"><%= t("custom.deficiency_reports.index.sidebar.officer_filter.title") %></h2>
+
+
+<ul id='deficiency-report-statuses-sidebar-filter'>
+  <li <%= "class=label-selected" if @selected_officer.nil? %> >
+    <%= label_tag "dr_officer_all", class: '' do %>
+      <%= radio_button_tag(:dr_officer, :all, @selected_officer.nil?, { class: 'js-filter-by-deficiency-report-officer' } ) %>
+      <%= t('custom.deficiency_reports.index.sidebar.officer_filter.all_reports') %>
+      <span class="checkmark"></span>
+    <% end %>
+  </li>
+
+  <li <%= "class=label-selected" if @selected_officer == 'current_user' %> >
+    <%= label_tag "dr_officer_current_user", class: '' do %>
+      <%= radio_button_tag(:dr_officer, :current_user, @selected_officer == 'current_user', { class: 'js-filter-by-deficiency-report-officer' } ) %>
+      <%= t('custom.deficiency_reports.index.sidebar.officer_filter.only_current_user') %>
+      <span class="checkmark"></span>
+    <% end %>
+  </li>
+</ul>

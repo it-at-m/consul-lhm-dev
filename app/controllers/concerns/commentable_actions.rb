@@ -36,7 +36,6 @@ module CommentableActions
     @resource = resource_model.new
     set_geozone
     set_resource_instance
-    @projekts = Projekt.top_level
   end
 
   def suggest

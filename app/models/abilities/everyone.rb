@@ -34,6 +34,8 @@ module Abilities
 
       can [:read, :help], ::SDG::Goal
       can :read, ::SDG::Phase
+
+      can [:read, :json_data], DeficiencyReport
     end
   end
 end

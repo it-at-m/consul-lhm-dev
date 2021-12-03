@@ -10,6 +10,9 @@
 // 1. CONSUL variables
 // --------------------
 
+$body-margin: calc(50vw - #{$global-width / 2}) !default;
+$full-width-margin: unquote("#{$global-width / 2} - 50vw") !default;
+
 $base-font-size:      17px;
 $base-line:           rem-calc(26);
 $small-font-size:     rem-calc(14);
@@ -73,6 +76,7 @@ $outline-focus:     3px solid #a36d00;
 
 $input-height:      $line-height * 2;
 
+$font-icon-margin: rem-calc(4) !default;
 $icon-width: $line-height * 2;
 
 $off-screen-left: -1000rem;

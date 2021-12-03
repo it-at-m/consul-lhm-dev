@@ -1,0 +1,16 @@
+<main class="proposal-new">
+  <%= back_link_to proposals_path, t("proposals.index.section_header.title") %>
+  <%= header do %>
+    <% if feature?('help_page') %>
+      <%= link_to help_path(anchor: "proposals"), title: t("shared.target_blank"), target: "_blank" do %>
+        <%= t("proposals.new.more_info") %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <aside>
+    <%= helpers.render_custom_block 'proposals_creation_recommendations' %>
+  </aside>
+
+  <%= render Proposals::FormComponent.new(proposal, url: proposals_path) %>
+</main>

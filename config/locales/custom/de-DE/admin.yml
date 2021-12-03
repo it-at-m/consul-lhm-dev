@@ -1580,6 +1580,7 @@ de:
         link_text: Linktext
         link_url: URL des Links
       feeds:
+        polls: Abstimmungen
         proposals: Vorschläge
         debates: Diskussionen
         processes: Beteiligungsverfahren

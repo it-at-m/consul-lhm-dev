@@ -111,6 +111,13 @@ module Abilities
 
       can :manage, LocalCensusRecord
       can [:create, :read], LocalCensusRecords::Import
+
+
+      #custom
+      can [:search, :create, :index, :destroy], ::DeficiencyReport::Officer
+      can [:index, :create, :edit, :update, :destroy], ::DeficiencyReport::Category
+      can [:index, :create, :edit, :update, :destroy], ::DeficiencyReport::Status
+      can [:manage], DeficiencyReport
     end
   end
 end

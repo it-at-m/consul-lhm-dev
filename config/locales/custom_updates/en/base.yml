@@ -1,5 +1,9 @@
 en:
   custom:
+    shared:
+      form:
+        projekt_assignment: Project
+        star_message: All Fields marked with a (*) are required
     account:
       settings:
         email_digest: "Receive a summary of proposal notifications"
@@ -104,6 +108,13 @@ en:
       not_verified: You must %{verify_account} to be able to participate
       phase_expired: The phase is already completed. This proposal can no longer be supported.
     welcome:
+      current_polls: Current polls
+      user_entries: Latest submissions
+      all_debates: All debates
+      all_proposals: All proposals
+      start_entry: + Create a post
+      start_debate: Create a debate
+      start_proposal: Create a proposal
       active_projekt_cards:
         title: Active participation processes
       archived_projekt_cards:

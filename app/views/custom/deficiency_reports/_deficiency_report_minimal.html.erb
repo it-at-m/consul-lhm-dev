@@ -1,0 +1,14 @@
+<div id="<%= dom_id(deficiency_report) %>" class="deficiency-report minimal clear" data-type="deficiency_report">
+  <div class="panel">
+    <div class="row">
+      <div class="small-12 column">
+        <div class="deficiency_report-content">
+          <% cache [locale_and_user_status(deficiency_report),
+                    "index_minimal", deficiency_report, deficiency_report.author] do %>
+            <h3><%= link_to deficiency_report.title, deficiency_report_path(deficiency_report) %></h3>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

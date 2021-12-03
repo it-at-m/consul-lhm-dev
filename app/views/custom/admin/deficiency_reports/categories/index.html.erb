@@ -1,0 +1,32 @@
+<%= link_to t("custom.admin.deficiency_reports.categories.index.create"),
+              new_admin_deficiency_report_category_path, class: "button float-right" %>
+
+<h2 class="inline-block"><%= t("custom.admin.deficiency_reports.categories.index.title") %></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= t("custom.admin.deficiency_reports.categories.category.icon") %></th>
+      <th><%= t("custom.admin.deficiency_reports.categories.category.color") %></th>
+      <th><%= t("custom.admin.deficiency_reports.categories.category.name") %></th>
+      <th><%= t("admin.actions.actions") %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr id="<%= dom_id(category) %>">
+        <td><%= "<i class=\"fas fa-#{category.icon}\" style=\"color:#{category.color}\"></i>".html_safe if category.icon %></td>
+        <td><%= category.color %></td>
+        <td><%= category.name %></td>
+        <td>
+          <%= render Admin::TableActionsComponent.new(category,
+                                                      actions: [:edit, :destroy],
+                                                      edit_path: edit_admin_deficiency_report_category_path(category),
+                                                      destroy_path: admin_deficiency_report_category_path(category)
+                                                     ) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

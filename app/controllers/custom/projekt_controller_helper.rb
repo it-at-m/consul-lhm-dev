@@ -2,7 +2,7 @@ module ProjektControllerHelper
 
   def get_highest_unique_parent_projekt_id(selected_projekts_ids)
     selected_parent_projekt_id = nil
-    top_level_active_projekt_ids = Projekt.top_level_active.ids
+    top_level_active_projekt_ids = Projekt.top_level.active.ids
     selected_projekts_ids = selected_projekts_ids.select{ |id| top_level_active_projekt_ids.include? Projekt.find_by(id: id).top_parent.id }
     return nil if selected_projekts_ids.empty?
 

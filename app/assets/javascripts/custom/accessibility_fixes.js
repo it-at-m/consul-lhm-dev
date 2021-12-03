@@ -34,7 +34,7 @@
       $('body').on('keyup', '.js-access-toggle-projekt-filter-checkbox', function(event) {
         if ( event.which === 32 || // space
              event.which === 13  ) { // enter
-          $(this).siblings('input.js-filter-projekt').trigger('click');
+          $(this).siblings('input').trigger('click');
         }
       })
 
@@ -48,48 +48,6 @@
           event.preventDefault();
         }
       })
-
-      $("body").on("keyup", ".js-select-projekt", function() {
-        var $label = $(this).closest('label')
-        var currentProjektId = $label.attr('data-projekt-id')
-        var $childGroup = $('div.projekt-group[data-parent=' + currentProjektId + ']')
-        var $currentProjektGroup = $label.closest('div.projekt-group')
-        var currentProjektGroupParentProjektId = $currentProjektGroup.attr('data-parent')
-        var $currentProjektGroupParentProjekt = $('label[data-projekt-id=' + currentProjektGroupParentProjektId + ']')
-
-        if ( event.which === 13 || event.which === 32 ) { // space or enter
-          App.Projekts.selectProjekt($label);
-        }
-
-        if ( event.which === 40 ) { // down arrow
-          $childGroup.hide()
-          $label.next('label').focus()
-          App.Projekts.highlightLabel($label.next('label'));
-        }
-
-        if ( event.which === 38 ) { // up arrow
-          $childGroup.hide()
-          $label.prev('label').focus()
-          App.Projekts.highlightLabel($label.prev('label'));
-        }
-
-        if ( event.which === 37 ) { // left arrow
-          if ( $childGroup.is(':visible') ) {
-            $childGroup.hide();
-          } else if ( $currentProjektGroupParentProjekt.is(':visible') ) {
-            $currentProjektGroupParentProjekt.focus();
-            $currentProjektGroup.hide();
-          }
-        }
-
-        if ( event.which === 39 && $label.hasClass('js-show-children-projekts') ) { // right arrow
-          if ( $childGroup.is(':visible') ) {
-            $childGroup.children('label').first().focus()
-          } else {
-            App.Projekts.showChildProjektGroupinSelector($label)
-          }
-        }
-      });
 
       $('body').on('keyup', '.js-icon-toggle-child-projekts', function(event) {
         event.preventDefault();
@@ -199,12 +157,7 @@
           }
         }
 
-
-
       })
-
-
-
 
     }
   };

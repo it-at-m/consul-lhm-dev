@@ -31,6 +31,10 @@
       width: $line-height * 1.5;
     }
 
+    &.deficiency-reports-link {
+      @include icon(box, solid);
+    }
+
     &.booths-link {
       @include icon(archive, solid);
     }

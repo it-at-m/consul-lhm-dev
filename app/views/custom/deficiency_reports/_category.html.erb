@@ -1,0 +1,6 @@
+<% if deficiency_report.category.present? %>
+  <div class="deficiency-report-category" >
+    <i class="fas fa-<%= "#{deficiency_report.category.icon}" %>"></i>
+    <%= deficiency_report.category.name%>
+  </div>
+<% end %>

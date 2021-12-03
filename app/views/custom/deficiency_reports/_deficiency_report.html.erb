@@ -1,0 +1,50 @@
+<% cache [locale_and_user_status, deficiency_report, deficiency_report.image, deficiency_report.author, deficiency_report.category, deficiency_report.officer, deficiency_report.status, params[:dr_categories], params[:dr_status], params[:dr_officer]] do %>
+  <div id="<%= dom_id(deficiency_report) %>" class='row collapse resource-n deficiency-report margin-bottom' data-equalizer='main' data-equalize-on="medium">
+
+    <div class='columns'>
+      <div class='column projekt-info show-for-small-only' style="background-color:<%= deficiency_report.category.color %>;color:<%= pick_text_color(deficiency_report.category.color) %>" >
+        <%= render partial: 'deficiency_reports/deficiency_report/projekt_bar', locals: { deficiency_report: deficiency_report } %>
+      </div>
+    </div>
+
+    <div class='columns small-12 medium-3 large-2 image-container show-for-small-only'>
+      <% if show_image_thumbnail?(deficiency_report) %>
+        <%= image_tag deficiency_report.image_url(:large), alt: deficiency_report.image.title.unicode_normalize %>
+      <% end %>
+    </div>
+
+    <div class="columns small-12 medium-3 large-2 image-container show-for-medium <%= 'image-placeholder' unless show_image_thumbnail?(deficiency_report) %>" data-equalizer-watch='main'>
+      <% if show_image_thumbnail?(deficiency_report)  %>
+        <%= image_tag deficiency_report.image_url(:thumb_wider), alt: deficiency_report.image.title.unicode_normalize %>
+      <% end %>
+    </div>
+
+    <div class='columns small-12 medium-9 large-10 details' data-equalizer-watch='main'>
+      <div class='column projekt-info show-for-medium' style="background-color:<%= deficiency_report.category.color %>;color:<%= pick_text_color(deficiency_report.category.color) %>" >
+        <%= render partial: 'deficiency_reports/deficiency_report/projekt_bar', locals: { deficiency_report: deficiency_report } %>
+      </div>
+
+      <div class='resource-info' data-equalizer='details'>
+        <div class='column small-12 medium-6 large-8 resource-details' data-equalizer-watch='details'>
+
+          <h4 class='resource-name'><%= link_to deficiency_report.title, deficiency_report %></h4>
+          <div class="resource-summary margin-bottom">
+            <%= wysiwyg(deficiency_report.summary) %>
+            <div class="truncate"></div>
+          </div>
+        </div>
+        <div class='column small-12 medium-6 large-4 resource-participate table' data-equalizer-watch='details'>
+          <div class='table-cell align-middle'>
+            <%= render "deficiency_reports/status", deficiency_report: deficiency_report %>
+
+            <% if deficiency_reports_feature?('allow_voting') %>
+              <div id="<%= dom_id(deficiency_report) %>_votes">
+                <%= render "deficiency_reports/votes", deficiency_report: deficiency_report %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

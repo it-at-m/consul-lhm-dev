@@ -1,0 +1,112 @@
+<%= translatable_form_for(proposal, url: url, html: { class: "proposal-form" }) do |f| %>
+  <%= render "shared/errors", resource: proposal %>
+
+  <fieldset class="required-fields">
+    <legend><%= t("custom.shared.form.projekt_assignment") %></legend>
+    <div class="margin-top">
+      <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: @proposal }  %>
+    </div>
+
+    <legend class='margin-top'><%= t("custom.proposals.form.required") %></legend>
+    <%= render "shared/globalize_locales", resource: proposal %>
+    <%= f.translatable_fields do |translations_form| %>
+      <div>
+        <%= translations_form.text_field :title,
+              maxlength: Proposal.title_max_length,
+              data: suggest_data(proposal),
+              autocomplete: "off" %>
+      </div>
+      <div class="js-suggest" data-locale="<%= translations_form.locale %>"></div>
+
+      <% if feature?(:allow_images) %>
+        <div class="images">
+          <%= render "images/nested_image", f: f %>
+        </div>
+      <% end %>
+
+      <div>
+        <%= translations_form.text_area :summary,
+                                        rows: 4, maxlength: 200,
+                                        hint: t("proposals.form.proposal_summary_note") %>
+      </div>
+
+      <div>
+        <%= translations_form.text_area :description,
+                                        maxlength: Proposal.description_max_length,
+                                        class: "html-area #{helpers.ck_editor_class(current_user)}" %>
+      </div>
+    <% end %>
+
+    <% if feature?(:map) %>
+      <div>
+        <%= render "map_locations/form_fields",
+                   form:     f,
+                   map_location: proposal.map_location || MapLocation.new,
+                   label:    t("proposals.form.map_location"),
+                   help:     t("proposals.form.map_location_instructions"),
+                   remove_marker_label: t("proposals.form.map_remove_marker"),
+                   parent_class: "proposal",
+                   i18n_namespace: "proposals" %>
+      </div>
+    <% end %>
+  </fieldset>
+
+  <%= f.invisible_captcha :subtitle %>
+
+  <fieldset>
+    <legend><%= t("shared.optional") %></legend>
+
+    <% if feature?(:allow_attached_documents) %>
+      <div class="documents">
+        <%= render "documents/nested_documents", f: f %>
+      </div>
+    <% end %>
+
+    <div>
+      <%= f.text_field :video_url, hint: t("proposals.form.proposal_video_url_note") %>
+    </div>
+
+    <div>
+
+      <%if extended_feature?("modulewide.enable_categories") && categories.any? %>
+        <div id="category_tags" class="tags">
+          <%= f.label :category_tag_list, t("proposals.form.tag_category_label") %>
+          <% categories.each do |tag| %>
+            <a class="js-add-tag-link"><%= tag.name %></a>
+          <% end %>
+        </div>
+        <br>
+      <%=f.hidden_field :tag_list_predefined, value: proposal.tags.reject{|t| !['category'].include?(t.kind)}.map(&:name).join(","), class: "js-tag-list list-tags predefined"%>
+      <%end%>
+
+      <%if extended_feature?("modulewide.enable_custom_tags") %>
+        <%= f.text_field :tag_list_custom, value: proposal.tag_list.to_s,
+                          label: t("custom.proposals.form.tags_custom"),
+                          placeholder: t("custom.proposals.form.tags_placeholder"),
+                          class: "js-tag-list tag-autocomplete",
+                          aria: { describedby: "tag-list-help-text" },
+                          data: { js_url: suggest_tags_path } %>
+      <% end %>
+    </div>
+
+    <div class='row'>
+      <%= render SDG::RelatedListSelectorComponent.new(f) %>
+    </div>
+  </fieldset>
+
+  <div class="actions">
+    <% if proposal.new_record? %>
+      <span class='star-message'><%= t('custom.shared.form.star_message')  %></span>
+
+      <div>
+        <%= f.check_box :terms_of_service,
+          title: t("form.accept_terms_title"),
+          label: t("form.accept_terms",
+                   policy: link_to(t("form.policy"), "/privacy", target: "blank"),
+                   conditions: link_to(t("form.conditions"), "/conditions", target: "blank")
+                  ) %>
+      </div>
+    <% end %>
+    <%= f.submit(class: "button", value: t("proposals.#{action_name}.form.submit_button")) %>
+  </div>
+<% end %>

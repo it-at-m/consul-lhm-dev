@@ -1,71 +1,74 @@
 <% poll_group.each do |poll| %>
-  <div class="poll with-image">
-    <% if !user_signed_in? %>
-      <div class="icon-poll-answer not-logged-in" title="<%= t("polls.index.not_logged_in") %>">
-        <span class="show-for-sr"><%= t("polls.index.not_logged_in") %></span>
+
+  <div class='row collapse resource-n poll-n' data-equalizer='main' data-equalize-on="medium">
+    <div class='columns'>
+      <div class='column projekt-info show-for-small-only' style="background-color:<%= poll.projekt.color %>;color:<%= pick_text_color(poll.projekt.color) %>;" >
+        <%= render partial: 'polls/poll/projekt_bar', locals: {poll: poll} %>
       </div>
-    <% elsif user_signed_in? %>
-      <% if current_user.unverified? %>
-        <div class="icon-poll-answer unverified" title="<%= t("polls.index.unverified") %>">
-          <span class="show-for-sr"><%= t("polls.index.unverified") %></span>
-        </div>
-      <% elsif cannot?(:answer, poll) %>
-        <div class="icon-poll-answer cant-answer" title="<%= t("polls.index.cant_answer") %>">
-          <span class="show-for-sr"><%= t("polls.index.cant_answer") %></span>
-        </div>
-      <% elsif !poll.votable_by?(current_user) %>
-        <div class="icon-poll-answer already-answer" title="<%= t("polls.index.already_answer") %>">
-          <span class="show-for-sr"><%= t("polls.index.already_answer") %></span>
-        </div>
+    </div>
+
+    <div class='columns small-12 medium-3 large-2 image-container show-for-small-only'>
+      <% if poll.image.present? %>
+        <%= image_tag poll.image_url(:large), alt: poll.image.title.unicode_normalize %>
       <% end %>
-    <% end %>
-    <div class="row" data-equalizer data-equalize-on="medium">
-      <div class="small-12 medium-3 column">
-        <div class="image-container" data-equalizer-watch>
-          <% if poll.image.present? %>
-            <%= image_tag poll.image_url(:large), alt: poll.image.title.unicode_normalize %>
-          <% end %>
-        </div>
+    </div>
+
+    <div class='columns small-12 medium-3 large-2 image-container show-for-medium' data-equalizer-watch='main'>
+      <% if poll.image.present? %>
+        <%= image_tag poll.image_url(:thumb_wider), alt: poll.image.title.unicode_normalize %>
+      <% end %>
+    </div>
+
+
+    <div class='columns small-12 medium-9 large-10 details' data-equalizer-watch='main'>
+      <div class='column projekt-info show-for-medium' style="background-color:<%= poll.projekt.color %>;color:<%= pick_text_color(poll.projekt.color) %>; border-right: 1px solid <%= poll.projekt.color %>" >
+        <%= render partial: 'polls/poll/projekt_bar', locals: {poll: poll} %>
       </div>
-      <div class="small-12 medium-6 column" data-equalizer-watch>
-        <div class="dates"></div>
-          <h4><%= link_to_poll poll.name, poll %></h4>
-          <%= poll_dates(poll) %>
-          <% if poll.projekt.present? && poll.projekt.page.published? %>
-            <br>
-            <% unless params[:controller] == "pages" %>
-              <%= link_to t("custom.projekt.back_to_projekt_overview"), poll.projekt.page.url, class: 'back' %>
-            <% end %>
-          <% end %>
 
+      <div class='resource-info' data-equalizer='details'>
 
-        <% if poll.show_summary_instead_of_questions? %>
-          <div class="margin-top margin-bottom">
-            <%= auto_link_already_sanitized_html simple_format(poll.summary) %>
+        <div class='column small-12 medium-6 large-8 resource-details' data-equalizer-watch='details'>
+
+          <h4 class='resource-name'><%= link_to_poll poll.name, poll %></h4>
+          <div class="resource-summary margin-bottom">
+
+						<% if poll.show_summary_instead_of_questions? %>
+							<div class="">
+								<%= auto_link_already_sanitized_html simple_format(poll.summary) %>
+							</div>
+						<% else %>
+							<ul class="">
+								<% poll.questions.joins(:translations).order('poll_question_translations.title').each do |question| %>
+									<li><%= question.title %></li>
+								<% end %>
+							</ul>
+						<% end %>
+
+            <div class="truncate"></div>
           </div>
-        <% else %>
-          <ul class="margin-top">
-            <% poll.questions.joins(:translations).order('poll_question_translations.title').each do |question| %>
-              <li><%= question.title %></li>
-            <% end %>
-          </ul>
-        <% end %>
+          <%= render "shared/tags", taggable: poll, limit: 5 %>
 
-
-
-        <%= render "shared/tags", taggable: poll, limit: 5 %>
-      </div>
-      <div class="small-12 medium-3 column table" data-equalizer-watch>
-        <div class="table-cell align-middle">
-          <%= link_to poll_path(id: poll.slug || poll.id), class: "button hollow expanded" do %>
-            <% if poll.expired? %>
-              <%= t("polls.index.participate_button_expired") %>
-            <% else %>
-              <%= t("polls.index.participate_button") %>
-            <% end %>
-          <% end %>
+        </div>
+        <div class='column small-12 medium-6 large-4 resource-participate table' data-equalizer-watch='details'>
+          <div class='table-cell align-middle'>
+            <div class='row'>
+              <div class="small-12 xlarge-10 small-centered column margin-top">
+                <div class='vote'>
+                  <%= link_to poll_path(id: poll.slug || poll.id), class: "button hollow expanded" do %>
+                    <%= t("custom.polls.poll.participate_button") %>
+                  <% end %>
+                  <% unless poll.expired? %>
+                    <div class="poll-dates-distance">
+                      <%= t("custom.polls.poll.days_left", count: (poll.ends_at.to_date - Date.today).to_i ) %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
 <% end %>

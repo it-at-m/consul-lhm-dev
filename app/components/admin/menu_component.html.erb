@@ -41,6 +41,17 @@
   </li>
 
   <li>
+    <a href="#" class="deficiency-reports-link"><%= t("custom.admin.menu.deficiency_reports_title") %></a>
+    <%= link_list(
+      deficiency_report_officers,
+      deficiency_report_categories,
+      deficiency_report_statuses,
+      deficiency_report_settings,
+      id: "deficiency_reports_menu", class: ("is-active" if deficiency_reports?)
+    ) %>
+  </li>
+
+  <li>
     <a href="#" class="booths-link"><%= t("admin.menu.title_booths") %></a>
     <%= link_list(
       officers_link,

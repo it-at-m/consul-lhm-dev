@@ -1,0 +1,28 @@
+<% if @categories.exists? %>
+  <div class="sidebar-divider"></div>
+
+  <h2 class="sidebar-title projekt-tag-chip-projekt projekt-tag-chip-icon"><%= t("custom.deficiency_reports.index.sidebar.categories.title") %></h2>
+
+  <ul id='deficiency-report-categories-sidebar-filter'>
+    <% @categories.each do |category| %>
+
+      <% category_selected = category.id.to_s.in?(@selected_categories_ids)  %>
+      <% label_class =  category_selected ? 'label-selected' : 'label_regular' %>
+      <% related_df_count = category.deficiency_reports.count %>
+
+      <li>
+        <%= label_tag dom_id(category), class: label_class do %>
+          <%= check_box_tag dom_id(category), category.id, category_selected, { class: 'js-filter-dr-category', tabindex: "-1" }  %>
+          <span class="checkmark focusable js-prevent-key-scroll js-access-toggle-projekt-filter-checkbox" tabindex="0"></span>
+          <i class="projekt-filter-icon fas fa-<%= category.icon || "circle" %>" style="color:<%= category.color || '#222222'  %>"></i>
+          <span aria-label="<%= t('custom.links.df_category_filter.category_name') %>" ><%= "#{category.name} (#{related_df_count})" %></span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+  <div class="sidebar-filter-group">
+    <%= button_tag t('custom.deficiency_reports.index.sidebar.categories.filter_button'), class: 'js-apply-projekts-filter sidebar-filter-button' %>
+    <%= button_tag '', class: 'js-reset-dr-category-filter sidebar-reset-filter-button' %>
+  </div>
+<% end %>

@@ -6,6 +6,7 @@ class ProposalsController
   include ProjektControllerHelper
 
   before_action :process_tags, only: [:create, :update]
+  before_action :set_projekts_for_selector, only: [:new, :edit, :create, :update]
 
   def index_customization
     @filtered_goals = params[:sdg_goals].present? ? params[:sdg_goals].split(',').map{ |code| code.to_i } : nil
@@ -31,6 +32,7 @@ class ProposalsController
     load_selected
     load_featured
     remove_archived_from_order_links
+    remove_where_projekt_not_active
 
     unless params[:search].present?
       take_only_by_tag_names
@@ -43,22 +45,22 @@ class ProposalsController
     @proposals_coordinates = all_proposal_map_locations(@resources)
     @selected_tags = all_selected_tags
 
-    @top_level_active_projekts = Projekt.top_level_active.select{ |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.has_active_phase?('proposals') || p.proposals.any? } }
-    @top_level_archived_projekts = Projekt.top_level_archived.select{ |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.has_active_phase?('proposals') || p.proposals.any? } }
+    @top_level_active_projekts = Projekt.top_level.active.selectable_in_sidebar_active('proposals')
+    @top_level_archived_projekts = Projekt.top_level.archived.selectable_in_sidebar_archived('proposals')
   end
 
   def new
     redirect_to proposals_path if proposal_limit_exceeded?(current_user)
+    redirect_to proposals_path if Projekt.top_level.selectable_in_selector('proposals', current_user).empty?
+
     @resource = resource_model.new
     set_geozone
     set_resource_instance
-    @projekts = Projekt.top_level
-
     @selected_projekt = Projekt.find(params[:projekt]) if params[:projekt]
   end
 
   def edit
-    @selected_projekt = @proposal.projekt
+    @selected_projekt = @proposal.projekt.id
   end
 
   def show
@@ -92,6 +94,11 @@ class ProposalsController
   end
 
   private
+
+    def remove_where_projekt_not_active
+      active_projekts_ids = Projekt.all.joins(:projekt_settings).where(projekt_settings: { key: 'projekt_feature.main.activate', value: 'active' }).pluck(:id)
+      @resources = @resources.joins(:projekt).where(projekts: { id: active_projekts_ids })
+    end
 
     def process_tags
       if params[:proposal][:tags]

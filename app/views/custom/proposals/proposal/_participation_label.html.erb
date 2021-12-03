@@ -1,0 +1,5 @@
+<% display_class = voted_for?(@proposal_votes, proposal) ? '' : 'hide' %>
+
+<div class="icon-poll-answer already-answer <%= display_class %>" title="<%= t("polls.index.already_answer") %>" data-voted-badge=<%= proposal.id %>>
+  <span class="show-for-sr"><%= t("polls.index.already_answer") %></span>
+</div>

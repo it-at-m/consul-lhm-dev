@@ -1,69 +1,47 @@
-<% cache [locale_and_user_status, debate, @debate_votes[debate.id], params[:tags], params[:projekts], params[:geozone_affiliation], params[:affiliated_geozones], params[:geozone_restriction], params[:restricted_geozones]] do %>
-  <div id="<%= dom_id(debate) %>" class="debate clear" data-type="debate">
-    <div class="panel">
-      <div class="row">
+<% cache [locale_and_user_status, debate, @debate_votes[debate.id], debate.projekt, debate.image, params[:tags], params[:projekts], params[:geozone_affiliation], params[:affiliated_geozones], params[:geozone_restriction], params[:restricted_geozones]] do %>
+  <div id="<%= dom_id(debate) %>" class='row collapse resource-n debate margin-bottom' data-equalizer='main' data-equalize-on="medium">
 
-        <% if debate.image.present? %>
-        <div class="small-12 medium-3 large-2 column text-center">
-          <%= image_tag debate.image_url(:thumb),
-            alt: debate.image.title.unicode_normalize %>
+    <div class='columns'>
+      <div class='column projekt-info show-for-small-only' style="background-color:<%= debate.projekt.color %>;color:<%= pick_text_color(debate.projekt.color) %>" >
+        <%= render partial: 'debates/debate/projekt_bar', locals: {debate: debate} %>
+      </div>
+    </div>
+
+    <div class='columns small-12 medium-3 large-2 image-container show-for-small-only'>
+      <% if show_image_thumbnail?(debate) %>
+        <%= image_tag debate.image_url(:large), alt: debate.image.title.unicode_normalize %>
+      <% end %>
+    </div>
+
+    <div class="columns small-12 medium-3 large-2 image-container show-for-medium <%= 'image-placeholder' unless show_image_thumbnail?(debate) %>" data-equalizer-watch='main'>
+      <% if show_image_thumbnail?(debate) %>
+        <%= image_tag debate.image_url(:thumb_wider), alt: debate.image.title.unicode_normalize %>
+      <% end %>
+    </div>
+
+    <div class='columns small-12 medium-9 large-10 details' data-equalizer-watch='main'>
+      <div class='column projekt-info show-for-medium' style="background-color:<%= debate.projekt.color %>;color:<%= pick_text_color(debate.projekt.color) %>" >
+        <%= render partial: 'debates/debate/projekt_bar', locals: {debate: debate} %>
+      </div>
+
+      <div class='resource-info' data-equalizer='details'>
+        <div class='column small-12 medium-6 large-8 resource-details' data-equalizer-watch='details'>
+
+          <h4 class='resource-name'><%= link_to debate.title, debate %></h4>
+          <div class="resource-summary margin-bottom">
+            <%= wysiwyg(debate.description) %>
+            <div class="truncate"></div>
+          </div>
+          <%= render "shared/tags", taggable: debate, limit: 5 %>
+
         </div>
-        <div class="small-12 medium-5 large-7 column">
-        <% else %>
-        <div class="small-12 medium-9 large-9 column">
-        <% end %>
-
-          <div class="debate-content">
-            <h3><%= link_to debate.title, debate %></h3>
-            <p class="debate-info">
-              <span class="icon-comments"></span>&nbsp;
-              <%= link_to t("debates.debate.comments", count: debate.comments_count), debate_path(debate, anchor: "comments") %>
-              <span class="bullet">&nbsp;&bull;&nbsp;</span>
-              <%= l debate.created_at.to_date %>
-
-              <% if debate.author.hidden? || debate.author.erased? %>
-                <span class="bullet">&nbsp;&bull;&nbsp;</span>
-                <span class="author">
-                  <%= t("debates.show.author_deleted") %>
-                </span>
-              <% else %>
-                <span class="bullet">&nbsp;&bull;&nbsp;</span>
-                <span class="author">
-                  <%= debate.author.name %>
-                </span>
-                <% if debate.author.display_official_position_badge? %>
-                  <span class="bullet">&nbsp;&bull;&nbsp;</span>
-                  <span class="label round level-<%= debate.author.official_level %>">
-                    <%= debate.author.official_position %>
-                  </span>
-                <% end %>
-              <% end %>
-
-              <% if debate.author.verified_organization? %>
-                <span class="bullet">&nbsp;&bull;&nbsp;</span>
-                <span class="label round is-association">
-                  <%= t("shared.collective") %>
-                </span>
-              <% end %>
-
-              <% if debate.projekt && debate.projekt.page.published? %>
-                  <br/>
-                  <span class='projekt-backlink'>&nbsp;
-                  </span>
-                  <%= link_to debate.projekt.page.title, debate.projekt.page.url %>
-              <% end %>
-            </p>
-            <div class="debate-description">
-              <%= wysiwyg(debate.description) %>
+        <div class='column small-12 medium-6 large-4 resource-participate table' data-equalizer-watch='details'>
+          <div class='table-cell align-middle'>
+            <div id="<%= dom_id(debate) %>_votes">
+              <%= render "debates/votes", debate: debate %>
             </div>
-            <%= render "shared/tags", taggable: debate, limit: 5 %>
           </div>
         </div>
-
-        <div id="<%= dom_id(debate) %>_votes" class="small-12 medium-3 large-3 column">
-            <%= render "debates/votes", debate: debate %>
-        </div>
-
       </div>
     </div>
   </div>

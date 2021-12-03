@@ -8,9 +8,16 @@ class Admin::DebatesController < Admin::BaseController
   has_orders %w[created_at]
 
   before_action :load_debate, except: :index
+  before_action :set_projekts_for_selector, only: [:update, :show]
 
 
   def show
+  end
+
+  def new
+    redirect_to debates_path if Projekt.top_level.selectable_in_selector('debates', current_user).empty?
+
+    super
   end
 
   def update
@@ -20,6 +27,12 @@ class Admin::DebatesController < Admin::BaseController
       render :show
     end
   end
+
+  def toggle_image
+    @debate.image.toggle!(:concealed)
+    redirect_to admin_debate_path(@debate)
+  end
+
 
   private
     def load_debate

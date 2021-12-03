@@ -1,0 +1,186 @@
+ul#deficiency-report-categories-sidebar-filter {
+	list-style-type: none;
+  margin-bottom: 0;
+  margin-left: 20px;
+
+  .checkmark {
+    position: absolute;
+    top: 5px;
+    left: -19px;
+    height: 14px;
+    width: 14px;
+    border: 1.5px solid #C6C6C6;
+    border-radius: 2px;
+  }
+
+  label {
+    position: relative;
+    cursor: pointer;
+    position: relative;
+    color: #878787;
+    margin-right: 2em;
+  }
+
+	input[type='checkbox'] {
+		position: absolute;
+		opacity: 0;
+		cursor: pointer;
+		height: 0;
+		width: 0;
+	}
+
+	input[type='checkbox']:checked ~ .checkmark {
+    background: #878787;
+    border: 1.5px solid #878787;
+  }
+
+	input[type='checkbox']:checked ~ .checkmark:before {
+    display: block;
+  }
+
+	.checkmark:before {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 4px;
+    top: 1px;
+    width: 4px;
+    height: 7px;
+    border: 1.5px solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+}
+
+ul#deficiency-report-statuses-sidebar-filter {
+
+  list-style-type: none;
+  margin-bottom: 0;
+
+  label {
+    cursor: pointer;
+    position: relative;
+    color: #878787;
+    margin-right: 2em;
+  }
+
+  li.label-selected label {
+    color: $brand;
+    font-weight: bold;
+  }
+
+  input[type='checkbox'],
+  input[type='radio'] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  .checkmark {
+    position: absolute;
+    left: -19px;
+    top: 0;
+  }
+
+  .checkmark::before {
+     content: "\f111";
+     font-family: 'Font Awesome 5 Free';
+     font-weight: normal;
+  }
+
+  input:checked ~ .checkmark::before {
+     content: "\f192";
+  }
+}
+
+
+.deficiency-report {
+  .deficiency-report-additional-info {
+
+    .votes {
+      border-left: none;
+    }
+  }
+
+  .deficiency-report-status {
+    font-size: 20px;
+    text-align: center;
+    padding: 0.75rem 0;
+
+    .fas {
+      display: block;
+      font-size: 36px;
+      margin-bottom: 7px;
+    }
+  }
+}
+
+.deficiency-report-show {
+
+  .deficinecy-report-show-main-column {
+    margin-bottom: 4rem;
+  }
+
+   form select {
+     background-color: white;  
+     height: 1.75rem;
+     border-radius: 3px;
+   }
+
+  .deficiency-report-status,
+  .deficiency-report-category,
+  .deficiency-report-officer {
+     margin-bottom: 0.5rem;
+  }
+
+  .deficiency-report-status,
+  .deficiency-report-category {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    margin-top: .75rem;
+
+    .fas {
+      display: block;
+      font-size: 36px;
+    }
+  }
+}
+
+.admin-deficiency-report-category-icons-selector,
+.admin-deficiency-report-status-icons-selector {
+  column-count: 10;
+
+  label > [type='radio'] {
+    margin-top: 1px;
+  }
+}
+
+.deficiency-report-official-answer {
+  margin-top: 3em;
+  border-top: 1px solid;
+  padding-top: 2em;
+  margin-bottom: 3em;
+}
+
+.approve-defficiciency-report-button {
+  margin-top: 1rem;
+}
+
+.deficiency-report-new {
+  @extend %public-form-header;
+
+  h1 {
+    @include has-fa-icon(box, solid, after);
+  }
+
+  aside {
+    margin-top: $line-height;
+  }
+
+  .recommendations li::before {
+    color: $debates;
+  }
+}

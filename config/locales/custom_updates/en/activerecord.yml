@@ -6,6 +6,10 @@ en:
           attributes:
             description:
               too_long: 'is too long'
+        projekt:
+          attributes:
+            color:
+              invalid: Please provide color in HEX format
     attributes:
       poll/answer:
         open_answer_text: Open Answer

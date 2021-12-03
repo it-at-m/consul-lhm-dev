@@ -1,0 +1,64 @@
+<div class="proposal-info">
+  <%= render "/shared/author_info", resource: @deficiency_report %>
+
+  <span class="bullet">&nbsp;&bull;&nbsp;</span>
+  <%= l @deficiency_report.created_at.to_date %>
+
+
+  <% if deficiency_reports_feature?('enable_comments') %>
+    <span class="bullet">&nbsp;&bull;&nbsp;</span>
+    <span class="icon-comments"></span>&nbsp;
+    <%= link_to t("proposals.show.comments", count: @deficiency_report.comments_count), "#comments" %>
+  <% end %>
+
+  <% if current_user %>
+    <span class="bullet">&nbsp;&bull;&nbsp;</span>
+    <span class="js-flag-actions">
+      <%= render "shared/flag_actions", flaggable: @deficiency_report %>
+    </span>
+  <% end %>
+
+</div>
+
+<%= render_image(@deficiency_report.image, :large, true) if @deficiency_report.image.present? %>
+
+<br>
+<p>
+	<%= t("proposals.show.code") %>
+	<strong><%= @deficiency_report.code %></strong>
+</p>
+
+
+<blockquote><%= @deficiency_report.summary %></blockquote>
+
+<% if @deficiency_report.video_url.present? %>
+  <div class="small-12 medium-7 small-centered">
+    <div class="flex-video">
+      <div id="js-embedded-video" data-video-code="<%= embedded_video_code(@deficiency_report) %>"></div>
+    </div>
+  </div>
+<% end %>
+
+<%= auto_link_already_sanitized_html wysiwyg(@deficiency_report.description) %>
+
+<% if feature?(:map) && map_location_available?(@deficiency_report.map_location) %>
+  <div class="margin">
+    <%= render_map(@deficiency_report.map_location, "deficiency_report", false, nil, MapLocation.where(deficiency_report_id: @deficiency_report.id).map(&:json_data)) %>
+  </div>
+<% end %>
+
+<% if @deficiency_report.video_url.present? %>
+  <div class="video-link">
+    <p>
+      <span class="icon-video"></span>&nbsp;
+      <strong><%= t("proposals.show.title_video_url") %></strong>
+    </p>
+    <%= sanitize_and_auto_link @deficiency_report.video_url %>
+  </div>
+<% end %>
+
+<% if feature?(:allow_attached_documents) %>
+  <%= render "documents/documents",
+              documents: @deficiency_report.documents,
+              max_documents_allowed: Proposal.max_documents_allowed %>
+<% end %>

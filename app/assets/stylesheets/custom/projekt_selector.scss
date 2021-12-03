@@ -1,0 +1,136 @@
+#projekt-selector-fields {
+  margin-bottom: 1em;
+
+  .projekt-selector {
+    margin-top: 1rem;
+    position: relative;
+    cursor: pointer;
+
+    &:not(:first-child) {
+      visibility: hidden;
+    }
+
+    &:after {
+      content: "\f0d7";
+      font-family: "Font Awesome 5 Free";
+      font-weight: bold;
+      position: absolute;
+      right: 7px;
+      top: 50%;
+      transform: translate(0, -50%);
+      font-size: 1.375rem;
+    }
+
+    &:nth-child(1) .projekt_group {
+      z-index: 3;
+    }
+
+    &:nth-child(2) .projekt_group {
+      z-index: 2;
+    }
+
+    &:nth-child(3) .projekt_group {
+      z-index: 1;
+    }
+  }
+
+  .projekt-selector > .projekt {
+     border-bottom: none;
+  }
+  
+  .spacer {
+    display: none;
+  }
+
+  .projekt_group {
+    position: absolute;
+    top: 70px;
+    border: 1px solid $dark;    
+    display: none;
+    width: 100%;
+    color: #0a0a0a;
+
+    &#group-for-0 {
+      display: block;
+    }
+  }
+
+  .selected-projekt,
+  .projekt {
+    min-height: 65px;
+		background-color: #DADADA;
+    border: 1px solid #D6DBDF;
+  }
+
+  .selected-projekt-placeholder {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    margin-left: 12px;
+    margin-right: 10%;
+    font-size: 1rem;
+  }
+
+  .projekt {
+    display: flex;
+    border-bottom: 1px solid $dark;
+    padding: 4px 0;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .projekt-icon {
+      margin: 2px 7px;
+      font-size: 0.9rem;
+      margin-left: 12px;
+    }
+
+    .projekt-details {
+
+      .projekt-phase-duration,
+      .projekt-phase-restriction {
+        font-size: 0.65rem;
+      }
+
+    }
+
+    .projekt-name {
+      font-size: 1rem;
+    }
+  }
+
+  .projekt.vertical-align {
+    .projekt-icon, .projekt-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .projekt-name {
+      padding-top: 2px;
+    }
+  }
+
+  @media screen and (min-width: 40em) {
+    display: flex;
+ 
+    .spacer {
+      display: block;
+      margin: 20px 20px;
+      visibility: hidden;
+    }
+
+    .projekt-selector, .spacer {
+      display: inline-block;
+    }
+
+    .projekt-selector {
+      margin-top: 0;
+      flex-grow: 1;
+      flex-basis: 0;
+    }
+  }
+
+}

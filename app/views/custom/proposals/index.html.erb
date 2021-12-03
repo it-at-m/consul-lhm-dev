@@ -54,7 +54,6 @@
   <% end %>
 
   <%tags = @selected_tags&.select{ |tag| tag.kind == 'category' } %>
-  <%can_create = @top_level_active_projekts.blank? %>
 
   <% if feature?(:map) %>
     <div class="map inline">
@@ -112,7 +111,9 @@
 
         <div class='row'>
           <div class='small-6 column small'>
-            <%= link_to t('proposals.index.section_header.help'), '#section_help' %>
+            <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
+              <%= link_to t('proposals.index.section_header.help'), '#section_help' %>
+            <% end %>
           </div>
 
           <div class='small-6 column small'>
@@ -132,7 +133,7 @@
             <%= t('custom.proposals.index.max_number_reached', max_number: Setting['extended_option.proposals.max_active_proposals_per_user']) %>
           </div>
         <% else %>
-          <% if @top_level_active_projekts.any? %>
+          <% if current_user.nil? || Projekt.top_level.selectable_in_selector(controller_name, current_user).any? %>
             <%= link_to t("proposals.index.start_proposal"), new_proposal_path(tags: tags.any? ? tags.map{|t| t.name} : nil, projekt: @selected_parent_projekt),
               class: "button expanded js-preselect-projekt" %>
           <% else %>
@@ -156,16 +157,11 @@
         <%= paginate @proposals %>
 
         <% unless @search_terms || @advanced_search_terms || @tag_filter %>
-          <div id="section_help" class="margin" data-magellan-target="section_help">
-            <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
+          <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
+            <div id="section_help" class="margin" data-magellan-target="section_help">
               <%=render_custom_block 'proposals_help' %>
-            <% else %>
-              <p class="lead">
-                <strong><%= t("proposals.index.section_footer.title") %></strong>
-              </p>
-              <p><%= t("proposals.index.section_footer.description") %></p>
-            <% end %>
-          </div>
+            </div>
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -177,7 +173,7 @@
             <%= t('custom.proposals.index.max_number_reached', max_number: Setting['extended_option.proposals.max_active_proposals_per_user']) %>
           </div>
         <% else %>
-          <% if @top_level_active_projekts.any? %>
+          <% if current_user.nil? || Projekt.top_level.selectable_in_selector(controller_name, current_user).any? %>
             <%= link_to t("proposals.index.start_proposal"), new_proposal_path(tags: tags.any? ? tags.map{|t| t.name} : nil, projekt: @selected_parent_projekt),
               class: "button expanded js-preselect-projekt" %>
           <% else %>

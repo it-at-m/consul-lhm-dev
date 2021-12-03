@@ -1,7 +1,7 @@
 namespace :admin do
   root to: "dashboard#index"
 
-  # custom routes
+  # custom projekt routes
   resources :projekts, only: [:index, :show, :create, :update, :destroy] do
     resources :projekt_settings, only: [:update] do
       member do
@@ -19,6 +19,17 @@ namespace :admin do
     end
     patch :update_map, to: "projekts#update_map"
   end
+
+  # custom deficiency reports routes
+  scope module: :deficiency_reports, path: :deficiency_reports, as: :deficiency_report do
+    resources :officers,    only: [:index, :create, :destroy] do
+      get :search, on: :collection
+    end
+    resources :categories,  only: %i[index new create edit update destroy]
+    resources :statuses,    only: %i[index new create edit update destroy]
+    resources :settings,    only: :index
+  end
+
 
   resources :organizations, only: :index do
     get :search, on: :collection

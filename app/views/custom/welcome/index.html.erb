@@ -12,13 +12,6 @@
 <% end %>
 
 <main>
-
-  <div class='row'>
-    <div class='official-logo-wrapper'>
-      <%= svg_tag "official_logo", class: 'official-logo' %>
-    </div>
-  </div>
-
   <%= render "header", header: @header %>
 
   <div class='row clear'>
@@ -28,16 +21,46 @@
   </div>
 
   <div class="row">
-    <div class="column medium-8 small-centered">
+    <div class="column medium-9 small-centered welcome-main custom-block">
       <div class=intro-text>
         <%=render_custom_block 'home_page_1' %>
       </div>
     </div>
   </div>
 
+  <% if @latest_polls.any? %>
+    <div class="row">
+      <div class="column medium-9 small-centered margin-bottom">
+        <h3 class='title card-title'><%= t('custom.welcome.current_polls') %></h3>
+        <%= render partial: "polls/poll_group", locals: { poll_group: @latest_polls } %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @latest_items.any? %>
+    <div class="row">
+      <div class="column medium-9 small-centered margin-top margin-bottom">
+        <h3 class='title card-title'><%= t('custom.welcome.user_entries') %></h3>
+        <%= render "latest_items" %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="column medium-9 small-centered">
+      <% if @cards.any? %>
+        <div class="row">
+          <div class="small-12 column">
+            <%= render partial: "cards", locals: { cards: @cards, section_title: t("welcome.cards.title") } %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
   <% if @active_projekt_cards.any? %>
     <div class="row">
-      <div class="column medium-8 small-centered">
+      <div class="column medium-9 small-centered">
         <%= render partial: "cards", locals: { cards: @active_projekt_cards, section_title: t("custom.welcome.active_projekt_cards.title")  } %>
       </div>
     </div>
@@ -45,41 +68,9 @@
 
   <% if @archived_projekt_cards.any? %>
     <div class="row">
-      <div class="column medium-8 small-centered">
+      <div class="column medium-9 small-centered">
         <%= render partial: "cards", locals: { cards: @archived_projekt_cards, section_title: t("custom.welcome.archived_projekt_cards.title")  } %>
       </div>
     </div>
-  <% end %>
-
-  <div class="row">
-    <div class="column medium-8 small-centered">
-      <% if @cards.any? %>
-        <div class="row">
-          <div class="small-12 column <%= "large-8" if feed_processes_enabled? %>">
-            <%= render partial: "cards", locals: { cards: @cards, section_title: t("welcome.cards.title") } %>
-          </div>
-        </div>
-      <% end %>
-
-      <% if feed_processes_enabled? %>
-        <div class="row">
-          <div class="small-12 large-4 column">
-            <%= render "processes" %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="column medium-8 small-centered">
-      <%= render "feeds" %>
-    </div>
-  </div>
-
-  <% if feature?("user.recommendations") && (@recommended_debates.present? || @recommended_proposals.present?) %>
-    <%= render "recommended",
-                recommended_debates: @recommended_debates,
-                recommended_proposals: @recommended_proposals %>
   <% end %>
 </main>

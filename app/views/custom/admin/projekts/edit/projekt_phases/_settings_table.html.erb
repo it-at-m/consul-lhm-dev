@@ -37,8 +37,7 @@
             <%= f.hidden_field :value, id: dom_id(@projekt, feature), value: (feature.enabled? ? "" : "active") %>
             <%= f.submit(t("admin.settings.index.features.#{feature.enabled? ? "disable" : "enable"}"),
                          class: "button expanded #{feature.enabled? ? "hollow alert" : "success"}", 
-                         data: { confirm: t("admin.actions.confirm") },
-                         disabled: disable_feature?(@projekt, feature) ) %>
+                         data: { confirm: t("admin.actions.confirm") } ) %>
           <% end %>
         </td>
       </tr>

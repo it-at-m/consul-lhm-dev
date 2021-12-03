@@ -1,5 +1,8 @@
 require_dependency Rails.root.join("app", "controllers", "admin", "poll", "polls_controller").to_s
 class Admin::Poll::PollsController < Admin::Poll::BaseController
+
+  before_action :set_projekts_for_selector, only: [:new, :edit, :update]
+
   private
 
     def poll_params

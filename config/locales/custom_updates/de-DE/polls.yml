@@ -8,6 +8,14 @@ de:
     polls:
       index:
         projekts: Projekte
+      poll:
+        participate_button: Abstimmen
+        date:
+          from: von
+          to: bis
+        days_left:
+          one: "Noch 1 Tag"
+          other: "Noch %{count} Tage" 
       questions:
         answers:
           more_info: Mehr Infos

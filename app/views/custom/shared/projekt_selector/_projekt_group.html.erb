@@ -1,26 +1,5 @@
-<% parent_projekt_id ||= 0 %>
-<% phase_name = 'debate_phase' if controller.controller_name == 'debates' %>
-<% phase_name = 'proposal_phase' if controller.controller_name == 'proposals' %>
-
-
-<div class="projekt-group" <%= "data-parent=#{parent_projekt_id}" %> <%= 'style=display:block;' if show_projekt_group_in_selector?(projekts) %> >
-  <%= f.collection_radio_buttons :projekt_id, projekts, :id, :name, {include_hidden: false} do |rb| %>
-
-    <% @projekt_phase = rb.object.send(phase_name) if phase_name %>
-
-    <% disable_radio_button = ((can?(:select, @projekt_phase) || ((current_user.administrator?) && controller.controller_name == 'polls') ) ? false : true)  %>
-    <% disabled_class = ((can?(:select, @projekt_phase) || ((current_user.administrator?) && controller.controller_name == 'polls') || projekt_feature?(rb.object, 'general.show_not_active_phases_in_projekts_page_sidebar')  ) ? '' : 'projekt-phase-disabled') %>
-    <% hide_map_class = projekt_feature?(rb.object, "general.show_map") ? '' : 'hide-map'  %>
-    <% arrow = rb.object.all_children_projekts.any? { |projekt| params[:controller].include?('polls') || projekt.has_active_phase?(params[:controller]) } ? 'show-arrow js-show-children-projekts' : ''  %>
-
-
-    <% rb.label(class: "js-prevent-key-scroll focusable #{arrow} #{disabled_class} #{highlight_projekt_in_selector?(rb.object)} #{hide_map_class} js-select-projekt", data: {projekt_id: rb.object.id, latitude: rb.object.map_location.latitude, longitude: rb.object.map_location.longitude, zoom: rb.object.map_location.zoom, maplocation: rb.object.map_location.id }, tabindex: "0" ) do  %>
-
-      <%= rb.radio_button(disabled: disable_radio_button, checked: check_radio_button?(rb.object.id), tabindex: "-1") %>
-      <%= rb.object.page.title %>
-
-      <%= render partial: "shared/projekt_selector/shared/projekt_info", locals: { projekt: rb.object, phase_name: phase_name  } %>
-      <%= render partial: "shared/projekt_selector/shared/checkmark", locals: { projekt: rb.object, phase_name: phase_name  } %>
-    <% end %>
+<div class='projekt_group' id="group-for-<%= parent_id %>" >
+  <% projekts.each do |projekt| %>
+    <%= render partial: 'shared/projekt_selector/projekt', locals: { projekt: projekt } %>
   <% end %>
 </div>

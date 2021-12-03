@@ -1,0 +1,137 @@
+<% provide :title do %><%= t("custom.deficiency_reports.index.seo.title") %><% end %>
+<% content_for :header_addon do %>
+  <%= render "shared/search_form",
+             search_path: deficiency_reports_path(page: 1),
+             i18n_namespace: "custom.deficiency_reports.index.search_form" %>
+<% end %>
+<% content_for :canonical do %>
+  <%= render "shared/canonical", href: deficiency_reports_url %>
+<% end %>
+
+<main>
+  <% if [
+          @search_terms,
+          @advanced_search_terms
+        ].any? %>
+    <div class="highlight no-margin-top padding margin-bottom">
+      <div class="row">
+        <div class="small-12 column">
+          <% if @search_terms || @advanced_search_terms %>
+            <h2><%= t("shared.search_results") %></h2>
+            <p>
+              <%= page_entries_info @deficiency_reports %>
+              <% if !@advanced_search_terms %>
+                <%= sanitize(
+                  t("proposals.index.search_results", count: @deficiency_reports.size, search_term: @search_terms)
+                ) %>
+              <% end %>
+            <p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <%= render "shared/section_header", i18n_namespace: "custom.deficiency_reports.index.section_header", image: "deficiency_reports" %>
+  <% end %>
+
+  <% if feature?(:map) %>
+    <div class="map inline">
+      <%= render_map(nil, "deficiency-reports", false, nil, @deficiency_reports_coordinates) %>
+    </div>
+    <div class='expand-proposals-overview-map small js-expand-proposals-overview-map'>
+      <%= t('custom.proposals.index.show_larger_map') %>
+    </div>
+    <div class="clear"></div>
+    <div class="no-bullet margin-top">
+    </div>
+  <%end%>
+
+  <div class="row">
+    <div id="deficiency_reports" class="deficiency-reports-list small-12 medium-9 column">
+
+      <%= render Shared::BannerComponent.new("deficiency_reports") %>
+
+      <% if extended_feature?("deficiency_reports.intro_text_for_deficiency_reports") %>
+        <%=render_custom_block 'deficiency_reports_welcome' %>
+      <% end %>
+
+      <div class="row">
+        <div class="small-12 column">
+          <%= render "view_mode" %>
+          <%= yield :header_addon %>
+        </div>
+      </div>
+
+      <%= render Shared::AdvancedSearchComponent.new %>
+
+      <%= render "shared/order_links", i18n_namespace: "custom.deficiency_reports.index" %>
+
+      <div class='row'>
+        <div class='small-6 column small'>
+          <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
+            <%= link_to t('custom.deficiency_reports.index.section_header.help'), '#section_help' %>
+          <% end %>
+        </div>
+
+        <div class='small-6 column small'>
+          <% if extended_feature?('modulewide.show_number_of_entries_in_modules') %>
+            <div class='float-right'>
+              <%= @deficiency_reports.except(:limit, :offset).count %>
+              <%= t('activerecord.models.deficiency_report', count: @deficiency_reports.except(:limit, :offset).count) %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="show-for-small-only margin-top">
+        <% if current_user %>
+          <%= link_to t("custom.deficiency_reports.index.start_deficiency_report"), new_deficiency_report_path,
+            class: "button expanded js-preselect-projekt" %>
+        <% end %>
+      </div>
+
+      <div id="deficiency-reports-list">
+        <% if @deficiency_reports.any? || current_user.blank? %>
+          <% if deficiency_reports_default_view? %>
+            <%= render partial: "deficiency_reports/deficiency_report", collection: @deficiency_reports %>
+          <% else %>
+            <% @deficiency_reports.each do |deficiency_report| %>
+              <%= render "/deficiency_reports/deficiency_report_minimal", deficiency_report: deficiency_report %>
+            <% end %>
+          <% end %>
+        <% else %>
+          <%= empty_recommended_proposals_message_text(current_user) %>
+        <% end %>
+        <%= paginate @deficiency_reports%>
+
+        <% unless @search_terms || @advanced_search_terms %>
+          <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
+            <div id="section_help" class="margin" data-magellan-target="section_help">
+              <%=render_custom_block 'deficiency_reports_help' %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="small-12 medium-3 column">
+      <aside class="margin-bottom">
+        <% if current_user  %>
+          <%= link_to t("custom.deficiency_reports.index.start_deficiency_report"), new_deficiency_report_path,
+            class: "button expanded" %>
+        <% end %>
+
+        <%= render "deficiency_reports/sidebar/categories" %>
+        <%= render "deficiency_reports/sidebar/statuses" %>
+
+        <% if current_user &&
+            ( current_user.deficiency_report_officer? ||
+            current_user.administrator? ) %>
+          <%= render "deficiency_reports/sidebar/officer_filter" %>
+        <% end %>
+
+      </aside>
+    </div>
+
+  </div>
+</main>

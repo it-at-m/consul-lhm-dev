@@ -1,0 +1,28 @@
+<% if @statuses.exists? %>
+
+  <div class="sidebar-divider"></div>
+
+  <h2 class="sidebar-title projekt-tag-chip-projekt projekt-tag-chip-icon"><%= t("custom.deficiency_reports.index.sidebar.statuses.title") %></h2>
+
+
+  <ul id='deficiency-report-statuses-sidebar-filter'>
+
+    <li <%= "class=label-selected" if @selected_status_id.nil? %> >
+      <%= label_tag "status_0", class: '' do %>
+        <%= radio_button_tag(:status, 0, @selected_status_id.nil?, { class: 'js-filter-by-deficiency-report-status' } ) %>
+        <%= t('custom.deficiency_reports.index.sidebar.statuses.all_statuses') %>
+        <span class="checkmark"></span>
+      <% end %>
+    </li>
+
+    <%= collection_radio_buttons(nil, :status, @statuses, :id, :title, { checked: @selected_status_id.to_i }) do |rb| %> 
+      <li <%= "class=label-selected" if @selected_status_id == rb.object.id.to_s %> >
+        <%= rb.label class: '' do %>
+          <%= rb.radio_button class: 'js-filter-by-deficiency-report-status' %>
+          <%= rb.text %>
+          <span class="checkmark"></span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

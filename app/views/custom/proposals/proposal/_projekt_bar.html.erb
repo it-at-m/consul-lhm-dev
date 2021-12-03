@@ -1,0 +1,13 @@
+<div class='projekt-name'>
+  <i class="fas fa-<%= proposal.projekt.icon || "circle" %>" ></i>
+  <%= link_to proposal.projekt.name, proposal.projekt %>
+</div>
+
+<div class='show-for-large'>
+  <% unless proposal.author.name.blank? %>
+    <%= t('custom.proposals.index.proposal.by') %>
+    <%= link_to proposal.author.name, proposal.author %>
+  <% end%>
+</div>
+
+<%= render partial: "proposals/proposal/participation_label", locals: { proposal: proposal } %>

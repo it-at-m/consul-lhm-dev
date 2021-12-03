@@ -1,0 +1,15 @@
+<h2><%= t("custom.admin.deficiency_reports.officers.index.title") %></h2>
+
+<%= render "search" %>
+
+<div id="search-result"></div>
+
+<h3>
+  <%= page_entries_info @officers, entry_name: t("custom.admin.deficiency_reports.officers.officer.entry_name") %>
+</h3>
+
+<% if @officers.any? %>
+  <%= render Admin::DeficiencyReports::Officers::OfficersComponent.new(@officers, id: "officers") %>
+
+  <%= paginate @officers %>
+<% end %>

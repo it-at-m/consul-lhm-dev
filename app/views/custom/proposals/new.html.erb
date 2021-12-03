@@ -1,34 +1,5 @@
-<div class="proposal-form row">
+<%= content_for :body_class, "js-new-resource" %>
 
-  <div class="small-12 medium-9 column">
-    <%= back_link_to %>
-
-    <h1>
-      <%if params[:tags]&.any?%>
-        <%= t("proposals.new.start_new_in", category: Tag.find_by(name: params[:tags])&.name) %>
-      <%else%>
-        <%= t("proposals.new.start_new") %>
-      <%end%>
-    </h1>
-
-    <% if feature?("help_page")  %>
-      <div data-alert class="callout primary">
-        <%= link_to help_path(anchor: "proposals"), title: t("shared.target_blank"), target: "_blank" do %>
-          <%= t("proposals.new.more_info") %>
-        <% end %>
-      </div>
-    <% end %>
-
-    <%= render "proposals/form", form_url: proposals_path %>
-  </div>
-
-  <div class="small-12 medium-3 column">
-    <span class="icon-proposals float-right"></span>
-    <h2><%= t("proposals.new.recommendations_title") %></h2>
-    <ul class="recommendations">
-      <li><%= t("proposals.new.recommendation_one") %></li>
-      <li><%= t("proposals.new.recommendation_two") %></li>
-      <li><%= t("proposals.new.recommendation_three") %></li>
-    </ul>
-  </div>
+<div class='row'>
+  <%= render Proposals::NewComponent.new(@proposal) %>
 </div>

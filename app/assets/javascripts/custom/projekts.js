@@ -2,62 +2,6 @@
   "use strict";
   App.Projekts = {
 
-    // Functions for selectors in form
-
-    toggleChildProjekts: function($label) {
-      var projektId = $label.data()['projektId']
-      var dataParentIdentifierString = "[data-parent=\"" + projektId + "\"]"
-      var $childrenProjektsGroup = $( dataParentIdentifierString )
-
-      if ( $childrenProjektsGroup.is(":visible") ) {
-        App.Projekts.hideCurrentlyVisibleChildProjekts($label);
-      } else {
-        App.Projekts.hideCurrentlyVisibleChildProjekts($label);
-        $childrenProjektsGroup.show()
-      }
-    },
-
-    toggleChildProjektsMobile: function($label) {
-      var projektId = $label.data()['projektId']
-      var $projektChildren = $('[data-parent=' + projektId + ']')
-
-      $projektChildren.toggle()
-
-      if ( $projektChildren.is(':hidden') ) {
-        $projektChildren.find('label').each( function() {
-          $(this).removeClass('highlighted')
-        })
-      }
-
-    },
-
-    highlightLabel: function($label) {
-      $label.closest('.projekt-tags-column').find('label').each( function() {
-        $(this).removeClass('highlighted')
-      })
-
-
-      $label.closest('.projekt-tags-column').nextAll('.projekt-tags-column').each( function() {
-        $(this).find('label').each(function() {
-          $(this).removeClass('highlighted')
-        })
-      })
-
-
-      $label.addClass('highlighted')
-    },
-
-    hideCurrentlyVisibleChildProjekts: function($label) {
-      var $currentProjektGroup = $label.parent();
-      var $currentColumn = $label.parent().parent()
-
-      $currentColumn.nextAll().each(function() {
-        $(this).find(".projekt-group").each( function() {
-          $(this).hide();
-        })
-      })
-    },
-
     // Functions for selectors in sidebar
 
     toggleChildrenInSidebar: function($label) {
@@ -290,26 +234,6 @@
 
     },
 
-    replaceProjektMapOnProposalCreation: function($label, $radioButton) {
-
-      var defaultLat = $("#projekt-tags-selector").attr('data-default-map-latitude')
-      var defaultLng = $("#projekt-tags-selector").attr('data-default-map-longitude')
-      var defaultZoom = $("#projekt-tags-selector").attr('data-default-map-zoom')
-
-      if ($radioButton.is(':checked')) {
-        if ($label.hasClass('hide-map')) {
-          $('#map-for-new-proposal').addClass('hide')
-        } else {
-          $('#map-for-new-proposal').removeClass('hide')
-          App.Map.maps[0].setView([$label.attr('data-latitude'), $label.attr('data-longitude')], $label.attr('data-zoom')).invalidateSize()
-        }
-      } else {
-        $('#map-for-new-proposal').removeClass('hide')
-        App.Map.maps[0].setView([defaultLat, defaultLng], defaultZoom).invalidateSize()
-      }
-
-    },
-
     setDefaultToggleProjektsIds: function() {
       if (
         !window.localStorage.getItem('proposalsProjektFilterToggleIds') ||
@@ -396,65 +320,10 @@
       }
     },
 
-    selectProjekt: function($label) {
-
-      if ( $label.hasClass('projekt-phase-disabled')) {
-        return false;
-      }
-
-      var $radioButton = $label.find(":radio").first()
-
-      $radioButton.prop( "checked", !$radioButton.prop( "checked") );
-
-      // $label.toggleClass('selected')
-
-      if ( $(this).closest('#projekt-tags-selector-mobile').length ) {
-        $(this).closest('#projekt-tags-selector-mobile').find('label').removeClass('highlighted')
-        $label.addClass('highlighted')
-      } else {
-        App.Projekts.highlightLabel($label);
-      }
-
-      App.Projekts.replaceProjektMapOnProposalCreation($label, $radioButton)
-    },
-
-    showChildProjektGroupinSelector: function($label) {
-      App.Projekts.toggleChildProjekts($label);
-      App.Projekts.highlightLabel($label);
-      return false;
-    },
-
 
     // Initializer
  
     initialize: function() {
-      $("body").on("click", ".js-show-children-projekts", function(event) {
-        event.preventDefault();
-
-        if ( event.target.tagName == 'LABEL' ) {
-          var $label = $(this)
-        } else {
-          var $label = $(this).parent()
-        }
-
-        App.Projekts.showChildProjektGroupinSelector($label)
-      });
-
-      $("body").on("click", ".js-show-children-projekts-mobile", function(event) {
-        event.preventDefault();
-
-        var $label = $(this).closest('label')
-
-        App.Projekts.toggleChildProjektsMobile($label);
-        return false;
-      });
-
-      $("body").on("click", ".js-select-projekt", function() {
-        event.preventDefault();
-        var $label = $(this).closest('label')
-        App.Projekts.selectProjekt($label);
-      });
-
       $("body").on("click", ".js-filter-projekt", function() {
         var $checkbox = $(this);
         App.Projekts.formNewFilterProjektsRequest($checkbox);

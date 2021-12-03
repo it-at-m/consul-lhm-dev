@@ -1,0 +1,33 @@
+<%= translatable_form_for [:admin, @status] do |f| %>
+
+  <%= render "shared/errors", resource: @status %>
+
+	<%= f.translatable_fields do |translations_form| %>
+		<div class="small-12 column">
+			<%= translations_form.text_field :title%>
+		</div>
+	<% end %>
+
+  <div class="clear">
+    <div class="small-12 medium-6 large-4 column">
+      <%= f.text_field :color, label: t("custom.admin.deficiency_reports.statuses.status.color"),
+        placeholder: t('custom.admin.deficiency_reports.statuses.form.color_placeholder') %>
+    </div>
+  </div>
+
+  <div class="clear">
+    <div class="small-12 column">
+      <%= f.label :icon, t("custom.admin.deficiency_reports.statuses.status.icon")  %>
+      <div class='admin-deficiency-report-status-icons-selector'>
+        <%= f.collection_radio_buttons :icon, DeficiencyReport::Status::AVAILABLE_ICONS, :first, :first do |rb| %>
+          <%= rb.label { rb.radio_button + "<i class=\"fas fa-#{rb.object.first}\"></i>".html_safe } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="small-12 column">
+    <%= f.submit(value: t("custom.admin.deficiency_reports.statuses.form.submit_button"),
+                class: "button success") %>
+  </div>
+<% end %>

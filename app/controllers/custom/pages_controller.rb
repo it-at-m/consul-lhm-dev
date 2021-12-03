@@ -9,13 +9,14 @@ class PagesController < ApplicationController
 
   def show
     @custom_page = SiteCustomization::Page.published.find_by(slug: params[:id])
-    @custom_page = SiteCustomization::Page.published.find_by(slug: 'help') if params[:id] == "help/index"
 
-    @commentable = @custom_page
-    @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
-    set_comment_flags(@comment_tree.comments)
+    if @custom_page.respond_to?(:comments)
+      @commentable = @custom_page
+      @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
+      set_comment_flags(@comment_tree.comments)
+    end
+
     set_resource_instance
-
 
     if @custom_page.present? && @custom_page.projekt.present?
       @projekt = @custom_page.projekt

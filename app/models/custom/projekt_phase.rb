@@ -10,9 +10,11 @@ class ProjektPhase < ApplicationRecord
                       ( geozone_restricted == "only_geozones" && user.present? && user.level_three_verified? && geozone_restrictions.any? && geozone_restrictions.include?(user.geozone) )
 
     user &&
-      user.level_two_or_three_verified?
-        geozone_allowed &&
-          currently_active?
+      user.level_two_or_three_verified? &&
+        projekt.active? &&
+          !projekt.archived? &&
+            geozone_allowed &&
+              currently_active?
   end
 
   def expired?

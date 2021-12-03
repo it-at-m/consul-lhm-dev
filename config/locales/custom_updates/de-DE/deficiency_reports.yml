@@ -1,0 +1,84 @@
+de:
+  custom:
+    deficiency_reports:
+      index:
+        deficiency_report:
+          by: von
+        start_deficiency_report: Mangel melden
+        seo:
+          title: Mängelmelder
+        search_form:
+          title: Suche Mängelmeldungen
+          placeholder: Suche Mängelmeldungen...
+          button: search
+        section_header:
+          title: Mängelmelder
+          icon_alt: Mängelmelder
+          help: Hilfe zu Mängelmeldungen
+        sidebar:
+          categories:
+            title: Kategorien
+            filter_button: Kategorien filtern
+          statuses:
+            title: Status
+            all_statuses: Alle Mängel
+          officer_filter:
+            title: Sachbearbeiter
+            all_reports: Alle Mängel
+            only_current_user: Mir zugewiesene Meldungen
+        orders:
+          hot_score: Aktivste
+          newest: Neuste
+          most_commented: Am meisten kommentiert
+        section_footer:
+          title: Hilfe zu Mängelmeldungen
+          description: Mängel können, abhängig vom eingestellten Verifizierungsverfahren, von jeder Benutzerin und jedem Benutzer eingebracht werden. Sie bieten eine einfache Möglichkeit auf Mängel in der Stadt hinzuweisen. Wir danken für Ihre Unterstützung!
+      show:
+        official_answer: Offizielle Antwort
+        submit_official_answer_button: Antwort speichern
+        approve_official_answer: Antwort freigeben
+        sidebar:
+          delete: Mangel löschen
+          vote: Unterstützer*innen
+          status: Status
+          category: Kategorien
+          officer: Sachbearbeiter*in
+          select_officer: Sachbearbeiter*in auswählen
+          social_share: Teilen
+
+      new:
+        start_new: Einen Mangel melden
+        recommendations_title: Empfehlungen zum Erstellen eines Mangels
+        recommendation_one: Verwenden Sie bitte nicht ausschließelich Großbuchstaben für die Überschrift oder für komplette Sätze. Im Internet gilt das als Schreien und niemand möchte angeschrien werden.
+        recommendation_two: Diskussionen oder Kommentare, die illegale Handlungen beinhalten, werden gelöscht sowie diejenigen, die die Diskussionen absichtlich sabotieren. Alles andere ist erlaubt.
+        recommendation_three: Genießen Sie diesen Ort und die Stimmen, die ihn füllen. Er gehört auch Ihnen.
+        more_info: Mehr Informationen
+        seo:
+          title: Einen Mangel melden
+      form:
+        category:
+          placeholder: Bitte wählen
+        labels:
+          title: Titel des Mangels
+          summary: Zusammenfassung des Mangel
+          description: Text zum Mangel
+        new:
+          submit_button: Mangel melden
+        create:
+          submit_button: Mangel melden
+      mailers:
+        notify_administrators:
+          subject: Neue Mangelmeldung
+          hi: Lieber Admin,
+          p1: es wurde ein neuer Mangel gemeldet.
+          signature_html: Viele Grüße</br>Consul
+        notify_author_about_status_change:
+          subject: Statusänderung Ihres Mangels
+          hi: Hallo
+          p1: der Status des von Ihnen eingereichten Mangels wurde geändert.
+          signature_html: Viele Grüße</br>Consul
+        notify_officer:
+          subject: Neue Mangelmeldung
+          hi: Liebe/r Sachbearbeiter*in,
+          p1: Ihnen wurde ein Mangel vom Admin zugewiesen.
+          signature_html: Viele Grüße</br>Consul

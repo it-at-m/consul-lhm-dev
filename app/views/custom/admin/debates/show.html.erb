@@ -25,6 +25,17 @@
     </span>
   </div>
 
+  <% if @debate.image.present? %>
+    <%= render_image(@debate.image, :large, true) %>
+
+    <div class='column'>
+      <%= link_to admin_debate_toggle_image_path(@debate), method: :patch, class: 'button hollow' do %>
+        <% @debate.image.concealed ? "Bild einblenden" : "Bild ausblenden" %>
+      <% end %>
+      <hr>
+    </div>
+  <% end %>
+
   <%= auto_link_already_sanitized_html wysiwyg(@debate.description) %>
 
   <h3><%= t("votes.supports") %></h3>

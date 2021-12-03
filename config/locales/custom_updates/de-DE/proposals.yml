@@ -7,11 +7,18 @@ de:
       form:
         tags_custom: Nutzer-Tags
         tags_placeholder: Trennen Sie die Tags mit einem Komma (',')
+        required: Ihr Vorschlag
       index:
         max_number_reached: Du hast die maximale Anzahl (%{max_number}) an Vorschlägen pro Nutzer erreicht. Bevor du einen weiteren Vorschlag erstellen kannst, musst du einen aktiven Vorschlag zurückziehen.
         no_active_projekt: Aktuell kein Beteiligungsverfahren
         projekts: Projekte
         show_larger_map: Mehr anzeigen
         show_smaller_map: Weniger anzeigen
+        proposal:
+          by: von
       proposal:
+        support: Unterstützen
         unsupport: Zurückziehen
+        supports:
+          one: "%{count} Unterstützer*in"
+          other: "%{count} Unterstützer*innen"

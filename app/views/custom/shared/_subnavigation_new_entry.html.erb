@@ -1,0 +1,35 @@
+<li class='nav-element top-level-item js-access-top-level-menu js-prevent-key-scroll'
+    <%= "aria-expanded=false" %>
+    <%= "tabindex=0" if placement == "desktop" %>
+    aria-label='<%= t('custom.links.menu.new_entry_label') if placement == "desktop" %>'
+    <%= "aria-haspopup=true" if placement == "desktop" %>
+    >
+
+  <div class='flyout-item-name projekt-name'>
+     <%= t('custom.links.menu.new_entry') %>
+  </div>
+
+  <% if placement == 'mobile' %>
+    <div class="nav-toggle-arrow js-toggle-mobile-flyout-item focusable" tabindex="0" aria-label='<%= t('custom.links.menu.new_entry') %>' aria-haspopup="true" aria-expanded="false"></div>
+  <% end %>
+
+  <ul class="nav-flyout-block">
+    <li class="nav-element flyout-item js-access-flyout-menu-item focusable"
+      <%= "tabindex=0" if placement == 'desktop' %>
+        aria-label='<%= t('custom.links.menu.new_entries.new_debate') %>'>
+      <%= link_to t('custom.links.menu.new_entries.new_debate'), new_debate_path,
+          tabindex: (placement == 'desktop' ? "-1" : "0"),
+          aria: { hidden: "true" }
+         %>
+    </li>
+    <li class="nav-element flyout-item js-access-flyout-menu-item focusable"
+      <%= "tabindex=0" if placement == 'desktop'  %>
+        aria-label='<%= t('custom.links.menu.new_entries.new_proposal') %>'>
+      <%= link_to t('custom.links.menu.new_entries.new_proposal'), new_proposal_path,
+          tabindex: (placement == 'desktop' ? "-1" : "0"),
+          aria: { hidden: "true" }
+         %>
+    </li>
+  </ul>
+
+</li>

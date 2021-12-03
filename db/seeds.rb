@@ -14,3 +14,6 @@ load Rails.root.join("db", "pages.rb")
 
 # Sustainable Development Goals
 load Rails.root.join("db", "sdg.rb")
+
+# Default custom content blocks
+load Rails.root.join("db", "content_blocks.rb")

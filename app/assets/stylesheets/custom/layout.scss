@@ -17,6 +17,36 @@ body>header, .wrapper>header, .top-bar {
   color: $dark;
 }
 
+.header-right-group {
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 39.9375em) {
+    width: 100%;
+  }
+
+  .account-buttons {
+    font-size: 0.85rem;
+    font-weight: bold;
+  }
+
+  .sign-in-button,
+  .sign-up-button {
+    display: inline-block;
+    border-radius: 2px;
+    padding: 0.25rem 2em;
+    margin-right: 0.5rem;
+
+    background-color: #F4F4F4;
+    color: $dark;
+  }
+
+  .sign-up-button {
+    margin-right: 2.8rem;
+    background-color: $brand;
+    color: $white;
+  }
+}
 
 .top-bar {
   h2.header-title {
@@ -34,7 +64,16 @@ body>header, .wrapper>header, .top-bar {
 }
 
 
-.debate .panel, .proposal .panel, .investment-project .panel, .budget-investment .panel, .legislation .panel, .communities-show .panel, .process-summary .debate-summary, .process-summary .proposal-summary, .process-summary .annotation-summary {
+.debate .panel,
+.proposal .panel,
+.deficiency-report .panel,
+.investment-project .panel,
+.budget-investment .panel,
+.legislation .panel,
+.communities-show .panel,
+.process-summary .debate-summary,
+.process-summary .proposal-summary,
+.process-summary .annotation-summary {
   background-color: $module-index-panel-background;
 }
 

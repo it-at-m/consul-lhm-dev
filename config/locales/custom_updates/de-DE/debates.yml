@@ -3,6 +3,9 @@ de:
     debates:
       form:
         tags_custom: Nutzer-Tags
+        required: Ihr Diskussionsbeitrag
       index:
         no_active_projekt: Aktuell kein Beteiligungsverfahren
         projekts: Projekte
+        debate:
+          by: von

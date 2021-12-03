@@ -1,0 +1,6 @@
+<% if deficiency_report.status.present? %>
+  <div class="deficiency-report-status" style=<%= "color:#{deficiency_report.status.color}" %> >
+    <i class="fas fa-<%= "#{deficiency_report.status.icon}" %>"></i>
+    <%= deficiency_report.status.title %>
+  </div>
+<% end %>

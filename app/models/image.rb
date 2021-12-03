@@ -5,7 +5,8 @@ class Image < ApplicationRecord
   has_attached_file :attachment, styles: {
                                    large: "x#{Setting["uploads.images.min_height"]}",
                                    medium: "300x300#",
-                                   thumb: "140x245#"
+                                   thumb: "140x245#",
+                                   thumb_wider: "185x280#"
                                  },
                                  url: "/system/:class/:prefix/:style/:hash.:extension",
                                  hash_data: ":class/:style",
@@ -58,6 +59,14 @@ class Image < ApplicationRecord
     else
       ":attachment/:id_partition"
     end
+  end
+
+  def self.max_file_size
+    Setting["uploads.images.max_size"].to_i
+  end
+
+  def self.humanized_accepted_content_types
+    Setting.accepted_content_types_for("images").join(", ")
   end
 
   private

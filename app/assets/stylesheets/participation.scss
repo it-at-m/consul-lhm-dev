@@ -246,8 +246,8 @@
 // 02. New participation
 // ---------------------
 
-.debate-form,
-.proposal-form,
+.debate-new,
+.proposal-new,
 .budget-investment-form,
 .document-form,
 .topic-new,
@@ -282,24 +282,23 @@
   margin-top: $line-height;
 
   li {
-    font-size: $small-font-size;
+    @include has-fa-icon(check, solid);
     margin: $line-height / 2 0;
 
     &::before {
-      content: "l ";
-      font-family: "icons" !important;
+      margin-right: $font-icon-margin * 1.5;
     }
   }
 }
 
-.debate-form {
+.debate-new {
 
   .recommendations li::before {
     color: $debates;
   }
 }
 
-.proposal-form,
+.proposal-new,
 .document-form,
 .topic-form,
 .topic-new {
@@ -310,7 +309,7 @@
 }
 
 .budget-investment-new,
-.proposal-form,
+.proposal-new,
 .proposal-edit,
 .polls-form,
 .poll-question-form,
@@ -328,6 +327,7 @@
 
 .debate-show,
 .proposal-show,
+.deficiency-report-show,
 .poll-question-show,
 .budget-investment-show,
 .polls-show,
@@ -641,6 +641,7 @@
 
 .debate,
 .proposal,
+.deficiency-report,
 .budget-investment,
 .legislation,
 .communities-show {
@@ -652,6 +653,7 @@
 
   .debate-content,
   .proposal-content,
+  .deficiency-report-content,
   .investment-project-content,
   .budget-investment-content {
     margin: 0;
@@ -694,6 +696,7 @@
 
   .debate-info,
   .proposal-info,
+  .deficiency-report-info,
   .investment-project-info,
   .budget-investment-info,
   .topic-info {
@@ -713,6 +716,7 @@
 
   .debate-description,
   .proposal-description,
+  .deficiency-report-description,
   .investment-project-description,
   .budget-investment-description {
     color: $text;
@@ -759,6 +763,8 @@
 
 .debate,
 .debate-show,
+.deficiency-report,
+.deficiency-report-show,
 .proposal-show,
 .legislation-proposals {
 
@@ -783,7 +789,8 @@
 }
 
 .proposal-show .votes,
-.debate-show .votes {
+.debate-show .votes,
+.deficiency-report-show .votes {
   border: 0;
   padding: $line-height / 2 0;
 }
@@ -996,6 +1003,7 @@
 
 .debate,
 .proposal,
+.deficiency-report,
 .budget-investment {
 
   &.minimal {
@@ -1003,6 +1011,7 @@
     .panel,
     .debate-content,
     .proposal-content,
+    .deficiency-report-content,
     .budget-investment-content {
       min-height: 0;
     }

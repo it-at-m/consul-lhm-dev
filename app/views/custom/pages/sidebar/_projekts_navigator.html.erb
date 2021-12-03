@@ -2,18 +2,18 @@
 
 <h2 class="sidebar-title"><%= t("custom.projekt.page.sidebar.navigator.title") %></h2>
 
-<% if show_archived_projekts_in_sidebar? && Projekt.top_level_active.any? && Projekt.top_level_archived.any? %>
+<% if show_archived_projekts_in_sidebar? && Projekt.top_level.active.any? && Projekt.top_level.archived.any? %>
   <div class='sidebar-projekt-group-name'>
 		<%= t("custom.projekts.sidebar_filter.title_active") %>
   </div>
 <% end %>
 
-<%= render partial: 'pages/sidebar/projekt_list', locals: { projekts: Projekt.top_level_active, current_projekt: projekt } %>
+<%= render partial: 'pages/sidebar/projekt_list', locals: { projekts: Projekt.top_level.active, current_projekt: projekt } %>
 
-<% if show_archived_projekts_in_sidebar? && Projekt.top_level_archived.any? %>
+<% if show_archived_projekts_in_sidebar? && Projekt.top_level.archived.any? %>
 
   <div class='sidebar-projekt-group-name'>
     <%= t("custom.projekts.sidebar_filter.title_archived") %>
   </div>
-  <%= render partial: 'pages/sidebar/projekt_list', locals: { projekts: Projekt.top_level_archived, current_projekt: projekt } %>
+  <%= render partial: 'pages/sidebar/projekt_list', locals: { projekts: Projekt.top_level.archived, current_projekt: projekt } %>
 <% end %>

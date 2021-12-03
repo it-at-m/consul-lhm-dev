@@ -1,3 +1,204 @@
+// Customization of resource partials for index
+
+.resource-n {
+  margin-bottom: 1rem;
+  border: 1px solid $border;
+  border-right: none;
+  background-color: #ffffff;
+
+  .resource-participate {
+    border-right: 1px solid $border;
+  }
+
+  .projekt-info {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-size: 0.9rem;
+    position: relative;
+    overflow: visible !important;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .projekt-name {
+    .fas {
+      padding-right: 2px;
+    }
+  }
+
+  .resource-info {
+    position: relative;
+  }
+
+  .resource-details {
+    border-right: 1px solid $border;
+
+    .resource-name {
+      margin-top: 1rem;
+
+      a {
+        color: $black;
+      }
+    }
+
+    .resource-summary {
+      height: 4.5rem;
+      overflow: hidden;
+      position: relative;
+    }
+  }
+}
+
+.poll-n {
+  .resource-participate {
+    .button {
+      margin-bottom: 0.5rem;
+    }
+
+    .poll-dates-distance {
+      font-size: 0.8rem;
+      text-align: center;
+    }
+  }
+
+  .vote {
+     @media screen and (max-width: 39.9375em) {
+       border-top: 1px solid $border;
+       margin-bottom: 2rem;
+       padding-top: 3rem;
+     }
+  }
+
+  .truncate {
+    background: image-url("truncate.png");
+    background-repeat: repeat-x;
+    bottom: 0;
+    height: 1.5rem;
+    position: absolute;
+    width: 100%;
+  }
+
+}
+
+.resource-n.poll-n,
+.resource-n.proposal {
+  .icon-poll-answer {
+    border-top: 0;
+    border-bottom: 60px solid transparent;
+    height: 0;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    width: 0;
+    z-index: 1;
+
+    &:after {
+      font-family: "icons" !important;
+      left: 34px;
+      position: absolute;
+      top: 5px;
+    }
+
+    &.already-answer {
+      border-right: 60px solid #dff0d8;
+
+      &:after {
+        color: #3c763d;
+        content: "\59";
+      }
+    }
+
+    &.not-logged-in {
+      border-right: 60px solid #d9edf7;
+
+      &:after {
+        color: #31708f;
+        content: "\6f";
+      }
+    }
+
+    &.unverified {
+      border-right: 60px solid #fcf8e3;
+
+      &:after {
+        color: #8a6d3b;
+        content: "\6f";
+      }
+    }
+
+    &.cant-answer{
+      border-right: 60px solid #f2dede;
+
+      &:after {
+        color: #a94442;
+        content: "\74";
+      }
+    }
+  }
+}
+
+
+
+
+
+.resource-n.debate,
+.resource-n.deficiency-report {
+  .votes {
+    border-left: 0;
+
+    .total-votes {
+      font-weight: normal;
+      font-size: 0.8rem;
+    }
+  }
+}
+
+.resource-n.deficiency-report {
+  .resource-details {
+    padding-bottom: 2.35rem;
+  }
+}
+
+.resource-n.proposal {
+  .supports-container {
+    border-left: 0;
+
+    .participation-not-allowed {
+      padding: 0.1rem;
+    }
+  }
+
+  .total-supports {
+    font-weight: normal;
+    font-size: 0.8rem;
+  }
+
+  .supports .button-support {
+    margin-top: 0;
+  }
+}
+
+
+
+.proposals-list .proposal .columns:last-child:not(:first-child),
+.proposals-list .proposal .column:last-child:not(:first-child) {
+  padding-top: 0;
+}
+
+.proposals-list .proposal img {
+  max-width: -webkit-fill-available;
+}
+
+
+// Customization of resource partials for index //
+
+
 .whatsapp::before {
   background-color: #43d854;
   color: #fff;
@@ -9,6 +210,26 @@
   vertical-align: top;
   width: rem-calc(48);
 }
+
+// Imageplaceholder
+
+.image-placeholder {
+  position: relative;
+
+  &:before {
+    position: absolute;
+    content: "\f03e";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 400;
+    color: white;
+    left: 50%;
+    top: 50%;
+    font-size: 70px;
+    transform: translate(-50%, -50%);
+  }
+}
+
+
 // setup_project
 // Polls
 .poll {
@@ -23,6 +244,77 @@
       height: 100%;
       max-width: none;
       position: absolute;
+    }
+  }
+}
+
+
+// overrides for debates and proposals forms
+
+.proposal-new, .proposal-edit,
+.debate-new, .debate-edit,
+.deficiency-report-new, .deficiency-report-edit {
+  ul.recommendations {
+    li {
+      position: relative;
+      padding-left: 22px;
+
+      &:before {
+        position: absolute;
+        top: 4px;
+        left: 1px;
+      }
+
+    }
+  }
+
+  .document .attachment-errors > .js-image-attachment,
+  .document .attachment-errors > .js-document-attachment,
+  .image .attachment-errors > .js-image-attachment,
+  .image .attachment-errors > .js-document-attachment {
+    display: none;
+  }
+
+  label:not([for$='_terms_of_service']),
+  fieldset.nested-image > legend,
+  fieldset.documents-list > legend,
+  fieldset.sdg-related-list-selector > legend {
+    color: #227CB1;
+  }
+
+  header {
+    margin-bottom: 5rem;
+  }
+
+  .required-fields {
+    margin-bottom: 4rem;
+
+    label[for^=proposal_translations_attributes],
+    label[for^=debate_translations_attributes] {
+      &:after {
+        content: '*';
+        margin-left: 0.15rem;
+      }
+    }
+  }
+
+  .actions {
+    span.star-message {
+      display: block;
+      color: #227CB1;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    label[for$=_terms_of_service] {
+      span {
+        display: inline;
+      }
+
+      input[id$=_terms_of_service] {
+        margin-top: 6px;
+        margin-bottom: 0px;
+      }
     }
   }
 }

@@ -1,0 +1,36 @@
+<% resource = @proposal || @debate || @poll %>
+<% projekt_phase = resource.class.name == "Poll" ? nil : projekt.send("#{resource.class.name.downcase}_phase") %>
+<% vertical_align = !projekt.has_active_phase?(controller_name) || projekt_feature?(projekt, "general.hide_additional_info_in_projekt_selector") || controller_name == 'polls' %>
+
+<div class='projekt js-select-projekt js-prevent-key-scroll <%= 'vertical-align' if vertical_align %>'
+     id=<%= dom_id(projekt) %>
+     tabindex="0"
+     aria-labeled-by=<%= "#{dom_id(projekt)}_name" %>
+     data-projekt-id="<%= projekt.id %>"
+     <%= "data-parent-id=#{projekt.parent.id}" if projekt.parent.present? %>
+     <%= "data-projekt-selectable=true" if projekt.selectable?(controller_name, current_user) %>
+     <%= "data-projekt-selectable-children=true" if projekt.children.selectable_in_selector(controller_name, current_user).any? %> 
+     <%= "data-latitude=#{projekt.map_location.latitude}" if projekt.map_location.latitude.present? %>
+     <%= "data-longitude=#{projekt.map_location.longitude}" if projekt.map_location.longitude.present? %>
+     <%= "data-zoom=#{projekt.map_location.zoom}" if projekt.map_location.zoom.present? %>
+     <%= "data-show-map=true" if feature?('map').present? && controller_name == 'proposals'  %> >
+
+  <div class='projekt-icon'>
+    <i class="fas fa-<%= projekt.icon || "circle" %>" style="color:<%= projekt.color %>"></i>
+  </div>
+ 
+  <div class='projekt-details'>
+    <div class='projekt-name' id=<%= "#{dom_id(projekt)}_name" %> >
+      <%= projekt.page.title %>
+    </div>
+
+    <% if projekt_phase.present? && projekt.has_active_phase?(controller_name) && !projekt_feature?(projekt, "general.hide_additional_info_in_projekt_selector") %>
+      <div class='projekt-phase-duration'>
+        <%= get_projekt_phase_duration(projekt_phase) %>
+      </div>
+      <div class='projekt-phase-restriction'>
+        <%= get_projekt_phase_restriction_name(projekt_phase) %>
+      </div>
+    <% end %>
+  </div>
+</div>

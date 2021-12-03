@@ -8,6 +8,12 @@ de:
         notification_icon: Benachrichtigungen
         projekt_name_label: "Projekt Name: %{projekt_name} "
         archived_projekts_label: Archivierte Projekte
+        deficiency_reports: Mängelmelder
+        new_entry_label: Beitrag erstellen
+        new_entry: + Beitrag erstellen
+        new_entries:
+          new_debate: Diskussionsbeitrag erstellen
+          new_proposal: Neuen Vorschlag erstellen
         mobile:
           arrow_projekts: Untermenü umschalten
           arrow_account: Kontomenü umschalten
@@ -22,6 +28,8 @@ de:
         arrow_label: Unterprojekte unschalten
         projekt_name: "Projekt Name: %{projekt_name}"
         resource_count: "Anzahl der Beitrage: %{resource_count}"
+      df_category_filter:
+        category_name: Kategoriename
       welcome:
         feeds:
           title: Nutzerinhalt

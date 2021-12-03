@@ -1,0 +1,18 @@
+<% @latest_items.each do |resource| %>
+  <%= render resource %>
+<% end %>
+
+<div class='links-entries margin-bottom clearfix'>
+  <%= link_to t('custom.welcome.all_proposals'), proposals_path, class: 'float-right'  %>
+  <%= link_to t('custom.welcome.all_debates'), debates_path, class: 'float-right margin-right'  %>
+</div>
+
+
+<div class='new-entry text-center'>
+  <%= button_tag t('custom.welcome.start_entry'), class: 'button hollow', onclick: '$(".new-entries").toggleClass("hide")' %>
+</div>
+
+<div class='new-entries text-center hide'>
+  <%= link_to t('custom.welcome.start_debate'), new_debate_path, class: 'button' %>
+  <%= link_to t('custom.welcome.start_proposal'), new_proposal_path, class: 'button'   %>
+</div>

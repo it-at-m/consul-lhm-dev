@@ -3,6 +3,7 @@ class Projekt < ApplicationRecord
   acts_as_paranoid column: :hidden_at
   include ActsAsParanoidAliases
   include Mappable
+  include ActiveModel::Dirty
 
   has_many :children, class_name: 'Projekt', foreign_key: 'parent_id'
   belongs_to :parent, class_name: 'Projekt', optional: true
@@ -28,30 +29,48 @@ class Projekt < ApplicationRecord
 
   accepts_nested_attributes_for :debate_phase, :proposal_phase, :projekt_notifications
 
+  before_validation :set_default_color
   after_create :create_corresponding_page, :set_order, :create_projekt_phases, :create_default_settings, :create_map_location
+  around_update :update_page
   after_destroy :ensure_projekt_order_integrity
 
-  scope :top_level, -> { where(parent: nil) }
+  validates :color, format: { with: /\A#[\d, a-f, A-F]{6}\Z/ }
+
+  scope :top_level, -> { where(parent: nil).with_order_number }
+
   scope :with_order_number, -> { where.not(order_number: nil).order(order_number: :asc) }
 
-  scope :top_level_active, -> { top_level.with_order_number.
-                                           where( "total_duration_end IS NULL OR total_duration_end >= ?", Date.today).
-                                           joins(' INNER JOIN projekt_settings a ON projekts.id = a.projekt_id').
-                                           where( 'a.key': 'projekt_feature.main.activate', 'a.value': 'active' ).
-                                           select('DISTINCT ON ("projekts"."order_number") "projekts".*') }
+  scope :active, -> { where( "total_duration_end IS NULL OR total_duration_end >= ?", Date.today).
+                      joins( :projekt_settings).
+                      where( projekt_settings: { key: 'projekt_feature.main.activate', value: 'active' } ) }
 
-  scope :top_level_archived, -> { top_level.with_order_number.
-                                           where( "total_duration_end < ?", Date.today).
-                                           joins(' INNER JOIN projekt_settings a ON projekts.id = a.projekt_id').
-                                           where( 'a.key': 'projekt_feature.main.activate', 'a.value': 'active' ).
-                                           select('DISTINCT ON ("projekts"."order_number") "projekts".*') }
+  scope :archived, -> { where( "total_duration_end < ?", Date.today).
+                        joins( :projekt_settings ).
+                        where( projekt_settings: { key: 'projekt_feature.main.activate', value: 'active' } ) }
 
-  scope :top_level_active_top_menu, -> { top_level.with_order_number.
-                                           where("total_duration_end IS NULL OR total_duration_end >= ?", Date.today).
-                                           joins('INNER JOIN projekt_settings a ON projekts.id = a.projekt_id').
-                                           joins('INNER JOIN projekt_settings b ON projekts.id = b.projekt_id').
-                                           where("a.key": "projekt_feature.main.activate", "a.value": "active", "b.key": "projekt_feature.general.show_in_navigation", "b.value": "active").distinct }
+  scope :visible_in_menu, -> { joins(' INNER JOIN projekt_settings a ON projekts.id = a.projekt_id').
+                            where( 'a.key': 'projekt_feature.general.show_in_navigation', 'a.value': 'active' ) }
 
+  scope :selectable_in_selector, ->(controller_name, current_user) { select{ |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.selectable?(controller_name, current_user) } } }
+  scope :selectable_in_sidebar_active, ->(controller_name) { select{ |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| ( p.active? && ( p.has_active_phase?(controller_name) || p.send(controller_name).any? ) ) } } }
+  scope :selectable_in_sidebar_archived, ->(controller_name) { select{ |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.active? && p.send(controller_name).any? } } }
+
+
+  def update_page
+    update_corresponding_page if self.name_changed?
+    yield
+  end
+
+  def selectable?(controller_name, user)
+    return true if controller_name == 'polls'
+    return false if user.nil?
+
+    if controller_name == 'proposals'
+      proposal_phase.selectable_by?(user)
+    elsif controller_name == 'debates'
+      debate_phase.selectable_by?(user)
+    end
+  end
 
   def current?(timestamp = Date.current.beginning_of_day)
     ( total_duration_start.nil? || total_duration_start <= timestamp ) &&
@@ -100,6 +119,33 @@ class Projekt < ApplicationRecord
     all_children_projekts
   end
 
+  def active?
+    projekt_settings.find_by(key: 'projekt_feature.main.activate').value.present?
+  end
+
+  def archived?
+    active? && !total_duration_end.nil? && total_duration_end < Date.today
+  end
+
+  def active_children
+    children.joins(:projekt_settings).where( projekt_settings: { key: 'projekt_feature.main.activate', value: 'active'  } )
+  end
+
+  def children_with_active_feature(projekt_feature_key)
+    children.joins(:projekt_settings).where( projekt_settings: { key: "projekt_feature.#{projekt_feature_key}", value: 'active'  } )
+  end
+
+  def all_active_children_projekts_in_tree(all_active_children_projekts = [])
+    if self.children_with_active_feature('main.activate').any?
+      self.children_with_active_feature('main.activate').each do |child|
+        all_active_children_projekts.push(child)
+        child.all_active_children_projekts_in_tree(all_active_children_projekts)
+      end
+    end
+
+    all_active_children_projekts
+  end
+
   def has_active_phase?(controller_name)
     case controller_name
     when 'proposals'
@@ -112,9 +158,9 @@ class Projekt < ApplicationRecord
   end
 
   def count_resources(controller_name)
-    return self.all_children_projekts.unshift(self).map{ |p| p.send(controller_name).published.count }.reduce(:+) if controller_name == 'proposals'
-    return self.all_children_projekts.unshift(self).map{ |p| p.send(controller_name).created_by_admin.not_budget.count }.reduce(:+) if controller_name == 'polls'
-    self.all_children_projekts.unshift(self).map{ |p| p.send(controller_name).count }.reduce(:+)
+    return self.all_active_children_projekts_in_tree.unshift(self).map{ |p| p.send(controller_name).published.count }.reduce(:+) if controller_name == 'proposals'
+    return self.all_active_children_projekts_in_tree.unshift(self).map{ |p| p.send(controller_name).created_by_admin.not_budget.count }.reduce(:+) if controller_name == 'polls'
+    self.all_active_children_projekts_in_tree.unshift(self).map{ |p| p.send(controller_name).count }.reduce(:+)
   end
 
   def top_level?
@@ -186,6 +232,18 @@ class Projekt < ApplicationRecord
   private
 
   def create_corresponding_page
+    page = SiteCustomization::Page.new(title: self.name, slug: form_page_slug, projekt: self)
+
+    if page.save
+      self.page = page
+    end
+  end
+
+  def update_corresponding_page
+    page.update(title: name, slug: form_page_slug)
+  end
+
+  def form_page_slug
     page_title = self.name
     clean_slug = self.name.downcase.gsub('ä', 'ae').gsub('ö', 'oe').gsub('ü', 'ue').gsub('ß', 'ss').gsub(/[^a-z0-9\s]/, '').gsub(/\s+/, '-')
     pages_with_similar_slugs = SiteCustomization::Page.where("slug ~ ?", "^#{clean_slug}(-[0-9]+$|$)").order(id: :asc)
@@ -197,14 +255,11 @@ class Projekt < ApplicationRecord
     else
       page_slug = clean_slug
     end
-    page = SiteCustomization::Page.new(title: page_title, slug: page_slug, projekt: self)
-    
-    if page.save
-      self.page = page
-    end
   end
 
   def set_order
+    return unless order_number.blank?
+
     if self.siblings.with_order_number.any? && siblings.with_order_number.pluck(:order_number).first == 1 && siblings.with_order_number.pluck(:order_number).each_cons(2).all? { |a, b| b == a + 1 }
       ordered_siblings_count = self.siblings.with_order_number.last.order_number
       self.update(order_number: ordered_siblings_count + 1)
@@ -260,5 +315,9 @@ class Projekt < ApplicationRecord
         projekt_id: self.id
       )
     end
+  end
+
+  def set_default_color
+    self.color ||= "#004a83"
   end
 end

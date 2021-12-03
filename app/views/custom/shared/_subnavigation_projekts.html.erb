@@ -1,18 +1,20 @@
 <% accesskey = 0 %>
-<% @active_projekts.each do |active_projekt| %>
+<% @top_level_active_projekts_for_menu.each do |active_projekt| %>
   <% accesskey += 1 %>
+  <% projekt_children_to_show_in_menu = active_projekt.children_with_active_feature('general.show_in_navigation') %>
+
   <li class='nav-element top-level-item js-access-top-level-menu js-prevent-key-scroll'
       <%= "tabindex=0" if placement == "desktop" %>
       aria-label='<%= t('custom.links.menu.projekt_name_label', projekt_name: active_projekt.page.title) if placement == "desktop" %>'
-      <%= "aria-expanded=false" if active_projekt.children.any? %>
-      <%= "aria-haspopup=true" if active_projekt.children.any? && placement == "desktop" %>
+      <%= "aria-expanded=false" if projekt_children_to_show_in_menu.any? %>
+      <%= "aria-haspopup=true" if projekt_children_to_show_in_menu.any? && placement == "desktop" %>
       <%= "accesskey=#{accesskey}" if accesskey < 9 && placement == "desktop" %> >
 
     <div class='flyout-item-name projekt-name'>
       <%= prepare_projekt_name(active_projekt, placement) %>
     </div>
 
-    <% if placement == 'mobile' && active_projekt.children.any? %>
+    <% if placement == 'mobile' && projekt_children_to_show_in_menu.any? %>
       <div class='nav-toggle-arrow js-toggle-mobile-flyout-item focusable'
         tabindex="0"
         aria-label='<%= t('custom.links.menu.mobile.arrow_projekts') %>'
@@ -22,12 +24,12 @@
       </div>
     <% end %>
 
-    <%= render partial: 'shared/subnavigation_flyout_projekts', locals: { projekts: active_projekt.children.with_order_number, placement: placement } if active_projekt.children.any? %>
+    <%= render partial: 'shared/subnavigation_flyout_projekts', locals: { projekts: projekt_children_to_show_in_menu.with_order_number, placement: placement } if projekt_children_to_show_in_menu.any? %>
 
   </li>
 <% end %>
 
-<% if show_archived_projekts_in_menu? && @archived_projekts.any? %>
+<% if show_archived_projekts_in_menu? && @top_level_archived_projekts_for_menu.any? %>
   <li class='nav-element top-level-item js-access-top-level-menu js-prevent-key-scroll'
       <%= "tabindex=0" if placement == "desktop" %>
       aria-label="<%= t('custom.links.menu.archived_projekts_label') %>"
@@ -48,6 +50,6 @@
       </div>
     <% end %>
 
-    <%= render partial: 'shared/subnavigation_flyout_projekts', locals: { projekts: @archived_projekts, placement: placement } %>
+    <%= render partial: 'shared/subnavigation_flyout_projekts', locals: { projekts: @top_level_archived_projekts_for_menu, placement: placement } %>
   </li>
 <% end %>

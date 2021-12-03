@@ -1,13 +1,24 @@
 de:
   activerecord:
+    models:
+      deficiency_report: Mangelmeldung
     errors:
       models:
         proposal:
           attributes:
             description:
               too_long: 'ist zu lange'
+        projekt:
+          attributes:
+            color:
+              invalid: Bitte den Farbwert als HEX-code eingeben
     attributes:
       poll/answer:
         open_answer_text: Offene Antwort
       widget/card:
         card_category: Kategorie
+      deficiency_report:
+        deficiency_report_category_id: Kategorie
+        video_url: Externes Video URL
+        official_answer: Offizielle Antwort
+

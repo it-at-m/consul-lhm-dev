@@ -31,7 +31,9 @@
 
         <div class='row'>
           <div class='small-6 column small'>
-            <%= link_to t('polls.index.section_header.help'), '#section_help' %>
+            <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
+              <%= link_to t('polls.index.section_header.help'), '#section_help' %>
+            <% end %>
           </div>
           <div class='small-6 column small'>
             <% if extended_feature?('modulewide.show_number_of_entries_in_modules') %>
@@ -57,14 +59,9 @@
 
       <div id="section_help" class="margin" data-magellan-target="section_help">
         <% if extended_feature?('modulewide.custom_help_text_in_modules')  %>
-          <%=render_custom_block 'polls_help' %>
-        <% else %>
-          <p class="lead">
-            <strong><%= t("polls.index.section_footer.title") %></strong>
-          </p>
-          <p><%= t("polls.index.section_footer.description") %></p>
+          <%= render_custom_block 'polls_help' %>
+          <%= render_custom_partial "footer" %>
         <% end %>
-        <%= render_custom_partial "footer" %>
       </div>
     </div>
 

@@ -1,94 +1,55 @@
-<% projekts ||= Projekt.top_level_active.select{ |projekt| params[:controller].include?('polls') || projekt.has_active_phase?(params[:controller]) || projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } }%>
-<% current_model_name = model.class.name.downcase %>
+<%= f.hidden_field :projekt_id %>
 
-<% if projekts.any?  %>
-
-  <% if current_model_name == 'debate' || current_model_name == 'proposal' %>
-    <h5><%= t("custom.projekts.selector.connected_resources.#{current_model_name}_title") %></h5>
-    <div>
-      <small><%= t("custom.projekts.selector.connected_resources.#{current_model_name}_description") %></small>
-    </div>
-  <% end %>
-
-  <div id="projekt-tags" class="margin-top margin-bottom">
-
-    <% if model.errors.full_messages.any? { |error| error.include? 'Projekt' } %>
-      <br>
-      <small class='form-error is-visible'>
-        <%= t('custom.projekts.errors.presence') %>
-      </small>
-    <% end %>
-
-    <div class='show-for-medium'>
-      <div id="projekt-tags-selector"
-           data-default-map-latitude=<%= Setting["map.latitude"] %>
-           data-default-map-longitude=<%= Setting["map.longitude"] %>
-           data-default-map-zoom=<%= Setting["map.zoom"] %>    >
-
-        <div class="projekt-tags-column">
-          <% if params[:controller].include?('polls') || projekts.any? do |projekt|
-              projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } ||
-              projekt.all_children_projekts.any? { |projekt| projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } }
-          end %>
-            <h6 class='show-for-medium'><%= t('custom.projekts.new.first_level') %></h6>
-          <% end %>
-
-          <%= render partial: 'shared/projekt_selector/projekt_group', locals: { f:f, projekts: projekts }  %>
-        </div>
-
-        <div class="projekt-tags-column">
-          <% if params[:controller].include?('polls') || projekts.any? do |projekt|
-              projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } ||
-              projekt.all_children_projekts.any? { |projekt| projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } }
-          end %>
-            <h6 class='show-for-medium'><%= t('custom.projekts.new.second_level') %></h6>
-          <% end %>
-
-          <% projekts.each do |projekt| %>
-            <% if params[:controller].include?('polls') || projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } %>
-              <%= render partial: 'shared/projekt_selector/projekt_group', locals: { f:f, projekts: projekt.children.with_order_number.select{ |projekt| params[:controller].include?('polls') || projekt.has_active_phase?(params[:controller]) || projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } } , parent_projekt_id: projekt.id }  %>
-            <% end %>
-          <% end %>
-        </div>
-
-        <div class="projekt-tags-column">
-          <% if params[:controller].include?('polls') || projekts.any? do |projekt|
-              projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } ||
-              projekt.all_children_projekts.any? { |projekt| projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } }
-          end %>
-            <h6 class='show-for-medium'><%= t('custom.projekts.new.third_level') %></h6>
-          <% end %>
-
-          <% projekts.each do |projekt| %>
-            <% if params[:controller].include?('polls') || projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } %>
-              <% projekt.all_children_projekts.each do |projekt| %>
-                <% if params[:controller].include?('polls') || projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } %>
-                  <%= render partial: 'shared/projekt_selector/projekt_group', locals: { f:f, projekts: projekt.children.with_order_number.select{ |projekt| params[:controller].include?('polls') || projekt.has_active_phase?(params[:controller]) || projekt.all_children_projekts.any? { |projekt| projekt.has_active_phase?(params[:controller]) } } , parent_projekt_id: projekt.id }  %>
-
-                <% end %>
-              <% end %>
-            <% end %>
-          <% end %>
-        </div>
-
-      </div>
-    </div>
-
-
-
-
-    <div class='show-for-small-only'>
-      <div id="projekt-tags-selector-mobile"
-           data-default-map-latitude=<%= Setting["map.latitude"] %>
-           data-default-map-longitude=<%= Setting["map.longitude"] %>
-           data-default-map-zoom=<%= Setting["map.zoom"] %>    >
-
-        <% projekts.each do |projekt| %>
-          <%= render partial: 'shared/projekt_selector/projekt_mobile', locals: { f:f, projekt: projekt }  %>
-        <% end %>
-
-      </div>
-    </div>
-
-  </div>
+<% if model.errors.full_messages.any? { |error| error.include? 'Projekt' } %>
+  <br>
+  <small class='form-error is-visible'>
+    <%= t('custom.projekts.errors.presence') %>
+  </small>
 <% end %>
+
+<div id='projekt-selector-fields' class=''>
+  <div class='projekt-selector js-toggle-projekt-group js-prevent-key-scroll' data-target='#group-for-0' tabindex='0' >
+
+    <div id='' class='selected-projekt'>
+      <div class='selected-projekt-placeholder'>
+        <%= t('custom.projekts.selector.select_placeholder_mandatory_html') %>
+      </div>
+    </div>
+
+    <%= render partial: 'shared/projekt_selector/projekt_group', locals: { projekts: @projekts.selectable_in_selector(controller_name, current_user), parent_id: 0 } %>
+  </div>
+
+  <div class='spacer'>
+    <i class="fas fa-chevron-right"></i>
+  </div>
+
+  <div class='projekt-selector js-toggle-projekt-group js-prevent-key-scroll' tabindex='0'>
+
+    <div id='' class='selected-projekt'>
+      <div class='selected-projekt-placeholder'>
+      </div>
+    </div>
+
+    <% @projekts.each do |projekt|  %>
+      <%= render partial: 'shared/projekt_selector/projekt_group', locals: { projekts: projekt.children.selectable_in_selector(controller_name, current_user), parent_id: projekt.id } if projekt.children.selectable_in_selector(controller_name, current_user) %>
+    <% end %>
+  </div>
+
+  <div class='spacer'>
+    <i class="fas fa-chevron-right"></i>
+  </div>
+
+  <div class='projekt-selector js-toggle-projekt-group js-prevent-key-scroll' tabindex='0'>
+
+    <div id='' class='selected-projekt'>
+      <div class='selected-projekt-placeholder'>
+      </div>
+    </div>
+
+    <% @projekts.each do |projekt|  %>
+      <% projekt.children.each do |projekt| %>
+        <%= render partial: 'shared/projekt_selector/projekt_group', locals: { projekts: projekt.children.selectable_in_selector(controller_name, current_user), parent_id: projekt.id  } if projekt.children.selectable_in_selector(controller_name, current_user).any? %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

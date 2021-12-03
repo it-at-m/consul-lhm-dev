@@ -1,0 +1,78 @@
+<%= translatable_form_for(deficiency_report, html: { class: "deficiency-report-form debate-form" }) do |f| %>
+  <%= render "shared/errors", resource: deficiency_report %>
+
+  <fieldset class="required-fields">
+    <div>
+      <%= f.select :deficiency_report_category_id, DeficiencyReport::Category.all.collect{ |category| [category.name, category.id] }, { prompt: t('custom.deficiency_reports.form.category.placeholder') } %>
+    </div>
+
+    <%= render "shared/globalize_locales", resource: deficiency_report %>
+    <%= f.translatable_fields do |translations_form| %>
+      <div>
+        <%= translations_form.text_field :title,
+            label: t('custom.deficiency_reports.form.labels.title'),
+            autocomplete: "off" %>
+      </div>
+
+      <% if feature?(:allow_images) %>
+        <div class="images">
+          <%= render "images/nested_image", imageable: deficiency_report, f: f %>
+        </div>
+      <% end %>
+
+      <div>
+        <%= translations_form.text_area :summary,
+                                        rows: 4, maxlength: 200,
+                                        hint: t("proposals.form.proposal_summary_note"),
+                                        label: t('custom.deficiency_reports.form.labels.summary') %>
+      </div>
+
+      <div>
+        <%= translations_form.text_area :description,
+              class: "html-area #{ck_editor_class(current_user)}",
+              label: t('custom.deficiency_reports.form.labels.description')   %>
+      </div>
+    <% end %>
+  </fieldset>
+
+  <%= f.invisible_captcha :subtitle %>
+
+  <fieldset>
+    <div>
+      <%= f.text_field :video_url, hint: t("proposals.form.proposal_video_url_note") %>
+    </div>
+
+    <% if feature?(:allow_attached_documents) %>
+      <div class="documents">
+        <%= render "documents/nested_documents", documentable: @deficiency_report, f: f %>
+      </div>
+    <% end %>
+
+    <div class="small-12" id='map-for-new-deficiency_report'>
+      <%= render "map_locations/form_fields",
+                 form:     f,
+                 map_location: @deficiency_report.map_location || MapLocation.new,
+                 label:    t("proposals.form.map_location"),
+                 help:     t("proposals.form.map_location_instructions"),
+                 remove_marker_label: t("proposals.form.map_remove_marker"),
+                 parent_class: "proposal",
+                 i18n_namespace: "proposals" %>
+
+  </fieldset>
+
+  <div class="actions">
+    <% if deficiency_report.new_record? %>
+      <span class='star-message'><%= t('custom.shared.form.star_message')  %></span>
+
+      <div>
+        <%= f.check_box :terms_of_service,
+          title: t("form.accept_terms_title"),
+          label: t("form.accept_terms",
+                   policy: link_to(t("form.policy"), "/privacy", target: "blank"),
+                   conditions: link_to(t("form.conditions"), "/conditions", target: "blank")
+                  ) %>
+      </div>
+    <% end %>
+    <%= f.submit(class: "button", value: t("custom.deficiency_reports.form.#{action_name}.submit_button")) %>
+  </div>
+<% end %>

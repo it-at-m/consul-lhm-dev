@@ -1,17 +1,19 @@
 <ul class="nav-flyout-block">
+
   <% projekts.each do |projekt| %>
+    <% projekt_children_to_show_in_menu = projekt.children_with_active_feature('general.show_in_navigation') %>
+
     <li class='nav-element flyout-item flyout-item-projekt js-access-flyout-menu-item focusable'
       <%= "tabindex=0" if placement == "desktop" %> 
         aria-label="<%= t('custom.links.menu.projekt_name_label', projekt_name: projekt.name) %>"
-        <%= "aria-expanded=false" if projekt.children.any? %>
-        <%= "aria-haspopup=true" if projekt.children.any? %> >
+        <%= "aria-haspopup=true" if projekt_children_to_show_in_menu.any? %> >
 
       <div class='projekt-name-group'>
         <div class='flyout-item-name projekt-name'>
           <%= prepare_projekt_name(projekt, placement) %>
         </div>
 
-        <% if projekt.children.any? && placement == 'mobile' %>
+        <% if projekt_children_to_show_in_menu.any? && placement == 'mobile' %>
           <div class='nav-toggle-arrow js-toggle-mobile-flyout-item focusable'
                tabindex="0"
                aria-expanded=false >
@@ -26,8 +28,8 @@
       <% end %>
 
       
-      <%= render partial: 'shared/subnavigation_flyout_projekts', locals: { projekts: projekt.children.with_order_number, placement: placement } if projekt.children.any? %>
+      <%= render partial: 'shared/subnavigation_flyout_projekts', locals: { projekts: projekt_children_to_show_in_menu.with_order_number, placement: placement } if projekt_children_to_show_in_menu.any? %>
     </li>
   <% end %>
-</ul>
 
+</ul>

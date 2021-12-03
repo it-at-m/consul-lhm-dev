@@ -27,7 +27,21 @@
 
 </div>
 
-<%= render_image(@proposal.image, :large, true) if @proposal.image.present? %>
+<% if @proposal.image.present? && ( !@proposal.image.concealed? || params[:controller] == 'admin/proposals' ) %>
+  <div class="image">
+    <%= render_image(@proposal.image, :large, true) %>
+  </div>
+<% end %>
+
+<% if @proposal.image.present? && params[:controller] == 'admin/proposals' %>
+  <div class='column'>
+    <%= link_to admin_proposal_toggle_image_path(@proposal), method: :patch, class: 'button hollow' do %>
+      <% @proposal.image.concealed ? "Bild einblenden" : "Bild ausblenden" %>
+    <% end %>
+    <hr>
+  </div>
+<% end %>
+
 
 <br>
 <% unless @proposal.selected? %>

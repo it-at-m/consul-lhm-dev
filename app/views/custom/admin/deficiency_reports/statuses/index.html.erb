@@ -1,0 +1,32 @@
+<%= link_to t("custom.admin.deficiency_reports.statuses.index.create"),
+              new_admin_deficiency_report_status_path, class: "button float-right" %>
+
+<h2 class="inline-block"><%= t("custom.admin.deficiency_reports.statuses.index.title") %></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= t("custom.admin.deficiency_reports.statuses.status.icon") %></th>
+      <th><%= t("custom.admin.deficiency_reports.statuses.status.color") %></th>
+      <th><%= t("custom.admin.deficiency_reports.statuses.status.title") %></th>
+      <th><%= t("admin.actions.actions") %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @statuses.each do |status| %>
+      <tr id="<%= dom_id(status) %>">
+        <td><%= "<i class=\"fas fa-#{status.icon}\" style=\"color:#{status.color}\"></i>".html_safe if status.icon %></td>
+        <td><%= status.color %></td>
+        <td><%= status.title %></td>
+        <td>
+          <%= render Admin::TableActionsComponent.new(status,
+                                                      actions: [:edit, :destroy],
+                                                      edit_path: edit_admin_deficiency_report_status_path(status),
+                                                      destroy_path: admin_deficiency_report_status_path(status)
+                                                     ) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

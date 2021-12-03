@@ -6,6 +6,72 @@ de:
         archived_projekts_title: Abgeschlossene Beteiligungsprozesse
       menu:
         projekts: Projekte
+        deficiency_reports_title: Mängelmelder
+        deficiency_reports:
+          officers: Sachbearbeiter*in
+          reports: Mängel zuweisen
+          categories: Kategorien festlegen
+          statuses: Status definieren
+          settings: Funktionen
+      deficiency_reports:
+        index:
+          title: Mängel zuweisen
+          no_deficiency_reports: Keine Mängelmeldungen
+          entry_name: Mangel
+        deficiency_report:
+          title: Gemeldeter Mangel
+          category: Kategorie
+          status: Status
+          officer: Sachbearbeiter*in
+        officers:
+          index:
+            title: Sachbearbeiter*innen
+            search:
+              email_placeholder: Benutzer*in via E-Mail suchen
+          officer:
+            entry_name: Sachbearbeiter*in
+            name: Name
+            email: E-Mail
+        categories:
+          index:
+            create: Kategorie erstellen
+            title: Kategorien
+          category:
+            icon: Icon
+            color: Farbe
+            name: Name
+          new:
+            creating: Neue Mangelkategorie erstellen
+          edit:
+            editing: Mangelkategorie bearbeiten
+          form:
+            color_placeholder: "HTML Farbcode (z.B. 'green') oder HEX Code mit #"
+            submit_button: Speichern
+          destroy:
+            cannot_be_destroyed: Sie können diese Kategorie nicht löschen, da sie mindestens einem Mangel zugewiesen ist.
+            destroyed_successfully: Die Kategorie wurde erfolgreich gelöscht.
+        statuses:
+          index:
+            create: Status erstellen
+            title: Status
+          status:
+            icon: Icon
+            color: Farbe
+            title: Name
+          new:
+            creating: Neue Mangelstatus erstellen
+          edit:
+            editing: Mangelstatus bearbeiten
+          form:
+            color_placeholder: "HTML Farbcode (z.B. 'green') oder HEX Code mit #"
+            submit_button: Speichern
+          destroy:
+            cannot_be_destroyed: Sie können diesen Status nicht löschen, da er mindestens einem Mangel zugewiesen ist.
+            destroyed_successfully: Der Status wurde erfolgreich gelöscht.
+        settings:
+          index:
+            title: Funktionen
+
       polls:
         questions:
           answers:

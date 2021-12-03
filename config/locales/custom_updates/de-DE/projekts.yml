@@ -4,12 +4,8 @@ de:
       backlink: Zur Projektübersicht
       errors:
         presence: Bitte wählen Sie ein Projekt
-      new:
-        first_level: Erste Projektebene
-        fourth_level: Vierte Projektebene
-        second_level: Zweite Projektebene
-        third_level: Dritte Projektebene
       selector:
+        select_placeholder_mandatory_html: Wähle Projekt (verpflichtend)
         connected_resources:
           debate_description: Bitte ordnen Sie Ihre Diskussion einem der nachfolgenden Projekte oder Unterprojekte zu. Dies dient dazu, dass die Diskussionen in der Diskussionsübersicht besser auffindbar sind.
           debate_title: Zuordnung der Diskussion zu einem Projekt

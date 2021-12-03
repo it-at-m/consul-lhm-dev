@@ -15,7 +15,13 @@
   <% end %>
 
   <main>
-    <% cache [locale_and_user_status(@debate), @debate, @debate.author, Flag.flagged?(current_user, @debate), @debate_votes] do %>
+  <% cache [locale_and_user_status(@debate),
+            @debate,
+            @debate.author,
+            Flag.flagged?(current_user, @debate),
+            @debate_votes,
+            @debate.projekt,
+            @debate.image ] do %>
       <div class="debate-show">
         <div id="<%= dom_id(@debate) %>" class="row">
           <div class="small-12 medium-9 column">
@@ -52,8 +58,9 @@
               </span>
             </div>
 
-            <%= render_image(@debate.image, :large, true) if @debate.image.present? %>
-
+            <% if @debate.image.present? && !@debate.image.concealed? %>
+              <%= render_image(@debate.image, :large, true) %>
+            <% end %>
 
             <%= auto_link_already_sanitized_html wysiwyg(@debate.description) %>
 

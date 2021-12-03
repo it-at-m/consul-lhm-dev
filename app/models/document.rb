@@ -73,6 +73,10 @@ class Document < ApplicationRecord
     attachment_content_type.split("/").last.upcase
   end
 
+  def self.humanized_accepted_content_types
+    Setting.accepted_content_types_for("documents").join(", ")
+  end
+
   private
 
     def documentable_class

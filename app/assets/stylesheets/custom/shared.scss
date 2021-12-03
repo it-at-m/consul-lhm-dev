@@ -5,7 +5,7 @@
   flex-wrap: wrap;
 }
 
-.projekt-tag-chip {
+.tag-chip {
   display: inline-block;
   font-size: 0.875em;
   background: #ececec;
@@ -17,13 +17,45 @@
   a {
     color: #222;
   }
-
-  &.filtered-projekt {
+  
+  &.filtered {
     background: $brand;
 
     a {
-      color: #fff;
+      color: $white;
     }
+  }
+}
+
+%tag-chip-icon {
+  font-weight: bold;
+  font-family: "Font Awesome 5 Free";
+  color: inherit;
+  margin-right: 0.5em;
+}
+
+.tag-chip-icon-projekt:before {
+  content: "\f126";
+  @extend %tag-chip-icon;
+}
+
+
+
+
+// eventually replace projekt-tag-chip with tag-chip everywhere
+.projekt-tag-chip {
+  display: inline-block;
+  font-size: 0.875em;
+  color: #222;
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
+
+  a {
+    color: $dark;
+  }
+
+  a.filtered-projekt {
+    font-weight: bold;
   }
 }
 
@@ -31,7 +63,9 @@
   font-weight: bold;
   font-family: "Font Awesome 5 Free";
   color: inherit;
-  margin-right: 0.5em;
+  margin-right: 0.25em;
+  display: inline-block;
+  text-decoration: none;
 }
 
 .projekt-tag-chip-projekt.projekt-tag-chip-icon:before {
@@ -47,7 +81,7 @@
 }
 
 .projekt-tag-chip-geozone-affiliation.projekt-tag-chip-icon:before {
-  content: "\f279";
+  content: "\f3c5";
 }
 
 .projekt-tag-chip-geozone-restriction.projekt-tag-chip-icon:before {
@@ -141,7 +175,18 @@
 
 // Summary styling
 
-.debate-show blockquote, .proposal-show blockquote, .poll-question-show blockquote, .budget-investment-show blockquote, .polls-show blockquote, .debate-quiz blockquote, .budget-investment-show blockquote, .draft-panels blockquote, .debate-questions blockquote, .communities-show blockquote, .topic-show blockquote, .milestone-content blockquote {
+.debate-show blockquote,
+.proposal-show blockquote,
+.deficiency-report-show blockquote,
+.poll-question-show blockquote,
+.budget-investment-show blockquote,
+.polls-show blockquote, .debate-quiz blockquote,
+.budget-investment-show blockquote,
+.draft-panels blockquote,
+.debate-questions blockquote,
+.communities-show blockquote,
+.topic-show blockquote,
+.milestone-content blockquote {
   background-color: $secondary;
   font-size: 1.25em;
 	padding-top: 10px;

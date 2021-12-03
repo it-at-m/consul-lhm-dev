@@ -5,9 +5,6 @@ module ProjektSettingsHelper
   end
 
   def disable_feature?(projekt, projekt_setting)
-    return true if ( !@projekt.top_level? && ( projekt_setting.key == "projekt_feature.general.show_in_navigation" ))
-    return true if ( !@projekt.top_level? && ( projekt_setting.key == "projekt_feature.main.activate" ))
-
     footer_tab_setting_keys = ['projekt_feature.footer.show_activity_in_projekt_footer', 'projekt_feature.footer.show_comments_in_projekt_footer', 'projekt_feature.footer.show_notifications_in_projekt_footer', 'projekt_feature.footer.show_milestones_in_projekt_footer', 'projekt_feature.footer.show_newsfeed_in_projekt_footer']
     return true if ( !projekt_feature?(projekt, 'footer.show_projekt_footer') && footer_tab_setting_keys.include?(projekt_setting.key) )
     false

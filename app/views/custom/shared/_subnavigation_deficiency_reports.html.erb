@@ -1,0 +1,8 @@
+<li class="nav-element top-level-item js-access-top-level-menu js-prevent-key-scroll"
+    <%= "aria-label='#{t('custom.links.menu.deficiency_reports')}'" if placement == 'desktop' %>
+    <%= "tabindex=0" if placement == 'desktop' %>
+>
+  <div class="flyout-item-name projekt-name">
+    <%= link_to t('custom.links.menu.deficiency_reports'), deficiency_reports_path, class: '', tabindex: '-1', aria: { hidden: true } %>
+  </div>
+</li>

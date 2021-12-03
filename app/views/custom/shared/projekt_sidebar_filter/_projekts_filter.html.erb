@@ -1,5 +1,11 @@
 <% projekts.each do |projekt| %>
 
+  <% if group == 'active' %>
+    <% preselected_children = projekt.children.selectable_in_sidebar_active(controller_name) %>
+  <% elsif group == 'archived' %>
+    <% preselected_children = projekt.children.selectable_in_sidebar_archived(controller_name) %>
+  <% end %>
+
   <% label_class =  ( @selected_projekts_ids && projekt.id.to_s.in?(@selected_projekts_ids) ) ? 'label-selected' : 'label_regular' %>
   <% checkbox_checked = @selected_projekts_ids && projekt.id.to_s.in?(@selected_projekts_ids)  %>
 
@@ -14,7 +20,7 @@
         <span class="checkmark focusable js-prevent-key-scroll js-access-toggle-projekt-filter-checkbox" tabindex="0"></span>
       <% end %>
 
-      <% if projekt.children.any? %>
+      <% if preselected_children.any? %>
         <span class='js-icon-toggle-child-projekts toggle-arrow focusable js-prevent-key-scroll'
               role="button"
               tabindex="0"
@@ -24,9 +30,7 @@
       <% end %>
     </li>
 
-    <% if projekt.children.any? %>
-      <%= render partial: "shared/projekt_sidebar_filter/projekts_filter", locals: { projekts: projekt.children.with_order_number, parent_projekt: projekt } %>
-    <% end %>
+    <%= render partial: "shared/projekt_sidebar_filter/projekts_filter", locals: { projekts: preselected_children, parent_projekt: projekt, group: group } %>
 
   </ul>
 

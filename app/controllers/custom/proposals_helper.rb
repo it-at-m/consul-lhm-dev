@@ -8,6 +8,10 @@ module ProposalsHelper
     MapLocation.where(proposal_id: ids).map(&:json_data)
   end
 
+  def proposal_settings_fingerprints
+    Setting.all.group_by(&:type)["extended_feature.proposals"].map{ |s| s.value == "active" ? 1 : 0 }.join()
+  end
+
   def json_data
     proposal = Proposal.find(params[:id])
     data = {
