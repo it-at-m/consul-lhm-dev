@@ -119,5 +119,7 @@ en:
         title: Active participation processes
       archived_projekt_cards:
         title: Completed participation processes
+    tag_names:
+      projekt: "Additional %{resources} for this Project"
   tag_names:
     general: General

@@ -1,5 +1,5 @@
 class Widget::Feed < ApplicationRecord
-  KINDS = %w[proposals debates processes].freeze
+  KINDS = %w[polls proposals debates processes].freeze
 
   def active?
     setting.value.present?

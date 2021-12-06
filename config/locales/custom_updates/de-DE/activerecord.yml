@@ -1,7 +1,9 @@
 de:
   activerecord:
     models:
-      deficiency_report: Mangelmeldung
+      deficiency_report:
+        one: Mangelmeldung
+        other: Mängelmeldungen
     errors:
       models:
         proposal:

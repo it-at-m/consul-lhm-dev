@@ -37,14 +37,20 @@
   .projekt-selector > .projekt {
      border-bottom: none;
   }
+
+  .projekt-selector > .projekt,
+  .projekt-selector > .selected-projekt {
+     height: 100%;
+  }
   
   .spacer {
     display: none;
+    align-self: center;
   }
 
   .projekt_group {
     position: absolute;
-    top: 70px;
+    top: 106%;
     border: 1px solid $dark;    
     display: none;
     width: 100%;

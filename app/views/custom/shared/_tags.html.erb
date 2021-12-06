@@ -48,7 +48,7 @@
     <% params[:projekts].present? ? active_projekt_ids = params[:projekts].split(',') : active_projekt_ids = [] %>
     <% taggable.projekt.id.to_s.in?(active_projekt_ids) ? active_projekt_class = 'filtered-projekt' : active_projekt_class = ''  %>
     <div class="projekt-tag-chip <%= active_projekt_class %>">
-      <%= link_to sanitize(taggable.projekt.name), (taggables_path(taggable.class.name.underscore, '') + "&projekts=#{taggable.projekt.id}" ), class: "#{tag_filter_class} projekt-tag-chip-icon projekt-tag-chip-projekt #{active_projekt_class}" %>
+      <%= link_to t("custom.tag_names.projekt", resources: taggable.model_name.human(count: 2)), (taggables_path(taggable.class.name.underscore, '') + "&projekts=#{taggable.projekt.id}" ), class: "#{tag_filter_class} projekt-tag-chip-icon projekt-tag-chip-projekt #{active_projekt_class}" %>
     </div>
   <% end %>
 </div>

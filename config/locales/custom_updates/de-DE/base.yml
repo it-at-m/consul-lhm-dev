@@ -120,5 +120,7 @@ de:
         title: Aktive Beteiligungsprozesse
       archived_projekt_cards:
         title: Abgeschlossene Beteiligungsprozesse
+    tag_names:
+      projekt: "Weitere %{resources} zu diesem Projekt"
   tag_names:
     general: General

@@ -1,6 +1,5 @@
 <div class='projekt-name'>
-  <i class="fas fa-<%= poll.projekt.icon || "circle" %>" ></i>
-  <%= link_to poll.projekt.name, poll.projekt %>
+  <%= link_to_projekt_page(poll.projekt) %>
 </div>
 
 <div class='show-for-large'>

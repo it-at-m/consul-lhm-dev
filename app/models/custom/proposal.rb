@@ -14,18 +14,18 @@ class Proposal < ApplicationRecord
   end
 
   def votable_by?(user)
-      user &&
+    user.present? &&
       !user.organization? &&
       user.level_two_or_three_verified? &&
       (
         Setting['feature.user.skip_verification'].present? ||
         projekt.blank? ||
-        proposal_phase && proposal_phase.geozone_restrictions.blank? ||
-        (proposal_phase && proposal_phase.geozone_restrictions.any? && proposal_phase.geozone_restrictions.include?(user.geozone) )
+        proposal_phase.present? && proposal_phase.geozone_restrictions.blank? ||
+        (proposal_phase.present? && proposal_phase.geozone_restrictions.any? && proposal_phase.geozone_restrictions.include?(user.geozone) )
       ) &&
       (
         projekt.blank? ||
-        proposal_phase && !proposal_phase.expired?
+        proposal_phase.present? && proposal_phase.currently_active?
       )
   end
 

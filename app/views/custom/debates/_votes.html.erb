@@ -61,7 +61,7 @@
         </p>
       </div>
 
-    <% elsif user_signed_in? && debate_phase &&
+    <% elsif user_signed_in? && debate_phase.present? &&
       (debate_phase.geozone_restrictions.any? && !debate_phase.geozone_restrictions.include?(current_user.geozone)) %>
       <div class="participation-not-allowed" style="display:none" aria-hidden="false">
         <p>
@@ -69,7 +69,7 @@
         </p>
       </div>
 
-    <% elsif user_signed_in? && debate_phase && debate_phase.expired? %>
+    <% elsif user_signed_in? && debate_phase.present? && !debate_phase.currently_active? %>
       <div class="participation-not-allowed" style="display:none" aria-hidden="false">
         <p>
           <%= sanitize(t("custom.votes.debate_phase_expired")) %>

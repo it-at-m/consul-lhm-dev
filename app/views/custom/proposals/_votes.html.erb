@@ -3,7 +3,7 @@
 <div class="supports text-center">
 
   <div class="in-favor">
-    <% if user_signed_in? && proposal_phase && proposal_phase.expired? %>
+    <% if user_signed_in? && proposal_phase.present? && !proposal_phase.currently_active? %>
       <div class="supported callout warning">
           <%= sanitize(t("custom.votes.proposal_phase_expired")) %>
       </div>
