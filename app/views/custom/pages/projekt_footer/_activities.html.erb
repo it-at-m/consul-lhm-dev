@@ -77,12 +77,16 @@
               <% end %>
             </div>
 
-            <% if @most_active_proposals.empty? && projekt.proposal_phase.selectable_by?(current_user)  %>
-              <%= t("custom.projekt.footer.show.no_proposals") %>
-            <% elsif @most_active_proposals.exists? %>
-              <%= render partial: "proposals/proposal", collection: @most_active_proposals %>
-              <%= proposals_overview_link( t("custom.projekt.page.sidebar.phases.proposal_phase_link"), projekt, 'all-projekt-resources-link' ) %>
-            <% end %>
+            <div class='row'>
+              <div class='column medium-9'>
+              <% if @most_active_proposals.empty? && projekt.proposal_phase.selectable_by?(current_user)  %>
+                <%= t("custom.projekt.footer.show.no_proposals") %>
+              <% elsif @most_active_proposals.exists? %>
+                <%= render partial: "proposals/proposal", collection: @most_active_proposals %>
+                <%= proposals_overview_link( t("custom.projekt.page.sidebar.phases.proposal_phase_link"), projekt, 'all-projekt-resources-link' ) %>
+              <% end %>
+              </div>
+            </div>
 
           <% else %>
             <%= t('custom.projekt.page.sidebar.phases.proposal_phase_not_active') %>
@@ -111,12 +115,16 @@
               <% end %>
             </div>
 
-            <% if @most_active_debates.empty? && projekt.debate_phase.selectable_by?(current_user) %>
-              <%= t("custom.projekt.footer.show.no_debates") %>
-            <% elsif @most_active_debates.exists? %>
-              <%= render partial: "debates/debate", collection: @most_active_debates %>
-              <%= debates_overview_link( t("custom.projekt.page.sidebar.phases.debate_phase_link"), projekt, 'all-projekt-resources-link' ) %>
-            <% end %>
+            <div class='row'>
+              <div class='column medium-9'>
+                <% if @most_active_debates.empty? && projekt.debate_phase.selectable_by?(current_user) %>
+                  <%= t("custom.projekt.footer.show.no_debates") %>
+                <% elsif @most_active_debates.exists? %>
+                  <%= render partial: "debates/debate", collection: @most_active_debates %>
+                  <%= debates_overview_link( t("custom.projekt.page.sidebar.phases.debate_phase_link"), projekt, 'all-projekt-resources-link' ) %>
+                <% end %>
+              </div>
+            </div>
 
           <% else %>
             <%= t('custom.projekt.page.sidebar.phases.debate_phase_not_active') %>
@@ -125,13 +133,16 @@
 
 
         <div class="tabs-panel <%= active_tab_in_activity?(projekt, 'polls') %>" id="tab-projekt-latest-polls">
-
-          <% if @latest_polls.exists? %>
-            <%= render partial: "polls/poll_group", locals: { poll_group: @latest_polls } %>
-            <%= polls_overview_link( t("custom.projekt.page.sidebar.phases.voting_phase_link"), projekt, 'all-projekt-resources-link' ) %>
-          <% else %>
-            <%= t("custom.projekt.footer.show.no_polls") %>
-          <% end %>
+          <div class='row'>
+            <div class='column medium-9'>
+              <% if @latest_polls.exists? %>
+                <%= render partial: "polls/poll_group", locals: { poll_group: @latest_polls } %>
+                <%= polls_overview_link( t("custom.projekt.page.sidebar.phases.voting_phase_link"), projekt, 'all-projekt-resources-link' ) %>
+              <% else %>
+                <%= t("custom.projekt.footer.show.no_polls") %>
+              <% end %>
+            </div>
+          </div>
         </div>
 
 
