@@ -711,10 +711,10 @@ de:
     check_all: Alle
     check_none: Keinen
     collective: Kollektiv
-    flag: Als unangemessen melden
+    flag: Melden
     follow: "Folgen"
-    following: "Folgen"
-    follow_entity: "Diesem Vorschlag folgen"
+    following: "Nicht länger folgen"
+    follow_entity: "Folgen"
     followable:
       budget_investment:
         create:

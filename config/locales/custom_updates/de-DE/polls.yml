@@ -31,3 +31,4 @@ de:
         confirm_participation_button: Meine Abstimmung bestätigen
         confirm_participation_notice: Sie haben erfolgreich an der Abstimmung teilgenommen.
         cant_answer_not_started_yet: Diese Abstimmung läuft vom %{start_date} bis zum %{end_date}
+        cant_answer_organization: Organisationen sind nicht berechtigt an Abstimmungen teilzunehmen.

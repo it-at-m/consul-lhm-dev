@@ -1,0 +1,9 @@
+<% if can? :hide, proposal %>
+  <%= link_to t("admin.actions.hide").capitalize, hide_moderation_proposal_path(proposal),
+              method: :put, remote: true, data: { confirm: t("admin.actions.confirm") }, class: "button hollow expanded" %>
+<% end %>
+
+<% if can? :hide, proposal.author %>
+  <%= link_to t("admin.actions.hide_author").capitalize, hide_moderation_user_path(proposal.author_id),
+              method: :put, data: { confirm: t("admin.actions.confirm") }, class: "button hollow expanded" %>
+<% end %>

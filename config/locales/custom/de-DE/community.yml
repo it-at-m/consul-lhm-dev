@@ -3,9 +3,9 @@ de:
     sidebar:
       title: Community
       description:
-        proposal: Beteiligen Sie sich in der Nutzergemeinde für diesen Vorschlag.
+        proposal: Treten Sie der Community bei und helfen Sie bei der weiteren Ausarbeitung des Vorschlages.
         investment: Beteiligen Sie sich in der Nutzergemeinde dieser Investition.
-      button_to_access: Treten Sie der Community bei
+      button_to_access: Beitreten
     show:
       title:
         proposal: Vorschlags-Community

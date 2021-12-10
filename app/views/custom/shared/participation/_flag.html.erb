@@ -1,0 +1,11 @@
+<% if show_flag_action?(resource) || show_unflag_action?(resource) %>
+  <div class="sidebar-divider"></div>
+  <h2><%= t("custom.shared.show.report_title") %></h2>
+  <p><%= t("custom.shared.show.report_text") %></p>
+<% end %>
+
+<% if show_flag_action?(resource) %>
+  <%= link_to t("shared.flag"), polymorphic_path(resource, action: :flag), method: :put, class: 'button hollow expanded'  %>
+<% elsif show_unflag_action?(resource) %>
+  <%= link_to t("shared.unflag"), polymorphic_path(resource, action: :unflag), method: :put, class: 'button hollow expanded' %>
+<% end %>

@@ -30,9 +30,9 @@ module DeficiencyReportsHelper
 
     return true if current_user.administrator?
 
-    if Setting["deficiency_reports.admins_must_assign_officer"]
+    if feature?("deficiency_reports.admins_must_assign_officer")
       current_user.deficiency_report_officer? &&
-        current_user == deficiency_report.officer
+        current_user == deficiency_report.officer.user
     else
       current_user.deficiency_report_officer?
     end

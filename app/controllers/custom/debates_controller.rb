@@ -61,6 +61,16 @@ class DebatesController < ApplicationController
     @restricted_geozones = (params[:restricted_geozones] || '').split(',').map(&:to_i)
   end
 
+  def flag
+    Flag.flag(current_user, @debate)
+    redirect_to @debate
+  end
+
+  def unflag
+    Flag.unflag(current_user, @debate)
+    redirect_to @debate
+  end
+
   private
 
     def remove_where_projekt_not_active

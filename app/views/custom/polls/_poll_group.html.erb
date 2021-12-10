@@ -2,7 +2,7 @@
 
   <div class='row collapse resource-n poll-n' data-equalizer='main' data-equalize-on="medium">
     <div class='columns'>
-      <div class='column projekt-info show-for-small-only' style="background-color:<%= poll.projekt.color %>;color:<%= pick_text_color(poll.projekt.color) %>;" >
+      <div class='show-for-small-only'>
         <%= render partial: 'polls/poll/projekt_bar', locals: {poll: poll} %>
       </div>
     </div>
@@ -21,7 +21,7 @@
 
 
     <div class='columns small-12 medium-9 large-10 details' data-equalizer-watch='main'>
-      <div class='column projekt-info show-for-medium' style="background-color:<%= poll.projekt.color %>;color:<%= pick_text_color(poll.projekt.color) %>; border-right: 1px solid <%= poll.projekt.color %>" >
+      <div class='show-for-medium'>
         <%= render partial: 'polls/poll/projekt_bar', locals: {poll: poll} %>
       </div>
 

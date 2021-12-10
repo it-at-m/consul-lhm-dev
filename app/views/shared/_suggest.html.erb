@@ -1,6 +1,6 @@
 <div class="small-12 column">
   <% if @search_terms && @resources.any? %>
-    <div class="callout warning">
+    <div class="callout warning" role="alert" aria-live="assertive">
       <p>
         <strong>
           <%= t("shared.suggest.#{resource_name}.found",

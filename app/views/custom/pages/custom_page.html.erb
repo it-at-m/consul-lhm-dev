@@ -55,7 +55,7 @@
   <% if @custom_page.projekt.present? && projekt_feature?(@custom_page.projekt, 'footer.show_projekt_footer') %>
     <div class="row">
       <div class="small-12 column">
-        <div class="additional-content projekt-footer">
+        <div class="additional-content projekt-footer margin-top">
           <div class="filter-subnav">
             <%= render partial: "pages/projekt_footer/filter_subnav", locals: { projekt: @custom_page.projekt  } %>
           </div>

@@ -8,7 +8,7 @@ module DocumentablesHelper
   end
 
   def max_file_size(documentable_class)
-    documentable_class.max_file_size / Numeric::MEGABYTE
+    documentable_class.max_file_size
   end
 
   def accepted_content_types(documentable_class)

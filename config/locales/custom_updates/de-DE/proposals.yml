@@ -14,11 +14,11 @@ de:
         projekts: Projekte
         show_larger_map: Mehr anzeigen
         show_smaller_map: Weniger anzeigen
-        proposal:
-          by: von
       proposal:
         support: Unterstützen
         unsupport: Zurückziehen
         supports:
           one: "%{count} Unterstützer*in"
           other: "%{count} Unterstützer*innen"
+      show:
+        description: Vorschlagstext

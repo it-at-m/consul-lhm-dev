@@ -332,6 +332,11 @@
 }
 
 
+.map .map-marker .map-icon.biking::after {
+  content: "\f84a";
+}
+
+
 .map .map-marker .map-icon.feather::after {
   content: "\f52d";
 }

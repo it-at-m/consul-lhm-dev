@@ -1,7 +1,11 @@
 <% provide :title do %><%= @poll.name %><% end %>
 
 <div class="polls-results-stats">
-  <%= render "poll_header" %>
+  <div class="row">
+    <div class="small-12 medium-9 column">
+      <%= render "poll_header" %>
+    </div>
+  </div>
 
   <%= render "poll_subnav" %>
 

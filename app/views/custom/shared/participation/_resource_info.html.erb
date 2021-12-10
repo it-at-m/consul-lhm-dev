@@ -1,0 +1,38 @@
+<div class="sidebar-divider"></div>
+<h2><%= t("custom.shared.show.information") %></h2>
+
+<div class='resource-info'>
+  <div class='resource-info-author'>
+    <%= link_to resource.author.username, resource.author %>
+  </div>
+
+  <div class='resource-info-comments'>
+    <%= link_to "#comments" do %>
+      <%= t("custom.shared.show.comments", count: resource.comments.count) %>
+    <% end %>
+  </div>
+
+  <div class='resource-info-date'>
+    <%= resource.created_at.strftime("%d. %B %Y") %>
+  </div>
+
+  <% if resource.respond_to?(:projekt) && geo_affiliation_name = prepare_geo_affiliation_name(resource) %>
+    <div class='resource-info-geo-affiliation'>
+      <%= geo_affiliation_name %>
+    </div>
+  <% end %>
+
+  <% if resource.respond_to?(:projekt) && geo_restriction_tag = prepare_geo_restriction_name(resource) %>
+    <div class='resource-info-geo-restriction'>
+      <%= geo_restriction_tag %>
+    </div>
+  <% end %>
+
+  <% if resource.class.name.in? ['Proposal', "DeficiencyReport"] %>
+    <div class='resource-info-entry-code'>
+      <%= t("proposals.show.code") %>
+      <br>
+      <%= resource.code %>
+    </div>
+  <% end %>
+</div>

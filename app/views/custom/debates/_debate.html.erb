@@ -2,8 +2,8 @@
   <div id="<%= dom_id(debate) %>" class='row collapse resource-n debate margin-bottom' data-equalizer='main' data-equalize-on="medium">
 
     <div class='columns'>
-      <div class='column projekt-info show-for-small-only' style="background-color:<%= debate.projekt.color %>;color:<%= pick_text_color(debate.projekt.color) %>" >
-        <%= render partial: 'debates/debate/projekt_bar', locals: {debate: debate} %>
+      <div class='show-for-small-only'>
+        <%= render partial: 'shared/participation/projekt_bar', locals: { resource: debate } %>
       </div>
     </div>
 
@@ -20,8 +20,8 @@
     </div>
 
     <div class='columns small-12 medium-9 large-10 details' data-equalizer-watch='main'>
-      <div class='column projekt-info show-for-medium' style="background-color:<%= debate.projekt.color %>;color:<%= pick_text_color(debate.projekt.color) %>" >
-        <%= render partial: 'debates/debate/projekt_bar', locals: {debate: debate} %>
+      <div class='show-for-medium'>
+        <%= render partial: 'shared/participation/projekt_bar', locals: { resource: debate } %>
       </div>
 
       <div class='resource-info' data-equalizer='details'>

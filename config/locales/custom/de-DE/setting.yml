@@ -54,6 +54,10 @@ de:
           intro_text_for_debates_description: Aktivieren Sie einen individuellen Einleitungstext oberhalb der Diskussionsübersicht
           head_image_for_debates: Titelbild für Diskussionen
           head_image_for_debates_description: Aktivieren Sie das Hinzufügen eines Titelbildes für Diskussionen
+          show_report_button_in_debate_sidebar: Diskussion melden
+          show_report_button_in_debate_sidebar_description: Aktivieren Sie die Melden-Funktion für Diskussionen
+          show_related_content: Verwandte Inhalte
+          show_related_content_description: Aktivieren Sie die Funktion “Verwandte Inhalte” für Diskussionen
         proposals:
           intro_text_for_proposals: Einleitungstext für Vorschläge
           intro_text_for_proposals_description: Aktivieren Sie einen individuellen Einleitungstext oberhalb der Vorschlagsübersicht
@@ -65,6 +69,14 @@ de:
           show_selected_proposals_in_proposal_sidebar_description: "Aktivieren Sie \"Ausgewählte Vorschläge\", um Vorschläge hervorzuheben"
           show_suggested_proposals_in_proposal_sidebar: Weitere Vorschlagslisten
           show_suggested_proposals_in_proposal_sidebar_description: "Aktivieren Sie \"Weitere Vorschlagslisten\", um zusätzliche Vorschlagslisten anzuzeigen"
+          show_report_button_in_proposal_sidebar: Vorschlag melden
+          show_report_button_in_proposal_sidebar_description: Aktivieren Sie die Melden-Funktion für Vorschläge
+          show_follow_button_in_proposal_sidebar: Vorschlag folgen
+          show_follow_button_in_proposal_sidebar_description: Aktivieren Sie die Funktion “Vorschlag folgen”
+          show_community_button_in_proposal_sidebar: Community
+          show_community_button_in_proposal_sidebar_description: Aktivieren Sie die Funktion “Community” für Vorschläge
+          show_related_content: Verwandte Inhalte
+          show_related_content_description: Aktivieren Sie die Funktion “Verwandte Inhalte” für Vorschläge
           enable_proposal_notifications_tab: Benachrichtigungen des Autors zu Vorschlägen
           enable_proposal_notifications_tab_description: Aktivieren Sie die Benachrichtigungen von Autoren zu eigenen Vorschlägen
           enable_proposal_milestones_tab: Meilensteine in Vorschlägen

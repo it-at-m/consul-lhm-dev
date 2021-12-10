@@ -2,7 +2,7 @@
   <div id="<%= dom_id(deficiency_report) %>" class='row collapse resource-n deficiency-report margin-bottom' data-equalizer='main' data-equalize-on="medium">
 
     <div class='columns'>
-      <div class='column projekt-info show-for-small-only' style="background-color:<%= deficiency_report.category.color %>;color:<%= pick_text_color(deficiency_report.category.color) %>" >
+      <div class='show-for-small-only'>
         <%= render partial: 'deficiency_reports/deficiency_report/projekt_bar', locals: { deficiency_report: deficiency_report } %>
       </div>
     </div>
@@ -20,7 +20,7 @@
     </div>
 
     <div class='columns small-12 medium-9 large-10 details' data-equalizer-watch='main'>
-      <div class='column projekt-info show-for-medium' style="background-color:<%= deficiency_report.category.color %>;color:<%= pick_text_color(deficiency_report.category.color) %>" >
+      <div class='show-for-medium'>
         <%= render partial: 'deficiency_reports/deficiency_report/projekt_bar', locals: { deficiency_report: deficiency_report } %>
       </div>
 

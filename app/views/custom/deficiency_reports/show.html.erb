@@ -1,4 +1,4 @@
-<%= content_for :body_class, "" %>
+<%= content_for :body_class, "deficiency-reports-show" %>
 <% provide :title do %><%= @deficiency_report.title %><% end %>
 <% content_for :meta_description do %><%= @deficiency_report.summary %><% end %>
 <% provide :social_media_meta_tags do %>
@@ -13,24 +13,34 @@
   <%= render "shared/canonical", href: deficiency_report_url(@deficiency_report) %>
 <% end %>
 
-<main>
-  <div class="deficiency-report-show">
-    <div id="<%= dom_id(@deficiency_report) %>" class="row">
-      <div class="small-12 medium-9 column deficinecy-report-show-main-column">
-        <% cache [locale_and_user_status(@deficiency_report),
-                  @deficiency_report,
-                  @deficiency_report.image,
-                  @deficiency_report.author,
-                  @deficiency_report.category,
-                  @deficiency_report.officer,
-                  @deficiency_report.status,
-                  @deficiency_report_votes ] do %>
-          <%= back_link_to deficiency_reports_path %>
 
+<main>
+  <% cache [locale_and_user_status(@deficiency_report),
+            @deficiency_report,
+            @deficiency_report.image,
+            @deficiency_report.author,
+            @deficiency_report.category,
+            @deficiency_report.officer,
+            @deficiency_report.status,
+            @deficiency_report_votes ] do %>
+    <div class="deficiency-report-show">
+
+      <div class='row'>
+        <div class='column margin-bottom'>
+          <%= render partial: 'deficiency_reports/deficiency_report/projekt_bar', locals: { deficiency_report: @deficiency_report } %>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='column small-12 medium-9'>
           <h1><%= @deficiency_report.title %></h1>
+        </div>
+      </div>
+
+      <div id="<%= dom_id(@deficiency_report) %>" class="row">
+        <div class="small-12 medium-9 column deficinecy-report-show-main-column">
 
           <%= render "deficiency_reports/info", deficiency_report: @deficiency_report %>
-
 
           <% if @deficiency_report.can_be_published? %>
             <div class="deficiency-report-official-answer">
@@ -72,6 +82,8 @@
             <% end %>
           </div>
         <% end %>
+
+        <%= render "shared/participation/resource_info", resource: @deficiency_report %>
 
         <% if deficiency_reports_feature?('allow_voting') %>
           <div class="sidebar-divider"></div>
@@ -130,7 +142,7 @@
   </div>
 
   <% if deficiency_reports_feature?('enable_comments') %>
-    <div class="additional-content">
+    <div class="additional-content margin-top">
       <div class="filter-subnav">
         <div class="row">
           <div class="small-12 column">

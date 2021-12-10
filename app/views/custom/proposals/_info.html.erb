@@ -1,31 +1,10 @@
-<div class="proposal-info">
-  <%= render "/shared/author_info", resource: @proposal %>
+<% if feature?(:map) && map_location_available?(@proposal.map_location) %>
+  <div class="margin-bottom">
+    <%= render_map(@proposal.map_location, "proposal", false, nil, MapLocation.where(proposal_id: @proposal.id).map(&:json_data)) %>
+  </div>
+<% end %>
 
-  <span class="bullet">&nbsp;&bull;&nbsp;</span>
-  <%= l @proposal.created_at.to_date %>
-
-  <% unless @proposal.selected? %>
-    <span class="bullet">&nbsp;&bull;&nbsp;</span>
-    <span class="icon-comments"></span>&nbsp;
-    <%= link_to t("proposals.show.comments", count: @proposal.comments_count), "#comments" %>
-  <% end %>
-
-  <% if @proposal.projekt && @proposal.projekt.page.published? %>
-    <span class="bullet">&nbsp;&bull;&nbsp;</span>
-    <span class='projekt-backlink'>
-    </span>
-    <%= link_to @proposal.projekt.page.title, @proposal.projekt.page.url %>
-  <% end %>
-
-
-  <% if current_user %>
-    <span class="bullet">&nbsp;&bull;&nbsp;</span>
-    <span class="js-flag-actions">
-      <%= render "shared/flag_actions", flaggable: @proposal %>
-    </span>
-  <% end %>
-
-</div>
+<blockquote><%= @proposal.summary %></blockquote>
 
 <% if @proposal.image.present? && ( !@proposal.image.concealed? || params[:controller] == 'admin/proposals' ) %>
   <div class="image">
@@ -42,32 +21,10 @@
   </div>
 <% end %>
 
-
-<br>
-<% unless @proposal.selected? %>
-  <p>
-    <%= t("proposals.show.code") %>
-    <strong><%= @proposal.code %></strong>
-  </p>
-<% end %>
-
-<blockquote><%= @proposal.summary %></blockquote>
-
-<% if @proposal.video_url.present? %>
-  <div class="small-12 medium-7 small-centered">
-    <div class="flex-video">
-      <div id="js-embedded-video" data-video-code="<%= embedded_video_code(@proposal) %>"></div>
-    </div>
-  </div>
-<% end %>
-
-<%= auto_link_already_sanitized_html wysiwyg(@proposal.description) %>
-
-<% if feature?(:map) && map_location_available?(@proposal.map_location) %>
-  <div class="margin">
-    <%= render_map(@proposal.map_location, "proposal", false, nil, MapLocation.where(proposal_id: @proposal.id).map(&:json_data)) %>
-  </div>
-<% end %>
+<div class='margin-bottom'>
+  <h5><%= t('custom.proposals.show.description')  %></h5>
+  <%= auto_link_already_sanitized_html wysiwyg(@proposal.description) %>
+</div>
 
 <% if @proposal.video_url.present? %>
   <div class="video-link">
@@ -75,7 +32,15 @@
       <span class="icon-video"></span>&nbsp;
       <strong><%= t("proposals.show.title_video_url") %></strong>
     </p>
-    <%= sanitize_and_auto_link @proposal.video_url %>
+    <br>
+    <div class="small-12 medium-7 small-centered">
+      <div class="flex-video">
+        <div id="js-embedded-video" data-video-code="<%= embedded_video_code(@proposal) %>"></div>
+      </div>
+      <div class='text-center'>
+        <%= sanitize_and_auto_link @proposal.video_url %>
+      </div>
+    </div>
   </div>
 <% end %>
 
@@ -94,5 +59,3 @@
               documents: @proposal.documents,
               max_documents_allowed: Proposal.max_documents_allowed %>
 <% end %>
-
-<%= render "shared/tags", taggable: @proposal %>

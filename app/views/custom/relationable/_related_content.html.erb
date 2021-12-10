@@ -1,0 +1,11 @@
+<div class="related-content padding">
+  <% if @related_contents.present? %>
+    <h5 class="inline-block">
+      <%= t("related_content.title") %>&nbsp;<span>(<%= relationable.relationed_contents.count %>)</span>
+    </h5>
+
+    <%= render "relationable/related_list", relationable: relationable %>
+  <% end %>
+
+  <%= render "relationable/form", relationable: relationable %>
+</div>

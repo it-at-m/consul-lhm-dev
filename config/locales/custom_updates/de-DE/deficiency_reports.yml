@@ -34,6 +34,7 @@ de:
           title: Hilfe zu Mängelmeldungen
           description: Mängel können, abhängig vom eingestellten Verifizierungsverfahren, von jeder Benutzerin und jedem Benutzer eingebracht werden. Sie bieten eine einfache Möglichkeit auf Mängel in der Stadt hinzuweisen. Wir danken für Ihre Unterstützung!
       show:
+        back_link: "Zurück zu alle Meldungen"
         official_answer: Offizielle Antwort
         submit_official_answer_button: Antwort speichern
         approve_official_answer: Antwort freigeben

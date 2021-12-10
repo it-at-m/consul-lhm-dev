@@ -72,10 +72,10 @@ class Projekt < ApplicationRecord
     end
   end
 
-  def current?(timestamp = Date.current.beginning_of_day)
+  def current?(timestamp = Date.today)
     ( total_duration_start.nil? || total_duration_start <= timestamp ) &&
       ( total_duration_end.nil? || timestamp <= total_duration_end ) &&
-      ( projekt_settings.find_by(key: 'projekt_feature.main.activate').value == 'active' )
+      active?
   end
 
   def comments_allowed?(current_user)

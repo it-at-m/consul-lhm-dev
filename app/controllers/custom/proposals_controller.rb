@@ -93,6 +93,16 @@ class ProposalsController
 
   end
 
+  def flag
+    Flag.flag(current_user, @proposal)
+    redirect_to @proposal
+  end
+
+  def unflag
+    Flag.unflag(current_user, @proposal)
+    redirect_to @proposal
+  end
+
   private
 
     def remove_where_projekt_not_active

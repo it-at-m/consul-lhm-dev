@@ -1,10 +1,12 @@
-<div class='projekt-name'>
-  <%= link_to_projekt_page(poll.projekt) %>
-</div>
+<div class='projekt-bar column' style="background-color:<%= projekt_bar_background_color(poll.projekt) %>;color:<%= projekt_bar_text_color(poll.projekt) %>" >
+  <div class='projekt-name'>
+    <%= link_to_projekt_page(poll.projekt) %>
+  </div>
 
-<div class='show-for-large'>
-  <%= poll.model_name.human %>
-  <%= format_date_range(poll.starts_at, poll.ends_at, prefix: t('custom.polls.poll.date.from'), separator: t('custom.polls.poll.date.to')) %>
-</div>
+  <div class='show-for-large'>
+    <%= poll.model_name.human %>
+    <%= format_date_range(poll.starts_at, poll.ends_at, prefix: t('custom.polls.poll.date.from'), separator: t('custom.polls.poll.date.to')) %>
+  </div>
 
-<%= render partial: "polls/poll/participation_label", locals: { poll: poll } %>
+  <%= render partial: "polls/poll/participation_label", locals: { poll: poll } %>
+</div>

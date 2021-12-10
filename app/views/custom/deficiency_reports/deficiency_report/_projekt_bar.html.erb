@@ -1,11 +1,17 @@
-<div class='projekt-name'>
-  <i class="fas fa-<%= deficiency_report.category.icon || "circle" %>" ></i>
-  <%= link_to deficiency_report.category.name, deficiency_reports_path(dr_categories: deficiency_report.category.id) %>
-</div>
+<div class='projekt-bar column' style="background-color:<%= deficiency_report.category.color %>;color:<%= pick_text_color(deficiency_report.category.color) %>" >
+  <div class='projekt-name'>
+    <i class="fas fa-<%= deficiency_report.category.icon || "circle" %>" ></i>
+    <%= link_to deficiency_report.category.name, deficiency_reports_path(dr_categories: deficiency_report.category.id) %>
+  </div>
 
-<div class='show-for-large'>
-  <% unless deficiency_report.author.name.blank? %>
-    <%= t('custom.deficiency_reports.index.deficiency_report.by') %>
-    <%= link_to deficiency_report.author.name, deficiency_report.author %>
-  <% end %>
+  <div class='show-for-large'>
+    <% if action_name == 'index'%>
+      <% unless deficiency_report.author.name.blank? %>
+        <%= t('custom.deficiency_reports.index.deficiency_report.by') %>
+        <%= link_to deficiency_report.author.name, deficiency_report.author %>
+      <% end %>
+    <% elsif action_name == 'show' %>
+      <%= link_to t("custom.deficiency_reports.show.back_link"), deficiency_reports_path %>
+    <% end %>
+  </div>
 </div>

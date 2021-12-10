@@ -11,10 +11,9 @@ class ProjektPhase < ApplicationRecord
 
     user.present? &&
       user.level_two_or_three_verified? &&
-        projekt.active? &&
-          !projekt.archived? &&
-            geozone_allowed &&
-              currently_active?
+        projekt.current? &&
+          geozone_allowed &&
+            currently_active?
   end
 
   def expired?

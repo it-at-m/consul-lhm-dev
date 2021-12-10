@@ -4,6 +4,21 @@ de:
       form:
         projekt_assignment: Projektzuordnung
         star_message: Alle mit (*) gekennzeichneten Felder sind Pflichtfelder
+      index:
+        resource:
+          by: von
+      show:
+        back_link: "Weitere %{resources} zu diesem Projekt"
+        admin: Admin
+        information: Information
+        comments: "%{count} Kommentare"
+        report_title: Melden
+        report_text: Melden Sie uns diesen Beitrag bei unangebrachten Inhalt oder bei Urheberrechtsverletzungen.
+        report_button: Melden
+        follow_text: Folgen Sie diesem Vorschlag, um stets über Neuigkeiten zu diesem Vorschlag informiert zu werden. 
+        related_title: Verwandte inhalte
+        related_text: Sie können Links von anderen Vorschlägen und Diskussionen hinzufügen.
+        related_button: Hinzufügen
     account:
       settings:
         email_digest: Erhalten Sie eine Zusammenfassung der Benachrichtigungen zu Vorschlägen

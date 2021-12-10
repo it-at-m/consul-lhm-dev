@@ -24,3 +24,11 @@
 .expand-proposals-overview-map[aria-expanded="true"]::before {
   transform: rotate(180deg);
 }
+
+.proposal-show .supports {
+  padding: 0;
+
+  .total-supports {
+    font-weight: normal;
+  }
+}
