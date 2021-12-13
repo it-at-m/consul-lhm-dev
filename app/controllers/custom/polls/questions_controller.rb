@@ -21,7 +21,7 @@ class Polls::QuestionsController < ApplicationController
     answer = @question.answers.find_or_initialize_by(author: current_user, answer: params[:answer])
 
     @question.answers.where(author: current_user, answer: params[:answer]).delete_all
-    @question.poll.delete_voter_participation_if_no_votes(params[:token])
+    @question.poll.delete_voter_participation_if_no_votes(current_user, params[:token])
 
     unless providing_an_open_answer?(answer)
       @answer_updated = 'unanswered'
