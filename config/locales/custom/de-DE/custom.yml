@@ -1,9 +1,13 @@
 de:
   omniauth:
-    openid_connect:
+    bayern_id:
       sign_in: Anmelden mit BayernID
       sign_up: Registrieren mit BayernID
       name: BayernID
+    m_login:
+      sign_in: Anmelden mit M-Login
+      sign_up: Registrieren mit M-Login
+      name: M-Login
   activerecord:
     errors:
       models:

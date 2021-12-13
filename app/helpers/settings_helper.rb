@@ -6,7 +6,9 @@ module SettingsHelper
       (:google_oauth2 if feature?(:google_login)),
       (:wordpress_oauth2 if feature?(:wordpress_login)),
       #START Ergänzung für Keycloak-Anbindung
-      (:openid_connect if feature?(:openid_connect_login))
+      # (:openid_connect if feature?(:openid_connect_login)),
+      (:bayern_id if feature?(:bayern_id_login)),
+      (:m_login if feature?(:m_login_login))
       #ENDE Ergänzung für Keycloak-Anbindung
     ].compact
   end

@@ -28,7 +28,9 @@ class Setting < ApplicationRecord
         "feature.twitter_login": true,
         "feature.wordpress_login": false,
         #START Ergänzung für Keycloak-Anbindung
-        "feature.openid_connect_login": true,
+        # "feature.openid_connect_login": true,
+        "feature.bayern_id_login": true,
+        "feature.m_login_login": true,
         #ENDE Ergänzung für Keycloak-Anbindung
         "feature.public_stats": true,
         "feature.signature_sheets": true,
