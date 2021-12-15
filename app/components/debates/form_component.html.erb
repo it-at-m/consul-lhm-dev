@@ -18,16 +18,16 @@
       </div>
       <div class="js-suggest" data-locale="<%= translations_form.locale %>"></div>
 
-      <% if extended_feature?("debates.head_image_for_debates") %>
-        <div class="images">
-          <%= render "images/nested_image", imageable: @debate, f: f %>
-        </div>
-      <% end %>
-
       <div>
         <%= translations_form.text_area :description,
               maxlength: Debate.description_max_length,
               class: "html-area #{helpers.ck_editor_class(current_user)}" %>
+      </div>
+    <% end %>
+
+    <% if extended_feature?("debates.head_image_for_debates") %>
+      <div class="images">
+        <%= render "images/nested_image", imageable: @debate, f: f %>
       </div>
     <% end %>
   </fieldset>

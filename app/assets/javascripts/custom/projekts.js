@@ -283,10 +283,22 @@
         resourceName = 'polls' + 'ProjektFilterToggleIds'
       }
 
+
+      var currentUrl = new URL(window.location.href);
+
+      if (currentUrl.searchParams.get('projekts') && currentUrl.searchParams.get('projekts').split(',').length == 1 ) {
+        var filteredProjektId = currentUrl.searchParams.get('projekts').split(',')[0];
+      }
+
+
       $('#filter-projekts-all').find('li').each( function() {
         var projektId = $(this).children('label').children('input').val()
 
-        if ( window.localStorage.getItem(resourceName) && window.localStorage.getItem(resourceName).split(',').includes(projektId) ) {
+        if ( filteredProjektId && $(this).siblings('ul').find('li[data-projekt-id=' + filteredProjektId + ']').length ) {
+          $(this).attr('aria-expanded', 'true')
+          $(this).children('.toggle-arrow').attr('aria-expanded', $(this).attr('aria-expanded'))
+
+        } else if ( !filteredProjektId && window.localStorage.getItem(resourceName) && window.localStorage.getItem(resourceName).split(',').includes(projektId) ) {
           $(this).attr('aria-expanded', 'true')
           $(this).children('.toggle-arrow').attr('aria-expanded', $(this).attr('aria-expanded'))
         }

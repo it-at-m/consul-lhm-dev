@@ -21,10 +21,12 @@
   </div>
 <% end %>
 
-<div class='margin-bottom'>
-  <h5><%= t('custom.proposals.show.description')  %></h5>
-  <%= auto_link_already_sanitized_html wysiwyg(@proposal.description) %>
-</div>
+<% if @proposal.description.present? %>
+  <div class='margin-bottom'>
+    <h5><%= t('custom.proposals.show.description')  %></h5>
+    <%= auto_link_already_sanitized_html wysiwyg(@proposal.description) %>
+  </div>
+<% end %>
 
 <% if @proposal.video_url.present? %>
   <div class="video-link">

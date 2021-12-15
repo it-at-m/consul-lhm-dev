@@ -118,6 +118,8 @@ module Abilities
       can [:manage], ::DeficiencyReport::Category
       can [:manage], ::DeficiencyReport::Status
       can [:manage], DeficiencyReport
+
+      can [:order_questions], Poll::Question
     end
   end
 end

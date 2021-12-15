@@ -62,27 +62,6 @@ class PollsController < ApplicationController
     @restricted_geozones = (params[:restricted_geozones] || '').split(',').map(&:to_i)
   end
 
-  def show
-    @questions = @poll.questions.for_render.joins(:translations).order(Arel.sql("poll_questions.proposal_id IS NULL"), "poll_question_translations.title")
-    @token = poll_voter_token(@poll, current_user)
-    @poll_questions_answers = Poll::Question::Answer.where(question: @poll.questions)
-                                                    .where.not(description: "").order(:given_order)
-
-    @answers_by_question_id = {}
-
-    @questions.each do |question|
-     @answers_by_question_id[question.id] = []
-    end
-
-    poll_answers = ::Poll::Answer.by_question(@poll.question_ids).by_author(current_user&.id)
-    poll_answers.each do |answer|
-      @answers_by_question_id[answer.question_id] = @answers_by_question_id.has_key?(answer.question_id) ? @answers_by_question_id[answer.question_id].push(answer.answer) : [answer.answer]
-    end
-
-    @commentable = @poll
-    @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
-  end
-
   def confirm_participation
     remove_answers_to_open_questions_with_blank_body
   end

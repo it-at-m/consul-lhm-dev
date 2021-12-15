@@ -70,4 +70,7 @@ Rails.application.routes.draw do
   # Toggle user generateg images
   patch  "admin/proposals/:id/toggle_image",               to: "admin/proposals#toggle_image",       as: :admin_proposal_toggle_image
   patch  "admin/debates/:id/toggle_image",                 to: "admin/debates#toggle_image",         as: :admin_debate_toggle_image
+
+  # Setting of poll questions order
+  post "/admin/polls/:poll_id/questions/order_questions",  to: "admin/poll/questions#order_questions",  as: "admin_poll_questions_order_questions"
 end

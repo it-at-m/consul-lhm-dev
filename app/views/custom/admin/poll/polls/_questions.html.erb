@@ -1,0 +1,46 @@
+<h3 class="inline-block"><%= t("admin.polls.show.questions_title") %></h3>
+
+<%= link_to t("admin.questions.index.create"), new_admin_question_path(poll_id: @poll.id),
+            class: "button float-right" %>
+
+<% if @poll.questions.empty? %>
+  <div class="callout primary margin-top">
+    <%= t("admin.polls.show.no_questions") %>
+  </div>
+<% else %>
+  <table class="margin selectable">
+    <thead>
+      <tr>
+        <th><%= t("admin.polls.show.table_title") %></th>
+        <th><%= t("admin.actions.actions") %></th>
+      </tr>
+    </thead>
+    <tbody class="sortable" data-js-url="<%= admin_poll_questions_order_questions_path(@poll.id) %>" >
+      <% @poll.questions.each do |question| %>
+        <tr id="<%= dom_id(question) %>" data-answer-id="<%= question.id %>">
+          <td>
+            <strong><%= question.title %></strong>
+            <% if question.multiple %>
+              <small>
+                (<%= t("admin.questions.index.multiple") %>)
+              </small>
+            <% end %>
+            <% if question.proposal.present? %>
+              <small>
+                <%= link_to t("admin.polls.show.see_proposal"),
+                            proposal_path(question.proposal),
+                            target: "_blank" %>
+              </small>
+            <% end %>
+          </td>
+          <td>
+            <%= render Admin::TableActionsComponent.new(question) do |actions| %>
+              <%= actions.link_to t("admin.polls.show.edit_answers"), admin_question_path(question),
+                                                                      class: "answers-link" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

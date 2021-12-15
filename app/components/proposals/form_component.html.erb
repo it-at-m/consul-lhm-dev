@@ -9,6 +9,13 @@
 
     <legend class='margin-top'><%= t("custom.proposals.form.required") %></legend>
     <%= render "shared/globalize_locales", resource: proposal %>
+
+    <% if feature?(:allow_images) %>
+      <div class="images">
+        <%= render "images/nested_image", f: f %>
+      </div>
+    <% end %>
+
     <%= f.translatable_fields do |translations_form| %>
       <div>
         <%= translations_form.text_field :title,
@@ -17,12 +24,6 @@
               autocomplete: "off" %>
       </div>
       <div class="js-suggest" data-locale="<%= translations_form.locale %>"></div>
-
-      <% if feature?(:allow_images) %>
-        <div class="images">
-          <%= render "images/nested_image", f: f %>
-        </div>
-      <% end %>
 
       <div>
         <%= translations_form.text_area :summary,
