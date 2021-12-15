@@ -50,4 +50,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     #sign_in_with :openid_connect_login, :openid_connect
   end
   # ENDE Ergänzung für Keycloak-Anbindung
+
+  def after_sign_in_path_for(resource)
+    if resource.registering_with_oauth && !resource.valid?
+      finish_signup_path
+    else
+      current_user.update(registering_with_oauth: false)
+      super(resource)
+    end
+  end
 end
