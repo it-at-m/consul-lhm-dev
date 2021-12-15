@@ -11,3 +11,28 @@
 .js-access-flyout-menu-item:focus {
   outline: 3px solid #ffbf47 !important;
 }
+
+// Login buttons
+
+.button-bayern_id,
+.button-m_login,
+.button-bayern_id:hover,
+.button-m_login:hover {
+  color: transparent;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: white;
+}
+
+.button-bayern_id {
+  background-image: url('bayern_id.png');
+}
+
+.button-m_login {
+  background-image: url('m_login');
+}
+
+.button-m_login:hover {
+  background-image: url('m_login_hover');
+}
