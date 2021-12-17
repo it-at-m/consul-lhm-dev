@@ -5,7 +5,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 CKEDITOR.editorConfig = function( config )
 {
-  config.extraPlugins = 'widget,lineutils,mjAccordion,youtube,iframe';
+  config.extraPlugins = 'widget,lineutils,mjAccordion,youtube,iframe,abbr';
   config.filebrowserImageBrowseLinkUrl = "/ckeditor/pictures";
   config.filebrowserImageBrowseUrl = "/ckeditor/pictures";
   config.filebrowserImageUploadUrl = "/ckeditor/pictures?";
@@ -117,11 +117,11 @@ CKEDITOR.editorConfig = function( config )
 
   config.toolbar_extended_admin = [
     { name: "paragraph", groups: [ "list", "indent", "blocks", "align", "bidi" ], items: [ "NumberedList", "BulletedList", "-", "Outdent", "Indent", "-", "Blockquote", "-", "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock" ] },
-    { name: "links", items: [ "Link", "Unlink", "Anchor" ] },
+    { name: "links", items: [ "Link", "Unlink", "Anchor", "Abbr" ] },
     { name: "styles", items: [ "Format", "Font", "FontSize", "Styles" ] },
     { name: "basicstyles", groups: [ "basicstyles", "cleanup" ], items: [ "Bold", "Italic", "Underline", "Strike", "Subscript", "Superscript", "-", "RemoveFormat" ] },
     { name: "colors", items: [ "TextColor", "BGColor" ] },
-    { name: "insert", items: [ "Image", "Table", "MJAccordion", "Source", "HorizontalRule", 'Iframe', 'Youtube'  ] },
+    { name: "insert", items: [ "Image", "Table", "MJAccordion", "Source", "HorizontalRule", 'Iframe', 'Youtube' ] },
   ];
 
   config.toolbar = "mini";
