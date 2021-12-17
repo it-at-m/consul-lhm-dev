@@ -11,6 +11,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     authlevel = extra.raw_info[:authlevel]
     keycloak_link = extra.raw_info["preferred_username"]
 
+    if validate_absolute_email_uniqueness(email)
+      @hidden_user_with_this_email_exists = true
+      redirect_to new_user_registration_path(reason: 'uh') and return
+    end
+
     user = User.find_by keycloak_link: keycloak_link
 
     unless user
@@ -57,6 +62,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     else
       current_user.update(registering_with_oauth: false)
       super(resource)
+    end
+  end
+
+  def validate_absolute_email_uniqueness(email)
+    if email.present?
+      hidden_user_with_same_email = User.only_hidden.find_by(email: email)
+
+      hidden_user_with_same_email.present?
     end
   end
 end

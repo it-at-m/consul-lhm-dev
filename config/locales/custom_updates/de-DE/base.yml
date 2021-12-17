@@ -50,6 +50,8 @@ de:
           new:
             privacy_link: Datenschutzbestimmung
             terms: Mit der Registrierung akzeptieren Sie die %{terms} und %{privacy}
+            hidden_user_with_this_email_exisits_regular: Es besteht bereits ein Konto mit dieser E-Mail-Adresse. Bitte verwenden Sie eine andere E-Mail-Adresse für die Registrierung.
+            hidden_user_with_this_email_exisits_omniauth_html: Es besteht bereits ein Konto mit dieser E-Mail-Adresse. Bitte ändern Sie die E-Mail-Adresse in Ihrem externen Benutzerkonto (Bayern-ID oder M-Login) oder kontaktieren Sie uns unter <a href=r'mailto:support.eogov@muenchen.der'>support.eogov@muenchen.de</a>
     gdpr_notice:
       accept: Akzeptieren
       link_text: Mehr Infos

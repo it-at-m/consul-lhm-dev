@@ -3,6 +3,18 @@
 
 <%= render "devise/omniauth_form", action: "sign_up" %>
 
+<% if @hidden_user_with_this_email_exists %>
+  <div class="callout alert">
+    <%= t('custom.devise_views.users.registrations.new.hidden_user_with_this_email_exisits_regular')  %>
+  </div>
+<% end %>
+
+<% if params[:reason] == 'uh' %>
+  <div class="callout alert">
+    <%= t('custom.devise_views.users.registrations.new.hidden_user_with_this_email_exisits_omniauth_html')  %>
+  </div>
+<% end %>
+
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "shared/errors", resource: resource %>
 

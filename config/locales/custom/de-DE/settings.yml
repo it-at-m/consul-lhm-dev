@@ -91,6 +91,10 @@ de:
       google_login_description: "Anmeldung mit Google-Account erlauben"
       wordpress_login: "Wordpress Login"
       wordpress_login_description: "Anmeldung mit Wordpress-Account erlauben"
+      bayern_id_login: BayernID
+      bayern_id_login_description: Anmelden mit BayernID erlauben
+      m_login_login: M-Login
+      m_login_login_description: Anmelden mit M-Login erlauben
       featured_proposals: "Hervorgehobene Vorschläge"
       featured_proposals_description: "Zeigt hervorgehobene Vorschläge auf der Index Vorschlags-Seite an"
       signature_sheets: "Unterschriftenbögen"

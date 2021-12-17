@@ -35,6 +35,8 @@ en:
           new:
             privacy_link: Privacy policy
             terms: With the registration you accept the %{terms} and %{privacy}
+            hidden_user_with_this_email_exisits_regular: An account with this email already exists. Please use a different email address for sign up.
+            hidden_user_with_this_email_exisits_omniauth_html: An account with this email already exists. Please change your email in the external account management system(Bayern-ID or M-Login) or contact us at <a href=r'mailto:support.eogov@muenchen.der'>support.eogov@muenchen.de</a>
     gdpr_notice:
       accept: Accept
       link_text: More info
