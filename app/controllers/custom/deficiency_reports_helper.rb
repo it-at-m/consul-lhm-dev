@@ -25,25 +25,6 @@ module DeficiencyReportsHelper
     end
   end
 
-  def show_official_reply_form?(deficiency_report)
-    return false unless current_user.present?
-
-    return true if current_user.administrator?
-
-    if feature?("deficiency_reports.admins_must_assign_officer")
-      current_user.deficiency_report_officer? &&
-        current_user == deficiency_report.officer.user
-    else
-      current_user.deficiency_report_officer?
-    end
-  end
-
-  def shall_be_approved?(deficiency_report)
-    Setting['deficiency_reports.admins_must_approved_officer_answer'].present? &&
-      !deficiency_report.official_answer_approved? &&
-      current_user.administrator?
-  end
-
   def deficiency_reports_default_view?
     @view == "default"
   end

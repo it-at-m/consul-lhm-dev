@@ -21,11 +21,15 @@ de:
             filter_button: Kategorien filtern
           statuses:
             title: Status
-            all_statuses: Alle Mängel
+            all_statuses: Alle Meldungen
           officer_filter:
             title: Sachbearbeiter
-            all_reports: Alle Mängel
+            all_reports: Alle Meldungen
             only_current_user: Mir zugewiesene Meldungen
+          approval_status_filter:
+            title: Admin
+            all_reports: Alle Meldungen
+            reports_to_approve: Freizugebende Meldungen
         orders:
           hot_score: Aktivste
           newest: Neuste
@@ -83,3 +87,5 @@ de:
           hi: Liebe/r Sachbearbeiter*in,
           p1: Ihnen wurde ein Mangel vom Admin zugewiesen.
           signature_html: Viele Grüße</br>Consul
+      notifications:
+        official_answer_updated: 'Antwort wurde erfolgreich gespeichert'

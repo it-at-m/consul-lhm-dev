@@ -99,14 +99,14 @@
       window.location.href = url;
     },
 
-    updateSelectedDeficiencyOfficerParam: function($label) {
+    updateSelectedFilter: function($label, filter_name, default_value) {
       var url = new URL(window.location.href);
-      var selection = $('input[name="dr_officer"]:checked').val();
+      var selection = $('input[name=' + filter_name + ']:checked').val();
 
-      if ( selection == 'all' ) {
-        url.searchParams.delete('dr_officer')
+      if ( selection == default_value ) {
+        url.searchParams.delete(filter_name)
       } else {
-        url.searchParams.set('dr_officer', selection)
+        url.searchParams.set(filter_name, selection)
       }
 
       url.searchParams.delete('search')
@@ -136,7 +136,13 @@
       $("body").on("click", ".js-filter-by-deficiency-report-officer", function() {
         var $label = $(this).closest('label');
         App.DeficiencyReports.updateLabelStyle($label.closest('li'));
-        App.DeficiencyReports.updateSelectedDeficiencyOfficerParam($label);
+        App.DeficiencyReports.updateSelectedFilter($label, 'dr_officer', 'all');
+      });
+
+      $("body").on("click", ".js-filter-by-deficiency-report-approval-status", function() {
+        var $label = $(this).closest('label');
+        App.DeficiencyReports.updateLabelStyle($label.closest('li'));
+        App.DeficiencyReports.updateSelectedFilter($label, 'approval_status', 'all');
       });
 
       $("body").on("click", ".js-update-dr-categories", function() {

@@ -2,10 +2,9 @@
 
   <div class="sidebar-divider"></div>
 
-  <h2 class="sidebar-title projekt-tag-chip-projekt projekt-tag-chip-icon"><%= t("custom.deficiency_reports.index.sidebar.statuses.title") %></h2>
+  <h2 class="sidebar-title sidebar-title-icon fa-check-circle"><%= t("custom.deficiency_reports.index.sidebar.statuses.title") %></h2>
 
-
-  <ul id='deficiency-report-statuses-sidebar-filter'>
+  <ul class='deficiency-reports-sidebar-filter '>
 
     <li <%= "class=label-selected" if @selected_status_id.nil? %> >
       <%= label_tag "status_0", class: '' do %>

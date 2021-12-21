@@ -127,10 +127,7 @@ module Abilities
         projekt_phase.selectable_by?(user)
       end
 
-      can [:read, :json_data, :create], DeficiencyReport
-      can [:update_status, :update_category, :update_official_answer], DeficiencyReport do |deficiency_report|
-        deficiency_report.updateable_by_user?(user)
-      end
+      can [:read, :json_data, :create, :vote], DeficiencyReport
     end
   end
 end

@@ -148,7 +148,7 @@ class Setting < ApplicationRecord
         "projekts.second_level_projekts_in_archived_filter": false,
         "deficiency_reports.show_in_main_menu": false,
         "deficiency_reports.admins_must_assign_officer": false,
-        "deficiency_reports.admins_must_approved_officer_answer": false,
+        "deficiency_reports.admins_must_approve_officer_answer": false,
         "deficiency_reports.allow_voting": false,
         "deficiency_reports.enable_comments": true,
         # "extended_feature.general.elasticsearch": false,

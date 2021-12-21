@@ -161,8 +161,8 @@ de:
         show_in_main_menu_description: Zeigt den Mängelmelder in der Hauptnavigation an
         admins_must_assign_officer: Admins müssen Sachbearbeiter*in zuweisen
         admins_must_assign_officer_description: Administratoren weisen Mangel an Sachbearbeiter*in zu
-        admins_must_approved_officer_answer: Admins müssen Antwort der Sachbearbeiter*innen freigeben
-        admins_must_approved_officer_answer_description: Administratoren geben die Antwort der Sachbearbeiter*in vor Veröffentlichung frei
+        admins_must_approve_officer_answer: Admins müssen Antwort der Sachbearbeiter*innen freigeben
+        admins_must_approve_officer_answer_description: Administratoren geben die Antwort der Sachbearbeiter*in vor Veröffentlichung frei
         allow_voting: Nutzer*innen Bewertung pro Mangel
         allow_voting_description: Aktiviert die Nutzer*innen-Bewertung für den Mängelmelder
         enable_comments: Kommentarfunktion

@@ -87,3 +87,23 @@ body>header, .wrapper>header, .top-bar {
 html.is-reveal-open body {
   overflow-y: visible !important;
 }
+
+
+// Sidebar
+
+.sidebar-title-icon:before {
+  font-weight: bold;
+  font-family: "Font Awesome 5 Free";
+  color: inherit;
+  margin-right: 0.25em;
+  display: inline-block;
+  text-decoration: none;  
+}
+
+.sidebar-title-icon.fa-highlighter:before {
+  content: "\f591";
+}
+
+.sidebar-title-icon.fa-check-circle:before {
+  content: "\f058";
+}

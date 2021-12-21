@@ -1,0 +1,22 @@
+<div class="sidebar-divider"></div>
+
+<h2 class="sidebar-title sidebar-title-icon fa-highlighter"><%= t("custom.deficiency_reports.index.sidebar.approval_status_filter.title") %></h2>
+
+
+<ul class='deficiency-reports-sidebar-filter'>
+  <li <%= "class=label-selected" if params[:approval_status].blank? %> >
+    <%= label_tag "approval_status_all", class: '' do %>
+      <%= radio_button_tag(:approval_status, :all, params[:approval_status].blank?, { class: 'js-filter-by-deficiency-report-approval-status' } ) %>
+      <%= t('custom.deficiency_reports.index.sidebar.approval_status_filter.all_reports') %>
+      <span class="checkmark"></span>
+    <% end %>
+  </li>
+
+  <li <%= "class=label-selected" if params[:approval_status] == 'not_approved' %> >
+    <%= label_tag "approval_status_not_approved", class: '' do %>
+      <%= radio_button_tag(:approval_status, :not_approved, params[:approval_status] == 'not_approved', { class: 'js-filter-by-deficiency-report-approval-status' } ) %>
+      <%= t('custom.deficiency_reports.index.sidebar.approval_status_filter.reports_to_approve') %>
+      <span class="checkmark"></span>
+    <% end %>
+  </li>
+</ul>

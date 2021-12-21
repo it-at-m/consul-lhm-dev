@@ -50,7 +50,7 @@
           <% end %>
         <% end %>
 
-        <% if show_official_reply_form?(@deficiency_report) %>
+        <% if can? :update_official_answer, @deficiency_report %>
           <%= render "shared/globalize_locales", resource: @deficiency_report %>
           <%= translatable_form_for @deficiency_report, url: update_official_answer_deficiency_report_path do |f| %>
             <%= f.translatable_fields do |translations_form| %>
@@ -65,7 +65,7 @@
             <% end %>
           <% end %>
 
-          <% if shall_be_approved?(@deficiency_report) %>
+          <% if can? :approve_official_answer, @deficiency_report %>
             <%= button_to t('custom.deficiency_reports.show.approve_official_answer'), approve_official_answer_deficiency_report_path, class: 'button success approve-defficiciency-report-button', method: :patch %>
           <% end %>
         <% end %>
@@ -97,7 +97,7 @@
         <h2><%= t("custom.deficiency_reports.show.sidebar.status") %></h2>
         <%= render "deficiency_reports/status", deficiency_report: @deficiency_report %>
 
-        <% if @deficiency_report.updateable_by_user?(current_user) %>
+        <% if can? :update_status, @deficiency_report %>
           <%= form_for @deficiency_report, url: update_status_deficiency_report_path do |f| %>
             <%= f.select :deficiency_report_status_id, DeficiencyReport::Status.all.collect{ |df| [df.title, df.id] }, { label: false  }, {onchange: "this.form.submit();" } %>
           <% end %>
@@ -107,13 +107,13 @@
         <h2><%= t("custom.deficiency_reports.show.sidebar.category") %></h2>
         <%= render "deficiency_reports/category", deficiency_report: @deficiency_report %>
 
-        <% if @deficiency_report.updateable_by_user?(current_user) %>
+        <% if can? :update_category, @deficiency_report %>
           <%= form_for @deficiency_report, url: update_category_deficiency_report_path do |f| %>
             <%= f.select :deficiency_report_category_id, DeficiencyReport::Category.all.collect{ |df| [df.name, df.id] }, { label: false }, { onchange: "this.form.submit();" } %>
           <% end %>
         <% end %>
 
-        <% if @deficiency_report.officer.present? || (current_user && current_user.administrator?)  %>
+        <% if current_user && ( current_user.administrator? || current_user.deficiency_report_officer? ) %>
           <div class="sidebar-divider"></div>
           <h2><%= t("custom.deficiency_reports.show.sidebar.officer") %></h2>
           <% if @deficiency_report.officer.present? %>
@@ -123,7 +123,7 @@
           <% end %>
         <% end %>
 
-        <% if current_user && current_user.administrator?  %>
+        <% if can? :update_officer, @deficiency_report  %>
           <%= form_for @deficiency_report, url: update_officer_deficiency_report_path do |f| %>
             <%= f.select :deficiency_report_officer_id, DeficiencyReport::Officer.all.collect{ |df| [df.name, df.id] }, { label: false, prompt: t('custom.deficiency_reports.show.sidebar.select_officer') }, { onchange: "this.form.submit();" } %>
           <% end %>

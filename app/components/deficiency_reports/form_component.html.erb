@@ -14,12 +14,6 @@
             autocomplete: "off" %>
       </div>
 
-      <% if feature?(:allow_images) %>
-        <div class="images">
-          <%= render "images/nested_image", imageable: deficiency_report, f: f %>
-        </div>
-      <% end %>
-
       <div>
         <%= translations_form.text_area :summary,
                                         rows: 4, maxlength: 200,
@@ -31,6 +25,12 @@
         <%= translations_form.text_area :description,
               class: "html-area #{ck_editor_class(current_user)}",
               label: t('custom.deficiency_reports.form.labels.description')   %>
+      </div>
+    <% end %>
+
+    <% if feature?(:allow_images) %>
+      <div class="images">
+        <%= render "images/nested_image", imageable: deficiency_report, f: f %>
       </div>
     <% end %>
   </fieldset>

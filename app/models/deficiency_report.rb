@@ -57,22 +57,11 @@ class DeficiencyReport < ApplicationRecord
   end
 
   def can_be_published?
-    if Setting['deficiency_reports.admins_must_approved_officer_answer'].present?
+    if Setting['deficiency_reports.admins_must_approve_officer_answer'].present?
       official_answer.present? && official_answer_approved?
     else
       official_answer.present?
     end
-  end
-
-  def updateable_by_user?(user)
-    return false if user.nil?
-    return true if user.administrator?
-
-    unless Setting['deficiency_reports.admins_must_assign_officer'].present?
-      return true if user.deficiency_report_officer?
-    end
-
-    false
   end
 
   def total_votes

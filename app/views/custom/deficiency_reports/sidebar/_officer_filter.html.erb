@@ -1,9 +1,9 @@
 <div class="sidebar-divider"></div>
 
-<h2 class="sidebar-title projekt-tag-chip-projekt projekt-tag-chip-icon"><%= t("custom.deficiency_reports.index.sidebar.officer_filter.title") %></h2>
+<h2 class="sidebar-title sidebar-title-icon fa-highlighter"><%= t("custom.deficiency_reports.index.sidebar.officer_filter.title") %></h2>
 
 
-<ul id='deficiency-report-statuses-sidebar-filter'>
+<ul class='deficiency-reports-sidebar-filter '>
   <li <%= "class=label-selected" if @selected_officer.nil? %> >
     <%= label_tag "dr_officer_all", class: '' do %>
       <%= radio_button_tag(:dr_officer, :all, @selected_officer.nil?, { class: 'js-filter-by-deficiency-report-officer' } ) %>

@@ -130,6 +130,12 @@
           <%= render "deficiency_reports/sidebar/officer_filter" %>
         <% end %>
 
+        <% if current_user &&
+            current_user.administrator? &&
+            Setting['deficiency_reports.admins_must_approve_officer_answer'].present? %>
+          <%= render "deficiency_reports/sidebar/not_approved_filter" %>
+        <% end %>
+
       </aside>
     </div>
 
