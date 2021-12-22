@@ -16,6 +16,10 @@
 
 .button-bayern_id,
 .button-m_login,
+.button-bayern_id:active,
+.button-m_login:active,
+.button-bayern_id:focus,
+.button-m_login:focus,
 .button-bayern_id:hover,
 .button-m_login:hover {
   color: transparent;

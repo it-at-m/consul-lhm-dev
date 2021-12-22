@@ -11,6 +11,7 @@
         <%= link_to t("omniauth.#{login}.name"), send("user_#{login}_omniauth_authorize_path"),
                     title: t("omniauth.#{login}.#{action}"),
                     class: "button-#{login.to_s.delete_suffix("_oauth2")} button expanded",
+                    role: 'button',
                     method: :post %>
       </div>
     <% end %>
