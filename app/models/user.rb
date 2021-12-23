@@ -73,7 +73,7 @@ class User < ApplicationRecord
   has_many :topics, foreign_key: :author_id, inverse_of: :author
   belongs_to :geozone
 
-  validates :username, presence: true, if: :username_required?
+  validates :username, presence: true, if: proc { |user| user.username_required? && !user.registering_with_oauth }
   validates :username, uniqueness: { scope: :registering_with_oauth }, if: :username_required?
   validates :document_number, uniqueness: { scope: :document_type }, allow_nil: true
 
