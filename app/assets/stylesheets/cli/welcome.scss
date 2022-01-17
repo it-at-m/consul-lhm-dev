@@ -6,14 +6,14 @@
   position: relative;
   height: 250px;
   margin-top: -24px;
-	background-image: url(lhm.jpg);
-	background-position: center;
-	background-size: cover;
+  background-image: image-url(lhm.jpg);
+  background-position: center;
+  background-size: cover;
 
-	@media screen and (min-width: 40em) {
-		background-image: none;
-		height: initial;
-	}
+  @media screen and (min-width: 40em) {
+    background-image: none;
+    height: initial;
+  }
 
   .hero-content {
     position: absolute;
@@ -69,7 +69,7 @@
     margin-right: 55px;
 
     @media screen and (min-width: 40em) {
-			margin-right: initial;
+      margin-right: initial;
     }
 
     span {
