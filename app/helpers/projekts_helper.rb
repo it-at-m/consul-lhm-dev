@@ -1,14 +1,20 @@
 module ProjektsHelper
-  def link_to_projekt_page(projekt)
-    content_tag = content_tag(:i, '', class: "fas fa-#{projekt.icon || 'circle'}")
+  def breadcrumbs_links(base_projekt, divider = '/', home_page_link = true)
+    divider_tag = content_tag(:div, divider, class: 'breadcrumbs-divider')
 
-    if projekt.page.published?
-      link_tag = link_to(projekt.name, projekt.page.url)
-    elsif projekt.parent.present? && projekt.parent.page.published?
-      link_tag = link_to(projekt.name, projekt.parent.page.url)
+    links = base_projekt.breadcrumb_trail_ids.map do |projekt_id|
+      projekt = Projekt.find(projekt_id)
+
+      if !projekt.page.published? || (projekt == base_projekt && home_page_link)
+        content_tag(:div, projekt.title, class: 'breadcrumbs-item')
+      else
+        link_to projekt.page.title, projekt.page.url, class: 'breadcrumbs-item'
+      end
     end
 
-    content_tag + link_tag
+    links.unshift(link_to t('custom.projekt.page.breadcrumbs.homepage'), root_path, class: 'breadcrumbs-item') if home_page_link
+
+    content_tag(:div, safe_join(links, divider_tag).html_safe, class: 'custom-breadcrumbs')
   end
 
   def projekt_bar_background_color(projekt)

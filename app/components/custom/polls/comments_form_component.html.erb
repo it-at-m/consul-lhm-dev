@@ -1,0 +1,21 @@
+<% if user_signed_in? && @poll.comments_allowed?(current_user) %>
+  <%= render "comments/form", { commentable: @poll, parent_id: nil } %>
+
+<% elsif user_signed_in? %>
+  <div class='callout alert'>
+    <% if current_user.geozone && @poll.geozones.any? && !@poll.geozone_ids.include?(current_user.geozone.id) %>
+      <%= t('custom.comments.restricted.geo_limitation', geozones: @poll.geozones.names.join(', ')) %>
+
+    <% elsif @poll.expired? %>
+      <%= t('custom.comments.restricted.poll_phase_expired')%>
+
+    <% elsif !@poll.expired? && !@poll.current?  %>
+      <%= t('custom.polls.show.cant_answer_not_started_yet', start_date: @poll.starts_at.strftime("%d.%m.%Y"), end_date: @poll.ends_at.strftime("%d.%m.%Y") )%>
+
+    <% end %>
+  </div>
+
+<% else %>
+  <%= render "shared/login_to_comment" %>
+
+<% end %>

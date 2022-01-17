@@ -34,3 +34,106 @@
   text-decoration: none;
   color: $white;
 }
+
+// Make iframes responsive
+
+iframe {
+  max-width: 100%;
+}
+
+// Show external video with two click
+
+.flex-video {
+  padding-bottom: 60%;
+}
+
+.flex-video iframe {
+  position: relative;
+  width: 560px;
+  height: 170px;
+}
+
+.iframe-explainer-text {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+}
+
+.iframe-explainer {
+  padding: 10%;
+}
+
+.iframe-consent-button {
+  margin-top: 1rem;
+}
+
+
+@media screen and (min-width: 350px) {
+  .flex-video iframe {
+    height: 210px;
+  }
+}
+
+@media screen and (min-width: 450px) {
+  .flex-video iframe {
+    height: 240px;
+  }
+
+  .iframe-explainer-text {
+    font-size: 1rem;
+  }
+
+  .iframe-explainer {
+    padding: 20% 10%;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .flex-video iframe {
+    height: 300px;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .flex-video iframe {
+    height: 230px;
+  }
+
+  .iframe-explainer {
+    padding: 10%;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .flex-video iframe {
+    height: 300px;
+  }
+
+  .flex-video {
+    padding-bottom: 65%;
+  }
+
+  .iframe-explainer {
+    padding: 20% 10%;
+  }
+}
+
+@media screen and (min-width: 950px) {
+  .flex-video iframe {
+    height: 365px;
+  }
+
+  .flex-video {
+    padding-bottom: 65%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .flex-video iframe {
+    height: 365px;
+  }
+
+  .flex-video {
+    padding-bottom: 75%;
+  }
+}

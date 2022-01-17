@@ -58,7 +58,7 @@ describe "Documents", :admin do
     click_button "Upload"
 
     expect(page).to have_content "Document uploaded succesfully"
-    expect(page).to have_link "logo.pdf", href: Document.last.attachment.url
+    expect(page).to have_link "logo.pdf"
   end
 
   scenario "Errors on create" do
@@ -75,7 +75,9 @@ describe "Documents", :admin do
     visit admin_site_customization_documents_path
 
     within("#document_#{document.id}") do
-      accept_confirm { click_link "Delete" }
+      accept_confirm("Are you sure? This action will delete \"#{document.title}\" and can't be undone.") do
+        click_button "Delete"
+      end
     end
 
     expect(page).to have_content "Document deleted succesfully"

@@ -19,10 +19,7 @@
   <div class="row">
     <div class="column">
       <% if @custom_page.projekt.present? %>
-        <%= render partial: 'breadcrumbs', locals: { current_page: @custom_page } %>
-        <div class='breadcrumbs-item'>
-          <%= @custom_page.title %>
-        </div >
+        <%= breadcrumbs_links(@custom_page.projekt) %>
       <% end %>
 
       <div class="row">

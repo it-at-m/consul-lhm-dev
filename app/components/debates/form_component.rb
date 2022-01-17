@@ -7,8 +7,4 @@ class Debates::FormComponent < ApplicationComponent
   def initialize(debate)
     @debate = debate
   end
-
-    def categories
-      Tag.category.order(:name)
-    end
 end

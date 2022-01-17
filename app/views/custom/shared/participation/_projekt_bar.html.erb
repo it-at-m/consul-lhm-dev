@@ -1,6 +1,6 @@
-<div class='projekt-bar column' style="background-color:<%= projekt_bar_background_color(resource.projekt) %>;color:<%= projekt_bar_text_color(resource.projekt) %>" >
+<div class='projekt-bar column' style="background-color:<%= projekt_bar_background_color(resource.projekt.top_parent) %>;color:<%= projekt_bar_text_color(resource.projekt.top_parent) %>" >
   <div class='projekt-name'>
-    <%= link_to_projekt_page(resource.projekt) %>
+    <%= breadcrumbs_links(resource.projekt, ">", false) %>
   </div>
 
   <div class='show-for-large'>
@@ -16,6 +16,7 @@
 
     <% elsif action_name == 'show' %>
       <%= link_to t("custom.shared.show.back_link", resources: resource.model_name.human(count: 2)), (taggables_path(resource.class.name.underscore, '') + "&projekts=#{resource.projekt.id}") %>
+
     <% end%>
   </div>
 </div>

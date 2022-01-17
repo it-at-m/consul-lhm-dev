@@ -1,16 +1,16 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="external-links" content=<%= Setting["extended_feature.gdpr.link_out_warning"] %> />
-<meta name="two-click-iframes" content=<%= Setting["extended_feature.gdpr.two_click_iframe_solution"] %> />
-<meta name="expand-active-projekts" content=<%= Setting["projekts.second_level_projekts_in_active_filter"] %> />
-<meta name="expand-archived-projekts" content=<%= Setting["projekts.second_level_projekts_in_archived_filter"] %> />
 <title><%= content_for?(:title) ? yield(:title) : default_title %></title>
 <%= stylesheet_link_tag "application" %>
 <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
 <%= csrf_meta_tags %>
 <%= favicon_link_tag "favicon.ico" %>
-<%= render "layouts/disable_animations_in_tests" if Rails.env.test? %>
+
+<meta name="external-links" content=<%= Setting["extended_feature.gdpr.link_out_warning"] %> />
+<meta name="two-click-iframes" content=<%= Setting["extended_feature.gdpr.two_click_iframe_solution"] %> />
+<meta name="expand-active-projekts" content=<%= Setting["projekts.second_level_projekts_in_active_filter"] %> />
+<meta name="expand-archived-projekts" content=<%= Setting["projekts.second_level_projekts_in_archived_filter"] %> />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

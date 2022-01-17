@@ -440,3 +440,9 @@ span.projekt-backlink:before {
     padding-top: 0.5rem;
   }
 }
+
+// Projekt settings
+
+.admin .featured-settings-form [aria-pressed] {
+  margin-bottom: 0;
+}

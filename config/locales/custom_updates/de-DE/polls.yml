@@ -16,6 +16,8 @@ de:
         days_left:
           one: "Noch 1 Tag"
           other: "Noch %{count} Tage" 
+        expires_today: Läuft nur noch heute
+        expired: Abstimmung abgelaufen
       questions:
         answers:
           more_info: Mehr Infos

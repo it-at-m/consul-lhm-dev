@@ -172,6 +172,7 @@ class Setting < ApplicationRecord
         "extended_feature.debates.head_image_for_debates": false,
         "extended_feature.debates.show_report_button_in_debate_sidebar": true,
         "extended_feature.debates.show_related_content": true,
+        "extended_feature.debates.enable_projekt_filter": true,
         "extended_feature.proposals.intro_text_for_proposals": false,
         "extended_feature.proposals.quorum_for_proposals": false,
         "extended_feature.proposals.enable_proposal_support_withdrawal": true,
@@ -183,13 +184,15 @@ class Setting < ApplicationRecord
         "extended_feature.proposals.show_related_content": true,
         "extended_feature.proposals.enable_proposal_notifications_tab": false,
         "extended_feature.proposals.enable_proposal_milestones_tab": false,
+        "extended_feature.proposals.enable_projekt_filter": true,
         "extended_option.proposals.max_active_proposals_per_user": 100,
         "extended_option.proposals.description_max_length": 6000,
         "extended_feature.polls.intro_text_for_polls": false,
         "extended_feature.polls.intermediate_poll_results_for_admins": true,
         "extended_feature.polls.enable_comments": true,
         "extended_feature.polls.additional_information": true,
-        "extended_feature.polls.additional_info_for_each_answer": true
+        "extended_feature.polls.additional_info_for_each_answer": true,
+        "extended_feature.polls.enable_projekt_filter": true
       }
     end
 

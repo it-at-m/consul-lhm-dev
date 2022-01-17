@@ -71,7 +71,6 @@
 //= require advanced_search
 //= require registration_form
 //= require suggest
-//= require filter_selector
 //= require forms
 //= require valuation_budget_investment_form
 //= require embed_video
@@ -129,6 +128,7 @@
 //= require deficiency_reports
 //= require leaflet.markercluster
 //= require leaflet.locatecontrol
+//= require_tree ./admin
 //= require_tree ./sdg
 //= require_tree ./sdg_management
 
@@ -152,7 +152,6 @@ var initialize_modules = function() {
   App.RegistrationForm.initialize();
   App.Suggest.initialize();
   App.Forms.initialize();
-  App.FilterSelector.initialize();
   App.ValuationBudgetInvestmentForm.initialize();
   App.EmbedVideo.initialize();
   App.FixedBar.initialize();
@@ -184,6 +183,8 @@ var initialize_modules = function() {
   if ($("#js-columns-selector").length) {
     App.ColumnsSelector.initialize();
   }
+  App.AdminBudgetsWizardCreationStep.initialize();
+  App.AdminMachineLearningScripts.initialize();
   App.BudgetEditAssociations.initialize();
   App.Datepicker.initialize();
   App.ClickOutWarning.initialize();

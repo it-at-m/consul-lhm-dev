@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<%= I18n.locale %>">
+<html <%= "dir=rtl" if rtl? %> lang="<%= I18n.locale %>">
 
   <head>
     <%= render "layouts/common_head", default_title: "Management" %>
@@ -8,42 +8,7 @@
   </head>
 
   <body class="admin">
-    <header class="header">
-      <div class="top-links">
-        <div class="expanded row">
-          <%= render "shared/locale_switcher" %>
-        </div>
-      </div>
-
-      <div class="expanded row admin-top-bar">
-        <div class="top-bar">
-          <div class="top-bar-left">
-            <ul class="menu">
-              <li class="menu-text">
-                <h1>
-                  <%= link_to management_root_path do %>
-                    <%= setting["org_name"] %>
-                    <br><small><%= t("management.dashboard.index.title") %></small>
-                  <% end %>
-                </h1>
-              </li>
-            </ul>
-          </div>
-          <% if show_admin_menu?(manager_logged_in) %>
-            <div id="responsive_menu">
-
-              <div class="top-bar-right">
-                <ul class="menu" data-responsive-menu="medium-dropdown">
-                  <%= render "shared/admin_login_items", current_user: manager_logged_in %>
-                  <%= render "devise/menu/login_items", current_user: manager_logged_in %>
-                </ul>
-              </div>
-
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </header>
+    <%= render "layouts/admin_header", current_user: manager_logged_in %>
 
     <div class="menu-and-content">
       <%= check_box_tag :show_menu, nil, false, role: "switch" %>

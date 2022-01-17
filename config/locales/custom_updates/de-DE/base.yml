@@ -16,7 +16,7 @@ de:
         report_text: Melden Sie uns diesen Beitrag bei unangebrachten Inhalt oder bei Urheberrechtsverletzungen.
         report_button: Melden
         follow_text: Folgen Sie diesem Vorschlag, um stets über Neuigkeiten zu diesem Vorschlag informiert zu werden. 
-        related_title: Verwandte inhalte
+        related_title: Verwandte Inhalte
         related_text: Sie können Links von anderen Vorschlägen und Diskussionen hinzufügen.
         related_button: Hinzufügen
     account:
@@ -89,6 +89,11 @@ de:
         image_name: Name des Titelbildes
     layouts:
       header:
+        home_link: Start Seite
+        admin_link: Administration
+        account_link: Konto
+        notification_item:
+          no_notifications: Keine Benachrichtigungen
         title_html: "Öffentlichkeitsbeteiligung<br><span>in der Landeshauptstadt"
       footer:
         demokratie: demokratie.today

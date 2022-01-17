@@ -4,19 +4,21 @@ body > header .locale.locale-custom,
 .wrapper > header .locale.locale-custom {
   height: 2.5rem;
   margin-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 
   &::after {
     display: none;
   }
 
   .locale-form {
+    margin-top: 0.65rem;
 
     label {
       color: $white;
     }
   
     .locale-switcher {
-      margin-top: 0.75rem;
 
       &:focus {
         outline: 3px solid #ffbf47 !important
@@ -32,13 +34,33 @@ body > header .locale.locale-custom,
   h2.city-name {
     border-bottom: 1px solid currentColor;
     padding-bottom: 0.5rem;
-    margin: 1em;
+    margin: 1rem;
   }
 
-  .subnavigation.row {
+  .subnavigation ul.main-menu {
+    margin-left: 1rem;
+    padding-bottom: 1rem;
+    margin-right: 1rem;
+  }
+
+  .subnavigation {
     position: absolute;
-    width: calc(100% + 2px);
-    top: 100%;
+    width: 100%;
+
+    &:before {
+      bottom: 0;
+      content: "";
+      display: block;
+      left: 0;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+      left: -0.625rem;
+      right: -0.625rem;
+      background: $white;
+      z-index: -1;
+    }
   }
 
   .hamburger-menu {
@@ -66,21 +88,34 @@ span.icon-circle {
 }
 
 span.icon-notification,
-span.icon-no-notification {
-  font-size: 19px;
+span.icon-no-notification,
+span.icon-home,
+span.icon-admin,
+span.icon-account {
+
+  &:before {
+    font-size: 20px;
+  }
 }
 
-.icon-notification::before {
-  font-size: 22px;
+.icon-home::before {
+  content: "\f015"
+}
+
+.icon-admin::before {
+  content: "\f013";
+}
+
+.icon-account::before {
+  content: "\f2bd";
 }
 
 .subnavigation a.home-items-icon {
   display: none;
-}
 
-.subnavigation ul.main-menu {
-  margin-left: 1em;
-  padding-bottom: 1em;
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .account-admin-items {
@@ -125,10 +160,9 @@ span.icon-no-notification {
 #responsive-menu {
   width: 100%;
 
-  .subnavigation.row {
+  .subnavigation {
     background-color: $responsive-menu-background-color;
     color: $responsive-menu-text-color;
-    left: 8px;
 
     a {
       color: $responsive-menu-text-color;
@@ -173,7 +207,7 @@ span.icon-no-notification {
 
   .flyout-item .nav-toggle-arrow {
     top: 9px;
-    right: -15px;
+    right: 0;
   }
 
   .nav-toggle-arrow:after {
@@ -236,12 +270,6 @@ span.icon-no-notification {
     }
   }
 
-  .home-icon {
-    top: 14px;
-    right: 0;
-    position: absolute;
-  }
-
   .subnavigation ul.main-menu {
     display: flex;
     margin-left: 0;
@@ -284,27 +312,15 @@ span.icon-no-notification {
     .admin-items-icon {
       width: 20px;
       height: 100%;
-    }
 
-    .icon-no-notification::before {
-      font-size: 20px;
+      &:hover {
+        text-decoration: none;
+      }
     }
 
     .account-items-link,
     .admin-items-link {
       display: none;
-    }
-
-    .admin-icon {
-      top: 14px;
-      right: 0;
-      padding-bottom: 14px;
-    }
-
-    .account-icon {
-      top: 14px;
-      right: 0;
-      padding-bottom: 14px;
     }
 
     .top-level-item {
@@ -459,4 +475,9 @@ span.icon-no-notification {
     }
   }
 
+}
+
+.subnavigation a {
+  padding-top: 0;
+  padding-bottom: 0;
 }

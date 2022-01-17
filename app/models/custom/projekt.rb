@@ -88,6 +88,14 @@ class Projekt < ApplicationRecord
     self.parent.level(counter+1)
   end
 
+  def breadcrumb_trail_ids(breadcrumb_trail_ids = [])
+    breadcrumb_trail_ids.unshift(self.id)
+
+    parent.breadcrumb_trail_ids(breadcrumb_trail_ids) if parent.present?
+
+    breadcrumb_trail_ids
+  end
+
   def all_parent_ids(all_parent_ids = [])
     if self.parent.present?
       all_parent_ids.push(parent.id)

@@ -40,19 +40,18 @@ describe "Cards", :admin do
   end
 
   scenario "Index" do
-    3.times { create(:widget_card) }
+    cards = Array.new(3) { create(:widget_card) }
 
     visit admin_homepage_path
 
     expect(page).to have_css(".homepage-card", count: 3)
 
-    cards = Widget::Card.all
     cards.each do |card|
       expect(page).to have_content card.title
       expect(page).to have_content card.description
       expect(page).to have_content card.link_text
       expect(page).to have_content card.link_url
-      expect(page).to have_link("Show image", href: card.image_url(:large))
+      expect(page).to have_link "Show image"
     end
   end
 
@@ -110,8 +109,8 @@ describe "Cards", :admin do
     visit admin_homepage_path
 
     within("#widget_card_#{card.id}") do
-      accept_confirm do
-        click_link "Delete"
+      accept_confirm("Are you sure? This action will delete \"#{card.title}\" and can't be undone.") do
+        click_button "Delete"
       end
     end
 
@@ -163,7 +162,7 @@ describe "Cards", :admin do
         visit admin_site_customization_pages_path
 
         within "#site_customization_page_#{custom_page.id}" do
-          click_link "See Cards"
+          click_link "Manage cards"
         end
 
         click_link "Create card"
@@ -172,6 +171,7 @@ describe "Cards", :admin do
           href: admin_site_customization_page_widget_cards_path(custom_page))
 
         fill_in "Title", with: "Card for a custom page"
+        fill_in "Link URL", with: "/any_path"
         click_button "Create card"
 
         expect(page).to have_current_path admin_site_customization_page_widget_cards_path(custom_page)
@@ -237,8 +237,8 @@ describe "Cards", :admin do
 
         expect(page).to have_content("Card title")
 
-        accept_confirm do
-          click_link "Delete"
+        accept_confirm("Are you sure? This action will delete \"Card title\" and can't be undone.") do
+          click_button "Delete"
         end
 
         expect(page).to have_current_path admin_site_customization_page_widget_cards_path(custom_page)
@@ -251,11 +251,8 @@ describe "Cards", :admin do
 
   def attach_image_to_card
     click_link "Add image"
-    image_input = all(".image").last.find("input[type=file]", visible: false)
-    attach_file(
-      image_input[:id],
-      Rails.root.join("spec/fixtures/files/clippy.jpg"),
-      make_visible: true)
+    attach_file "Choose image", Rails.root.join("spec/fixtures/files/clippy.jpg")
+
     expect(page).to have_field("widget_card_image_attributes_title", with: "clippy.jpg")
   end
 end

@@ -1,4 +1,8 @@
 en:
+  admin:
+    homepage:
+      feeds:
+        polls: Polls
   custom:
     admin:
       homepage:

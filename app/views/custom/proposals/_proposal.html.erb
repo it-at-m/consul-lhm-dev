@@ -1,4 +1,4 @@
-<% cache [locale_and_user_status(proposal), "index", proposal, proposal.voters, proposal.projekt, proposal.image, proposal.author, params[:tags], params[:projekts], params[:geozone_affiliation], params[:affiliated_geozones], params[:geozone_restriction], params[:restricted_geozones], proposal_settings_fingerprints ] do %>
+<% cache [locale_and_user_status(proposal), "index", proposal, proposal.voters, proposal.projekt, proposal.projekt.page, proposal.image, proposal.author, params[:tags], params[:projekts], params[:geozone_affiliation], params[:affiliated_geozones], params[:geozone_restriction], params[:restricted_geozones], proposal_settings_fingerprints ] do %>
 
   <div id="<%= dom_id(proposal) %>" class='row collapse resource-n proposal margin-bottom' data-equalizer='main' data-equalize-on="medium">
     <div class='columns'>
@@ -7,13 +7,13 @@
       </div>
     </div>
 
-    <div class='columns small-12 medium-3 large-2 image-container show-for-small-only'>
+    <div class='columns small-12 medium-3 large-2 show-for-small-only'>
       <% if show_image_thumbnail?(proposal) %>
         <%= image_tag proposal.image_url(:large), alt: proposal.image.title.unicode_normalize %>
       <% end %>
     </div>
 
-    <div class="columns small-12 medium-3 large-2 image-container show-for-medium <%= 'image-placeholder' unless show_image_thumbnail?(proposal)  %>" data-equalizer-watch='main'>
+    <div class="columns small-12 medium-3 large-2 show-for-medium <%= "image-placeholder icon-#{proposal.projekt.icon || "image" }" unless show_image_thumbnail?(proposal)  %>" data-equalizer-watch='main'>
       <% if show_image_thumbnail?(proposal) %>
         <%= image_tag proposal.image_url(:thumb_wider), alt: proposal.image.title.unicode_normalize %>
       <% end %>

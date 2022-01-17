@@ -19,14 +19,18 @@ describe "Admin poll officers", :admin do
     click_button "Search"
 
     expect(page).to have_content user.name
-    click_link "Add"
+
+    click_button "Add"
+
     within("#officers") do
       expect(page).to have_content user.name
     end
   end
 
   scenario "Delete" do
-    accept_confirm { click_link "Delete position" }
+    accept_confirm("Are you sure? This action will delete \"#{officer.name}\" and can't be undone.") do
+      click_button "Delete position"
+    end
 
     expect(page).not_to have_css "#officers"
   end

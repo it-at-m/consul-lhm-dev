@@ -60,6 +60,8 @@ de:
     meta_keywords_description: 'Stichwörter <meta name="keywords">, zur Verbesserung der Auffindbarkeit in Suchmaschinen'
     min_age_to_participate: erforderliches Mindestalter zur Teilnahme
     min_age_to_participate_description: "Nutzer ab diesem Alter können an allen Prozessen teilnehmen"
+    postal_codes: "Postleitzahl"
+    postal_codes_description: "Eine durch Komma getrennte Liste gültiger Postleitzahlen; Sie können auch durch einen Doppelpunkt getrennte Bereiche angeben. Beispiel: 00001:00010,00024,AB3 45FG,00031:00035 lässt Postleitzahlen zwischen 00001 und 00010, die Postleitzahl 00024, die Postleitzahl AB3 45FG und Postleitzahlen zwischen 00031 und 00035 zu. Wenn Sie das Feld leer lassen, sind alle Postleitzahlen gültig."
     proposals:
       successful_proposal_id: Erfolgreicher Vorschlag
       successful_proposal_id_description: Dieser Vorschlag wird als Referenz für einen erfolgreichen Vorschlag in der Unterstützungs-Anzahl verwendet und im Dashboard-Diagramm angezeigt.
@@ -91,10 +93,6 @@ de:
       google_login_description: "Anmeldung mit Google-Account erlauben"
       wordpress_login: "Wordpress Login"
       wordpress_login_description: "Anmeldung mit Wordpress-Account erlauben"
-      bayern_id_login: BayernID
-      bayern_id_login_description: Anmelden mit BayernID erlauben
-      m_login_login: M-Login
-      m_login_login_description: Anmelden mit M-Login erlauben
       featured_proposals: "Hervorgehobene Vorschläge"
       featured_proposals_description: "Zeigt hervorgehobene Vorschläge auf der Index Vorschlags-Seite an"
       signature_sheets: "Unterschriftenbögen"
@@ -110,6 +108,8 @@ de:
         recommendations_on_proposals_description: "Zeigt Vorschlags-Empfehlungen auf der Vorschlagssübersichtsseite an, basierend auf dem Nutzerverhalten."
       community: "Community für Vorschläge und Investitionsvorschläge"
       community_description: "Schaltet den Community-Bereich in der Rubrik Vorschläge und Investitionsprojekte der Budgets ein"
+      machine_learning: "AI / Machine learning"
+      machine_learning_description: "Aktivieren Sie den Bereich KI/Maschinelles Lernen, um Python-Skripte auszuführen und Inhalte automatisch anzureichern."
       map: "Der Standort von Vorschlägen und Investitonsvorschlägen wird angezeigt"
       map_description: "Ermöglicht die Geolokalisierung der Vorschläge und Investitionsprojekte"
       allow_images: "Upload und Anzeigen von Bildern erlauben"
@@ -134,6 +134,8 @@ de:
       dashboard:
         notification_emails: "Dashboard Email-Benachrichtigungen"
         notification_emails_description: "Aktivieren Sie das Senden von Dashboard-E-Mail-Benachrichtigungen an die Autoren von Vorschlägen"
+      remove_investments_supports: "Allow removing supports on budget investments"
+      remove_investments_supports_description: "Allow users to remove supports on participatory budgets investments during the selecting projects phase."
       sdg: SDG
       sdg_description: Aktivieren Sie die Abschnitte "Sustainable Development Goals" im Administrationsmenü und in den Globalen Einstellungen.
     remote_census:

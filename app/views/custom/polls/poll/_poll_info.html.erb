@@ -3,7 +3,7 @@
 
 <div class='resource-info'>
   <div class='resource-info-date'>
-		<%= t("custom.polls.poll.days_left", count: (@poll.ends_at.to_date - Date.today).to_i ) %> 
+    <%= poll_remaining_activity_days(@poll) %>
   </div>
 
   <div class='resource-info-comments'>

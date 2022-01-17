@@ -1,11 +1,17 @@
 .custom-page-banner {
   display: none;
+  background-clip: content-box;
 
   @media screen and (min-width: 40em) {
     display: block;
-    margin-top: -25px;
-    margin-bottom: 25px;
+    margin-top: -24px;
+    margin-bottom: 24px;
     height: 250px;
+  }
+
+  @media only screen and (min-width: 75rem) {
+    margin-left: calc(-50vw + 37.5rem);
+    margin-right: calc(-50vw + 37.5rem);
   }
 }
 

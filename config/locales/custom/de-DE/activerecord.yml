@@ -4,6 +4,10 @@ de:
     results_enabled: "Ergebnisse anzeigen"
     stats_enabled: "Statistiken anzeigen"
     advanced_stats_enabled: "Erweiterte Statistiken anzeigen"
+    name: Name
+    email: Email
+    description: Beschreibung
+    related_sdg_list: Ziele und Unterziele
   activerecord:
     models:
       activity:
@@ -72,6 +76,18 @@ de:
       proposal:
         one: "Vorschlag"
         other: "Vorschläge"
+      sdg/goal:
+        one: "Ziel"
+        other: "Ziele"
+      sdg/local_target:
+        one: "Lokales Unterziel"
+        other: "Lokale Unterziele"
+      sdg/manager:
+        one: "SDG Manager*in"
+        other: "SDG Manager*innen"
+      sdg/target:
+        one: "Unterziel"
+        other: "Unterziele"
       site_customization/page:
         one: Meine Seite
         other: Meine Seiten
@@ -145,6 +161,8 @@ de:
         voting_style_knapsack: "Knapsack (Mehrere Stimmen bis Budget aufgebraucht ist)"
         voting_style_approval: "Zustimmung (Eine Stimme)"
       budget/translation:
+        main_link_text: "Linktext"
+        main_link_url: "Der Link führt Sie zu (Link hinzufügen)"
         name: "Name"
       budget/investment:
         heading_id: "Rubrik"
@@ -214,8 +232,11 @@ de:
         ends_at: "Enddatum des Verfahrens"
         starts_at: "Anfangsdatum"
       budget/phase/translation:
+        name: "Name"
         description: "Beschreibung"
         summary: "Zusammenfassung"
+        main_link_text: "Linktext"
+        main_link_url: "Der Link führt Sie zu (Link hinzufügen)"
       comment:
         body: "Kommentar"
         user: "Benutzer*in"
@@ -272,6 +293,7 @@ de:
         responsible_name: "Der/die* Gruppenverantwortliche"
       poll:
         name: "Name"
+        title: "Name"
         starts_at: "Anfangsdatum"
         ends_at: "Enddatum"
         geozone_restricted: "Beschränkt auf Bereiche"
@@ -308,6 +330,24 @@ de:
         signable_type: "Unterschriftentyp"
         signable_id: "ID des Vorschlags/Investitionsvorschlags"
         document_numbers: "Dokumentennummern"
+      sdg/goal:
+        code: "Code"
+        title: "Titel"
+        description: "Beschreibung"
+      sdg/local_target:
+        code: "Code"
+        target_id: "Unterziel"
+        title: "Titel"
+      sdg/local_target/translation:
+        title: "Titel"
+        description: "Beschreibung"
+      sdg/phase/kind:
+        sensitization: "Sensibilisierung"
+        planning: "Planung"
+        monitoring: "Überwachung"
+      sdg/target:
+        code: "Code"
+        title: "Titel"
       site_customization/page:
         content: Inhalt
         created_at: Erstellt am
@@ -500,10 +540,6 @@ de:
           attributes:
             segment_recipient:
               invalid: "Das Benutzer*innensegment ist ungültig"
-        map_location:
-          attributes:
-            map:
-              invalid: Der Kartenstandort darf nicht leer sein. Platzieren Sie einen Marker oder aktivieren Sie das Kontrollkästchen, wenn eine Standorterkennung nicht möglich ist
         poll/voter:
           attributes:
             document_number:
@@ -558,6 +594,10 @@ de:
           attributes:
             locale:
               already_translated: Ressource wurde schon übersetzt
+        sdg/local_target:
+          attributes:
+            code:
+              invalid: "muss mit demselben Code wie das Ziel beginnen, gefolgt von einem Punkt, und mit einer Zahl enden"
       messages:
         translations_too_short: Ist verpflichtet, mindestens eine Übersetzung zur Verfügung zu stellen
         record_invalid: "Validierung fehlgeschlagen: %{errors}"

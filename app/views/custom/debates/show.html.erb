@@ -53,7 +53,9 @@
 
             <%= auto_link_already_sanitized_html wysiwyg(@debate.description) %>
 
-            <%= render "relationable/related_content", relationable: @debate %>
+            <% if extended_feature?('debates.show_related_content') %>
+              <%= render "relationable/related_content", relationable: @debate %>
+            <% end %>
           </div>
 
           <aside class="small-12 medium-3 column">

@@ -104,7 +104,7 @@ describe "Admin banners magement", :admin do
     fill_in "Post ended at", with: Date.current + 1.week
 
     click_button "Save changes"
-    click_link "Edit banner"
+    click_link "Edit"
 
     expect_to_have_language_selected "Français"
     expect(page).to have_field "Title", with: "En Français"
@@ -137,7 +137,7 @@ describe "Admin banners magement", :admin do
       click_link "Manage banners"
     end
 
-    click_link "Edit banner"
+    click_link "Edit"
 
     fill_in "Title", with: "Modified title"
     fill_in "Description", with: "Edited text"
@@ -173,7 +173,9 @@ describe "Admin banners magement", :admin do
 
     expect(page).to have_content "Ugly banner"
 
-    accept_confirm { click_link "Delete banner" }
+    accept_confirm("Are you sure? This action will delete \"Ugly banner\" and can't be undone.") do
+      click_button "Delete"
+    end
 
     visit admin_root_path
     expect(page).not_to have_content "Ugly banner"

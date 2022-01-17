@@ -43,9 +43,9 @@
 
       createMarker = function(latitude, longitude, color, iconClass) {
         if ( !iconClass ) {
-          iconClass = '';
+          iconClass = 'circle';
         } else {
-          iconClass = ' ' + 'custom-icon' + ' ' + iconClass
+          iconClass = iconClass
         };
 
         var markerLatLng;
@@ -58,9 +58,9 @@
         });
 
         if ( color ) {
-          markerIcon.options.html = '<div class="map-icon' + iconClass + '" style="background-color: ' + color + '"></div>'
+          markerIcon.options.html = '<div class="map-icon icon-' + iconClass + '" style="background-color: ' + color + '"></div>'
         } else {
-          markerIcon.options.html = '<div class="map-icon' + iconClass + '"></div>'
+          markerIcon.options.html = '<div class="map-icon icon-' + iconClass + '"></div>'
         }
 
         marker = L.marker(markerLatLng, {
@@ -200,7 +200,7 @@
       map.addControl(search);
 
 
-      L.control.locate().addTo(map);
+      L.control.locate({icon: 'fa fa-map-marker'}).addTo(map);
 
 
       if (markerLatitude && markerLongitude && !addMarker) {

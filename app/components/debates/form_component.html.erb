@@ -9,6 +9,13 @@
 
     <legend class='margin-top'><%= t("custom.debates.form.required") %></legend>
     <%= render "shared/globalize_locales", resource: debate %>
+
+    <% if extended_feature?("debates.head_image_for_debates") %>
+      <div class="images">
+        <%= render "images/nested_image", imageable: @debate, f: f %>
+      </div>
+    <% end %>
+
     <%= f.translatable_fields do |translations_form| %>
       <div>
         <%= translations_form.text_field :title,
@@ -22,12 +29,6 @@
         <%= translations_form.text_area :description,
               maxlength: Debate.description_max_length,
               class: "html-area #{helpers.ck_editor_class(current_user)}" %>
-      </div>
-    <% end %>
-
-    <% if extended_feature?("debates.head_image_for_debates") %>
-      <div class="images">
-        <%= render "images/nested_image", imageable: @debate, f: f %>
       </div>
     <% end %>
   </fieldset>
@@ -82,6 +83,7 @@
                   ) %>
       </div>
     <% end %>
+
     <%= f.submit(class: "button", value: t("debates.#{action_name}.form.submit_button")) %>
   </div>
 <% end %>

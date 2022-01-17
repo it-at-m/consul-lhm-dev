@@ -1,0 +1,5 @@
+<%= render Proposals::CommentsFormComponent.new(record) if record.class.name == 'Proposal' %>
+<%= render Debates::CommentsFormComponent.new(record) if record.class.name == 'Debate' %>
+<%= render Polls::CommentsFormComponent.new(record) if record.class.name == 'Poll' %>
+<%= render Pages::CommentsFormComponent.new(record) if record.class.name == 'Projekt' %>
+<%= render DeficiencyReports::CommentsFormComponent.new(record) if record.class.name == 'DeficiencyReport' %>

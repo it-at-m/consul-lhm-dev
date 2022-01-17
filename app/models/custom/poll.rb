@@ -8,6 +8,8 @@ class Poll < ApplicationRecord
   belongs_to :projekt, optional: true
   has_many :geozone_affiliations, through: :projekt
 
+  scope :with_active_projekt,  -> { joins(:projekt).merge(Projekt.active) }
+
   def answerable_by?(user)
     user &&
       !user.organization? &&

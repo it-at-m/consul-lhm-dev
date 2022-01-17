@@ -3,7 +3,7 @@
       share_title: t("custom.pages.social_share.share"),
       title: projekt.page.title,
       url: url_for(only_path: false),
-      description: strip_tags(projekt.page.content)[0..200] + '...',
+      description: strip_tags(projekt.page.content || '')[0..200] + '...',
       mobile: projekt.page.title
   %>
 <% end %>

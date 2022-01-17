@@ -1,9 +1,10 @@
 de:
   moderation:
+    actions:
+      confirm_action: "Sind Sie sicher? %{action}"
     comments:
       index:
         block_authors: Autoren blockieren
-        confirm: Sind Sie sich sicher?
         filter: Filter
         filters:
           all: Alle
@@ -14,7 +15,6 @@ de:
           moderate: Moderieren
         hide_comments: Kommentare ausblenden
         ignore_flags: Als gelesen markieren
-        order: Bestellung
         orders:
           flags: Am meisten markiert
           newest: Neueste
@@ -25,7 +25,6 @@ de:
     debates:
       index:
         block_authors: Autoren blockieren
-        confirm: Sind Sie sich sicher?
         filter: Filter
         filters:
           all: Alle
@@ -36,7 +35,6 @@ de:
           moderate: Moderieren
         hide_debates: Diskussionen ausblenden
         ignore_flags: Als gelesen markieren
-        order: Bestellung
         orders:
           created_at: Neueste
           flags: Am meisten markiert
@@ -53,7 +51,6 @@ de:
     proposals:
       index:
         block_authors: Autoren blockieren
-        confirm: Sind Sie sich sicher?
         filter: Filter
         filters:
           all: Alle
@@ -64,7 +61,6 @@ de:
           proposal: Vorschlag
         hide_proposals: Vorschläge ausblenden
         ignore_flags: Als gelesen markieren
-        order: Sortieren nach
         orders:
           created_at: Neuste
           flags: Am meisten markiert
@@ -72,7 +68,6 @@ de:
     budget_investments:
       index:
         block_authors: Autoren blockieren
-        confirm: Sind Sie sich sicher?
         filter: Filter
         filters:
           all: Alle
@@ -83,7 +78,6 @@ de:
           budget_investment: Haushaltsinvestitionen
         hide_budget_investments: Investitionsvorschläge verbergen
         ignore_flags: Als gelesen markieren
-        order: Sortieren nach
         orders:
           created_at: neuestes
           flags: Am meisten markiert
@@ -91,7 +85,6 @@ de:
     proposal_notifications:
       index:
         block_authors: Autoren blockieren
-        confirm: Sind Sie sich sicher?
         filter: Filter
         filters:
           all: Alle
@@ -102,16 +95,17 @@ de:
           proposal_notification: Benachrichtigung zu einem Vorschlag
         hide_proposal_notifications: Vorschläge ausblenden
         ignore_flags: Als gelesen markieren
-        order: Sortieren nach
         orders:
           created_at: neuestes
           moderated: Moderiert
         title: Benachrichtigungen zu einem Vorschlag
     users:
       index:
-        hidden: Blockiert
-        hide: Block
-        search: Suche
+        block: Blockieren
+        confirm_block: "Sind Sie sicher? Dadurch wird der/die Benutzer*in \"%{name}\" und alle seine/ihre Inhalte ausgeblendet."
+        confirm_hide: "Sind Sie sicher? Damit wird der/die Benutzer*in \"%{name}\" ausgeblendet, ohne dass sein/ihr Inhalt verborgen wird."
+        hide: Verstecken
         search_placeholder: E-Mail oder Benutzername
-        title: Benutzer blockieren
-      notice_hide: Benutzer gesperrt. Alle Diskussionen und Kommentare dieses Benutzers wurden ausgeblendet.
+        title: Benutzer*in blockieren
+      notice_hide: Benutzer*in gesperrt. Alle Diskussionen und Kommentare dieses/dieser Benutzers*in wurden ausgeblendet.
+      notice_hide: Der/die Benutzer*in wurde ausgeblendet. Inhalte, die von diesem/dieser Benutzer*in verfasst wurden, sind weiterhin verfügbar.

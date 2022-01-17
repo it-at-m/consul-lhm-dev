@@ -56,7 +56,7 @@
   <%tags = @selected_tags&.select{ |tag| tag.kind == 'category' } %>
 
   <% if feature?(:map) %>
-    <div class="map inline">
+    <div class="map proposals-map">
       <% if @selected_parent_projekt %>
         <%= render_map(@selected_parent_projekt.map_location, "proposals", false, nil, @proposals_coordinates) %>
       <% else %>
@@ -191,7 +191,10 @@
         <% end %>
 
         <% if params[:retired].blank? %>
-          <%= render "shared/projekt_sidebar_filter/projekts_sidebar" %>
+
+          <% if extended_feature?('proposals.enable_projekt_filter') %>
+            <%= render "shared/projekt_sidebar_filter/projekts_sidebar" %>
+          <% end %>
           <% if show_affiliation_filter_in_sidebar? %>
             <%= render "shared/sidebar_filter/geozone_affiliations" %>
           <% end %>

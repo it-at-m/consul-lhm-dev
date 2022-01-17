@@ -72,10 +72,15 @@ de:
         create:
           submit_button: Mangel melden
       mailers:
-        notify_administrators:
+        notify_administrators_about_new_deficiency_report:
           subject: Neue Mangelmeldung
           hi: Lieber Admin,
           p1: es wurde ein neuer Mangel gemeldet.
+          signature_html: Viele Grüße</br>Consul
+        notify_administrators_about_answer_update:
+          subject: Neue offizielle Antwort von einem/einer Sachbearbeiter*in
+          hi: Lieber Admin,
+          p1: ein/e Sachbearbeiter*in hat eine neue offizielle Antwort gespeichert.
           signature_html: Viele Grüße</br>Consul
         notify_author_about_status_change:
           subject: Statusänderung Ihres Mangels

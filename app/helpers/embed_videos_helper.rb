@@ -24,7 +24,8 @@ module EmbedVideosHelper
     end
 
     if match && match[2]
-      '<iframe src="' + src + match[2] + '" style="border:0;" allowfullscreen title="' + title + '"></iframe>'
+      # '<iframe src="' + src + match[2] + '" style="border:0;" allowfullscreen title="' + title + '"></iframe>'
+      '<iframe src="' + src + match[2] + '" style="border:0;" allowfullscreen title="' + title + '" width="560" height="315"></iframe>'
     else
       ""
     end

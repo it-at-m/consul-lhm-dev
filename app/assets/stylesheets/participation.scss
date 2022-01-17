@@ -29,7 +29,7 @@
   .icon-like,
   .icon-unlike {
     background: #fff;
-    border: 2px solid $text-light;
+    border: 2px solid;
     border-radius: rem-calc(3);
     color: $text-light;
     display: inline-block;
@@ -149,7 +149,6 @@
   }
 
   .percentage {
-    color: $text;
     font-size: $tiny-font-size;
     position: absolute;
     right: 6px;
@@ -167,7 +166,7 @@
 
   .button-support {
     background: $proposals;
-    color: $text;
+    color: inherit;
     display: inline-block;
     font-size: $small-font-size;
     margin-top: rem-calc(12);
@@ -180,7 +179,6 @@
   }
 
   .total-supports {
-    color: $text;
     display: block;
     font-weight: bold;
     text-align: center;
@@ -225,13 +223,13 @@
   z-index: 2;
 
   p {
-    color: $color-warning !important;
+    color: inherit !important;
     margin: 0 rem-calc(12);
     text-align: left;
   }
 
   a {
-    color: $color-warning !important;
+    color: inherit !important;
     font-weight: bold;
     text-decoration: underline;
   }
@@ -246,36 +244,6 @@
 // 02. New participation
 // ---------------------
 
-.debate-new,
-.proposal-new,
-.budget-investment-form,
-.document-form,
-.topic-new,
-.topic-form {
-
-  .icon-debates,
-  .icon-proposals,
-  .icon-budget,
-  .icon-image {
-    font-size: rem-calc(50);
-    line-height: $line-height;
-    opacity: 0.5;
-  }
-
-  .icon-debates {
-    color: $debates;
-  }
-
-  .icon-proposals,
-  .icon-image {
-    color: $proposals;
-  }
-
-  .icon-budget {
-    color: $budget;
-  }
-}
-
 .recommendations {
   list-style-type: none;
   margin-left: 0;
@@ -288,23 +256,6 @@
     &::before {
       margin-right: $font-icon-margin * 1.5;
     }
-  }
-}
-
-.debate-new {
-
-  .recommendations li::before {
-    color: $debates;
-  }
-}
-
-.proposal-new,
-.document-form,
-.topic-form,
-.topic-new {
-
-  .recommendations li::before {
-    color: $proposals;
   }
 }
 
@@ -392,6 +343,11 @@
     li {
       font-size: rem-calc(15);
       margin-bottom: rem-calc(15);
+    }
+
+    .order-links > li {
+      font-size: inherit;
+      margin-bottom: 0;
     }
   }
 
@@ -527,6 +483,7 @@
   }
 
   .filter-subnav {
+    @include full-width-background;
     background: $highlight;
     margin-bottom: $line-height;
     padding-top: $line-height / 4;
@@ -536,7 +493,7 @@
 .fixed-mobile-content {
 
   @include breakpoint(medium down) {
-    background: #fff;
+    background: $body-background;
     margin-bottom: rem-calc(-1) !important;
     padding-top: $line-height / 2;
   }
@@ -547,7 +504,6 @@
 
 .debates-list,
 .proposals-list,
-.investment-projects-list,
 .budget-investments-list {
 
   @include breakpoint(medium) {
@@ -555,11 +511,14 @@
   }
 }
 
-.investment-projects-list,
 .budget-investments-list {
 
   @include breakpoint(medium) {
     min-height: $line-height * 15;
+
+    .with-image > .row {
+      display: flex;
+    }
   }
 }
 
@@ -589,13 +548,14 @@
     }
 
     img {
+      // height: 100%;
       max-width: 12rem;
     }
   }
 }
 
 %panel {
-  background: #fff;
+  background: $body-background;
   border: 1px solid;
   border-color: #e5e6e9 #dfe0e4 #d0d1d5;
   border-radius: 0;
@@ -620,7 +580,7 @@
     margin-top: $line-height / 2;
 
     a {
-      color: $text;
+      color: inherit;
     }
   }
 
@@ -719,7 +679,6 @@
   .deficiency-report-description,
   .investment-project-description,
   .budget-investment-description {
-    color: $text;
     font-size: rem-calc(13);
     height: rem-calc(72);
     line-height: $line-height;
@@ -727,10 +686,6 @@
     margin-top: 0;
     overflow: hidden;
     position: relative;
-
-    a {
-      color: $text;
-    }
   }
 
   .truncate {
@@ -740,10 +695,6 @@
     height: rem-calc(24);
     position: absolute;
     width: 100%;
-  }
-
-  p {
-    color: $text;
   }
 }
 
@@ -821,6 +772,10 @@
       color: #fff;
       font-size: $base-font-size;
       font-weight: bold;
+
+      &:disabled {
+        opacity: 1;
+      }
 
       &:hover {
         background: $budget-hover;
@@ -905,8 +860,9 @@
 
 .help-header,
 .section-header {
+  @include full-width-background;
+  @include full-width-border(bottom, 1px solid #eee);
   background: #fafafa;
-  border-bottom: 1px solid #eee;
   margin-top: -$line-height;
   margin-bottom: $line-height;
   padding-bottom: $line-height / 2;
@@ -1026,6 +982,15 @@
   }
 }
 
+.search-results-summary {
+  @include full-width-background;
+  background: $highlight;
+  margin-bottom: $line-height;
+  margin-top: -$line-height;
+  padding-bottom: $line-height;
+  padding-top: $line-height;
+}
+
 // 05. Featured
 // ------------
 
@@ -1049,7 +1014,7 @@
     margin-bottom: 0;
 
     a {
-      color: $text;
+      color: inherit;
       font-size: rem-calc(24);
     }
   }
@@ -1093,7 +1058,7 @@
       margin-top: 0;
 
       &:hover {
-        background: #fff;
+        background: $body-background;
         color: $text;
       }
     }
@@ -1104,7 +1069,7 @@
       padding-top: 0;
 
       a {
-        color: $color-warning;
+        color: inherit;
       }
 
       p {
@@ -1124,7 +1089,7 @@
 
     .social-share-button .ssb-icon {
       background: none;
-      color: $text;
+      color: inherit;
       height: rem-calc(33);
 
       &::before {
@@ -1139,23 +1104,35 @@
 // -----------
 
 .budget-header {
-  @extend %brand-background;
-  margin-top: -$line-height;
-  padding-bottom: $line-height;
-  padding-top: $line-height;
+  @extend %budget-header;
 
-  h1,
-  h2,
-  p,
-  a,
-  .back,
-  .icon-angle-left,
-  .description {
-    color: #fff;
+  margin-top: -$line-height;
+  min-height: $line-height * 25;
+  padding-bottom: $line-height;
+  padding-top: $line-height * 4;
+
+  &.with-background-image {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
-  a {
-    text-decoration: underline;
+  h1 {
+    padding-top: $line-height * 2;
+  }
+
+  .budget-title {
+    font-weight: bold;
+    text-transform: uppercase;
+
+    &::after {
+      border-bottom: 2px solid #fff;
+      content: "";
+      margin: 0 auto;
+      padding-top: $line-height / 2;
+      display: block;
+      width: 20%;
+    }
   }
 
   .confirmed {
@@ -1171,11 +1148,20 @@
       text-transform: uppercase;
     }
   }
+
+  .main-link {
+    @include regular-button($color: rgba(0, 0, 0, 0.5));
+
+    font-size: 1.25rem;
+    margin-bottom: $line-height * 2;
+    min-width: 30%;
+    text-decoration: none;
+  }
 }
 
 .jumbo-budget {
-  background: $white;
-  border-bottom: 2px solid $border;
+  @include full-width-border(bottom, 2px solid $border);
+  background: $body-background;
 
   &.budget-heading {
     min-height: $line-height * 10;
@@ -1187,23 +1173,12 @@
 
       &::after {
         margin-left: $line-height / 4;
-        margin-right: 0;
       }
     }
   }
 
   h2 {
     margin-bottom: 0;
-  }
-
-  h1,
-  h2,
-  h3,
-  .back,
-  .icon-angle-left,
-  p,
-  a {
-    color: $text;
   }
 
   .tagline {
@@ -1216,7 +1191,7 @@
     font-size: $base-font-size;
 
     a {
-      color: $color-warning;
+      color: inherit;
     }
   }
 
@@ -1388,7 +1363,7 @@
     transition: height 0.3s;
 
     &.is-fixed {
-      background: $white;
+      background: $body-background;
       border-bottom: 2px solid $border;
       height: auto;
       left: 0;
@@ -1417,6 +1392,7 @@
 .budgets-stats {
 
   .header {
+    @include full-width-background;
     background: $highlight;
   }
 
@@ -1437,7 +1413,7 @@
   position: relative;
 
   a {
-    color: $text;
+    color: inherit;
     display: block;
 
     img {
@@ -1488,36 +1464,6 @@
 // 07. Proposals successful
 // -------------------------
 
-.dark-heading {
-  background: #2d3e50;
-  color: #fff;
-
-  @include breakpoint(medium) {
-    padding-bottom: $line-height;
-  }
-
-  p {
-
-    &.title {
-      color: #ffd200;
-    }
-
-    &.title-date {
-      font-size: rem-calc(24);
-      font-weight: bold;
-    }
-  }
-
-  .info {
-    background: #314253;
-    padding-top: $line-height;
-
-    @include breakpoint(medium) {
-      border-top: rem-calc(6) solid #ffd200;
-    }
-  }
-}
-
 .successful .panel {
 
   .icon-successful {
@@ -1567,27 +1513,12 @@
 // ----------------------
 
 .polls-show-header {
+  @include full-width-background;
   background: #fafafa;
-
-  .callout {
-
-    &.warning a {
-      color: $color-warning;
-    }
-
-    &.primary a {
-      color: $color-info;
-    }
-
-    &.alert a {
-      color: $color-alert;
-    }
-  }
 }
 
 .poll-more-info,
 .poll-more-info-answers {
-  border-top: 1px solid #eee;
 
   .read-more {
     margin-bottom: $line-height;
@@ -1599,16 +1530,22 @@
   }
 }
 
+.poll-more-info {
+  border-top: 1px solid #eee;
+}
+
 .poll-more-info-answers {
+  @include full-width-background;
+  @include full-width-border(top, 1px solid #eee);
+  @include full-width-border(bottom, 1px solid #eee);
   background: #fafafa;
-  border-bottom: 1px solid #eee;
 
   .column:nth-child(odd) {
-    border-right: 2px solid $text;
+    border-right: 2px solid;
   }
 
   .answer-divider {
-    border-bottom: 2px solid $text;
+    border-bottom: 2px solid;
     border-right: 0 !important;
     margin-bottom: $line-height;
     padding-bottom: $line-height;
@@ -1653,9 +1590,9 @@
 }
 
 .zoom-link {
-  background: #fff;
+  background: $body-background;
   border-radius: rem-calc(48);
-  color: #000;
+  color: $text;
   font-size: rem-calc(24);
   font-weight: bold;
   height: rem-calc(48);
@@ -1782,7 +1719,7 @@
     line-height: $line-height * 1.5;
 
     a {
-      color: $text;
+      color: inherit;
     }
   }
 }
@@ -1797,7 +1734,7 @@
   margin: $line-height 0;
 
   span {
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid;
   }
 }
 
@@ -1806,10 +1743,6 @@
 
   h3 {
     padding-top: $line-height;
-
-    a {
-      color: $text;
-    }
   }
 }
 
@@ -1874,18 +1807,6 @@
 // ---------------------------
 
 .polls-results-stats {
-
-  .sidebar {
-
-    .menu:not(.vertical) {
-      padding: 0;
-
-      li a {
-        color: $link;
-        line-height: $line-height;
-      }
-    }
-  }
 
   table {
     table-layout: fixed;

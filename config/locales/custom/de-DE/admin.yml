@@ -15,14 +15,13 @@ de:
       configure: 
       update: Update
       delete: Löschen
+      configure: Konfigurieren
     officing_booth:
       title: "Sie verlassen den Raum, der sich in %{booth} befindet. Wenn dies nicht korrekt ist, fahren Sie nicht fort und rufen Sie die Hilfe-Rufnummer an. Vielen Dank."
     banners:
       index:
         title: Banner
         create: Banner erstellen
-        edit: Banner bearbeiten
-        delete: Banner löschen
         filters:
           all: Alle
           with_active: Aktiv
@@ -36,12 +35,17 @@ de:
           proposals: Vorschläge
           budgets: Budget
           help_page: Hilfeseite
+          sdg: SDG
+      create:
+        notice: "Banner erfolgreich erstellt"
       edit:
         editing: Banner bearbeiten
         form:
           submit_button: Änderungen speichern
       new:
         creating: Banner erstellen
+      update:
+        notice: "Banner erfolgreich aktualisiert"
     activity:
       show:
         action: Aktion
@@ -63,36 +67,56 @@ de:
         type: Typ
         no_activity: Hier sind keine Moderator*innen aktiv.
     budgets:
+      actions:
+        ballots: "Wahlkabine erstellen"
+        confirm:
+          ballots: "Sind Sie sicher? Diese Maßnahme ist nur erforderlich, wenn Sie in der Endphase der Wahl physische Wahlkabinen einsetzen wollen. Die Bürgerinnen und Bürger können weiterhin über das Internet wählen, mit oder ohne Wahlkabinen."
+          destroy: "Sind Sie sicher? Dadurch werden das Budget und alle zugehörigen Gruppen und Rubriken gelöscht. Diese Aktion kann nicht rückgängig gemacht werden."
+        descriptions:
+          ballots: "Damit können Sie physische Stimmzettel verwalten. Verwenden Sie diese Option nur, wenn Sie während der letzten Abstimmungsphase physische Wahlkabinen zum Einsammeln der Stimmzettel verwenden wollen."
+          calculate_winners: 'Nach der Berechnung der Ergebnisse können nur Administratoren auf diese zugreifen. Sie werden veröffentlicht, wenn die Phase "%{phase}" erreicht wurde, <strong> wenn die Option "Ergebnisse anzeigen" bei den Budget-Einstellungen aktiviert ist</strong>'
+          destroy: "Dadurch werden das Budget und alle zugehörigen Gruppen und Rubriken gelöscht. Diese Aktion kann nicht rückgängig gemacht werden."
+        edit: "Budget editieren"
+        preview: "Vorschau"
+        preview_results: "Vorschau der Ergebnisse"
       index:
         title: Budgets
         new_link: Neuen Budget erstellen
         filter: Filter
         filters:
+          all: Alle
           open: Offen
           finished: Abgeschlossen
         budget_investments: Investitionsprojekte verwalten
+        table_budget_type: "Typ"
+        table_completed: Abgeschlossen
+        table_draft: "Entwurf"
+        table_duration: "Dauer"
         table_name: Name
         table_phase: Phase
-        table_investments: Investitionsvorschläge
-        table_edit_groups: Gruppierungen von Rubriken
-        table_edit_budget: Bearbeiten
-        table_admin_ballots: Stimmzettel
-        edit_groups: Gruppierungen von Rubriken bearbeiten
-        edit_budget: Budget bearbeiten
+        table_phase_progress: "(%{current_phase_number}/%{total_phases})"
+        type_multiple: "Mehrere Rubriken"
+        type_pending: "Ausstehend: Noch keine Rubriken"
+        type_single: "Einzelne Rubrik"
         admin_ballots: Admin Stimmzettel
         no_budgets: "Kein Budgets vorhanden."
       create:
         notice: Neuer Budget erfolgreich erstellt!
       update:
         notice: Budget erfolgreich aktualisiert
+      publish:
+        notice: "Budget erfolgreich veröffentlicht"
       edit:
         title: Budget bearbeiten
+        drafting: "Dieses Budget ist im Entwurfsmodus, nur Administratoren können ihn auf der öffentlichen Seite sehen. Sobald er veröffentlicht ist, kann er nicht mehr in den Entwurfsmodus geändert werden."
+        publish: "Budget veröffentlichen"
         delete: Budget löschen
         phase: Phase
-        dates: Datum
+        phases_caption: "Phasen"
+        duration: "Dauer"
         enabled: Aktiviert
         actions: Aktionen
-        edit_phase: Phase bearbeiten
+        enable_phase: "%{phase} Phase aktivieren"        
         active: Aktiv
         blank_dates: Das Datumfeld ist leer
         administrators:
@@ -105,12 +129,34 @@ de:
           other: "%{count} Gutachter*in ausgewählt"
         empty_administrators: "Keine Administrator*innen vorhanden"
         empty_valuators: "Keine Gutachter*innen vorhanden"
+        name_description: "Dies ist der Name des Budgets, der in der Kopfzeile und auf den Karten verwendet wird, wenn er aktiv ist."
+        image_description: "Wenn ein Bild hochgeladen wird, wird es als Banner über diesem Budget verwendet, ansonsten wird die Standardfarbe für Budgets verwendet."
+        main_call_to_action: "Haupt-Handlungsaufforderung (optional)"
+        main_call_to_action_description: "Dieser Link erscheint auf dem Hauptbanner des Budgets und ermutigt Ihre Nutzer, eine bestimmte Aktion durchzuführen, z. B. einen Vorschlag zu erstellen, für einen bestehenden Vorschlag abzustimmen oder mehr über den Prozess zu erfahren."
+        info:
+          budget_settings: "Allgemeine Einstellungen zum Budget"
+          staff_settings: "Dem Budget zugewiesene Verwalter und Bewerter"
       destroy:
         success_notice: Budget erfolgreich gelöscht
         unable_notice: Ein Budget mit zugehörigen Investitionsvorschlägen kann nicht gelöscht werden
         unable_notice_polls: Sie können kein Budget löschen, das eine zugehörige Abstimmung hat
       new:
-        title: Neuer Budget
+        title_multiple: Neues Budget mit mehreren Rubriken
+        title_single: Neues Budget mit einer Rubrik
+      help:
+        budgets: "Das Budget ermöglichen es den Bürgern, Vorschläge zu machen und direkt zu entscheiden, wie ein Teil des Budgets ausgegeben werden soll, wobei die Vorschläge von der Institution überwacht und streng bewertet werden."
+        groups:
+          multiple: "Gruppen sind dazu gedacht, Rubriken zu organisieren. Nachdem eine Gruppe erstellt wurde und sie Rubriken enthält, kann festgelegt werden, in wie vielen Rubriken ein Benutzer pro Gruppe abstimmen kann."
+          single: "Da dieses Budget nur eine Rubrik enthält, kann derselbe Name verwendet werden, da er nirgendwo erscheint. Sie können einfach mit dem nächsten Schritt fortfahren."
+        headings:
+          multiple: "Die Rubriken dienen dazu, das Geld des Budgets aufzuteilen. Hier können Sie Rubriken für diese Gruppe hinzufügen und den Geldbetrag zuweisen, der für jede Rubrik verwendet werden soll."
+          single: "Rubriken dienen dazu, das Geld des Budgets aufzuteilen. Da dieses Budget nur eine einzige Rubrik enthält, legen Sie hier das Geld fest, das in diesem Budget ausgegeben werden soll."
+        phases: "Budgets haben verschiedene Phasen. Hier können Sie Phasen aktivieren oder deaktivieren und auch jede einzelne Phase anpassen."
+      show:
+        add_group: "Gruppe hinzufügen"
+        add_heading: "Rubrik hinzufügen"
+        groups_and_headings: "Rubrikengruppen"
+        headings_caption: "Rubriken in %{group}"
       winners:
         calculate: Bestbewertete Vorschläge ermitteln
         calculated: Die bestbewerteten Vorschläge werden ermittelt. Dies kann einen Moment dauern.
@@ -118,7 +164,6 @@ de:
     budget_groups:
       name: "Name"
       headings_name: "Rubriken"
-      headings_edit: "Rubriken bearbeiten"
       headings_manage: "Rubriken verwalten"
       no_groups: "Keine Gruppen vorhanden."
       amount:
@@ -140,9 +185,6 @@ de:
         back: "Zurück zu Budgets"
     budget_headings:
       no_headings: "Keine Rubriken vorhanden."
-      amount:
-        one: "Es gibt 1 Rubrik"
-        other: "Es gibt %{count} Rubriken"
       create:
         notice: "Rubrik erfolgreich erstellt!"
       update:
@@ -158,14 +200,28 @@ de:
         create: "Neue Rubrik erstellen"
         edit: "Rubrik bearbeiten"
         submit: "Rubrik speichern"
+      group_switcher:
+        currently_showing: "Anzeige von Rubriken aus der Gruppe <strong>%{group}</strong>."
+        different_group: "Verwalten von Rubriken aus einer anderen Gruppe."
+        the_other_group: "Verwalten Sie Rubriken aus der Gruppe %{group}."
       index:
         back: "Zurück zu Gruppen"
+        new_button: "Neue Rubrik hinzufügen"
+        title: "%{budget} / %{group} Rubriken"
     budget_phases:
       edit:
-        summary_help_text: Dieser Text informiert die Benutzer*innen über die jeweilige Phase. Um den Text anzuzeigen, auch wenn die Phase nicht aktiv ist, klicken sie das untenstehende Kästchen an
+        title: "Phase editieren"
         description_help_text: Dieser Text erscheint in der Kopfzeile, wenn die Phase aktiv ist
+        duration: "Dauer der Phase"
+        duration_description: "Der Zeitraum, in dem diese Phase aktiv sein wird."
         enabled_help_text: Diese Phase wird öffentlich in der Zeitleiste der Phasen des Budget angezeigt und ist auch für andere Zwecke aktiv
+        image_description: "Wenn ein Bild hochgeladen wurde, wird es neben der Beschreibung dieser Phase angezeigt."
+        main_call_to_action: "Haupt-Handlungsempfehlung (optional)"
+        main_call_to_action_description: "Dieser Link erscheint auf dem Hauptbanner des Budgets, wenn diese Phase aktiviert ist, und ermutigt Ihre Nutzer, eine bestimmte Aktion auszuführen, z. B. einen Vorschlag zu erstellen, für bestehende Vorschläge abzustimmen oder mehr über den Prozess zu erfahren."
+        name_help_text: "Dies ist der Titel der Phase, den die Benutzer in der Kopfzeile lesen können, wenn diese Phase aktiv ist."
         save_changes: Änderungen speichern
+      index:
+        title: "%{budget} phases"
     budget_investments:
       index:
         heading_filter_all: Alle Überschriften
@@ -261,6 +317,37 @@ de:
         tags_placeholder: "Geben Sie die gewünschten Tags durch Kommas (,) getrennt ein"
         undefined: Undefiniert
       search_unfeasible: Suche undurchführbar
+    budgets_wizard:
+      creation_timeline:
+        budget: Budget
+        groups: Gruppen
+        headings: Rubriken
+        phases: Phasen
+      budgets:
+        continue: "Weiter zu den Gruppen"
+      groups:
+        back: "Zurück, um Budget zu bearbeiten"
+        continue: "Weiter zu den Rubriken"
+      headings:
+        continue: "Weiter zu den Phasen"
+        single:
+          back: "Zurück, um Gruppen zu bearbeiten"
+      heading_mode:
+        multiple:
+          description: "Erstellen Sie einen Prozess mit mehreren Gruppen, Bezirken oder Themen. Sie haben so etwas wie mehrere Taschen voller Geld. Zum Beispiel 25.000 € für das \"Nordviertel\", 30.000 € für das \"Mittelviertel\", 28.000 € für das \"Südviertel\" und die ganze Stadt. Oder für mehrere Themen wie Sport, Kultur oder Gesundheit."
+          link: "Budget für mehrere Rubriken erstellen"
+          title: "Budget mit <strong>mehreren Rubriken</strong>"
+        single:
+          description: "Erstellen Sie einen Prozess mit einer Gruppe, einem Bezirk oder einem Thema. Sie haben so etwas wie einen Beutel mit Geld. Zum Beispiel 25.000 € für den Bezirk oder 10.000 € für die Kultur."
+          link: "Budget für einer einzige Rubrik erstellen"
+          title: "Budget mit <strong>einer Rubrik</strong>"
+        title: "Art des Budgets"
+      phases:
+        continue: "Fertig stellen"
+        multiple:
+          back: "Zurück zu Rubriken"
+        single:
+          back: "Zurück, um Rubriken zu bearbeiten"
     milestones:
       index:
         table_id: "ID"
@@ -269,7 +356,6 @@ de:
         table_publication_date: "Datum der Veröffentlichung"
         table_status: Status
         table_actions: "Aktionen"
-        delete: "Meilenstein löschen"
         no_milestones: "Keine Meilensteine definiert"
         image: "Bild"
         show_image: "Bild anzeigen"
@@ -292,24 +378,22 @@ de:
         notice: Meilenstein erfolgreich gelöscht
     statuses:
       index:
-        title: Status der Investitionsvorschläge
+        title: Status der Vorschläge
         empty_statuses: Es wurde noch kein Status für Investitionsvorschläge definiert
-        new_status: Neuen Status für Investitionsvorschlag erstellen
+        new_status: Neuen Status für Vorschlag erstellen
         table_name: Name
         table_description: Beschreibung
         table_actions: Aktionen
-        delete: Löschen
-        edit: Bearbeiten
       edit:
-        title: Status für Investitionsvorschlag bearbeiten
+        title: Status des Investitionsvorschlag bearbeiten
       update:
-        notice: Status für Investitionsvorschlag erfolgreich aktualisiert
+        notice: Status des Investitionsvorschlag erfolgreich aktualisiert
       new:
-        title: Status für Investitionsvorschlag erstellen
+        title: Status des Investitionsvorschlag erstellen
       create:
-        notice: Status für Investitionsvorschlag erfolgreich erstellt
+        notice: Status des Investitionsvorschlag erfolgreich erstellt
       delete:
-        notice: Status für Investitionsvorschlag erfolgreich gelöscht
+        notice: Status des Investitionsvorschlag erfolgreich gelöscht
     progress_bars:
       manage: "Fortschrittsbalken verwalten"
       index:
@@ -362,8 +446,6 @@ de:
         index:
           description: "Wenn Benutzer Vorschläge erstellen, können sie auf ein Dashboard ihres Vorschlags zugreifen, in dem Sie Ressourcen und Empfehlungen vorschlagen können, um Unterstützung für ihre Idee zu erhalten."
           create: Ressource oder Aktion erstellen
-          edit: Bearbeiten
-          delete: Löschen
           active: 'Ja'
           inactive: 'Nein'
           title: Ressourcen und Aktionen
@@ -419,7 +501,6 @@ de:
         author: Autor
         title: Diskussionen
         no_debates: Keine Diskussion vorhanden.
-      update: Update
     hidden_debates:
       index:
         filter: Filter
@@ -491,15 +572,10 @@ de:
           allegations_phase: Ausarbeitungsphase
           proposals_phase: Vorschlagsphase
           use_markdown: Verwenden Sie Markdown, um den Text zu formationen
-          title_placeholder: Titel des Beteiligungsverfahrens
-          summary_placeholder: Kurze Zusammenfassung der Beschreibung
-          description_placeholder: Fügen Sie eine Beschreibung des Beteiligungsverfahrens hinzu
-          additional_info_placeholder: Fügen Sie zusätzliche Informationen hinzu, die Sie für nützlich halten
           homepage_description: Hier können Sie den Inhalt des Beteiligungsverfahrens erläutern
           banner_title: Farben Header
         index:
           create: Neues Beteiligungsverfahren
-          delete: Löschen
           title: Beteiligungsverfahren
           filters:
             active: Aktiv
@@ -509,7 +585,6 @@ de:
           title: Neues kollaboratives Beteiligungsverfahren erstellen
           submit_button: Beteiligungsverfahren erstellen
         proposals:
-          select_order: Sortieren nach
           orders:
             id: ID
             title: Titel
@@ -568,9 +643,7 @@ de:
             status:
               draft: Als Admin können Sie eine Vorschau anzeigen lassen, die niemand sonst sehen kann
               published: Für alle sichtbar
-          title_placeholder: Titel der Entwurfsfassung
           changelog_placeholder: Beschreiben Sie alle relevanten Änderungen der vorherigen Version
-          body_placeholder: Schreiben Sie einen Entwurfstext
         index:
           title: Entwurfsfassungen
           create: Version erstellen
@@ -601,7 +674,6 @@ de:
           submit_button: Änderungen speichern
         form:
           add_option: Antwortmöglichkeit hinzufügen
-          title_placeholder: Frage hinzufügen
           value_placeholder: Geschlossene Antwort hinzufügen
           question_options: "Mögliche Antworten (optional, standardmäßig offene Antworten)"
         index:
@@ -626,14 +698,17 @@ de:
     managers:
       index:
         title: Verwalter*innen
-        name: Name
-        email: E-Mail
         no_managers: Keine Verwalter*innen vorhanden.
       manager:
         add: Hinzufügen
-        delete: Löschen
       search:
         title: "Verwalter*innen: Benutzer*innensuche"
+    sdg_managers:
+      index:
+        no_sdg_managers: Keine Benutzer*innen
+    sdg/managers:
+      sdg/manager:
+        add: Hinzufügen
     menu:
       activity: Aktivität der Moderator*innen
       admin: Admin-Menü
@@ -650,6 +725,7 @@ de:
       hidden_users: Verborgene Benutzer*innen
       administrators: Administrator*innen
       managers: Verwalter*innen
+      sdg_managers: SDG Manager*innen
       moderators: Moderator*innen
       messaging_users: Nachrichten
       newsletters: Newsletter
@@ -681,6 +757,7 @@ de:
           proposals: "Vorschläge"
           polls: "Abstimmungen"
           layouts: "Layouts"
+          machine_learning: "AI / Machine Learning"
           mailers: "E-Mails"
           management: "Management"
           welcome: "Willkommen"
@@ -701,17 +778,14 @@ de:
       debates: "Diskussionen"
       comments: "Kommentare"
       local_census_records: Verwaltung des lokalen Registers
+      machine_learning: "AI / Machine learning"
     administrators:
       index:
         title: Administrator*innen
-        name: Name
-        email: E-Mail
-        description: Beschreibung
         id: Administrator ID
         no_administrators: Keine Administrator*innen vorhanden.
       administrator:
         add: Hinzufügen
-        delete: Löschen
         restricted_removal: "Entschuldigung, Sie können sich nicht von der Liste entfernen"
       search:
         title: "Administrator*innen: Benutzer*innensuche"
@@ -721,12 +795,9 @@ de:
     moderators:
       index:
         title: Moderator*innen
-        name: Name
-        email: E-Mail
         no_moderators: Keine Moderator*innen vorhanden.
       moderator:
         add: Hinzufügen
-        delete: Löschen
       search:
         title: "Moderator*innen: Benutzer*innensuche"
     segment_recipient:
@@ -753,8 +824,6 @@ de:
         sent: Gesendet
         actions: Aktionen
         draft: Entwurf
-        edit: Bearbeiten
-        delete: Löschen
         preview: Vorschau
         empty_newsletters: Keine Newsletter zum Anzeigen vorhanden
       new:
@@ -790,8 +859,6 @@ de:
         sent: Gesendet
         actions: Aktionen
         draft: Entwurf
-        edit: Bearbeiten
-        delete: Löschen
         preview: Vorschau
         view: Anzeigen
         empty_notifications: Keine Benachrichtigungen vorhanden
@@ -889,7 +956,6 @@ de:
         can_edit_dossier: "Kann Dossier bearbeiten"
       valuator:
         add: Als Gutachter*in hinzufügen
-        delete: Löschen
       search:
         title: "Gutachter*innen: Benutzer*innensuche"
       form:
@@ -927,7 +993,6 @@ de:
         entry_name: Wahlhelfer*in
       search:
         email_placeholder: Benutzer*in via E-Mail suchen
-        search: Suche
         user_not_found: Benutzer wurde nicht gefunden
         help: "Um Wahlhelfer*innen hinzuzufügen oder zu entfernen, verwenden Sie das untenstehende Suchformular."
     poll_officer_assignments:
@@ -1145,7 +1210,6 @@ de:
         location: "Lage"
       booth:
         shifts: "Arbeitsschichten verwalten"
-        edit: "Wahlkabine bearbeiten"
     officials:
       edit:
         destroy: Status "Offizielle(r) Vertreter*in" entfernen
@@ -1167,7 +1231,6 @@ de:
       level_4: Stufe 4
       level_5: Stufe 5
       search:
-        edit_official: Offizielle(n) Vertreter*in bearbeiten
         make_official: Offizielle(n) Vertreter*in erstellen
         title: "Offizielle(r) Vertreter*innen: Benutzer*innensuche"
         no_results: Keine offizielle Vertreter*innen gefunden.
@@ -1190,8 +1253,6 @@ de:
         no_organizations: Keine Organisationen vorhanden.
         reject: Ablehnen
         rejected: Abgelehnt
-        search: Suche
-        search_placeholder: Name, E-Mail oder Telefonnummer
         title: Organisationen
         verified: Überprüft
         verify: Überprüfen
@@ -1208,7 +1269,6 @@ de:
         selected: Vorschläge auswählen
         milestones: Meilensteine
         no_proposals: Keine Vorschläge vorhanden.
-        tags: Tags
       show:
         create_question: Fügen Sie diesen Vorschlag zu einer Abstimmung hinzu, über die abgestimmt werden soll
       form:
@@ -1245,9 +1305,6 @@ de:
         feature_flags: Funktionen
         features:
           enabled: "Funktion aktiviert"
-          disabled: "Funktion deaktiviert"
-          enable: "Aktivieren"
-          disable: "Deaktivieren"
         map:
           title: Kartenkonfiguration
           help: Hier können Sie festlegen, wie die Karte den Benutzer*innen angezeigt wird. Bewegen Sie den Marker oder klicken Sie auf einen beliebigen Teil der Karte, passen Sie den Zoom an und klicken Sie auf die Schaltfläche "Aktualisieren".
@@ -1261,36 +1318,39 @@ de:
         remote_census:
           title: Register Konfiguration entfernen
           how_to_enable: 'Um die Fernzählung (SOAP) zu konfigurieren, müssen Sie "Verbindung zur Fernzählung (SOAP) konfigurieren" auf der Registerkarte "Funktionen" aktivieren.'
+        sdg:
+          title: SDG Konfiguration
+          how_to_enable: 'Um die Konfigurationsoptionen der UN-Nachhaltigkeitsziele anzuzeigen, müssen Sie "SDG" auf der Registerkarte "Features" aktivieren.'
       remote_census_general_name: Allgemeine Informationen
       remote_census_request_name: Anfrage Daten
       remote_census_response_name: Antwort Daten
       setting: Funktion
-      setting_actions: Aktionen
       setting_name: Einstellung
-      setting_status: Status
       setting_value: Wert
       no_description: "Ohne Beschreibung"
     shared:
-      true_value: "Ja"
-      false_value: "Nein"
-      booths_search:
-        button: Suche
-        placeholder: Suche Wahlkabine nach Name
-      poll_officers_search:
-        button: Suche
-        placeholder: Suche Offizielle(r) Vertreter*innen
-      poll_questions_search:
-        button: Suche
-        placeholder: Suche Fragen
-      proposal_search:
-        button: Suche
-        placeholder: Suche Vorschläge nach Titel, Code, Beschreibung oder Frage
-      debate_search:
-        button: Suche
-        placeholder: Suche Diskussionen per Titel oder Beschreibung
-      user_search:
-        button: Suche
-        placeholder: Suche Benutzer*in nach Name oder E-Mail
+      search:
+        advanced_filters:
+          sdg_goals:
+            all: "Alle Ziele"
+            label: "Nach Ziel"
+          sdg_targets:
+            all: "Alle Unterziele"
+            label: "Nach Unterziel"
+        label:
+          booths: "Wahlkabine nach Name und Standort suchen"
+          budget_investments: "Investitionen nach Titel, Beschreibung oder Rubrik durchsuchen"
+          debates: "Diskussionen nach Titel oder Beschreibung durchsuchen"
+          legislation_processes: "Prozesse nach Titel oder Beschreibung durchsuchen"
+          legislation_proposals: "Vorschläge nach Titel oder Beschreibung durchsuchen"
+          local_census_records: "Nach Dokumentnummer durchsuchen"
+          organizations: "Name, E-Mail oder Telefonnummer"
+          poll_officers: "Wahlhelfer durchsuchen"
+          poll_questions: "Abstimmungsfragen durchsuchen"
+          polls: "Abstimmungen nach Titel oder Beschreibung durchsuchen"
+          proposals: "Search proposals by title, code, description or question"
+          users: "Search user by name or email"
+        search: "Search"
       search_results: "Ergebnisse anzeigen"
       no_search_results: "Keine Ergebnisse gefunden."
       actions: Aktionen
@@ -1304,16 +1364,15 @@ de:
       author: Autor
       content: Inhalt
       created_at: Erstellt am
-      delete: Löschen
       color_help: Hexadezimales Format
       show_results_and_stats: "Ergebnisse und Statistiken anzeigen"
       results_and_stats_reminder: "Durch das Markieren dieses Kontrollkästchens werden die Resultate und/oder Statistiken dieser Abstimmung öffentlich abrufbar und für alle Benutzer*innen sichtbar."
+      close_modal: Modal schließen
+      example_url: "Zum Beispiel, https://consulproject.org oder /help"
     geozones:
       index:
         title: Bereiche
         create: Gebiet erstellen
-        edit: Bearbeiten
-        delete: Löschen
       geozone:
         name: Name
         external_code: Externer Code
@@ -1393,6 +1452,7 @@ de:
         proposal_notifications: Benachrichtigungen zu einem Vorschlag
         incomplete_verifications: Unvollständige Verifizierungen
         polls: Abstimmungen
+        sdg: SDG
       graph:
         debate_created: Diskussionen
         visit: Besuche
@@ -1435,24 +1495,22 @@ de:
           question_name: Frage
           origin_web: Online-Teilnehmer*innen
           origin_total: Gesamtanzahl Teilnehmer*innen
+      sdg:
+        budget_investments:
+          amount: "Bewilligter Betrag"
+          winners: "Investitionsprojekte der Gewinner"
+          sent: "Übermittelte Investitionsprojekte projects sent"
+        debates: "Diskussionen"
+        polls: "Abstimmungen"
+        proposals: "Vorschläge"
+        title: "SDG - Statistiken"
     tags:
       create: Tag erstellen
-      destroy: Tag löschen
       index:
         add_tag: Neue Tags hinzufügen 
         title: Tags
         topic: Tag
         help: Tags können als Projekt, Kategorie oder Unterkategorie angelegt werden.
-        scope: Art
-        settings: Einstellungen
-      logic:
-        project: Projekt
-        category: Kategorie
-        subcategory: Unterkategorie
-        predefined: Festgelegt
-        cloud_category: Tag Cloud für Kategorie
-        cloud_subcategory: Tag Cloud für Unterkategorie
-        custom_tags: Nutzer Tags
     users:
       columns:
         id: ID
@@ -1471,7 +1529,6 @@ de:
           erased: Gelöscht
       search:
         placeholder: Suche Benutzer*in nach E-Mail, Name oder Ausweis
-        search: Suche
     verifications:
       index:
         phone_not_given: Telefon nicht angegeben
@@ -1548,17 +1605,12 @@ de:
           updated_at: Aktualisiert
           title: Titel
           slug: URL
-          cards_title: Kacheln
           see_cards: Kachel anzeigen
         cards:
           cards_title: Kacheln
           create_card: Kachel erstellen
           no_cards: Keine Kachel vorhanden.
-          title: Titel
-          description: Beschreibung
-          link_text: Linktext
-          link_url: URL des Links
-          columns_help: "Breite der Karte in Spaltenanzahl. Auf mobilen Bildschirmen beträgt die Breit immer 100%."
+          columns_help: "Breite der Kachel in Anzahl der Spalten. Auf mobilen Bildschirmen ist es immer eine Breite von 100%."
           create:
             notice: "Erfolg"
           update:
@@ -1574,13 +1626,7 @@ de:
       cards_title: Kacheln
       create_card: Kachel erstellen
       no_cards: Keine Kacheln vorhanden.
-      cards:
-        title: Titel
-        description: Beschreibung
-        link_text: Linktext
-        link_url: URL des Links
       feeds:
-        polls: Abstimmungen
         proposals: Vorschläge
         debates: Diskussionen
         processes: Beteiligungsverfahren
@@ -1614,9 +1660,6 @@ de:
         document_number: Dokumentennummer
         date_of_birth: Geburtsdatum
         postal_code: Postleitzahl
-        search:
-          placeholder: Suche per Dokumentennummer
-          search: Suche
         import: Import CSV
       new:
         creating: Neues lokales Register anlegen
@@ -1642,3 +1685,53 @@ de:
           created: Erstellte Datensätze
         local_census_records:
           no_records_found: Keine Datensätze gefunden.
+    machine_learning:
+      cancel: "Vorgang abbrechen"
+      cancel_alert: "Diese Aktion bricht das aktuelle Skript ab und es ist erforderlich, das Skript erneut auszuführen."
+      comments_summary: "Zusammenfassung der Kommentare"
+      comments_summary_description: "Zeigt eine automatisch generierte Zusammenfassung der Kommentare zu allen Elementen an, die kommentiert werden können."
+      data_folder_content: "Inhalt des Datenordners"
+      error: "Fehler:"
+      execute_script: "Skript ausführen"
+      executed_by: "Ausgeführt von:"
+      executed_script: "Ausgeführtes Skript:"
+      feature_disabled: "Diese Funktion ist deaktiviert. Um das maschinelle Lernen zu nutzen, können Sie es über den %{link} aktivieren."
+      feature_disabled_link: "Einstellungsseite"
+      help:
+        title_1: "Was ist KI/Maschinelles Lernen?"
+        description_1: "Traditionell werden Computerprogramme entwickelt, indem genaue Regeln dafür aufgestellt werden, was das Programm in jeder Situation tun soll und wie es die verfügbaren Informationen zu jedem Zeitpunkt verarbeiten soll. Bei dem, was gemeinhin als KI/Maschinenlernen bekannt ist, handelt es sich um eine Art von Programmen, bei denen genau festgelegt wird, welche Aufgabe zu erfüllen ist und wie zu beurteilen ist, ob die Aufgabe besser oder schlechter erfüllt wird. Aber im Gegensatz zu den erstgenannten Programmen entdeckt oder lernt das System, welche Methode am besten geeignet ist, um die Aufgabe zu erfüllen."
+        title_2: "Was leistet das AI / Machine Learning Modul in CONSUL?"
+        description_2: "Mit diesem Modul können beliebige KI/Machine Learning Programme in CONSUL implementiert werden. Die Programme können die in CONSUL verfügbaren Informationen verarbeiten und Ergebnisse erzeugen, die sowohl den Nutzern als auch den Verwaltern helfen, eine effektivere und intelligentere Bürgerbeteiligung durchzuführen. Das Modul wurde entwickelt, um die Implementierung und Ausführung neuer Programme zu erleichtern, wobei der allgemeine Code von CONSUL und der Code dieser neuen Programme unabhängig voneinander bleiben."
+        title_3: "Wie man dieses Modul verwendet"
+        description_3: "Für die erstmalige Verwendung ist es erforderlich, die in der CONSUL-Dokumentation enthaltenen Anweisungen zur ordnungsgemäßen Aktivierung dieses Moduls zu befolgen. Sobald das Modul korrekt aktiviert ist, werden die Programme über die Registerkarte \"Skripte ausführen\" ausgeführt. Vor der Ausführung werden auf der gleichen Registerkarte eine Schätzung der Ausführungszeit und andere relevante Informationen angezeigt. Am Ende der Ausführung können wir die Inhalte, die in CONSUL angezeigt werden, auf der Registerkarte \"Einstellungen\" aktivieren und andere generierte Dateien, die für uns nützlich sein könnten, herunterladen."
+        title_4: "Wie implementiert man neue AI / Machine Learning Skripte?"
+        description_4: "Bitte verwenden Sie frühere Skripte als Beispiele."
+        description_4b: "Die neuen Skripte sollten sich in dem Ordner <code>public/machine_learning/scripts</code> befinden."
+        description_4c: "Die Eingabedaten, die das Skript verwenden soll, werden als JSON-Dateien im Ordner <code>../data</code> erstellt."
+        description_4d: "Jede erzeugte Ausgabe sollte in den Ordner <code>../data</code> abgelegt werden."
+        description_4e: "Es wird empfohlen, eine unabhängige <code>.ini</code> Textdatei mit den Einstellungen des Skripts zu erstellen, die den gleichen Namen wie das Skript trägt und von configparser gelesen werden kann. Diese Datei erleichtert die Änderung der Einstellungen durch die Administratoren."
+        description_4f: "Es wird empfohlen, in die erste Zeile des Skripts eine Zeichenfolge in dreifachen Anführungszeichen aufzunehmen, die einige kurze Informationen über das Skript und Links zu allen relevanten Informationen enthält. Diese Zeichenfolge wird automatisch in der Verwaltungsschnittstelle angezeigt."
+        description_4g: "Es wird empfohlen, die relevanten Informationen des Skripts in einer <code>.log</code> Textdatei mit demselben Namen wie das Skript zu protokollieren."
+        title_5: "Um AI / Machine Learning Skripte zu verwenden, müssen Sie Python auf Ihrem Server installiert haben"
+        description_5: "Hier sehen Sie die Beispielanleitung für einen Ubuntu 18.04 Server:"
+      help_text: "Diese Funktionalität ist experimentell."
+      last_execution: "Letzte Ausführung"
+      no_content: "Es wurde noch kein Inhalt generiert."
+      notice:
+        success: "Das letzte Skript wurde erfolgreich ausgeführt."
+        error: "Es ist ein Fehler aufgetreten. Sie können die Details unten sehen."
+        working: "Das Skript wird ausgeführt. Der Administrator, der es ausgeführt hat, erhält eine E-Mail, wenn es beendet ist."
+        delete_generated_content: "Der generierte Inhalt wurde erfolgreich gelöscht."
+      output_files: "Output-Dateien:"
+      related_content: "Verwandte Inhalte"
+      related_content_description: "Fügt automatisch generierte Inhalte zu Vorschlägen und Budgetprojekten hinzu."
+      script_info: "Sie erhalten eine E-Mail in %{email}, wenn das Skript beendet ist."
+      script_name: "Script Name:"
+      select_script: "Python-Skript zur Ausführung auswählen"
+      started_at: "Begonnen am:"
+      tab_help: "Hilfe"
+      tab_scripts: "Skript ausführen"
+      tab_settings: "Einstellungen / Erstellte Inhalte"
+      tags: "Tags"
+      tags_description: "Erzeugt automatische Tags für alle Elemente, die mit Tags versehen werden können."
+      title: "AI / Machine learning"

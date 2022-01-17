@@ -114,7 +114,9 @@
           <% else %>
             <%= link_to t("custom.debates.index.no_active_projekt"), '#', class: "button expanded disabled-no-active-projekt", disabled: true %>
           <% end %>
-          <%= render "shared/projekt_sidebar_filter/projekts_sidebar" %>
+          <% if extended_feature?('debates.enable_projekt_filter') %>
+            <%= render "shared/projekt_sidebar_filter/projekts_sidebar" %>
+          <% end %>
           <% if show_affiliation_filter_in_sidebar? %>
             <%= render "shared/sidebar_filter/geozone_affiliations" %>
           <% end %>

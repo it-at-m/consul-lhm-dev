@@ -1,54 +1,50 @@
 <header>
-  <div class="row">
-    <div class="column">
-      <div class="top-bar">
+  <div class="top-bar">
 
-        <h2 class='header-title show-for-medium'><%= t('custom.layouts.header.title_html') %> <%= Setting['org_name'] %></h2>
+    <h2 class='header-title show-for-medium'><%= t('custom.layouts.header.title_html') %> <%= Setting['org_name'] %></h2>
 
-        <span data-responsive-toggle="responsive-menu"
-              data-hide-for="medium"
-              class="hamburger-menu focusable js-toggle-mobile-menu js-prevent-key-scroll"
-              role="button"
-              tabindex="0"
-              aria-haspopup="true"
-              aria-expanded="false"
-              aria-label='<%= t('custom.links.menu.mobile.menu_label') %>' >
-          <span class="menu-icon dark" data-toggle></span>
-        </span>
+    <span data-responsive-toggle="responsive-menu"
+          data-hide-for="medium"
+          class="hamburger-menu focusable js-toggle-mobile-menu js-prevent-key-scroll"
+          role="button"
+          tabindex="0"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-label='<%= t('custom.links.menu.mobile.menu_label') %>' >
+      <span class="menu-icon dark" data-toggle></span>
+    </span>
 
-        <div class='header-right-group'>
-          <% unless current_user %>
-            <div class='account-buttons show-for-large'>
-              <%= link_to t('devise_views.menu.login_items.login'), new_user_session_path, class: 'sign-in-button', role: 'button' %>
-              <%= link_to t('devise_views.menu.login_items.signup') , new_user_registration_path, class: 'sign-up-button', role: 'button'  %>
-            </div>
-          <% end %>
-
-          <div class="top-bar-title show-for-medium">
-            <%= link_to 'https://www.muenchen.de/rathaus/' do %>
-              <%= image_tag(image_path_for("logo_header.png"), class: "", alt: t("layouts.header.logo")) %>
-            <% end %>
-          </div>
+    <div class='header-right-group'>
+      <% unless current_user %>
+        <div class='account-buttons show-for-large'>
+          <%= link_to t('devise_views.menu.login_items.login'), new_user_session_path, class: 'sign-in-button', role: 'button' %>
+          <%= link_to t('devise_views.menu.login_items.signup') , new_user_registration_path, class: 'sign-up-button', role: 'button'  %>
         </div>
+      <% end %>
 
-        <div class="top-bar-title show-for-small-only">
-          <%= link_to 'https://www.muenchen.de/rathaus/' do %>
-            <%= image_tag(image_path_for("logo_header_mobile.png"), class: "", alt: t("layouts.header.logo"), style: "width: 70px;") %>
-          <% end %>
-        </div>
+      <div class="top-bar-title show-for-medium">
+        <%= link_to 'https://www.muenchen.de/rathaus/' do %>
+          <%= image_tag(image_path_for("logo_header.png"), class: "", alt: t("layouts.header.logo")) %>
+        <% end %>
+      </div>
+    </div>
 
-        <div id="responsive-menu">
-          <div class="top-bar-right">
-            <div class="show-for-small-only">
-              <div class="subnavigation row">
+    <div class="top-bar-title show-for-small-only">
+      <%= link_to 'https://www.muenchen.de/rathaus/' do %>
+        <%= image_tag(image_path_for("logo_header_mobile.png"), class: "", alt: t("layouts.header.logo"), style: "width: 70px;") %>
+      <% end %>
+    </div>
 
-                <h2 class='city-name'><%= t('custom.layouts.header.title_html') %> <%= Setting['org_name'] %></h2>
+    <div id="responsive-menu">
+      <div class="top-bar-right">
+        <div class="show-for-small-only">
+          <div class="subnavigation">
 
-                <%= render partial: "shared/subnavigation", locals: { placement: 'mobile' } %>
-                <div class="small-12 column">
-                  <%= render "shared/top_links" %>
-                </div>
-              </div>
+            <h2 class='city-name'><%= t('custom.layouts.header.title_html') %> <%= Setting['org_name'] %></h2>
+
+            <%= render partial: "shared/subnavigation", locals: { placement: 'mobile' } %>
+            <div class="small-12 column">
+              <%= render "shared/top_links" %>
             </div>
           </div>
         </div>
@@ -57,10 +53,8 @@
   </div>
 
   <div id="navigation_bar" class="subnavigation expanded">
-    <div class="row">
-      <div class="hide-for-small-only">
-        <%= render partial: "shared/subnavigation", locals: { placement: 'desktop' } %>
-      </div>
+    <div class="hide-for-small-only">
+      <%= render partial: "shared/subnavigation", locals: { placement: 'desktop' } %>
     </div>
   </div>
 </header>

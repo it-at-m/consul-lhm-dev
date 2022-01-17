@@ -10,6 +10,10 @@ class Debate
 
   validates :projekt_id, presence: true, if: :require_a_projekt?
 
+  scope :with_active_projekt,  -> { joins(:projekt).merge(Projekt.active) }
+
+  alias_attribute :projekt_phase, :debate_phase
+
   def require_a_projekt?
     Setting["projekts.connected_resources"].present? ? true : false
   end

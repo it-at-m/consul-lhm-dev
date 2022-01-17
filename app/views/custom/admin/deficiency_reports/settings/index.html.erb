@@ -4,15 +4,14 @@
   <thead>
     <tr>
       <th><%= t("admin.settings.setting") %></th>
-      <th><%= t("admin.settings.setting_status") %></th>
-      <th><%= t("admin.settings.setting_actions") %></th>
+      <th><%= t("admin.settings.index.features.enabled") %></th>
     </tr>
   </thead>
   <tbody>
     <% @settings.each do |feature| %>
       <tr>
-        <td class="small-8">
-          <strong><%= t("custom.settings.#{feature.key}") %></strong>
+        <td>
+          <strong id="<%= dom_id(feature, :title) %>"><%= t("custom.settings.#{feature.key}") %></strong>
           <br>
           <span class="small">
             <%= t("custom.settings.#{feature.key}_description", default: t("admin.settings.no_description")) %>
@@ -20,27 +19,7 @@
         </td>
 
         <td>
-          <% if feature.enabled? %>
-            <span class="enabled">
-              <strong>
-                <%= t ("admin.settings.index.features.enabled") %>
-              </strong>
-            </span>
-          <% else %>
-            <span class="disabled">
-              <%= t("admin.settings.index.features.disabled") %>
-            </span>
-          <% end %>
-        </td>
-
-        <td class="text-right">
-          <%= form_for(feature, url: admin_setting_path(feature), html: { id: "edit_#{dom_id(feature)}" }) do |f| %>
-            <%= f.hidden_field :tab, value: '#tab-projekts-settings' %>
-            <%= f.hidden_field :value, id: dom_id(feature), value: (feature.enabled? ? "" : "active") %>
-            <%= f.submit(t("admin.settings.index.features.#{feature.enabled? ? "disable" : "enable"}"),
-                         class: "button expanded #{feature.enabled? ? "hollow alert" : "success"}",
-                         data: { confirm: t("admin.actions.confirm") }) %>
-          <% end %>
+          <%= render Admin::Settings::FeaturedSettingsFormComponent.new(feature, tab: '#tab-projekts-settings') %>
         </td>
       </tr>
     <% end %>

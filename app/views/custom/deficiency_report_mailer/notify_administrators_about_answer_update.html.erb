@@ -1,0 +1,17 @@
+<td style="padding-bottom: 20px; padding-left: 10px;">
+
+  <p style="font-family: 'Open Sans','Helvetica Neue',arial,sans-serif;font-size: 14px;font-weight: normal;line-height: 24px;">
+    <%= t("custom.deficiency_reports.mailers.notify_administrators_about_answer_update.hi") %>
+  </p>
+
+  <p style="font-family: 'Open Sans','Helvetica Neue',arial,sans-serif;font-size: 14px;font-weight: normal;line-height: 24px;">
+    <%= t("custom.deficiency_reports.mailers.notify_administrators_about_answer_update.p1") %>
+    <%= link_to @deficiency_report.title, deficiency_report_url(@deficiency_report) %>
+  </p>
+
+  <p style="font-family: 'Open Sans','Helvetica Neue',arial,sans-serif;font-size: 14px;font-weight: normal;line-height: 24px;">
+    <%= t("custom.deficiency_reports.mailers.notify_administrators_about_answer_update.signature_html") %>
+  </p>
+
+
+</td>

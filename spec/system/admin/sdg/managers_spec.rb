@@ -22,7 +22,7 @@ describe "Admin SDG managers" do
 
     expect(page).to have_content user.name
 
-    click_link "Add"
+    click_button "Add"
 
     within("#sdg_managers") do
       expect(page).to have_content user.name
@@ -32,7 +32,9 @@ describe "Admin SDG managers" do
   scenario "Delete SDG Manager" do
     visit admin_sdg_managers_path
 
-    accept_confirm { click_link "Delete" }
+    accept_confirm("Are you sure? This action will delete \"#{sdg_manager.name}\" and can't be undone.") do
+      click_button "Delete"
+    end
 
     within("#sdg_managers") do
       expect(page).not_to have_content sdg_manager.name
@@ -90,7 +92,9 @@ describe "Admin SDG managers" do
       fill_in "Search user by name or email", with: sdg_manager2.email
       click_button "Search"
 
-      accept_confirm { click_link "Delete" }
+      accept_confirm("Are you sure? This action will delete \"#{sdg_manager2.name}\" and can't be undone.") do
+        click_button "Delete"
+      end
 
       expect(page).to have_content(sdg_manager1.email)
       expect(page).not_to have_content(sdg_manager2.email)

@@ -35,7 +35,7 @@
   <% end %>
 
   <% if feature?(:map) %>
-    <div class="map inline">
+    <div class="map deficiency-reports-map">
       <%= render_map(nil, "deficiency-reports", false, nil, @deficiency_reports_coordinates) %>
     </div>
     <div class='expand-proposals-overview-map small js-expand-proposals-overview-map'>
@@ -84,10 +84,8 @@
       </div>
 
       <div class="show-for-small-only margin-top">
-        <% if current_user %>
-          <%= link_to t("custom.deficiency_reports.index.start_deficiency_report"), new_deficiency_report_path,
-            class: "button expanded js-preselect-projekt" %>
-        <% end %>
+        <%= link_to t("custom.deficiency_reports.index.start_deficiency_report"), new_deficiency_report_path,
+          class: "button expanded js-preselect-projekt" %>
       </div>
 
       <div id="deficiency-reports-list">
@@ -99,8 +97,6 @@
               <%= render "/deficiency_reports/deficiency_report_minimal", deficiency_report: deficiency_report %>
             <% end %>
           <% end %>
-        <% else %>
-          <%= empty_recommended_proposals_message_text(current_user) %>
         <% end %>
         <%= paginate @deficiency_reports%>
 
@@ -116,10 +112,8 @@
 
     <div class="small-12 medium-3 column">
       <aside class="margin-bottom">
-        <% if current_user  %>
-          <%= link_to t("custom.deficiency_reports.index.start_deficiency_report"), new_deficiency_report_path,
-            class: "button expanded" %>
-        <% end %>
+        <%= link_to t("custom.deficiency_reports.index.start_deficiency_report"), new_deficiency_report_path,
+          class: "button expanded" %>
 
         <%= render "deficiency_reports/sidebar/categories" %>
         <%= render "deficiency_reports/sidebar/statuses" %>

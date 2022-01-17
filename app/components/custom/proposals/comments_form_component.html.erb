@@ -1,0 +1,31 @@
+<% if user_signed_in? && @projekt && @proposal.comments_allowed?(current_user) %>
+  <%= render "comments/form", { commentable: @proposal, parent_id: nil } %>
+
+<% elsif user_signed_in? && @projekt.present? %>
+
+  <div class='callout alert'>
+    <% if !current_user.level_two_or_three_verified? %>
+      <%= t('custom.comments.restricted.not_verified', verify_account: link_to_verify_account).html_safe %>
+
+    <% elsif current_user.geozone && @projekt.proposal_phase.geozone_restrictions.any? && !@projekt.proposal_phase.geozone_restriction_ids.include?(current_user.geozone.id) %>
+      <%= t('custom.comments.restricted.geo_limitation', geozones: @projekt.proposal_phase.geozone_restrictions.names.join(', ')) %></li>
+
+    <% elsif @projekt.proposal_phase.active && @projekt.proposal_phase.expired? %>
+      <%= t('custom.comments.restricted.proposal_phase_expired')%>
+
+    <% elsif !@projekt.proposal_phase.active %>
+      <%= t('custom.comments.restricted.proposal_phase_not_active')%>
+
+    <% else %>
+     <%= t('custom.comments.restricted.other')%>
+
+    <% end %>
+  </div>
+
+<% elsif user_signed_in? && @projekt.blank? %>
+  <%= render "comments/form", { commentable: @proposal, parent_id: nil } %>
+
+<% else %>
+  <%= render "shared/login_to_comment" %>
+
+<% end %>

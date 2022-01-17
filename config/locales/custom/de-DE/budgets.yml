@@ -3,6 +3,7 @@ de:
     ballots:
       show:
         title: Ihre Abstimmung
+        amount_progress: "%{amount_spent} / %{amount_limit}"
         amount_available:
           knapsack: "Sie haben noch <span>%{count}</span> zu investieren."
           approval:
@@ -42,10 +43,6 @@ de:
     groups:
       show:
         title: Wählen Sie eine Option
-        unfeasible_title: Nicht durchführbare Investitionsvorschläge
-        unfeasible: Nicht durchführbare Investitionen anzeigen
-        unselected_title: Investitionsvorschläge, die nicht für die Abstimmungsphase ausgewählt wurden
-        unselected: Investitionsvorschläge, die nicht für die Abstimmungsphase ausgewählt wurden, anzeigen
     phase:
       drafting: Entwurf (nicht für die Öffentlichkeit sichtbar)
       informing: Information
@@ -64,7 +61,6 @@ de:
         icon_alt: Symbol für Budgets
         title: Budgets
         help: Hilfe zu Budgets
-        all_phases: Alle Phasen anzeigen
       all_phases: Phasen des Budgets
       map: Investitionsvorschläge geografisch geordnet
       investment_proyects: Liste aller Investitionsvorschläge
@@ -78,6 +74,8 @@ de:
       milestones: Meilensteine
     investments:
       form:
+        title: "Erstellen Sie ein Investitionsbudget"
+        subtitle: "%{heading} (%{price})"
         tag_category_label: "Tags"
         tags_instructions: "Markieren Sie den Vorschlag. Sie können einen Tag auswählen oder selbst erstellen"
         tags_label: Verschlagwortung
@@ -85,7 +83,6 @@ de:
         map_location: "Kartenposition"
         map_location_instructions: "Navigieren Sie auf der Karte zum Standort und setzen Sie die Markierung."
         map_remove_marker: "Entfernen Sie die Kartenmarkierung"
-        map_skip_checkbox: "Dieser Investitionsvorschlag hat keinen konkreten Standort oder ich kenne ihn nicht."
       index:
         title: Budgets
         unfeasible: Undurchführbare Investitionsvorschläge
@@ -118,9 +115,13 @@ de:
           verified_only: "Um ein neuen Investitionsvorschlag zu erstellen %{verify}."
           create: "Einen Investitionsvorschlag erstellen"
           not_logged_in: "Um einen neuen Investitionsvorschlag erstellen zu können, müssen Sie %{sign_in} oder %{sign_up}."
-          by_feasibility: Nach Durchführbarkeit
-          feasible: Durchführbare Projekte
-          unfeasible: Nicht durchführbare Projekte
+        filter: "Projekte filtern nach"
+        filters:
+          not_unfeasible: "Aktiv"
+          selected: "Aktive"
+          unfeasible: "Nicht durchführbar"
+          unselected: "Nicht für die Endabstimmung ausgewählt"
+          winners: "Gewinner"
         orders:
           random: Zufällig
           confidence_score: Am besten bewertet
@@ -151,37 +152,46 @@ de:
       investment:
         add: Stimme
         already_added: Sie haben diesen Investitionsvorschlag bereits hinzugefügt
-        already_supported: Sie haben diesen Investitionsvorschlag bereits unterstützt. Jetzt teilen!
         support_title: Unterstützen Sie dieses Projekt
-        confirm_group:
-          one: "Sie können nur Investitionsvorschläge im %{count} Gebiet unterstützen. Wenn Sie fortfahren, können Sie ihren WahlGebiet nicht ändern. Sind Sie sicher?"
-          other: "Sie können nur Investitionsvorschläge im %{count} Gebiet unterstützen. Wenn sie fortfahren, können sie ihren WahlGebiet nicht ändern. Sind sie sicher?"
         supports:
           zero: Keine Unterstützung
           one: 1 Unterstützer*in
           other: "%{count} Unterstützer*innen"
-        give_support: Unterstützung
       header:
         check_ballot: Meine Abstimmung überprüfen
         different_heading_assigned: "Sie haben bereits in einer anderen Rubrik: %{heading_link} abgestimmt"
         change_ballot: "Wenn Sie Ihre Meinung ändern, können Sie Ihre Stimme in %{check_ballot} zurückziehen und von vorne beginnen."
         check_ballot_link: "Meine Abstimmungen überprüfen"
         price: "Dieser Bereich verfügt über ein Budget von"
-    progress_bar:
-      assigned: "Sie haben zugeordnet: "
-      available: "VerfügbareBudgetmittel: "
       votes:
-        zero: "Sie haben <strong>0</strong> von <strong>%{limit}</strong> Projekten ausgewählt"
-        one: "Sie haben <strong>1</strong> Projekt von <strong>%{limit}</strong> Projekten ausgewählt"
-        other: "Sie haben <strong>%{count}</strong> Projekte von <strong>%{limit}</strong> Projekten ausgewählt"
+        already_supported: "Sie haben dieses Investitionsprojekt bereits unterstützt. Teilen Sie es!"
+        confirm_group:
+          one: "Sie können nur Investitionen im Bezirk %{count} unterstützen. Wenn Sie fortfahren, können Sie die Wahl Ihres Bezirks nicht ändern. Sind Sie sicher?"
+          other: "Sie können nur Investitionen in %{count}-Bezirken unterstützen. Wenn Sie fortfahren, können Sie die Wahl Ihres Bezirks nicht ändern. Sind Sie sicher?"
+        remove_support: "Unterstützung zurückziehen"
+        remove_support_label: "Streichen Sie Ihre Unterstützung für %{investition}"
+        support: "Unterstützung"
+        support_label: "Unterstützung für %{investment}"
+    investments_list:
+      investment:
+        price: "Preis"
+        read_more: "Mehr lesen"
+        supports: "Unterstützungen"
+      see_all: "Alle Investments anschauen"
+      title: "Investmentliste"
     show:
       group: Gruppe
-      phase: Aktuelle Phase
-      unfeasible_title: Nicht durchführbare Investitionsvorschläge
-      unfeasible: Nicht durchführbare Investitionsvorschläge anzeigen
-      unselected_title: Investitionsvorschläge, die es nicht in die Abstimmungsphase geschafft haben
-      unselected: Investitionsvorschläge, die es nicht in die Abstimmungsphase geschafft haben, anzeigen
-      see_results: Ergebnisse anzeigen
+    supports_info:
+      different: "Sie können an so vielen verschiedenen Projekten mitarbeiten, wie Sie möchten."
+      next: "Unterstützen Sie die Projekte, von denen Sie möchten, dass sie in die nächste Phase übergehen."
+      scrolling: "Scrollen Sie weiter, um alle Ideen zu sehen"
+      share: "Sie können die Projekte, die Sie unterstützt haben, in den sozialen Medien verbreiten und so mehr Aufmerksamkeit und Unterstützung für sie gewinnen!"
+      supported:
+        one: "Bis jetzt haben Sie <strong>1 Projekt</strong> unterstützt."
+        other: "Bislang haben Sie <strong>%{count} Projekte</strong> unterstützt."
+      supported_not_logged_in: "Melden Sie sich an, um mit der <strong>Unterstützung von Projekten</strong> zu beginnen."
+      time: "Bis zum %{phase_end_date} ist noch Zeit, Projekte zu unterstützen."
+      title: "Es ist an der Zeit, Projekte zu <strong>unterstützen</strong>!"
     results:
       link: Ergebnisse
       page_title: "%{budget} - Ergebnisse"

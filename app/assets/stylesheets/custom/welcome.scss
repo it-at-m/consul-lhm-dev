@@ -55,6 +55,7 @@
       position: absolute;
       bottom: 10%;
       max-width: 40rem;
+      @include grid-column-gutter;
     }
 
 		h1 {
@@ -85,6 +86,16 @@
       
       h1 {
         font-size: rem-calc(40);
+      }
+    }
+
+    @media only screen and (min-width: 75rem) {
+      margin-left: calc(-50vw + 37.5rem);
+      margin-right: calc(-50vw + 37.5rem);
+
+      .jumbo-message {
+        margin-left: calc(50vw - 37.5rem);
+        margin-right: calc(50vw - 37.5rem);
       }
     }
 

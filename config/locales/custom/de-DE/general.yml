@@ -5,10 +5,7 @@ de:
       erase_account_link: Mein Konto löschen
       finish_verification: Verifizierung abschließen
       notifications: Benachrichtigungen
-      organization_name_label: Name der Organisation
-      organization_responsible_name_placeholder: Vertreter der Organisation/des Kollektivs
       personal: Persönliche Daten
-      phone_number_label: Telefonnummer
       public_interests_my_title_list: Tags der Themen, denen Sie folgen
       public_interests_user_title_list: Kennzeichnungen der Elemente denen dieser Benutzer folgt
       save_changes_submit: Änderungen speichern
@@ -22,7 +19,6 @@ de:
       user_permission_verify: Damit Sie alle Funktionen nutzen können, müssen Sie ihr Konto verifizieren.
       user_permission_verify_info: "* Nur verifizierte Nutzer"
       user_permission_votes: An finaler Abstimmung teilnehmen
-      username_label: Benutzer*innenname
       verified_account: Konto verifiziert
       verify_my_account: Mein Konto verifizieren
   application:
@@ -92,10 +88,8 @@ de:
         submit_button: Änderungen speichern
       show_link: Diskussion anzeigen
     form:
-      debate_title: Titel der Diskussion
       tags_instructions: Diskussion markieren.
       tags_placeholder: "Trennen Sie die Tags mit einem Komma (',')"
-      tags_categories: "Eigene Kategorie(n) hinzufügen"
     index:
       featured_debates: Hervorgehoben
       orders:
@@ -119,7 +113,6 @@ de:
       search_results:
         one: " enthält den Begriff <strong>'%{search_term}'</strong>"
         other: " enthält den Begriff <strong>'%{search_term}'</strong>"
-      select_order: Sortieren nach
       start_debate: Starten Sie eine Diskussion
       title: Diskussionen
       section_header:
@@ -134,8 +127,6 @@ de:
     new:
       form:
         submit_button: Eine Diskussion starten
-      info: Wenn Sie einen Vorschlag veröffentlichen möchten, sind Sie hier falsch, gehen Sie zu %{info_link}.
-      info_link: Neuen Vorschlag erstellen
       more_info: Weitere Informationen
       recommendation_four: Genießen Sie diesen Ort und die Stimmen, die ihn füllen. Er gehört auch Ihnen.
       recommendation_one: Verwenden Sie bitte nicht ausschließlich Großbuchstaben für die Überschrift oder für komplette Sätze. Im Internet gilt das als schreien. Und niemand möchte gerne angeschrien werden.
@@ -143,7 +134,6 @@ de:
       recommendation_two: Diskussionen oder Kommentare, die illegale Handlungen beinhalten, werden gelöscht sowie diejenigen, die die Diskussionen absichtlich sabotieren. Alles andere ist erlaubt.
       recommendations_title: Empfehlungen für die Erstellung einer Diskussion
       start_new: Eine Diskussion starten
-      start_new_in: Starten Sie eine Diskussion in %{category}
     show:
       author_deleted: Benutzer*in gelöscht
       comments:
@@ -170,7 +160,7 @@ de:
     direct_message: Private Nachricht
     error: Fehler
     errors: Fehler
-    not_saved: "verhinderte das Speichern. <br>Bitte überprüfen Sie die gekennzeichneten Felder, um herauszufinden wie diese korrigiert werden können:"
+    not_saved: "verhinderte das Speichern dieser %{resource}. <br>Bitte überprüfen Sie die gekennzeichneten Felder, um herauszufinden wie diese korrigiert werden können:"
     policy: Datenschutzbestimmungen
     banner: Banner
     proposal: Vorschlag
@@ -223,7 +213,6 @@ de:
       conditions: Allgemeine Nutzungsbedingungen
       consul: CONSUL
       consul_url: https://github.com/consul/consul
-      contact_us: Für technische Unterstützung geben Sie ein
       copyright: CONSUL, %{year}
       description: Die Plattform basiert auf %{consul}, einer %{open_source}.
       open_source: Open-Source Software
@@ -234,11 +223,9 @@ de:
     header:
       administration_menu: Admin
       administration: Administration
-      available_locales: Verfügbare Sprachen
       collaborative_legislation: Beteiligungsverfahren
       debates: Diskussionen
       locale: "Sprache:"
-      logo: Consul-Logo
       management: Verwaltung
       moderation: Moderation
       valuation: Bewertung
@@ -254,8 +241,9 @@ de:
         new_notifications:
           one: Sie haben eine neue Benachrichtigung
           other: Sie haben %{count} neue Benachrichtigungen
+          zero: "Sie haben keine neuen Benachrichtigungen"
         notifications: Benachrichtigungen
-        no_notifications: "Sie haben keine neuen Benachrichtigungen"
+      sdg: "SDG"
   notifications:
     index:
       empty_notifications: Sie haben keine neuen Benachrichtigungen.
@@ -288,7 +276,7 @@ de:
       name: Facebook
     finish_signup:
       title: "Weitere Details"
-      username_warning: "Wir möchten die Beiträge der Nutzer klar unterscheidbar machen. Aus diesem Grund müssen die Nutzer:innen-Namen einzigartig sein. Bitte wählen Sie einen alternativen Nutzer:innen-Namen."
+      username_warning: "Aufgrund einer Änderung in der Art und Weise, wie wir mit sozialen Netzwerken umgehen, ist es möglich, dass Ihr Benutzername nun als 'bereits in Verwendung' erscheint. Wenn dies der Fall ist, wählen Sie bitte einen anderen Benutzernamen."
     google_oauth2:
       sign_in: Anmelden mit Google
       sign_up: Registrierung mit Google
@@ -348,7 +336,6 @@ de:
       map_location: "Kartenposition"
       map_location_instructions: "Navigieren Sie auf der Karte zum Standort und setzen Sie die Markierung."
       map_remove_marker: "Entfernen Sie die Kartenmarkierung"
-      map_skip_checkbox: "Dieser Vorschlag hat keinen konkreten Ort oder ich kenne ihn nicht."
     index:
       featured_proposals: Hervorgehoben
       orders:
@@ -387,7 +374,6 @@ de:
         one: " enthält den Begriff <strong>'%{search_term}'</strong>"
         other: " enthält den Begriff <strong>'%{search_term}'</strong>"
       select_order: Sortieren nach
-      select_order_long: "Sie sehen Vorschläge nach:"
       start_proposal: Vorschlag erstellen
       title: Vorschläge
       top: Tops der Woche
@@ -408,8 +394,6 @@ de:
       recommendation_two: Diskussionen oder Kommentare, die illegale Handlungen beinhalten, werden gelöscht sowie diejenigen, die die Diskussionen absichtlich sabotieren. Alles andere ist erlaubt.
       recommendations_title: Empfehlungen zum Erstellen eines Vorschlags
       start_new: Neuen Vorschlag erstellen
-      start_new_in: Erstellen Sie einen Vorschlag
-      help: Wie funktionieren Vorschläge?
     notice:
       retired: Vorschlag im Ruhezustand
       published: Der Vorschlag wurde veröffentlicht
@@ -681,14 +665,13 @@ de:
       back: "Zurück zu meiner Aktivität"
   shared:
     edit: "Bearbeiten"
+    filter: "Filtern"
     save: "Speichern"
     delete: "Löschen"
     "yes": "Ja"
     "no": "Nein"
     search_results: "Suchergebnisse"
     advanced_search:
-      author_type: "Nach Autoren-Typ"
-      author_type_blank: "Tag auswählen"
       date: "Nach Datum"
       date_placeholder: "TT/MM/JJJJ"
       date_range_blank: "Wählen Sie ein Datum"
@@ -699,8 +682,11 @@ de:
       date_5: "Angepasst"
       from: "Von"
       general: "Mit dem Text"
-      general_placeholder: "Text verfassen"
+      goal: "Nach SDG"
+      goal_blank: "Ziel wählen"
       search: "Filter"
+      target: "Nach Unterziel"
+      target_blank: "Unterziel wählen"
       title: "Erweiterte Suche"
       to: "An"
     author_info:
@@ -750,7 +736,6 @@ de:
         message: "Sie sehen %{limit} %{count} Vorschläge mit dem Begriff \"%{query}\""
         see_all: "Alle anzeigen"
     tags_cloud:
-      projekts: Projekte
       districts: "Bereiche"
       districts_list: "Liste der Bereiche"
       categories: Tags
@@ -789,7 +774,6 @@ de:
     facebook: "%{org} Facebook"
     twitter: "%{org} Twitter"
     youtube: "%{org} YouTube"
-    whatsapp: WhatsApp
     telegram: "%{org} Telegramm"
     instagram: "%{org} Instagram"
   stats:
@@ -931,6 +915,7 @@ de:
     help: "Sie können Links von %{models} innerhalb des %{org} hinzufügen."
     submit: "Hinzufügen"
     error: "Ungültiger Link. Starten Sie mit %{url}."
+    error_duplicate: "Der verwandte Inhalt, den Sie hinzufügen, existiert bereits."
     error_itself: "Ungültiger Link. Sie können einen Inhalt nicht auf sich selbst beziehen."
     success: "Sie haben einen neuen verwandten Inhalt hinzugefügt"
     is_related: "Ist der Inhalt verknüpft?"
@@ -956,9 +941,6 @@ de:
       title: Links
       note: Fügen Sie Links hinzu, die von Interesse sind
       add_new_link: Neuen Link hinzufügen
-    link_fields:
-      label_placeholder: Titel Link
-      url_placeholder: Link Adresse
   communities:
     show:
       surveys: Abstimmungen
@@ -973,8 +955,19 @@ de:
     create:
       enqueue_remote_translation: Übersetzungen wurden korrekt angefordert.
     button: Seite übersetzen
+  tags:
+    list:
+      filter:
+        more:
+          one: "Ein weiterer Tag"
+          other: "%{count} weitere Tags"
+  machine_learning:
+    comments_summary: "Zusammenfassung Kommentare"
+    info_text: "Inhalt per AI / Machine Learning generiert"  
+  alerts:
+    select_one_category: "Bitte wählen Sie nur eine Kategorie"
   search:
-    go_to_discusstion: "open discussion..."
+    go_to_discusstion: "Diskussion öffnen..."
     search_form:
       placeholder: "Suchen..."
       button: "Suche"
@@ -995,5 +988,3 @@ de:
       le: "l"
       co: "k"
       si: "s"
-  alerts:
-    select_one_category: "Bitte wählen Sie nur eine Kategorie"

@@ -3,6 +3,8 @@
     <%= "tabindex=0" if placement == 'desktop' %>
 >
   <%= link_to root_path, class: 'home-items-icon', tabindex: '-1', aria: { hidden: true } do %>
-    <%= svg_tag 'home-solid', class: "home-icon" %>
+     <span class="icon-home" aria-hidden="true"
+           title="<%= t("custom.layouts.header.home_link") %>">
+     </span>
   <% end %>
 </li>

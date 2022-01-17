@@ -7,7 +7,7 @@ class ProposalsController < ApplicationController
   include MapLocationAttributes
   include Translatable
 
-  before_action :load_categories, only: [:index, :new, :create, :edit, :map, :summary]
+  before_action :load_categories, only: [:index, :map, :summary]
   before_action :load_geozones, only: [:edit, :map, :summary]
   before_action :authenticate_user!, except: [:index, :show, :map, :summary, :json_data]
   before_action :destroy_map_location_association, only: :update
@@ -29,7 +29,6 @@ class ProposalsController < ApplicationController
     super
     @notifications = @proposal.notifications
     @notifications = @proposal.notifications.not_moderated
-    @related_contents = Kaminari.paginate_array(@proposal.relationed_contents).page(params[:page]).per(5)
 
     if request.path != proposal_path(@proposal)
       redirect_to proposal_path(@proposal), status: :moved_permanently

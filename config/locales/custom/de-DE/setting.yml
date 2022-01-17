@@ -58,6 +58,8 @@ de:
           show_report_button_in_debate_sidebar_description: Aktivieren Sie die Melden-Funktion für Diskussionen
           show_related_content: Verwandte Inhalte
           show_related_content_description: Aktivieren Sie die Funktion “Verwandte Inhalte” für Diskussionen
+          enable_projekt_filter: Projektfilter anzeigen
+          enable_projekt_filter_description: Zeigt den Projektfilter in der Diskussionsübersichtseite
         proposals:
           intro_text_for_proposals: Einleitungstext für Vorschläge
           intro_text_for_proposals_description: Aktivieren Sie einen individuellen Einleitungstext oberhalb der Vorschlagsübersicht
@@ -81,6 +83,8 @@ de:
           enable_proposal_notifications_tab_description: Aktivieren Sie die Benachrichtigungen von Autoren zu eigenen Vorschlägen
           enable_proposal_milestones_tab: Meilensteine in Vorschlägen
           enable_proposal_milestones_tab_description: Aktivieren Sie "Meilensteine" in Vorschlägen, die von der Verwaltung angelegt werden müssen
+          enable_projekt_filter: Projektfilter anzeigen
+          enable_projekt_filter_description: Zeigt den Projektfilter in der Vorschlagsübersichtseite
         polls:
           intro_text_for_polls: Einleitungstext für Abstimmungen
           intro_text_for_polls_description: Aktivieren Sie einen individuellen Einleitungstext oberhalb der Abstimmungsübersicht
@@ -92,6 +96,8 @@ de:
           additional_information_description: Aktivieren Sie "Erweiterete Informationen" für das Abstimmungsmodul
           additional_info_for_each_answer: Zusätzliche Informationen je Antwort
           additional_info_for_each_answer_description: Zeigt die "Zusätzliche Informationen" je Antwort an
+          enable_projekt_filter: Projektfilter anzeigen
+          enable_projekt_filter_description: Zeigt den Projektfilter in der Abstimmungsübersichtseite
 
       extended_option:
         gdpr:

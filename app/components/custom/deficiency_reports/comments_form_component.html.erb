@@ -1,0 +1,7 @@
+<% if user_signed_in? %>
+  <%= render "comments/form", { commentable: @deficiency_report, parent_id: nil } %>
+<% else %>
+  <br>
+  <%= render "shared/login_to_comment" %>
+<% end %>
+

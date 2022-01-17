@@ -1,4 +1,4 @@
-@mixin brand-background($color: $brand, $invert-selection: true) {
+@mixin brand-background($color: $white, $invert-selection: true) {
   background-color: $color;
   color: $white;
 

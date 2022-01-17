@@ -4,6 +4,21 @@ en:
       form:
         projekt_assignment: Project
         star_message: All Fields marked with a (*) are required
+      index:
+        resource:
+          by: by
+      show:
+        back_link: "Additional %{resources} with this subject"
+        admin: Admin
+        information: Information
+        comments: "%{count} comments"
+        report_title: Report
+        report_text: Report this entry if it contains unacceptable content or infringes third party rights.
+        report_button: Report
+        follow_text: Follow this Proposal to get updates.
+        related_title: Related content
+        related_text: You can add links to other Proposals or Debates.
+        related_button: Add Link
     account:
       settings:
         email_digest: "Receive a summary of proposal notifications"
@@ -74,6 +89,11 @@ en:
         image_name: Title image name
     layouts:
       header:
+        home_link: Start page
+        admin_link: Administration
+        account_link: Account
+        notification_item:
+          no_notifications: No notifications
         title_html: "Public Participation<br><span>in the city of"
       footer:
         demokratie: demokratie.today
@@ -108,7 +128,8 @@ en:
     votes:
       geo_restricted: You are not eligible to participate due to territorial restrictions.
       not_verified: You must %{verify_account} to be able to participate
-      phase_expired: The phase is already completed. This proposal can no longer be supported.
+      proposal_phase_expired: The phase is already expired.
+      debate_phase_expired: The phase is already expired.
     welcome:
       current_polls: Current polls
       user_entries: Latest submissions

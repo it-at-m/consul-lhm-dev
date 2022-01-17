@@ -1,3 +1,5 @@
+require "airbrake/delayed_job" if defined?(Delayed)
+
 Airbrake.configure do |config|
   config.host = Rails.application.secrets.errbit_host
   config.project_id = Rails.application.secrets.errbit_project_id
@@ -9,6 +11,8 @@ Airbrake.configure do |config|
   if config.host.blank? || config.project_id.blank? || config.project_key.blank?
     config.ignore_environments += [Rails.env]
   end
+
+  config.performance_stats = false
 end
 
 Airbrake.add_filter do |notice|

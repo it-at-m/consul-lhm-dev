@@ -13,7 +13,6 @@ main {
 }
 
 body>header, .wrapper>header, .top-bar {
-  background-color: $white;
   color: $dark;
 }
 
@@ -49,6 +48,7 @@ body>header, .wrapper>header, .top-bar {
 }
 
 .top-bar {
+  justify-content: space-between !important;
   h2.header-title {
     line-height: 1em;
     text-transform: uppercase;

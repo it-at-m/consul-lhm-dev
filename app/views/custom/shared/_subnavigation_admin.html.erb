@@ -8,7 +8,9 @@
   >
 
     <%= link_to admin_root_path, class: 'admin-items-icon', tabindex: "-1", aria: { hidden: true } do %>
-      <%= svg_tag 'admin-menu-icon', class: "admin-icon" %>
+      <span class="icon-admin" aria-hidden="true"
+            title="<%= t("custom.layouts.header.admin_link") %>">
+      </span>
     <% end %>
 
     <% if placement == 'mobile' %>

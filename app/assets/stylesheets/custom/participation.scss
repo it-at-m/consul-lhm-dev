@@ -215,12 +215,12 @@
 
 .image-placeholder {
   position: relative;
+  background: #D3D3D3;
 
-  &:before {
+  &::before {
     position: absolute;
-    content: "\f03e";
     font-family: 'Font Awesome 5 Free';
-    font-weight: 400;
+    font-weight: bold;
     color: white;
     left: 50%;
     top: 50%;

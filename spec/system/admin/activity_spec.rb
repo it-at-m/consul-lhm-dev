@@ -9,12 +9,12 @@ describe "Admin activity" do
 
   context "Proposals" do
     scenario "Shows moderation activity on proposals" do
-      proposal = create(:proposal)
+      proposal = create(:proposal, description: "<p>Description with html tag</p>")
 
       visit proposal_path(proposal)
 
       within("#proposal_#{proposal.id}") do
-        accept_confirm { click_link "Hide" }
+        accept_confirm("Are you sure? Hide \"#{proposal.title}\"") { click_link "Hide" }
       end
       expect(page).to have_css("#proposal_#{proposal.id}.faded")
 
@@ -24,6 +24,7 @@ describe "Admin activity" do
         expect(page).to have_content(proposal.title)
         expect(page).to have_content("Hidden")
         expect(page).to have_content(admin.user.username)
+        expect(page).to have_css("p", exact_text: "Description with html tag")
       end
     end
 
@@ -42,7 +43,7 @@ describe "Admin activity" do
         check "proposal_#{proposal3.id}_check"
       end
 
-      accept_confirm { click_button "Hide proposals" }
+      accept_confirm("Are you sure? Hide proposals") { click_button "Hide proposals" }
 
       expect(page).not_to have_content(proposal1.title)
 
@@ -59,7 +60,7 @@ describe "Admin activity" do
       visit admin_hidden_proposals_path
 
       within("#proposal_#{proposal.id}") do
-        accept_confirm { click_link "Restore" }
+        accept_confirm("Are you sure? Restore") { click_button "Restore" }
       end
 
       expect(page).to have_content "There are no hidden proposals"
@@ -81,7 +82,7 @@ describe "Admin activity" do
       visit debate_path(debate)
 
       within("#debate_#{debate.id}") do
-        accept_confirm { click_link "Hide" }
+        accept_confirm("Are you sure? Hide \"#{debate.title}\"") { click_link "Hide" }
       end
       expect(page).to have_css("#debate_#{debate.id}.faded")
 
@@ -109,7 +110,7 @@ describe "Admin activity" do
         check "debate_#{debate3.id}_check"
       end
 
-      accept_confirm { click_button "Hide debates" }
+      accept_confirm("Are you sure? Hide debates") { click_button "Hide debates" }
 
       expect(page).not_to have_content(debate1.title)
 
@@ -126,7 +127,7 @@ describe "Admin activity" do
       visit admin_hidden_debates_path
 
       within("#debate_#{debate.id}") do
-        accept_confirm { click_link "Restore" }
+        accept_confirm("Are you sure? Restore") { click_button "Restore" }
       end
 
       expect(page).to have_content "There are no hidden debates"
@@ -149,7 +150,7 @@ describe "Admin activity" do
       visit debate_path(debate)
 
       within("#comment_#{comment.id}") do
-        accept_confirm { click_link "Hide" }
+        accept_confirm("Are you sure? Hide \"#{comment.body}\"") { click_link "Hide" }
         expect(page).to have_css(".faded")
       end
 
@@ -177,7 +178,7 @@ describe "Admin activity" do
         check "comment_#{comment3.id}_check"
       end
 
-      accept_confirm { click_button "Hide comments" }
+      accept_confirm("Are you sure? Hide comments") { click_button "Hide comments" }
 
       expect(page).not_to have_content(comment1.body)
 
@@ -194,7 +195,7 @@ describe "Admin activity" do
       visit admin_hidden_comments_path
 
       within("#comment_#{comment.id}") do
-        accept_confirm { click_link "Restore" }
+        accept_confirm("Are you sure? Restore") { click_button "Restore" }
       end
 
       expect(page).to have_content "There are no hidden comments"
@@ -216,7 +217,7 @@ describe "Admin activity" do
       visit proposal_path(proposal)
 
       within("#proposal_#{proposal.id}") do
-        accept_confirm { click_link "Hide author" }
+        accept_confirm("Are you sure? Hide author \"#{proposal.author.name}\"") { click_link "Hide author" }
 
         expect(page).to have_current_path(debates_path)
       end
@@ -265,7 +266,7 @@ describe "Admin activity" do
         check "proposal_#{proposal3.id}_check"
       end
 
-      accept_confirm { click_button "Block authors" }
+      accept_confirm("Are you sure? Block authors") { click_button "Block authors" }
 
       expect(page).not_to have_content(proposal1.author.username)
 
@@ -293,7 +294,7 @@ describe "Admin activity" do
         check "debate_#{debate3.id}_check"
       end
 
-      accept_confirm { click_button "Block authors" }
+      accept_confirm("Are you sure? Block authors") { click_button "Block authors" }
 
       expect(page).not_to have_content(debate1.author.username)
 
@@ -321,7 +322,7 @@ describe "Admin activity" do
         check "comment_#{comment3.id}_check"
       end
 
-      accept_confirm { click_button "Block authors" }
+      accept_confirm("Are you sure? Block authors") { click_button "Block authors" }
 
       expect(page).not_to have_content comment1.author.username
 
@@ -340,7 +341,7 @@ describe "Admin activity" do
       visit admin_hidden_users_path
 
       within("#user_#{user.id}") do
-        accept_confirm { click_link "Restore" }
+        accept_confirm("Are you sure? Restore") { click_button "Restore" }
       end
 
       expect(page).to have_content "There are no hidden users"

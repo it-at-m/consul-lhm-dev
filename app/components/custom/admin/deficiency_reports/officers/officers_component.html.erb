@@ -24,7 +24,7 @@
               destroy_options: { class: "destroy-officer-link" }
             ) %>
           <% else %>
-            <%= render Admin::TableActionsComponent.new(actions: []) do |actions| %>
+            <%= render Admin::TableActionsComponent.new(officer, actions: []) do |actions| %>
               <%= actions.link_to t("admin.poll_officers.officer.add"),
                                   add_user_path(officer),
                                   method: :post,

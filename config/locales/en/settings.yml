@@ -60,6 +60,8 @@ en:
     meta_keywords_description: 'Keywords <meta name="keywords">, used to improve SEO'
     min_age_to_participate: Minimum age needed to participate
     min_age_to_participate_description: "Users over this age can participate in all processes where a user verified account is needed"
+    postal_codes: "Postal Codes"
+    postal_codes_description: "A comma-separated list of valid postal codes; you can also introduce ranges separated with a colon. Example: 00001:00010,00024,AB3 45FG,00031:00035 will allow postal codes between 00001 and 00010, the postal code 00024, the postal code AB3 45FG, and postal codes between 00031 and 00035. If you leave it blank, all postal codes will be valid."
     proposals:
       successful_proposal_id: Successful proposal
       successful_proposal_id_description: This proposal is used as a reference for a successful proposal in supports number and will be displayed in the dashboard graph.
@@ -110,6 +112,8 @@ en:
         recommendations_on_proposals_description: "Displays recommendations to users on the proposals page based on the tags of the items followed"
       community: "Community on proposals and investments"
       community_description: "Enables the community section in the proposals and investment projects of the Participatory Budgets"
+      machine_learning: "AI / Machine learning"
+      machine_learning_description: "Enable the AI / Machine Learning section to run python scripts and enrich content automatically."
       map: "Proposals and budget investments geolocation"
       map_description: "Enables geolocation of proposals and investment projects"
       allow_images: "Allow upload and show images"
@@ -134,6 +138,8 @@ en:
       dashboard:
         notification_emails: "Dashboard notification emails"
         notification_emails_description: "Enable sending dashboard notification emails to proposal's authors"
+      remove_investments_supports: "Allow removing supports on budget investments"
+      remove_investments_supports_description: "Allow users to remove supports on participatory budgets investments during the selecting projects phase."
       sdg: SDG
       sdg_description: Enable Sustainable Development Goals sections in the administration menu and in the Global Settings.
     remote_census:

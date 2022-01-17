@@ -1,4 +1,10 @@
 de:
+  admin:
+    homepage:
+      feeds:
+        polls: Abstimmungen
+    tags:
+      destroy: Löschen
   custom:
     admin:
       homepage:

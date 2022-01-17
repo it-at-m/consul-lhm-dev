@@ -2,37 +2,22 @@
   <thead>
     <tr>
       <th><%= t("admin.settings.setting") %></th>
-      <th><%= t("admin.settings.setting_status") %></th>
-      <th><%= t("admin.settings.setting_actions") %></th>
+      <th><%= t("admin.settings.index.features.enabled") %></th>
     </tr>
   </thead>
   <tbody>
     <% features.each do |feature| %>
       <tr>
-        <td class="small-8">
-          <strong><%= t("custom.settings.#{feature.key}") %></strong>
+        <td class='small-10'>
+          <strong id="<%= dom_id(feature, :title) %>"><%= t("custom.settings.#{feature.key}") %></strong>
           <br>
           <span class="small">
             <%= t("custom.settings.#{feature.key}_description", default: t("admin.settings.no_description")) %>
           </span>
         </td>
 
-        <td class="small-2">
-          <% if feature.enabled? %>
-            <span class="enabled">
-              <strong>
-                <%= t ("admin.settings.index.features.enabled") %>
-              </strong>
-            </span>
-          <% else %>
-            <span class="disabled">
-              <%= t("admin.settings.index.features.disabled") %>
-            </span>
-          <% end %>
-        </td>
-
-        <td class="text-right">
-          <%= render "admin/settings/featured_settings_form", feature: feature, tab: tab %>
+        <td class='small-2'>
+          <%= render Admin::Settings::FeaturedSettingsFormComponent.new(feature, tab: tab) %>
         </td>
       </tr>
     <% end %>

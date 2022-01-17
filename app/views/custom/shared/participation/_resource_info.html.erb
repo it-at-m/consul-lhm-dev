@@ -13,7 +13,7 @@
   </div>
 
   <div class='resource-info-date'>
-    <%= resource.created_at.strftime("%d. %B %Y") %>
+    <%= l(resource.created_at, format: "%d. %B %Y") %>
   </div>
 
   <% if resource.respond_to?(:projekt) && geo_affiliation_name = prepare_geo_affiliation_name(resource) %>

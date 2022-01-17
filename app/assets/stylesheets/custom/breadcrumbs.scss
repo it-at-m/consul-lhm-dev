@@ -2,14 +2,29 @@
 .breadcrumbs-item-active,
 .breadcrumbs-divider {
   display: inline-block;
-  font-size: .75em;
 }
 
-.breadcrumbs-item-active {
-  color: #06408E;
-  cursor: pointer;
+.custom-breadcrumbs {
+  .breadcrumbs-item, .breadcrumbs-divider {
+    margin-right: 0.25rem;
+    font-size: .75rem;
+  }
+
+  .breadcrumbs-divider {
+    color: #87A3C9;
+  }
 }
 
-.breadcrumbs-divider {
-  color: #87A3C9;
+.projekt-bar {
+  .custom-breadcrumbs {
+    .breadcrumbs-item, .breadcrumbs-divider {
+      margin-right: 0.25rem;
+      font-size: .9rem;
+    }
+
+    .breadcrumbs-divider {
+      color: inherit;
+      margin: 0 .5rem;
+    }
+  }
 }

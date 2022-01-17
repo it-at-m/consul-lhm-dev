@@ -9,6 +9,10 @@ class Proposal < ApplicationRecord
   validates :projekt_id, presence: true, if: :require_a_projekt?
   validate :description_sanitized
 
+  scope :with_active_projekt,  -> { joins(:projekt).merge(Projekt.active) }
+
+  alias_attribute :projekt_phase, :proposal_phase
+
   def require_a_projekt?
     Setting["projekts.connected_resources"].present? ? true : false
   end
