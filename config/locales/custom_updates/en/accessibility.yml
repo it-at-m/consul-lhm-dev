@@ -1,0 +1,36 @@
+en:
+  custom:
+    links:
+      menu:
+        home_icon: Homepage link
+        search_icon: Search
+        konto_icon: My account menu link
+        admin_icon: Admin menu link
+        notification_icon: Notifications
+        projekt_name_label: "Project name: %{projekt_name} "
+        archived_projekts_label: Archived projects
+        deficiency_reports: Deficiency reports
+        new_entry_label: Create new post
+        new_entry: + Create new post
+        new_entries:
+          new_debate: Create new debate
+          new_proposal: Create new proposal
+        mobile:
+          arrow_projekts: Toggle submenu
+          arrow_account: Toggle account submenu
+          arrow_admin: Toggle admin submenu
+          arrow_archived_projekts: Toggle archived projects
+          menu_label: Mobile menu
+      comments:
+        expand_replies: Show replies
+        hide_replies: Hide replies
+        comment_tree: Comment tree
+      projekts_filter:
+        arrow_label: Toggle subprojekts
+        projekt_name: "Project name: %{projekt_name}"
+        resource_count: "Count: %{resource_count}"
+      df_category_filter:
+        category_name: Category name
+      welcome:
+        feeds:
+          title: User Content

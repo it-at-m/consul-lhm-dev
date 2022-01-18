@@ -45,7 +45,7 @@ class ProposalsController
     @proposals_coordinates = all_proposal_map_locations(@resources)
     @selected_tags = all_selected_tags
 
-    @top_level_active_projekts = Projekt.top_level.active.selectable_in_sidebar_active('proposals')
+    @top_level_active_projekts = Projekt.top_level.selectable_in_sidebar_active('proposals')
     @top_level_archived_projekts = Projekt.top_level.archived.selectable_in_sidebar_archived('proposals')
   end
 
