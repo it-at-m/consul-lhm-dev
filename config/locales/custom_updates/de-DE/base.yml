@@ -100,6 +100,7 @@ de:
         demokratie_url: https://www.demokratie.today/
         description: Die Plattform basiert auf %{consul}, einer %{open_source} und wurde von %{demokratie} modifiziert.
         impressum: Impressum
+        netiquette: Netiquette
     menu:
       account: Konto
       archived: Abgelaufene Projekte
