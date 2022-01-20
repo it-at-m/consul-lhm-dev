@@ -20,6 +20,7 @@ class Shared::CommentsComponent < ApplicationComponent
       add_phase_specific_keys(keys) if ["Proposal", "Debate"].include?(record.class.name) && record.projekt.present?
       add_poll_specific_keys(keys) if record.class.name == "Poll"
       add_projekt_page_specific_keys(keys) if record.class.name == "Projekt"
+      keys
     end
 
     def add_phase_specific_keys(keys)
