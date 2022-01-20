@@ -152,9 +152,10 @@
         transparent: true
       });
 
-      var overlayStadtSpaziergaenge = L.tileLayer.wms(mapTilesProvider, {
+
+      var overlayStadtNeueRadwegeXXII = L.tileLayer.wms(mapTilesProvider, {
         attribution: mapAttribution,
-        layers: 'gsm:g_stadtspaziergaenge_smarter_together',
+        layers: 'gsm:rad_consulrouten_utm',
         format: 'image/png',
         transparent: true
       });
@@ -165,8 +166,8 @@
       };
 
       var overlayMaps = {
-        "Radeln": overlayStadtRadeln,
-        "Spazieren": overlayStadtSpaziergaenge
+        "Radwege": overlayStadtRadeln,
+        "Geplante Radrouten Stadtbezirk 22": overlayStadtNeueRadwegeXXII
       };
 
 
