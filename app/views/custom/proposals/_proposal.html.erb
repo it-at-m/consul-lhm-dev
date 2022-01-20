@@ -7,13 +7,13 @@
       </div>
     </div>
 
-    <div class='columns small-12 medium-3 large-2 show-for-small-only'>
+    <div class='columns small-12 medium-3 large-2 show-for-small-only not-print'>
       <% if show_image_thumbnail?(proposal) %>
         <%= image_tag proposal.image_url(:large), alt: proposal.image.title.unicode_normalize %>
       <% end %>
     </div>
 
-    <div class="columns small-12 medium-3 large-2 show-for-medium <%= "image-placeholder icon-#{proposal.projekt.icon || "image" }" unless show_image_thumbnail?(proposal)  %>" data-equalizer-watch='main'>
+    <div class="columns small-12 medium-3 large-2 show-for-medium not-print <%= "image-placeholder icon-#{proposal.projekt.icon || "image" }" unless show_image_thumbnail?(proposal)  %>" data-equalizer-watch='main'>
       <% if show_image_thumbnail?(proposal) %>
         <%= image_tag proposal.image_url(:thumb_wider), alt: proposal.image.title.unicode_normalize %>
       <% end %>

@@ -1,5 +1,5 @@
 <% if feature?(:map) && map_location_available?(@proposal.map_location) %>
-  <div class="margin-bottom">
+  <div class="margin-bottom not-print">
     <%= render_map(@proposal.map_location, "proposal", false, nil, MapLocation.where(proposal_id: @proposal.id).map(&:json_data)) %>
   </div>
 <% end %>
@@ -29,7 +29,7 @@
 <% end %>
 
 <% if @proposal.video_url.present? %>
-  <div class="video-link">
+  <div class="video-link not-print">
     <p>
       <span class="icon-video"></span>&nbsp;
       <strong><%= t("proposals.show.title_video_url") %></strong>
