@@ -128,6 +128,7 @@
 //= require deficiency_reports
 //= require leaflet.markercluster
 //= require leaflet.locatecontrol
+//= require matomo
 //= require_tree ./admin
 //= require_tree ./sdg
 //= require_tree ./sdg_management
