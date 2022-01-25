@@ -18,6 +18,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     user = User.find_by keycloak_link: keycloak_link
 
+    byebug
+
     unless user
       password = SecureRandom.base64(15)
       user = User.new({ email: email, username: username, oauth_email: email, terms_of_service: true, password:  password, password_confirmation: password, keycloak_link: keycloak_link, registering_with_oauth: true })
@@ -50,6 +52,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       end
     end
 
+    cookies[:keycloack_user] = true
+
     redirect_to after_sign_in_path_for(user)
 
     #sign_in_with :openid_connect_login, :openid_connect
@@ -60,7 +64,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if resource.registering_with_oauth && !resource.valid?
       finish_signup_path
     else
-      current_user.update(registering_with_oauth: false)
+      resource.update(registering_with_oauth: false)
       super(resource)
     end
   end
