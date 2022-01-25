@@ -27,7 +27,6 @@ class Admin::SiteCustomization::ContentBlocksController < Admin::SiteCustomizati
       notice = t("admin.site_customization.content_blocks.create.notice")
       redirect_to admin_site_customization_content_blocks_path, notice: notice
     else
-      byebug
       flash.now[:error] = t("admin.site_customization.content_blocks.create.error")
       render :new
     end

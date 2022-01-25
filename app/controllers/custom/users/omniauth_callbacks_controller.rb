@@ -18,8 +18,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     user = User.find_by keycloak_link: keycloak_link
 
-    byebug
-
     unless user
       password = SecureRandom.base64(15)
       user = User.new({ email: email, username: username, oauth_email: email, terms_of_service: true, password:  password, password_confirmation: password, keycloak_link: keycloak_link, registering_with_oauth: true })
