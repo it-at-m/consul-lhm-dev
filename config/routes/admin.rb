@@ -26,7 +26,11 @@ namespace :admin do
       get :search, on: :collection
     end
     resources :categories,  only: %i[index new create edit update destroy]
-    resources :statuses,    only: %i[index new create edit update destroy]
+    resources :statuses,    only: %i[index new create edit update destroy] do
+      collection do
+        post 'order_statuses'
+      end
+    end
     resources :settings,    only: :index
   end
 

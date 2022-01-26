@@ -28,7 +28,7 @@ class DebatesController < ApplicationController
 
     @featured_debates = @debates.featured
 
-    remove_where_projekt_not_active
+    @all_resources = @resources.except(:limit, :offset)
 
     unless params[:search].present?
       take_only_by_tag_names
@@ -36,12 +36,13 @@ class DebatesController < ApplicationController
       take_by_sdgs
       take_by_geozone_affiliations
       take_by_geozone_restrictions
+      take_with_activated_projekt_only
     end
 
     @selected_tags = all_selected_tags
 
-    @top_level_active_projekts = Projekt.top_level.active.selectable_in_sidebar_active('debates')
-    @top_level_archived_projekts = Projekt.top_level.archived.selectable_in_sidebar_archived('debates')
+    @top_level_active_projekts = Projekt.top_level_sidebar_current('debates')
+    @top_level_archived_projekts = Projekt.top_level_sidebar_expired('debates')
   end
 
   def show
@@ -73,10 +74,9 @@ class DebatesController < ApplicationController
 
   private
 
-    def remove_where_projekt_not_active
-      active_projekts_ids = Projekt.all.joins(:projekt_settings).where(projekt_settings: { key: 'projekt_feature.main.activate', value: 'active' }).pluck(:id)
-      @resources = @resources.joins(:projekt).where(projekts: { id: active_projekts_ids })
-    end
+  def take_with_activated_projekt_only
+    @resources = @resources.joins(:projekt).merge(Projekt.activated)
+  end
 
   def debate_params
     attributes = [:tag_list, :terms_of_service, :projekt_id, :related_sdg_list,

@@ -7,24 +7,6 @@
   font-size: 0.875em;
 }
 
-.expand-proposals-overview-map {
-  float: right;
-  cursor: pointer;
-  position: relative;
-
-  &::before {
-    content: "\f078";
-    font-family: "Font Awesome 5 Free";
-    font-weight: bold;
-    position: absolute;
-    left: -20px;
-  }
-}
-
-.expand-proposals-overview-map[aria-expanded="true"]::before {
-  transform: rotate(180deg);
-}
-
 .proposal-show .supports {
   padding: 0;
 

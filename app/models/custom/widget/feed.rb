@@ -4,14 +4,14 @@ class Widget::Feed < ApplicationRecord
   KINDS = %w[polls proposals debates].freeze
 
   def polls
-    Poll.with_active_projekt.current.order(created_at: :asc).limit(limit)
+    Poll.with_current_projekt.current.order(created_at: :asc).limit(limit)
   end
 
   def proposals
-    Proposal.published.not_archived.with_active_projekt.sort_by_created_at.limit(limit)
+    Proposal.published.not_archived.with_current_projekt.sort_by_created_at.limit(limit)
   end
 
   def debates
-    Debate.with_active_projekt.sort_by_created_at.limit(limit)
+    Debate.with_current_projekt.sort_by_created_at.limit(limit)
   end
 end

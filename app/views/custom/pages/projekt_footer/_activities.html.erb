@@ -48,8 +48,10 @@
                     <%= render_map(projekt.map_location, "proposals", false, nil, @proposals_coordinates) %>
                   </div>
 
-                  <div class='expand-proposals-overview-map small js-expand-proposals-overview-map'>
-                    <%= t('custom.proposals.index.show_larger_map') %>
+                  <div class="expand-overview-map-wrapper">
+                    <div class='expand-overview-map small js-expand-overview-map not-print'>
+                      <%= t('custom.proposals.index.show_larger_map') %>
+                    </div>
                   </div>
                   <div class="clear"></div>
                 </div>

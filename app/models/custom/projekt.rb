@@ -36,24 +36,31 @@ class Projekt < ApplicationRecord
 
   validates :color, format: { with: /\A#[\d, a-f, A-F]{6}\Z/ }
 
-  scope :top_level, -> { where(parent: nil).with_order_number }
-
   scope :with_order_number, -> { where.not(order_number: nil).order(order_number: :asc) }
+  scope :top_level, -> { with_order_number.
+                         where(parent: nil) }
+  scope :activated, -> { joins( :projekt_settings).where( projekt_settings: { key: 'projekt_feature.main.activate', value: 'active' } ) }
 
-  scope :active, -> { where( "total_duration_end IS NULL OR total_duration_end >= ?", Date.today).
-                      joins( :projekt_settings).
-                      where( projekt_settings: { key: 'projekt_feature.main.activate', value: 'active' } ) }
+  scope :current, ->(timestamp = Date.today) { activated.
+                                               where( "total_duration_start IS NULL OR total_duration_start <= ?", Date.today ). 
+                                               where( "total_duration_end IS NULL OR total_duration_end >= ?", Date.today) }
+  scope :expired, ->(timestamp = Date.today) { activated.
+                                               where( "total_duration_end < ?", Date.today) }
 
-  scope :archived, -> { where( "total_duration_end < ?", Date.today).
-                        joins( :projekt_settings ).
-                        where( projekt_settings: { key: 'projekt_feature.main.activate', value: 'active' } ) }
-
-  scope :visible_in_menu, -> { joins(' INNER JOIN projekt_settings a ON projekts.id = a.projekt_id').
-                            where( 'a.key': 'projekt_feature.general.show_in_navigation', 'a.value': 'active' ) }
+  scope :visible_in_menu, -> { joins(:projekt_settings).where( projekt_settings: { key: 'projekt_feature.general.show_in_navigation', value: 'active' } ) }
 
   scope :selectable_in_selector, ->(controller_name, current_user) { select{ |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.selectable?(controller_name, current_user) } } }
-  scope :selectable_in_sidebar_active, ->(controller_name) { select{ |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| ( p.active? && ( p.has_active_phase?(controller_name) || p.send(controller_name).any? ) ) } } }
-  scope :selectable_in_sidebar_archived, ->(controller_name) { select{ |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.active? && p.send(controller_name).any? } } }
+
+  scope :selectable_in_sidebar_current, ->(controller_name) { select{ |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.current? && ( p.send(controller_name).any? || p.has_active_phase?(controller_name) ) } } }
+  scope :selectable_in_sidebar_expired, ->(controller_name) { select{ |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.expired? && p.send(controller_name).any? } } }
+
+
+  scope :top_level_navigation_current, -> { top_level.visible_in_menu.current }
+  scope :top_level_navigation_expired, -> { top_level.visible_in_menu.expired }
+
+  scope :top_level_sidebar_current, ->(controller_name) { top_level.selectable_in_sidebar_current(controller_name) }
+  scope :top_level_sidebar_expired, ->(controller_name) { top_level.selectable_in_sidebar_expired(controller_name) }
+
 
 
   def update_page
@@ -72,15 +79,33 @@ class Projekt < ApplicationRecord
     end
   end
 
+  def top_level?
+    Projekt.top_level.exists?(id)
+  end
+
+  def activated?
+    Projekt.activated.exists?(id)
+  end
+
   def current?(timestamp = Date.today)
-    ( total_duration_start.nil? || total_duration_start <= timestamp ) &&
-      ( total_duration_end.nil? || timestamp <= total_duration_end ) &&
-      active?
+    Projekt.current(timestamp).exists?(id)
+  end
+
+  def expired?(timestamp = Date.today)
+    Projekt.expired(timestamp).exists?(id)
+  end
+
+  def activated_children
+    children.activated
+  end
+
+  def children_with_active_feature(projekt_feature_key)
+    children.joins(:projekt_settings).where( projekt_settings: { key: "projekt_feature.#{projekt_feature_key}", value: 'active'  } )
   end
 
   def comments_allowed?(current_user)
     current_user.level_two_or_three_verified? &&
-      current?
+      current?(timestamp)
   end
 
   def level(counter = 1)
@@ -127,31 +152,12 @@ class Projekt < ApplicationRecord
     all_children_projekts
   end
 
-  def active?
-    projekt_settings.find_by(key: 'projekt_feature.main.activate').value.present?
-  end
-
-  def archived?
-    active? && !total_duration_end.nil? && total_duration_end < Date.today
-  end
-
-  def active_children
-    children.joins(:projekt_settings).where( projekt_settings: { key: 'projekt_feature.main.activate', value: 'active'  } )
-  end
-
-  def children_with_active_feature(projekt_feature_key)
-    children.joins(:projekt_settings).where( projekt_settings: { key: "projekt_feature.#{projekt_feature_key}", value: 'active'  } )
-  end
-
-  def all_active_children_projekts_in_tree(all_active_children_projekts = [])
-    if self.children_with_active_feature('main.activate').any?
-      self.children_with_active_feature('main.activate').each do |child|
-        all_active_children_projekts.push(child)
-        child.all_active_children_projekts_in_tree(all_active_children_projekts)
-      end
+  def selectable_tree_ids(controller_name, filter)
+    if filter == 'active'
+      all_children_projekts.unshift(self) & Projekt.selectable_in_sidebar_current(controller_name)
+    else
+      all_children_projekts.unshift(self) & Projekt.selectable_in_sidebar_expired(controller_name)
     end
-
-    all_active_children_projekts
   end
 
   def has_active_phase?(controller_name)
@@ -161,18 +167,8 @@ class Projekt < ApplicationRecord
     when 'debates'
       debate_phase.currently_active?
     when 'polls'
-      polls.any?
+      false
     end
-  end
-
-  def count_resources(controller_name)
-    return self.all_active_children_projekts_in_tree.unshift(self).map{ |p| p.send(controller_name).published.count }.reduce(:+) if controller_name == 'proposals'
-    return self.all_active_children_projekts_in_tree.unshift(self).map{ |p| p.send(controller_name).created_by_admin.not_budget.count }.reduce(:+) if controller_name == 'polls'
-    self.all_active_children_projekts_in_tree.unshift(self).map{ |p| p.send(controller_name).count }.reduce(:+)
-  end
-
-  def top_level?
-    self.parent.blank?
   end
 
   def top_parent

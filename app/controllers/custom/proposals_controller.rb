@@ -32,7 +32,8 @@ class ProposalsController
     load_selected
     load_featured
     remove_archived_from_order_links
-    remove_where_projekt_not_active
+
+    @all_resources = @resources.except(:limit, :offset)
 
     unless params[:search].present?
       take_only_by_tag_names
@@ -40,13 +41,14 @@ class ProposalsController
       take_by_sdgs
       take_by_geozone_affiliations
       take_by_geozone_restrictions
+      take_with_activated_projekt_only
     end
 
     @proposals_coordinates = all_proposal_map_locations(@resources)
     @selected_tags = all_selected_tags
 
-    @top_level_active_projekts = Projekt.top_level.active.selectable_in_sidebar_active('proposals')
-    @top_level_archived_projekts = Projekt.top_level.archived.selectable_in_sidebar_archived('proposals')
+    @top_level_active_projekts = Projekt.top_level_sidebar_current('proposals')
+    @top_level_archived_projekts = Projekt.top_level_sidebar_expired('proposals')
   end
 
   def new
@@ -105,9 +107,8 @@ class ProposalsController
 
   private
 
-    def remove_where_projekt_not_active
-      active_projekts_ids = Projekt.all.joins(:projekt_settings).where(projekt_settings: { key: 'projekt_feature.main.activate', value: 'active' }).pluck(:id)
-      @resources = @resources.joins(:projekt).where(projekts: { id: active_projekts_ids })
+    def take_with_activated_projekt_only
+      @resources = @resources.joins(:projekt).merge(Projekt.activated)
     end
 
     def process_tags

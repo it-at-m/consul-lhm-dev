@@ -122,7 +122,7 @@ module Abilities
       can [:manage], ::DeficiencyReport::Officer
       can [:manage], ::DeficiencyReport::Category
       can [:manage], ::DeficiencyReport::Status
-      can [:index, :show, :new, :create, :destroy, :update_status, :update_category, :update_officer, :update_official_answer, :vote], DeficiencyReport
+      can [:index, :show, :new, :create, :destroy, :update_status, :update_category, :update_officer, :update_official_answer, :vote, :order_statuses], DeficiencyReport
       can [:approve_official_answer], ::DeficiencyReport do |dr|
         Setting['deficiency_reports.admins_must_approve_officer_answer'].present? &&
           !dr.official_answer_approved? &&

@@ -38,8 +38,10 @@
     <div class="map deficiency-reports-map">
       <%= render_map(nil, "deficiency-reports", false, nil, @deficiency_reports_coordinates) %>
     </div>
-    <div class='expand-proposals-overview-map small js-expand-proposals-overview-map'>
-      <%= t('custom.proposals.index.show_larger_map') %>
+    <div class="expand-overview-map-wrapper">
+      <div class='expand-overview-map small js-expand-overview-map wide'>
+        <%= t('custom.proposals.index.show_larger_map') %>
+      </div>
     </div>
     <div class="clear"></div>
     <div class="no-bullet margin-top">
@@ -47,11 +49,33 @@
   <%end%>
 
   <div class="row">
-    <div id="deficiency_reports" class="deficiency-reports-list small-12 medium-9 column">
+    <div id="deficiency-reports-sidebar" class="small-12 medium-3 column">
+      <aside class="margin-bottom">
+        <%= link_to t("custom.deficiency_reports.index.start_deficiency_report"), new_deficiency_report_path,
+          class: "button expanded" %>
+
+        <%= render "deficiency_reports/sidebar/categories" %>
+        <%= render "deficiency_reports/sidebar/statuses" %>
+
+        <% if current_user &&
+            ( current_user.deficiency_report_officer? ||
+            current_user.administrator? ) %>
+          <%= render "deficiency_reports/sidebar/officer_filter" %>
+        <% end %>
+
+        <% if current_user &&
+            current_user.administrator? &&
+            Setting['deficiency_reports.admins_must_approve_officer_answer'].present? %>
+          <%= render "deficiency_reports/sidebar/not_approved_filter" %>
+        <% end %>
+      </aside>
+    </div>
+
+    <div id="deficiency-reports" class="deficiency-reports-list small-12 medium-9 column">
 
       <%= render Shared::BannerComponent.new("deficiency_reports") %>
 
-      <% if extended_feature?("deficiency_reports.intro_text_for_deficiency_reports") %>
+      <% if deficiency_reports_feature?("intro_text") %>
         <%=render_custom_block 'deficiency_reports_welcome' %>
       <% end %>
 
@@ -109,29 +133,5 @@
         <% end %>
       </div>
     </div>
-
-    <div class="small-12 medium-3 column">
-      <aside class="margin-bottom">
-        <%= link_to t("custom.deficiency_reports.index.start_deficiency_report"), new_deficiency_report_path,
-          class: "button expanded" %>
-
-        <%= render "deficiency_reports/sidebar/categories" %>
-        <%= render "deficiency_reports/sidebar/statuses" %>
-
-        <% if current_user &&
-            ( current_user.deficiency_report_officer? ||
-            current_user.administrator? ) %>
-          <%= render "deficiency_reports/sidebar/officer_filter" %>
-        <% end %>
-
-        <% if current_user &&
-            current_user.administrator? &&
-            Setting['deficiency_reports.admins_must_approve_officer_answer'].present? %>
-          <%= render "deficiency_reports/sidebar/not_approved_filter" %>
-        <% end %>
-
-      </aside>
-    </div>
-
   </div>
 </main>

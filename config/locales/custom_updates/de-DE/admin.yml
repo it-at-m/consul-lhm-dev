@@ -51,7 +51,7 @@ de:
           edit:
             editing: Mangelkategorie bearbeiten
           form:
-            color_placeholder: "HTML Farbcode (z.B. 'green') oder HEX Code mit #"
+            color_placeholder: "HEX Code mit #"
             submit_button: Speichern
           destroy:
             cannot_be_destroyed: Sie können diese Kategorie nicht löschen, da sie mindestens einem Mangel zugewiesen ist.
@@ -69,7 +69,7 @@ de:
           edit:
             editing: Mangelstatus bearbeiten
           form:
-            color_placeholder: "HTML Farbcode (z.B. 'green') oder HEX Code mit #"
+            color_placeholder: "HEX Code mit #"
             submit_button: Speichern
           destroy:
             cannot_be_destroyed: Sie können diesen Status nicht löschen, da er mindestens einem Mangel zugewiesen ist.

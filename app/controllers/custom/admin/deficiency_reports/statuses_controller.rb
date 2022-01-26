@@ -3,7 +3,7 @@ class Admin::DeficiencyReports::StatusesController < Admin::BaseController
   load_and_authorize_resource :status, class: "DeficiencyReport::Status", except: :show
 
   def index
-    @statuses = DeficiencyReport::Status.all.order(id: :asc)
+    @statuses = DeficiencyReport::Status.all.order(given_order: :asc)
   end
 
   def new
@@ -37,6 +37,11 @@ class Admin::DeficiencyReports::StatusesController < Admin::BaseController
     else
       redirect_to admin_deficiency_report_statuses_path, alert: t('custom.admin.deficiency_reports.statuses.destroy.cannot_be_destroyed')
     end
+  end
+
+  def order_statuses
+    DeficiencyReport::Status.order_statuses(params[:ordered_list])
+    head :ok
   end
 
   private

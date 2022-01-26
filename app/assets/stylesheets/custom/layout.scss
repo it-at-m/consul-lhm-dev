@@ -107,3 +107,21 @@ html.is-reveal-open body {
 .sidebar-title-icon.fa-check-circle:before {
   content: "\f058";
 }
+
+// Reorder columns
+
+@media screen and (min-width: 40em) {
+  #proposals.proposals-list.column,
+  #debates.debates-list.column,
+  #polls.polls-list.column,
+  #deficiency-reports.deficiency-reports-list.column {
+    float: left;
+  }
+
+  #proposals-sidebar.column,
+  #debates-sidebar.column,
+  #polls-sidebar.column,
+  #deficiency-reports-sidebar.column {
+    float: right;
+  }
+}

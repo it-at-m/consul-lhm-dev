@@ -173,6 +173,8 @@ de:
         allow_voting_description: Aktiviert die Nutzer*innen-Bewertung für den Mängelmelder
         enable_comments: Kommentarfunktion
         enable_comments_description: Nutzer*innen können unterhalb eines Mangels kommentieren
+        intro_text: Einleitungstext für den Mängelmelder
+        intro_text_description: Aktivieren Sie einen individuellen Einleitungstext oberhalb der Mängelübersichtsseite
 
       projekt_newsfeed:
         id: Newsfeed ID 

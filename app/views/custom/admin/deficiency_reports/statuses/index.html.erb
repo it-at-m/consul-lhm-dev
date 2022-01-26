@@ -13,9 +13,9 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody class="sortable" data-js-url=<%= order_statuses_admin_deficiency_report_statuses_path %>>
     <% @statuses.each do |status| %>
-      <tr id="<%= dom_id(status) %>">
+      <tr id="<%= dom_id(status) %>" data-answer-id="<%= status.id %>">
         <td><%= "<i class=\"fas fa-#{status.icon}\" style=\"color:#{status.color}\"></i>".html_safe if status.icon %></td>
         <td><%= status.color %></td>
         <td><%= status.title %></td>

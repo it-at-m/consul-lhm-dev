@@ -13,7 +13,24 @@
   <%= render "shared/section_header", i18n_namespace: "polls.index.section_header", image: "polls" %>
   
   <div class="row">
-    <div class="small-12 medium-9 column">
+    <div id="polls-sidebar" class="small-12 medium-3 column">
+      <aside class="margin-bottom">
+        <% if extended_feature?('polls.enable_projekt_filter') %>
+          <%= render "shared/projekt_sidebar_filter/projekts_sidebar" %>
+        <% end %>
+        <% if show_affiliation_filter_in_sidebar? %>
+          <%= render "shared/sidebar_filter/geozone_affiliations" %>
+        <% end %>
+        <% unless skip_user_verification? %>
+          <%= render "shared/sidebar_filter/geozone_restrictions" %>
+        <% end %>
+        <%= render "shared/categories", taggable: "poll" %>
+        <%= render "shared/tag_cloud", taggable: "poll" %>
+        <%= render SDG::Goals::TagCloudComponent.new("Poll") %>
+      </aside>
+    </div>
+
+    <div id="polls" class="polls-list small-12 medium-9 column">
 
       <% if extended_feature?('polls.intro_text_for_polls') %>
         <%=render_custom_block 'polls_welcome' %>
@@ -45,7 +62,6 @@
           </div>
         </div>
 
-
         <div class='margin-top'>
           <%= render "poll_group", poll_group: @polls %>
         </div>
@@ -63,23 +79,6 @@
           <%= render_custom_partial "footer" %>
         <% end %>
       </div>
-    </div>
-
-    <div class="small-12 medium-3 column">
-      <aside class="margin-bottom">
-        <% if extended_feature?('polls.enable_projekt_filter') %>
-          <%= render "shared/projekt_sidebar_filter/projekts_sidebar" %>
-        <% end %>
-        <% if show_affiliation_filter_in_sidebar? %>
-          <%= render "shared/sidebar_filter/geozone_affiliations" %>
-        <% end %>
-        <% unless skip_user_verification? %>
-          <%= render "shared/sidebar_filter/geozone_restrictions" %>
-        <% end %>
-        <%= render "shared/categories", taggable: "poll" %>
-        <%= render "shared/tag_cloud", taggable: "poll" %>
-        <%= render SDG::Goals::TagCloudComponent.new("Poll") %>
-      </aside>
     </div>
   </div>
 </main>

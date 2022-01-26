@@ -63,8 +63,10 @@
         <%= render_map(nil, "proposals", false, nil, @proposals_coordinates) %>
       <% end %>
     </div>
-    <div class='expand-proposals-overview-map small js-expand-proposals-overview-map not-print'>
-      <%= t('custom.proposals.index.show_larger_map') %>
+    <div class='expand-overview-map-wrapper'>
+      <div class='expand-overview-map small js-expand-overview-map not-print wide'>
+        <%= t('custom.proposals.index.show_larger_map') %>
+      </div>
     </div>
     <div class="clear"></div>
     <div class="no-bullet margin-top">
@@ -72,6 +74,54 @@
   <%end%>
 
   <div class="row">
+    <div id="proposals-sidebar"  class="small-12 medium-3 column">
+      <aside class="margin-bottom">
+        <% if current_user && proposal_limit_exceeded?(current_user) %>
+          <div class='max-proposals-exceeded'>
+            <%= t('custom.proposals.index.max_number_reached', max_number: Setting['extended_option.proposals.max_active_proposals_per_user']) %>
+          </div>
+        <% else %>
+          <% if current_user.nil? || Projekt.top_level.selectable_in_selector(controller_name, current_user).any? %>
+            <%= link_to t("proposals.index.start_proposal"), new_proposal_path(tags: tags.any? ? tags.map{|t| t.name} : nil, projekt: @selected_parent_projekt),
+              class: "button expanded js-preselect-projekt" %>
+          <% else %>
+            <%= link_to t("custom.proposals.index.no_active_projekt"), '#', class: "button expanded disabled-no-active-projekt", disabled: true %>
+          <% end %>
+        <% end %>
+
+        <% if extended_feature?('proposals.show_selected_proposals_in_proposal_sidebar') %>
+          <div class="sidebar-divider"></div>
+          <h2 class="sidebar-title"><%= t("proposals.index.selected_proposals") %></h2>
+          <br>
+          <p class="small">
+            <%= link_to t("proposals.index.selected_proposals_link"), proposals_path(selected: "all") %>
+          </p>
+        <% end %>
+
+        <% if params[:retired].blank? %>
+
+          <% if extended_feature?('proposals.enable_projekt_filter') %>
+            <%= render "shared/projekt_sidebar_filter/projekts_sidebar" %>
+          <% end %>
+          <% if show_affiliation_filter_in_sidebar? %>
+            <%= render "shared/sidebar_filter/geozone_affiliations" %>
+          <% end %>
+          <% unless skip_user_verification? %>
+            <%= render "shared/sidebar_filter/geozone_restrictions" %>
+          <% end %>
+          <%= render "shared/categories", taggable: "proposal" %>
+          <%= render "shared/tag_cloud", taggable: "proposal" %>
+          <%= render SDG::Goals::TagCloudComponent.new("Proposal") %>
+        <% end %>
+        <%= render "retired" %>
+
+        <% if extended_feature?('proposals.show_suggested_proposals_in_proposal_sidebar') %>
+          <%= render "proposals_lists" %>
+        <% end %>
+
+      </aside>
+    </div>
+
     <div id="proposals" class="proposals-list small-12 medium-9 column">
 
       <%= render Shared::BannerComponent.new("proposals") %>
@@ -165,54 +215,5 @@
         <% end %>
       </div>
     </div>
-
-    <div class="small-12 medium-3 column">
-      <aside class="margin-bottom">
-        <% if current_user && proposal_limit_exceeded?(current_user) %>
-          <div class='max-proposals-exceeded'>
-            <%= t('custom.proposals.index.max_number_reached', max_number: Setting['extended_option.proposals.max_active_proposals_per_user']) %>
-          </div>
-        <% else %>
-          <% if current_user.nil? || Projekt.top_level.selectable_in_selector(controller_name, current_user).any? %>
-            <%= link_to t("proposals.index.start_proposal"), new_proposal_path(tags: tags.any? ? tags.map{|t| t.name} : nil, projekt: @selected_parent_projekt),
-              class: "button expanded js-preselect-projekt" %>
-          <% else %>
-            <%= link_to t("custom.proposals.index.no_active_projekt"), '#', class: "button expanded disabled-no-active-projekt", disabled: true %>
-          <% end %>
-        <% end %>
-
-        <% if extended_feature?('proposals.show_selected_proposals_in_proposal_sidebar') %>
-          <div class="sidebar-divider"></div>
-          <h2 class="sidebar-title"><%= t("proposals.index.selected_proposals") %></h2>
-          <br>
-          <p class="small">
-            <%= link_to t("proposals.index.selected_proposals_link"), proposals_path(selected: "all") %>
-          </p>
-        <% end %>
-
-        <% if params[:retired].blank? %>
-
-          <% if extended_feature?('proposals.enable_projekt_filter') %>
-            <%= render "shared/projekt_sidebar_filter/projekts_sidebar" %>
-          <% end %>
-          <% if show_affiliation_filter_in_sidebar? %>
-            <%= render "shared/sidebar_filter/geozone_affiliations" %>
-          <% end %>
-          <% unless skip_user_verification? %>
-            <%= render "shared/sidebar_filter/geozone_restrictions" %>
-          <% end %>
-          <%= render "shared/categories", taggable: "proposal" %>
-          <%= render "shared/tag_cloud", taggable: "proposal" %>
-          <%= render SDG::Goals::TagCloudComponent.new("Proposal") %>
-        <% end %>
-        <%= render "retired" %>
-
-        <% if extended_feature?('proposals.show_suggested_proposals_in_proposal_sidebar') %>
-          <%= render "proposals_lists" %>
-        <% end %>
-
-      </aside>
-    </div>
-
   </div>
 </main>

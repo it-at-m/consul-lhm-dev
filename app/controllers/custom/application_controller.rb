@@ -16,8 +16,8 @@ class ApplicationController < ActionController::Base
   end
 
   def set_top_level_active_and_archived_projekts_for_menu
-    @top_level_active_projekts_for_menu = Projekt.top_level.active.visible_in_menu
-    @top_level_archived_projekts_for_menu = Projekt.top_level.archived.visible_in_menu
+    @top_level_active_projekts_for_menu =Projekt.top_level_navigation_current
+    @top_level_archived_projekts_for_menu = Projekt.top_level_navigation_expired
   end
 
   def set_default_social_media_images

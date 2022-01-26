@@ -67,10 +67,15 @@ en:
         create:
           submit_button: Submit deficiency
       mailers:
-        notify_administrators:
-          subject: New deficiency report
+        notify_administrators_about_new_deficiency_report:
+          subject: "New deficiency report %{identifier}"
           hi: Dear Admin,
           p1: A new deficiency report has just been submitted.
+          signature_html: Best regards,</br>Consul
+        notify_administrators_about_answer_update:
+          subject: "New official answer to deficiency report %{identifier}"
+          hi: Dear Admin,
+          p1: Officer has updated official answer.
           signature_html: Best regards,</br>Consul
         notify_author_about_status_change:
           subject: Status change of your deficiency report
@@ -78,7 +83,7 @@ en:
           p1: Status of your a deficiency report you submitted earlier, was changed.
           signature_html: Best regards,</br>Consul
         notify_officer:
-          subject: New deficiency report
+          subject: "New deficiency report %{identifier}"
           hi: Dear Officer,
           p1: Admin has assigned you one of the new deficiency reports.
           signature_html: Best regards,</br>Consul

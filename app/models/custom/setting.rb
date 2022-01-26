@@ -151,6 +151,7 @@ class Setting < ApplicationRecord
         "deficiency_reports.admins_must_approve_officer_answer": false,
         "deficiency_reports.allow_voting": false,
         "deficiency_reports.enable_comments": true,
+        "deficiency_reports.intro_text": false,
         # "extended_feature.general.elasticsearch": false,
         "extended_feature.general.extended_editor_for_admins": true,
         "extended_feature.general.extended_editor_for_users": false,

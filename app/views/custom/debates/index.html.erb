@@ -38,6 +38,28 @@
     <% end %>
 
     <div class="row">
+      <div id="debates-sidebar" class="small-12 medium-3 column">
+        <aside class="margin-bottom">
+          <% if current_user.nil? || Projekt.top_level.selectable_in_selector(controller_name, current_user).any? %>
+            <%= link_to t("debates.index.start_debate"), new_debate_path(projekt: @selected_parent_projekt), class: "button expanded js-preselect-projekt" %>
+          <% else %>
+            <%= link_to t("custom.debates.index.no_active_projekt"), '#', class: "button expanded disabled-no-active-projekt", disabled: true %>
+          <% end %>
+          <% if extended_feature?('debates.enable_projekt_filter') %>
+            <%= render "shared/projekt_sidebar_filter/projekts_sidebar" %>
+          <% end %>
+          <% if show_affiliation_filter_in_sidebar? %>
+            <%= render "shared/sidebar_filter/geozone_affiliations" %>
+          <% end %>
+          <% unless skip_user_verification? %>
+            <%= render "shared/sidebar_filter/geozone_restrictions" %>
+          <% end %>
+          <%= render "shared/categories", taggable: "debate" %>
+          <%= render "shared/tag_cloud", taggable: "debate" %>
+          <%= render SDG::Goals::TagCloudComponent.new("Debate") %>
+        </aside>
+      </div>
+
       <div id="debates" class="debates-list small-12 medium-9 column">
 
         <% if extended_feature?("debates.intro_text_for_debates") %>
@@ -106,28 +128,5 @@
           <% end %>
         <% end %>
       </div>
-
-      <div class="small-12 medium-3 column">
-        <aside class="margin-bottom">
-          <% if current_user.nil? || Projekt.top_level.selectable_in_selector(controller_name, current_user).any? %>
-            <%= link_to t("debates.index.start_debate"), new_debate_path(projekt: @selected_parent_projekt), class: "button expanded js-preselect-projekt" %>
-          <% else %>
-            <%= link_to t("custom.debates.index.no_active_projekt"), '#', class: "button expanded disabled-no-active-projekt", disabled: true %>
-          <% end %>
-          <% if extended_feature?('debates.enable_projekt_filter') %>
-            <%= render "shared/projekt_sidebar_filter/projekts_sidebar" %>
-          <% end %>
-          <% if show_affiliation_filter_in_sidebar? %>
-            <%= render "shared/sidebar_filter/geozone_affiliations" %>
-          <% end %>
-          <% unless skip_user_verification? %>
-            <%= render "shared/sidebar_filter/geozone_restrictions" %>
-          <% end %>
-          <%= render "shared/categories", taggable: "debate" %>
-          <%= render "shared/tag_cloud", taggable: "debate" %>
-          <%= render SDG::Goals::TagCloudComponent.new("Debate") %>
-        </aside>
-      </div>
-
     </div>
   </main>

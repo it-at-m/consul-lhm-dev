@@ -34,7 +34,7 @@ class PollsController < ApplicationController
 
     @polls = @polls.created_by_admin.not_budget.send(@current_filter).includes(:geozones)
 
-    remove_where_projekt_not_active
+    @all_resources = @polls
 
     unless params[:search].present?
       take_only_by_tag_names
@@ -42,6 +42,7 @@ class PollsController < ApplicationController
       take_by_sdgs
       take_by_geozone_affiliations
       take_by_geozone_restrictions
+      take_with_activated_projekt_only
     end
 
     @all_polls = @polls.created_by_admin.not_budget
@@ -50,8 +51,8 @@ class PollsController < ApplicationController
       @polls.created_by_admin.not_budget.send(@current_filter).includes(:geozones).sort_for_list
     ).page(params[:page])
 
-    @top_level_active_projekts = Projekt.top_level.active.select{ |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.polls.any? } }
-    @top_level_archived_projekts = Projekt.top_level.archived.select{ |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.polls.any? } }
+    @top_level_active_projekts = Projekt.top_level_sidebar_current('polls')
+    @top_level_archived_projekts = Projekt.top_level_sidebar_expired('polls')
   end
 
   def set_geo_limitations
@@ -68,9 +69,8 @@ class PollsController < ApplicationController
 
   private
 
-    def remove_where_projekt_not_active
-      active_projekts_ids = Projekt.all.joins(:projekt_settings).where(projekt_settings: { key: 'projekt_feature.main.activate', value: 'active' }).pluck(:id)
-      @polls = @polls.joins(:projekt).where(projekts: { id: active_projekts_ids })
+    def take_with_activated_projekt_only
+      @polls = @polls.joins(:projekt).merge(Projekt.activated)
     end
 
     def remove_answers_to_open_questions_with_blank_body

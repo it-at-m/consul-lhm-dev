@@ -39,3 +39,32 @@
 .map_location, #admin-map {
   height: 350px;
 }
+
+
+.expand-overview-map-wrapper {
+  position: relative;
+
+  .expand-overview-map {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+
+    &.wide {
+      @media screen and (min-width: 75rem) {
+        right: calc(37.5rem - 50vw + 15px)
+      }
+    }
+
+    &::before {
+      content: "\f078";
+      font-family: "Font Awesome 5 Free";
+      font-weight: bold;
+      position: absolute;
+      left: -15px;
+    }
+  }
+
+  .expand-overview-map[aria-expanded="true"]::before {
+    transform: rotate(180deg);
+  }
+}
