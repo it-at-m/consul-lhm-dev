@@ -105,7 +105,7 @@ class Projekt < ApplicationRecord
 
   def comments_allowed?(current_user)
     current_user.level_two_or_three_verified? &&
-      current?(timestamp)
+      current?
   end
 
   def level(counter = 1)
