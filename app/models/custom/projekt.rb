@@ -39,7 +39,8 @@ class Projekt < ApplicationRecord
   scope :with_order_number, -> { where.not(order_number: nil).order(order_number: :asc) }
   scope :top_level, -> { with_order_number.
                          where(parent: nil) }
-  scope :activated, -> { joins( :projekt_settings).where( projekt_settings: { key: 'projekt_feature.main.activate', value: 'active' } ) }
+  scope :activated, -> { joins( 'INNER JOIN projekt_settings act ON projekts.id = act.projekt_id' ).
+                         where( 'act.key': 'projekt_feature.main.activate', 'act.value': 'active' ) }
 
   scope :current, ->(timestamp = Date.today) { activated.
                                                where( "total_duration_start IS NULL OR total_duration_start <= ?", Date.today ). 
@@ -47,7 +48,11 @@ class Projekt < ApplicationRecord
   scope :expired, ->(timestamp = Date.today) { activated.
                                                where( "total_duration_end < ?", Date.today) }
 
-  scope :visible_in_menu, -> { joins(:projekt_settings).where( projekt_settings: { key: 'projekt_feature.general.show_in_navigation', value: 'active' } ) }
+  scope :visible_in_menu, -> { joins( 'INNER JOIN projekt_settings vim ON projekts.id = vim.projekt_id').
+                               where( 'vim.key': 'projekt_feature.general.show_in_navigation', 'vim.value': 'active' ) }
+
+  scope :with_active_feature, ->(projekt_feature_key) { joins( 'INNER JOIN projekt_settings waf ON projekts.id = waf.projekt_id').
+                                                        where( 'waf.key': "projekt_feature.#{projekt_feature_key}", 'waf.value': 'active' ) }
 
   scope :selectable_in_selector, ->(controller_name, current_user) { select{ |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.selectable?(controller_name, current_user) } } }
 
@@ -100,7 +105,7 @@ class Projekt < ApplicationRecord
   end
 
   def children_with_active_feature(projekt_feature_key)
-    children.joins(:projekt_settings).where( projekt_settings: { key: "projekt_feature.#{projekt_feature_key}", value: 'active'  } )
+    children.merge(Projekt.with_active_feature(projekt_feature_key))
   end
 
   def comments_allowed?(current_user)
