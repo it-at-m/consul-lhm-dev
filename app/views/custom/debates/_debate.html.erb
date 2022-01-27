@@ -1,4 +1,4 @@
-<% cache [locale_and_user_status, debate, @debate_votes[debate.id], debate.projekt, debate.projekt.page, debate.image, params[:tags], params[:projekts], params[:geozone_affiliation], params[:affiliated_geozones], params[:geozone_restriction], params[:restricted_geozones]] do %>
+<% cache [locale_and_user_status, debate, @debate_votes[debate.id], debate.projekt, debate.projekt.top_parent, debate.projekt.page, debate.image, params[:tags], params[:projekts], params[:geozone_affiliation], params[:affiliated_geozones], params[:geozone_restriction], params[:restricted_geozones]] do %>
   <div id="<%= dom_id(debate) %>" class='row collapse resource-n debate margin-bottom' data-equalizer='main' data-equalize-on="medium">
 
     <div class='columns'>

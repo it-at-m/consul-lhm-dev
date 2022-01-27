@@ -1,4 +1,4 @@
-<% cache [locale_and_user_status(proposal), "index", proposal, proposal.voters, proposal.projekt, proposal.projekt.page, proposal.image, proposal.author, params[:tags], params[:projekts], params[:geozone_affiliation], params[:affiliated_geozones], params[:geozone_restriction], params[:restricted_geozones], proposal_settings_fingerprints ] do %>
+<% cache [locale_and_user_status(proposal), "index", proposal, proposal.voters, proposal.projekt, proposal.projekt.top_parent, proposal.projekt.page, proposal.image, proposal.author, params[:tags], params[:projekts], params[:geozone_affiliation], params[:affiliated_geozones], params[:geozone_restriction], params[:restricted_geozones], proposal_settings_fingerprints ] do %>
 
   <div id="<%= dom_id(proposal) %>" class='row collapse resource-n proposal margin-bottom' data-equalizer='main' data-equalize-on="medium">
     <div class='columns'>
