@@ -26,7 +26,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       user.verified_at = Time.now
 
       if User.find_by(email: email)
-        redirect_to new_user_session_path, alert: t('cli.account.email_taken') and return
+        redirect_to "#{Rails.application.secrets.openid_connect_sign_out_uri}?redirect_uri=#{new_user_session_url(reason: 'ee')}" and return
       end
 
       if user.save
