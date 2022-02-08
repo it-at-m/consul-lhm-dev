@@ -6,7 +6,6 @@
   <div class='show-for-large'>
     <% if action_name == 'index'%>
       <% unless resource.author.name.blank? %>
-        <%= t('custom.shared.index.resource.by') %>
         <%= link_to resource.author.name, resource.author %>
       <% end%>
 

@@ -7,7 +7,6 @@
   <div class='show-for-large'>
     <% if action_name == 'index'%>
       <% unless deficiency_report.author.name.blank? %>
-        <%= t('custom.deficiency_reports.index.deficiency_report.by') %>
         <%= link_to deficiency_report.author.name, deficiency_report.author %>
       <% end %>
     <% elsif action_name == 'show' %>

@@ -54,12 +54,6 @@ class Projekt < ApplicationRecord
   scope :with_active_feature, ->(projekt_feature_key) { joins( 'INNER JOIN projekt_settings waf ON projekts.id = waf.projekt_id').
                                                         where( 'waf.key': "projekt_feature.#{projekt_feature_key}", 'waf.value': 'active' ) }
 
-  scope :selectable_in_selector, ->(controller_name, current_user) { select{ |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.selectable?(controller_name, current_user) } } }
-
-  scope :selectable_in_sidebar_current, ->(controller_name) { select{ |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.current? && ( p.send(controller_name).any? || p.has_active_phase?(controller_name) ) } } }
-  scope :selectable_in_sidebar_expired, ->(controller_name) { select{ |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.expired? && p.send(controller_name).any? } } }
-
-
   scope :top_level_navigation_current, -> { top_level.visible_in_menu.current }
   scope :top_level_navigation_expired, -> { top_level.visible_in_menu.expired }
 
@@ -67,6 +61,19 @@ class Projekt < ApplicationRecord
   scope :top_level_sidebar_expired, ->(controller_name) { top_level.selectable_in_sidebar_expired(controller_name) }
 
 
+  class << self
+    def selectable_in_selector(controller_name, current_user)
+      select { |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.selectable?(controller_name, current_user) } }
+    end
+
+    def selectable_in_sidebar_current(controller_name)
+      select { |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.current? && ( p.send(controller_name).any? || p.has_active_phase?(controller_name) ) } }
+    end
+
+    def selectable_in_sidebar_expired(controller_name)
+      select { |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.expired? && p.send(controller_name).any? } }
+    end
+  end
 
   def update_page
     update_corresponding_page if self.name_changed?
@@ -85,19 +92,26 @@ class Projekt < ApplicationRecord
   end
 
   def top_level?
-    Projekt.top_level.exists?(id)
+    order_number.present? && parent.present?
   end
 
   def activated?
-    Projekt.activated.exists?(id)
+    projekt_settings.
+      find_by( projekt_settings: { key: "projekt_feature.main.activate" } ).
+      value.
+      present?
   end
 
   def current?(timestamp = Date.today)
-    Projekt.current(timestamp).exists?(id)
+    activated? &&
+     ( total_duration_start.blank? || total_duration_start <= timestamp) &&
+     ( total_duration_end.blank? || total_duration_end >= timestamp )
   end
 
   def expired?(timestamp = Date.today)
-    Projekt.expired(timestamp).exists?(id)
+    activated? &&
+      total_duration_end.present? &&
+      total_duration_end < timestamp
   end
 
   def activated_children
