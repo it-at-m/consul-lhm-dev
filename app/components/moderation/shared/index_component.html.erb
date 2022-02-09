@@ -8,7 +8,7 @@
   <%= render "shared/order_links", i18n_namespace: "moderation.#{i18n_namespace}.index" %>
 <% end %>
 
-<%= form_tag form_path, method: :put do %>
+<%= form_tag form_path do %>
   <p class="float-left js-check">
     <%= t("shared.check") %>:
     <%= link_to t("shared.check_all"), "#", data: { check_all: field_name } %>
