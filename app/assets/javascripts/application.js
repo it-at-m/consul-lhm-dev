@@ -124,6 +124,7 @@
 //= require gdpr_notice
 //= require map_refresh
 //= require accessibility_fixes
+//= require analytics_cookie_banner_component
 //= require polls_custom
 //= require deficiency_reports
 //= require leaflet.markercluster
@@ -200,6 +201,7 @@ var initialize_modules = function() {
   App.PollsCustom.initialize();
   App.DeficiencyReports.initialize();
   App.AccessibilityFixes.initialize();
+  App.AnalyticsCookieBannerCustom.initialize()
   if ($("#projekt-selector-fields").length) {
     App.ProjektSelector.initialize();
   }

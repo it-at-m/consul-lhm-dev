@@ -1,0 +1,55 @@
+<div class="reveal analytics-cookie-banner" id='model-question' data-reveal>
+  <h2>
+    Cookie Einstellungen
+  </h2>
+  <div class="analytics-cookie-banner--text">
+    <p>
+      Um Ihnen die Informationen und den Komfort dieser Seite weiterhin zur
+      Verfügung stellen zu können, brauchen wir Ihre Zustimmung für die
+      Verwendung von Cookies für die aufgeführten Zwecke. Bitte beachten Sie,
+      dass auf Basis individueller Einstellungen womöglich nicht mehr alle
+      Funktionen der Seite zur Verfügung stehen.
+    </p>
+    <p>
+      Sie können Ihre Entscheidung jederzeit ändern, indem Sie auf die den Link
+      „Zustimmung zurückziehen“ am Ende der Webseite klicken.
+    </p>
+  </div>
+
+  <div class="row analytics-cookie-banner--option-row">
+    <div class="row analytics-cookie-banner--option-input">
+      <%= check_box_tag 'accept-cookies-disabled', nil, nil, disabled: true %>
+      <%= label_tag 'accept-cookies-disabled', 'Essenzielle Cookies' %>
+    </div>
+    <div class="analytics-cookie-banner--option-caption">
+     Um die Funktionalität dieser Webseite zu garantieren, werden anonyme
+     Informationen für die Dauer Ihres Besuches gespeichert.
+    </div>
+  </div>
+  <div class="row analytics-cookie-banner--option-row">
+    <div class="row analytics-cookie-banner--option-input">
+      <%= check_box_tag 'accept-analytics-cookies', nil, nil, class: 'js-accept-analytics-cookies' %>
+      <%= label_tag 'accept-analytics-cookies', 'Optional: Statistik-Cookie' %>
+    </div>
+    <div class="analytics-cookie-banner--option-caption">
+      Dieser Cookie dient zur Erstellung von nicht personalisierten Statistiken.
+      Es werden keine auf Personen beziehbare Daten gespeichert. Wird er
+      deaktiviert, wird der Seitenzugriff nicht für die Website-Statistik
+      mitverfolgt.
+    </div>
+  </div>
+
+  <div class="analytics-cookie-banner--actions-row">
+    <button type="button" class="button js-analytics-cookies-reject-button">
+      Einstellungen speichern
+    </button>
+
+    <button type="button" class="button agree-button js-analytics-cookies-accept-button">
+      Alle Cookies akzeptieren
+    </button>
+  </div>
+
+  <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

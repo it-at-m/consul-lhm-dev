@@ -1,0 +1,27 @@
+.analytics-cookie-banner {
+  padding: 2em;
+}
+
+.analytics-cookie-banner--text {
+  margin-bottom: 20px;
+}
+
+.analytics-cookie-banner--actions-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.analytics-cookie-banner--option-caption {
+  font-size: 12px;
+}
+
+.analytics-cookie-banner--option-row {
+  margin-bottom: 15px;
+
+  input[type="checkbox"] {
+    margin: 0;
+  }
+}
+
+
