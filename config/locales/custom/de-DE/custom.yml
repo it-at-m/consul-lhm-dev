@@ -1,4 +1,7 @@
 de:
+  layouts:
+    header:
+      logo: Logo der Stadt München – zur Startseite von muenchen.de
   omniauth:
     bayern_id:
       sign_in: Anmelden mit BayernID
