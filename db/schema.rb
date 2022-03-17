@@ -1861,6 +1861,7 @@ ActiveRecord::Schema.define(version: 2022_03_17_083908) do
     t.string "city_name"
     t.datetime "bam_letter_verification_code_sent_at"
     t.string "bam_unique_stamp"
+    t.string "keycloak_link"
     t.boolean "custom_analytics_cookies_enabled", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["date_of_birth"], name: "index_users_on_date_of_birth"
@@ -2005,6 +2006,7 @@ ActiveRecord::Schema.define(version: 2022_03_17_083908) do
   add_foreign_key "failed_census_calls", "users"
   add_foreign_key "flags", "users"
   add_foreign_key "follows", "users"
+  add_foreign_key "geozones_polls", "geozones"
   add_foreign_key "geozones_polls", "polls"
   add_foreign_key "identities", "users"
   add_foreign_key "images", "users"
@@ -2036,6 +2038,7 @@ ActiveRecord::Schema.define(version: 2022_03_17_083908) do
   add_foreign_key "polls", "budgets"
   add_foreign_key "polls", "projekts"
   add_foreign_key "projekt_notifications", "projekts"
+  add_foreign_key "projekt_phase_geozones", "geozones"
   add_foreign_key "projekt_phase_geozones", "projekt_phases"
   add_foreign_key "projekt_phases", "projekts"
   add_foreign_key "projekt_settings", "projekts"
@@ -2046,5 +2049,6 @@ ActiveRecord::Schema.define(version: 2022_03_17_083908) do
   add_foreign_key "related_content_scores", "users"
   add_foreign_key "sdg_managers", "users"
   add_foreign_key "site_customization_pages", "projekts"
+  add_foreign_key "users", "geozones"
   add_foreign_key "valuators", "users"
 end
