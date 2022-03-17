@@ -206,11 +206,8 @@ var initialize_modules = function() {
   App.DeficiencyReports.initialize();
   App.AccessibilityFixes.initialize();
   App.AnalyticsCookieBannerCustom.initialize()
-<<<<<<< HEAD
   App.CustomPages.initialize();
   App.ModerationCustom.initialize();
-=======
->>>>>>> 25d09a37b (cli_muc)
   if ($("#projekt-selector-fields").length) {
     App.ProjektSelector.initialize();
   }
