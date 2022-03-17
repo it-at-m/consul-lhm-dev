@@ -7,7 +7,7 @@ class Poll::CsvExporter
   end
 
   def to_csv
-    CSV.generate(headers: true) do |csv|
+    CSV.generate(headers: true, col_sep: ";") do |csv|
       csv << headers
 
       @polls.each do |poll|

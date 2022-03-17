@@ -1,4 +1,4 @@
-class Proposal::CsvExporter
+class Proposals::CsvExporter
   require "csv"
   include JsonExporter
 
@@ -7,7 +7,7 @@ class Proposal::CsvExporter
   end
 
   def to_csv
-    CSV.generate(headers: true) do |csv|
+    CSV.generate(headers: true, col_sep: ";") do |csv|
       csv << headers
 
       @proposals.each do |proposal|
@@ -43,7 +43,9 @@ class Proposal::CsvExporter
         "published_at",
         "community_id",
         "selected",
-        "projekt_id"
+        "projekt_id",
+        "latitude",
+        "longitude"
       ]
     end
 
@@ -67,7 +69,9 @@ class Proposal::CsvExporter
         proposal.published_at,
         proposal.community_id,
         proposal.selected,
-        proposal.projekt_id
+        proposal.projekt_id,
+        proposal.map_location&.latitude,
+        proposal.map_location&.longitude
       ]
     end
 end

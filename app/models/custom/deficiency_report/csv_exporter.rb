@@ -7,7 +7,7 @@ class DeficiencyReport::CsvExporter
   end
 
   def to_csv
-    CSV.generate(headers: true) do |csv|
+    CSV.generate(headers: true, col_sep: ";") do |csv|
       csv << headers
 
       @deficiency_reports.each do |deficiency_report|
@@ -38,6 +38,8 @@ class DeficiencyReport::CsvExporter
         "status_title",
         "officer_name",
         "officer_email",
+        "latitude",
+        "longitude"
       ]
     end
 
@@ -56,6 +58,8 @@ class DeficiencyReport::CsvExporter
         deficiency_report.status&.title,
         deficiency_report.officer&.name,
         deficiency_report.officer&.email,
+        deficiency_report.map_location&.latitude,
+        deficiency_report.map_location&.longitude
       ]
     end
 end

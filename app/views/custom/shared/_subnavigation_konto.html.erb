@@ -7,7 +7,8 @@
 
   <%= link_to account_path, class: 'account-items-icon', tabindex: "-1", aria: { hidden: true } do %>
     <span class="icon-account" aria-hidden="true"
-          title="<%= t("custom.layouts.header.account_link") %>">
+          title="<%= t("custom.layouts.header.account_link") %>"
+          aria-label="<%= t("custom.layouts.header.account_link") %>">
     </span>
   <% end %>
 

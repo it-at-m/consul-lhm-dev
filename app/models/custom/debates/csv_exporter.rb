@@ -7,7 +7,7 @@ class Debates::CsvExporter
   end
 
   def to_csv
-    CSV.generate(headers: true) do |csv|
+    CSV.generate(headers: true, col_sep: ";") do |csv|
       csv << headers
 
       @debates.each do |debate|
