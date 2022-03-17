@@ -1,6 +1,6 @@
 <%= content_for :body_class, "debates-show" %>
 
-<% provide :title do %><%= @debate.title %><% end %>
+<% provide :title do %><%= "#{t('cli.general.seo_title_prefix')} #{@debate.title}" %><% end %>
 <% content_for :canonical do %>
   <%= render "shared/canonical", href: debate_url(@debate) %>
 <% end %>

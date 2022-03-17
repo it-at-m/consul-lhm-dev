@@ -1,5 +1,7 @@
 de:
   cli:
+    general:
+      seo_title_prefix: "Öffentlichkeitsbeteiligung München:"
     mailers:
       unser_muenchen_html: "unser.muenchen.de - Online-Plattform Öffentlichkeitsbeteiligung der Landeshauptstadt München Impressum: <a href='https://unser.muenchen.de/impressum'>https://unser.muenchen.de/impressum</a>"
       no_reply: Diese Nachricht wurde von einer E-Mail-Adresse gesendet, die keine Antworten akzeptiert.

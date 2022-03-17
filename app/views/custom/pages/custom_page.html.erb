@@ -1,5 +1,5 @@
 <%= content_for :body_class, "custom-page" %>
-<% provide :title do %><%= @custom_page.title %><% end %>
+<% provide :title do %><%= "#{t('cli.general.seo_title_prefix')} #{@custom_page.title}" %><% end %>
 
 <style>
   <% if @custom_page.image.present? %>

@@ -1,4 +1,4 @@
-<% provide :title do %><%= t("custom.deficiency_reports.index.seo.title") %><% end %>
+<% provide :title do %><%= "#{t('cli.general.seo_title_prefix')} #{t("custom.deficiency_reports.index.seo.title")}" %><% end %>
 <% content_for :header_addon do %>
   <%= render "shared/search_form",
              search_path: deficiency_reports_path(page: 1),

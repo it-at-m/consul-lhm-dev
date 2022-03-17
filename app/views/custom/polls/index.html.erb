@@ -1,4 +1,4 @@
-<% provide :title do %><%= t("polls.index.title") %><% end %>
+<% provide :title do %><%= "#{t('cli.general.seo_title_prefix')} #{t("polls.index.title")}" %><% end %>
 
 <%= render_custom_partial "meta_description" %>
 

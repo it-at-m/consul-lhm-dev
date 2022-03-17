@@ -1,4 +1,4 @@
-<%= provide :title, t("social_share.polls_show.title_#{@poll.id}", default: @poll.title) %>
+<%= provide :title, t('cli.general.seo_title_prefix') + ' ' + t("social_share.polls_show.title_#{@poll.id}", default: @poll.title) %>
 <%= provide :meta_description, t("social_share.polls_show.description_#{@poll.id}", default: @poll.title) %>
 <%= provide :social_media_meta_tags do %>
   <%= render "shared/social_media_meta_tags",

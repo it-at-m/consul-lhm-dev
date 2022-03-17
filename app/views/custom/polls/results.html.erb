@@ -1,4 +1,4 @@
-<% provide :title do %><%= @poll.name %><% end %>
+<% provide :title do %><%= "#{t('cli.general.seo_title_prefix')} #{@poll.name}" %><% end %>
 
 <div class="polls-results-stats">
   <div class="row">

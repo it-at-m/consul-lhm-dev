@@ -1,5 +1,5 @@
 <%= content_for :body_class, "deficiency-reports-show" %>
-<% provide :title do %><%= @deficiency_report.title %><% end %>
+<% provide :title do %><%= "#{t('cli.general.seo_title_prefix')} #{@deficiency_report.title}" %><% end %>
 <% content_for :meta_description do %><%= @deficiency_report.summary %><% end %>
 <% provide :social_media_meta_tags do %>
   <%= render "shared/social_media_meta_tags",
