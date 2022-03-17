@@ -126,10 +126,13 @@
 //= require accessibility_fixes
 //= require analytics_cookie_banner_component
 //= require polls_custom
+//= require radio_button_filter
 //= require deficiency_reports
 //= require leaflet.markercluster
 //= require leaflet.locatecontrol
 //= require matomo
+//= require custom_pages
+//= require moderation_custom
 //= require_tree ./admin
 //= require_tree ./sdg
 //= require_tree ./sdg_management
@@ -199,9 +202,12 @@ var initialize_modules = function() {
   App.GDPRNotice.initialize();
   App.MapRefresh.initialize();
   App.PollsCustom.initialize();
+  App.RadioButtonFilter.initialize();
   App.DeficiencyReports.initialize();
   App.AccessibilityFixes.initialize();
   App.AnalyticsCookieBannerCustom.initialize()
+  App.CustomPages.initialize();
+  App.ModerationCustom.initialize();
   if ($("#projekt-selector-fields").length) {
     App.ProjektSelector.initialize();
   }

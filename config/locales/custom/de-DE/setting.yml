@@ -60,12 +60,15 @@ de:
           show_related_content_description: Aktivieren Sie die Funktion “Verwandte Inhalte” für Diskussionen
           enable_projekt_filter: Projektfilter anzeigen
           enable_projekt_filter_description: Zeigt den Projektfilter in der Diskussionsübersichtseite
+          enable_my_posts_filter: Meine Beiträge
+          enable_my_posts_filter_description: Zeigt einen Filter für meine Beiträge in der Diskussionsübersichtsseite
+
         proposals:
           intro_text_for_proposals: Einleitungstext für Vorschläge
           intro_text_for_proposals_description: Aktivieren Sie einen individuellen Einleitungstext oberhalb der Vorschlagsübersicht
           quorum_for_proposals: Quorum für Vorschläge
           quorum_for_proposals_description: Aktivieren Sie ein Quorum für Vorschläge
-          enable_proposal_support_withdrawal: Vorschlagsunterstützung zurückziehen 
+          enable_proposal_support_withdrawal: Vorschlagsunterstützung zurückziehen
           enable_proposal_support_withdrawal_description: Aktivieren Sie die Rücknahme der Vorschlagsunterstützung
           show_selected_proposals_in_proposal_sidebar: Ausgewählte Vorschläge
           show_selected_proposals_in_proposal_sidebar_description: "Aktivieren Sie \"Ausgewählte Vorschläge\", um Vorschläge hervorzuheben"
@@ -85,13 +88,15 @@ de:
           enable_proposal_milestones_tab_description: Aktivieren Sie "Meilensteine" in Vorschlägen, die von der Verwaltung angelegt werden müssen
           enable_projekt_filter: Projektfilter anzeigen
           enable_projekt_filter_description: Zeigt den Projektfilter in der Vorschlagsübersichtseite
+          enable_my_posts_filter: Meine Beiträge
+          enable_my_posts_filter_description: Zeigt einen Filter für meine Beiträge in der Vorschlagsübersichtseite
         polls:
           intro_text_for_polls: Einleitungstext für Abstimmungen
           intro_text_for_polls_description: Aktivieren Sie einen individuellen Einleitungstext oberhalb der Abstimmungsübersicht
           intermediate_poll_results_for_admins: Zwischenergebnisse von Abstimmungen für Admins
           intermediate_poll_results_for_admins_description: Aktivieren Sie die Einsicht in Zwischenergebnisse zu Abstimmungen für Administratoren
           enable_comments: Kommentare
-          enable_comments_description: Aktivieren Sie "Kommentare" für das Abstimmungsmodul 
+          enable_comments_description: Aktivieren Sie "Kommentare" für das Abstimmungsmodul
           additional_information: Erweiterte Informationen
           additional_information_description: Aktivieren Sie "Erweiterete Informationen" für das Abstimmungsmodul
           additional_info_for_each_answer: Zusätzliche Informationen je Antwort
@@ -112,11 +117,9 @@ de:
           description_max_length_description: Legen Sie fest, wie viele Zeichen für Vorschläge maximal verwendet werden dürfen
 
       projekts:
-        connected_resources: Verpflichtende Zuordnung von Diskussionen & Vorschläge zu Projekten
-        connected_resources_description: Diskussionen & Vorschläge können ohne Projektzuordnung nicht erstellt werden
+        overview_page: Projektübersichtsseite in Navigation anzeigen
+        overview_page_description: Zeigt die Projektübersichtsseite in der Navigation an
         show_archived:
-          navigation: Archivierte Projekte in Navigation anzeigen
-          navigation_description: Zeigt archivierte Projekte in der Navigationsleiste wenn aktiviert
           sidebar: Archivierte Projekte in Projektseitenleiste  anzeigen
           sidebar_description: Zeigt archivierte Projekte in der Projektseitenleiste wenn aktiviert
         show_module_links_in_flyout_menu: Modul-Links in den Dropdowns
@@ -131,8 +134,10 @@ de:
           activate: Projekt aktivieren
           activate_description: Aktivieren Sie das Projekt, sodass es in der Applikation sichtbar ist
         general:
-          show_in_navigation: Projekt in Navigation anzeigen
+          show_in_navigation: Projekt in Navigation hervorheben
           show_in_navigation_description: Zeigt das Projekt in der Top-Navigation der Webseite an (nur für Top-Level-Projekte)
+          show_in_overview_page: Projekt in Projektübersichtsseite anzeigen
+          show_in_overview_page_description: Zeigt das Projekt in der Projektübersichtsseite an
           hide_additional_info_in_projekt_selector: Zusätzliche Projektinformationen im Projekt-Selektor ausblenden
           hide_additional_info_in_projekt_selector_description: Verbirgt die zusätzlichen Projektinformationen wie Gebiet, Dauer und Partizipationsberechtigung im Projekt-Selektor
           show_not_active_phases_in_projekts_page_sidebar: Nicht aktive Teilnahmephasen verbergen
@@ -144,23 +149,29 @@ de:
           projekt_page_sharing_description: Aktivieren Sie die Teilen-Funktion in der rechten Seitenleiste der Projektseite
           show_phases_in_projekt_page_sidebar: Projektphasen
           show_phases_in_projekt_page_sidebar_description: Aktivieren Sie die Projektphasen in der rechten Seitenleiste der Projektseite
-          show_total_duration_in_projekts_page_sidebar: Projektinformation
-          show_total_duration_in_projekts_page_sidebar_description: Zeigt das Projektverzeichnis in der rechten Seitenleiste der Projektseiten an
           show_navigator_in_projekts_page_sidebar: Projektverzeichnis
           show_navigator_in_projekts_page_sidebar_description: Zeigt die Projektverzeichnis in der rechten Seitenleiste der Projektseiten an
         footer:
           show_projekt_footer: Fußzeile aktivieren
           show_projekt_footer_description: Aktiviert die Fußzeile am unteren Ende des Projektes
-          show_activity_in_projekt_footer: Aktivität
-          show_activity_in_projekt_footer_description: Aktiviert die Aktivität in der Fußzeile eines Projektes
-          show_comments_in_projekt_footer: Kommentare
-          show_comments_in_projekt_footer_description: Aktiviert die Kommentarfunktion in der Fußzeile eines Projekts
           show_notifications_in_projekt_footer: Benachrichtigungen
           show_notifications_in_projekt_footer_description: Aktiviert die Benachrichtigungsfunktion in der Fußzeile eines Projekts
           show_milestones_in_projekt_footer: Meilensteine
           show_milestones_in_projekt_footer_description: Aktiviert die Meilensteinfunktion in der Fußzeile eines Projekts
           show_newsfeed_in_projekt_footer: News-Feed
           show_newsfeed_in_projekt_footer_description: Aktiviert den News-Feed in der Fußzeile eines Projekts
+          comment_info: Kommentarphase
+          comment_info_description: Aktiviert die Kommentarphase in der Fußzeile eines Projekts
+          debate_info: Diskussionsphase
+          debate_info_description: Aktiviert die Diskussionsphase in der Fußzeile eines Projekts
+          proposal_info: Vorschlagsphase
+          proposal_info_description: Aktiviert die Vorschlagsphase in der Fußzeile eines Projekts
+          voting_info: Abstimmungsphase
+          voting_info_description: Aktiviert die Abstimmungsphase in der Fußzeile eines Projekts
+          budget_info: Budgetphase
+          budget_info_description: Aktiviert die Budgetphase in der Fußzeile eines Projekts
+          milestone_info: Umsetzungsphase
+          milestone_info_description: Aktiviert die Umsetzungsphase in der Fußzeile eines Projekts
 
       deficiency_reports:
         show_in_main_menu: Mängelmelder in Navigation anzeigen
@@ -175,12 +186,14 @@ de:
         enable_comments_description: Nutzer*innen können unterhalb eines Mangels kommentieren
         intro_text: Einleitungstext für den Mängelmelder
         intro_text_description: Aktivieren Sie einen individuellen Einleitungstext oberhalb der Mängelübersichtsseite
+        enable_my_posts_filter: Meine Beiträge
+        enable_my_posts_filter_description: Zeigt einen Filter für meine Beiträge in der Diskussionsübersichtsseite
 
       projekt_newsfeed:
-        id: Newsfeed ID 
-        id_description:  
+        id: Newsfeed ID
+        id_description:
         type: Newsfeed Type
-        type_description: 
+        type_description:
 
       projekt_custom_feature:
         default_footer_tab: Standard-Element

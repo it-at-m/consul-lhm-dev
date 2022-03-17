@@ -5,6 +5,7 @@ en:
         tags_custom: User tags
       index:
         no_active_projekt: Currently no participation procedure
+        no_active_phase: Phase expired
         projekts: Projects
         debate:
           by: by

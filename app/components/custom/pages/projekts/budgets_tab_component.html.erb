@@ -1,0 +1,58 @@
+<% if !budget.informing? && projekt_feature?(budget.projekt, 'general.show_map') %>
+  <div class="map proposals-map">
+    <%= render_map(budget.projekt.map_location, "budgets", false, nil, coordinates) %>
+  </div>
+
+  <div class='expand-overview-map-wrapper'>
+    <div class='expand-overview-map small js-expand-overview-map not-print wide'>
+      <%= t('custom.proposals.index.show_larger_map') %>
+    </div>
+  </div>
+<% end %>
+
+<section class="no-margin-top margin-bottom">
+  <div class="expanded jumbo-budget budget-heading padding">
+
+    <div class="row">
+      <div class="small-12 column">
+        <% if can? :show, ballot %>
+          <%= link_to t("budgets.investments.header.check_ballot"),
+                      budget_ballot_path(budget),
+                      class: "check-ballot button" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row progress-votes">
+      <div class="small-12 column">
+        <% if can? :show, ballot %>
+          <div id="check-ballot" style="display: none;">
+            <%= link_to t("budgets.investments.header.check_ballot"),
+                        budget_ballot_path(budget) %>
+          </div>
+          <% if ballot.valid_heading?(heading) %>
+            <div class="progress-bar-nav" data-fixed-bar>
+              <h2>
+                <%= t("budgets.investments.index.by_heading", heading: heading.name) %>
+              </h2>
+              <div id="progress_bar">
+                <%= render "budgets/ballot/progress_bar", ballot: ballot, heading: heading %>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <h2 class="margin-top">
+            <%= t("budgets.investments.index.by_heading", heading: heading.name) %>
+          </h2>
+          <h3>
+            <span class="tagline"><%= t("budgets.investments.header.price") %></span>
+            <%= budget.formatted_heading_price(heading) %>
+          </h3>
+        <% end %>
+
+
+      <%= budget.current_phase.name %>
+      </div>
+    </div>
+  </div>
+</section>

@@ -8,6 +8,9 @@
   <%= render Admin::SearchComponent.new(label: t("admin.shared.search.label.debates")) %>
 
   <h3 class="inline-block"><%= page_entries_info @debates %></h3>
+  <%= link_to t("admin.debates.index.download_current_selection"),
+              admin_debates_path(csv_params),
+              class: "float-right small clear" %>
 
   <table>
     <thead>

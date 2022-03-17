@@ -8,14 +8,23 @@ class Debate
   has_many :geozone_restrictions, through: :debate_phase
   has_many :geozone_affiliations, through: :projekt
 
-  validates :projekt_id, presence: true, if: :require_a_projekt?
+  validates :projekt_id, presence: true
 
   scope :with_current_projekt,  -> { joins(:projekt).merge(Projekt.current) }
+  scope :by_author, -> (user_id) {
+    return if user_id.nil?
+
+    where(author_id: user_id)
+  }
+
+  scope :seen, -> { where.not(ignored_flag_at: nil) }
+  scope :unseen, -> { where(ignored_flag_at: nil) }
 
   alias_attribute :projekt_phase, :debate_phase
 
-  def require_a_projekt?
-    Setting["projekts.connected_resources"].present? ? true : false
+  def self.base_selection(scoped_projekt_ids = Projekt.ids)
+    where(projekt_id: scoped_projekt_ids).
+      joins(:projekt).merge(Projekt.activated)
   end
 
   def votable_by?(user)
@@ -30,7 +39,7 @@ class Debate
     ) &&
     (
       projekt.blank? ||
-      debate_phase.present? && debate_phase.currently_active?
+      debate_phase.present? && debate_phase.current?
     )
 
     #  user.voted_for?(self)

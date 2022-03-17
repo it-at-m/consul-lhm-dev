@@ -33,6 +33,10 @@ module ProjektsHelper
     end
   end
 
+  def projekt_filter_resources_name
+    @current_tab_phase&.resources_name || controller_name
+  end
+
   def show_archived_projekts_in_sidebar?
     Setting["projekts.show_archived.sidebar"].present? ? true : false
   end
@@ -99,13 +103,13 @@ module ProjektsHelper
   end
 
   def projekt_phase_show_in_navigation?(projekt, phase_name)
-    projekt.send(phase_name).active &&
+    projekt.send(phase_name).phase_activated? &&
       ((projekt.send(phase_name).start_date <= Date.today if projekt.send(phase_name).start_date) || projekt.send(phase_name).start_date.blank? )
   end
 
   def format_date(date)
     return '' if date.blank?
-    date.strftime("%d.%m.%Y")
+    l date.to_date
   end
 
   def format_date_range(start_date=nil, end_date=nil, options={})
@@ -113,14 +117,26 @@ module ProjektsHelper
     options[:separator] = ' ' + options[:separator] + ' '
     options[:prefix].present? ? options[:prefix] = options[:prefix] + ' ' : options[:prefix] = ''
 
-    if start_date && end_date
-      options[:prefix] + format_date(start_date) + options[:separator] + format_date(end_date)
-    elsif start_date && !end_date
-      "Start #{format_date(start_date)}"
-    elsif !start_date && end_date
-      "bis #{format_date(end_date)}"
-    else
-      'Zeitlich nicht beschränkt'
+    # if start_date && end_date
+    #   options[:prefix] + format_date(start_date) + options[:separator] + format_date(end_date)
+    # elsif start_date && !end_date
+    #  "Start #{format_date(start_date)}"
+    # elsif !start_date && end_date
+    #  "bis #{format_date(end_date)}"
+    # else
+    #  'Zeitlich nicht beschränkt'
+    # end
+
+    if end_date.present? && end_date.to_date < Date.today
+      "Abgeschlossen am #{l end_date.to_date}"
+    elsif end_date.present?  && end_date.to_date > Date.today && start_date.present? && start_date.to_date <= Date.today
+      days_left = (end_date.to_date - Date.today).to_i
+      t('custom.shared.dates.days_left', count: days_left)
+    elsif end_date.present? && end_date.to_date == Date.today && start_date.present? && start_date.to_date <= Date.today
+      "Endet heute"
+    elsif start_date.present? && start_date.to_date > Date.today
+      days_left = (start_date.to_date - Date.today).to_i
+      t('custom.shared.dates.starts_in_days', count: days_left)
     end
   end
 
@@ -132,7 +148,7 @@ module ProjektsHelper
     end
   end
 
-  def get_projekt_affiliation_name(projekt)
+  def get_projekt_affiliation_name(projekt, only_name = false )
     affiliation_name = projekt.geozone_affiliated || "no_affiliation"
     geozone_affiliations = projekt.geozone_affiliations
 
@@ -140,12 +156,16 @@ module ProjektsHelper
       return geozone_affiliations.pluck(:name).join(', ')
     end
 
+    return affiliation_name if only_name
+
     t("custom.geozones.projekt_selector.affiliations.#{affiliation_name}" )
   end
 
-  def get_projekt_phase_restriction_name(projekt_phase, destination=nil)
+  def get_projekt_phase_restriction_name(projekt_phase, destination=nil, only_name=false)
     restriction_name = projekt_phase.geozone_restricted || "no_restriction"
     geozone_restrictions = projekt_phase.geozone_restrictions
+
+    return restriction_name if only_name
 
     if geozone_restrictions.exists? && restriction_name == 'only_geozones'
       return geozone_restrictions.pluck(:name).join(', ')

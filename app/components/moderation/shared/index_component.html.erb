@@ -4,12 +4,15 @@
 
 <h3 class="inline-block"><%= page_entries_info records %></h3>
 
-<% if records.any? %>
-  <%= render "shared/order_links", i18n_namespace: "moderation.#{i18n_namespace}.index" %>
-<% end %>
+<%= form_tag form_path, method: :put do %>
+  <% unless @records.class_name == 'ProposalNotification' %>
+    <p class="float-left">
+      <%= check_box_tag :only_with_flags, params[:only_with_flags], params[:only_with_flags] == 'true', class: 'js-only-with-flags' %>
+      <%= label_tag :only_with_flags, t("moderation.show_only_with_flags"), { style: 'font-weight:normal;margin-left:0.1rem;' } %>
+    </p>
+  <% end %>
 
-<%= form_tag form_path do %>
-  <p class="float-left js-check">
+  <p class="float-right js-check">
     <%= t("shared.check") %>:
     <%= link_to t("shared.check_all"), "#", data: { check_all: field_name } %>
     |

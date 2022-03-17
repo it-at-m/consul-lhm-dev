@@ -1,0 +1,8 @@
+<div class="extended-sidebar-map-wrapper">
+  <div class="extended-sidebar-map" 
+    <%= render_map(@current_projekt.map_location, "proposals_sidebar_extended", false, nil, []) %>
+    <button class="close-button" aria-label="Close modal" type="button" onclick="$('#extended-sidebar-map').html('');$('#extended-sidebar-map').css('position', 'relative');">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>

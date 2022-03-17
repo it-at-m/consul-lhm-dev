@@ -8,6 +8,13 @@
     <%= render "shared/canonical", href: debates_url %>
   <% end %>
 
+  <%=
+    link_to t("admin.budget_investments.index.download_current_selection"),
+    admin_debates_path(csv_params),
+    target: '_blank',
+    class: "float-right small clear"
+  %>
+
   <main>
     <% if @search_terms || @advanced_search_terms %>
       <div class="highlight no-margin-top padding margin-bottom">
@@ -40,14 +47,12 @@
     <div class="row">
       <div id="debates-sidebar" class="small-12 medium-3 column">
         <aside class="margin-bottom">
-          <% if current_user.nil? || Projekt.top_level.selectable_in_selector(controller_name, current_user).any? %>
-            <%= link_to t("debates.index.start_debate"), new_debate_path(projekt: @selected_parent_projekt), class: "button expanded js-preselect-projekt" %>
-          <% else %>
-            <%= link_to t("custom.debates.index.no_active_projekt"), '#', class: "button expanded disabled-no-active-projekt", disabled: true %>
-          <% end %>
+          <%= render Debates::NewButtonComponent.new() %>
+
           <% if extended_feature?('debates.enable_projekt_filter') %>
-            <%= render "shared/projekt_sidebar_filter/projekts_sidebar" %>
+            <%= render Sidebar::ProjektsFilterComponent.new(@top_level_active_projekts, @top_level_archived_projekts, @all_resources) %>
           <% end %>
+
           <% if show_affiliation_filter_in_sidebar? %>
             <%= render "shared/sidebar_filter/geozone_affiliations" %>
           <% end %>
@@ -57,6 +62,9 @@
           <%= render "shared/categories", taggable: "debate" %>
           <%= render "shared/tag_cloud", taggable: "debate" %>
           <%= render SDG::Goals::TagCloudComponent.new("Debate") %>
+          <% if extended_feature?('debates.enable_my_posts_filter') %>
+            <%= render "shared/sidebar_filter/my_posts" %>
+          <% end %>
         </aside>
       </div>
 
@@ -97,14 +105,6 @@
               </div>
             <% end %>
           </div>
-        </div>
-
-        <div class="show-for-small-only">
-          <% if current_user.nil? || Projekt.top_level.selectable_in_selector(controller_name, current_user).any? %>
-            <%= link_to t("debates.index.start_debate"), new_debate_path(projekt: @selected_parent_projekt), class: "button expanded js-preselect-projekt" %>
-          <% else %>
-            <%= link_to t("custom.debates.index.no_active_projekt"), '#', class: "button expanded disabled-no-active-projekt", disabled: true %>
-          <% end %>
         </div>
 
         <% if @debates.any? || current_user.blank? %>

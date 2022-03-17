@@ -1,0 +1,21 @@
+<div class="row collapse projekt-listing" data-equalizer='projekt' data-equalize-on="medium">
+
+  <div class='column medium-3 image' data-equalizer-watch='projekt'>
+    <% if projekt.image.present? %>
+      <%= image_tag projekt.image_url(:medium) %>
+    <% end %>
+  </div>
+
+  <div class='column medium-6 content' data-equalizer-watch='projekt'>
+    <div class='content-wrapper'>
+      <h4><%= projekt.page.title %></h4>
+      <p><%= projekt.description %></p>
+      <%= render SDG::TagListComponent.new(projekt, limit: 3) %>
+    </div>
+  </div>
+
+  <div class='column medium-3 actions' data-equalizer-watch='projekt'>
+    <%= link_to 'Zum Projekt', projekt.page.url, class: 'button' %>
+  </div>
+
+</div>

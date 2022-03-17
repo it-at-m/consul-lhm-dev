@@ -9,6 +9,12 @@
             class: "button float-right" %>
 
 <% if @polls.any? %>
+  <%=
+    link_to t("admin.budget_investments.index.download_current_selection"),
+    admin_polls_path(csv_params),
+    target: '_blank',
+    class: "float-right small clear"
+  %>
   <table>
     <thead>
       <th class="small-5"><%= t("admin.polls.index.name") %></th>

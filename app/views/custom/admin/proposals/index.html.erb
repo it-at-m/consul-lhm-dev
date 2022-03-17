@@ -9,6 +9,13 @@
 
   <h3><%= page_entries_info @proposals %></h3>
 
+  <%=
+    link_to t("admin.budget_investments.index.download_current_selection"),
+    admin_proposals_path(csv_params),
+    target: '_blank',
+    class: "float-right small clear"
+  %>
+
   <table>
     <thead>
       <tr>

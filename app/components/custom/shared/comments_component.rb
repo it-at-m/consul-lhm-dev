@@ -38,5 +38,7 @@ class Shared::CommentsComponent < ApplicationComponent
       keys.push(record)
       keys.push(record.page)
       keys.push(record.projekt_settings)
+      keys.push(record.comment_phase)
+      keys.push(helpers.change_of_current_state(record.comment_phase.start_date, record.comment_phase.end_date))
     end
 end

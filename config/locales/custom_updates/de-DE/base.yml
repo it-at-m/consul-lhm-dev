@@ -1,6 +1,16 @@
 de:
+  date:
+    formats:
+      default: "%d. %B %Y"
   custom:
     shared:
+      dates:
+        days_left:
+          one: "Noch 1 Tag"
+          other: "Noch %{count} Tage"
+        starts_in_days:
+          one: 'Startet in 1 Tag'
+          other: 'Startet in %{count} Tagen'
       form:
         projekt_assignment: Projektzuordnung
         star_message: Alle mit (*) gekennzeichneten Felder sind Pflichtfelder
@@ -39,10 +49,11 @@ de:
         other: Die Kommentarfunktion ist nicht verfügbar
         debate_phase_expired: Die Diskussionsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
         proposal_phase_expired: Die Vorschlagsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
-        poll_phase_expired: Die Abstimmungsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
+        voting_phase_expired: Die Abstimmungsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
         debate_phase_not_active: Die Diskussionsphase ist nicht aktiv
         proposal_phase_not_active: Die Vorschlagsphase ist nich aktiv
         projekt_not_active: Das Projekt ist nicht aktiv
+        projekt_phase_not_active: Die Projektphase ist nicht aktiv
 
     devise_views:
       users:

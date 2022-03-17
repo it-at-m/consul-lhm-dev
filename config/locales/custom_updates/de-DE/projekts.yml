@@ -1,6 +1,8 @@
 de:
   custom:    
     projekts:
+      index:
+        title: Projektübersicht
       backlink: Zur Projektübersicht
       errors:
         presence: Bitte wählen Sie ein Projekt
@@ -16,3 +18,26 @@ de:
         title: Projekte
         title_active: Aktive Projekte
         title_archived: Abgelaufene Projekte
+      page:
+        sidebar:
+          phases:
+            participate: Offen für Beteiligung!
+        tabs:
+          comments: Kommentare
+          debates: Diskussionen
+          proposals: Vorschläge
+          polls: Abstimmungen
+          budget: Budgets
+          milestones: Meilensteine
+          projekt_notifications: Benachrichtigungen
+          newsfeed: News
+      phase_name:
+        comment_phase: Kommentare
+        debate_phase: Diskussionen
+        proposal_phase: Vorschläge
+        voting_phase: Abstimmungen
+        budget_phase: Budget
+        milestone_phase: Meilensteine
+        milestone_phase:
+          start: Umsetzung
+          ending: Gepl. Fertigstellung

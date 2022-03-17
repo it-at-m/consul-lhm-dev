@@ -9,6 +9,7 @@ module SDG::Related
     Legislation::Proposal
     Poll
     Proposal
+    Projekt
   ].freeze
 
   included do

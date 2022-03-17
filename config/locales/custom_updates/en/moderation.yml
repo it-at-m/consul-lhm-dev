@@ -1,0 +1,27 @@
+en:
+  moderation:
+    show_only_with_flags: Show only flagged
+    proposals:
+      index:
+        filters:
+          all: all
+          unseen: unread
+          seen: read
+    debates:
+      index:
+        filters:
+          all: all
+          unseen: unread
+          seen: read
+    comments:
+      index:
+        filters:
+          all: all
+          unseen: unread
+          seen: read
+    budget_investments:
+      index:
+        filters:
+          all: all
+          unseen: unread
+          seen: read

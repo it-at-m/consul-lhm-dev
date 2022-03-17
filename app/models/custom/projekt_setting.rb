@@ -24,7 +24,7 @@ class ProjektSetting < ApplicationRecord
   end
 
   def projekt_feature_type
-    if %w[main general sidebar footer].include? projekt_feature_prefix
+    if %w[main phase general sidebar footer].include? projekt_feature_prefix
       projekt_feature_prefix
     else
       "configuration"
@@ -37,21 +37,31 @@ class ProjektSetting < ApplicationRecord
       {
         "projekt_feature.main.activate": '',
 
+        "projekt_feature.phase.comment": '',
+        "projekt_feature.phase.comment_info": 'active',
+        "projekt_feature.phase.debate": '',
+        "projekt_feature.phase.debate_info": 'active',
+        "projekt_feature.phase.proposal": '',
+        "projekt_feature.phase.proposal_info": 'active',
+        "projekt_feature.phase.voting": '',
+        "projekt_feature.phase.voting_info": 'active',
+        "projekt_feature.phase.budget": '',
+        "projekt_feature.phase.budget_info": 'active',
+        "projekt_feature.phase.milestone": '',
+        "projekt_feature.phase.milestone_info": 'active',
+
         "projekt_feature.general.show_in_navigation": '',
+        "projekt_feature.general.show_in_overview_page": '',
         "projekt_feature.general.hide_additional_info_in_projekt_selector": '',
         "projekt_feature.general.show_not_active_phases_in_projekts_page_sidebar": '',
         "projekt_feature.general.show_map": 'active',
 
         "projekt_feature.sidebar.projekt_page_sharing": 'active',
-        "projekt_feature.sidebar.show_total_duration_in_projekts_page_sidebar": 'active',
         "projekt_feature.sidebar.show_phases_in_projekt_page_sidebar": 'active',
         "projekt_feature.sidebar.show_navigator_in_projekts_page_sidebar": true,
 
         "projekt_feature.footer.show_projekt_footer": 'active',
-        "projekt_feature.footer.show_activity_in_projekt_footer": 'active',
-        "projekt_feature.footer.show_comments_in_projekt_footer": 'active',
         "projekt_feature.footer.show_notifications_in_projekt_footer": '',
-        "projekt_feature.footer.show_milestones_in_projekt_footer": '',
         "projekt_feature.footer.show_newsfeed_in_projekt_footer": '',
 
         "projekt_newsfeed.id": '',

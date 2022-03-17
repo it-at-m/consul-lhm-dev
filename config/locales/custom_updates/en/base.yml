@@ -1,6 +1,13 @@
 en:
   custom:
     shared:
+      dates:
+        days_left:
+          one: "1 more day"
+          other: "%{count} more days"
+        starts_in_days:
+          one: 'Starts in 1 day'
+          other: 'Starts in %{count} days'
       form:
         projekt_assignment: Project
         star_message: All Fields marked with a (*) are required
@@ -39,10 +46,11 @@ en:
         other: The comment function is not available
         debate_phase_expired: The discussion phase has already expired. New comments can no longer be added.
         proposal_phase_expired: The proposal phase has already expired. New comments can no longer be added.
-        poll_phase_expired: The voting period has already expired. New comments can no longer be added.
+        voting_phase_expired: The voting period has already expired. New comments can no longer be added.
         debate_phase_not_active: The discussion phase is not active
         proposal_phase_not_active: The proposal phase is not active
         projekt_not_active: Project is not active
+        projekt_phase_not_active: Projekt phase is not active
 
     devise_views:
       users:

@@ -6,4 +6,5 @@ de:
         required: Ihr Diskussionsbeitrag
       index:
         no_active_projekt: Aktuell kein Beteiligungsverfahren
+        no_active_phase: Phase bereits geschlossen
         projekts: Projekte

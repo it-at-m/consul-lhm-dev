@@ -30,6 +30,11 @@ class DeficiencyReport < ApplicationRecord
   scope :sort_by_most_commented,       -> { reorder(comments_count: :desc) }
   scope :sort_by_hot_score,            -> { reorder(hot_score: :desc) }
   scope :sort_by_newest,               -> { reorder(created_at: :desc) }
+  scope :by_author, -> (user_id) {
+    return if user_id.nil?
+
+    where(author_id: user_id)
+  }
 
   def self.search(terms)
     pg_search(terms)

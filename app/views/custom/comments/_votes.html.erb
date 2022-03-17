@@ -5,7 +5,7 @@
 
     <span class="in_favor">
       <% if can?(:vote, comment) %>
-        <% if @commentable.comments_allowed?(current_user) %>
+        <% if comment.commentable.comments_allowed?(current_user) %>
           <%= button_to vote_comment_path(comment, value: "yes"),
               method: "post", remote: true, title: t("votes.agree") do %>
               <span class="icon-like">
@@ -29,7 +29,7 @@
 
     <span class="against">
       <% if can?(:vote, comment) %>
-        <% if @commentable.comments_allowed?(current_user) %>
+        <% if comment.commentable.comments_allowed?(current_user) %>
           <%= button_to vote_comment_path(comment, value: "no"),
               method: "post", remote: true, title: t("votes.disagree") do %>
               <span class="icon-unlike">

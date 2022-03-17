@@ -1,0 +1,38 @@
+#footer-content .phases-list {
+	border: none;
+  margin-bottom: 4rem;
+
+  .phase-title {
+    background-color: $highlight;
+    clip-path: polygon(calc(100% - 3em) 0, 100% 50%, calc(100% - 3em) 100%, 0 100%, 3em 50%, 0 0);
+    padding-right: 4rem;
+    padding-left: 4rem;
+    margin-right: -40px;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    margin-bottom: .5rem;
+
+    &.current-phase-tab {
+      background-color: $brand;
+
+      .phase-name,
+      .phase-date-range {
+				color: $white;
+      }
+    }
+  }
+
+  .phase-title:first-child {
+    clip-path: polygon(calc(100% - 3em) 0, 100% 50%, calc(100% - 3em) 100%, 0 100%, 0em 50%, 0 0);
+    padding-left: 1rem;
+  }
+
+  .phase-name {
+    font-weight: bold;
+    color: $brand;
+  }
+
+  .phase-date-range {
+    font-size: 0.875rem;
+  }
+}

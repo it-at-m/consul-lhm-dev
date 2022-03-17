@@ -1,0 +1,21 @@
+<% if projekt_feature?(@custom_page.projekt, "sidebar.show_phases_in_projekt_page_sidebar") %>
+  <%= render Pages::Projekts::SidebarPhasesComponent.new(projekt) %>
+<% end %>
+
+<% if projekt_feature?(projekt, 'general.show_map') %>
+  <%= render Pages::Projekts::SidebarMapComponent.new(projekt) %>
+<% end %>
+
+<% if projekt_feature?(@custom_page.projekt, "sidebar.show_navigator_in_projekts_page_sidebar") %>
+  <%= render partial: 'pages/sidebar/projekts_navigator', locals: { projekt: projekt } %>
+<% end %>
+
+<% if projekt_feature?(@custom_page.projekt, "sidebar.projekt_page_sharing") %>
+  <%= render "shared/social_share",
+      share_title: t("custom.pages.social_share.share"),
+      title: projekt.page.title,
+      url: url_for(only_path: false),
+      description: strip_tags(projekt.page.content || '')[0..200] + '...',
+      mobile: projekt.page.title
+  %>
+<% end %>

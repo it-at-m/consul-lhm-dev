@@ -1,0 +1,83 @@
+<div class="sidebar-divider hide-for-small-only"></div>
+
+<h2 class="sidebar-title hide-for-small-only"><%= t("custom.projekt.page.sidebar.phases.title") %></h2>
+
+<div class='sidebar-projekt-phases'>
+
+  <% if phases.any? { |phase| phase.current? } %>
+    <span class='sidebar-projekt-phases-title'><%= t('custom.projekts.page.sidebar.phases.participate') %></span>
+  <% end %>
+
+  <% phases.each do |phase| %>
+    <% if phase.phase_info_activated? %>
+      <div class="sidebar-projekt-phase <%= 'active' if phase.current? %>" <%= "aria-expanded=true" if phase.name == 'budget_phase' %>>
+        <div class='sidebar-projekt-phase-status'>
+        </div>
+        <div class='sidebar-projekt-phase-details'>
+          <span class='sidebar-projekt-phase-name'>
+            <%= phase_name(phase) %>
+
+            <% if projekt_feature?(@projekt, 'footer.show_projekt_footer') %>
+              <%= link_to "/#{projekt.id}/#{phase.name}_footer_tab", remote: true, onclick: '$("html, body").animate({scrollTop: $("#filter-subnav").offset().top}); $("#footer-content").addClass("show-loader");' do %>
+                <i class="fas fa-long-arrow-alt-right"></i>
+              <% end %>
+            <% end %>
+
+          </span>
+          <span class='sidebar-projekt-phase-duration'><%= format_date_range(phase.start_date, phase.end_date) %></span>
+
+          <% if phase.name == 'budget_phase' && projekt.budget.present? %>
+
+            <span class='js-icon-toggle-budget-phases toggle-arrow focusable js-prevent-key-scroll'
+                  role="button"
+                  tabindex="0"
+                  aria-expanded="false"
+                  aria-label="<%= t('custom.links.projekts_filter.arrow_label') %>" >
+            </span>
+
+            <div class='sidebar-projekt-budget-phases'>
+              <%= render Pages::Projekts::SidebarBudgetPhasesComponent.new(projekt.budget) %>
+            </div>
+          <% end %>
+        </div>
+
+      </div>
+    <% end %>
+  <% end %>
+
+  <% if milestone_phase.phase_activated? %>
+    <div class="sidebar-projekt-phase <%= 'active' if milestone_phase.current? %>" >
+      <div class='sidebar-projekt-phase-status'>
+      </div>
+      <div class='sidebar-projekt-phase-details'>
+        <span class='sidebar-projekt-phase-name'>
+          <%= phase_name(milestone_phase, 'start') %>
+
+          <% if projekt_feature?(@projekt, 'footer.show_projekt_footer') %>
+            <%= link_to "/#{projekt.id}/#{milestone_phase.name}_footer_tab", remote: true, onclick: '$("html, body").animate({scrollTop: $("#filter-subnav").offset().top}); $("#footer-content").addClass("show-loader");' do %>
+              <i class="fas fa-long-arrow-alt-right"></i>
+            <% end %>
+          <% end %>
+        </span>
+        <span class='sidebar-projekt-phase-duration'><%= format_date(milestone_phase.start_date) %></span>
+      </div>
+    </div>
+
+    <div class="sidebar-projekt-phase" >
+      <div class='sidebar-projekt-phase-status'>
+      </div>
+      <div class='sidebar-projekt-phase-details'>
+        <span class='sidebar-projekt-phase-name'>
+          <%= phase_name(milestone_phase, 'ending') %>
+
+          <% if projekt_feature?(@projekt, 'footer.show_projekt_footer') %>
+            <%= link_to "/#{projekt.id}/#{milestone_phase.name}_footer_tab", remote: true, onclick: '$("html, body").animate({scrollTop: $("#filter-subnav").offset().top}); $("#footer-content").addClass("show-loader");' do %>
+              <i class="fas fa-long-arrow-alt-right"></i>
+            <% end %>
+          <% end %>
+        </span>
+        <span class='sidebar-projekt-phase-duration'><%= format_date(milestone_phase.end_date) %></span>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -22,6 +22,14 @@ class Admin::MenuComponent < ApplicationComponent
       ( %w[officers categories statuses settings].include?(controller_name) && controller.class.parent == Admin::DeficiencyReports )
     end
 
+    def deficiency_reports_list
+      [
+        t("custom.admin.menu.deficiency_reports.list"),
+        admin_deficiency_reports_path,
+        controller_name == "deficiency_reports"
+      ]
+    end
+
     def deficiency_report_officers
       [
         t("custom.admin.menu.deficiency_reports.officers"),

@@ -12,8 +12,8 @@ class DebatesController < ApplicationController
     @filtered_goals = params[:sdg_goals].present? ? params[:sdg_goals].split(',').map{ |code| code.to_i } : nil
     @filtered_target = params[:sdg_targets].present? ? params[:sdg_targets].split(',')[0] : nil
 
-    if params[:projekts]
-      @selected_projekts_ids = params[:projekts].split(',').select{ |id| Projekt.find_by(id: id).present? }
+    if params[:filter_projekt_ids]
+      @selected_projekts_ids = params[:filter_projekt_ids].select{ |id| Projekt.find_by(id: id).present? }
       selected_parent_projekt_id = get_highest_unique_parent_projekt_id(@selected_projekts_ids)
       @selected_parent_projekt = Projekt.find_by(id: selected_parent_projekt_id)
     end
@@ -37,6 +37,7 @@ class DebatesController < ApplicationController
       take_by_geozone_affiliations
       take_by_geozone_restrictions
       take_with_activated_projekt_only
+      take_by_my_posts
     end
 
     @selected_tags = all_selected_tags
@@ -106,8 +107,8 @@ class DebatesController < ApplicationController
   end
 
   def take_by_projekts
-    if params[:projekts].present?
-      @resources = @resources.where(projekt_id: params[:projekts].split(',')).distinct
+    if params[:filter_projekt_ids].present?
+      @resources = @resources.where(projekt_id: params[:filter_projekt_ids].split(',')).distinct
     end
   end
 
@@ -158,6 +159,12 @@ class DebatesController < ApplicationController
 				"
 				@resources = @resources.joins(sql_query).where(geozone_restrictions: { id: @restricted_geozones }).distinct
       end
+    end
+  end
+
+  def take_by_my_posts
+    if params[:my_posts_filter] == 'true'
+      @resources = @resources.by_author(current_user&.id)
     end
   end
 end

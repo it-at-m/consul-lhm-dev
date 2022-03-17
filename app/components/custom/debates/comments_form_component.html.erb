@@ -9,10 +9,10 @@
     <% elsif current_user.geozone && @projekt.debate_phase.geozone_restrictions.any? && !@projekt.debate_phase.geozone_restriction_ids.include?(current_user.geozone.id) %>
       <%= t('custom.comments.restricted.geo_limitation', geozones: @projekt.debate_phase.geozone_restrictions.names.join(', ')) %>
 
-    <% elsif @projekt.debate_phase.active && @projekt.debate_phase.expired? %>
+    <% elsif @projekt.debate_phase.phase_activated? && @projekt.debate_phase.expired? %>
       <%= t('custom.comments.restricted.debate_phase_expired')%>
 
-    <% elsif !@projekt.debate_phase.active %>
+    <% elsif !@projekt.debate_phase.phase_activated? %>
       <%= t('custom.comments.restricted.debate_phase_not_active')%>
 
     <% else %>

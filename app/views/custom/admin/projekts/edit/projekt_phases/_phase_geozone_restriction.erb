@@ -1,4 +1,4 @@
-<div class="projekt-phase-geozone-restriction-selector <%= 'gray-labels' if skip_user_verification? %>">
+<div class="projekt-phase-geozone-restriction-selector margin-bottom <%= 'gray-labels' if skip_user_verification? %>">
 
   <%= phase_form.radio_button :geozone_restricted, 'no_restriction',
                              label: t('custom.geozones.sidebar_filter.restrictions.no_restriction' ),
@@ -12,6 +12,8 @@
   <%= phase_form.radio_button :geozone_restricted, 'only_geozones', label: t('custom.geozones.sidebar_filter.restrictions.only_geozones'), class: "#{phase_name}_only_geozones", disabled: skip_user_verification? %>
 
   <div class="projekt-phase-geozone-selector <%= phase_name %>">
-    <%= phase_form.collection_check_boxes(:geozone_restriction_ids, Geozone.all, :id, :name, {}, { disabled: skip_user_verification?}  ) %>
+    <%= phase_form.collection_check_boxes(:geozone_restriction_ids, Geozone.all, :id, :name, {}, { disabled: skip_user_verification? } ) do |b| %>
+      <%= b.label(style: 'display:inline-block;cursor:pointer;') { b.check_box(style: 'margin-top:0;') + b.text } %>
+    <% end %>
   </div>
 </div>

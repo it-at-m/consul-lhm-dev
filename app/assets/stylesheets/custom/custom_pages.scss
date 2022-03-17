@@ -24,29 +24,128 @@ span.replace-highlighted {
 
 // Sidebar
 
-.projekt-phase {
-  margin-bottom: 1em;
-  line-height: 1.75;
+span.sidebar-projekt-phases-title {
+  display: block;
+  color: #207868;
+  margin-bottom: 1rem;
+}
 
+.sidebar-projekt-phase {
+  display: flex;
+  color: #9EADBA;
+  margin-bottom: .5rem;
 
-  .projekt-phase-button {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+  .sidebar-projekt-phase-status {
+    width: 14px;
+    height: 14px;
+    background: #DFE6ED;
+    border-radius: 50%;
+    border: 2px solid #9EADBA;
+    margin-top: 4px;
+    margin-right: 4px;
+    min-width: 14px;
+  }
+
+  .sidebar-projekt-phase-details {
+    flex-basis: 100%;
+
+    .sidebar-projekt-phase-name,
+    .sidebar-projekt-phase-duration {
+      display: block;
+    }
+
+    .sidebar-projekt-phase-name {
+      a {
+        color: inherit;
+      }
+
+      i {
+        margin-left: 5px;
+      }
+    }
+
+    .sidebar-projekt-phase-duration {
+      font-size: 0.65rem;
+    }
   }
 }
 
-.debate-phase, .proposals-phase {
-  margin-bottom: 2em;
-}
+.sidebar-projekt-phase:not(:last-child) > .sidebar-projekt-phase-details {
+  position: relative;
 
-.link-icon {
-
-  &:before {
-    content: "\f35d";
-    font-family: "Font Awesome 5 Free";
-    font-weight: bold;
+  &::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    border-left: 2px solid;
+    left: -12px;
+    top: 12px;
+    z-index: -1;
   }
 }
+
+.sidebar-projekt-budget-phases {
+  margin-top: 12px;
+}
+
+.sidebar-projekt-phase.active {
+  .sidebar-projekt-phase-details {
+    color: #207868 !important;
+  }
+
+  .sidebar-projekt-phase-status {
+    background-color: #90BCB3;
+    border-color: #207868;
+  }
+}
+
+.sidebar-projekt-phase[aria-expanded="false"] {
+  .sidebar-projekt-budget-phases {
+    display: none;
+  }
+
+  span.toggle-arrow:after {
+    transform: rotate(180deg);
+    transition: 0.25s;
+  }
+}
+
+.sidebar-projekt-map .map_location {
+  height: 250px;
+  cursor: pointer;
+
+  .leaflet-control-container {
+    .leaflet-control-zoom,
+    .leaflet-control-locate,
+    .leaflet-control-geosearch {
+      display: none;
+    }
+  }
+}
+
+// .projekt-phase {
+//   margin-bottom: 1em;
+//   line-height: 1.75;
+// 
+// 
+//   .projekt-phase-button {
+//     margin-top: 0.5em;
+//     margin-bottom: 0.5em;
+//   }
+// }
+// 
+// .debate-phase, .proposals-phase {
+//   margin-bottom: 2em;
+// }
+// 
+// .link-icon {
+// 
+//   &:before {
+//     content: "\f35d";
+//     font-family: "Font Awesome 5 Free";
+//     font-weight: bold;
+//   }
+// }
 
 ul.projekt-navigator {
   margin-left: 1rem;
@@ -75,14 +174,54 @@ li.projekt-navigator.current-projekt::before {
 }
 
 
+// Sidebar map
 
-// Sidebar icons 
+#extended-sidebar-map {
+  display: none;
+  width: 80%;
+  height: 70%;
+  left: 10%;
+  top: 10%;
+  z-index: 10;
+
+  .extended-sidebar-map-wrapper {
+    border: 1px solid black;
+    position: relative;
+
+    .extended-sidebar-map {
+      height: 500px;
+
+      @media screen and (min-width: 1920px) {
+        height: 700px;
+      }
+
+      @media screen and (min-width: 3000px) {
+        height: 1200px;
+      }
+    }
+
+    .close-button {
+      position: absolute;
+      top: 0;
+      right: 3px;
+    }
+  }
+
+  @media screen and (min-width: 40em) {
+    display: block;
+  }
+}
+
+
+
+// Footer icons
 
 span.time-icon,
 span.geo-restriction-icon,
 span.geo-affiliation-icon {
   margin-left: 23px;
   position: relative;
+  display: block
 }
 
 span.time-icon:before,
@@ -92,7 +231,7 @@ span.geo-affiliation-icon:before {
   font-family: "Font Awesome 5 Free";
   position: absolute;
   left: -23px;
-  color: $brand;
+  font-size: 0.75rem;
 }
 
 span.time-icon:before {
@@ -158,3 +297,140 @@ li.projekt-navigator[aria-expanded="false"] {
     transform: rotate(0deg);
   }
 }
+
+
+// Footer
+
+.tab-info-summary {
+  height: 2.75rem;
+  overflow: hidden;
+
+  span.time-icon,
+  span.geo-restriction-icon {
+    white-space: nowrap;
+  }
+}
+
+.page-subnav-tab.is-active {
+  background: #e7f2fc;
+}
+
+.arrow-controls {
+  display: none;
+
+  .disabled {
+    color: gray;
+  }
+}
+
+@media screen and (min-width: 64em) {
+  .arrow-controls {
+    display: flex;
+    font-size: 1.5rem;
+    cursor: pointer;
+
+    #left-arrow-control {
+      margin-right: 10px;
+    }
+  }
+
+  .custom-page #filter-subnav {
+    display: flex;
+    overflow-x: scroll;
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .page-subnav-tab a {
+      width: 270px;
+    }
+  }
+}
+
+
+
+// Loader
+.loader {
+  display: none;
+}
+
+.show-loader {
+  & > .loader {
+    display: block;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    width: 100px;
+    z-index: 5000;
+
+    &:before {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
+  }
+
+  .circular {
+    animation: rotate 2s linear infinite;
+    height: 100%;
+    transform-origin: center center;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  .path {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+    stroke-linecap: round;
+  }
+
+  @keyframes rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes dash {
+    0% {
+      stroke-dasharray: 1, 200;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: 89, 200;
+      stroke-dashoffset: -35px;
+    }
+    100% {
+      stroke-dasharray: 89, 200;
+      stroke-dashoffset: -124px;
+    }
+  }
+
+  @keyframes color {
+    100%,
+    0% {
+      stroke: red;
+    }
+    40% {
+      stroke: blue;
+    }
+    66% {
+      stroke: green;
+    }
+    80%,
+    90% {
+      stroke: yellow;
+    }
+  }
+}
+
+

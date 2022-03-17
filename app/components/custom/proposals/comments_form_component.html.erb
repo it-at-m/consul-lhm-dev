@@ -10,10 +10,10 @@
     <% elsif current_user.geozone && @projekt.proposal_phase.geozone_restrictions.any? && !@projekt.proposal_phase.geozone_restriction_ids.include?(current_user.geozone.id) %>
       <%= t('custom.comments.restricted.geo_limitation', geozones: @projekt.proposal_phase.geozone_restrictions.names.join(', ')) %></li>
 
-    <% elsif @projekt.proposal_phase.active && @projekt.proposal_phase.expired? %>
+    <% elsif @projekt.proposal_phase.phase_activated? && @projekt.proposal_phase.expired? %>
       <%= t('custom.comments.restricted.proposal_phase_expired')%>
 
-    <% elsif !@projekt.proposal_phase.active %>
+    <% elsif !@projekt.proposal_phase.phase_activated? %>
       <%= t('custom.comments.restricted.proposal_phase_not_active')%>
 
     <% else %>

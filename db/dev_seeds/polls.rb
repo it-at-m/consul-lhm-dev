@@ -6,22 +6,26 @@ section "Creating polls" do
                slug: I18n.t("seeds.polls.current_poll").parameterize,
                starts_at: 7.days.ago,
                ends_at:   7.days.from_now,
+               projekt: Projekt.first,
                geozone_restricted: false)
 
   Poll.create!(name: I18n.t("seeds.polls.current_poll_geozone_restricted"),
                slug: I18n.t("seeds.polls.current_poll_geozone_restricted").parameterize,
                starts_at: 5.days.ago,
                ends_at:   5.days.from_now,
+               projekt: Projekt.first,
                geozone_restricted: true,
                geozones: Geozone.sample(3))
 
   Poll.create!(name: I18n.t("seeds.polls.recounting_poll"),
                slug: I18n.t("seeds.polls.recounting_poll").parameterize,
+               projekt: Projekt.first,
                starts_at: 15.days.ago,
                ends_at:   2.days.ago)
 
   Poll.create!(name: I18n.t("seeds.polls.expired_poll_without_stats"),
                slug: I18n.t("seeds.polls.expired_poll_without_stats").parameterize,
+               projekt: Projekt.first,
                starts_at: 2.months.ago,
                ends_at:   1.month.ago)
 
@@ -29,6 +33,7 @@ section "Creating polls" do
                slug: I18n.t("seeds.polls.expired_poll_with_stats").parameterize,
                starts_at: 2.months.ago,
                ends_at:   1.month.ago,
+               projekt: Projekt.first,
                results_enabled: true,
                stats_enabled: true)
 

@@ -9,6 +9,9 @@
     <% elsif !@projekt.current? %>
       <%= t('custom.comments.restricted.projekt_not_active')%>
 
+    <% elsif !@projekt.comment_phase.current? %>
+      <%= t('custom.comments.restricted.projekt_phase_not_active')%>
+
     <% else %>
       <%= t('custom.comments.restricted.other')%>
 

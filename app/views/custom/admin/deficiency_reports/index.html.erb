@@ -1,0 +1,52 @@
+<% provide(:title) do %>
+  <%= t("admin.header.title") %> - <%= t("admin.resources.index.title") %>
+<% end %>
+
+<h2><%= t("admin.deficiency_reports.index.title") %></h2>
+
+<% if @deficiency_reports.any? %>
+  <h3><%= page_entries_info @deficiency_reports %></h3>
+
+  <%=
+    link_to t("admin.budget_investments.index.download_current_selection"),
+    admin_deficiency_reports_path(csv_params),
+    target: '_blank',
+    class: "float-right small clear"
+  %>
+
+  <table>
+    <thead>
+      <tr>
+        <th class="text-center"><%= t("admin.resources.index.id") %></th>
+        <th><%= t("admin.resources.index.title") %></th>
+        <th><%= t("admin.resources.index.author") %></th>
+        <th><%= t("admin.resources.index.official_answer") %></th>
+        <th><%= t("admin.resources.index.category_name") %></th>
+        <th><%= t("admin.resources.index.status_title") %></th>
+        <th><%= t("admin.resources.index.officer_name") %></th>
+        <th><%= t("admin.resources.index.officer_email") %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @deficiency_reports.each do |deficiency_report| %>
+        <tr id="<%= dom_id(deficiency_report) %>" class="deficiency_report">
+          <td class="text-center"><%= deficiency_report.id %></td>
+          <td> <%= link_to(deficiency_report.title, admin_deficiency_report_path(deficiency_report)) %> </td>
+          <td><%= deficiency_report.author.username %></td>
+          <td><%= deficiency_report.official_answer %></td>
+          <td><%= deficiency_report.category&.name %></td>
+          <td><%= deficiency_report.status&.title %></td>
+          <td><%= deficiency_report.officer&.name %></td>
+          <td><%= deficiency_report.officer&.email %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= paginate @deficiency_reports %>
+<% else %>
+  <div class="callout primary">
+    <%= t("admin.deficiency_reports.no_deficiency_reports") %>
+  </div>
+<% end %>

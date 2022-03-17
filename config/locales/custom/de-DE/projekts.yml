@@ -10,23 +10,10 @@ de:
             title: Projektinformation
             projekt_duration: Gesamtdauer
             affiliation: Gebietszuordnung
-
           phases:
             title: Projektphasen
-            debate_phase: Diskussionsphase
-            debate_phase_link: Zur Übersicht aller Diskussionen
-            debate_phase_button: Starten Sie eine Diskussion
-            debate_phase_not_active: Diskussionsphase nicht aktiviert
-            proposal_phase: Vorschlagsphase
-            proposal_phase_link: Zur Übersicht aller Vorschläge
-            proposal_phase_button: Vorschlag erstellen
-            proposal_phase_not_active: Vorschlagsphase nicht aktiviert
-            voting_phase: Abstimmungsphase
-            voting_phase_link: Zu den Abstimmungen
-            voting_phase_active_count:
-              zero: "Keine Abstimmungen"
-              one: "%{count} Abstimmung"
-              other: "%{count} Abstimmungen"
+          map:
+            title: Gebiet
           navigator:
             title: Projektverzeichnis
       footer:

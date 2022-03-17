@@ -14,6 +14,7 @@ de:
         projekts: Projekte
         deficiency_reports_title: Mängelmelder
         deficiency_reports:
+          list: Liste der Mängelmeldungen
           officers: Sachbearbeiter*in
           reports: Mängel zuweisen
           categories: Kategorien festlegen
@@ -24,6 +25,20 @@ de:
           title: Mängel zuweisen
           no_deficiency_reports: Keine Mängelmeldungen
           entry_name: Mangel
+        show:
+          title: Mängel zuweisen
+          no_deficiency_reports: Keine Mängelmeldungen
+          entry_name: Mangel
+          category: Kategori
+          status: Status
+          summary: Zusammenfassung
+          description: Bezeichnung
+          video: Video
+          author: Autor
+          created_at: Erstellt am
+          updated_at: Aktualisiert am
+          official_answer: Offizielle Antwort
+          officer_name: Sachbearbeiter*in
         deficiency_report:
           title: Gemeldeter Mangel
           category: Kategorie
@@ -99,6 +114,7 @@ de:
       projekts:
         destroy: Löschen
         edit:
+          description: Projektbeschreibung
           projekt_activated: Projekt aktiv
           projekt_active:
             'no': Nein
@@ -121,6 +137,8 @@ de:
           projekt_phases: Projektphasen
           projekt_phases_tab:
             actions: Aktionen
+            activate_phase: Phase aktiviert
+            activate_info: Info aktiviert
             activate: Aktiviert
             affiliation: Gebietszuordnung
             beginning: Anfangsdatum
@@ -139,12 +157,22 @@ de:
             start_date: Anfangsdatum
             voting_manage: Abstimmungen verwalten
             voting_phase: Abstimmungsphase
+            comment_phase: Kommentarphase
+            budget_phase: Budgetphase
+            milestone_phase: Umsetzungsphase
+            link:
+              voting_phase: Abstimmungen
+              budget_phase: Budgets
           projekt_settings_tab:
             footer_settings: Fußzeile
             general_settings: Allgemein
             name: Projektfunktionen
             select_an_element: auswählen
             sidebar_settings: Seitenleiste
+          projekt_sdg_tab:
+            name: 'SDGs & Tags'
+            sdgs: SDGs
+            tags: Tags
           projekt_status: Projektstatus
           setting_indicator:
             'no': Nein
@@ -216,3 +244,7 @@ de:
           category_options:
             active_projekt: Aktiver Beteiligungsprozess
             archived_projekt: Abgeschlossener Beteiligungsprozess
+      budgets:
+        edit:
+          info:
+            projekt_association: Projektzuordnung

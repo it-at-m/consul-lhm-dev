@@ -1,0 +1,15 @@
+<div class="map proposals-map not-print">
+  <% if @selected_parent_projekt %>
+    <%= render_map(@selected_parent_projekt.map_location, "proposals", false, nil, @proposals_coordinates) %>
+  <% else %>
+    <%= render_map(nil, "proposals", false, nil, @proposals_coordinates) %>
+  <% end %>
+</div>
+<div class='expand-overview-map-wrapper'>
+  <div class='expand-overview-map small js-expand-overview-map not-print wide'>
+    <%= t('custom.proposals.index.show_larger_map') %>
+  </div>
+</div>
+<div class="clear"></div>
+<div class="no-bullet margin-top">
+</div>

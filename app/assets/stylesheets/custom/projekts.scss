@@ -43,7 +43,7 @@ table.edit-projekt {
     &+tr.projekt-details {
       display: none;
     }
-	}
+  }
 
   tr.projekt-row[aria-expanded="true"] {
     .info-arrow {
@@ -53,7 +53,7 @@ table.edit-projekt {
     &+tr.projekt-details {
       display: table-row;
     }
-	}
+  }
 
   .update-projekt-link {
     color: #004a83;
@@ -218,11 +218,19 @@ div.projekt-phase-geozone-restriction-selector {
   }
 
 
+  input.comment_phase_only_geozones:checked ~ .projekt-phase-geozone-selector.comment_phase {
+    display: block;
+  }
+
   input.debate_phase_only_geozones:checked ~ .projekt-phase-geozone-selector.debate_phase {
     display: block;
   }
 
   input.proposal_phase_only_geozones:checked ~ .projekt-phase-geozone-selector.proposal_phase {
+    display: block;
+  }
+
+  input.budget_phase_only_geozones:checked ~ .projekt-phase-geozone-selector.budget_phase {
     display: block;
   }
 
@@ -235,6 +243,12 @@ div.projekt-phase-geozone-restriction-selector {
 // Index and new views
 
 #filter-projekts-all {
+
+  form label {
+    font-size: 0.875rem;
+    font-weight: inherit;
+    line-height: 1.8;
+  }
 
   ul {
     list-style-type: none;
@@ -295,7 +309,8 @@ div.projekt-phase-geozone-restriction-selector {
     margin-right: 2em;
   }
 
-  input[type='checkbox'] {
+  input[type='checkbox'],
+  input[type='radio'] {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -316,21 +331,31 @@ div.projekt-phase-geozone-restriction-selector {
     color: $brand;
   }
 
-  .checkmark {
+  .checkmark,
+  .radiomark {
     position: absolute;
     top: 5px;
     left: -19px;
     height: 14px;
     width: 14px;
     border: 1.5px solid #C6C6C6;
+  }
+
+  .checkmark {
     border-radius: 2px;
   }
 
-  input:checked ~ .checkmark:before {
+  .radiomark {
+    border-radius: 14px;
+  }
+
+  input:checked ~ .checkmark:before,
+  input:checked ~ .radiomark:before {
     display: block;
   }
 
-  input:checked ~ .checkmark {
+  input:checked ~ .checkmark,
+  input:checked ~ .radiomark {
     background: #878787;
     border: 1.5px solid #878787;
   }
@@ -338,19 +363,25 @@ div.projekt-phase-geozone-restriction-selector {
   .label-selected {
   }
 
-  .checkmark:before {
+  .checkmark:before,
+  .radiomark:before {
     content: "";
     position: absolute;
     display: none;
-    left: 4px;
-    top: 1px;
+    left: 50%;
+    top: 50%;
     width: 4px;
     height: 7px;
     border: 1.5px solid #fff;
     border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
+    transform: translate(-50%, -50%) rotate(45deg);
   }
 
+  .sidebar-filter-group {
+    input[type="submit"] {
+      border: 0;
+    } 
+  }
 }
 
 .sidebar-projekt-group-name {
@@ -445,4 +476,43 @@ span.projekt-backlink:before {
 
 .admin .featured-settings-form [aria-pressed] {
   margin-bottom: 0;
+}
+
+.projekt-listing {
+  border: 1px solid #e5e6e9;
+  background: #f9f9f9;
+  color: #707070;
+  padding: 10px;
+  margin-bottom: 1rem;
+
+  .image img {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 20px;
+
+    @media (min-width: 40em) {
+      padding-right: 10px;
+      margin-bottom: 0;
+    }
+  }
+
+  .content-wrapper {
+    padding-right: 15px;
+  }
+
+  .actions {
+    position: relative;
+    min-height: 80px;
+
+    a.button {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto;
+      width: max-content;
+      height: fit-content;
+    }
+  }
 }

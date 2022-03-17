@@ -11,6 +11,7 @@ de:
       index:
         max_number_reached: Du hast die maximale Anzahl (%{max_number}) an Vorschlägen pro Nutzer erreicht. Bevor du einen weiteren Vorschlag erstellen kannst, musst du einen aktiven Vorschlag zurückziehen.
         no_active_projekt: Aktuell kein Beteiligungsverfahren
+        no_active_phase: Phase bereits geschlossen
         projekts: Projekte
         show_larger_map: Mehr anzeigen
         show_smaller_map: Weniger anzeigen

@@ -1,0 +1,14 @@
+<div class='sidebar-projekt-phases'>
+  <% phases.each do |phase| %>
+    <div class="sidebar-projekt-phase <%= 'active' if phase.current? %>">
+      <div class='sidebar-projekt-phase-status'>
+      </div>
+      <div class='sidebar-projekt-phase-details'>
+        <span class='sidebar-projekt-phase-name'>
+          <%= phase.name %>
+        </span>
+        <span class='sidebar-projekt-phase-duration'><%= format_date_range(phase.starts_at, phase.ends_at.to_date) %></span>
+      </div>
+    </div>
+  <% end %>
+</div>

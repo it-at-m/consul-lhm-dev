@@ -3,6 +3,17 @@ require_dependency Rails.root.join("app", "controllers", "admin", 'site_customiz
 class Admin::SiteCustomization::PagesController < Admin::SiteCustomization::BaseController
   include ImageAttributes
 
+
+  def update
+    if @page.update(page_params)
+      notice = t("admin.site_customization.pages.update.notice")
+      redirect_to redirect_path, notice: notice
+    else
+      flash.now[:error] = t("admin.site_customization.pages.update.error")
+      render :edit
+    end
+  end
+
   def destroy
     if @page.safe_to_destroy?
       @page.destroy!
@@ -27,5 +38,13 @@ class Admin::SiteCustomization::PagesController < Admin::SiteCustomization::Base
 
     def resource
       SiteCustomization::Page.find(params[:id])
+    end
+
+    def redirect_path
+      if @page.projekt.present?
+        edit_admin_projekt_path(@page.projekt)
+      else
+        admin_site_customization_pages_path
+      end
     end
 end

@@ -33,6 +33,7 @@ namespace :admin do
     end
     resources :settings,    only: :index
   end
+  resources :deficiency_reports, only: [:index, :show]
 
 
   resources :organizations, only: :index do

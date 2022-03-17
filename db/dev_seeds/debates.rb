@@ -2,8 +2,10 @@ section "Creating Debates" do
   tags = Faker::Lorem.words(number: 25)
   30.times do
     author = User.all.sample
+    projekt = Projekt.all.sample
     description = "<p>#{Faker::Lorem.paragraphs.join("</p><p>")}</p>"
     debate = Debate.create!(author: author,
+                            projekt: projekt,
                             title: Faker::Lorem.sentence(word_count: 3).truncate(60),
                             created_at: rand((Time.current - 1.week)..Time.current),
                             description: description,
@@ -22,9 +24,11 @@ section "Creating Debates" do
   tags = Tag.where(kind: "category")
   30.times do
     author = User.all.sample
+    projekt = Projekt.all.sample
     description = "<p>#{Faker::Lorem.paragraphs.join("</p><p>")}</p>"
 
     debate = Debate.create!(author: author,
+                            projekt: projekt,
                             title: Faker::Lorem.sentence(word_count: 3).truncate(60),
                             created_at: rand((Time.current - 1.week)..Time.current),
                             description: description,

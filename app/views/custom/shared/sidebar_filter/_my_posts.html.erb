@@ -1,0 +1,22 @@
+<% if current_user.present? %>
+  <div class="sidebar-divider"></div>
+
+  <h2 class="sidebar-title sidebar-title-icon fa-check-circle"><%= t("custom.sidebar_filter.my_posts.title") %></h2>
+
+  <ul class='deficiency-reports-sidebar-filter '>
+    <li <%= "class=label-selected" if params[:my_posts_filter] != 'true' %> >
+      <%= label_tag "my_posts_filter_false", class: '' do %>
+        <%= radio_button_tag(:my_posts_filter, 'false', params[:my_posts_filter] != 'true', { class: 'js-radio-button-filter', id: 'my_posts_filter_false' } ) %>
+        <%= t('custom.sidebar_filter.my_posts.all') %>
+        <span class="checkmark"></span>
+      <% end %>
+    </li>
+    <li <%= "class=label-selected" if params[:my_posts_filter] == 'true' %> >
+      <%= label_tag "my_posts_filter_true", class: '' do %>
+        <%= radio_button_tag(:my_posts_filter, 'true', params[:my_posts_filter] == 'true', { class: 'js-radio-button-filter', id: "my_posts_filter_true" } ) %>
+        <%= t('custom.sidebar_filter.my_posts.my_posts') %>
+        <span class="checkmark"></span>
+      <% end %>
+    </li>
+  </ul>
+<% end %>

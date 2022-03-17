@@ -56,7 +56,6 @@
 
         <%= render "deficiency_reports/sidebar/categories" %>
         <%= render "deficiency_reports/sidebar/statuses" %>
-
         <% if current_user &&
             ( current_user.deficiency_report_officer? ||
             current_user.administrator? ) %>
@@ -67,6 +66,9 @@
             current_user.administrator? &&
             Setting['deficiency_reports.admins_must_approve_officer_answer'].present? %>
           <%= render "deficiency_reports/sidebar/not_approved_filter" %>
+        <% end %>
+        <% if extended_feature?('deficiency_reports.enable_my_posts_filter') %>
+          <%= render "shared/sidebar_filter/my_posts" %>
         <% end %>
       </aside>
     </div>

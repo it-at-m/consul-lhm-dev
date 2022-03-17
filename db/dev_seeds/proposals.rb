@@ -29,9 +29,11 @@ section "Creating Proposals" do
     title = Faker::Lorem.sentence(word_count: 3).truncate(60)
     summary = Faker::Lorem.sentence(word_count: 3)
     author = User.all.sample
+    projekt = Projekt.all.sample
     description = "<p>#{Faker::Lorem.paragraphs.join("</p><p>")}</p>"
 
     proposal = Proposal.create!(author: author,
+                                projekt: projekt,
                                 title: title,
                                 summary: summary,
                                 responsible_name: Faker::Name.name,
@@ -57,9 +59,11 @@ section "Creating Archived Proposals" do
   tags = Faker::Lorem.words(number: 25)
   5.times do
     author = User.all.sample
+    projekt = Projekt.all.sample
     description = "<p>#{Faker::Lorem.paragraphs.join("</p><p>")}</p>"
     months_to_archive_proposals = Setting["months_to_archive_proposals"]
     proposal = Proposal.create!(author: author,
+                                projekt: projekt,
                                 title: Faker::Lorem.sentence(word_count: 3).truncate(60),
                                 summary: Faker::Lorem.sentence(word_count: 3),
                                 responsible_name: Faker::Name.name,
@@ -85,8 +89,10 @@ section "Creating Successful Proposals" do
   tags = Faker::Lorem.words(number: 25)
   10.times do
     author = User.all.sample
+    projekt = Projekt.all.sample
     description = "<p>#{Faker::Lorem.paragraphs.join("</p><p>")}</p>"
     proposal = Proposal.create!(author: author,
+                                projekt: projekt,
                                 title: Faker::Lorem.sentence(word_count: 3).truncate(60),
                                 summary: Faker::Lorem.sentence(word_count: 3),
                                 responsible_name: Faker::Name.name,
@@ -111,8 +117,10 @@ section "Creating Successful Proposals" do
   tags = Tag.where(kind: "category")
   30.times do
     author = User.all.sample
+    projekt = Projekt.all.sample
     description = "<p>#{Faker::Lorem.paragraphs.join("</p><p>")}</p>"
     proposal = Proposal.create!(author: author,
+                                projekt: projekt,
                                 title: Faker::Lorem.sentence(word_count: 4).truncate(60),
                                 summary: Faker::Lorem.sentence(word_count: 3),
                                 responsible_name: Faker::Name.name,

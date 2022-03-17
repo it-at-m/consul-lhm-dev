@@ -9,8 +9,20 @@ class Admin::ProposalsController < Admin::BaseController
   before_action :load_proposal, except: :index
   before_action :set_projekts_for_selector, only: [:update, :show]
 
+  def index
+    super
+
+    respond_to do |format|
+      format.html
+      format.csv do
+        send_data Proposal::CsvExporter.new(@resources.limit(nil)).to_csv,
+          filename: "proposals.csv"
+      end
+    end
+  end
+
   def show
-     @affiliated_geozones = (params[:affiliated_geozones] || '').split(',').map(&:to_i)
+    @affiliated_geozones = (params[:affiliated_geozones] || '').split(',').map(&:to_i)
   end
 
   def update
@@ -39,6 +51,12 @@ class Admin::ProposalsController < Admin::BaseController
 
     def load_proposal
       @proposal = Proposal.find(params[:id])
+    end
+
+    def load_proposals
+      @investments = Budget::Investment.scoped_filter(params, @current_filter).order_filter(params)
+      @investments = Kaminari.paginate_array(@investments) if @investments.is_a?(Array)
+      @investments = @investments.page(params[:page]) unless request.format.csv?
     end
 
     def proposal_params

@@ -1,6 +1,8 @@
 en:
   custom:    
     projekts:
+      index:
+        title: Projects overview
       backlink: To the project overview
       errors:
         presence: Please select a project
@@ -20,3 +22,21 @@ en:
         title: Projects
         title_active: Active projects
         title_archived: Expired projects
+      page:
+        sidebar:
+          phases:
+            participate: Open for participation!
+        tabs:
+          comments: Comments
+          debates: Debates
+          proposals: Proposals
+          polls: Polls
+          budgets: Budgets
+          milestones: Milestones
+      phase_name:
+        comment_phase: Kommentare
+        debate_phase: Diskussionen
+        proposal_phase: Vorschläge
+        voting_phase: Abstimmungen
+        budget_phase: Budget
+        milestone_phase: Milestones

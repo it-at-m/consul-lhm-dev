@@ -1,0 +1,22 @@
+
+
+<%= form_for(@projekt, url: admin_projekt_path, as: :projekt) do |f| %>
+  <div class="margin-bottom">
+    <h2><%= t("custom.admin.projekts.edit.projekt_sdg_tab.sdgs") %></h2>
+    <%= hidden_field_tag :tab, '#tab-projekt-sdg' %>
+    <%= render SDG::RelatedListSelectorComponent.new(f) %>
+  </div>
+
+  <div class="margin-bottom">
+    <div id="category_tags" class="tags">
+      <h2><%= t("custom.admin.projekts.edit.projekt_sdg_tab.tags") %></h2>
+      <% Tag.category.order(:name).each do |tag| %>
+        <a class="js-add-tag-link"><%= tag.name %></a>
+      <% end %>
+    </div>
+  </div>
+
+  <%=f.hidden_field :tag_list_predefined, value: @projekt.tags.reject{|t| !['category'].include?(t.kind)}.map(&:name).join(","), class: "js-tag-list list-tags predefined"%>
+
+  <%= f.submit %>
+<% end %>

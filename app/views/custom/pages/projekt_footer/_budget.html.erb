@@ -1,0 +1,46 @@
+<%= render 'shared/loader_spinner' %>
+
+<%= render Pages::Projekts::BudgetsTabComponent.new(@budget, @ballot, current_user) %>
+
+<div class='row'>
+  <div id='budgets-sidebar' class='small-12 medium-3 column'>
+    <aside class='margin-bottom'>
+
+      <% if @budget.accepting? %>
+        <% if current_user %>
+          <% if current_user.level_two_or_three_verified? %>
+            <div class="text-right">
+              <%= link_to t("budgets.investments.index.sidebar.create"),
+                          new_budget_investment_path(@budget),
+                          class: "button" %>
+            </div>
+          <% else %>
+            <div class="callout warning">
+              <%= sanitize(t("budgets.investments.index.sidebar.verified_only",
+                    verify: link_to_verify_account)) %>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="callout primary">
+            <%= sanitize(t("budgets.investments.index.sidebar.not_logged_in",
+                  sign_in: link_to_signin, sign_up: link_to_signup)) %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <%= render Sidebar::ProjektsFilterComponent.new(@top_level_active_projekts, @top_level_archived_projekts, @all_resources, @current_tab_phase, @current_projekt) %>
+    </aside>
+  </div>
+
+  <div id='budgets' class='budgets-list spinner-placeholder small-12 medium-9 column'>
+    <%= render 'shared/loader_spinner' %>
+
+    <% @investments.each do |investment| %>
+      <%= render "/budgets/investments/investment",
+                 investment: investment,
+                 investment_ids: @investment_ids,
+                 ballot: @ballot %>
+    <% end %>
+
+  </div>
+</div>

@@ -4,10 +4,15 @@ module ModerateActions
   PER_PAGE = 50
 
   def index
+    if params[:only_with_flags] == 'true' && @resources.column_names.include?('flags_count')
+      @resources = @resources.where('flags_count > 0')
+    end
+
     @resources = @resources.send(@current_filter)
                            .send("sort_by_#{@current_order}")
                            .page(params[:page])
                            .per(PER_PAGE)
+
     set_resources_instance
   end
 

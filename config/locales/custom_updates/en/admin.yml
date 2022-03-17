@@ -31,6 +31,7 @@ en:
       projekts:
         destroy: Delete
         edit:
+          description: Projekt description
           projekt_activated: Project active
           projekt_active:
             'no': "No"
@@ -71,12 +72,23 @@ en:
             start_date: Start date
             voting_manage: Manage polls
             voting_phase: Voting phase
+            comment_phase: Commenting phase
+            budget_phase: Budget phase
+            milestone_phase: Execution phase
+            link:
+              voting_phase: Polls
+              budget_phase: Budgets
           projekt_settings_tab:
             footer_settings: Footer
             general_settings: General
             name: Project functions
             select_an_element: select
             sidebar_settings: Sidebar
+          projekt_sdg_tab:
+            name: 'SDGs & Tags'
+            sdgs: SDGs
+            tags: Tags
+          projekt_status: Projektstatus
           projekt_status: Project status
           setting_indicator:
             'no': "No"
@@ -148,3 +160,7 @@ en:
           category_options:
             active_projekt: Active participation process
             archived_projekt: Completed participation process
+      budgets:
+        edit:
+          info:
+            projekt_association: Project association

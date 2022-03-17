@@ -2,20 +2,19 @@
   "use strict";
   App.ExpandProposalsMap = {
 
-    toggleMap: function() {
-      var mapDiv = $('.map_location').first();
-      var toggler = $(event.target)
+    toggleMap: function($mapDiv) {
+      var $toggler = $(event.target)
 
-      if ( mapDiv.attr("aria-expanded") == "true" ) {
-        mapDiv.css('height', '350px')
-        mapDiv.attr("aria-expanded","false")
-        toggler.attr("aria-expanded","false")
-        toggler.text("<%= I18n.t('custom.proposals.index.show_larger_map') %>")
+      if ( $mapDiv.attr("aria-expanded") == "true" ) {
+        $mapDiv.css('height', '350px')
+        $mapDiv.attr("aria-expanded","false")
+        $toggler.attr("aria-expanded","false")
+        $toggler.text("<%= I18n.t('custom.proposals.index.show_larger_map') %>")
       } else {
-        mapDiv.css('height', '700px')
-        mapDiv.attr("aria-expanded","true")
-        toggler.attr("aria-expanded","true")
-        toggler.text("<%= I18n.t('custom.proposals.index.show_smaller_map') %>")
+        $mapDiv.css('height', '700px')
+        $mapDiv.attr("aria-expanded","true")
+        $toggler.attr("aria-expanded","true")
+        $toggler.text("<%= I18n.t('custom.proposals.index.show_smaller_map') %>")
       } 
 
       App.Map.maps.forEach(function(map) { map.invalidateSize() } )
@@ -24,7 +23,8 @@
     initialize: function() {
 
       $("body").on("click", ".js-expand-overview-map", function() {
-        App.ExpandProposalsMap.toggleMap();
+        var $mapDiv = $(this).closest('.expand-overview-map-wrapper').prev().find('.map_location')
+        App.ExpandProposalsMap.toggleMap($mapDiv);
       });
     }
   };

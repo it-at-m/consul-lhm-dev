@@ -3,6 +3,16 @@ class Admin::Poll::PollsController < Admin::Poll::BaseController
 
   before_action :set_projekts_for_selector, only: [:new, :edit, :update]
 
+  def index
+    respond_to do |format|
+      format.html
+      format.csv do
+        send_data Poll::CsvExporter.new(@polls.limit(2000)).to_csv,
+          filename: "polls.csv"
+      end
+    end
+  end
+
   private
 
     def poll_params

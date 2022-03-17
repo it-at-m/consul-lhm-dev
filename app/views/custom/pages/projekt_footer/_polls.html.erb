@@ -1,0 +1,54 @@
+<%= render 'shared/loader_spinner' %>
+
+<div class='row'>
+  <div id="polls-sidebar" class="small-12 medium-3 column">
+    <aside class="margin-bottom">
+      <%= render Sidebar::ProjektsFilterComponent.new(@top_level_active_projekts, @top_level_archived_projekts, @all_resources, @current_tab_phase, @current_projekt) %>
+    </aside>
+  </div>
+
+  <div id="polls" class="polls-list spinner-placeholder small-12 medium-9 column">
+    <%= render 'shared/loader_spinner' %>
+
+    <% if extended_feature?('polls.intro_text_for_polls') %>
+      <%=render_custom_block 'polls_welcome' %>
+    <% end %>
+
+    <% if show_polls_description? %>
+      <div class="polls-description">
+        <%= auto_link_already_sanitized_html wysiwyg(@active_poll.description) %>
+      </div>
+    <% end %>
+
+    <%= render "shared/filter_subnav", i18n_namespace: "polls.index" %>
+
+    <div class='row'>
+      <div class='small-6 column small'>
+        <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
+          <%= link_to t('polls.index.section_header.help'), '#section_help' %>
+        <% end %>
+      </div>
+      <div class='small-6 column small'>
+        <% if extended_feature?('modulewide.show_number_of_entries_in_modules') %>
+          <div class='float-right'>
+            <%= @all_resources.count %>
+            <%= t('activerecord.models.poll', count: @all_resources.count) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class='margin-top'>
+      <%= render "polls/poll_group", poll_group: @polls %>
+    </div>
+
+    <%= paginate @polls %>
+
+    <div id="section_help" class="margin" data-magellan-target="section_help">
+      <% if extended_feature?('modulewide.custom_help_text_in_modules')  %>
+        <%= render_custom_block 'polls_help' %>
+        <%= render_custom_partial "footer" %>
+      <% end %>
+    </div>
+  </div>
+</div>

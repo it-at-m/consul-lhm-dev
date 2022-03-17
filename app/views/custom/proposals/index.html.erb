@@ -53,41 +53,14 @@
                                            namespace: "proposals" %>
   <% end %>
 
-  <%tags = @selected_tags&.select{ |tag| tag.kind == 'category' } %>
-
   <% if feature?(:map) %>
-    <div class="map proposals-map not-print">
-      <% if @selected_parent_projekt %>
-        <%= render_map(@selected_parent_projekt.map_location, "proposals", false, nil, @proposals_coordinates) %>
-      <% else %>
-        <%= render_map(nil, "proposals", false, nil, @proposals_coordinates) %>
-      <% end %>
-    </div>
-    <div class='expand-overview-map-wrapper'>
-      <div class='expand-overview-map small js-expand-overview-map not-print wide'>
-        <%= t('custom.proposals.index.show_larger_map') %>
-      </div>
-    </div>
-    <div class="clear"></div>
-    <div class="no-bullet margin-top">
-    </div>
+    <%= render "map" %>
   <%end%>
 
   <div class="row">
     <div id="proposals-sidebar"  class="small-12 medium-3 column">
       <aside class="margin-bottom">
-        <% if current_user && proposal_limit_exceeded?(current_user) %>
-          <div class='max-proposals-exceeded'>
-            <%= t('custom.proposals.index.max_number_reached', max_number: Setting['extended_option.proposals.max_active_proposals_per_user']) %>
-          </div>
-        <% else %>
-          <% if current_user.nil? || Projekt.top_level.selectable_in_selector(controller_name, current_user).any? %>
-            <%= link_to t("proposals.index.start_proposal"), new_proposal_path(tags: tags.any? ? tags.map{|t| t.name} : nil, projekt: @selected_parent_projekt),
-              class: "button expanded js-preselect-projekt" %>
-          <% else %>
-            <%= link_to t("custom.proposals.index.no_active_projekt"), '#', class: "button expanded disabled-no-active-projekt", disabled: true %>
-          <% end %>
-        <% end %>
+        <%= render Proposals::NewButtonComponent.new() %>
 
         <% if extended_feature?('proposals.show_selected_proposals_in_proposal_sidebar') %>
           <div class="sidebar-divider"></div>
@@ -101,13 +74,16 @@
         <% if params[:retired].blank? %>
 
           <% if extended_feature?('proposals.enable_projekt_filter') %>
-            <%= render "shared/projekt_sidebar_filter/projekts_sidebar" %>
+            <%= render Sidebar::ProjektsFilterComponent.new(@top_level_active_projekts, @top_level_archived_projekts, @all_resources) %>
           <% end %>
           <% if show_affiliation_filter_in_sidebar? %>
             <%= render "shared/sidebar_filter/geozone_affiliations" %>
           <% end %>
           <% unless skip_user_verification? %>
             <%= render "shared/sidebar_filter/geozone_restrictions" %>
+          <% end %>
+          <% if extended_feature?('proposals.enable_my_posts_filter') %>
+            <%= render "shared/sidebar_filter/my_posts" %>
           <% end %>
           <%= render "shared/categories", taggable: "proposal" %>
           <%= render "shared/tag_cloud", taggable: "proposal" %>
@@ -123,7 +99,6 @@
     </div>
 
     <div id="proposals" class="proposals-list small-12 medium-9 column">
-
       <%= render Shared::BannerComponent.new("proposals") %>
 
       <% if extended_feature?("proposals.intro_text_for_proposals") %>
@@ -176,21 +151,6 @@
           </div>
         </div>
       <% end %>
-
-      <div class="show-for-small-only margin-top">
-        <% if current_user && proposal_limit_exceeded?(current_user) %>
-          <div class='max-proposals-exceeded'>
-            <%= t('custom.proposals.index.max_number_reached', max_number: Setting['extended_option.proposals.max_active_proposals_per_user']) %>
-          </div>
-        <% else %>
-          <% if current_user.nil? || Projekt.top_level.selectable_in_selector(controller_name, current_user).any? %>
-            <%= link_to t("proposals.index.start_proposal"), new_proposal_path(tags: tags.any? ? tags.map{|t| t.name} : nil, projekt: @selected_parent_projekt),
-              class: "button expanded js-preselect-projekt" %>
-          <% else %>
-            <%= link_to t("custom.proposals.index.no_active_projekt"), '#', class: "button expanded disabled-no-active-projekt", disabled: true %>
-          <% end %>
-        <% end %>
-      </div>
 
       <div id="proposals-list">
         <% if @proposals.any? || current_user.blank? %>

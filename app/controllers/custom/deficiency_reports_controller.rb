@@ -34,6 +34,7 @@ class DeficiencyReportsController < ApplicationController
     filter_by_selected_status if @selected_status_id.present?
     filter_by_selected_officer if @selected_officer.present?
     filter_by_approval_status if params[:approval_status].present?
+    filter_by_my_posts
 
     set_deficiency_report_votes(@deficiency_reports)
   end
@@ -108,6 +109,12 @@ class DeficiencyReportsController < ApplicationController
 
 
   private
+
+  def filter_by_my_posts
+    return unless params[:my_posts_filter] == 'true'
+
+    @deficiency_reports = @deficiency_reports.by_author(current_user&.id)
+  end
 
   def load_categories
     @categories = Tag.category.order(:name)

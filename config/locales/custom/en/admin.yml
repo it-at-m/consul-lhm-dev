@@ -40,3 +40,9 @@ en:
         cloud_category: Tag cloud for category
         cloud_subcategory: Tag cloud for subcategory
         custom_tags: User tags
+  custom:
+    sidebar_filter:
+      my_posts:
+        title: 'My posts'
+        all: 'All'
+        my_posts: 'My posts'

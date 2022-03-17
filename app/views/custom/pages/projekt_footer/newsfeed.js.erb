@@ -1,0 +1,4 @@
+$("#filter-subnav li").removeClass("is-active")
+$("li#filter-subnav-newsfeed").addClass("is-active")
+$("#footer-content").removeClass("show-loader");
+$("#footer-content").html("<%= j render("pages/projekt_footer/newsfeed") %>");

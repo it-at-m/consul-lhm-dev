@@ -1,6 +1,7 @@
 <ul class="main-menu">
   <div class="content-items">
     <%= render partial: 'shared/subnavigation_home', locals: { placement: placement } %>
+    <%= render partial: 'shared/subnavigation_projekts_overview', locals: { placement: placement } if Setting['projekts.overview_page'].present? %>
     <%= raw content_block("subnavigation_left", I18n.locale) %>
     <%= render partial: 'shared/subnavigation_projekts', locals: { placement: placement } %>
     <%= render partial: 'shared/subnavigation_deficiency_reports', locals: { placement: placement } if deficiency_reports_feature?('show_in_main_menu') %>

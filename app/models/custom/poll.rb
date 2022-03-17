@@ -10,6 +10,13 @@ class Poll < ApplicationRecord
 
   scope :with_current_projekt,  -> { joins(:projekt).merge(Projekt.current) }
 
+  def self.base_selection(scoped_projekt_ids = Projekt.ids)
+    created_by_admin.
+      not_budget.
+      where(projekt_id: scoped_projekt_ids).
+      joins(:projekt).merge(Projekt.activated)
+  end
+
   def answerable_by?(user)
     user &&
       !user.organization? &&

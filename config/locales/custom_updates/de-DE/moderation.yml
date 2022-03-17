@@ -1,0 +1,27 @@
+de:
+  moderation:
+    show_only_with_flags: Nur von Nutzer*innen gemeldete anzeigen
+    proposals:
+      index:
+        filters:
+          all: alle
+          unseen: ungelesen
+          seen: gelesen
+    debates:
+      index:
+        filters:
+          all: alle
+          unseen: ungelesen
+          seen: gelesen
+    comments:
+      index:
+        filters:
+          all: alle
+          unseen: ungelesen
+          seen: gelesen
+    budget_investments:
+      index:
+        filters:
+          all: alle
+          unseen: ungelesen
+          seen: gelesen

@@ -10,6 +10,7 @@ en:
         projekt_name_label: "Project name: %{projekt_name} "
         archived_projekts_label: Archived projects
         deficiency_reports: Deficiency reports
+        projekts_overview: Projects
         new_entry_label: Create new post
         new_entry: + Create new post
         new_entries:

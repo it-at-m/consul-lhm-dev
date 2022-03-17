@@ -12,7 +12,7 @@ de:
       mark_featured: Hervorgehoben
       unmark_featured: Markierung aufheben
       edit: Bearbeiten
-      configure: 
+      configure:
       update: Update
       delete: Löschen
       configure: Konfigurieren
@@ -116,7 +116,7 @@ de:
         duration: "Dauer"
         enabled: Aktiviert
         actions: Aktionen
-        enable_phase: "%{phase} Phase aktivieren"        
+        enable_phase: "%{phase} Phase aktivieren"
         active: Aktiv
         blank_dates: Das Datumfeld ist leer
         administrators:
@@ -501,6 +501,7 @@ de:
         author: Autor
         title: Diskussionen
         no_debates: Keine Diskussion vorhanden.
+        download_current_selection: "Aktuelle Auswahl herunterladen"
     hidden_debates:
       index:
         filter: Filter
@@ -632,7 +633,7 @@ de:
           back: Zurück
           submit_button: Änderungen speichern
           warning: Sie haben den Text bearbeitet. Bitte klicken Sie nun auf speichern, um die Änderungen dauerhaft zu sichern.
-          markdown_changes_message: "Sie haben den Text bearbeitet, ohne ihn zu speichern. Bestätigen Sie, die Seite zu verlassen?"       
+          markdown_changes_message: "Sie haben den Text bearbeitet, ohne ihn zu speichern. Bestätigen Sie, die Seite zu verlassen?"
         form:
           title: 'Bearbeiten des <span class="strong">-%{draft_version_title}-</span> Beteiligungsverfahrens <span class="strong">%{process_title}</span>'
           launch_text_editor: Textbearbeitung öffnen
@@ -1260,6 +1261,10 @@ de:
       search:
         title: Organisationen suchen
         no_results: Keine Organisationen gefunden.
+    deficiency_reports:
+      no_deficiency_reports: Keine Mängelmeldungen vorhanden.
+      index:
+        title: Mängelmeldungen
     proposals:
       index:
         title: Vorschläge
@@ -1507,7 +1512,7 @@ de:
     tags:
       create: Tag erstellen
       index:
-        add_tag: Neue Tags hinzufügen 
+        add_tag: Neue Tags hinzufügen
         title: Tags
         topic: Tag
         help: Tags können als Projekt, Kategorie oder Unterkategorie angelegt werden.

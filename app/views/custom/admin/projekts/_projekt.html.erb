@@ -70,7 +70,7 @@
           <%= icon('fas', 'sync') %>
         <% end %>
 
-        <%= link_to admin_projekt_path(projekt), method: :delete, class: "destroy-link", title: t("custom.admin.projekts.destroy") do %>
+        <%= link_to admin_projekt_path(projekt), method: :delete, class: "destroy-link", title: t("custom.admin.projekts.destroy"), data: { confirm: 'Sind Sie sicher?' } do %>
           <%= icon('far', 'trash-alt') %>
         <% end %>
      </div>

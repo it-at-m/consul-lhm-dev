@@ -60,6 +60,20 @@
         }
       })
 
+      $('body').on('keyup', '.js-icon-toggle-budget-phases', function(event) {
+        event.preventDefault();
+        var $toggleArrow = $(this);
+        var $phase = $(this).closest('.sidebar-projekt-phase')
+        var arrowExpanded = $toggleArrow.attr('aria-expanded') == "true"
+
+        if ( ( event.which === 38 && arrowExpanded  ) || // up arrow and expanded
+             ( event.which === 40 && !arrowExpanded ) ) { // down arrow and closed
+
+          $toggleArrow.attr('aria-expanded', !arrowExpanded)
+          $phase.attr('aria-expanded', !arrowExpanded)
+        }
+      });
+
       $('body').on('keyup', '.js-access-top-level-menu', function(event) {
         if ( !$(event.target).hasClass('js-access-top-level-menu') ) { return false }
 

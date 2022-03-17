@@ -10,6 +10,17 @@ class Admin::DebatesController < Admin::BaseController
   before_action :load_debate, except: :index
   before_action :set_projekts_for_selector, only: [:update, :show]
 
+  def index
+    super
+
+    respond_to do |format|
+      format.html
+      format.csv do
+        send_data Debates::CsvExporter.new(@resources.limit(nil)).to_csv,
+          filename: "debates.csv"
+      end
+    end
+  end
 
   def show
   end

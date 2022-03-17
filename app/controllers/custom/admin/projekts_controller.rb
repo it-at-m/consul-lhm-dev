@@ -1,16 +1,18 @@
 class Admin::ProjektsController < Admin::BaseController
   include MapLocationAttributes
+  include Translatable
+  include ImageAttributes
+
 
   before_action :find_projekt, only: [:update, :destroy, :quick_update]
   before_action :load_geozones, only: [:new, :create, :edit, :update]
+  before_action :process_tags, only: [:update]
 
   def index
     @projekts = Projekt.top_level
     @projekt = Projekt.new
 
     @projekts_settings = Setting.all.group_by(&:type)['projekts']
-    map_setting = Setting.find_by(key: 'feature.map')
-    @projekts_settings.push(map_setting)
     skip_user_verification_setting = Setting.find_by(key: 'feature.user.skip_verification')
     @projekts_settings.push(skip_user_verification_setting)
 
@@ -30,17 +32,40 @@ class Admin::ProjektsController < Admin::BaseController
       @projekt.reload
     end
 
+    @projekt.build_comment_phase if @projekt.comment_phase.blank?
+    @projekt.comment_phase.geozone_restrictions.build
+
     @projekt.build_debate_phase if @projekt.debate_phase.blank?
     @projekt.debate_phase.geozone_restrictions.build
 
     @projekt.build_proposal_phase if @projekt.proposal_phase.blank?
     @projekt.proposal_phase.geozone_restrictions.build
 
+    @projekt.build_budget_phase if @projekt.budget_phase.blank?
+    @projekt.budget_phase.geozone_restrictions.build
+
+    @projekt.build_voting_phase if @projekt.voting_phase.blank?
+    @projekt.voting_phase.geozone_restrictions.build
+
     @projekt.build_map_location if @projekt.map_location.blank?
 
     all_settings = ProjektSetting.where(projekt: @projekt).group_by(&:type)
     all_projekt_features = all_settings["projekt_feature"].group_by(&:projekt_feature_type)
     @projekt_features_main = all_projekt_features['main']
+
+    @projekt_features_phase_comment_active = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.comment')
+    @projekt_features_phase_debate_active = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.debate')
+    @projekt_features_phase_proposal_active = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.proposal')
+    @projekt_features_phase_budget_active = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.budget')
+    @projekt_features_phase_voting_active = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.voting')
+    @projekt_features_phase_milestone_active = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.milestone')
+    @projekt_features_phase_comment_info = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.comment_info')
+    @projekt_features_phase_debate_info = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.debate_info')
+    @projekt_features_phase_proposal_info = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.proposal_info')
+    @projekt_features_phase_budget_info = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.budget_info')
+    @projekt_features_phase_voting_info = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.voting_info')
+    @projekt_features_phase_milestone_info = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.milestone_info')
+
     @projekt_features_general = all_projekt_features['general']
     @projekt_features_sidebar = all_projekt_features['sidebar']
     @projekt_features_footer = all_projekt_features['footer']
@@ -51,7 +76,6 @@ class Admin::ProjektsController < Admin::BaseController
     @projekt_notifications = ProjektNotification.where(projekt: @projekt).order(created_at: :desc)
 
     @default_footer_tab_setting = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_custom_feature.default_footer_tab')
-    @default_footer_tab_options = get_default_footer_tab_selection_options(@projekt)
   end
 
   def quick_update
@@ -119,11 +143,24 @@ class Admin::ProjektsController < Admin::BaseController
   private
 
   def projekt_params
-    params.require(:projekt).permit(:name, :parent_id, :total_duration_start, :total_duration_end, :color, :icon, :geozone_affiliated, geozone_affiliation_ids: [],
-                                    debate_phase_attributes: [:id, :start_date, :end_date, :active, :geozone_restricted, geozone_restriction_ids: [] ],
-                                    proposal_phase_attributes: [:id, :start_date, :end_date, :active, :geozone_restricted, geozone_restriction_ids: [] ],
-                                    map_location_attributes: map_location_attributes,
-                                    projekt_notifications: [:title, :body])
+    attributes = [
+      :name, :parent_id, :total_duration_start, :total_duration_end, :color, :icon, :geozone_affiliated, :tag_list, :related_sdg_list, geozone_affiliation_ids: [], sdg_goal_ids: [],
+      comment_phase_attributes: [:id, :start_date, :end_date, :geozone_restricted, geozone_restriction_ids: [] ],
+      debate_phase_attributes: [:id, :start_date, :end_date, :geozone_restricted, geozone_restriction_ids: [] ],
+      proposal_phase_attributes: [:id, :start_date, :end_date, :geozone_restricted, geozone_restriction_ids: [] ],
+      budget_phase_attributes: [:id, :start_date, :end_date, :geozone_restricted, geozone_restriction_ids: [] ],
+      voting_phase_attributes: [:id, :start_date, :end_date, :geozone_restricted, geozone_restriction_ids: [] ],
+      milestone_phase_attributes: [:id, :start_date, :end_date],
+      map_location_attributes: map_location_attributes,
+      image_attributes: image_attributes,
+      projekt_notifications: [:title, :body]
+    ]
+    params.require(:projekt).permit(attributes, translation_params(Projekt))
+  end
+
+  def process_tags
+    params[:projekt][:tag_list] = (params[:projekt][:tag_list_predefined] || "")
+    params[:projekt].delete(:tag_list_predefined)
   end
 
   def map_location_params
@@ -140,16 +177,5 @@ class Admin::ProjektsController < Admin::BaseController
 
   def load_geozones
     @geozones = Geozone.all.order(:name)
-  end
-
-  def get_default_footer_tab_selection_options(projekt)
-    projekt_footer_tab_keys = [
-      "projekt_feature.footer.show_activity_in_projekt_footer",
-      "projekt_feature.footer.show_comments_in_projekt_footer",
-      "projekt_feature.footer.show_notifications_in_projekt_footer",
-      "projekt_feature.footer.show_milestones_in_projekt_footer",
-      "projekt_feature.footer.show_newsfeed_in_projekt_footer"
-    ]
-    ProjektSetting.where(key: projekt_footer_tab_keys, value: 'active', projekt: projekt)
   end
 end

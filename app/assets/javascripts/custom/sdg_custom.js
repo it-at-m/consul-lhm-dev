@@ -76,12 +76,6 @@
         var selectedValue = event.target.value;
         App.SDGCustom.updateSDGFilterTargets(selectedValue);
       });
-
-      $("body").on("click", ".js-sdg-custom-target-filter-tag", function(event) {
-        event.preventDefault();
-        var selectedValue = event.target.getAttribute('data-code');
-        App.SDGCustom.updateSDGFilterTargets(selectedValue, 'tag');
-      });
     }
   };
 }).call(this);

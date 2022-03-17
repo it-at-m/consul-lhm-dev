@@ -1,0 +1,77 @@
+<% provide :title do %>
+  <%= t("admin.header.title") %> - <%= t("admin.menu.proposals") %> - <%= @deficiency_report.title %>
+<% end %>
+
+<div class="deficiency_report-show">
+  <h2 class="inline-block"><%= @deficiency_report.title %></h2>
+</div>
+
+<% if @deficiency_report.category&.present? %>
+  <div class='margin-bottom'>
+    <h5><%= t('custom.admin.deficiency_reports.show.category') %></h5>
+    <%= @deficiency_report.category&.name %>
+  </div>
+<% end %>
+
+<% if @deficiency_report.status&.present? %>
+  <div class='margin-bottom'>
+    <h5><%= t('custom.admin.deficiency_reports.show.status') %></h5>
+    <%= @deficiency_report.status&.title %>
+  </div>
+<% end %>
+
+<% if @deficiency_report.summary.present? %>
+  <div class='margin-bottom'>
+    <h5><%= t('custom.admin.deficiency_reports.show.summary') %></h5>
+    <%= @deficiency_report.summary %>
+  </div>
+<% end %>
+
+<% if @deficiency_report.description.present? %>
+  <div class='margin-bottom'>
+    <h5><%= t('custom.admin.deficiency_reports.show.description') %></h5>
+    <%= auto_link_already_sanitized_html wysiwyg(@deficiency_report.description) %>
+  </div>
+<% end %>
+
+<% if @deficiency_report.video_url.present? %>
+  <div class='margin-bottom'>
+    <h5><%= t('custom.admin.deficiency_reports.show.video') %></h5>
+    <%= sanitize_and_auto_link @proposal.video_url %>
+  </div>
+<% end %>
+
+<% if @deficiency_report.video_url.present? %>
+  <div class="small-12 medium-7 small-centered">
+    <div class="flex-video">
+      <div id="js-embedded-video" data-video-code="<%= embedded_video_code(@deficiency_report) %>"></div>
+    </div>
+  </div>
+<% end %>
+
+<% if @deficiency_report.author.username.present? %>
+  <div class='margin-bottom'>
+    <h5><%= t('custom.admin.deficiency_reports.show.author') %></h5>
+    <%= @deficiency_report.author.username %>
+  </div>
+<% end %>
+
+<div class='margin-bottom'>
+  <h5><%= t('custom.admin.deficiency_reports.show.created_at') %></h5>
+  <%= @deficiency_report.created_at %>
+</div>
+
+<div class='margin-bottom'>
+  <h5><%= t('custom.admin.deficiency_reports.show.updated_at') %></h5>
+  <%= @deficiency_report.updated_at %>
+</div>
+
+<div class='margin-bottom'>
+  <h5><%= t('custom.admin.deficiency_reports.show.official_answer') %></h5>
+  <%= @deficiency_report.official_answer %>
+</div>
+
+<div class='margin-bottom'>
+  <h5><%= t('custom.admin.deficiency_reports.show.officer_name') %></h5>
+  <%= @deficiency_report.officer&.name %>
+</div>

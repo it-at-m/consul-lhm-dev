@@ -21,74 +21,44 @@
       <% if @custom_page.projekt.present? %>
         <%= breadcrumbs_links(@custom_page.projekt) %>
       <% end %>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="small-12 medium-9 column">
-      <h1><%= @custom_page.title %></h1>
-      <% if @custom_page.subtitle.present? %>
-        <h2><%= @custom_page.subtitle %></h2>
-      <% end %>
-    </div>
-  </div>
-
-  <% if @custom_page.projekt.present? %>
-    <div class="row">
-      <div class="small-12 medium-9 column margin-bottom">
-        <%= render 'custom_page_content' %>
+      <div class="row">
+        <div class="small-12 medium-9 column">
+          <h1><%= @custom_page.title %></h1>
+          <% if @custom_page.subtitle.present? %>
+            <h2><%= @custom_page.subtitle %></h2>
+          <% end %>
+        </div>
       </div>
 
-      <div class="small-12 medium-3 column">
-        <%= render partial: 'pages/sidebar/projekts_sidebar', locals: { projekt: @custom_page.projekt } %>
-      </div>
-    </div>
+      <% if @custom_page.projekt.present? %>
+        <div class="row">
+          <div class="small-12 medium-9 column margin-bottom">
+            <%= render 'custom_page_content' %>
+          </div>
 
-  <% else %>
-    <div class="row">
-      <div class="small-12 medium-9 column margin-bottom">
-        <%= render 'custom_page_content' %>
-      </div>
-    </div>
-
-  <% end %>
-
-  <% if @custom_page.projekt.present? && projekt_feature?(@custom_page.projekt, 'footer.show_projekt_footer') %>
-    <div class="row">
-      <div class="small-12 column">
-        <div class="additional-content projekt-footer margin-top">
-          <div class="filter-subnav">
-            <%= render partial: "pages/projekt_footer/filter_subnav", locals: { projekt: @custom_page.projekt  } %>
+          <div class="small-12 medium-3 column margin-bottom">
+            <%= render partial: 'pages/sidebar', locals: { projekt: @custom_page.projekt } %>
           </div>
         </div>
-      </div>
+
+      <% else %>
+        <%= render 'custom_page_content' %>
+      <% end %>
+
     </div>
+  </div>
 
-    <div class="tabs-content" data-tabs-content="projekt-footer-tabs">
+  <% if @custom_page.projekt.present? && projekt_feature?(@custom_page.projekt, 'footer.show_projekt_footer') %>
+    <%= render Pages::Projekts::FooterPhasesComponent.new(@custom_page.projekt, @default_phase_name) %>
 
-      <% if projekt_feature?(@custom_page.projekt, 'footer.show_activity_in_projekt_footer') %>
-        <%= render partial: "pages/projekt_footer/activities", locals: { projekt: @custom_page.projekt } %>
-      <% end %>
-
-      <% if projekt_feature?(@custom_page.projekt, 'footer.show_comments_in_projekt_footer') %>
-        <div class="tabs-panel <%= active_tab_in_projekt_footer?(@custom_page.projekt, 'footer.show_comments_in_projekt_footer') %>" id="tab-comments">
-          <%= render partial: "pages/projekt_footer/comments", locals: { projekt: @custom_page.projekt } %>
-        </div>
-      <% end %>
-
-      <% if projekt_feature?(@custom_page.projekt, 'footer.show_notifications_in_projekt_footer') %>
-        <%= render partial: "pages/projekt_footer/notifications", locals: { projekt: @custom_page.projekt } %>
-      <% end %>
-
-      <% if projekt_feature?(@custom_page.projekt, 'footer.show_milestones_in_projekt_footer') %>
-        <%= render "milestones/milestones", milestoneable: @custom_page.projekt, is_active_tab: active_tab_in_projekt_footer?(@custom_page.projekt, 'footer.show_milestones_in_projekt_footer') %>
-      <% end %>
-
-      <% if projekt_feature?(@custom_page.projekt, 'footer.show_newsfeed_in_projekt_footer') &&
-            ProjektSetting.find_by(projekt: @custom_page.projekt, key: "projekt_newsfeed.id").value.present? &&
-            ProjektSetting.find_by(projekt: @custom_page.projekt, key: "projekt_newsfeed.type").value.present? %>
-        <%= render partial: "pages/projekt_footer/newsfeed", locals: { projekt: @custom_page.projekt } %>
-      <% end %>
+    <div id='footer-content'>
+      <%= render 'shared/loader_spinner' %>
+      <%= render "pages/projekt_footer/#{@default_phase_name}" %>
     </div>
   <% end %>
 </main>
+
+<script>
+  App.Projekts.toggleDefaultProjekts();
+</script>

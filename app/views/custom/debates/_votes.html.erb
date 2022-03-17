@@ -69,7 +69,7 @@
         </p>
       </div>
 
-    <% elsif user_signed_in? && debate_phase.present? && !debate_phase.currently_active? %>
+    <% elsif user_signed_in? && debate_phase.present? && !debate_phase.current? %>
       <div class="participation-not-allowed" style="display:none" aria-hidden="false">
         <p>
           <%= sanitize(t("custom.votes.debate_phase_expired")) %>

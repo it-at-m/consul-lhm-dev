@@ -1,5 +1,6 @@
 require_dependency Rails.root.join("app", "models", "budget").to_s
 
 class Budget < ApplicationRecord
-  has_and_belongs_to_many :projekts
+  belongs_to :projekt, optional: true
+  has_one :budget_phase, through: :projekt
 end

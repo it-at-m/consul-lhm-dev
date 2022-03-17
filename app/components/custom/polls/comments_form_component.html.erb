@@ -7,7 +7,7 @@
       <%= t('custom.comments.restricted.geo_limitation', geozones: @poll.geozones.names.join(', ')) %>
 
     <% elsif @poll.expired? %>
-      <%= t('custom.comments.restricted.poll_phase_expired')%>
+      <%= t('custom.comments.restricted.voting_phase_expired')%>
 
     <% elsif !@poll.expired? && !@poll.current?  %>
       <%= t('custom.polls.show.cant_answer_not_started_yet', start_date: @poll.starts_at.strftime("%d.%m.%Y"), end_date: @poll.ends_at.strftime("%d.%m.%Y") )%>

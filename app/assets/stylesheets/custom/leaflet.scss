@@ -43,6 +43,7 @@
 
 .expand-overview-map-wrapper {
   position: relative;
+  z-index: 1;
 
   .expand-overview-map {
     cursor: pointer;

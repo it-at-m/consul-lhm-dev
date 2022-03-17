@@ -31,6 +31,7 @@ def random_locales_attributes(**attribute_names_with_values)
   end
 end
 
+require_relative "dev_seeds/projekts"
 require_relative "dev_seeds/settings"
 require_relative "dev_seeds/geozones"
 require_relative "dev_seeds/users"

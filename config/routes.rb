@@ -63,7 +63,19 @@ Rails.application.routes.draw do
   get "help/faq",         to: "pages#show", id: "faq",                    as: "faq"
 
   # Static pages
-  resources :pages, path: "/", only: [:show]
+  resources :pages, path: "/", only: [:show] do
+    member do
+      get :comment_phase_footer_tab
+      get :debate_phase_footer_tab
+      get :proposal_phase_footer_tab
+      get :voting_phase_footer_tab
+      get :budget_phase_footer_tab
+      get :milestone_phase_footer_tab
+      get :projekt_notifications_footer_tab
+      get :newsfeed_footer_tab
+      get :extended_sidebar_map
+    end
+  end
 
   # Post open answers
   post "polls/questions/:id/answers/update_open_answer",   to: "polls/questions#update_open_answer", as: :update_open_answer

@@ -175,53 +175,53 @@
 
 .sidebar-filter-group {
   display: flex;
-	margin-top: 1em;
+  margin-top: 1em;
 
-	.sidebar-filter-button {
-		flex-grow: 1;
-		background: $secondary;
-		color: $black;
-		border-radius: 3px;
+  .sidebar-filter-button {
+    flex-grow: 1;
+    background: $secondary;
+    color: $brand;
+    border-radius: 3px;
     margin-right: 0.5rem;
     height: 2.5rem;
     line-height: 2.5rem;
     text-align: center;
-	}
+  }
 
-	.sidebar-filter-button:hover,
-	.sidebar-filter-button:focus {
-		color: $white;
-		background: $brand;
-		text-decoration:none;
-		cursor:pointer;
-	}
+  .sidebar-filter-button:hover,
+  .sidebar-filter-button:focus {
+    color: $white;
+    background: $brand;
+    text-decoration:none;
+    cursor:pointer;
+  }
 
-	.sidebar-reset-filter-button {
+  .sidebar-reset-filter-button {
     position: relative;
     width: 20px;
     height: 20px;
     background: #ececec;
     cursor: pointer;
-		border-radius: 3px;
+    border-radius: 3px;
     height: 2.5rem;
     width: 2.5rem;
     color: #9a9a9a;
-	}
+  }
 
-	.sidebar-reset-filter-button:hover,
-	.sidebar-reset-filter-button:focus {
+  .sidebar-reset-filter-button:hover,
+  .sidebar-reset-filter-button:focus {
     background: #ddd;
   }
 
-	.sidebar-reset-filter-button:before {
-		content: "\f2ed";
-		font-weight: bold;
-		font-family: "Font Awesome 5 Free";
+  .sidebar-reset-filter-button:before {
+    content: "\f2ed";
+    font-weight: bold;
+    font-family: "Font Awesome 5 Free";
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-	}
+  }
 
 }
 
@@ -254,9 +254,9 @@
 .milestone-content blockquote {
   background-color: $secondary;
   font-size: 1.25em;
-	padding-top: 10px;
-	padding-bottom: 8px;
-	color: $black;
+  padding-top: 10px;
+  padding-bottom: 8px;
+  color: $black;
 }
 
 
@@ -264,12 +264,11 @@
   color: #c2c2c2;
 }
 
-.paid-feature:before {
+.paid-feature:after {
   content: "\f3d1";
   font-weight: bold;
   font-family: "Font Awesome 5 Free";
-  position: absolute;
-  right: -30px;
+  margin-left: 5px;
 }
 
 // Overriding foundation
@@ -352,4 +351,23 @@ input.checkbox-label + span {
 
 .pagination .current {
   background-color: #1779ba;
+}
+
+// Toggle arrow
+
+span.toggle-arrow {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 14px;
+  cursor: pointer;
+  color: inherit;
+
+  &:after {
+    content: "\f107";
+    font-family: "Font Awesome 5 Free";
+    font-weight: bold;
+    display: inline-block;
+    transition: 0.25s;
+  }
 }
