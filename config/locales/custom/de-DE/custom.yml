@@ -79,6 +79,7 @@ de:
       settings:
         public_activity: Meine Aktivität veröffentlichen
         public_interests: Vorschläge, denen ich folge, veröffentlichen
+        custom_analytics_cookies_enabled: Optionale Cookies für anonyme Statistiken erlauben
 
         email_on_comment: E-Mail-Benachrichtigung erhalten, bei Kommentare zu meinen Aktivitäten
         email_on_comment_reply: E-Mail-Benachrichtigung erhalten, bei Antworten auf meine Kommentare

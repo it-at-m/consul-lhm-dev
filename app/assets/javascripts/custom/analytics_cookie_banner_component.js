@@ -90,7 +90,10 @@
 
       if (this.isCookiePreferenceAlreadyStored()) return
 
-      this.open()
+      if (window.location.pathname !== '/account') {
+        this.open()
+      }
+
       this.setupEventListeners()
     }
   };

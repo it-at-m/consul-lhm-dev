@@ -11,14 +11,13 @@
       Funktionen der Seite zur Verfügung stehen.
     </p>
     <p>
-      Sie können Ihre Entscheidung jederzeit ändern, indem Sie auf die den Link
-      „Zustimmung zurückziehen“ am Ende der Webseite klicken.
+    Sie können Ihre Entscheidung jederzeit ändern, indem Sie die Einstellungen in Ihrem <a href="<%= account_path %>">Konto</a> ändern.
     </p>
   </div>
 
   <div class="row analytics-cookie-banner--option-row">
     <div class="row analytics-cookie-banner--option-input">
-      <%= check_box_tag 'accept-cookies-disabled', nil, nil, disabled: true %>
+      <%= check_box_tag 'accept-cookies-disabled', nil, true, disabled: true %>
       <%= label_tag 'accept-cookies-disabled', 'Essenzielle Cookies' %>
     </div>
     <div class="analytics-cookie-banner--option-caption">
