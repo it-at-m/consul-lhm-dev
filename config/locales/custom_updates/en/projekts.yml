@@ -3,6 +3,8 @@ en:
     projekts:
       index:
         title: Projects overview
+        current_projekts: Current projekts
+        expired_projekts: Expired projekts
       backlink: To the project overview
       errors:
         presence: Please select a project

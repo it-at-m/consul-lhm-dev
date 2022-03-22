@@ -3,6 +3,8 @@ de:
     projekts:
       index:
         title: Projektübersicht
+        current_projekts: Projekte mit aktiver Beteiligungsphase
+        expired_projekts: Abgeschlossene Projekte
       backlink: Zur Projektübersicht
       errors:
         presence: Bitte wählen Sie ein Projekt

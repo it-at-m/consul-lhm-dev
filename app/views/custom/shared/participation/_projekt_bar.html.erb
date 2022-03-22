@@ -4,7 +4,7 @@
   </div>
 
   <div class='show-for-large'>
-    <% if action_name == 'index'%>
+    <% if action_name == 'index' && controller_name.in?(['proposals', 'debates', 'polls'])  %>
       <% unless resource.author.name.blank? %>
         <%= link_to resource.author.name, resource.author %>
       <% end%>
@@ -13,10 +13,12 @@
         <%= render partial: "proposals/proposal/participation_label", locals: { proposal: resource } %>
       <% end %>
 
-    <% elsif action_name == 'show' %>
+    <% elsif action_name == 'show' && controller_name.in?(['proposals', 'debates', 'polls']) %>
       <%= link_to t("custom.shared.show.back_link", resources: resource.model_name.human(count: 2)), (taggables_path(resource.class.name.underscore, '') + "&projekts=#{resource.projekt.id}") %>
+
+    <% elsif controller_name == 'pages' %>
+        <%= link_to resource.author.name, resource.author %>
 
     <% end%>
   </div>
 </div>
-

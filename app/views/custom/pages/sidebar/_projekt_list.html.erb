@@ -6,7 +6,7 @@
     <li class="projekt-navigator <%= current_projekt_class %>" aria-expanded=<%= toggle_projekt %>>
       <%= prepare_projekt_name(projekt, 'mobile') %>
 
-      <% if projekt.children.any? %>
+      <% if projekt.children.with_order_number.activated.any? %>
         <span class='js-icon-toggle-child-projekts toggle-arrow focusable js-prevent-key-scroll'
               role="button"
               tabindex="0"
@@ -17,8 +17,8 @@
 
     </li>
 
-    <% if projekt.children.any? %>
-      <%= render partial: 'pages/sidebar/projekt_list', locals: { projekts: projekt.children.with_order_number, current_projekt: current_projekt } %>
+    <% if projekt.children.with_order_number.activated.any? %>
+      <%= render partial: 'pages/sidebar/projekt_list', locals: { projekts: projekt.children.with_order_number.activated, current_projekt: current_projekt } %>
     <% end %>
   </ul>
 <% end %>

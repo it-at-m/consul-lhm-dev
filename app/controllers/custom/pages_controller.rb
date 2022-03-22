@@ -131,8 +131,9 @@ class PagesController < ApplicationController
   end
 
   def set_top_level_projekts
-    @top_level_active_projekts = Projekt.where( id: @current_projekt.top_parent ).selectable_in_sidebar_current(@current_tab_phase.resources_name)
-    @top_level_archived_projekts = Projekt.where( id: @current_projekt.top_parent ).selectable_in_sidebar_expired(@current_tab_phase.resources_name)
+    @top_level_active_projekts = Projekt.where( id: @current_projekt.top_parent ).select { |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.current? && ( p.send(@current_tab_phase.resources_name).any? || p.has_active_phase?(@current_tab_phase.resources_name) ) } }
+
+    @top_level_archived_projekts = Projekt.where( id: @current_projekt.top_parent ).select { |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.expired? && p.send(@current_tab_phase.resources_name).any? } }
   end
 
   def set_comments_footer_tab_variables(projekt=nil)
