@@ -145,17 +145,9 @@
         layers: 'gsm:g_luftbild'
       });
 
-      var overlayStadtRadeln = L.tileLayer.wms(mapTilesProvider, {
+      var handlungsraumLayer = L.tileLayer.wms(mapTilesProvider, {
         attribution: mapAttribution,
-        layers: 'gsm:aktion_stadtradeln',
-        format: 'image/png',
-        transparent: true
-      });
-
-
-      var overlayStadtNeueRadwegeXXII = L.tileLayer.wms(mapTilesProvider, {
-        attribution: mapAttribution,
-        layers: 'gsm:rad_consulrouten_utm',
+        layers: 'hr3_polygon_211216_bayern',
         format: 'image/png',
         transparent: true
       });
@@ -165,12 +157,6 @@
         "Luftbild": baseLayerLuftbild
       };
 
-      var overlayMaps = {
-        "Radwege": overlayStadtRadeln,
-        "Geplante Radrouten Stadtbezirk 22": overlayStadtNeueRadwegeXXII
-      };
-
-
       mapCenterLatLng = new L.LatLng(mapCenterLatitude, mapCenterLongitude);
 
       map = L.map(element.id, {
@@ -179,8 +165,14 @@
       }).setView(mapCenterLatLng, zoom);
 
       baseMaps['Gesamt'].addTo(map);
+      handlungsraumLayer.addTo(map);
 
-      L.control.layers(baseMaps, overlayMaps).addTo(map);
+      // L.control.layers(baseMaps).addTo(map);
+
+      // map.on('baselayerchange', function() {
+      //   handlungsraumLayer.addTo(map);
+      //   handlungsraumLayer.bringToFront();
+      // });
 
       if ( !editable ) {
         map._layersMaxZoom = 19;
