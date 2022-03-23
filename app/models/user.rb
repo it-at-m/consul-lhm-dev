@@ -75,7 +75,7 @@ class User < ApplicationRecord
   belongs_to :geozone
 
   validates :username, presence: true, if: proc { |user| user.username_required? && !user.registering_with_oauth }
-  validates :username, uniqueness: { scope: :registering_with_oauth }, if: :username_required?
+  validates :username, uniqueness: { scope: :registering_with_oauth }, allow_blank: true, if: :username_required?
   validates :document_number, uniqueness: { scope: :document_type }, allow_nil: true
 
   validate :validate_username_length
