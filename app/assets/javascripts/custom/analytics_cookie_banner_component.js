@@ -1,14 +1,18 @@
 (function() {
   "use strict";
   App.AnalyticsCookieBannerCustom = {
-    analyticsCookieName: 'analytics_cookies_accepted',
+    analyticsCookieName: 'statistic_cookies_enabled',
+
+    element: function() {
+      return $('#statistic-cookie-modal')
+    },
 
     open: function() {
-      $('#model-question').foundation('open')
+      this.element().foundation('open')
     },
 
     close: function() {
-      $('#model-question').foundation('close')
+      this.element().foundation('close')
     },
 
     confirm: function() {
@@ -17,7 +21,7 @@
       App.Cookies.saveCookie(this.analyticsCookieName, analyticsCookiesAccepted.toString(), 360)
 
       this.close()
-      this.enableMatomoIfEnabled()
+      this.enableMatomoIfAllowed()
     },
 
     reject: function() {
@@ -78,15 +82,29 @@
       })();
     },
 
-    enableMatomoIfEnabled: function() {
-      if (this.isAnalyticsEnabled()) {
+    enableMatomoIfAllowed: function() {
+      var analyticsCookieEnabledAsUserSetting = (this.analyticsCookieSettingForUserIsSet() && this.analyticsCookieSettingForUserEnabled())
+
+      if (analyticsCookieEnabledAsUserSetting && this.isAnalyticsEnabled()) {
         this.enableMatomo()
       }
     },
 
+    analyticsCookieSetting: function() {
+      return this.element().attr('data-statistic-cookie-enabled')
+    },
+
+    analyticsCookieSettingForUserIsSet: function() {
+      return (this.analyticsCookieSetting() === 'true' || this.analyticsCookieSetting() === 'false')
+    },
+
+    analyticsCookieSettingForUserEnabled: function() {
+      return (this.analyticsCookieSetting() === 'true')
+    },
+
     initialize: function() {
       this.hideGDPRNotice()
-      this.enableMatomoIfEnabled()
+      this.enableMatomoIfAllowed()
 
       if (this.isCookiePreferenceAlreadyStored()) return
 

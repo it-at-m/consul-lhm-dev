@@ -1,8 +1,8 @@
-<div class="reveal analytics-cookie-banner" id='model-question' data-reveal>
+<div class="reveal statistic-cookie-modal" id='statistic-cookie-modal' data-reveal data-statistic-cookie-enabled="<%= helpers.current_user&.custom_statistic_cookies_enabled %>">
   <h2>
     Cookie Einstellungen
   </h2>
-  <div class="analytics-cookie-banner--text">
+  <div class="statistic-cookie-modal--text">
     <p>
       Um Ihnen die Informationen und den Komfort dieser Seite weiterhin zur
       Verfügung stellen zu können, brauchen wir Ihre Zustimmung für die
@@ -15,22 +15,22 @@
     </p>
   </div>
 
-  <div class="row analytics-cookie-banner--option-row">
-    <div class="row analytics-cookie-banner--option-input">
+  <div class="row statistic-cookie-modal--option-row">
+    <div class="row statistic-cookie-modal--option-input">
       <%= check_box_tag 'accept-cookies-disabled', nil, true, disabled: true %>
       <%= label_tag 'accept-cookies-disabled', 'Essenzielle Cookies' %>
     </div>
-    <div class="analytics-cookie-banner--option-caption">
+    <div class="statistic-cookie-modal--option-caption">
      Um die Funktionalität dieser Webseite zu garantieren, werden anonyme
      Informationen für die Dauer Ihres Besuches gespeichert.
     </div>
   </div>
-  <div class="row analytics-cookie-banner--option-row">
-    <div class="row analytics-cookie-banner--option-input">
+  <div class="row statistic-cookie-modal--option-row">
+    <div class="row statistic-cookie-modal--option-input">
       <%= check_box_tag 'accept-analytics-cookies', nil, nil, class: 'js-accept-analytics-cookies' %>
       <%= label_tag 'accept-analytics-cookies', 'Optional: Statistik-Cookie' %>
     </div>
-    <div class="analytics-cookie-banner--option-caption">
+    <div class="statistic-cookie-modal--option-caption">
       Dieser Cookie dient zur Erstellung von nicht personalisierten Statistiken.
       Es werden keine auf Personen beziehbare Daten gespeichert. Wird er
       deaktiviert, wird der Seitenzugriff nicht für die Website-Statistik
@@ -38,7 +38,7 @@
     </div>
   </div>
 
-  <div class="analytics-cookie-banner--actions-row">
+  <div class="statistic-cookie-modal--actions-row">
     <button type="button" class="button js-analytics-cookies-reject-button">
       Einstellungen speichern
     </button>
