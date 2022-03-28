@@ -11,7 +11,7 @@ class Projekt < ApplicationRecord
   translates :description
   include Globalizable
 
-  has_many :children, class_name: 'Projekt', foreign_key: 'parent_id'
+  has_many :children, -> { order(order_number: :asc) }, class_name: 'Projekt', foreign_key: 'parent_id'
   belongs_to :parent, class_name: 'Projekt', optional: true
 
   has_many :debates, dependent: :nullify
@@ -28,6 +28,8 @@ class Projekt < ApplicationRecord
   has_one :comment_phase, class_name: 'ProjektPhase::CommentPhase'
   has_one :voting_phase, class_name: 'ProjektPhase::VotingPhase'
   has_one :milestone_phase, class_name: 'ProjektPhase::MilestonePhase'
+  has_one :projekt_notification_phase, class_name: 'ProjektPhase::ProjektNotificationPhase'
+  has_one :newsfeed_phase, class_name: 'ProjektPhase::NewsfeedPhase'
   has_many :geozone_restrictions, through: :projekt_phases
   has_and_belongs_to_many :geozone_affiliations, through: :geozones_projekts, class_name: 'Geozone'
   has_one :map_location, dependent: :destroy
@@ -41,8 +43,11 @@ class Projekt < ApplicationRecord
   accepts_nested_attributes_for :debate_phase, :proposal_phase, :budget_phase, :voting_phase, :comment_phase, :milestone_phase, :projekt_notifications
 
   before_validation :set_default_color
-  after_create :create_corresponding_page, :set_order, :create_projekt_phases, :create_default_settings, :create_map_location
   around_update :update_page
+  after_create :create_corresponding_page, :set_order, :create_projekt_phases, :create_default_settings, :create_map_location
+  after_save do
+    Projekt.all.each { |projekt| projekt.update_column('level', projekt.calculate_level) }
+  end
   after_destroy :ensure_projekt_order_integrity
 
   validates :color, format: { with: /\A#[\d, a-f, A-F]{6}\Z/ }
@@ -65,8 +70,7 @@ class Projekt < ApplicationRecord
   scope :with_active_feature, ->(projekt_feature_key) { joins( 'INNER JOIN projekt_settings waf ON projekts.id = waf.projekt_id').
                                                         where( 'waf.key': "projekt_feature.#{projekt_feature_key}", 'waf.value': 'active' ) }
 
-  scope :top_level_navigation_current, -> { top_level.visible_in_menu.current }
-  scope :top_level_navigation_expired, -> { top_level.visible_in_menu.expired }
+  scope :top_level_navigation, -> { top_level.visible_in_menu }
 
   scope :top_level_sidebar_current, ->(controller_name) { top_level.selectable_in_sidebar_current(controller_name) }
   scope :top_level_sidebar_expired, ->(controller_name) { top_level.selectable_in_sidebar_expired(controller_name) }
@@ -93,7 +97,7 @@ class Projekt < ApplicationRecord
 
   def regular_projekt_phases
     projekt_phases.
-      where.not(type: 'ProjektPhase::MilestonePhase')
+      where.not(type: ['ProjektPhase::MilestonePhase', 'ProjektPhase::ProjektNotificationPhase', 'ProjektPhase::NewsfeedPhase' ])
   end
 
   def update_page
@@ -104,6 +108,7 @@ class Projekt < ApplicationRecord
   def selectable?(controller_name, user)
     return true if controller_name == 'polls'
     return false if user.nil?
+    return false if selectable_by_admins_only? && user.administrator.blank?
 
     if controller_name == 'proposals'
       proposal_phase.selectable_by?(user)
@@ -113,7 +118,7 @@ class Projekt < ApplicationRecord
   end
 
   def top_level?
-    order_number.present? && parent.present?
+    order_number.present? && parent.blank?
   end
 
   def activated?
@@ -135,6 +140,13 @@ class Projekt < ApplicationRecord
       total_duration_end < timestamp
   end
 
+  def selectable_by_admins_only?
+    projekt_settings.
+      find_by( projekt_settings: { key: "projekt_feature.general.only_admins_create_debates_proposals" } ).
+      value.
+      present?
+  end
+
   def activated_children
     children.activated
   end
@@ -149,9 +161,9 @@ class Projekt < ApplicationRecord
       comment_phase.current?
   end
 
-  def level(counter = 1)
+  def calculate_level(counter = 1)
     return counter if self.parent.blank?
-    self.parent.level(counter+1)
+    self.parent.calculate_level(counter+1)
   end
 
   def breadcrumb_trail_ids(breadcrumb_trail_ids = [])
@@ -261,6 +273,8 @@ class Projekt < ApplicationRecord
       projekt.comment_phase = ProjektPhase::CommentPhase.create unless projekt.comment_phase
       projekt.voting_phase = ProjektPhase::VotingPhase.create unless projekt.voting_phase
       projekt.milestone_phase = ProjektPhase::MilestonePhase.create unless projekt.milestone_phase
+      projekt.projekt_notification_phase = ProjektPhase::ProjektNotificationPhase.create unless projekt.projekt_notification_phase
+      projekt.newsfeed_phase = ProjektPhase::NewsfeedPhase.create unless projekt.newsfeed_phase
     end
   end
 
@@ -327,6 +341,8 @@ class Projekt < ApplicationRecord
     self.comment_phase = ProjektPhase::CommentPhase.create
     self.voting_phase = ProjektPhase::VotingPhase.create
     self.milestone_phase = ProjektPhase::MilestonePhase.create
+    self.projekt_notification_phase = ProjektPhase::ProjektNotificationPhase.create
+    self.newsfeed_phase = ProjektPhase::NewsfeedPhase.create
   end
 
   def swap_order_numbers_up

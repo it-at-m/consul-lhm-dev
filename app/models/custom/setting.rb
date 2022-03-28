@@ -164,6 +164,7 @@ class Setting < ApplicationRecord
         "extended_feature.general.extended_editor_for_users": true,
         "extended_feature.general.language_switcher_in_menu": false,
         "extended_feature.general.links_to_create_resources_in_menu": false,
+        "extended_option.general.subtitle": 'in der Stadt CONSUL',
         "extended_feature.gdpr.gdpr_conformity": false,
         "extended_feature.gdpr.show_cookie_banner": true,
         "extended_feature.gdpr.link_out_warning": true,

@@ -23,4 +23,7 @@ de:
         deficiency_report_category_id: Kategorie
         video_url: Externes Video URL
         official_answer: Offizielle Antwort
-
+      debate:
+        on_behalf_of: Im Namen von
+      proposal:
+        on_behalf_of: Im Namen von

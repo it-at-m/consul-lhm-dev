@@ -85,22 +85,19 @@ class PagesController < ApplicationController
     end
   end
 
-  def projekt_notifications_footer_tab
-    @current_projekt = Projekt.find(params[:id])
-    @projekt_notifications = @current_projekt.projekt_notifications
+  def projekt_notification_phase_footer_tab
+    set_projekt_notifications_footer_tab_variables
 
     respond_to do |format|
-      format.js { render "pages/projekt_footer/projekt_notifications" }
+      format.js { render "pages/projekt_footer/footer_tab" }
     end
   end
 
-  def newsfeed_footer_tab
-    @current_projekt = Projekt.find(params[:id])
-    @rss_id = ProjektSetting.find_by(projekt: @current_projekt, key: "projekt_newsfeed.id").value
-    @rss_type = ProjektSetting.find_by(projekt: @current_projekt, key: "projekt_newsfeed.type").value
+  def newsfeed_phase_footer_tab
+    set_newsfeed_footer_tab_variables
 
     respond_to do |format|
-      format.js { render "pages/projekt_footer/newsfeed" }
+      format.js { render "pages/projekt_footer/footer_tab" }
     end
   end
 
@@ -247,6 +244,19 @@ class PagesController < ApplicationController
   def set_milestones_footer_tab_variables(projekt=nil)
     @current_projekt = projekt || Projekt.find(params[:id])
     @current_tab_phase = @current_projekt.milestone_phase
+  end
+
+  def set_projekt_notifications_footer_tab_variables(projekt=nil)
+    @current_projekt = projekt || Projekt.find(params[:id])
+    @current_tab_phase = @current_projekt.projekt_notification_phase
+    @projekt_notifications = @current_projekt.projekt_notifications
+  end
+
+  def set_newsfeed_footer_tab_variables(projekt=nil)
+    @current_projekt = projekt || Projekt.find(params[:id])
+    @current_tab_phase = @current_projekt.newsfeed_phase
+    @rss_id = ProjektSetting.find_by(projekt: @current_projekt, key: "projekt_newsfeed.id").value
+    @rss_type = ProjektSetting.find_by(projekt: @current_projekt, key: "projekt_newsfeed.type").value
   end
 
   def default_phase_name

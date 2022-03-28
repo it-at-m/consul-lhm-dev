@@ -102,7 +102,7 @@ en:
         account_link: Account
         notification_item:
           no_notifications: No notifications
-        title_html: "Public Participation<br><span>in the city of"
+        title_html: "Public Participation"
       footer:
         demokratie: demokratie.today
         demokratie_url: https://www.demokratie.today/

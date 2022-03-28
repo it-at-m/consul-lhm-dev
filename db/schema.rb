@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_17_083908) do
+ActiveRecord::Schema.define(version: 2022_03_28_113029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -573,6 +573,7 @@ ActiveRecord::Schema.define(version: 2022_03_17_083908) do
     t.tsvector "tsv"
     t.datetime "featured_at"
     t.bigint "projekt_id"
+    t.string "on_behalf_of"
     t.index ["author_id", "hidden_at"], name: "index_debates_on_author_id_and_hidden_at"
     t.index ["author_id"], name: "index_debates_on_author_id"
     t.index ["cached_votes_down"], name: "index_debates_on_cached_votes_down"
@@ -1467,6 +1468,7 @@ ActiveRecord::Schema.define(version: 2022_03_17_083908) do
     t.string "geozone_affiliated"
     t.string "color"
     t.string "icon"
+    t.integer "level", default: 1
     t.index ["parent_id"], name: "index_projekts_on_parent_id"
   end
 
@@ -1520,6 +1522,7 @@ ActiveRecord::Schema.define(version: 2022_03_17_083908) do
     t.datetime "published_at"
     t.boolean "selected", default: false
     t.bigint "projekt_id"
+    t.string "on_behalf_of"
     t.index ["author_id", "hidden_at"], name: "index_proposals_on_author_id_and_hidden_at"
     t.index ["author_id"], name: "index_proposals_on_author_id"
     t.index ["cached_votes_up"], name: "index_proposals_on_cached_votes_up"
@@ -1863,6 +1866,7 @@ ActiveRecord::Schema.define(version: 2022_03_17_083908) do
     t.string "bam_unique_stamp"
     t.string "keycloak_link"
     t.boolean "custom_analytics_cookies_enabled", default: false
+    t.boolean "custom_newsletter", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["date_of_birth"], name: "index_users_on_date_of_birth"
     t.index ["email"], name: "index_users_on_email", unique: true

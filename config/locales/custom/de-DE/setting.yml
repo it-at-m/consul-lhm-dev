@@ -105,6 +105,9 @@ de:
           enable_projekt_filter_description: Zeigt den Projektfilter in der Abstimmungsübersichtseite
 
       extended_option:
+        general:
+          subtitle: Untertitel der Applikation
+          subtitle_description: Fügt einen Untertitel zur Applikation hinzu.
         gdpr:
           devise_timeout_min: Dauer von Nutzer-Sitzungen
           devise_timeout_min_description: Legen Sie fest, wie lange ein Nutzer pro Sitzung eingeloggt bleiben soll in Minuten
@@ -144,6 +147,8 @@ de:
           show_not_active_phases_in_projekts_page_sidebar_description: Verbirgt die Teilnahmephasen in der rechten Seitenleiste der Projektseite und in der Projektauswahl
           show_map: Karte einblenden
           show_map_description: Zeigt die Karte sowie die Gebietszuordnung in der Applikation an
+          only_admins_create_debates_proposals: Nur Admins können neue Vorschläge und Diskussionen erstellen
+          only_admins_create_debates_proposals_description: Neue Beiträge können nur von Admins erstellt werden. Nutzer:innen können kommentieren und bewerten
         sidebar:
           projekt_page_sharing: Teilen-Funktion
           projekt_page_sharing_description: Aktivieren Sie die Teilen-Funktion in der rechten Seitenleiste der Projektseite
@@ -154,12 +159,6 @@ de:
         footer:
           show_projekt_footer: Fußzeile aktivieren
           show_projekt_footer_description: Aktiviert die Fußzeile am unteren Ende des Projektes
-          show_notifications_in_projekt_footer: Benachrichtigungen
-          show_notifications_in_projekt_footer_description: Aktiviert die Benachrichtigungsfunktion in der Fußzeile eines Projekts
-          show_milestones_in_projekt_footer: Meilensteine
-          show_milestones_in_projekt_footer_description: Aktiviert die Meilensteinfunktion in der Fußzeile eines Projekts
-          show_newsfeed_in_projekt_footer: News-Feed
-          show_newsfeed_in_projekt_footer_description: Aktiviert den News-Feed in der Fußzeile eines Projekts
           comment_info: Kommentarphase
           comment_info_description: Aktiviert die Kommentarphase in der Fußzeile eines Projekts
           debate_info: Diskussionsphase

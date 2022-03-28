@@ -14,18 +14,22 @@
 
       <% if @current_projekts.any? %>
         <h3><%= t('custom.projekts.index.current_projekts') %></h3>
-      <% end %>
 
-      <% @current_projekts.each do |projekt| %>
-        <%= render partial: 'projekt', locals: { projekt: projekt } %>
+        <% Projekt.top_level.each do |top_level_projekt| %>
+          <% top_level_projekt.all_children_projekts.unshift(top_level_projekt).each do |projekt| %>
+            <%= render partial: 'projekt', locals: { projekt: projekt } if projekt.in? @current_projekts %>
+          <% end %>
+        <% end %>
       <% end %>
 
       <% if @expired_projekts.any? %>
         <h3 class='margin-top'><%= t('custom.projekts.index.expired_projekts') %></h3>
-      <% end %>
 
-      <% @expired_projekts.each do |projekt| %>
-        <%= render partial: 'projekt', locals: { projekt: projekt } %>
+        <% Projekt.top_level.each do |top_level_projekt| %>
+          <% top_level_projekt.all_children_projekts.unshift(top_level_projekt).each do |projekt| %>
+            <%= render partial: 'projekt', locals: { projekt: projekt } if projekt.in? @expired_projekts %>
+          <% end %>
+        <% end %>
       <% end %>
 
     </div>

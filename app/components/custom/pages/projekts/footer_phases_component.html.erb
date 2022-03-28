@@ -3,14 +3,16 @@
     <div class="small-12 column">
       <div style='display:flex;justify-content:space-between;align-items:end;'>
         <h3><%= "Beteiligung" %></h3>
-        <div class='arrow-controls'>
-          <div id='left-arrow-control' class='js-left-arrow-control disabled'>
-            <i class="fas fa-chevron-circle-left"></i>
+        <% if @phases.size > 4 %>
+          <div class='arrow-controls'>
+            <div id='left-arrow-control' class='js-left-arrow-control disabled'>
+              <i class="fas fa-chevron-circle-left"></i>
+            </div>
+            <div id='right-arrow-control' class='js-right-arrow-control'>
+              <i class="fas fa-chevron-circle-right"></i>
+            </div>
           </div>
-          <div id='right-arrow-control' class='js-right-arrow-control'>
-            <i class="fas fa-chevron-circle-right"></i>
-          </div>
-        </div>
+        <% end %>
       </div>
 
 
@@ -60,27 +62,27 @@
             </li>
           <% end %>
 
-          <% if projekt_feature?(@projekt, 'footer.show_notifications_in_projekt_footer') %>
-            <li id="filter-subnav-projekt_notifications" class="page-subnav-tab <%= 'is-active' if default_phase_name == 'projekt_notifications' %>">
-              <%= link_to "/#{projekt.id}/projekt_notifications_footer_tab", remote: true, onclick: '$("#footer-content").addClass("show-loader")' do %>
+          <% if projekt_notification_phase.phase_info_activated? %>
+            <li id="filter-subnav-<%= projekt_notification_phase.resources_name %>" class="page-subnav-tab <%= 'is-active' if projekt_notification_phase.resources_name == default_phase_name %>">
+              <%= link_to "/#{projekt.id}/#{projekt_notification_phase.name}_footer_tab", remote: true, onclick: '$("#footer-content").addClass("show-loader")' do %>
                 <h4>
-                  <%= t("custom.projekts.page.tabs.projekt_notifications") %>
+                  <%= t("custom.projekts.page.tabs.#{projekt_notification_phase.resources_name}") %>
                   <%= "(#{projekt.projekt_notifications.count})" %>
                 </h4>
                 <div class='tab-info-summary'>
                   <% if @projekt.projekt_notifications.any? %>
-                    <span class='time-icon'><%= format_date(@projekt.projekt_notifications.last.created_at.to_date) %></span>
+                  <span class='time-icon'><%= format_date(@projekt.projekt_notifications.last.updated_at.to_date) %></span>
                   <% end %>
                 </div>
               <% end %>
             </li>
           <% end %>
 
-          <% if projekt_feature?(@projekt, 'footer.show_newsfeed_in_projekt_footer') %>
-            <li id="filter-subnav-newsfeed" class="page-subnav-tab <%= 'is-active' if default_phase_name == 'newsfeed' %>">
-              <%= link_to "/#{projekt.id}/newsfeed_footer_tab", remote: true, onclick: '$("#footer-content").addClass("show-loader")' do %>
+          <% if newsfeed_phase.phase_info_activated? %>
+            <li id="filter-subnav-<%= newsfeed_phase.resources_name %>" class="page-subnav-tab <%= 'is-active' if newsfeed_phase.resources_name == default_phase_name %>">
+              <%= link_to "/#{projekt.id}/#{newsfeed_phase.name}_footer_tab", remote: true, onclick: '$("#footer-content").addClass("show-loader")' do %>
                 <h4>
-                  <%= t("custom.projekts.page.tabs.newsfeed") %>
+                  <%= t("custom.projekts.page.tabs.#{newsfeed_phase.resources_name}") %>
                 </h4>
               <% end %>
             </li>

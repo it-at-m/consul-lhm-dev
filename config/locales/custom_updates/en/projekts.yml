@@ -42,3 +42,8 @@ en:
         voting_phase: Abstimmungen
         budget_phase: Budget
         milestone_phase: Milestones
+        milestone_phase_details:
+          start: Start
+          ending: Planned end
+        projekt_notification_phase: Notifications
+        newsfeed_phase: Newsfeed

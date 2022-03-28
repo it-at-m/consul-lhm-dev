@@ -3,7 +3,7 @@ require_dependency Rails.root.join("app", "controllers", "application_controller
 
 class ApplicationController < ActionController::Base
 
-  before_action :set_top_level_active_and_archived_projekts_for_menu, :set_default_social_media_images
+  before_action :set_top_level_projekts_for_menu, :set_default_social_media_images
 
   private
 
@@ -15,9 +15,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def set_top_level_active_and_archived_projekts_for_menu
-    @top_level_active_projekts_for_menu =Projekt.top_level_navigation_current
-    @top_level_archived_projekts_for_menu = Projekt.top_level_navigation_expired
+  def set_top_level_projekts_for_menu
+    @top_level_projekts_for_menu =Projekt.top_level_navigation
   end
 
   def set_default_social_media_images

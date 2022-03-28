@@ -1,9 +1,10 @@
 <h2><%= t("custom.admin.settings.index.extended_features.general") %></h2>
 <%= render "extended_features_table", features: @extended_feature_general, options: @extended_option_settings, tab: "#tab-extended-features" %>
+<%= render "extended_options_table_no_header", settings: @extended_option_general, setting_name: "setting", tab: "#tab-extended-features" %>
 
 <h2><%= t("custom.admin.settings.index.extended_features.gdpr") %></h2>
 <%= render "extended_features_table", features: @extended_feature_gdpr, options: @extended_option_settings, tab: "#tab-extended-features" %>
-<%= render "extended_options_table_no_header", settings: @extended_option_gdpr, setting_name: "setting", tab: "#tab-extended-options" %>
+<%= render "extended_options_table_no_header", settings: @extended_option_gdpr, setting_name: "setting", tab: "#tab-extended-features" %>
 
 <h2><%= t("custom.admin.settings.index.extended_features.modulewide") %></h2>
 <%= render "extended_features_table", features: @extended_feature_modulewide, options: @extended_option_settings, tab: "#tab-extended-features" %>

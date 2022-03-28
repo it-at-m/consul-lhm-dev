@@ -36,6 +36,13 @@
   <%= f.invisible_captcha :subtitle %>
 
   <fieldset>
+
+    <% if current_user.administrator? || current_user.moderator? %>
+      <div>
+        <%= f.text_field :on_behalf_of %>
+      </div>
+    <% end %>
+
     <% if (extended_feature?("modulewide.enable_categories") && categories.any?) ||
         extended_feature?("modulewide.enable_custom_tags") ||
         SDG::ProcessEnabled.new(f.object).enabled?    %>

@@ -1,54 +1,56 @@
-<% if @top_level_active_projekts.any? || @top_level_archived_projekts.any? %>
-  <div class="sidebar-divider"></div>
+<% cache [ @top_level_active_projekts, @top_level_archived_projekts.any?, @all_resources, @current_projekt, @current_tab_phase, params[:filter_projekt_ids] ] do %>
+  <% if @top_level_active_projekts.any? || @top_level_archived_projekts.any? %>
+    <div class="sidebar-divider"></div>
 
-  <h2 class="sidebar-title projekt-tag-chip-projekt projekt-tag-chip-icon"><%= t("custom.projekts.sidebar_filter.title") %></h2>
+    <h2 class="sidebar-title projekt-tag-chip-projekt projekt-tag-chip-icon"><%= t("custom.projekts.sidebar_filter.title") %></h2>
 
-  <div id='filter-projekts-all' data-resources-name=<%= resource_name_js %> data-projekts-to-toggle=<%= projekts_to_toggle_js %>  >
+    <div id='filter-projekts-all' data-resources-name=<%= resource_name_js %> data-projekts-to-toggle=<%= projekts_to_toggle_js %>  >
 
-    <%= form_with url: form_path, method: :get, local: local_form? do |f| %>
+      <%= form_with url: form_path, method: :get, local: local_form? do |f| %>
 
-      <% if show_archived_projekts_in_sidebar? && @top_level_active_projekts.any? && @top_level_archived_projekts.any? %>
-        <div class='sidebar-projekt-group-name'>
-          <%= t("custom.projekts.sidebar_filter.title_active") %>
-        </div>
-      <% end %>
+        <% if show_archived_projekts_in_sidebar? && @top_level_active_projekts.any? && @top_level_archived_projekts.any? %>
+          <div class='sidebar-projekt-group-name'>
+            <%= t("custom.projekts.sidebar_filter.title_active") %>
+          </div>
+        <% end %>
 
-      <% if @top_level_active_projekts.any? %>
-        <div id='filter-projekts-active'>
-          <% @top_level_active_projekts.each do |projekt| %>
-            <% if @current_tab_phase&.name == 'budget_phase' %>
-              <%= render Sidebar::ProjektsFilterRadioComponent.new(f, projekt, 'active', @all_resources) %>
-            <% else %>
-              <%= render Sidebar::ProjektsFilterCheckboxComponent.new(f, projekt, 'active', @all_resources, @current_projekt) %>
+        <% if @top_level_active_projekts.any? %>
+          <div id='filter-projekts-active'>
+            <% @top_level_active_projekts.each do |projekt| %>
+              <% if @current_tab_phase&.name == 'budget_phase' %>
+                <%= render Sidebar::ProjektsFilterRadioComponent.new(f, projekt, 'active', @all_resources) %>
+              <% else %>
+                <%= render Sidebar::ProjektsFilterCheckboxComponent.new(f, projekt, 'active', @all_resources, @current_projekt) %>
+              <% end %>
             <% end %>
-          <% end %>
-        </div>
-      <% end %>
+          </div>
+        <% end %>
 
 
-      <% if show_archived_projekts_in_sidebar? && @top_level_archived_projekts.any? %>
-        <div class='sidebar-projekt-group-name'>
-          <%= t("custom.projekts.sidebar_filter.title_archived") %>
-        </div>
+        <% if show_archived_projekts_in_sidebar? && @top_level_archived_projekts.any? %>
+          <div class='sidebar-projekt-group-name'>
+            <%= t("custom.projekts.sidebar_filter.title_archived") %>
+          </div>
 
-        <div id='filter-projekts-archived'>
-          <% @top_level_archived_projekts.each do |projekt| %>
-            <% if @current_tab_phase&.name == 'budget_phase' %>
-              <%= render Sidebar::ProjektsFilteRadioComponent.new(f, projekt, 'archived', @all_resources) %>
-            <% else %>
-              <%= render Sidebar::ProjektsFilterCheckboxComponent.new(f, projekt, 'archived', @all_resources, @current_projekt) %>
+          <div id='filter-projekts-archived'>
+            <% @top_level_archived_projekts.each do |projekt| %>
+              <% if @current_tab_phase&.name == 'budget_phase' %>
+                <%= render Sidebar::ProjektsFilteRadioComponent.new(f, projekt, 'archived', @all_resources) %>
+              <% else %>
+                <%= render Sidebar::ProjektsFilterCheckboxComponent.new(f, projekt, 'archived', @all_resources, @current_projekt) %>
+              <% end %>
             <% end %>
-          <% end %>
-        </div>
-      <% end %>
+          </div>
+        <% end %>
 
-      <% if @current_tab_phase&.name != 'budget_phase' %>
-        <div class="sidebar-filter-group">
-          <%= f.submit t('custom.projekts.sidebar_filter.filter_button'), class: 'sidebar-filter-button', onclick: '$(".spinner-placeholder").addClass("show-loader")' %>
-          <%= button_tag '', class: 'js-reset-projekts-filter sidebar-reset-filter-button' %>
-        </div>
-      <% end %>
+        <% if @current_tab_phase&.name != 'budget_phase' %>
+          <div class="sidebar-filter-group">
+            <%= f.submit t('custom.projekts.sidebar_filter.filter_button'), class: 'sidebar-filter-button', onclick: '$(".spinner-placeholder").addClass("show-loader")' %>
+            <%= button_tag '', class: 'js-reset-projekts-filter sidebar-reset-filter-button' %>
+          </div>
+        <% end %>
 
-    <% end %>
-  </div>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>

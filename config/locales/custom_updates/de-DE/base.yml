@@ -105,7 +105,7 @@ de:
         account_link: Konto
         notification_item:
           no_notifications: Keine Benachrichtigungen
-        title_html: "Öffentlichkeitsbeteiligung<br><span>in der Landeshauptstadt"
+        title_html: "Öffentlichkeitsbeteiligung"
       footer:
         demokratie: demokratie.today
         demokratie_url: https://www.demokratie.today/

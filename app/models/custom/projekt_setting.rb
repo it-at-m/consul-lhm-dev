@@ -49,20 +49,23 @@ class ProjektSetting < ApplicationRecord
         "projekt_feature.phase.budget_info": 'active',
         "projekt_feature.phase.milestone": '',
         "projekt_feature.phase.milestone_info": 'active',
+        "projekt_feature.phase.projekt_notification": '',
+        "projekt_feature.phase.projekt_notification_info": 'active',
+        "projekt_feature.phase.newsfeed": '',
+        "projekt_feature.phase.newsfeed_info": 'active',
 
         "projekt_feature.general.show_in_navigation": '',
         "projekt_feature.general.show_in_overview_page": '',
         "projekt_feature.general.hide_additional_info_in_projekt_selector": '',
         "projekt_feature.general.show_not_active_phases_in_projekts_page_sidebar": '',
         "projekt_feature.general.show_map": 'active',
+        "projekt_feature.general.only_admins_create_debates_proposals": '',
 
         "projekt_feature.sidebar.projekt_page_sharing": 'active',
         "projekt_feature.sidebar.show_phases_in_projekt_page_sidebar": 'active',
         "projekt_feature.sidebar.show_navigator_in_projekts_page_sidebar": true,
 
         "projekt_feature.footer.show_projekt_footer": 'active',
-        "projekt_feature.footer.show_notifications_in_projekt_footer": '',
-        "projekt_feature.footer.show_newsfeed_in_projekt_footer": '',
 
         "projekt_newsfeed.id": '',
         "projekt_newsfeed.type": '',

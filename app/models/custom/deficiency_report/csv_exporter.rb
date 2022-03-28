@@ -1,6 +1,7 @@
 class DeficiencyReport::CsvExporter
   require "csv"
   include JsonExporter
+  include ActionView::Helpers::SanitizeHelper
 
   def initialize(deficiency_reports)
     @deficiency_reports = deficiency_reports

@@ -1,6 +1,6 @@
 class Pages::Projekts::FooterPhasesComponent < ApplicationComponent
   delegate :format_date, :format_date_range, :get_projekt_phase_restriction_name, :projekt_feature?, to: :helpers
-  attr_reader :projekt, :default_phase_name, :phases, :milestone_phase
+  attr_reader :projekt, :default_phase_name, :phases, :milestone_phase, :projekt_notification_phase, :newsfeed_phase
 
   def initialize(projekt, default_phase_name)
     @projekt = projekt
@@ -8,6 +8,8 @@ class Pages::Projekts::FooterPhasesComponent < ApplicationComponent
 
     @phases = projekt.regular_projekt_phases.order(:start_date)
     @milestone_phase = projekt.milestone_phase
+    @projekt_notification_phase = projekt.projekt_notification_phase
+    @newsfeed_phase = projekt.newsfeed_phase
 
     scoped_projekt_ids = @projekt.all_children_projekts.unshift(@projekt).pluck(:id)
     @comments_count = @projekt.comments.count

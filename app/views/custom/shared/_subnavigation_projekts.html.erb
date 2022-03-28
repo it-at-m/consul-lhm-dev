@@ -1,5 +1,5 @@
 <% accesskey = 0 %>
-<% @top_level_active_projekts_for_menu.each do |active_projekt| %>
+<% @top_level_projekts_for_menu.each do |active_projekt| %>
   <% accesskey += 1 %>
   <% projekt_children_to_show_in_menu = active_projekt.children_with_active_feature('general.show_in_navigation') %>
 
@@ -26,30 +26,5 @@
 
     <%= render partial: 'shared/subnavigation_flyout_projekts', locals: { projekts: projekt_children_to_show_in_menu.with_order_number, placement: placement } if projekt_children_to_show_in_menu.any? %>
 
-  </li>
-<% end %>
-
-<% if show_archived_projekts_in_menu? && @top_level_archived_projekts_for_menu.any? %>
-  <li class='nav-element top-level-item js-access-top-level-menu js-prevent-key-scroll'
-      <%= "tabindex=0" if placement == "desktop" %>
-      aria-label="<%= t('custom.links.menu.archived_projekts_label') %>"
-      aria-expanded='false'
-      aria-haspopup="true" >
-
-    <div class='flyout-item-name projekt-name'>
-      <%= t('custom.menu.archived') %>
-    </div>
-
-    <% if placement == 'mobile' %>
-      <div class='nav-toggle-arrow js-toggle-mobile-flyout-item focusable'
-           tabindex="0"
-           aria-label='<%= t('custom.links.menu.mobile.arrow_archivied_projekts') %>'
-           aria-haspopup=true
-           aria-expanded=false
-      >
-      </div>
-    <% end %>
-
-    <%= render partial: 'shared/subnavigation_flyout_projekts', locals: { projekts: @top_level_archived_projekts_for_menu, placement: placement } %>
   </li>
 <% end %>

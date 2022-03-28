@@ -41,10 +41,6 @@ module ProjektsHelper
     Setting["projekts.show_archived.sidebar"].present? ? true : false
   end
 
-  def show_archived_projekts_in_menu?
-    Setting["projekts.show_archived.navigation"].present? ? true : false
-  end
-
   def show_affiliation_filter_in_sidebar?
     Setting["extended_feature.modulewide.show_affiliation_filter_in_index_sidebar"].present? ? true : false
   end
@@ -79,15 +75,15 @@ module ProjektsHelper
   end
 
   def debates_overview_link(anchor_text, projekt, class_name)
-    link_to anchor_text, (debates_path + "?projekts=#{projekt.all_children_ids.push(projekt.id).join(',')}"), class: (class_name + ' js-reset-projekt-filter-toggle-status'), data: { projekts: projekt.all_parent_ids.push(projekt.id).join(','), resources: 'debates' }
+    link_to anchor_text, (debates_path + "?#{projekt.all_children_ids.unshift(projekt.id).to_query('filter_projekt_ids')}"), class: (class_name + ' js-reset-projekt-filter-toggle-status'), data: { projekts: projekt.all_parent_ids.push(projekt.id).join(','), resources: 'debates' }
   end
 
   def proposals_overview_link(anchor_text, projekt, class_name)
-    link_to anchor_text, (proposals_path + "?projekts=#{projekt.all_children_ids.push(projekt.id).join(',')}"), class: (class_name + ' js-reset-projekt-filter-toggle-status'), data: { projekts: projekt.all_parent_ids.push(projekt.id).join(','), resources: 'proposals' }
+    link_to anchor_text, (proposals_path + "?#{projekt.all_children_ids.unshift(projekt.id).to_query('filter_projekt_ids')}"), class: (class_name + ' js-reset-projekt-filter-toggle-status'), data: { projekts: projekt.all_parent_ids.push(projekt.id).join(','), resources: 'proposals' }
   end
 
   def polls_overview_link(anchor_text, projekt, class_name)
-    link_to anchor_text, (polls_path + "?projekts=#{projekt.all_children_ids.push(projekt.id).join(',')}"), class: (class_name + ' js-reset-projekt-filter-toggle-status'), data: { projekts: projekt.all_parent_ids.push(projekt.id).join(','), resources: 'polls' }
+    link_to anchor_text, (polls_path + "?#{projekt.all_children_ids.unshift(projekt.id).to_query('filter_projekt_ids')}"), class: (class_name + ' js-reset-projekt-filter-toggle-status'), data: { projekts: projekt.all_parent_ids.push(projekt.id).join(','), resources: 'polls' }
   end
 
   def projekt_phase_active?(projekt, phase_name)

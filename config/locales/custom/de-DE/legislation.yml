@@ -39,7 +39,7 @@ de:
         updated_at: aktualisiert am %{date}
         see_changes: Zusammenfassung der Änderungen anzeigen
         see_comments: Alle Kommentare anzeigen
-        text_toc: Inhaltsverzeichnis
+        text_toc: Inhalt
         text_body: Text
         text_comments: Kommentare
     processes:

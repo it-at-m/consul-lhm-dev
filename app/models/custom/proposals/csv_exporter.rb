@@ -1,6 +1,7 @@
 class Proposals::CsvExporter
   require "csv"
   include JsonExporter
+  include ActionView::Helpers::SanitizeHelper
 
   def initialize(proposals)
     @proposals = proposals
@@ -54,7 +55,7 @@ class Proposals::CsvExporter
         proposal.id.to_s,
         proposal.title,
         proposal.summary,
-        proposal.description,
+        strip_tags(proposal.description),
         proposal.projekt&.name,
         proposal.responsible_name,
         proposal.author.username,

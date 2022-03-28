@@ -1,6 +1,7 @@
 class Debates::CsvExporter
   require "csv"
   include JsonExporter
+  include ActionView::Helpers::SanitizeHelper
 
   def initialize(debates)
     @debates = debates
@@ -56,7 +57,7 @@ class Debates::CsvExporter
       [
         debate.id,
         debate.title,
-        debate.description,
+        strip_tags(debate.description),
         debate.projekt&.name,
         debate.tag_list,
         debate.author.username,

@@ -1,5 +1,3 @@
-<% projekt_level ||= 1 %>
-
 <tr class='projekt-row' aria-expanded=false>
   <%= form_for(projekt,
         url: quick_update_admin_projekt_path(projekt),
@@ -20,7 +18,7 @@
         <%= label_tag t('custom.admin.projekts.index.level') %>
       </div>
       <h2 class='projekt-level-number'>
-        <%= projekt_level %>
+        <%= projekt.level || 'none' %>
       </h2>
     </td>
 
@@ -82,6 +80,6 @@
 
 <% if projekt.children.any? %>
   <% projekt.children.order(order_number: :asc).each do |child_projekt| %>
-    <%= render partial: "projekt", locals: { projekt: child_projekt, projekt_level: projekt_level + 1 } %> 
+    <%= render partial: "projekt", locals: { projekt: child_projekt } %>
   <% end %>
 <% end %>

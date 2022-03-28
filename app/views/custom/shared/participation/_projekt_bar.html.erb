@@ -4,8 +4,10 @@
   </div>
 
   <div class='show-for-large'>
-    <% if action_name == 'index' && controller_name.in?(['proposals', 'debates', 'polls'])  %>
-      <% unless resource.author.name.blank? %>
+    <% if action_name == 'index' && controller_name.in?(['proposals', 'debates', 'polls', 'welcome'])  %>
+      <% if resource.respond_to?(:on_behalf_of) && resource.on_behalf_of.present? %>
+        <%= resource.on_behalf_of %>
+      <% elsif !resource.author.name.blank? %>
         <%= link_to resource.author.name, resource.author %>
       <% end%>
 
@@ -14,10 +16,14 @@
       <% end %>
 
     <% elsif action_name == 'show' && controller_name.in?(['proposals', 'debates', 'polls']) %>
-      <%= link_to t("custom.shared.show.back_link", resources: resource.model_name.human(count: 2)), (taggables_path(resource.class.name.underscore, '') + "&projekts=#{resource.projekt.id}") %>
+      <%= link_to t("custom.shared.show.back_link", resources: resource.model_name.human(count: 2)), resource&.projekt&.parent %>
 
     <% elsif controller_name == 'pages' %>
+      <% if resource.respond_to?(:on_behalf_of) && resource.on_behalf_of.present? %>
+        <%= resource.on_behalf_of %>
+      <% else %>
         <%= link_to resource.author.name, resource.author %>
+      <% end %>
 
     <% end%>
   </div>

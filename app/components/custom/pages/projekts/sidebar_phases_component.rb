@@ -11,7 +11,7 @@ class Pages::Projekts::SidebarPhasesComponent < ApplicationComponent
   private
 
   def phase_name(phase, part=nil)
-    return t("custom.projekts.phase_name.#{phase.name}.#{part}") if part
+    return t("custom.projekts.phase_name.#{phase.name}_details.#{part}") if part
     t("custom.projekts.phase_name.#{phase.name}")
   end
 end

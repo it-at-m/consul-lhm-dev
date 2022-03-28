@@ -1,3 +1,5 @@
-<div data-alert class="callout alert">
-  <%= t("errors.messages.blank").capitalize %>
-</div>
+<% comment.errors.messages.each do |type, message| %>
+  <div data-alert class="callout alert">
+    <%= message.first.capitalize %>
+  </div>
+<% end %>

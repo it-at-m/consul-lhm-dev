@@ -32,7 +32,7 @@ de:
           budget: Budgets
           milestones: Meilensteine
           projekt_notifications: Benachrichtigungen
-          newsfeed: News
+          newsfeed: Nachrichten
       phase_name:
         comment_phase: Kommentare
         debate_phase: Diskussionen
@@ -40,6 +40,8 @@ de:
         voting_phase: Abstimmungen
         budget_phase: Budget
         milestone_phase: Meilensteine
-        milestone_phase:
+        milestone_phase_details:
           start: Umsetzung
           ending: Gepl. Fertigstellung
+        projekt_notification_phase: Benachrichtigungen
+        newsfeed_phase: Newsfeed

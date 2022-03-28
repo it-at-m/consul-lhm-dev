@@ -197,7 +197,7 @@ class ProposalsController
     end
 
     def proposal_params
-      attributes = [:video_url, :responsible_name, :tag_list,
+      attributes = [:video_url, :responsible_name, :tag_list, :on_behalf_of,
                     :terms_of_service, :geozone_id, :projekt_id, :related_sdg_list,
                     image_attributes: image_attributes,
                     documents_attributes: [:id, :title, :attachment, :cached_attachment,

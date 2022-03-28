@@ -57,6 +57,12 @@
   <fieldset>
     <legend><%= t("shared.optional") %></legend>
 
+    <% if current_user.administrator? || current_user.moderator? %>
+      <div>
+        <%= f.text_field :on_behalf_of %>
+      </div>
+    <% end %>
+
     <% if feature?(:allow_attached_documents) %>
       <div class="documents">
         <%= render "documents/nested_documents", f: f %>
