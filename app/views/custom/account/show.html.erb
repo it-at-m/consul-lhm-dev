@@ -11,7 +11,7 @@
 
       <h1 class="inline-block"><%= t("account.show.title") %></h1>
 
-      <%= form_for @account, as: :account, url: account_path do |f| %>
+      <%= form_for @account, as: :account, url: account_path, html: { class: 'js-user-settings-form'}  do |f| %>
         <%= render "shared/errors", resource: @account %>
 
         <div class="row">
@@ -41,7 +41,7 @@
             </div>
 
             <div>
-              <%= f.check_box :custom_statistic_cookies_enabled, {label: t('custom.account.settings.custom_analytics_cookies_enabled')} %>
+              <%= f.check_box :custom_statistic_cookies_enabled, {label: t('custom.account.settings.custom_analytics_cookies_enabled'), class: 'js-user-setting-enable-statistic-cookies'} %>
             </div>
 
             <% if @account.email.present? %>

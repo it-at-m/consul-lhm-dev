@@ -7,6 +7,10 @@
       return $('#statistic-cookie-modal')
     },
 
+    userSetting: function() {
+      return $('.js-user-setting-enable-statistic-cookies')
+    },
+
     open: function() {
       this.element().foundation('open')
     },
@@ -15,10 +19,18 @@
       this.element().foundation('close')
     },
 
+    enableStatisticCookie: function() {
+      App.Cookies.saveCookie(this.analyticsCookieName, true, 360)
+    },
+
+    setStatisticCookie: function(value) {
+      App.Cookies.saveCookie(this.analyticsCookieName, value.toString(), 360)
+    },
+
     confirm: function() {
       var analyticsCookiesAccepted = document.querySelector('.js-accept-analytics-cookies').checked
 
-      App.Cookies.saveCookie(this.analyticsCookieName, analyticsCookiesAccepted.toString(), 360)
+      this.setStatisticCookie(analyticsCookiesAccepted)
 
       this.close()
       this.enableMatomoIfAllowed()
@@ -33,6 +45,15 @@
     setupEventListeners: function() {
       $('.js-analytics-cookies-accept-button').on('click', this.confirm.bind(this))
       $('.js-analytics-cookies-reject-button').on('click', this.reject.bind(this))
+
+      $('.js-user-settings-form').on('submit', function() {
+        var userStatisticCheckbox = document.querySelector('.js-user-setting-enable-statistic-cookies')
+
+        console.log(userStatisticCheckbox)
+        if (userStatisticCheckbox) {
+          this.setStatisticCookie(userStatisticCheckbox.checked)
+        }
+      }.bind(this))
     },
 
     isCookiePreferenceAlreadyStored: function() {
@@ -85,34 +106,34 @@
     enableMatomoIfAllowed: function() {
       var analyticsCookieEnabledAsUserSetting = (this.analyticsCookieSettingForUserIsSet() && this.analyticsCookieSettingForUserEnabled())
 
-      if (analyticsCookieEnabledAsUserSetting && this.isAnalyticsEnabled()) {
+      if (analyticsCookieEnabledAsUserSetting || this.isAnalyticsEnabled()) {
         this.enableMatomo()
       }
     },
 
-    analyticsCookieSetting: function() {
+    analyticsUserSettingEnabled: function() {
       return this.element().attr('data-statistic-cookie-enabled')
     },
 
     analyticsCookieSettingForUserIsSet: function() {
-      return (this.analyticsCookieSetting() === 'true' || this.analyticsCookieSetting() === 'false')
+      return (this.analyticsUserSettingEnabled() === 'true' || this.analyticsUserSettingEnabled() === 'false')
     },
 
     analyticsCookieSettingForUserEnabled: function() {
-      return (this.analyticsCookieSetting() === 'true')
+      return (this.analyticsUserSettingEnabled() === 'true')
     },
 
     initialize: function() {
       this.hideGDPRNotice()
       this.enableMatomoIfAllowed()
 
+      this.setupEventListeners()
+
       if (this.isCookiePreferenceAlreadyStored()) return
 
       if (window.location.pathname !== '/account') {
         this.open()
       }
-
-      this.setupEventListeners()
     }
   };
 }).call(this);
