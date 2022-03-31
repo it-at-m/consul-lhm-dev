@@ -130,10 +130,10 @@
       this.setupEventListeners()
 
       if (this.isCookiePreferenceAlreadyStored()) return
+      if (this.analyticsCookieSettingForUserIsSet()) return
+      if (window.location.pathname === '/account') return
 
-      if (window.location.pathname !== '/account') {
-        this.open()
-      }
+      this.open()
     }
   };
 }).call(this);
