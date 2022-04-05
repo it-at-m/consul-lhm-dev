@@ -71,8 +71,14 @@ class Proposals::CsvExporter
         proposal.community_id,
         proposal.selected,
         proposal.projekt_id,
-        proposal.map_location&.latitude,
-        proposal.map_location&.longitude
+        geo_field(proposal.map_location&.latitude),
+        geo_field(proposal.map_location&.longitude)
       ]
     end
+
+  def geo_field(field)
+    return nil if field.blank?
+
+    "\"#{field}\""
+  end
 end

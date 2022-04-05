@@ -8,9 +8,6 @@
     <% if investment.should_show_votes? %>
       <% if user_voted_for? %>
         <div class="supported">
-          <div class="callout success">
-            <%= t("budgets.investments.votes.already_supported") %>
-          </div>
           <% if feature?(:remove_investments_supports) %>
             <%= button_to remove_support_path,
                 class: "button button-remove-support expanded",

@@ -160,28 +160,33 @@ class Setting < ApplicationRecord
         "deficiency_reports.enable_comments": true,
         "deficiency_reports.intro_text": false,
         # "extended_feature.general.elasticsearch": false,
+
         "extended_feature.general.extended_editor_for_admins": true,
         "extended_feature.general.extended_editor_for_users": true,
         "extended_feature.general.language_switcher_in_menu": false,
         "extended_feature.general.links_to_create_resources_in_menu": false,
         "extended_option.general.subtitle": 'in der Stadt CONSUL',
+
         "extended_feature.gdpr.gdpr_conformity": false,
         "extended_feature.gdpr.show_cookie_banner": true,
         "extended_feature.gdpr.link_out_warning": true,
         "extended_feature.gdpr.two_click_iframe_solution": true,
         "extended_option.gdpr.devise_timeout_min": 30,
         "extended_option.gdpr.devise_verification_token_validity_days": 3,
+
         "extended_feature.modulewide.enable_categories": false,
         "extended_feature.modulewide.enable_custom_tags": false,
         "extended_feature.modulewide.show_number_of_entries_in_modules": true,
         "extended_feature.modulewide.show_affiliation_filter_in_index_sidebar": false,
         "extended_feature.modulewide.hide_comment_replies_by_default": false,
         "extended_feature.modulewide.custom_help_text_in_modules": false,
+
         "extended_feature.debates.intro_text_for_debates": true,
         "extended_feature.debates.head_image_for_debates": true,
         "extended_feature.debates.show_report_button_in_debate_sidebar": true,
         "extended_feature.debates.show_related_content": true,
         "extended_feature.debates.enable_projekt_filter": true,
+
         "extended_feature.proposals.intro_text_for_proposals": true,
         "extended_feature.proposals.quorum_for_proposals": false,
         "extended_feature.proposals.enable_proposal_support_withdrawal": true,
@@ -196,12 +201,21 @@ class Setting < ApplicationRecord
         "extended_feature.proposals.enable_projekt_filter": true,
         "extended_option.proposals.max_active_proposals_per_user": 100,
         "extended_option.proposals.description_max_length": 6000,
+
         "extended_feature.polls.intro_text_for_polls": true,
         "extended_feature.polls.intermediate_poll_results_for_admins": true,
         "extended_feature.polls.enable_comments": true,
         "extended_feature.polls.additional_information": false,
         "extended_feature.polls.additional_info_for_each_answer": true,
         "extended_feature.polls.enable_projekt_filter": true,
+
+        "extended_feature.budget_investments.show_report_button_in_sidebar": true,
+        "extended_feature.budget_investments.show_follow_button_in_sidebar": true,
+        "extended_feature.budget_investments.show_community_button_in_sidebar": true,
+        "extended_feature.budget_investments.show_related_content": true,
+        "extended_feature.budget_investments.show_implementation_option_fields": true,
+        "extended_feature.budget_investments.enable_investment_milestones_tab": true,
+
         "extended_feature.proposals.enable_my_posts_filter": true,
         "extended_feature.debates.enable_my_posts_filter": true,
         "extended_feature.deficiency_reports.enable_my_posts_filter": true

@@ -6,7 +6,7 @@
   <p><%= get_projekt_affiliation_name(projekt) %></p>
 <% end %>
 
-<%= link_to extended_sidebar_map_page_path(projekt), remote: true do %>
+<%= link_to extended_sidebar_map_page_path(projekt.page.slug), remote: true do %>
   <div class='sidebar-projekt-map'>
     <%= render_map(projekt.map_location, "proposals_sidebar", false, nil, [] ) %>
   </div>

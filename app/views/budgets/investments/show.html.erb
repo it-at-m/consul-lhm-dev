@@ -22,5 +22,7 @@
                                          display_comments_count: false %>
   </div>
 
-  <%= render "milestones/milestones", milestoneable: @investment %>
+  <div class="tabs-panel" id="tab-milestones">
+    <%= render "milestones/milestones", milestoneable: @investment %>
+  </div>
 </div>

@@ -1,0 +1,16 @@
+de:
+  custom:
+    budgets:
+      investments:
+        show:
+          implementation: Umsetzung
+          implementation_user_text_html: "<p>%{author} unterstützt bei der Durchführung<p><p>%{implementation_contribution}</p>"
+          implementation_city_text_html: "<p>Soll von Stadtverwaltung umgesetzt werden</p>"
+        statuses:
+          phases:
+            accepting: Der Investitionsvorschlag wurde erfolgreich eingereicht.
+            reviewing: Der Investitionsvorschlag wird zur Zeit intern auf seine Durchführbarkeit überprüft.
+            valuating: Die Kosten für diesen Investitionsvorschlag werden intern ermittelt.
+            reviewing_ballots: Die Abstimmung wird gerade intern überprüft.
+        form:
+          required: Ihr Investitionsvorschlag

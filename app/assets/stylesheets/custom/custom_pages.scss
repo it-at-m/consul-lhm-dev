@@ -89,11 +89,11 @@ span.sidebar-projekt-phases-title {
 }
 
 .sidebar-projekt-phase.active {
-  .sidebar-projekt-phase-details {
+  & > .sidebar-projekt-phase-details {
     color: #207868 !important;
   }
 
-  .sidebar-projekt-phase-status {
+  & > .sidebar-projekt-phase-status {
     background-color: #90BCB3;
     border-color: #207868;
   }

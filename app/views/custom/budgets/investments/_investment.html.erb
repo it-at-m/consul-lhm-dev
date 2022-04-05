@@ -1,4 +1,4 @@
-<% cache [locale_and_user_status, investment, investment.projekt, investment.projekt.top_parent, investment.projekt.page, investment.image, investment.author, params[:tags], params[:projekts], params[:geozone_affiliation], params[:affiliated_geozones], params[:geozone_restriction], params[:restricted_geozones]] do %>
+<% cache [locale_and_user_status, investment, investment.budget, investment.projekt, investment.projekt.top_parent, investment.projekt.page, investment.image, investment.author, investment.ballot_lines_count, investment.votes_for.count, params[:tags], params[:projekts], params[:geozone_affiliation], params[:affiliated_geozones], params[:geozone_restriction], params[:restricted_geozones]] do %>
   <div id="<%= dom_id(investment) %>" class='row collapse resource-n budget-investment margin-bottom' data-equalizer='main' data-equalize-on="medium">
 
     <div class='columns'>
@@ -62,12 +62,18 @@
               <% elsif investment.should_show_price? %>
                 <div id="<%= dom_id(investment) %>_price" class="supports">
                   <div class="supports">
-                    <span class="total-supports no-button">
+                    <span class="total-supports no-button price">
                       <%= investment.formatted_price %>
                     </span>
                   </div>
                 </div>
               <% end %>
+            <% end %>
+
+            <% if investment.budget.phase.in?(['accepting', 'reviewing', 'valuating', 'reviewing_ballots']) %>
+              <div class="callout warning" style='margin-bottom:0;'>
+                <%= t("custom.budgets.investments.statuses.phases.#{investment.budget.phase}") %>
+              </div>
             <% end %>
 
           </div>

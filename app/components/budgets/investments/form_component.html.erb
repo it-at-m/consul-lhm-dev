@@ -3,11 +3,34 @@
   <%= render "shared/errors", resource: investment %>
 
   <fieldset class="required-fields">
-    <legend><%= t("shared.required") %></legend>
+    <legend><%= t("custom.budgets.investments.form.required") %></legend>
 
     <% unless budget.single_heading? %>
       <div>
         <%= f.select :heading_id, budget_heading_select_options(budget), { include_blank: true } %>
+      </div>
+    <% end %>
+
+    <% if extended_feature?('budget_investments.show_implementation_option_fields')  %>
+      <div>
+        <%= f.select :implementation_performer, options_for_implementation_select, {}, { class: 'implementation-performer show-arrow', onChange: "$(this).val() === 'user' ? $('#implementation_contribution').css('display', 'block') : $('#implementation_contribution').css('display', 'none')" } %>
+      </div>
+
+      <div id='implementation_contribution' style="display:<%= investment.implementation_performer == 'user' ? 'block' : 'none' %>">
+        <%= f.text_field :implementation_contribution %>
+      </div>
+    <% end %>
+
+    <% if feature?(:map) %>
+      <div>
+        <%= render "map_locations/form_fields",
+                   form:     f,
+                   map_location: investment.map_location || investment&.projekt&.map_location || MapLocation.new,
+                   label:    t("budgets.investments.form.map_location"),
+                   help:     t("budgets.investments.form.map_location_instructions"),
+                   remove_marker_label: t("budgets.investments.form.map_remove_marker"),
+                   parent_class: "budget_investment",
+                   i18n_namespace: "budgets.investments" %>
       </div>
     <% end %>
 
@@ -26,7 +49,7 @@
       <div>
         <%= translations_form.text_area :description,
               maxlength: Budget::Investment.description_max_length,
-              class: "html-area" %>
+              class: "html-area #{helpers.ck_editor_class(current_user)}" %>
       </div>
     <% end %>
   </fieldset>
@@ -48,48 +71,9 @@
       </div>
     <% end %>
 
-    <% if feature?(:map) %>
-      <div>
-        <%= render "map_locations/form_fields",
-                   form:     f,
-                   map_location: investment.map_location || MapLocation.new,
-                   label:    t("budgets.investments.form.map_location"),
-                   help:     t("budgets.investments.form.map_location_instructions"),
-                   remove_marker_label: t("budgets.investments.form.map_remove_marker"),
-                   parent_class: "budget_investment",
-                   i18n_namespace: "budgets.investments" %>
-      </div>
-    <% end %>
-
-    <div>
-      <%= f.text_field :location %>
-    </div>
-
     <div>
       <%= f.text_field :organization_name %>
     </div>
-
-    <div>
-      <%= f.label :tag_list, t("budgets.investments.form.tags_label") %>
-      <p class="help-text" id="tags-list-help-text"><%= t("budgets.investments.form.tags_instructions") %></p>
-
-      <div id="category_tags" class="tags">
-        <%= f.label :category_tag_list, t("budgets.investments.form.tag_category_label") %>
-        <% categories.each do |tag| %>
-          <a class="js-add-tag-link"><%= tag.name %></a>
-        <% end %>
-      </div>
-
-      <br>
-      <%= f.text_field :tag_list, value: investment.tag_list.to_s,
-                        label: false,
-                        placeholder: t("budgets.investments.form.tags_placeholder"),
-                        aria: { describedby: "tags-list-help-text" },
-                        class: "js-tag-list tag-autocomplete",
-                        data: { js_url: suggest_tags_path } %>
-    </div>
-
-    <%= render SDG::RelatedListSelectorComponent.new(f) %>
   </fieldset>
 
   <div class="actions">

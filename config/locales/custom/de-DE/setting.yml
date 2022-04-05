@@ -15,6 +15,8 @@ de:
         user:
           skip_verification: Standardmäßige Partizipation für alle Nutzer:innen der Plattform
           skip_verification_description: Nutzer:innen können ohne Verifizierung am Beteiligungsprozess teilnehmen
+        remove_investments_supports: Zurückziehen von Unterstützungen für Investitionsvorschläge zulassen
+        remove_investments_supports_description: Ermöglicht es den Nutzern, in der Phase der Projektauswahl Unterstützungen für Investitionsvorschläge zurückzuziehen
       extended_feature:
         general:
           elasticsearch: "Elasticsearch"
@@ -103,6 +105,19 @@ de:
           additional_info_for_each_answer_description: Zeigt die "Zusätzliche Informationen" je Antwort an
           enable_projekt_filter: Projektfilter anzeigen
           enable_projekt_filter_description: Zeigt den Projektfilter in der Abstimmungsübersichtseite
+        budget_investments:
+          show_report_button_in_sidebar: Investition melden
+          show_report_button_in_sidebar_description: Aktivieren Sie die Melden-Funktion für Investitionen
+          show_follow_button_in_sidebar: Investition folgen
+          show_follow_button_in_sidebar_description: Aktivieren Sie die Funktion “Investition folgen”
+          show_related_content: Verwandte Inhalte
+          show_related_content_description: Aktivieren Sie die Funktion “Verwandte Inhalte” für Investitionen
+          show_community_button_in_sidebar: Community
+          show_community_button_in_sidebar_description: Aktivieren Sie die Funktion “Community” für Investitionen
+          show_implementation_option_fields: Umsetzung
+          show_implementation_option_fields_description: Fügt beim Erstellen eines Investitionsvorschlags ein Auswahlfeld “Umsetzung” hinzu
+          enable_investment_milestones_tab: Meilensteine in Vorschlägen
+          enable_investment_milestones_tab_description: Aktivieren Sie "Meilensteine" in Vorschlägen, die von der Verwaltung angelegt werden müssen
 
       extended_option:
         general:

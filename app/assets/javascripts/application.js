@@ -125,6 +125,7 @@
 //= require map_refresh
 //= require accessibility_fixes
 //= require analytics_cookie_banner_component
+//= require components/shared/footer_phases_component
 //= require polls_custom
 //= require radio_button_filter
 //= require deficiency_reports
@@ -208,6 +209,8 @@ var initialize_modules = function() {
   App.AnalyticsCookieBannerCustom.initialize()
   App.CustomPages.initialize();
   App.ModerationCustom.initialize();
+  App.FooterPhasesComponentCustom.initialize();
+
   if ($("#projekt-selector-fields").length) {
     App.ProjektSelector.initialize();
   }

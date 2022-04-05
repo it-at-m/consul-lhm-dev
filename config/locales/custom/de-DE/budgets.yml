@@ -48,7 +48,7 @@ de:
       informing: Information
       accepting: Investitionsvorschläge einreichen
       reviewing: Interne Überprüfung der Investitionsvorschläge
-      selecting: Auswahlphase der Investitionsvorschläge
+      selecting: Unterstützungsphase
       valuating: Investitionsvorschläge begutachten
       publishing_prices: Preise der Investitionsvorschläge veröffentlichen
       balloting: Abstimmung über Investitionsvorschläge
@@ -63,7 +63,7 @@ de:
         help: Hilfe zu Budgets
       all_phases: Phasen des Budgets
       map: Investitionsvorschläge geografisch geordnet
-      investment_proyects: Liste aller Investitionsvorschläge
+      investment_proyects: Liste aller Investitionsvorschläge, die gewonnen haben
       unfeasible_investment_proyects: Liste aller nicht durchführbaren Investitionsvorschläge
       not_selected_investment_proyects: Liste aller Investitionsvorschläge, die nicht für die Abstimmung ausgewählt wurden
       finished_budgets: Abgeschlossene Budgets
@@ -113,12 +113,12 @@ de:
           check_ballot_link: "Überprüfung meiner Abstimmung"
           zero: Sie haben für keinen Investitionsvorschlag in dieser Gruppe abgestimmt.
           verified_only: "Um ein neuen Investitionsvorschlag zu erstellen %{verify}."
-          create: "Einen Investitionsvorschlag erstellen"
+          create: "Investitionsvorschlag erstellen"
           not_logged_in: "Um einen neuen Investitionsvorschlag erstellen zu können, müssen Sie %{sign_in} oder %{sign_up}."
         filter: "Projekte filtern nach"
         filters:
-          not_unfeasible: "Aktiv"
-          selected: "Aktive"
+          not_unfeasible: "Durchführbar"
+          selected: "Ausgewählt"
           unfeasible: "Nicht durchführbar"
           unselected: "Nicht für die Endabstimmung ausgewählt"
           winners: "Gewinner"
@@ -168,8 +168,8 @@ de:
         confirm_group:
           one: "Sie können nur Investitionen im Bezirk %{count} unterstützen. Wenn Sie fortfahren, können Sie die Wahl Ihres Bezirks nicht ändern. Sind Sie sicher?"
           other: "Sie können nur Investitionen in %{count}-Bezirken unterstützen. Wenn Sie fortfahren, können Sie die Wahl Ihres Bezirks nicht ändern. Sind Sie sicher?"
-        remove_support: "Unterstützung zurückziehen"
-        remove_support_label: "Streichen Sie Ihre Unterstützung für %{investition}"
+        remove_support: "Zurückziehen"
+        remove_support_label: "Streichen Sie Ihre Unterstützung für %{investment}"
         support: "Unterstützung"
         support_label: "Unterstützung für %{investment}"
     investments_list:
@@ -205,8 +205,8 @@ de:
       accepted: "Genehmigter Investitionsvorschlag: "
       discarded: "Verworfener Investitionsvorschlag: "
       incompatibles: Unvereinbar
-      investment_title: Projekt Titel
-      investment_proyects: Liste aller Investitionsvorschläge
+      investment_title: Vorschlag Titel
+      investment_proyects: Liste aller Investitionsvorschläge, die gewonnen haben
       unfeasible_investment_proyects: Liste aller nicht durchführbaren Investitionsvorschläge
       not_selected_investment_proyects: Liste aller Investitionsvorschläge, die es nicht in die Abstimmung geschafft haben
     executions:

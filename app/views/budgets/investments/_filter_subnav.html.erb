@@ -13,12 +13,15 @@
       </h3>
     <% end %>
   </li>
-  <li class="tabs-title">
-    <%= link_to "#tab-milestones" do %>
-      <h3>
-        <%= t("budgets.investments.show.milestones_tab") %>
-        (<%= @investment.milestones.count %>)
-      </h3>
-    <% end %>
-  </li>
+
+  <% if extended_feature?('budget_investments.enable_investment_milestones_tab') %>
+    <li class="tabs-title">
+      <%= link_to "#tab-milestones" do %>
+        <h3>
+          <%= t("budgets.investments.show.milestones_tab") %>
+          (<%= @investment.milestones.count %>)
+        </h3>
+      <% end %>
+    </li>
+  <% end %>
 </ul>

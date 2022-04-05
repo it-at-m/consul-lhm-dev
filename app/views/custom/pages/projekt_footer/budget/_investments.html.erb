@@ -1,0 +1,17 @@
+<div class='row'>
+  <div class='column small'>
+    <% if extended_feature?('modulewide.show_number_of_entries_in_modules') %>
+      <div class='float-right'>
+        <%= @investments.except(:limit, :offset).count %>
+        <%= t('activerecord.models.budget/investment', count: @investments.except(:limit, :offset).count) %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<% @investments.each do |investment| %>
+  <%= render "/budgets/investments/investment",
+             investment: investment,
+             investment_ids: @investment_ids,
+             ballot: @ballot %>
+<% end %>

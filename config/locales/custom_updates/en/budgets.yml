@@ -1,0 +1,15 @@
+en:
+  custom:
+    budgets:
+      investments:
+        show:
+          implementation: Implementation
+          implementation_text_html: "<p>%{author} supports with implementation<p><p>%{implementation_contribution}</p>"
+        statuses:
+          phases:
+            accepting: The investment proposal was successfully submitted.
+            reviewing: The feasibility of the investment proposal is currently evaluated.
+            valuating: The costs for this investment proposal are evaluated internally.
+            reviewing_ballots: We're currently checking the votes.
+        form:
+          required: Your investment proposal

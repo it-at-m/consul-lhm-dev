@@ -24,6 +24,9 @@ de:
         sidebar:
           phases:
             participate: Offen für Beteiligung!
+        footer:
+          budget:
+            investments_subtab: Investitionen
         tabs:
           comments: Kommentare
           debates: Diskussionen

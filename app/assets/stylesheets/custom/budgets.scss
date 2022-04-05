@@ -1,5 +1,5 @@
 #footer-content .phases-list {
-	border: none;
+  border: none;
   margin-bottom: 4rem;
 
   .phase-title {
@@ -17,7 +17,7 @@
 
       .phase-name,
       .phase-date-range {
-				color: $white;
+        color: $white;
       }
     }
   }
@@ -34,5 +34,56 @@
 
   .phase-date-range {
     font-size: 0.875rem;
+  }
+}
+
+.expanded.jumbo-budget.budget-heading {
+  min-height: auto;
+}
+
+.budget-investment-new aside {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+
+// Investment partial
+
+.budget-investment {
+  .callout {
+    padding: 0.5rem 1rem;
+  }
+
+  .no-button {
+    margin-top: 0;
+  }
+
+  .supports {
+    padding: 0.5rem 0;
+
+    .total-supports.price {
+      font-size: 24px;
+    }
+
+    .investment-project-amount {
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .remove {
+      .icon-check-circle {
+        display: none;
+      }
+
+      .investment-project-amount:before {
+        content: "\f058";
+        font-family: 'Font Awesome 5 Free';
+        font-weight: bold;
+      }
+    }
+
+    .button-remove-support {
+      margin-top: 0.75rem;
+    }
   }
 }

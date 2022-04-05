@@ -20,6 +20,14 @@ class Pages::Projekts::FooterPhasesComponent < ApplicationComponent
 
   private
 
+  def show_arrows?
+    phases_total = @phases.to_a
+
+    phases_total += [milestone_phase, projekt_notification_phase, newsfeed_phase].compact
+
+    phases_total.select(&:phase_info_activated?).size > 4
+  end
+
   def phase_name(phase)
     t("custom.projekts.phase_name.#{phase.name}")
   end

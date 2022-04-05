@@ -36,10 +36,10 @@ class Sidebar::ProjektsFilterComponent < ApplicationComponent
   end
 
   def form_path
-    if @current_tab_phase && @current_projekt
-      send("#{@current_tab_phase.name}_footer_tab_page_path")
+    if params[:current_tab_path]
+      url_for(action: params[:current_tab_path], controller: 'pages')
     else
-      send("#{controller_name}_path")
+      url_for(action: 'index', controller: controller_name)
     end
   end
 

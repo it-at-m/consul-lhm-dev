@@ -1,0 +1,58 @@
+<% if feature?(:map) && map_location_available?(@investment.map_location) %>
+  <div class="">
+    <%= render_map(investment.map_location, "budget_investment", false, nil, MapLocation.where(investment_id: investment.id).map(&:json_data)) %>
+  </div>
+<% end %>
+
+<br>
+<%= auto_link_already_sanitized_html wysiwyg(investment.description) %>
+
+<%= render_image(investment.image, :large, true) if investment.image.present? %>
+
+<% if investment.location.present? %>
+  <p>
+    <%= sanitize(t("budgets.investments.show.location", location: investment.location)) %>
+  </p>
+<% end %>
+
+<% if investment.organization_name.present? %>
+  <p>
+    <%= sanitize(t("budgets.investments.show.organization_name", name: investment.organization_name)) %>
+  </p>
+<% end %>
+
+<% if feature?(:allow_attached_documents) %>
+  <%= render "documents/documents",
+              documents: investment.documents,
+              max_documents_allowed: Budget::Investment.max_documents_allowed %>
+<% end %>
+
+<%# = render "shared/tags", taggable: investment %>
+
+<% if investment.external_url.present? %>
+  <div class="document-link">
+    <%= sanitize_and_auto_link investment.external_url %>
+  </div>
+<% end %>
+
+
+<% if extended_feature?('budget_investments.show_implementation_option_fields') %>
+  <h2><%= t("custom.budgets.investments.show.implementation") %></h2>
+  <%= t("custom.budgets.investments.show.implementation_#{investment.implementation_performer}_text_html", author: investment.author.name, implementation_contribution: investment.implementation_contribution) %>
+<% end %>
+
+<% if investment.should_show_unfeasibility_explanation? %>
+  <h2><%= t("budgets.investments.show.unfeasibility_explanation") %></h2>
+  <p><%= investment.unfeasibility_explanation %></p>
+<% end %>
+
+<% if investment.should_show_price_explanation? %>
+  <h2 id="price_explanation" data-magellan-target="price_explanation">
+    <%= t("budgets.investments.show.price_explanation") %>
+  </h2>
+  <p><%= investment.price_explanation %></p>
+<% end %>
+
+<% if local_assigns[:preview].nil? %>
+  <%= render "relationable/related_content", relationable: investment %>
+<% end %>

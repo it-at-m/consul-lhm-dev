@@ -4,6 +4,7 @@ en:
       title: Administration
     actions:
       actions: Actions
+      confirm: Sind Sie sich sicher?
       confirm_action: "Are you sure? %{action} \"%{name}\""
       confirm_delete: "Are you sure? This action will delete \"%{name}\" and can't be undone."
       confirm_hide: Confirm moderation

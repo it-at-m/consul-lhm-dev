@@ -4,7 +4,7 @@
   </div>
 
   <div class='show-for-large'>
-    <% if action_name == 'index' && controller_name.in?(['proposals', 'debates', 'polls', 'welcome'])  %>
+    <% if action_name == 'index' && controller_name.in?(['proposals', 'debates', 'polls', 'investments', 'welcome'])  %>
       <% if resource.respond_to?(:on_behalf_of) && resource.on_behalf_of.present? %>
         <%= resource.on_behalf_of %>
       <% elsif !resource.author.name.blank? %>
@@ -15,8 +15,8 @@
         <%= render partial: "proposals/proposal/participation_label", locals: { proposal: resource } %>
       <% end %>
 
-    <% elsif action_name == 'show' && controller_name.in?(['proposals', 'debates', 'polls']) %>
-      <%= link_to t("custom.shared.show.back_link", resources: resource.model_name.human(count: 2)), resource&.projekt&.parent %>
+    <% elsif action_name == 'show' && controller_name.in?(['proposals', 'debates', 'polls', 'investments']) && resource.projekt&.page&.published? %>
+      <%= link_to t("custom.shared.show.back_link", resources: resource.model_name.human(count: 2)), page_path(resource.projekt.page.slug) %>
 
     <% elsif controller_name == 'pages' %>
       <% if resource.respond_to?(:on_behalf_of) && resource.on_behalf_of.present? %>

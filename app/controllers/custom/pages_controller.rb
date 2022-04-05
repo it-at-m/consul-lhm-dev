@@ -14,7 +14,7 @@ class PagesController < ApplicationController
     if @custom_page.present? && @custom_page.projekt.present?
       @projekt = @custom_page.projekt
 
-      @default_phase_name = default_phase_name
+      @default_phase_name = default_phase_name(params[:selected_phase_id])
 
       send("set_#{@default_phase_name}_footer_tab_variables", @projekt)
 
@@ -102,7 +102,7 @@ class PagesController < ApplicationController
   end
 
   def extended_sidebar_map
-    @current_projekt = Projekt.find(params[:id])
+    @current_projekt = SiteCustomization::Page.find_by(slug: params[:id]).projekt
 
     respond_to do |format|
       format.js { render "pages/sidebar/extended_map" }
@@ -137,7 +137,7 @@ class PagesController < ApplicationController
     @valid_orders = %w[most_voted newest oldest]
     @current_order = @valid_orders.include?(params[:order]) ? params[:order] : @valid_orders.first
 
-    @current_projekt = projekt || Projekt.find(params[:id])
+    @current_projekt = projekt || SiteCustomization::Page.find_by(slug: params[:id]).projekt
     @current_tab_phase = @current_projekt.comment_phase
 
     @commentable = @current_projekt
@@ -151,8 +151,9 @@ class PagesController < ApplicationController
     @valid_orders.delete('relevance')
     @current_order = @valid_orders.include?(params[:order]) ? params[:order] : @valid_orders.first
 
-    @current_projekt = projekt || Projekt.find(params[:id])
+    @current_projekt = projekt || SiteCustomization::Page.find_by(slug: params[:id]).projekt
     @current_tab_phase = @current_projekt.debate_phase
+    params[:current_tab_path] = 'debate_phase_footer_tab'
     params[:filter_projekt_ids] ||= @current_projekt.all_children_ids.unshift(@current_projekt.id).map(&:to_s)
 
     @selected_parent_projekt = @current_projekt
@@ -175,8 +176,9 @@ class PagesController < ApplicationController
     @valid_orders.delete('relevance')
     @current_order = @valid_orders.include?(params[:order]) ? params[:order] : @valid_orders.first
 
-    @current_projekt = projekt || Projekt.find(params[:id])
+    @current_projekt = projekt || SiteCustomization::Page.find_by(slug: params[:id]).projekt
     @current_tab_phase = @current_projekt.proposal_phase
+    params[:current_tab_path] = 'proposal_phase_footer_tab'
     params[:filter_projekt_ids] ||= @current_projekt.all_children_ids.unshift(@current_projekt.id).map(&:to_s)
 
     @selected_parent_projekt = @current_projekt
@@ -199,9 +201,10 @@ class PagesController < ApplicationController
     @valid_filters = %w[all current]
     @current_filter = @valid_filters.include?(params[:filter]) ? params[:filter] : @valid_filters.first
 
-    @current_projekt = projekt || Projekt.find(params[:id])
+    @current_projekt = projekt || SiteCustomization::Page.find_by(slug: params[:id]).projekt
     @current_tab_phase = @current_projekt.voting_phase
     @selected_parent_projekt = @current_projekt
+    params[:current_tab_path] = 'voting_phase_footer_tab'
     params[:filter_projekt_ids] ||= @current_projekt.all_children_ids.unshift(@current_projekt.id).map(&:to_s)
 
     scoped_projekt_ids = @current_projekt.top_parent.all_children_projekts.unshift(@current_projekt.top_parent).pluck(:id)
@@ -215,19 +218,37 @@ class PagesController < ApplicationController
   end
 
   def set_budget_footer_tab_variables(projekt=nil)
-    params[:filter_projekt_id] = projekt&.id || params[:id].to_i
+    params[:filter_projekt_id] = projekt&.id || SiteCustomization::Page.find_by(slug: params[:id]).projekt.id
     @current_projekt = Projekt.find(params[:filter_projekt_id])
+
+    @valid_filters = @current_projekt.budget.investments_filters
+    params[:filter] ||= 'winners' if @current_projekt.budget.phase == 'finished'
+    @current_filter = @valid_filters.include?(params[:filter]) ? params[:filter] : nil
+
     @current_tab_phase = @current_projekt.budget_phase
+    params[:current_tab_path] = 'budget_phase_footer_tab'
 
     params[:filter_projekt_id] ||= @current_projekt.id
 
     @budget = Budget.find_by(projekt_id: params[:filter_projekt_id])
+    @headings = @budget.headings.sort_by_name
+    @heading = @headings.first
 
-    query = Budget::Ballot.where(user: current_user, budget: @budget)
-    @ballot = @budget.balloting? ? query.first_or_create! : query.first_or_initialize
+    params[:section] ||= 'results' if @budget.phase == 'finished'
 
-    @investments = @budget.investments
-    @investment_ids = @investments.ids
+    if params[:section] == 'results' 
+      @investments = Budget::Result.new(@budget, @budget.headings.first).investments
+    elsif params[:section] == 'stats'
+      @stats = Budget::Stats.new(@budget)
+      @investments = @budget.investments
+    else
+      query = Budget::Ballot.where(user: current_user, budget: @budget)
+      @ballot = @budget.balloting? ? query.first_or_create! : query.first_or_initialize
+
+      @investments = @budget.investments
+      @investments = @investments.send(params[:filter]) if params[:filter]
+      @investment_ids = @budget.investments.ids
+    end
 
     if @budget.present? && @current_projekt.current?
       @top_level_active_projekts = Projekt.where( id: @current_projekt )
@@ -242,25 +263,25 @@ class PagesController < ApplicationController
   end
 
   def set_milestones_footer_tab_variables(projekt=nil)
-    @current_projekt = projekt || Projekt.find(params[:id])
+    @current_projekt = projekt || SiteCustomization::Page.find_by(slug: params[:id]).projekt
     @current_tab_phase = @current_projekt.milestone_phase
   end
 
   def set_projekt_notifications_footer_tab_variables(projekt=nil)
-    @current_projekt = projekt || Projekt.find(params[:id])
+    @current_projekt = projekt || SiteCustomization::Page.find_by(slug: params[:id]).projekt
     @current_tab_phase = @current_projekt.projekt_notification_phase
     @projekt_notifications = @current_projekt.projekt_notifications
   end
 
   def set_newsfeed_footer_tab_variables(projekt=nil)
-    @current_projekt = projekt || Projekt.find(params[:id])
+    @current_projekt = projekt || SiteCustomization::Page.find_by(slug: params[:id]).projekt
     @current_tab_phase = @current_projekt.newsfeed_phase
     @rss_id = ProjektSetting.find_by(projekt: @current_projekt, key: "projekt_newsfeed.id").value
     @rss_type = ProjektSetting.find_by(projekt: @current_projekt, key: "projekt_newsfeed.type").value
   end
 
-  def default_phase_name
-    default_phase_id = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_custom_feature.default_footer_tab').value
+  def default_phase_name(default_phase_id)
+    default_phase_id ||= ProjektSetting.find_by(projekt: @projekt, key: 'projekt_custom_feature.default_footer_tab').value
     if default_phase_id.present?
       ProjektPhase.find(default_phase_id).resources_name
     elsif @projekt.projekt_phases.select{ |phase| phase.phase_activated? }.any?

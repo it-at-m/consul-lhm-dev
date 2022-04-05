@@ -19,6 +19,10 @@
             @proposal,
             @proposal.author,
             Flag.flagged?(current_user, @proposal),
+            extended_feature?('proposals.show_report_button_in_proposal_sidebar'),
+            extended_feature?('proposals.show_follow_button_in_proposal_sidebar'),
+            extended_feature?('proposals.show_community_button_in_proposal_sidebar'),
+            extended_feature?('proposals.show_related_content'),
             @proposal_votes,
             @proposal.projekt,
             @proposal.proposal_phase,
@@ -156,13 +160,13 @@
         <%= render "proposals/comments" %>
       </div>
 
-      <% if extended_feature?('proposals.enable_proposal_notifications_tab') %>
+      <div class="tabs-panel" id="tab-notifications">
         <%= render "proposals/notifications" %>
-      <% end %>
+      </div>
 
-      <% if extended_feature?('proposals.enable_proposal_milestones_tab') %>
+      <div class="tabs-panel" id="tab-milestones">
         <%= render "milestones/milestones", milestoneable: @proposal %>
-      <% end %>
+      </div>
     </div>
   <% end %>
 </main>

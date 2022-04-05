@@ -23,3 +23,9 @@ en:
         on_behalf_of: On behalf of
       proposal:
         on_behalf_of: On behalf of
+      budget/investment:
+        implementation_performer: Implementation of investment proposal
+        implementation_performers:
+          city: Implementation by the city administration
+          user: I can help with implementation
+        implementation_contribution: How can you contribute?

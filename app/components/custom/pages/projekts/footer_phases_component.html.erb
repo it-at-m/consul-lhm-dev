@@ -3,7 +3,7 @@
     <div class="small-12 column">
       <div style='display:flex;justify-content:space-between;align-items:end;'>
         <h3><%= "Beteiligung" %></h3>
-        <% if @phases.size > 4 %>
+        <% if show_arrows? %>
           <div class='arrow-controls'>
             <div id='left-arrow-control' class='js-left-arrow-control disabled'>
               <i class="fas fa-chevron-circle-left"></i>
@@ -23,7 +23,7 @@
 
             <% if phase.phase_info_activated? %>
               <li id="filter-subnav-<%= phase.resources_name %>" class="page-subnav-tab <%= 'is-active' if phase.resources_name == default_phase_name %>">
-                <%= link_to "/#{projekt.id}/#{phase.name}_footer_tab", remote: true, onclick: '$("#footer-content").addClass("show-loader")' do %>
+                <%= link_to "/#{params[:id]}/#{phase.name}_footer_tab", remote: true, onclick: '$("#footer-content").addClass("show-loader"); ' do %>
                   <h4>
                     <%= t("custom.projekts.page.tabs.#{phase.resources_name}") %>
                     <% if phase.resources_name.in?(['debates', 'proposals', 'polls', 'comments']) %>
@@ -48,7 +48,7 @@
 
           <% if milestone_phase.phase_info_activated? %>
             <li id="filter-subnav-<%= milestone_phase.resources_name %>" class="page-subnav-tab <%= 'is-active' if milestone_phase.resources_name == default_phase_name %>">
-              <%= link_to "/#{projekt.id}/#{milestone_phase.name}_footer_tab", remote: true, onclick: '$("#footer-content").addClass("show-loader")' do %>
+              <%= link_to "/#{params[:id]}/#{milestone_phase.name}_footer_tab", remote: true, onclick: '$("#footer-content").addClass("show-loader")' do %>
                 <h4>
                   <%= t("custom.projekts.page.tabs.#{milestone_phase.resources_name}") %>
                   <%= "(#{projekt.milestones.count})" %>
@@ -64,7 +64,7 @@
 
           <% if projekt_notification_phase.phase_info_activated? %>
             <li id="filter-subnav-<%= projekt_notification_phase.resources_name %>" class="page-subnav-tab <%= 'is-active' if projekt_notification_phase.resources_name == default_phase_name %>">
-              <%= link_to "/#{projekt.id}/#{projekt_notification_phase.name}_footer_tab", remote: true, onclick: '$("#footer-content").addClass("show-loader")' do %>
+              <%= link_to "/#{params[:id]}/#{projekt_notification_phase.name}_footer_tab", remote: true, onclick: '$("#footer-content").addClass("show-loader")' do %>
                 <h4>
                   <%= t("custom.projekts.page.tabs.#{projekt_notification_phase.resources_name}") %>
                   <%= "(#{projekt.projekt_notifications.count})" %>
@@ -80,7 +80,7 @@
 
           <% if newsfeed_phase.phase_info_activated? %>
             <li id="filter-subnav-<%= newsfeed_phase.resources_name %>" class="page-subnav-tab <%= 'is-active' if newsfeed_phase.resources_name == default_phase_name %>">
-              <%= link_to "/#{projekt.id}/#{newsfeed_phase.name}_footer_tab", remote: true, onclick: '$("#footer-content").addClass("show-loader")' do %>
+              <%= link_to "/#{params[:id]}/#{newsfeed_phase.name}_footer_tab", remote: true, onclick: '$("#footer-content").addClass("show-loader")' do %>
                 <h4>
                   <%= t("custom.projekts.page.tabs.#{newsfeed_phase.resources_name}") %>
                 </h4>

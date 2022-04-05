@@ -28,7 +28,7 @@
     </div>
   <% end %>
 
-  <% if resource.class.name.in? ['Proposal', "DeficiencyReport"] %>
+  <% if resource.class.name.in? ['Proposal', 'DeficiencyReport', 'Budget::Investment'] %>
     <div class='resource-info-entry-code'>
       <%= t("proposals.show.code") %>
       <br>

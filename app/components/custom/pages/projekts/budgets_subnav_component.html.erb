@@ -1,0 +1,21 @@
+<div class="row margin-top">
+  <div class="small-12 column">
+    <ul class="tabs">
+      <% budget_subnav_items_for(budget).each do |item| %>
+        <% if item[:active] %>
+          <li class="tabs-title is-active">
+            <span class="show-for-sr"><%= t("shared.you_are_in") %></span>
+
+            <%= link_to item[:text], item[:url], class: "is-active", remote: true %>
+          </li>
+        <% else %>
+          <li class="tabs-title"><%= link_to item[:text], item[:url], remote: true %></li>
+        <% end %>
+      <% end %>
+
+      <li class="tabs-title <%= 'is-active' if params[:section].blank? || params[:section] == 'overview' %>">
+        <%= link_to t('custom.projekts.page.footer.budget.investments_subtab'), budget_phase_footer_tab_page_path(section: 'overview'), remote: true, class: "#{'is-active' if params[:section].blank? || params[:section] == 'overview' }" %>
+      </li>
+    </ul>
+  </div>
+</div>

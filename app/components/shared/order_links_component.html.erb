@@ -4,7 +4,7 @@
       <%= link_to link_path(order),
         class: html_class(order),
         remote: (controller_name == 'pages'),
-        onclick: (controller_name == 'pages' ? "$('#footer-content').addClass('show-loader')" : '') do %>
+        onclick: (controller_name == 'pages' ? '$(".spinner-placeholder").addClass("show-loader")' : '') do %>
         <%= content_tag tag_name(order), link_text(order) %>
       <% end %>
     </li>

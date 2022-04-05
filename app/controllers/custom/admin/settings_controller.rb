@@ -4,7 +4,7 @@ class Admin::SettingsController < Admin::BaseController
   def index
     all_settings = Setting.all.group_by(&:type)
     @configuration_settings = all_settings["configuration"]
-    @feature_settings = all_settings["feature"]
+    @feature_settings = all_settings["feature"].reject{ |s| s.key == 'feature.remove_investments_supports' }
 
     @extended_feature_general = all_settings["extended_feature.general"]
     @extended_feature_gdpr = all_settings["extended_feature.gdpr"]
@@ -12,6 +12,7 @@ class Admin::SettingsController < Admin::BaseController
     @extended_feature_debates = all_settings["extended_feature.debates"]
     @extended_feature_proposals = all_settings["extended_feature.proposals"]
     @extended_feature_polls = all_settings["extended_feature.polls"]
+    @extended_feature_budget_investments = all_settings["extended_feature.budget_investments"].push(Setting.find_by(key: 'feature.remove_investments_supports'))
 
     @extended_option_general = all_settings["extended_option.general"]
     @extended_option_gdpr = all_settings["extended_option.gdpr"]

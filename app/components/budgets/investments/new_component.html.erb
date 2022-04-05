@@ -1,7 +1,12 @@
 <main class="budget-investment-new">
-  <%= back_link_to budgets_path %>
+  <%= budgets_back_link_path %>
 
   <%= header %>
+
+  <aside>
+    <%= helpers.render_custom_block 'budget_investments_creation_recommendations' %>
+  </aside>
+
 
   <%= render "/budgets/investments/form", form_url: budget_investments_path(budget) %>
 </main>

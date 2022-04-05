@@ -12,7 +12,6 @@
 <h2><%= t("custom.admin.settings.index.extended_features.debates") %></h2>
 <%= render "extended_features_table", features: @extended_feature_debates, options: @extended_option_settings, tab: "#tab-extended-features" %>
 
-
 <h2><%= t("custom.admin.settings.index.extended_features.proposals") %></h2>
 <%= render "extended_features_table", features: @extended_feature_proposals, options: @extended_option_settings, tab: "#tab-extended-features" %>
 <%= render "extended_options_table_no_header", settings: @extended_option_proposals, setting_name: "setting", tab: "#tab-extended-options" %>
@@ -20,9 +19,5 @@
 <h2><%= t("custom.admin.settings.index.extended_features.polls") %></h2>
 <%= render "extended_features_table", features: @extended_feature_polls, options: @extended_option_settings, tab: "#tab-extended-features" %>
 
-
-
-
-
-
-
+<h2><%= t("custom.admin.settings.index.extended_features.budget_investments") %></h2>
+<%= render "extended_features_table", features: @extended_feature_budget_investments, tab: "#tab-extended-features" %>

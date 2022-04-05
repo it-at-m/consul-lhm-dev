@@ -115,9 +115,12 @@ table.edit-projekt {
 }
 
 form select {
-  background: #f8f8f8;
   height: 3rem;
   margin-bottom: 1rem;
+
+  &:not(.show-arrow) {
+    background: #f8f8f8;
+  }
 }
 
 tr.projekt-row td {
@@ -243,6 +246,7 @@ div.projekt-phase-geozone-restriction-selector {
 // Index and new views
 
 #filter-projekts-all {
+  margin-bottom: 1rem;
 
   form label {
     font-size: 0.875rem;

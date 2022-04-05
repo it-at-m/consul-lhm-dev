@@ -8,7 +8,8 @@
     <span class='sidebar-projekt-phases-title'><%= t('custom.projekts.page.sidebar.phases.participate') %></span>
   <% end %>
 
-  <% phases.each do |phase| %>
+  <% index = 0 %>
+  <% phases.each do |phase | %>
     <% if phase.phase_info_activated? %>
       <div class="sidebar-projekt-phase <%= 'active' if phase.current? %>" <%= "aria-expanded=true" if phase.name == 'budget_phase' %>>
         <div class='sidebar-projekt-phase-status'>
@@ -18,7 +19,7 @@
             <%= phase_name(phase) %>
 
             <% if projekt_feature?(@projekt, 'footer.show_projekt_footer') %>
-              <%= link_to "/#{projekt.id}/#{phase.name}_footer_tab", remote: true, onclick: '$("html, body").animate({scrollTop: $("#filter-subnav").offset().top}); $("#footer-content").addClass("show-loader");' do %>
+              <%= link_to "/#{params[:id]}/#{phase.name}_footer_tab", class: 'js-sidebar-phase-link', remote: true, data: { index: index - 1 } do %>
                 <i class="fas fa-long-arrow-alt-right"></i>
               <% end %>
             <% end %>
@@ -43,6 +44,7 @@
 
       </div>
     <% end %>
+    <% index += 1 %>
   <% end %>
 
   <% if milestone_phase.phase_activated? %>
@@ -54,13 +56,14 @@
           <%= phase_name(milestone_phase, 'start') %>
 
           <% if projekt_feature?(@projekt, 'footer.show_projekt_footer') %>
-            <%= link_to "/#{projekt.id}/#{milestone_phase.name}_footer_tab", remote: true, onclick: '$("html, body").animate({scrollTop: $("#filter-subnav").offset().top}); $("#footer-content").addClass("show-loader");' do %>
+            <%= link_to "/#{params[:id]}/#{milestone_phase.name}_footer_tab", remote: true, class: 'js-sidebar-phase-link', data: { index: index } do %>
               <i class="fas fa-long-arrow-alt-right"></i>
             <% end %>
           <% end %>
         </span>
         <span class='sidebar-projekt-phase-duration'><%= format_date(milestone_phase.start_date) %></span>
       </div>
+      <% index += 1 %>
     </div>
 
     <div class="sidebar-projekt-phase" >
@@ -71,7 +74,7 @@
           <%= phase_name(milestone_phase, 'ending') %>
 
           <% if projekt_feature?(@projekt, 'footer.show_projekt_footer') %>
-            <%= link_to "/#{projekt.id}/#{milestone_phase.name}_footer_tab", remote: true, onclick: '$("html, body").animate({scrollTop: $("#filter-subnav").offset().top}); $("#footer-content").addClass("show-loader");' do %>
+            <%= link_to "/#{params[:id]}/#{milestone_phase.name}_footer_tab", remote: true, class: 'js-sidebar-phase-link', data: { index: index } do %>
               <i class="fas fa-long-arrow-alt-right"></i>
             <% end %>
           <% end %>

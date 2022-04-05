@@ -6,5 +6,7 @@ class Budget
 
     scope :seen, -> { where.not(ignored_flag_at: nil) }
     scope :unseen, -> { where(ignored_flag_at: nil) }
+
+    enum implementation_performer: { city: 0, user: 1 }
   end
 end
