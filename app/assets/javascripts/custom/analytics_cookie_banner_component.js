@@ -2,6 +2,7 @@
   "use strict";
   App.AnalyticsCookieBannerCustom = {
     analyticsCookieName: 'statistic_cookies_enabled',
+    analyticsCookieJustSetName: 'statistic_cookies_just_set',
 
     element: function() {
       return $('#statistic-cookie-modal')
@@ -23,6 +24,10 @@
       App.Cookies.saveCookie(this.analyticsCookieName, true, 360)
     },
 
+    analyticsCookieJustSet: function(value) {
+      App.Cookies.saveCookie(this.analyticsCookieJustSetName, 'true', 360)
+    },
+
     setStatisticCookie: function(value) {
       App.Cookies.saveCookie(this.analyticsCookieName, value.toString(), 360)
     },
@@ -31,6 +36,7 @@
       var analyticsCookiesAccepted = document.querySelector('.js-accept-analytics-cookies').checked
 
       this.setStatisticCookie(analyticsCookiesAccepted)
+      this.analyticsCookieJustSet()
 
       this.close()
       this.enableMatomoIfAllowed()
@@ -38,6 +44,7 @@
 
     reject: function() {
       App.Cookies.saveCookie(this.analyticsCookieName, 'false', 360)
+      this.analyticsCookieJustSet()
 
       this.close()
     },
