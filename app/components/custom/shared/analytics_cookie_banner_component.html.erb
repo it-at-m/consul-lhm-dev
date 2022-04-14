@@ -27,7 +27,7 @@
   </div>
   <div class="row statistic-cookie-modal--option-row">
     <div class="row statistic-cookie-modal--option-input">
-      <%= check_box_tag 'accept-analytics-cookies', nil, nil, class: 'js-accept-analytics-cookies' %>
+      <%= check_box_tag 'accept-analytics-cookies', nil, statistic_enabled?, class: 'js-accept-analytics-cookies' %>
       <%= label_tag 'accept-analytics-cookies', 'Optional: Statistik-Cookie' %>
     </div>
     <div class="statistic-cookie-modal--option-caption">
@@ -39,11 +39,11 @@
   </div>
 
   <div class="statistic-cookie-modal--actions-row">
-    <button type="button" class="button js-analytics-cookies-reject-button">
+    <button type="button" class="button js-analytics-cookies-save-settings-button">
       Einstellungen speichern
     </button>
 
-    <button type="button" class="button agree-button js-analytics-cookies-accept-button">
+    <button type="button" class="button agree-button js-analytics-cookies-accept-all-button">
       Alle Cookies akzeptieren
     </button>
   </div>
