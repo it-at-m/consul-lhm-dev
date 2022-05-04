@@ -25,7 +25,7 @@ de:
         report_title: Melden
         report_text: Melden Sie uns diesen Beitrag bei unangebrachten Inhalt oder bei Urheberrechtsverletzungen.
         report_button: Melden
-        follow_text: Folgen Sie diesem Vorschlag, um stets über Neuigkeiten zu diesem Vorschlag informiert zu werden. 
+        follow_text: Folgen Sie diesem Vorschlag, um stets über Neuigkeiten zu diesem Vorschlag informiert zu werden.
         related_title: Verwandte Inhalte
         related_text: Sie können Links von anderen Vorschlägen und Diskussionen hinzufügen.
         related_button: Hinzufügen
@@ -112,6 +112,7 @@ de:
         description: Die Plattform basiert auf %{consul}, einer %{open_source} und wurde von %{demokratie} modifiziert.
         impressum: Impressum
         netiquette: Netiquette
+        statistic_cookies_settings: Cookie-Einstellungen
     menu:
       account: Konto
       archived: Abgelaufene Projekte

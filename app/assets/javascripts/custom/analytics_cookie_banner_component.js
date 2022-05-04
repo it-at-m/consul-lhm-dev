@@ -2,7 +2,7 @@
   "use strict";
   App.AnalyticsCookieBannerCustom = {
     analyticsCookieName: 'statistic_cookies_enabled',
-    analyticsCookieJustSetName: 'statistic_cookies_just_set',
+    analyticsCookieJustChangedCookieName: 'statistic_cookies_setting_just_changed',
 
     element: function() {
       return $('#statistic-cookie-modal')
@@ -21,46 +21,58 @@
     },
 
     enableStatisticCookie: function() {
-      App.Cookies.saveCookie(this.analyticsCookieName, true, 360)
+      App.Cookies.saveCookie(this.analyticsCookieName, 'true', 360)
     },
 
-    analyticsCookieJustSet: function(value) {
-      App.Cookies.saveCookie(this.analyticsCookieJustSetName, 'true', 360)
+    analyticsCookieJustChanged: function(value) {
+      App.Cookies.saveCookie(this.analyticsCookieJustChangedCookieName, 'true', 360)
     },
 
     setStatisticCookie: function(value) {
       App.Cookies.saveCookie(this.analyticsCookieName, value.toString(), 360)
     },
 
-    confirm: function() {
-      var analyticsCookiesAccepted = document.querySelector('.js-accept-analytics-cookies').checked
-
-      this.setStatisticCookie(analyticsCookiesAccepted)
-      this.analyticsCookieJustSet()
-
-      this.close()
-      this.enableMatomoIfAllowed()
+    statisticCookiesCheckbox: function() {
+      return document.querySelector('.js-accept-analytics-cookies')
     },
 
-    reject: function() {
-      App.Cookies.saveCookie(this.analyticsCookieName, 'false', 360)
-      this.analyticsCookieJustSet()
+    saveSettings: function() {
+      var analyticsCookiesAccepted = this.statisticCookiesCheckbox().checked
+
+      this.setStatisticCookie(analyticsCookiesAccepted)
+      this.analyticsCookieJustChanged()
 
       this.close()
+    },
+
+    acceptAll: function() {
+      this.statisticCookiesCheckbox().checked = true
+      this.analyticsCookieJustChanged()
+      App.Cookies.saveCookie(this.analyticsCookieName, 'true', 360)
+
+      this.close()
+    },
+
+    setStatisticCookieFromUserProfileSetting: function() {
+      var userStatisticCheckbox = document.querySelector('.js-user-setting-enable-statistic-cookies')
+
+      if (userStatisticCheckbox) {
+        this.setStatisticCookie(userStatisticCheckbox.checked)
+      }
+    },
+
+    handleOpenSettingsAgain: function(e) {
+      e.preventDefault()
+      e.stopPropagation()
+
+      this.open()
     },
 
     setupEventListeners: function() {
-      $('.js-analytics-cookies-accept-button').on('click', this.confirm.bind(this))
-      $('.js-analytics-cookies-reject-button').on('click', this.reject.bind(this))
-
-      $('.js-user-settings-form').on('submit', function() {
-        var userStatisticCheckbox = document.querySelector('.js-user-setting-enable-statistic-cookies')
-
-        console.log(userStatisticCheckbox)
-        if (userStatisticCheckbox) {
-          this.setStatisticCookie(userStatisticCheckbox.checked)
-        }
-      }.bind(this))
+      $('.js-analytics-cookies-accept-all-button').on('click', this.acceptAll.bind(this))
+      $('.js-analytics-cookies-save-settings-button').on('click', this.saveSettings.bind(this))
+      $('.js-user-settings-form').on('submit', this.setStatisticCookieFromUserProfileSetting.bind(this))
+      $('.js-statistic-cookies-settings').on('click', this.handleOpenSettingsAgain.bind(this))
     },
 
     isCookiePreferenceAlreadyStored: function() {
@@ -137,7 +149,8 @@
       this.setupEventListeners()
 
       if (this.isCookiePreferenceAlreadyStored()) return
-      if (this.analyticsCookieSettingForUserIsSet()) return
+      // Clarify if this cheek is needed
+      // if (this.analyticsCookieSettingForUserIsSet()) return
       if (window.location.pathname === '/account') return
 
       this.open()

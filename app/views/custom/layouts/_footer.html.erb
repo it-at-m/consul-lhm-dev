@@ -23,14 +23,15 @@
   </div>
 
   <div class="subfooter row">
-    <div class="small-12 medium-8 column">
+    <div class="small-12 medium-10 column">
       <%= t("layouts.footer.copyright", year: Time.current.year) %>&nbsp;|
       <ul class="no-bullet inline-block">
         <li class="inline-block"><%= link_to t("layouts.footer.privacy"), page_path("privacy"), data: { turbolinks: "false" } %>&nbsp;|</li>
         <li class="inline-block"><%= link_to t("layouts.footer.conditions"), page_path("conditions"), data: { turbolinks: "false" } %>&nbsp;|</li>
         <li class="inline-block"><%= link_to t("layouts.footer.accessibility"), page_path("accessibility"), data: { turbolinks: "false" } %>&nbsp;|</li>
         <li class="inline-block"><%= link_to t("custom.layouts.footer.impressum"), page_path("impressum"), data: { turbolinks: "false" } %>&nbsp;|</li>
-        <li class="inline-block"><%= link_to t("custom.layouts.footer.netiquette"), page_path("netiquette"), data: { turbolinks: "false" } %></li>
+        <li class="inline-block"><%= link_to t("custom.layouts.footer.netiquette"), page_path("netiquette"), data: { turbolinks: "false" } %>&nbsp;|</li>
+        <li class="inline-block"><%= link_to t("custom.layouts.footer.statistic_cookies_settings"), '', class: 'js-statistic-cookies-settings' %></li>
       </ul>
     </div>
 
