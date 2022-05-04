@@ -1,0 +1,42 @@
+<h2><%= t("custom.admin.projekts.edit.projekt_events_tab.page_title") %></h2>
+
+<%= render partial: 'custom/admin/projekts/edit/projekt_events/form', locals: { url: admin_projekt_projekt_events_path(@projekt), projekt: @projekt, event: @projekt_event } %>
+
+<div class='margin-top'>
+  <% @projekt_events.each do |event| %>
+    <div class='small-12 medium-7 projekt-event' id="<%= dom_id(event) %>">
+      <%= check_box_tag "edit_projekt_event_#{ dom_id(event) }" %>
+      <%= label_tag nil, nil, for: "edit_projekt_event_#{ dom_id(event) }", class: 'edit-projekt-event' %>
+
+      <div class='projekt-event-content'>
+        <p>
+          <strong><%= t('custom.admin.projekts.edit.projekt_events_tab.event_title') %>:</strong>
+          <%= event.title %></h3>
+        </p>
+        <p>
+          <strong><%= t('custom.admin.projekts.edit.projekt_events_tab.event_location') %>:</strong>
+          <%= event.location %>
+        </p>
+        <p>
+          <strong><%= t('custom.admin.projekts.edit.projekt_events_tab.event_datetime') %>:</strong>
+          <%= event.datetime.strftime('%d.%m.%y %H:%m') %>
+        </p>
+        <p>
+          <strong><%= t('custom.admin.projekts.edit.projekt_events_tab.event_weblink') %>:</strong>
+          <%= link_to(event.weblink, event.weblink) %>
+        </p>
+        <p>
+          <strong><%= t('custom.admin.projekts.edit.projekt_events_tab.event_created_at') %>:</strong>
+          <%= event.created_at.to_date %>
+        </p>
+      </div>
+
+      <div class='edit-projekt-event-form'>
+        <%= render partial: 'custom/admin/projekts/edit/projekt_events/form', locals: { url: admin_projekt_projekt_event_path(@projekt, event), projekt: @projekt, event: event } %>
+      </div>
+
+      <%= link_to '', admin_projekt_projekt_event_path(@projekt, event), method: :delete, class: 'delete-projekt-event' %>
+      <hr>
+    </div>
+  <% end %>
+</div>

@@ -126,6 +126,7 @@
 //= require accessibility_fixes
 //= require analytics_cookie_banner_component
 //= require components/shared/footer_phases_component
+//= require components/admin/livesubmit_checkbox
 //= require orbit_in_popup_fix
 //= require polls_custom
 //= require radio_button_filter
@@ -211,6 +212,7 @@ var initialize_modules = function() {
   App.CustomPages.initialize();
   App.ModerationCustom.initialize();
   App.FooterPhasesComponentCustom.initialize();
+  App.LivesubmitCheckboxCustom.initialize();
   App.OrbitInPopupFixCustom.initialize();
 
   if ($("#projekt-selector-fields").length) {

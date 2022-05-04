@@ -38,7 +38,7 @@
         <div class='column small-12 medium-6 large-4 resource-participate table' data-equalizer-watch='details'>
           <div class='table-cell align-middle'>
 
-            <% unless investment.unfeasible? %>
+            <% if investment.feasible? %>
               <% if investment.should_show_votes? %>
                 <div id="<%= dom_id(investment) %>_votes" class="">
                      <%= render Budgets::Investments::VotesComponent.new(investment) %>
@@ -70,11 +70,7 @@
               <% end %>
             <% end %>
 
-            <% if investment.budget.phase.in?(['accepting', 'reviewing', 'valuating', 'reviewing_ballots']) %>
-              <div class="callout warning" style='margin-bottom:0;'>
-                <%= t("custom.budgets.investments.statuses.phases.#{investment.budget.phase}") %>
-              </div>
-            <% end %>
+            <%= render partial: 'budgets/investments/investment_status_callout', locals: { investment: investment } %>
 
           </div>
         </div>

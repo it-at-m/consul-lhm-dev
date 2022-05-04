@@ -488,9 +488,12 @@ GEM
     pronto-scss (0.11.0)
       pronto (~> 0.11.0)
       scss_lint (~> 0.43, >= 0.43.0)
-    pry (0.14.1)
+    pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
+    pry-byebug (3.9.0)
+      byebug (~> 11.0)
+      pry (~> 0.13.0)
     public_suffix (4.0.6)
     puma (4.3.10)
       nio4r (~> 2.0)
@@ -505,6 +508,10 @@ GEM
       json-jwt (>= 1.11.0)
       rack (>= 2.1.0)
     rack-proxy (0.7.2)
+      rack
+    rack-mini-profiler (3.0.0)
+      rack (>= 1.2.0)
+    rack-protection (2.1.0)
       rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -817,8 +824,10 @@ DEPENDENCIES
   pronto-eslint (~> 0.11.0)
   pronto-rubocop (~> 0.11.1)
   pronto-scss (~> 0.11.0)
-  pry (~> 0.14.1)
+  pry (~> 0.13.0)
+  pry-byebug (~> 3.9)
   puma (~> 4.3.10)
+  rack-mini-profiler
   rails (= 5.2.6)
   rails-assets-leaflet!
   rails-assets-leaflet.locatecontrol!

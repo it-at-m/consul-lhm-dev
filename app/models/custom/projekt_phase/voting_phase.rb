@@ -4,7 +4,7 @@ class ProjektPhase::VotingPhase < ProjektPhase
   end
 
   def phase_info_activated?
-    ProjektSetting.find_by(projekt: projekt, key: "projekt_feature.phase.voting_info").value.present?
+    info_active?
   end
 
   def name
@@ -13,5 +13,9 @@ class ProjektPhase::VotingPhase < ProjektPhase
 
   def resources_name
     'polls'
+  end
+
+  def default_order
+    4
   end
 end

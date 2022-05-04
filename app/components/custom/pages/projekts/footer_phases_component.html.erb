@@ -26,7 +26,7 @@
                 <%= link_to "/#{params[:id]}/#{phase.name}_footer_tab", remote: true, onclick: '$("#footer-content").addClass("show-loader"); ' do %>
                   <h4>
                     <%= t("custom.projekts.page.tabs.#{phase.resources_name}") %>
-                    <% if phase.resources_name.in?(['debates', 'proposals', 'polls', 'comments']) %>
+                    <% if phase.resources_name.in?(['debates', 'proposals', 'polls', 'comments', 'projekt_events']) %>
                       <% count = instance_variable_get("@#{phase.resources_name}_count") %>
                       <%= "(#{count})" %>
                     <% end %>
@@ -78,6 +78,22 @@
             </li>
           <% end %>
 
+          <% if event_phase.phase_info_activated? %>
+            <li id="filter-subnav-<%= event_phase.resources_name %>" class="page-subnav-tab <%= 'is-active' if event_phase.resources_name == default_phase_name %>">
+              <%= link_to "/#{params[:id]}/#{event_phase.name}_footer_tab", remote: true, onclick: '$("#footer-content").addClass("show-loader")' do %>
+                <h4>
+                  <%= t("custom.projekts.page.tabs.#{event_phase.resources_name}") %>
+                  <%= "(#{projekt_events_count})" %>
+                </h4>
+                <div class='tab-info-summary'>
+                  <% if projekt_events.sort_by_incoming.any? %>
+                  <span class='time-icon'><%= format_date(projekt_events.sort_by_incoming.first.datetime.to_date) %></span>
+                  <% end %>
+                </div>
+              <% end %>
+            </li>
+          <% end %>
+
           <% if newsfeed_phase.phase_info_activated? %>
             <li id="filter-subnav-<%= newsfeed_phase.resources_name %>" class="page-subnav-tab <%= 'is-active' if newsfeed_phase.resources_name == default_phase_name %>">
               <%= link_to "/#{params[:id]}/#{newsfeed_phase.name}_footer_tab", remote: true, onclick: '$("#footer-content").addClass("show-loader")' do %>
@@ -87,10 +103,8 @@
               <% end %>
             </li>
           <% end %>
-
         </ul>
       </div>
-
     </div>
   </div>
 </nav>

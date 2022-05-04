@@ -22,25 +22,25 @@
     <% end %>
   </div>
 
-  <span class="divider"></span>
-
-  <div class="against inline-block">
-    <% if user_signed_in? %>
-      <%= link_to vote_debate_path(debate, value: "no"), class: "unlike #{voted_classes[:against]}", title: t("votes.disagree"), method: "post", remote: true do %>
-        <span class="icon-unlike">
-          <span class="show-for-sr"><%= t("votes.disagree") %></span>
-        </span>
-        <span class="percentage"><%= votes_percentage("dislikes", debate) %></span>
+  <% if debate.projekt.blank? || (debate.projekt.present? && projekt_feature?(debate.projekt, 'debates.allow_downvoting') ) %>
+    <div class="against inline-block">
+      <% if user_signed_in? %>
+        <%= link_to vote_debate_path(debate, value: "no"), class: "unlike #{voted_classes[:against]}", title: t("votes.disagree"), method: "post", remote: true do %>
+          <span class="icon-unlike">
+            <span class="show-for-sr"><%= t("votes.disagree") %></span>
+          </span>
+          <span class="percentage"><%= votes_percentage("dislikes", debate) %></span>
+        <% end %>
+      <% else %>
+        <div class="unlike">
+          <span class="icon-unlike">
+            <span class="show-for-sr"><%= t("votes.disagree") %></span>
+          </span>
+          <span class="percentage"><%= votes_percentage("dislikes", debate) %></span>
+        </div>
       <% end %>
-    <% else %>
-      <div class="unlike">
-        <span class="icon-unlike">
-          <span class="show-for-sr"><%= t("votes.disagree") %></span>
-        </span>
-        <span class="percentage"><%= votes_percentage("dislikes", debate) %></span>
-      </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 
   <span class="total-votes">
     <%= t("debates.debate.votes", count: debate.votes_for.count) %>

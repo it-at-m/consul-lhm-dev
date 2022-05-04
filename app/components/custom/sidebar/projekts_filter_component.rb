@@ -46,4 +46,14 @@ class Sidebar::ProjektsFilterComponent < ApplicationComponent
   def local_form?
     controller_name == 'pages' ? false : true
   end
+
+  def cache_key
+    [
+      Projekt.all,
+      ProjektSetting.where('key LIKE ?', '%show_in_sidebar_filter%'),
+      params[:filter_projekt_ids],
+      controller_name,
+      action_name
+    ].flatten
+  end
 end

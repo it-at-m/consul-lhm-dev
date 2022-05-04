@@ -1,5 +1,5 @@
 en:
-  custom:    
+  custom:
     projekts:
       index:
         title: Projects overview
@@ -38,6 +38,15 @@ en:
           polls: Polls
           budgets: Budgets
           milestones: Milestones
+          project_events: Events
+        projekt_events_tab:
+          title: Events
+          no_events: No events
+          event_title: Title
+          event_location: Location
+          event_date: Date
+          event_time: Time
+          event_weblink: Weblink
       phase_name:
         comment_phase: Kommentare
         debate_phase: Diskussionen
@@ -45,8 +54,14 @@ en:
         voting_phase: Abstimmungen
         budget_phase: Budget
         milestone_phase: Milestones
+        event_phase: Event phase
         milestone_phase_details:
           start: Start
           ending: Planned end
         projekt_notification_phase: Notifications
         newsfeed_phase: Newsfeed
+      projekt_events:
+        orders:
+          all: All
+          incoming: Incoming
+          past: Past

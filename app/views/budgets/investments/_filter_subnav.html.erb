@@ -1,27 +1,34 @@
-<ul class="tabs"
-    id="investments_tabs"
-    data-deep-link="true"
-    data-update-history="true"
-    data-deep-link-smudge="true"
-    data-deep-link-smudge-delay="500"
-    data-tabs>
-  <li class="tabs-title is-active">
-    <%= link_to "#tab-comments" do %>
-      <h3>
-        <%= t("budgets.investments.show.comments_tab") %>
-        <span class="js-comments-count">(<%= @investment.comments_count %>)</span>
-      </h3>
-    <% end %>
-  </li>
+<% if projekt_feature?(@investment&.projekt, 'budgets.show_comments') ||
+    projekt_feature?(@investment&.projekt, 'budgets.enable_investment_milestones_tab') %>
 
-  <% if extended_feature?('budget_investments.enable_investment_milestones_tab') %>
-    <li class="tabs-title">
-      <%= link_to "#tab-milestones" do %>
-        <h3>
-          <%= t("budgets.investments.show.milestones_tab") %>
-          (<%= @investment.milestones.count %>)
-        </h3>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
+  <ul class="tabs"
+      id="investments_tabs"
+      data-deep-link="true"
+      data-update-history="true"
+      data-deep-link-smudge="true"
+      data-deep-link-smudge-delay="500"
+      data-tabs>
+
+    <% if projekt_feature?(@investment&.projekt, 'budgets.show_comments') %>
+      <li class="tabs-title is-active">
+        <%= link_to "#tab-comments" do %>
+          <h3>
+            <%= t("budgets.investments.show.comments_tab") %>
+            <span class="js-comments-count">(<%= @investment.comments_count %>)</span>
+          </h3>
+        <% end %>
+      </li>
+    <% end %>
+
+    <% if projekt_feature?(@investment&.projekt, 'budgets.enable_investment_milestones_tab') %>
+      <li class="tabs-title <%= 'is-active' unless projekt_feature?(@investment&.projekt, 'budgets.show_comments') %>">
+        <%= link_to "#tab-milestones" do %>
+          <h3>
+            <%= t("budgets.investments.show.milestones_tab") %>
+            (<%= @investment.milestones.count %>)
+          </h3>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

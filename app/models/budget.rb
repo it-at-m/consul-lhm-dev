@@ -178,7 +178,9 @@ class Budget < ApplicationRecord
     ActionController::Base.helpers.number_to_currency(amount,
                                                       precision: 0,
                                                       locale: I18n.locale,
-                                                      unit: currency_symbol)
+                                                      unit: currency_symbol,
+                                                      delimiter: ( I18n.locale == :de ? '.' : ',' )
+                                                     )
   end
 
   def formatted_heading_price(heading)

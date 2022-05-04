@@ -5,7 +5,7 @@
     <aside class="margin-bottom">
       <%= render Debates::NewButtonComponent.new(@current_projekt, @current_tab_phase) %>
 
-      <%= render Sidebar::ProjektsFilterComponent.new(@top_level_active_projekts, @top_level_archived_projekts, @all_resources, @current_tab_phase, @current_projekt) %>
+      <%= render Sidebar::ProjektsFilterComponent.new(@top_level_active_projekts, @top_level_archived_projekts, @debates.except(:limit, :offset), @current_tab_phase, @current_projekt) %>
     </aside>
   </div>
 

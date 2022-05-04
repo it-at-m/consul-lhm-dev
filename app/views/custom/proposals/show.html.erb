@@ -19,13 +19,14 @@
             @proposal,
             @proposal.author,
             Flag.flagged?(current_user, @proposal),
-            extended_feature?('proposals.show_report_button_in_proposal_sidebar'),
-            extended_feature?('proposals.show_follow_button_in_proposal_sidebar'),
-            extended_feature?('proposals.show_community_button_in_proposal_sidebar'),
-            extended_feature?('proposals.show_related_content'),
+            projekt_feature?(@proposal&.projekt, 'proposals.show_report_button_in_proposal_sidebar'),
+            projekt_feature?(@proposal&.projekt, 'proposals.show_follow_button_in_proposal_sidebar'),
+            projekt_feature?(@proposal&.projekt, 'proposals.show_community_button_in_proposal_sidebar'),
+            projekt_feature?(@proposal&.projekt, 'proposals.show_related_content'),
             @proposal_votes,
             @proposal.projekt,
             @proposal.proposal_phase,
+            @proposal.successful?,
             @proposal.image] do %>
     <div class="proposal-show">
 
@@ -61,7 +62,7 @@
 
           <%= render "proposals/info", proposal: @proposal %>
 
-          <% if !@proposal.selected? && extended_feature?('proposals.show_related_content') %>
+          <% if !@proposal.selected? && projekt_feature?(@proposal&.projekt, 'proposals.show_related_content') %>
             <%= render "relationable/related_content", relationable: @proposal %>
           <% end %>
         </div>
@@ -110,24 +111,24 @@
 
             <%= render "shared/participation/resource_info", resource: @proposal %>
 
-            <% if extended_feature?('proposals.show_report_button_in_proposal_sidebar') %>
+            <% if projekt_feature?(@proposal&.projekt, 'proposals.show_report_button_in_proposal_sidebar') %>
               <%= render "shared/participation/flag", resource: @proposal %>
             <% end %>
 
             <%= render "proposals/social_share", proposal: @proposal, share_title: t("proposals.show.share") %>
 
-            <% if current_user && extended_feature?('proposals.show_follow_button_in_proposal_sidebar') %>
+            <% if current_user && projekt_feature?(@proposal&.projekt, 'proposals.show_follow_button_in_proposal_sidebar') %>
               <div class="sidebar-divider"></div>
               <h2><%= t("shared.follow") %></h2>
               <P><%= t("custom.shared.show.follow_text") %></p>
               <%= render "follows/follow_button", follow: find_or_build_follow(current_user, @proposal) %>
             <% end %>
 
-            <% if extended_feature?('proposals.show_community_button_in_proposal_sidebar') %>
+            <% if projekt_feature?(@proposal&.projekt, 'proposals.show_community_button_in_proposal_sidebar') %>
               <%= render "communities/access_button", community: @proposal.community %>
             <% end %>
 
-            <% if current_user && extended_feature?('proposals.show_related_content') %>
+            <% if current_user && projekt_feature?(@proposal&.projekt, 'proposals.show_related_content') %>
               <div class="sidebar-divider"></div>
               <h2><%= t("custom.shared.show.related_title") %></h2>
               <p><%= t("custom.shared.show.related_text") %></p>
@@ -156,11 +157,13 @@
     </div>
 
     <div class="tabs-content" data-tabs-content="proposals_tabs">
-      <div class="tabs-panel is-active" id="tab-comments">
-        <%= render "proposals/comments" %>
-      </div>
+      <% if projekt_feature?(@proposal.projekt, 'proposals.show_comments') %>
+        <div class="tabs-panel is-active" id="tab-comments">
+          <%= render "proposals/comments" %>
+        </div>
+      <% end %>
 
-      <div class="tabs-panel" id="tab-notifications">
+      <div class="tabs-panel <%= 'is-active' unless projekt_feature?(@proposal.projekt, 'proposals.show_comments') %>" id="tab-notifications">
         <%= render "proposals/notifications" %>
       </div>
 

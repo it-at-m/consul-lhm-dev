@@ -1,4 +1,4 @@
-<% if user_signed_in? && @projekt.present? && @projekt.comments_allowed?(current_user) %>
+<% if comments_allowed? %>
   <%= render "comments/form", { commentable: @projekt, parent_id: nil } %>
 
 <% elsif user_signed_in? && @projekt.present? %>

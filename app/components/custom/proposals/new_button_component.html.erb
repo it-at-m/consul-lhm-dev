@@ -1,5 +1,5 @@
 <% if any_selectable_projekts? || current_user.nil? %>
-  <%= link_to t("proposals.index.start_proposal"), new_proposal_path(projekt: selected_parent_projekt), class: "button expanded js-preselect-projekt" %>
+  <%= link_to t("proposals.index.start_proposal"), new_proposal_path( link_params_hash ), class: "button expanded js-preselect-projekt" %>
 <% elsif !any_selectable_projekts? && @current_tab_phase.present? %>
   <% nil %>
 <% else %>

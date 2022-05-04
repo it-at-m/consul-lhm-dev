@@ -980,6 +980,8 @@ de:
       legislation_proposal: "Beteiligungsverfahren %{doc_count}"
       comment: "Kommentare %{doc_count}"
       site_customization_page: "Webseiten %{doc_count}"
+      event: "Event %{doc_count}"
+      projekt_events: "Event %{doc_count}"
     result_tag:
       de: "d"
       pr: "v"

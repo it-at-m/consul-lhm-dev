@@ -47,10 +47,10 @@
     <div class="row">
       <div id="debates-sidebar" class="small-12 medium-3 column">
         <aside class="margin-bottom">
-          <%= render Debates::NewButtonComponent.new() %>
+          <%= render Debates::NewButtonComponent.new(@selected_parent_projekt) %>
 
           <% if extended_feature?('debates.enable_projekt_filter') %>
-            <%= render Sidebar::ProjektsFilterComponent.new(@top_level_active_projekts, @top_level_archived_projekts, @all_resources) %>
+            <%= render Sidebar::ProjektsFilterComponent.new(@top_level_active_projekts, @top_level_archived_projekts, @debates.except(:limit, :offset)) %>
           <% end %>
 
           <% if show_affiliation_filter_in_sidebar? %>

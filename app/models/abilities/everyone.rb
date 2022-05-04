@@ -7,9 +7,9 @@ module Abilities
       can [:read, :map, :summary, :share, :json_data], Proposal
       can :read, Comment
       can :read, Poll
-      if (user&.administrator? || user&.moderator?) && Setting["extended_feature.polls.intermediate_poll_results_for_admins"]
-        can :results, Poll
-        can :stats, Poll
+      can [:results, :stats], Poll do |poll|
+        (user&.administrator? || user&.moderator?) &&
+          ProjektSetting.find_by(projekt: poll.projekt, key: "projekt_feature.polls.intermediate_poll_results_for_admins").value.present?
       end
       can :results, Poll, id: Poll.expired.results_enabled.not_budget.ids
       can :stats, Poll, id: Poll.expired.stats_enabled.not_budget.ids

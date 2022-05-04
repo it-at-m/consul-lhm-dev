@@ -4,6 +4,10 @@ module ProjektSettingsHelper
     (setting && (setting.value == 'active' || setting.value == 't'  )) ? true : false
   end
 
+  def projekt_option(projekt, option)
+    ProjektSetting.find_by(projekt: projekt, key: "projekt_feature.#{option}").value
+  end
+
   def show_projekt_phase_in_projekt_page?(projekt, phase_name)
     projekt.send(phase_name).present? && ( projekt_feature?(projekt, "general.show_not_active_phases_in_projekts_page_sidebar") || projekt_phase_active?(projekt, phase_name) )
   end

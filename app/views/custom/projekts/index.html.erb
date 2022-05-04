@@ -1,40 +1,55 @@
 <% provide :title do %><%= "#{t('cli.general.seo_title_prefix')} #{t('custom.projekts.index.title')}" %><% end %>
 
-<main>
-  <div class='row'>
-    <div class='column'>
-      <h1 class='margin-bottom'>
-        <%= t('custom.projekts.index.title') %>
-      </h1>
+<main class="projekts-page">
+  <div class="help-header">
+    <div class='row'>
+      <div class='column'>
+        <h1 class='projekts-page-title'>
+          <i class="fas fa-code-branch"></i>
+          <%= t('custom.projekts.index.title') %>
+        </h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="projekts-map-wrapper">
+    <div class="map projekts-map not-print">
+      <%= render_map(MapLocation.new(latitude: Setting['map.latitude'], longitude: Setting['map.longitude'], zoom: Setting['map.zoom']), "projekts", false, nil, @projekts_coordinates) %>
+    </div>
+    <div class='expand-overview-map-wrapper'>
+      <div class='expand-overview-map small js-expand-overview-map not-print wide'>
+        <%= t('custom.proposals.index.show_larger_map') %>
+      </div>
     </div>
   </div>
 
   <div class='row'>
     <div class='column small-12 medium-9'>
+      <%= render_custom_block 'projekts_list' %>
+      <%= render Shared::OrderLinksComponent.new("custom.projekts.projekts") %>
 
-      <% if @current_projekts.any? %>
-        <h3><%= t('custom.projekts.index.current_projekts') %></h3>
-
+      <% if @projekts.any? %>
         <% Projekt.top_level.each do |top_level_projekt| %>
           <% top_level_projekt.all_children_projekts.unshift(top_level_projekt).each do |projekt| %>
-            <%= render partial: 'projekt', locals: { projekt: projekt } if projekt.in? @current_projekts %>
+            <%= render partial: 'projekt', locals: { projekt: projekt } if projekt.in? @projekts %>
           <% end %>
         <% end %>
+      <% else %>
+        <%= t('custom.projekts.index.no_projekts') %>
       <% end %>
-
-      <% if @expired_projekts.any? %>
-        <h3 class='margin-top'><%= t('custom.projekts.index.expired_projekts') %></h3>
-
-        <% Projekt.top_level.each do |top_level_projekt| %>
-          <% top_level_projekt.all_children_projekts.unshift(top_level_projekt).each do |projekt| %>
-            <%= render partial: 'projekt', locals: { projekt: projekt } if projekt.in? @expired_projekts %>
-          <% end %>
-        <% end %>
-      <% end %>
-
     </div>
 
     <div class='column small-12 medium-3'>
+      <% if show_affiliation_filter_in_sidebar? %>
+        <%= render "shared/sidebar_filter/geozone_affiliations" %>
+      <% end %>
+
+      <%= render "shared/categories", taggable: "projekt" %>
+      <%= render "shared/tag_cloud", taggable: "projekt" %>
+      <% if @sdgs.present? %>
+        <%= render SDG::Goals::TagCloudComponent.new("Projekt") %>
+      <% end %>
+
       <%= render "shared/social_share",
           share_title: t("custom.pages.social_share.share"),
           title: 'Title',

@@ -1,0 +1,25 @@
+<%= form_for(event, url: url) do |f| %>
+  <%= render "shared/errors", resource: f.object %>
+
+  <div class='small-12 medium-7'>
+    <%= f.text_field :title, {label: t("custom.admin.projekts.edit.projekt_events_tab.event_title") } %>
+  </div>
+
+  <div class='small-12 medium-7'>
+    <%= f.text_field :location, {label: t("custom.admin.projekts.edit.projekt_events_tab.event_location") } %>
+  </div>
+
+  <div class='small-12 medium-7'>
+    <%= f.datetime_field :datetime, {label: t("custom.admin.projekts.edit.projekt_events_tab.event_datetime") } %>
+  </div>
+
+  <div class='small-12 medium-7'>
+    <%= f.text_field :weblink, {label: t("custom.admin.projekts.edit.projekt_events_tab.event_weblink") } %>
+  </div>
+
+  <%= f.hidden_field :tab, value: "#tab-projekt-events" %>
+
+  <div>
+    <%= f.submit(t("custom.admin.projekts.edit.projekt_events_tab.button"), class: "button") %>
+  </div>
+<% end %>

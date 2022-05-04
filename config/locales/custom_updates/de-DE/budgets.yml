@@ -1,11 +1,26 @@
 de:
+  budgets:
+    investments:
+      index:
+        filters:
+          all: Alle
+          feasible: Durchführbar
+          undecided: Noch nicht definiert
   custom:
     budgets:
       investments:
         show:
+          callouts:
+            selecting:
+              undecided: Dieser Investitionsvorschlag befindet sich gerade noch in der Bewertung.
+              unfeasible: Dieser Investitionsvorschlag wurde als nicht durchführbar klassifiziert.
+            publishing_prices:
+              unfeasible: Dieser Investitionsvorschlag wurde als nicht durchführbar markiert
+              undecided: Der Investitionsvorschlag wird nicht zur Wahl gestellt.
           implementation: Umsetzung
           implementation_user_text_html: "<p>%{author} unterstützt bei der Durchführung<p><p>%{implementation_contribution}</p>"
           implementation_city_text_html: "<p>Soll von Stadtverwaltung umgesetzt werden</p>"
+          user_cost_estimate: "Preisliche Einschätzung"
         statuses:
           phases:
             accepting: Der Investitionsvorschlag wurde erfolgreich eingereicht.

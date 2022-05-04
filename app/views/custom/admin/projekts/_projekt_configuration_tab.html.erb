@@ -1,7 +1,7 @@
 <h2><%= t('custom.admin.projekts.index.add_projekt') %>  </h2>
 <%= form_for(@projekt, url: admin_projekts_path, as: :projekt) do |f| %>
   <div class='small-12 medium-7'>
-    <%= f.text_field :name, {label: t("custom.admin.projekts.index.enter_name") } %>
+    <%= f.text_field :name, {label: t("custom.admin.projekts.index.enter_name"), required: true } %>
   </div>
 
   <div class='small-12 medium-7'>

@@ -1,16 +1,18 @@
-<div class="sidebar-divider hide-for-small-only"></div>
+<div class="sidebar-divider <% 'show-for-medium' if @default_phase_name == 'proposals' %>"></div>
 
-<h2 class="sidebar-title hide-for-small-only"><%= t("custom.projekt.page.sidebar.map.title") %></h2>
+<h2 class="sidebar-title <% 'show-for-medium' if @default_phase_name == 'proposals' %>"><%= t("custom.projekt.page.sidebar.map.title") %></h2>
 
-<% unless get_projekt_affiliation_name(projekt, true) == 'no_affiliation' %>
-  <p><%= get_projekt_affiliation_name(projekt) %></p>
-<% end %>
+<div class=<%= 'show-for-medium' if @default_phase_name == 'proposals' %>>
+  <% unless get_projekt_affiliation_name(projekt, true) == 'no_affiliation' %>
+    <p><%= get_projekt_affiliation_name(projekt) %></p>
+  <% end %>
 
-<%= link_to extended_sidebar_map_page_path(projekt.page.slug), remote: true do %>
-  <div class='sidebar-projekt-map'>
-    <%= render_map(projekt.map_location, "proposals_sidebar", false, nil, [] ) %>
+  <%= link_to extended_sidebar_map_page_path(projekt.page.slug), remote: true do %>
+    <div class='sidebar-projekt-map'>
+      <%= render_map(projekt.map_location, "proposals_sidebar", false, nil, [] ) %>
+    </div>
+  <% end %>
+
+  <div id="extended-sidebar-map">
   </div>
-<% end %>
-
-<div id="extended-sidebar-map">
 </div>

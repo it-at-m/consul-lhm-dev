@@ -1,5 +1,7 @@
-<div class="sidebar-divider"></div>
+<div class="sidebar-divider show-for-medium"></div>
 
-<h2 class="sidebar-title"><%= t("custom.projekt.page.sidebar.navigator.title") %></h2>
+<h2 class="sidebar-title show-for-medium"><%= t("custom.projekt.page.sidebar.navigator.title") %></h2>
 
-<%= render partial: 'pages/sidebar/projekt_list', locals: { projekts: [projekt.top_parent], current_projekt: projekt } %>
+<div class='show-for-medium'>
+  <%= render partial: 'pages/sidebar/projekt_list', locals: { projekts: [projekt.top_parent], current_projekt: projekt } %>
+</div>

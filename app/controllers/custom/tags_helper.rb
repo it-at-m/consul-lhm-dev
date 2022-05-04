@@ -13,6 +13,8 @@ module TagsHelper
       budget_investments_path(@budget, search: tag_name)
     when "legislation/proposal"
       legislation_process_proposals_path(@process, search: tag_name)
+    when "projekt"
+      projekts_path(@process, tags: tag_name)
     else
       "#"
     end

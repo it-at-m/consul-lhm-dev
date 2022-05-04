@@ -8,7 +8,7 @@
     <% if investment.should_show_votes? %>
       <% if user_voted_for? %>
         <div class="supported">
-          <% if feature?(:remove_investments_supports) %>
+          <% if projekt_feature?(investment.projekt, 'budgets.remove_investments_supports') %>
             <%= button_to remove_support_path,
                 class: "button button-remove-support expanded",
                 method: "delete",

@@ -24,7 +24,7 @@
          data-proposal-graph-progress-label="<%= t("dashboard.progress.progress") %>"
          data-proposal-graph-supports-label="<%= t("dashboard.progress.supports") %>"
          data-proposal-graph-success-label="<%= t("dashboard.progress.success") %>"
-         data-proposal-success="<%= Setting["votes_for_proposal_success"] %>"
+         data-proposal-success="<%= custom_votes_for_proposal_success(@proposal) || Setting["votes_for_proposal_success"] %>"
          data-proposal-resources-url="<%= proposal_dashboard_resources_path(proposal, format: :json) %>"
          class="c3 proposal-graph"></div>
   </div>

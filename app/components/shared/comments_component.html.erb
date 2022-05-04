@@ -8,9 +8,7 @@
       <%= render Shared::OrderLinksComponent.new("comments", anchor: "tab-comments") %>
 
       <%= render "comments/comment_list", comments: comment_tree.root_comments %>
-      <%= paginate comment_tree.root_comments, params: {
-        anchor: controller_name == "pages" ? "tab-comments" : "comments"
-      } %>
+      <%= pagination_links %>
     <% end %>
   </div>
 </div>

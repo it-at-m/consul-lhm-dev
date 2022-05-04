@@ -9,7 +9,7 @@
       </div>
 
     <% elsif voted_for?(@proposal_votes, proposal) %>
-      <% if withdraw_proposal_support_on? %>
+      <% if projekt_feature?(proposal&.projekt, 'proposals.enable_proposal_support_withdrawal') %>
         <%= link_to unvote_proposal_url(proposal),
             class: "button button-support small expanded",
             title: t("proposals.proposal.support_title"), method: "post", remote: true do %>

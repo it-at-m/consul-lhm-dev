@@ -78,8 +78,8 @@ class Proposal < ApplicationRecord
   scope :last_week,                -> { where("proposals.created_at >= ?", 7.days.ago) }
   scope :retired,                  -> { where.not(retired_at: nil) }
   scope :not_retired,              -> { where(retired_at: nil) }
-  scope :successful,               -> { where("cached_votes_up >= ?", Proposal.votes_needed_for_success) }
-  scope :unsuccessful,             -> { where("cached_votes_up < ?", Proposal.votes_needed_for_success) }
+  # scope :successful,               -> { where("cached_votes_up >= ?", Proposal.votes_needed_for_success) }
+  # scope :unsuccessful,             -> { where("cached_votes_up < ?", Proposal.votes_needed_for_success) }
   scope :public_for_api,           -> { all }
   scope :selected,                 -> { where(selected: true) }
   scope :not_selected,             -> { where(selected: false) }

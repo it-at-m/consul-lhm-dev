@@ -73,6 +73,7 @@ Rails.application.routes.draw do
       get :milestone_phase_footer_tab
       get :projekt_notification_phase_footer_tab
       get :newsfeed_phase_footer_tab
+      get :event_phase_footer_tab
       get :extended_sidebar_map
     end
   end

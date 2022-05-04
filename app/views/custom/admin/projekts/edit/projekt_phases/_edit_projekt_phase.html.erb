@@ -1,6 +1,11 @@
 <tr class="projekt_phase_settings" style='vertical-align:top;' >
   <td>
     <%= t("custom.admin.projekts.edit.projekt_phases_tab.#{phase_name}") %>
+    <div>
+      <small>
+        <%= "/#{@projekt.page.slug}?selected_phase_id=#{projekt_phase.id}"  %>
+      </small>
+    </div>
   </td>
   <td>
     <%= form_for(@projekt, url: admin_projekt_path, as: :projekt) do |f| %>
@@ -16,7 +21,7 @@
           </div>
         </div>
 
-        <% unless phase_name == 'milestone_phase' %>
+        <% unless phase_name.in?(['milestone_phase', 'voting_phase']) %>
           <strong class='geo-restriction-title'><span class='geo-restriction-icon'><%= t("custom.admin.projekts.edit.projekt_phases_tab.restriction") %></span></strong>
           <%= render partial: 'custom/admin/projekts/edit/projekt_phases/phase_geozone_restriction', locals: { phase_form: phase_form, projekt_phase: projekt_phase, phase_name: phase_name } %>
         <% end %>
@@ -27,7 +32,7 @@
   </td>
 
   <td>
-    <%= render Admin::Settings::FeaturedSettingsFormComponent.new(feature_phase_info, tab: '#tab-projekt-phases') %>
+    <%= render Admin::LivesubmitCheckbox::Component.new(url: liveupdate_admin_projekt_path, resource_name: "projekt[#{phase_name}_attributes]", attribute_name: 'info_active',  id: @projekt.send(phase_name.to_sym).id, current_value: @projekt.send(phase_name.to_sym).info_active) %>
   </td>
 
   <td>
@@ -36,7 +41,7 @@
     <% elsif phase_name == 'voting_phase'  %>
       <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.voting_phase"), admin_polls_path, target: '_blank' %>
     <% else %>
-      <%= render Admin::Settings::FeaturedSettingsFormComponent.new(feature_phase_active, tab: '#tab-projekt-phases') %>
+      <%= render Admin::LivesubmitCheckbox::Component.new(url: liveupdate_admin_projekt_path, resource_name: "projekt[#{phase_name}_attributes]", attribute_name: 'active', id: @projekt.send(phase_name.to_sym).id, current_value: @projekt.send(phase_name.to_sym).active) %>
     <% end %>
   </td>
 </tr>

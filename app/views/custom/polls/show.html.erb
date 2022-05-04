@@ -11,23 +11,23 @@
 
 <main>
   <div class="polls-show">
-		<div class="row">
-			<div class="column margin-bottom">
-				<%= render partial: "shared/participation/projekt_bar", locals: { resource: @poll } %>
-			</div>
-		</div>
+    <div class="row">
+      <div class="column margin-bottom">
+        <%= render partial: "shared/participation/projekt_bar", locals: { resource: @poll } %>
+      </div>
+    </div>
 
-		<div class="row">
-			<div class="column small-12 medium-9">
+    <div class="row">
+      <div class="column small-12 medium-9">
         <h1><%= @poll.name %></h1>
-			</div>
-		</div>
+      </div>
+    </div>
 
     <div class="row">
       <div class="small-12 medium-9 column">
-				<%= render "poll_header" %>
+        <%= render "poll_header" %>
 
-				<%= render "poll_subnav" %>
+        <%= render "poll_subnav" %>
 
         <%= render "callout" %>
 
@@ -65,20 +65,20 @@
         <% end %>
       </div>
 
-			<aside class="small-12 medium-3 column">
+      <aside class="small-12 medium-3 column">
         <%= render "polls/poll/poll_info" %>
 
-				<%= render "shared/social_share",
-					share_title: t("shared.share"),
-					title: @poll.name,
-					url: poll_url(@poll),
-					description: @poll.name,
-					mobile: @poll.name
-				%>
-			</aside>
+        <%= render "shared/social_share",
+          share_title: t("shared.share"),
+          title: @poll.name,
+          url: poll_url(@poll),
+          description: @poll.name,
+          mobile: @poll.name
+        %>
+      </aside>
     </div>
 
-    <% if extended_feature?("polls.additional_information") %>
+    <% if projekt_feature?(@poll&.projekt, "polls.additional_information") %>
       <div class="expanded poll-more-info">
         <div class="row margin">
           <div class="small-12 medium-9 column">
@@ -87,9 +87,9 @@
           </div>
         </div>
       </div>
-		<% end %>
+    <% end %>
 
-    <% unless extended_feature?("polls.additional_info_for_each_answer") %>
+    <% unless projekt_feature?(@poll&.projekt, "polls.additional_info_for_each_answer") %>
       <div id="poll_more_info_answers" class="expanded poll-more-info-answers">
         <div class="row padding">
           <% @poll_questions_answers.each do |answer| %>
@@ -109,10 +109,19 @@
       <% end %>
     <% end %>
 
-    <% if extended_feature?("polls.enable_comments") %>
-      <div class="tabs-content" data-tabs-content="polls_tabs">
-        <%= render "filter_subnav" %>
+    <% if projekt_feature?(@poll.projekt, "polls.show_comments") %>
 
+      <div class="additional-content margin-top">
+        <div class="filter-subnav">
+          <div class="row">
+            <div class="small-12 column">
+              <%= render "filter_subnav" %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabs-content" data-tabs-content="polls_tabs">
         <div class="tabs-panel is-active" id="tab-comments">
           <%= render "comments" %>
         </div>

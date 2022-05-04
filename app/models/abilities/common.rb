@@ -95,7 +95,7 @@ module Abilities
         can :vote_featured, Legislation::Proposal
         can :create, Legislation::Answer
 
-        can :create, Budget::Investment,               budget: { phase: "accepting" }
+        # can :create, Budget::Investment,               budget: { phase: "accepting" }
         can :edit, Budget::Investment,                 budget: { phase: "accepting" }, author_id: user.id
         can :update, Budget::Investment,               budget: { phase: "accepting" }, author_id: user.id
         can :suggest, Budget::Investment,              budget: { phase: "accepting" }
@@ -131,6 +131,14 @@ module Abilities
       end
 
       can [:read, :json_data, :create, :vote], DeficiencyReport
+
+      can :create, Budget::Investment do |investment|
+        investment.budget.phase == "accepting" &&
+          (
+           (ProjektSetting.find_by(projekt: investment.projekt, key: "projekt_feature.budgets.only_admins_create_investment_proposals").value.present? && user.administrator? ) ||
+           ProjektSetting.find_by(projekt: investment.projekt, key: "projekt_feature.budgets.only_admins_create_investment_proposals").value.blank?
+          )
+      end
     end
   end
 end

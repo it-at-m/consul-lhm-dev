@@ -2,6 +2,14 @@
   "use strict";
   App.CustomPages = {
     initialize: function() {
+      var tabFilterSubnav = document.getElementById('filter-subnav')
+      var scrollLeftWidth = $('.page-subnav-tab.is-active').offset().left - tabFilterSubnav.clientWidth
+
+      if (scrollLeftWidth > 0) {
+        $('#left-arrow-control').removeClass('disabled')
+        $('#filter-subnav').animate( { scrollLeft: scrollLeftWidth + 400 }, 10 );
+      }
+
       $("body").on("click", ".js-icon-toggle-budget-phases", function(event) {
         var $phase = $(this).closest('.sidebar-projekt-phase')
         $phase.attr('aria-expanded', function (i, attr) {

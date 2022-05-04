@@ -1,4 +1,4 @@
-<% cache [ @top_level_active_projekts, @top_level_archived_projekts.any?, @all_resources, @current_projekt, @current_tab_phase, params[:filter_projekt_ids] ] do %>
+<% cache cache_key do %>
   <% if @top_level_active_projekts.any? || @top_level_archived_projekts.any? %>
     <div class="sidebar-divider"></div>
 

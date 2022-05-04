@@ -1,10 +1,22 @@
 de:
-  custom:    
+  custom:
     projekts:
+      projekts:
+        orders:
+          active: 'Aktive Beteiligung'
+          ongoing: 'Laufende Projekte'
+          upcoming: 'Zukünftige Projektvorhaben'
+          expired: 'Abgeschlossen'
+          active_title: 'Hier sind alle Projekte mit einer aktiven Beteiligungsphase gelistet. Dabei spielt es keine Rolle, welche Beteiligungsphase eröffnet ist. Als Beteiligungsphasen zählen: Kommentare, Diskussionen, Vorschläge, Abstimmungen, Bürgerbudget, Kollaborative Textbearbeitung und Kurzumfragen.'
+          ongoing_title: 'Hier sind alle Projekte gelistet, die noch in der Umsetzungsphase - also noch nicht abgeschlossen sind - aber aktuell keine aktive Beteiligungsphase haben.'
+          upcoming_title: 'Dies ist eine Vorhabenliste. Hier sind alle zukünftigen Projektvorhaben gelistet.'
+          expired_title: 'Hier sind alle abgeschlossenen Projekte gelistet.'
       index:
-        title: Projektübersicht
+        title: Projekte
         current_projekts: Projekte mit aktiver Beteiligungsphase
         expired_projekts: Abgeschlossene Projekte
+        no_projekts: keine Projekte
+
       backlink: Zur Projektübersicht
       errors:
         presence: Bitte wählen Sie ein Projekt
@@ -35,7 +47,16 @@ de:
           budget: Budgets
           milestones: Meilensteine
           projekt_notifications: Benachrichtigungen
-          newsfeed: Nachrichten
+          newsfeed: News-Feed
+          projekt_events: Veranstaltungen
+        projekt_events_tab:
+          title: Kommende Veranstaltungen
+          no_events: Keine Ereignisse
+          event_title: Veranstaltungstitel
+          event_location: Veranstaltungsort
+          event_date: Datum
+          event_time: Zeit
+          event_weblink: Weblink
       phase_name:
         comment_phase: Kommentare
         debate_phase: Diskussionen
@@ -43,8 +64,14 @@ de:
         voting_phase: Abstimmungen
         budget_phase: Budget
         milestone_phase: Meilensteine
+        event_phase: Veranstaltungen
         milestone_phase_details:
           start: Umsetzung
           ending: Gepl. Fertigstellung
         projekt_notification_phase: Benachrichtigungen
         newsfeed_phase: Newsfeed
+      projekt_events:
+        orders:
+          all: Alle
+          incoming: Kommende
+          past: Vergangene

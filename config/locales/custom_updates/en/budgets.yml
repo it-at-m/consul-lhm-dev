@@ -1,10 +1,26 @@
 en:
+  budgets:
+    investments:
+      index:
+        filters:
+          all: All
+          feasible: Feasible
+          undecided: Undecided
   custom:
     budgets:
       investments:
         show:
+          callouts:
+            selecting:
+              undecided: This investment proposal was not eveluated yet.
+              unfeasible: This investment proposal was marked as unfeasible.
+            publishing_prices:
+              unfeasible: This investment proposal was marked as unfeasible.
+              undecided: The investment proposal was not decided yet.
           implementation: Implementation
           implementation_text_html: "<p>%{author} supports with implementation<p><p>%{implementation_contribution}</p>"
+          implementation_city_text_html: "<p>Needs to be implemented by the city</p>"
+          user_cost_estimate: "Cost estimate"
         statuses:
           phases:
             accepting: The investment proposal was successfully submitted.

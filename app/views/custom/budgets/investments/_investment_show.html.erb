@@ -11,12 +11,13 @@
           investment,
           investment.author,
           Flag.flagged?(current_user, investment),
-          extended_feature?('budget_investments.show_report_button_in_sidebar'),
-          extended_feature?('budget_investments.show_follow_button_in_sidebar'),
-          extended_feature?('budget_investments.show_community_button_in_sidebar'),
-          extended_feature?('budget_investments.show_related_content'),
+          projekt_feature?(investment&.projekt, 'budgets.remove_investments_supports'),
+          projekt_feature?(investment&.projekt, 'budgets.show_report_button_in_sidebar'),
+          projekt_feature?(investment&.projekt, 'budgets.show_follow_button_in_sidebar'),
+          projekt_feature?(investment&.projekt, 'budgets.show_community_button_in_sidebar'),
+          projekt_feature?(investment&.projekt, 'budgets.show_related_content'),
+          projekt_feature?(investment&.projekt, 'budgets.show_user_cost_estimate'),
           investment.followed_by?(current_user),
-          feature?(:remove_investments_supports),
           current_user&.voted_for?(investment)] do %>
   <section class="budget-investment-show" id="<%= dom_id(investment) %>">
 
@@ -100,11 +101,7 @@
           </div>
         <% end %>
 
-        <% if @budget.phase.in?(['accepting', 'reviewing', 'valuating', 'reviewing_ballots']) %>
-          <div class="callout warning">
-            <%= t("custom.budgets.investments.statuses.phases.#{investment.budget.phase}") %>
-          </div>
-        <% end %>
+        <%= render partial: 'budgets/investments/investment_status_callout', locals: { investment: investment } %>
 
         <% if investment.should_show_price? %>
           <div class="sidebar-divider"></div>
@@ -124,7 +121,7 @@
 
         <%= render "shared/participation/resource_info", resource: investment %>
 
-        <% if extended_feature?('budget_investments.show_report_button_in_sidebar') %>
+        <% if projekt_feature?(investment&.projekt, 'budgets.show_report_button_in_sidebar') %>
           <%= render "shared/participation/flag", resource: investment %>
         <% end %>
 
@@ -140,18 +137,18 @@
                      title: investment.title,
                      handle: setting["twitter_handle"]) %>
 
-        <% if current_user && extended_feature?('budget_investments.show_follow_button_in_sidebar') %>
+        <% if current_user && projekt_feature?(investment&.projekt, 'budgets.show_follow_button_in_sidebar') %>
           <div class="sidebar-divider"></div>
           <p class="sidebar-title"><%= t("shared.follow") %></p>
 
           <%= render "follows/follow_button", follow: find_or_build_follow(current_user, investment) %>
         <% end %>
 
-        <% if current_user && extended_feature?('budget_investments.show_community_button_in_sidebar') %>
+        <% if current_user && projekt_feature?(investment&.projekt, 'budgets.show_community_button_in_sidebar') %>
           <%= render "communities/access_button", community: investment.community %>
         <% end %>
 
-        <% if current_user && extended_feature?('budget_investments.show_related_content') %>
+        <% if current_user && projekt_feature?(investment&.projekt, 'budgets.show_related_content') %>
           <div class="sidebar-divider"></div>
           <h2><%= t("custom.shared.show.related_title") %></h2>
           <p><%= t("custom.shared.show.related_text") %></p>

@@ -1,0 +1,21 @@
+<% if investment.budget.phase.in?(['accepting', 'reviewing', 'valuating', 'reviewing_ballots']) %>
+  <div class="callout warning">
+    <%= t("custom.budgets.investments.statuses.phases.#{investment.budget.phase}") %>
+  </div>
+<% elsif investment.unfeasible? && investment.budget.phase == 'selecting' %>
+  <div class='callout alert'>
+    <%= t("custom.budgets.investments.show.callouts.#{investment.budget.phase}.#{investment.feasibility}") %>
+  </div>
+<% elsif investment.undecided? && investment.budget.phase == 'selecting'  %>
+  <div class='callout warning'>
+    <%= t("custom.budgets.investments.show.callouts.#{investment.budget.phase}.#{investment.feasibility}") %>
+  </div>
+<% elsif investment.undecided? && investment.budget.phase == 'publishing_prices' %>
+  <div class='callout warning'>
+    <%= t("custom.budgets.investments.show.callouts.#{investment.budget.phase}.#{investment.feasibility}") %>
+  </div>
+<% elsif investment.unfeasible? && investment.budget.phase == 'publishing_prices' && controller_name != 'investments' %>
+  <div class='callout warning'>
+    <%= t("custom.budgets.investments.show.callouts.#{investment.budget.phase}.#{investment.feasibility}") %>
+  </div>
+<% end %>

@@ -24,7 +24,12 @@ class Debate
 
   def self.base_selection(scoped_projekt_ids = Projekt.ids)
     where(projekt_id: scoped_projekt_ids).
-      joins(:projekt).merge(Projekt.activated)
+      joins(:projekt).merge(Projekt.activated).
+      joins( 'INNER JOIN projekt_settings shwmn ON projekts.id = shwmn.projekt_id' ).
+      where( 'shwmn.key': 'projekt_feature.debates.show_in_sidebar_filter', 'shwmn.value': 'active' )
+
+
+
   end
 
   def votable_by?(user)

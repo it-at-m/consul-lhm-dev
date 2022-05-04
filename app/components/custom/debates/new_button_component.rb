@@ -16,4 +16,11 @@ class Debates::NewButtonComponent < ApplicationComponent
         Projekt.top_level.selectable_in_selector('debates', current_user).any?
       end
     end
+
+    def link_params_hash
+      link_params = {}
+      link_params[:projekt] = selected_parent_projekt
+      link_params[:origin] = 'projekt' if controller_name == 'pages'
+      link_params
+    end
 end

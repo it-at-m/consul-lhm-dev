@@ -87,3 +87,12 @@
     }
   }
 }
+
+
+// Budget heading
+
+@media screen and (min-width: 75em) {
+  .budget-heading {
+    @include full-width-background;
+  }
+}

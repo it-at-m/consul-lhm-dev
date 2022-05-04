@@ -1,0 +1,5 @@
+<%= form_with(url: @url, method: :patch, local: false, html: { class: "js-livesubmit-checkbox featured-settings-form", data: { enabled_text: enabled_text, disabled_text: disabled_text } }) do |f| %>
+  <%= f.hidden_field field_name, value: (enabled? ? "false" : "true"), class: 'js-livesubmit-checkbox-value' %>
+  <%= f.hidden_field id_field_name, value: @id %>
+  <%= f.button text, options %>
+<% end %>

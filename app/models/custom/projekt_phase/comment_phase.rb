@@ -1,10 +1,10 @@
 class ProjektPhase::CommentPhase < ProjektPhase
   def phase_activated?
-    ProjektSetting.find_by(projekt: projekt, key: "projekt_feature.phase.comment").value.present?
+    active?
   end
 
   def phase_info_activated?
-    ProjektSetting.find_by(projekt: projekt, key: "projekt_feature.phase.comment_info").value.present?
+    info_active?
   end
 
   def name
@@ -13,5 +13,9 @@ class ProjektPhase::CommentPhase < ProjektPhase
 
   def resources_name
     'comments'
+  end
+
+  def default_order
+    1
   end
 end

@@ -132,6 +132,15 @@ de:
             notification_title: Titel
             page_title: Nachricht senden
             title: Nachricht senden
+          projekt_events_tab:
+            name: Veranstaltungen
+            page_title: Veranstaltungen
+            button: Event erstellen
+            event_title: Veranstaltungstitel
+            event_location: Veranstaltungsort
+            event_datetime: Datum
+            event_weblink: Weblink
+            event_created_at: Hergestellt in
           projekt_page: Projektseite
           projekt_phase_limitation: Beschränkung
           projekt_phases: Projektphasen
@@ -164,15 +173,23 @@ de:
               voting_phase: Abstimmungen
               budget_phase: Budgets
           projekt_settings_tab:
-            footer_settings: Fußzeile
             general_settings: Allgemein
+            sidebar_settings: Seitenleiste
+            footer_settings: Fußzeile
+            debates_settings: Diskussion
+            proposals_settings: Vorschläge
+            polls_settings: Abstimmungen
+            budget_settings: Budgets
             name: Projektfunktionen
             select_an_element: auswählen
-            sidebar_settings: Seitenleiste
             projekt_notification_phase: Benachrichtigungen
             projekt_notification_phase_description: Aktiviert die Benachrichtigungsfunktion in der Fußzeile eines Projekts
+            milestone_phase: Meilensteine
+            milestone_phase_description: Aktiviert die Meilensteinfunktion in der Fußzeile eines Projektes
             newsfeed_phase: News-Feed
             newsfeed_phase_description: Aktiviert den News-Feed in der Fußzeile eines Projekts
+            event_phase: Veranstaltungen
+            event_phase_description: Aktivieren Sie Veranstaltungen in der Fußzeile eines Projekts
           projekt_sdg_tab:
             name: 'SDGs & Tags'
             sdgs: SDGs

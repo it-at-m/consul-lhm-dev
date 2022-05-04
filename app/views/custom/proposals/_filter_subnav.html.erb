@@ -14,7 +14,7 @@
     <% end %>
   </li>
 
-  <% if extended_feature?('proposals.enable_proposal_notifications_tab') %>
+  <% if projekt_feature?(@proposali&.projekt, 'proposals.enable_proposal_notifications_tab') %>
     <li class="tabs-title">
       <%= link_to "#tab-notifications" do %>
         <h3>
@@ -25,7 +25,7 @@
     </li>
   <% end %>
 
-  <% if extended_feature?('proposals.enable_proposal_milestones_tab') %>
+  <% if projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_milestones_tab') %>
     <li class="tabs-title">
       <%= link_to "#tab-milestones" do %>
         <h3>

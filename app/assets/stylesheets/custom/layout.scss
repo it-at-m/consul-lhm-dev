@@ -1,3 +1,34 @@
+body,
+.help-header,
+.tabs-content,
+.comments,
+.comment-list .comment-body,
+.fixed-mobile-content,
+body.admin ul.tabs,
+body.admin .top-bar,
+body.admin .tabs-title > a[aria-selected='true'],
+.admin-top-bar {
+  background-color: #F4F4F4 !important;
+}
+
+.help-header {
+  background-color: #eeeeee;
+
+  .column {
+    float: none;
+  }
+}
+
+.help-header::after,
+.section-header::after {
+  border-bottom: 2px solid #eee;
+}
+
+.footer {
+  background: #d7d7d7;
+}
+
+
 main {
   margin-top: -24px;
   padding-top: 24px;
@@ -132,4 +163,8 @@ html.is-reveal-open body {
   #deficiency-reports-sidebar.column {
     float: right;
   }
+}
+
+ul.tabs li.tabs-title {
+  margin-bottom: 0;
 }

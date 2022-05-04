@@ -11,7 +11,7 @@
       </div>
     <% end %>
 
-    <% if extended_feature?('budget_investments.show_implementation_option_fields')  %>
+    <% if projekt_feature?(investment&.projekt, 'budgets.show_implementation_option_fields')  %>
       <div>
         <%= f.select :implementation_performer, options_for_implementation_select, {}, { class: 'implementation-performer show-arrow', onChange: "$(this).val() === 'user' ? $('#implementation_contribution').css('display', 'block') : $('#implementation_contribution').css('display', 'none')" } %>
       </div>
@@ -21,7 +21,11 @@
       </div>
     <% end %>
 
-    <% if feature?(:map) %>
+    <% if projekt_feature?(investment.projekt, 'budgets.show_user_cost_estimate') %>
+      <%= f.text_field :user_cost_estimate %>
+    <% end %>
+
+    <% if projekt_feature?(budget&.projekt, 'budgets.show_map') %>
       <div>
         <%= render "map_locations/form_fields",
                    form:     f,

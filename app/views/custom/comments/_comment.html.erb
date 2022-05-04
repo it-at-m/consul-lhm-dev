@@ -1,5 +1,6 @@
 <% valuation = local_assigns.fetch(:valuation, false) %>
-<% cache [locale_and_user_status(comment), comment, commentable_cache_key(comment.commentable), comment.author] do %>
+<% @current_projekt ||= @projekt %>
+<% cache [locale_and_user_status(comment), comment, commentable_cache_key(comment.commentable), comment.author, projekt_feature?(@current_projekt, 'general.allow_downvoting_comments')] do %>
   <div id="<%= dom_id(comment) %>" class="comment small-12" role="comment">
     <div class="comment-body">
       <% if comment.hidden? || comment.user.hidden? %>

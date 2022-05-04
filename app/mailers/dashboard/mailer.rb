@@ -10,6 +10,13 @@ class Dashboard::Mailer < ApplicationMailer
   def new_actions_notification_rake_published(proposal, new_actions_ids)
     @proposal = proposal
     @new_actions = get_new_actions(new_actions_ids)
+
+    @custom_votes_for_proposal_success = if proposal.projekt.present? && ProjektSetting.find_by(projekt: proposal.projekt, key: "projekt_feature.proposal_options.votes_for_proposal_success").value.to_i == 0
+      ProjektSetting.find_by(projekt: proposal.projekt, key: "projekt_feature.proposal_options.votes_for_proposal_success").value
+		else
+      Setting["votes_for_proposal_success"]
+    end
+
     mail to: proposal.author.email,
          subject: I18n.t("mailers.new_actions_notification_rake_published.subject")
   end
@@ -23,6 +30,13 @@ class Dashboard::Mailer < ApplicationMailer
 
   def new_actions_notification_on_create(proposal)
     @proposal = proposal
+
+    @custom_votes_for_proposal_success = if proposal.projekt.present? && ProjektSetting.find_by(projekt: proposal.projekt, key: "projekt_feature.proposal_options.votes_for_proposal_success").value.to_i == 0
+      ProjektSetting.find_by(projekt: proposal.projekt, key: "projekt_feature.proposal_options.votes_for_proposal_success").value
+		else
+      Setting["votes_for_proposal_success"]
+    end
+
     mail to: proposal.author.email,
          subject: I18n.t("mailers.new_actions_notification_on_create.subject")
   end

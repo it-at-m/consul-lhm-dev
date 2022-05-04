@@ -19,6 +19,9 @@
             @debate,
             @debate.author,
             Flag.flagged?(current_user, @debate),
+            projekt_feature?(@debate.projekt, 'debates.show_report_button_in_sidebar'),
+            projekt_feature?(@debate.projekt, 'debates.show_related_content'),
+            projekt_feature?(@debate.projekt, 'debates.allow_downvoting'),
             @debate_votes,
             @debate.projekt,
             @debate.debate_phase,
@@ -53,7 +56,7 @@
 
             <%= auto_link_already_sanitized_html wysiwyg(@debate.description) %>
 
-            <% if extended_feature?('debates.show_related_content') %>
+            <% if projekt_feature?(@debate.projekt, 'debates.show_related_content') %>
               <%= render "relationable/related_content", relationable: @debate %>
             <% end %>
           </div>
@@ -84,7 +87,7 @@
 
             <%= render "shared/participation/resource_info", resource: @debate %> 
 
-            <% if extended_feature?('debates.show_report_button_in_debate_sidebar') %>
+            <% if projekt_feature?(@debate.projekt, 'debates.show_report_button_in_sidebar') %>
               <%= render "shared/participation/flag", resource: @debate %>
             <% end %>
 
@@ -96,7 +99,7 @@
               mobile: @debate.title
             %>
 
-            <% if current_user && extended_feature?('debates.show_related_content') %>
+            <% if current_user && projekt_feature?(@debate.projekt, 'debates.show_related_content') %>
               <div class="sidebar-divider"></div>
               <h2><%= t("custom.shared.show.related_title") %></h2>
               <p><%= t("custom.shared.show.related_text") %></p>
@@ -112,5 +115,7 @@
       </div>
     <% end %>
 
-    <%= render "comments" %>
+    <% if projekt_feature?(@debate.projekt, 'debates.show_comments') %>
+      <%= render "comments" %>
+    <% end %>
   </main>

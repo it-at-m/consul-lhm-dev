@@ -21,7 +21,7 @@ span.icon-projekts::before {
 
 table.projekts,
 table.edit-projekt {
-  
+
   tr:nth-child(even),
   tr:hover {
     background: none;
@@ -145,7 +145,7 @@ td.projekt-info {
     font-weight: bold;
     height: auto;
     position: absolute;
-    transition: 0.25s; 
+    transition: 0.25s;
     font-size: 24px;
     left: 14px;
     top: 10px;
@@ -179,7 +179,7 @@ td.projekt-order {
   display: flex;
   justify-content: flex-end;
 
-  a, 
+  a,
   input {
     margin-right: 0.75em !important;
     margin-left: 0 !important;
@@ -201,7 +201,7 @@ table.edit-projekt {
 div.projekt-phase-geozone-restriction-selector {
 
   input[type='radio'] {
-    margin-bottom: 0.5em 
+    margin-bottom: 0.5em
   }
 
   .projekt-phase-geozone-selector label {
@@ -384,7 +384,7 @@ div.projekt-phase-geozone-restriction-selector {
   .sidebar-filter-group {
     input[type="submit"] {
       border: 0;
-    } 
+    }
   }
 }
 
@@ -427,7 +427,7 @@ span.projekt-backlink:before {
   input:checked ~ .edit-projekt-notification-form {
     display: block;
   }
-  
+
   .edit-projekt-notification {
     position: absolute;
     right: 10px;
@@ -459,6 +459,57 @@ span.projekt-backlink:before {
   }
 }
 
+// Projekt events
+.admin .projekt-event {
+  position: relative;
+
+  input[type='checkbox'] {
+    display: none;
+  }
+
+  .edit-projekt-event-form {
+    display: none;
+  }
+
+  input:checked ~ .projekt-event-content {
+    display: none;
+  }
+
+  input:checked ~ .edit-projekt-event-form {
+    display: block;
+  }
+
+  .edit-projekt-event {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .edit-projekt-event::before {
+    content: "\f044";
+    font-weight: normal;
+    font-family: 'Font Awesome 5 Free';
+    color: #004a83;
+  }
+
+  .delete-projekt-event {
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .delete-projekt-event::before {
+    content: "\f2ed";
+    font-weight: normal;
+    font-family: 'Font Awesome 5 Free';
+    color: #cc4b37;
+  }
+}
+
 // Projekt page footer
 
 .projekt-footer {
@@ -483,40 +534,143 @@ span.projekt-backlink:before {
 }
 
 .projekt-listing {
+  display: flex;
+  flex-wrap: wrap;
   border: 1px solid #e5e6e9;
   background: #f9f9f9;
   color: #707070;
-  padding: 10px;
+  padding: 18px;
   margin-bottom: 1rem;
 
-  .image img {
-    display: block;
-    margin: 0 auto;
-    margin-bottom: 20px;
+  .image {
+    max-width: 150px;
 
-    @media (min-width: 40em) {
-      padding-right: 10px;
-      margin-bottom: 0;
+    img {
+      display: block;
+      margin: 0 auto;
+      margin-bottom: 20px;
+
+      @media (min-width: 40em) {
+        padding-right: 15px;
+        margin-bottom: 0;
+      }
     }
   }
 
-  .content-wrapper {
+  .content {
+    @media (min-width: 40em) {
+      max-width: calc(100% - 300px);
+    }
+
     padding-right: 15px;
   }
 
-  .actions {
-    position: relative;
-    min-height: 80px;
+  .projekt-title {
+    font-size: 18px;
+  }
+
+  .projekt-link {
+    align-self: center;
 
     a.button {
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      margin: auto;
-      width: max-content;
-      height: fit-content;
+      min-width: 150px;
     }
   }
+
+  p {
+    margin-bottom: 5px;
+  }
+
+  .sdg-tag-list .sdg-goal-tag-list {
+    margin-left: 0;
+
+    .selected-goal {
+      margin-right: 2px;
+      margin-left: 2px;
+
+    }
+    .sdg-goal-icon {
+      min-width: 42px;
+      max-width: 42px;
+      width: auto;
+    }
+  }
+}
+
+.projekt-event-item {
+  display: flex;
+  border-bottom: 1px solid #dcdcdc;
+  padding-top: 20px;
+  padding-bottom: 25px;
+  font-size: 16px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.projekt-event-item-titles {
+  padding-right: 58px;
+}
+
+.projekt-event-item-calendar {
+  width: 70px;
+  height: 70px;
+  padding-top: 5px;
+  text-align: center;
+  margin-right: 50px;
+  border-radius: 10px;
+  box-shadow: inset 0px 3px 6px #0000000F, 0px 3px 6px #00000024;
+  background: transparent linear-gradient(180deg, #FFFFFF 0%, #EDEDED 100%) 0% 0% no-repeat padding-box;
+}
+
+.projekt-event-item-calendar-dayname {
+  color: #FF4120;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.projekt-event-item-calendar-daynumber {
+  font-size: 38px;
+  font-weight: bold;
+  margin-top: -14px;
+}
+
+.projekt-event-tab-title {
+  margin-bottom: 20px;
+}
+
+.projekts-map-wrapper {
+  margin-bottom: 50px;
+}
+
+.projekts-page {
+  ul.order-links li a {
+    margin-bottom: 12px;
+  }
+}
+
+.projekt-item-attributes {
+  display: flex;
+}
+
+.projekt-item-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-bottom: 5px;
+}
+
+.projekt-item-tag {
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: #ECECEC;
+  color: black;
+  font-size: 14px;
+}
+
+.projekt-item-tags {
+  display: flex;
 }

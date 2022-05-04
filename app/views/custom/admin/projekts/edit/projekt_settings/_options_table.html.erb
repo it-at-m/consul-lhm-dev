@@ -1,0 +1,22 @@
+<table>
+  <tbody>
+    <% options.each do |option| %>
+      <tr>
+        <td class="small-6">
+          <strong><%= t("custom.settings.#{option.key}") %></strong>
+          <br>
+          <span class="small">
+            <%= t("custom.settings.#{option.key}_description", default: t("admin.settings.no_description")) %>
+          </span>
+        </td>
+        <td class="small-6">
+					<% if defined?(tab) %>
+						<%= render "admin/settings/settings_form", setting: option, tab: tab %>
+					<% else %>
+						<%= render "admin/settings/settings_form", setting: option %>
+					<% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

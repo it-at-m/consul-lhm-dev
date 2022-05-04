@@ -13,6 +13,7 @@ en:
       legislation_proposal: "Legislations %{doc_count}"
       comment: "Comments %{doc_count}"
       site_customization_page: "Pages %{doc_count}"
+      project_events: "Events %{doc_count}"
     result_tag:
       de: "d"
       pr: "p"

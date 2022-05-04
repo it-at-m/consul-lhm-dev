@@ -106,11 +106,15 @@
       };
       openMarkerPopup = function(e) {
 
-        var route
+        console.log(e.target)
+        var route;
+
         if ( process == "proposals" ) {
           route = "/proposals/" + e.target.options.id + "/json_data"
         } else if ( process == "deficiency-reports") {
           route = "/deficiency_reports/" + e.target.options.id + "/json_data"
+        } else if ( process == "projekts") {
+          route = "/projekts/" + e.target.options.id + "/json_data"
         } else {
           route = "/investments/" + e.target.options.id + "/json_data"
         }
@@ -125,11 +129,14 @@
         });
       };
 
+      // TODO: add projekts link
       getPopupContent = function(data) {
         if (process == "proposals") {
           return "<a href='/proposals/" + data.proposal_id + "'>" + data.proposal_title + "</a>";
         } else if ( process == "deficiency-reports" ) {
           return "<a href='/deficiency_reports/" + data.deficiency_report_id + "'>" + data.deficiency_report_title + "</a>";
+        } else if ( process == "projekts" ) {
+          return "<a href='/projekts/" + data.projekt_id + "'>" + data.projekt_title + "</a>";
         } else {
           return "<a href='/budgets/" + data.budget_id + "/investments/" + data.investment_id + "'>" + data.investment_title + "</a>";
         }
@@ -218,6 +225,8 @@
               marker.options.id = coordinates.proposal_id
             } else if (process == "deficiency-reports") {
               marker.options.id = coordinates.deficiency_report_id
+            } else if (process == "projekts") {
+              marker.options.id = coordinates.projekt_id
             } else {
               marker.options.id = coordinates.investment_id
             }

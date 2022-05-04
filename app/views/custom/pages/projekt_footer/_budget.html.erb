@@ -26,12 +26,16 @@
         <% end %>
       <% end %>
 
+      <%= render_custom_block "budget_#{@budget.id}_phase_#{@budget.current_phase.id}_info" %>
+
       <%= render 'pages/projekt_footer/budget/my_ballot'  %>
 
       <%= render Sidebar::ProjektsFilterComponent.new(@top_level_active_projekts, @top_level_archived_projekts, @all_resources, @current_tab_phase, @current_projekt) %>
 
-      <% if params[:section].blank? || params[:section] == 'overview' %>
-        <%= render Budgets::Investments::FiltersComponent.new %>
+      <% unless @budget.phase == 'publishing_prices' && projekt_feature?(@projekt, 'budgets.show_results_after_first_vote')  # con-1036 %>
+        <% if params[:section].blank? || params[:section] == 'overview' %>
+          <%= render Budgets::Investments::FiltersComponent.new %>
+        <% end %>
       <% end %>
     </aside>
   </div>

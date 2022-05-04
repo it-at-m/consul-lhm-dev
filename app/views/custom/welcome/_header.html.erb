@@ -3,11 +3,7 @@
   <style>
     <%if header_large%>
       .home-page .jumbo{
-        background-image: linear-gradient(90deg, 
-                            rgba(34, 34, 34, 0.75) 35%, 
-                            rgba(34, 34, 34, 0.65) 50%,
-                            rgba(34, 34, 34, 0.0)),
-                          url("<%=header_large.image.attachment.url%>");
+        background-image: url("<%=header_large.image.attachment.url%>");
         background-size: cover;
         background-position: center 25%;
       }
@@ -16,10 +12,6 @@
 
   <div class="jumbo not-print">
     <div class='jumbo-message'>
-      <h1>Lorem Ipsum</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dolor eros, dapibus sed mauris at, tincidunt tincidunt massa. Praesent sit amet erat eget purus molestie fringilla vel elementum ex. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-      <p>Maecenas a varius orci. Aliquam sit amet lorem in neque laoreet laoreet. Proin turpis purus, suscipit vel nunc a, volutpat ultrices lectus. Nullam congue tempor sodales.</p>
-      <p></p>
     </div>
   </div>
 

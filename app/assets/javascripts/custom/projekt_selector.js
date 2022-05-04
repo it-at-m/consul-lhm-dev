@@ -84,7 +84,10 @@
 
     replaceProjektMapOnProposalCreation: function($projekt) {
       if ( $projekt.data('showMap') ) {
-        App.Map.maps[0].setView([$projekt.data('latitude'), $projekt.data('longitude')], $projekt.data('zoom')).invalidateSize()
+        $('#map-container').show();
+        App.Map.maps[0].setView([$projekt.data('latitude'), $projekt.data('longitude')], $projekt.data('zoom')).invalidateSize();
+      } else {
+        $('#map-container').hide();
       }
     },
 

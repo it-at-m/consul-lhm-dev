@@ -1,21 +1,27 @@
-<div class="row collapse projekt-listing" data-equalizer='projekt' data-equalize-on="medium">
+<div class="collapse projekt-listing">
 
-  <div class='column medium-3 image' data-equalizer-watch='projekt'>
+  <div class='image'>
     <% if projekt.image.present? %>
-      <%= image_tag projekt.image_url(:medium) %>
+      <%= link_to projekt.page.url do %>
+        <%= image_tag projekt.image_url(:medium) %>
+      <% end %>
     <% end %>
   </div>
 
-  <div class='column medium-6 content' data-equalizer-watch='projekt'>
-    <div class='content-wrapper'>
-      <h4><%= projekt.page.title %></h4>
-      <p><%= projekt.description %></p>
-      <%= render SDG::TagListComponent.new(projekt, limit: 3) %>
+  <div class='content'>
+    <h4 class="projekt-title"><%= projekt.page.title %></h4>
+    <p><%= projekt.description %></p>
+    <div class="projekt-item-tag-list">
+      <% projekt.tags.each do |tag| %>
+        <div class="projekt-item-tag">
+          <%= tag.name %>
+        </div>
+      <% end %>
     </div>
+    <%= render SDG::TagListComponent.new(projekt, limit: 3) %>
   </div>
 
-  <div class='column medium-3 actions' data-equalizer-watch='projekt'>
+  <div class='projekt-link'>
     <%= link_to 'Zum Projekt', projekt.page.url, class: 'button' %>
   </div>
-
 </div>

@@ -249,7 +249,7 @@
     },
 
     // Initializer
- 
+
     initialize: function() {
       $("body").on("click", ".js-filter-projekt", function() {
         var $checkbox = $(this);

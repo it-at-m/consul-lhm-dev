@@ -1,7 +1,7 @@
 <div class="poll-question-answers">
   <% if can?(:answer, question) && !question.poll.voted_in_booth?(current_user) %>
     <% question.question_answers.each do |answer| %>
-      <div class='poll-answer-group <%= 'align-answers-top image-answers' if question.show_images? && extended_feature?("polls.additional_info_for_each_answer") %>'>
+      <div class='poll-answer-group <%= 'align-answers-top image-answers' if question.show_images? && projekt_feature?(@poll&.projekt, "polls.additional_info_for_each_answer") %>'>
 
         <%= render partial: 'polls/questions/answer_more_info_sign', locals: { question: question, answer: answer } %>
 
@@ -50,22 +50,22 @@
 
   <% elsif !user_signed_in? %>
     <% question.question_answers.order(id: :desc).each do |answer| %>
-      <div class='poll-answer-group <%= 'align-answers-top image-answers' if question.show_images? && extended_feature?("polls.additional_info_for_each_answer") %>'>
-				<%= render partial: 'polls/questions/answer_more_info_sign', locals: { question: question, answer: answer } %>
-				<%= link_to answer.title, new_user_session_path, class: "button secondary hollow" %>
+      <div class='poll-answer-group <%= 'align-answers-top image-answers' if question.show_images? && projekt_feature?(@poll&.projekt, "polls.additional_info_for_each_answer") %>'>
+        <%= render partial: 'polls/questions/answer_more_info_sign', locals: { question: question, answer: answer } %>
+        <%= link_to answer.title, new_user_session_path, class: "button secondary hollow" %>
       </div>
     <% end %>
   <% elsif !current_user.level_two_or_three_verified? %>
     <% question.question_answers.order(id: :desc).each do |answer| %>
-      <div class='poll-answer-group <%= 'align-answers-top image-answers' if question.show_images? && extended_feature?("polls.additional_info_for_each_answer") %>'>
-				<%= render partial: 'polls/questions/answer_more_info_sign', locals: { question: question, answer: answer } %>
-				<%= link_to answer.title, verification_path, class: "button secondary hollow" %>
+      <div class='poll-answer-group <%= 'align-answers-top image-answers' if question.show_images? && projekt_feature?(@poll&.projekt, "polls.additional_info_for_each_answer") %>'>
+        <%= render partial: 'polls/questions/answer_more_info_sign', locals: { question: question, answer: answer } %>
+        <%= link_to answer.title, verification_path, class: "button secondary hollow" %>
       </div>
     <% end %>
   <% else %>
     <% question.question_answers.order(id: :desc).each do |answer| %>
-      <div class='poll-answer-group <%= 'align-answers-top image-answers' if question.show_images? && extended_feature?("polls.additional_info_for_each_answer") %>'>
-			<%= render partial: 'polls/questions/answer_more_info_sign', locals: { question: question, answer: answer } %>
+      <div class='poll-answer-group <%= 'align-answers-top image-answers' if question.show_images? && projekt_feature?(@poll&.projekt, "polls.additional_info_for_each_answer") %>'>
+      <%= render partial: 'polls/questions/answer_more_info_sign', locals: { question: question, answer: answer } %>
       <span class="button secondary hollow disabled"><%= answer.title %></span>
       </div>
     <% end %>

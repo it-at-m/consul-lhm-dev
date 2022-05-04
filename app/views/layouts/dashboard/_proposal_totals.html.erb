@@ -24,7 +24,7 @@
           <div class="counter-value">
             <%= number_with_delimiter(proposal.votes_for.size, delimiter: ".") %>
             /
-            <%= number_with_delimiter(next_goal_supports, delimiter: ".") %>
+            <%= number_with_delimiter(next_goal_supports(@proposal), delimiter: ".") %>
           </div>
           <div class="counter-label">
             <%= t("layouts.dashboard.proposal_totals.supports", count: proposal.votes_for.size) %>

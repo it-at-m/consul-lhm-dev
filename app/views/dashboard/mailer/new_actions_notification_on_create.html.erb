@@ -17,7 +17,7 @@
     <li>
       <%= t("mailers.new_actions_notification_on_create.list_4",
             max_month: Setting["months_to_archive_proposals"],
-            max_votes: Setting["votes_for_proposal_success"]) %>
+            max_votes: @custom_votes_for_proposal_success) %>
     </li>
   </ul>
   <br>

@@ -27,7 +27,7 @@
   <p>
     <%= t("mailers.new_actions_notification_rake_published.text_3",
           days_count: (limit_to_archive_proposal - Date.current).to_i,
-          max_votes_count: Setting["votes_for_proposal_success"]) %>
+          max_votes_count: @custom_votes_for_proposal_success) %>
   </p>
 
   <% first_proposed_action = @new_actions.proposed_actions.first %>

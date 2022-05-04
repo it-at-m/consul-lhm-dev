@@ -4,8 +4,7 @@ class ProjektPhase::BudgetPhase < ProjektPhase
   end
 
   def phase_info_activated?
-    ProjektSetting.find_by(projekt: projekt, key: "projekt_feature.phase.budget_info").value.present? &&
-      projekt.budget.present?
+    info_active? && projekt.budget.present?
   end
 
   def name
@@ -14,5 +13,9 @@ class ProjektPhase::BudgetPhase < ProjektPhase
 
   def resources_name
     'budget'
+  end
+
+  def default_order
+    5
   end
 end

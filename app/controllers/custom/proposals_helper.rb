@@ -24,10 +24,6 @@ module ProposalsHelper
     end
   end
 
-  def withdraw_proposal_support_on?
-    Setting["extended_feature.proposals.enable_proposal_support_withdrawal"]
-  end
-
   def label_error_class?(field)
     return 'is-invalid-label' if @proposal.errors.any? && @proposal.errors[field].present?
     ""
@@ -36,13 +32,5 @@ module ProposalsHelper
   def error_text(field)
     return @proposal.errors[:description].join(', ') if @proposal.errors.any? && @proposal.errors[field].present?
     ""
-  end
-
-  def show_map_in_form?(projekt)
-    if @selected_projekt
-      projekt_feature?(@selected_projekt, "general.show_map") ? '' : 'hide'
-    else
-      feature?(:map) ? '' : 'hide'
-    end
   end
 end

@@ -13,7 +13,7 @@
      <%= "data-latitude=#{projekt.map_location.latitude}" if projekt.map_location.latitude.present? %>
      <%= "data-longitude=#{projekt.map_location.longitude}" if projekt.map_location.longitude.present? %>
      <%= "data-zoom=#{projekt.map_location.zoom}" if projekt.map_location.zoom.present? %>
-     <%= "data-show-map=true" if feature?('map').present? && controller_name == 'proposals'  %> >
+     <%= "data-show-map=true" if projekt_feature?(projekt, 'proposals.show_map').present? && controller_name == 'proposals'  %> >
 
   <div class='projekt-icon'>
     <i class="fas fa-<%= projekt.icon || "circle" %>" style="color:<%= projekt.color %>"></i>
