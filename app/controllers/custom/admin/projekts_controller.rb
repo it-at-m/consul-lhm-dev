@@ -175,7 +175,7 @@ class Admin::ProjektsController < Admin::BaseController
       projekt_notifications: [:title, :body],
       project_events: [:id, :title, :location, :datetime, :weblink],
     ]
-    params.require(:projekt).permit(attributes)
+    params.require(:projekt).permit(attributes, translation_params(Projekt))
   end
 
   def process_tags

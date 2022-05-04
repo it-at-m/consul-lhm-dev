@@ -542,8 +542,24 @@ span.projekt-backlink:before {
   padding: 18px;
   margin-bottom: 1rem;
 
+  @media screen and (max-width: 650px) {
+    justify-content: center;
+    padding: 15px 10px;
+  }
+
   .image {
     max-width: 150px;
+
+    @media screen and (max-width: 650px) {
+      flex-direction: column;
+      max-width: 100%;
+    }
+  }
+
+  .image img {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 20px;
 
     img {
       display: block;
@@ -558,11 +574,12 @@ span.projekt-backlink:before {
   }
 
   .content {
+    padding-right: 15px;
+    padding-left: 15px;
+
     @media (min-width: 40em) {
       max-width: calc(100% - 300px);
     }
-
-    padding-right: 15px;
   }
 
   .projekt-title {
@@ -572,8 +589,18 @@ span.projekt-backlink:before {
   .projekt-link {
     align-self: center;
 
+    @media screen and (max-width: 650px) {
+      width: 100%;
+    }
+
     a.button {
       min-width: 150px;
+
+      @media screen and (max-width: 650px) {
+        width: 100%;
+        margin-top: 15px;
+        margin-bottom: 10px;
+      }
     }
   }
 
@@ -647,6 +674,14 @@ span.projekt-backlink:before {
 .projekts-page {
   ul.order-links li a {
     margin-bottom: 12px;
+  }
+}
+
+@media screen and (min-width: 75em) {
+  .projekts-map {
+    margin-left: calc(-50vw + 37.5rem);
+    margin-right: calc(-50vw + 37.5rem);
+    width: auto;
   }
 }
 

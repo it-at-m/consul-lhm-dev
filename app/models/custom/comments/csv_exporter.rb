@@ -25,7 +25,6 @@ class Comments::CsvExporter
         "author_username",
         "type",
         "commentable_id",
-        "subject",
         "user_id",
         "created_at",
         "updated_at",
@@ -38,9 +37,7 @@ class Comments::CsvExporter
         "cached_votes_up",
         "cached_votes_down",
         "confirmed_hide_at",
-        "ancestry",
-        "confidence_score",
-        "valuation"
+        "ancestry"
       ]
     end
 
@@ -51,7 +48,6 @@ class Comments::CsvExporter
         comment.author.username,
         comment.commentable_type.constantize.model_name.human,
         comment.commentable_id,
-        comment.subject,
         comment.user_id,
         comment.created_at,
         comment.updated_at,
@@ -64,9 +60,7 @@ class Comments::CsvExporter
         comment.cached_votes_up,
         comment.cached_votes_down,
         comment.confirmed_hide_at,
-        comment.ancestry,
-        comment.confidence_score,
-        comment.valuation
+        comment.ancestry
       ]
     end
 end

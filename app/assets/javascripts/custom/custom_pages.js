@@ -3,11 +3,14 @@
   App.CustomPages = {
     initialize: function() {
       var tabFilterSubnav = document.getElementById('filter-subnav')
-      var scrollLeftWidth = $('.page-subnav-tab.is-active').offset().left - tabFilterSubnav.clientWidth
 
-      if (scrollLeftWidth > 0) {
-        $('#left-arrow-control').removeClass('disabled')
-        $('#filter-subnav').animate( { scrollLeft: scrollLeftWidth + 400 }, 10 );
+      if (tabFilterSubnav) {
+        var scrollLeftWidth = $('.page-subnav-tab.is-active').offset().left - tabFilterSubnav.clientWidth
+
+        if (scrollLeftWidth > 0) {
+          $('#left-arrow-control').removeClass('disabled')
+          $('#filter-subnav').animate( { scrollLeft: scrollLeftWidth + 400 }, 10 );
+        }
       }
 
       $("body").on("click", ".js-icon-toggle-budget-phases", function(event) {
