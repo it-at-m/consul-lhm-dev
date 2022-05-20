@@ -61,6 +61,10 @@
       var currentAffiliatedGeoZoneIds;
       var currentTags;
 
+      if (!currentPageUrl.pathname.includes('projekts')) {
+        currentPageUrl.pathname = '/projekts'
+      }
+
       if (currentPageUrl.searchParams.get('projekts')) {
         currentProjektIds = currentPageUrl.searchParams.get('projekts').split(',');
       } else {

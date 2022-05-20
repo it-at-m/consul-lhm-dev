@@ -1,19 +1,19 @@
 require_dependency Rails.root.join("app", "helpers", "map_locations_helper").to_s
 
 module MapLocationsHelper
-    def render_map(map_location, parent_class, editable, remove_marker_label, investments_coordinates = [])
+    def render_map(map_location, parent_class, editable, remove_marker_label, investments_coordinates = [], map_layers = nil)
       map_location = MapLocation.new if map_location.nil?
       map = content_tag :div, "",
                         id: "#{dom_id(map_location)}_#{parent_class}",
                         class: "map_location map",
-                        data: prepare_map_settings(map_location, editable, parent_class, investments_coordinates)
+                        data: prepare_map_settings(map_location, editable, parent_class, investments_coordinates, map_layers)
       map += map_location_remove_marker(map_location, remove_marker_label) if editable
       map
     end
 
     private
 
-      def prepare_map_settings(map_location, editable, parent_class, process_coordinates = nil)
+      def prepare_map_settings(map_location, editable, parent_class, process_coordinates = nil, map_layers = nil)
         options = {
         parent_class: parent_class,
           map: "",
@@ -31,6 +31,7 @@ module MapLocationsHelper
         }
         options[:marker_latitude] = map_location.latitude if map_location.latitude.present?
         options[:marker_longitude] = map_location.longitude if map_location.longitude.present?
+        options[:map_layers] = map_layers if map_layers.present?
         options
       end
   end

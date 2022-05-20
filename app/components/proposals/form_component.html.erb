@@ -25,7 +25,7 @@
       </div>
       <div class="js-suggest" data-locale="<%= translations_form.locale %>"></div>
 
-      <div>
+      <div class='summary-field'>
         <%= translations_form.text_area :summary,
                                         rows: 4, maxlength: 200,
                                         hint: t("proposals.form.proposal_summary_note") %>
@@ -61,11 +61,9 @@
       </div>
     <% end %>
 
-    <% if feature?(:allow_attached_documents) %>
-      <div class="documents">
-        <%= render "documents/nested_documents", f: f %>
-      </div>
-    <% end %>
+    <div class="documents" id="attach-documents">
+      <%= render "documents/nested_documents", f: f %>
+    </div>
 
     <div>
       <%= f.text_field :video_url, hint: t("proposals.form.proposal_video_url_note") %>
@@ -113,6 +111,7 @@
       </div>
     <% end %>
 
-    <%= f.submit(class: "button", value: t("proposals.#{action_name}.form.submit_button")) %>
+    <%= f.submit t("custom.proposals.form.buttons.save_draft"), class: 'button', name: 'save_draft' %>
+    <%= f.submit t("custom.proposals.form.buttons.publish"),    class: "button" %>
   </div>
 <% end %>

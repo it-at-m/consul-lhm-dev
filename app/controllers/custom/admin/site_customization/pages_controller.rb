@@ -41,7 +41,9 @@ class Admin::SiteCustomization::PagesController < Admin::SiteCustomization::Base
     end
 
     def redirect_path
-      if @page.projekt.present?
+      if @page.projekt.present? && @page.published? && params[:site_customization_page][:origin] == 'public_page'
+        page_path(@page.slug)
+      elsif @page.projekt.present?
         edit_admin_projekt_path(@page.projekt)
       else
         admin_site_customization_pages_path

@@ -5,6 +5,7 @@
       var tabFilterSubnav = document.getElementById('filter-subnav')
 
       if (tabFilterSubnav) {
+
         var scrollLeftWidth = $('.page-subnav-tab.is-active').offset().left - tabFilterSubnav.clientWidth
 
         if (scrollLeftWidth > 0) {
@@ -53,7 +54,9 @@
 
       })
 
-
+      $("body").on("click", ".spinner-placeholder ul.pagination li a", function(event) {
+        $(".spinner-placeholder").addClass("show-loader")
+      })
     }
   }
 }).call(this);

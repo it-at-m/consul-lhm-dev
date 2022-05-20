@@ -2,7 +2,8 @@
   <div class="content-items">
     <%= render partial: 'shared/subnavigation_home', locals: { placement: placement } %>
     <%= render partial: 'shared/subnavigation_projekts_overview', locals: { placement: placement } if Setting['projekts.overview_page'].present? %>
-    <%= raw content_block("subnavigation_left", I18n.locale) %>
+    <%= raw content_block("subnavigation_left_desktop", I18n.locale) if placement == 'desktop' %>
+    <%= raw content_block("subnavigation_left_mobile", I18n.locale) if placement == 'mobile' %>
     <%= render partial: 'shared/subnavigation_projekts', locals: { placement: placement } %>
     <%= render partial: 'shared/subnavigation_deficiency_reports', locals: { placement: placement } if deficiency_reports_feature?('show_in_main_menu') %>
     <%= raw content_block("subnavigation_right_desktop", I18n.locale) if placement == 'desktop' %>

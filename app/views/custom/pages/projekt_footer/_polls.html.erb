@@ -42,7 +42,7 @@
       <%= render "polls/poll_group", poll_group: @polls %>
     </div>
 
-    <%= paginate @polls %>
+    <%= paginate @polls, remote: true, params: { controller: 'pages', action: 'voting_phase_footer_tab' } %>
 
     <div id="section_help" class="margin" data-magellan-target="section_help">
       <% if extended_feature?('modulewide.custom_help_text_in_modules')  %>

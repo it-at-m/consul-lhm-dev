@@ -26,6 +26,9 @@ en:
         title_archived: Expired projects
       page:
         sidebar:
+          admin_controls:
+            edit_projekt: Edit projekt
+            edit_projekt_page: Edit projekt page
           phases:
             participate: Open for participation!
         footer:
@@ -39,6 +42,7 @@ en:
           budgets: Budgets
           milestones: Milestones
           project_events: Events
+          projekt_questions: Questions
         projekt_events_tab:
           title: Events
           no_events: No events

@@ -19,14 +19,18 @@
         <%= translations_form.hidden_field :title, value: l(Time.current, format: :datetime),
                                                    maxlength: Milestone.title_max_length %>
         <%= translations_form.text_area :description, rows: 5 %>
+
+        <%= f.date_field :publication_date %>
+
+        <% if @milestoneable.class.name == 'Projekt' %>
+          <%= translations_form.text_field :custom_date, label: t('activerecord.attributes.milestone.custom_date') %>
+        <% end %>
       </div>
     <% end %>
   </div>
 
   <div class="row">
     <div class="column">
-      <%= f.date_field :publication_date %>
-
       <%= render "images/nested_image", f: f %>
 
       <div class="documents">

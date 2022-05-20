@@ -71,6 +71,10 @@
       <% end %>
     </div>
 
+    <div class="documents" id="attach-documents">
+      <%= render "documents/nested_documents", f: f %>
+    </div>
+
     <div class='row margin-top'>
       <br>
       <%= render SDG::RelatedListSelectorComponent.new(f) %>

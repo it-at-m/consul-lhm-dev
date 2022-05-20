@@ -1,3 +1,12 @@
+<% @projekt.map_layers.each do |layer| %>
+  <%= render partial: 'custom/admin/projekts/edit/projekt_map/map_layer', locals: { layer: layer } %>
+<% end %>
+
+<div id='new-map-layer'>
+  <%= link_to t("custom.map_layer.buttons.new_layer"), new_admin_projekt_map_layer_path(@projekt), class: 'button success margin-bottom', remote: true %>
+</div>
+
+
 <h2><%= t("admin.settings.index.map.title") %></h2>
 
 

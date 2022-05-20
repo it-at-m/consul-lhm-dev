@@ -1,0 +1,44 @@
+<div class="legislation-draft-versions-index">
+  <h2><%= t("custom.admin.projekts.projekt_questions.index.title") %></h2>
+
+  <h4><%= t("custom.admin.projekts.projekt_questions.index.enable_projekt_list") %></h2>
+  <%= render Admin::Settings::FeaturedSettingsFormComponent.new(ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.questions.show_questions_list'), tab: '#tab-projekt-phases') %>
+
+  <div class="float-right">
+    <%= link_to t("custom.admin.projekts.projekt_questions.index.create"), new_admin_projekt_projekt_question_path(projekt_id: @projekt.id), class: "button" %>
+  </div>
+
+  <div class="small-12 column">
+
+    <% if @projekt.questions.any? %>
+      <table class="stack">
+       <thead>
+          <tr>
+            <th><%= t("admin.legislation.questions.table.title") %></th>
+            <th><%= t("admin.legislation.questions.table.question_options") %></th>
+            <th class="text-center"><%= t("admin.legislation.questions.table.answers_count") %></th>
+            <th class="text-center"><%= t("admin.legislation.questions.table.comments_count") %></th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @projekt.questions.each do |question| %>
+          <tr id="<%= dom_id(question) %>">
+            <td>
+              <%= link_to question.title, edit_admin_projekt_projekt_question_path(@projekt, question) %>
+            </td>
+            <td>
+              <ul>
+                <% question.question_options.each do |question_option| %>
+                  <li><%= "#{question_option.value} (#{question_option.answers_count})" %></li>
+                <% end %>
+              </ul>
+            </td>
+            <td class="text-center"><%= question.answers_count %></td>
+            <td class="text-center"><%= link_to question.comments.count, legislation_process_question_path(@projekt, question, anchor: "comments") %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

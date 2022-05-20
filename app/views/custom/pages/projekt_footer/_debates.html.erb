@@ -29,13 +29,13 @@
       </div>
     </div>
 
-		<% if @debates.any? || current_user.blank? %>
-			<%= render @debates %>
+    <% if @debates.any? || current_user.blank? %>
+      <%= render @debates %>
       <% render partial: "debates/debate", collection: @debates %>
-		<% else %>
-			<%# = empty_recommended_debates_message_text(current_user) %>
-		<% end %>
-		<%= paginate @debates, remote: true %>
+    <% else %>
+      <%# = empty_recommended_debates_message_text(current_user) %>
+    <% end %>
+    <%= paginate @debates, remote: true, params: { controller: 'pages', action: 'debate_phase_footer_tab' } %>
 
   </div>
 </div>

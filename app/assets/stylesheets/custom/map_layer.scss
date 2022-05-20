@@ -1,0 +1,31 @@
+.map-layer {
+  position: relative;
+
+  .edit-map-layer,
+  .delete-map-layer {
+    position: absolute;
+    top: 5px;
+  }
+
+  .edit-map-layer {
+    right: 30px;
+  }
+
+  .delete-map-layer {
+    right: 10px;
+  }
+}
+
+.map-layer-form {
+  border: 1px solid gainsboro;
+  padding-top: 25px;
+  border-radius: 5px;
+
+  .checkboxes {
+    margin-bottom: 20px;
+
+    span.checkbox {
+      font-weight: normal;
+    }
+  }
+}

@@ -1,5 +1,5 @@
 <% cache cache_key do %>
-  <% if @top_level_active_projekts.any? || @top_level_archived_projekts.any? %>
+  <% if show_filter? %>
     <div class="sidebar-divider"></div>
 
     <h2 class="sidebar-title projekt-tag-chip-projekt projekt-tag-chip-icon"><%= t("custom.projekts.sidebar_filter.title") %></h2>

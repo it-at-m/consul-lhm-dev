@@ -1,10 +1,12 @@
 <% if feature?(:map) && map_location_available?(@proposal.map_location) %>
   <div class="margin-bottom not-print">
-    <%= render_map(@proposal.map_location, "proposal", false, nil, MapLocation.where(proposal_id: @proposal.id).map(&:json_data)) %>
+    <%= render_map(@proposal.map_location, "proposal", false, nil, MapLocation.where(proposal_id: @proposal.id).map(&:json_data), @proposal.projekt.map_layers.to_json) %>
   </div>
 <% end %>
 
-<blockquote><%= @proposal.summary %></blockquote>
+<% if projekt_feature?(@proposal.projekt, 'proposals.enable_summary') %>
+  <blockquote><%= @proposal.summary %></blockquote>
+<% end %>
 
 <% if @proposal.image.present? && ( !@proposal.image.concealed? || params[:controller] == 'admin/proposals' ) %>
   <div class="image">
@@ -56,7 +58,7 @@
   </div>
 <% end %>
 
-<% if feature?(:allow_attached_documents) %>
+<% if projekt_feature?(@proposal.projekt, "proposals.allow_attached_documents") %>
   <%= render "documents/documents",
               documents: @proposal.documents,
               max_documents_allowed: Proposal.max_documents_allowed %>

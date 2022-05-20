@@ -25,6 +25,8 @@ en:
           show_open_answer_with_username: Show open answers with user name
           show_open_answer_without_username: Show open answers anonymously
           show_summary_instead_of_questions: Show summary instead of list of questions
+          show_on_home_page: This poll will be visible on the home page.
+          show_on_index_page: This poll will be visible on polls index page.
       progress_bars:
         index:
           progress_bar: Progress bar
@@ -38,6 +40,8 @@ en:
             'yes': "Yes"
           projekt_map_tab:
             name: Ind. card configuration
+          projekt_questions_tab:
+            name: Questions
           projekt_milestones_tab:
             name: Progress & Milestones
           projekt_news_tab:
@@ -90,6 +94,7 @@ en:
           projekt_settings_tab:
             footer_settings: Footer
             general_settings: General
+            milestone_settings: Settings
             name: Project functions
             select_an_element: select
             sidebar_settings: Sidebar

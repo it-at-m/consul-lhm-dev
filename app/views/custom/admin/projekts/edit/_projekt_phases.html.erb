@@ -121,44 +121,37 @@
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
       projekt_phase: @projekt.comment_phase,
-      phase_name: 'comment_phase',
-      feature_phase_active: @projekt_features_phase_comment_active,
-      feature_phase_info: @projekt_features_phase_comment_info
+      phase_name: 'comment_phase'
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
       projekt_phase: @projekt.debate_phase,
-      phase_name: 'debate_phase',
-      feature_phase_active: @projekt_features_phase_debate_active,
-      feature_phase_info: @projekt_features_phase_debate_info
+      phase_name: 'debate_phase'
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
       projekt_phase: @projekt.proposal_phase,
-      phase_name: 'proposal_phase',
-      feature_phase_active: @projekt_features_phase_proposal_active,
-      feature_phase_info: @projekt_features_phase_proposal_info
+      phase_name: 'proposal_phase'
+    } %>
+
+    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
+      projekt_phase: @projekt.question_phase,
+      phase_name: 'question_phase'
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
       projekt_phase: @projekt.voting_phase,
-      phase_name: 'voting_phase',
-      feature_phase_active: @projekt_features_phase_voting_active,
-      feature_phase_info: @projekt_features_phase_voting_info
+      phase_name: 'voting_phase'
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
       projekt_phase: @projekt.budget_phase,
-      phase_name: 'budget_phase',
-      feature_phase_active: @projekt_features_phase_budget_active,
-      feature_phase_info: @projekt_features_phase_budget_info
+      phase_name: 'budget_phase'
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
       projekt_phase: @projekt.milestone_phase,
-      phase_name: 'milestone_phase',
-      feature_phase_active: @projekt_features_phase_milestone_active,
-      feature_phase_info: @projekt_features_phase_milestone_info
+      phase_name: 'milestone_phase'
     } %>
   </tbody>
 </table>

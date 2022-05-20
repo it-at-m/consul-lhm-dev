@@ -187,11 +187,14 @@
 
 
 .proposals-list .proposal .columns:last-child:not(:first-child),
-.proposals-list .proposal .column:last-child:not(:first-child) {
+.proposals-list .proposal .column:last-child:not(:first-child),
+.budget-investments-list .budget-investment .columns:last-child:not(:first-child),
+.budget-investments-list .budget-investment .column:last-child:not(:first-child) {
   padding-top: 0;
 }
 
-.proposals-list .proposal img {
+.proposals-list .proposal img,
+.budget-investments-list .budget-investment img {
   max-width: 100%;
 }
 

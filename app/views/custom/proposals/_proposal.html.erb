@@ -1,4 +1,22 @@
-<% cache [locale_and_user_status(proposal), "index", proposal, proposal.voters, proposal.projekt, proposal.projekt.top_parent, proposal.projekt.page, proposal.image, proposal.author, params[:tags], params[:projekts], params[:geozone_affiliation], params[:affiliated_geozones], params[:geozone_restriction], params[:restricted_geozones], proposal.custom_votes_needed_for_success, proposal_settings_fingerprints ] do %>
+<% cache [locale_and_user_status(proposal),
+          proposal,
+          proposal.voters.count,
+          @proposal_votes,
+          proposal.author,
+          proposal.projekt,
+          proposal.proposal_phase,
+          proposal.projekt.top_parent,
+          proposal.projekt.page,
+          proposal.image,
+          proposal.successful?,
+          proposal.custom_votes_needed_for_success,
+          proposal_settings_fingerprints,
+          params[:tags],
+          params[:projekts],
+          params[:geozone_affiliation],
+          params[:affiliated_geozones],
+          params[:geozone_restriction],
+          params[:restricted_geozones]] do %>
 
   <div id="<%= dom_id(proposal) %>" class='row collapse resource-n proposal margin-bottom' data-equalizer='main' data-equalize-on="medium">
     <div class='columns'>
@@ -9,13 +27,17 @@
 
     <div class='columns small-12 medium-3 large-2 show-for-small-only not-print'>
       <% if show_image_thumbnail?(proposal) %>
-        <%= image_tag proposal.image_url(:large), alt: proposal.image.title.unicode_normalize %>
+        <%= link_to namespaced_proposal_path(proposal) do %>
+          <%= image_tag proposal.image_url(:large), alt: proposal.image.title.unicode_normalize %>
+        <% end %>
       <% end %>
     </div>
 
     <div class="columns small-12 medium-3 large-2 show-for-medium not-print <%= "image-placeholder icon-#{proposal.projekt.icon || "image" }" unless show_image_thumbnail?(proposal)  %>" data-equalizer-watch='main'>
       <% if show_image_thumbnail?(proposal) %>
-        <%= image_tag proposal.image_url(:thumb_wider), alt: proposal.image.title.unicode_normalize %>
+        <%= link_to namespaced_proposal_path(proposal) do %>
+          <%= image_tag proposal.image_url(:thumb_wider), alt: proposal.image.title.unicode_normalize %>
+        <% end %>
       <% end %>
     </div>
 
@@ -27,7 +49,7 @@
         <div class='column small-12 medium-6 large-8 resource-details' data-equalizer-watch='details'>
           <h4 class='resource-name'><%= link_to proposal.title, namespaced_proposal_path(proposal) %></h4>
           <div class="resource-summary margin-bottom">
-            <%= auto_link_already_sanitized_html simple_format(proposal.summary) %>
+            <%= auto_link_already_sanitized_html simple_format(projekt_feature?(proposal.projekt, 'proposals.enable_summary') ? proposal.summary : proposal.description[0..200]) %>
             <div class="truncate"></div>
           </div>
           <% #render "shared/tags", taggable: proposal, limit: 5 %>

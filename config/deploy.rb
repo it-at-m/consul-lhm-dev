@@ -99,6 +99,7 @@ task :add_new_settings do
         execute :rake, "projekt_settings:destroy_obsolete"
         execute :rake, "projekts:ensure_map_existence"
         execute :rake, "deficiency_report_statuses:add_default_statuses"
+        execute :rake, "map_layers:ensure_existence_of_base_layer"
       end
     end
   end

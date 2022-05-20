@@ -20,7 +20,7 @@
       App.Map.maps = [];
     },
     initializeMap: function(element) {
-      var addMarker, clearFormfields, createMarker, editable, getPopupContent, latitudeInputSelector, longitudeInputSelector, map, mapAttribution, mapCenterLatLng, mapCenterLatitude, mapCenterLongitude, mapTilesProvider, marker, markerIcon, markerLatitude, markerLongitude, markerColor, markerIconClass, moveOrPlaceMarker, openMarkerPopup, removeMarker, removeMarkerSelector, updateFormfields, zoom, zoomInputSelector, process, markersGroup;
+      var addMarker, clearFormfields, createMarker, editable, getPopupContent, latitudeInputSelector, longitudeInputSelector, map, mapAttribution, mapCenterLatLng, mapCenterLatitude, mapCenterLongitude, mapTilesProvider, marker, markerIcon, markerLatitude, markerLongitude, markerColor, markerIconClass, moveOrPlaceMarker, openMarkerPopup, removeMarker, removeMarkerSelector, updateFormfields, zoom, zoomInputSelector, process, markersGroup, layersData;
       process = $(element).data("parent-class");
       App.Map.cleanCoordinates(element);
       mapCenterLatitude = $(element).data("map-center-latitude");
@@ -40,6 +40,8 @@
       editable = $(element).data("marker-editable");
       marker = null;
       markersGroup = L.markerClusterGroup();
+
+      layersData = $(element).data('map-layers');
 
       createMarker = function(latitude, longitude, color, iconClass) {
         if ( !iconClass ) {
@@ -86,6 +88,7 @@
         }
         clearFormfields();
       };
+
       moveOrPlaceMarker = function(e) {
         if (marker) {
           marker.setLatLng(e.latlng);
@@ -94,19 +97,20 @@
         }
         updateFormfields();
       };
+
       updateFormfields = function() {
         $(latitudeInputSelector).val(marker.getLatLng().lat);
         $(longitudeInputSelector).val(marker.getLatLng().lng);
         $(zoomInputSelector).val(map.getZoom());
       };
+
       clearFormfields = function() {
         $(latitudeInputSelector).val("");
         $(longitudeInputSelector).val("");
         $(zoomInputSelector).val("");
       };
-      openMarkerPopup = function(e) {
 
-        console.log(e.target)
+      openMarkerPopup = function(e) {
         var route;
 
         if ( process == "proposals" ) {
@@ -142,28 +146,6 @@
         }
       };
 
-      var baseLayerGesamt = L.tileLayer.wms(mapTilesProvider, {
-        attribution: mapAttribution,
-				layers: 'gsm:g_stadtkarte_gesamt'
-      });
-
-      var baseLayerLuftbild = L.tileLayer.wms(mapTilesProvider, {
-        attribution: mapAttribution,
-        layers: 'gsm:g_luftbild'
-      });
-
-      var handlungsraumLayer = L.tileLayer.wms(mapTilesProvider, {
-        attribution: mapAttribution,
-        layers: 'hr3_polygon_211216_bayern',
-        format: 'image/png',
-        transparent: true
-      });
-
-      var baseMaps = {
-        "Gesamt": baseLayerGesamt,
-        "Luftbild": baseLayerLuftbild
-      };
-
       mapCenterLatLng = new L.LatLng(mapCenterLatitude, mapCenterLongitude);
 
       map = L.map(element.id, {
@@ -171,15 +153,6 @@
         maxZoom: 18
       }).setView(mapCenterLatLng, zoom);
 
-      baseMaps['Gesamt'].addTo(map);
-      handlungsraumLayer.addTo(map);
-
-      // L.control.layers(baseMaps).addTo(map);
-
-      // map.on('baselayerchange', function() {
-      //   handlungsraumLayer.addTo(map);
-      //   handlungsraumLayer.bringToFront();
-      // });
 
       if ( !editable ) {
         map._layersMaxZoom = 19;
@@ -187,6 +160,67 @@
       }
 
       App.Map.maps.push(map);
+
+
+
+///
+
+      var baseLayers = {};
+      var overlayLayers = {};
+
+      var createLayer = function(item, index) {
+
+        if ( item.protocol == 'wms' ) {
+          var layer = L.tileLayer.wms(item.provider, {
+            attribution: item.attribution,
+            layers: item.layer_names,
+            format: (item.transparent ? 'image/png' : 'image/jpeg'),
+            transparent: (item.transparent),
+            show_by_default: (item.show_by_default)
+          });
+
+        } else {
+          var layer = L.tileLayer(item.provider, {
+            attribution: item.attribution
+          });
+
+        }
+
+        if ( item.base ) {
+          baseLayers[item.name] = layer;
+        } else {
+          overlayLayers[item.name] = layer;
+        }
+      }
+
+      var ensureBaseLayerExistence = function() {
+        if ( Object.keys(baseLayers).length === 0 ) {
+          var defaultLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href=\"http://osm.org/copyright\">OpenStreetMap</a> contributors'
+          });
+
+          baseLayers['defaultLayer'] = defaultLayer;
+        }
+      }
+
+      if ( typeof layersData !== "undefined"  ) {
+        layersData.forEach(createLayer);
+      }
+
+      if ( Object.keys(overlayLayers).length > 0 ) {
+        for (let i = 0; i < Object.keys(overlayLayers).length; i++ ) {
+          if ( overlayLayers[Object.keys(overlayLayers)[i]].options.show_by_default == true ) {
+            overlayLayers[Object.keys(overlayLayers)[i]].addTo(map)
+          }
+        }
+
+        L.control.layers(baseLayers, overlayLayers).addTo(map);
+      }
+
+      ensureBaseLayerExistence();
+      baseLayers[Object.keys(baseLayers)[0]].addTo(map);
+
+///
 
 
       var search = new GeoSearch.GeoSearchControl({
@@ -199,13 +233,13 @@
 
       map.addControl(search);
 
-
       L.control.locate({icon: 'fa fa-map-marker'}).addTo(map);
 
 
       if (markerLatitude && markerLongitude && !addMarker) {
         marker = createMarker(markerLatitude, markerLongitude, markerColor, markerIconClass);
       }
+
       if (editable) {
         $('.js-select-projekt').on("click", removeMarker);
         $(removeMarkerSelector).on("click", removeMarker);
@@ -216,6 +250,7 @@
         });
         map.on("click", moveOrPlaceMarker);
       }
+
       if (addMarker) {
         addMarker.forEach(function(coordinates) {
           if (App.Map.validCoordinates(coordinates)) {
@@ -236,10 +271,12 @@
         });
       }
     },
+
     toggleMap: function() {
       $(".map").toggle();
       $(".js-location-map-remove-marker").toggle();
     },
+
     cleanCoordinates: function(element) {
       var clean_markers, markers;
       markers = $(element).attr("data-marker-process-coordinates");
@@ -248,9 +285,11 @@
         $(element).attr("data-marker-process-coordinates", clean_markers);
       }
     },
+
     validCoordinates: function(coordinates) {
       return App.Map.isNumeric(coordinates.lat) && App.Map.isNumeric(coordinates.long);
     },
+
     isNumeric: function(n) {
       return !isNaN(parseFloat(n)) && isFinite(n);
     }

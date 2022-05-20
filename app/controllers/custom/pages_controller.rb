@@ -109,6 +109,14 @@ class PagesController < ApplicationController
     end
   end
 
+  def question_phase_footer_tab
+    set_projekt_questions_footer_tab_variables
+
+    respond_to do |format|
+      format.js { render "pages/projekt_footer/footer_tab" }
+    end
+  end
+
   def extended_sidebar_map
     @current_projekt = SiteCustomization::Page.find_by(slug: params[:id]).projekt
 
@@ -283,6 +291,8 @@ class PagesController < ApplicationController
   def set_milestones_footer_tab_variables(projekt=nil)
     @current_projekt = projekt || SiteCustomization::Page.find_by(slug: params[:id]).projekt
     @current_tab_phase = @current_projekt.milestone_phase
+    milestone_order_newest = ProjektSetting.find_by(projekt: @current_projekt, key: 'projekt_feature.milestones.newest_first').value.present?
+    @milestones_publication_date_order = milestone_order_newest ? :desc : :asc
   end
 
   def set_projekt_notifications_footer_tab_variables(projekt=nil)
@@ -305,6 +315,30 @@ class PagesController < ApplicationController
     @current_tab_phase = @current_projekt.event_phase
     scoped_projekt_ids = @current_projekt.all_children_projekts.unshift(@current_projekt).compact.pluck(:id)
     @projekt_events = ProjektEvent.base_selection(scoped_projekt_ids).page(params[:page]).send("sort_by_#{@current_order}")
+  end
+
+  def set_projekt_questions_footer_tab_variables(projekt=nil)
+    @current_projekt = projekt || SiteCustomization::Page.find_by(slug: params[:id]).projekt
+    @current_tab_phase = @current_projekt.question_phase
+    scoped_projekt_ids = @current_projekt.all_children_projekts.unshift(@current_projekt).compact.pluck(:id)
+    # @projekt_questions = ProjektQuestion.base_selection(scoped_projekt_ids)
+
+    if @current_projekt.projekt_list_enabled?
+      @projekt_questions = @current_projekt.questions
+    else
+      @projekt_question = @current_projekt.questions.first
+      @commentable = @projekt_question
+
+      @valid_orders = %w[most_voted newest oldest]
+      @current_order = @valid_orders.include?(params[:order]) ? params[:order] : @valid_orders.first
+
+      @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
+
+      if @commentable.present?
+        set_comment_flags(@comment_tree.comments)
+      end
+      @projekt_question_answer = @projekt_question&.answer_for_user(current_user) || ProjektQuestionAnswer.new
+    end
   end
 
   def default_phase_name(default_phase_id)

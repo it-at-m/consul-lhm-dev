@@ -4,7 +4,7 @@ class Widget::Feed < ApplicationRecord
   KINDS = %w[polls proposals debates].freeze
 
   def polls
-    Poll.with_current_projekt.current.order(created_at: :asc).limit(limit)
+    Poll.current.where(show_on_home_page: true).order(created_at: :asc).limit(limit)
   end
 
   def proposals

@@ -69,7 +69,7 @@
       </div>
     <% end %>
 
-    <% if feature?(:allow_attached_documents) %>
+    <% if projekt_feature?(budget.projekt, "budgets.allow_attached_documents") %>
       <div class="documents">
         <%= render "documents/nested_documents", f: f %>
       </div>

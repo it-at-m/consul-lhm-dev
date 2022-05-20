@@ -3,6 +3,7 @@ require_dependency Rails.root.join("app", "controllers", "debates_controller").t
 class DebatesController < ApplicationController
   include ImageAttributes
   include ProjektControllerHelper
+  include DocumentAttributes
 
   before_action :load_categories, only: [:index, :create, :edit, :map, :summary]
   before_action :process_tags, only: [:create, :update]
@@ -81,7 +82,8 @@ class DebatesController < ApplicationController
 
   def debate_params
     attributes = [:tag_list, :terms_of_service, :projekt_id, :related_sdg_list, :on_behalf_of,
-                  image_attributes: image_attributes]
+                  image_attributes: image_attributes,
+                  documents_attributes: document_attributes]
     params.require(:debate).permit(attributes, translation_params(Debate))
   end
 

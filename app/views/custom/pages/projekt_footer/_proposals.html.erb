@@ -43,6 +43,6 @@
     <% else %>
       <%= empty_recommended_proposals_message_text(current_user) %>
     <% end %>
-    <%= paginate @proposals, remote: true %>
+    <%= paginate @proposals, remote: true, params: { controller: 'pages', action: 'proposal_phase_footer_tab' } %>
   </div>
 </div>

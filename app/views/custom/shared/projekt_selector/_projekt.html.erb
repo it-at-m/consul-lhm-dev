@@ -13,7 +13,10 @@
      <%= "data-latitude=#{projekt.map_location.latitude}" if projekt.map_location.latitude.present? %>
      <%= "data-longitude=#{projekt.map_location.longitude}" if projekt.map_location.longitude.present? %>
      <%= "data-zoom=#{projekt.map_location.zoom}" if projekt.map_location.zoom.present? %>
-     <%= "data-show-map=true" if projekt_feature?(projekt, 'proposals.show_map').present? && controller_name == 'proposals'  %> >
+     <%= "data-show-map=true" if projekt_feature?(projekt, "#{controller_name}.show_map") %>
+     <%= "data-show-summary=true" if projekt_feature?(projekt, "proposals.enable_summary")  %>
+     <%= "data-allow-attached-document=true" if projekt_feature?(projekt, "#{controller_name}.allow_attached_documents")  %>
+     >
 
   <div class='projekt-icon'>
     <i class="fas fa-<%= projekt.icon || "circle" %>" style="color:<%= projekt.color %>"></i>

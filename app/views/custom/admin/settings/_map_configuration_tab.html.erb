@@ -1,0 +1,21 @@
+<% if feature?(:map) %>
+  <% MapLayer.general.each do |layer| %>
+    <%= render partial: 'custom/admin/settings/map_layer', locals: { layer: layer, origin: 'admin/settings', tab: '#tab-map-configuration' } %>
+  <% end %>
+
+  <div id='new-map-layer'>
+    <%= link_to t("custom.map_layer.buttons.new_layer"), new_admin_map_layer_path(origin: 'admin/settings', tab: '#tab-map-configuration'), class: 'button success margin-bottom', remote: true %>
+  </div>
+
+  <h2><%= t("admin.settings.index.map.title") %></h2>
+
+  <%= render "settings_table", settings: @map_configuration_settings, setting_name: "setting", tab: "#tab-map-configuration" %>
+
+  <p><%= t("admin.settings.index.map.help") %></p>
+
+  <%= render "map_form" %>
+<% else %>
+  <div class="callout primary">
+    <%= t("admin.settings.index.map.how_to_enable") %>
+  </div>
+<% end %>

@@ -1,6 +1,6 @@
 class ProjektsController < ApplicationController
   skip_authorization_check
-  has_orders %w[active ongoing upcoming expired], only: :index
+  has_orders %w[active all ongoing upcoming expired], only: :index
 
   before_action do
     raise FeatureFlags::FeatureDisabled, :projekts_overview unless Setting['projekts.overview_page']
@@ -10,13 +10,24 @@ class ProjektsController < ApplicationController
 
   def index
     @filtered_goals = params[:sdg_goals].present? ? params[:sdg_goals].split(',').map{ |code| code.to_i } : nil
-    @filtered_target = params[:sdg_targets].present? ? params[:sdg_targets].split(',')[0] : nil
+    @filtered_targets = params[:sdg_targets].present? ? params[:sdg_targets].split(',')[0] : nil
 
     @projekts =
       Projekt
         .joins( 'INNER JOIN projekt_settings show_in_overview_page ON projekts.id = show_in_overview_page.projekt_id' )
         .where( 'show_in_overview_page.key': 'projekt_feature.general.show_in_overview_page', 'show_in_overview_page.value': 'active' )
 
+    @projekts_count_hash = {}
+
+    valid_orders.each do |order|
+      @projekts_count_hash[order] = @projekts.send(order).count
+    end
+
+    @current_active_orders = @projekts_count_hash.select do |key, value|
+      value > 0
+    end.keys
+
+    @current_order = valid_orders.include?(params[:order]) ? params[:order] : @current_active_orders.first
 
     @geozones = Geozone.all
     @selected_geozone_affiliation = params[:geozone_affiliation] || 'all_resources'
@@ -40,7 +51,8 @@ class ProjektsController < ApplicationController
     @resource_name = 'projekt'
 
     @projekts = @projekts.includes(:sdg_goals).send(@current_order)
-    @sdgs = @projekts.map(&:sdg_goals).flatten.uniq.compact + SDG::Goal.where(code: @filtered_goals).to_a
+    @sdgs = (@projekts.map(&:sdg_goals).flatten.uniq.compact + SDG::Goal.where(code: @filtered_goals).to_a).uniq
+    @sdg_targets = (@projekts.map(&:sdg_targets).flatten.uniq.compact + SDG::Target.where(code: @filtered_targets).to_a).uniq
 
     @projekts_coordinates = all_projekts_map_locations(@projekts)
   end
@@ -86,7 +98,10 @@ class ProjektsController < ApplicationController
 
   def take_by_sdgs
     if params[:sdg_targets].present?
-      @projekts = @projekts.joins(:sdg_global_targets).where(sdg_targets: { code: params[:sdg_targets].split(',')[0] }).distinct
+      sdg_target_codes = params[:sdg_targets].split(',')
+      @projekts = @projekts.left_joins(sdg_global_targets: :local_targets)
+
+      @projekts = @projekts.where(sdg_targets: { code: sdg_target_codes}).or(@projekts.where(sdg_local_targets: { code: sdg_target_codes })).distinct
       return
     end
 

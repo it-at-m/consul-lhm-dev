@@ -30,3 +30,5 @@ en:
           user: I can help with implementation
         implementation_contribution: How can you contribute?
         user_cost_estimate: Cost estimate
+      milestone:
+        custom_date: Custom date

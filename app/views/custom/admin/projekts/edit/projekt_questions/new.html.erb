@@ -1,0 +1,14 @@
+<div class="legislation-questions-new legislation-questions-form">
+
+  <%= back_link_to admin_projekt_path(@projekt), t("admin.legislation.questions.new.back") %>
+
+  <h2><%= @projekt.title %></h2>
+
+  <div class="row">
+    <div class="small-12 column">
+      <h3><%= t("custom.admin.projekts.projekt_questions.new.title") %></h3>
+    </div>
+  </div>
+
+  <%= render "admin/projekts/edit/projekt_questions/form", url: admin_projekt_projekt_questions_path(@projekt) %>
+</div>

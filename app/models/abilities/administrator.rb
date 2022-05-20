@@ -131,6 +131,7 @@ module Abilities
 
 
       can [:order_questions], Poll::Question
+      can [:show], Projekt
     end
   end
 end

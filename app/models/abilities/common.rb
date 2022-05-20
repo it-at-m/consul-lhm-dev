@@ -139,6 +139,10 @@ module Abilities
            ProjektSetting.find_by(projekt: investment.projekt, key: "projekt_feature.budgets.only_admins_create_investment_proposals").value.blank?
           )
       end
+
+      # extending to regular users
+      can :access, :ckeditor
+      can :manage, Ckeditor::Picture
     end
   end
 end

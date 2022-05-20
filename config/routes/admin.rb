@@ -10,6 +10,9 @@ namespace :admin do
     end
     resources :projekt_notifications, only: [:create, :update, :destroy]
     resources :projekt_events, only: [:create, :update, :destroy]
+    resources :projekt_questions  do
+      post "/answers/order_answers", to: "questions/answers#order_answers"
+    end
     resources :milestones, controller: "projekt_milestones"
     resources :progress_bars, except: :show, controller: "projekt_progress_bars"
     member do
@@ -20,7 +23,11 @@ namespace :admin do
       patch :quick_update
     end
     patch :update_map, to: "projekts#update_map"
+
+    resources :map_layers, only: [:update, :create, :edit, :new, :destroy], controller: 'projekts/map_layers'
   end
+
+  resources :map_layers, only: [:update, :create, :edit, :new, :destroy]
 
   # custom deficiency reports routes
   scope module: :deficiency_reports, path: :deficiency_reports, as: :deficiency_report do

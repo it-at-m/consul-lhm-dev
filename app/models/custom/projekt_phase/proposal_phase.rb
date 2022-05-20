@@ -16,6 +16,6 @@ class ProjektPhase::ProposalPhase < ProjektPhase
   end
 
   def default_order
-    3
+    4
   end
 end

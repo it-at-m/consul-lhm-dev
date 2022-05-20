@@ -6,9 +6,6 @@
     <% if !current_user.level_two_or_three_verified? %>
       <%= t('custom.comments.restricted.not_verified', verify_account: link_to_verify_account).html_safe %>
 
-    <% elsif !@projekt.current? %>
-      <%= t('custom.comments.restricted.projekt_not_active')%>
-
     <% elsif !@projekt.comment_phase.current? %>
       <%= t('custom.comments.restricted.projekt_phase_not_active')%>
 

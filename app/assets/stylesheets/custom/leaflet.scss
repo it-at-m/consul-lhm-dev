@@ -75,3 +75,9 @@
     transform: rotate(180deg);
   }
 }
+
+.sidebar-projekt-map {
+  .leaflet-top.leaflet-right {
+    display: none;
+  }
+}

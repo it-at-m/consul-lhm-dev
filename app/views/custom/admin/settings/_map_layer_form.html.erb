@@ -1,0 +1,58 @@
+<div class='map-layer-form'>
+  <%= form_for([:admin, @map_layer]) do |f| %>
+    <%= hidden_field_tag :tab, params[:tab] %>
+    <%= hidden_field_tag :origin, params[:origin] %>
+
+    <div class='row'>
+      <div class='column'>
+        <%= f.text_field :name, 
+                          hint: t('custom.map_layer.hints.name')
+         %>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='column medium-6 checkboxes'>
+        <%= f.check_box :base, class: 'js-map-layer-base-checkbox'  %>
+        <%= f.check_box :show_by_default, disabled: layer.base  %>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='column'>
+        <%= f.text_field :provider,
+                          hint: t('custom.map_layer.hints.provider')
+      %>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='column'>
+        <%= f.text_field :attribution,
+                          hint: t('custom.map_layer.hints.attribution')
+      %>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='column medium-6'>
+        <%= f.label :protocol %>
+        <%= f.collection_radio_buttons(:protocol, MapLayer.protocol_attributes_for_select, :first, :last) do |rb| %>
+          <div style='display:inline-block;margin-right:20px;'>
+            <%= rb.radio_button(class: 'js-map-protocol') + rb.label %>
+          </div>
+        <% end %>
+        <%= f.check_box :transparent, disabled: layer.protocol != 'wms' %>
+      </div>
+      <div class='column medium-6'>
+        <%= f.text_field :layer_names,
+          hint: t('custom.map_layer.hints.layer_names'),
+          disabled: layer.protocol != 'wms'
+        %>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='column'>
+        <%= f.submit %>
+      </div>
+    </div>
+
+  <% end %>
+</div>

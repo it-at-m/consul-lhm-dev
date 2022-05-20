@@ -1,4 +1,19 @@
-<% cache [locale_and_user_status, debate, @debate_votes[debate.id], debate.projekt, debate.projekt.top_parent, debate.projekt.page, debate.image, params[:tags], params[:projekts], params[:geozone_affiliation], params[:affiliated_geozones], params[:geozone_restriction], params[:restricted_geozones]] do %>
+<% cache [locale_and_user_status,
+          debate,
+          @debate_votes[debate.id],
+          debate.author,
+          debate.projekt,
+          debate.projekt.top_parent,
+          debate.projekt.page,
+          debate.debate_phase,
+          debate.image,
+          projekt_feature?(debate.projekt, 'debates.allow_downvoting'),
+          params[:tags],
+          params[:projekts],
+          params[:geozone_affiliation],
+          params[:affiliated_geozones],
+          params[:geozone_restriction],
+          params[:restricted_geozones]] do %>
   <div id="<%= dom_id(debate) %>" class='row collapse resource-n debate margin-bottom' data-equalizer='main' data-equalize-on="medium">
 
     <div class='columns'>
@@ -9,13 +24,17 @@
 
     <div class='columns small-12 medium-3 large-2 show-for-small-only'>
       <% if show_image_thumbnail?(debate) %>
-        <%= image_tag debate.image_url(:large), alt: debate.image.title.unicode_normalize %>
+        <%= link_to debate do %>
+          <%= image_tag debate.image_url(:large), alt: debate.image.title.unicode_normalize %>
+        <% end %>
       <% end %>
     </div>
 
     <div class="columns small-12 medium-3 large-2 show-for-medium <%= "image-placeholder icon-#{debate.projekt.icon || 'image' }" unless show_image_thumbnail?(debate) %>" data-equalizer-watch='main'>
       <% if show_image_thumbnail?(debate) %>
-        <%= image_tag debate.image_url(:thumb_wider), alt: debate.image.title.unicode_normalize %>
+        <%= link_to debate do %>
+          <%= image_tag debate.image_url(:thumb_wider), alt: debate.image.title.unicode_normalize %>
+        <% end %>
       <% end %>
     </div>
 

@@ -17,15 +17,17 @@
   <main>
   <% cache [locale_and_user_status(@debate),
             @debate,
+            @debate_votes,
             @debate.author,
+            @debate.projekt,
+            @debate.projekt.top_parent,
+            @debate.projekt.page,
+            @debate.debate_phase,
+            @debate.image,
             Flag.flagged?(current_user, @debate),
             projekt_feature?(@debate.projekt, 'debates.show_report_button_in_sidebar'),
             projekt_feature?(@debate.projekt, 'debates.show_related_content'),
-            projekt_feature?(@debate.projekt, 'debates.allow_downvoting'),
-            @debate_votes,
-            @debate.projekt,
-            @debate.debate_phase,
-            @debate.image ] do %>
+            projekt_feature?(@debate.projekt, 'debates.allow_downvoting')] do %>
 
       <div class="debate-show">
 
@@ -55,6 +57,14 @@
             <% end %>
 
             <%= auto_link_already_sanitized_html wysiwyg(@debate.description) %>
+
+
+            <% if projekt_feature?(@debate.projekt, "debates.allow_attached_documents") %>
+              <%= render "documents/documents",
+                          documents: @debate.documents,
+                          max_documents_allowed: Debate.max_documents_allowed %>
+            <% end %>
+~          
 
             <% if projekt_feature?(@debate.projekt, 'debates.show_related_content') %>
               <%= render "relationable/related_content", relationable: @debate %>
@@ -115,7 +125,21 @@
       </div>
     <% end %>
 
-    <% if projekt_feature?(@debate.projekt, 'debates.show_comments') %>
-      <%= render "comments" %>
-    <% end %>
+    <div class="additional-content margin-top">
+      <div class="filter-subnav">
+        <div class="row">
+          <div class="small-12 column">
+            <%= render "debates/filter_subnav" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabs-content" data-tabs-content="proposals_tabs">
+      <% if projekt_feature?(@debate.projekt, 'debates.show_comments') %>
+        <div class="tabs-panel is-active" id="tab-comments">
+          <%= render "comments" %>
+        </div>
+      <% end %>
+    </div>
   </main>

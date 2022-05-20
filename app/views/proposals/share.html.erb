@@ -3,7 +3,7 @@
 <%= render "shared/social_media_meta_tags",
             social_url: proposal_url(@proposal),
             social_title: @proposal.title,
-            social_description: @proposal.summary %>
+            social_description: projekt_feature?(@proposal.projekt, 'proposals.enable_summary') ? @proposal.summary : @proposal.description[0..200] %>
 <% end %>
 <% content_for :canonical do %>
   <%= render "shared/canonical", href: proposal_url(@proposal) %>
@@ -23,7 +23,7 @@
       <%= render "shared/social_share",
         title: @proposal.title,
         url: proposal_url(@proposal),
-        description: @proposal.summary,
+        description: projekt_feature?(@proposal.projekt, 'proposals.enable_summary') ? @proposal.summary : @proposal.description[0..200],
         mobile: @proposal.title %>
 
       <% if can?(:dashboard, @proposal) %>

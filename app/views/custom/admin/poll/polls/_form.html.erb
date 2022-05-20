@@ -69,7 +69,7 @@
   <%end%>
 
   <div class="row">
-    <div class="small-12 column">
+    <div class="small-12 column margin-top margin-bottom">
       <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: @poll, projekts: Projekt.top_level }  %>
     </div>
   </div>
@@ -81,6 +81,18 @@
   <div class='row'>
     <div class='column'>
       <%= f.check_box :show_summary_instead_of_questions, label: t('custom.admin.polls.settings.show_summary_instead_of_questions') %>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='column'>
+      <%= f.check_box :show_on_home_page, label: t('custom.admin.polls.settings.show_on_home_page') %>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='column'>
+      <%= f.check_box :show_on_index_page, label: t('custom.admin.polls.settings.show_on_index_page') %>
     </div>
   </div>
 

@@ -55,19 +55,6 @@ class Admin::ProjektsController < Admin::BaseController
     all_projekt_features = all_settings["projekt_feature"].group_by(&:projekt_feature_type)
     @projekt_features_main = all_projekt_features['main']
 
-    @projekt_features_phase_comment_active = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.comment')
-    @projekt_features_phase_debate_active = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.debate')
-    @projekt_features_phase_proposal_active = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.proposal')
-    @projekt_features_phase_budget_active = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.budget')
-    @projekt_features_phase_voting_active = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.voting')
-    @projekt_features_phase_milestone_active = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.milestone')
-    @projekt_features_phase_event_active = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.event')
-    @projekt_features_phase_comment_info = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.comment_info')
-    @projekt_features_phase_debate_info = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.debate_info')
-    @projekt_features_phase_proposal_info = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.proposal_info')
-    @projekt_features_phase_budget_info = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.budget_info')
-    @projekt_features_phase_voting_info = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.voting_info')
-    @projekt_features_phase_milestone_info = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.milestone_info')
     @projekt_features_phase_projekt_notification_info = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.projekt_notification_info')
     @projekt_features_phase_newsfeed_info = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.newsfeed_info')
     @projekt_features_phase_event_info = ProjektSetting.find_by(projekt: @projekt, key: 'projekt_feature.phase.event_info')
@@ -80,6 +67,7 @@ class Admin::ProjektsController < Admin::BaseController
     @projekt_options_proposals = all_projekt_features['proposal_options']
     @projekt_features_polls = all_projekt_features['polls']
     @projekt_features_budgets = all_projekt_features['budgets']
+    @projekt_features_milestones = all_projekt_features['milestones']
 
     @projekt_newsfeed_settings = all_settings["projekt_newsfeed"]
 
@@ -169,6 +157,7 @@ class Admin::ProjektsController < Admin::BaseController
       budget_phase_attributes: [:id, :start_date, :end_date, :geozone_restricted, :active, :info_active, geozone_restriction_ids: [] ],
       voting_phase_attributes: [:id, :start_date, :end_date, :geozone_restricted, :active, :info_active, geozone_restriction_ids: [] ],
       milestone_phase_attributes: [:id, :start_date, :end_date, :active, :info_active],
+      question_phase_attributes: [:id, :start_date, :end_date, :active, :info_active],
       event_phase_attributes: [:id, :start_date, :end_date],
       map_location_attributes: map_location_attributes,
       image_attributes: image_attributes,

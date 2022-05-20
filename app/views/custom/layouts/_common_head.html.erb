@@ -13,6 +13,10 @@
 <meta name="expand-active-projekts" content=<%= Setting["projekts.second_level_projekts_in_active_filter"] %> />
 <meta name="expand-archived-projekts" content=<%= Setting["projekts.second_level_projekts_in_archived_filter"] %> />
 
+<% if ( controller_name.in?(['proposals', 'debates', 'polls', 'welcome']) && action_name == 'index' ) || ( controller_name == 'pages' && action_name == 'show' ) %>
+  <meta name="turbolinks-cache-control" content="no-cache">
+<% end %>
+
 <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.6.0/dist/geosearch.css" />
 <script src="https://unpkg.com/leaflet-geosearch@3.6.0/dist/geosearch.umd.js"></script>
 

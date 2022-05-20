@@ -1,0 +1,56 @@
+<div class='map-layer margin-bottom' id=<%= dom_id(layer) %>>
+
+  <%= link_to edit_admin_map_layer_path(layer, origin: origin, tab: tab), class: 'edit-map-layer', remote: true do %>
+    <i class="far fa-edit"></i>
+  <% end %>
+
+  <%= link_to admin_map_layer_path(layer, origin: origin, tab: tab),
+    class: 'delete-map-layer',
+    remote: true,
+    method: :delete do %>
+    <i class="fas fa-trash-alt"></i>
+  <% end %>
+
+  <div class='row collapse'>
+    <div class='column'>
+      <strong>
+        <%= layer.name %>
+      </strong>
+      <% if layer.base? %>
+        (base)
+      <% end %>
+    </div>
+  </div>
+
+  <div class='row collapse'>
+    <div class='column'>
+      <div>
+        <%= t('custom.map_layer.labels.provider') + ':' %>
+        <%= layer.provider %>
+      </div>
+      <% if layer.layer_names.present? %>
+        <%= t('custom.map_layer.labels.layer_names') + ':' %>
+        <%= layer.layer_names %>
+      <% end %>
+      <div>
+        <%= t('custom.map_layer.labels.attribution') + ':' %>
+        <%= layer.attribution %>
+      </div>
+    </div>
+  </div>
+
+  <div class='row collapse'>
+    <div class='column'>
+      <% if layer.protocol.present? %>
+        <%= t('custom.map_layer.labels.protocol') + ':' %>
+        <%= t("activerecord.attributes.map_layer.protocols.#{layer.protocol}") %>
+      <% end %>
+
+      <% if layer.transparent.present? %>
+        <div>
+          <%= t('custom.map_layer.labels.transparent') %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

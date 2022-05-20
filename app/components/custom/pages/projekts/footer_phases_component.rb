@@ -2,13 +2,14 @@ class Pages::Projekts::FooterPhasesComponent < ApplicationComponent
   delegate :format_date, :format_date_range, :get_projekt_phase_restriction_name, :projekt_feature?, to: :helpers
   attr_reader :projekt, :default_phase_name, :phases, :milestone_phase,
               :projekt_notification_phase, :newsfeed_phase, :event_phase,
-              :projekt_events, :projekt_events_count
+              :projekt_events, :projekt_events_count, :projekt_questions_count
 
   def initialize(projekt, default_phase_name)
     @projekt = projekt
     @default_phase_name = default_phase_name
 
-    @phases = projekt.regular_projekt_phases.sort{ |a, b| a.default_order <=> b.default_order }
+    @phases = projekt.regular_projekt_phases
+      .sort{ |a, b| a.default_order <=> b.default_order }
       .each{ |x| x.start_date = Date.today if x.start_date.nil? }
       .sort_by{ |a| a.start_date }
     @milestone_phase = projekt.milestone_phase
@@ -23,6 +24,7 @@ class Pages::Projekts::FooterPhasesComponent < ApplicationComponent
     @polls_count = Poll.base_selection(scoped_projekt_ids).count
     @projekt_events = ProjektEvent.base_selection(scoped_projekt_ids)
     @projekt_events_count = @projekt_events.count
+    @projekt_questions_count = @projekt.questions.count
   end
 
   private

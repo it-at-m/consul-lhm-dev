@@ -9,13 +9,17 @@
 
     <div class='columns small-12 medium-3 large-2 show-for-small-only'>
       <% if show_image_thumbnail?(investment) %>
-        <%= image_tag investment.image_url(:large), alt: investment.image.title.unicode_normalize %>
+        <%= link_to investment do %>
+          <%= image_tag investment.image_url(:large), alt: investment.image.title.unicode_normalize %>
+        <% end %>
       <% end %>
     </div>
 
     <div class="columns small-12 medium-3 large-2 show-for-medium <%= "image-placeholder icon-#{ investment.projekt.icon || 'image' }" unless show_image_thumbnail?(investment) %>" data-equalizer-watch='main'>
       <% if show_image_thumbnail?(investment) %>
-        <%= image_tag investment.image_url(:thumb_wider), alt: investment.image.title.unicode_normalize %>
+        <%= link_to investment do %>
+          <%= image_tag investment.image_url(:thumb_wider), alt: investment.image.title.unicode_normalize %>
+        <% end %>
       <% end %>
     </div>
 

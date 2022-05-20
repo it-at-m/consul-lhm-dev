@@ -14,3 +14,18 @@
     font-weight: normal;
   }
 }
+
+// proposals form
+
+.proposal-new {
+  input[name='save_draft'] {
+    background: $secondary;
+    color: $brand;
+
+    &:hover,
+    &:focus {
+      color: $white;
+      background: $brand;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 de:
   date:
     formats:
-      default: "%d. %B %Y"
+      long: "%d. %B %Y"
   custom:
     shared:
       dates:

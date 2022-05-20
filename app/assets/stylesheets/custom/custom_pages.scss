@@ -366,8 +366,9 @@ li.projekt-navigator[aria-expanded="false"] {
 .show-loader {
   & > .loader {
     display: block;
-    position: absolute;
+    position: fixed;
     margin: auto;
+    top: 20px;
     left: 0;
     right: 0;
     width: 100px;

@@ -1,7 +1,7 @@
 require_dependency Rails.root.join("app", "models", "proposal").to_s
 class Proposal < ApplicationRecord
 
-  belongs_to :projekt, optional: true
+  belongs_to :projekt, optional: true, touch: true
   has_one :proposal_phase, through: :projekt
   has_many :geozone_restrictions, through: :proposal_phase
   has_many :geozone_affiliations, through: :projekt

@@ -140,6 +140,8 @@ de:
           show_related_content_description: Aktivieren Sie die Funktion “Verwandte Inhalte” für Diskussionen
           show_comments: Kommentare
           show_comments_description: Aktivieren Sie "Kommentare" für das Diskussionsmodul
+          allow_attached_documents: Zusätzliche Dokumente
+          allow_attached_documents_description: Ermöglicht es den Nutzer:innen Dokumente der Diskussion anzuhängen
           only_admins_create_debates: Nur Admins können neue Diskussionen erstellen
           only_admins_create_debates_description: Die Erstellung von neuen Diskussionen ist auf Admins beschränkt
           allow_downvoting: Downvotes aktivieren
@@ -165,12 +167,16 @@ de:
           show_related_content_description: Aktivieren Sie die Funktion “Verwandte Inhalte” für Vorschläge
           show_comments: Kommentare
           show_comments_description: Aktivieren Sie "Kommentare" für das Vorschlagsmodul
+          allow_attached_documents: Zusätzliche Dokumente
+          allow_attached_documents_description: Ermöglicht es den Nutzer:innen Dokumente den Vorschlägen anzuhängen
           only_admins_create_proposals: Nur Admins können neue Vorschläge erstellen
           only_admins_create_proposals_description: Die Erstellung von neuen Vorschlägen ist auf Admins beschränkt
           show_in_sidebar_filter: Projekt in der Projektseitenleiste anzeigen
           show_in_sidebar_filter_description: Zeigt das Projekt in der Projektseitenleiste auf der Vorschlagsübersichtsseite an
           show_map: Karte für Vorschläge anzeigen
           show_map_description: Zeigt die Karte für Vorschläge in diesem Projekt an
+          enable_summary: "\"Zusammenfassung\" anzeigen"
+          enable_summary_description: "Zeigt das Feld \"Zusammenfassung\" in den Vorschlägen an"
         proposal_options:
           votes_for_proposal_success: "Anzahl der notwendigen Stimmen zur Genehmigung eines Vorschlags"
           votes_for_proposal_success_description: "Wenn ein Antrag diese Anzahl von Unterstützungen erreicht, kann er nicht mehr mehr unterstützt werden und gilt als erfolgreich"
@@ -204,12 +210,20 @@ de:
           show_comments_description: Aktivieren Sie "Kommentare" für das Vorschlagsmodul
           enable_investment_milestones_tab: Meilensteine in Investitionsvorschlägen
           enable_investment_milestones_tab_description: Aktivieren Sie "Meilensteine" in Investitionsvorschlägen, die von der Verwaltung angelegt werden müssen
+          allow_attached_documents: Zusätzliche Dokumente
+          allow_attached_documents_description: Ermöglicht es den Nutzer:innen Dokumente den Vorschlägen anzuhängen
           only_admins_create_investment_proposals: Nur Admins können neue Investitionsvorschläge erstellen
           only_admins_create_investment_proposals_description: Die Erstellung von neuen Vorschlägen ist auf Admins beschränkt
           show_map: Karte für Investitionsvorschläge anzeigen
           show_map_description: Zeigt die Karte für Investitionsvorschläge in diesem Projekt an
           show_results_after_first_vote: Ergebnisliste nach erster Beteiligungsphase anzeigen
           show_results_after_first_vote_description: Zeigt in der Phase "Veröffentliching der Preise" nur ausgewählte Projekte als Ergebnisse an
+          enable_summary: "\"Zusammenfassung\" anzeigen"
+          enable_summary_description: "Zeigt das Feld \"Zusammenfassung\" in den Vorschlägen an"
+        milestones:
+          newest_first: Neueste Meilensteine zuerst anzeigen
+          newest_first_description: Sortiert die Meilensteine absteigend mit dem neuesten Datum zuerst 
+
 
       deficiency_reports:
         show_in_main_menu: Mängelmelder in Navigation anzeigen

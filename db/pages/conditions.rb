@@ -1,7 +1,4 @@
 def conditions_page_content
-  content = "<p>#{I18n.t("pages.conditions.description")}</p>"
-
-
   content += '<p><strong>1. Allgemeines</strong></p>'
 
   content += '<p>1.1 Die Stadt <span class="replace-highlighted">xyz, Straße, PLZ Ort („Betreiberin“)</span>, betreibt die Online-Plattform <span class="replace-highlighted">www.xyz.de („Plattform“)</span>. Die Plattform ermöglicht es <span class="replace-highlighted">xyz</span> („Nutzer“), sich über <span class="replace-highlighted">xyz</span> zu informieren und sich an <span class="replace-highlighted">xyz</span> zu beteiligen.</p>'
@@ -22,9 +19,11 @@ def conditions_page_content
 
   content += '<p>3.1 Die Betreiberin bietet dem Nutzer mittels der Plattform die Möglichkeit sich über <span class="replace-highlighted">xyz</span> zu informieren und sich an <span class="replace-highlighted">xyz</span> zu beteiligen, etwa indem er <span class="replace-highlighted">xyz</span>. Weiterhin kann der Nutzer <span class="replace-highlighted">xyz</span>. An <span class="replace-highlighted">xyz</span>, die nur für <span class="replace-highlighted">xyz</span> bestimmt sind, können sich nur derjenige Nutzer beteiligen, der dort seinen ersten Wohnsitz hat.</p>'
 
-  content += '<p>3.2 Die Betreiberin hat das Recht, die Plattform jederzeit hinsichtlich Funktionsweise, Gestaltung, Inhalt und anderer Merkmale zu ändern. Die Betreiberin hat weiterhin das Recht, den Zugang zu der Plattform aufgrund von Wartungsarbeiten, Kapazitätsbelangen und anderer Ereignisse ganz oder teilweise, zeitweise oder auf Dauer, einzuschränken. Der Nutzer erkennt an, dass technisch bedingt die Plattform nicht  immer verfügbar sein könnte.</p>'
+  content += '<p>3.2 Die Betreiberin überprüft die Inhalte des Nutzers wie etwa <span class="replace-highlighted">xyz</span> und <span class="replace-highlighted">xyz</span> und schaltet diese Inhalte frei. Der Nutzer hat keinen Anspruch auf Veröffentlichung eines Inhalts. Die Betreiberin hat das Recht, Inhalte zu bearbeiten, zu sperren und zu löschen.</p>'
 
-  content += '<p>3.3 Hat die Betreiberin konkrete Anhaltspunkte dafür, dass ein Dritter das Benutzerkonto eines Nutzers unbefugt nutzt, oder dafür, dass ein Nutzer gegen diese Nutzungsbedingungen verstößt, ist die Betreiberin berechtigt, das Benutzerkonto dieses Nutzers zeitweise oder vollständig zu sperren.</p>'
+  content += '<p>3.3 Die Betreiberin hat das Recht, die Plattform jederzeit hinsichtlich Funktionsweise, Gestaltung, Inhalt und anderer Merkmale zu ändern. Die Betreiberin hat weiterhin das Recht, den Zugang zu der Plattform aufgrund von Wartungsarbeiten, Kapazitätsbelangen und anderer Ereignisse ganz oder teilweise, zeitweise oder auf Dauer, einzuschränken. Der Nutzer erkennt an, dass technisch bedingt die Plattform nicht  immer verfügbar sein könnte.</p>'
+
+  content += '<p>3.4 Hat die Betreiberin konkrete Anhaltspunkte dafür, dass ein Dritter das Benutzerkonto eines Nutzers unbefugt nutzt, oder dafür, dass ein Nutzer gegen diese Nutzungsbedingungen verstößt, ist die Betreiberin berechtigt, das Benutzerkonto dieses Nutzers zeitweise oder vollständig zu sperren.</p>'
 
 
   content += '<p>4. Pflichten des Nutzers</p>'

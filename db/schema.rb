@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_02_141403) do
+ActiveRecord::Schema.define(version: 2022_05_16_170345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1084,6 +1084,21 @@ ActiveRecord::Schema.define(version: 2022_05_02_141403) do
     t.index ["user_id"], name: "index_managers_on_user_id"
   end
 
+  create_table "map_layers", force: :cascade do |t|
+    t.string "name"
+    t.string "provider"
+    t.string "attribution"
+    t.string "layer_names"
+    t.boolean "base"
+    t.bigint "projekt_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "show_by_default", default: false
+    t.boolean "transparent", default: false
+    t.integer "protocol", default: 0
+    t.index ["projekt_id"], name: "index_map_layers_on_projekt_id"
+  end
+
   create_table "map_locations", id: :serial, force: :cascade do |t|
     t.float "latitude"
     t.float "longitude"
@@ -1115,6 +1130,7 @@ ActiveRecord::Schema.define(version: 2022_05_02_141403) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.text "description"
+    t.string "custom_date"
     t.index ["locale"], name: "index_milestone_translations_on_locale"
     t.index ["milestone_id"], name: "index_milestone_translations_on_milestone_id"
   end
@@ -1400,6 +1416,8 @@ ActiveRecord::Schema.define(version: 2022_05_02_141403) do
     t.boolean "show_open_answer_author_name"
     t.boolean "show_summary_instead_of_questions", default: false
     t.boolean "bam_street_restricted", default: false
+    t.boolean "show_on_home_page", default: true
+    t.boolean "show_on_index_page", default: true
     t.index ["budget_id"], name: "index_polls_on_budget_id", unique: true
     t.index ["geozone_restricted"], name: "index_polls_on_geozone_restricted"
     t.index ["projekt_id"], name: "index_polls_on_projekt_id"
@@ -1465,6 +1483,65 @@ ActiveRecord::Schema.define(version: 2022_05_02_141403) do
     t.boolean "active"
     t.boolean "info_active"
     t.index ["projekt_id"], name: "index_projekt_phases_on_projekt_id"
+  end
+
+  create_table "projekt_question_answers", force: :cascade do |t|
+    t.bigint "projekt_question_id"
+    t.bigint "projekt_question_option_id"
+    t.bigint "user_id"
+    t.datetime "hidden_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hidden_at"], name: "index_projekt_question_answers_on_hidden_at"
+    t.index ["projekt_question_id"], name: "index_projekt_question_answers_on_projekt_question_id"
+    t.index ["projekt_question_option_id"], name: "index_projekt_question_answers_on_projekt_question_option_id"
+    t.index ["user_id"], name: "index_projekt_question_answers_on_user_id"
+  end
+
+  create_table "projekt_question_option_translations", force: :cascade do |t|
+    t.bigint "projekt_question_option_id"
+    t.string "locale", null: false
+    t.string "value"
+    t.datetime "hidden_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["projekt_question_option_id"], name: "option_projekt_question_option_id"
+  end
+
+  create_table "projekt_question_options", force: :cascade do |t|
+    t.bigint "projekt_question_id"
+    t.integer "answers_count", default: 0
+    t.datetime "hidden_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hidden_at"], name: "index_projekt_question_options_on_hidden_at"
+    t.index ["projekt_question_id"], name: "index_projekt_question_options_on_projekt_question_id"
+  end
+
+  create_table "projekt_question_translations", force: :cascade do |t|
+    t.bigint "projekt_question_id"
+    t.string "locale", null: false
+    t.text "title"
+    t.datetime "hidden_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["locale"], name: "index_projekt_question_translations_on_locale"
+    t.index ["projekt_question_id"], name: "index_projekt_question_translations_on_projekt_question_id"
+  end
+
+  create_table "projekt_questions", force: :cascade do |t|
+    t.text "title"
+    t.integer "answers_count", default: 0
+    t.integer "comments_count", default: 0
+    t.integer "author_id", default: 0
+    t.datetime "hidden_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "projekt_id"
+    t.boolean "comments_enabled", default: true
+    t.boolean "show_answers_count", default: true
+    t.index ["hidden_at"], name: "index_projekt_questions_on_hidden_at"
+    t.index ["projekt_id"], name: "index_projekt_questions_on_projekt_id"
   end
 
   create_table "projekt_settings", force: :cascade do |t|
@@ -2061,6 +2138,7 @@ ActiveRecord::Schema.define(version: 2022_05_02_141403) do
   add_foreign_key "locks", "users"
   add_foreign_key "machine_learning_jobs", "users"
   add_foreign_key "managers", "users"
+  add_foreign_key "map_layers", "projekts"
   add_foreign_key "map_locations", "deficiency_reports"
   add_foreign_key "map_locations", "projekts"
   add_foreign_key "moderators", "users"

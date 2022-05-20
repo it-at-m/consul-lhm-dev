@@ -8,6 +8,9 @@ de:
         tags_custom: Nutzer-Tags
         tags_placeholder: Trennen Sie die Tags mit einem Komma (',')
         required: Ihr Vorschlag
+        buttons:
+          save_draft: Als Entwurf speichern
+          publish: Vorschlag jetzt veröffentlichen
       index:
         max_number_reached: Du hast die maximale Anzahl (%{max_number}) an Vorschlägen pro Nutzer erreicht. Bevor du einen weiteren Vorschlag erstellen kannst, musst du einen aktiven Vorschlag zurückziehen.
         no_active_projekt: Aktuell kein Beteiligungsverfahren

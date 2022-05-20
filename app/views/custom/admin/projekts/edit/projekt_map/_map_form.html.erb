@@ -12,7 +12,9 @@
                     data-marker-fa-icon-class="<%= map_location.projekt.icon %>"
                     data-latitude-input-selector="#latitude"
                     data-longitude-input-selector="#longitude"
-                    data-zoom-input-selector="#zoom">
+                    data-zoom-input-selector="#zoom"
+                    data-map-layers="<%= @projekt.map_layers.to_json %>"
+                    >
 </div>
 
 <%= form_tag admin_projekt_update_map_path(@projekt), method: :patch, id: "map-form" do |f| %>

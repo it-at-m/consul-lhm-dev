@@ -9,13 +9,17 @@
 
     <div class='columns small-12 medium-3 large-2 show-for-small-only'>
       <% if show_image_thumbnail?(deficiency_report) %>
-        <%= image_tag deficiency_report.image_url(:large), alt: deficiency_report.image.title.unicode_normalize %>
+        <%= link_to deficiency_report do %>
+          <%= image_tag deficiency_report.image_url(:large), alt: deficiency_report.image.title.unicode_normalize %>
+        <% end %>
       <% end %>
     </div>
 
     <div class="columns small-12 medium-3 large-2 show-for-medium <%= "image-placeholder icon-#{deficiency_report.category.icon || 'image'}" unless show_image_thumbnail?(deficiency_report) %>" data-equalizer-watch='main'>
       <% if show_image_thumbnail?(deficiency_report)  %>
-        <%= image_tag deficiency_report.image_url(:thumb_wider), alt: deficiency_report.image.title.unicode_normalize %>
+        <%= link_to deficiency_report do %>
+          <%= image_tag deficiency_report.image_url(:thumb_wider), alt: deficiency_report.image.title.unicode_normalize %>
+        <% end %>
       <% end %>
     </div>
 

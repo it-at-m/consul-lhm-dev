@@ -5,7 +5,7 @@ class Poll < ApplicationRecord
 
   scope :last_week, -> { where("polls.created_at >= ?", 7.days.ago) }
 
-  belongs_to :projekt, optional: true
+  belongs_to :projekt, optional: true, touch: true
   has_many :geozone_affiliations, through: :projekt
 
   scope :with_current_projekt,  -> { joins(:projekt).merge(Projekt.current) }

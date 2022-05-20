@@ -19,6 +19,10 @@ class Projekt < ApplicationRecord
   has_many :polls, dependent: :nullify
   has_one :budget, dependent: :nullify
   has_many :projekt_events, dependent: :nullify
+  has_many :questions, -> { order(:id) },
+    class_name: 'ProjektQuestion',
+    inverse_of:  :projekt,
+    dependent:   :destroy
 
   has_one :page, class_name: "SiteCustomization::Page", dependent: :destroy
 
@@ -32,6 +36,7 @@ class Projekt < ApplicationRecord
   has_one :projekt_notification_phase, class_name: 'ProjektPhase::ProjektNotificationPhase'
   has_one :newsfeed_phase, class_name: 'ProjektPhase::NewsfeedPhase'
   has_one :event_phase, class_name: 'ProjektPhase::EventPhase'
+  has_one :question_phase, class_name: 'ProjektPhase::QuestionPhase'
   has_many :geozone_restrictions, through: :projekt_phases
   has_and_belongs_to_many :geozone_affiliations, through: :geozones_projekts, class_name: 'Geozone'
   has_one :map_location, dependent: :destroy
@@ -42,7 +47,9 @@ class Projekt < ApplicationRecord
   has_many :comments, as: :commentable, inverse_of: :commentable, dependent: :destroy
   belongs_to :author, -> { with_hidden }, class_name: "User", inverse_of: :projekts
 
-  accepts_nested_attributes_for :debate_phase, :proposal_phase, :budget_phase, :voting_phase, :comment_phase, :milestone_phase, :projekt_notifications, :projekt_events, :event_phase
+  has_many :map_layers
+
+  accepts_nested_attributes_for :debate_phase, :proposal_phase, :budget_phase, :voting_phase, :comment_phase, :milestone_phase, :projekt_notifications, :projekt_events, :event_phase, :question_phase
 
   before_validation :set_default_color
   around_update :update_page
@@ -304,6 +311,7 @@ class Projekt < ApplicationRecord
       projekt.proposal_phase = ProjektPhase::ProposalPhase.create unless projekt.proposal_phase
       projekt.budget_phase = ProjektPhase::BudgetPhase.create unless projekt.budget_phase
       projekt.comment_phase = ProjektPhase::CommentPhase.create unless projekt.comment_phase
+      projekt.question_phase = ProjektPhase::QuestionPhase.create unless projekt.question_phase
       projekt.voting_phase = ProjektPhase::VotingPhase.create unless projekt.voting_phase
       projekt.milestone_phase = ProjektPhase::MilestonePhase.create unless projekt.milestone_phase
       projekt.projekt_notification_phase = ProjektPhase::ProjektNotificationPhase.create unless projekt.projekt_notification_phase
@@ -324,6 +332,10 @@ class Projekt < ApplicationRecord
 
   def title
     name
+  end
+
+  def projekt_list_enabled?
+    ProjektSetting.find_by(projekt: self, key: 'projekt_feature.questions.show_questions_list')&.enabled?
   end
 
   private
@@ -373,6 +385,7 @@ class Projekt < ApplicationRecord
     self.proposal_phase = ProjektPhase::ProposalPhase.create
     self.budget_phase = ProjektPhase::BudgetPhase.create
     self.comment_phase = ProjektPhase::CommentPhase.create
+    self.question_phase = ProjektPhase::QuestionPhase.create
     self.voting_phase = ProjektPhase::VotingPhase.create
     self.milestone_phase = ProjektPhase::MilestonePhase.create
     self.projekt_notification_phase = ProjektPhase::ProjektNotificationPhase.create

@@ -1,0 +1,16 @@
+de:
+  custom:
+    map_layer:
+      labels:
+        layer_names: Kartenebenennamen
+        provider: Anbieter
+        attribution: Zuschreibung
+        protocol: Kartenprotokoll
+        transparent: transparent
+      hints:
+        name: für Endbenutzer sichtbar
+        layer_names: WMS Kartenebenename(n), Komma getrennt, ohne Leerzeichen
+        provider: Karten-URL
+        attribution: Text, kann HTML-Tags enthalten
+      buttons:
+        new_layer: Neue Kartenebene erstellen

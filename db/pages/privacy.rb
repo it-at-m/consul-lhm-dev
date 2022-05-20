@@ -1,6 +1,4 @@
 def privacy_page_content
-  content = "<p>#{I18n.t('pages.privacy.subtitle')}</p>"
-
   content += '<p><strong>1. Allgemeine Hinweise</strong></p>'
   content += '<p>Die Stadt <span class="replace-highlighted">xyz</span> als Betreiber der Online-Beteiligungsplattform <span class="replace-highlighted">www.xyz.de</span> nimmt den Schutz personenbezogener Daten sehr ernst. Wir behandeln personenbezogene Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie auf Grundlage dieser Datenschutzerklärung. Die rechtlichen Grundlagen finden Sie insbesondere in der Datenschutz-Grundverordnung (DSGVO) sowie im Bundesdatenschutzgesetz (BDSG).</p>'
   content += '<p>Wenn Sie diese Online-Beteiligungsplattform benutzen, werden je nach Art und Umfang der Nutzung verschiedene personenbezogene Daten verarbeitet. Personenbezogene Daten sind Informationen, die sich auf eine identifizierte oder identifizierbare natürliche Person (im Folgenden „betroffene Person“) beziehen; als identifizierbar wird eine natürliche Person angesehen, die direkt oder indirekt (z.B. mittels Zuordnung zu einer Online-Kennung) identifiziert werden kann. Darunter fallen Informationen wie der Name, die Anschrift oder die Telefonnummer.</p>'

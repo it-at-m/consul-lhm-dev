@@ -19,7 +19,6 @@
     <thead>
       <tr>
         <th><%= t("admin.milestones.index.table_id") %></th>
-        <th><%= t("admin.milestones.index.table_title") %></th>
         <th><%= t("admin.milestones.index.table_description") %></th>
         <th><%= t("admin.milestones.index.table_publication_date") %></th>
         <th><%= t("admin.milestones.index.table_status") %></th>
@@ -32,10 +31,10 @@
       <% milestoneable.milestones.order_by_publication_date.each do |milestone| %>
         <tr id="<%= dom_id(milestone) %>" class="milestone">
           <td class="text-center"><%= milestone.id %></td>
-          <td><%= milestone.title %></td>
           <td class="small small-5"><%= milestone.description %></td>
           <td class="small">
-            <%= l(milestone.publication_date.to_date) if milestone.publication_date.present? %>
+            <%= milestone.custom_date if milestone.custom_date.present? %>
+            <%= l(milestone.publication_date.to_date, format: :long) if !milestone.custom_date.present? && milestone.publication_date.present? %>
           </td>
           <td class="small">
             <%= milestone.status.present? ? milestone.status.name : "" %>
@@ -73,3 +72,7 @@
               admin_polymorphic_path(milestoneable.milestones.new, action: :new),
               class: "button hollow" %>
 </p>
+
+
+<h2 class='margin-top-25'><%= t('custom.admin.projekts.edit.projekt_settings_tab.milestone_settings') %></h2>
+<%= render partial: "admin/projekts/edit/projekt_settings/features_table", locals: { features: @projekt_features_milestones } %>

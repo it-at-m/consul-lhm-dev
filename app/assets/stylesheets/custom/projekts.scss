@@ -542,6 +542,10 @@ span.projekt-backlink:before {
   padding: 18px;
   margin-bottom: 1rem;
 
+  .sdg-goal-tag-list li:first-child {
+    margin-left: 0;
+  }
+
   @media screen and (max-width: 650px) {
     justify-content: center;
     padding: 15px 10px;
@@ -708,4 +712,163 @@ span.projekt-backlink:before {
 
 .projekt-item-tags {
   display: flex;
+}
+
+.projekt-question-section {
+  #comments > h2 {
+      font-size: 24px;
+  }
+
+  #comments {
+    .callout.primary[data-alert] {
+      display: none;
+    }
+  }
+
+  .quiz-header {
+    margin-bottom: $line-height;
+
+    .quiz-title,
+    .quiz-next {
+      padding: 12px;
+
+      @include breakpoint(medium) {
+        height: $line-height * 2;
+      }
+    }
+
+    .quiz-title {
+      background: $highlight;
+
+      .quiz-header-title {
+        font-size: $small-font-size;
+        font-weight: 700;
+        margin-bottom: 0;
+        text-transform: uppercase;
+      }
+    }
+
+    h4 a {
+      @include brand-text;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    .quiz-next-link {
+      display: block;
+      margin-top: 70px;
+
+      &:hover,
+      &:active {
+        text-decoration: none;
+      }
+    }
+
+    .quiz-next {
+      @include brand-text;
+      background: #ccdbe5;
+      font-size: $small-font-size;
+      font-weight: bold;
+      text-align: right;
+      text-transform: uppercase;
+      transition: background 0.25s ease-out, background 0.25s ease-out;
+
+      .icon-angle-right {
+        vertical-align: middle;
+      }
+
+      &:hover,
+      &:active {
+        @extend %brand-background;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .quiz-question {
+    font-size: 32px;
+    margin-bottom: $line-height;
+  }
+
+  .project-question-list {
+    position: relative;
+    list-style: none;
+
+    .control {
+      background: #fff;
+      border: 1px solid $border;
+      border-radius: rem-calc(1);
+      border-radius: 7px;
+      color: #555;
+      cursor: pointer;
+      display: inline-block;
+      margin-bottom: 1rem;
+      margin-right: $line-height / 3;
+      padding: $line-height / 2  $line-height * 2;
+      position: relative;
+    }
+
+    .is-active {
+      background: #ccdbe6;
+      border: 0;
+    }
+
+    .control input {
+      position: absolute;
+      opacity: 0;
+      z-index: -1;
+    }
+
+    .control input:checked ~ .control-indicator {
+      background-color: $brand;
+      border: 0;
+    }
+
+    .radio .control-indicator {
+      border-radius: 50%;
+    }
+
+    .control-indicator {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      display: block;
+      width: rem-calc(16);
+      height: rem-calc(16);
+      line-height: rem-calc(16);
+      font-size: 65%;
+      text-align: center;
+      border: 2px solid #9c9c9c;
+      pointer-events: none;
+      user-select: none;
+    }
+  }
+}
+
+.projekt-next-question-button-section {
+  margin-bottom: 10px;
+}
+
+.projekt-next-to-question-list-button {
+  text-align: right;
+}
+
+.projekt-list-tabs {
+  @media screen and (max-width: 650px) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.projekt-tag {
+  background: #ececec;
+  border-radius: 0.375rem;
+  color: #222;
+  display: inline-block;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  padding: 0.375rem 0.5rem;
+  text-decoration: none;
 }

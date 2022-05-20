@@ -1,3 +1,11 @@
+<% MapLayer.general.each do |layer| %>
+  <%= render partial: 'custom/admin/settings/map_layer', locals: { layer: layer, origin: 'admin/projekts', tab: '#tab-projekt-map' } %>
+<% end %>
+
+<div id='new-map-layer'>
+  <%= link_to t("custom.map_layer.buttons.new_layer"), new_admin_map_layer_path(origin: 'admin/projekts', tab: '#tab-projekt-map'), class: 'button success margin-bottom', remote: true %>
+</div>
+
 <h2><%= t("admin.settings.index.map.title") %></h2>
 
 <%= render "admin/settings/settings_table", settings: @map_configuration_settings, setting_name: "setting", tab: "#tab-projekts-map" %>

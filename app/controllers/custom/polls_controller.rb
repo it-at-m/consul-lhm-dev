@@ -32,7 +32,7 @@ class PollsController < ApplicationController
     @selected_geozone_restriction = params[:geozone_restriction] || 'no_restriction'
     @restricted_geozones = (params[:restricted_geozones] || '').split(',').map(&:to_i)
 
-    @polls = @polls.created_by_admin.not_budget.send(@current_filter).includes(:geozones)
+    @polls = @polls.base_selection.where(show_on_index_page: true).send(@current_filter).includes(:geozones)
 
     @all_resources = @polls
 

@@ -11,6 +11,13 @@ class Sidebar::ProjektsFilterComponent < ApplicationComponent
 
 	private
 
+  def show_filter?
+    @top_level_active_projekts.count > 1 ||
+      ( @top_level_active_projekts.count == 1 && @top_level_active_projekts.first.children.with_order_number.selectable_in_sidebar_current(resources_name).any? ) ||
+      @top_level_archived_projekts.count > 1 ||
+      ( @top_level_archived_projekts.count == 1 &&  @top_level_archived_projekts.first.children.with_order_number.selectable_in_sidebar_expired(resources_name).any? )
+  end
+
   def show_archived_projekts_in_sidebar?
     true
 	end
@@ -50,6 +57,7 @@ class Sidebar::ProjektsFilterComponent < ApplicationComponent
   def cache_key
     [
       Projekt.all,
+      ProjektSetting.where('key LIKE ?', 'projekt_feature.main.activate'),
       ProjektSetting.where('key LIKE ?', '%show_in_sidebar_filter%'),
       params[:filter_projekt_ids],
       controller_name,
