@@ -36,19 +36,21 @@
           <h4 class='resource-name'><%= link_to_poll poll.name, poll %></h4>
           <div class="resource-summary margin-bottom">
 
-						<% if poll.show_summary_instead_of_questions? %>
-							<div class="">
-								<%= auto_link_already_sanitized_html simple_format(poll.summary) %>
-							</div>
-						<% else %>
-							<ul class="">
-								<% poll.questions.joins(:translations).order('poll_question_translations.title').each do |question| %>
-									<li><%= question.title %></li>
-								<% end %>
-							</ul>
-						<% end %>
+            <%= link_to_poll_with_block poll do %>
+              <% if poll.show_summary_instead_of_questions? %>
+                <div class="">
+                  <%= auto_link_already_sanitized_html simple_format(poll.summary) %>
+                </div>
+              <% else %>
+                <ul class="">
+                  <% poll.questions.joins(:translations).order('poll_question_translations.title').each do |question| %>
+                    <li><%= question.title %></li>
+                  <% end %>
+                </ul>
+              <% end %>
 
-            <div class="truncate"></div>
+              <div class="truncate"></div>
+						<% end %>
           </div>
           <% # render "shared/tags", taggable: poll, limit: 5 %>
 

@@ -49,8 +49,10 @@
         <div class='column small-12 medium-6 large-8 resource-details' data-equalizer-watch='details'>
           <h4 class='resource-name'><%= link_to proposal.title, namespaced_proposal_path(proposal) %></h4>
           <div class="resource-summary margin-bottom">
-            <%= auto_link_already_sanitized_html simple_format(projekt_feature?(proposal.projekt, 'proposals.enable_summary') ? proposal.summary : proposal.description[0..200]) %>
-            <div class="truncate"></div>
+            <%= link_to namespaced_proposal_path(proposal) do %>
+              <%= auto_link_already_sanitized_html simple_format(projekt_feature?(proposal.projekt, 'proposals.enable_summary') ? proposal.summary : proposal.description[0..200]) %>
+              <div class="truncate"></div>
+            <% end %>
           </div>
           <% #render "shared/tags", taggable: proposal, limit: 5 %>
 

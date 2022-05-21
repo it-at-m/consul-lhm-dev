@@ -1,10 +1,14 @@
 <ul aria-live="polite" >
   <li data-projekt-id=<%= projekt.id %> >
+    <span class="projekt-tree-ul-vertical-line"></span>
     <%= label_tag dom_id(projekt), class: label_class do %>
       <%= check_box_tag "filter_projekt_ids[]", projekt.id, checkbox_checked, {id: dom_id(projekt), class: 'js-filter-projekt', tabindex: "-1" }  %>
       <i class="projekt-filter-icon fas fa-<%= projekt.icon || "circle" %>" <%= "style=color:#{projekt.color}" if projekt.color.present? %> ></i>
-      <span aria-label="<%= t('custom.links.projekts_filter.projekt_name', projekt_name: projekt.page.title ) %>" ><%= projekt.page.title %></span>
       <span aria-label="<%= t('custom.links.projekts_filter.resource_count', resource_count: resource_count) %>"> <%= "(#{resource_count})" %> </span>
+      <% projekt_title = (projekt.page.title&.size || 0) > 25 ? projekt.page.title : '' %>
+      <% if projekt.page.title.present? %>
+        <span class="projekt-name-in-label" title="<%= projekt_title %>" aria-label="<%= t('custom.links.projekts_filter.projekt_name', projekt_name: projekt.page.title ) %>" ><%= projekt.page.title %></span>
+      <% end %>
       <span class="checkmark focusable js-prevent-key-scroll js-access-toggle-projekt-filter-checkbox" tabindex="0"></span>
     <% end %>
 

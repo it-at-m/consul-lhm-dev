@@ -23,6 +23,16 @@ module PollsHelper
     end
   end
 
+  def link_to_poll_with_block(poll, &block)
+    if can?(:results, poll)
+      link_to(results_poll_path(id: poll.slug || poll.id), data: { turbolinks: false }, &block)
+    elsif can?(:stats, poll)
+      link_to(stats_poll_path(id: poll.slug || poll.id), &block)
+    else
+      link_to(poll_path(id: poll.slug || poll.id), &block)
+    end
+  end
+
   def poll_remaining_activity_days(poll)
     remaining_days = (poll.ends_at.to_date - Date.today).to_i
 

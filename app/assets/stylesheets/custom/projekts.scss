@@ -615,11 +615,11 @@ span.projekt-backlink:before {
   .sdg-tag-list .sdg-goal-tag-list {
     margin-left: 0;
 
-    .selected-goal {
+    .selected-goal, .unselected-goal {
       margin-right: 2px;
       margin-left: 2px;
-
     }
+
     .sdg-goal-icon {
       min-width: 42px;
       max-width: 42px;
@@ -871,4 +871,17 @@ span.projekt-backlink:before {
   margin-bottom: 0.5rem;
   padding: 0.375rem 0.5rem;
   text-decoration: none;
+}
+
+#filter-projekts-all {
+  .projekt-name-in-label {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 165px;
+    display: inline-block;
+    white-space: nowrap;
+    line-height: 1;
+    position: relative;
+    top: 2px;
+  }
 }

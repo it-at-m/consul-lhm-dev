@@ -168,3 +168,62 @@ html.is-reveal-open body {
 ul.tabs li.tabs-title {
   margin-bottom: 0;
 }
+
+.header-right-group {
+  .account-buttons {
+    display: flex;
+    flex-direction: column;
+  }
+
+   .sign-in-button, .sign-up-button {
+     text-align: center;
+     margin-right: 0;
+     margin-bottom: 5px;
+     padding: 0.25rem 2.2em;
+   }
+}
+
+#filter-projekts-all #filter-projekts-active ul {
+  position: relative;
+}
+
+#filter-projekts-all #filter-projekts-active ul > li[aria-expanded="true"] > .projekt-tree-ul-vertical-line {
+  background: #b8b8b8;
+  content: '';
+  width: 1px;
+  position: absolute;
+  display: block;
+  top: 21px;
+  left: -12px;
+}
+
+#filter-projekts-all #filter-projekts-active > ul > ul {
+  &::before {
+    background: #b8b8b8;
+    content: '';
+    width: calc(100% - 224px);
+    height: 1px;
+    position: absolute;
+    display: block;
+    top: 12px;
+    right: 251px;
+  }
+}
+
+#filter-projekts-all #filter-projekts-active > ul > ul > ul {
+  &::before {
+    background: #b8b8b8;
+    content: '';
+    width: calc(100% - 205px);
+    height: 1px;
+    position: absolute;
+    display: block;
+    top: 11px;
+    right: 233px;
+  }
+}
+
+.resource-n .resource-details .resource-summary a {
+  color: #222;
+  text-decoration: none;
+}
