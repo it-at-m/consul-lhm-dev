@@ -9,6 +9,17 @@ de:
         expired_projekts: Abgeschlossene Projekte
         no_projekts: keine Projekte
         title: Projekte
+      orders:
+        all: 'Alle Projekte'
+        all_title: 'Alle Projekte'
+        active: Aktive Beteiligung
+        active_title: 'Im Reiter "Aktive Beteiligung" sind Projekte, bei denen man sich aktuell beteiligen kann.'
+        expired: Abgeschlossen
+        expired_title: 'Im Reiter "Abgeschlossen" sind Beteiligungsprojekte gelistet, die abgeschlossen sind. Sowohl die Beteiligungsphase, als auch das Projekt an sich.'
+        ongoing: Laufende Projekte
+        ongoing_title: 'Im Reiter "Laufende Projekte" sind Projekte die noch laufen, die Beteiligung aber schon abgeschlossen ist.'
+        upcoming: Zukünftige Projektvorhaben
+        upcoming_title: 'Im Reiter "Zukünftige Projektvorhaben" sind Beteiligungsprojekte gelistet, die erst in der Zukunft stattfinden.'
       page:
         footer:
           budget:
@@ -64,18 +75,6 @@ de:
         comments_count: "%{count} offene Antworten"
         comments_title: Offene Antworten
         login_to_answer: Sie müssen sich %{signin} oder %{signup}, um an der Kurzumfrage teilzunehmen.
-      projekts:
-        orders:
-          all: 'Alle Projekte'
-          all_title: 'Alle Projekte'
-          active: Aktive Beteiligung
-          active_title: 'Im Reiter "Aktive Beteiligung" sind Projekte, bei denen man sich aktuell beteiligen kann.'
-          expired: Abgeschlossen
-          expired_title: 'Im Reiter "Abgeschlossen" sind Beteiligungsprojekte gelistet, die abgeschlossen sind. Sowohl die Beteiligungsphase, als auch das Projekt an sich.'
-          ongoing: Laufende Projekte
-          ongoing_title: 'Im Reiter "Laufende Projekte" sind Projekte die noch laufen, die Beteiligung aber schon abgeschlossen ist.'
-          upcoming: Zukünftige Projektvorhaben
-          upcoming_title: 'Im Reiter "Zukünftige Projektvorhaben" sind Beteiligungsprojekte gelistet, die erst in der Zukunft stattfinden.'
       selector:
         connected_resources:
           debate_description: Bitte ordnen Sie Ihre Diskussion einem der nachfolgenden Projekte oder Unterprojekte zu. Dies dient dazu, dass die Diskussionen in der Diskussionsübersicht besser auffindbar sind.

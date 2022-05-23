@@ -9,6 +9,17 @@ en:
         expired_projekts: Expired projekts
         no_projekts: No projects
         title: Projects
+      orders:
+        all: 'All Projects'
+        all_title: 'All Projects'
+        active: Active participation
+        active_title: 'In the tab "Active participation" are projects in which you can currently participate.'
+        expired: Completed
+        expired_title: 'The "Completed" tab lists participation projects that have been completed. Both the participation phase and the project itself.'
+        ongoing: Ongoing projects
+        ongoing_title: 'In the tab "Ongoing projects" are projects that are still running, but the participation is already completed.'
+        upcoming: Future project plans
+        upcoming_title: 'The "Future project plans" tab lists participation projects that will only take place in the future.'
       page:
         footer:
           budget:
@@ -62,16 +73,6 @@ en:
         comments_button: Publish answer
         comments_title: Open answers
         login_to_answer: You must %{signin} or %{signup} to participate in the short survey.
-      projekts:
-        orders:
-          active: Active participation
-          active_title: 'In the tab "Active participation" are projects in which you can currently participate.'
-          expired: Completed
-          expired_title: 'The "Completed" tab lists participation projects that have been completed. Both the participation phase and the project itself.'
-          ongoing: Ongoing projects
-          ongoing_title: 'In the tab "Ongoing projects" are projects that are still running, but the participation is already completed.'
-          upcoming: Future project plans
-          upcoming_title: 'The "Future project plans" tab lists participation projects that will only take place in the future.'
       selector:
         connected_resources:
           debate_description: Please assign your discussion to one of the following projects or subprojects. This serves to make the discussions easier to find in the discussion overview.
