@@ -238,6 +238,7 @@ de:
       poll_questions: Abstimmung
       budgets: Budgets
       notification_item:
+        no_notifications: Keine Benachrichtigungen
         new_notifications:
           one: Sie haben eine neue Benachrichtigung
           other: Sie haben %{count} neue Benachrichtigungen
