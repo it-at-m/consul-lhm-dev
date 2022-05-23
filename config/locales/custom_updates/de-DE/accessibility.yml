@@ -5,7 +5,7 @@ de:
         home_icon: Startseiten Link
         search_icon: Suchen
         konto_icon: Mein Konto Link
-        admin_icon: Adminmenü Link"
+        admin_icon: Adminmenü Link
         notification_icon: Benachrichtigungen
         projekt_name_label: "Projekt Name: %{projekt_name} "
         archived_projekts_label: Archivierte Projekte

@@ -1,71 +1,86 @@
 en:
   custom:
     projekts:
-      index:
-        title: Projects overview
-        current_projekts: Current projekts
-        expired_projekts: Expired projekts
       backlink: To the project overview
       errors:
         presence: Please select a project
-      new:
-        first_level: First project level
-        fourth_level: Fourth project level
-        second_level: Second project level
-        third_level: Third project level
-      selector:
-        connected_resources:
-          debate_description: Please assign your discussion to one of the following projects or subprojects. This serves to make the discussions easier to find in the discussion overview.
-          debate_title: Assignment of the discussion to a project
-          proposal_description: Please assign your proposal to one of the following projects or sub-projects. This serves to make the proposals easier to find in the proposal overview.
-          proposal_title: Assignment of the proposal to a project
-      sidebar_filter:
-        filter_button: Filter by projects
+      index:
+        current_projekts: Current projekts
+        expired_projekts: Expired projekts
+        no_projekts: No projects
         title: Projects
-        title_active: Active projects
-        title_archived: Expired projects
       page:
+        footer:
+          budget:
+            investments_subtab: Investments
+        projekt_events_tab:
+          event_date: Date
+          event_location: Location
+          event_time: Time
+          event_title: Title
+          event_weblink: Weblink
+          no_events: No events
+          title: Events
         sidebar:
           admin_controls:
             edit_projekt: Edit projekt
             edit_projekt_page: Edit projekt page
           phases:
             participate: Open for participation!
-        footer:
-          budget:
-            investments_subtab: Investments
         tabs:
+          budgets: Budgets
           comments: Comments
           debates: Debates
-          proposals: Proposals
-          polls: Polls
-          budgets: Budgets
           milestones: Milestones
+          newsfeed: Newsfeed
+          polls: Polls
           project_events: Events
-          projekt_questions: Questions
-        projekt_events_tab:
-          title: Events
-          no_events: No events
-          event_title: Title
-          event_location: Location
-          event_date: Date
-          event_time: Time
-          event_weblink: Weblink
+          projekt_notifications: Notifications
+          projekt_questions: Short survey
+          proposals: Proposals
+          questions: Questions
       phase_name:
-        comment_phase: Kommentare
-        debate_phase: Diskussionen
-        proposal_phase: Vorschläge
-        voting_phase: Abstimmungen
         budget_phase: Budget
-        milestone_phase: Milestones
+        comment_phase: Comments
+        debate_phase: Debates
         event_phase: Event phase
+        milestone_phase: Milestones
         milestone_phase_details:
-          start: Start
           ending: Planned end
-        projekt_notification_phase: Notifications
+          start: Start
         newsfeed_phase: Newsfeed
+        projekt_notification_phase: Notifications
+        proposal_phase: Vorschläge
+        question_phase: Short survey
+        voting_phase: Abstimmungen
       projekt_events:
         orders:
           all: All
           incoming: Incoming
           past: Past
+      projekt_questions:
+        comments_button: Publish answer
+        comments_title: Open answers
+        login_to_answer: You must %{signin} or %{signup} to participate in the short survey.
+      projekts:
+        orders:
+          active: Active participation
+          active_title: 'In the tab "Active participation" are projects in which you can currently participate.'
+          expired: Completed
+          expired_title: 'The "Completed" tab lists participation projects that have been completed. Both the participation phase and the project itself.'
+          ongoing: Ongoing projects
+          ongoing_title: 'In the tab "Ongoing projects" are projects that are still running, but the participation is already completed.'
+          upcoming: Future project plans
+          upcoming_title: 'The "Future project plans" tab lists participation projects that will only take place in the future.'
+      selector:
+        connected_resources:
+          debate_description: Please assign your discussion to one of the following projects or subprojects. This serves to make the discussions easier to find in the discussion overview.
+          debate_title: Assignment of the discussion to a project
+          proposal_description: Please assign your proposal to one of the following projects or sub-projects. This serves to make the proposals easier to find in the proposal overview.
+          proposal_title: Assignment of the proposal to a project
+        select_placeholder_mandatory_html: Choose project (mandatory)
+      sidebar_filter:
+        filter_button: Filter by projects
+        title: Projects
+        title_active: Active projects
+        title_archived: Expired projects

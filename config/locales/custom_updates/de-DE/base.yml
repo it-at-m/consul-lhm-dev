@@ -1,34 +1,5 @@
 de:
-  date:
-    formats:
-      long: "%d. %B %Y"
   custom:
-    shared:
-      dates:
-        days_left:
-          one: "Noch 1 Tag"
-          other: "Noch %{count} Tage"
-        starts_in_days:
-          one: 'Startet in 1 Tag'
-          other: 'Startet in %{count} Tagen'
-      form:
-        projekt_assignment: Projektzuordnung
-        star_message: Alle mit (*) gekennzeichneten Felder sind Pflichtfelder
-      index:
-        resource:
-          by: von
-      show:
-        back_link: "Weitere %{resources} zu diesem Projekt"
-        admin: Admin
-        information: Information
-        comments: "%{count} Kommentare"
-        report_title: Melden
-        report_text: Melden Sie uns diesen Beitrag bei unangebrachten Inhalt oder bei Urheberrechtsverletzungen.
-        report_button: Melden
-        follow_text: Folgen Sie diesem Vorschlag, um stets über Neuigkeiten zu diesem Vorschlag informiert zu werden.
-        related_title: Verwandte Inhalte
-        related_text: Sie können Links von anderen Vorschlägen und Diskussionen hinzufügen.
-        related_button: Hinzufügen
     account:
       settings:
         email_digest: Erhalten Sie eine Zusammenfassung der Benachrichtigungen zu Vorschlägen
@@ -44,25 +15,22 @@ de:
       reply_form:
         leave_comment: Schreiben Sie eine Antwort
       restricted:
+        debate_phase_expired: Die Diskussionsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
+        debate_phase_not_active: Die Diskussionsphase ist nicht aktiv
         geo_limitation: 'Dieses projekt ist auf die folgende Gebiete beschränkt: %{geozones}'
         not_verified: Bitte %{verify_account}, um teilnehmen zu können
         other: Die Kommentarfunktion ist nicht verfügbar
-        debate_phase_expired: Die Diskussionsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
-        proposal_phase_expired: Die Vorschlagsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
-        voting_phase_expired: Die Abstimmungsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
-        debate_phase_not_active: Die Diskussionsphase ist nicht aktiv
-        proposal_phase_not_active: Die Vorschlagsphase ist nich aktiv
         projekt_not_active: Das Projekt ist nicht aktiv
         projekt_phase_not_active: Die Projektphase ist nicht aktiv
-
+        proposal_phase_expired: Die Vorschlagsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
+        proposal_phase_not_active: Die Vorschlagsphase ist nich aktiv
+        voting_phase_expired: Die Abstimmungsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
     devise_views:
       users:
         registrations:
           new:
             privacy_link: Datenschutzbestimmung
             terms: Mit der Registrierung akzeptieren Sie die %{terms} und %{privacy}
-            hidden_user_with_this_email_exisits_regular: Es besteht bereits ein Konto mit dieser E-Mail-Adresse. Bitte verwenden Sie eine andere E-Mail-Adresse für die Registrierung.
-            hidden_user_with_this_email_exisits_omniauth_html: Es besteht bereits ein Konto mit dieser E-Mail-Adresse. Bitte ändern Sie die E-Mail-Adresse in Ihrem externen Benutzerkonto (Bayern-ID oder M-Login) oder kontaktieren Sie uns unter <a href=r'mailto:support.eogov@muenchen.der'>support.eogov@muenchen.de</a>
     gdpr_notice:
       accept: Akzeptieren
       link_text: Mehr Infos
@@ -99,20 +67,18 @@ de:
       form:
         image_name: Name des Titelbildes
     layouts:
-      header:
-        home_link: Start Seite
-        admin_link: Administration
-        account_link: Konto
-        notification_item:
-          no_notifications: Keine Benachrichtigungen
-        title_html: "Öffentlichkeitsbeteiligung"
       footer:
         demokratie: demokratie.today
         demokratie_url: https://www.demokratie.today/
         description: Die Plattform basiert auf %{consul}, einer %{open_source} und wurde von %{demokratie} modifiziert.
         impressum: Impressum
-        netiquette: Netiquette
-        statistic_cookies_settings: Cookie-Einstellungen
+      header:
+        account_link: Konto
+        admin_link: Administration
+        home_link: Start Seite
+        notification_item:
+          no_notifications: Keine Benachrichtigungen
+        title_html: Öffentlichkeitsbeteiligung
     menu:
       account: Konto
       archived: Abgelaufene Projekte
@@ -135,27 +101,56 @@ de:
         label: Filter für Unterziele (%{more_link})
         more_link_text: Mehr Info
         select: Unterziel auswählen
+    shared:
+      dates:
+        days_left:
+          one: Noch 1 Tag
+          other: Noch %{count} Tage
+        starts_in_days:
+          one: Startet in 1 Tag
+          other: Startet in %{count} Tagen
+      form:
+        projekt_assignment: Projektzuordnung
+        star_message: Alle mit (*) gekennzeichneten Felder sind Pflichtfelder
+      index:
+        resource:
+          by: von
+      show:
+        admin: Admin
+        back_link: Weitere %{resources} zu diesem Projekt
+        comments: '%{count} Kommentare'
+        follow_text: Folgen Sie diesem Vorschlag, um stets über Neuigkeiten zu diesem Vorschlag informiert zu werden.
+        information: Information
+        related_button: Hinzufügen
+        related_text: Sie können Links von anderen Vorschlägen und Diskussionen hinzufügen.
+        related_title: Verwandte Inhalte
+        report_button: Melden
+        report_text: Melden Sie uns diesen Beitrag bei unangebrachten Inhalt oder bei Urheberrechtsverletzungen.
+        report_title: Melden
+    tag_names:
+      projekt: Weitere %{resources} zu diesem Projekt
     users:
       login_to_vote: Sie müssen sich %{signin} oder %{signup}, um teilnehmen zu können
       verify_account_link_short: verifizieren
     votes:
+      debate_phase_expired: Die Phase ist bereits abgeschlossen.
       geo_restricted: Sie sind aufgrund von Gebiets- beschränkungen nicht berechtigt teilzunehmen.
       not_verified: Sie müssen sich %{verify_account}, um teilnehmen zu können
       proposal_phase_expired: Die Phase ist bereits abgeschlossen.
-      debate_phase_expired: Die Phase ist bereits abgeschlossen.
     welcome:
-      current_polls: Laufende Abstimmungen
-      user_entries: Neueste Beiträge
-      all_debates: Alle Diskussionen
-      all_proposals: Alle Vorschläge
-      start_entry: + Beitrag erstellen
-      start_debate: Diskussion starten
-      start_proposal: Vorschlag erstellen
       active_projekt_cards:
         title: Aktive Beteiligungsprozesse
+      all_debates: Alle Diskussionen
+      all_proposals: Alle Vorschläge
       archived_projekt_cards:
         title: Abgeschlossene Beteiligungsprozesse
-    tag_names:
-      projekt: "Weitere %{resources} zu diesem Projekt"
+      current_polls: Laufende Abstimmungen
+      start_debate: Diskussion starten
+      start_entry: + Beitrag erstellen
+      start_proposal: Vorschlag erstellen
+      user_entries: Neueste Beiträge
+  date:
+    formats:
+      long: '%d. %B %Y'
   tag_names:
     general: General

@@ -207,18 +207,24 @@
         layersData.forEach(createLayer);
       }
 
+      ensureBaseLayerExistence();
+      baseLayers[Object.keys(baseLayers)[0]].addTo(map);
+
       if ( Object.keys(overlayLayers).length > 0 ) {
         for (let i = 0; i < Object.keys(overlayLayers).length; i++ ) {
           if ( overlayLayers[Object.keys(overlayLayers)[i]].options.show_by_default == true ) {
             overlayLayers[Object.keys(overlayLayers)[i]].addTo(map)
           }
         }
-
-        L.control.layers(baseLayers, overlayLayers).addTo(map);
       }
 
-      ensureBaseLayerExistence();
-      baseLayers[Object.keys(baseLayers)[0]].addTo(map);
+
+      if ( Object.keys(baseLayers).length > 1 && Object.keys(overlayLayers).length > 0 ) {
+        L.control.layers(baseLayers, overlayLayers).addTo(map);
+      } else if ( Object.keys(overlayLayers).length > 0 ) {
+        L.control.layers({}, overlayLayers).addTo(map);
+      }
+
 
 ///
 

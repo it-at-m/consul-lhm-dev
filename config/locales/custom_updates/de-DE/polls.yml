@@ -1,23 +1,18 @@
 de:
-  polls:
-    index:
-      filters:
-        all: Alle Abstimmungen
-        currrent: Nur aktive Abstimmungen
-  custom:    
+  custom:
     polls:
       index:
         projekts: Projekte
       poll:
-        participate_button: Abstimmen
         date:
           from: von
           to: bis
         days_left:
-          one: "Noch 1 Tag"
-          other: "Noch %{count} Tage" 
-        expires_today: Läuft nur noch heute
+          one: Noch 1 Tag
+          other: Noch %{count} Tage
         expired: Abstimmung abgelaufen
+        expires_today: Läuft nur noch heute
+        participate_button: Abstimmen
       questions:
         answers:
           more_info: Mehr Infos
@@ -26,11 +21,16 @@ de:
       results:
         open_answers: Offene Antworten
       show:
+        cant_answer_not_started_yet: Diese Abstimmung läuft vom %{start_date} bis zum %{end_date}
+        cant_answer_organization: Organisationen sind nicht berechtigt an Abstimmungen teilzunehmen.
+        confirm_participation_button: Meine Abstimmung bestätigen
+        confirm_participation_notice: Sie haben erfolgreich an der Abstimmung teilgenommen.
         info_menu: Abstimmung
         results_menu: Zwischenergebnisse für Admins
         vote_counted: Ihre Stimme wurde gezählt!
         vote_uncounted: Ihre Stimme wurde entfernt
-        confirm_participation_button: Meine Abstimmung bestätigen
-        confirm_participation_notice: Sie haben erfolgreich an der Abstimmung teilgenommen.
-        cant_answer_not_started_yet: Diese Abstimmung läuft vom %{start_date} bis zum %{end_date}
-        cant_answer_organization: Organisationen sind nicht berechtigt an Abstimmungen teilzunehmen.
+  polls:
+    index:
+      filters:
+        all: Alle Abstimmungen
+        currrent: Nur aktive Abstimmungen

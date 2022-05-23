@@ -27,9 +27,9 @@ de:
         video_url: Externes Video URL
         official_answer: Offizielle Antwort
       debate:
-        on_behalf_of: Im Namen von
+        on_behalf_of: Diskussion im Namen von jemanden erstellen
       proposal:
-        on_behalf_of: Im Namen von
+        on_behalf_of: Vorschlag im Namen von jemanden erstellen
       budget/investment:
         implementation_performer: Umsetzung des Investitionsvorschlages
         implementation_performers:

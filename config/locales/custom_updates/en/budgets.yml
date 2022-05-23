@@ -9,23 +9,23 @@ en:
   custom:
     budgets:
       investments:
+        form:
+          required: Your investment proposal
         show:
           callouts:
+            publishing_prices:
+              undecided: The investment proposal was not decided yet.
+              unfeasible: This investment proposal was marked as unfeasible.
             selecting:
               undecided: This investment proposal was not eveluated yet.
               unfeasible: This investment proposal was marked as unfeasible.
-            publishing_prices:
-              unfeasible: This investment proposal was marked as unfeasible.
-              undecided: The investment proposal was not decided yet.
           implementation: Implementation
-          implementation_text_html: "<p>%{author} supports with implementation<p><p>%{implementation_contribution}</p>"
-          implementation_city_text_html: "<p>Needs to be implemented by the city</p>"
-          user_cost_estimate: "Cost estimate"
+          implementation_city_text_html: <p>Needs to be implemented by the city</p>
+          implementation_text_html: <p>%{author} supports with implementation<p><p>%{implementation_contribution}</p>
+          user_cost_estimate: Cost estimate
         statuses:
           phases:
             accepting: The investment proposal was successfully submitted.
             reviewing: The feasibility of the investment proposal is currently evaluated.
-            valuating: The costs for this investment proposal are evaluated internally.
             reviewing_ballots: We're currently checking the votes.
-        form:
-          required: Your investment proposal
+            valuating: The costs for this investment proposal are evaluated internally.

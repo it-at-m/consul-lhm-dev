@@ -1,93 +1,92 @@
 de:
   custom:
     projekts:
-      orders:
-        all: 'Alle Projekte'
-        active: 'Aktive Beteiligung'
-        ongoing: 'Laufende Projekte'
-        upcoming: 'Zukünftige Projektvorhaben'
-        expired: 'Abgeschlossen'
-        all_title: 'Alle Projekte'
-        active_title: 'Hier sind alle Projekte mit einer aktiven Beteiligungsphase gelistet. Dabei spielt es keine Rolle, welche Beteiligungsphase eröffnet ist. Als Beteiligungsphasen zählen: Kommentare, Diskussionen, Vorschläge, Abstimmungen, Bürgerbudget, Kollaborative Textbearbeitung und Kurzumfragen.'
-        ongoing_title: 'Hier sind alle Projekte gelistet, die noch in der Umsetzungsphase - also noch nicht abgeschlossen sind - aber aktuell keine aktive Beteiligungsphase haben.'
-        upcoming_title: 'Dies ist eine Vorhabenliste. Hier sind alle zukünftigen Projektvorhaben gelistet.'
-        expired_title: 'Hier sind alle abgeschlossenen Projekte gelistet.'
-      index:
-        title: Projekte
-        current_projekts: Projekte mit aktiver Beteiligungsphase
-        expired_projekts: Abgeschlossene Projekte
-        no_projekts: keine Projekte
-      projekt_questions :
-        comments_title: "Offene Antworten"
-        comments_button: "Antwort veröffentlichen"
-        login_to_answer: "Sie müssen sich %{signin} oder %{signup}, um an der Kurzumfrage teilzunehmen."
-        back_to_question_list: 'Zurück zur Fragenliste'
-        comments_count: "%{count} offene Antworten"
-
       backlink: Zur Projektübersicht
       errors:
         presence: Bitte wählen Sie ein Projekt
-      selector:
-        select_placeholder_mandatory_html: Wähle Projekt (verpflichtend)
-        connected_resources:
-          debate_description: Bitte ordnen Sie Ihre Diskussion einem der nachfolgenden Projekte oder Unterprojekte zu. Dies dient dazu, dass die Diskussionen in der Diskussionsübersicht besser auffindbar sind.
-          debate_title: Zuordnung der Diskussion zu einem Projekt
-          proposal_description: Bitte ordnen Sie Ihren Vorschlag einem der nachfolgenden Projekte oder Unterprojekte zu. Dies dient dazu, dass die Vorschläge in der Vorschlagsübersicht besser auffindbar sind.
-          proposal_title: Zuordnung des Vorschlags zu einem Projekt
-      sidebar:
-        sdgs: SDG
-
-      sidebar_filter:
-        filter_button: Nach Projekte filtern
+      index:
+        current_projekts: Projekte mit aktiver Beteiligungsphase
+        expired_projekts: Abgeschlossene Projekte
+        no_projekts: keine Projekte
         title: Projekte
-        title_active: Aktive Projekte
-        title_archived: Abgelaufene Projekte
       page:
+        footer:
+          budget:
+            investments_subtab: Investitionen
+        projekt_events_tab:
+          event_date: Datum
+          event_location: Veranstaltungsort
+          event_time: Zeit
+          event_title: Veranstaltungstitel
+          event_weblink: Weblink
+          no_events: Keine Ereignisse
+          title: Kommende Veranstaltungen
         sidebar:
           admin_controls:
             edit_projekt: Projekt bearbeiten
             edit_projekt_page: Projektseite bearbeiten
           phases:
             participate: Offen für Beteiligung!
-        footer:
-          budget:
-            investments_subtab: Investitionen
         tabs:
+          budget: Budgets
           comments: Kommentare
           debates: Diskussionen
+          milestones: Meilensteine
+          newsfeed: News-Feed
+          polls: Abstimmungen
+          projekt_events: Veranstaltungen
+          projekt_notifications: Benachrichtigungen
+          projekt_questions: Kurzumfrage
           proposals: Vorschläge
           questions: Questions
-          polls: Abstimmungen
-          budget: Budgets
-          milestones: Meilensteine
-          projekt_notifications: Benachrichtigungen
-          newsfeed: News-Feed
-          projekt_events: Veranstaltungen
-          projekt_questions: Kurzumfrage
-        projekt_events_tab:
-          title: Kommende Veranstaltungen
-          no_events: Keine Ereignisse
-          event_title: Veranstaltungstitel
-          event_location: Veranstaltungsort
-          event_date: Datum
-          event_time: Zeit
-          event_weblink: Weblink
       phase_name:
+        budget_phase: Budget
         comment_phase: Kommentare
         debate_phase: Diskussionen
-        proposal_phase: Vorschläge
-        voting_phase: Abstimmungen
-        budget_phase: Budget
-        milestone_phase: Meilensteine
         event_phase: Veranstaltungen
+        milestone_phase: Meilensteine
         milestone_phase_details:
-          start: Umsetzung
           ending: Gepl. Fertigstellung
-        projekt_notification_phase: Benachrichtigungen
+          start: Umsetzung
         newsfeed_phase: Newsfeed
+        projekt_notification_phase: Benachrichtigungen
+        proposal_phase: Vorschläge
         question_phase: Kurzumfrage
+        voting_phase: Abstimmungen
       projekt_events:
         orders:
           all: Alle
           incoming: Kommende
           past: Vergangene
+      projekt_questions:
+        back_to_question_list: 'Zurück zur Fragenliste'
+        comments_button: Antwort veröffentlichen
+        comments_count: "%{count} offene Antworten"
+        comments_title: Offene Antworten
+        login_to_answer: Sie müssen sich %{signin} oder %{signup}, um an der Kurzumfrage teilzunehmen.
+      projekts:
+        orders:
+          all: 'Alle Projekte'
+          all_title: 'Alle Projekte'
+          active: Aktive Beteiligung
+          active_title: 'Im Reiter "Aktive Beteiligung" sind Projekte, bei denen man sich aktuell beteiligen kann.'
+          expired: Abgeschlossen
+          expired_title: 'Im Reiter "Abgeschlossen" sind Beteiligungsprojekte gelistet, die abgeschlossen sind. Sowohl die Beteiligungsphase, als auch das Projekt an sich.'
+          ongoing: Laufende Projekte
+          ongoing_title: 'Im Reiter "Laufende Projekte" sind Projekte die noch laufen, die Beteiligung aber schon abgeschlossen ist.'
+          upcoming: Zukünftige Projektvorhaben
+          upcoming_title: 'Im Reiter "Zukünftige Projektvorhaben" sind Beteiligungsprojekte gelistet, die erst in der Zukunft stattfinden.'
+      selector:
+        connected_resources:
+          debate_description: Bitte ordnen Sie Ihre Diskussion einem der nachfolgenden Projekte oder Unterprojekte zu. Dies dient dazu, dass die Diskussionen in der Diskussionsübersicht besser auffindbar sind.
+          debate_title: Zuordnung der Diskussion zu einem Projekt
+          proposal_description: Bitte ordnen Sie Ihren Vorschlag einem der nachfolgenden Projekte oder Unterprojekte zu. Dies dient dazu, dass die Vorschläge in der Vorschlagsübersicht besser auffindbar sind.
+          proposal_title: Zuordnung des Vorschlags zu einem Projekt
+        select_placeholder_mandatory_html: Wähle Projekt (verpflichtend)
+      sidebar:
+        sdgs: SDG
+      sidebar_filter:
+        filter_button: Nach Projekte filtern
+        title: Projekte
+        title_active: Aktive Projekte
+        title_archived: Abgelaufene Projekte

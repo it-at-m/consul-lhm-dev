@@ -1,11 +1,15 @@
 en:
   activerecord:
+    models:
+    deficiency_report:
+      one: Deficiency report
+      other: Deficiency reports
     errors:
       models:
         proposal:
           attributes:
             description:
-              too_long: 'is too long'
+              too_long: "Text is too long"
         projekt:
           attributes:
             color:
@@ -20,9 +24,9 @@ en:
         video_url: External video URL
         official_answer: Official answer
       debate:
-        on_behalf_of: On behalf of
+        on_behalf_of: Create debate on behalf of someone
       proposal:
-        on_behalf_of: On behalf of
+        on_behalf_of: Create proposal on behalf of someone
       budget/investment:
         implementation_performer: Implementation of investment proposal
         implementation_performers:

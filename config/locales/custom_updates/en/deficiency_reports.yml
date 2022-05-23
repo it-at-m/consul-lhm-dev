@@ -1,89 +1,88 @@
 en:
   custom:
     deficiency_reports:
-      index:
-        deficiency_report:
-          by: by
-        start_deficiency_report: Report a deficiency
-        seo:
-          title: Deficiency Reports
-        search_form:
-          title: Search for deficiency reports
-          placeholder: Search for deficiency reports...
-          button: search
-        section_header:
-          title: Deficiency reports
-          icon_alt: Deficiency reports
-          help: Help with Deficiency reports
-        sidebar:
-          categories:
-            title: Categories
-            filter_button: Filter categories
-          statuses:
-            title: Status
-            all_statuses: All Reports
-          officer_filter:
-            title: Officer
-            all_reports: All reports
-            only_current_user: Reports assigned to myself
-        orders:
-          hot_score: Most active
-          newest: Newest
-          most_commented: Most commented
-        section_footer:
-          title: Help with Deficiency reports
-          description: Deficiencies, subject to user verification settings, can be submitted by any user. They offer an easy opportunity to report deficiencies in a city. Thank you for your support!
-      show:
-        official_answer: Official reply
-        submit_official_answer_button: Save reply
-        approve_official_answer: Publish reply
-        sidebar:
-          delete: Delete report
-          vote: Support
-          status: Status
-          category: Categories
-          officer: Officer
-          select_officer: Select officer
-          social_share: Share
-
-      new:
-        start_new: Report a deficiency
-        recommendations_title: Tips for reporting a deficiency
-        recommendation_one: Verwenden Sie bitte nicht ausschließelich Großbuchstaben für die Überschrift oder für komplette Sätze. Im Internet gilt das als Schreien und niemand möchte angeschrien werden.
-        recommendation_two: Diskussionen oder Kommentare, die illegale Handlungen beinhalten, werden gelöscht sowie diejenigen, die die Diskussionen absichtlich sabotieren. Alles andere ist erlaubt.
-        recommendation_three: Genießen Sie diesen Ort und die Stimmen, die ihn füllen. Er gehört auch Ihnen.
-        more_info: More info
-        seo:
-          title: Report a deficiency
       form:
         category:
           placeholder: Please select
-        labels:
-          title: Title of the deficiency
-          summary: Summary of the deficiency
-          description: Description of the deficiency
-        new:
-          submit_button: Submit deficiency
         create:
           submit_button: Submit deficiency
+        labels:
+          description: Description of the deficiency
+          summary: Summary of the deficiency
+          title: Title of the deficiency
+        new:
+          submit_button: Submit deficiency
+      index:
+        deficiency_report:
+          by: by
+        orders:
+          hot_score: Most active
+          most_commented: Most commented
+          newest: Newest
+        search_form:
+          button: search
+          placeholder: Search for deficiency reports...
+          title: Search for deficiency reports
+        section_footer:
+          description: Deficiencies, subject to user verification settings, can be submitted by any user. They offer an easy opportunity to report deficiencies in a city. Thank you for your support!
+          title: Help with Deficiency reports
+        section_header:
+          help: Help with Deficiency reports
+          icon_alt: Deficiency reports
+          title: Deficiency reports
+        seo:
+          title: Deficiency Reports
+        sidebar:
+          categories:
+            filter_button: Filter categories
+            title: Categories
+          officer_filter:
+            all_reports: All reports
+            only_current_user: Reports assigned to myself
+            title: Officer
+          statuses:
+            all_statuses: All Reports
+            title: Status
+        start_deficiency_report: Report a deficiency
       mailers:
-        notify_administrators_about_new_deficiency_report:
-          subject: "New deficiency report %{identifier}"
-          hi: Dear Admin,
-          p1: A new deficiency report has just been submitted.
-          signature_html: Best regards,</br>Consul
         notify_administrators_about_answer_update:
-          subject: "New official answer to deficiency report %{identifier}"
           hi: Dear Admin,
           p1: Officer has updated official answer.
           signature_html: Best regards,</br>Consul
+          subject: New official answer to deficiency report %{identifier}
+        notify_administrators_about_new_deficiency_report:
+          hi: Dear Admin,
+          p1: A new deficiency report has just been submitted.
+          signature_html: Best regards,</br>Consul
+          subject: New deficiency report %{identifier}
         notify_author_about_status_change:
-          subject: Status change of your deficiency report
           hi: Hi
           p1: Status of your a deficiency report you submitted earlier, was changed.
           signature_html: Best regards,</br>Consul
+          subject: Status change of your deficiency report
         notify_officer:
-          subject: "New deficiency report %{identifier}"
           hi: Dear Officer,
           p1: Admin has assigned you one of the new deficiency reports.
           signature_html: Best regards,</br>Consul
+          subject: New deficiency report %{identifier}
+      new:
+        more_info: More info
+        recommendation_one: Verwenden Sie bitte nicht ausschließelich Großbuchstaben für die Überschrift oder für komplette Sätze. Im Internet gilt das als Schreien und niemand möchte angeschrien werden.
+        recommendation_three: Genießen Sie diesen Ort und die Stimmen, die ihn füllen. Er gehört auch Ihnen.
+        recommendation_two: Diskussionen oder Kommentare, die illegale Handlungen beinhalten, werden gelöscht sowie diejenigen, die die Diskussionen absichtlich sabotieren. Alles andere ist erlaubt.
+        recommendations_title: Tips for reporting a deficiency
+        seo:
+          title: Report a deficiency
+        start_new: Report a deficiency
+      show:
+        approve_official_answer: Publish reply
+        official_answer: Official reply
+        sidebar:
+          category: Categories
+          delete: Delete report
+          officer: Officer
+          select_officer: Select officer
+          social_share: Share
+          status: Status
+          vote: Support
+        submit_official_answer_button: Save reply

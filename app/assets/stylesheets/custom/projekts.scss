@@ -885,3 +885,30 @@ span.projekt-backlink:before {
     top: 2px;
   }
 }
+
+#filter-projekts-all #filter-projekts-active ul {
+  position: relative;
+}
+
+#filter-projekts-all #filter-projekts-active ul > li[aria-expanded="true"] > .projekt-tree-ul-vertical-line {
+  background: #b8b8b8;
+  content: '';
+  width: 1px;
+  position: absolute;
+  display: block;
+  top: 21px;
+  left: -12px;
+}
+
+#filter-projekts-all #filter-projekts-active > ul ul {
+  &::before {
+    background: #b8b8b8;
+    content: '';
+    width: 7px;
+    height: 1px;
+    position: absolute;
+    display: block;
+    top: 11px;
+    left: -27px;
+  }
+}

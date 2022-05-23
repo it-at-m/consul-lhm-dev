@@ -7,92 +7,95 @@ de:
       destroy: Löschen
   custom:
     admin:
-      homepage:
-        active_projekts_title: Aktive Beteiligungsprozesse
-        archived_projekts_title: Abgeschlossene Beteiligungsprozesse
-      menu:
-        projekts: Projekte
-        deficiency_reports_title: Mängelmelder
-        deficiency_reports:
-          list: Liste der Mängelmeldungen
-          officers: Sachbearbeiter*in
-          reports: Mängel zuweisen
-          categories: Kategorien festlegen
-          statuses: Status definieren
-          settings: Funktionen
+      budgets:
+        edit:
+          info:
+            projekt_association: Projektzuordnung
       deficiency_reports:
-        index:
-          title: Mängel zuweisen
-          no_deficiency_reports: Keine Mängelmeldungen
-          entry_name: Mangel
-        show:
-          title: Mängel zuweisen
-          no_deficiency_reports: Keine Mängelmeldungen
-          entry_name: Mangel
-          category: Kategori
-          status: Status
-          summary: Zusammenfassung
-          description: Bezeichnung
-          video: Video
-          author: Autor
-          created_at: Erstellt am
-          updated_at: Aktualisiert am
-          official_answer: Offizielle Antwort
-          officer_name: Sachbearbeiter*in
-        deficiency_report:
-          title: Gemeldeter Mangel
-          category: Kategorie
-          status: Status
-          officer: Sachbearbeiter*in
-        officers:
-          index:
-            title: Sachbearbeiter*innen
-            search:
-              email_placeholder: Benutzer*in via E-Mail suchen
-          officer:
-            entry_name: Sachbearbeiter*in
-            name: Name
-            email: E-Mail
         categories:
-          index:
-            create: Kategorie erstellen
-            title: Kategorien
           category:
-            icon: Icon
             color: Farbe
+            icon: Icon
             name: Name
-          new:
-            creating: Neue Mangelkategorie erstellen
+          destroy:
+            cannot_be_destroyed: Sie können diese Kategorie nicht löschen, da sie mindestens einem Mangel zugewiesen ist.
+            destroyed_successfully: Die Kategorie wurde erfolgreich gelöscht.
           edit:
             editing: Mangelkategorie bearbeiten
           form:
             color_placeholder: "HEX Code mit #"
             submit_button: Speichern
-          destroy:
-            cannot_be_destroyed: Sie können diese Kategorie nicht löschen, da sie mindestens einem Mangel zugewiesen ist.
-            destroyed_successfully: Die Kategorie wurde erfolgreich gelöscht.
-        statuses:
           index:
-            create: Status erstellen
-            title: Status
-          status:
-            icon: Icon
-            color: Farbe
-            title: Name
+            create: Kategorie erstellen
+            title: Kategorien
           new:
-            creating: Neue Mangelstatus erstellen
+            creating: Neue Mangelkategorie erstellen
+        deficiency_report:
+          category: Kategorie
+          officer: Sachbearbeiter*in
+          status: Status
+          title: Gemeldeter Mangel
+        index:
+          entry_name: Mangel
+          no_deficiency_reports: Keine Mängelmeldungen
+          title: Mängel zuweisen
+        officers:
+          index:
+            search:
+              email_placeholder: Benutzer*in via E-Mail suchen
+            title: Sachbearbeiter*innen
+          officer:
+            email: E-Mail
+            entry_name: Sachbearbeiter*in
+            name: Name
+        settings:
+          index:
+            title: Funktionen
+        show:
+          author: Autor
+          category: Kategorie
+          created_at: Erstellt am
+          description: Bezeichnung
+          entry_name: Mangel
+          no_deficiency_reports: Keine Mängelmeldungen
+          officer_name: Sachbearbeiter*in
+          official_answer: Offizielle Antwort
+          status: Status
+          summary: Zusammenfassung
+          title: Mängel zuweisen
+          updated_at: Aktualisiert am
+          video: Video
+        statuses:
+          destroy:
+            cannot_be_destroyed: Sie können diesen Status nicht löschen, da er mindestens einem Mangel zugewiesen ist.
+            destroyed_successfully: Der Status wurde erfolgreich gelöscht.
           edit:
             editing: Mangelstatus bearbeiten
           form:
             color_placeholder: "HEX Code mit #"
             submit_button: Speichern
-          destroy:
-            cannot_be_destroyed: Sie können diesen Status nicht löschen, da er mindestens einem Mangel zugewiesen ist.
-            destroyed_successfully: Der Status wurde erfolgreich gelöscht.
-        settings:
           index:
-            title: Funktionen
-
+            create: Status erstellen
+            title: Status
+          new:
+            creating: Neue Mangelstatus erstellen
+          status:
+            color: Farbe
+            icon: Icon
+            title: Name
+      homepage:
+        active_projekts_title: Aktive Beteiligungsprozesse
+        archived_projekts_title: Abgeschlossene Beteiligungsprozesse
+      menu:
+        deficiency_reports:
+          categories: Kategorien festlegen
+          list: Liste der Mängelmeldungen
+          officers: Sachbearbeiter*in
+          reports: Mängel zuweisen
+          settings: Funktionen
+          statuses: Status definieren
+        deficiency_reports_title: Mängelmelder
+        projekts: Projekte
       polls:
         questions:
           answers:
@@ -105,49 +108,38 @@ de:
             open_answer_html: Offene Antwort <small><em>(Nur eine erlaubt)</em></small>
           show_images: Bilder für Antworten anzeigen
         settings:
+          show_on_home_page: Diese Abstimmung wird auf der Homepage angezeigt.
+          show_on_index_page: Diese Abstimmung wird auf der Abstimmungsübersicht angezeigt
           show_open_answer_with_username: Offene Antworten mit Nutzer:innen-Name anzeigen
           show_open_answer_without_username: Offene Antworten anonym anzeigen
           show_summary_instead_of_questions: Zusammenfassung statt Liste aller Fragen in der Abstimmungsübersicht anzeigen
-          show_on_home_page: Diese Abstimmung wird auf der Homepage angezeigt.
-          show_on_index_page: Diese Abstimmung wird auf der Abstimmungsübersicht angezeigt
       progress_bars:
         index:
           progress_bar: Fortschrittsbalken
       projekts:
-        projekt_questions:
-          show_answers_count: 'Anzahl der Stimmen im Frontend anzeigen'
-          comments_enabled: 'Offene Antwort aktiviert'
-          index:
-            title: Kurzumfrage
-            create: Frage erstellen
-            enable_projekt_list: Aktivieren Sie eine Übersicht aller Fragen
-          edit:
-            title: Frage bearbeiten
-            save: Frage aktualisieren
-          new:
-            title: Frage erstellen
-            create: Frage aktualisieren
         destroy: Löschen
         edit:
           description: Projektbeschreibung
+          design:
+            icon: Icon
+            submit_button: Submit
           projekt_activated: Projekt aktiv
           projekt_active:
-            'no': Nein
-            'yes': Ja
+            "no": Nein
+            "yes": Ja
+          projekt_events_tab:
+            button: Event erstellen
+            event_created_at: Hergestellt in
+            event_datetime: Datum
+            event_location: Veranstaltungsort
+            event_title: Veranstaltungstitel
+            event_weblink: Weblink
+            name: Veranstaltungen
+            page_title: Veranstaltungen
           projekt_map_tab:
             name: Ind. Kartenkonfiguration
-          projekt_questions_tab:
-            name: Kurzumfragen
-            title: Questions
           projekt_milestones_tab:
             name: Fortschritt & Meilensteine
-          projekt_notifications_tab:
-            name: Benachrichtigungen
-            page_title: Nachricht senden
-            title: Nachricht senden
-            notification_title: Titel
-            notification_body: Nachricht
-            button: Nachricht senden
           projekt_news_tab:
             name: News-Feed
           projekt_notifications_tab:
@@ -157,81 +149,72 @@ de:
             notification_title: Titel
             page_title: Nachricht senden
             title: Nachricht senden
-          projekt_events_tab:
-            name: Veranstaltungen
-            page_title: Veranstaltungen
-            button: Event erstellen
-            event_title: Veranstaltungstitel
-            event_location: Veranstaltungsort
-            event_datetime: Datum
-            event_weblink: Weblink
-            event_created_at: Hergestellt in
           projekt_page: Projektseite
           projekt_phase_limitation: Beschränkung
           projekt_phases: Projektphasen
           projekt_phases_tab:
             actions: Aktionen
-            activate_phase: Phase aktiviert
-            activate_info: Info aktiviert
             activate: Aktiviert
+            activate_info: Info aktiviert
+            activate_phase: Phase aktiviert
             affiliation: Gebietszuordnung
             beginning: Anfangsdatum
+            budget_phase: Budgetphase
+            comment_phase: Kommentarphase
             debate_phase: Diskussionsphase
             end_date: Enddatum
             ending: Enddatum
             information_block_title: Projektinformationen
+            link:
+              budget_phase: Budgets
+              voting_phase: Abstimmungen
             main_block_title: Projektstatus
+            milestone_phase: Umsetzungsphase
             name: Projekteinstellungen
             page_block_title: Projektseite
             phase_name: Phase
             phases_block_title: Projektphasen
             projekt_duration: Projektinformationen
             proposal_phase: Vorschlagsphase
+            question_phase: Kurzumfragenphase
             restriction: Partizipationsbeschränkung
             start_date: Anfangsdatum
             voting_manage: Abstimmungen verwalten
             voting_phase: Abstimmungsphase
-            comment_phase: Kommentarphase
-            budget_phase: Budgetphase
-            milestone_phase: Umsetzungsphase
-            question_phase: Kurzumfragenphase
-            link:
-              voting_phase: Abstimmungen
-              budget_phase: Budgets
-          projekt_settings_tab:
-            general_settings: Allgemein
-            sidebar_settings: Seitenleiste
-            footer_settings: Fußzeile
-            debates_settings: Diskussion
-            proposals_settings: Vorschläge
-            polls_settings: Abstimmungen
-            budget_settings: Budgets
-            milestone_settings: Einstellungen
-            name: Projektfunktionen
-            select_an_element: auswählen
-            projekt_notification_phase: Benachrichtigungen
-            projekt_notification_phase_description: Aktiviert die Benachrichtigungsfunktion in der Fußzeile eines Projekts
-            milestone_phase: Meilensteine
-            milestone_phase_description: Aktiviert die Meilensteinfunktion in der Fußzeile eines Projektes
-            newsfeed_phase: News-Feed
-            newsfeed_phase_description: Aktiviert den News-Feed in der Fußzeile eines Projekts
-            event_phase: Veranstaltungen
-            event_phase_description: Aktivieren Sie Veranstaltungen in der Fußzeile eines Projekts
+          projekt_questions_tab:
+            name: Kurzumfragen
+            title: Fragen
           projekt_sdg_tab:
-            name: 'SDGs & Tags'
+            name: SDGs & Tags
             sdgs: SDGs
             tags: Tags
+          projekt_settings_tab:
+            budget_settings: Budgets
+            debates_settings: Diskussion
+            event_phase: Veranstaltungen
+            event_phase_description: Aktivieren Sie Veranstaltungen in der Fußzeile eines Projekts
+            footer_settings: Fußzeile
+            general_settings: Allgemein
+            milestone_phase: Meilensteine
+            milestone_phase_description: Aktiviert die Meilensteinfunktion in der Fußzeile eines Projektes
+            milestone_settings: Einstellungen
+            name: Projektfunktionen
+            newsfeed_phase: News-Feed
+            newsfeed_phase_description: Aktiviert den News-Feed in der Fußzeile eines Projekts
+            polls_settings: Abstimmungen
+            projekt_notification_phase: Benachrichtigungen
+            projekt_notification_phase_description: Aktiviert die Benachrichtigungsfunktion in der Fußzeile eines Projekts
+            proposals_settings: Vorschläge
+            select_an_element: auswählen
+            sidebar_settings: Seitenleiste
           projekt_status: Projektstatus
           setting_indicator:
-            'no': Nein
-            'yes': Ja
+            "no": Nein
+            "yes": Ja
           show_footer: Projekt Fußzeile
           show_in_navigation: null
           show_in_navigation_checkbox: Projekt in Navigation anzeigen
           update: Projekteinstellungen aktualisieren
-          design:
-            icon: Icon
-            submit_button: Submit
         edit_projekt: Editieren
         index:
           add_cards: Kacheln erstellen/bearbeiten
@@ -258,6 +241,19 @@ de:
           projekt_phase_limitation: Partizipationsbeschränkung
           proposal_phase: Vorschlagsphase
           voting_phase: Abstimmungsphase
+        projekt_questions:
+          comments_enabled: Offene Antwort aktiviert
+          edit:
+            save: Frage aktualisieren
+            title: Frage bearbeiten
+          index:
+            create: Frage erstellen
+            enable_projekt_list: Aktivieren Sie eine Übersicht aller Fragen
+            title: Kurzumfrage
+          new:
+            create: Frage aktualisieren
+            title: Frage erstellen
+          show_answers_count: Anzahl der Stimmen im Frontend anzeigen
         tabs:
           configuration: Konfigurationseinstellungen
           geozones: Geozonen verwalten
@@ -284,15 +280,11 @@ de:
             cannot_notice: Diese Seite kann nicht gelöscht werden. Bitte löschen Sie das zugehörige Projekt zuvor.
           images:
             form:
-              title: Seitenbanner
-              note: "Der Banner sollte mindestens 200 Pixel hoch und 1920 Pixel breit sein. Sie können ein Bild des folgenden Formats hochladen: %{accepted_content_types}, bis zu %{max_file_size} MB."
               add_new_image: Banner hinzufügen
+              note: "Der Banner sollte mindestens 200 Pixel hoch und 1920 Pixel breit sein. Sie können ein Bild des folgenden Formats hochladen: %{accepted_content_types}, bis zu %{max_file_size} MB."
+              title: Seitenbanner
       widget:
         card:
           category_options:
             active_projekt: Aktiver Beteiligungsprozess
             archived_projekt: Abgeschlossener Beteiligungsprozess
-      budgets:
-        edit:
-          info:
-            projekt_association: Projektzuordnung

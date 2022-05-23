@@ -1,65 +1,36 @@
 en:
   custom:
-    shared:
-      dates:
-        days_left:
-          one: "1 more day"
-          other: "%{count} more days"
-        starts_in_days:
-          one: 'Starts in 1 day'
-          other: 'Starts in %{count} days'
-      form:
-        projekt_assignment: Project
-        star_message: All Fields marked with a (*) are required
-      index:
-        resource:
-          by: by
-      show:
-        back_link: "Additional %{resources} with this subject"
-        admin: Admin
-        information: Information
-        comments: "%{count} comments"
-        report_title: Report
-        report_text: Report this entry if it contains unacceptable content or infringes third party rights.
-        report_button: Report
-        follow_text: Follow this Proposal to get updates.
-        related_title: Related content
-        related_text: You can add links to other Proposals or Debates.
-        related_button: Add Link
     account:
       settings:
-        email_digest: "Receive a summary of proposal notifications"
-        email_on_comment: "Notify me by email when someone comments on my proposals or debates"
-        email_on_comment_reply: "Notify me by email when someone replies to my comments"
-        email_on_direct_message: "Receive emails about direct messages"
-        newsletter: "Receive by email website relevant information"
-        public_activity: "Keep my list of activities public"
-        public_interests: "Keep the labels of the elements I follow public"
+        email_digest: Receive a summary of proposal notifications
+        email_on_comment: Notify me by email when someone comments on my proposals or debates
+        email_on_comment_reply: Notify me by email when someone replies to my comments
+        email_on_direct_message: Receive emails about direct messages
+        newsletter: Receive by email website relevant information
+        public_activity: Keep my list of activities public
+        public_interests: Keep the labels of the elements I follow public
       show:
         user_permission_votes: Participate in polls
     comments:
       reply_form:
         leave_comment: Write a reply
       restricted:
+        debate_phase_expired: The discussion phase has already expired. New comments can no longer be added.
+        debate_phase_not_active: The discussion phase is not active
         geo_limitation: 'This project is limited to the following areas: %{geozones}'
         not_verified: Please %{verify_account} to participate
         other: The comment function is not available
-        debate_phase_expired: The discussion phase has already expired. New comments can no longer be added.
-        proposal_phase_expired: The proposal phase has already expired. New comments can no longer be added.
-        voting_phase_expired: The voting period has already expired. New comments can no longer be added.
-        debate_phase_not_active: The discussion phase is not active
-        proposal_phase_not_active: The proposal phase is not active
         projekt_not_active: Project is not active
         projekt_phase_not_active: Projekt phase is not active
-
+        proposal_phase_expired: The proposal phase has already expired. New comments can no longer be added.
+        proposal_phase_not_active: The proposal phase is not active
+        voting_phase_expired: The voting period has already expired. New comments can no longer be added.
     devise_views:
       users:
         registrations:
           new:
             privacy_link: Privacy policy
             terms: With the registration you accept the %{terms} and %{privacy}
-            hidden_user_with_this_email_exisits_regular: An account with this email already exists. Please use a different email address for sign up.
-            hidden_user_with_this_email_exisits_omniauth_html: An account with this email already exists. Please change your email in the external account management system(Bayern-ID or M-Login) or contact us at <a href=r'mailto:support.eogov@muenchen.der'>support.eogov@muenchen.de</a>
     gdpr_notice:
       accept: Accept
       link_text: More info
@@ -96,20 +67,18 @@ en:
       form:
         image_name: Title image name
     layouts:
-      header:
-        home_link: Start page
-        admin_link: Administration
-        account_link: Account
-        notification_item:
-          no_notifications: No notifications
-        title_html: "Public Participation"
       footer:
         demokratie: demokratie.today
         demokratie_url: https://www.demokratie.today/
         description: The platform is based on %{consul}, a %{open_source} and is modified by %{demokratie}.
         impressum: Imprint
-        netiquette: Netiquette
-        statistic_cookies_settings: Cookie settings
+      header:
+        account_link: Account
+        admin_link: Administration
+        home_link: Start page
+        notification_item:
+          no_notifications: No notifications
+        title_html: Public Participation
     menu:
       account: Account
       archived: Expired projects
@@ -132,27 +101,53 @@ en:
         label: Filter for targets (%{more_link})
         more_link_text: More info
         select: Select target
+    shared:
+      dates:
+        days_left:
+          one: 1 more day
+          other: '%{count} more days'
+        starts_in_days:
+          one: Starts in 1 day
+          other: Starts in %{count} days
+      form:
+        projekt_assignment: Project
+        star_message: All Fields marked with a (*) are required
+      index:
+        resource:
+          by: by
+      show:
+        admin: Admin
+        back_link: Additional %{resources} with this subject
+        comments: '%{count} comments'
+        follow_text: Follow this Proposal to get updates.
+        information: Information
+        related_button: Add Link
+        related_text: You can add links to other Proposals or Debates.
+        related_title: Related content
+        report_button: Report
+        report_text: Report this entry if it contains unacceptable content or infringes third party rights.
+        report_title: Report
+    tag_names:
+      projekt: Additional %{resources} for this Project
     users:
       login_to_vote: You must %{signin} or %{signup} to be able to participate
       verify_account_link_short: verify
     votes:
+      debate_phase_expired: The phase is already expired.
       geo_restricted: You are not eligible to participate due to territorial restrictions.
       not_verified: You must %{verify_account} to be able to participate
       proposal_phase_expired: The phase is already expired.
-      debate_phase_expired: The phase is already expired.
     welcome:
-      current_polls: Current polls
-      user_entries: Latest submissions
-      all_debates: All debates
-      all_proposals: All proposals
-      start_entry: + Create a post
-      start_debate: Create a debate
-      start_proposal: Create a proposal
       active_projekt_cards:
         title: Active participation processes
+      all_debates: All debates
+      all_proposals: All proposals
       archived_projekt_cards:
         title: Completed participation processes
-    tag_names:
-      projekt: "Additional %{resources} for this Project"
+      current_polls: Current polls
+      start_debate: Create a debate
+      start_entry: + Create a post
+      start_proposal: Create a proposal
+      user_entries: Latest submissions
   tag_names:
     general: General

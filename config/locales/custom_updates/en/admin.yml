@@ -3,12 +3,98 @@ en:
     homepage:
       feeds:
         polls: Polls
+    tags:
+      destroy: Delete
   custom:
     admin:
+      budgets:
+        edit:
+          info:
+            projekt_association: Project association
+      deficiency_reports:
+        categories:
+          category:
+            color: Color
+            icon: Icon
+            name: Name
+          destroy:
+            cannot_be_destroyed: You cannot delete this category because it is assigned to at least one defect.
+            destroyed_successfully: The category was successfully deleted.
+          edit:
+            editing: Edit deficiency category
+          form:
+            color_placeholder: "HEX Code with #"
+            submit_button: Save
+          index:
+            create: Create category
+            title: Categories
+          new:
+            creating: Create new defect category
+        deficiency_report:
+          category: Category
+          officer: Responsible person
+          status: Status
+          title: Reported deficiency
+        index:
+          entry_name: Deficiency
+          no_deficiency_reports: No deficiency reports
+          title: Assign deficiencies
+        officers:
+          index:
+            search:
+              email_placeholder: Search user via email
+            title: Responsible persons
+          officer:
+            email: E-Mail
+            entry_name: Responsible person
+            name: Name
+        settings:
+          index:
+            title: Features
+        show:
+          author: Author
+          category: Category
+          created_at: Created at
+          description: Description
+          entry_name: Deficiency
+          no_deficiency_reports: No deficiency reports
+          officer_name: Responsible person
+          official_answer: Official answer
+          status: Status
+          summary: Summary
+          title: Assign deficiencies
+          updated_at: Updated at
+          video: Video
+        statuses:
+          destroy:
+            cannot_be_destroyed: You cannot delete this status because it is assigned to at least one defect.
+            destroyed_successfully: The status was successfully deleted.
+          edit:
+            editing: Edit deficiency status
+          form:
+            color_placeholder: "HEX Code with #"
+            submit_button: Save
+          index:
+            create: Create status
+            title: Status
+          new:
+            creating: Create new deficiency status
+          status:
+            color: Color
+            icon: Icon
+            title: Name
       homepage:
         active_projekts_title: Active participatory processes
         archived_projekts_title: Completed participation processes
       menu:
+        deficiency_reports:
+          categories: Kategorien festlegen
+          list: List of deficiency reports
+          officers: Responsible person
+          reports: Assign deficiencies
+          settings: Features
+          statuses: Set categories
+        deficiency_reports_title: Deficiency reports
         projekts: Projects
       polls:
         questions:
@@ -22,11 +108,11 @@ en:
             open_answer_html: Open answer  <small><em>(Only one allowed)</em></small>
           show_images: Show preview images for answers
         settings:
+          show_on_home_page: This poll will be visible on the home page.
+          show_on_index_page: This poll will be visible on polls index page.
           show_open_answer_with_username: Show open answers with user name
           show_open_answer_without_username: Show open answers anonymously
           show_summary_instead_of_questions: Show summary instead of list of questions
-          show_on_home_page: This poll will be visible on the home page.
-          show_on_index_page: This poll will be visible on polls index page.
       progress_bars:
         index:
           progress_bar: Progress bar
@@ -34,14 +120,24 @@ en:
         destroy: Delete
         edit:
           description: Projekt description
+          design:
+            icon: Icon
+            submit_button: Submit
           projekt_activated: Project active
           projekt_active:
-            'no': "No"
-            'yes': "Yes"
+            "no": "No"
+            "yes": "Yes"
+          projekt_events_tab:
+            button: Save notification
+            event_created_at: Created at
+            event_datetime: Datetime
+            event_location: Location
+            event_title: Title
+            event_weblink: Weblink
+            name: Events
+            page_title: Create notification
           projekt_map_tab:
             name: Ind. card configuration
-          projekt_questions_tab:
-            name: Questions
           projekt_milestones_tab:
             name: Progress & Milestones
           projekt_news_tab:
@@ -53,28 +149,27 @@ en:
             notification_title: Title
             page_title: Send message
             title: Send message
-          projekt_events_tab:
-            name: Events
-            button: Save notification
-            event_title: Title
-            event_location: Location
-            event_weblink: Weblink
-            event_datetime: Datetime
-            event_created_at: Created at
-            page_title: Create notification
           projekt_page: Project page
           projekt_phase_limitation: Restriction
           projekt_phases: Project phases
           projekt_phases_tab:
             actions: Actions
             activate: Enabled
+            activate_info: Info enabled
+            activate_phase: Phase enabled
             affiliation: Area allocation
             beginning: Start date
+            budget_phase: Budget phase
+            comment_phase: Commenting phase
             debate_phase: Discussion phase
             end_date: End date
             ending: End date
             information_block_title: Project information
+            link:
+              budget_phase: Budgets
+              voting_phase: Polls
             main_block_title: Project status
+            milestone_phase: Execution phase
             name: Project settings
             page_block_title: Project page
             phase_name: Phase
@@ -85,37 +180,40 @@ en:
             start_date: Start date
             voting_manage: Manage polls
             voting_phase: Voting phase
-            comment_phase: Commenting phase
-            budget_phase: Budget phase
-            milestone_phase: Execution phase
-            link:
-              voting_phase: Polls
-              budget_phase: Budgets
-          projekt_settings_tab:
-            footer_settings: Footer
-            general_settings: General
-            milestone_settings: Settings
-            name: Project functions
-            select_an_element: select
-            sidebar_settings: Sidebar
-            event_phase: Events
-            event_phase_description: Enable Events in the footer of a project
+          projekt_questions_tab:
+            name: Short survey
+            title: Questions
           projekt_sdg_tab:
-            name: 'SDGs & Tags'
+            name: SDGs & Tags
             sdgs: SDGs
             tags: Tags
-          projekt_status: Projektstatus
+          projekt_settings_tab:
+            budget_settings: Budgets
+            debates_settings: Debates
+            event_phase: Events
+            event_phase_description: Enable Events in the footer of a project
+            footer_settings: Footer
+            general_settings: General
+            milestone_phase: Milestones
+            milestone_phase_description: Activates the milestone function in the footer of a project
+            milestone_settings: Settings
+            name: Project functions
+            newsfeed_phase: News-Feed
+            newsfeed_phase_description: Activates the news feed in the footer of a project
+            polls_settings: Polls
+            projekt_notification_phase: Notifications
+            projekt_notification_phase_description: Activates the notifications in the footer of a project
+            proposals_settings: Proposals
+            select_an_element: select
+            sidebar_settings: Sidebar
           projekt_status: Project status
           setting_indicator:
-            'no': "No"
-            'yes': "Yes"
+            "no": "No"
+            "yes": "Yes"
           show_footer: Project footer
           show_in_navigation: null
           show_in_navigation_checkbox: Show project in navigation
           update: Update project settings
-          design:
-            icon: Icon
-            submit_button: Submit
         edit_projekt: Edit
         index:
           add_cards: Create/edit tiles
@@ -142,6 +240,18 @@ en:
           projekt_phase_limitation: Participation restriction
           proposal_phase: Proposal phase
           voting_phase: Voting phase
+        projekt_questions:
+          comments_enabled: Open answer enabled
+          edit:
+            save: Update question
+            title: Edit question
+          index:
+            create: Create question
+            title: Short survey
+          new:
+            create: Update question
+            title: Create question
+          show_answers_count: Show number of votes in frontend
         tabs:
           configuration: Configuration settings
           geozones: Manage geozones
@@ -168,15 +278,11 @@ en:
             cannot_notice: This page cannot be deleted. Please delete the associated project beforehand.
           images:
             form:
-              title: Banner for the website
-              note: "The banner should be at least 200 pixels high and 1920 pixels wide. You can upload an image of the following format: %{accepted_content_types}, up to %{max_file_size} MB."
               add_new_image: Add banner
+              note: "The banner should be at least 200 pixels high and 1920 pixels wide. You can upload an image of the following format: %{accepted_content_types}, up to %{max_file_size} MB."
+              title: Banner for the website
       widget:
         card:
           category_options:
             active_projekt: Active participation process
             archived_projekt: Completed participation process
-      budgets:
-        edit:
-          info:
-            projekt_association: Project association

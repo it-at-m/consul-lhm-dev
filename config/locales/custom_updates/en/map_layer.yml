@@ -1,0 +1,18 @@
+en:
+  custom:
+    map_layer:
+      hints:
+        attribution: Map attribution
+        format: default
+        layer_names: Not mandatory
+        name: Visible in selector, if there are more than one layer
+        protocol: wms, default blank
+        provider: URL of the map
+        transparent: default
+      labels:
+        attribution: Attribution
+        format: Format
+        layer_names: Layer names
+        protocol: Protocol
+        provider: Provider
+        transparent: Transparent

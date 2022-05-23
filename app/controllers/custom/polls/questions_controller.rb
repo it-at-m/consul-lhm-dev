@@ -3,6 +3,8 @@ require_dependency Rails.root.join("app", "controllers", "polls", "questions_con
 class Polls::QuestionsController < ApplicationController
 
   def answer
+    @poll = @question.poll
+
     answer = @question.answers.find_or_initialize_by(author: current_user, answer: params[:answer])
     answer.save_and_record_voter_participation(params[:token])
 
@@ -18,6 +20,8 @@ class Polls::QuestionsController < ApplicationController
   end
 
   def unanswer
+    @poll = @question.poll
+
     answer = @question.answers.find_or_initialize_by(author: current_user, answer: params[:answer])
 
     @question.answers.where(author: current_user, answer: params[:answer]).delete_all
