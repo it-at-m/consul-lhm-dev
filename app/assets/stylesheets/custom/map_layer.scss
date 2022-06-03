@@ -5,6 +5,11 @@
   .delete-map-layer {
     position: absolute;
     top: 5px;
+    color: #004a83;
+
+    &:hover {
+      color: #00101d;
+    }
   }
 
   .edit-map-layer {
@@ -13,6 +18,8 @@
 
   .delete-map-layer {
     right: 10px;
+    top: 8px;
+    cursor: pointer;
   }
 }
 
