@@ -1,54 +1,18 @@
 <% limit ||= nil %>
-<% tag_filter_class = (action_name == 'index' && controller_name != 'welcome'  ) ? 'js-projekt-tag-filter-link' : ''  %>
-<% resource_name = (@resource_name || taggable.class.name.downcase) %>
 
+<%= render Shared::TagListComponent.new(taggable, limit: limit) %>
 <%= render SDG::TagListComponent.new(taggable, limit: limit) %>
 
+<!--
 <div class='tag-list'>
 
-  <% if taggable.projekt.present? %>
-    <% if show_affiliation_filter_in_sidebar? %>
-      <%= prepare_geo_affiliation_tag(taggable, resource_name, tag_filter_class) %>
-    <% end %>
-  <% end %>
-
-  <% unless skip_user_verification? %>
-    <% if taggable.projekt.present? && resource_name != 'poll' && taggable.projekt.send("#{resource_name}_phase").present?%>
-      <%= prepare_geo_restriction_tag(taggable, resource_name, tag_filter_class) %>
-    <% elsif resource_name == 'poll' %>
-      <%= prepare_geo_restriction_tag_for_polls(taggable, tag_filter_class) %>
-    <% else %>
-      <% active_projekt_class = params[:geozone_restriction] == 'no_restriction' ? 'filtered-projekt' : ''%>
+  <%# if projekt_feature?(taggable&.projekt, 'general.enable_tags') && taggable.tags.category.any? %>
+    <%# taggable.tags.category.each do |category| %>
+      <%# active_projekt_class = params[:tags]&.split(",")&.include?(category.name) ? active_projekt_class = 'filtered-projekt' : active_projekt_class = '' %>
       <div class="projekt-tag-chip">
-        <%= link_to t( "custom.geozones.sidebar_filter.no_restriction" ), (taggables_path(taggable.class.name.underscore, '') + "&geozone_restriction=no_restriction" ), class: "#{tag_filter_class} projekt-tag-chip-icon projekt-tag-chip-geozone #{active_projekt_class}" %>
+        <%#= link_to sanitize(category.name), taggables_path(taggable.class.name.underscore, category.name), class: "#{tag_filter_class} projekt-tag-chip-icon projekt-tag-chip-category #{active_projekt_class}" %></li>
       </div>
-    <% end %>
-  <% end %>
-
-
-  <% if extended_feature?("modulewide.enable_categories") && taggable.tags.category.any? %>
-    <% taggable.tags.category.each do |category| %>
-      <% active_projekt_class = params[:tags]&.split(",")&.include?(category.name) ? active_projekt_class = 'filtered-projekt' : active_projekt_class = '' %>
-      <div class="projekt-tag-chip">
-        <%= link_to sanitize(category.name), taggables_path(taggable.class.name.underscore, category.name), class: "#{tag_filter_class} projekt-tag-chip-icon projekt-tag-chip-category #{active_projekt_class}" %></li>
-      </div>
-    <% end %>
-  <%end%>
-
-  <% if extended_feature?("modulewide.enable_custom_tags") && taggable.tags.where(kind: nil).any? %>
-    <% taggable.tags.where(kind: nil).each do |tag| %>
-      <% active_projekt_class = params[:tags]&.split(",")&.include?(tag.name) ? active_projekt_class = 'filtered-projekt' : active_projekt_class = '' %>
-      <div class="projekt-tag-chip" >
-        <%= link_to sanitize(tag.name), taggables_path(taggable.class.name.underscore, tag.name), class: "#{tag_filter_class} projekt-tag-chip-icon projekt-tag-chip-tag #{active_projekt_class}" %></li>
-      </div>
-    <% end %>
-  <% end %>
-
-  <% if taggable.projekt.present? %>
-    <% params[:projekts].present? ? active_projekt_ids = params[:projekts].split(',') : active_projekt_ids = [] %>
-    <% taggable.projekt.id.to_s.in?(active_projekt_ids) ? active_projekt_class = 'filtered-projekt' : active_projekt_class = ''  %>
-    <div class="projekt-tag-chip <%= active_projekt_class %>">
-      <%= link_to t("custom.tag_names.projekt", resources: taggable.model_name.human(count: 2)), (taggables_path(taggable.class.name.underscore, '') + "&projekts=#{taggable.projekt.id}" ), class: "#{tag_filter_class} projekt-tag-chip-icon projekt-tag-chip-projekt #{active_projekt_class}" %>
-    </div>
-  <% end %>
+    <%# end %>
+  <%# end %>
 </div>
+-->

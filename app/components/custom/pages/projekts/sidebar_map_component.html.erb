@@ -9,7 +9,7 @@
 
   <%= link_to extended_sidebar_map_page_path(projekt.page.slug), remote: true do %>
     <div class='sidebar-projekt-map'>
-      <%= render_map(projekt.map_location, "proposals_sidebar", false, nil, [], projekt.map_layers.to_json ) %>
+      <%= render_map(projekt.map_location, "proposals_sidebar", false, nil, [], projekt.map_layers_for_render.to_json ) %>
     </div>
   <% end %>
 

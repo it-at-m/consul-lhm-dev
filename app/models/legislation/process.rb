@@ -43,6 +43,8 @@ class Legislation::Process < ApplicationRecord
     inverse_of:  :process,
     dependent:   :destroy
 
+  belongs_to :projekt
+
   validates_translation :title, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true

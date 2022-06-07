@@ -1,6 +1,6 @@
 <% if feature?(:map) && map_location_available?(@investment.map_location) %>
   <div class="">
-    <%= render_map(investment.map_location, "budget_investment", false, nil, MapLocation.where(investment_id: investment.id).map(&:json_data), investment&.projekt&.map_layers.to_json) %>
+    <%= render_map(investment.map_location, "budget_investment", false, nil, MapLocation.where(investment_id: investment.id).map(&:json_data), investment&.projekt&.map_layers_for_render.to_json) %>
   </div>
 <% end %>
 
@@ -48,7 +48,7 @@
 
 <% if investment.should_show_unfeasibility_explanation? %>
   <h2><%= t("budgets.investments.show.unfeasibility_explanation") %></h2>
-  <p><%= investment.unfeasibility_explanation %></p>
+  <p><%= auto_link_already_sanitized_html wysiwyg(investment.unfeasibility_explanation) %></p>
 <% end %>
 
 <% if investment.should_show_price_explanation? %>

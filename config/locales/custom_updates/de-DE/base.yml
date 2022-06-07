@@ -139,11 +139,11 @@ de:
       proposal_phase_expired: Die Phase ist bereits abgeschlossen.
     welcome:
       active_projekt_cards:
-        title: Aktive Beteiligungsprozesse
+        title: Aktive Beteiligung
       all_debates: Alle Diskussionen
       all_proposals: Alle Vorschläge
-      archived_projekt_cards:
-        title: Abgeschlossene Beteiligungsprozesse
+      expired_projekt_cards:
+        title: Abgeschlossene Projekte
       current_polls: Laufende Abstimmungen
       start_debate: Diskussion starten
       start_entry: + Beitrag erstellen

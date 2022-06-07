@@ -4,6 +4,7 @@ class PollsController < ApplicationController
 
   include CommentableActions
   include ProjektControllerHelper
+  include Takeable
 
   before_action :load_categories, only: [:index]
   before_action :set_geo_limitations, only: [:show, :results, :stats]
@@ -15,44 +16,37 @@ class PollsController < ApplicationController
     @resource_name = 'poll'
     @tag_cloud = tag_cloud
 
-    @filtered_goals = params[:sdg_goals].present? ? params[:sdg_goals].split(',').map{ |code| code.to_i } : nil
-    @filtered_target = params[:sdg_targets].present? ? params[:sdg_targets].split(',')[0] : nil
-
-    if params[:filter_projekt_ids]
-      @selected_projekts_ids = params[:filter_projekt_ids].select{ |id| Projekt.find_by(id: id).present? }
-      selected_parent_projekt_id = get_highest_unique_parent_projekt_id(@selected_projekts_ids)
-      @selected_parent_projekt = Projekt.find_by(id: selected_parent_projekt_id)
-    end
-
     @geozones = Geozone.all
-
     @selected_geozone_affiliation = params[:geozone_affiliation] || 'all_resources'
     @affiliated_geozones = (params[:affiliated_geozones] || '').split(',').map(&:to_i)
-
     @selected_geozone_restriction = params[:geozone_restriction] || 'no_restriction'
     @restricted_geozones = (params[:restricted_geozones] || '').split(',').map(&:to_i)
 
-    @polls = @polls.base_selection.where(show_on_index_page: true).send(@current_filter).includes(:geozones)
-
-    @all_resources = @polls
-
-    unless params[:search].present?
-      take_only_by_tag_names
-      take_by_projekts
-      take_by_sdgs
-      take_by_geozone_affiliations
-      take_by_geozone_restrictions
-      take_with_activated_projekt_only
-    end
-
-    @all_polls = @polls.created_by_admin.not_budget
-
-    @polls = Kaminari.paginate_array(
-      @polls.created_by_admin.not_budget.send(@current_filter).includes(:geozones).sort_for_list
-    ).page(params[:page])
+    @resources = Poll.where(show_on_index_page: true)
+      .created_by_admin
+      .not_budget
+      .send(@current_filter)
+      .includes(:geozones)
 
     @top_level_active_projekts = Projekt.top_level_sidebar_current('polls')
     @top_level_archived_projekts = Projekt.top_level_sidebar_expired('polls')
+
+    @scoped_projekt_ids = (@top_level_active_projekts + @top_level_archived_projekts)
+      .map{ |p| p.all_children_projekts.unshift(p) }
+      .flatten.select do |projekt|
+        ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.polls.show_in_sidebar_filter').value.present?
+      end
+      .pluck(:id)
+
+    unless params[:search].present?
+      take_by_tag_names
+      take_by_sdgs
+      take_by_geozone_affiliations
+      take_by_polls_geozone_restrictions
+      take_by_projekts(@scoped_projekt_ids)
+    end
+
+    @polls = Kaminari.paginate_array(@resources.sort_for_list).page(params[:page])
   end
 
   def set_geo_limitations
@@ -69,10 +63,6 @@ class PollsController < ApplicationController
 
   private
 
-    def take_with_activated_projekt_only
-      @polls = @polls.joins(:projekt).merge(Projekt.activated)
-    end
-
     def remove_answers_to_open_questions_with_blank_body
       questions = @poll.questions.each do |question|
         open_question_answers_names = Poll::Question::Answer.where(question: question).select(&:open_answer).pluck(:title)
@@ -81,67 +71,11 @@ class PollsController < ApplicationController
       end
     end
 
-    def section(resource_name)
-      "polls"
-    end
+    # def section(resource_name)
+    #   "polls"
+    # end
 
     def resource_model
       Poll
     end
-
-  def take_only_by_tag_names
-    if params[:tags].present?
-      @polls = @polls.tagged_with(params[:tags].split(","), all: true, any: :true)
-    end
-  end
-
-  def take_by_projekts
-    if params[:filter_projekt_ids].present?
-      @polls = @polls.where(projekt_id: params[:filter_projekt_ids].split(',') ).distinct
-    end
-  end
-
-  def take_by_sdgs
-    if params[:sdg_targets].present?
-      @polls = @polls.joins(:sdg_global_targets).where(sdg_targets: { code: params[:sdg_targets].split(',')[0] }).distinct
-      return
-    end
-
-    if params[:sdg_goals].present?
-      @polls = @polls.joins(:sdg_goals).where(sdg_goals: { code: params[:sdg_goals].split(',') }).distinct
-    end
-  end
-
-  def take_by_geozone_affiliations
-    case @selected_geozone_affiliation
-    when 'all_resources'
-      @polls
-    when 'no_affiliation'
-      @polls = @polls.joins(:projekt).where( projekts: { geozone_affiliated: 'no_affiliation' } ).distinct
-    when 'entire_city'
-      @polls = @polls.joins(:projekt).where(projekts: { geozone_affiliated: 'entire_city' } ).distinct
-    when 'only_geozones'
-      @polls = @polls.joins(:projekt).where(projekts: { geozone_affiliated: 'only_geozones' } ).distinct
-      if @affiliated_geozones.present?
-        @polls = @polls.joins(:geozone_affiliations).where(geozones: { id: @affiliated_geozones }).distinct
-      else
-        @polls = @polls.joins(:geozone_affiliations).where.not(geozones: { id: nil }).distinct
-      end
-    end
-  end
-
-  def take_by_geozone_restrictions
-    case @selected_geozone_restriction
-    when 'no_restriction'
-      @polls = @polls
-    when 'only_citizens'
-      @polls = @polls.left_outer_joins(:geozones_polls).where("polls.geozone_restricted = ? AND geozones_polls.geozone_id IS NULL", true)
-    when 'only_geozones'
-      if @restricted_geozones.present?
-        @polls = @polls.left_outer_joins(:geozones_polls).where("polls.geozone_restricted = ? AND geozones_polls.geozone_id IN (?)", true, @restricted_geozones)
-      else
-        @polls = @polls.left_outer_joins(:geozones_polls).where("polls.geozone_restricted = ? AND geozones_polls.geozone_id IS NOT NULL", true)
-      end
-    end
-  end
 end

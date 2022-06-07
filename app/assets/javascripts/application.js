@@ -138,6 +138,7 @@
 //= require custom_pages
 //= require custom_admin
 //= require moderation_custom
+//= require copy_content
 //= require_tree ./admin
 //= require_tree ./sdg
 //= require_tree ./sdg_management
@@ -214,6 +215,7 @@ var initialize_modules = function() {
   App.CustomPages.initialize();
   App.CustomAdmin.initialize();
   App.ModerationCustom.initialize();
+  App.CopyContent.initialize();
   App.FooterPhasesComponentCustom.initialize();
   App.ProjektQuestionCustom.initialize();
   App.LivesubmitCheckboxCustom.initialize();

@@ -139,11 +139,11 @@ en:
       proposal_phase_expired: The phase is already expired.
     welcome:
       active_projekt_cards:
-        title: Active participation processes
+        title: Active projekts
       all_debates: All debates
       all_proposals: All proposals
-      archived_projekt_cards:
-        title: Completed participation processes
+      expired_projekt_cards:
+        title: Expired projekts
       current_polls: Current polls
       start_debate: Create a debate
       start_entry: + Create a post

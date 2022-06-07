@@ -16,83 +16,105 @@
   }
 }
 
-li.unselected-goal a:hover img {
+li.unselected-goal a:hover {
   opacity: 1 !important;
   filter: grayscale(0);
+
+  img {
+    opacity: 1 !important;
+    filter: grayscale(0);
+  }
 }
 
 
 li.unselected-goal {
 
-  img {
+  img, a {
     filter: grayscale(1);
   }
 
-  a[data-code='1'] img {
+  a[data-code='1'] img, 
+  a[data-code^='1.'] {
     opacity: 40%;
   }
 
-  a[data-code='2'] img {
+  a[data-code='2'] img,
+  a[data-code^='2.'] {
     opacity: 85%;
   }
 
-  a[data-code='3'] img {
+  a[data-code='3'] img,
+  a[data-code^='3.'] {
     opacity: 60%;
   }
 
-  a[data-code='4'] img {
+  a[data-code='4'] img,
+  a[data-code^='4.'] {
     opacity: 40%;
   }
 
-  a[data-code='5'] img {
+  a[data-code='5'] img,
+  a[data-code^='5.'] {
     opacity: 50%;
   }
 
-  a[data-code='6'] img {
+  a[data-code='6'] img,
+  a[data-code^='6.'] {
     opacity: 70%;
   }
 
-  a[data-code='7'] img {
+  a[data-code='7'] img,
+  a[data-code^='7.'] {
     opacity: 100%;
   }
 
-  a[data-code='8'] img {
+  a[data-code='8'] img,
+  a[data-code^='8.'] {
     opacity: 35%;
   }
 
-  a[data-code='9'] img {
+  a[data-code='9'] img,
+  a[data-code^='9.'] {
     opacity: 60%;
   }
 
-  a[data-code='10'] img {
+  a[data-code='10'] img,
+  a[data-code^='10.'] {
     opacity: 40%;
   }
 
-  a[data-code='11'] img {
+  a[data-code='11'] img,
+  a[data-code^='11.'] {
     opacity: 80%;
   }
 
-  a[data-code='12'] img {
+  a[data-code='12'] img,
+  a[data-code^='12.'] {
     opacity: 60%;
   }
 
-  a[data-code='13'] img {
+  a[data-code='13'] img,
+  a[data-code^='13.'] {
     opacity: 50%;
   }
 
-  a[data-code='14'] img {
+  a[data-code='14'] img,
+  a[data-code^='14.'] {
     opacity: 50%;
   }
 
-  a[data-code='15'] img {
+  a[data-code='15'] img,
+  a[data-code^='15.'] {
     opacity: 70%;
   }
 
-  a[data-code='16'] img {
+  a[data-code='16'] img,
+  a[data-code^='16.'] {
     opacity: 40%;
   }
 
-  a[data-code='17'] img {
+  a[data-code='17'] img,
+  a[data-code^='17.'] {
     opacity: 35%;
   }
 }

@@ -35,6 +35,16 @@
       $(".js-projekt-question-section").addClass("show-loader");
     },
 
+    handleCheckboxClick: function(e) {
+      var $elementForm = $(e.currentTarget).closest('form')
+      var isLogined = $elementForm.attr('data-logined')
+      var redirectTo = $elementForm.attr('data-redirect-to')
+
+      if (isLogined === 'false') {
+        Turbolinks.visit(redirectTo)
+      }
+    },
+
     initialize: function() {
       $("body").on("click", ".js-projekt-question-next", function(e) {
         e.preventDefault()
@@ -42,8 +52,8 @@
         this.loadQuestionSection(e.currentTarget.href)
       }.bind(this));
 
-      $('body').on('change', '.js-project-question-list form input', this.debounce(this.submitForm.bind(this), 500))
-      $('body').on('click', 'js-projekt-question-switch', this.loadQuestionSection.bind(this))
+      $('body').on('change', '.js-projekt-answer-form input', this.debounce(this.submitForm.bind(this), 500))
+      $('body').on('click', '.js-projekt-answer-form label', this.handleCheckboxClick.bind(this))
     }
   }
 }).call(this);

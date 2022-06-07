@@ -58,7 +58,7 @@
       <legend><%= t('custom.admin.budgets.edit.info.projekt_association') %></legend>
 
       <div class="small-12 medium-6 large-6 column end">
-        <%= f.select :projekt_id, Projekt.top_level.map{ |x| x.all_children_projekts.unshift(x) }.flatten.select{ |p| p.current? && p.budget.blank? }.collect {|p| [ p.name, p.id ] }, prompt: 'Select projekt' %>
+        <%= f.select :projekt_id, Projekt.top_level.map{ |x| x.all_children_projekts.unshift(x) }.flatten.select{ |p| p.budget.blank? }.collect {|p| [ p.name, p.id ] }, prompt: 'Select projekt' %>
       </div>
     </fieldset>
   <% end %>

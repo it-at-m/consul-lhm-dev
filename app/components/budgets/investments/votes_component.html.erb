@@ -19,14 +19,20 @@
           <% end %>
         </div>
       <% else %>
-        <%= button_to t("budgets.investments.votes.support"), support_path,
-            class: "button button-support expanded",
-            title: t("budgets.investments.investment.support_title"),
-            method: "post",
-            remote: !display_support_alert?,
-            data:   ({ confirm: confirm_vote_message } if display_support_alert?),
-            disabled: !current_user,
-            "aria-label": support_aria_label %>
+        <% if !current_user %>
+          <div class="button button-support small expanded">
+            <%= t("budgets.investments.votes.support") %>
+          </div>
+        <% else %>
+          <%= button_to t("budgets.investments.votes.support"), support_path,
+              class: "button button-support expanded",
+              title: t("budgets.investments.investment.support_title"),
+              method: "post",
+              remote: !display_support_alert?,
+              data:   ({ confirm: confirm_vote_message } if display_support_alert?),
+              disabled: !current_user,
+              "aria-label": support_aria_label %>
+        <% end %>
       <% end %>
     <% end %>
   </div>

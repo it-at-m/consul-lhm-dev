@@ -29,7 +29,7 @@ class Legislation::AnnotationsController < Legislation::BaseController
   end
 
   def create
-    if !@process.allegations_phase.open? || @draft_version.final_version?
+    if !@process.draft_phase.open? || @draft_version.final_version?
       render(json: {}, status: :not_found) && return
     end
 

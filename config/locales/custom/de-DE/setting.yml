@@ -105,6 +105,8 @@ de:
         second_level_projekts_in_active_filter_description: Zeigt eine zweite Ebene im Projektfilter für aktive Projekte standardmäßig an
         second_level_projekts_in_archived_filter: Zweite Ebene für archivierte Projekte anzeigen
         second_level_projekts_in_archived_filter_description: Zeigt eine zweite Ebene im Projektfilter für archivierte Projekte standardmäßig an
+        set_default_sorting_to_newest: Standardsortierung auf "Neueste" unstellen
+        set_default_sorting_to_newest_description: Zeigt standardmäßig die neuesten Beiträge anstatt der aktivsten Beiträge an
 
       projekt_feature:
         main:
@@ -113,14 +115,20 @@ de:
         general:
           show_in_navigation: Projekt in Navigation hervorheben
           show_in_navigation_description: Zeigt das Projekt in der Top-Navigation der Webseite an (nur für Top-Level-Projekte)
-          show_in_overview_page: Projekt in Projektübersichtsseite anzeigen
-          show_in_overview_page_description: Zeigt das Projekt in der Projektübersichtsseite an
+          show_in_overview_page: Projekt in Übersichtsseite und auf Homepage anzeigen
+          show_in_overview_page_description: Zeigt das Projekt in der Projektübersichtsseite und auf der Homepage an
           hide_additional_info_in_projekt_selector: Zusätzliche Projektinformationen im Projekt-Selektor ausblenden
           hide_additional_info_in_projekt_selector_description: Verbirgt die zusätzlichen Projektinformationen wie Gebiet, Dauer und Partizipationsberechtigung im Projekt-Selektor
           show_not_active_phases_in_projekts_page_sidebar: Nicht aktive Teilnahmephasen verbergen
           show_not_active_phases_in_projekts_page_sidebar_description: Verbirgt die Teilnahmephasen in der rechten Seitenleiste der Projektseite und in der Projektauswahl
           allow_downvoting_comments: Downvotes in Kommentaren aktivieren
           allow_downvoting_comments_description: Aktivieren Sie den "Daumen nach unten"-Button in den Kommentaren
+          enable_tags: Tags aktivieren
+          enable_tags_description: Aktivieren Sie Tags für dieses Projekt
+          enable_sdgs: SDGs aktivieren
+          enable_sdgs_description: Aktivieren Sie die UN-Nachhaltigkeitsziele für dieses Projekt
+          set_default_sorting_to_newest: Standardsortierung auf 'Neueste' umstellen
+          set_default_sorting_to_newest_description: Zeigt standardmäßig die neuesten Beiträge anstatt der aktivsten Beiträge an
         sidebar:
           show_phases_in_projekt_page_sidebar: Projektphasen
           show_phases_in_projekt_page_sidebar_description: Aktivieren Sie die Projektphasen in der rechten Seitenleiste der Projektseite

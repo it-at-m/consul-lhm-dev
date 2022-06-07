@@ -30,6 +30,43 @@
           aria: { hidden: "true" }
          %>
     </li>
-  </ul>
 
+    <% projekts_with_accepting_budgets = Projekt.joins(:budget).where( budgets: { phase: 'accepting'} ).order(:level).order(:order_number) %>
+
+    <% if projekts_with_accepting_budgets.any? %>
+      <li class="nav-element flyout-item js-access-flyout-menu-item focusable"
+        <%= "tabindex=0" if placement == 'desktop'  %>
+          aria-label='<%= t('custom.links.menu.new_entries.new_budget_investment') %>'>
+        <div class='projekt-name'>
+          <%= t('custom.links.menu.new_entries.new_budget_investment') %>
+        </div>
+
+        <% if placement == 'mobile' %>
+          <div class='nav-toggle-arrow js-toggle-mobile-flyout-item focusable'
+               tabindex="0"
+               aria-expanded=false >
+          </div>
+        <% end %>
+
+        <ul class="nav-flyout-block">
+          <% projekts_with_accepting_budgets.each do |projekt| %>
+
+            <li class='nav-element flyout-item js-access-flyout-menu-item focusable'
+              <%= "tabindex=0" if placement == "desktop" %> 
+                aria-label="<%= t('custom.links.menu.projekt_name_label', projekt_name: projekt.name) %>" >
+              <div class='projekt-name-group'>
+                <div class='flyout-item-name projekt-name'>
+                  <%= link_to projekt.page.title, new_budget_investment_path(projekt.budget, origin: url_for),
+                      tabindex: (placement == 'desktop' ? "-1" : "0"),
+                      aria: { hidden: placement == 'desktop' } %>
+                </div>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+
+      </li>
+    <% end %>
+
+  </ul>
 </li>

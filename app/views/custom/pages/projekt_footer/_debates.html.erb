@@ -5,7 +5,14 @@
     <aside class="margin-bottom">
       <%= render Debates::NewButtonComponent.new(@current_projekt, @current_tab_phase) %>
 
-      <%= render Sidebar::ProjektsFilterComponent.new(@top_level_active_projekts, @top_level_archived_projekts, @debates.except(:limit, :offset), @current_tab_phase, @current_projekt) %>
+      <%= render Sidebar::ProjektsFilterComponent.new(
+        top_level_active_projekts: @top_level_active_projekts,
+        top_level_archived_projekts: @top_level_archived_projekts,
+        scoped_projekt_ids: @scoped_projekt_ids,
+        all_resources: @all_resources,
+        current_tab_phase: @current_tab_phase,
+        current_projekt: @current_projekt
+      ) %>
     </aside>
   </div>
 
@@ -22,8 +29,8 @@
       <div class='small-6 column small'>
         <% if extended_feature?('modulewide.show_number_of_entries_in_modules') %>
           <div class='float-right'>
-            <%= @debates.except(:limit, :offset).count %>
-            <%= t('activerecord.models.debate', count: @debates.except(:limit, :offset).count) %>
+            <%= @resources.count %>
+            <%= t('activerecord.models.debate', count: @resources.count) %>
           </div>
         <% end %>
       </div>

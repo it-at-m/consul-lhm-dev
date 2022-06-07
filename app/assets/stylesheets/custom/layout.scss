@@ -169,19 +169,59 @@ ul.tabs li.tabs-title {
   margin-bottom: 0;
 }
 
+  .account-buttons {
+    font-size: 0.85rem;
+    font-weight: bold;
+  }
+
+.header-right-group,
+#responsive-menu {
+  .sign-in-button,
+  .sign-up-button {
+    display: inline-block;
+    border-radius: 2px;
+    padding: 0.25rem 2em;
+    margin-right: 0.5rem;
+
+    background-color: #F4F4F4;
+    color: $dark;
+  }
+
+  .sign-in-button {
+    color: $brand !important;
+  }
+
+  .sign-up-button {
+    margin-right: 1rem;
+    background-color: $brand;
+    color: $white !important;
+    border: 1px solid $white;
+  }
+}
+
 .header-right-group {
   .account-buttons {
     display: flex;
     flex-direction: column;
+    margin-right: 15px;
   }
 
-   .sign-in-button, .sign-up-button {
-     text-align: center;
-     margin-right: 0;
-     margin-bottom: 5px;
-     padding: 0.25rem 2.2em;
-   }
+  .sign-in-button, .sign-up-button {
+    text-align: center;
+    margin-right: 0;
+    margin-bottom: 5px;
+    padding: 0.25rem 2.2em;
+  }
 }
+
+#responsive-menu {
+  .account-buttons {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
 
 .resource-n .resource-details .resource-summary a {
   color: #222;

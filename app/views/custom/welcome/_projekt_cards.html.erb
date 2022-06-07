@@ -1,0 +1,7 @@
+<h3 class="title card-title"><%= section_title %></h3>
+
+<div class="row">
+  <% projekts.each do |projekt| %>
+    <%= render "projekt_card", projekt: projekt %>
+  <% end %>
+</div>

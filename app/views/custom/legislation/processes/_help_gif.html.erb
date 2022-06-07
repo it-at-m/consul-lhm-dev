@@ -1,0 +1,17 @@
+<button type="button" class="button hollow projekt-text-hint-button" data-toggle="annotator-help">
+  <sub><span class="icon-edit"></span></sub>&nbsp;
+  <%= t("annotator.help.title") %>
+</button>
+
+<div class="dropdown-pane projekt-annotate-help-hint" id="annotator-help" data-dropdown data-auto-focus="true">
+  <% if user_signed_in? %>
+    <%= t("annotator.help.alt") %>
+  <% else %>
+    <p>
+    <%= sanitize(t("annotator.help.text",
+                   sign_in: link_to_signin, sign_up: link_to_signup)) %>
+    </p>
+  <% end %>
+
+  <%= video_tag "annotator_help.mp4", alt: t("annotator.help.alt"), autoplay: true, loop: true, width: 500 %>
+</div>

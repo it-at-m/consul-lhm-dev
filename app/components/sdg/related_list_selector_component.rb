@@ -39,7 +39,7 @@ class SDG::RelatedListSelectorComponent < ApplicationComponent
       goal = checkbox_form.object
 
       checkbox_form.check_box(data: { code: goal.code }) +
-        checkbox_form.label { render(SDG::Goals::IconComponent.new(goal)) }
+        checkbox_form.label(data: { 'sdg-goal-id': goal.id }) { render(SDG::Goals::IconComponent.new(goal)) }
     end
 
     def text_for(goal_or_target)

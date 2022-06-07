@@ -1,6 +1,18 @@
 <% @latest_items.each do |resource| %>
-  <%= render resource %>
+  <% if resource.is_a?(Budget::Investment) %>
+    <% budget = resource.budget %>
+    <% query = Budget::Ballot.where(user: current_user, budget: budget) %>
+    <% ballot = budget.balloting? ? query.first_or_create! : query.first_or_initialize %>
+
+		<%= render "/budgets/investments/investment",
+							 investment: resource,
+							 investment_ids: budget.investments.ids,
+               ballot: budget.balloting? ? query.first_or_create! : query.first_or_initialize %>
+  <% else %>
+		<%= render resource %>
+  <% end %>
 <% end %>
+
 
 <div class='links-entries margin-bottom clearfix'>
   <%= link_to t('custom.welcome.all_proposals'), proposals_path, class: 'float-right'  %>

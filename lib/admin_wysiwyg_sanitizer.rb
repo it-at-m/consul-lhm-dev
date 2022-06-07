@@ -3,6 +3,7 @@ class AdminWYSIWYGSanitizer < WYSIWYGSanitizer
     super + %w[
       h1 iframe object param embed
       i input label form button figure figcaption nav
+      section
     ]
   end
 
@@ -19,7 +20,7 @@ class AdminWYSIWYGSanitizer < WYSIWYGSanitizer
       data-deep-link data-update-history
       data-animation-duration data-animation-easing data-threshold data-active-class data-deep-linking data-update-history data-offset
       data-drilldown
-      data-accordion data-accordion-item data-tab-content
+      data-accordion data-accordion-item data-tab-content data-allow-all-closed
       data-accordion-menu
       data-dropdown data-auto-focus placeholder
       data-reveal data-open data-close
@@ -31,6 +32,7 @@ class AdminWYSIWYGSanitizer < WYSIWYGSanitizer
       data-anim-in-from-left data-anim-in-from-right data-anim-out-to-left data-anim-out-to-right
       data-options
       data-equalizer data-equalizer-watch data-equalize-on
+      data-target
     ]
   end
 end

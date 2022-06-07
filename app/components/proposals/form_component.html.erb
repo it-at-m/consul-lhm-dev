@@ -4,7 +4,7 @@
   <fieldset class="required-fields">
     <legend><%= t("custom.shared.form.projekt_assignment") %></legend>
     <div class="margin-top">
-      <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: @proposal }  %>
+      <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: @proposal, projekts: Projekt.top_level }  %>
     </div>
 
     <legend class='margin-top'><%= t("custom.proposals.form.required") %></legend>
@@ -71,28 +71,20 @@
 
     <div>
 
-      <%if extended_feature?("modulewide.enable_categories") && categories.any? %>
+      <%if categories.any? %>
         <div id="category_tags" class="tags">
           <%= f.label :category_tag_list, t("proposals.form.tag_category_label") %>
           <% categories.each do |tag| %>
-            <a class="js-add-tag-link"><%= tag.name %></a>
+            <a class="js-add-tag-link" data-category-id="<%= tag.id %>"><%= tag.name %></a>
           <% end %>
         </div>
         <br>
       <%=f.hidden_field :tag_list_predefined, value: proposal.tags.reject{|t| !['category'].include?(t.kind)}.map(&:name).join(","), class: "js-tag-list list-tags predefined"%>
       <%end%>
-
-      <%if extended_feature?("modulewide.enable_custom_tags") %>
-        <%= f.text_field :tag_list_custom, value: proposal.tag_list.to_s,
-                          label: t("custom.proposals.form.tags_custom"),
-                          placeholder: t("custom.proposals.form.tags_placeholder"),
-                          class: "js-tag-list tag-autocomplete",
-                          aria: { describedby: "tag-list-help-text" },
-                          data: { js_url: suggest_tags_path } %>
-      <% end %>
     </div>
 
-    <div class='row'>
+    <div id="sdgs-selector" class='row margin-top'>
+      <br>
       <%= render SDG::RelatedListSelectorComponent.new(f) %>
     </div>
   </fieldset>
@@ -111,7 +103,9 @@
       </div>
     <% end %>
 
-    <%= f.submit t("custom.proposals.form.buttons.save_draft"), class: 'button', name: 'save_draft' %>
+    <% unless proposal.published? %>
+      <%= f.submit t("custom.proposals.form.buttons.save_draft"), class: 'button', name: 'save_draft' %>
+    <% end %>
     <%= f.submit t("custom.proposals.form.buttons.publish"),    class: "button" %>
   </div>
 <% end %>

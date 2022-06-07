@@ -1,34 +1,35 @@
 class Sidebar::ProjektsFilterCheckboxComponent < ApplicationComponent
   delegate :projekt_filter_resources_name, to: :helpers
+  attr_reader :f, :projekt
 
-  def initialize(f, projekt, group, all_resources, current_projekt=nil)
+  def initialize(
+    f:,
+    projekt:,
+    scoped_projekt_ids:,
+    group:,
+    all_resources:,
+    current_projekt: nil
+  )
     @f = f
     @projekt = projekt
-    @current_projekt = current_projekt
+    @scoped_projekt_ids = scoped_projekt_ids
     @group = group
     @all_resources = all_resources
+    @current_projekt = current_projekt
   end
 
 	private
 
-  def f
-    @f
-  end
-
-  def projekt
-    @projekt
-  end
-
   def resource_count
-    @all_resources.where(projekt: projekt.selectable_tree_ids(projekt_filter_resources_name, @group)).count
+    projekt_ids_to_count = projekt.all_children_projekts.unshift(projekt).select do |projekt|
+      (projekt.all_children_ids.unshift(projekt.id) & @scoped_projekt_ids).any?
+    end
+
+    @all_resources.where( projekt: projekt_ids_to_count ).count
   end
 
   def selectable_children
-    if @group == 'active'
-      @projekt.children.with_order_number.selectable_in_sidebar_current(projekt_filter_resources_name)
-    elsif @group == 'archived'
-      @projekt.children.with_order_number.selectable_in_sidebar_expired(projekt_filter_resources_name)
-    end
+    projekt.children.select{ |projekt| ( projekt.all_children_ids.unshift(projekt.id) & @scoped_projekt_ids ).any? }
   end
 
   def label_class

@@ -51,10 +51,13 @@ class Setting < ApplicationRecord
         "feature.sdg": false,
         "feature.machine_learning": false,
         # "feature.remove_investments_supports": false,
+        "homepage.widgets.feeds.active_projekts": true,
         "homepage.widgets.feeds.polls": true,
         "homepage.widgets.feeds.debates": true,
         "homepage.widgets.feeds.processes": false,
         "homepage.widgets.feeds.proposals": true,
+        "homepage.widgets.feeds.expired_projekts": true,
+        "homepage.widgets.feeds.investment_proposals": true,
         # Code to be included at the top (inside <body>) of every page
         "html.per_page_code_body": "",
         # Code to be included at the top (inside <head>) of every page (useful for tracking)
@@ -153,6 +156,8 @@ class Setting < ApplicationRecord
         "projekts.show_module_links_in_flyout_menu": true,
         "projekts.second_level_projekts_in_active_filter": false,
         "projekts.second_level_projekts_in_archived_filter": false,
+        "projekts.set_default_sorting_to_newest": false,
+
         "deficiency_reports.show_in_main_menu": false,
         "deficiency_reports.admins_must_assign_officer": false,
         "deficiency_reports.admins_must_approve_officer_answer": false,

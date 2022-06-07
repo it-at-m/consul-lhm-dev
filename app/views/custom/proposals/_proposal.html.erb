@@ -11,6 +11,7 @@
           proposal.successful?,
           proposal.custom_votes_needed_for_success,
           proposal_settings_fingerprints,
+          projekt_feature?(proposal&.projekt, 'proposals.quorum_for_proposals'),
           params[:tags],
           params[:projekts],
           params[:geozone_affiliation],
@@ -54,7 +55,7 @@
               <div class="truncate"></div>
             <% end %>
           </div>
-          <% #render "shared/tags", taggable: proposal, limit: 5 %>
+          <%= render "shared/tags", taggable: proposal, limit: 5 %>
 
         </div>
         <div class='column small-12 medium-6 large-4 resource-participate table' data-equalizer-watch='details'>

@@ -11,14 +11,7 @@
   <div class='content'>
     <h4 class="projekt-title"><%= projekt.page.title %></h4>
     <p><%= projekt.description %></p>
-    <div class="projekt-item-tag-list">
-      <% projekt.tags.each do |tag| %>
-        <div class="projekt-item-tag">
-          <%= tag.name %>
-        </div>
-      <% end %>
-    </div>
-    <%= render SDG::TagListComponent.new(projekt, limit: 3) %>
+    <%= render "shared/tags", taggable: projekt, limit: 5 %>
   </div>
 
   <div class='projekt-link'>

@@ -1,6 +1,6 @@
 <div class="map proposals-map not-print">
   <% if @selected_parent_projekt %>
-    <%= render_map(@selected_parent_projekt.map_location, "proposals", false, nil, @proposals_coordinates, @selected_parent_projekt.map_layers.to_json) %>
+    <%= render_map(@selected_parent_projekt.map_location, "proposals", false, nil, @proposals_coordinates, @selected_parent_projekt.map_layers_for_render.to_json) %>
   <% else %>
     <%= render_map(nil, "proposals", false, nil, @proposals_coordinates, MapLayer.general.to_json) %>
   <% end %>

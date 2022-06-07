@@ -16,6 +16,11 @@ class Budgets::Investments::NewComponent < ApplicationComponent
         tag.span(class: "icon-angle-left") + t("shared.back")
       end
 
+    elsif params[:origin].present?
+      link_to params[:origin], class: "back" do
+        tag.span(class: "icon-angle-left") + t("shared.back")
+      end
+
     else
       back_link_to budgets_path
 

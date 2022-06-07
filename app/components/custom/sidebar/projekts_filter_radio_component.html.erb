@@ -18,6 +18,11 @@
   </li>
 
   <% selectable_children.each do |projekt| %>
-    <%= render Sidebar::ProjektsFilterRadioComponent.new(f, projekt, @group, @all_resources) %>
+    <%= render Sidebar::ProjektsFilterRadioComponent.new(
+      f: f,
+      projekt: projekt,
+      group: @group,
+      all_resources: @all_resources
+    ) %>
   <% end %>
 </ul>

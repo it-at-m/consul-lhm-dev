@@ -21,14 +21,12 @@ module LinkListHelper
   end
 
   def highlight_sdg_chip(goal_code)
-    if goal_code.class.name == "Integer"
-      return  @filtered_goals.nil? || @filtered_goals.include?(goal_code)
-    end
-
     if goal_code.class.name == "String"
-      return (@filtered_goals.nil? && @filtered_target.nil?) ||
+      ( @filtered_goals.nil? && @filtered_target.nil? ) ||
         @filtered_target == goal_code ||
         @filtered_goals.include?(goal_code.split('.')[0].to_i)
+    elsif goal_code.class.name == "Integer"
+      @filtered_goals.nil? || @filtered_goals.include?(goal_code)
     end
   end
 end

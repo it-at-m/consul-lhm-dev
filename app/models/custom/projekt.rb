@@ -17,6 +17,7 @@ class Projekt < ApplicationRecord
   has_many :debates, dependent: :nullify
   has_many :proposals, dependent: :nullify
   has_many :polls, dependent: :nullify
+  has_many :legislation_processes, dependent: :nullify, class_name: "Legislation::Process"
   has_one :budget, dependent: :nullify
   has_many :projekt_events, dependent: :nullify
   has_many :questions, -> { order(:id) },
@@ -36,10 +37,13 @@ class Projekt < ApplicationRecord
   has_one :projekt_notification_phase, class_name: 'ProjektPhase::ProjektNotificationPhase'
   has_one :newsfeed_phase, class_name: 'ProjektPhase::NewsfeedPhase'
   has_one :event_phase, class_name: 'ProjektPhase::EventPhase'
+  has_one :legislation_process_phase, class_name: 'ProjektPhase::LegislationProcessPhase'
   has_one :question_phase, class_name: 'ProjektPhase::QuestionPhase'
   has_many :geozone_restrictions, through: :projekt_phases
   has_and_belongs_to_many :geozone_affiliations, through: :geozones_projekts, class_name: 'Geozone'
   has_one :map_location, dependent: :destroy
+
+  has_one :legislation_process, class_name: 'Legislation::Process'
 
   has_many :projekt_settings, dependent: :destroy
   has_many :projekt_notifications, dependent: :destroy
@@ -49,7 +53,11 @@ class Projekt < ApplicationRecord
 
   has_many :map_layers
 
-  accepts_nested_attributes_for :debate_phase, :proposal_phase, :budget_phase, :voting_phase, :comment_phase, :milestone_phase, :projekt_notifications, :projekt_events, :event_phase, :question_phase
+  accepts_nested_attributes_for(
+    :debate_phase, :proposal_phase, :budget_phase,
+    :voting_phase, :comment_phase, :milestone_phase, :projekt_notifications,
+    :projekt_events, :event_phase, :question_phase, :legislation_process_phase
+  )
 
   before_validation :set_default_color
   around_update :update_page
@@ -72,38 +80,36 @@ class Projekt < ApplicationRecord
                                                where( "total_duration_start IS NULL OR total_duration_start <= ?", Date.today ).
                                                where( "total_duration_end IS NULL OR total_duration_end >= ?", Date.today) }
 
-  scope :active, -> {
-    current
-      .includes(:projekt_phases)
-      .select { |p| p.projekt_phases.any? { |phase| phase.current? }}
-  }
+  scope :expired, ->(timestamp = Date.today) { activated.
+                                               where( "total_duration_end < ?", Date.today) }
 
-  scope :ongoing, -> {
-    current
-      .includes(:projekt_phases)
-      .select { |p| p.projekt_phases.all? { |phase| !phase.current? }}
-  }
+  scope :upcoming, ->(timestamp = Date.today) { activated.
+                                                where( "total_duration_start > ?", Date.today) }
 
-  scope :upcoming, -> {
-    activated
-      .where( "total_duration_start > ?", Date.today)
-  }
+  scope :underway, ->() { current.
+                          includes(:projekt_phases).
+                          select { |p| p.projekt_phases.any? { |phase| phase.current? }} }
 
-  scope :expired, ->(timestamp = Date.today) {
-    activated
-      .where( "total_duration_end < ?", Date.today)
-  }
+  scope :ongoing, ->() { current.
+                         includes(:projekt_phases).
+                         select { |p| p.projekt_phases.all? { |phase| !phase.current? }} }
+
+  scope :show_in_overview_page, -> { joins( 'INNER JOIN projekt_settings siop ON projekts.id = siop.projekt_id' ).
+                                     where( 'siop.key': 'projekt_feature.general.show_in_overview_page', 'siop.value': 'active' ) }
 
   scope :visible_in_menu, -> { joins( 'INNER JOIN projekt_settings vim ON projekts.id = vim.projekt_id').
                                where( 'vim.key': 'projekt_feature.general.show_in_navigation', 'vim.value': 'active' ) }
+
+  scope :visible_in_sidebar, ->(resources_name) { joins( 'INNER JOIN projekt_settings spism ON projekts.id = spism.projekt_id' ).
+                                                  where( 'spism.key': "projekt_feature.#{resources_name}.show_in_sidebar_filter", 'spism.value': 'active' ) }
 
   scope :with_active_feature, ->(projekt_feature_key) { joins( 'INNER JOIN projekt_settings waf ON projekts.id = waf.projekt_id').
                                                         where( 'waf.key': "projekt_feature.#{projekt_feature_key}", 'waf.value': 'active' ) }
 
   scope :top_level_navigation, -> { top_level.visible_in_menu }
 
-  scope :top_level_sidebar_current, ->(controller_name) { top_level.selectable_in_sidebar_current(controller_name) }
-  scope :top_level_sidebar_expired, ->(controller_name) { top_level.selectable_in_sidebar_expired(controller_name) }
+  scope :top_level_sidebar_current, ->(controller_name) { top_level.visible_in_sidebar(controller_name).current }
+  scope :top_level_sidebar_expired, ->(controller_name) { top_level.visible_in_sidebar(controller_name).expired }
 
   scope :by_my_posts, -> (my_posts_switch, current_user_id) {
     return unless my_posts_switch
@@ -113,20 +119,8 @@ class Projekt < ApplicationRecord
 
   scope :last_week, -> { where("projekts.created_at >= ?", 7.days.ago) }
 
-  class << self
-    def selectable_in_selector(controller_name, current_user)
-      select { |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.selectable?(controller_name, current_user) } }
-    end
-
-    def selectable_in_sidebar_current(controller_name)
-      return [] unless controller_name.in?(['proposals', 'debates', 'polls'])
-      select { |projekt| projekt.current? && projekt.all_children_projekts.unshift(projekt).any? { |p| p.projekt_settings.find_by(key: "projekt_feature.#{controller_name}.show_in_sidebar_filter").value.present? } }
-    end
-
-    def selectable_in_sidebar_expired(controller_name)
-      return [] unless controller_name.in?(['proposals', 'debates', 'polls'])
-      select { |projekt| projekt.expired? && projekt.all_children_projekts.unshift(projekt).any? { |p| p.projekt_settings.find_by(key: "projekt_feature.#{controller_name}.show_in_sidebar_filter").value.present? } }
-    end
+  def self.selectable_in_selector(controller_name, current_user)
+    select { |projekt| projekt.all_children_projekts.unshift(projekt).any? { |p| p.selectable?(controller_name, current_user) } }
   end
 
   def regular_projekt_phases
@@ -149,6 +143,9 @@ class Projekt < ApplicationRecord
     elsif controller_name == 'debates'
       return false if debates_selectable_by_admins_only? && user.administrator.blank?
       debate_phase.selectable_by?(user)
+    elsif controller_name == 'processes'
+      # return false if proposals_selectable_by_admins_only? && user.administrator.blank?
+      legislation_process_phase.selectable_by?(user)
     end
   end
 
@@ -245,14 +242,6 @@ class Projekt < ApplicationRecord
     all_children_projekts
   end
 
-  def selectable_tree_ids(controller_name, filter)
-    if filter == 'active'
-      all_children_projekts.unshift(self) & Projekt.selectable_in_sidebar_current(controller_name)
-    else
-      all_children_projekts.unshift(self) & Projekt.selectable_in_sidebar_expired(controller_name)
-    end
-  end
-
   def has_active_phase?(controller_name)
     case controller_name
     when 'proposals'
@@ -317,6 +306,7 @@ class Projekt < ApplicationRecord
       projekt.projekt_notification_phase = ProjektPhase::ProjektNotificationPhase.create unless projekt.projekt_notification_phase
       projekt.newsfeed_phase = ProjektPhase::NewsfeedPhase.create unless projekt.newsfeed_phase
       projekt.event_phase = ProjektPhase::EventPhase.create unless projekt.event_phase
+      projekt.legislation_process_phase = ProjektPhase::LegislationProcessPhase.create unless projekt.legislation_process_phase
     end
   end
 
@@ -336,6 +326,13 @@ class Projekt < ApplicationRecord
 
   def projekt_list_enabled?
     ProjektSetting.find_by(projekt: self, key: 'projekt_feature.questions.show_questions_list')&.enabled?
+  end
+
+  def map_layers_for_render
+    unless map_layers.any?{ |layer| layer.base? }
+      return map_layers.or(MapLayer.where(projekt: nil, base: true))
+    end
+    map_layers
   end
 
   private
@@ -391,6 +388,7 @@ class Projekt < ApplicationRecord
     self.projekt_notification_phase = ProjektPhase::ProjektNotificationPhase.create
     self.newsfeed_phase = ProjektPhase::NewsfeedPhase.create
     self.event_phase = ProjektPhase::EventPhase.create
+    self.legislation_process_phase = ProjektPhase::LegislationProcessPhase.create
   end
 
   def swap_order_numbers_up

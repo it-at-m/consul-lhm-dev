@@ -1,0 +1,6 @@
+<div class="sidebar-divider"></div>
+<h2 class="sidebar-title"><%= t('custom.projekts.sidebar.sgds') %></h2>
+
+<% if projekt.sdg_goals.any? %>
+  <%= render SDG::TagListComponent.new(projekt) %>
+<% end %>

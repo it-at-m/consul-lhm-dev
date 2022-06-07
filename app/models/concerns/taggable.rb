@@ -10,7 +10,8 @@ module Taggable
     if Tag.machine_learning? && (is_a?(Proposal) || is_a?(Budget::Investment))
       ml_tags
     else
-      tags
+      # tags - take only categories
+      tags.category
     end
   end
 

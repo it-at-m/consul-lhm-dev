@@ -18,9 +18,21 @@
           <div id='filter-projekts-active'>
             <% @top_level_active_projekts.each do |projekt| %>
               <% if @current_tab_phase&.name == 'budget_phase' %>
-                <%= render Sidebar::ProjektsFilterRadioComponent.new(f, projekt, 'active', @all_resources) %>
+                <%= render Sidebar::ProjektsFilterRadioComponent.new(
+                  f: f,
+                  projekt: projekt,
+                  group: 'active',
+                  all_resources: @all_resources
+                ) %>
               <% else %>
-                <%= render Sidebar::ProjektsFilterCheckboxComponent.new(f, projekt, 'active', @all_resources, @current_projekt) %>
+                <%= render Sidebar::ProjektsFilterCheckboxComponent.new(
+                  f: f,
+                  projekt: projekt,
+                  scoped_projekt_ids: @scoped_projekt_ids,
+                  group: 'active',
+                  all_resources: @all_resources,
+                  current_projekt: @current_projekt
+                ) %>
               <% end %>
             <% end %>
           </div>
@@ -37,7 +49,14 @@
               <% if @current_tab_phase&.name == 'budget_phase' %>
                 <%= render Sidebar::ProjektsFilteRadioComponent.new(f, projekt, 'archived', @all_resources) %>
               <% else %>
-                <%= render Sidebar::ProjektsFilterCheckboxComponent.new(f, projekt, 'archived', @all_resources, @current_projekt) %>
+                <%= render Sidebar::ProjektsFilterCheckboxComponent.new(
+                  f: f,
+                  projekt: projekt,
+                  scoped_projekt_ids: @scoped_projekt_ids,
+                  group: 'archived',
+                  all_resources: @all_resources,
+                  current_projekt: @current_projekt
+                ) %>
               <% end %>
             <% end %>
           </div>

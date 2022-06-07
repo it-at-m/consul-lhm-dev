@@ -6,7 +6,7 @@
 
   <div class="comments-wrapper">
     <div class="comment-input">
-      <% if !@process.allegations_phase.open? %>
+      <% if !@process.draft_phase.open? %>
         <div data-alert class="callout primary">
           <%= t("legislation.annotations.form.phase_not_open") %>
         </div>

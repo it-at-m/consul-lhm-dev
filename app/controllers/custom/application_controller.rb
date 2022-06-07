@@ -3,7 +3,7 @@ require_dependency Rails.root.join("app", "controllers", "application_controller
 
 class ApplicationController < ActionController::Base
 
-  before_action :set_top_level_projekts_for_menu, :set_default_social_media_images
+  before_action :set_top_level_projekts_for_menu, :set_default_social_media_images, :set_partner_emails
 
   private
 
@@ -33,5 +33,10 @@ class ApplicationController < ActionController::Base
 
   def set_projekts_for_selector
     @projekts = Projekt.top_level
+  end
+
+  def set_partner_emails
+    filename = File.join(Rails.root, 'config', 'secret_emails.yml')
+    @partner_emails = File.exist?(filename) ? File.readlines(filename).map(&:chomp) : []
   end
 end

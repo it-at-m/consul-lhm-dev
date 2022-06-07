@@ -1,6 +1,6 @@
 class ProjektsController < ApplicationController
   skip_authorization_check
-  has_orders %w[active all ongoing upcoming expired], only: :index
+  has_orders %w[underway all ongoing upcoming expired], only: :index
 
   before_action do
     raise FeatureFlags::FeatureDisabled, :projekts_overview unless Setting['projekts.overview_page']
@@ -12,10 +12,7 @@ class ProjektsController < ApplicationController
     @filtered_goals = params[:sdg_goals].present? ? params[:sdg_goals].split(',').map{ |code| code.to_i } : nil
     @filtered_targets = params[:sdg_targets].present? ? params[:sdg_targets].split(',')[0] : nil
 
-    @projekts =
-      Projekt
-        .joins( 'INNER JOIN projekt_settings show_in_overview_page ON projekts.id = show_in_overview_page.projekt_id' )
-        .where( 'show_in_overview_page.key': 'projekt_feature.general.show_in_overview_page', 'show_in_overview_page.value': 'active' )
+    @projekts = Projekt.show_in_overview_page
 
     @projekts_count_hash = {}
 
@@ -50,7 +47,6 @@ class ProjektsController < ApplicationController
     @selected_tags = all_selected_tags
     @resource_name = 'projekt'
 
-    @projekts = @projekts.includes(:sdg_goals).send(@current_order)
     @sdgs = (@projekts.map(&:sdg_goals).flatten.uniq.compact + SDG::Goal.where(code: @filtered_goals).to_a).uniq
     @sdg_targets = (@projekts.map(&:sdg_targets).flatten.uniq.compact + SDG::Target.where(code: @filtered_targets).to_a).uniq
 

@@ -1,30 +1,27 @@
 require_dependency Rails.root.join("app", "controllers", "proposals_controller").to_s
 
 class ProposalsController
-
   include ProposalsHelper
   include ProjektControllerHelper
+  include Takeable
 
   before_action :process_tags, only: [:create, :update]
   before_action :set_projekts_for_selector, only: [:new, :edit, :create, :update]
 
   def index_customization
-    @filtered_goals = params[:sdg_goals].present? ? params[:sdg_goals].split(',').map{ |code| code.to_i } : nil
-    @filtered_target = params[:sdg_targets].present? ? params[:sdg_targets].split(',')[0] : nil
-
-    if params[:filter_projekt_ids]
-      @selected_projekts_ids = params[:filter_projekt_ids].select{ |id| Projekt.find_by(id: id).present? }
-      selected_parent_projekt_id = get_highest_unique_parent_projekt_id(@selected_projekts_ids)
-      @selected_parent_projekt = Projekt.find_by(id: selected_parent_projekt_id)
+    if Setting['projekts.set_default_sorting_to_newest'].present? &&
+        @valid_orders.include?('created_at')
+      @current_order = 'created_at'
     end
 
     @geozones = Geozone.all
-
     @selected_geozone_affiliation = params[:geozone_affiliation] || 'all_resources'
     @affiliated_geozones = (params[:affiliated_geozones] || '').split(',').map(&:to_i)
-
     @selected_geozone_restriction = params[:geozone_restriction] || 'no_restriction'
     @restricted_geozones = (params[:restricted_geozones] || '').split(',').map(&:to_i)
+
+    @top_level_active_projekts = Projekt.top_level_sidebar_current('proposals')
+    @top_level_archived_projekts = Projekt.top_level_sidebar_expired('proposals')
 
     discard_draft
     discard_archived
@@ -33,23 +30,25 @@ class ProposalsController
     load_featured
     remove_archived_from_order_links
 
-    @all_resources = @resources.except(:limit, :offset)
+    @scoped_projekt_ids = (@top_level_active_projekts + @top_level_archived_projekts)
+      .map{ |p| p.all_children_projekts.unshift(p) }
+      .flatten.select do |projekt|
+        ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.proposals.show_in_sidebar_filter').value.present?
+      end
+      .pluck(:id)
 
     unless params[:search].present?
-      take_only_by_tag_names
-      take_by_projekts
+      take_by_my_posts
+      take_by_tag_names
       take_by_sdgs
       take_by_geozone_affiliations
       take_by_geozone_restrictions
-      take_with_activated_projekt_only
-      take_by_my_posts
+      take_by_projekts(@scoped_projekt_ids)
     end
 
     @proposals_coordinates = all_proposal_map_locations(@resources)
-    @selected_tags = all_selected_tags
-
-    @top_level_active_projekts = Projekt.top_level_sidebar_current('proposals')
-    @top_level_archived_projekts = Projekt.top_level_sidebar_expired('proposals')
+    @proposals = @resources.page(params[:page]).send("sort_by_#{@current_order}")
+    # @selected_tags = all_selected_tags
   end
 
   def new
@@ -146,11 +145,6 @@ class ProposalsController
   end
 
   private
-
-    def take_with_activated_projekt_only
-      @resources = @resources.joins(:projekt).merge(Projekt.activated)
-    end
-
     def process_tags
       if params[:proposal][:tags]
         params[:tags] = params[:proposal][:tags].split(',')
@@ -165,74 +159,6 @@ class ProposalsController
       params[:proposal][:tag_list] += ((params[:proposal][:tag_list_predefined] || "").split(",") + (params[:proposal][:tag_list_custom] || "").split(",")).join(",")
       params[:proposal].delete(:tag_list_predefined)
       params[:proposal].delete(:tag_list_custom)
-    end
-
-    def take_only_by_tag_names
-      if params[:tags].present?
-        @resources = @resources.tagged_with(params[:tags].split(","), all: true)
-      end
-    end
-
-    def take_by_projekts
-      if params[:filter_projekt_ids].present?
-        @resources = @resources.where(projekt_id: params[:filter_projekt_ids]).distinct
-      end
-    end
-
-    def take_by_sdgs
-      if params[:sdg_targets].present?
-        @resources = @resources.joins(:sdg_global_targets).where(sdg_targets: { code: params[:sdg_targets].split(',')[0] }).distinct
-        return
-      end
-
-      if params[:sdg_goals].present?
-        @resources = @resources.joins(:sdg_goals).where(sdg_goals: { code: params[:sdg_goals].split(',') }).distinct
-      end
-    end
-
-    def take_by_geozone_affiliations
-      case @selected_geozone_affiliation
-      when 'all_resources'
-        @resources
-      when 'no_affiliation'
-        @resources = @resources.joins(:projekt).where( projekts: { geozone_affiliated: 'no_affiliation' } ).distinct
-      when 'entire_city'
-        @resources = @resources.joins(:projekt).where(projekts: { geozone_affiliated: 'entire_city' } ).distinct
-      when 'only_geozones'
-        @resources = @resources.joins(:projekt).where(projekts: { geozone_affiliated: 'only_geozones' } ).distinct
-        if @affiliated_geozones.present?
-          @resources = @resources.joins(:geozone_affiliations).where(geozones: { id: @affiliated_geozones }).distinct
-        else
-          @resources = @resources.joins(:geozone_affiliations).where.not(geozones: { id: nil }).distinct
-        end
-      end
-    end
-
-    def take_by_geozone_restrictions
-      case @selected_geozone_restriction
-      when 'no_restriction'
-        @resources = @resources.joins(:proposal_phase).distinct
-      when 'only_citizens'
-        @resources = @resources.joins(:proposal_phase).where(projekt_phases: { geozone_restricted: ['only_citizens', 'only_geozones'] }).distinct
-      when 'only_geozones'
-        @resources = @resources.joins(:proposal_phase).where(projekt_phases: { geozone_restricted: 'only_geozones' }).distinct
-
-        if @restricted_geozones.present?
-          sql_query = "
-            INNER JOIN projekts AS projekts_proposals_join_for_restrictions ON projekts_proposals_join_for_restrictions.hidden_at IS NULL AND projekts_proposals_join_for_restrictions.id = proposals.projekt_id
-            INNER JOIN projekt_phases AS proposal_phases_proposals_join_for_restrictions ON proposal_phases_proposals_join_for_restrictions.projekt_id = projekts_proposals_join_for_restrictions.id AND proposal_phases_proposals_join_for_restrictions.type IN ('ProjektPhase::ProposalPhase')
-            INNER JOIN projekt_phase_geozones ON projekt_phase_geozones.projekt_phase_id = proposal_phases_proposals_join_for_restrictions.id
-            INNER JOIN geozones AS geozone_restrictions ON geozone_restrictions.id = projekt_phase_geozones.geozone_id
-          "
-          @resources = @resources.joins(sql_query).where(geozone_restrictions: { id: @restricted_geozones }).distinct
-        end
-      end
-    end
-
-    def take_by_my_posts
-      if params[:my_posts_filter] == 'true'
-        @resources = @resources.by_author(current_user&.id)
-      end
     end
 
     def proposal_params

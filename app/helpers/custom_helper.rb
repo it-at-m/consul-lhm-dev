@@ -30,12 +30,17 @@ module CustomHelper
     MapLocation.where(proposal_id: ids).map(&:json_data)
   end
 
+  def projekt_legislation_process_footer_path(current_projekt, draft_version, section: 'text', anchor: 'footer-content', params: {})
+    current_projekt.page.url + "?text_draft_version_id=#{draft_version.id}&selected_phase_id=#{current_projekt.legislation_process_phase.id}" + "&section=#{section}&#{params.to_query}" + "##{anchor}"
+  end
+
   def sorted_projekt_phases_for_footer(projekt)
     [
       projekt.comment_phase,
       projekt.debate_phase,
       projekt.proposal_phase,
       projekt.voting_phase,
+      projekt.legislation_process_phase,
       projekt.budget_phase,
       projekt.question_phase,
       projekt.milestone_phase,
@@ -43,5 +48,12 @@ module CustomHelper
       projekt.event_phase,
       projekt.newsfeed_phase
     ]
+  end
+
+  def legislation_process_tabs(process)
+    {
+      "info"           => edit_admin_legislation_process_path(process),
+      "draft_versions" => admin_legislation_process_draft_versions_path(process),
+    }
   end
 end

@@ -1,6 +1,6 @@
 <div class="extended-sidebar-map-wrapper">
   <div class="extended-sidebar-map" 
-    <%= render_map(@current_projekt.map_location, "proposals_sidebar_extended", false, nil, [], @current_projekt.map_layers.to_json) %>
+    <%= render_map(@current_projekt.map_location, "proposals_sidebar_extended", false, nil, [], @current_projekt.map_layers_for_render.to_json) %>
     <button class="close-button" aria-label="Close modal" type="button" onclick="$('#extended-sidebar-map').html('');$('#extended-sidebar-map').css('position', 'relative');">
       <span aria-hidden="true">&times;</span>
     </button>

@@ -30,6 +30,10 @@ class ProjektQuestion < ApplicationRecord
     @next_question_id ||= projekt.questions.where("id > ?", id).sorted.limit(1).ids.first
   end
 
+  def previous_question_id
+    @previous_question_id ||= projekt.questions.where("id < ?", id).sorted.ids.last
+  end
+
   def first_question_id
     @first_question_id ||= projekt.questions.sorted.limit(1).ids.first
   end
@@ -52,5 +56,9 @@ class ProjektQuestion < ApplicationRecord
 
   def best_comments
     comments.sort_by_supports.limit(3)
+  end
+
+  def answers_count
+    question_options.sum(&:answers_count)
   end
 end

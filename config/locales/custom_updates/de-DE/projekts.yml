@@ -12,12 +12,12 @@ de:
       orders:
         all: 'Alle Projekte'
         all_title: 'Alle Projekte'
-        active: Aktive Beteiligung
-        active_title: 'Im Reiter "Aktive Beteiligung" sind Projekte, bei denen man sich aktuell beteiligen kann.'
         expired: Abgeschlossen
         expired_title: 'Im Reiter "Abgeschlossen" sind Beteiligungsprojekte gelistet, die abgeschlossen sind. Sowohl die Beteiligungsphase, als auch das Projekt an sich.'
         ongoing: Laufende Projekte
         ongoing_title: 'Im Reiter "Laufende Projekte" sind Projekte die noch laufen, die Beteiligung aber schon abgeschlossen ist.'
+        underway: Aktive Beteiligung
+        underway_title: 'Im Reiter "Aktive Beteiligung" sind Projekte, bei denen man sich aktuell beteiligen kann.'
         upcoming: Zukünftige Projektvorhaben
         upcoming_title: 'Im Reiter "Zukünftige Projektvorhaben" sind Beteiligungsprojekte gelistet, die erst in der Zukunft stattfinden.'
       page:
@@ -34,6 +34,7 @@ de:
           title: Kommende Veranstaltungen
         sidebar:
           admin_controls:
+            copy_code: Quellcode kopieren
             edit_projekt: Projekt bearbeiten
             edit_projekt_page: Projektseite bearbeiten
           phases:
@@ -50,6 +51,7 @@ de:
           projekt_questions: Kurzumfrage
           proposals: Vorschläge
           questions: Questions
+          legislation_processes: Textbearbeitung
       phase_name:
         budget_phase: Budget
         comment_phase: Kommentare
@@ -64,6 +66,7 @@ de:
         proposal_phase: Vorschläge
         question_phase: Kurzumfrage
         voting_phase: Abstimmungen
+        legislation_process_phase: Textbearbeitungsphase
       projekt_events:
         orders:
           all: Alle
@@ -75,6 +78,10 @@ de:
         comments_count: "%{count} offene Antworten"
         comments_title: Offene Antworten
         login_to_answer: Sie müssen sich %{signin} oder %{signup}, um an der Kurzumfrage teilzunehmen.
+        previous_question: Vorherige Frage
+        next_question: Nächste Frage
+        first_question: Erste Frage
+        answers_count: "%{count} Stimmen"
       selector:
         connected_resources:
           debate_description: Bitte ordnen Sie Ihre Diskussion einem der nachfolgenden Projekte oder Unterprojekte zu. Dies dient dazu, dass die Diskussionen in der Diskussionsübersicht besser auffindbar sind.

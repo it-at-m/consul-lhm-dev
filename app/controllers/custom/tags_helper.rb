@@ -2,19 +2,25 @@ require_dependency Rails.root.join("app", "helpers", "tags_helper").to_s
 
 module TagsHelper
   def taggables_path(taggable_type, tag_name)
+    currently_selected_tags = params[:tags].present? ? params[:tags].split(',') : []
+    currently_selected_tags.include?(tag_name) ? currently_selected_tags.delete(tag_name) : currently_selected_tags.push(tag_name)
+    selected_tags = currently_selected_tags.join(',')
+
+    updated_params = params.merge({tags: selected_tags}).permit(:tags, :geozone_affiliation, :geozone_restriction, :affiliated_geozones, :restricted_geozones, :sdg_goals, :sdg_targets, filter_projekt_ids: [])
+
     case taggable_type
     when "debate"
-      debates_path(tags: tag_name)
+      debates_path(updated_params)
     when "proposal"
-      proposals_path(tags: tag_name)
+      proposals_path(updated_params)
     when "poll"
-      polls_path(tags: tag_name, filter: params[:filter])
+      polls_path(updated_params)
     when "budget/investment"
-      budget_investments_path(@budget, search: tag_name)
+      budget_investments_path(@budget, updated_params)
     when "legislation/proposal"
-      legislation_process_proposals_path(@process, search: tag_name)
+      legislation_process_proposals_path(@process, updated_params)
     when "projekt"
-      projekts_path(@process, tags: tag_name)
+      projekts_path(updated_params)
     else
       "#"
     end

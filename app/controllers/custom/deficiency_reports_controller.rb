@@ -16,6 +16,11 @@ class DeficiencyReportsController < ApplicationController
   has_orders %w[newest most_voted oldest], only: :show
 
   def index
+    if Setting['projekts.set_default_sorting_to_newest'].present? &&
+        @valid_orders.include?('created_at')
+      @current_order = 'created_at'
+    end
+
     @deficiency_reports = DeficiencyReport.all.page(params[:page]).send("sort_by_#{@current_order}")
 
     @categories = DeficiencyReport::Category.all.order(created_at: :asc)

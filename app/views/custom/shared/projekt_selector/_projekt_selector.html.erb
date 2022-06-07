@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <%= render partial: 'shared/projekt_selector/projekt_group', locals: { projekts: @projekts.selectable_in_selector(controller_name, current_user), parent_id: 0 } %>
+    <%= render partial: 'shared/projekt_selector/projekt_group', locals: { projekts: projekts.selectable_in_selector(controller_name, current_user), parent_id: 0 } %>
   </div>
 
   <div class='spacer'>
@@ -30,7 +30,7 @@
       </div>
     </div>
 
-    <% @projekts.each do |projekt|  %>
+    <% projekts.each do |projekt|  %>
       <%= render partial: 'shared/projekt_selector/projekt_group', locals: { projekts: projekt.children.selectable_in_selector(controller_name, current_user), parent_id: projekt.id } if projekt.children.selectable_in_selector(controller_name, current_user) %>
     <% end %>
   </div>
@@ -46,7 +46,7 @@
       </div>
     </div>
 
-    <% @projekts.each do |projekt|  %>
+    <% projekts.each do |projekt|  %>
       <% projekt.children.each do |projekt| %>
         <%= render partial: 'shared/projekt_selector/projekt_group', locals: { projekts: projekt.children.selectable_in_selector(controller_name, current_user), parent_id: projekt.id  } if projekt.children.selectable_in_selector(controller_name, current_user).any? %>
       <% end %>

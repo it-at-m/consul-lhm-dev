@@ -12,12 +12,12 @@ en:
       orders:
         all: 'All Projects'
         all_title: 'All Projects'
-        active: Active participation
-        active_title: 'In the tab "Active participation" are projects in which you can currently participate.'
         expired: Completed
         expired_title: 'The "Completed" tab lists participation projects that have been completed. Both the participation phase and the project itself.'
         ongoing: Ongoing projects
         ongoing_title: 'In the tab "Ongoing projects" are projects that are still running, but the participation is already completed.'
+        underway: Active participation
+        underway_title: 'In the tab "Active participation" are projects in which you can currently participate.'
         upcoming: Future project plans
         upcoming_title: 'The "Future project plans" tab lists participation projects that will only take place in the future.'
       page:
@@ -34,6 +34,7 @@ en:
           title: Events
         sidebar:
           admin_controls:
+            copy_code: Copy source code
             edit_projekt: Edit projekt
             edit_projekt_page: Edit projekt page
           phases:
@@ -50,6 +51,7 @@ en:
           projekt_questions: Short survey
           proposals: Proposals
           questions: Questions
+          legislation_processes: Text editing
       phase_name:
         budget_phase: Budget
         comment_phase: Comments

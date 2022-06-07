@@ -11,7 +11,8 @@ class Shared::CommentsComponent < ApplicationComponent
         comment_tree.comments,
         comment_tree.comment_authors,
         record.comments_count,
-        record_specific_keys
+        record_specific_keys,
+        Comment.body_max_length
       ].flatten
     end
 

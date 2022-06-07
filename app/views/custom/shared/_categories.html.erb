@@ -5,13 +5,15 @@
 
   <ul id="categories" class="no-bullet categories">
     <% selected_categories = params[:tags] ? params[:tags].split(',') : []%>
+
     <% @categories.each do |category| %>
       <li class="inline-block">
-        <% selected_categories.include?(category.name) ? css_class = { class: "is-active js-projekt-tag-filter-link" } : css_class = { class: "js-projekt-tag-filter-link" }  %>
-        <%= link_to taggables_path(taggable, category.name), css_class do %>
+        <% css_class = selected_categories.include?(category.name) ? "is-active" : "" %>
+        <%= link_to taggables_path(taggable, category.name), class: css_class do %>
           <span class="tag"><%= category.name %></span>
         <% end %>
       </li>
     <% end %>
+
   </ul>
 <%end%>

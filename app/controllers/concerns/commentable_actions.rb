@@ -11,7 +11,9 @@ module CommentableActions
     @resources = @resources.search(@search_terms) if @search_terms.present?
     @resources = @resources.filter_by(@advanced_search_terms)
 
-    @resources = @resources.page(params[:page]).send("sort_by_#{@current_order}")
+    if params[:controller].include?("admin/")
+      @resources = @resources.page(params[:page]).send("sort_by_#{@current_order}")
+    end
 
     index_customization
 
@@ -19,7 +21,10 @@ module CommentableActions
 
     set_resource_votes(@resources)
 
-    set_resources_instance
+    if params[:controller].include?("admin/")
+      set_resources_instance
+    end
+
     @remote_translations = detect_remote_translations(@resources, featured_proposals)
   end
 

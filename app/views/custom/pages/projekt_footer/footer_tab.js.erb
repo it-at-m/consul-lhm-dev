@@ -4,6 +4,12 @@ $("#footer-content").removeClass("show-loader");
 $("#footer-content").html("<%= j render("pages/projekt_footer/#{@current_tab_phase.resources_name}") %>");
 App.Projekts.toggleDefaultProjekts()
 App.Projekts.toggleProjektsInSidebarFilter();
+App.Legislation.initialize()
+
+if ($(".legislation-annotatable").length) {
+  App.LegislationAnnotatable.initialize();
+}
+
 $('#footer-content').foundation();
 
 

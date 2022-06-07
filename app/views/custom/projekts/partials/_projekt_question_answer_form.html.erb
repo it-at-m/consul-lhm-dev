@@ -1,31 +1,17 @@
 <% if projekt_question.question_options.any? %>
-  <% if projekt.question_phase.active? %>
+  <% path = projekt_answer.persisted? ? projekt_projekt_question_answer_path(projekt, projekt_answer) : projekt_projekt_question_answers_path(projekt) %>
 
-    <% path = projekt_answer.persisted? ? projekt_projekt_question_answer_path(projekt, projekt_answer) : projekt_projekt_question_answers_path(projekt) %>
-
-    <%= form_for projekt_answer, url: path, remote: true, html: { class: "controls-stacked js-projekt-answer-form" } do |f| %>
-        <% projekt_question.question_options.each do |question_option| %>
-          <label class="control radio <%= "is-active" if projekt_answer.question_option&.id == question_option.id %>">
-            <%= f.radio_button :projekt_question_option_id, question_option.id, disabled: (!user_signed_in?), label: false %>
-            <span class="control-indicator"></span>
-            <%= question_option.value %>
-            <% if projekt_question.show_answers_count? %>
-              (<%= question_option.answers_count  %>)
-            <% end %>
-          </label>
+  <%= form_for projekt_answer, url: path, remote: true, html: { class: "controls-stacked js-projekt-answer-form", data: { logined: user_signed_in?, redirect_to: new_user_session_path } } do |f| %>
+    <% projekt_question.question_options.each do |question_option| %>
+      <label class="control radio <%= "is-active" if projekt_answer.question_option&.id == question_option.id %>">
+        <% radio_button_disabled = (!user_signed_in? || !projekt.question_phase.active?) %>
+        <%= f.radio_button :projekt_question_option_id, question_option.id, disabled: radio_button_disabled, label: false %>
+        <span class="control-indicator"></span>
+        <%= question_option.value %>
+        <% if projekt_question.show_answers_count? %>
+          (<%= question_option.answers_count  %>)
         <% end %>
+      </label>
     <% end %>
-
-  <% else %>
-
-    <form class="controls-stacked disabled">
-      <% projekt_question.question_options.each do |question_option| %>
-        <label class="control radio <%= "is-active" if projekt_answer.persisted? && (projekt_answer.question_option&.id == question_option.id) %>">
-          <input id="quiz-1" name="radio" type="radio" disabled="true">
-          <span class="control-indicator"></span>
-          <%= question_option.value %>
-        </label>
-      <% end %>
-    </form>
   <% end %>
 <% end %>

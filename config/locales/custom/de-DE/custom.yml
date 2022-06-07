@@ -94,9 +94,6 @@ de:
       proposals: Vorschläge
       polls: Abstimmungen
     admin:
-      homepage:
-        active_projekts_title: Aktive Beteiligungsprozesse
-        archived_projekts_title: Abgeschlossene Beteiligungsprozesse
       site_customization:
         pages:
           destroy:

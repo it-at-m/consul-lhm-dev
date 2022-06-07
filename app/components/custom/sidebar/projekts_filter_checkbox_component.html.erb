@@ -4,7 +4,7 @@
     <%= label_tag dom_id(projekt), class: label_class do %>
       <%= check_box_tag "filter_projekt_ids[]", projekt.id, checkbox_checked, {id: dom_id(projekt), class: 'js-filter-projekt', tabindex: "-1" }  %>
       <i class="projekt-filter-icon fas fa-<%= projekt.icon || "circle" %>" <%= "style=color:#{projekt.color}" if projekt.color.present? %> ></i>
-      <span aria-label="<%= t('custom.links.projekts_filter.resource_count', resource_count: resource_count) %>"> <%= "(#{resource_count})" %> </span>
+      <span class="projekt-number-in-label" aria-label="<%= t('custom.links.projekts_filter.resource_count', resource_count: resource_count) %>"> <%= "(#{resource_count})" %> </span>
       <% projekt_title = (projekt.page.title&.size || 0) > 25 ? projekt.page.title : '' %>
       <% if projekt.page.title.present? %>
         <span class="projekt-name-in-label" title="<%= projekt_title %>" aria-label="<%= t('custom.links.projekts_filter.projekt_name', projekt_name: projekt.page.title ) %>" ><%= projekt.page.title %></span>
@@ -23,6 +23,13 @@
   </li>
 
   <% selectable_children.each do |projekt| %>
-    <%= render Sidebar::ProjektsFilterCheckboxComponent.new(f, projekt, @group, @all_resources, @current_projekt) %>
+    <%= render Sidebar::ProjektsFilterCheckboxComponent.new(
+      f: f,
+      projekt: projekt,
+      scoped_projekt_ids: @scoped_projekt_ids,
+      group: @group,
+      all_resources: @all_resources,
+      current_projekt: @current_projekt
+    ) %>
   <% end %>
 </ul>

@@ -1,6 +1,6 @@
 <% if !budget.informing? && projekt_feature?(budget.projekt, 'budgets.show_map') %>
   <div class="map proposals-map">
-    <%= render_map(budget.projekt.map_location, "budgets", false, nil, coordinates, budget.projekt.map_layers.to_json) %>
+    <%= render_map(budget.projekt.map_location, "budgets", false, nil, coordinates, budget.projekt.map_layers_for_render.to_json) %>
   </div>
 
   <div class='expand-overview-map-wrapper'>

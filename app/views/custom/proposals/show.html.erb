@@ -31,6 +31,7 @@
             @proposal.custom_votes_needed_for_success,
             proposal_settings_fingerprints,
             Flag.flagged?(current_user, @proposal),
+            projekt_feature?(@proposal&.projekt, 'proposals.quorum_for_proposals'),
             projekt_feature?(@proposal&.projekt, 'proposals.show_report_button_in_proposal_sidebar'),
             projekt_feature?(@proposal&.projekt, 'proposals.show_follow_button_in_proposal_sidebar'),
             projekt_feature?(@proposal&.projekt, 'proposals.show_community_button_in_proposal_sidebar'),

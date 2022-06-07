@@ -1,0 +1,16 @@
+<div class="sidebar-divider"></div>
+<h2 class="sidebar-title projekt-tag-chip-category"><%= t("shared.tags_cloud.categories") %></h2>
+<br>
+
+<% if projekt.tags.category.any? %>
+  <ul id="categories" class="no-bullet categories">
+    <% projekt.tags.category.each do |category| %>
+      <li class="inline-block">
+        <% css_class = { class: "js-projekt-tag-filter-link" } %>
+        <%= link_to taggables_path('projekt', category.name), css_class do %>
+          <span class="tag"><%= category.name %></span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

@@ -32,36 +32,6 @@
 
 <hr>
 
-<div id='active_projekts'>
-  <h3 class="inline-block"><%= t("custom.admin.homepage.active_projekts_title") %></h3>
-
-  <div class="float-right">
-    <%= link_to t("admin.homepage.create_card"), new_admin_widget_card_path, class: "button" %>
-  </div>
-
-  <%= render Admin::Widget::Cards::TableComponent.new(
-    @active_projekt_cards,
-    no_cards_message: t("admin.homepage.no_cards")
-  ) %>
-</div>
-
-<hr>
-
-<div id='archived_projekts'>
-  <h3 class="inline-block"><%= t("custom.admin.homepage.archived_projekts_title") %></h3>
-
-  <div class="float-right">
-    <%= link_to t("admin.homepage.create_card"), new_admin_widget_card_path, class: "button" %>
-  </div>
-
-  <%= render Admin::Widget::Cards::TableComponent.new(
-    @archived_projekt_cards,
-    no_cards_message: t("admin.homepage.no_cards")
-  ) %>
-</div>
-
-<hr>
-
 <% @feeds.each do |feed| %>
   <%= render "feed", feed: feed %>
 <% end %>

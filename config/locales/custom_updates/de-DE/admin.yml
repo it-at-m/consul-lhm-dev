@@ -2,6 +2,8 @@ de:
   admin:
     homepage:
       feeds:
+        active_projekts: Aktive Beteiligung
+        expired_projekts: Abgeschlossene Projekte
         polls: Abstimmungen
     tags:
       destroy: Löschen
@@ -83,9 +85,6 @@ de:
             color: Farbe
             icon: Icon
             title: Name
-      homepage:
-        active_projekts_title: Aktive Beteiligungsprozesse
-        archived_projekts_title: Abgeschlossene Beteiligungsprozesse
       menu:
         deficiency_reports:
           categories: Kategorien festlegen
@@ -168,6 +167,8 @@ de:
             link:
               budget_phase: Budgets
               voting_phase: Abstimmungen
+              question_phase: Kurzumfragen
+              legislation_process_phase: Textbearbeitung
             main_block_title: Projektstatus
             milestone_phase: Umsetzungsphase
             name: Projekteinstellungen
@@ -181,6 +182,7 @@ de:
             start_date: Anfangsdatum
             voting_manage: Abstimmungen verwalten
             voting_phase: Abstimmungsphase
+            legislation_process_phase: Textbearbeitungsphase
           projekt_questions_tab:
             name: Kurzumfragen
             title: Fragen

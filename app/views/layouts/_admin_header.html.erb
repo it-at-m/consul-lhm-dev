@@ -2,7 +2,7 @@
   <div class="top-links">
     <%= render "shared/locale_switcher" %>
 
-    <%= link_to root_path do %>
+    <%= link_to dashboard_index_back_path do %>
       <%= t("admin.dashboard.index.back", org: setting["org_name"]) %>
     <% end %>
   </div>

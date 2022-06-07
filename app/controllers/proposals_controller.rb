@@ -122,49 +122,49 @@ class ProposalsController < ApplicationController
       @featured_proposals_votes = current_user ? current_user.proposal_votes(proposals) : {}
     end
 
-    def discard_draft
-      @resources = @resources.published
-    end
+    # def discard_draft
+    #   @resources = @resources.published
+    # end
 
-    def discard_archived
-      unless @current_order == "archival_date" || params[:selected].present?
-        @resources = @resources.not_archived
-      end
-    end
+    # def discard_archived
+    #   unless @current_order == "archival_date" || params[:selected].present?
+    #     @resources = @resources.not_archived
+    #   end
+    # end
 
-    def load_retired
-      if params[:retired].present?
-        @resources = @resources.retired
-        @resources = @resources.where(retired_reason: params[:retired]) if Proposal::RETIRE_OPTIONS.include?(params[:retired])
-      else
-        @resources = @resources.not_retired
-      end
-    end
+    # def load_retired
+    #   if params[:retired].present?
+    #     @resources = @resources.retired
+    #     @resources = @resources.where(retired_reason: params[:retired]) if Proposal::RETIRE_OPTIONS.include?(params[:retired])
+    #   else
+    #     @resources = @resources.not_retired
+    #   end
+    # end
 
-    def load_selected
-      if params[:selected].present?
-        @resources = @resources.selected
-      else
-        @resources = @resources.not_selected
-      end
-    end
+    # def load_selected
+    #   if params[:selected].present?
+    #     @resources = @resources.selected
+    #   else
+    #     @resources = @resources.not_selected
+    #   end
+    # end
 
-    def load_featured
-      return unless !@advanced_search_terms && @search_terms.blank? && params[:retired].blank? && @current_order != "recommendations"
+    # def load_featured
+    #   return unless !@advanced_search_terms && @search_terms.blank? && params[:retired].blank? && @current_order != "recommendations"
 
-      if Setting["feature.featured_proposals"]
-        @featured_proposals = Proposal.not_archived.unsuccessful
-                              .sort_by_confidence_score.limit(Setting["featured_proposals_number"])
-        if @featured_proposals.present?
-          set_featured_proposal_votes(@featured_proposals)
-          @resources = @resources.where.not(id: @featured_proposals)
-        end
-      end
-    end
+    #   if Setting["feature.featured_proposals"]
+    #     @featured_proposals = Proposal.not_archived.unsuccessful
+    #                           .sort_by_confidence_score.limit(Setting["featured_proposals_number"])
+    #     if @featured_proposals.present?
+    #       set_featured_proposal_votes(@featured_proposals)
+    #       @resources = @resources.where.not(id: @featured_proposals)
+    #     end
+    #   end
+    # end
 
-    def remove_archived_from_order_links
-      @valid_orders.delete("archival_date")
-    end
+    # def remove_archived_from_order_links
+    #   @valid_orders.delete("archival_date")
+    # end
 
     def set_view
       @view = (params[:view] == "minimal") ? "minimal" : "default"

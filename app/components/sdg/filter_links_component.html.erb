@@ -1,1 +1,1 @@
-<%= link_list_sdg_goals(*links, class: "sdg-#{parameter_name}-tag-list") %>
+<%= link_list_sdg_goals(*links, class: "sdg-#{parameter_name}-tag-list", data: { path: @related_model.name.downcase.pluralize }) %>

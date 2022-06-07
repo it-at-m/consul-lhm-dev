@@ -107,6 +107,7 @@ module Consul
     # * Spanish: https://github.com/consul/consul/blob/master/CUSTOMIZE_ES.md
     #
     config.autoload_paths << "#{Rails.root}/app/components/custom"
+    config.autoload_paths << "#{Rails.root}/app/controllers/concerns/custom"
     config.autoload_paths << "#{Rails.root}/app/controllers/custom"
     config.autoload_paths << "#{Rails.root}/app/models/concerns/custom"
     config.autoload_paths << "#{Rails.root}/app/models/custom"

@@ -74,6 +74,7 @@ Rails.application.routes.draw do
       get :projekt_notification_phase_footer_tab
       get :newsfeed_phase_footer_tab
       get :event_phase_footer_tab
+      get :legislation_process_phase_footer_tab
       get :question_phase_footer_tab
       get :extended_sidebar_map
     end

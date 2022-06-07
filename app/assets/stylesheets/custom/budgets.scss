@@ -37,6 +37,12 @@
   }
 }
 
+#footer-content {
+  #budgets ul.tabs {
+    background: initial;
+  }
+}
+
 .expanded.jumbo-budget.budget-heading {
   min-height: auto;
 }
@@ -85,6 +91,23 @@
     .button-remove-support {
       margin-top: 0.75rem;
     }
+  }
+}
+
+
+// Sidebar
+
+#budgets-sidebar {
+  .ballot-list li {
+    background-color: white;
+
+    &:hover {
+      background-color: $brand;
+    }
+  }
+
+  #categories {
+    display: none;
   }
 }
 

@@ -2,6 +2,8 @@ en:
   admin:
     homepage:
       feeds:
+        active_projekts: Aktiv Projects
+        expired_projekts: Expired Projects
         polls: Polls
     tags:
       destroy: Delete
@@ -83,9 +85,6 @@ en:
             color: Color
             icon: Icon
             title: Name
-      homepage:
-        active_projekts_title: Active participatory processes
-        archived_projekts_title: Completed participation processes
       menu:
         deficiency_reports:
           categories: Kategorien festlegen

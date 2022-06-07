@@ -177,4 +177,14 @@ module ProjektsHelper
   def related_polls(projekt, timestamp = Date.current.beginning_of_day)
     Poll.where(projekt_id: projekt.all_children_ids.push(projekt.id))
   end
+
+  def options_for_projekt_select
+    select_options = []
+
+    Projekt.top_level.each do |top_level_projekt|
+      select_options += top_level_projekt.all_children_projekts.unshift(top_level_projekt).pluck(:name, :id)
+    end
+
+    select_options
+  end
 end

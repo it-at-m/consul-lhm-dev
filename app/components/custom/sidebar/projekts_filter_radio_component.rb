@@ -2,7 +2,12 @@ class Sidebar::ProjektsFilterRadioComponent < ApplicationComponent
   delegate :projekt_filter_resources_name, to: :helpers
   attr_reader :f, :projekt, :group
 
-  def initialize(f, projekt, group, all_resources)
+  def initialize(
+    f:,
+    projekt:,
+    group:,
+    all_resources:
+  )
     @f = f
     @projekt = projekt
     @group = group

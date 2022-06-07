@@ -1,6 +1,6 @@
 <% valuation = local_assigns.fetch(:valuation, false) %>
 <% @current_projekt ||= @projekt %>
-<% cache [locale_and_user_status(comment), comment, commentable_cache_key(comment.commentable), comment.author, projekt_feature?(@current_projekt, 'general.allow_downvoting_comments')] do %>
+<% cache [locale_and_user_status(comment), comment, commentable_cache_key(comment.commentable), comment.author, projekt_feature?(@current_projekt, 'general.allow_downvoting_comments'), Comment.body_max_length] do %>
   <div id="<%= dom_id(comment) %>" class="comment small-12" role="comment">
     <div class="comment-body">
       <% if comment.hidden? || comment.user.hidden? %>
