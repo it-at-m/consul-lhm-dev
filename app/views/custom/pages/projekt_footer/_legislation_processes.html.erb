@@ -1,3 +1,4 @@
+<div class="column">
 <% if @current_section == 'all_drafts_annotations' %>
   <div class="column row">
     <div class="draft-panels projekt-draft-panels small-12 column row">
@@ -76,6 +77,7 @@
                 </span>
               <% end %>
             </div>
+            <span><%= t("legislation.draft_versions.show.updated_at", date: format_date(@draft_version.updated_at)) %></span>
           </div>
 
           <% unless @draft_version.final_version? %>
@@ -112,6 +114,10 @@
               <% else %>
               <section class="legislation-annotatable"
                        data-legislation-draft-version-id="<%= @draft_version.id %>"
+                       data-projekt-slug="<%= @current_projekt.page.url %>"
+                       data-text-draft-version-id="<%= @draft_version.id %>"
+                       data-selected-phase-id="<%= @current_projekt.legislation_process_phase.id %>"
+                       data-section-name="annotations"
                        data-legislation-annotatable-base-url="<%= legislation_process_draft_version_path(@process, @draft_version) %>"
                        data-legislation-open-phase="<%= @process.allegations_phase.open? %>">
               <% end %>
@@ -219,3 +225,4 @@
     </div>
   </div>
 <% end %>
+</div>

@@ -980,20 +980,44 @@ span.projekt-backlink:before {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+
+    @media screen and (max-width: 750px) {
+      flex-direction: column;
+    }
   }
 }
 
 .projekt-texts-button-section {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   margin-top: 40px;
+
+  @media (min-width: 750px) and (max-width: 1024px) {
+    margin-top: 77px;
+  }
+
+  @media screen and (max-width: 750px) {
+    margin-top: 0;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .button {
+    @media screen and (max-width: 750px) {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .projekt-text-hint-button {
   min-width: 300px;
   padding: 4px 5px;
   margin-right: 30px;
+
+  @media screen and (max-width: 750px) {
+    margin-bottom: 0;
+  }
 }
 
 .projekt-all-comments-button {

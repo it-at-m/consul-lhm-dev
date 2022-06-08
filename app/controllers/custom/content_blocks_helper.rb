@@ -14,10 +14,10 @@ module ContentBlocksHelper
       copy_link = link_to '<i class="fas fa-code"></i>'.html_safe, '#', class: 'js-copy-source-button', style: "#{'margin-left:10px' if edit_link.present?}", data: { target: '#home_page_1' }
     end
 
-    res = "<div id=#{key}>#{block_body}</div>"
+    res = "<div id=#{key} class=#{ 'custom-content-block-body' if block_body.present? }>#{block_body}</div>"
 
     if edit_link || copy_link
-      res << "<div class='custom-block-controls margin-top'>"
+      res << "<div class='custom-content-block-controls'>"
         res << edit_link if edit_link.present?
         res << copy_link if copy_link.present?
       res << "</div>"

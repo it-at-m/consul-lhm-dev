@@ -42,40 +42,40 @@
   </div>
 
   <div class="row">
-    <div class="column medium-9 small-centered welcome-main custom-block">
-      <%=render_custom_block 'home_page_1' %>
+    <div class="column medium-9 small-centered">
+      <%= render_custom_block 'home_page_1' %>
     </div>
   </div>
 
-  <div class="row">
-    <div class="column medium-9 small-centered">
-      <% if @cards.any? %>
+  <% if @cards.any? %>
+    <div class="row">
+      <div class="column medium-9 small-centered margin-bottom">
         <div class="row">
           <div class="small-12 column">
             <%= render partial: "cards", locals: { cards: @cards, section_title: t("welcome.cards.title") } %>
           </div>
         </div>
-      <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 
   <div class="row">
-    <div class="column medium-9 small-centered welcome-main custom-block">
-      <%=render_custom_block 'home_page_2' %>
+    <div class="column medium-9 small-centered">
+      <%= render_custom_block 'home_page_2' %>
     </div>
   </div>
 
   <% if @active_projekts.any? %>
     <div class="row">
-      <div class="column medium-9 small-centered">
+      <div class="column medium-9 small-centered margin-bottom">
         <%= render partial: "projekt_cards", locals: { projekts: @active_projekts, section_title: t("custom.welcome.active_projekt_cards.title")  } %>
       </div>
     </div>
   <% end %>
 
   <div class="row">
-    <div class="column medium-9 small-centered welcome-main custom-block">
-      <%=render_custom_block 'home_page_3' %>
+    <div class="column medium-9 small-centered">
+      <%= render_custom_block 'home_page_3' %>
     </div>
   </div>
 
@@ -89,14 +89,14 @@
   <% end %>
 
   <div class="row">
-    <div class="column medium-9 small-centered welcome-main custom-block">
+    <div class="column medium-9 small-centered">
       <%=render_custom_block 'home_page_4' %>
     </div>
   </div>
 
   <% if @latest_items.any? %>
     <div class="row">
-      <div class="column medium-9 small-centered margin-top margin-bottom">
+      <div class="column medium-9 small-centered margin-bottom">
         <h3 class='title card-title'><%= t('custom.welcome.user_entries') %></h3>
         <%= render "latest_items" %>
       </div>
@@ -104,21 +104,21 @@
   <% end %>
 
   <div class="row">
-    <div class="column medium-9 small-centered welcome-main custom-block">
+    <div class="column medium-9 small-centered">
       <%=render_custom_block 'home_page_5' %>
     </div>
   </div>
 
   <% if @expired_projekts.any? %>
     <div class="row">
-      <div class="column medium-9 small-centered">
+      <div class="column medium-9 small-centered margin-bottom">
         <%= render partial: "projekt_cards", locals: { projekts: @expired_projekts, section_title: t("custom.welcome.expired_projekt_cards.title")  } %>
       </div>
     </div>
   <% end %>
 
   <div class="row">
-    <div class="column medium-9 small-centered welcome-main custom-block">
+    <div class="column medium-9 small-centered">
       <%=render_custom_block 'home_page_6' %>
     </div>
   </div>

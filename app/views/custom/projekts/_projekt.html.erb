@@ -2,7 +2,11 @@
 
   <div class='image'>
     <% if projekt.image.present? %>
-      <%= link_to projekt.page.url do %>
+      <% if projekt.page&.published? %>
+        <%= link_to projekt.page.url do %>
+          <%= image_tag projekt.image_url(:medium) %>
+        <% end %>
+      <% else %>
         <%= image_tag projekt.image_url(:medium) %>
       <% end %>
     <% end %>
@@ -14,7 +18,9 @@
     <%= render "shared/tags", taggable: projekt, limit: 5 %>
   </div>
 
-  <div class='projekt-link'>
-    <%= link_to 'Zum Projekt', projekt.page.url, class: 'button' %>
-  </div>
+  <% if projekt.page&.published? %>
+    <div class='projekt-link'>
+      <%= link_to 'Zum Projekt', projekt.page.url, class: 'button' %>
+    </div>
+  <% end %>
 </div>

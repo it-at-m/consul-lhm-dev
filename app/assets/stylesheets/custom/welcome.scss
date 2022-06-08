@@ -4,8 +4,13 @@
 
   background-color: #F4F4F4;
 
-  .custom-block.welcome-main {
-    margin-top: 2.25rem;
+  .custom-content-block-body,
+  .custom-content-block-controls {
+    margin-bottom: 2.25rem;
+  }
+
+  .custom-content-block-body + .custom-content-block-controls {
+    margin-top: -1.5rem;
   }
 
   .card-homepage {
