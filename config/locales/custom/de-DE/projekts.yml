@@ -10,8 +10,6 @@ de:
             title: Projektinformation
             projekt_duration: Gesamtdauer
             affiliation: Gebietszuordnung
-          phases:
-            title: Projektphasen
           map:
             title: Gebiet
           navigator:

@@ -7,6 +7,7 @@
      tabindex="0"
      aria-labeled-by=<%= "#{dom_id(projekt)}_name" %>
      data-projekt-id="<%= projekt.id %>"
+     <%= "data-base-layer=#{ ( projekt.map_layers.where(base: true).any? ? projekt.map_layers.where(base: true).first : projekt.map_layers_for_render.where(base: true).first ).to_json(except: :attribution) }" %>
      <%= "data-parent-id=#{projekt.parent.id}" if projekt.parent.present? %>
      <%= "data-projekt-selectable=true" if projekt.selectable?(controller_name, current_user) %>
      <%= "data-projekt-selectable-children=true" if projekt.children.selectable_in_selector(controller_name, current_user).any? %>
@@ -17,10 +18,9 @@
      <%= "data-show-summary=true" if projekt_feature?(projekt, "proposals.enable_summary")  %>
      <%= "data-allow-attached-document=true" if projekt_feature?(projekt, "#{controller_name}.allow_attached_documents")  %>
      <%= "data-allow-tags=true" if projekt_feature?(projekt, "general.enable_tags")  %>
-     <%= "data-tag-ids=#{projekt_feature?(projekt, 'general.enable_tags') ? projekt.tags.category.ids.join(',') : ''}" %>
-     <%= "data-allow-sdgs=true" if projekt_feature?(projekt, "general.enable_sdgs")  %>
-     <%= "data-sdg-ids=#{projekt_feature?(projekt, 'general.enable_sdgs') ? projekt.sdg_goals.ids.join(',') : ''}" %>
-     <%= "data-base-layer=#{ ( projekt.map_layers.where(base: true).any? ? projekt.map_layers.where(base: true).first : projekt.map_layers_for_render.where(base: true).first ).to_json }" %>
+     <%= "data-tag-ids=#{ projekt.tags.category.ids.any? ? projekt.tags.category.ids.join(',') : false }" if projekt_feature?(projekt, "general.enable_tags") %>
+     <%= "data-allow-sdgs=true" if projekt_feature?(projekt, "general.enable_sdgs") %>
+     <%= "data-sdg-ids=#{ projekt.sdg_goals.ids.any? ? projekt.sdg_goals.ids.join(',') : false}" if projekt_feature?(projekt, "general.enable_sdgs") %>
      >
 
 

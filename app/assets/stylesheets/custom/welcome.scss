@@ -47,8 +47,12 @@
       display: none;
   }
 
+  .jumbo,
+  .hero-video-wrapper {
+    margin-bottom: 4rem;
+  }
+
   .jumbo {
-  
     background-position: $welcomebgposition;
     background-size: 100% auto;
     background-repeat: no-repeat;

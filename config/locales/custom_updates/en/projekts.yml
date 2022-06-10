@@ -9,6 +9,7 @@ en:
         expired_projekts: Expired projekts
         no_projekts: No projects
         title: Projects
+        to_projekt: To the project
       orders:
         all: 'All Projects'
         all_title: 'All Projects'
@@ -37,8 +38,15 @@ en:
             copy_code: Copy source code
             edit_projekt: Edit projekt
             edit_projekt_page: Edit projekt page
+          map:
+            title: District
+          navigator:
+            title: Project index
           phases:
+            title: Project phases
             participate: Open for participation!
+          tags:
+            title: Categories
         tabs:
           budgets: Budgets
           comments: Comments
@@ -57,15 +65,16 @@ en:
         comment_phase: Comments
         debate_phase: Debates
         event_phase: Event phase
+        legislation_process_phase: Document drafting
         milestone_phase: Milestones
         milestone_phase_details:
           ending: Planned end
           start: Start
         newsfeed_phase: Newsfeed
         projekt_notification_phase: Notifications
-        proposal_phase: Vorschläge
+        proposal_phase: Proposals
         question_phase: Short survey
-        voting_phase: Abstimmungen
+        voting_phase: Voting
       projekt_events:
         orders:
           all: All

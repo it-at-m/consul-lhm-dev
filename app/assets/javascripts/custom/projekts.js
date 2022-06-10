@@ -266,7 +266,7 @@
           if (nestedUl) {
             var elementPosition = element.getBoundingClientRect()
             var netstedUlPosition = nestedUl.getBoundingClientRect()
-            var nestedUlLi = nestedUl.querySelector('.checkmark')
+            var nestedUlLi = nestedUl.querySelector('.mark')
 
             var lineHeight = (Math.round(netstedUlPosition.top - elementPosition.top) - Math.round(nestedUlLi.offsetHeight / 2) - 2)
 

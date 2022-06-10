@@ -20,7 +20,7 @@
 
   <% if projekt.page&.published? %>
     <div class='projekt-link'>
-      <%= link_to 'Zum Projekt', projekt.page.url, class: 'button' %>
+      <%= link_to t('custom.projekts.index.to_projekt'), projekt.page.url, class: 'button' %>
     </div>
   <% end %>
 </div>

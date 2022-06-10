@@ -1,10 +1,11 @@
 <ul aria-live="polite" >
   <li data-projekt-id=<%= projekt.id %> >
+    <span class="projekt-tree-ul-vertical-line"></span>
     <%= label_tag "filter_projekt_id_#{projekt.id}", class: label_class do %>
       <%= radio_button_tag :filter_projekt_id, projekt.id, radio_button_selected, { class: '', tabindex: "-1", onclick: "$(this.form).trigger('submit.rails');$('.spinner-placeholder').addClass('show-loader');" }   %>
       <i class="projekt-filter-icon fas fa-<%= projekt.icon || "circle" %>" <%= "style=color:#{projekt.color}" if projekt.color.present? %> ></i>
       <span aria-label="<%= t('custom.links.projekts_filter.projekt_name', projekt_name: projekt.page.title ) %>" ><%= projekt.page.title %></span>
-      <span class="radiomark focusable js-prevent-key-scroll js-access-toggle-projekt-filter-checkbox" tabindex="0"></span>
+      <span class="radiomark mark focusable js-prevent-key-scroll js-access-toggle-projekt-filter-checkbox" tabindex="0"></span>
     <% end %>
 
     <% if selectable_children.any? %>

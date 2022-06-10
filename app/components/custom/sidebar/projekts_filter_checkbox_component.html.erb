@@ -9,7 +9,7 @@
       <% if projekt.page.title.present? %>
         <span class="projekt-name-in-label" title="<%= projekt_title %>" aria-label="<%= t('custom.links.projekts_filter.projekt_name', projekt_name: projekt.page.title ) %>" ><%= projekt.page.title %></span>
       <% end %>
-      <span class="checkmark focusable js-prevent-key-scroll js-access-toggle-projekt-filter-checkbox" tabindex="0"></span>
+      <span class="checkmark mark focusable js-prevent-key-scroll js-access-toggle-projekt-filter-checkbox" tabindex="0"></span>
     <% end %>
 
     <% if selectable_children.any? %>

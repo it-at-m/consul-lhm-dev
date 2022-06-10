@@ -107,7 +107,8 @@ class ApplicationController < ActionController::Base
 
     def set_return_url
       if request.get? && !devise_controller? && is_navigational_format?
-        store_location_for(:user, request.fullpath)
+        request_path = request.fullpath == '/null' ? '/' : request.fullpath # quickfix
+        store_location_for(:user, request_path)
       end
     end
 

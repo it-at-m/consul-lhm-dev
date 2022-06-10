@@ -9,6 +9,7 @@ de:
         expired_projekts: Abgeschlossene Projekte
         no_projekts: keine Projekte
         title: Projekte
+        to_projekt: Zum Projekt
       orders:
         all: 'Alle Projekte'
         all_title: 'Alle Projekte'
@@ -37,8 +38,15 @@ de:
             copy_code: Quellcode kopieren
             edit_projekt: Projekt bearbeiten
             edit_projekt_page: Projektseite bearbeiten
+          map:
+            title: Gebiet
+          navigator:
+            title: Projektverzeichnis
           phases:
+            title: Projektphasen
             participate: Offen für Beteiligung!
+          tags:
+            title: Kategorien
         tabs:
           budget: Budgets
           comments: Kommentare
@@ -57,6 +65,7 @@ de:
         comment_phase: Kommentare
         debate_phase: Diskussionen
         event_phase: Veranstaltungen
+        legislation_process_phase: Textbearbeitungsphase
         milestone_phase: Meilensteine
         milestone_phase_details:
           ending: Gepl. Fertigstellung
@@ -66,7 +75,6 @@ de:
         proposal_phase: Vorschläge
         question_phase: Kurzumfrage
         voting_phase: Abstimmungen
-        legislation_process_phase: Textbearbeitungsphase
       projekt_events:
         orders:
           all: Alle

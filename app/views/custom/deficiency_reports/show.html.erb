@@ -45,7 +45,7 @@
           <% if @deficiency_report.can_be_published? %>
             <div class="deficiency-report-official-answer">
               <h3><%= t('custom.deficiency_reports.show.official_answer') %></h3>
-              <%= @deficiency_report.official_answer %>
+              <%= AdminWYSIWYGSanitizer.new.sanitize(@deficiency_report.official_answer) %>
             </div>
           <% end %>
         <% end %>
@@ -56,7 +56,7 @@
             <%= f.translatable_fields do |translations_form| %>
               <div class="small-12 column" >
                 <%= translations_form.label :official_answer, t('custom.deficiency_reports.show.official_answer') %>
-                <%= translations_form.text_field :official_answer, label: false %>
+                <%= translations_form.text_area :official_answer, label: false, class: "html-area #{ck_editor_class(current_user)}" %>
               </div>
 
               <div class="actions small-12 column">

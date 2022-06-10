@@ -7,7 +7,7 @@ de:
         name: für Endbenutzer sichtbar
         provider: Karten-URL
       labels:
-        attribution: Zuschreibung
+        attribution: Attribution
         layer_names: Kartenebenennamen
         protocol: Kartenprotokoll
         provider: Anbieter

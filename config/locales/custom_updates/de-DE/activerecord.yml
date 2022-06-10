@@ -42,7 +42,7 @@ de:
       map_layer:
         name: Name der Kartenebene
         provider: Anbieter
-        attribution: Zuschreibung
+        attribution: Attribution
         base: Basisschicht der Karte
         layer_names: Kartenebenennamen
         show_by_default: standardmäßig anzeigen

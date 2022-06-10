@@ -341,7 +341,7 @@ de:
       featured_proposals: Hervorgehoben
       orders:
         confidence_score: Am besten bewertet
-        created_at: Neuste
+        created_at: Neueste zuerst
         hot_score: Aktivste
         most_commented: Am meisten kommentiert
         relevance: Relevanz
