@@ -1,7 +1,13 @@
 require_dependency Rails.root.join("app", "components", "budgets", "investments", "new_component").to_s
 
 class Budgets::Investments::NewComponent < ApplicationComponent
+  attr_reader :investment
   delegate :back_link_to, to: :helpers
+
+  def initialize(budget, investment = nil)
+    @budget = budget
+    @investment = investment
+  end
 
   private
 

@@ -20,9 +20,6 @@ class ProposalsController
     @selected_geozone_restriction = params[:geozone_restriction] || 'no_restriction'
     @restricted_geozones = (params[:restricted_geozones] || '').split(',').map(&:to_i)
 
-    @top_level_active_projekts = Projekt.top_level_sidebar_current('proposals')
-    @top_level_archived_projekts = Projekt.top_level_sidebar_expired('proposals')
-
     discard_draft
     discard_archived
     load_retired
@@ -30,12 +27,10 @@ class ProposalsController
     load_featured
     remove_archived_from_order_links
 
-    @scoped_projekt_ids = (@top_level_active_projekts + @top_level_archived_projekts)
-      .map{ |p| p.all_children_projekts.unshift(p) }
-      .flatten.select do |projekt|
-        ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.proposals.show_in_sidebar_filter').value.present?
-      end
-      .pluck(:id)
+    @scoped_projekt_ids = Proposal.scoped_projekt_ids_for_index
+
+    @top_level_active_projekts = Projekt.top_level.current.where(id: @scoped_projekt_ids)
+    @top_level_archived_projekts = Projekt.top_level.expired.where(id: @scoped_projekt_ids)
 
     unless params[:search].present?
       take_by_my_posts
@@ -74,7 +69,7 @@ class ProposalsController
     elsif @proposal.save
       @proposal.publish
 
-      if @proposal.proposal_phase.info_active?
+      if @proposal.proposal_phase.active?
         redirect_to page_path(
           @proposal.projekt.page.slug,
           anchor: 'filter-subnav',
@@ -93,7 +88,7 @@ class ProposalsController
   def publish
     @proposal.publish
 
-    if @proposal.proposal_phase.info_active?
+    if @proposal.proposal_phase.active?
       redirect_to page_path(
         @proposal.projekt.page.slug,
         anchor: 'filter-subnav',

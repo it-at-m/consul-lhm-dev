@@ -18,7 +18,8 @@ class ProjektEvent < ApplicationRecord
     where('datetime < ?', Time.now)
   }
 
-  def self.base_selection(scoped_projekt_ids = Projekt.ids)
-    where(projekt_id: scoped_projekt_ids)
+  def self.scoped_projekt_ids_for_footer(projekt)
+		projekt.top_parent.all_children_projekts.unshift(projekt.top_parent).
+      pluck(:id)
   end
 end

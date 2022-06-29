@@ -4,10 +4,6 @@ class ProjektPhase::QuestionPhase < ProjektPhase
     projekt.questions.any?
   end
 
-  def phase_info_activated?
-    info_active?
-  end
-
   def name
     'question_phase'
   end

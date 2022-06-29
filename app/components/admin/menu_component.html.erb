@@ -23,7 +23,7 @@
 
   <% if feature?(:legislation) %>
     <li class="<%= "is-active" if controller.class.parent == Admin::Legislation %>">
-      <%= link_to t("admin.menu.legislation"), admin_legislation_processes_path, class: "legislation-link" %>
+      <%= link_to t("custom.admin.menu.legislation"), admin_legislation_processes_path, class: "legislation-link" %>
     </li>
   <% end %>
 

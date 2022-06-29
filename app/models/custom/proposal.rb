@@ -21,14 +21,28 @@ class Proposal < ApplicationRecord
 
   alias_attribute :projekt_phase, :proposal_phase
 
-  def self.base_selection(scoped_projekt_ids = Projekt.ids)
+  def self.scoped_projekt_ids_for_index
+    Projekt.top_level
+      .map{ |p| p.all_children_projekts.unshift(p) }
+      .flatten.select do |projekt|
+        ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.main.activate').value.present? &&
+        ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.proposals.show_in_sidebar_filter').value.present? &&
+        projekt.all_children_projekts.unshift(projekt).any? { |p| p.proposal_phase.current? || p.proposals.base_selection.any? }
+      end
+      .pluck(:id)
+  end
+
+  def self.scoped_projekt_ids_for_footer(projekt)
+    projekt.top_parent.all_children_projekts.unshift(projekt.top_parent).select do |projekt|
+      ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.main.activate').value.present? &&
+      projekt.all_children_projekts.unshift(projekt).any? { |p| p.proposal_phase.current? || p.proposals.base_selection.any? }
+    end.pluck(:id)
+  end
+
+  def self.base_selection
     published.
       not_archived.
-      not_retired.
-      where(projekt_id: scoped_projekt_ids).
-      joins(:projekt).merge(Projekt.activated).
-      joins( 'INNER JOIN projekt_settings shwmn ON projekts.id = shwmn.projekt_id' ).
-      where( 'shwmn.key': 'projekt_feature.proposals.show_in_sidebar_filter', 'shwmn.value': 'active' )
+      not_retired
   end
 
   def successful?

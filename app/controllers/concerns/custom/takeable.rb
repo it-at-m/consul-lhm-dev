@@ -5,7 +5,7 @@ module Takeable
     @resources = @resources.joins(:projekt).merge(Projekt.activated)
 
     if controller_name.in?(['debates', 'proposals', 'polls'])
-      projekts_visible_in_sidebar = Projekt.visible_in_sidebar(controller_name)
+      projekts_visible_in_sidebar = Projekt.show_in_sidebar(controller_name)
       @resources = @resources.where(projekt: projekts_visible_in_sidebar)
     end
 

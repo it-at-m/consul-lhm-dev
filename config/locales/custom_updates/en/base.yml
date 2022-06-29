@@ -151,5 +151,8 @@ en:
       start_entry: + Create a post
       start_proposal: Create a proposal
       user_entries: Latest submissions
+    welcome_launch:
+      p1: We're building a new citizen participation platform for the city of %{org_name}
+      p2: We'll go live on %{date}!
   tag_names:
     general: General

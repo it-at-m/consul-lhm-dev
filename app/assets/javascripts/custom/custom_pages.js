@@ -3,9 +3,9 @@
   App.CustomPages = {
     initialize: function() {
       var tabFilterSubnav = document.getElementById('filter-subnav')
+      var questionTab = document.querySelector('.page-subnav-tab.is-active')
 
-      if (tabFilterSubnav) {
-
+      if (tabFilterSubnav && questionTab) {
         var scrollLeftWidth = $('.page-subnav-tab.is-active').offset().left - tabFilterSubnav.clientWidth
 
         if (scrollLeftWidth > 0) {

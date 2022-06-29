@@ -2,11 +2,12 @@
 
   <%= render "shared/errors", resource: @category %>
 
-	<%= f.translatable_fields do |translations_form| %>
-		<div class="small-12 column">
-			<%= translations_form.text_field :name %>
-		</div>
-	<% end %>
+  <%= render "shared/globalize_locales", resource: @category %>
+  <%= f.translatable_fields do |translations_form| %>
+    <div class="small-12 column">
+      <%= translations_form.text_field :name %>
+    </div>
+  <% end %>
 
   <div class="clear">
     <div class="small-12 medium-6 large-4 column">

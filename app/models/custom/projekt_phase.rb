@@ -1,5 +1,5 @@
 class ProjektPhase < ApplicationRecord
-  belongs_to :projekt, optional: true
+  belongs_to :projekt, optional: true, touch: true
   has_many :projekt_phase_geozones, dependent: :destroy
   has_many :geozone_restrictions, through: :projekt_phase_geozones, source: :geozone
 

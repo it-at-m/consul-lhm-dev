@@ -24,7 +24,7 @@ class ProjektSetting < ApplicationRecord
   end
 
   def projekt_feature_type
-    if %w[main phase general sidebar footer debates proposals proposal_options polls budgets milestones].include? projekt_feature_prefix
+    if %w[main phase general sidebar debates proposals proposal_options polls budgets milestones].include? projekt_feature_prefix
       projekt_feature_prefix
     else
       "configuration"
@@ -37,25 +37,6 @@ class ProjektSetting < ApplicationRecord
       {
         "projekt_feature.main.activate": '',
 
-        "projekt_feature.phase.comment": '',
-        "projekt_feature.phase.comment_info": 'active',
-        "projekt_feature.phase.debate": '',
-        "projekt_feature.phase.debate_info": 'active',
-        "projekt_feature.phase.proposal": '',
-        "projekt_feature.phase.proposal_info": 'active',
-        "projekt_feature.phase.voting": '',
-        "projekt_feature.phase.voting_info": 'active',
-        "projekt_feature.phase.budget": '',
-        "projekt_feature.phase.budget_info": 'active',
-        "projekt_feature.phase.milestone": '',
-        "projekt_feature.phase.milestone_info": 'active',
-        "projekt_feature.phase.projekt_notification": '',
-        "projekt_feature.phase.projekt_notification_info": 'active',
-        "projekt_feature.phase.newsfeed": '',
-        "projekt_feature.phase.newsfeed_info": 'active',
-        "projekt_feature.phase.event": '',
-        "projekt_feature.phase.event_info": 'active',
-
         "projekt_feature.general.show_in_navigation": '',
         "projekt_feature.general.show_in_overview_page": '',
         "projekt_feature.general.hide_additional_info_in_projekt_selector": 'active',
@@ -64,13 +45,12 @@ class ProjektSetting < ApplicationRecord
         "projekt_feature.general.enable_tags": '',
         "projekt_feature.general.enable_sdgs": '',
         "projekt_feature.general.set_default_sorting_to_newest": '',
+        "projekt_feature.general.show_projekt_footer": 'active',
 
         "projekt_feature.sidebar.show_phases_in_projekt_page_sidebar": 'active',
         "projekt_feature.sidebar.show_map": 'active',
         "projekt_feature.sidebar.show_navigator_in_projekts_page_sidebar": 'active',
         "projekt_feature.sidebar.projekt_page_sharing": 'active',
-
-        "projekt_feature.footer.show_projekt_footer": 'active',
 
         "projekt_feature.debates.show_report_button_in_sidebar": 'active',
         "projekt_feature.debates.show_related_content": 'active',

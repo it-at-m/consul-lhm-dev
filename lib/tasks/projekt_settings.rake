@@ -21,31 +21,19 @@ namespace :projekt_settings do
       puts "Migrate phases active status for Projekt with id: #{projekt.id} "
 
       projekt.comment_phase.update(
-        active: use_projekt_phase_setting.call(projekt, "comment"),
-        info_active: use_projekt_phase_setting.call(projekt, "comment_info")
+        active: use_projekt_phase_setting.call(projekt, "comment")
       )
 
       projekt.debate_phase.update(
-        active: use_projekt_phase_setting.call(projekt, "debate"),
-        info_active: use_projekt_phase_setting.call(projekt, "debate_info")
+        active: use_projekt_phase_setting.call(projekt, "debate")
       )
 
       projekt.proposal_phase.update(
-        active: use_projekt_phase_setting.call(projekt, "proposal"),
-        info_active: use_projekt_phase_setting.call(projekt, "proposal_info")
+        active: use_projekt_phase_setting.call(projekt, "proposal")
       )
 
       projekt.milestone_phase.update(
-        active: use_projekt_phase_setting.call(projekt, "milestone"),
-        info_active: use_projekt_phase_setting.call(projekt, "milestone_info")
-      )
-
-      projekt.voting_phase.update(
-        info_active: use_projekt_phase_setting.call(projekt, "voting_info")
-      )
-
-      projekt.budget_phase.update(
-        info_active: use_projekt_phase_setting.call(projekt, "budget_info")
+        active: use_projekt_phase_setting.call(projekt, "milestone")
       )
     end
   end

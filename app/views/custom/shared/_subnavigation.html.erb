@@ -1,23 +1,29 @@
 <ul class="main-menu">
   <div class="content-items">
     <%= render partial: 'shared/subnavigation_home', locals: { placement: placement } %>
-    <%= render partial: 'shared/subnavigation_projekts_overview', locals: { placement: placement } if Setting['projekts.overview_page'].present? %>
-    <%= raw content_block("subnavigation_left_desktop", I18n.locale) if placement == 'desktop' %>
-    <%= raw content_block("subnavigation_left_mobile", I18n.locale) if placement == 'mobile' %>
-    <%= render partial: 'shared/subnavigation_projekts', locals: { placement: placement } %>
-    <%= render partial: 'shared/subnavigation_deficiency_reports', locals: { placement: placement } if deficiency_reports_feature?('show_in_main_menu') %>
-    <%= raw content_block("subnavigation_right_desktop", I18n.locale) if placement == 'desktop' %>
-    <%= raw content_block("subnavigation_right_mobile", I18n.locale) if placement == 'mobile' %>
-    <% if extended_feature?("general.links_to_create_resources_in_menu") %>
+    <%= render partial: 'shared/subnavigation_projekts_overview', locals: { placement: placement } if Setting['projekts.overview_page'].present? && !launch_page %>
+    <%= raw content_block("subnavigation_left_desktop", I18n.locale) if placement == 'desktop' && !launch_page %>
+    <%= raw content_block("subnavigation_left_mobile", I18n.locale) if placement == 'mobile' && !launch_page %>
+    <%= render partial: 'shared/subnavigation_projekts', locals: { placement: placement } unless launch_page %>
+    <%= render partial: 'shared/subnavigation_deficiency_reports', locals: { placement: placement } if deficiency_reports_feature?('show_in_main_menu') && !launch_page %>
+    <%= raw content_block("subnavigation_right_desktop", I18n.locale) if placement == 'desktop' && !launch_page %>
+    <%= raw content_block("subnavigation_right_mobile", I18n.locale) if placement == 'mobile' && !launch_page %>
+    <% if extended_feature?("general.links_to_create_resources_in_menu") &&
+        !launch_page &&
+        ( Projekt.top_level.selectable_in_selector('debates', current_user).any? ||
+          Projekt.top_level.selectable_in_selector('proposals', current_user).any? ||
+          Projekt.joins(:budget).where( budgets: { phase: 'accepting'} ).any? ) %>
       <%= render partial: 'shared/subnavigation_new_entry', locals: { placement: placement } %>
     <% end %>
   </div>
 
-  <div class="account-admin-items">
-    <%= render partial: 'shared/subnavigation_locale', locals: { placement: placement } if extended_feature?("general.language_switcher_in_menu") && placement == 'desktop' %>
-    <%= render partial: "layouts/notification_item", locals: { placement: placement } %>
-    <%= render partial: 'shared/subnavigation_konto', locals: { placement: placement } %>
-    <%= render partial: 'shared/subnavigation_admin', locals: { placement: placement } %>
-    <%= render partial: 'shared/subnavigation_locale', locals: { placement: placement } if extended_feature?("general.language_switcher_in_menu") && placement == 'mobile' %>
-  </div>
+  <% unless launch_page %>
+    <div class="account-admin-items">
+      <%= render partial: 'shared/subnavigation_locale', locals: { placement: placement } if extended_feature?("general.language_switcher_in_menu") && placement == 'desktop' %>
+      <%= render partial: "layouts/notification_item", locals: { placement: placement } %>
+      <%= render partial: 'shared/subnavigation_konto', locals: { placement: placement } %>
+      <%= render partial: 'shared/subnavigation_admin', locals: { placement: placement } %>
+      <%= render partial: 'shared/subnavigation_locale', locals: { placement: placement } if extended_feature?("general.language_switcher_in_menu") && placement == 'mobile' %>
+    </div>
+  <% end %>
 </ul>

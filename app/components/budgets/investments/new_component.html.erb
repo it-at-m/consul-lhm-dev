@@ -8,5 +8,9 @@
   </aside>
 
 
-  <%= render "/budgets/investments/form", form_url: budget_investments_path(budget) %>
+  <% if investment.present? %>
+    <%= render "/budgets/investments/form", form_url: budget_investment_path(budget, investment) %>
+  <% else %>
+    <%= render "/budgets/investments/form", form_url: budget_investments_path(budget) %>
+  <% end %>
 </main>

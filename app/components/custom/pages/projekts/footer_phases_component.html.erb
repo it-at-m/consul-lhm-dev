@@ -19,90 +19,17 @@
       <div class='footer-phases-filter-subnav'>
 
         <ul id='filter-subnav' class='key-dates'>
-          <% @phases.each do |phase| %>
-
-            <% if phase.phase_info_activated? %>
-              <li id="filter-subnav-<%= phase.resources_name %>" class="page-subnav-tab <%= 'is-active' if phase.resources_name == default_phase_name %>">
-                <%= link_to "/#{params[:id]}/#{phase.name}_footer_tab", remote: true, onclick: '$("#footer-content").addClass("show-loader"); ' do %>
-                  <h4>
-                    <%= t("custom.projekts.page.tabs.#{phase.resources_name}") %>
-                    <% if phase.resources_name.in?(['debates', 'proposals', 'polls', 'comments', 'projekt_events', 'projekt_questions', 'legislation_processes']) %>
-                      <% count = instance_variable_get("@#{phase.resources_name}_count") %>
-                      <%= "(#{count})" %>
-                    <% end %>
-                  </h4>
-                  <div class='tab-info-summary'>
-                    <% if phase.start_date.present? && phase.end_date.present? %>
-                      <span class='time-icon'><%= format_date_range(phase.start_date, phase.end_date) %></span>
-                    <% end %>
-
-                    <% unless get_projekt_phase_restriction_name(phase, nil, true) == 'no_restriction' %>
-                      <span class='geo-restriction-icon'><%= get_projekt_phase_restriction_name(phase) %></span>
-                    <% end %>
-                  </div>
-                <% end %>
-              </li>
-            <% end %>
-
-          <% end %>
-
-          <% if milestone_phase.phase_info_activated? %>
-            <li id="filter-subnav-<%= milestone_phase.resources_name %>" class="page-subnav-tab <%= 'is-active' if milestone_phase.resources_name == default_phase_name %>">
-              <%= link_to "/#{params[:id]}/#{milestone_phase.name}_footer_tab", remote: true, onclick: '$("#footer-content").addClass("show-loader")' do %>
-                <h4>
-                  <%= t("custom.projekts.page.tabs.#{milestone_phase.resources_name}") %>
-                  <%= "(#{projekt.milestones.count})" %>
-                </h4>
-                <div class='tab-info-summary'>
-                  <% if @projekt.milestones.any? %>
-                  <span class='time-icon'><%= format_date(@projekt.milestones.last.publication_date.to_date) %></span>
-                  <% end %>
-                </div>
-              <% end %>
-            </li>
-          <% end %>
-
-          <% if projekt_notification_phase.phase_info_activated? %>
-            <li id="filter-subnav-<%= projekt_notification_phase.resources_name %>" class="page-subnav-tab <%= 'is-active' if projekt_notification_phase.resources_name == default_phase_name %>">
-              <%= link_to "/#{params[:id]}/#{projekt_notification_phase.name}_footer_tab", remote: true, onclick: '$("#footer-content").addClass("show-loader")' do %>
-                <h4>
-                  <%= t("custom.projekts.page.tabs.#{projekt_notification_phase.resources_name}") %>
-                  <%= "(#{projekt.projekt_notifications.count})" %>
-                </h4>
-                <div class='tab-info-summary'>
-                  <% if @projekt.projekt_notifications.any? %>
-                  <span class='time-icon'><%= format_date(@projekt.projekt_notifications.last.updated_at.to_date) %></span>
-                  <% end %>
-                </div>
-              <% end %>
-            </li>
-          <% end %>
-
-          <% if event_phase.phase_info_activated? %>
-            <li id="filter-subnav-<%= event_phase.resources_name %>" class="page-subnav-tab <%= 'is-active' if event_phase.resources_name == default_phase_name %>">
-              <%= link_to "/#{params[:id]}/#{event_phase.name}_footer_tab", remote: true, onclick: '$("#footer-content").addClass("show-loader")' do %>
-                <h4>
-                  <%= t("custom.projekts.page.tabs.#{event_phase.resources_name}") %>
-                  <%= "(#{projekt_events_count})" %>
-                </h4>
-                <div class='tab-info-summary'>
-                  <% if projekt_events.sort_by_incoming.any? %>
-                  <span class='time-icon'><%= format_date(projekt_events.sort_by_incoming.first.datetime.to_date) %></span>
-                  <% end %>
-                </div>
-              <% end %>
-            </li>
-          <% end %>
-
-          <% if newsfeed_phase.phase_info_activated? %>
-            <li id="filter-subnav-<%= newsfeed_phase.resources_name %>" class="page-subnav-tab <%= 'is-active' if newsfeed_phase.resources_name == default_phase_name %>">
-              <%= link_to "/#{params[:id]}/#{newsfeed_phase.name}_footer_tab", remote: true, onclick: '$("#footer-content").addClass("show-loader")' do %>
-                <h4>
-                  <%= t("custom.projekts.page.tabs.#{newsfeed_phase.resources_name}") %>
-                </h4>
-              <% end %>
-            </li>
-          <% end %>
+          <%= render Pages::Projekts::FooterPhaseTabComponent.new(projekt.comment_phase, default_phase_name, @comments_count) %>
+          <%= render Pages::Projekts::FooterPhaseTabComponent.new(projekt.debate_phase, default_phase_name, @debates_count) %>
+          <%= render Pages::Projekts::FooterPhaseTabComponent.new(projekt.proposal_phase, default_phase_name, @proposals_count) %>
+          <%= render Pages::Projekts::FooterPhaseTabComponent.new(projekt.question_phase, default_phase_name, @projekt_questions_count) %>
+          <%= render Pages::Projekts::FooterPhaseTabComponent.new(projekt.voting_phase, default_phase_name, @polls_count) %>
+          <%= render Pages::Projekts::FooterPhaseTabComponent.new(projekt.budget_phase, default_phase_name) %>
+          <%= render Pages::Projekts::FooterPhaseTabComponent.new(projekt.legislation_process_phase, default_phase_name, @legislation_processes_count) %>
+          <%= render Pages::Projekts::FooterPhaseTabComponent.new(projekt.projekt_notification_phase, default_phase_name, @projekt_notifications_count) %>
+          <%= render Pages::Projekts::FooterPhaseTabComponent.new(projekt.milestone_phase, default_phase_name, @milestones_count) %>
+          <%= render Pages::Projekts::FooterPhaseTabComponent.new(projekt.event_phase, default_phase_name, @projekt_events_count) %>
+          <%= render Pages::Projekts::FooterPhaseTabComponent.new(projekt.newsfeed_phase, default_phase_name) %>
         </ul>
       </div>
     </div>

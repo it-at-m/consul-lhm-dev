@@ -18,6 +18,7 @@
             <th><%= t("admin.legislation.questions.table.question_options") %></th>
             <th class="text-center"><%= t("admin.legislation.questions.table.answers_count") %></th>
             <th class="text-center"><%= t("admin.legislation.questions.table.comments_count") %></th>
+            <th><%= t("admin.actions.actions") %></th>
           </tr>
         </thead>
         <tbody>
@@ -35,6 +36,7 @@
             </td>
             <td class="text-center"><%= question.answers_count %></td>
             <td class="text-center"><%= link_to question.comments.count, legislation_process_question_path(@projekt, question, anchor: "comments") %></td>
+            <td><%= render Admin::TableActionsComponent.new(question, edit_path: edit_admin_projekt_projekt_question_path(@projekt, question), destroy_path: admin_projekt_projekt_question_path(@projekt, question)) %></td>
           </tr>
         <% end %>
         </tbody>

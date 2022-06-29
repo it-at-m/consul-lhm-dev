@@ -54,6 +54,9 @@
           <%= render "shared/globalize_locales", resource: @deficiency_report %>
           <%= translatable_form_for @deficiency_report, url: update_official_answer_deficiency_report_path do |f| %>
             <%= f.translatable_fields do |translations_form| %>
+
+              <%= translations_form.hidden_field :title, label: false, value: @deficiency_report.title %>
+
               <div class="small-12 column" >
                 <%= translations_form.label :official_answer, t('custom.deficiency_reports.show.official_answer') %>
                 <%= translations_form.text_area :official_answer, label: false, class: "html-area #{ck_editor_class(current_user)}" %>

@@ -3,10 +3,6 @@ class ProjektPhase::DebatePhase < ProjektPhase
     active?
   end
 
-  def phase_info_activated?
-    info_active?
-  end
-
   def name
     'debate_phase'
   end

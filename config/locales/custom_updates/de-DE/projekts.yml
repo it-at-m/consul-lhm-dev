@@ -37,6 +37,7 @@ de:
           admin_controls:
             copy_code: Quellcode kopieren
             edit_projekt: Projekt bearbeiten
+            edit_projekt_settings: Projektfunktionen
             edit_projekt_page: Projektseite bearbeiten
           map:
             title: Gebiet
@@ -59,7 +60,7 @@ de:
           projekt_questions: Kurzumfrage
           proposals: Vorschläge
           questions: Questions
-          legislation_processes: Textbearbeitung
+          legislation_process: Textbearbeitung
       phase_name:
         budget_phase: Budget
         comment_phase: Kommentare

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>">
+  <head>
+    <%= render "layouts/common_head", default_title: setting["meta_title"] %>
+    <%= render "layouts/tracking_data" %>
+    <%= render "layouts/meta_tags" %>
+    <%= content_for :canonical %>
+    <%= favicon_link_tag image_path_for("apple-touch-icon-200.png"),
+                     rel: "icon apple-touch-icon",
+                     sizes: "200x200",
+                     type: "image/png" %>
+    <%= content_for :social_media_meta_tags %>
+  </head>
+  <body class="<%= yield(:body_class) %> public">
+
+    <div class="wrapper <%= yield(:wrapper_class) %>">
+      <%= render "layouts/header", with_subnavigation: true, launch_page: true %>
+
+      <%= render "layouts/flash" %>
+
+      <%= yield %>
+    </div>
+    <div class="footer">
+      <%= render "layouts/footer" %>
+    </div>
+  </body>
+</html>

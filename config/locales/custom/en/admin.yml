@@ -40,6 +40,15 @@ en:
         cloud_category: Tag cloud for category
         cloud_subcategory: Tag cloud for subcategory
         custom_tags: User tags
+
+    legislation:
+      processes:
+        new:
+          title: Create new text
+          submit_button: Create text
+        index:
+          create: Create text
+          title: Texts
   custom:
     sidebar_filter:
       my_posts:

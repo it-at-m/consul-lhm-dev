@@ -20,11 +20,21 @@
 </div>
 
 
-<div class='new-entry text-center'>
-  <%= button_tag t('custom.welcome.start_entry'), class: 'button hollow', onclick: '$(".new-entries").toggleClass("hide")' %>
-</div>
+<% if extended_feature?("general.links_to_create_resources_in_menu") &&
+  ( Projekt.top_level.selectable_in_selector('debates', current_user).any? ||
+    Projekt.top_level.selectable_in_selector('proposals', current_user).any? ) %>
 
-<div class='new-entries text-center hide'>
-  <%= link_to t('custom.welcome.start_debate'), new_debate_path, class: 'button' %>
-  <%= link_to t('custom.welcome.start_proposal'), new_proposal_path, class: 'button'   %>
-</div>
+  <div class='new-entry text-center'>
+    <%= button_tag t('custom.welcome.start_entry'), class: 'button hollow', onclick: '$(".new-entries").toggleClass("hide")' %>
+  </div>
+
+  <div class='new-entries text-center hide'>
+    <% if Projekt.top_level.selectable_in_selector('debates', current_user).any? %>
+      <%= link_to t('custom.welcome.start_debate'), new_debate_path, class: 'button' %>
+    <% end %>
+
+    <% if Projekt.top_level.selectable_in_selector('proposals', current_user).any? %>
+      <%= link_to t('custom.welcome.start_proposal'), new_proposal_path, class: 'button' %>
+    <% end %>
+  </div>
+<% end %>

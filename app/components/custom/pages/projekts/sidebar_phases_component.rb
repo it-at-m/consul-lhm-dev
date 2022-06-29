@@ -14,4 +14,10 @@ class Pages::Projekts::SidebarPhasesComponent < ApplicationComponent
     return t("custom.projekts.phase_name.#{phase.name}_details.#{part}") if part
     t("custom.projekts.phase_name.#{phase.name}")
   end
+
+  def show_cta?
+    return true if projekt.budget_phase.current? && projekt.budget.phase.in?(%w[accepting selecting balloting])
+
+    phases.any? { |phase| phase.type != 'ProjektPhase::BudgetPhase' && phase.current? } 
+  end
 end

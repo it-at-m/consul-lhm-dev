@@ -1,3 +1,4 @@
+<% launch_page ||= false %>
 <header>
   <div class="top-bar">
 
@@ -19,7 +20,7 @@
     </span>
 
     <div class='header-right-group not-print'>
-      <% unless current_user %>
+      <% if !launch_page && current_user.nil? %>
         <div class='account-buttons show-for-large'>
           <%= link_to t('devise_views.menu.login_items.login'), new_user_session_path, class: 'sign-in-button', role: 'button' %>
           <%= link_to t('devise_views.menu.login_items.signup') , new_user_registration_path, class: 'sign-up-button', role: 'button'  %>
@@ -50,14 +51,14 @@
               <%= content_tag :span, Setting['extended_option.general.subtitle'] %>
             </h2>
 
-            <% unless current_user %>
+            <% if !launch_page && current_user.nil? %>
               <div class='account-buttons'>
                 <%= link_to t('devise_views.menu.login_items.login'), new_user_session_path, class: 'sign-in-button', role: 'button' %>
                 <%= link_to t('devise_views.menu.login_items.signup') , new_user_registration_path, class: 'sign-up-button', role: 'button'  %>
               </div>
             <% end %>
 
-            <%= render partial: "shared/subnavigation", locals: { placement: 'mobile' } %>
+            <%= render partial: "shared/subnavigation", locals: { placement: 'mobile', launch_page: launch_page } %>
             <div class="small-12 column">
               <%= render "shared/top_links" %>
             </div>
@@ -69,7 +70,7 @@
 
   <div id="navigation_bar" class="subnavigation expanded not-print">
     <div class="hide-for-small-only">
-      <%= render partial: "shared/subnavigation", locals: { placement: 'desktop' } %>
+      <%= render partial: "shared/subnavigation", locals: { placement: 'desktop', launch_page: launch_page } %>
     </div>
   </div>
 </header>

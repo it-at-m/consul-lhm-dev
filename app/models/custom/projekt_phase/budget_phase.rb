@@ -3,10 +3,6 @@ class ProjektPhase::BudgetPhase < ProjektPhase
     projekt.budget.present?
   end
 
-  def phase_info_activated?
-    info_active? && projekt.budget.present?
-  end
-
   def name
     'budget_phase'
   end

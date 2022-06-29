@@ -43,8 +43,6 @@ class Projekt < ApplicationRecord
   has_and_belongs_to_many :geozone_affiliations, through: :geozones_projekts, class_name: 'Geozone'
   has_one :map_location, dependent: :destroy
 
-  has_one :legislation_process, class_name: 'Legislation::Process'
-
   has_many :projekt_settings, dependent: :destroy
   has_many :projekt_notifications, dependent: :destroy
 
@@ -56,7 +54,8 @@ class Projekt < ApplicationRecord
   accepts_nested_attributes_for(
     :debate_phase, :proposal_phase, :budget_phase,
     :voting_phase, :comment_phase, :milestone_phase, :projekt_notifications,
-    :projekt_events, :event_phase, :question_phase, :legislation_process_phase
+    :projekt_events, :event_phase, :question_phase, :legislation_process_phase,
+    :newsfeed_phase, :projekt_notification_phase
   )
 
   before_validation :set_default_color
@@ -100,16 +99,13 @@ class Projekt < ApplicationRecord
   scope :visible_in_menu, -> { joins( 'INNER JOIN projekt_settings vim ON projekts.id = vim.projekt_id').
                                where( 'vim.key': 'projekt_feature.general.show_in_navigation', 'vim.value': 'active' ) }
 
-  scope :visible_in_sidebar, ->(resources_name) { joins( 'INNER JOIN projekt_settings spism ON projekts.id = spism.projekt_id' ).
-                                                  where( 'spism.key': "projekt_feature.#{resources_name}.show_in_sidebar_filter", 'spism.value': 'active' ) }
+  scope :show_in_sidebar, ->(resources_name) { joins( 'INNER JOIN projekt_settings sis ON projekts.id = sis.projekt_id' ).
+                                                  where( 'sis.key': "projekt_feature.#{resources_name}.show_in_sidebar_filter", 'sis.value': 'active' ) }
 
   scope :with_active_feature, ->(projekt_feature_key) { joins( 'INNER JOIN projekt_settings waf ON projekts.id = waf.projekt_id').
                                                         where( 'waf.key': "projekt_feature.#{projekt_feature_key}", 'waf.value': 'active' ) }
 
   scope :top_level_navigation, -> { top_level.visible_in_menu }
-
-  scope :top_level_sidebar_current, ->(controller_name) { top_level.visible_in_sidebar(controller_name).current }
-  scope :top_level_sidebar_expired, ->(controller_name) { top_level.visible_in_sidebar(controller_name).expired }
 
   scope :by_my_posts, -> (my_posts_switch, current_user_id) {
     return unless my_posts_switch
@@ -135,6 +131,7 @@ class Projekt < ApplicationRecord
 
   def selectable?(controller_name, user)
     return true if controller_name == 'polls'
+    return true if controller_name == 'processes'
     return false if user.nil?
 
     if controller_name == 'proposals'
@@ -333,6 +330,10 @@ class Projekt < ApplicationRecord
       return map_layers.or(MapLayer.where(projekt: nil, base: true))
     end
     map_layers
+  end
+
+  def legislation_process
+    legislation_processes.order(:updated_at).last
   end
 
   private

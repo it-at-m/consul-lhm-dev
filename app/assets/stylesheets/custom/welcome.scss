@@ -58,7 +58,7 @@
     background-repeat: no-repeat;
     background-color: $welcomebgcolor;
     position: relative;
-		height: 285px;
+    height: 285px;
  
     .jumbo-message {
       position: absolute;
@@ -67,11 +67,11 @@
       @include grid-column-gutter;
     }
 
-		h1 {
-			font-size: rem-calc(30);
-			font-weight: 700;
-			line-height: rem-calc(40);
-		}
+    h1 {
+      font-size: rem-calc(30);
+      font-weight: 700;
+      line-height: rem-calc(40);
+    }
 
     h1, p {
       color: $white;
@@ -114,6 +114,36 @@
 
     @media only screen and (min-width: 1900px) {
       height: 600px;
+    }
+  }
+}
+
+.home-page.launch-page {
+  .jumbo {
+    margin-bottom: 0;
+    min-height: calc(100vh - 385px);
+  }
+
+  .footer {
+    margin-top: 0;
+  }
+
+  .jumbo-message p {
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 1.4;
+    display: block;
+  }
+
+  @media only screen and (min-width: 550px) {
+    p {
+      display: block;
+    }
+  }
+
+  @media only screen and (min-width: 1920px) {
+    .jumbo-message {
+      top: 10%;
     }
   }
 }

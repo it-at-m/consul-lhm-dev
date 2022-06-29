@@ -578,15 +578,15 @@ de:
           homepage_description: Hier können Sie den Inhalt des Beteiligungsverfahrens erläutern
           banner_title: Farben Header
         index:
-          create: Neues Beteiligungsverfahren
-          title: Beteiligungsverfahren
+          create: Neues Textbearbeitung
+          title: Textbearbeitung
           filters:
             active: Aktiv
             all: Alle
         new:
           back: Zurück
-          title: Neues kollaboratives Beteiligungsverfahren erstellen
-          submit_button: Beteiligungsverfahren erstellen
+          title: Neues Textbearbeitung
+          submit_button: Textbearbeitung erstellen
         proposals:
           orders:
             id: ID

@@ -10,13 +10,26 @@ class Poll < ApplicationRecord
 
   scope :with_current_projekt,  -> { joins(:projekt).merge(Projekt.current) }
 
-  def self.base_selection(scoped_projekt_ids = Projekt.ids)
+  def self.base_selection
     created_by_admin.
-      not_budget.
-      where(projekt_id: scoped_projekt_ids).
-      joins(:projekt).merge(Projekt.activated).
-      joins( 'INNER JOIN projekt_settings shwmn ON projekts.id = shwmn.projekt_id' ).
-      where( 'shwmn.key': 'projekt_feature.polls.show_in_sidebar_filter', 'shwmn.value': 'active' )
+      not_budget
+  end
+
+  def self.scoped_projekt_ids_for_index
+   Projekt.top_level
+     .map{ |p| p.all_children_projekts.unshift(p) }
+    .flatten.select do |projekt|
+      ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.main.activate').value.present? &&
+      ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.polls.show_in_sidebar_filter').value.present? &&
+      Poll.base_selection.where(projekt_id: projekt.all_children_ids.unshift(projekt.id)).any?
+    end.pluck(:id)
+  end
+
+  def self.scoped_projekt_ids_for_footer(projekt)
+    projekt.top_parent.all_children_projekts.unshift(projekt.top_parent).select do |projekt|
+      ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.main.activate').value.present? &&
+      Poll.base_selection.where(projekt_id: projekt.all_children_ids.unshift(projekt.id)).any?
+    end.pluck(:id)
   end
 
   def answerable_by?(user)

@@ -102,21 +102,6 @@
 <h2 class="margin-top-25"><%= t("custom.admin.projekts.edit.projekt_phases_tab.phases_block_title") %></h2>
 
 <table class='edit-projekt margin-top'>
-  <thead>
-    <th scope="col" class="small-2"><%= t("custom.admin.projekts.edit.projekt_phases_tab.phase_name") %></th>
-    <th scope="col" class="small-6">
-      <div class='row collapse'>
-        <div class='column small-6'>
-          <%= t("custom.admin.projekts.edit.projekt_phases_tab.beginning") %>
-        </div>
-        <div class='column small-6' style='padding-left:5px;'>
-          <%= t("custom.admin.projekts.edit.projekt_phases_tab.ending") %>
-        </div>
-      </div>
-    </th>
-    <th scope="col" class="small-2"><%= t("custom.admin.projekts.edit.projekt_phases_tab.activate_info") %></th>
-    <th scope="col" class="small-2"><%= t("custom.admin.projekts.edit.projekt_phases_tab.activate_phase") %></th>
-  </thead>
   <tbody>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
@@ -155,8 +140,23 @@
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
+      projekt_phase: @projekt.projekt_notification_phase,
+      phase_name: 'projekt_notification_phase'
+    } %>
+
+    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
       projekt_phase: @projekt.milestone_phase,
       phase_name: 'milestone_phase'
+    } %>
+
+    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
+      projekt_phase: @projekt.event_phase,
+      phase_name: 'event_phase'
+    } %>
+
+    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
+      projekt_phase: @projekt.newsfeed_phase,
+      phase_name: 'newsfeed_phase'
     } %>
   </tbody>
 </table>

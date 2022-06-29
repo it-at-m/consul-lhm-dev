@@ -27,12 +27,12 @@ class Sidebar::ProjektsFilterComponent < ApplicationComponent
     @top_level_active_projekts.count > 1 ||
 
       ( @top_level_active_projekts.count == 1 &&
-        @top_level_active_projekts.first.all_children_projekts.any?{ |projekt| ProjektSetting.find_by( projekt: projekt, key: "projekt_feature.#{resources_name}.show_in_sidebar_filter").value.present? }) ||
+        ( @top_level_active_projekts.first.all_children_ids & @scoped_projekt_ids ).any? ) ||
 
       @top_level_archived_projekts.count > 1 ||
 
       ( @top_level_archived_projekts.count == 1 &&
-        @top_level_archived_projekts.first.all_children_projekts.any?{ |projekt| ProjektSetting.find_by( projekt: projekt, key: "projekt_feature.#{resources_name}.show_in_sidebar_filter").value.present? })
+        ( @top_level_archived_projekts.first.all_children_ids & @scoped_projekt_ids ).any? )
   end
 
   def show_archived_projekts_in_sidebar?

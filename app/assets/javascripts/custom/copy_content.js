@@ -5,7 +5,7 @@
       $(".js-copy-source-button").on("click", function(event) {
         event.preventDefault();
         var targetId = $(this).data('target');
-        navigator.clipboard.writeText( $(targetId).html() );
+        navigator.clipboard.writeText( $('#' + targetId).html().trim() );
       });
     }
   };

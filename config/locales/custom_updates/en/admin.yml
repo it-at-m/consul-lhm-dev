@@ -95,6 +95,7 @@ en:
           statuses: Set categories
         deficiency_reports_title: Deficiency reports
         projekts: Projects
+        legislation: Text edit
       polls:
         questions:
           answers:
@@ -154,15 +155,17 @@ en:
           projekt_phases_tab:
             actions: Actions
             activate: Enabled
-            activate_info: Info enabled
-            activate_phase: Phase enabled
+            activate_phase: Status
             affiliation: Area allocation
             beginning: Start date
             budget_phase: Budget phase
+            copy_phase_link: Copy link to phase
             comment_phase: Commenting phase
             debate_phase: Discussion phase
+            default_tab: Standard Element
             end_date: End date
             ending: End date
+            event_phase: Eventsphase
             information_block_title: Project information
             link:
               budget_phase: Budgets
@@ -170,28 +173,34 @@ en:
             main_block_title: Project status
             milestone_phase: Execution phase
             name: Project settings
+            newsfeed_phase: News-Feed
             page_block_title: Project page
             phase_name: Phase
             phases_block_title: Project phases
             projekt_duration: Project information
+            projekt_notification_phase: Notificationsphase
             proposal_phase: Proposal phase
             restriction: Participation restriction
             start_date: Start date
+            standard_element: Standart element
             voting_manage: Manage polls
             voting_phase: Voting phase
+            legislation_process_phase: Text drafting phase
           projekt_questions_tab:
             name: Short survey
             title: Questions
           projekt_sdg_tab:
             name: SDGs & Tags
             sdgs: SDGs
+            sdgs_enable: Please activate SDGs in the Projectsettings Tab
             tags: Tags
+            tags_enable: Please activate Tags in the Projectsettings Tab
+            tags_hint: Please select one or multiple tags in order to suggest them to platform users.
           projekt_settings_tab:
             budget_settings: Budgets
             debates_settings: Debates
             event_phase: Events
             event_phase_description: Enable Events in the footer of a project
-            footer_settings: Footer
             general_settings: General
             milestone_phase: Milestones
             milestone_phase_description: Activates the milestone function in the footer of a project
@@ -256,6 +265,7 @@ en:
           geozones: Manage geozones
           map_settings: Standard card configuration
           settings: Functions
+          legislation_process: Text edit
       settings:
         index:
           extended_features:

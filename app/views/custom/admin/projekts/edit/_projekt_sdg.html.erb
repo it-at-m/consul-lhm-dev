@@ -8,7 +8,7 @@
     </div>
 
   <% else %>
-    <div class='margin-bottom'>Please enable SDGs in projekt settings tab ttranslate</div>
+    <div class='margin-bottom'><%= t("custom.admin.projekts.edit.projekt_sdg_tab.sdgs_enable") %></div>
 
   <% end %>
 
@@ -16,6 +16,7 @@
     <div class="margin-bottom">
       <div id="category_tags" class="tags">
         <h2><%= t("custom.admin.projekts.edit.projekt_sdg_tab.tags") %></h2>
+        <i style="display:block;margin-top:-1.5rem;margin-bottom:1rem;padding-left:5px;"><%= t("custom.admin.projekts.edit.projekt_sdg_tab.tags_hint") %></i>
         <% Tag.category.order(:name).each do |tag| %>
           <a class="js-add-tag-link"><%= tag.name %></a>
         <% end %>
@@ -23,7 +24,7 @@
     </div>
 
   <% else %>
-    <div class='margin-bottom'>Please enable Tags in projekt settings tab ttranslate</div>
+    <div class='margin-bottom'><%= t("custom.admin.projekts.edit.projekt_sdg_tab.tags_enable") %></div>
 
   <% end %>
 

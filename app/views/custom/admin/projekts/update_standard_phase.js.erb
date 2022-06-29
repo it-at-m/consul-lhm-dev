@@ -1,0 +1,3 @@
+<% @projekt.projekt_phases.each do |projekt_phase| %>
+  $("#<%= dom_id(projekt_phase, :default_footer_tab) %>").html("<%= j render("admin/projekts/edit/projekt_phases/default_projekt_phase", projekt_phase: projekt_phase, phase_name: projekt_phase.name) %>")
+<% end %>

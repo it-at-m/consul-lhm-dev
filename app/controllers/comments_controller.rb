@@ -92,6 +92,9 @@ class CommentsController < ApplicationController
     def add_notification(comment)
       notifiable = comment.reply? ? comment.parent : comment.commentable
       notifiable_author_id = notifiable&.author_id
+      puts "Notifiable: #{notifiable}"
+      puts "Notifiable json : #{notifiable.as_json}"
+
       if notifiable_author_id.present? && notifiable_author_id != comment.author_id
         Notification.add(notifiable.author, notifiable)
       end

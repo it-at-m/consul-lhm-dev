@@ -1,7 +1,9 @@
 class Admin::ProjektQuestionsController < Admin::BaseController
   include Translatable
 
-  before_action :set_projekt, except: :destroy
+  before_action :set_projekt, only: [:new, :create]
+  before_action :set_projekt_and_projekt_question, except: [:new, :create]
+
   skip_authorization_check
 
   load_and_authorize_resource :projekt
@@ -34,8 +36,6 @@ class Admin::ProjektQuestionsController < Admin::BaseController
   end
 
   def update
-    @projekt_question = ProjektQuestion.find(params[:id])
-
     if @projekt_question.update(projekt_question_params)
       notice = 'Question updated'
       redirect_to edit_admin_projekt_path(@projekt.id, anchor: 'tab-projekt-questions'), notice: notice
@@ -47,7 +47,9 @@ class Admin::ProjektQuestionsController < Admin::BaseController
 
   def destroy
     @projekt_question.destroy!
+
     notice = t("admin.legislation.questions.destroy.notice")
+
     redirect_to edit_admin_projekt_path(@projekt, anchor: 'tab-projekt-questions'), notice: notice
   end
 
@@ -66,6 +68,11 @@ class Admin::ProjektQuestionsController < Admin::BaseController
         ]
       )
     end
+
+  def set_projekt_and_projekt_question
+    @projekt = Projekt.find(params[:projekt_id])
+    @projekt_question = ProjektQuestion.find(params[:id])
+  end
 
   def set_projekt
     @projekt = Projekt.find(params[:projekt_id])

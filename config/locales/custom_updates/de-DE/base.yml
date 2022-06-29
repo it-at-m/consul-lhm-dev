@@ -151,6 +151,9 @@ de:
       start_entry: + Beitrag erstellen
       start_proposal: Vorschlag erstellen
       user_entries: Neueste Beiträge
+    welcome_launch:
+      p1: Hier entsteht die neue Beteiligungsplattform der Stadt %{org_name}
+      p2: Unser Go-Live ist am %{date}!
   date:
     formats:
       long: '%d. %B %Y'

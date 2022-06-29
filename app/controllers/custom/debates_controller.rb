@@ -24,15 +24,10 @@ class DebatesController < ApplicationController
 
     @featured_debates = Debate.featured
 
-    @top_level_active_projekts = Projekt.top_level_sidebar_current('debates')
-    @top_level_archived_projekts = Projekt.top_level_sidebar_expired('debates')
+    @scoped_projekt_ids = Debate.scoped_projekt_ids_for_index
 
-    @scoped_projekt_ids = (@top_level_active_projekts + @top_level_archived_projekts)
-      .map{ |p| p.all_children_projekts.unshift(p) }
-      .flatten.select do |projekt|
-        ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.debates.show_in_sidebar_filter').value.present?
-      end
-      .pluck(:id)
+    @top_level_active_projekts = Projekt.top_level.current.where(id: @scoped_projekt_ids)
+    @top_level_archived_projekts = Projekt.top_level.expired.where(id: @scoped_projekt_ids)
 
     unless params[:search].present?
       take_by_my_posts

@@ -37,6 +37,7 @@ en:
           admin_controls:
             copy_code: Copy source code
             edit_projekt: Edit projekt
+            edit_projekt_settings: Project settings
             edit_projekt_page: Edit projekt page
           map:
             title: District
@@ -59,7 +60,7 @@ en:
           projekt_questions: Short survey
           proposals: Proposals
           questions: Questions
-          legislation_processes: Text editing
+          legislation_process: Text editing
       phase_name:
         budget_phase: Budget
         comment_phase: Comments

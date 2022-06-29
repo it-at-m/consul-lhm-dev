@@ -14,22 +14,27 @@
   <% end %>
 
   <ul class="nav-flyout-block">
-    <li class="nav-element flyout-item js-access-flyout-menu-item focusable"
-      <%= "tabindex=0" if placement == 'desktop' %>
-        aria-label='<%= t('custom.links.menu.new_entries.new_debate') %>'>
-      <%= link_to t('custom.links.menu.new_entries.new_debate'), new_debate_path,
-          tabindex: (placement == 'desktop' ? "-1" : "0"),
-          aria: { hidden: "true" }
-         %>
-    </li>
-    <li class="nav-element flyout-item js-access-flyout-menu-item focusable"
-      <%= "tabindex=0" if placement == 'desktop'  %>
-        aria-label='<%= t('custom.links.menu.new_entries.new_proposal') %>'>
-      <%= link_to t('custom.links.menu.new_entries.new_proposal'), new_proposal_path,
-          tabindex: (placement == 'desktop' ? "-1" : "0"),
-          aria: { hidden: "true" }
-         %>
-    </li>
+    <% if Projekt.top_level.selectable_in_selector('debates', current_user).any? %>
+      <li class="nav-element flyout-item js-access-flyout-menu-item focusable"
+        <%= "tabindex=0" if placement == 'desktop' %>
+          aria-label='<%= t('custom.links.menu.new_entries.new_debate') %>'>
+        <%= link_to t('custom.links.menu.new_entries.new_debate'), new_debate_path,
+            tabindex: (placement == 'desktop' ? "-1" : "0"),
+            aria: { hidden: "true" }
+           %>
+      </li>
+    <% end %>
+
+    <% if Projekt.top_level.selectable_in_selector('proposals', current_user).any? %>
+      <li class="nav-element flyout-item js-access-flyout-menu-item focusable"
+        <%= "tabindex=0" if placement == 'desktop'  %>
+          aria-label='<%= t('custom.links.menu.new_entries.new_proposal') %>'>
+        <%= link_to t('custom.links.menu.new_entries.new_proposal'), new_proposal_path,
+            tabindex: (placement == 'desktop' ? "-1" : "0"),
+            aria: { hidden: "true" }
+           %>
+      </li>
+    <% end %>
 
     <% projekts_with_accepting_budgets = Projekt.joins(:budget).where( budgets: { phase: 'accepting'} ).order(:level).order(:order_number) %>
 

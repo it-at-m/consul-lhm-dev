@@ -28,15 +28,10 @@ class PollsController < ApplicationController
       .send(@current_filter)
       .includes(:geozones)
 
-    @top_level_active_projekts = Projekt.top_level_sidebar_current('polls')
-    @top_level_archived_projekts = Projekt.top_level_sidebar_expired('polls')
+    @scoped_projekt_ids = Poll.scoped_projekt_ids_for_index
 
-    @scoped_projekt_ids = (@top_level_active_projekts + @top_level_archived_projekts)
-      .map{ |p| p.all_children_projekts.unshift(p) }
-      .flatten.select do |projekt|
-        ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.polls.show_in_sidebar_filter').value.present?
-      end
-      .pluck(:id)
+    @top_level_active_projekts = Projekt.top_level.current.where(id: @scoped_projekt_ids)
+    @top_level_archived_projekts = Projekt.top_level.expired.where(id: @scoped_projekt_ids)
 
     unless params[:search].present?
       take_by_tag_names

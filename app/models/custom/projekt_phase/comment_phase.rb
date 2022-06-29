@@ -3,10 +3,6 @@ class ProjektPhase::CommentPhase < ProjektPhase
     active?
   end
 
-  def phase_info_activated?
-    info_active?
-  end
-
   def name
     'comment_phase'
   end

@@ -1099,7 +1099,7 @@ de:
         video_url: Externes Video
         multiple: Mehrfachantworten erlaubt?
         multiple_yes: ja
-        multiple_no: nein 
+        multiple_no: nein
         answers:
           title: Antwort
           description: Beschreibung

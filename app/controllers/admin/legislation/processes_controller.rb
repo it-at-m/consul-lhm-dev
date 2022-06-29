@@ -13,7 +13,7 @@ class Admin::Legislation::ProcessesController < Admin::Legislation::BaseControll
   end
 
   def create
-    if @process.save
+    if @process.save(validate: false)
       link = legislation_process_path(@process)
       notice = t("admin.legislation.processes.create.notice", link: link)
       redirect_to edit_admin_legislation_process_path(@process), notice: notice

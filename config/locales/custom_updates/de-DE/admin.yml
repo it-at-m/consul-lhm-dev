@@ -9,6 +9,13 @@ de:
       destroy: Löschen
   custom:
     admin:
+      legislation:
+        processes:
+          index:
+            create: Neuer Textbearbeitung
+            title: Textbearbeitung
+            status: Textbearbeitung
+            count: textbearbeitung
       budgets:
         edit:
           info:
@@ -95,6 +102,7 @@ de:
           statuses: Status definieren
         deficiency_reports_title: Mängelmelder
         projekts: Projekte
+        legislation: Textbearbeitung
       polls:
         questions:
           answers:
@@ -154,15 +162,17 @@ de:
           projekt_phases_tab:
             actions: Aktionen
             activate: Aktiviert
-            activate_info: Info aktiviert
-            activate_phase: Phase aktiviert
+            activate_phase: Status
             affiliation: Gebietszuordnung
             beginning: Anfangsdatum
             budget_phase: Budgetphase
+            copy_phase_link: Link abrufen
             comment_phase: Kommentarphase
             debate_phase: Diskussionsphase
+            default_tab: Standardelement
             end_date: Enddatum
             ending: Enddatum
+            event_phase: Veranstaltungsphase
             information_block_title: Projektinformationen
             link:
               budget_phase: Budgets
@@ -172,14 +182,17 @@ de:
             main_block_title: Projektstatus
             milestone_phase: Umsetzungsphase
             name: Projekteinstellungen
+            newsfeed_phase: News-Feed
             page_block_title: Projektseite
             phase_name: Phase
             phases_block_title: Projektphasen
             projekt_duration: Projektinformationen
+            projekt_notification_phase: Benachrichtigungen
             proposal_phase: Vorschlagsphase
             question_phase: Kurzumfragenphase
             restriction: Partizipationsbeschränkung
             start_date: Anfangsdatum
+            standard_element: Standardelement
             voting_manage: Abstimmungen verwalten
             voting_phase: Abstimmungsphase
             legislation_process_phase: Textbearbeitungsphase
@@ -189,13 +202,15 @@ de:
           projekt_sdg_tab:
             name: SDGs & Tags
             sdgs: SDGs
+            sdgs_enable: Bitte aktivieren Sie SDGs in Projektfunktionen Tab
             tags: Tags
+            tags_enable: Bitte aktivieren Sie Tags in Projektfunktionen Tab
+            tags_hint: Klicken Sie auf einen oder mehrere Tags, um Sie für dieses Projekt dem/der Nutzer:in anzubieten.
           projekt_settings_tab:
             budget_settings: Budgets
             debates_settings: Diskussion
             event_phase: Veranstaltungen
             event_phase_description: Aktivieren Sie Veranstaltungen in der Fußzeile eines Projekts
-            footer_settings: Fußzeile
             general_settings: Allgemein
             milestone_phase: Meilensteine
             milestone_phase_description: Aktiviert die Meilensteinfunktion in der Fußzeile eines Projektes

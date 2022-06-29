@@ -22,51 +22,5 @@
       </tr>
     <% end %>
 
-    <% if local_assigns[:table_name] == 'projekt-footer' %>
-
-      <tr>
-        <td class='small-9'>
-          <strong id="<%= dom_id(@projekt_features_phase_projekt_notification_info, :title) %>"><%= t("custom.admin.projekts.edit.projekt_settings_tab.projekt_notification_phase") %></strong>
-          <br>
-          <span class="small">
-            <%= t("custom.admin.projekts.edit.projekt_settings_tab.projekt_notification_phase_description", default: t("admin.settings.no_description")) %>
-          </span>
-        </td>
-
-        <td>
-          <%= render Admin::Settings::FeaturedSettingsFormComponent.new(@projekt_features_phase_projekt_notification_info, tab: '#tab-projekt-phases') %>
-        </td>
-      </tr>
-
-      <tr>
-        <td class='small-9'>
-          <strong id="<%= dom_id(@projekt_features_phase_newsfeed_info, :title) %>"><%= t("custom.admin.projekts.edit.projekt_settings_tab.newsfeed_phase") %></strong>
-          <br>
-          <span class="small">
-            <%= t("custom.admin.projekts.edit.projekt_settings_tab.newsfeed_phase_description", default: t("admin.settings.no_description")) %>
-          </span>
-        </td>
-
-        <td>
-          <%= render Admin::Settings::FeaturedSettingsFormComponent.new(@projekt_features_phase_newsfeed_info, tab: '#tab-projekt-phases') %>
-        </td>
-      </tr>
-
-      <tr>
-        <td class='small-9'>
-          <strong id="<%= dom_id(@projekt_features_phase_event_info, :title) %>"><%= t("custom.admin.projekts.edit.projekt_settings_tab.event_phase") %></strong>
-          <br>
-          <span class="small">
-            <%= t("custom.admin.projekts.edit.projekt_settings_tab.event_phase_description", default: t("admin.settings.no_description")) %>
-          </span>
-        </td>
-
-        <td>
-          <%= render Admin::Settings::FeaturedSettingsFormComponent.new(@projekt_features_phase_event_info, tab: '#tab-projekt-phases') %>
-        </td>
-      </tr>
-
-      <%= render 'custom/admin/projekts/edit/projekt_settings/default_footer_tab' %>
-    <% end %>
   </tbody>
 </table>

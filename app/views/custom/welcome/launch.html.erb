@@ -1,0 +1,22 @@
+<% content_for :body_class, "home-page launch-page" %>
+
+<% if @header_launch.present? %>
+  <style>
+		.home-page .jumbo{
+      background-image: linear-gradient(90deg,
+                          rgba(34, 34, 34, 0.75) 35%,
+                          rgba(34, 34, 34, 0.65) 50%,
+                          rgba(34, 34, 34, 0.0)),
+                          url("<%=@header_launch.image.attachment.url%>");
+			background-size: cover;
+			background-position: center 25%;
+		}
+  </style>
+
+  <div class="jumbo not-print">
+    <div class='jumbo-message'>
+			<p><%= t('custom.welcome_launch.p1', org_name: Setting["org_name"]) %></p>
+			<p><%= t('custom.welcome_launch.p2', date: Setting["extended_option.general.launch_date"]) %></p>
+    </div>
+  </div>
+<% end %>

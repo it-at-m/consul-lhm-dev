@@ -82,6 +82,8 @@ de:
           title_description: Fügt einen Titel zur Applikation hinzu.
           subtitle: Untertitel der Applikation
           subtitle_description: Fügt einen Untertitel zur Applikation hinzu.
+          launch_date: Erscheinungsdatum
+          launch_date_description: "Bitte geben Sie das Erscheinungsdatum im folgenden Format an: \"dd.mm.yyyy\". So sollte beispielsweise der 3. Oktober 1990 als 03.10.1990 geschrieben werden."
         gdpr:
           devise_timeout_min: Dauer von Nutzer-Sitzungen
           devise_timeout_min_description: Legen Sie fest, wie lange ein Nutzer pro Sitzung eingeloggt bleiben soll in Minuten
@@ -129,6 +131,8 @@ de:
           enable_sdgs_description: Aktivieren Sie die UN-Nachhaltigkeitsziele für dieses Projekt
           set_default_sorting_to_newest: Standardsortierung auf 'Neueste' umstellen
           set_default_sorting_to_newest_description: Zeigt standardmäßig die neuesten Beiträge anstatt der aktivsten Beiträge an
+          show_projekt_footer: Fußzeile aktivieren
+          show_projekt_footer_description: Aktiviert die Fußzeile am unteren Ende des Projektes
         sidebar:
           show_phases_in_projekt_page_sidebar: Projektphasen
           show_phases_in_projekt_page_sidebar_description: Aktivieren Sie die Projektphasen in der rechten Seitenleiste der Projektseite
@@ -138,9 +142,6 @@ de:
           show_navigator_in_projekts_page_sidebar_description: Zeigt die Projektverzeichnis in der rechten Seitenleiste der Projektseiten an
           projekt_page_sharing: Teilen-Funktion
           projekt_page_sharing_description: Aktivieren Sie die Teilen-Funktion in der rechten Seitenleiste der Projektseite
-        footer:
-          show_projekt_footer: Fußzeile aktivieren
-          show_projekt_footer_description: Aktiviert die Fußzeile am unteren Ende des Projektes
         debates:
           show_report_button_in_sidebar: Diskussion melden
           show_report_button_in_sidebar_description: Aktivieren Sie die Melden-Funktion für Diskussionen

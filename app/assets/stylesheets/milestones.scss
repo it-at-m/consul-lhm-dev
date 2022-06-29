@@ -45,7 +45,7 @@ $progress-bar-color:      #fea230;
   }
 
   &::before {
-    background: $budget;
+    background: $brand;
     border-radius: rem-calc(20);
     content: "";
     height: rem-calc(20);
@@ -118,7 +118,7 @@ $progress-bar-color:      #fea230;
 }
 
 .milestone-status {
-  background: $budget;
+  background: $brand;
   border-radius: rem-calc(4);
   color: #fff;
   display: inline-block;
