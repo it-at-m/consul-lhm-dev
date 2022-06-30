@@ -221,12 +221,7 @@ class PagesController < ApplicationController
     load_featured
     remove_archived_from_order_links
 
-    @scoped_projekt_ids = @current_projekt
-      .top_parent.all_children_projekts.unshift(@current_projekt.top_parent).select do |projekt|
-        ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.main.activate').value.present? &&
-        projekt.proposal_phase.current?
-      end
-      .pluck(:id)
+    @scoped_projekt_ids = Proposal.scoped_projekt_ids_for_footer(@current_projekt)
 
     unless params[:search].present?
       take_by_my_posts
