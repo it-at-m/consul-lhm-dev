@@ -4,6 +4,7 @@ resources :projekts, only: [:index, :show] do
 
   member do
     get :json_data
+    get :map_html
   end
 end
 

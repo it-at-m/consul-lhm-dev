@@ -7,7 +7,6 @@
      tabindex="0"
      aria-labeled-by=<%= "#{dom_id(projekt)}_name" %>
      data-projekt-id="<%= projekt.id %>"
-     <%= "data-base-layer=#{ ( projekt.map_layers.where(base: true).any? ? projekt.map_layers.where(base: true).first : projekt.map_layers_for_render.where(base: true).first ).to_json(except: :attribution) }" %>
      <%= "data-parent-id=#{projekt.parent.id}" if projekt.parent.present? %>
      <%= "data-projekt-selectable=true" if projekt.selectable?(controller_name, current_user) %>
      <%= "data-projekt-selectable-children=true" if projekt.children.selectable_in_selector(controller_name, current_user).any? %>

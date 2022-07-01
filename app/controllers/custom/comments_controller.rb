@@ -18,20 +18,11 @@ class CommentsController < ApplicationController
   def vote
     @comment.vote_by(voter: current_user, vote: params[:value])
     @commentable = @comment.commentable
+
     respond_with(@comment, @commentable)
   end
 
   private
-
-  def verify_comments_open!
-    return if current_user.administrator? || current_user.moderator?
-
-    puts "Comments closed: #{@commentable.comments_closed?}"
-
-    if @commentable.respond_to?(:comments_closed?) && @commentable.comments_closed?
-      redirect_to commentable_path(@comment), alert: t("comments.comments_closed")
-    end
-  end
 
   def verify_user_can_comment
     commentable = @comment.commentable

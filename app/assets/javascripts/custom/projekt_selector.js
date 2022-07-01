@@ -88,39 +88,26 @@
     },
 
     replaceProjektMapOnProposalCreation: function($projekt) {
+
       if ( $projekt.data('showMap') ) {
         $('#map-container').show();
 
-        App.Map.maps[0].eachLayer( function(layer) {
-          App.Map.maps[0].removeLayer(layer)
-        })
-
-        var newBaseLayer;
-        var newBaseLayerData = $projekt.data('baseLayer');
-
-        if ( !newBaseLayerData ) {
-          newBaseLayer = L.tileLayer( "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            attribution: "&copy; <a href=\"http://osm.org/copyright\">OpenStreetMap</a> contributors"
-          } )
-
-        } else if ( newBaseLayerData.protocol == 'wms' ) {
-          newBaseLayer = L.tileLayer.wms( newBaseLayerData.provider, {
-            attribution: newBaseLayerData.attribution,
-            layers:  newBaseLayerData.layer_names,
-            format: 'image/jpeg'
-          } )
-
-        } else {
-          newBaseLayer = L.tileLayer( newBaseLayerData.provider, {
-            attribution: newBaseLayerData.attribution
-          } )
-        }
-
-        App.Map.maps[0].addLayer(newBaseLayer)
+        $.ajax("/projekts/" + $projekt.data('projektId') + "/map_html", {
+          type: "GET",
+          dataType: "html",
+          success: function(data) {
+            $('.js-remove-marker-div').remove();
+            App.Map.destroy();
+            $('div.map_location.map').first().replaceWith(data)
+            App.Map.initialize();
+          }
+        });
 
         App.Map.maps[0].setView([$projekt.data('latitude'), $projekt.data('longitude')], $projekt.data('zoom')).invalidateSize();
+
       } else {
         $('#map-container').hide();
+
       }
     },
 
@@ -191,10 +178,14 @@
         selectedProjektId = $('[id$="projekt_id"]').val();
       }
 
+      if ( selectedProjektId === '' ) {
+        return false;
+      }
 
       // get ordered array of parent projekts
       var projektIdsToShow = [selectedProjektId]
       var $selectedProjekt = $('#projekt_' + selectedProjektId)
+
       while ( $selectedProjekt.data('parentId') ) {
         projektIdsToShow.unshift( $selectedProjekt.data('parentId') )
         $selectedProjekt = $('#projekt_' + $selectedProjekt.data('parentId'))
@@ -202,7 +193,6 @@
 
       // show projekts staring with top parent
       $.each(projektIdsToShow, function(index, projektId) {
-        console.log(projektId)
         var $selectedProjekt = $('#projekt_' + projektId)
         App.ProjektSelector.selectProjekt($selectedProjekt);
         $selectedProjekt.closest('.projekt_group').hide();

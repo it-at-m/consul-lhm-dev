@@ -33,7 +33,7 @@ module MapLocationsHelper
   end
 
   def map_location_remove_marker(map_location, text)
-    tag.div class: "margin-bottom" do
+    tag.div class: "margin-bottom js-remove-marker-div" do
       link_to text, "#",
               id: map_location_remove_marker_link_id(map_location),
               class: "js-location-map-remove-marker location-map-remove-marker"

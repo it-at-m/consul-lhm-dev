@@ -79,6 +79,10 @@ class ProjektsController < ApplicationController
     end
   end
 
+  def map_html
+    @projekt = Projekt.find(params[:id])
+  end
+
   private
 
   def take_only_by_tag_names
