@@ -4,14 +4,14 @@ class Pages::Projekts::FooterPhasesComponent < ApplicationComponent
 
   def initialize(projekt, default_phase_name)
     @projekt = projekt
+    @projekt_tree_ids = projekt.all_children_ids.unshift(projekt.id)
     @default_phase_name = default_phase_name
 
     @comments_count = @projekt.comments.count
-    @debates_count = Debate.where(projekt_id: Debate.scoped_projekt_ids_for_footer(@projekt)).count
-    @proposals_count = Proposal.base_selection.where(projekt_id: Proposal.scoped_projekt_ids_for_footer(@projekt)).count
+    @debates_count = Debate.where(projekt_id: (Debate.scoped_projekt_ids_for_footer(@projekt) & @projekt_tree_ids)).count
+    @proposals_count = Proposal.base_selection.where(projekt_id: (Proposal.scoped_projekt_ids_for_footer(@projekt) & @projekt_tree_ids)).count
     @projekt_questions_count = @projekt.questions.count
-    @polls_count = Poll.base_selection.where(projekt_id: Poll.scoped_projekt_ids_for_footer(@projekt)).count
-    @legislation_processes_count = (@projekt.legislation_process&.draft_versions&.published&.count || 0)
+    @polls_count = Poll.base_selection.where(projekt_id: (Poll.scoped_projekt_ids_for_footer(@projekt) & @projekt_tree_ids)).count
     @milestones_count = @projekt.milestones.count
     @projekt_notifications_count = @projekt.projekt_notifications.count
     @projekt_events_count = @projekt.projekt_events.count

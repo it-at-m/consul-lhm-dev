@@ -23,7 +23,7 @@ de:
         projekt_not_active: Das Projekt ist nicht aktiv
         projekt_phase_not_active: Die Projektphase ist nicht aktiv
         proposal_phase_expired: Die Vorschlagsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
-        proposal_phase_not_active: Die Vorschlagsphase ist nich aktiv
+        proposal_phase_not_active: Die Vorschlagsphase ist nicht aktiv
         voting_phase_expired: Die Abstimmungsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
     devise_views:
       users:
