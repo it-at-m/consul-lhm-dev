@@ -7,6 +7,10 @@
 
       url.pathname = $(event.target).closest('ul').data('path')
 
+      if (url.pathname.includes('projekts')) {
+        url.searchParams.set('order', 'all')
+      }
+
       var clickedSDGCode = $(event.target).parent().attr('data-code');
       var currentSDGTarget = "";
 

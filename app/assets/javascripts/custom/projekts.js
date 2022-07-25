@@ -66,6 +66,8 @@
         currentPageUrl.pathname = '/projekts'
       }
 
+      currentPageUrl.searchParams.set('order', 'all')
+
       if (currentPageUrl.searchParams.get('projekts')) {
         currentProjektIds = currentPageUrl.searchParams.get('projekts').split(',');
       } else {
