@@ -178,7 +178,6 @@ class ProjektsController < ApplicationController
 
     set_resources(Proposal)
 
-
     set_proposal_votes(@resources)
 
     @proposals_coordinates = all_proposal_map_locations(@resources)
@@ -337,6 +336,11 @@ class ProjektsController < ApplicationController
     @sdgs = (@projekts.map(&:sdg_goals).flatten.uniq.compact + SDG::Goal.where(code: @filtered_goals).to_a).uniq
     @sdg_targets = (@projekts.map(&:sdg_targets).flatten.uniq.compact + SDG::Target.where(code: @filtered_targets).to_a).uniq
 
-    @projekts_coordinates = all_projekts_map_locations(@projekts)
+    @map_coordinates = all_projekts_map_locations(@projekts)
+
+    if @overview_page_special_projekt.proposal_phase.phase_activated?
+      proposals = Proposal.where(projekt_id: @overview_page_special_projekt.id)
+      @map_coordinates = @map_coordinates + all_proposal_map_locations(proposals)
+    end
   end
 end
