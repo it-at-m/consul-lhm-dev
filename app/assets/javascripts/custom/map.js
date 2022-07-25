@@ -140,7 +140,7 @@
 
       // TODO: add projekts link
       getPopupContent = function(data) {
-        if (process == "proposals" || !!data.proposal_id) {
+        if (process == "proposals" || data.proposal_id) {
           return "<a href='/proposals/" + data.proposal_id + "'>" + data.proposal_title + "</a>";
         } else if ( process == "deficiency-reports" ) {
           return "<a href='/deficiency_reports/" + data.deficiency_report_id + "'>" + data.deficiency_report_title + "</a>";
