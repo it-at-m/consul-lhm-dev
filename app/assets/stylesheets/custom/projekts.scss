@@ -695,7 +695,7 @@ span.projekt-backlink:before {
 }
 
 .projekts-map-wrapper {
-  margin-bottom: 50px;
+  margin-bottom: 45px;
 }
 
 .projekts-page {
@@ -1250,17 +1250,9 @@ span.projekt-backlink:before {
   }
 }
 
-.show-on-desktop {
-  @media screen and (max-width: 650px) {
-    display: none;
-  }
-}
-
-.show-on-mobile {
-  display: none;
-
-  @media screen and (max-width: 650px) {
-    display: block;
+.projekt-sidebar {
+  @media screen and (max-width: 750px) {
+     margin-bottom: 2rem ;
   }
 }
 
