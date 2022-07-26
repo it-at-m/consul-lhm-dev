@@ -21,11 +21,19 @@
     </div>
   </div>
 
-  <div class='row'>
-    <div class='column small-12 medium-9'>
+  <div class='projekt-list-page-container row'>
+    <div class="proejkt-list-tabs-container column show-on-mobile">
       <%= render_custom_block "projekts_list_before_tabs_#{@current_projekts_order}" %>
       <%= render Projekts::ProjektListTabsComponent.new(current_order: @current_projekts_order, current_active_orders: @current_active_orders, overview_page: @current_projekt.overview_page?) %>
       <%= render_custom_block "projekts_list_after_tabs_#{@current_projekts_order}" %>
+    </div>
+
+    <div class='projekt-list column small-12 medium-9'>
+      <div class="proejkt-list-tabs-container show-on-desktop">
+        <%= render_custom_block "projekts_list_before_tabs_#{@current_projekts_order}" %>
+        <%= render Projekts::ProjektListTabsComponent.new(current_order: @current_projekts_order, current_active_orders: @current_active_orders, overview_page: @current_projekt.overview_page?) %>
+        <%= render_custom_block "projekts_list_after_tabs_#{@current_projekts_order}" %>
+      </div>
 
       <% if @projekts.any? %>
         <% Projekt.top_level.each do |top_level_projekt| %>
@@ -38,7 +46,7 @@
       <% end %>
     </div>
 
-    <div class='column small-12 medium-3'>
+    <div class='projekt-sidebar column small-12 medium-3'>
       <div class="custom-content-block--margin-bottom">
         <%= render_custom_block "projekt_index_sidebar" %>
       </div>
@@ -53,13 +61,15 @@
         <%= render SDG::Goals::TagCloudComponent.new("Projekt", sdg_targets: @sdg_targets) %>
       <% end %>
 
-      <%= render "shared/social_share",
-          share_title: t("custom.pages.social_share.share"),
-          title: t("custom.projekts.index.social_share.title"),
-          url: url_for(only_path: false),
-          description: t("custom.projekts.index.social_share.description", domain: request.domain),
-          mobile: t("custom.projekts.index.social_share.description", domain: request.domain)
-      %>
+      <div class="show-on-desktop">
+        <%= render "shared/social_share",
+            share_title: t("custom.pages.social_share.share"),
+            title: t("custom.projekts.index.social_share.title"),
+            url: url_for(only_path: false),
+            description: t("custom.projekts.index.social_share.description", domain: request.domain),
+            mobile: t("custom.projekts.index.social_share.description", domain: request.domain)
+        %>
+      </div>
     </div>
   </div>
 
@@ -86,4 +96,15 @@
         <% end %>
       </div>
   <% end %>
+  <div class="row">
+    <div class="column show-on-mobile projekt-mobile-share-buttons">
+      <%= render "shared/social_share",
+          share_title: t("custom.pages.social_share.share"),
+          title: t("custom.projekts.index.social_share.title"),
+          url: url_for(only_path: false),
+          description: t("custom.projekts.index.social_share.description", domain: request.domain),
+          mobile: t("custom.projekts.index.social_share.description", domain: request.domain)
+      %>
+    </div>
+  </div>
 </main>

@@ -1,5 +1,4 @@
 // Admin pages
-
 span.icon-projekts::before {
   content: "\f126";
 }
@@ -521,9 +520,6 @@ span.projekt-backlink:before {
 
 // Projekt page footer
 
-.projekt-footer {
-  margin-top: 5em;
-}
 
 #tab-activities .most-active-resources {
   .tabs-panel {
@@ -574,6 +570,7 @@ span.projekt-backlink:before {
   .image {
     max-width: 150px;
     min-width: 150px;
+    margin-bottom: 1rem;
 
     @media screen and (max-width: 750px) {
       flex-direction: column;
@@ -1165,10 +1162,6 @@ span.projekt-backlink:before {
     min-width: 90px;
   }
 
-  .projekt-argument-values-column {
-
-  }
-
   .projekt-argument-image-column {
     min-height: 100px;
     margin-right: 17px;
@@ -1218,7 +1211,11 @@ span.projekt-backlink:before {
 }
 
 .projekt-footer {
-  margin-top: 50px;
+  margin-top: 35px;
+
+  @media screen and (max-width: 750px) {
+    margin-top: 18px;
+  }
 }
 
 .projekt-phase-edit--link-to-resources {
@@ -1227,16 +1224,50 @@ span.projekt-backlink:before {
   text-align: center;
 }
 
-.projekt-sidebar {
-  .custom-content-block-controls {
-    margin-bottom: 15px;
+.projekt-list-page-container {
+  display: flex;
+
+  @media screen and (max-width: 650px) {
+    flex-direction: column;
   }
 }
 
-.d-flex {
-  display: flex;
+.projekt-list {
+  @media screen and (max-width: 650px) {
+    order: 2;
+  }
 }
 
-.d-flex-start {
-  justify-content: flex-start;
+.projekt-sidebar {
+  @media screen and (max-width: 650px) {
+    order: 1;
+  }
+}
+
+.projekt-mobile-share-buttons {
+  @media screen and (max-width: 650px) {
+    order: 3;
+  }
+}
+
+.show-on-desktop {
+  @media screen and (max-width: 650px) {
+    display: none;
+  }
+}
+
+.show-on-mobile {
+  display: none;
+
+  @media screen and (max-width: 650px) {
+    display: block;
+  }
+}
+
+.projekts-page {
+  @media screen and (max-width: 750px) {
+    .row.comments {
+      padding-bottom: 2rem;
+    }
+  }
 }
