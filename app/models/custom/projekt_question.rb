@@ -42,10 +42,6 @@ class ProjektQuestion < ApplicationRecord
     answers.find_by(user: user)
   end
 
-  def comments_for_verified_residents_only?
-    true
-  end
-
   def comments_allowed?(current_user)
     current_user&.present? &&
       !projekt.question_phase.expired?
