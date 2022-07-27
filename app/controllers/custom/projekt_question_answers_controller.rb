@@ -1,6 +1,5 @@
 class ProjektQuestionAnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :verify_resident!
 
   skip_authorization_check
   has_orders %w[most_voted newest oldest]
