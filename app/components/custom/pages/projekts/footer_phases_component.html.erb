@@ -30,6 +30,7 @@
           <%= render Pages::Projekts::FooterPhaseTabComponent.new(projekt.projekt_notification_phase, default_phase_name, @projekt_notifications_count) %>
           <%= render Pages::Projekts::FooterPhaseTabComponent.new(projekt.milestone_phase, default_phase_name, @milestones_count) %>
           <%= render Pages::Projekts::FooterPhaseTabComponent.new(projekt.event_phase, default_phase_name, @projekt_events_count) %>
+          <%= render Pages::Projekts::FooterPhaseTabComponent.new(projekt.livestream_phase, default_phase_name, @projekt_livestreams_count) %>
           <%= render Pages::Projekts::FooterPhaseTabComponent.new(projekt.newsfeed_phase, default_phase_name) %>
         </ul>
       </div>

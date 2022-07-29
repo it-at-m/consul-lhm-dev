@@ -9,6 +9,8 @@ group :development do
   gem 'pry-byebug', '~> 3.9'
 end
 
+gem 'httparty'
+
 gem "sentry-ruby"
 gem "sentry-rails"
 

@@ -165,6 +165,16 @@ en:
             argument_created_at: Created at
             page_title: Arguments
             title: Arguments
+          projekt_livestreams_tab:
+            submit_button: Save Livestream
+            name: Livestreams
+            page_title: Livestream
+            livestream:
+              url: Livestream link
+              title: Title
+              description: Description
+              starts_at: Starts at
+              platform: Platform
           projekt_page: Project page
           projekt_phase_limitation: Restriction
           projekt_phases: Project phases

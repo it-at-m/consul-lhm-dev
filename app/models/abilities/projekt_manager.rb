@@ -3,7 +3,7 @@ module Abilities
     include CanCan::Ability
 
     def self.resources_to_manage
-      [MapLayer, ProjektQuestion, ProjektNotification, ProjektEvent, Milestone, ProgressBar, ProjektArgument]
+      [MapLayer, ProjektQuestion, ProjektNotification, ProjektEvent, ProjektLivestream, Milestone, ProgressBar, ProjektArgument]
     end
 
     def initialize(user)
@@ -32,7 +32,7 @@ module Abilities
         wc.cardable.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
       end
 
-      can(:manage, ProjektManager.resources_to_manage) do |resource|
+      can(:manage, Abilities::ProjektManager.resources_to_manage) do |resource|
         resource.projekt.present? &&
           resource.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
       end

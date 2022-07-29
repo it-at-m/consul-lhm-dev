@@ -12,7 +12,8 @@ de:
       index:
         current_projekts: Projekte mit aktiver Beteiligungsphase
         expired_projekts: Abgeschlossene Projekte
-        no_projekts: keine Projekte
+        no_projekts: Keine Projekte
+        no_projekts_for_current_filter: Keine Projekte für aktuellen filter
         title: Projekte
         to_projekt: Zum Projekt
         social_share:
@@ -69,6 +70,7 @@ de:
           projekt_notifications: Benachrichtigungen
           projekt_questions: Kurzumfrage
           projekt_arguments: Stimmen
+          projekt_livestreams: Livestream
           proposals: Vorschläge
           questions: Questions
           legislation_process: Textbearbeitung
@@ -122,6 +124,9 @@ de:
           party: Partei
           position: Position
           note: Stimme
+      projekt_livestreams:
+        links_title: Livestreams
+        current_livestream: Current Livestream
       selector:
         connected_resources:
           debate_description: Bitte ordnen Sie Ihre Diskussion einem der nachfolgenden Projekte oder Unterprojekte zu. Dies dient dazu, dass die Diskussionen in der Diskussionsübersicht besser auffindbar sind.

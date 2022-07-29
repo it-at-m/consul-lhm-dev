@@ -14,6 +14,7 @@ namespace :admin do
       post "/answers/order_answers", to: "questions/answers#order_answers"
     end
     resources :projekt_arguments, only: [:create, :update, :destroy]
+    resources :projekt_livestreams, only: [:create, :update, :destroy]
     resources :milestones, controller: "projekt_milestones"
     resources :progress_bars, except: :show, controller: "projekt_progress_bars"
     member do

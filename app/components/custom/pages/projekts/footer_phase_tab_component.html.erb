@@ -8,16 +8,26 @@
       <div class='tab-info-summary'>
         <% if phase.is_a?(ProjektPhase::MilestonePhase) && resource_count.present?  %>
           <% if phase.projekt.milestones.last.present? %>
-            <span class='time-icon'><%= format_date(phase.projekt.milestones.last.publication_date.to_date) %></span>
+            <i class="far fa-calendar"></i>
+            <span ><%= format_date(phase.projekt.milestones.last.publication_date.to_date) %></span>
           <% end %>
 
         <% elsif phase.is_a?(ProjektPhase::ProjektNotificationPhase) && phase.projekt.projekt_notifications.any? %>
-          <span class='time-icon'><%= format_date(phase.projekt.projekt_notifications.last.updated_at.to_date) %></span>
+          <i class="far fa-calendar"></i>
+          <span ><%= format_date(phase.projekt.projekt_notifications.last.updated_at.to_date) %></span>
 
         <% elsif phase.is_a?(ProjektPhase::EventPhase) && resource_count.present? %>
           <% if phase.projekt.projekt_events.sort_by_incoming.first.present? %>
-            <span class='time-icon'><%= format_date(phase.projekt.projekt_events.sort_by_incoming.first.datetime.to_date) %></span>
+            <i class="far fa-calendar"></i>
+            <span ><%= format_date(phase.projekt.projekt_events.sort_by_incoming.first.datetime.to_date) %></span>
           <% end %>
+
+        <% elsif phase.is_a?(ProjektPhase::LivestreamPhase) && resource_count.present? %>
+          <% if phase.projekt.projekt_livestreams.order(starts_at: :desc).first.present? %>
+            <i class="far fa-calendar"></i>
+            <span ><%= format_date(phase.projekt.projekt_livestreams.order(starts_at: :desc).first.starts_at.to_date) %></span>
+          <% end %>
+
         <% elsif phase.start_date.present? && phase.end_date.present? %>
           <span class='time-icon'><%= format_date_range(phase.start_date, phase.end_date) %></span>
         <% end %>
