@@ -42,7 +42,7 @@ class Projekt < ApplicationRecord
   has_one :legislation_process_phase, class_name: 'ProjektPhase::LegislationProcessPhase'
   has_one :question_phase, class_name: 'ProjektPhase::QuestionPhase'
   has_one :argument_phase, class_name: 'ProjektPhase::ArgumentPhase'
-  has_one :livestream_phase, class_name: 'ProjektPhase::LivestreamPhase'
+  has_one :livestream_phase, class_name: 'ProjektPhase::LivestreamPhase', dependent: :destroy
   has_many :geozone_restrictions, through: :projekt_phases
   has_and_belongs_to_many :geozone_affiliations, through: :geozones_projekts, class_name: 'Geozone'
 
