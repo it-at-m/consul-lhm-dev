@@ -28,7 +28,7 @@
           <% end %>
 
           <span class="projekt-livestream--description-text">
-            <%= @current_projekt_livestream.description %>
+            <%= WYSIWYGSanitizer.new.sanitize(@current_projekt_livestream.description) %>
           </span>
         </div>
       <% end %>
