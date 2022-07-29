@@ -19,7 +19,7 @@
           <%= @current_projekt_livestream.title %>
         </h3>
       <% end %>
-      <% if @current_projekt_livestream.description.present? %>
+      <% if @current_projekt_livestream.description.present? || @current_projekt_livestream.starts_at.present? %>
         <div class="projekt-livestream--description">
           <% if @current_projekt_livestream.starts_at.present? %>
             <span class="projekt-livestream--description-starts-at">
@@ -27,9 +27,11 @@
             </span>
           <% end %>
 
-          <span class="projekt-livestream--description-text">
-            <%= WYSIWYGSanitizer.new.sanitize(@current_projekt_livestream.description) %>
-          </span>
+          <% if @current_projekt_livestream.description.present? %>
+            <span class="projekt-livestream--description-text">
+              <%= WYSIWYGSanitizer.new.sanitize(@current_projekt_livestream.description) %>
+            </span>
+          <% end %>
         </div>
       <% end %>
     </div>
@@ -42,14 +44,16 @@
     <% if @other_livestreams.size > 1 %>
       <div class="projekt-livestream-navigation--links">
         <% @other_livestreams.each do |other_livestream| %>
-          <%=
-            link_to(
-              truncate(other_livestream.title, length: 70),
-              projekt_livestream_path(other_livestream.id),
-              class: (other_livestream.id == @current_projekt_livestream.id ? 'is-active' : nil),
-              remote: true
-            )
-          %>
+          <% if other_livestream.title.present? %>
+            <%=
+              link_to(
+                truncate(other_livestream.title, length: 70),
+                projekt_livestream_path(other_livestream.id),
+                class: (other_livestream.id == @current_projekt_livestream.id ? 'is-active' : nil),
+                remote: true
+              )
+            %>
+          <% end %>
       <% end %>
       </div>
     <% end %>
