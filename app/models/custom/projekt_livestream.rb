@@ -61,7 +61,7 @@ class ProjektLivestream < ApplicationRecord
 
   def fetch_video_details
     if from_youtube?
-      youtube_api = YoutubeApi.new(ENV["YOUTUBE_API_KEY"])
+      youtube_api = YoutubeApi.new(Rails.application.secrets.youtube_api_key)
 
       video_data = youtube_api.fetch_video(external_id)
       base_video_data = video_data["snippet"]
