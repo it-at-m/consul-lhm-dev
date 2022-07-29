@@ -42,12 +42,14 @@ class Projekt < ApplicationRecord
   has_one :legislation_process_phase, class_name: 'ProjektPhase::LegislationProcessPhase'
   has_one :question_phase, class_name: 'ProjektPhase::QuestionPhase'
   has_one :argument_phase, class_name: 'ProjektPhase::ArgumentPhase'
+  has_one :livestream_phase, class_name: 'ProjektPhase::LivestreamPhase', dependent: :destroy
   has_many :geozone_restrictions, through: :projekt_phases
   has_and_belongs_to_many :geozone_affiliations, through: :geozones_projekts, class_name: 'Geozone'
 
   has_many :projekt_settings, dependent: :destroy
   has_many :projekt_notifications, dependent: :destroy
   has_many :projekt_arguments, dependent: :destroy
+  has_many :projekt_livestreams, dependent: :destroy
 
   has_many :comments, as: :commentable, inverse_of: :commentable, dependent: :destroy
   belongs_to :author, -> { with_hidden }, class_name: "User", inverse_of: :projekts
@@ -62,7 +64,7 @@ class Projekt < ApplicationRecord
     :voting_phase, :comment_phase, :milestone_phase,
     :event_phase, :question_phase, :legislation_process_phase,
     :newsfeed_phase, :projekt_notification_phase, :argument_phase,
-    :projekt_events, :projekt_notifications, :projekt_arguments
+    :livestream_phase, :projekt_events, :projekt_notifications, :projekt_arguments
   )
 
   before_validation :set_default_color
@@ -352,6 +354,7 @@ class Projekt < ApplicationRecord
       projekt.newsfeed_phase = ProjektPhase::NewsfeedPhase.create unless projekt.newsfeed_phase
       projekt.event_phase = ProjektPhase::EventPhase.create unless projekt.event_phase
       projekt.argument_phase = ProjektPhase::ArgumentPhase.create unless projekt.argument_phase
+      projekt.livestream_phase = ProjektPhase::LivestreamPhase.create unless projekt.livestream_phase
       projekt.legislation_process_phase = ProjektPhase::LegislationProcessPhase.create unless projekt.legislation_process_phase
     end
   end
@@ -452,6 +455,7 @@ class Projekt < ApplicationRecord
     self.milestone_phase = ProjektPhase::MilestonePhase.create
     self.projekt_notification_phase = ProjektPhase::ProjektNotificationPhase.create
     self.argument_phase = ProjektPhase::ArgumentPhase.create
+    self.livestream_phase = ProjektPhase::LivestreamPhase.create
     self.newsfeed_phase = ProjektPhase::NewsfeedPhase.create
     self.event_phase = ProjektPhase::EventPhase.create
     self.legislation_process_phase = ProjektPhase::LegislationProcessPhase.create

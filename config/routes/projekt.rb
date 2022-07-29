@@ -18,3 +18,5 @@ end
 post "update_selected_parent_projekt", to: "projekts#update_selected_parent_projekt"
 
 get :events, to: "projekt_events#index", as: :projekt_events
+
+resources :projekt_livestreams, only: [:show]

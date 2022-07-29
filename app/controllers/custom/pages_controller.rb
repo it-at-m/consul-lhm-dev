@@ -130,6 +130,14 @@ class PagesController < ApplicationController
     end
   end
 
+  def livestream_phase_footer_tab
+    set_projekt_livestreams_footer_tab_variables
+
+    respond_to do |format|
+      format.js { render "pages/projekt_footer/footer_tab" }
+    end
+  end
+
   def extended_sidebar_map
     @current_projekt = SiteCustomization::Page.find_by(slug: params[:id]).projekt
 
@@ -438,6 +446,16 @@ class PagesController < ApplicationController
 
     @projekt_arguments_pro = @current_projekt.projekt_arguments.pro.order(created_at: :desc)
     @projekt_arguments_cons = @current_projekt.projekt_arguments.cons.order(created_at: :desc)
+  end
+
+  def set_projekt_livestreams_footer_tab_variables(projekt = nil)
+    @current_projekt = projekt || SiteCustomization::Page.find_by(slug: params[:id]).projekt
+    @current_tab_phase = @current_projekt.livestream_phase
+
+    @all_livestreams = @current_projekt.projekt_livestreams.order(created_at: :desc)
+
+    @current_projekt_livestream = @all_livestreams.first
+    @other_livestreams = @all_livestreams.select(:id, :title)
   end
 
   def default_phase_name(default_phase_id)

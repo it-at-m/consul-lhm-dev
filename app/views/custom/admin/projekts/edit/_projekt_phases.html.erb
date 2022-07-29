@@ -17,75 +17,55 @@
   <tbody>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt: @projekt,
-      projekt_phase: @projekt.comment_phase,
-      phase_name: 'comment_phase'
+      projekt_phase: @projekt.comment_phase
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt: @projekt,
-      projekt_phase: @projekt.debate_phase,
-      phase_name: 'debate_phase'
+      projekt_phase: @projekt.debate_phase
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt: @projekt,
-      projekt_phase: @projekt.proposal_phase,
-      phase_name: 'proposal_phase'
+      projekt_phase: @projekt.proposal_phase
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt: @projekt,
-      projekt_phase: @projekt.question_phase,
-      phase_name: 'question_phase'
+      projekt_phase: @projekt.question_phase
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt: @projekt,
-      projekt_phase: @projekt.voting_phase,
-      phase_name: 'voting_phase'
+      projekt_phase: @projekt.voting_phase
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt: @projekt,
-      projekt_phase: @projekt.budget_phase,
-      phase_name: 'budget_phase'
+      projekt_phase: @projekt.budget_phase
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt: @projekt,
-      projekt_phase: @projekt.legislation_process_phase,
-      phase_name: 'legislation_process_phase'
+      projekt_phase: @projekt.legislation_process_phase
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt: @projekt,
-      projekt_phase: @projekt.argument_phase,
-      phase_name: 'argument_phase'
+      projekt_phase: @projekt.argument_phase
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt: @projekt,
-      projekt_phase: @projekt.projekt_notification_phase,
-      phase_name: 'projekt_notification_phase'
+      projekt_phase: @projekt.projekt_notification_phase
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt: @projekt,
-      projekt_phase: @projekt.milestone_phase,
-      phase_name: 'milestone_phase'
+      projekt_phase: @projekt.milestone_phase
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt: @projekt,
-      projekt_phase: @projekt.event_phase,
-      phase_name: 'event_phase'
+      projekt_phase: @projekt.event_phase
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt: @projekt,
-      projekt_phase: @projekt.newsfeed_phase,
-      phase_name: 'newsfeed_phase'
+      projekt_phase: @projekt.livestream_phase
+    } %>
+
+    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
+      projekt_phase: @projekt.newsfeed_phase
     } %>
   </tbody>
 </table>

@@ -109,6 +109,10 @@ en:
           party: Party
           position: Position
           note: Note
+      projekt_livestreams:
+        links_title: Livestreams
+        current_livestream: Actual Livestream
+
       selector:
         connected_resources:
           debate_description: Please assign your discussion to one of the following projects or subprojects. This serves to make the discussions easier to find in the discussion overview.

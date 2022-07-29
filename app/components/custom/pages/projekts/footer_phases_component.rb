@@ -16,6 +16,7 @@ class Pages::Projekts::FooterPhasesComponent < ApplicationComponent
     @projekt_notifications_count = @projekt.projekt_notifications.count
     @projekt_events_count = @projekt.projekt_events.count
     @projekt_argumens_count = @projekt.projekt_arguments.count
+    @projekt_livestreams_count = @projekt.projekt_livestreams.count
 
     @process = @projekt.legislation_process
     @draft_versions = @process&.draft_versions&.published

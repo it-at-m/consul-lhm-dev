@@ -1,0 +1,29 @@
+<%= form_for(livestream, url: url) do |f| %>
+  <%= hidden_field_tag :namespace, @namespace %>
+
+  <%= render "shared/errors", resource: f.object %>
+
+  <div class='small-12 medium-7'>
+    <%= f.text_field :url, {label: t("custom.admin.projekts.edit.projekt_livestreams_tab.livestream.url"), required: true } %>
+  </div>
+
+  <% if livestream.persisted? %>
+    <div class='small-12 medium-7'>
+      <%= f.text_field :title, {label: t("custom.admin.projekts.edit.projekt_livestreams_tab.livestream.title") } %>
+    </div>
+
+    <div class='small-12 medium-7'>
+      <%= f.datetime_field :starts_at, {label: t("custom.admin.projekts.edit.projekt_livestreams_tab.livestream.starts_at") } %>
+    </div>
+
+    <div class='small-12 medium-12'>
+      <%= f.text_area :description, {label: t("custom.admin.projekts.edit.projekt_livestreams_tab.livestream.description") } %>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :tab, value: "#tab-projekt-livestreams" %>
+
+  <div>
+    <%= f.submit(t("custom.admin.projekts.edit.projekt_livestreams_tab.submit_button"), class: "button") %>
+  </div>
+<% end %>

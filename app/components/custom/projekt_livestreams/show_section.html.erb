@@ -1,0 +1,55 @@
+<div class="projekt-livestream-container">
+  <div class="projekt-livestream-video">
+    <h3 class="projekt-actual-livestream">
+      <%= t('custom.projekts.projekt_livestreams.current_livestream') %>
+    </h3>
+    <%=
+      render(
+        Shared::ExternalVideoPlayer.new(
+          external_video_id: @current_projekt_livestream.external_id,
+          video_platform: @current_projekt_livestream.video_platform,
+          width: 800,
+          height: 480
+        )
+      )
+    %>
+    <div class="projekt-livestream--details">
+      <% if @current_projekt_livestream.title.present? %>
+        <h3 class="projekt-livestream--title">
+          <%= @current_projekt_livestream.title %>
+        </h3>
+      <% end %>
+      <% if @current_projekt_livestream.description.present? %>
+        <div class="projekt-livestream--description">
+          <% if @current_projekt_livestream.starts_at.present? %>
+            <span class="projekt-livestream--description-starts-at">
+              <%= @current_projekt_livestream.starts_at.strftime("%H:%M %d.%m.%Y") %>
+            </span>
+          <% end %>
+
+          <span class="projekt-livestream--description-text">
+            <%= @current_projekt_livestream.description %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="projekt-livestream--navigation">
+    <h3 class="projekt-livestream-navigation--title">
+      <i class="fas fa-play"></i>
+      <%= t('custom.projekts.projekt_livestreams.links_title') %>
+    </h3>
+    <div class="projekt-livestream-navigation--links">
+      <% @other_livestreams.each do |other_livestream| %>
+        <%=
+          link_to(
+            other_livestream.title,
+            projekt_livestream_path(other_livestream.id),
+            class: (other_livestream.id == @current_projekt_livestream.id ? 'is-active' : nil),
+            remote: true
+          )
+        %>
+      <% end %>
+    </div>
+  </div>
+</div>

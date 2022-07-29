@@ -61,6 +61,9 @@ module ProjektAdminActions
     @projekt_event = ProjektEvent.new
     @projekt_events = @projekt.projekt_events.order(created_at: :desc)
 
+    @projekt_livestream = ProjektLivestream.new
+    @projekt_livestreams = @projekt.projekt_livestreams
+
     @default_footer_tab_setting = ProjektSetting.find_by(
       projekt: @projekt,
       key: "projekt_custom_feature.default_footer_tab"
@@ -130,6 +133,8 @@ module ProjektAdminActions
         newsfeed_phase_attributes: [:id, :start_date, :end_date, :active],
         event_phase_attributes: [:id, :start_date, :end_date, :active],
         question_phase_attributes: [:id, :start_date, :end_date, :geozone_restricted,
+                                    :active, geozone_restriction_ids: []],
+        livestream_phase_attributes: [:id, :start_date, :end_date, :geozone_restricted,
                                     :active, geozone_restriction_ids: []],
         projekt_notification_phase_attributes: [:id, :start_date, :end_date, :active],
         argument_phase_attributes: [:id, :start_date, :end_date, :active, geozone_restriction_ids: []],
