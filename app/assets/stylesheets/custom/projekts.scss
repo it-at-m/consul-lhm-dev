@@ -1315,6 +1315,10 @@ span.projekt-backlink:before {
   display: flex;
   flex-direction: column;
 
+  a {
+    margin-bottom: 10px;
+  }
+
   .is-active {
     font-weight: bold;
   }

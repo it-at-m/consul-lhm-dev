@@ -112,6 +112,7 @@ en:
       projekt_livestreams:
         links_title: Livestreams
         current_livestream: Actual Livestream
+        no_livestreams: No Livestreams
 
       selector:
         connected_resources:

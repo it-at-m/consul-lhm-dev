@@ -126,7 +126,8 @@ de:
           note: Stimme
       projekt_livestreams:
         links_title: Livestreams
-        current_livestream: Current Livestream
+        current_livestream: Actual Livestream
+        no_livestreams: Keine Livestreams
       selector:
         connected_resources:
           debate_description: Bitte ordnen Sie Ihre Diskussion einem der nachfolgenden Projekte oder Unterprojekte zu. Dies dient dazu, dass die Diskussionen in der Diskussionsübersicht besser auffindbar sind.

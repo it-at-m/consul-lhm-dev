@@ -39,17 +39,19 @@
       <i class="fas fa-play"></i>
       <%= t('custom.projekts.projekt_livestreams.links_title') %>
     </h3>
-    <div class="projekt-livestream-navigation--links">
-      <% @other_livestreams.each do |other_livestream| %>
-        <%=
-          link_to(
-            other_livestream.title,
-            projekt_livestream_path(other_livestream.id),
-            class: (other_livestream.id == @current_projekt_livestream.id ? 'is-active' : nil),
-            remote: true
-          )
-        %>
+    <% if @other_livestreams.size > 1 %>
+      <div class="projekt-livestream-navigation--links">
+        <% @other_livestreams.each do |other_livestream| %>
+          <%=
+            link_to(
+              truncate(other_livestream.title, length: 70),
+              projekt_livestream_path(other_livestream.id),
+              class: (other_livestream.id == @current_projekt_livestream.id ? 'is-active' : nil),
+              remote: true
+            )
+          %>
       <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 </div>
