@@ -111,6 +111,7 @@ module Consul
     config.autoload_paths << "#{Rails.root}/app/controllers/concerns/custom"
     config.autoload_paths << "#{Rails.root}/app/controllers/custom"
     config.autoload_paths << "#{Rails.root}/app/models/concerns/custom"
+    config.autoload_paths << "#{Rails.root}/app/graphql/custom"
     config.autoload_paths << "#{Rails.root}/app/models/custom"
     config.paths["app/views"].unshift(Rails.root.join("app", "views", "custom"))
     config.paths["app/views"].unshift(Rails.root.join("app", "views", "cli"))
@@ -120,7 +121,7 @@ end
 class Rails::Engine
   initializer :prepend_custom_assets_path, group: :all do |app|
     if self.class.name == "Consul::Application"
-      %w[images fonts javascripts].each do |asset|
+      %w[images fonts].each do |asset|
         app.config.assets.paths.unshift(Rails.root.join("app", "assets", asset, "custom").to_s)
       end
     end

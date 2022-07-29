@@ -39,9 +39,6 @@ module Abilities
       can [:retire_form, :retire], Proposal, author_id: user.id
 
       can :read, Legislation::Proposal
-      cannot [:edit, :update], Legislation::Proposal do |proposal|
-        proposal.editable_by?(user)
-      end
       can [:retire_form, :retire], Legislation::Proposal, author_id: user.id
 
       can :create, Comment
@@ -92,7 +89,6 @@ module Abilities
         can :vote_featured, Proposal
 
         can :vote, Legislation::Proposal
-        can :vote_featured, Legislation::Proposal
         can :create, Legislation::Answer
 
         # can :create, Budget::Investment,               budget: { phase: "accepting" }
@@ -135,8 +131,14 @@ module Abilities
       can :create, Budget::Investment do |investment|
         investment.budget.phase == "accepting" &&
           (
-           (ProjektSetting.find_by(projekt: investment.projekt, key: "projekt_feature.budgets.only_admins_create_investment_proposals").value.present? && user.administrator? ) ||
-           ProjektSetting.find_by(projekt: investment.projekt, key: "projekt_feature.budgets.only_admins_create_investment_proposals").value.blank?
+           (ProjektSetting.find_by(
+             projekt: investment.projekt,
+             key: "projekt_feature.budgets.only_admins_create_investment_proposals").value.present? &&
+            user.administrator?) ||
+
+           ProjektSetting.find_by(
+             projekt: investment.projekt,
+             key: "projekt_feature.budgets.only_admins_create_investment_proposals").value.blank?
           )
       end
 

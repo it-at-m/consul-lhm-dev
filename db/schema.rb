@@ -451,6 +451,7 @@ ActiveRecord::Schema.define(version: 2022_07_22_092031) do
     t.string "voting_style", default: "knapsack"
     t.boolean "published"
     t.bigint "projekt_id"
+    t.boolean "hide_money", default: false
     t.index ["projekt_id"], name: "index_budgets_on_projekt_id"
   end
 
@@ -2021,6 +2022,7 @@ ActiveRecord::Schema.define(version: 2022_07_22_092031) do
     t.string "pfo_street_number"
     t.string "pfo_plz"
     t.string "pfo_city"
+    t.string "subscriptions_token"
     t.index ["bam_street_id"], name: "index_users_on_bam_street_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["date_of_birth"], name: "index_users_on_date_of_birth"
