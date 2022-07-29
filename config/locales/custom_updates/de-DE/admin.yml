@@ -223,6 +223,7 @@ de:
             standard_element: Standardelement
             voting_manage: Abstimmungen verwalten
             voting_phase: Abstimmungsphase
+            livestream_phase: Livestreams
             legislation_process_phase: Textbearbeitungsphase
           projekt_questions_tab:
             name: Kurzumfragen
