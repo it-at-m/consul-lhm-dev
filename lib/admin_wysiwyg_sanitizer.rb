@@ -3,7 +3,7 @@ class AdminWYSIWYGSanitizer < WYSIWYGSanitizer
     super + %w[
       h1 iframe object param embed
       i input label form button figure figcaption nav
-      section
+      section textarea
     ]
   end
 
