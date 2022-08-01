@@ -13,6 +13,7 @@ class ProposalsController
         @valid_orders.include?('created_at')
       @current_order = 'created_at'
     end
+    @resource_name = 'proposal'
 
     @geozones = Geozone.all
     @selected_geozone_affiliation = params[:geozone_affiliation] || 'all_resources'
@@ -130,7 +131,6 @@ class ProposalsController
     @follow = Follow.find_by(user: current_user, followable: @proposal)
     @follow.destroy if @follow
     @proposal.unvote_by(current_user)
-    set_proposal_votes(@proposal)
   end
 
   def created

@@ -9,7 +9,7 @@ class AdminWYSIWYGSanitizer < WYSIWYGSanitizer
 
   def allowed_attributes
     super + %w[
-      frameborder height width longdesc scrolling title allow allowfullscreen value
+      frameborder height min-height width longdesc scrolling title allow allowfullscreen value
       dir action
       role tabindex type for name title
       data-toggle aria-label aria-hidden allowfullscreen

@@ -19,8 +19,6 @@ module CommentableActions
 
     @tag_cloud = tag_cloud
 
-    set_resource_votes(@resources)
-
     if params[:controller].include?("admin/")
       set_resources_instance
     end

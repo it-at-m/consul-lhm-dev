@@ -26,8 +26,6 @@ class WelcomeController < ApplicationController
         .select{ |feed| feed.kind == 'proposals' || feed.kind == 'debates' || feed.kind == 'investment_proposals' }
         .collect{ |feed| feed.items.to_a }.flatten
         .sort_by(&:created_at).reverse
-      set_debate_votes(@latest_items.select{|item| item.class.name == 'Debate'})
-      set_proposal_votes(@latest_items.select{|item| item.class.name == 'Proposal'})
     else
       @latest_items = []
     end
