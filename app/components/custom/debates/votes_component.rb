@@ -1,8 +1,8 @@
-require_dependency Rails.root.join("app", "components", "proposals", "votes_component").to_s
+require_dependency Rails.root.join("app", "components", "debates", "votes_component").to_s
 
-class Proposals::VotesComponent < ApplicationComponent
+class Debates::VotesComponent < ApplicationComponent
   delegate :user_signed_in?, :link_to_signin, :link_to_signup,
-           :link_to_verify_account_short, :projekt_feature?, to: :helpers
+           :link_to_verify_account_short, to: :helpers
 
   private
 
@@ -18,9 +18,9 @@ class Proposals::VotesComponent < ApplicationComponent
       elsif !current_user.level_two_or_three_verified?
         sanitize(t("custom.votes.not_verified", verify_account: link_to_verify_account_short))
 
-      elsif proposal.proposal_phase &&
-        (proposal.proposal_phase.geozone_restrictions.any? &&
-          !proposal.proposal_phase.geozone_restrictions.include?(current_user.geozone))
+      elsif debate.debate_phase &&
+        (debate.debate_phase.geozone_restrictions.any? &&
+          !debate.debate_phase.geozone_restrictions.include?(current_user.geozone))
         t("custom.votes.geo_restricted")
 
       else
