@@ -13,7 +13,10 @@
           event.preventDefault();
           not_allowed.show().focus();
 
-          if (votes_selector === "div.votes") {
+          if (votes.parent().hasClass('comment-votes')) { // custom
+            votes.find('.comment-votes-controls').hide() // custom
+            not_allowed.css('display', 'inline') // custom
+          } else if (votes_selector === "div.votes") {
             $("button", votes).prop("disabled", true);
           } else {
             $(event.target).closest("form").remove();

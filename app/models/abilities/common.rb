@@ -80,7 +80,7 @@ module Abilities
 
       unless user.organization?
         can :vote, Debate
-        can :vote, Comment
+        # can :vote, Comment
       end
 
       if user.level_two_or_three_verified?
@@ -140,6 +140,11 @@ module Abilities
              projekt: investment.projekt,
              key: "projekt_feature.budgets.only_admins_create_investment_proposals").value.blank?
           )
+      end
+
+      can :vote, Comment do |comment|
+        !user.organization? &&
+        comment.commentable.comments_allowed?(user)
       end
 
       # extending to regular users

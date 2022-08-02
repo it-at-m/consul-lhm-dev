@@ -34,4 +34,8 @@ class Comment < ApplicationRecord
 
     commentable.projekt if commentable.projekt.present?
   end
+
+  def votable_by?(user)
+    user.present?
+  end
 end
