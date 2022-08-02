@@ -4,10 +4,10 @@
       <% if projekt.image.present? %>
         <% if projekt.page&.published? %>
           <%= link_to projekt.page.url do %>
-            <%= image_tag projekt.image_url(:medium) %>
+            <%= image_tag projekt.image.variant(:medium) %>
           <% end %>
         <% else %>
-          <%= image_tag projekt.image_url(:medium) %>
+          <%= image_tag projekt.image.variant(:medium) %>
         <% end %>
       <% end %>
     </div>

@@ -10,8 +10,8 @@
               social_url: debate_url(@debate),
               social_title: @debate.title,
               social_description: @debate.description,
-              twitter_image_url: (@debate.image.present? ? @debate.image_url(:thumb) : nil),
-              og_image_url: (@debate.image.present? ? @debate.image_url(:thumb) : nil) %>
+              twitter_image_url: (@debate.image.present? ? @debate.image.variant(:thumb) : nil),
+              og_image_url: (@debate.image.present? ? @debate.image.variant(:thumb) : nil) %>
 <% end %>
 
   <main>

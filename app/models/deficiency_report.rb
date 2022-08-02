@@ -30,7 +30,7 @@ class DeficiencyReport < ApplicationRecord
   scope :sort_by_most_commented,       -> { reorder(comments_count: :desc) }
   scope :sort_by_hot_score,            -> { reorder(hot_score: :desc) }
   scope :sort_by_newest,               -> { reorder(created_at: :desc) }
-  scope :by_author, -> (user_id) {
+  scope :by_author, ->(user_id) {
     return if user_id.nil?
 
     where(author_id: user_id)
@@ -62,7 +62,7 @@ class DeficiencyReport < ApplicationRecord
   end
 
   def can_be_published?
-    if Setting['deficiency_reports.admins_must_approve_officer_answer'].present?
+    if Setting["deficiency_reports.admins_must_approve_officer_answer"].present?
       official_answer.present? && official_answer_approved?
     else
       official_answer.present?
@@ -79,14 +79,14 @@ class DeficiencyReport < ApplicationRecord
 
   def dislikes
     cached_votes_down
-	end
+  end
 
   def votes_score
     cached_votes_score
   end
 
   def votable_by?(user)
-    user.present? ? true : false
+    user.present?
   end
 
   def self.deficiency_report_orders
@@ -112,5 +112,4 @@ class DeficiencyReport < ApplicationRecord
 
     official_answer.blank?
   end
-
 end

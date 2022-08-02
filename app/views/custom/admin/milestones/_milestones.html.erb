@@ -41,7 +41,7 @@
           </td>
           <td class="small">
             <%= link_to t("admin.milestones.index.show_image"),
-                        milestone.image_url(:large),
+                        milestone.image.variant(:large),
                         target: :_blank if milestone.image.present? %>
           </td>
           <td class="small">

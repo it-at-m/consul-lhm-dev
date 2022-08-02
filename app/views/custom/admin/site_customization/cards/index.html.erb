@@ -39,7 +39,7 @@
             </td>
             <td>
               <% if card.image.present? %>
-                <%= link_to t("admin.shared.show_image"), card.image_url(:large),
+                <%= link_to t("admin.shared.show_image"), card.image.variant(:large),
                             title: card.image.title, target: "_blank" %>
               <% end %>
             </td>
