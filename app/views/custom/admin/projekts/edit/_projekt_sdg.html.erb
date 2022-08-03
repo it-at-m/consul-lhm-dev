@@ -30,6 +30,11 @@
 
   <% end %>
 
+
+  <% if !projekt_feature?(@projekt, 'general.enable_sdgs') || !projekt_feature?(@projekt, 'general.enable_tags') %>
+    <div class='margin-bottom'><%= t("custom.admin.projekts.edit.projekt_sdg_tab.refresh_page") %></div>
+  <% end %>
+
   <%=f.hidden_field :tag_list_predefined, value: @projekt.tags.reject{|t| !['category'].include?(t.kind)}.map(&:name).join(","), class: "js-tag-list list-tags predefined"%>
 
   <%= f.submit %>

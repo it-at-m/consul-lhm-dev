@@ -223,6 +223,7 @@ en:
             tags: Tags
             tags_enable: Please activate Tags in the Projectsettings Tab
             tags_hint: Please select one or multiple tags in order to suggest them to platform users.
+            refresh_page: If you activated these features already but they are not visible here, please reload this page.
           projekt_settings_tab:
             budget_settings: Budgets
             debates_settings: Debates
