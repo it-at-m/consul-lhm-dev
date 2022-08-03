@@ -177,7 +177,8 @@ de:
           projekt_livestreams_tab:
             submit_button: Livestream erstellen
             name: Livestreams
-            page_title: Livestream
+            page_title: Livestreams
+            all_livestreams: Alle Livestreams
             livestream:
               url: Livestream link
               title: Titel

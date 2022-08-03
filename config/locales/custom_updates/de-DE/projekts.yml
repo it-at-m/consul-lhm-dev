@@ -126,8 +126,9 @@ de:
           note: Stimme
       projekt_livestreams:
         links_title: Livestreams
-        current_livestream: Actual Livestream
+        current_livestream: Aktueller Livestream
         no_livestreams: Keine Livestreams
+        video_platform_not_supported: "Videoplattform wird nicht unterstützt. Unterstützte Plattformen: YouTube, Vimeo"
       selector:
         connected_resources:
           debate_description: Bitte ordnen Sie Ihre Diskussion einem der nachfolgenden Projekte oder Unterprojekte zu. Dies dient dazu, dass die Diskussionen in der Diskussionsübersicht besser auffindbar sind.
