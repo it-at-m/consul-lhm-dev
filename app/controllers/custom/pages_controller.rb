@@ -206,8 +206,6 @@ class PagesController < ApplicationController
       take_by_projekts(@scoped_projekt_ids)
     end
 
-    set_debate_votes(@resources)
-
     @debates = @resources.page(params[:page]).send("sort_by_#{@current_order}")
   end
 
@@ -249,8 +247,6 @@ class PagesController < ApplicationController
       # take_by_geozone_restrictions
       take_by_projekts(@scoped_projekt_ids)
     end
-
-    set_proposal_votes(@resources)
 
     @proposals_coordinates = all_proposal_map_locations(@resources)
 

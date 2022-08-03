@@ -178,8 +178,6 @@ class ProjektsController < ApplicationController
 
     set_resources(Proposal)
 
-    set_proposal_votes(@resources)
-
     @proposals_coordinates = all_proposal_map_locations(@resources)
     @proposals = @resources.page(params[:page]) #.send("sort_by_#{@current_order}")
   end
