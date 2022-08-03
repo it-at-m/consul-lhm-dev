@@ -1,0 +1,22 @@
+<div class="votes">
+  <span class="total-votes">
+    <%= t("debates.debate.votes", count: debate.votes_score) %>
+  </span>
+
+  <% if debate.debate_phase&.expired? %>
+    <div class="supported callout warning">
+      <%= t("custom.votes.debate_phase_expired") %>
+    </div>
+
+  <% elsif !debate.debate_phase&.current? %>
+    <div class="supported callout warning">
+      <%= t("custom.votes.debate_phase_not_current") %>
+    </div>
+
+  <% else %>
+    <%= render Shared::InFavorAgainstComponent.new(debate) %>
+  <% end %>
+
+
+  <%= render Shared::ParticipationNotAllowedComponent.new(debate, cannot_vote_text: cannot_vote_text) %>
+</div>

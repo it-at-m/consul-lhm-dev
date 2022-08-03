@@ -4,8 +4,10 @@
       <%= t("related_content.title") %>&nbsp;<span>(<%= relationable.relationed_contents.count %>)</span>
     </h5>
 
-    <%= render "relationable/related_list", relationable: relationable %>
+    <%= render Relationable::RelatedListComponent.new(relationable) %>
   <% end %>
 
-  <%= render "relationable/form", relationable: relationable %>
+  <% if current_user %>
+    <%= render "relationable/form", relationable: relationable %>
+  <% end %>
 </div>

@@ -169,7 +169,6 @@ module Takeable
       @featured_proposals = Proposal.not_archived.unsuccessful
                             .sort_by_confidence_score.limit(Setting["featured_proposals_number"])
       if @featured_proposals.present?
-        set_featured_proposal_votes(@featured_proposals)
         @resources = @resources.where.not(id: @featured_proposals)
       end
     end

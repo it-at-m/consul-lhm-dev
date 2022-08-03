@@ -6,8 +6,8 @@
               social_url: deficiency_report_url(@deficiency_report),
               social_title: @deficiency_report.title,
               social_description: @deficiency_report.summary,
-              twitter_image_url: (@deficiency_report.image.present? ? @deficiency_report.image_url(:thumb) : nil),
-              og_image_url: (@deficiency_report.image.present? ? @deficiency_report.image_url(:thumb) : nil) %>
+              twitter_image_url: (@deficiency_report.image.present? ? @deficiency_report.image.variant(:thumb) : nil),
+              og_image_url: (@deficiency_report.image.present? ? @deficiency_report.image.variant(:thumb) : nil) %>
 <% end %>
 <% content_for :canonical do %>
   <%= render "shared/canonical", href: deficiency_report_url(@deficiency_report) %>

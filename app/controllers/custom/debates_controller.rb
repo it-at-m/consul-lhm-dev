@@ -15,6 +15,7 @@ class DebatesController < ApplicationController
         @valid_orders.include?('created_at')
       @current_order = 'created_at'
     end
+    @resource_name = 'debate'
 
     @geozones = Geozone.all
     @selected_geozone_affiliation = params[:geozone_affiliation] || 'all_resources'

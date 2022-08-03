@@ -5,7 +5,7 @@
   <div class='projekt-argument-content'>
     <div class="projekt-argument-image-column">
       <% if projekt_argument.image.present? %>
-        <%= image_tag(projekt_argument.image_url(:medium)) %>
+        <%= image_tag(projekt_argument.image.variant(:medium)) %>
       <% end %>
     </div>
 

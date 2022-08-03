@@ -11,3 +11,13 @@
 .comment-body .comment-user.is-admin {
   background: #F7EED0;
 }
+
+.comment-votes {
+  .comment-votes-controls {
+    display: inline;
+  }
+
+  .participation-not-allowed {
+    padding: 0.5rem;
+  }
+}

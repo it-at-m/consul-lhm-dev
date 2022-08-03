@@ -136,9 +136,12 @@ en:
       verify_account_link_short: verify
     votes:
       debate_phase_expired: The phase is already expired.
+      debate_phase_not_current: The phase is not active.
       geo_restricted: You are not eligible to participate due to territorial restrictions.
-      not_verified: You must %{verify_account} to be able to participate
+      not_verified: You must %{verify_account} to be able to participate.
       proposal_phase_expired: The phase is already expired.
+      proposal_phase_not_current: The phase is not active.
+      not_votable: Something went wrong, please contact administrator
     welcome:
       active_projekt_cards:
         title: Active projekts
