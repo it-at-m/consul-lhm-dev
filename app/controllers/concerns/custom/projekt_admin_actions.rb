@@ -148,7 +148,7 @@ module ProjektAdminActions
     end
 
     def process_tags
-      params[:projekt][:tag_list] = (params[:projekt][:tag_list_predefined] || "")
+      params[:projekt][:tag_list] = (params[:projekt][:tag_list_predefined] || @projekt.tag_list.join(','))
       params[:projekt].delete(:tag_list_predefined)
     end
 
