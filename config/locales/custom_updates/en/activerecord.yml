@@ -1,9 +1,15 @@
 en:
   activerecord:
     models:
-    deficiency_report:
-      one: Deficiency report
-      other: Deficiency reports
+      deficiency_report:
+        one: Deficiency report
+        other: Deficiency reports
+      map_layer:
+        one: Map Layer
+        other: Map Layers
+      projekt:
+        one: Project
+        other: Projects
     errors:
       models:
         proposal:

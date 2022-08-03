@@ -7,6 +7,9 @@ de:
       map_layer:
         one: Kartenebene
         other: Kartenebenen
+      projekt:
+        one: Projekt
+        other: Projekte
     errors:
       models:
         proposal:
