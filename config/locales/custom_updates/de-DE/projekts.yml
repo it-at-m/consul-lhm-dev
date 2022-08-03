@@ -137,7 +137,7 @@ de:
           proposal_title: Zuordnung des Vorschlags zu einem Projekt
         select_placeholder_mandatory_html: Wähle Projekt (verpflichtend)
       sidebar:
-        sdgs: SDG
+        sdgs: SDGs
       sidebar_filter:
         filter_button: Nach Projekte filtern
         title: Projekte
