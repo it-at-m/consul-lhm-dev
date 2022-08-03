@@ -63,15 +63,13 @@
         <%= render SDG::Goals::TagCloudComponent.new("Projekt", sdg_targets: @sdg_targets) %>
       <% end %>
 
-      <div class="show-on-desktop">
-        <%= render "shared/social_share",
-            share_title: t("custom.pages.social_share.share"),
-            title: t("custom.projekts.index.social_share.title"),
-            url: url_for(only_path: false),
-            description: t("custom.projekts.index.social_share.description", domain: request.domain),
-            mobile: t("custom.projekts.index.social_share.description", domain: request.domain)
-        %>
-      </div>
+      <%= render "shared/social_share",
+          share_title: t("custom.pages.social_share.share"),
+          title: t("custom.projekts.index.social_share.title"),
+          url: url_for(only_path: false),
+          description: t("custom.projekts.index.social_share.description", domain: request.domain),
+          mobile: t("custom.projekts.index.social_share.description", domain: request.domain)
+      %>
     </div>
   </div>
 
