@@ -1,7 +1,6 @@
 class Budgets::Investments::VotesComponent < ApplicationComponent
   attr_reader :investment
-  delegate :namespace, :current_user, :voted_for?, :image_absolute_url,
-    :link_to_verify_account, :link_to_signin, :link_to_signup, :projekt_feature?, to: :helpers
+  delegate :namespace, :current_user, :image_absolute_url, :link_to_verify_account, to: :helpers
 
   def initialize(investment)
     @investment = investment
@@ -65,8 +64,7 @@ class Budgets::Investments::VotesComponent < ApplicationComponent
         t("votes.budget_investments.#{reason}",
           count: investment.group.max_votable_headings,
           verify_account: link_to_verify_account,
-          supported_headings: (current_user && current_user.headings_voted_within_group(investment.group).map(&:name).sort.to_sentence),
-          signin: link_to_signin, signup: link_to_signup)
+          supported_headings: (current_user && current_user.headings_voted_within_group(investment.group).map(&:name).sort.to_sentence))
       end
     end
 end
