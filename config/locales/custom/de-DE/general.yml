@@ -94,11 +94,17 @@ de:
       featured_debates: Hervorgehoben
       orders:
         confidence_score: Am meisten bewertet
+        confidence_score_title: Am meisten bewertet
         created_at: Neuste
+        created_at_title: Neuste
         hot_score: Aktivste
+        hot_score_title: Aktivste
         most_commented: Am meisten kommentiert
+        most_commented_title: Am meisten kommentiert
         relevance: Relevanz
+        relevance_title: Relevanz
         recommendations: Empfehlungen
+        recommendations_title: Empfehlungen
       recommendations:
         without_results: Es gibt keine Diskussionen, die Ihren Interessen entsprechen
         without_interests: Folgen Sie Vorschlägen, sodass wir Ihnen Empfehlungen geben können
@@ -341,12 +347,19 @@ de:
       featured_proposals: Hervorgehoben
       orders:
         confidence_score: Am besten bewertet
+        confidence_score_title: Am besten bewertet
         created_at: Neueste zuerst
+        created_at_title: Neueste zuerst
         hot_score: Aktivste
+        hot_score_title: Aktivste
         most_commented: Am meisten kommentiert
+        most_commented_title: Am meisten kommentiert
         relevance: Relevanz
+        relevance_title: Relevanz
         archival_date: Archiviert
+        archival_date_title: Archiviert
         recommendations: Empfehlungen
+        recommendations_title: Empfehlungen
       recommendations:
         without_results: Es gibt keine Vorschläge, die Ihren Interessen entsprechen
         without_interests: Folgen Sie Vorschlägen, sodass wir Ihnen Empfehlungen geben können
