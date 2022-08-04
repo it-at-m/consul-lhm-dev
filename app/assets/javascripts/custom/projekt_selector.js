@@ -9,7 +9,7 @@
       }
     },
 
-    selectProjekt: function($projekt) {
+    selectProjekt: function($projekt, shouldUpdateMap) {
       var $selectedProjekt = $projekt.clone().removeClass('js-select-projekt')
       var projektId = $projekt.data('projektId')
       var $currentProjektSelector = $projekt.closest('.projekt-selector')
@@ -55,7 +55,9 @@
         App.ProjektSelector.addNextProjektPlaceholder($nextProejektSelector, "(verpflichtend)")
       }
 
-      App.ProjektSelector.replaceProjektMapOnProposalCreation($selectedProjekt)
+      if ( shouldUpdateMap ) {
+        App.ProjektSelector.replaceProjektMapOnProposalCreation($selectedProjekt)
+      }
       App.ProjektSelector.toggleDocumentAttachment($selectedProjekt)
       App.ProjektSelector.toggleSummary($selectedProjekt)
       App.ProjektSelector.updateAvailableTagsSelection($selectedProjekt)
@@ -192,9 +194,11 @@
       }
 
       // show projekts staring with top parent
+      var shouldUpdateMap = $('form#new_proposal').length == 1
+
       $.each(projektIdsToShow, function(index, projektId) {
         var $selectedProjekt = $('#projekt_' + projektId)
-        App.ProjektSelector.selectProjekt($selectedProjekt);
+        App.ProjektSelector.selectProjekt($selectedProjekt, shouldUpdateMap);
         $selectedProjekt.closest('.projekt_group').hide();
       });
     },
@@ -256,7 +260,7 @@
       });
 
       $("body").on("click", ".js-select-projekt", function(event) {
-        App.ProjektSelector.selectProjekt($(this));
+        App.ProjektSelector.selectProjekt($(this), true);
       });
 
       $(".js-new-resource").on("click", function(event) {
