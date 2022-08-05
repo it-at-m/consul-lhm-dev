@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
       twitter_icon = SiteCustomization::Image.all.find_by(name: "social_media_icon_twitter").image
 
       if twitter_icon.attached?
-        @social_media_icon_twitter_path = rails_blob_path(twitter_icon, disposition: "attachment")
+        @social_media_icon_twitter_url = rails_blob_url(twitter_icon.attachment, disposition: "attachment")
           .split("?")[0]
       else
         nil

@@ -104,12 +104,4 @@ class DeficiencyReport < ApplicationRecord
   def calculate_hot_score
     self.hot_score = ScoreCalculator.hot_score(self)
   end
-
-  def can_be_deleted_by?(user)
-    return false if user.nil?
-    return true if user.administrator?
-    return false if user != author
-
-    official_answer.blank?
-  end
 end

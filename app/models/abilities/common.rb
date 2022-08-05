@@ -127,6 +127,10 @@ module Abilities
       end
 
       can [:read, :json_data, :create, :vote], DeficiencyReport
+      can :destroy, DeficiencyReport do |dr|
+        dr.author_id == user.id &&
+          dr.official_answer.blank?
+      end
 
       can :create, Budget::Investment do |investment|
         investment.budget.phase == "accepting" &&
