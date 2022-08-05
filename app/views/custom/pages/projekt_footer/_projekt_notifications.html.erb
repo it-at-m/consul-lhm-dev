@@ -13,10 +13,6 @@
         <h3><%= notification.title %></h3>
         <p class="more-info"><%= l notification.created_at.to_date %></p>
         <%= simple_format sanitize_and_auto_link(notification.body), {}, sanitize: false %>
-
-        <span class="js-flag-actions">
-          <%= render "proposal_notifications/actions", notification: notification %>
-        </span>
       </div>
     <% end %>
   </div>

@@ -61,18 +61,18 @@ module Abilities
 
       can :moderate, Comment do |comment|
         comment.projekt.present? &&
-          comment.projekt.projekt_manager_id == user.projekt_manager.id
+          comment.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
       end
 
       can :hide, Comment do |comment|
         comment.projekt.present? &&
-          comment.projekt.projekt_manager_id == user.projekt_manager.id &&
+          comment.projekt.projekt_manager_ids.include?(user.projekt_manager.id) &&
           comment.hidden_at == nil
       end
 
       can :ignore_flag, Comment do |comment|
         comment.projekt.present? &&
-          comment.projekt.projekt_manager_id == user.projekt_manager.id &&
+          comment.projekt.projekt_manager_ids.include?(user.projekt_manager.id) &&
           comment.ignored_flag_at == nil &&
           comment.hidden_at == nil
       end
