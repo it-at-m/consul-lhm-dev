@@ -8,6 +8,8 @@ class ProjektLivestream < ApplicationRecord
   before_save :assign_external_id
   after_create :fetch_video_details
 
+  has_one :projekt_question, dependent: :destroy
+
   scope :sort_by_all, -> {
     all
   }
