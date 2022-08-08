@@ -113,6 +113,28 @@ de:
         set_default_sorting_to_newest: Standardsortierung auf "Neueste" unstellen
         set_default_sorting_to_newest_description: Zeigt standardmäßig die neuesten Beiträge anstatt der aktivsten Beiträge an
 
+      extra_fields:
+        registration: Registrierung
+        verification: Verifizierung
+        first_name: Vorname
+        first_name_description: Aktiviert das Feld "Vorname" bei der Nutzer*innen-Verifizierung
+        last_name: Nachname
+        last_name_description: Aktiviert das Feld "Nachname" bei der Nutzer*innen-Verifizierung
+        street_name: Straße
+        street_name_description: Aktiviert das Feld "Straße" bei der Nutzer*innen-Verifizierung
+        street_number: Hausnummer
+        street_number_description: Aktiviert das Feld "Hausnummer" bei der Nutzer*innen-Verifizierung
+        plz: Postleitzahl
+        plz_description: Aktiviert das Feld "Postleitzahl" bei der Nutzer*innen-Verifizierung
+        city_name: Stadt
+        city_name_description: Aktiviert das Feld "Stadt" bei der Nutzer*innen-Verifizierung
+        date_of_birth: Geburtsdatum
+        date_of_birth_description: Aktiviert das Feld "Geburtsdatum" bei der Nutzer*innen-Verifizierung
+        gender: Geschlecht
+        gender_description: Aktiviert das Feld "Geschlecht" bei der Nutzer*innen-Verifizierung
+        document: Personalausweis / Passport (4 letzten Ziffern)
+        document_description: Aktiviert das Feld "Personalausweis/Passport" bei der Nutzer*innen-Verifizierung
+
       projekt_feature:
         main:
           activate: Projekt aktivieren

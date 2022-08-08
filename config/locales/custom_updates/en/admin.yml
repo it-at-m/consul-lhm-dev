@@ -315,6 +315,7 @@ en:
             proposals: Proposals
           extended_options: Advanced configuration settings
           extended_settings: Advanced settings
+          extra_fields: Registration & Verification
           features:
             activate:
               disabled: Project disabled

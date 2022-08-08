@@ -328,6 +328,7 @@ de:
             proposals: Vorschläge
           extended_options: Erweiterte Konfigurationseinstellungen
           extended_settings: Erweiterte Einstellungen
+          extra_fields: Registrierung & Verifizierung
           features:
             activate:
               disabled: Projekt deaktiviert
