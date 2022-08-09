@@ -360,3 +360,20 @@ span.toggle-arrow {
     display: block;
   }
 }
+
+// User registration form
+
+.user-date-of-birth.sign-up {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  label {
+    flex-basis: 100%;
+  }
+
+  select {
+    flex-basis: 32%;
+    margin-right: 0;
+  }
+}

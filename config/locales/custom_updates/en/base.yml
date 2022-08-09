@@ -31,6 +31,9 @@ en:
           new:
             privacy_link: Privacy policy
             terms: With the registration you accept the %{terms} and %{privacy}
+        gender:
+          male: male
+          female: female
     gdpr_notice:
       accept: Accept
       link_text: More info

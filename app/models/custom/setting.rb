@@ -228,7 +228,7 @@ class Setting < ApplicationRecord
         "extra_fields.registration.city_name": false,
         "extra_fields.registration.date_of_birth": false,
         "extra_fields.registration.gender": false,
-        "extra_fields.registration.document": false,
+        "extra_fields.registration.document_last_digits": false,
         "extra_fields.verification.first_name": false,
         "extra_fields.verification.last_name": false,
         "extra_fields.verification.street_name": false,
@@ -237,7 +237,7 @@ class Setting < ApplicationRecord
         "extra_fields.verification.city_name": false,
         "extra_fields.verification.date_of_birth": false,
         "extra_fields.verification.gender": false,
-        "extra_fields.verification.document": false
+        "extra_fields.verification.document_last_digits": false
       }
     end
 

@@ -132,8 +132,8 @@ de:
         date_of_birth_description: Aktiviert das Feld "Geburtsdatum" bei der Nutzer*innen-Verifizierung
         gender: Geschlecht
         gender_description: Aktiviert das Feld "Geschlecht" bei der Nutzer*innen-Verifizierung
-        document: Personalausweis / Passport (4 letzten Ziffern)
-        document_description: Aktiviert das Feld "Personalausweis/Passport" bei der Nutzer*innen-Verifizierung
+        document_last_digits: Personalausweis / Passport (4 letzten Ziffern)
+        document_last_digits_description: Aktiviert das Feld "Personalausweis/Passport" bei der Nutzer*innen-Verifizierung
 
       projekt_feature:
         main:

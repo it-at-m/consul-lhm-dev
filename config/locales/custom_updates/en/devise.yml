@@ -1,0 +1,14 @@
+de:
+  custom:
+    devise_views:
+      users:
+        registrations:
+          new:
+            first_name_label: First name
+            last_name_label: Last name
+            street_name_label: Street name
+            street_number_label: Street number
+            plz_label: PLZ
+            gender: Please select
+            city_name_label: City
+            document_last_digits_label: Document (4 last digits)

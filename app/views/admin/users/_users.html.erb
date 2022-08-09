@@ -12,6 +12,15 @@
         <% else %>
           <th scope="col"><%= t("admin.users.columns.name") %></th>
           <th scope="col"><%= t("admin.users.columns.email") %></th>
+          <th scope="col"><%= t("custom.admin.users.columns.first_name") %></th>
+          <th scope="col"><%= t("custom.admin.users.columns.last_name") %></th>
+          <th scope="col"><%= t("custom.admin.users.columns.street_name") %></th>
+          <th scope="col"><%= t("custom.admin.users.columns.street_number") %></th>
+          <th scope="col"><%= t("custom.admin.users.columns.plz") %></th>
+          <th scope="col"><%= t("custom.admin.users.columns.city_name") %></th>
+          <th scope="col"><%= t("custom.admin.users.columns.gender") %></th>
+          <th scope="col"><%= t("custom.admin.users.columns.date_of_birth") %></th>
+          <th scope="col"><%= t("custom.admin.users.columns.document_last_digits") %></th>
           <th scope="col"><%= t("admin.users.columns.document_number") %></th>
           <th scope="col"><%= t("admin.users.columns.roles") %></th>
           <th scope="col"><%= t("admin.users.columns.verification_level") %></th>
@@ -27,6 +36,17 @@
           <% else %>
             <td><%= link_to user.name, user_path(user), target: "_blank" %></td>
             <td><%= user.email %></td>
+
+            <td><%= user.first_name %></td>
+            <td><%= user.last_name %></td>
+            <td><%= user.street_name %></td>
+            <td><%= user.street_number %></td>
+            <td><%= user.plz %></td>
+            <td><%= user.city_name %></td>
+            <td><%= t("custom.devise_views.users.gender.#{user.gender}") if user.gender.present? %></td>
+            <td><%= l user.date_of_birth.to_date if user.date_of_birth.present? %></td>
+            <td><%= user.document_last_digits %></td>
+
             <td><%= user.document_number %></td>
             <td><%= display_user_roles(user) %></td>
             <td><%= user.user_type %></td>
