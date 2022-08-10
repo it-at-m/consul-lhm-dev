@@ -92,6 +92,10 @@ de:
             color: Farbe
             icon: Icon
             title: Name
+      geozones:
+        geozone:
+          postal_codes: Postleitzahlen
+          postal_codes_help: Kommaseparierte Liste der Postleitzahlen, die zu dieser Geozone gehören
       menu:
         deficiency_reports:
           categories: Kategorien festlegen

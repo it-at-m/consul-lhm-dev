@@ -1,0 +1,14 @@
+en:
+  custom:
+    verification:
+      residence:
+        new:
+          first_name: First name
+          last_name: Last name
+          street_name: Street
+          street_number: Street number
+          plz: Postal code
+          city_name: City
+          gender: Gender
+          date_of_birth: Date of birth
+          document_last_digits: Document (last 4 digits)

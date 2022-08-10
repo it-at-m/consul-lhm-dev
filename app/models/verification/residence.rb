@@ -14,8 +14,8 @@ class Verification::Residence
   validate :allowed_age
   validate :document_number_uniqueness
 
-  validate :local_postal_code
-  validate :local_residence
+  # validate :local_postal_code
+  # validate :local_residence
 
   def initialize(attrs = {})
     self.date_of_birth = parse_date("date_of_birth", attrs)

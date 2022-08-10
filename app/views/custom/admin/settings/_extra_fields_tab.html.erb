@@ -1,3 +1,9 @@
+<h2><%= t("custom.admin.settings.index.extended_features.verification") %></h2>
+<div class='js-toggle-availability-of-verification-settings'>
+  <%= render "extended_features_table", features: @extended_feature_verification, tab: "#tab-extra-fields" %>
+</div>
+
+<h2><%= t("custom.admin.settings.index.extended_features.extra_fields") %></h2>
 <table>
   <thead>
     <tr>

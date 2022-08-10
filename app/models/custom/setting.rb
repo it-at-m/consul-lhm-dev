@@ -220,6 +220,8 @@ class Setting < ApplicationRecord
         "extended_feature.projekts_overview_page_footer.show_in_expired": true,
         "extended_feature.projekts_overview_page_footer.show_in_individual_list": true,
 
+        "extended_feature.verification.manual_verifications": true,
+
         "extra_fields.registration.first_name": false,
         "extra_fields.registration.last_name": false,
         "extra_fields.registration.street_name": false,

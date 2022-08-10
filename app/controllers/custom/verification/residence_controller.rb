@@ -1,6 +1,21 @@
 require_dependency Rails.root.join("app", "controllers", "verification", "residence_controller").to_s
 
 class Verification::ResidenceController < ApplicationController
+  def create
+    @residence = Verification::Residence.new(residence_params.merge(user: current_user))
+    verification_mode = params[:residence][:verification_mode]
+
+    if verification_mode == "manual" && @residence.save_manual_verification
+      redirect_to account_path, notice: t("verification.residence.create.flash.ssuccess")
+
+    elsif verification_mode != "manual" && @residence.save
+      redirect_to verified_user_path, notice: t("verification.residence.create.flash.success")
+
+    else
+      render :new
+    end
+  end
+
   private
 
     def allowed_params

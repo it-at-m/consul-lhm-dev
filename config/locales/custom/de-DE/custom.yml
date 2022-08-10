@@ -109,6 +109,8 @@ de:
             debates: Diskussionen
             proposals: Vorschläge
             polls: Abstimmungen
+            verification: Verifizierung
+            extra_fields: Abfragefelder
       polls:
         questions:
           show_images: Bilder für Antworten anzeigen

@@ -61,6 +61,9 @@ de:
           enable_projekt_filter_description: Zeigt den Projektfilter in der Diskussionsübersichtseite
           enable_my_posts_filter: Meine Beiträge
           enable_my_posts_filter_description: Zeigt einen Filter für meine Beiträge in der Diskussionsübersichtsseite
+        verification:
+          manual_verifications: Manuelle Nutzer*innen-Verifizierung
+          manual_verifications_description: Nutzer*innen müssen manuell verifiziert werden. Beteiligungsformate können auf Nutzer*innen-Gruppen eingeschränkt werden
 
         proposals:
           intro_text_for_proposals: Einleitungstext für Vorschläge
