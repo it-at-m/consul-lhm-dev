@@ -23,8 +23,11 @@ class ProjektQuestionAnswersController < ApplicationController
       )
       @answer.save!
       @commentable = @question
-      @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
-      set_comment_flags(@comment_tree.comments)
+
+      if @question.root_question?
+        @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
+        set_comment_flags(@comment_tree.comments)
+      end
 
       render 'custom/projekt_questions/show.js.erb', format: :js
     end
@@ -40,8 +43,11 @@ class ProjektQuestionAnswersController < ApplicationController
 
       @answer.save!
       @commentable = @question
-      @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
-      set_comment_flags(@comment_tree.comments)
+
+      if @question.root_question?
+        @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
+        set_comment_flags(@comment_tree.comments)
+      end
 
       render 'custom/projekt_questions/show.js.erb', format: :js
     end

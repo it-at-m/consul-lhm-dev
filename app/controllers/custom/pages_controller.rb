@@ -417,10 +417,12 @@ class PagesController < ApplicationController
 
     params[:current_tab_path] = 'question_phase_footer_tab'
 
+    projekt_questions = @current_projekt.questions.root_questions
+
     if @current_projekt.projekt_list_enabled?
-      @projekt_questions = @current_projekt.questions
+      @projekt_questions = projekt_questions
     else
-      @projekt_question = @current_projekt.questions.first
+      @projekt_question = projekt_questions.first
       @commentable = @projekt_question
 
       @valid_orders = %w[most_voted newest oldest]

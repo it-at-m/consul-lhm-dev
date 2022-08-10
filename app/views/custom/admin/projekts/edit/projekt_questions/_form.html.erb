@@ -3,6 +3,9 @@
 <%= translatable_form_for [:admin, @projekt, @projekt_question], url: url do |f| %>
 
   <%= hidden_field_tag :namespace, @namespace %>
+  <% if @projekt_livestream.present? %>
+    <%= hidden_field_tag :projekt_livestream_id, @projekt_livestream.id %>
+  <% end %>
 
   <%= render "shared/errors", resource: @projekt_question %>
 

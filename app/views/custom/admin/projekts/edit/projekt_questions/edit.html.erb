@@ -1,12 +1,24 @@
 <div class="legislation-questions-new legislation-questions-form">
 
-  <%= back_link_to redirect_to_projekt_questions_path(@projekt), t("admin.legislation.questions.new.back") %>
+  <% if @projekt_livestream.present? %>
+    <%= back_link_to admin_projekt_livestreams_path(@projekt), t("admin.legislation.questions.new.back") %>
+  <% else %>
+    <%= back_link_to redirect_to_projekt_questions_path(@projekt), t("admin.legislation.questions.new.back") %>
+  <% end %>
 
-  <h2><%= @projekt.title %></h2>
+  <% if @projekt_livestream.present? %>
+    <h2><%= @projekt_livestream.title %></h2>
+  <% else %>
+    <h2><%= @projekt.title %></h2>
+  <% end %>
 
   <div class="row">
     <div class="small-12 column">
-      <h3><%= t("custom.admin.projekts.projekt_questions.edit.title") %></h3>
+      <% if @projekt_livestream.present? %>
+        <h3><%= t("custom.admin.projekts.projekt_questions.edit.title_for_livestream") %></h3>
+      <% else %>
+        <h3><%= t("custom.admin.projekts.projekt_questions.edit.title") %></h3>
+      <% end %>
     </div>
   </div>
 

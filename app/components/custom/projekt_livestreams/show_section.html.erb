@@ -28,10 +28,21 @@
           <% end %>
 
           <% if @current_projekt_livestream.description.present? %>
-            <span class="projekt-livestream--description-text">
-              <%= WYSIWYGSanitizer.new.sanitize(@current_projekt_livestream.description) %>
-            </span>
+            <%= render Shared::CollapseTextComponent.new do |component| %>
+              <% component.inner_content do %>
+                <span class="projekt-livestream--description-text">
+                  <%= WYSIWYGSanitizer.new.sanitize(@current_projekt_livestream.description) %>
+                </span>
+              <% end %>
+            <% end %>
           <% end %>
+        </div>
+      <% end %>
+      <% if @current_projekt_livestream.projekt_questions.any? %>
+        <div class="projekt-questions-container projekt-question-embed js-projekt-questions-container">
+          <% projekt_question = @current_projekt_livestream.projekt_questions.first %>
+          <% projekt_question_answer = projekt_question&.answer_for_user(helpers.current_user) || ProjektQuestionAnswer.new %>
+          <%= render ProjektQuestions::ProjektQuestionComponent.new(projekt_question, projekt_question_answer: projekt_question_answer) %>
         </div>
       <% end %>
     </div>

@@ -18,9 +18,12 @@ class ProjektQuestionsController < ApplicationController
   end
 
   def show
-    @commentable = @question
-    @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
-    set_comment_flags(@comment_tree.comments)
+    if @question.root_question?
+      @commentable = @question
+      @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
+      set_comment_flags(@comment_tree.comments)
+    end
+
     @answer = @question.answer_for_user(current_user) || ProjektQuestionAnswer.new
   end
 

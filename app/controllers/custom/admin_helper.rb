@@ -23,27 +23,41 @@ module AdminHelper
 
   # path helpers for projekt questions
 
-  def new_projekt_question_path(projekt_id)
+  def new_projekt_question_path(projekt_id, projekt_livestream_id: nil)
     if params[:controller].include?('projekt_management')
-      new_projekt_management_projekt_projekt_question_path(projekt_id: projekt_id)
+      new_projekt_management_projekt_projekt_question_path(
+        projekt_id: projekt_id,
+        projekt_livestream_id: projekt_livestream_id
+      )
     else
-      new_admin_projekt_projekt_question_path(projekt_id: projekt_id)
+      new_admin_projekt_projekt_question_path(
+        projekt_id: projekt_id,
+        projekt_livestream_id: projekt_livestream_id
+      )
     end
   end
 
-  def edit_projekt_question_path(projekt, question)
-    if params[:controller].include?('projekt_management')
-      edit_projekt_management_projekt_projekt_question_path(projekt, question)
+  def edit_projekt_question_path(projekt, question, **hash_arguments)
+    if params[:controller].include?("projekt_management")
+      edit_projekt_management_projekt_projekt_question_path(projekt, question, **hash_arguments)
     else
-      edit_admin_projekt_projekt_question_path(projekt, question)
+      edit_admin_projekt_projekt_question_path(projekt, question, **hash_arguments)
     end
   end
 
   def redirect_to_projekt_questions_path(projekt)
-    if params[:controller].include?('projekt_management')
-      edit_projekt_management_projekt_path(projekt) + '#tab-projekt-questions'
+    edit_admin_projekt_path(projekt, anchor: "tab-projekt-questions")
+  end
+
+  def edit_admin_projekt_path(projekt, **hash_arguments)
+    if params[:controller].include?("projekt_management")
+      edit_projekt_management_projekt_path(projekt, **hash_arguments)
     else
-      edit_admin_projekt_path(projekt) + '#tab-projekt-questions'
+      super(projekt, **hash_arguments)
     end
+  end
+
+  def admin_projekt_livestreams_path(projekt)
+    edit_admin_projekt_path(projekt, anchor: "tab-projekt-livestreams")
   end
 end
