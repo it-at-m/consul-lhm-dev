@@ -693,7 +693,7 @@ en:
           title: Create new question
           submit_button: Create question
         table:
-          title: Title
+          title: Short survey
           question_options: Question options
           answers_count: Answers count
           comments_count: Comments count

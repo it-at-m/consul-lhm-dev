@@ -14,7 +14,12 @@ class ProjektQuestion < ApplicationRecord
             class_name: "ProjektQuestionOption",
             foreign_key: "projekt_question_id",
             dependent: :destroy
-  has_many :answers, class_name: "ProjektQuestionAnswer", foreign_key: "projekt_question_id", dependent: :destroy
+  has_many(
+    :answers,
+    class_name: "ProjektQuestionAnswer",
+    foreign_key: "projekt_question_id",
+    dependent: :destroy
+  )
   has_many :comments, as: :commentable, inverse_of: :commentable, dependent: :destroy
 
   accepts_nested_attributes_for :question_options, reject_if: proc { |attributes| attributes.all? { |k, v| v.blank? } }, allow_destroy: true
@@ -24,20 +29,48 @@ class ProjektQuestion < ApplicationRecord
 
   scope :sorted, -> { order("id ASC") }
 
+  scope :root_questions, -> {
+    where(projekt_livestream_id: nil)
+  }
+
+  scope :livestream_questions, -> {
+    where.not(projekt_livestream_id: nil)
+  }
+
   def self.base_selection(scoped_projekt_ids = Projekt.ids)
     where(projekt_id: scoped_projekt_ids)
   end
 
+  def root_question?
+    projekt_livestream_id.nil?
+  end
+
+  def livestream_question?
+    projekt_livestream_id.present?
+  end
+
+  def base_query_for_navigation
+    base_query = projekt.questions.sorted.limit(1)
+
+    if root_question?
+      base_query.root_questions
+    elsif livestream_question?
+      base_query.where(projekt_livestream_id: projekt_livestream_id)
+    end
+  end
+
   def next_question_id
-    @next_question_id ||= projekt.questions.where("id > ?", id).sorted.limit(1).ids.first
+    return @next_question_id if @next_question_id.present?
+
+    @next_question_id ||= base_query_for_navigation.where("id > ?", id).ids.first
   end
 
   def previous_question_id
-    @previous_question_id ||= projekt.questions.where("id < ?", id).sorted.ids.last
+    @previous_question_id ||= base_query_for_navigation.where("id < ?", id).ids.last
   end
 
   def first_question_id
-    @first_question_id ||= projekt.questions.sorted.limit(1).ids.first
+    @first_question_id ||= base_query_for_navigation.ids.first
   end
 
   def answer_for_user(user)

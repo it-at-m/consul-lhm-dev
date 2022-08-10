@@ -175,6 +175,8 @@ en:
               description: Description
               starts_at: Starts at
               platform: Platform
+              add_question: Add question
+              question: Questions
           projekt_page: Project page
           projekt_phase_limitation: Restriction
           projekt_phases: Project phases
@@ -281,9 +283,16 @@ en:
           edit:
             save: Update question
             title: Edit question
+            title_for_livestream: Create question for livestream
           index:
             create: Create question
             title: Short survey
+            attached_to: Angehängt
+            title: Short survey
+            question_options: Question options
+            answers_count: Answers count
+            comments_count: Comments count
+            enable_projekt_list: Activate projekt questions overview
           new:
             create: Update question
             title: Create question

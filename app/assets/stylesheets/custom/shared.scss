@@ -360,3 +360,24 @@ span.toggle-arrow {
     display: block;
   }
 }
+
+.collapse-text-widget--inner-content {
+  position: relative;
+  max-height: 145px;
+  overflow: hidden;
+
+  &.-expanded {
+    max-height: 100%;
+  }
+}
+
+.collapse-text-widget--expand-button {
+  display: none;
+  margin-top: 5px;
+  cursor: pointer;
+  user-select: none;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: bold;
+  color: #808080;
+}

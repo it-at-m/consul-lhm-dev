@@ -3,6 +3,7 @@ class Admin::ProjektQuestionsController < Admin::BaseController
 
   before_action :set_projekt, only: [:new, :create]
   before_action :set_projekt_and_projekt_question, except: [:new, :create]
+  before_action :set_projekt_livestream, only: [:new, :create, :update]
 
   skip_authorization_check
 
@@ -20,9 +21,18 @@ class Admin::ProjektQuestionsController < Admin::BaseController
     @projekt_question.projekt_id = @projekt.id
     @projekt_question.author = current_user
 
+    if @projekt_livestream.present?
+      @projekt_question.projekt_livestream = @projekt_livestream
+    end
+
     if @projekt_question.save
       notice = "Question created"
-      redirect_to redirect_path(@projekt.id, "#tab-projekt-questions"), notice: notice
+
+      if @projekt_livestream.present?
+        redirect_to redirect_path(@projekt.id, "#tab-projekt-livestreams"), notice: notice
+      else
+        redirect_to redirect_path(@projekt.id, "#tab-projekt-questions"), notice: notice
+      end
     else
       flash.now[:error] = t("admin.legislation.questions.create.error")
       render "admin/projekts/edit/projekt_questions/new"
@@ -31,6 +41,7 @@ class Admin::ProjektQuestionsController < Admin::BaseController
 
   def edit
     @projekt_question = ProjektQuestion.find(params[:id])
+    @projekt_livestream = @projekt_question.projekt_livestream
 
     render "admin/projekts/edit/projekt_questions/edit"
   end
@@ -75,6 +86,10 @@ class Admin::ProjektQuestionsController < Admin::BaseController
 
     def set_projekt
       @projekt = Projekt.find(params[:projekt_id])
+    end
+
+    def set_projekt_livestream
+      @projekt_livestream = ProjektLivestream.find_by(id: params[:projekt_livestream_id])
     end
 
     def redirect_path(projekt_id, tab)

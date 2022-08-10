@@ -185,6 +185,8 @@ de:
               description: Bezeichnung
               starts_at: Startet um
               platform: Portal
+              add_question: Frage hinzufügen
+              questoins: Kurzumfragen
           projekt_page: Projektseite
           projekt_phase_limitation: Beschränkung
           projekt_phases: Projektphasen
@@ -298,9 +300,14 @@ de:
             create: Frage erstellen
             enable_projekt_list: Aktivieren Sie eine Übersicht aller Fragen
             title: Kurzumfrage
+            question_options: Antwortmöglichkeiten
+            answers_count: Anzahl der Antworten
+            comments_count: Anzahl der Kommentare
+            attached_to: Angehängt
           new:
             create: Frage aktualisieren
             title: Frage erstellen
+            title_for_livestream: Frage für Livestream erstellen
           show_answers_count: Anzahl der Stimmen im Frontend anzeigen
         overview_page_tab:
           title: Projektübersichtseite

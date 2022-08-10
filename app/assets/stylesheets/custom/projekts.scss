@@ -1112,6 +1112,34 @@ span.projekt-backlink:before {
 .admin .projekt-livestream {
   position: relative;
 
+  .admin-delete-icon-button-livestream {
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .admin-edit-icon-button-livestream {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .admin-edit-icon-button {
+    font-size: 14px;
+  }
+
+  .admin-delete-icon-button {
+    font-size: 16px;
+  }
+
+  .admin-projekt-livestream-projekt-questions-title {
+    margin-bottom: 10px;
+  }
+
   img {
     margin-bottom: 15px;
   }
@@ -1329,6 +1357,34 @@ span.projekt-backlink:before {
   white-space: pre-line;
 }
 
+.projekt-livestream--description + .projekt-questions-container {
+  margin-top: 28px;
+}
+
+.projekt-question-embed {
+  .projekt-question-container,
+  .projekt-question-next-question-section {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .quiz-question {
+    font-size: 32px;
+    margin-bottom: 15px;
+  }
+
+  .projekt-question-next-question-section {
+    margin-top: 15px;
+  }
+
+  .projekt-next-question-button-section {
+    justify-content: flex-start;
+  }
+}
+
 .projekt-livestream--description-starts-at {
   font-weight: bold;
   padding-right: 5px;
@@ -1372,4 +1428,49 @@ span.projekt-backlink:before {
       padding-bottom: 2rem;
     }
   }
+}
+
+.admin-projekt-livestream-projekt-question {
+  display: flex;
+  margin-bottom: 10px;
+
+  .admin-projekt-livestream-projekt-question--actions {
+    margin-left: 10px;
+    display: flex;
+    margin-top: 2px;
+
+    .admin-edit-icon-button {
+      margin-right: 5px;
+      padding-top: 2px;
+    }
+  }
+
+  h4 {
+    display: flex;
+    margin-bottom: 0;
+  }
+}
+
+.admin-delete-icon-button {
+  width: 20px;
+  height: 20px;
+}
+
+.admin-delete-icon-button::before {
+  content: "\f2ed";
+  font-weight: normal;
+  font-family: "Font Awesome 5 Free";
+  color: #cc4b37;
+}
+
+.admin-edit-icon-button {
+  width: 20px;
+  height: 20px;
+}
+
+.admin-edit-icon-button::before {
+  content: "\f044";
+  font-weight: normal;
+  font-family: "Font Awesome 5 Free";
+  color: #004a83;
 }

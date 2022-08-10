@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_27_200543) do
+ActiveRecord::Schema.define(version: 2022_08_09_095915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1585,8 +1585,10 @@ ActiveRecord::Schema.define(version: 2022_07_27_200543) do
     t.bigint "projekt_id"
     t.boolean "comments_enabled", default: true
     t.boolean "show_answers_count", default: true
+    t.integer "projekt_livestream_id"
     t.index ["hidden_at"], name: "index_projekt_questions_on_hidden_at"
     t.index ["projekt_id"], name: "index_projekt_questions_on_projekt_id"
+    t.index ["projekt_livestream_id"], name: "index_projekt_questions_on_projekt_livestream_id"
   end
 
   create_table "projekt_settings", force: :cascade do |t|

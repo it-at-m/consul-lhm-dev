@@ -4,11 +4,14 @@ class ProjektLivestream < ApplicationRecord
   validates :url, presence: true
 
   default_scope { order(starts_at: :desc) }
+
   before_save :assign_video_platform
   before_save :assign_external_id
+  before_save :strip_description
+
   after_create :fetch_video_details
 
-  has_one :projekt_question, dependent: :destroy
+  has_many :projekt_questions, dependent: :destroy
 
   scope :sort_by_all, -> {
     all
@@ -105,5 +108,9 @@ class ProjektLivestream < ApplicationRecord
 
     save!
   rescue StandardError
+  end
+
+  def strip_description
+    self.description = description.strip
   end
 end

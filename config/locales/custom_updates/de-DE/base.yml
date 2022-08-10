@@ -157,6 +157,10 @@ de:
     welcome_launch:
       p1: Hier entsteht die neue Beteiligungsplattform der Stadt %{org_name}
       p2: Unser Go-Live ist am %{date}!
+    shared_components:
+      collapse_text:
+        show_more: "Zeig mehr"
+        show_less: "Zeige weniger"
   date:
     formats:
       long: '%d. %B %Y'
