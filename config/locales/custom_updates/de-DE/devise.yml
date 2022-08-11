@@ -1,0 +1,14 @@
+de:
+  custom:
+    devise_views:
+      users:
+        registrations:
+          new:
+            first_name_label: Vorname
+            last_name_label: Nachname
+            street_name_label: Straße
+            street_number_label: Hausnummer
+            plz_label: Postleitzahl
+            gender: Bitte wählen
+            city_name_label: Stadt
+            document_last_digits_label: Personalausweis / Passport (4 letzten Ziffern)

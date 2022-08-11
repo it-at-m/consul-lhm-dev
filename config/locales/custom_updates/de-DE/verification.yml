@@ -1,0 +1,17 @@
+de:
+  custom:
+    verification:
+      residence:
+        new:
+          first_name: Vorname
+          last_name: Nachname
+          street_name: Straße
+          street_number: Hausnummer
+          plz: Postleitzahl
+          city_name: Stadt
+          gender: Geschlecht
+          date_of_birth: Geburtsdatum
+          document_last_digits: Personalausweis / Passport (4 letzten Ziffern)
+        create:
+          flash:
+            success_manual: Vielen Dank, Ihre Daten wurden gespeichert

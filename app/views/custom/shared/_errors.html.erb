@@ -5,7 +5,7 @@
     </button>
 
     <strong role="alert" aria-live="assertive">
-      <% errors_count = resource.errors.messages.reject { |attribute| attribute == :base }.count %>
+      <% errors_count = resource.errors.count %>
 
       <%= pluralize errors_count, t("form.error"), t("form.errors") %>
 

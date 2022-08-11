@@ -1,0 +1,17 @@
+<tr>
+  <td class='small-8'>
+    <strong><%= t("custom.settings.extra_fields.#{field}") %></strong>
+    <br>
+    <span class="small">
+      <%= t("custom.settings.extra_fields.#{field}_description", default: t("admin.settings.no_description")) %>
+    </span>
+  </td>
+
+  <td class='small-2'>
+    <%= render Admin::Settings::FeaturedSettingsFormComponent.new(@extra_fields_registration.detect{ |e| e.key === "extra_fields.registration.#{field}"}) %>
+  </td>
+
+  <td class='small-2 js-verification-settings'>
+    <%= render Admin::Settings::FeaturedSettingsFormComponent.new(@extra_fields_verification.detect{ |e| e.key === "extra_fields.verification.#{field}"}, disabled: !extended_feature?("verification.manual_verifications")) %>
+  </td>
+</tr>

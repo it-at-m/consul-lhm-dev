@@ -15,7 +15,7 @@ en:
         proposal:
           attributes:
             description:
-              too_long: "Text is too long"
+              too_long: 'is too long'
         projekt:
           attributes:
             color:
@@ -42,3 +42,25 @@ en:
         user_cost_estimate: Cost estimate
       milestone:
         custom_date: Custom date
+      map_layer:
+        name: Layer name
+        provider: Provider
+        attribution: Attribution
+        base: Base layer
+        layer_names: Layer names
+        show_by_default: show by default
+        transparent: this layer is transparent
+        protocol: Protocol
+        protocols:
+          regular: default
+          wms: WMS
+      user:
+        first_name: First name
+        last_name: Last name
+        street_name: Street
+        street_number: Street number
+        plz: Postal code
+        city_name: City
+        gender: Gender
+        date_of_birth: Date of birth
+        document_last_digits: Document (last 4 digits)

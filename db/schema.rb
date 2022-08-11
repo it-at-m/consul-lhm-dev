@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_09_095915) do
+ActiveRecord::Schema.define(version: 2022_08_10_151907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -780,6 +780,7 @@ ActiveRecord::Schema.define(version: 2022_08_09_095915) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "census_code"
+    t.string "postal_codes"
   end
 
   create_table "geozones_polls", id: :serial, force: :cascade do |t|
@@ -2039,6 +2040,8 @@ ActiveRecord::Schema.define(version: 2022_08_09_095915) do
     t.string "pfo_plz"
     t.string "pfo_city"
     t.string "subscriptions_token"
+    t.string "street_number"
+    t.string "document_last_digits"
     t.index ["bam_street_id"], name: "index_users_on_bam_street_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["date_of_birth"], name: "index_users_on_date_of_birth"

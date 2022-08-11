@@ -12,26 +12,33 @@
         <% else %>
           <th scope="col"><%= t("admin.users.columns.name") %></th>
           <th scope="col"><%= t("admin.users.columns.email") %></th>
-          <th scope="col"><%= t("admin.users.columns.document_number") %></th>
+
+          <% if extended_feature?("verification.manual_verifications")  %>
+            <th scope="col"><%= t("custom.admin.users.columns.first_name") %></th>
+            <th scope="col"><%= t("custom.admin.users.columns.last_name") %></th>
+            <th scope="col"><%= t("custom.admin.users.columns.street_name") %></th>
+            <th scope="col"><%= t("custom.admin.users.columns.street_number") %></th>
+            <th scope="col"><%= t("custom.admin.users.columns.plz") %></th>
+            <th scope="col"><%= t("custom.admin.users.columns.city_name") %></th>
+            <th scope="col"><%= t("custom.admin.users.columns.document_last_digits") %></th>
+          <% else %>
+            <th scope="col"><%= t("admin.users.columns.document_number") %></th>
+          <% end %>
+
+          <th scope="col"><%= t("custom.admin.users.columns.gender") %></th>
+          <th scope="col"><%= t("custom.admin.users.columns.date_of_birth") %></th>
           <th scope="col"><%= t("admin.users.columns.roles") %></th>
           <th scope="col"><%= t("admin.users.columns.verification_level") %></th>
+
+          <% if extended_feature?("verification.manual_verifications")  %>
+            <th scope="col"><%= t("custom.admin.users.columns.actions") %></th>
+          <% end %>
         <% end %>
       </tr>
     </thead>
     <tbody>
       <% @users.each do |user| %>
-        <tr>
-          <% if @current_filter == "erased" %>
-            <td><%= link_to user.id, user_path(user), target: "_blank" %></td>
-            <td><%= user.erase_reason %></td>
-          <% else %>
-            <td><%= link_to user.name, user_path(user), target: "_blank" %></td>
-            <td><%= user.email %></td>
-            <td><%= user.document_number %></td>
-            <td><%= display_user_roles(user) %></td>
-            <td><%= user.user_type %></td>
-          <% end %>
-        </tr>
+        <%= render 'admin/users/user_row', user: user %>
       <% end %>
     </tbody>
   </table>

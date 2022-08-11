@@ -25,6 +25,47 @@
 
       <%= f.email_field :email, placeholder: t("devise_views.users.registrations.new.email_label") %>
 
+      <% if Setting["extra_fields.registration.first_name"] %>
+        <%= f.text_field :first_name, placeholder: t("custom.devise_views.users.registrations.new.first_name_label") %>
+      <% end %>
+
+      <% if Setting["extra_fields.registration.last_name"] %>
+        <%= f.text_field :last_name, placeholder: t("custom.devise_views.users.registrations.new.last_name_label") %>
+      <% end %>
+
+      <% if Setting["extra_fields.registration.street_name"] %>
+        <%= f.text_field :street_name, placeholder: t("custom.devise_views.users.registrations.new.street_name_label") %>
+      <% end %>
+
+      <% if Setting["extra_fields.registration.street_number"] %>
+        <%= f.text_field :street_number, placeholder: t("custom.devise_views.users.registrations.new.street_number_label") %>
+      <% end %>
+
+      <% if Setting["extra_fields.registration.plz"] %>
+        <%= f.text_field :plz, placeholder: t("custom.devise_views.users.registrations.new.plz_label") %>
+      <% end %>
+
+      <% if Setting["extra_fields.registration.city_name"] %>
+        <%= f.text_field :city_name, placeholder: t("custom.devise_views.users.registrations.new.city_name_label") %>
+      <% end %>
+
+      <% if Setting["extra_fields.registration.date_of_birth"] %>
+        <div class="user-date-of-birth sign-up">
+          <%= f.date_select :date_of_birth,
+                            prompt: true,
+                            start_year: 1900, end_year: minimum_required_age.years.ago.year %>
+        </div>
+      <% end %>
+
+      <% if Setting["extra_fields.registration.gender"] %>
+        <%= f.select :gender, options_for_gender_select, include_blank: t("custom.devise_views.users.registrations.new.gender") %>
+      <% end %>
+
+      <% if Setting["extra_fields.registration.document_last_digits"] %>
+        <%= f.text_field :document_last_digits, placeholder: t("custom.devise_views.users.registrations.new.document_last_digits_label") %>
+      <% end %>
+
+
       <%= f.password_field :password, autocomplete: "off",
                            placeholder: t("devise_views.users.registrations.new.password_label") %>
 
@@ -45,8 +86,7 @@
                  privacy: link_to(t("custom.devise_views.users.registrations.new.privacy_link"), "/privacy",
                                 title: t("shared.target_blank"),
                                 target: "_blank")
-                ),
-        class: 'checkbox-label' %>
+                ) %>
 
 
       <div class="small-12 medium-6 small-centered margin-top">

@@ -380,4 +380,20 @@ span.toggle-arrow {
   font-size: 12px;
   font-weight: bold;
   color: #808080;
+
+// User registration form
+
+.user-date-of-birth.sign-up {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  label {
+    flex-basis: 100%;
+  }
+
+  select {
+    flex-basis: 32%;
+    margin-right: 0;
+  }
 }

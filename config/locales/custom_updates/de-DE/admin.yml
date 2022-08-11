@@ -92,6 +92,10 @@ de:
             color: Farbe
             icon: Icon
             title: Name
+      geozones:
+        geozone:
+          postal_codes: Postleitzahlen
+          postal_codes_help: Kommaseparierte Liste der Postleitzahlen, die zu dieser Geozone gehören
       menu:
         deficiency_reports:
           categories: Kategorien festlegen
@@ -335,6 +339,7 @@ de:
             proposals: Vorschläge
           extended_options: Erweiterte Konfigurationseinstellungen
           extended_settings: Erweiterte Einstellungen
+          extra_fields: Registrierung & Verifizierung
           features:
             activate:
               disabled: Projekt deaktiviert
@@ -348,6 +353,18 @@ de:
               add_new_image: Banner hinzufügen
               note: "Der Banner sollte mindestens 200 Pixel hoch und 1920 Pixel breit sein. Sie können ein Bild des folgenden Formats hochladen: %{accepted_content_types}, bis zu %{max_file_size} MB."
               title: Seitenbanner
+      users:
+        columns:
+          first_name: Vorname
+          last_name: Nachname
+          street_name: Straße
+          street_number: Hausnummer
+          plz: Postleitzahl
+          city_name: Stadt
+          gender: Geschlecht
+          date_of_birth: Geburtsdatum
+          document_last_digits: Dokument (4 letzten Ziffern)
+          actions: Aktionen
       widget:
         card:
           category_options:

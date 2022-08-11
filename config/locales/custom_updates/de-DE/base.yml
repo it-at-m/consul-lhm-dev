@@ -31,6 +31,9 @@ de:
           new:
             privacy_link: Datenschutzbestimmung
             terms: Mit der Registrierung akzeptieren Sie die %{terms} und %{privacy}
+        gender:
+          male: männlich
+          female: weiblich
     gdpr_notice:
       accept: Akzeptieren
       link_text: Mehr Infos

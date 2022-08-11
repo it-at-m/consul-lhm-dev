@@ -17,6 +17,12 @@ class Admin::SettingsController < Admin::BaseController
     @extended_option_gdpr = all_settings["extended_option.gdpr"]
     @extended_option_proposals = all_settings["extended_option.proposals"]
 
+    @extended_feature_verification = all_settings["extended_feature.verification"]
+    @extra_fields_registration = all_settings["extra_fields.registration"]
+    @extra_fields_verification = all_settings["extra_fields.verification"]
+    @extra_fields_attributes = all_settings["extra_fields.registration"].pluck(:key).map{ |key| key.split('.').last } &&
+      all_settings["extra_fields.verification"].pluck(:key).map{ |key| key.split('.').last }
+
     @participation_processes_settings = all_settings["process"]
     @map_configuration_settings = all_settings["map"]
     @proposals_settings = all_settings["proposals"]
