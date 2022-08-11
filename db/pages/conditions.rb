@@ -1,5 +1,5 @@
 def conditions_page_content
-  content += '<p><strong>1. Allgemeines</strong></p>'
+  content = '<p><strong>1. Allgemeines</strong></p>'
 
   content += '<p>1.1 Die Stadt <span class="replace-highlighted">xyz, Straße, PLZ Ort („Betreiberin“)</span>, betreibt die Online-Plattform <span class="replace-highlighted">www.xyz.de („Plattform“)</span>. Die Plattform ermöglicht es <span class="replace-highlighted">xyz</span> („Nutzer“), sich über <span class="replace-highlighted">xyz</span> zu informieren und sich an <span class="replace-highlighted">xyz</span> zu beteiligen.</p>'
   
