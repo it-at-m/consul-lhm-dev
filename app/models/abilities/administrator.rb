@@ -133,6 +133,7 @@ module Abilities
 
       can [:order_questions], Poll::Question
       can [:show], Projekt
+      can :verify, User
     end
   end
 end

@@ -12,3 +12,6 @@ en:
           gender: Gender
           date_of_birth: Date of birth
           document_last_digits: Document (last 4 digits)
+        create:
+          flash:
+            success_manual: Thank you, your data were saved.

@@ -12,3 +12,6 @@ de:
           gender: Geschlecht
           date_of_birth: Geburtsdatum
           document_last_digits: Personalausweis / Passport (4 letzten Ziffern)
+        create:
+          flash:
+            success_manual: Vielen Dank, Ihre Daten wurden gespeichert

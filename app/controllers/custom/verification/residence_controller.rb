@@ -6,7 +6,7 @@ class Verification::ResidenceController < ApplicationController
     verification_mode = params[:residence][:verification_mode]
 
     if verification_mode == "manual" && @residence.save_manual_verification
-      redirect_to account_path, notice: t("verification.residence.create.flash.ssuccess")
+      redirect_to account_path, notice: t("custom.verification.residence.create.flash.success_manual")
 
     elsif verification_mode != "manual" && @residence.save
       redirect_to verified_user_path, notice: t("verification.residence.create.flash.success")
