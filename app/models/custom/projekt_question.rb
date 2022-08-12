@@ -61,7 +61,7 @@ class ProjektQuestion < ApplicationRecord
 
   def sibling_questions
     if root_question?
-      projekt.questions
+      projekt.questions.root_questions
     elsif projekt_livestream.present?
       projekt_livestream.projekt_questions
     end
