@@ -1,6 +1,6 @@
-<div class='small-12 column'>
+<div class='projekt-question-list small-12 column'>
   <% projekt_questions.each do |question| %>
-    <div class="debate-block projekt-question-list-item margin-bottom">
+    <div class="debate-block projekt-question-list--item margin-bottom">
       <div class="debate-title">
         <h4><%= link_to question.title, projekt_projekt_question_path(projekt, question.id, format: :js), class: 'js-projekt-question-next' %></h4>
       </div>

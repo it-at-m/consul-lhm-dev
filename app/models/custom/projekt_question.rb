@@ -59,6 +59,14 @@ class ProjektQuestion < ApplicationRecord
     end
   end
 
+  def sibling_questions
+    if root_question?
+      projekt.questions
+    elsif projekt_livestream.present?
+      projekt_livestream.projekt_questions
+    end
+  end
+
   def next_question_id
     return @next_question_id if @next_question_id.present?
 

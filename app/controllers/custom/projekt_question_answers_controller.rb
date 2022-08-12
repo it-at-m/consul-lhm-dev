@@ -24,10 +24,8 @@ class ProjektQuestionAnswersController < ApplicationController
       @answer.save!
       @commentable = @question
 
-      if @question.root_question?
-        @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
-        set_comment_flags(@comment_tree.comments)
-      end
+      @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
+      set_comment_flags(@comment_tree.comments)
 
       render 'custom/projekt_questions/show.js.erb', format: :js
     end
@@ -44,10 +42,8 @@ class ProjektQuestionAnswersController < ApplicationController
       @answer.save!
       @commentable = @question
 
-      if @question.root_question?
-        @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
-        set_comment_flags(@comment_tree.comments)
-      end
+      @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
+      set_comment_flags(@comment_tree.comments)
 
       render 'custom/projekt_questions/show.js.erb', format: :js
     end
@@ -59,7 +55,7 @@ class ProjektQuestionAnswersController < ApplicationController
     @projekt = Projekt.find(params[:projekt_id])
   end
 
-    def answer_params
-      params.require(:projekt_question_answer).permit(:projekt_question_option_id)
-    end
+  def answer_params
+    params.require(:projekt_question_answer).permit(:projekt_question_option_id)
+  end
 end

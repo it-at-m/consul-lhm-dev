@@ -1,9 +1,9 @@
 require_dependency Rails.root.join("app", "controllers", "application_controller").to_s
 
 class ApplicationController < ActionController::Base
-
   before_action :set_top_level_projekts_for_menu, :set_default_social_media_images, :set_partner_emails
   before_action :show_launch_page, if: :show_launch_page?
+  helper_method :set_comment_flags
 
   private
 
