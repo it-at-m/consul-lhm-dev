@@ -85,15 +85,15 @@ class Projekt < ApplicationRecord
   scope :activated, -> { joins( 'INNER JOIN projekt_settings act ON projekts.id = act.projekt_id' ).
                          where( 'act.key': 'projekt_feature.main.activate', 'act.value': 'active' ) }
 
-  scope :current, ->(timestamp = Date.today) { activated.
-                                               not_in_individual_list.
-                                               where( "total_duration_start IS NULL OR total_duration_start <= ?", Date.today ).
-                                               where( "total_duration_end IS NULL OR total_duration_end >= ?", Date.today) }
+  scope :current, ->(timestamp = Date.today) {
+    activated
+      .where( "total_duration_start IS NULL OR total_duration_start <= ?", Date.today )
+      .where( "total_duration_end IS NULL OR total_duration_end >= ?", Date.today)
+  }
 
   scope :expired, ->(timestamp = Date.today) {
-    activated.
-      not_in_individual_list.
-      where( "total_duration_end < ?", Date.today)
+    activated
+      .where( "total_duration_end < ?", Date.today)
   }
 
   scope :upcoming, ->(timestamp = Date.today) {

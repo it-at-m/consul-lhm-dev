@@ -45,7 +45,7 @@
 
     <td class='small-3 projekt-text-field '>
       <% projekts = Projekt.all.reject { |p| p.id.in?(projekt.all_children_ids) || p.id == projekt.id } %>
-      <%= f.select :parent_id, projekts.pluck(:name, :id),
+      <%= f.select :parent_id, options_for_projekt_select,
                    { include_blank: true, label: t('custom.admin.projekts.index.parent') },
                    { id: "projekt_parent_#{projekt.id}"} %>
     </td>
