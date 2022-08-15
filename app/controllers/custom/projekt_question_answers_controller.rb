@@ -24,32 +24,34 @@ class ProjektQuestionAnswersController < ApplicationController
       @answer.save!
       @commentable = @question
 
-      if @question.root_question?
-        @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
-        set_comment_flags(@comment_tree.comments)
-      end
+      @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
+      set_comment_flags(@comment_tree.comments)
 
       render 'custom/projekt_questions/show.js.erb', format: :js
     end
   end
 
   def update
-    if @projekt.question_phase.active?
-      question_option = ProjektQuestionOption.find(params[:projekt_question_answer][:projekt_question_option_id])
-      @question = question_option.question
+    question_option = ProjektQuestionOption.find(params[:projekt_question_answer][:projekt_question_option_id])
+    @question = question_option.question
 
+    if question_option.nil?
+      head :not_found and return
+    end
+
+    if @question.root_question? && !@projekt.question_phase.active?
+      head :forbidden
+    else
       @answer = ProjektQuestionAnswer.find(params[:id])
       @answer.update(question_option: question_option)
 
       @answer.save!
       @commentable = @question
 
-      if @question.root_question?
-        @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
-        set_comment_flags(@comment_tree.comments)
-      end
+      @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
+      set_comment_flags(@comment_tree.comments)
 
-      render 'custom/projekt_questions/show.js.erb', format: :js
+      render "custom/projekt_questions/show.js.erb"
     end
   end
 
@@ -59,7 +61,7 @@ class ProjektQuestionAnswersController < ApplicationController
     @projekt = Projekt.find(params[:projekt_id])
   end
 
-    def answer_params
-      params.require(:projekt_question_answer).permit(:projekt_question_option_id)
-    end
+  def answer_params
+    params.require(:projekt_question_answer).permit(:projekt_question_option_id)
+  end
 end

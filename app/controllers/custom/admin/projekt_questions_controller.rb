@@ -49,7 +49,12 @@ class Admin::ProjektQuestionsController < Admin::BaseController
   def update
     if @projekt_question.update(projekt_question_params)
       notice = "Question updated"
-      redirect_to redirect_path(@projekt.id, "#tab-projekt-questions"), notice: notice
+
+      if @projekt_livestream.present?
+        redirect_to redirect_path(@projekt.id, "#tab-projekt-livestreams"), notice: notice
+      else
+        redirect_to redirect_path(@projekt.id, "#tab-projekt-questions"), notice: notice
+      end
     else
       flash.now[:error] = t("admin.legislation.questions.update.error")
       render :edit

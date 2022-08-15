@@ -34,7 +34,6 @@
                 <% end %>
               </ul>
             </td>
-            <td class="text-center"></td>
             <td class="text-center"><%= question.answers_count %></td>
             <td class="text-center"><%= link_to question.comments.count, legislation_process_question_path(@projekt, question, anchor: "comments") %></td>
             <td><%= render Admin::TableActionsComponent.new(question, edit_path: edit_projekt_question_path(@projekt, question), destroy_path: admin_projekt_projekt_question_path(@projekt, question, namespace: @namespace)) %></td>

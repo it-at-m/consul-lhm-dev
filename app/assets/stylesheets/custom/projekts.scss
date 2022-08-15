@@ -872,7 +872,7 @@ span.projekt-backlink:before {
   justify-content: flex-end;
 }
 
-.projekt-next-to-question-list-button {
+.projekt-question--go-to-question-list-button {
   text-align: right;
 }
 
@@ -952,6 +952,15 @@ span.projekt-backlink:before {
   display: flex;
   flex-direction: column;
   // margin-bottom: $line-height;
+
+  .icon-angle-left {
+    padding-left: 5px;;
+  }
+
+  .icon-angle-left::before {
+    position: relative;
+    left: -5px;
+  }
 }
 
 .projekt-question-next-question-section {
@@ -963,7 +972,7 @@ span.projekt-backlink:before {
 }
 
 .projekt-question-container-question-block {
-  margin-bottom: $line-height;
+  margin-bottom: 10px;
 
   @media screen and (max-width: 650px) {
     order: 2;
@@ -1104,13 +1113,19 @@ span.projekt-backlink:before {
 
   .projekt-argument-image-column {
     max-width: 120px;
+    min-width: 120px;
     margin-right: 20px;
   }
 }
 
+
 // Projekt livestreams
 .admin .projekt-livestream {
   position: relative;
+
+  .projekt-livestream-content {
+    margin-bottom: 20px;
+  }
 
   .admin-delete-icon-button-livestream {
     position: absolute;
@@ -1137,6 +1152,7 @@ span.projekt-backlink:before {
   }
 
   .admin-projekt-livestream-projekt-questions-title {
+    margin-top: 15px;
     margin-bottom: 10px;
   }
 
@@ -1328,6 +1344,7 @@ span.projekt-backlink:before {
   background: white;
   margin-top: 15px;
   width: 800px;
+  padding-bottom: 22px;
 }
 
 .projekt-livestream-navigation--title {
@@ -1361,6 +1378,10 @@ span.projekt-backlink:before {
   margin-top: 28px;
 }
 
+.projekt-question-list--item {
+  margin-bottom: 18px;
+}
+
 .projekt-question-embed {
   .projekt-question-container,
   .projekt-question-next-question-section {
@@ -1382,6 +1403,42 @@ span.projekt-backlink:before {
 
   .projekt-next-question-button-section {
     justify-content: flex-start;
+  }
+
+  .projekt-question-next-question-section {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .projekt-question-list {
+    float: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .projekt-question--go-to-question-list-button {
+    order: 1;
+    width: 200px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .projekt-next-question-button-section {
+    order: 2;
+  }
+
+  .projekt-question--comments-wrapper {
+    width: 100%;
+    margin-top: 20px;
+
+    #comments {
+      padding: 20px 20px;
+    }
+
+    .comments {
+      padding-bottom: 0;
+    }
   }
 }
 

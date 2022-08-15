@@ -44,4 +44,19 @@ module CustomHelper
   def in_projekt_footer?
     params[:current_tab_path].present? && !request.path.starts_with?('/projekts')
   end
+
+  def set_comments_view_context_variables(commentable, comment_order: nil)
+    @commentable = commentable
+    @comment_tree = CommentTree.new(@commentable, params[:page], comment_order)
+
+    if @commentable.present?
+      set_comment_flags(@comment_tree.comments)
+    end
+
+    {
+      commentable: @commentable,
+      comment_tree: @comment_tree,
+      comment_flags: @comment_flags
+    }
+  end
 end

@@ -5,7 +5,9 @@
         <h3 class="quiz-question"><%= projekt_question.title %></h3>
         <div class="project-question-list js-project-question-list" id="legislation-answer-form" data-question-url="<%= projekt_projekt_question_path(projekt, projekt_question.id, format: :js) %>">
           <%= render "custom/projekts/partials/projekt_question_answer_form", projekt: projekt, projekt_question: projekt_question, projekt_answer: projekt_question_answer %>
-          <%= render "custom/projekts/partials/projekt_question_particapation_not_allowed", projekt: projekt %>
+          <% if projekt_question.root_question? %>
+            <%= render "custom/projekts/partials/projekt_question_particapation_not_allowed", projekt: projekt %>
+          <% end %>
         </div>
       </div>
       <div class="projekt-question-next-question-section small-12 medium-4 column quiz-header small-collapse">
@@ -41,18 +43,18 @@
             <% end %>
           <% end %>
         </div>
-        <% if projekt.projekt_list_enabled? && projekt_question.root_question? %>
-          <div class='small-12 column projekt-next-to-question-list-button'>
-            <%= link_to t("custom.projekts.projekt_questions.back_to_question_list"), projekt_projekt_questions_path(projekt, format: :js), class: "js-projekt-question-next icon-angle-left" %>
+        <% if projekt.projekt_list_enabled? %>
+          <div class='small-12 column projekt-question--go-to-question-list-button'>
+            <%= link_to t("custom.projekts.projekt_questions.back_to_question_list"), projekt_projekt_questions_path(projekt, current_projekt_question_id: @projekt_question.id, format: :js), class: "js-projekt-question-next icon-angle-left" %>
           </div>
         <% end %>
       </div>
     </div>
   </div>
 
-  <% if projekt_question.comments_enabled? && @comment_tree.present? %>
-    <div class="small-12 medium-9">
-      <%= render Shared::CommentsComponent.new(projekt_question, @comment_tree) %>
+  <% if projekt_question.comments_enabled? && comment_tree.present? %>
+    <div class="small-12 medium-9 projekt-question--comments-wrapper">
+      <%= render Shared::CommentsComponent.new(projekt_question, comment_tree) %>
     </div>
   <% end %>
 </section>

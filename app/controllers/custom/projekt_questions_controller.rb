@@ -14,15 +14,25 @@ class ProjektQuestionsController < ApplicationController
 
   def index
     @projekt = Projekt.find(params[:projekt_id])
-    @projekt_questions = @projekt.questions
+
+    @projekt_questions =
+      if params[:current_projekt_question_id].present?
+        current_projekt_question = @projekt.questions.find(params[:current_projekt_question_id])
+
+        if current_projekt_question.present?
+          current_projekt_question.sibling_questions
+        else
+          head :not_found
+        end
+      else
+        @projekt.questions
+      end
   end
 
   def show
-    if @question.root_question?
-      @commentable = @question
-      @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
-      set_comment_flags(@comment_tree.comments)
-    end
+    @commentable = @question
+    @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
+    set_comment_flags(@comment_tree.comments)
 
     @answer = @question.answer_for_user(current_user) || ProjektQuestionAnswer.new
   end
