@@ -150,6 +150,11 @@ class Projekt < ApplicationRecord
     individual_list
   }
 
+  scope :with_published_custom_page, -> {
+    joins(:page)
+      .where(site_customization_pages: { status: "published" })
+  }
+
   def self.overview_page
     find_by(
       special_name: 'projekt_overview_page',
