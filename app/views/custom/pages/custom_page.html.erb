@@ -4,7 +4,7 @@
 <style>
   <% if @custom_page.image.present? %>
     .custom-page-banner {
-      background-image: url("<%= rails_blob_url(@custom_page.image.attachment) %>");
+      background-image: url("<%= url_for(@custom_page.image.attachment) %>");
       background-size: cover;
       background-position: center center;
     }

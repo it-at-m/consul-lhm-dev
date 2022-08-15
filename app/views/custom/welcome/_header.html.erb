@@ -3,7 +3,7 @@
   <style>
     <%if header_large%>
       .home-page .jumbo{
-        background-image: url("<%= rails_blob_url(header_large.image.attachment) %>");
+        background-image: url("<%= polymorphic_path(header_large.image.attachment) %>");
         background-size: cover;
         background-position: center 25%;
       }

@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
       social_media_icon = SiteCustomization::Image.all.find_by(name: "social_media_icon").image
 
       if social_media_icon.attached?
-        @social_media_icon_path = rails_blob_path(social_media_icon, disposition: "attachment").split("?")[0]
+        @social_media_icon_path = polymorphic_path(social_media_icon, disposition: "attachment").split("?")[0]
       else
         @social_media_icon_path = nil
       end
@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
       twitter_icon = SiteCustomization::Image.all.find_by(name: "social_media_icon_twitter").image
 
       if twitter_icon.attached?
-        @social_media_icon_twitter_url = rails_blob_url(twitter_icon.attachment, disposition: "attachment")
+        @social_media_icon_twitter_url = polymorphic_path(twitter_icon.attachment, disposition: "attachment")
           .split("?")[0]
       else
         nil

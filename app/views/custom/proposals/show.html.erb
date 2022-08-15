@@ -9,8 +9,8 @@
               social_url: proposal_url(@proposal),
               social_title: @proposal.title,
               social_description: projekt_feature?(@proposal.projekt, 'proposals.enable_summary') ? @proposal.summary : @proposal.description[0..200],
-              twitter_image_url: (@proposal.image.present? ? @proposal.image.variant(:thumb) : nil),
-              og_image_url: (@proposal.image.present? ? @proposal.image.variant(:thumb) : nil) %>
+              twitter_image_url: (@proposal.image.present? ? polymorphic_path(@proposal.image) : nil),
+              og_image_url: (@proposal.image.present? ? polymorphic_path(@proposal.image) : nil) %>
 <% end %>
 <% content_for :canonical do %>
   <%= render "shared/canonical", href: proposal_url(@proposal) %>

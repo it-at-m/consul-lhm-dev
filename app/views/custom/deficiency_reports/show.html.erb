@@ -6,8 +6,8 @@
               social_url: deficiency_report_url(@deficiency_report),
               social_title: @deficiency_report.title,
               social_description: @deficiency_report.summary,
-              twitter_image_url: (@deficiency_report.image.present? ? rails_blob_url(@deficiency_report.image.attachment) : nil),
-              og_image_url: (@deficiency_report.image.present? ? rails_blob_url(@deficiency_report.image.attachment) : nil) %>
+              twitter_image_url: (@deficiency_report.image.present? ? polymorphic_path(@deficiency_report.image) : nil),
+              og_image_url: (@deficiency_report.image.present? ? polymorphic_path(@deficiency_report.image) : nil) %>
 <% end %>
 <% content_for :canonical do %>
   <%= render "shared/canonical", href: deficiency_report_url(@deficiency_report) %>
