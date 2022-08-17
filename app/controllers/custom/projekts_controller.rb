@@ -299,7 +299,7 @@ class ProjektsController < ApplicationController
     @projekts_count_hash = {}
 
     valid_orders.each do |order|
-      @projekts_count_hash[order] = @projekts.send(order).with_published_custom_page.count
+      @projekts_count_hash[order] = @projekts.with_published_custom_page.send(order).count
     end
 
     @current_active_orders = @projekts_count_hash.select do |key, value|
@@ -332,8 +332,8 @@ class ProjektsController < ApplicationController
 
     @projekts =
       @projekts
-        .send(@current_order)
         .with_published_custom_page
+        .send(@current_order)
 
     @sdgs = (@projekts.map(&:sdg_goals).flatten.uniq.compact + SDG::Goal.where(code: @filtered_goals).to_a).uniq
     @sdg_targets = (@projekts.map(&:sdg_targets).flatten.uniq.compact + SDG::Target.where(code: @filtered_targets).to_a).uniq
