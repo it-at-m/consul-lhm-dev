@@ -11,7 +11,16 @@ class ProjektManagement::CommentsController < ProjektManagement::BaseController
   def index
     super
 
-    render "moderation/comments/index"
+    respond_to do |format|
+      format.html do
+        render "moderation/comments/index"
+      end
+
+      format.csv do
+        send_data Comments::CsvExporter.new(@resources.limit(20_000)).to_csv,
+          filename: "comments.csv"
+      end
+    end
   end
 
   def moderate

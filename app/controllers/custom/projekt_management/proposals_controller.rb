@@ -14,7 +14,16 @@ class ProjektManagement::ProposalsController < ProjektManagement::BaseController
   def index
     super
 
-    render "moderation/proposals/index"
+    respond_to do |format|
+      format.html do
+        render "moderation/proposals/index"
+      end
+
+      format.csv do
+        send_data Proposals::CsvExporter.new(@resources.limit(nil)).to_csv,
+          filename: "proposals.csv"
+      end
+    end
   end
 
   private

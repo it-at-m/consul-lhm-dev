@@ -14,7 +14,16 @@ class ProjektManagement::Budgets::InvestmentsController < ProjektManagement::Bas
   def index
     super
 
-    render "moderation/budgets/investments/index"
+    respond_to do |format|
+      format.html do
+        render "moderation/budgets/investments/index"
+      end
+
+      format.csv do
+        send_data Budget::Investment::Exporter.new(@resources).to_csv,
+                  filename: "budget_investments.csv"
+      end
+    end
   end
 
   private
