@@ -5,6 +5,7 @@ en:
         active_projekts: Aktiv Projects
         expired_projekts: Expired Projects
         polls: Polls
+        investment_proposals: Investment Proposals
     tags:
       destroy: Delete
   custom:

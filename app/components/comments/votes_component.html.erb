@@ -7,7 +7,8 @@
     <span class="in-favor">
       <%= button_to vote_comment_path(comment, value: "yes"),
           method: "post",
-          remote: can?(:vote, comment),
+          remote: true,
+          disabled: cannot?(:vote, comment),
           title: t("votes.agree") do %>
         <span class="show-for-sr"><%= t("votes.agree") %></span>
       <% end %>
@@ -18,7 +19,8 @@
       <span class="against">
         <%= button_to vote_comment_path(comment, value: "no"),
             method: "post",
-            remote: can?(:vote, comment),
+            remote: true,
+            disabled: cannot?(:vote, comment),
             title: t("votes.disagree") do %>
           <span class="show-for-sr"><%= t("votes.disagree") %></span>
         <% end %>
@@ -26,6 +28,4 @@
       </span>
     <% end %>
   </div>
-
-  <%= render Shared::ParticipationNotAllowedComponent.new(comment, cannot_vote_text: cannot_vote_text) %>
 </div>

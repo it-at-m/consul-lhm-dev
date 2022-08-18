@@ -104,6 +104,7 @@ de:
         back_to_question_list: 'Zurück zur Fragenliste'
         comments_button: Antwort veröffentlichen
         comments_count: "%{count} offene Antworten"
+        comment_votes_count: "%{count} Up- & Downvotes"
         comments_title: Offene Antworten
         previous_question: Vorherige Frage
         next_question: Nächste Frage

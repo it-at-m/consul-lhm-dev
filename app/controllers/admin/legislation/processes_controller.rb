@@ -14,7 +14,15 @@ class Admin::Legislation::ProcessesController < Admin::Legislation::BaseControll
 
   def create
     if @process.save(validate: false)
-      link = legislation_process_path(@process)
+
+      if @process.projekt.present? #custom
+        projekt_page_path = @process.projekt&.page&.url
+        legislation_phase_id = @process.projekt.legislation_process_phase.id
+        link = "#{projekt_page_path}?selected_phase_id=#{legislation_phase_id}#filter-subnav"
+      else
+        link = legislation_process_path(@process)
+      end
+
       notice = t("admin.legislation.processes.create.notice", link: link)
       redirect_to edit_admin_legislation_process_path(@process), notice: notice
     else

@@ -93,6 +93,8 @@ en:
           past: Past
       projekt_questions:
         comments_button: Publish answer
+        comments_count: "%{count} open answers"
+        comment_votes_count: "%{count} up- & downvotes"
         comments_title: Open answers
         participation_not_allowed:
           login_to_answer: Please %{signin} or %{signup} to proceed.

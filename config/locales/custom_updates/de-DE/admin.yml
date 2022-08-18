@@ -5,6 +5,7 @@ de:
         active_projekts: Aktive Beteiligung
         expired_projekts: Abgeschlossene Projekte
         polls: Abstimmungen
+        investment_proposals: Investitionsvorschläge
     tags:
       destroy: Löschen
   custom:
