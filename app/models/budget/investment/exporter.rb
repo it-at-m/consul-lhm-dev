@@ -7,7 +7,7 @@ class Budget::Investment::Exporter
   end
 
   def to_csv
-    CSV.generate(headers: true) do |csv|
+    CSV.generate(headers: true, col_sep: ";") do |csv|
       csv << headers
       @investments.each { |investment| csv << csv_values(investment) }
     end
@@ -24,6 +24,7 @@ class Budget::Investment::Exporter
         I18n.t("admin.budget_investments.index.list.id"),
         I18n.t("admin.budget_investments.index.list.title"),
         I18n.t("admin.budget_investments.index.list.supports"),
+        'projekt',
         I18n.t("admin.budget_investments.index.list.admin"),
         I18n.t("admin.budget_investments.index.list.valuator"),
         I18n.t("admin.budget_investments.index.list.valuation_group"),
@@ -41,6 +42,7 @@ class Budget::Investment::Exporter
         investment.id.to_s,
         investment.title,
         investment.total_votes.to_s,
+        investment.budget&.projekt&.name,
         admin(investment),
         investment.assigned_valuators || "-",
         investment.assigned_valuation_groups || "-",

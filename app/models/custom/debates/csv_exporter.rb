@@ -17,10 +17,6 @@ class Debates::CsvExporter
     end
   end
 
-  def model
-    Proposal
-  end
-
   private
 
     def headers
@@ -31,7 +27,6 @@ class Debates::CsvExporter
         "project",
         "category",
         "author",
-        "projekt_id",
         "created_at",
         "updated_at",
         "visit_id",
@@ -61,7 +56,6 @@ class Debates::CsvExporter
         debate.projekt&.name,
         debate.tag_list,
         debate.author.username,
-        debate.projekt_id,
         debate.created_at,
         debate.updated_at,
         debate.visit_id,
