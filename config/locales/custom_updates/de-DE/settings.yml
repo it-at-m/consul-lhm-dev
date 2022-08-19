@@ -5,29 +5,29 @@ de:
         projekts_overview_page_navigation:
           show_in_navigation: Projektübersichtsseite in Navigation anzeigen
           show_in_navigation_description: Zeigt die Projektübersichtsseite in der Navigation an
-          show_all: Alle Projekte
-          show_all_description: Zeigt Tab "Alle Projekte" an
-          show_underway: Aktive Beteiligung
-          show_underway_description: Zeigt Tab "Aktive Beteiligung" an
-          show_ongoing: Laufende Projekte
-          show_ongoing_descrition: Zeigt Tab "Laufende Projekte" an
-          show_upcoming: Zukünftige Projektvorhaben
-          show_upcoming_description: Zeigt Tab "Zukünftige Projektvorhaben" an
-          show_expired: Archivierte Projektvorhaben
-          show_expired_description: Zeigt Tab "Archivierte Projektvorhaben" an
-          show_individual_list: Individuelle Liste
-          show_individual_list_description: Zeigt Tab "Individuelle Liste" an
+          show_index_order_all: Alle Projekte
+          show_index_order_all_description: Zeigt Tab "Alle Projekte" an
+          show_index_order_underway: Aktive Beteiligung
+          show_index_order_underway_description: Zeigt Tab "Aktive Beteiligung" an
+          show_index_order_ongoing: Laufende Projekte
+          show_index_order_ongoing_descrition: Zeigt Tab "Laufende Projekte" an
+          show_index_order_upcoming: Zukünftige Projektvorhaben
+          show_index_order_upcoming_description: Zeigt Tab "Zukünftige Projektvorhaben" an
+          show_index_order_expired: Archivierte Projektvorhaben
+          show_index_order_expired_description: Zeigt Tab "Archivierte Projektvorhaben" an
+          show_index_order_individual_list: Individuelle Liste
+          show_index_order_individual_list_description: Zeigt Tab "Individuelle Liste" an
 
         projekts_overview_page_footer:
-          show_in_all: Beteiligung für "Alle Projekte"
-          show_in_all_description: Zeigt die Beteiligungsmodule für den Tab "Alle Projekte an"
-          show_in_underway: Beteiligung für "Aktive Beteiligung"
-          show_in_underway_description: Zeigt die Beteiligungsmodule für den Tab "Alle Projekte an"
-          show_in_ongoing: Beteiligung für "Laufende Projekte"
-          show_in_ongoing_descrition: Zeigt die Beteiligungsmodule für den Tab "Alle Projekte an"
-          show_in_upcoming: Beteiligung für "Zukünftige Projektvorhaben"
-          show_in_upcoming_description: Zeigt die Beteiligungsmodule für den Tab "Alle Projekte an"
-          show_in_expired: Beteiligung für "Archivierte Projektvorhaben"
-          show_in_expired_description: Zeigt die Beteiligungsmodule für den Tab "Archivierte Projektvorhaben"
-          show_in_individual_list: Individuelle Liste
-          show_in_individual_list_description: Zeigt Tab "Individuelle Liste" an
+          show_in_index_order_all: Beteiligung für "Alle Projekte"
+          show_in_index_order_all_description: Zeigt die Beteiligungsmodule für den Tab "Alle Projekte an"
+          show_in_index_order_underway: Beteiligung für "Aktive Beteiligung"
+          show_in_index_order_underway_description: Zeigt die Beteiligungsmodule für den Tab "Alle Projekte an"
+          show_in_index_order_ongoing: Beteiligung für "Laufende Projekte"
+          show_in_index_order_ongoing_descrition: Zeigt die Beteiligungsmodule für den Tab "Alle Projekte an"
+          show_in_index_order_upcoming: Beteiligung für "Zukünftige Projektvorhaben"
+          show_in_index_order_upcoming_description: Zeigt die Beteiligungsmodule für den Tab "Alle Projekte an"
+          show_in_index_order_expired: Beteiligung für "Archivierte Projektvorhaben"
+          show_in_index_order_expired_description: Zeigt die Beteiligungsmodule für den Tab "Archivierte Projektvorhaben"
+          show_in_index_order_individual_list: Individuelle Liste
+          show_in_index_order_individual_list_description: Zeigt Tab "Individuelle Liste" an

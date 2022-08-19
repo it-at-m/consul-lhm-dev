@@ -16,9 +16,16 @@ class Projekts::ProjektListTabsComponent < ApplicationComponent
 
   private
 
-  def current_active_orders_sorted
-    ['all', 'underway', 'ongoing', 'upcoming', 'expired', 'individual_list'] & @current_active_orders
-  end
+    def current_active_orders_sorted
+      [
+        "index_order_all",
+        "index_order_underway",
+        "index_order_ongoing",
+        "index_order_upcoming",
+        "index_order_expired",
+        "index_order_individual_list"
+      ] & @current_active_orders
+    end
 
     def html_class(order)
       "is-active" if order == current_order

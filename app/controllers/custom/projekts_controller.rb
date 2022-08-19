@@ -3,18 +3,9 @@ class ProjektsController < ApplicationController
   include ProposalsHelper
 
   skip_authorization_check
-  has_orders %w[underway all ongoing upcoming expired individual_list], only: [
-    :index, :comment_phase_footer_tab, :debate_phase_footer_tab,
-    :proposal_phase_footer_tab, :voting_phase_footer_tab
-  ]
-
-  before_action :find_overview_page_projekt, only: [
-    :index, :comment_phase_footer_tab, :debate_phase_footer_tab,
-    :proposal_phase_footer_tab, :voting_phase_footer_tab
-  ]
-
-  skip_authorization_check
-  has_orders %w[underway all ongoing upcoming expired individual_list], only: [
+  has_orders %w[index_order_underway index_order_all
+                index_order_ongoing index_order_upcoming
+                index_order_expired index_order_individual_list], only: [
     :index, :comment_phase_footer_tab, :debate_phase_footer_tab,
     :proposal_phase_footer_tab, :voting_phase_footer_tab
   ]
@@ -334,6 +325,8 @@ class ProjektsController < ApplicationController
       @projekts
         .with_published_custom_page
         .send(@current_order)
+        .page(params[:page])
+        .per(2)
 
     @sdgs = (@projekts.map(&:sdg_goals).flatten.uniq.compact + SDG::Goal.where(code: @filtered_goals).to_a).uniq
     @sdg_targets = (@projekts.map(&:sdg_targets).flatten.uniq.compact + SDG::Target.where(code: @filtered_targets).to_a).uniq
