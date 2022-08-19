@@ -8,11 +8,12 @@ class ApplicationController < ActionController::Base
   private
 
     def show_launch_page?
-      return false if user_signed_in?
-      return false if controller_name == "sessions" && action_name == "new"
-
       launch_date_setting = Setting["extended_option.general.launch_date"]
       return false if launch_date_setting.blank?
+
+      return false if current_user&.administrator?
+
+      return false if allowed_public_actions?
 
       begin
         launch_date = Date.strptime(launch_date_setting, "%d.%m.%Y")
@@ -20,6 +21,13 @@ class ApplicationController < ActionController::Base
       rescue Date::Error
         false
       end
+    end
+
+    def allowed_public_actions?
+      (controller_name == "sessions" && action_name == "new") ||
+        (controller_name == "passwords" && action_name.in?(%w[new edit create])) ||
+        (controller_name == "confirmations" && action_name.in?(%w[new show create update])) ||
+        (controller_name == "registrations" && action_name.in?(%w[new create success check_username cancel edit update destroy delete_form delete finish_signup do_finish_signup]))
     end
 
     def show_launch_page
