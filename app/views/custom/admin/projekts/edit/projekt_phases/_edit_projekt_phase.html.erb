@@ -2,7 +2,7 @@
 <% phase_name = projekt_phase.name %>
 
 <tr class="projekt_phase_settings" style='vertical-align:top;' >
-  <td>
+  <td style="width:195px;">
     <strong>
       <%= t("custom.admin.projekts.edit.projekt_phases_tab.#{phase_name}") %>
     </strong>
@@ -15,13 +15,51 @@
         <% end %>
       </div>
       <small>
-        <%= link_to "</> #{t('custom.admin.projekts.edit.projekt_phases_tab.copy_phase_link')}", '#', class: 'js-copy-source-button phase-copy-link', data: { target: dom_id(projekt_phase, :copy_phase_link) } %>
-      </small>
-    </div>
+        <div class="projekt-phase-edit--link-to-resources">
+          <%= link_to t('custom.admin.projekts.edit.projekt_phases_tab.copy_phase_link'), '#', class: 'js-copy-source-button phase-copy-link', data: { target: dom_id(projekt_phase, :copy_phase_link) } %>
 
+          <% if phase_name == 'question_phase'  %>
+            <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.question_phase"), edit_admin_projekt_path(projekt, anchor: 'tab-projekt-questions'), target: '_blank', class: 'resources-link'  %>
+
+          <% elsif phase_name == 'voting_phase'  %>
+            <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.voting_phase"), admin_polls_path, target: '_blank', class: 'resources-link' %>
+            <span class="additional-info"><%= t("custom.admin.projekts.edit.projekt_phases_tab.hint") %></a>
+
+          <% elsif phase_name == 'budget_phase'  %>
+            <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.budget_phase"), admin_budgets_path, target: '_blank', class: 'resources-link' %>
+            <span class="additional-info"><%= t("custom.admin.projekts.edit.projekt_phases_tab.hint") %></a>
+
+          <% elsif phase_name == 'legislation_process_phase'  %>
+            <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.legislation_process_phase"), admin_legislation_processes_path(anchor: 'tab-projekt-questions'), target: '_blank', class: 'resources-link'  %>
+            <span class="additional-info"><%= t("custom.admin.projekts.edit.projekt_phases_tab.hint") %></a>
+
+          <% elsif phase_name == 'argument_phase'  %>
+            <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.argument_phase"), edit_admin_projekt_path(projekt, anchor: 'tab-projekt-arguments'), target: '_blank', class: 'resources-link'  %>
+
+          <% elsif phase_name == 'projekt_notification_phase'  %>
+            <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.notification_phase"), edit_admin_projekt_path(projekt, anchor: 'tab-projekt-notifications'), target: '_blank', class: 'resources-link'  %>
+
+          <% elsif phase_name == 'milestone_phase'  %>
+            <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.milestone_phase"), edit_admin_projekt_path(projekt, anchor: 'tab-projekt-milestones'), target: '_blank', class: 'resources-link'  %>
+            <span class="additional-info"><%= t("custom.admin.projekts.edit.projekt_phases_tab.hint") %></a>
+
+          <% elsif phase_name == 'event_phase'  %>
+            <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.event_phase"), edit_admin_projekt_path(projekt, anchor: 'tab-projekt-events'), target: '_blank', class: 'resources-link'  %>
+
+          <% elsif phase_name == 'livestream_phase'  %>
+            <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.livestream_phase"), edit_admin_projekt_path(projekt, anchor: 'tab-projekt-livestreams'), target: '_blank', class: 'resources-link'  %>
+
+          <% elsif phase_name == 'newsfeed_phase'  %>
+            <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.newsfeed_phase"), edit_admin_projekt_path(projekt, anchor: 'tab-projekt-newsfeeds'), target: '_blank', class: 'resources-link'  %>
+
+          <% end %>
+        </div>
+        </small>
+
+    </div>
   </td>
   <td>
-    <% unless phase_name.in?(["event_phase", "argument_phase", "projekt_notification_phase"]) %>
+    <% unless phase_name.in?(["event_phase", "argument_phase", "projekt_notification_phase", "livestream_phase", "newsfeed_phase"]) %>
       <%= form_for(@projekt, url: namespace_projekt_path(@projekt), as: :projekt) do |f| %>
         <%= hidden_field_tag :tab, '#tab-projekt-phases' %>
         <%= hidden_field_tag :namespace, params[:controller].include?('projekt_management') ? 'projekt_management' : '' %>
@@ -64,17 +102,5 @@
     </strong>
 
     <%= render Admin::LivesubmitCheckbox::Component.new(url: liveupdate_admin_projekt_path(projekt), resource_name: "projekt[#{phase_name}_attributes]", attribute_name: 'active', id: projekt.send(phase_name.to_sym).id, current_value: projekt.send(phase_name.to_sym).active) %>
-
-    <div class="projekt-phase-edit--link-to-resources">
-      <% if phase_name == 'budget_phase'  %>
-        <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.budget_phase"), admin_budgets_path, target: '_blank' %>
-      <% elsif phase_name == 'voting_phase'  %>
-        <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.voting_phase"), admin_polls_path, target: '_blank' %>
-      <% elsif phase_name == 'question_phase'  %>
-        <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.question_phase"), edit_admin_projekt_path(projekt, anchor: 'tab-projekt-questions'), target: '_blank' %>
-      <% elsif phase_name == 'legislation_process_phase'  %>
-        <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.legislation_process_phase"), admin_legislation_processes_path(anchor: 'tab-projekt-questions'), target: '_blank' %>
-      <% end %>
-    </div>
   </td>
 </tr>

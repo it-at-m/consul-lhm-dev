@@ -1322,9 +1322,40 @@ span.projekt-backlink:before {
 }
 
 .projekt-phase-edit--link-to-resources {
-  width: 100px;
-  margin-top: 20px;
-  text-align: center;
+  a, span {
+    display: block;
+
+    &::before {
+      font-weight: bold;
+      font-family: "Font Awesome 5 Free";
+      margin-right: 5px;
+    }
+  }
+
+  .phase-copy-link {
+    &::before {
+      content: "\f121";
+    }
+  }
+
+  .resources-link {
+    &::before {
+      content: "\f0c1";
+      margin-left: 1px;
+      margin-right: 6px;
+    }
+  }
+
+  .additional-info {
+    margin-left: 21px;
+    position: relative;
+
+    &::before {
+      content: "\f129";
+      position: absolute;
+      left: -17px;
+    }
+  }
 }
 
 .projekt-livestream-container {
