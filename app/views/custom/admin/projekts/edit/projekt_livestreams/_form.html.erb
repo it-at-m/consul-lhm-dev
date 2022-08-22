@@ -4,26 +4,27 @@
   <%= render "shared/errors", resource: f.object %>
 
   <div class='small-12 medium-7'>
-    <%= f.text_field :url, {label: t("custom.admin.projekts.edit.projekt_livestreams_tab.livestream.url"), required: true } %>
+    <%= f.text_field :url, { id: dom_id(livestream, :url), label: t("custom.admin.projekts.edit.projekt_livestreams_tab.livestream.url"), required: true } %>
   </div>
 
   <% if livestream.persisted? %>
     <div class='small-12 medium-7'>
-      <%= f.text_field :title, {label: t("custom.admin.projekts.edit.projekt_livestreams_tab.livestream.title") } %>
+      <%= f.text_field :title, { id: dom_id(livestream, :title), label: t("custom.admin.projekts.edit.projekt_livestreams_tab.livestream.title") } %>
     </div>
 
     <div class='small-12 medium-7'>
-      <%= f.datetime_field :starts_at, {label: t("custom.admin.projekts.edit.projekt_livestreams_tab.livestream.starts_at") } %>
+      <%= f.label :starts_at, t("custom.admin.projekts.edit.projekt_livestreams_tab.livestream.starts_at"), for: dom_id(livestream, :starts_at) %>
+      <%= f.datetime_field :starts_at, { id: dom_id(livestream, :starts_at), label: false } %>
     </div>
 
     <div class='small-12 medium-12'>
-      <%= f.text_area :description, {label: t("custom.admin.projekts.edit.projekt_livestreams_tab.livestream.description") } %>
+      <%= f.text_area :description, { id: dom_id(livestream, :description), label: t("custom.admin.projekts.edit.projekt_livestreams_tab.livestream.description") } %>
     </div>
   <% end %>
 
   <%= f.hidden_field :tab, value: "#tab-projekt-livestreams" %>
 
   <div>
-    <%= f.submit(t("custom.admin.projekts.edit.projekt_livestreams_tab.submit_button"), class: "button") %>
+    <%= f.submit(class: "button") %>
   </div>
 <% end %>

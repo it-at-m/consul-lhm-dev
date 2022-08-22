@@ -111,6 +111,6 @@ class ProjektLivestream < ApplicationRecord
   end
 
   def strip_description
-    self.description = description.strip
+    self.description = description&.strip
   end
 end

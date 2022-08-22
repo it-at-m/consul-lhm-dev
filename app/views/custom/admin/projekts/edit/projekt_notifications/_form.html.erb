@@ -3,11 +3,11 @@
   <%= f.hidden_field :namespace, value: @namespace %>
 
   <div class='small-12 medium-7'>
-    <%= f.text_field :title, {label: t("custom.admin.projekts.edit.projekt_notifications_tab.notification_title") } %>
+    <%= f.text_field :title, { id: dom_id(notification, :edit_title), label: t("custom.admin.projekts.edit.projekt_notifications_tab.notification_title") } %>
   </div>
 
   <div class='small-12 medium-7'>
-    <%= f.text_field :body, {label: t("custom.admin.projekts.edit.projekt_notifications_tab.notification_body") } %>
+    <%= f.text_field :body, { id: dom_id(notification, :edit_body), label: t("custom.admin.projekts.edit.projekt_notifications_tab.notification_body") } %>
   </div>
 
   <div>
