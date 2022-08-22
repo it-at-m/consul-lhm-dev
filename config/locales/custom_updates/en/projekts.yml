@@ -17,16 +17,18 @@ en:
         title: Projects
         to_projekt: To the project
       orders:
-        all: 'All Projects'
-        all_title: 'All Projects'
-        expired: Completed
-        expired_title: 'The "Completed" tab lists participation projects that have been completed. Both the participation phase and the project itself.'
-        ongoing: Ongoing projects
-        ongoing_title: 'In the tab "Ongoing projects" are projects that are still running, but the participation is already completed.'
-        underway: Active participation
-        underway_title: 'In the tab "Active participation" are projects in which you can currently participate.'
-        upcoming: Future project plans
-        upcoming_title: 'The "Future project plans" tab lists participation projects that will only take place in the future.'
+        index_order_all: 'All Projects'
+        index_order_all_title: 'All Projects'
+        index_order_expired: Completed
+        index_order_expired_title: 'The "Completed" tab lists participation projects that have been completed. Both the participation phase and the project itself.'
+        index_order_ongoing: Ongoing projects
+        index_order_ongoing_title: 'In the tab "Ongoing projects" are projects that are still running, but the participation is already completed.'
+        index_order_underway: Active participation
+        index_order_underway_title: 'In the tab "Active participation" are projects in which you can currently participate.'
+        index_order_upcoming: Future project plans
+        index_order_upcoming_title: 'The "Future project plans" tab lists participation projects that will only take place in the future.'
+        index_order_individual_list: "Individual list"
+        index_order_individual_list_title: "Individual list"
       page:
         footer:
           budget:
