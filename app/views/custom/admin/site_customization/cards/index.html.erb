@@ -1,7 +1,7 @@
 <% provide :title do %>
   <%= t("admin.header.title") %> - <%= t("admin.menu.site_customization.pages") %> - <%= @page.title %>
 <% end %>
-<%= back_link_to namespaced_polymorphic_path(params[:controller].split('/').first, @page.projekt, action: :edit) %>
+<%= back_link_to namespaced_polymorphic_path(params[:controller].split('/').first, (@page.projekt || @page), action: :edit) %>
 <div id="cards">
   <h2 class="inline-block">
     <%= @page.title %> <%= t("admin.site_customization.pages.cards.cards_title") %></h2>
