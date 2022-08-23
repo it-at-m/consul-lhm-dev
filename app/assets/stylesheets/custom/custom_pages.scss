@@ -205,6 +205,10 @@ li.projekt-navigator.current-projekt::before {
       @media screen and (min-width: 3000px) {
         height: 1200px;
       }
+
+      .map_location {
+        height: 100%;
+      }
     }
 
     .close-button {
