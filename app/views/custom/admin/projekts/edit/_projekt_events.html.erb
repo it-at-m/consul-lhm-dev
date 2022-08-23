@@ -25,6 +25,14 @@
           <strong><%= t('custom.admin.projekts.edit.projekt_events_tab.event_weblink') %>:</strong>
           <%= link_to(event.weblink, event.weblink) %>
         </p>
+        <% if event.description.present? %>
+          <p>
+            <strong><%= t('custom.admin.projekts.edit.projekt_events_tab.event_description') %>:</strong>
+            <div>
+              <%= auto_link_already_sanitized_html wysiwyg(event.description) %>
+            </div>
+          </p>
+        <% end %>
         <p>
           <strong><%= t('custom.admin.projekts.edit.projekt_events_tab.event_created_at') %>:</strong>
           <%= event.created_at.to_date %>
