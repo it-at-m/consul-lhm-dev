@@ -20,7 +20,7 @@
   </div>
 
   <div class='small-12 medium-7'>
-    <%= f.text_area :description, class: "html-area admin" %>
+    <%= f.text_area :description, rows: 10, class: "html-area #{ck_editor_class(current_user)}" %>
   </div>
 
   <%= f.hidden_field :tab, value: "#tab-projekt-events" %>
