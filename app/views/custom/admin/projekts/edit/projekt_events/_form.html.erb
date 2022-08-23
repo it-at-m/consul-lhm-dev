@@ -4,7 +4,7 @@
   <%= render "shared/errors", resource: f.object %>
 
   <div class='small-12 medium-7'>
-    <%= f.text_field :title, {label: t("custom.admin.projekts.edit.projekt_events_tab.event_title") } %>
+    <%= f.text_field :title, {label: t("custom.admin.projekts.edit.projekt_events_tab.event_title"), required: true } %>
   </div>
 
   <div class='small-12 medium-7'>
@@ -12,11 +12,15 @@
   </div>
 
   <div class='small-12 medium-7'>
-    <%= f.datetime_field :datetime, {label: t("custom.admin.projekts.edit.projekt_events_tab.event_datetime") } %>
+    <%= f.datetime_field :datetime, {label: t("custom.admin.projekts.edit.projekt_events_tab.event_datetime"), required: true } %>
   </div>
 
   <div class='small-12 medium-7'>
     <%= f.text_field :weblink, {label: t("custom.admin.projekts.edit.projekt_events_tab.event_weblink") } %>
+  </div>
+
+  <div class='small-12 medium-7'>
+    <%= f.text_area :description, class: "html-area admin" %>
   </div>
 
   <%= f.hidden_field :tab, value: "#tab-projekt-events" %>

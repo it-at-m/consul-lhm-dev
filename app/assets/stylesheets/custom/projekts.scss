@@ -663,6 +663,20 @@ span.projekt-backlink:before {
   }
 }
 
+.projekt-event-item--description-text {
+  font-size: 15px;
+}
+
+.projekt-event-item-values--title {
+  font-size: 22px;
+  margin-bottom: 2px;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}
+
 .projekt-event-item-titles {
   padding-right: 58px;
 }
@@ -672,10 +686,24 @@ span.projekt-backlink:before {
   height: 70px;
   padding-top: 5px;
   text-align: center;
-  margin-right: 50px;
+  margin-right: 35px;
   border-radius: 10px;
   box-shadow: inset 0px 3px 6px #0000000F, 0px 3px 6px #00000024;
   background: transparent linear-gradient(180deg, #FFFFFF 0%, #EDEDED 100%) 0% 0% no-repeat padding-box;
+}
+
+.projekt-event-item-values--details-row {
+  display: flex;
+
+  span {
+    padding-right: 12px;
+    font-size: 14px;
+
+    i {
+      padding-right: 5px;
+      font-size: 15px;
+    }
+  }
 }
 
 .projekt-event-item-calendar-dayname {

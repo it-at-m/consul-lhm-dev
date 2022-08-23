@@ -9,24 +9,27 @@
       </div>
     </div>
   </div>
-  <div class="projekt-event-item-titles">
-    <div><strong><%= t('custom.projekts.page.projekt_events_tab.event_title') %>:</strong></div>
-    <div><%= t('custom.projekts.page.projekt_events_tab.event_location') %>:</div>
-    <div><%= t('custom.projekts.page.projekt_events_tab.event_date') %>:</div>
-    <div><%= t('custom.projekts.page.projekt_events_tab.event_time') %>:</div>
-    <div><%= t('custom.projekts.page.projekt_events_tab.event_weblink') %>:</div>
-    <% if @show_projekt_link %>
-      <div><%= t('custom.projekts.page.projekt_events_tab.event_projekt') %>:</div>
-    <% end %>
-  </div>
   <div class="projekt-event-item-values">
-    <div><strong><%= projekt_event.title %></strong></div>
-    <div><%= projekt_event.location %></div>
-    <div><%= projekt_event.datetime.strftime('%d.%m.%Y') %></div>
-    <div><%= projekt_event.datetime.strftime('%H:%M') %></div>
-    <div><a href="<%= projekt_event.weblink %>"><%= projekt_event.weblink %></a></div>
-    <% if @show_projekt_link %>
-      <div><%= link_to(projekt_event.projekt.page.title, projekt_event.projekt.page.url) %></div>
+    <h3 class="projekt-event-item-values--title">
+      <% if @show_projekt_link %>
+        <%= link_to(projekt_event.title, projekt_event.projekt.page.url) %>
+      <% else %>
+        <%= projekt_event.title %>
+      <% end %>
+    </h3>
+    <div class="projekt-event-item-values--details-row">
+      <span><i class="fa fa-clock"></i><%= projekt_event.datetime.strftime('%d.%m.%Y %H:%M') %></span>
+      <span><i class="fa fa-map-marker-alt"></i><%= projekt_event.location %></span>
+      <span><a href="<%= projekt_event.weblink %>"><%= projekt_event.weblink %></a></span>
+    </div>
+    <% if projekt_event.description.present? %>
+      <%= render Shared::CollapseTextComponent.new(size: :small) do |component| %>
+        <% component.inner_content do %>
+          <span class="projekt-event-item--description-text">
+            <%= WYSIWYGSanitizer.new.sanitize(projekt_event.description) %>
+          </span>
+        <% end %>
+      <% end %>
     <% end %>
   </div>
 </div>
