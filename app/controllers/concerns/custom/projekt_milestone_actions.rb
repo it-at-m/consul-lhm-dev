@@ -7,6 +7,7 @@ module ProjektMilestoneActions
   included do
     before_action :load_milestoneable, only: [:index, :new, :create, :edit, :update, :destroy]
     before_action :load_milestone, only: [:edit, :update, :destroy]
+    before_action :set_namespace, only: [:new, :create, :edit, :update, :destroy]
     before_action :load_statuses, only: [:index, :new, :create, :edit, :update]
     helper_method :milestoneable_path, :admin_milestone_form_path
   end
@@ -16,7 +17,6 @@ module ProjektMilestoneActions
 
   def new
     @milestone = @milestoneable.milestones.new
-    @namespace = params[:controller].split("/").first
 
     authorize! :new, @milestone if @namespace == "projekt_management"
 
@@ -37,15 +37,13 @@ module ProjektMilestoneActions
   end
 
   def edit
-    @namespace = params[:controller].split("/").first
-
     authorize! :edit, @milestone if @namespace == "projekt_management"
 
     render "admin/projekts/edit/projekt_milestones/edit"
   end
 
   def update
-    authorize! :update, @milestone if params[:namespace] == "projekt_management"
+    authorize! :update, @milestone if @namespace == "projekt_management"
 
     if @milestone.update(milestone_params)
       redirect_to namespaced_polymorphic_path(params[:namespace], @milestoneable, action: :edit) +
@@ -56,8 +54,6 @@ module ProjektMilestoneActions
   end
 
   def destroy
-    @namespace = params[:controller].split("/").first
-
     authorize! :destroy, @milestone if @namespace == "projekt_management"
 
     @milestone.destroy!
@@ -79,6 +75,10 @@ module ProjektMilestoneActions
 
     def load_milestoneable
       @milestoneable = milestoneable
+    end
+
+    def set_namespace
+      @namespace = params[:controller].split("/").first
     end
 
     def milestoneable

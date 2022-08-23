@@ -325,8 +325,12 @@ class ProjektsController < ApplicationController
       @projekts
         .with_published_custom_page
         .send(@current_order)
-        .page(params[:page])
-        .per(2)
+
+    if @projekts.is_a?(Array)
+      @projekts = Kaminari.paginate_array(@projekts).page(params[:page]).per(25)
+    else
+      @projekts = @projekts.page(params[:page]).per(25)
+    end
 
     @sdgs = (@projekts.map(&:sdg_goals).flatten.uniq.compact + SDG::Goal.where(code: @filtered_goals).to_a).uniq
     @sdg_targets = (@projekts.map(&:sdg_targets).flatten.uniq.compact + SDG::Target.where(code: @filtered_targets).to_a).uniq
