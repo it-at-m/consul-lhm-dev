@@ -57,6 +57,8 @@ en:
             participate: Open for participation!
           tags:
             title: Categories
+          projekt_start: Projekt start
+          projekt_end: Planned completion
         tabs:
           budgets: Budgets
           comments: Comments
@@ -78,14 +80,12 @@ en:
         event_phase: Event phase
         legislation_process_phase: Document drafting
         milestone_phase: Milestones
-        milestone_phase_details:
-          ending: Planned end
-          start: Start
         newsfeed_phase: Newsfeed
         projekt_notification_phase: Notifications
         proposal_phase: Proposals
         question_phase: Short survey
         voting_phase: Voting
+        argument_phase: Arguments
       projekt_events:
         index:
           title: Events

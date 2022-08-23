@@ -60,6 +60,8 @@ de:
             participate: Offen für Beteiligung!
           tags:
             title: Kategorien
+          projekt_start: Projektstart
+          projekt_end: Gepl. Fertigstellung
         tabs:
           budget: Budgets
           comments: Kommentare
@@ -82,9 +84,6 @@ de:
         event_phase: Veranstaltungen
         legislation_process_phase: Textbearbeitungsphase
         milestone_phase: Meilensteine
-        milestone_phase_details:
-          ending: Gepl. Fertigstellung
-          start: Umsetzung
         newsfeed_phase: Newsfeed
         projekt_notification_phase: Benachrichtigungen
         proposal_phase: Vorschläge
