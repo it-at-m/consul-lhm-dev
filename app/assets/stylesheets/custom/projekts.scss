@@ -471,6 +471,14 @@ span.projekt-backlink:before {
 .admin .projekt-event {
   position: relative;
 
+  h3 {
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin-bottom: 5px;
+  }
+
   input[type='checkbox'] {
     display: none;
   }
@@ -672,8 +680,9 @@ span.projekt-backlink:before {
   margin-bottom: 2px;
 
   a {
-    text-decoration: none;
-    color: black;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
@@ -687,13 +696,20 @@ span.projekt-backlink:before {
 
 .projekt-event-item-calendar {
   width: 70px;
-  height: 70px;
   padding-top: 5px;
   text-align: center;
   margin-right: 35px;
   border-radius: 10px;
   box-shadow: inset 0px 3px 6px #0000000F, 0px 3px 6px #00000024;
   background: transparent linear-gradient(180deg, #FFFFFF 0%, #EDEDED 100%) 0% 0% no-repeat padding-box;
+}
+
+.projekt-event-item-calendar--separator {
+  line-height: 0.5;
+}
+
+.projekt-event-item-calendar--enddatetime {
+  margin-top: -11px
 }
 
 .projekt-event-item-values--details-row {

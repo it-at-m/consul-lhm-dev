@@ -146,6 +146,7 @@ de:
             button: Event erstellen
             event_created_at: Hergestellt in
             event_datetime: Datum
+            event_end_datetime: Endtermin
             event_location: Veranstaltungsort
             event_title: Veranstaltungstitel
             event_weblink: Weblink

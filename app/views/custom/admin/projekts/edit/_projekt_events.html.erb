@@ -10,21 +10,30 @@
 
       <div class='projekt-event-content'>
         <p>
-          <strong><%= t('custom.admin.projekts.edit.projekt_events_tab.event_title') %>:</strong>
-          <%= event.title %></h3>
+          <h3>
+            <%= event.title %>
+          </h3>
         </p>
-        <p>
+        <% if event.location.present? %>
+          <p>
           <strong><%= t('custom.admin.projekts.edit.projekt_events_tab.event_location') %>:</strong>
           <%= event.location %>
-        </p>
+          </p>
+        <% end %>
         <p>
           <strong><%= t('custom.admin.projekts.edit.projekt_events_tab.event_datetime') %>:</strong>
           <%= event.datetime.strftime('%d.%m.%y %H:%m') %>
+          <% if event.end_datetime.present? %>
+            —
+            <%= event.end_datetime.strftime('%d.%m.%y %H:%m') %>
+          <% end %>
         </p>
-        <p>
-          <strong><%= t('custom.admin.projekts.edit.projekt_events_tab.event_weblink') %>:</strong>
-          <%= link_to(event.weblink, event.weblink) %>
-        </p>
+        <% if event.weblink.present? %>
+          <p>
+            <strong><%= t('custom.admin.projekts.edit.projekt_events_tab.event_weblink') %>:</strong>
+            <%= link_to(event.weblink, event.weblink) %>
+          </p>
+        <% end %>
         <% if event.description.present? %>
           <p>
             <strong><%= t('custom.admin.projekts.edit.projekt_events_tab.event_description') %>:</strong>
