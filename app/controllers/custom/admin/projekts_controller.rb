@@ -56,6 +56,7 @@ class Admin::ProjektsController < Admin::BaseController
 
   def quick_update
     @projekt.update_attributes!(projekt_params)
+    @projekt.touch
     Projekt.ensure_order_integrity
 
     redirect_back(fallback_location: admin_projekts_path)
@@ -64,6 +65,7 @@ class Admin::ProjektsController < Admin::BaseController
   def update
     if @projekt.overview_page?
       if @projekt.update_attributes(projekt_params)
+        @projekt.touch
         redirect_to admin_projekts_path + "#tab-projekts-overview-page",
           notice: t("admin.settings.index.map.flash.update")
       else
