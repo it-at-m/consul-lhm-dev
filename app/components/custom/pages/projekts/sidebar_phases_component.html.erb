@@ -8,7 +8,7 @@
     <span class='sidebar-projekt-phases-title'><%= t('custom.projekts.page.sidebar.phases.participate') %></span>
   <% end %>
 
-  <div class="sidebar-projekt-phase <%= 'active' if projekt.total_duration_start <= Time.zone.today %>" >
+  <div class="sidebar-projekt-phase <%= 'active' if projekt.total_duration_start.present? && projekt.total_duration_start <= Time.zone.today %>" >
     <div class='sidebar-projekt-phase-status'>
     </div>
     <div class='sidebar-projekt-phase-details'>
@@ -59,7 +59,7 @@
     <% index += 1 %>
   <% end %>
 
-  <div class="sidebar-projekt-phase <%= 'active' if projekt.total_duration_end >= Time.zone.today %>">
+  <div class="sidebar-projekt-phase <%= 'active' if projekt.total_duration_end.present? && projekt.total_duration_end >= Time.zone.today %>">
     <div class='sidebar-projekt-phase-status'>
     </div>
     <div class='sidebar-projekt-phase-details'>
