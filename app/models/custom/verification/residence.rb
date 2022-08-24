@@ -11,6 +11,8 @@ class Verification::Residence
   validates :plz, presence: true, if: :plz_required?
   validates :city_name, presence: true, if: :city_name_required?
   validates :gender, presence: true, if: :gender_required?
+  validates :date_of_birth, presence: true, if: :date_of_birth_required?
+  validate  :allowed_age, if: :date_of_birth_required?
   validates :document_last_digits, presence: true, if: :document_last_digits_required?
 
   validates :document_number, presence: true, unless: :manual_verification?
