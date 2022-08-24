@@ -6,19 +6,25 @@ class Admin::Projekts::MapLayersController < Admin::BaseController
     @map_layer = @projekt.map_layers.build
     @namespace = params[:namespace]
 
-    authorize!(:new, @map_layer) if @namespace == "projekt_management"
+    if should_authorize_projekt_manager?
+      authorize!(:new, @map_layer)
+    end
   end
 
   def edit
     @namespace = params[:namespace]
 
-    authorize!(:edit, @map_layer) if @namespace == "projekt_management"
+    if should_authorize_projekt_manager?
+      authorize!(:edit, @map_layer)
+    end
   end
 
   def create
     @map_layer = @projekt.map_layers.new(map_layer_params)
 
-    authorize!(:create, @map_layer) if params[:namespace] == "projekt_management"
+    if should_authorize_projekt_manager?
+      authorize!(:create, @map_layer)
+    end
 
     if @map_layer.save
       redirect_to redirect_path(params[:projekt_id], params[:tab].to_s),
@@ -30,7 +36,9 @@ class Admin::Projekts::MapLayersController < Admin::BaseController
   end
 
   def update
-    authorize!(:update, @map_layer) if params[:namespace] == "projekt_management"
+    if should_authorize_projekt_manager?
+      authorize!(:update, @map_layer)
+    end
 
     if @map_layer.update(map_layer_params)
       redirect_to redirect_path(params[:projekt_id], params[:tab].to_s),
@@ -42,7 +50,9 @@ class Admin::Projekts::MapLayersController < Admin::BaseController
   end
 
   def destroy
-    authorize!(:destroy, @map_layer) if params[:namespace] == "projekt_management"
+    if should_authorize_projekt_manager?
+      authorize!(:destroy, @map_layer)
+    end
 
     @map_layer.destroy!
     redirect_to redirect_path(params[:projekt_id], params[:tab].to_s)

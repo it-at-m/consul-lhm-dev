@@ -6,7 +6,9 @@ class Admin::ProjektNotificationsController < Admin::BaseController
     @projekt_notification = ProjektNotification.new(projekt_notification_params)
     @projekt_notification.projekt = @projekt
 
-    authorize! :create, @projekt_notification if @namespace == "projekt_management"
+    if should_authorize_projekt_manager?
+      authorize! :create, @projekt_notification
+    end
 
     @projekt_notification.save!
     redirect_to redirect_path(@projekt), notice: t("admin.settings.flash.updated")
@@ -15,7 +17,9 @@ class Admin::ProjektNotificationsController < Admin::BaseController
   def update
     @projekt_notification = ProjektNotification.find_by(id: params[:id])
 
-    authorize! :update, @projekt_notification if @namespace == "projekt_management"
+    if should_authorize_projekt_manager?
+      authorize! :update, @projekt_notification
+    end
 
     @projekt_notification.update!(projekt_notification_params)
     redirect_to redirect_path(@projekt), notice: t("admin.settings.flash.updated")
@@ -25,7 +29,9 @@ class Admin::ProjektNotificationsController < Admin::BaseController
     @projekt_notification = ProjektNotification.find_by(id: params[:id])
     @namespace = params[:namespace]
 
-    authorize! :destroy, @projekt_notification if @namespace == "projekt_management"
+    if should_authorize_projekt_manager?
+      authorize! :destroy, @projekt_notification
+    end
 
     @projekt_notification.destroy!
     redirect_to redirect_path(@projekt)

@@ -6,7 +6,9 @@ class Admin::ProjektLivestreamsController < Admin::BaseController
     @projekt_livestream = ProjektLivestream.new(projekt_livestream_params)
     @projekt_livestream.projekt = @projekt
 
-    authorize! :create, @projekt_livestream if params[:namespace] == "projekt_management"
+    if should_authorize_projekt_manager?
+      authorize! :create, @projekt_livestream
+    end
 
     @projekt_livestream.save!
 
@@ -17,7 +19,9 @@ class Admin::ProjektLivestreamsController < Admin::BaseController
     @projekt_livestream = ProjektLivestream.find_by(id: params[:id])
     @projekt_livestream.update!(projekt_livestream_params)
 
-    authorize! :update, @projekt_livestream if params[:namespace] == "projekt_management"
+    if should_authorize_projekt_manager?
+      authorize! :update, @projekt_livestream
+    end
 
     redirect_to redirect_path(@projekt), notice: t("admin.settings.flash.updated")
   end
@@ -26,7 +30,9 @@ class Admin::ProjektLivestreamsController < Admin::BaseController
     @projekt_livestream = ProjektLivestream.find_by(id: params[:id])
     @namespace = params[:namespace]
 
-    authorize! :destroy, @projekt_livestream if params[:namespace] == "projekt_management"
+    if should_authorize_projekt_manager?
+      authorize! :destroy, @projekt_livestream
+    end
 
     @projekt_livestream.destroy!
     redirect_to redirect_path(@projekt)

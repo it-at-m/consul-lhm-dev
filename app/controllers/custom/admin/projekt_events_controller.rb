@@ -5,7 +5,9 @@ class Admin::ProjektEventsController < Admin::BaseController
     @projekt_event = ProjektEvent.new(projekt_event_params)
     @projekt_event.projekt = @projekt
 
-    authorize! :create, @projekt_event if params[:namespace] == "projekt_management"
+    if should_authorize_projekt_manager?
+      authorize! :create, @projekt_event
+    end
 
     @projekt_event.save!
 
@@ -16,7 +18,9 @@ class Admin::ProjektEventsController < Admin::BaseController
     @projekt_event = ProjektEvent.find_by(id: params[:id])
     @projekt_event.update!(projekt_event_params)
 
-    authorize! :update, @projekt_event if params[:namespace] == "projekt_management"
+    if should_authorize_projekt_manager?
+      authorize! :update, @projekt_event
+    end
 
     redirect_to redirect_path(@projekt), notice: t("admin.settings.flash.updated")
   end
@@ -25,7 +29,9 @@ class Admin::ProjektEventsController < Admin::BaseController
     @projekt_event = ProjektEvent.find_by(id: params[:id])
     @projekt_event.destroy!
 
-    authorize! :destroy, @projekt_event if params[:namespace] == "projekt_management"
+    if should_authorize_projekt_manager?
+      authorize! :destroy, @projekt_event
+    end
 
     redirect_to redirect_path(@projekt)
   end

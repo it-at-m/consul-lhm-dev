@@ -8,7 +8,9 @@ class Admin::ProjektArgumentsController < Admin::BaseController
     @projekt_argument = ProjektArgument.new(projekt_argument_params)
     @projekt_argument.projekt = @projekt
 
-    authorize! :create, @projekt_argument if @namespace == "projekt_management"
+    if should_authorize_projekt_manager?
+      authorize! :create, @projekt_argument
+    end
 
     @projekt_argument.save!
     redirect_to redirect_path(@projekt), notice: t("admin.settings.flash.updated")
@@ -17,7 +19,9 @@ class Admin::ProjektArgumentsController < Admin::BaseController
   def update
     @projekt_argument = ProjektArgument.find_by(id: params[:id])
 
-    authorize! :update, @projekt_argument if @namespace == "projekt_management"
+    if should_authorize_projekt_manager?
+      authorize! :update, @projekt_argument
+    end
 
     @projekt_argument.update!(projekt_argument_params)
     redirect_to redirect_path(@projekt), notice: t("admin.settings.flash.updated")
@@ -27,7 +31,9 @@ class Admin::ProjektArgumentsController < Admin::BaseController
     @projekt_argument = ProjektArgument.find_by(id: params[:id])
     @namespace = params[:namespace]
 
-    authorize! :destroy, @projekt_argument if @namespace == "projekt_management"
+    if should_authorize_projekt_manager?
+      authorize! :destroy, @projekt_argument
+    end
 
     @projekt_argument.destroy!
     redirect_to redirect_path(@projekt)
