@@ -7,6 +7,19 @@
       <div class="projekt-event-item-calendar-daynumber">
         <%= projekt_event.datetime.strftime('%d') %>
       </div>
+      <% if projekt_event.end_datetime.present? %>
+        <div class="projekt-event-item-calendar--enddatetime">
+          <div class="projekt-event-item-calendar--separator">
+            -
+          </div>
+        <div class="projekt-event-item-calendar-dayname">
+          <%= projekt_event.end_datetime.strftime('%b').upcase %>
+        </div>
+          <div class="projekt-event-item-calendar-daynumber">
+            <%= projekt_event.end_datetime.strftime('%d') %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
   <div class="projekt-event-item-values">
@@ -18,9 +31,19 @@
       <% end %>
     </h3>
     <div class="projekt-event-item-values--details-row">
-      <span><i class="fa fa-clock"></i><%= projekt_event.datetime.strftime('%d.%m.%Y %H:%M') %></span>
-      <span><i class="fa fa-map-marker-alt"></i><%= projekt_event.location %></span>
-      <span><a href="<%= projekt_event.weblink %>"><%= projekt_event.weblink %></a></span>
+      <span><i class="fa fa-clock"></i>
+        <%= projekt_event.datetime.strftime('%d %B %Y %H:%M') %>
+        <% if projekt_event.end_datetime.present? %>
+          -
+          <%= projekt_event.datetime.strftime('%d %B %Y %H:%M') %>
+        <% end %>
+      </span>
+      <% if projekt_event.location.present? %>
+        <span><i class="fa fa-map-marker-alt"></i><%= projekt_event.location %></span>
+      <% end %>
+      <% if projekt_event.weblink.present? %>
+        <span><i class="fa fa-globe"></i><a href="<%= projekt_event.weblink %>"><%= projekt_event.weblink %></a></span>
+      <% end %>
     </div>
     <% if projekt_event.description.present? %>
       <%= render Shared::CollapseTextComponent.new(size: :small) do |component| %>
