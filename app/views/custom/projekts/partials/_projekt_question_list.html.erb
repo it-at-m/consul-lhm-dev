@@ -13,10 +13,10 @@
         <% end %>
         <% if question.comments_enabled? %>
           ·
-          <span class="icon-comments" aria-hidden="true"></span> <span class="debate-comments">
-            <%= link_to t("custom.projekts.projekt_questions.comments_count", count: question.comments.count), projekt_projekt_question_path(projekt, question.id, format: :js, anchor: 'comments'), class: 'js-projekt-question-next' %>
-          </span>
+          <span class="icon-comments" aria-hidden="true"></span>
+          <%= link_to t("custom.projekts.projekt_questions.comments_count", count: question.comments.count), projekt_projekt_question_path(projekt, question.id, format: :js, anchor: 'comments'), class: 'js-projekt-question-next' %>
           ·
+          <i class="fas fa-vote-yea"></i>
           <%= link_to t("custom.projekts.projekt_questions.comment_votes_count", count: question.comments.map(&:cached_votes_total).sum), projekt_projekt_question_path(projekt, question.id, format: :js, anchor: 'comments'), class: 'js-projekt-question-next' %>
         <% end %>
 
