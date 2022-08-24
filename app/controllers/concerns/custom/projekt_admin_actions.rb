@@ -71,7 +71,9 @@ module ProjektAdminActions
   end
 
   def update
-    authorize!(:update, Projekt) if params[:namespace] == "projekt_management"
+    if should_authorize_projekt_manager?
+      authorize!(:update, @projekt)
+    end
 
     if @projekt.update_attributes(projekt_params)
       redirect_to redirect_path(params[:id], params[:tab].to_s),
@@ -85,7 +87,9 @@ module ProjektAdminActions
   def update_map
     map_location = MapLocation.find_by(projekt: params[:projekt_id])
 
-    authorize!(:update_map, map_location) if params[:namespace] == "projekt_management"
+    if should_authorize_projekt_manager?
+      authorize!(:update_map, map_location)
+    end
 
     map_location.update!(map_location_params)
 
@@ -100,7 +104,9 @@ module ProjektAdminActions
       key: "projekt_custom_feature.default_footer_tab"
     ).reload
 
-    authorize!(:update_standard_phase, @default_footer_tab_setting) if current_user.projekt_manager?
+    if should_authorize_projekt_manager?
+      authorize!(:update_standard_phase, @default_footer_tab_setting)
+    end
 
     if @default_footer_tab_setting.present?
       @default_footer_tab_setting.update!(value: params[:default_footer_tab][:id])
@@ -174,5 +180,9 @@ module ProjektAdminActions
       else
         edit_admin_projekt_path(projekt_id) + tab
       end
+    end
+
+    def should_authorize_projekt_manager?
+      current_user&.projekt_manager? && !current_user&.administrator?
     end
 end

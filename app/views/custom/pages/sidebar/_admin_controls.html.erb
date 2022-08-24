@@ -6,17 +6,23 @@
 <% end %>
 
 <% if current_user.present? && current_user.administrator? %>
-  <%= link_to edit_admin_projekt_path(@projekt), class: 'button hollow expanded' do %>
+  <% namespace = "admin" %>
+<% elsif current_user.present? && current_user.projekt_manager? %>
+  <% namespace = "projekt_management" %>
+<% end %>
+
+<% if current_user.present? && (current_user.administrator? || (current_user.projekt_manager? && can?(:edit, @projekt))) %>
+  <%= link_to namespaced_polymorphic_path(namespace, @projekt, action: :edit), class: 'button hollow expanded' do %>
     <i class="fas fa-cog"></i>
     <%= t('custom.projekts.page.sidebar.admin_controls.edit_projekt') %>
   <% end %>
 
-  <%= link_to edit_admin_projekt_path(@projekt, anchor: 'tab-projekt-settings'), class: 'button hollow expanded' do %>
+  <%= link_to namespaced_polymorphic_path(namespace, @projekt, action: :edit, anchor: 'tab-projekt-settings'), class: 'button hollow expanded' do %>
     <i class="fas fa-edit"></i>
     <%= t('custom.projekts.page.sidebar.admin_controls.edit_projekt_settings') %>
   <% end %>
 
-  <%= link_to edit_admin_site_customization_page_path(@projekt.page, origin: 'public_page'), class: 'button hollow expanded' do %>
+  <%= link_to namespaced_polymorphic_path(namespace, @projekt.page, action: :edit, origin: 'public_page'), class: 'button hollow expanded' do %>
     <i class="fas fa-window-maximize"></i>
     <%= t('custom.projekts.page.sidebar.admin_controls.edit_projekt_page') %>
   <% end %>
