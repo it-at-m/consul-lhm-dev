@@ -36,7 +36,6 @@
       })
 
       $(document).on("click", ".js-admin-edit-projekt-event", function(e) {
-        console.log('click')
         App.HTMLEditor.initialize();
       })
     }
