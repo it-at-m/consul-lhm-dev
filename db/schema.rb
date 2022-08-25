@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_23_055737) do
+ActiveRecord::Schema.define(version: 2022_08_24_123655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1453,6 +1453,7 @@ ActiveRecord::Schema.define(version: 2022_08_23_055737) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
+    t.datetime "end_datetime"
   end
 
   create_table "projekt_livestreams", force: :cascade do |t|
