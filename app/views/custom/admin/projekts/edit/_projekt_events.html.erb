@@ -6,7 +6,7 @@
   <% @projekt_events.each do |event| %>
     <div class='small-12 medium-7 projekt-event' id="<%= dom_id(event) %>">
       <%= check_box_tag "edit_projekt_event_#{ dom_id(event) }" %>
-      <%= label_tag nil, nil, for: "edit_projekt_event_#{ dom_id(event) }", class: 'edit-projekt-event' %>
+      <%= label_tag nil, nil, for: "edit_projekt_event_#{ dom_id(event) }", class: 'edit-projekt-event js-admin-edit-projekt-event' %>
 
       <div class='projekt-event-content'>
         <p>

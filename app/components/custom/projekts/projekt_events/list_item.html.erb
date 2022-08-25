@@ -35,7 +35,7 @@
         <%= projekt_event.datetime.strftime('%d %B %Y %H:%M') %>
         <% if projekt_event.end_datetime.present? %>
           -
-          <%= projekt_event.datetime.strftime('%d %B %Y %H:%M') %>
+          <%= projekt_event.end_datetime.strftime('%d %B %Y %H:%M') %>
         <% end %>
       </span>
       <% if projekt_event.location.present? %>
