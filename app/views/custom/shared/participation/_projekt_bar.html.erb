@@ -1,11 +1,15 @@
 <div class='projekt-bar column' style="background-color:<%= projekt_bar_background_color(resource.projekt.top_parent) %>;color:<%= projekt_bar_text_color(resource.projekt.top_parent) %>" >
   <div class='projekt-name'>
-    <%= breadcrumbs_links(resource.projekt, ">", false) %>
+    <% if resource.projekt.overview_page? %>
+      <%= t("custom.projekts.overview_page.projekt_name_for_proposal") %>
+    <% else %>
+      <%= breadcrumbs_links(resource.projekt, ">", false) %>
+    <% end %>
   </div>
 
   <div class='show-for-large'>
     <% if ( action_name == 'index' && controller_name.in?(['proposals', 'debates', 'polls', 'investments', 'welcome'])) ||
-          ( controller_name == 'pages') %>
+          ( controller_name == 'pages' || controller_name == 'projekts') %>
       <% if resource.respond_to?(:on_behalf_of) && resource.on_behalf_of.present? %>
         <%= resource.on_behalf_of %>
       <% elsif !resource.author.name.blank? %>
