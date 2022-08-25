@@ -26,7 +26,7 @@
     <% if extended_feature?("verification.manual_verifications")  %>
       <td>
         <% unless user.level_three_verified? || user.organization? %>
-          <%= link_to("Verify", verify_admin_user_path(user), class: 'button', remote: true, method: :put) %>
+          <%= link_to(t("custom.admin.users.columns.action.verify"), verify_admin_user_path(user), class: 'button', remote: true, method: :put) %>
         <% end %>
       </td>
     <% end %>
