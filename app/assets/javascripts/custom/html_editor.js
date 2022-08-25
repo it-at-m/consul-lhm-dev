@@ -6,7 +6,7 @@
         if ($(this).hasClass("extended-u")) {
           CKEDITOR.replace(this.name, { language: $("html").attr("lang"), toolbar: "extended_user", height: 500 });
         } else if ($(this).hasClass("extended-a")) {
-          CKEDITOR.replace(element, { language: $("html").attr("lang"), toolbar: "extended_admin", height: 500 });
+          CKEDITOR.replace(this.id, { language: $("html").attr("lang"), toolbar: "extended_admin", height: 500 });
 
         } else {
           CKEDITOR.replace(this.name, { language: $("html").attr("lang") });

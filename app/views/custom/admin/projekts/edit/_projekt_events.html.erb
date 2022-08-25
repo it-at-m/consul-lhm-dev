@@ -49,7 +49,7 @@
       </div>
 
       <div class='edit-projekt-event-form'>
-        <%= render partial: 'custom/admin/projekts/edit/projekt_events/form', locals: { url: admin_projekt_projekt_event_path(@projekt, event), projekt: @projekt, event: event } %>
+        <%= render partial: 'custom/admin/projekts/edit/projekt_events/form', locals: { url: admin_projekt_projekt_event_path(@projekt, event), projekt: @projekt, event: event, wide_textarea: true } %>
       </div>
 
       <%= link_to '', admin_projekt_projekt_event_path(@projekt, event, namespace: @namespace), method: :delete, class: 'delete-projekt-event' %>
