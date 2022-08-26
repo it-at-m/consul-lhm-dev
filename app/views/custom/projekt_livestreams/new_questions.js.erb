@@ -1,0 +1,12 @@
+console.log('tick')
+<% @new_questions.each do |question| %>
+  $(".js-livestream-livequestion").append("<%= j render("custom/projekt_livestreams/new_question", question: question ) %>");
+<% end %>
+
+<% if @new_questions.any? %>
+  var livequestionElement = document.querySelector(".js-livestream-livequestion");
+
+  if (livequestionElement) {
+    livequestionElement.dataset.url = "<%= new_questions_projekt_livestream_path(@current_projekt_livestream.id, last_question_id: @new_questions.last.id) %>";
+  }
+<% end %>

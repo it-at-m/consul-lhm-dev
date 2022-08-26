@@ -110,6 +110,9 @@ de:
         next_question: Nächste Frage
         first_question: Erste Frage
         answers_count: "%{count} Stimmen"
+        new_question_notification: "Neue Frage: %{question_title}"
+        all_questions: Alle Fragen
+        go_to_question: Zur Frage wechseln
         participation_not_allowed:
           login_to_answer: Sie müssen sich %{signin} oder %{signup}, um an der Kurzumfrage teilzunehmen.
           organizations: Organisationen dürfen sich nicht an der Diskussion beteiligen

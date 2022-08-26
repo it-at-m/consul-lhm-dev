@@ -98,6 +98,9 @@ en:
         comments_count: "%{count} open answers"
         comment_votes_count: "%{count} up- & downvotes"
         comments_title: Open answers
+        new_question_notification: "New question: %{question_title}"
+        all_questions: All questions
+        go_to_question: Go to question
         participation_not_allowed:
           login_to_answer: Please %{signin} or %{signup} to proceed.
           organizations: Organizations cannot take part

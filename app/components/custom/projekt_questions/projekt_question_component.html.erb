@@ -13,7 +13,7 @@
       <div class="projekt-question-next-question-section small-12 medium-4 column quiz-header small-collapse">
         <div class="projekt-next-question-button-section">
           <% if projekt_question.previous_question_id %>
-            <%= link_to projekt_projekt_question_path(projekt, projekt_question.previous_question_id, format: :js), class: "quiz-next-link js-projekt-question-next" do %>
+            <%= link_to projekt_projekt_question_path(projekt, projekt_question.previous_question_id, format: :js), remote: true, class: "quiz-next-link js-projekt-question-next" do %>
               <div class="quiz-next">
                 <span>
                 <span class="icon-angle-left" aria-hidden="true" />
@@ -26,7 +26,7 @@
             <% end %>
           <% end %>
           <% if projekt_question.next_question_id %>
-            <%= link_to projekt_projekt_question_path(projekt, projekt_question.next_question_id, format: :js), class: "quiz-next-link js-projekt-question-next" do %>
+            <%= link_to projekt_projekt_question_path(projekt, projekt_question.next_question_id, format: :js), remote: true, class: "quiz-next-link js-projekt-question-next" do %>
               <div class="quiz-next">
                 <%= t("custom.projekts.projekt_questions.next_question") %>
 
@@ -34,7 +34,7 @@
               </div>
             <% end %>
           <% elsif projekt_question.first_question_id && projekt_question.first_question_id != projekt_question.id %>
-            <%= link_to projekt_projekt_question_path(projekt, projekt_question.first_question_id, format: :js), class: "quiz-next-link js-projekt-question-next" do %>
+            <%= link_to projekt_projekt_question_path(projekt, projekt_question.first_question_id, format: :js), remote: true, class: "quiz-next-link js-projekt-question-next" do %>
               <div class="quiz-next js-projekt-question-section-next-button">
                 <%= t("legislation.questions.show.first_question") %>
 
@@ -45,7 +45,7 @@
         </div>
         <% if projekt.projekt_list_enabled? %>
           <div class='small-12 column projekt-question--go-to-question-list-button'>
-            <%= link_to t("custom.projekts.projekt_questions.back_to_question_list"), projekt_projekt_questions_path(projekt, current_projekt_question_id: @projekt_question.id, format: :js), class: "js-projekt-question-next icon-angle-left" %>
+            <%= link_to t("custom.projekts.projekt_questions.back_to_question_list"), projekt_projekt_questions_path(projekt, current_projekt_question_id: @projekt_question.id, format: :js), remote: true, class: "js-projekt-question-next icon-angle-left" %>
           </div>
         <% end %>
       </div>

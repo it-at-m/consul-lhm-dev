@@ -11,6 +11,7 @@ function initComponents() {
   "use strict";
 
   initializeMjAccordion();
+  App.LivesteamLivequestion.initialize();
   App.CollapseTextComponent.initialize();
 }
 
