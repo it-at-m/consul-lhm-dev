@@ -23,7 +23,7 @@
           function() {
             this.loadNewQuestions();
           }.bind(this),
-          20000
+          10000
         );
       }
     },
