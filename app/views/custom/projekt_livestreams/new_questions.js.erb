@@ -1,4 +1,3 @@
-console.log('tick')
 <% @new_questions.each do |question| %>
   $(".js-livestream-livequestion").append("<%= j render("custom/projekt_livestreams/new_question", question: question ) %>");
 <% end %>

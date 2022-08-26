@@ -5,7 +5,8 @@ $("#footer-content").html("<%= j render("pages/projekt_footer/#{@current_tab_pha
 App.Projekts.toggleDefaultProjekts()
 App.Projekts.toggleProjektsInSidebarFilter();
 App.CollapseTextComponent.enableHoverButtons();
-App.Legislation.initialize()
+App.Legislation.initialize();
+App.LivesteamLivequestion.initialize();
 
 if ($(".legislation-annotatable").length) {
   App.LegislationAnnotatable.initialize();

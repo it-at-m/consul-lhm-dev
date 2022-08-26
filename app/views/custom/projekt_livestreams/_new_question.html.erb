@@ -11,6 +11,8 @@
           </span>
       </div>
     <% end %>
-    <%= link_to t("custom.projekts.projekt_questions.all_questions"), projekt_projekt_questions_path(question.projekt, current_projekt_question_id: question.id, format: :js), remote: true, class: 'projekt-all-questions-notification-link js-projekt-question-new' %>
+    <% if quesiton.projekt.question_list_enabled? %>
+      <%= link_to t("custom.projekts.projekt_questions.all_questions"), projekt_projekt_questions_path(question.projekt, current_projekt_question_id: question.id, format: :js), remote: true, class: 'projekt-all-questions-notification-link js-projekt-question-new' %>
+    <% end %>
   </div>
 </div>

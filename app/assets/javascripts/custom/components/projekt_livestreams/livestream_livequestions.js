@@ -2,21 +2,23 @@
   "use strict";
   App.LivesteamLivequestion = {
     initialize: function() {
-      if (this.livequestionElement()) {
-        this.startLivequtionLoad();
-      }
+      this.startLivequtionLoad();
     },
 
     livequestionElement: function() {
       return document.querySelector(".js-livestream-livequestion");
     },
 
-    startLivequtionLoad: function() {
+    clearInterval: function() {
       if (this.questionLoadInterval) {
         clearInterval(this.questionLoadInterval);
       }
+    },
 
+    startLivequtionLoad: function() {
       var livequestion = this.livequestionElement();
+
+      this.clearInterval();
 
       if (livequestion) {
         this.questionLoadInterval = setInterval(
@@ -30,6 +32,11 @@
 
     loadNewQuestions: function() {
       var livequestion = this.livequestionElement();
+
+      if (!livequestion) {
+        this.clearInterval();
+        return;
+      }
 
       $.ajax({
         url: livequestion.dataset.url,
