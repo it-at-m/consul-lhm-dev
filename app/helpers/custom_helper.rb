@@ -50,7 +50,7 @@ module CustomHelper
     @comment_tree = CommentTree.new(@commentable, params[:page], comment_order)
 
     if @commentable.present?
-      set_comment_flags(@comment_tree.comments)
+      @comment_flags = set_comment_flags(@comment_tree.comments)
     end
 
     {
