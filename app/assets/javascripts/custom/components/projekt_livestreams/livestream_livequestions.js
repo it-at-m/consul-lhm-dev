@@ -38,10 +38,12 @@
         return;
       }
 
-      $.ajax({
-        url: livequestion.dataset.url,
-        method: "POST"
-      });
+      if (livequestion.dataset.url) {
+        $.ajax({
+          url: livequestion.dataset.url,
+          method: "POST"
+        });
+      }
     }
   };
 }).call(this);

@@ -14,11 +14,11 @@
       <label class="control radio <%= "is-active" if projekt_answer.question_option&.id == question_option.id %>">
         <% radio_button_disabled = !user_signed_in? || (projekt_question.root_question? && !projekt.question_phase.participation_open?) %>
         <%= f.radio_button :projekt_question_option_id, question_option.id, disabled: radio_button_disabled, label: false %>
-        <span class="control-indicator"></span>
-        <%= question_option.value %>
-        <% if projekt_question.show_answers_count? %>
-          (<%= question_option.answers_count  %>)
-        <% end %>
+        <span class="js-projekt-question-option control-indicator"></span>
+          <%= question_option.value %>
+          <% if projekt_question.show_answers_count? %>
+            (<span class="js-projekt-question-option--answers-count"><%= question_option.answers_count  %></span>)
+          <% end %>
       </label>
     <% end %>
   <% end %>

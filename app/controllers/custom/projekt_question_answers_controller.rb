@@ -15,12 +15,15 @@ class ProjektQuestionAnswersController < ApplicationController
       question_option = ProjektQuestionOption.find(params[:projekt_question_answer][:projekt_question_option_id])
       @question = question_option.question
 
-      @answer = ProjektQuestionAnswer.new(
+      @answer = ProjektQuestionAnswer.find_or_initialize_by(
         user: current_user,
-        question_option: question_option,
-        question: @question,
-        **answer_params
+        question: @question
       )
+
+      @answer.assign_attributes(
+        question_option: question_option,
+      )
+
       @answer.save!
       @commentable = @question
 
@@ -61,7 +64,7 @@ class ProjektQuestionAnswersController < ApplicationController
     @projekt = Projekt.find(params[:projekt_id])
   end
 
-  def answer_params
-    params.require(:projekt_question_answer).permit(:projekt_question_option_id)
-  end
+  # def answer_params
+  #   params.require(:projekt_question_answer).permit(:projekt_question_option_id)
+  # end
 end

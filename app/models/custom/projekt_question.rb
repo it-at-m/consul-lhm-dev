@@ -50,7 +50,7 @@ class ProjektQuestion < ApplicationRecord
   end
 
   def base_query_for_navigation
-    base_query = projekt.questions.sorted.limit(1)
+    base_query = projekt.questions.sorted
 
     if root_question?
       base_query.root_questions
@@ -85,8 +85,8 @@ class ProjektQuestion < ApplicationRecord
     @first_question_id ||= base_query_for_navigation.ids.first
   end
 
-  def last_question_id
-    @last_question_id ||= base_query_for_navigation.ids.last
+  def most_recent_question_id
+    @most_recent_question_id ||= base_query_for_navigation.ids.last
   end
 
   def answer_for_user(user)

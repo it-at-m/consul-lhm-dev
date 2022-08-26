@@ -1,2 +1,5 @@
 $(".js-projekt-question-section").removeClass("show-loader");
 $(".js-projekt-questions-container").html("<%= j render "custom/projekts/partials/projekt_question", projekt: @projekt, projekt_question: @question, projekt_question_answer: @answer %>");
+$(".js-livestream-livequestion").attr('data-url',
+  "<%= new_questions_projekt_livestream_path(@question.projekt_livestream.id, current_projekt_question_id: @question.id, most_recent_question_id: @question.most_recent_question_id) %>"
+)

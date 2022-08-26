@@ -6,6 +6,12 @@
   var livequestionElement = document.querySelector(".js-livestream-livequestion");
 
   if (livequestionElement) {
-    livequestionElement.dataset.url = "<%= new_questions_projekt_livestream_path(@current_projekt_livestream.id, last_question_id: @new_questions.last.id) %>";
+    livequestionElement.dataset.url = "<%= new_questions_projekt_livestream_path(@current_projekt_livestream.id, current_projekt_question_id: @current_projekt_question_id&.id, most_recent_question_id: @new_questions.last.id) %>";
   }
+<% end %>
+
+<% if @current_projekt_question.present? %>
+  <% @current_projekt_question.question_options.each do |question_option| %>
+    $('.js-projekt-answer-form input[name="projekt_question_answer[projekt_question_option_id]"][value="<%= question_option.id %>"]').siblings('.js-projekt-question-option--answers-count').html("<%= question_option.answers_count %>")
+  <% end %>
 <% end %>

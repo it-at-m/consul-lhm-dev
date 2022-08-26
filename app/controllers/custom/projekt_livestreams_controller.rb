@@ -21,13 +21,17 @@ class ProjektLivestreamsController < ApplicationController
 
   def new_questions
     @new_questions =
-      if params[:last_question_id]
-        last_projekt_question = ProjektQuestion.find(params[:last_question_id])
+      if params[:most_recent_question_id]
+        last_projekt_question = ProjektQuestion.find(params[:most_recent_question_id])
 
         last_projekt_question.next_questions
       else
         @current_projekt_livestream.projekt_questions
       end
+
+    if params[:current_projekt_question_id]
+      @current_projekt_question = @current_projekt_livestream.projekt_questions.find(params[:current_projekt_question_id])
+    end
   end
 
   def set_projekt_livestream

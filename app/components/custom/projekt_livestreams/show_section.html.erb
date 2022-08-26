@@ -38,7 +38,7 @@
           <% end %>
         </div>
       <% end %>
-      <div class="js-livestream-livequestion projekt-livestream-livequestion" data-url="<%= new_questions_projekt_livestream_path(@current_projekt_livestream.id, last_question_id: @current_projekt_livestream.projekt_questions&.last&.id) %>">
+      <div class="js-livestream-livequestion projekt-livestream-livequestion" data-enabled="true" data-url="<%= new_questions_projekt_livestream_path(@current_projekt_livestream.id, current_projekt_question_id: @current_projekt_livestream&.projekt_questions&.first, most_recent_question_id: @current_projekt_livestream.projekt_questions&.last&.id) %>">
       </div>
       <% if @current_projekt_livestream.projekt_questions.any? %>
         <div class="projekt-questions-container projekt-question-embed js-projekt-questions-container">
