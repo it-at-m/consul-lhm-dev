@@ -5,14 +5,14 @@
     </p>
   </div>
 
-<% elsif projekt.question_phase.expired? %>
+<% elsif projekt_question.root_question? && projekt.question_phase.expired? %>
   <div class="callout primary">
     <p>
       <%= t("custom.projekts.projekt_questions.participation_not_allowed.phase_expired") %>
     </p>
   </div>
 
-<% elsif !projekt.question_phase.current? %>
+<% elsif projekt_question.root_question? && !projekt.question_phase.current? %>
   <div class="callout primary">
     <p>
       <%= t("custom.projekts.projekt_questions.participation_not_allowed.phase_not_yet_started") %>
@@ -35,7 +35,7 @@
     </p>
   </div>
 
-<% elsif !projekt.question_phase.active? %>
+<% elsif projekt_question.root_question? && !projekt.question_phase.active? %>
   <div class="callout primary">
     <p>
       <%= t("custom.projekts.projekt_questions.participation_not_allowed.phase_not_active") %>
