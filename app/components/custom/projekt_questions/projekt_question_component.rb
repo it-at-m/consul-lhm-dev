@@ -7,7 +7,7 @@ class ProjektQuestions::ProjektQuestionComponent < ApplicationComponent
     @projekt_question = projekt_question
     @projekt_question_answer = projekt_question_answer
     @projekt = projekt_question.projekt
-    @current_comment_order = "oldest"
+    @current_comment_order = "newest"
   end
 
   def before_render
