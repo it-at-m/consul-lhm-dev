@@ -1,4 +1,4 @@
-<section class="projekt-question-section js-projekt-question-section">
+<section class="projekt-question-section js-projekt-question-section" data-question-id="<%= projekt_question.id %>">
   <div class="projekt-question-container row">
     <div class="projekt-question-container-question-block">
       <div class="projekt-question-container small-12 medium-8 column">
@@ -51,7 +51,7 @@
   </div>
 
   <% if projekt_question.comments_enabled? && comment_tree.present? %>
-    <div class="small-12 medium-9 projekt-question--comments-wrapper">
+    <div class="small-12 medium-9 projekt-question--comments-wrapper js-comments-liveupdate-wrapper" data-last-comment-id="<%= projekt_question.comments&.last&.id %>">
       <%= render Shared::CommentsComponent.new(projekt_question, comment_tree) %>
     </div>
   <% end %>
