@@ -5,7 +5,7 @@
       this.startLivequtionLoad();
 
       $(document)
-        .on("click", ".js-comments-liveupdate-wrapper form.new_comment input[type='submit']", function(e) {
+        .on("submit", ".js-comments-liveupdate-wrapper form.new_comment input[type='submit']", function(e) {
           e.preventDefault();
           e.stopPropagation();
 
@@ -59,6 +59,14 @@
 
         if (lastCommentId) {
           url.searchParams.set("last_comment_id", lastCommentId);
+
+          var commentElements = document.querySelectorAll(".comment-list .comment");
+
+          if (commentElements.length > 0) {
+            var lastCommentIdInCommentsList = commentElements[0].id.replace("comment_", "");
+          }
+
+          url.searchParams.set("last_comment_id_in_comments_list", lastCommentIdInCommentsList);
         }
       }
 

@@ -32,9 +32,26 @@ class ProjektLivestreamsController < ApplicationController
     if params[:current_projekt_question_id]
       @current_projekt_question = @current_projekt_livestream.projekt_questions.find(params[:current_projekt_question_id])
 
-      if params[:last_comment_id]
-        @new_comments = @current_projekt_question.comments.find(params[:last_comment_id]).next_comments
-      end
+      @new_comments =
+        if params[:last_comment_id]
+          new_comments = nil
+
+          last_comment = @current_projekt_question.comments.find(params[:last_comment_id])
+
+          if last_comment.present?
+            new_comments = last_comment.next_comments
+          elsif params[:last_comment_id_in_comments_list].present?
+            last_comment = @current_projekt_question.comments.find(params[:last_comment_id])
+
+            if last_comment.present?
+              new_comments = last_comment.next_comments
+            end
+          end
+
+          new_comments
+        else
+          @current_projekt_question.comments
+        end
     end
   end
 
