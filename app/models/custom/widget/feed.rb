@@ -4,11 +4,11 @@ class Widget::Feed < ApplicationRecord
   KINDS = %w[active_projekts polls proposals debates expired_projekts investment_proposals].freeze
 
   def active_projekts
-    Projekt.current.show_in_overview_page.first(limit)
+    Projekt.index_order_underway.first(limit)
   end
 
   def expired_projekts
-    Projekt.expired.show_in_overview_page.first(limit)
+    Projekt.index_order_expired.first(limit)
   end
 
   def polls
@@ -24,6 +24,6 @@ class Widget::Feed < ApplicationRecord
   end
 
   def investment_proposals
-    Budget::Investment.joins(:budget).where.not( budgets: { projekt_id: nil } ).sort_by_created_at.limit(limit)
+    Budget::Investment.joins(:budget).where.not(budgets: { projekt_id: nil }).sort_by_created_at.limit(limit)
   end
 end
