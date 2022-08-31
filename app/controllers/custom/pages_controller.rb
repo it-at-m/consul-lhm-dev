@@ -421,7 +421,7 @@ class PagesController < ApplicationController
 
     projekt_questions = @current_projekt.questions.root_questions
 
-    if @current_projekt.projekt_list_enabled?
+    if @current_projekt.question_list_enabled?
       @projekt_questions = projekt_questions
     else
       @projekt_question = projekt_questions.first
