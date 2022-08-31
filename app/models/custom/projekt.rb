@@ -110,10 +110,12 @@ class Projekt < ApplicationRecord
 
   scope :index_order_all, ->() {
     current
+      .with_published_custom_page
   }
 
   scope :index_order_underway, ->() {
     current
+      .with_published_custom_page
       .not_in_individual_list
       .includes(:projekt_phases)
       .select { |p| p.projekt_phases.any?(&:current?) }
@@ -121,6 +123,7 @@ class Projekt < ApplicationRecord
 
   scope :index_order_ongoing, ->() {
     current
+      .with_published_custom_page
       .not_in_individual_list
       .includes(:projekt_phases)
       .select { |p| p.projekt_phases.all? { |phase| !phase.current? } }
@@ -128,17 +131,20 @@ class Projekt < ApplicationRecord
 
   scope :index_order_upcoming, ->(timestamp = Time.zone.today) {
     activated
+      .with_published_custom_page
       .not_in_individual_list
       .where("total_duration_start > ?", timestamp)
   }
 
   scope :index_order_expired, ->(timestamp = Time.zone.today) {
     expired
+      .with_published_custom_page
       .not_in_individual_list
   }
 
   scope :index_order_individual_list, -> {
-    joins("INNER JOIN projekt_settings siil ON projekts.id = siil.projekt_id")
+    with_published_custom_page
+      .joins("INNER JOIN projekt_settings siil ON projekts.id = siil.projekt_id")
       .where("siil.key": "projekt_feature.general.show_in_individual_list", "siil.value": "active")
   }
 

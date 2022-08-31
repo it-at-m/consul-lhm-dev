@@ -290,7 +290,7 @@ class ProjektsController < ApplicationController
     @projekts_count_hash = {}
 
     valid_orders.each do |order|
-      @projekts_count_hash[order] = @projekts.with_published_custom_page.send(order).count
+      @projekts_count_hash[order] = @projekts.send(order).count
     end
 
     @current_active_orders = @projekts_count_hash.select do |key, value|
