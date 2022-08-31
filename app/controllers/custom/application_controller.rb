@@ -48,6 +48,8 @@ class ApplicationController < ActionController::Base
     end
 
     def set_default_social_media_images
+      return if params[:controller] == "ckeditor/pictures"
+
       SiteCustomization::Image.all_images
 
       social_media_icon = SiteCustomization::Image.all.find_by(name: "social_media_icon").image
