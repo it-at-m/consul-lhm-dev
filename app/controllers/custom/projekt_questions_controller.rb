@@ -38,7 +38,9 @@ class ProjektQuestionsController < ApplicationController
 
     @answer = @question.answer_for_user(current_user) || ProjektQuestionAnswer.new
 
-    @projekt_livestream_livequestion_path = new_questions_projekt_livestream_path(@question.projekt_livestream.id, current_projekt_question_id: @question.id, most_recent_question_id: @question.most_recent_question_id)
+    if @question.livestream_question?
+      @projekt_livestream_livequestion_path = new_questions_projekt_livestream_path(@question.projekt_livestream.id, current_projekt_question_id: @question.id, most_recent_question_id: @question.most_recent_question_id)
+    end
   end
 
   private
