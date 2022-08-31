@@ -284,7 +284,7 @@ class ProjektsController < ApplicationController
     @filtered_goals = params[:sdg_goals].present? ? params[:sdg_goals].split(',').map{ |code| code.to_i } : nil
     @filtered_targets = params[:sdg_targets].present? ? params[:sdg_targets].split(',')[0] : nil
 
-    @projekts = Projekt.show_in_overview_page.regular
+    @projekts = Projekt.regular
     @resources = @projekts
 
     @projekts_count_hash = {}
