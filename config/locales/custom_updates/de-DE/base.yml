@@ -162,7 +162,7 @@ de:
       p2: Unser Go-Live ist am %{date}!
     shared_components:
       collapse_text:
-        show_more: "Zeig mehr"
+        show_more: "Zeige mehr"
         show_less: "Zeige weniger"
   date:
     formats:
