@@ -1,8 +1,13 @@
 (function() {
   "use strict";
   App.CollapseTextComponent = {
+    initialized: false,
     initialize: function() {
-      $(document).on("click", ".js-collapse-show-more-button", this.toggleCollapse.bind(this));
+      if (!this.initialized) {
+        $(document).on("click", ".js-collapse-show-more-button", this.toggleCollapse.bind(this));
+      }
+
+      this.initialized = true;
 
       this.enableHoverButtons();
     },

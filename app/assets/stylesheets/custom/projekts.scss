@@ -715,7 +715,7 @@ span.projekt-backlink:before {
 .projekt-event-item-values--details-row {
   display: flex;
 
-  span {
+  .projekt-event-item-values--details-row-column {
     padding-right: 12px;
     font-size: 14px;
 
@@ -723,6 +723,10 @@ span.projekt-backlink:before {
       padding-right: 5px;
       font-size: 15px;
     }
+  }
+
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
   }
 }
 

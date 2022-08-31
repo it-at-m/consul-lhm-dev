@@ -24,25 +24,25 @@
   </div>
   <div class="projekt-event-item-values">
     <h3 class="projekt-event-item-values--title">
-      <% if @show_projekt_link %>
+      <% if @show_projekt_link && projekt_event.projekt.published? %>
         <%= link_to(projekt_event.title, projekt_event.projekt.page.url) %>
       <% else %>
         <%= projekt_event.title %>
       <% end %>
     </h3>
     <div class="projekt-event-item-values--details-row">
-      <span><i class="fa fa-clock"></i>
-        <%= projekt_event.datetime.strftime('%d %B %Y %H:%M') %>
+      <div class="projekt-event-item-values--details-row-column">
+        <i class="fa fa-clock"></i><%= projekt_event.datetime.strftime('%d %B %Y %H:%M') %>
         <% if projekt_event.end_datetime.present? %>
           -
           <%= projekt_event.end_datetime.strftime('%d %B %Y %H:%M') %>
         <% end %>
-      </span>
+      </div>
       <% if projekt_event.location.present? %>
-        <span><i class="fa fa-map-marker-alt"></i><%= projekt_event.location %></span>
+        <div class="projekt-event-item-values--details-row-column"><i class="fa fa-map-marker-alt"></i><%= projekt_event.location %></div>
       <% end %>
       <% if projekt_event.weblink.present? %>
-        <span><i class="fa fa-globe"></i><a href="<%= projekt_event.weblink %>"><%= projekt_event.weblink %></a></span>
+        <div class="projekt-event-item-values--details-row-column"><i class="fa fa-globe"></i><a href="<%= projekt_event.weblink %>"><%= projekt_event.weblink %></a></div>
       <% end %>
     </div>
     <% if projekt_event.description.present? %>

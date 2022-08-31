@@ -210,6 +210,10 @@ class Projekt < ApplicationRecord
     end
   end
 
+  def published?
+    page&.status == "published"
+  end
+
   def regular_projekt_phases
     special_types = [
       "ProjektPhase::MilestonePhase",
