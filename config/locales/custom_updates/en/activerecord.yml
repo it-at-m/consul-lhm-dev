@@ -21,6 +21,9 @@ en:
             color:
               invalid: Please provide color in HEX format
     attributes:
+      projekt:
+        show_start_date_in_frontend: Visible in front end
+        show_end_date_in_frontend: Visible in front end
       poll/answer:
         open_answer_text: Open Answer
       widget/card:

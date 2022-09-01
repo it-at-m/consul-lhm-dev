@@ -21,6 +21,9 @@ de:
             color:
               invalid: Bitte den Farbwert als HEX-code eingeben
     attributes:
+      projekt:
+        show_start_date_in_frontend: Im Frontend angezeigt
+        show_end_date_in_frontend: Im Frontend angezeigt
       poll/answer:
         open_answer_text: Offene Antwort
       widget/card:

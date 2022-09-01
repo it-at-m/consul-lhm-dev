@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_24_123655) do
+ActiveRecord::Schema.define(version: 2022_09_01_145044) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -434,8 +434,8 @@ ActiveRecord::Schema.define(version: 2022_08_24_123655) do
     t.text "description_informing"
     t.string "voting_style", default: "knapsack"
     t.boolean "published"
-    t.boolean "hide_money", default: false
     t.bigint "projekt_id"
+    t.boolean "hide_money", default: false
     t.index ["projekt_id"], name: "index_budgets_on_projekt_id"
   end
 
@@ -490,6 +490,7 @@ ActiveRecord::Schema.define(version: 2022_08_24_123655) do
     t.string "ancestry"
     t.integer "confidence_score", default: 0, null: false
     t.boolean "valuation", default: false
+    t.tsvector "tsv"
     t.index ["ancestry"], name: "index_comments_on_ancestry"
     t.index ["cached_votes_down"], name: "index_comments_on_cached_votes_down"
     t.index ["cached_votes_total"], name: "index_comments_on_cached_votes_total"
@@ -497,6 +498,7 @@ ActiveRecord::Schema.define(version: 2022_08_24_123655) do
     t.index ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
     t.index ["confidence_score"], name: "index_comments_on_confidence_score"
     t.index ["hidden_at"], name: "index_comments_on_hidden_at"
+    t.index ["tsv"], name: "index_comments_on_tsv", using: :gin
     t.index ["user_id"], name: "index_comments_on_user_id"
     t.index ["valuation"], name: "index_comments_on_valuation"
   end
@@ -1613,6 +1615,8 @@ ActiveRecord::Schema.define(version: 2022_08_24_123655) do
     t.integer "level", default: 1
     t.boolean "special", default: false
     t.string "special_name"
+    t.boolean "show_start_date_in_frontend", default: true
+    t.boolean "show_end_date_in_frontend", default: true
     t.index ["parent_id"], name: "index_projekts_on_parent_id"
   end
 
@@ -1627,6 +1631,8 @@ ActiveRecord::Schema.define(version: 2022_08_24_123655) do
     t.datetime "hidden_at"
     t.datetime "ignored_at"
     t.datetime "confirmed_hide_at"
+    t.tsvector "tsv"
+    t.index ["tsv"], name: "index_proposal_notifications_on_tsv", using: :gin
   end
 
   create_table "proposal_translations", id: :serial, force: :cascade do |t|

@@ -122,6 +122,7 @@ module ProjektAdminActions
     def projekt_params
       attributes = [
         :name, :parent_id, :total_duration_start, :total_duration_end, :color, :icon,
+        :show_start_date_in_frontend, :show_end_date_in_frontend,
         :geozone_affiliated, :tag_list, :related_sdg_list, geozone_affiliation_ids: [], sdg_goal_ids: [],
         comment_phase_attributes: [:id, :start_date, :end_date, :geozone_restricted,
                                    :active, geozone_restriction_ids: []],

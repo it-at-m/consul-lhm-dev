@@ -13,9 +13,15 @@
       <tr style="border-bottom:none;" >
         <td>
           <%= f.date_field :total_duration_start, label: false %>
+          <div class="show-projekt-dates-in-frontend-checkbox">
+            <%= f.check_box :show_start_date_in_frontend %>
+          </div>
         </td>
         <td>
           <%= f.date_field :total_duration_end, label: false %>
+          <div class="show-projekt-dates-in-frontend-checkbox">
+            <%= f.check_box :show_end_date_in_frontend %>
+          </div>
         </td>
       </tr>
 
