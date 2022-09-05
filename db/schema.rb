@@ -211,6 +211,7 @@ ActiveRecord::Schema.define(version: 2022_09_01_145044) do
     t.integer "budget_id"
     t.integer "group_id"
     t.integer "heading_id"
+    t.integer "line_weight", default: 1
     t.index ["ballot_id", "investment_id"], name: "index_budget_ballot_lines_on_ballot_id_and_investment_id", unique: true
     t.index ["ballot_id"], name: "index_budget_ballot_lines_on_ballot_id"
     t.index ["budget_id"], name: "index_budget_ballot_lines_on_budget_id"
@@ -434,8 +435,8 @@ ActiveRecord::Schema.define(version: 2022_09_01_145044) do
     t.text "description_informing"
     t.string "voting_style", default: "knapsack"
     t.boolean "published"
-    t.bigint "projekt_id"
     t.boolean "hide_money", default: false
+    t.bigint "projekt_id"
     t.index ["projekt_id"], name: "index_budgets_on_projekt_id"
   end
 
@@ -490,7 +491,6 @@ ActiveRecord::Schema.define(version: 2022_09_01_145044) do
     t.string "ancestry"
     t.integer "confidence_score", default: 0, null: false
     t.boolean "valuation", default: false
-    t.tsvector "tsv"
     t.index ["ancestry"], name: "index_comments_on_ancestry"
     t.index ["cached_votes_down"], name: "index_comments_on_cached_votes_down"
     t.index ["cached_votes_total"], name: "index_comments_on_cached_votes_total"
@@ -498,7 +498,6 @@ ActiveRecord::Schema.define(version: 2022_09_01_145044) do
     t.index ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
     t.index ["confidence_score"], name: "index_comments_on_confidence_score"
     t.index ["hidden_at"], name: "index_comments_on_hidden_at"
-    t.index ["tsv"], name: "index_comments_on_tsv", using: :gin
     t.index ["user_id"], name: "index_comments_on_user_id"
     t.index ["valuation"], name: "index_comments_on_valuation"
   end
@@ -1631,8 +1630,6 @@ ActiveRecord::Schema.define(version: 2022_09_01_145044) do
     t.datetime "hidden_at"
     t.datetime "ignored_at"
     t.datetime "confirmed_hide_at"
-    t.tsvector "tsv"
-    t.index ["tsv"], name: "index_proposal_notifications_on_tsv", using: :gin
   end
 
   create_table "proposal_translations", id: :serial, force: :cascade do |t|

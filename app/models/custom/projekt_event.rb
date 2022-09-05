@@ -15,7 +15,7 @@ class ProjektEvent < ApplicationRecord
   }
 
   scope :sort_by_past, -> {
-    where('end_datetime < ?', Time.now)
+    where("COALESCE(end_datetime, datetime) < ?", Time.now)
   }
 
   def self.scoped_projekt_ids_for_footer(projekt)
