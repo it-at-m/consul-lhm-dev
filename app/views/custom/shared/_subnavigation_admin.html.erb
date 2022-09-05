@@ -7,14 +7,14 @@
       <%= "tabindex=0" if placement == 'desktop' %>
   >
 
-    <%= link_to admin_root_path, class: 'admin-items-icon', tabindex: "-1", aria: { hidden: true } do %>
+    <%= link_to custom_admin_root_path(current_user), class: 'admin-items-icon', tabindex: "-1", aria: { hidden: true } do %>
       <span class="icon-admin" aria-hidden="true"
             title="<%= t("custom.layouts.header.admin_link") %>">
       </span>
     <% end %>
 
     <% if placement == 'mobile' %>
-      <%= link_to admin_root_path, class: 'admin-items-link' do %>
+      <%= link_to custom_admin_root_path(current_user), class: 'admin-items-link' do %>
         <%= t('layouts.header.administration_menu') %>
       <% end %>
 
