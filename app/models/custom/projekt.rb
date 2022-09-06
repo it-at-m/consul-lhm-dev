@@ -120,7 +120,7 @@ class Projekt < ApplicationRecord
       .show_in_overview_page
       .not_in_individual_list
       .includes(:projekt_phases)
-      .select { |p| p.projekt_phases.any?(&:current?) }
+      .select { |p| p.projekt_phases.regular_phases.any?(&:current?) }
   }
 
   scope :index_order_ongoing, ->() {
@@ -129,7 +129,7 @@ class Projekt < ApplicationRecord
       .show_in_overview_page
       .not_in_individual_list
       .includes(:projekt_phases)
-      .select { |p| p.projekt_phases.all? { |phase| !phase.current? } }
+      .select { |p| p.projekt_phases.regular_phases.all? { |phase| !phase.current? } }
   }
 
   scope :index_order_upcoming, ->(timestamp = Time.zone.today) {
@@ -212,19 +212,6 @@ class Projekt < ApplicationRecord
 
   def published?
     page&.status == "published"
-  end
-
-  def regular_projekt_phases
-    special_types = [
-      "ProjektPhase::MilestonePhase",
-      "ProjektPhase::ProjektNotificationPhase",
-      "ProjektPhase::NewsfeedPhase",
-      "ProjektPhase::EventPhase",
-      "ProjektPhase::ArgumentPhase"
-    ]
-
-    projekt_phases.
-      where.not(type: special_types)
   end
 
   def update_page
