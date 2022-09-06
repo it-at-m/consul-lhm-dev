@@ -13,6 +13,7 @@ class ProjektPhase < ApplicationRecord
   has_many :geozone_restrictions, through: :projekt_phase_geozones, source: :geozone
 
   scope :regular_phases, -> { where.not(type: REGULAR_PROJEKT_PHASES) }
+  scope :special_phases, -> { where(type: REGULAR_PROJEKT_PHASES) }
 
   def selectable_by?(user)
     user.present? &&
