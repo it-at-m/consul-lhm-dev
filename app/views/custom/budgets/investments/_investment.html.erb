@@ -44,7 +44,7 @@
           <% if investment.feasible? %>
             <% if investment.should_show_votes? %>
               <div id="<%= dom_id(investment) %>_votes" class="">
-                   <%= render Budgets::Investments::VotesComponent.new(investment) %>
+                 <%= render Budgets::Investments::VotesComponent.new(investment) %>
               </div>
             <% elsif investment.should_show_vote_count? %>
               <div id="<%= dom_id(investment) %>_votes" class="">
