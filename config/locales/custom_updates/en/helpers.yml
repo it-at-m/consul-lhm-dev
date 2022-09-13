@@ -1,0 +1,6 @@
+en:
+  helpers:
+    submit:
+      projekt_livestream:
+        create: "Livestream erstellen"
+        update: "Livestream aktualisieren"

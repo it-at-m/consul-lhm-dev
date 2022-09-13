@@ -4,7 +4,9 @@
 
     <%= render Shared::CommentsFormComponent.new(record) %>
 
-    <% unless record.is_a?(ProjektQuestion) %>
+    <% unless record.is_a?(ProjektQuestion) ||
+        (record.is_a?(Projekt) && record.overview_page?) ||
+        comment_tree.root_comments.where(hidden_at: nil).count < 2 %>
       <%= render Shared::OrderLinksComponent.new("comments", anchor: "tab-comments") %>
     <% end %>
 
@@ -12,3 +14,4 @@
     <%= pagination_links %>
   </div>
 </div>
+

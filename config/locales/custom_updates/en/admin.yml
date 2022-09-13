@@ -5,6 +5,7 @@ en:
         active_projekts: Aktiv Projects
         expired_projekts: Expired Projects
         polls: Polls
+        investment_proposals: Investment Proposals
     tags:
       destroy: Delete
   custom:
@@ -95,6 +96,7 @@ en:
           statuses: Set categories
         deficiency_reports_title: Deficiency reports
         projekts: Projects
+        projekt_managers: Project managers
         legislation: Text edit
       polls:
         questions:
@@ -136,6 +138,8 @@ en:
             event_weblink: Weblink
             name: Events
             page_title: Create notification
+          projekt_managers_tab:
+            name: Project managers
           projekt_map_tab:
             name: Ind. card configuration
           projekt_milestones_tab:
@@ -149,13 +153,38 @@ en:
             notification_title: Title
             page_title: Send message
             title: Send message
+          projekt_arguments_tab:
+            button: Save argument
+            name: Arguments
+            argument_name: Name
+            argument_pro: Pro
+            argument_cons: Cons
+            argument_party: Party
+            argument_position: Position
+            argument_note: Note
+            argument_image: Image
+            argument_created_at: Created at
+            page_title: Arguments
+            title: Arguments
+          projekt_livestreams_tab:
+            submit_button: Save Livestream
+            name: Livestreams
+            page_title: Livestream
+            livestream:
+              url: Livestream link
+              title: Title
+              description: Description
+              starts_at: Starts at
+              platform: Platform
+              add_question: Add question
+              question: Questions
           projekt_page: Project page
           projekt_phase_limitation: Restriction
           projekt_phases: Project phases
           projekt_phases_tab:
             actions: Actions
             activate: Enabled
-            activate_phase: Status
+            activate_phase: Active
             affiliation: Area allocation
             beginning: Start date
             budget_phase: Budget phase
@@ -180,6 +209,7 @@ en:
             projekt_duration: Project information
             projekt_notification_phase: Notificationsphase
             proposal_phase: Proposal phase
+            livestream_phase: Livestreams
             restriction: Participation restriction
             start_date: Start date
             standard_element: Standart element
@@ -196,6 +226,7 @@ en:
             tags: Tags
             tags_enable: Please activate Tags in the Projectsettings Tab
             tags_hint: Please select one or multiple tags in order to suggest them to platform users.
+            refresh_page: If you activated these features already but they are not visible here, please reload this page.
           projekt_settings_tab:
             budget_settings: Budgets
             debates_settings: Debates
@@ -253,19 +284,36 @@ en:
           edit:
             save: Update question
             title: Edit question
+            title_for_livestream: Create question for livestream
           index:
             create: Create question
             title: Short survey
+            attached_to: Angehängt
+            title: Short survey
+            question_options: Question options
+            answers_count: Answers count
+            comments_count: Comments count
+            enable_projekt_list: Activate projekt questions overview
           new:
             create: Update question
             title: Create question
           show_answers_count: Show number of votes in frontend
+        overview_page_tab:
+          title: Project overview page
+          title_footer: Footer
         tabs:
           configuration: Configuration settings
           geozones: Manage geozones
           map_settings: Standard card configuration
           settings: Functions
           legislation_process: Text edit
+          overview_page: Project overview page
+      projekt_managers:
+        index:
+          title: Projekt managers
+          no_projekt_managers: No projekt managers
+        search:
+          title: "Projekt managers: User search"
       settings:
         index:
           extended_features:
@@ -277,6 +325,7 @@ en:
             proposals: Proposals
           extended_options: Advanced configuration settings
           extended_settings: Advanced settings
+          extra_fields: Registration & Verification
           features:
             activate:
               disabled: Project disabled

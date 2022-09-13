@@ -5,4 +5,8 @@ class Milestone < ApplicationRecord
     sorting_order ||= :asc
     order(publication_date: sorting_order, created_at: :asc)
   end
+
+  def projekt
+    milestoneable.is_a?(Projekt) ? milestoneable : nil
+  end
 end

@@ -181,7 +181,7 @@ module ProjektsHelper
   def options_for_projekt_select
     select_options = []
 
-    Projekt.top_level.each do |top_level_projekt|
+    Projekt.regular.top_level.each do |top_level_projekt|
       select_options += top_level_projekt.all_children_projekts.unshift(top_level_projekt).pluck(:name, :id)
     end
 

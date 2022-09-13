@@ -120,6 +120,8 @@ de:
             debates: Diskussionen
             proposals: Vorschläge
             polls: Abstimmungen
+            verification: Verifizierung
+            extra_fields: Abfragefelder
       polls:
         questions:
           show_images: Bilder für Antworten anzeigen
@@ -194,6 +196,7 @@ de:
             proposal_phase: Vorschlagsphase
             voting_phase: Abstimmungsphase
             voting_manage: Abstimmungen verwalten
+            argument_phase: Stimmen
           projekt_settings_tab:
             name: Projektfunktionen
             general_settings: Allgemein

@@ -1,0 +1,9 @@
+<div class="votes">
+  <span class="total-votes">
+    <%= t("debates.debate.votes", count: deficiency_report.votes_score) %>
+  </span>
+
+  <%= render Shared::InFavorAgainstComponent.new(deficiency_report) %>
+
+  <%= render Shared::ParticipationNotAllowedComponent.new(deficiency_report, cannot_vote_text: cannot_vote_text) %>
+</div>

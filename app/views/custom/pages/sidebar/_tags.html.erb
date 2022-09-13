@@ -1,8 +1,8 @@
-<div class="sidebar-divider"></div>
-<h2 class="sidebar-title show-for-medium"><%= t("custom.projekts.page.sidebar.tags.title") %></h2>
-<br>
-
 <% if projekt.tags.category.any? %>
+  <div class="sidebar-divider"></div>
+  <h2 class="sidebar-title show-for-medium"><%= t("custom.projekts.page.sidebar.tags.title") %></h2>
+  <br>
+
   <ul id="categories" class="no-bullet categories">
     <% projekt.tags.category.each do |category| %>
       <li class="inline-block">

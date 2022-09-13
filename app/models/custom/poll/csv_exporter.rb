@@ -20,6 +20,8 @@ class Poll::CsvExporter
 
     def headers
       [
+        "name",
+        "project",
         "starts_at",
         "ends_at",
         "published",
@@ -33,7 +35,6 @@ class Poll::CsvExporter
         "budget_id",
         "related_type",
         "related_id",
-        "projekt_id",
         "show_open_answer_author_name",
         "show_summary_instead_of_questions",
       ]
@@ -41,6 +42,8 @@ class Poll::CsvExporter
 
     def csv_values(poll)
       [
+        poll.name,
+        poll.projekt&.name,
         poll.starts_at,
         poll.ends_at,
         poll.published,
@@ -54,7 +57,6 @@ class Poll::CsvExporter
         poll.budget_id,
         poll.related_type,
         poll.related_id,
-        poll.projekt_id,
         poll.show_open_answer_author_name,
         poll.show_summary_instead_of_questions
       ]

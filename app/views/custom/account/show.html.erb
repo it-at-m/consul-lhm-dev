@@ -134,6 +134,8 @@
                       <span class="icon-check"></span>
                       <%= t("account.show.verified_account") %>
                     </p>
+                  <% elsif extended_feature?("verification.manual_verifications") %>
+                    <%= link_to t("account.show.verify_my_account"), new_residence_path, class: "button success" %>
                   <% elsif current_user.level_two_verified? %>
                     <%= link_to t("account.show.finish_verification"), verification_path, class: "button success" %>
                   <% else %>

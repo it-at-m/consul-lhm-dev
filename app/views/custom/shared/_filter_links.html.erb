@@ -1,0 +1,20 @@
+<ul class="menu simple clear" id="filter-subnav">
+  <li class="show-for-sr"><%= t("#{i18n_namespace}.filter") %>: </li>
+
+  <% valid_filters.each do |filter| %>
+    <% if current_filter == filter %>
+      <li class="is-active"><h2><%= t("#{i18n_namespace}.filters.#{filter}") %></h2></li>
+    <% else %>
+      <% if in_projekt_footer? %>
+        <% link_url =
+          url_for(
+            action: params[:current_tab_path],
+            controller: 'pages', filter: filter, filter_projekt_ids: params[:filter_projekt_ids]
+         ) %>
+      <% else %>
+        <% link_url = current_path_with_query_params(filter: filter, page: 1) %>
+      <% end %>
+      <li><%= link_to t("#{i18n_namespace}.filters.#{filter}"), link_url, remote: (controller_name == 'pages') %></li>
+    <% end %>
+  <% end %>
+</ul>

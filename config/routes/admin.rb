@@ -2,7 +2,7 @@ namespace :admin do
   root to: "dashboard#index"
 
   # custom projekt routes
-  resources :projekts, only: [:index, :show, :create, :update, :destroy] do
+  resources :projekts, only: [:index, :edit, :create, :update, :destroy] do
     resources :settings, controller: 'projekt_settings', only: [:update] do
       member do
         patch :update_default_projekt_footer_tab
@@ -13,12 +13,13 @@ namespace :admin do
     resources :projekt_questions  do
       post "/answers/order_answers", to: "questions/answers#order_answers"
     end
+    resources :projekt_arguments, only: [:create, :update, :destroy]
+    resources :projekt_livestreams, only: [:create, :update, :destroy]
     resources :milestones, controller: "projekt_milestones"
     resources :progress_bars, except: :show, controller: "projekt_progress_bars"
     member do
       get :order_up
       get :order_down
-      get :edit
       patch :liveupdate
       patch :update_standard_phase
       patch :quick_update
@@ -43,7 +44,13 @@ namespace :admin do
     end
     resources :settings,    only: :index
   end
+
   resources :deficiency_reports, only: [:index, :show]
+
+  # custom projekt managers
+  resources :projekt_managers, only: [:index, :create, :destroy] do
+    get :search, on: :collection
+  end
 
 
   resources :organizations, only: :index do

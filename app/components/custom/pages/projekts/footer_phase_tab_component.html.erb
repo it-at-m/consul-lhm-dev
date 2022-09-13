@@ -1,6 +1,6 @@
 <% if phase.phase_activated? %>
   <li id="filter-subnav-<%= phase.resources_name %>" class="page-subnav-tab <%= 'is-active' if phase.resources_name == default_phase_name %>">
-    <%= link_to "/#{params[:id]}/#{phase.name}_footer_tab", remote: true, onclick: '$("#footer-content").addClass("show-loader"); ' do %>
+    <%= link_to link_url, remote: true, onclick: '$("#footer-content").addClass("show-loader"); ' do %>
       <h4>
         <%= t("custom.projekts.page.tabs.#{phase.resources_name}") %>
         <%= "(#{resource_count})" if resource_count.present? %>
@@ -8,19 +8,28 @@
       <div class='tab-info-summary'>
         <% if phase.is_a?(ProjektPhase::MilestonePhase) && resource_count.present?  %>
           <% if phase.projekt.milestones.last.present? %>
-            <span class='time-icon'><%= format_date(phase.projekt.milestones.last.publication_date.to_date) %></span>
+            <i class="far fa-calendar"></i>
+            <span ><%= format_date(phase.projekt.milestones.last.publication_date.to_date) %></span>
           <% end %>
 
-        <% elsif phase.is_a?(ProjektPhase::ProjektNotificationPhase) && resource_count.present? %>
-          <span class='time-icon'><%= format_date(phase.projekt.projekt_notifications.last.updated_at.to_date) %></span>
+        <% elsif phase.is_a?(ProjektPhase::ProjektNotificationPhase) && phase.projekt.projekt_notifications.any? %>
+          <i class="far fa-calendar"></i>
+          <span ><%= format_date(phase.projekt.projekt_notifications.last.updated_at.to_date) %></span>
 
         <% elsif phase.is_a?(ProjektPhase::EventPhase) && resource_count.present? %>
           <% if phase.projekt.projekt_events.sort_by_incoming.first.present? %>
-            <span class='time-icon'><%= format_date(phase.projekt.projekt_events.sort_by_incoming.first.datetime.to_date) %></span>
+            <i class="far fa-calendar"></i>
+            <span ><%= format_date(phase.projekt.projekt_events.sort_by_incoming.first.datetime.to_date) %></span>
           <% end %>
+
+        <% elsif phase.is_a?(ProjektPhase::LivestreamPhase) && resource_count.present? %>
+          <% if phase.projekt.projekt_livestreams.order(starts_at: :desc).first.present? %>
+            <i class="far fa-calendar"></i>
+            <span ><%= format_date(phase.projekt.projekt_livestreams.order(starts_at: :desc).first.starts_at.to_date) %></span>
+          <% end %>
+
         <% elsif phase.start_date.present? && phase.end_date.present? %>
           <span class='time-icon'><%= format_date_range(phase.start_date, phase.end_date) %></span>
-
         <% end %>
 
         <% unless get_projekt_phase_restriction_name(phase, nil, true) == 'no_restriction' %>

@@ -2,12 +2,11 @@
   "use strict";
   App.HTMLEditor = {
     initialize: function() {
-      $("textarea.html-area").each(function() {
+      $("textarea.html-area").each(function(index, element) {
         if ($(this).hasClass("extended-u")) {
           CKEDITOR.replace(this.name, { language: $("html").attr("lang"), toolbar: "extended_user", height: 500 });
-
         } else if ($(this).hasClass("extended-a")) {
-          CKEDITOR.replace(this.name, { language: $("html").attr("lang"), toolbar: "extended_admin", height: 500 });
+          CKEDITOR.replace(this.id, { language: $("html").attr("lang"), toolbar: "extended_admin", height: 500 });
 
         } else {
           CKEDITOR.replace(this.name, { language: $("html").attr("lang") });

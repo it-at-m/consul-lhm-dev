@@ -1,1 +1,3 @@
-<%= render Admin::LivesubmitCheckbox::Component.new(url: update_standard_phase_admin_projekt_path, resource_name: 'default_footer_tab', attribute_name: 'id', id: @projekt.send(phase_name.to_sym).id, current_value: @default_footer_tab_setting.value == projekt_phase.id.to_s ) %>
+<% projekt = projekt_phase.projekt %>
+<% phase_name = projekt_phase.name %>
+<%= render Admin::LivesubmitCheckbox::Component.new(url: update_standard_phase_admin_projekt_path(projekt), resource_name: 'default_footer_tab', attribute_name: 'id', id: projekt.send(phase_name.to_sym).id, current_value: @default_footer_tab_setting.value == projekt_phase.id.to_s ) %>

@@ -1,23 +1,44 @@
 <% if user_signed_in? && current_user.organization? %>
-  <div class="participation-not-allowed" style="display:none" aria-hidden="false">
+  <div class="callout primary">
     <p>
-      <%= t("legislation.questions.participation.organizations") %>
+      <%= t("custom.projekts.projekt_questions.participation_not_allowed.organizations") %>
     </p>
   </div>
-<% elsif user_signed_in? && current_user.unverified? %>
-  <div class="participation-not-allowed" style="display:none" aria-hidden="false">
+
+<% elsif projekt_question.root_question? && projekt.question_phase.expired? %>
+  <div class="callout primary">
     <p>
-      <%= sanitize(t("legislation.questions.participation.verified_only",
+      <%= t("custom.projekts.projekt_questions.participation_not_allowed.phase_expired") %>
+    </p>
+  </div>
+
+<% elsif projekt_question.root_question? && !projekt.question_phase.current? %>
+  <div class="callout primary">
+    <p>
+      <%= t("custom.projekts.projekt_questions.participation_not_allowed.phase_not_yet_started") %>
+    </p>
+  </div>
+
+<% elsif user_signed_in? && current_user.unverified? %>
+  <div class="callout primary">
+    <p>
+      <%= sanitize(t("custom.projekts.projekt_questions.participation_not_allowed.not_verified",
           verify_account: link_to_verify_account)) %>
     </p>
   </div>
+
 <% elsif !user_signed_in? %>
-  <div class="participation-not-allowed" style="display:none" aria-hidden="false">
-    <%= sanitize(t("legislation.questions.participation.unauthenticated",
-          signin: link_to_signin, signup: link_to_signup)) %>
+  <div class="callout primary">
+    <p>
+      <%= sanitize(t("custom.projekts.projekt_questions.participation_not_allowed.login_to_answer",
+                     signin: link_to_signin, signup: link_to_signup)) %>
+    </p>
   </div>
-<% elsif !projekt.question_phase.active? %>
-  <div class="participation-not-allowed" style="display:none" aria-hidden="false">
-    <%= t("legislation.questions.participation.debate_phase_not_open") %>
+
+<% elsif projekt_question.root_question? && !projekt.question_phase.active? %>
+  <div class="callout primary">
+    <p>
+      <%= t("custom.projekts.projekt_questions.participation_not_allowed.phase_not_active") %>
+    </p>
   </div>
 <% end %>

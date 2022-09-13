@@ -31,6 +31,9 @@ de:
           new:
             privacy_link: Datenschutzbestimmung
             terms: Mit der Registrierung akzeptieren Sie die %{terms} und %{privacy}
+        gender:
+          male: männlich
+          female: weiblich
     gdpr_notice:
       accept: Akzeptieren
       link_text: Mehr Infos
@@ -78,6 +81,8 @@ de:
         account_link: Konto
         admin_link: Administration
         home_link: Start Seite
+        projekt_events_link: Veranstaltungen
+        projekt_management: Projektmanager
         notification_item:
           no_notifications: Keine Benachrichtigungen
         title_html: Öffentlichkeitsbeteiligung
@@ -136,9 +141,12 @@ de:
       verify_account_link_short: verifizieren
     votes:
       debate_phase_expired: Die Phase ist bereits abgeschlossen.
+      debate_phase_not_current: Die Phase ist nicht aktiv.
       geo_restricted: Sie sind aufgrund von Gebiets- beschränkungen nicht berechtigt teilzunehmen.
-      not_verified: Sie müssen sich %{verify_account}, um teilnehmen zu können
+      not_verified: Sie müssen sich %{verify_account}, um teilnehmen zu können.
       proposal_phase_expired: Die Phase ist bereits abgeschlossen.
+      proposal_phase_not_current: Die Phase ist nicht aktiv.
+      not_votable: Etwas ist schief gelaufen, bitte wenden Sie sich an den Administrator.
     welcome:
       active_projekt_cards:
         title: Aktive Beteiligung
@@ -154,6 +162,10 @@ de:
     welcome_launch:
       p1: Hier entsteht die neue Beteiligungsplattform der Stadt %{org_name}
       p2: Unser Go-Live ist am %{date}!
+    shared_components:
+      collapse_text:
+        show_more: "Zeige mehr"
+        show_less: "Zeige weniger"
   date:
     formats:
       long: '%d. %B %Y'

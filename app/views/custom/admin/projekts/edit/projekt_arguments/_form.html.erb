@@ -1,0 +1,44 @@
+<%= form_for(projekt_argument, url: url) do |f| %>
+  <%= f.hidden_field :tab, value: "#tab-projekt-arguments" %>
+  <%= f.hidden_field :namespace, value: @namespace %>
+
+  <div class='small-12 medium-7'>
+    <div class="d-flex">
+      <div class="d-flex d-flex-start">
+        <%= f.radio_button :pro, true, label: false, required: true, id: "projekt_argument_pro_#{f.object.id}" %>
+        <%= f.label "pro_#{f.object.id}", t("custom.admin.projekts.edit.projekt_arguments_tab.argument_pro") %>
+      </div>
+
+      <div class="d-flex d-flex-start margin-left">
+        <%= f.radio_button :pro, false, label: false, required: true, id: "projekt_argument_cons_#{f.object.id}" %>
+        <%= f.label "cons_#{f.object.id}", t("custom.admin.projekts.edit.projekt_arguments_tab.argument_cons") %>
+      </div>
+    </div>
+  </div>
+
+  <div class='small-12 medium-7'>
+    <%= f.text_field :name, { id: "projekt_argument_name_#{f.object.id}", label: t("custom.admin.projekts.edit.projekt_arguments_tab.argument_name"), required: true } %>
+  </div>
+
+  <div class='small-12 medium-7'>
+    <%= f.text_field :party, { id: "projekt_argument_party_#{f.object.id}", label: t("custom.admin.projekts.edit.projekt_arguments_tab.argument_party") } %>
+  </div>
+
+  <div class='small-12 medium-7'>
+    <%= f.text_field :position, { id: "projekt_argument_position_#{f.object.id}", label: t("custom.admin.projekts.edit.projekt_arguments_tab.argument_position"), required: true } %>
+  </div>
+
+  <div class='small-12 medium-7'>
+    <%= f.text_area :note, { id: "projekt_argument_note_#{f.object.id}", label: t("custom.admin.projekts.edit.projekt_arguments_tab.argument_note"), required: true } %>
+  </div>
+
+  <div class='small-12 medium-7 margin-bottom'>
+    <%= f.file_field 'image_attributes[attachment]', { required: f.object.new_record?, id: "projekt_argument_image_#{f.object.id}", label: t("custom.admin.projekts.edit.projekt_arguments_tab.argument_image") } %>
+    <%= f.hidden_field 'image_attributes[title]', value: 'photo' %>
+    <%= f.hidden_field 'image_attributes[user_id]', value: current_user.id %>
+  </div>
+
+  <div>
+    <%= f.submit(t("custom.admin.projekts.edit.projekt_arguments_tab.button"), class: "button") %>
+  </div>
+<% end %>

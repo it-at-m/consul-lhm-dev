@@ -1,4 +1,11 @@
-<li>
+<% if @current_milestone == milestone %>
+  <% milestone_timeline_class = 'current-milestone' %>
+<% elsif @current_milestone.present? && milestone.publication_date > @current_milestone.publication_date %>
+  <% milestone_timeline_class = 'future-milestone' %>
+<% end %>
+
+
+<li class=<%= milestone_timeline_class %>>
   <div class="milestone-content">
 
     <% if milestone.custom_date.present? %>
@@ -25,7 +32,7 @@
       </p>
     <% end %>
 
-    <%= image_tag(milestone.image_url(:large), { id: "image_#{milestone.id}", alt: milestone.image.title, class: "margin" }) if milestone.image.present? %>
+    <%= image_tag(milestone.image.variant(:large), { id: "image_#{milestone.id}", alt: milestone.image.title, class: "margin" }) if milestone.image.present? %>
 
     <p>
       <%= sanitize_and_auto_link milestone.description %>
@@ -40,7 +47,7 @@
 
           <% milestone.documents.each do |document| %>
               <%= link_to document.title,
-                      document.attachment.url,
+                      document.attachment,
                       target: "_blank",
                       rel: "nofollow" %><br>
               <small>

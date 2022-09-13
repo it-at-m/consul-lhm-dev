@@ -1,0 +1,18 @@
+<div class="projekt-new-question-notification">
+  <div class="projekt-new-question-notification--title">
+    <%= t("custom.projekts.projekt_questions.new_question_notification", question_title: question.title) %>
+  </div>
+
+  <div class="projekt-new-questions-notification-links-section">
+    <%= link_to projekt_projekt_question_path(question.projekt, question.id, format: :js), remote: true, class: "quiz-next-link js-projekt-question-new" do %>
+      <div class="quiz-next">
+          <span>
+            <%= t("custom.projekts.projekt_questions.go_to_question") %>
+          </span>
+      </div>
+    <% end %>
+    <% if question.projekt.question_list_enabled? %>
+      <%= link_to t("custom.projekts.projekt_questions.all_questions"), projekt_projekt_questions_path(question.projekt, current_projekt_question_id: question.id, format: :js), remote: true, class: 'projekt-all-questions-notification-link js-projekt-question-new' %>
+    <% end %>
+  </div>
+</div>

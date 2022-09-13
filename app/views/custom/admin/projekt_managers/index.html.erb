@@ -1,0 +1,38 @@
+<h2 class="inline-block"><%= t("custom.admin.projekt_managers.index.title") %></h2>
+
+<%= render "admin/shared/user_search", url: search_admin_projekt_managers_path %>
+
+<div id="projekt_managers">
+  <% if @projekt_managers.any? %>
+    <h3><%= page_entries_info @projekt_managers %></h3>
+
+    <table>
+      <thead>
+        <th scope="col"><%= Moderator.human_attribute_name(:name) %></th>
+        <th scope="col" class="small-6"><%= Moderator.human_attribute_name(:email) %></th>
+        <th scope="col" class="small-3"><%= t("admin.shared.actions") %></th>
+      </thead>
+      <tbody>
+        <% @projekt_managers.each do |projekt_manager| %>
+          <tr>
+            <td>
+              <%= projekt_manager.name %>
+            </td>
+            <td>
+              <%= projekt_manager.email %>
+            </td>
+            <td>
+              <%= render Admin::Roles::TableActionsComponent.new(projekt_manager) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= paginate @projekt_managers %>
+  <% else %>
+    <div class="callout primary">
+      <%= t("custom.admin.projekt_managers.index.no_projekt_managers") %>
+    </div>
+  <% end %>
+</div>

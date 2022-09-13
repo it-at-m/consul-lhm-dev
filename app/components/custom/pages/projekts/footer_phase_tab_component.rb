@@ -8,6 +8,14 @@ class Pages::Projekts::FooterPhaseTabComponent < ApplicationComponent
     @resource_count = resource_count
   end
 
+  def link_url
+    if phase.projekt.overview_page?
+      url_for(controller: 'projekts', action: "#{phase.name}_footer_tab", order: params[:order])
+    else
+      "/#{params[:id]}/#{phase.name}_footer_tab"
+    end
+  end
+
   private
 
   def phase_name(phase)

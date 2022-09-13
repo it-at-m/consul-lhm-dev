@@ -1,0 +1,8 @@
+<li class="nav-element top-level-item js-access-top-level-menu js-prevent-key-scroll"
+    <%= "aria-label='#{t('custom.links.menu.projekts_overview')}'" if placement == 'desktop' %>
+    <%= "tabindex=0" if placement == 'desktop' %>
+>
+  <div class="flyout-item-name projekt-name">
+    <%= link_to t('custom.layouts.header.projekt_events_link'), projekt_events_path, class: '', tabindex: ( placement == 'desktop' ? '-1' : '0' ), aria: { hidden: true } %>
+  </div>
+</li>

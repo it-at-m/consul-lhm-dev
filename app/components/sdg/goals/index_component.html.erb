@@ -14,6 +14,8 @@
   <%= link_list(*goal_links, class: "sdg-goal-list") %>
 
   <% phases.each do |phase| %>
+    <% next unless phase.cards.exists? %>
+
     <section class="sdg-phase" id="sdg_phase_<%= phase.kind %>">
       <header>
         <h2 class="title"><%= phase.title %></h2>

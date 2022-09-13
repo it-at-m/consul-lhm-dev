@@ -1,0 +1,30 @@
+<div class="column help-header">
+  <h1>
+    <i class="fas fa-code-branch"></i>
+    <%= t('custom.projekts.projekt_events.index.title') %>
+  </h1>
+</div>
+
+<div class="column small-12 medium-9">
+  <%= render Projekts::ProjektEvents::List.new(projekt_events: @projekt_events, show_projekt_link: true) %>
+</div>
+
+<div class="small-12 medium-3 column">
+  <div class="custom-content-block--margin-bottom">
+    <%= render_custom_block "projekt_events_index_sidebar" %>
+  </div>
+
+  <%= render "shared/social_share",
+      share_title: t("custom.pages.social_share.share"),
+      title: t("custom.projekts.projekt_events.index.social_share.title"),
+      url: url_for(only_path: false),
+      description: t("custom.projekts.projekt_events.index.social_share.description", domain: request.domain),
+      mobile: t("custom.projekts.projekt_events.index.social_share.description", domain: request.domain)
+  %>
+
+  <aside class="margin-bottom">
+  </aside>
+</div>
+
+
+<%= paginate @projekt_events %>

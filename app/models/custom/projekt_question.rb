@@ -7,12 +7,19 @@ class ProjektQuestion < ApplicationRecord
   include Globalizable
 
   belongs_to :author, -> { with_hidden }, class_name: "User", inverse_of: :projekt_questions
-  # belongs_to :projekt, foreign_key: "projekt_question_id", inverse_of: :questions
   belongs_to :projekt
+  belongs_to :projekt_livestream, optional: true
 
-  has_many :question_options, -> { order(:id) }, class_name: "ProjektQuestionOption", foreign_key: "projekt_question_id",
-                                                 dependent: :destroy #, inverse_of: :question
-  has_many :answers, class_name: "ProjektQuestionAnswer", foreign_key: "projekt_question_id", dependent: :destroy #, inverse_of: :question
+  has_many :question_options, -> { order(:id) },
+            class_name: "ProjektQuestionOption",
+            foreign_key: "projekt_question_id",
+            dependent: :destroy
+  has_many(
+    :answers,
+    class_name: "ProjektQuestionAnswer",
+    foreign_key: "projekt_question_id",
+    dependent: :destroy
+  )
   has_many :comments, as: :commentable, inverse_of: :commentable, dependent: :destroy
 
   accepts_nested_attributes_for :question_options, reject_if: proc { |attributes| attributes.all? { |k, v| v.blank? } }, allow_destroy: true
@@ -22,32 +29,79 @@ class ProjektQuestion < ApplicationRecord
 
   scope :sorted, -> { order("id ASC") }
 
+  scope :root_questions, -> {
+    where(projekt_livestream_id: nil)
+  }
+
+  scope :livestream_questions, -> {
+    where.not(projekt_livestream_id: nil)
+  }
+
   def self.base_selection(scoped_projekt_ids = Projekt.ids)
     where(projekt_id: scoped_projekt_ids)
   end
 
+  def root_question?
+    projekt_livestream_id.nil?
+  end
+
+  def livestream_question?
+    projekt_livestream_id.present?
+  end
+
+  def base_query_for_navigation
+    base_query = projekt.questions.sorted
+
+    if root_question?
+      base_query.root_questions
+    elsif livestream_question?
+      base_query.where(projekt_livestream_id: projekt_livestream_id)
+    end
+  end
+
+  def sibling_questions
+    if root_question?
+      projekt.questions.root_questions
+    elsif projekt_livestream.present?
+      projekt_livestream.projekt_questions
+    end
+  end
+
   def next_question_id
-    @next_question_id ||= projekt.questions.where("id > ?", id).sorted.limit(1).ids.first
+    return @next_question_id if @next_question_id.present?
+
+    @next_question_id ||= next_questions.ids.first
+  end
+
+  def next_questions
+    base_query_for_navigation.where("id > ?", id)
   end
 
   def previous_question_id
-    @previous_question_id ||= projekt.questions.where("id < ?", id).sorted.ids.last
+    @previous_question_id ||= base_query_for_navigation.where("id < ?", id).ids.last
   end
 
   def first_question_id
-    @first_question_id ||= projekt.questions.sorted.limit(1).ids.first
+    @first_question_id ||= base_query_for_navigation.ids.first
+  end
+
+  def most_recent_question_id
+    @most_recent_question_id ||= base_query_for_navigation.ids.last
   end
 
   def answer_for_user(user)
     answers.find_by(user: user)
   end
 
-  def comments_for_verified_residents_only?
-    true
-  end
-
   def comments_allowed?(current_user)
-    current_user.present?
+    return false if comments_closed?
+    return false if current_user.nil?
+
+    if root_question?
+      projekt.question_phase.participation_open?
+    else
+      true
+    end
   end
 
   def comments_closed?

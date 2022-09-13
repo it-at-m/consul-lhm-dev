@@ -118,7 +118,12 @@
         } else if ( process == "deficiency-reports") {
           route = "/deficiency_reports/" + e.target.options.id + "/json_data"
         } else if ( process == "projekts") {
-          route = "/projekts/" + e.target.options.id + "/json_data"
+          if (e.target.options.proposal_id) {
+            route = "/proposals/" + e.target.options.proposal_id + "/json_data"
+          }
+          else {
+            route = "/projekts/" + e.target.options.id + "/json_data"
+          }
         } else {
           route = "/investments/" + e.target.options.id + "/json_data"
         }
@@ -135,7 +140,7 @@
 
       // TODO: add projekts link
       getPopupContent = function(data) {
-        if (process == "proposals") {
+        if (process == "proposals" || data.proposal_id) {
           return "<a href='/proposals/" + data.proposal_id + "'>" + data.proposal_title + "</a>";
         } else if ( process == "deficiency-reports" ) {
           return "<a href='/deficiency_reports/" + data.deficiency_report_id + "'>" + data.deficiency_report_title + "</a>";
@@ -268,6 +273,7 @@
               marker.options.id = coordinates.deficiency_report_id
             } else if (process == "projekts") {
               marker.options.id = coordinates.projekt_id
+              marker.options.proposal_id = coordinates.proposal_id
             } else {
               marker.options.id = coordinates.investment_id
             }

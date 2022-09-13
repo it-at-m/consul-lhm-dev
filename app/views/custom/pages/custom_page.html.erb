@@ -4,7 +4,7 @@
 <style>
   <% if @custom_page.image.present? %>
     .custom-page-banner {
-      background-image: url("<%=@custom_page.image.attachment.url%>");
+      background-image: url("<%= url_for(@custom_page.image.attachment) %>");
       background-size: cover;
       background-position: center center;
     }
@@ -37,7 +37,7 @@
             <%= render 'custom_page_content' %>
           </div>
 
-          <div class="small-12 medium-3 column margin-bottom">
+          <div class="projekt-sidebar small-12 medium-3 column margin-bottom">
             <%= render partial: 'pages/sidebar', locals: { projekt: @custom_page.projekt } %>
           </div>
         </div>

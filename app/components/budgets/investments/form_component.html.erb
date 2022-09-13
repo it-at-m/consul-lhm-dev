@@ -75,9 +75,12 @@
       </div>
     <% end %>
 
-    <div>
-      <%= f.text_field :organization_name %>
-    </div>
+
+    <% if current_user.administrator? %>
+      <div>
+        <%= f.text_field :organization_name %>
+      </div>
+    <% end %>
   </fieldset>
 
   <div class="actions">

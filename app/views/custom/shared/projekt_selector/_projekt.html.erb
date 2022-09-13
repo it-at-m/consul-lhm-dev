@@ -29,7 +29,7 @@
 
   <div class='projekt-details'>
     <div class='projekt-name' id=<%= "#{dom_id(projekt)}_name" %> >
-      <%= projekt.page.title %>
+      <%= projekt.name_for_resource_creation(resource) %>
     </div>
 
     <% if projekt_phase.present? && projekt.has_active_phase?(controller_name) && !projekt_feature?(projekt, "general.hide_additional_info_in_projekt_selector") %>

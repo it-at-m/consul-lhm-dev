@@ -1,0 +1,58 @@
+<div id="<%= dom_id(projekt_event) %>" class="projekt-event-item">
+  <div class="projekt-event-item-calendar-column">
+    <div class="projekt-event-item-calendar">
+      <div class="projekt-event-item-calendar-dayname">
+        <%= projekt_event.datetime.strftime('%b').upcase %>
+      </div>
+      <div class="projekt-event-item-calendar-daynumber">
+        <%= projekt_event.datetime.strftime('%d') %>
+      </div>
+      <% if projekt_event.end_datetime.present? %>
+        <div class="projekt-event-item-calendar--enddatetime">
+          <div class="projekt-event-item-calendar--separator">
+            -
+          </div>
+        <div class="projekt-event-item-calendar-dayname">
+          <%= projekt_event.end_datetime.strftime('%b').upcase %>
+        </div>
+          <div class="projekt-event-item-calendar-daynumber">
+            <%= projekt_event.end_datetime.strftime('%d') %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="projekt-event-item-values">
+    <h3 class="projekt-event-item-values--title">
+      <% if @show_projekt_link && projekt_event.projekt.published? %>
+        <%= link_to(projekt_event.title, projekt_event.projekt.page.url) %>
+      <% else %>
+        <%= projekt_event.title %>
+      <% end %>
+    </h3>
+    <div class="projekt-event-item-values--details-row">
+      <div class="projekt-event-item-values--details-row-column">
+        <i class="fa fa-clock"></i><%= projekt_event.datetime.strftime('%d %B %Y %H:%M') %>
+        <% if projekt_event.end_datetime.present? %>
+          -
+          <%= projekt_event.end_datetime.strftime('%d %B %Y %H:%M') %>
+        <% end %>
+      </div>
+      <% if projekt_event.location.present? %>
+        <div class="projekt-event-item-values--details-row-column"><i class="fa fa-map-marker-alt"></i><%= projekt_event.location %></div>
+      <% end %>
+      <% if projekt_event.weblink.present? %>
+        <div class="projekt-event-item-values--details-row-column"><i class="fa fa-globe"></i><a href="<%= projekt_event.weblink %>"><%= projekt_event.weblink %></a></div>
+      <% end %>
+    </div>
+    <% if projekt_event.description.present? %>
+      <%= render Shared::CollapseTextComponent.new(size: :small) do |component| %>
+        <% component.inner_content do %>
+          <div class="projekt-event-item--description-text">
+            <%= helpers.auto_link_already_sanitized_html AdminWYSIWYGSanitizer.new.sanitize(projekt_event.description) %>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

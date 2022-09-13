@@ -1,5 +1,9 @@
 $("#<%= dom_id(@proposal) %>_votes").html("<%= j render("proposals/votes", proposal: @proposal) %>");
-$("div[data-voted-badge=<%= @proposal.id %>]").removeClass('hide');
+
+<% if @proposal.voters.include? current_user %>
+  $("div[data-voted-badge=<%= @proposal.id %>]").removeClass('hide');
+<% end %>
+
 App.Followable.update("<%= dom_id(@follow.followable) %>",
                       "<%= j render("follows/follow_button", follow: @follow) %>",
                       "<%= j render("layouts/flash") %>")

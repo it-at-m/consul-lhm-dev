@@ -4,10 +4,32 @@
 
 .comment-list,
 .comment-list .comment-list {
-  border-left: 2px solid lightgray;
+  border-left: 2px solid #d3d3d3;
   padding-left: 2rem;
 }
 
 .comment-body .comment-user.is-admin {
-  background: #F7EED0;
+  background: #f7eed0;
+}
+
+.comment-votes {
+  .comment-votes-controls {
+    display: inline;
+  }
+
+  .participation-not-allowed {
+    padding: 0.5rem;
+  }
+}
+
+// disabled comment vote buttons
+
+.comment-votes button:disabled,
+.comment-votes .in-favor button:disabled:hover,
+.comment-votes .against button:disabled:hover {
+  color: #4a4a4a;
+}
+
+.comment-votes button:disabled:active {
+  outline: none;
 }

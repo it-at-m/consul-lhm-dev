@@ -22,6 +22,7 @@
   <%= hidden_field_tag :latitude, map_location.latitude %>
   <%= hidden_field_tag :longitude, map_location.longitude %>
   <%= hidden_field_tag :zoom, map_location.zoom %>
+  <%= hidden_field_tag :namespace, params[:controller].include?('projekt_management') ? 'projekt_management' : '' %>
 
   <div class="small-12 medium-6 large-4 margin-top">
     <%= submit_tag t("admin.settings.index.map.form.submit"),

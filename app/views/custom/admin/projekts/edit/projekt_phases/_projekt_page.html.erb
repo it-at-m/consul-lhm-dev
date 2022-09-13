@@ -1,0 +1,39 @@
+<table class="cms-page-list">
+  <thead>
+    <tr>
+      <th><%= t("admin.site_customization.pages.page.title") %></th>
+      <th><%= t("admin.site_customization.pages.page.slug") %></th>
+      <th><%= t("admin.site_customization.pages.page.created_at") %></th>
+      <th><%= t("admin.site_customization.pages.page.updated_at") %></th>
+      <th><%= t("admin.site_customization.pages.page.status") %></th>
+      <th><%= t("admin.actions.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr id="<%= dom_id(@projekt.page) %>">
+      <td><%= @projekt.page.title %></td>
+      <td><%= @projekt.page.slug %></td>
+      <td><%= I18n.l @projekt.page.created_at, format: :short %></td>
+      <td><%= I18n.l @projekt.page.created_at, format: :short %></td>
+      <td><%= t("admin.site_customization.pages.page.status_#{@projekt.page.status}") %></td>
+      <td>
+        <%= render Admin::TableActionsComponent.new(@projekt.page,
+                                                    actions: [:edit],
+                                                    edit_path: namespaced_polymorphic_path(namespace, @projekt.page, action: :edit)) do |actions| %>
+          <%= actions.link_to t("admin.site_customization.pages.page.see_cards"),
+                              namespaced_polymorphic_path(namespace, @projekt.page.cards.new),
+                              class: "cards-link" %>
+
+          <% if @projekt.page.status == "published" %>
+            <%= actions.link_to t("admin.site_customization.pages.index.see_page"),
+                                @projekt.page.url,
+                                target: "_blank",
+                                class: "show-link" %>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+
+  </tbody>
+</table>

@@ -1,22 +1,26 @@
-<div class='small-12 column'>
+<div class='projekt-question-list small-12 column'>
   <% projekt_questions.each do |question| %>
-    <div class="debate-block projekt-question-list-item margin-bottom">
+    <div class="debate-block projekt-question-list--item margin-bottom">
       <div class="debate-title">
-        <h4><%= link_to question.title, projekt_projekt_question_path(projekt, question.id, format: :js), class: 'js-projekt-question-next' %></h4>
+        <h4><%= link_to question.title, projekt_projekt_question_path(projekt, question.id, format: :js), remote: true, class: 'js-projekt-question-next' %></h4>
       </div>
       <div class="debate-meta">
         <% if question.question_options.size > 1 %>
           <span class="projet-question-list-item-answers-count">
             <i class="fas fa-poll-h"></i>
-            <%= link_to t('custom.projekts.projekt_questions.answers_count', count: question.answers_count), projekt_projekt_question_path(projekt, question.id, format: :js), class: 'js-projekt-question-next' %></h4>
+            <%= link_to t('custom.projekts.projekt_questions.answers_count', count: question.answers_count), projekt_projekt_question_path(projekt, question.id, format: :js), remote: true, class: 'js-projekt-question-next' %></h4>
           </span>
-       <% end %>
+        <% end %>
         <% if question.comments_enabled? %>
-           ·
-          <span class="icon-comments" aria-hidden="true"></span> <span class="debate-comments">
-            <%= link_to t("custom.projekts.projekt_questions.comments_count", count: question.comments.count), projekt_projekt_question_path(projekt, question.id, format: :js, anchor: 'comments'), class: 'js-projekt-question-next' %>
-          </span> · <span class="debate-date"><%= format_date question.created_at %></span>
-       <% end %>
+          ·
+          <span class="icon-comments" aria-hidden="true"></span>
+          <%= link_to t("custom.projekts.projekt_questions.comments_count", count: question.comments.count), projekt_projekt_question_path(projekt, question.id, format: :js, anchor: 'comments'), remote: true, class: 'js-projekt-question-next' %>
+          ·
+          <i class="fas fa-vote-yea"></i>
+          <%= link_to t("custom.projekts.projekt_questions.comment_votes_count", count: question.comments.map(&:cached_votes_total).sum), projekt_projekt_question_path(projekt, question.id, format: :js, anchor: 'comments'), remote: true, class: 'js-projekt-question-next' %>
+        <% end %>
+
+        · <span class="debate-date"><%= format_date question.created_at %></span>
       </div>
     </div>
   <% end %>

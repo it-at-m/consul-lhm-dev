@@ -1,0 +1,62 @@
+<% provide :title do %>
+  <%= t("admin.header.title") %> - <%= t("admin.menu.site_customization.pages") %> - <%= @page.title %>
+<% end %>
+<%= back_link_to namespaced_polymorphic_path(params[:controller].split('/').first, (@page.projekt || @page), action: :edit) %>
+<div id="cards">
+  <h2 class="inline-block">
+    <%= @page.title %> <%= t("admin.site_customization.pages.cards.cards_title") %></h2>
+
+  <div class="float-right">
+    <%= link_to t("admin.site_customization.pages.cards.create_card"),
+                namespaced_polymorphic_path(params[:controller].split('/').first, @page.cards.new, action: :new), class: "button" %>
+  </div>
+
+  <% if @cards.any? %>
+    <table>
+      <thead>
+        <tr>
+          <th><%= ::Widget::Card.human_attribute_name(:title) %></th>
+          <th><%= ::Widget::Card.human_attribute_name(:description) %></th>
+          <th><%= "#{::Widget::Card.human_attribute_name(:link_text)} / #{::Widget::Card.human_attribute_name(:link_url)}" %></th>
+          <th><%= t("admin.shared.image") %></th>
+          <th><%= t("admin.shared.actions") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cards.each do |card| %>
+          <% next unless card.persisted? %>
+          <tr id="<%= dom_id(card) %>" class="homepage-card">
+            <td>
+              <%= card.label %>
+              <%= card.title %>
+            </td>
+            <td>
+              <%= card.description %>
+            </td>
+            <td>
+              <%= card.link_text %>
+              <%= card.link_url %>
+            </td>
+            <td>
+              <% if card.image.present? %>
+                <%= link_to t("admin.shared.show_image"), card.image.variant(:large),
+                            title: card.image.title, target: "_blank" %>
+              <% end %>
+            </td>
+
+            <td>
+              <%= render Admin::TableActionsComponent.new(card,
+                actions: [:edit, :destroy],
+                edit_path: namespaced_polymorphic_path(params[:controller].split('/').first, card, action: :edit),
+                destroy_path: namespaced_polymorphic_path(params[:controller].split('/').first, card),
+              ) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p><%= t("admin.site_customization.pages.cards.no_cards") %></p>
+  <% end %>
+
+</div>

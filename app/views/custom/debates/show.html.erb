@@ -10,14 +10,13 @@
               social_url: debate_url(@debate),
               social_title: @debate.title,
               social_description: @debate.description,
-              twitter_image_url: (@debate.image.present? ? @debate.image_url(:thumb) : nil),
-              og_image_url: (@debate.image.present? ? @debate.image_url(:thumb) : nil) %>
+              twitter_image_url: (@debate.image.present? ? polymorphic_path(@debate.image) : nil),
+              og_image_url: (@debate.image.present? ? polymorphic_path(@debate.image) : nil) %>
 <% end %>
 
   <main>
   <% cache [locale_and_user_status(@debate),
             @debate,
-            @debate_votes,
             @debate.author,
             @debate.projekt,
             @debate.projekt.top_parent,

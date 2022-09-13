@@ -1,6 +1,7 @@
 class ProjektPhase::VotingPhase < ProjektPhase
   def phase_activated?
-    projekt.polls.any?# { |poll| poll.current? }
+    # projekt.polls.any?# { |poll| poll.current? }
+    active?
   end
 
   def name

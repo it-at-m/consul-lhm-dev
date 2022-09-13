@@ -44,7 +44,9 @@ class Admin::SiteCustomization::PagesController < Admin::SiteCustomization::Base
       if @page.projekt.present? && @page.published? && params[:site_customization_page][:origin] == 'public_page'
         page_path(@page.slug)
       elsif @page.projekt.present?
-        edit_admin_projekt_path(@page.projekt)
+        namespace = params[:controller].split('/').first
+
+        namespaced_polymorphic_path(namespace, @page.projekt, action: :edit)
       else
         admin_site_customization_pages_path
       end

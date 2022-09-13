@@ -1,0 +1,8 @@
+en:
+  projekt_management:
+    header:
+      title: Project management
+    dashboard:
+      index:
+        title: Project management
+        description: "Welcome to Projekt Management Panel for %{org}."

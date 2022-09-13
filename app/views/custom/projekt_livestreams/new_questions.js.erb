@@ -1,0 +1,42 @@
+<% @new_questions.each do |question| %>
+  $(".js-livestream-livequestion").append("<%= j render("custom/projekt_livestreams/new_question", question: question ) %>");
+<% end %>
+
+<% if @new_questions.present? %>
+  var livequestionElement = document.querySelector(".js-livestream-livequestion");
+
+  if (livequestionElement) {
+    livequestionElement.dataset.url = "<%= new_questions_projekt_livestream_path(@current_projekt_livestream.id, current_projekt_question_id: @current_projekt_question_id&.id, most_recent_question_id: @new_questions.last.id) %>";
+  }
+<% end %>
+
+<% if @new_comments.present? %>
+  <% if @current_projekt_question.present? %>
+
+    <% @commentable = @current_projekt_question %>
+  <% end %>
+
+  <% @new_comments.each do |comment| %>
+    <% if comment.root? -%>
+      var parent_id = "";
+    <% else -%>
+      var parent_id = "#" + "<%= "comment_#{comment.parent_id}" %>";
+      var responses_count_html = "<%= j(render "comments/responses_count", count: comment.parent.children.size, comment: comment) %>"
+      App.Comments.update_responses_count(parent_id, responses_count_html);
+    <% end -%>
+
+    App.Comments.add_comment(parent_id, "<li><%= j(render comment) %></li>");
+  <% end %>
+
+  var commentsLiveupdateWrapper = document.querySelector('.js-comments-liveupdate-wrapper');
+
+  if (commentsLiveupdateWrapper) {
+    commentsLiveupdateWrapper.dataset.lastCommentId = "<%= @new_comments.last.id %>";
+  }
+<% end %>
+
+<% if @current_projekt_question.present? %>
+  <% @current_projekt_question.question_options.each do |question_option| %>
+    $('.js-projekt-answer-form input[name="projekt_question_answer[projekt_question_option_id]"][value="<%= question_option.id %>"]').siblings('.js-projekt-question-option--answers-count').html("<%= question_option.answers_count %>")
+  <% end %>
+<% end %>

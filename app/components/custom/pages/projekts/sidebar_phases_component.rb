@@ -4,14 +4,19 @@ class Pages::Projekts::SidebarPhasesComponent < ApplicationComponent
 
   def initialize(projekt)
     @projekt = projekt
-    @phases = projekt.regular_projekt_phases.sort{ |a, b| a.default_order <=> b.default_order }.each{ |x| x.start_date = Date.today if x.start_date.nil? }.sort_by{ |a| a.start_date }
+
+    @phases = projekt.projekt_phases.regular_phases.sort do |a, b|
+      a.default_order <=> b.default_order
+    end.each do |x|
+      x.start_date = Date.today if x.start_date.nil?
+    end.sort_by{ |a| a.start_date }
+
     @milestone_phase = projekt.milestone_phase
   end
 
   private
 
-  def phase_name(phase, part=nil)
-    return t("custom.projekts.phase_name.#{phase.name}_details.#{part}") if part
+  def phase_name(phase)
     t("custom.projekts.phase_name.#{phase.name}")
   end
 

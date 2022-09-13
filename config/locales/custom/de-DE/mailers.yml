@@ -5,7 +5,7 @@ de:
     comment:
       hi: Hallo
       new_comment_by: Es gibt einen neuen Kommentar von <strong>%{commenter}</strong>
-      subject: Jemand hat Ihre %{commentable} kommentiert.
+      subject: Jemand hat Ihren Beitrag kommentiert.
       title: Neuer Kommentar
     config:
       manage_email_subscriptions: Wenn Sie keine E-Mails mehr empfangen möchten, ändern Sie bitte Ihre Einstellungen in

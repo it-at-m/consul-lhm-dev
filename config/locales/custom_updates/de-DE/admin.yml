@@ -5,6 +5,7 @@ de:
         active_projekts: Aktive Beteiligung
         expired_projekts: Abgeschlossene Projekte
         polls: Abstimmungen
+        investment_proposals: Investitionsvorschläge
     tags:
       destroy: Löschen
   custom:
@@ -92,6 +93,10 @@ de:
             color: Farbe
             icon: Icon
             title: Name
+      geozones:
+        geozone:
+          postal_codes: Postleitzahlen
+          postal_codes_help: Kommaseparierte Liste der Postleitzahlen, die zu dieser Geozone gehören
       menu:
         deficiency_reports:
           categories: Kategorien festlegen
@@ -102,9 +107,12 @@ de:
           statuses: Status definieren
         deficiency_reports_title: Mängelmelder
         projekts: Projekte
+        projekt_managers: Projektmanager*innen
         legislation: Textbearbeitung
       polls:
         questions:
+          show:
+            description: Bezeichnung
           answers:
             notice:
               delete:
@@ -138,11 +146,14 @@ de:
             button: Event erstellen
             event_created_at: Hergestellt in
             event_datetime: Datum
+            event_end_datetime: Endtermin
             event_location: Veranstaltungsort
             event_title: Veranstaltungstitel
             event_weblink: Weblink
             name: Veranstaltungen
             page_title: Veranstaltungen
+          projekt_managers_tab:
+            name: Projektmanager*innen
           projekt_map_tab:
             name: Ind. Kartenkonfiguration
           projekt_milestones_tab:
@@ -156,31 +167,64 @@ de:
             notification_title: Titel
             page_title: Nachricht senden
             title: Nachricht senden
+          projekt_arguments_tab:
+            button: Stimme erlstellen
+            name: Stimmen
+            argument_name: Name
+            argument_pro: Pro
+            argument_cons: Contra
+            argument_party: Partei
+            argument_position: Position
+            argument_note: Stimme
+            argument_image: Bild
+            argument_created_at: Created at
+            page_title: Stimmen
+            title: Stimmen
+          projekt_livestreams_tab:
+            submit_button: Livestream erstellen
+            name: Livestreams
+            page_title: Livestreams
+            all_livestreams: Alle Livestreams
+            livestream:
+              url: Livestream link
+              title: Titel
+              description: Bezeichnung
+              starts_at: Startet um
+              platform: Portal
+              add_question: Frage hinzufügen
+              questoins: Kurzumfragen
           projekt_page: Projektseite
           projekt_phase_limitation: Beschränkung
           projekt_phases: Projektphasen
           projekt_phases_tab:
             actions: Aktionen
             activate: Aktiviert
-            activate_phase: Status
+            activate_phase: Aktiviert
             affiliation: Gebietszuordnung
             beginning: Anfangsdatum
             budget_phase: Budgetphase
-            copy_phase_link: Link abrufen
+            copy_phase_link: Link für Tab abrufen
             comment_phase: Kommentarphase
             debate_phase: Diskussionsphase
             default_tab: Standardelement
             end_date: Enddatum
             ending: Enddatum
-            event_phase: Veranstaltungsphase
+            event_phase: Veranstaltungen
+            hint: Einstellungen gelten nur für Tab-Info in der Fußzeile
             information_block_title: Projektinformationen
             link:
-              budget_phase: Budgets
-              voting_phase: Abstimmungen
-              question_phase: Kurzumfragen
-              legislation_process_phase: Textbearbeitung
+              question_phase: Zu den Kurzumfragen
+              voting_phase: Zu den Abstimmungen
+              budget_phase: Zu den Budgets
+              legislation_process_phase: Zur Textbearbeitung
+              argument_phase: Zu den Stimmen
+              notification_phase: Zu den Benachrichtigungen
+              milestone_phase: Zu den Meilensteinen
+              event_phase: Zu den Veranstaltungen
+              livestream_phase: Zu den Livestreams
+              newsfeed_phase: Zu den News-Feeds
             main_block_title: Projektstatus
-            milestone_phase: Umsetzungsphase
+            milestone_phase: Meilensteinphase
             name: Projekteinstellungen
             newsfeed_phase: News-Feed
             page_block_title: Projektseite
@@ -195,6 +239,7 @@ de:
             standard_element: Standardelement
             voting_manage: Abstimmungen verwalten
             voting_phase: Abstimmungsphase
+            livestream_phase: Livestreams
             legislation_process_phase: Textbearbeitungsphase
           projekt_questions_tab:
             name: Kurzumfragen
@@ -206,6 +251,7 @@ de:
             tags: Tags
             tags_enable: Bitte aktivieren Sie Tags in Projektfunktionen Tab
             tags_hint: Klicken Sie auf einen oder mehrere Tags, um Sie für dieses Projekt dem/der Nutzer:in anzubieten.
+            refresh_page: Sollten Sie die Funktionen bereits aktiviert haben, sie werden aber hier nicht angezeigt, dann laden Sie diese Seite bitte neu.
           projekt_settings_tab:
             budget_settings: Budgets
             debates_settings: Diskussion
@@ -267,15 +313,30 @@ de:
             create: Frage erstellen
             enable_projekt_list: Aktivieren Sie eine Übersicht aller Fragen
             title: Kurzumfrage
+            question_options: Antwortmöglichkeiten
+            answers_count: Anzahl der Antworten
+            comments_count: Anzahl der Kommentare
+            attached_to: Angehängt
           new:
             create: Frage aktualisieren
             title: Frage erstellen
+            title_for_livestream: Frage für Livestream erstellen
           show_answers_count: Anzahl der Stimmen im Frontend anzeigen
+        overview_page_tab:
+          title: Projektübersichtseite
+          title_footer: Fußzeile
         tabs:
           configuration: Konfigurationseinstellungen
           geozones: Geozonen verwalten
           map_settings: Standard-Kartenkonfiguration
           settings: Funktionen
+          overview_page: Projektübersichtseite
+      projekt_managers:
+        index:
+          title: Projektmanager*innen
+          no_projekt_managers: Keine Projektmanager*innen vorhanden.
+        search:
+          title: "Projektmanager*innen: Benutzer*innensuche"
       settings:
         index:
           extended_features:
@@ -287,6 +348,7 @@ de:
             proposals: Vorschläge
           extended_options: Erweiterte Konfigurationseinstellungen
           extended_settings: Erweiterte Einstellungen
+          extra_fields: Registrierung & Verifizierung
           features:
             activate:
               disabled: Projekt deaktiviert
@@ -300,8 +362,24 @@ de:
               add_new_image: Banner hinzufügen
               note: "Der Banner sollte mindestens 200 Pixel hoch und 1920 Pixel breit sein. Sie können ein Bild des folgenden Formats hochladen: %{accepted_content_types}, bis zu %{max_file_size} MB."
               title: Seitenbanner
+      users:
+        columns:
+          first_name: Vorname
+          last_name: Nachname
+          street_name: Straße
+          street_number: Hausnummer
+          plz: Postleitzahl
+          city_name: Stadt
+          gender: Geschlecht
+          date_of_birth: Geburtsdatum
+          document_last_digits: Dokument (4 letzten Ziffern)
+          actions: Aktionen
+          action:
+            verify: Verifizieren
       widget:
         card:
           category_options:
             active_projekt: Aktiver Beteiligungsprozess
             archived_projekt: Abgeschlossener Beteiligungsprozess
+      flash:
+        deleted: Gelöscht

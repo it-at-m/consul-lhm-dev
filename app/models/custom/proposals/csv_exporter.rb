@@ -17,10 +17,6 @@ class Proposals::CsvExporter
     end
   end
 
-  def model
-    Proposal
-  end
-
   private
 
     def headers
@@ -30,7 +26,7 @@ class Proposals::CsvExporter
         "title",
         "summary",
         "description",
-        "project_name",
+        "project",
         "responsible_name",
         "author_username",
         "supports",
@@ -45,7 +41,6 @@ class Proposals::CsvExporter
         "published_at",
         "community_id",
         "selected",
-        "projekt_id",
         "latitude",
         "longitude"
       ]
@@ -72,15 +67,14 @@ class Proposals::CsvExporter
         proposal.published_at,
         proposal.community_id,
         proposal.selected,
-        proposal.projekt_id,
         geo_field(proposal.map_location&.latitude),
         geo_field(proposal.map_location&.longitude)
       ]
     end
 
-  def geo_field(field)
-    return nil if field.blank?
+    def geo_field(field)
+      return nil if field.blank?
 
-    "\"#{field}\""
-  end
+      "\"#{field}\""
+    end
 end

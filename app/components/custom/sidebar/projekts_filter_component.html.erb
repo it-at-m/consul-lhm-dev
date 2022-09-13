@@ -47,7 +47,7 @@
           <div id='filter-projekts-archived'>
             <% @top_level_archived_projekts.each do |projekt| %>
               <% if @current_tab_phase&.name == 'budget_phase' %>
-                <%= render Sidebar::ProjektsFilteRadioComponent.new(
+                <%= render Sidebar::ProjektsFilterRadioComponent.new(
                   f: f,
                   projekt: projekt,
                   group: 'archived',

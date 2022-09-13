@@ -3,14 +3,14 @@ class AdminWYSIWYGSanitizer < WYSIWYGSanitizer
     super + %w[
       h1 iframe object param embed
       i input label form button figure figcaption nav
-      section
+      section textarea
     ]
   end
 
   def allowed_attributes
     super + %w[
-      frameborder height width longdesc scrolling title allow allowfullscreen value
-      dir
+      min-height longdesc scrolling title allow value
+      dir action
       role tabindex type for name title
       data-toggle aria-label aria-hidden allowfullscreen
       data-slider data-initial-start data-end data-slider-handle data-slider-fill

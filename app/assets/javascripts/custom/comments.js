@@ -6,6 +6,7 @@
       $(parent_selector + " .responses-count:first").removeClass("collapsed");
       this.update_comments_count();
     },
+
     update_comments_count: function() {
       $(".js-comments-count").each(function() {
         var new_val;
@@ -15,12 +16,15 @@
         $(this).text(new_val);
       });
     },
+
     update_responses_count: function(comment_id, responses_count_html) {
       $(comment_id + "_reply .responses-count").html(responses_count_html);
     },
+
     display_error: function(field_with_errors, error_html) {
       $(error_html).insertAfter($("" + field_with_errors));
     },
+
     reset_form: function(parent_selector) {
       var form_container;
 
@@ -31,17 +35,20 @@
         form_container.hide();
       }
     },
+
     toggle_form: function(id) {
       $("#js-comment-form-" + id).toggle();
     },
+
     toggle_comments: function(el) {
-        $(el).closest(".comment").find(".comment-list:first").toggle("slow");
-        $(el).closest(".responses-count").toggleClass("collapsed");
-        return false;
+      $(el).closest(".comment").find(".comment-list:first").toggle("slow");
+      $(el).closest(".responses-count").toggleClass("collapsed");
+      return false;
     },
+
     initialize: function() {
       $("body .js-hide-comment-replies-by-default").each(function() {
-        App.Comments.toggle_comments( this );
+        App.Comments.toggle_comments(this);
       });
 
       $("body").on("click", ".js-add-comment-link", function() {
@@ -50,7 +57,7 @@
       });
 
       $("body").on("click", ".js-toggle-children", function() {
-        App.Comments.toggle_comments( this );
+        App.Comments.toggle_comments(this);
         return false;
       });
     }

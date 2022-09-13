@@ -3,12 +3,11 @@
 <% end %>
 
 <div id='new-map-layer'>
-  <%= link_to t("custom.map_layer.buttons.new_layer"), new_admin_projekt_map_layer_path(@projekt), class: 'button success margin-bottom', remote: true %>
+  <%= link_to t("custom.map_layer.buttons.new_layer"), new_admin_projekt_map_layer_path(@projekt, namespace: @namespace), class: 'button success margin-bottom', remote: true %>
 </div>
 
 
 <h2><%= t("admin.settings.index.map.title") %></h2>
-
 
 <table>
   <thead>
@@ -21,6 +20,8 @@
 
     <%= form_for(@projekt.map_location, url: admin_projekt_update_map_path(@projekt)) do |f| %>
       <%= hidden_field_tag :tab, '#tab-projekt-map' %>
+      <%= hidden_field_tag :namespace, params[:controller].include?('projekt_management') ? 'projekt_management' : '' %>
+
       <%= render partial: 'custom/admin/projekts/edit/projekt_map/map_settings_form', locals: { map_location_form: f, attribute: :latitude } %>
       <%= render partial: 'custom/admin/projekts/edit/projekt_map/map_settings_form', locals: { map_location_form: f, attribute: :longitude } %>
       <%= render partial: 'custom/admin/projekts/edit/projekt_map/map_settings_form', locals: { map_location_form: f, attribute: :zoom } %>
@@ -28,6 +29,8 @@
 
     <%= form_for(@projekt, url: admin_projekt_path, as: :projekt) do |f| %>
       <%= hidden_field_tag :tab, '#tab-projekt-map' %>
+      <%= hidden_field_tag :namespace, params[:controller].include?('projekt_management') ? 'projekt_management' : '' %>
+
       <%= render partial: 'custom/admin/projekts/edit/projekt_map/map_settings_form', locals: { map_location_form: f, attribute: :color }%>
     <% end %>
 
@@ -35,15 +38,13 @@
 </table>
 
 
-
 <p><%= t("admin.settings.index.map.help") %></p>
 
 <%= render 'custom/admin/projekts/edit/projekt_map/map_form', map_location: @projekt.map_location %>
 
-
-
-<%= form_for(@projekt, url: admin_projekt_path, as: :projekt) do |f| %>
+<%= form_for(@projekt, url: namespace_projekt_path(@projekt), as: :projekt) do |f| %>
   <%= hidden_field_tag :tab, '#tab-projekt-map' %>
+  <%= hidden_field_tag :namespace, params[:controller].include?('projekt_management') ? 'projekt_management' : '' %>
 
   <%= render "shared/errors", resource: @projekt %>
 

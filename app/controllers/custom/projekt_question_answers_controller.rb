@@ -1,6 +1,5 @@
 class ProjektQuestionAnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :verify_resident!
 
   skip_authorization_check
   has_orders %w[most_voted newest oldest]
@@ -12,18 +11,22 @@ class ProjektQuestionAnswersController < ApplicationController
   respond_to :html, :js
 
   def create
-    if @projekt.question_phase.active?
+    if @projekt.question_phase.phase_activated?
       question_option = ProjektQuestionOption.find(params[:projekt_question_answer][:projekt_question_option_id])
       @question = question_option.question
 
-      @answer = ProjektQuestionAnswer.new(
+      @answer = ProjektQuestionAnswer.find_or_initialize_by(
         user: current_user,
-        question_option: question_option,
-        question: @question,
-        **answer_params
+        question: @question
       )
+
+      @answer.assign_attributes(
+        question_option: question_option,
+      )
+
       @answer.save!
       @commentable = @question
+
       @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
       set_comment_flags(@comment_tree.comments)
 
@@ -32,19 +35,26 @@ class ProjektQuestionAnswersController < ApplicationController
   end
 
   def update
-    if @projekt.question_phase.active?
-      question_option = ProjektQuestionOption.find(params[:projekt_question_answer][:projekt_question_option_id])
-      @question = question_option.question
+    question_option = ProjektQuestionOption.find(params[:projekt_question_answer][:projekt_question_option_id])
+    @question = question_option.question
 
+    if question_option.nil?
+      head :not_found and return
+    end
+
+    if @question.root_question? && !@projekt.question_phase.active?
+      head :forbidden
+    else
       @answer = ProjektQuestionAnswer.find(params[:id])
       @answer.update(question_option: question_option)
 
       @answer.save!
       @commentable = @question
+
       @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
       set_comment_flags(@comment_tree.comments)
 
-      render 'custom/projekt_questions/show.js.erb', format: :js
+      render "custom/projekt_questions/show.js.erb"
     end
   end
 
@@ -54,7 +64,7 @@ class ProjektQuestionAnswersController < ApplicationController
     @projekt = Projekt.find(params[:projekt_id])
   end
 
-    def answer_params
-      params.require(:projekt_question_answer).permit(:projekt_question_option_id)
-    end
+  # def answer_params
+  #   params.require(:projekt_question_answer).permit(:projekt_question_option_id)
+  # end
 end

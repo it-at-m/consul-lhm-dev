@@ -4,6 +4,12 @@
 
 <h3 class="inline-block"><%= page_entries_info records %></h3>
 
+<% if params[:controller].include?('projekt_management') && @records.count > 0 %>
+  <%= link_to t("admin.debates.index.download_current_selection"),
+              url_for(controller: params[:controller], action: :index, params: {format: :csv}),
+              class: "small clear" %>
+<% end %>
+
 <%= form_tag form_path, method: :put do %>
   <% unless @records.class_name == 'ProposalNotification' %>
     <p class="float-left">

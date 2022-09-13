@@ -12,6 +12,11 @@
       <br>
       <%= @question.title %>
     </p>
+    <p>
+      <strong><%= t("custom.admin.polls.questions.show.description") %></strong>
+      <br>
+      <%= auto_link_already_sanitized_html wysiwyg(@question.description) %>
+    </p>
 
     <p>
       <strong><%= t("admin.questions.show.author") %></strong>

@@ -1,7 +1,3 @@
-class Admin::ProjektProgressBarsController < Admin::ProgressBarsController
-  private
-
-    def progressable
-      Projekt.find(params[:projekt_id])
-    end
+class Admin::ProjektProgressBarsController < Admin::BaseController
+  include ProjektProgressBarActions
 end

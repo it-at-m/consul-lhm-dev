@@ -50,7 +50,7 @@ class Shared::CommentsComponent < ApplicationComponent
       if params[:current_tab_path].present?
         paginate comment_tree.root_comments, params: { action: params[:current_tab_path] }, remote: true
       else
-        paginate comment_tree.root_comments, params: { anchor: "comments" }
+        paginate comment_tree.root_comments, params: { anchor: "comments" }, remote: true
       end
     end
 end

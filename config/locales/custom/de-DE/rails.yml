@@ -9,7 +9,7 @@ de:
       - Fr
       - Sa
     abbr_month_names:
-      - 
+      -
       - Jan
       - Feb
       - Mär
@@ -35,7 +35,7 @@ de:
       long: "%B %d, %Y"
       short: "%b %d"
     month_names:
-      - 
+      -
       - Januar
       - Februar
       - März
@@ -195,9 +195,9 @@ de:
   time:
     am: vormittags
     formats:
-      datetime: "%Y-%m-%d %H:%M:%S"
-      default: "%a, %d %b %Y %H:%M:%S %z"
-      long: "%B %d, %Y %H:%M"
-      short: "%d %b %H:%M"
+      datetime: "%d. %B %Y %H:%M:%S"
+      default: "%d. %B %Y %H:%M:%S"
+      long: "%d. %B %Y %H:%M:%S"
+      short: "%d. %B %H:%M"
       api: "%Y-%m-%d %H"
     pm: nachmittags

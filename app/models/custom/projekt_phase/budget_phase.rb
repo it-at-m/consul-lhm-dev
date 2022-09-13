@@ -1,6 +1,7 @@
 class ProjektPhase::BudgetPhase < ProjektPhase
   def phase_activated?
-    projekt.budget.present?
+    # projekt.budget.present?
+    active?
   end
 
   def name

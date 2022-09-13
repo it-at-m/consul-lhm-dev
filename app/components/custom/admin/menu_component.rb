@@ -62,6 +62,18 @@ class Admin::MenuComponent < ApplicationComponent
       ]
     end
 
+    def projekt_managers_link
+      [
+        t("custom.admin.menu.projekt_managers"),
+        admin_projekt_managers_path,
+        controller_name == "projekt_managers"
+      ]
+    end
+
+    def profiles?
+      %w[administrators projekt_managers organizations officials moderators valuators managers users].include?(controller_name)
+    end
+
     def settings?
       controllers_names = ["settings", "tags", "geozones", "images", "content_blocks",
                            "local_census_records", "imports"]

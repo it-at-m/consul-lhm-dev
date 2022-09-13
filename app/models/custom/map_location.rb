@@ -21,7 +21,10 @@ class MapLocation < ApplicationRecord
 
   def get_pin_color
     set_object
-    if @proposal.present? && @proposal.projekt.present?
+
+    if @proposal&.projekt&.overview_page?
+      "#009900"
+    elsif @proposal.present? && @proposal.projekt.present?
       @proposal.projekt.color
     elsif @deficiency_report.present?
       @deficiency_report.category.color
@@ -32,7 +35,10 @@ class MapLocation < ApplicationRecord
 
   def get_fa_icon_class
     set_object
-    if @proposal.present? && @proposal.projekt.present?
+
+    if @proposal&.projekt&.overview_page?
+      "user"
+    elsif @proposal.present? && @proposal.projekt.present?
       @proposal.projekt.icon
     elsif @deficiency_report.present?
       @deficiency_report.category.icon

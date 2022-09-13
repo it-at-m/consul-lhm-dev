@@ -1,5 +1,7 @@
 <%= form_for(@projekt, url: admin_projekt_path, as: :projekt) do |f| %>
 
+  <%= hidden_field_tag :namespace, @namespace %>
+
   <% if projekt_feature?(@projekt, 'general.enable_sdgs') %>
     <div class="margin-bottom">
       <h2><%= t("custom.admin.projekts.edit.projekt_sdg_tab.sdgs") %></h2>
@@ -26,6 +28,11 @@
   <% else %>
     <div class='margin-bottom'><%= t("custom.admin.projekts.edit.projekt_sdg_tab.tags_enable") %></div>
 
+  <% end %>
+
+
+  <% if !projekt_feature?(@projekt, 'general.enable_sdgs') || !projekt_feature?(@projekt, 'general.enable_tags') %>
+    <div class='margin-bottom'><%= t("custom.admin.projekts.edit.projekt_sdg_tab.refresh_page") %></div>
   <% end %>
 
   <%=f.hidden_field :tag_list_predefined, value: @projekt.tags.reject{|t| !['category'].include?(t.kind)}.map(&:name).join(","), class: "js-tag-list list-tags predefined"%>

@@ -407,7 +407,7 @@ de:
         font_color: Schriftfarbe
         homepage_enabled: "Informations-Tab aktiviert"
       legislation/process/translation:
-        title: Titel des Beteiligungsverfahrens
+        title: Titel des Textes
         summary: Zusammenfassung
         description: Beschreibung
         additional_info: Zusätzliche Information

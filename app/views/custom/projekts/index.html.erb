@@ -14,7 +14,7 @@
 
   <div class="projekts-map-wrapper">
     <div class="map projekts-map not-print">
-      <%= render_map(MapLocation.new(latitude: Setting['map.latitude'], longitude: Setting['map.longitude'], zoom: Setting['map.zoom']), "projekts", false, nil, @projekts_coordinates, MapLayer.general.to_json) %>
+      <%= render_map(MapLocation.new(latitude: Setting['map.latitude'], longitude: Setting['map.longitude'], zoom: Setting['map.zoom']), "projekts", false, nil, @map_coordinates, MapLayer.general.to_json) %>
     </div>
     <div class='expand-overview-map-wrapper'>
       <div class='expand-overview-map small js-expand-overview-map not-print wide'>
@@ -23,10 +23,19 @@
     </div>
   </div>
 
-  <div class='row'>
-    <div class='column small-12 medium-9'>
-      <%= render_custom_block 'projekts_list' %>
-      <%= render Projekts::ProjektListTabsComponent.new(current_active_orders: @current_active_orders) %>
+  <div class='projekt-list-page-container row'>
+    <div class="proejkt-list-tabs-container column show-on-mobile">
+      <%= render_custom_block "projekts_list_before_tabs_#{@current_projekts_order}" %>
+      <%= render Projekts::ProjektListTabsComponent.new(current_order: @current_projekts_order, current_active_orders: @current_active_orders, overview_page: @current_projekt.overview_page?) %>
+      <%= render_custom_block "projekts_list_after_tabs_#{@current_projekts_order}" %>
+    </div>
+
+    <div class='projekt-list column small-12 medium-9'>
+      <div class="proejkt-list-tabs-container show-on-desktop">
+        <%= render_custom_block "projekts_list_before_tabs_#{@current_projekts_order}" %>
+        <%= render Projekts::ProjektListTabsComponent.new(current_order: @current_projekts_order, current_active_orders: @current_active_orders, overview_page: @current_projekt.overview_page?) %>
+        <%= render_custom_block "projekts_list_after_tabs_#{@current_projekts_order}" %>
+      </div>
 
       <% if @projekts.any? %>
         <% Projekt.top_level.each do |top_level_projekt| %>
@@ -35,11 +44,17 @@
           <% end %>
         <% end %>
       <% else %>
-        <%= t('custom.projekts.index.no_projekts') %>
+        <h4 class="text-center">
+          <%= t('custom.projekts.index.no_projekts_for_current_filter') %>
+        </h3>
       <% end %>
     </div>
 
-    <div class='column small-12 medium-3'>
+    <div class='projekt-sidebar column small-12 medium-3'>
+      <div class="custom-content-block--margin-bottom">
+        <%= render_custom_block "projekt_index_sidebar" %>
+      </div>
+
       <% if show_affiliation_filter_in_sidebar? %>
         <%= render "shared/sidebar_filter/geozone_affiliations" %>
       <% end %>
@@ -52,10 +67,47 @@
 
       <%= render "shared/social_share",
           share_title: t("custom.pages.social_share.share"),
-          title: 'Title',
+          title: t("custom.projekts.index.social_share.title"),
           url: url_for(only_path: false),
-          description: 'Description',
-          mobile: 'Description'
+          description: t("custom.projekts.index.social_share.description", domain: request.domain),
+          mobile: t("custom.projekts.index.social_share.description", domain: request.domain)
+      %>
+    </div>
+  </div>
+
+  <%= paginate @projekts %>
+
+  <% if @show_footer %>
+    <nav class="margin-bottom projekt-footer <%= "legislation-process-list" if true %>">
+    <div class="row">
+      <div class="small-12 column">
+        <h3><%= "Beteiligung" %></h3>
+        <div class='footer-phases-filter-subnav'>
+          <ul id='filter-subnav' class='key-dates'>
+            <%= render Pages::Projekts::FooterPhaseTabComponent.new(@overview_page_special_projekt.comment_phase, @current_phase.resources_name, @comments_count) %>
+            <%= render Pages::Projekts::FooterPhaseTabComponent.new(@overview_page_special_projekt.debate_phase, @current_phase.resources_name, @debates_count) %>
+            <%= render Pages::Projekts::FooterPhaseTabComponent.new(@overview_page_special_projekt.proposal_phase, @current_phase.resources_name, @proposals_count) %>
+            <%= render Pages::Projekts::FooterPhaseTabComponent.new(@overview_page_special_projekt.voting_phase, @current_phase.resources_name, @polls_count) %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+      <div id='footer-content'>
+        <% if (@current_phase.present? && @current_phase.phase_activated?) %>
+          <%= render 'shared/loader_spinner' %>
+          <%= render "pages/projekt_footer/#{@current_phase.resources_name}" %>
+        <% end %>
+      </div>
+  <% end %>
+  <div class="row">
+    <div class="column show-on-mobile projekt-mobile-share-buttons">
+      <%= render "shared/social_share",
+          share_title: t("custom.pages.social_share.share"),
+          title: t("custom.projekts.index.social_share.title"),
+          url: url_for(only_path: false),
+          description: t("custom.projekts.index.social_share.description", domain: request.domain),
+          mobile: t("custom.projekts.index.social_share.description", domain: request.domain)
       %>
     </div>
   </div>

@@ -1,6 +1,7 @@
 <div class='map-layer-form'>
   <%= form_for([:admin, @projekt, layer]) do |f| %>
     <%= hidden_field_tag :tab, '#tab-projekt-map' %>
+    <%= hidden_field_tag :namespace, @namespace %>
 
     <div class='row'>
       <div class='column'>

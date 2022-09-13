@@ -7,6 +7,9 @@
       </small>
     <% end %>
   </h3>
+  <p>
+    <%= auto_link_already_sanitized_html wysiwyg(question.description) %>
+  </p>
 
   <div id="<%= dom_id(question) %>_answers" class="padding">
     <%= render "polls/questions/answers", question: question, token: token %>

@@ -133,20 +133,20 @@ span.sidebar-projekt-phases-title {
 // .projekt-phase {
 //   margin-bottom: 1em;
 //   line-height: 1.75;
-// 
-// 
+//
+//
 //   .projekt-phase-button {
 //     margin-top: 0.5em;
 //     margin-bottom: 0.5em;
 //   }
 // }
-// 
+//
 // .debate-phase, .proposals-phase {
 //   margin-bottom: 2em;
 // }
-// 
+//
 // .link-icon {
-// 
+//
 //   &:before {
 //     content: "\f35d";
 //     font-family: "Font Awesome 5 Free";
@@ -205,6 +205,10 @@ li.projekt-navigator.current-projekt::before {
       @media screen and (min-width: 3000px) {
         height: 1200px;
       }
+
+      .map_location {
+        height: 100%;
+      }
     }
 
     .close-button {
@@ -260,7 +264,7 @@ li.projekt-navigator {
   padding-right: 14px;
   color: #878787;
 
-  a { 
+  a {
     color: $brand !important;
   }
 
@@ -341,7 +345,7 @@ li.projekt-navigator[aria-expanded="false"] {
     }
   }
 
-  .custom-page #filter-subnav {
+  .footer-phases-filter-subnav #filter-subnav {
     display: flex;
     overflow-x: scroll;
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
@@ -441,4 +445,6 @@ li.projekt-navigator[aria-expanded="false"] {
   }
 }
 
-
+.card {
+  background: #F4F4F4;
+}

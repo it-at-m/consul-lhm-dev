@@ -1,0 +1,13 @@
+
+
+<%= form_for(@projekt, url: admin_projekt_path(@projekt)) do |f| %>
+  <%= hidden_field_tag :tab, '#tab-projekt-managers' %>
+
+  <div>
+    <%= f.collection_check_boxes :projekt_manager_ids, @projekt_managers, :id, :name do |cb| %>
+      <%= cb.label(class: "projekt_manager_checkbox") { cb.check_box + cb.text } %>
+    <% end %>
+  </div>
+
+  <%= f.submit %>
+<% end %>

@@ -1,21 +1,22 @@
 <div class="collapse projekt-listing">
-
-  <div class='image'>
-    <% if projekt.image.present? %>
-      <% if projekt.page&.published? %>
-        <%= link_to projekt.page.url do %>
-          <%= image_tag projekt.image_url(:medium) %>
+  <div class="projekt-listing--inner-container">
+    <div class='image'>
+      <% if projekt.image.present? %>
+        <% if projekt.page&.published? %>
+          <%= link_to projekt.page.url do %>
+            <%= image_tag projekt.image.variant(:medium) %>
+          <% end %>
+        <% else %>
+          <%= image_tag projekt.image.variant(:medium) %>
         <% end %>
-      <% else %>
-        <%= image_tag projekt.image_url(:medium) %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
 
-  <div class='content'>
-    <h4 class="projekt-title"><%= projekt.page.title %></h4>
-    <p><%= projekt.description %></p>
-    <%= render "shared/tags", taggable: projekt, limit: 5 %>
+    <div class='content'>
+      <h4 class="projekt-title"><%= projekt.page.title %></h4>
+      <p><%= sanitize projekt.description %></p>
+      <%= render "shared/tags", taggable: projekt, limit: 5 %>
+    </div>
   </div>
 
   <% if projekt.page&.published? %>

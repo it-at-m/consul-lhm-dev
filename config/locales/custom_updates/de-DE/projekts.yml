@@ -1,26 +1,37 @@
 de:
   custom:
     projekts:
+      overview_page:
+        projekt_name: Projektübersichtsseite
+        projekt_name_for_proposal: Neuer Projektvorschlag
+        projekt_name_for_debate: Neue Diskussion
+        projekt_name_for_poll: Abtimmung
       backlink: Zur Projektübersicht
       errors:
         presence: Bitte wählen Sie ein Projekt
       index:
         current_projekts: Projekte mit aktiver Beteiligungsphase
         expired_projekts: Abgeschlossene Projekte
-        no_projekts: keine Projekte
+        no_projekts: Keine Projekte
+        no_projekts_for_current_filter: Keine Projekte für aktuellen filter
         title: Projekte
         to_projekt: Zum Projekt
+        social_share:
+          title: Projektübersicht
+          description:  Die Übersicht aller Projekte
       orders:
-        all: 'Alle Projekte'
-        all_title: 'Alle Projekte'
-        expired: Abgeschlossen
-        expired_title: 'Im Reiter "Abgeschlossen" sind Beteiligungsprojekte gelistet, die abgeschlossen sind. Sowohl die Beteiligungsphase, als auch das Projekt an sich.'
-        ongoing: Laufende Projekte
-        ongoing_title: 'Im Reiter "Laufende Projekte" sind Projekte die noch laufen, die Beteiligung aber schon abgeschlossen ist.'
-        underway: Aktive Beteiligung
-        underway_title: 'Im Reiter "Aktive Beteiligung" sind Projekte, bei denen man sich aktuell beteiligen kann.'
-        upcoming: Zukünftige Projektvorhaben
-        upcoming_title: 'Im Reiter "Zukünftige Projektvorhaben" sind Beteiligungsprojekte gelistet, die erst in der Zukunft stattfinden.'
+        index_order_all: 'Alle Projekte'
+        index_order_all_title: 'Alle Projekte'
+        index_order_expired: Abgeschlossen
+        index_order_expired_title: 'Im Reiter "Abgeschlossen" sind Beteiligungsprojekte gelistet, die abgeschlossen sind. Sowohl die Beteiligungsphase, als auch das Projekt an sich.'
+        index_order_ongoing: Laufende Projekte
+        index_order_ongoing_title: 'Im Reiter "Laufende Projekte" sind Projekte die noch laufen, die Beteiligung aber schon abgeschlossen ist.'
+        index_order_underway: Aktive Beteiligung
+        index_order_underway_title: 'Im Reiter "Aktive Beteiligung" sind Projekte, bei denen man sich aktuell beteiligen kann.'
+        index_order_upcoming: Zukünftige Projektvorhaben
+        index_order_upcoming_title: 'Im Reiter "Zukünftige Projektvorhaben" sind Beteiligungsprojekte gelistet, die erst in der Zukunft stattfinden.'
+        index_order_individual_list: "Individuelle Liste"
+        index_order_individual_list_title: "Individuelle Liste"
       page:
         footer:
           budget:
@@ -31,6 +42,7 @@ de:
           event_time: Zeit
           event_title: Veranstaltungstitel
           event_weblink: Weblink
+          event_projekt: Projekt
           no_events: Keine Ereignisse
           title: Kommende Veranstaltungen
         sidebar:
@@ -48,6 +60,8 @@ de:
             participate: Offen für Beteiligung!
           tags:
             title: Kategorien
+          projekt_start: Projektstart
+          projekt_end: Gepl. Fertigstellung
         tabs:
           budget: Budgets
           comments: Kommentare
@@ -58,6 +72,8 @@ de:
           projekt_events: Veranstaltungen
           projekt_notifications: Benachrichtigungen
           projekt_questions: Kurzumfrage
+          projekt_arguments: Stimmen
+          projekt_livestreams: Livestream
           proposals: Vorschläge
           questions: Questions
           legislation_process: Textbearbeitung
@@ -68,16 +84,19 @@ de:
         event_phase: Veranstaltungen
         legislation_process_phase: Textbearbeitungsphase
         milestone_phase: Meilensteine
-        milestone_phase_details:
-          ending: Gepl. Fertigstellung
-          start: Umsetzung
         newsfeed_phase: Newsfeed
         projekt_notification_phase: Benachrichtigungen
         proposal_phase: Vorschläge
         question_phase: Kurzumfrage
         voting_phase: Abstimmungen
+        argument_phase: Stimmen
       projekt_events:
-        orders:
+        index:
+          title: Veranstaltungskalender
+          social_share:
+            title: Veranstaltungen
+            description: "Die Veranstaltungsübersicht von %{domain}"
+        filters:
           all: Alle
           incoming: Kommende
           past: Vergangene
@@ -85,12 +104,35 @@ de:
         back_to_question_list: 'Zurück zur Fragenliste'
         comments_button: Antwort veröffentlichen
         comments_count: "%{count} offene Antworten"
+        comment_votes_count: "%{count} Up- & Downvotes"
         comments_title: Offene Antworten
-        login_to_answer: Sie müssen sich %{signin} oder %{signup}, um an der Kurzumfrage teilzunehmen.
         previous_question: Vorherige Frage
         next_question: Nächste Frage
         first_question: Erste Frage
         answers_count: "%{count} Stimmen"
+        new_question_notification: "Neue Frage: %{question_title}"
+        all_questions: Alle Fragen
+        go_to_question: Zur Frage wechseln
+        participation_not_allowed:
+          login_to_answer: Sie müssen sich %{signin} oder %{signup}, um an der Kurzumfrage teilzunehmen.
+          organizations: Organisationen dürfen sich nicht an der Diskussion beteiligen
+          not_verified: 'Nur verifizierte Benutzer können teilnehmen: %{verify_account}.'
+          phase_expired: Die Beteiligung ist bereits beendet
+          phase_not_yet_started: Die Beteiligung hat noch nicht begonnen
+          phase_not_active: Die Phase ist nicht aktiviert
+      projekt_arguments:
+        pro: Pro
+        cons: Contra
+        fields:
+          name: Name
+          party: Partei
+          position: Position
+          note: Stimme
+      projekt_livestreams:
+        links_title: Livestreams
+        current_livestream: Aktueller Livestream
+        no_livestreams: Keine Livestreams
+        video_platform_not_supported: "Videoplattform wird nicht unterstützt. Unterstützte Plattformen: YouTube, Vimeo"
       selector:
         connected_resources:
           debate_description: Bitte ordnen Sie Ihre Diskussion einem der nachfolgenden Projekte oder Unterprojekte zu. Dies dient dazu, dass die Diskussionen in der Diskussionsübersicht besser auffindbar sind.
@@ -99,7 +141,7 @@ de:
           proposal_title: Zuordnung des Vorschlags zu einem Projekt
         select_placeholder_mandatory_html: Wähle Projekt (verpflichtend)
       sidebar:
-        sdgs: SDG
+        sdgs: SDGs
       sidebar_filter:
         filter_button: Nach Projekte filtern
         title: Projekte

@@ -1,7 +1,6 @@
 <% cache [locale_and_user_status(proposal),
           proposal,
           proposal.voters.count,
-          @proposal_votes,
           proposal.author,
           proposal.projekt,
           proposal.proposal_phase,
@@ -29,7 +28,7 @@
     <div class='columns small-12 medium-3 large-2 show-for-small-only not-print'>
       <% if show_image_thumbnail?(proposal) %>
         <%= link_to namespaced_proposal_path(proposal) do %>
-          <%= image_tag proposal.image_url(:large), alt: proposal.image.title.unicode_normalize %>
+          <%= image_tag proposal.image.variant(:large), alt: proposal.image.title.unicode_normalize %>
         <% end %>
       <% end %>
     </div>
@@ -37,7 +36,7 @@
     <div class="columns small-12 medium-3 large-2 show-for-medium not-print <%= "image-placeholder icon-#{proposal.projekt.icon || "image" }" unless show_image_thumbnail?(proposal)  %>" data-equalizer-watch='main'>
       <% if show_image_thumbnail?(proposal) %>
         <%= link_to namespaced_proposal_path(proposal) do %>
-          <%= image_tag proposal.image_url(:thumb_wider), alt: proposal.image.title.unicode_normalize %>
+          <%= image_tag proposal.image.variant(:thumb_wider), alt: proposal.image.title.unicode_normalize %>
         <% end %>
       <% end %>
     </div>

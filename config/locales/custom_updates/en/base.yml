@@ -31,6 +31,9 @@ en:
           new:
             privacy_link: Privacy policy
             terms: With the registration you accept the %{terms} and %{privacy}
+        gender:
+          male: male
+          female: female
     gdpr_notice:
       accept: Accept
       link_text: More info
@@ -78,6 +81,8 @@ en:
         account_link: Account
         admin_link: Administration
         home_link: Start page
+        projekt_events_link: Events
+        projekt_management: Project manager
         notification_item:
           no_notifications: No notifications
         title_html: Public Participation
@@ -136,9 +141,12 @@ en:
       verify_account_link_short: verify
     votes:
       debate_phase_expired: The phase is already expired.
+      debate_phase_not_current: The phase is not active.
       geo_restricted: You are not eligible to participate due to territorial restrictions.
-      not_verified: You must %{verify_account} to be able to participate
+      not_verified: You must %{verify_account} to be able to participate.
       proposal_phase_expired: The phase is already expired.
+      proposal_phase_not_current: The phase is not active.
+      not_votable: Something went wrong, please contact administrator
     welcome:
       active_projekt_cards:
         title: Active projekts
@@ -154,5 +162,9 @@ en:
     welcome_launch:
       p1: We're building a new citizen participation platform for the city of %{org_name}
       p2: We'll go live on %{date}!
+    shared_components:
+      collapse_text:
+        show_more: "Show more"
+        show_less: "Show less"
   tag_names:
     general: General

@@ -1,0 +1,11 @@
+.tab-milestones .timeline {
+  li.current-milestone::before {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+
+  li.future-milestone::before {
+    background: transparent;
+    border: 3px solid $brand;
+  }
+}

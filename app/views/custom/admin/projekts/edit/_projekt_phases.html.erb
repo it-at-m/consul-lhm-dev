@@ -1,103 +1,15 @@
+<% namespace = params[:controller].split('/').first %>
+
 <h2><%= t("custom.admin.projekts.edit.projekt_phases_tab.main_block_title") %></h2>
 <%= render partial: "admin/projekts/edit/projekt_phases/settings_table", locals: { features: @projekt_features_main } %>
 
+
 <h2><%= t("custom.admin.projekts.edit.projekt_phases_tab.page_block_title") %></h2>
-<table class="cms-page-list">
-  <thead>
-    <tr>
-      <th><%= t("admin.site_customization.pages.page.title") %></th>
-      <th><%= t("admin.site_customization.pages.page.slug") %></th>
-      <th><%= t("admin.site_customization.pages.page.created_at") %></th>
-      <th><%= t("admin.site_customization.pages.page.updated_at") %></th>
-      <th><%= t("admin.site_customization.pages.page.status") %></th>
-      <th><%= t("admin.actions.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-
-    <tr id="<%= dom_id(@projekt.page) %>">
-      <td><%= @projekt.page.title %></td>
-      <td><%= @projekt.page.slug %></td>
-      <td><%= I18n.l @projekt.page.created_at, format: :short %></td>
-      <td><%= I18n.l @projekt.page.created_at, format: :short %></td>
-      <td><%= t("admin.site_customization.pages.page.status_#{@projekt.page.status}") %></td>
-      <td>
-        <%= render Admin::TableActionsComponent.new(@projekt.page, actions: [:edit]) do |actions| %>
-          <%= actions.link_to t("admin.site_customization.pages.page.see_cards"),
-                              admin_site_customization_page_widget_cards_path(@projekt.page),
-                              class: "cards-link" %>
-
-          <% if @projekt.page.status == "published" %>
-            <%= actions.link_to t("admin.site_customization.pages.index.see_page"),
-                                @projekt.page.url,
-                                target: "_blank",
-                                class: "show-link" %>
-          <% end %>
-        <% end %>
-      </td>
-    </tr>
-
-  </tbody>
-</table>
+<%= render partial: "admin/projekts/edit/projekt_phases/projekt_page" %>
 
 
 <h2><%= t("custom.admin.projekts.edit.projekt_phases_tab.information_block_title") %></h2>
-<%= translatable_form_for(@projekt, url: admin_projekt_path, as: :projekt) do |f| %>
-  <%= hidden_field_tag :tab, '#tab-projekt-phases' %>
-  <table class='edit-projekt margin-top'>
-    <thead>
-      <th scope="col" class="small-3"><%= t("custom.admin.projekts.edit.projekt_phases_tab.beginning") %></th>
-      <th scope="col" class="small-3"><%= t("custom.admin.projekts.edit.projekt_phases_tab.ending") %></th>
-    </thead>
-    <tbody>
-
-      <tr style="border-bottom:none;" >
-        <td>
-          <%= f.date_field :total_duration_start, label: false %>
-        </td>
-        <td>
-          <%= f.date_field :total_duration_end, label: false %>
-        </td>
-      </tr>
-
-      <tr style="border-bottom:none;border-top:none;" >
-        <td colspan="2">
-
-          <strong class='geo-affiliation-title'><span class='geo-affiliation-icon'><%= t("custom.admin.projekts.edit.projekt_phases_tab.affiliation") %></span></strong>
-          <%= render partial: 'custom/admin/projekts/edit/projekt_phases/phase_geozone_affiliation', locals: { f: f } %>
-        </td>
-      </tr>
-
-      <tr style='border-bottom:none;border-top:none;'>
-        <td colspan="2">
-          <%= render "shared/globalize_locales", resource: @projekt %>
-          <%= f.translatable_fields do |translations_form| %>
-            <div>
-              <%= translations_form.text_area :description,
-                                              rows: 4, maxlength: 200,
-                                              label: t('custom.admin.projekts.edit.description') %>
-            </div>
-          <% end %>
-        </td>
-      </tr>
-
-      <tr style='border-top:none;'>
-        <td colspan="2">
-          <div class="images">
-            <%= render "images/nested_image", imageable: @projekt, f: f %>
-          </div>
-        </td>
-      </tr>
-
-
-    </tbody>
-  </table>
-
-  <div>
-    <%= f.submit(t("custom.admin.projekts.edit.update"), class: "button success") %>
-  </div>
-<% end %>
-
+<%= render partial: 'admin/projekts/edit/projekt_phases/projekt_information' %>
 
 <h2 class="margin-top-25"><%= t("custom.admin.projekts.edit.projekt_phases_tab.phases_block_title") %></h2>
 
@@ -105,58 +17,55 @@
   <tbody>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt_phase: @projekt.comment_phase,
-      phase_name: 'comment_phase'
+      projekt_phase: @projekt.comment_phase
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt_phase: @projekt.debate_phase,
-      phase_name: 'debate_phase'
+      projekt_phase: @projekt.debate_phase
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt_phase: @projekt.proposal_phase,
-      phase_name: 'proposal_phase'
+      projekt_phase: @projekt.proposal_phase
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt_phase: @projekt.question_phase,
-      phase_name: 'question_phase'
+      projekt_phase: @projekt.question_phase
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt_phase: @projekt.voting_phase,
-      phase_name: 'voting_phase'
+      projekt_phase: @projekt.voting_phase
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt_phase: @projekt.budget_phase,
-      phase_name: 'budget_phase'
+      projekt_phase: @projekt.budget_phase
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt_phase: @projekt.legislation_process_phase,
-      phase_name: 'legislation_process_phase'
+      projekt_phase: @projekt.legislation_process_phase
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt_phase: @projekt.projekt_notification_phase,
-      phase_name: 'projekt_notification_phase'
+      projekt_phase: @projekt.argument_phase
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt_phase: @projekt.milestone_phase,
-      phase_name: 'milestone_phase'
+      projekt_phase: @projekt.projekt_notification_phase
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt_phase: @projekt.event_phase,
-      phase_name: 'event_phase'
+      projekt_phase: @projekt.milestone_phase
     } %>
 
     <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt_phase: @projekt.newsfeed_phase,
-      phase_name: 'newsfeed_phase'
+      projekt_phase: @projekt.event_phase
+    } %>
+
+    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
+      projekt_phase: @projekt.livestream_phase
+    } %>
+
+    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
+      projekt_phase: @projekt.newsfeed_phase
     } %>
   </tbody>
 </table>

@@ -8,6 +8,15 @@
     </li>
   <% end %>
 
+  <% if current_user.projekt_manager? %>
+    <li class='nav-element flyout-item js-access-flyout-menu-item focusable'
+        tabindex="0"
+        aria-label='<%= t("custom.layouts.header.projekt_management") %>'
+        >
+      <%= link_to t("custom.layouts.header.projekt_management"), projekt_management_root_path, tabindex: "-1", aria: { hidden: true } %>
+    </li>
+  <% end %>
+
   <% if current_user.administrator? || current_user.moderator? %>
     <li class='nav-element flyout-item js-access-flyout-menu-item focusable'
         tabindex="0"

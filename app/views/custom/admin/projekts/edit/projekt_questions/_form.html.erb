@@ -2,6 +2,11 @@
 
 <%= translatable_form_for [:admin, @projekt, @projekt_question], url: url do |f| %>
 
+  <%= hidden_field_tag :namespace, @namespace %>
+  <% if @projekt_livestream.present? %>
+    <%= hidden_field_tag :projekt_livestream_id, @projekt_livestream.id %>
+  <% end %>
+
   <%= render "shared/errors", resource: @projekt_question %>
 
   <div class="row">
@@ -31,12 +36,14 @@
       <% end %>
 
       <div class="js-add-fields-container">
-        <div class="small-12 medium-9 column">
+        <div class="column">
           <%= link_to_add_association t("admin.legislation.questions.form.add_option"),
                                     f, :question_options, class: "button hollow", partial: 'admin/projekts/edit/projekt_questions/projekt_question_option_fields' %>
         </div>
       </div>
     </div>
+  </div>
+  <div class="row">
 
     <div class="small-12 medium-6 large-3 clear column end margin-top">
       <%= f.submit(class: "button success expanded", value: t("admin.legislation.questions.#{admin_submit_action(@projekt_question)}.submit_button")) %>

@@ -1,16 +1,24 @@
 <% if projekt_question.question_options.any? %>
   <% path = projekt_answer.persisted? ? projekt_projekt_question_answer_path(projekt, projekt_answer) : projekt_projekt_question_answers_path(projekt) %>
+  <%
+    redirect_path =
+      if user_signed_in? && current_user&.unverified?
+        verification_path
+      elsif !user_signed_in?
+        new_user_session_path
+      end
+  %>
 
-  <%= form_for projekt_answer, url: path, remote: true, html: { class: "controls-stacked js-projekt-answer-form", data: { logined: user_signed_in?, redirect_to: new_user_session_path } } do |f| %>
+  <%= form_for projekt_answer, url: path, remote: true, html: { class: "controls-stacked js-projekt-answer-form", data: { logined_and_verified: user_signed_in? && !current_user&.unverified?, redirect_to: redirect_path } } do |f| %>
     <% projekt_question.question_options.each do |question_option| %>
       <label class="control radio <%= "is-active" if projekt_answer.question_option&.id == question_option.id %>">
-        <% radio_button_disabled = (!user_signed_in? || !projekt.question_phase.active?) %>
+        <% radio_button_disabled = !user_signed_in? || (projekt_question.root_question? && !projekt.question_phase.participation_open?) %>
         <%= f.radio_button :projekt_question_option_id, question_option.id, disabled: radio_button_disabled, label: false %>
-        <span class="control-indicator"></span>
-        <%= question_option.value %>
-        <% if projekt_question.show_answers_count? %>
-          (<%= question_option.answers_count  %>)
-        <% end %>
+        <span class="js-projekt-question-option control-indicator"></span>
+          <%= question_option.value %>
+          <% if projekt_question.show_answers_count? %>
+            (<span class="js-projekt-question-option--answers-count"><%= question_option.answers_count  %></span>)
+          <% end %>
       </label>
     <% end %>
   <% end %>

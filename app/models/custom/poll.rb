@@ -8,6 +8,8 @@ class Poll < ApplicationRecord
   belongs_to :projekt, optional: true, touch: true
   has_many :geozone_affiliations, through: :projekt
 
+  validates :projekt, presence: true
+
   scope :with_current_projekt,  -> { joins(:projekt).merge(Projekt.current) }
 
   def self.base_selection

@@ -1,7 +1,6 @@
 require_dependency Rails.root.join("app", "models", "user").to_s
 
 class User < ApplicationRecord
-
   devise :database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable,
          :timeoutable,
          :trackable, :validatable, :omniauthable, :password_expirable, :secure_validatable,
@@ -13,6 +12,19 @@ class User < ApplicationRecord
   has_many :projekt_questions, foreign_key: :author_id #, inverse_of: :author
   has_many :deficiency_reports, -> { with_hidden }, foreign_key: :author_id, inverse_of: :author
   has_one :deficiency_report_officer, class_name: "DeficiencyReport::Officer"
+  has_one :projekt_manager
+
+  scope :projekt_managers, -> { joins(:projekt_manager) }
+
+  validates :first_name, presence: true, on: :create, if: :first_name_required?
+  validates :last_name, presence: true, on: :create, if: :last_name_required?
+  validates :street_name, presence: true, on: :create, if: :street_name_required?
+  validates :street_number, presence: true, on: :create, if: :street_number_required?
+  validates :plz, presence: true, on: :create, if: :plz_required?
+  validates :city_name, presence: true, on: :create, if: :city_name_required?
+  validates :date_of_birth, presence: true, on: :create, if: :date_of_birth_required?
+  validates :gender, presence: true, on: :create, if: :gender_required?
+  validates :document_last_digits, presence: true, on: :create, if: :document_last_digits_required?
 
   def gdpr_conformity?
     Setting["extended_feature.gdpr.gdpr_conformity"].present?
@@ -35,5 +47,45 @@ class User < ApplicationRecord
 
   def deficiency_report_officer?
     deficiency_report_officer.present?
+  end
+
+  def projekt_manager?
+    projekt_manager.present?
+  end
+
+  def first_name_required?
+    !organization? && !erased? && Setting["extra_fields.registration.first_name"]
+  end
+
+  def last_name_required?
+    !organization? && !erased? && Setting["extra_fields.registration.last_name"]
+  end
+
+  def street_name_required?
+    !organization? && !erased? && Setting["extra_fields.registration.street_name"]
+  end
+
+  def street_number_required?
+    !organization? && !erased? && Setting["extra_fields.registration.street_number"]
+  end
+
+  def plz_required?
+    !organization? && !erased? && Setting["extra_fields.registration.plz"]
+  end
+
+  def city_name_required?
+    !organization? && !erased? && Setting["extra_fields.registration.city_name"]
+  end
+
+  def date_of_birth_required?
+    !organization? && !erased? && Setting["extra_fields.registration.date_of_birth"]
+  end
+
+  def gender_required?
+    !organization? && !erased? && Setting["extra_fields.registration.gender"]
+  end
+
+  def document_last_digits_required?
+    !organization? && !erased? && Setting["extra_fields.registration.document_last_digits"]
   end
 end

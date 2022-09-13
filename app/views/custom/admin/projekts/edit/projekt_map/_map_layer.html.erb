@@ -1,10 +1,10 @@
 <div class='map-layer margin-bottom' id=<%= dom_id(layer) %>>
 
-  <%= link_to edit_admin_projekt_map_layer_path(@projekt, layer), class: 'edit-map-layer', remote: true do %>
+  <%= link_to edit_admin_projekt_map_layer_path(@projekt, layer, namespace: @namespace), class: 'edit-map-layer', remote: true do %>
     <i class="far fa-edit"></i>
   <% end %>
 
-  <%= link_to admin_projekt_map_layer_path(@projekt, layer, tab: '#tab-projekt-map'),
+  <%= link_to admin_projekt_map_layer_path(@projekt, layer, namespace: @namespace, tab: '#tab-projekt-map'),
     class: 'delete-map-layer',
     remote: true,
     method: :delete do %>

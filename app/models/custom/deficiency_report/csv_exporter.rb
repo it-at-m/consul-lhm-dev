@@ -17,10 +17,6 @@ class DeficiencyReport::CsvExporter
     end
   end
 
-  def model
-    deficiency_report
-  end
-
   private
 
     def headers

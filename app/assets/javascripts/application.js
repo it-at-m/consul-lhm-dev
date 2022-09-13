@@ -66,8 +66,7 @@
 //= require jquery.amsify.suggestags
 //= require tags
 //= require users
-//= require votes
-//= require allow_participation
+//= require participation_not_allowed
 //= require advanced_search
 //= require registration_form
 //= require suggest
@@ -94,7 +93,6 @@
 //= require documentable
 //= require imageable
 //= require tree_navigator
-//= require custom
 //= require tag_autocomplete
 //= require polls_admin
 //= require leaflet
@@ -112,36 +110,15 @@
 //= require cookies
 //= require columns_selector
 //= require budget_edit_associations
+//= require budget_hide_money
 //= require datepicker
-//= require projekts
-//= require projekt_selector
-//= require responsive_menu
-//= require click_out_warning
-//= require iframe_filter
-//= require sdg_custom
-//= require geozones
-//= require expand_proposals_map
-//= require gdpr_notice
-//= require map_refresh
-//= require accessibility_fixes
-//= require analytics_cookie_banner_component
-//= require components/shared/footer_phases_component
-//= require projekt_question
-//= require components/admin/livesubmit_checkbox
-//= require orbit_in_popup_fix
-//= require polls_custom
-//= require radio_button_filter
-//= require deficiency_reports
 //= require leaflet.markercluster
 //= require leaflet.locatecontrol
-//= require matomo
-//= require custom_pages
-//= require custom_admin
-//= require moderation_custom
-//= require copy_content
 //= require_tree ./admin
 //= require_tree ./sdg
 //= require_tree ./sdg_management
+//= require custom
+//= require_tree ./custom
 
 var initialize_modules = function() {
   "use strict";
@@ -152,8 +129,7 @@ var initialize_modules = function() {
   App.Users.initialize();
   App.Projekts.initialize();
   App.ResponsiveMenu.initialize();
-  App.Votes.initialize();
-  App.AllowParticipation.initialize();
+  App.ParticipationNotAllowed.initialize();
   App.Tags.initialize();
   App.FoundationExtras.initialize();
   App.LocationChanger.initialize();
@@ -197,6 +173,7 @@ var initialize_modules = function() {
   App.AdminBudgetsWizardCreationStep.initialize();
   App.AdminMachineLearningScripts.initialize();
   App.BudgetEditAssociations.initialize();
+  App.BudgetHideMoney.initialize();
   App.Datepicker.initialize();
   App.ClickOutWarning.initialize();
   App.IframeFilter.initialize();

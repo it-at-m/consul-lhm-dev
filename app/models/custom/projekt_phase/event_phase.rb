@@ -4,10 +4,10 @@ class ProjektPhase::EventPhase < ProjektPhase
   end
 
   def name
-    'event_phase'
+    "event_phase"
   end
 
   def resources_name
-    'projekt_events'
+    "projekt_events"
   end
 end

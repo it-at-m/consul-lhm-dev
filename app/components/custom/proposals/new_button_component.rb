@@ -9,6 +9,12 @@ class Proposals::NewButtonComponent < ApplicationComponent
 
   private
 
+    def show_link?
+      return true if @selected_parent_projekt&.overview_page?
+
+      any_selectable_projekts? || current_user.nil?
+    end
+
     def any_selectable_projekts?
       if @current_tab_phase.present?
         (@selected_parent_projekt.all_parent_ids + [@selected_parent_projekt.id] +  @selected_parent_projekt.all_children_ids).any? { |id| Projekt.find(id).selectable?('proposals', current_user) }
@@ -19,6 +25,7 @@ class Proposals::NewButtonComponent < ApplicationComponent
 
     def link_params_hash
       link_params = {}
+
       link_params[:projekt] = selected_parent_projekt
       link_params[:origin] = 'projekt' if controller_name == 'pages'
       link_params

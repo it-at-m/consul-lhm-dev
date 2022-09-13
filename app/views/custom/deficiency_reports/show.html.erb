@@ -6,8 +6,8 @@
               social_url: deficiency_report_url(@deficiency_report),
               social_title: @deficiency_report.title,
               social_description: @deficiency_report.summary,
-              twitter_image_url: (@deficiency_report.image.present? ? @deficiency_report.image_url(:thumb) : nil),
-              og_image_url: (@deficiency_report.image.present? ? @deficiency_report.image_url(:thumb) : nil) %>
+              twitter_image_url: (@deficiency_report.image.present? ? polymorphic_path(@deficiency_report.image) : nil),
+              og_image_url: (@deficiency_report.image.present? ? polymorphic_path(@deficiency_report.image) : nil) %>
 <% end %>
 <% content_for :canonical do %>
   <%= render "shared/canonical", href: deficiency_report_url(@deficiency_report) %>
@@ -75,7 +75,7 @@
       </div>
 
       <aside class="small-12 medium-3 column">
-        <% if @deficiency_report.can_be_deleted_by?(current_user)  %>
+        <% if can? :destroy, @deficiency_report %>
           <div class="show-actions-menu">
             <%= link_to deficiency_report_path(@deficiency_report),
                         class: "button hollow expanded",

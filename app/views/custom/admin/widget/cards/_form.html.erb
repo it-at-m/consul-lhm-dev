@@ -30,16 +30,6 @@
   </div>
 
   <div class="row">
-    <div class="small-12 medium-6 column">
-      <%= f.select :card_category, [
-        ['', ''],
-        [t('custom.admin.widget.card.category_options.active_projekt'), 'active_projekt'],
-        [t('custom.admin.widget.card.category_options.archived_projekt'), 'archived_projekt']
-      ] %>
-    </div>
-  </div>
-
-  <div class="row">
     <% unless card.header? %>
       <div class="column">
         <%= f.label :columns %>

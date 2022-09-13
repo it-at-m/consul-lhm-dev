@@ -8,7 +8,21 @@
     <span class='sidebar-projekt-phases-title'><%= t('custom.projekts.page.sidebar.phases.participate') %></span>
   <% end %>
 
+  <% if projekt.show_start_date_in_frontend? && projekt.total_duration_start.present? %>
+    <div class="sidebar-projekt-phase active" >
+      <div class='sidebar-projekt-phase-status'>
+      </div>
+      <div class='sidebar-projekt-phase-details'>
+        <span class='sidebar-projekt-phase-name'>
+          <%= t('custom.projekts.page.sidebar.projekt_start') %>
+        </span>
+        <span class='sidebar-projekt-phase-duration'><%= format_date(projekt.total_duration_start) %></span>
+      </div>
+    </div>
+  <% end %>
+
   <% index = 0 %>
+
   <% phases.each do |phase | %>
     <% if phase.phase_activated? %>
       <div class="sidebar-projekt-phase <%= 'active' if phase.current? %>" <%= "aria-expanded=true" if phase.name == 'budget_phase' %>>
@@ -47,40 +61,23 @@
     <% index += 1 %>
   <% end %>
 
-  <% if milestone_phase.phase_activated? %>
-    <div class="sidebar-projekt-phase <%= 'active' if milestone_phase.current? %>" >
+  <% if projekt.show_end_date_in_frontend? && projekt.total_duration_end.present? %>
+    <div class="sidebar-projekt-phase active">
       <div class='sidebar-projekt-phase-status'>
       </div>
       <div class='sidebar-projekt-phase-details'>
         <span class='sidebar-projekt-phase-name'>
-          <%= phase_name(milestone_phase, 'start') %>
+          <%= t('custom.projekts.page.sidebar.projekt_end') %>
 
           <% if projekt_feature?(@projekt, 'general.show_projekt_footer') %>
-            <%= link_to "/#{params[:id]}/#{milestone_phase.name}_footer_tab", remote: true, class: 'js-sidebar-phase-link', data: { index: index } do %>
+            <%= link_to "/#{params[:id]}/#{milestone_phase.name}_footer_tab", remote: true, class: 'js-sidebar-phase-link' do %>
               <i class="fas fa-long-arrow-alt-right"></i>
             <% end %>
           <% end %>
         </span>
-        <span class='sidebar-projekt-phase-duration'><%= format_date(milestone_phase.start_date) %></span>
-      </div>
-      <% index += 1 %>
-    </div>
-
-    <div class="sidebar-projekt-phase" >
-      <div class='sidebar-projekt-phase-status'>
-      </div>
-      <div class='sidebar-projekt-phase-details'>
-        <span class='sidebar-projekt-phase-name'>
-          <%= phase_name(milestone_phase, 'ending') %>
-
-          <% if projekt_feature?(@projekt, 'general.show_projekt_footer') %>
-            <%= link_to "/#{params[:id]}/#{milestone_phase.name}_footer_tab", remote: true, class: 'js-sidebar-phase-link', data: { index: index } do %>
-              <i class="fas fa-long-arrow-alt-right"></i>
-            <% end %>
-          <% end %>
-        </span>
-        <span class='sidebar-projekt-phase-duration'><%= format_date(milestone_phase.end_date) %></span>
+        <span class='sidebar-projekt-phase-duration'><%= format_date(projekt.total_duration_end) %></span>
       </div>
     </div>
   <% end %>
+
 </div>

@@ -1,18 +1,22 @@
 class ProjektPhase::QuestionPhase < ProjektPhase
   def phase_activated?
-    # active?
-    projekt.questions.any?
+    active?
   end
 
   def name
-    'question_phase'
+    "question_phase"
   end
 
   def resources_name
-    'projekt_questions'
+    "projekt_questions"
   end
 
   def default_order
     3
+  end
+
+  def participation_open?
+    projekt.present? &&
+    projekt.question_phase.current?
   end
 end

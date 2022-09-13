@@ -25,14 +25,21 @@ class ConsulFormBuilder < FoundationRailsHelper::FormBuilder
     else
       label = tag.span sanitize(label_text(attribute, options[:label])), class: "checkbox"
 
-      super(attribute, options.merge(label: label, label_options: label_options_for(options)))
+      super(attribute, options.merge(
+        label: label,
+        label_options: { class: "checkbox-label" }.merge(label_options_for(options))
+      ))
     end
   end
 
   def radio_button(attribute, tag_value, options = {})
-    default_label = object.class.human_attribute_name("#{attribute}_#{tag_value}")
+    if options[:label] == false
+      super
+    else
+      default_label = object.class.human_attribute_name("#{attribute}_#{tag_value}")
 
-    super(attribute, tag_value, { label: default_label }.merge(options))
+      super(attribute, tag_value, { label: default_label }.merge(options))
+    end
   end
 
   def select(attribute, choices, options = {}, html_options = {})
@@ -76,14 +83,14 @@ class ConsulFormBuilder < FoundationRailsHelper::FormBuilder
     end
 
     def help_text(attribute, options)
-      if options[:hint]
+      if options[:hint].present?
         tag.span options[:hint], class: "help-text", id: help_text_id(attribute, options)
       end
     end
 
     def help_text_id(attribute, options)
-      if options[:hint]
-        "#{custom_label(attribute, nil, nil).match(/for="([^"]+)"/)[1]}-help-text"
+      if options[:hint].present?
+        "#{custom_label(attribute, "Example", nil).match(/for="([^"]+)"/)[1]}-help-text"
       end
     end
 end

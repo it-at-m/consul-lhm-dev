@@ -2,16 +2,18 @@
 
 <div class='row'>
   <div id="polls-sidebar" class="small-12 medium-3 column">
-    <aside class="margin-bottom">
-      <%= render Sidebar::ProjektsFilterComponent.new(
-        top_level_active_projekts: @top_level_active_projekts,
-        top_level_archived_projekts: @top_level_archived_projekts,
-        scoped_projekt_ids: @scoped_projekt_ids,
-        all_resources: @all_resources,
-        current_tab_phase: @current_tab_phase,
-        current_projekt: @current_projekt
-      ) %>
-    </aside>
+    <% unless @current_projekt.overview_page? %>
+      <aside class="margin-bottom">
+        <%= render Sidebar::ProjektsFilterComponent.new(
+          top_level_active_projekts: @top_level_active_projekts,
+          top_level_archived_projekts: @top_level_archived_projekts,
+          scoped_projekt_ids: @scoped_projekt_ids,
+          all_resources: @all_resources,
+          current_tab_phase: @current_tab_phase,
+          current_projekt: @current_projekt
+        ) %>
+      </aside>
+    <% end %>
   </div>
 
   <div id="polls" class="polls-list spinner-placeholder small-12 medium-9 column">
@@ -27,7 +29,9 @@
       </div>
     <% end %>
 
-    <%= render "shared/filter_subnav", i18n_namespace: "polls.index" %>
+    <% unless @current_projekt.overview_page? %>
+      <%= render "custom/shared/filter_links", i18n_namespace: "polls.index" %>
+    <% end %>
 
     <div class='row'>
       <div class='small-6 column small'>

@@ -4,10 +4,10 @@ class ProjektPhase::ProjektNotificationPhase < ProjektPhase
   end
 
   def name
-    'projekt_notification_phase'
+    "projekt_notification_phase"
   end
 
   def resources_name
-    'projekt_notifications'
+    "projekt_notifications"
   end
 end

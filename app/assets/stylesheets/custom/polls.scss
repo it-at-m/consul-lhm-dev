@@ -6,6 +6,13 @@
   position: relative;
 }
 
+// Poll show
+.polls-show {
+  .poll-question {
+    background: $white;
+  }
+}
+
 // Open answers in results
 
 .show-user-name-with-open-answers {

@@ -10,7 +10,7 @@ class Debates::NewButtonComponent < ApplicationComponent
   private
 
     def any_selectable_projekts?
-      if @current_tab_phase.present?
+      if @current_tab_phase.present? && ! @selected_parent_projekt.overview_page?
         (@selected_parent_projekt.all_parent_ids + [@selected_parent_projekt.id] +  @selected_parent_projekt.all_children_ids).any? { |id| Projekt.find(id).selectable?('debates', current_user) }
       else
         Projekt.top_level.selectable_in_selector('debates', current_user).any?

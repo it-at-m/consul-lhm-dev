@@ -1,0 +1,25 @@
+<div class="projekt-argument-item">
+  <div class="projekt-argument-image-column">
+    <%= image_tag projekt_argument.image.variant(:medium), class: "projekt-argument-image" %>
+  </div>
+  <div class="projekt-argument-titles-column">
+    <div class="projekt-argument-row">
+      <b><%= t('custom.projekts.projekt_arguments.fields.name') %>:</b>
+      <span><%= projekt_argument.name %></span>
+    </div>
+    <% if projekt_argument.party.present? %>
+      <div class="projekt-argument-row">
+        <b><%= t('custom.projekts.projekt_arguments.fields.party') %>:</b>
+        <span><%= projekt_argument.party %></span>
+      </div>
+    <% end %>
+    <div class="projekt-argument-row">
+      <b><%= t('custom.projekts.projekt_arguments.fields.position') %>:</b>
+      <span><%= projekt_argument.position %></span>
+    </div>
+    <div class="projekt-argument-row -note-row">
+      <b><%= t('custom.projekts.projekt_arguments.fields.note') %>:</b>
+      <span><%= projekt_argument.note %></span>
+    </div>
+  </div>
+</div>

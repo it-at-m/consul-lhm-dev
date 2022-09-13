@@ -1,0 +1,4 @@
+$(".projekt-livestream-section").removeClass("show-loader");
+$(".projekt-livestream-section").html("<%= j render(ProjektLivestreams::ShowSection.new(current_projekt_livestream: @current_projekt_livestream, other_livestreams: @other_livestreams)) %>");
+App.CollapseTextComponent.enableHoverButtons();
+App.LivesteamLivequestion.initialize();

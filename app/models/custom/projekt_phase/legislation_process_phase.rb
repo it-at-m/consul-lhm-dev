@@ -1,7 +1,7 @@
 class ProjektPhase::LegislationProcessPhase < ProjektPhase
   def phase_activated?
-    # active?
-    projekt.legislation_process.present?
+    # projekt.legislation_process.present?
+    active?
   end
 
   def name

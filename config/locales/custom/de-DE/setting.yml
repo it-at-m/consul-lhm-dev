@@ -27,6 +27,9 @@ de:
           language_switcher_in_menu_description: Aktivieren Sie den Umschalter für weitere Sprachen in der Navigationsleiste
           links_to_create_resources_in_menu: Button "+ Beitrag erstellen" in Navigation anzeigen
           links_to_create_resources_in_menu_description: Zeigt den Button "+ Beitrag erstellen" in der Hauptnavigation an
+          enable_projekt_events_page: Veranstaltungskalender anzeigen
+          enable_projekt_events_page_description: Zeigt den Veranstaltungskalender in der Hauptnavigation an
+
         gdpr:
           gdpr_conformity: DSGVO-konforme Voreinstellungen
           gdpr_conformity_description: "Aktivieren Sie die DSGVO-konforme Voreinstellungen, um \"privacy by design\" zu gewähren"
@@ -58,6 +61,9 @@ de:
           enable_projekt_filter_description: Zeigt den Projektfilter in der Diskussionsübersichtseite
           enable_my_posts_filter: Meine Beiträge
           enable_my_posts_filter_description: Zeigt einen Filter für meine Beiträge in der Diskussionsübersichtsseite
+        verification:
+          manual_verifications: Manuelle Nutzer*innen-Verifizierung
+          manual_verifications_description: Nutzer*innen müssen manuell verifiziert werden. Beteiligungsformate können auf Nutzer*innen-Gruppen eingeschränkt werden
 
         proposals:
           intro_text_for_proposals: Einleitungstext für Vorschläge
@@ -110,6 +116,28 @@ de:
         set_default_sorting_to_newest: Standardsortierung auf "Neueste" unstellen
         set_default_sorting_to_newest_description: Zeigt standardmäßig die neuesten Beiträge anstatt der aktivsten Beiträge an
 
+      extra_fields:
+        registration: Registrierung
+        verification: Verifizierung
+        first_name: Vorname
+        first_name_description: Aktiviert das Feld "Vorname" bei der Nutzer*innen-Verifizierung
+        last_name: Nachname
+        last_name_description: Aktiviert das Feld "Nachname" bei der Nutzer*innen-Verifizierung
+        street_name: Straße
+        street_name_description: Aktiviert das Feld "Straße" bei der Nutzer*innen-Verifizierung
+        street_number: Hausnummer
+        street_number_description: Aktiviert das Feld "Hausnummer" bei der Nutzer*innen-Verifizierung
+        plz: Postleitzahl
+        plz_description: Aktiviert das Feld "Postleitzahl" bei der Nutzer*innen-Verifizierung
+        city_name: Stadt
+        city_name_description: Aktiviert das Feld "Stadt" bei der Nutzer*innen-Verifizierung
+        date_of_birth: Geburtsdatum
+        date_of_birth_description: Aktiviert das Feld "Geburtsdatum" bei der Nutzer*innen-Verifizierung
+        gender: Geschlecht
+        gender_description: Aktiviert das Feld "Geschlecht" bei der Nutzer*innen-Verifizierung
+        document_last_digits: Personalausweis / Passport (4 letzten Ziffern)
+        document_last_digits_description: Aktiviert das Feld "Personalausweis/Passport" bei der Nutzer*innen-Verifizierung
+
       projekt_feature:
         main:
           activate: Projekt aktivieren
@@ -133,6 +161,8 @@ de:
           set_default_sorting_to_newest_description: Zeigt standardmäßig die neuesten Beiträge anstatt der aktivsten Beiträge an
           show_projekt_footer: Fußzeile aktivieren
           show_projekt_footer_description: Aktiviert die Fußzeile am unteren Ende des Projektes
+          show_in_individual_list: Projekt in individueller Liste anzeigen
+          show_in_individual_list_description: Zeigt das Projekt in einer individuellen Liste an
         sidebar:
           show_phases_in_projekt_page_sidebar: Projektphasen
           show_phases_in_projekt_page_sidebar_description: Aktivieren Sie die Projektphasen in der rechten Seitenleiste der Projektseite
@@ -231,7 +261,7 @@ de:
           enable_summary_description: "Zeigt das Feld \"Zusammenfassung\" in den Vorschlägen an"
         milestones:
           newest_first: Neueste Meilensteine zuerst anzeigen
-          newest_first_description: Sortiert die Meilensteine absteigend mit dem neuesten Datum zuerst 
+          newest_first_description: Sortiert die Meilensteine absteigend mit dem neuesten Datum zuerst
 
 
       deficiency_reports:

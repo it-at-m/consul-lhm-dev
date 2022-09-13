@@ -13,6 +13,8 @@ class Setting < ApplicationRecord
       key.rpartition(".").first
     elsif %w[extended_option].include? prefix
       key.rpartition(".").first
+    elsif %w[extra_fields].include? prefix
+      key.rpartition(".").first
     else
       "configuration"
     end
@@ -151,7 +153,7 @@ class Setting < ApplicationRecord
         "sdg.process.budgets": false,
         "sdg.process.legislation": false,
         "sdg.process.projekts": true,
-        "projekts.overview_page": true,
+
         "projekts.show_archived.sidebar": true,
         "projekts.show_module_links_in_flyout_menu": true,
         "projekts.second_level_projekts_in_active_filter": false,
@@ -170,6 +172,7 @@ class Setting < ApplicationRecord
         "extended_feature.general.extended_editor_for_users": true,
         "extended_feature.general.language_switcher_in_menu": false,
         "extended_feature.general.links_to_create_resources_in_menu": false,
+        "extended_feature.general.enable_projekt_events_page": false,
         "extended_option.general.title": 'Öffentlichkeitsbeteiligung',
         "extended_option.general.subtitle": 'in der Stadt CONSUL',
         "extended_option.general.launch_date": '',
@@ -190,43 +193,58 @@ class Setting < ApplicationRecord
 
         "extended_feature.debates.intro_text_for_debates": true,
         "extended_feature.debates.head_image_for_debates": true,
-        # "extended_feature.debates.show_report_button_in_debate_sidebar": true,
-        # "extended_feature.debates.show_related_content": true,
         "extended_feature.debates.enable_projekt_filter": true,
         "extended_feature.debates.enable_my_posts_filter": true,
 
         "extended_feature.proposals.intro_text_for_proposals": true,
-        # "extended_feature.proposals.quorum_for_proposals": false,
         "extended_feature.proposals.enable_proposal_support_withdrawal": true,
         "extended_feature.proposals.show_selected_proposals_in_proposal_sidebar": false,
         "extended_feature.proposals.show_suggested_proposals_in_proposal_sidebar": false,
-        # "extended_feature.proposals.show_report_button_in_proposal_sidebar": false,
-        # "extended_feature.proposals.show_follow_button_in_proposal_sidebar": false,
-        # "extended_feature.proposals.show_community_button_in_proposal_sidebar": true,
-        # "extended_feature.proposals.show_related_content": true,
-        # "extended_feature.proposals.enable_proposal_notifications_tab": true,
-        # "extended_feature.proposals.enable_proposal_milestones_tab": true,
         "extended_feature.proposals.enable_projekt_filter": true,
         "extended_feature.proposals.enable_my_posts_filter": true,
-        # "extended_feature.proposals.enable_summary": true,
         "extended_option.proposals.max_active_proposals_per_user": 100,
         "extended_option.proposals.description_max_length": 6000,
 
         "extended_feature.polls.intro_text_for_polls": true,
-        # "extended_feature.polls.intermediate_poll_results_for_admins": true,
-        # "extended_feature.polls.enable_comments": true,
-        # "extended_feature.polls.additional_information": false,
-        # "extended_feature.polls.additional_info_for_each_answer": true,
         "extended_feature.polls.enable_projekt_filter": true,
 
-        # "extended_feature.budget_investments.show_report_button_in_sidebar": true,
-        # "extended_feature.budget_investments.show_follow_button_in_sidebar": true,
-        # "extended_feature.budget_investments.show_community_button_in_sidebar": true,
-        # "extended_feature.budget_investments.show_related_content": true,
-        # "extended_feature.budget_investments.show_implementation_option_fields": true,
-        # "extended_feature.budget_investments.enable_investment_milestones_tab": true,
+        "extended_feature.deficiency_reports.enable_my_posts_filter": true,
 
-        "extended_feature.deficiency_reports.enable_my_posts_filter": true
+        "extended_feature.projekts_overview_page_navigation.show_in_navigation": true,
+        "extended_feature.projekts_overview_page_navigation.show_index_order_all": true,
+        "extended_feature.projekts_overview_page_navigation.show_index_order_underway": true,
+        "extended_feature.projekts_overview_page_navigation.show_index_order_ongoing": true,
+        "extended_feature.projekts_overview_page_navigation.show_index_order_upcoming": true,
+        "extended_feature.projekts_overview_page_navigation.show_index_order_expired": true,
+        "extended_feature.projekts_overview_page_navigation.show_index_order_individual_list": true,
+
+        "extended_feature.projekts_overview_page_footer.show_in_index_order_all": true,
+        "extended_feature.projekts_overview_page_footer.show_in_index_order_underway": true,
+        "extended_feature.projekts_overview_page_footer.show_in_index_order_ongoing": true,
+        "extended_feature.projekts_overview_page_footer.show_in_index_order_upcoming": true,
+        "extended_feature.projekts_overview_page_footer.show_in_index_order_expired": true,
+        "extended_feature.projekts_overview_page_footer.show_in_index_order_individual_list": true,
+
+        "extended_feature.verification.manual_verifications": true,
+
+        "extra_fields.registration.first_name": false,
+        "extra_fields.registration.last_name": false,
+        "extra_fields.registration.street_name": false,
+        "extra_fields.registration.street_number": false,
+        "extra_fields.registration.plz": false,
+        "extra_fields.registration.city_name": false,
+        "extra_fields.registration.date_of_birth": false,
+        "extra_fields.registration.gender": false,
+        "extra_fields.registration.document_last_digits": false,
+        "extra_fields.verification.first_name": false,
+        "extra_fields.verification.last_name": false,
+        "extra_fields.verification.street_name": false,
+        "extra_fields.verification.street_number": false,
+        "extra_fields.verification.plz": false,
+        "extra_fields.verification.city_name": false,
+        "extra_fields.verification.date_of_birth": false,
+        "extra_fields.verification.gender": false,
+        "extra_fields.verification.document_last_digits": false
       }
     end
 
@@ -237,6 +255,5 @@ class Setting < ApplicationRecord
     def destroy_obsolete
       Setting.all.each{ |setting| setting.destroy unless defaults.keys.include?(setting.key.to_sym) }
     end
-
   end
 end
