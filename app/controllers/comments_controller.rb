@@ -76,7 +76,7 @@ class CommentsController < ApplicationController
       if administrator_comment?
         @comment.administrator_id = current_user.administrator.id
       elsif moderator_comment?
-        @comment.moderator_id = current_user.moderator.id
+        @comment.moderator_id = current_user.moderator&.id
       end
     end
 
