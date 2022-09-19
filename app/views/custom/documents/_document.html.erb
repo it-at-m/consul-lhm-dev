@@ -3,14 +3,14 @@
     <%= link_to t("documents.buttons.download_document"),
                 document.attachment, target: "_blank",
                 rel: "nofollow", class: "button hollow medium float-right" %>
-  <% end %>
 
-  <strong><%= document.title %></strong>
-  <br>
-  <small>
-    <%= document.humanized_content_type %>&nbsp;|&nbsp;
-    <%= number_to_human_size(document.attachment_file_size, precision: 2) %>
-  </small>
+    <strong><%= document.title %></strong>
+    <br>
+    <small>
+      <%= document.humanized_content_type %>&nbsp;|&nbsp;
+      <%= number_to_human_size(document.attachment_file_size, precision: 2) %>
+    </small>
+  <% end %>
 
   <% if can?(:destroy, document) %>
     <br>
