@@ -10,12 +10,11 @@ Rails.application.config.assets.version = "1.0"
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.precompile += %w[ckeditor/config.js]
-Rails.application.config.assets.precompile += %w[ckeditor/plugins/lineutils/*]
-Rails.application.config.assets.precompile += %w[ckeditor/plugins/mjAccordion/*]
-Rails.application.config.assets.precompile += %w[ckeditor/plugins/youtube/*]
-Rails.application.config.assets.precompile += %w[ckeditor/plugins/abbr/*]
-Rails.application.config.assets.precompile += %w[ckeditor/plugins/iframe/*]
-Rails.application.config.assets.precompile += %w[ckeditor/plugins/widget/*]
+
+Rails.application.config.assets.precompile += Dir.glob("#{Rails.root}/app/assets/javascripts/ckeditor/plugins/**/*.js")
+Rails.application.config.assets.precompile += Dir.glob("#{Rails.root}/app/assets/javascripts/ckeditor/plugins/**/*.png")
+Rails.application.config.assets.precompile += Dir.glob("#{Rails.root}/app/assets/javascripts/ckeditor/plugins/**/*.css")
+
 Rails.application.config.assets.precompile += %w[stat_graphs.js]
 Rails.application.config.assets.precompile += %w[dashboard_graphs.js]
 Rails.application.config.assets.precompile += %w[application-rtl.css]
