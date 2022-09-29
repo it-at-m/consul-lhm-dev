@@ -6,7 +6,7 @@ module UsersHelper
   end
 
   def ck_editor_class(current_user)
-    if extended_feature?("general.extended_editor_for_admins") && (current_user.administrator? || current_user.administrator?)
+    if extended_feature?("general.extended_editor_for_admins") && (current_user.administrator? || current_user.projekt_manager?)
       'extended-a'
     elsif extended_feature?("general.extended_editor_for_users")
       'extended-u'
