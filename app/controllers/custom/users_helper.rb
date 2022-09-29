@@ -6,13 +6,13 @@ module UsersHelper
   end
 
   def ck_editor_class(current_user)
-   if extended_feature?("general.extended_editor_for_admins") && current_user.administrator?
-     'extended-a'
-   elsif extended_feature?("general.extended_editor_for_users") && !current_user.administrator?
-     'extended-u'
-   else
-     'regular'
-   end
+    if extended_feature?("general.extended_editor_for_admins") && (current_user.administrator? || current_user.administrator?)
+      'extended-a'
+    elsif extended_feature?("general.extended_editor_for_users")
+      'extended-u'
+    else
+      'regular'
+    end
   end
 
   def skip_user_verification?

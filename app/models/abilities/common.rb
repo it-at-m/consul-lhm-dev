@@ -138,7 +138,7 @@ module Abilities
            (ProjektSetting.find_by(
              projekt: investment.projekt,
              key: "projekt_feature.budgets.only_admins_create_investment_proposals").value.present? &&
-            user.administrator?) ||
+            (user.administrator? || user.projekt_manager?)) ||
 
            ProjektSetting.find_by(
              projekt: investment.projekt,
