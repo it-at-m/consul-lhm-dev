@@ -22,7 +22,7 @@ class Projekt < ApplicationRecord
   has_many :polls, dependent: :nullify
   has_many :legislation_processes, dependent: :nullify, class_name: "Legislation::Process"
   has_one :budget, dependent: :nullify
-  has_many :projekt_events, dependent: :nullify
+  has_many :projekt_events, dependent: :destroy
   has_many :questions, -> { order(:id) },
     class_name: "ProjektQuestion",
     inverse_of:  :projekt,

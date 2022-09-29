@@ -47,9 +47,7 @@
               <span class="user-name" aria-label="Er antwortete"><%= link_to comment.user.name, user_path(comment.user), title: 'sagte'  %></span>
               <% if comment.user.display_official_position_badge? %>
                 &nbsp;&bull;&nbsp;
-                <span class="label round level-<%= comment.user.official_level %>">
-                  <%= comment.user.official_position %>
-                </span>
+                <%= render Shared::OfficialPositionBadgeComponent.new(user: comment.user) %>
               <% end %>
             <% end %>
             <% if comment.user.verified_organization? %>

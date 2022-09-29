@@ -10,9 +10,14 @@
   <div class='show-for-large'>
     <% if ( action_name == 'index' && controller_name.in?(['proposals', 'debates', 'polls', 'investments', 'welcome'])) ||
           ( controller_name == 'pages' || controller_name == 'projekts') %>
+
       <% if resource.respond_to?(:on_behalf_of) && resource.on_behalf_of.present? %>
         <%= resource.on_behalf_of %>
-      <% elsif !resource.author.name.blank? %>
+      <% elsif resource.author.name.present? %>
+        <% if resource.author.display_official_position_badge? %>
+          <%= render Shared::OfficialPositionBadgeComponent.new(user: resource.author) %>
+          &nbsp;&bull;&nbsp;
+        <% end %>
         <%= link_to resource.author.name, resource.author %>
       <% end%>
 
