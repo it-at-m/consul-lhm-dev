@@ -6,7 +6,9 @@
 
   <div class='show-for-large'>
     <% if action_name == 'index'%>
-      <% unless deficiency_report.author.name.blank? %>
+      <% if deficiency_report.on_behalf_of.present? %>
+        <%= deficiency_report.on_behalf_of %>
+      <% elsif deficiency_report.author.name.present? %>
         <%= link_to deficiency_report.author.name, deficiency_report.author %>
       <% end %>
     <% elsif action_name == 'show' %>

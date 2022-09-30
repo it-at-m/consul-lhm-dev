@@ -366,7 +366,9 @@ class PagesController < ApplicationController
       @investments = @budget.investments
       @investments = @investments.send(params[:filter]) if params[:filter]
       @investment_ids = @budget.investments.ids
+      @investments = @investments.page(params[:page])
     end
+
 
     if @budget.present? && @current_projekt.current?
       @top_level_active_projekts = Projekt.where( id: @current_projekt )

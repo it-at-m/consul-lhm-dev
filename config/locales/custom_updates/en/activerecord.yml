@@ -32,6 +32,7 @@ en:
         deficiency_report_category_id: Category
         video_url: External video URL
         official_answer: Official answer
+        on_behalf_of: Create report on behalf of someone
       debate:
         on_behalf_of: Create debate on behalf of someone
       proposal:
@@ -43,6 +44,7 @@ en:
           user: I can help with implementation
         implementation_contribution: How can you contribute?
         user_cost_estimate: Cost estimate
+        on_behalf_of: Create investment proposal on behalf of someone
       milestone:
         custom_date: Custom date
       map_layer:

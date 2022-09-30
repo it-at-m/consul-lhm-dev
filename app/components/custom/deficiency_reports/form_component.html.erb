@@ -37,6 +37,12 @@
 
   <%= f.invisible_captcha :subtitle %>
 
+  <% if current_user.administrator? || current_user.moderator? %>
+    <div>
+      <%= f.text_field :on_behalf_of %>
+    </div>
+  <% end %>
+
   <fieldset>
     <div>
       <%= f.text_field :video_url, hint: t("proposals.form.proposal_video_url_note") %>

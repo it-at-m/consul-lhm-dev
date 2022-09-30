@@ -32,6 +32,7 @@ de:
         deficiency_report_category_id: Kategorie
         video_url: Externes Video URL
         official_answer: Offizielle Antwort
+        on_behalf_of: Meldung im Namen von jemanden erstellen
       debate:
         on_behalf_of: Diskussion im Namen von jemanden erstellen
       proposal:
@@ -43,6 +44,7 @@ de:
           user: Ich kann bei der Umsetzung unterstützen
         implementation_contribution: Was tragen Sie zur Umsetzung bei?
         user_cost_estimate: Preisliche Einschätzung
+        on_behalf_of: Investitionsvorschlag im Namen von jemanden erstellen
       geozone:
         postal_codes: Postleitzahlen
       milestone:
