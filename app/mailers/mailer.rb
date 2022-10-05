@@ -153,6 +153,15 @@ class Mailer < ApplicationMailer
     end
   end
 
+  def manual_verification_confirmation(user)
+    @email_to = user.email
+    @user = user
+
+    with_user(@user) do
+      mail(to: @email_to, subject: t("mailers.manual_verification_confirmation.subject"))
+    end
+  end
+
   private
 
     def with_user(user, &block)
