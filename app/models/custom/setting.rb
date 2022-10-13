@@ -173,7 +173,6 @@ class Setting < ApplicationRecord
         "extended_option.general.launch_date": '',
 
         "extended_feature.gdpr.gdpr_conformity": false,
-        "extended_feature.gdpr.show_cookie_banner": true,
         "extended_feature.gdpr.link_out_warning": true,
         "extended_feature.gdpr.two_click_iframe_solution": true,
         "extended_option.gdpr.devise_timeout_min": 30,
