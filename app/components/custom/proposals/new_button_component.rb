@@ -12,7 +12,7 @@ class Proposals::NewButtonComponent < ApplicationComponent
     def show_link?
       return true if @selected_parent_projekt&.overview_page?
 
-      any_selectable_projekts? || current_user.nil?
+      any_selectable_projekts?
     end
 
     def any_selectable_projekts?
