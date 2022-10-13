@@ -182,7 +182,6 @@ var initialize_modules = function() {
   App.SDGCustom.initialize();
   App.Geozones.initialize();
   App.ExpandProposalsMap.initialize();
-  App.GDPRNotice.initialize();
   App.MapRefresh.initialize();
   App.PollsCustom.initialize();
   App.RadioButtonFilter.initialize();
