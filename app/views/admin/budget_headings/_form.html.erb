@@ -18,7 +18,8 @@
       <%= f.hidden_field :price, value: 0 %>
     <% end %>
 
-    <% if heading.budget.approval_voting? %>
+    <% if heading.budget.approval_voting? ||
+        heading.budget.distributed_voting? %>
       <%= f.number_field :max_ballot_lines,
                            hint: t("admin.budget_headings.form.max_ballot_lines_info") %>
     <% end %>

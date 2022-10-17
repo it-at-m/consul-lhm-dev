@@ -9,7 +9,7 @@ module Budgets
       load_and_authorize_resource through: :investment, through_association: :votes_for, only: :destroy
 
       def create
-        @investment.register_selection(current_user)
+        @investment.register_selection(current_user, params[:vote_weight])
 
         respond_to do |format|
           format.html do

@@ -3,7 +3,27 @@ require_dependency Rails.root.join("app", "components", "budgets", "investments"
 class Budgets::Investments::BallotComponent < ApplicationComponent
   delegate :link_to_signin, :link_to_signup, to: :helpers
 
+  def initialize(investment:, investment_ids:, ballot:,
+                 top_level_active_projekts:, top_level_archived_projekts:)
+    @investment = investment
+    @investment_ids = investment_ids
+    @ballot = ballot
+    @top_level_active_projekts = top_level_active_projekts
+    @top_level_archived_projekts = top_level_archived_projekts
+  end
+
   private
+
+    def line_weight_options_for_select
+      raise :budget_not_distributed unless budget.distributed_voting?
+
+      remaining_votes = ballot.amount_available(investment.heading)
+
+      return 0 if remaining_votes < 1
+
+      (1..remaining_votes).map { |i| [i, i] }
+    end
+
     def cannot_vote_text
       if reason.present? && reason == :not_logged_in
         t("votes.budget_investments.not_logged_in",

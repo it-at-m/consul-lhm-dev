@@ -37,6 +37,8 @@ de:
         on_behalf_of: Diskussion im Namen von jemanden erstellen
       proposal:
         on_behalf_of: Vorschlag im Namen von jemanden erstellen
+      budget:
+        voting_style_distributed: "Mehrere Stimmen"
       budget/investment:
         implementation_performer: Umsetzung des Investitionsvorschlages
         implementation_performers:

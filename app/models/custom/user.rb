@@ -7,6 +7,10 @@ class User < ApplicationRecord
          authentication_keys: [:login]
 
   before_create :set_default_privacy_settings_to_false, if: :gdpr_conformity?
+  before_create { self.unique_stamp = prepare_unique_stamp }
+  before_create { self.geozone = geozone_with_plz }
+  after_create :take_votes_from_erased_user
+  after_save :update_qualified_votes_count_for_budget_investments
 
   has_many :projekts, -> { with_hidden }, foreign_key: :author_id, inverse_of: :author
   has_many :projekt_questions, foreign_key: :author_id #, inverse_of: :author
@@ -25,6 +29,31 @@ class User < ApplicationRecord
   validates :date_of_birth, presence: true, on: :create, if: :date_of_birth_required?
   validates :gender, presence: true, on: :create, if: :gender_required?
   validates :document_last_digits, presence: true, on: :create, if: :document_last_digits_required?
+
+
+  def take_votes_from_erased_user
+    return if erased?
+
+    erased_user = User.erased.find_by(unique_stamp: unique_stamp)
+
+    if erased_user.present?
+      take_votes_from(erased_user)
+      erased_user.update!(unique_stamp: nil)
+    end
+  end
+
+  def stamp_unique?
+    User.find_by(unique_stamp: prepare_unique_stamp).blank?
+  end
+
+  def prepare_unique_stamp
+    return nil unless first_name.present? && last_name.present? && date_of_birth.present? && plz.present?
+
+    first_name.downcase + "_" +
+      last_name.downcase + "_" +
+      date_of_birth.to_date.strftime("%Y_%m_%d") + "_" +
+      plz.to_s
+  end
 
   def gdpr_conformity?
     Setting["extended_feature.gdpr.gdpr_conformity"].present?
@@ -54,11 +83,11 @@ class User < ApplicationRecord
   end
 
   def first_name_required?
-    !organization? && !erased? && Setting["extra_fields.registration.first_name"]
+    !organization? && !erased? #&& Setting["extra_fields.registration.first_name"]
   end
 
   def last_name_required?
-    !organization? && !erased? && Setting["extra_fields.registration.last_name"]
+    !organization? && !erased? #&& Setting["extra_fields.registration.last_name"]
   end
 
   def street_name_required?
@@ -70,7 +99,7 @@ class User < ApplicationRecord
   end
 
   def plz_required?
-    !organization? && !erased? && Setting["extra_fields.registration.plz"]
+    !organization? && !erased? #&& Setting["extra_fields.registration.plz"]
   end
 
   def city_name_required?
@@ -78,7 +107,7 @@ class User < ApplicationRecord
   end
 
   def date_of_birth_required?
-    !organization? && !erased? && Setting["extra_fields.registration.date_of_birth"]
+    !organization? && !erased? #&& Setting["extra_fields.registration.date_of_birth"]
   end
 
   def gender_required?
@@ -88,4 +117,25 @@ class User < ApplicationRecord
   def document_last_digits_required?
     !organization? && !erased? && Setting["extra_fields.registration.document_last_digits"]
   end
+
+  private
+
+    def update_qualified_votes_count_for_budget_investments
+      Budget::Ballot.where(user_id: id).find_each do |ballot|
+        ballot.investments.each do |investment|
+          investment.update(qualified_votes_count: investment.budget_ballot_lines.joins(ballot: :user).where.not(ballot: { users: { verified_at: nil } }).sum(:line_weight))
+        end
+      end
+    end
+
+    def geozone_with_plz
+      return nil unless plz.present?
+
+
+      Geozone.where.not(postal_codes: nil).select do |geozone|
+        geozone.postal_codes.split(",").any? do |postal_code|
+          postal_code.strip == plz.to_s
+        end
+      end.first
+    end
 end

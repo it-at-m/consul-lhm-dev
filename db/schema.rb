@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_30_113313) do
+ActiveRecord::Schema.define(version: 2022_10_13_092846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -160,6 +160,15 @@ ActiveRecord::Schema.define(version: 2022_09_30_113313) do
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
+  end
+
+  create_table "bam_street_polls", force: :cascade do |t|
+    t.bigint "bam_street_id"
+    t.bigint "poll_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bam_street_id"], name: "index_bam_street_polls_on_bam_street_id"
+    t.index ["poll_id"], name: "index_bam_street_polls_on_poll_id"
   end
 
   create_table "bam_street_projekt_phases", force: :cascade do |t|
@@ -354,6 +363,7 @@ ActiveRecord::Schema.define(version: 2022_09_30_113313) do
     t.text "implementation_contribution"
     t.string "user_cost_estimate"
     t.string "on_behalf_of"
+    t.integer "qualified_votes_count", default: 0
     t.index ["administrator_id"], name: "index_budget_investments_on_administrator_id"
     t.index ["author_id"], name: "index_budget_investments_on_author_id"
     t.index ["budget_id"], name: "index_budget_investments_on_budget_id"
@@ -1426,6 +1436,7 @@ ActiveRecord::Schema.define(version: 2022_09_30_113313) do
     t.boolean "show_on_home_page", default: true
     t.boolean "show_on_index_page", default: true
     t.boolean "bam_street_restricted", default: false
+    t.boolean "show_individual_stats_per_answer", default: false
     t.index ["budget_id"], name: "index_polls_on_budget_id", unique: true
     t.index ["geozone_restricted"], name: "index_polls_on_geozone_restricted"
     t.index ["projekt_id"], name: "index_polls_on_projekt_id"
@@ -2175,6 +2186,8 @@ ActiveRecord::Schema.define(version: 2022_09_30_113313) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "administrators", "users"
+  add_foreign_key "bam_street_polls", "bam_streets"
+  add_foreign_key "bam_street_polls", "polls"
   add_foreign_key "bam_street_projekt_phases", "bam_streets"
   add_foreign_key "bam_street_projekt_phases", "projekt_phases"
   add_foreign_key "budget_administrators", "administrators"

@@ -1,0 +1,37 @@
+<aside class='margin-bottom' id='sidebar'>
+
+	<% if can?(:create, Budget::Investment.new(budget: @budget)) %>
+		<% if current_user %>
+			<% if current_user.level_two_or_three_verified? %>
+				<%= link_to t("budgets.investments.index.sidebar.create"),
+										new_budget_investment_path(@budget, origin: 'projekt'),
+										class: "button expanded" %>
+			<% else %>
+				<div class="callout warning">
+					<%= sanitize(t("budgets.investments.index.sidebar.verified_only",
+								verify: link_to_verify_account)) %>
+				</div>
+			<% end %>
+		<% else %>
+			<div class="callout primary">
+				<%= sanitize(t("budgets.investments.index.sidebar.not_logged_in",
+							sign_in: link_to_signin, sign_up: link_to_signup)) %>
+			</div>
+		<% end %>
+	<% end %>
+	<%= render_custom_block "budget_#{@budget.id}_phase_#{@budget.current_phase.id}_info" %>
+	<%= render 'pages/projekt_footer/budget/my_ballot'  %>
+	<%= render Sidebar::ProjektsFilterComponent.new(
+		top_level_active_projekts: @top_level_active_projekts,
+		top_level_archived_projekts: @top_level_archived_projekts,
+		scoped_projekt_ids: @scoped_projekt_ids,
+		all_resources: @all_resources,
+		current_tab_phase: @current_tab_phase,
+		current_projekt: @current_projekt
+	) %>
+	<% unless @budget.phase == 'publishing_prices' && projekt_feature?(@projekt, 'budgets.show_results_after_first_vote')  # con-1036 %>
+		<% if params[:section].blank? || params[:section] == 'overview' %>
+			<%= render Budgets::Investments::FiltersComponent.new %>
+		<% end %>
+	<% end %>
+</aside>

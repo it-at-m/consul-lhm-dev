@@ -1,16 +1,59 @@
 en:
   budgets:
+    show:
+      amount_available:
+        distributed:
+          zero: "Sie können immer noch <span>%{count}</span> Stimmen abgeben."
+          one: "Sie können immer noch <span>%{count}</span> Stimme abgeben."
+          other: "Sie können immer noch <span>%{count}</span> Stimmen abgeben."
+      amount_spent:
+        distributed:
+          zero: "Abgegebene Stimmen: <span>%{count}</span>"
+          one: "Abgegebene Stimme: <span>%{count}</span>"
+          other: "Abgegebene Stimmen: <span>%{count}</span>"
+      amount_limit:
+        distributed:
+          one: "Sie können noch <span>1</span> Stimme abgeben"
+          other: "Sie können bis zu <span>%{count}</span> Stimmen abgeben"
     investments:
       index:
         filters:
           all: All
           feasible: Feasible
           undecided: Undecided
+        orders:
+          random: Random
+          ballot_line_weight: Most supported
+          newest: Newest
+        sidebar:
+          voted_info:
+            distributed: You can change your vote at any time until the end of this phase. There is no need to spend all available budget.
+          voted_info_unverified_html: "<p>Thank you for taking part in the voting! Now we will manually check your data with the population register. This can take 1-2 working days.<br>
+          After that, your votes will be approved and you will receive an email.</p>
+          <p>Your data will be checked manually. This can take 1-2 working days.<br>
+          After that, your votes will be released.</p>"
   custom:
     budgets:
       investments:
+        index:
+          sidebar:
+            user_votes: "My votes: %{count}"
         form:
           required: Your investment proposal
+        investment:
+          supporters:
+            zero: No supporters
+            one: "1 supporter"
+            other: "%{count} supporters"
+          supports:
+            zero: No votes
+            one: 1 vote
+            other: "%{count} votes"
+          qualified_supports: "Total votes: %{count}"
+          line_weight_label: "Your votes"
+          unverified_note: "Your data will be checked manually. This can take 1-2 working days. After that, your votes will be released."
+          unverified_note_no_data_html: "Plaese %{verify_account}, to make sure your votes are counted."
+          unfeasible_html: "This investment proposal <strong>was marked as not feasible</strong> and will not take part in voting."
         show:
           callouts:
             publishing_prices:

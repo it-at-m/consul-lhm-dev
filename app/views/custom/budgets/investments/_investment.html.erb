@@ -71,6 +71,10 @@
                 </div>
               </div>
             <% end %>
+          <% elsif investment.unfeasible? %>
+            <div class='callout warning' style="margin-top:1rem;">
+              <%= t("custom.budgets.investments.investment.unfeasible_html") %>
+            </div>
           <% end %>
 
           <%= render partial: 'budgets/investments/investment_status_callout', locals: { investment: investment } %>

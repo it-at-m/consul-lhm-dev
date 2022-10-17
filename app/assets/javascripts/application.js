@@ -192,6 +192,7 @@ var initialize_modules = function() {
   App.ModerationCustom.initialize();
   App.CopyContent.initialize();
   App.FooterPhasesComponentCustom.initialize();
+  App.RemoteLinksPushState.initialize();
   App.ProjektQuestionCustom.initialize();
   App.LivesubmitCheckboxCustom.initialize();
   App.OrbitInPopupFixCustom.initialize();

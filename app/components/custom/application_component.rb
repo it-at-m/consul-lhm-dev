@@ -5,4 +5,18 @@ class ApplicationComponent < ViewComponent::Base
     @comment_flags = helpers.current_user ? helpers.current_user.comment_flags(comments) : {}
     @comment_flags
   end
+
+  private
+
+    def url_for_footer_tab_back_button(page_id,
+                                       current_tab_path = "",
+                                       filter = "",
+                                       order = "",
+                                       filter_projekt_ids = "")
+      projekt = SiteCustomization::Page.find_by(slug: page_id).projekt
+      phase_name = params[:current_tab_path].split("_")[0..-3].join("_")
+      current_projekt_phase = projekt.send(phase_name)
+
+      "/#{projekt.page.slug}?selected_phase_id=#{current_projekt_phase.id}&filter=#{filter}&order=#{order}&filter_projekt_ids=#{filter_projekt_ids}"
+    end
 end

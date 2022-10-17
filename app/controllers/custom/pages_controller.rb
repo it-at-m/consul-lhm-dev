@@ -326,18 +326,19 @@ class PagesController < ApplicationController
     end
   end
 
-  def set_budget_footer_tab_variables(projekt=nil)
+  def set_budget_footer_tab_variables(projekt = nil)
     params[:filter_projekt_id] = projekt&.id || SiteCustomization::Page.find_by(slug: params[:id]).projekt.id
     @current_projekt = Projekt.find(params[:filter_projekt_id])
 
     @valid_filters = @current_projekt.budget.investments_filters
-    params[:filter] ||= 'feasible' if @current_projekt.budget.phase.in?(['selecting', 'valuating'])
-    params[:filter] ||= 'winners' if @current_projekt.budget.phase == 'finished'
+    params[:filter] ||= "feasible" if @current_projekt.budget.phase.in?(["selecting", "valuating"])
+    params[:filter] ||= "all" if @current_projekt.budget.phase.in?(["selecting", "valuating", "balloting", "reviewing_ballots"])
+    params[:filter] ||= "winners" if @current_projekt.budget.phase == "finished"
     @current_filter = @valid_filters.include?(params[:filter]) ? params[:filter] : nil
     @all_resources = []
 
     @current_tab_phase = @current_projekt.budget_phase
-    params[:current_tab_path] = 'budget_phase_footer_tab'
+    params[:current_tab_path] = "budget_phase_footer_tab"
 
     params[:filter_projekt_id] ||= @current_projekt.id
 
@@ -345,10 +346,19 @@ class PagesController < ApplicationController
     @headings = @budget.headings.sort_by_name
     @heading = @headings.first
 
+    @valid_orders = %w[random supports ballots ballot_line_weight newest]
+    @valid_orders.delete("supports")
+    @valid_orders.delete("ballots")
+    @valid_orders.delete("ballot_line_weight") unless @budget.phase == "balloting"
+    @current_order = @valid_orders.include?(params[:order]) ? params[:order] : @valid_orders.first
+
     params[:section] ||= 'results' if @budget.phase == 'finished'
 
     # con-1036
-    if @budget.phase == 'publishing_prices' && @budget.projekt.present? && @budget.projekt.projekt_settings.find_by(key: 'projekt_feature.budgets.show_results_after_first_vote').value.present?
+    if @budget.phase == 'publishing_prices' &&
+        @budget.projekt.present? &&
+        @budget.projekt.projekt_settings
+          .find_by(key: 'projekt_feature.budgets.show_results_after_first_vote').value.present?
       params[:filter] = 'selected'
       @current_filter = nil
     end
@@ -366,9 +376,9 @@ class PagesController < ApplicationController
       @investments = @budget.investments
       @investments = @investments.send(params[:filter]) if params[:filter]
       @investment_ids = @budget.investments.ids
-      @investments = @investments.page(params[:page])
     end
 
+    @investments = @investments.send("sort_by_#{@current_order}").page(params[:page]).per(2)
 
     if @budget.present? && @current_projekt.current?
       @top_level_active_projekts = Projekt.where( id: @current_projekt )
@@ -378,7 +388,9 @@ class PagesController < ApplicationController
       @top_level_archived_projekts = Projekt.where( id: @current_projekt )
     else
       @top_level_active_projekts = []
-      @top_level_archived_projekts = [] end end
+      @top_level_archived_projekts = []
+    end
+  end
 
   def set_milestones_footer_tab_variables(projekt=nil)
     @current_projekt = projekt || SiteCustomization::Page.find_by(slug: params[:id]).projekt

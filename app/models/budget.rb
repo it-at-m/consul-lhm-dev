@@ -21,7 +21,7 @@ class Budget < ApplicationRecord
   end
 
   CURRENCY_SYMBOLS = %w[€ $ £ ¥].freeze
-  VOTING_STYLES = %w[knapsack approval].freeze
+  VOTING_STYLES = %w[knapsack approval distributed].freeze
 
   validates_translation :name, presence: true
   validates_translation :main_link_url, presence: true, unless: -> { main_link_text.blank? }
