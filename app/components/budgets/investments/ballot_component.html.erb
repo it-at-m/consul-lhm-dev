@@ -43,6 +43,7 @@
         <%= investment.formatted_price %>
       </p>
       <% if investment.should_show_ballots? %>
+
         <% if investment.budget.distributed_voting? %>
           <br>
           <strong>

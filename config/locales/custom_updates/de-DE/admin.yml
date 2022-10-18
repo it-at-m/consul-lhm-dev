@@ -21,6 +21,9 @@ de:
         edit:
           info:
             projekt_association: Projektzuordnung
+      budget_investments:
+        show:
+          physical_votes_updated: Physical votes updated!
       deficiency_reports:
         categories:
           category:

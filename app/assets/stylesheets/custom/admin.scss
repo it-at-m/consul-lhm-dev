@@ -13,6 +13,16 @@
   }
 }
 
+.officing-offline-ballots {
+  @media screen and (min-width: 75em) {
+    .budget-heading::before,
+    .jumbo-budget::after {
+      left: 0;
+      right: 0;
+    }
+  }
+}
+
 .show-projekt-dates-in-frontend-checkbox {
   margin-bottom: 20px;
 

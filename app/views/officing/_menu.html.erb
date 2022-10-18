@@ -13,5 +13,11 @@
         <%= link_to t("officing.menu.total_recounts"), final_officing_polls_path, class: "users-link" %>
       </li>
     <% end %>
+
+    <% Budget.joins(:projekt).where(phase: 'balloting').each do |budget| %>
+      <li>
+        <%= link_to budget.name, officing_offline_ballots_verify_user_path(budget), class: "users-link" %>
+      </li>
+    <% end %>
   </ul>
 </div>

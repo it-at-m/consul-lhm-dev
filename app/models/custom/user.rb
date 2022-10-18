@@ -129,13 +129,6 @@ class User < ApplicationRecord
     end
 
     def geozone_with_plz
-      return nil unless plz.present?
-
-
-      Geozone.where.not(postal_codes: nil).select do |geozone|
-        geozone.postal_codes.split(",").any? do |postal_code|
-          postal_code.strip == plz.to_s
-        end
-      end.first
+      Geozone.find_with_plz(plz)
     end
 end

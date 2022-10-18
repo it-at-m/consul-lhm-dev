@@ -1,0 +1,25 @@
+<div class='officing-offline-ballots'>
+  <%= render Pages::Projekts::BudgetsTabComponent.new(@budget, @ballot, current_user) %>
+
+  <div class='row'>
+    <div id='budgets' class='budgets-list spinner-placeholder column'>
+      <div class='row'>
+        <div class='column small'>
+          <% if extended_feature?('modulewide.show_number_of_entries_in_modules') %>
+            <div class='float-right'>
+              <%= @investments.except(:limit, :offset).unscope(:group).count %>
+              <%= t('activerecord.models.budget/investment', count: @investments.except(:limit, :offset).count) %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <% @investments.each do |investment| %>
+        <%= render "/budgets/investments/investment",
+                   investment: investment,
+                   investment_ids: @investment_ids,
+                   ballot: @ballot %>
+      <% end %>
+    </div>
+  </div>
+</div>

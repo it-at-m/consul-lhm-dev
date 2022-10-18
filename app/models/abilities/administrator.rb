@@ -134,6 +134,10 @@ module Abilities
       can [:order_questions], Poll::Question
       can [:show], Projekt
       can :verify, User
+
+      can :edit_physical_votes, Budget::Investment do |investment|
+        investment.budget.phase == "selecting"
+      end
     end
   end
 end

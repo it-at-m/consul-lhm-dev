@@ -24,25 +24,15 @@ class Verification::Residence
   def save_manual_verification
     return false unless valid?
 
-    user.update!(first_name:            first_name,            #custom
-                 last_name:             last_name,             #custom
-                 street_name:           street_name,           #custom
-                 street_number:         street_number,         #custom
-                 plz:                   plz,                   #custom
-                 city_name:             city_name,             #custom
-                 document_last_digits:  document_last_digits,  #custom
-                 geozone:               geozone_with_plz,      #custom
+    user.update!(first_name:            first_name,                      #custom
+                 last_name:             last_name,                       #custom
+                 street_name:           street_name,                     #custom
+                 street_number:         street_number,                   #custom
+                 plz:                   plz,                             #custom
+                 city_name:             city_name,                       #custom
+                 document_last_digits:  document_last_digits,            #custom
+                 geozone:               Geozone.find_with_plz(plz),      #custom
                  gender:                gender)
-  end
-
-  def geozone_with_plz
-    return nil unless plz.present?
-
-    Geozone.where.not(postal_codes: nil).select do |geozone|
-      geozone.postal_codes.split(",").any? do |postal_code|
-        postal_code.strip == plz
-      end
-    end.first
   end
 
   def document_number_uniqueness
@@ -57,13 +47,15 @@ class Verification::Residence
   end
 
   def first_name_required?
-    manual_verification? &&
-      Setting["extra_fields.verification.first_name"].present?
+    true
+    # manual_verification? &&
+    #   Setting["extra_fields.verification.first_name"].present?
   end
 
   def last_name_required?
-    manual_verification? &&
-      Setting["extra_fields.verification.last_name"].present?
+    true
+    # manual_verification? &&
+    #   Setting["extra_fields.verification.last_name"].present?
   end
 
   def street_name_required?
@@ -77,8 +69,9 @@ class Verification::Residence
   end
 
   def plz_required?
-    manual_verification? &&
-      Setting["extra_fields.verification.plz"].present?
+    true
+    # manual_verification? &&
+    #   Setting["extra_fields.verification.plz"].present?
   end
 
   def city_name_required?
@@ -87,8 +80,9 @@ class Verification::Residence
   end
 
   def date_of_birth_required?
-    manual_verification? &&
-      Setting["extra_fields.verification.date_of_birth"].present?
+    true
+    # manual_verification? &&
+    #   Setting["extra_fields.verification.date_of_birth"].present?
   end
 
   def gender_required?

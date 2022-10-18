@@ -1,4 +1,6 @@
-<% if !budget.informing? && projekt_feature?(budget.projekt, 'budgets.show_map') %>
+<% if !budget.informing? &&
+    projekt_feature?(budget.projekt, 'budgets.show_map') &&
+    controller_name != "offline_ballots" %>
   <div class="map proposals-map">
     <%= render_map(budget.projekt.map_location, "budgets", false, nil, coordinates, budget.projekt.map_layers_for_render.to_json) %>
   </div>
