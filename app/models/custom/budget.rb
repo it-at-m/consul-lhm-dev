@@ -6,7 +6,7 @@ class Budget < ApplicationRecord
 
   def investments_filters
     [
-      ("all" if selecting? || valuating? || balloting? || reviewing_ballots?),
+      ("all" if selecting? || valuating? || publishing_prices? || balloting? || reviewing_ballots?),
       ("winners" if finished?),
       ("selected" if publishing_prices_or_later? && !finished?),
       # ("unselected" if publishing_prices_or_later?),

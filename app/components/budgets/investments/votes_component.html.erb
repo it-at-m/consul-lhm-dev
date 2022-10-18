@@ -33,7 +33,8 @@
       <% else %>
         <% if investment.budget.distributed_voting? %>
           <%= form_with url: support_path, local: display_support_alert? do |f| %>
-            <%= f.select :vote_weight, [[1, 1], [2, 2], [3, 3]] %>
+            <%= f.label :vote_weight, t("custom.budgets.investments.investment.line_weight_label"), style: "font-weight:normal;margin-top:15px;"  %>
+            <%= f.select :vote_weight, [[1, 1], [2, 2], [3, 3]], label: false %>
             <%= f.submit t("budgets.investments.votes.support"),
               class: "button button-support expanded",
               title: t("budgets.investments.investment.support_title"),

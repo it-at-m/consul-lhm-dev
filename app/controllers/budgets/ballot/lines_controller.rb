@@ -17,7 +17,7 @@ module Budgets
         load_heading
         load_map
 
-        @ballot.add_investment(@investment)
+        @ballot.add_investment(@investment, params[:line_weight])
       end
 
       def destroy

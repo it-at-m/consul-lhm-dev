@@ -55,7 +55,7 @@
                   </span>
                 </div>
               </div>
-            <% elsif investment.should_show_ballots? && !management_controller? && !controller_name=='welcome' %>
+            <% elsif investment.should_show_ballots? && !management_controller? && controller_name != 'welcome' %>
               <div id="<%= dom_id(investment) %>_ballot" class="">
                     <%= render "/budgets/investments/ballot",
                       investment: investment,

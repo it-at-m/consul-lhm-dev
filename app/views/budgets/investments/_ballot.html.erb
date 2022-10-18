@@ -1,5 +1,7 @@
 <%= render Budgets::Investments::BallotComponent.new(
   investment: investment,
   investment_ids: investment_ids,
-  ballot: ballot
+  ballot: ballot,
+  top_level_active_projekts: @top_level_active_projekts,
+  top_level_archived_projekts: @top_level_archived_projekts
 ) %>
