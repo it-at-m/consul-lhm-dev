@@ -86,4 +86,8 @@ class Debate
       Debate.increment_counter(:cached_anonymous_votes_total, id) if user.unverified?
     end
   end
+
+  def votes_score
+    cached_votes_up + cached_votes_down
+  end
 end
