@@ -6,7 +6,12 @@ module TagsHelper
     currently_selected_tags.include?(tag_name) ? currently_selected_tags.delete(tag_name) : currently_selected_tags.push(tag_name)
     selected_tags = currently_selected_tags.join(',')
 
-    updated_params = params.merge({tags: selected_tags}).permit(:tags, :geozone_affiliation, :geozone_restriction, :affiliated_geozones, :restricted_geozones, :sdg_goals, :sdg_targets, filter_projekt_ids: [])
+    updated_params = params.merge({tags: selected_tags}).permit(
+      :tags, :geozone_affiliation, :geozone_restriction, :affiliated_geozones, :restricted_geozones,
+      :sdg_goals, :sdg_targets,
+      :order,
+      filter_projekt_ids: []
+    )
 
     case taggable_type
     when "debate"
