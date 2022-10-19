@@ -47,7 +47,7 @@ class User < ApplicationRecord
   end
 
   def prepare_unique_stamp
-    return nil unless first_name.present? && last_name.present? && date_of_birth.present? && plz.present?
+    return nil if first_name.blank? || last_name.blank? || date_of_birth.blank? || plz.blank?
 
     first_name.downcase + "_" +
       last_name.downcase + "_" +

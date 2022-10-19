@@ -11,6 +11,12 @@ class Pages::Projekts::BudgetsTabComponent < ApplicationComponent
 
   private
 
+  def render_map?
+    !budget.informing? &&
+      projekt_feature?(budget.projekt, 'budgets.show_map') &&
+      controller_name != "offline_ballots"
+  end
+
   def phases
     budget.published_phases
   end

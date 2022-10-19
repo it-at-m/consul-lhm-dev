@@ -10,6 +10,8 @@ class Budget
 
         def update_qualified_votes_count
           if ballot.user.level_three_verified?
+            line_weight ||= 1
+
             if persisted?
               investment.increment!(:qualified_votes_count, line_weight)
             else

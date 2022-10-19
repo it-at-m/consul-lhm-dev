@@ -1,14 +1,15 @@
 class Officing::OfflineBallotsController < Officing::BaseController
   def verify_user
+    render
   end
 
   def find_or_create_user
     unique_stamp = User.new(user_params).prepare_unique_stamp
 
-    if unique_stamp.blank? ||
+    if (unique_stamp.blank? ||
         params[:"date_of_birth(1i)"].blank? ||
         params[:"date_of_birth(2i)"].blank? ||
-        params[:"date_of_birth(3i)"].blank?
+        params[:"date_of_birth(3i)"].blank?)
       flash.now[:error] = "Please make sure all fields are filled in"
       render :verify_user
 
