@@ -32,10 +32,19 @@
             proposal_settings_fingerprints,
             Flag.flagged?(current_user, @proposal),
             projekt_feature?(@proposal&.projekt, 'proposals.quorum_for_proposals'),
+            projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_support_withdrawal'),
+            projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab'),
+            projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_milestones_tab'),
             projekt_feature?(@proposal&.projekt, 'proposals.show_report_button_in_proposal_sidebar'),
             projekt_feature?(@proposal&.projekt, 'proposals.show_follow_button_in_proposal_sidebar'),
             projekt_feature?(@proposal&.projekt, 'proposals.show_community_button_in_proposal_sidebar'),
-            projekt_feature?(@proposal&.projekt, 'proposals.show_related_content') ] do %>
+            projekt_feature?(@proposal&.projekt, 'proposals.show_related_content'),
+            projekt_feature?(@proposal&.projekt, 'proposals.show_comments'),
+            projekt_feature?(@proposal&.projekt, 'proposals.allow_attached_documents'),
+            projekt_feature?(@proposal&.projekt, 'proposals.show_in_sidebar_filter'),
+            projekt_feature?(@proposal&.projekt, 'proposals.show_map'),
+            projekt_feature?(@proposal&.projekt, 'proposals.enable_summary'),
+            projekt_feature?(@proposal&.projekt, 'proposals.allow_voting') ] do %>
     <div class="proposal-show">
 
       <% unless action_name == 'created' %>
@@ -115,7 +124,9 @@
               </div>
             <% end %>
 
-            <%= render "proposals/support_status", proposal: @proposal %>
+            <% if projekt_feature?(@proposal&.projekt, 'proposals.allow_voting') %>
+              <%= render "proposals/support_status", proposal: @proposal %>
+            <% end %>
 
             <%= render "shared/participation/resource_info", resource: @proposal %>
 
@@ -153,7 +164,9 @@
     </div>
   <% end %>
 
-  <% unless preview %>
+  <% if ((projekt_feature?(@proposal&.projekt, 'proposals.show_comments') ||
+      projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab') ||
+      projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_milestones_tab')) && !preview) %>
     <div class="additional-content margin-top">
       <div class="filter-subnav">
         <div class="row">
@@ -165,19 +178,23 @@
     </div>
 
     <div class="tabs-content" data-tabs-content="proposals_tabs">
-      <% if projekt_feature?(@proposal.projekt, 'proposals.show_comments') %>
-        <div class="tabs-panel is-active" id="tab-comments">
+      <% if projekt_feature?(@proposal&.projekt, 'proposals.show_comments') %>
+        <div class="tabs-panel <%= 'is-active' if default_active_proposal_footer_tab?('comments') %>" id="tab-comments">
           <%= render "proposals/comments" %>
         </div>
       <% end %>
 
-      <div class="tabs-panel <%= 'is-active' unless projekt_feature?(@proposal.projekt, 'proposals.show_comments') %>" id="tab-notifications">
-        <%= render "proposals/notifications" %>
-      </div>
+      <% if projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab') %>
+        <div class="tabs-panel <%= 'is-active' if default_active_proposal_footer_tab?('notifications') %>" id="tab-notifications">
+          <%= render "proposals/notifications" %>
+        </div>
+      <% end %>
 
-      <div class="tabs-panel" id="tab-milestones">
-        <%= render "milestones/milestones", milestoneable: @proposal %>
-      </div>
+      <% if projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_milestones_tab') %>
+        <div class="tabs-panel <%= 'is-active' if default_active_proposal_footer_tab?('milestones') %>" id="tab-milestones">
+          <%= render "milestones/milestones", milestoneable: @proposal %>
+        </div>
+      <% end %>
     </div>
   <% end %>
 </main>

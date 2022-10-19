@@ -11,6 +11,7 @@
           proposal.custom_votes_needed_for_success,
           proposal_settings_fingerprints,
           projekt_feature?(proposal&.projekt, 'proposals.quorum_for_proposals'),
+          projekt_feature?(proposal&.projekt, 'proposals.allow_voting'),
           params[:tags],
           params[:projekts],
           params[:geozone_affiliation],
@@ -73,7 +74,7 @@
                     <strong><%= t("proposals.proposal.supports", count: proposal.total_votes) %></strong>
                     <p><%= t("proposals.proposal.archived") %></p>
                   </div>
-                <% else %>
+                <% elsif projekt_feature?(proposal&.projekt, 'proposals.allow_voting') %>
                   <%= render "proposals/votes",
                             { proposal: proposal, vote_url: vote_proposal_path(proposal, value: "yes") } %>
                 <% end %>

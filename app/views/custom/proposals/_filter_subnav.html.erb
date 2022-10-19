@@ -5,17 +5,19 @@
     data-deep-link-smudge="true"
     data-deep-link-smudge-delay="500"
     data-tabs>
-  <li class="tabs-title is-active">
-    <%= link_to "#tab-comments" do %>
-      <h3>
-        <%= t("proposals.show.comments_tab") %>
-        <span class="js-comments-count">(<%= @proposal.comments_count %>)</span>
-      </h3>
-    <% end %>
-  </li>
+  <% if projekt_feature?(@proposal&.projekt, 'proposals.show_comments') %>
+    <li class="tabs-title <%= 'is-active' if default_active_proposal_footer_tab?('comments') %>">
+      <%= link_to "#tab-comments" do %>
+        <h3>
+          <%= t("proposals.show.comments_tab") %>
+          <span class="js-comments-count">(<%= @proposal.comments_count %>)</span>
+        </h3>
+      <% end %>
+    </li>
+  <% end %>
 
   <% if projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab') %>
-    <li class="tabs-title">
+    <li class="tabs-title <%= 'is-active' if default_active_proposal_footer_tab?('notifications') %>">
       <%= link_to "#tab-notifications" do %>
         <h3>
           <%= t("proposals.show.notifications_tab") %>
@@ -26,7 +28,7 @@
   <% end %>
 
   <% if projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_milestones_tab') %>
-    <li class="tabs-title">
+    <li class="tabs-title <%= 'is-active' if default_active_proposal_footer_tab?('milestones') %>">
       <%= link_to "#tab-milestones" do %>
         <h3>
           <%= t("proposals.show.milestones_tab") %>

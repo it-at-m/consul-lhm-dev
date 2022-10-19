@@ -60,6 +60,7 @@ class ProjektSetting < ApplicationRecord
         "projekt_feature.debates.only_admins_create_debates": '',
         "projekt_feature.debates.allow_downvoting": 'active',
         "projekt_feature.debates.show_in_sidebar_filter": 'active',
+        "projekt_feature.debates.allow_voting": 'active',
 
         "projekt_feature.proposals.quorum_for_proposals": '',
         "projekt_feature.proposals.enable_proposal_support_withdrawal": 'active',
@@ -75,6 +76,7 @@ class ProjektSetting < ApplicationRecord
         "projekt_feature.proposals.show_in_sidebar_filter": 'active',
         "projekt_feature.proposals.show_map": 'active',
         "projekt_feature.proposals.enable_summary": '',
+        "projekt_feature.proposals.allow_voting": 'active',
 
         "projekt_feature.proposal_options.votes_for_proposal_success": 10000,
 

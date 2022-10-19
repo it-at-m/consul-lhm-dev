@@ -7,6 +7,7 @@
           debate.debate_phase,
           debate.image,
           projekt_feature?(debate.projekt, 'debates.allow_downvoting'),
+          projekt_feature?(debate.projekt, 'debates.allow_voting'),
           params[:tags],
           params[:projekts],
           params[:geozone_affiliation],
@@ -57,9 +58,11 @@
         </div>
         <div class='column small-12 medium-6 large-4 resource-participate table' data-equalizer-watch='details'>
           <div class='table-cell align-middle'>
-            <div id="<%= dom_id(debate) %>_votes">
-              <%= render "debates/votes", debate: debate %>
-            </div>
+            <% if projekt_feature?(debate&.projekt, 'debates.allow_voting') %>
+              <div id="<%= dom_id(debate) %>_votes">
+                <%= render "debates/votes", debate: debate %>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>

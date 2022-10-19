@@ -187,6 +187,8 @@ de:
           allow_downvoting_description: Aktivieren Sie den "Daumen nach unten"-Button
           show_in_sidebar_filter: Projekt in der Projektseitenleiste anzeigen
           show_in_sidebar_filter_description: Zeigt das Projekt in der Projektseitenleiste auf der Diskussionsübersichtsseite an
+          allow_voting: Unterstützung von Diskussionen
+          allow_voting_description: Aktivieren Sie die Unterstützung von Diskussionen mit Daumen hoch und runter
         proposals:
           quorum_for_proposals: Quorum für Vorschläge
           quorum_for_proposals_description: Aktivieren Sie ein Quorum für Vorschläge
@@ -216,6 +218,8 @@ de:
           show_map_description: Zeigt die Karte für Vorschläge in diesem Projekt an
           enable_summary: "\"Zusammenfassung\" anzeigen"
           enable_summary_description: "Zeigt das Feld \"Zusammenfassung\" in den Vorschlägen an"
+          allow_voting: Unterstützung von Vorschlägen
+          allow_voting_description: Aktivieren Sie die Unterstützung für Vorschläge
         proposal_options:
           votes_for_proposal_success: "Anzahl der notwendigen Stimmen zur Genehmigung eines Vorschlags"
           votes_for_proposal_success_description: "Wenn ein Antrag diese Anzahl von Unterstützungen erreicht, kann er nicht mehr mehr unterstützt werden und gilt als erfolgreich"

@@ -26,7 +26,11 @@
             Flag.flagged?(current_user, @debate),
             projekt_feature?(@debate.projekt, 'debates.show_report_button_in_sidebar'),
             projekt_feature?(@debate.projekt, 'debates.show_related_content'),
-            projekt_feature?(@debate.projekt, 'debates.allow_downvoting')] do %>
+            projekt_feature?(@debate.projekt, 'debates.show_comments'),
+            projekt_feature?(@debate.projekt, 'debates.allow_attached_documents'),
+            projekt_feature?(@debate.projekt, 'debates.allow_downvoting'),
+            projekt_feature?(@debate.projekt, 'debates.show_in_sidebar_filter'),
+            projekt_feature?(@debate.projekt, 'debates.allow_voting') ] do %>
 
       <div class="debate-show">
 
@@ -91,11 +95,13 @@
               </div>
             <% end %>
 
-            <div class="sidebar-divider"></div>
-            <h2><%= t("votes.supports") %></h2>
-            <div id="<%= dom_id(@debate) %>_votes">
-              <%= render "debates/votes", debate: @debate %>
-            </div>
+            <% if projekt_feature?(@debate&.projekt, 'debates.allow_voting') %>
+              <div class="sidebar-divider"></div>
+              <h2><%= t("votes.supports") %></h2>
+              <div id="<%= dom_id(@debate) %>_votes">
+                <%= render "debates/votes", debate: @debate %>
+              </div>
+            <% end %>
 
             <%= render "shared/participation/resource_info", resource: @debate %> 
 
@@ -127,21 +133,21 @@
       </div>
     <% end %>
 
-    <div class="additional-content margin-top">
-      <div class="filter-subnav">
-        <div class="row">
-          <div class="small-12 column">
-            <%= render "debates/filter_subnav" %>
+    <% if projekt_feature?(@debate.projekt, 'debates.show_comments') %>
+      <div class="additional-content margin-top">
+        <div class="filter-subnav">
+          <div class="row">
+            <div class="small-12 column">
+              <%= render "debates/filter_subnav" %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="tabs-content" data-tabs-content="proposals_tabs">
-      <% if projekt_feature?(@debate.projekt, 'debates.show_comments') %>
+      <div class="tabs-content" data-tabs-content="proposals_tabs">
         <div class="tabs-panel is-active" id="tab-comments">
           <%= render "comments" %>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </main>
