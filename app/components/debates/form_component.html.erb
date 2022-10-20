@@ -37,6 +37,8 @@
 
   <fieldset>
 
+    <legend><%= t("shared.optional") %></legend>
+
     <% if current_user.administrator? || current_user.moderator? %>
       <div>
         <%= f.text_field :on_behalf_of %>
@@ -45,7 +47,6 @@
 
     <% if (extended_feature?("modulewide.enable_categories") && categories.any?) ||
         SDG::ProcessEnabled.new(f.object).enabled?    %>
-      <legend><%= t("shared.optional") %></legend>
     <% end %>
 
     <div>
