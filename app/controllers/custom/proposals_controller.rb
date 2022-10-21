@@ -99,7 +99,7 @@ class ProposalsController
       end
 
     else
-      @selected_projekt = @proposal.projekt.id
+      @selected_projekt = @proposal.projekt&.id
       render :new
     end
   end

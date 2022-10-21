@@ -6,6 +6,7 @@ class Proposal < ApplicationRecord
   has_many :geozone_restrictions, through: :proposal_phase
   has_many :geozone_affiliations, through: :projekt
 
+  validates_translation :description, presence: true
   validates :projekt_id, presence: true
   validate :description_sanitized
 
