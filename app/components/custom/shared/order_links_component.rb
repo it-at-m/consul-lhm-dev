@@ -7,7 +7,7 @@ class Shared::OrderLinksComponent < ApplicationComponent
       if params[:current_tab_path].present? && !helpers.request.path.starts_with?("/projekts")
         url_for(action: params[:current_tab_path],
                 controller: "/pages",
-                page: 1,
+                page: params[:page] || 1,
                 order: order,
                 filter_projekt_ids: params[:filter_projekt_ids],
                 anchor: anchor,
