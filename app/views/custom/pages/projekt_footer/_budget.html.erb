@@ -8,8 +8,6 @@
   </div>
 
   <div id='budgets' class='budgets-list spinner-placeholder small-12 medium-9 column'>
-    <%= render 'shared/loader_spinner' %>
-
     <% if @budget.phase == 'finished' %>
       <%= render Pages::Projekts::BudgetsSubnavComponent.new(@budget) %>
     <% else %>

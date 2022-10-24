@@ -8,8 +8,8 @@
     initialize: function() {
       $("body").on("click", ".js-remote-link-push-state", function() {
         var link = $(this).data('footer-tab-back-url')
-        this.pushState(link);
-      }.bind(this));
+        App.RemoteLinksPushState.pushState(link);
+      });
     }
   };
 }).call(this);
