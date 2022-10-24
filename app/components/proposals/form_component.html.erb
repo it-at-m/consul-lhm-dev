@@ -53,10 +53,10 @@
   <%= f.invisible_captcha :subtitle %>
 
   <fieldset>
-    <legend><%= t("shared.optional") %></legend>
+    <legend id='additional-fields-title'><%= t("shared.optional") %></legend>
 
     <% if current_user.administrator? || current_user.moderator? %>
-      <div>
+      <div id="on-behalf-of-fields">
         <%= f.text_field :on_behalf_of %>
       </div>
     <% end %>
@@ -65,7 +65,7 @@
       <%= render "documents/nested_documents", f: f %>
     </div>
 
-    <div>
+    <div id="external-video-url-fields">
       <%= f.text_field :video_url, hint: t("proposals.form.proposal_video_url_note") %>
     </div>
 

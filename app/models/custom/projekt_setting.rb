@@ -77,6 +77,7 @@ class ProjektSetting < ApplicationRecord
         "projekt_feature.proposals.show_map": 'active',
         "projekt_feature.proposals.enable_summary": '',
         "projekt_feature.proposals.allow_voting": 'active',
+        "projekt_feature.proposals.enable_external_video": 'active',
 
         "projekt_feature.proposal_options.votes_for_proposal_success": 10000,
 
