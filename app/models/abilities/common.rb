@@ -134,6 +134,7 @@ module Abilities
 
       can :create, Budget::Investment do |investment|
         investment.budget.phase == "accepting" &&
+          user.level_three_verified? &&
           (
            (ProjektSetting.find_by(
              projekt: investment.projekt,

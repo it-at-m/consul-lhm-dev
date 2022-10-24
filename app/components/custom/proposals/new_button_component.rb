@@ -1,5 +1,5 @@
 class Proposals::NewButtonComponent < ApplicationComponent
-  delegate :current_user, to: :helpers
+  delegate :current_user, :user_signed_in?, :sanitize, :link_to_verify_account, :link_to_signin, :link_to_signup, to: :helpers
   attr_reader :selected_parent_projekt
 
   def initialize(selected_parent_projekt = nil, current_tab_phase = nil)
