@@ -63,7 +63,10 @@ class Image < ApplicationRecord
         return true if imageable_class == Widget::Card
         return true if imageable_class == SiteCustomization::Page
 
-        attachment.analyze unless attachment.analyzed?
+        unless attachment.analyzed?
+          attachment_changes["attachment"].upload
+          attachment.analyze
+        end
 
         width = attachment.metadata[:width]
         height = attachment.metadata[:height]
