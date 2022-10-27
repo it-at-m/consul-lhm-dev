@@ -19,7 +19,7 @@
       <%= t('custom.comments.restricted.only_for_citizens') %>
 
     <% elsif @projekt.debate_phase.only_geozones_allowed? && !@projekt.debate_phase.geozone_allowed?(current_user)  %>
-      <%= t('custom.comments.restricted.geozone_not_allowed', geozones: @projekt.debate_phase.geozone_restrictions.ids.join(', ') ) %>
+      <%= t('custom.comments.restricted.geozone_not_allowed', geozones: @projekt.debate_phase.comment_phase.geozone_restrictions.map { |g| g.postal_codes }.flatten.join(', ') ) %>
 
     <% else %>
      <%= t('custom.comments.restricted.other')%>
