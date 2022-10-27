@@ -51,7 +51,7 @@
           <h4 class='resource-name'><%= link_to proposal.title, namespaced_proposal_path(proposal) %></h4>
           <div class="resource-summary margin-bottom">
             <%= link_to namespaced_proposal_path(proposal) do %>
-              <%= auto_link_already_sanitized_html simple_format(projekt_feature?(proposal.projekt, 'proposals.enable_summary') ? proposal.summary : proposal.description[0..200]) %>
+              <%= auto_link_already_sanitized_html simple_format(projekt_feature?(proposal.projekt, 'proposals.enable_summary') ? proposal.summary : strip_tags(proposal.description)[0..200]) %>
               <div class="truncate"></div>
             <% end %>
           </div>
