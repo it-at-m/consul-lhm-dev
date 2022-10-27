@@ -16,9 +16,11 @@ class ProjektPhase < ApplicationRecord
   scope :special_phases, -> { where(type: REGULAR_PROJEKT_PHASES) }
 
   def selectable_by?(user)
+    # user.present? &&
+    #   user.level_two_or_three_verified? &&
+    #   geozone_allowed?(user) &&
+    #   current?
     user.present? &&
-      user.level_two_or_three_verified? &&
-      # projekt.current? &&
       geozone_allowed?(user) &&
       current?
   end
