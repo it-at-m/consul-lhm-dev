@@ -35,8 +35,13 @@ class ProjektPhase < ApplicationRecord
       ((end_date >= Date.today if end_date.present?) || end_date.blank? )
   end
 
+  def only_citizens_allowed?
+    geozone_restricted == "only_citizens"
+  end
 
-  private
+  def only_geozones_allowed?
+    geozone_restricted == "only_geozones"
+  end
 
   def geozone_allowed?(user)
     (geozone_restricted == "no_restriction" || geozone_restricted.nil?) ||
@@ -44,14 +49,14 @@ class ProjektPhase < ApplicationRecord
     (geozone_restricted == "only_citizens" &&
       user.present? &&
       user.level_three_verified? &&
-      user_has_any_system_geozone?(user)
+      user.current_city_citizen?
     ) ||
 
     (geozone_restricted == "only_geozones" &&
       user.present? &&
       user.level_three_verified? &&
       geozone_restrictions.blank? &&
-      user_has_any_system_geozone?(user)
+      user.current_city_citizen?
     ) ||
 
     (geozone_restricted == "only_geozones" &&
@@ -61,7 +66,7 @@ class ProjektPhase < ApplicationRecord
       geozone_restrictions.include?(user.geozone))
   end
 
-  def user_has_any_system_geozone?(user)
+  def user_is_citizen?(user)
     @geozone_ids ||= Geozone.ids
 
     @geozone_ids.include?(user.geozone.id)
