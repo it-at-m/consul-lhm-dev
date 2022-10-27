@@ -16,9 +16,11 @@ class ProjektPhase < ApplicationRecord
   scope :special_phases, -> { where(type: REGULAR_PROJEKT_PHASES) }
 
   def selectable_by?(user)
+    # user.present? &&
+    #   user.level_two_or_three_verified? &&
+    #   geozone_allowed?(user) &&
+    #   current?
     user.present? &&
-      user.level_two_or_three_verified? &&
-      # projekt.current? &&
       geozone_allowed?(user) &&
       current?
   end
@@ -37,19 +39,31 @@ class ProjektPhase < ApplicationRecord
   private
 
   def geozone_allowed?(user)
-    ( geozone_restricted == "no_restriction" || geozone_restricted.nil? ) ||
-    ( geozone_restricted == "only_citizens" &&
-      user.present? && user.level_three_verified? ) ||
+    (geozone_restricted == "no_restriction" || geozone_restricted.nil?) ||
 
-    ( geozone_restricted == "only_geozones" &&
+    (geozone_restricted == "only_citizens" &&
       user.present? &&
       user.level_three_verified? &&
-      geozone_restrictions.blank? ) ||
+      user_has_any_system_geozone?(user)
+    ) ||
 
-    ( geozone_restricted == "only_geozones" &&
+    (geozone_restricted == "only_geozones" &&
+      user.present? &&
+      user.level_three_verified? &&
+      geozone_restrictions.blank? &&
+      user_has_any_system_geozone?(user)
+    ) ||
+
+    (geozone_restricted == "only_geozones" &&
       user.present? &&
       user.level_three_verified? &&
       geozone_restrictions.any? &&
-      geozone_restrictions.include?(user.geozone) )
+      geozone_restrictions.include?(user.geozone))
+  end
+
+  def user_has_any_system_geozone?(user)
+    @geozone_ids ||= Geozone.ids
+
+    @geozone_ids.include?(user.geozone.id)
   end
 end
