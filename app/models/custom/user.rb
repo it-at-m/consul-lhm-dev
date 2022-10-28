@@ -118,6 +118,14 @@ class User < ApplicationRecord
     !organization? && !erased? && Setting["extra_fields.registration.document_last_digits"]
   end
 
+  def current_city_citizen?
+    return false if geozone.nil?
+
+    @geozone_ids ||= Geozone.ids
+
+    @geozone_ids.include?(geozone.id)
+  end
+
   private
 
     def update_qualified_votes_count_for_budget_investments

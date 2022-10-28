@@ -16,6 +16,12 @@
     <% elsif !@projekt.proposal_phase.phase_activated? %>
       <%= t('custom.comments.restricted.proposal_phase_not_active')%>
 
+    <% elsif @projekt.proposal_phase.only_citizens_allowed? && !current_user.current_city_citizen?  %>
+      <%= t('custom.comments.restricted.only_for_citizens') %>
+
+    <% elsif @projekt.proposal_phase.only_geozones_allowed? && !@projekt.proposal_phase.geozone_allowed?(current_user)  %>
+      <%= t('custom.comments.restricted.geozone_not_allowed', geozones: @projekt.proposal_phase.comment_phase.geozone_restrictions.map { |g| g.postal_codes }.flatten.join(', ') ) %>
+
     <% else %>
      <%= t('custom.comments.restricted.other')%>
 

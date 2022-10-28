@@ -20,6 +20,8 @@ de:
         geo_limitation: 'Dieses projekt ist auf die folgende Gebiete beschränkt: %{geozones}'
         not_verified: Bitte %{verify_account}, um teilnehmen zu können
         other: Die Kommentarfunktion ist nicht verfügbar
+        only_for_citizens: Es können sich nur Bürgerinnen und Bürger der Stadt Detmold beteiligen.
+        geozone_not_allowed: Es können sich nur Bürgerinnen und Bürger beteiligen, die im Postleitzahlenbereich %{geozones} wohnen.
         projekt_not_active: Das Projekt ist nicht aktiv
         projekt_phase_not_active: Die Projektphase ist nicht aktiv
         proposal_phase_expired: Die Vorschlagsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
