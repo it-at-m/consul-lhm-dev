@@ -1,9 +1,20 @@
 <%= render 'shared/loader_spinner' %>
 
 <div class='row'>
+
   <div id="debates-sidebar" class="small-12 medium-3 column">
     <aside class="margin-bottom">
-      <%= render Debates::NewButtonComponent.new(@current_projekt, @current_tab_phase) %>
+      <% if @current_projekt.debate_phase.only_citizens_allowed? && !current_user&.current_city_citizen? %>
+        <div class="callout warning">
+          <%= t('custom.debates.index.creation_only_for_citizens', city: Setting["org_name"]) %>
+        </div>
+      <% elsif @current_projekt.debate_phase.only_geozones_allowed? && !@current_projekt.debate_phase.geozone_allowed?(current_user) %>
+        <div class="callout warning">
+          <%= t('custom.debates.index.creation_only_for_specific_geozones', geozones: @current_projekt.debate_phase.geozone_restrictions_formated) %>
+        </div>
+      <% else %>
+        <%= render Debates::NewButtonComponent.new(@current_projekt, @current_tab_phase) %>
+      <% end %>
 
     <% unless @current_projekt.overview_page? %>
       <%= render Sidebar::ProjektsFilterComponent.new(

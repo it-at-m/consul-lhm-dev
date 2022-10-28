@@ -18,6 +18,8 @@ de:
         projekts: Projekte
         show_larger_map: Mehr anzeigen
         show_smaller_map: Weniger anzeigen
+        creation_only_for_citizens: Neue Vorschläge können in diesem Projekt nur von Bürgerinnen und Bürgern der Stadt %{city} eingereicht werden.
+        creation_only_for_specific_geozones: Vorschläge können nur von Bürger*innen aus dem Postleitzahlbereich %{geozones} eingebracht werden.
       proposal:
         support: Unterstützen
         unsupport: Zurückziehen

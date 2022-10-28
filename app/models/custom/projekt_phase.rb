@@ -71,4 +71,8 @@ class ProjektPhase < ApplicationRecord
 
     @geozone_ids.include?(user.geozone.id)
   end
+
+  def geozone_restrictions_formated
+    geozone_restrictions.map(&:postal_codes).flatten.join(", ")
+  end
 end
