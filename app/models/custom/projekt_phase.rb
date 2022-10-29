@@ -35,6 +35,14 @@ class ProjektPhase < ApplicationRecord
       ((end_date >= Date.today if end_date.present?) || end_date.blank? )
   end
 
+  def not_current?
+    !current?
+  end
+
+  def not_active?
+    !active?
+  end
+
   def only_citizens_allowed?
     geozone_restricted == "only_citizens"
   end
@@ -66,10 +74,8 @@ class ProjektPhase < ApplicationRecord
       geozone_restrictions.include?(user.geozone))
   end
 
-  def user_is_citizen?(user)
-    @geozone_ids ||= Geozone.ids
-
-    @geozone_ids.include?(user.geozone.id)
+  def geozone_not_allowed?(user)
+    !geozone_allowed?(user)
   end
 
   def geozone_restrictions_formated

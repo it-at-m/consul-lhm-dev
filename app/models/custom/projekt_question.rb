@@ -94,11 +94,24 @@ class ProjektQuestion < ApplicationRecord
   end
 
   def comments_allowed?(current_user)
-    return false if comments_closed?
-    return false if current_user.nil?
+    !comments_not_allowed?(current_user)
+  end
+
+  def comments_not_allowed?(current_user)
+    return true if comments_closed?
+    return true if current_user.nil?
+    return true if current_user.unverified?
+    return true if current_user.organization?
 
     if root_question?
-      projekt.question_phase.participation_open?
+      (
+        projekt.question_phase.particapation_closed? ||
+        projekt.question_phase.only_citizens_allowed? && current_user.not_current_city_citizen? ||
+        projekt.question_phase.only_geozones_allowed? && projekt.question_phase.geozone_not_allowed?(current_user) ||
+        projekt.question_phase.expired? ||
+        projekt.question_phase.not_current? ||
+        projekt.question_phase.not_active?
+      )
     else
       true
     end

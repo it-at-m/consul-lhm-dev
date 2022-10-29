@@ -232,6 +232,10 @@ div.projekt-phase-geozone-restriction-selector {
     display: block;
   }
 
+  input.question_phase_only_geozones:checked ~ .projekt-phase-geozone-selector.question_phase {
+    display: block;
+  }
+
   input.budget_phase_only_geozones:checked ~ .projekt-phase-geozone-selector.budget_phase {
     display: block;
   }
