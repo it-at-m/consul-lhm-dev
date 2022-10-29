@@ -25,7 +25,7 @@
         <% elsif phase.is_a?(ProjektPhase::LivestreamPhase) && resource_count.present? %>
           <% if phase.projekt.projekt_livestreams.order(starts_at: :desc).first.present? %>
             <i class="far fa-calendar"></i>
-            <span ><%= format_date(phase.projekt.projekt_livestreams.order(starts_at: :desc).first.starts_at.to_date) %></span>
+            <span ><%= format_date(phase.projekt.projekt_livestreams.order(starts_at: :desc).first.starts_at&.to_date) %></span>
           <% end %>
 
         <% elsif phase.start_date.present? && phase.end_date.present? %>
