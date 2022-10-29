@@ -279,7 +279,7 @@
     display: none;
   }
 
-  label:not([for$='_terms_of_service']),
+  label:not([for$='_terms_of_service']):not(.is-invalid-label),
   fieldset.nested-image > legend,
   fieldset.documents-list > legend,
   fieldset.sdg-related-list-selector > legend {
