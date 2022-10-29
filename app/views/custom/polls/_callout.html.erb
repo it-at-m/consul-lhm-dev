@@ -5,26 +5,32 @@
             signin: link_to_signin(class: "probe-message"),
             signup: link_to_signup(class: "probe-message"))) %>
     </div>
+
   <% elsif current_user.organization? %>
     <div class="callout alert">
       <%= sanitize(t("custom.polls.show.cant_answer_organization")) %>
     </div>
+
   <% elsif current_user.unverified? %>
     <div class="callout warning">
       <%= sanitize(t("polls.show.cant_answer_verify",
             verify_link: link_to(t("polls.show.verify_link"), verification_path))) %>
     </div>
+
   <% elsif @poll.expired? %>
     <div class="callout alert">
       <%= t("polls.show.cant_answer_expired") %>
     </div>
+
   <% elsif !@poll.expired? && !@poll.current? %>
     <div class="callout alert">
       <%= t("custom.polls.show.cant_answer_not_started_yet", start_date: @poll.starts_at.strftime("%d.%m.%Y"), end_date: @poll.ends_at.strftime("%d.%m.%Y")) %>
     </div>
-  <% else %>
+
+  <% elsif @poll.not_allow_user_geozone?(current_user) %>
     <div class="callout warning">
-      <%= t("polls.show.cant_answer_wrong_geozone") %>
+      <%= t('custom.shared.warnings.only_for_geozones', geozones: @poll.geozone_restrictions_formated) %>
     </div>
+
   <% end %>
 <% end %>

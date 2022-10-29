@@ -2,9 +2,9 @@
   <%= render "comments/form", { commentable: @poll, parent_id: nil } %>
 
 <% elsif user_signed_in? %>
-  <div class='callout alert'>
-    <% if current_user.geozone && @poll.geozones.any? && !@poll.geozone_ids.include?(current_user.geozone.id) %>
-      <%= t('custom.comments.restricted.geo_limitation', geozones: @poll.geozones.names.join(', ')) %>
+  <div class='callout warning'>
+    <% if @poll.not_allow_user_geozone?(current_user) %>
+      <%= t('custom.shared.warnings.only_for_geozones', geozones: @poll.geozone_restrictions_formated) %>
 
     <% elsif @poll.expired? %>
       <%= t('custom.comments.restricted.voting_phase_expired')%>
