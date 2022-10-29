@@ -16,7 +16,7 @@
       <%= t("custom.shared.warnings.only_for_citizens", city: Setting["org_name"]) %>
 
     <% elsif @projekt.debate_phase.only_geozones_allowed? && !@projekt.debate_phase.geozone_allowed?(current_user)  %>
-      <%= t("custom.shared.warnings.only_for_geozones", geozones: debate.debate_phase.geozone_restrictions_formated) %>
+      <%= t("custom.shared.warnings.only_for_geozones", geozones: @projekt.debate.debate_phase.geozone_restrictions_formated) %>
 
     <% else %>
      <%= t('custom.comments.restricted.other')%>
