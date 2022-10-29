@@ -51,6 +51,14 @@ class ProjektPhase < ApplicationRecord
     geozone_restricted == "only_geozones"
   end
 
+  def citizen_not_allowed?(user)
+    only_citizens_allowed? && user.not_current_city_citizen?
+  end
+
+  def user_geozone_not_allowed?(user)
+    only_geozones_allowed? && geozone_not_allowed?(user)
+  end
+
   def geozone_allowed?(user)
     (geozone_restricted == "no_restriction" || geozone_restricted.nil?) ||
 
