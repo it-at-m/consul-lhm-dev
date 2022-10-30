@@ -6,6 +6,9 @@
     <% if @poll.not_allow_user_geozone?(current_user) %>
       <%= t('custom.shared.warnings.only_for_geozones', geozones: @poll.geozone_restrictions_formated) %>
 
+    <% elsif @poll.citizen_not_alloed?(current_user) %>
+      <%= t("custom.shared.warnings.only_for_citizens", city: Setting["org_name"]) %>
+
     <% elsif @poll.expired? %>
       <%= t('custom.comments.restricted.voting_phase_expired')%>
 

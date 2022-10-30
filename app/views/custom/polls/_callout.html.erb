@@ -32,5 +32,10 @@
       <%= t('custom.shared.warnings.only_for_geozones', geozones: @poll.geozone_restrictions_formated) %>
     </div>
 
+  <% elsif @poll.citizen_not_alloed?(current_user) %>
+    <div class="callout warning">
+      <%= t("custom.shared.warnings.only_for_citizens", city: Setting["org_name"]) %>
+    </div>
+
   <% end %>
 <% end %>
