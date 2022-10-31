@@ -61,11 +61,11 @@ class ProposalsController
     @resource = resource_model.new
     set_geozone
     set_resource_instance
-    @selected_projekt = Projekt.find(params[:projekt]) if params[:projekt]
+    @selected_projekt = Projekt.find(params[:projekt_id]) if params[:projekt_id]
   end
 
   def edit
-    @selected_projekt = @proposal.projekt.id
+    @selected_projekt = @proposal.projekt
   end
 
   def create
@@ -79,27 +79,33 @@ class ProposalsController
 
       if @proposal.proposal_phase.active?
         if @proposal.projekt.overview_page?
-          redirect_to projekts_path( anchor: 'filter-subnav', selected_phase_id: @proposal.proposal_phase.id, resources_order: 'created_at'), notice: t("proposals.notice.published")
+          redirect_to projekts_path(
+            anchor: 'filter-subnav',
+            selected_phase_id: @proposal.proposal_phase.id,
+            order: params[:order]
+          ), notice: t("proposals.notice.published")
         else
           redirect_to page_path(
             @proposal.projekt.page.slug,
             anchor: 'filter-subnav',
             selected_phase_id: @proposal.proposal_phase.id,
-            order: 'created_at'), notice: t("proposals.notice.published")
+            order: params[:order]
+          ), notice: t("proposals.notice.published")
         end
       else
         if @proposal.projekt.overview_page?
           redirect_to projekts_path(
             anchor: 'filter-subnav',
-            selected_phase_id: @proposal.proposal_phase.id
+            selected_phase_id: @proposal.proposal_phase.id,
+            order: params[:order]
           ), notice: t("proposals.notice.published")
         else
-          redirect_to proposals_path(resources_order: 'created_at'), notice: t("proposals.notice.published")
+          redirect_to proposals_path(resources_order: params[:order]), notice: t("proposals.notice.published")
         end
       end
 
     else
-      @selected_projekt = @proposal.projekt&.id
+      @selected_projekt = @proposal.projekt
       render :new
     end
   end
