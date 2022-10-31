@@ -24,6 +24,8 @@
   <% index = 0 %>
 
   <% phases.each do |phase | %>
+    <% next if phase.name == 'budget_phase' && @projekt.budget.blank?  %>
+
     <% if phase.phase_activated? %>
       <div class="sidebar-projekt-phase <%= 'active' if phase.current? %>" <%= "aria-expanded=true" if phase.name == 'budget_phase' %>>
         <div class='sidebar-projekt-phase-status'>

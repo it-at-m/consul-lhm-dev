@@ -329,6 +329,9 @@ class PagesController < ApplicationController
   def set_budget_footer_tab_variables(projekt = nil)
     params[:filter_projekt_id] = projekt&.id || SiteCustomization::Page.find_by(slug: params[:id]).projekt.id
     @current_projekt = Projekt.find(params[:filter_projekt_id])
+    @current_tab_phase = @current_projekt.budget_phase
+
+    return if @current_projekt.budget.blank?
 
     @valid_filters = @current_projekt.budget.investments_filters
     params[:filter] ||= "feasible" if @current_projekt.budget.phase.in?(["selecting", "valuating"])
@@ -337,7 +340,6 @@ class PagesController < ApplicationController
     @current_filter = @valid_filters.include?(params[:filter]) ? params[:filter] : nil
     @all_resources = []
 
-    @current_tab_phase = @current_projekt.budget_phase
     params[:current_tab_path] = "budget_phase_footer_tab"
 
     params[:filter_projekt_id] ||= @current_projekt.id
