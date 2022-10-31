@@ -9,11 +9,25 @@
       end
   %>
 
-  <%= form_for projekt_answer, url: path, remote: true, html: { class: "controls-stacked js-projekt-answer-form", data: { logined_and_verified: user_signed_in? && !current_user&.unverified?, redirect_to: redirect_path } } do |f| %>
+  <%= form_for projekt_answer, url: path, remote: true, html: { class: "controls-stacked js-projekt-answer-form", data: { should_redirect: (!user_signed_in? || current_user&.unverified?), redirect_to: redirect_path } } do |f| %>
     <% projekt_question.question_options.each do |question_option| %>
       <label class="control radio <%= "is-active" if projekt_answer.question_option&.id == question_option.id %>">
-        <% radio_button_disabled = !user_signed_in? || (projekt_question.root_question? && !projekt.question_phase.participation_open?) %>
-        <%= f.radio_button :projekt_question_option_id, question_option.id, disabled: radio_button_disabled, label: false %>
+        <% radio_button_enabled =
+          (
+            user_signed_in? && current_user&.verified? &&
+            projekt_question.root_question? && projekt.question_phase.participation_open?
+          )
+        %>
+
+        <%
+          if projekt.question_phase.only_citizens_allowed? && current_user.not_current_city_citizen?
+            radio_button_enabled = false
+          elsif projekt.question_phase.only_geozones_allowed? && projekt.question_phase.geozone_not_allowed?(current_user)
+            radio_button_enabled = false
+          end
+        %>
+
+        <%= f.radio_button :projekt_question_option_id, question_option.id, disabled: !radio_button_enabled, label: false %>
         <span class="js-projekt-question-option control-indicator"></span>
           <%= question_option.value %>
           <% if projekt_question.show_answers_count? %>

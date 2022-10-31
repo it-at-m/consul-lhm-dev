@@ -6,20 +6,17 @@
     <% if !current_user.level_two_or_three_verified? %>
       <%= t('custom.comments.restricted.not_verified', verify_account: link_to_verify_account).html_safe %>
 
-    <% elsif current_user.geozone && @projekt.debate_phase.geozone_restrictions.any? && !@projekt.debate_phase.geozone_restriction_ids.include?(current_user.geozone.id) %>
-      <%= t('custom.comments.restricted.geo_limitation', geozones: @projekt.debate_phase.geozone_restrictions.names.join(', ')) %>
-
     <% elsif @projekt.debate_phase.phase_activated? && @projekt.debate_phase.expired? %>
       <%= t('custom.comments.restricted.debate_phase_expired')%>
 
     <% elsif !@projekt.debate_phase.phase_activated? %>
       <%= t('custom.comments.restricted.debate_phase_not_active')%>
 
-    <% elsif @projekt.debate_phase.only_citizens_allowed? && !current_user.current_city_citizen?  %>
-      <%= t('custom.comments.restricted.only_for_citizens') %>
+    <% elsif @projekt.debate_phase.citizen_not_allowed?(current_user) %>
+      <%= t("custom.shared.warnings.only_for_citizens", city: Setting["org_name"]) %>
 
-    <% elsif @projekt.debate_phase.only_geozones_allowed? && !@projekt.debate_phase.geozone_allowed?(current_user)  %>
-      <%= t('custom.comments.restricted.geozone_not_allowed', geozones: @projekt.debate_phase.comment_phase.geozone_restrictions.map { |g| g.postal_codes }.flatten.join(', ') ) %>
+    <% elsif @projekt.debate_phase.user_geozone_not_allowed?(current_user)  %>
+      <%= t("custom.shared.warnings.only_for_geozones", geozones: @projekt.debate_phase.geozone_restrictions_formated) %>
 
     <% else %>
      <%= t('custom.comments.restricted.other')%>

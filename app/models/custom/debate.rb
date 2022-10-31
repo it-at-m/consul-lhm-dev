@@ -42,21 +42,24 @@ class Debate
   end
 
   def votable_by?(user)
-    user.present? &&
-    !user.organization? &&
-    user.level_two_or_three_verified? &&
-    (
-      Setting['feature.user.skip_verification'].present? ||
-      projekt.blank? ||
-      debate_phase && debate_phase.geozone_restrictions.blank? ||
-      (debate_phase && debate_phase.geozone_restrictions.any? && debate_phase.geozone_restrictions.include?(user.geozone) )
-    ) &&
-    (
-      projekt.blank? ||
-      debate_phase.present? && debate_phase.current?
-    )
+    return false if debate_phase.only_citizens_allowed? && user&.not_current_city_citizen?
+    return false if debate_phase.only_geozones_allowed? && debate_phase.geozone_not_allowed?(user)
 
-    #  user.voted_for?(self)
+    (
+      user.present? &&
+      !user.organization? &&
+      user.level_two_or_three_verified? &&
+      (
+        Setting['feature.user.skip_verification'].present? ||
+        projekt.blank? ||
+        debate_phase && debate_phase.geozone_restrictions.blank? ||
+        (debate_phase && debate_phase.geozone_restrictions.any? && debate_phase.geozone_restrictions.include?(user.geozone) )
+      ) &&
+      (
+        projekt.blank? ||
+        debate_phase.present? && debate_phase.current?
+      )
+    )
   end
 
   def comments_allowed?(user)

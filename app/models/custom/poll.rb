@@ -12,9 +12,20 @@ class Poll < ApplicationRecord
 
   scope :with_current_projekt,  -> { joins(:projekt).merge(Projekt.current) }
 
+  def not_allow_user_geozone?(user)
+    geozone_restricted? && geozone_ids.any? && !geozone_ids.include?(user.geozone_id)
+  end
+
+  def citizen_not_alloed?(user)
+    geozone_restricted? && geozone_ids.empty? && user.not_current_city_citizen?
+  end
+
+  def geozone_restrictions_formated
+    geozones.map(&:postal_codes).flatten.join(", ")
+  end
+
   def self.base_selection
-    created_by_admin.
-      not_budget
+    created_by_admin.not_budget
   end
 
   def self.scoped_projekt_ids_for_index

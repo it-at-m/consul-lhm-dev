@@ -7,7 +7,7 @@
   </div>
 
   <div class='columns small-12 medium-3 large-2 show-for-small-only'>
-    <% if show_image_thumbnail?(investment) %>
+    <% if show_image_thumbnail?(investment) && investment.image.attached? %>
       <%= link_to investment do %>
         <%= image_tag investment.image.variant(:large), alt: investment.image.title.unicode_normalize %>
       <% end %>

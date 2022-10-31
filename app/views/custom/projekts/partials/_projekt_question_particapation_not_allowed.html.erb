@@ -19,6 +19,20 @@
     </p>
   </div>
 
+<% elsif projekt_question.root_question? && projekt.question_phase.only_citizens_allowed? && !current_user.current_city_citizen? %>
+  <div class="callout warning">
+    <p>
+      <%= t("custom.shared.warnings.only_for_citizens", city: Setting["org_name"]) %>
+    </p>
+  </div>
+
+<% elsif projekt_question.root_question? && projekt.question_phase.only_geozones_allowed? && !projekt.question_phase.geozone_allowed?(current_user) %>
+  <div class="callout warning">
+    <p>
+      <%= t("custom.shared.warnings.only_for_geozones", geozones: projekt.question_phase.geozone_restrictions_formated) %>
+    </p>
+  </div>
+
 <% elsif user_signed_in? && current_user.unverified? %>
   <div class="callout primary">
     <p>

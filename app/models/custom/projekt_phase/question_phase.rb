@@ -19,4 +19,8 @@ class ProjektPhase::QuestionPhase < ProjektPhase
     projekt.present? &&
     projekt.question_phase.current?
   end
+
+  def particapation_closed?
+    !participation_open?
+  end
 end

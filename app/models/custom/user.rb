@@ -126,6 +126,14 @@ class User < ApplicationRecord
     @geozone_ids.include?(geozone.id)
   end
 
+  def not_current_city_citizen?
+    !current_city_citizen?
+  end
+
+  def verified?
+    !unverified?
+  end
+
   private
 
     def update_qualified_votes_count_for_budget_investments
