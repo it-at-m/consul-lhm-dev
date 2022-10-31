@@ -100,10 +100,11 @@ class ProposalsController
             order: params[:order]
           ), notice: t("proposals.notice.published")
         else
-          redirect_to proposals_path(resources_order: params[:order]), notice: t("proposals.notice.published")
+          redirect_to proposals_path(
+            resources_order: params[:order]
+          ), notice: t("proposals.notice.published")
         end
       end
-
     else
       @selected_projekt = @proposal.projekt
       render :new

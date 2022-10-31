@@ -158,7 +158,7 @@ class ProjektsController < ApplicationController
     @top_level_archived_projekts = @resources
 
     @debates = @resources.page(params[:page]) #.send("sort_by_#{@current_order}")
-    @debate_votes = current_user ? current_user.debate_votes(@debates) : {}
+    # @debate_votes = current_user ? current_user.debate_votes(@debates) : {}
   end
 
   def set_proposals_footer_tab_variables(projekt=nil)

@@ -50,6 +50,60 @@ class DebatesController < ApplicationController
     @debates = @resources.page(params[:page]).send("sort_by_#{@current_order}")
   end
 
+  def new
+    redirect_to proposals_path if Projekt.top_level.selectable_in_selector('debates', current_user).empty?
+
+    @resource = resource_model.new
+    set_geozone
+    set_resource_instance
+    @selected_projekt = Projekt.find(params[:projekt_id]) if params[:projekt_id]
+  end
+
+  def edit
+    @selected_projekt = @debate.projekt
+  end
+
+  def create
+    @debate = Debate.new(strong_params)
+    @debate.author = current_user
+
+    if @debate.save
+      track_event
+
+      if @debate.debate_phase.active?
+        if @debate.projekt.overview_page?
+          redirect_to projekts_path(
+            anchor: 'filter-subnav',
+            selected_phase_id: @debate.debate_phase.id,
+            order: params[:order]
+          ), notice: t("flash.actions.create.debate")
+        else
+          redirect_to page_path(
+            @debate.projekt.page.slug,
+            anchor: 'filter-subnav',
+            selected_phase_id: @debate.debate_phase.id,
+            order: params[:order]
+          ), notice: t("flash.actions.create.debate")
+        end
+      else
+        if @debate.projekt.overview_page?
+          redirect_to projekts_path(
+            anchor: 'filter-subnav',
+            selected_phase_id: @debate.debate_phase.id,
+            order: params[:order]
+          ), notice: t("flash.actions.create.debate")
+        else
+          redirect_to proposals_path(
+            resources_order: params[:order]
+          ), notice: t("flash.actions.create.debate")
+        end
+      end
+    else
+      @selected_projekt = @debate.projekt
+      render :new
+    end
+  end
+
   def show
     super
 

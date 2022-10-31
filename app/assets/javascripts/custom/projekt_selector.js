@@ -200,8 +200,8 @@
       // get preselcted projekt id
       var selectedProjektId;
       var url = new URL(window.location.href);
-      if (url.searchParams.get('projekt')) {
-        selectedProjektId = url.searchParams.get('projekt');
+      if (url.searchParams.get('projekt_id')) {
+        selectedProjektId = url.searchParams.get('projekt_id');
       } else {
         selectedProjektId = $('[id$="projekt_id"]').val();
       }

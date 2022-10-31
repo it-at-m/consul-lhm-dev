@@ -13,5 +13,5 @@
     <%= helpers.render_custom_block 'debates_creation_recommendations' %>
   </aside>
 
-  <%= render Debates::FormComponent.new(debate) %>
+  <%= render Debates::FormComponent.new(debate, selected_projekt: @selected_projekt) %>
 </main>
