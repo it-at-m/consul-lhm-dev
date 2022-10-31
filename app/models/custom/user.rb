@@ -131,7 +131,7 @@ class User < ApplicationRecord
   end
 
   def verified?
-    verified_at.present?
+    !unverified?
   end
 
   private
