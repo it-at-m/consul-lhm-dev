@@ -107,7 +107,7 @@ var klaroConfig = {
         // translationsed defined under the 'zz' language code act as default
         // translations.
         zz: {
-            privacyPolicyUrl: '/#privacy',
+            privacyPolicyUrl: '/privacy',
         },
         // If you erase the "consentModal" translations, Klaro will use the
         // bundled translations.
