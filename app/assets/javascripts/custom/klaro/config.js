@@ -78,7 +78,7 @@ var klaroConfig = {
     hideLearnMore: false,
 
     // show cookie notice as modal
-    noticeAsModal: false,
+    noticeAsModal: true,
 
     // You can also remove the 'Realized with Klaro!' text in the consent modal.
     // Please don't do this! We provide Klaro as a free open source tool.
@@ -152,7 +152,13 @@ var klaroConfig = {
                 livechat: 'Live Chat',
                 advertising: 'Anzeigen von Werbung',
                 styling: 'Styling',
+                system: 'Plattformbetrieb'
             },
+            ok: 'Alle akzeptieren',
+            consentNotice: {
+              learnMore: 'Individuelle Datenschutzeinstellungen',
+              description: 'Wir speichern und verarbeiten Ihre personenbezogenen Informationen für folgende Zwecke: {purposes}'
+            }
         },
         en: {
             consentModal: {
@@ -196,6 +202,7 @@ var klaroConfig = {
                 livechat: 'Livechat',
                 advertising: 'Advertising',
                 styling: 'Styling',
+                system: 'Plattform operation',
             },
         },
     },
@@ -290,12 +297,12 @@ var klaroConfig = {
         //     required: true,
         // },
         {
-            name: 'klarotest',
-            title: 'Klaro Test',
+            name: 'system',
+            title: 'Session cookie',
             default: true,
-            purposes: ['analytics'],
-            cookies: ['testklaro'],
+            purposes: ['system'],
             optOut: false,
+            required: true
         },
     ],
 };
