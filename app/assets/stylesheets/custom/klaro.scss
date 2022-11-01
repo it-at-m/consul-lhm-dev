@@ -1,17 +1,28 @@
 .klaro {
-  .cookie-modal-notice {
+  .cookie-modal {
     .cn-ok {
-
-      .cm-btn-lern-more {
+      .cm-btn.cm-btn-info {
         padding: 10px;
-        background-color: $brand;
+        background-color: $accent;
         flex-grow: 1;
         min-height: 3rem;
       }
 
-      .cm-btn-success {
+      .cm-btn.cm-btn-success {
         padding: 10px;
+        background-color: $brand;
         min-height: 3rem;
+      }
+    }
+
+    .cm-footer {
+      .cm-footer-buttons {
+        .cm-btn.cm-btn-info {
+          background-color: $accent;
+        }
+        .cm-btn.cm-btn-accept-all {
+          background-color: $brand;
+        }
       }
     }
   }
