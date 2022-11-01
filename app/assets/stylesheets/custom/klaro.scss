@@ -1,3 +1,7 @@
+.klaro .cookie-modal .cm-list-input:checked+.cm-list-label .slider {
+  background-color: $accent !important;
+}
+
 .klaro {
   .cookie-modal {
     .cn-ok {
@@ -15,15 +19,18 @@
       }
     }
 
-    .cm-footer {
-      .cm-footer-buttons {
-        .cm-btn.cm-btn-info {
-          background-color: $accent;
-        }
-        .cm-btn.cm-btn-accept-all {
-          background-color: $brand;
-        }
+    .cm-footer-buttons {
+      .cm-btn.cm-btn-info {
+        background-color: $accent;
       }
+
+      .cm-btn.cm-btn-accept-all {
+        background-color: $brand;
+      }
+    }
+
+    a {
+      color: $brand !important;
     }
   }
 }
