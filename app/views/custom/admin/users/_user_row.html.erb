@@ -5,30 +5,22 @@
   <% else %>
     <td><%= link_to user.name, user_path(user), target: "_blank" %></td>
     <td><%= user.email %></td>
-
-    <% if extended_feature?("verification.manual_verifications")  %>
-      <td><%= user.first_name %></td>
-      <td><%= user.last_name %></td>
-      <td><%= user.street_name %></td>
-      <td><%= user.street_number %></td>
-      <td><%= user.plz %></td>
-      <td><%= user.city_name %></td>
-      <td><%= user.document_last_digits %></td>
-    <% else %>
-      <td><%= user.document_number %></td>
-    <% end %>
-
+    <td><%= user.first_name %></td>
+    <td><%= user.last_name %></td>
+    <td><%= user.street_name %></td>
+    <td><%= user.street_number %></td>
+    <td><%= user.plz %></td>
+    <td><%= user.city_name %></td>
+    <td><%= user.document_last_digits %></td>
     <td><%= t("custom.devise_views.users.gender.#{user.gender}") if user.gender.present? %></td>
     <td><%= l user.date_of_birth.to_date if user.date_of_birth.present? %></td>
     <td><%= display_user_roles(user) %></td>
     <td><%= user.user_type %></td>
 
-    <% if extended_feature?("verification.manual_verifications")  %>
-      <td>
-        <% unless user.level_three_verified? || user.organization? %>
-          <%= link_to(t("custom.admin.users.columns.action.verify"), verify_admin_user_path(user), class: 'button', remote: true, method: :put) %>
-        <% end %>
-      </td>
-    <% end %>
+    <td>
+      <% unless user.level_three_verified? || user.organization? %>
+        <%= link_to(t("custom.admin.users.columns.action.verify"), verify_admin_user_path(user), class: 'button', remote: true, method: :put) %>
+      <% end %>
+    </td>
   <% end %>
 </tr>

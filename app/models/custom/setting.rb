@@ -1,6 +1,7 @@
 require_dependency Rails.root.join("app", "models", "setting").to_s
 
 class Setting < ApplicationRecord
+  attr_accessor :form_field_disabled, :dependent_setting_ids, :dependent_setting_action
 
   def type
     if %w[feature process proposals map html homepage uploads projekts sdg].include? prefix
@@ -219,26 +220,9 @@ class Setting < ApplicationRecord
         "extended_feature.projekts_overview_page_footer.show_in_index_order_expired": true,
         "extended_feature.projekts_overview_page_footer.show_in_index_order_individual_list": true,
 
-        "extended_feature.verification.manual_verifications": true,
-
-        "extra_fields.registration.first_name": false,
-        "extra_fields.registration.last_name": false,
-        "extra_fields.registration.street_name": false,
-        "extra_fields.registration.street_number": false,
-        "extra_fields.registration.plz": false,
-        "extra_fields.registration.city_name": false,
-        "extra_fields.registration.date_of_birth": false,
-        "extra_fields.registration.gender": false,
-        "extra_fields.registration.document_last_digits": false,
-        "extra_fields.verification.first_name": false,
-        "extra_fields.verification.last_name": false,
-        "extra_fields.verification.street_name": false,
-        "extra_fields.verification.street_number": false,
-        "extra_fields.verification.plz": false,
-        "extra_fields.verification.city_name": false,
-        "extra_fields.verification.date_of_birth": false,
-        "extra_fields.verification.gender": false,
-        "extra_fields.verification.document_last_digits": false
+        "extra_fields.registration.extended": false,
+        "extra_fields.registration.check_documents": false,
+        "extra_fields.verification.check_documents": false,
       }
     end
 

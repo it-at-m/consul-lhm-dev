@@ -13,26 +13,20 @@
           <th scope="col"><%= t("admin.users.columns.name") %></th>
           <th scope="col"><%= t("admin.users.columns.email") %></th>
 
-          <% if extended_feature?("verification.manual_verifications")  %>
-            <th scope="col"><%= t("custom.admin.users.columns.first_name") %></th>
-            <th scope="col"><%= t("custom.admin.users.columns.last_name") %></th>
-            <th scope="col"><%= t("custom.admin.users.columns.street_name") %></th>
-            <th scope="col"><%= t("custom.admin.users.columns.street_number") %></th>
-            <th scope="col"><%= t("custom.admin.users.columns.plz") %></th>
-            <th scope="col"><%= t("custom.admin.users.columns.city_name") %></th>
-            <th scope="col"><%= t("custom.admin.users.columns.document_last_digits") %></th>
-          <% else %>
-            <th scope="col"><%= t("admin.users.columns.document_number") %></th>
-          <% end %>
+          <th scope="col"><%= t("custom.admin.users.columns.first_name") %></th>
+          <th scope="col"><%= t("custom.admin.users.columns.last_name") %></th>
+          <th scope="col"><%= t("custom.admin.users.columns.street_name") %></th>
+          <th scope="col"><%= t("custom.admin.users.columns.street_number") %></th>
+          <th scope="col"><%= t("custom.admin.users.columns.plz") %></th>
+          <th scope="col"><%= t("custom.admin.users.columns.city_name") %></th>
+          <th scope="col"><%= t("custom.admin.users.columns.document_last_digits") %></th>
 
           <th scope="col"><%= t("custom.admin.users.columns.gender") %></th>
           <th scope="col"><%= t("custom.admin.users.columns.date_of_birth") %></th>
           <th scope="col"><%= t("admin.users.columns.roles") %></th>
           <th scope="col"><%= t("admin.users.columns.verification_level") %></th>
 
-          <% if extended_feature?("verification.manual_verifications")  %>
-            <th scope="col"><%= t("custom.admin.users.columns.actions") %></th>
-          <% end %>
+          <th scope="col"><%= t("custom.admin.users.columns.actions") %></th>
         <% end %>
       </tr>
     </thead>

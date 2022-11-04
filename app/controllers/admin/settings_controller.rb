@@ -47,7 +47,7 @@ class Admin::SettingsController < Admin::BaseController
     end
 
     def allowed_params
-      [:value]
+      [:value, :dependent_setting_id, :dependent_setting_action]
     end
 
     def content_type_params

@@ -17,11 +17,24 @@ class Admin::SettingsController < Admin::BaseController
     @extended_option_gdpr = all_settings["extended_option.gdpr"]
     @extended_option_proposals = all_settings["extended_option.proposals"]
 
-    @extended_feature_verification = all_settings["extended_feature.verification"]
     @extra_fields_registration = all_settings["extra_fields.registration"]
+    extra_fields_refistration_extended = @extra_fields_registration.find { |setting| setting.key == "extra_fields.registration.extended" }
+    extra_fields_registration_check_documents = @extra_fields_registration.find { |setting| setting.key == "extra_fields.registration.check_documents" }
+    extra_fields_refistration_extended.dependent_setting_ids = extra_fields_registration_check_documents.id
+    extra_fields_refistration_extended.dependent_setting_action = "disable-when-disabled"
+    unless extra_fields_refistration_extended.enabled?
+      extra_fields_registration_check_documents.form_field_disabled = true
+    end
+
     @extra_fields_verification = all_settings["extra_fields.verification"]
-    @extra_fields_attributes = all_settings["extra_fields.registration"].pluck(:key).map{ |key| key.split('.').last } &&
-      all_settings["extra_fields.verification"].pluck(:key).map{ |key| key.split('.').last }
+    extra_fields_verification_check_documents = @extra_fields_verification.find { |setting| setting.key == "extra_fields.verification.check_documents" }
+    skip_verification_setting = Setting.find_by(key: "feature.user.skip_verification")
+    skip_verification_setting.dependent_setting_ids = extra_fields_verification_check_documents.id
+    skip_verification_setting.dependent_setting_action = "disable-when-enabled"
+    if skip_verification_setting.enabled?
+      extra_fields_verification_check_documents.form_field_disabled = true
+    end
+    @extra_fields_verification.unshift(skip_verification_setting)
 
     @participation_processes_settings = all_settings["process"]
     @map_configuration_settings = all_settings["map"]
@@ -33,6 +46,17 @@ class Admin::SettingsController < Admin::BaseController
     @sdg_settings = all_settings["sdg"]
   end
 
+  def update
+    @setting = Setting.find(params[:id])
+    @setting.update!(settings_params)
+    update_dependent_settings
+
+    respond_to do |format|
+      format.html { redirect_to request_referer, notice: t("admin.settings.flash.updated") }
+      format.js
+    end
+  end
+
   def update_map
     Setting["map.latitude"] = params[:latitude].to_f
     Setting["map.longitude"] = params[:longitude].to_f
@@ -41,10 +65,27 @@ class Admin::SettingsController < Admin::BaseController
   end
 
   private
+
     def request_referer
       return request.referer + params[:setting][:tab] if params[:setting] && params[:setting][:tab]
       return request.referer + params[:tab] if params[:tab]
 
       request.referer
+    end
+
+    def allowed_params
+      [:value, :dependent_setting_ids, :dependent_setting_action]
+    end
+
+    def update_dependent_settings
+      dependent_setting_ids = @setting.dependent_setting_ids.split(",")
+      @dependent_settings = Setting.where(id: dependent_setting_ids)
+
+      if (@setting.dependent_setting_action == "disable-when-disabled" && !@setting.enabled?) ||
+        (@setting.dependent_setting_action == "disable-when-enabled" && @setting.enabled?)
+
+        @dependent_settings.update_all(value: "")
+        @dependent_settings.each { |setting| setting.form_field_disabled = true }
+      end
     end
 end
