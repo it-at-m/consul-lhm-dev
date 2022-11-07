@@ -11,12 +11,6 @@
       <%= sanitize(t("custom.polls.show.cant_answer_organization")) %>
     </div>
 
-  <% elsif current_user.unverified? %>
-    <div class="callout warning">
-      <%= sanitize(t("polls.show.cant_answer_verify",
-            verify_link: link_to(t("polls.show.verify_link"), verification_path))) %>
-    </div>
-
   <% elsif @poll.expired? %>
     <div class="callout alert">
       <%= t("polls.show.cant_answer_expired") %>
@@ -38,4 +32,27 @@
     </div>
 
   <% end %>
+<% end %>
+
+<% if @poll.voted_in_booth?(current_user) %>
+  <div class="callout warning">
+    <%= t("polls.show.already_voted_in_booth") %>
+  </div>
+<% else %>
+
+  <% if current_user && @poll.voted_in_web?(current_user) && !@poll.expired? %>
+    <div class="callout warning">
+      <%= t("polls.show.already_voted_in_web") %>
+    </div>
+  <% end %>
+<% end %>
+
+<% if can?(:answer, @poll) %>
+  <div class="callout primary">
+    <%= t("poll_questions.show.withdraw_answers_hint") %>
+  </div>
+<% end %>
+
+<% @questions.each do |question| %>
+  <%= render "polls/questions/question", question: question, token: @token %>
 <% end %>

@@ -83,11 +83,19 @@ module Abilities
         # can :vote, Comment
       end
 
-      if user.level_two_or_three_verified?
-        can :vote, Proposal, &:published?
-        can :unvote, Proposal, &:published?
-        can :vote_featured, Proposal
+      can :vote, Proposal, &:published?
+      can :unvote, Proposal, &:published?
+      can :vote_featured, Proposal
 
+      can [:answer, :unanswer, :confirm_participation], Poll do |poll|
+        poll.answerable_by?(user)
+      end
+
+      can [:answer, :unanswer, :update_open_answer], Poll::Question do |question|
+        question.answerable_by?(user)
+      end
+
+      if user.level_two_or_three_verified?
         can :vote, Legislation::Proposal
         can :create, Legislation::Answer
 
@@ -106,13 +114,6 @@ module Abilities
 
         can :create, DirectMessage
         can :show, DirectMessage, sender_id: user.id
-
-        can [:answer, :unanswer, :confirm_participation], Poll do |poll|
-          poll.answerable_by?(user)
-        end
-        can [:answer, :unanswer, :update_open_answer], Poll::Question do |question|
-          question.answerable_by?(user)
-        end
       end
 
       can [:create, :show], ProposalNotification, proposal: { author_id: user.id }

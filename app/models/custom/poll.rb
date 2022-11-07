@@ -48,7 +48,6 @@ class Poll < ApplicationRecord
   def answerable_by?(user)
     user &&
       !user.organization? &&
-      user.level_three_verified? &&
       current? &&
       (!geozone_restricted || ( geozone_restricted && geozone_ids.blank? && user.geozone.present? ) || (geozone_restricted && geozone_ids.include?(user.geozone_id)))
   end

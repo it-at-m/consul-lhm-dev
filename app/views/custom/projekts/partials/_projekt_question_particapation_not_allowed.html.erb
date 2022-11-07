@@ -33,14 +33,6 @@
     </p>
   </div>
 
-<% elsif user_signed_in? && current_user.unverified? %>
-  <div class="callout primary">
-    <p>
-      <%= sanitize(t("custom.projekts.projekt_questions.participation_not_allowed.not_verified",
-          verify_account: link_to_verify_account)) %>
-    </p>
-  </div>
-
 <% elsif !user_signed_in? %>
   <div class="callout primary">
     <p>

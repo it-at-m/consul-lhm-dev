@@ -31,29 +31,6 @@
 
         <%= render "callout" %>
 
-        <% if @poll.voted_in_booth?(current_user) %>
-          <div class="callout warning">
-            <%= t("polls.show.already_voted_in_booth") %>
-          </div>
-        <% else %>
-
-          <% if current_user && @poll.voted_in_web?(current_user) && !@poll.expired? %>
-            <div class="callout warning">
-              <%= t("polls.show.already_voted_in_web") %>
-            </div>
-          <% end %>
-        <% end %>
-
-        <% if can?(:answer, @poll) %>
-          <div class="callout primary">
-            <%= t("poll_questions.show.withdraw_answers_hint") %>
-          </div>
-        <% end %>
-
-        <% @questions.each do |question| %>
-          <%= render "polls/questions/question", question: question, token: @token %>
-        <% end %>
-
         <% if @poll.current? %>
           <div id='confirm-poll-participation-outer-wrapper'>
             <div class='confirm-poll-participation-inner-wrapper'>
