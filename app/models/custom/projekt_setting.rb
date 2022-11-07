@@ -1,4 +1,5 @@
 class ProjektSetting < ApplicationRecord
+  attr_accessor :form_field_disabled, :dependent_setting_ids, :dependent_setting_action
   belongs_to :projekt
 
   validates :key, presence: true, uniqueness: { scope: :projekt_id }
