@@ -48,7 +48,6 @@ class Debate
     (
       user.present? &&
       !user.organization? &&
-      user.level_two_or_three_verified? &&
       (
         Setting['feature.user.skip_verification'].present? ||
         projekt.blank? ||
