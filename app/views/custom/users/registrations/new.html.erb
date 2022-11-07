@@ -61,9 +61,29 @@
         <%= f.select :gender, options_for_gender_select, include_blank: t("custom.devise_views.users.registrations.new.gender") %>
       <% end %>
 
-      <% if resource.document_last_digits_required? %>
-        <%= f.text_field :document_last_digits, placeholder: t("custom.devise_views.users.registrations.new.document_last_digits_label") %>
+      <% if resource.document_required? %>
+				<%= f.select :document_type, user_document_types, prompt: "" %>
+				<%= f.text_field :document_last_digits, placeholder: t("custom.devise_views.users.registrations.new.document_last_digits_label") %>
+
+        <div>
+          <label><%= t('custom.users.document_help') %></label>
+
+          <div class='row margin-bottom'>
+            <div class='column small-12 medium-6'>
+              <label><%= t('custom.users.card_label') %></label>
+              <p><%= t('custom.users.card_help') %></p>
+              <%= image_tag 'card.jpg' %>
+            </div>
+
+            <div class='column small-12 medium-6'>
+              <label><%= t('custom.users.pass_label') %></label>
+              <p><%= t('custom.users.pass_help') %></p>
+              <%= image_tag 'pass_new.png' %>
+            </div>
+          </div>
+        </div>
       <% end %>
+
 
 
       <%= f.password_field :password, autocomplete: "off",

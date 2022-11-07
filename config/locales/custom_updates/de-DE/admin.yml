@@ -382,6 +382,7 @@ de:
           actions: Aktionen
           action:
             verify: Verifizieren
+            unverify: Verifizierung zurückziehen
       widget:
         card:
           category_options:

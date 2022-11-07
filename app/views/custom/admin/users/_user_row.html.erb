@@ -11,6 +11,7 @@
     <td><%= user.street_number %></td>
     <td><%= user.plz %></td>
     <td><%= user.city_name %></td>
+    <td><%= user.document_type %></td>
     <td><%= user.document_last_digits %></td>
     <td><%= t("custom.devise_views.users.gender.#{user.gender}") if user.gender.present? %></td>
     <td><%= l user.date_of_birth.to_date if user.date_of_birth.present? %></td>
@@ -18,8 +19,12 @@
     <td><%= user.user_type %></td>
 
     <td>
-      <% unless user.level_three_verified? || user.organization? %>
-        <%= link_to(t("custom.admin.users.columns.action.verify"), verify_admin_user_path(user), class: 'button', remote: true, method: :put) %>
+      <% unless skip_user_verification? || user.organization? %>
+        <% if user.verified_at.blank? %>
+          <%= link_to(t("custom.admin.users.columns.action.verify"), verify_admin_user_path(user), class: 'button', remote: true, method: :put) %>
+        <% else %>
+          <%= link_to(t("custom.admin.users.columns.action.unverify"), unverify_admin_user_path(user), class: 'button', remote: true, method: :put) %>
+        <% end %>
       <% end %>
     </td>
   <% end %>

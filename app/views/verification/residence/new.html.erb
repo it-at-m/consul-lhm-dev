@@ -16,134 +16,100 @@
       </ul>
     </div>
 
-      <%= form_for @residence, as: "residence", url: residence_path do |f| %>
-        <%= render "errors" %>
+    <%= form_for @residence, as: "residence", url: residence_path do |f| %>
+      <%= render "errors" %>
 
-          <div class="small-12 medium-5 clear">
-            <%= f.label t("custom.verification.residence.new.first_name") %>
-            <%= f.text_field :first_name, label: false %>
-          </div>
-
-          <div class="small-12 medium-5 clear">
-            <%= f.label t("custom.verification.residence.new.last_name") %>
-            <%= f.text_field :last_name, label: false %>
-          </div>
-
-          <div class="small-12 medium-5 clear">
-            <%= f.label t("custom.verification.residence.new.street_name") %>
-            <%= f.text_field :street_name, label: false %>
-          </div>
-
-          <div class="small-12 medium-5 clear">
-            <%= f.label t("custom.verification.residence.new.street_number") %>
-            <%= f.text_field :street_number, label: false %>
-          </div>
-
-          <div class="small-12 medium-5 clear">
-            <%= f.label t("custom.verification.residence.new.plz") %>
-            <%= f.text_field :plz, label: false %>
-          </div>
-
-          <div class="small-12 medium-5 clear">
-            <%= f.label t("custom.verification.residence.new.city_name") %>
-            <%= f.text_field :city_name, label: false %>
-          </div>
-
-          <div class="small-12 medium-5 clear">
-            <%= f.label t("custom.verification.residence.new.date_of_birth") %>
-            <div class="user-date-of-birth sign-up">
-              <%= f.date_select :date_of_birth,
-                                prompt: true,
-                                label: false,
-                                start_year: 1900, end_year: minimum_required_age.years.ago.year %>
-            </div>
-          </div>
-
-          <div class="small-12 medium-5 clear">
-            <%= f.label t("custom.verification.residence.new.gender") %>
-            <%= f.select :gender, options_for_gender_select, include_blank: t("custom.devise_views.users.registrations.new.gender"), label: false %>
-          </div>
-
-        <% if Setting["extra_fields.verification.check_documents"] %>
-          <div class="small-12 medium-5 clear">
-            <%= f.label t("custom.verification.residence.new.document_last_digits") %>
-            <%= f.text_field :document_last_digits, label: false %>
-          </div>
-        <% end %>
-
-        <div class="small-12">
-          <%= f.check_box :terms_of_service,
-            title: t("verification.residence.new.accept_terms_text_title"),
-            label: t("verification.residence.new.accept_terms_text",
-                     terms_url: link_to(t("verification.residence.new.terms"), page_path("census_terms"),
-                                        title: t("shared.target_blank"),
-                                        target: "_blank")
-                    ) %>
-        </div>
-
-        <div class="small-12 medium-3 clear">
-          <%= f.submit t("verification.residence.new.verify_residence"),
-                       id: "new_residence_submit",
-                       class: "button success expanded" %>
-        </div>
-      <% end %>
-
-      <%= form_for @residence, as: "residence", url: residence_path do |f| %>
-        <%= render "errors" %>
-
-        <div class="row">
-          <div class="small-12 medium-8">
-            <div class="small-12 medium-3 column">
-            <%= f.select :document_type, document_types, prompt: "" %>
-            </div>
-            <div class="small-12 medium-5 column end">
-
-            <div class="inline-block">
-              <%= f.label t("verification.residence.new.document_number") %>
-            </div>
-
-            <button type="button" class="inline-block" data-toggle="info-document-number">
-              <span class="icon-help"></span>
-              <span class="show-for-sr"><%= t("verification.residence.new.document_number_help_title") %></span>
-            </button>
-
-            <div class="dropdown-pane" id="info-document-number" data-dropdown
-                 data-hover="true" data-hover-pane="true">
-              <%= sanitize(t("verification.residence.new.document_number_help_text")) %>
-            </div>
-
-            <%= f.text_field :document_number, label: false %>
-            </div>
-          </div>
-        </div>
-
-        <div class="date-of-birth small-12 medium-6 clear">
-        <%= f.date_select :date_of_birth,
-                          prompt: true,
-                          start_year: 1900, end_year: minimum_required_age.years.ago.year %>
+        <div class="small-12 medium-5 clear">
+          <%= f.label t("custom.verification.residence.new.first_name") %>
+          <%= f.text_field :first_name, label: false %>
         </div>
 
         <div class="small-12 medium-5 clear">
-          <%= f.text_field :postal_code,
-            hint: t("verification.residence.new.postal_code_note") %>
+          <%= f.label t("custom.verification.residence.new.last_name") %>
+          <%= f.text_field :last_name, label: false %>
         </div>
 
-        <div class="small-12">
-          <%= f.check_box :terms_of_service,
-            title: t("verification.residence.new.accept_terms_text_title"),
-            label: t("verification.residence.new.accept_terms_text",
-                     terms_url: link_to(t("verification.residence.new.terms"), page_path("census_terms"),
-                                        title: t("shared.target_blank"),
-                                        target: "_blank")
-                    ) %>
+        <div class="small-12 medium-5 clear">
+          <%= f.label t("custom.verification.residence.new.street_name") %>
+          <%= f.text_field :street_name, label: false %>
         </div>
 
-        <div class="small-12 medium-3 clear">
-          <%= f.submit t("verification.residence.new.verify_residence"),
-                       id: "new_residence_submit",
-                       class: "button success expanded" %>
+        <div class="small-12 medium-5 clear">
+          <%= f.label t("custom.verification.residence.new.street_number") %>
+          <%= f.text_field :street_number, label: false %>
         </div>
 
+        <div class="small-12 medium-5 clear">
+          <%= f.label t("custom.verification.residence.new.plz") %>
+          <%= f.text_field :plz, label: false %>
+        </div>
+
+        <div class="small-12 medium-5 clear">
+          <%= f.label t("custom.verification.residence.new.city_name") %>
+          <%= f.text_field :city_name, label: false %>
+        </div>
+
+        <div class="small-12 medium-5 clear">
+          <%= f.label t("custom.verification.residence.new.date_of_birth") %>
+          <div class="user-date-of-birth sign-up">
+            <%= f.date_select :date_of_birth,
+                              prompt: true,
+                              label: false,
+                              start_year: 1900, end_year: minimum_required_age.years.ago.year %>
+          </div>
+        </div>
+
+        <div class="small-12 medium-5 clear">
+          <%= f.label t("custom.verification.residence.new.gender") %>
+          <%= f.select :gender, options_for_gender_select, include_blank: t("custom.devise_views.users.registrations.new.gender"), label: false %>
+        </div>
+
+      <% if @residence.document_required? %>
+
+        <div class='user-document'>
+          <div class='small-12 medium-5 clear'>
+            <%= f.select :document_type, user_document_types, prompt: "" %>
+          </div>
+          <div class='small-12 medium-5 clear'>
+            <%= f.label t("custom.verification.residence.new.document_last_digits") %>
+            <%= f.text_field :document_last_digits, label: false %>
+          </div>
+        </div>
+
+        <div>
+          <label><%= t('custom.users.document_help') %></label>
+
+          <div class='row margin-bottom'>
+            <div class='column small-12 medium-6'>
+              <label><%= t('custom.users.card_label') %></label>
+              <p><%= t('custom.users.card_help') %></p>
+              <%= image_tag 'card.jpg' %>
+            </div>
+
+            <div class='column small-12 medium-6'>
+              <label><%= t('custom.users.pass_label') %></label>
+              <p><%= t('custom.users.pass_help') %></p>
+              <%= image_tag 'pass_new.png' %>
+            </div>
+          </div>
+        </div>
       <% end %>
+
+      <div class="small-12">
+        <%= f.check_box :terms_of_service,
+          title: t("verification.residence.new.accept_terms_text_title"),
+          label: t("verification.residence.new.accept_terms_text",
+                   terms_url: link_to(t("verification.residence.new.terms"), page_path("census_terms"),
+                                      title: t("shared.target_blank"),
+                                      target: "_blank")
+                  ) %>
+      </div>
+
+      <div class="small-12 medium-3 clear">
+        <%= f.submit t("verification.residence.new.verify_residence"),
+                     id: "new_residence_submit",
+                     class: "button success expanded" %>
+      </div>
+    <% end %>
   </div>
 </div>

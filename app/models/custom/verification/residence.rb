@@ -11,38 +11,34 @@ class Verification::Residence
   validates :plz, presence: true
   validates :city_name, presence: true
   validates :gender, presence: true
-  validates :date_of_birth, presence: true
-  validate  :allowed_age
-  validates :document_last_digits, presence: true, if: :document_last_digits_required?
-
-  # validates :document_number, presence: true, unless: :manual_verification?
-  # validates :document_type, presence: true, unless: :manual_verification?
-  # validates :postal_code, presence: true, unless: :manual_verification?
-  # validate :local_postal_code, unless: :manual_verification?
-  # validate :local_residence, unless: :manual_verification?
+  validates :document_type, presence: true, if: :document_required?
+  validates :document_last_digits, presence: true, if: :document_required?
 
   def save
     return false unless valid?
 
-    user.update!(first_name:            first_name,                      #custom
-                 last_name:             last_name,                       #custom
-                 street_name:           street_name,                     #custom
-                 street_number:         street_number,                   #custom
-                 plz:                   plz,                             #custom
-                 city_name:             city_name,                       #custom
-                 document_last_digits:  document_last_digits,            #custom
-                 geozone:               Geozone.find_with_plz(plz),      #custom
-                 gender:                gender)
+    user.assign_attributes(
+      first_name:            first_name,
+      last_name:             last_name,
+      street_name:           street_name,
+      street_number:         street_number,
+      plz:                   plz,
+      city_name:             city_name,
+      document_type:         document_type,
+      document_last_digits:  document_last_digits,
+      date_of_birth:         date_of_birth,
+      geozone:               Geozone.find_with_plz(plz),
+      gender:                gender,
+    )
+
+    user.unique_stamp = user.prepare_unique_stamp
+
+    return false unless user.stamp_unique?
+
+    user.save!
   end
 
-  def document_number_uniqueness
-    if User.active.where.not(id: user.id).where(document_number: document_number).any? &&
-        !document_number.blank?
-      errors.add(:document_number, I18n.t("errors.messages.taken"))
-    end
-  end
-
-  def document_last_digits_required?
+  def document_required?
     Setting["extra_fields.verification.check_documents"].present?
   end
 end

@@ -28,8 +28,8 @@ class User < ApplicationRecord
   validates :city_name, presence: true, on: :create, if: :city_name_required?
   validates :date_of_birth, presence: true, on: :create, if: :date_of_birth_required?
   validates :gender, presence: true, on: :create, if: :gender_required?
-  validates :document_last_digits, presence: true, on: :create, if: :document_last_digits_required?
-
+  validates :document_type, presence: true, on: :create, if: :document_required?
+  validates :document_last_digits, presence: true, on: :create, if: :document_required?
 
   def take_votes_from_erased_user
     return if erased?
@@ -43,7 +43,7 @@ class User < ApplicationRecord
   end
 
   def stamp_unique?
-    User.find_by(unique_stamp: prepare_unique_stamp).blank?
+    User.where.not(id: id).find_by(unique_stamp: prepare_unique_stamp).blank?
   end
 
   def prepare_unique_stamp
@@ -114,7 +114,7 @@ class User < ApplicationRecord
     !organization? && !erased? && Setting["extra_fields.registration.extended"]
   end
 
-  def document_last_digits_required?
+  def document_required?
     !organization? && !erased? && Setting["extra_fields.registration.check_documents"]
   end
 

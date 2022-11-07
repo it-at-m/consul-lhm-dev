@@ -36,6 +36,9 @@ de:
         gender:
           male: männlich
           female: weiblich
+        document_type:
+          card: Personalausweis
+          pass: Reisepass
     gdpr_notice:
       accept: Akzeptieren
       link_text: Mehr Infos
@@ -142,6 +145,11 @@ de:
     users:
       login_to_vote: Sie müssen sich %{signin} oder %{signup}, um teilnehmen zu können
       verify_account_link_short: verifizieren
+      document_help: "Hinweis:"
+      card_label: Personalausweis Rückseite
+      card_help: "Letzte vier Ziffern auf Personalausweis Rückseite:"
+      pass_label: Reisepass Vorderseite
+      pass_help: "Letzte vier Ziffern auf Reisepass Vorderseite:"
     votes:
       debate_phase_expired: Die Phase ist bereits abgeschlossen.
       debate_phase_not_current: Die Phase ist nicht aktiv.

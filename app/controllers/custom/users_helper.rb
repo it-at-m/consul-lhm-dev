@@ -19,6 +19,13 @@ module UsersHelper
     Setting["feature.user.skip_verification"].present?
   end
 
+  def user_document_types
+    [
+      [t("custom.devise_views.users.document_type.card"), "card"],
+      [t("custom.devise_views.users.document_type.pass"), "pass"]
+    ]
+  end
+
   def show_admin_menu?(user = nil)
     unless namespace == "officing"
       current_administrator? || current_moderator? || current_valuator? || current_manager? ||
