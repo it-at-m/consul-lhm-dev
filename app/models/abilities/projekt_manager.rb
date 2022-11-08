@@ -59,10 +59,7 @@ module Abilities
                                            hidden_at: nil,
                                            budget: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
 
-      can :moderate, Comment do |comment|
-        comment.projekt.present? &&
-          comment.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
-      end
+      can :moderate, Comment
 
       can :hide, Comment do |comment|
         comment.projekt.present? &&
