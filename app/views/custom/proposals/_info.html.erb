@@ -1,69 +1,77 @@
-<% if feature?(:map) && map_location_available?(@proposal.map_location) %>
-  <div class="margin-bottom not-print">
-    <%= render_map(@proposal.map_location, "proposal", false, nil, MapLocation.where(proposal_id: @proposal.id).map(&:json_data), @proposal.projekt.map_layers_for_render.to_json) %>
+<% cache [locale_and_user_status(@proposal),
+          @proposal,
+          @proposal.author,
+          @proposal.projekt,
+          feature?(:map),
+          Flag.flagged?(current_user, @proposal)] do %>
+
+  <% if feature?(:map) && map_location_available?(@proposal.map_location) %>
+    <div class="margin-bottom not-print">
+      <%= render_map(@proposal.map_location, "proposal", false, nil, MapLocation.where(proposal_id: @proposal.id).map(&:json_data), @proposal.projekt.map_layers_for_render.to_json) %>
+    </div>
+  <% end %>
+
+  <% if projekt_feature?(@proposal.projekt, 'proposals.enable_summary') %>
+    <blockquote><%= @proposal.summary %></blockquote>
+  <% end %>
+
+  <% if @proposal.image.present? && ( !@proposal.image.concealed? || params[:controller] == 'admin/proposals' ) %>
+    <div class="image">
+      <%= render_image(@proposal.image, :large, true) %>
+    </div>
+  <% end %>
+
+  <% if @proposal.image.present? && params[:controller] == 'admin/proposals' %>
+    <div class='column'>
+      <%= link_to admin_proposal_toggle_image_path(@proposal), method: :patch, class: 'button hollow' do %>
+        <% @proposal.image.concealed ? "Bild einblenden" : "Bild ausblenden" %>
+      <% end %>
+      <hr>
+    </div>
+  <% end %>
+
+  <% if @proposal.description.present? %>
+    <div class='margin-bottom'>
+      <h5><%= t('custom.proposals.show.description')  %></h5>
+      <%= auto_link_already_sanitized_html wysiwyg(@proposal.description) %>
+    </div>
+  <% end %>
+
+  <div class='margin-top margin-bottom'>
+    <%= render "shared/tags", taggable: @proposal, limit: 5 %>
   </div>
-<% end %>
 
-<% if projekt_feature?(@proposal.projekt, 'proposals.enable_summary') %>
-  <blockquote><%= @proposal.summary %></blockquote>
-<% end %>
-
-<% if @proposal.image.present? && ( !@proposal.image.concealed? || params[:controller] == 'admin/proposals' ) %>
-  <div class="image">
-    <%= render_image(@proposal.image, :large, true) %>
-  </div>
-<% end %>
-
-<% if @proposal.image.present? && params[:controller] == 'admin/proposals' %>
-  <div class='column'>
-    <%= link_to admin_proposal_toggle_image_path(@proposal), method: :patch, class: 'button hollow' do %>
-      <% @proposal.image.concealed ? "Bild einblenden" : "Bild ausblenden" %>
-    <% end %>
-    <hr>
-  </div>
-<% end %>
-
-<% if @proposal.description.present? %>
-  <div class='margin-bottom'>
-    <h5><%= t('custom.proposals.show.description')  %></h5>
-    <%= auto_link_already_sanitized_html wysiwyg(@proposal.description) %>
-  </div>
-<% end %>
-
-<div class='margin-top margin-bottom'>
-	<%= render "shared/tags", taggable: @proposal, limit: 5 %>
-</div>
-
-<% if @proposal.video_url.present? %>
-  <div class="video-link not-print">
-    <p>
-      <span class="icon-video"></span>&nbsp;
-      <strong><%= t("proposals.show.title_video_url") %></strong>
-    </p>
-    <br>
-    <div class="small-12 medium-10 large-7 small-centered">
-      <div class="flex-video">
-        <div id="js-embedded-video" data-video-code="<%= embedded_video_code(@proposal) %>"></div>
-      </div>
-      <div class='text-center'>
-        <%= sanitize_and_auto_link @proposal.video_url %>
+  <% if @proposal.video_url.present? %>
+    <div class="video-link not-print">
+      <p>
+        <span class="icon-video"></span>&nbsp;
+        <strong><%= t("proposals.show.title_video_url") %></strong>
+      </p>
+      <br>
+      <div class="small-12 medium-10 large-7 small-centered">
+        <div class="flex-video">
+          <div id="js-embedded-video" data-video-code="<%= embedded_video_code(@proposal) %>"></div>
+        </div>
+        <div class='text-center'>
+          <%= sanitize_and_auto_link @proposal.video_url %>
+        </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
 
-<% if @proposal.retired? %>
-  <div id="retired_explanation" class="callout">
-    <h2>
-      <%= t("proposals.show.retired") %>:
-      <%= t("proposals.retire_options.#{@proposal.retired_reason}") unless @proposal.retired_reason == "other" %>
-    </h2>
-    <%= simple_format sanitize_and_auto_link(@proposal.retired_explanation), {}, sanitize: false %>
-  </div>
-<% end %>
+  <% if @proposal.retired? %>
+    <div id="retired_explanation" class="callout">
+      <h2>
+        <%= t("proposals.show.retired") %>:
+        <%= t("proposals.retire_options.#{@proposal.retired_reason}") unless @proposal.retired_reason == "other" %>
+      </h2>
+      <%= simple_format sanitize_and_auto_link(@proposal.retired_explanation), {}, sanitize: false %>
+    </div>
+  <% end %>
 
-<% if projekt_feature?(@proposal.projekt, "proposals.allow_attached_documents") %>
-  <%= render "documents/documents",
-              documents: @proposal.documents,
-              max_documents_allowed: Proposal.max_documents_allowed %>
+  <% if projekt_feature?(@proposal.projekt, "proposals.allow_attached_documents") %>
+    <%= render "documents/documents",
+                documents: @proposal.documents,
+                max_documents_allowed: Proposal.max_documents_allowed %>
+  <% end %>
 <% end %>

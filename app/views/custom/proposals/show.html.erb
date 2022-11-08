@@ -17,104 +17,76 @@
 <% end %>
 
 <main>
-  <% cache [locale_and_user_status(@proposal),
-            @proposal,
-            @proposal.voters.count,
-            @proposal_votes,
-            @proposal.author,
-            @proposal.projekt,
-            @proposal.proposal_phase,
-            @proposal.projekt.top_parent,
-            @proposal.projekt.page,
-            @proposal.image,
-            @proposal.successful?,
-            @proposal.custom_votes_needed_for_success,
-            proposal_settings_fingerprints,
-            Flag.flagged?(current_user, @proposal),
-            projekt_feature?(@proposal&.projekt, 'proposals.quorum_for_proposals'),
-            projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_support_withdrawal'),
-            projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab'),
-            projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_milestones_tab'),
-            projekt_feature?(@proposal&.projekt, 'proposals.show_report_button_in_proposal_sidebar'),
-            projekt_feature?(@proposal&.projekt, 'proposals.show_follow_button_in_proposal_sidebar'),
-            projekt_feature?(@proposal&.projekt, 'proposals.show_community_button_in_proposal_sidebar'),
-            projekt_feature?(@proposal&.projekt, 'proposals.show_related_content'),
-            projekt_feature?(@proposal&.projekt, 'proposals.show_comments'),
-            projekt_feature?(@proposal&.projekt, 'proposals.allow_attached_documents'),
-            projekt_feature?(@proposal&.projekt, 'proposals.show_in_sidebar_filter'),
-            projekt_feature?(@proposal&.projekt, 'proposals.show_map'),
-            projekt_feature?(@proposal&.projekt, 'proposals.enable_summary'),
-            projekt_feature?(@proposal&.projekt, 'proposals.allow_voting') ] do %>
-    <div class="proposal-show">
-
-      <% unless action_name == 'created' %>
-        <div class="row">
-          <div class="column margin-bottom">
-          <%= render partial: "shared/participation/projekt_bar", locals: { resource: @proposal } %>
-          </div>
-        </div>
-      <% end %>
-
+  <div class="proposal-show">
+    <% unless action_name == 'created' %>
       <div class="row">
-        <div class="small-12 medium-9 column">
-          <h1><%= @proposal.title %></h1>
+        <div class="column margin-bottom">
+        <%= render partial: "shared/participation/projekt_bar", locals: { resource: @proposal } %>
         </div>
       </div>
+    <% end %>
 
-      <div id="<%= dom_id(@proposal) %>" class="row">
-        <div class="small-12 medium-9 column">
-          <% if @proposal.retired? %>
-            <div data-alert class="callout alert margin-bottom proposal-retired">
-              <strong>
-                <%= t("proposals.show.retired_warning") %><br>
-                <%= link_to t("proposals.show.retired_warning_link_to_explanation"),
-                            "#retired_explanation" %>
-              </strong>
-            </div>
-          <% elsif @proposal.conflictive? %>
-            <div data-alert class="callout alert margin-bottom">
-              <strong><%= t("proposals.show.flag") %></strong>
-            </div>
-          <% end %>
+    <div class="row">
+      <div class="small-12 medium-9 column">
+        <h1><%= @proposal.title %></h1>
+      </div>
+    </div>
 
-          <%= render "proposals/info", proposal: @proposal %>
+    <div id="<%= dom_id(@proposal) %>" class="row">
+      <div class="small-12 medium-9 column">
+        <% if @proposal.retired? %>
+          <div data-alert class="callout alert margin-bottom proposal-retired">
+            <strong>
+              <%= t("proposals.show.retired_warning") %><br>
+              <%= link_to t("proposals.show.retired_warning_link_to_explanation"),
+                          "#retired_explanation" %>
+            </strong>
+          </div>
+        <% elsif @proposal.conflictive? %>
+          <div data-alert class="callout alert margin-bottom">
+            <strong><%= t("proposals.show.flag") %></strong>
+          </div>
+        <% end %>
 
-          <% if !@proposal.selected? && projekt_feature?(@proposal&.projekt, 'proposals.show_related_content') %>
-            <%= render "relationable/related_content", relationable: @proposal %>
-          <% end %>
-        </div>
+        <%= render "proposals/info", proposal: @proposal %>
 
-        <% unless preview %>
-          <aside class="small-12 medium-3 column">
+        <% if !@proposal.selected? && projekt_feature?(@proposal&.projekt, 'proposals.show_related_content') %>
+          <%= render "relationable/related_content", relationable: @proposal %>
+        <% end %>
+      </div>
 
-            <% if can?(:dashboard, @proposal) %>
-              <div class="sidebar-divider"></div>
-              <h2><%= t("proposals.show.author") %></h2>
+      <% unless preview %>
+        <aside class="small-12 medium-3 column">
 
-              <div class="show-actions-menu">
-                <%= link_to proposal_dashboard_path(@proposal),
-                            class: "button hollow expanded",
-                            id: "proposal-dashboard-#{@proposal.id}" do %>
-                  <span class="icon-edit"></span>
-                  <%= t("proposals.show.dashboard_proposal_link") %>
-                <% end %>
+          <% if can?(:dashboard, @proposal) %>
+            <div class="sidebar-divider"></div>
+            <h2><%= t("proposals.show.author") %></h2>
 
-                <% if current_editable?(@proposal) %>
-                  <%= link_to t("dashboard.index.edit_proposal_link"),
-                              edit_proposal_path(@proposal),
-                              target: "_blank",
-                              class: "button hollow expanded" %>
-                <% end %>
-              </div>
-            <% end %>
-
-            <% if can?(:publish, @proposal) %>
-              <%= link_to t("dashboard.index.publish"),
-                          publish_proposal_path(@proposal),
+            <div class="show-actions-menu">
+              <%= link_to proposal_dashboard_path(@proposal),
                           class: "button hollow expanded",
-                          method: :patch %>
-            <% end %>
+                          id: "proposal-dashboard-#{@proposal.id}" do %>
+                <span class="icon-edit"></span>
+                <%= t("proposals.show.dashboard_proposal_link") %>
+              <% end %>
 
+              <% if current_editable?(@proposal) %>
+                <%= link_to t("dashboard.index.edit_proposal_link"),
+                            edit_proposal_path(@proposal),
+                            target: "_blank",
+                            class: "button hollow expanded" %>
+              <% end %>
+            </div>
+          <% end %>
+
+          <% if can?(:publish, @proposal) %>
+            <%= link_to t("dashboard.index.publish"),
+                        publish_proposal_path(@proposal),
+                        class: "button hollow expanded",
+                        method: :patch %>
+          <% end %>
+
+          <% cache [locale_and_user_status(@proposal)] do %>
             <% if current_user.present? && current_user.administrator? %>
               <div class="sidebar-divider"></div>
               <h2><%= t("custom.shared.show.admin") %></h2>
@@ -123,26 +95,30 @@
                 <%= render "proposals/actions", proposal: @proposal %>
               </div>
             <% end %>
+          <% end %>
 
-            <% if projekt_feature?(@proposal&.projekt, 'proposals.allow_voting') %>
-              <%= render "proposals/support_status", proposal: @proposal %>
-            <% end %>
+          <% if projekt_feature?(@proposal&.projekt, 'proposals.allow_voting') %>
+            <%= render "proposals/support_status", proposal: @proposal %>
+          <% end %>
 
-            <%= render "shared/participation/resource_info", resource: @proposal %>
+          <%= render "shared/participation/resource_info", resource: @proposal %>
 
-            <% if projekt_feature?(@proposal&.projekt, 'proposals.show_report_button_in_proposal_sidebar') %>
-              <%= render "shared/participation/flag", resource: @proposal %>
-            <% end %>
+          <% if projekt_feature?(@proposal&.projekt, 'proposals.show_report_button_in_proposal_sidebar') %>
+            <%= render "shared/participation/flag", resource: @proposal %>
+          <% end %>
 
-            <%= render "proposals/social_share", proposal: @proposal, share_title: t("proposals.show.share") %>
+          <%= render "proposals/social_share", proposal: @proposal, share_title: t("proposals.show.share") %>
 
-            <% if current_user && projekt_feature?(@proposal&.projekt, 'proposals.show_follow_button_in_proposal_sidebar') %>
-              <div class="sidebar-divider"></div>
-              <h2><%= t("shared.follow") %></h2>
-              <P><%= t("custom.shared.show.follow_text") %></p>
-              <%= render "follows/follow_button", follow: find_or_build_follow(current_user, @proposal) %>
-            <% end %>
+          <% if current_user && projekt_feature?(@proposal&.projekt, 'proposals.show_follow_button_in_proposal_sidebar') %>
+            <div class="sidebar-divider"></div>
+            <h2><%= t("shared.follow") %></h2>
+            <P><%= t("custom.shared.show.follow_text") %></p>
+            <%= render "follows/follow_button", follow: find_or_build_follow(current_user, @proposal) %>
+          <% end %>
 
+          <% cache [locale_and_user_status(@proposal),
+                    @proposal,
+                    @proposal.projekt] do %>
             <% if projekt_feature?(@proposal&.projekt, 'proposals.show_community_button_in_proposal_sidebar') %>
               <%= render "communities/access_button", community: @proposal.community %>
             <% end %>
@@ -157,44 +133,48 @@
                 <% end %>
               </div>
             <% end %>
+          <% end %>
 
-          </aside>
-        <% end %>
-      </div>
+        </aside>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 
-  <% if ((projekt_feature?(@proposal&.projekt, 'proposals.show_comments') ||
-      projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab') ||
-      projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_milestones_tab')) && !preview) %>
-    <div class="additional-content margin-top">
-      <div class="filter-subnav">
-        <div class="row">
-          <div class="small-12 column">
-            <%= render "proposals/filter_subnav" %>
+  <% cache [locale_and_user_status(@proposal),
+            @proposal,
+            @proposal.projekt] do %>
+    <% if ((projekt_feature?(@proposal&.projekt, 'proposals.show_comments') ||
+        projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab') ||
+        projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_milestones_tab')) && !preview) %>
+      <div class="additional-content margin-top">
+        <div class="filter-subnav">
+          <div class="row">
+            <div class="small-12 column">
+              <%= render "proposals/filter_subnav" %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="tabs-content" data-tabs-content="proposals_tabs">
-      <% if projekt_feature?(@proposal&.projekt, 'proposals.show_comments') %>
-        <div class="tabs-panel <%= 'is-active' if default_active_proposal_footer_tab?('comments') %>" id="tab-comments">
-          <%= render "proposals/comments" %>
-        </div>
-      <% end %>
+      <div class="tabs-content" data-tabs-content="proposals_tabs">
+        <% if projekt_feature?(@proposal&.projekt, 'proposals.show_comments') %>
+          <div class="tabs-panel <%= 'is-active' if default_active_proposal_footer_tab?('comments') %>" id="tab-comments">
+            <%= render "proposals/comments" %>
+          </div>
+        <% end %>
 
-      <% if projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab') %>
-        <div class="tabs-panel <%= 'is-active' if default_active_proposal_footer_tab?('notifications') %>" id="tab-notifications">
-          <%= render "proposals/notifications" %>
-        </div>
-      <% end %>
+        <% if projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab') %>
+          <div class="tabs-panel <%= 'is-active' if default_active_proposal_footer_tab?('notifications') %>" id="tab-notifications">
+            <%= render "proposals/notifications" %>
+          </div>
+        <% end %>
 
-      <% if projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_milestones_tab') %>
-        <div class="tabs-panel <%= 'is-active' if default_active_proposal_footer_tab?('milestones') %>" id="tab-milestones">
-          <%= render "milestones/milestones", milestoneable: @proposal %>
-        </div>
-      <% end %>
-    </div>
+        <% if projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_milestones_tab') %>
+          <div class="tabs-panel <%= 'is-active' if default_active_proposal_footer_tab?('milestones') %>" id="tab-milestones">
+            <%= render "milestones/milestones", milestoneable: @proposal %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
 </main>

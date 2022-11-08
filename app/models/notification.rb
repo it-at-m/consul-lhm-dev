@@ -1,6 +1,6 @@
 class Notification < ApplicationRecord
   belongs_to :user, counter_cache: true
-  belongs_to :notifiable, polymorphic: true
+  belongs_to :notifiable, polymorphic: true, touch: true
 
   validates :user, presence: true
 

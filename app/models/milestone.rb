@@ -6,7 +6,7 @@ class Milestone < ApplicationRecord
   include Globalizable
   translation_class_delegate :status_id
 
-  belongs_to :milestoneable, polymorphic: true
+  belongs_to :milestoneable, polymorphic: true, touch: true
   belongs_to :status
 
   validates :milestoneable, presence: true
