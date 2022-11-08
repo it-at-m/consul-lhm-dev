@@ -1,27 +1,12 @@
-<% cache [locale_and_user_status,
-          debate,
-          debate.author,
-          debate.projekt,
-          debate.projekt.top_parent,
-          debate.projekt.page,
-          debate.debate_phase,
-          debate.image,
-          projekt_feature?(debate.projekt, 'debates.allow_downvoting'),
-          projekt_feature?(debate.projekt, 'debates.allow_voting'),
-          params[:tags],
-          params[:projekts],
-          params[:geozone_affiliation],
-          params[:affiliated_geozones],
-          params[:geozone_restriction],
-          params[:restricted_geozones]] do %>
-  <div id="<%= dom_id(debate) %>" class='row collapse resource-n debate margin-bottom' data-equalizer='main' data-equalize-on="medium">
+<div id="<%= dom_id(debate) %>" class='row collapse resource-n debate margin-bottom' data-equalizer='main' data-equalize-on="medium">
 
-    <div class='columns'>
-      <div class='show-for-small-only'>
-        <%= render partial: 'shared/participation/projekt_bar', locals: { resource: debate } %>
-      </div>
+  <div class='columns'>
+    <div class='show-for-small-only'>
+      <%= render partial: 'shared/participation/projekt_bar', locals: { resource: debate } %>
     </div>
+  </div>
 
+  <% cache [debate] do %>
     <div class='columns small-12 medium-3 large-2 show-for-small-only'>
       <% if show_image_thumbnail?(debate) %>
         <%= link_to debate do %>
@@ -37,14 +22,23 @@
         <% end %>
       <% end %>
     </div>
+  <% end %>
 
-    <div class='columns small-12 medium-9 large-10 details' data-equalizer-watch='main'>
-      <div class='show-for-medium'>
-        <%= render partial: 'shared/participation/projekt_bar', locals: { resource: debate } %>
-      </div>
+  <div class='columns small-12 medium-9 large-10 details' data-equalizer-watch='main'>
+    <div class='show-for-medium'>
+      <%= render partial: 'shared/participation/projekt_bar', locals: { resource: debate } %>
+    </div>
 
-      <div class='resource-info' data-equalizer='details'>
-        <div class='column small-12 medium-6 large-8 resource-details' data-equalizer-watch='details'>
+    <div class='resource-info' data-equalizer='details'>
+      <div class='column small-12 medium-6 large-8 resource-details' data-equalizer-watch='details'>
+        <% cache [locale_and_user_status,
+                  debate,
+                  debate.projekt,
+                  params[:tags],
+                  params[:geozone_affiliation],
+                  params[:affiliated_geozones],
+                  params[:geozone_restriction],
+                  params[:restricted_geozones]] do %>
 
           <h4 class='resource-name'><%= link_to debate.title, debate %></h4>
           <div class="resource-summary margin-bottom">
@@ -54,18 +48,19 @@
             <% end %>
           </div>
           <%= render "shared/tags", taggable: debate, limit: 5 %>
+        <% end %>
+      </div>
 
-        </div>
-        <div class='column small-12 medium-6 large-4 resource-participate table' data-equalizer-watch='details'>
-          <div class='table-cell align-middle'>
-            <% if projekt_feature?(debate&.projekt, 'debates.allow_voting') %>
-              <div id="<%= dom_id(debate) %>_votes">
-                <%= render "debates/votes", debate: debate %>
-              </div>
-            <% end %>
-          </div>
+      <div class='column small-12 medium-6 large-4 resource-participate table' data-equalizer-watch='details'>
+        <div class='table-cell align-middle'>
+          <% if projekt_feature?(debate&.projekt, 'debates.allow_voting') %>
+            <div id="<%= dom_id(debate) %>_votes">
+              <%= render "debates/votes", debate: debate %>
+            </div>
+          <% end %>
         </div>
       </div>
+
     </div>
   </div>
-<% end %>
+</div>

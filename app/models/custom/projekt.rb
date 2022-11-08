@@ -47,8 +47,7 @@ class Projekt < ApplicationRecord
   has_one :livestream_phase, class_name: "ProjektPhase::LivestreamPhase", dependent: :destroy
   has_many :geozone_restrictions, through: :projekt_phases
 
-  has_and_belongs_to_many :geozone_affiliations, class_name: "Geozone"
-  # has_many :geozone_affiliations, through: :geozones_projekts, class_name: "Geozone"
+  has_and_belongs_to_many :geozone_affiliations, class_name: "Geozone", after_add: :touch_updated_at, after_remove: :touch_updated_at
 
   has_many :projekt_settings, dependent: :destroy
   has_many :projekt_notifications, dependent: :destroy
@@ -562,5 +561,9 @@ class Projekt < ApplicationRecord
 
     def set_default_color
       self.color ||= "#004a83"
+    end
+
+    def touch_updated_at(geozone)
+      touch if persisted?
     end
 end

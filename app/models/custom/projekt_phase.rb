@@ -10,7 +10,7 @@ class ProjektPhase < ApplicationRecord
 
   belongs_to :projekt, optional: true, touch: true
   has_many :projekt_phase_geozones, dependent: :destroy
-  has_many :geozone_restrictions, through: :projekt_phase_geozones, source: :geozone
+  has_many :geozone_restrictions, through: :projekt_phase_geozones, source: :geozone, after_add: :touch_updated_at, after_remove: :touch_updated_at
 
   scope :regular_phases, -> { where.not(type: REGULAR_PROJEKT_PHASES) }
   scope :special_phases, -> { where(type: REGULAR_PROJEKT_PHASES) }
@@ -89,4 +89,10 @@ class ProjektPhase < ApplicationRecord
   def geozone_restrictions_formated
     geozone_restrictions.map(&:postal_codes).flatten.join(", ")
   end
+
+  private
+
+    def touch_updated_at(geozone)
+      touch if persisted?
+    end
 end

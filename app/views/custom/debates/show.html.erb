@@ -15,67 +15,54 @@
 <% end %>
 
   <main>
-  <% cache [locale_and_user_status(@debate),
-            @debate,
-            @debate.author,
-            @debate.projekt,
-            @debate.projekt.top_parent,
-            @debate.projekt.page,
-            @debate.debate_phase,
-            @debate.image,
-            Flag.flagged?(current_user, @debate),
-            projekt_feature?(@debate.projekt, 'debates.show_report_button_in_sidebar'),
-            projekt_feature?(@debate.projekt, 'debates.show_related_content'),
-            projekt_feature?(@debate.projekt, 'debates.show_comments'),
-            projekt_feature?(@debate.projekt, 'debates.allow_attached_documents'),
-            projekt_feature?(@debate.projekt, 'debates.allow_downvoting'),
-            projekt_feature?(@debate.projekt, 'debates.show_in_sidebar_filter'),
-            projekt_feature?(@debate.projekt, 'debates.allow_voting') ] do %>
-
-      <div class="debate-show">
-
-        <div class="row">
-          <div class="column margin-bottom">
-            <%= render partial: "shared/participation/projekt_bar", locals: { resource: @debate } %>
-          </div>
+    <div class="debate-show">
+      <div class="row">
+        <div class="column margin-bottom">
+          <%= render partial: "shared/participation/projekt_bar", locals: { resource: @debate } %>
         </div>
+      </div>
 
-
-        <div class='row'>
-          <div class="small-12 medium-9 column">
-            <h1><%= @debate.title %></h1>
-          </div>
+      <div class='row'>
+        <div class="small-12 medium-9 column">
+          <h1><%= @debate.title %></h1>
         </div>
+      </div>
 
         <div id="<%= dom_id(@debate) %>" class="row">
-          <div class="small-12 medium-9 column">
-            <% if @debate.conflictive? %>
-              <div data-alert class="callout alert margin-top">
-                <strong><%= t("debates.show.flag") %></strong>
+          <% cache [locale_and_user_status(@debate),
+                    @debate,
+                    @debate.author,
+                    @debate.projekt,
+                    Flag.flagged?(current_user, @debate) ] do %>
+            <div class="small-12 medium-9 column">
+              <% if @debate.conflictive? %>
+                <div data-alert class="callout alert margin-top">
+                  <strong><%= t("debates.show.flag") %></strong>
+                </div>
+              <% end %>
+
+              <% if @debate.image.present? && !@debate.image.concealed? %>
+                <%= render_image(@debate.image, :large, true) %>
+              <% end %>
+
+              <%= auto_link_already_sanitized_html wysiwyg(@debate.description) %>
+
+
+              <% if projekt_feature?(@debate.projekt, "debates.allow_attached_documents") %>
+                <%= render "documents/documents",
+                            documents: @debate.documents,
+                            max_documents_allowed: Debate.max_documents_allowed %>
+              <% end %>
+
+              <div class='margin-top margin-bottom'>
+                <%= render "shared/tags", taggable: @debate, limit: 5 %>
               </div>
-            <% end %>
 
-            <% if @debate.image.present? && !@debate.image.concealed? %>
-              <%= render_image(@debate.image, :large, true) %>
-            <% end %>
-
-            <%= auto_link_already_sanitized_html wysiwyg(@debate.description) %>
-
-
-            <% if projekt_feature?(@debate.projekt, "debates.allow_attached_documents") %>
-              <%= render "documents/documents",
-                          documents: @debate.documents,
-                          max_documents_allowed: Debate.max_documents_allowed %>
-            <% end %>
-
-            <div class='margin-top margin-bottom'>
-              <%= render "shared/tags", taggable: @debate, limit: 5 %>
+              <% if projekt_feature?(@debate.projekt, 'debates.show_related_content') %>
+                <%= render "relationable/related_content", relationable: @debate %>
+              <% end %>
             </div>
-
-            <% if projekt_feature?(@debate.projekt, 'debates.show_related_content') %>
-              <%= render "relationable/related_content", relationable: @debate %>
-            <% end %>
-          </div>
+          <% end %>
 
           <aside class="small-12 medium-3 column">
             <% if current_user && @debate.editable_by?(current_user) || current_administrator? %>
@@ -87,12 +74,14 @@
               <% end %>
             <% end %>
 
-            <% if current_user.present? && current_user.administrator? %>
-              <div class='sidebar-divider'></div>
-              <h2><%= t("custom.shared.show.admin") %></h2>
-              <div class="js-moderator-debate-actions">
-                <%= render "actions", debate: @debate %>
-              </div>
+            <% cache [locale_and_user_status(@debate)] do %>
+              <% if current_user.present? && current_user.administrator? %>
+                <div class='sidebar-divider'></div>
+                <h2><%= t("custom.shared.show.admin") %></h2>
+                <div class="js-moderator-debate-actions">
+                  <%= render "actions", debate: @debate %>
+                </div>
+              <% end %>
             <% end %>
 
             <% if projekt_feature?(@debate&.projekt, 'debates.allow_voting') %>
@@ -105,49 +94,56 @@
 
             <%= render "shared/participation/resource_info", resource: @debate %> 
 
-            <% if projekt_feature?(@debate.projekt, 'debates.show_report_button_in_sidebar') %>
-              <%= render "shared/participation/flag", resource: @debate %>
-            <% end %>
+            <% cache [locale_and_user_status(@debate),
+                      @debate,
+                      @debate.projekt] do %>
+              <% if projekt_feature?(@debate.projekt, 'debates.show_report_button_in_sidebar') %>
+                <%= render "shared/participation/flag", resource: @debate %>
+              <% end %>
 
-            <%= render "shared/social_share",
-              share_title: t("debates.show.share"),
-              title: @debate.title,
-              url: debate_url(@debate),
-              description: @debate.title,
-              mobile: @debate.title
-            %>
+              <%= render "shared/social_share",
+                share_title: t("debates.show.share"),
+                title: @debate.title,
+                url: debate_url(@debate),
+                description: @debate.title,
+                mobile: @debate.title
+              %>
 
-            <% if current_user && projekt_feature?(@debate.projekt, 'debates.show_related_content') %>
-              <div class="sidebar-divider"></div>
-              <h2><%= t("custom.shared.show.related_title") %></h2>
-              <p><%= t("custom.shared.show.related_text") %></p>
-              <div class="">
-                <%= link_to '#related_content', data: {toggle: "related_content"}, id: "add-related-content", class: "button hollow expanded" do %>
-                  <%= t("custom.shared.show.related_button") %>
-                <% end %>
-              </div>
+              <% if current_user && projekt_feature?(@debate.projekt, 'debates.show_related_content') %>
+                <div class="sidebar-divider"></div>
+                <h2><%= t("custom.shared.show.related_title") %></h2>
+                <p><%= t("custom.shared.show.related_text") %></p>
+                <div class="">
+                  <%= link_to '#related_content', data: {toggle: "related_content"}, id: "add-related-content", class: "button hollow expanded" do %>
+                    <%= t("custom.shared.show.related_button") %>
+                  <% end %>
+                </div>
+              <% end %>
             <% end %>
 
           </aside>
         </div>
       </div>
-    <% end %>
 
-    <% if projekt_feature?(@debate.projekt, 'debates.show_comments') %>
-      <div class="additional-content margin-top">
-        <div class="filter-subnav">
-          <div class="row">
-            <div class="small-12 column">
-              <%= render "debates/filter_subnav" %>
+    <% cache [locale_and_user_status(@debate),
+              @debate,
+              @debate.projekt] do %>
+      <% if projekt_feature?(@debate.projekt, 'debates.show_comments') %>
+        <div class="additional-content margin-top">
+          <div class="filter-subnav">
+            <div class="row">
+              <div class="small-12 column">
+                <%= render "debates/filter_subnav" %>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="tabs-content" data-tabs-content="proposals_tabs">
-        <div class="tabs-panel is-active" id="tab-comments">
-          <%= render "comments" %>
+        <div class="tabs-content" data-tabs-content="proposals_tabs">
+          <div class="tabs-panel is-active" id="tab-comments">
+            <%= render "comments" %>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </main>
