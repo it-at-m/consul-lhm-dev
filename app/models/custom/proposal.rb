@@ -6,8 +6,8 @@ class Proposal < ApplicationRecord
   has_many :geozone_restrictions, through: :proposal_phase
   has_many :geozone_affiliations, through: :projekt
 
-  delegate :votable_by?, to: :debate_phase
-  delegate :comments_allowed?, to: :debate_phase
+  delegate :votable_by?, to: :proposal_phase
+  delegate :comments_allowed?, to: :proposal_phase
 
   validates_translation :description, presence: true
   validates :projekt_id, presence: true
