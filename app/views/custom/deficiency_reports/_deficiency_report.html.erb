@@ -1,12 +1,12 @@
-<% cache [locale_and_user_status, deficiency_report, deficiency_report.image, deficiency_report.author, deficiency_report.category, deficiency_report.officer, deficiency_report.status, params[:dr_categories], params[:dr_status], params[:dr_officer]] do %>
-  <div id="<%= dom_id(deficiency_report) %>" class='row collapse resource-n deficiency-report margin-bottom' data-equalizer='main' data-equalize-on="medium">
+<div id="<%= dom_id(deficiency_report) %>" class='row collapse resource-n deficiency-report margin-bottom' data-equalizer='main' data-equalize-on="medium">
 
-    <div class='columns'>
-      <div class='show-for-small-only'>
-        <%= render partial: 'deficiency_reports/deficiency_report/projekt_bar', locals: { deficiency_report: deficiency_report } %>
-      </div>
+  <div class='columns'>
+    <div class='show-for-small-only'>
+      <%= render partial: 'deficiency_reports/deficiency_report/projekt_bar', locals: { deficiency_report: deficiency_report } %>
     </div>
+  </div>
 
+  <% cache [deficiency_report, "image"] do %>
     <div class='columns small-12 medium-3 large-2 show-for-small-only'>
       <% if show_image_thumbnail?(deficiency_report) %>
         <%= link_to deficiency_report do %>
@@ -22,15 +22,16 @@
         <% end %>
       <% end %>
     </div>
+  <% end %>
 
-    <div class='columns small-12 medium-9 large-10 details' data-equalizer-watch='main'>
-      <div class='show-for-medium'>
-        <%= render partial: 'deficiency_reports/deficiency_report/projekt_bar', locals: { deficiency_report: deficiency_report } %>
-      </div>
+  <div class='columns small-12 medium-9 large-10 details' data-equalizer-watch='main'>
+    <div class='show-for-medium'>
+      <%= render partial: 'deficiency_reports/deficiency_report/projekt_bar', locals: { deficiency_report: deficiency_report } %>
+    </div>
 
-      <div class='resource-info' data-equalizer='details'>
-        <div class='column small-12 medium-6 large-8 resource-details' data-equalizer-watch='details'>
-
+    <div class='resource-info' data-equalizer='details'>
+      <div class='column small-12 medium-6 large-8 resource-details' data-equalizer-watch='details'>
+        <% cache [deficiency_report, "details"] do %>
           <h4 class='resource-name'><%= link_to deficiency_report.title, deficiency_report %></h4>
           <div class="resource-summary margin-bottom">
             <%= link_to deficiency_report do %>
@@ -38,19 +39,19 @@
               <div class="truncate"></div>
             <% end %>
           </div>
-        </div>
-        <div class='column small-12 medium-6 large-4 resource-participate table' data-equalizer-watch='details'>
-          <div class='table-cell align-middle'>
-            <%= render "deficiency_reports/status", deficiency_report: deficiency_report %>
+        <% end %>
+      </div>
+      <div class='column small-12 medium-6 large-4 resource-participate table' data-equalizer-watch='details'>
+        <div class='table-cell align-middle'>
+          <%= render "deficiency_reports/status", deficiency_report: deficiency_report %>
 
-            <% if deficiency_reports_feature?('allow_voting') %>
-              <div id="<%= dom_id(deficiency_report) %>_votes">
-                <%= render "deficiency_reports/votes", deficiency_report: deficiency_report %>
-              </div>
-            <% end %>
-          </div>
+          <% if deficiency_reports_feature?('allow_voting') %>
+            <div id="<%= dom_id(deficiency_report) %>_votes">
+              <%= render "deficiency_reports/votes", deficiency_report: deficiency_report %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
-<% end %>
+</div>

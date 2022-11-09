@@ -33,7 +33,8 @@
                     @debate,
                     @debate.author,
                     @debate.projekt,
-                    Flag.flagged?(current_user, @debate) ] do %>
+                    Flag.flagged?(current_user, @debate),
+                    "show" ] do %>
             <div class="small-12 medium-9 column">
               <% if @debate.conflictive? %>
                 <div data-alert class="callout alert margin-top">
@@ -74,14 +75,12 @@
               <% end %>
             <% end %>
 
-            <% cache [locale_and_user_status(@debate)] do %>
-              <% if current_user.present? && current_user.administrator? %>
-                <div class='sidebar-divider'></div>
-                <h2><%= t("custom.shared.show.admin") %></h2>
-                <div class="js-moderator-debate-actions">
-                  <%= render "actions", debate: @debate %>
-                </div>
-              <% end %>
+            <% if current_user.present? && current_user.administrator? %>
+              <div class='sidebar-divider'></div>
+              <h2><%= t("custom.shared.show.admin") %></h2>
+              <div class="js-moderator-debate-actions">
+                <%= render "actions", debate: @debate %>
+              </div>
             <% end %>
 
             <% if projekt_feature?(@debate&.projekt, 'debates.allow_voting') %>
@@ -96,7 +95,8 @@
 
             <% cache [locale_and_user_status(@debate),
                       @debate,
-                      @debate.projekt] do %>
+                      @debate.projekt,
+                      "flag"] do %>
               <% if projekt_feature?(@debate.projekt, 'debates.show_report_button_in_sidebar') %>
                 <%= render "shared/participation/flag", resource: @debate %>
               <% end %>
@@ -127,7 +127,8 @@
 
     <% cache [locale_and_user_status(@debate),
               @debate,
-              @debate.projekt] do %>
+              @debate.projekt,
+              "comments"] do %>
       <% if projekt_feature?(@debate.projekt, 'debates.show_comments') %>
         <div class="additional-content margin-top">
           <div class="filter-subnav">

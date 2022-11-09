@@ -5,7 +5,7 @@
     </div>
   </div>
 
-  <% cache [proposal] do %>
+  <% cache [proposal, "image"] do %>
     <div class='columns small-12 medium-3 large-2 show-for-small-only not-print'>
       <% if show_image_thumbnail?(proposal) %>
         <%= link_to namespaced_proposal_path(proposal) do %>
@@ -37,8 +37,8 @@
                   params[:geozone_affiliation],
                   params[:affiliated_geozones],
                   params[:geozone_restriction],
-                  params[:restricted_geozones]] do %>
-
+                  params[:restricted_geozones],
+                  "details"] do %>
           <h4 class='resource-name'><%= link_to proposal.title, namespaced_proposal_path(proposal) %></h4>
           <div class="resource-summary margin-bottom">
             <%= link_to namespaced_proposal_path(proposal) do %>
@@ -47,8 +47,8 @@
             <% end %>
           </div>
           <%= render "shared/tags", taggable: proposal, limit: 5 %>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
 
       <div class='column small-12 medium-6 large-4 resource-participate table' data-equalizer-watch='details'>
         <div class='table-cell align-middle'>

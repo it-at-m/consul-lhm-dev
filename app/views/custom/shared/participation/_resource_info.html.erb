@@ -1,6 +1,7 @@
 <% cache [resource,
           resource.author,
-          resource.try(:projekt)] do %>
+          resource.try(:projekt),
+          "resource_info"] do %>
   <div class="sidebar-divider"></div>
   <h2><%= t("custom.shared.show.information") %></h2>
 

@@ -15,39 +15,28 @@
 
 
 <main>
-  <% cache [locale_and_user_status(@deficiency_report),
-            @deficiency_report,
-            @deficiency_report.image,
-            @deficiency_report.author,
-            @deficiency_report.category,
-            @deficiency_report.officer,
-            @deficiency_report.status,
-            @deficiency_report_votes ] do %>
-    <div class="deficiency-report-show">
-
-      <div class='row'>
-        <div class='column margin-bottom'>
-          <%= render partial: 'deficiency_reports/deficiency_report/projekt_bar', locals: { deficiency_report: @deficiency_report } %>
-        </div>
+  <div class="deficiency-report-show">
+    <div class='row'>
+      <div class='column margin-bottom'>
+        <%= render partial: 'deficiency_reports/deficiency_report/projekt_bar', locals: { deficiency_report: @deficiency_report } %>
       </div>
+    </div>
 
-      <div class='row'>
-        <div class='column small-12 medium-9'>
-          <h1><%= @deficiency_report.title %></h1>
-        </div>
+    <div class='row'>
+      <div class='column small-12 medium-9'>
+        <h1><%= @deficiency_report.title %></h1>
       </div>
+    </div>
 
-      <div id="<%= dom_id(@deficiency_report) %>" class="row">
-        <div class="small-12 medium-9 column deficinecy-report-show-main-column">
+    <div id="<%= dom_id(@deficiency_report) %>" class="row">
+      <div class="small-12 medium-9 column deficinecy-report-show-main-column">
+        <%= render "deficiency_reports/info", deficiency_report: @deficiency_report %>
 
-          <%= render "deficiency_reports/info", deficiency_report: @deficiency_report %>
-
-          <% if @deficiency_report.can_be_published? %>
-            <div class="deficiency-report-official-answer">
-              <h3><%= t('custom.deficiency_reports.show.official_answer') %></h3>
-              <%= AdminWYSIWYGSanitizer.new.sanitize(@deficiency_report.official_answer) %>
-            </div>
-          <% end %>
+        <% if @deficiency_report.can_be_published? %>
+          <div class="deficiency-report-official-answer">
+            <h3><%= t('custom.deficiency_reports.show.official_answer') %></h3>
+            <%= AdminWYSIWYGSanitizer.new.sanitize(@deficiency_report.official_answer) %>
+          </div>
         <% end %>
 
         <% if can? :update_official_answer, @deficiency_report %>
@@ -137,28 +126,34 @@
           title: @deficiency_report.title,
           url: deficiency_report_url(@deficiency_report),
           description: @deficiency_report.title,
-          mobile: @deficiency_report.title
-        %>
+          mobile: @deficiency_report.title %>
       </aside>
 
     </div>
   </div>
 
-  <% if deficiency_reports_feature?('enable_comments') %>
-    <div class="additional-content margin-top">
-      <div class="filter-subnav">
-        <div class="row">
-          <div class="small-12 column">
-            <%= render "deficiency_reports/filter_subnav" %>
+
+  <% cache [locale_and_user_status(@deficiency_report),
+            @deficiency_report,
+            deficiency_reports_feature?('enable_comments'),
+            "comments"] do %>
+
+    <% if deficiency_reports_feature?('enable_comments') %>
+      <div class="additional-content margin-top">
+        <div class="filter-subnav">
+          <div class="row">
+            <div class="small-12 column">
+              <%= render "deficiency_reports/filter_subnav" %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="tabs-content" data-tabs-content="deficiency_reports_tabs">
-      <div class="tabs-panel is-active" id="tab-comments">
-        <%= render "deficiency_reports/comments" %>
+      <div class="tabs-content" data-tabs-content="deficiency_reports_tabs">
+        <div class="tabs-panel is-active" id="tab-comments">
+          <%= render "deficiency_reports/comments" %>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 </main>

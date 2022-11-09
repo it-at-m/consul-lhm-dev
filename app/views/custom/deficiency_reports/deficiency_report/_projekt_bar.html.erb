@@ -1,18 +1,24 @@
-<div class='projekt-bar column' style="background-color:<%= deficiency_report.category.color %>;color:<%= pick_text_color(deficiency_report.category.color) %>" >
-  <div class='projekt-name'>
-    <i class="fas fa-<%= deficiency_report.category.icon || "circle" %>" ></i>
-    <%= link_to deficiency_report.category.name, deficiency_reports_path(dr_categories: deficiency_report.category.id) %>
-  </div>
+<% cache [deficiency_report,
+          deficiency_report.author,
+          deficiency_report.category,
+          "projekt_bar"] do %>
 
-  <div class='show-for-large'>
-    <% if action_name == 'index'%>
-      <% if deficiency_report.on_behalf_of.present? %>
-        <%= deficiency_report.on_behalf_of %>
-      <% elsif deficiency_report.author.name.present? %>
-        <%= link_to deficiency_report.author.name, deficiency_report.author %>
+  <div class='projekt-bar column' style="background-color:<%= deficiency_report.category.color %>;color:<%= pick_text_color(deficiency_report.category.color) %>" >
+    <div class='projekt-name'>
+      <i class="fas fa-<%= deficiency_report.category.icon || "circle" %>" ></i>
+      <%= link_to deficiency_report.category.name, deficiency_reports_path(dr_categories: deficiency_report.category.id) %>
+    </div>
+
+    <div class='show-for-large'>
+      <% if action_name == 'index'%>
+        <% if deficiency_report.on_behalf_of.present? %>
+          <%= deficiency_report.on_behalf_of %>
+        <% elsif deficiency_report.author.name.present? %>
+          <%= link_to deficiency_report.author.name, deficiency_report.author %>
+        <% end %>
+      <% elsif action_name == 'show' %>
+        <%= link_to t("custom.deficiency_reports.show.back_link"), deficiency_reports_path %>
       <% end %>
-    <% elsif action_name == 'show' %>
-      <%= link_to t("custom.deficiency_reports.show.back_link"), deficiency_reports_path %>
-    <% end %>
+    </div>
   </div>
-</div>
+<% end %>

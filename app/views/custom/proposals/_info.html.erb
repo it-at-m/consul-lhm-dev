@@ -3,7 +3,8 @@
           @proposal.author,
           @proposal.projekt,
           feature?(:map),
-          Flag.flagged?(current_user, @proposal)] do %>
+          Flag.flagged?(current_user, @proposal),
+          "show_info" ] do %>
 
   <% if feature?(:map) && map_location_available?(@proposal.map_location) %>
     <div class="margin-bottom not-print">
