@@ -22,7 +22,7 @@
         <%
           if projekt.question_phase.geozone_restricted == "only_citizens" && current_user.not_current_city_citizen?
             radio_button_enabled = false
-          elsif projekt.question_phase.geozone_restricted == "only_geozones" && !projekt.question_phase.geozone_restrictions.include?(user.geozone)
+          elsif projekt.question_phase.geozone_restricted == "only_geozones" && !projekt.question_phase.geozone_restrictions.include?(current_user.geozone)
             radio_button_enabled = false
           end
         %>

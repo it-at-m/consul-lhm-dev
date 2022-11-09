@@ -15,7 +15,7 @@
     <% elsif @projekt.debate_phase.geozone_restricted == "only_citizens" && current_user.not_current_city_citizen? %>
       <%= t("custom.shared.warnings.only_for_citizens", city: Setting["org_name"]) %>
 
-    <% elsif @projekt.debate_phase.geozone_restricted == "only_geozones" && !@projekt.debate_phase.geozone_restrictions.include?(user.geozone)  %>
+    <% elsif @projekt.debate_phase.geozone_restricted == "only_geozones" && !@projekt.debate_phase.geozone_restrictions.include?(current_user.geozone)  %>
       <%= t("custom.shared.warnings.only_for_geozones", geozones: @projekt.debate_phase.geozone_restrictions_formatted) %>
 
     <% else %>
