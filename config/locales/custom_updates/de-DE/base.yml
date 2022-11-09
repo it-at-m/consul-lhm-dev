@@ -114,7 +114,7 @@ de:
     shared:
       warnings:
         only_for_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
-        only_for_geozones: Die Beteiligung ist auf Bürger*innen im Postleitzahlenbereich %{geozones} beschränkt.
+        only_for_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}"
       dates:
         days_left:
           one: Noch 1 Tag

@@ -12,13 +12,13 @@
   <div id="proposals-sidebar"  class="small-12 medium-3 column">
     <aside class="margin-bottom">
 
-      <% if @current_projekt.proposal_phase.only_citizens_allowed? && !current_user&.current_city_citizen? %>
+      <% if @current_projekt.proposal_phase.geozone_restricted == "only_citizens" && !current_user&.current_city_citizen? %>
         <div class="callout warning">
           <%= t('custom.shared.warnings.only_for_citizens', city: Setting["org_name"]) %>
         </div>
-      <% elsif @current_projekt.proposal_phase.only_geozones_allowed? && !@current_projekt.proposal_phase.geozone_allowed?(current_user) %>
+      <% elsif @current_projekt.proposal_phase.geozone_restricted == "only_geozones" && !@current_projekt.proposal_phase.geozone_restrictions.include?(current_user&.geozone) %>
         <div class="callout warning">
-          <%= t('custom.shared.warnings.only_for_geozones', geozones: @current_projekt.proposal_phase.geozone_restrictions_formated) %>
+          <%= t('custom.shared.warnings.only_for_geozones', geozones: @current_projekt.proposal_phase.geozone_restrictions_formatted) %>
         </div>
       <% else %>
         <%= render Proposals::NewButtonComponent.new(@current_projekt, @current_tab_phase) %>

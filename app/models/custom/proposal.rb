@@ -6,6 +6,9 @@ class Proposal < ApplicationRecord
   has_many :geozone_restrictions, through: :proposal_phase
   has_many :geozone_affiliations, through: :projekt
 
+  delegate :votable_by?, to: :debate_phase
+  delegate :comments_allowed?, to: :debate_phase
+
   validates_translation :description, presence: true
   validates :projekt_id, presence: true
   validate :description_sanitized
@@ -59,25 +62,6 @@ class Proposal < ApplicationRecord
     ids = Proposal.select { |p| p.cached_votes_up < p.custom_votes_needed_for_success }.pluck(:id)
     Proposal.where(id: ids)
 	end
-
-  def votable_by?(user)
-    user.present? &&
-      !user.organization? &&
-      (
-        Setting['feature.user.skip_verification'].present? ||
-        projekt.blank? ||
-        proposal_phase.present? && proposal_phase.geozone_restrictions.blank? ||
-        (proposal_phase.present? && proposal_phase.geozone_restrictions.any? && proposal_phase.geozone_restrictions.include?(user.geozone) )
-      ) &&
-      (
-        projekt.blank? ||
-        proposal_phase.present? && proposal_phase.current?
-      )
-  end
-
-  def comments_allowed?(user)
-    projekt.present? ? proposal_phase.selectable_by?(user) : false
-  end
 
   def description_sanitized
     sanitized_description = ActionController::Base.helpers.strip_tags(description).gsub("\n", '').gsub("\r", '').gsub(" ", '').gsub(/^$\n/, '').gsub(/[\u202F\u00A0\u2000\u2001\u2003]/, "")

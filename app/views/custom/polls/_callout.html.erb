@@ -23,7 +23,7 @@
 
   <% elsif @poll.not_allow_user_geozone?(current_user) %>
     <div class="callout warning">
-      <%= t('custom.shared.warnings.only_for_geozones', geozones: @poll.geozone_restrictions_formated) %>
+      <%= t('custom.shared.warnings.only_for_geozones', geozones: @poll.geozone_restrictions_formatted) %>
     </div>
 
   <% elsif @poll.citizen_not_alloed?(current_user) %>

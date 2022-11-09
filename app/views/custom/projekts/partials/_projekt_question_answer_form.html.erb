@@ -20,9 +20,9 @@
         %>
 
         <%
-          if projekt.question_phase.only_citizens_allowed? && current_user.not_current_city_citizen?
+          if projekt.question_phase.geozone_restricted == "only_citizens" && current_user.not_current_city_citizen?
             radio_button_enabled = false
-          elsif projekt.question_phase.only_geozones_allowed? && projekt.question_phase.geozone_not_allowed?(current_user)
+          elsif projekt.question_phase.geozone_restricted == "only_geozones" && !projekt.question_phase.geozone_restrictions.include?(user.geozone)
             radio_button_enabled = false
           end
         %>

@@ -9,11 +9,11 @@
     <% elsif !@projekt.comment_phase.current? %>
       <%= t('custom.comments.restricted.projekt_phase_not_active')%>
 
-    <% elsif @projekt.comment_phase.only_citizens_allowed? && !current_user.current_city_citizen?  %>
+    <% elsif @projekt.comment_phase.geozone_restricted == "only_citizens" && !current_user.current_city_citizen?  %>
       <%= t('custom.comments.restricted.only_for_citizens') %>
 
-    <% elsif @projekt.comment_phase.only_geozones_allowed? && !@projekt.comment_phase.geozone_allowed?(current_user)  %>
-      <%= t('custom.comments.restricted.geozone_not_allowed', geozones: @projekt.comment_phase.geozone_restrictions.map { |g| g.postal_codes }.flatten.join(', ') ) %>
+    <% elsif @projekt.comment_phase.geozone_restricted == "only_geozones" && !@projekt.comment_phase.geozone_restrictions.include?(current_user&.geozone)  %>
+      <%= t('custom.comments.restricted.geozone_not_allowed', geozones: @projekt.comment_phase.geozone_restrictions_formatted ) %>
 
     <% else %>
       <%= t('custom.comments.restricted.other')%>

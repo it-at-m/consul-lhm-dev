@@ -20,8 +20,8 @@ class Poll < ApplicationRecord
     geozone_restricted? && geozone_ids.empty? && user.not_current_city_citizen?
   end
 
-  def geozone_restrictions_formated
-    geozones.map(&:postal_codes).flatten.join(", ")
+  def geozone_restrictions_formatted
+    geozones.map(&:name).flatten.join(", ")
   end
 
   def self.base_selection

@@ -16,14 +16,13 @@ class ProjektPhase < ApplicationRecord
   scope :special_phases, -> { where(type: REGULAR_PROJEKT_PHASES) }
 
   def selectable_by?(user)
-    # user.present? &&
-    #   user.level_two_or_three_verified? &&
-    #   geozone_allowed?(user) &&
-    #   current?
-    user.present? &&
-      geozone_allowed?(user) &&
-      current?
+    return false if user.blank? || user.organization? || !current?
+
+    geozone_allowed?(user)
   end
+
+  alias_method :votable_by?, :selectable_by?
+  alias_method :comments_allowed?, :selectable_by?
 
   def expired?
     end_date.present? && end_date < Date.today
@@ -43,56 +42,32 @@ class ProjektPhase < ApplicationRecord
     !active?
   end
 
-  def only_citizens_allowed?
-    geozone_restricted == "only_citizens"
-  end
-
-  def only_geozones_allowed?
-    geozone_restricted == "only_geozones"
-  end
-
-  def citizen_not_allowed?(user)
-    only_citizens_allowed? && user.not_current_city_citizen?
-  end
-
-  def user_geozone_not_allowed?(user)
-    only_geozones_allowed? && geozone_not_allowed?(user)
-  end
-
-  def geozone_allowed?(user)
-    (geozone_restricted == "no_restriction" || geozone_restricted.nil?) ||
-
-    (geozone_restricted == "only_citizens" &&
-      user.present? &&
-      user.level_three_verified? &&
-      user.current_city_citizen?
-    ) ||
-
-    (geozone_restricted == "only_geozones" &&
-      user.present? &&
-      user.level_three_verified? &&
-      geozone_restrictions.blank? &&
-      user.current_city_citizen?
-    ) ||
-
-    (geozone_restricted == "only_geozones" &&
-      user.present? &&
-      user.level_three_verified? &&
-      geozone_restrictions.any? &&
-      geozone_restrictions.include?(user.geozone))
-  end
-
-  def geozone_not_allowed?(user)
-    !geozone_allowed?(user)
-  end
-
-  def geozone_restrictions_formated
-    geozone_restrictions.map(&:postal_codes).flatten.join(", ")
+  def geozone_restrictions_formatted
+    geozone_restrictions.map(&:name).flatten.join(", ")
   end
 
   private
 
     def touch_updated_at(geozone)
       touch if persisted?
+    end
+
+    def geozone_allowed?(user)
+      if Setting["feature.user.skip_verification"].present?
+        true
+
+      elsif geozone_restricted == "no_restriction" || geozone_restricted.nil?
+        true
+
+      elsif geozone_restricted == "only_citizens"
+        user.level_three_verified? &&
+          user.current_city_citizen?
+
+      elsif geozone_restricted == "only_geozones"
+        user.level_three_verified? &&
+          geozone_restrictions.any? &&
+          geozone_restrictions.include?(user.geozone)
+
+      end
     end
 end

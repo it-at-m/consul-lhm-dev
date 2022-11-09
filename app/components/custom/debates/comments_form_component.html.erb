@@ -12,11 +12,11 @@
     <% elsif !@projekt.debate_phase.phase_activated? %>
       <%= t('custom.comments.restricted.debate_phase_not_active')%>
 
-    <% elsif @projekt.debate_phase.citizen_not_allowed?(current_user) %>
+    <% elsif @projekt.debate_phase.geozone_restricted == "only_citizens" && current_user.not_current_city_citizen? %>
       <%= t("custom.shared.warnings.only_for_citizens", city: Setting["org_name"]) %>
 
-    <% elsif @projekt.debate_phase.user_geozone_not_allowed?(current_user)  %>
-      <%= t("custom.shared.warnings.only_for_geozones", geozones: @projekt.debate_phase.geozone_restrictions_formated) %>
+    <% elsif @projekt.debate_phase.geozone_restricted == "only_geozones" && !@projekt.debate_phase.geozone_restrictions.include?(user.geozone)  %>
+      <%= t("custom.shared.warnings.only_for_geozones", geozones: @projekt.debate_phase.geozone_restrictions_formatted) %>
 
     <% else %>
      <%= t('custom.comments.restricted.other')%>

@@ -12,11 +12,11 @@ class Debates::VotesComponent < ApplicationComponent
       if !user_signed_in?
         sanitize(t("custom.users.login_to_vote", signin: link_to_signin, signup: link_to_signup))
 
-      elsif debate.debate_phase.only_citizens_allowed? && current_user&.not_current_city_citizen?
+      elsif debate.debate_phase.geozone_restricted == "only_citizens" && current_user&.not_current_city_citizen?
         t("custom.shared.warnings.only_for_citizens", city: Setting["org_name"])
 
-      elsif debate.debate_phase.only_geozones_allowed? && debate.debate_phase.geozone_not_allowed?(current_user)
-        t("custom.shared.warnings.only_for_geozones", geozones: debate.debate_phase.geozone_restrictions_formated)
+      elsif debate.debate_phase.geozone_restricted == "only_geozones" && !debate.debate_phase.geozone_restrictions.include?(current_user&.geozone)
+        t("custom.shared.warnings.only_for_geozones", geozones: debate.debate_phase.geozone_restrictions_formatted)
 
       elsif current_user.organization?
         t("votes.organizations")

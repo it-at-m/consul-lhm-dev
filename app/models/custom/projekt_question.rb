@@ -106,8 +106,8 @@ class ProjektQuestion < ApplicationRecord
     if root_question?
       (
         projekt.question_phase.particapation_closed? ||
-        projekt.question_phase.only_citizens_allowed? && current_user.not_current_city_citizen? ||
-        projekt.question_phase.only_geozones_allowed? && projekt.question_phase.geozone_not_allowed?(current_user) ||
+        projekt.question_phase.geozone_restricted == "only_citizens" && current_user.not_current_city_citizen? ||
+        projekt.question_phase.geozone_restricted == "only_geozones" && !projekt.question_phase.geozone_restrictions.include?(current_user&.geozone) ||
         projekt.question_phase.expired? ||
         projekt.question_phase.not_current? ||
         projekt.question_phase.not_active?
