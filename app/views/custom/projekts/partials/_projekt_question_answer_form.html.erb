@@ -12,7 +12,6 @@
   <%= form_for projekt_answer, url: path, remote: true, html: { class: "controls-stacked js-projekt-answer-form", data: { should_redirect: (!user_signed_in? || current_user&.unverified?), redirect_to: redirect_path } } do |f| %>
     <% projekt_question.question_options.each do |question_option| %>
       <label class="control radio <%= "is-active" if projekt_answer.question_option&.id == question_option.id %>">
-        <% byebug %>
         <% radio_button_enabled =
           (
             user_signed_in? && current_user&.verified? &&

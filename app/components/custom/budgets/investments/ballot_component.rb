@@ -33,7 +33,9 @@ class Budgets::Investments::BallotComponent < ApplicationComponent
           verify_account: link_to_verify_account,
           my_heading: link_to_my_heading,
           change_ballot: link_to_change_ballot,
-          heading_link: heading_link(assigned_heading, budget))
+          heading_link: heading_link(assigned_heading, budget),
+          city: Setting["org_name"],
+          geozones: @investment.budget.budget_phase.geozone_restrictions_formatted)
       end
     end
 end

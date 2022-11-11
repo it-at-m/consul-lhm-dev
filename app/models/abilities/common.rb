@@ -95,22 +95,22 @@ module Abilities
         question.answerable_by?(user)
       end
 
+      # can :create, Budget::Investment,               budget: { phase: "accepting" }
+      can :edit, Budget::Investment,                 budget: { phase: "accepting" }, author_id: user.id
+      can :update, Budget::Investment,               budget: { phase: "accepting" }, author_id: user.id
+      can :suggest, Budget::Investment,              budget: { phase: "accepting" }
+      can :destroy, Budget::Investment,              budget: { phase: ["accepting", "reviewing"] }, author_id: user.id
+      can [:create, :destroy], ActsAsVotable::Vote,
+        voter_id: user.id,
+        votable_type: "Budget::Investment",
+        votable: { budget: { phase: "selecting" }}
+
+      can [:show, :create], Budget::Ballot,          budget: { phase: "balloting" }
+      can [:create, :destroy], Budget::Ballot::Line, budget: { phase: "balloting" }
+
       if user.level_two_or_three_verified?
         can :vote, Legislation::Proposal
         can :create, Legislation::Answer
-
-        # can :create, Budget::Investment,               budget: { phase: "accepting" }
-        can :edit, Budget::Investment,                 budget: { phase: "accepting" }, author_id: user.id
-        can :update, Budget::Investment,               budget: { phase: "accepting" }, author_id: user.id
-        can :suggest, Budget::Investment,              budget: { phase: "accepting" }
-        can :destroy, Budget::Investment,              budget: { phase: ["accepting", "reviewing"] }, author_id: user.id
-        can [:create, :destroy], ActsAsVotable::Vote,
-          voter_id: user.id,
-          votable_type: "Budget::Investment",
-          votable: { budget: { phase: "selecting" }}
-
-        can [:show, :create], Budget::Ballot,          budget: { phase: "balloting" }
-        can [:create, :destroy], Budget::Ballot::Line, budget: { phase: "balloting" }
 
         can :create, DirectMessage
         can :show, DirectMessage, sender_id: user.id

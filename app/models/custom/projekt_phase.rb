@@ -46,28 +46,51 @@ class ProjektPhase < ApplicationRecord
     geozone_restrictions.map(&:name).flatten.join(", ")
   end
 
+  def geozone_allowed?(user)
+    if Setting["feature.user.skip_verification"].present?
+      true
+
+    elsif geozone_restricted == "no_restriction" || geozone_restricted.nil?
+      true
+
+    elsif geozone_restricted == "only_citizens"
+      user.level_three_verified? &&
+        user.current_city_citizen?
+
+    elsif geozone_restricted == "only_geozones"
+      user.level_three_verified? &&
+        geozone_restrictions.include?(user.geozone)
+
+    end
+  end
+
+  def geozone_permission_problem(user)
+    return nil if Setting["feature.user.skip_verification"].present?
+
+    case geozone_restricted
+    when "no_restriction" || nil
+      nil
+    when "only_citizens"
+      if !user.level_three_verified?
+        :not_verified
+      elsif user.not_current_city_citizen?
+        :only_citizens
+      end
+    when "only_geozones"
+      if !user.level_three_verified?
+        :not_verified
+      elsif !budget_phase.geozone_restrictions.include?(user.geozone)
+        :only_specific_geozones
+      end
+    end
+  end
+
+
+
   private
 
     def touch_updated_at(geozone)
       touch if persisted?
     end
 
-    def geozone_allowed?(user)
-      if Setting["feature.user.skip_verification"].present?
-        true
-
-      elsif geozone_restricted == "no_restriction" || geozone_restricted.nil?
-        true
-
-      elsif geozone_restricted == "only_citizens"
-        user.level_three_verified? &&
-          user.current_city_citizen?
-
-      elsif geozone_restricted == "only_geozones"
-        user.level_three_verified? &&
-          geozone_restrictions.any? &&
-          geozone_restrictions.include?(user.geozone)
-
-      end
-    end
 end

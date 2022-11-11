@@ -31,7 +31,7 @@ de:
         zero: Sie haben noch über keinen Investitionsvorschlag abgestimmt.
       reasons_for_not_balloting:
         not_logged_in: Sie müssen sich %{signin} oder %{signup}, um fortfahren zu können.
-        not_verified: Nur verifizierte Benutzer*innen können über einen Investitionsvorschlag abstimmen; %{verify_account}.
+        not_verified: Nur verifizierte Benutzer*innen können über einen Investitionsvorschlag abstimmen, %{verify_account}.
         organization: Organisationen ist es nicht erlaubt abzustimmen
         not_selected: Für nicht durchführbare Ausgabevorschläge kann nicht abgestimmt werden
         not_enough_money: "Sie haben bereits das gesamte verfügbare Budget zugewiesen.<br><small>Bitte denken Sie daran, dass Sie dies %{change_ballot} jederzeit</small>ändern können"
@@ -40,6 +40,8 @@ de:
         not_enough_available_votes: "Sie haben die maximal zulässige Anzahl von Stimmen erreicht"
         change_ballot: Ändern Sie Ihre Wahl
         casted_offline: Sie haben schon offline abgestimmt
+        only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
+        only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
     groups:
       show:
         title: Wählen Sie eine Option
@@ -112,9 +114,13 @@ de:
           change_ballot: "Wenn Sie Ihre Meinung ändern, können Sie Ihre Stimme unter %{check_ballot} entfernen und von vorne beginnen."
           check_ballot_link: "Überprüfung meiner Abstimmung"
           zero: Sie haben für keinen Investitionsvorschlag in dieser Gruppe abgestimmt.
-          verified_only: "Um ein neuen Investitionsvorschlag zu erstellen %{verify}."
           create: "Investitionsvorschlag erstellen"
-          not_logged_in: "Um einen neuen Investitionsvorschlag erstellen zu können, müssen Sie %{sign_in} oder %{sign_up}."
+          cannot_create_reasons:
+            not_logged_in: "Um einen neuen Investitionsvorschlag erstellen zu können, müssen Sie %{sign_in} oder %{sign_up}."
+            not_verified: "Um ein neuen Investitionsvorschlag zu erstellen %{verify}."
+            organization: Organisationen dürfen nicht neuen Investitionsvorschlag erstellen.
+            only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
+            only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
         filter: "Projekte filtern nach"
         filters:
           not_unfeasible: "Durchführbar"

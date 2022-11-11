@@ -1,24 +1,6 @@
 <aside class='margin-bottom' id='sidebar'>
 
-  <% if can?(:create, Budget::Investment.new(budget: @budget)) %>
-    <%= link_to t("budgets.investments.index.sidebar.create"),
-                new_budget_investment_path(@budget, origin: 'projekt'),
-                class: "button expanded" %>
-
-  <% else %>
-    <% if user_signed_in? && !current_user.level_three_verified? %>
-      <div class="callout warning">
-        <%= sanitize(t("budgets.investments.index.sidebar.verified_only",
-              verify: link_to_verify_account)) %>
-      </div>
-    <% elsif !user_signed_in? %>
-      <div class="callout warning">
-        <%= sanitize(t("budgets.investments.index.sidebar.not_logged_in",
-              sign_in: link_to_signin, sign_up: link_to_signup)) %>
-      </div>
-    <% end %>
-
-  <% end %>
+  <%= render Budgets::NewButtonComponent.new(@budget) %>
 
   <%= render_custom_block "budget_#{@budget.id}_phase_#{@budget.current_phase.id}_info" %>
 

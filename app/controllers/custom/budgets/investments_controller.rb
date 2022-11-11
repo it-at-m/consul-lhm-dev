@@ -3,6 +3,14 @@ require_dependency Rails.root.join("app", "controllers", "budgets", "investments
 module Budgets
   class InvestmentsController < ApplicationController
 
+    def new
+      if @budget.reason_for_not_allowing_new_proposal(current_user)
+        redirect_to page_path(@budget.projekt.page.slug,
+                              selected_phase_id: @budget.budget_phase.id,
+                              anchor: "filter-subnav")
+      end
+    end
+
     def flag
       Flag.flag(current_user, @investment)
       redirect_to @investment

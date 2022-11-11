@@ -19,4 +19,12 @@ class Budget < ApplicationRecord
   def distributed_voting?
     voting_style == "distributed"
   end
+
+  def reason_for_not_allowing_new_proposal(user)
+    return :not_logged_in unless user
+    return :organization  if user.organization?
+    return budget_phase.geozone_permission_problem(user) if budget_phase.geozone_permission_problem(user)
+
+    nil
+  end
 end

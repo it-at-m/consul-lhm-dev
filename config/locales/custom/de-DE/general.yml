@@ -876,6 +876,8 @@ de:
       different_heading_assigned:
         one: "Sie können nur Investitionsprojekte in %{count} Bereich unterstützen. Sie haben bereits Investitionen in %{supported_headings} unterstützt."
         other: "Sie können nur Investitionsprojekte in %{count} Bereichen unterstützen. Sie haben bereits Investitionen in %{supported_headings} unterstützt."
+      only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
+      only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}"
   welcome:
     feed:
       most_active:

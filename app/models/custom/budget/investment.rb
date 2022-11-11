@@ -33,5 +33,13 @@ class Budget
         cached_votes_up + physical_votes
       end
     end
+
+    def permission_problem(user)
+      return :not_logged_in unless user
+      return :organization  if user.organization?
+      return budget.budget_phase.geozone_permission_problem(user) if budget.budget_phase.geozone_permission_problem(user)
+
+      nil
+    end
   end
 end
