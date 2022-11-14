@@ -44,6 +44,6 @@ class Comment < ApplicationRecord
   def projekt
     return commentable if commentable.is_a?(Projekt)
 
-    commentable.projekt if commentable.projekt.present?
+    commentable&.projekt.presence if commentable.respond_to?(:projekt)
   end
 end
