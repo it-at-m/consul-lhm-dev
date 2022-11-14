@@ -27,6 +27,12 @@ de:
         proposal_phase_expired: Die Vorschlagsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
         proposal_phase_not_active: Die Vorschlagsphase ist nicht aktiv
         voting_phase_expired: Die Abstimmungsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
+
+        not_logged_in: "Sie müssen sich %{signin} oder %{signup}, um einen Kommentar zu hinterlassen."
+        only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
+        only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
+        budget_phase_not_active: Die Phase ist nicht aktiv
+        budget_phase_expired: Die Phase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
     devise_views:
       users:
         registrations:

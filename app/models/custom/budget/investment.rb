@@ -37,6 +37,8 @@ class Budget
     def permission_problem(user)
       return :not_logged_in unless user
       return :organization  if user.organization?
+      return :budget_phase_not_active if budget.budget_phase.expired?
+      return :budget_phase_expired if budget.budget_phase.not_current?
       return budget.budget_phase.geozone_permission_problem(user) if budget.budget_phase.geozone_permission_problem(user)
 
       nil

@@ -5,3 +5,4 @@
 <%= render ProjektQuestions::CommentsFormComponent.new(record) if record.class.name == 'ProjektQuestion' %>
 <%= render DeficiencyReports::CommentsFormComponent.new(record) if record.class.name == 'DeficiencyReport' %>
 <%= render Topics::CommentsFormComponent.new(record) if record.class.name == 'Topic' %>
+<%= render Budgets::Investments::CommentsFormComponent.new(record) if record.class.name == 'Budget::Investment' %>

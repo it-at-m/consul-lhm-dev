@@ -12,8 +12,8 @@
           ) %>
     </div>
   <% else %>
-		<%= link_to t("budgets.investments.index.sidebar.create"),
-								new_budget_investment_path(@budget, origin: 'projekt'),
-								class: "button expanded" %>
+    <%= link_to t("budgets.investments.index.sidebar.create"),
+                new_budget_investment_path(@budget, origin: 'projekt'),
+                class: "button expanded" %>
   <% end %>
 <% end %>

@@ -79,13 +79,11 @@ class ProjektPhase < ApplicationRecord
     when "only_geozones"
       if !user.level_three_verified?
         :not_verified
-      elsif !budget_phase.geozone_restrictions.include?(user.geozone)
+      elsif !geozone_restrictions.include?(user.geozone)
         :only_specific_geozones
       end
     end
   end
-
-
 
   private
 
