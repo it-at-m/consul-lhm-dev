@@ -31,6 +31,7 @@ class Verification::Residence
       gender:                gender,
     )
 
+    user.send(:strip_whitespace)
     user.unique_stamp = user.prepare_unique_stamp
 
     return false unless user.stamp_unique?

@@ -6,6 +6,8 @@ class User < ApplicationRecord
          :trackable, :validatable, :omniauthable, :password_expirable, :secure_validatable,
          authentication_keys: [:login]
 
+  before_validation :strip_whitespace
+
   before_create :set_default_privacy_settings_to_false, if: :gdpr_conformity?
   before_create { self.unique_stamp = prepare_unique_stamp }
   before_create { self.geozone = geozone_with_plz }
@@ -146,5 +148,13 @@ class User < ApplicationRecord
 
     def geozone_with_plz
       Geozone.find_with_plz(plz)
+    end
+
+    def strip_whitespace
+      self.first_name = first_name.strip unless first_name.nil?
+      self.last_name = last_name.strip unless last_name.nil?
+      self.street_name = street_name.strip unless street_name.nil?
+      self.street_number = street_number.strip unless street_number.nil?
+      self.city_name = city_name.strip unless city_name.nil?
     end
 end
