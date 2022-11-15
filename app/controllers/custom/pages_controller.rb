@@ -380,7 +380,7 @@ class PagesController < ApplicationController
       @investment_ids = @budget.investments.ids
     end
 
-    @investments = @investments.send("sort_by_#{@current_order}").page(params[:page]).per(2)
+    @investments = @investments.send("sort_by_#{@current_order}").page(params[:page]).per(20)
 
     if @budget.present? && @current_projekt.current?
       @top_level_active_projekts = Projekt.where( id: @current_projekt )
