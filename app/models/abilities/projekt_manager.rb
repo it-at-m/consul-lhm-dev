@@ -74,9 +74,7 @@ module Abilities
           comment.hidden_at == nil
       end
 
-      can :comment_as_moderator, [Debate, Proposal, Comment]
-
-      can :manage, [Debate, Proposal], projekt: { projekt_managers: { id: user.projekt_manager.id }}
+      can :comment_as_moderator, [Debate, Comment, Proposal, Budget::Investment, Poll, Poll::Question, Projekt, ProjektQuestion], projekt: { projekt_managers: { id: user.projekt_manager.id }}
     end
   end
 end
