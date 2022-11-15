@@ -49,7 +49,7 @@ module Abilities
       can :mark_featured, Debate
       can :unmark_featured, Debate
 
-      can :comment_as_administrator, [Debate, Comment, Proposal, Poll, Poll::Question, Budget::Investment,
+      can :comment_as_administrator, [Debate, Comment, Proposal, Poll, Poll::Question, Budget::Investment, Projekt,
                                       Legislation::Question, Legislation::Proposal, Legislation::Annotation, Topic, Projekt]
 
       can [:search, :create, :index, :destroy, :update], ::Administrator
