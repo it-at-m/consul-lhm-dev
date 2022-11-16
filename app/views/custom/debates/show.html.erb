@@ -128,6 +128,7 @@
     <% cache [locale_and_user_status(@debate),
               @debate,
               @debate.projekt,
+              params[:page],
               "comments"] do %>
       <% if projekt_feature?(@debate.projekt, 'debates.show_comments') %>
         <div class="additional-content margin-top">

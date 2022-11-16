@@ -136,6 +136,7 @@
   <% cache [locale_and_user_status(@deficiency_report),
             @deficiency_report,
             deficiency_reports_feature?('enable_comments'),
+            params[:page],
             "comments"] do %>
 
     <% if deficiency_reports_feature?('enable_comments') %>

@@ -139,42 +139,44 @@
     </div>
   </div>
 
-  <% cache [locale_and_user_status(@proposal),
-            @proposal,
-            @proposal.projekt,
-            "comments"] do %>
-    <% if ((projekt_feature?(@proposal&.projekt, 'proposals.show_comments') ||
-        projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab') ||
-        projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_milestones_tab')) && !preview) %>
-      <div class="additional-content margin-top">
-        <div class="filter-subnav">
-          <div class="row">
-            <div class="small-12 column">
-              <%= render "proposals/filter_subnav" %>
-            </div>
+
+  <% if ((projekt_feature?(@proposal&.projekt, 'proposals.show_comments') ||
+      projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab') ||
+      projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_milestones_tab')) && !preview) %>
+    <div class="additional-content margin-top">
+      <div class="filter-subnav">
+        <div class="row">
+          <div class="small-12 column">
+            <%= render "proposals/filter_subnav" %>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="tabs-content" data-tabs-content="proposals_tabs">
-        <% if projekt_feature?(@proposal&.projekt, 'proposals.show_comments') %>
-          <div class="tabs-panel <%= 'is-active' if default_active_proposal_footer_tab?('comments') %>" id="tab-comments">
+    <div class="tabs-content" data-tabs-content="proposals_tabs">
+      <% if projekt_feature?(@proposal&.projekt, 'proposals.show_comments') %>
+        <div class="tabs-panel <%= 'is-active' if default_active_proposal_footer_tab?('comments') %>" id="tab-comments">
+          <% cache [locale_and_user_status(@proposal),
+                    @proposal,
+                    @proposal.projekt,
+                    params[:page],
+                    "comments"] do %>
             <%= render "proposals/comments" %>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
+      <% end %>
 
-        <% if projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab') %>
-          <div class="tabs-panel <%= 'is-active' if default_active_proposal_footer_tab?('notifications') %>" id="tab-notifications">
-            <%= render "proposals/notifications" %>
-          </div>
-        <% end %>
+      <% if projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab') %>
+        <div class="tabs-panel <%= 'is-active' if default_active_proposal_footer_tab?('notifications') %>" id="tab-notifications">
+          <%= render "proposals/notifications" %>
+        </div>
+      <% end %>
 
-        <% if projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_milestones_tab') %>
-          <div class="tabs-panel <%= 'is-active' if default_active_proposal_footer_tab?('milestones') %>" id="tab-milestones">
-            <%= render "milestones/milestones", milestoneable: @proposal %>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
+      <% if projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_milestones_tab') %>
+        <div class="tabs-panel <%= 'is-active' if default_active_proposal_footer_tab?('milestones') %>" id="tab-milestones">
+          <%= render "milestones/milestones", milestoneable: @proposal %>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 </main>
