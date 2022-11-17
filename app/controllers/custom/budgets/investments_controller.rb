@@ -4,7 +4,7 @@ module Budgets
   class InvestmentsController < ApplicationController
 
     def new
-      if @budget.reason_for_not_allowing_new_proposal(current_user)
+      if @budget.budget_phase.permission_problem(current_user)
         redirect_to page_path(@budget.projekt.page.slug,
                               selected_phase_id: @budget.budget_phase.id,
                               anchor: "filter-subnav")

@@ -454,6 +454,10 @@ class Projekt < ApplicationRecord
     end
   end
 
+  def all_ids_in_tree
+    all_parent_ids + [id] + all_children_ids
+  end
+
   private
 
     def create_corresponding_page

@@ -1,6 +1,6 @@
 <aside class='margin-bottom' id='sidebar'>
 
-  <%= render Budgets::NewButtonComponent.new(@budget) %>
+  <%= render Shared::NewButtonComponent.new(projekt_phase: @budget.budget_phase) %>
 
   <%= render_custom_block "budget_#{@budget.id}_phase_#{@budget.current_phase.id}_info" %>
 

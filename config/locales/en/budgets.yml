@@ -112,13 +112,6 @@ en:
           check_ballot_link: "submit my ballot"
           zero: You have not voted any investment project in this group.
           create: "Create a budget investment"
-          cannot_create_reasons: 
-            not_logged_in: "To create a new budget investment you must %{sign_in} or %{sign_up}."
-            not_verified: "To create a new budget investment %{verify}."
-            organization: Organizations are not allowed to create new investment proposals.
-            only_citizens: Participation is only allowed for citizes of %{city}.
-            only_specific_geozones: "Participation is only allowed for citizes of the following areas: %{geozones}."
-
         filter: "Filtering projects by"
         filters:
           not_unfeasible: "Active"

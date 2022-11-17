@@ -115,12 +115,6 @@ de:
           check_ballot_link: "Überprüfung meiner Abstimmung"
           zero: Sie haben für keinen Investitionsvorschlag in dieser Gruppe abgestimmt.
           create: "Investitionsvorschlag erstellen"
-          cannot_create_reasons:
-            not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
-            not_verified: "Um ein neuen Investitionsvorschlag zu erstellen %{verify}."
-            organization: Organisationen dürfen nicht neuen Investitionsvorschlag erstellen.
-            only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
-            only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
         filter: "Projekte filtern nach"
         filters:
           not_unfeasible: "Durchführbar"

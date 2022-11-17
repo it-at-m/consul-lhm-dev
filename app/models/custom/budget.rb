@@ -20,7 +20,7 @@ class Budget < ApplicationRecord
     voting_style == "distributed"
   end
 
-  def reason_for_not_allowing_new_proposal(user)
-    budget_phase.permission_problem(user)
+  def projekt_phase
+    budget_phase
   end
 end
