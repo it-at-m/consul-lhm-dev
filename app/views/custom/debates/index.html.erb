@@ -47,7 +47,7 @@
     <div class="row">
       <div id="debates-sidebar" class="small-12 medium-3 column">
         <aside class="margin-bottom">
-          <%= render Debates::NewButtonComponent.new(@selected_parent_projekt, nil, params[:order]) %>
+          <%= render Shared::NewButtonComponent.new(resources_name: "debates", query_params: params) %>
 
           <% if extended_feature?('debates.enable_projekt_filter') %>
             <%= render Sidebar::ProjektsFilterComponent.new(

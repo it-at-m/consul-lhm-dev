@@ -8,7 +8,7 @@
      aria-labeled-by=<%= "#{dom_id(projekt)}_name" %>
      data-projekt-id="<%= projekt.id %>"
      <%= "data-parent-id=#{projekt.parent.id}" if projekt.parent.present? %>
-     <%= "data-projekt-selectable=true" if projekt.selectable?(controller_name, current_user) %>
+     <%= "data-projekt-selectable=true" if projekt.selectable_in_selector?(controller_name, current_user) %>
      <%= "data-projekt-selectable-children=true" if projekt.children.selectable_in_selector(controller_name, current_user).any? %>
      <%= "data-latitude=#{projekt.map_location.latitude}" if projekt.map_location.latitude.present? %>
      <%= "data-longitude=#{projekt.map_location.longitude}" if projekt.map_location.longitude.present? %>

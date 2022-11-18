@@ -4,17 +4,7 @@
 
   <div id="debates-sidebar" class="small-12 medium-3 column">
     <aside class="margin-bottom">
-      <% if @current_projekt.debate_phase.geozone_restricted == "only_citizens" && !current_user&.current_city_citizen? %>
-        <div class="callout warning">
-          <%= t('custom.shared.warnings.only_for_citizens', city: Setting["org_name"]) %>
-        </div>
-      <% elsif @current_projekt.debate_phase.geozone_restricted == "only_geozones" && !@current_tab_phase.geozone_restrictions.include?(current_user&.geozone) %>
-        <div class="callout warning">
-          <%= t('custom.shared.warnings.only_for_geozones', geozones: @current_tab_phase.geozone_restrictions_formatted) %>
-        </div>
-      <% else %>
-        <%= render Debates::NewButtonComponent.new(@current_projekt, @current_tab_phase) %>
-      <% end %>
+      <%= render Shared::NewButtonComponent.new(projekt_phase: @current_tab_phase) %>
 
     <% unless @current_projekt.overview_page? %>
       <%= render Sidebar::ProjektsFilterComponent.new(

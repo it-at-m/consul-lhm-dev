@@ -60,7 +60,7 @@
   <div class="row">
     <div id="proposals-sidebar"  class="small-12 medium-3 column">
       <aside class="margin-bottom">
-        <%= render Proposals::NewButtonComponent.new(@selected_parent_projekt, nil, params[:order]) %>
+        <%= render Shared::NewButtonComponent.new(resources_name: "proposals", query_params: params) %>
 
         <% if extended_feature?('proposals.show_selected_proposals_in_proposal_sidebar') %>
           <div class="sidebar-divider"></div>

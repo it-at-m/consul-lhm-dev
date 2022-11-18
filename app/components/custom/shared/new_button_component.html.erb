@@ -1,4 +1,4 @@
-<% if show_new_button? && permission_problem_key.present? %>
+<% if permission_problem_key.present? %>
   <div class="callout warning">
     <%= permission_problem_message(permission_problem_key) %>
   </div>

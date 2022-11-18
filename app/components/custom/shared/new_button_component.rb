@@ -3,31 +3,31 @@ class Shared::NewButtonComponent < ApplicationComponent
            :sanitize,
            :link_to_signin, :link_to_signup, :link_to_verify_account, to: :helpers
 
-  def initialize(projekt_phase: nil, resources_name: nil, url_params: nil)
+  def initialize(projekt_phase: nil, resources_name: nil, query_params: nil)
     @projekt_phase = projekt_phase
     @resources_name = resources_name
-    @url_params = url_params
+    @query_params = query_params
   end
 
   private
 
     def show_new_button?
-      return true if @projekt_phase.projekt&.overview_page? # projects overview page
+      return true if @projekt_phase&.projekt&.overview_page? # projects overview page
 
-      return Projekt.top_level.selectable_in_selector('debates', current_user).any? if @resources_name.present? # resources index page
+      return Projekt.top_level.selectable_in_selector(@resources_name, current_user).any? if @resources_name.present? # resources index page
 
       if @projekt_phase.is_a?(ProjektPhase::BudgetPhase) # projekt page footer tab for budgets
         can? :create, Budget::Investment.new(budget: @projekt_phase.projekt.budget)
 
       elsif @projekt_phase.present? # projekt page all other footer tabs
-        @projekt_phase.projekt.all_ids_in_tree.any? { |id| Projekt.find(id).selectable?(@projekt_phase.resources_name, current_user) }
+        @projekt_phase.projekt.all_ids_in_tree.any? { |id| Projekt.find(id).selectable_in_selector?(@projekt_phase.resources_name, current_user) }
 
       end
     end
 
     def permission_problem_key
       if @projekt_phase.present?
-				@permission_problem_key ||= @projekt_phase.permission_problem(current_user)
+        @permission_problem_key ||= @projekt_phase.permission_problem(current_user)
 
       elsif current_user.blank?
         @permission_problem_key ||= :not_logged_in
@@ -41,13 +41,14 @@ class Shared::NewButtonComponent < ApplicationComponent
               sign_up: link_to_signup,
               verify: link_to_verify_account,
               city: Setting["org_name"],
-              geozones: @projekt_phase.geozone_restrictions_formatted
+              geozones: @projekt_phase&.geozone_restrictions_formatted
         )
       )
     end
 
     def path_to_key(permission_problem_key)
-      if I18n.exists? "custom.projekt_phases.permission_problem.new_button_component.#{@projekt_phase.name}.#{permission_problem_key}"
+      if @projekt_phase &&
+          I18n.exists?("custom.projekt_phases.permission_problem.new_button_component.#{@projekt_phase.name}.#{permission_problem_key}")
         "custom.projekt_phases.permission_problem.new_button_component.#{@projekt_phase.name}.#{permission_problem_key}"
       else
         "custom.projekt_phases.permission_problem.new_button_component.shared.#{permission_problem_key}"
@@ -56,10 +57,12 @@ class Shared::NewButtonComponent < ApplicationComponent
 
     def link_params_hash
       link_params = {}
+      permitted_query_params = %i[order]
 
-      link_params[:projekt_id] = selected_parent_projekt.id if selected_parent_projekt.present?
-      link_params[:origin] = 'projekt' if controller_name == 'pages'
-      link_params[:order] = @resources_order
+      link_params[:projekt_id] = @projekt_phase.projekt.id if @projekt_phase.present?
+      link_params[:origin] = "projekt" if controller_name == "pages"
+
+      link_params.merge!(@query_params.permit(permitted_query_params).to_h) if @query_params.present?
 
       link_params
     end
@@ -69,8 +72,16 @@ class Shared::NewButtonComponent < ApplicationComponent
         link_to t("budgets.investments.index.sidebar.create"),
                 new_budget_investment_path(@projekt_phase.projekt.budget, origin: "projekt"),
                 class: "button expanded"
-      elsif @projekt_phase.is_a?(ProjektPhase::DebatePhase)
-        link_to t("debates.index.start_debate"), new_debate_path( link_params_hash ), class: "button expanded js-preselect-projekt"
+
+      elsif @projekt_phase.is_a?(ProjektPhase::DebatePhase) || @resources_name == "debates"
+        link_to t("debates.index.start_debate"), new_debate_path(link_params_hash),
+          class: "button expanded js-preselect-projekt"
+
+      elsif @projekt_phase.is_a?(ProjektPhase::ProposalPhase) || @resources_name == "proposals"
+        link_to t("proposals.index.start_proposal"), new_proposal_path(link_params_hash),
+          class: "button expanded js-preselect-projekt",
+          data: { turbolinks: false }
+
       end
     end
 end

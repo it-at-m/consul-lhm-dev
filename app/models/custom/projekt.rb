@@ -203,7 +203,7 @@ class Projekt < ApplicationRecord
   def self.selectable_in_selector(controller_name, current_user)
     select do |projekt|
       projekt.all_children_projekts.unshift(projekt).any? do |p|
-        p.selectable?(controller_name, current_user)
+        p.selectable_in_selector?(controller_name, current_user)
       end
     end
   end
@@ -217,7 +217,7 @@ class Projekt < ApplicationRecord
     yield
   end
 
-  def selectable?(controller_name, user)
+  def selectable_in_selector?(controller_name, user)
     return true if controller_name == "polls"
     return true if controller_name == "processes"
     return false if user.nil?
