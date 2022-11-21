@@ -1,7 +1,7 @@
 require_dependency Rails.root.join("app", "components", "budgets", "investments", "ballot_component").to_s
 
 class Budgets::Investments::BallotComponent < ApplicationComponent
-  delegate :link_to_signin, :link_to_signup, to: :helpers
+  delegate :link_to_signin, :link_to_signup, :link_to_verify_account, to: :helpers
 
   def initialize(investment:, investment_ids:, ballot:,
                  top_level_active_projekts:, top_level_archived_projekts:)
@@ -25,17 +25,18 @@ class Budgets::Investments::BallotComponent < ApplicationComponent
     end
 
     def cannot_vote_text
-      if reason.present? && reason == :not_logged_in
-        t("votes.budget_investments.not_logged_in",
+      if reason == :not_logged_in
+        t(path_to_key,
           signin: link_to_signin, signup: link_to_signup)
-      elsif reason.present? && !voted?
-        t("budgets.ballots.reasons_for_not_balloting.#{reason}",
+      elsif reason.present?
+        t(path_to_key,
           verify_account: link_to_verify_account,
-          my_heading: link_to_my_heading,
-          change_ballot: link_to_change_ballot,
-          heading_link: heading_link(assigned_heading, budget),
           city: Setting["org_name"],
           geozones: @investment.budget.budget_phase.geozone_restrictions_formatted)
       end
+    end
+
+    def path_to_key
+      "custom.projekt_phases.permission_problem.ballot_component.budget_phase.#{reason}"
     end
 end

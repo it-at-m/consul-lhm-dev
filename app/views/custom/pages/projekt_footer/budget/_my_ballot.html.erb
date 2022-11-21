@@ -8,26 +8,8 @@
       <p>
         <em><%= sanitize(@ballot.voted_info(@heading)) %></em>
       </p>
-    <% elsif @assigned_heading.present? %>
-      <p>
-        <%= sanitize(t("budgets.investments.index.sidebar.different_heading_assigned",
-                heading_link: heading_link(@assigned_heading, @budget)
-              )) %>
-        <br>
-        <small>
-          <%= sanitize(t("budgets.investments.index.sidebar.change_ballot",
-              check_ballot: link_to(t("budgets.investments.index.sidebar.check_ballot_link"),
-                            budget_ballot_path(@budget)))) %>
-        </small>
-      </p>
     <% else %>
       <p><strong><%= t("budgets.investments.index.sidebar.zero") %></strong></p>
-    <% end %>
-
-    <% if @ballot.investments.exists? && !current_user.level_three_verified? %>
-      <p>
-        <%= t("budgets.investments.index.sidebar.voted_info_unverified_html") %>
-      </p>
     <% end %>
 
     <ul class="ballot-list">

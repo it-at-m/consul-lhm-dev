@@ -156,14 +156,6 @@ de:
       card_help: "Letzte vier Ziffern auf Personalausweis Rückseite:"
       pass_label: Reisepass Vorderseite
       pass_help: "Letzte vier Ziffern auf Reisepass Vorderseite:"
-    votes:
-      debate_phase_expired: Die Phase ist bereits abgeschlossen.
-      debate_phase_not_current: Die Phase ist nicht aktiv.
-      geo_restricted: Sie sind aufgrund von Gebiets- beschränkungen nicht berechtigt teilzunehmen.
-      not_verified: Sie müssen sich %{verify_account}, um teilnehmen zu können.
-      proposal_phase_expired: Die Phase ist bereits abgeschlossen.
-      proposal_phase_not_current: Die Phase ist nicht aktiv.
-      not_votable: Etwas ist schief gelaufen, bitte wenden Sie sich an den Administrator.
     welcome:
       active_projekt_cards:
         title: Aktive Beteiligung
