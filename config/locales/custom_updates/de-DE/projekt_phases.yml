@@ -26,6 +26,15 @@ de:
             phase_not_current: Projektphase nicht aktuell
           budget_phase:
             phase_expired: Budgetphase ist abgelaufen
+        poll_votes:
+          not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
+          not_verified: "Um ein neuen Investitionsvorschlag zu erstellen %{verify}."
+          organization: Organisationen dürfen nicht neuen Investitionsvorschlag erstellen.
+          only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
+          only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
+          phase_not_active: Projektphase nicht aktiv
+          phase_expired: Projektphase ist abgelaufen
+          phase_not_current: Projektphase nicht aktuell
         ballot_component:
           budget_phase:
             not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."

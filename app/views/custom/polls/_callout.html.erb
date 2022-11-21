@@ -1,58 +1,20 @@
-<% unless can?(:answer, @poll) %>
-  <% if current_user.nil? %>
-    <div class="callout primary">
-      <%= sanitize(t("polls.show.cant_answer_not_logged_in",
-            signin: link_to_signin(class: "probe-message"),
-            signup: link_to_signup(class: "probe-message"))) %>
-    </div>
-
-  <% elsif current_user.organization? %>
-    <div class="callout alert">
-      <%= sanitize(t("custom.polls.show.cant_answer_organization")) %>
-    </div>
-
-  <% elsif @poll.expired? %>
-    <div class="callout alert">
-      <%= t("polls.show.cant_answer_expired") %>
-    </div>
-
-  <% elsif !@poll.expired? && !@poll.current? %>
-    <div class="callout alert">
-      <%= t("custom.polls.show.cant_answer_not_started_yet", start_date: @poll.starts_at.strftime("%d.%m.%Y"), end_date: @poll.ends_at.strftime("%d.%m.%Y")) %>
-    </div>
-
-  <% elsif @poll.not_allow_user_geozone?(current_user) %>
-    <div class="callout warning">
-      <%= t('custom.shared.warnings.only_for_geozones', geozones: @poll.geozone_restrictions_formatted) %>
-    </div>
-
-  <% elsif @poll.citizen_not_alloed?(current_user) %>
-    <div class="callout warning">
-      <%= t("custom.shared.warnings.only_for_citizens", city: Setting["org_name"]) %>
-    </div>
-
-  <% end %>
-<% end %>
-
 <% if @poll.voted_in_booth?(current_user) %>
   <div class="callout warning">
     <%= t("polls.show.already_voted_in_booth") %>
   </div>
-<% else %>
-
-  <% if current_user && @poll.voted_in_web?(current_user) && !@poll.expired? %>
-    <div class="callout warning">
-      <%= t("polls.show.already_voted_in_web") %>
-    </div>
-  <% end %>
 <% end %>
 
 <% if can?(:answer, @poll) %>
   <div class="callout primary">
     <%= t("poll_questions.show.withdraw_answers_hint") %>
   </div>
-<% end %>
 
-<% @questions.each do |question| %>
-  <%= render "polls/questions/question", question: question, token: @token %>
+<% else %>
+  <% reason = @poll.reason_for_not_being_answerable_by(current_user) %>
+
+  <% if reason.present? %>
+    <div class="callout <%= cannot_answer_callout_class(reason) %>">
+      <%= cannot_answer_callout_text(reason, @poll.voting_phase) %>
+    </div>
+  <% end %>
 <% end %>

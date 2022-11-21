@@ -44,4 +44,25 @@ module PollsHelper
       t("custom.polls.poll.expired")
     end
   end
+
+  def cannot_answer_callout_text(permission_problem_key, voting_phase)
+    return nil if permission_problem_key.blank?
+
+    if permission_problem_key == :not_logged_in
+      sanitize(t("custom.projekt_phases.permission_problem.poll_votes.#{permission_problem_key}",
+               sign_in: link_to_signin, sign_up: link_to_signup))
+
+    else
+      sanitize(t("custom.projekt_phases.permission_problem.poll_votes.#{permission_problem_key}",
+               verify: link_to_verify_account,
+               city: Setting["org_name"],
+               geozones: voting_phase.geozone_restrictions_formatted))
+    end
+  end
+
+  def cannot_answer_callout_class(permission_problem_key)
+    return "primary" if permission_problem_key == :not_logged_in
+
+    "warning"
+  end
 end

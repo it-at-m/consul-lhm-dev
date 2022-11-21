@@ -31,7 +31,11 @@
 
         <%= render "callout" %>
 
-        <% if @poll.current? %>
+        <% @questions.each do |question| %>
+          <%= render "polls/questions/question", question: question, token: @token %>
+        <% end %>
+
+        <% if can?(:answer, @poll) %>
           <div id='confirm-poll-participation-outer-wrapper'>
             <div class='confirm-poll-participation-inner-wrapper'>
               <div id="confirm-poll-participation">
