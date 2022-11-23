@@ -240,6 +240,14 @@ div.projekt-phase-geozone-restriction-selector {
     display: block;
   }
 
+  input.voting_phase_only_geozones:checked ~ .projekt-phase-geozone-selector.voting_phase {
+    display: block;
+  }
+
+  input.legislation_phase_only_geozones:checked ~ .projekt-phase-geozone-selector.legislation_phase {
+    display: block;
+  }
+
   input#projekt_geozone_affiliated_only_geozones:checked ~ .projekt-phase-geozone-selector {
     display: block;
   }

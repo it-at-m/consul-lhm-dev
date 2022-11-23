@@ -35,7 +35,7 @@ class PagesController < ApplicationController
   end
 
   def comment_phase_footer_tab
-    set_comments_footer_tab_variables
+    set_comment_phase_footer_tab_variables
 
     respond_to do |format|
       format.js { render "pages/projekt_footer/footer_tab" }
@@ -43,7 +43,7 @@ class PagesController < ApplicationController
   end
 
   def debate_phase_footer_tab
-    set_debates_footer_tab_variables
+    set_debate_phase_footer_tab_variables
 
     respond_to do |format|
       format.js { render "pages/projekt_footer/footer_tab" }
@@ -51,7 +51,7 @@ class PagesController < ApplicationController
   end
 
   def proposal_phase_footer_tab
-    set_proposals_footer_tab_variables
+    set_proposal_phase_footer_tab_variables
 
     respond_to do |format|
       format.js { render "pages/projekt_footer/footer_tab" }
@@ -59,7 +59,7 @@ class PagesController < ApplicationController
   end
 
   def voting_phase_footer_tab
-    set_polls_footer_tab_variables
+    set_voting_phase_footer_tab_variables
 
     respond_to do |format|
       format.js { render "pages/projekt_footer/footer_tab" }
@@ -67,7 +67,7 @@ class PagesController < ApplicationController
   end
 
   def budget_phase_footer_tab
-    set_budget_footer_tab_variables
+    set_budget_phase_footer_tab_variables
 
     respond_to do |format|
       format.js { render "pages/projekt_footer/footer_tab" }
@@ -75,7 +75,7 @@ class PagesController < ApplicationController
   end
 
   def milestone_phase_footer_tab
-    set_milestones_footer_tab_variables
+    set_milestone_phase_footer_tab_variables
 
     respond_to do |format|
       format.js { render "pages/projekt_footer/footer_tab" }
@@ -83,7 +83,7 @@ class PagesController < ApplicationController
   end
 
   def projekt_notification_phase_footer_tab
-    set_projekt_notifications_footer_tab_variables
+    set_projekt_notification_phase_footer_tab_variables
 
     respond_to do |format|
       format.js { render "pages/projekt_footer/footer_tab" }
@@ -91,7 +91,7 @@ class PagesController < ApplicationController
   end
 
   def newsfeed_phase_footer_tab
-    set_newsfeed_footer_tab_variables
+    set_newsfeed_phase_footer_tab_variables
 
     respond_to do |format|
       format.js { render "pages/projekt_footer/footer_tab" }
@@ -99,15 +99,15 @@ class PagesController < ApplicationController
   end
 
   def event_phase_footer_tab
-    set_projekt_events_footer_tab_variables
+    set_event_phase_footer_tab_variables
 
     respond_to do |format|
       format.js { render "pages/projekt_footer/footer_tab" }
     end
   end
 
-  def legislation_process_phase_footer_tab
-    set_legislation_process_footer_tab_variables
+  def legislation_phase_footer_tab
+    set_legislation_phase_footer_tab_variables
 
     respond_to do |format|
       format.js { render "pages/projekt_footer/footer_tab" }
@@ -115,7 +115,7 @@ class PagesController < ApplicationController
   end
 
   def question_phase_footer_tab
-    set_projekt_questions_footer_tab_variables
+    set_question_phase_footer_tab_variables
 
     respond_to do |format|
       format.js { render "pages/projekt_footer/footer_tab" }
@@ -123,7 +123,7 @@ class PagesController < ApplicationController
   end
 
   def argument_phase_footer_tab
-    set_projekt_arguments_footer_tab_variables
+    set_argument_phase_footer_tab_variables
 
     respond_to do |format|
       format.js { render "pages/projekt_footer/footer_tab" }
@@ -131,7 +131,7 @@ class PagesController < ApplicationController
   end
 
   def livestream_phase_footer_tab
-    set_projekt_livestreams_footer_tab_variables
+    set_livestream_phase_footer_tab_variables
 
     respond_to do |format|
       format.js { render "pages/projekt_footer/footer_tab" }
@@ -162,7 +162,7 @@ class PagesController < ApplicationController
     @top_level_archived_projekts = Projekt.where( id: @current_projekt.top_parent ).expired
   end
 
-  def set_comments_footer_tab_variables(projekt=nil)
+  def set_comment_phase_footer_tab_variables(projekt=nil)
     @valid_orders = %w[most_voted newest oldest]
     @current_order = @valid_orders.include?(params[:order]) ? params[:order] : @valid_orders.first
 
@@ -175,7 +175,7 @@ class PagesController < ApplicationController
     set_comment_flags(@comment_tree.comments)
   end
 
-  def set_debates_footer_tab_variables(projekt=nil)
+  def set_debate_phase_footer_tab_variables(projekt=nil)
     @valid_orders = Debate.debates_orders(current_user)
     @valid_orders.delete('relevance')
     @current_order = @valid_orders.include?(params[:order]) ? params[:order] : @valid_orders.first
@@ -209,7 +209,7 @@ class PagesController < ApplicationController
     @debates = @resources.page(params[:page]).send("sort_by_#{@current_order}")
   end
 
-  def set_proposals_footer_tab_variables(projekt=nil)
+  def set_proposal_phase_footer_tab_variables(projekt=nil)
     @valid_orders = Proposal.proposals_orders(current_user)
     @valid_orders.delete("archival_date")
     @valid_orders.delete('relevance')
@@ -253,7 +253,7 @@ class PagesController < ApplicationController
     @proposals = @resources.page(params[:page]).send("sort_by_#{@current_order}")
   end
 
-  def set_polls_footer_tab_variables(projekt=nil)
+  def set_voting_phase_footer_tab_variables(projekt=nil)
     @valid_filters = %w[all current]
     @current_filter = @valid_filters.include?(params[:filter]) ? params[:filter] : @valid_filters.first
 
@@ -285,12 +285,12 @@ class PagesController < ApplicationController
     @polls = Kaminari.paginate_array(@resources.sort_for_list).page(params[:page])
   end
 
-  def set_legislation_process_footer_tab_variables(projekt=nil)
+  def set_legislation_phase_footer_tab_variables(projekt=nil)
     @current_section = params[:section] || 'text'
 
     @current_projekt = projekt || SiteCustomization::Page.find_by(slug: params[:id]).projekt
-    @current_tab_phase = @current_projekt.legislation_process_phase
-    params[:current_tab_path] = 'legislation_process_phase_footer_tab'
+    @current_tab_phase = @current_projekt.legislation_phase
+    params[:current_tab_path] = "legislation_phase_footer_tab"
 
     @selected_parent_projekt = @current_projekt
 
@@ -326,7 +326,7 @@ class PagesController < ApplicationController
     end
   end
 
-  def set_budget_footer_tab_variables(projekt = nil)
+  def set_budget_phase_footer_tab_variables(projekt = nil)
     params[:filter_projekt_id] = projekt&.id || SiteCustomization::Page.find_by(slug: params[:id]).projekt.id
     @current_projekt = Projekt.find(params[:filter_projekt_id])
     @current_tab_phase = @current_projekt.budget_phase
@@ -398,7 +398,7 @@ class PagesController < ApplicationController
     end
   end
 
-  def set_milestones_footer_tab_variables(projekt=nil)
+  def set_milestone_phase_footer_tab_variables(projekt=nil)
     @current_projekt = projekt || SiteCustomization::Page.find_by(slug: params[:id]).projekt
     @current_tab_phase = @current_projekt.milestone_phase
     @current_milestone = @current_projekt.milestones.where("publication_date < ?", Time.zone.today).order(publication_date: :desc).first
@@ -407,20 +407,20 @@ class PagesController < ApplicationController
     @milestones_publication_date_order = milestone_order_newest ? :desc : :asc
   end
 
-  def set_projekt_notifications_footer_tab_variables(projekt=nil)
+  def set_projekt_notification_phase_footer_tab_variables(projekt=nil)
     @current_projekt = projekt || SiteCustomization::Page.find_by(slug: params[:id]).projekt
     @current_tab_phase = @current_projekt.projekt_notification_phase
     @projekt_notifications = @current_projekt.projekt_notifications
   end
 
-  def set_newsfeed_footer_tab_variables(projekt=nil)
+  def set_newsfeed_phase_footer_tab_variables(projekt=nil)
     @current_projekt = projekt || SiteCustomization::Page.find_by(slug: params[:id]).projekt
     @current_tab_phase = @current_projekt.newsfeed_phase
     @rss_id = ProjektSetting.find_by(projekt: @current_projekt, key: "projekt_newsfeed.id").value
     @rss_type = ProjektSetting.find_by(projekt: @current_projekt, key: "projekt_newsfeed.type").value
   end
 
-  def set_projekt_events_footer_tab_variables(projekt=nil)
+  def set_event_phase_footer_tab_variables(projekt=nil)
     @valid_filters = %w[all incoming past]
     @current_filter = @valid_filters.include?(params[:filter]) ? params[:filter] : @valid_filters.first
 
@@ -431,7 +431,7 @@ class PagesController < ApplicationController
     @projekt_events = ProjektEvent.where(projekt_id: @current_projekt).page(params[:page]).send("sort_by_#{@current_filter}")
   end
 
-  def set_projekt_questions_footer_tab_variables(projekt=nil)
+  def set_question_phase_footer_tab_variables(projekt=nil)
     @current_projekt = projekt || SiteCustomization::Page.find_by(slug: params[:id]).projekt
     @current_tab_phase = @current_projekt.question_phase
     scoped_projekt_ids = @current_projekt.all_children_projekts.unshift(@current_projekt).compact.pluck(:id)
@@ -460,7 +460,7 @@ class PagesController < ApplicationController
     end
   end
 
-  def set_projekt_arguments_footer_tab_variables(projekt = nil)
+  def set_argument_phase_footer_tab_variables(projekt = nil)
     @current_projekt = projekt || SiteCustomization::Page.find_by(slug: params[:id]).projekt
     @current_tab_phase = @current_projekt.argument_phase
 
@@ -468,7 +468,7 @@ class PagesController < ApplicationController
     @projekt_arguments_cons = @current_projekt.projekt_arguments.cons.order(created_at: :desc)
   end
 
-  def set_projekt_livestreams_footer_tab_variables(projekt = nil)
+  def set_livestream_phase_footer_tab_variables(projekt = nil)
     @current_projekt = projekt || SiteCustomization::Page.find_by(slug: params[:id]).projekt
     @current_tab_phase = @current_projekt.livestream_phase
 
@@ -485,14 +485,14 @@ class PagesController < ApplicationController
       projekt_phase = ProjektPhase.find(default_phase_id)
 
       if projekt_phase.phase_activated?
-        return projekt_phase.resources_name
+        return projekt_phase.name
       end
     end
 
     if @projekt.projekt_phases.select { |phase| phase.phase_activated? }.any?
-      @projekt.projekt_phases.select { |phase| phase.phase_activated? }.first.resources_name
+      @projekt.projekt_phases.select { |phase| phase.phase_activated? }.first.name
     else
-      'comments'
+      'comment_phase'
     end
   end
 

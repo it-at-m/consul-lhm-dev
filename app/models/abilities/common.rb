@@ -41,7 +41,7 @@ module Abilities
       can :read, Legislation::Proposal
       can [:retire_form, :retire], Legislation::Proposal, author_id: user.id
 
-      can :create, Comment
+      # can :create, Comment
       can :create, Debate
       can [:create, :created], Proposal
       can :create, Legislation::Proposal
@@ -147,7 +147,7 @@ module Abilities
           )
       end
 
-      can :vote, Comment do |comment|
+      can [:create, :vote], Comment do |comment|
         !user.organization? &&
         comment.commentable.comments_allowed?(user)
       end

@@ -29,8 +29,8 @@
             <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.budget_phase"), admin_budgets_path, target: '_blank', class: 'resources-link' %>
             <span class="additional-info"><%= t("custom.admin.projekts.edit.projekt_phases_tab.hint") %></a>
 
-          <% elsif phase_name == 'legislation_process_phase'  %>
-            <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.legislation_process_phase"), admin_legislation_processes_path(anchor: 'tab-projekt-questions'), target: '_blank', class: 'resources-link'  %>
+          <% elsif phase_name == 'legislation_phase'  %>
+            <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.legislation_phase"), admin_legislation_processes_path(anchor: 'tab-projekt-questions'), target: '_blank', class: 'resources-link'  %>
             <span class="additional-info"><%= t("custom.admin.projekts.edit.projekt_phases_tab.hint") %></a>
 
           <% elsif phase_name == 'argument_phase'  %>
@@ -76,7 +76,7 @@
             </div>
           </div>
 
-          <% if phase_name.in?(['comment_phase', 'debate_phase', 'proposal_phase', 'question_phase', 'voting_phase', 'budget_phase', 'legislation_process_phase']) %>
+          <% if phase_name.in?(['comment_phase', 'debate_phase', 'proposal_phase', 'question_phase', 'voting_phase', 'budget_phase', 'legislation_phase']) %>
             <strong class='geo-restriction-title'><span class='geo-restriction-icon'><%= t("custom.admin.projekts.edit.projekt_phases_tab.restriction") %></span></strong>
             <%= render partial: 'custom/admin/projekts/edit/projekt_phases/phase_geozone_restriction', locals: { projekt: projekt, phase_form: phase_form, projekt_phase: projekt_phase, phase_name: phase_name } %>
           <% end %>

@@ -134,7 +134,7 @@ module ProjektAdminActions
                                   :active, geozone_restriction_ids: []],
         voting_phase_attributes: [:id, :start_date, :end_date, :geozone_restricted,
                                   :active, geozone_restriction_ids: []],
-        legislation_process_phase_attributes: [:id, :start_date, :end_date, :geozone_restricted,
+        legislation_phase_attributes: [:id, :start_date, :end_date, :geozone_restricted,
                                                :active, geozone_restriction_ids: []],
         milestone_phase_attributes: [:id, :start_date, :end_date, :active],
         newsfeed_phase_attributes: [:id, :start_date, :end_date, :active],

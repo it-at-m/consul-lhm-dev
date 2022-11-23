@@ -1,8 +1,18 @@
-<%= render Proposals::CommentsFormComponent.new(record) if record.class.name == 'Proposal' %>
-<%= render Debates::CommentsFormComponent.new(record) if record.class.name == 'Debate' %>
-<%= render Polls::CommentsFormComponent.new(record) if record.class.name == 'Poll' %>
-<%= render Pages::CommentsFormComponent.new(record) if record.class.name == 'Projekt' %>
-<%= render ProjektQuestions::CommentsFormComponent.new(record) if record.class.name == 'ProjektQuestion' %>
-<%= render DeficiencyReports::CommentsFormComponent.new(record) if record.class.name == 'DeficiencyReport' %>
-<%= render Topics::CommentsFormComponent.new(record) if record.class.name == 'Topic' %>
-<%= render Budgets::Investments::CommentsFormComponent.new(record) if record.class.name == 'Budget::Investment' %>
+<% if record.is_a?(ProjektQuestion) %>
+	<%= render ProjektQuestions::CommentsFormComponent.new(record) %>
+
+<% elsif record.is_a?(DeficiencyReport) %>
+	<%= render DeficiencyReports::CommentsFormComponent.new(record) %>
+
+<% elsif record.is_a?(Topic) %>
+	<%= render Topics::CommentsFormComponent.new(record) %>
+
+<% elsif permission_problem_key.present? %>
+  <div class='callout alert'>
+    <%= cannot_vote_text %>
+  </div>
+
+<% else can? :create, Comment.new(commentable: record) %>
+  <%= render "comments/form", { commentable: record, parent_id: nil } %>
+
+<% end %>

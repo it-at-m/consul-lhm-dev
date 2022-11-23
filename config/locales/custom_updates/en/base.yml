@@ -14,22 +14,6 @@ en:
     comments:
       reply_form:
         leave_comment: Write a reply
-      restricted:
-        debate_phase_expired: The discussion phase has already expired. New comments can no longer be added.
-        debate_phase_not_active: The discussion phase is not active
-        geo_limitation: 'This project is limited to the following areas: %{geozones}'
-        not_verified: Please %{verify_account} to participate
-        other: The comment function is not available
-        projekt_not_active: Project is not active
-        projekt_phase_not_active: Projekt phase is not active
-        proposal_phase_expired: The proposal phase has already expired. New comments can no longer be added.
-        proposal_phase_not_active: The proposal phase is not active
-        voting_phase_expired: The voting period has already expired. New comments can no longer be added.
-
-        only_citizens: Commenting is limiited only to residents of %{city}.
-        only_specific_geozones: "Commenting is limited to residents of the following areas: %{geozones}."
-        budget_phase_not_active: The budgeting period is not active
-        budget_phase_expired: The budgeting period has already expired. New comments can no longer be added.
     devise_views:
       users:
         registrations:
