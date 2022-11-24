@@ -219,7 +219,7 @@
             </div>
           </div>
 
-        <%= render "/comments/comment_tree", comment_tree: @comment_tree, display_comments_count: true %>
+        <%= render Shared::CommentsComponent.new(@commentable, @comment_tree) %>
         </div>
       </div>
     </div>

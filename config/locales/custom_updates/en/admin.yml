@@ -215,7 +215,7 @@ en:
             standard_element: Standart element
             voting_manage: Manage polls
             voting_phase: Voting phase
-            legislation_process_phase: Text drafting phase
+            legislation_phase: Text drafting phase
           projekt_questions_tab:
             name: Short survey
             title: Questions
