@@ -72,7 +72,7 @@ en:
           projekt_arguments: Arguments
           proposals: Proposals
           questions: Questions
-          legislation_process: Text editing
+          legislation: Text editing
       phase_name:
         budget_phase: Budget
         comment_phase: Comments

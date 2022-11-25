@@ -248,6 +248,10 @@ div.projekt-phase-geozone-restriction-selector {
     display: block;
   }
 
+  input.livestream_phase_only_geozones:checked ~ .projekt-phase-geozone-selector.livestream_phase {
+    display: block;
+  }
+
   input#projekt_geozone_affiliated_only_geozones:checked ~ .projekt-phase-geozone-selector {
     display: block;
   }

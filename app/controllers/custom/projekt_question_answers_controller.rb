@@ -42,7 +42,7 @@ class ProjektQuestionAnswersController < ApplicationController
       head :not_found and return
     end
 
-    if @question.root_question? && !@projekt.question_phase.active?
+    if @question.permission_problem(current_user).present?
       head :forbidden
     else
       @answer = ProjektQuestionAnswer.find(params[:id])

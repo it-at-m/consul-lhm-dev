@@ -5,7 +5,7 @@
         <h3 class="quiz-question"><%= projekt_question.title %></h3>
         <div class="project-question-list js-project-question-list" id="legislation-answer-form" data-question-url="<%= projekt_projekt_question_path(projekt, projekt_question.id, format: :js) %>">
           <%= render "custom/projekts/partials/projekt_question_answer_form", projekt: projekt, projekt_question: projekt_question, projekt_answer: projekt_question_answer %>
-          <%= render "custom/projekts/partials/projekt_question_particapation_not_allowed", projekt: projekt, projekt_question: projekt_question %>
+          <%= render "custom/projekts/partials/projekt_question_particapation_not_allowed", projekt_question: projekt_question %>
         </div>
       </div>
       <div class="projekt-question-next-question-section small-12 medium-4 column quiz-header small-collapse">

@@ -12,26 +12,14 @@
   <%= form_for projekt_answer, url: path, remote: true, html: { class: "controls-stacked js-projekt-answer-form", data: { should_redirect: (!user_signed_in? || current_user&.unverified?), redirect_to: redirect_path } } do |f| %>
     <% projekt_question.question_options.each do |question_option| %>
       <label class="control radio <%= "is-active" if projekt_answer.question_option&.id == question_option.id %>">
-        <% radio_button_disabled =
-          (
-            !user_signed_in? || current_user&.verified? || (projekt_question.root_question? && projekt.question_phase.participation_closed?)
-          )
-        %>
-
-        <%
-          if projekt.question_phase.geozone_restricted == "only_citizens" && current_user.not_current_city_citizen?
-            radio_button_disabled = true
-          elsif projekt.question_phase.geozone_restricted == "only_geozones" && !projekt.question_phase.geozone_restrictions.include?(current_user&.geozone)
-            radio_button_disabled = true
-          end
-        %>
+        <% radio_button_disabled = projekt_question.permission_problem(current_user).present? %>
 
         <%= f.radio_button :projekt_question_option_id, question_option.id, disabled: radio_button_disabled, label: false %>
         <span class="js-projekt-question-option control-indicator"></span>
-          <%= question_option.value %>
-          <% if projekt_question.show_answers_count? %>
-            (<span class="js-projekt-question-option--answers-count"><%= question_option.answers_count  %></span>)
-          <% end %>
+        <%= question_option.value %>
+        <% if projekt_question.show_answers_count? %>
+          (<span class="js-projekt-question-option--answers-count"><%= question_option.answers_count  %></span>)
+        <% end %>
       </label>
     <% end %>
   <% end %>

@@ -1,50 +1,7 @@
-<% if user_signed_in? && current_user.organization? %>
-  <div class="callout primary">
-    <p>
-      <%= t("custom.projekts.projekt_questions.participation_not_allowed.organizations") %>
-    </p>
-  </div>
+<% reason = projekt_question.permission_problem(current_user) %>
 
-<% elsif projekt_question.root_question? && projekt.question_phase.expired? %>
-  <div class="callout primary">
-    <p>
-      <%= t("custom.projekts.projekt_questions.participation_not_allowed.phase_expired") %>
-    </p>
-  </div>
-
-<% elsif projekt_question.root_question? && !projekt.question_phase.current? %>
-  <div class="callout primary">
-    <p>
-      <%= t("custom.projekts.projekt_questions.participation_not_allowed.phase_not_yet_started") %>
-    </p>
-  </div>
-
-<% elsif projekt_question.root_question? && projekt.question_phase.geozone_restricted == "only_citizens" && !current_user.current_city_citizen? %>
-  <div class="callout warning">
-    <p>
-      <%= t("custom.shared.warnings.only_for_citizens", city: Setting["org_name"]) %>
-    </p>
-  </div>
-
-<% elsif projekt_question.root_question? && projekt.question_phase.geozone_restricted == "only_geozones" && !projekt.question_phase.geozone_restrictions.include?(current_user&.geozone) %>
-  <div class="callout warning">
-    <p>
-      <%= t("custom.shared.warnings.only_for_geozones", geozones: projekt.question_phase.geozone_restrictions_formatted) %>
-    </p>
-  </div>
-
-<% elsif !user_signed_in? %>
-  <div class="callout primary">
-    <p>
-      <%= sanitize(t("custom.projekts.projekt_questions.participation_not_allowed.login_to_answer",
-                     signin: link_to_signin, signup: link_to_signup)) %>
-    </p>
-  </div>
-
-<% elsif projekt_question.root_question? && !projekt.question_phase.active? %>
-  <div class="callout primary">
-    <p>
-      <%= t("custom.projekts.projekt_questions.participation_not_allowed.phase_not_active") %>
-    </p>
+<% if reason.present? %>
+  <div class="callout alert">
+    <%= cannot_answer_projekt_question_callout_text(reason, projekt_question.projekt_phase) %>
   </div>
 <% end %>

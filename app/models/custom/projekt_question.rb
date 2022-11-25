@@ -49,6 +49,22 @@ class ProjektQuestion < ApplicationRecord
     projekt_livestream_id.present?
   end
 
+  def projekt_phase
+    if projekt_livestream_id.present?
+      projekt.livestream_phase
+    else
+      projekt.question_phase
+    end
+  end
+
+  def permission_problem(user)
+    @permission_problem = projekt_phase.permission_problem(user)
+  end
+
+  def comments_allowed?(current_user)
+    permission_problem(current_user).blank?
+  end
+
   def base_query_for_navigation
     base_query = projekt.questions.sorted
 
@@ -91,38 +107,6 @@ class ProjektQuestion < ApplicationRecord
 
   def answer_for_user(user)
     answers.find_by(user: user)
-  end
-
-  def comments_allowed?(current_user)
-    !comments_not_allowed?(current_user)
-  end
-
-  def comments_not_allowed?(current_user)
-    return true if comments_closed?
-    return true if current_user.nil?
-    return true if current_user.unverified?
-    return true if current_user.organization?
-
-    if root_question?
-      (
-        projekt.question_phase.particapation_closed? ||
-        projekt.question_phase.geozone_restricted == "only_citizens" && current_user.not_current_city_citizen? ||
-        projekt.question_phase.geozone_restricted == "only_geozones" && !projekt.question_phase.geozone_restrictions.include?(current_user&.geozone) ||
-        projekt.question_phase.expired? ||
-        projekt.question_phase.not_current? ||
-        projekt.question_phase.not_active?
-      )
-    else
-      true
-    end
-  end
-
-  def comments_closed?
-    !comments_open?
-  end
-
-  def comments_open?
-    projekt.question_phase.phase_activated?
   end
 
   def best_comments

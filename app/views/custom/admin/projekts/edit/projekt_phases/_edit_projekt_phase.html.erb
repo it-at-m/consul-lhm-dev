@@ -59,7 +59,7 @@
     </div>
   </td>
   <td>
-    <% unless phase_name.in?(["event_phase", "argument_phase", "projekt_notification_phase", "milestone_phase", "livestream_phase", "newsfeed_phase"]) %>
+    <% unless phase_name.in?(["event_phase", "argument_phase", "projekt_notification_phase", "milestone_phase", "newsfeed_phase"]) %>
       <%= form_for(@projekt, url: namespace_projekt_path(@projekt), as: :projekt) do |f| %>
         <%= hidden_field_tag :tab, '#tab-projekt-phases' %>
         <%= hidden_field_tag :namespace, params[:controller].include?('projekt_management') ? 'projekt_management' : '' %>
@@ -76,7 +76,7 @@
             </div>
           </div>
 
-          <% if phase_name.in?(['comment_phase', 'debate_phase', 'proposal_phase', 'question_phase', 'voting_phase', 'budget_phase', 'legislation_phase']) %>
+          <% if phase_name.in?(['comment_phase', 'debate_phase', 'proposal_phase', 'question_phase', 'voting_phase', 'budget_phase', 'legislation_phase', 'livestream_phase']) %>
             <strong class='geo-restriction-title'><span class='geo-restriction-icon'><%= t("custom.admin.projekts.edit.projekt_phases_tab.restriction") %></span></strong>
             <%= render partial: 'custom/admin/projekts/edit/projekt_phases/phase_geozone_restriction', locals: { projekt: projekt, phase_form: phase_form, projekt_phase: projekt_phase, phase_name: phase_name } %>
           <% end %>
