@@ -23,6 +23,7 @@ en:
         gender:
           male: male
           female: female
+          other: third #custom
         document_type:
           card: ID card
           pass: Passport

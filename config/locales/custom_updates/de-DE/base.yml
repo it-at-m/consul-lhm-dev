@@ -23,6 +23,7 @@ de:
         gender:
           male: männlich
           female: weiblich
+          other_gen: dritte #custom
         document_type:
           card: Personalausweis
           pass: Reisepass

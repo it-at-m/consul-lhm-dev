@@ -37,7 +37,8 @@ module UsersHelper
   def options_for_gender_select
     [
       [t("custom.devise_views.users.gender.male"), "male"],
-      [t("custom.devise_views.users.gender.female"), "female"]
+      [t("custom.devise_views.users.gender.female"), "female"],
+      [t("custom.devise_views.users.gender.other_gen"), "other_gen"]
     ]
   end
 
