@@ -53,6 +53,10 @@
       content: image-url("stats_woman.png");
     }
 
+    &.other-gen::before {
+      content: image-url("stats_other_gen.png");
+    }
+
     &.total-investments::before {
       content: image-url("stats_investments.png");
     }
