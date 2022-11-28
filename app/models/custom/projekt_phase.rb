@@ -41,12 +41,16 @@ class ProjektPhase < ApplicationRecord
     !current?
   end
 
-  def permission_problem(user)
+  def permission_problem(user, location: nil)
     return :not_logged_in unless user
-    return :organization  if user.organization?
     return :phase_not_active if not_active?
     return :phase_expired if expired?
     return :phase_not_current if not_current?
+
+    if phase_specific_permission_problems(user, location).present?
+      return phase_specific_permission_problems(user, location)
+    end
+
     return geozone_permission_problem(user) if geozone_permission_problem(user)
 
     nil
@@ -61,6 +65,10 @@ class ProjektPhase < ApplicationRecord
   end
 
   private
+
+    def phase_specific_permission_problems(user)
+      nil
+    end
 
     def geozone_permission_problem(user)
       case geozone_restricted

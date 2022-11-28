@@ -7,7 +7,7 @@ class Proposals::VotesComponent < ApplicationComponent
   private
 
     def permission_problem_key
-      @permission_problem_key ||= @proposal_phase.permission_problem(current_user)
+      @permission_problem_key ||= @proposal_phase.permission_problem(current_user, location: :votes_component)
     end
 
     def cannot_vote_text

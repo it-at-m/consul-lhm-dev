@@ -5,85 +5,82 @@ de:
         new_button_component:
           shared:
             not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
-            not_verified: "Um ein neuen Investitionsvorschlag zu erstellen %{verify}."
-            organization: Organisationen dürfen nicht neuen Investitionsvorschlag erstellen.
+            not_verified: "Um fortzufahren, bitte %{verify}."
+            organization: Organisationen dürfen keine Inhalte erstellen.
             only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
             only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
-            phase_not_active: Projektphase nicht aktiv
-            phase_expired: Projektphase ist abgelaufen
-            phase_not_current: Projektphase nicht aktuell
-          budget_phase:
-            phase_expired: Budgetphase ist abgelaufen
+            phase_not_active: Diese Projektphase ist nicht aktiv
+            phase_expired: Diese Projektphase ist abgelaufen
+            phase_not_current: Diese Projektphase wurde noch nicht gestarted
         votes_component:
           shared:
             not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
-            not_verified: "Um ein neuen Investitionsvorschlag zu erstellen %{verify}."
-            organization: Organisationen dürfen nicht neuen Investitionsvorschlag erstellen.
+            not_verified: "Um fortzufahren, bitte %{verify}."
+            organization: Organisationen dürfen keine Inhalte erstellen.
             only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
             only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
-            phase_not_active: Projektphase nicht aktiv
-            phase_expired: Projektphase ist abgelaufen
-            phase_not_current: Projektphase nicht aktuell
-          budget_phase:
-            phase_expired: Budgetphase ist abgelaufen
+            phase_not_active: Diese Projektphase ist nicht aktiv
+            phase_expired: Diese Projektphase ist abgelaufen
+            phase_not_current: Diese Projektphase wurde noch nicht gestarted
         ballot_component:
           budget_phase:
             not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
-            not_verified: "Um ein neuen Investitionsvorschlag zu erstellen %{verify_account}."
-            organization: Organisationen dürfen nicht neuen Investitionsvorschlag erstellen.
+            not_verified: "Um fortzufahren, bitte %{verify}."
+            organization: Organisationen dürfen an dieser Abstimmung teilnehmen.
             only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
             only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
-            phase_not_active: Projektphase nicht aktiv
-            phase_expired: Projektphase ist abgelaufen
-            not_selected: Für nicht durchführbare Ausgabevorschläge kann nicht abgestimmt werden
+            phase_not_active: Diese Projektphase ist nicht aktiv
+            phase_expired: Diese Projektphase ist abgelaufen
+            phase_not_current: Diese Projektphase wurde noch nicht gestarted
+            not_selected: Für nicht durchführbare Investitionsvorschläge kann nicht abgestimmt werden
             no_ballots_allowed: Die Auswahlphase ist abgeschlossen
             different_heading_assigned: "Sie haben bereits für eine andere Rubrik gestimmt: %{heading_link}"
-            casted_offline: Sie haben schon offline abgestimmt
+            casted_offline: Sie haben bereits offline abgestimmt
         commenting:
           shared:
             not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
-            not_verified: "Um ein neuen Investitionsvorschlag zu erstellen %{verify}."
-            organization: Organisationen dürfen nicht neuen Investitionsvorschlag erstellen.
+            not_verified: "Um fortzufahren, bitte %{verify}."
+            organization: Organisationen dürfen keine Inhalte erstellen.
             only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
             only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
-            phase_not_active: Projektphase nicht aktiv
-            phase_expired: Projektphase ist abgelaufen
-            phase_not_current: Projektphase nicht aktuell
+            phase_not_active: Diese Projektphase ist nicht aktiv
+            phase_expired: Diese Projektphase ist abgelaufen
+            phase_not_current: Diese Projektphase wurde noch nicht gestarted
           budget_phase:
-            phase_expired: Budgetphase ist abgelaufen
+            phase_expired: Diese Projektphase ist abgelaufen
         poll_votes:
           not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
-          not_verified: "Um ein neuen Investitionsvorschlag zu erstellen %{verify}."
-          organization: Organisationen dürfen nicht neuen Investitionsvorschlag erstellen.
+          not_verified: "Um fortzufahren, bitte %{verify}."
+          organization: Organisationen dürfen nicht abstimmen.
           only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
           only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
-          phase_not_active: Projektphase nicht aktiv
-          phase_expired: Projektphase ist abgelaufen
-          phase_not_current: Projektphase nicht aktuell
+          phase_not_active: Diese Projektphase ist nicht aktiv
+          phase_expired: Diese Projektphase ist abgelaufen
+          phase_not_current: Diese Projektphase wurde noch nicht gestarted
         legislation_annotations:
           not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
-          not_verified: "Um ein neuen Investitionsvorschlag zu erstellen %{verify}."
-          organization: Organisationen dürfen nicht neuen Investitionsvorschlag erstellen.
+          not_verified: "Um fortzufahren, bitte %{verify}."
+          organization: Organisationen dürfen keine Inhalte erstellen.
           only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
           only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
-          phase_not_active: Projektphase nicht aktiv
-          phase_expired: Projektphase ist abgelaufen
-          phase_not_current: Projektphase nicht aktuell
+          phase_not_active: Diese Projektphase ist nicht aktiv
+          phase_expired: Diese Projektphase ist abgelaufen
+          phase_not_current: Diese Projektphase wurde noch nicht gestarted
         projekt_questions:
           not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
-          not_verified: "Um ein neuen Investitionsvorschlag zu erstellen %{verify}."
-          organization: Organisationen dürfen nicht neuen Investitionsvorschlag erstellen.
+          not_verified: "Um fortzufahren, bitte %{verify}."
+          organization: Organisationen dürfen keine Inhalte erstellen.
           only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
           only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
-          phase_not_active: Projektphase nicht aktiv
-          phase_expired: Projektphase ist abgelaufen
-          phase_not_current: Projektphase nicht aktuell
+          phase_not_active: Diese Projektphase ist nicht aktiv
+          phase_expired: Diese Projektphase ist abgelaufen
+          phase_not_current: Diese Projektphase wurde noch nicht gestarted
         projekt_livestreams:
           not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
-          not_verified: "Um ein neuen Investitionsvorschlag zu erstellen %{verify}."
-          organization: Organisationen dürfen nicht neuen Investitionsvorschlag erstellen.
+          not_verified: "Um fortzufahren, bitte %{verify}."
+          organization: Organisationen dürfen keine Inhalte erstellen.
           only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
           only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
-          phase_not_active: Projektphase nicht aktiv
-          phase_expired: Projektphase ist abgelaufen
-          phase_not_current: Projektphase nicht aktuell
+          phase_not_active: Diese Projektphase ist nicht aktiv
+          phase_expired: Diese Projektphase ist abgelaufen
+          phase_not_current: Diese Projektphase wurde noch nicht gestarted
