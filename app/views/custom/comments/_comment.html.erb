@@ -1,21 +1,19 @@
 <% valuation = local_assigns.fetch(:valuation, false) %>
 <% @current_projekt ||= @projekt %>
-<% cache [locale_and_user_status(comment),
-          comment,
-          (comment.commentable.try(:projekt) || comment.commentable),
-          commentable_cache_key(comment.commentable),
-          comment.author,
-          projekt_feature?(@current_projekt, 'general.allow_downvoting_comments'),
-          Comment.body_max_length] do %>
-  <div id="<%= dom_id(comment) %>" class="comment small-12" role="comment">
-    <div class="comment-body">
-      <% if comment.hidden? || comment.user.hidden? %>
-        <% if comment.children.size > 0 %>
-          <div class="callout secondary">
-            <p><%= t("comments.comment.deleted") %></p>
-          </div>
-        <% end %>
-      <% else %>
+<div id="<%= dom_id(comment) %>" class="comment small-12" role="comment">
+  <div class="comment-body">
+    <% if comment.hidden? || comment.user.hidden? %>
+      <% if comment.children.size > 0 %>
+        <div class="callout secondary">
+          <p><%= t("comments.comment.deleted") %></p>
+        </div>
+      <% end %>
+    <% else %>
+      <% cache [locale_and_user_status(comment),
+                comment,
+                (comment.commentable.try(:projekt) || comment.commentable),
+                commentable_cache_key(comment.commentable),
+                comment.author] do %>
         <div aria-live="off" >
           <% if comment.as_administrator? %>
             <%= image_tag("avatar_admin.png", size: 32, class: "admin-avatar float-left", aria: { live: "off" } ) %>
@@ -33,7 +31,6 @@
         </div>
 
         <div class="comment-info">
-
           <% if comment.as_administrator? %>
             <span class="user-name">
               <%= t("comments.comment.admin") %>
@@ -84,40 +81,40 @@
                   <%= comment_author_class comment, comment.commentable.author_id %>">
           <%= simple_format sanitize_and_auto_link(comment.body), {}, sanitize: false %>
         </div>
-
-        <div id="<%= dom_id(comment) %>_reply" class="reply" aria-live="off">
-          <% unless valuation %>
-            <div id="<%= dom_id(comment) %>_votes" class="comment-votes float-right" aria-live="off">
-              <%= render "comments/votes", comment: comment %>
-            </div>
-          <% end %>
-
-          <span class="responses-count" aria-live="off">
-            <%= render "comments/responses_count", count: comment.children.size, comment: comment %>
-          </span>
-
-          <% if user_signed_in? && !comments_closed_for_commentable?(comment.commentable) && !require_verified_resident_for_commentable?(comment.commentable, current_user) %>
-            <% if @commentable.comments_allowed?(current_user) %>
-              <span class="divider">&nbsp;|&nbsp;</span>
-              <%= button_tag(comment_link_text(comment),
-                          class: "js-add-comment-link link_to_button", data: { "id": dom_id(comment) }) %>
-            <% end %>
-
-            <% unless valuation %>
-              <%= render "comments/actions", { comment: comment } %>
-            <% end %>
-
-            <% if !valuation || can?(:comment_valuation, comment.commentable) %>
-              <% #Renders reply_form instead of form %>
-              <%= render "comments/reply_form", { commentable: comment.commentable,
-                                           parent_id: comment.id,
-                                           valuation: valuation } %>
-            <% end %>
-          <% end %>
-        </div>
       <% end %>
-    </div>
 
-    <%= render "comments/comment_list", comments: child_comments_of(comment), valuation: valuation  %>
+      <div id="<%= dom_id(comment) %>_reply" class="reply" aria-live="off">
+        <% unless valuation %>
+          <div id="<%= dom_id(comment) %>_votes" class="comment-votes float-right" aria-live="off">
+            <%= render "comments/votes", comment: comment %>
+          </div>
+        <% end %>
+
+        <span class="responses-count" aria-live="off">
+          <%= render "comments/responses_count", count: comment.children.size, comment: comment %>
+        </span>
+
+        <% if user_signed_in? %>
+          <% if @commentable.comments_allowed?(current_user) %>
+            <span class="divider">&nbsp;|&nbsp;</span>
+            <%= button_tag(comment_link_text(comment),
+                        class: "js-add-comment-link link_to_button", data: { "id": dom_id(comment) }) %>
+          <% end %>
+
+          <% unless valuation %>
+            <%= render "comments/actions", { comment: comment } %>
+          <% end %>
+
+          <% if !valuation || can?(:comment_valuation, comment.commentable) %>
+            <% #Renders reply_form instead of form %>
+            <%= render "comments/reply_form", { commentable: comment.commentable,
+                                         parent_id: comment.id,
+                                         valuation: valuation } %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+
+  <%= render "comments/comment_list", comments: child_comments_of(comment), valuation: valuation  %>
+</div>

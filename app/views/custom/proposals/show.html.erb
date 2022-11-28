@@ -156,13 +156,7 @@
     <div class="tabs-content" data-tabs-content="proposals_tabs">
       <% if projekt_feature?(@proposal&.projekt, 'proposals.show_comments') %>
         <div class="tabs-panel <%= 'is-active' if default_active_proposal_footer_tab?('comments') %>" id="tab-comments">
-          <% cache [locale_and_user_status(@proposal),
-                    @proposal,
-                    @proposal.projekt,
-                    params[:page],
-                    "comments"] do %>
-            <%= render "proposals/comments" %>
-          <% end %>
+          <%= render "proposals/comments" %>
         </div>
       <% end %>
 

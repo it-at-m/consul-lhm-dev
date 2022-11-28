@@ -19,10 +19,10 @@ class Comments::VotesComponent < ApplicationComponent
     end
 
     def thumb_up_class
-      return "voted_up" if current_user.voted_up_on? comment
+      return "voted_up" if current_user&.voted_up_on?(comment)
     end
 
     def thumb_down_class
-      return "voted_down" if current_user.voted_down_on? comment
+      return "voted_down" if current_user&.voted_down_on?(comment)
     end
 end

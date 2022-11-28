@@ -132,29 +132,21 @@
     </div>
   </div>
 
-
-  <% cache [locale_and_user_status(@deficiency_report),
-            @deficiency_report,
-            deficiency_reports_feature?('enable_comments'),
-            params[:page],
-            "comments"] do %>
-
-    <% if deficiency_reports_feature?('enable_comments') %>
-      <div class="additional-content margin-top">
-        <div class="filter-subnav">
-          <div class="row">
-            <div class="small-12 column">
-              <%= render "deficiency_reports/filter_subnav" %>
-            </div>
+  <% if deficiency_reports_feature?('enable_comments') %>
+    <div class="additional-content margin-top">
+      <div class="filter-subnav">
+        <div class="row">
+          <div class="small-12 column">
+            <%= render "deficiency_reports/filter_subnav" %>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="tabs-content" data-tabs-content="deficiency_reports_tabs">
-        <div class="tabs-panel is-active" id="tab-comments">
-          <%= render "deficiency_reports/comments" %>
-        </div>
+    <div class="tabs-content" data-tabs-content="deficiency_reports_tabs">
+      <div class="tabs-panel is-active" id="tab-comments">
+        <%= render "deficiency_reports/comments" %>
       </div>
-    <% end %>
+    </div>
   <% end %>
 </main>
