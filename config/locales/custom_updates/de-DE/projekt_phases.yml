@@ -10,8 +10,8 @@ de:
             only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
             only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
             phase_not_active: Diese Projektphase ist nicht aktiv
-            phase_expired: Diese Projektphase ist abgelaufen
-            phase_not_current: Diese Projektphase wurde noch nicht gestarted
+            phase_expired: Diese Projektphase ist bereits abgelaufen
+            phase_not_current: Diese Projektphase wurde noch nicht gestartet
         votes_component:
           shared:
             not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
@@ -20,8 +20,8 @@ de:
             only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
             only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
             phase_not_active: Diese Projektphase ist nicht aktiv
-            phase_expired: Diese Projektphase ist abgelaufen
-            phase_not_current: Diese Projektphase wurde noch nicht gestarted
+            phase_expired: Diese Projektphase ist bereits abgelaufen
+            phase_not_current: Diese Projektphase wurde noch nicht gestartet
         ballot_component:
           budget_phase:
             not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
@@ -30,8 +30,8 @@ de:
             only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
             only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
             phase_not_active: Diese Projektphase ist nicht aktiv
-            phase_expired: Diese Projektphase ist abgelaufen
-            phase_not_current: Diese Projektphase wurde noch nicht gestarted
+            phase_expired: Diese Projektphase ist bereits abgelaufen
+            phase_not_current: Diese Projektphase wurde noch nicht gestartet
             not_selected: Für nicht durchführbare Investitionsvorschläge kann nicht abgestimmt werden
             no_ballots_allowed: Die Auswahlphase ist abgeschlossen
             different_heading_assigned: "Sie haben bereits für eine andere Rubrik gestimmt: %{heading_link}"
@@ -44,8 +44,8 @@ de:
             only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
             only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
             phase_not_active: Diese Projektphase ist nicht aktiv
-            phase_expired: Diese Projektphase ist abgelaufen
-            phase_not_current: Diese Projektphase wurde noch nicht gestarted
+            phase_expired: Diese Projektphase ist bereits abgelaufen
+            phase_not_current: Diese Projektphase wurde noch nicht gestartet
           budget_phase:
             phase_expired: Diese Projektphase ist abgelaufen
         poll_votes:
@@ -55,8 +55,8 @@ de:
           only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
           only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
           phase_not_active: Diese Projektphase ist nicht aktiv
-          phase_expired: Diese Projektphase ist abgelaufen
-          phase_not_current: Diese Projektphase wurde noch nicht gestarted
+          phase_expired: Diese Projektphase ist bereits abgelaufen
+          phase_not_current: Diese Projektphase wurde noch nicht gestartet
         legislation_annotations:
           not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
           not_verified: "Um fortzufahren, bitte %{verify}."
@@ -64,8 +64,8 @@ de:
           only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
           only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
           phase_not_active: Diese Projektphase ist nicht aktiv
-          phase_expired: Diese Projektphase ist abgelaufen
-          phase_not_current: Diese Projektphase wurde noch nicht gestarted
+          phase_expired: Diese Projektphase ist bereits abgelaufen
+          phase_not_current: Diese Projektphase wurde noch nicht gestartet
         projekt_questions:
           not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
           not_verified: "Um fortzufahren, bitte %{verify}."
@@ -73,8 +73,8 @@ de:
           only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
           only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
           phase_not_active: Diese Projektphase ist nicht aktiv
-          phase_expired: Diese Projektphase ist abgelaufen
-          phase_not_current: Diese Projektphase wurde noch nicht gestarted
+          phase_expired: Diese Projektphase ist bereits abgelaufen
+          phase_not_current: Diese Projektphase wurde noch nicht gestartet
         projekt_livestreams:
           not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
           not_verified: "Um fortzufahren, bitte %{verify}."
@@ -82,5 +82,5 @@ de:
           only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
           only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
           phase_not_active: Diese Projektphase ist nicht aktiv
-          phase_expired: Diese Projektphase ist abgelaufen
-          phase_not_current: Diese Projektphase wurde noch nicht gestarted
+          phase_expired: Diese Projektphase ist bereits abgelaufen
+          phase_not_current: Diese Projektphase wurde noch nicht gestartet
