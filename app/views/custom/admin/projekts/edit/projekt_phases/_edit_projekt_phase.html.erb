@@ -76,10 +76,7 @@
             </div>
           </div>
 
-          <% if phase_name.in?(['comment_phase', 'debate_phase', 'proposal_phase', 'question_phase', 'voting_phase', 'budget_phase', 'legislation_phase', 'livestream_phase']) %>
-            <strong class='geo-restriction-title'><span class='geo-restriction-icon'><%= t("custom.admin.projekts.edit.projekt_phases_tab.restriction") %></span></strong>
-            <%= render partial: 'custom/admin/projekts/edit/projekt_phases/phase_geozone_restriction', locals: { projekt: projekt, phase_form: phase_form, projekt_phase: projekt_phase, phase_name: phase_name } %>
-          <% end %>
+          <%= render partial: 'custom/admin/projekts/edit/projekt_phases/phase_restrictions', locals: { projekt: projekt, phase_form: phase_form, projekt_phase: projekt_phase, phase_name: phase_name } %>
         <% end %>
 
         <%= f.submit(t("custom.admin.projekts.edit.update"), class: "button success") %>

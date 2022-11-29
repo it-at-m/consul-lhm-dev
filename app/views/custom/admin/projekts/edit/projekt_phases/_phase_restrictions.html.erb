@@ -1,0 +1,8 @@
+<% if phase_name.in?(['comment_phase', 'debate_phase', 'proposal_phase', 'question_phase', 'voting_phase', 'budget_phase', 'legislation_phase', 'livestream_phase']) %>
+
+  <div class="phase-restrictions">
+    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/phase_restrictions/phase_verified_restriction', locals: { projekt: projekt, phase_form: phase_form, projekt_phase: projekt_phase, phase_name: phase_name } %>
+    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/phase_restrictions/phase_geozone_restriction', locals: { projekt: projekt, phase_form: phase_form, projekt_phase: projekt_phase, phase_name: phase_name } %>
+  </div>
+
+<% end %>
