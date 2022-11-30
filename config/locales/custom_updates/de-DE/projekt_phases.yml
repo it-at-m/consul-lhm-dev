@@ -9,6 +9,7 @@ de:
             organization: Organisationen dürfen keine Inhalte erstellen.
             only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
             only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
+            only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
             phase_not_active: Diese Projektphase ist nicht aktiv
             phase_expired: Diese Projektphase ist bereits abgelaufen
             phase_not_current: Diese Projektphase wurde noch nicht gestartet
@@ -19,6 +20,7 @@ de:
             organization: Organisationen dürfen keine Inhalte erstellen.
             only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
             only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
+            only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
             phase_not_active: Diese Projektphase ist nicht aktiv
             phase_expired: Diese Projektphase ist bereits abgelaufen
             phase_not_current: Diese Projektphase wurde noch nicht gestartet
@@ -29,6 +31,7 @@ de:
             organization: Organisationen dürfen an dieser Abstimmung teilnehmen.
             only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
             only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
+            only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
             phase_not_active: Diese Projektphase ist nicht aktiv
             phase_expired: Diese Projektphase ist bereits abgelaufen
             phase_not_current: Diese Projektphase wurde noch nicht gestartet
@@ -43,6 +46,7 @@ de:
             organization: Organisationen dürfen keine Inhalte erstellen.
             only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
             only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
+            only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
             phase_not_active: Diese Projektphase ist nicht aktiv
             phase_expired: Diese Projektphase ist bereits abgelaufen
             phase_not_current: Diese Projektphase wurde noch nicht gestartet
@@ -54,6 +58,7 @@ de:
           organization: Organisationen dürfen nicht abstimmen.
           only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
           only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
+          only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
           phase_not_active: Diese Projektphase ist nicht aktiv
           phase_expired: Diese Projektphase ist bereits abgelaufen
           phase_not_current: Diese Projektphase wurde noch nicht gestartet
@@ -63,6 +68,7 @@ de:
           organization: Organisationen dürfen keine Inhalte erstellen.
           only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
           only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
+          only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
           phase_not_active: Diese Projektphase ist nicht aktiv
           phase_expired: Diese Projektphase ist bereits abgelaufen
           phase_not_current: Diese Projektphase wurde noch nicht gestartet
@@ -72,6 +78,7 @@ de:
           organization: Organisationen dürfen keine Inhalte erstellen.
           only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
           only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
+          only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
           phase_not_active: Diese Projektphase ist nicht aktiv
           phase_expired: Diese Projektphase ist bereits abgelaufen
           phase_not_current: Diese Projektphase wurde noch nicht gestartet
@@ -81,6 +88,7 @@ de:
           organization: Organisationen dürfen keine Inhalte erstellen.
           only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
           only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
+          only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
           phase_not_active: Diese Projektphase ist nicht aktiv
           phase_expired: Diese Projektphase ist bereits abgelaufen
           phase_not_current: Diese Projektphase wurde noch nicht gestartet
@@ -89,3 +97,6 @@ de:
           title: Verifizierung
           no_restriction: Alle Nutzer*innen
           only_verified: Nur verifizierte Nutzer*innen
+        age:
+          title: Alter
+          no_restriction: Keine Beschränkung

@@ -21,7 +21,8 @@ class Debates::VotesComponent < ApplicationComponent
         t(path_to_key,
               verify: link_to_verify_account,
               city: Setting["org_name"],
-              geozones: @debate_phase&.geozone_restrictions_formatted
+              geozones: @debate_phase&.geozone_restrictions_formatted,
+              age_restriction: @debate_phase&.age_restriction_formatted
         )
 
       end

@@ -9,6 +9,7 @@ class ProjektPhase < ApplicationRecord
   ].freeze
 
   belongs_to :projekt, optional: true, touch: true
+  belongs_to :age_restriction
   has_many :projekt_phase_geozones, dependent: :destroy
   has_many :geozone_restrictions, through: :projekt_phase_geozones, source: :geozone,
            after_add: :touch_updated_at, after_remove: :touch_updated_at
@@ -46,6 +47,7 @@ class ProjektPhase < ApplicationRecord
     return :phase_not_active if not_active?
     return :phase_expired if expired?
     return :phase_not_current if not_current?
+    return age_permission_problem(user) if age_permission_problem(user).present?
 
     if phase_specific_permission_problems(user, location).present?
       return phase_specific_permission_problems(user, location)
@@ -62,6 +64,10 @@ class ProjektPhase < ApplicationRecord
 
   def geozone_restrictions_formatted
     geozone_restrictions.map(&:name).flatten.join(", ")
+  end
+
+  def age_restriction_formatted
+    age_restriction.present? ? age_restriction.name.downcase : ""
   end
 
   private
@@ -87,6 +93,14 @@ class ProjektPhase < ApplicationRecord
           :only_specific_geozones
         end
       end
+    end
+
+    def age_permission_problem(user)
+      return nil if age_restriction.blank?
+      return :not_verified if !user.level_three_verified?
+      return nil if age_restriction.min_age <= user.age && user.age <= age_restriction.max_age
+
+      :only_specific_ages
     end
 
     def touch_updated_at(geozone)

@@ -112,6 +112,7 @@ de:
         projekts: Projekte
         projekt_managers: Projektmanager*innen
         legislation: Textbearbeitung
+        age_restrictions: Alter
       polls:
         questions:
           show:
@@ -390,3 +391,13 @@ de:
             archived_projekt: Abgeschlossener Beteiligungsprozess
       flash:
         deleted: Gelöscht
+      age_restrictions:
+        name: Name
+        min_age: Minimum Alter
+        max_age: Maximum Alter
+        range: Altersspanne
+        order: Position
+        buttons:
+          new: Neu erstellen
+          edit: Bearbeiten
+          destroy: Löschen

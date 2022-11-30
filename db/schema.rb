@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_29_094358) do
+ActiveRecord::Schema.define(version: 2022_11_30_121657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -88,6 +88,24 @@ ActiveRecord::Schema.define(version: 2022_11_29_094358) do
     t.integer "user_id"
     t.string "description"
     t.index ["user_id"], name: "index_administrators_on_user_id"
+  end
+
+  create_table "age_restriction_translations", force: :cascade do |t|
+    t.bigint "age_restriction_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.index ["age_restriction_id"], name: "index_age_restriction_translations_on_age_restriction_id"
+    t.index ["locale"], name: "index_age_restriction_translations_on_locale"
+  end
+
+  create_table "age_restrictions", force: :cascade do |t|
+    t.integer "order"
+    t.integer "min_age"
+    t.integer "max_age"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "ahoy_events", force: :cascade do |t|
@@ -1545,6 +1563,8 @@ ActiveRecord::Schema.define(version: 2022_11_29_094358) do
     t.datetime "updated_at", null: false
     t.boolean "active"
     t.boolean "verification_restricted", default: false
+    t.bigint "age_restriction_id"
+    t.index ["age_restriction_id"], name: "index_projekt_phases_on_age_restriction_id"
     t.index ["projekt_id"], name: "index_projekt_phases_on_projekt_id"
   end
 
@@ -2249,6 +2269,7 @@ ActiveRecord::Schema.define(version: 2022_11_29_094358) do
   add_foreign_key "projekt_notifications", "projekts"
   add_foreign_key "projekt_phase_geozones", "geozones"
   add_foreign_key "projekt_phase_geozones", "projekt_phases"
+  add_foreign_key "projekt_phases", "age_restrictions"
   add_foreign_key "projekt_phases", "projekts"
   add_foreign_key "projekt_settings", "projekts"
   add_foreign_key "projekts", "projekts", column: "parent_id"

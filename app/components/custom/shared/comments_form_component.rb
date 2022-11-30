@@ -31,7 +31,8 @@ class Shared::CommentsFormComponent < ApplicationComponent
         sanitize(t(path_to_key,
                  verify: link_to_verify_account,
                  city: Setting["org_name"],
-                 geozones: projekt_phase.geozone_restrictions_formatted
+                 geozones: projekt_phase.geozone_restrictions_formatted,
+                 age_restriction: projekt_phase.age_restriction_formatted
         ))
 
       end

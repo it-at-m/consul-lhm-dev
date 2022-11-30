@@ -10,7 +10,9 @@ module LegislationHelper
       sanitize(t("custom.projekt_phases.permission_problem.legislation_annotations.#{permission_problem_key}",
                verify: link_to_verify_account,
                city: Setting["org_name"],
-               geozones: legislation_phase.geozone_restrictions_formatted))
+               geozones: legislation_phase.geozone_restrictions_formatted,
+               age_restriction: legislation_phase.age_restriction_formatted
+              ))
     end
   end
 end

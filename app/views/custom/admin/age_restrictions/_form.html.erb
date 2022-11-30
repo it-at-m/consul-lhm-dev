@@ -1,0 +1,37 @@
+<%= translatable_form_for([:admin, age_restriction]) do |f| %>
+  <div class="row">
+    <div class="column">
+      <%= render "shared/errors", resource: age_restriction %>
+      <%= render "shared/globalize_locales", resource: age_restriction %>
+    </div>
+  </div>
+
+  <%= f.translatable_fields do |translations_form| %>
+    <div class="row">
+      <div class="column">
+        <%= translations_form.text_field :name, autocomplete: "off" %>
+      </div>
+    </div>
+  <% end %>
+
+
+  <div class="row">
+    <div class="column medium-4">
+      <%= f.text_field :min_age %>
+    </div>
+
+    <div class="column medium-4">
+      <%= f.text_field :max_age %>
+    </div>
+
+    <div class="column medium-4">
+      <%= f.text_field :order %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column medium-6 large-4">
+      <%= f.submit %>
+    </div>
+  </div>
+<% end %>

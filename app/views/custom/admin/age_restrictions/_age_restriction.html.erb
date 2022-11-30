@@ -1,0 +1,21 @@
+<div id=<%= dom_id(age_restriction) %> class="row" style="margin-bottom:20px">
+  <div class="column medium-4">
+    <%= t("custom.admin.age_restrictions.name") %>
+    <br>
+    <%= age_restriction.name %>
+  </div>
+  <div class="column medium-3">
+    <%= t("custom.admin.age_restrictions.range") %>
+    <br>
+    <%= "#{age_restriction.min_age} - #{age_restriction.max_age}" %>
+  </div>
+  <div class="column medium-3">
+    <%= t("custom.admin.age_restrictions.order") %>
+    <br>
+    <%= age_restriction.order %>
+  </div>
+  <div class="column medium-2">
+    <%= link_to t("custom.admin.age_restrictions.buttons.edit"), edit_admin_age_restriction_path(age_restriction), class: "" %>
+    <%= link_to t("custom.admin.age_restrictions.buttons.destroy"), admin_age_restriction_path(age_restriction), class: "", method: :delete %>
+  </div>
+</div>

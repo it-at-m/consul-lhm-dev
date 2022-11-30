@@ -20,7 +20,8 @@ class Budgets::Investments::CommentsFormComponent < ApplicationComponent
         signup: link_to_signup,
         verify_account: link_to_verify_account,
         city: Setting["org_name"],
-        geozones: @investment.budget.budget_phase.geozone_restrictions_formatted
+        geozones: @investment.budget.budget_phase.geozone_restrictions_formatted,
+        age_restriction: @investment.budget.budget_phase.age_restriction_formatted
        )
     end
 end

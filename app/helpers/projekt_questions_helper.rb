@@ -10,7 +10,9 @@ module ProjektQuestionsHelper
       sanitize(t("custom.projekt_phases.permission_problem.#{projekt_phase.resources_name}.#{permission_problem_key}",
                verify: link_to_verify_account,
                city: Setting["org_name"],
-               geozones: projekt_phase.geozone_restrictions_formatted))
+               geozones: projekt_phase.geozone_restrictions_formatted,
+               age_restriction: projekt_phase.age_restriction_formatted
+              ))
     end
   end
 end

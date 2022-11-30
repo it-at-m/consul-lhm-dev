@@ -47,7 +47,7 @@ class Poll < ApplicationRecord
   end
 
   def answerable_by?(user)
-    voting_phase.permission_problem(user).blank?
+    @answerable ||= voting_phase.permission_problem(user).blank?
   end
 
   def reason_for_not_being_answerable_by(user)
@@ -74,5 +74,9 @@ class Poll < ApplicationRecord
     if poll_answer_count_by_current_user == 0
       Poll::Voter.find_by!(user: user, poll: self, origin: "web", token: token).destroy
     end
+  end
+
+  def projekt_phase
+    voting_phase
   end
 end

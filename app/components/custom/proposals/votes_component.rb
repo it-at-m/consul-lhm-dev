@@ -21,7 +21,8 @@ class Proposals::VotesComponent < ApplicationComponent
         t(path_to_key,
               verify: link_to_verify_account,
               city: Setting["org_name"],
-              geozones: @proposal_phase&.geozone_restrictions_formatted
+              geozones: @proposal_phase&.geozone_restrictions_formatted,
+              age_restriction: @proposal_phase&.age_restriction_formatted
         )
 
       end

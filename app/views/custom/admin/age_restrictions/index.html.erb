@@ -1,0 +1,11 @@
+<div style="margin-bottom:50px;">
+  <%= render @age_restrictions %>
+</div>
+
+<div id="new_age_restriction">
+  <div class="row">
+    <div class="columns medium-4">
+      <%= link_to t("custom.admin.age_restrictions.buttons.new"), new_admin_age_restriction_path, remote: true, class: "button expanded" %>
+    </div>
+  </div>
+</div>

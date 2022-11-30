@@ -14,7 +14,8 @@ class Budgets::Investments::VotesComponent < ApplicationComponent
         t(path_to_key,
           verify: link_to_verify_account,
           city: Setting["org_name"],
-          geozones: investment.budget.budget_phase.geozone_restrictions_formatted
+          geozones: investment.budget.budget_phase.geozone_restrictions_formatted,
+          age_restriction: investment.budget.budget_phase.age_restriction_formatted
          )
       end
     end

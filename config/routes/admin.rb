@@ -31,6 +31,9 @@ namespace :admin do
 
   resources :map_layers, only: [:update, :create, :edit, :new, :destroy]
 
+  # custom age restriction routes
+  resources :age_restrictions
+
   # custom deficiency reports routes
   scope module: :deficiency_reports, path: :deficiency_reports, as: :deficiency_report do
     resources :officers,    only: [:index, :create, :destroy] do
