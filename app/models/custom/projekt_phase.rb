@@ -47,13 +47,16 @@ class ProjektPhase < ApplicationRecord
     return :phase_not_active if not_active?
     return :phase_expired if expired?
     return :phase_not_current if not_current?
-    return age_permission_problem(user) if age_permission_problem(user).present?
+    return :not_verified if verification_restricted && !user.level_three_verified?
 
     if phase_specific_permission_problems(user, location).present?
       return phase_specific_permission_problems(user, location)
     end
 
-    return geozone_permission_problem(user) if geozone_permission_problem(user)
+    unless Setting["feature.user.skip_verification"].present?
+      return age_permission_problem(user) if age_permission_problem(user).present?
+      return geozone_permission_problem(user) if geozone_permission_problem(user)
+    end
 
     nil
   end
