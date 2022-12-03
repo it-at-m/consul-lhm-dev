@@ -184,14 +184,12 @@ en:
           projekt_phases_tab:
             actions: Actions
             activate: Enabled
-            activate_phase: Active
             affiliation: Area allocation
             beginning: Start date
             budget_phase: Budget phase
             copy_phase_link: Copy link to phase
             comment_phase: Commenting phase
             debate_phase: Discussion phase
-            default_tab: Standard Element
             end_date: End date
             ending: End date
             event_phase: Eventsphase

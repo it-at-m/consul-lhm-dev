@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_30_121657) do
+ActiveRecord::Schema.define(version: 2022_12_02_115716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1551,6 +1551,18 @@ ActiveRecord::Schema.define(version: 2022_11_30_121657) do
     t.datetime "updated_at", null: false
     t.index ["geozone_id"], name: "index_projekt_phase_geozones_on_geozone_id"
     t.index ["projekt_phase_id"], name: "index_projekt_phase_geozones_on_projekt_phase_id"
+  end
+
+  create_table "projekt_phase_translations", force: :cascade do |t|
+    t.bigint "projekt_phase_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "phase_tab_name"
+    t.text "new_resource_button_name"
+    t.text "resource_form_title"
+    t.index ["locale"], name: "index_projekt_phase_translations_on_locale"
+    t.index ["projekt_phase_id"], name: "index_projekt_phase_translations_on_projekt_phase_id"
   end
 
   create_table "projekt_phases", force: :cascade do |t|

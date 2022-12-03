@@ -203,14 +203,12 @@ de:
           projekt_phases_tab:
             actions: Aktionen
             activate: Aktiviert
-            activate_phase: Aktiviert
             affiliation: Gebietszuordnung
             beginning: Anfangsdatum
-            budget_phase: Budgetphase
+            budget_phase: Budget
             copy_phase_link: Link für Tab abrufen
-            comment_phase: Kommentarphase
-            debate_phase: Diskussionsphase
-            default_tab: Standardelement
+            comment_phase: Kommentare
+            debate_phase: Diskussionen
             end_date: Enddatum
             ending: Enddatum
             event_phase: Veranstaltungen
@@ -228,7 +226,7 @@ de:
               livestream_phase: Zu den Livestreams
               newsfeed_phase: Zu den News-Feeds
             main_block_title: Projektstatus
-            milestone_phase: Meilensteinphase
+            milestone_phase: Meilensteine
             name: Projekteinstellungen
             newsfeed_phase: News-Feed
             page_block_title: Projektseite
@@ -236,15 +234,27 @@ de:
             phases_block_title: Projektphasen
             projekt_duration: Projektinformationen
             projekt_notification_phase: Benachrichtigungen
-            proposal_phase: Vorschlagsphase
-            question_phase: Kurzumfragenphase
+            proposal_phase: Vorschläge
+            question_phase: Kurzumfrage
             restriction: Partizipationsbeschränkung
             start_date: Anfangsdatum
             standard_element: Standardelement
             voting_manage: Abstimmungen verwalten
-            voting_phase: Abstimmungsphase
+            voting_phase: Abstimmung
             livestream_phase: Livestreams
-            legislation_phase: Textbearbeitungsphase
+            legislation_phase: Textbearbeitung
+            restriction_names:
+              age: Alter
+              geo: Geo
+              verification: Verifizierung
+            table_headings:
+              phase_name: Phase
+              start_date: Anfangsdatum
+              end_date: Enddatum
+              limitations: Beschränkung
+              default_tab: Standard
+              activated: Aktiviert
+              edit_link: Bearbeiten
           projekt_questions_tab:
             name: Kurzumfragen
             title: Fragen
@@ -401,3 +411,12 @@ de:
           new: Neu erstellen
           edit: Bearbeiten
           destroy: Löschen
+      projekt_phases:
+        phase_tab_name: Name in Tab
+        new_resource_button_name: Text in Button
+        resource_form_title: Text bei Erstellung
+        duration: Laufzeit
+        start_date: Anfangsdatum
+        end_date: Enddatum
+        edit:
+          title: Einstellung für Phase

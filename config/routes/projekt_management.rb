@@ -2,6 +2,7 @@ namespace :projekt_management do
   root to: "projekts#index"
 
   resources :projekts, only: %i[index edit update] do
+    resources :projekt_phases, only: [:edit, :update]
     resources :projekt_questions, only: %i[new edit]
     resources :milestones, controller: "projekt_milestones", except: %i[index show]
     resources :progress_bars, controller: "projekt_progress_bars", except: %i[show]

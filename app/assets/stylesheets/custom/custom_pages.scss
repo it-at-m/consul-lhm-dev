@@ -228,6 +228,8 @@ li.projekt-navigator.current-projekt::before {
 // Footer icons
 
 span.time-icon,
+span.verification-restriction-icon,
+span.age-restriction-icon,
 span.geo-restriction-icon,
 span.geo-affiliation-icon {
   margin-left: 23px;
@@ -236,17 +238,28 @@ span.geo-affiliation-icon {
 }
 
 span.time-icon:before,
+span.verification-restriction-icon:before,
+span.age-restriction-icon:before,
 span.geo-restriction-icon:before,
 span.geo-affiliation-icon:before {
   font-weight: bold;
   font-family: "Font Awesome 5 Free";
   position: absolute;
-  left: -23px;
+  left: -21px;
+  top: 2px;
   font-size: 0.75rem;
 }
 
 span.time-icon:before {
   content: "\f017";
+}
+
+span.verification-restriction-icon:before {
+  content: "\f4fc";
+}
+
+span.age-restriction-icon:before {
+  content: "\f4fc";
 }
 
 span.geo-restriction-icon:before {

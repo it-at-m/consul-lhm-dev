@@ -76,6 +76,8 @@ module Abilities
 
       can :comment_as_moderator, [Debate, Comment, Proposal, Budget::Investment, Poll, ProjektQuestion], projekt: { projekt_managers: { id: user.projekt_manager.id }}
       can :comment_as_moderator, [Projekt], projekt_managers: { id: user.projekt_manager.id }
+
+      can :update, ProjektPhase, projekt: { projekt_managers: { id: user.projekt_manager.id }}
     end
   end
 end

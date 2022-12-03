@@ -58,46 +58,48 @@
 
     </div>
   </td>
+
   <td>
-    <% unless phase_name.in?(["event_phase", "argument_phase", "projekt_notification_phase", "milestone_phase", "newsfeed_phase"]) %>
-      <%= form_for(@projekt, url: namespace_projekt_path(@projekt), as: :projekt) do |f| %>
-        <%= hidden_field_tag :tab, '#tab-projekt-phases' %>
-        <%= hidden_field_tag :namespace, params[:controller].include?('projekt_management') ? 'projekt_management' : '' %>
+    <%= projekt_phase.start_date || 'nil' %>
+  </td>
 
-        <%= f.fields_for phase_name.to_s do |phase_form| %>
-          <div style='display: flex'>
-            <div style='flex-grow:1'>
-              <strong><%= t("custom.admin.projekts.edit.projekt_phases_tab.beginning") %></strong>
-              <%= phase_form.date_field :start_date, label: false %>
-            </div>
-            <div style='flex-grow:1'>
-              <strong><%= t("custom.admin.projekts.edit.projekt_phases_tab.ending") %></strong>
-              <%= phase_form.date_field :end_date, label: false %>
-            </div>
-          </div>
+  <td>
+    <%= projekt_phase.end_date || 'nil' %>
+  </td>
 
-          <%= render partial: 'custom/admin/projekts/edit/projekt_phases/phase_restrictions', locals: { projekt: projekt, phase_form: phase_form, projekt_phase: projekt_phase, phase_name: phase_name } %>
-        <% end %>
+  <td>
+    <% if projekt_phase.age_restriction.present? %>
+      <span class='age-restriction-icon'>
+        <%= t("custom.admin.projekts.edit.projekt_phases_tab.restriction_names.age") %>
+      </span>
+    <% end %>
 
-        <%= f.submit(t("custom.admin.projekts.edit.update"), class: "button success") %>
-      <% end %>
+    <% if projekt_phase.geozone_restricted != "no_restriction" %>
+      <span class='geo-restriction-icon'>
+        <%= t("custom.admin.projekts.edit.projekt_phases_tab.restriction_names.geo") %>
+      </span>
+    <% end  %>
+
+    <% if projekt_phase.verification_restricted %>
+      <span class='verification-restriction-icon'>
+        <%= t("custom.admin.projekts.edit.projekt_phases_tab.restriction_names.verification") %>
+      </span>
     <% end %>
   </td>
 
   <td>
-    <strong>
-      <%= t("custom.admin.projekts.edit.projekt_phases_tab.default_tab") %>
-    </strong>
     <div id=<%= dom_id(projekt_phase, :default_footer_tab) %> >
       <%= render partial: 'admin/projekts/edit/projekt_phases/default_projekt_phase', locals: { projekt: projekt, projekt_phase: projekt_phase, phase_name: phase_name } %>
     </div>
   </td>
 
   <td>
-    <strong>
-      <%= t("custom.admin.projekts.edit.projekt_phases_tab.activate_phase") %>
-    </strong>
-
     <%= render Admin::LivesubmitCheckbox::Component.new(url: liveupdate_admin_projekt_path(projekt), resource_name: "projekt[#{phase_name}_attributes]", attribute_name: 'active', id: projekt.send(phase_name.to_sym).id, current_value: projekt.send(phase_name.to_sym).active) %>
+  </td>
+
+  <td>
+    <%= link_to "/#{@namespace}/projekts/#{projekt.id}/projekt_phases/#{projekt_phase.id}/edit" do %>
+      <i class="fas fa-edit"></i>
+    <% end %>
   </td>
 </tr>

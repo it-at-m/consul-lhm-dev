@@ -3,7 +3,8 @@ namespace :admin do
 
   # custom projekt routes
   resources :projekts, only: [:index, :edit, :create, :update, :destroy] do
-    resources :settings, controller: 'projekt_settings', only: [:update] do
+    resources :projekt_phases, only: [:edit, :update]
+    resources :settings, controller: "projekt_settings", only: [:update] do
       member do
         patch :update_default_projekt_footer_tab
       end

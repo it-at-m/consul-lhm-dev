@@ -8,6 +8,11 @@ class ProjektPhase < ApplicationRecord
     "ProjektPhase::LivestreamPhase"
   ].freeze
 
+  translates :phase_tab_name, touch: true
+  translates :new_resource_button_name, touch: true
+  translates :resource_form_title, touch: true
+  include Globalizable
+
   belongs_to :projekt, optional: true, touch: true
   belongs_to :age_restriction
   has_many :projekt_phase_geozones, dependent: :destroy
