@@ -3,7 +3,7 @@ class Admin::AgeRestrictionsController < Admin::BaseController
   before_action :set_age_restriction, only: %i[edit update destroy]
 
   def index
-    @age_restrictions = AgeRestriction.all.order(order: :asc)
+    @age_restrictions = AgeRestriction.all
   end
 
   def new

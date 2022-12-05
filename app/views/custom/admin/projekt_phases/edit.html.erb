@@ -8,6 +8,13 @@
 <% if @projekt_phase.name.in?(["comment_phase", "debate_phase", "proposal_phase", "question_phase", "voting_phase", "budget_phase", "legislation_phase", "livestream_phase"]) %>
   <%= translatable_form_for(@projekt_phase, url: namespace_projekt_phase_path(@projekt, @projekt_phase), as: :projekt_phase) do |f| %>
 
+    <div class="row">
+      <div class="column">
+        <%= render "shared/errors", resource: @projekt_phase %>
+        <%= render "shared/globalize_locales", resource: @projekt_phase %>
+      </div>
+    </div>
+
     <%= f.translatable_fields do |translations_form| %>
       <div class="row">
         <div class="column large-8">
@@ -16,19 +23,22 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="column large-8">
-          <strong><%= t("custom.admin.projekt_phases.new_resource_button_name") %></strong>
-          <%= translations_form.text_field :new_resource_button_name, label: false %>
+      <% if @projekt_phase.name.in?(["debate_phase", "proposal_phase"]) %>
+        <div class="row">
+          <div class="column large-8">
+            <strong><%= t("custom.admin.projekt_phases.new_resource_button_name") %></strong>
+            <%= translations_form.text_field :new_resource_button_name, label: false %>
+          </div>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="column large-8">
-          <strong><%= t("custom.admin.projekt_phases.resource_form_title") %></strong>
-          <%= translations_form.text_field :resource_form_title, label: false %>
+        <div class="row">
+          <div class="column large-8">
+            <strong><%= t("custom.admin.projekt_phases.resource_form_title") %></strong>
+            <%= translations_form.text_field :resource_form_title, label: false %>
+          </div>
         </div>
-      </div>
+      <% end %>
+
     <% end %>
 
     <div class='row'>

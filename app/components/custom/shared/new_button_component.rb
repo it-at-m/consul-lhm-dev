@@ -41,7 +41,8 @@ class Shared::NewButtonComponent < ApplicationComponent
               sign_up: link_to_signup,
               verify: link_to_verify_account,
               city: Setting["org_name"],
-              geozones: @projekt_phase&.geozone_restrictions_formatted
+              geozones: @projekt_phase&.geozone_restrictions_formatted,
+              age_restriction: @projekt_phase&.age_restriction_formatted
         )
       )
     end
@@ -74,11 +75,13 @@ class Shared::NewButtonComponent < ApplicationComponent
                 class: "button expanded"
 
       elsif @projekt_phase.is_a?(ProjektPhase::DebatePhase) || @resources_name == "debates"
-        link_to t("debates.index.start_debate"), new_debate_path(link_params_hash),
+        button_text = @projekt_phase&.new_resource_button_name.presence || t("debates.index.start_debate")
+        link_to button_text, new_debate_path(link_params_hash),
           class: "button expanded js-preselect-projekt"
 
       elsif @projekt_phase.is_a?(ProjektPhase::ProposalPhase) || @resources_name == "proposals"
-        link_to t("proposals.index.start_proposal"), new_proposal_path(link_params_hash),
+        button_text = @projekt_phase&.new_resource_button_name.presence || t("proposals.index.start_proposal")
+        link_to button_text, new_proposal_path(link_params_hash),
           class: "button expanded js-preselect-projekt",
           data: { turbolinks: false }
 

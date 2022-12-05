@@ -58,12 +58,14 @@
       if ( shouldUpdateMap ) {
         App.ProjektSelector.replaceProjektMapOnProposalCreation($selectedProjekt)
       }
+
       App.ProjektSelector.toggleDocumentAttachment($selectedProjekt)
       App.ProjektSelector.toggleSummary($selectedProjekt)
       App.ProjektSelector.toggleExternalVideoUrl($selectedProjekt)
       App.ProjektSelector.updateAvailableTagsSelection($selectedProjekt)
       App.ProjektSelector.updateAvailableSDGsSelection($selectedProjekt)
       App.ProjektSelector.toggleExternalFieldsHeader($selectedProjekt)
+      App.ProjektSelector.updateMainHeader($selectedProjekt)
 
     },
 
@@ -193,6 +195,24 @@
         $('#additional-fields-title').hide();
       } else {
         $('#additional-fields-title').show();
+      }
+    },
+
+    updateMainHeader: function($selectedProjekt) {
+      var $header = $('header h1').first();
+      var defaultText, customText;
+
+      if (!$header.data("defaultText")) {
+        defaultText = $header.text();
+        $header.data("defaultText", defaultText)
+      }
+
+      if ($selectedProjekt.data('resourceFormTitle')) {
+        customText = $selectedProjekt.data('resourceFormTitle').replaceAll('_', ' ')
+        $header.text(customText);
+      } else if ($header.data('defaultText')) {
+        defaultText = $header.data('defaultText');
+        $header.text(defaultText);
       }
     },
 
