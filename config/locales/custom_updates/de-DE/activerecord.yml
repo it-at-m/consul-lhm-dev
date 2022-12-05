@@ -10,6 +10,9 @@ de:
       projekt:
         one: Projekt
         other: Projekte
+      age_restriction:
+        one: Altersbeschränkung
+        other: Altersbeschränkungen
     errors:
       models:
         proposal:
@@ -73,3 +76,7 @@ de:
         gender: Geschlecht
         date_of_birth: Geburtsdatum
         document_last_digits: Personalausweis / Passport (4 letzten Ziffern)
+      age_restriction:
+        min_age: Mindestalter
+        max_age: Maximalalter
+        order: Reihenfolge

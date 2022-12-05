@@ -93,6 +93,7 @@ de:
           phase_expired: Diese Projektphase ist bereits abgelaufen
           phase_not_current: Diese Projektphase wurde noch nicht gestartet
       restrictions:
+        hint: Um die Partizipation einschränken zu können, müssen Nutzer*innen verifiziert werden.
         verification:
           title: Verifizierung
           no_restriction: Alle Nutzer*innen

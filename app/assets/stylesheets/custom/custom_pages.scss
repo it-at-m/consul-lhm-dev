@@ -270,6 +270,14 @@ span.geo-affiliation-icon:before {
   content: "\f279";
 }
 
+span.restriction-hint {
+  font-size: small;
+  font-weight: normal;
+  position: relative;
+  top: -5px;
+  left: 23px;
+}
+
 // Toggling projekt lists in page sidebar
 
 li.projekt-navigator {

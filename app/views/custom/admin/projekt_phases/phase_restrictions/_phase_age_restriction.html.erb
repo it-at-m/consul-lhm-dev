@@ -1,5 +1,8 @@
 <div class="phase-age-restriction">
-  <strong class='age-restriction-title'><span class='age-restriction-icon'><%= t("custom.projekt_phases.restrictions.age.title") %></span></strong>
+  <strong class='age-restriction-title'>
+    <span class='age-restriction-icon'><%= t("custom.projekt_phases.restrictions.age.title") %></span>
+    <span class='restriction-hint'><%= t("custom.projekt_phases.restrictions.hint") %></span>
+  </strong>
   <div class="projekt-phase-restriction-selector margin-bottom <%= 'gray-labels' if skip_user_verification? %>">
 
     <div>

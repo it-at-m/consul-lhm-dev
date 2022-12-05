@@ -112,7 +112,7 @@ de:
         projekts: Projekte
         projekt_managers: Projektmanager*innen
         legislation: Textbearbeitung
-        age_restrictions: Alter
+        age_restrictions: Altersbeschränkungen
       polls:
         questions:
           show:
@@ -218,7 +218,7 @@ de:
               question_phase: Zu den Kurzumfragen
               voting_phase: Zu den Abstimmungen
               budget_phase: Zu den Budgets
-              legislation_process_phase: Zur Textbearbeitung
+              legislation_phase: Zur Textbearbeitung
               argument_phase: Zu den Stimmen
               notification_phase: Zu den Benachrichtigungen
               milestone_phase: Zu den Meilensteinen
@@ -386,6 +386,7 @@ de:
           street_name: Straße
           street_number: Hausnummer
           plz: Postleitzahl
+          geozone: Gebiet
           city_name: Stadt
           gender: Geschlecht
           date_of_birth: Geburtsdatum
@@ -403,10 +404,10 @@ de:
         deleted: Gelöscht
       age_restrictions:
         name: Name
-        min_age: Minimum Alter
-        max_age: Maximum Alter
-        range: Altersspanne
-        order: Position
+        min_age: Mindestalter
+        max_age: Maximalalter
+        range: Altersbeschränkung
+        order: Reihenfolge
         buttons:
           new: Neu erstellen
           edit: Bearbeiten

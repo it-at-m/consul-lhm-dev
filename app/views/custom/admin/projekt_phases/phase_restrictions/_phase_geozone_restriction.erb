@@ -1,5 +1,8 @@
 <div class="phase-geo-restriction">
-  <strong class='geo-restriction-title'><span class='geo-restriction-icon'><%= t("custom.admin.projekts.edit.projekt_phases_tab.restriction") %></span></strong>
+  <strong class='geo-restriction-title'>
+    <span class='geo-restriction-icon'><%= t("custom.admin.projekts.edit.projekt_phases_tab.restriction") %></span>
+    <span class='restriction-hint'><%= t("custom.projekt_phases.restrictions.hint") %></span>
+  </strong>
   <div class="projekt-phase-restriction-selector margin-bottom <%= 'gray-labels' if skip_user_verification? %>">
 
     <%= f.radio_button :geozone_restricted, 'no_restriction',

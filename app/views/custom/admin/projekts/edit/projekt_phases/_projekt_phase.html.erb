@@ -6,6 +6,11 @@
     <strong>
       <%= t("custom.admin.projekts.edit.projekt_phases_tab.#{phase_name}") %>
     </strong>
+    <% if projekt_phase.phase_tab_name.present? %>
+      <div>
+        <%= "(#{projekt_phase.phase_tab_name})" %>
+      </div>
+    <% end %>
     <div class='margin-bottom'>
       <div id=<%= dom_id(projekt_phase, :copy_phase_link) %> class='hide'>
         <% if projekt.overview_page? %>
@@ -60,11 +65,11 @@
   </td>
 
   <td>
-    <%= projekt_phase.start_date || 'nil' %>
+    <%= projekt_phase.start_date %>
   </td>
 
   <td>
-    <%= projekt_phase.end_date || 'nil' %>
+    <%= projekt_phase.end_date %>
   </td>
 
   <td>
