@@ -57,28 +57,22 @@
 <table class='edit-projekt margin-top'>
   <tbody>
 
-    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt: @overview_page_special_projekt,
+    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase_table_header' %>
+
+    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase', locals: {
       projekt_phase: @overview_page_special_projekt.comment_phase,
-      phase_name: 'comment_phase'
     } %>
 
-    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt: @overview_page_special_projekt,
+    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase', locals: {
       projekt_phase: @overview_page_special_projekt.debate_phase,
-      phase_name: 'debate_phase'
     } %>
 
-    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt: @overview_page_special_projekt,
+    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase', locals: {
       projekt_phase: @overview_page_special_projekt.proposal_phase,
-      phase_name: 'proposal_phase'
     } %>
 
-    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/edit_projekt_phase', locals: {
-      projekt: @overview_page_special_projekt,
+    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase', locals: {
       projekt_phase: @overview_page_special_projekt.voting_phase,
-      phase_name: 'voting_phase'
     } %>
   </tbody>
 </table>

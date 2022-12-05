@@ -74,7 +74,7 @@
       </span>
     <% end %>
 
-    <% if projekt_phase.geozone_restricted != "no_restriction" %>
+    <% if projekt_phase.geozone_restricted != "no_restriction" && projekt_phase.geozone_restricted != nil %>
       <span class='geo-restriction-icon'>
         <%= t("custom.admin.projekts.edit.projekt_phases_tab.restriction_names.geo") %>
       </span>
@@ -98,7 +98,7 @@
   </td>
 
   <td>
-    <%= link_to "/#{@namespace}/projekts/#{projekt.id}/projekt_phases/#{projekt_phase.id}/edit" do %>
+    <%= link_to "/#{@namespace || 'admin'}/projekts/#{projekt.id}/projekt_phases/#{projekt_phase.id}/edit" do %>
       <i class="fas fa-edit"></i>
     <% end %>
   </td>

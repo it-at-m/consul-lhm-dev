@@ -16,6 +16,10 @@ class Admin::ProjektPhasesController < Admin::BaseController
     end
 
     def edit_namespace_projekt_path(projekt)
-      edit_admin_projekt_path(projekt)
+      if projekt.special?
+        admin_projekts_path(anchor: "tab-projekts-overview-page")
+      else
+        edit_admin_projekt_path(projekt)
+      end
     end
 end
