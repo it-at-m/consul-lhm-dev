@@ -10,7 +10,7 @@
 
   <div class="comment-footer">
     <% if annotation.comments.roots.count > Legislation::Annotation::COMMENTS_PAGE_SIZE %>
-      <%= link_to legislation_process_draft_version_annotation_path(annotation.draft_version.process, annotation.draft_version, annotation), class: "button" do %>
+      <%= link_to projekt_legislation_process_footer_path(annotation.draft_version.process.projekt, annotation.draft_version, section: 'annotations', params: { annotation_id: annotation.id}), class: "button" do %>
           <strong><%= t("legislation.annotations.comments.see_all") %></strong>
       <% end %>
     <% end %>
