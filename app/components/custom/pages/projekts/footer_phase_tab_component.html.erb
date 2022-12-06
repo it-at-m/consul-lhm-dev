@@ -35,6 +35,10 @@
         <% unless get_projekt_phase_restriction_name(phase, nil, true) == 'no_restriction' %>
           <span class='geo-restriction-icon'><%= get_projekt_phase_restriction_name(phase) %></span>
         <% end %>
+
+        <% if phase.age_restriction.present? %>
+          <span class='age-restriction-icon'><%= phase.age_restriction.name %></span>
+        <% end %>
       </div>
     <% end %>
   </li>
