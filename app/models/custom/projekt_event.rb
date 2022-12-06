@@ -11,11 +11,11 @@ class ProjektEvent < ApplicationRecord
   }
 
   scope :sort_by_incoming, -> {
-    where('datetime > ?', Time.now)
+    where("COALESCE(end_datetime, datetime) >= ?", Time.zone.now)
   }
 
   scope :sort_by_past, -> {
-    where("COALESCE(end_datetime, datetime) < ?", Time.now)
+    where("COALESCE(end_datetime, datetime) < ?", Time.zone.now)
   }
 
   def self.scoped_projekt_ids_for_footer(projekt)
@@ -23,6 +23,6 @@ class ProjektEvent < ApplicationRecord
       .top_parent
       .all_children_projekts
       .unshift(projekt.top_parent)
-      .pluck(:id)
+      .ids
   end
 end
