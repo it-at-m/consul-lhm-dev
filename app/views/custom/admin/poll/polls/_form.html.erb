@@ -35,12 +35,6 @@
     <div class="small-12 column">
       <%= render "images/nested_image", f: f %>
     </div>
-
-    <div class="clear">
-      <div class="small-6 medium-6 column">
-        <%= f.check_box :geozone_restricted, data: { checkbox_toggle: "#geozones" } %>
-      </div>
-    </div>
   </div>
 
   <div id="geozones" style="<%= @poll.geozone_restricted? ? "" : "display:none" %>">

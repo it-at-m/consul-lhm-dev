@@ -35,6 +35,8 @@ class Polls::QuestionsController < ApplicationController
   end
 
   def update_open_answer
+    @poll = @question.poll
+
     answer = @question.answers.find_or_initialize_by(author: current_user, answer: open_answer_params[:answer])
     if answer.update(open_answer_text: open_answer_params[:open_answer_text])
       @open_answer_updated = true
