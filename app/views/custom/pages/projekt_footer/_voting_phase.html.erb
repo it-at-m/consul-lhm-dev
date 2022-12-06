@@ -29,26 +29,6 @@
       </div>
     <% end %>
 
-    <% unless @current_projekt.overview_page? %>
-      <%= render "custom/shared/filter_links", i18n_namespace: "polls.index" %>
-    <% end %>
-
-    <div class='row'>
-      <div class='small-6 column small'>
-        <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
-          <%= link_to t('polls.index.section_header.help'), '#section_help' %>
-        <% end %>
-      </div>
-      <div class='small-6 column small'>
-        <% if extended_feature?('modulewide.show_number_of_entries_in_modules') %>
-          <div class='float-right'>
-            <%= @resources.count %>
-            <%= t('activerecord.models.poll', count: @resources.count) %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-
     <div class='margin-top'>
       <%= render "polls/poll_group", poll_group: @polls %>
     </div>

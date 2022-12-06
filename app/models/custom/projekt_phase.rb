@@ -22,6 +22,13 @@ class ProjektPhase < ApplicationRecord
   scope :regular_phases, -> { where.not(type: REGULAR_PROJEKT_PHASES) }
   scope :special_phases, -> { where(type: REGULAR_PROJEKT_PHASES) }
 
+  scope :active, -> { where(active: true) }
+  scope :current, ->(timestamp = Time.zone.today) {
+    active
+      .where("start_date IS NULL OR start_date <= ?", timestamp)
+      .where("end_date IS NULL OR end_date >= ?", timestamp)
+  }
+
   def selectable_by?(user)
     permission_problem(user).blank?
   end

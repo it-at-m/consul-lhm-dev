@@ -12,7 +12,7 @@ de:
           other: Noch %{count} Tage
         expired: Abstimmung abgelaufen
         expires_today: Läuft nur noch heute
-        participate_button: Abstimmen
+        participate_button: Teilnehmen
       questions:
         answers:
           more_info: Mehr Infos
@@ -30,5 +30,5 @@ de:
   polls:
     index:
       filters:
-        all: Alle Abstimmungen
-        currrent: Nur aktive Abstimmungen
+        all: Alle
+        currrent: Nur aktive
