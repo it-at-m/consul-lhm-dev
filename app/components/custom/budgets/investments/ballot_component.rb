@@ -27,7 +27,7 @@ class Budgets::Investments::BallotComponent < ApplicationComponent
     def cannot_vote_text
       if reason == :not_logged_in
         t(path_to_key,
-          signin: link_to_signin, signup: link_to_signup)
+          sign_in: link_to_signin, sign_up: link_to_signup)
       elsif reason.present?
         t(path_to_key,
           verify_account: link_to_verify_account,
