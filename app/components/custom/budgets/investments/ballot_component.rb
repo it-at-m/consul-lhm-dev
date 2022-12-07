@@ -30,7 +30,7 @@ class Budgets::Investments::BallotComponent < ApplicationComponent
           sign_in: link_to_signin, sign_up: link_to_signup)
       elsif reason.present?
         t(path_to_key,
-          verify_account: link_to_verify_account,
+          verify: link_to_verify_account,
           city: Setting["org_name"],
           geozones: @investment.budget.budget_phase.geozone_restrictions_formatted,
           age_restriction: @investment.budget.budget_phase.age_restriction_formatted)
