@@ -14,6 +14,20 @@ class Budgets::Investments::BallotComponent < ApplicationComponent
 
   private
 
+    def user
+      if current_user.administrator? &&
+          controller_name == "offline_ballots" &&
+          params[:user_id]
+        User.find(params[:user_id])
+      else
+        current_user
+      end
+    end
+
+    def reason
+      @reason ||= investment.reason_for_not_being_ballotable_by(user, ballot)
+    end
+
     def line_weight_options_for_select
       raise :budget_not_distributed unless budget.distributed_voting?
 
