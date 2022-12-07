@@ -2,6 +2,8 @@
   <% if @current_filter == "erased" %>
     <td><%= link_to user.id, user_path(user), target: "_blank" %></td>
     <td><%= user.erase_reason %></td>
+    <td><%= user.unique_stamp %></td>
+    <td><%= user.user_type %></td>
   <% else %>
     <td><%= link_to user.name, user_path(user), target: "_blank" %></td>
     <td><%= user.email %></td>

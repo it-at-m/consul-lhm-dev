@@ -9,6 +9,8 @@
         <% if @current_filter == "erased" %>
           <th scope="col"><%= t("admin.users.columns.id") %></th>
           <th scope="col"><%= t("admin.users.columns.erase_reason") %></th>
+          <th scope="col"><%= t("admin.users.columns.unique_stamp") %></th>
+          <th scope="col"><%= t("admin.users.columns.verification_level") %></th>
         <% else %>
           <th scope="col"><%= t("admin.users.columns.name") %></th>
           <th scope="col"><%= t("admin.users.columns.email") %></th>
