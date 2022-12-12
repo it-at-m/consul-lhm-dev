@@ -7,26 +7,24 @@ module Budgets
 
       def create
         load_investment
-
-        if permission_problem.present?
-          return
-        end
-
         load_heading
         load_map
+
+        if permission_problem.present? && permission_problem != :not_enough_available_votes
+          return
+        end
 
         @ballot.add_investment(@investment, params[:line_weight])
       end
 
       def destroy
         @investment = @line.investment
-
-        if permission_problem.present?
-          return
-        end
-
         load_heading
         load_map
+
+        if permission_problem.present? && permission_problem != :not_enough_available_votes
+          return
+        end
 
         @line.destroy!
         load_investments

@@ -14,6 +14,8 @@ class Budgets::Ballot::InvestmentComponent < ApplicationComponent
     end
 
     def show_delete_vote_button?
-      investment.reason_for_not_being_ballotable_by(current_user, ballot).blank?
+      permission_problem = investment.reason_for_not_being_ballotable_by(current_user, ballot)
+
+      permission_problem.blank? || permission_problem == :not_enough_available_votes
     end
 end
