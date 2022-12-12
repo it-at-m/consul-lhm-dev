@@ -5,6 +5,33 @@ module Budgets
     class LinesController < ApplicationController
       before_action :set_variables_for_sidebar_filter, only: %i[create destroy]
 
+      def create
+        load_investment
+
+        if permission_problem.present?
+          return
+        end
+
+        load_heading
+        load_map
+
+        @ballot.add_investment(@investment, params[:line_weight])
+      end
+
+      def destroy
+        @investment = @line.investment
+
+        if permission_problem.present?
+          return
+        end
+
+        load_heading
+        load_map
+
+        @line.destroy!
+        load_investments
+      end
+
       private
 
         def load_ballot
@@ -20,6 +47,10 @@ module Budgets
           @valid_filters = @budget.investments_filters
           params[:current_tab_path] = "budget_phase_footer_tab"
           params[:id] = @budget.projekt.page.slug
+        end
+
+        def permission_problem
+          @permission_problem = @investment.reason_for_not_being_ballotable_by(current_user, @line.ballot)
         end
     end
   end

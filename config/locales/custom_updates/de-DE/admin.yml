@@ -391,6 +391,7 @@ de:
           gender: Geschlecht
           date_of_birth: Geburtsdatum
           document_last_digits: Dokument (4 letzten Ziffern)
+          verified_at: Verifiziert am
           actions: Aktionen
           action:
             verify: Verifizieren
