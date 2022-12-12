@@ -39,6 +39,8 @@ class Budgets::Investments::BallotComponent < ApplicationComponent
     end
 
     def cannot_vote_text
+      return nil if voted? && reason == :not_enough_available_votes
+
       if reason == :not_logged_in
         t(path_to_key,
           sign_in: link_to_signin, sign_up: link_to_signup)
