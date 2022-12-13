@@ -99,7 +99,7 @@
   </td>
 
   <td>
-    <%= render Admin::LivesubmitCheckbox::Component.new(url: liveupdate_admin_projekt_path(projekt), resource_name: "projekt[#{phase_name}_attributes]", attribute_name: 'active', id: projekt.send(phase_name.to_sym).id, current_value: projekt.send(phase_name.to_sym).active) %>
+    <%= render Admin::LivesubmitCheckbox::Component.new(url: toggle_active_status_admin_projekt_projekt_phase_path(projekt, projekt_phase), resource_name: "projekt[phase_attributes]", attribute_name: 'active', id: projekt.send(phase_name.to_sym).id, current_value: projekt.send(phase_name.to_sym).active) %>
   </td>
 
   <td>

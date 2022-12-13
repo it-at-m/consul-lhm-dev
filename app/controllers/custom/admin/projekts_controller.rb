@@ -77,10 +77,6 @@ class Admin::ProjektsController < Admin::BaseController
     end
   end
 
-  def liveupdate
-    @projekt.update_attributes(projekt_params)
-  end
-
   def create
     @projekts = Projekt.top_level.page(params[:page])
     @projekt = Projekt.new(projekt_params.merge(color: "#073E8E"))

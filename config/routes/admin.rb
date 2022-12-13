@@ -3,7 +3,11 @@ namespace :admin do
 
   # custom projekt routes
   resources :projekts, only: [:index, :edit, :create, :update, :destroy] do
-    resources :projekt_phases, only: [:edit, :update]
+    resources :projekt_phases, only: [:edit, :update] do
+      member do
+        patch :toggle_active_status
+      end
+    end
     resources :settings, controller: "projekt_settings", only: [:update] do
       member do
         patch :update_default_projekt_footer_tab
@@ -21,7 +25,6 @@ namespace :admin do
     member do
       get :order_up
       get :order_down
-      patch :liveupdate
       patch :update_standard_phase
       patch :quick_update
     end
