@@ -42,10 +42,10 @@
 
     handleCheckboxClick: function(e) {
       var $elementForm = $(e.currentTarget).closest('form')
-      var isLoginedAndVerified = $elementForm.attr('data-logined-and-verified')
+      var shouldRedirect = $elementForm.attr('data-should-redirect')
       var redirectTo = $elementForm.attr('data-redirect-to')
 
-      if (isLoginedAndVerified === 'false') {
+      if (shouldRedirect === 'true') {
         Turbolinks.visit(redirectTo)
       }
     }

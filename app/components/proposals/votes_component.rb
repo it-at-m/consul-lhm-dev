@@ -5,6 +5,7 @@ class Proposals::VotesComponent < ApplicationComponent
   def initialize(proposal, vote_url: nil)
     @proposal = proposal
     @vote_url = vote_url
+    @proposal_phase = @proposal.proposal_phase
   end
 
   def vote_url

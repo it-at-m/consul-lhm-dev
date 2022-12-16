@@ -4,10 +4,16 @@ class ProjektPhase::NewsfeedPhase < ProjektPhase
   end
 
   def name
-    'newsfeed_phase'
+    "newsfeed_phase"
   end
 
   def resources_name
-    'newsfeed'
+    "newsfeed"
   end
+
+  private
+
+    def phase_specific_permission_problems(user, location)
+      return :organization if user.organization?
+    end
 end

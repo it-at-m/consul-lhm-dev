@@ -6,15 +6,28 @@ class Poll < ApplicationRecord
   scope :last_week, -> { where("polls.created_at >= ?", 7.days.ago) }
 
   belongs_to :projekt, optional: true, touch: true
+  has_one :voting_phase, through: :projekt
   has_many :geozone_affiliations, through: :projekt
 
   validates :projekt, presence: true
 
   scope :with_current_projekt,  -> { joins(:projekt).merge(Projekt.current) }
+  scope :current, -> { joins(:voting_phase).merge(ProjektPhase::VotingPhase.current) }
+
+  def not_allow_user_geozone?(user)
+    geozone_restricted? && geozone_ids.any? && !geozone_ids.include?(user.geozone_id)
+  end
+
+  def citizen_not_alloed?(user)
+    geozone_restricted? && geozone_ids.empty? && user.not_current_city_citizen?
+  end
+
+  def geozone_restrictions_formatted
+    geozones.map(&:name).flatten.join(", ")
+  end
 
   def self.base_selection
-    created_by_admin.
-      not_budget
+    created_by_admin.not_budget
   end
 
   def self.scoped_projekt_ids_for_index
@@ -35,11 +48,11 @@ class Poll < ApplicationRecord
   end
 
   def answerable_by?(user)
-    user &&
-      !user.organization? &&
-      user.level_three_verified? &&
-      current? &&
-      (!geozone_restricted || ( geozone_restricted && geozone_ids.blank? && user.geozone.present? ) || (geozone_restricted && geozone_ids.include?(user.geozone_id)))
+    @answerable ||= voting_phase.permission_problem(user).blank?
+  end
+
+  def reason_for_not_being_answerable_by(user)
+    voting_phase.permission_problem(user)
   end
 
   def comments_allowed?(user)
@@ -62,5 +75,9 @@ class Poll < ApplicationRecord
     if poll_answer_count_by_current_user == 0
       Poll::Voter.find_by!(user: user, poll: self, origin: "web", token: token).destroy
     end
+  end
+
+  def projekt_phase
+    voting_phase
   end
 end

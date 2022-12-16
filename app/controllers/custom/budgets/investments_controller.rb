@@ -3,6 +3,14 @@ require_dependency Rails.root.join("app", "controllers", "budgets", "investments
 module Budgets
   class InvestmentsController < ApplicationController
 
+    def new
+      if @budget.budget_phase.permission_problem(current_user)
+        redirect_to page_path(@budget.projekt.page.slug,
+                              selected_phase_id: @budget.budget_phase.id,
+                              anchor: "filter-subnav")
+      end
+    end
+
     def flag
       Flag.flag(current_user, @investment)
       redirect_to @investment
@@ -16,7 +24,7 @@ module Budgets
     private
 
       def investment_params
-        attributes = [:heading_id, :tag_list, :organization_name, :location,
+        attributes = [:heading_id, :tag_list, :organization_name, :location, :on_behalf_of,
                       :terms_of_service, :related_sdg_list, :implementation_performer, :implementation_contribution, :user_cost_estimate,
                       image_attributes: image_attributes,
                       documents_attributes: document_attributes,

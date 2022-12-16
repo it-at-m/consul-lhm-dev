@@ -49,6 +49,22 @@ class ProjektQuestion < ApplicationRecord
     projekt_livestream_id.present?
   end
 
+  def projekt_phase
+    if projekt_livestream_id.present?
+      projekt.livestream_phase
+    else
+      projekt.question_phase
+    end
+  end
+
+  def permission_problem(user)
+    @permission_problem = projekt_phase.permission_problem(user)
+  end
+
+  def comments_allowed?(current_user)
+    permission_problem(current_user).blank?
+  end
+
   def base_query_for_navigation
     base_query = projekt.questions.sorted
 
@@ -91,25 +107,6 @@ class ProjektQuestion < ApplicationRecord
 
   def answer_for_user(user)
     answers.find_by(user: user)
-  end
-
-  def comments_allowed?(current_user)
-    return false if comments_closed?
-    return false if current_user.nil?
-
-    if root_question?
-      projekt.question_phase.participation_open?
-    else
-      true
-    end
-  end
-
-  def comments_closed?
-    !comments_open?
-  end
-
-  def comments_open?
-    projekt.question_phase.phase_activated?
   end
 
   def best_comments

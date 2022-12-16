@@ -58,10 +58,15 @@
       if ( shouldUpdateMap ) {
         App.ProjektSelector.replaceProjektMapOnProposalCreation($selectedProjekt)
       }
+
       App.ProjektSelector.toggleDocumentAttachment($selectedProjekt)
       App.ProjektSelector.toggleSummary($selectedProjekt)
+      App.ProjektSelector.toggleExternalVideoUrl($selectedProjekt)
       App.ProjektSelector.updateAvailableTagsSelection($selectedProjekt)
       App.ProjektSelector.updateAvailableSDGsSelection($selectedProjekt)
+      App.ProjektSelector.toggleExternalFieldsHeader($selectedProjekt)
+      App.ProjektSelector.updateMainHeader($selectedProjekt)
+
     },
 
     addNextProjektPlaceholder: function( $nextProejektSelector, text ) {
@@ -170,12 +175,53 @@
       }
     },
 
+    toggleExternalVideoUrl: function($projekt) {
+      if ( $projekt.data('allowVideo') ) {
+        $('#external-video-url-fields').show();
+      } else {
+        $('#external-video-url-fields').hide();
+      }
+    },
+
+    toggleExternalFieldsHeader: function($selectedProjekt) {
+      if (
+        $('#on-behalf-of-fields').length == 0 &&
+          $('#attach-documents').is(":hidden") &&
+          $('.summary-field').is(":hidden") &&
+          $('#external-video-url-fields').is(":hidden") &&
+          $('#category_tags').is(":hidden") &&
+          $('#sdgs-selector').is(":hidden")
+      ) {
+        $('#additional-fields-title').hide();
+      } else {
+        $('#additional-fields-title').show();
+      }
+    },
+
+    updateMainHeader: function($selectedProjekt) {
+      var $header = $('header h1').first();
+      var defaultText, customText;
+
+      if (!$header.data("defaultText")) {
+        defaultText = $header.text();
+        $header.data("defaultText", defaultText)
+      }
+
+      if ($selectedProjekt.data('resourceFormTitle')) {
+        customText = $selectedProjekt.data('resourceFormTitle').replaceAll('_', ' ')
+        $header.text(customText);
+      } else if ($header.data('defaultText')) {
+        defaultText = $header.data('defaultText');
+        $header.text(defaultText);
+      }
+    },
+
     preselectProjekt: function(projektId) {
       // get preselcted projekt id
       var selectedProjektId;
       var url = new URL(window.location.href);
-      if (url.searchParams.get('projekt')) {
-        selectedProjektId = url.searchParams.get('projekt');
+      if (url.searchParams.get('projekt_id')) {
+        selectedProjektId = url.searchParams.get('projekt_id');
       } else {
         selectedProjektId = $('[id$="projekt_id"]').val();
       }

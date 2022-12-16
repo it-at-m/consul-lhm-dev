@@ -31,10 +31,6 @@
         }
       })
 
-      $("body").on("click", ".js-toggle-availability-of-verification-settings button", function() {
-        $('.js-verification-settings button').prop('disabled', $(this).attr('aria-pressed') == 'true')
-      })
-
       $(document).on("click", ".js-admin-edit-projekt-event", function(e) {
         App.HTMLEditor.initialize();
       })

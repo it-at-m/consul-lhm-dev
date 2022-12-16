@@ -7,7 +7,7 @@
   </div>
 
   <div class='columns small-12 medium-3 large-2 show-for-small-only'>
-    <% if show_image_thumbnail?(investment) %>
+    <% if show_image_thumbnail?(investment) && investment.image.attached? %>
       <%= link_to investment do %>
         <%= image_tag investment.image.variant(:large), alt: investment.image.title.unicode_normalize %>
       <% end %>
@@ -55,7 +55,7 @@
                   </span>
                 </div>
               </div>
-            <% elsif investment.should_show_ballots? && !management_controller? && !controller_name=='welcome' %>
+            <% elsif investment.should_show_ballots? && !management_controller? && controller_name != 'welcome' %>
               <div id="<%= dom_id(investment) %>_ballot" class="">
                     <%= render "/budgets/investments/ballot",
                       investment: investment,
@@ -71,6 +71,10 @@
                 </div>
               </div>
             <% end %>
+          <% elsif investment.unfeasible? %>
+            <div class='callout warning' style="margin-top:1rem;">
+              <%= t("custom.budgets.investments.investment.unfeasible_html") %>
+            </div>
           <% end %>
 
           <%= render partial: 'budgets/investments/investment_status_callout', locals: { investment: investment } %>

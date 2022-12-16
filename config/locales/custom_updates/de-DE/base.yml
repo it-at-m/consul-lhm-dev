@@ -14,17 +14,6 @@ de:
     comments:
       reply_form:
         leave_comment: Schreiben Sie eine Antwort
-      restricted:
-        debate_phase_expired: Die Diskussionsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
-        debate_phase_not_active: Die Diskussionsphase ist nicht aktiv
-        geo_limitation: 'Dieses projekt ist auf die folgende Gebiete beschränkt: %{geozones}'
-        not_verified: Bitte %{verify_account}, um teilnehmen zu können
-        other: Die Kommentarfunktion ist nicht verfügbar
-        projekt_not_active: Das Projekt ist nicht aktiv
-        projekt_phase_not_active: Die Projektphase ist nicht aktiv
-        proposal_phase_expired: Die Vorschlagsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
-        proposal_phase_not_active: Die Vorschlagsphase ist nicht aktiv
-        voting_phase_expired: Die Abstimmungsphase ist bereits abgelaufen. Neue Kommentare können nicht mehr hinzugefügt werden
     devise_views:
       users:
         registrations:
@@ -34,6 +23,10 @@ de:
         gender:
           male: männlich
           female: weiblich
+          other_gen: dritte #custom
+        document_type:
+          card: Personalausweis
+          pass: Reisepass
     gdpr_notice:
       accept: Akzeptieren
       link_text: Mehr Infos
@@ -109,6 +102,9 @@ de:
         more_link_text: Mehr Info
         select: Unterziel auswählen
     shared:
+      warnings:
+        only_for_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
+        only_for_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}"
       dates:
         days_left:
           one: Noch 1 Tag
@@ -139,14 +135,11 @@ de:
     users:
       login_to_vote: Sie müssen sich %{signin} oder %{signup}, um teilnehmen zu können
       verify_account_link_short: verifizieren
-    votes:
-      debate_phase_expired: Die Phase ist bereits abgeschlossen.
-      debate_phase_not_current: Die Phase ist nicht aktiv.
-      geo_restricted: Sie sind aufgrund von Gebiets- beschränkungen nicht berechtigt teilzunehmen.
-      not_verified: Sie müssen sich %{verify_account}, um teilnehmen zu können.
-      proposal_phase_expired: Die Phase ist bereits abgeschlossen.
-      proposal_phase_not_current: Die Phase ist nicht aktiv.
-      not_votable: Etwas ist schief gelaufen, bitte wenden Sie sich an den Administrator.
+      document_help: "Hinweis:"
+      card_label: Personalausweis Rückseite
+      card_help: "Letzte vier Ziffern auf Personalausweis Rückseite:"
+      pass_label: Reisepass Vorderseite
+      pass_help: "Letzte vier Ziffern auf Reisepass Vorderseite:"
     welcome:
       active_projekt_cards:
         title: Aktive Beteiligung

@@ -4,14 +4,20 @@ class ProjektPhase::CommentPhase < ProjektPhase
   end
 
   def name
-    'comment_phase'
+    "comment_phase"
   end
 
   def resources_name
-    'comments'
+    "comments"
   end
 
   def default_order
     1
   end
+
+  private
+
+    def phase_specific_permission_problems(user, location)
+      nil
+    end
 end

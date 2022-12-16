@@ -75,6 +75,12 @@
 
 <%= render "valuation/budget_investments/valuation_comments" %>
 
+<% if can?(:edit_physical_votes, @investment) %>
+  <%= render "admin/budget_investments/edit_physical_votes", investment: @investment %>
+<% end %>
+
+<hr>
+
 <%= render "admin/audits/audits", resource: @investment %>
 
 <%#= render "admin/milestones/milestones", milestoneable: @investment %>

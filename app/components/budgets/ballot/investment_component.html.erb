@@ -2,7 +2,7 @@
   <%= investment_title %>
   <%= investment_price %>
 
-  <% if budget.balloting? %>
+  <% if show_delete_vote_button? %>
     <%= link_to delete_path,
                 title: t("budgets.ballots.show.remove"),
                 class: "remove-budget-investment",

@@ -1,8 +1,8 @@
 <% if phase.phase_activated? %>
-  <li id="filter-subnav-<%= phase.resources_name %>" class="page-subnav-tab <%= 'is-active' if phase.resources_name == default_phase_name %>">
+  <li id="filter-subnav-<%= phase.name %>" class="page-subnav-tab <%= 'is-active' if phase.name == default_phase_name %>">
     <%= link_to link_url, remote: true, onclick: '$("#footer-content").addClass("show-loader"); ' do %>
       <h4>
-        <%= t("custom.projekts.page.tabs.#{phase.resources_name}") %>
+        <%= tab_title %>
         <%= "(#{resource_count})" if resource_count.present? %>
       </h4>
       <div class='tab-info-summary'>
@@ -25,7 +25,7 @@
         <% elsif phase.is_a?(ProjektPhase::LivestreamPhase) && resource_count.present? %>
           <% if phase.projekt.projekt_livestreams.order(starts_at: :desc).first.present? %>
             <i class="far fa-calendar"></i>
-            <span ><%= format_date(phase.projekt.projekt_livestreams.order(starts_at: :desc).first.starts_at.to_date) %></span>
+            <span ><%= format_date(phase.projekt.projekt_livestreams.order(starts_at: :desc).first.starts_at&.to_date) %></span>
           <% end %>
 
         <% elsif phase.start_date.present? && phase.end_date.present? %>
@@ -34,6 +34,10 @@
 
         <% unless get_projekt_phase_restriction_name(phase, nil, true) == 'no_restriction' %>
           <span class='geo-restriction-icon'><%= get_projekt_phase_restriction_name(phase) %></span>
+        <% end %>
+
+        <% if phase.age_restriction.present? %>
+          <span class='age-restriction-icon'><%= phase.age_restriction.name %></span>
         <% end %>
       </div>
     <% end %>

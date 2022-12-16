@@ -7,4 +7,19 @@ class Legislation::AnnotationsController < Legislation::BaseController
     @current_projekt = @draft_version.process.projekt
     @comment = @annotation.comments.new
   end
+
+  def new_comment
+    @draft_version = Legislation::DraftVersion.find(params[:draft_version_id])
+    @annotation = @draft_version.annotations.find(params[:annotation_id])
+    @comment = @annotation.comments.new(body: params[:comment][:body], user: current_user)
+
+    @current_projekt = @draft_version.process.projekt #custom line
+    if @comment.save
+      @comment = @annotation.comments.new
+    end
+
+    respond_to do |format|
+      format.js { render :new_comment }
+    end
+  end
 end

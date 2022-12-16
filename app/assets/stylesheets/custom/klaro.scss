@@ -1,0 +1,36 @@
+.klaro .cookie-modal .cm-list-input:checked+.cm-list-label .slider {
+  background-color: $accent !important;
+}
+
+.klaro {
+  .cookie-modal {
+    .cn-ok {
+      .cm-btn.cm-btn-info {
+        padding: 10px;
+        background-color: $accent;
+        flex-grow: 1;
+        min-height: 3rem;
+      }
+
+      .cm-btn.cm-btn-success {
+        padding: 10px;
+        background-color: $brand;
+        min-height: 3rem;
+      }
+    }
+
+    .cm-footer-buttons {
+      .cm-btn.cm-btn-info {
+        background-color: $accent;
+      }
+
+      .cm-btn.cm-btn-accept-all {
+        background-color: $brand;
+      }
+    }
+
+    a {
+      color: $brand !important;
+    }
+  }
+}

@@ -117,26 +117,14 @@ de:
         set_default_sorting_to_newest_description: Zeigt standardmäßig die neuesten Beiträge anstatt der aktivsten Beiträge an
 
       extra_fields:
-        registration: Registrierung
-        verification: Verifizierung
-        first_name: Vorname
-        first_name_description: Aktiviert das Feld "Vorname" bei der Nutzer*innen-Verifizierung
-        last_name: Nachname
-        last_name_description: Aktiviert das Feld "Nachname" bei der Nutzer*innen-Verifizierung
-        street_name: Straße
-        street_name_description: Aktiviert das Feld "Straße" bei der Nutzer*innen-Verifizierung
-        street_number: Hausnummer
-        street_number_description: Aktiviert das Feld "Hausnummer" bei der Nutzer*innen-Verifizierung
-        plz: Postleitzahl
-        plz_description: Aktiviert das Feld "Postleitzahl" bei der Nutzer*innen-Verifizierung
-        city_name: Stadt
-        city_name_description: Aktiviert das Feld "Stadt" bei der Nutzer*innen-Verifizierung
-        date_of_birth: Geburtsdatum
-        date_of_birth_description: Aktiviert das Feld "Geburtsdatum" bei der Nutzer*innen-Verifizierung
-        gender: Geschlecht
-        gender_description: Aktiviert das Feld "Geschlecht" bei der Nutzer*innen-Verifizierung
-        document_last_digits: Personalausweis / Passport (4 letzten Ziffern)
-        document_last_digits_description: Aktiviert das Feld "Personalausweis/Passport" bei der Nutzer*innen-Verifizierung
+        registration:
+          extended: Erweiterte Registrierung
+          extended_description: Bei der Registrierung werden zusätzlich "Vorname", "Nachname", "Straße", "Hausnummer", "PLZ", "Stadt" und "Geburtsdatum" abgefragt
+          check_documents: Dokumentenabfrage
+          check_documents_description: Aktiviert die zusätzliche Dokumentenabfrage "Personalausweis" oder "Reisepass" während der Registrierung
+        verification:
+          check_documents: Dokumentenprüfung
+          check_documents_description: Aktiviert die zusätzliche Dokumentenprüfung "Personalausweis" oder "Reisepass"
 
       projekt_feature:
         main:
@@ -187,6 +175,8 @@ de:
           allow_downvoting_description: Aktivieren Sie den "Daumen nach unten"-Button
           show_in_sidebar_filter: Projekt in der Projektseitenleiste anzeigen
           show_in_sidebar_filter_description: Zeigt das Projekt in der Projektseitenleiste auf der Diskussionsübersichtsseite an
+          allow_voting: Unterstützung von Diskussionen
+          allow_voting_description: Aktivieren Sie die Unterstützung von Diskussionen mit Daumen hoch und runter
         proposals:
           quorum_for_proposals: Quorum für Vorschläge
           quorum_for_proposals_description: Aktivieren Sie ein Quorum für Vorschläge
@@ -216,6 +206,10 @@ de:
           show_map_description: Zeigt die Karte für Vorschläge in diesem Projekt an
           enable_summary: "\"Zusammenfassung\" anzeigen"
           enable_summary_description: "Zeigt das Feld \"Zusammenfassung\" in den Vorschlägen an"
+          allow_voting: Unterstützung von Vorschlägen
+          allow_voting_description: Aktivieren Sie die Unterstützung für Vorschläge
+          enable_external_video: Externes Video einbinden
+          enable_external_video_description: Ermöglicht es den Nutzer:innen externe Videos über YouTube und Vimeo einzubinden
         proposal_options:
           votes_for_proposal_success: "Anzahl der notwendigen Stimmen zur Genehmigung eines Vorschlags"
           votes_for_proposal_success_description: "Wenn ein Antrag diese Anzahl von Unterstützungen erreicht, kann er nicht mehr mehr unterstützt werden und gilt als erfolgreich"

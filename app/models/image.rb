@@ -48,6 +48,10 @@ class Image < ApplicationRecord
     end
   end
 
+  def attached?
+    attachment.attached?
+  end
+
   private
 
     def association_name

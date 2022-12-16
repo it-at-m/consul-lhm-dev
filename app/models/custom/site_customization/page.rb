@@ -4,7 +4,7 @@ class SiteCustomization::Page < ApplicationRecord
   include Imageable
   attr_reader :origin
 
-  belongs_to :projekt
+  belongs_to :projekt, touch: true
 
   has_many :comments, through: :projekt
 

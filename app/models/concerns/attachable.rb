@@ -27,6 +27,7 @@ module Attachable
       }
 
     before_validation :set_attachment_from_cached_attachment, if: -> { cached_attachment.present? }
+    after_validation :verify_presence # custom
   end
 
   def association_class
@@ -61,5 +62,9 @@ module Attachable
 
   def file_path
     ActiveStorage::Blob.service.path_for(attachment.blob.key)
+  end
+
+  def verify_presence #custom
+    errors.add(:attachment, :blank) unless attachment.attached?
   end
 end

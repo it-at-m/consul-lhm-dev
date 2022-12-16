@@ -13,5 +13,5 @@
     <%= helpers.render_custom_block 'proposals_creation_recommendations' %>
   </aside>
 
-  <%= render Proposals::FormComponent.new(proposal, url: proposals_path) %>
+  <%= render Proposals::FormComponent.new(proposal, url: proposals_path, selected_projekt: @selected_projekt) %>
 </main>

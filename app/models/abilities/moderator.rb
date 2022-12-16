@@ -5,9 +5,8 @@ module Abilities
     def initialize(user)
       merge Abilities::Moderation.new(user)
 
-      can :comment_as_moderator, [Debate, Comment, Proposal, Budget::Investment, Poll, Poll::Question,
+      can :comment_as_moderator, [Debate, Comment, Proposal, Budget::Investment, Poll, Poll::Question, Projekt,
                                   Legislation::Question, Legislation::Annotation, Legislation::Proposal, Topic]
-      can :manage, [Debate, Proposal]
     end
   end
 end

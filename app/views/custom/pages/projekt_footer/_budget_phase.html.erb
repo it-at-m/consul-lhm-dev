@@ -1,0 +1,35 @@
+<%= render 'shared/loader_spinner' %>
+
+<% if @current_projekt.budget.present? %>
+  <%= render Pages::Projekts::BudgetsTabComponent.new(@budget, @ballot, current_user) %>
+
+  <div class='row'>
+    <div id='budgets-sidebar' class='small-12 medium-3 column'>
+       <%= render "budgets/investments/sidebar" %>
+    </div>
+
+    <div id='budgets' class='budgets-list spinner-placeholder small-12 medium-9 column'>
+      <% if @budget.phase == 'finished' %>
+        <%= render Pages::Projekts::BudgetsSubnavComponent.new(@budget) %>
+      <% else %>
+        <%= render "shared/order_links", i18n_namespace: "budgets.investments.index" %>
+      <% end %>
+
+      <% if params[:section] == 'results' %>
+        <%= render 'pages/projekt_footer/budget/results' %>
+      <% elsif params[:section] == 'stats' %>
+        <%= render 'pages/projekt_footer/budget/stats' %>
+      <% elsif params[:section] == 'executions' %>
+        <%= render 'pages/projekt_footer/budget/executions' %>
+      <% else %>
+        <%= render 'pages/projekt_footer/budget/investments' %>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class='row'>
+    <div class='column'>
+      <h3>Dieses Projekt hat kein zugehöriges Budget</h3>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,15 @@
+<div id=<%= dom_id(investment, :edit_physical_votes) %>>
+  <hr>
+
+  <%= form_with(url: edit_physical_votes_admin_budget_budget_investment_path, model: investment, method: :patch, local: false) do |f| %>
+    <%= f.text_field :physical_votes %>
+    <%= f.submit %>
+		<% if @answer_updated.present? %>
+			<div class="answer-counted" <%= "style=color:#a94442" if @answer_updated == 'unanswered' %> >
+				<% if @answer_updated == 'answered' %>
+					<%= t('custom.admin.budget_investments.show.physical_votes_updated') %>
+				<% end %>
+			</div>
+		<% end %>
+  <% end %>
+</div>

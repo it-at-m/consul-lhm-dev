@@ -1,0 +1,9 @@
+de:
+  custom:
+    officing:
+      budgets:
+        verify_users:
+          first_name: Vorname
+          last_name: Nachname
+          plz: Postleitzahl
+          date_of_birth: Geburtsdatum

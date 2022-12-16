@@ -2,30 +2,38 @@ require_dependency Rails.root.join("app", "components", "debates", "votes_compon
 
 class Debates::VotesComponent < ApplicationComponent
   delegate :user_signed_in?, :link_to_signin, :link_to_signup,
-           :link_to_verify_account_short, to: :helpers
+           :link_to_verify_account, to: :helpers
 
   private
 
+    def permission_problem_key
+      @permission_problem_key ||= @debate_phase.permission_problem(current_user)
+    end
+
     def cannot_vote_text
-      return if can_vote?
+      return nil if permission_problem_key.blank?
 
-      if !user_signed_in?
-        sanitize(t("custom.users.login_to_vote", signin: link_to_signin, signup: link_to_signup))
-
-      elsif current_user.organization?
-        t("votes.organizations")
-
-      elsif !current_user.level_two_or_three_verified?
-        sanitize(t("custom.votes.not_verified", verify_account: link_to_verify_account_short))
-
-      elsif debate.debate_phase &&
-        (debate.debate_phase.geozone_restrictions.any? &&
-          !debate.debate_phase.geozone_restrictions.include?(current_user.geozone))
-        t("custom.votes.geo_restricted")
+      if permission_problem_key == :not_logged_in
+        t(path_to_key,
+              sign_in: link_to_signin, sign_up: link_to_signup)
 
       else
-        t("custom.votes.not_votable")
+        t(path_to_key,
+              verify: link_to_verify_account,
+              city: Setting["org_name"],
+              geozones: @debate_phase&.geozone_restrictions_formatted,
+              age_restriction: @debate_phase&.age_restriction_formatted
+        )
 
+      end
+    end
+
+    def path_to_key
+      if @debate_phase &&
+        I18n.exists?("custom.projekt_phases.permission_problem.votes_component.#{@debate_phase.name}.#{permission_problem_key}")
+        "custom.projekt_phases.permission_problem.votes_component.#{@debate_phase.name}.#{permission_problem_key}"
+      else
+        "custom.projekt_phases.permission_problem.votes_component.shared.#{permission_problem_key}"
       end
     end
 end

@@ -8,7 +8,8 @@
       url.pathname = $(event.target).closest('ul').data('path')
 
       if (url.pathname.includes('projekts')) {
-        url.searchParams.set('order', 'all')
+        var orderParam = url.searchParams.get('order')
+        url.searchParams.set('order', (orderParam !== null) ? orderParam : 'all')
       }
 
       var clickedSDGCode = $(event.target).parent().attr('data-code');
@@ -50,10 +51,10 @@
       var url = new URL(window.location.href);
 
       if (url.pathname.includes('projekts')) {
-        url.searchParams.set('order', 'all')
+        var orderParam = url.searchParams.get('order')
+        url.searchParams.set('order', (orderParam !== null) ? orderParam : 'all')
       }
 
-      url.pathname = $(event.target).closest('ul').data('path')
 
       var currentSDGTargetCodes = url.searchParams.get('sdg_targets') || [];
 

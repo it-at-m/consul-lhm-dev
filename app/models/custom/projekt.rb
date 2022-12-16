@@ -22,7 +22,7 @@ class Projekt < ApplicationRecord
   has_many :polls, dependent: :nullify
   has_many :legislation_processes, dependent: :nullify, class_name: "Legislation::Process"
   has_one :budget, dependent: :nullify
-  has_many :projekt_events, dependent: :nullify
+  has_many :projekt_events, dependent: :destroy
   has_many :questions, -> { order(:id) },
     class_name: "ProjektQuestion",
     inverse_of:  :projekt,
@@ -41,14 +41,13 @@ class Projekt < ApplicationRecord
     dependent: :destroy
   has_one :newsfeed_phase, class_name: "ProjektPhase::NewsfeedPhase", dependent: :destroy
   has_one :event_phase, class_name: "ProjektPhase::EventPhase", dependent: :destroy
-  has_one :legislation_process_phase, class_name: "ProjektPhase::LegislationProcessPhase", dependent: :destroy
+  has_one :legislation_phase, class_name: "ProjektPhase::LegislationPhase", dependent: :destroy
   has_one :question_phase, class_name: "ProjektPhase::QuestionPhase", dependent: :destroy
   has_one :argument_phase, class_name: "ProjektPhase::ArgumentPhase", dependent: :destroy
   has_one :livestream_phase, class_name: "ProjektPhase::LivestreamPhase", dependent: :destroy
   has_many :geozone_restrictions, through: :projekt_phases
 
-  has_and_belongs_to_many :geozone_affiliations, class_name: "Geozone"
-  # has_many :geozone_affiliations, through: :geozones_projekts, class_name: "Geozone"
+  has_and_belongs_to_many :geozone_affiliations, class_name: "Geozone", after_add: :touch_updated_at, after_remove: :touch_updated_at
 
   has_many :projekt_settings, dependent: :destroy
   has_many :projekt_notifications, dependent: :destroy
@@ -66,7 +65,7 @@ class Projekt < ApplicationRecord
   accepts_nested_attributes_for(
     :debate_phase, :proposal_phase, :budget_phase,
     :voting_phase, :comment_phase, :milestone_phase,
-    :event_phase, :question_phase, :legislation_process_phase,
+    :event_phase, :question_phase, :legislation_phase,
     :newsfeed_phase, :projekt_notification_phase, :argument_phase,
     :livestream_phase, :projekt_events, :projekt_notifications, :projekt_arguments
   )
@@ -204,7 +203,7 @@ class Projekt < ApplicationRecord
   def self.selectable_in_selector(controller_name, current_user)
     select do |projekt|
       projekt.all_children_projekts.unshift(projekt).any? do |p|
-        p.selectable?(controller_name, current_user)
+        p.selectable_in_selector?(controller_name, current_user)
       end
     end
   end
@@ -218,22 +217,24 @@ class Projekt < ApplicationRecord
     yield
   end
 
-  def selectable?(controller_name, user)
+  def selectable_in_selector?(controller_name, user)
     return true if controller_name == "polls"
     return true if controller_name == "processes"
     return false if user.nil?
 
+    user_has_admin_rights = user.administrator? || user.projekt_manager?
+
     if controller_name == "proposals"
-      return false if proposals_selectable_by_admins_only? && user.administrator.blank?
+      return false if proposals_selectable_by_admins_only? && !user_has_admin_rights
 
       proposal_phase.selectable_by?(user)
     elsif controller_name == "debates"
-      return false if debates_selectable_by_admins_only? && user.administrator.blank?
+      return false if debates_selectable_by_admins_only? && !user_has_admin_rights
 
       debate_phase.selectable_by?(user)
     elsif controller_name == "processes"
       # return false if proposals_selectable_by_admins_only? && user.administrator.blank?
-      legislation_process_phase.selectable_by?(user)
+      legislation_phase.selectable_by?(user)
     end
   end
 
@@ -402,8 +403,8 @@ class Projekt < ApplicationRecord
       projekt.event_phase = ProjektPhase::EventPhase.create unless projekt.event_phase
       projekt.argument_phase = ProjektPhase::ArgumentPhase.create unless projekt.argument_phase
       projekt.livestream_phase = ProjektPhase::LivestreamPhase.create unless projekt.livestream_phase
-      unless projekt.legislation_process_phase
-        projekt.legislation_process_phase = ProjektPhase::LegislationProcessPhase.create
+      unless projekt.legislation_phase
+        projekt.legislation_phase = ProjektPhase::LegislationPhase.create
       end
     end
   end
@@ -461,6 +462,10 @@ class Projekt < ApplicationRecord
     else
       page.title
     end
+  end
+
+  def all_ids_in_tree
+    all_parent_ids + [id] + all_children_ids
   end
 
   private
@@ -521,7 +526,7 @@ class Projekt < ApplicationRecord
       self.livestream_phase = ProjektPhase::LivestreamPhase.create
       self.newsfeed_phase = ProjektPhase::NewsfeedPhase.create
       self.event_phase = ProjektPhase::EventPhase.create
-      self.legislation_process_phase = ProjektPhase::LegislationProcessPhase.create
+      self.legislation_phase = ProjektPhase::LegislationPhase.create
     end
 
     def swap_order_numbers_up
@@ -570,5 +575,9 @@ class Projekt < ApplicationRecord
 
     def set_default_color
       self.color ||= "#004a83"
+    end
+
+    def touch_updated_at(geozone)
+      touch if persisted?
     end
 end

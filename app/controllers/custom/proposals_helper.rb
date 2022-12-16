@@ -8,10 +8,6 @@ module ProposalsHelper
     MapLocation.where(proposal_id: ids).map(&:json_data)
   end
 
-  def proposal_settings_fingerprints
-    Setting.all.group_by(&:type)["extended_feature.proposals"].map{ |s| s.value == "active" ? 1 : 0 }.join()
-  end
-
   def json_data
     proposal = Proposal.find(params[:id])
     data = {
@@ -32,5 +28,16 @@ module ProposalsHelper
   def error_text(field)
     return @proposal.errors[:description].join(', ') if @proposal.errors.any? && @proposal.errors[field].present?
     ""
+  end
+
+  def default_active_proposal_footer_tab?(tab)
+    return true if tab == "comments" && projekt_feature?(@proposal&.projekt, 'proposals.show_comments')
+
+    return true if tab == "notifications" && projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab') &&
+                     !projekt_feature?(@proposal&.projekt, 'proposals.show_comments')
+
+    tab == "milestones" && projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_milestones_tab') &&
+      !projekt_feature?(@proposal&.projekt, 'proposals.show_comments') &&
+      !projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab')
   end
 end

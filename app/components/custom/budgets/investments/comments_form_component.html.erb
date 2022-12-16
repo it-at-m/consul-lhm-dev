@@ -1,0 +1,9 @@
+<% if commenting_allowed? %>
+  <%= render "comments/form", { commentable: @investment, parent_id: nil } %>
+
+<% else %>
+  <div class="callout warning">
+    <%= sanitize(cannot_comment_reason) %>
+  </div>
+
+<% end %>

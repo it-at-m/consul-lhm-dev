@@ -10,4 +10,10 @@ class ProjektPhase::EventPhase < ProjektPhase
   def resources_name
     "projekt_events"
   end
+
+  private
+
+    def phase_specific_permission_problems(user, location)
+      return :organization if user.organization?
+    end
 end

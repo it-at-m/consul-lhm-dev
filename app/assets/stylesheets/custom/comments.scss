@@ -33,3 +33,12 @@
 .comment-votes button:disabled:active {
   outline: none;
 }
+
+// Voted up or down
+.comment-votes .in-favor button.voted_up {
+  color: #7bd2a8;
+}
+
+.comment-votes .against button.voted_down {
+  color: #ef8585;
+}

@@ -19,7 +19,8 @@ class Poll
     end
 
     def self.available
-      where(polls: { id: Poll.current_or_recounting }).joins(:polls)
+      # where(polls: { id: Poll.current_or_recounting }).joins(:polls)
+      where(polls: { id: Poll.current }).joins(:polls)
     end
 
     def assignment_on_poll(poll)

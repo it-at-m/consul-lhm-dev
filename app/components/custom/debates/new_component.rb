@@ -2,11 +2,16 @@ require_dependency Rails.root.join("app", "components", "debates", "new_componen
 
 class Debates::NewComponent < ApplicationComponent
 
+  def initialize(debate, selected_projekt)
+    @debate = debate
+    @selected_projekt = selected_projekt
+  end
+
   private
 
   def debates_back_link_path
     if params[:origin] == 'projekt'
-      projekt = Projekt.find(params[:projekt])
+      projekt = Projekt.find(params[:projekt_id])
       page = projekt.page
       debate_phase_id = projekt.debate_phase.id
 

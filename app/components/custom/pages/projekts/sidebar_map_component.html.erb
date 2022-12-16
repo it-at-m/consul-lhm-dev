@@ -1,8 +1,8 @@
-<div class="sidebar-divider <%= 'show-for-medium' if @default_phase_name == 'proposals' %>"></div>
+<div class="sidebar-divider <%= 'show-for-medium' if @default_phase_name == 'proposal_phase' %>"></div>
 
-<h2 class="sidebar-title <%= 'show-for-medium' if @default_phase_name == 'proposals' %>"><%= t("custom.projekts.page.sidebar.map.title") %></h2>
+<h2 class="sidebar-title <%= 'show-for-medium' if @default_phase_name == 'proposal_phase' %>"><%= t("custom.projekts.page.sidebar.map.title") %></h2>
 
-<div class=<%= 'show-for-medium' if @default_phase_name == 'proposals' %>>
+<div class=<%= 'show-for-medium' if @default_phase_name == 'proposal_phase' %>>
   <% unless get_projekt_affiliation_name(projekt, true) == 'no_affiliation' %>
     <p><%= get_projekt_affiliation_name(projekt) %></p>
   <% end %>

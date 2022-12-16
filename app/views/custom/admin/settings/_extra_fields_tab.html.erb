@@ -1,20 +1,7 @@
-<h2><%= t("custom.admin.settings.index.extended_features.verification") %></h2>
-<div class='js-toggle-availability-of-verification-settings'>
-  <%= render "extended_features_table", features: @extended_feature_verification, tab: "#tab-extra-fields" %>
-</div>
+<h2><%= t("custom.admin.settings.index.extra_fields_titles.registration") %></h2>
+<%= render "extended_features_table", features: @extra_fields_registration, tab: "#tab-exta-fields" %>
 
-<h2><%= t("custom.admin.settings.index.extended_features.extra_fields") %></h2>
-<table>
-  <thead>
-    <tr>
-      <th><%= t("admin.settings.setting") %></th>
-      <th><%= t("custom.settings.extra_fields.registration") %></th>
-      <th><%= t("custom.settings.extra_fields.verification") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @extra_fields_attributes.each do |attribute| %>
-      <%= render "admin/settings/extra_fields_table_row", field: attribute %>
-    <% end %>
-  </tbody>
-</table>
+
+<h2><%= t("custom.admin.settings.index.extra_fields_titles.verification") %></h2>
+<%= render "extended_features_table", features: @extra_fields_verification, tab: "#tab-extra-fields" %>
+

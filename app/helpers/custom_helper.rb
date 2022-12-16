@@ -31,7 +31,7 @@ module CustomHelper
   end
 
   def projekt_legislation_process_footer_path(current_projekt, draft_version, section: 'text', anchor: 'footer-content', params: {})
-    current_projekt.page.url + "?text_draft_version_id=#{draft_version.id}&selected_phase_id=#{current_projekt.legislation_process_phase.id}" + "&section=#{section}&#{params.to_query}" + "##{anchor}"
+    current_projekt.page.url + "?text_draft_version_id=#{draft_version.id}&selected_phase_id=#{current_projekt.legislation_phase.id}" + "&section=#{section}&#{params.to_query}" + "##{anchor}"
   end
 
   def legislation_process_tabs(process)

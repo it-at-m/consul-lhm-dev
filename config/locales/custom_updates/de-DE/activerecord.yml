@@ -10,6 +10,9 @@ de:
       projekt:
         one: Projekt
         other: Projekte
+      age_restriction:
+        one: Altersbeschränkung
+        other: Altersbeschränkungen
     errors:
       models:
         proposal:
@@ -32,10 +35,13 @@ de:
         deficiency_report_category_id: Kategorie
         video_url: Externes Video URL
         official_answer: Offizielle Antwort
+        on_behalf_of: Meldung im Namen von jemanden erstellen
       debate:
         on_behalf_of: Diskussion im Namen von jemanden erstellen
       proposal:
         on_behalf_of: Vorschlag im Namen von jemanden erstellen
+      budget:
+        voting_style_distributed: "Mehrere Stimmen"
       budget/investment:
         implementation_performer: Umsetzung des Investitionsvorschlages
         implementation_performers:
@@ -43,6 +49,7 @@ de:
           user: Ich kann bei der Umsetzung unterstützen
         implementation_contribution: Was tragen Sie zur Umsetzung bei?
         user_cost_estimate: Preisliche Einschätzung
+        on_behalf_of: Investitionsvorschlag im Namen von jemanden erstellen
       geozone:
         postal_codes: Postleitzahlen
       milestone:
@@ -69,3 +76,7 @@ de:
         gender: Geschlecht
         date_of_birth: Geburtsdatum
         document_last_digits: Personalausweis / Passport (4 letzten Ziffern)
+      age_restriction:
+        min_age: Mindestalter
+        max_age: Maximalalter
+        order: Reihenfolge

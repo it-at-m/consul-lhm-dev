@@ -75,12 +75,19 @@
       </div>
     <% end %>
 
-
-    <% if current_user.administrator? %>
+    <% if current_user.administrator? || current_user.moderator? %>
       <div>
-        <%= f.text_field :organization_name %>
+        <%= f.text_field :on_behalf_of %>
       </div>
     <% end %>
+
+    <%# if current_user.administrator? %>
+      <!--
+      <div>
+        <%#= f.text_field :organization_name %>
+      </div>
+      -->
+    <%# end %>
   </fieldset>
 
   <div class="actions">

@@ -6,17 +6,24 @@ module UsersHelper
   end
 
   def ck_editor_class(current_user)
-   if extended_feature?("general.extended_editor_for_admins") && current_user.administrator?
-     'extended-a'
-   elsif extended_feature?("general.extended_editor_for_users") && !current_user.administrator?
-     'extended-u'
-   else
-     'regular'
-   end
+    if extended_feature?("general.extended_editor_for_admins") && (current_user.administrator? || current_user.projekt_manager?)
+      'extended-a'
+    elsif extended_feature?("general.extended_editor_for_users")
+      'extended-u'
+    else
+      'regular'
+    end
   end
 
   def skip_user_verification?
     Setting["feature.user.skip_verification"].present?
+  end
+
+  def user_document_types
+    [
+      [t("custom.devise_views.users.document_type.card"), "card"],
+      [t("custom.devise_views.users.document_type.pass"), "pass"]
+    ]
   end
 
   def show_admin_menu?(user = nil)
@@ -30,7 +37,8 @@ module UsersHelper
   def options_for_gender_select
     [
       [t("custom.devise_views.users.gender.male"), "male"],
-      [t("custom.devise_views.users.gender.female"), "female"]
+      [t("custom.devise_views.users.gender.female"), "female"],
+      [t("custom.devise_views.users.gender.other_gen"), "other_gen"]
     ]
   end
 

@@ -1,5 +1,5 @@
 de:
-  custom:    
+  custom:
     debates:
       form:
         tags_custom: Nutzer-Tags
@@ -8,3 +8,5 @@ de:
         no_active_projekt: Aktuell kein Beteiligungsverfahren
         no_active_phase: Phase bereits geschlossen
         projekts: Projekte
+        creation_only_for_citizens: Neue Diskussionen können in diesem Projekt nur von Bürgerinnen und Bürgern der Stadt %{city} erstellt werden.
+        creation_only_for_specific_geozones: Neue Diskussionen können nur von Bürger*innen aus dem Postleitzahlbereich %{geozones} erstellt werden

@@ -14,17 +14,6 @@ en:
     comments:
       reply_form:
         leave_comment: Write a reply
-      restricted:
-        debate_phase_expired: The discussion phase has already expired. New comments can no longer be added.
-        debate_phase_not_active: The discussion phase is not active
-        geo_limitation: 'This project is limited to the following areas: %{geozones}'
-        not_verified: Please %{verify_account} to participate
-        other: The comment function is not available
-        projekt_not_active: Project is not active
-        projekt_phase_not_active: Projekt phase is not active
-        proposal_phase_expired: The proposal phase has already expired. New comments can no longer be added.
-        proposal_phase_not_active: The proposal phase is not active
-        voting_phase_expired: The voting period has already expired. New comments can no longer be added.
     devise_views:
       users:
         registrations:
@@ -34,6 +23,10 @@ en:
         gender:
           male: male
           female: female
+          other: third #custom
+        document_type:
+          card: ID card
+          pass: Passport
     gdpr_notice:
       accept: Accept
       link_text: More info
@@ -139,14 +132,6 @@ en:
     users:
       login_to_vote: You must %{signin} or %{signup} to be able to participate
       verify_account_link_short: verify
-    votes:
-      debate_phase_expired: The phase is already expired.
-      debate_phase_not_current: The phase is not active.
-      geo_restricted: You are not eligible to participate due to territorial restrictions.
-      not_verified: You must %{verify_account} to be able to participate.
-      proposal_phase_expired: The phase is already expired.
-      proposal_phase_not_current: The phase is not active.
-      not_votable: Something went wrong, please contact administrator
     welcome:
       active_projekt_cards:
         title: Active projekts

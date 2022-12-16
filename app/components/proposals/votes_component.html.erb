@@ -4,20 +4,10 @@
 
   <div class="in-favor">
 
-    <% if proposal.proposal_phase&.expired? %>
-      <div class="supported callout warning">
-          <%= sanitize(t("custom.votes.proposal_phase_expired")) %>
-      </div>
-
-    <% elsif !proposal.proposal_phase&.current? %>
-      <div class="supported callout warning">
-          <%= sanitize(t("custom.votes.proposal_phase_not_current")) %>
-      </div>
-
-    <% elsif voted? %>
+    <% if voted? %>
       <% if projekt_feature?(proposal&.projekt, 'proposals.enable_proposal_support_withdrawal') %>
-        <%= link_to unvote_proposal_url(proposal),
-            class: "button button-support small expanded",
+        <%= button_to unvote_proposal_url(proposal),
+            class: "button button-support small expanded unvote",
             title: t("proposals.proposal.support_title"), method: "post", remote: true do %>
           <%= t("custom.proposals.proposal.unsupport") %>
         <% end %>

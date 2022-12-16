@@ -12,10 +12,15 @@ class Admin::Settings::FeaturedSettingsFormComponent < ApplicationComponent
 
     def options
       {
-        data: { disable_with: text },
+        data: {
+          disable_with: text,
+          dependent_setting_ids: @feature.dependent_setting_ids,
+          dependent_setting_action: @feature.dependent_setting_action
+        },
         "aria-labelledby": dom_id(feature, :title),
         "aria-describedby": (dom_id(feature, :description) if describedby?),
-        "aria-pressed": enabled?
+        "aria-pressed": enabled?,
+        disabled: @feature.form_field_disabled
       }.merge(@extra_options)
     end
 end

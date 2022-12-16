@@ -41,7 +41,7 @@ module Abilities
       can :read, Legislation::Proposal
       can [:retire_form, :retire], Legislation::Proposal, author_id: user.id
 
-      can :create, Comment
+      # can :create, Comment
       can :create, Debate
       can [:create, :created], Proposal
       can :create, Legislation::Proposal
@@ -83,36 +83,37 @@ module Abilities
         # can :vote, Comment
       end
 
-      if user.level_two_or_three_verified?
-        can :vote, Proposal, &:published?
-        can :unvote, Proposal, &:published?
-        can :vote_featured, Proposal
+      can :vote, Proposal, &:published?
+      can :unvote, Proposal, &:published?
+      can :vote_featured, Proposal
 
+      can [:answer, :unanswer, :confirm_participation], Poll do |poll|
+        poll.answerable_by?(user)
+      end
+
+      can [:answer, :unanswer, :update_open_answer], Poll::Question do |question|
+        question.answerable_by?(user)
+      end
+
+      # can :create, Budget::Investment,               budget: { phase: "accepting" }
+      can :edit, Budget::Investment,                 budget: { phase: "accepting" }, author_id: user.id
+      can :update, Budget::Investment,               budget: { phase: "accepting" }, author_id: user.id
+      can :suggest, Budget::Investment,              budget: { phase: "accepting" }
+      can :destroy, Budget::Investment,              budget: { phase: ["accepting", "reviewing"] }, author_id: user.id
+      can [:create, :destroy], ActsAsVotable::Vote,
+        voter_id: user.id,
+        votable_type: "Budget::Investment",
+        votable: { budget: { phase: "selecting" }}
+
+      can [:show, :create], Budget::Ballot,          budget: { phase: "balloting" }
+      can [:create, :destroy], Budget::Ballot::Line, budget: { phase: "balloting" }
+
+      if user.level_two_or_three_verified?
         can :vote, Legislation::Proposal
         can :create, Legislation::Answer
 
-        # can :create, Budget::Investment,               budget: { phase: "accepting" }
-        can :edit, Budget::Investment,                 budget: { phase: "accepting" }, author_id: user.id
-        can :update, Budget::Investment,               budget: { phase: "accepting" }, author_id: user.id
-        can :suggest, Budget::Investment,              budget: { phase: "accepting" }
-        can :destroy, Budget::Investment,              budget: { phase: ["accepting", "reviewing"] }, author_id: user.id
-        can [:create, :destroy], ActsAsVotable::Vote,
-          voter_id: user.id,
-          votable_type: "Budget::Investment",
-          votable: { budget: { phase: "selecting" }}
-
-        can [:show, :create], Budget::Ballot,          budget: { phase: "balloting" }
-        can [:create, :destroy], Budget::Ballot::Line, budget: { phase: "balloting" }
-
         can :create, DirectMessage
         can :show, DirectMessage, sender_id: user.id
-
-        can [:answer, :unanswer, :confirm_participation], Poll do |poll|
-          poll.answerable_by?(user)
-        end
-        can [:answer, :unanswer, :update_open_answer], Poll::Question do |question|
-          question.answerable_by?(user)
-        end
       end
 
       can [:create, :show], ProposalNotification, proposal: { author_id: user.id }
@@ -138,7 +139,7 @@ module Abilities
            (ProjektSetting.find_by(
              projekt: investment.projekt,
              key: "projekt_feature.budgets.only_admins_create_investment_proposals").value.present? &&
-            user.administrator?) ||
+            (user.administrator? || user.projekt_manager?)) ||
 
            ProjektSetting.find_by(
              projekt: investment.projekt,
@@ -146,7 +147,7 @@ module Abilities
           )
       end
 
-      can :vote, Comment do |comment|
+      can [:create, :vote], Comment do |comment|
         !user.organization? &&
         comment.commentable.comments_allowed?(user)
       end

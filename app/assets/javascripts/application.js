@@ -182,7 +182,6 @@ var initialize_modules = function() {
   App.SDGCustom.initialize();
   App.Geozones.initialize();
   App.ExpandProposalsMap.initialize();
-  App.GDPRNotice.initialize();
   App.MapRefresh.initialize();
   App.PollsCustom.initialize();
   App.RadioButtonFilter.initialize();
@@ -194,6 +193,7 @@ var initialize_modules = function() {
   App.ModerationCustom.initialize();
   App.CopyContent.initialize();
   App.FooterPhasesComponentCustom.initialize();
+  App.RemoteLinksPushState.initialize();
   App.ProjektQuestionCustom.initialize();
   App.LivesubmitCheckboxCustom.initialize();
   App.OrbitInPopupFixCustom.initialize();
