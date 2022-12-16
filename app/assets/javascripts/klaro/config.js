@@ -231,7 +231,7 @@ var klaroConfig = {
             default: true,
 
             // The title of your service as listed in the consent modal.
-            title: 'Matomo/Piwik',
+            title: 'Statistik-Cookie',
 
             // The purpose(s) of this service. Will be listed on the consent notice.
             // Do not forget to add translations for all purposes you list here.
@@ -251,29 +251,28 @@ var klaroConfig = {
                 // Notice that it is not possible to delete cookies that were set
                 // on a third-party domain! See the note at mdn:
                 // https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie#new-cookie_domain
-                [/^_pk_.*$/, '/', 'klaro.kiprotect.com'], //for the production version
-                [/^_pk_.*$/, '/', 'localhost'], //for the local version
-                'piwik_ignore',
+                [/^_pk_.*$/],
+                'piwik_ignore'
             ],
 
             // An optional callback function that will be called each time
             // the consent state for the service changes (true=consented). Passes
             // the `service` config as the second parameter as well.
-            callback: function(consent, service) {
-                // This is an example callback function.
-                console.log(
-                    'User consent for service ' + service.name + ': consent=' + consent
-                );
-                // To be used in conjunction with Matomo 'requireCookieConsent' Feature, Matomo 3.14.0 or newer
-                // For further Information see https://matomo.org/faq/new-to-piwik/how-can-i-still-track-a-visitor-without-cookies-even-if-they-decline-the-cookie-consent/
-                /*
-                if(consent==true){
-                    _paq.push(['rememberCookieConsentGiven']);
-                } else {
-                    _paq.push(['forgetCookieConsentGiven']);
-                }
-                */
-            },
+            // callback: function(consent, service) {
+            //     // This is an example callback function.
+            //     console.log(
+            //         'User consent for service ' + service.name + ': consent=' + consent
+            //     );
+            //     // To be used in conjunction with Matomo 'requireCookieConsent' Feature, Matomo 3.14.0 or newer
+            //     // For further Information see https://matomo.org/faq/new-to-piwik/how-can-i-still-track-a-visitor-without-cookies-even-if-they-decline-the-cookie-consent/
+            //     /*
+            //     if(consent==true){
+            //         _paq.push(['rememberCookieConsentGiven']);
+            //     } else {
+            //         _paq.push(['forgetCookieConsentGiven']);
+            //     }
+            //     */
+            // },
 
             // If "required" is set to true, Klaro will not allow this service to
             // be disabled by the user.
