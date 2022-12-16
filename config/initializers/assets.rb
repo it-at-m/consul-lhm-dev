@@ -11,6 +11,9 @@ Rails.application.config.assets.version = "1.0"
 # Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.precompile += %w[ckeditor/config.js]
 
+Rails.application.config.assets.precompile += Dir.glob("#{Rails.root}/app/assets/javascripts/cli/**/*.js")
+Rails.application.config.assets.precompile += Dir.glob("#{Rails.root}/app/assets/javascripts/klaro/*.js")
+
 Rails.application.config.assets.precompile += Dir.glob("#{Rails.root}/app/assets/javascripts/ckeditor/plugins/**/*.js")
 Rails.application.config.assets.precompile += Dir.glob("#{Rails.root}/app/assets/javascripts/ckeditor/plugins/**/*.png")
 Rails.application.config.assets.precompile += Dir.glob("#{Rails.root}/app/assets/javascripts/ckeditor/plugins/**/*.css")
