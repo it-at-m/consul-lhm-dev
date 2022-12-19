@@ -10,7 +10,7 @@
       <% if investment.should_show_ballots? %>
         <br>
         <strong>
-          <%= t("custom.budgets.investments.investment.qualified_supports", count: investment.budget_ballot_lines.joins(ballot: :user).where.not(ballot: { users: { verified_at: nil } }).sum(:line_weight)) %>
+          <%= t("custom.budgets.investments.investment.qualified_supports", count: investment.budget_ballot_lines.sum(:line_weight)) %>
         </strong>
         <%= button_to budget_ballot_line_path(id: investment.id,
                                               budget_id: investment.budget_id,
@@ -47,7 +47,7 @@
         <% if investment.budget.distributed_voting? %>
           <br>
           <strong>
-            <%= t("custom.budgets.investments.investment.qualified_supports", count: investment.budget_ballot_lines.joins(ballot: :user).where.not(ballot: { users: { verified_at: nil } }).sum(:line_weight)) %>
+            <%= t("custom.budgets.investments.investment.qualified_supports", count: investment.budget_ballot_lines.sum(:line_weight)) %>
           </strong>
           <%= form_with url: budget_ballot_lines_path(investment_id: investment.id,
                                                       budget_id: investment.budget_id,
