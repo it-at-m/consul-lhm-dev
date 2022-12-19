@@ -41,11 +41,24 @@ class DeficiencyReportMailer < ApplicationMailer
     end
   end
 
-  private
+  def send_overdue_reminders(officer_id, threshold_date)
+    @officer = DeficiencyReport::Officer.find(officer_id)
+    @overdue_reports = @officer.deficiency_reports.where(official_answer: nil)
+      .where(created_at: threshold_date.midnight..threshold_date.end_of_day)
 
-  def with_user(user)
-    I18n.with_locale(user.locale) do
-      yield
+    subject = t("custom.deficiency_reports.mailers.notify_officer.subject",
+                identifier: "id:iciency_report.title.first(50)}")
+
+    with_user(@officer.user) do
+      mail(to: @officer.email, subject: subject)
     end
   end
+
+  private
+
+    def with_user(user)
+      I18n.with_locale(user.locale) do
+        yield
+      end
+    end
 end

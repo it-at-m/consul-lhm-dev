@@ -1,5 +1,4 @@
 class DeficiencyReport < ApplicationRecord
-
   include Taggable
   include Mappable
   include Imageable
@@ -35,6 +34,20 @@ class DeficiencyReport < ApplicationRecord
 
     where(author_id: user_id)
   }
+
+  def self.send_overdue_reminders
+    threshold_date = 14.days.ago
+    officers_with_overdue_reports_ids = where(created_at: threshold_date.midnight..threshold_date.end_of_day)
+      # .where(official_answer: nil)
+      .joins(:officer)
+      .pluck("deficiency_report_officers.id")
+      .compact.uniq
+
+    debugger
+    officers_with_overdue_reports_ids.each do |officer_id|
+      DeficiencyReportMailer.send_overdue_reminders(officer_id, threshold_date).deliver_now
+    end
+  end
 
   def self.search(terms)
     pg_search(terms)
