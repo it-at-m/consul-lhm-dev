@@ -9,8 +9,6 @@ class User < ApplicationRecord
   before_validation :strip_whitespace
 
   before_create :set_default_privacy_settings_to_false, if: :gdpr_conformity?
-  before_create { self.unique_stamp = prepare_unique_stamp }
-  before_create { self.geozone = geozone_with_plz }
   after_create :take_votes_from_erased_user
   after_save :update_qualified_votes_count_for_budget_investments
 
@@ -32,6 +30,17 @@ class User < ApplicationRecord
   validates :gender, presence: true, on: :create, if: :gender_required?
   validates :document_type, presence: true, on: :create, if: :document_required?
   validates :document_last_digits, presence: true, on: :create, if: :document_required?
+
+  def verify!
+    return false unless stamp_unique?
+
+    take_votes_from_erased_user
+    update_columns(
+      verified_at: Time.current,
+      unique_stamp: prepare_unique_stamp,
+      geozone_id: geozone_with_plz&.id
+    )
+  end
 
   def take_votes_from_erased_user
     return if erased?

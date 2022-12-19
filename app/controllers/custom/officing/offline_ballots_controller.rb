@@ -10,7 +10,7 @@ class Officing::OfflineBallotsController < Officing::BaseController
         params[:"date_of_birth(1i)"].blank? ||
         params[:"date_of_birth(2i)"].blank? ||
         params[:"date_of_birth(3i)"].blank?)
-      flash.now[:error] = "Please make sure all fields are filled in"
+      flash.now[:error] = "Bitte stellen Sie sicher, dass alle Felder ausgefüllt sind"
       render :verify_user
 
     else

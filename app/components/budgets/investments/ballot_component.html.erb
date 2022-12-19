@@ -24,17 +24,6 @@
                       "aria-label": remove_vote_aria_label do %>
           <%= t("budgets.ballots.show.remove") %>
         <% end %>
-        <% unless current_user.level_three_verified? %>
-          <% if current_user.unique_stamp.present? %>
-            <div class='callout warning'>
-              <%= t("custom.budgets.investments.investment.unverified_note") %>
-            </div>
-          <% else %>
-            <div class='callout warning'>
-              <%= t("custom.budgets.investments.investment.unverified_note_no_data_html", verify_account: link_to_verify_account) %>
-            </div>
-          <% end  %>
-        <% end %>
       <% end %>
     </div>
   <% else %>
