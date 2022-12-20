@@ -89,7 +89,10 @@ class DeficiencyReportsController < ApplicationController
   end
 
   def update_officer
-    if @deficiency_report.update(deficiency_report_officer_id: deficiency_report_params[:deficiency_report_officer_id])
+    if @deficiency_report.update(
+      deficiency_report_officer_id: deficiency_report_params[:deficiency_report_officer_id],
+      assigned_at: Time.zone.now
+    )
       DeficiencyReportMailer.notify_officer(@deficiency_report).deliver_later
     end
     redirect_to deficiency_report_path(@deficiency_report)

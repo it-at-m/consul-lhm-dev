@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_02_115716) do
+ActiveRecord::Schema.define(version: 2022_12_20_135928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -713,6 +713,7 @@ ActiveRecord::Schema.define(version: 2022_12_02_115716) do
     t.tsvector "tsv"
     t.bigint "hot_score", default: 0
     t.string "on_behalf_of"
+    t.datetime "assigned_at"
     t.index ["cached_anonymous_votes_total"], name: "index_deficiency_reports_on_cached_anonymous_votes_total"
     t.index ["cached_votes_down"], name: "index_deficiency_reports_on_cached_votes_down"
     t.index ["cached_votes_score"], name: "index_deficiency_reports_on_cached_votes_score"
@@ -2093,7 +2094,6 @@ ActiveRecord::Schema.define(version: 2022_12_02_115716) do
     t.string "bam_unique_stamp"
     t.bigint "bam_street_id"
     t.string "keycloak_link"
-    t.boolean "custom_statistic_cookies_enabled"
     t.index ["bam_street_id"], name: "index_users_on_bam_street_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["date_of_birth"], name: "index_users_on_date_of_birth"

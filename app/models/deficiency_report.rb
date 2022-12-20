@@ -37,15 +37,33 @@ class DeficiencyReport < ApplicationRecord
 
   def self.send_overdue_reminders
     threshold_date = 14.days.ago
-    officers_with_overdue_reports_ids = where(created_at: threshold_date.midnight..threshold_date.end_of_day)
-      # .where(official_answer: nil)
+
+    overdue_reports = where(official_answer: nil)
+      .where(assigned_at: threshold_date.midnight..threshold_date.end_of_day)
+
+    officers_with_overdue_reports_ids = overdue_reports
       .joins(:officer)
       .pluck("deficiency_report_officers.id")
       .compact.uniq
 
-    debugger
+    return if officers_with_overdue_reports_ids.blank?
+
     officers_with_overdue_reports_ids.each do |officer_id|
-      DeficiencyReportMailer.send_overdue_reminders(officer_id, threshold_date).deliver_now
+      overdue_report_ids_for_officer = overdue_reports.where(deficiency_report_officer_id: officer_id).ids
+      DeficiencyReportMailer.send_overdue_reminders(officer_id, overdue_report_ids_for_officer).deliver_later
+    end
+  end
+
+  def self.send_not_assigned_reminders
+    threshold_date = 14.days.ago
+    reports_with_overdue_assignment_ids = where(deficiency_report_officer_id: nil)
+      .where(assigned_at: threshold_date.midnight..threshold_date.end_of_day)
+      .ids
+
+    return if reports_with_overdue_assignment_ids.blank?
+
+    Administrator.all.find_each do |admin|
+      DeficiencyReportMailer.send_not_assigned_reminders(admin.id, reports_with_overdue_assignment_ids).deliver_later
     end
   end
 
@@ -116,5 +134,9 @@ class DeficiencyReport < ApplicationRecord
 
   def calculate_hot_score
     self.hot_score = ScoreCalculator.hot_score(self)
+  end
+
+  def comments_allowed?(user)
+    true
   end
 end

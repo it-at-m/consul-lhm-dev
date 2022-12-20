@@ -41,16 +41,25 @@ class DeficiencyReportMailer < ApplicationMailer
     end
   end
 
-  def send_overdue_reminders(officer_id, threshold_date)
+  def send_overdue_reminders(officer_id, overdue_reports_ids)
     @officer = DeficiencyReport::Officer.find(officer_id)
-    @overdue_reports = @officer.deficiency_reports.where(official_answer: nil)
-      .where(created_at: threshold_date.midnight..threshold_date.end_of_day)
+    @overdue_reports = DeficiencyReport.where(id: overdue_reports_ids)
 
-    subject = t("custom.deficiency_reports.mailers.notify_officer.subject",
-                identifier: "id:iciency_report.title.first(50)}")
+    subject = t("custom.deficiency_reports.mailers.send_overdue_reminders.subject")
 
     with_user(@officer.user) do
       mail(to: @officer.email, subject: subject)
+    end
+  end
+
+  def send_not_assigned_reminders(admin_id, not_assigned_reports_ids)
+    @admin = Administrator.find(admin_id)
+    @not_assigned_reports = DeficiencyReport.where(id: not_assigned_reports_ids)
+
+    subject = t("custom.deficiency_reports.mailers.send_not_assigned_reminders.subject")
+
+    with_user(@admin.user) do
+      mail(to: @admin.email, subject: subject)
     end
   end
 
