@@ -13,9 +13,9 @@ module NotificationServices
     private
 
       def users_to_notify_ids
-        administrator_ids = User.joins(:administrator).ids
-        moderator_ids = User.joins(:moderator).ids
-        projekt_manager_ids = User.joins(projekt_manager: :projekts)
+        administrator_ids = User.joins(:administrator).where(adm_email_on_new_proposal: true).ids
+        moderator_ids = User.joins(:moderator).where(adm_email_on_new_proposal: true).ids
+        projekt_manager_ids = User.joins(projekt_manager: :projekts).where(adm_email_on_new_proposal: true)
           .where(projekt_managers: { projekts: { id: @proposal.projekt.id }}).ids
 
         [administrator_ids, moderator_ids, projekt_manager_ids].flatten.uniq

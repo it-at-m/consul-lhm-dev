@@ -32,6 +32,17 @@ class NotificationServiceMailer < ApplicationMailer
     end
   end
 
+  def new_debate(user_id, debate_id)
+    @user = User.find(user_id)
+    @debate = Debate.find(debate_id)
+
+    subject = t("custom.notification_service_mailers.new_debate.subject")
+
+    with_user(@user) do
+      mail(to: @user.email, subject: subject)
+    end
+  end
+
   private
 
     def with_user(user)

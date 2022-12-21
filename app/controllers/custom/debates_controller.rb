@@ -69,6 +69,7 @@ class DebatesController < ApplicationController
 
     if @debate.save
       track_event
+      NotificationServices::NewDebateNotifier.new(@debate.id).call
 
       if @debate.debate_phase.active?
         if @debate.projekt.overview_page?
