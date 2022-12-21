@@ -187,7 +187,6 @@ var initialize_modules = function() {
   App.RadioButtonFilter.initialize();
   App.DeficiencyReports.initialize();
   App.AccessibilityFixes.initialize();
-  App.AnalyticsCookieBannerCustom.initialize()
   App.CustomPages.initialize();
   App.CustomAdmin.initialize();
   App.ModerationCustom.initialize();
