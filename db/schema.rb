@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_20_135928) do
+ActiveRecord::Schema.define(version: 2022_12_21_091115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -2094,6 +2094,10 @@ ActiveRecord::Schema.define(version: 2022_12_20_135928) do
     t.string "bam_unique_stamp"
     t.bigint "bam_street_id"
     t.string "keycloak_link"
+    t.boolean "adm_email_on_new_comment", default: false
+    t.boolean "adm_email_on_new_proposal", default: false
+    t.boolean "adm_email_on_new_debate", default: false
+    t.boolean "adm_email_on_new_deficiency_report", default: false
     t.index ["bam_street_id"], name: "index_users_on_bam_street_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["date_of_birth"], name: "index_users_on_date_of_birth"
