@@ -69,18 +69,6 @@ de:
           p1: Ihnen wurde ein Mangel vom Admin zugewiesen.
           signature_html: Viele Grüße</br>Consul
           subject: Neue Mangelmeldung %{identifier}
-        send_overdue_reminders:
-          hi: Liebe/r Sachbearbeiter*in,
-          p1_s: Ihnen wurde vor zwei Woche ein Mangel zur Bearbeitung zugewiesen, welcher noch nicht bearbeitet wurde.
-          p1_p: Ihnen wurde vor zwei Wochen mehrere Mängel zur Bearbeitung zugewiesen, die noch nicht bearbeitet wurden.
-          signature_html: Viele Grüße</br>Consul
-          subject: Mangel wurde noch nicht bearbeitet
-        send_not_assigned_reminders:
-          hi: Lieber Admin,
-          p1_s: es liegt ein Mangel vor, der noch nicht zugewiesen wurde.
-          p1_p: es liegen mehrere Mängel vor, die noch nicht zugewiesen wurden.
-          signature_html: Viele Grüße</br>Consul
-          subject: Mangelzuweisen noch ausstehend
       new:
         more_info: Mehr Informationen
         recommendation_one: Verwenden Sie bitte nicht ausschließelich Großbuchstaben für die Überschrift oder für komplette Sätze. Im Internet gilt das als Schreien und niemand möchte angeschrien werden.

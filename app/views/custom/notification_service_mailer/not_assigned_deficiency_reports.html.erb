@@ -1,19 +1,19 @@
 <td style="padding-bottom: 20px; padding-left: 10px;">
 
   <p style="font-family: 'Open Sans','Helvetica Neue',arial,sans-serif;font-size: 14px;font-weight: normal;line-height: 24px;">
-    <%= t("custom.deficiency_reports.mailers.send_overdue_reminders.hi") %>
+    <%= t("custom.notification_service_mailers.not_assigned_deficiency_reports.hi") %>
   </p>
 
   <p style="font-family: 'Open Sans','Helvetica Neue',arial,sans-serif;font-size: 14px;font-weight: normal;line-height: 24px;">
-    <% if @overdue_reports.count == 1 %>
-      <%= t("custom.deficiency_reports.mailers.send_overdue_reminders.p1_s") %>
+    <% if @not_assigned_reports.count == 1 %>
+      <%= t("custom.notification_service_mailers.not_assigned_deficiency_reports.p1_s") %>
     <% else %>
-      <%= t("custom.deficiency_reports.mailers.send_overdue_reminders.p1_p") %>
+      <%= t("custom.notification_service_mailers.not_assigned_deficiency_reports.p1_p") %>
     <% end %>
   </p>
 
   <ul>
-    <% @overdue_reports.each do |report| %>
+    <% @not_assigned_reports.each do |report| %>
       <li>
         <%= link_to report.title, deficiency_report_url(report) %>
       </li>
@@ -21,6 +21,6 @@
   </ul>
 
   <p style="font-family: 'Open Sans','Helvetica Neue',arial,sans-serif;font-size: 14px;font-weight: normal;line-height: 24px;">
-    <%= t("custom.deficiency_reports.mailers.send_overdue_reminders.signature_html") %>
+    <%= t("custom.notification_service_mailers.not_assigned_deficiency_reports.signature_html") %>
   </p>
 </td>

@@ -75,6 +75,12 @@ class Proposal < ApplicationRecord
     ProjektSetting.find_by(projekt: projekt, key: "projekt_feature.proposal_options.votes_for_proposal_success").value.to_i
   end
 
+  def publish
+    update!(published_at: Time.current)
+    NotificationServices::NewProposalNotifier.new(@proposal.id).call
+    send_new_actions_notification_on_published
+  end
+
   protected
 
     def set_responsible_name
