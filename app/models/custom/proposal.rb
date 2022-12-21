@@ -77,7 +77,7 @@ class Proposal < ApplicationRecord
 
   def publish
     update!(published_at: Time.current)
-    NotificationServices::NewProposalNotifier.new(@proposal.id).call
+    NotificationServices::NewProposalNotifier.new(id).call
     send_new_actions_notification_on_published
   end
 
