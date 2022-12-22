@@ -96,14 +96,14 @@ module Takeable
 
     case @selected_geozone_restriction
     when 'no_restriction'
-      @resources = @resources.joins(phase_name).distinct
+      @resources = @resources.joins(phase_name)
     when 'only_citizens'
-      @resources = @resources.joins(phase_name).where(projekt_phases: { geozone_restricted: ['only_citizens', 'only_geozones'] }).distinct
+      @resources = @resources.joins(phase_name).where(projekt_phases: { geozone_restricted: ['only_citizens', 'only_geozones'] })
     when 'only_geozones'
-      @resources = @resources.joins(phase_name).where(projekt_phases: { geozone_restricted: 'only_geozones' }).distinct
+      @resources = @resources.joins(phase_name).where(projekt_phases: { geozone_restricted: 'only_geozones' })
 
       if @restricted_geozones.present?
-        @resources = @resources.joins(sql_query).where(geozone_restrictions: { id: @restricted_geozones }).distinct
+        @resources = @resources.joins(sql_query).where(geozone_restrictions: { id: @restricted_geozones })
       end
     end
 

@@ -11,6 +11,7 @@
 
 <h2><%= t("custom.admin.settings.index.extended_features.debates") %></h2>
 <%= render "extended_features_table", features: @extended_feature_debates, options: @extended_option_settings, tab: "#tab-extended-features" %>
+<%= render Shared::SelectableOptionComponent.new('debates.default_order', Debate.debates_orders) %>
 
 <h2><%= t("custom.admin.settings.index.extended_features.proposals") %></h2>
 <%= render "extended_features_table", features: @extended_feature_proposals, options: @extended_option_settings, tab: "#tab-extended-features" %>
