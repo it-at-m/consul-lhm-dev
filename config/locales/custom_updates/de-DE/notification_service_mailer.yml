@@ -15,21 +15,21 @@ de:
         signature_html: Viele Grüße</br>Consul
       new_proposal:
         subject: Neuer Vorschlag auf Consul
-        hi: Lieber Admin,
+        hi: Hallo %{username},
         p1: es ist ein neuer Vorschlag auf Consul eingegangen.
         signature_html: PViele Grüße</br>Consul
       new_debate:
         subject: Neue Diskussionsbeitrag auf Consul
-        hi: Lieber Admin,
+        hi: Hallo %{username},
         p1: es ist ein neuer Diskussionsbeitrag auf Consul erstellt worden.
         signature_html: PViele Grüße</br>Consul
       new_comment:
         subject: Neuer Kommentar auf Consul
-        hi: Lieber Admin,
+        hi: Hallo %{username},
         p1: es ist ein neuer Kommentar auf Consul veröffentlicht worden.
         signature_html: Viele Grüße</br>Consul
       new_deficiency_report:
         subject: Neue Mangelmeldung %{identifier}
-        hi: Lieber Admin,
+        hi: Hallo %{username},
         p1: es wurde ein neuer Mangel gemeldet.
         signature_html: Viele Grüße</br>Consul

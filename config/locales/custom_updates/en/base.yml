@@ -9,8 +9,13 @@ en:
         newsletter: Receive by email website relevant information
         public_activity: Keep my list of activities public
         public_interests: Keep the labels of the elements I follow public
+        adm_email_on_new_comment: Email notifications on each new Comment
+        adm_email_on_new_proposal: Email notification on each new Proposal
+        adm_email_on_new_debate: Email notification on each new Debate
+        adm_email_on_new_deficiency_report: Email notification on each new Deficiency Report
       show:
         user_permission_votes: Participate in polls
+        admin_notifications: Admin Notifications
     comments:
       reply_form:
         leave_comment: Write a reply
