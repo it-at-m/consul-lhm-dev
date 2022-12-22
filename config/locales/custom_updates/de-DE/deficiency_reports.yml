@@ -54,11 +54,6 @@ de:
           p1: ein/e Sachbearbeiter*in hat eine neue offizielle Antwort gespeichert.
           signature_html: Viele Grüße</br>Consul
           subject: Neue offizielle Antwort von einem/einer Sachbearbeiter*in %{identifier}
-        notify_administrators_about_new_deficiency_report:
-          hi: Lieber Admin,
-          p1: es wurde ein neuer Mangel gemeldet.
-          signature_html: Viele Grüße</br>Consul
-          subject: Neue Mangelmeldung %{identifier}
         notify_author_about_status_change:
           hi: Hallo
           p1: der Status des von Ihnen eingereichten Mangels wurde geändert.

@@ -61,9 +61,7 @@ class DeficiencyReportsController < ApplicationController
     @deficiency_report = DeficiencyReport.new(deficiency_report_params.merge(author: current_user, status: status))
 
     if @deficiency_report.save
-      Administrator.all.each do |admin|
-        DeficiencyReportMailer.notify_administrators_about_new_deficiency_report(@deficiency_report, admin.user).deliver_later
-      end
+      NotificationServices::NewDeficiencyReportNotifier.new(@deficiency_report.id).call
       redirect_to deficiency_report_path(@deficiency_report)
     else
       render :new

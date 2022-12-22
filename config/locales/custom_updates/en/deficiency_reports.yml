@@ -50,11 +50,6 @@ en:
           p1: Officer has updated official answer.
           signature_html: Best regards,</br>Consul
           subject: New official answer to deficiency report %{identifier}
-        notify_administrators_about_new_deficiency_report:
-          hi: Dear Admin,
-          p1: A new deficiency report has just been submitted.
-          signature_html: Best regards,</br>Consul
-          subject: New deficiency report %{identifier}
         notify_author_about_status_change:
           hi: Hi
           p1: Status of your a deficiency report you submitted earlier, was changed.

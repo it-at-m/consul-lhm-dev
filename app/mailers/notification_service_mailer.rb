@@ -43,6 +43,29 @@ class NotificationServiceMailer < ApplicationMailer
     end
   end
 
+  def new_comment(user_id, comment_id)
+    @user = User.find(user_id)
+    @comment = Comment.find(comment_id)
+
+    subject = t("custom.notification_service_mailers.new_comment.subject")
+
+    with_user(@user) do
+      mail(to: @user.email, subject: subject)
+    end
+  end
+
+  def new_deficiency_report(user_id, deficiency_report_id)
+    @user = User.find(user_id)
+    @deficiency_report = DeficiencyReport.find(deficiency_report_id)
+
+    subject = t("custom.notification_service_mailers.new_deficiency_report.subject",
+                identifier: "#{@deficiency_report.id}: #{@deficiency_report.title.first(50)}")
+
+    with_user(@user) do
+      mail(to: @user.email, subject: subject)
+    end
+  end
+
   private
 
     def with_user(user)
