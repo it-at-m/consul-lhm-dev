@@ -31,7 +31,7 @@
         <li class="inline-block"><%= link_to t("layouts.footer.accessibility"), page_path("accessibility"), data: { turbolinks: "false" } %>&nbsp;|</li>
         <li class="inline-block"><%= link_to t("custom.layouts.footer.impressum"), page_path("impressum"), data: { turbolinks: "false" } %>&nbsp;|</li>
         <li class="inline-block"><%= link_to t("custom.layouts.footer.netiquette"), page_path("netiquette"), data: { turbolinks: "false" } %>&nbsp;|</li>
-        <li class="inline-block"><%= link_to t("custom.layouts.footer.statistic_cookies_settings"), '', class: 'js-statistic-cookies-settings' %></li>
+        <li class="inline-block"><%= link_to t("custom.layouts.footer.statistic_cookies_settings"), '#', onClick: "klaro.show();return false;"  %></li>
       </ul>
     </div>
 
