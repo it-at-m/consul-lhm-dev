@@ -78,6 +78,7 @@ class Admin::SettingsController < Admin::BaseController
     end
 
     def update_dependent_settings
+      return
       dependent_setting_ids = @setting.dependent_setting_ids.split(",")
       @dependent_settings = Setting.where(id: dependent_setting_ids)
 
