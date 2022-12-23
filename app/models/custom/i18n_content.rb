@@ -4,8 +4,10 @@ class I18nContent < ApplicationRecord
   def self.all_translation_strings
     I18n.backend.send(:init_translations) unless I18n.backend.initialized?
 
+    allowed_keys = %i[debates community proposals polls layouts mailers management welcome machine_learning custom cli devise_views shared]
+
     all_groups = I18n.backend.send(:translations)[I18n.locale].select do |key, _translations|
-      key.in?([:debates, :community, :proposals, :polls, :layouts, :mailers, :management, :welcome, :machine_learning, :custom, :cli, :devise_views])
+      key.in?(allowed_keys)
     end
 
     flat_hash(all_groups).keys.map do |string|
