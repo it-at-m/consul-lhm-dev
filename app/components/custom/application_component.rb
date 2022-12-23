@@ -18,6 +18,6 @@ class ApplicationComponent < ViewComponent::Base
       phase_name = params[:current_tab_path].split("_")[0..-3].join("_")
       current_projekt_phase = projekt.send(phase_name)
 
-      "/#{projekt.page.slug}?selected_phase_id=#{current_projekt_phase.id}&filter=#{filter}&order=#{order}&filter_projekt_ids=#{filter_projekt_ids}i&page=#{pagination_page}"
+      "/#{projekt.page.slug}?selected_phase_id=#{current_projekt_phase.id}&filter=#{filter}&order=#{order}&#{filter_projekt_ids.to_query(:filter_projekt_ids)}&page=#{pagination_page}"
     end
 end

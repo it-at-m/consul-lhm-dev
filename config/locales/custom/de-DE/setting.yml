@@ -101,6 +101,14 @@ de:
           description_max_length: Maximale Zeichenanzahl für die Vorschlagsbeschreibung
           description_max_length_description: Legen Sie fest, wie viele Zeichen für Vorschläge maximal verwendet werden dürfen
 
+      selectable_setting:
+        debates:
+          default_order: Standardsortierung
+          default_order_description: Definieren Sie wie die Inhalte standardmäßig sortiert werden sollen
+        proposals:
+          default_order: Standardsortierung
+          default_order_description: Definieren Sie wie die Inhalte standardmäßig sortiert werden sollen
+
       projekts:
         overview_page: Projektübersichtsseite in Navigation anzeigen
         overview_page_description: Zeigt die Projektübersichtsseite in der Navigation an

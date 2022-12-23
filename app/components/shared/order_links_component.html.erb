@@ -2,7 +2,7 @@
   <% valid_orders.each do |order| %>
     <li class="inline-block">
       <%= link_to link_path(order),
-        class: "#{html_class(order)} js-remote-link-push-state",
+        class: "#{html_class(order)} js-remote-link-push-state".strip,
         title: title_for(order),
         "data-footer-tab-back-url": footer_tab_back_button_url(order),
         remote: (controller_name == 'pages'),

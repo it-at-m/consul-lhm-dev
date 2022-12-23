@@ -22,13 +22,18 @@ class Debate
   }
 
   scope :sort_by_alphabet, -> { with_translations(I18n.locale).reorder("LOWER(debate_translations.title) ASC") }
-  scope :sort_by_votes_up, -> { reorder(cached_votes_up: :desc) }
-  scope :sort_by_random,   -> { reorder("RANDOM()") }
+  scope :sort_by_votes_total, -> { reorder(cached_votes_total: :desc) }
 
   scope :seen, -> { where.not(ignored_flag_at: nil) }
   scope :unseen, -> { where(ignored_flag_at: nil) }
 
   alias_attribute :projekt_phase, :debate_phase
+
+  def self.debates_orders(user = nil)
+    orders = %w[hot_score confidence_score created_at relevance alphabet votes_total random]
+    orders << "recommendations" if Setting["feature.user.recommendations_on_debates"] && user&.recommended_debates
+    orders
+  end
 
   def self.scoped_projekt_ids_for_index
     Projekt.top_level
@@ -46,12 +51,6 @@ class Debate
       ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.main.activate').value.present? &&
       projekt.all_children_projekts.unshift(projekt).any? { |p| p.debate_phase.current? || p.debates.any? }
     end.pluck(:id)
-  end
-
-  def self.debates_orders(user = nil)
-    orders = %w[hot_score confidence_score created_at relevance alphabet votes_up random]
-    orders << "recommendations" if Setting["feature.user.recommendations_on_debates"] && user&.recommended_debates
-    orders
   end
 
   def register_vote(user, vote_value)
