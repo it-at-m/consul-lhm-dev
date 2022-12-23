@@ -32,10 +32,10 @@
     </h3>
     <div class="projekt-event-item-values--details-row">
       <div class="projekt-event-item-values--details-row-column">
-        <i class="fa fa-clock"></i><%= projekt_event.datetime.strftime('%d %B %Y %H:%M') %>
+        <i class="fa fa-clock"></i><%= l(projekt_event.datetime, format: "%d. %B %Y %H:%M") %>
         <% if projekt_event.end_datetime.present? %>
           -
-          <%= projekt_event.end_datetime.strftime('%d %B %Y %H:%M') %>
+          <%= l(projekt_event.end_datetime, format: "%d. %B %Y %H:%M") %>
         <% end %>
       </div>
       <% if projekt_event.location.present? %>

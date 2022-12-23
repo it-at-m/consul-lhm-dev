@@ -1,5 +1,5 @@
 .klaro .cookie-modal .cm-list-input:checked+.cm-list-label .slider {
-  background-color: $accent !important;
+  background-color: #0085eb !important;
 }
 
 .klaro {
@@ -7,30 +7,30 @@
     .cn-ok {
       .cm-btn.cm-btn-info {
         padding: 10px;
-        background-color: $accent;
+        background-color: #0085eb;
         flex-grow: 1;
         min-height: 3rem;
       }
 
       .cm-btn.cm-btn-success {
         padding: 10px;
-        background-color: $brand;
+        background-color: #005a9f;
         min-height: 3rem;
       }
     }
 
     .cm-footer-buttons {
       .cm-btn.cm-btn-info {
-        background-color: $accent;
+        background-color: #0085eb;
       }
 
       .cm-btn.cm-btn-accept-all {
-        background-color: $brand;
+        background-color: #005a9f;
       }
     }
 
     a {
-      color: $brand !important;
+      color: #005a9f !important;
     }
   }
 }
