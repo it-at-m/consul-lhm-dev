@@ -6,16 +6,18 @@ var form = $("<%= j render Admin::Settings::FeaturedSettingsFormComponent.new(
 
 $("#" + form.attr("id")).html(form.html()).find("[type='submit']").focus();
 
-<% @dependent_settings.each do |setting| %>
-  var form = $("<%= j render Admin::Settings::FeaturedSettingsFormComponent.new(
-    setting,
-    tab: params[:setting][:tab],
-    describedby: params[:setting][:describedby]
-  ) %>");
-
-  $("#" + form.attr("id")).html(form.html());
-<% end %>
-
 <% if @setting.type == "feature" || @setting.type == "process" %>
   $("#side_menu").html("<%= j render Admin::MenuComponent.new %>").foundation();
+<% end %>
+
+<% if @dependent_settings.present? %>
+  <% @dependent_settings.each do |setting| %>
+    var form = $("<%= j render Admin::Settings::FeaturedSettingsFormComponent.new(
+      setting,
+      tab: params[:setting][:tab],
+      describedby: params[:setting][:describedby]
+    ) %>");
+
+    $("#" + form.attr("id")).html(form.html());
+  <% end %>
 <% end %>

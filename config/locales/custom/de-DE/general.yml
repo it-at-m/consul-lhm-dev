@@ -105,6 +105,12 @@ de:
         relevance_title: Relevanz
         recommendations: Empfehlungen
         recommendations_title: Empfehlungen
+        alphabet: Alphabetisch
+        alphabet_title: Alphabetisch
+        random: Zufällig
+        random_title: Zufällig
+        votes_total: Am meisten gewählt
+        votes_total_title: Am meisten gewählt
       recommendations:
         without_results: Es gibt keine Diskussionen, die Ihren Interessen entsprechen
         without_interests: Folgen Sie Vorschlägen, sodass wir Ihnen Empfehlungen geben können
@@ -360,6 +366,12 @@ de:
         archival_date_title: Archiviert
         recommendations: Empfehlungen
         recommendations_title: Empfehlungen
+        alphabet: Alphabetisch
+        alphabet_title: Alphabetisch
+        random: Zufällig
+        random_title: Zufällig
+        votes_up: Am meisten gewählt
+        votes_up_title: Am meisten gewählt
       recommendations:
         without_results: Es gibt keine Vorschläge, die Ihren Interessen entsprechen
         without_interests: Folgen Sie Vorschlägen, sodass wir Ihnen Empfehlungen geben können

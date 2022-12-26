@@ -190,6 +190,7 @@ class Setting < ApplicationRecord
         "extended_feature.debates.head_image_for_debates": true,
         "extended_feature.debates.enable_projekt_filter": true,
         "extended_feature.debates.enable_my_posts_filter": true,
+        "selectable_setting.debates.default_order": "created_at",
 
         "extended_feature.proposals.intro_text_for_proposals": true,
         "extended_feature.proposals.enable_proposal_support_withdrawal": true,
@@ -199,6 +200,7 @@ class Setting < ApplicationRecord
         "extended_feature.proposals.enable_my_posts_filter": true,
         "extended_option.proposals.max_active_proposals_per_user": 100,
         "extended_option.proposals.description_max_length": 6000,
+        "selectable_setting.proposals.default_order": "created_at",
 
         "extended_feature.polls.intro_text_for_polls": true,
         "extended_feature.polls.enable_projekt_filter": true,
