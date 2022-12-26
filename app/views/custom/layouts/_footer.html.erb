@@ -30,6 +30,9 @@
         <li class="inline-block"><%= link_to t("layouts.footer.conditions"), page_path("conditions") %>&nbsp;|</li>
         <li class="inline-block"><%= link_to t("layouts.footer.accessibility"), page_path("accessibility") %>&nbsp;|</li>
         <li class="inline-block"><%= link_to t("custom.layouts.footer.impressum"), page_path("impressum") %>&nbsp;|</li>
+        <% if SiteCustomization::Page.find_by(slug: "contact_us", status: "published") %>
+          <li class="inline-block"><%= link_to t("custom.layouts.footer.contact_us"), page_path("contact_us") %>&nbsp;|</li>
+        <% end %>
         <li class="inline-block"><%= link_to t("custom.layouts.footer.statistic_cookies_settings"), '#', onClick: "klaro.show();return false;"  %></li>
       </ul>
     </div>

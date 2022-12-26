@@ -73,6 +73,8 @@ de:
         demokratie_url: https://www.demokratie.today/
         description: Die Plattform basiert auf %{consul}, einer %{open_source} und wurde von %{demokratie} modifiziert.
         impressum: Impressum
+        statistic_cookies_settings: Cookie Einstellungen
+        contact_us: Kontaktieren Sie uns
       header:
         account_link: Konto
         admin_link: Administration
@@ -91,6 +93,8 @@ de:
     pages:
       impressum:
         title: Impressum
+      contact_us:
+        title: Kontaktieren Sie uns
       social_share:
         share: Teilen
     sdg:
