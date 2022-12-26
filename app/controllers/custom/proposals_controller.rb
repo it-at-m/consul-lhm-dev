@@ -9,10 +9,8 @@ class ProposalsController
   before_action :set_projekts_for_selector, only: [:new, :edit, :create, :update]
 
   def index_customization
-    if params[:order].nil? &&
-      Setting["projekts.set_default_sorting_to_newest"].present? &&
-      @valid_orders.include?("created_at")
-      @current_order = "created_at"
+    if params[:order].nil?
+      @current_order = Setting["selectable_setting.proposals.default_order"]
     end
     @resource_name = "proposal"
 
