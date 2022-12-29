@@ -234,10 +234,11 @@ namespace :admin do
     end
 
     resources :questions, shallow: true do
-      resources :answers, except: [:index], controller: "questions/answers" do
+      resources :answers, except: [:index, :show], controller: "questions/answers", shallow: false
+      resources :answers, only: [], controller: "questions/answers" do
         resources :images, controller: "questions/answers/images"
-        resources :videos, controller: "questions/answers/videos"
-        get :documents, to: "questions/answers#documents"
+        resources :videos, controller: "questions/answers/videos", shallow: false
+        resources :documents, only: [:index, :create], controller: "questions/answers/documents"
       end
       post "/answers/order_answers", to: "questions/answers#order_answers"
     end

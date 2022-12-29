@@ -2,6 +2,15 @@ require_dependency Rails.root.join("app", "controllers", "admin", "poll", "quest
 
 class Admin::Poll::Questions::AnswersController < Admin::Poll::BaseController
 
+  def new
+    @answer = ::Poll::Question::Answer.new
+    @question = ::Poll::Question.find_by(id: params[:question_id])
+  end
+
+  def edit
+    @question = @answer.question
+  end
+
   def destroy
     load_answer
     if @answer.question.poll.safe_to_delete_answer?
@@ -15,7 +24,7 @@ class Admin::Poll::Questions::AnswersController < Admin::Poll::BaseController
   private
 
     def answer_params
-      attributes = [:title, :description, :given_order, :question_id, :open_answer,
+      attributes = [:title, :description, :given_order, :question_id, :open_answer, :rating_scale_weight,
         documents_attributes: document_attributes]
 
       params.require(:poll_question_answer).permit(

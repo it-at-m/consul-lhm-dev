@@ -94,4 +94,8 @@ Rails.application.routes.draw do
   # Manuall verify user
   put "/admin/users/:id/verify",                           to: "admin/users#verify",                 as: :verify_admin_user
   put "/admin/users/:id/unverify",                         to: "admin/users#unverify",               as: :unverify_admin_user
+
+
+  # unvote answer
+  delete "/questions/:question_id/answers/:id",            to: "polls/answers#destroy",              as: :question_answer
 end

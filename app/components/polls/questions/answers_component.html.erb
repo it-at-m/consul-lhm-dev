@@ -1,0 +1,95 @@
+<div class="<%= poll_question_answers_class %>">
+  <% question_answers.each do |question_answer| %>
+
+    <div class="<%= poll_answer_group_class %>">
+
+      <!-- additional info block -->
+      <% if show_additional_info_images? %>
+        <div class='poll-answer-thumbnail'
+             <%= "data-open=model-question-#{question_answer.id}" if answer_with_description?(question_answer) %>>
+
+          <% if answer_with_description?(question_answer) %>
+            <div class='poll-answer-more-info'>
+              <%= t('custom.polls.questions.answers.more_info')  %>
+            </div>
+          <% end %>
+
+          <% if question_answer.images.any? %>
+            <%= image_tag question_answer.images.first.variant(:large) %>
+          <% end %>
+        </div>
+      <% elsif show_additional_info_description?(question_answer) %>
+        <div class='poll-answer-more-info-link' data-open='model-question-<%= question_answer.id %>'>
+          <%= t('custom.polls.questions.answers.more_info')  %>
+        </div>
+      <% end %>
+
+      <!-- buttons block -->
+      <% if can?(:answer, question) && !question.poll.voted_in_booth?(current_user) %>
+        <% if already_answered?(question_answer) %>
+          <%= button_to question_answer_path(question, user_answer(question_answer)),
+                        method: :delete,
+                        remote: true,
+                        title: t("poll_questions.show.voted", answer: question_answer.title),
+                        class: button_answered_class,
+                        "aria-pressed": true do %>
+            <%= question_answer.title %>
+          <% end %>
+        <% else %>
+          <%= button_to answer_question_path(question, answer: question_answer.title),
+                        remote: true,
+                        title: t("poll_questions.show.vote_answer", answer: question_answer.title),
+                        class: button_not_answered_class,
+                        "aria-pressed": false,
+                        disabled: disable_answer?(question_answer) do %>
+            <%= question_answer.title %>
+          <% end %>
+        <% end %>
+
+      <% elsif !user_signed_in? %>
+        <%= button_to new_user_session_path,
+                      method: :get,
+                      title: t("poll_questions.show.vote_answer", answer: question_answer.title),
+                      class: button_not_answered_class,
+                      "aria-pressed": false,
+                      disabled: disable_answer?(question_answer) do %>
+          <%= question_answer.title %>
+        <% end %>
+
+      <% else %>
+        <% if question.votation_type.vote_type == "rating_scale" %>
+          <span class="rating-scale-button rating-scale-button--disabled"><%= question_answer.title %></span>
+        <% else %>
+          <span class="button secondary hollow disabled"><%= question_answer.title %></span>
+        <% end %>
+
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if question.open_question_answer.present? && already_answered?(question.open_question_answer) %>
+    <% open_answer = question.answers.find_or_initialize_by(author: current_user, answer: question.open_question_answer.title)  %>
+    <%= form_for open_answer, url: update_open_answer_path(question), method: :post, remote: true do |f| %>
+      <%= f.text_area :open_answer_text %>
+      <%= f.hidden_field :answer %>
+      <% if open_answer.open_answer_text.present? %>
+        <%= f.submit t('custom.polls.questions.answers.update_open_answer'), class: "button open-answer" %>
+        <% if @open_answer_updated %>
+          <div class='open-answer-saved-notice'>
+            <%= t('custom.admin.polls.questions.answers.notice.open_answer_saved')  %>
+          </div>
+        <% end %>
+      <% else %>
+        <%= f.submit t('custom.polls.questions.answers.save_open_answer'), class: "button open-answer" %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="answer-counted" <%= "style=color:#a94442" if @answer_updated == 'unanswered' %> >
+  <% if @answer_updated == 'answered' %>
+    <%= t('custom.polls.show.vote_counted') %>
+  <% elsif @answer_updated == 'unanswered' %>
+    <%= t('custom.polls.show.vote_uncounted') %>
+  <% end %>
+</div>

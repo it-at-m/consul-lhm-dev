@@ -1,23 +1,21 @@
-<%= render "shared/globalize_locales", resource: @question %>
+<%= render "shared/globalize_locales", resource: question %>
 
-<%= translatable_form_for(@question, url: form_url) do |f| %>
+<%= translatable_form_for(question, url: url) do |f| %>
 
-  <%= render "shared/errors", resource: @question %>
+  <%= render "shared/errors", resource: question %>
 
   <%= f.hidden_field :proposal_id %>
 
   <div class="row">
     <div class="small-12">
-      <% if @poll.present? %>
-        <%= f.hidden_field :poll_id, value: @poll.id %>
-      <% elsif @question.poll.present? %>
-        <%= f.hidden_field :poll_id, value: @question.poll.id %>
+      <% if question.poll.present? %>
+        <%= f.hidden_field :poll_id, value: question.poll.id %>
       <% else %>
         <div class="small-12 medium-6 large-4 column">
-          <% select_options = Poll.all.map { |p| [p.name, p.id] } %>
           <%= f.select :poll_id,
                         options_for_select(select_options),
-                        prompt: t("admin.questions.index.select_poll") %>
+                        prompt: t("admin.questions.index.select_poll"),
+                        hint: t("admin.questions.form.poll_help") %>
         </div>
       <% end %>
     </div>
@@ -29,6 +27,7 @@
         <%= translations_form.text_field :title %>
       </div>
     </div>
+
     <div class="row">
       <div class="column">
         <%= translations_form.text_area :description,
@@ -38,8 +37,10 @@
   <% end %>
 
   <div class="row">
-    <div class="column">
-      <%= f.check_box :multiple %>
+    <div class="small-12">
+      <%= f.fields_for :votation_type do |votation_f| %>
+        <%= render Admin::VotationTypes::FieldsComponent.new(form: votation_f) %>
+      <% end %>
     </div>
   </div>
 
@@ -54,5 +55,4 @@
       <%= f.submit(class: "button success expanded", value: t("shared.save")) %>
     </div>
   </div>
-
 <% end %>

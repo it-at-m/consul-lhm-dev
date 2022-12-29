@@ -1,17 +1,19 @@
 <div id="<%= dom_id(question) %>" class="poll-question">
   <h3>
     <%= question.title %>
-    <% if question.multiple %>
-      <small class="multiple-answers-hint">
-        (<%= t("poll_questions.show.question.multiple") %>)
-      </small>
-    <% end %>
   </h3>
+
+  <% if question.votation_type.present? %>
+    <strong>
+      <%= t("poll_questions.description.#{question.vote_type}", maximum: question.max_votes) %>
+    </strong>
+  <% end %>
+
   <p>
     <%= auto_link_already_sanitized_html wysiwyg(question.description) %>
   </p>
 
   <div id="<%= dom_id(question) %>_answers" class="padding">
-    <%= render "polls/questions/answers", question: question, token: token %>
+    <%= render Polls::Questions::AnswersComponent.new(question) %>
   </div>
 </div>

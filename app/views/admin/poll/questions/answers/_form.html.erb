@@ -14,9 +14,23 @@
       <div class="column end">
         <%= translations_form.text_field :title %>
       </div>
-      <div class="column">
-        <%= translations_form.text_area :description, maxlength: Poll::Question.description_max_length, class: "html-area" %>
-      </div>
+      <% if @question.votation_type.rating_scale? %>
+        <div class="column end">
+          <%= f.text_area :rating_scale_weight %>
+        </div>
+      <% end %>
+      <% if @question.votation_type.unique? || @question.votation_type.multiple? %>
+        <div class="column">
+          <%= translations_form.text_area :description, maxlength: Poll::Question.description_max_length, class: "html-area" %>
+        </div>
+      <% end %>
+      <% if @question.votation_type.unique? || @question.votation_type.multiple? %>
+        <div class="small-6 column">
+          <%= f.check_box :open_answer,
+            label: t('custom.admin.polls.questions.answers.open_answer_html'),
+            disabled: !can_answer_be_open?(@answer.question || @question) && !@answer.open_answer? %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 

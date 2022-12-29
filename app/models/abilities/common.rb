@@ -95,6 +95,10 @@ module Abilities
         question.answerable_by?(user)
       end
 
+      can :destroy, Poll::Answer do |answer|
+        answer.author == user && answer.question.answerable_by?(user)
+      end
+
       # can :create, Budget::Investment,               budget: { phase: "accepting" }
       can :edit, Budget::Investment,                 budget: { phase: "accepting" }, author_id: user.id
       can :update, Budget::Investment,               budget: { phase: "accepting" }, author_id: user.id
