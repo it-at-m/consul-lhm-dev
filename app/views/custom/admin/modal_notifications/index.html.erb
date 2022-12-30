@@ -1,0 +1,32 @@
+<%= link_to t("custom.admin.modal_notifications.index.create"),
+              new_admin_modal_notification_path, class: "button float-right" %>
+
+<h2 class="inline-block"><%= t("custom.admin.modal_notifications.index.title") %></h2>
+
+<% @modal_notifications.each do |modal_notification| %>
+  <table>
+    <thead>
+      <tr id="<%= dom_id(modal_notification) %>">
+        <th scope="col"><%= ModalNotification.human_attribute_name(:titel) %></th>
+        <th scope="col"><%= ModalNotification.human_attribute_name(:active_from) %></th>
+        <th scope="col"><%= ModalNotification.human_attribute_name(:active_to) %></th>
+        <th scope="col"><%= t("custom.admin.actions.actions") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= modal_notification.title %></td>
+        <td><%= modal_notification.active_from %></td>
+        <td><%= modal_notification.active_to %></td>
+        <td><%= render Admin::TableActionsComponent.new(modal_notification) %></td>
+      </tr>
+      <tr>
+        <td colspan="4">
+          <%= AdminWYSIWYGSanitizer.new.sanitize(modal_notification.html_content) %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>
+
+<%= paginate @modal_notifications %>

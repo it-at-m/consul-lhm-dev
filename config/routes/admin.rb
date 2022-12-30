@@ -59,6 +59,9 @@ namespace :admin do
     get :search, on: :collection
   end
 
+  # custom modal notifications routes
+  resources :modal_notifications, except: :show
+
 
   resources :organizations, only: :index do
     get :search, on: :collection

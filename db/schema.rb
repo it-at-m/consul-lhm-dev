@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_27_114335) do
+ActiveRecord::Schema.define(version: 2022_12_30_101657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1185,6 +1185,24 @@ ActiveRecord::Schema.define(version: 2022_12_27_114335) do
     t.integer "commentable_id"
     t.string "commentable_type"
     t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "modal_notification_translations", force: :cascade do |t|
+    t.bigint "modal_notification_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.text "html_content"
+    t.index ["locale"], name: "index_modal_notification_translations_on_locale"
+    t.index ["modal_notification_id"], name: "index_modal_notification_translations_on_modal_notification_id"
+  end
+
+  create_table "modal_notifications", force: :cascade do |t|
+    t.date "active_from"
+    t.date "active_to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

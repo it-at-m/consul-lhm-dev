@@ -13,6 +13,9 @@ de:
       age_restriction:
         one: Altersbeschränkung
         other: Altersbeschränkungen
+      modal_notification:
+        one: Modal Benachrichtigung
+        other: Modale Benachrichtungen
     errors:
       models:
         proposal:
@@ -80,3 +83,8 @@ de:
         min_age: Mindestalter
         max_age: Maximalalter
         order: Reihenfolge
+      modal_notification:
+        titel: Titel
+        active_from: Von
+        active_to: Bis
+        html_content: HTML-Code der Benachrichtigung

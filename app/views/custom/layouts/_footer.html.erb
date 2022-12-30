@@ -90,4 +90,16 @@
       </div>
     </div>
   </div>
+
+  <% if ModalNotification.current.present? %>
+    <div class="reveal"
+         style="padding:0;border:none;outline:none;"
+         id="currentModalNotification"
+         data-reveal data-modal-notification-id=<%= ModalNotification.current.id %>>
+      <%= AdminWYSIWYGSanitizer.new.sanitize(ModalNotification.current.html_content) %>
+			<button class="close-button" data-close aria-label="Close modal" type="button">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+  <% end %>
 </footer>

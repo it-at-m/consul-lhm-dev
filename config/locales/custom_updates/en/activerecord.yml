@@ -10,6 +10,9 @@ en:
       projekt:
         one: Project
         other: Projects
+      modal_notification:
+        one: Modal notification
+        other: Modal notifications
     errors:
       models:
         proposal:
@@ -71,3 +74,8 @@ en:
         gender: Gender
         date_of_birth: Date of birth
         document_last_digits: Document (last 4 digits)
+      modal_notification:
+        titel: Titel
+        active_from: From
+        active_to: To
+        html_content: HTML-Code of the notification

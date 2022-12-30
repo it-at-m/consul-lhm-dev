@@ -98,6 +98,8 @@ en:
         projekts: Projects
         projekt_managers: Project managers
         legislation: Text edit
+        age_restrictions: Age restrictions
+        modal_notification: Modal notifications
       polls:
         questions:
           answers:
@@ -342,3 +344,17 @@ en:
           category_options:
             active_projekt: Active participation process
             archived_projekt: Completed participation process
+      modal_notifications:
+        index:
+          create: Create
+          title: Modal notifications
+        new:
+          creating: Creating a modal notification
+        create:
+          notice: Modal notification was successfully created
+        edit:
+          editing: Editing modal notification
+        update:
+          notice: Modal notification updated
+        destroy:
+          notice: Modal notification deleted

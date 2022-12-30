@@ -113,6 +113,7 @@ de:
         projekt_managers: Projektmanager*innen
         legislation: Textbearbeitung
         age_restrictions: Altersbeschränkungen
+        modal_notification: Modale Benachrichtigungen
       polls:
         questions:
           show:
@@ -422,3 +423,17 @@ de:
         end_date: Enddatum
         edit:
           title: Einstellung für Phase
+      modal_notifications:
+        index:
+          create: Erstellen
+          title: Modale Benachrichtungen
+        new:
+          creating: Modale Benachrichtigung erstellen
+        create:
+          notice: Modale Benachrichtigung wurde erfolgreich erstellt
+        edit:
+          editing: Modale Benachrichtigung bearbeiten
+        update:
+          notice: Modale Benachrichtigung wurde erfolgreich aktualisiert
+        destroy:
+          notice: Modale Benachrichtigung wurde erfolgreich gelöscht
