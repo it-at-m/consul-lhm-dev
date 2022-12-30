@@ -13,7 +13,7 @@
           <%= prepare_projekt_name(projekt, placement) %>
         </div>
 
-        <% if projekt_children_to_show_in_menu.any? && placement == 'mobile' %>
+        <% if projekt_children_to_show_in_menu.any? && local_assigns[:skip_subprojekts] != true && placement == 'mobile' %>
           <div class='nav-toggle-arrow js-toggle-mobile-flyout-item focusable'
                tabindex="0"
                aria-expanded=false >
@@ -28,7 +28,7 @@
       <% end %>
 
       
-      <%= render partial: 'shared/subnavigation_flyout_projekts', locals: { projekts: projekt_children_to_show_in_menu.with_order_number, placement: placement } if projekt_children_to_show_in_menu.any? %>
+      <%= render partial: 'shared/subnavigation_flyout_projekts', locals: { projekts: projekt_children_to_show_in_menu.with_order_number, placement: placement } if projekt_children_to_show_in_menu.any? && local_assigns[:skip_subprojekts] != true %>
     </li>
   <% end %>
 

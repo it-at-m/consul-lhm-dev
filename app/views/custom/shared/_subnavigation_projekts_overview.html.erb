@@ -5,4 +5,16 @@
   <div class="flyout-item-name projekt-name">
     <%= link_to t('custom.links.menu.projekts_overview'), projekts_path, class: '', tabindex: ( placement == 'desktop' ? '-1' : '0' ), aria: { hidden: true } %>
   </div>
+
+  <% if placement == 'mobile' && @projekts_for_overview_page_navigation.any? %>
+    <div class='nav-toggle-arrow js-toggle-mobile-flyout-item focusable'
+      tabindex="0"
+      aria-label='<%= t('custom.links.menu.mobile.arrow_projekts') %>'
+      aria-haspopup=true
+      aria-expanded=false
+    >
+    </div>
+  <% end %>
+
+  <%= render partial: 'shared/subnavigation_flyout_projekts', locals: { projekts: @projekts_for_overview_page_navigation, placement: placement, skip_subprojekts: true } if @projekts_for_overview_page_navigation.any? %>
 </li>

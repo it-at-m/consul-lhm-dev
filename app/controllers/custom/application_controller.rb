@@ -1,7 +1,8 @@
 require_dependency Rails.root.join("app", "controllers", "application_controller").to_s
 
 class ApplicationController < ActionController::Base
-  before_action :set_top_level_projekts_for_menu, :set_default_social_media_images, :set_partner_emails
+  before_action :set_projekts_for_overview_page_navigation, :set_top_level_projekts_for_menu,
+                :set_default_social_media_images, :set_partner_emails
   before_action :show_launch_page, if: :show_launch_page?
   helper_method :set_comment_flags
 
@@ -41,6 +42,11 @@ class ApplicationController < ActionController::Base
       else
         []
       end
+    end
+
+    def set_projekts_for_overview_page_navigation
+      @projekts_for_overview_page_navigation = Projekt.joins(:projekt_settings)
+        .where(projekt_settings: { key: "projekt_feature.general.show_in_overview_page_navigation", value: "active" })
     end
 
     def set_top_level_projekts_for_menu

@@ -141,6 +141,8 @@ de:
         general:
           show_in_navigation: Projekt in Navigation hervorheben
           show_in_navigation_description: Zeigt das Projekt in der Top-Navigation der Webseite an (nur für Top-Level-Projekte)
+          show_in_overview_page_navigation: Projekt in Dropdown-Navigation anzeigen
+          show_in_overview_page_navigation_description: Zeigt das Projekt in einer Dropdownliste im Navigationsmenü
           show_in_overview_page: Projekt in Übersichtsseite und auf Homepage anzeigen
           show_in_overview_page_description: Zeigt das Projekt in der Projektübersichtsseite und auf der Homepage an
           hide_additional_info_in_projekt_selector: Zusätzliche Projektinformationen im Projekt-Selektor ausblenden
