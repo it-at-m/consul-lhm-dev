@@ -28,7 +28,7 @@
       <% if can?(:answer, question) && !question.poll.voted_in_booth?(current_user) %>
         <% if already_answered?(question_answer) %>
           <%= form_with url: question_answer_path(question, user_answer(question_answer)), local: false, method: :delete, class: "button_to" do |f| %>
-            <%= f.button question_answer.title, 
+            <%= f.button question_answer.title,
                          title: t("poll_questions.show.voted", answer: question_answer.title),
                          class: button_answered_class,
                          "aria-pressed": true %>

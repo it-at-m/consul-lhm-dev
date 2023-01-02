@@ -16,6 +16,9 @@ de:
       modal_notification:
         one: Modal Benachrichtigung
         other: Modale Benachrichtungen
+      votation_type:
+        one: Art der Abstimmung
+        other: Arte der Abstimmung
     errors:
       models:
         proposal:
@@ -88,3 +91,12 @@ de:
         active_from: Von
         active_to: Bis
         html_content: HTML-Code der Benachrichtigung
+      votation_type:
+        max_votes: Maximale Stimmanzahl
+        vote_type: Art der Abstimmung
+      votation_type/vote_type:
+        unique: Einzelne Stimme
+        multiple: Mehrere Stimmen
+        rating_scale: Bewertungsskala
+        multiple_with_weights: Mehrere gewichtete Stimmen
+    
