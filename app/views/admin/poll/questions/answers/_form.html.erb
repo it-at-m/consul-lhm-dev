@@ -19,7 +19,7 @@
           <%= f.text_area :rating_scale_weight %>
         </div>
       <% end %>
-      <% if @question.votation_type.unique? || @question.votation_type.multiple? %>
+      <% if @question.votation_type.unique? || @question.votation_type.multiple? || @question.votation_type.multiple_with_weights? %>
         <div class="column">
           <%= translations_form.text_area :description, maxlength: Poll::Question.description_max_length, class: "html-area" %>
         </div>

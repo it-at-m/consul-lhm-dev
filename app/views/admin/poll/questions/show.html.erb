@@ -108,7 +108,6 @@
                       admin_answer_videos_path(answer) %>
         </td>
         <td>
-          <%= render Admin::Poll::Questions::Answers::TableActionsComponent.new(answer) %>
           <%= render Admin::TableActionsComponent.new(answer,
             actions: [:edit, :destroy],
             edit_path: edit_admin_answer_path(answer),

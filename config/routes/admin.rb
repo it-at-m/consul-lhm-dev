@@ -391,6 +391,10 @@ resolve "Poll::Officer" do |officer, options|
   [:officer, options.merge(id: officer)]
 end
 
+resolve "Poll::Question::Answer" do |answer, options|
+  [:question, :answer, options.merge(question_id: answer.question, id: answer)]
+end
+
 resolve "Poll::Question::Answer::Video" do |video, options|
   [:video, options.merge(id: video)]
 end

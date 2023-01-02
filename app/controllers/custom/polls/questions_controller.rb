@@ -4,6 +4,7 @@ class Polls::QuestionsController < ApplicationController
 
   def answer
     answer = @question.find_or_initialize_user_answer(current_user, params[:answer])
+    answer.answer_weight = params[:answer_weight] if params[:answer_weight].present?
     answer.save_and_record_voter_participation
 
     unless providing_an_open_answer?(answer)
@@ -18,7 +19,7 @@ class Polls::QuestionsController < ApplicationController
     if answer.update(open_answer_text: open_answer_params[:open_answer_text])
       @open_answer_updated = true
     end
-    render :answer
+    render "polls/questions/answers"
   end
 
   private

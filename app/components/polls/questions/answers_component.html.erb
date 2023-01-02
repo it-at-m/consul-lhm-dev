@@ -27,23 +27,30 @@
       <!-- buttons block -->
       <% if can?(:answer, question) && !question.poll.voted_in_booth?(current_user) %>
         <% if already_answered?(question_answer) %>
-          <%= button_to question_answer_path(question, user_answer(question_answer)),
-                        method: :delete,
-                        remote: true,
-                        title: t("poll_questions.show.voted", answer: question_answer.title),
-                        class: button_answered_class,
-                        "aria-pressed": true do %>
-            <%= question_answer.title %>
+          <%= form_with url: question_answer_path(question, user_answer(question_answer)), local: false, method: :delete, class: "button_to" do |f| %>
+            <%= f.button question_answer.title, 
+                         title: t("poll_questions.show.voted", answer: question_answer.title),
+                         class: button_answered_class,
+                         "aria-pressed": true %>
+
+            <% if should_show_answer_weight? %>
+              <span class="button secondary hollow answer-weight-result"><%= user_answer(question_answer).answer_weight %></span>
+            <% end %>
           <% end %>
+
         <% else %>
-          <%= button_to answer_question_path(question, answer: question_answer.title),
-                        remote: true,
-                        title: t("poll_questions.show.vote_answer", answer: question_answer.title),
-                        class: button_not_answered_class,
-                        "aria-pressed": false,
-                        disabled: disable_answer?(question_answer) do %>
-            <%= question_answer.title %>
+          <%= form_with url: answer_question_path(question, answer: question_answer.title), local: false, class: "button_to" do |f| %>
+            <%= f.button question_answer.title,
+                         title: t("poll_questions.show.vote_answer", answer: question_answer.title),
+                         class: button_not_answered_class,
+                         disabled: disable_answer?(question_answer),
+                         "aria-pressed": false %>
+
+            <% if should_show_answer_weight? && available_vote_weight > 0 %>
+              <%= f.select :answer_weight, (1..available_vote_weight).to_a, selected: 1, label: false %>
+            <% end %>
           <% end %>
+
         <% end %>
 
       <% elsif !user_signed_in? %>

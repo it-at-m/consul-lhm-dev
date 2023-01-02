@@ -58,4 +58,18 @@ class Polls::Questions::AnswersComponent < ApplicationComponent
     projekt_feature?(question.poll&.projekt, "polls.additional_info_for_each_answer") &&
       answer_with_description?(question_answer)
   end
+
+  def should_show_answer_weight?
+    question.votation_type.multiple_with_weights? &&
+      question.max_votes.present?
+  end
+
+  def available_vote_weight
+    question.max_votes - question.answers.sum(:answer_weight)
+  end
+
+  def disable_answer?(question_answer)
+    (question.multiple? && user_answers.count == question.max_votes) ||
+      (question.votation_type.multiple_with_weights? && available_vote_weight == 0)
+  end
 end
