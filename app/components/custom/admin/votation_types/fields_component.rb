@@ -12,4 +12,8 @@ class Admin::VotationTypes::FieldsComponent < ApplicationComponent
 
     "hide"
   end
+
+  def hide_max_votes_input_class(votation_type_name)
+    return "hide" if !VotationType.allowing_multiple_answers.include?(votation_type_name)
+  end
 end

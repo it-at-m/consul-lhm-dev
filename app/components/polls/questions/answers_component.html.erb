@@ -34,7 +34,10 @@
                          "aria-pressed": true %>
 
             <% if should_show_answer_weight? %>
-              <span class="button secondary hollow answer-weight-result"><%= user_answer(question_answer).answer_weight %></span>
+              <%= f.button user_answer(question_answer).answer_weight,
+                           title: t("poll_questions.show.voted", answer: question_answer.title),
+                           class: "#{button_answered_class} answer-weight-result",
+                           "aria-pressed": true %>
             <% end %>
           <% end %>
 
@@ -47,7 +50,7 @@
                          "aria-pressed": false %>
 
             <% if should_show_answer_weight? && available_vote_weight > 0 %>
-              <%= f.select :answer_weight, (1..available_vote_weight).to_a, selected: 1, label: false %>
+              <%= f.select :answer_weight, (1..available_vote_weight).to_a, { selected: 1, label: false}, { onchange: "$(this).closest('form').submit()" } %>
             <% end %>
           <% end %>
 

@@ -19,7 +19,7 @@
   </div>
 </div>
 
-<div class="small-12 medium-6 column end">
+<div id="votation_max_votes" class="small-12 medium-6 column end <%= hide_max_votes_input_class(@votation_type.vote_type) %>">
   <div class="max-votes">
     <%= form.number_field :max_votes, min: 2, max: 999, class: "votation-type-max-votes" %>
   </div>

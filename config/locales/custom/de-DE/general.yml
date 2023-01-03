@@ -681,6 +681,11 @@ de:
     show:
       vote_answer: "Für %{answer} abstimmen"
       voted: "Sie haben für %{answer} abgestimmt"
+    description:
+      unique: Sie dürfen bei dieser Frage eine Stimme vergeben.
+      multiple: Sie dürfen %{maximum} Stimmen gleichmäßig auf die gegebenen Antworten verteilen.
+      rating_scale: Sie dürfen eine Stimme pro Bewertungsskala abgeben.
+      multiple_with_weights: Nutzer*innen können je Frage ihre Stimmen auf mehrere Antworten gewichtet verteilen.
   proposal_notifications:
     new:
       title: "Nachricht senden"

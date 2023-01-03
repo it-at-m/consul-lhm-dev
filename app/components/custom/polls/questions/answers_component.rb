@@ -65,7 +65,8 @@ class Polls::Questions::AnswersComponent < ApplicationComponent
   end
 
   def available_vote_weight
-    question.max_votes - question.answers.sum(:answer_weight)
+    max_votes = question.max_votes.presence || question.question_answers.count
+    max_votes - question.answers.sum(:answer_weight)
   end
 
   def disable_answer?(question_answer)

@@ -4,7 +4,7 @@ class Polls::QuestionsController < ApplicationController
 
   def answer
     answer = @question.find_or_initialize_user_answer(current_user, params[:answer])
-    answer.answer_weight = params[:answer_weight] if params[:answer_weight].present?
+    answer.answer_weight = params[:answer_weight].presence || 1
     answer.save_and_record_voter_participation
 
     unless providing_an_open_answer?(answer)

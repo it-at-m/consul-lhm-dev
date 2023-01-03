@@ -24,7 +24,7 @@
         <% most_voted_answer_votes = question.most_voted_answer_votes %>
         <h3 id="<%= question.title.parameterize %>">
           <%= question.title %>
-          <% if question.multiple %>
+          <% if VotationType.allowing_multiple_answers.include?(question.votation_type.vote_type) %>
             <small>
               (<%= t("poll_questions.show.question.multiple") %>)
             </small>
