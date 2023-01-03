@@ -93,7 +93,7 @@
 
   <% if ModalNotification.current.present? %>
     <div class="reveal"
-         style="padding:0;border:none;outline:none;"
+         style="padding:0;border:none;outline:none;padding:15px;"
          id="currentModalNotification"
          data-reveal data-modal-notification-id=<%= ModalNotification.current.id %>>
       <%= AdminWYSIWYGSanitizer.new.sanitize(ModalNotification.current.html_content) %>

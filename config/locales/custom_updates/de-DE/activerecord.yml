@@ -14,8 +14,8 @@ de:
         one: Altersbeschränkung
         other: Altersbeschränkungen
       modal_notification:
-        one: Modal Benachrichtigung
-        other: Modale Benachrichtungen
+        one: Popup Benachrichtigung
+        other: Popup Benachrichtungen
       votation_type:
         one: Art der Abstimmung
         other: Arte der Abstimmung
@@ -87,10 +87,10 @@ de:
         max_age: Maximalalter
         order: Reihenfolge
       modal_notification:
-        titel: Titel
+        title: Titel
         active_from: Von
         active_to: Bis
-        html_content: HTML-Code der Benachrichtigung
+        html_content: Inhalt
       votation_type:
         max_votes: Maximale Stimmanzahl
         vote_type: Art der Abstimmung
@@ -99,4 +99,3 @@ de:
         multiple: Mehrere Stimmen
         rating_scale: Bewertungsskala
         multiple_with_weights: Mehrere gewichtete Stimmen
-    

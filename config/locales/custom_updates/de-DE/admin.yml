@@ -113,7 +113,7 @@ de:
         projekt_managers: Projektmanager*innen
         legislation: Textbearbeitung
         age_restrictions: Altersbeschränkungen
-        modal_notification: Modale Benachrichtigungen
+        modal_notification: Popup Benachrichtigung
       polls:
         questions:
           show:
@@ -426,14 +426,14 @@ de:
       modal_notifications:
         index:
           create: Erstellen
-          title: Modale Benachrichtungen
+          title: Popup Benachrichtungen
         new:
-          creating: Modale Benachrichtigung erstellen
+          creating: Popup erstellen
         create:
-          notice: Modale Benachrichtigung wurde erfolgreich erstellt
+          notice: Popup Benachrichtigung wurde erfolgreich erstellt
         edit:
-          editing: Modale Benachrichtigung bearbeiten
+          editing: Popup Benachrichtigung bearbeiten
         update:
-          notice: Modale Benachrichtigung wurde erfolgreich aktualisiert
+          notice: Popup Benachrichtigung wurde erfolgreich aktualisiert
         destroy:
-          notice: Modale Benachrichtigung wurde erfolgreich gelöscht
+          notice: Popup Benachrichtigung wurde erfolgreich gelöscht
