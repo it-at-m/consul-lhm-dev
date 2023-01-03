@@ -39,7 +39,8 @@ class Budgets::Investments::BallotComponent < ApplicationComponent
     end
 
     def cannot_vote_text
-      return nil if voted? && reason == :not_enough_available_votes
+      return nil if voted? &&
+        @investment.permission_problem_keys_allowing_ballot_line_deletion.include?(reason)
 
       if reason == :not_logged_in
         t(path_to_key,
