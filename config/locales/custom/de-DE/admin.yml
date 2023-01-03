@@ -1112,7 +1112,7 @@ de:
         unique_description: Nutzer*innen können je Frage eine Stimme vergeben.
         multiple_description: Nutzer*innen können je Frage ihre Stimmen auf mehrere Antworten gleichmäßig verteilen.
         rating_scale_description: Nutzer*innen können je Frage ihre Stimmen auf mehrere Antworten gleichmäßig verteilen.
-        multiple_with_weights: Nutzer*innen können je Frage ihre Stimmen auf mehrere Antworten gewichtet verteilen.
+        multiple_with_weights_description: Nutzer*innen können je Frage ihre Stimmen auf mehrere Antworten gewichtet verteilen.
     questions:
       index:
         title: "Fragen"
