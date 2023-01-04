@@ -12,7 +12,7 @@
     },
 
     toggleVotationTypeMaxVotesField: function(newVotationTypeName) {
-      var typesAllowingMultipleAnswers = ['multiple', 'multiple_with_weights']
+      var typesAllowingMultipleAnswers = ['multiple', 'multiple_with_weight']
 
       if ( typesAllowingMultipleAnswers.includes(newVotationTypeName) ) {
         $('#votation_max_votes').removeClass('hide')

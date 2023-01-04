@@ -652,8 +652,11 @@ en:
       vote_unanswer: "Take back vote for %{answer}"
       voted: "You have voted %{answer}"
       withdraw_answers_hint: "You can withdraw your vote by clicking on an answer again"
-      question:
-        multiple: "Multiple answers possible"
+    description:
+      unique: You can cast one vote for this question.
+      multiple: You may cast %{maximum} votes evenly among the available answers.
+      multiple_with_weight: You may cast %{maximum} votes weighted across multiple answers.
+      rating_scale: You are allowed one vote per rating scale.
   proposal_notifications:
     new:
       title: "Send notification"

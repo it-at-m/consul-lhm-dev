@@ -9,10 +9,10 @@ module Questionable
         { author: user }
       when "multiple"
         { author: user, answer: title }
+      when "multiple_with_weight"
+        { author: user, answer: title }
       when "rating_scale"
         { author: user }
-      when "multiple_with_weights"
-        { author: user, answer: title }
       end
     end
 end

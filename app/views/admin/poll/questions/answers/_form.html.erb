@@ -9,25 +9,29 @@
 
   <%= f.hidden_field :question_id, value: @answer.question_id || @question.id %>
 
-  <div class="row">
-    <%= f.translatable_fields do |translations_form| %>
+  <%= f.translatable_fields do |translations_form| %>
+    <div class="row">
       <div class="column end">
         <%= translations_form.text_field :title %>
       </div>
-      <% if @question.votation_type.unique? || @question.votation_type.multiple? || @question.votation_type.multiple_with_weights? %>
+    </div>
+    <% if @question.votation_type.unique? || @question.votation_type.multiple? || @question.votation_type.multiple_with_weight? %>
+      <div class="row">
         <div class="column">
           <%= translations_form.text_area :description, maxlength: Poll::Question.description_max_length, class: "html-area" %>
         </div>
-      <% end %>
-      <% if @question.votation_type.unique? || @question.votation_type.multiple? %>
+      </div>
+    <% end %>
+    <% if @question.votation_type.unique? || @question.votation_type.multiple? %>
+      <div class="row">
         <div class="small-6 column">
           <%= f.check_box :open_answer,
             label: t('custom.admin.polls.questions.answers.open_answer_html'),
             disabled: !can_answer_be_open?(@answer.question || @question) && !@answer.open_answer? %>
         </div>
-      <% end %>
+      </div>
     <% end %>
-  </div>
+  <% end %>
 
   <div class="row">
     <div class="small-12 medium-4 large-2 margin-top column">
