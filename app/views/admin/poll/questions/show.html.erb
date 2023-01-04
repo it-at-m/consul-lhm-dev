@@ -69,9 +69,6 @@
       <% if @question.votation_type.unique? || @question.votation_type.multiple? %>
         <th scope="col" class="medium-7"><%= t("admin.questions.show.answers.description") %></th>
       <% end %>
-      <% if @question.votation_type.rating_scale? %>
-        <th scope="col" class="text-center"><%= t("custom.admin.questions.show.answers.rating_scale_weight") %></th>
-      <% end %>
       <th scope="col" class="text-center"><%= t("admin.questions.show.answers.images") %></th>
       <th scope="col" class="text-center"><%= t("admin.questions.show.answers.documents") %></th>
       <th scope="col" class="text-center"><%= t("admin.questions.show.answers.videos") %></th>
@@ -85,9 +82,6 @@
         <td class="align-top"><%= answer.title %></td>
         <% if @question.votation_type.unique? || @question.votation_type.multiple? %>
           <td class="align-top break"><%= wysiwyg(answer.description) %></td>
-        <% end %>
-        <% if @question.votation_type.rating_scale? %>
-          <td class="align-top text-center"><%= answer.rating_scale_weight %></td>
         <% end %>
         <td class="align-top text-center">
           (<%= answer.images.count %>)
