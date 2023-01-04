@@ -86,6 +86,6 @@ class ApplicationController < ActionController::Base
 
     def set_partner_emails
       filename = File.join(Rails.root, "config", "secret_emails.yml")
-      @partner_emails = File.exist?(filename) ? File.readlines(filename).map(&:chomp) : []
+      @partner_emails = File.exist?(filename) ? File.readlines(filename).map { |l| l.chomp.downcase } : []
     end
 end
