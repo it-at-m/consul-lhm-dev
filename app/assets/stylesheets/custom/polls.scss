@@ -139,6 +139,8 @@ td.answers-column  {
     width: 55px;
     min-width: 0;
     margin-right: 0;
+    border: 2px solid #92ba48 !important;
+    background: #f4f8ec !important;
 
     &:after {
       content: '';

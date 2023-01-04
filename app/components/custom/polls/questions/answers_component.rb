@@ -64,12 +64,16 @@ class Polls::Questions::AnswersComponent < ApplicationComponent
       question.max_votes.present?
   end
 
-  def available_vote_weight
-    question.max_votes - question.answers.sum(:answer_weight)
+  def available_vote_weight(question_answer)
+    if user_answer(question_answer).present?
+      question.max_votes - question.answers.sum(:answer_weight) + user_answer(question_answer).answer_weight
+    else
+      question.max_votes - question.answers.sum(:answer_weight)
+    end
   end
 
   def disable_answer?(question_answer)
     (question.multiple? && user_answers.count == question.max_votes) ||
-      (question.votation_type.multiple_with_weight? && available_vote_weight == 0)
+      (question.votation_type.multiple_with_weight? && available_vote_weight(question_answer) == 0)
   end
 end
