@@ -1,7 +1,7 @@
 require_dependency Rails.root.join("app", "models", "poll", "question").to_s
 
 class Poll::Question < ApplicationRecord
-  translates :description, touch: true
+  translates :description, :min_rating_scale_label, :max_rating_scale_label, touch: true
 
   def self.order_questions(ordered_array)
     ordered_array.each_with_index do |question_id, order|

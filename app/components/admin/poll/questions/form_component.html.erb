@@ -44,6 +44,19 @@
     </div>
   </div>
 
+  <div id="rating-scale-labels" class="row <%= hide_rating_scale_labels_class(question.votation_type.vote_type) %>">
+    <%= f.translatable_fields do |translations_form| %>
+      <div class="column medium-6">
+        <%= translations_form.label :min_rating_scale_label, t("activerecord.attributes.poll/question.min_rating_scale_label") %>
+        <%= translations_form.text_field :min_rating_scale_label, label: false %>
+      </div>
+      <div class="column medium-6">
+        <%= translations_form.label :min_rating_scale_label, t("activerecord.attributes.poll/question.max_rating_scale_label") %>
+        <%= translations_form.text_field :max_rating_scale_label, label: false %>
+      </div>
+    <% end %>
+  </div>
+
   <div class="row">
     <div class="small-12 column">
       <%= f.check_box :show_images, label: t('custom.admin.polls.questions.show_images') %>

@@ -158,6 +158,20 @@ td.answers-column  {
   display: flex;
   margin-bottom: 20px;
 
+  .rating-scale-label {
+    color: #3b3b3b;
+    font-size: 16px;
+    line-height: 1;
+
+    &--left {
+      margin-right: 30px;
+    }
+
+    &--right {
+      margin-left: 30px;
+    }
+  }
+
   .poll-answer-group {
     flex-grow: 1;
     flex-basis: 0;

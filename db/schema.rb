@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_02_124607) do
+ActiveRecord::Schema.define(version: 2023_01_04_142104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1358,6 +1358,8 @@ ActiveRecord::Schema.define(version: 2023_01_02_124607) do
     t.string "title"
     t.datetime "hidden_at"
     t.text "description"
+    t.string "min_rating_scale_label"
+    t.string "max_rating_scale_label"
     t.index ["hidden_at"], name: "index_poll_question_translations_on_hidden_at"
     t.index ["locale"], name: "index_poll_question_translations_on_locale"
     t.index ["poll_question_id"], name: "index_poll_question_translations_on_poll_question_id"
