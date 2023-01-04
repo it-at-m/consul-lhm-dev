@@ -3,8 +3,8 @@ class Admin::Poll::QuestionsController < Admin::Poll::BaseController
   include Translatable
 
   load_and_authorize_resource :poll
-  load_resource class: "Poll::Question"
-  authorize_resource except: [:new, :index]
+  load_resource class: "Poll::Question", except: [:order_questions]
+  authorize_resource except: [:new, :index, :order_questions]
 
   def index
     @polls = Poll.not_budget

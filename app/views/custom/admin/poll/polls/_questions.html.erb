@@ -20,7 +20,7 @@
         <tr id="<%= dom_id(question) %>" data-answer-id="<%= question.id %>">
           <td>
             <strong><%= question.title %></strong>
-            <% if question.multiple %>
+            <% if question.allows_multiple_answers? %>
               <small>
                 (<%= t("admin.questions.index.multiple") %>)
               </small>

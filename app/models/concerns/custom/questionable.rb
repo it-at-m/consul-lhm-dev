@@ -1,6 +1,10 @@
 require_dependency Rails.root.join("app", "models", "concerns", "questionable").to_s
 
 module Questionable
+  def max_votes
+    votation_type.max_votes || question_answers.count
+  end
+
   private
 
     def find_by_attributes(user, title)
