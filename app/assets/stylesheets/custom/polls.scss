@@ -129,6 +129,8 @@ td.answers-column  {
     background: #fff;
     border-color: #767676;
     width: 55px;
+    cursor: pointer;
+    padding: 0.2em 1.2em;
 
     &:hover {
       border-color: #3b3b3b;
@@ -136,9 +138,6 @@ td.answers-column  {
   }
 
   .answer-weight-result {
-    width: 55px;
-    min-width: 0;
-    margin-right: 0;
     border: 2px solid #92ba48 !important;
     background: #f4f8ec !important;
 
