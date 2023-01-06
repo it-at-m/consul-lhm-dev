@@ -13,6 +13,12 @@ de:
       age_restriction:
         one: Altersbeschränkung
         other: Altersbeschränkungen
+      modal_notification:
+        one: Popup Benachrichtigung
+        other: Popup Benachrichtungen
+      votation_type:
+        one: Art der Abstimmung
+        other: Arte der Abstimmung
     errors:
       models:
         proposal:
@@ -80,3 +86,19 @@ de:
         min_age: Mindestalter
         max_age: Maximalalter
         order: Reihenfolge
+      modal_notification:
+        title: Titel
+        active_from: Von
+        active_to: Bis
+        html_content: Inhalt
+      votation_type:
+        max_votes: Maximale Stimmanzahl
+        vote_type: Art der Abstimmung
+      votation_type/vote_type:
+        unique: Einzelne Stimme
+        multiple: Mehrere Stimmen
+        multiple_with_weight: Mehrere gewichtete Stimmen
+        rating_scale: Bewertungsskala
+      poll/question:
+        min_rating_scale_label: Linkes Label
+        max_rating_scale_label: Rechtes Label

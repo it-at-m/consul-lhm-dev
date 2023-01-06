@@ -242,17 +242,17 @@ var klaroConfig = {
             // given service, Klaro will then automatically delete all matching
             // cookies.
             cookies: [
-                // you can also explicitly provide a path and a domain for
-                // a given cookie. This is necessary if you have services that
-                // set cookies for a path that is not "/" or a domain that
-                // is not the current domain. If you do not set these values
-                // properly, the cookie can't be deleted by Klaro
-                // (there is no way to access the path or domain of a cookie in JS)
-                // Notice that it is not possible to delete cookies that were set
-                // on a third-party domain! See the note at mdn:
-                // https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie#new-cookie_domain
-                [/^_pk_.*$/],
-                'piwik_ignore'
+               // you can also explicitly provide a path and a domain for
+               // a given cookie. This is necessary if you have services that
+               // set cookies for a path that is not "/" or a domain that
+               // is not the current domain. If you do not set these values
+               // properly, the cookie can't be deleted by Klaro
+               // (there is no way to access the path or domain of a cookie in JS)
+               // Notice that it is not possible to delete cookies that were set
+               // on a third-party domain! See the note at mdn:
+               // https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie#new-cookie_domain
+               [/^_pk_.*$/],
+               'piwik_ignore'
             ],
 
             // An optional callback function that will be called each time

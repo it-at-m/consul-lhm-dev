@@ -101,6 +101,14 @@ de:
           description_max_length: Maximale Zeichenanzahl für die Vorschlagsbeschreibung
           description_max_length_description: Legen Sie fest, wie viele Zeichen für Vorschläge maximal verwendet werden dürfen
 
+      selectable_setting:
+        debates:
+          default_order: Standardsortierung
+          default_order_description: Definieren Sie wie die Inhalte standardmäßig sortiert werden sollen
+        proposals:
+          default_order: Standardsortierung
+          default_order_description: Definieren Sie wie die Inhalte standardmäßig sortiert werden sollen
+
       projekts:
         overview_page: Projektübersichtsseite in Navigation anzeigen
         overview_page_description: Zeigt die Projektübersichtsseite in der Navigation an
@@ -133,6 +141,8 @@ de:
         general:
           show_in_navigation: Projekt in Navigation hervorheben
           show_in_navigation_description: Zeigt das Projekt in der Top-Navigation der Webseite an (nur für Top-Level-Projekte)
+          show_in_overview_page_navigation: Projekt in Dropdown-Navigation anzeigen
+          show_in_overview_page_navigation_description: Zeigt das Projekt in einer Dropdownliste im Navigationsmenü
           show_in_overview_page: Projekt in Übersichtsseite und auf Homepage anzeigen
           show_in_overview_page_description: Zeigt das Projekt in der Projektübersichtsseite und auf der Homepage an
           hide_additional_info_in_projekt_selector: Zusätzliche Projektinformationen im Projekt-Selektor ausblenden

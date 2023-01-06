@@ -1,6 +1,6 @@
 class DeficiencyReport::Officer < ApplicationRecord
   belongs_to :user
-  has_many :deficiency_reports, foreign_key: :deficiency_report_officer_id
+  has_many :deficiency_reports, foreign_key: :deficiency_report_officer_id, dependent: :nullify
 
   def name
     user&.name || I18n.t("shared.author_info.author_deleted")

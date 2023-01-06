@@ -1,0 +1,35 @@
+de:
+  custom:
+    notification_service_mailers:
+      overdue_deficiency_reports:
+        subject: Mangel wurde noch nicht bearbeitet
+        hi: Liebe/r Sachbearbeiter*in,
+        p1_s: Ihnen wurde vor zwei Woche ein Mangel zur Bearbeitung zugewiesen, welcher noch nicht bearbeitet wurde.
+        p1_p: Ihnen wurde vor zwei Wochen mehrere Mängel zur Bearbeitung zugewiesen, die noch nicht bearbeitet wurden.
+        signature_html: Viele Grüße</br>Consul
+      not_assigned_deficiency_reports:
+        subject: Mangelzuweisen noch ausstehend
+        hi: Lieber Admin,
+        p1_s: es liegt ein Mangel vor, der noch nicht zugewiesen wurde.
+        p1_p: es liegen mehrere Mängel vor, die noch nicht zugewiesen wurden.
+        signature_html: Viele Grüße</br>Consul
+      new_proposal:
+        subject: Neuer Vorschlag auf Consul
+        hi: Hallo %{username},
+        p1: es ist ein neuer Vorschlag auf Consul eingegangen.
+        signature_html: PViele Grüße</br>Consul
+      new_debate:
+        subject: Neue Diskussionsbeitrag auf Consul
+        hi: Hallo %{username},
+        p1: es ist ein neuer Diskussionsbeitrag auf Consul erstellt worden.
+        signature_html: PViele Grüße</br>Consul
+      new_comment:
+        subject: Neuer Kommentar auf Consul
+        hi: Hallo %{username},
+        p1: es ist ein neuer Kommentar auf Consul veröffentlicht worden.
+        signature_html: Viele Grüße</br>Consul
+      new_deficiency_report:
+        subject: Neue Mangelmeldung %{identifier}
+        hi: Hallo %{username},
+        p1: es wurde ein neuer Mangel gemeldet.
+        signature_html: Viele Grüße</br>Consul

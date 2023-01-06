@@ -62,6 +62,30 @@
               <div>
                 <%= f.check_box :email_on_direct_message, {label: t('custom.account.settings.email_on_direct_message')} %>
               </div>
+
+              <% if @account&.administrator? || @account&.moderator? || @account&.projekt_manager? %>
+                <h2><%= t("custom.account.show.admin_notifications") %></h2>
+
+                <div>
+                  <%= f.check_box :adm_email_on_new_comment,
+                    {label: t('custom.account.settings.adm_email_on_new_comment')} %>
+                </div>
+
+                <div>
+                  <%= f.check_box :adm_email_on_new_proposal,
+                    {label: t('custom.account.settings.adm_email_on_new_proposal')} %>
+                </div>
+
+                <div>
+                  <%= f.check_box :adm_email_on_new_debate,
+                    {label: t('custom.account.settings.adm_email_on_new_debate')} %>
+                </div>
+
+                <div>
+                  <%= f.check_box :adm_email_on_new_deficiency_report,
+                    {label: t('custom.account.settings.adm_email_on_new_deficiency_report')} %>
+                </div>
+              <% end %>
             <% end %>
 
             <% if @account.official_level == 1 %>

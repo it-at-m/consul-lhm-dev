@@ -1,0 +1,37 @@
+<%= render "shared/globalize_locales", resource: @modal_notification %>
+
+<%= translatable_form_for [:admin, @modal_notification] do |f| %>
+
+  <%= render "shared/errors", resource: @modal_notification %>
+
+  <div class="row">
+    <div class="small-12 medium-6 column">
+      <%= f.date_field :active_from %>
+    </div>
+    <div class="small-12 medium-6 column end">
+      <%= f.date_field :active_to %>
+    </div>
+  </div>
+
+  <div class="row">
+    <%= f.translatable_fields do |translations_form| %>
+      <div class="small-12 column">
+        <%= translations_form.label t("activerecord.attributes.modal_notification.title") %>
+        <%= translations_form.text_field :title, label: false %>
+      </div>
+
+      <div class="small-12 column">
+        <%= translations_form.label t("activerecord.attributes.modal_notification.html_content") %>
+        <%= translations_form.text_area :html_content,
+          class: "html-area #{ck_editor_class(current_user)}",
+          label: false  %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <div class="actions small-12 medium-6 column">
+      <%= f.submit class: "button expanded" %>
+    </div>
+  </div>
+<% end %>

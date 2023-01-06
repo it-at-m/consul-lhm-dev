@@ -178,7 +178,7 @@ class PagesController < ApplicationController
   def set_debate_phase_footer_tab_variables(projekt=nil)
     @valid_orders = Debate.debates_orders(current_user)
     @valid_orders.delete('relevance')
-    @current_order = @valid_orders.include?(params[:order]) ? params[:order] : @valid_orders.first
+    @current_order = @valid_orders.include?(params[:order]) ? params[:order] : Setting["selectable_setting.debates.default_order"]
 
     @current_projekt = projekt || SiteCustomization::Page.find_by(slug: params[:id]).projekt
     @current_tab_phase = @current_projekt.debate_phase
@@ -213,7 +213,7 @@ class PagesController < ApplicationController
     @valid_orders = Proposal.proposals_orders(current_user)
     @valid_orders.delete("archival_date")
     @valid_orders.delete('relevance')
-    @current_order = @valid_orders.include?(params[:order]) ? params[:order] : @valid_orders.first
+    @current_order = @valid_orders.include?(params[:order]) ? params[:order] : Setting["selectable_setting.proposals.default_order"]
 
     @current_projekt = projekt || SiteCustomization::Page.find_by(slug: params[:id]).projekt
     @current_tab_phase = @current_projekt.proposal_phase

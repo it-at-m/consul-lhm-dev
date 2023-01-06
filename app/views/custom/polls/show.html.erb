@@ -31,9 +31,7 @@
 
         <%= render "callout" %>
 
-        <% @questions.each do |question| %>
-          <%= render "polls/questions/question", question: question, token: @token %>
-        <% end %>
+        <%= render Polls::Questions::QuestionComponent.with_collection(@questions) %>
 
         <% if can?(:answer, @poll) %>
           <div id='confirm-poll-participation-outer-wrapper'>

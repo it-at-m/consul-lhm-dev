@@ -15,6 +15,17 @@ class CommentsController < ApplicationController
     end
   end
 
+  def create
+    if @comment.save
+      CommentNotifier.new(comment: @comment).process
+      add_notification @comment
+      EvaluationCommentNotifier.new(comment: @comment).process if send_evaluation_notification?
+      NotificationServices::NewCommentNotifier.new(@comment.id).call
+    else
+      render :new
+    end
+  end
+
   def vote
     @comment.vote_by(voter: current_user, vote: params[:value])
     @commentable = @comment.commentable

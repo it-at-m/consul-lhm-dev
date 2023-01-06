@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_16_123059) do
+ActiveRecord::Schema.define(version: 2023_01_04_142104) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -713,6 +713,7 @@ ActiveRecord::Schema.define(version: 2022_12_16_123059) do
     t.tsvector "tsv"
     t.bigint "hot_score", default: 0
     t.string "on_behalf_of"
+    t.datetime "assigned_at"
     t.index ["cached_anonymous_votes_total"], name: "index_deficiency_reports_on_cached_anonymous_votes_total"
     t.index ["cached_votes_down"], name: "index_deficiency_reports_on_cached_votes_down"
     t.index ["cached_votes_score"], name: "index_deficiency_reports_on_cached_votes_score"
@@ -1188,6 +1189,24 @@ ActiveRecord::Schema.define(version: 2022_12_16_123059) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "modal_notification_translations", force: :cascade do |t|
+    t.bigint "modal_notification_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.text "html_content"
+    t.index ["locale"], name: "index_modal_notification_translations_on_locale"
+    t.index ["modal_notification_id"], name: "index_modal_notification_translations_on_modal_notification_id"
+  end
+
+  create_table "modal_notifications", force: :cascade do |t|
+    t.date "active_from"
+    t.date "active_to"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "moderators", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.index ["user_id"], name: "index_moderators_on_user_id"
@@ -1230,6 +1249,7 @@ ActiveRecord::Schema.define(version: 2022_12_16_123059) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "open_answer_text"
+    t.integer "answer_weight", default: 1
     t.index ["author_id"], name: "index_poll_answers_on_author_id"
     t.index ["question_id", "answer"], name: "index_poll_answers_on_question_id_and_answer"
     t.index ["question_id"], name: "index_poll_answers_on_question_id"
@@ -1338,6 +1358,8 @@ ActiveRecord::Schema.define(version: 2022_12_16_123059) do
     t.string "title"
     t.datetime "hidden_at"
     t.text "description"
+    t.string "min_rating_scale_label"
+    t.string "max_rating_scale_label"
     t.index ["hidden_at"], name: "index_poll_question_translations_on_hidden_at"
     t.index ["locale"], name: "index_poll_question_translations_on_locale"
     t.index ["poll_question_id"], name: "index_poll_question_translations_on_poll_question_id"
@@ -2093,6 +2115,10 @@ ActiveRecord::Schema.define(version: 2022_12_16_123059) do
     t.string "bam_unique_stamp"
     t.bigint "bam_street_id"
     t.string "keycloak_link"
+    t.boolean "adm_email_on_new_comment", default: false
+    t.boolean "adm_email_on_new_proposal", default: false
+    t.boolean "adm_email_on_new_debate", default: false
+    t.boolean "adm_email_on_new_deficiency_report", default: false
     t.index ["bam_street_id"], name: "index_users_on_bam_street_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["date_of_birth"], name: "index_users_on_date_of_birth"
@@ -2160,6 +2186,15 @@ ActiveRecord::Schema.define(version: 2022_12_16_123059) do
     t.datetime "started_at"
     t.index ["started_at"], name: "index_visits_on_started_at"
     t.index ["user_id"], name: "index_visits_on_user_id"
+  end
+
+  create_table "votation_types", force: :cascade do |t|
+    t.integer "questionable_id"
+    t.string "questionable_type"
+    t.integer "vote_type"
+    t.integer "max_votes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "votes", id: :serial, force: :cascade do |t|

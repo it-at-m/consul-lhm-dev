@@ -13,17 +13,26 @@ class Proposal < ApplicationRecord
   validates :projekt_id, presence: true
   validate :description_sanitized
 
-  scope :with_current_projekt,  -> { joins(:projekt).merge(Projekt.current) }
-  scope :by_author, -> (user_id) {
+  scope :with_current_projekt, -> { joins(:projekt).merge(Projekt.current) }
+  scope :by_author, ->(user_id) {
     return if user_id.nil?
 
     where(author_id: user_id)
   }
 
+  scope :sort_by_alphabet, -> { with_translations(I18n.locale).reorder("LOWER(proposal_translations.title) ASC") }
+  scope :sort_by_votes_up, -> { reorder(cached_votes_up: :desc) }
+
   scope :seen,                     -> { where.not(ignored_flag_at: nil) }
   scope :unseen,                   -> { where(ignored_flag_at: nil) }
 
   alias_attribute :projekt_phase, :proposal_phase
+
+  def self.proposals_orders(user = nil)
+    orders = %w[hot_score confidence_score created_at archival_date alphabet votes_up random]
+    orders << "recommendations" if Setting["feature.user.recommendations_on_proposals"] && user&.recommended_proposals
+    orders
+  end
 
   def self.scoped_projekt_ids_for_index
     Projekt.top_level
@@ -73,6 +82,12 @@ class Proposal < ApplicationRecord
     return Proposal.votes_needed_for_success unless projekt.present?
     return Proposal.votes_needed_for_success if ProjektSetting.find_by(projekt: projekt, key: "projekt_feature.proposal_options.votes_for_proposal_success").value.to_i == 0
     ProjektSetting.find_by(projekt: projekt, key: "projekt_feature.proposal_options.votes_for_proposal_success").value.to_i
+  end
+
+  def publish
+    update!(published_at: Time.current)
+    NotificationServices::NewProposalNotifier.new(id).call
+    send_new_actions_notification_on_published
   end
 
   protected

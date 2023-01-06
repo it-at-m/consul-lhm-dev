@@ -1,5 +1,5 @@
 <header>
-  <%= back_link_to session[:ballot_referer] %>
+  <%= back_link_to budget_phase_link %>
 
   <h1 class="text-center"><%= t("budgets.ballots.show.title") %></h1>
 
@@ -23,7 +23,7 @@
           <h3>
             <%= group.name %> - <%= heading.name %>
           </h3>
-          <%= link_to sanitize(ballot.amount_available_info(heading)), group_path(group) %>
+          <%= link_to sanitize(ballot.amount_available_info(heading)), budget_phase_link %>
         </div>
         <% if ballot.has_lines_in_group?(group) %>
           <h4 class="amount-spent text-right">
@@ -51,7 +51,7 @@
           <h3>
             <%= group.name %>
           </h3>
-          <%= link_to t("budgets.ballots.show.no_balloted_group_yet"), group_path(group) %>
+          <%= link_to t("budgets.ballots.show.no_balloted_group_yet"), budget_phase_link %>
         </div>
       </div>
     </div>

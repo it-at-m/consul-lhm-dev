@@ -9,8 +9,13 @@ de:
         newsletter: E-Mail-Benachrichtigung erhalten, bei wichtigen System-Infos
         public_activity: Meine Aktivität veröffentlichen
         public_interests: Vorschläge, denen ich folge, veröffentlichen
+        adm_email_on_new_comment: E-Mail-Benachrichtigung erhalten nach jedem neuen Kommentar
+        adm_email_on_new_proposal: E-Mail-Benachrichtigung erhalten nach jedem neuen Vorschlag
+        adm_email_on_new_debate: E-Mail-Benachrichtigung erhalten nach jedem neuen Diskussionsbeitrag
+        adm_email_on_new_deficiency_report: E-Mail-Benachrichtigung erhalten nach jeder neuen Mangelmeldung
       show:
         user_permission_votes: An Abstimmungen teilnehmen
+        admin_notifications: Admin Benachrichtigungen
     comments:
       reply_form:
         leave_comment: Schreiben Sie eine Antwort
@@ -70,6 +75,7 @@ de:
         impressum: Impressum
         netiquette: Netiquette
         statistic_cookies_settings: Cookie Einstellungen
+        contact_us: Kontaktieren Sie uns
       header:
         account_link: Konto
         admin_link: Administration
@@ -88,6 +94,8 @@ de:
     pages:
       impressum:
         title: Impressum
+      contact_us:
+        title: Kontaktieren Sie uns
       social_share:
         share: Teilen
     sdg:

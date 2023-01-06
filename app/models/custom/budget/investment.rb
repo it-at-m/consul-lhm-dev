@@ -41,5 +41,9 @@ class Budget
     def comments_allowed?(user)
       permission_problem(user).nil?
     end
+
+    def permission_problem_keys_allowing_ballot_line_deletion
+      [:not_enough_available_votes, :not_enough_money]
+    end
   end
 end

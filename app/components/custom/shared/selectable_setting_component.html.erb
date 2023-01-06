@@ -1,0 +1,24 @@
+<table>
+  <tbody>
+    <tr>
+      <td class="small-6">
+        <strong><%= t("custom.settings.#{@selectable_setting.key}") %></strong>
+        <br>
+        <span class="small">
+          <%= t("custom.settings.#{@selectable_setting.key}_description", default: t("admin.settings.no_description")) %>
+        </span>
+      </td>
+      <td class="small-6">
+        <%= form_for([:admin, @selectable_setting]) do |f| %>
+          <%= f.hidden_field :tab, value: @tab if @tab.present? %>
+          <div class="small-12 medium-6 large-8 column">
+            <%= f.select :value, @options, label: false %>
+          </div>
+          <div class="small-12 medium-6 large-4 column">
+            <%= f.submit(t("admin.settings.index.update_setting"), class: "button hollow expanded") %>
+          </div>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>  
+</table>    

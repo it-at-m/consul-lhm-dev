@@ -1,0 +1,26 @@
+<div class="small-12 medium-6 column">
+  <%= form.enum_select :vote_type, {}, class: "votation-type-vote-type js-update-votation-type-hint" %>
+</div>
+
+<div class="small-12 column">
+  <div class="callout primary">
+    <span class="votation-type-hint <%= hide_hint_class('unique') %>" id="votation-type-unique">
+      <%= t("admin.polls.votation_type.unique_description") %>
+    </span>
+    <span class="votation-type-hint <%= hide_hint_class('multiple') %>" id="votation-type-multiple">
+      <%= t("admin.polls.votation_type.multiple_description") %>
+    </span>
+    <span class="votation-type-hint <%= hide_hint_class('rating_scale') %>" id="votation-type-rating_scale">
+      <%= t("admin.polls.votation_type.rating_scale_description") %>
+    </span>
+    <span class="votation-type-hint <%= hide_hint_class('multiple_with_weight') %>" id="votation-type-multiple_with_weight">
+      <%= t("admin.polls.votation_type.multiple_with_weight_description") %>
+    </span>
+  </div>
+</div>
+
+<div id="votation_max_votes" class="small-12 medium-6 column end <%= hide_max_votes_input_class(@votation_type.vote_type) %>">
+  <div class="max-votes">
+    <%= form.number_field :max_votes, min: 2, max: 999, class: "votation-type-max-votes" %>
+  </div>
+</div>

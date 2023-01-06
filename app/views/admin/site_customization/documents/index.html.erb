@@ -23,7 +23,11 @@
           <td><%= document.title %></td>
           <td><%= document.attachment.content_type %></td>
           <td><%= number_to_human_size(document.attachment.byte_size) %></td>
-          <td><%= link_to document.title, document.attachment, target: :blank %></td>
+          <td>
+            <%= link_to document.title, document.attachment, target: :blank %>
+            <br>
+            <%= link_to "Download-Link kopieren", "#", onclick: "event.preventDefault();navigator.clipboard.writeText('#{rails_blob_url(document.attachment)}');"  %>
+          </td>
           <td>
             <div class="small-12 medium-6 column">
               <%= render Admin::TableActionsComponent.new(

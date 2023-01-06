@@ -105,6 +105,12 @@ de:
         relevance_title: Relevanz
         recommendations: Empfehlungen
         recommendations_title: Empfehlungen
+        alphabet: Alphabetisch
+        alphabet_title: Alphabetisch
+        random: Zufällig
+        random_title: Zufällig
+        votes_total: Am meisten gewählt
+        votes_total_title: Am meisten gewählt
       recommendations:
         without_results: Es gibt keine Diskussionen, die Ihren Interessen entsprechen
         without_interests: Folgen Sie Vorschlägen, sodass wir Ihnen Empfehlungen geben können
@@ -360,6 +366,12 @@ de:
         archival_date_title: Archiviert
         recommendations: Empfehlungen
         recommendations_title: Empfehlungen
+        alphabet: Alphabetisch
+        alphabet_title: Alphabetisch
+        random: Zufällig
+        random_title: Zufällig
+        votes_up: Am meisten gewählt
+        votes_up_title: Am meisten gewählt
       recommendations:
         without_results: Es gibt keine Vorschläge, die Ihren Interessen entsprechen
         without_interests: Folgen Sie Vorschlägen, sodass wir Ihnen Empfehlungen geben können
@@ -669,6 +681,11 @@ de:
     show:
       vote_answer: "Für %{answer} abstimmen"
       voted: "Sie haben für %{answer} abgestimmt"
+    description:
+      unique: Sie dürfen bei dieser Frage eine Stimme vergeben.
+      multiple: Sie dürfen %{maximum} Stimmen gleichmäßig auf die gegebenen Antworten verteilen.
+      multiple_with_weight: Sie dürfen %{maximum} Stimmen gewichtet auf mehrere Antworten verteilen.
+      rating_scale: Sie dürfen eine Stimme pro Bewertungsskala abgeben.
   proposal_notifications:
     new:
       title: "Nachricht senden"
@@ -876,6 +893,8 @@ de:
       different_heading_assigned:
         one: "Sie können nur Investitionsprojekte in %{count} Bereich unterstützen. Sie haben bereits Investitionen in %{supported_headings} unterstützt."
         other: "Sie können nur Investitionsprojekte in %{count} Bereichen unterstützen. Sie haben bereits Investitionen in %{supported_headings} unterstützt."
+      only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
+      only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}"
   welcome:
     feed:
       most_active:

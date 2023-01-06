@@ -1107,6 +1107,12 @@ de:
         alert: "Diese Aktion entfernt die Abstimmung und alle damit verbundenen Fragen."
         success_notice: "Abstimmung erfolgreich gelöscht"
         unable_notice: "Sie können keine Abstimmung löschen, für die schon abgestimmt wurde"
+      votation_type:
+        title: Art der Abstimmung
+        unique_description: Nutzer*innen können je Frage eine Stimme vergeben.
+        multiple_description:     Nutzer*innen können je Frage ihre Stimmen auf mehrere Antworten gleichmäßig verteilen.
+        multiple_with_weight_description: Nutzer*innen können je Frage ihre Stimmen auf mehrere Antworten gewichtet verteilen.
+        rating_scale_description: Nutzer*innen können eine Stimme pro Bewertungsskala abgeben.
     questions:
       index:
         title: "Fragen"

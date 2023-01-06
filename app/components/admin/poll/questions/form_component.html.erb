@@ -1,0 +1,71 @@
+<%= render "shared/globalize_locales", resource: question %>
+
+<%= translatable_form_for(question, url: url) do |f| %>
+
+  <%= render "shared/errors", resource: question %>
+
+  <%= f.hidden_field :proposal_id %>
+
+  <div class="row">
+    <div class="small-12">
+      <% if question.poll.present? %>
+        <%= f.hidden_field :poll_id, value: question.poll.id %>
+      <% else %>
+        <div class="small-12 medium-6 large-4 column">
+          <%= f.select :poll_id,
+                        options_for_select(select_options),
+                        prompt: t("admin.questions.index.select_poll"),
+                        hint: t("admin.questions.form.poll_help") %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <%= f.translatable_fields do |translations_form| %>
+    <div class="row">
+      <div class="column">
+        <%= translations_form.text_field :title %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <%= translations_form.text_area :description,
+          class: "html-area #{ck_editor_class(current_user)}" %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="small-12">
+      <%= f.fields_for :votation_type do |votation_f| %>
+        <%= render Admin::VotationTypes::FieldsComponent.new(form: votation_f) %>
+      <% end %>
+    </div>
+  </div>
+
+  <div id="rating-scale-labels" class="row <%= hide_rating_scale_labels_class(question.votation_type.vote_type) %>">
+    <%= f.translatable_fields do |translations_form| %>
+      <div class="column medium-6">
+        <%= translations_form.label :min_rating_scale_label, t("activerecord.attributes.poll/question.min_rating_scale_label") %>
+        <%= translations_form.text_field :min_rating_scale_label, label: false %>
+      </div>
+      <div class="column medium-6">
+        <%= translations_form.label :min_rating_scale_label, t("activerecord.attributes.poll/question.max_rating_scale_label") %>
+        <%= translations_form.text_field :max_rating_scale_label, label: false %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <div class="small-12 column">
+      <%= f.check_box :show_images, label: t('custom.admin.polls.questions.show_images') %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-12 medium-4 large-2 margin-top column">
+      <%= f.submit(class: "button success expanded", value: t("shared.save")) %>
+    </div>
+  </div>
+<% end %>

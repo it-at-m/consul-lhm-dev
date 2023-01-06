@@ -41,6 +41,16 @@ module Budgets
     respond_to :html, :js
 
     def index
+      # custom redirect
+      if @budget.projekt.present?
+        redirect_to page_path(@budget.projekt.page.slug,
+                              selected_phase_id: @budget.projekt_phase,
+                              anchor: "filter-subnav")
+      else
+        redirect_to root_path
+      end
+
+
       @investments = investments.page(params[:page]).per(PER_PAGE).for_render
 
       @investment_ids = @investments.ids
@@ -169,12 +179,13 @@ module Budgets
         @budget.investments.apply_filters_and_search(@budget, params, @current_filter)
       end
 
-      def investments
-        if @current_order == "random"
-          investments_with_filters.sort_by_random(session[:random_seed])
-        else
-          investments_with_filters.send("sort_by_#{@current_order}")
-        end
+      def investments #custom
+        # if @current_order == "random"
+        #   investments_with_filters.sort_by_random(session[:random_seed])
+        # else
+        #   investments_with_filters.send("sort_by_#{@current_order}")
+        # end
+        investments_with_filters
       end
 
       def set_default_investment_filter

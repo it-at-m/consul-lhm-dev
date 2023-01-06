@@ -2,6 +2,15 @@ require_dependency Rails.root.join("app", "controllers", "admin", "poll", "quest
 
 class Admin::Poll::Questions::AnswersController < Admin::Poll::BaseController
 
+  def new
+    @answer = ::Poll::Question::Answer.new
+    @question = ::Poll::Question.find_by(id: params[:question_id])
+  end
+
+  def edit
+    @question = @answer.question
+  end
+
   def destroy
     load_answer
     if @answer.question.poll.safe_to_delete_answer?

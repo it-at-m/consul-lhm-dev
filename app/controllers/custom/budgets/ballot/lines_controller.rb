@@ -10,7 +10,7 @@ module Budgets
         load_heading
         load_map
 
-        if permission_problem.present? && permission_problem != :not_enough_available_votes
+        if permission_problem.present?
           return
         end
 
@@ -22,7 +22,8 @@ module Budgets
         load_heading
         load_map
 
-        if permission_problem.present? && permission_problem != :not_enough_available_votes
+        if permission_problem.present? &&
+            !@investment.permission_problem_keys_allowing_ballot_line_deletion.include?(permission_problem)
           return
         end
 

@@ -17,7 +17,7 @@
 #   runner "AnotherModel.prune_old_records"
 # end
 
-env 'MAILTO', ''
+env "MAILTO", ""
 
 # Learn more: http://github.com/javan/whenever
 
@@ -54,4 +54,9 @@ end
 
 every 1.day, at: "2:30 am", roles: [:cron] do
   rake "projekt_phases:check_currentness_change"
+end
+
+every 1.day, at: "6:00 am", roles: [:cron] do
+  rake "reminders:overdue_deficiency_reports"
+  rake "reminders:not_assigned_deficiency_reports"
 end

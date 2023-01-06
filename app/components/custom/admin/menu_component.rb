@@ -98,4 +98,17 @@ class Admin::MenuComponent < ApplicationComponent
         controller_name == "age_restrictions"
       ]
     end
+
+    def customization?
+      ["pages", "banners", "modal_notifications", "information_texts", "documents"].include?(controller_name) ||
+        homepage? || pages?
+    end
+
+    def modal_notifications_link
+      [
+        t("custom.admin.menu.modal_notification"),
+        admin_modal_notifications_path,
+        controller_name == "modal_notifications"
+      ]
+    end
 end

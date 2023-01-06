@@ -1,0 +1,35 @@
+en:
+  custom:
+    notification_service_mailers:
+      overdue_deficiency_reports:
+        subject: Deficiency report without an answer
+        hi: Dear Officer,
+        p1_s: Two weeks ago you were assigned a deficiency report, which was not processed yet.
+        p1_p: Two weeks ago you were assigned multiple deficiency reports, which were not processed yet.
+        signature_html: Best regards</br>Consul
+      not_assigned_deficiency_reports:
+        subject: Deficiency report not assigned yet
+        hi: Dear Admin,
+        p1_s: There is an outstanding deficiency report, which was not assigned yet.
+        p1_p: There are multiple outstanding deficiency reports, which were not assigned yet.
+        signature_html: Best regards</br>Consul
+      new_proposal:
+        subject: New Proposal added to Consul
+        hi: Hi %{username},
+        p1: New proposal has just been added to Consul.
+        signature_html: Best regards</br>Consul
+      new_debate:
+        subject: New Debate added to Consul
+        hi: Hi %{username},
+        p1: New Debate has just been added to Consul.
+        signature_html: Best regards</br>Consul
+      new_comment:
+        subject: New Comment added to Consul
+        hi: Hi %{username},
+        p1: New comment has just been added to Consul.
+        signature_html: Best regards</br>Consul
+      new_deficiency_report:
+        subject: New Deficiency Report %{identifier}
+        hi: Hi %{username},
+        p1: New deficiency report has just been added to Consul
+        signature_html: Best regards</br>Consul

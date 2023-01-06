@@ -14,17 +14,26 @@ class Debate
 
   validates :projekt_id, presence: true
 
-  scope :with_current_projekt,  -> { joins(:projekt).merge(Projekt.current) }
-  scope :by_author, -> (user_id) {
+  scope :with_current_projekt, -> { joins(:projekt).merge(Projekt.current) }
+  scope :by_author, ->(user_id) {
     return if user_id.nil?
 
     where(author_id: user_id)
   }
 
+  scope :sort_by_alphabet, -> { with_translations(I18n.locale).reorder("LOWER(debate_translations.title) ASC") }
+  scope :sort_by_votes_total, -> { reorder(cached_votes_total: :desc) }
+
   scope :seen, -> { where.not(ignored_flag_at: nil) }
   scope :unseen, -> { where(ignored_flag_at: nil) }
 
   alias_attribute :projekt_phase, :debate_phase
+
+  def self.debates_orders(user = nil)
+    orders = %w[hot_score confidence_score created_at alphabet votes_total random]
+    orders << "recommendations" if Setting["feature.user.recommendations_on_debates"] && user&.recommended_debates
+    orders
+  end
 
   def self.scoped_projekt_ids_for_index
     Projekt.top_level

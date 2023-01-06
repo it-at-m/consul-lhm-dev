@@ -1,5 +1,4 @@
 class DeficiencyReport < ApplicationRecord
-
   include Taggable
   include Mappable
   include Imageable
@@ -103,5 +102,9 @@ class DeficiencyReport < ApplicationRecord
 
   def calculate_hot_score
     self.hot_score = ScoreCalculator.hot_score(self)
+  end
+
+  def comments_allowed?(user)
+    true
   end
 end
