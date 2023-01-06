@@ -30,6 +30,9 @@
         <li class="inline-block"><%= link_to t("layouts.footer.conditions"), page_path("conditions") %>&nbsp;|</li>
         <li class="inline-block"><%= link_to t("layouts.footer.accessibility"), page_path("accessibility") %>&nbsp;|</li>
         <li class="inline-block"><%= link_to t("custom.layouts.footer.impressum"), page_path("impressum") %>&nbsp;|</li>
+        <% if SiteCustomization::Page.find_by(slug: "netiquette", status: "published") %>
+          <li class="inline-block"><%= link_to t("custom.layouts.footer.netiquette"), page_path("netiquette") %>&nbsp;|</li>
+        <% end %>
         <% if SiteCustomization::Page.find_by(slug: "contact_us", status: "published") %>
           <li class="inline-block"><%= link_to t("custom.layouts.footer.contact_us"), page_path("contact_us") %>&nbsp;|</li>
         <% end %>
@@ -97,9 +100,9 @@
          id="currentModalNotification"
          data-reveal data-modal-notification-id=<%= ModalNotification.current.id %>>
       <%= AdminWYSIWYGSanitizer.new.sanitize(ModalNotification.current.html_content) %>
-			<button class="close-button" data-close aria-label="Close modal" type="button">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
+      <button class="close-button" data-close aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
   <% end %>
 </footer>
