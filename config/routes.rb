@@ -98,4 +98,7 @@ Rails.application.routes.draw do
 
   # unvote answer
   delete "/questions/:question_id/answers/:id",            to: "polls/answers#destroy",              as: :question_answer
+
+  # poll results scoped to question_answer
+  get    "/polls/:poll_id/question_answers/:id/results",   to: "polls/question_answers#results",     as: :results_poll_question_answer
 end

@@ -76,6 +76,9 @@
                     <%= answer.title %>
                   <% end %>
                 </td>
+                <td style='width:100px' class='<%= answer.total_votes == most_voted_answer_votes ? "win" : "" %>'>
+                  <%= link_to "Scoped results", results_poll_question_answer_path(answer.question.poll, answer) %>
+                </td>
               </tr>
             <% end %>
           </tbody>
