@@ -143,14 +143,16 @@ class ProjektsController < ApplicationController
   def set_debates_footer_tab_variables(projekt=nil)
     @current_projekt = @overview_page_special_projekt
     @current_tab_phase = @current_projekt.debate_phase
+    @selected_parent_projekt = @current_projekt
     params[:current_tab_path] = 'debate_phase_footer_tab'
 
-    if ProjektSetting.find_by(projekt: @current_projekt, key: 'projekt_feature.general.set_default_sorting_to_newest').value.present? &&
-        @valid_orders.include?('created_at')
-      @current_order = 'created_at'
-    end
-
-    @selected_parent_projekt = @current_projekt
+    @current_order = if @valid_orders.include?(params[:order])
+                       params[:order]
+                     elsif helpers.projekt_feature?(@current_projekt, 'general.set_default_sorting_to_newest')
+                       'created_at'
+                     else
+                       Setting["selectable_setting.debates.default_order"]
+                     end
 
     set_resources(Debate)
 
