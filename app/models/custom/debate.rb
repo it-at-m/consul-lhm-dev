@@ -30,7 +30,7 @@ class Debate
   alias_attribute :projekt_phase, :debate_phase
 
   def self.debates_orders(user = nil)
-    orders = %w[hot_score confidence_score created_at alphabet votes_total random]
+    orders = %w[hot_score created_at alphabet votes_total random]
     orders << "recommendations" if Setting["feature.user.recommendations_on_debates"] && user&.recommended_debates
     orders
   end

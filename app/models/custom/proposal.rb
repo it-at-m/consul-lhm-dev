@@ -29,7 +29,7 @@ class Proposal < ApplicationRecord
   alias_attribute :projekt_phase, :proposal_phase
 
   def self.proposals_orders(user = nil)
-    orders = %w[hot_score confidence_score created_at archival_date alphabet votes_up random]
+    orders = %w[hot_score created_at alphabet votes_up random]
     orders << "recommendations" if Setting["feature.user.recommendations_on_proposals"] && user&.recommended_proposals
     orders
   end
