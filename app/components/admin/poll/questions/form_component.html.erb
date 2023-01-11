@@ -21,6 +21,14 @@
     </div>
   </div>
 
+  <div class="row">
+    <div class="small-12">
+      <%= f.fields_for :votation_type do |votation_f| %>
+        <%= render Admin::VotationTypes::FieldsComponent.new(form: votation_f) %>
+      <% end %>
+    </div>
+  </div>
+
   <%= f.translatable_fields do |translations_form| %>
     <div class="row">
       <div class="column">
@@ -34,18 +42,8 @@
           class: "html-area #{ck_editor_class(current_user)}" %>
       </div>
     </div>
-  <% end %>
 
-  <div class="row">
-    <div class="small-12">
-      <%= f.fields_for :votation_type do |votation_f| %>
-        <%= render Admin::VotationTypes::FieldsComponent.new(form: votation_f) %>
-      <% end %>
-    </div>
-  </div>
-
-  <div id="rating-scale-labels" class="row <%= hide_rating_scale_labels_class(question.votation_type.vote_type) %>">
-    <%= f.translatable_fields do |translations_form| %>
+    <div class="row rating-scale-labels <%= hide_rating_scale_labels_class(question.votation_type.vote_type) %>">
       <div class="column medium-6">
         <%= translations_form.label :min_rating_scale_label, t("activerecord.attributes.poll/question.min_rating_scale_label") %>
         <%= translations_form.text_field :min_rating_scale_label, label: false %>
@@ -54,8 +52,8 @@
         <%= translations_form.label :min_rating_scale_label, t("activerecord.attributes.poll/question.max_rating_scale_label") %>
         <%= translations_form.text_field :max_rating_scale_label, label: false %>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 
   <div class="row">
     <div class="small-12 column">
