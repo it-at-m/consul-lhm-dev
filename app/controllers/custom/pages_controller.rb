@@ -176,19 +176,22 @@ class PagesController < ApplicationController
   end
 
   def set_debate_phase_footer_tab_variables(projekt=nil)
-    @valid_orders = Debate.debates_orders(current_user)
-    @valid_orders.delete('relevance')
-    @current_order = @valid_orders.include?(params[:order]) ? params[:order] : Setting["selectable_setting.debates.default_order"]
-
     @current_projekt = projekt || SiteCustomization::Page.find_by(slug: params[:id]).projekt
     @current_tab_phase = @current_projekt.debate_phase
+
+    @valid_orders = Debate.debates_orders(current_user)
+    @valid_orders.delete('relevance')
+
+    @current_order = if @valid_orders.include?(params[:order])
+                       params[:order]
+                     elsif helpers.projekt_feature?(@current_projekt, 'general.set_default_sorting_to_newest') && @valid_orders.include?('created_at')
+                       @current_order = 'created_at'
+                     else
+                       Setting["selectable_setting.debates.default_order"]
+                     end
+
     params[:current_tab_path] = 'debate_phase_footer_tab'
     params[:filter_projekt_ids] ||= @current_projekt.all_children_ids.push(@current_projekt.id).map(&:to_s)
-
-    if ProjektSetting.find_by(projekt: @current_projekt, key: 'projekt_feature.general.set_default_sorting_to_newest').value.present? &&
-        @valid_orders.include?('created_at')
-      @current_order = 'created_at'
-    end
 
     @selected_parent_projekt = @current_projekt
 
@@ -210,20 +213,23 @@ class PagesController < ApplicationController
   end
 
   def set_proposal_phase_footer_tab_variables(projekt=nil)
+    @current_projekt = projekt || SiteCustomization::Page.find_by(slug: params[:id]).projekt
+    @current_tab_phase = @current_projekt.proposal_phase
+
     @valid_orders = Proposal.proposals_orders(current_user)
     @valid_orders.delete("archival_date")
     @valid_orders.delete('relevance')
-    @current_order = @valid_orders.include?(params[:order]) ? params[:order] : Setting["selectable_setting.proposals.default_order"]
 
-    @current_projekt = projekt || SiteCustomization::Page.find_by(slug: params[:id]).projekt
-    @current_tab_phase = @current_projekt.proposal_phase
+    @current_order = if @valid_orders.include?(params[:order])
+                       params[:order]
+                     elsif helpers.projekt_feature?(@current_projekt, 'general.set_default_sorting_to_newest') && @valid_orders.include?('created_at')
+                       @current_order = 'created_at'
+                     else
+                       Setting["selectable_setting.proposals.default_order"]
+                     end
+
     params[:current_tab_path] = 'proposal_phase_footer_tab'
     params[:filter_projekt_ids] ||= @current_projekt.all_children_ids.push(@current_projekt.id).map(&:to_s)
-
-    if ProjektSetting.find_by(projekt: @current_projekt, key: 'projekt_feature.general.set_default_sorting_to_newest').value.present? &&
-        @valid_orders.include?('created_at')
-      @current_order = 'created_at'
-    end
 
     @selected_parent_projekt = @current_projekt
 
