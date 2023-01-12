@@ -76,9 +76,14 @@
                     <%= answer.title %>
                   <% end %>
                 </td>
-                <td style='width:100px' class='<%= answer.total_votes == most_voted_answer_votes ? "win" : "" %>'>
+                <td style='width:150px' class='<%= answer.total_votes == most_voted_answer_votes ? "win" : "" %>'>
                   <% if answer.total_votes > 0 %>
-                    <%= link_to "Scoped results", results_poll_question_answer_path(answer.question.poll, answer) %>
+                    <%= link_to results_poll_question_answer_path(answer.question.poll, answer), remote: true, style: "font-weight:normal" do %>
+                      <%= t('custom.polls.results.scoped_popup_link') %>
+                    <% end %>
+
+                    <div class="reveal" id="<%= dom_id(answer, :connected_votes_stats) %>" data-reveal>
+                    </div>
                   <% end %>
                 </td>
               </tr>
