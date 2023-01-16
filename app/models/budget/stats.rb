@@ -34,7 +34,8 @@ class Budget::Stats
   end
 
   def vote_phase_finished?
-    budget.finished?
+    budget.reviewing_ballots? || #custom line
+      budget.finished?
   end
 
   def total_participants
