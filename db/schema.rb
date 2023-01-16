@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_04_142104) do
+ActiveRecord::Schema.define(version: 2023_01_16_161249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -488,6 +488,13 @@ ActiveRecord::Schema.define(version: 2023_01_04_142104) do
   create_table "campaigns", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "track_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "city_streets", force: :cascade do |t|
+    t.string "name"
+    t.string "plz"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -2119,7 +2126,9 @@ ActiveRecord::Schema.define(version: 2023_01_04_142104) do
     t.boolean "adm_email_on_new_proposal", default: false
     t.boolean "adm_email_on_new_debate", default: false
     t.boolean "adm_email_on_new_deficiency_report", default: false
+    t.bigint "city_street_id"
     t.index ["bam_street_id"], name: "index_users_on_bam_street_id"
+    t.index ["city_street_id"], name: "index_users_on_city_street_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["date_of_birth"], name: "index_users_on_date_of_birth"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -2326,6 +2335,7 @@ ActiveRecord::Schema.define(version: 2023_01_04_142104) do
   add_foreign_key "sdg_managers", "users"
   add_foreign_key "site_customization_pages", "projekts"
   add_foreign_key "users", "bam_streets"
+  add_foreign_key "users", "city_streets"
   add_foreign_key "users", "geozones"
   add_foreign_key "valuators", "users"
 end

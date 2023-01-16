@@ -22,6 +22,17 @@ class Polls::QuestionsController < ApplicationController
     render "polls/questions/answers"
   end
 
+  def csv_stats
+    question = Poll::Question.find(params[:id])
+
+    respond_to do |format|
+      format.csv do
+        send_data Poll::Question::Stats::CsvExporter.new(question).to_csv,
+          filename: "question_#{question.id}_answer_stats_#{Date.today.strftime("%d/%m/%Y")}.csv"
+      end
+    end
+  end
+
   private
 
   def open_answer_params
