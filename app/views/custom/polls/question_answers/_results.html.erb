@@ -29,7 +29,7 @@
                   </div>
 
                   <% if open_answers.count > 0 %>
-                  <div class='poll-results-open-answers-list'>
+                  <div class='poll-results-open-answers-list' style="display:none;">
                     <% page_name = ("page_a" + @question_answer.id.to_s).to_sym %>
                     <% open_answers.page(params[page_name]).per(5).each do |open_answer| %>
                       <div class='poll-results-open-answer'>
