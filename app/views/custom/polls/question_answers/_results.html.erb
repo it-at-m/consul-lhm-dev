@@ -1,4 +1,6 @@
-<% provide :title do %><%= @poll.name %><% end %>
+<button class="close-button" data-close aria-label="Close modal" type="button">
+  <span aria-hidden="true">&times;</span>
+</button>
 
 <div class="polls-results-stats">
   <div class="row margin" data-equalizer data-equalize-on="medium">
@@ -66,7 +68,7 @@
         <p><%= t('custom.polls.results.scoped_popup_callout') %></p>
       </div>
 
-      <hr>
+      <hr style="border-width:3px;margin-bottom:3rem;">
 
       <%- @poll.questions.each do |question| %>
         <% next if question == @question %>
@@ -96,7 +98,7 @@
                       </div>
 
                       <% if open_answers.count > 0 %>
-                      <div class='poll-results-open-answers-list'>
+                      <div class='poll-results-open-answers-list'  style="display:none;">
                         <% page_name = ("page_a" + answer.id.to_s).to_sym %>
                         <% open_answers.page(params[page_name]).per(5).each do |open_answer| %>
                           <div class='poll-results-open-answer'>
