@@ -103,6 +103,7 @@ Rails.application.routes.draw do
   get    "/polls/:poll_id/question_answers/:id/stats",     to: "polls/questions/answers#stats",      as: :stats_poll_question_answer
   get    "/polls/:poll_id/question_answers/:id/results",   to: "polls/questions/answers#results",    as: :results_poll_question_answer
 
-  # csv stats for poll questions and answers
-  get   "/polls/questions/:id/csv_stats",                  to: "polls/questions#csv_stats",          as: :question_answer_stats
+  # csv details for poll questions
+  get    "/polls/questions/:id/csv_answers_streets",       to: "polls/questions#csv_answers_streets", as: :polls_question_csv_answers_streets
+  get    "/polls/questions/:id/csv_answers_votes",         to: "polls/questions#csv_answers_votes",   as: :polls_question_csv_answers_votes
 end

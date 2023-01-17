@@ -94,8 +94,12 @@
               <% end %>
             </tbody>
           </table>
-          <% if can? :csv_stats, question %>
-            <%= link_to "Statistiken herunterladen", question_answer_stats_path(question.id, format: :csv) %>
+          <% if can? :csv_answers_streets, question %>
+            <%= link_to t('custom.polls.results.question_street_details_csv_link'), polls_question_csv_answers_streets_path(question.id, format: :csv) %>
+            &nbsp;|&nbsp;
+          <% end %>
+          <% if can? :csv_answers_votes, question %>
+            <%= link_to t('custom.polls.results.question_answer_details_csv_link'), polls_question_csv_answers_votes_path(question.id, format: :csv) %>
           <% end %>
         </div>
 

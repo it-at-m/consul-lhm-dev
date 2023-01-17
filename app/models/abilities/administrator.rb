@@ -94,7 +94,7 @@ module Abilities
       can [:create], Poll::Question
       can [:update, :destroy], Poll::Question
 
-      can [:read, :order_answer, :csv_stats], Poll::Question::Answer
+      can [:read, :order_answer], Poll::Question::Answer
       can [:create, :update, :destroy], Poll::Question::Answer do |answer|
         can?(:update, answer.question)
       end
@@ -146,8 +146,7 @@ module Abilities
           dr.official_answer.present?
       end
 
-
-      can [:order_questions, :csv_stats], Poll::Question
+      can [:order_questions, :csv_answers_streets, :csv_answers_votes], Poll::Question
       can [:show], Projekt
       can [:verify, :unverify], User
 
