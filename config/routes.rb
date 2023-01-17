@@ -81,6 +81,7 @@ Rails.application.routes.draw do
 
   # Post open answers
   post "polls/questions/:id/answers/update_open_answer",   to: "polls/questions#update_open_answer", as: :update_open_answer
+
   # Confirm poll participation
   post "polls/:id/confirm_participation",                  to: "polls#confirm_participation",        as: :poll_confirm_participation
 
@@ -95,7 +96,14 @@ Rails.application.routes.draw do
   put "/admin/users/:id/verify",                           to: "admin/users#verify",                 as: :verify_admin_user
   put "/admin/users/:id/unverify",                         to: "admin/users#unverify",               as: :unverify_admin_user
 
-
   # unvote answer
   delete "/questions/:question_id/answers/:id",            to: "polls/answers#destroy",              as: :question_answer
+
+  # poll stats and results scoped to question_answer
+  get    "/polls/:poll_id/question_answers/:id/stats",     to: "polls/questions/answers#stats",      as: :stats_poll_question_answer
+  get    "/polls/:poll_id/question_answers/:id/results",   to: "polls/questions/answers#results",    as: :results_poll_question_answer
+
+  # csv details for poll questions
+  get    "/polls/questions/:id/csv_answers_streets",       to: "polls/questions#csv_answers_streets", as: :polls_question_csv_answers_streets
+  get    "/polls/questions/:id/csv_answers_votes",         to: "polls/questions#csv_answers_votes",   as: :polls_question_csv_answers_votes
 end

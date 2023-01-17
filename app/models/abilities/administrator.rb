@@ -146,8 +146,7 @@ module Abilities
           dr.official_answer.present?
       end
 
-
-      can [:order_questions], Poll::Question
+      can [:order_questions, :csv_answers_streets, :csv_answers_votes], Poll::Question
       can [:show], Projekt
       can [:verify, :unverify], User
 

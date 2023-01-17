@@ -22,13 +22,35 @@ class Polls::QuestionsController < ApplicationController
     render "polls/questions/answers"
   end
 
+  def csv_answers_streets
+    question = Poll::Question.find(params[:id])
+
+    respond_to do |format|
+      format.csv do
+        send_data CsvServices::PollQuestionAnswersStreetsExporter.new(question).call,
+          filename: "question_#{question.id}_answers_streets_#{Time.zone.today.strftime("%d/%m/%Y")}.csv"
+      end
+    end
+  end
+
+  def csv_answers_votes
+    question = Poll::Question.find(params[:id])
+
+    respond_to do |format|
+      format.csv do
+        send_data CsvServices::PollQuestionAnswersVotesExporter.new(question).call,
+          filename: "question_#{question.id}_answers_votes_#{Time.zone.today.strftime("%d/%m/%Y")}.csv"
+      end
+    end
+  end
+
   private
 
-  def open_answer_params
-    params.require(:poll_answer).permit(:answer, :open_answer_text)
-	end
+    def open_answer_params
+      params.require(:poll_answer).permit(:answer, :open_answer_text)
+    end
 
-  def providing_an_open_answer?(answer)
-    @question.open_question_answer.present? && @question.open_question_answer.title == answer.answer
-  end
+    def providing_an_open_answer?(answer)
+      @question.open_question_answer.present? && @question.open_question_answer.title == answer.answer
+    end
 end
