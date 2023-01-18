@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_16_161249) do
+ActiveRecord::Schema.define(version: 2023_01_18_100211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -490,6 +490,15 @@ ActiveRecord::Schema.define(version: 2023_01_16_161249) do
     t.string "track_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "city_street_projekt_phases", force: :cascade do |t|
+    t.bigint "city_street_id"
+    t.bigint "projekt_phase_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_street_id"], name: "index_city_street_projekt_phases_on_city_street_id"
+    t.index ["projekt_phase_id"], name: "index_city_street_projekt_phases_on_projekt_phase_id"
   end
 
   create_table "city_streets", force: :cascade do |t|
@@ -2272,6 +2281,8 @@ ActiveRecord::Schema.define(version: 2023_01_16_161249) do
   add_foreign_key "budget_valuators", "budgets"
   add_foreign_key "budget_valuators", "valuators"
   add_foreign_key "budgets", "projekts"
+  add_foreign_key "city_street_projekt_phases", "city_streets"
+  add_foreign_key "city_street_projekt_phases", "projekt_phases"
   add_foreign_key "dashboard_administrator_tasks", "users"
   add_foreign_key "dashboard_executed_actions", "dashboard_actions", column: "action_id"
   add_foreign_key "dashboard_executed_actions", "proposals"
