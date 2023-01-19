@@ -34,7 +34,7 @@
       <% end %>
 
       <% if resource.street_name_required? %>
-        <%= f.text_field :street_name, placeholder: t("custom.devise_views.users.registrations.new.street_name_label") %>
+        <%= f.select :city_street_id, CityStreet.all.map{ |str| [str.name_with_plz, str.id]  }, { prompt: t('helpers.select.prompt') } %>
       <% end %>
 
       <% if resource.street_number_required? %>

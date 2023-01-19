@@ -29,13 +29,13 @@
       <div id="projekt-phase-selected-streets">
         <% projekt_phase.city_streets.each do |street| %>
           <div class='selected-street' data-street-id=<%= street.id %>>
-            <%= street.name %>
+            <%= street.name_with_plz %>
             <i class='fas fa-times js-deselect-street'></i>
           </div>
         <% end %>
       </div>
 
-      <%= select_tag :streets, options_from_collection_for_select(CityStreet.all, :id, :name), class: 'js-select-street', prompt: 'Bitte wählen' %>
+      <%= select_tag :streets, options_from_collection_for_select(CityStreet.all, :id, :name_with_plz), class: 'js-select-street', prompt: 'Bitte wählen' %>
 
       <div class='hide'>
         <%= f.collection_check_boxes :city_street_ids, CityStreet.all, :id, :name %>

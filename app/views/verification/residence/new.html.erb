@@ -11,7 +11,7 @@
       <ul>
         <li><span class="icon-check"></span>&nbsp;<%= t("verification.user_permission_debates") %></li>
         <li><span class="icon-check"></span>&nbsp;<%= t("verification.user_permission_proposal") %></li>
-        <li><span class="icon-check"></span>&nbsp;<%= t("verification.user_permission_support_proposal") %></li>
+        <li><span class="icon-x"></span>&nbsp;<%= t("verification.user_permission_support_proposal") %></li>
         <li><span class="icon-x"></span>&nbsp;<%= t("verification.user_permission_votes") %></li>
       </ul>
     </div>
@@ -31,7 +31,7 @@
 
         <div class="small-12 medium-5 clear">
           <%= f.label t("custom.verification.residence.new.street_name") %>
-          <%= f.text_field :street_name, label: false %>
+          <%= f.select :city_street_id, CityStreet.all.map{ |str| [str.name_with_plz, str.id]  }, { prompt: t('helpers.select.prompt'), label: false } %>
         </div>
 
         <div class="small-12 medium-5 clear">

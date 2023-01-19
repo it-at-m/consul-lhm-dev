@@ -21,7 +21,7 @@ class Verification::ResidenceController < ApplicationController
     def allowed_params
       [
         :document_number, :document_type, :date_of_birth, :postal_code, :terms_of_service,
-        :first_name, :last_name, :street_name, :street_number,
+        :first_name, :last_name, :city_street_id, :street_number,
         :plz, :city_name, :gender, :document_type, :document_last_digits
       ]
     end
