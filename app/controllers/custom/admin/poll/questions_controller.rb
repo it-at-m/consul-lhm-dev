@@ -9,7 +9,7 @@ class Admin::Poll::QuestionsController < Admin::Poll::BaseController
   private
 
     def question_params
-      attributes = [:poll_id, :question, :proposal_id, :show_images, votation_type_attributes: [:vote_type, :max_votes]]
+      attributes = [:poll_id, :question, :proposal_id, :show_hint_callout, :show_images, votation_type_attributes: [:vote_type, :max_votes]]
       params.require(:poll_question).permit(*attributes, translation_params(Poll::Question))
     end
 end

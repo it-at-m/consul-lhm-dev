@@ -102,3 +102,4 @@ de:
       poll/question:
         min_rating_scale_label: Linkes Label
         max_rating_scale_label: Rechtes Label
+        show_hint_callout: Diese Textbox im Frontend anzeigen

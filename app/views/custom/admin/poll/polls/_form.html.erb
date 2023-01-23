@@ -22,11 +22,13 @@
       </div>
 
       <div class="small-12 column">
-        <%= translations_form.text_area :summary, rows: 4 %>
+        <%= translations_form.text_area :summary,
+            class: "html-area #{ck_editor_class(current_user)}" %>
       </div>
 
       <div class="small-12 column">
-        <%= translations_form.text_area :description, rows: 8 %>
+        <%= translations_form.text_area :description,
+            class: "html-area #{ck_editor_class(current_user)}" %>
       </div>
     <% end %>
   </div>
