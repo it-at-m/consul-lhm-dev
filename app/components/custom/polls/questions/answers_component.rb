@@ -14,6 +14,7 @@ class Polls::Questions::AnswersComponent < ApplicationComponent
 
     if question.votation_type.rating_scale?
       classes.push("rating-scale")
+      classes.push("rating-scale-#{question.question_answers.count}-answers")
     end
 
     classes.join(" ")

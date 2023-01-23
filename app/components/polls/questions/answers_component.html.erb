@@ -1,7 +1,9 @@
 <div class="<%= poll_question_answers_class %>">
   <% if question.vote_type == "rating_scale" %>
     <div class="rating-scale-label rating-scale-label--left">
-      <%= question.min_rating_scale_label  %>
+      <div class="label secondary">
+        <%= question.min_rating_scale_label  %>
+      </div>
     </div>
   <% end %>
 
@@ -89,7 +91,9 @@
 
   <% if question.vote_type == "rating_scale" %>
     <div class="rating-scale-label rating-scale-label--right">
-      <%= question.max_rating_scale_label  %>
+      <div class="label secondary">
+        <%= question.max_rating_scale_label  %>
+      </div>
     </div>
   <% end %>
 
