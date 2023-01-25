@@ -59,6 +59,8 @@ class Projekt < ApplicationRecord
 
   has_many :map_layers, dependent: :destroy
 
+  has_many :projekt_labels, dependent: :destroy
+
   has_many :projekt_manager_assignments, dependent: :destroy
   has_many :projekt_managers, through: :projekt_manager_assignments
 

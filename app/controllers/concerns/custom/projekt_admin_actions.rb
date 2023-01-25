@@ -64,6 +64,8 @@ module ProjektAdminActions
     @projekt_livestream = ProjektLivestream.new
     @projekt_livestreams = @projekt.projekt_livestreams
 
+    @projekt_labels = @projekt.projekt_labels
+
     @default_footer_tab_setting = ProjektSetting.find_by(
       projekt: @projekt,
       key: "projekt_custom_feature.default_footer_tab"

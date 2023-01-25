@@ -157,6 +157,8 @@ module Abilities
       can :manage, ModalNotification
 
       can [:results, :stats], Poll, projekt: { projekt_settings: { key: "projekt_feature.polls.intermediate_poll_results_for_admins", value: "active" }}
+
+      can [:manage], ProjektLabel
     end
   end
 end
