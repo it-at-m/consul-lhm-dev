@@ -126,6 +126,10 @@ class ProjektsController < ApplicationController
     @projekt = Projekt.find(params[:id])
   end
 
+  def projekt_labels_selector
+    render Shared::ProjektLabelsComponent.new(projekt_id: params[:id], css_class: "js-select-projekt-label")
+  end
+
   private
 
   def set_comments_footer_tab_variables(projekt = nil)

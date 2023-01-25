@@ -66,6 +66,7 @@
       App.ProjektSelector.updateAvailableSDGsSelection($selectedProjekt)
       App.ProjektSelector.toggleExternalFieldsHeader($selectedProjekt)
       App.ProjektSelector.updateMainHeader($selectedProjekt)
+      App.ProjektSelector.updateProjektLabelSelector($selectedProjekt)
 
     },
 
@@ -92,6 +93,16 @@
         $(this).find('.selected-projekt').show();
         $(this).children('.projekt').remove();
       })
+    },
+
+    updateProjektLabelSelector: function ($projekt) {
+      $.ajax("/projekts/" + $projekt.data('projektId') + "/projekt_labels_selector", {
+        type: "GET",
+        dataType: "html",
+        success: function(data) {
+          $('#projekt_labels_selector').html(data)
+        }
+      });
     },
 
     replaceProjektMapOnProposalCreation: function($projekt) {

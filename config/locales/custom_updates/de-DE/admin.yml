@@ -269,7 +269,9 @@ de:
             refresh_page: Sollten Sie die Funktionen bereits aktiviert haben, sie werden aber hier nicht angezeigt, dann laden Sie diese Seite bitte neu.
           projekt_labels_tab:
             name: Labels
+            page_title: Labels
             create_button: Label erstellen
+            no_labels: Dieses Projekt hat keine Labels
           projekt_settings_tab:
             budget_settings: Budgets
             debates_settings: Diskussion

@@ -12,6 +12,7 @@ resources :projekts, only: [:index, :show] do
   member do
     get :json_data
     get :map_html
+    get :projekt_labels_selector
   end
 end
 
