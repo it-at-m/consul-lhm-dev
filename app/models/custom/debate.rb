@@ -3,6 +3,7 @@ require_dependency Rails.root.join("app", "models", "debate").to_s
 class Debate
   include Imageable
   include Documentable
+  include Labelable
 
   belongs_to :projekt, optional: true, touch: true
   has_one :debate_phase, through: :projekt

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_25_091808) do
+ActiveRecord::Schema.define(version: 2023_01_26_104630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1555,6 +1555,16 @@ ActiveRecord::Schema.define(version: 2023_01_25_091808) do
     t.index ["projekt_label_id"], name: "index_projekt_label_translations_on_projekt_label_id"
   end
 
+  create_table "projekt_labelings", force: :cascade do |t|
+    t.bigint "projekt_label_id"
+    t.string "labelable_type"
+    t.bigint "labelable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["labelable_type", "labelable_id"], name: "index_projekt_labelings_on_labelable_type_and_labelable_id"
+    t.index ["projekt_label_id"], name: "index_projekt_labelings_on_projekt_label_id"
+  end
+
   create_table "projekt_labels", force: :cascade do |t|
     t.string "color"
     t.string "icon"
@@ -2350,6 +2360,7 @@ ActiveRecord::Schema.define(version: 2023_01_25_091808) do
   add_foreign_key "poll_voters", "polls"
   add_foreign_key "polls", "budgets"
   add_foreign_key "polls", "projekts"
+  add_foreign_key "projekt_labelings", "projekt_labels"
   add_foreign_key "projekt_labels", "projekts"
   add_foreign_key "projekt_manager_assignments", "projekt_managers"
   add_foreign_key "projekt_manager_assignments", "projekts"

@@ -1,5 +1,6 @@
 require_dependency Rails.root.join("app", "models", "proposal").to_s
 class Proposal < ApplicationRecord
+  include Labelable
 
   belongs_to :projekt, optional: true, touch: true
   has_one :proposal_phase, through: :projekt
