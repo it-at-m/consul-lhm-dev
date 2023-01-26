@@ -95,16 +95,6 @@
       })
     },
 
-    updateProjektLabelSelector: function ($projekt) {
-      $.ajax("/projekts/" + $projekt.data('projektId') + "/projekt_labels_selector", {
-        type: "GET",
-        dataType: "html",
-        success: function(data) {
-          $('#projekt_labels_selector').html(data)
-        }
-      });
-    },
-
     replaceProjektMapOnProposalCreation: function($projekt) {
 
       if ( $projekt.data('showMap') ) {
@@ -168,6 +158,18 @@
       } else {
         $('#sdgs-selector').hide();
       }
+    },
+
+    updateProjektLabelSelector: function ($projekt) {
+      var labelIdsToShow = $projekt.data("projekt-label-ids").toString().split(",");
+
+      $("#projekt_labels_selector .projekt-label").each(function(index, label) {
+        if (labelIdsToShow.includes($(label).data("labelId").toString())) {
+          $(label).show();
+        } else {
+          $(label).hide();
+        }
+      });
     },
 
     toggleDocumentAttachment: function($projekt) {
