@@ -165,9 +165,9 @@
 
       $("#projekt_labels_selector .projekt-label").each(function(index, label) {
         if (labelIdsToShow.includes($(label).data("labelId").toString())) {
-          $(label).show();
+          $(label).removeClass('hide');
         } else {
-          $(label).hide();
+          $(label).addClass('hide');
         }
       });
     },
@@ -319,10 +319,13 @@
       $labelCheckBox.prop("checked", !$labelCheckBox.prop("checked"));
 
       if ($labelCheckBox.prop("checked")) {
-        var labelColor = $label.data('backgroundColor');
-        $label.css('background-color', labelColor)
+        var labelBackgroundColor = $label.data('backgroundColor');
+        var labelTextColor = $label.data('textColor');
+        $label.css('background-color', labelBackgroundColor);
+        $label.css('color', labelTextColor);
       } else {
         $label.css('background-color', '#767676')
+        $label.css('color', '#fff')
       }
     },
 

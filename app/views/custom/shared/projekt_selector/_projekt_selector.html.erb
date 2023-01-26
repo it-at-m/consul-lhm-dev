@@ -1,10 +1,11 @@
 <%= f.hidden_field :projekt_id %>
 
-<% if model.errors.full_messages.any? { |error| error.include? 'Projekt' } %>
-  <br>
-  <small class='form-error is-visible'>
-    <%= t('custom.projekts.errors.presence') %>
-  </small>
+<% if model.errors.details[:projekt_id].any? %>
+  <% model.errors.details[:projekt_id].each do |error| %>
+    <small class='form-error is-visible'>
+      <%= t("custom.projekts.errors.#{error[:error]}") %>
+    </small>
+  <% end %>
 <% end %>
 
 <div id='projekt-selector-fields' class=''>
@@ -54,8 +55,17 @@
   </div>
 </div>
 
+
+<% if model.errors.details[:projekt_labels].any? %>
+  <% model.errors.details[:projekt_labels].each do |error| %>
+    <small class='form-error is-visible margin-top'>
+      <%= t("custom.projekt_label.errors.#{error[:error]}") %>
+    </small>
+  <% end %>
+<% end %>
+
 <div id='projekt_labels_selector'>
-  <%= render Shared::ProjektLabelsComponent.new(css_class: "js-select-projekt-label") %>
+  <%= render Shared::ProjektLabelsComponent.new(css_class: "js-select-projekt-label hide") %>
 </div>
 
 <div id="projekt-labels-checkboxes">
