@@ -1687,3 +1687,15 @@ span.projekt-backlink:before {
 .projekt-all-questions-notification-link {
   margin-left: 15px;
 }
+
+// Projekt labels
+
+#projekt_labels_selector {
+  .projekt-label {
+    cursor: pointer;
+  }
+}
+
+#projekt-labels-checkboxes {
+  // display: none;
+}

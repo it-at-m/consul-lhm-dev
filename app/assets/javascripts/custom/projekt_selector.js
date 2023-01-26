@@ -311,6 +311,19 @@
       }
     },
 
+    selectLabel: function($label) {
+      var labelId = $label.data('labelId');
+      var $labelCheckBox = $("#projekt-labels-checkboxes [id*='_projekt_label_ids_" + labelId + "']");
+      $labelCheckBox.prop("checked", !$labelCheckBox.prop("checked"));
+
+      if ($labelCheckBox.prop("checked")) {
+        var labelColor = $label.data('backgroundColor');
+        $label.css('background-color', labelColor)
+      } else {
+        $label.css('background-color', '#767676')
+      }
+    },
+
     initialize: function() {
       $("body").on("click", ".js-toggle-projekt-group", function(event) {
         App.ProjektSelector.toggleProjektGroup(this);
@@ -324,6 +337,10 @@
         if ( $(event.target).closest('.js-toggle-projekt-group').length == 0 ) {
           $('.projekt_group').hide();
         }
+      });
+
+      $("body").on("click", ".js-select-projekt-label", function() {
+        App.ProjektSelector.selectLabel($(this));
       });
 
       App.ProjektSelector.preselectProjekt();

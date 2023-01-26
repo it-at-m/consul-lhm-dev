@@ -1,5 +1,5 @@
 <% @projekt_labels.each do |label| %>
-  <span class="label secondary <%= @css_class %>"
+  <span class="label projekt-label secondary <%= @css_class %>"
         style="background-color:<%= label_grayscale? ? "#767676" : label.color %>"
         data-background-color="<%= label.color %>"
         data-label-id="<%= label.id %>"
