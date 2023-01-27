@@ -25,10 +25,14 @@ de:
           attributes:
             description:
               too_long: 'ist zu lange'
+            projekt_id:
+              blank: Bitte wählen Sie ein Projekt
+            projekt_labels:
+              blank: Bitte wählen Sie ein Label
         debate:
           attributes:
             projekt_id:
-              blank: Bitte wählen Sie ein Projekt       
+              blank: Bitte wählen Sie ein Projekt
             projekt_labels:
               blank: Bitte wählen Sie ein Label
         projekt:
