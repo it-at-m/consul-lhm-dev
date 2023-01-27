@@ -40,7 +40,10 @@
                   params[:geozone_restriction],
                   params[:restricted_geozones],
                   "details"] do %>
-
+ 
+          <div class='resource-projekt-labels'>
+            <%= render Shared::ProjektLabelsComponent.new(resource: debate) %>
+          </div>
           <h4 class='resource-name'><%= link_to debate.title, debate %></h4>
           <div class="resource-summary margin-bottom">
             <%= link_to debate do %></h4>

@@ -1,10 +1,11 @@
 class Shared::ProjektLabelsComponent < ViewComponent::Base
   delegate :pick_text_color, to: :helpers
 
-  def initialize(projekt_id: nil, css_class: nil, scope: :all)
+  def initialize(projekt_id: nil, css_class: nil, scope: :all, resource: nil)
     @projekt = Projekt.find(projekt_id) if projekt_id
     @css_class = css_class
     @scope = scope
+    @resource = resource
   end
 
   def render?
@@ -12,6 +13,8 @@ class Shared::ProjektLabelsComponent < ViewComponent::Base
   end
 
   def gray_by_default?
+    return false unless @css_class
+
     @css_class.split && %w[js-select-projekt-label].any?
   end
 
@@ -28,6 +31,8 @@ class Shared::ProjektLabelsComponent < ViewComponent::Base
   end
 
   def projekt_labels
+    return @resource.projekt_labels if @resource
+
     return ProjektLabel.all unless @projekt
 
     @scope == :all ? @projekt.all_projekt_labels : @projekt.projekt_labels
