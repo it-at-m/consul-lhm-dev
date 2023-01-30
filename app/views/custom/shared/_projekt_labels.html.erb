@@ -1,11 +1,9 @@
 <%if projekt.all_projekt_labels_in_tree.any? %>
   <div class="sidebar-divider"></div>
-  <h2 class="sidebar-title projekt-tag-chip-category projekt-tag-chip-icon"><%= t("shared.tags_cloud.categories") %></h2>
+  <h2 class="sidebar-title projekt-tag-chip-category projekt-tag-chip-icon"><%= t("shared.tags_cloud.labels") %></h2>
   <br>
 
   <div id="projekt-labels-sidebar" class="">
-    <% selected_categories = params[:tags] ? params[:tags].split(',') : []%>
-
     <%= render Shared::ProjektLabelsComponent.new(
       projekt_id: projekt.id,
       scope: :all_in_tree,

@@ -19,7 +19,7 @@ module Takeable
   end
 
   def take_by_projekt_labels
-    return if params[:projekt_label_ids].blank?
+    return if params[:projekt_label_ids].all?(&:blank?)
 
     @resources = @resources
       .joins(:projekt_labels)
