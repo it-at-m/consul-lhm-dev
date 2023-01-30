@@ -21,7 +21,11 @@ class Proposal < ApplicationRecord
     where(author_id: user_id)
   }
 
-  scope :sort_by_alphabet, -> { with_translations(I18n.locale).reorder("LOWER(proposal_translations.title) ASC") }
+  scope :sort_by_alphabet, -> {
+    with_translations(I18n.locale).
+    select("proposals.*, LOWER(proposal_translations.title)").
+    reorder("LOWER(proposal_translations.title) ASC")
+  }
   scope :sort_by_votes_up, -> { reorder(cached_votes_up: :desc) }
 
   scope :seen,                     -> { where.not(ignored_flag_at: nil) }

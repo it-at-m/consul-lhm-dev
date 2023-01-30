@@ -5,7 +5,18 @@
         data-text-color="<%= pick_text_color(label.color) %>"
         data-label-id="<%= label.id %>"
         >
-        <i class="fas fa-<%= label.icon %>"></i>
-        <%= label.name %>
+        <% if @sidebar_filter_link %>
+          <%= link_to link_path(label),
+            remote: true,
+            class: 'js-remote-link-push-state',
+            "data-footer-tab-back-url": footer_tab_back_button_url(label),
+            onclick: '$(".spinner-placeholder").addClass("show-loader")' do %>
+            <i class="fas fa-<%= label.icon %>"></i>
+            <%= label.name %>
+          <% end %>
+        <% else %>
+          <i class="fas fa-<%= label.icon %>"></i>
+          <%= label.name %>
+        <% end %>
   </span>
 <% end %>

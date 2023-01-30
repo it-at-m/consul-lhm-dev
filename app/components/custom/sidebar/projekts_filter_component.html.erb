@@ -69,7 +69,7 @@
 
         <% if @current_tab_phase&.name != 'budget_phase' %>
           <div class="sidebar-filter-group">
-            <%= f.submit t('custom.projekts.sidebar_filter.filter_button'), class: 'sidebar-filter-button', onclick: '$(".spinner-placeholder").addClass("show-loader")' %>
+            <%= f.submit t('custom.projekts.sidebar_filter.filter_button'), class: 'sidebar-filter-button js-remote-link-push-state', onclick: '$(".spinner-placeholder").addClass("show-loader")' %>
             <%= button_tag '', class: 'js-reset-projekts-filter sidebar-reset-filter-button' %>
           </div>
         <% end %>

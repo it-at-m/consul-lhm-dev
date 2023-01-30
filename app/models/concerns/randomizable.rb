@@ -10,6 +10,7 @@ module Randomizable
       ids_with_order = ids.map.with_index { |id, order| "(#{id}, #{order})" }.join(", ")
 
       joins("LEFT JOIN (VALUES #{ids_with_order}) AS ids(id, ordering) ON #{table_name}.id = ids.id")
+        .select("#{table_name}.*", "ids.ordering") #custom line
         .order("ids.ordering")
     end
   end

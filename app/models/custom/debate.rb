@@ -22,7 +22,11 @@ class Debate
     where(author_id: user_id)
   }
 
-  scope :sort_by_alphabet, -> { with_translations(I18n.locale).reorder("LOWER(debate_translations.title) ASC") }
+  scope :sort_by_alphabet, -> {
+    with_translations(I18n.locale).
+    select("debates.*, LOWER(debate_translations.title)").
+    reorder("LOWER(debate_translations.title) ASC")
+  }
   scope :sort_by_votes_total, -> { reorder(cached_votes_total: :desc) }
 
   scope :seen, -> { where.not(ignored_flag_at: nil) }

@@ -5,4 +5,6 @@ class ProjektLabel < ApplicationRecord
   include Globalizable
 
   belongs_to :projekt
+
+  default_scope { order(:id) }
 end

@@ -464,6 +464,10 @@ class Projekt < ApplicationRecord
     ProjektLabel.where(projekt_id: (all_parent_ids + [id]))
   end
 
+  def all_projekt_labels_in_tree
+    ProjektLabel.where(projekt_id: all_ids_in_tree)
+  end
+
   private
 
     def create_corresponding_page
