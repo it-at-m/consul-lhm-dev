@@ -71,7 +71,7 @@ en:
     layouts:
       footer:
         demokratie: demokratie.today
-        demokratie_url: https://www.demokratie.today/
+        demokratie_url: https://demokratie.today/
         description: The platform is based on %{consul}, a %{open_source} and is modified by %{demokratie}.
         impressum: Imprint
         statistic_cookies_settings: Cookie Settings
