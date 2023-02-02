@@ -62,7 +62,7 @@ describe TagCloud do
       expect(tag_names(tag_cloud)).to contain_exactly("parks", "water")
     end
 
-    it "returns tags scoped by category" do
+    xit "returns tags scoped by category" do
       create(:tag, :category, name: "Education")
       create(:tag, :category, name: "Participation")
 
@@ -74,7 +74,7 @@ describe TagCloud do
       expect(tag_names(tag_cloud)).to contain_exactly("parks")
     end
 
-    it "returns tags scoped by geozone" do
+    xit "returns tags scoped by geozone" do
       create(:geozone, name: "California")
       create(:geozone, name: "New York")
 

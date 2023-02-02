@@ -14,6 +14,7 @@ FactoryBot.define do
     description_balloting { "This budget is balloting" }
     description_reviewing_ballots { "This budget is reviewing ballots" }
     description_finished { "This budget is finished" }
+    projekt { create(:projekt) }
 
     trait :drafting do
       published { false }

@@ -3,6 +3,7 @@ FactoryBot.define do
     sequence(:title)     { |n| "Debate #{n} title" }
     description          { "Debate description" }
     terms_of_service     { "1" }
+    projekt              { create(:projekt) }
     association :author, factory: :user
 
     trait :hidden do

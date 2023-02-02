@@ -7,6 +7,7 @@ FactoryBot.define do
     responsible_name     { "John Snow" }
     terms_of_service     { "1" }
     published_at         { Time.current }
+    projekt              { create(:projekt) }
 
     association :author, factory: :user
 
