@@ -17,7 +17,7 @@ de:
         subject: Neuer Vorschlag auf Consul
         hi: Hallo %{username},
         p1: es ist ein neuer Vorschlag auf Consul eingegangen.
-        signature_html: PViele Grüße</br>Consul
+        signature_html: Viele Grüße</br>Consul
       new_debate:
         subject: Neue Diskussionsbeitrag auf Consul
         hi: Hallo %{username},
@@ -32,4 +32,10 @@ de:
         subject: Neue Mangelmeldung %{identifier}
         hi: Hallo %{username},
         p1: es wurde ein neuer Mangel gemeldet.
+        signature_html: Viele Grüße</br>Consul
+      new_manual_verification_request:
+        subject: Neue Nutzerverifizierung
+        hi: "Hallo %{user_to_notify_username},"
+        p1: "%{user_to_verify_username} hat sich soeben verifiziert."
+        link_text: Admin (demokratie.today)
         signature_html: Viele Grüße</br>Consul

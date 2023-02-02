@@ -15,3 +15,4 @@ en:
         create:
           flash:
             success_manual: Thank you, your data were saved.
+            error: Wir konnten Ihre Daten nicht verifizieren, bitte kontaktieren Sie uns.
