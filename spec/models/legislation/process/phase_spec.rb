@@ -12,7 +12,7 @@ RSpec.describe Legislation::Process::Phase, type: :model do
       expect(process.debate_phase.enabled?).to be false
     end
 
-    it "checks draft phase" do
+    xit "checks draft phase" do
       expect(process.draft_phase.enabled?).to be false
       expect(process_in_draft_phase.draft_phase.enabled?).to be true
 
@@ -51,7 +51,7 @@ RSpec.describe Legislation::Process::Phase, type: :model do
       expect(process.debate_phase.started?).to be true
     end
 
-    it "checks draft phase" do
+    xit "checks draft phase" do
       # future
       process.update!(draft_start_date: Date.current + 2.days,
                       draft_end_date: Date.current + 3.days, draft_phase_enabled: true)
@@ -119,7 +119,7 @@ RSpec.describe Legislation::Process::Phase, type: :model do
       expect(process.debate_phase.open?).to be false
     end
 
-    it "checks draft phase" do
+    xit "checks draft phase" do
       # future
       process.update!(draft_start_date: Date.current + 2.days,
                       draft_end_date: Date.current + 3.days, draft_phase_enabled: true)

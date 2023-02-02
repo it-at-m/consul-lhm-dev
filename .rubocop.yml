@@ -358,11 +358,11 @@ RSpec/BeforeAfterAll:
 RSpec/Capybara/CurrentPathExpectation:
   Enabled: true
 
-RSpec/Capybara/FeatureMethods:
-  Enabled: true
-  EnabledMethods:
-    - scenario
-    - xscenario
+# RSpec/Capybara/FeatureMethods:
+#   Enabled: true
+#   EnabledMethods:
+#     - scenario
+#     - xscenario
 
 RSpec/Capybara/VisibilityMatcher:
   Enabled: true

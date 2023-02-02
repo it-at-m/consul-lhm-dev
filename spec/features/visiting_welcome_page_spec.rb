@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
-feature 'user visits welcome page' do
-  scenario 'successfully' do
-    visit root_path(locale: :de)
+feature "user visits welcome page", js: true do
+  scenario "successfully" do
+    Capybara.current_driver = :selenium_chrome
 
-    expect(page).to have_content I18n.t('devise_views.menu.login_items.login')
+    I18n.with_locale(:de) do
+      visit root_path(locale: :de)
+      expect(page).to have_selector "h2", text: "ÖFFENTLICHKEITSBETEILIGUNG\nIN DER STADT CONSUL"
+    end
   end
 end

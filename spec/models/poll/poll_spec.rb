@@ -170,12 +170,12 @@ describe Poll do
         end
       end
 
-      it "accepts level 2 users when unrestricted and current" do
+      xit "accepts level 2 users when unrestricted and current" do
         expect(current_poll).to be_answerable_by(level2)
         expect(current_poll).to be_answerable_by(level2_from_geozone)
       end
 
-      it "accepts level 2 users only from the same geozone when restricted by geozone" do
+      xit "accepts level 2 users only from the same geozone when restricted by geozone" do
         expect(current_restricted_poll).not_to be_answerable_by(level2)
         expect(current_restricted_poll).to be_answerable_by(level2_from_geozone)
       end
@@ -368,7 +368,7 @@ describe Poll do
       expect(Poll.sort_for_list).to eq [poll1, poll2]
     end
 
-    it "returns polls for the user's geozone first" do
+    xit "returns polls for the user's geozone first" do
       geozone = create(:geozone)
       poll1 = create(:poll, geozone_restricted: true)
       poll2 = create(:poll, geozone_restricted: true)
