@@ -750,18 +750,18 @@ describe User do
   end
 
   describe "#block" do
-    xit "hides legislation proposals created by the user" do
-      user = create(:user)
-      other_user = create(:user)
+    # it "hides legislation proposals created by the user" do
+    #   user = create(:user)
+    #   other_user = create(:user)
 
-      proposal = create(:legislation_proposal, author: user)
-      other_proposal = create(:legislation_proposal, author: other_user)
+    #   proposal = create(:legislation_proposal, author: user)
+    #   other_proposal = create(:legislation_proposal, author: other_user)
 
-      user.block
+    #   user.block
 
-      expect(Legislation::Proposal.all).to eq [other_proposal]
-      expect(Legislation::Proposal.with_hidden).to match_array [proposal, other_proposal]
-    end
+    #   expect(Legislation::Proposal.all).to eq [other_proposal]
+    #   expect(Legislation::Proposal.with_hidden).to match_array [proposal, other_proposal]
+    # end
 
     it "removes all user roles" do
       user = create(:user)

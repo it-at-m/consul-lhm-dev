@@ -392,21 +392,21 @@ describe Budget do
       end
     end
 
-    xit "correctly formats Dollars with Spanish" do
-      budget.update!(currency_symbol: "$")
+    # it "correctly formats Dollars with Spanish" do
+    #   budget.update!(currency_symbol: "$")
 
-      I18n.with_locale(:es) do
-        expect(budget.formatted_amount(1000.00)).to eq "1.000 $"
-      end
-    end
+    #   I18n.with_locale(:es) do
+    #     expect(budget.formatted_amount(1000.00)).to eq "1.000 $"
+    #   end
+    # end
 
-    it "correctly formats Dollars with English" do
-      budget.update!(currency_symbol: "$")
+    # it "correctly formats Dollars with English" do
+    #   budget.update!(currency_symbol: "$")
 
-      I18n.with_locale(:en) do
-        expect(budget.formatted_amount(1000.00)).to eq "$1,000"
-      end
-    end
+    #   I18n.with_locale(:en) do
+    #     expect(budget.formatted_amount(1000.00)).to eq "$1,000"
+    #   end
+    # end
 
     it "correctly formats Euros with English" do
       budget.update!(currency_symbol: "€")

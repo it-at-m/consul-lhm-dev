@@ -96,16 +96,16 @@ describe Proposal do
       proposal.responsible_name = "12345678Z"
     end
 
-    xit "is not updated when the author is deleted" do
-      author = create(:user, :level_three, document_number: "12345678Z")
-      proposal.author = author
-      proposal.save!
+    # it "is not updated when the author is deleted" do
+    #   author = create(:user, :level_three, document_number: "12345678Z")
+    #   proposal.author = author
+    #   proposal.save!
 
-      proposal.author.erase
+    #   proposal.author.erase
 
-      proposal.save!
-      expect(proposal.responsible_name).to eq "12345678Z"
-    end
+    #   proposal.save!
+    #   expect(proposal.responsible_name).to eq "12345678Z"
+    # end
   end
 
   describe "tag_list" do
@@ -212,10 +212,10 @@ describe Proposal do
   describe "#votable_by?" do
     let(:proposal) { create(:proposal) }
 
-    xit "is true for level two verified users" do
-      user = create(:user, residence_verified_at: Time.current, confirmed_phone: "666333111")
-      expect(proposal.votable_by?(user)).to be true
-    end
+    # it "is true for level two verified users" do
+    #   user = create(:user, residence_verified_at: Time.current, confirmed_phone: "666333111")
+    #   expect(proposal.votable_by?(user)).to be true
+    # end
 
     xit "is true for level three verified users" do
       user = create(:user, verified_at: Time.current)
@@ -231,12 +231,12 @@ describe Proposal do
   describe "#register_vote" do
     let(:proposal) { create(:proposal) }
 
-    describe "from level two verified users" do
-      xit "registers vote" do
-        user = create(:user, residence_verified_at: Time.current, confirmed_phone: "666333111")
-        expect { proposal.register_vote(user, "yes") }.to change { proposal.reload.votes_for.size }.by(1)
-      end
-    end
+    # describe "from level two verified users" do
+    #   it "registers vote" do
+    #     user = create(:user, residence_verified_at: Time.current, confirmed_phone: "666333111")
+    #     expect { proposal.register_vote(user, "yes") }.to change { proposal.reload.votes_for.size }.by(1)
+    #   end
+    # end
 
     describe "from level three verified users" do
       xit "registers vote" do

@@ -74,17 +74,17 @@ describe TagCloud do
       expect(tag_names(tag_cloud)).to contain_exactly("parks")
     end
 
-    xit "returns tags scoped by geozone" do
-      create(:geozone, name: "California")
-      create(:geozone, name: "New York")
+    # it "returns tags scoped by geozone" do
+    #   create(:geozone, name: "California")
+    #   create(:geozone, name: "New York")
 
-      create(:proposal, tag_list: "parks, California")
-      create(:proposal, tag_list: "water, New York")
+    #   create(:proposal, tag_list: "parks, California")
+    #   create(:proposal, tag_list: "water, New York")
 
-      tag_cloud = TagCloud.new(Proposal, "California")
+    #   tag_cloud = TagCloud.new(Proposal, "California")
 
-      expect(tag_names(tag_cloud)).to contain_exactly("parks")
-    end
+    #   expect(tag_names(tag_cloud)).to contain_exactly("parks")
+    # end
 
     it "orders tags by count" do
       3.times { create(:proposal, tag_list: "participation") }

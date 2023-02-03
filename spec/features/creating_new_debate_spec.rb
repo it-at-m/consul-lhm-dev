@@ -3,18 +3,20 @@
 require "rails_helper"
 
 feature "user creates new proposal" do
-  scenario "successfully" do
-    projekt = create(:projekt)
-    projekt.projekt_settings.find_by(key: "projekt_feature.main.activate").update!(value: true)
-    projekt.debate_phase.update!(active: true, start_date: 1.month.ago, end_date: 1.month.from_now)
-    projekt.proposal_phase.update!(active: true, start_date: 1.month.ago, end_date: 1.month.from_now)
+  scenario "successfully", js: true do
+    Capybara.current_driver = :selenium_chrome
+    setup_proejekt(labels: false)
 
     author = create(:user, :level_three)
     login_as(author)
 
-    debugger
-    visit new_proposal_path(locale: :de)
-    custom_fill_in_proposal
+    visit new_debate_path(locale: :de)
+
+    fill_in "Titel des Vorschlages", with: "Titel des Vorschlages"
+    fill_in "Zusammenfassung Vorschlag", with: "Zusammenfassung Vorschlag..."
+    # fill_in_ckeditor "Vorschlagstext", with: "Vorschlagstext..."
+    fill_in "Externes Video URL", with: "https://www.youtube.com/watch?v=_51lRi-YJjk"
+    check "Ich stimme der Datenschutzbestimmungen und den Allgemeine Nutzungsbedingungen zu"
 
     click_button "Vorschlag erstellen"
 

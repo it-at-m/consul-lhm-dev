@@ -7,5 +7,11 @@ FactoryBot.define do
 
     color { "#00AA02" }
     icon { "biking" }
+
+    factory :projekt_with_labels do
+      after(:create) do |projekt, evaluator|
+        projekt.labels << create(:projekt_label)
+      end
+    end
   end
 end
