@@ -217,6 +217,20 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 
   config.expect_with(:rspec) { |c| c.syntax = :expect }
+
+  # custom config
+  config.before(:each, type: :feature) do
+    Capybara.current_driver = :selenium_chrome
+    visit root_path
+    page.driver.browser.manage.add_cookie(
+      name: "klaro",
+      value: "%7B%22system%22%3Atrue%7D",
+      path: "/",
+      domain: "127.0.0.1",
+      expires: nil,
+      secure: false
+    )
+  end
 end
 
 # Parallel build helper configuration for CI
