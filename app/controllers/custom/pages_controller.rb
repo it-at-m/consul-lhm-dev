@@ -390,8 +390,14 @@ class PagesController < ApplicationController
       @investment_ids = @budget.investments.ids
     end
 
-    if @budget.phase == "finished" && @budget.voting_style == "distributed"
-      @current_order = "ballot_line_weight"
+    if @budget.phase == "finished"
+      if @budget.voting_style == "distributed"
+        @current_order = "ballot_line_weight"
+      elsif @budget.voting_style == "distributed"
+        @current_order = "ballots"
+      elsif @budget.voting_style == "knapsack"
+        @current_order = "ballots"
+      end
     end
 
     @investments = @investments.send("sort_by_#{@current_order}").page(params[:page]).per(20)
