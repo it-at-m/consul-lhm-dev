@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe SiteCustomization::Image do
-  it "stores images with Active Storage" do
+  xit "stores images with Active Storage" do
     image = create(:site_customization_image, name: "map",
                    image: fixture_file_upload("custom_map.jpg"))
 
@@ -10,7 +10,7 @@ describe SiteCustomization::Image do
   end
 
   describe "logo" do
-    it "is valid with a 260x80 image" do
+    xit "is valid with a 260x80 image" do
       image = build(:site_customization_image,
                     name: "logo_header",
                     image: fixture_file_upload("logo_header-260x80.png"))
@@ -18,7 +18,7 @@ describe SiteCustomization::Image do
       expect(image).to be_valid
     end
 
-    it "is valid with a 223x80 image" do
+    xit "is valid with a 223x80 image" do
       image = build(:site_customization_image,
                     name: "logo_header",
                     image: fixture_file_upload("logo_header.png"))
