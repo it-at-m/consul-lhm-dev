@@ -66,6 +66,17 @@ class NotificationServiceMailer < ApplicationMailer
     end
   end
 
+  def new_manual_verification_request(user_to_notify_id, user_to_verify_id)
+    @user_to_notify = User.find(user_to_notify_id)
+    @user_to_verify = User.find(user_to_verify_id)
+
+    subject = t("custom.notification_service_mailers.new_manual_verification_request.subject")
+
+    with_user(@user_to_notify) do
+      mail(to: @user_to_notify.email, subject: subject)
+    end
+  end
+
   private
 
     def with_user(user)

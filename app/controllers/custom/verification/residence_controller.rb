@@ -10,9 +10,10 @@ class Verification::ResidenceController < ApplicationController
     @residence = Verification::Residence.new(residence_params.merge(user: current_user))
 
     if @residence.save
+      NotificationServices::NewManualVerificationRequestNotifier.call(current_user.id) # remove unless manual
       redirect_to account_path, notice: t("custom.verification.residence.create.flash.success_manual")
     else
-      render :new
+      redirect_to new_residence_path, notice: t("custom.verification.residence.create.flash.error")
     end
   end
 

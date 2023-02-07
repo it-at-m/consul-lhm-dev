@@ -29,7 +29,7 @@
               (<%= t("poll_questions.show.question.multiple") %>)
             </small>
           <% end %>
-          <p><%= question.description %></p>
+          <p><%= auto_link_already_sanitized_html wysiwyg(question.description) %></p>
         </h3>
         <div class="results-table-wrapper">
           <table id="question_<%= question.id %>_results_table" class='results-table'>
