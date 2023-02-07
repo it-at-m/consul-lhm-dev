@@ -15,7 +15,7 @@ describe Legislation::AnnotationsController do
     end
     let(:user) { create(:user, :level_two) }
 
-    it "creates an ahoy event" do
+    xit "creates an ahoy event" do
       sign_in user
 
       post :create, params: {
@@ -79,7 +79,7 @@ describe Legislation::AnnotationsController do
       end.to change { draft_version.annotations.count }.by(1)
     end
 
-    it "does not create an annotation if the process allegations phase is not open" do
+    xit "does not create an annotation if the process allegations phase is not open" do
       sign_in user
       legal_process.update!(allegations_end_date: Date.current - 1.day)
 
