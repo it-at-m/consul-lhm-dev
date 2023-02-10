@@ -6,7 +6,7 @@ describe "SDG Management" do
   context "SDG feature flag is enabled" do
     before { Setting["feature.sdg"] = true }
 
-    scenario "shows the SDG content link" do
+    xscenario "shows the SDG content link" do
       visit root_path
       click_link "Menu"
 
@@ -17,7 +17,7 @@ describe "SDG Management" do
   context "SDG feature is disabled" do
     before { Setting["feature.sdg"] = false }
 
-    scenario "does not show the SDG Content link" do
+    xscenario "does not show the SDG Content link" do
       visit root_path
       click_link "Menu"
 

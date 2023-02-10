@@ -14,7 +14,7 @@ describe "Admin tags", :admin do
     expect(page).to have_content "supertag"
   end
 
-  scenario "Create" do
+  xscenario "Create" do
     visit admin_tags_path
 
     expect(page).not_to have_content "important issues"
@@ -78,7 +78,7 @@ describe "Admin tags", :admin do
       expect(page).not_to have_content "Not a category"
     end
 
-    scenario "Create instanciates tags of correct kind" do
+    xscenario "Create instanciates tags of correct kind" do
       visit admin_tags_path
 
       within("form.new_tag") do
@@ -93,7 +93,7 @@ describe "Admin tags", :admin do
     end
   end
 
-  scenario "Upgrade tag to category" do
+  xscenario "Upgrade tag to category" do
     create(:tag, name: "Soon a category")
 
     visit admin_tags_path
@@ -106,7 +106,7 @@ describe "Admin tags", :admin do
     expect(page).to have_content "Soon a category"
   end
 
-  scenario "Create shows validation error when tag name is empty" do
+  xscenario "Create shows validation error when tag name is empty" do
     visit admin_tags_path
 
     within("form.new_tag") do

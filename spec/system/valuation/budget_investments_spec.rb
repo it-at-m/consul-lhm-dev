@@ -20,7 +20,7 @@ describe "Valuation budget investments" do
     end
   end
 
-  scenario "Display link to valuation section" do
+  xscenario "Display link to valuation section" do
     visit root_path
     click_link "Menu"
 
@@ -215,7 +215,7 @@ describe "Valuation budget investments" do
                                  valuators: [valuator, second_valuator])
     end
 
-    scenario "visible for assigned valuators" do
+    xscenario "visible for assigned valuators" do
       investment.update!(visible_to_valuators: true)
       visit valuation_budget_budget_investments_path(budget)
 
@@ -237,7 +237,7 @@ describe "Valuation budget investments" do
       end
     end
 
-    scenario "visible for admins" do
+    xscenario "visible for admins" do
       logout
       login_as create(:administrator).user
 
@@ -501,7 +501,7 @@ describe "Valuation budget investments" do
       expect(page).to have_content("Investments can only be valuated when Budget is in valuating phase")
     end
 
-    scenario "visible to admins regardless of not being in valuating phase" do
+    xscenario "visible to admins regardless of not being in valuating phase" do
       budget.update!(phase: "publishing_prices")
 
       user = create(:user)

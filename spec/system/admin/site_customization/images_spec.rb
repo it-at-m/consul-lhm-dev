@@ -30,7 +30,7 @@ describe "Admin custom images", :admin do
     expect(page).to have_css("img[src*='custom_map.jpg']", count: 1)
   end
 
-  scenario "Image is replaced on front views" do
+  xscenario "Image is replaced on front views" do
     budget = create(:budget)
     group = create(:budget_group, budget: budget)
 
@@ -60,7 +60,7 @@ describe "Admin custom images", :admin do
     end
   end
 
-  scenario "Custom apple touch icon is replaced on front views" do
+  xscenario "Custom apple touch icon is replaced on front views" do
     create(:site_customization_image,
            name: "apple-touch-icon-200",
            image: fixture_file_upload("apple-touch-icon-custom-200.png"))

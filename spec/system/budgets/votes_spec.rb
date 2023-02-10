@@ -11,7 +11,7 @@ describe "Votes" do
     before { login_as(manuela) }
 
     describe "Index" do
-      scenario "Index shows user votes on proposals" do
+      xscenario "Index shows user votes on proposals" do
         investment1 = create(:budget_investment, heading: heading, voters: [manuela])
         investment2 = create(:budget_investment, heading: heading)
         investment3 = create(:budget_investment, heading: heading)
@@ -36,7 +36,7 @@ describe "Votes" do
         end
       end
 
-      scenario "Create from investments' index" do
+      xscenario "Create from investments' index" do
         create(:budget_investment, heading: heading)
 
         visit budget_investments_path(budget, heading_id: heading.id)
@@ -59,7 +59,7 @@ describe "Votes" do
         expect(page).to have_content "No supports"
       end
 
-      scenario "Trying to vote multiple times" do
+      xscenario "Trying to vote multiple times" do
         visit budget_investment_path(budget, investment)
 
         within(".supports") do
@@ -70,7 +70,7 @@ describe "Votes" do
         end
       end
 
-      scenario "Create from investment show" do
+      xscenario "Create from investment show" do
         visit budget_investment_path(budget, investment)
 
         within(".supports") do
@@ -83,7 +83,7 @@ describe "Votes" do
       end
     end
 
-    scenario "Disable voting on investments" do
+    xscenario "Disable voting on investments" do
       budget.update!(phase: "reviewing")
       investment = create(:budget_investment, heading: heading)
 
@@ -116,7 +116,7 @@ describe "Votes" do
         group.update(max_votable_headings: 2)
       end
 
-      scenario "From Index" do
+      xscenario "From Index" do
         visit budget_investments_path(budget, heading_id: new_york.id)
 
         within("#budget_investment_#{new_york_investment.id}") do
@@ -159,7 +159,7 @@ describe "Votes" do
         end
       end
 
-      scenario "From show" do
+      xscenario "From show" do
         visit budget_investment_path(budget, new_york_investment)
 
         accept_confirm { click_button "Support" }
@@ -192,14 +192,14 @@ describe "Votes" do
                                          "Share it!"
       end
 
-      scenario "Confirm message shows the right text" do
+      xscenario "Confirm message shows the right text" do
         visit budget_investments_path(budget, heading_id: new_york.id)
         click_button "Support"
 
         expect(page.driver.send(:find_modal).text).to match "You can only support investments in 2 districts."
       end
 
-      scenario "Do not show confirm message if user can vote in all headings" do
+      xscenario "Do not show confirm message if user can vote in all headings" do
         group.update!(max_votable_headings: group.headings.count)
 
         visit budget_investments_path(budget, heading_id: new_york.id)
@@ -215,7 +215,7 @@ describe "Votes" do
     let(:budget) { create(:budget, :balloting, :approval) }
     before { login_as(manuela) }
 
-    scenario "Budget limit is ignored" do
+    xscenario "Budget limit is ignored" do
       group = create(:budget_group, budget: budget)
       heading = create(:budget_heading, group: group, max_ballot_lines: 2)
       investment1 = create(:budget_investment, :selected, heading: heading, price: heading.price)

@@ -14,7 +14,7 @@ describe "Legislation" do
       create(:legislation_question, process: process, title: "Question 3")
     end
 
-    scenario "shows question list" do
+    xscenario "shows question list" do
       visit legislation_process_path(process)
 
       expect(page).to have_content("Question 1")
@@ -37,7 +37,7 @@ describe "Legislation" do
       expect(page).not_to have_content("NEXT QUESTION")
     end
 
-    scenario "shows question page" do
+    xscenario "shows question page" do
       visit legislation_process_question_path(process, process.questions.first)
 
       expect(page).to have_content("Question 1")

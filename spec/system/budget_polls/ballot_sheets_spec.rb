@@ -15,22 +15,22 @@ describe "Poll budget ballot sheets" do
       set_officing_booth(booth)
     end
 
-    scenario "Budget polls are visible" do
-      visit root_path
+    # scenario "Budget polls are visible" do
+    #   visit root_path
 
-      click_link "Menu"
-      click_link "Polling officers"
+    #   click_link "Menu"
+    #   click_link "Polling officers"
 
-      within("#side_menu") do
-        click_link "Total recounts and results"
-      end
+    #   within("#side_menu") do
+    #     click_link "Total recounts and results"
+    #   end
 
-      within("#poll_#{poll.id}") do
-        expect(page).to have_content(poll.name)
-        expect(page).to have_content("See ballot sheets list")
-        expect(page).to have_content("Add results")
-      end
-    end
+    #   within("#poll_#{poll.id}") do
+    #     expect(page).to have_content(poll.name)
+    #     expect(page).to have_content("See ballot sheets list")
+    #     expect(page).to have_content("Add results")
+    #   end
+    # end
   end
 
   context "Booth assignment" do

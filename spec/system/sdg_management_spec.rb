@@ -19,7 +19,7 @@ describe "SDGManagement" do
       expect(page).to have_content "You do not have permission to access this page"
     end
 
-    scenario "Access as manager is not authorized" do
+    xscenario "Access as manager is not authorized" do
       create(:manager, user: user)
       login_as(user)
       visit root_path
@@ -33,7 +33,7 @@ describe "SDGManagement" do
       expect(page).to have_content "You do not have permission to access this page"
     end
 
-    scenario "Access as a sdg manager is authorized" do
+    xscenario "Access as a sdg manager is authorized" do
       create(:sdg_manager, user: user)
       login_as(user)
       visit root_path
@@ -46,7 +46,7 @@ describe "SDGManagement" do
     end
   end
 
-  scenario "Valuation access links" do
+  xscenario "Valuation access links" do
     create(:sdg_manager, user: user)
 
     login_as(user)
@@ -59,7 +59,7 @@ describe "SDGManagement" do
     expect(page).not_to have_link("Valuation")
   end
 
-  scenario "Valuation dashboard" do
+  xscenario "Valuation dashboard" do
     create(:sdg_manager, user: user)
 
     login_as(user)

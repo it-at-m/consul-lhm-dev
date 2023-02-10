@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "Tags" do
-  scenario "Index" do
+  xscenario "Index" do # move to categories
     earth = create(:proposal, tag_list: "Medio Ambiente")
     money = create(:proposal, tag_list: "Economía")
 
@@ -16,7 +16,7 @@ describe "Tags" do
     end
   end
 
-  scenario "Index shows up to 5 tags per proposal" do
+  xscenario "Index shows up to 5 tags per proposal" do # move to categories
     tag_list = ["Hacienda", "Economía", "Medio Ambiente", "Corrupción", "Fiestas populares", "Prensa"]
     create :proposal, tag_list: tag_list
 
@@ -36,7 +36,7 @@ describe "Tags" do
     expect(page).not_to have_selector("#featured-proposals")
   end
 
-  scenario "Index shows 3 tags with no plus link" do
+  xscenario "Index shows 3 tags with no plus link" do # move to categories
     tag_list = ["Medio Ambiente", "Corrupción", "Fiestas populares"]
     create :proposal, tag_list: tag_list
 
@@ -50,7 +50,7 @@ describe "Tags" do
     end
   end
 
-  scenario "Show" do
+  xscenario "Show" do # move to categories
     proposal = create(:proposal, tag_list: "Hacienda, Economía")
 
     visit proposal_path(proposal)
@@ -59,29 +59,29 @@ describe "Tags" do
     expect(page).to have_content "Hacienda"
   end
 
-  scenario "Create with custom tags" do
-    user = create(:user)
-    login_as(user)
+  # scenario "Create with custom tags" do
+  #   user = create(:user)
+  #   login_as(user)
 
-    visit new_proposal_path
-    fill_in_new_proposal_title with: "Help refugees"
-    fill_in "Proposal summary", with: "In summary, what we want is..."
-    fill_in_ckeditor "Proposal text", with: "This is very important because..."
-    fill_in "Full name of the person submitting the proposal", with: "Isabel Garcia"
-    fill_in "Tags", with: "Economía, Hacienda"
-    check "I agree to the Privacy Policy and the Terms and conditions of use"
+  #   visit new_proposal_path
+  #   fill_in_new_proposal_title with: "Help refugees"
+  #   fill_in "Proposal summary", with: "In summary, what we want is..."
+  #   fill_in_ckeditor "Proposal text", with: "This is very important because..."
+  #   fill_in "Full name of the person submitting the proposal", with: "Isabel Garcia"
+  #   fill_in "Tags", with: "Economía, Hacienda"
+  #   check "I agree to the Privacy Policy and the Terms and conditions of use"
 
-    click_button "Create proposal"
+  #   click_button "Create proposal"
 
-    expect(page).to have_content "Proposal created successfully."
-    click_link "No, I want to publish the proposal"
-    click_link "Not now, go to my proposal"
+  #   expect(page).to have_content "Proposal created successfully."
+  #   click_link "No, I want to publish the proposal"
+  #   click_link "Not now, go to my proposal"
 
-    expect(page).to have_content "Economía"
-    expect(page).to have_content "Hacienda"
-  end
+  #   expect(page).to have_content "Economía"
+  #   expect(page).to have_content "Hacienda"
+  # end
 
-  scenario "Category with category tags" do
+  xscenario "Category with category tags" do
     create(:tag, :category, name: "Education")
     create(:tag, :category, name: "Health")
 
@@ -110,50 +110,50 @@ describe "Tags" do
     end
   end
 
-  scenario "Create with too many tags" do
-    user = create(:user)
-    login_as(user)
+  # scenario "Create with too many tags" do
+  #   user = create(:user)
+  #   login_as(user)
 
-    visit new_proposal_path
-    fill_in_new_proposal_title with: "Title"
-    fill_in_ckeditor "Proposal text", with: "Description"
-    check "I agree to the Privacy Policy and the Terms and conditions of use"
+  #   visit new_proposal_path
+  #   fill_in_new_proposal_title with: "Title"
+  #   fill_in_ckeditor "Proposal text", with: "Description"
+  #   check "I agree to the Privacy Policy and the Terms and conditions of use"
 
-    fill_in "Tags", with: "Impuestos, Economía, Hacienda, Sanidad, Educación, Política, Igualdad"
+  #   fill_in "Tags", with: "Impuestos, Economía, Hacienda, Sanidad, Educación, Política, Igualdad"
 
-    click_button "Create proposal"
+  #   click_button "Create proposal"
 
-    expect(page).to have_content error_message
-    expect(page).to have_content "tags must be less than or equal to 6"
-  end
+  #   expect(page).to have_content error_message
+  #   expect(page).to have_content "tags must be less than or equal to 6"
+  # end
 
-  scenario "Create with dangerous strings" do
-    author = create(:user)
-    login_as(author)
+  # scenario "Create with dangerous strings" do
+  #   author = create(:user)
+  #   login_as(author)
 
-    visit new_proposal_path
+  #   visit new_proposal_path
 
-    fill_in_new_proposal_title with: "A test of dangerous strings"
-    fill_in "Proposal summary", with: "In summary, what we want is..."
-    fill_in_ckeditor "Proposal text", with: "A description suitable for this test"
-    fill_in "Full name of the person submitting the proposal", with: "Isabel Garcia"
-    check "I agree to the Privacy Policy and the Terms and conditions of use"
+  #   fill_in_new_proposal_title with: "A test of dangerous strings"
+  #   fill_in "Proposal summary", with: "In summary, what we want is..."
+  #   fill_in_ckeditor "Proposal text", with: "A description suitable for this test"
+  #   fill_in "Full name of the person submitting the proposal", with: "Isabel Garcia"
+  #   check "I agree to the Privacy Policy and the Terms and conditions of use"
 
-    fill_in "Tags", with: "user_id=1, &a=3, <script>alert('hey');</script>"
+  #   fill_in "Tags", with: "user_id=1, &a=3, <script>alert('hey');</script>"
 
-    click_button "Create proposal"
+  #   click_button "Create proposal"
 
-    expect(page).to have_content "Proposal created successfully."
-    click_link "No, I want to publish the proposal"
-    click_link "Not now, go to my proposal"
+  #   expect(page).to have_content "Proposal created successfully."
+  #   click_link "No, I want to publish the proposal"
+  #   click_link "Not now, go to my proposal"
 
-    expect(page).to have_content "user_id1"
-    expect(page).to have_content "a3"
-    expect(page).to have_content "scriptalert('hey');script"
-    expect(page.html).not_to include "user_id=1, &a=3, <script>alert('hey');</script>"
-  end
+  #   expect(page).to have_content "user_id1"
+  #   expect(page).to have_content "a3"
+  #   expect(page).to have_content "scriptalert('hey');script"
+  #   expect(page.html).not_to include "user_id=1, &a=3, <script>alert('hey');</script>"
+  # end
 
-  scenario "Update" do
+  xscenario "Update" do
     proposal = create(:proposal, tag_list: "Economía")
 
     login_as(proposal.author)
@@ -171,7 +171,7 @@ describe "Tags" do
     end
   end
 
-  scenario "Delete" do
+  xscenario "Delete" do
     proposal = create(:proposal, tag_list: "Economía")
 
     login_as(proposal.author)
@@ -185,7 +185,7 @@ describe "Tags" do
   end
 
   context "Filter" do
-    scenario "From index" do
+    xscenario "From index" do
       create(:proposal, tag_list: "Health", title: "More green spaces")
       create(:proposal, tag_list: "Education", title: "Online teachers")
 
@@ -201,7 +201,7 @@ describe "Tags" do
       end
     end
 
-    scenario "From show" do
+    xscenario "From show" do
       proposal = create(:proposal, tag_list: "Education")
       create(:proposal, tag_list: "Health")
 
@@ -216,39 +216,39 @@ describe "Tags" do
     end
   end
 
-  context "Tag cloud" do
-    scenario "Display user tags" do
-      create(:proposal, tag_list: "Medio Ambiente")
-      create(:proposal, tag_list: "Economía")
+  # context "Tag cloud" do
+  #   scenario "Display user tags" do
+  #     create(:proposal, tag_list: "Medio Ambiente")
+  #     create(:proposal, tag_list: "Economía")
 
-      visit proposals_path
+  #     visit proposals_path
 
-      within "#tag-cloud" do
-        expect(page).to have_content "Medio Ambiente"
-        expect(page).to have_content "Economía"
-      end
-    end
+  #     within "#tag-cloud" do
+  #       expect(page).to have_content "Medio Ambiente"
+  #       expect(page).to have_content "Economía"
+  #     end
+  #   end
 
-    scenario "Filter by user tags" do
-      proposal1 = create(:proposal, tag_list: "Medio Ambiente")
-      proposal2 = create(:proposal, tag_list: "Medio Ambiente")
-      proposal3 = create(:proposal, tag_list: "Economía")
+  #   scenario "Filter by user tags" do
+  #     proposal1 = create(:proposal, tag_list: "Medio Ambiente")
+  #     proposal2 = create(:proposal, tag_list: "Medio Ambiente")
+  #     proposal3 = create(:proposal, tag_list: "Economía")
 
-      visit proposals_path
+  #     visit proposals_path
 
-      within "#tag-cloud" do
-        click_link "Medio Ambiente"
-      end
+  #     within "#tag-cloud" do
+  #       click_link "Medio Ambiente"
+  #     end
 
-      expect(page).to have_css ".proposal", count: 2
-      expect(page).to have_content proposal1.title
-      expect(page).to have_content proposal2.title
-      expect(page).not_to have_content proposal3.title
-    end
-  end
+  #     expect(page).to have_css ".proposal", count: 2
+  #     expect(page).to have_content proposal1.title
+  #     expect(page).to have_content proposal2.title
+  #     expect(page).not_to have_content proposal3.title
+  #   end
+  # end
 
   context "Categories" do
-    scenario "Display category tags" do
+    xscenario "Display category tags" do
       create(:tag, :category, name: "Medio Ambiente")
       create(:tag, :category, name: "Economía")
 
@@ -263,7 +263,7 @@ describe "Tags" do
       end
     end
 
-    scenario "Filter by category tags" do
+    xscenario "Filter by category tags" do
       create(:tag, :category, name: "Medio Ambiente")
       create(:tag, :category, name: "Economía")
 

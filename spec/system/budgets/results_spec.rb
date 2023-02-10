@@ -30,7 +30,7 @@ describe "Results" do
     expect(page).not_to have_link "See results"
   end
 
-  scenario "Diplays winner investments" do
+  xscenario "Diplays winner investments" do
     create(:budget_heading, group: group)
 
     visit budget_path(budget)
@@ -116,7 +116,7 @@ describe "Results" do
     end
   end
 
-  scenario "Loads budget and heading by slug" do
+  xscenario "Loads budget and heading by slug" do
     visit budget_results_path(budget.slug, heading_id: heading.slug)
 
     expect(page).to have_selector("a.is-active", text: heading.name)

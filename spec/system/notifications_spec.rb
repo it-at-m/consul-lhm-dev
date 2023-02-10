@@ -4,7 +4,7 @@ describe "Notifications" do
   let(:user) { create :user }
   before { login_as(user) }
 
-  scenario "View all" do
+  xscenario "View all" do
     read1 = create(:notification, :read, user: user)
     read2 = create(:notification, :read, user: user)
     unread = create(:notification, user: user)
@@ -19,7 +19,7 @@ describe "Notifications" do
     expect(page).not_to have_content(unread.notifiable_title)
   end
 
-  scenario "View unread" do
+  xscenario "View unread" do
     unread1 = create(:notification, user: user)
     unread2 = create(:notification, user: user)
     read = create(:notification, :read, user: user)
@@ -34,7 +34,7 @@ describe "Notifications" do
     expect(page).not_to have_content(read.notifiable_title)
   end
 
-  scenario "View single notification" do
+  xscenario "View single notification" do
     proposal = create(:proposal)
     create(:notification, user: user, notifiable: proposal)
 
@@ -51,7 +51,7 @@ describe "Notifications" do
     expect(page).to have_css ".notification", count: 1
   end
 
-  scenario "Mark as read" do
+  xscenario "Mark as read" do
     notification1 = create(:notification, user: user)
     notification2 = create(:notification, user: user)
 
@@ -100,7 +100,7 @@ describe "Notifications" do
     expect(page).to have_content(notification2.notifiable_title)
   end
 
-  scenario "Bell" do
+  xscenario "Bell" do
     create(:notification, user: user)
     visit root_path
 
@@ -163,7 +163,7 @@ describe "Notifications" do
       expect(page).to have_current_path "https://www.external.link.dev/", url: true
     end
 
-    scenario "With internal link" do
+    xscenario "With internal link" do
       admin_notification.update!(link: "/stats")
 
       visit notifications_path

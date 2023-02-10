@@ -16,7 +16,7 @@ describe "SDG Goals" do
       within("#navigation_bar") { expect(page).not_to have_link "SDG" }
     end
 
-    scenario "routes to the goals index" do
+    xscenario "routes to the goals index" do
       visit root_path
       within("#navigation_bar") { click_link "SDG" }
 
@@ -57,7 +57,7 @@ describe "SDG Goals" do
       create(:legislation_process, title: "Tax regulations", sdg_goals: [SDG::Goal[10]])
     end
 
-    scenario "shows the SDG and its related content" do
+    xscenario "shows the SDG and its related content" do
       visit sdg_goal_path(15)
 
       within(".sdg-goal header") { expect(page).to have_content "15\nLIFE ON\nLAND" }

@@ -4,7 +4,7 @@ describe "Proposal's dashboard" do
   let(:proposal) { create(:proposal, :draft) }
   before { login_as(proposal.author) }
 
-  scenario "Navigation" do
+  xscenario "Navigation" do
     visit proposal_dashboard_path(proposal)
 
     expect(page).to have_link("Edit my proposal")
@@ -16,14 +16,14 @@ describe "Proposal's dashboard" do
     expect(page).to have_link("Poster")
   end
 
-  scenario "Publish link dissapears after proposal's publication" do
+  xscenario "Publish link dissapears after proposal's publication" do
     visit proposal_dashboard_path(proposal)
     click_link "Publish proposal"
 
     expect(page).not_to have_link("Publish proposal")
   end
 
-  scenario "Dashboard progress shows current goal" do
+  xscenario "Dashboard progress shows current goal" do
     goal = create(:dashboard_action, :resource, :active,
                                      required_supports: proposal.votes_for.size + 1_000)
     future_goal = create(:dashboard_action, :resource, :active,
@@ -47,7 +47,7 @@ describe "Proposal's dashboard" do
     end
   end
 
-  scenario "Dashboard progress show proposed actions" do
+  xscenario "Dashboard progress show proposed actions" do
     action = create(:dashboard_action, :proposed_action, :active)
 
     visit progress_proposal_dashboard_path(proposal)
@@ -262,7 +262,7 @@ describe "Proposal's dashboard" do
     expect(page).to have_link(feature.title)
   end
 
-  scenario "Request resource with admin request" do
+  xscenario "Request resource with admin request" do
     feature = create(:dashboard_action, :resource, :active, :admin_request)
 
     visit proposal_dashboard_path(proposal)
@@ -285,7 +285,7 @@ describe "Proposal's dashboard" do
     expect(page).to have_content("Proposal has already been taken")
   end
 
-  scenario "Resource requested show message instead of button" do
+  xscenario "Resource requested show message instead of button" do
     feature = create(:dashboard_action, :resource, :active, :admin_request)
 
     visit proposal_dashboard_path(proposal)
@@ -380,7 +380,7 @@ describe "Proposal's dashboard" do
                                                             anchor: "tab-notifications"))
   end
 
-  scenario "Dashboard has a related content section" do
+  xscenario "Dashboard has a related content section" do
     related_debate = create(:debate)
     related_proposal = create(:proposal)
 

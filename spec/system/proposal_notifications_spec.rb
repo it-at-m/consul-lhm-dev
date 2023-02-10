@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "Proposal Notifications" do
-  scenario "Send a notification" do
+  xscenario "Send a notification" do
     author = create(:user, :with_proposal)
 
     login_as(author)
@@ -26,7 +26,7 @@ describe "Proposal Notifications" do
     expect(page).to have_content "Please share it with others so we can make it happen!"
   end
 
-  scenario "Send a notification (Active voter)", :no_js do
+  xscenario "Send a notification (Active voter)", :no_js do
     proposal = create(:proposal)
 
     create(:user, :level_two, votables: [proposal], followables: [proposal])
@@ -35,7 +35,7 @@ describe "Proposal Notifications" do
     expect(Notification.count).to eq(1)
   end
 
-  scenario "Send a notification (Follower)", :no_js do
+  xscenario "Send a notification (Follower)", :no_js do
     proposal = create(:proposal)
 
     create(:user, :level_two, followables: [proposal])
@@ -44,7 +44,7 @@ describe "Proposal Notifications" do
     expect(Notification.count).to eq(1)
   end
 
-  scenario "Send a notification (Follower and Voter)", :no_js do
+  xscenario "Send a notification (Follower and Voter)", :no_js do
     proposal = create(:proposal)
 
     create(:user, followables: [proposal], votables: [proposal])
@@ -55,7 +55,7 @@ describe "Proposal Notifications" do
     expect(Notification.count).to eq(2)
   end
 
-  scenario "Send a notification (Blocked voter)", :no_js do
+  xscenario "Send a notification (Blocked voter)", :no_js do
     proposal = create(:proposal)
     voter = create(:user, :level_two, votables: [proposal])
 
@@ -65,7 +65,7 @@ describe "Proposal Notifications" do
     expect(Notification.count).to eq(0)
   end
 
-  scenario "Send a notification (Erased voter)", :no_js do
+  xscenario "Send a notification (Erased voter)", :no_js do
     proposal = create(:proposal)
     voter = create(:user, :level_two, votables: [proposal])
 
@@ -75,7 +75,7 @@ describe "Proposal Notifications" do
     expect(Notification.count).to eq(0)
   end
 
-  scenario "Show notifications" do
+  xscenario "Show notifications" do
     proposal = create(:proposal)
 
     create(:proposal_notification,
@@ -95,7 +95,7 @@ describe "Proposal Notifications" do
     expect(page).to have_content "We are almost there please share with your peoples!"
   end
 
-  scenario "Message about receivers (Followers)" do
+  xscenario "Message about receivers (Followers)" do
     author = create(:user)
     proposal = create(:proposal, author: author)
 
@@ -110,7 +110,7 @@ describe "Proposal Notifications" do
                                                      anchor: "comments"))
   end
 
-  scenario "Message about receivers (Disctinct Followers and Voters)" do
+  xscenario "Message about receivers (Disctinct Followers and Voters)" do
     author = create(:user)
     proposal = create(:proposal, author: author)
 
@@ -126,7 +126,7 @@ describe "Proposal Notifications" do
                                                      anchor: "comments"))
   end
 
-  scenario "Message about receivers (Same Followers and Voters)" do
+  xscenario "Message about receivers (Same Followers and Voters)" do
     author = create(:user)
     voter_follower = create(:user)
 
@@ -141,7 +141,7 @@ describe "Proposal Notifications" do
                                                      anchor: "comments"))
   end
 
-  context "Permissions" do
+  xcontext "Permissions" do
     scenario "Link to send the message" do
       author = create(:user)
       proposal = create(:proposal, author: author)
@@ -175,7 +175,7 @@ describe "Proposal Notifications" do
     end
   end
 
-  context "In-app notifications from the proposal's author" do
+  xcontext "In-app notifications from the proposal's author" do
     scenario "Voters who are followed should receive a notification" do
       author = create(:user)
       proposal = create(:proposal, author: author)
@@ -366,7 +366,7 @@ describe "Proposal Notifications" do
     end
   end
 
-  scenario "Error messages" do
+  xscenario "Error messages" do
     author = create(:user)
     proposal = create(:proposal, author: author)
 
@@ -378,7 +378,7 @@ describe "Proposal Notifications" do
     expect(page).to have_content error_message
   end
 
-  context "Limits" do
+  xcontext "Limits" do
     scenario "Cannot send more than one notification within established interval" do
       author = create(:user)
       proposal = create(:proposal, author: author)

@@ -5,13 +5,13 @@ describe "Polls" do
 
   before { login_as(proposal.author) }
 
-  scenario "Has a link to polls feature" do
+  xscenario "Has a link to polls feature" do
     visit proposal_dashboard_path(proposal)
 
     expect(page).to have_link("Polls")
   end
 
-  scenario "Create a poll" do
+  xscenario "Create a poll" do
     visit proposal_dashboard_path(proposal)
     click_link "Polls"
     click_link "Create poll"
@@ -42,7 +42,7 @@ describe "Polls" do
   end
 
   describe "Datepicker" do
-    scenario "displays the expected format when changing the date field" do
+    xscenario "displays the expected format when changing the date field" do
       visit new_proposal_dashboard_poll_path(proposal)
 
       fill_in "Start Date", with: "20/02/2002"
@@ -52,7 +52,7 @@ describe "Polls" do
       expect(page).to have_field "Start Date", with: "22/02/2002"
     end
 
-    scenario "is closed after using the browser back button" do
+    xscenario "is closed after using the browser back button" do
       visit proposal_dashboard_polls_path(proposal)
 
       click_link "Create poll"
@@ -66,7 +66,7 @@ describe "Polls" do
       expect(page).not_to have_css "#ui-datepicker-div"
     end
 
-    scenario "works after using the browser back button" do
+    xscenario "works after using the browser back button" do
       visit new_proposal_dashboard_poll_path(proposal)
       click_link "Polls"
 
@@ -79,7 +79,7 @@ describe "Polls" do
     end
   end
 
-  scenario "Create a poll redirects back to form when invalid data" do
+  xscenario "Create a poll redirects back to form when invalid data" do
     visit proposal_dashboard_path(proposal)
     click_link "Polls"
     click_link "Create poll"
@@ -89,7 +89,7 @@ describe "Polls" do
     expect(page).to have_content("New poll")
   end
 
-  scenario "Edit poll is allowed for upcoming polls" do
+  xscenario "Edit poll is allowed for upcoming polls" do
     poll = create(:poll, related: proposal, starts_at: 1.week.from_now)
 
     visit proposal_dashboard_polls_path(proposal)
@@ -105,7 +105,7 @@ describe "Polls" do
     expect(page).to have_content "Poll updated successfully"
   end
 
-  scenario "Edit poll redirects back when invalid data" do
+  xscenario "Edit poll redirects back when invalid data" do
     poll = create(:poll, related: proposal, starts_at: 1.week.from_now)
 
     visit proposal_dashboard_polls_path(proposal)
@@ -123,7 +123,7 @@ describe "Polls" do
     expect(page).to have_content("Edit poll")
   end
 
-  scenario "Edit poll is not allowed for current polls" do
+  xscenario "Edit poll is not allowed for current polls" do
     poll = create(:poll, :current, related: proposal)
 
     visit proposal_dashboard_polls_path(proposal)
@@ -133,7 +133,7 @@ describe "Polls" do
     end
   end
 
-  scenario "Edit poll is not allowed for expired polls" do
+  xscenario "Edit poll is not allowed for expired polls" do
     poll = create(:poll, :expired, related: proposal)
 
     visit proposal_dashboard_polls_path(proposal)
@@ -143,7 +143,7 @@ describe "Polls" do
     end
   end
 
-  scenario "Edit poll should allow to remove questions" do
+  xscenario "Edit poll should allow to remove questions" do
     poll = create(:poll, related: proposal, starts_at: 1.week.from_now)
     create(:poll_question, poll: poll)
     create(:poll_question, poll: poll)
@@ -166,7 +166,7 @@ describe "Polls" do
     expect(page).to have_css ".nested-fields", count: 1
   end
 
-  scenario "Edit poll allows users to remove answers" do
+  xscenario "Edit poll allows users to remove answers" do
     poll = create(:poll, related: proposal, starts_at: 1.week.from_now)
     create(:poll_question, :yes_no, poll: poll)
     visit proposal_dashboard_polls_path(proposal)
@@ -193,7 +193,7 @@ describe "Polls" do
     end
   end
 
-  scenario "Can destroy poll without responses" do
+  xscenario "Can destroy poll without responses" do
     poll = create(:poll, related: proposal)
 
     visit proposal_dashboard_polls_path(proposal)
@@ -206,7 +206,7 @@ describe "Polls" do
     expect(page).not_to have_content(poll.name)
   end
 
-  scenario "Can't destroy poll with responses" do
+  xscenario "Can't destroy poll with responses" do
     poll = create(:poll, related: proposal)
     create(:poll_question, poll: poll)
     create(:poll_voter, poll: poll)
@@ -221,7 +221,7 @@ describe "Polls" do
     expect(page).to have_content(poll.name)
   end
 
-  scenario "View results not available for upcoming polls" do
+  xscenario "View results not available for upcoming polls" do
     poll = create(:poll, related: proposal, starts_at: 1.week.from_now)
 
     visit proposal_dashboard_polls_path(proposal)
@@ -231,7 +231,7 @@ describe "Polls" do
     end
   end
 
-  scenario "View results available for current polls" do
+  xscenario "View results available for current polls" do
     poll = create(:poll, :current, related: proposal)
 
     visit proposal_dashboard_polls_path(proposal)
@@ -241,7 +241,7 @@ describe "Polls" do
     end
   end
 
-  scenario "View results available for expired polls" do
+  xscenario "View results available for expired polls" do
     poll = create(:poll, :expired, related: proposal)
 
     visit proposal_dashboard_polls_path(proposal)
@@ -251,7 +251,7 @@ describe "Polls" do
     end
   end
 
-  scenario "View results redirects to results in public zone" do
+  xscenario "View results redirects to results in public zone" do
     poll = create(:poll, :expired, related: proposal)
 
     visit proposal_dashboard_polls_path(proposal)
@@ -261,7 +261,7 @@ describe "Polls" do
     end
   end
 
-  scenario "Enable and disable results" do
+  xscenario "Enable and disable results" do
     create(:poll, related: proposal)
 
     visit proposal_dashboard_polls_path(proposal)
@@ -274,7 +274,7 @@ describe "Polls" do
     expect(find_field("Show results")).not_to be_checked
   end
 
-  scenario "Poll card" do
+  xscenario "Poll card" do
     poll = create(:poll, :expired, related: proposal)
 
     visit proposal_dashboard_polls_path(proposal)

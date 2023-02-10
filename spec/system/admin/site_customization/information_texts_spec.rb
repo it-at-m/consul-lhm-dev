@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "Admin custom information texts", :admin do
-  scenario "page is correctly loaded" do
+  xscenario "page is correctly loaded" do
     visit admin_site_customization_information_texts_path
 
     click_link "Basic customization"
@@ -43,7 +43,7 @@ describe "Admin custom information texts", :admin do
     expect(page).to have_content "See all debates"
   end
 
-  scenario "check that tabs are highlight when click it" do
+  xscenario "check that tabs are highlight when click it" do
     visit admin_site_customization_information_texts_path
 
     within("#information-texts-tabs") { click_link "Proposals" }

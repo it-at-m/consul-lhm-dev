@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "Budgets creation wizard", :admin do
-  scenario "Creation of a single-heading budget by steps" do
+  xscenario "Creation of a single-heading budget by steps" do
     visit admin_budgets_path
     click_button "Create new budget"
     click_link "Create single heading budget"

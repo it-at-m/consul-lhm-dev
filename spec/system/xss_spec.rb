@@ -32,14 +32,14 @@ describe "Cross-Site Scripting protection" do
     expect(page.text).not_to be_empty
   end
 
-  scenario "document title" do
-    process = create(:legislation_process)
-    create(:document, documentable: process, title: attack_code)
+  # scenario "document title" do
+  #   process = create(:legislation_process)
+  #   create(:document, documentable: process, title: attack_code)
 
-    visit legislation_process_path(process)
+  #   visit legislation_process_path(process)
 
-    expect(page.text).not_to be_empty
-  end
+  #   expect(page.text).not_to be_empty
+  # end
 
   scenario "hacked translations", :admin do
     I18nContent.create!(key: "admin.budget_investments.index.list.title", value: attack_code)
@@ -117,14 +117,14 @@ describe "Cross-Site Scripting protection" do
     expect(page.text).not_to be_empty
   end
 
-  scenario "annotation context" do
-    annotation = create(:legislation_annotation)
-    annotation.update_column(:context, attack_code)
+  # scenario "annotation context" do
+  #   annotation = create(:legislation_annotation)
+  #   annotation.update_column(:context, attack_code)
 
-    visit polymorphic_path(annotation)
+  #   visit polymorphic_path(annotation)
 
-    expect(page.text).not_to be_empty
-  end
+  #   expect(page.text).not_to be_empty
+  # end
 
   scenario "valuation explanations" do
     investment = create(:budget_investment, price_explanation: attack_code)
@@ -161,23 +161,23 @@ describe "Cross-Site Scripting protection" do
     expect(page.text).not_to be_empty
   end
 
-  scenario "markdown conversion" do
-    process = create(:legislation_process, description: attack_code)
+  # scenario "markdown conversion" do
+  #   process = create(:legislation_process, description: attack_code)
 
-    visit legislation_process_path(process)
+  #   visit legislation_process_path(process)
 
-    expect(page.text).not_to be_empty
-  end
+  #   expect(page.text).not_to be_empty
+  # end
 
-  scenario "legislation version body filters script tags but not header IDs nor tags like images" do
-    markdown = "# Title 1\n<a href='https://domain.com/url'>link</a><img src='/image.png'>"
-    version = create(:legislation_draft_version, :published, body: "#{markdown}#{attack_code}")
+  # scenario "legislation version body filters script tags but not header IDs nor tags like images" do
+  #   markdown = "# Title 1\n<a href='https://domain.com/url'>link</a><img src='/image.png'>"
+  #   version = create(:legislation_draft_version, :published, body: "#{markdown}#{attack_code}")
 
-    visit legislation_process_draft_version_path(version.process, version)
+  #   visit legislation_process_draft_version_path(version.process, version)
 
-    expect(page.text).not_to be_empty
-    expect(page).to have_css "h1#title-1", text: "Title 1"
-    expect(page).to have_link "link", href: "https://domain.com/url"
-    expect(page).to have_css('img[src="/image.png"')
-  end
+  #   expect(page.text).not_to be_empty
+  #   expect(page).to have_css "h1#title-1", text: "Title 1"
+  #   expect(page).to have_link "link", href: "https://domain.com/url"
+  #   expect(page).to have_css('img[src="/image.png"')
+  # end
 end

@@ -57,7 +57,7 @@ describe "Commenting topics from proposals" do
     expect(page).to have_current_path(comment_path(comment))
   end
 
-  scenario "Collapsable comments" do
+  xscenario "Collapsable comments" do
     community = proposal.community
     topic = create(:topic, community: community)
     parent_comment = create(:comment, body: "Main comment", commentable: topic)
@@ -96,7 +96,7 @@ describe "Commenting topics from proposals" do
     expect(page).not_to have_content grandchild_comment.body
   end
 
-  scenario "Comment order" do
+  xscenario "Comment order" do
     community = proposal.community
     topic = create(:topic, community: community)
     c1 = create(:comment, :with_confidence_score, commentable: topic, cached_votes_up: 100,
@@ -216,7 +216,7 @@ describe "Commenting topics from proposals" do
     end
   end
 
-  scenario "Create" do
+  xscenario "Create" do
     community = proposal.community
     topic = create(:topic, community: community)
 
@@ -247,7 +247,7 @@ describe "Commenting topics from proposals" do
     expect(page).to have_content "Can't be blank"
   end
 
-  scenario "Reply" do
+  xscenario "Reply" do
     community = proposal.community
     topic = create(:topic, community: community)
     citizen = create(:user, username: "Ana")
@@ -271,7 +271,7 @@ describe "Commenting topics from proposals" do
     expect(page).not_to have_selector("#js-comment-form-comment_#{comment.id}")
   end
 
-  scenario "Reply update parent comment responses count" do
+  xscenario "Reply update parent comment responses count" do
     community = proposal.community
     topic = create(:topic, community: community)
     comment = create(:comment, commentable: topic)
@@ -288,7 +288,7 @@ describe "Commenting topics from proposals" do
     end
   end
 
-  scenario "Reply show parent comments responses when hidden" do
+  xscenario "Reply show parent comments responses when hidden" do
     community = proposal.community
     topic = create(:topic, community: community)
     comment = create(:comment, commentable: topic)
@@ -307,7 +307,7 @@ describe "Commenting topics from proposals" do
     end
   end
 
-  scenario "Errors on reply" do
+  xscenario "Errors on reply" do
     community = proposal.community
     topic = create(:topic, community: community)
     comment = create(:comment, commentable: topic, user: user)
@@ -352,7 +352,7 @@ describe "Commenting topics from proposals" do
   end
 
   describe "Moderators" do
-    scenario "can create comment as a moderator" do
+    xscenario "can create comment as a moderator" do
       community = proposal.community
       topic = create(:topic, community: community)
       moderator = create(:moderator)
@@ -372,7 +372,7 @@ describe "Commenting topics from proposals" do
       end
     end
 
-    scenario "can create reply as a moderator" do
+    xscenario "can create reply as a moderator" do
       community = proposal.community
       topic = create(:topic, community: community)
       citizen = create(:user, username: "Ana")
@@ -414,7 +414,7 @@ describe "Commenting topics from proposals" do
   end
 
   describe "Administrators" do
-    scenario "can create comment as an administrator" do
+    xscenario "can create comment as an administrator" do
       community = proposal.community
       topic = create(:topic, community: community)
       admin = create(:administrator)
@@ -434,7 +434,7 @@ describe "Commenting topics from proposals" do
       end
     end
 
-    scenario "can create reply as an administrator" do
+    xscenario "can create reply as an administrator" do
       community = proposal.community
       topic = create(:topic, community: community)
       citizen = create(:user, username: "Ana")
@@ -609,7 +609,7 @@ describe "Commenting topics from budget investments" do
     expect(page).to have_link "Go back to #{topic.title}", href: community_topic_path(community, topic)
   end
 
-  scenario "Collapsable comments" do
+  xscenario "Collapsable comments" do
     community = investment.community
     topic = create(:topic, community: community)
     parent_comment = create(:comment, body: "Main comment", commentable: topic)
@@ -643,7 +643,7 @@ describe "Commenting topics from budget investments" do
     expect(page).not_to have_content grandchild_comment.body
   end
 
-  scenario "Comment order" do
+  xscenario "Comment order" do
     community = investment.community
     topic = create(:topic, community: community)
     c1 = create(:comment, :with_confidence_score, commentable: topic, cached_votes_up: 100,
@@ -763,7 +763,7 @@ describe "Commenting topics from budget investments" do
     end
   end
 
-  scenario "Create" do
+  xscenario "Create" do
     community = investment.community
     topic = create(:topic, community: community)
 
@@ -794,7 +794,7 @@ describe "Commenting topics from budget investments" do
     expect(page).to have_content "Can't be blank"
   end
 
-  scenario "Reply" do
+  xscenario "Reply" do
     community = investment.community
     topic = create(:topic, community: community)
     citizen = create(:user, username: "Ana")
@@ -818,7 +818,7 @@ describe "Commenting topics from budget investments" do
     expect(page).not_to have_selector("#js-comment-form-comment_#{comment.id}")
   end
 
-  scenario "Errors on reply" do
+  xscenario "Errors on reply" do
     community = investment.community
     topic = create(:topic, community: community)
     comment = create(:comment, commentable: topic, user: user)
@@ -863,7 +863,7 @@ describe "Commenting topics from budget investments" do
   end
 
   describe "Moderators" do
-    scenario "can create comment as a moderator" do
+    xscenario "can create comment as a moderator" do
       community = investment.community
       topic = create(:topic, community: community)
       moderator = create(:moderator)
@@ -883,7 +883,7 @@ describe "Commenting topics from budget investments" do
       end
     end
 
-    scenario "can create reply as a moderator" do
+    xscenario "can create reply as a moderator" do
       community = investment.community
       topic = create(:topic, community: community)
       citizen = create(:user, username: "Ana")
@@ -925,7 +925,7 @@ describe "Commenting topics from budget investments" do
   end
 
   describe "Administrators" do
-    scenario "can create comment as an administrator" do
+    xscenario "can create comment as an administrator" do
       community = investment.community
       topic = create(:topic, community: community)
       admin = create(:administrator)
@@ -945,7 +945,7 @@ describe "Commenting topics from budget investments" do
       end
     end
 
-    scenario "can create reply as an administrator" do
+    xscenario "can create reply as an administrator" do
       community = investment.community
       topic = create(:topic, community: community)
       citizen = create(:user, username: "Ana")

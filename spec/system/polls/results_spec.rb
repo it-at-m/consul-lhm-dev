@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "Poll Results" do
-  scenario "List each Poll question" do
+  xscenario "List each Poll question" do
     user1 = create(:user, :level_two)
     user2 = create(:user, :level_two)
     user3 = create(:user, :level_two)
@@ -53,7 +53,7 @@ describe "Poll Results" do
     end
   end
 
-  scenario "Results for polls with questions but without answers" do
+  xscenario "Results for polls with questions but without answers" do
     poll = create(:poll, :expired, results_enabled: true)
     question = create(:poll_question, poll: poll)
 

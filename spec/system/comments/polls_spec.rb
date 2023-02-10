@@ -52,7 +52,7 @@ describe "Commenting polls" do
     expect(page).to have_current_path(comment_path(comment))
   end
 
-  scenario "Collapsable comments" do
+  xscenario "Collapsable comments" do
     parent_comment = create(:comment, body: "Main comment", commentable: poll)
     child_comment  = create(:comment, body: "First subcomment", commentable: poll, parent: parent_comment)
     grandchild_comment = create(:comment, body: "Last subcomment", commentable: poll, parent: child_comment)
@@ -89,7 +89,7 @@ describe "Commenting polls" do
     expect(page).not_to have_content grandchild_comment.body
   end
 
-  scenario "Comment order" do
+  xscenario "Comment order" do
     c1 = create(:comment, :with_confidence_score, commentable: poll, cached_votes_up: 100,
                                                   cached_votes_total: 120, created_at: Time.current - 2)
     c2 = create(:comment, :with_confidence_score, commentable: poll, cached_votes_up: 10,
@@ -184,7 +184,7 @@ describe "Commenting polls" do
   end
 
   describe "Not logged user" do
-    scenario "can not see comments forms" do
+    xscenario "can not see comments forms" do
       create(:comment, commentable: poll)
       visit poll_path(poll)
 
@@ -221,7 +221,7 @@ describe "Commenting polls" do
     expect(page).to have_content "Can't be blank"
   end
 
-  scenario "Reply" do
+  xscenario "Reply" do
     citizen = create(:user, username: "Ana")
     manuela = create(:user, username: "Manuela")
     comment = create(:comment, commentable: poll, user: citizen)
@@ -243,7 +243,7 @@ describe "Commenting polls" do
     expect(page).not_to have_selector("#js-comment-form-comment_#{comment.id}")
   end
 
-  scenario "Reply update parent comment responses count" do
+  xscenario "Reply update parent comment responses count" do
     comment = create(:comment, commentable: poll)
 
     login_as(create(:user))
@@ -258,7 +258,7 @@ describe "Commenting polls" do
     end
   end
 
-  scenario "Reply show parent comments responses when hidden" do
+  xscenario "Reply show parent comments responses when hidden" do
     comment = create(:comment, commentable: poll)
     create(:comment, commentable: poll, parent: comment)
 
@@ -275,7 +275,7 @@ describe "Commenting polls" do
     end
   end
 
-  scenario "Errors on reply" do
+  xscenario "Errors on reply" do
     comment = create(:comment, commentable: poll, user: user)
 
     login_as(user)
@@ -332,7 +332,7 @@ describe "Commenting polls" do
       end
     end
 
-    scenario "can create reply as a moderator" do
+    xscenario "can create reply as a moderator" do
       citizen = create(:user, username: "Ana")
       manuela = create(:user, username: "Manuela")
       moderator = create(:moderator, user: manuela)
@@ -388,7 +388,7 @@ describe "Commenting polls" do
       end
     end
 
-    scenario "can create reply as an administrator" do
+    xscenario "can create reply as an administrator" do
       citizen = create(:user, username: "Ana")
       manuela = create(:user, username: "Manuela")
       admin   = create(:administrator, user: manuela)

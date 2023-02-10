@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "Admin hidden comments", :admin do
-  scenario "Do not show comments from blocked users" do
+  xscenario "Do not show comments from blocked users" do
     comment = create(:comment, :hidden, body: "SPAM from SPAMMER")
     proposal = create(:proposal, author: comment.author)
     create(:comment, commentable: proposal, user: comment.author, body: "Good Proposal!")

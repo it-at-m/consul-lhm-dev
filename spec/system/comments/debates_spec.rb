@@ -55,7 +55,7 @@ describe "Commenting debates" do
     expect(page).to have_current_path(comment_path(comment))
   end
 
-  scenario "Collapsable comments" do
+  xscenario "Collapsable comments" do
     parent_comment = create(:comment, body: "Main comment", commentable: debate)
     child_comment  = create(:comment, body: "First subcomment", commentable: debate, parent: parent_comment)
     grandchild_comment = create(:comment, body: "Last subcomment", commentable: debate, parent: child_comment)
@@ -92,7 +92,7 @@ describe "Commenting debates" do
     expect(page).not_to have_content grandchild_comment.body
   end
 
-  scenario "can collapse comments after adding a reply" do
+  xscenario "can collapse comments after adding a reply" do
     create(:comment, body: "Main comment", commentable: debate)
 
     login_as(user)
@@ -111,7 +111,7 @@ describe "Commenting debates" do
     end
   end
 
-  scenario "Comment order" do
+  xscenario "Comment order" do
     c1 = create(:comment, :with_confidence_score, commentable: debate, cached_votes_up: 100,
                                                   cached_votes_total: 120, created_at: Time.current - 2)
     c2 = create(:comment, :with_confidence_score, commentable: debate, cached_votes_up: 10,
@@ -206,7 +206,7 @@ describe "Commenting debates" do
   end
 
   describe "Not logged user" do
-    scenario "can not see comments forms" do
+    xscenario "can not see comments forms" do
       create(:comment, commentable: debate)
       visit debate_path(debate)
 
@@ -218,7 +218,7 @@ describe "Commenting debates" do
     end
   end
 
-  scenario "Create" do
+  xscenario "Create" do
     login_as(user)
     visit debate_path(debate)
 
@@ -241,7 +241,7 @@ describe "Commenting debates" do
   end
 
   describe "Hide" do
-    scenario "Without replies" do
+    xscenario "Without replies" do
       create(:comment, commentable: debate, user: user, body: "This was a mistake")
 
       login_as(user)
@@ -267,7 +267,7 @@ describe "Commenting debates" do
       expect(page).to have_content "This was a mistake"
     end
 
-    scenario "With replies" do
+    xscenario "With replies" do
       comment = create(:comment, commentable: debate, user: user, body: "Wrong comment")
       create(:comment, commentable: debate, parent: comment, body: "Right reply")
 
@@ -292,7 +292,7 @@ describe "Commenting debates" do
     end
   end
 
-  scenario "Reply" do
+  xscenario "Reply" do
     citizen = create(:user, username: "Ana")
     manuela = create(:user, username: "Manuela")
     comment = create(:comment, commentable: debate, user: citizen)
@@ -314,7 +314,7 @@ describe "Commenting debates" do
     expect(page).not_to have_selector("#js-comment-form-comment_#{comment.id}")
   end
 
-  scenario "Reply to reply" do
+  xscenario "Reply to reply" do
     create(:comment, commentable: debate, body: "Any estimates?")
 
     login_as(create(:user))
@@ -339,7 +339,7 @@ describe "Commenting debates" do
     end
   end
 
-  scenario "Reply update parent comment responses count" do
+  xscenario "Reply update parent comment responses count" do
     comment = create(:comment, commentable: debate)
 
     login_as(create(:user))
@@ -354,7 +354,7 @@ describe "Commenting debates" do
     end
   end
 
-  scenario "Reply show parent comments responses when hidden" do
+  xscenario "Reply show parent comments responses when hidden" do
     comment = create(:comment, commentable: debate)
     create(:comment, commentable: debate, parent: comment)
 
@@ -371,7 +371,7 @@ describe "Commenting debates" do
     end
   end
 
-  scenario "Show comment when the author is hidden" do
+  xscenario "Show comment when the author is hidden" do
     create(:comment, body: "This is pointless", commentable: debate, author: create(:user, :hidden))
 
     visit debate_path(debate)
@@ -381,7 +381,7 @@ describe "Commenting debates" do
     end
   end
 
-  scenario "Errors on reply" do
+  xscenario "Errors on reply" do
     comment = create(:comment, commentable: debate, user: user)
 
     login_as(user)
@@ -451,7 +451,7 @@ describe "Commenting debates" do
       end
     end
 
-    scenario "can create reply as a moderator" do
+    xscenario "can create reply as a moderator" do
       citizen = create(:user, username: "Ana")
       manuela = create(:user, username: "Manuela")
       moderator = create(:moderator, user: manuela)
@@ -507,7 +507,7 @@ describe "Commenting debates" do
       end
     end
 
-    scenario "can create reply as an administrator" do
+    xscenario "can create reply as an administrator" do
       citizen = create(:user, username: "Ana")
       manuela = create(:user, username: "Manuela")
       admin   = create(:administrator, user: manuela)

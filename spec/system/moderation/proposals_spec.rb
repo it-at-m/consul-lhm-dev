@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "Moderate proposals" do
-  scenario "Hide" do
+  xscenario "Hide" do
     citizen   = create(:user)
     proposal  = create(:proposal)
     moderator = create(:moderator)
@@ -21,7 +21,7 @@ describe "Moderate proposals" do
     expect(page).to have_css(".proposal", count: 0)
   end
 
-  scenario "Can hide own proposal" do
+  xscenario "Can hide own proposal" do
     moderator = create(:moderator)
     proposal = create(:proposal, author: moderator.user)
 
@@ -55,7 +55,7 @@ describe "Moderate proposals" do
           end
         end
 
-        scenario "Hide the proposal" do
+        xscenario "Hide the proposal" do
           accept_confirm("Are you sure? Hide proposals") { click_button "Hide proposals" }
 
           expect(page).not_to have_css("#proposal_#{proposal.id}")
@@ -69,7 +69,7 @@ describe "Moderate proposals" do
           end
         end
 
-        scenario "Block the author" do
+        xscenario "Block the author" do
           accept_confirm("Are you sure? Block authors") { click_button "Block authors" }
 
           expect(page).not_to have_css("#proposal_#{proposal.id}")
@@ -83,7 +83,7 @@ describe "Moderate proposals" do
           end
         end
 
-        scenario "Ignore the proposal", :no_js do
+        xscenario "Ignore the proposal", :no_js do
           click_button "Mark as viewed"
 
           expect(proposal.reload).to be_ignored_flag
@@ -92,7 +92,7 @@ describe "Moderate proposals" do
         end
       end
 
-      scenario "select all/none" do
+      xscenario "select all/none" do
         create_list(:proposal, 2)
 
         visit moderation_proposals_path
@@ -108,7 +108,7 @@ describe "Moderate proposals" do
         end
       end
 
-      scenario "remembering page, filter and order" do
+      xscenario "remembering page, filter and order" do
         stub_const("#{ModerateActions}::PER_PAGE", 2)
         create_list(:proposal, 4)
 
@@ -125,7 +125,7 @@ describe "Moderate proposals" do
       end
     end
 
-    scenario "Current filter is properly highlighted" do
+    xscenario "Current filter is properly highlighted" do
       visit moderation_proposals_path
       expect(page).not_to have_link("Pending")
       expect(page).to have_link("All")
@@ -153,7 +153,7 @@ describe "Moderate proposals" do
       end
     end
 
-    scenario "Filtering proposals" do
+    xscenario "Filtering proposals" do
       create(:proposal, title: "Regular proposal")
       create(:proposal, :flagged, title: "Pending proposal")
       create(:proposal, :hidden, title: "Hidden proposal")

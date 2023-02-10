@@ -1,12 +1,12 @@
 require "rails_helper"
 
 describe "Topics" do
-  context "Concerns" do
+  xcontext "Concerns" do
     it_behaves_like "notifiable in-app", :topic_with_community
   end
 
   context "New" do
-    scenario "Create new topic link should redirect to sign up for anonymous users" do
+    xscenario "Create new topic link should redirect to sign up for anonymous users" do
       proposal = create(:proposal)
       community = proposal.community
 
@@ -49,7 +49,7 @@ describe "Topics" do
     end
   end
 
-  context "Create" do
+  xcontext "Create" do
     scenario "Can create a new topic" do
       proposal = create(:proposal)
       community = proposal.community

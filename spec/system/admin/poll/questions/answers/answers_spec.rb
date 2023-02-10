@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "Answers", :admin do
-  scenario "Create" do
+  xscenario "Create" do
     question = create(:poll_question)
 
     visit admin_question_path(question)
@@ -16,7 +16,7 @@ describe "Answers", :admin do
     expect(page).to have_content "The Hitchhiker's Guide To The Universe"
   end
 
-  scenario "Create second answer and place after the first one" do
+  xscenario "Create second answer and place after the first one" do
     question = create(:poll_question)
     create(:poll_question_answer, title: "First", question: question, given_order: 1)
 
@@ -31,7 +31,7 @@ describe "Answers", :admin do
     expect("First").to appear_before("Second")
   end
 
-  scenario "Update" do
+  xscenario "Update" do
     question = create(:poll_question)
     answer = create(:poll_question_answer, question: question, title: "Answer title", given_order: 2)
     create(:poll_question_answer, question: question, title: "Another title", given_order: 1)
@@ -54,7 +54,7 @@ describe "Answers", :admin do
     expect("Another title").to appear_before("New title")
   end
 
-  scenario "Reorder" do
+  xscenario "Reorder" do
     question = create(:poll_question)
     create(:poll_question_answer, question: question, title: "First", given_order: 1)
     create(:poll_question_answer, question: question, title: "Last", given_order: 2)

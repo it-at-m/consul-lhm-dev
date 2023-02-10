@@ -6,5 +6,4 @@ InvisibleCaptcha.setup do |config|
   # config.error_message           = 'You are a robot!'
   # config.sentence_for_humans     = 'If you are a human, ignore this field'
   # config.timestamp_error_message = 'Sorry, that was too quick! Please resubmit.'
-  config.timestamp_enabled = false if Rails.env.test? #custom line
 end

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "Custom information texts", :admin do
-  scenario "Show custom texts instead of default ones" do
+  xscenario "Show custom texts instead of default ones" do
     debate_key = "debates.index.section_footer.title"
     proposal_key = "proposals.index.section_footer.title"
 

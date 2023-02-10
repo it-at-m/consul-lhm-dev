@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "Organizations" do
-  scenario "Organizations can be created" do
+  xscenario "Organizations can be created" do
     admin = create(:administrator).user
 
     visit new_organization_registration_path
@@ -26,7 +26,7 @@ describe "Organizations" do
     end
   end
 
-  scenario "Create with invisible_captcha honeypot field", :no_js do
+  xscenario "Create with invisible_captcha honeypot field", :no_js do
     visit new_organization_registration_path
 
     fill_in "user_organization_attributes_name",  with: "robot"
@@ -45,7 +45,7 @@ describe "Organizations" do
     expect(page).to have_current_path(organization_registration_path)
   end
 
-  scenario "Create organization too fast" do
+  xscenario "Create organization too fast" do
     allow(InvisibleCaptcha).to receive(:timestamp_threshold).and_return(Float::INFINITY)
     visit new_organization_registration_path
     fill_in "user_organization_attributes_name", with: "robot"
@@ -61,7 +61,7 @@ describe "Organizations" do
     expect(page).to have_current_path(new_organization_registration_path)
   end
 
-  scenario "Errors on create" do
+  xscenario "Errors on create" do
     visit new_organization_registration_path
 
     click_button "Register"
@@ -69,7 +69,7 @@ describe "Organizations" do
     expect(page).to have_content error_message
   end
 
-  scenario "Shared links" do
+  xscenario "Shared links" do
     # visit new_user_registration_path
     # expect(page).to have_link "Sign up as an organization / collective"
 

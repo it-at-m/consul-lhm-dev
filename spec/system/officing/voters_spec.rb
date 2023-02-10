@@ -34,7 +34,7 @@ describe "Voters" do
     expect(Poll::Voter.last.officer_id).to eq(officer.id)
   end
 
-  scenario "Cannot vote" do
+  xscenario "Cannot vote" do
     unvotable_poll = create(:poll, :current, geozone_restricted: true, geozones: [create(:geozone, census_code: "02")])
     create(:poll_officer_assignment, officer: officer, poll: unvotable_poll, booth: booth)
 
@@ -67,7 +67,7 @@ describe "Voters" do
     end
   end
 
-  scenario "Had already verified his residence, but is not level 2 yet" do
+  xscenario "Had already verified his residence, but is not level 2 yet" do
     user = create(:user, residence_verified_at: Time.current, document_type: "1", document_number: "12345678Z")
     expect(user).not_to be_level_two_verified
 

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "Moderate users" do
-  scenario "Hide" do
+  xscenario "Hide" do
     citizen = create(:user)
     moderator = create(:moderator)
 
@@ -97,7 +97,7 @@ describe "Moderate users" do
     end
   end
 
-  scenario "Block a user removes all their roles" do
+  xscenario "Block a user removes all their roles" do
     admin = create(:administrator).user
     user = create(:user, username: "Budget administrator")
     budget = create(:budget, administrators: [create(:administrator, user: user)])

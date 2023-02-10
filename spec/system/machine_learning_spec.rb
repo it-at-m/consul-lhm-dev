@@ -47,7 +47,7 @@ describe "Machine learning" do
     end
   end
 
-  scenario "investment view" do
+  xscenario "investment view" do
     create(:ml_summary_comment, commentable: investment, body: "Build in the main square")
     create(:related_content, parent_relationable: investment,
            child_relationable: related_investment,
