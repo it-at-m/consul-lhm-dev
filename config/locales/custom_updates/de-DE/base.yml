@@ -13,6 +13,7 @@ de:
         adm_email_on_new_proposal: E-Mail-Benachrichtigung erhalten nach jedem neuen Vorschlag
         adm_email_on_new_debate: E-Mail-Benachrichtigung erhalten nach jedem neuen Diskussionsbeitrag
         adm_email_on_new_deficiency_report: E-Mail-Benachrichtigung erhalten nach jeder neuen Mangelmeldung
+        adm_email_on_new_manual_verification: E-Mail-Benachrichtigung erhalten nach jeder neuen Nutzerverifizierung
       show:
         user_permission_votes: An Abstimmungen teilnehmen
         admin_notifications: Admin Benachrichtigungen
