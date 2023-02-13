@@ -28,13 +28,13 @@ de:
             projekt_id:
               blank: Bitte wählen Sie ein Projekt
             projekt_labels:
-              blank: Bitte wählen Sie ein Label
+              blank: Bitte wählen Sie mindestens ein Label
         debate:
           attributes:
             projekt_id:
               blank: Bitte wählen Sie ein Projekt
             projekt_labels:
-              blank: Bitte wählen Sie ein Label
+              blank: Bitte wählen Sie mindestens ein Label
         projekt:
           attributes:
             color:
