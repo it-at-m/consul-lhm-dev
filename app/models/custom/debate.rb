@@ -3,6 +3,7 @@ require_dependency Rails.root.join("app", "models", "debate").to_s
 class Debate
   include Imageable
   include Documentable
+  include Labelable
 
   belongs_to :projekt, optional: true, touch: true
   has_one :debate_phase, through: :projekt
@@ -21,7 +22,11 @@ class Debate
     where(author_id: user_id)
   }
 
-  scope :sort_by_alphabet, -> { with_translations(I18n.locale).reorder("LOWER(debate_translations.title) ASC") }
+  scope :sort_by_alphabet, -> {
+    with_translations(I18n.locale).
+    select("debates.*, LOWER(debate_translations.title)").
+    reorder("LOWER(debate_translations.title) ASC")
+  }
   scope :sort_by_votes_total, -> { reorder(cached_votes_total: :desc) }
 
   scope :seen, -> { where.not(ignored_flag_at: nil) }
@@ -30,7 +35,7 @@ class Debate
   alias_attribute :projekt_phase, :debate_phase
 
   def self.debates_orders(user = nil)
-    orders = %w[hot_score confidence_score created_at alphabet votes_total random]
+    orders = %w[hot_score created_at alphabet votes_total random]
     orders << "recommendations" if Setting["feature.user.recommendations_on_debates"] && user&.recommended_debates
     orders
   end

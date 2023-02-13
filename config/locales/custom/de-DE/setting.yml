@@ -29,7 +29,8 @@ de:
           links_to_create_resources_in_menu_description: Zeigt den Button "+ Beitrag erstellen" in der Hauptnavigation an
           enable_projekt_events_page: Veranstaltungskalender anzeigen
           enable_projekt_events_page_description: Zeigt den Veranstaltungskalender in der Hauptnavigation an
-
+          enable_google_translate: Google Translate aktivieren
+          enable_google_translate_description: Aktivieren Sie Google Translate, um die gesamte Seite in unzählige Sprachen übersetzen zu lassen.
         gdpr:
           gdpr_conformity: DSGVO-konforme Voreinstellungen
           gdpr_conformity_description: "Aktivieren Sie die DSGVO-konforme Voreinstellungen, um \"privacy by design\" zu gewähren"

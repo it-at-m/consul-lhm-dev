@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_04_142104) do
+ActiveRecord::Schema.define(version: 2023_01_26_104630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -488,6 +488,22 @@ ActiveRecord::Schema.define(version: 2023_01_04_142104) do
   create_table "campaigns", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "track_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "city_street_projekt_phases", force: :cascade do |t|
+    t.bigint "city_street_id"
+    t.bigint "projekt_phase_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_street_id"], name: "index_city_street_projekt_phases_on_city_street_id"
+    t.index ["projekt_phase_id"], name: "index_city_street_projekt_phases_on_projekt_phase_id"
+  end
+
+  create_table "city_streets", force: :cascade do |t|
+    t.string "name"
+    t.string "plz"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -1132,6 +1148,7 @@ ActiveRecord::Schema.define(version: 2023_01_04_142104) do
     t.boolean "show_by_default", default: false
     t.boolean "transparent", default: false
     t.integer "protocol", default: 0
+    t.string "layer_defs"
     t.index ["projekt_id"], name: "index_map_layers_on_projekt_id"
   end
 
@@ -1379,6 +1396,7 @@ ActiveRecord::Schema.define(version: 2023_01_04_142104) do
     t.boolean "show_images", default: false
     t.boolean "multiple", default: false
     t.integer "given_order"
+    t.boolean "show_hint_callout", default: true
     t.index ["author_id"], name: "index_poll_questions_on_author_id"
     t.index ["poll_id"], name: "index_poll_questions_on_poll_id"
     t.index ["proposal_id"], name: "index_poll_questions_on_proposal_id"
@@ -1525,6 +1543,35 @@ ActiveRecord::Schema.define(version: 2023_01_04_142104) do
     t.datetime "updated_at", null: false
     t.text "description"
     t.datetime "end_datetime"
+  end
+
+  create_table "projekt_label_translations", force: :cascade do |t|
+    t.bigint "projekt_label_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.index ["locale"], name: "index_projekt_label_translations_on_locale"
+    t.index ["projekt_label_id"], name: "index_projekt_label_translations_on_projekt_label_id"
+  end
+
+  create_table "projekt_labelings", force: :cascade do |t|
+    t.bigint "projekt_label_id"
+    t.string "labelable_type"
+    t.bigint "labelable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["labelable_type", "labelable_id"], name: "index_projekt_labelings_on_labelable_type_and_labelable_id"
+    t.index ["projekt_label_id"], name: "index_projekt_labelings_on_projekt_label_id"
+  end
+
+  create_table "projekt_labels", force: :cascade do |t|
+    t.string "color"
+    t.string "icon"
+    t.bigint "projekt_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["projekt_id"], name: "index_projekt_labels_on_projekt_id"
   end
 
   create_table "projekt_livestreams", force: :cascade do |t|
@@ -2119,7 +2166,9 @@ ActiveRecord::Schema.define(version: 2023_01_04_142104) do
     t.boolean "adm_email_on_new_proposal", default: false
     t.boolean "adm_email_on_new_debate", default: false
     t.boolean "adm_email_on_new_deficiency_report", default: false
+    t.bigint "city_street_id"
     t.index ["bam_street_id"], name: "index_users_on_bam_street_id"
+    t.index ["city_street_id"], name: "index_users_on_city_street_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["date_of_birth"], name: "index_users_on_date_of_birth"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -2263,6 +2312,8 @@ ActiveRecord::Schema.define(version: 2023_01_04_142104) do
   add_foreign_key "budget_valuators", "budgets"
   add_foreign_key "budget_valuators", "valuators"
   add_foreign_key "budgets", "projekts"
+  add_foreign_key "city_street_projekt_phases", "city_streets"
+  add_foreign_key "city_street_projekt_phases", "projekt_phases"
   add_foreign_key "dashboard_administrator_tasks", "users"
   add_foreign_key "dashboard_executed_actions", "dashboard_actions", column: "action_id"
   add_foreign_key "dashboard_executed_actions", "proposals"
@@ -2309,6 +2360,8 @@ ActiveRecord::Schema.define(version: 2023_01_04_142104) do
   add_foreign_key "poll_voters", "polls"
   add_foreign_key "polls", "budgets"
   add_foreign_key "polls", "projekts"
+  add_foreign_key "projekt_labelings", "projekt_labels"
+  add_foreign_key "projekt_labels", "projekts"
   add_foreign_key "projekt_manager_assignments", "projekt_managers"
   add_foreign_key "projekt_manager_assignments", "projekts"
   add_foreign_key "projekt_managers", "users"
@@ -2326,6 +2379,7 @@ ActiveRecord::Schema.define(version: 2023_01_04_142104) do
   add_foreign_key "sdg_managers", "users"
   add_foreign_key "site_customization_pages", "projekts"
   add_foreign_key "users", "bam_streets"
+  add_foreign_key "users", "city_streets"
   add_foreign_key "users", "geozones"
   add_foreign_key "valuators", "users"
 end

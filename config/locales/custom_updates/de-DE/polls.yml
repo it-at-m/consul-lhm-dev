@@ -20,6 +20,9 @@ de:
           update_open_answer: Antwort editieren
       results:
         open_answers: Offene Antworten
+        scoped_popup_callout: Die nachfolgende Auswertung zeigt, wie die Nutzer*innen, die für diese Antwortoption gestimmt haben, in den nachfolgenden Fragen geantwortet haben.
+        question_street_details_csv_link: Straßenauswertung herunterladen
+        question_answer_details_csv_link: Kreuztabellen-Auswertung herunterladen
       show:
         confirm_participation_button: Meine Abstimmung bestätigen
         confirm_participation_notice: Sie haben erfolgreich an der Abstimmung teilgenommen.

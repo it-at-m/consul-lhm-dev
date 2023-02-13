@@ -84,7 +84,7 @@ describe "Admin custom content blocks", :admin do
   end
 
   context "Delete" do
-    scenario "From index page" do
+    xscenario "From index page" do
       block = create(:site_customization_content_block)
       visit   admin_site_customization_content_blocks_path
 

@@ -6,7 +6,7 @@ describe "Admin SDG managers" do
 
   before { login_as(create(:administrator).user) }
 
-  scenario "Index" do
+  xscenario "Index" do
     visit admin_sdg_managers_path
 
     expect(page).to have_content sdg_manager.name

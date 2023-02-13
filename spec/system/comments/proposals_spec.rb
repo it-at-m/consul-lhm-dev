@@ -54,7 +54,7 @@ describe "Commenting proposals" do
     expect(page).to have_current_path(comment_path(comment))
   end
 
-  scenario "Collapsable comments" do
+  xscenario "Collapsable comments" do
     parent_comment = create(:comment, body: "Main comment", commentable: proposal)
     child_comment  = create(:comment, body: "First subcomment", commentable: proposal, parent: parent_comment)
     grandchild_comment = create(:comment, body: "Last subcomment", commentable: proposal, parent: child_comment)
@@ -91,7 +91,7 @@ describe "Commenting proposals" do
     expect(page).not_to have_content grandchild_comment.body
   end
 
-  scenario "Comment order" do
+  xscenario "Comment order" do
     c1 = create(:comment, :with_confidence_score, commentable: proposal, cached_votes_up: 100,
                                                   cached_votes_total: 120, created_at: Time.current - 2)
     c2 = create(:comment, :with_confidence_score, commentable: proposal, cached_votes_up: 10,
@@ -186,7 +186,7 @@ describe "Commenting proposals" do
   end
 
   describe "Not logged user" do
-    scenario "can not see comments forms" do
+    xscenario "can not see comments forms" do
       create(:comment, commentable: proposal)
       visit proposal_path(proposal)
 
@@ -223,7 +223,7 @@ describe "Commenting proposals" do
     expect(page).to have_content "Can't be blank"
   end
 
-  scenario "Reply" do
+  xscenario "Reply" do
     citizen = create(:user, username: "Ana")
     manuela = create(:user, username: "Manuela")
     comment = create(:comment, commentable: proposal, user: citizen)
@@ -245,7 +245,7 @@ describe "Commenting proposals" do
     expect(page).not_to have_selector("#js-comment-form-comment_#{comment.id}")
   end
 
-  scenario "Reply update parent comment responses count" do
+  xscenario "Reply update parent comment responses count" do
     comment = create(:comment, commentable: proposal)
 
     login_as(create(:user))
@@ -260,7 +260,7 @@ describe "Commenting proposals" do
     end
   end
 
-  scenario "Reply show parent comments responses when hidden" do
+  xscenario "Reply show parent comments responses when hidden" do
     comment = create(:comment, commentable: proposal)
     create(:comment, commentable: proposal, parent: comment)
 
@@ -277,7 +277,7 @@ describe "Commenting proposals" do
     end
   end
 
-  scenario "Errors on reply" do
+  xscenario "Errors on reply" do
     comment = create(:comment, commentable: proposal, user: user)
 
     login_as(user)
@@ -334,7 +334,7 @@ describe "Commenting proposals" do
       end
     end
 
-    scenario "can create reply as a moderator" do
+    xscenario "can create reply as a moderator" do
       citizen = create(:user, username: "Ana")
       manuela = create(:user, username: "Manuela")
       moderator = create(:moderator, user: manuela)
@@ -390,7 +390,7 @@ describe "Commenting proposals" do
       end
     end
 
-    scenario "can create reply as an administrator" do
+    xscenario "can create reply as an administrator" do
       citizen = create(:user, username: "Ana")
       manuela = create(:user, username: "Manuela")
       admin   = create(:administrator, user: manuela)

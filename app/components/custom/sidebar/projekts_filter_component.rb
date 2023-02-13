@@ -66,9 +66,29 @@ class Sidebar::ProjektsFilterComponent < ApplicationComponent
 
     def form_path
       if params[:current_tab_path]
-        url_for(action: params[:current_tab_path], controller: "pages")
+        url_for(action: params[:current_tab_path],
+                controller: "/pages",
+                order: params[:order],
+                projekt_label_ids: params[:projekt_label_ids],
+                filter: params[:filter])
       else
         url_for(action: "index", controller: controller_name)
+      end
+    end
+
+    def footer_tab_back_button_url
+      if controller_name == "pages" &&
+          params[:current_tab_path].present? &&
+          !helpers.request.path.starts_with?("/projekts")
+
+        url_for_footer_tab_back_button(page_id: params[:id],
+                                       pagination_page: params[:page],
+                                       current_tab_path: params[:current_tab_path],
+                                       filter: params[:filter],
+                                       order: params[:order],
+                                       projekt_label_ids: params[:projekt_label_ids])
+      else
+        "empty"
       end
     end
 

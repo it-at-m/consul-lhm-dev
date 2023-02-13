@@ -31,6 +31,8 @@
       </div>
       <div class="js-suggest" data-locale="<%= translations_form.locale %>"></div>
 
+      <%= render partial: "shared/projekt_selector/projekt_labels", locals:	{ f: f, model: @debate } %>
+
       <div>
         <%= translations_form.text_area :description,
               maxlength: Debate.description_max_length,

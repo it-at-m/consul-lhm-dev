@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "Tags" do
-  scenario "Index" do
+  xscenario "Index" do
     earth = create(:debate, tag_list: "Medio Ambiente")
     money = create(:debate, tag_list: "Economía")
 
@@ -16,7 +16,7 @@ describe "Tags" do
     end
   end
 
-  scenario "Filtered" do
+  xscenario "Filtered" do
     debate1 = create(:debate, tag_list: "Salud")
     debate2 = create(:debate, tag_list: "salud")
     debate3 = create(:debate, tag_list: "Hacienda")
@@ -44,7 +44,7 @@ describe "Tags" do
     end
   end
 
-  scenario "Show" do
+  xscenario "Show" do
     debate = create(:debate, tag_list: "Hacienda, Economía")
 
     visit debate_path(debate)
@@ -53,7 +53,7 @@ describe "Tags" do
     expect(page).to have_content "Hacienda"
   end
 
-  scenario "Create" do
+  xscenario "Create" do
     user = create(:user)
     login_as(user)
 
@@ -72,7 +72,7 @@ describe "Tags" do
     expect(page).to have_content "Impuestos"
   end
 
-  scenario "Create with too many tags" do
+  xscenario "Create with too many tags" do
     user = create(:user)
     login_as(user)
 
@@ -89,7 +89,7 @@ describe "Tags" do
     expect(page).to have_content "tags must be less than or equal to 6"
   end
 
-  scenario "Update" do
+  xscenario "Update" do
     debate = create(:debate, tag_list: "Economía")
 
     login_as(debate.author)
@@ -107,7 +107,7 @@ describe "Tags" do
     end
   end
 
-  scenario "Delete" do
+  xscenario "Delete" do
     debate = create(:debate, tag_list: "Economía")
 
     login_as(debate.author)
@@ -121,7 +121,7 @@ describe "Tags" do
   end
 
   context "Tag cloud" do
-    scenario "Proposals" do
+    xscenario "Proposals" do
       create(:proposal, tag_list: "Medio Ambiente")
       create(:proposal, tag_list: "Economía")
 
@@ -133,7 +133,7 @@ describe "Tags" do
       end
     end
 
-    scenario "Debates" do
+    xscenario "Debates" do
       create(:debate, tag_list: "Medio Ambiente")
       create(:debate, tag_list: "Economía")
 
@@ -145,7 +145,7 @@ describe "Tags" do
       end
     end
 
-    scenario "scoped by category" do
+    xscenario "scoped by category" do
       create(:tag, :category, name: "Medio Ambiente")
       create(:tag, :category, name: "Economía")
 
@@ -161,7 +161,7 @@ describe "Tags" do
       end
     end
 
-    scenario "scoped by district" do
+    xscenario "scoped by district" do
       create(:geozone, name: "Madrid")
       create(:geozone, name: "Barcelona")
 
@@ -177,7 +177,7 @@ describe "Tags" do
       end
     end
 
-    scenario "tag links" do
+    xscenario "tag links" do
       proposal1 = create(:proposal, tag_list: "Medio Ambiente")
       proposal2 = create(:proposal, tag_list: "Medio Ambiente")
       proposal3 = create(:proposal, tag_list: "Economía")

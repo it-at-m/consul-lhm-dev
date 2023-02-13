@@ -6,17 +6,19 @@
     <aside class="margin-bottom">
       <%= render Shared::NewButtonComponent.new(projekt_phase: @current_tab_phase) %>
 
-    <% unless @current_projekt.overview_page? %>
-      <%= render Sidebar::ProjektsFilterComponent.new(
-          top_level_active_projekts: @top_level_active_projekts,
-          top_level_archived_projekts: @top_level_archived_projekts,
-          scoped_projekt_ids: @scoped_projekt_ids,
-          all_resources: @all_resources,
-          current_tab_phase: @current_tab_phase,
-          current_projekt: @current_projekt
-        ) %>
-      </aside>
-    <% end %>
+      <% unless @current_projekt.overview_page? %>
+        <%= render Sidebar::ProjektsFilterComponent.new(
+            top_level_active_projekts: @top_level_active_projekts,
+            top_level_archived_projekts: @top_level_archived_projekts,
+            scoped_projekt_ids: @scoped_projekt_ids,
+            all_resources: @all_resources,
+            current_tab_phase: @current_tab_phase,
+            current_projekt: @current_projekt
+          ) %>
+      <% end %>
+
+      <%= render "shared/projekt_labels", projekt: @current_projekt %>
+    </aside>
   </div>
 
   <div id="debates" class="debates-list spinner-placeholder small-12 medium-9 column">

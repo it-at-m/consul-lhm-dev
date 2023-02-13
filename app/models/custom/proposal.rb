@@ -1,5 +1,6 @@
 require_dependency Rails.root.join("app", "models", "proposal").to_s
 class Proposal < ApplicationRecord
+  include Labelable
 
   belongs_to :projekt, optional: true, touch: true
   has_one :proposal_phase, through: :projekt
@@ -20,7 +21,11 @@ class Proposal < ApplicationRecord
     where(author_id: user_id)
   }
 
-  scope :sort_by_alphabet, -> { with_translations(I18n.locale).reorder("LOWER(proposal_translations.title) ASC") }
+  scope :sort_by_alphabet, -> {
+    with_translations(I18n.locale).
+    select("proposals.*, LOWER(proposal_translations.title)").
+    reorder("LOWER(proposal_translations.title) ASC")
+  }
   scope :sort_by_votes_up, -> { reorder(cached_votes_up: :desc) }
 
   scope :seen,                     -> { where.not(ignored_flag_at: nil) }
@@ -29,7 +34,7 @@ class Proposal < ApplicationRecord
   alias_attribute :projekt_phase, :proposal_phase
 
   def self.proposals_orders(user = nil)
-    orders = %w[hot_score confidence_score created_at archival_date alphabet votes_up random]
+    orders = %w[hot_score created_at alphabet votes_up random]
     orders << "recommendations" if Setting["feature.user.recommendations_on_proposals"] && user&.recommended_proposals
     orders
   end

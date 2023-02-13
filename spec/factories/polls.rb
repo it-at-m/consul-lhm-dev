@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :poll do
     sequence(:name) { |n| "Poll #{SecureRandom.hex}" }
+    projekt { create(:projekt) }
 
     slug { "this-is-a-slug" }
 

@@ -208,7 +208,7 @@ RSpec.configure do |config|
   # order dependency and want to debug it, you can fix the order by providing
   # the seed, which is printed after each run.
   #     --seed 1234
-  config.order = :random
+  # config.order = :random
 
   # Seed global randomization in this process using the `--seed` CLI option.
   # Setting this allows you to use `--seed` to deterministically reproduce
@@ -217,6 +217,35 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 
   config.expect_with(:rspec) { |c| c.syntax = :expect }
+
+  # custom config
+  config.before(:each, type: :system) do
+    unless Capybara.current_driver == :rack_test
+      visit root_path
+      page.driver.browser.manage.add_cookie(
+        name: "klaro",
+        value: "%7B%22system%22%3Atrue%7D",
+        path: "/",
+        domain: "127.0.0.1",
+        expires: nil,
+        secure: false
+      )
+    end
+  end
+
+  config.before(:each, type: :feature) do
+    allow(InvisibleCaptcha).to receive(:timestamp_threshold).and_return(0)
+    Capybara.current_driver = :selenium_chrome
+    visit root_path
+    page.driver.browser.manage.add_cookie(
+      name: "klaro",
+      value: "%7B%22system%22%3Atrue%7D",
+      path: "/",
+      domain: "127.0.0.1",
+      expires: nil,
+      secure: false
+    )
+  end
 end
 
 # Parallel build helper configuration for CI

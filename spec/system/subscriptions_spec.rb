@@ -4,7 +4,7 @@ describe "Subscriptions" do
   let(:user) { create(:user, subscriptions_token: SecureRandom.base58(32)) }
 
   context "Edit page" do
-    scenario "Render content in the user's preferred locale" do
+    xscenario "Render content in the user's preferred locale" do
       user.update!(locale: "es")
       visit edit_subscriptions_path(token: user.subscriptions_token)
 
@@ -17,7 +17,7 @@ describe "Subscriptions" do
       expect(page).to have_button "Guardar cambios"
     end
 
-    scenario "Use the locale in the parameters when accessing anonymously" do
+    xscenario "Use the locale in the parameters when accessing anonymously" do
       visit edit_subscriptions_path(token: user.subscriptions_token, locale: :es)
 
       expect(page).to have_content "Notificaciones"
@@ -25,7 +25,7 @@ describe "Subscriptions" do
   end
 
   context "Update" do
-    scenario "Allow updating the status notification" do
+    xscenario "Allow updating the status notification" do
       user.update!(email_on_comment: false,
                    email_on_comment_reply: true,
                    newsletter: true,

@@ -42,6 +42,9 @@ RSpec.configure do |config|
   config.after do
     Warden.test_reset!
   end
+
+  config.include CustomExtension::SharedActions, type: :feature # custom line
+  config.include CustomExtension::Helpers, type: :feature # custom line
 end
 
 FactoryBot.use_parent_strategy = false

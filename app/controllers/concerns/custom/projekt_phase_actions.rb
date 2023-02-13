@@ -31,7 +31,7 @@ module ProjektPhaseActions
         translation_params(ProjektPhase),
         :active, :start_date, :end_date,
         :verification_restricted, :age_restriction_id,
-        :geozone_restricted, geozone_restriction_ids: [])
+        :geozone_restricted, geozone_restriction_ids: [], city_street_ids: [])
     end
 
     def set_projekt

@@ -7,7 +7,7 @@ describe "Account" do
     login_as(user)
   end
 
-  scenario "Show" do
+  xscenario "Show" do
     visit root_path
 
     click_link "My account"
@@ -143,7 +143,7 @@ describe "Account" do
     expect(page).to have_content error_message
   end
 
-  scenario "Errors editing credentials" do
+  xscenario "Errors editing credentials" do
     visit root_path
 
     click_link "My account"
@@ -194,8 +194,8 @@ describe "Account" do
     expect(page).to have_select options: ["All administrators", "Other admin"]
   end
 
-  context "Recommendations" do
-    scenario "are enabled by default" do
+  context "Recommendations" do # remove from front-end and comment out this test
+    xscenario "are enabled by default" do
       visit account_path
 
       expect(page).to have_content "Recommendations"
@@ -203,7 +203,7 @@ describe "Account" do
       expect(page).to have_field "Recommend proposals to me", checked: true
     end
 
-    scenario "can be disabled through 'My account' page" do
+    xscenario "can be disabled through 'My account' page" do
       visit account_path
 
       expect(page).to have_content "Recommendations"

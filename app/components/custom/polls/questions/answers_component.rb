@@ -14,6 +14,11 @@ class Polls::Questions::AnswersComponent < ApplicationComponent
 
     if question.votation_type.rating_scale?
       classes.push("rating-scale")
+
+      count_of_rating_scale_cells = question.question_answers.count
+      count_of_rating_scale_cells += 1 if question.min_rating_scale_label.present?
+      count_of_rating_scale_cells += 1 if question.max_rating_scale_label.present?
+      classes.push("rating-scale-#{count_of_rating_scale_cells}-answers")
     end
 
     classes.join(" ")

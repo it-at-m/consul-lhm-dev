@@ -59,4 +59,14 @@ module CustomHelper
       comment_flags: @comment_flags
     }
   end
+
+  def toggle_element_in_array(array, element)
+    if array.include?(element)
+      array.delete(element)
+    else
+      array.push(element)
+    end
+
+    array
+  end
 end

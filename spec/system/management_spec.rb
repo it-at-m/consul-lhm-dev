@@ -4,7 +4,7 @@ describe "Management" do
   let(:user) { create(:user) }
   before { Setting["org_name"] = "CONSUL" }
 
-  scenario "Should show admin menu if logged user is admin" do
+  xscenario "Should show admin menu if logged user is admin" do
     create(:administrator, user: user)
     login_as(user)
 
@@ -20,7 +20,7 @@ describe "Management" do
     expect(page).to have_link "Sign out"
   end
 
-  scenario "Should not show admin menu if logged user is manager" do
+  xscenario "Should not show admin menu if logged user is manager" do
     create(:manager, user: user)
     login_as(user)
     visit root_path

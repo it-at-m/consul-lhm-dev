@@ -267,6 +267,11 @@ de:
             tags_enable: Bitte aktivieren Sie Tags in Projektfunktionen Tab
             tags_hint: Klicken Sie auf einen oder mehrere Tags, um Sie für dieses Projekt dem/der Nutzer:in anzubieten.
             refresh_page: Sollten Sie die Funktionen bereits aktiviert haben, sie werden aber hier nicht angezeigt, dann laden Sie diese Seite bitte neu.
+          projekt_labels_tab:
+            name: Labels
+            page_title: Labels
+            create_button: Label erstellen
+            no_labels: Dieses Projekt hat keine Labels
           projekt_settings_tab:
             budget_settings: Budgets
             debates_settings: Diskussion
@@ -384,7 +389,7 @@ de:
         columns:
           first_name: Vorname
           last_name: Nachname
-          street_name: Straße
+          city_street_id: Straße
           street_number: Hausnummer
           plz: Postleitzahl
           geozone: Gebiet

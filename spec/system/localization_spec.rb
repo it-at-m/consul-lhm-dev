@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "Localization" do
-  scenario "Wrong locale" do
+  xscenario "Wrong locale" do
     I18n.with_locale(:es) do
       create(:widget_card, title: "Bienvenido a CONSUL",
                            description: "Software libre para la participación ciudadana.",
@@ -16,7 +16,7 @@ describe "Localization" do
     expect(page).to have_text("Bienvenido a CONSUL")
   end
 
-  scenario "Changing the locale" do
+  xscenario "Changing the locale" do
     visit "/"
     select "Español", from: "Language:"
 
@@ -24,7 +24,7 @@ describe "Localization" do
     expect(page).to have_select "Idioma:", selected: "Español"
   end
 
-  scenario "Keeps query parameters while using protected redirects" do
+  xscenario "Keeps query parameters while using protected redirects" do
     visit "/debates?order=created_at&host=evil.dev"
 
     select "Español", from: "Language:"

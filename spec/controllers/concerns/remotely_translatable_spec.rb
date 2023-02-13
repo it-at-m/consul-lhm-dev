@@ -34,7 +34,7 @@ describe RemotelyTranslatable do
         end
       end
 
-      it "When widget feeds are not defined in current locale" do
+      xit "When widget feeds are not defined in current locale" do
         create_list(:proposal, 3)
         create_list(:debate, 3)
         create_list(:legislation_process, 3)

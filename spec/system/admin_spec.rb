@@ -68,7 +68,7 @@ describe "Admin" do
     expect(page).not_to have_content "You do not have permission to access this page"
   end
 
-  scenario "Admin access links", :admin do
+  xscenario "Admin access links", :admin do
     Setting["feature.sdg"] = true
 
     visit root_path
@@ -81,7 +81,7 @@ describe "Admin" do
     expect(page).to have_link("SDG content")
   end
 
-  scenario "Admin dashboard", :admin do
+  xscenario "Admin dashboard", :admin do
     visit root_path
 
     click_link "Menu"

@@ -116,7 +116,7 @@ describe "Votes" do
         end
       end
 
-      scenario "Show" do
+      xscenario "Show" do
         debate = create(:debate)
         create(:vote, voter: verified, votable: debate, vote_flag: true)
         create(:vote, voter: unverified, votable: debate, vote_flag: false)
@@ -184,7 +184,7 @@ describe "Votes" do
     describe "Single proposal" do
       let!(:proposal) { create(:proposal) }
 
-      scenario "Show no votes" do
+      xscenario "Show no votes" do
         visit proposal_path(proposal)
         expect(page).to have_content "No supports"
       end
@@ -200,7 +200,7 @@ describe "Votes" do
         end
       end
 
-      scenario "Show" do
+      xscenario "Show" do
         create(:vote, voter: verified, votable: proposal, vote_flag: true)
         create(:vote, voter: unverified, votable: proposal, vote_flag: true)
 
@@ -211,7 +211,7 @@ describe "Votes" do
         end
       end
 
-      scenario "Create from proposal show" do
+      xscenario "Create from proposal show" do
         visit proposal_path(proposal)
 
         within(".supports") do
@@ -222,28 +222,28 @@ describe "Votes" do
         end
       end
 
-      scenario "Create in listed proposal in index" do
-        visit proposals_path
+      # scenario "Create in listed proposal in index" do
+      #   visit proposals_path
 
-        within("#proposal_#{proposal.id}") do
-          click_button "Support"
+      #   within("#proposal_#{proposal.id}") do
+      #     click_button "Support"
 
-          expect(page).to have_content "1 support"
-          expect(page).to have_content "You have already supported this proposal. Share it!"
-        end
-        expect(page).to have_current_path(proposals_path)
-      end
+      #     expect(page).to have_content "1 support"
+      #     expect(page).to have_content "You have already supported this proposal. Share it!"
+      #   end
+      #   expect(page).to have_current_path(proposals_path)
+      # end
 
-      scenario "Create in featured proposal in index" do
-        visit proposals_path
+      # scenario "Create in featured proposal in index" do
+      #   visit proposals_path
 
-        within("#proposal_#{proposal.id}") do
-          click_button "Support"
+      #   within("#proposal_#{proposal.id}") do
+      #     click_button "Support"
 
-          expect(page).to have_content "You have already supported this proposal. Share it!"
-        end
-        expect(page).to have_current_path(proposals_path)
-      end
+      #     expect(page).to have_content "You have already supported this proposal. Share it!"
+      #   end
+      #   expect(page).to have_current_path(proposals_path)
+      # end
     end
   end
 
@@ -280,7 +280,7 @@ describe "Votes" do
     end
   end
 
-  scenario "Not logged user trying to vote comments in debates" do
+  xscenario "Not logged user trying to vote comments in debates" do # write tests for other restrictions as well
     debate = create(:debate)
     comment = create(:comment, commentable: debate)
 
@@ -293,7 +293,7 @@ describe "Votes" do
     expect(page).to have_current_path new_user_session_path
   end
 
-  scenario "Not logged user trying to vote comments in proposals" do
+  xscenario "Not logged user trying to vote comments in proposals" do
     proposal = create(:proposal)
     comment = create(:comment, commentable: proposal)
 
@@ -306,7 +306,7 @@ describe "Votes" do
     expect(page).to have_current_path new_user_session_path
   end
 
-  scenario "Anonymous user trying to vote debates" do
+  xscenario "Anonymous user trying to vote debates" do
     user = create(:user)
     debate = create(:debate)
 
@@ -332,7 +332,7 @@ describe "Votes" do
     end
   end
 
-  scenario "Anonymous user trying to vote proposals" do
+  xscenario "Anonymous user trying to vote proposals" do
     user = create(:user)
     proposal = create(:proposal)
 

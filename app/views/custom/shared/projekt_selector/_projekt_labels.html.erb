@@ -1,0 +1,17 @@
+<% if controller_name.in? %w[debates proposals] %>
+  <% if model.errors.details[:projekt_labels].any? %>
+    <% model.errors.details[:projekt_labels].each do |error| %>
+      <small class='form-error is-visible margin-top'>
+        <%= t("activerecord.errors.models.#{model.model_name.param_key}.attributes.projekt_labels.#{error[:error]}") %>
+      </small>
+    <% end %>
+  <% end %>
+
+  <div id='projekt_labels_selector' style="margin-top:2rem;margin-bottom:2rem;">
+    <%= render Shared::ProjektLabelsComponent.new(css_class: "js-select-projekt-label hide") %>
+  </div>
+
+  <div id="projekt-labels-checkboxes">
+    <%= f.collection_check_boxes :projekt_label_ids, ProjektLabel.all, :id, :name %>
+  </div>
+<% end %>

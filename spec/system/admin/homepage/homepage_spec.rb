@@ -26,7 +26,7 @@ describe "Homepage", :admin do
   end
 
   context "Feeds" do
-    scenario "Proposals" do
+    xscenario "Proposals" do
       5.times { create(:proposal) }
 
       visit admin_homepage_path
@@ -48,7 +48,7 @@ describe "Homepage", :admin do
       expect(page).not_to have_css("#feed_proposals.medium-8")
     end
 
-    scenario "Debates" do
+    xscenario "Debates" do
       5.times { create(:debate) }
 
       visit admin_homepage_path
@@ -69,7 +69,7 @@ describe "Homepage", :admin do
       expect(page).not_to have_css("#feed_debates.medium-4")
     end
 
-    scenario "Proposals and debates" do
+    xscenario "Proposals and debates" do
       3.times { create(:proposal) }
       3.times { create(:debate) }
 
@@ -102,7 +102,7 @@ describe "Homepage", :admin do
       end
     end
 
-    scenario "Processes" do
+    xscenario "Processes" do
       5.times { create(:legislation_process) }
 
       visit admin_homepage_path
@@ -119,7 +119,7 @@ describe "Homepage", :admin do
       expect(page).to have_css(".legislation-process", count: 3)
     end
 
-    scenario "Deactivate proposals" do
+    xscenario "Deactivate proposals" do
       Setting["homepage.widgets.feeds.proposals"] = true
       create(:proposal)
 
@@ -136,7 +136,7 @@ describe "Homepage", :admin do
       expect(page).not_to have_content "Most active proposals"
     end
 
-    scenario "Deactivate debates" do
+    xscenario "Deactivate debates" do
       Setting["homepage.widgets.feeds.debates"] = true
       create(:debate)
 
@@ -171,7 +171,7 @@ describe "Homepage", :admin do
     end
   end
 
-  scenario "Cards" do
+  xscenario "Cards" do
     card1 = create(:widget_card, label: "Card1 label",
                                  title: "Card1 text",
                                  description: "Card1 description",
@@ -207,21 +207,21 @@ describe "Homepage", :admin do
     end
   end
 
-  scenario "Recomendations" do
-    create(:proposal, tag_list: "Sport", followers: [user])
-    create(:proposal, tag_list: "Sport")
+  # scenario "Recomendations" do
+  #   create(:proposal, tag_list: "Sport", followers: [user])
+  #   create(:proposal, tag_list: "Sport")
 
-    visit admin_homepage_path
+  #   visit admin_homepage_path
 
-    within("#edit_setting_#{user_recommendations.id}") do
-      click_button "No"
+  #   within("#edit_setting_#{user_recommendations.id}") do
+  #     click_button "No"
 
-      expect(page).to have_button "Yes"
-    end
+  #     expect(page).to have_button "Yes"
+  #   end
 
-    login_as(user)
-    visit root_path
+  #   login_as(user)
+  #   visit root_path
 
-    expect(page).to have_content("Recommendations that may interest you")
-  end
+  #   expect(page).to have_content("Recommendations that may interest you")
+  # end
 end

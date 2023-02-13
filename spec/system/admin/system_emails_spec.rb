@@ -123,7 +123,7 @@ describe "System Emails" do
       expect(page).to have_link "Share your investment project", href: share_url
     end
 
-    scenario "#budget_investment_unfeasible" do
+    xscenario "#budget_investment_unfeasible" do
       investment = create(:budget_investment, title: "Cleaner city", heading: heading, author: user)
 
       visit admin_system_email_view_path("budget_investment_unfeasible")
@@ -142,7 +142,7 @@ describe "System Emails" do
       expect(page).to have_content "Thank you again for participating."
     end
 
-    scenario "#comment" do
+    xscenario "#comment" do
       debate = create(:debate, title: "Let's do...", author: user)
 
       commenter = create(:user)

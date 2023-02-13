@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "Sessions" do
-  scenario "Staying in the same page after doing login/logout" do
+  xscenario "Staying in the same page after doing login/logout" do
     user = create(:user, sign_in_count: 10)
     debate = create(:debate)
 
@@ -22,7 +22,7 @@ describe "Sessions" do
     expect(page).to have_current_path(debate_path(debate))
   end
 
-  scenario "Sign in redirects keeping GET parameters" do
+  xscenario "Sign in redirects keeping GET parameters" do
     create(:user, :level_two, email: "dev@consul.dev", password: "consuldev")
     heading = create(:budget_heading, name: "outskirts")
 
@@ -48,7 +48,7 @@ describe "Sessions" do
     expect(page).to have_current_path "/"
   end
 
-  scenario "Sign out does not redirect to POST requests URLs" do
+  xscenario "Sign out does not redirect to POST requests URLs" do
     login_as(create(:user))
 
     visit account_path

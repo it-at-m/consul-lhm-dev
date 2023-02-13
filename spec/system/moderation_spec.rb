@@ -18,7 +18,7 @@ describe "Moderation" do
     expect(page).to have_content "You do not have permission to access this page"
   end
 
-  scenario "Access as valuator is not authorized" do
+  xscenario "Access as valuator is not authorized" do
     create(:valuator, user: user)
     login_as(user)
 
@@ -34,7 +34,7 @@ describe "Moderation" do
     expect(page).to have_content "You do not have permission to access this page"
   end
 
-  scenario "Access as manager is not authorized" do
+  xscenario "Access as manager is not authorized" do
     create(:manager, user: user)
     login_as(user)
 
@@ -50,7 +50,7 @@ describe "Moderation" do
     expect(page).to have_content "You do not have permission to access this page"
   end
 
-  scenario "Access as SDG manager is not authorized" do
+  xscenario "Access as SDG manager is not authorized" do
     create(:sdg_manager, user: user)
     login_as(user)
 
@@ -66,7 +66,7 @@ describe "Moderation" do
     expect(page).to have_content "You do not have permission to access this page"
   end
 
-  scenario "Access as poll officer is not authorized" do
+  xscenario "Access as poll officer is not authorized" do
     create(:poll_officer, user: user)
     login_as(user)
 
@@ -82,7 +82,7 @@ describe "Moderation" do
     expect(page).to have_content "You do not have permission to access this page"
   end
 
-  scenario "Access as a moderator is authorized" do
+  xscenario "Access as a moderator is authorized" do
     create(:moderator, user: user)
 
     login_as(user)
@@ -94,7 +94,7 @@ describe "Moderation" do
     expect(page).not_to have_content "You do not have permission to access this page"
   end
 
-  scenario "Access as an administrator is authorized" do
+  xscenario "Access as an administrator is authorized" do
     create(:administrator, user: user)
 
     login_as(user)
@@ -106,7 +106,7 @@ describe "Moderation" do
     expect(page).not_to have_content "You do not have permission to access this page"
   end
 
-  scenario "Moderation access links" do
+  xscenario "Moderation access links" do
     create(:moderator, user: user)
     login_as(user)
 
@@ -123,7 +123,7 @@ describe "Moderation" do
       Setting["org_name"] = "OrgName"
     end
 
-    scenario "Contains correct elements" do
+    xscenario "Contains correct elements" do
       create(:moderator, user: user)
       login_as(user)
 

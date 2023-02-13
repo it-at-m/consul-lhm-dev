@@ -22,6 +22,7 @@
      <%= "data-tag-ids=#{ projekt.tags.category.ids.any? ? projekt.tags.category.ids.join(',') : false }" if projekt_feature?(projekt, "general.enable_tags") %>
      <%= "data-allow-sdgs=true" if projekt_feature?(projekt, "general.enable_sdgs") %>
      <%= "data-sdg-ids=#{ projekt.sdg_goals.ids.any? ? projekt.sdg_goals.ids.join(',') : false}" if projekt_feature?(projekt, "general.enable_sdgs") %>
+     <%= "data-projekt-label-ids=#{ projekt.all_projekt_labels.ids.join(',') }" %>
      <%= "data-resource-form-title=#{ projekt_phase.resource_form_title.gsub(' ', '_') }" if projekt_phase&.resource_form_title.present? %>
      >
 

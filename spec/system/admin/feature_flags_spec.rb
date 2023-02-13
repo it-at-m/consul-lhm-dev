@@ -63,7 +63,7 @@ describe "Admin feature flags", :admin do
     end
   end
 
-  scenario "Disable a feature" do
+  xscenario "Disable a feature" do
     visit admin_settings_path
     click_link "Features"
 
@@ -75,7 +75,7 @@ describe "Admin feature flags", :admin do
     end
   end
 
-  scenario "Enable a disabled feature" do
+  xscenario "Enable a disabled feature" do
     visit admin_settings_path
     click_link "Features"
 

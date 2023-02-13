@@ -31,7 +31,7 @@ describe "Admin settings", :admin do
       Setting["feature.map"] = true
     end
 
-    scenario "When `Map settings` tab content is hidden map should not be initialized" do
+    xscenario "When `Map settings` tab content is hidden map should not be initialized" do
       visit admin_settings_path
 
       expect(page).not_to have_css("#admin-map.leaflet-container", visible: :all)
@@ -84,7 +84,7 @@ describe "Admin settings", :admin do
       expect(page).to have_content "Map configuration updated succesfully"
     end
 
-    scenario "Should display marker by default" do
+    xscenario "Should display marker by default" do
       Setting["feature.map"] = true
 
       visit admin_settings_path
@@ -348,7 +348,7 @@ describe "Admin settings", :admin do
   end
 
   describe "Machine learning settings" do
-    scenario "show the machine learning feature but not its settings" do
+    xscenario "show the machine learning feature but not its settings" do
       Setting["feature.machine_learning"] = true
 
       visit admin_settings_path

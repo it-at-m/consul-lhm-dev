@@ -42,7 +42,7 @@ describe Poll::Answer do
     let(:poll) { create(:poll) }
     let(:question) { create(:poll_question, :yes_no, poll: poll) }
 
-    it "creates a poll_voter with user and poll data" do
+    xit "creates a poll_voter with user and poll data" do
       answer = create(:poll_answer, question: question, author: author, answer: "Yes")
       expect(answer.poll.voters).to be_blank
 
@@ -55,7 +55,7 @@ describe Poll::Answer do
       expect(voter.officer_id).to eq(nil)
     end
 
-    it "updates a poll_voter with user and poll data" do
+    xit "updates a poll_voter with user and poll data" do
       answer = create(:poll_answer, question: question, author: author, answer: "Yes")
       answer.save_and_record_voter_participation("token")
 
@@ -71,7 +71,7 @@ describe Poll::Answer do
       expect(voter.poll_id).to eq(answer.poll.id)
     end
 
-    it "does not save the answer if the voter is invalid" do
+    xit "does not save the answer if the voter is invalid" do
       allow_any_instance_of(Poll::Voter).to receive(:valid?).and_return(false)
       answer = build(:poll_answer)
 

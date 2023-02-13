@@ -9,13 +9,22 @@ module Takeable
       @resources = @resources.where(projekt: projekts_visible_in_sidebar)
     end
 
-    @resources = @resources.where(projekt_id: scoped_projekts_ids)
+    @resources = @resources.where(projekt_id: scoped_projekts_ids).distinct
 
     @all_resources = @resources
 
     if params[:filter_projekt_ids].present?
       @resources = @resources.where(projekt_id: params[:filter_projekt_ids].split(','))
     end
+  end
+
+  def take_by_projekt_labels
+    return if params[:projekt_label_ids].all?(&:blank?)
+
+    @resources = @resources
+      .joins(:projekt_labels)
+      .where(projekt_labels: { id: params[:projekt_label_ids] })
+      .distinct
   end
 
   def take_by_tag_names

@@ -18,13 +18,17 @@
     <% end %>
   </div>
 
+  <% if extended_feature?("general.enable_google_translate") && placement == 'desktop' %>
+    <div id="google_translate_element"></div>
+  <% end %>
+
   <% unless launch_page %>
     <div class="account-admin-items">
-      <%= render partial: 'shared/subnavigation_locale', locals: { placement: placement } if extended_feature?("general.language_switcher_in_menu") && placement == 'desktop' %>
+      <%= render partial: 'shared/subnavigation_locale', locals: { placement: placement } if extended_feature?("general.language_switcher_in_menu") && !extended_feature?("general.enable_google_translate") && placement == 'desktop' %>
       <%= render partial: "layouts/notification_item", locals: { placement: placement } %>
       <%= render partial: 'shared/subnavigation_konto', locals: { placement: placement } %>
       <%= render partial: 'shared/subnavigation_admin', locals: { placement: placement } %>
-      <%= render partial: 'shared/subnavigation_locale', locals: { placement: placement } if extended_feature?("general.language_switcher_in_menu") && placement == 'mobile' %>
+      <%= render partial: 'shared/subnavigation_locale', locals: { placement: placement } if extended_feature?("general.language_switcher_in_menu") && !extended_feature?("general.enable_google_translate") && placement == 'mobile' %>
     </div>
   <% end %>
 </ul>

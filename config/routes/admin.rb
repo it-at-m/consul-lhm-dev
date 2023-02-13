@@ -31,6 +31,7 @@ namespace :admin do
     patch :update_map, to: "projekts#update_map"
 
     resources :map_layers, only: [:update, :create, :edit, :new, :destroy], controller: 'projekts/map_layers'
+    resources :projekt_labels, except: %i[index show]
   end
 
   resources :map_layers, only: [:update, :create, :edit, :new, :destroy]

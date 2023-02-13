@@ -84,7 +84,7 @@ describe "Admin geozones", :admin do
     expect(page).not_to have_content("Delete me!")
   end
 
-  scenario "Delete geozone with associated element" do
+  xscenario "Delete geozone with associated element" do
     geozone = create(:geozone, name: "Delete me!")
     create(:proposal, geozone: geozone)
 

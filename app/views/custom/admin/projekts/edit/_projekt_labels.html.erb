@@ -1,0 +1,41 @@
+<h2><%= t("custom.admin.projekts.edit.projekt_labels_tab.page_title") %></h2>
+
+<% if @projekt_labels.empty? %>
+  <p><%= t("custom.admin.projekts.edit.projekt_labels_tab.no_labels") %></p>
+
+<% else %>
+  <table>
+    <thead>
+      <tr>
+        <th><%= t("custom.admin.deficiency_reports.categories.category.icon") %></th>
+        <th><%= t("custom.admin.deficiency_reports.categories.category.color") %></th>
+        <th><%= t("custom.admin.deficiency_reports.categories.category.name") %></th>
+        <th><%= t("admin.actions.actions") %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @projekt_labels.each do |label| %>
+        <tr id="<%= dom_id(label) %>">
+          <td><%= "<i class=\"fas fa-#{label.icon}\" style=\"color:#{label.color}\"></i>".html_safe if label.icon %></td>
+          <td><%= label.color %></td>
+          <td><%= label.name %></td>
+          <td>
+            <%= render Admin::TableActionsComponent.new(label,
+                                                        actions: [:edit, :destroy],
+                                                        edit_path: edit_admin_projekt_projekt_label_path(@projekt, label),
+                                                        destroy_path: admin_projekt_projekt_label_path(@projekt, label),
+                                                        edit_options: { remote: true, data: { "turbolinks-scroll": "false"}},
+                                                        destroy_options: { remote: true }
+                                                       ) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<div id="create-or-edit-projekt-label">
+  <%= link_to t("custom.admin.projekts.edit.projekt_labels_tab.create_button"),
+    new_admin_projekt_projekt_label_path(@projekt), class: "button", remote: true, data: { "turbolinks-scroll": "false"} %>
+</div>

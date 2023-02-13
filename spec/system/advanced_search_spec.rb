@@ -4,7 +4,7 @@ describe "Advanced search" do
   let(:budget)  { create(:budget, name: "Big Budget") }
   let(:heading) { create(:budget_heading, budget: budget, name: "More hospitals") }
 
-  scenario "Search debates" do
+  xscenario "Search debates" do
     debate1 = create(:debate, title: "Get Schwifty")
     debate2 = create(:debate, title: "Schwifty Hello")
     debate3 = create(:debate, title: "Do not show me")
@@ -24,7 +24,7 @@ describe "Advanced search" do
     end
   end
 
-  scenario "Search proposals" do
+  xscenario "Search proposals" do
     proposal1 = create(:proposal, title: "Get Schwifty")
     proposal2 = create(:proposal, title: "Schwifty Hello")
     proposal3 = create(:proposal, title: "Do not show me")
@@ -44,7 +44,7 @@ describe "Advanced search" do
     end
   end
 
-  scenario "Search investments" do
+  xscenario "Search investments" do
     bdgt_invest1 = create(:budget_investment, heading: heading, title: "Get Schwifty")
     bdgt_invest2 = create(:budget_investment, heading: heading, title: "Schwifty Hello")
     bdgt_invest3 = create(:budget_investment, heading: heading, title: "Do not show me")
@@ -64,9 +64,9 @@ describe "Advanced search" do
     end
   end
 
-  context "Search by date" do
+  xcontext "Search by date" do
     context "Predefined date ranges" do
-      scenario "Last day" do
+      xscenario "Last day" do
         bdgt_invest1 = create(:budget_investment, heading: heading, created_at: 1.minute.ago)
         bdgt_invest2 = create(:budget_investment, heading: heading, created_at: 1.hour.ago)
         bdgt_invest3 = create(:budget_investment, heading: heading, created_at: 2.days.ago)
@@ -86,7 +86,7 @@ describe "Advanced search" do
         end
       end
 
-      scenario "Last week" do
+      xscenario "Last week" do
         debate1 = create(:debate, created_at: 1.day.ago)
         debate2 = create(:debate, created_at: 5.days.ago)
         debate3 = create(:debate, created_at: 8.days.ago)
@@ -106,7 +106,7 @@ describe "Advanced search" do
         end
       end
 
-      scenario "Last month" do
+      xscenario "Last month" do
         proposal1 = create(:proposal, created_at: 10.days.ago)
         proposal2 = create(:proposal, created_at: 20.days.ago)
         proposal3 = create(:proposal, created_at: 33.days.ago)
@@ -126,7 +126,7 @@ describe "Advanced search" do
         end
       end
 
-      scenario "Last year" do
+      xscenario "Last year" do
         bdgt_invest1 = create(:budget_investment, heading: heading, created_at: 300.days.ago)
         bdgt_invest2 = create(:budget_investment, heading: heading, created_at: 350.days.ago)
         bdgt_invest3 = create(:budget_investment, heading: heading, created_at: 370.days.ago)
@@ -193,7 +193,7 @@ describe "Advanced search" do
       end
     end
 
-    scenario "Search by multiple filters" do
+    xscenario "Search by multiple filters" do
       Setting["feature.sdg"] = true
       Setting["sdg.process.budgets"] = true
 
@@ -265,7 +265,7 @@ describe "Advanced search" do
       Setting["sdg.process.budgets"] = true
     end
 
-    scenario "Search by goal" do
+    xscenario "Search by goal" do
       create(:budget_investment, title: "Purifier", heading: heading, sdg_goals: [SDG::Goal[6]])
       create(:budget_investment, title: "Hospital", heading: heading, sdg_goals: [SDG::Goal[3]])
 

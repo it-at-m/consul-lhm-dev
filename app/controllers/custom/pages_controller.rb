@@ -192,6 +192,7 @@ class PagesController < ApplicationController
 
     params[:current_tab_path] = 'debate_phase_footer_tab'
     params[:filter_projekt_ids] ||= @current_projekt.all_children_ids.push(@current_projekt.id).map(&:to_s)
+    params[:projekt_label_ids] ||= []
 
     @selected_parent_projekt = @current_projekt
 
@@ -207,6 +208,7 @@ class PagesController < ApplicationController
       # take_by_geozone_affiliations
       # take_by_geozone_restrictions
       take_by_projekts(@scoped_projekt_ids)
+      take_by_projekt_labels if params[:projekt_label_ids].any?
     end
 
     @debates = @resources.page(params[:page]).send("sort_by_#{@current_order}")
@@ -230,6 +232,7 @@ class PagesController < ApplicationController
 
     params[:current_tab_path] = 'proposal_phase_footer_tab'
     params[:filter_projekt_ids] ||= @current_projekt.all_children_ids.push(@current_projekt.id).map(&:to_s)
+    params[:projekt_label_ids] ||= []
 
     @selected_parent_projekt = @current_projekt
 
@@ -252,6 +255,7 @@ class PagesController < ApplicationController
       # take_by_geozone_affiliations
       # take_by_geozone_restrictions
       take_by_projekts(@scoped_projekt_ids)
+      take_by_projekt_labels if params[:projekt_label_ids].any?
     end
 
     @proposals_coordinates = all_proposal_map_locations(@resources)
@@ -386,8 +390,14 @@ class PagesController < ApplicationController
       @investment_ids = @budget.investments.ids
     end
 
-    if @budget.phase == "finished" && @budget.voting_style == "distributed"
-      @current_order = "ballot_line_weight"
+    if @budget.phase == "finished"
+      if @budget.voting_style == "distributed"
+        @current_order = "ballot_line_weight"
+      elsif @budget.voting_style == "distributed"
+        @current_order = "ballots"
+      elsif @budget.voting_style == "knapsack"
+        @current_order = "ballots"
+      end
     end
 
     @investments = @investments.send("sort_by_#{@current_order}").page(params[:page]).per(20)

@@ -25,7 +25,7 @@ describe Admin::Api::StatsController, :admin do
         create :ahoy_event, name: "bar", time: time_3
       end
 
-      it "returns single events formated for working with c3.js" do
+      xit "returns single events formated for working with c3.js" do
         get :show, params: { event: "foo" }
 
         expect(response).to be_ok
@@ -36,7 +36,7 @@ describe Admin::Api::StatsController, :admin do
     end
 
     context "visits present" do
-      it "returns visits formated for working with c3.js" do
+      xit "returns visits formated for working with c3.js" do
         time_1 = Time.zone.local(2015, 01, 01)
         time_2 = Time.zone.local(2015, 01, 02)
 

@@ -499,4 +499,8 @@ describe "Users" do
       end
     end
   end
+
+  describe "Check custom user settings" do
+    pending "Show admin settings block"
+  end
 end

@@ -1,0 +1,24 @@
+<label id="label-for-projekt-labels-selector" class="hide"><%= t("custom.shared.form.projekt_labels")%></label>
+
+<% projekt_labels.each do |label| %>
+  <span class="label projekt-label secondary <%= @css_class %>"
+        style="background-color:<%= label_background_color(label) %>;color:<%= label_text_color(label) %>"
+        data-background-color="<%= label.color %>"
+        data-text-color="<%= pick_text_color(label.color) %>"
+        data-label-id="<%= label.id %>"
+        >
+        <% if @sidebar_filter_link %>
+          <%= link_to link_path(label),
+            remote: true,
+            class: 'js-remote-link-push-state',
+            "data-footer-tab-back-url": footer_tab_back_button_url(label),
+            onclick: '$(".spinner-placeholder").addClass("show-loader")' do %>
+            <i class="fas fa-<%= label.icon %>"></i>
+            <%= label.name %>
+          <% end %>
+        <% else %>
+          <i class="fas fa-<%= label.icon %>"></i>
+          <%= label.name %>
+        <% end %>
+  </span>
+<% end %>

@@ -62,6 +62,7 @@ en:
           no_restriction: All users of the platform
           only_citizens: Only citizens of the city
           only_geozones: Only citizens of the district
+          only_streets: Only citizens of a street
           show_more: Show more
           title: Participation
     images:
@@ -70,7 +71,7 @@ en:
     layouts:
       footer:
         demokratie: demokratie.today
-        demokratie_url: https://www.demokratie.today/
+        demokratie_url: https://demokratie.today/
         description: The platform is based on %{consul}, a %{open_source} and is modified by %{demokratie}.
         impressum: Imprint
         netiquette: Netiquette
@@ -120,6 +121,7 @@ en:
       form:
         projekt_assignment: Project
         star_message: All Fields marked with a (*) are required
+        projekt_labels: Labels *
       index:
         resource:
           by: by

@@ -146,8 +146,7 @@ module Abilities
           dr.official_answer.present?
       end
 
-
-      can [:order_questions], Poll::Question
+      can [:order_questions, :csv_answers_streets, :csv_answers_votes], Poll::Question
       can [:show], Projekt
       can [:verify, :unverify], User
 
@@ -158,6 +157,8 @@ module Abilities
       can :manage, ModalNotification
 
       can [:results, :stats], Poll, projekt: { projekt_settings: { key: "projekt_feature.polls.intermediate_poll_results_for_admins", value: "active" }}
+
+      can [:manage], ProjektLabel
     end
   end
 end

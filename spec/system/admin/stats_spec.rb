@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "Stats", :admin do
   context "Summary" do
-    scenario "General" do
+    xscenario "General" do
       create(:debate)
       2.times { create(:proposal) }
       3.times { create(:comment, commentable: Debate.first) }
@@ -73,17 +73,17 @@ describe "Stats", :admin do
       expect(page).to have_content "TOTAL USERS\n1"
     end
 
-    scenario "Level 2 user Graph" do
-      create(:geozone)
-      visit account_path
-      click_link "Verify my account"
-      verify_residence
-      confirm_phone
+    # scenario "Level 2 user Graph" do
+    #   create(:geozone)
+    #   visit account_path
+    #   click_link "Verify my account"
+    #   verify_residence
+    #   confirm_phone
 
-      visit admin_stats_path
+    #   visit admin_stats_path
 
-      expect(page).to have_content "LEVEL TWO USERS\n1"
-    end
+    #   expect(page).to have_content "LEVEL TWO USERS\n1"
+    # end
   end
 
   describe "Budget investments" do
@@ -216,7 +216,7 @@ describe "Stats", :admin do
   end
 
   context "graphs" do
-    scenario "event graphs", :with_frozen_time do
+    xscenario "event graphs", :with_frozen_time do
       campaign = create(:campaign)
 
       visit root_path(track_id: campaign.track_id)

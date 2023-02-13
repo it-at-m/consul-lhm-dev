@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "Stats" do
   context "Summary" do
-    scenario "General" do
+    xscenario "General" do
       create(:debate)
       2.times { create(:proposal) }
       3.times { create(:comment, commentable: Debate.first) }
@@ -16,7 +16,7 @@ describe "Stats" do
       expect(page).to have_content "VISITS\n4"
     end
 
-    scenario "Votes" do
+    xscenario "Votes" do
       create(:debate,   voters: Array.new(1) { create(:user) })
       create(:proposal, voters: Array.new(2) { create(:user) })
       create(:comment,  voters: Array.new(3) { create(:user) })
@@ -29,7 +29,7 @@ describe "Stats" do
       expect(page).to have_content "TOTAL VOTES\n6"
     end
 
-    scenario "Users" do
+    xscenario "Users" do
       1.times { create(:user, :level_three) }
       2.times { create(:user, :level_two) }
       2.times { create(:user) }

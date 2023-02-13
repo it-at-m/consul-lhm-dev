@@ -21,5 +21,26 @@
         <%= b.label(style: 'display:inline-block;cursor:pointer;') { b.check_box(style: 'margin-top:0;') + b.text } %>
       <% end %>
     </div>
+    <br>
+
+    <%= f.radio_button :geozone_restricted, 'only_streets', label: t('custom.geozones.sidebar_filter.restrictions.only_streets'), class: "#{projekt_phase.name}_only_streets", disabled: skip_user_verification? %>
+
+    <div class="projekt-phase-street-selector">
+      <div id="projekt-phase-selected-streets">
+        <% projekt_phase.city_streets.each do |street| %>
+          <div class='selected-street' data-street-id=<%= street.id %>>
+            <%= street.name_with_plz %>
+            <i class='fas fa-times js-deselect-street'></i>
+          </div>
+        <% end %>
+      </div>
+
+      <%= select_tag :streets, options_from_collection_for_select(CityStreet.all, :id, :name_with_plz), class: 'js-select-street', prompt: 'Bitte wählen' %>
+
+      <div class='hide'>
+        <%= f.collection_check_boxes :city_street_ids, CityStreet.all, :id, :name %>
+      </div>
+    </div>
+
   </div>
 </div>

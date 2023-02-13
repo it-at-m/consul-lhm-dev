@@ -11,7 +11,7 @@
       <ul>
         <li><span class="icon-check"></span>&nbsp;<%= t("verification.user_permission_debates") %></li>
         <li><span class="icon-check"></span>&nbsp;<%= t("verification.user_permission_proposal") %></li>
-        <li><span class="icon-check"></span>&nbsp;<%= t("verification.user_permission_support_proposal") %></li>
+        <li><span class="icon-x"></span>&nbsp;<%= t("verification.user_permission_support_proposal") %></li>
         <li><span class="icon-x"></span>&nbsp;<%= t("verification.user_permission_votes") %></li>
       </ul>
     </div>
@@ -31,7 +31,7 @@
 
         <div class="small-12 medium-5 clear">
           <%= f.label t("custom.verification.residence.new.street_name") %>
-          <%= f.text_field :street_name, label: false %>
+          <%= f.select :city_street_id, CityStreet.all.map{ |str| [str.name_with_plz, str.id]  }, { prompt: t('helpers.select.prompt'), label: false } %>
         </div>
 
         <div class="small-12 medium-5 clear">
@@ -97,11 +97,14 @@
 
       <div class="small-12">
         <%= f.check_box :terms_of_service,
-          title: t("verification.residence.new.accept_terms_text_title"),
-          label: t("verification.residence.new.accept_terms_text",
-                   terms_url: link_to(t("verification.residence.new.terms"), page_path("census_terms"),
-                                      title: t("shared.target_blank"),
-                                      target: "_blank")
+          title: t("devise_views.users.registrations.new.terms_title"),
+          label: t("custom.devise_views.users.registrations.new.terms",
+                   terms: link_to(t("devise_views.users.registrations.new.terms_link"), "/conditions",
+                                  title: t("shared.target_blank"),
+                                  target: "_blank"),
+                   privacy: link_to(t("custom.devise_views.users.registrations.new.privacy_link"), "/privacy",
+                                  title: t("shared.target_blank"),
+                                  target: "_blank")
                   ) %>
       </div>
 

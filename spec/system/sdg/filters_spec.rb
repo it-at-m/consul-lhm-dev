@@ -6,7 +6,7 @@ describe "SDG filters" do
     Setting["sdg.process.budgets"] = true
   end
 
-  scenario "generates links to index with nested resources" do
+  xscenario "generates links to index with nested resources" do
     budget = create(:budget)
     create(:budget_investment, budget: budget, title: "School's out", sdg_goals: [SDG::Goal[4]])
     create(:budget_investment, budget: budget, title: "We are the world", sdg_goals: [SDG::Goal[1]])

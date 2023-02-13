@@ -206,10 +206,6 @@ div.projekt-phase-restriction-selector {
     margin-right: 2em;
   }
 
-  .projekt-phase-geozone-selector {
-    display: none;
-  }
-
   input[type='checkbox'] + label {
     font-weight: normal;
   }
@@ -217,7 +213,6 @@ div.projekt-phase-restriction-selector {
   input[type='checkbox']:checked + label {
     font-weight: bold;
   }
-
 
   input.comment_phase_only_geozones:checked ~ .projekt-phase-geozone-selector.comment_phase {
     display: block;
@@ -253,6 +248,36 @@ div.projekt-phase-restriction-selector {
 
   input#projekt_geozone_affiliated_only_geozones:checked ~ .projekt-phase-geozone-selector {
     display: block;
+  }
+
+  .projekt-phase-geozone-selector,
+  .projekt-phase-street-selector {
+    display: none;
+  }
+
+  input[class$=_phase_only_geozones]:checked ~ .projekt-phase-geozone-selector {
+    display: block;
+  }
+
+  input[class$=_phase_only_streets]:checked ~ .projekt-phase-street-selector {
+    display: block;
+  }
+}
+
+.projekt-phase-selected-streets {
+  margin-bottom: 10px;
+
+  .selected-projekt {
+    font-weight: bold;
+    position: relative;
+
+    i {
+      position: absolute;
+      margin-left: 7px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
   }
 }
 
@@ -1661,4 +1686,28 @@ span.projekt-backlink:before {
 
 .projekt-all-questions-notification-link {
   margin-left: 15px;
+}
+
+// Projekt labels
+
+#projekt_labels_selector {
+  .projekt-label {
+    cursor: pointer;
+    font-size: 1.2rem;
+  }
+}
+
+#projekt-labels-checkboxes {
+  display: none;
+}
+
+#projekt-labels-sidebar {
+  .projekt-label {
+    margin-bottom: 0.25rem;
+  }
+
+  .projekt-label a {
+    color: inherit;
+    text-decoration: none;
+  }
 }

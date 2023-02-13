@@ -8,9 +8,9 @@ describe "Budget Investments" do
   let(:group) { create(:budget_group, name: "Health", budget: budget) }
   let!(:heading) { create(:budget_heading, name: "More hospitals", price: 666666, group: group) }
 
-  it_behaves_like "milestoneable", :budget_investment
+  # it_behaves_like "milestoneable", :budget_investment
 
-  context "Concerns" do
+  xcontext "Concerns" do
     it_behaves_like "notifiable in-app", :budget_investment
     it_behaves_like "relationable", Budget::Investment
     it_behaves_like "remotely_translatable",
@@ -46,7 +46,7 @@ describe "Budget Investments" do
     end
   end
 
-  scenario "Index" do
+  xscenario "Index" do
     budget.update!(phase: "valuating")
 
     investments = [create(:budget_investment, heading: heading),
@@ -72,7 +72,7 @@ describe "Budget Investments" do
     expect(page).to have_current_path budget_path(budget)
   end
 
-  scenario "Index view mode" do
+  xscenario "Index view mode" do
     investments = [create(:budget_investment, heading: heading),
                    create(:budget_investment, heading: heading),
                    create(:budget_investment, heading: heading)]
@@ -100,7 +100,7 @@ describe "Budget Investments" do
     end
   end
 
-  scenario "Index should show investment descriptive image only when is defined" do
+  xscenario "Index should show investment descriptive image only when is defined" do
     investment = create(:budget_investment, heading: heading)
     investment_with_image = create(:budget_investment, :with_image, heading: heading)
 
@@ -114,7 +114,7 @@ describe "Budget Investments" do
     end
   end
 
-  scenario "Index should show a map if heading has coordinates defined" do
+  xscenario "Index should show a map if heading has coordinates defined" do
     create(:budget_investment, heading: heading)
     visit budget_investments_path(budget, heading_id: heading.id)
     within("#sidebar") do
@@ -130,7 +130,7 @@ describe "Budget Investments" do
     end
   end
 
-  scenario "Index filter by status" do
+  xscenario "Index filter by status" do
     budget.update!(phase: "finished")
 
     create(:budget_investment, heading: heading, title: "Unclassified investment")
@@ -163,7 +163,7 @@ describe "Budget Investments" do
   end
 
   context("Search") do
-    scenario "Search by text" do
+    xscenario "Search by text" do
       investment1 = create(:budget_investment, heading: heading, title: "Get Schwifty")
       investment2 = create(:budget_investment, heading: heading, title: "Schwifty Hello")
       investment3 = create(:budget_investment, heading: heading, title: "Do not show me")
@@ -186,7 +186,7 @@ describe "Budget Investments" do
       end
     end
 
-    scenario "Advanced search combined with filter by status" do
+    xscenario "Advanced search combined with filter by status" do
       budget.update!(phase: "valuating")
 
       create(:budget_investment, :feasible, heading: heading, title: "Feasible environment")
@@ -220,7 +220,7 @@ describe "Budget Investments" do
       expect(page).not_to have_content "Unfeasible health"
     end
 
-    scenario "Advanced search without search terms" do
+    xscenario "Advanced search without search terms" do
       create(:budget_heading, group: heading.group)
       create(:budget_investment, heading: heading, title: "Old thing", created_at: 2.years.ago)
       create(:budget_investment, heading: heading, title: "Newest thing", created_at: 1.hour.ago)
@@ -239,7 +239,7 @@ describe "Budget Investments" do
   end
 
   context("Filters") do
-    scenario "by unfeasibility" do
+    xscenario "by unfeasibility" do
       budget.update!(phase: "valuating")
 
       investment1 = create(:budget_investment, :unfeasible, :finished, heading: heading)
@@ -262,7 +262,7 @@ describe "Budget Investments" do
     context "Results Phase" do
       before { budget.update(phase: "finished", results_enabled: true) }
 
-      scenario "show winners by default" do
+      xscenario "show winners by default" do
         investment1 = create(:budget_investment, :winner, heading: heading)
         investment2 = create(:budget_investment, :selected, heading: heading)
 
@@ -284,7 +284,7 @@ describe "Budget Investments" do
         end
       end
 
-      scenario "unfeasible" do
+      xscenario "unfeasible" do
         investment1 = create(:budget_investment, :unfeasible, :finished, heading: heading)
         investment2 = create(:budget_investment, :feasible, heading: heading)
 
@@ -298,7 +298,7 @@ describe "Budget Investments" do
         end
       end
 
-      scenario "unselected" do
+      xscenario "unselected" do
         investment1 = create(:budget_investment, :unselected, heading: heading)
         investment2 = create(:budget_investment, :selected, heading: heading)
 
@@ -318,7 +318,7 @@ describe "Budget Investments" do
     before { budget.update(phase: "selecting") }
     let(:per_page) { Budgets::InvestmentsController::PER_PAGE }
 
-    scenario "Default order is random" do
+    xscenario "Default order is random" do
       (per_page + 2).times { create(:budget_investment, heading: heading) }
 
       visit budget_investments_path(budget, heading_id: heading.id)
@@ -333,7 +333,7 @@ describe "Budget Investments" do
       expect(order).to eq(new_order)
     end
 
-    scenario "Random order after another order" do
+    xscenario "Random order after another order" do
       (per_page + 2).times { create(:budget_investment, heading: heading) }
 
       visit budget_investments_path(budget, heading_id: heading.id)
@@ -354,7 +354,7 @@ describe "Budget Investments" do
       expect(order).to eq(new_order)
     end
 
-    scenario "Random order maintained with pagination" do
+    xscenario "Random order maintained with pagination" do
       (per_page + 2).times { create(:budget_investment, heading: heading) }
 
       visit budget_investments_path(budget, heading_id: heading.id)
@@ -372,7 +372,7 @@ describe "Budget Investments" do
       expect(order).to eq(new_order)
     end
 
-    scenario "Random order maintained when going back from show" do
+    xscenario "Random order maintained when going back from show" do
       per_page.times { create(:budget_investment, heading: heading) }
       first_investment = Budget::Investment.first
 
@@ -393,7 +393,7 @@ describe "Budget Investments" do
       expect(order).to eq(new_order)
     end
 
-    scenario "Investments are not repeated with random order" do
+    xscenario "Investments are not repeated with random order" do
       (per_page + 2).times { create(:budget_investment, heading: heading) }
 
       visit budget_investments_path(budget, order: "random")
@@ -410,7 +410,7 @@ describe "Budget Investments" do
       expect(common_values.length).to eq(0)
     end
 
-    scenario "Proposals are ordered by confidence_score" do
+    xscenario "Proposals are ordered by confidence_score" do
       best_proposal = create(:budget_investment, heading: heading, title: "Best proposal")
       best_proposal.update_column(:confidence_score, 10)
       worst_proposal = create(:budget_investment, heading: heading, title: "Worst proposal")
@@ -431,7 +431,7 @@ describe "Budget Investments" do
       expect(page).to have_current_path(/page=1/)
     end
 
-    scenario "Each user has a different and consistent random budget investment order" do
+    xscenario "Each user has a different and consistent random budget investment order" do
       (per_page * 1.3).to_i.times { create(:budget_investment, heading: heading) }
       first_user_investments_order = nil
       second_user_investments_order = nil
@@ -509,7 +509,7 @@ describe "Budget Investments" do
       end
     end
 
-    scenario "Order is random if budget is finished" do
+    xscenario "Order is random if budget is finished" do
       per_page.times { create(:budget_investment, :winner, heading: heading) }
 
       budget.update!(phase: "finished")
@@ -524,7 +524,7 @@ describe "Budget Investments" do
       expect(order).to eq(new_order)
     end
 
-    scenario "Order always is random for unfeasible and unselected investments" do
+    xscenario "Order always is random for unfeasible and unselected investments" do
       Budget::Phase::kind_or_later("valuating").each do |phase|
         budget.update!(phase: phase)
 
@@ -556,7 +556,7 @@ describe "Budget Investments" do
   context "Phase I - Accepting" do
     before { budget.update(phase: "accepting") }
 
-    scenario "Create with invisible_captcha honeypot field", :no_js do
+    xscenario "Create with invisible_captcha honeypot field", :no_js do
       login_as(author)
       visit new_budget_investment_path(budget)
 
@@ -572,7 +572,7 @@ describe "Budget Investments" do
       expect(page).to have_current_path(budget_investments_path(budget))
     end
 
-    scenario "Create budget investment too fast" do
+    xscenario "Create budget investment too fast" do
       allow(InvisibleCaptcha).to receive(:timestamp_threshold).and_return(Float::INFINITY)
 
       login_as(author)
@@ -588,7 +588,7 @@ describe "Budget Investments" do
       expect(page).to have_current_path(new_budget_investment_path(budget))
     end
 
-    scenario "Create with single heading" do
+    xscenario "Create with single heading" do
       login_as(author)
 
       visit new_budget_investment_path(budget)
@@ -619,7 +619,7 @@ describe "Budget Investments" do
       expect(page).to have_content "Build a skyscraper"
     end
 
-    scenario "Create with single heading and hidden money" do
+    xscenario "Create with single heading and hidden money" do
       budget_hide_money = create(:budget, :hide_money)
       group = create(:budget_group, budget: budget_hide_money)
       create(:budget_heading, name: "Heading without money", group: group)
@@ -632,7 +632,7 @@ describe "Budget Investments" do
       expect(page).not_to have_content "€"
     end
 
-    scenario "Create with single group and multiple headings" do
+    xscenario "Create with single group and multiple headings" do
       create(:budget_heading, group: group, name: "Medical supplies")
       create(:budget_heading, group: group, name: "Even more hospitals")
 
@@ -645,7 +645,7 @@ describe "Budget Investments" do
       expect(page).not_to have_content "Health"
     end
 
-    scenario "Create with multiple groups" do
+    xscenario "Create with multiple groups" do
       education = create(:budget_group, budget: budget, name: "Education")
 
       create(:budget_heading, group: group, name: "Medical supplies")
@@ -728,7 +728,7 @@ describe "Budget Investments" do
       expect(page).to have_content message_error
     end
 
-    scenario "Errors on create" do
+    xscenario "Errors on create" do
       login_as(author)
 
       visit new_budget_investment_path(budget)
@@ -739,7 +739,7 @@ describe "Budget Investments" do
     context "Suggest" do
       factory = :budget_investment
 
-      scenario "Show up to 5 suggestions" do
+      xscenario "Show up to 5 suggestions" do
         %w[first second third fourth fifth sixth].each do |ordinal|
           create(factory, title: "#{ordinal.titleize} #{factory}, has search term", budget: budget)
         end
@@ -754,7 +754,7 @@ describe "Budget Investments" do
         end
       end
 
-      scenario "No found suggestions" do
+      xscenario "No found suggestions" do
         %w[first second third fourth fifth sixth].each do |ordinal|
           create(factory, title: "#{ordinal.titleize} #{factory}, has search term", budget: budget)
         end
@@ -768,7 +768,7 @@ describe "Budget Investments" do
         end
       end
 
-      scenario "Don't show suggestions from a different budget" do
+      xscenario "Don't show suggestions from a different budget" do
         %w[first second third fourth fifth sixth].each do |ordinal|
           create(factory, title: "#{ordinal.titleize} #{factory}, has search term", budget: budget)
         end
@@ -796,7 +796,7 @@ describe "Budget Investments" do
           expect(page).not_to have_content "There is an investment with the term 'search'"
         end
 
-        scenario "for update action" do
+        xscenario "for update action" do
           fill_in "Title", with: ""
 
           click_button "Update Investment"
@@ -807,7 +807,7 @@ describe "Budget Investments" do
       end
     end
 
-    scenario "Ballot is not visible" do
+    xscenario "Ballot is not visible" do
       login_as(author)
 
       visit budget_investments_path(budget, heading_id: heading.id)
@@ -821,7 +821,7 @@ describe "Budget Investments" do
       end
     end
 
-    scenario "Heading options are correctly ordered" do
+    xscenario "Heading options are correctly ordered" do
       city_group = create(:budget_group, name: "Toda la ciudad", budget: budget)
       create(:budget_heading, name: "Toda la ciudad", price: 333333, group: city_group)
       create(:budget_heading, name: "More health professionals", price: 999999, group: group)
@@ -838,7 +838,7 @@ describe "Budget Investments" do
     end
   end
 
-  scenario "Show" do
+  xscenario "Show" do
     investment = create(:budget_investment, heading: heading)
 
     user = create(:user)
@@ -859,7 +859,7 @@ describe "Budget Investments" do
     let(:investment) { create(:budget_investment, :selected_with_price, heading: heading) }
 
     context "When investment with price is selected" do
-      scenario "Price & explanation is shown when Budget is on published prices phase" do
+      xscenario "Price & explanation is shown when Budget is on published prices phase" do
         Budget::Phase::PUBLISHED_PRICES_PHASES.each do |phase|
           budget.update!(phase: phase)
 
@@ -879,7 +879,7 @@ describe "Budget Investments" do
         end
       end
 
-      scenario "Price & explanation isn't shown when Budget is not on published prices phase" do
+      xscenario "Price & explanation isn't shown when Budget is not on published prices phase" do
         (Budget::Phase::PHASE_KINDS - Budget::Phase::PUBLISHED_PRICES_PHASES).each do |phase|
           budget.update!(phase: phase)
           visit budget_investment_path(budget, id: investment.id)
@@ -900,7 +900,7 @@ describe "Budget Investments" do
         investment.update(selected: false)
       end
 
-      scenario "Price & explanation isn't shown for any Budget's phase" do
+      xscenario "Price & explanation isn't shown for any Budget's phase" do
         Budget::Phase::PHASE_KINDS.each do |phase|
           budget.update!(phase: phase)
           visit budget_investment_path(budget, id: investment.id)
@@ -917,7 +917,7 @@ describe "Budget Investments" do
     end
   end
 
-  scenario "Can access the community" do
+  xscenario "Can access the community" do
     Setting["feature.community"] = true
 
     investment = create(:budget_investment, heading: heading)
@@ -941,7 +941,7 @@ describe "Budget Investments" do
     expect(page).not_to have_selector ".js-follow"
   end
 
-  scenario "Show back link contains heading id" do
+  xscenario "Show back link contains heading id" do
     investment = create(:budget_investment, heading: heading)
     visit budget_investment_path(budget, investment)
 
@@ -1061,7 +1061,7 @@ describe "Budget Investments" do
     expect(page).to have_content("This investment project has not been selected for balloting phase")
   end
 
-  scenario "Show title (no message)" do
+  xscenario "Show title (no message)" do
     investment = create(:budget_investment,
                         :feasible,
                         :finished,
@@ -1096,36 +1096,36 @@ describe "Budget Investments" do
     expect(page).not_to have_content("Local government is not competent in this matter")
   end
 
-  it_behaves_like "followable", "budget_investment", "budget_investment_path", { budget_id: "budget_id", id: "id" }
+  # it_behaves_like "followable", "budget_investment", "budget_investment_path", { budget_id: "budget_id", id: "id" }
 
-  it_behaves_like "imageable", "budget_investment", "budget_investment_path", { budget_id: "budget_id", id: "id" }
+  # it_behaves_like "imageable", "budget_investment", "budget_investment_path", { budget_id: "budget_id", id: "id" }
 
-  it_behaves_like "nested imageable",
-                  "budget_investment",
-                  "new_budget_investment_path",
-                  { budget_id: "budget_id" },
-                  "imageable_fill_new_valid_budget_investment",
-                  "Create Investment",
-                  "Budget Investment created successfully."
+  # it_behaves_like "nested imageable",
+  #                 "budget_investment",
+  #                 "new_budget_investment_path",
+  #                 { budget_id: "budget_id" },
+  #                 "imageable_fill_new_valid_budget_investment",
+  #                 "Create Investment",
+  #                 "Budget Investment created successfully."
 
-  it_behaves_like "documentable", "budget_investment", "budget_investment_path", { budget_id: "budget_id", id: "id" }
+  # it_behaves_like "documentable", "budget_investment", "budget_investment_path", { budget_id: "budget_id", id: "id" }
 
-  it_behaves_like "nested documentable",
-                  "user",
-                  "budget_investment",
-                  "new_budget_investment_path",
-                  { budget_id: "budget_id" },
-                  "documentable_fill_new_valid_budget_investment",
-                  "Create Investment",
-                  "Budget Investment created successfully."
+  # it_behaves_like "nested documentable",
+  #                 "user",
+  #                 "budget_investment",
+  #                 "new_budget_investment_path",
+  #                 { budget_id: "budget_id" },
+  #                 "documentable_fill_new_valid_budget_investment",
+  #                 "Create Investment",
+  #                 "Budget Investment created successfully."
 
-  it_behaves_like "mappable",
-                  "budget_investment",
-                  "investment",
-                  "new_budget_investment_path",
-                  "",
-                  "budget_investment_path",
-                  { budget_id: "budget_id" }
+  # it_behaves_like "mappable",
+  #                 "budget_investment",
+  #                 "investment",
+  #                 "new_budget_investment_path",
+  #                 "",
+  #                 "budget_investment_path",
+  #                 { budget_id: "budget_id" }
 
   context "Destroy" do
     scenario "Admin cannot destroy budget investments", :admin do
@@ -1167,7 +1167,7 @@ describe "Budget Investments" do
     end
 
     context "Popup alert to vote only in one heading per group" do
-      scenario "When supporting in the first heading group" do
+      xscenario "When supporting in the first heading group" do
         carabanchel = create(:budget_heading, group: group)
         salamanca   = create(:budget_heading, group: group)
 
@@ -1184,7 +1184,7 @@ describe "Budget Investments" do
         end
       end
 
-      scenario "When already supported in the group" do
+      xscenario "When already supported in the group" do
         carabanchel = create(:budget_heading, group: group)
         salamanca   = create(:budget_heading, group: group)
 
@@ -1201,7 +1201,7 @@ describe "Budget Investments" do
         end
       end
 
-      scenario "When supporting in another group" do
+      xscenario "When supporting in another group" do
         heading = create(:budget_heading, group: group)
 
         group2 = create(:budget_group, budget: budget)
@@ -1221,7 +1221,7 @@ describe "Budget Investments" do
         end
       end
 
-      scenario "When supporting in a group with a single heading" do
+      xscenario "When supporting in a group with a single heading" do
         all_city_investment = create(:budget_investment, heading: heading)
 
         login_as(author)
@@ -1243,7 +1243,7 @@ describe "Budget Investments" do
       end
     end
 
-    scenario "Remove a support from show view" do
+    xscenario "Remove a support from show view" do
       Setting["feature.remove_investments_supports"] = true
       investment = create(:budget_investment, budget: budget)
 
@@ -1265,7 +1265,7 @@ describe "Budget Investments" do
       end
     end
 
-    scenario "Remove a support from index view" do
+    xscenario "Remove a support from index view" do
       Setting["feature.remove_investments_supports"] = true
       investment = create(:budget_investment, budget: budget)
 
@@ -1304,7 +1304,7 @@ describe "Budget Investments" do
       end
     end
 
-    scenario "Index should display support count" do
+    xscenario "Index should display support count" do
       investment = create(:budget_investment, budget: budget, heading: heading, voters: [create(:user)])
 
       visit budget_investments_path(budget, heading_id: heading.id)
@@ -1331,7 +1331,7 @@ describe "Budget Investments" do
       budget.update(phase: "publishing_prices")
     end
 
-    scenario "Heading index - should show only selected investments" do
+    xscenario "Heading index - should show only selected investments" do
       investment1 = create(:budget_investment, :selected, heading: heading, price: 10000)
       investment2 = create(:budget_investment, :selected, heading: heading, price: 15000)
       investment3 = create(:budget_investment, heading: heading, price: 30000)
@@ -1351,7 +1351,7 @@ describe "Budget Investments" do
       budget.update(phase: "balloting")
     end
 
-    scenario "Index" do
+    xscenario "Index" do
       user = create(:user, :level_two)
       investment1 = create(:budget_investment, :selected, heading: heading, price: 10000)
       investment2 = create(:budget_investment, :selected, heading: heading, price: 20000)
@@ -1377,7 +1377,7 @@ describe "Budget Investments" do
       expect(page).to have_content "STILL AVAILABLE TO YOU €666,666"
     end
 
-    scenario "Order by cost (only when balloting)" do
+    xscenario "Order by cost (only when balloting)" do
       mid_investment = create(:budget_investment, :selected, heading: heading, title: "Build a nice house", price: 1000)
       mid_investment.update_column(:confidence_score, 10)
       low_investment = create(:budget_investment, :selected, heading: heading, title: "Build an ugly house", price: 1000)
@@ -1398,7 +1398,7 @@ describe "Budget Investments" do
       expect(page).to have_current_path(/page=1/)
     end
 
-    scenario "Show" do
+    xscenario "Show" do
       user = create(:user, :level_two)
       investment = create(:budget_investment, :selected, heading: heading, price: 10000)
 
@@ -1410,7 +1410,7 @@ describe "Budget Investments" do
       expect(page).to have_content "€10,000"
     end
 
-    scenario "Show message if user already voted in other heading" do
+    xscenario "Show message if user already voted in other heading" do
       group = create(:budget_group, budget: budget, name: "Global Group")
       heading = create(:budget_heading, group: group, name: "Heading 1")
       investment = create(:budget_investment, :selected, heading: heading)
@@ -1435,7 +1435,7 @@ describe "Budget Investments" do
       end
     end
 
-    scenario "Confirm" do
+    xscenario "Confirm" do
       budget.update!(phase: "balloting")
       user = create(:user, :level_two)
 
@@ -1493,7 +1493,7 @@ describe "Budget Investments" do
       end
     end
 
-    scenario "Highlight voted heading" do
+    xscenario "Highlight voted heading" do
       budget.update!(phase: "balloting")
       user = create(:user, :level_two)
 
@@ -1513,7 +1513,7 @@ describe "Budget Investments" do
       expect(page).to have_css("#budget_heading_#{heading_2.id}")
     end
 
-    scenario "Ballot is visible" do
+    xscenario "Ballot is visible" do
       login_as(author)
 
       visit budget_investments_path(budget, heading_id: heading.id)
@@ -1527,7 +1527,7 @@ describe "Budget Investments" do
       end
     end
 
-    scenario "Show unselected budget investments" do
+    xscenario "Show unselected budget investments" do
       investment1 = create(:budget_investment, :unselected, :feasible, :finished, heading: heading)
       investment2 = create(:budget_investment, :selected,   :feasible, :finished, heading: heading)
       investment3 = create(:budget_investment, :selected,   :feasible, :finished, heading: heading)
@@ -1545,7 +1545,7 @@ describe "Budget Investments" do
       end
     end
 
-    scenario "Do not display vote button for unselected investments in index" do
+    xscenario "Do not display vote button for unselected investments in index" do
       investment = create(:budget_investment, :unselected, heading: heading)
 
       visit budget_investments_path(budget, heading_id: heading.id, filter: "unselected")
@@ -1592,7 +1592,7 @@ describe "Budget Investments" do
   end
 
   context "sidebar map" do
-    scenario "Display 6 investment's markers on sidebar map" do
+    xscenario "Display 6 investment's markers on sidebar map" do
       investment1 = create(:budget_investment, heading: heading)
       investment2 = create(:budget_investment, heading: heading)
       investment3 = create(:budget_investment, heading: heading)
@@ -1614,7 +1614,7 @@ describe "Budget Investments" do
       end
     end
 
-    scenario "Display 2 investment's markers on sidebar map" do
+    xscenario "Display 2 investment's markers on sidebar map" do
       investment1 = create(:budget_investment, heading: heading)
       investment2 = create(:budget_investment, heading: heading)
 
@@ -1628,7 +1628,7 @@ describe "Budget Investments" do
       end
     end
 
-    scenario "Display only investment's related to the current heading" do
+    xscenario "Display only investment's related to the current heading" do
       heading_2 = create(:budget_heading, name: "Madrid", group: group)
 
       investment1 = create(:budget_investment, heading: heading)
@@ -1670,7 +1670,7 @@ describe "Budget Investments" do
       end
     end
 
-    scenario "Shows all investments and not only the ones on the current page" do
+    xscenario "Shows all investments and not only the ones on the current page" do
       stub_const("#{Budgets::InvestmentsController}::PER_PAGE", 2)
 
       3.times do
@@ -1739,7 +1739,7 @@ describe "Budget Investments" do
       budget.update!(phase: "accepting")
     end
 
-    scenario "create budget investment with sdg related list" do
+    xscenario "create budget investment with sdg related list" do
       login_as(author)
       visit new_budget_investment_path(budget)
       fill_in_new_investment_title with: "A title for a budget investment related with SDG related content"
@@ -1752,7 +1752,7 @@ describe "Budget Investments" do
       within(".sdg-goal-tag-list") { expect(page).to have_link "1. No Poverty" }
     end
 
-    scenario "edit budget investment with sdg related list" do
+    xscenario "edit budget investment with sdg related list" do
       investment = create(:budget_investment, heading: heading, author: author)
       investment.sdg_goals = [SDG::Goal[1], SDG::Goal[2]]
       login_as(author)

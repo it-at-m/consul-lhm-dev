@@ -59,6 +59,8 @@ class Projekt < ApplicationRecord
 
   has_many :map_layers, dependent: :destroy
 
+  has_many :projekt_labels, dependent: :destroy
+
   has_many :projekt_manager_assignments, dependent: :destroy
   has_many :projekt_managers, through: :projekt_manager_assignments
 
@@ -466,6 +468,14 @@ class Projekt < ApplicationRecord
 
   def all_ids_in_tree
     all_parent_ids + [id] + all_children_ids
+  end
+
+  def all_projekt_labels
+    ProjektLabel.where(projekt_id: (all_parent_ids + [id]))
+  end
+
+  def all_projekt_labels_in_tree
+    ProjektLabel.where(projekt_id: all_ids_in_tree)
   end
 
   private

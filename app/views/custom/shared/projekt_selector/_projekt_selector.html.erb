@@ -1,10 +1,11 @@
 <%= f.hidden_field :projekt_id %>
 
-<% if model.errors.full_messages.any? { |error| error.include? 'Projekt' } %>
-  <br>
-  <small class='form-error is-visible'>
-    <%= t('custom.projekts.errors.presence') %>
-  </small>
+<% if model.errors.details[:projekt_id].any? %>
+  <% model.errors.details[:projekt_id].each do |error| %>
+    <small class='form-error is-visible'>
+      <%= t("activerecord.errors.models.#{model.model_name.param_key}.attributes.projekt_id.#{error[:error]}") %>
+    </small>
+  <% end %>
 <% end %>
 
 <div id='projekt-selector-fields' class=''>

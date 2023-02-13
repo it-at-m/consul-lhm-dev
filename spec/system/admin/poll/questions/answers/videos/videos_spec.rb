@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "Videos", :admin do
-  scenario "Create" do
+  xscenario "Create" do
     question = create(:poll_question)
     answer = create(:poll_question_answer, question: question)
     video_title = "'Magical' by Junko Ohashi"

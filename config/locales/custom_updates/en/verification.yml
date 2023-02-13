@@ -5,7 +5,7 @@ en:
         new:
           first_name: First name
           last_name: Last name
-          street_name: Street
+          city_street_id: Street
           street_number: Street number
           plz: Postal code
           city_name: City
@@ -15,3 +15,4 @@ en:
         create:
           flash:
             success_manual: Thank you, your data were saved.
+            error: Wir konnten Ihre Daten nicht verifizieren, bitte kontaktieren Sie uns.

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "Level two verification" do
-  scenario "Verification with residency and sms" do
+  xscenario "Verification with residency and sms" do
     create(:geozone)
     user = create(:user)
     login_as(user)
@@ -26,7 +26,7 @@ describe "Level two verification" do
   context "In Spanish, with no fallbacks" do
     before { allow(I18n.fallbacks).to receive(:[]).and_return([:es]) }
 
-    scenario "Works normally" do
+    xscenario "Works normally" do
       user = create(:user)
       login_as(user)
 

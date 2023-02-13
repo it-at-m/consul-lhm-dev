@@ -13,6 +13,16 @@
   }
 }
 
+// Poll results
+.results-table-wrapper {
+  margin-bottom: 40px;
+
+  table.results-table {
+    margin-bottom: 0.5rem;
+  }
+}
+
+
 // Open answers in results
 
 .show-user-name-with-open-answers {
@@ -152,34 +162,101 @@ td.answers-column  {
   }
 }
 
+@mixin horizontal-rating-scale-answers {
+  flex-direction: row;
 
-.poll-question-answers.rating-scale {
-  display: flex;
-  margin-bottom: 20px;
+  .poll-answer-group {
+    margin-top: 20px;
+    padding: 0 5px;
+    flex-basis: 100px;
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
 
   .rating-scale-label {
-    color: #3b3b3b;
-    font-size: 16px;
-    line-height: 1;
+    flex-basis: 100px;
+    flex-grow: 0;
+    flex-shrink: 0;
 
     &--left {
-      margin-right: 30px;
+      justify-content: start;
     }
 
     &--right {
-      margin-left: 30px;
+      margin: 0;
+      justify-content: end;
+    }
+  }
+}
+
+.poll-question-answers.rating-scale {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &.rating-scale-3-answers {
+    @media (min-width: 790px) {
+      @include horizontal-rating-scale-answers;
+    }
+  }
+
+  &.rating-scale-4-answers {
+    @media (min-width: 790px) {
+      @include horizontal-rating-scale-answers;
+    }
+  }
+
+  &.rating-scale-5-answers {
+    @media (min-width: 790px) {
+      @include horizontal-rating-scale-answers;
+    }
+  }
+
+  &.rating-scale-6-answers {
+    @media (min-width: 930px) {
+      @include horizontal-rating-scale-answers;
+    }
+  }
+
+  &.rating-scale-7-answers {
+    @media (min-width: 1100px) {
+      @include horizontal-rating-scale-answers;
+    }
+  }
+
+  &.rating-scale-8-answers {
+    @media (min-width: 1190px) {
+      @include horizontal-rating-scale-answers;
+    }
+  }
+
+  .rating-scale-label {
+    color: $white;
+    font-size: 16px;
+    line-height: 1;
+    flex-grow: 1;
+    flex-basis: 0;
+    display: flex;
+    justify-content: center;
+    width: 100px;
+
+    &--left {
+    }
+
+    &--right {
+      margin-top: 25px;
     }
   }
 
   .poll-answer-group {
     flex-grow: 1;
     flex-basis: 0;
-    max-width: 100px;
+    padding: 50px 5px 0 5px;
+    width: 100px;
   }
 
   .rating-scale-button {
     color: #3b3b3b;
-    width: 100px;
     margin: 0 auto;
     position: relative;
     cursor: pointer;

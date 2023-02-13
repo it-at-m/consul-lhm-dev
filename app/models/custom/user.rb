@@ -17,12 +17,13 @@ class User < ApplicationRecord
   has_many :deficiency_reports, -> { with_hidden }, foreign_key: :author_id, inverse_of: :author
   has_one :deficiency_report_officer, class_name: "DeficiencyReport::Officer"
   has_one :projekt_manager
+  belongs_to :city_street
 
   scope :projekt_managers, -> { joins(:projekt_manager) }
 
   validates :first_name, presence: true, on: :create, if: :first_name_required?
   validates :last_name, presence: true, on: :create, if: :last_name_required?
-  validates :street_name, presence: true, on: :create, if: :street_name_required?
+  validates :city_street_id, presence: true, on: :create, if: :street_name_required?
   validates :street_number, presence: true, on: :create, if: :street_number_required?
   validates :plz, presence: true, on: :create, if: :plz_required?
   validates :city_name, presence: true, on: :create, if: :city_name_required?
@@ -162,7 +163,6 @@ class User < ApplicationRecord
     def strip_whitespace
       self.first_name = first_name.strip unless first_name.nil?
       self.last_name = last_name.strip unless last_name.nil?
-      self.street_name = street_name.strip unless street_name.nil?
       self.street_number = street_number.strip unless street_number.nil?
       self.city_name = city_name.strip unless city_name.nil?
     end

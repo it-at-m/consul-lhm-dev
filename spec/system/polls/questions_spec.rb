@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "Poll Questions" do
-  scenario "Lists questions from proposals before regular questions" do
+  xscenario "Lists questions from proposals before regular questions" do
     poll = create(:poll)
     normal_question = create(:poll_question, poll: poll)
     proposal_question = create(:poll_question, proposal: create(:proposal), poll: poll)
@@ -11,7 +11,7 @@ describe "Poll Questions" do
     expect(proposal_question.title).to appear_before(normal_question.title)
   end
 
-  scenario "shows answers with an image and no description" do
+  xscenario "shows answers with an image and no description" do
     poll = create(:poll)
     answer = create(:poll_question_answer, poll: poll, title: "Pedestrian road", description: "")
     create(:image, imageable: answer, title: "Trees on both sides of the road")

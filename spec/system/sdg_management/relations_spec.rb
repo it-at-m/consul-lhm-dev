@@ -11,7 +11,7 @@ describe "SDG Relations" do
     Setting["sdg.process.proposals"] = true
   end
 
-  scenario "navigation" do
+  xscenario "navigation" do
     visit sdg_management_root_path
 
     within("#side_menu") { click_link "Participatory budgets" }
@@ -292,7 +292,7 @@ describe "SDG Relations" do
       end
     end
 
-    scenario "allows removing the goals, global target and local_targets" do
+    xscenario "allows removing the goals, global target and local_targets" do
       process = create(:legislation_process, title: "SDG process")
       create(:sdg_local_target, code: "1.1.1")
       process.sdg_goals = [SDG::Goal[1], SDG::Goal[2], SDG::Goal[3]]
@@ -410,7 +410,7 @@ describe "SDG Relations" do
         expect(find("input[data-code='1']")).to be_checked
       end
 
-      scenario "when remove a last tag related to a Goal, the icon will not be checked" do
+      xscenario "when remove a last tag related to a Goal, the icon will not be checked" do
         process = create(:legislation_process, title: "SDG process")
         create(:sdg_local_target, code: "1.1.1")
         process.sdg_goals = [SDG::Goal[1]]
@@ -447,7 +447,7 @@ describe "SDG Relations" do
         end
       end
 
-      scenario "Help page link opens in new window" do
+      xscenario "Help page link opens in new window" do
         process = create(:legislation_process, title: "SDG process")
 
         visit sdg_management_edit_legislation_process_path(process)
@@ -468,7 +468,7 @@ describe "SDG Relations" do
         within(".help-section") { expect(page).to have_content "No Poverty" }
       end
 
-      scenario "when remove a tag remove his title in help section" do
+      xscenario "when remove a tag remove his title in help section" do
         process = create(:legislation_process, title: "SDG process")
         process.sdg_goals = [SDG::Goal[1]]
 

@@ -18,6 +18,8 @@ class ProjektPhase < ApplicationRecord
   has_many :projekt_phase_geozones, dependent: :destroy
   has_many :geozone_restrictions, through: :projekt_phase_geozones, source: :geozone,
            after_add: :touch_updated_at, after_remove: :touch_updated_at
+  has_many :city_street_projekt_phases, dependent: :destroy
+  has_many :city_streets, through: :city_street_projekt_phases
 
   scope :regular_phases, -> { where.not(type: REGULAR_PROJEKT_PHASES) }
   scope :special_phases, -> { where(type: REGULAR_PROJEKT_PHASES) }
@@ -81,6 +83,10 @@ class ProjektPhase < ApplicationRecord
     geozone_restrictions.map(&:name).flatten.join(", ")
   end
 
+  def street_restrictions_formatted
+    city_streets.map(&:name).flatten.join(", ")
+  end
+
   def age_restriction_formatted
     age_restriction.present? ? age_restriction.name.downcase : ""
   end
@@ -106,6 +112,12 @@ class ProjektPhase < ApplicationRecord
           :not_verified
         elsif !geozone_restrictions.include?(user.geozone)
           :only_specific_geozones
+        end
+      when "only_streets"
+        if !user.level_three_verified?
+          :not_verified
+        elsif !city_streets.include?(user.city_street)
+          :only_specific_streets
         end
       end
     end

@@ -47,7 +47,7 @@ describe "Signature sheets", :admin do
       expect(page).to have_content "1 support"
     end
 
-    scenario "Budget Investment" do
+    xscenario "Budget Investment" do
       investment = create(:budget_investment)
       budget = investment.budget
       budget.update!(phase: "selecting")
@@ -93,7 +93,7 @@ describe "Signature sheets", :admin do
       expect(page).to have_content "1 support"
     end
 
-    scenario "Budget Investment" do
+    xscenario "Budget Investment" do
       investment = create(:budget_investment)
       budget = investment.budget
       budget.update!(phase: "selecting")

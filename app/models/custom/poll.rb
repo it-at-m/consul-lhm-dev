@@ -12,7 +12,6 @@ class Poll < ApplicationRecord
   validates :projekt, presence: true
 
   scope :with_current_projekt,  -> { joins(:projekt).merge(Projekt.current) }
-  scope :current, -> { joins(:voting_phase).merge(ProjektPhase::VotingPhase.current) }
 
   def not_allow_user_geozone?(user)
     geozone_restricted? && geozone_ids.any? && !geozone_ids.include?(user.geozone_id)

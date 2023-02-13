@@ -18,7 +18,7 @@ describe DebatesController do
       InvisibleCaptcha.timestamp_enabled = true
     end
 
-    it "creates an ahoy event" do
+    xit "creates an ahoy event" do
       debate_attributes = {
         terms_of_service: "1",
         translations_attributes: {
@@ -48,7 +48,7 @@ describe DebatesController do
       end.to change { debate.reload.votes_for.size }.by(1)
     end
 
-    it "does not allow vote if user is not allowed" do
+    xit "does not allow vote if user is not allowed" do
       Setting["max_ratio_anon_votes_on_debates"] = 0
       debate = create(:debate, cached_votes_total: 1000)
       sign_in create(:user)

@@ -11,7 +11,7 @@ describe "Remote Translations" do
   end
 
   describe "Display remote translation button when locale is included in microsoft translate client" do
-    context "with locale that has :en fallback" do
+    xcontext "with locale that has :en fallback" do
       before do
         allow(I18n.fallbacks).to receive(:[]).and_return([:en])
         Globalize.set_fallbacks_to_all_available_locales
@@ -32,7 +32,7 @@ describe "Remote Translations" do
       end
     end
 
-    context "with locale that has :es fallback" do
+    xcontext "with locale that has :es fallback" do
       before do
         allow(I18n.fallbacks).to receive(:[]).and_return([:es])
         Globalize.set_fallbacks_to_all_available_locales

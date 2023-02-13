@@ -25,6 +25,16 @@ de:
           attributes:
             description:
               too_long: 'ist zu lange'
+            projekt_id:
+              blank: Bitte wählen Sie ein Projekt
+            projekt_labels:
+              blank: Bitte wählen Sie ein Label
+        debate:
+          attributes:
+            projekt_id:
+              blank: Bitte wählen Sie ein Projekt
+            projekt_labels:
+              blank: Bitte wählen Sie ein Label
         projekt:
           attributes:
             color:
@@ -75,7 +85,7 @@ de:
       user:
         first_name: Vorname
         last_name: Nachname
-        street_name: Straße
+        city_street_id: Straße
         street_number: Hausnummer
         plz: Postleitzahl
         city_name: Stadt
@@ -102,3 +112,4 @@ de:
       poll/question:
         min_rating_scale_label: Linkes Label
         max_rating_scale_label: Rechtes Label
+        show_hint_callout: Diese Textbox im Frontend anzeigen

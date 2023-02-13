@@ -37,7 +37,12 @@ class Budgets::Investments::FiltersComponent < ApplicationComponent
           params[:current_tab_path].present? &&
           !helpers.request.path.starts_with?("/projekts")
 
-        url_for_footer_tab_back_button(params[:id], params[:page], params[:current_tab_path], filter, params[:order], params[:filter_projekt_ids])
+        url_for_footer_tab_back_button(page_id: params[:id],
+                                       pagination_page: params[:page],
+                                       current_tab_path: params[:current_tab_path],
+                                       filter: filter,
+                                       order: params[:order],
+                                       filter_projekt_ids: params[:filter_projekt_ids])
       else
         "empty"
       end

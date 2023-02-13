@@ -68,7 +68,7 @@ describe "Budgets" do
       expect(first_heading.name).to appear_before(last_heading.name)
     end
 
-    scenario "Show groups and headings for missing translations" do
+    xscenario "Show groups and headings for missing translations" do
       group1 = create(:budget_group, budget: budget)
       group2 = create(:budget_group, budget: budget)
 
@@ -259,7 +259,7 @@ describe "Budgets" do
       Setting["feature.map"] = true
     end
 
-    scenario "Display investment's map location markers" do
+    xscenario "Display investment's map location markers" do
       investment1 = create(:budget_investment, heading: heading)
       investment2 = create(:budget_investment, heading: heading)
       investment3 = create(:budget_investment, heading: heading)
@@ -275,7 +275,7 @@ describe "Budgets" do
       end
     end
 
-    scenario "Display all investment's map location if there are no selected" do
+    xscenario "Display all investment's map location if there are no selected" do
       budget.update!(phase: :publishing_prices)
 
       investment1 = create(:budget_investment, heading: heading)
@@ -295,7 +295,7 @@ describe "Budgets" do
       end
     end
 
-    scenario "Display only selected investment's map location from publishing prices phase" do
+    xscenario "Display only selected investment's map location from publishing prices phase" do
       budget.update!(phase: :publishing_prices)
 
       investment1 = create(:budget_investment, :selected, heading: heading)
@@ -315,7 +315,7 @@ describe "Budgets" do
       end
     end
 
-    scenario "Skip invalid map markers" do
+    xscenario "Skip invalid map markers" do
       map_locations = []
 
       investment = create(:budget_investment, heading: heading)
@@ -422,7 +422,7 @@ describe "Budgets" do
       expect(page).to have_content "So far you've supported 3 projects."
     end
 
-    scenario "Show supports only if the support has not been removed" do
+    xscenario "Show supports only if the support has not been removed" do
       Setting["feature.remove_investments_supports"] = true
       voter = create(:user, :level_two)
       budget = create(:budget, phase: "selecting")

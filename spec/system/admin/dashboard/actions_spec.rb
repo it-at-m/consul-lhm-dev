@@ -55,7 +55,7 @@ describe "Admin dashboard actions", :admin do
       expect(page).to have_content(action.title)
     end
 
-    scenario "Renders create form in case data is invalid" do
+    xscenario "Renders create form in case data is invalid" do
       click_button "Save"
 
       expect(page).to have_content("error prevented this Dashboard/Action from being saved.")

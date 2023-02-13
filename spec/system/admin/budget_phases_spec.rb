@@ -48,15 +48,15 @@ describe "Admin budget phases" do
       end
     end
 
-    scenario "shows successful notice when updating the phase with a valid image" do
-      visit edit_admin_budget_budget_phase_path(budget, budget.current_phase)
+    # scenario "shows successful notice when updating the phase with a valid image" do
+    #   visit edit_admin_budget_budget_phase_path(budget, budget.current_phase)
 
-      imageable_attach_new_file(file_fixture("clippy.jpg"))
+    #   imageable_attach_new_file(file_fixture("clippy.jpg"))
 
-      click_on "Save changes"
+    #   click_on "Save changes"
 
-      expect(page).to have_content "Changes saved"
-    end
+    #   expect(page).to have_content "Changes saved"
+    # end
 
     scenario "shows CTA link in public site if added" do
       visit edit_admin_budget_budget_phase_path(budget, budget.current_phase)

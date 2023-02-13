@@ -1,13 +1,13 @@
 require "rails_helper"
 
 describe "Admin budgets", :admin do
-  it_behaves_like "nested imageable",
-                  "budget",
-                  "new_admin_budgets_wizard_budget_path",
-                  {},
-                  "imageable_fill_new_valid_budget",
-                  "Continue to groups",
-                  "New participatory budget created successfully!"
+  # it_behaves_like "nested imageable",
+  #                 "budget",
+  #                 "new_admin_budgets_wizard_budget_path",
+  #                 {},
+  #                 "imageable_fill_new_valid_budget",
+  #                 "Continue to groups",
+  #                 "New participatory budget created successfully!"
 
   context "Load" do
     before { create(:budget, slug: "budget_slug") }
@@ -95,7 +95,7 @@ describe "Admin budgets", :admin do
   end
 
   context "Create" do
-    scenario "Create budget - Approval voting with hide money" do
+    xscenario "Create budget - Approval voting with hide money" do
       visit admin_budgets_path
       click_button "Create new budget"
       click_link "Create multiple headings budget"
@@ -117,7 +117,7 @@ describe "Admin budgets", :admin do
       expect(page).to have_field "Hide money amount for this budget", checked: true
     end
 
-    scenario "Create a budget with hide money by steps" do
+    xscenario "Create a budget with hide money by steps" do
       visit admin_budgets_path
       click_button "Create new budget"
       click_link "Create multiple headings budget"

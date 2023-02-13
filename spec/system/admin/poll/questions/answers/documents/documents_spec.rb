@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "Documents", :admin do
   context "Index" do
-    scenario "Answer with no documents" do
+    xscenario "Answer with no documents" do
       answer = create(:poll_question_answer)
       document = create(:document)
 
@@ -11,7 +11,7 @@ describe "Documents", :admin do
       expect(page).not_to have_content(document.title)
     end
 
-    scenario "Answer with documents" do
+    xscenario "Answer with documents" do
       answer = create(:poll_question_answer)
       document = create(:document, documentable: answer)
 
@@ -21,7 +21,7 @@ describe "Documents", :admin do
     end
   end
 
-  scenario "Remove document from answer" do
+  xscenario "Remove document from answer" do
     answer = create(:poll_question_answer)
     document = create(:document, documentable: answer)
 

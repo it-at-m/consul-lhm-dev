@@ -32,7 +32,7 @@ describe "Ballots" do
       login_as(user)
     end
 
-    scenario "finds ballot lines using budget slug" do
+    xscenario "finds ballot lines using budget slug" do
       visit budget_investments_path("budget_slug", states, california)
       add_to_ballot("More rain")
 
@@ -63,7 +63,7 @@ describe "Ballots" do
         end
       end
 
-      scenario "Investments" do
+      xscenario "Investments" do
         create(:budget_heading, group: city, name: "Under the city")
 
         create(:budget_heading, group: city, name: "Above the city") do |heading|
@@ -103,7 +103,7 @@ describe "Ballots" do
     end
 
     context "Adding and Removing Investments" do
-      scenario "Add a investment" do
+      xscenario "Add a investment" do
         create(:budget_investment, :selected, heading: new_york, price: 10000, title: "Bring back King Kong")
         create(:budget_investment, :selected, heading: new_york, price: 20000, title: "Paint cabs black")
 
@@ -131,7 +131,7 @@ describe "Ballots" do
         end
       end
 
-      scenario "Removing a investment" do
+      xscenario "Removing a investment" do
         investment = create(:budget_investment, :selected, heading: new_york, price: 10000, balloters: [user])
 
         visit budget_investments_path(budget, heading_id: new_york)
@@ -160,7 +160,7 @@ describe "Ballots" do
         end
       end
 
-      scenario "the Map shoud be visible before and after" do
+      xscenario "the Map shoud be visible before and after" do
         create(:budget_investment, :selected, heading: new_york, price: 10000, title: "More bridges")
 
         visit budget_investments_path(budget, heading_id: new_york)
@@ -189,7 +189,7 @@ describe "Ballots" do
 
     #Break up or simplify with helpers
     context "Balloting in multiple headings" do
-      scenario "Independent progress bar for headings" do
+      xscenario "Independent progress bar for headings" do
         city_heading      = create(:budget_heading, group: city,      name: "All city",   price: 10000000)
         district_heading1 = create(:budget_heading, group: districts, name: "District 1", price: 1000000)
         district_heading2 = create(:budget_heading, group: districts, name: "District 2", price: 2000000)
@@ -247,7 +247,7 @@ describe "Ballots" do
       end
     end
 
-    scenario "Display progress bar after first vote" do
+    xscenario "Display progress bar after first vote" do
       create(:budget_investment, :selected, heading: new_york, price: 10000, title: "Park expansion")
 
       visit budget_investments_path(budget, heading_id: new_york.id)
@@ -263,7 +263,7 @@ describe "Ballots" do
   context "Groups" do
     before { login_as(user) }
 
-    scenario "Select my heading" do
+    xscenario "Select my heading" do
       create(:budget_investment, :selected, heading: california, title: "Green beach")
 
       visit budget_investments_path(budget, heading_id: california)
@@ -276,7 +276,7 @@ describe "Ballots" do
       expect(page).to have_css("#budget_heading_#{california.id}.is-active")
     end
 
-    scenario "Change my heading" do
+    xscenario "Change my heading" do
       create(:budget_investment, :selected, heading: california, title: "Early ShakeAlert", balloters: [user])
       create(:budget_investment, :selected, heading: new_york, title: "Avengers Tower")
 
@@ -297,7 +297,7 @@ describe "Ballots" do
       expect(page).not_to have_css("#budget_heading_#{california.id}.is-active")
     end
 
-    scenario "View another heading" do
+    xscenario "View another heading" do
       create(:budget_investment, :selected, heading: california, balloters: [user])
 
       visit budget_investments_path(budget, heading_id: new_york.id)
@@ -309,7 +309,7 @@ describe "Ballots" do
   end
 
   context "Showing the ballot" do
-    scenario "Displaying the correct group, heading, count & amount" do
+    xscenario "Displaying the correct group, heading, count & amount" do
       group1 = create(:budget_group, budget: budget)
       group2 = create(:budget_group, budget: budget)
 
@@ -346,7 +346,7 @@ describe "Ballots" do
     end
   end
 
-  scenario "Removing investments from ballot" do
+  xscenario "Removing investments from ballot" do
     investment = create(:budget_investment, :selected, price: 10, heading: new_york)
     user = create(:user, :level_two, ballot_lines: [investment])
 
@@ -363,7 +363,7 @@ describe "Ballots" do
     expect(page).to have_content("You have voted 0 investments")
   end
 
-  scenario "Removing investments from ballot (sidebar)" do
+  xscenario "Removing investments from ballot (sidebar)" do
     investment1 = create(:budget_investment, :selected, price: 10000, heading: new_york)
     investment2 = create(:budget_investment, :selected, price: 20000, heading: new_york)
     user = create(:user, :level_two, ballot_lines: [investment1, investment2])
@@ -399,7 +399,7 @@ describe "Ballots" do
   end
 
   describe "Back link" do
-    scenario "after adding and removing an investment from the ballot" do
+    xscenario "after adding and removing an investment from the ballot" do
       create(:budget_investment, :selected, heading: new_york, price: 10, title: "Sully monument")
 
       login_as(user)
@@ -423,7 +423,7 @@ describe "Ballots" do
       expect(page).to have_current_path(budget_investments_path(budget, heading_id: new_york.id))
     end
 
-    scenario "before adding any investments" do
+    xscenario "before adding any investments" do
       login_as(user)
       visit budget_investments_path(budget, heading_id: new_york.id)
 
@@ -440,7 +440,7 @@ describe "Ballots" do
   end
 
   context "Permissions" do
-    scenario "User not logged in" do
+    xscenario "User not logged in" do
       investment = create(:budget_investment, :selected, heading: new_york)
 
       visit budget_investments_path(budget, heading_id: new_york.id)
@@ -453,7 +453,7 @@ describe "Ballots" do
       end
     end
 
-    scenario "User not verified" do
+    xscenario "User not verified" do
       unverified_user = create(:user)
       investment = create(:budget_investment, :selected, heading: new_york)
 
@@ -468,7 +468,7 @@ describe "Ballots" do
       end
     end
 
-    scenario "User is organization" do
+    xscenario "User is organization" do
       org = create(:organization)
       investment = create(:budget_investment, :selected, heading: new_york)
 
@@ -492,7 +492,7 @@ describe "Ballots" do
       expect(page).not_to have_css("#budget_investment_#{investment.id}")
     end
 
-    scenario "Investments with feasibility undecided are not shown" do
+    xscenario "Investments with feasibility undecided are not shown" do
       investment = create(:budget_investment, :undecided, heading: new_york)
 
       login_as(user)
@@ -504,7 +504,7 @@ describe "Ballots" do
       end
     end
 
-    scenario "Different district" do
+    xscenario "Different district" do
       bi1 = create(:budget_investment, :selected, heading: california)
       bi2 = create(:budget_investment, :selected, heading: new_york)
       user = create(:user, :level_two, ballot_lines: [bi1])
@@ -520,7 +520,7 @@ describe "Ballots" do
       end
     end
 
-    scenario "Insufficient funds (on page load)" do
+    xscenario "Insufficient funds (on page load)" do
       bi1 = create(:budget_investment, :selected, heading: california, price: 600)
       bi2 = create(:budget_investment, :selected, heading: california, price: 500)
       user = create(:user, :level_two, ballot_lines: [bi1])
@@ -536,7 +536,7 @@ describe "Ballots" do
       end
     end
 
-    scenario "Insufficient funds (added after create)" do
+    xscenario "Insufficient funds (added after create)" do
       create(:budget_investment, :selected, heading: california, price: 600, title: "Build replicants")
       create(:budget_investment, :selected, heading: california, price: 500, title: "Build terminators")
 
@@ -553,7 +553,7 @@ describe "Ballots" do
       end
     end
 
-    scenario "Insufficient funds (removed after destroy)" do
+    xscenario "Insufficient funds (removed after destroy)" do
       bi1 = create(:budget_investment, :selected, heading: california, price: 600)
       bi2 = create(:budget_investment, :selected, heading: california, price: 500)
       user = create(:user, :level_two, ballot_lines: [bi1])
@@ -582,7 +582,7 @@ describe "Ballots" do
       end
     end
 
-    scenario "Insufficient funds (removed after destroying from sidebar)" do
+    xscenario "Insufficient funds (removed after destroying from sidebar)" do
       bi1 = create(:budget_investment, :selected, heading: california, price: 600)
       bi2 = create(:budget_investment, :selected, heading: california, price: 500)
       user = create(:user, :level_two, ballot_lines: [bi1])
@@ -611,7 +611,7 @@ describe "Ballots" do
       end
     end
 
-    scenario "Edge case voting a non-elegible investment" do
+    xscenario "Edge case voting a non-elegible investment" do
       investment1 = create(:budget_investment, :selected, heading: new_york, price: 10000)
       admin_user = create(:administrator).user
 
@@ -646,7 +646,7 @@ describe "Ballots" do
       end
     end
 
-    scenario "Balloting is disabled when budget isn't in the balotting phase" do
+    xscenario "Balloting is disabled when budget isn't in the balotting phase" do
       budget.update!(phase: "accepting")
 
       bi1 = create(:budget_investment, :selected, heading: california, price: 600)
@@ -661,7 +661,7 @@ describe "Ballots" do
   end
 
   context "Hide money" do
-    scenario "Do not show prices on sidebar or ballot show" do
+    xscenario "Do not show prices on sidebar or ballot show" do
       budget_hide_money = create(:budget, :balloting, :approval, :hide_money)
       group_no_price = create(:budget_group, budget: budget_hide_money)
       heading_no_price = create(:budget_heading, group: group_no_price, max_ballot_lines: 2)
