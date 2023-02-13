@@ -124,7 +124,7 @@ de:
       form:
         projekt_assignment: Projektzuordnung
         star_message: Alle mit (*) gekennzeichneten Felder sind Pflichtfelder
-        projekt_labels: Labels *
+        projekt_labels: Ausstattung *
       index:
         resource:
           by: von
