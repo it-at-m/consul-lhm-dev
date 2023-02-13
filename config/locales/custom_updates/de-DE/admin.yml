@@ -271,7 +271,7 @@ de:
             name: Labels
             page_title: Labels
             create_button: Label erstellen
-            no_labels: Dieses Projekt hat keine Labels
+            no_labels: Für dieses Projekt sind noch keine Labels hinterlegt
           projekt_settings_tab:
             budget_settings: Budgets
             debates_settings: Diskussion
