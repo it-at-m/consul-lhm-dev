@@ -120,6 +120,7 @@ en:
       form:
         projekt_assignment: Project
         star_message: All Fields marked with a (*) are required
+        projekt_labels: Labels *
       index:
         resource:
           by: by

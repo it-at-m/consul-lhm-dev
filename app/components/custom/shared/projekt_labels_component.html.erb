@@ -1,3 +1,5 @@
+<label id="label-for-projekt-labels-selector" class="hide"><%= t("custom.shared.form.projekt_labels")%></label>
+
 <% projekt_labels.each do |label| %>
   <span class="label projekt-label secondary <%= @css_class %>"
         style="background-color:<%= label_background_color(label) %>;color:<%= label_text_color(label) %>"
