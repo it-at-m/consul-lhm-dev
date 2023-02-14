@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
       social_media_icon = SiteCustomization::Image.all.find_by(name: "social_media_icon").image
 
       if social_media_icon.attached?
-        @social_media_icon_path = polymorphic_path(social_media_icon, disposition: "attachment").split("?")[0]
+        @social_media_icon_path = polymorphic_path(social_media_icon, disposition: "attachment").split("?")[0].delete_prefix("/")
       else
         @social_media_icon_path = nil
       end
