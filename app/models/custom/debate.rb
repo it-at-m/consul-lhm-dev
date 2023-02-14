@@ -36,7 +36,7 @@ class Debate
 
   def self.debates_orders(user = nil)
     orders = %w[hot_score created_at alphabet votes_total random]
-    orders << "recommendations" if Setting["feature.user.recommendations_on_debates"] && user&.recommended_debates
+    # orders << "recommendations" if Setting["feature.user.recommendations_on_debates"] && user&.recommended_debates
     orders
   end
 
