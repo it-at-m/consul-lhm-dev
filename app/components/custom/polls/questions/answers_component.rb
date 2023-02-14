@@ -71,9 +71,12 @@ class Polls::Questions::AnswersComponent < ApplicationComponent
 
   def available_vote_weight(question_answer)
     if user_answer(question_answer).present?
-      question.max_votes - question.answers.sum(:answer_weight) + user_answer(question_answer).answer_weight
+      question.max_votes -
+        question.answers.where(author_id: current_user.id).sum(:answer_weight) +
+        user_answer(question_answer).answer_weight
     else
-      question.max_votes - question.answers.sum(:answer_weight)
+      question.max_votes -
+        question.answers.where(author_id: current_user.id).sum(:answer_weight)
     end
   end
 
