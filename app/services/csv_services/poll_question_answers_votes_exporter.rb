@@ -26,7 +26,10 @@ module CsvServices
         headers = []
         headers.push(question.title)
         headers.push("Antworten")
-        question.question_answers.each { |qa| headers.push("#{qa.title} (#{qa.total_votes})") }
+        question.question_answers.each do |qa|
+          headers.push("#{qa.title} (#{qa.total_votes})")
+          headers.push("%")
+        end
         headers
       end
 
@@ -37,6 +40,7 @@ module CsvServices
 
         @question.question_answers.each do |base_question_answer|
           row.push question_answer.total_connected_votes_to(base_question_answer)
+          row.push question_answer.total_connected_votes_inner_share(base_question_answer).round(2)
         end
 
         row
