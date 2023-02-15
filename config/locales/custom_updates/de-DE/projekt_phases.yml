@@ -63,6 +63,8 @@ de:
           phase_not_active: Diese Projektphase ist nicht aktiv
           phase_expired: Diese Projektphase ist bereits abgelaufen
           phase_not_current: Diese Projektphase wurde noch nicht gestartet
+          poll_expired: Diese Abstimmung ist bereits abgelaufen
+          poll_not_current: Diese Abstimmung wurde noch nicht gestartet
         legislation_annotations:
           not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
           not_verified: "Um fortzufahren, bitte %{verify}."
