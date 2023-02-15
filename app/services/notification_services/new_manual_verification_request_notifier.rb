@@ -13,7 +13,7 @@ module NotificationServices
     private
 
       def users_to_notify_ids
-        User.joins(:administrator).ids
+        User.joins(:administrator).where(adm_email_on_new_manual_verification: true).ids
       end
   end
 end

@@ -1,5 +1,17 @@
 <%= content_for :body_class, "custom-page" %>
 <% provide :title do %><%= @custom_page.title %><% end %>
+<% provide :meta_description do %><%= @custom_page.subtitle.presence || @custom_page.description %><% end %>
+
+<% provide :social_media_meta_tags do %>
+  <%= render "shared/social_media_meta_tags",
+              social_url: page_url(@custom_page),
+              social_title: @custom_page.title,
+              social_description: @custom_page.subtitle.presence || @custom_page.description,
+              twitter_image_url: (@custom_page.image.present? ? polymorphic_path(@custom_page.image) : nil),
+              og_image_url: (@custom_page.image.present? ? polymorphic_path(@proposal.image) : nil) %>
+<% end %>
+
+
 
 <div class="row margin-top">
 

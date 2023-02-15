@@ -1,5 +1,5 @@
 <% resource = @proposal || @debate || @poll || @process %>
-<% projekt_phase = ("legislation_phase") if resource.is_a?(Legislation::Process) %>
+<% projekt_phase = projekt.send("legislation_phase") if resource.is_a?(Legislation::Process) %>
 <% projekt_phase ||= resource.class.name == "Poll" ? nil : projekt.send("#{resource.class.name.downcase.gsub('::', '_')}_phase") %>
 <% vertical_align = !projekt.has_active_phase?(controller_name) || projekt_feature?(projekt, "general.hide_additional_info_in_projekt_selector") || controller_name == 'polls' %>
 

@@ -21,7 +21,9 @@ en:
       results:
         open_answers: Open answers
         scoped_popup_callout: The following analysis shows how the users who voted for this answer option answered the following questions.
+        question_street_details_tooltip: Participants data
         question_street_details_csv_link: Download details about streets
+        question_answer_details_tooltip: Crosssecrional details
         question_answer_details_csv_link: Download details about crossectional voting
       show:
         confirm_participation_button: Confirm my vote

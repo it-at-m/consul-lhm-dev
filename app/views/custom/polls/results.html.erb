@@ -80,12 +80,12 @@
                   </td>
                   <td style='width:65px' class='<%= answer.total_votes == most_voted_answer_votes ? "win" : "" %>'>
                     <% if answer.total_votes > 0 %>
-                      <%= link_to stats_poll_question_answer_path(answer.question.poll, answer), remote: true, style: "margin-right:7px" do %>
+                      <%= link_to stats_poll_question_answer_path(answer.question.poll, answer), remote: true, style: "margin-right:7px;text-decoration:none;", title: t("custom.polls.results.question_street_details_tooltip") do %>
                         <i class="fas fa-chart-pie"></i>
                       <% end %>
                       <div class="reveal" id="<%= dom_id(answer, :answer_stats) %>" data-reveal></div>
 
-                      <%= link_to results_poll_question_answer_path(answer.question.poll, answer), remote: true do %>
+                      <%= link_to results_poll_question_answer_path(answer.question.poll, answer), remote: true, title: t("custom.polls.results.question_answer_details_tooltip") do %>
                         <i class="fas fa-clipboard-list"></i>
                       <% end %>
                       <div class="reveal" id="<%= dom_id(answer, :answer_results) %>" data-reveal></div>

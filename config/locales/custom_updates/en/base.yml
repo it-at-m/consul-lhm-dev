@@ -13,6 +13,7 @@ en:
         adm_email_on_new_proposal: Email notification on each new Proposal
         adm_email_on_new_debate: Email notification on each new Debate
         adm_email_on_new_deficiency_report: Email notification on each new Deficiency Report
+        adm_email_on_new_manual_verification: Receive email notification after each new user verification
       show:
         user_permission_votes: Participate in polls
         admin_notifications: Admin Notifications

@@ -20,7 +20,6 @@
           <tr>
             <td id="answer_<%= @question_answer.id %>_result" class='results-column <%= @question_answer.total_votes == most_voted_answer_votes ? "win" : "" %>' >
               <%= @question_answer.total_votes %>
-              (<%= @question_answer.total_votes_percentage.round(2) %>%)
             </td>
             <td class='answers-column <%= @question_answer.total_votes == most_voted_answer_votes ? "win" : "" %>' >
               <% if @question.open_question_answer == @question_answer %>
@@ -88,7 +87,6 @@
               <tr>
                 <td id="answer_<%= answer.id %>_result" class='results-column <%= answer.total_votes == most_voted_answer_votes ? "win" : "" %>' >
                   <%= answer.total_connected_votes_to(@question_answer) %>
-                  (<%= answer.total_connected_votes_percentage(@question_answer).round(2) %>%)
                 </td>
                 <td class='answers-column <%= answer.total_votes == most_voted_answer_votes ? "win" : "" %>' >
                   <% if question.open_question_answer == answer %>
