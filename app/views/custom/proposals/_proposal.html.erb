@@ -5,7 +5,7 @@
     </div>
   </div>
 
-  <% cache [proposal, "image"] do %>
+  <% cache [proposal, proposal.image, "image"] do %>
     <div class='columns small-12 medium-3 large-2 show-for-small-only not-print'>
       <% if show_image_thumbnail?(proposal) %>
         <%= link_to namespaced_proposal_path(proposal) do %>

@@ -47,10 +47,14 @@ class Poll < ApplicationRecord
   end
 
   def answerable_by?(user)
-    @answerable ||= voting_phase.permission_problem(user).blank?
+    @answerable ||= (voting_phase.permission_problem(user).blank? && current?)
   end
 
   def reason_for_not_being_answerable_by(user)
+    return :poll_expired if expired?
+
+    return :poll_not_current if !current?
+
     voting_phase.permission_problem(user)
   end
 
