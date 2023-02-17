@@ -9,6 +9,8 @@ module Labelable
   end
 
   def labels_available?
+    return false if projekt.nil?
+
     projekt.all_projekt_labels.exists?
   end
 end
