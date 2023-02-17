@@ -23,6 +23,8 @@
     enableShowMoreButtonIfOverflowing: function(element) {
       if (this.isOverflowing(element)) {
         element.parentElement.querySelector(".js-collapse-show-more-button").style.display = "block";
+      } else {
+        $(element).addClass('-expanded')
       }
     },
     toggleCollapse: function(e) {
