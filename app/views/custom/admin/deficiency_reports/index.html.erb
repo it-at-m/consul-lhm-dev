@@ -8,7 +8,7 @@
   <h3><%= page_entries_info @deficiency_reports %></h3>
 
   <%=
-    link_to t("admin.budget_investments.index.download_current_selection"),
+    link_to t("custom.shared.download"),
     admin_deficiency_reports_path(csv_params),
     target: '_blank',
     class: "float-right small clear"
