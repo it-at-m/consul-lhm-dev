@@ -9,7 +9,7 @@
       }
     },
 
-    selectProjekt: function($projekt, shouldUpdateMap) {
+    selectProjekt: function($projekt) {
       var $selectedProjekt = $projekt.clone().removeClass('js-select-projekt')
       var projektId = $projekt.data('projektId')
       var $currentProjektSelector = $projekt.closest('.projekt-selector')
@@ -55,8 +55,11 @@
         App.ProjektSelector.addNextProjektPlaceholder($nextProejektSelector, "(verpflichtend)")
       }
 
-      if ( shouldUpdateMap ) {
+      if ( $selectedProjekt.data('showMap') ) {
+        $('#map-container').show();
         App.ProjektSelector.replaceProjektMapOnProposalCreation($selectedProjekt)
+      } else {
+        $('#map-container').hide();
       }
 
       App.ProjektSelector.toggleDocumentAttachment($selectedProjekt)
@@ -259,11 +262,9 @@
       }
 
       // show projekts staring with top parent
-      var shouldUpdateMap = $('form#new_proposal').length == 1
-
       $.each(projektIdsToShow, function(index, projektId) {
         var $selectedProjekt = $('#projekt_' + projektId)
-        App.ProjektSelector.selectProjekt($selectedProjekt, shouldUpdateMap);
+        App.ProjektSelector.selectProjekt($selectedProjekt);
         $selectedProjekt.closest('.projekt_group').hide();
       });
     },
