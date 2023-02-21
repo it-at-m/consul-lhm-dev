@@ -192,6 +192,11 @@ ul.tabs li.tabs-title {
     margin-left: 1rem;
     margin-right: 1rem;
     margin-bottom: 1rem;
+
+    .sign-in-button,
+    .sign-up-button {
+      width: 8rem;
+    }
   }
 }
 
