@@ -34,6 +34,10 @@ Check the ongoing documentation at [https://docs.consulproject.org](https://docs
 
 You can access the main website of the project at [http://consulproject.org](http://consulproject.org) where you can find documentation about the use of the platform, videos, and links to the community space.
 
+## Individual CONSUL developments for the city of munich by demokratie.today
+
+You can find an overview of additional features that have been further developed by demokratie.today at the following link. [https://demokratie.today/#features](https://demokratie.today). Especially for the Munich Consul instance the following functionalities have been added: MLogin, BayernID and Google Login with Keycloak
+
 ## Configuration for development and test environments
 
 **NOTE**: For more detailed instructions check the [docs](https://docs.consulproject.org)
