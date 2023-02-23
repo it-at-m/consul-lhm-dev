@@ -14,6 +14,11 @@ class Budget
     scope :sort_by_random, -> { reorder('RANDOM()') }
     scope :sort_by_newest, -> { reorder(created_at: :desc) }
 
+    # validates :terms_of_service, acceptance: { allow_nil: false }, on: :create
+    validates :terms_data_storage, acceptance: { allow_nil: false }, on: :create #custom
+    validates :terms_data_protection, acceptance: { allow_nil: false }, on: :create #custom
+    validates :terms_general, acceptance: { allow_nil: false }, on: :create #custom
+
     def self.sort_by_ballot_line_weight(budget = nil)
       order(qualified_votes_count: :desc)
     end

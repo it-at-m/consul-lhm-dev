@@ -82,7 +82,7 @@ class User < ApplicationRecord
   validate :validate_username_length
 
   validates :official_level, inclusion: { in: 0..5 }
-  validates :terms_of_service, acceptance: { allow_nil: false }, on: :create
+  # validates :terms_of_service, acceptance: { allow_nil: false }, on: :create
 
   validates_associated :organization, message: false
 
@@ -136,7 +136,10 @@ class User < ApplicationRecord
       email: oauth_email,
       oauth_email: oauth_email,
       password: Devise.friendly_token[0, 20],
-      terms_of_service: "1",
+      # terms_of_service: "1", #custom
+      terms_data_storage: "1", #custom
+      terms_data_protection: "1", #custom
+      terms_general: "1", #custom
       confirmed_at: oauth_email_confirmed ? DateTime.current : nil
     )
   end

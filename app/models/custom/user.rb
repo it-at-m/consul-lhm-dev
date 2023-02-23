@@ -32,6 +32,11 @@ class User < ApplicationRecord
   validates :document_type, presence: true, on: :create, if: :document_required?
   validates :document_last_digits, presence: true, on: :create, if: :document_required?
 
+  # validates :terms_of_service, acceptance: { allow_nil: false }, on: :create
+  validates :terms_data_storage, acceptance: { allow_nil: false }, on: :create
+  validates :terms_data_protection, acceptance: { allow_nil: false }, on: :create
+  validates :terms_general, acceptance: { allow_nil: false }, on: :create
+
   def verify!
     return false unless stamp_unique?
 

@@ -22,7 +22,10 @@ class Officing::OfflineBallotsController < Officing::BaseController
         @user.verified_at = Time.current
         @user.erased_at = Time.current
         @user.password = (0...20).map { ("a".."z").to_a[rand(26)] }.join
-        @user.terms_of_service = "1"
+        # @user.terms_of_service = "1" #custom
+        @user.terms_data_storage = "1" #custom
+        @user.terms_data_protection = "1" #custom
+        @user.terms_general = "1" #custom
         @user.unique_stamp = unique_stamp
         @user.geozone = Geozone.find_with_plz(params[:plz])
         @user.save!

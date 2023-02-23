@@ -14,6 +14,11 @@ class Verification::Residence
   validates :document_type, presence: true, if: :document_required?
   validates :document_last_digits, presence: true, if: :document_required?
 
+  # validates :terms_of_service, acceptance: { allow_nil: false }
+  validates :terms_data_storage, acceptance: { allow_nil: false } #custom
+  validates :terms_data_protection, acceptance: { allow_nil: false } #custom
+  validates :terms_general, acceptance: { allow_nil: false } #custom
+
   def save
     return false unless valid?
 

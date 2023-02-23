@@ -10,7 +10,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
                                    :first_name, :last_name, :city_street_id, :street_number, :plz, :city_name,
                                    :gender, :date_of_birth,
                                    :document_type, :document_last_digits,
-                                   :password, :password_confirmation, :terms_of_service, :locale,
+                                   :password, :password_confirmation,
+                                   :terms_of_service, :terms_data_storage, :terms_data_protection, :terms_general,
+                                   :locale,
                                    :redeemable_code)
     end
 end

@@ -1,0 +1,16 @@
+de:
+  custom:
+    terms:
+      data_storage:
+        title: Datenverarbeitung
+        label: Mit der Registrierung akzeptieren Sie, dass wir die hier erhobenen Daten zur Verarbeitung speichern.
+      data_protection:
+        title: Datenschutzvereinbarung
+        label: Mit der Registrierung akzeptieren Sie die %{privacy_link}
+      general:
+        title: Allgemeinen Geschäftsbedingungen
+        label: Mit der Registrierung akzeptieren Sie die %{terms_link}
+      privacy_link:
+        text: Datenschutzbestimmung
+      terms_link:
+        text: Allgemeinen Geschäftsbedingungen
