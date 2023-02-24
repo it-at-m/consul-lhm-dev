@@ -3,6 +3,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   # START Ergänzung für Keycloak-Anbindung
   def openid_connect
+    keycloak_id_token = request.env["omniauth.auth"].credentials.id_token
+
     extra = request.env["omniauth.auth"].extra
 
     info = request.env["omniauth.auth"].info
@@ -11,46 +13,51 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     authlevel = extra.raw_info[:authlevel]
     keycloak_link = extra.raw_info["preferred_username"]
 
-    if validate_absolute_email_uniqueness(email)
-      @hidden_user_with_this_email_exists = true
-      redirect_to new_user_registration_path(reason: 'uh') and return
+    if User.only_hidden.find_by(email: email)
+      redirect_to new_user_registration_path(reason: "uh") and return
     end
 
-    user = User.find_by keycloak_link: keycloak_link
-
-    unless user
-      password = SecureRandom.base64(15)
-      user = User.new({ email: email, username: username, oauth_email: email, terms_of_service: true, password:  password, password_confirmation: password, keycloak_link: keycloak_link, registering_with_oauth: true })
-
-      user.skip_confirmation!
-      user.verified_at = Time.now
-
-      if User.find_by(email: email)
-        redirect_to "#{Rails.application.secrets.openid_connect_sign_out_uri}?redirect_uri=#{new_user_session_url(reason: 'ee')}" and return
-      end
-
-      if user.save
-        sign_in user
-      end
-    else
-      if user.email != email
-        if User.find_by(email: email)
-          redirect_to new_user_session_path, alert: t('cli.account.email_taken') and return
+    if user = User.find_by(keycloak_link: keycloak_link) #keycloak user logged in in the past
+      if user.email != email #email changed in keycloak after logging in with old email
+        if User.find_by(email: email) #new keycloak email already taken by other user
+					redirect_to "#{Rails.application.secrets.openid_connect_sign_out_uri}?redirect_uri=#{new_user_session_url(reason: 'ee')}" and return
         else
-          user.assign_attributes(email: email)
+          user.assign_attributes(
+            email: email,
+            keycloak_id_token: keycloak_id_token)
           user.skip_reconfirmation!
-          user.save
+          user.save!
         end
       end
 
-      if user.administrator? && ["STORK-QAA-Level-3", "STORK-QAA-Level-4"].include?(authlevel)
-        sign_in user
-      elsif !user.administrator?
+    else
+      if User.find_by(email: email) #new keycloak email already taken by other user
+        redirect_to "#{Rails.application.secrets.openid_connect_sign_out_uri}?redirect_uri=#{new_user_session_url(reason: 'ee')}" and return
+      else
+        user = User.create!({
+          email: email,
+          username: username,
+          oauth_email: email,
+          terms_of_service: true,
+          password: SecureRandom.base64(15),
+          password_confirmation: password,
+          keycloak_link: keycloak_link,
+          keycloak_id_token: keycloak_id_token,
+          confirmed_at: Time.zone.now,
+          verified_at: Time.zone.now,
+          registering_with_oauth: true
+        })
+
         sign_in user
       end
+
     end
 
-    cookies[:keycloack_user] = true
+    if user.administrator? && ["STORK-QAA-Level-3", "STORK-QAA-Level-4"].include?(authlevel)
+      sign_in user
+    elsif !user.administrator?
+      sign_in user
+    end
 
     redirect_to after_sign_in_path_for(user)
 
@@ -62,16 +69,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if resource.registering_with_oauth && !resource.valid?
       finish_signup_path
     else
-      resource.update(registering_with_oauth: false)
+      resource.update!(registering_with_oauth: false)
       super(resource)
-    end
-  end
-
-  def validate_absolute_email_uniqueness(email)
-    if email.present?
-      hidden_user_with_same_email = User.only_hidden.find_by(email: email)
-
-      hidden_user_with_same_email.present?
     end
   end
 end

@@ -2,3 +2,9 @@ en:
   cli:
     general:
       seo_title_prefix: "Öffentlichkeitsbeteiligung München:"
+    devise_views:
+      users:
+        registrations:
+          errors:
+            user_hidden: Accont with this email address has been blocked by a moderator.
+            email_exists: This email address is already in use.

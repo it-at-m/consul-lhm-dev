@@ -16,9 +16,13 @@
       </div>
     <% end %>
 
-    <% if params[:reason] == 'ee' %>
+    <% if params[:reason] == 'uh' %>
       <div class="callout alert" style="clear:both;">
-        <%= t('custom.devise_views.users.registrations.new.hidden_user_with_this_email_exisits_omniauth_html')  %>
+        <%= t('cli.devise_views.users.registrations.errors.user_hidden')  %>
+      </div>
+    <% elsif params[:reason] == 'ee' %>
+      <div class="callout alert" style="clear:both;">
+        <%= t('cli.devise_views.users.registrations.errors.email_exists')  %>
       </div>
     <% end %>
 
