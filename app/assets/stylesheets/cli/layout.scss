@@ -16,17 +16,22 @@
 
 .button-bayern_id,
 .button-m_login,
+.button-keycloak_google,
 .button-bayern_id:active,
 .button-m_login:active,
+.button-keycloak_google:active,
 .button-bayern_id:focus,
 .button-m_login:focus,
+.button-keycloak_google:focus,
 .button-bayern_id:hover,
-.button-m_login:hover {
+.button-m_login:hover,
+.button-keycloak_google:hover {
   color: transparent;
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
   background-color: white;
+  background-color: #F4F4F4 !important;
 }
 
 .button-bayern_id {
@@ -39,4 +44,8 @@
 
 .button-m_login:hover {
   background-image: image-url('m_login_hover');
+}
+
+.button-keycloak_google {
+  background-image: image-url('keycloak_google.png');
 }

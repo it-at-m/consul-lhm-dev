@@ -16,15 +16,17 @@
       </div>
     <% end %>
 
-    <% if params[:reason] == 'uh' %>
-      <div class="callout alert" style="clear:both;">
-        <%= t('cli.devise_views.users.registrations.errors.user_hidden')  %>
-      </div>
-    <% elsif params[:reason] == 'ee' %>
-      <div class="callout alert" style="clear:both;">
-        <%= t('cli.devise_views.users.registrations.errors.email_exists')  %>
-      </div>
-    <% end %>
+    <div class="small-12 column">
+      <% if params[:reason] == 'uh' %>
+        <div class="callout alert" style="clear:both;">
+          <%= t('cli.devise_views.users.registrations.errors.user_hidden')  %>
+        </div>
+      <% elsif params[:reason] == 'ee' %>
+        <div class="callout alert" style="clear:both;">
+          <%= t('cli.devise_views.users.registrations.errors.email_exists')  %>
+        </div>
+      <% end %>
+    </div>
 
     <div class="small-12 column auth-divider">
       <span><%= t("omniauth.or_fill") %></span>

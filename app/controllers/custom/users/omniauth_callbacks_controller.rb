@@ -31,7 +31,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       end
 
     else
-      if User.find_by(email: email) #new keycloak email already taken by other user
+      if User.find_by(email: email) #keycloak email already taken by other user
         redirect_to "#{Rails.application.secrets.openid_connect_sign_out_uri}?redirect_uri=#{new_user_session_url(reason: 'ee')}" and return
       else
         user = User.create!({

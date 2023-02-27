@@ -8,7 +8,8 @@ module SettingsHelper
       #START Ergänzung für Keycloak-Anbindung
       # (:openid_connect if feature?(:openid_connect_login)),
       (:bayern_id if feature?(:bayern_id_login)),
-      (:m_login if feature?(:m_login_login))
+      (:m_login if feature?(:m_login_login)),
+      (:keycloak_google if feature?(:keycloak_google_login))
       #ENDE Ergänzung für Keycloak-Anbindung
     ].compact
   end

@@ -11,6 +11,10 @@ de:
       sign_in: Anmelden mit M-Login
       sign_up: Registrieren mit M-Login
       name: M-Login
+    keycloak_google:
+      sign_in: Anmelden mit Google
+      sign_up: Registrieren mit Google
+      name: Google
   activerecord:
     errors:
       models:

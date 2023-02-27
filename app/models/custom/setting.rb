@@ -34,6 +34,7 @@ class Setting < ApplicationRecord
         # "feature.openid_connect_login": true,
         "feature.bayern_id_login": true,
         "feature.m_login_login": true,
+        "feature.keycloak_google_login": true,
         #ENDE Ergänzung für Keycloak-Anbindung
         "feature.public_stats": true,
         "feature.signature_sheets": true,
