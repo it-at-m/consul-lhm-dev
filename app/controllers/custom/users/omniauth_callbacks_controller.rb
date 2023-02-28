@@ -18,48 +18,51 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
 
     if user = User.find_by(keycloak_link: keycloak_link) #keycloak user logged in in the past
-      if user.email != email #email changed in keycloak after logging in with old email
+      if user.email == email #keycloak user didn't change his email in keycloak
+        sign_in user
+
+      else #email changed in keycloak after logging in with old email
         if User.find_by(email: email) #new keycloak email already taken by other user
-					redirect_to "#{Rails.application.secrets.openid_connect_sign_out_uri}?redirect_uri=#{new_user_session_url(reason: 'ee')}" and return
+          redirect_to new_user_session_url(reason: "ee") and return
         else
           user.assign_attributes(
             email: email,
             keycloak_id_token: keycloak_id_token)
           user.skip_reconfirmation!
           user.save!
+
+          sign_in user
         end
       end
 
     else
-      if User.find_by(email: email) #keycloak email already taken by other user
-        redirect_to "#{Rails.application.secrets.openid_connect_sign_out_uri}?redirect_uri=#{new_user_session_url(reason: 'ee')}" and return
+      if user = User.find_by(email: email) #keycloak email already taken by other user
+        user.update!(keycloak_link: keycloak_link, keycloak_id_token: keycloak_id_token)
       else
+        password = SecureRandom.base64(15)
         user = User.create!({
           email: email,
           username: username,
           oauth_email: email,
           terms_of_service: true,
-          password: SecureRandom.base64(15),
+          password: password,
           password_confirmation: password,
           keycloak_link: keycloak_link,
           keycloak_id_token: keycloak_id_token,
           confirmed_at: Time.zone.now,
-          verified_at: Time.zone.now,
           registering_with_oauth: true
         })
-
-        sign_in user
       end
-
-    end
-
-    if user.administrator? && ["STORK-QAA-Level-3", "STORK-QAA-Level-4"].include?(authlevel)
-      sign_in user
-    elsif !user.administrator?
       sign_in user
     end
 
-    redirect_to after_sign_in_path_for(user)
+    redirect_to after_sign_in_path_for(user), notice: t("cli.devise.success")
+
+    # if user.administrator? && ["STORK-QAA-Level-3", "STORK-QAA-Level-4"].include?(authlevel)
+    #   sign_in user
+    # elsif !user.administrator?
+    #   sign_in user
+    # end
 
     #sign_in_with :openid_connect_login, :openid_connect
   end
@@ -73,4 +76,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       super(resource)
     end
   end
+
+  alias_method :bayern_id, :openid_connect
 end
