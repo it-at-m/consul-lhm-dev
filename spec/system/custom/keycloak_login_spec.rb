@@ -76,14 +76,14 @@ describe "Keycloak Login" do
 
     context "when user didn't sign in with Keycloak in Consul before" do
       context "when user with the same email coming from Keycloak is already taken in Consul" do
-        it "picks up existing account by email and sign user in" do
+        it "redirects to sign in page and asks user to sign in with email" do
           create(:user, email: "bayern_id@consul.dev", keycloak_link: nil)
           visit new_user_session_path(locale: :de)
           click_button "Alle akzeptieren"
           click_link(title: "Anmelden mit BayernID")
-          expect(page).to have_content "Erfolgreich angemeldet."
+          expect(page).to have_content "Die angegebene E-Mail-Adresse wird bereits verwendet."
           expect(User.count).to eq(1)
-          expect(User.first.keycloak_link).to eq("johndoe")
+          expect(User.first.keycloak_link).to eq(nil)
           expect(User.first.email).to eq("bayern_id@consul.dev")
         end
       end
