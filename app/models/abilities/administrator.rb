@@ -155,6 +155,9 @@ module Abilities
       end
 
       can :manage, ModalNotification
+      can [:index, :import], RegisteredAddress
+      can [:index, :update, :destroy], RegisteredAddressGrouping
+      can [:index], RegisteredAddressStreet
 
       can [:results, :stats], Poll, projekt: { projekt_settings: { key: "projekt_feature.polls.intermediate_poll_results_for_admins", value: "active" }}
 

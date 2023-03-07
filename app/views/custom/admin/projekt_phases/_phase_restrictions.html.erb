@@ -1,9 +1,14 @@
 <% if projekt_phase.name.in?(['comment_phase', 'debate_phase', 'proposal_phase', 'question_phase', 'voting_phase', 'budget_phase', 'legislation_phase', 'livestream_phase']) %>
 
   <div class="phase-restrictions">
-    <%= render partial: 'custom/admin/projekt_phases/phase_restrictions/phase_verified_restriction', locals: { projekt: projekt, projekt_phase: projekt_phase, f: f } %>
-    <%= render partial: 'custom/admin/projekt_phases/phase_restrictions/phase_geozone_restriction', locals: { projekt: projekt, projekt_phase: projekt_phase, f: f } %>
-    <%= render partial: 'custom/admin/projekt_phases/phase_restrictions/phase_age_restriction', locals: { projekt: projekt, projekt_phase: projekt_phase, f: f } %>
+    <%= render partial: 'custom/admin/projekt_phases/phase_restrictions/phase_verified_restriction',
+      locals: { projekt: projekt, projekt_phase: projekt_phase, f: f } %>
+    <%= render partial: 'custom/admin/projekt_phases/phase_restrictions/phase_geozone_restriction',
+      locals: { projekt: projekt, projekt_phase: projekt_phase, f: f } %>
+    <%= render partial: 'custom/admin/projekt_phases/phase_restrictions/phase_extended_geozone_restriction',
+      locals: { projekt: projekt, projekt_phase: projekt_phase, f: f } %>
+    <%= render partial: 'custom/admin/projekt_phases/phase_restrictions/phase_age_restriction',
+      locals: { projekt: projekt, projekt_phase: projekt_phase, f: f } %>
   </div>
 
 <% end %>

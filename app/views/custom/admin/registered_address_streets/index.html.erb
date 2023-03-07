@@ -1,0 +1,23 @@
+<h2 class="inline-block"><%= t("custom.admin.registered_address_streets.index.title") %></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= t("custom.admin.registered_address_streets.attributes.id") %></th>
+      <th><%= t("custom.admin.registered_address_streets.attributes.name") %></th>
+      <th><%= t("custom.admin.registered_address_streets.attributes.plz") %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @registered_address_streets.each do |street| %>
+      <tr id="<%= dom_id(street) %>">
+        <td><%= street.id %></td>
+        <td><%= street.name %></td>
+        <td><%= street.plz %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @registered_address_streets %>

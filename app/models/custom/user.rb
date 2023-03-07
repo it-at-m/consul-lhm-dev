@@ -6,6 +6,10 @@ class User < ApplicationRecord
          :trackable, :validatable, :omniauthable, :password_expirable, :secure_validatable,
          authentication_keys: [:login]
 
+  attr_accessor :registered_address_street_name,
+                :registered_address_street_number,
+                :registered_address_street_number_extension
+
   before_validation :strip_whitespace
 
   before_create :set_default_privacy_settings_to_false, if: :gdpr_conformity?
@@ -17,20 +21,30 @@ class User < ApplicationRecord
   has_many :deficiency_reports, -> { with_hidden }, foreign_key: :author_id, inverse_of: :author
   has_one :deficiency_report_officer, class_name: "DeficiencyReport::Officer"
   has_one :projekt_manager
-  belongs_to :city_street
+  belongs_to :city_street, optional: true
+  belongs_to :registered_address, optional: true
+  belongs_to :registered_address_street, optional: true
 
   scope :projekt_managers, -> { joins(:projekt_manager) }
 
-  validates :first_name, presence: true, on: :create, if: :first_name_required?
-  validates :last_name, presence: true, on: :create, if: :last_name_required?
-  validates :city_street_id, presence: true, on: :create, if: :street_name_required?
-  validates :street_number, presence: true, on: :create, if: :street_number_required?
-  validates :plz, presence: true, on: :create, if: :plz_required?
-  validates :city_name, presence: true, on: :create, if: :city_name_required?
-  validates :date_of_birth, presence: true, on: :create, if: :date_of_birth_required?
-  validates :gender, presence: true, on: :create, if: :gender_required?
+  validates :first_name, presence: true, on: :create, if: :extended_registration?
+  validates :last_name, presence: true, on: :create, if: :extended_registration?
+
+  # remove validations
+  validates :city_street_id, presence: true, on: :create, unless: :extended_registration_with_registered_address_street?
+  validates :street_number, presence: true, on: :create, unless: :extended_registration_with_registered_address_street?
+
+  validates :plz, presence: true, on: :create, if: :extended_registration?
+  validates :city_name, presence: true, on: :create, if: :extended_registration?
+  validates :date_of_birth, presence: true, on: :create, if: :extended_registration?
+  validates :gender, presence: true, on: :create, if: :extended_registration?
   validates :document_type, presence: true, on: :create, if: :document_required?
   validates :document_last_digits, presence: true, on: :create, if: :document_required?
+
+  # remove method
+  def extended_registration_with_registered_address_street?
+    RegisteredAddressStreet.any? && extended_registration?
+  end
 
   def verify!
     return false unless stamp_unique?
@@ -94,35 +108,39 @@ class User < ApplicationRecord
     projekt_manager.present?
   end
 
-  def first_name_required?
-    !organization? && !erased? && Setting["extra_fields.registration.extended"]
-  end
+  # def first_name_required?
+  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
+  # end
 
-  def last_name_required?
-    !organization? && !erased? && Setting["extra_fields.registration.extended"]
-  end
+  # def last_name_required?
+  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
+  # end
 
-  def street_name_required?
-    !organization? && !erased? && Setting["extra_fields.registration.extended"]
-  end
+  # def street_name_required?
+  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
+  # end
 
-  def street_number_required?
-    !organization? && !erased? && Setting["extra_fields.registration.extended"]
-  end
+  # def street_number_required?
+  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
+  # end
 
-  def plz_required?
-    !organization? && !erased? && Setting["extra_fields.registration.extended"]
-  end
+  # def plz_required?
+  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
+  # end
 
-  def city_name_required?
-    !organization? && !erased? && Setting["extra_fields.registration.extended"]
-  end
+  # def city_name_required?
+  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
+  # end
 
-  def date_of_birth_required?
-    !organization? && !erased? && Setting["extra_fields.registration.extended"]
-  end
+  # def date_of_birth_required?
+  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
+  # end
 
-  def gender_required?
+  # def gender_required?
+  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
+  # end
+
+  def extended_registration?
     !organization? && !erased? && Setting["extra_fields.registration.extended"]
   end
 

@@ -120,6 +120,16 @@
     ) %>
   </li>
 
+  <li>
+    <a href="#" class="registered-addresses-link"><%= t("custom.admin.menu.title_registered_addresses") %></a>
+    <%= link_list(
+      registered_addresses_list,
+      registered_address_groupings_list,
+      registered_address_streets_list,
+      class: ("is-active" if registered_addresses?)
+    ) %>
+  </li>
+
   <li class="<%= "is-active" if controller_name == "stats" %>">
     <%= link_to t("admin.menu.stats"), admin_stats_path, class: "stats-link" %>
   </li>

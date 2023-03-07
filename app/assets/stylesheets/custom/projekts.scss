@@ -196,70 +196,23 @@ table.edit-projekt {
   }
 }
 
-div.projekt-phase-restriction-selector {
+.projekt-phase-restriction-option {
+  margin-bottom: 0.25em;
+}
 
-  input[type='radio'] {
-    margin-bottom: 0.5em
-  }
+.projekt-phase-geo-restriction {
 
-  .projekt-phase-geozone-selector label {
-    margin-right: 2em;
-  }
-
-  input[type='checkbox'] + label {
-    font-weight: normal;
-  }
-
-  input[type='checkbox']:checked + label {
-    font-weight: bold;
-  }
-
-  input.comment_phase_only_geozones:checked ~ .projekt-phase-geozone-selector.comment_phase {
-    display: block;
-  }
-
-  input.debate_phase_only_geozones:checked ~ .projekt-phase-geozone-selector.debate_phase {
-    display: block;
-  }
-
-  input.proposal_phase_only_geozones:checked ~ .projekt-phase-geozone-selector.proposal_phase {
-    display: block;
-  }
-
-  input.question_phase_only_geozones:checked ~ .projekt-phase-geozone-selector.question_phase {
-    display: block;
-  }
-
-  input.budget_phase_only_geozones:checked ~ .projekt-phase-geozone-selector.budget_phase {
-    display: block;
-  }
-
-  input.voting_phase_only_geozones:checked ~ .projekt-phase-geozone-selector.voting_phase {
-    display: block;
-  }
-
-  input.legislation_phase_only_geozones:checked ~ .projekt-phase-geozone-selector.legislation_phase {
-    display: block;
-  }
-
-  input.livestream_phase_only_geozones:checked ~ .projekt-phase-geozone-selector.livestream_phase {
-    display: block;
-  }
-
-  input#projekt_geozone_affiliated_only_geozones:checked ~ .projekt-phase-geozone-selector {
-    display: block;
-  }
-
-  .projekt-phase-geozone-selector,
-  .projekt-phase-street-selector {
+  + label + .projekt-phase-geo-restriction-selector {
     display: none;
+    margin-left: 21px;
+    column-count: 3;
+
+    label {
+      font-weight: normal;
+    }
   }
 
-  input[class$=_phase_only_geozones]:checked ~ .projekt-phase-geozone-selector {
-    display: block;
-  }
-
-  input[class$=_phase_only_streets]:checked ~ .projekt-phase-street-selector {
+  &:checked + label + .projekt-phase-geo-restriction-selector {
     display: block;
   }
 }
