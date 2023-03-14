@@ -5,7 +5,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
     resource.registering_from_web = true
 
-    debugger
     if resource.valid?
       super
     else
@@ -13,52 +12,60 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def update_registered_address_street_field
+    @registered_address_city = RegisteredAddress::City
+      .find_by(id: params[:form_registered_address_city_id])
+
+    if @registered_address_city.present?
+      @registered_address_streets = @registered_address_city.registered_address_streets.order(name: :asc)
+    else
+      @registered_address_streets = []
+    end
+  end
+
+  def update_registered_address_field
+    @registered_address_street = RegisteredAddress::Street
+      .find_by(id: params[:form_registered_address_street_id])
+
+    if @registered_address_street.present?
+      @registered_addresses = @registered_address_street.registered_addresses
+    else
+      @registered_addresses = []
+    end
+  end
+
   private
 
     def sign_up_params
-      debugger
-      params[:user][:registered_address_id] = registered_address&.id
-      params[:user][:registered_address_street_id] = registered_address_street&.id
+      set_related_params
       params[:user].delete(:redeemable_code) if params[:user].present? &&
                                                 params[:user][:redeemable_code].blank?
       params.require(:user).permit(:username, :email,
                                    :first_name, :last_name, :street_number, :plz, :city_name,
-                                   :registered_address_id, :registered_address_street_id, :city_street_id,
+                                   :registered_address_id, :city_street_id,
+                                   :form_registered_address_city_id, :form_registered_address_street_id, :form_registered_address_id,
                                    :gender, :date_of_birth,
                                    :document_type, :document_last_digits,
                                    :password, :password_confirmation, :terms_of_service, :locale,
                                    :redeemable_code)
     end
 
-    def registered_address
-      return nil if registered_address_street.blank?
+    def set_related_params
+      params[:user][:form_registered_address_city_id] = params[:form_registered_address_city_id]
+      params[:user][:form_registered_address_street_id] = params[:form_registered_address_street_id]
+      params[:user][:form_registered_address_id] = params[:form_registered_address_id]
 
-      street_number = params[:user][:registered_address_street_number]
-      street_number_extension = params[:user][:registered_address_street_number_extension]
-      plz = params[:user][:plz]
-      city_name = params[:user][:city_name]
+      if params[:form_registered_address_id].present?
+        registered_address = RegisteredAddress.find(params[:form_registered_address_id])
+        debugger
 
-      return nil if street_number.blank? || plz.blank? || city_name.blank?
+        params[:user][:registered_address_id] = registered_address.id
 
-      registered_address_street.registered_addresses.where(
-        "street_number = ? AND lower(street_number_extension) = ? AND plz = ? AND lower(city) = ?",
-        street_number.strip,
-        street_number_extension.strip.downcase,
-        plz.strip,
-        city_name.strip.downcase
-      )&.first
-    end
-
-    def registered_address_street
-      street_name = params[:user][:registered_address_street_name]
-      plz = params[:user][:plz]
-
-      return nil if street_name.blank? || plz.blank?
-
-      RegisteredAddressStreet.where(
-        "lower(name) = ? AND plz = ?",
-        street_name.downcase.strip,
-        plz.strip
-      )&.first
+        params[:user][:city_name] = registered_address.registered_address_city.name
+        params[:user][:plz] = registered_address.plz
+        params[:user][:street_name] = registered_address.registered_address_street.name
+        params[:user][:street_number] = registered_address.street_number
+        params[:user][:street_number_extension] = registered_address.street_number_extension
+      end
     end
 end

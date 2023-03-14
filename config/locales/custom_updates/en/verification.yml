@@ -7,6 +7,7 @@ en:
           last_name: Last name
           city_street_id: Street
           street_number: Street number
+          street_number_extension: Street number extension
           plz: Postal code
           city_name: City
           gender: Gender

@@ -110,7 +110,7 @@ de:
           plz: PLZ
           street_name: Straße
           street_number: Hausnummer
-          street_number_extension: Hausnummer Ergänzung
+          street_number_extension: Hausnummerergänzung
           groupings: Gruppierungen
       registered_address_groupings:
         index:
@@ -428,6 +428,7 @@ de:
           last_name: Nachname
           city_street_id: Straße
           street_number: Hausnummer
+          street_number_extension: Hausnummerergänzung
           plz: Postleitzahl
           geozone: Gebiet
           city_name: Stadt

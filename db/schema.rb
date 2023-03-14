@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_07_123104) do
+ActiveRecord::Schema.define(version: 2023_03_13_105527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1819,6 +1819,12 @@ ActiveRecord::Schema.define(version: 2023_03_07_123104) do
     t.index ["tsv"], name: "index_proposals_on_tsv", using: :gin
   end
 
+  create_table "registered_address_cities", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "registered_address_groupings", force: :cascade do |t|
     t.string "key"
     t.string "name"
@@ -1835,13 +1841,13 @@ ActiveRecord::Schema.define(version: 2023_03_07_123104) do
   end
 
   create_table "registered_addresses", force: :cascade do |t|
-    t.string "city"
     t.string "street_number"
     t.string "street_number_extension"
     t.jsonb "groupings", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "registered_address_street_id"
+    t.integer "registered_address_city_id"
     t.index ["groupings"], name: "index_registered_addresses_on_groupings", using: :gin
     t.index ["registered_address_street_id"], name: "index_registered_addresses_on_registered_address_street_id"
   end
@@ -2189,7 +2195,7 @@ ActiveRecord::Schema.define(version: 2023_03_07_123104) do
     t.boolean "adm_email_on_new_manual_verification", default: false
     t.text "keycloak_id_token", default: ""
     t.bigint "registered_address_id"
-    t.bigint "registered_address_street_id"
+    t.string "street_number_extension"
     t.index ["bam_street_id"], name: "index_users_on_bam_street_id"
     t.index ["city_street_id"], name: "index_users_on_city_street_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
@@ -2200,7 +2206,6 @@ ActiveRecord::Schema.define(version: 2023_03_07_123104) do
     t.index ["hidden_at"], name: "index_users_on_hidden_at"
     t.index ["password_changed_at"], name: "index_users_on_password_changed_at"
     t.index ["registered_address_id"], name: "index_users_on_registered_address_id"
-    t.index ["registered_address_street_id"], name: "index_users_on_registered_address_street_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username"
   end
@@ -2407,7 +2412,6 @@ ActiveRecord::Schema.define(version: 2023_03_07_123104) do
   add_foreign_key "users", "bam_streets"
   add_foreign_key "users", "city_streets"
   add_foreign_key "users", "geozones"
-  add_foreign_key "users", "registered_address_streets"
   add_foreign_key "users", "registered_addresses"
   add_foreign_key "valuators", "users"
 end

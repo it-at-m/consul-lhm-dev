@@ -47,7 +47,7 @@ module ProjektPhaseActions
     end
 
     def registered_address_grouping_restrictions_params_to_permit
-      keys_hash = RegisteredAddressGrouping.all
+      keys_hash = RegisteredAddress::Grouping.all
         .pluck(:key).each_with_object({}) do |key, hash|
           hash[key.to_sym] = []
         end

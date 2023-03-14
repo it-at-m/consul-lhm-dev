@@ -1,0 +1,5 @@
+<%= label_tag :form_registered_address_id, t('custom.devise_views.users.registrations.new.form_registered_address_label') %>
+<%= select_tag :form_registered_address_id,
+  options_for_select(registered_addresses.all.map{ |adr| [adr.formatted_name, adr.id] }),
+  { include_blank: true, class: 'js-registration-city-selector' }
+%>

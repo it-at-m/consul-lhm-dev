@@ -20,40 +20,55 @@
       <%= f.text_field :username,  autofocus: true, maxlength: User.username_max_length,
                                    placeholder: t("devise_views.users.registrations.new.username_label"),
                                    hint: t("devise_views.users.registrations.new.username_note") %>
+      <%= f.email_field :email, placeholder: t("devise_views.users.registrations.new.email_label") %>
 
       <%= f.invisible_captcha :address %>
 
-      <%= f.email_field :email, placeholder: t("devise_views.users.registrations.new.email_label") %>
-
       <% if resource.extended_registration? %>
+        <%= f.select :gender, options_for_gender_select, include_blank: t("custom.devise_views.users.registrations.new.gender") %>
         <%= f.text_field :first_name, placeholder: t("custom.devise_views.users.registrations.new.first_name_label") %>
         <%= f.text_field :last_name, placeholder: t("custom.devise_views.users.registrations.new.last_name_label") %>
 
-        <% if RegisteredAddressStreet.any? %>
-          <%= f.select :registered_address_street_name, RegisteredAddressStreet.all.map{ |str| [str.name_with_plz, str.name] },
-            prompt: t('helpers.select.prompt') %>
-          <%= f.text_field :registered_address_street_number,
-            placeholder: t("custom.devise_views.users.registrations.new.street_number_label") %>
-          <%= f.text_field :registered_address_street_number_extension,
-            placeholder: t("custom.devise_views.users.registrations.new.street_number_extension_label") %>
+        <% if RegisteredAddress::City.any? %>
+          <%= label_tag :form_registered_address_city_id, t('custom.devise_views.users.registrations.new.form_registered_address_city_label') %>
+          <%= select_tag :form_registered_address_city_id,
+            options_for_select(
+              RegisteredAddress::City.all.collect { |city| [city.name, city.id] }.push([t('not_in_the_list'), 0]),
+              resource.form_registered_address_city_id
+            ),
+            { include_blank: true, class: 'js-registration-city-selector' } %>
 
-        <% else %>
-          <%= f.select :city_street_id, CityStreet.all.map{ |str| [str.name_with_plz, str.id] },
-            prompt: t('helpers.select.prompt') %>
-          <%= f.text_field :street_number, placeholder: t("custom.devise_views.users.registrations.new.street_number_label") %>
+          <div id="registered-address-street-field">
+            <% if resource.form_registered_address_city_id.present? %>
+              <% registered_addresses = ::RegisteredAddress::City.find(resource.form_registered_address_city_id).registered_address_streets %>
+              <%= render 'custom/users/registrations/partials/street_selector',
+                selected_value: resource.form_registered_address_street_id,
+                registered_address_streets: registered_addresses %>
+            <% end %>
+          </div>
+
+          <div id="registered-address-field"></div>
 
         <% end %>
 
-        <%= f.text_field :plz, placeholder: t("custom.devise_views.users.registrations.new.plz_label") %>
-        <%= f.text_field :city_name, placeholder: t("custom.devise_views.users.registrations.new.city_name_label") %>
+        <div id="no-registered-address" style="display:<%= resource.show_no_registered_address_field? ? 'block' : 'none' %>">
+          <%= f.text_field :city_name,
+            placeholder: t("custom.devise_views.users.registrations.new.city_name_label") %>
+          <%= f.text_field :plz,
+            placeholder: t("custom.devise_views.users.registrations.new.plz_label") %>
+          <%= f.text_field :street_name,
+            placeholder: t("custom.devise_views.users.registrations.new.street_name_label") %>
+          <%= f.text_field :street_number,
+            placeholder: t("custom.devise_views.users.registrations.new.street_number_label") %>
+          <%= f.text_field :street_number_extension,
+            placeholder: t("custom.devise_views.users.registrations.new.street_number_extension_label") %>
+        </div>
 
         <div class="user-date-of-birth sign-up">
           <%= f.date_select :date_of_birth,
                             prompt: true,
                             start_year: 1900, end_year: minimum_required_age.years.ago.year %>
         </div>
-
-        <%= f.select :gender, options_for_gender_select, include_blank: t("custom.devise_views.users.registrations.new.gender") %>
       <% end %>
 
       <% if resource.document_required? %>

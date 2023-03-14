@@ -1,8 +1,8 @@
 class Admin::RegisteredAddressGroupingsController < Admin::BaseController
-  load_and_authorize_resource :registered_address_grouping
+  load_and_authorize_resource class: RegisteredAddress::Grouping
 
   def index
-    @registered_address_groupings = RegisteredAddressGrouping.order(created_at: :desc).page(params[:page])
+    @registered_address_groupings = RegisteredAddress::Grouping.order(created_at: :desc).page(params[:page])
   end
 
   def edit

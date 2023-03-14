@@ -1,0 +1,9 @@
+<% selected_value ||= nil %>
+<%= label_tag :form_registered_address_street_id, t('custom.devise_views.users.registrations.new.form_registered_address_street_label') %>
+<%= select_tag :form_registered_address_street_id,
+  options_for_select(
+    registered_address_streets.all.map{ |str| [str.name_with_plz, str.id] }.unshift([t('not_in_the_list'), 0]),
+    selected_value
+  ),
+  { include_blank: true, class: 'js-registration-street-selector' }
+%>

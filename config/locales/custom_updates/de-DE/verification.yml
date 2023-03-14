@@ -7,6 +7,7 @@ de:
           last_name: Nachname
           street_name: Straße
           street_number: Hausnummer
+          street_number_extension: Hausnummerergänzung
           plz: Postleitzahl
           city_name: Stadt
           gender: Geschlecht

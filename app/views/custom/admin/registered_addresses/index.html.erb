@@ -22,7 +22,7 @@
     <% @registered_addresses.each do |address| %>
       <tr id="<%= dom_id(address) %>">
         <td><%= address.id %></td>
-        <td><%= address.city %></td>
+        <td><%= address.registered_address_city.name %></td>
         <td><%= address.registered_address_street.plz %></td>
         <td><%= address.registered_address_street.name %></td>
         <td><%= address.street_number %></td>

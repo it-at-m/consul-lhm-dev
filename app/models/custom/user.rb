@@ -6,9 +6,9 @@ class User < ApplicationRecord
          :trackable, :validatable, :omniauthable, :password_expirable, :secure_validatable,
          authentication_keys: [:login]
 
-  attr_accessor :registered_address_street_name,
-                :registered_address_street_number,
-                :registered_address_street_number_extension
+  attr_accessor :form_registered_address_city_id,
+                :form_registered_address_street_id,
+                :form_registered_address_id
 
   before_validation :strip_whitespace
 
@@ -23,7 +23,6 @@ class User < ApplicationRecord
   has_one :projekt_manager
   belongs_to :city_street, optional: true
   belongs_to :registered_address, optional: true
-  belongs_to :registered_address_street, optional: true
 
   scope :projekt_managers, -> { joins(:projekt_manager) }
 
@@ -34,8 +33,9 @@ class User < ApplicationRecord
   validates :city_street_id, presence: true, on: :create, unless: :extended_registration_with_registered_address_street?
   validates :street_number, presence: true, on: :create, unless: :extended_registration_with_registered_address_street?
 
-  validates :plz, presence: true, on: :create, if: :extended_registration?
-  validates :city_name, presence: true, on: :create, if: :extended_registration?
+  validates :plz, presence: true, on: :create, if: :show_no_registered_address_field?
+  validates :city_name, presence: true, on: :create, if: :show_no_registered_address_field?
+
   validates :date_of_birth, presence: true, on: :create, if: :extended_registration?
   validates :gender, presence: true, on: :create, if: :extended_registration?
   validates :document_type, presence: true, on: :create, if: :document_required?
@@ -43,7 +43,16 @@ class User < ApplicationRecord
 
   # remove method
   def extended_registration_with_registered_address_street?
-    RegisteredAddressStreet.any? && extended_registration?
+    RegisteredAddress::Street.any? && extended_registration?
+  end
+
+  def show_no_registered_address_field?
+    return false unless extended_registration?
+    return true if RegisteredAddress::Street.none?
+
+    form_registered_address_city_id == "0" ||
+      form_registered_address_street_id == "0" ||
+      form_registered_address_id == "0"
   end
 
   def verify!

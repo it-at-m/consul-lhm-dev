@@ -1,4 +1,8 @@
-class RegisteredAddressGrouping < ApplicationRecord
+class RegisteredAddress::Grouping < ApplicationRecord
+  def self.table_name_prefix
+    "registered_address_"
+  end
+
   def restriction_options
     query = <<-SQL
       SELECT DISTINCT (groupings ->> '#{key}')
