@@ -45,9 +45,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
       params[:user].delete(:redeemable_code) if params[:user].present? &&
                                                 params[:user][:redeemable_code].blank?
       params.require(:user).permit(:username, :email,
-                                   :first_name, :last_name, :street_number, :plz, :city_name,
-                                   :registered_address_id, :city_street_id,
-                                   :form_registered_address_city_id, :form_registered_address_street_id, :form_registered_address_id,
+                                   :first_name, :last_name,
+                                   :city_name, :plz, :street_name, :street_number, :street_number_extension,
+                                   :registered_address_id, #:city_street_id,
+                                   :form_registered_address_city_id,
+                                   :form_registered_address_street_id,
+                                   :form_registered_address_id,
                                    :gender, :date_of_birth,
                                    :document_type, :document_last_digits,
                                    :password, :password_confirmation, :terms_of_service, :locale,
