@@ -31,10 +31,11 @@ class User < ApplicationRecord
 
   # remove validations
   validates :city_street_id, presence: true, on: :create, unless: :extended_registration_with_registered_address_street?
-  validates :street_number, presence: true, on: :create, unless: :extended_registration_with_registered_address_street?
 
-  validates :plz, presence: true, on: :create, if: :show_no_registered_address_field?
   validates :city_name, presence: true, on: :create, if: :show_no_registered_address_field?
+  validates :plz, presence: true, on: :create, if: :show_no_registered_address_field?
+  validates :street_name, presence: true, on: :create, if: :show_no_registered_address_field?
+  validates :street_number, presence: true, on: :create, if: :show_no_registered_address_field?
 
   validates :date_of_birth, presence: true, on: :create, if: :extended_registration?
   validates :gender, presence: true, on: :create, if: :extended_registration?

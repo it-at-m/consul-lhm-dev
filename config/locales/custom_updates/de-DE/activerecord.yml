@@ -86,6 +86,7 @@ de:
         first_name: Vorname
         last_name: Nachname
         city_street_id: Straße
+        street_name: Straße
         street_number: Hausnummer
         street_number_extension: Hausnummerergänzung
         plz: Postleitzahl

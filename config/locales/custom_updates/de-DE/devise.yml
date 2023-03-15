@@ -13,6 +13,6 @@ de:
             gender: Bitte wählen
             city_name_label: Stadt
             document_last_digits_label: Personalausweis / Passport (4 letzten Ziffern)
-            form_registered_address_label: Addresse
-            form_registered_address_city_label: Stadt
+            form_registered_address_label: Adresse
+            form_registered_address_city_label: Wohnort
             form_registered_address_street_label: Straße

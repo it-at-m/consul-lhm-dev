@@ -8,6 +8,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if resource.valid?
       super
     else
+      @registered_address_city = RegisteredAddress::City.find_by(id: params[:form_registered_address_city_id])
+      @registered_address_street = RegisteredAddress::Street.find_by(id: params[:form_registered_address_street_id])
+      @registered_address = RegisteredAddress.find_by(id: params[:form_registered_address_id])
+      increase_error_count_for_registered_address_selectors
       render :new
     end
   end
@@ -55,17 +59,28 @@ class Users::RegistrationsController < Devise::RegistrationsController
       params[:user][:form_registered_address_street_id] = params[:form_registered_address_street_id]
       params[:user][:form_registered_address_id] = params[:form_registered_address_id]
 
-      if params[:form_registered_address_id].present?
+      if params[:form_registered_address_id].present? && params[:form_registered_address_id] != "0"
         registered_address = RegisteredAddress.find(params[:form_registered_address_id])
-        debugger
 
         params[:user][:registered_address_id] = registered_address.id
 
         params[:user][:city_name] = registered_address.registered_address_city.name
-        params[:user][:plz] = registered_address.plz
+        params[:user][:plz] = registered_address.registered_address_street.plz
         params[:user][:street_name] = registered_address.registered_address_street.name
         params[:user][:street_number] = registered_address.street_number
         params[:user][:street_number_extension] = registered_address.street_number_extension
+      end
+    end
+
+    def increase_error_count_for_registered_address_selectors
+      if RegisteredAddress::City.any?
+        if params[:form_registered_address_city_id].blank?
+          resource.errors.add(:form_registered_address_city_id, :blank)
+        elsif params[:form_registered_address_street_id].blank?
+          resource.errors.add(:form_registered_address_street_id, :blank)
+        elsif params[:form_registered_address_id].blank?
+          resource.errors.add(:form_registered_address_id, :blank)
+        end
       end
     end
 end
