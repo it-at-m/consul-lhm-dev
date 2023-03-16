@@ -25,7 +25,40 @@ describe "UserRegistration" do
     end
   end
 
-  context "when extended registraion is enabled" do
+  context "when extended registraion is enabled but there are no registered addresses" do
+    before do
+      Setting["extra_fields.registration.extended"] = true
+    end
+
+    it "creates a user" do
+      visit new_user_registration_path(locale: :de)
+      expect(page).not_to have_content("Wohnort")
+
+      fill_in_mandatory_fields_for_extended_registration
+
+      fill_in "Stadt", with: "Bremen"
+      fill_in "Postleitzahl", with: "33333"
+      fill_in "Straße", with: "Haupstraße"
+      fill_in "Hausnummer", with: "123"
+      fill_in "Hausnummerergänzung", with: "B"
+
+      click_button "Registrieren"
+
+      expect(User.count).to eq(1)
+      expect(User.first.registered_address).not_to be_present
+      expect(User.first).to have_attributes(
+        username: "nutzer",
+        email: "nutzer@consul.dev",
+        city_name: "Bremen",
+        plz: 33333,
+        street_name: "Haupstraße",
+        street_number: "123",
+        street_number_extension: "B"
+      )
+    end
+  end
+
+  context "when extended registraion is enabled and registered addresses are present" do
     before do
       Setting["extra_fields.registration.extended"] = true
 
