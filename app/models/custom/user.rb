@@ -32,7 +32,7 @@ class User < ApplicationRecord
   validates :last_name, presence: true, on: :create, if: :extended_registration?
 
   # remove validations
-  validates :city_street_id, presence: true, on: :create, unless: :extended_registration_with_registered_address_street?
+  # validates :city_street_id, presence: true, on: :create, unless: :extended_registration_with_registered_address_street?
 
   validates :city_name, presence: true, on: :create, if: :show_no_registered_address_field?
   validates :plz, presence: true, on: :create, if: :show_no_registered_address_field?
@@ -45,9 +45,9 @@ class User < ApplicationRecord
   validates :document_last_digits, presence: true, on: :create, if: :document_required?
 
   # remove method
-  def extended_registration_with_registered_address_street?
-    RegisteredAddress::Street.any? && extended_registration?
-  end
+  # def extended_registration_with_registered_address_street?
+  #   RegisteredAddress::Street.any? && extended_registration?
+  # end
 
   def show_no_registered_address_field?
     return false unless extended_registration?

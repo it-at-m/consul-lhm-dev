@@ -93,6 +93,7 @@ de:
         city_name: Stadt
         gender: Geschlecht
         date_of_birth: Geburtsdatum
+        document_type: Dokument
         document_last_digits: Personalausweis / Passport (4 letzten Ziffern)
       age_restriction:
         min_age: Mindestalter

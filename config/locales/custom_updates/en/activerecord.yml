@@ -75,6 +75,7 @@ en:
         city_name: City
         gender: Gender
         date_of_birth: Date of birth
+        document_type: Document
         document_last_digits: Document (last 4 digits)
       modal_notification:
         titel: Titel

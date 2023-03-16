@@ -1,13 +1,37 @@
 require "rails_helper"
 
 describe "UserRegistration" do
+  context "when extended registraion is not enabled" do
+    before do
+      Setting["extra_fields.registration.extended"] = false
+    end
+
+    it "creates a user" do
+      visit new_user_registration_path(locale: :de)
+      fill_in "Benutzer*innenname", with: "nutzer"
+      fill_in "E-Mail", with: "nutzer@consul.dev"
+      fill_in "Passwort", with: "12345678"
+      fill_in "Passwort bestätigen", with: "12345678"
+      check "Mit der Registrierung akzeptieren Sie die Allgemeine Nutzungsbedingungen und Datenschutzbestimmung"
+      click_button "Registrieren"
+
+      expect(page).not_to have_content("Wohnort")
+      expect(page).not_to have_content("Postleitzahl")
+      expect(User.count).to eq(1)
+      expect(User.first).to have_attributes(
+        username: "nutzer",
+        email: "nutzer@consul.dev"
+      )
+    end
+  end
+
   context "when extended registraion is enabled" do
     before do
       Setting["extra_fields.registration.extended"] = true
 
+      FactoryBot.rewind_sequences
       registered_address_street = create(:registered_address_street, name: "Teststraße", plz: "12345")
       registered_address_city = create(:registered_address_city, name: "Teststadt")
-
       create_list(:registered_address, 5,
                   registered_address_street: registered_address_street,
                   registered_address_city: registered_address_city
@@ -17,20 +41,13 @@ describe "UserRegistration" do
     context "when user's address is among the existing registered addresses" do
       it "creates a user and links them to registered address" do
         visit new_user_registration_path(locale: :de)
-        fill_in "Benutzer*innenname", with: "nutzer"
-        fill_in "E-Mail", with: "nutzer@consul.dev"
-        select "männlich", from: "Geschlecht"
-        fill_in "Vorname", with: "Max"
-        fill_in "Nachname", with: "Mustermann"
+        fill_in_mandatory_fields_for_extended_registration
         select "Teststadt", from: "Wohnort"
         select "Teststraße (12345)", from: "Straße"
         select "Teststraße 2a", from: "Adresse"
-        select_date "31-Dezember-1980", from: "user_date_of_birth"
-        fill_in "Passwort", with: "12345678"
-        fill_in "Passwort bestätigen", with: "12345678"
-        check "Mit der Registrierung akzeptieren Sie die Allgemeine Nutzungsbedingungen und Datenschutzbestimmung"
         click_button "Registrieren"
 
+        expect(page).not_to have_content("Postleitzahl")
         expect(User.count).to eq(1)
         expect(User.first.registered_address).to eq(RegisteredAddress.second)
         expect(User.first.registered_address_street).to eq(RegisteredAddress::Street.first)
@@ -53,29 +70,22 @@ describe "UserRegistration" do
     context "when user's city is not listed in selector" do
       it "creates a user with a custom address" do
         visit new_user_registration_path(locale: :de)
-        fill_in "Benutzer*innenname", with: "nutzer"
-        fill_in "E-Mail", with: "nutzer@consul.dev"
-        select "weiblich", from: "Geschlecht"
-        fill_in "Vorname", with: "Erika"
-        fill_in "Nachname", with: "Mustermann"
+        fill_in_mandatory_fields_for_extended_registration
         select "Nicht in der Liste enthalten", from: "Wohnort"
         fill_in "Stadt", with: "Berlin"
         fill_in "Postleitzahl", with: "54321"
         fill_in "Straße", with: "Unter den Linden"
         fill_in "Hausnummer", with: "100"
         fill_in "Hausnummerergänzung", with: "C"
-        select_date "31-Dezember-1980", from: "user_date_of_birth"
-        fill_in "Passwort", with: "12345678"
-        fill_in "Passwort bestätigen", with: "12345678"
-        check "Mit der Registrierung akzeptieren Sie die Allgemeine Nutzungsbedingungen und Datenschutzbestimmung"
         click_button "Registrieren"
+
         expect(User.count).to eq(1)
         expect(User.first.registered_address).not_to be_present
         expect(User.first).to have_attributes(
           username: "nutzer",
           email: "nutzer@consul.dev",
-          gender: "female",
-          first_name: "Erika",
+          gender: "male",
+          first_name: "Max",
           last_name: "Mustermann",
           date_of_birth: Time.zone.local(1980, 12, 31),
           city_name: "Berlin",
@@ -90,11 +100,7 @@ describe "UserRegistration" do
     context "when user's street is not listed selector" do
       it "creates a user with a custom address" do
         visit new_user_registration_path(locale: :de)
-        fill_in "Benutzer*innenname", with: "nutzer"
-        fill_in "E-Mail", with: "nutzer@consul.dev"
-        select "weiblich", from: "Geschlecht"
-        fill_in "Vorname", with: "Erika"
-        fill_in "Nachname", with: "Mustermann"
+        fill_in_mandatory_fields_for_extended_registration
         select "Teststadt", from: "Wohnort"
         select "Nicht in der Liste enthalten", from: "Straße"
         fill_in "Stadt", with: "Munich"
@@ -102,18 +108,15 @@ describe "UserRegistration" do
         fill_in "Straße", with: "Marienplatz"
         fill_in "Hausnummer", with: "111"
         fill_in "Hausnummerergänzung", with: "B"
-        select_date "31-Dezember-1980", from: "user_date_of_birth"
-        fill_in "Passwort", with: "12345678"
-        fill_in "Passwort bestätigen", with: "12345678"
-        check "Mit der Registrierung akzeptieren Sie die Allgemeine Nutzungsbedingungen und Datenschutzbestimmung"
         click_button "Registrieren"
+
         expect(User.count).to eq(1)
         expect(User.first.registered_address).not_to be_present
         expect(User.first).to have_attributes(
           username: "nutzer",
           email: "nutzer@consul.dev",
-          gender: "female",
-          first_name: "Erika",
+          gender: "male",
+          first_name: "Max",
           last_name: "Mustermann",
           date_of_birth: Time.zone.local(1980, 12, 31),
           city_name: "Munich",
@@ -125,14 +128,10 @@ describe "UserRegistration" do
       end
     end
 
-    context "when user's street is not listed selector" do
+    context "when user's address is not listed selector" do
       it "creates a user with a custom address" do
         visit new_user_registration_path(locale: :de)
-        fill_in "Benutzer*innenname", with: "nutzer"
-        fill_in "E-Mail", with: "nutzer@consul.dev"
-        select "weiblich", from: "Geschlecht"
-        fill_in "Vorname", with: "Erika"
-        fill_in "Nachname", with: "Mustermann"
+        fill_in_mandatory_fields_for_extended_registration
         select "Teststadt", from: "Wohnort"
         select "Teststraße (12345)", from: "Straße"
         select "Nicht in der Liste enthalten", from: "Adresse"
@@ -140,18 +139,15 @@ describe "UserRegistration" do
         fill_in "Postleitzahl", with: "22222"
         fill_in "Straße", with: "Reeperbahn"
         fill_in "Hausnummer", with: "99"
-        select_date "31-Dezember-1980", from: "user_date_of_birth"
-        fill_in "Passwort", with: "12345678"
-        fill_in "Passwort bestätigen", with: "12345678"
-        check "Mit der Registrierung akzeptieren Sie die Allgemeine Nutzungsbedingungen und Datenschutzbestimmung"
         click_button "Registrieren"
+
         expect(User.count).to eq(1)
         expect(User.first.registered_address).not_to be_present
         expect(User.first).to have_attributes(
           username: "nutzer",
           email: "nutzer@consul.dev",
-          gender: "female",
-          first_name: "Erika",
+          gender: "male",
+          first_name: "Max",
           last_name: "Mustermann",
           date_of_birth: Time.zone.local(1980, 12, 31),
           city_name: "Hamburg",
@@ -159,6 +155,44 @@ describe "UserRegistration" do
           street_name: "Reeperbahn",
           street_number: "99",
           street_number_extension: ""
+        )
+      end
+    end
+
+    context "when document is required and user user's address is among the existing registered addresses" do
+      before do
+        Setting["extra_fields.registration.check_documents"] = true
+      end
+
+      it "creates a user and links them to registered address" do
+        visit new_user_registration_path(locale: :de)
+        fill_in_mandatory_fields_for_extended_registration
+        select "Teststadt", from: "Wohnort"
+        select "Teststraße (12345)", from: "Straße"
+        select "Teststraße 2a", from: "Adresse"
+
+        select "Personalausweis", from: "Dokument"
+        fill_in "Personalausweis / Passport (4 letzten Ziffern)", with: "1234"
+
+        click_button "Registrieren"
+
+        expect(User.count).to eq(1)
+        expect(User.first.registered_address).to eq(RegisteredAddress.second)
+        expect(User.first.registered_address_street).to eq(RegisteredAddress::Street.first)
+        expect(User.first).to have_attributes(
+          username: "nutzer",
+          email: "nutzer@consul.dev",
+          gender: "male",
+          first_name: "Max",
+          last_name: "Mustermann",
+          date_of_birth: Time.zone.local(1980, 12, 31),
+          city_name: "Teststadt",
+          plz: 12345,
+          street_name: "Teststraße",
+          street_number: "2",
+          street_number_extension: "a",
+          document_type: "card",
+          document_last_digits: "1234"
         )
       end
     end
