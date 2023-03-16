@@ -20,7 +20,7 @@ describe "Keycloak Login" do
         },
         info: {
           email: "bayern_id@consul.dev",
-          username: "John Doe"
+          name: "John Doe"
         }
       }
     end
@@ -96,6 +96,27 @@ describe "Keycloak Login" do
         expect(User.count).to eq(1)
         expect(User.first.keycloak_link).to eq("johndoe")
         expect(User.first.email).to eq("bayern_id@consul.dev")
+      end
+
+      context "when user's first and last name form a username that is already taken" do
+        before do
+          create(:user, username: "John Doe")
+        end
+
+        it "signs in user successfully and allows to pick a different username" do
+          visit new_user_session_path(locale: :de)
+          click_button "Alle akzeptieren"
+          click_link(title: "Anmelden mit BayernID")
+
+          expect(page).to have_current_path("/finish_signup")
+
+          fill_in "Benutzer*innenname", with: "John Doe 2"
+          click_button "Registrieren"
+
+          expect(User.count).to eq(2)
+          expect(User.last.keycloak_link).to eq("johndoe")
+          expect(User.last.username).to eq("John Doe 2")
+        end
       end
     end
   end

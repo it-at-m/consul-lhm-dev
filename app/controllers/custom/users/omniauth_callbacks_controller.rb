@@ -52,7 +52,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           confirmed_at: Time.zone.now,
           registering_with_oauth: true
         })
+
+        if User.find_by(username: username, registering_with_oauth: false)
+          sign_in user
+          redirect_to finish_signup_path
+          return
+        end
       end
+
       sign_in user
     end
 
@@ -69,12 +76,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # ENDE Ergänzung für Keycloak-Anbindung
 
   def after_sign_in_path_for(resource)
-    if resource.registering_with_oauth && !resource.valid?
-      finish_signup_path
-    else
+    # if resource.registering_with_oauth && !resource.valid?
+    #   finish_signup_path
+    # else
       resource.update!(registering_with_oauth: false)
       super(resource)
-    end
+    # end
   end
 
   alias_method :bayern_id, :openid_connect
