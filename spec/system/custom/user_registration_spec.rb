@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "UserRegistration" do
+describe "User registration" do
   context "when extended registraion is not enabled" do
     before do
       Setting["extra_fields.registration.extended"] = false
@@ -67,8 +67,7 @@ describe "UserRegistration" do
       registered_address_city = create(:registered_address_city, name: "Teststadt")
       create_list(:registered_address, 5,
                   registered_address_street: registered_address_street,
-                  registered_address_city: registered_address_city
-                 )
+                  registered_address_city: registered_address_city)
     end
 
     context "when user's address is among the existing registered addresses" do

@@ -23,12 +23,12 @@
         <div class="small-12 medium-5 column">
 
           <div class="">
-            <%= f.label t("custom.verification.residence.new.first_name") %>
+            <%= f.label :first_name, t("custom.verification.residence.new.first_name") %>
             <%= f.text_field :first_name, label: false %>
           </div>
 
           <div class="">
-            <%= f.label t("custom.verification.residence.new.last_name") %>
+            <%= f.label :last_name, t("custom.verification.residence.new.last_name") %>
             <%= f.text_field :last_name, label: false %>
           </div>
 
@@ -43,7 +43,7 @@
                 ),
                 {
                   prompt: t('custom.helpers.select.prompt'),
-                  class: "js-registration-city-selector show-arrow #{'is-invalid-input' if invalid_field_class}",
+                  class: "js-verification-city-selector show-arrow #{'is-invalid-input' if invalid_field_class}",
                   style: "background-color:#f8f8f8;"
                 } %>
             </div>  
@@ -51,7 +51,7 @@
             <div id="registered-address-street-field" class="">
               <% if @registered_address_city.present? %>
                 <% invalid_field_class = @residence.form_registered_address_street_id.blank? && action_name == 'create' %>
-                <%= render 'custom/users/registrations/partials/street_selector',
+                <%= render 'custom/verification/residence/partials/street_selector',
                   selected_value: @residence.form_registered_address_street_id,
                   registered_address_streets: @registered_address_city&.registered_address_streets,
                   invalid_field_class: invalid_field_class %>
@@ -61,7 +61,7 @@
             <div id="registered-address-field" class="">
               <% if @registered_address_city.present? && @registered_address_street.present? %>
                 <% invalid_field_class = @residence.form_registered_address_id.blank? && action_name == 'create' %>
-                <%= render 'custom/users/registrations/partials/address_selector',
+                <%= render 'custom/verification/residence/partials/address_selector',
                   selected_value: @residence.form_registered_address_id,
                   registered_addresses: @registered_address_street&.registered_addresses,
                   invalid_field_class: invalid_field_class %>
@@ -99,14 +99,10 @@
             </div>
           </div>
 
-          <div class="">
-            <%= f.label t("custom.verification.residence.new.date_of_birth") %>
-            <div class="user-date-of-birth sign-up">
-              <%= f.date_select :date_of_birth,
-                                prompt: true,
-                                label: false,
-                                start_year: 1900, end_year: minimum_required_age.years.ago.year %>
-            </div>
+          <div class="user-date-of-birth sign-up">
+            <%= f.date_select :date_of_birth,
+                              prompt: true,
+                              start_year: 1900, end_year: minimum_required_age.years.ago.year %>
           </div>
 
           <div class="">

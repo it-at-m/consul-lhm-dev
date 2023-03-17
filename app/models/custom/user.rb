@@ -30,24 +30,16 @@ class User < ApplicationRecord
 
   validates :first_name, presence: true, on: :create, if: :extended_registration?
   validates :last_name, presence: true, on: :create, if: :extended_registration?
-
-  # remove validations
-  # validates :city_street_id, presence: true, on: :create, unless: :extended_registration_with_registered_address_street?
+  validates :gender, presence: true, on: :create, if: :extended_registration?
+  validates :date_of_birth, presence: true, on: :create, if: :extended_registration?
 
   validates :city_name, presence: true, on: :create, if: :show_no_registered_address_field?
   validates :plz, presence: true, on: :create, if: :show_no_registered_address_field?
   validates :street_name, presence: true, on: :create, if: :show_no_registered_address_field?
   validates :street_number, presence: true, on: :create, if: :show_no_registered_address_field?
 
-  validates :date_of_birth, presence: true, on: :create, if: :extended_registration?
-  validates :gender, presence: true, on: :create, if: :extended_registration?
   validates :document_type, presence: true, on: :create, if: :document_required?
   validates :document_last_digits, presence: true, on: :create, if: :document_required?
-
-  # remove method
-  # def extended_registration_with_registered_address_street?
-  #   RegisteredAddress::Street.any? && extended_registration?
-  # end
 
   def show_no_registered_address_field?
     return false unless extended_registration?
@@ -193,7 +185,9 @@ class User < ApplicationRecord
     def strip_whitespace
       self.first_name = first_name.strip unless first_name.nil?
       self.last_name = last_name.strip unless last_name.nil?
-      self.street_number = street_number.strip unless street_number.nil?
       self.city_name = city_name.strip unless city_name.nil?
+      self.street_name = street_name.strip unless street_name.nil?
+      self.street_number = street_number.strip unless street_number.nil?
+      self.street_number_extension = street_number_extension.strip unless street_number_extension.nil?
     end
 end
