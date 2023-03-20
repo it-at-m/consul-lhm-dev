@@ -89,7 +89,8 @@ class Projekt < ApplicationRecord
   scope :with_order_number, -> { where.not(order_number: nil).order(order_number: :asc) }
 
   scope :top_level, -> {
-    with_order_number
+    regular
+      .with_order_number
       .where(parent: nil)
   }
 
