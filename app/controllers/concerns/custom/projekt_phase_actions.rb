@@ -56,10 +56,13 @@ module ProjektPhaseActions
 
     def filter_empty_registered_address_grouping_restrictions
       grouping_restrictions = params[:projekt_phase][:registered_address_grouping_restrictions]
+      return if grouping_restrictions.blank?
+
       filtered_grouping_restrictions = grouping_restrictions
         .reject { |_, v| v == [""] }
         .as_json
         .each { |_, v| v.reject!(&:blank?) }
+
       params[:projekt_phase][:registered_address_grouping_restrictions] = filtered_grouping_restrictions
     end
 end
