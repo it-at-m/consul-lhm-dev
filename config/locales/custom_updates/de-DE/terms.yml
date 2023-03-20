@@ -8,9 +8,11 @@ de:
         title: Datenschutzvereinbarung
         label: Mit der Registrierung akzeptieren Sie die %{privacy_link}
       general:
-        title: Allgemeinen Geschäftsbedingungen
+        title: Allgemeinen Nutzungsbedingungen
         label: Mit der Registrierung akzeptieren Sie die %{terms_link}
       privacy_link:
-        text: Datenschutzbestimmung
+        text: Datenschutzvereinbarung
       terms_link:
-        text: Allgemeinen Geschäftsbedingungen
+        text: Allgemeinen Nutzungsbedingungen
+      revoke_consent:
+        text: Sie können Ihre Einwilligung zur Datenspeicherung ohne eine Angabe von Gründen jederzeit widerrufen.

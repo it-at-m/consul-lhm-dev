@@ -96,16 +96,6 @@
       <% end %>
 
       <div class="small-12">
-        <%#= f.check_box :terms_of_service,
-          title: t("devise_views.users.registrations.new.terms_title"),
-          label: t("custom.devise_views.users.registrations.new.terms",
-                   terms: link_to(t("devise_views.users.registrations.new.terms_link"), "/conditions",
-                                  title: t("shared.target_blank"),
-                                  target: "_blank"),
-                   privacy: link_to(t("custom.devise_views.users.registrations.new.privacy_link"), "/privacy",
-                                  title: t("shared.target_blank"),
-                                  target: "_blank")
-                  ) %>
 
         <%= f.check_box :terms_data_storage,
           title: t("custom.terms.data_storage.title"),
@@ -126,6 +116,7 @@
                                        title: t("shared.target_blank"), target: "_blank")),
           class: "checkbox-label--aligned" %>
 
+        <p><%= t("custom.terms.revoke_consent.text") %></p>
 
       </div>
 

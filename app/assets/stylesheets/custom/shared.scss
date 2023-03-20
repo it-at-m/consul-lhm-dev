@@ -296,6 +296,7 @@ form .checkbox-label--aligned {
   align-items: flex-start;
   margin-bottom: 0.5rem;
   text-align: left;
+  color: #222 !important;
 
   input {
     margin-bottom: 0;
@@ -304,7 +305,6 @@ form .checkbox-label--aligned {
 
   span {
     display: block;
-    margin-bottom: 0.5rem;
   }
 }
 
