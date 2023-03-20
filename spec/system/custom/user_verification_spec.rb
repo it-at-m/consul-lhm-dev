@@ -21,9 +21,14 @@ describe "User verification" do
 
       expect(page).to have_current_path(account_path)
       expect(User.count).to eq(1)
-      expect(user.reload.first_name).to eq("Jane")
-      expect(user.reload.plz.to_s).to eq("33333")
-      expect(user.reload.gender).to eq("female")
+
+      expect(user.reload).to have_attributes(
+        first_name: "Jane",
+        plz: 33333,
+        gender: "female",
+        unique_stamp: nil,
+        geozone: nil
+      )
     end
 
     it "cannot submit a verification request if data is missing" do
@@ -46,7 +51,7 @@ describe "User verification" do
 
     context "when user's address is among the existing registered addresses" do
       it "send verification request and links user to registered address" do
-        fill_in_mandatory_fields_for_verification
+        fill_in_mandatory_fields_for_verification(first_name: " John ", last_name: "Doe")
         select "Teststadt", from: "Wohnort"
         select "Teststraße (12345)", from: "Straße"
         select "Teststraße 1a", from: "Adresse"
@@ -54,12 +59,72 @@ describe "User verification" do
 
         expect(page).to have_current_path(account_path)
         expect(User.count).to eq(1)
-        expect(user.reload.registered_address).to eq(RegisteredAddress.first)
-        expect(user.reload.street_name).to eq("Teststraße")
-        expect(user.reload.street_number).to eq("1")
-        expect(user.reload.street_number_extension).to eq("a")
-        expect(user.reload.plz.to_s).to eq("12345")
-        expect(user.reload.city_name).to eq("Teststadt")
+        expect(user.reload).to have_attributes(
+          registered_address: RegisteredAddress.first,
+          street_name: "Teststraße",
+          street_number: "1",
+          street_number_extension: "a",
+          plz: 12345,
+          city_name: "Teststadt",
+          unique_stamp: nil,
+          geozone_id: nil
+        )
+      end
+    end
+
+    context "when user's address is not among the existing registered addresses" do
+      it "send verification request and does not link user to registered address" do
+        fill_in_mandatory_fields_for_verification(first_name: " John ", last_name: "Doe")
+        select "Teststadt", from: "Wohnort"
+        select "Nicht in der Liste enthalten", from: "Straße"
+
+        fill_in "Stadt", with: "Bremen"
+        fill_in "Postleitzahl", with: "33333"
+        fill_in "Straße", with: "Haupstraße"
+        fill_in "Hausnummer", with: "123"
+        fill_in "Hausnummerergänzung", with: "B"
+        click_button "Wohnsitz bestätigen"
+
+        expect(page).to have_current_path(account_path)
+        expect(User.count).to eq(1)
+        expect(user.reload).to have_attributes(
+          registered_address: nil,
+          street_name: "Haupstraße",
+          street_number: "123",
+          street_number_extension: "B",
+          plz: 33333,
+          city_name: "Bremen",
+          unique_stamp: nil,
+          geozone_id: nil
+        )
+      end
+    end
+
+    context "when user's address is not among the existing registered addresses and is not valid" do
+      it "does not send verification request" do
+        fill_in_mandatory_fields_for_verification(first_name: " John ", last_name: "Doe")
+        select "Teststadt", from: "Wohnort"
+        select "Nicht in der Liste enthalten", from: "Straße"
+
+        fill_in "Postleitzahl", with: "33333"
+        fill_in "Straße", with: "Haupstraße"
+        fill_in "Hausnummer", with: "123"
+        fill_in "Hausnummerergänzung", with: "B"
+        click_button "Wohnsitz bestätigen"
+
+        expect(page).to have_current_path(new_residence_path)
+        expect(page).to have_text("Wir konnten Ihre Daten nicht verifizieren, bitte kontaktieren Sie uns.")
+        expect(User.count).to eq(1)
+        expect(user.reload).to have_attributes(
+          registered_address: nil,
+          city_name: nil,
+          plz: 11111,
+          street_name: nil,
+          street_number: nil,
+          street_number_extension: nil,
+          unique_stamp: nil,
+          geozone_id: nil
+        )
       end
     end
   end

@@ -10,6 +10,8 @@ class Verification::ResidenceController < ApplicationController
 
   def create
     @residence = Verification::Residence.new(residence_params.merge(user: current_user))
+    @residence.form_registered_address_city_id = params[:form_registered_address_city_id]
+    @residence.form_registered_address_street_id = params[:form_registered_address_street_id]
     @residence.form_registered_address_id = params[:form_registered_address_id]
 
     if @residence.save

@@ -49,14 +49,8 @@ class Verification::Residence
       street_number_extension: street_number_extension,
       document_type:           document_type,
       document_last_digits:    document_last_digits,
-      geozone:                 Geozone.find_with_plz(plz),
       registered_address_id:   registered_address_id
     )
-
-    user.send(:strip_whitespace)
-    user.unique_stamp = user.prepare_unique_stamp
-
-    return false unless user.stamp_unique?
 
     user.save!
   end

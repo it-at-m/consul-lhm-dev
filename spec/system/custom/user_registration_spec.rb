@@ -20,7 +20,9 @@ describe "User registration" do
       expect(User.count).to eq(1)
       expect(User.first).to have_attributes(
         username: "nutzer",
-        email: "nutzer@consul.dev"
+        email: "nutzer@consul.dev",
+        unique_stamp: nil,
+        geozone: nil
       )
     end
   end
@@ -53,7 +55,9 @@ describe "User registration" do
         plz: 33333,
         street_name: "Haupstraße",
         street_number: "123",
-        street_number_extension: "B"
+        street_number_extension: "B",
+        unique_stamp: nil,
+        geozone: nil
       )
     end
   end
@@ -94,7 +98,9 @@ describe "User registration" do
           plz: 12345,
           street_name: "Teststraße",
           street_number: "2",
-          street_number_extension: "a"
+          street_number_extension: "a",
+          unique_stamp: nil,
+          geozone: nil
         )
       end
     end
@@ -124,7 +130,9 @@ describe "User registration" do
           plz: 54321,
           street_name: "Unter den Linden",
           street_number: "100",
-          street_number_extension: "C"
+          street_number_extension: "C",
+          unique_stamp: nil,
+          geozone: nil
         )
       end
     end
@@ -132,7 +140,7 @@ describe "User registration" do
     context "when user's street is not listed selector" do
       it "creates a user with a custom address" do
         visit new_user_registration_path(locale: :de)
-        fill_in_mandatory_fields_for_extended_registration
+        fill_in_mandatory_fields_for_extended_registration(first_name: "John ")
         select "Teststadt", from: "Wohnort"
         select "Nicht in der Liste enthalten", from: "Straße"
         fill_in "Stadt", with: "Munich"
@@ -148,14 +156,16 @@ describe "User registration" do
           username: "nutzer",
           email: "nutzer@consul.dev",
           gender: "male",
-          first_name: "Max",
+          first_name: "John",
           last_name: "Mustermann",
           date_of_birth: Time.zone.local(1980, 12, 31),
           city_name: "Munich",
           plz: 11111,
           street_name: "Marienplatz",
           street_number: "111",
-          street_number_extension: "B"
+          street_number_extension: "B",
+          unique_stamp: nil,
+          geozone: nil
         )
       end
     end
@@ -186,7 +196,9 @@ describe "User registration" do
           plz: 22222,
           street_name: "Reeperbahn",
           street_number: "99",
-          street_number_extension: ""
+          street_number_extension: "",
+          unique_stamp: nil,
+          geozone: nil
         )
       end
     end
@@ -224,7 +236,9 @@ describe "User registration" do
           street_number: "2",
           street_number_extension: "a",
           document_type: "card",
-          document_last_digits: "1234"
+          document_last_digits: "1234",
+          unique_stamp: nil,
+          geozone: nil
         )
       end
     end
