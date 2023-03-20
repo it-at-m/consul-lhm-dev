@@ -6,6 +6,12 @@ class User < ApplicationRecord
          :trackable, :validatable, :omniauthable, :password_expirable, :secure_validatable,
          authentication_keys: [:login]
 
+  delegate :registered_address_street, to: :registered_address
+
+  attr_accessor :form_registered_address_city_id,
+                :form_registered_address_street_id,
+                :form_registered_address_id
+
   before_validation :strip_whitespace
 
   before_create :set_default_privacy_settings_to_false, if: :gdpr_conformity?
@@ -17,20 +23,32 @@ class User < ApplicationRecord
   has_many :deficiency_reports, -> { with_hidden }, foreign_key: :author_id, inverse_of: :author
   has_one :deficiency_report_officer, class_name: "DeficiencyReport::Officer"
   has_one :projekt_manager
-  belongs_to :city_street
+  belongs_to :city_street, optional: true
+  belongs_to :registered_address, optional: true
 
   scope :projekt_managers, -> { joins(:projekt_manager) }
 
-  validates :first_name, presence: true, on: :create, if: :first_name_required?
-  validates :last_name, presence: true, on: :create, if: :last_name_required?
-  validates :city_street_id, presence: true, on: :create, if: :street_name_required?
-  validates :street_number, presence: true, on: :create, if: :street_number_required?
-  validates :plz, presence: true, on: :create, if: :plz_required?
-  validates :city_name, presence: true, on: :create, if: :city_name_required?
-  validates :date_of_birth, presence: true, on: :create, if: :date_of_birth_required?
-  validates :gender, presence: true, on: :create, if: :gender_required?
+  validates :first_name, presence: true, on: :create, if: :extended_registration?
+  validates :last_name, presence: true, on: :create, if: :extended_registration?
+  validates :gender, presence: true, on: :create, if: :extended_registration?
+  validates :date_of_birth, presence: true, on: :create, if: :extended_registration?
+
+  validates :city_name, presence: true, on: :create, if: :show_no_registered_address_field?
+  validates :plz, presence: true, on: :create, if: :show_no_registered_address_field?
+  validates :street_name, presence: true, on: :create, if: :show_no_registered_address_field?
+  validates :street_number, presence: true, on: :create, if: :show_no_registered_address_field?
+
   validates :document_type, presence: true, on: :create, if: :document_required?
   validates :document_last_digits, presence: true, on: :create, if: :document_required?
+
+  def show_no_registered_address_field?
+    return false unless extended_registration?
+    return true if RegisteredAddress::Street.none?
+
+    form_registered_address_city_id == "0" ||
+      form_registered_address_street_id == "0" ||
+      form_registered_address_id == "0"
+  end
 
   def verify!
     return false unless stamp_unique?
@@ -94,35 +112,39 @@ class User < ApplicationRecord
     projekt_manager.present?
   end
 
-  def first_name_required?
-    !organization? && !erased? && Setting["extra_fields.registration.extended"]
-  end
+  # def first_name_required?
+  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
+  # end
 
-  def last_name_required?
-    !organization? && !erased? && Setting["extra_fields.registration.extended"]
-  end
+  # def last_name_required?
+  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
+  # end
 
-  def street_name_required?
-    !organization? && !erased? && Setting["extra_fields.registration.extended"]
-  end
+  # def street_name_required?
+  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
+  # end
 
-  def street_number_required?
-    !organization? && !erased? && Setting["extra_fields.registration.extended"]
-  end
+  # def street_number_required?
+  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
+  # end
 
-  def plz_required?
-    !organization? && !erased? && Setting["extra_fields.registration.extended"]
-  end
+  # def plz_required?
+  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
+  # end
 
-  def city_name_required?
-    !organization? && !erased? && Setting["extra_fields.registration.extended"]
-  end
+  # def city_name_required?
+  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
+  # end
 
-  def date_of_birth_required?
-    !organization? && !erased? && Setting["extra_fields.registration.extended"]
-  end
+  # def date_of_birth_required?
+  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
+  # end
 
-  def gender_required?
+  # def gender_required?
+  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
+  # end
+
+  def extended_registration?
     !organization? && !erased? && Setting["extra_fields.registration.extended"]
   end
 
@@ -163,7 +185,9 @@ class User < ApplicationRecord
     def strip_whitespace
       self.first_name = first_name.strip unless first_name.nil?
       self.last_name = last_name.strip unless last_name.nil?
-      self.street_number = street_number.strip unless street_number.nil?
       self.city_name = city_name.strip unless city_name.nil?
+      self.street_name = street_name.strip unless street_name.nil?
+      self.street_number = street_number.strip unless street_number.nil?
+      self.street_number_extension = street_number_extension.strip unless street_number_extension.nil?
     end
 end

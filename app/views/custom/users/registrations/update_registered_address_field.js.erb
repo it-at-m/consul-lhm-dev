@@ -1,0 +1,8 @@
+<% if @registered_addresses.any? %>
+  $("#no-registered-address").css("display", "none");
+  $("#registered-address-field").css("display", "block");
+  $("#registered-address-field").html("<%= j render("custom/users/registrations/partials/address_selector", registered_addresses: @registered_addresses) %>");
+<% else %>
+  $("#no-registered-address").css("display", "block");
+  $("#registered-address-field").css("display", "none");
+<% end %>

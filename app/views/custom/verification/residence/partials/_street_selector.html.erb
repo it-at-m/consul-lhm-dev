@@ -1,0 +1,14 @@
+<% selected_value ||= nil %>
+<% invalid_field_class ||= false %>
+<%= label_tag :form_registered_address_street_id, t('custom.devise_views.users.registrations.new.form_registered_address_street_label'), class: "#{'is-invalid-label' if invalid_field_class}" %>
+<%= select_tag :form_registered_address_street_id,
+  options_for_select(
+    registered_address_streets.all.map{ |str| [str.name_with_plz, str.id] }.unshift([t('custom.helpers.select.not_in_list'), 0]),
+    selected_value
+  ),
+  {
+    prompt: t('custom.helpers.select.prompt'),
+    class: "js-verification-street-selector show-arrow #{'is-invalid-input' if invalid_field_class}",
+    style: "background-color:#f8f8f8;"
+  }
+%>

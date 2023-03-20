@@ -63,6 +63,12 @@ namespace :admin do
   # custom modal notifications routes
   resources :modal_notifications, except: :show
 
+  # custom routes for registered addresses
+  resources :registered_addresses, only: %i[index] do
+    collection { post :import }
+  end
+  resources :registered_address_groupings, only: %i[index edit update destroy]
+  resources :registered_address_streets, only: %i[index]
 
   resources :organizations, only: :index do
     get :search, on: :collection

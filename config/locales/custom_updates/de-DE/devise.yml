@@ -8,7 +8,11 @@ de:
             last_name_label: Nachname
             street_name_label: Straße
             street_number_label: Hausnummer
+            street_number_extension_label: Hausnummerergänzung
             plz_label: Postleitzahl
             gender: Bitte wählen
             city_name_label: Stadt
             document_last_digits_label: Personalausweis / Passport (4 letzten Ziffern)
+            form_registered_address_label: Adresse
+            form_registered_address_city_label: Wohnort
+            form_registered_address_street_label: Straße

@@ -197,6 +197,7 @@ var initialize_modules = function() {
   App.LivesubmitCheckboxCustom.initialize();
   App.OrbitInPopupFixCustom.initialize();
   App.ModalNotification.initialize();
+  App.VerificationForm.initialize();
 
   if ($("#projekt-selector-fields").length) {
     App.ProjektSelector.initialize();

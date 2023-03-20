@@ -13,6 +13,11 @@ devise_scope :user do
   delete "users/registrations", to: "users/registrations#delete"
   get :finish_signup, to: "users/registrations#finish_signup"
   patch :do_finish_signup, to: "users/registrations#do_finish_signup"
+
+  get "users/registrations/update_registered_address_street_field",
+    to: "users/registrations#update_registered_address_street_field" # custom line
+  get "users/registrations/update_registered_address_field",
+    to: "users/registrations#update_registered_address_field" # custom line
 end
 
 devise_for :organizations, class_name: "User",

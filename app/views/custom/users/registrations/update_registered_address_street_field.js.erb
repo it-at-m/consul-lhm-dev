@@ -1,0 +1,9 @@
+<% if @registered_address_streets.any? %>
+  $("#no-registered-address").css("display", "none");
+  $("#registered-address-street-field").css("display", "block");
+  $("#registered-address-street-field").html("<%= j render("custom/users/registrations/partials/street_selector", registered_address_streets: @registered_address_streets) %>");
+<% else %>
+  $("#no-registered-address").css("display", "block");
+  $("#registered-address-street-field").css("display", "none");
+  $("#registered-address-field").css("display", "none");
+<% end %>

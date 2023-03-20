@@ -90,6 +90,10 @@
       @include icon(users, solid);
     }
 
+    &.registered-addresses-link {
+      @include icon(address-book, solid);
+    }
+
     &.proposals-link,
     &.proposal-notifications-link {
       @include icon(lightbulb, solid);

@@ -20,45 +20,86 @@
       <%= f.text_field :username,  autofocus: true, maxlength: User.username_max_length,
                                    placeholder: t("devise_views.users.registrations.new.username_label"),
                                    hint: t("devise_views.users.registrations.new.username_note") %>
+      <%= f.email_field :email, placeholder: t("devise_views.users.registrations.new.email_label") %>
 
       <%= f.invisible_captcha :address %>
 
-      <%= f.email_field :email, placeholder: t("devise_views.users.registrations.new.email_label") %>
-
-      <% if resource.first_name_required? %>
+      <% if resource.extended_registration? %>
+        <%= f.select :gender, options_for_gender_select,
+          {
+            prompt: t('custom.helpers.select.prompt'),
+            class: "show-arrow",
+            style: "background-color:#f8f8f8;"
+          } %>
         <%= f.text_field :first_name, placeholder: t("custom.devise_views.users.registrations.new.first_name_label") %>
-      <% end %>
-
-      <% if resource.last_name_required? %>
         <%= f.text_field :last_name, placeholder: t("custom.devise_views.users.registrations.new.last_name_label") %>
-      <% end %>
 
-      <% if resource.street_name_required? %>
-        <%= f.select :city_street_id, CityStreet.all.map{ |str| [str.name_with_plz, str.id]  }, { prompt: t('helpers.select.prompt') } %>
-      <% end %>
+        <% if RegisteredAddress::City.any? %>
 
-      <% if resource.street_number_required? %>
-        <%= f.text_field :street_number, placeholder: t("custom.devise_views.users.registrations.new.street_number_label") %>
-      <% end %>
+          <% invalid_field_class = resource.form_registered_address_city_id.blank? && action_name == 'create' %>
+          <%= label_tag :form_registered_address_city_id, t('custom.devise_views.users.registrations.new.form_registered_address_city_label'), class: "#{'is-invalid-label' if invalid_field_class}" %>
+          <%= select_tag :form_registered_address_city_id,
+            options_for_select(
+              RegisteredAddress::City.all.collect { |city| [city.name, city.id] }.push([t('custom.helpers.select.not_in_list'), 0]),
+              resource.form_registered_address_city_id
+            ),
+            {
+              prompt: t('custom.helpers.select.prompt'),
+              class: "js-registration-city-selector show-arrow #{'is-invalid-input' if invalid_field_class}",
+              style: "background-color:#f8f8f8;"
+            } %>
 
-      <% if resource.plz_required? %>
-        <%= f.text_field :plz, placeholder: t("custom.devise_views.users.registrations.new.plz_label") %>
-      <% end %>
+          <div id="registered-address-street-field">
+            <% if @registered_address_city.present? %>
+              <% invalid_field_class = resource.form_registered_address_street_id.blank? && action_name == 'create' %>
+              <%= render 'custom/users/registrations/partials/street_selector',
+                selected_value: resource.form_registered_address_street_id,
+                registered_address_streets: @registered_address_city&.registered_address_streets,
+                invalid_field_class: invalid_field_class %>
+            <% end %>
+          </div>
 
-      <% if resource.city_name_required? %>
-        <%= f.text_field :city_name, placeholder: t("custom.devise_views.users.registrations.new.city_name_label") %>
-      <% end %>
+          <div id="registered-address-field">
+            <% if @registered_address_city.present? && @registered_address_street.present? %>
+              <% invalid_field_class = resource.form_registered_address_id.blank? && action_name == 'create' %>
+              <%= render 'custom/users/registrations/partials/address_selector',
+                selected_value: resource.form_registered_address_id,
+                registered_addresses: @registered_address_street&.registered_addresses,
+                invalid_field_class: invalid_field_class %>
+            <% end %>
+          </div>
+        <% end %>
 
-      <% if resource.date_of_birth_required? %>
+        <div id="no-registered-address" style="display:<%= resource.show_no_registered_address_field? ? 'block' : 'none' %>">
+          <div class="row">
+            <div class="small-12 medium-8 column">
+              <%= f.text_field :city_name,
+                placeholder: t("custom.devise_views.users.registrations.new.city_name_label") %>
+            </div>
+            <div class="small-12 medium-4 column">
+              <%= f.text_field :plz,
+                placeholder: t("custom.devise_views.users.registrations.new.plz_label") %>
+            </div>
+          </div>
+          <%= f.text_field :street_name,
+            placeholder: t("custom.devise_views.users.registrations.new.street_name_label") %>
+          <div class="row">
+            <div class="small-12 medium-6 column">
+              <%= f.text_field :street_number,
+                placeholder: t("custom.devise_views.users.registrations.new.street_number_label") %>
+            </div>
+            <div class="small-12 medium-6 column">
+              <%= f.text_field :street_number_extension,
+                placeholder: t("custom.devise_views.users.registrations.new.street_number_extension_label") %>
+            </div>
+          </div>
+        </div>
+
         <div class="user-date-of-birth sign-up">
           <%= f.date_select :date_of_birth,
                             prompt: true,
                             start_year: 1900, end_year: minimum_required_age.years.ago.year %>
         </div>
-      <% end %>
-
-      <% if resource.gender_required? %>
-        <%= f.select :gender, options_for_gender_select, include_blank: t("custom.devise_views.users.registrations.new.gender") %>
       <% end %>
 
       <% if resource.document_required? %>
@@ -83,8 +124,6 @@
           </div>
         </div>
       <% end %>
-
-
 
       <%= f.password_field :password, autocomplete: "off",
                            placeholder: t("devise_views.users.registrations.new.password_label") %>

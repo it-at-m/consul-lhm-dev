@@ -2,6 +2,7 @@ class Admin::ProjektPhasesController < Admin::BaseController
   include ProjektPhaseActions
 
   def edit
+    @registered_address_groupings = RegisteredAddress::Grouping.all
     super
   end
 
