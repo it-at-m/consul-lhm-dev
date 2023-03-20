@@ -164,7 +164,11 @@
     },
 
     updateProjektLabelSelector: function ($projekt) {
-      var labelIdsToShow = $projekt.data("projekt-label-ids").toString().split(",");
+      if ($projekt.data("projekt-label-ids")) {
+        var labelIdsToShow = $projekt.data("projekt-label-ids").toString().split(",");
+      } else {
+        var labelIdsToShow = [];
+      }
 
       if (labelIdsToShow.join().length == 0) {
         $('#label-for-projekt-labels-selector').addClass('hide');
