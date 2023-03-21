@@ -29,6 +29,7 @@ class Verification::ResidenceController < ApplicationController
         :first_name, :last_name, :gender, :date_of_birth,
         :city_name, :plz, :street_name, :street_number, :street_number_extension,
         :document_type, :document_last_digits,
+        :terms_data_storage, :terms_data_protection, :terms_general,
         :registered_address_id, :terms_of_service
       ]
     end

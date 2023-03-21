@@ -291,15 +291,23 @@
 
 // Align checkbox and label
 
-input.checkbox-label {
-  margin-bottom: 0;
-  vertical-align: middle;
+form .checkbox-label--aligned {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+  text-align: left;
+  color: #222 !important;
+
+  input {
+    margin-bottom: 0;
+    display: block;
+  }
+
+  span {
+    display: block;
+  }
 }
 
-input.checkbox-label + span {
-  display: inline;
-  margin-bottom: 0.5rem;
-}
 
 .disabled-no-active-projekt {
   background-color: #ececec !important;

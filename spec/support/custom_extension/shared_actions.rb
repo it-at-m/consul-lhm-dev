@@ -15,7 +15,9 @@ module CustomExtension
       select_date "31-Dezember-1980", from: "user_date_of_birth"
       fill_in "Passwort", with: "12345678"
       fill_in "Passwort bestätigen", with: "12345678"
-      check "Mit der Registrierung akzeptieren Sie die Allgemeine Nutzungsbedingungen und Datenschutzbestimmung"
+      check "Mit der Registrierung akzeptieren Sie, dass wir die hier erhobenen Daten zur Verarbeitung speichern."
+      check "Mit der Registrierung akzeptieren Sie die Datenschutzvereinbarung"
+      check "Mit der Registrierung akzeptieren Sie die Allgemeinen Nutzungsbedingungen"
     end
 
     def fill_in_mandatory_fields_for_verification(**options)
@@ -23,7 +25,9 @@ module CustomExtension
       fill_in "Nachname", with: options[:last_name] || "Mustermann"
       select_date "31-Dezember-1980", from: "residence_date_of_birth"
       select options[:gender] || "männlich", from: "Geschlecht"
-      check "Mit der Registrierung akzeptieren Sie die Allgemeine Nutzungsbedingungen und Datenschutzbestimmung"
+      check "Mit der Registrierung akzeptieren Sie, dass wir die hier erhobenen Daten zur Verarbeitung speichern."
+      check "Mit der Registrierung akzeptieren Sie die Datenschutzvereinbarung"
+      check "Mit der Registrierung akzeptieren Sie die Allgemeinen Nutzungsbedingungen"
     end
   end
 end

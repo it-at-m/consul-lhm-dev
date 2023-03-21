@@ -12,7 +12,9 @@ describe "User registration" do
       fill_in "E-Mail", with: "nutzer@consul.dev"
       fill_in "Passwort", with: "12345678"
       fill_in "Passwort bestätigen", with: "12345678"
-      check "Mit der Registrierung akzeptieren Sie die Allgemeine Nutzungsbedingungen und Datenschutzbestimmung"
+      check "Mit der Registrierung akzeptieren Sie, dass wir die hier erhobenen Daten zur Verarbeitung speichern."
+      check "Mit der Registrierung akzeptieren Sie die Datenschutzvereinbarung"
+      check "Mit der Registrierung akzeptieren Sie die Allgemeinen Nutzungsbedingungen"
       click_button "Registrieren"
 
       expect(page).not_to have_content("Wohnort")

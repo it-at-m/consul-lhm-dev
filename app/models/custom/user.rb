@@ -41,6 +41,10 @@ class User < ApplicationRecord
   validates :document_type, presence: true, on: :create, if: :document_required?
   validates :document_last_digits, presence: true, on: :create, if: :document_required?
 
+  validates :terms_data_storage, acceptance: { allow_nil: false }, on: :create
+  validates :terms_data_protection, acceptance: { allow_nil: false }, on: :create
+  validates :terms_general, acceptance: { allow_nil: false }, on: :create
+
   def show_no_registered_address_field?
     return false unless extended_registration?
     return true if RegisteredAddress::Street.none?
@@ -111,38 +115,6 @@ class User < ApplicationRecord
   def projekt_manager?
     projekt_manager.present?
   end
-
-  # def first_name_required?
-  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
-  # end
-
-  # def last_name_required?
-  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
-  # end
-
-  # def street_name_required?
-  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
-  # end
-
-  # def street_number_required?
-  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
-  # end
-
-  # def plz_required?
-  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
-  # end
-
-  # def city_name_required?
-  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
-  # end
-
-  # def date_of_birth_required?
-  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
-  # end
-
-  # def gender_required?
-  #   !organization? && !erased? && Setting["extra_fields.registration.extended"]
-  # end
 
   def extended_registration?
     !organization? && !erased? && Setting["extra_fields.registration.extended"]

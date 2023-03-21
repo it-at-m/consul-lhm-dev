@@ -25,7 +25,8 @@ module Budgets
 
       def investment_params
         attributes = [:heading_id, :tag_list, :organization_name, :location, :on_behalf_of,
-                      :terms_of_service, :related_sdg_list, :implementation_performer, :implementation_contribution, :user_cost_estimate,
+                      :related_sdg_list, :implementation_performer, :implementation_contribution, :user_cost_estimate,
+                      :terms_of_service, :terms_data_storage, :terms_data_protection, :terms_general,
                       image_attributes: image_attributes,
                       documents_attributes: document_attributes,
                       map_location_attributes: map_location_attributes]
