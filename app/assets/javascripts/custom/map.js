@@ -158,6 +158,32 @@
         maxZoom: 18
       }).setView(mapCenterLatLng, zoom);
 
+      map.pm.addControls({  
+        position: 'topright',  
+        customControls: true,
+        drawMarker: false
+      });
+      
+      map.pm.Toolbar.setBlockPosition('custom', 'topright');
+
+      map.pm.Toolbar.createCustomControl({
+        name: 'consulMarker',
+        className: 'fas fa-map-pin',
+        title: 'Drop Marker',
+        block: 'draw',
+        onClick: function() {
+          map.on("click", moveOrPlaceMarker);
+        }
+      });
+
+      map.pm.Toolbar.changeControlOrder([
+          'consulMarker'
+      ]);
+
+      map.on('pm:create', function(e) {
+				debugger
+      })
+
 
       if ( !editable ) {
         map._layersMaxZoom = 19;
@@ -259,7 +285,7 @@
             updateFormfields();
           }
         });
-        map.on("click", moveOrPlaceMarker);
+        // map.on("click", moveOrPlaceMarker);
       }
 
       if (addMarker) {
