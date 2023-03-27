@@ -158,30 +158,41 @@
         maxZoom: 18
       }).setView(mapCenterLatLng, zoom);
 
-      map.pm.addControls({  
-        position: 'topright',  
+      // add custom controler to geoman, and remove default marker control
+      map.pm.addControls({
         customControls: true,
         drawMarker: false
       });
-      
-      map.pm.Toolbar.setBlockPosition('custom', 'topright');
 
+      // add consul marker to geoman controls
       map.pm.Toolbar.createCustomControl({
         name: 'consulMarker',
         className: 'fas fa-map-pin',
         title: 'Drop Marker',
-        block: 'draw',
+        block: 'custom',
         onClick: function() {
           map.on("click", moveOrPlaceMarker);
         }
       });
 
-      map.pm.Toolbar.changeControlOrder([
-          'consulMarker'
-      ]);
+      // add remove consul marker to geoman controls
+      map.pm.Toolbar.createCustomControl({
+        name: 'removeConsulMarker',
+        className: 'fas fa-times',
+        title: 'Remove Marker',
+        block: 'custom',
+        onClick: function() {
+          removeMarker();
+        }
+      });
+ 
+      // set positions for geoman controls
+      map.pm.Toolbar.setBlockPosition('draw', 'topright');
+      map.pm.Toolbar.setBlockPosition('edit', 'topright');
+      map.pm.Toolbar.setBlockPosition('custom', 'topleft');
 
       map.on('pm:create', function(e) {
-				debugger
+        debugger
       })
 
 
