@@ -426,7 +426,7 @@ de:
         columns:
           first_name: Vorname
           last_name: Nachname
-          city_street_id: Straße
+          street_name: Straße
           street_number: Hausnummer
           street_number_extension: Hausnummerergänzung
           plz: Postleitzahl
@@ -434,6 +434,7 @@ de:
           city_name: Stadt
           gender: Geschlecht
           date_of_birth: Geburtsdatum
+          document_type: Dokument
           document_last_digits: Dokument (4 letzten Ziffern)
           verified_at: Verifiziert am
           actions: Aktionen
