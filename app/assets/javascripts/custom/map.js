@@ -164,36 +164,40 @@
         drawMarker: false
       });
 
-      // add consul marker to geoman controls
-      map.pm.Toolbar.createCustomControl({
-        name: 'consulMarker',
-        className: 'fas fa-map-pin',
-        title: 'Drop Marker',
-        block: 'custom',
-        onClick: function() {
-          map.on("click", moveOrPlaceMarker);
-        }
-      });
+      if ( editable ) {
+        // add consul marker to geoman controls
+        map.pm.Toolbar.createCustomControl({
+          name: 'consulMarker',
+          className: 'control-icon leaflet-pm-icon-marker',
+          title: 'Drop Marker',
+          block: 'custom',
+          onClick: function() {
+            if (this.toggleStatus) {
+              map.off("click", moveOrPlaceMarker);
+            } else {
+              map.on("click", moveOrPlaceMarker);
+            }
+          }
+        });
 
-      // add remove consul marker to geoman controls
-      map.pm.Toolbar.createCustomControl({
-        name: 'removeConsulMarker',
-        className: 'fas fa-times',
-        title: 'Remove Marker',
-        block: 'custom',
-        onClick: function() {
-          removeMarker();
-        }
-      });
+        // add remove consul marker to geoman controls
+        map.pm.Toolbar.createCustomControl({
+          name: 'removeConsulMarker',
+          className: 'control-icon fas fa-times',
+          title: 'Remove Marker',
+          block: 'custom',
+          onClick: function(e) {
+            removeMarker(e);
+            map.off("click", moveOrPlaceMarker);
+            map.pm.Toolbar.toggleButton('removeConsulMarker', true);
+          },
+        });
+      }
  
       // set positions for geoman controls
       map.pm.Toolbar.setBlockPosition('draw', 'topright');
       map.pm.Toolbar.setBlockPosition('edit', 'topright');
       map.pm.Toolbar.setBlockPosition('custom', 'topleft');
-
-      map.on('pm:create', function(e) {
-        debugger
-      })
 
 
       if ( !editable ) {
