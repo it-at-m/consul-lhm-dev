@@ -100,6 +100,8 @@
 
     replaceProjektMapOnProposalCreation: function($projekt) {
 
+      App.Map.destroy();
+
       if ( $projekt.data('showMap') ) {
         $('#map-container').show();
 
@@ -111,10 +113,9 @@
             App.Map.destroy();
             $('div.map_location.map').first().replaceWith(data)
             App.Map.initialize();
+            App.Map.maps[0].setView([$projekt.data('latitude'), $projekt.data('longitude')], $projekt.data('zoom')).invalidateSize();
           }
         });
-
-        App.Map.maps[0].setView([$projekt.data('latitude'), $projekt.data('longitude')], $projekt.data('zoom')).invalidateSize();
 
       } else {
         $('#map-container').hide();
