@@ -158,20 +158,39 @@
         maxZoom: 18
       }).setView(mapCenterLatLng, zoom);
 
-      // add custom controler to geoman, and remove default marker control
-      map.pm.addControls({
-        customControls: true,
-        drawMarker: false
+
+      // geoman
+
+      // set colors
+      var adminShapesColor = 'red';
+      map.pm.setPathOptions({
+        color: adminShapesColor,
+        fillColor: adminShapesColor,
+        fillOpacity: 0.4,
       });
+      map.pm.setGlobalOptions({
+        templineStyle: { color: adminShapesColor },
+        hintlineStyle: { color: adminShapesColor, dashArray: [5, 5]  }
+      })
 
       if ( editable ) {
+        // remove unnecessary controls
+        map.pm.addControls({
+          drawMarker: false,
+          drawCircleMarker: false,
+          drawText: false,
+          removalMode: false
+        });
+
         // add consul marker to geoman controls
         map.pm.Toolbar.createCustomControl({
           name: 'consulMarker',
           className: 'control-icon leaflet-pm-icon-marker',
           title: 'Drop Marker',
-          block: 'custom',
+          block: 'draw',
           onClick: function() {
+            removeShapesAndMarkers();
+
             if (this.toggleStatus) {
               map.off("click", moveOrPlaceMarker);
             } else {
@@ -182,22 +201,95 @@
 
         // add remove consul marker to geoman controls
         map.pm.Toolbar.createCustomControl({
-          name: 'removeConsulMarker',
-          className: 'control-icon fas fa-times',
-          title: 'Remove Marker',
-          block: 'custom',
-          onClick: function(e) {
-            removeMarker(e);
+          name: 'clearMap',
+          className: 'control-icon leaflet-pm-icon-delete',
+          title: 'Clear Map',
+          block: 'edit',
+          onClick: function() {
+            removeShapesAndMarkers();
             map.off("click", moveOrPlaceMarker);
-            map.pm.Toolbar.toggleButton('removeConsulMarker', true);
+            map.pm.Toolbar.toggleButton('clearMap', true);
           },
         });
+
+        // toggle consul marker button by default
+        map.pm.Toolbar.toggleButton('consulMarker', true)
+        map.on("click", moveOrPlaceMarker);
+
+        // reorder geoman controls
+        map.pm.Toolbar.changeControlOrder([
+          'consulMarker'
+        ]);
+
+        // remove past elements when new element is started
+        map.on('pm:drawstart', function(e) {
+          if (e.shape == 'Cut') {
+            return
+          }
+          removeShapesAndMarkers();
+        });
+
+        // function to clear previously created shaped (only one shaped allowed)
+        function removeShapesAndMarkers() {
+          if (marker) {
+            map.removeLayer(marker);
+            marker = null;
+          }
+
+          map.pm.getGeomanLayers().forEach(function(layer) {
+            layer.remove();
+          })
+        }
+
+
+
+        map.on('pm:split', function(e) {
+          debugger
+          console.log('pm:split')
+        })
+
+        // save shape to form
+        map.on('pm:create', function(e) {
+          var layer = e.layer;
+          console.log('pm:create')
+          updateShapeFieldInForm(layer);
+
+          layer.on('pm:edit', function(e) {
+            console.log('pm:edit')
+            updateShapeFieldInForm(e.layer);
+          })
+
+          layer.on('pm:split', function(e) {
+            debugger
+            console.log('pm:split')
+          })
+
+          // allows multiple cuts
+          layer.on('pm:cut', function(e) {
+            // e.originalLayer.setLatLngs(e.layer.getLatLngs());
+            e.originalLayer.addTo(map);
+            e.originalLayer._pmTempLayer = false;
+
+            e.layer._pmTempLayer = true;
+            e.layer.remove();
+          })
+        })
+
+        // update shape field in form
+        var updateShapeFieldInForm = function(layer) {
+          var shape = layer.toGeoJSON();
+          var shapeString = JSON.stringify(shape);
+          console.log(shapeString);
+          // $(shapeInputSelector).val(shapeString);
+          // $(latitudeInputSelector).val(marker.getLatLng().lat);
+          // $(longitudeInputSelector).val(marker.getLatLng().lng);
+          // $(zoomInputSelector).val(map.getZoom());
+        };
       }
  
       // set positions for geoman controls
       map.pm.Toolbar.setBlockPosition('draw', 'topright');
-      map.pm.Toolbar.setBlockPosition('edit', 'topright');
-      map.pm.Toolbar.setBlockPosition('custom', 'topleft');
+      map.pm.Toolbar.setBlockPosition('edit', 'bottomright');
 
 
       if ( !editable ) {
