@@ -10,7 +10,7 @@ class Users::SessionsController < Devise::SessionsController
   private
 
     def after_sign_out_path_for(resource)
-      if @keycloak_id_token
+      if @keycloak_id_token.present?
         redirect_path = @stored_location.present? && !@stored_location.match("management") ? @stored_location : super
         redirect_url = request.base_url + redirect_path
         Rails.application.secrets.openid_connect_sign_out_uri +

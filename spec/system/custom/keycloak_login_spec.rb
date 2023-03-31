@@ -75,6 +75,18 @@ describe "Keycloak Login" do
     end
 
     context "when user didn't sign in with Keycloak in Consul before" do
+      context "Consul user that signed in with email before" do
+        it "can logout successfully" do
+          user = create(:user, email: "consul@consul.dev", keycloak_link: nil, password: "12345678")
+          login_as(user)
+          visit root_path(locale: :de)
+          click_button "Alle akzeptieren"
+          find(".account-items-icon").find(:xpath, "..").hover
+          click_link "Abmelden"
+          expect(page).to have_content "Sie haben sich erfolgreich abgemeldet."
+        end
+      end
+
       context "when user with the same email coming from Keycloak is already taken in Consul" do
         it "redirects to sign in page and asks user to sign in with email" do
           create(:user, email: "bayern_id@consul.dev", keycloak_link: nil)
