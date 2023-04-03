@@ -15,47 +15,56 @@
       App.Map.maps = [];
     },
     initializeMap: function(element) {
-      var clearFormfields, createMarker, editable, getPopupContent, latitudeInputSelector, longitudeInputSelector, mapUserShape, mapAdminShape, map, mapAttribution, mapCenterLatLng, mapCenterLatitude, mapCenterLongitude, mapTilesProvider, marker, markerIcon, markerLatitude, markerLongitude, markerColor, markerIconClass, moveOrPlaceMarker, openMarkerPopup, removeMarker, removeMarkerSelector, updateFormfields, zoom, zoomInputSelector, shapeInputSelector, process, markersGroup, layersData;
 
-      var addMarker = $(element).data("marker-process-coordinates");
+      // variables to set map view
+      var mapCenterLatitude = $(element).data("map-center-latitude");
+      var mapCenterLongitude = $(element).data("map-center-longitude");
+      var mapCenterLatLng = new L.LatLng(mapCenterLatitude, mapCenterLongitude);
+      var zoom = $(element).data("map-zoom");
 
-      process = $(element).data("parent-class");
+      // tile and overlay layers for map
+      var layersData = $(element).data('map-layers');
+      var baseLayers = {};
+      var overlayLayers = {};
+
+      var mapUserShape = $(element).data("map-user-shape");
+      var mapAdminShape = $(element).data("map-admin-shape");
+
+      var markerProcessCoordinates = $(element).data("marker-process-coordinates");
+
+      var markerLatitude = $(element).data("marker-latitude");
+      var markerLongitude = $(element).data("marker-longitude");
+      var markerColor = $(element).data("marker-color");
+      var markerIconClass = $(element).data("marker-fa-icon-class")
+
+      var process = $(element).data("parent-class");
+
+      var latitudeInputSelector = $(element).data("latitude-input-selector");
+      var longitudeInputSelector = $(element).data("longitude-input-selector");
+      var zoomInputSelector = $(element).data("zoom-input-selector");
+      var shapeInputSelector = $(element).data("shape-input-selector");
+
+      var editable = $(element).data("marker-editable");
+
+      var marker = null;
+
+      var markersGroup = L.markerClusterGroup();
+
       App.Map.cleanCoordinates(element);
-      mapCenterLatitude = $(element).data("map-center-latitude");
-      mapCenterLongitude = $(element).data("map-center-longitude");
-      mapUserShape = $(element).data("map-user-shape");
-      mapAdminShape = $(element).data("map-admin-shape");
-      markerLatitude = $(element).data("marker-latitude");
-      markerLongitude = $(element).data("marker-longitude");
-      markerColor = $(element).data("marker-color");
-      markerIconClass = $(element).data("marker-fa-icon-class")
-      zoom = $(element).data("map-zoom");
-      mapTilesProvider = $(element).data("map-tiles-provider");
-      mapAttribution = $(element).data("map-tiles-provider-attribution");
-      latitudeInputSelector = $(element).data("latitude-input-selector");
-      longitudeInputSelector = $(element).data("longitude-input-selector");
-      zoomInputSelector = $(element).data("zoom-input-selector");
-      shapeInputSelector = $(element).data("shape-input-selector");
-      removeMarkerSelector = $(element).data("marker-remove-selector");
-      editable = $(element).data("marker-editable");
-      marker = null;
-      markersGroup = L.markerClusterGroup();
-
-      layersData = $(element).data('map-layers');
 
       var adminShapesColor = 'red';
 
-      createMarker = function(latitude, longitude, color, iconClass) {
+      // function to create a marker
+      var createMarker = function(latitude, longitude, color, iconClass) {
         if ( !iconClass ) {
           iconClass = 'circle';
         } else {
           iconClass = iconClass
         };
 
-        var markerLatLng;
-        markerLatLng = new L.LatLng(latitude, longitude);
+        var markerLatLng = new L.LatLng(latitude, longitude);
 
-        markerIcon = L.divIcon({
+        var markerIcon = L.divIcon({
           className: "map-marker",
           iconSize: [30, 30],
           iconAnchor: [15, 40]
@@ -82,7 +91,8 @@
         return marker;
       };
 
-      removeMarker = function(e) {
+      // function to remove marker
+      var removeMarker = function(e) {
         e.preventDefault();
         if (marker) {
           map.removeLayer(marker);
@@ -91,7 +101,8 @@
         clearFormfields();
       };
 
-      moveOrPlaceMarker = function(e) {
+      // function to create or move existing marker
+      var moveOrPlaceMarker = function(e) {
         if (marker) {
           marker.setLatLng(e.latlng);
         } else {
@@ -100,19 +111,22 @@
         updateFormfields();
       };
 
-      updateFormfields = function() {
+      // function to update form fields TODO: refactor, should probably be removed
+      var updateFormfields = function() {
         $(latitudeInputSelector).val(marker.getLatLng().lat);
         $(longitudeInputSelector).val(marker.getLatLng().lng);
         $(zoomInputSelector).val(map.getZoom());
       };
 
-      clearFormfields = function() {
+      // function to clear form fields OLD TODO: refactor, should probably be expanded
+      var clearFormfields = function() {
         $(latitudeInputSelector).val("");
         $(longitudeInputSelector).val("");
         $(zoomInputSelector).val("");
       };
 
-      openMarkerPopup = function(e) {
+      // function to open marker popup
+      var openMarkerPopup = function(e) {
         var route;
 
         if ( process == "proposals" ) {
@@ -140,8 +154,8 @@
         });
       };
 
-      // TODO: add projekts link
-      getPopupContent = function(data) {
+      // function to generate marker popup content
+      var getPopupContent = function(data) {
         if (process == "proposals" || data.proposal_id) {
           return "<a href='/proposals/" + data.proposal_id + "'>" + data.proposal_title + "</a>";
         } else if ( process == "deficiency-reports" ) {
@@ -153,27 +167,116 @@
         }
       };
 
-      mapCenterLatLng = new L.LatLng(mapCenterLatitude, mapCenterLongitude);
 
-      map = L.map(element.id, {
+      /* Create leaflet map start */
+
+      var map = L.map(element.id, {
         gestureHandling: true,
         maxZoom: 18
       }).setView(mapCenterLatLng, zoom);
+      // App.Map.maps.push(map); # consider deleting this line
+
+      /* Create leaflet map end */
 
 
-      // geoman
-      // set colors
-      map.pm.setPathOptions({
-        color: adminShapesColor,
-        fillColor: adminShapesColor,
-        fillOpacity: 0.4,
+
+      /* Manages base and overlay layers start */
+
+      // function to create tile or overlay layer
+      var createLayer = function(item, index) {
+
+        if ( item.protocol == 'wms' ) {
+          var layer = L.tileLayer.wms(item.provider, {
+            attribution: item.attribution,
+            layers: item.layer_names,
+            format: (item.transparent ? 'image/png' : 'image/jpeg'),
+            transparent: (item.transparent),
+            show_by_default: (item.show_by_default)
+          });
+
+        } else {
+          var layer = L.tileLayer(item.provider, {
+            attribution: item.attribution
+          });
+
+        }
+
+        if ( item.base ) {
+          baseLayers[item.name] = layer;
+        } else {
+          overlayLayers[item.name] = layer;
+        }
+      }
+
+      // function to ensure that at least one base layer exists
+      var ensureBaseLayerExistence = function() {
+        if ( Object.keys(baseLayers).length === 0 ) {
+          var defaultLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href=\"http://osm.org/copyright\">OpenStreetMap</a> contributors'
+          });
+
+          baseLayers['defaultLayer'] = defaultLayer;
+        }
+      }
+
+      // creates tile and overlay layers if data is available
+      if ( typeof layersData !== "undefined"  ) {
+        layersData.forEach(createLayer);
+      }
+
+      // ensures that at least one base layer exists and adds it to map
+      ensureBaseLayerExistence();
+      baseLayers[Object.keys(baseLayers)[0]].addTo(map);
+
+      // adds overlay layers to map if they should be visible by default
+      if ( Object.keys(overlayLayers).length > 0 ) {
+        for (let i = 0; i < Object.keys(overlayLayers).length; i++ ) {
+          if ( overlayLayers[Object.keys(overlayLayers)[i]].options.show_by_default == true ) {
+            overlayLayers[Object.keys(overlayLayers)[i]].addTo(map)
+          }
+        }
+      }
+
+      // adds layer control to map if there are more than one base and/or overlay layers
+      if ( Object.keys(baseLayers).length > 1 && Object.keys(overlayLayers).length > 0 ) {
+        L.control.layers(baseLayers, overlayLayers).addTo(map);
+      } else if ( Object.keys(overlayLayers).length > 0 ) {
+        L.control.layers({}, overlayLayers).addTo(map);
+      }
+
+      /* Manages base and overlay layers end */
+
+
+
+      /* Leaflet plugins start */
+
+      // Leaflet.Locate plugin: ads control to map
+      L.control.locate({icon: 'fa fa-map-marker'}).addTo(map);
+
+
+      // Leaflet GeoSearch plugin: adds control to map
+      var searchControl = new GeoSearch.GeoSearchControl({
+        provider: new GeoSearch.OpenStreetMapProvider(),
+        style: 'bar',
+        showMarker: false,
+        searchLabel: 'Nach Adresse suchen',
+        notFoundMessage: 'Entschuldigung! Die Adresse wurde nicht gefunden.',
       });
-      map.pm.setGlobalOptions({
-        templineStyle: { color: adminShapesColor },
-        hintlineStyle: { color: adminShapesColor, dashArray: [5, 5]  }
-      })
+      map.addControl(searchControl);
 
+
+      // Leaflet-Geoman plugin: adds and customizes controls to map
+
+      // configure editor controls
       if ( editable ) {
+
+        // sets default language to German
+        map.pm.setLang('de');
+ 
+        // set positions for geoman controls
+        map.pm.Toolbar.setBlockPosition('draw', 'topright');
+        map.pm.Toolbar.setBlockPosition('edit', 'topright');
+
         // remove unnecessary controls
         map.pm.addControls({
           drawMarker: false,
@@ -186,7 +289,7 @@
         map.pm.Toolbar.createCustomControl({
           name: 'consulMarker',
           className: 'control-icon leaflet-pm-icon-marker',
-          title: 'Drop Marker',
+          title: 'Marker setzen',
           block: 'draw',
           onClick: function() {
             removeShapesAndMarkers();
@@ -221,6 +324,17 @@
           'consulMarker'
         ]);
 
+        // set colors of shapes when drawing - TODO: make sure it's only set for admin
+        map.pm.setPathOptions({
+          color: adminShapesColor,
+          fillColor: adminShapesColor,
+          fillOpacity: 0.4,
+        });
+        map.pm.setGlobalOptions({
+          templineStyle: { color: adminShapesColor },
+          hintlineStyle: { color: adminShapesColor, dashArray: [5, 5]  }
+        })
+
         // remove past elements when new element is started
         map.on('pm:drawstart', function(e) {
           if (e.shape == 'Cut') {
@@ -241,14 +355,16 @@
           })
         }
 
-        // save shape to form
+        // save newly created shape to form
         map.on('pm:create', function(e) {
           var layer = e.layer;
-          console.log('pm:create')
           updateShapeFieldInForm(layer);
 
           layer.on('pm:edit', function(e) {
-            console.log('pm:edit')
+            updateShapeFieldInForm(e.layer);
+          })
+
+          layer.on('pm:dragend', function(e) {
             updateShapeFieldInForm(e.layer);
           })
 
@@ -265,6 +381,13 @@
           })
         })
 
+        // update form fields when map center changes // TODO: should only work for admins
+        map.on("moveend", function() {
+          $(latitudeInputSelector).val(map.getCenter().lat);
+          $(longitudeInputSelector).val(map.getCenter().lng);
+          $(zoomInputSelector).val(map.getZoom());
+        });
+
         // update shape field in form
         var updateShapeFieldInForm = function(layer) {
           var shape = layer.toGeoJSON();
@@ -273,10 +396,6 @@
           $(shapeInputSelector).val(shapeString);
         };
       }
- 
-      // set positions for geoman controls
-      map.pm.Toolbar.setBlockPosition('draw', 'topright');
-      map.pm.Toolbar.setBlockPosition('edit', 'bottomright');
 
       // render shape created by admin
       if (mapAdminShape && Object.keys(mapAdminShape).length > 0) {
@@ -296,96 +415,14 @@
         map.addLayer(markersGroup);
       }
 
-      App.Map.maps.push(map);
 
-
-
-///
-
-      var baseLayers = {};
-      var overlayLayers = {};
-
-      var createLayer = function(item, index) {
-
-        if ( item.protocol == 'wms' ) {
-          var layer = L.tileLayer.wms(item.provider, {
-            attribution: item.attribution,
-            layers: item.layer_names,
-            format: (item.transparent ? 'image/png' : 'image/jpeg'),
-            transparent: (item.transparent),
-            show_by_default: (item.show_by_default)
-          });
-
-        } else {
-          var layer = L.tileLayer(item.provider, {
-            attribution: item.attribution
-          });
-
-        }
-
-        if ( item.base ) {
-          baseLayers[item.name] = layer;
-        } else {
-          overlayLayers[item.name] = layer;
-        }
-      }
-
-      var ensureBaseLayerExistence = function() {
-        if ( Object.keys(baseLayers).length === 0 ) {
-          var defaultLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href=\"http://osm.org/copyright\">OpenStreetMap</a> contributors'
-          });
-
-          baseLayers['defaultLayer'] = defaultLayer;
-        }
-      }
-
-      if ( typeof layersData !== "undefined"  ) {
-        layersData.forEach(createLayer);
-      }
-
-      ensureBaseLayerExistence();
-      baseLayers[Object.keys(baseLayers)[0]].addTo(map);
-
-      if ( Object.keys(overlayLayers).length > 0 ) {
-        for (let i = 0; i < Object.keys(overlayLayers).length; i++ ) {
-          if ( overlayLayers[Object.keys(overlayLayers)[i]].options.show_by_default == true ) {
-            overlayLayers[Object.keys(overlayLayers)[i]].addTo(map)
-          }
-        }
-      }
-
-
-      if ( Object.keys(baseLayers).length > 1 && Object.keys(overlayLayers).length > 0 ) {
-        L.control.layers(baseLayers, overlayLayers).addTo(map);
-      } else if ( Object.keys(overlayLayers).length > 0 ) {
-        L.control.layers({}, overlayLayers).addTo(map);
-      }
-
-
-///
-
-
-      var search = new GeoSearch.GeoSearchControl({
-        provider: new GeoSearch.OpenStreetMapProvider(),
-        style: 'bar',
-        showMarker: false,
-        searchLabel: 'Nach Adresse suchen',
-        notFoundMessage: 'Entschuldigung! Die Adresse wurde nicht gefunden.',
-      });
-
-      map.addControl(search);
-
-      L.control.locate({icon: 'fa fa-map-marker'}).addTo(map);
-
-
-      if (markerLatitude && markerLongitude && !addMarker) {
-        marker = createMarker(markerLatitude, markerLongitude, markerColor, markerIconClass);
-      }
+      // // ads a market to admin map TODO: consider removing these lines
+      // if (markerLatitude && markerLongitude && !markerProcessCoordinates) {
+      //   marker = createMarker(markerLatitude, markerLongitude, markerColor, markerIconClass);
+      // }
 
       if (editable) {
         $('.js-select-projekt').on("click", removeMarker);
-        $(removeMarkerSelector).on("click", removeMarker);
         map.on("zoomend", function() {
           if (marker) {
             updateFormfields();
@@ -393,8 +430,8 @@
         });
       }
 
-      if (addMarker) {
-        addMarker.forEach(function(coordinates) {
+      if (markerProcessCoordinates) {
+        markerProcessCoordinates.forEach(function(coordinates) {
           if (App.Map.validCoordinates(coordinates)) {
             marker = createMarker(coordinates.lat, coordinates.long, coordinates.color, coordinates.fa_icon_class);
 
@@ -413,6 +450,7 @@
           }
         });
       }
+
     },
 
     toggleMap: function() {
