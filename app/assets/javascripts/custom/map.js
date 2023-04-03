@@ -6,11 +6,6 @@
       $("*[data-map]:visible").each(function() {
         App.Map.initializeMap(this);
       });
-      $(".js-toggle-map").on({
-        click: function() {
-          App.Map.toggleMap();
-        }
-      });
     },
     destroy: function() {
       App.Map.maps.forEach(function(map) {
@@ -20,11 +15,16 @@
       App.Map.maps = [];
     },
     initializeMap: function(element) {
-      var addMarker, clearFormfields, createMarker, editable, getPopupContent, latitudeInputSelector, longitudeInputSelector, map, mapAttribution, mapCenterLatLng, mapCenterLatitude, mapCenterLongitude, mapTilesProvider, marker, markerIcon, markerLatitude, markerLongitude, markerColor, markerIconClass, moveOrPlaceMarker, openMarkerPopup, removeMarker, removeMarkerSelector, updateFormfields, zoom, zoomInputSelector, process, markersGroup, layersData;
+      var clearFormfields, createMarker, editable, getPopupContent, latitudeInputSelector, longitudeInputSelector, mapUserShape, mapAdminShape, map, mapAttribution, mapCenterLatLng, mapCenterLatitude, mapCenterLongitude, mapTilesProvider, marker, markerIcon, markerLatitude, markerLongitude, markerColor, markerIconClass, moveOrPlaceMarker, openMarkerPopup, removeMarker, removeMarkerSelector, updateFormfields, zoom, zoomInputSelector, shapeInputSelector, process, markersGroup, layersData;
+
+      var addMarker = $(element).data("marker-process-coordinates");
+
       process = $(element).data("parent-class");
       App.Map.cleanCoordinates(element);
       mapCenterLatitude = $(element).data("map-center-latitude");
       mapCenterLongitude = $(element).data("map-center-longitude");
+      mapUserShape = $(element).data("map-user-shape");
+      mapAdminShape = $(element).data("map-admin-shape");
       markerLatitude = $(element).data("marker-latitude");
       markerLongitude = $(element).data("marker-longitude");
       markerColor = $(element).data("marker-color");
@@ -35,13 +35,15 @@
       latitudeInputSelector = $(element).data("latitude-input-selector");
       longitudeInputSelector = $(element).data("longitude-input-selector");
       zoomInputSelector = $(element).data("zoom-input-selector");
+      shapeInputSelector = $(element).data("shape-input-selector");
       removeMarkerSelector = $(element).data("marker-remove-selector");
-      addMarker = $(element).data("marker-process-coordinates");
       editable = $(element).data("marker-editable");
       marker = null;
       markersGroup = L.markerClusterGroup();
 
       layersData = $(element).data('map-layers');
+
+      var adminShapesColor = 'red';
 
       createMarker = function(latitude, longitude, color, iconClass) {
         if ( !iconClass ) {
@@ -160,9 +162,7 @@
 
 
       // geoman
-
       // set colors
-      var adminShapesColor = 'red';
       map.pm.setPathOptions({
         color: adminShapesColor,
         fillColor: adminShapesColor,
@@ -229,7 +229,7 @@
           removeShapesAndMarkers();
         });
 
-        // function to clear previously created shaped (only one shaped allowed)
+        // function to clear previously created shapes (only one shaped allowed)
         function removeShapesAndMarkers() {
           if (marker) {
             map.removeLayer(marker);
@@ -240,13 +240,6 @@
             layer.remove();
           })
         }
-
-
-
-        map.on('pm:split', function(e) {
-          debugger
-          console.log('pm:split')
-        })
 
         // save shape to form
         map.on('pm:create', function(e) {
@@ -259,19 +252,16 @@
             updateShapeFieldInForm(e.layer);
           })
 
-          layer.on('pm:split', function(e) {
-            debugger
-            console.log('pm:split')
-          })
-
           // allows multiple cuts
           layer.on('pm:cut', function(e) {
-            // e.originalLayer.setLatLngs(e.layer.getLatLngs());
-            e.originalLayer.addTo(map);
-            e.originalLayer._pmTempLayer = false;
+            if (typeof(e.layer.getLatLngs) == 'function') {
+              e.originalLayer.setLatLngs(e.layer.getLatLngs());
+              e.originalLayer.addTo(map);
+              e.originalLayer._pmTempLayer = false;
 
-            e.layer._pmTempLayer = true;
-            e.layer.remove();
+              e.layer._pmTempLayer = true;
+              e.layer.remove();
+            }
           })
         })
 
@@ -280,10 +270,7 @@
           var shape = layer.toGeoJSON();
           var shapeString = JSON.stringify(shape);
           console.log(shapeString);
-          // $(shapeInputSelector).val(shapeString);
-          // $(latitudeInputSelector).val(marker.getLatLng().lat);
-          // $(longitudeInputSelector).val(marker.getLatLng().lng);
-          // $(zoomInputSelector).val(map.getZoom());
+          $(shapeInputSelector).val(shapeString);
         };
       }
  
@@ -291,6 +278,18 @@
       map.pm.Toolbar.setBlockPosition('draw', 'topright');
       map.pm.Toolbar.setBlockPosition('edit', 'bottomright');
 
+      // render shape created by admin
+      if (mapAdminShape && Object.keys(mapAdminShape).length > 0) {
+        var adminShapeLayer = L.geoJSON(mapAdminShape);
+        adminShapeLayer.pm.ignore = true;
+        adminShapeLayer.setStyle({
+          color: adminShapesColor,
+          fillColor: adminShapesColor,
+          fillOpacity: 0.4,
+        })
+        adminShapeLayer.addTo(map);
+        // map.fitBounds(layer.getBounds());
+      }
 
       if ( !editable ) {
         map._layersMaxZoom = 19;
@@ -392,7 +391,6 @@
             updateFormfields();
           }
         });
-        // map.on("click", moveOrPlaceMarker);
       }
 
       if (addMarker) {
