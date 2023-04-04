@@ -109,7 +109,6 @@
           type: "GET",
           dataType: "html",
           success: function(data) {
-            $('.js-remove-marker-div').remove();
             App.Map.destroy();
             $('div.map_location.map').first().replaceWith(data)
             App.Map.initialize();

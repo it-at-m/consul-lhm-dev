@@ -5,7 +5,7 @@ module ProposalsHelper
   def all_proposal_map_locations(proposals_for_map)
     ids = proposals_for_map.except(:limit, :offset, :order).pluck(:id).uniq
 
-    MapLocation.where(proposal_id: ids).map(&:json_data)
+    MapLocation.where(proposal_id: ids, shape: {}).map(&:json_data)
   end
 
   def json_data

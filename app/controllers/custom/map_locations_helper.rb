@@ -19,8 +19,6 @@ module MapLocationsHelper
           map_center_latitude: map_location_latitude(map_location),
           map_center_longitude: map_location_longitude(map_location),
           map_zoom: map_location_zoom(map_location),
-          map_tiles_provider: Rails.application.secrets.map_tiles_provider,
-          map_tiles_provider_attribution: Rails.application.secrets.map_tiles_provider_attribution,
           marker_editable: editable,
           latitude_input_selector: "##{map_location_input_id(parent_class, "latitude")}",
           longitude_input_selector: "##{map_location_input_id(parent_class, "longitude")}",

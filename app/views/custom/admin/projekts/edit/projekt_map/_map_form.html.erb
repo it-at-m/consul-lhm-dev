@@ -3,19 +3,23 @@
                     data-map-center-latitude="<%= map_location.latitude %>"
                     data-map-center-longitude="<%= map_location.longitude %>"
                     data-map-zoom="<%= map_location.zoom %>"
-                    data-map-admin-shape="<%= map_location.shape %>"
-                    data-map-tiles-provider="<%= Rails.application.secrets.map_tiles_provider %>"
-                    data-map-tiles-provider-attribution="<%= Rails.application.secrets.map_tiles_provider_attribution %>"
-                    data-marker-editable="true"
-                    data-marker-latitude="<%= map_location.latitude %>"
-                    data-marker-longitude="<%= map_location.longitude %>"
-                    data-marker-color="<%= map_location.projekt.color %>"
-                    data-marker-fa-icon-class="<%= map_location.projekt.icon %>"
+                    data-map-layers="<%= @projekt.map_layers_for_render.to_json %>"
+
+                    data-admin-editor="true"
+
+                    data-admin-shape="<%= map_location.shape %>"
+                    data-editable="true"
                     data-latitude-input-selector="#latitude"
                     data-longitude-input-selector="#longitude"
                     data-zoom-input-selector="#zoom"
                     data-shape-input-selector="#shape"
-                    data-map-layers="<%= @projekt.map_layers_for_render.to_json %>"
+
+                    data-map-tiles-provider="<%= Rails.application.secrets.map_tiles_provider %>"
+                    data-map-tiles-provider-attribution="<%= Rails.application.secrets.map_tiles_provider_attribution %>"
+                    data-marker-latitude="<%= map_location.latitude %>"
+                    data-marker-longitude="<%= map_location.longitude %>"
+                    data-marker-color="<%= map_location.projekt.color %>"
+                    data-marker-fa-icon-class="<%= map_location.projekt.icon %>"
                     >
 </div>
 

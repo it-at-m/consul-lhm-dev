@@ -27,32 +27,33 @@
       var baseLayers = {};
       var overlayLayers = {};
 
+      // variables that define map editing behaviour
+      var adminEditor = $(element).data("admin-editor");
+      var adminShape = $(element).data("admin-shape");
+      var adminShapesColor = 'red';
+
       var mapUserShape = $(element).data("map-user-shape");
-      var mapAdminShape = $(element).data("map-admin-shape");
-
-      var markerProcessCoordinates = $(element).data("marker-process-coordinates");
-
-      var markerLatitude = $(element).data("marker-latitude");
-      var markerLongitude = $(element).data("marker-longitude");
-      var markerColor = $(element).data("marker-color");
-      var markerIconClass = $(element).data("marker-fa-icon-class")
 
       var process = $(element).data("parent-class");
+      var processCoordinates = $(element).data("process-coordinates");
+
+      // var markerLatitude = $(element).data("marker-latitude");
+      // var markerLongitude = $(element).data("marker-longitude");
+      // var markerColor = $(element).data("marker-color");
+      // var markerIconClass = $(element).data("marker-fa-icon-class")
 
       var latitudeInputSelector = $(element).data("latitude-input-selector");
       var longitudeInputSelector = $(element).data("longitude-input-selector");
       var zoomInputSelector = $(element).data("zoom-input-selector");
       var shapeInputSelector = $(element).data("shape-input-selector");
 
-      var editable = $(element).data("marker-editable");
+      var editable = $(element).data("editable");
 
       var marker = null;
-
       var markersGroup = L.markerClusterGroup();
 
-      App.Map.cleanCoordinates(element);
+      // App.Map.cleanCoordinates(element);
 
-      var adminShapesColor = 'red';
 
       // function to create a marker
       var createMarker = function(latitude, longitude, color, iconClass) {
@@ -69,6 +70,10 @@
           iconSize: [30, 30],
           iconAnchor: [15, 40]
         });
+
+        if ( adminEditor ) {
+          color = adminShapesColor;
+        }
 
         if ( color ) {
           markerIcon.options.html = '<div class="map-icon icon-' + iconClass + '" style="background-color: ' + color + '"></div>'
@@ -174,7 +179,7 @@
         gestureHandling: true,
         maxZoom: 18
       }).setView(mapCenterLatLng, zoom);
-      // App.Map.maps.push(map); # consider deleting this line
+      App.Map.maps.push(map);
 
       /* Create leaflet map end */
 
@@ -242,6 +247,44 @@
         L.control.layers(baseLayers, overlayLayers).addTo(map);
       } else if ( Object.keys(overlayLayers).length > 0 ) {
         L.control.layers({}, overlayLayers).addTo(map);
+      }
+
+      // render shape created by admin if available
+      if (adminShape && Object.keys(adminShape).length > 0) {
+        var adminShapeLayer = L.geoJSON(adminShape);
+        adminShapeLayer.pm.setOptions({ adminShape: true })
+        adminShapeLayer.setStyle({
+          color: adminShapesColor,
+          fillColor: adminShapesColor,
+          fillOpacity: 0.4,
+        })
+        adminShapeLayer.addTo(map);
+      }
+
+      // ads pins and shapes created by user
+      if (processCoordinates) {
+        processCoordinates.forEach(function(coordinates) {
+          if (App.Map.validCoordinates(coordinates)) {
+            marker = createMarker(coordinates.lat, coordinates.long, coordinates.color, coordinates.fa_icon_class);
+
+            if (process == "proposals") {
+              marker.options.id = coordinates.proposal_id
+            } else if (process == "deficiency-reports") {
+              marker.options.id = coordinates.deficiency_report_id
+            } else if (process == "projekts") {
+              marker.options.id = coordinates.projekt_id
+              marker.options.proposal_id = coordinates.proposal_id
+            } else {
+              marker.options.id = coordinates.investment_id
+            }
+
+            marker.on("click", openMarkerPopup);
+
+          } else {
+            var userShape = L.geoJSON(JSON.parse(coordinates));
+            userShape.addTo(map);
+          }
+        });
       }
 
       /* Manages base and overlay layers end */
@@ -315,25 +358,29 @@
           },
         });
 
-        // toggle consul marker button by default
-        map.pm.Toolbar.toggleButton('consulMarker', true)
-        map.on("click", moveOrPlaceMarker);
+        // // toggle consul marker button by default for regular users
+        if ( !adminEditor ) {
+          map.pm.Toolbar.toggleButton('consulMarker', true)
+          map.on("click", moveOrPlaceMarker);
+        }
 
         // reorder geoman controls
         map.pm.Toolbar.changeControlOrder([
           'consulMarker'
         ]);
 
-        // set colors of shapes when drawing - TODO: make sure it's only set for admin
-        map.pm.setPathOptions({
-          color: adminShapesColor,
-          fillColor: adminShapesColor,
-          fillOpacity: 0.4,
-        });
-        map.pm.setGlobalOptions({
-          templineStyle: { color: adminShapesColor },
-          hintlineStyle: { color: adminShapesColor, dashArray: [5, 5]  }
-        })
+        // set colors of shapes for admin
+        if ( adminEditor ) {
+          map.pm.setPathOptions({
+            color: adminShapesColor,
+            fillColor: adminShapesColor,
+            fillOpacity: 0.4,
+          });
+          map.pm.setGlobalOptions({
+            templineStyle: { color: adminShapesColor },
+            hintlineStyle: { color: adminShapesColor, dashArray: [5, 5]  }
+          })
+        }
 
         // remove past elements when new element is started
         map.on('pm:drawstart', function(e) {
@@ -351,7 +398,9 @@
           }
 
           map.pm.getGeomanLayers().forEach(function(layer) {
-            layer.remove();
+            if ( layer.pm.options.adminShape != true || adminEditor ) {
+              layer.remove();
+            }
           })
         }
 
@@ -397,19 +446,6 @@
         };
       }
 
-      // render shape created by admin
-      if (mapAdminShape && Object.keys(mapAdminShape).length > 0) {
-        var adminShapeLayer = L.geoJSON(mapAdminShape);
-        adminShapeLayer.pm.ignore = true;
-        adminShapeLayer.setStyle({
-          color: adminShapesColor,
-          fillColor: adminShapesColor,
-          fillOpacity: 0.4,
-        })
-        adminShapeLayer.addTo(map);
-        // map.fitBounds(layer.getBounds());
-      }
-
       if ( !editable ) {
         map._layersMaxZoom = 19;
         map.addLayer(markersGroup);
@@ -417,55 +453,30 @@
 
 
       // // ads a market to admin map TODO: consider removing these lines
-      // if (markerLatitude && markerLongitude && !markerProcessCoordinates) {
+      // if (markerLatitude && markerLongitude && !processCoordinates) {
       //   marker = createMarker(markerLatitude, markerLongitude, markerColor, markerIconClass);
       // }
 
-      if (editable) {
-        $('.js-select-projekt').on("click", removeMarker);
-        map.on("zoomend", function() {
-          if (marker) {
-            updateFormfields();
-          }
-        });
-      }
+      // if (editable) { TODO: consider removing these lines
+      //   $('.js-select-projekt').on("click", removeMarker);
+      //   map.on("zoomend", function() {
+      //     if (marker) {
+      //       updateFormfields();
+      //     }
+      //   });
+      // }
 
-      if (markerProcessCoordinates) {
-        markerProcessCoordinates.forEach(function(coordinates) {
-          if (App.Map.validCoordinates(coordinates)) {
-            marker = createMarker(coordinates.lat, coordinates.long, coordinates.color, coordinates.fa_icon_class);
-
-            if (process == "proposals") {
-              marker.options.id = coordinates.proposal_id
-            } else if (process == "deficiency-reports") {
-              marker.options.id = coordinates.deficiency_report_id
-            } else if (process == "projekts") {
-              marker.options.id = coordinates.projekt_id
-              marker.options.proposal_id = coordinates.proposal_id
-            } else {
-              marker.options.id = coordinates.investment_id
-            }
-
-            marker.on("click", openMarkerPopup);
-          }
-        });
-      }
 
     },
 
-    toggleMap: function() {
-      $(".map").toggle();
-      $(".js-location-map-remove-marker").toggle();
-    },
-
-    cleanCoordinates: function(element) {
-      var clean_markers, markers;
-      markers = $(element).attr("data-marker-process-coordinates");
-      if (markers != null) {
-        clean_markers = markers.replace(/-?(\*+)/g, null);
-        $(element).attr("data-marker-process-coordinates", clean_markers);
-      }
-    },
+    // cleanCoordinates: function(element) {
+    //   var clean_markers, markers;
+    //   markers = $(element).attr("data-marker-process-coordinates");
+    //   if (markers != null) {
+    //     clean_markers = markers.replace(/-?(\*+)/g, null);
+    //     $(element).attr("data-marker-process-coordinates", clean_markers);
+    //   }
+    // },
 
     validCoordinates: function(coordinates) {
       return App.Map.isNumeric(coordinates.lat) && App.Map.isNumeric(coordinates.long);

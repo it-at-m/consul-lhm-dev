@@ -1,5 +1,5 @@
 class Pages::Projekts::BudgetsTabComponent < ApplicationComponent
-  delegate :render_map, :can?, :projekt_feature?, to: :helpers
+  delegate :can?, :projekt_feature?, to: :helpers
   attr_reader :budget, :ballot, :current_user, :heading
 
   def initialize(budget, ballot, current_user)
@@ -34,6 +34,6 @@ class Pages::Projekts::BudgetsTabComponent < ApplicationComponent
       investments = budget.investments
     end
 
-    MapLocation.where(investment_id: investments).map(&:json_data)
+    MapLocation.where(investment_id: investments, shape: {}).map(&:json_data)
   end
 end
