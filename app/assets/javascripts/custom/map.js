@@ -249,7 +249,7 @@
         L.control.layers({}, overlayLayers).addTo(map);
       }
 
-      // render shape created by admin if available
+      // render shape created by admin, if available
       if (adminShape && Object.keys(adminShape).length > 0) {
         var adminShapeLayer = L.geoJSON(adminShape);
         adminShapeLayer.pm.setOptions({ adminShape: true })
@@ -260,6 +260,21 @@
         })
         adminShapeLayer.addTo(map);
       }
+
+      // adds second attribution to tell about admin pins and shapes
+      var adminShapeExplainerText = 'Alle markierten Flächen und Pins in rot sind vom System vorgegeben';
+      var adminShapeExplainer = L.control({
+        position: 'bottomleft'
+      });
+      adminShapeExplainer.onAdd = function(map) {
+        var container = L.DomUtil.create('div', 'my-attribution');
+        container.innerHTML = adminShapeExplainerText;
+        container.className += ' leaflet-control-attribution';
+        container.style.color = adminShapesColor;
+        return container;
+      }
+      adminShapeExplainer.addTo(map);
+
 
       // ads pins and shapes created by user
       if (processCoordinates) {
