@@ -78,6 +78,6 @@ class Shared::MapComponent < ApplicationComponent
     def admin_shape
       return unless projekt.present?
 
-      JSON.parse(projekt.map_location.shape).presence&.to_json || projekt.map_location.json_data.to_json
+      projekt.map_location.shape_json_data.presence || projekt.map_location.json_data.to_json
     end
 end

@@ -303,7 +303,20 @@
             marker.on("click", openMarkerPopup);
 
           } else {
-            var userShape = L.geoJSON(JSON.parse(coordinates));
+            var userShape = L.geoJSON(coordinates);
+
+            if (process == "proposals") {
+              userShape.options.id = coordinates.proposal_id
+            } else if (process == "deficiency-reports") {
+              userShape.options.id = coordinates.deficiency_report_id
+            } else if (process == "projekts") {
+              userShape.options.id = coordinates.projekt_id
+              // userShape.options.proposal_id = coordinates.proposal_id // consider deleting this line
+            } else {
+              userShape.options.id = coordinates.investment_id
+            }
+
+            userShape.on("click", openMarkerPopup);
             userShape.addTo(map);
           }
         });

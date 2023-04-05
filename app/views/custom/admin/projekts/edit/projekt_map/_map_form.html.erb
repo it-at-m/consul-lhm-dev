@@ -7,7 +7,7 @@
 
                     data-admin-editor="true"
 
-                    data-admin-shape="<%= JSON.parse(map_location.shape).presence&.to_json || map_location.json_data.to_json %>"
+                    data-admin-shape="<%= map_location.shape.presence&.to_json || map_location.json_data.to_json %>"
                     data-editable="true"
                     data-latitude-input-selector="#latitude"
                     data-longitude-input-selector="#longitude"
