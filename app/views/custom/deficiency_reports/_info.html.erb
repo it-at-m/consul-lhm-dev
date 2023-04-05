@@ -8,8 +8,7 @@
       <%= render Shared::MapComponent.new(
          mappable: @deficiency_report,
          map_location: @deficiency_report.map_location,
-         parent_class: "deficiency_report",
-         map_layers: MapLayer.general.to_json
+         parent_class: "deficiency_report"
        ) %>
     </div>
   <% end %>

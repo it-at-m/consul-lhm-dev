@@ -12,8 +12,7 @@
         mappable: @proposal,
         map_location: @proposal.map_location,
         parent_class: "proposal",
-        map_layers: @proposal.projekt.map_layers_for_render.to_json,
-        admin_shape: @proposal.projekt.map_location.shape
+        projekt: @proposal.projekt
       ) %>
     </div>
   <% end %>

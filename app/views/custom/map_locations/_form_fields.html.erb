@@ -16,8 +16,7 @@
     map_location: map_location,
     parent_class: parent_class,
     editable:	true,
-    map_layers: mappable&.projekt&.map_layers_for_render&.to_json,
-    admin_shape: mappable&.projekt&.map_location&.shape
+    projekt: mappable&.projekt
   ) %>
 <% else %>
   <%= render Shared::MapComponent.new(
@@ -25,8 +24,7 @@
     map_location: map_location,
     parent_class: parent_class,
     editable: true,
-    map_layers: mappable&.projekt&.map_layers_for_render&.to_json,
-    admin_shape: mappable&.projekt&.map_location&.shape
+    projekt: mappable&.projekt
   ) %>
 <% end %>
 

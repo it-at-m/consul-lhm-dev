@@ -13,8 +13,7 @@
          map_location: projekt.map_location,
          parent_class: "proposals_sidebar",
          process_coordinates: MapLocation.where(projekt_id: projekt.id).map(&:json_data),
-         map_layers: projekt.map_layers_for_render.to_json,
-         admin_shape: projekt.map_location.shape
+         projekt: projekt
        ) %>
     </div>
   <% end %>

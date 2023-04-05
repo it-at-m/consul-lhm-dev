@@ -1,6 +1,6 @@
 class Shared::MapComponent < ApplicationComponent
   attr_reader :mappable, :map_location, :parent_class, :editable,
-              :process_coordinates, :map_layers, :admin_shape
+              :process_coordinates, :projekt
   delegate :map_location_latitude, :map_location_longitude, :map_location_zoom,
            :map_location_input_id, to: :helpers
 
@@ -10,16 +10,14 @@ class Shared::MapComponent < ApplicationComponent
     parent_class:,
     editable: false,
     process_coordinates: nil,
-    map_layers: nil,
-    admin_shape: nil
+    projekt: nil
   )
     @mappable = mappable
     @map_location = map_location || MapLocation.new
     @parent_class = parent_class
     @editable = editable
     @process_coordinates = process_coordinates || get_process_coordinates
-    @map_layers = map_layers
-    @admin_shape = admin_shape
+    @projekt = projekt
   end
 
   def map_div
@@ -67,5 +65,19 @@ class Shared::MapComponent < ApplicationComponent
       else
         []
       end
+    end
+
+    def map_layers
+      if projekt.present?
+        projekt.map_layers_for_render.to_json
+      else
+        MapLayer.general.to_json
+      end
+    end
+
+    def admin_shape
+      return unless projekt.present?
+
+      JSON.parse(projekt.map_location.shape).presence&.to_json || projekt.map_location.json_data.to_json
     end
 end

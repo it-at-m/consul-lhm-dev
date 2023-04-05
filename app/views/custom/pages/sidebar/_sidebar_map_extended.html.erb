@@ -1,11 +1,9 @@
 <div class="extended-sidebar-map-wrapper">
   <div class="extended-sidebar-map">
     <%= render Shared::MapComponent.new(
-        mappable: @current_projekt,
         map_location: @current_projekt.map_location,
         parent_class: "proposals_sidebar_extended",
-        map_layers: @current_projekt.map_layers_for_render.to_json,
-        admin_shape: @current_projekt.map_location.shape
+        projekt: @current_projekt
     ) %>
 
     <button class="close-button" aria-label="Close modal" type="button" onclick="$('#extended-sidebar-map').html('');$('#extended-sidebar-map').css('position', 'relative');">

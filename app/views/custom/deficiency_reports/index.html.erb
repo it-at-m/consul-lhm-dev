@@ -38,8 +38,7 @@
     <div class="map deficiency-reports-map">
       <%= render Shared::MapComponent.new(
         parent_class: "deficiency-reports",
-        process_coordinates: @deficiency_reports_coordinates,
-        map_layers: MapLayer.general.to_json
+        process_coordinates: @deficiency_reports_coordinates
       ) %>
     </div>
     <div class="expand-overview-map-wrapper">
