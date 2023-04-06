@@ -12,7 +12,6 @@
       <%= render Shared::MapComponent.new(
          map_location: projekt.map_location,
          parent_class: "proposals_sidebar",
-         process_coordinates: MapLocation.where(projekt_id: projekt.id).map(&:json_data),
          projekt: projekt
        ) %>
     </div>

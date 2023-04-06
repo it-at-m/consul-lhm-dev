@@ -32,8 +32,6 @@
       var adminShape = $(element).data("admin-shape");
       var adminShapesColor = 'red';
 
-      var mapUserShape = $(element).data("map-user-shape");
-
       var process = $(element).data("parent-class");
       var processCoordinates = $(element).data("process-coordinates");
 
@@ -51,9 +49,76 @@
 
       var marker = null;
       var markersGroup = L.markerClusterGroup();
+      var markerIcon = L.divIcon({
+        className: "map-marker",
+        iconSize: [30, 30],
+        iconAnchor: [15, 40]
+      });
 
-      // App.Map.cleanCoordinates(element);
 
+      // App.Map.cleanCoordinates(element); TODO: consider removing this function
+
+
+      /* Create leaflet map start */
+
+      var map = L.map(element.id, {
+        gestureHandling: true,
+        maxZoom: 18
+      }).setView(mapCenterLatLng, zoom);
+      App.Map.maps.push(map);
+
+      /* Create leaflet map end */
+
+
+      /* Leaflet basic plugins start */
+
+      // Leaflet.Locate plugin: ads control to map
+      L.control.locate({icon: 'fa fa-map-marker'}).addTo(map);
+
+      // Leaflet GeoSearch plugin: adds control to map
+      var searchControl = new GeoSearch.GeoSearchControl({
+        provider: new GeoSearch.OpenStreetMapProvider(),
+        style: 'bar',
+        showMarker: false,
+        searchLabel: 'Nach Adresse suchen',
+        notFoundMessage: 'Entschuldigung! Die Adresse wurde nicht gefunden.',
+      });
+      map.addControl(searchControl);
+
+      // Leaflet.Deflate plugin: replaces shapes with markers when they are too small
+      const deflateFeatures = L.deflate({
+        minSize: 10,
+        markerLayer: markersGroup,
+        markerOptions: function(shape) {
+          return {
+            icon: markerIcon,
+            id: getProcessId(shape)
+          }
+        }
+      })
+
+      deflateFeatures.addTo(map);
+
+      function getProcessId(shape) {
+        var id;
+
+        if (process == "proposals") {
+          id = shape.feature.proposal_id
+        } else if (process == "deficiency-reports") {
+          id = shape.feature.deficiency_report_id
+        } else if (process == "projekts") {
+          id = shape.feature.projekt_id
+        } else {
+          id = shape.feature.investment_id
+        }
+
+        return id
+      }
+
+      /* Leaflet basic plugins end */
+
+
+      /* Function definitions start */
 
       // function to create a marker
       var createMarker = function(latitude, longitude, color, iconClass) {
@@ -64,12 +129,6 @@
         };
 
         var markerLatLng = new L.LatLng(latitude, longitude);
-
-        var markerIcon = L.divIcon({
-          className: "map-marker",
-          iconSize: [30, 30],
-          iconAnchor: [15, 40]
-        });
 
         if ( adminEditor ) {
           color = adminShapesColor;
@@ -173,16 +232,6 @@
         }
       };
 
-
-      /* Create leaflet map start */
-
-      var map = L.map(element.id, {
-        gestureHandling: true,
-        maxZoom: 18
-      }).setView(mapCenterLatLng, zoom);
-      App.Map.maps.push(map);
-
-      /* Create leaflet map end */
 
 
 
@@ -295,7 +344,7 @@
               marker.options.id = coordinates.deficiency_report_id
             } else if (process == "projekts") {
               marker.options.id = coordinates.projekt_id
-              marker.options.proposal_id = coordinates.proposal_id
+              // marker.options.proposal_id = coordinates.proposal_id
             } else {
               marker.options.id = coordinates.investment_id
             }
@@ -317,6 +366,7 @@
             }
 
             userShape.on("click", openMarkerPopup);
+            userShape.addTo(deflateFeatures);
             userShape.addTo(map);
           }
         });
@@ -325,25 +375,7 @@
       /* Manages base and overlay layers end */
 
 
-
-      /* Leaflet plugins start */
-
-      // Leaflet.Locate plugin: ads control to map
-      L.control.locate({icon: 'fa fa-map-marker'}).addTo(map);
-
-
-      // Leaflet GeoSearch plugin: adds control to map
-      var searchControl = new GeoSearch.GeoSearchControl({
-        provider: new GeoSearch.OpenStreetMapProvider(),
-        style: 'bar',
-        showMarker: false,
-        searchLabel: 'Nach Adresse suchen',
-        notFoundMessage: 'Entschuldigung! Die Adresse wurde nicht gefunden.',
-      });
-      map.addControl(searchControl);
-
-
-      // Leaflet-Geoman plugin: adds and customizes controls to map
+      /* Leaflet-Geoman plugin: config start */
 
       // configure editor controls
       if ( editable ) {
@@ -442,6 +474,11 @@
         // save newly created shape to form
         map.on('pm:create', function(e) {
           var layer = e.layer;
+
+          if (e.shape == 'Circle') {
+            layer.options.shape = 'Circle'
+          }
+
           updateShapeFieldInForm(layer);
 
           layer.on('pm:edit', function(e) {
@@ -474,12 +511,19 @@
 
         // update shape field in form
         var updateShapeFieldInForm = function(layer) {
+          if (layer.options.shape == 'Circle') {
+            layer = L.PM.Utils.circleToPolygon(layer, 60)
+          }
+
           var shape = layer.toGeoJSON();
           var shapeString = JSON.stringify(shape);
           console.log(shapeString);
           $(shapeInputSelector).val(shapeString);
         };
       }
+
+      /* Leaflet-Geoman plugin: config start */
+
 
       if ( !editable ) {
         map._layersMaxZoom = 19;
