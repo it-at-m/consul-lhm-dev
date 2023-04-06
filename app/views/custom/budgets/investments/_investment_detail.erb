@@ -1,6 +1,11 @@
 <% if feature?(:map) && map_location_available?(@investment.map_location) %>
   <div class="">
-    <%= render_map(investment.map_location, "budget_investment", false, nil, MapLocation.where(investment_id: investment.id).map(&:json_data), investment&.projekt&.map_layers_for_render.to_json) %>
+    <%= render Shared::MapComponent.new(
+       map_location: investment.map_location,
+       parent_class: "budget_investment",
+       process_coordinates: MapLocation.where(investment_id: investment.id).map(&:json_data),
+       projekt: investment&.projekt
+    ) %>
   </div>
 <% end %>
 

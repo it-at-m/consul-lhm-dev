@@ -4,11 +4,16 @@
           @proposal.projekt,
           feature?(:map),
           Flag.flagged?(current_user, @proposal),
-          "show_info" ] do %>
+          "show_info"] do %>
 
   <% if feature?(:map) && map_location_available?(@proposal.map_location) %>
     <div class="margin-bottom not-print">
-      <%= render_map(@proposal.map_location, "proposal", false, nil, MapLocation.where(proposal_id: @proposal.id).map(&:json_data), @proposal.projekt.map_layers_for_render.to_json) %>
+      <%= render Shared::MapComponent.new(
+        mappable: @proposal,
+        map_location: @proposal.map_location,
+        parent_class: "proposal",
+        projekt: @proposal.projekt
+      ) %>
     </div>
   <% end %>
 

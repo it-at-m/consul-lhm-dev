@@ -2,5 +2,6 @@ $("#extended-sidebar-map").html("<%= j render("pages/sidebar/sidebar_map_extende
 $("#extended-sidebar-map").css('position', 'fixed');
 
 $('#extended-sidebar-map').foundation();
-App.Map.destroy();
-App.Map.initialize();
+
+var map = document.querySelector("#extended-sidebar-map *[data-map]")
+App.Map.initializeMap(map);

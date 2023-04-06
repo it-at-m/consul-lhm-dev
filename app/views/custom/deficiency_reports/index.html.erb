@@ -36,7 +36,10 @@
 
   <% if feature?(:map) %>
     <div class="map deficiency-reports-map">
-      <%= render_map(nil, "deficiency-reports", false, nil, @deficiency_reports_coordinates, MapLayer.general.to_json) %>
+      <%= render Shared::MapComponent.new(
+        parent_class: "deficiency-reports",
+        process_coordinates: @deficiency_reports_coordinates
+      ) %>
     </div>
     <div class="expand-overview-map-wrapper">
       <div class='expand-overview-map small js-expand-overview-map wide'>

@@ -12,7 +12,11 @@
 
   <div class="projekts-map-wrapper">
     <div class="map projekts-map not-print">
-      <%= render_map(MapLocation.new(latitude: Setting['map.latitude'], longitude: Setting['map.longitude'], zoom: Setting['map.zoom']), "projekts", false, nil, @map_coordinates, MapLayer.general.to_json) %>
+      <%= render Shared::MapComponent.new(
+         map_location: MapLocation.new(latitude: Setting['map.latitude'], longitude: Setting['map.longitude'], zoom: Setting['map.zoom']),
+         parent_class: "projekts",
+         process_coordinates: @map_coordinates,
+       ) %>
     </div>
     <div class='expand-overview-map-wrapper'>
       <div class='expand-overview-map small js-expand-overview-map not-print wide'>
