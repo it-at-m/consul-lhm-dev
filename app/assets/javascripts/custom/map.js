@@ -441,7 +441,7 @@
           map.pm.setPathOptions({
             color: adminShapesColor,
             fillColor: adminShapesColor,
-            fillOpacity: 0.4,
+            fillOpacity: 0.4
           });
           map.pm.setGlobalOptions({
             templineStyle: { color: adminShapesColor },
@@ -517,7 +517,10 @@
 
           var shape = layer.toGeoJSON();
           var shapeString = JSON.stringify(shape);
-          console.log(shapeString);
+
+          $(latitudeInputSelector).val(map.getCenter().lat);
+          $(longitudeInputSelector).val(map.getCenter().lng);
+          $(zoomInputSelector).val(map.getZoom());
           $(shapeInputSelector).val(shapeString);
         };
       }
