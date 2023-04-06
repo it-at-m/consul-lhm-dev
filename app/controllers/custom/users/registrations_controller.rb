@@ -26,9 +26,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
                                    :first_name, :last_name,
                                    :city_name, :plz, :street_name, :street_number, :street_number_extension,
                                    :registered_address_id,
-                                   # :form_registered_address_city_id,
-                                   # :form_registered_address_street_id,
-                                   # :form_registered_address_id,
                                    :gender, :date_of_birth,
                                    :document_type, :document_last_digits,
                                    :password, :password_confirmation,
@@ -42,7 +39,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       params[:user][:form_registered_address_street_id] = params[:form_registered_address_street_id]
       params[:user][:form_registered_address_id] = params[:form_registered_address_id]
 
-      if params[:form_registered_address_id].present? && params[:form_registered_address_id] != "0"
+      if params[:form_registered_address_id].present?
         registered_address = RegisteredAddress.find(params[:form_registered_address_id])
 
         params[:user][:registered_address_id] = registered_address.id

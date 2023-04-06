@@ -25,9 +25,9 @@ RSpec.configure do |config|
     metadata[:type] = :component
   end
 
-  # config.before(:suite) do
-  #   Rails.application.load_seed
-  # end
+  config.before(:suite) do
+    Rails.application.load_seed
+  end
 
   # config.before do |example|
   #   Globalize.set_fallbacks_to_all_available_locales

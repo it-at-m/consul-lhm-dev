@@ -2,8 +2,12 @@
   $("#no-registered-address").css("display", "none");
   $("#registered-address-street-field").css("display", "block");
   $("#registered-address-street-field").html("<%= j render("custom/users/registrations/partials/street_selector", registered_address_streets: @registered_address_streets) %>");
-<% else %>
+<% elsif params[:form_registered_address_city_id] == "0" %>
   $("#no-registered-address").css("display", "block");
+  $("#registered-address-street-field").css("display", "none");
+  $("#registered-address-field").css("display", "none");
+<% elsif params[:form_registered_address_city_id] == "" %>
+  $("#no-registered-address").css("display", "none");
   $("#registered-address-street-field").css("display", "none");
   $("#registered-address-field").css("display", "none");
 <% end %>

@@ -75,8 +75,7 @@ describe "User verification" do
     context "when user's address is not among the existing registered addresses" do
       it "send verification request and does not link user to registered address" do
         fill_in_mandatory_fields_for_verification(first_name: " John ", last_name: "Doe")
-        select "Teststadt", from: "Wohnort"
-        select "Nicht in der Liste enthalten", from: "Straße"
+        select "Nicht in der Liste enthalten", from: "Wohnort"
 
         fill_in "Stadt", with: "Bremen"
         fill_in "Postleitzahl", with: "33333"
@@ -103,8 +102,7 @@ describe "User verification" do
     context "when user's address is not among the existing registered addresses and is not valid" do
       it "does not send verification request" do
         fill_in_mandatory_fields_for_verification(first_name: " John ", last_name: "Doe")
-        select "Teststadt", from: "Wohnort"
-        select "Nicht in der Liste enthalten", from: "Straße"
+        select "Nicht in der Liste enthalten", from: "Wohnort"
 
         fill_in "Postleitzahl", with: "33333"
         fill_in "Straße", with: "Haupstraße"
