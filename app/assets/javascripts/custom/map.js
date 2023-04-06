@@ -344,7 +344,7 @@
               marker.options.id = coordinates.deficiency_report_id
             } else if (process == "projekts") {
               marker.options.id = coordinates.projekt_id
-              // marker.options.proposal_id = coordinates.proposal_id
+              marker.options.proposal_id = coordinates.proposal_id // proposals on projekt page
             } else {
               marker.options.id = coordinates.investment_id
             }
@@ -360,7 +360,7 @@
               userShape.options.id = coordinates.deficiency_report_id
             } else if (process == "projekts") {
               userShape.options.id = coordinates.projekt_id
-              // userShape.options.proposal_id = coordinates.proposal_id // consider deleting this line
+              userShape.options.proposal_id = coordinates.proposal_id // proposals on projekt page
             } else {
               userShape.options.id = coordinates.investment_id
             }
