@@ -32,6 +32,7 @@
       var adminShape = $(element).data("admin-shape");
       var adminShapesColor = 'red';
 
+      // variables that define location and tooltips of process coordinates (both pins and shapes)
       var process = $(element).data("parent-class");
       var processCoordinates = $(element).data("process-coordinates");
 
@@ -232,6 +233,30 @@
         }
       };
 
+      // function to add event listeners to the shape layer
+      function addEventListenersToShapeLayer(layer) {
+        layer.on('pm:edit', function(e) {
+          updateShapeFieldInForm(e.layer);
+        })
+
+        layer.on('pm:dragend', function(e) {
+          updateShapeFieldInForm(e.layer);
+        })
+
+        // allows multiple cuts
+        layer.on('pm:cut', function(e) {
+          if (typeof(e.layer.getLatLngs) == 'function') {
+            e.originalLayer.setLatLngs(e.layer.getLatLngs());
+            e.originalLayer.addTo(map);
+            e.originalLayer._pmTempLayer = false;
+
+            e.layer._pmTempLayer = true;
+            e.layer.remove();
+          }
+        })
+      }
+
+
 
 
 
@@ -299,7 +324,7 @@
         L.control.layers({}, overlayLayers).addTo(map);
       }
 
-      // render shape created by admin, if available
+      // render marker or shape created by admin, if available
       if (adminShape) {
         if (App.Map.validCoordinates(adminShape)) {
           marker = createMarker(adminShape.lat, adminShape.long, adminShapesColor, adminShape.fa_icon_class);
@@ -312,6 +337,9 @@
             fillColor: adminShapesColor,
             fillOpacity: 0.4,
           })
+          if (editable) {
+            addEventListenersToShapeLayer(adminShapeLayer)
+          }
           adminShapeLayer.addTo(map);
 
         }
@@ -480,26 +508,7 @@
           }
 
           updateShapeFieldInForm(layer);
-
-          layer.on('pm:edit', function(e) {
-            updateShapeFieldInForm(e.layer);
-          })
-
-          layer.on('pm:dragend', function(e) {
-            updateShapeFieldInForm(e.layer);
-          })
-
-          // allows multiple cuts
-          layer.on('pm:cut', function(e) {
-            if (typeof(e.layer.getLatLngs) == 'function') {
-              e.originalLayer.setLatLngs(e.layer.getLatLngs());
-              e.originalLayer.addTo(map);
-              e.originalLayer._pmTempLayer = false;
-
-              e.layer._pmTempLayer = true;
-              e.layer.remove();
-            }
-          })
+          addEventListenersToShapeLayer(layer)
         })
 
         // update form fields when map center changes // TODO: should only work for admins
