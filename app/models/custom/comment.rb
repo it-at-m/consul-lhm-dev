@@ -4,7 +4,7 @@ class Comment < ApplicationRecord
   scope :seen, -> { where.not(ignored_flag_at: nil) }
   scope :unseen, -> { where(ignored_flag_at: nil) }
 
-  delegate :comments_allowed?, to: :projekt
+  delegate :comments_allowed?, to: :projekt, allow_nil: true
 
   def self.moderatable_by_projekt_manager(projekt_manager_id)
     managed_projekt_ids = ProjektManager.find(projekt_manager_id).projekt_ids

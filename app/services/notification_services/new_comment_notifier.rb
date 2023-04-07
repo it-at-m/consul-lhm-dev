@@ -16,7 +16,7 @@ module NotificationServices
         administrator_ids = User.joins(:administrator).where(adm_email_on_new_comment: true).ids
         moderator_ids = User.joins(:moderator).where(adm_email_on_new_comment: true).ids
         projekt_manager_ids = User.joins(projekt_manager: :projekts).where(adm_email_on_new_comment: true)
-          .where(projekt_managers: { projekts: { id: @comment.projekt.id }}).ids
+          .where(projekt_managers: { projekts: { id: @comment&.projekt&.id }}).ids
 
         [administrator_ids, moderator_ids, projekt_manager_ids].flatten.uniq
       end
