@@ -44,6 +44,7 @@
 
       // defines if it's allowed to edit map
       var editable = $(element).data("editable");
+      var enableGeomanControls = $(element).data("enable-geoman-controls");
 
       // biolerplate for marker
       var marker = null;
@@ -397,6 +398,19 @@
           drawText: false,
           removalMode: false
         });
+        if ( !enableGeomanControls ) {
+          map.pm.addControls({
+            drawPolyline: false,
+            drawRectangle: false,
+            drawPolygon: false,
+            drawCircle: false,
+            editMode: false,
+            dragMode: false,
+            cutPolygon: false,
+            rotateMode: false,
+            oneBlock: true
+          })
+        }
 
         // add consul marker to geoman controls
         map.pm.Toolbar.createCustomControl({
@@ -423,9 +437,20 @@
           block: 'edit',
           onClick: function() {
             removeShapesAndMarkers();
-            map.off("click", moveOrPlaceMarker);
-            map.pm.Toolbar.toggleButton('clearMap', true);
+            if ( enableGeomanControls ) {
+              map.pm.Toolbar.toggleButton('clearMap', true);
+              map.off("click", moveOrPlaceMarker);
+            } else {
+              map.pm.Toolbar.toggleButton('clearMap', false);
+              map.pm.Toolbar.toggleButton('consulMarker', true);
+              map.on("click", moveOrPlaceMarker);
+            }
           },
+          afterClick: function() {
+            if (!enableGeomanControls) {
+              $(".control-icon.leaflet-pm-icon-delete").closest(".active").removeClass("active")
+            }
+          } 
         });
 
         // toggle consul marker button by default for regular users

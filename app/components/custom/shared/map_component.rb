@@ -2,7 +2,7 @@ class Shared::MapComponent < ApplicationComponent
   attr_reader :mappable, :map_location, :parent_class, :editable,
               :process_coordinates, :projekt
   delegate :map_location_latitude, :map_location_longitude, :map_location_zoom,
-           :map_location_input_id, to: :helpers
+           :map_location_input_id, :projekt_feature?, to: :helpers
 
   def initialize(
     mappable: nil,
@@ -48,7 +48,8 @@ class Shared::MapComponent < ApplicationComponent
         zoom_input_selector: "##{map_location_input_id(parent_class, "zoom")}",
         shape_input_selector: "##{map_location_input_id(parent_class, "shape")}",
 
-        editable: editable
+        editable: editable,
+        enable_geoman_controls: enable_geoman_controls?
       }
 
       options[:map_layers] = map_layers if map_layers.present?
@@ -77,5 +78,22 @@ class Shared::MapComponent < ApplicationComponent
       return unless projekt.present?
 
       projekt.map_location.shape_json_data.presence || projekt.map_location.json_data.to_json
+    end
+
+    def enable_geoman_controls?
+      return false unless editable
+
+      if mappable.is_a? DeficiencyReport
+        Setting["deficiency_reports.enable_geoman_controls_in_maps"].present?
+
+      elsif projekt.present? && parent_class == "proposal"
+        projekt_feature?(projekt, "proposals.enable_geoman_controls_in_maps")
+
+      elsif projekt.present? && parent_class == "budget_investment"
+        projekt_feature?(projekt, "budgets.enable_geoman_controls_in_maps")
+
+      else
+        false
+      end
     end
 end

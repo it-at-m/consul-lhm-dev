@@ -80,6 +80,7 @@ class ProjektSetting < ApplicationRecord
         "projekt_feature.proposals.enable_summary": '',
         "projekt_feature.proposals.allow_voting": 'active',
         "projekt_feature.proposals.enable_external_video": 'active',
+        "projekt_feature.proposals.enable_geoman_controls_in_maps": 'active',
 
         "projekt_feature.proposal_options.votes_for_proposal_success": 10000,
 
@@ -102,6 +103,7 @@ class ProjektSetting < ApplicationRecord
         "projekt_feature.budgets.only_admins_create_investment_proposals": '',
         "projekt_feature.budgets.show_map": 'active',
         "projekt_feature.budgets.show_results_after_first_vote": '',
+        "projekt_feature.budgets.enable_geoman_controls_in_maps": 'active',
 
         "projekt_feature.questions.show_questions_list": '',
 

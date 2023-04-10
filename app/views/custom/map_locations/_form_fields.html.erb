@@ -5,6 +5,7 @@
 
 <% if mappable.present?  && !mappable.respond_to?(:projekt) %>
   <%= render Shared::MapComponent.new(
+    mappable: mappable,
     map_location: map_location,
     parent_class: parent_class,
     editable: true
@@ -16,7 +17,7 @@
     map_location: map_location,
     parent_class: parent_class,
     editable:	true,
-    projekt: mappable&.projekt
+    projekt: projekt
   ) %>
 <% else %>
   <%= render Shared::MapComponent.new(
@@ -24,7 +25,7 @@
     map_location: map_location,
     parent_class: parent_class,
     editable: true,
-    projekt: mappable&.projekt
+    projekt: projekt
   ) %>
 <% end %>
 
