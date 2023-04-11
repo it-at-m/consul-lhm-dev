@@ -93,8 +93,8 @@
                 <%= f.text_field :street_number, label: false %>
               </div>
               <div class="small-12 medium-6 column">
-                <%= f.text_field :street_number_extension,
-                  placeholder: t("custom.devise_views.users.registrations.new.street_number_extension_label") %>
+                <%= f.label :street_number, t("custom.verification.residence.new.street_number_extension") %>
+                <%= f.text_field :street_number_extension, label: false %>
               </div>
             </div>
           </div>
@@ -171,7 +171,7 @@
 
           </div>
 
-          <div class="small-12 medium-3 clear">
+          <div class="small-12 medium-6 clear">
             <%= f.submit t("verification.residence.new.verify_residence"),
                          id: "new_residence_submit",
                          class: "button success expanded" %>
