@@ -181,21 +181,16 @@
         } else if ( process == "deficiency-reports") {
           route = "/deficiency_reports/" + e.target.options.id + "/json_data"
         } else if ( process == "projekts") {
-          if (e.target.options.proposal_id) {
-            route = "/proposals/" + e.target.options.proposal_id + "/json_data"
-          }
-          else {
-            route = "/projekts/" + e.target.options.id + "/json_data"
-          }
+          route = "/projekts/" + e.target.options.id + "/json_data"
         } else {
           route = "/investments/" + e.target.options.id + "/json_data"
         }
 
         marker = e.target;
-          $.ajax(route, {
-            type: "GET",
-            dataType: "json",
-            success: function(data) {
+        $.ajax(route, {
+          type: "GET",
+          dataType: "json",
+          success: function(data) {
             e.target.bindPopup(getPopupContent(data)).openPopup();
           }
         });
@@ -306,6 +301,13 @@
       if (adminShape) {
         if (App.Map.validCoordinates(adminShape)) {
           marker = createMarker(adminShape.lat, adminShape.long, adminShapesColor, adminShape.fa_icon_class);
+          if (!editable) {
+            marker.on("click", function() {
+              if (!this._popup) {
+                this.bindPopup('Alle markierten Flächen und Pins in rot sind vom System vorgegeben').openPopup();
+              }
+            });
+          }
 
         } else if (Object.keys(adminShape).length > 0) {
           var adminShapeLayer = L.geoJSON(adminShape);
@@ -315,11 +317,18 @@
             fillColor: adminShapesColor,
             fillOpacity: 0.4,
           })
+
           if (editable) {
             addEventListenersToShapeLayer(adminShapeLayer)
+          } else {
+            adminShapeLayer.on("click", function() {
+              if (!this._popup) {
+                this.bindPopup('Alle markierten Flächen und Pins in rot sind vom System vorgegeben').openPopup();
+              }
+            });
           }
-          adminShapeLayer.addTo(map);
 
+          adminShapeLayer.addTo(map);
         }
       }
 
@@ -350,7 +359,6 @@
               marker.options.id = coordinates.deficiency_report_id
             } else if (process == "projekts") {
               marker.options.id = coordinates.projekt_id
-              marker.options.proposal_id = coordinates.proposal_id // proposals on projekt page
             } else {
               marker.options.id = coordinates.investment_id
             }
@@ -358,7 +366,11 @@
             marker.on("click", openMarkerPopup);
 
           } else {
-            var userShape = L.geoJSON(coordinates);
+            var userShape = L.geoJSON(coordinates, {
+              style: function(feature) {
+                return { color: coordinates.color };
+              }
+            });
 
             if (process == "proposals") {
               userShape.options.id = coordinates.proposal_id
@@ -366,7 +378,6 @@
               userShape.options.id = coordinates.deficiency_report_id
             } else if (process == "projekts") {
               userShape.options.id = coordinates.projekt_id
-              userShape.options.proposal_id = coordinates.proposal_id // proposals on projekt page
             } else {
               userShape.options.id = coordinates.investment_id
             }

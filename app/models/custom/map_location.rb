@@ -26,7 +26,8 @@ class MapLocation < ApplicationRecord
       investment_id: investment_id,
       proposal_id: proposal_id,
       projekt_id: projekt_id,
-      deficiency_report_id: deficiency_report_id
+      deficiency_report_id: deficiency_report_id,
+      color: get_pin_color
     })
   end
 
@@ -42,7 +43,7 @@ class MapLocation < ApplicationRecord
     elsif @deficiency_report.present?
       @deficiency_report.category.color
     elsif @projekt.present?
-      @projekt.color
+      "red"
     end
   end
 
