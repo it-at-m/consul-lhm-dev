@@ -6,6 +6,7 @@
                     data-map-layers="<%= @projekt.map_layers_for_render.to_json %>"
 
                     data-admin-editor="true"
+                    data-enable-geoman-controls="true"
 
                     data-admin-shape="<%= map_location.shape.presence&.to_json || map_location.json_data.to_json %>"
                     data-editable="true"
