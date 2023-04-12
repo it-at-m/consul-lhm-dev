@@ -274,7 +274,8 @@ de:
             projekt_notification_phase: Benachrichtigungen
             proposal_phase: Vorschläge
             question_phase: Kurzumfrage
-            restriction: Partizipationsbeschränkung
+            geo_restriction_title: Gebietsbeschränkung
+            extended_geo_restriction_title: Zusatzliche individuelle Gebietsbeschränkungen
             start_date: Anfangsdatum
             standard_element: Standardelement
             voting_manage: Abstimmungen verwalten
