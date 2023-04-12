@@ -50,17 +50,23 @@ class User < ApplicationRecord
     not_transferred_user_ids = []
 
     User.find_each do |user|
-      next if user.city_street.blank?
+      next if user.city_street.blank? && user.street_name.blank?
+
+      street_name_selector = if user.city_street.present?
+                               user.city_street.name.split()[0].downcase
+                             elsif user.street_name.present?
+                               user.street_name.split()[0].downcase
+                             end
 
       matching_registered_addresses = RegisteredAddress.joins(:registered_address_street)
         .where("LOWER(registered_address_streets.name) LIKE ? AND CONCAT(street_number,LOWER(street_number_extension)) = ?",
-               "#{user.city_street.name.split()[0].downcase}%", user.street_number&.downcase)
+               "#{street_name_selector}%", user.street_number&.downcase)
 
       next if matching_registered_addresses.blank?
 
       matching_registered_addresses.map do |ra|
         puts "Processing user with id: #{user.id}"
-        puts "Transfer \"CityStreet: #{user.city_street.name} #{user.street_number}\" to" \
+        puts "Transfer \"CityStreet: #{user.city_street&.name || user.street_name } #{user.street_number}\" to" \
           " \"RegisteredAddress: #{ra.registered_address_street.name} #{ra.street_number}#{ra.street_number_extension}\"? (y/n)"
         answer = gets.chomp
 
