@@ -57,7 +57,8 @@ module PollsHelper
                verify: link_to_verify_account,
                city: Setting["org_name"],
                geozones: voting_phase.geozone_restrictions_formatted,
-               age_restriction: voting_phase.age_restriction_formatted
+               age_restriction: voting_phase.age_restriction_formatted,
+               restricted_streets: voting_phase.street_restrictions_formatted
               ))
     end
   end

@@ -11,7 +11,8 @@ module LegislationHelper
                verify: link_to_verify_account,
                city: Setting["org_name"],
                geozones: legislation_phase.geozone_restrictions_formatted,
-               age_restriction: legislation_phase.age_restriction_formatted
+               age_restriction: legislation_phase.age_restriction_formatted,
+               restricted_streets: legislation_phase.street_restrictions_formatted
               ))
     end
   end

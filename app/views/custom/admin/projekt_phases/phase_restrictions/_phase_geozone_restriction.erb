@@ -40,7 +40,7 @@
 
       <div class="projekt-phase-street-selector projekt-phase-geo-restriction-selector" style="column-count: 1;">
         <div id="projekt-phase-selected-streets">
-          <% projekt_phase.city_streets.each do |street| %>
+          <% projekt_phase.registered_address_streets.each do |street| %>
             <div class='selected-street' data-street-id=<%= street.id %>>
               <%= street.name_with_plz %>
               <i class='fas fa-times js-deselect-street'></i>
@@ -48,10 +48,10 @@
           <% end %>
         </div>
 
-        <%= select_tag :streets, options_from_collection_for_select(CityStreet.all, :id, :name_with_plz), class: 'js-select-street', prompt: 'Bitte wählen' %>
+        <%= select_tag :streets, options_from_collection_for_select(RegisteredAddress::Street.all, :id, :name_with_plz), class: "js-select-street", prompt: "Bitte wählen" %>
 
         <div class='hide'>
-          <%= f.collection_check_boxes :city_street_ids, CityStreet.all, :id, :name %>
+          <%= f.collection_check_boxes :registered_address_street_ids, RegisteredAddress::Street.all, :id, :name %>
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_31_141612) do
+ActiveRecord::Schema.define(version: 2023_04_11_154616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1834,6 +1834,15 @@ ActiveRecord::Schema.define(version: 2023_03_31_141612) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "registered_address_street_projekt_phases", force: :cascade do |t|
+    t.bigint "registered_address_street_id"
+    t.bigint "projekt_phase_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["projekt_phase_id"], name: "index_ras_projekt_phases_on_projekt_phase_id"
+    t.index ["registered_address_street_id"], name: "index_ras_projekt_phases_on_ras_id"
+  end
+
   create_table "registered_address_streets", force: :cascade do |t|
     t.string "name"
     t.string "plz"
@@ -2406,6 +2415,8 @@ ActiveRecord::Schema.define(version: 2023_03_31_141612) do
   add_foreign_key "projekts", "projekts", column: "parent_id"
   add_foreign_key "proposals", "communities"
   add_foreign_key "proposals", "projekts"
+  add_foreign_key "registered_address_street_projekt_phases", "projekt_phases"
+  add_foreign_key "registered_address_street_projekt_phases", "registered_address_streets"
   add_foreign_key "registered_addresses", "registered_address_streets"
   add_foreign_key "related_content_scores", "related_contents"
   add_foreign_key "related_content_scores", "users"

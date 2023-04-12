@@ -34,7 +34,7 @@ module ProjektPhaseActions
         :active, :start_date, :end_date,
         :verification_restricted, :age_restriction_id,
         :geozone_restricted, :registered_address_grouping_restriction,
-        geozone_restriction_ids: [], city_street_ids: [],
+        geozone_restriction_ids: [], registered_address_street_ids: [],
         registered_address_grouping_restrictions: registered_address_grouping_restrictions_params_to_permit)
     end
 
