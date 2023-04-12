@@ -45,6 +45,43 @@ class User < ApplicationRecord
   validates :terms_data_protection, acceptance: { allow_nil: false }, on: :create
   validates :terms_general, acceptance: { allow_nil: false }, on: :create
 
+  def self.transfer_city_streets # delete later
+    transferred_user_ids = []
+    not_transferred_user_ids = []
+
+    User.find_each do |user|
+      next if user.city_street.blank?
+
+      matching_registered_addresses = RegisteredAddress.joins(:registered_address_street)
+        .where("LOWER(registered_address_streets.name) LIKE ? AND CONCAT(street_number,LOWER(street_number_extension)) = ?",
+               "#{user.city_street.name.split()[0].downcase}%", user.street_number&.downcase)
+
+      next if matching_registered_addresses.blank?
+
+      matching_registered_addresses.map do |ra|
+        puts "Processing user with id: #{user.id}"
+        puts "Transfer \"CityStreet: #{user.city_street.name} #{user.street_number}\" to" \
+          " \"RegisteredAddress: #{ra.registered_address_street.name} #{ra.street_number}#{ra.street_number_extension}\"? (y/n)"
+        answer = gets.chomp
+
+        if answer == "y"
+          transferred_user_ids << user.id
+          user.update_columns(
+            registered_address_id: ra.id
+          )
+          break
+        elsif answer == "c"
+          break
+        else
+          not_transferred_user_ids << user.id
+        end
+      end
+    end
+
+    puts "Transferred user ids: #{transferred_user_ids}"
+    puts "Not transferred user ids: #{not_transferred_user_ids - transferred_user_ids}"
+  end
+
   def show_no_registered_address_field?
     return false unless extended_registration?
     return true if RegisteredAddress::Street.none?
