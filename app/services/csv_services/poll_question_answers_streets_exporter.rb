@@ -8,29 +8,29 @@ module CsvServices
 
     def call
       CSV.generate(headers: false, col_sep: ";") do |csv|
-        csv << city_street_headers(@question)
+        csv << street_headers(@question)
 
-        CityStreet.all.find_each do |city_street|
-          csv << city_street_row(@question, city_street)
+        RegisteredAddress::Street.find_each do |street|
+          csv << street_row(@question, street)
         end
       end
     end
 
     private
 
-      def city_street_headers(question)
+      def street_headers(question)
         question.question_answers.map(&:title).unshift(question.title)
       end
 
-      def city_street_row(question, city_street)
+      def street_row(question, street)
         row = []
-        row.push(city_street.name)
+        row.push(street.name)
 
         question.question_answers.each do |qa|
           answer_count_by_street = question.answers
             .where(answer: qa.title)
-            .joins(author: :city_street)
-            .where(city_streets: { id: city_street.id })
+            .joins(author: [registered_address: :registered_address_street])
+            .where(registered_address_streets: { id: street.id })
             .count
           row.push answer_count_by_street
         end
