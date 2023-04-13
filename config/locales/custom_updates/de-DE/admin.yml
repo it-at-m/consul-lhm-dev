@@ -427,9 +427,7 @@ de:
         columns:
           first_name: Vorname
           last_name: Nachname
-          street_name: Straße
-          street_number: Hausnummer
-          street_number_extension: Hausnummerergänzung
+          street_address: Adresse
           plz: Postleitzahl
           geozone: Gebiet
           city_name: Stadt
