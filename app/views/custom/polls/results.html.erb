@@ -9,6 +9,10 @@
 
   <%= render "poll_subnav" %>
 
+  <% if can? :csv_answers_votes, @poll %>
+    <%= link_to t("custom.polls.show.results.download_csv_answers_votes"), poll_csv_answers_votes_path(@poll, format: :csv), class: "button small float-right" %>
+  <% end %>
+
   <div class="row margin" data-equalizer data-equalize-on="medium">
     <div class="small-12 medium-3 column sidebar" data-equalizer-watch>
       <p><strong><%= t("polls.show.results.title") %></strong></p>
