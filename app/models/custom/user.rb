@@ -45,11 +45,13 @@ class User < ApplicationRecord
   validates :terms_data_protection, acceptance: { allow_nil: false }, on: :create
   validates :terms_general, acceptance: { allow_nil: false }, on: :create
 
-  def self.transfer_city_streets # delete later
+  def self.transfer_city_streets # TODO delete this method
     transferred_user_ids = []
     not_transferred_user_ids = []
 
     User.find_each do |user|
+      next if user.registered_address.present?
+
       next if user.city_street.blank? && user.street_name.blank?
 
       street_name_selector = if user.city_street.present?
