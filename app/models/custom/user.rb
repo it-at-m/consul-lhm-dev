@@ -6,7 +6,7 @@ class User < ApplicationRecord
          :trackable, :validatable, :omniauthable, :password_expirable, :secure_validatable,
          authentication_keys: [:login]
 
-  delegate :registered_address_street, to: :registered_address
+  delegate :registered_address_street, to: :registered_address, allow_nil: true
 
   attr_accessor :form_registered_address_city_id,
                 :form_registered_address_street_id,
