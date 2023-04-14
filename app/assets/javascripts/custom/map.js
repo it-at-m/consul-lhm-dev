@@ -26,6 +26,7 @@
       var layersData = $(element).data('map-layers');
       var baseLayers = {};
       var overlayLayers = {};
+      var adminMarker = null;
       var adminShape = $(element).data("admin-shape");
       var showAdminShape = $(element).data("show-admin-shape");
 
@@ -122,24 +123,33 @@
 
       /* Function definitions start */
       // function to create a marker
-      var createMarker = function(latitude, longitude, color, iconClass) {
+      var getMarkerIconHTML = function(color, iconClass) {
+        var markerIconHTML;
+
         if ( !iconClass ) {
           iconClass = 'circle';
         } else {
           iconClass = iconClass
         };
 
-        var markerLatLng = new L.LatLng(latitude, longitude);
-
         if ( adminEditor ) {
           color = adminShapesColor;
         }
 
         if ( color ) {
-          markerIcon.options.html = '<div class="map-icon icon-' + iconClass + '" style="background-color: ' + color + '"></div>'
+          markerIconHTML = '<div class="map-icon icon-' + iconClass + '" style="background-color: ' + color + '"></div>'
         } else {
-          markerIcon.options.html = '<div class="map-icon icon-' + iconClass + '"></div>'
+          markerIconHTML = '<div class="map-icon icon-' + iconClass + '"></div>'
         }
+
+        return markerIconHTML;
+      }
+
+      var createMarker = function(latitude, longitude, color, iconClass) {
+
+        var markerLatLng = new L.LatLng(latitude, longitude);
+
+        markerIcon.options.html = getMarkerIconHTML(color, iconClass);
 
         marker = L.marker(markerLatLng, {
           icon: markerIcon,
@@ -306,13 +316,26 @@
       // render marker or shape created by admin, if available
       if (adminShape && showAdminShape) {
         if (App.Map.validCoordinates(adminShape)) {
-          marker = createMarker(adminShape.lat, adminShape.long, adminShapesColor, adminShape.fa_icon_class);
-          if (!editable) {
-            marker.on("click", function() {
+          if ( adminEditor ) {
+            marker = createMarker(adminShape.lat, adminShape.long, adminShapesColor, adminShape.fa_icon_class);
+
+
+          } else {
+            var markerLatLng = new L.LatLng(adminShape.lat, adminShape.long);
+            markerIcon.options.html = getMarkerIconHTML(adminShapesColor, adminShape.fa_icon_class);
+
+            adminMarker = L.marker(markerLatLng, {
+              icon: markerIcon
+            });
+            adminMarker.pm.setOptions({ adminShape: true })
+
+            adminMarker.on("click", function() {
               if (!this._popup) {
                 this.bindPopup('Alle markierten Flächen und Pins in rot sind vom System vorgegeben').openPopup();
               }
             });
+
+            adminMarker.addTo(map);
           }
 
         } else if (Object.keys(adminShape).length > 0) {
@@ -432,21 +455,23 @@
         }
 
         // add consul marker to geoman controls
-        map.pm.Toolbar.createCustomControl({
-          name: 'consulMarker',
-          className: 'control-icon leaflet-pm-icon-marker',
-          title: 'Marker setzen',
-          block: 'draw',
-          onClick: function() {
-            removeShapesAndMarkers();
+        if ( enableGeomanControls ) {
+          map.pm.Toolbar.createCustomControl({
+            name: 'consulMarker',
+            className: 'control-icon leaflet-pm-icon-marker',
+            title: 'Marker setzen',
+            block: 'draw',
+            onClick: function() {
+              removeShapesAndMarkers();
 
-            if (this.toggleStatus) {
-              map.off("click", moveOrPlaceMarker);
-            } else {
-              map.on("click", moveOrPlaceMarker);
+              if (this.toggleStatus) {
+                map.off("click", moveOrPlaceMarker);
+              } else {
+                map.on("click", moveOrPlaceMarker);
+              }
             }
-          }
-        });
+          });
+        }
 
         // add remove consul marker to geoman controls
         map.pm.Toolbar.createCustomControl({
