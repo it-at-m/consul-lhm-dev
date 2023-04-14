@@ -4,7 +4,8 @@
       map_location: @selected_parent_projekt.map_location,
       parent_class: "proposals",
       process_coordinates: @proposals_coordinates,
-      projekt: @selected_parent_projekt
+      projekt: @selected_parent_projekt,
+      show_admin_shape: @selected_parent_projekt.map_location.show_admin_shape?
     ) %>
 
   <% else %>

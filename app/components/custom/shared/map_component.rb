@@ -1,6 +1,6 @@
 class Shared::MapComponent < ApplicationComponent
   attr_reader :mappable, :map_location, :parent_class, :editable,
-              :process_coordinates, :projekt
+              :process_coordinates, :projekt, :show_admin_shape
   delegate :map_location_latitude, :map_location_longitude, :map_location_zoom,
            :map_location_input_id, :projekt_feature?, to: :helpers
 
@@ -10,7 +10,8 @@ class Shared::MapComponent < ApplicationComponent
     parent_class:,
     editable: false,
     process_coordinates: nil,
-    projekt: nil
+    projekt: nil,
+    show_admin_shape: false
   )
     @mappable = mappable
     @map_location = map_location || MapLocation.new
@@ -18,6 +19,7 @@ class Shared::MapComponent < ApplicationComponent
     @editable = editable
     @process_coordinates = process_coordinates || get_process_coordinates
     @projekt = projekt
+    @show_admin_shape = show_admin_shape
   end
 
   def map_div
@@ -38,6 +40,8 @@ class Shared::MapComponent < ApplicationComponent
         map_zoom: map_location_zoom(map_location),
 
         admin_editor: false,
+
+        show_admin_shape: show_admin_shape,
         admin_shape: admin_shape,
 
         parent_class: parent_class,

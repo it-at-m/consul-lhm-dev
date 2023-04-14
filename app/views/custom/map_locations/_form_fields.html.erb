@@ -17,7 +17,8 @@
     map_location: map_location,
     parent_class: parent_class,
     editable:	true,
-    projekt: projekt
+    projekt: projekt,
+    show_admin_shape: projekt.map_location.show_admin_shape?
   ) %>
 <% else %>
   <%= render Shared::MapComponent.new(
@@ -25,7 +26,8 @@
     map_location: map_location,
     parent_class: parent_class,
     editable: true,
-    projekt: projekt
+    projekt: projekt,
+    show_admin_shape: projekt.map_location.show_admin_shape?
   ) %>
 <% end %>
 

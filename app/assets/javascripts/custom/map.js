@@ -26,10 +26,11 @@
       var layersData = $(element).data('map-layers');
       var baseLayers = {};
       var overlayLayers = {};
+      var adminShape = $(element).data("admin-shape");
+      var showAdminShape = $(element).data("show-admin-shape");
 
       // variables that define map editing behaviour
       var adminEditor = $(element).data("admin-editor");
-      var adminShape = $(element).data("admin-shape");
       var adminShapesColor = 'red';
 
       // variables that define location and tooltips of process coordinates (both pins and shapes)
@@ -41,6 +42,7 @@
       var longitudeInputSelector = $(element).data("longitude-input-selector");
       var zoomInputSelector = $(element).data("zoom-input-selector");
       var shapeInputSelector = $(element).data("shape-input-selector");
+      var showAdminShapeInputSelector = $(element).data("show-admin-shape-input-selector");
 
       // defines if it's allowed to edit map
       var editable = $(element).data("editable");
@@ -170,6 +172,10 @@
         $(longitudeInputSelector).val(marker.getLatLng().lng);
         $(zoomInputSelector).val(map.getZoom());
         $(shapeInputSelector).val(JSON.stringify({}));
+
+        if ( adminEditor ) {
+          $(showAdminShapeInputSelector).val(true);
+        }
       };
 
       // function to open marker popup
@@ -298,7 +304,7 @@
       }
 
       // render marker or shape created by admin, if available
-      if (adminShape) {
+      if (adminShape && showAdminShape) {
         if (App.Map.validCoordinates(adminShape)) {
           marker = createMarker(adminShape.lat, adminShape.long, adminShapesColor, adminShape.fa_icon_class);
           if (!editable) {
@@ -333,18 +339,20 @@
       }
 
       // adds second attribution to tell about admin pins and shapes
-      var adminShapeExplainerText = 'Alle markierten Flächen und Pins in rot sind vom System vorgegeben';
-      var adminShapeExplainer = L.control({
-        position: 'bottomleft'
-      });
-      adminShapeExplainer.onAdd = function(map) {
-        var container = L.DomUtil.create('div', 'my-attribution');
-        container.innerHTML = adminShapeExplainerText;
-        container.className += ' leaflet-control-attribution';
-        container.style.color = adminShapesColor;
-        return container;
+      if ( showAdminShape ) {
+        var adminShapeExplainerText = 'Alle markierten Flächen und Pins in rot sind vom System vorgegeben';
+        var adminShapeExplainer = L.control({
+          position: 'bottomleft'
+        });
+        adminShapeExplainer.onAdd = function(map) {
+          var container = L.DomUtil.create('div', 'my-attribution');
+          container.innerHTML = adminShapeExplainerText;
+          container.className += ' leaflet-control-attribution';
+          container.style.color = adminShapesColor;
+          return container;
+        }
+        adminShapeExplainer.addTo(map);
       }
-      adminShapeExplainer.addTo(map);
 
 
       // ads pins and shapes created by user
@@ -508,6 +516,9 @@
               layer.remove();
             }
           })
+
+          $(shapeInputSelector).val({});
+          $(showAdminShapeInputSelector).val(false);
         }
 
         // add newly created shape to form field
@@ -535,6 +546,10 @@
           $(longitudeInputSelector).val(map.getCenter().lng);
           $(zoomInputSelector).val(map.getZoom());
           $(shapeInputSelector).val(shapeString);
+
+          if (adminEditor) {
+            $(showAdminShapeInputSelector).val(true);
+          }
         };
       }
       /* Leaflet-Geoman plugin: config start */

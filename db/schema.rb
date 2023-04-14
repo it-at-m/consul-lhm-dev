@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_11_154616) do
+ActiveRecord::Schema.define(version: 2023_04_14_081219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1162,6 +1162,7 @@ ActiveRecord::Schema.define(version: 2023_04_11_154616) do
     t.string "pin_color"
     t.bigint "deficiency_report_id"
     t.jsonb "shape", default: {}, null: false
+    t.boolean "show_admin_shape", default: false
     t.index ["deficiency_report_id"], name: "index_map_locations_on_deficiency_report_id"
     t.index ["investment_id"], name: "index_map_locations_on_investment_id"
     t.index ["projekt_id"], name: "index_map_locations_on_projekt_id"

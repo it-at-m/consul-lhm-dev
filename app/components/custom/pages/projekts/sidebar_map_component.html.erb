@@ -12,7 +12,8 @@
       <%= render Shared::MapComponent.new(
          map_location: projekt.map_location,
          parent_class: "proposals_sidebar",
-         projekt: projekt
+         projekt: projekt,
+         show_admin_shape: false
        ) %>
     </div>
   <% end %>
