@@ -37,6 +37,39 @@ describe "Keycloak Login" do
       end
     end
 
+    context "when user's username was duplicate but user didn't complete registration to update the username" do
+      before do
+        create(:user, username: "John Doe" )
+        create(:user, username: "John Doe", email: "bayern_id@consul.dev", oauth_email: "bayern_id@consul.dev", keycloak_link: "johndoe", registering_with_oauth: true)
+      end
+
+      it "redirects user to finish sign_up_path and allows updating username" do
+        visit new_user_session_path(locale: :de)
+        click_button "Alle akzeptieren"
+        click_link(title: "Anmelden mit BayernID")
+
+        expect(page).to have_current_path("/finish_signup")
+        expect(page).to have_content "1 Fehler verhinderte das Speichern dieser Konto"
+
+        fill_in "Benutzer*innenname", with: "John Doe new"
+        click_button "Registrieren"
+
+        expect(User.count).to eq(2)
+
+        expect(page).to have_content "Erfolgreich angemeldet."
+
+        expect(User.first).to have_attributes(
+          username: "John Doe",
+          registering_with_oauth: false
+        )
+        expect(User.last).to have_attributes(
+          username: "John Doe new",
+          registering_with_oauth: false,
+          keycloak_link: "johndoe"
+        )
+      end
+    end
+
     context "when user signed in with keycloak before" do
       context "without changing his email address in keycloak after first sign in to Consul" do
         it "signs user in successfully" do

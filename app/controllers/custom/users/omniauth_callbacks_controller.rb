@@ -17,7 +17,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to new_user_registration_path(reason: "uh") and return
     end
 
-    if user = User.find_by(keycloak_link: keycloak_link) #keycloak user logged in in the past
+
+
+    if user = User.find_by(keycloak_link: keycloak_link, username: username, registering_with_oauth: true) #keycloak user logged in in the past but didn't finish registration
+      sign_in user
+      redirect_to finish_signup_path
+      return
+
+    elsif user = User.find_by(keycloak_link: keycloak_link) #keycloak user logged in in the past
       if user.email == email #keycloak user didn't change his email in keycloak
         sign_in user
 
