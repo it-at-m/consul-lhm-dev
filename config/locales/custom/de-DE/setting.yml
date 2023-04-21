@@ -190,6 +190,8 @@ de:
           show_in_sidebar_filter_description: Zeigt das Projekt in der Projektseitenleiste auf der Diskussionsübersichtsseite an
           allow_voting: Unterstützung von Diskussionen
           allow_voting_description: Aktivieren Sie die Unterstützung von Diskussionen mit Daumen hoch und runter
+          hide_projekt_selector: Projekt-Selektor ausblenden
+          hide_projekt_selector_description: Blendet den Projektselektor in diesem Projekt aus
         proposals:
           quorum_for_proposals: Quorum für Vorschläge
           quorum_for_proposals_description: Aktivieren Sie ein Quorum für Vorschläge
@@ -227,6 +229,8 @@ de:
           enable_external_video_description: Ermöglicht es den Nutzer:innen externe Videos über YouTube und Vimeo einzubinden
           enable_geoman_controls_in_maps: Nutzer*innen ermöglichen Figuren in die Karte einzuzeichnen.
           enable_geoman_controls_in_maps_description: Ermöglicht es den Nutzer*innen Rechtecke, Kreise etc. einzuzeichnen.
+          hide_projekt_selector: Projekt-Selektor ausblenden
+          hide_projekt_selector_description: Blendet den Projektselektor in diesem Projekt aus
         proposal_options:
           votes_for_proposal_success: "Anzahl der notwendigen Stimmen zur Genehmigung eines Vorschlags"
           votes_for_proposal_success_description: "Wenn ein Antrag diese Anzahl von Unterstützungen erreicht, kann er nicht mehr mehr unterstützt werden und gilt als erfolgreich"

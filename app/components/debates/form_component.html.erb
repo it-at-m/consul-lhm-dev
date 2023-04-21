@@ -6,10 +6,11 @@
 
     <% if @selected_projekt&.overview_page? %>
       <%= f.hidden_field :projekt_id, value: @selected_projekt.id %>
+
     <% else %>
       <legend><%= t("custom.shared.form.projekt_assignment") %></legend>
-      <div class="margin-top">
-        <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: @debate, projekts: Projekt.top_level }  %>
+      <div id="projekt-selector-block" class="margin-top">
+        <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: @debate, projekts: Projekt.top_level } %>
       </div>
     <% end %>
 
