@@ -180,6 +180,8 @@ de:
           show_comments_description: Aktivieren Sie "Kommentare" für das Diskussionsmodul
           allow_attached_documents: Zusätzliche Dokumente
           allow_attached_documents_description: Ermöglicht es den Nutzer:innen Dokumente der Diskussion anzuhängen
+          allow_attached_image: Titelbild hinzufügen
+          allow_attached_image_description: Ermöglicht es den Bürger*innen ein Titelbild hinzuzufügen.
           only_admins_create_debates: Nur Admins können neue Diskussionen erstellen
           only_admins_create_debates_description: Die Erstellung von neuen Diskussionen ist auf Admins beschränkt
           allow_downvoting: Downvotes aktivieren
@@ -209,6 +211,8 @@ de:
           show_comments_description: Aktivieren Sie "Kommentare" für das Vorschlagsmodul
           allow_attached_documents: Zusätzliche Dokumente
           allow_attached_documents_description: Ermöglicht es den Nutzer:innen Dokumente den Vorschlägen anzuhängen
+          allow_attached_image: Titelbild hinzufügen
+          allow_attached_image_description: Ermöglicht es den Bürger*innen ein Titelbild hinzuzufügen.
           only_admins_create_proposals: Nur Admins können neue Vorschläge erstellen
           only_admins_create_proposals_description: Die Erstellung von neuen Vorschlägen ist auf Admins beschränkt
           show_in_sidebar_filter: Projekt in der Projektseitenleiste anzeigen

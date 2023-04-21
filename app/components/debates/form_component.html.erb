@@ -17,7 +17,7 @@
     <%= render "shared/globalize_locales", resource: debate %>
 
     <% if extended_feature?("debates.head_image_for_debates") %>
-      <div class="images">
+      <div id="attach-image" class="images">
         <%= render "images/nested_image", imageable: @debate, f: f %>
       </div>
     <% end %>

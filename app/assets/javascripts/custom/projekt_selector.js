@@ -62,6 +62,7 @@
         $('#map-container').hide();
       }
 
+      App.ProjektSelector.toggleImageAttachment($selectedProjekt)
       App.ProjektSelector.toggleDocumentAttachment($selectedProjekt)
       App.ProjektSelector.toggleSummary($selectedProjekt)
       App.ProjektSelector.toggleExternalVideoUrl($selectedProjekt)
@@ -183,6 +184,16 @@
           $(label).addClass('hide');
         }
       });
+    },
+
+    toggleImageAttachment: function($projekt) {
+      if ( $projekt.data('allowAttachedImage') ) {
+        $('#attach-image').show();
+      } else {
+        $('#attach-image #nested-image .direct-upload').remove();
+        $("#new_image_link").removeClass("hide");
+        $('#attach-image').hide();
+      }
     },
 
     toggleDocumentAttachment: function($projekt) {

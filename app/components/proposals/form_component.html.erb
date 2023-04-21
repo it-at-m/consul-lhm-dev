@@ -17,7 +17,7 @@
     <%= render "shared/globalize_locales", resource: proposal %>
 
     <% if feature?(:allow_images) %>
-      <div class="images">
+      <div id="attach-image" class="images">
         <%= render "images/nested_image", f: f %>
       </div>
     <% end %>
