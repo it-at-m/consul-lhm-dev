@@ -15,7 +15,7 @@
       <% end %>
     </div>
 
-    <div class="columns small-12 medium-3 large-2 show-for-medium <%= "image-placeholder icon-#{poll.projekt.icon || 'image'}" unless poll.image.present? %>" data-equalizer-watch='main'>
+    <div class="columns small-12 medium-3 large-2 show-for-medium <%= "image-placeholder icon-#{poll.projekt.icon.presence || "image"}" unless poll.image.present? %>" data-equalizer-watch='main'>
       <% if poll.image.present? %>
         <%= link_to poll do %>
           <%= image_tag poll.image.variant(:thumb_wider), alt: poll.image.title.unicode_normalize %>

@@ -14,7 +14,7 @@
     <% end %>
   </div>
 
-  <div class="columns small-12 medium-3 large-2 show-for-medium <%= "image-placeholder icon-#{ investment.projekt.icon || 'image' }" unless show_image_thumbnail?(investment) %>" data-equalizer-watch='main'>
+  <div class="columns small-12 medium-3 large-2 show-for-medium <%= "image-placeholder icon-#{ investment.projekt.icon.presence || 'image' }" unless show_image_thumbnail?(investment) %>" data-equalizer-watch='main'>
     <% if show_image_thumbnail?(investment) %>
       <%= link_to investment do %>
         <%= image_tag investment.image.variant(:thumb_wider), alt: investment.image.title.unicode_normalize %>
