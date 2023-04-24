@@ -68,9 +68,11 @@
 
       // update form fields when map center changes
       map.on("moveend", function() {
-        $(latitudeInputSelector).val(map.getCenter().lat);
-        $(longitudeInputSelector).val(map.getCenter().lng);
-        $(zoomInputSelector).val(map.getZoom());
+        if ( adminEditor && !marker ) {
+          $(latitudeInputSelector).val(map.getCenter().lat);
+          $(longitudeInputSelector).val(map.getCenter().lng);
+          $(zoomInputSelector).val(map.getZoom());
+        }
       });
       /* Create leaflet map end */
 
@@ -493,6 +495,11 @@
           afterClick: function() {
             if (!enableGeomanControls) {
               $(".control-icon.leaflet-pm-icon-delete").closest(".active").removeClass("active")
+            }
+
+            if ( !adminEditor ) {
+              $(latitudeInputSelector).val('');
+              $(longitudeInputSelector).val('');
             }
           } 
         });
