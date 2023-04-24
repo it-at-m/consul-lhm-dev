@@ -2,7 +2,7 @@
   <div class="">
     <%= render Shared::MapComponent.new(
        mappable: investment,
-       map_location: investment.map_location || investment.projekt&.map_location,
+       map_location: investment.map_location || investment.projekt&.map_location_with_admin_shape,
        parent_class: "budget_investment",
        projekt: investment&.projekt,
        show_admin_shape: investment&.projekt&.map_location&.show_admin_shape?

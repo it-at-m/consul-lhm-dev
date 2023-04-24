@@ -10,7 +10,7 @@
     <div class="margin-bottom not-print">
       <%= render Shared::MapComponent.new(
         mappable: @proposal,
-        map_location: @proposal.map_location || @proposal.projekt&.map_location,
+        map_location: @proposal.map_location || @proposal.projekt&.map_location_with_admin_shape,
         parent_class: "proposal",
         projekt: @proposal.projekt,
         show_admin_shape: @proposal.projekt.map_location.show_admin_shape?

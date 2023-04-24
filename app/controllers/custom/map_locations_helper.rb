@@ -3,7 +3,7 @@ require_dependency Rails.root.join("app", "helpers", "map_locations_helper").to_
 module MapLocationsHelper
     def map_location_available?(resource)
       if resource.respond_to?(:projekt)
-        map_location = resource.map_location || resource.projekt.map_location
+        map_location = resource.map_location || resource.projekt.map_location_with_admin_shape
       elsif resource.respond_to?(:map_location)
         map_location = resource.map_location
       end

@@ -469,6 +469,10 @@ class Projekt < ApplicationRecord
     ProjektLabel.where(projekt_id: all_ids_in_tree)
   end
 
+  def map_location_with_admin_shape
+    map_location.show_admin_shape? ? map_location : nil
+  end
+
   private
 
     def create_corresponding_page
