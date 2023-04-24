@@ -61,10 +61,11 @@ class Shared::MapComponent < ApplicationComponent
     end
 
     def get_process_coordinates
-      if mappable&.map_location&.shape.present?
-        [mappable.map_location.shape]
-      elsif mappable&.map_location.present?
-        [mappable.map_location.json_data]
+      if mappable.present? && mappable.map_location.present?
+        [
+          mappable.map_location.shape_json_data.presence ||
+            mappable.map_location.json_data
+        ]
       else
         []
       end

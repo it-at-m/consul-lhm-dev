@@ -1,6 +1,16 @@
 require_dependency Rails.root.join("app", "helpers", "map_locations_helper").to_s
 
 module MapLocationsHelper
+    def map_location_available?(resource)
+      if resource.respond_to?(:projekt)
+        map_location = resource.map_location || resource.projekt.map_location
+      elsif resource.respond_to?(:map_location)
+        map_location = resource.map_location
+      end
+
+      map_location.present? && map_location.available?
+    end
+
     def render_map(map_location, parent_class, editable, _remove_marker_label, process_coordinates = [], map_layers = nil)
       map_location = MapLocation.new if map_location.nil?
       map = content_tag :div, "",

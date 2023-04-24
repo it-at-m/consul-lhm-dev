@@ -38,10 +38,16 @@ class MapLocation < ApplicationRecord
 
     if @proposal&.projekt&.overview_page?
       "#009900"
+
     elsif @proposal.present? && @proposal.projekt.present?
       @proposal.projekt.color
+
+    elsif @investment.present?
+      @investment.projekt.color
+
     elsif @deficiency_report.present?
       @deficiency_report.category.color
+
     elsif @projekt.present?
       "red"
     end
@@ -52,12 +58,19 @@ class MapLocation < ApplicationRecord
 
     if @proposal&.projekt&.overview_page?
       "user"
+
     elsif @proposal.present? && @proposal.projekt.present?
       @proposal.projekt.icon
+
+    elsif @investment.present? && @investment.projekt.present?
+      @investment.projekt.icon
+
     elsif @deficiency_report.present?
       @deficiency_report.category.icon
+
     elsif @projekt.present?
       @projekt.icon
+
     end
   end
 
@@ -65,6 +78,7 @@ class MapLocation < ApplicationRecord
     @projekt = Projekt.find_by(id: projekt_id) if projekt_id.present?
     @proposal = Proposal.find_by(id: proposal_id) if proposal_id.present?
     @deficiency_report = DeficiencyReport.find_by(id: deficiency_report_id) if deficiency_report_id.present?
+    @investment = Budget::Investment.find_by(id: investment_id) if investment_id.present?
   end
 
   def ensure_shape_is_json

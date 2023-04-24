@@ -6,11 +6,11 @@
           Flag.flagged?(current_user, @proposal),
           "show_info"] do %>
 
-  <% if feature?(:map) && map_location_available?(@proposal.map_location) %>
+  <% if feature?(:map) && map_location_available?(@proposal) %>
     <div class="margin-bottom not-print">
       <%= render Shared::MapComponent.new(
         mappable: @proposal,
-        map_location: @proposal.map_location,
+        map_location: @proposal.map_location || @proposal.projekt&.map_location,
         parent_class: "proposal",
         projekt: @proposal.projekt,
         show_admin_shape: @proposal.projekt.map_location.show_admin_shape?

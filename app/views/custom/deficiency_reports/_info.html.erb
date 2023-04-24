@@ -3,7 +3,7 @@
           @deficiency_report,
           "show_info"] do %>
 
-  <% if feature?(:map) && map_location_available?(@deficiency_report.map_location) %>
+  <% if feature?(:map) && map_location_available?(@deficiency_report) %>
     <div class="margin-bottom">
       <%= render Shared::MapComponent.new(
          mappable: @deficiency_report,
