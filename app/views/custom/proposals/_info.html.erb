@@ -18,7 +18,13 @@
     </div>
   <% end %>
 
-  <% if projekt_feature?(@proposal.projekt, 'proposals.enable_summary') %>
+  <% if @proposal.projekt_labels.any? %>
+    <div class='resource-projekt-labels' style='margin-bottom:30px;'>
+      <%= render Shared::ProjektLabelsComponent.new(resource: @proposal) %>
+    </div>
+  <% end %>
+
+  <% if projekt_feature?(@proposal.projekt, 'proposals.enable_summary') && @proposal.summary.present? %>
     <blockquote><%= @proposal.summary %></blockquote>
   <% end %>
 
