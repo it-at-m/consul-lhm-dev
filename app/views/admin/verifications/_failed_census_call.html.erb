@@ -1,6 +1,6 @@
 <div>
   <%= humanize_document_type(failed_census_call.document_type) %>
   <%= failed_census_call.document_number %>
-  <%= l(failed_census_call.date_of_birth) %>
+  <%= l(failed_census_call.date_of_birth) if failed_census_call.date_of_birth.present? %>
   <%= failed_census_call.postal_code %>
 </div>
