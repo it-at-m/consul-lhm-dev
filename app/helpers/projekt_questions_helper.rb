@@ -11,7 +11,8 @@ module ProjektQuestionsHelper
                verify: link_to_verify_account,
                city: Setting["org_name"],
                geozones: projekt_phase.geozone_restrictions_formatted,
-               age_restriction: projekt_phase.age_restriction_formatted
+               age_restriction: projekt_phase.age_restriction_formatted,
+               restricted_streets: projekt_phase.street_restrictions_formatted
               ))
     end
   end

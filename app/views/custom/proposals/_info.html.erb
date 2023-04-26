@@ -4,15 +4,27 @@
           @proposal.projekt,
           feature?(:map),
           Flag.flagged?(current_user, @proposal),
-          "show_info" ] do %>
+          "show_info"] do %>
 
-  <% if feature?(:map) && map_location_available?(@proposal.map_location) %>
+  <% if feature?(:map) && map_location_available?(@proposal) %>
     <div class="margin-bottom not-print">
-      <%= render_map(@proposal.map_location, "proposal", false, nil, MapLocation.where(proposal_id: @proposal.id).map(&:json_data), @proposal.projekt.map_layers_for_render.to_json) %>
+      <%= render Shared::MapComponent.new(
+        mappable: @proposal,
+        map_location: @proposal.map_location || @proposal.projekt&.map_location_with_admin_shape,
+        parent_class: "proposal",
+        projekt: @proposal.projekt,
+        show_admin_shape: @proposal.projekt.map_location.show_admin_shape?
+      ) %>
     </div>
   <% end %>
 
-  <% if projekt_feature?(@proposal.projekt, 'proposals.enable_summary') %>
+  <% if @proposal.projekt_labels.any? %>
+    <div class='resource-projekt-labels' style='margin-bottom:30px;'>
+      <%= render Shared::ProjektLabelsComponent.new(resource: @proposal) %>
+    </div>
+  <% end %>
+
+  <% if projekt_feature?(@proposal.projekt, 'proposals.enable_summary') && @proposal.summary.present? %>
     <blockquote><%= @proposal.summary %></blockquote>
   <% end %>
 

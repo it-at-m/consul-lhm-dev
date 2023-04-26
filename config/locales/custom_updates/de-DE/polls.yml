@@ -32,6 +32,8 @@ de:
         results_menu: Zwischenergebnisse für Admins
         vote_counted: Ihre Stimme wurde gezählt!
         vote_uncounted: Ihre Stimme wurde entfernt
+        results:
+          download_csv_answers_votes: Abstimmungsergebnisse herunterladen
   polls:
     index:
       filters:

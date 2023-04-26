@@ -56,6 +56,17 @@ class PollsController < ApplicationController
     remove_answers_to_open_questions_with_blank_body
   end
 
+  def csv_answers_votes
+    authorize! :csv_answers_votes, @poll
+
+    respond_to do |format|
+      format.csv do
+        send_data CsvServices::PollAnswersVotesExporter.new(@poll).call,
+          filename: "poll_#{@poll.id}_answers_votes_#{Time.zone.today.strftime("%d/%m/%Y")}.csv"
+      end
+    end
+  end
+
   private
 
     def remove_answers_to_open_questions_with_blank_body

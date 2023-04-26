@@ -3,15 +3,21 @@
                     data-map-center-latitude="<%= Setting["map.latitude"] %>"
                     data-map-center-longitude="<%= Setting["map.longitude"] %>"
                     data-map-zoom="<%= Setting["map.zoom"] %>"
-                    data-map-tiles-provider="<%= Rails.application.secrets.map_tiles_provider %>"
-                    data-map-tiles-provider-attribution="<%= Rails.application.secrets.map_tiles_provider_attribution %>"
-                    data-marker-editable="true"
-                    data-marker-latitude="<%= Setting["map.latitude"] %>"
-                    data-marker-longitude="<%= Setting["map.longitude"] %>"
+                    data-map-layers="<%= MapLayer.general.to_json %>"
+
+                    data-admin-editor="true"
+
+                    data-editable="true"
+                    data-enable-geoman-controls="true"
+
                     data-latitude-input-selector="#latitude"
                     data-longitude-input-selector="#longitude"
                     data-zoom-input-selector="#zoom"
-                    data-map-layers="<%= MapLayer.general.to_json %>"
+
+                    data-map-tiles-provider="<%= Rails.application.secrets.map_tiles_provider %>"
+                    data-map-tiles-provider-attribution="<%= Rails.application.secrets.map_tiles_provider_attribution %>"
+                    data-marker-latitude="<%= Setting["map.latitude"] %>"
+                    data-marker-longitude="<%= Setting["map.longitude"] %>"
                     >
 </div>
 

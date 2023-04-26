@@ -182,12 +182,13 @@ class ProposalsController
 
     def proposal_params
       attributes = [:video_url, :responsible_name, :tag_list, :on_behalf_of,
-                    :terms_of_service, :geozone_id, :projekt_id, :related_sdg_list,
+                    :geozone_id, :projekt_id, :related_sdg_list,
+                    :terms_of_service, :terms_data_storage, :terms_data_protection, :terms_general,
                     projekt_label_ids: [],
                     image_attributes: image_attributes,
                     documents_attributes: [:id, :title, :attachment, :cached_attachment,
                                            :user_id, :_destroy],
-                    map_location_attributes: [:latitude, :longitude, :zoom]]
+                    map_location_attributes: map_location_attributes]
       translations_attributes = translation_params(Proposal, except: :retired_explanation)
       params.require(:proposal).permit(attributes, translations_attributes)
     end

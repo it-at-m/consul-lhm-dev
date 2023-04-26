@@ -7,3 +7,8 @@ scope module: :verification do
 end
 
 resource :verification, controller: "verification", only: [:show]
+
+get "verification/residence/update_registered_address_street_field",
+  to: "verification/residence#update_registered_address_street_field" # custom line
+get "verification/residence/update_registered_address_field",
+  to: "verification/residence#update_registered_address_field" # custom line

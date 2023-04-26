@@ -13,7 +13,9 @@ feature "user creates new debate" do
     select_projekt_in_selector
     fill_in "Titel der Diskussion", with: "Titel der Diskussion"
     fill_in_ckeditor "Diskussionenbeitrag", with: "Diskussionenbeitrag"
-    check "Ich stimme der Datenschutzbestimmungen und den Allgemeine Nutzungsbedingungen zu"
+    check "Mit der Registrierung akzeptieren Sie, dass wir die hier erhobenen Daten zur Verarbeitung speichern."
+    check "Mit der Registrierung akzeptieren Sie die Datenschutzvereinbarung"
+    check "Mit der Registrierung akzeptieren Sie die Allgemeinen Nutzungsbedingungen"
     click_button "Eine Diskussion starten"
 
     expect(page).to have_content "Titel der Diskussion"

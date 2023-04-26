@@ -9,7 +9,12 @@
 
   <%= link_to extended_sidebar_map_page_path(projekt.page.slug), remote: true do %>
     <div class='sidebar-projekt-map'>
-      <%= render_map(projekt.map_location, "proposals_sidebar", false, nil, MapLocation.where(projekt_id: projekt.id).map(&:json_data), projekt.map_layers_for_render.to_json ) %>
+      <%= render Shared::MapComponent.new(
+         map_location: projekt.map_location,
+         parent_class: "proposals_sidebar",
+         projekt: projekt,
+         show_admin_shape: projekt.map_location.show_admin_shape?
+       ) %>
     </div>
   <% end %>
 

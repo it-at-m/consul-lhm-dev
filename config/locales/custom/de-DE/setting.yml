@@ -180,6 +180,8 @@ de:
           show_comments_description: Aktivieren Sie "Kommentare" für das Diskussionsmodul
           allow_attached_documents: Zusätzliche Dokumente
           allow_attached_documents_description: Ermöglicht es den Nutzer:innen Dokumente der Diskussion anzuhängen
+          allow_attached_image: Titelbild hinzufügen
+          allow_attached_image_description: Ermöglicht es den Bürger*innen ein Titelbild hinzuzufügen.
           only_admins_create_debates: Nur Admins können neue Diskussionen erstellen
           only_admins_create_debates_description: Die Erstellung von neuen Diskussionen ist auf Admins beschränkt
           allow_downvoting: Downvotes aktivieren
@@ -188,6 +190,8 @@ de:
           show_in_sidebar_filter_description: Zeigt das Projekt in der Projektseitenleiste auf der Diskussionsübersichtsseite an
           allow_voting: Unterstützung von Diskussionen
           allow_voting_description: Aktivieren Sie die Unterstützung von Diskussionen mit Daumen hoch und runter
+          hide_projekt_selector: Projekt-Selektor ausblenden
+          hide_projekt_selector_description: Blendet den Projektselektor in diesem Projekt aus
         proposals:
           quorum_for_proposals: Quorum für Vorschläge
           quorum_for_proposals_description: Aktivieren Sie ein Quorum für Vorschläge
@@ -209,6 +213,8 @@ de:
           show_comments_description: Aktivieren Sie "Kommentare" für das Vorschlagsmodul
           allow_attached_documents: Zusätzliche Dokumente
           allow_attached_documents_description: Ermöglicht es den Nutzer:innen Dokumente den Vorschlägen anzuhängen
+          allow_attached_image: Titelbild hinzufügen
+          allow_attached_image_description: Ermöglicht es den Bürger*innen ein Titelbild hinzuzufügen.
           only_admins_create_proposals: Nur Admins können neue Vorschläge erstellen
           only_admins_create_proposals_description: Die Erstellung von neuen Vorschlägen ist auf Admins beschränkt
           show_in_sidebar_filter: Projekt in der Projektseitenleiste anzeigen
@@ -221,6 +227,10 @@ de:
           allow_voting_description: Aktivieren Sie die Unterstützung für Vorschläge
           enable_external_video: Externes Video einbinden
           enable_external_video_description: Ermöglicht es den Nutzer:innen externe Videos über YouTube und Vimeo einzubinden
+          enable_geoman_controls_in_maps: Nutzer*innen ermöglichen Figuren in die Karte einzuzeichnen.
+          enable_geoman_controls_in_maps_description: Ermöglicht es den Nutzer*innen Rechtecke, Kreise etc. einzuzeichnen.
+          hide_projekt_selector: Projekt-Selektor ausblenden
+          hide_projekt_selector_description: Blendet den Projektselektor in diesem Projekt aus
         proposal_options:
           votes_for_proposal_success: "Anzahl der notwendigen Stimmen zur Genehmigung eines Vorschlags"
           votes_for_proposal_success_description: "Wenn ein Antrag diese Anzahl von Unterstützungen erreicht, kann er nicht mehr mehr unterstützt werden und gilt als erfolgreich"
@@ -264,6 +274,8 @@ de:
           show_results_after_first_vote_description: Zeigt in der Phase "Veröffentliching der Preise" nur ausgewählte Projekte als Ergebnisse an
           enable_summary: "\"Zusammenfassung\" anzeigen"
           enable_summary_description: "Zeigt das Feld \"Zusammenfassung\" in den Vorschlägen an"
+          enable_geoman_controls_in_maps: Nutzer*innen ermöglichen Figuren in die Karte einzuzeichnen.
+          enable_geoman_controls_in_maps_description: Ermöglicht es den Nutzer*innen Rechtecke, Kreise etc. einzuzeichnen.
         milestones:
           newest_first: Neueste Meilensteine zuerst anzeigen
           newest_first_description: Sortiert die Meilensteine absteigend mit dem neuesten Datum zuerst
@@ -284,6 +296,8 @@ de:
         intro_text_description: Aktivieren Sie einen individuellen Einleitungstext oberhalb der Mängelübersichtsseite
         enable_my_posts_filter: Meine Beiträge
         enable_my_posts_filter_description: Zeigt einen Filter für meine Beiträge in der Diskussionsübersichtsseite
+        enable_geoman_controls_in_maps: Nutzer*innen ermöglichen Figuren in die Karte einzuzeichnen.
+        enable_geoman_controls_in_maps_description: Ermöglicht es den Nutzer*innen Rechtecke, Kreise etc. einzuzeichnen.
 
       projekt_newsfeed:
         id: Newsfeed ID

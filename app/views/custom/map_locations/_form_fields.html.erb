@@ -3,10 +3,32 @@
 
 <% mappable = @proposal || @deficiency_report || @investment || nil %>
 
-<% if mappable.present? && mappable.map_location.present? %>
-  <%= render_map(map_location, parent_class, editable = true, remove_marker_label, [ mappable.map_location.json_data ], ( mappable&.projekt&.map_layers_for_render&.to_json ) ) %>
+<% if mappable.present?  && !mappable.respond_to?(:projekt) %>
+  <%= render Shared::MapComponent.new(
+    mappable: mappable,
+    map_location: map_location,
+    parent_class: parent_class,
+    editable: true
+  ) %>
+
+<% elsif mappable.present? && mappable.map_location.present? %>
+  <%= render Shared::MapComponent.new(
+    mappable: mappable,
+    map_location: map_location,
+    parent_class: parent_class,
+    editable:	true,
+    projekt: projekt,
+    show_admin_shape: projekt&.map_location&.show_admin_shape?
+  ) %>
 <% else %>
-  <%= render_map(map_location, parent_class, editable = true, remove_marker_label, nil ) %>
+  <%= render Shared::MapComponent.new(
+    mappable: mappable,
+    map_location: map_location,
+    parent_class: parent_class,
+    editable: true,
+    projekt: projekt,
+    show_admin_shape: projekt&.map_location&.show_admin_shape?
+  ) %>
 <% end %>
 
 <%= form.fields_for :map_location, map_location do |m_l_fields| %>
@@ -22,4 +44,7 @@
   <%= m_l_fields.hidden_field :zoom,
                               value: map_location.zoom,
                               id: map_location_input_id(parent_class, "zoom") %>
+  <%= m_l_fields.hidden_field :shape,
+                              value: map_location.shape,
+                              id: map_location_input_id(parent_class, "shape") %>
 <% end %>

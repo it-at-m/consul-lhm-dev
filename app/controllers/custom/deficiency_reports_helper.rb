@@ -8,9 +8,11 @@ module DeficiencyReportsHelper
   end
 
   def all_deficiency_report_map_locations(deficiency_reports_for_map)
-    ids = deficiency_reports_for_map.except(:limit, :offset, :order).pluck(:id).uniq
+    ids = deficiency_reports_for_map.except(:limit, :offset, :order).ids.uniq
 
-    MapLocation.where(deficiency_report_id: ids).map(&:json_data)
+    MapLocation.where(deficiency_report_id: ids).map do |map_location|
+      map_location.shape_json_data.presence || map_location.json_data
+    end
   end
 
   def json_data

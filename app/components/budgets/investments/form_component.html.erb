@@ -28,12 +28,12 @@
     <% if projekt_feature?(budget&.projekt, 'budgets.show_map') %>
       <div>
         <%= render "map_locations/form_fields",
-                   form:     f,
-                   map_location: investment.map_location || MapLocation.new,
-                   label:    t("budgets.investments.form.map_location"),
-                   help:     t("budgets.investments.form.map_location_instructions"),
-                   remove_marker_label: t("budgets.investments.form.map_remove_marker"),
-                   parent_class: "budget_investment",
+                   form:           f,
+                   map_location:   investment.map_location || MapLocation.new,
+                   label:          t("budgets.investments.form.map_location"),
+                   help:           t("budgets.investments.form.map_location_instructions"),
+                   parent_class:   "budget_investment",
+                   projekt:        budget&.projekt,
                    i18n_namespace: "budgets.investments" %>
       </div>
     <% end %>
@@ -93,12 +93,28 @@
   <div class="actions">
     <% unless current_user.manager? || investment.persisted? %>
       <div>
-        <%= f.check_box :terms_of_service,
-          title: t("form.accept_terms_title"),
-          label: t("form.accept_terms",
-                   policy: link_to(t("form.policy"), "/privacy", target: "blank"),
-                   conditions: link_to(t("form.conditions"), "/conditions", target: "blank")
-                  ) %>
+
+        <%= f.check_box :terms_data_storage,
+          title: t("custom.terms.data_storage.title"),
+          label: t("custom.terms.data_storage.label"),
+          class: "checkbox-label--aligned" %>
+
+        <%= f.check_box :terms_data_protection,
+          title: t("custom.terms.data_protection.title"),
+          label: t("custom.terms.data_protection.label",
+                   privacy_link: link_to(t("custom.terms.privacy_link.text"), "/privacy",
+                                         title: t("shared.target_blank"), target: "_blank")),
+          class: "checkbox-label--aligned" %>
+
+        <%= f.check_box :terms_general,
+          title: t("custom.terms.general.title"),
+          label: t("custom.terms.general.label",
+                   terms_link: link_to(t("custom.terms.terms_link.text"), "/privacy",
+                                       title: t("shared.target_blank"), target: "_blank")),
+          class: "checkbox-label--aligned" %>
+
+        <p style="text-align:left;"><%= t("custom.terms.revoke_consent.text") %></p>
+
       </div>
     <% end %>
 

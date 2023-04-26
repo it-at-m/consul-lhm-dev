@@ -1,0 +1,18 @@
+de:
+  custom:
+    terms:
+      data_storage:
+        title: Datenverarbeitung
+        label: Mit der Registrierung akzeptieren Sie, dass wir die hier erhobenen Daten zur Verarbeitung speichern.
+      data_protection:
+        title: Datenschutzvereinbarung
+        label: Mit der Registrierung akzeptieren Sie die %{privacy_link}
+      general:
+        title: Allgemeinen Nutzungsbedingungen
+        label: Mit der Registrierung akzeptieren Sie die %{terms_link}
+      privacy_link:
+        text: Datenschutzvereinbarung
+      terms_link:
+        text: Allgemeinen Nutzungsbedingungen
+      revoke_consent:
+        text: Sie können Ihre Einwilligung zur Datenspeicherung ohne eine Angabe von Gründen jederzeit widerrufen.

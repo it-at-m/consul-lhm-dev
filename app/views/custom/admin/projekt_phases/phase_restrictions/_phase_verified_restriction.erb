@@ -2,13 +2,18 @@
   <strong class='verification-restriction-title'><span class='verification-restriction-icon'><%= t("custom.projekt_phases.restrictions.verification.title") %></span></strong>
   <div class="projekt-phase-restriction-selector margin-bottom <%= 'gray-labels' if skip_user_verification? %>">
 
-    <%= f.radio_button :verification_restricted, false,
-                       label: t('custom.projekt_phases.restrictions.verification.no_restriction' ),
-                       disabled: skip_user_verification? %>
-    <br>
+    <div class="projekt-phase-restriction-block">
+      <%= f.radio_button :verification_restricted, false,
+                         label: t('custom.projekt_phases.restrictions.verification.no_restriction' ),
+                         class: "projekt-phase-restriction-option",
+                         disabled: skip_user_verification? %>
+    </div>
 
-    <%= f.radio_button :verification_restricted, true,
-                       label: t('custom.projekt_phases.restrictions.verification.only_verified' ),
-                       disabled: skip_user_verification? %>
+    <div class="projekt-phase-restriction-block">
+      <%= f.radio_button :verification_restricted, true,
+                         label: t('custom.projekt_phases.restrictions.verification.only_verified' ),
+                         class: "projekt-phase-restriction-option",
+                         disabled: skip_user_verification? %>
+    </div>
   </div>
 </div>

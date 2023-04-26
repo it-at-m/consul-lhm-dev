@@ -29,16 +29,16 @@ RSpec.configure do |config|
     Rails.application.load_seed
   end
 
-  config.before do |example|
-    Globalize.set_fallbacks_to_all_available_locales
-    Setting["feature.user.skip_verification"] = nil
-  end
+  # config.before do |example|
+  #   Globalize.set_fallbacks_to_all_available_locales
+  #   Setting["feature.user.skip_verification"] = nil
+  # end
 
-  config.around do |example|
-    I18n.with_locale(:en) do
-      example.run
-    end
-  end
+  # config.around do |example|
+  #   I18n.with_locale(:en) do
+  #     example.run
+  #   end
+  # end
 
   config.around(:each, :race_condition) do |example|
     self.use_transactional_tests = false
@@ -49,13 +49,13 @@ RSpec.configure do |config|
     Rails.application.load_seed
   end
 
-  config.before(:each, type: :system) do
-    Capybara::Webmock.start
-  end
+  # config.before(:each, type: :system) do
+  #   Capybara::Webmock.start
+  # end
 
-  config.after(:suite) do
-    Capybara::Webmock.stop
-  end
+  # config.after(:suite) do
+  #   Capybara::Webmock.stop
+  # end
 
   config.after(:each, :page_driver) do
     page.driver.reset!

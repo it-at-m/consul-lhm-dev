@@ -1,0 +1,18 @@
+en:
+  custom:
+    terms:
+      data_storage:
+        title: Data processing
+        label: By registering, you accept that we store the data collected here for processing.
+      data_protection:
+        title: Privacy Policy
+        label: By registering you accept the %{privacy_link}
+      general:
+        title: General Terms of Use
+        label: By registering you accept the %{terms_link}
+      privacy_link:
+        text: Privacy Policy
+      terms_link:
+        text: General Terms of Use
+      revoke_consent:
+        text: You can revoke your consent to data storage at any time without giving reasons.

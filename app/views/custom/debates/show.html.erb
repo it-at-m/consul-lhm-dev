@@ -46,8 +46,13 @@
             <%= render_image(@debate.image, :large, true) %>
           <% end %>
 
-          <%= auto_link_already_sanitized_html wysiwyg(@debate.description) %>
+          <% if @debate.projekt_labels.any? %>
+            <div class='resource-projekt-labels' style='margin-bottom:30px;'>
+              <%= render Shared::ProjektLabelsComponent.new(resource: @debate) %>
+            </div>
+          <% end %>
 
+          <%= auto_link_already_sanitized_html wysiwyg(@debate.description) %>
 
           <% if projekt_feature?(@debate.projekt, "debates.allow_attached_documents") %>
             <%= render "documents/documents",

@@ -33,7 +33,7 @@ class Legislation::Proposal < ApplicationRecord
   validates :title, length: { in: 4..Legislation::Proposal.title_max_length }
   validates :description, length: { maximum: Legislation::Proposal.description_max_length }
 
-  validates :terms_of_service, acceptance: { allow_nil: false }, on: :create
+  # validates :terms_of_service, acceptance: { allow_nil: false }, on: :create
 
   before_validation :set_responsible_name
 

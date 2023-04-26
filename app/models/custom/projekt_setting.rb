@@ -58,11 +58,13 @@ class ProjektSetting < ApplicationRecord
         "projekt_feature.debates.show_report_button_in_sidebar": 'active',
         "projekt_feature.debates.show_related_content": 'active',
         "projekt_feature.debates.show_comments": 'active',
+        "projekt_feature.debates.allow_attached_image": 'active',
         "projekt_feature.debates.allow_attached_documents": '',
         "projekt_feature.debates.only_admins_create_debates": '',
         "projekt_feature.debates.allow_downvoting": 'active',
         "projekt_feature.debates.show_in_sidebar_filter": 'active',
         "projekt_feature.debates.allow_voting": 'active',
+        "projekt_feature.debates.hide_projekt_selector": '',
 
         "projekt_feature.proposals.quorum_for_proposals": '',
         "projekt_feature.proposals.enable_proposal_support_withdrawal": 'active',
@@ -73,6 +75,7 @@ class ProjektSetting < ApplicationRecord
         "projekt_feature.proposals.show_community_button_in_proposal_sidebar": 'active',
         "projekt_feature.proposals.show_related_content": 'active',
         "projekt_feature.proposals.show_comments": 'active',
+        "projekt_feature.proposals.allow_attached_image": 'active',
         "projekt_feature.proposals.allow_attached_documents": 'active',
         "projekt_feature.proposals.only_admins_create_proposals": '',
         "projekt_feature.proposals.show_in_sidebar_filter": 'active',
@@ -80,6 +83,8 @@ class ProjektSetting < ApplicationRecord
         "projekt_feature.proposals.enable_summary": '',
         "projekt_feature.proposals.allow_voting": 'active',
         "projekt_feature.proposals.enable_external_video": 'active',
+        "projekt_feature.proposals.enable_geoman_controls_in_maps": 'active',
+        "projekt_feature.proposals.hide_projekt_selector": '',
 
         "projekt_feature.proposal_options.votes_for_proposal_success": 10000,
 
@@ -102,6 +107,7 @@ class ProjektSetting < ApplicationRecord
         "projekt_feature.budgets.only_admins_create_investment_proposals": '',
         "projekt_feature.budgets.show_map": 'active',
         "projekt_feature.budgets.show_results_after_first_vote": '',
+        "projekt_feature.budgets.enable_geoman_controls_in_maps": 'active',
 
         "projekt_feature.questions.show_questions_list": '',
 

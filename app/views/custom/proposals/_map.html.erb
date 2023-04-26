@@ -1,8 +1,19 @@
 <div class="map proposals-map not-print">
   <% if @selected_parent_projekt %>
-    <%= render_map(@selected_parent_projekt.map_location, "proposals", false, nil, @proposals_coordinates, @selected_parent_projekt.map_layers_for_render.to_json) %>
+    <%= render Shared::MapComponent.new(
+      map_location: @selected_parent_projekt.map_location,
+      parent_class: "proposals",
+      process_coordinates: @proposals_coordinates,
+      projekt: @selected_parent_projekt,
+      show_admin_shape: @selected_parent_projekt.map_location.show_admin_shape?
+    ) %>
+
   <% else %>
-    <%= render_map(nil, "proposals", false, nil, @proposals_coordinates, MapLayer.general.to_json) %>
+    <%= render Shared::MapComponent.new(
+      parent_class: "proposals",
+      process_coordinates: @proposals_coordinates
+    ) %>
+
   <% end %>
 </div>
 <div class='expand-overview-map-wrapper'>

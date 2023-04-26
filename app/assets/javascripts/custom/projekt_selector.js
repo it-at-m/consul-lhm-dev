@@ -62,6 +62,7 @@
         $('#map-container').hide();
       }
 
+      App.ProjektSelector.toggleImageAttachment($selectedProjekt)
       App.ProjektSelector.toggleDocumentAttachment($selectedProjekt)
       App.ProjektSelector.toggleSummary($selectedProjekt)
       App.ProjektSelector.toggleExternalVideoUrl($selectedProjekt)
@@ -100,6 +101,8 @@
 
     replaceProjektMapOnProposalCreation: function($projekt) {
 
+      App.Map.destroy();
+
       if ( $projekt.data('showMap') ) {
         $('#map-container').show();
 
@@ -107,14 +110,12 @@
           type: "GET",
           dataType: "html",
           success: function(data) {
-            $('.js-remove-marker-div').remove();
             App.Map.destroy();
             $('div.map_location.map').first().replaceWith(data)
             App.Map.initialize();
+            App.Map.maps[0].setView([$projekt.data('latitude'), $projekt.data('longitude')], $projekt.data('zoom')).invalidateSize();
           }
         });
-
-        App.Map.maps[0].setView([$projekt.data('latitude'), $projekt.data('longitude')], $projekt.data('zoom')).invalidateSize();
 
       } else {
         $('#map-container').hide();
@@ -164,7 +165,11 @@
     },
 
     updateProjektLabelSelector: function ($projekt) {
-      var labelIdsToShow = $projekt.data("projekt-label-ids").toString().split(",");
+      if ($projekt.data("projekt-label-ids")) {
+        var labelIdsToShow = $projekt.data("projekt-label-ids").toString().split(",");
+      } else {
+        var labelIdsToShow = [];
+      }
 
       if (labelIdsToShow.join().length == 0) {
         $('#label-for-projekt-labels-selector').addClass('hide');
@@ -179,6 +184,16 @@
           $(label).addClass('hide');
         }
       });
+    },
+
+    toggleImageAttachment: function($projekt) {
+      if ( $projekt.data('allowAttachedImage') ) {
+        $('#attach-image').show();
+      } else {
+        $('#attach-image #nested-image .direct-upload').remove();
+        $("#new_image_link").removeClass("hide");
+        $('#attach-image').hide();
+      }
     },
 
     toggleDocumentAttachment: function($projekt) {
@@ -238,7 +253,7 @@
       }
     },
 
-    preselectProjekt: function(projektId) {
+    preselectProjekt: function() {
       // get preselcted projekt id
       var selectedProjektId;
       var url = new URL(window.location.href);
@@ -267,6 +282,11 @@
         App.ProjektSelector.selectProjekt($selectedProjekt);
         $selectedProjekt.closest('.projekt_group').hide();
       });
+
+      if ( $selectedProjekt.data('hideProjektSelector') ) {
+        $('#projekt-selector-block').prev('legend').hide();
+        $('#projekt-selector-block').hide();
+      }
     },
 
 

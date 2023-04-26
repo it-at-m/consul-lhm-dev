@@ -128,7 +128,8 @@ class DeficiencyReportsController < ApplicationController
   end
 
   def deficiency_report_params
-    attributes = [:terms_of_service, :video_url, :on_behalf_of,
+    attributes = [:video_url, :on_behalf_of,
+                  :terms_of_service, :terms_data_storage, :terms_data_protection, :terms_general,
                   :deficiency_report_status_id,
                   :deficiency_report_category_id,
                   :deficiency_report_officer_id,

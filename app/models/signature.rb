@@ -51,7 +51,10 @@ class Signature < ApplicationRecord
       verified_at: Time.current,
       erased_at: Time.current,
       password: random_password,
-      terms_of_service: "1",
+      # terms_of_service: "1", #custom
+      terms_data_storage: "1", #custom
+      terms_data_protection: "1", #custom
+      terms_general: "1", #custom
       email: nil,
       date_of_birth: @census_api_response.date_of_birth,
       gender: @census_api_response.gender,

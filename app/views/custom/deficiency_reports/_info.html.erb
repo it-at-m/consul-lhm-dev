@@ -3,9 +3,13 @@
           @deficiency_report,
           "show_info"] do %>
 
-  <% if feature?(:map) && map_location_available?(@deficiency_report.map_location) %>
+  <% if feature?(:map) && map_location_available?(@deficiency_report) %>
     <div class="margin-bottom">
-      <%= render_map(@deficiency_report.map_location, "deficiency_report", false, nil, MapLocation.where(deficiency_report_id: @deficiency_report.id).map(&:json_data), MapLayer.general.to_json) %>
+      <%= render Shared::MapComponent.new(
+         mappable: @deficiency_report,
+         map_location: @deficiency_report.map_location,
+         parent_class: "deficiency_report"
+       ) %>
     </div>
   <% end %>
 

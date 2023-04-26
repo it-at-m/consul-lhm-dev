@@ -1,0 +1,29 @@
+<h2 class="inline-block"><%= t("custom.admin.registered_address_groupings.index.title") %></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= t("custom.admin.registered_address_groupings.attributes.key") %></th>
+      <th><%= t("custom.admin.registered_address_groupings.attributes.name") %></th>
+      <th><%= t("custom.admin.registered_address_groupings.attributes.options") %></th>
+      <th><%= t("admin.actions.actions") %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @registered_address_groupings.each do |grouping| %>
+      <tr id="<%= dom_id(grouping) %>">
+        <td><%= grouping.key %></td>
+        <td><%= grouping.name %></td>
+        <td><%= grouping.restriction_options %></td>
+        <td>
+          <%= render Admin::TableActionsComponent.new(grouping,
+                                                      actions: [:edit, :destroy],
+                                                      edit_path: edit_admin_registered_address_grouping_path(grouping),
+                                                      destroy_path: admin_registered_address_grouping_path(grouping)
+                                                     ) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

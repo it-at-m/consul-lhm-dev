@@ -10,11 +10,11 @@
     <td><%= user.email %></td>
     <td><%= user.first_name %></td>
     <td><%= user.last_name %></td>
-    <td><%= user.city_street&.name %></td>
-    <td><%= user.street_number %></td>
+    <td><%= user.city_name %></td>
+    <td><%= "#{user.city_street&.name || user.street_name } #{user.street_number}" %></td>
+    <td><%= "#{user.registered_address_street&.name} #{user.street_number}#{user.street_number_extension}" if user.registered_address_street.present? %></td>
     <td><%= user.plz %></td>
     <td><%= user.geozone&.name %></td>
-    <td><%= user.city_name %></td>
     <td><%= user.document_type %></td>
     <td><%= user.document_last_digits %></td>
     <td><%= t("custom.devise_views.users.gender.#{user.gender}") if user.gender.present? %></td>

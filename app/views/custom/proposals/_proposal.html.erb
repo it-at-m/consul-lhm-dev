@@ -5,7 +5,7 @@
     </div>
   </div>
 
-  <% cache [proposal, proposal.image, "image"] do %>
+  <% cache [proposal, proposal.image, "image", proposal&.projekt] do %>
     <div class='columns small-12 medium-3 large-2 show-for-small-only not-print'>
       <% if show_image_thumbnail?(proposal) %>
         <%= link_to namespaced_proposal_path(proposal) do %>
@@ -14,7 +14,7 @@
       <% end %>
     </div>
 
-    <div class="columns small-12 medium-3 large-2 show-for-medium not-print <%= "image-placeholder icon-#{proposal.projekt.icon || "image" }" unless show_image_thumbnail?(proposal)  %>" data-equalizer-watch='main'>
+    <div class="columns small-12 medium-3 large-2 show-for-medium not-print <%= "image-placeholder icon-#{proposal.projekt.icon.presence || "image"}" unless show_image_thumbnail?(proposal) %>" data-equalizer-watch='main'>
       <% if show_image_thumbnail?(proposal) %>
         <%= link_to namespaced_proposal_path(proposal) do %>
           <%= image_tag proposal.image.variant(:thumb_wider), alt: proposal.image.title.unicode_normalize %>
@@ -38,6 +38,7 @@
                   params[:affiliated_geozones],
                   params[:geozone_restriction],
                   params[:restricted_geozones],
+                  params[:projekt_label_ids],
                   "details"] do %>
           <div class='resource-projekt-labels'>
             <%= render Shared::ProjektLabelsComponent.new(resource: proposal) %>

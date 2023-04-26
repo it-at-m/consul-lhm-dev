@@ -33,6 +33,10 @@ de:
         document_type:
           card: Personalausweis
           pass: Reisepass
+    helpers:
+      select:
+        prompt: Bitte wählen
+        not_in_list: Nicht in der Liste enthalten
     gdpr_notice:
       accept: Akzeptieren
       link_text: Mehr Infos

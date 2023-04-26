@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_24_160057) do
+ActiveRecord::Schema.define(version: 2023_04_14_081219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1161,10 +1161,13 @@ ActiveRecord::Schema.define(version: 2023_02_24_160057) do
     t.bigint "projekt_id"
     t.string "pin_color"
     t.bigint "deficiency_report_id"
+    t.jsonb "shape", default: {}, null: false
+    t.boolean "show_admin_shape", default: false
     t.index ["deficiency_report_id"], name: "index_map_locations_on_deficiency_report_id"
     t.index ["investment_id"], name: "index_map_locations_on_investment_id"
     t.index ["projekt_id"], name: "index_map_locations_on_projekt_id"
     t.index ["proposal_id"], name: "index_map_locations_on_proposal_id"
+    t.index ["shape"], name: "index_map_locations_on_shape", using: :gin
   end
 
   create_table "milestone_statuses", id: :serial, force: :cascade do |t|
@@ -1646,8 +1649,11 @@ ActiveRecord::Schema.define(version: 2023_02_24_160057) do
     t.boolean "active"
     t.boolean "verification_restricted", default: false
     t.bigint "age_restriction_id"
+    t.string "registered_address_grouping_restriction", default: ""
+    t.jsonb "registered_address_grouping_restrictions", default: {}, null: false
     t.index ["age_restriction_id"], name: "index_projekt_phases_on_age_restriction_id"
     t.index ["projekt_id"], name: "index_projekt_phases_on_projekt_id"
+    t.index ["registered_address_grouping_restrictions"], name: "index_p_phases_on_ra_grouping_restrictions", using: :gin
   end
 
   create_table "projekt_question_answers", force: :cascade do |t|
@@ -1814,6 +1820,48 @@ ActiveRecord::Schema.define(version: 2023_02_24_160057) do
     t.index ["projekt_id"], name: "index_proposals_on_projekt_id"
     t.index ["selected"], name: "index_proposals_on_selected"
     t.index ["tsv"], name: "index_proposals_on_tsv", using: :gin
+  end
+
+  create_table "registered_address_cities", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "registered_address_groupings", force: :cascade do |t|
+    t.string "key"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "registered_address_street_projekt_phases", force: :cascade do |t|
+    t.bigint "registered_address_street_id"
+    t.bigint "projekt_phase_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["projekt_phase_id"], name: "index_ras_projekt_phases_on_projekt_phase_id"
+    t.index ["registered_address_street_id"], name: "index_ras_projekt_phases_on_ras_id"
+  end
+
+  create_table "registered_address_streets", force: :cascade do |t|
+    t.string "name"
+    t.string "plz"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name", "plz"], name: "index_registered_address_streets_on_name_and_plz", unique: true
+  end
+
+  create_table "registered_addresses", force: :cascade do |t|
+    t.string "street_number"
+    t.string "street_number_extension"
+    t.jsonb "groupings", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "registered_address_street_id"
+    t.integer "registered_address_city_id"
+    t.index ["groupings"], name: "index_registered_addresses_on_groupings", using: :gin
+    t.index ["registered_address_street_id"], name: "index_registered_addresses_on_registered_address_street_id"
   end
 
   create_table "related_content_scores", id: :serial, force: :cascade do |t|
@@ -2158,6 +2206,8 @@ ActiveRecord::Schema.define(version: 2023_02_24_160057) do
     t.bigint "city_street_id"
     t.boolean "adm_email_on_new_manual_verification", default: false
     t.text "keycloak_id_token", default: ""
+    t.bigint "registered_address_id"
+    t.string "street_number_extension"
     t.index ["bam_street_id"], name: "index_users_on_bam_street_id"
     t.index ["city_street_id"], name: "index_users_on_city_street_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
@@ -2167,6 +2217,7 @@ ActiveRecord::Schema.define(version: 2023_02_24_160057) do
     t.index ["geozone_id"], name: "index_users_on_geozone_id"
     t.index ["hidden_at"], name: "index_users_on_hidden_at"
     t.index ["password_changed_at"], name: "index_users_on_password_changed_at"
+    t.index ["registered_address_id"], name: "index_users_on_registered_address_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["username"], name: "index_users_on_username"
   end
@@ -2365,6 +2416,9 @@ ActiveRecord::Schema.define(version: 2023_02_24_160057) do
   add_foreign_key "projekts", "projekts", column: "parent_id"
   add_foreign_key "proposals", "communities"
   add_foreign_key "proposals", "projekts"
+  add_foreign_key "registered_address_street_projekt_phases", "projekt_phases"
+  add_foreign_key "registered_address_street_projekt_phases", "registered_address_streets"
+  add_foreign_key "registered_addresses", "registered_address_streets"
   add_foreign_key "related_content_scores", "related_contents"
   add_foreign_key "related_content_scores", "users"
   add_foreign_key "sdg_managers", "users"
@@ -2372,5 +2426,6 @@ ActiveRecord::Schema.define(version: 2023_02_24_160057) do
   add_foreign_key "users", "bam_streets"
   add_foreign_key "users", "city_streets"
   add_foreign_key "users", "geozones"
+  add_foreign_key "users", "registered_addresses"
   add_foreign_key "valuators", "users"
 end

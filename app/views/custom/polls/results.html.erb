@@ -9,6 +9,10 @@
 
   <%= render "poll_subnav" %>
 
+  <% if can? :csv_answers_votes, @poll %>
+    <%= link_to t("custom.polls.show.results.download_csv_answers_votes"), poll_csv_answers_votes_path(@poll, format: :csv), class: "button small float-right" %>
+  <% end %>
+
   <div class="row margin" data-equalizer data-equalize-on="medium">
     <div class="small-12 medium-3 column sidebar" data-equalizer-watch>
       <p><strong><%= t("polls.show.results.title") %></strong></p>
@@ -80,13 +84,18 @@
                   </td>
                   <td style='width:65px' class='<%= answer.total_votes == most_voted_answer_votes ? "win" : "" %>'>
                     <% if answer.total_votes > 0 %>
-                      <%= link_to stats_poll_question_answer_path(answer.question.poll, answer), remote: true, style: "margin-right:7px;text-decoration:none;", title: t("custom.polls.results.question_street_details_tooltip") do %>
-                        <i class="fas fa-chart-pie"></i>
+                      <% if can? :stats, answer.question.poll %>
+                        <%= link_to stats_poll_question_answer_path(answer.question.poll, answer), remote: true, style: "margin-right:7px;text-decoration:none;", title: t("custom.polls.results.question_street_details_tooltip") do %>
+                          <i class="fas fa-chart-pie"></i>
+                        <% end %>
                       <% end %>
+
                       <div class="reveal" id="<%= dom_id(answer, :answer_stats) %>" data-reveal></div>
 
-                      <%= link_to results_poll_question_answer_path(answer.question.poll, answer), remote: true, title: t("custom.polls.results.question_answer_details_tooltip") do %>
-                        <i class="fas fa-clipboard-list"></i>
+                      <% if can? :results, answer.question.poll %>
+                        <%= link_to results_poll_question_answer_path(answer.question.poll, answer), remote: true, title: t("custom.polls.results.question_answer_details_tooltip") do %>
+                          <i class="fas fa-clipboard-list"></i>
+                        <% end %>
                       <% end %>
                       <div class="reveal" id="<%= dom_id(answer, :answer_results) %>" data-reveal></div>
                     <% end %>

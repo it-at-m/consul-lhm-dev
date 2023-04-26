@@ -18,8 +18,12 @@ class ProjektPhase < ApplicationRecord
   has_many :projekt_phase_geozones, dependent: :destroy
   has_many :geozone_restrictions, through: :projekt_phase_geozones, source: :geozone,
            after_add: :touch_updated_at, after_remove: :touch_updated_at
-  has_many :city_street_projekt_phases, dependent: :destroy
-  has_many :city_streets, through: :city_street_projekt_phases
+
+  has_many :city_street_projekt_phases, dependent: :destroy     # TODO delete
+  has_many :city_streets, through: :city_street_projekt_phases  # TODO delete
+
+  has_many :registered_address_street_projekt_phase, dependent: :destroy
+  has_many :registered_address_streets, through: :registered_address_street_projekt_phase
 
   scope :regular_phases, -> { where.not(type: REGULAR_PROJEKT_PHASES) }
   scope :special_phases, -> { where(type: REGULAR_PROJEKT_PHASES) }
@@ -84,7 +88,7 @@ class ProjektPhase < ApplicationRecord
   end
 
   def street_restrictions_formatted
-    city_streets.map(&:name).flatten.join(", ")
+    registered_address_streets.map(&:name).flatten.join(", ")
   end
 
   def age_restriction_formatted
@@ -116,10 +120,30 @@ class ProjektPhase < ApplicationRecord
       when "only_streets"
         if !user.level_three_verified?
           :not_verified
-        elsif !city_streets.include?(user.city_street)
+        elsif !registered_address_streets.include?(user.registered_address_street)
           :only_specific_streets
         end
       end
+    end
+
+    def advanced_geozone_restriction_permission_problem(user)
+      case registered_address_grouping_restriction
+      when "no_restriction" || nil
+        nil
+      else
+        if user.registered_address.blank?
+          :no_registered_address
+        elsif !user.level_three_verified?
+          :not_verified
+        elsif !user_registered_address_permitted?(user)
+          :only_specific_registered_address_groupings
+        end
+      end
+    end
+
+    def user_registered_address_permitted?(user)
+      registered_address_grouping_restrictions[registered_address_grouping_restriction]
+        .include?(user.registered_address.groupings[registered_address_grouping_restriction])
     end
 
     def age_permission_problem(user)

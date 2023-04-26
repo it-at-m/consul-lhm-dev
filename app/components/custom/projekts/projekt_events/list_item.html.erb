@@ -2,7 +2,7 @@
   <div class="projekt-event-item-calendar-column">
     <div class="projekt-event-item-calendar">
       <div class="projekt-event-item-calendar-dayname">
-        <%= projekt_event.datetime.strftime('%b').upcase %>
+        <%= l(projekt_event.datetime, format: "%b").upcase %>
       </div>
       <div class="projekt-event-item-calendar-daynumber">
         <%= projekt_event.datetime.strftime('%d') %>
@@ -13,7 +13,7 @@
             -
           </div>
           <div class="projekt-event-item-calendar-dayname">
-            <%= projekt_event.end_datetime.strftime('%b').upcase %>
+            <%= l(projekt_event.end_datetime, format: "%b").upcase %>
           </div>
           <div class="projekt-event-item-calendar-daynumber">
             <%= projekt_event.end_datetime.strftime('%d') %>

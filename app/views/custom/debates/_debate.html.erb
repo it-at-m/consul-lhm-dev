@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <% cache [debate, debate.image, "image"] do %>
+  <% cache [debate, debate.image, "image", debate.projekt] do %>
     <div class='columns small-12 medium-3 large-2 show-for-small-only'>
       <% if show_image_thumbnail?(debate) %>
         <%= link_to debate do %>
@@ -15,7 +15,7 @@
       <% end %>
     </div>
 
-    <div class="columns small-12 medium-3 large-2 show-for-medium <%= "image-placeholder icon-#{debate.projekt.icon || 'image' }" unless show_image_thumbnail?(debate) %>" data-equalizer-watch='main'>
+    <div class="columns small-12 medium-3 large-2 show-for-medium <%= "image-placeholder icon-#{debate.projekt.icon.presence || 'image' }" unless show_image_thumbnail?(debate) %>" data-equalizer-watch='main'>
       <% if show_image_thumbnail?(debate) %>
         <%= link_to debate do %>
           <%= image_tag debate.image.variant(:thumb_wider), alt: debate.image.title.unicode_normalize %>
@@ -39,6 +39,7 @@
                   params[:affiliated_geozones],
                   params[:geozone_restriction],
                   params[:restricted_geozones],
+                  params[:projekt_label_ids],
                   "details"] do %>
  
           <div class='resource-projekt-labels'>

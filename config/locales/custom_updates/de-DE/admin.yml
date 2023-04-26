@@ -100,6 +100,36 @@ de:
         geozone:
           postal_codes: Postleitzahlen
           postal_codes_help: Kommaseparierte Liste der Postleitzahlen, die zu dieser Geozone gehören
+      registered_addresses:
+        index:
+          title: Registrierte Adressen
+          import_button: Import
+        attributes:
+          id: ID
+          city: Stadt
+          plz: PLZ
+          street_name: Straße
+          street_number: Hausnummer
+          street_number_extension: Hausnummerergänzung
+          groupings: Gruppierungen
+      registered_address_groupings:
+        index:
+          title: Registrierte Adressgruppierung
+        update:
+          success: Registrierte Adressgruppierung erfolgreich aktualisiert
+        destroy:
+          success: Registrierte Adressgruppierung erfolgreich gelöscht
+        attributes:
+          key: Spaltenname
+          name: Name
+          options: Optionen  
+      registered_address_streets:
+        index:
+          title: Registrierte Adressen
+        attributes:
+          id: ID
+          name: Name
+          plz: PLZ
       menu:
         deficiency_reports:
           categories: Kategorien festlegen
@@ -114,6 +144,13 @@ de:
         legislation: Textbearbeitung
         age_restrictions: Altersbeschränkungen
         modal_notification: Popup Benachrichtigung
+        title_registered_addresses: Registrierte Adressen
+        registered_addresses:
+          list: Registrierte Adressen
+        registered_address_groupings:
+          list: Registrierte Adressgruppen
+        registered_address_streets:
+          list: Registrierte Straßen    
       polls:
         questions:
           show:
@@ -237,7 +274,8 @@ de:
             projekt_notification_phase: Benachrichtigungen
             proposal_phase: Vorschläge
             question_phase: Kurzumfrage
-            restriction: Partizipationsbeschränkung
+            geo_restriction_title: Gebietsbeschränkung
+            extended_geo_restriction_title: Zusatzliche individuelle Gebietsbeschränkungen
             start_date: Anfangsdatum
             standard_element: Standardelement
             voting_manage: Abstimmungen verwalten
@@ -389,13 +427,13 @@ de:
         columns:
           first_name: Vorname
           last_name: Nachname
-          city_street_id: Straße
-          street_number: Hausnummer
+          street_address: Adresse
           plz: Postleitzahl
           geozone: Gebiet
           city_name: Stadt
           gender: Geschlecht
           date_of_birth: Geburtsdatum
+          document_type: Dokument
           document_last_digits: Dokument (4 letzten Ziffern)
           verified_at: Verifiziert am
           actions: Aktionen

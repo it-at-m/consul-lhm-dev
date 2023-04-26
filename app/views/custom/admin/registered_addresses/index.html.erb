@@ -1,0 +1,36 @@
+<%#= form_tag import_admin_registered_addresses_path, multipart: true do %>
+  <%#= file_field_tag :file, style: "width:auto;" %>
+  <%#= submit_tag t("custom.admin.registered_addresses.index.import_button") %>
+<%# end %>
+
+<h2 class="inline-block"><%= t("custom.admin.registered_addresses.index.title") %></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= t("custom.admin.registered_addresses.attributes.id") %></th>
+      <th><%= t("custom.admin.registered_addresses.attributes.city") %></th>
+      <th><%= t("custom.admin.registered_addresses.attributes.plz") %></th>
+      <th><%= t("custom.admin.registered_addresses.attributes.street_name") %></th>
+      <th><%= t("custom.admin.registered_addresses.attributes.street_number") %></th>
+      <th><%= t("custom.admin.registered_addresses.attributes.street_number_extension") %></th>
+      <th><%= t("custom.admin.registered_addresses.attributes.groupings") %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @registered_addresses.each do |address| %>
+      <tr id="<%= dom_id(address) %>">
+        <td><%= address.id %></td>
+        <td><%= address.registered_address_city.name %></td>
+        <td><%= address.registered_address_street.plz %></td>
+        <td><%= address.registered_address_street.name %></td>
+        <td><%= address.street_number %></td>
+        <td><%= address.street_number_extension %></td>
+        <td><%= JSON.pretty_generate(address.groupings) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @registered_addresses %>

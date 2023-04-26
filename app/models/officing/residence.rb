@@ -41,7 +41,10 @@ class Officing::Residence
         verified_at:           Time.current,
         erased_at:             Time.current,
         password:              random_password,
-        terms_of_service:      "1",
+        # terms_of_service:      "1", #custom
+        terms_data_storage:    "1", #custom
+        terms_data_protection: "1", #custom
+        terms_general:         "1", #custom
         email:                 nil
       }
       self.user = User.create!(user_params)

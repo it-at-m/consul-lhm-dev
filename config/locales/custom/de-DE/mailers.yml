@@ -8,7 +8,7 @@ de:
       subject: Jemand hat Ihren Beitrag kommentiert.
       title: Neuer Kommentar
     config:
-      notifications_link: here
+      notifications_link: hier
       unsubscribe_text: 'Falls Sie keine weiteren E-Mails mehr erhalten möchten, bitte klicken Sie %{notifications}.'
     email_verification:
       click_here_to_verify: diesen Link

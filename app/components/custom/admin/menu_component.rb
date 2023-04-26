@@ -111,4 +111,32 @@ class Admin::MenuComponent < ApplicationComponent
         controller_name == "modal_notifications"
       ]
     end
+
+    def registered_addresses?
+      %w[registered_addresses registered_address_groupings registered_address_streets].include?(controller_name)
+    end
+
+    def registered_addresses_list
+      [
+        t("custom.admin.menu.registered_addresses.list"),
+        admin_registered_addresses_path,
+        controller_name == "registered_addresses"
+      ]
+    end
+
+    def registered_address_groupings_list
+      [
+        t("custom.admin.menu.registered_address_groupings.list"),
+        admin_registered_address_groupings_path,
+        controller_name == "registered_address_groupings"
+      ]
+    end
+
+    def registered_address_streets_list
+      [
+        t("custom.admin.menu.registered_address_streets.list"),
+        admin_registered_address_streets_path,
+        controller_name == "registered_address_streets"
+      ]
+    end
 end

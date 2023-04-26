@@ -32,7 +32,7 @@ class Debate < ApplicationRecord
   validate :description_length
   validates :author, presence: true
 
-  validates :terms_of_service, acceptance: { allow_nil: false }, on: :create
+  # validates :terms_of_service, acceptance: { allow_nil: false }, on: :create
 
   before_save :calculate_hot_score, :calculate_confidence_score
 

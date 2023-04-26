@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <% cache [deficiency_report, "image"] do %>
+  <% cache [deficiency_report, "image", deficiency_report.category] do %>
     <div class='columns small-12 medium-3 large-2 show-for-small-only'>
       <% if show_image_thumbnail?(deficiency_report) %>
         <%= link_to deficiency_report do %>
@@ -15,7 +15,7 @@
       <% end %>
     </div>
 
-    <div class="columns small-12 medium-3 large-2 show-for-medium <%= "image-placeholder icon-#{deficiency_report.category.icon || 'image'}" unless show_image_thumbnail?(deficiency_report) %>" data-equalizer-watch='main'>
+    <div class="columns small-12 medium-3 large-2 show-for-medium <%= "image-placeholder icon-#{deficiency_report.category.icon.presence || "image"}" unless show_image_thumbnail?(deficiency_report) %>" data-equalizer-watch='main'>
       <% if show_image_thumbnail?(deficiency_report)  %>
         <%= link_to deficiency_report do %>
           <%= image_tag deficiency_report.image.variant(:thumb_wider), alt: deficiency_report.image.title.unicode_normalize %>

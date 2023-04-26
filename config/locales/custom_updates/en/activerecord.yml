@@ -68,11 +68,14 @@ en:
         first_name: First name
         last_name: Last name
         city_street_id: Street
+        street_name: Street
         street_number: Street number
+        street_number_extension: Street number extension
         plz: Postal code
         city_name: City
         gender: Gender
         date_of_birth: Date of birth
+        document_type: Document
         document_last_digits: Document (last 4 digits)
       modal_notification:
         titel: Titel

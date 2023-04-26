@@ -33,6 +33,10 @@ en:
         document_type:
           card: ID card
           pass: Passport
+    helpers:
+      select:
+        prompt: Please select
+        not_in_list: Not in the list
     gdpr_notice:
       accept: Accept
       link_text: More info

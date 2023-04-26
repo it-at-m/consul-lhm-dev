@@ -1,6 +1,8 @@
 require_dependency Rails.root.join("app", "controllers", "verification", "residence_controller").to_s
 
 class Verification::ResidenceController < ApplicationController
+  include HasRegisteredAddress
+
   def new
     current_user_attributes = current_user.attributes.transform_keys(&:to_sym).slice(*allowed_params)
     @residence = Verification::Residence.new(current_user_attributes)
@@ -8,6 +10,9 @@ class Verification::ResidenceController < ApplicationController
 
   def create
     @residence = Verification::Residence.new(residence_params.merge(user: current_user))
+    @residence.form_registered_address_city_id = params[:form_registered_address_city_id]
+    @residence.form_registered_address_street_id = params[:form_registered_address_street_id]
+    @residence.form_registered_address_id = params[:form_registered_address_id]
 
     if @residence.save
       NotificationServices::NewManualVerificationRequestNotifier.call(current_user.id) # remove unless manual
@@ -21,9 +26,11 @@ class Verification::ResidenceController < ApplicationController
 
     def allowed_params
       [
-        :document_number, :document_type, :date_of_birth, :postal_code, :terms_of_service,
-        :first_name, :last_name, :city_street_id, :street_number,
-        :plz, :city_name, :gender, :document_type, :document_last_digits
+        :first_name, :last_name, :gender, :date_of_birth,
+        :city_name, :plz, :street_name, :street_number, :street_number_extension,
+        :document_type, :document_last_digits,
+        :terms_data_storage, :terms_data_protection, :terms_general,
+        :registered_address_id, :terms_of_service
       ]
     end
 end

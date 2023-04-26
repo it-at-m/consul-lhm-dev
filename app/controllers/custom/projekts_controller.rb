@@ -20,9 +20,7 @@ class ProjektsController < ApplicationController
     :proposal_phase_footer_tab, :voting_phase_footer_tab
   ]
 
-  before_action do
-    raise FeatureFlags::FeatureDisabled, :projekts_overview unless Setting['extended_feature.projekts_overview_page_navigation.show_in_navigation']
-  end
+  before_action :raise_flag_feature_disabled, except: [:map_html]
 
   include ProjektControllerHelper
 
@@ -339,9 +337,13 @@ class ProjektsController < ApplicationController
     @sdgs = (@projekts.map(&:sdg_goals).flatten.uniq.compact + SDG::Goal.where(code: @filtered_goals).to_a).uniq
     @sdg_targets = (@projekts.map(&:sdg_targets).flatten.uniq.compact + SDG::Target.where(code: @filtered_targets).to_a).uniq
 
-    if @overview_page_special_projekt.proposal_phase.phase_activated?
-      proposals = Proposal.where(projekt_id: @overview_page_special_projekt.id)
-      @map_coordinates = @map_coordinates + all_proposal_map_locations(proposals)
-    end
+    # if @overview_page_special_projekt.proposal_phase.phase_activated?
+    #   proposals = Proposal.where(projekt_id: @overview_page_special_projekt.id)
+    #    @map_coordinates = @map_coordinates + all_proposal_map_locations(proposals)
+    # end
+  end
+
+  def raise_flag_feature_disabled
+    raise FeatureFlags::FeatureDisabled, :projekts_overview unless Setting["extended_feature.projekts_overview_page_navigation.show_in_navigation"]
   end
 end

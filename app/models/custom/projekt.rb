@@ -89,7 +89,8 @@ class Projekt < ApplicationRecord
   scope :with_order_number, -> { where.not(order_number: nil).order(order_number: :asc) }
 
   scope :top_level, -> {
-    with_order_number
+    regular
+      .with_order_number
       .where(parent: nil)
   }
 
@@ -476,6 +477,10 @@ class Projekt < ApplicationRecord
 
   def all_projekt_labels_in_tree
     ProjektLabel.where(projekt_id: all_ids_in_tree)
+  end
+
+  def map_location_with_admin_shape
+    map_location.show_admin_shape? ? map_location : nil
   end
 
   private

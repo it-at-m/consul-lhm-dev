@@ -23,18 +23,29 @@
 <link rel="stylesheet" href="//unpkg.com/leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css" type="text/css">
 <script src="//unpkg.com/leaflet-gesture-handling"></script>
 
+<script src="https://unpkg.com/Leaflet.Deflate/dist/L.Deflate.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.css" />
+<script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.min.js"></script>
+
 <%= javascript_include_tag "cli/matomo.js", defer: true, type: "text/plain", data: { type: "application/javascript", name: 'matomo' } %>
 
 <%= javascript_include_tag "klaro/config.js", defer: true %>
 <%= javascript_include_tag "klaro/klaro.js", defer: true %>
 
 <% if Setting["extended_feature.general.enable_google_translate"].present? %>
-  <!-- Scripts for google translate -->
   <script type="text/javascript">
-    function googleTranslateElementInit() {
-    new google.translate.TranslateElement({pageLanguage: 'de'}, 'google_translate_element');
+    var googleTranslateElementInit = function() {
+      new google.translate.TranslateElement({pageLanguage: 'de'}, 'google_translate_element');
     }
+
+    $(document).on('turbolinks:load', function() {
+      var googleTranslateScript = document.createElement('script');
+      googleTranslateScript.type = 'text/javascript';
+      googleTranslateScript.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      document.head.appendChild(googleTranslateScript);
+
+      googleTranslateElementInit();
+    });
   </script>
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <!-- Scripts for google translate end -->
 <% end %>

@@ -114,7 +114,7 @@ de:
       recommendations:
         without_results: Es gibt keine Diskussionen, die Ihren Interessen entsprechen
         without_interests: Folgen Sie Vorschlägen, sodass wir Ihnen Empfehlungen geben können
-        eisable: "Empfehlungen für Diskussionen werden nicht mehr angezeigt, wenn sie diese ablehnen. Sie können auf der 'Mein Benutzerkonto'-Seite wieder aktiviert werden"
+        disable: "Empfehlungen für Diskussionen werden nicht mehr angezeigt, wenn sie diese ablehnen. Sie können auf der 'Mein Benutzerkonto'-Seite wieder aktiviert werden"
         actions:
           success: "Empfehlungen für Diskussionen sind jetzt für dieses Konto deaktiviert"
           error: "Ein Fehler ist aufgetreten. Bitte gehen Sie zur 'Ihr Benutzerkonto'-Seite um Diskussionen-Empfehlungen manuell abzuschalten"
