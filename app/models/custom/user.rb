@@ -185,6 +185,12 @@ class User < ApplicationRecord
     !unverified?
   end
 
+  def formatted_address
+    return registered_address.formatted_name if registered_address.present?
+
+    "#{street_name} #{street_number}#{street_number_extension}"
+  end
+
   private
 
     def update_qualified_votes_count_for_budget_investments
