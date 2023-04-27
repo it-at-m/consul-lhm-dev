@@ -1,6 +1,19 @@
 require_dependency Rails.root.join("app", "controllers", "admin", "users_controller").to_s
 
 class Admin::UsersController < Admin::BaseController
+  def index
+    @users = @users.send(@current_filter).order(:created_at)
+    @users = @users.by_username_email_or_document_number(params[:search]) if params[:search]
+    @users = @users.page(params[:page]) unless params[:format] == "csv"
+    respond_to do |format|
+      format.html
+      format.js
+      format.csv do
+        send_data CsvServices::UsersExporter.call(@users), filename: "users-#{Time.zone.today}.csv"
+      end
+    end
+  end
+
   def verify
     @user = User.find(params[:id])
     if @user.verify!
