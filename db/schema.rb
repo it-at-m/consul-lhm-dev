@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_14_081219) do
+ActiveRecord::Schema.define(version: 2023_04_28_080411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -881,6 +881,22 @@ ActiveRecord::Schema.define(version: 2023_04_14_081219) do
     t.boolean "concealed", default: false
     t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
     t.index ["user_id"], name: "index_images_on_user_id"
+  end
+
+  create_table "individual_group_values", force: :cascade do |t|
+    t.string "name"
+    t.bigint "individual_group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["individual_group_id"], name: "index_individual_group_values_on_individual_group_id"
+  end
+
+  create_table "individual_groups", force: :cascade do |t|
+    t.string "name"
+    t.integer "kind", default: 0
+    t.boolean "visible", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "legislation_annotations", id: :serial, force: :cascade do |t|
@@ -2373,6 +2389,7 @@ ActiveRecord::Schema.define(version: 2023_04_14_081219) do
   add_foreign_key "geozones_polls", "polls"
   add_foreign_key "identities", "users"
   add_foreign_key "images", "users"
+  add_foreign_key "individual_group_values", "individual_groups"
   add_foreign_key "legislation_draft_versions", "legislation_processes"
   add_foreign_key "legislation_processes", "projekts"
   add_foreign_key "legislation_proposals", "legislation_processes"

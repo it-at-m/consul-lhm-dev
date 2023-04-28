@@ -76,7 +76,7 @@ class Admin::MenuComponent < ApplicationComponent
 
     def settings?
       controllers_names = ["settings", "tags", "geozones", "images", "content_blocks",
-                           "local_census_records", "imports", "age_restrictions"]
+                           "local_census_records", "imports", "age_restrictions", "individual_groups", "individual_group_values"]
       controllers_names.include?(controller_name) &&
         controller.class.parent != Admin::Poll::Questions::Answers &&
         controller.class != Admin::DeficiencyReports::SettingsController
@@ -137,6 +137,14 @@ class Admin::MenuComponent < ApplicationComponent
         t("custom.admin.menu.registered_address_streets.list"),
         admin_registered_address_streets_path,
         controller_name == "registered_address_streets"
+      ]
+    end
+
+    def individual_groups_link
+      [
+        t("custom.admin.menu.individual_groups"),
+        admin_individual_groups_path,
+        ["individual_groups", "individual_group_values"].include?(controller_name)
       ]
     end
 end
