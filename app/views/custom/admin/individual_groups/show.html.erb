@@ -14,7 +14,7 @@
         <tbody>
           <% @individual_group.individual_group_values.each do |value| %>
             <tr id="<%= dom_id(value) %>">
-              <td><%= value.name %></td>
+              <td><%= link_to value.name, admin_individual_group_value_path(@individual_group, value) %></td>
               <td><%= render Admin::TableActionsComponent.new(value,
                                                               edit_path: edit_admin_individual_group_value_path(@individual_group, value),
                                                               destroy_path: admin_individual_group_value_path(@individual_group, value)

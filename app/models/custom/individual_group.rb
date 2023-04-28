@@ -3,4 +3,9 @@ class IndividualGroup < ApplicationRecord
   validates :name, presence: true
 
   enum kind: { hard: 0, soft: 1 }
+
+  scope :hard, -> { where(kind: "hard") }
+  scope :soft, -> { where(kind: "soft") }
+  scope :visible, -> { where(visible: true) }
+
 end

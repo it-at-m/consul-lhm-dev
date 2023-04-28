@@ -122,6 +122,13 @@
         </div>
       <% end %>
 
+      <% IndividualGroup.soft.visible.each do |individual_group| %>
+        <%= individual_group.name %>
+        <%= f.collection_check_boxes :individual_group_value_ids, individual_group.individual_group_values, :id, :name do |b| %>
+          <%= b.label(class: "checkbox-label--aligned") { b.check_box(class: "checkbox--aligned") + b.text } %>
+        <% end %>
+      <% end %>
+
       <%= f.password_field :password, autocomplete: "off",
                            placeholder: t("devise_views.users.registrations.new.password_label") %>
 
