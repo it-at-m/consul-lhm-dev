@@ -17,6 +17,9 @@ en:
       show:
         user_permission_votes: Participate in polls
         admin_notifications: Admin Notifications
+    boolean:
+      "yes": "yes"
+      "no": "no"
     comments:
       reply_form:
         leave_comment: Write a reply

@@ -493,8 +493,8 @@ de:
           title: Individuelle Gruppe bearbeiten
         table:
           name: Name
-          kind: Kind
-          visible: Visible
+          kind: Art
+          visible: Sichtbarkeit
       individual_group_values:
         show:
           related_users: verwandte Benutzer

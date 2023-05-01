@@ -20,8 +20,8 @@
           <% @individual_groups.each do |individual_group| %>
             <tr id="<%= dom_id(individual_group) %>">
               <td><%= link_to individual_group.name, admin_individual_group_path(individual_group) %></td>
-              <td><%= individual_group.kind %></td>
-              <td><%= individual_group.visible %></td>
+              <td><%= t("activerecord.attributes.individual_group.kinds.#{individual_group.kind}") %></td>
+              <td><%= t(individual_group.visible ? "custom.boolean.yes" : "custom.boolean.no") %></td>
               <td><%= render Admin::TableActionsComponent.new(individual_group) %></td>
             </tr>
           <% end %>

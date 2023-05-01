@@ -13,13 +13,13 @@
 
   <div class="row">
     <div class="column medium-4">
-      <%= f.check_box :visible  %>
+      <%= f.select :kind, IndividualGroup.kinds.keys.map { |kind| [t("activerecord.attributes.individual_group.kinds.#{kind}"), kind] } %>
     </div>
   </div>
 
   <div class="row">
     <div class="column medium-4">
-      <%= f.select :kind, IndividualGroup.kinds.keys %>
+      <%= f.check_box :visible %>
     </div>
   </div>
 

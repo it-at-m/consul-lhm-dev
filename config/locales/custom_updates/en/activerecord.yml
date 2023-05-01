@@ -82,3 +82,12 @@ en:
         active_from: From
         active_to: To
         html_content: HTML-Code of the notification
+      individual_group:
+        name: Name
+        visible: Visible
+        kind: Kind
+        kinds:
+          hard: hard
+          soft: soft
+      individual_group_value:
+        name: Name

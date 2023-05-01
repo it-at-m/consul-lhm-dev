@@ -125,6 +125,9 @@ de:
       individual_group:
         name: Name
         visible: sichtbar
-        kind: kind
+        kind: Art
+        kinds:
+          hard: starke Gruppe
+          soft: schwache Gruppe
       individual_group_value:
         name: Name
