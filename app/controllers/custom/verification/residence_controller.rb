@@ -18,7 +18,7 @@ class Verification::ResidenceController < ApplicationController
       NotificationServices::NewManualVerificationRequestNotifier.call(current_user.id) # remove unless manual
       redirect_to account_path, notice: t("custom.verification.residence.create.flash.success_manual")
     else
-      redirect_to new_residence_path, notice: t("custom.verification.residence.create.flash.error")
+      render :new #, alert: t("custom.verification.residence.create.flash.error")
     end
   end
 

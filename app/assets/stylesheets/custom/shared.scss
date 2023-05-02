@@ -296,7 +296,12 @@ form .checkbox-label--aligned {
   align-items: flex-start;
   margin-bottom: 0.5rem;
   text-align: left;
-  color: #222 !important;
+  color: #222;
+
+  &.is-invalid-label,
+  &.form-error {
+    color: #cc4b37;
+  }
 
   input {
     margin-bottom: 0;
