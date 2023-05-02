@@ -1363,7 +1363,7 @@ de:
           polls: "Abstimmungen nach Titel oder Beschreibung durchsuchen"
           proposals: "Search proposals by title, code, description or question"
           users: "Search user by name or email"
-        search: "Search"
+        search: "Suchen"
       search_results: "Ergebnisse anzeigen"
       no_search_results: "Keine Ergebnisse gefunden."
       actions: Aktionen

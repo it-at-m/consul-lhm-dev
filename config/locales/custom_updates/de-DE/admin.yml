@@ -496,6 +496,8 @@ de:
           name: Name
           kind: Art
           visible: Sichtbarkeit
+          email: Email
+          remove_user: Profil entfernen
       individual_group_values:
         show:
           related_users: verwandte Benutzer

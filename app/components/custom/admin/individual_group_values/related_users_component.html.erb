@@ -1,8 +1,8 @@
 <%= tag.table options do %>
   <thead>
     <tr>
-      <th><%= t("custom.admin.individual_groups.related_user_table.name") %></th>
-      <th><%= t("custom.admin.individual_groups.related_user_table.email") %></th>
+      <th><%= t("custom.admin.individual_groups.table.name") %></th>
+      <th><%= t("custom.admin.individual_groups.table.email") %></th>
       <th><%= t("admin.actions.actions") %></th>
     </tr>
   </thead>
@@ -19,7 +19,7 @@
           <% if individual_group_value.users.include?(related_user) %>
             <%= render Admin::TableActionsComponent.new(related_user,
               actions: [:destroy],
-              destroy_text: t("custom.admin.individual_groups.related_user_table.remove_user"),
+              destroy_text: t("custom.admin.individual_groups.table.remove_user"),
               destroy_path: remove_user_admin_individual_group_value_path(user_id: related_user.id),
               destroy_options: { class: "destroy-officer-link" }
             ) %>
