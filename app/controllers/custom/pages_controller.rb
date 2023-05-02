@@ -26,7 +26,8 @@ class PagesController < ApplicationController
       render action: :custom_page
 
     elsif @custom_page.present? && @custom_page.projekt.present?
-      head :not_found and return
+      @individual_group_value_names = @custom_page.projekt.individual_group_values.pluck(:name)
+      render "custom/pages/forbidden", layout: false
 
     elsif @custom_page.present?
       @cards = @custom_page.cards
