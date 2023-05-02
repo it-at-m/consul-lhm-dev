@@ -58,7 +58,8 @@ module PollsHelper
                city: Setting["org_name"],
                geozones: voting_phase.geozone_restrictions_formatted,
                age_restriction: voting_phase.age_restriction_formatted,
-               restricted_streets: voting_phase.street_restrictions_formatted
+               restricted_streets: voting_phase.street_restrictions_formatted,
+               individual_group_values: voting_phase.individual_group_value_restriction_formatted
               ))
     end
   end

@@ -47,7 +47,10 @@ class Projekt < ApplicationRecord
   has_one :livestream_phase, class_name: "ProjektPhase::LivestreamPhase", dependent: :destroy
   has_many :geozone_restrictions, through: :projekt_phases
 
-  has_and_belongs_to_many :geozone_affiliations, class_name: "Geozone", after_add: :touch_updated_at, after_remove: :touch_updated_at
+  has_and_belongs_to_many :geozone_affiliations, class_name: "Geozone",
+    after_add: :touch_updated_at, after_remove: :touch_updated_at
+  has_and_belongs_to_many :individual_group_values,
+    after_add: :touch_updated_at, after_remove: :touch_updated_at
 
   has_many :projekt_settings, dependent: :destroy
   has_many :projekt_notifications, dependent: :destroy

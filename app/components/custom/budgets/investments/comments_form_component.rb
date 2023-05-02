@@ -22,7 +22,8 @@ class Budgets::Investments::CommentsFormComponent < ApplicationComponent
         city: Setting["org_name"],
         geozones: @investment.budget.budget_phase.geozone_restrictions_formatted,
         age_restriction: @investment.budget.budget_phase.age_restriction_formatted,
-        restricted_streets: @investment.budget.budget_phase.street_restrictions_formatted
+        restricted_streets: @investment.budget.budget_phase.street_restrictions_formatted,
+        individual_group_values: @investment.budget.budget_phase.individual_group_value_restriction_formatted
        )
     end
 end

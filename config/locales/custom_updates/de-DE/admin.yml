@@ -243,6 +243,7 @@ de:
             actions: Aktionen
             activate: Aktiviert
             affiliation: Gebietszuordnung
+            projekt_individual_group_values: Sichbarkeitseinschränkung für Gruppen
             beginning: Anfangsdatum
             budget_phase: Budget
             copy_phase_link: Link für Tab abrufen

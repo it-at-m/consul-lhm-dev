@@ -12,7 +12,8 @@ module LegislationHelper
                city: Setting["org_name"],
                geozones: legislation_phase.geozone_restrictions_formatted,
                age_restriction: legislation_phase.age_restriction_formatted,
-               restricted_streets: legislation_phase.street_restrictions_formatted
+               restricted_streets: legislation_phase.street_restrictions_formatted,
+               individual_group_values: legislation_phase.individual_group_value_restriction_formatted
               ))
     end
   end

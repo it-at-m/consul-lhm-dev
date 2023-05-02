@@ -13,6 +13,8 @@ module ProjektAdminActions
       @projekt.reload
     end
 
+    @individual_groups = IndividualGroup.visible
+
     @projekt.build_comment_phase if @projekt.comment_phase.blank?
     @projekt.comment_phase.geozone_restrictions.build
 
@@ -126,6 +128,7 @@ module ProjektAdminActions
         :name, :parent_id, :total_duration_start, :total_duration_end, :color, :icon,
         :show_start_date_in_frontend, :show_end_date_in_frontend,
         :geozone_affiliated, :tag_list, :related_sdg_list, geozone_affiliation_ids: [], sdg_goal_ids: [],
+        individual_group_value_ids: [],
         map_location_attributes: map_location_attributes,
         image_attributes: image_attributes,
         projekt_notifications: [:title, :body],
