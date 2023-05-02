@@ -11,7 +11,7 @@ de:
             only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
             only_specific_streets: "Die Beteiligung ist auf Anwohner*innen der folgenden Straßen beschränkt: %{restricted_streets}."
             only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
-            only_specific_individual_group_values: "Participation is only allowed for these individual group values: %{individual_group_values}."
+            only_specific_individual_group_values: "Die Teilnahme ist beschränkt auf: %{individual_group_values}."
             phase_not_active: Diese Projektphase ist nicht aktiv
             phase_expired: Diese Projektphase ist bereits abgelaufen
             phase_not_current: Diese Projektphase wurde noch nicht gestartet
@@ -24,7 +24,7 @@ de:
             only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
             only_specific_streets: "Die Beteiligung ist auf Anwohner*innen der folgenden Straßen beschränkt: %{restricted_streets}."
             only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
-            only_specific_individual_group_values: "Participation is only allowed for these individual group values: %{individual_group_values}."
+            only_specific_individual_group_values: "Die Teilnahme ist beschränkt auf: %{individual_group_values}."
             phase_not_active: Diese Projektphase ist nicht aktiv
             phase_expired: Diese Projektphase ist bereits abgelaufen
             phase_not_current: Diese Projektphase wurde noch nicht gestartet
@@ -37,7 +37,7 @@ de:
             only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
             only_specific_streets: "Die Beteiligung ist auf Anwohner*innen der folgenden Straßen beschränkt: %{restricted_streets}."
             only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
-            only_specific_individual_group_values: "Participation is only allowed for these individual group values: %{individual_group_values}."
+            only_specific_individual_group_values: "Die Teilnahme ist beschränkt auf: %{individual_group_values}."
             phase_not_active: Diese Projektphase ist nicht aktiv
             phase_expired: Diese Projektphase ist bereits abgelaufen
             phase_not_current: Diese Projektphase wurde noch nicht gestartet
@@ -55,7 +55,7 @@ de:
             only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
             only_specific_streets: "Die Beteiligung ist auf Anwohner*innen der folgenden Straßen beschränkt: %{restricted_streets}."
             only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
-            only_specific_individual_group_values: "Participation is only allowed for these individual group values: %{individual_group_values}."
+            only_specific_individual_group_values: "Die Teilnahme ist beschränkt auf: %{individual_group_values}."
             phase_not_active: Diese Projektphase ist nicht aktiv
             phase_expired: Diese Projektphase ist bereits abgelaufen
             phase_not_current: Diese Projektphase wurde noch nicht gestartet
@@ -69,7 +69,7 @@ de:
           only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
           only_specific_streets: "Die Beteiligung ist auf Anwohner*innen der folgenden Straßen beschränkt: %{restricted_streets}."
           only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
-          only_specific_individual_group_values: "Participation is only allowed for these individual group values: %{individual_group_values}."
+          only_specific_individual_group_values: "Die Teilnahme ist beschränkt auf: %{individual_group_values}."
           phase_not_active: Diese Projektphase ist nicht aktiv
           phase_expired: Diese Projektphase ist bereits abgelaufen
           phase_not_current: Diese Projektphase wurde noch nicht gestartet
@@ -83,7 +83,7 @@ de:
           only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
           only_specific_streets: "Die Beteiligung ist auf Anwohner*innen der folgenden Straßen beschränkt: %{restricted_streets}."
           only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
-          only_specific_individual_group_values: "Participation is only allowed for these individual group values: %{individual_group_values}."
+          only_specific_individual_group_values: "Die Teilnahme ist beschränkt auf: %{individual_group_values}."
           phase_not_active: Diese Projektphase ist nicht aktiv
           phase_expired: Diese Projektphase ist bereits abgelaufen
           phase_not_current: Diese Projektphase wurde noch nicht gestartet
@@ -95,7 +95,7 @@ de:
           only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
           only_specific_streets: "Die Beteiligung ist auf Anwohner*innen der folgenden Straßen beschränkt: %{restricted_streets}."
           only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
-          only_specific_individual_group_values: "Participation is only allowed for these individual group values: %{individual_group_values}."
+          only_specific_individual_group_values: "Die Teilnahme ist beschränkt auf: %{individual_group_values}."
           phase_not_active: Diese Projektphase ist nicht aktiv
           phase_expired: Diese Projektphase ist bereits abgelaufen
           phase_not_current: Diese Projektphase wurde noch nicht gestartet
@@ -107,7 +107,7 @@ de:
           only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
           only_specific_streets: "Die Beteiligung ist auf Anwohner*innen der folgenden Straßen beschränkt: %{restricted_streets}."
           only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
-          only_specific_individual_group_values: "Participation is only allowed for these individual group values: %{individual_group_values}."
+          only_specific_individual_group_values: "Die Teilnahme ist beschränkt auf: %{individual_group_values}."
           phase_not_active: Diese Projektphase ist nicht aktiv
           phase_expired: Diese Projektphase ist bereits abgelaufen
           phase_not_current: Diese Projektphase wurde noch nicht gestartet
