@@ -10,7 +10,7 @@ class Budget
     def calculate_winners
       reset_winners
       if @budget.hide_money?
-        investments.compatible.update_all(winner: true)
+        investments.compatible.limit(@budget.max_number_of_winners).update_all(winner: true)
       else
         investments.compatible.each do |investment|
           @current_investment = investment

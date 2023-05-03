@@ -49,7 +49,7 @@
             </td>
             <td class="text-center">
               <% if @budget.voting_style == "distributed" %>
-                <%= investment.budget_ballot_lines.joins(ballot: :user).where.not(ballot: { users: { verified_at: nil } }).sum(:line_weight) %>
+                <%= investment.qualified_total_ballot_line_weight %>
               <% else %>
                 <%= investment.ballot_lines_count %>
               <% end %>

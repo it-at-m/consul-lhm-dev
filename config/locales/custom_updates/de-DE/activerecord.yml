@@ -64,6 +64,8 @@ de:
         on_behalf_of: Vorschlag im Namen von jemanden erstellen
       budget:
         voting_style_distributed: "Mehrere Stimmen"
+        hide_money: Geld ausblenden
+        max_number_of_winners: maximale Anzahl an Gewinnern
       budget/investment:
         implementation_performer: Umsetzung des Investitionsvorschlages
         implementation_performers:

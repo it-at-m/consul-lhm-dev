@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_01_114638) do
+ActiveRecord::Schema.define(version: 2023_05_03_153535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -381,7 +381,7 @@ ActiveRecord::Schema.define(version: 2023_05_01_114638) do
     t.text "implementation_contribution"
     t.string "user_cost_estimate"
     t.string "on_behalf_of"
-    t.integer "qualified_votes_count", default: 0
+    t.integer "qualified_total_ballot_line_weight", default: 0
     t.index ["administrator_id"], name: "index_budget_investments_on_administrator_id"
     t.index ["author_id"], name: "index_budget_investments_on_author_id"
     t.index ["budget_id"], name: "index_budget_investments_on_budget_id"
@@ -482,6 +482,7 @@ ActiveRecord::Schema.define(version: 2023_05_01_114638) do
     t.boolean "published"
     t.boolean "hide_money", default: false
     t.bigint "projekt_id"
+    t.integer "max_number_of_winners", default: 0
     t.index ["projekt_id"], name: "index_budgets_on_projekt_id"
   end
 

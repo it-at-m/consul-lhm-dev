@@ -25,10 +25,12 @@
         <h2 class="margin-top">
           <%= budget.current_phase.name %>
         </h2>
-        <h3>
-          <span class="tagline"><%= t("budgets.investments.header.price") %></span>
-          <%= budget.formatted_heading_price(heading) %>
-        </h3>
+        <% if budget.show_money? %>
+          <h3>
+            <span class="tagline"><%= t("budgets.investments.header.price") %></span>
+            <%= budget.formatted_heading_price(heading) %>
+          </h3>
+        <% end %>
 
         <% if can? :show, ballot %>
           <% if ballot.valid_heading?(heading) %>
