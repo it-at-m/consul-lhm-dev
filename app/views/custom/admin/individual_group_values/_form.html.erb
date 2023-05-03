@@ -1,0 +1,21 @@
+<%= form_for([:admin, individual_group_value]) do |f| %>
+  <div class="row">
+    <div class="column">
+      <%= render "shared/errors", resource: individual_group_value %>
+    </div>
+  </div>
+
+  <%= f.hidden_field :individual_group_id, value: params[:individual_group_id] %>
+
+  <div class="row">
+    <div class="column">
+      <%= f.text_field :name, autocomplete: "off" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column medium-6 large-4">
+      <%= f.submit %>
+    </div>
+  </div>
+<% end %>

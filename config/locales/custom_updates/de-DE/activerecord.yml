@@ -19,6 +19,12 @@ de:
       votation_type:
         one: Art der Abstimmung
         other: Arte der Abstimmung
+      individual_group:
+        one: Individuelle Gruppe
+        other: Individuelle Gruppen
+      individual_group_value:
+        one: Gruppenwert
+        other: Gruppenwerte
     errors:
       models:
         proposal:
@@ -116,3 +122,12 @@ de:
         min_rating_scale_label: Linkes Label
         max_rating_scale_label: Rechtes Label
         show_hint_callout: Diese Textbox im Frontend anzeigen
+      individual_group:
+        name: Name
+        visible: sichtbar
+        kind: Art
+        kinds:
+          hard: starke Gruppe
+          soft: schwache Gruppe
+      individual_group_value:
+        name: Name

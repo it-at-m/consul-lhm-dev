@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="small-12 column">
+    <h2 class="inline-block"><%= t("custom.admin.individual_groups.index.title") %></h2>
+
+    <%= link_to t("custom.admin.individual_groups.index.new"),
+                new_admin_individual_group_path,
+                class: "button float-right" %>
+
+    <% if @individual_groups.any? %>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col"><%= t("custom.admin.individual_groups.table.name") %></th>
+            <th scope="col"><%= t("custom.admin.individual_groups.table.kind") %></th>
+            <th scope="col"><%= t("custom.admin.individual_groups.table.visible") %></th>
+            <th scope="col"><%= t("admin.actions.actions") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @individual_groups.each do |individual_group| %>
+            <tr id="<%= dom_id(individual_group) %>">
+              <td><%= link_to individual_group.name, admin_individual_group_path(individual_group) %></td>
+              <td><%= t("activerecord.attributes.individual_group.kinds.#{individual_group.kind}") %></td>
+              <td><%= t(individual_group.visible ? "custom.boolean.yes" : "custom.boolean.no") %></td>
+              <td><%= render Admin::TableActionsComponent.new(individual_group) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

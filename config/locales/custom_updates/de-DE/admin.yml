@@ -151,6 +151,7 @@ de:
           list: Registrierte Adressgruppen
         registered_address_streets:
           list: Registrierte Straßen    
+        individual_groups: Individuelle Gruppen
       polls:
         questions:
           show:
@@ -242,6 +243,7 @@ de:
             actions: Aktionen
             activate: Aktiviert
             affiliation: Gebietszuordnung
+            projekt_individual_group_values: Sichbarkeitseinschränkung auf Gruppen
             beginning: Anfangsdatum
             budget_phase: Budget
             copy_phase_link: Link für Tab abrufen
@@ -480,3 +482,26 @@ de:
           notice: Popup Benachrichtigung wurde erfolgreich aktualisiert
         destroy:
           notice: Popup Benachrichtigung wurde erfolgreich gelöscht
+      individual_groups:
+        index:
+          title: Individuelle Gruppen
+          new: Neue Gruppe
+        show:
+          new_value: Neuer Gruppenwert
+        new:
+          title: Neue Gruppe
+        edit:
+          title: Individuelle Gruppe bearbeiten
+        table:
+          name: Name
+          kind: Art
+          visible: Sichtbarkeit
+          email: Email
+          remove_user: Profil entfernen
+      individual_group_values:
+        show:
+          related_users: verwandte Benutzer
+        edit:
+          title: Gruppenwert bearbeiten
+        table:
+          name: Name

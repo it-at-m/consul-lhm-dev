@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="small-12 column">
+    <%= back_link_to admin_individual_group_path(@individual_group) %>
+    <h2><%= @individual_group_value.name %></h2>
+
+    <%= render "search_user" %>
+
+    <div id="user-search-result"></div>
+
+
+    <% if @related_users.any? %>
+      <h3>
+        <%= page_entries_info @related_users, entry_name: t("custom.admin.individual_group_values.show.related_users") %>
+      </h3>
+      <%= render Admin::IndividualGroupValues::RelatedUsersComponent.new(@related_users, @individual_group_value, id: "related-users") %>
+    <% end %>
+
+  </div>
+</div>

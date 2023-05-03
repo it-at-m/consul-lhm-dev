@@ -47,7 +47,10 @@ class Projekt < ApplicationRecord
   has_one :livestream_phase, class_name: "ProjektPhase::LivestreamPhase", dependent: :destroy
   has_many :geozone_restrictions, through: :projekt_phases
 
-  has_and_belongs_to_many :geozone_affiliations, class_name: "Geozone", after_add: :touch_updated_at, after_remove: :touch_updated_at
+  has_and_belongs_to_many :geozone_affiliations, class_name: "Geozone",
+    after_add: :touch_updated_at, after_remove: :touch_updated_at
+  has_and_belongs_to_many :individual_group_values,
+    after_add: :touch_updated_at, after_remove: :touch_updated_at
 
   has_many :projekt_settings, dependent: :destroy
   has_many :projekt_notifications, dependent: :destroy
@@ -165,9 +168,12 @@ class Projekt < ApplicationRecord
       .where("siop.key": "projekt_feature.general.show_in_overview_page", "siop.value": "active")
   }
 
-  scope :visible_in_menu, -> {
+  scope :visible_in_menu, ->(user = nil) {
     joins("INNER JOIN projekt_settings vim ON projekts.id = vim.projekt_id")
-      .where("vim.key": "projekt_feature.general.show_in_navigation", "vim.value": "active") }
+      .where("vim.key": "projekt_feature.general.show_in_navigation", "vim.value": "active")
+      .with_order_number
+      .select { |p| p.visible_for?(user) }
+  }
 
   scope :show_in_sidebar, ->(resources_name) {
     joins("INNER JOIN projekt_settings sis ON projekts.id = sis.projekt_id")
@@ -176,8 +182,6 @@ class Projekt < ApplicationRecord
   scope :with_active_feature, ->(projekt_feature_key) {
     joins("INNER JOIN projekt_settings waf ON projekts.id = waf.projekt_id")
       .where("waf.key": "projekt_feature.#{projekt_feature_key}", "waf.value": "active") }
-
-  scope :top_level_navigation, -> { top_level.visible_in_menu }
 
   scope :by_my_posts, ->(my_posts_switch, current_user_id) {
     return unless my_posts_switch
@@ -280,10 +284,6 @@ class Projekt < ApplicationRecord
 
   def activated_children
     children.activated
-  end
-
-  def children_with_active_feature(projekt_feature_key)
-    children.merge(Projekt.with_active_feature(projekt_feature_key))
   end
 
   def comments_allowed?(current_user)
@@ -471,6 +471,14 @@ class Projekt < ApplicationRecord
 
   def map_location_with_admin_shape
     map_location.show_admin_shape? ? map_location : nil
+  end
+
+  def visible_for?(user = nil)
+    return true if individual_group_values.empty?
+    return false unless user.present?
+    return true if user.administrator?
+
+    (individual_group_values.ids & user.individual_group_values.ids).any?
   end
 
   private

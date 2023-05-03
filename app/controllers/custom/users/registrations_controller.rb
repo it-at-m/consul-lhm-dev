@@ -30,6 +30,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
                                    :document_type, :document_last_digits,
                                    :password, :password_confirmation,
                                    :terms_of_service, :terms_data_storage, :terms_data_protection, :terms_general,
+                                   :individual_group_value_ids,
                                    :locale,
                                    :redeemable_code)
     end

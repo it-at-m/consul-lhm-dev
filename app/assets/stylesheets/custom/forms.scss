@@ -1,3 +1,41 @@
 .translatable-fields {
   clear: both;
 }
+
+
+// Option: radio buttons and checkboxes
+
+input.with-related-options[type="radio"]:not(:checked) + label + .options-group {
+  display: none;
+}
+
+.options-group {
+  margin-bottom: 1rem;
+
+  > input {
+    margin-bottom: 0.5rem;
+  }
+
+  > input[type="radio"] + label {
+    display: inline-block;
+  }
+
+  .checkbox-label {
+    font-weight: normal !important;
+
+    &--inline {
+      display: inline-block;
+      margin-right: 0.5rem;
+
+      input {
+        margin-right: 0.25rem;
+        margin-top: 0;
+        margin-bottom: 3px;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .radio-button-label {
+  }
+}

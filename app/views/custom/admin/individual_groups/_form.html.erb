@@ -1,0 +1,31 @@
+<%= form_for([:admin, individual_group]) do |f| %>
+  <div class="row">
+    <div class="column">
+      <%= render "shared/errors", resource: individual_group %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <%= f.text_field :name, autocomplete: "off" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column medium-4">
+      <%= f.select :kind, IndividualGroup.kinds.keys.map { |kind| [t("activerecord.attributes.individual_group.kinds.#{kind}"), kind] } %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column medium-4">
+      <%= f.check_box :visible %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column medium-6 large-4">
+      <%= f.submit %>
+    </div>
+  </div>
+<% end %>
