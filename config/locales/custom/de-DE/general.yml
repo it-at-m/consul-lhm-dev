@@ -634,7 +634,7 @@ de:
       already_answer: "Sie haben bereits an dieser Abstimmung teilgenommen"
       not_logged_in: "Sie müssen sich anmelden oder registrieren, um teilnehmen zu können"
       unverified: "Sie müssen ihr Konto bestätigen, um teilnehmen zu können"
-      cant_answer: "Diese Abstimmung ist nicht in ihrem Gebiet verfügbar"
+      cant_answer: "Diese Abstimmung ist leider derzeit nicht verfügbar"
       section_header:
         icon_alt: Wahlsymbol
         title: Abstimmung
