@@ -36,15 +36,17 @@
         </td>
       </tr>
 
-      <tr style="border-bottom:none;border-top:none;">
-        <td colspan="2">
-          <div class="option-group-title">
-            <i class="fas fa-users-cog"></i>
-            <span><%= t("custom.admin.projekts.edit.projekt_phases_tab.projekt_individual_group_values") %></span>
-          </div>
-          <%= render partial: "custom/admin/projekts/edit/projekt_phases/projekt_individual_group_values", locals: { f: f } %>
-        </td>
-      </tr>
+      <% if @individual_groups.any? %>
+        <tr style="border-bottom:none;border-top:none;">
+          <td colspan="2">
+            <div class="option-group-title">
+              <i class="fas fa-users-cog"></i>
+              <span><%= t("custom.admin.projekts.edit.projekt_phases_tab.projekt_individual_group_values") %></span>
+            </div>
+            <%= render partial: "custom/admin/projekts/edit/projekt_phases/projekt_individual_group_values", locals: { f: f } %>
+          </td>
+        </tr>
+      <% end %>
 
       <tr style='border-bottom:none;border-top:none;'>
         <td colspan="2">
