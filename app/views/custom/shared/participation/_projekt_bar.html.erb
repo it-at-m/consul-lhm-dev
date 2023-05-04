@@ -18,7 +18,7 @@
           <%= render Shared::OfficialPositionBadgeComponent.new(user: resource.author) %>
           &nbsp;&bull;&nbsp;
         <% end %>
-        <%= link_to resource.author.name, resource.author %>
+        <%= link_to_profile_page_for(resource.author) %>
       <% end%>
 
       <% if resource.class.name == "Proposal" %>

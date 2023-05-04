@@ -10,7 +10,7 @@
       <% if resource.respond_to?(:on_behalf_of) && resource.on_behalf_of.present? %>
         <%= resource.on_behalf_of %>
       <% else %>
-        <%= link_to resource.author.username, resource.author %>
+        <%= link_to_profile_page_for(resource.author) %>
       <% end %>
     </div>
 
