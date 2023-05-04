@@ -198,7 +198,18 @@ class User < ApplicationRecord
     def update_qualified_total_ballot_line_weight_for_budget_investments
       Budget::Ballot.where(user_id: id).find_each do |ballot|
         ballot.investments.each do |investment|
-          investment.update(qualified_total_ballot_line_weight: investment.budget_ballot_lines.joins(ballot: :user).where.not(ballot: { users: { verified_at: nil } }).sum(:line_weight))
+          if Setting["feature.user.skip_verification"].present?
+            new_qualified_total_ballot_line_weight = investment.budget_ballot_lines
+                                                               .joins(ballot: :user)
+                                                               .sum(:line_weight)
+          else
+            new_qualified_total_ballot_line_weight = investment.budget_ballot_lines
+                                                               .joins(ballot: :user)
+                                                               .where.not(ballot: { users: { verified_at: nil }})
+                                                               .sum(:line_weight)
+          end
+
+          investment.update!(qualified_total_ballot_line_weight: new_qualified_total_ballot_line_weight)
         end
       end
     end
