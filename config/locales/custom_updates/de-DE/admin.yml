@@ -19,6 +19,8 @@ de:
             count: textbearbeitung
       budgets:
         edit:
+          hide_money: Geld ausblenden
+          hide_money_help_text: Wenn diese Option aktiviert ist, werden alle Felder, die den Geldbetrag anzeigen, während des gesamten Vorgangs ausgeblendet.
           info:
             projekt_association: Projektzuordnung
       budget_investments:
