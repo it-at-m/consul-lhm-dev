@@ -12,25 +12,32 @@ class Shared::NewButtonComponent < ApplicationComponent
   private
 
     def show_new_button?
+      return true if current_user.blank?
       return true if @projekt_phase&.projekt&.overview_page? # projects overview page
-
       return Projekt.top_level.selectable_in_selector(@resources_name, current_user).any? if @resources_name.present? # resources index page
 
       if @projekt_phase.is_a?(ProjektPhase::BudgetPhase) # projekt page footer tab for budgets
         can? :create, Budget::Investment.new(budget: @projekt_phase.projekt.budget)
-
-      elsif @projekt_phase.present? # projekt page all other footer tabs
-        @projekt_phase.projekt.all_ids_in_tree.any? { |id| Projekt.find(id).selectable_in_selector?(@projekt_phase.resources_name, current_user) }
-
+      else
+        true # all other pages including footer tabs
       end
     end
 
     def permission_problem_key
-      if @projekt_phase.present?
-        @permission_problem_key ||= @projekt_phase.permission_problem(current_user)
-
-      elsif current_user.blank?
+      if current_user.blank?
         @permission_problem_key ||= :not_logged_in
+
+      elsif @projekt_phase.present?
+        if @projekt_phase.is_a?(ProjektPhase::BudgetPhase) || @projekt_phase.hide_projekt_selector?
+          @permission_problem_key ||= @projekt_phase.permission_problem(current_user)
+
+        elsif @projekt_phase.projekt.all_ids_in_tree.any? { |id| Projekt.find(id).selectable_in_selector?(@projekt_phase.resources_name, current_user) }
+          nil
+
+        else
+          @permission_problem_key ||= @projekt_phase.permission_problem(current_user)
+
+        end
       end
     end
 
@@ -70,21 +77,32 @@ class Shared::NewButtonComponent < ApplicationComponent
       link_params
     end
 
+    def new_button_classes
+      classes = %w[button expanded new-resource-button]
+
+      if @projekt_phase.class.name.in?(["ProjektPhase::ProposalPhase", "ProjektPhase::DebatePhase"]) ||
+          @resources_name.in?(["proposals", "debates"])
+        classes << "js-preselect-projekt"
+      end
+
+      classes.join(" ")
+    end
+
     def new_button_html
       if @projekt_phase.is_a?(ProjektPhase::BudgetPhase)
         link_to t("budgets.investments.index.sidebar.create"),
                 new_budget_investment_path(@projekt_phase.projekt.budget, origin: "projekt"),
-                class: "button expanded"
+                class: new_button_classes
 
       elsif @projekt_phase.is_a?(ProjektPhase::DebatePhase) || @resources_name == "debates"
         button_text = @projekt_phase&.new_resource_button_name.presence || t("debates.index.start_debate")
         link_to button_text, new_debate_path(link_params_hash),
-          class: "button expanded js-preselect-projekt"
+          class: new_button_classes
 
       elsif @projekt_phase.is_a?(ProjektPhase::ProposalPhase) || @resources_name == "proposals"
         button_text = @projekt_phase&.new_resource_button_name.presence || t("proposals.index.start_proposal")
         link_to button_text, new_proposal_path(link_params_hash),
-          class: "button expanded js-preselect-projekt",
+          class: new_button_classes,
           data: { turbolinks: false }
 
       end

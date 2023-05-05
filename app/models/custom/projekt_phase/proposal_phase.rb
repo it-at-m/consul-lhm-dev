@@ -15,6 +15,13 @@ class ProjektPhase::ProposalPhase < ProjektPhase
     4
   end
 
+  def hide_projekt_selector?
+    projekt_settings
+      .find_by(key: "projekt_feature.proposals.hide_projekt_selector")
+      .value
+      .present?
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)

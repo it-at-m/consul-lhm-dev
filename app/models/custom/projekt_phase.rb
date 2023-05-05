@@ -14,6 +14,7 @@ class ProjektPhase < ApplicationRecord
   include Globalizable
 
   belongs_to :projekt, optional: true, touch: true
+  has_many :projekt_settings, through: :projekt
   belongs_to :age_restriction
   has_many :projekt_phase_geozones, dependent: :destroy
   has_many :geozone_restrictions, through: :projekt_phase_geozones, source: :geozone,
@@ -102,6 +103,10 @@ class ProjektPhase < ApplicationRecord
 
   def individual_group_value_restriction_formatted
     individual_group_values.map(&:name).flatten.join(", ")
+  end
+
+  def hide_projekt_selector?
+    false
   end
 
   private
