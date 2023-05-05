@@ -115,6 +115,32 @@
               <% end %>
             <% end %>
 
+            <% if @account_individial_groups_hard.any? || @account_individial_groups_soft.any? %>
+              <h2><%= t("custom.account.show.user_groups_title") %></h2>
+            <% end %>
+
+            <% @account_individial_groups_hard.map do |individual_group| %>
+              <div class="options-group">
+                <label><%= individual_group.name %></label>
+
+                <%= f.collection_check_boxes :individual_group_value_ids, individual_group.individual_group_values, :id, :name do |cb| %>
+                  <%= cb.label(class: "checkbox-label checkbox-label--inline") { cb.check_box(disabled: true) + cb.text } %>
+                <% end %>
+
+              </div>
+            <% end %>
+
+            <% @account_individial_groups_soft.map do |individual_group| %>
+
+              <div class="options-group">
+                <label><%= individual_group.name %></label>
+
+                <%= f.collection_check_boxes :individual_group_value_ids, individual_group.individual_group_values, :id, :name do |cb| %>
+                  <%= cb.label(class: "checkbox-label checkbox-label--inline") { cb.check_box + cb.text } %>
+                <% end %>
+              </div>
+            <% end %>
+
             <%= f.submit t("account.show.save_changes_submit"), class: "button margin-top" %>
           </div>
 
