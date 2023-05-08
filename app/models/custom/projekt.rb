@@ -209,6 +209,7 @@ class Projekt < ApplicationRecord
 
   def self.selectable_in_selector(controller_name, current_user)
     select do |projekt|
+      projekt.all_parent_projekts.unshift(projekt).none? { |p| p.hidden_for?(current_user) } &&
       projekt.all_children_projekts.unshift(projekt).any? do |p|
         p.selectable_in_selector?(controller_name, current_user)
       end
