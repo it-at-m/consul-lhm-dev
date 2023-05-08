@@ -13,7 +13,7 @@ module ProjektAdminActions
       @projekt.reload
     end
 
-    @individual_groups = IndividualGroup.visible
+    @individual_groups = IndividualGroup.hard.visible
 
     @projekt.build_comment_phase if @projekt.comment_phase.blank?
     @projekt.comment_phase.geozone_restrictions.build
