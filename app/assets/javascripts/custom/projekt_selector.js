@@ -71,6 +71,7 @@
       App.ProjektSelector.toggleExternalFieldsHeader($selectedProjekt)
       App.ProjektSelector.updateMainHeader($selectedProjekt)
       App.ProjektSelector.updateProjektLabelSelector($selectedProjekt)
+      App.ProjektSelector.updateProjektSelectorHint($selectedProjekt)
 
     },
 
@@ -250,6 +251,25 @@
       } else if ($header.data('defaultText')) {
         defaultText = $header.data('defaultText');
         $header.text(defaultText);
+      }
+    },
+
+    updateProjektSelectorHint: function($selectedProjekt) {
+      var $hintElement = $('[id$="proposals_creation_recommendations"]').first();
+      var defaultText, customText;
+
+      if (!$hintElement.data("defaultText")) {
+        defaultText = $hintElement.html().replaceAll(' ', '!@#$%');
+        $hintElement.data("defaultText", defaultText)
+      }
+
+      if ($selectedProjekt.data("projektSelectorHint") && $selectedProjekt.data("projektSelectable")) {
+        customText = $selectedProjekt.data("projektSelectorHint").replaceAll("!@#$%", " ")
+        $hintElement.html(customText);
+        $hintElement.next(".custom-content-block-controls").hide();
+      } else if ($hintElement.data("defaultText")) {
+        defaultText = $hintElement.data("defaultText").replaceAll("!@#$%", " ")
+        $hintElement.html(defaultText);
       }
     },
 

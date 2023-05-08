@@ -36,6 +36,17 @@
           <%= translations_form.text_field :resource_form_title, label: false %>
         </div>
       </div>
+
+      <% if @projekt_phase.is_a?(ProjektPhase::DebatePhase) || @projekt_phase.is_a?(ProjektPhase::ProposalPhase) %>
+        <div class="row">
+          <div class="column large-8">
+            <strong><%= t("custom.admin.projekt_phases.projekt_selector_hint") %></strong>
+            <%= translations_form.text_area :projekt_selector_hint,
+              label: false,
+              class: "html-area #{ck_editor_class(current_user)}" %>
+          </div>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
 

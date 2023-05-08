@@ -11,6 +11,7 @@ class ProjektPhase < ApplicationRecord
   translates :phase_tab_name, touch: true
   translates :new_resource_button_name, touch: true
   translates :resource_form_title, touch: true
+  translates :projekt_selector_hint, touch: true
   include Globalizable
 
   belongs_to :projekt, optional: true, touch: true
