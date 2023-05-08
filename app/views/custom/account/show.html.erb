@@ -99,22 +99,6 @@
               </div>
             <% end %>
 
-            <% if feature?("user.recommendations") %>
-              <h2><%= t("account.show.recommendations") %></h2>
-
-              <% if feature?("user.recommendations_on_debates") %>
-                <div>
-                  <%= f.check_box :recommended_debates %>
-                </div>
-              <% end %>
-
-              <% if feature?("user.recommendations_on_proposals") %>
-                <div>
-                  <%= f.check_box :recommended_proposals %>
-                </div>
-              <% end %>
-            <% end %>
-
             <% if @account_individial_groups_hard.any? || @account_individial_groups_soft.any? %>
               <h2><%= t("custom.account.show.user_groups_title") %></h2>
             <% end %>
