@@ -45,12 +45,13 @@ class Debate
     orders
   end
 
-  def self.scoped_projekt_ids_for_index
+  def self.scoped_projekt_ids_for_index(current_user)
     Projekt.top_level
       .map{ |p| p.all_children_projekts.unshift(p) }
       .flatten.select do |projekt|
         ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.main.activate').value.present? &&
         ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.debates.show_in_sidebar_filter').value.present? &&
+        projekt.all_parent_projekts.unshift(projekt).none? { |p| p.hidden_for?(current_user) } &&
         projekt.all_children_projekts.unshift(projekt).any? { |p| p.debate_phase.current? || p.debates.any? }
       end
       .pluck(:id)

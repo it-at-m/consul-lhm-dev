@@ -313,6 +313,15 @@ class Projekt < ApplicationRecord
     all_parent_ids
   end
 
+  def all_parent_projekts(all_parent_projekts = [])
+    if parent.present?
+      all_parent_projekts.push(parent)
+      parent.all_parent_projekts(all_parent_projekts)
+    end
+
+    all_parent_projekts
+  end
+
   def all_children_ids(all_children_ids = [])
     if children.any?
       children.each do |child|
@@ -479,6 +488,10 @@ class Projekt < ApplicationRecord
     return true if user.administrator?
 
     (individual_group_values.ids & user.individual_group_values.ids).any?
+  end
+
+  def hidden_for?(user = nil)
+    !visible_for?(user)
   end
 
   private

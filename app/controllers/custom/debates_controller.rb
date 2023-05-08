@@ -32,7 +32,7 @@ class DebatesController < ApplicationController
 
     @featured_debates = Debate.featured
 
-    @scoped_projekt_ids = Debate.scoped_projekt_ids_for_index
+    @scoped_projekt_ids = Debate.scoped_projekt_ids_for_index(current_user)
 
     @top_level_active_projekts = Projekt.top_level.current.where(id: @scoped_projekt_ids)
     @top_level_archived_projekts = Projekt.top_level.expired.where(id: @scoped_projekt_ids)

@@ -28,7 +28,7 @@ class PollsController < ApplicationController
       .send(@current_filter)
       .includes(:geozones)
 
-    @scoped_projekt_ids = Poll.scoped_projekt_ids_for_index
+    @scoped_projekt_ids = Poll.scoped_projekt_ids_for_index(current_user)
 
     @top_level_active_projekts = Projekt.top_level.current.where(id: @scoped_projekt_ids)
     @top_level_archived_projekts = Projekt.top_level.expired.where(id: @scoped_projekt_ids)
