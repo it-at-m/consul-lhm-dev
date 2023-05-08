@@ -95,23 +95,4 @@ class Sidebar::ProjektsFilterComponent < ApplicationComponent
     def local_form?
       controller_name != "pages"
     end
-
-    def cache_key
-      [
-        Projekt.all,
-        ProjektSetting.where("key LIKE ?", "projekt_feature.main.activate"),
-        ProjektSetting.where("key LIKE ?", "%show_in_sidebar_filter%"),
-        ProjektSetting.find_by(projekt: @current_projekt, key: "projekt_custom_feature.default_footer_tab"),
-        params[:filter_projekt_ids],
-        params[:tags],
-        params[:projekts],
-        params[:geozone_affiliation],
-        params[:affiliated_geozones],
-        params[:geozone_restriction],
-        params[:restricted_geozones],
-        params[:my_posts_filter],
-        controller_name,
-        action_name
-      ].flatten
-    end
 end
