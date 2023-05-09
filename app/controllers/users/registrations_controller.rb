@@ -5,8 +5,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   invisible_captcha only: [:create], honeypot: :address, scope: :user
 
   def new
-    @individual_groups = IndividualGroup.soft.visible
-
     super do |user|
       user.use_redeemable_code = true if params[:use_redeemable_code].present?
     end
