@@ -90,7 +90,8 @@ class Shared::NewButtonComponent < ApplicationComponent
 
     def new_button_html
       if @projekt_phase.is_a?(ProjektPhase::BudgetPhase)
-        link_to t("budgets.investments.index.sidebar.create"),
+        button_text = @projekt_phase&.new_resource_button_name.presence || t("budgets.investments.index.sidebar.create")
+        link_to button_text,
                 new_budget_investment_path(@projekt_phase.projekt.budget, origin: "projekt"),
                 class: new_button_classes
 

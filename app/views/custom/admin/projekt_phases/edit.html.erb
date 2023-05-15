@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <% if @projekt_phase.name.in?(["debate_phase", "proposal_phase"]) %>
+    <% if @projekt_phase.name.in?(["debate_phase", "proposal_phase", "budget_phase"]) %>
       <div class="row">
         <div class="column large-8">
           <strong><%= t("custom.admin.projekt_phases.new_resource_button_name") %></strong>
