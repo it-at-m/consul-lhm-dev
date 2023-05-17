@@ -255,12 +255,16 @@
     },
 
     updateProjektSelectorHint: function($selectedProjekt) {
-      var $hintElement = $('[id$="proposals_creation_recommendations"]').first();
+      var $hintElement = $('[id$="_creation_recommendations"]').first();
       var defaultText, customText;
+
+      if (!$hintElement.length) {
+        return;
+      }
 
       if (!$hintElement.data("defaultText")) {
         defaultText = $hintElement.html().replaceAll(' ', '!@#$%');
-        $hintElement.data("defaultText", defaultText)
+        $hintElement.data("defaultText", defaultText ? defaultText : '!@#$%');
       }
 
       if ($selectedProjekt.data("projektSelectorHint") && $selectedProjekt.data("projektSelectable")) {
@@ -270,6 +274,8 @@
       } else if ($hintElement.data("defaultText")) {
         defaultText = $hintElement.data("defaultText").replaceAll("!@#$%", " ")
         $hintElement.html(defaultText);
+      } else {
+        $hintElement.html('');
       }
     },
 

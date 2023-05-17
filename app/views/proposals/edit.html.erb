@@ -9,6 +9,10 @@
 
     <h1><%= t("proposals.edit.editing") %></h1>
 
+    <aside>
+      <%= render_custom_block 'proposals_creation_recommendations' %>
+    </aside>
+
     <%= render "form", form_url: proposal_path(@proposal), selected_projekt: @selected_projekt %>
   </div>
 </div>
