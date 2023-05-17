@@ -30,6 +30,8 @@ class User < ApplicationRecord
 
   scope :projekt_managers, -> { joins(:projekt_manager) }
 
+  validate :email_should_not_be_used_by_hidden_user
+
   validates :first_name, presence: true, on: :create, if: :extended_registration?
   validates :last_name, presence: true, on: :create, if: :extended_registration?
   validates :gender, presence: true, on: :create, if: :extended_registration?
@@ -218,5 +220,11 @@ class User < ApplicationRecord
       self.street_name = street_name.strip unless street_name.nil?
       self.street_number = street_number.strip unless street_number.nil?
       self.street_number_extension = street_number_extension.strip unless street_number_extension.nil?
+    end
+
+    def email_should_not_be_used_by_hidden_user
+      if User.only_hidden.find_by(email: email).present?
+        errors.add(:email, "Diese E-Mail-Adresse wurde bereits verwendet. Ggf. wurde das Konto geblockt. Bitte kontaktieren Sie uns per E-Mail.")
+      end
     end
 end

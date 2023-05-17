@@ -32,6 +32,8 @@ module HasRegisteredAddress
     end
 
     def increase_error_count_for_registered_address_selectors
+      return unless resource.extended_registration?
+
       if RegisteredAddress::City.any?
         if params[:form_registered_address_city_id].blank?
           resource.errors.add(:form_registered_address_city_id, :blank)
