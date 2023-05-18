@@ -468,6 +468,7 @@ de:
         duration: Laufzeit
         start_date: Anfangsdatum
         end_date: Enddatum
+        projekt_selector_hint: Hinweise zum Projekt
         edit:
           title: Einstellung für Phase
       modal_notifications:
