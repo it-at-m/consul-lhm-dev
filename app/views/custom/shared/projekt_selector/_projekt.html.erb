@@ -26,6 +26,7 @@
      <%= "data-projekt-label-ids=#{ projekt.all_projekt_labels.ids.join(',') }" if projekt.all_projekt_labels.any? %>
      <%= "data-resource-form-title=#{ projekt_phase.resource_form_title.gsub(' ', '_') }" if projekt_phase&.resource_form_title.present? %>
      <%= "data-hide-projekt-selector=true" if projekt_feature?(projekt, "#{controller_name}.hide_projekt_selector") %>
+     <%= "data-projekt-selector-hint=#{projekt_phase.projekt_selector_hint.gsub(' ', '!@#$%')}" if projekt_phase&.projekt_selector_hint.present? %>
      >
 
 

@@ -20,7 +20,7 @@ class Budget
     validates :terms_general, acceptance: { allow_nil: false }, on: :create #custom
 
     def self.sort_by_ballot_line_weight(budget = nil)
-      order(qualified_votes_count: :desc)
+      order(qualified_total_ballot_line_weight: :desc)
     end
 
     def register_selection(user, vote_weight = 1)

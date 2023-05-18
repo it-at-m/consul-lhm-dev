@@ -1,8 +1,10 @@
-<h2 class="inline-block"><%= t("admin.milestones.index.milestone") %></h2>
+<h2><%= t("custom.admin.progress_bars.index.progress_bar") %></h2>
 
 <%= link_to t("admin.progress_bars.manage"),
             admin_polymorphic_path(milestoneable.progress_bars.new),
-            class: "button hollow float-right" %>
+            class: "button hollow" %>
+
+<h2><%= t("admin.milestones.index.milestone") %></h2>
 
 <% if milestoneable.milestone_tag_list.any? %>
   <div>
@@ -17,7 +19,6 @@
     <thead>
       <tr>
         <th><%= t("admin.milestones.index.table_id") %></th>
-        <th><%= t("admin.milestones.index.table_title") %></th>
         <th><%= t("admin.milestones.index.table_description") %></th>
         <th><%= t("admin.milestones.index.table_publication_date") %></th>
         <th><%= t("admin.milestones.index.table_status") %></th>
@@ -30,10 +31,13 @@
       <% milestoneable.milestones.order_by_publication_date.each do |milestone| %>
         <tr id="<%= dom_id(milestone) %>" class="milestone">
           <td class="text-center"><%= milestone.id %></td>
-          <td><%= milestone.title %></td>
           <td class="small small-5"><%= milestone.description %></td>
           <td class="small">
-            <%= l(milestone.publication_date.to_date) if milestone.publication_date.present? %>
+            <% if milestone.custom_date.present? %>
+              <%= milestone.custom_date %>
+            <% elsif milestone.publication_date.present? %>
+              <%= l(milestone.publication_date) %>
+            <% end %>
           </td>
           <td class="small">
             <%= milestone.status.present? ? milestone.status.name : "" %>

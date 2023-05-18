@@ -99,20 +99,30 @@
               </div>
             <% end %>
 
-            <% if feature?("user.recommendations") %>
-              <h2><%= t("account.show.recommendations") %></h2>
+            <% if @account_individial_groups_hard.any? || @account_individial_groups_soft.any? %>
+              <h2><%= t("custom.account.show.user_groups_title") %></h2>
+            <% end %>
 
-              <% if feature?("user.recommendations_on_debates") %>
-                <div>
-                  <%= f.check_box :recommended_debates %>
-                </div>
-              <% end %>
+            <% @account_individial_groups_hard.map do |individual_group| %>
+              <div class="options-group">
+                <label><%= individual_group.name %></label>
 
-              <% if feature?("user.recommendations_on_proposals") %>
-                <div>
-                  <%= f.check_box :recommended_proposals %>
-                </div>
-              <% end %>
+                <%= f.collection_check_boxes :individual_group_value_ids, individual_group.individual_group_values, :id, :name do |cb| %>
+                  <%= cb.label(class: "checkbox-label checkbox-label--inline") { cb.check_box(disabled: true) + cb.text } %>
+                <% end %>
+
+              </div>
+            <% end %>
+
+            <% @account_individial_groups_soft.map do |individual_group| %>
+
+              <div class="options-group">
+                <label><%= individual_group.name %></label>
+
+                <%= f.collection_check_boxes :individual_group_value_ids, individual_group.individual_group_values, :id, :name do |cb| %>
+                  <%= cb.label(class: "checkbox-label checkbox-label--inline") { cb.check_box + cb.text } %>
+                <% end %>
+              </div>
             <% end %>
 
             <%= f.submit t("account.show.save_changes_submit"), class: "button margin-top" %>
@@ -121,32 +131,6 @@
           <div class="user-permissions small-12 medium-5 column">
             <h2><%= t("account.show.user_permission_title") %></h2>
 
-            <p><%= t("account.show.user_permission_info") %></p>
-
-            <ul>
-              <li><span class="icon-check"></span>&nbsp;<%= t("account.show.user_permission_debates") %></li>
-              <li><span class="icon-check"></span>&nbsp;<%= t("account.show.user_permission_proposal") %></li>
-              <li>
-                <% if current_user.level_two_or_three_verified? %>
-                  <span class="icon-check"></span>
-                <% else %>
-                  <span class="icon-x"></span>
-                <% end %>
-                <%= t("account.show.user_permission_support_proposal") %>
-              </li>
-              <li>
-                <% if current_user.level_three_verified? %>
-                  <span class="icon-check"></span>
-                <% else %>
-                  <span class="icon-x"></span>
-                <% end %>
-                <%= t("custom.account.show.user_permission_votes") %>
-              </li>
-            </ul>
-
-            <p>
-              <span><%= t("account.show.user_permission_verify_info") %></span>
-            </p>
             <p>
               <%= t("account.show.user_permission_verify") %>
             </p>

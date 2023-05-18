@@ -14,7 +14,7 @@ class PagesController < ApplicationController
 
     set_resource_instance
 
-    if @custom_page.present? && @custom_page.projekt.present?
+    if @custom_page.present? && @custom_page.projekt.present? && @custom_page.projekt.visible_for?(current_user)
       @projekt = @custom_page.projekt
 
       @default_phase_name = default_phase_name(params[:selected_phase_id])
@@ -24,9 +24,15 @@ class PagesController < ApplicationController
       @cards = @custom_page.cards
 
       render action: :custom_page
+
+    elsif @custom_page.present? && @custom_page.projekt.present?
+      @individual_group_value_names = @custom_page.projekt.individual_group_values.pluck(:name)
+      render "custom/pages/forbidden", layout: false
+
     elsif @custom_page.present?
       @cards = @custom_page.cards
       render action: :custom_page
+
     else
       render action: params[:id]
     end

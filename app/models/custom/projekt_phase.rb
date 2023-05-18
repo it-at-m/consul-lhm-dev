@@ -11,13 +11,19 @@ class ProjektPhase < ApplicationRecord
   translates :phase_tab_name, touch: true
   translates :new_resource_button_name, touch: true
   translates :resource_form_title, touch: true
+  translates :projekt_selector_hint, touch: true
   include Globalizable
 
   belongs_to :projekt, optional: true, touch: true
+  has_many :projekt_settings, through: :projekt
   belongs_to :age_restriction
   has_many :projekt_phase_geozones, dependent: :destroy
   has_many :geozone_restrictions, through: :projekt_phase_geozones, source: :geozone,
            after_add: :touch_updated_at, after_remove: :touch_updated_at
+
+  has_and_belongs_to_many :individual_group_values,
+    after_add: :touch_updated_at, after_remove: :touch_updated_at
+
 
   has_many :city_street_projekt_phases, dependent: :destroy     # TODO delete
   has_many :city_streets, through: :city_street_projekt_phases  # TODO delete
@@ -74,6 +80,7 @@ class ProjektPhase < ApplicationRecord
     unless Setting["feature.user.skip_verification"].present?
       return age_permission_problem(user) if age_permission_problem(user).present?
       return geozone_permission_problem(user) if geozone_permission_problem(user)
+      return individual_group_value_permission_problem(user) if individual_group_value_permission_problem(user).present?
     end
 
     nil
@@ -93,6 +100,14 @@ class ProjektPhase < ApplicationRecord
 
   def age_restriction_formatted
     age_restriction.present? ? age_restriction.name.downcase : ""
+  end
+
+  def individual_group_value_restriction_formatted
+    individual_group_values.map(&:name).flatten.join(", ")
+  end
+
+  def hide_projekt_selector?
+    false
   end
 
   private
@@ -152,6 +167,13 @@ class ProjektPhase < ApplicationRecord
       return nil if age_restriction.min_age <= user.age && user.age <= age_restriction.max_age
 
       :only_specific_ages
+    end
+
+    def individual_group_value_permission_problem(user)
+      return nil if individual_group_values.blank?
+      return nil if (individual_group_values & user.individual_group_values).any?
+
+      :only_specific_individual_group_values
     end
 
     def touch_updated_at(geozone)

@@ -3,6 +3,7 @@ class Admin::ProjektPhasesController < Admin::BaseController
 
   def edit
     @registered_address_groupings = RegisteredAddress::Grouping.all
+    @individual_groups = IndividualGroup.visible
     super
   end
 

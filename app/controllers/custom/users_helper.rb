@@ -47,4 +47,10 @@ module UsersHelper
 
     admin_root_path
   end
+
+  def link_to_profile_page_for(user)
+    return "Verborgene(r) Nutzer*in" if user.hidden?
+
+    link_to user.name, user
+  end
 end

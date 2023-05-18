@@ -17,6 +17,10 @@ de:
       show:
         user_permission_votes: An Abstimmungen teilnehmen
         admin_notifications: Admin Benachrichtigungen
+        user_groups_title: Individuelle Gruppen
+    boolean:
+      "yes": "ja"
+      "no": "nein"
     comments:
       reply_form:
         leave_comment: Schreiben Sie eine Antwort

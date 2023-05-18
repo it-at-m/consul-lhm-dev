@@ -40,10 +40,12 @@
     </div>
 
     <div id="hide_money" class="row expanded <%= hide_money_style %>">
-      <div class="small-12 column">
-        <p class="form-label"><%= t("admin.budgets.edit.hide_money") %></p>
-        <p class="help-text"><%= t("admin.budgets.edit.hide_money_help_text") %></p>
+      <div class="small-12 medium-6 column">
+        <p class="form-label"><%= t("custom.admin.budgets.edit.hide_money") %></p>
+        <p class="help-text"><%= t("custom.admin.budgets.edit.hide_money_help_text") %></p>
         <%= f.check_box :hide_money %>
+        <%= f.text_field :max_number_of_winners %>
+
       </div>
     </div>
 

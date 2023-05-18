@@ -15,6 +15,13 @@ class ProjektPhase::DebatePhase < ProjektPhase
     2
   end
 
+  def hide_projekt_selector?
+    projekt_settings
+      .find_by(key: "projekt_feature.debates.hide_projekt_selector")
+      .value
+      .present?
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)

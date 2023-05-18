@@ -48,8 +48,8 @@
               <%= link_to investment.title, budget_investment_path(@budget, investment) %>
             </td>
             <td class="text-center">
-              <% if @budget.voting_style == "distributed" %>
-                <%= investment.budget_ballot_lines.joins(ballot: :user).where.not(ballot: { users: { verified_at: nil } }).sum(:line_weight) %>
+              <% if @budget.distributed_voting? %>
+                <%= investment.qualified_total_ballot_line_weight %>
               <% else %>
                 <%= investment.ballot_lines_count %>
               <% end %>

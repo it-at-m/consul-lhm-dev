@@ -46,7 +46,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
                                    :password, :password_confirmation,
                                    :terms_of_service, :terms_data_storage, :terms_data_protection, :terms_general,
                                    :locale,
-                                   :redeemable_code)
+                                   :redeemable_code,
+                                   individual_group_value_ids: [])
     end
 
     def set_related_params

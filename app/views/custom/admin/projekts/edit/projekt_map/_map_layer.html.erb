@@ -4,9 +4,8 @@
     <i class="far fa-edit"></i>
   <% end %>
 
-  <%= link_to admin_projekt_map_layer_path(@projekt, layer, namespace: @namespace, tab: '#tab-projekt-map'),
-    class: 'delete-map-layer',
-    remote: true,
+  <%= button_to admin_projekt_map_layer_path(@projekt, layer, namespace: @namespace, tab: "#tab-projekt-map"),
+    class: "delete-map-layer",
     method: :delete do %>
     <i class="fas fa-trash-alt"></i>
   <% end %>

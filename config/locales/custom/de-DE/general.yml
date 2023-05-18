@@ -17,7 +17,7 @@ de:
       user_permission_support_proposal: Vorschläge unterstützen
       user_permission_title: Teilnahme
       user_permission_verify: Damit Sie alle Funktionen nutzen können, müssen Sie ihr Konto verifizieren.
-      user_permission_verify_info: "* Nur verifizierte Nutzer"
+      user_permission_verify_info: Nur verifizierte Nutzer*innen
       user_permission_votes: An finaler Abstimmung teilnehmen
       verified_account: Konto verifiziert
       verify_my_account: Mein Konto verifizieren
@@ -634,13 +634,13 @@ de:
       already_answer: "Sie haben bereits an dieser Abstimmung teilgenommen"
       not_logged_in: "Sie müssen sich anmelden oder registrieren, um teilnehmen zu können"
       unverified: "Sie müssen ihr Konto bestätigen, um teilnehmen zu können"
-      cant_answer: "Diese Abstimmung ist nicht in ihrem Gebiet verfügbar"
+      cant_answer: "Diese Abstimmung ist leider derzeit nicht verfügbar"
       section_header:
         icon_alt: Wahlsymbol
         title: Abstimmung
-        help: Hilfe zur Abstimmung
+        help: Hilfe
       section_footer:
-        title: Hilfe zur Abstimmung
+        title: Hilfe
         description: BürgerAbstimmungen sind ein partizipatorischer Mechanismus, mit dem Bürger mit Wahlrecht direkte Entscheidungen treffen können
       no_polls: "Keine offenen Abstimmungen."
     show:
@@ -965,7 +965,7 @@ de:
   annotator:
     help:
       alt: Wählen Sie den Text, den Sie kommentieren möchten und drücken Sie den Button mit dem Stift.
-      text: Um dieses Dokument zu kommentieren, müssen Sie %{sign_in} oder %{sign_up}. Dann wählen Sie den Text aus, den Sie kommentieren möchten und klicken auf den Button mit dem Stift.
+      text: Um dieses Dokument zu kommentieren, müssen Sie sich %{sign_in} oder %{sign_up}. Dann wählen Sie den Text aus, den Sie kommentieren möchten und klicken auf den Button mit dem Stift.
       title: Wie kann ich dieses Dokument kommentieren?
   links:
     form:

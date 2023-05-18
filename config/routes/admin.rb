@@ -36,6 +36,15 @@ namespace :admin do
 
   resources :map_layers, only: [:update, :create, :edit, :new, :destroy]
 
+  # custom individual groups routes
+  resources :individual_groups do
+    resources :individual_group_values, as: :values do
+      get :search_user, on: :member
+      post :add_user, on: :member
+      delete :remove_user, on: :member
+    end
+  end
+
   # custom age restriction routes
   resources :age_restrictions
 

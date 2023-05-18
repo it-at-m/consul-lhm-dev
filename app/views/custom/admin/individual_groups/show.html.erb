@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="small-12 column">
+    <%= back_link_to admin_individual_groups_path %>
+    <h2><%= @individual_group.name %></h2>
+
+    <% if @individual_group.individual_group_values.any? %>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col"><%= t("custom.admin.individual_group_values.table.name") %></th>
+            <th scope="col"><%= t("admin.actions.actions") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @individual_group.individual_group_values.each do |value| %>
+            <tr id="<%= dom_id(value) %>">
+              <td><%= link_to value.name, admin_individual_group_value_path(@individual_group, value) %></td>
+              <td><%= render Admin::TableActionsComponent.new(value,
+                                                              edit_path: edit_admin_individual_group_value_path(@individual_group, value),
+                                                              destroy_path: admin_individual_group_value_path(@individual_group, value)
+                                                             ) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+
+    <div id="new_individual_group_value">
+      <%= link_to t("custom.admin.individual_groups.show.new_value"),
+                  new_admin_individual_group_value_path(@individual_group),
+                  remote: true,
+                  class: "button float-right" %>
+    </div>
+  </div>
+</div>

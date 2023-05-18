@@ -22,9 +22,7 @@
 
         <%= f.date_field :publication_date %>
 
-        <% if @milestoneable.class.name == 'Projekt' %>
-          <%= translations_form.text_field :custom_date, label: t('activerecord.attributes.milestone.custom_date') %>
-        <% end %>
+        <%= translations_form.text_field :custom_date, label: t('activerecord.attributes.milestone.custom_date') %>
       </div>
     <% end %>
   </div>

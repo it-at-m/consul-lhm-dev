@@ -198,6 +198,7 @@ var initialize_modules = function() {
   App.OrbitInPopupFixCustom.initialize();
   App.ModalNotification.initialize();
   App.VerificationForm.initialize();
+  App.SharedNewButtonComponent.initialize();
 
   if ($("#projekt-selector-fields").length) {
     App.ProjektSelector.initialize();

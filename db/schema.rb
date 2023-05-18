@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_14_081219) do
+ActiveRecord::Schema.define(version: 2023_05_08_153038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -381,7 +381,7 @@ ActiveRecord::Schema.define(version: 2023_04_14_081219) do
     t.text "implementation_contribution"
     t.string "user_cost_estimate"
     t.string "on_behalf_of"
-    t.integer "qualified_votes_count", default: 0
+    t.integer "qualified_total_ballot_line_weight", default: 0
     t.index ["administrator_id"], name: "index_budget_investments_on_administrator_id"
     t.index ["author_id"], name: "index_budget_investments_on_author_id"
     t.index ["budget_id"], name: "index_budget_investments_on_budget_id"
@@ -482,6 +482,7 @@ ActiveRecord::Schema.define(version: 2023_04_14_081219) do
     t.boolean "published"
     t.boolean "hide_money", default: false
     t.bigint "projekt_id"
+    t.integer "max_number_of_winners", default: 0
     t.index ["projekt_id"], name: "index_budgets_on_projekt_id"
   end
 
@@ -881,6 +882,32 @@ ActiveRecord::Schema.define(version: 2023_04_14_081219) do
     t.boolean "concealed", default: false
     t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
     t.index ["user_id"], name: "index_images_on_user_id"
+  end
+
+  create_table "individual_group_values", force: :cascade do |t|
+    t.string "name"
+    t.bigint "individual_group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["individual_group_id"], name: "index_individual_group_values_on_individual_group_id"
+  end
+
+  create_table "individual_group_values_projekt_phases", id: false, force: :cascade do |t|
+    t.bigint "individual_group_value_id", null: false
+    t.bigint "projekt_phase_id", null: false
+  end
+
+  create_table "individual_group_values_projekts", id: false, force: :cascade do |t|
+    t.bigint "individual_group_value_id", null: false
+    t.bigint "projekt_id", null: false
+  end
+
+  create_table "individual_groups", force: :cascade do |t|
+    t.string "name"
+    t.integer "kind", default: 0
+    t.boolean "visible", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "legislation_annotations", id: :serial, force: :cascade do |t|
@@ -1634,6 +1661,7 @@ ActiveRecord::Schema.define(version: 2023_04_14_081219) do
     t.string "phase_tab_name"
     t.text "new_resource_button_name"
     t.text "resource_form_title"
+    t.text "projekt_selector_hint"
     t.index ["locale"], name: "index_projekt_phase_translations_on_locale"
     t.index ["projekt_phase_id"], name: "index_projekt_phase_translations_on_projekt_phase_id"
   end
@@ -2121,6 +2149,15 @@ ActiveRecord::Schema.define(version: 2023_04_14_081219) do
     t.index ["hidden_at"], name: "index_topics_on_hidden_at"
   end
 
+  create_table "user_individual_group_values", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "individual_group_value_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["individual_group_value_id"], name: "index_user_individual_group_values_on_individual_group_value_id"
+    t.index ["user_id"], name: "index_user_individual_group_values_on_user_id"
+  end
+
   create_table "users", id: :serial, force: :cascade do |t|
     t.string "email", default: ""
     t.string "encrypted_password", default: "", null: false
@@ -2373,6 +2410,7 @@ ActiveRecord::Schema.define(version: 2023_04_14_081219) do
   add_foreign_key "geozones_polls", "polls"
   add_foreign_key "identities", "users"
   add_foreign_key "images", "users"
+  add_foreign_key "individual_group_values", "individual_groups"
   add_foreign_key "legislation_draft_versions", "legislation_processes"
   add_foreign_key "legislation_processes", "projekts"
   add_foreign_key "legislation_proposals", "legislation_processes"
@@ -2423,6 +2461,8 @@ ActiveRecord::Schema.define(version: 2023_04_14_081219) do
   add_foreign_key "related_content_scores", "users"
   add_foreign_key "sdg_managers", "users"
   add_foreign_key "site_customization_pages", "projekts"
+  add_foreign_key "user_individual_group_values", "individual_group_values"
+  add_foreign_key "user_individual_group_values", "users"
   add_foreign_key "users", "bam_streets"
   add_foreign_key "users", "city_streets"
   add_foreign_key "users", "geozones"

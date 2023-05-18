@@ -4,13 +4,19 @@
       <span class="icon-check-circle"
             title="<%= t("budgets.investments.investment.already_added") %>">
       </span>
-      <p class="investment-project-amount">
-        <%= investment.formatted_price %>
-      </p>
+      <% if investment.should_show_price? %>
+        <p class="investment-project-amount">
+          <%= investment.formatted_price %>
+        </p>
+      <% end %>
       <% if investment.should_show_ballots? %>
         <br>
         <strong>
-          <%= t("custom.budgets.investments.investment.qualified_supports", count: investment.budget_ballot_lines.sum(:line_weight)) %>
+          <% if investment.budget.distributed_voting? %>
+            <%= t("custom.budgets.investments.investment.qualified_supports", count: investment.qualified_total_ballot_line_weight) %>
+          <% else %>
+            <%= t("custom.budgets.investments.investment.qualified_supports", count: investment.ballot_lines_count) %>
+          <% end %>
         </strong>
         <%= button_to budget_ballot_line_path(id: investment.id,
                                               budget_id: investment.budget_id,
@@ -28,15 +34,17 @@
     </div>
   <% else %>
     <div class="add in-favor">
-      <p class="investment-project-amount">
-        <%= investment.formatted_price %>
-      </p>
+      <% if investment.should_show_price? %>
+        <p class="investment-project-amount">
+          <%= investment.formatted_price %>
+        </p>
+      <% end %>
       <% if investment.should_show_ballots? %>
 
         <% if investment.budget.distributed_voting? %>
           <br>
           <strong>
-            <%= t("custom.budgets.investments.investment.qualified_supports", count: investment.budget_ballot_lines.sum(:line_weight)) %>
+            <%= t("custom.budgets.investments.investment.qualified_supports", count: investment.qualified_total_ballot_line_weight) %>
           </strong>
           <%= form_with url: budget_ballot_lines_path(investment_id: investment.id,
                                                       budget_id: investment.budget_id,

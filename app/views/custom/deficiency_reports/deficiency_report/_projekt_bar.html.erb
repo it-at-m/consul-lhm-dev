@@ -13,8 +13,8 @@
       <% if action_name == 'index'%>
         <% if deficiency_report.on_behalf_of.present? %>
           <%= deficiency_report.on_behalf_of %>
-        <% elsif deficiency_report.author.name.present? %>
-          <%= link_to deficiency_report.author.name, deficiency_report.author %>
+        <% elsif deficiency_report.author.present? %>
+          <%= link_to_profile_page_for(deficiency_report.author) %>
         <% end %>
       <% elsif action_name == 'show' %>
         <%= link_to t("custom.deficiency_reports.show.back_link"), deficiency_reports_path %>
