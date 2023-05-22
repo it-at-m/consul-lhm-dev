@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_08_153038) do
+ActiveRecord::Schema.define(version: 2023_05_22_093224) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1394,6 +1394,7 @@ ActiveRecord::Schema.define(version: 2023_05_08_153038) do
     t.integer "given_order", default: 1
     t.boolean "most_voted", default: false
     t.boolean "open_answer", default: false
+    t.string "more_info_link"
     t.index ["question_id"], name: "index_poll_question_answers_on_question_id"
   end
 
@@ -2245,6 +2246,7 @@ ActiveRecord::Schema.define(version: 2023_05_08_153038) do
     t.text "keycloak_id_token", default: ""
     t.bigint "registered_address_id"
     t.string "street_number_extension"
+    t.boolean "reverify", default: true
     t.index ["bam_street_id"], name: "index_users_on_bam_street_id"
     t.index ["city_street_id"], name: "index_users_on_city_street_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

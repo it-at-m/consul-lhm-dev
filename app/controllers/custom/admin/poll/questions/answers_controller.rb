@@ -24,7 +24,7 @@ class Admin::Poll::Questions::AnswersController < Admin::Poll::BaseController
   private
 
     def answer_params
-      attributes = [:title, :description, :given_order, :question_id, :open_answer,
+      attributes = [:title, :description, :given_order, :question_id, :open_answer, :more_info_link,
         documents_attributes: document_attributes]
 
       params.require(:poll_question_answer).permit(

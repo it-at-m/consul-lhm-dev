@@ -368,7 +368,11 @@ td.answers-column  {
       font-weight: bold;
       color: $brand;
     }
-  
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
   }
 }
 
