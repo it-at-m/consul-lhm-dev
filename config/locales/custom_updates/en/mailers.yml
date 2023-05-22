@@ -1,13 +1,11 @@
 en:
   mailers:
     budget_investment_unfeasible:
+      subject: "Your investment proposal '%{title}' has been marked as unfeasible."
       hi: "Dear User"
-      thank_you: "Thank you very much for submitting your proposal for %{budget_name}."
-      rejected: "Unfortunately, after examining your proposal, we have to inform you that it is not valid and therefore cannot be put to the vote."
-      reject_reason: "A comment from the valuator:"
-      next_steps: "Thank you for your valuable participation."
+      rejected: "Unfortunately, after examining your proposal \"%{title}\", we have to inform you that it is not valid and therefore cannot be put to the vote."
+      thank_you: "Thank you very much for submitting your proposal"
       sincerely: "Sincerely"
-      subject: "Your investment proposal '%{code}' has been marked as unfeasible."
     manual_verification_confirmation:
       subject: Your account has just been verified.
       p1: Your account has just been verified.
