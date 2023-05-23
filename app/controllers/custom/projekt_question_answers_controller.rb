@@ -11,10 +11,12 @@ class ProjektQuestionAnswersController < ApplicationController
   respond_to :html, :js
 
   def create
-    if @projekt.question_phase.phase_activated?
-      question_option = ProjektQuestionOption.find(params[:projekt_question_answer][:projekt_question_option_id])
-      @question = question_option.question
+    question_option = ProjektQuestionOption.find(params[:projekt_question_answer][:projekt_question_option_id])
+    @question = question_option.question
 
+    if !@projekt.question_phase.phase_activated? && @question.root_question?
+      render text: "Question phase not active", status: :unprocessable_entity
+    else
       @answer = ProjektQuestionAnswer.find_or_initialize_by(
         user: current_user,
         question: @question
@@ -30,7 +32,7 @@ class ProjektQuestionAnswersController < ApplicationController
       @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
       set_comment_flags(@comment_tree.comments)
 
-      render 'custom/projekt_questions/show.js.erb', format: :js
+      render "custom/projekt_questions/show.js.erb", format: :js
     end
   end
 
