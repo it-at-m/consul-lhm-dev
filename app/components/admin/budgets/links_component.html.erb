@@ -11,7 +11,7 @@
                path: admin_poll_booth_assignments_path(budget.poll)) %>
   <% end %>
 
-  <% if can?(:read_results, budget) %>
+  <% if can?(:recalculate_winners, budget) %>
     <%= action(:results, text: results_text, path: budget_results_path(budget)) %>
   <% else %>
     <%= action(:preview, text: preview_text, path: budget_path(budget)) %>
