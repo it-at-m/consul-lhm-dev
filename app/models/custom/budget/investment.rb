@@ -39,6 +39,16 @@ class Budget
       end
     end
 
+    def total_ballot_votes
+      qualified_total_ballot_line_weight
+    end
+
+    def total_ballot_votes_percentage
+      return 0 if total_ballot_votes.zero?
+
+      (total_ballot_votes.to_f / heading.total_ballot_votes.to_f) * 100.0
+    end
+
     def permission_problem(user)
       budget.budget_phase.permission_problem(user)
     end

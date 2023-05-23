@@ -25,4 +25,8 @@ module Statisticable
   def total_other_gen_participants
     participants.other_gen.count
   end
+
+  def show_percentage_values_only?
+    false
+  end
 end

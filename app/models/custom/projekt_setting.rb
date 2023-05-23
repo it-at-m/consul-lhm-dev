@@ -108,6 +108,7 @@ class ProjektSetting < ApplicationRecord
         "projekt_feature.budgets.show_map": 'active',
         "projekt_feature.budgets.show_results_after_first_vote": '',
         "projekt_feature.budgets.enable_geoman_controls_in_maps": 'active',
+        "projekt_feature.budgets.show_relative_ballotting_results": '',
 
         "projekt_feature.questions.show_questions_list": '',
 

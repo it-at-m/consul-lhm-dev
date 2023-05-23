@@ -4,18 +4,21 @@
   <%= number_with_info_tags(
     stats.total_male_participants,
     t("stats.men_percentage", percentage: number_to_stats_percentage(stats.male_percentage)),
-    html_class: "participants male"
+    html_class: "participants male",
+    show_percentage_values_only: stats.show_percentage_values_only?
   ) %>
 
   <%= number_with_info_tags(
     stats.total_female_participants,
     t("stats.women_percentage", percentage: number_to_stats_percentage(stats.female_percentage)),
-    html_class: "participants female"
+    html_class: "participants female",
+    show_percentage_values_only: stats.show_percentage_values_only?
   ) %>
 
   <%= number_with_info_tags(
     stats.total_other_gen_participants,
     t("stats.other_gen_percentage", percentage: number_to_stats_percentage(stats.other_gen_percentage)),
-    html_class: "participants other-gen"
+    html_class: "participants other-gen",
+    show_percentage_values_only: stats.show_percentage_values_only?
   ) %>
 </div>

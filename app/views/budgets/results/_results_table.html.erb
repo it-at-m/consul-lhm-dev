@@ -48,10 +48,10 @@
               <%= link_to investment.title, budget_investment_path(@budget, investment) %>
             </td>
             <td class="text-center">
-              <% if @budget.distributed_voting? %>
-                <%= investment.qualified_total_ballot_line_weight %>
+              <% if @budget.show_percentage_values_only? %>
+                <%= number_to_percentage(investment.total_ballot_votes_percentage, { strip_insignificant_zeros: true, precision: 2 }) %>
               <% else %>
-                <%= investment.ballot_lines_count %>
+                <%= investment.total_ballot_votes %>
               <% end %>
             </td>
             <% if @budget.show_money? %>

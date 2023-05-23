@@ -15,7 +15,11 @@
           <td><%= group[:range] %></td>
           <td>
             <strong>
-              <%= "#{group[:count]} (#{number_to_stats_percentage(group[:percentage])})" %>
+              <% if stats.show_percentage_values_only? %>
+                <%= number_to_stats_percentage(group[:percentage]) %>
+              <% else %>
+                <%= "#{group[:count]} (#{number_to_stats_percentage(group[:percentage])})" %>
+              <% end %>
             </strong>
             <div class="progress" tabindex="0">
               <span class="progress-meter" style="width: <%= group[:percentage] %>%"></span>
