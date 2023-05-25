@@ -108,9 +108,16 @@ class DebatesController < ApplicationController
     super
 
     @projekt = @debate.projekt
-
     @related_contents = Kaminari.paginate_array(@debate.relationed_contents).page(params[:page]).per(5)
-    redirect_to debate_path(@debate), status: :moved_permanently if request.path != debate_path(@debate)
+
+    if request.path != debate_path(@debate)
+      redirect_to debate_path(@debate), status: :moved_permanently
+
+    elsif !@projekt.visible_for?(current_user)
+      @individual_group_value_names = @projekt.individual_group_values.pluck(:name)
+      render "custom/pages/forbidden", layout: false
+
+    end
 
     @geozones = Geozone.all
 

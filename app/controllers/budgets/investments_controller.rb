@@ -64,6 +64,11 @@ module Budgets
     end
 
     def show
+      if !@investment.projekt.visible_for?(current_user)
+        @individual_group_value_names = @investment.projekt.individual_group_values.pluck(:name)
+        render "custom/pages/forbidden", layout: false
+      end
+
       @commentable = @investment
       @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
       set_comment_flags(@comment_tree.comments)

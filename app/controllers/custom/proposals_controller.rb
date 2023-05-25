@@ -134,6 +134,11 @@ class ProposalsController
 
     if request.path != proposal_path(@proposal)
       redirect_to proposal_path(@proposal), status: :moved_permanently
+
+    elsif !@projekt.visible_for?(current_user)
+      @individual_group_value_names = @projekt.individual_group_values.pluck(:name)
+      render "custom/pages/forbidden", layout: false
+
     end
 
     @affiliated_geozones = (params[:affiliated_geozones] || '').split(',').map(&:to_i)
