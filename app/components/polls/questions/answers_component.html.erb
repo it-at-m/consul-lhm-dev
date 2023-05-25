@@ -16,6 +16,7 @@
         <div class='poll-answer-more-info-link'>
           <%= link_to question_answer.more_info_link, target: "_blank" do %>
             <%= t("custom.polls.questions.answers.more_info") %>
+            <i class="fas fa-external-link-alt" style="color:#004a83;"></i>
           <% end %>
         </div>
 
@@ -36,6 +37,7 @@
       <% elsif show_additional_info_description?(question_answer) %>
         <div class='poll-answer-more-info-link' data-open='model-question-<%= question_answer.id %>'>
           <%= t('custom.polls.questions.answers.more_info')  %>
+          <i class="fas fa-external-link-alt" style="color:#004a83;"></i>
         </div>
       <% end %>
 
