@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_22_093224) do
+ActiveRecord::Schema.define(version: 2023_05_27_121732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1190,6 +1190,7 @@ ActiveRecord::Schema.define(version: 2023_05_22_093224) do
     t.bigint "deficiency_report_id"
     t.jsonb "shape", default: {}, null: false
     t.boolean "show_admin_shape", default: false
+    t.float "altitude"
     t.index ["deficiency_report_id"], name: "index_map_locations_on_deficiency_report_id"
     t.index ["investment_id"], name: "index_map_locations_on_investment_id"
     t.index ["projekt_id"], name: "index_map_locations_on_projekt_id"
@@ -1654,6 +1655,15 @@ ActiveRecord::Schema.define(version: 2023_05_22_093224) do
     t.index ["projekt_phase_id"], name: "index_projekt_phase_geozones_on_projekt_phase_id"
   end
 
+  create_table "projekt_phase_subscriptions", force: :cascade do |t|
+    t.bigint "projekt_phase_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["projekt_phase_id"], name: "index_projekt_phase_subscriptions_on_projekt_phase_id"
+    t.index ["user_id"], name: "index_projekt_phase_subscriptions_on_user_id"
+  end
+
   create_table "projekt_phase_translations", force: :cascade do |t|
     t.bigint "projekt_phase_id", null: false
     t.string "locale", null: false
@@ -1753,6 +1763,16 @@ ActiveRecord::Schema.define(version: 2023_05_22_093224) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["projekt_id"], name: "index_projekt_settings_on_projekt_id"
+  end
+
+  create_table "projekt_subscriptions", force: :cascade do |t|
+    t.bigint "projekt_id"
+    t.bigint "user_id"
+    t.boolean "active", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["projekt_id"], name: "index_projekt_subscriptions_on_projekt_id"
+    t.index ["user_id"], name: "index_projekt_subscriptions_on_user_id"
   end
 
   create_table "projekt_translations", force: :cascade do |t|
@@ -2450,9 +2470,13 @@ ActiveRecord::Schema.define(version: 2023_05_22_093224) do
   add_foreign_key "projekt_notifications", "projekts"
   add_foreign_key "projekt_phase_geozones", "geozones"
   add_foreign_key "projekt_phase_geozones", "projekt_phases"
+  add_foreign_key "projekt_phase_subscriptions", "projekt_phases"
+  add_foreign_key "projekt_phase_subscriptions", "users"
   add_foreign_key "projekt_phases", "age_restrictions"
   add_foreign_key "projekt_phases", "projekts"
   add_foreign_key "projekt_settings", "projekts"
+  add_foreign_key "projekt_subscriptions", "projekts"
+  add_foreign_key "projekt_subscriptions", "users"
   add_foreign_key "projekts", "projekts", column: "parent_id"
   add_foreign_key "proposals", "communities"
   add_foreign_key "proposals", "projekts"

@@ -62,6 +62,9 @@ de:
             title: Kategorien
           projekt_start: Projektstart
           projekt_end: Gepl. Fertigstellung
+          phases_subscription:
+            title: Benachrichtigungen
+            description: Möchten Sie zu diesem Projekt auf dem Laufenden bleiben?
         tabs:
           budget: Budgets
           comments: Kommentare

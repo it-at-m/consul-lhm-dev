@@ -3,6 +3,9 @@
 <%= link_to t("admin.questions.index.create"), new_admin_question_path(poll_id: @poll.id),
             class: "button float-right" %>
 
+<%= link_to t("custom.admin.polls.poll.send_notifications"), send_notifications_admin_poll_path(@poll.id),
+            class: "button float-right", method: :put, data: { confirm: t("custom.admin.polls.poll.send_notifications_confirm") } %>
+
 <% if @poll.questions.empty? %>
   <div class="callout primary margin-top">
     <%= t("admin.polls.show.no_questions") %>

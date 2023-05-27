@@ -59,6 +59,9 @@ en:
             title: Categories
           projekt_start: Projekt start
           projekt_end: Planned completion
+          phases_subscription:
+            title: Notifications
+            description: Would you like to stay current?
         tabs:
           budgets: Budgets
           comments: Comments

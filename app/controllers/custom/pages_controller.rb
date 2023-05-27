@@ -16,6 +16,7 @@ class PagesController < ApplicationController
 
     if @custom_page.present? && @custom_page.projekt.present? && @custom_page.projekt.visible_for?(current_user)
       @projekt = @custom_page.projekt
+      @projekt_subscription = ProjektSubscription.find_or_create_by!(projekt: @projekt, user: current_user)
 
       @default_phase_name = default_phase_name(params[:selected_phase_id])
 

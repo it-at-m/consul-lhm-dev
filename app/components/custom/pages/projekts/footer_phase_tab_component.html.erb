@@ -41,5 +41,11 @@
         <% end %>
       </div>
     <% end %>
+
+    <% if current_user.present? %>
+      <div class="phase-subscription">
+        <%= render "custom/projekts/partials/phase_subscription", phase: phase %>
+      </div>
+    <% end %>
   </li>
 <% end %>

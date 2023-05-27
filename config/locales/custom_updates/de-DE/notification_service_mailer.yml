@@ -39,3 +39,8 @@ de:
         p1: "%{user_to_verify_username} hat sich soeben verifiziert."
         link_text: Admin (demokratie.today)
         signature_html: Viele Grüße</br>Consul
+      new_poll:
+        subject: Neue Abstimmung auf Consul
+        hi: Hallo %{username},
+        p1: es ist eine neue Abstimmung auf Consul eingegangen.
+        signature_html: Viele Grüße</br>Consul

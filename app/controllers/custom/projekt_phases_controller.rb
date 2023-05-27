@@ -17,4 +17,14 @@ class ProjektPhasesController < ApplicationController
       render html: default_text
     end
   end
+
+  def toggle_subscription
+    @projekt_phase = ProjektPhase.find(params[:id])
+
+    if @projekt_phase.subscribed?(current_user)
+      @projekt_phase.unsubscribe(current_user)
+    else
+      @projekt_phase.subscribe(current_user)
+    end
+  end
 end

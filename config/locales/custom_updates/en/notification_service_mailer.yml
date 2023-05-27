@@ -33,3 +33,8 @@ en:
         hi: Hi %{username},
         p1: New deficiency report has just been added to Consul
         signature_html: Best regards</br>Consul
+      new_poll:
+        subject: New Poll added to Consul
+        hi: Hi %{username},
+        p1: New poll has just been added to Consul
+        signature_html: Best regards</br>Consul

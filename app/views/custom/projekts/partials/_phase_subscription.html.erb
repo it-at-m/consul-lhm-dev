@@ -1,0 +1,9 @@
+<div id="<%= dom_id(phase, :subscription) %>" class="subscription">
+  <%= link_to toggle_subscription_projekt_phase_path(phase), remote: true, method: :post do %>
+    <% if phase.subscribed?(current_user) %>
+      <i class="fas fa-bell"></i>
+    <% else %>
+      <i class="far fa-bell-slash"></i>
+    <% end %>
+  <% end %>
+</div>

@@ -101,6 +101,10 @@ en:
         age_restrictions: Age restrictions
         modal_notification: Modal notifications
       polls:
+        poll:
+          send_notifications: Send notifications
+          notifications_sent: Notifications sent successfully
+          send_notifications_confirm: Are you sure?
         questions:
           answers:
             notice:

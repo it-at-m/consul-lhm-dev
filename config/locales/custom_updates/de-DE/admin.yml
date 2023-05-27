@@ -155,6 +155,10 @@ de:
           list: Registrierte Straßen    
         individual_groups: Individuelle Gruppen
       polls:
+        poll:
+          send_notifications: Benachrichtigungen senden
+          notifications_sent: Benachrichtigungen wurden erfolgreich gesendet
+          send_notifications_confirm: Sind Sie sicher?
         questions:
           show:
             description: Bezeichnung

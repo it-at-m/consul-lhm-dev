@@ -1,0 +1,4 @@
+<%= form_with(model: @resource, url: @path, local: false, html: { class: "toggle-attribute-component" }) do |f| %>
+  <%= f.hidden_field @attribute, value: !@resource.send(@attribute) %>
+  <%= f.button button_text.capitalize, { aria: { pressed: @resource.send(@attribute) }} %>
+<% end %>

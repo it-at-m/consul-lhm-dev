@@ -159,6 +159,13 @@ module Abilities
       # extending to regular users
       can :access, :ckeditor
       can :manage, Ckeditor::Picture
+
+      can :toggle_subscription, ProjektSubscription do |subscription|
+        subscription.user == user
+      end
+      can :toggle_subscription, ProjektPhaseSubscription do |subscription|
+        subscription.user == user
+      end
     end
   end
 end
