@@ -99,6 +99,17 @@ class NotificationServiceMailer < ApplicationMailer
     end
   end
 
+  def projekt_arguments(user_id, projekt_id)
+    @user = User.find(user_id)
+    @projekt = Projekt.find(projekt_id)
+
+    subject = t("custom.notification_service_mailers.projekt_arguments.subject")
+
+    with_user(@user) do
+      mail(to: @user.email, subject: subject)
+    end
+  end
+
   def new_budget_investment(user_id, investment_id)
     @user = User.find(user_id)
     @investment = Budget::Investment.find(investment_id)

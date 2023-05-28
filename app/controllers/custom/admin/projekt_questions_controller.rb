@@ -1,8 +1,8 @@
 class Admin::ProjektQuestionsController < Admin::BaseController
   include Translatable
 
-  before_action :set_projekt, only: [:new, :create]
-  before_action :set_projekt_and_projekt_question, except: [:new, :create]
+  before_action :set_projekt, only: [:new, :create, :send_notifications]
+  before_action :set_projekt_and_projekt_question, except: [:new, :create, :send_notifications]
   before_action :set_projekt_livestream, only: [:new, :create, :update]
 
   skip_authorization_check

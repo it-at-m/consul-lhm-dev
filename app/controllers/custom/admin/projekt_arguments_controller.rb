@@ -39,6 +39,11 @@ class Admin::ProjektArgumentsController < Admin::BaseController
     redirect_to redirect_path(@projekt)
   end
 
+  def send_notifications
+    NotificationServices::ProjektArgumentsNotifier.call(@projekt.id)
+    redirect_to edit_admin_projekt_path(@projekt), notice: t("custom.admin.projekts.projekt_arguments.index.notifications_sent_notice")
+  end
+
   private
 
     def projekt_argument_params

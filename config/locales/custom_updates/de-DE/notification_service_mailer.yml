@@ -50,6 +50,12 @@ de:
         link: Kurzumfrage
         p1: es ist eine neue Kurzumfrage auf Consul eingegangen.
         signature_html: Viele Grüße</br>Consul
+      projekt_arguments:
+        subject: Pro und Contra Stimmen auf Consul
+        hi: Hallo %{username},
+        link: Pro und Contra Stimmen
+        p1: es sind neue Pro und Contra Stimmen auf Consul eingegangen.
+        signature_html: Viele Grüße</br>Consul
       new_budget_investment:
         subject: Neuer Investitionsvorschlag auf Consul
         hi: Hallo %{username},

@@ -44,6 +44,12 @@ en:
         link: Short survey
         p1: New short survey has just been added to Consul
         signature_html: Best regards</br>Consul
+      projekt_arguments:
+        subject: Arguments added to Consul
+        hi: Hi %{username},
+        link: Projekt arguments
+        p1: Projekt arguments were just added to Consul
+        signature_html: Best regards</br>Consul
       new_budget_investment:
         subject: New Investment proposal added to Consul
         hi: Hi %{username},

@@ -112,7 +112,8 @@ Rails.application.routes.draw do
 
   # projekt notifications
   put "/admin/polls/:id/send_notifications",               to: "admin/poll/polls#send_notifications", as: :send_notifications_admin_poll
-  put "/admin/projekt/:id/projekt_questions/send_notifications",   to: "admin/projekt_questions#send_notifications", as: :send_notifications_admin_projekt_projekt_question
+  post "/admin/projekt/:projekt_id/projekt_questions/send_notifications",   to: "admin/projekt_questions#send_notifications", as: :send_notifications_admin_projekt_projekt_questions
+  post "/admin/projekt/:projekt_id/projekt_arguments/send_notifications",   to: "admin/projekt_arguments#send_notifications", as: :send_notifications_admin_projekt_projekt_arguments
 
 
 end
