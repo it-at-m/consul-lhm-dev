@@ -68,6 +68,11 @@ class Admin::ProjektQuestionsController < Admin::BaseController
       notice: t("admin.legislation.questions.destroy.notice")
   end
 
+  def send_notifications
+    NotificationServices::ProjektQuestionsNotifier.call(@projekt.id)
+    redirect_to edit_admin_projekt_path(@projekt), notice: t("custom.admin.projekts.projekt_questions.index.notifications_sent_notice")
+  end
+
   private
 
     def question_path

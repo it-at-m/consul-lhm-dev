@@ -38,3 +38,9 @@ en:
         hi: Hi %{username},
         p1: New poll has just been added to Consul
         signature_html: Best regards</br>Consul
+      projekt_questions:
+        subject: New short survey added to Consul
+        hi: Hi %{username},
+        link: Short survey
+        p1: New short survey has just been added to Consul
+        signature_html: Best regards</br>Consul

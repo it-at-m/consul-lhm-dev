@@ -111,8 +111,8 @@ Rails.application.routes.draw do
   get    "/polls/:id/csv_answers_votes",                   to: "polls#csv_answers_votes",             as: :poll_csv_answers_votes
 
   # projekt notifications
-  resources :projekt_notification_subscriptions, only: [:update]
   put "/admin/polls/:id/send_notifications",               to: "admin/poll/polls#send_notifications", as: :send_notifications_admin_poll
+  put "/admin/projekt/:id/projekt_questions/send_notifications",   to: "admin/projekt_questions#send_notifications", as: :send_notifications_admin_projekt_projekt_question
 
 
 end
