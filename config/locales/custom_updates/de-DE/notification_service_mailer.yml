@@ -61,3 +61,9 @@ de:
         hi: Hallo %{username},
         p1: es ist ein neuer Investitionsvorschlag auf Consul eingegangen.
         signature_html: Viele Grüße</br>Consul
+      new_projekt_notification:
+        subject: Neue Projektbenachrichtigung auf Consul
+        hi: Hallo %{username},
+        link: Projektbenachrichtigung
+        p1: es ist eine neue Projektbenachrichtigung auf Consul eingegangen.
+        signature_html: Viele Grüße</br>Consul

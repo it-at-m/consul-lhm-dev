@@ -121,6 +121,18 @@ class NotificationServiceMailer < ApplicationMailer
     end
   end
 
+  def new_projekt_notification(user_id, projekt_notification_id)
+    @user = User.find(user_id)
+    @projekt_notification = ProjektNotification.find(projekt_notification_id)
+    @projekt = @projekt_notification.projekt
+
+    subject = t("custom.notification_service_mailers.new_projekt_notification.subject")
+
+    with_user(@user) do
+      mail(to: @user.email, subject: subject)
+    end
+  end
+
   private
 
     def with_user(user)
