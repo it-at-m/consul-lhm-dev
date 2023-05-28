@@ -50,3 +50,8 @@ de:
         link: Kurzumfrage
         p1: es ist eine neue Kurzumfrage auf Consul eingegangen.
         signature_html: Viele Grüße</br>Consul
+      new_budget_investment:
+        subject: Neuer Investitionsvorschlag auf Consul
+        hi: Hallo %{username},
+        p1: es ist ein neuer Investitionsvorschlag auf Consul eingegangen.
+        signature_html: Viele Grüße</br>Consul
