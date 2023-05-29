@@ -70,7 +70,8 @@ class Admin::ProjektQuestionsController < Admin::BaseController
 
   def send_notifications
     NotificationServices::ProjektQuestionsNotifier.call(@projekt.id)
-    redirect_to edit_admin_projekt_path(@projekt), notice: t("custom.admin.projekts.projekt_questions.index.notifications_sent_notice")
+    redirect_to edit_admin_projekt_path(@projekt, anchor: "tab-projekt-questions"),
+      notice: t("custom.admin.projekts.projekt_questions.index.notifications_sent_notice")
   end
 
   private

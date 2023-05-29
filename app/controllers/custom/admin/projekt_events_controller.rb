@@ -40,7 +40,7 @@ class Admin::ProjektEventsController < Admin::BaseController
     @projekt_event = ProjektEvent.find_by(id: params[:id])
     NotificationServices::NewProjektEventNotifier.call(@projekt_event.id)
     redirect_to edit_admin_projekt_path(@projekt, anchor: "tab-projekt-events"),
-      notice: t("custom.admin.projekts.projekt_events.index.notifications_sent_notice")
+      notice: t("custom.admin.projekts.edit.projekt_events_tab.notifications_sent_notice")
   end
 
   private

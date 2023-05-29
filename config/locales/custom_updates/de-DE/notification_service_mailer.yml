@@ -79,3 +79,9 @@ de:
         link: Meilenstein
         p1: es ist ein neuen Meilenstein auf Consul eingegangen.
         signature_html: Viele Grüße</br>Consul
+      new_projekt_livestream:
+        subject: Neue Livestream auf Consul
+        hi: Hallo %{username},
+        link: Livestream
+        p1: es ist ein neue Livestream auf Consul eingegangen.
+        signature_html: Viele Grüße</br>Consul

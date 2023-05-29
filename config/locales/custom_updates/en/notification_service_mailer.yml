@@ -73,3 +73,9 @@ en:
         link: Projekt milestone
         p1: New projekt milestone has just been added to Consul
         signature_html: Best regards</br>Consul
+      new_projekt_livestream:
+        subject: New projekt livestream added to Consul
+        hi: Hi %{username},
+        link: Projekt livestream
+        p1: New projekt livestream has just been added to Consul
+        signature_html: Best regards</br>Consul

@@ -201,6 +201,8 @@ de:
             event_weblink: Weblink
             name: Veranstaltungen
             page_title: Veranstaltungen
+            send_notifications_button: Benachrichtigungen senden
+            notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
           projekt_managers_tab:
             name: Projektmanager*innen
           projekt_map_tab:
@@ -229,6 +231,8 @@ de:
             argument_created_at: Created at
             page_title: Stimmen
             title: Stimmen
+            send_notifications_button: Benachrichtigungen senden
+            notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
           projekt_livestreams_tab:
             submit_button: Livestream erstellen
             name: Livestreams
@@ -242,6 +246,8 @@ de:
               platform: Portal
               add_question: Frage hinzufügen
               questoins: Kurzumfragen
+            send_notifications_button: Benachrichtigungen senden
+            notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
           projekt_page: Projektseite
           projekt_phase_limitation: Beschränkung
           projekt_phases: Projektphasen
@@ -390,14 +396,6 @@ de:
             title: Frage erstellen
             title_for_livestream: Frage für Livestream erstellen
           show_answers_count: Anzahl der Stimmen im Frontend anzeigen
-        projekt_arguments:
-          index:
-            send_notifications_button: Benachrichtigungen senden
-            notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
-        projekt_events:
-          index:
-            send_notifications_button: Benachrichtigungen senden
-            notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
         overview_page_tab:
           title: Projektübersichtseite
           title_footer: Fußzeile

@@ -157,6 +157,18 @@ class NotificationServiceMailer < ApplicationMailer
     end
   end
 
+  def new_projekt_livestream(user_id, projekt_livestream_id)
+    @user = User.find(user_id)
+    @projekt_livestream = ProjektLivestream.find(projekt_livestream_id)
+    @projekt = @projekt_livestream.projekt
+
+    subject = t("custom.notification_service_mailers.new_projekt_livestream.subject")
+
+    with_user(@user) do
+      mail(to: @user.email, subject: subject)
+    end
+  end
+
   private
 
     def with_user(user)
