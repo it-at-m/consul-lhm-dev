@@ -67,3 +67,9 @@ de:
         link: Projektbenachrichtigung
         p1: es ist eine neue Projektbenachrichtigung auf Consul eingegangen.
         signature_html: Viele Grüße</br>Consul
+      new_projekt_event:
+        subject: Neue Veranstaltung auf Consul
+        hi: Hallo %{username},
+        link: Veranstaltung
+        p1: es ist eine neue Veranstaltung auf Consul eingegangen.
+        signature_html: Viele Grüße</br>Consul

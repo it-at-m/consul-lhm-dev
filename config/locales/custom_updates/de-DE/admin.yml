@@ -394,6 +394,10 @@ de:
           index:
             send_notifications_button: Benachrichtigungen senden
             notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
+        projekt_events:
+          index:
+            send_notifications_button: Benachrichtigungen senden
+            notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
         overview_page_tab:
           title: Projektübersichtseite
           title_footer: Fußzeile
