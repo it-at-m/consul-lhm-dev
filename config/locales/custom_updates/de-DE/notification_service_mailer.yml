@@ -73,3 +73,9 @@ de:
         link: Veranstaltung
         p1: es ist eine neue Veranstaltung auf Consul eingegangen.
         signature_html: Viele Grüße</br>Consul
+      new_projekt_milestone:
+        subject: Neuer Meilenstein auf Consul
+        hi: Hallo %{username},
+        link: Meilenstein
+        p1: es ist ein neuen Meilenstein auf Consul eingegangen.
+        signature_html: Viele Grüße</br>Consul

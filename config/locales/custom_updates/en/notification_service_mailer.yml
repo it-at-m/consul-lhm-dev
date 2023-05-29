@@ -61,9 +61,15 @@ en:
         link: Projekt notification
         p1: New projekt notification has just been added to Consul
         signature_html: Best regards</br>Consul
-      new_projekt_notification:
+      new_projekt_event:
         subject: New projekt event added to Consul
         hi: Hi %{username},
         link: Projekt event
         p1: New projekt event has just been added to Consul
+        signature_html: Best regards</br>Consul
+      new_projekt_milestone:
+        subject: New projekt milestone added to Consul
+        hi: Hi %{username},
+        link: Projekt milestone
+        p1: New projekt milestone has just been added to Consul
         signature_html: Best regards</br>Consul
