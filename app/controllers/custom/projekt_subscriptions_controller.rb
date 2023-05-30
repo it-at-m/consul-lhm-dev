@@ -1,8 +1,11 @@
 class ProjektSubscriptionsController < ApplicationController
   def toggle_subscription
     @projekt_subscription = ProjektSubscription.find(params[:id])
-    @projekt = @projekt_subscription.projekt
     authorize! :toggle_subscription, @projekt_subscription
+
+    redirect_to new_user_session_path and return unless current_user
+
+    @projekt = @projekt_subscription.projekt
 
     @projekt_subscription.update!(active: projekt_subscription_params[:active])
 

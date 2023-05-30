@@ -163,6 +163,7 @@ module Abilities
       can :toggle_subscription, ProjektSubscription do |subscription|
         subscription.user == user
       end
+
       can :toggle_subscription, ProjektPhaseSubscription do |subscription|
         subscription.user == user
       end

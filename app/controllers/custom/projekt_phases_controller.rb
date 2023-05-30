@@ -3,7 +3,7 @@ class ProjektPhasesController < ApplicationController
   # include ProposalsHelper
   # include ProjektControllerHelper
 
-  skip_authorization_check
+  skip_authorization_check only: [:selector_hint_html]
 
   def selector_hint_html
     projekt_phase = ProjektPhase.find(params[:id])
@@ -20,6 +20,9 @@ class ProjektPhasesController < ApplicationController
 
   def toggle_subscription
     @projekt_phase = ProjektPhase.find(params[:id])
+    authorize! :toggle_subscription, @projekt_phase
+
+    redirect_to new_user_session_path and return unless current_user
 
     if @projekt_phase.subscribed?(current_user)
       @projekt_phase.unsubscribe(current_user)
