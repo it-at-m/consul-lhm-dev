@@ -27,3 +27,10 @@
     <%= t('custom.projekts.page.sidebar.admin_controls.edit_projekt_page') %>
   <% end %>
 <% end %>
+
+<% if current_user.present? && current_user.administrator? %>
+  <%= link_to new_admin_newsletter_path(projekt_id: @projekt.page), class: "button hollow expanded", target: "_blank" do %>
+    <i class="fas fa-envelope"></i>
+    <%= t("custom.projekts.page.sidebar.admin_controls.create_newsletter_draft") %>
+  <% end %>
+<% end %>

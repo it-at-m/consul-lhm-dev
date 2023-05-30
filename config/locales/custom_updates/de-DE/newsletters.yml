@@ -1,0 +1,11 @@
+de:
+  admin:
+    segment_recipient:
+      newsletter_subscribers: Newsletter-Abonnenten
+  custom:
+    newsletters:
+      new_projekt:
+        total_duration_start: Projektstart
+        total_duration_end: Gepl. Fertigstellung
+        open_phases: Projektphasen
+        url: Projektlink

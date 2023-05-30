@@ -44,6 +44,12 @@ class ProjektPhase < ApplicationRecord
       .where("end_date IS NULL OR end_date >= ?", timestamp)
   }
 
+  scope :sorted, -> do
+    regular_phases.sort_by(&:default_order).each do |x|
+      x.start_date = Time.zone.today if x.start_date.nil?
+    end.sort_by(&:start_date)
+  end
+
   def selectable_by?(user)
     permission_problem(user).blank?
   end
@@ -129,6 +135,10 @@ class ProjektPhase < ApplicationRecord
     return false unless user
 
     subscriptions.where(user_id: user.id).destroy_all
+  end
+
+  def title
+    phase_tab_name.presence || I18n.t("custom.projekts.page.tabs.#{resources_name}")
   end
 
   private
