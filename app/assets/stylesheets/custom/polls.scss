@@ -362,13 +362,10 @@ td.answers-column  {
     display: inline-block;
     margin-right: auto;
 
-    &:after {
-      content: "\f35d";
-      font-family: "Font Awesome 5 Free";
-      font-weight: bold;
-      color: $brand;
+    a {
+      text-decoration: none;
+      color: inherit;
     }
-  
   }
 }
 

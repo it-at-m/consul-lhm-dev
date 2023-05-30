@@ -33,6 +33,12 @@
                 data: { "toggle-selector" => ".js-discarded",
                         "toggle-text" => t("budgets.results.hide_discarded_link") } %>
 
+    <% if can?(:recalculate_winners, @budget) %>
+      <%= link_to t("custom.budgets.results.recalculate_winners"), recalculate_winners_admin_budget_path(@budget),
+                  method: :put,
+                  class: "button hollow margin-bottom float-right-medium margin-right" %>
+    <% end %>
+
     <%= render "results_table", results_type: :compatible,
                                 title: @heading.name,
                                 heading_price: @heading.price,

@@ -16,7 +16,6 @@ class User < ApplicationRecord
 
   before_create :set_default_privacy_settings_to_false, if: :gdpr_conformity?
   after_create :take_votes_from_erased_user
-  after_update :update_qualified_total_ballot_line_weight_for_budget_investments
 
   has_many :projekts, -> { with_hidden }, foreign_key: :author_id, inverse_of: :author
   has_many :projekt_questions, foreign_key: :author_id #, inverse_of: :author
@@ -196,18 +195,6 @@ class User < ApplicationRecord
   end
 
   private
-
-    def update_qualified_total_ballot_line_weight_for_budget_investments
-      Budget::Ballot.where(user_id: id).find_each do |ballot|
-        ballot.investments.each do |investment|
-          new_qualified_total_ballot_line_weight = investment.budget_ballot_lines
-                                                             .joins(ballot: :user)
-                                                             .sum(:line_weight)
-
-          investment.update!(qualified_total_ballot_line_weight: new_qualified_total_ballot_line_weight)
-        end
-      end
-    end
 
     def geozone_with_plz
       Geozone.find_with_plz(plz)

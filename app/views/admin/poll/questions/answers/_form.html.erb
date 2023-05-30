@@ -20,6 +20,9 @@
         <div class="column">
           <%= translations_form.text_area :description, maxlength: Poll::Question.description_max_length, class: "html-area" %>
         </div>
+        <div class="column">
+          <%= f.text_field :more_info_link %>
+        </div>
       </div>
     <% end %>
     <% if @question.votation_type.unique? || @question.votation_type.multiple? %>

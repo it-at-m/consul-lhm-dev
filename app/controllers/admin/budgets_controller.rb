@@ -33,6 +33,11 @@ class Admin::BudgetsController < Admin::BaseController
                 notice: I18n.t("admin.budgets.winners.calculated")
   end
 
+  def recalculate_winners
+    @budget.headings.each { |heading| Budget::Result.new(@budget, heading).calculate_winners }
+    redirect_to budget_results_path(@budget, @heading), notice: "Ergebnisse erfolgreich berechnet."
+  end
+
   def update
     if @budget.update(budget_params)
       redirect_to admin_budget_path(@budget), notice: t("admin.budgets.update.notice")

@@ -10,7 +10,6 @@ class Budget
 
         def update_qualified_total_ballot_line_weight
           new_qualified_total_ballot_line_weight = investment.budget_ballot_lines
-                                                             .joins(ballot: :user)
                                                              .sum(:line_weight)
 
           investment.update!(qualified_total_ballot_line_weight: new_qualified_total_ballot_line_weight)

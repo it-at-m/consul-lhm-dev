@@ -276,6 +276,8 @@ de:
           enable_summary_description: "Zeigt das Feld \"Zusammenfassung\" in den Vorschlägen an"
           enable_geoman_controls_in_maps: Nutzer*innen ermöglichen Figuren in die Karte einzuzeichnen.
           enable_geoman_controls_in_maps_description: Ermöglicht es den Nutzer*innen Rechtecke, Kreise etc. einzuzeichnen.
+          show_relative_ballotting_results: Nur prozentuale Werte anzeigen
+          show_relative_ballotting_results_description: Blendet die absoluten Zahlen in den Statistiken aus. Nur prozentuale Werte werden angezeigt
         milestones:
           newest_first: Neueste Meilensteine zuerst anzeigen
           newest_first_description: Sortiert die Meilensteine absteigend mit dem neuesten Datum zuerst

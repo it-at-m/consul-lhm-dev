@@ -1,11 +1,11 @@
 <td style="<%= css_for_mailer_content %>">
 
-  <h1 style="<%= css_for_mailer_heading %>">
-    <%= t("mailers.budget_investment_unfeasible.title") %>
-  </h1>
-
   <p style="<%= css_for_mailer_text %>">
     <%= t("mailers.budget_investment_unfeasible.hi") %>
+  </p>
+
+  <p style="<%= css_for_mailer_text %>">
+    <%= t("mailers.budget_investment_unfeasible.rejected", title: @investment.title) %>
   </p>
 
   <p style="<%= css_for_mailer_text + css_for_mailer_quote %>">
@@ -24,7 +24,7 @@
   </p>
 
   <p style="<%= css_for_mailer_text %>">
-    <%= t("mailers.budget_investment_unfeasible.sorry") %>
+    <%= t("mailers.budget_investment_unfeasible.thank_you") %>
   </p>
 
   <p style="<%= css_for_mailer_text %>">

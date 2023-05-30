@@ -134,6 +134,7 @@ namespace :admin do
     member do
       patch :publish
       put :calculate_winners
+      put :recalculate_winners # custom
     end
 
     resources :groups, except: [:index, :show], controller: "budget_groups" do

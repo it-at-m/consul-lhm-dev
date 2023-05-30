@@ -19,6 +19,11 @@ class PollsController < ApplicationController
   end
 
   def show
+    if !@poll.projekt.visible_for?(current_user)
+      @individual_group_value_names = @poll.projekt.individual_group_values.pluck(:name)
+      render "custom/pages/forbidden", layout: false
+    end
+
     @questions = @poll.questions.for_render.sort_for_list
     @token = poll_voter_token(@poll, current_user)
     @poll_questions_answers = Poll::Question::Answer.where(question: @poll.questions)

@@ -29,6 +29,8 @@ en:
         show_end_date_in_frontend: Visible in front end
       poll/answer:
         open_answer_text: Open Answer
+      poll/question/answer:
+        more_info_link: Explanation link
       widget/card:
         card_category: Category
       deficiency_report:

@@ -1,13 +1,11 @@
 de:
   mailers:
     budget_investment_unfeasible:
+      subject: "Ihr Ausgabenvorschlag '%{title}' wurde als undurchführbar markiert"
       hi: "Liebe*r Benutzer*in,"
-      thank_you: "herzlichen Dank für den eingereichten Vorschlag zum %{budget_name}"
-      rejected: "Nach Prüfung Ihres Vorschlages müssen wir Ihnen leider mitteilen, dass er nicht gültig ist und somit nicht zur Abstimmung gestellt werden kann."
-      reject_reason: "Folgendes können wir Ihnen zur Begründung der Ungültigkeit mitteilen:"
-      next_steps: "Vielen Dank für Ihre wertvolle Beteiligung."
-      sincerely: "Mit freundlichen Grüßen"
-      subject: "Ihr Ausgabenvorschlag '%{code}' wurde als undurchführbar markiert"
+      rejected: "vielen Dank für die Einreichung Ihres Vorschlags \"%{title}\". Leider wurde Ihr Vorschlag mit folgender Begründung abgelehnt:"
+      thank_you: Vielen Dank für Ihre Beteiligung!
+      sincerely: Mit freundlichen Grüßen
     manual_verification_confirmation:
       subject: Ihr Konto wurde soeben verifiziert.
       p1: Ihr Konto wurde soeben verifiziert.

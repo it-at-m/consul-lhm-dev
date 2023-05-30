@@ -51,6 +51,8 @@ de:
         show_end_date_in_frontend: Im Frontend angezeigt
       poll/answer:
         open_answer_text: Offene Antwort
+      poll/question/answer:
+        more_info_link: Erklärungslink
       widget/card:
         card_category: Kategorie
       deficiency_report:

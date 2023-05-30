@@ -69,3 +69,5 @@ de:
             reviewing: Der Investitionsvorschlag wird zur Zeit intern auf seine Durchführbarkeit überprüft.
             reviewing_ballots: Die Abstimmung wird gerade intern überprüft.
             valuating: Die Kosten für diesen Investitionsvorschlag werden intern ermittelt.
+      results:
+        recalculate_winners: Gewinner neu berechnen
