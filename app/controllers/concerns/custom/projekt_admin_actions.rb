@@ -6,6 +6,7 @@ module ProjektAdminActions
 
   def edit
     @projekt = Projekt.find(params[:id])
+    @projekt_phases = @projekt.projekt_phases.order(:given_order)
     @namespace = params[:controller].split("/").first
 
     if @projekt.map_location.nil?

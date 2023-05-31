@@ -41,6 +41,12 @@ class ProjektPhase < ApplicationRecord
       .where("end_date IS NULL OR end_date >= ?", timestamp)
   }
 
+  def self.order_phases(ordered_array)
+    ordered_array.each_with_index do |phase_id, order|
+      find(phase_id).update_column(:given_order, (order + 1))
+    end
+  end
+
   def selectable_by?(user)
     permission_problem(user).blank?
   end
