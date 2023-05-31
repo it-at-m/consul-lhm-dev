@@ -31,6 +31,8 @@ class ProjektPhase < ApplicationRecord
   has_many :registered_address_street_projekt_phase, dependent: :destroy
   has_many :registered_address_streets, through: :registered_address_street_projekt_phase
 
+  default_scope { order(given_order: :asc) }
+
   scope :regular_phases, -> { where.not(type: REGULAR_PROJEKT_PHASES) }
   scope :special_phases, -> { where(type: REGULAR_PROJEKT_PHASES) }
 
@@ -114,6 +116,10 @@ class ProjektPhase < ApplicationRecord
 
   def hide_projekt_selector?
     false
+  end
+
+  def resource_count
+    nil
   end
 
   private

@@ -22,6 +22,11 @@ class ProjektPhase::ProposalPhase < ProjektPhase
       .present?
   end
 
+  def resource_count
+    projekt_tree_ids = projekt.all_children_ids.unshift(projekt.id)
+    Proposal.base_selection.where(projekt_id: (Proposal.scoped_projekt_ids_for_footer(projekt) & projekt_tree_ids)).count
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)

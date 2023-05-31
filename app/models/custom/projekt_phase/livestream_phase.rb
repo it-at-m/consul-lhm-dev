@@ -15,6 +15,10 @@ class ProjektPhase::LivestreamPhase < ProjektPhase
     2
   end
 
+  def resource_count
+    projekt.projekt_livestreams.count
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)
