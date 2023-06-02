@@ -65,12 +65,13 @@ class Sidebar::ProjektsFilterComponent < ApplicationComponent
     end
 
     def form_path
-      if params[:current_tab_path]
-        url_for(action: params[:current_tab_path],
-                controller: "/pages",
-                order: params[:order],
-                projekt_label_ids: params[:projekt_label_ids],
-                filter: params[:filter])
+      if params[:projekt_phase_id]
+        projekt_phase_footer_tab_page_path(params[:projekt_id], params[:projekt_phase_id],
+                                            page: params[:page] || 1,
+                                            order: params[:order],
+                                            projekt_label_ids: params[:projekt_label_ids],
+                                            filter: params[:filter]
+                                          )
       else
         url_for(action: "index", controller: controller_name)
       end

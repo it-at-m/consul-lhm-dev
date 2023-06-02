@@ -59,17 +59,17 @@ module ProjektsHelper
 
     module_links = []
 
-    if projekt_phase_show_in_navigation?(projekt, 'debate_phase')
-      module_links.push( debates_overview_link(t('custom.menu.debates'), projekt, 'projekt-module-link') )
-    end
+    # if projekt_phase_show_in_navigation?(projekt, 'debate_phase')
+    #   module_links.push( debates_overview_link(t('custom.menu.debates'), projekt, 'projekt-module-link') )
+    # end
 
-    if projekt_phase_show_in_navigation?(projekt, 'proposal_phase')
-      module_links.push( proposals_overview_link(t('custom.menu.proposals'), projekt, 'projekt-module-link') )
-    end
+    # if projekt_phase_show_in_navigation?(projekt, 'proposal_phase')
+    #   module_links.push( proposals_overview_link(t('custom.menu.proposals'), projekt, 'projekt-module-link') )
+    # end
 
-    if related_polls(projekt).any?
-      module_links.push( polls_overview_link(t('custom.menu.polls'), projekt, 'projekt-module-link') )
-    end
+    # if related_polls(projekt).any?
+    #   module_links.push( polls_overview_link(t('custom.menu.polls'), projekt, 'projekt-module-link') )
+    # end
 
     module_links.join(' | ').html_safe
   end

@@ -4,17 +4,17 @@ class Shared::OrderLinksComponent < ApplicationComponent
   private
 
     def link_path(order)
-      if params[:current_tab_path].present? && !helpers.request.path.starts_with?("/projekts")
-        url_for(action: params[:current_tab_path],
-                controller: "/pages",
-                page: params[:page] || 1,
-                order: order,
-                filter_projekt_ids: params[:filter_projekt_ids],
-                anchor: anchor,
-                projekt_label_ids: params[:projekt_label_ids],
-                filter: params[:filter])
-      else
+      if helpers.request.path.starts_with?("/projekts")
         current_path_with_query_params(order: order, page: 1, anchor: anchor)
+      else
+        projekt_phase_footer_tab_page_path(params[:projekt_id], params[:projekt_phase_id],
+                                            page: params[:page] || 1,
+                                            order: order,
+                                            filter_projekt_ids: params[:filter_projekt_ids],
+                                            anchor: anchor,
+                                            projekt_label_ids: params[:projekt_label_ids],
+                                            filter: params[:filter]
+                                          )
       end
     end
 

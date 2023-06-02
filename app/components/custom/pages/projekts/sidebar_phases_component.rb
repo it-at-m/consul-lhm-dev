@@ -11,7 +11,7 @@ class Pages::Projekts::SidebarPhasesComponent < ApplicationComponent
       x.start_date = Time.zone.today if x.start_date.nil?
     end.sort_by(&:start_date)
 
-    @milestone_phase = projekt.milestone_phase
+    @milestone_phase = projekt.milestone_phases.first
   end
 
   private
@@ -21,7 +21,7 @@ class Pages::Projekts::SidebarPhasesComponent < ApplicationComponent
     end
 
     def show_cta?
-      return true if projekt.budget.present? && projekt.budget_phase.current? && projekt.budget.phase.in?(%w[accepting selecting balloting])
+      return true if projekt.budget.present? && projekt.budget_phases.any?(&:current?) && projekt.budget.phase.in?(%w[accepting selecting balloting])
 
       phases.any? { |phase| phase.type != "ProjektPhase::BudgetPhase" && phase.current? }
     end

@@ -31,21 +31,21 @@ class Projekt < ApplicationRecord
   has_one :page, class_name: "SiteCustomization::Page", dependent: :destroy
 
   has_many :projekt_phases, dependent: :destroy
-  has_one :debate_phase, class_name: "ProjektPhase::DebatePhase", dependent: :destroy
-  has_one :proposal_phase, class_name: "ProjektPhase::ProposalPhase", dependent: :destroy
-  has_one :budget_phase, class_name: "ProjektPhase::BudgetPhase", dependent: :destroy
-  has_one :comment_phase, class_name: "ProjektPhase::CommentPhase", dependent: :destroy
-  has_one :voting_phase, class_name: "ProjektPhase::VotingPhase", dependent: :destroy
-  has_one :milestone_phase, class_name: "ProjektPhase::MilestonePhase", dependent: :destroy
-  has_one :projekt_notification_phase, class_name: "ProjektPhase::ProjektNotificationPhase",
+  has_many :debate_phases, class_name: "ProjektPhase::DebatePhase", dependent: :destroy
+  has_many :proposal_phases, class_name: "ProjektPhase::ProposalPhase", dependent: :destroy
+  has_many :budget_phases, class_name: "ProjektPhase::BudgetPhase", dependent: :destroy
+  has_many :comment_phases, class_name: "ProjektPhase::CommentPhase", dependent: :destroy
+  has_many :voting_phases, class_name: "ProjektPhase::VotingPhase", dependent: :destroy
+  has_many :milestone_phases, class_name: "ProjektPhase::MilestonePhase", dependent: :destroy
+  has_many :projekt_notification_phases, class_name: "ProjektPhase::ProjektNotificationPhase",
     dependent: :destroy
-  has_one :newsfeed_phase, class_name: "ProjektPhase::NewsfeedPhase", dependent: :destroy
-  has_one :event_phase, class_name: "ProjektPhase::EventPhase", dependent: :destroy
-  has_one :legislation_phase, class_name: "ProjektPhase::LegislationPhase", dependent: :destroy
-  has_one :question_phase, class_name: "ProjektPhase::QuestionPhase", dependent: :destroy
-  has_one :argument_phase, class_name: "ProjektPhase::ArgumentPhase", dependent: :destroy
-  has_one :livestream_phase, class_name: "ProjektPhase::LivestreamPhase", dependent: :destroy
-  has_many :geozone_restrictions, through: :projekt_phases
+  has_many :newsfeed_phases, class_name: "ProjektPhase::NewsfeedPhase", dependent: :destroy
+  has_many :event_phases, class_name: "ProjektPhase::EventPhase", dependent: :destroy
+  has_many :legislation_phases, class_name: "ProjektPhase::LegislationPhase", dependent: :destroy
+  has_many :question_phases, class_name: "ProjektPhase::QuestionPhase", dependent: :destroy
+  has_many :argument_phases, class_name: "ProjektPhase::ArgumentPhase", dependent: :destroy
+  has_many :livestream_phases, class_name: "ProjektPhase::LivestreamPhase", dependent: :destroy
+  # has_many :geozone_restrictions, through: :projekt_phases
 
   has_and_belongs_to_many :geozone_affiliations, class_name: "Geozone",
     after_add: :touch_updated_at, after_remove: :touch_updated_at
@@ -68,15 +68,11 @@ class Projekt < ApplicationRecord
   has_many :projekt_managers, through: :projekt_manager_assignments
 
   accepts_nested_attributes_for(
-    :debate_phase, :proposal_phase, :budget_phase,
-    :voting_phase, :comment_phase, :milestone_phase,
-    :event_phase, :question_phase, :legislation_phase,
-    :newsfeed_phase, :projekt_notification_phase, :argument_phase,
-    :livestream_phase, :projekt_events, :projekt_notifications, :projekt_arguments
+    :projekt_events, :projekt_notifications, :projekt_arguments
   )
 
   before_validation :set_default_color
-  after_create :create_corresponding_page, :set_order, :create_projekt_phases, :create_default_settings,
+  after_create :create_corresponding_page, :set_order, :ensure_projekt_phases, :create_default_settings,
     :create_map_location
   around_update :update_page
   after_save do
@@ -235,14 +231,14 @@ class Projekt < ApplicationRecord
     if controller_name == "proposals"
       return false if proposals_selectable_by_admins_only? && !user_has_admin_rights
 
-      proposal_phase.selectable_by?(user)
+      proposal_phases.first.selectable_by?(user)
     elsif controller_name == "debates"
       return false if debates_selectable_by_admins_only? && !user_has_admin_rights
 
-      debate_phase.selectable_by?(user)
+      debate_phases.first.selectable_by?(user)
     elsif controller_name == "processes"
       # return false if proposals_selectable_by_admins_only? && user.administrator.blank?
-      legislation_phase.selectable_by?(user)
+      legislation_phases.first.selectable_by?(user)
     end
   end
 
@@ -400,25 +396,9 @@ class Projekt < ApplicationRecord
     end
   end
 
-  def self.ensure_projekt_phases
+  def self.ensure_projekts_phases
     all.find_each do |projekt|
-      projekt.debate_phase = ProjektPhase::DebatePhase.create unless projekt.debate_phase
-      projekt.proposal_phase = ProjektPhase::ProposalPhase.create unless projekt.proposal_phase
-      projekt.budget_phase = ProjektPhase::BudgetPhase.create unless projekt.budget_phase
-      projekt.comment_phase = ProjektPhase::CommentPhase.create unless projekt.comment_phase
-      projekt.question_phase = ProjektPhase::QuestionPhase.create unless projekt.question_phase
-      projekt.voting_phase = ProjektPhase::VotingPhase.create unless projekt.voting_phase
-      projekt.milestone_phase = ProjektPhase::MilestonePhase.create unless projekt.milestone_phase
-      unless projekt.projekt_notification_phase
-        projekt.projekt_notification_phase = ProjektPhase::ProjektNotificationPhase.create
-      end
-      projekt.newsfeed_phase = ProjektPhase::NewsfeedPhase.create unless projekt.newsfeed_phase
-      projekt.event_phase = ProjektPhase::EventPhase.create unless projekt.event_phase
-      projekt.argument_phase = ProjektPhase::ArgumentPhase.create unless projekt.argument_phase
-      projekt.livestream_phase = ProjektPhase::LivestreamPhase.create unless projekt.livestream_phase
-      unless projekt.legislation_phase
-        projekt.legislation_phase = ProjektPhase::LegislationPhase.create
-      end
+      projekt.send(:ensure_projekt_phases)
     end
   end
 
@@ -540,20 +520,20 @@ class Projekt < ApplicationRecord
       end
     end
 
-    def create_projekt_phases
-      self.debate_phase = ProjektPhase::DebatePhase.create
-      self.proposal_phase = ProjektPhase::ProposalPhase.create
-      self.budget_phase = ProjektPhase::BudgetPhase.create
-      self.comment_phase = ProjektPhase::CommentPhase.create
-      self.question_phase = ProjektPhase::QuestionPhase.create
-      self.voting_phase = ProjektPhase::VotingPhase.create
-      self.milestone_phase = ProjektPhase::MilestonePhase.create
-      self.projekt_notification_phase = ProjektPhase::ProjektNotificationPhase.create
-      self.argument_phase = ProjektPhase::ArgumentPhase.create
-      self.livestream_phase = ProjektPhase::LivestreamPhase.create
-      self.newsfeed_phase = ProjektPhase::NewsfeedPhase.create
-      self.event_phase = ProjektPhase::EventPhase.create
-      self.legislation_phase = ProjektPhase::LegislationPhase.create
+    def ensure_projekt_phases
+      projekt.debate_phases << ProjektPhase::DebatePhase.create if projekt.debate_phases.empty?
+      projekt.proposal_phases << ProjektPhase::ProposalPhase.create if projekt.proposal_phases.empty?
+      projekt.budget_phases << ProjektPhase::BudgetPhase.create if projekt.budget_phases.empty?
+      projekt.comment_phases << ProjektPhase::CommentPhase.create if projekt.comment_phases.empty?
+      projekt.question_phases << ProjektPhase::QuestionPhase.create if projekt.question_phases.empty?
+      projekt.voting_phases << ProjektPhase::VotingPhase.create if projekt.voting_phases.empty?
+      projekt.milestone_phases << ProjektPhase::MilestonePhase.create if projekt.milestone_phases.empty?
+      projekt.projekt_notification_phases << ProjektPhase::ProjektNotificationPhase.create if projekt.projekt_notification_phases.empty?
+      projekt.newsfeed_phases << ProjektPhase::NewsfeedPhase.create if projekt.newsfeed_phases.empty?
+      projekt.event_phases << ProjektPhase::EventPhase.create if projekt.event_phases.empty?
+      projekt.argument_phases << ProjektPhase::ArgumentPhase.create if projekt.argument_phases.empty?
+      projekt.livestream_phases << ProjektPhase::LivestreamPhase.create if projekt.livestream_phases.empty?
+      projekt.legislation_phases << ProjektPhase::LegislationPhase.create if projekt.legislation_phases.empty?
     end
 
     def swap_order_numbers_up

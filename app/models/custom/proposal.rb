@@ -3,7 +3,7 @@ class Proposal < ApplicationRecord
   include Labelable
 
   belongs_to :projekt, optional: true, touch: true
-  has_one :proposal_phase, through: :projekt
+  has_many :proposal_phases, through: :projekt
   has_many :geozone_restrictions, through: :proposal_phase
   has_many :geozone_affiliations, through: :projekt
 
@@ -59,7 +59,7 @@ class Proposal < ApplicationRecord
   def self.scoped_projekt_ids_for_footer(projekt)
     projekt.top_parent.all_children_projekts.unshift(projekt.top_parent).select do |projekt|
       ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.main.activate').value.present? &&
-      projekt.all_children_projekts.unshift(projekt).any? { |p| p.proposal_phase.current? || p.proposals.base_selection.any? }
+        projekt.all_children_projekts.unshift(projekt).any? { |p| p.proposal_phases.any?(&:current?) || p.proposals.base_selection.any? }
     end.pluck(:id)
   end
 

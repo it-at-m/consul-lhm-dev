@@ -51,9 +51,9 @@ class ProjektQuestion < ApplicationRecord
 
   def projekt_phase
     if projekt_livestream_id.present?
-      projekt.livestream_phase
+      projekt.livestream_phases.first
     else
-      projekt.question_phase
+      projekt.question_phases.first
     end
   end
 

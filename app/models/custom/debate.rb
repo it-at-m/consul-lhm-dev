@@ -6,7 +6,7 @@ class Debate
   include Labelable
 
   belongs_to :projekt, optional: true, touch: true
-  has_one :debate_phase, through: :projekt
+  has_many :debate_phases, through: :projekt
   has_many :geozone_restrictions, through: :debate_phase
   has_many :geozone_affiliations, through: :projekt
 
@@ -60,7 +60,7 @@ class Debate
   def self.scoped_projekt_ids_for_footer(projekt)
     projekt.top_parent.all_children_projekts.unshift(projekt.top_parent).select do |projekt|
       ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.main.activate').value.present? &&
-      projekt.all_children_projekts.unshift(projekt).any? { |p| p.debate_phase.current? || p.debates.any? }
+        projekt.all_children_projekts.unshift(projekt).any? { |p| p.debate_phases.any?(&:current?) || p.debates.any? }
     end.pluck(:id)
   end
 

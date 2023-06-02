@@ -15,24 +15,6 @@ module ProjektAdminActions
 
     @individual_groups = IndividualGroup.hard.visible
 
-    @projekt.build_comment_phase if @projekt.comment_phase.blank?
-    @projekt.comment_phase.geozone_restrictions.build
-
-    @projekt.build_debate_phase if @projekt.debate_phase.blank?
-    @projekt.debate_phase.geozone_restrictions.build
-
-    @projekt.build_proposal_phase if @projekt.proposal_phase.blank?
-    @projekt.proposal_phase.geozone_restrictions.build
-
-    @projekt.build_budget_phase if @projekt.budget_phase.blank?
-    @projekt.budget_phase.geozone_restrictions.build
-
-    @projekt.build_voting_phase if @projekt.voting_phase.blank?
-    @projekt.voting_phase.geozone_restrictions.build
-
-    @projekt.build_event_phase if @projekt.event_phase.blank?
-    @projekt.event_phase.geozone_restrictions.build
-
     @projekt.build_map_location if @projekt.map_location.blank?
 
     all_settings = ProjektSetting.where(projekt: @projekt).group_by(&:type)

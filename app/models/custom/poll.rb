@@ -6,7 +6,7 @@ class Poll < ApplicationRecord
   scope :last_week, -> { where("polls.created_at >= ?", 7.days.ago) }
 
   belongs_to :projekt, optional: true, touch: true
-  has_one :voting_phase, through: :projekt
+  has_many :voting_phases, through: :projekt
   has_many :geozone_affiliations, through: :projekt
 
   validates :projekt, presence: true
@@ -48,7 +48,7 @@ class Poll < ApplicationRecord
   end
 
   def answerable_by?(user)
-    @answerable ||= (voting_phase.permission_problem(user).blank? && current?)
+    @answerable ||= (voting_phases.first.permission_problem(user).blank? && current?)
   end
 
   def reason_for_not_being_answerable_by(user)
@@ -56,7 +56,7 @@ class Poll < ApplicationRecord
 
     return :poll_not_current if !current?
 
-    voting_phase.permission_problem(user)
+    voting_phases.first.permission_problem(user)
   end
 
   def comments_allowed?(user)
@@ -82,6 +82,6 @@ class Poll < ApplicationRecord
   end
 
   def projekt_phase
-    voting_phase
+    voting_phases.first
   end
 end
