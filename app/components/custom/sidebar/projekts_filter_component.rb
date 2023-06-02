@@ -23,7 +23,7 @@ class Sidebar::ProjektsFilterComponent < ApplicationComponent
       return false if @current_projekt&.overview_page?
 
       if resources_name == "budget"
-        return @current_projekt.present? && @current_projekt.children.joins(:budget).any?
+        return @current_projekt.present? && @current_projekt.children.joins(budget_phases: :budget).any?
       end
 
       @top_level_active_projekts.count > 1 ||

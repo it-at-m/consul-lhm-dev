@@ -1,4 +1,7 @@
 class ProjektPhase::BudgetPhase < ProjektPhase
+  has_one :budget, class_name: "Budget", foreign_key: "projekt_phase_id",
+    dependent: :destroy, inverse_of: :projekt_phase
+
   def phase_activated?
     # projekt.budget.present?
     active?

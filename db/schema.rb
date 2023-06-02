@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_31_072439) do
+ActiveRecord::Schema.define(version: 2023_06_02_104820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -483,7 +483,9 @@ ActiveRecord::Schema.define(version: 2023_05_31_072439) do
     t.boolean "hide_money", default: false
     t.bigint "projekt_id"
     t.integer "max_number_of_winners", default: 0
+    t.bigint "projekt_phase_id"
     t.index ["projekt_id"], name: "index_budgets_on_projekt_id"
+    t.index ["projekt_phase_id"], name: "index_budgets_on_projekt_phase_id"
   end
 
   create_table "campaigns", id: :serial, force: :cascade do |t|
@@ -2413,6 +2415,7 @@ ActiveRecord::Schema.define(version: 2023_05_31_072439) do
   add_foreign_key "budget_investments", "communities"
   add_foreign_key "budget_valuators", "budgets"
   add_foreign_key "budget_valuators", "valuators"
+  add_foreign_key "budgets", "projekt_phases"
   add_foreign_key "budgets", "projekts"
   add_foreign_key "city_street_projekt_phases", "city_streets"
   add_foreign_key "city_street_projekt_phases", "projekt_phases"

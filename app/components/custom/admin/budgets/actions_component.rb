@@ -4,6 +4,7 @@ class Admin::Budgets::ActionsComponent < ApplicationComponent
   private
 
     def create_budget_poll_path
+      debugger
       balloting_phase = budget.phases.find_by(kind: "balloting")
 
       admin_polls_path(poll: {
@@ -11,7 +12,7 @@ class Admin::Budgets::ActionsComponent < ApplicationComponent
         budget_id: budget.id,
         starts_at: balloting_phase.starts_at,
         ends_at:   balloting_phase.ends_at,
-        projekt_id: budget.projekt.id
+        projekt_phase_id: budget.projekt_phase.id
       })
     end
 end

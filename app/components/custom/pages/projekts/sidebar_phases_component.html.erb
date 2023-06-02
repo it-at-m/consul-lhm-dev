@@ -24,7 +24,7 @@
   <% index = 0 %>
 
   <% phases.each do |phase | %>
-    <% next if phase.name == 'budget_phase' && @projekt.budget.blank?  %>
+    <% next if phase.name == 'budget_phase' && phase.budget.blank?  %>
 
     <% if phase.phase_activated? %>
       <div class="sidebar-projekt-phase <%= 'active' if phase.current? %>" <%= "aria-expanded=true" if phase.name == 'budget_phase' %>>
@@ -43,7 +43,7 @@
           </span>
           <span class='sidebar-projekt-phase-duration'><%= format_date_range(phase.start_date, phase.end_date) %></span>
 
-          <% if phase.name == 'budget_phase' && projekt.budget.present? %>
+          <% if phase.name == 'budget_phase' && phase.budget.present? %>
 
             <span class='js-icon-toggle-budget-phases toggle-arrow focusable js-prevent-key-scroll'
                   role="button"
@@ -53,7 +53,7 @@
             </span>
 
             <div class='sidebar-projekt-budget-phases'>
-              <%= render Pages::Projekts::SidebarBudgetPhasesComponent.new(projekt.budget) %>
+              <%= render Pages::Projekts::SidebarBudgetPhasesComponent.new(phase.budget) %>
             </div>
           <% end %>
         </div>

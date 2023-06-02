@@ -21,7 +21,6 @@ class Projekt < ApplicationRecord
   has_many :proposals, dependent: :nullify
   has_many :polls, dependent: :nullify
   has_many :legislation_processes, dependent: :nullify, class_name: "Legislation::Process"
-  has_one :budget, dependent: :nullify
   has_many :projekt_events, dependent: :destroy
   has_many :questions, -> { order(:id) },
     class_name: "ProjektQuestion",
@@ -46,6 +45,8 @@ class Projekt < ApplicationRecord
   has_many :argument_phases, class_name: "ProjektPhase::ArgumentPhase", dependent: :destroy
   has_many :livestream_phases, class_name: "ProjektPhase::LivestreamPhase", dependent: :destroy
   # has_many :geozone_restrictions, through: :projekt_phases
+
+  has_many :budgets, through: :budget_phases
 
   has_and_belongs_to_many :geozone_affiliations, class_name: "Geozone",
     after_add: :touch_updated_at, after_remove: :touch_updated_at

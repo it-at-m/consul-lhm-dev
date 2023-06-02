@@ -17,7 +17,8 @@ class ApplicationComponent < ViewComponent::Base
     )
 
       if params[:projekt_phase_id].present? # single projekt footer tab
-        page = Projekt.find(params[:projekt_id]).page
+        projekt = ProjektPhase.find(params[:projekt_phase_id]).projekt
+        page = projekt.page
 
         page_path(page.slug, selected_phase_id: params[:projekt_phase_id],
           page: pagination_page || params[:page],

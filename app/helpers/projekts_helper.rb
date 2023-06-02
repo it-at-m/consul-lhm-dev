@@ -34,7 +34,7 @@ module ProjektsHelper
   end
 
   def projekt_filter_resources_name
-    @current_tab_phase&.resources_name || controller_name
+    @projekt_phase&.resources_name || controller_name
   end
 
   def show_archived_projekts_in_sidebar?

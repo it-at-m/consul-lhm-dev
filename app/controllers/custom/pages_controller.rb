@@ -17,10 +17,12 @@ class PagesController < ApplicationController
     if @custom_page.present? && @custom_page.projekt.present? && @custom_page.projekt.visible_for?(current_user)
       @projekt = @custom_page.projekt
       @default_projekt_phase = get_default_projekt_phase(params[:selected_phase_id])
-      send("set_#{@default_projekt_phase.name}_footer_tab_variables")
+      @projekt_phase = @default_projekt_phase
 
       params[:projekt_phase_id] = @default_projekt_phase.id
       params[:projekt_id] ||= @projekt.id
+
+      send("set_#{@default_projekt_phase.name}_footer_tab_variables")
 
       @cards = @custom_page.cards
 
@@ -219,7 +221,7 @@ class PagesController < ApplicationController
   end
 
   def set_budget_phase_footer_tab_variables
-    @budget = @projekt.budget
+    @budget = @projekt_phase.budget
     return if @budget.blank?
 
     @all_resources = []
