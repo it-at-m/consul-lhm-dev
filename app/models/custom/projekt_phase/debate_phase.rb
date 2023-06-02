@@ -30,6 +30,6 @@ class ProjektPhase::DebatePhase < ProjektPhase
   private
 
     def phase_specific_permission_problems(user, location)
-      nil
+      return :only_admins if projekt.debates_selectable_by_admins_only? && !(user.administrator? || user.projekt_manager?)
     end
 end

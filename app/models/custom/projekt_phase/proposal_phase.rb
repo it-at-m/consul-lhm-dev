@@ -31,5 +31,6 @@ class ProjektPhase::ProposalPhase < ProjektPhase
 
     def phase_specific_permission_problems(user, location)
       return :organization if user.organization? && location == :votes_component
+      return :only_admins if projekt.proposals_selectable_by_admins_only? && !(user.administrator? || user.projekt_manager?)
     end
 end
