@@ -233,8 +233,12 @@ class Projekt < ApplicationRecord
     user_has_admin_rights = user.administrator? || user.projekt_manager?
 
     if controller_name == "proposals"
+      return false if proposals_selectable_by_admins_only? && !user_has_admin_rights
+
       proposal_phase.selectable_by?(user)
     elsif controller_name == "debates"
+      return false if debates_selectable_by_admins_only? && !user_has_admin_rights
+
       debate_phase.selectable_by?(user)
     elsif controller_name == "processes"
       legislation_phase.selectable_by?(user)
