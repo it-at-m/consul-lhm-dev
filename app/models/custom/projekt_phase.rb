@@ -122,6 +122,10 @@ class ProjektPhase < ApplicationRecord
     nil
   end
 
+  def selectable_by_admins_only?
+    false
+  end
+
   private
 
     def phase_specific_permission_problems(user)
