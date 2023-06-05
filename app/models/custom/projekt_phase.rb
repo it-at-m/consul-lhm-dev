@@ -31,6 +31,8 @@ class ProjektPhase < ApplicationRecord
   has_many :registered_address_street_projekt_phase, dependent: :destroy
   has_many :registered_address_streets, through: :registered_address_street_projekt_phase
 
+  default_scope { order(given_order: :asc) }
+
   scope :regular_phases, -> { where.not(type: REGULAR_PROJEKT_PHASES) }
   scope :special_phases, -> { where(type: REGULAR_PROJEKT_PHASES) }
 
@@ -40,6 +42,12 @@ class ProjektPhase < ApplicationRecord
       .where("start_date IS NULL OR start_date <= ?", timestamp)
       .where("end_date IS NULL OR end_date >= ?", timestamp)
   }
+
+  def self.order_phases(ordered_array)
+    ordered_array.each_with_index do |phase_id, order|
+      find(phase_id).update_column(:given_order, (order + 1))
+    end
+  end
 
   def selectable_by?(user)
     permission_problem(user).blank?
@@ -108,6 +116,10 @@ class ProjektPhase < ApplicationRecord
 
   def hide_projekt_selector?
     false
+  end
+
+  def resource_count
+    nil
   end
 
   private

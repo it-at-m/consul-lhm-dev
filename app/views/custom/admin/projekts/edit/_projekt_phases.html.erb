@@ -1,4 +1,4 @@
-<% namespace = params[:controller].split('/').first %>
+<% namespace = params[:controller].split("/").first %>
 
 <h2><%= t("custom.admin.projekts.edit.projekt_phases_tab.main_block_title") %></h2>
 <%= render partial: "admin/projekts/edit/projekt_phases/settings_table", locals: { features: @projekt_features_main } %>
@@ -7,67 +7,21 @@
 <h2><%= t("custom.admin.projekts.edit.projekt_phases_tab.page_block_title") %></h2>
 <%= render partial: "admin/projekts/edit/projekt_phases/projekt_page" %>
 
-
 <h2><%= t("custom.admin.projekts.edit.projekt_phases_tab.information_block_title") %></h2>
-<%= render partial: 'admin/projekts/edit/projekt_phases/projekt_information' %>
+<%= render partial: "admin/projekts/edit/projekt_phases/projekt_information" %>
 
 <h2 class="margin-top-25"><%= t("custom.admin.projekts.edit.projekt_phases_tab.phases_block_title") %></h2>
 
 <table class='edit-projekt margin-top'>
-  <tbody>
+  <thead>
+    <%= render partial: "custom/admin/projekts/edit/projekt_phases/projekt_phase_table_header" %>
+  </thead>
 
-    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase_table_header' %>
-
-    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase', locals: {
-      projekt_phase: @projekt.comment_phase
-    } %>
-
-    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase', locals: {
-      projekt_phase: @projekt.debate_phase
-    } %>
-
-    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase', locals: {
-      projekt_phase: @projekt.proposal_phase
-    } %>
-
-    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase', locals: {
-      projekt_phase: @projekt.question_phase
-    } %>
-
-    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase', locals: {
-      projekt_phase: @projekt.voting_phase
-    } %>
-
-    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase', locals: {
-      projekt_phase: @projekt.budget_phase
-    } %>
-
-    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase', locals: {
-      projekt_phase: @projekt.legislation_phase
-    } %>
-
-    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase', locals: {
-      projekt_phase: @projekt.argument_phase
-    } %>
-
-    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase', locals: {
-      projekt_phase: @projekt.projekt_notification_phase
-    } %>
-
-    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase', locals: {
-      projekt_phase: @projekt.milestone_phase
-    } %>
-
-    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase', locals: {
-      projekt_phase: @projekt.event_phase
-    } %>
-
-    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase', locals: {
-      projekt_phase: @projekt.livestream_phase
-    } %>
-
-    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase', locals: {
-      projekt_phase: @projekt.newsfeed_phase
-    } %>
+  <tbody class="sortable" data-js-url="<%= order_phases_admin_projekt_projekt_phases_path(@projekt) %>">
+    <% @projekt.projekt_phases.each do |projekt_phase| %>
+      <%= render partial: "custom/admin/projekts/edit/projekt_phases/projekt_phase", locals: {
+        projekt_phase: projekt_phase
+      } %>
+    <% end %>
   </tbody>
 </table>

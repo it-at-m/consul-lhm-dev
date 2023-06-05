@@ -1,7 +1,6 @@
 <% projekt = projekt_phase.projekt %>
 <% phase_name = projekt_phase.name %>
-
-<tr class="projekt_phase_settings" style='vertical-align:top;' >
+<tr class="projekt_phase_settings" data-answer-id="<%= projekt_phase.id %>" style='vertical-align:top;' >
   <td style="width:195px;">
     <strong>
       <%= t("custom.admin.projekts.edit.projekt_phases_tab.#{phase_name}") %>

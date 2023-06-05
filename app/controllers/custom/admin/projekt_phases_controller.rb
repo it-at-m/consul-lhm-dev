@@ -11,6 +11,12 @@ class Admin::ProjektPhasesController < Admin::BaseController
     super
   end
 
+  def order_phases
+    @projekt = Projekt.find(params[:projekt_id])
+    @projekt.projekt_phases.order_phases(params[:ordered_list])
+    head :ok
+  end
+
   private
 
     def namespace_projekt_phase_path(projekt, projekt_phase)

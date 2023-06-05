@@ -7,6 +7,9 @@ namespace :admin do
       member do
         patch :toggle_active_status
       end
+      collection do
+        post :order_phases
+      end
     end
     resources :settings, controller: "projekt_settings", only: [:update] do
       member do

@@ -15,6 +15,10 @@ class ProjektPhase::CommentPhase < ProjektPhase
     1
   end
 
+  def resource_count
+    projekt.comments.count
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)

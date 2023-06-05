@@ -15,6 +15,10 @@ class ProjektPhase::QuestionPhase < ProjektPhase
     3
   end
 
+  def resource_count
+    projekt.questions.count
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)

@@ -22,9 +22,14 @@ class ProjektPhase::DebatePhase < ProjektPhase
       .present?
   end
 
+  def resource_count
+    projekt_tree_ids = projekt.all_children_ids.unshift(projekt.id)
+    Debate.where(projekt_id: (Debate.scoped_projekt_ids_for_footer(projekt) & projekt_tree_ids)).count
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)
-      nil
+      return :only_admins if projekt.debates_selectable_by_admins_only? && !(user.administrator? || user.projekt_manager?)
     end
 end

@@ -11,6 +11,10 @@ class ProjektPhase::EventPhase < ProjektPhase
     "projekt_events"
   end
 
+  def resource_count
+    projekt.projekt_events.count
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)
