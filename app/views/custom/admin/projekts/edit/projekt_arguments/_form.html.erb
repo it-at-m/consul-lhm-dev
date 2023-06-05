@@ -3,6 +3,11 @@
   <%= f.hidden_field :namespace, value: @namespace %>
 
   <div class='small-12 medium-7'>
+    <%= f.label :projekt_phase_id, t("custom.admin.projekts.edit.projekt_arguments_tab.phases_label") %>
+    <%= f.collection_radio_buttons :projekt_phase_id, @projekt.argument_phases, :id, :name, required: true %>
+  </div>
+
+  <div class='small-12 medium-7'>
     <div class="d-flex">
       <div class="d-flex d-flex-start">
         <%= f.radio_button :pro, true, label: false, required: true, id: "projekt_argument_pro_#{f.object.id}" %>

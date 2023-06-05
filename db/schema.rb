@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_02_104820) do
+ActiveRecord::Schema.define(version: 2023_06_05_090552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1564,7 +1564,9 @@ ActiveRecord::Schema.define(version: 2023_06_02_104820) do
     t.integer "projekt_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "projekt_phase_id"
     t.index ["projekt_id"], name: "index_projekt_arguments_on_projekt_id"
+    t.index ["projekt_phase_id"], name: "index_projekt_arguments_on_projekt_phase_id"
   end
 
   create_table "projekt_events", force: :cascade do |t|
@@ -2466,6 +2468,7 @@ ActiveRecord::Schema.define(version: 2023_06_02_104820) do
   add_foreign_key "poll_voters", "polls"
   add_foreign_key "polls", "budgets"
   add_foreign_key "polls", "projekts"
+  add_foreign_key "projekt_arguments", "projekt_phases"
   add_foreign_key "projekt_labelings", "projekt_labels"
   add_foreign_key "projekt_labels", "projekts"
   add_foreign_key "projekt_manager_assignments", "projekt_managers"

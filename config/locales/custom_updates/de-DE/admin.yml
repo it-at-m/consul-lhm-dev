@@ -215,6 +215,7 @@ de:
           projekt_arguments_tab:
             button: Stimme erlstellen
             name: Stimmen
+            phases_label: Phasen
             argument_name: Name
             argument_pro: Pro
             argument_cons: Contra

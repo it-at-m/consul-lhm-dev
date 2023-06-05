@@ -55,7 +55,7 @@ class Projekt < ApplicationRecord
 
   has_many :projekt_settings, dependent: :destroy
   has_many :projekt_notifications, dependent: :destroy
-  has_many :projekt_arguments, dependent: :destroy
+  has_many :projekt_arguments, through: :argument_phases
   has_many :projekt_livestreams, dependent: :destroy
 
   has_many :comments, as: :commentable, inverse_of: :commentable, dependent: :destroy
@@ -69,7 +69,7 @@ class Projekt < ApplicationRecord
   has_many :projekt_managers, through: :projekt_manager_assignments
 
   accepts_nested_attributes_for(
-    :projekt_events, :projekt_notifications, :projekt_arguments
+    :projekt_events, :projekt_notifications
   )
 
   before_validation :set_default_color

@@ -6,7 +6,6 @@ class Admin::ProjektArgumentsController < Admin::BaseController
 
   def create
     @projekt_argument = ProjektArgument.new(projekt_argument_params)
-    @projekt_argument.projekt = @projekt
 
     if should_authorize_projekt_manager?
       authorize! :create, @projekt_argument
@@ -42,7 +41,7 @@ class Admin::ProjektArgumentsController < Admin::BaseController
   private
 
     def projekt_argument_params
-      params.require(:projekt_argument).permit(:name, :party, :pro, :position,
+      params.require(:projekt_argument).permit(:projekt_phase_id, :name, :party, :pro, :position,
                                                :note, image_attributes: image_attributes)
     end
 

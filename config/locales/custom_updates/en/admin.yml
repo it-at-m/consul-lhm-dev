@@ -158,6 +158,7 @@ en:
           projekt_arguments_tab:
             button: Save argument
             name: Arguments
+            phases_label: Phases
             argument_name: Name
             argument_pro: Pro
             argument_cons: Cons
