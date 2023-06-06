@@ -41,7 +41,7 @@ class Admin::ProjektEventsController < Admin::BaseController
     def projekt_event_params
       params
         .require(:projekt_event)
-        .permit(:title, :description, :location, :datetime, :end_datetime, :weblink)
+        .permit(:projekt_phase_id, :title, :description, :location, :datetime, :end_datetime, :weblink)
     end
 
     def set_projekt

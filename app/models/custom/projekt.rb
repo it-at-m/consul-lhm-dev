@@ -47,11 +47,12 @@ class Projekt < ApplicationRecord
   has_many :projekt_arguments, through: :argument_phases
   has_many :projekt_livestreams, through: :livestream_phases
   has_many :projekt_notifications, through: :projekt_notification_phases
+  has_many :projekt_events, through: :event_phases
+
   has_many :debates, dependent: :nullify
   has_many :proposals, dependent: :nullify
   has_many :polls, dependent: :nullify
   has_many :legislation_processes, dependent: :nullify, class_name: "Legislation::Process"
-  has_many :projekt_events, dependent: :destroy
 
 
   has_many :comments, as: :commentable, inverse_of: :commentable, dependent: :destroy
@@ -63,10 +64,6 @@ class Projekt < ApplicationRecord
 
   has_many :projekt_manager_assignments, dependent: :destroy
   has_many :projekt_managers, through: :projekt_manager_assignments
-
-  accepts_nested_attributes_for(
-    :projekt_events, :projekt_notifications
-  )
 
   before_validation :set_default_color
   after_create :create_corresponding_page, :set_order, :ensure_projekt_phases, :create_default_settings,

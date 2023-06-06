@@ -132,6 +132,7 @@ en:
             "no": "No"
             "yes": "Yes"
           projekt_events_tab:
+            phases_label: Phases
             button: Save notification
             event_created_at: Created at
             event_datetime: Datetime

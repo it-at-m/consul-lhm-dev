@@ -1,5 +1,6 @@
 class ProjektEvent < ApplicationRecord
-  belongs_to :projekt
+  belongs_to :projekt # TODO: remove column after data migration con1538
+  belongs_to :projekt_phase
 
   validates :title, presence: true
   validates :datetime, presence: true

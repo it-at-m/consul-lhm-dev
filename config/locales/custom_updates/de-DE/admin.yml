@@ -188,6 +188,7 @@ de:
             "no": Nein
             "yes": Ja
           projekt_events_tab:
+            phases_label: Phasen
             button: Event erstellen
             event_created_at: Hergestellt in
             event_datetime: Datum
