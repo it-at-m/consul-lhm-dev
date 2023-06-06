@@ -49,12 +49,12 @@
       </div>
     </div>
   </div>
-  <div class="projekt-livestream--navigation">
-    <h3 class="projekt-livestream-navigation--title">
-      <i class="fas fa-play"></i>
-      <%= t('custom.projekts.projekt_livestreams.links_title') %>
-    </h3>
-    <% if @other_livestreams.size > 1 %>
+  <% if @other_livestreams.size > 1 %>
+    <div class="projekt-livestream--navigation">
+      <h3 class="projekt-livestream-navigation--title">
+        <i class="fas fa-play"></i>
+        <%= t('custom.projekts.projekt_livestreams.links_title') %>
+      </h3>
       <div class="projekt-livestream-navigation--links">
         <% @other_livestreams.each do |other_livestream| %>
           <% if other_livestream.title.present? %>
@@ -67,8 +67,8 @@
               )
             %>
           <% end %>
-      <% end %>
+        <% end %>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>

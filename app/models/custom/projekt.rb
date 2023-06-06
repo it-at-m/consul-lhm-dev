@@ -45,17 +45,13 @@ class Projekt < ApplicationRecord
 
   has_many :budgets, through: :budget_phases
   has_many :projekt_arguments, through: :argument_phases
+  has_many :projekt_livestreams, through: :livestream_phases
   has_many :projekt_notifications, dependent: :destroy
-  has_many :projekt_livestreams, dependent: :destroy
   has_many :debates, dependent: :nullify
   has_many :proposals, dependent: :nullify
   has_many :polls, dependent: :nullify
   has_many :legislation_processes, dependent: :nullify, class_name: "Legislation::Process"
   has_many :projekt_events, dependent: :destroy
-  # has_many :questions, -> { order(:id) },
-  #   class_name: "ProjektQuestion",
-  #   inverse_of:  :projekt,
-  #   dependent:   :destroy
 
 
   has_many :comments, as: :commentable, inverse_of: :commentable, dependent: :destroy

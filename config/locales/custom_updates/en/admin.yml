@@ -171,6 +171,7 @@ en:
             page_title: Arguments
             title: Arguments
           projekt_livestreams_tab:
+            phases_label: Phases
             submit_button: Save Livestream
             name: Livestreams
             page_title: Livestream

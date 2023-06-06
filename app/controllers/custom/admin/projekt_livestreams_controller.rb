@@ -41,7 +41,7 @@ class Admin::ProjektLivestreamsController < Admin::BaseController
   private
 
     def projekt_livestream_params
-      params.require(:projekt_livestream).permit(:url, :title, :starts_at, :description)
+      params.require(:projekt_livestream).permit(:projekt_phase_id, :url, :title, :starts_at, :description)
     end
 
     def set_projekt

@@ -341,7 +341,7 @@ class PagesController < ApplicationController
   end
 
   def set_livestream_phase_footer_tab_variables
-    @all_livestreams = @projekt.projekt_livestreams.order(created_at: :desc)
+    @all_livestreams = @projekt_phase.projekt_livestreams.order(created_at: :desc)
     @current_projekt_livestream = @all_livestreams.first
     @other_livestreams = @all_livestreams.select(:id, :title)
   end

@@ -8,7 +8,7 @@ class ProjektQuestion < ApplicationRecord
 
   belongs_to :author, -> { with_hidden }, class_name: "User", inverse_of: :projekt_questions
   belongs_to :projekt # TODO: remove column after data migration con1538
-  belongs_to :projekt_phase
+  belongs_to :projekt_phase, optional: true
   belongs_to :projekt_livestream, optional: true
 
   has_many :question_options, -> { order(:id) },
