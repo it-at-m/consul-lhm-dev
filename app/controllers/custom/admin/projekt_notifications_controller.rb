@@ -40,7 +40,7 @@ class Admin::ProjektNotificationsController < Admin::BaseController
   private
 
     def projekt_notification_params
-      params.require(:projekt_notification).permit(:title, :body)
+      params.require(:projekt_notification).permit(:projekt_phase_id, :title, :body)
     end
 
     def set_projekt

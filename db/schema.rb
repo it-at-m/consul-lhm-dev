@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_06_133318) do
+ActiveRecord::Schema.define(version: 2023_06_06_155248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1649,7 +1649,9 @@ ActiveRecord::Schema.define(version: 2023_06_06_133318) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "projekt_phase_id"
     t.index ["projekt_id"], name: "index_projekt_notifications_on_projekt_id"
+    t.index ["projekt_phase_id"], name: "index_projekt_notifications_on_projekt_phase_id"
   end
 
   create_table "projekt_phase_geozones", force: :cascade do |t|
@@ -2479,6 +2481,7 @@ ActiveRecord::Schema.define(version: 2023_06_06_133318) do
   add_foreign_key "projekt_manager_assignments", "projekt_managers"
   add_foreign_key "projekt_manager_assignments", "projekts"
   add_foreign_key "projekt_managers", "users"
+  add_foreign_key "projekt_notifications", "projekt_phases"
   add_foreign_key "projekt_notifications", "projekts"
   add_foreign_key "projekt_phase_geozones", "geozones"
   add_foreign_key "projekt_phase_geozones", "projekt_phases"

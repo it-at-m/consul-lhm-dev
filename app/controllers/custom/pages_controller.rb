@@ -296,7 +296,7 @@ class PagesController < ApplicationController
   end
 
   def set_projekt_notification_phase_footer_tab_variables
-    @projekt_notifications = @projekt.projekt_notifications
+    @projekt_notifications = @projekt_phase.projekt_notifications
   end
 
   def set_newsfeed_phase_footer_tab_variables

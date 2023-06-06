@@ -1,4 +1,7 @@
 class ProjektPhase::ProjektNotificationPhase < ProjektPhase
+  has_many :projekt_notifications, foreign_key: :projekt_phase_id,
+    dependent: :destroy, inverse_of: :projekt_phase
+
   def phase_activated?
     active?
   end
@@ -12,7 +15,7 @@ class ProjektPhase::ProjektNotificationPhase < ProjektPhase
   end
 
   def resource_count
-    projekt.projekt_notifications.count
+    projekt_notifications.count
   end
 
   private

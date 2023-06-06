@@ -46,7 +46,7 @@ class Projekt < ApplicationRecord
   has_many :budgets, through: :budget_phases
   has_many :projekt_arguments, through: :argument_phases
   has_many :projekt_livestreams, through: :livestream_phases
-  has_many :projekt_notifications, dependent: :destroy
+  has_many :projekt_notifications, through: :projekt_notification_phases
   has_many :debates, dependent: :nullify
   has_many :proposals, dependent: :nullify
   has_many :polls, dependent: :nullify
