@@ -14,7 +14,7 @@ class ProjektPhase < ApplicationRecord
   translates :projekt_selector_hint, touch: true
   include Globalizable
 
-  belongs_to :projekt, optional: true, touch: true
+  belongs_to :projekt, touch: true
   has_many :projekt_settings, through: :projekt
   belongs_to :age_restriction
   has_many :projekt_phase_geozones, dependent: :destroy
@@ -30,6 +30,8 @@ class ProjektPhase < ApplicationRecord
 
   has_many :registered_address_street_projekt_phase, dependent: :destroy
   has_many :registered_address_streets, through: :registered_address_street_projekt_phase
+
+  validates :projekt, presence: true
 
   default_scope { order(given_order: :asc) }
 

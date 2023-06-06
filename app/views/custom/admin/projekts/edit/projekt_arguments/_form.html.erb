@@ -2,12 +2,25 @@
   <%= f.hidden_field :tab, value: "#tab-projekt-arguments" %>
   <%= f.hidden_field :namespace, value: @namespace %>
 
-  <div class='small-12 medium-7'>
-    <%= f.label :projekt_phase_id, t("custom.admin.projekts.edit.projekt_arguments_tab.phases_label") %>
-    <%= f.collection_radio_buttons :projekt_phase_id, @projekt.argument_phases, :id, :name, required: true %>
-  </div>
+  <% if @projekt.argument_phases.count == 1 %>
+    <%= f.hidden_field :projekt_phase_id, value: @projekt.argument_phases.first.id %>
+  <% else %>
+    <div class='small-12 medium-10'>
+      <%= f.label :projekt_phase_id, t("custom.admin.projekts.edit.projekt_arguments_tab.phases_label") %>
+      <div class="d-flex">
+        <% @projekt.argument_phases.each.with_index(1) do |argument_phase, index| %>
+          <div class="d-flex d-flex-start margin-right">
+            <%= f.radio_button :projekt_phase_id, argument_phase.id, label: false, required: true, id: "projekt_argument_phase_#{argument_phase.id}" %>
+            <%= f.label "phase_#{argument_phase.id}",
+              "#{argument_phase.phase_tab_name.presence || t("custom.admin.projekts.edit.projekt_arguments_tab.name")} (#{argument_phase.name} #{index})" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 
   <div class='small-12 medium-7'>
+    <%= f.label :pro, t("custom.admin.projekts.edit.projekt_arguments_tab.argument_type_label") %>
     <div class="d-flex">
       <div class="d-flex d-flex-start">
         <%= f.radio_button :pro, true, label: false, required: true, id: "projekt_argument_pro_#{f.object.id}" %>

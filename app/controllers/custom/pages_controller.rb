@@ -336,8 +336,8 @@ class PagesController < ApplicationController
   end
 
   def set_argument_phase_footer_tab_variables
-    @projekt_arguments_pro = @projekt.projekt_arguments.pro.order(created_at: :desc)
-    @projekt_arguments_cons = @projekt.projekt_arguments.cons.order(created_at: :desc)
+    @projekt_arguments_pro = @projekt_phase.projekt_arguments.pro.order(created_at: :desc)
+    @projekt_arguments_cons = @projekt_phase.projekt_arguments.cons.order(created_at: :desc)
   end
 
   def set_livestream_phase_footer_tab_variables

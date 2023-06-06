@@ -159,6 +159,7 @@ en:
             button: Save argument
             name: Arguments
             phases_label: Phases
+            argument_type_label: Argument
             argument_name: Name
             argument_pro: Pro
             argument_cons: Cons
