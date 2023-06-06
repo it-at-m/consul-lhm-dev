@@ -18,7 +18,6 @@ class Admin::ProjektQuestionsController < Admin::BaseController
 
   def create
     @projekt_question = ProjektQuestion.new(projekt_question_params)
-    @projekt_question.projekt_id = @projekt.id
     @projekt_question.author = current_user
 
     if @projekt_livestream.present?
@@ -77,6 +76,7 @@ class Admin::ProjektQuestionsController < Admin::BaseController
     def projekt_question_params
       params.require(:projekt_question).permit(
         translation_params(::ProjektQuestion),
+        :projekt_phase_id,
         :comments_enabled, :show_answers_count,
         question_options_attributes: [
           :id, :_destroy, translation_params(::ProjektQuestionOption)

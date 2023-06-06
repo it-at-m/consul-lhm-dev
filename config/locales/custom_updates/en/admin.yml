@@ -219,6 +219,7 @@ en:
             voting_phase: Voting phase
             legislation_phase: Text drafting phase
           projekt_questions_tab:
+            phases_label: Phases
             name: Short survey
             title: Questions
           projekt_sdg_tab:

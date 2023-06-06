@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_05_090552) do
+ActiveRecord::Schema.define(version: 2023_06_06_083350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1756,9 +1756,11 @@ ActiveRecord::Schema.define(version: 2023_06_05_090552) do
     t.boolean "comments_enabled", default: true
     t.boolean "show_answers_count", default: true
     t.integer "projekt_livestream_id"
+    t.bigint "projekt_phase_id"
     t.index ["hidden_at"], name: "index_projekt_questions_on_hidden_at"
     t.index ["projekt_id"], name: "index_projekt_questions_on_projekt_id"
     t.index ["projekt_livestream_id"], name: "index_projekt_questions_on_projekt_livestream_id"
+    t.index ["projekt_phase_id"], name: "index_projekt_questions_on_projekt_phase_id"
   end
 
   create_table "projekt_settings", force: :cascade do |t|
@@ -2481,6 +2483,7 @@ ActiveRecord::Schema.define(version: 2023_06_05_090552) do
   add_foreign_key "projekt_phase_subscriptions", "users"
   add_foreign_key "projekt_phases", "age_restrictions"
   add_foreign_key "projekt_phases", "projekts"
+  add_foreign_key "projekt_questions", "projekt_phases"
   add_foreign_key "projekt_settings", "projekts"
   add_foreign_key "projekt_subscriptions", "projekts"
   add_foreign_key "projekt_subscriptions", "users"

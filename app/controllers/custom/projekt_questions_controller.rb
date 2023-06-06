@@ -17,7 +17,7 @@ class ProjektQuestionsController < ApplicationController
 
     @projekt_questions =
       if params[:current_projekt_question_id].present?
-        current_projekt_question = @projekt.questions.find(params[:current_projekt_question_id])
+        current_projekt_question = ProjektQuestion.find(params[:current_projekt_question_id])
 
         if current_projekt_question.present?
           current_projekt_question.sibling_questions
@@ -45,8 +45,7 @@ class ProjektQuestionsController < ApplicationController
 
   private
 
-  def set_question
-    @projekt = Projekt.find(params[:projekt_id])
-    @question = @projekt.questions.find(params[:id])
-  end
+    def set_question
+      @question = ProjektQuestion.find(params[:id])
+    end
 end

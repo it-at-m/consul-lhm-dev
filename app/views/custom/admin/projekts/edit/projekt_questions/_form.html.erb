@@ -10,6 +10,25 @@
   <%= render "shared/errors", resource: @projekt_question %>
 
   <div class="row">
+   <% if @projekt.question_phases.count == 1 %>
+     <%= f.hidden_field :projekt_phase_id, value: @projekt.question_phases.first.id %>
+   <% else %>
+     <div class='small-12 medium-10 column'>
+       <%= f.label :projekt_phase_id, t("custom.admin.projekts.edit.projekt_questions_tab.phases_label") %>
+       <div class="d-flex">
+         <% @projekt.question_phases.each.with_index(1) do |question_phase, index| %>
+           <div class="d-flex d-flex-start margin-right">
+             <%= f.radio_button :projekt_phase_id, question_phase.id, label: false, required: true, id: "projekt_question_phase_#{question_phase.id}" %>
+             <%= f.label "phase_#{question_phase.id}",
+               "#{question_phase.phase_tab_name.presence || t("custom.admin.projekts.edit.projekt_questions_tab.name")} (#{question_phase.name} #{index})" %>
+           </div>
+         <% end %>
+       </div>
+     </div>
+   <% end %>
+ </div>
+
+  <div class="row">
     <%= f.translatable_fields do |translations_form| %>
       <div class="small-12 medium-9 column end">
         <%= translations_form.text_area :title, rows: 5 %>

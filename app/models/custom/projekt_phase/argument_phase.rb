@@ -3,7 +3,6 @@ class ProjektPhase::ArgumentPhase < ProjektPhase
     dependent: :restrict_with_exception, inverse_of: :projekt_phase
 
   def phase_activated?
-    # projekt.questions.any?
     active?
   end
 

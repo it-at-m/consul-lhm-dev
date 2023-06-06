@@ -17,17 +17,9 @@ class Projekt < ApplicationRecord
     inverse_of: :parent
   belongs_to :parent, class_name: "Projekt", optional: true
 
-  has_many :debates, dependent: :nullify
-  has_many :proposals, dependent: :nullify
-  has_many :polls, dependent: :nullify
-  has_many :legislation_processes, dependent: :nullify, class_name: "Legislation::Process"
-  has_many :projekt_events, dependent: :destroy
-  has_many :questions, -> { order(:id) },
-    class_name: "ProjektQuestion",
-    inverse_of:  :projekt,
-    dependent:   :destroy
-
   has_one :page, class_name: "SiteCustomization::Page", dependent: :destroy
+
+  has_many :projekt_settings, dependent: :destroy
 
   has_many :projekt_phases, dependent: :destroy
   has_many :debate_phases, class_name: "ProjektPhase::DebatePhase", dependent: :destroy
@@ -46,17 +38,25 @@ class Projekt < ApplicationRecord
   has_many :livestream_phases, class_name: "ProjektPhase::LivestreamPhase", dependent: :destroy
   # has_many :geozone_restrictions, through: :projekt_phases
 
-  has_many :budgets, through: :budget_phases
-
   has_and_belongs_to_many :geozone_affiliations, class_name: "Geozone",
     after_add: :touch_updated_at, after_remove: :touch_updated_at
   has_and_belongs_to_many :individual_group_values,
     after_add: :touch_updated_at, after_remove: :touch_updated_at
 
-  has_many :projekt_settings, dependent: :destroy
-  has_many :projekt_notifications, dependent: :destroy
+  has_many :budgets, through: :budget_phases
   has_many :projekt_arguments, through: :argument_phases
+  has_many :projekt_notifications, dependent: :destroy
   has_many :projekt_livestreams, dependent: :destroy
+  has_many :debates, dependent: :nullify
+  has_many :proposals, dependent: :nullify
+  has_many :polls, dependent: :nullify
+  has_many :legislation_processes, dependent: :nullify, class_name: "Legislation::Process"
+  has_many :projekt_events, dependent: :destroy
+  # has_many :questions, -> { order(:id) },
+  #   class_name: "ProjektQuestion",
+  #   inverse_of:  :projekt,
+  #   dependent:   :destroy
+
 
   has_many :comments, as: :commentable, inverse_of: :commentable, dependent: :destroy
   belongs_to :author, -> { with_hidden }, class_name: "User", inverse_of: :projekts
@@ -405,10 +405,6 @@ class Projekt < ApplicationRecord
 
   def title
     name
-  end
-
-  def question_list_enabled?
-    ProjektSetting.find_by(projekt: self, key: "projekt_feature.questions.show_questions_list")&.enabled?
   end
 
   def map_layers_for_render

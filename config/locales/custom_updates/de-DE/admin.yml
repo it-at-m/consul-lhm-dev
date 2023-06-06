@@ -301,6 +301,7 @@ de:
               activated: Aktiviert
               edit_link: Bearbeiten
           projekt_questions_tab:
+            phases_label: Phasen
             name: Kurzumfragen
             title: Fragen
           projekt_sdg_tab:

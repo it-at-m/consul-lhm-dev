@@ -314,9 +314,9 @@ class PagesController < ApplicationController
     # scoped_projekt_ids = @current_projekt.all_children_projekts.unshift(@current_projekt).compact.pluck(:id)
     # @projekt_questions = ProjektQuestion.base_selection(scoped_projekt_ids)
 
-    projekt_questions = @projekt.questions.root_questions
+    projekt_questions = @projekt_phase.questions.root_questions
 
-    if @projekt.question_list_enabled?
+    if @projekt_phase.question_list_enabled?
       @projekt_questions = projekt_questions
     else
       @projekt_question = projekt_questions.first

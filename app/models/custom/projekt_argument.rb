@@ -1,7 +1,7 @@
 class ProjektArgument < ApplicationRecord
   include Imageable
 
-  # belongs_to :projekt # TODO: remove column after data migration con1538
+  belongs_to :projekt # TODO: remove column after data migration con1538
 
   belongs_to :projekt_phase
 

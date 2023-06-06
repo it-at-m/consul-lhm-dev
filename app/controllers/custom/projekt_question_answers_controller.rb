@@ -13,8 +13,9 @@ class ProjektQuestionAnswersController < ApplicationController
   def create
     question_option = ProjektQuestionOption.find(params[:projekt_question_answer][:projekt_question_option_id])
     @question = question_option.question
+    question_phase = @question.projekt_phase
 
-    if !@projekt.question_phase.phase_activated? && @question.root_question?
+    if !question_phase.phase_activated? && @question.root_question?
       render text: "Question phase not active", status: :unprocessable_entity
     else
       @answer = ProjektQuestionAnswer.find_or_initialize_by(
