@@ -206,6 +206,7 @@ de:
           projekt_news_tab:
             name: News-Feed
           projekt_notifications_tab:
+            phases_label: Phasen
             button: Nachricht senden
             name: Benachrichtigungen
             notification_body: Nachricht

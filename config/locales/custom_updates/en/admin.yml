@@ -149,6 +149,7 @@ en:
           projekt_news_tab:
             name: News-Feed
           projekt_notifications_tab:
+            phases_label: Phases
             button: Send message
             name: Notifications
             notification_body: Message
