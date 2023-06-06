@@ -8,6 +8,8 @@ class ProjektPhase < ApplicationRecord
     "ProjektPhase::LivestreamPhase"
   ].freeze
 
+  delegate :icon, to: :projekt
+
   translates :phase_tab_name, touch: true
   translates :new_resource_button_name, touch: true
   translates :resource_form_title, touch: true
@@ -18,6 +20,7 @@ class ProjektPhase < ApplicationRecord
   has_many :projekt_settings, through: :projekt
   belongs_to :age_restriction
   has_many :projekt_phase_geozones, dependent: :destroy
+  has_many :geozone_affiliations, through: :projekt
   has_many :geozone_restrictions, through: :projekt_phase_geozones, source: :geozone,
            after_add: :touch_updated_at, after_remove: :touch_updated_at
 

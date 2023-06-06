@@ -13,7 +13,7 @@ class Pages::Projekts::FooterPhaseTabComponent < ApplicationComponent
     if phase.projekt.overview_page?
       url_for(controller: "projekts", action: "#{phase.name}_footer_tab", order: params[:order])
     else
-      projekt_phase_footer_tab_page_path(@projekt, phase)
+      projekt_phase_footer_tab_page_path(@projekt.page, phase)
     end
   end
 

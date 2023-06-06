@@ -13,7 +13,7 @@ class Budgets::Investments::NewComponent < ApplicationComponent
 
     def budgets_back_link_path
       if params[:projekt_phase_id].present?
-        link_to url_for_footer_tab_back_button, class: "back" do
+        link_to url_to_footer_tab, class: "back" do
           tag.span(class: "icon-angle-left") + t("shared.back")
         end
 

@@ -6,8 +6,8 @@ class Shared::OrderLinksComponent < ApplicationComponent
     def link_path(order)
       if helpers.request.path.starts_with?("/projekts")
         current_path_with_query_params(order: order, page: 1, anchor: anchor)
-      else
-        projekt_phase_footer_tab_page_path(params[:projekt_id], params[:projekt_phase_id],
+      elsif params[:projekt_phase_id].present?
+        projekt_phase_footer_tab_page_path(params[:id], params[:projekt_phase_id],
                                             page: params[:page] || 1,
                                             order: order,
                                             filter_projekt_ids: params[:filter_projekt_ids],
@@ -15,6 +15,8 @@ class Shared::OrderLinksComponent < ApplicationComponent
                                             projekt_label_ids: params[:projekt_label_ids],
                                             filter: params[:filter]
                                           )
+      else
+        url_for(action: "index", controller: controller_name, order: order)
       end
     end
 
@@ -24,16 +26,10 @@ class Shared::OrderLinksComponent < ApplicationComponent
 
     def footer_tab_back_button_url(order)
       if controller_name == "pages" &&
-          params[:current_tab_path].present? &&
+          params[:projekt_phase_id].present? &&
           !helpers.request.path.starts_with?("/projekts")
 
-        url_for_footer_tab_back_button(page_id: params[:id],
-                                       pagination_page: params[:page],
-                                       current_tab_path: params[:current_tab_path],
-                                       filter: params[:filter],
-                                       order: order,
-                                       filter_projekt_ids: params[:filter_projekt_ids],
-                                       projekt_label_ids: params[:projekt_label_ids])
+        url_to_footer_tab(order: order)
       else
         "empty"
       end

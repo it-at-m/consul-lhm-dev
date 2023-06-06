@@ -17,20 +17,14 @@ module ProjektsHelper
     content_tag(:div, safe_join(links, divider_tag).html_safe, class: 'custom-breadcrumbs')
   end
 
-  def projekt_bar_background_color(projekt)
-    if projekt.color.present?
-      projekt.color
-    else
-      '#FFFFFF'
-    end
+  def projekt_bar_background_color(projekt_phase)
+    projekt = projekt_phase.projekt.top_parent
+    projekt.color.presence || "#FFFFFF"
   end
 
-  def projekt_bar_text_color(projekt)
-    if projekt.color.present?
-      pick_text_color(projekt.color)
-    else
-      '#000000'
-    end
+  def projekt_bar_text_color(projekt_phase)
+    projekt = projekt_phase.projekt.top_parent
+    projekt.color.present? ? pick_text_color(projekt.color) : "#000000"
   end
 
   def projekt_filter_resources_name

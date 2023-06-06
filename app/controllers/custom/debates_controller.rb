@@ -70,18 +70,18 @@ class DebatesController < ApplicationController
       track_event
       NotificationServices::NewDebateNotifier.new(@debate.id).call
 
-      if @debate.debate_phase.active?
-        if @debate.projekt.overview_page?
+      if @debate.projekt_phase.active?
+        if @debate.projekt_phase.projekt.overview_page?
           redirect_to projekts_path(
-            anchor: 'filter-subnav',
-            selected_phase_id: @debate.debate_phase.id,
+            anchor: "filter-subnav",
+            selected_phase_id: @debate.projekt_phase.id,
             order: params[:order]
           ), notice: t("flash.actions.create.debate")
         else
           redirect_to page_path(
-            @debate.projekt.page.slug,
-            anchor: 'filter-subnav',
-            selected_phase_id: @debate.debate_phase.id,
+            @debate.projekt_phase.projekt.page.slug,
+            anchor: "filter-subnav",
+            selected_phase_id: @debate.projekt_phase.id,
             order: params[:order]
           ), notice: t("flash.actions.create.debate")
         end
@@ -89,7 +89,7 @@ class DebatesController < ApplicationController
         if @debate.projekt.overview_page?
           redirect_to projekts_path(
             anchor: 'filter-subnav',
-            selected_phase_id: @debate.debate_phase.id,
+            selected_phase_id: @debate.projekt_phase.id,
             order: params[:order]
           ), notice: t("flash.actions.create.debate")
         else
@@ -107,7 +107,7 @@ class DebatesController < ApplicationController
   def show
     super
 
-    @projekt = @debate.projekt
+    @projekt = @debate.projekt_phase.projekt
     @related_contents = Kaminari.paginate_array(@debate.relationed_contents).page(params[:page]).per(5)
 
     if request.path != debate_path(@debate)

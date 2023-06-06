@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_06_162412) do
+ActiveRecord::Schema.define(version: 2023_06_06_172808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -643,6 +643,7 @@ ActiveRecord::Schema.define(version: 2023_06_06_162412) do
     t.datetime "featured_at"
     t.bigint "projekt_id"
     t.string "on_behalf_of"
+    t.bigint "projekt_phase_id"
     t.index ["author_id", "hidden_at"], name: "index_debates_on_author_id_and_hidden_at"
     t.index ["author_id"], name: "index_debates_on_author_id"
     t.index ["cached_votes_down"], name: "index_debates_on_cached_votes_down"
@@ -654,6 +655,7 @@ ActiveRecord::Schema.define(version: 2023_06_06_162412) do
     t.index ["hidden_at"], name: "index_debates_on_hidden_at"
     t.index ["hot_score"], name: "index_debates_on_hot_score"
     t.index ["projekt_id"], name: "index_debates_on_projekt_id"
+    t.index ["projekt_phase_id"], name: "index_debates_on_projekt_phase_id"
     t.index ["tsv"], name: "index_debates_on_tsv", using: :gin
   end
 
@@ -2432,6 +2434,7 @@ ActiveRecord::Schema.define(version: 2023_06_06_162412) do
   add_foreign_key "dashboard_administrator_tasks", "users"
   add_foreign_key "dashboard_executed_actions", "dashboard_actions", column: "action_id"
   add_foreign_key "dashboard_executed_actions", "proposals"
+  add_foreign_key "debates", "projekt_phases"
   add_foreign_key "debates", "projekts"
   add_foreign_key "deficiency_report_officers", "users"
   add_foreign_key "deficiency_reports", "deficiency_report_categories"

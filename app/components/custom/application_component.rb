@@ -8,7 +8,7 @@ class ApplicationComponent < ViewComponent::Base
 
   private
 
-    def url_for_footer_tab_back_button(
+    def url_to_footer_tab(
       pagination_page: nil,
       filter: nil,
       order: nil,

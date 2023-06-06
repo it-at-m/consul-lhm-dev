@@ -69,7 +69,7 @@ class Shared::NewButtonComponent < ApplicationComponent
       link_params = {}
       permitted_query_params = %i[order]
 
-      link_params[:projekt_id] = @projekt_phase.projekt.id if @projekt_phase.present?
+      link_params[:projekt_phase_id] = @projekt_phase.id if @projekt_phase.present?
       link_params[:origin] = "projekt" if controller_name == "pages"
 
       link_params.merge!(@query_params.permit(permitted_query_params).to_h) if @query_params.present?
