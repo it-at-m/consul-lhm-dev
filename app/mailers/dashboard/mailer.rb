@@ -11,7 +11,7 @@ class Dashboard::Mailer < ApplicationMailer
     @proposal = proposal
     @new_actions = get_new_actions(new_actions_ids)
 
-    @custom_votes_for_proposal_success = if proposal.custom_votes_needed_for_success
+    @custom_votes_for_proposal_success = proposal.custom_votes_needed_for_success
 
     mail to: proposal.author.email,
          subject: I18n.t("mailers.new_actions_notification_rake_published.subject")
@@ -27,7 +27,7 @@ class Dashboard::Mailer < ApplicationMailer
   def new_actions_notification_on_create(proposal)
     @proposal = proposal
 
-    @custom_votes_for_proposal_success = if proposal.custom_votes_needed_for_success
+    @custom_votes_for_proposal_success = proposal.custom_votes_needed_for_success
 
     mail to: proposal.author.email,
          subject: I18n.t("mailers.new_actions_notification_on_create.subject")
