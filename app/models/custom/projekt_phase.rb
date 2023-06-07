@@ -8,6 +8,16 @@ class ProjektPhase < ApplicationRecord
     "ProjektPhase::LivestreamPhase"
   ].freeze
 
+  PROJEKT_PHASES_TYPES = REGULAR_PROJEKT_PHASES + [
+    "ProjektPhase::BudgetPhase",
+    "ProjektPhase::QuestionPhase",
+    "ProjektPhase::VotingPhase",
+    "ProjektPhase::CommentPhase",
+    "ProjektPhase::LegislationPhase",
+    "ProjektPhase::DebatePhase",
+    "ProjektPhase::ProposalPhase"
+  ]
+
   delegate :icon, to: :projekt
 
   translates :phase_tab_name, touch: true

@@ -1,6 +1,13 @@
 class Admin::ProjektPhasesController < Admin::BaseController
   include ProjektPhaseActions
 
+  def create
+    @projekt = Projekt.find(params[:projekt_id])
+    ProjektPhase.create!(projekt_phase_params)
+
+    redirect_to edit_admin_projekt_path(@projekt.id), notice: t("admin.projekt_phase.create.notice")
+  end
+
   def edit
     @registered_address_groupings = RegisteredAddress::Grouping.all
     @individual_groups = IndividualGroup.visible
@@ -29,5 +36,9 @@ class Admin::ProjektPhasesController < Admin::BaseController
       else
         edit_admin_projekt_path(projekt)
       end
+    end
+
+    def projekt_phase_params
+      params.require(:projekt_phase).permit(:projekt_id, :type)
     end
 end

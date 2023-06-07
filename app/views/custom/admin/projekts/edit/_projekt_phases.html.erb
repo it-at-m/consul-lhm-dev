@@ -25,3 +25,11 @@
     <% end %>
   </tbody>
 </table>
+
+<div>
+  <%= form_for(ProjektPhase.new, url: admin_projekt_projekt_phases_path(@projekt)) do |f| %>
+    <%= f.hidden_field :projekt_id, value: @projekt.id %>
+    <%= f.select :type, ProjektPhase::PROJEKT_PHASES_TYPES.map { |type| [type, type] }, {}, { class: "form-control" } %>
+    <%= f.submit %>
+  <% end %>
+</div>

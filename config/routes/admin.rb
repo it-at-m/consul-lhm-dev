@@ -3,7 +3,7 @@ namespace :admin do
 
   # custom projekt routes
   resources :projekts, only: [:index, :edit, :create, :update, :destroy] do
-    resources :projekt_phases, only: [:edit, :update] do
+    resources :projekt_phases, only: [:create, :edit, :update] do
       member do
         patch :toggle_active_status
       end
