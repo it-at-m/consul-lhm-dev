@@ -1,0 +1,14 @@
+de:
+  admin:
+    segment_recipient:
+      newsletter_subscribers: Newsletter-Subscribers
+  custom:
+    newsletters:
+      new_projekt:
+        subject: "New Projekt: %{title}"
+        total_duration_start: Start date
+        total_duration_end: Duration
+        total_duration_end_till: till
+        open_phases: Projekt Phases
+        url: Projekt
+        url_participate: I want to participate!

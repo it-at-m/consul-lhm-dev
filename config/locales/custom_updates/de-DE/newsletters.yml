@@ -5,7 +5,10 @@ de:
   custom:
     newsletters:
       new_projekt:
+        subject: "Neues Projekt: %{title}"
         total_duration_start: Projektstart
-        total_duration_end: Gepl. Fertigstellung
-        open_phases: Projektphasen
-        url: Projektlink
+        total_duration_end: Projektlaufzeit
+        total_duration_end_till: bis
+        open_phases: Beteiligungsphasen
+        url: Zum Projekt
+        url_participate: Ich möchte MITmachen!
