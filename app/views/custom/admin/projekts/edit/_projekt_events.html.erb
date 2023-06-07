@@ -9,11 +9,10 @@
       <%= label_tag nil, nil, for: "edit_projekt_event_#{ dom_id(event) }", class: 'edit-projekt-event js-admin-edit-projekt-event' %>
 
       <div class='projekt-event-content'>
-        <p>
-          <h3>
-            <%= event.title %>
-          </h3>
-        </p>
+        <h3>
+          <%= event.title %>
+        </h3>
+
         <% if event.location.present? %>
           <p>
           <strong><%= t('custom.admin.projekts.edit.projekt_events_tab.event_location') %>:</strong>
@@ -46,6 +45,7 @@
           <strong><%= t('custom.admin.projekts.edit.projekt_events_tab.event_created_at') %>:</strong>
           <%= event.created_at.to_date %>
         </p>
+        <%= link_to t("custom.admin.projekts.edit.projekt_events_tab.send_notifications_button"), send_notifications_admin_projekt_projekt_event_path(@projekt.id, event.id, params: { projekt_argument: { namespace: @namespace }}), method: :post, class: "margin-right" %>
       </div>
 
       <div class='edit-projekt-event-form'>

@@ -51,6 +51,7 @@ de:
             edit_projekt: Projekt bearbeiten
             edit_projekt_settings: Projektfunktionen
             edit_projekt_page: Projektseite bearbeiten
+            create_newsletter_draft: Newsletter Entwurf erstellen
           map:
             title: Gebiet
           navigator:
@@ -62,6 +63,9 @@ de:
             title: Kategorien
           projekt_start: Projektstart
           projekt_end: Gepl. Fertigstellung
+          phases_subscription:
+            title: Benachrichtigungen
+            description: Möchten Sie zu diesem Projekt auf dem Laufenden bleiben?
         tabs:
           budget: Budgets
           comments: Kommentare

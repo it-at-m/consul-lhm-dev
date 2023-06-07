@@ -1,0 +1,9 @@
+$('#sidebar-projekt-phase-subscriptions').replaceWith(
+  "<%= j render "pages/sidebar/projekt_phase_subscriptions", projekt_subscription: @projekt_subscription %>"
+);
+
+<% @projekt.projekt_phases.each do |phase| %>
+  $("#<%= dom_id(phase, :subscription) %>").replaceWith(
+    "<%= j render(partial: "custom/projekts/partials/phase_subscription", locals: { phase: phase }) %>"
+  );
+<% end %>

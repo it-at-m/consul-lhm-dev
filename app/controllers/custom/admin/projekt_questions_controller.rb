@@ -1,8 +1,8 @@
 class Admin::ProjektQuestionsController < Admin::BaseController
   include Translatable
 
-  before_action :set_projekt, only: [:new, :create]
-  before_action :set_projekt_and_projekt_question, except: [:new, :create]
+  before_action :set_projekt, only: [:new, :create, :send_notifications]
+  before_action :set_projekt_and_projekt_question, except: [:new, :create, :send_notifications]
   before_action :set_projekt_livestream, only: [:new, :create, :update]
 
   skip_authorization_check
@@ -66,6 +66,12 @@ class Admin::ProjektQuestionsController < Admin::BaseController
 
     redirect_to redirect_path(@projekt.id, "#tab-projekt-questions"),
       notice: t("admin.legislation.questions.destroy.notice")
+  end
+
+  def send_notifications
+    NotificationServices::ProjektQuestionsNotifier.call(@projekt.id)
+    redirect_to edit_admin_projekt_path(@projekt, anchor: "tab-projekt-questions"),
+      notice: t("custom.admin.projekts.projekt_questions.index.notifications_sent_notice")
   end
 
   private

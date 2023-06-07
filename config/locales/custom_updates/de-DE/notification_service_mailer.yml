@@ -39,3 +39,49 @@ de:
         p1: "%{user_to_verify_username} hat sich soeben verifiziert."
         link_text: Admin (demokratie.today)
         signature_html: Viele Grüße</br>Consul
+      new_poll:
+        subject: Neue Abstimmung auf Consul
+        hi: Hallo %{username},
+        p1: es ist eine neue Abstimmung auf Consul eingegangen.
+        signature_html: Viele Grüße</br>Consul
+      projekt_questions:
+        subject: Neue Kurzumfrage auf Consul
+        hi: Hallo %{username},
+        link: Kurzumfrage
+        p1: es ist eine neue Kurzumfrage auf Consul eingegangen.
+        signature_html: Viele Grüße</br>Consul
+      projekt_arguments:
+        subject: Pro und Contra Stimmen auf Consul
+        hi: Hallo %{username},
+        link: Pro und Contra Stimmen
+        p1: es sind neue Pro und Contra Stimmen auf Consul eingegangen.
+        signature_html: Viele Grüße</br>Consul
+      new_budget_investment:
+        subject: Neuer Investitionsvorschlag auf Consul
+        hi: Hallo %{username},
+        p1: es ist ein neuer Investitionsvorschlag auf Consul eingegangen.
+        signature_html: Viele Grüße</br>Consul
+      new_projekt_notification:
+        subject: Neue Projektbenachrichtigung auf Consul
+        hi: Hallo %{username},
+        link: Projektbenachrichtigung
+        p1: es ist eine neue Projektbenachrichtigung auf Consul eingegangen.
+        signature_html: Viele Grüße</br>Consul
+      new_projekt_event:
+        subject: Neue Veranstaltung auf Consul
+        hi: Hallo %{username},
+        link: Veranstaltung
+        p1: es ist eine neue Veranstaltung auf Consul eingegangen.
+        signature_html: Viele Grüße</br>Consul
+      new_projekt_milestone:
+        subject: Neuer Meilenstein auf Consul
+        hi: Hallo %{username},
+        link: Meilenstein
+        p1: es ist ein neuen Meilenstein auf Consul eingegangen.
+        signature_html: Viele Grüße</br>Consul
+      new_projekt_livestream:
+        subject: Neue Livestream auf Consul
+        hi: Hallo %{username},
+        link: Livestream
+        p1: es ist ein neue Livestream auf Consul eingegangen.
+        signature_html: Viele Grüße</br>Consul

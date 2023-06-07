@@ -1,5 +1,9 @@
-<%= render partial: 'pages/sidebar/custom_text' %>
-<%= render partial: 'pages/sidebar/admin_controls' %>
+<%= render partial: "pages/sidebar/custom_text" %>
+<%= render partial: "pages/sidebar/admin_controls" %>
+
+<% if @projekt_subscription.present? %>
+  <%= render partial: "pages/sidebar/projekt_phase_subscriptions", locals: { projekt_subscription: @projekt_subscription } %>
+<% end %>
 
 <% if projekt_feature?(@custom_page.projekt, "sidebar.show_phases_in_projekt_page_sidebar") %>
   <div class="sidebar-divider"></div>

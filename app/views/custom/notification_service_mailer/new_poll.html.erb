@@ -1,0 +1,18 @@
+<td style="padding-bottom: 20px; padding-left: 10px;">
+
+  <p style="font-family: 'Open Sans','Helvetica Neue',arial,sans-serif;font-size: 14px;font-weight: normal;line-height: 24px;">
+    <%= t("custom.notification_service_mailers.new_poll.hi", username: @user.username) %>
+  </p>
+
+  <p style="font-family: 'Open Sans','Helvetica Neue',arial,sans-serif;font-size: 14px;font-weight: normal;line-height: 24px;">
+    <%= t("custom.notification_service_mailers.new_poll.p1") %>
+  </p>
+
+  <p>
+    <%= link_to @poll.title, poll_url(@poll) %>
+  </p>
+
+  <p style="font-family: 'Open Sans','Helvetica Neue',arial,sans-serif;font-size: 14px;font-weight: normal;line-height: 24px;">
+    <%= t("custom.notification_service_mailers.new_poll.signature_html") %>
+  </p>
+</td>

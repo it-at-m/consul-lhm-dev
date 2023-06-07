@@ -1,0 +1,10 @@
+<div id="sidebar-projekt-phase-subscriptions">
+  <h2 class="sidebar-title"><%= t("custom.projekts.page.sidebar.phases_subscription.title") %></h2>
+
+  <div class="sidebar-projekt-phase-subscriptions">
+    <p>
+      <%= t("custom.projekts.page.sidebar.phases_subscription.description") %>
+    </p>
+    <%= render Shared::ToggleAttributeComponent.new(projekt_subscription, :active, toggle_subscription_projekt_subscription_path(projekt_subscription)) %>
+  </div>
+</div>

@@ -155,6 +155,10 @@ de:
           list: Registrierte Straßen    
         individual_groups: Individuelle Gruppen
       polls:
+        poll:
+          send_notifications: Benachrichtigungen senden
+          notifications_sent: Benachrichtigungen wurden erfolgreich gesendet
+          send_notifications_confirm: Sind Sie sicher?
         questions:
           show:
             description: Bezeichnung
@@ -197,6 +201,8 @@ de:
             event_weblink: Weblink
             name: Veranstaltungen
             page_title: Veranstaltungen
+            send_notifications_button: Benachrichtigungen senden
+            notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
           projekt_managers_tab:
             name: Projektmanager*innen
           projekt_map_tab:
@@ -225,6 +231,8 @@ de:
             argument_created_at: Created at
             page_title: Stimmen
             title: Stimmen
+            send_notifications_button: Benachrichtigungen senden
+            notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
           projekt_livestreams_tab:
             submit_button: Livestream erstellen
             name: Livestreams
@@ -238,6 +246,8 @@ de:
               platform: Portal
               add_question: Frage hinzufügen
               questoins: Kurzumfragen
+            send_notifications_button: Benachrichtigungen senden
+            notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
           projekt_page: Projektseite
           projekt_phase_limitation: Beschränkung
           projekt_phases: Projektphasen
@@ -379,6 +389,8 @@ de:
             answers_count: Anzahl der Antworten
             comments_count: Anzahl der Kommentare
             attached_to: Angehängt
+            send_notifications_button: Benachrichtigungen senden
+            notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
           new:
             create: Frage aktualisieren
             title: Frage erstellen

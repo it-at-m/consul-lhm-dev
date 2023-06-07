@@ -8,6 +8,10 @@
     <%= link_to t("custom.admin.projekts.projekt_questions.index.create"), new_projekt_question_path(@projekt.id), class: "button" %>
   </div>
 
+  <div class="float-right">
+    <%= link_to t("custom.admin.projekts.projekt_questions.index.send_notifications_button"), send_notifications_admin_projekt_projekt_questions_path(@projekt.id, params: { projekt_argument: { namespace: @namespace }}), method: :post, class: "button margin-right" %>
+  </div>
+
   <div class="small-12 column">
 
     <% if @projekt.questions.any? %>

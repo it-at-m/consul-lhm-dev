@@ -15,6 +15,7 @@ class Legislation::AnnotationsController < Legislation::BaseController
 
     @current_projekt = @draft_version.process.projekt #custom line
     if @comment.save
+      NotificationServices::NewCommentNotifier.call(@comment.id) # custom
       @comment = @annotation.comments.new
     end
 

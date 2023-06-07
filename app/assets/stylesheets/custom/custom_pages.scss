@@ -224,6 +224,16 @@ li.projekt-navigator.current-projekt::before {
 }
 
 
+// Sidebar projekt subscriptions
+.sidebar-projekt-phase-subscriptions {
+  display: flex;
+
+  form {
+    margin-top: 0.75rem;
+  }
+}
+
+
 
 // Footer icons
 
@@ -378,6 +388,36 @@ li.projekt-navigator[aria-expanded="false"] {
 
     .page-subnav-tab a {
       width: 270px;
+    }
+  }
+}
+
+
+// Phase subscriptions
+
+.footer-phases-filter-subnav {
+  .page-subnav-tab {
+    .phase-subscription {
+      color: #004a83;
+      position: absolute;
+      top: 17px;
+      right: 45px;
+
+      a {
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      @media screen and (min-width: 64em) {
+        top: 5px;
+        right: 5px;
+
+        a {
+          width: auto !important;
+        }
+      }
     }
   }
 }

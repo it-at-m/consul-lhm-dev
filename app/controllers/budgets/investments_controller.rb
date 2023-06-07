@@ -82,6 +82,7 @@ module Budgets
 
       if @investment.save
         Mailer.budget_investment_created(@investment).deliver_later
+        NotificationServices::NewBudgetInvestmentNotifier.call(@investment.id) #custom
         redirect_to budget_investment_path(@budget, @investment),
                     notice: t("flash.actions.create.budget_investment")
       else

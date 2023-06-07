@@ -43,6 +43,17 @@ class NotificationServiceMailer < ApplicationMailer
     end
   end
 
+  def new_poll(user_id, poll_id)
+    @user = User.find(user_id)
+    @poll = Poll.find(poll_id)
+
+    subject = t("custom.notification_service_mailers.new_poll.subject")
+
+    with_user(@user) do
+      mail(to: @user.email, subject: subject)
+    end
+  end
+
   def new_comment(user_id, comment_id)
     @user = User.find(user_id)
     @comment = Comment.find(comment_id)
@@ -74,6 +85,87 @@ class NotificationServiceMailer < ApplicationMailer
 
     with_user(@user_to_notify) do
       mail(to: @user_to_notify.email, subject: subject)
+    end
+  end
+
+  def projekt_questions(user_id, projekt_id)
+    @user = User.find(user_id)
+    @projekt = Projekt.find(projekt_id)
+
+    subject = t("custom.notification_service_mailers.projekt_questions.subject")
+
+    with_user(@user) do
+      mail(to: @user.email, subject: subject)
+    end
+  end
+
+  def projekt_arguments(user_id, projekt_id)
+    @user = User.find(user_id)
+    @projekt = Projekt.find(projekt_id)
+
+    subject = t("custom.notification_service_mailers.projekt_arguments.subject")
+
+    with_user(@user) do
+      mail(to: @user.email, subject: subject)
+    end
+  end
+
+  def new_budget_investment(user_id, investment_id)
+    @user = User.find(user_id)
+    @investment = Budget::Investment.find(investment_id)
+
+    subject = t("custom.notification_service_mailers.new_budget_investment.subject")
+
+    with_user(@user) do
+      mail(to: @user.email, subject: subject)
+    end
+  end
+
+  def new_projekt_notification(user_id, projekt_notification_id)
+    @user = User.find(user_id)
+    @projekt_notification = ProjektNotification.find(projekt_notification_id)
+    @projekt = @projekt_notification.projekt
+
+    subject = t("custom.notification_service_mailers.new_projekt_notification.subject")
+
+    with_user(@user) do
+      mail(to: @user.email, subject: subject)
+    end
+  end
+
+  def new_projekt_event(user_id, projekt_event_id)
+    @user = User.find(user_id)
+    @projekt_event = ProjektEvent.find(projekt_event_id)
+    @projekt = @projekt_event.projekt
+
+    subject = t("custom.notification_service_mailers.new_projekt_event.subject")
+
+    with_user(@user) do
+      mail(to: @user.email, subject: subject)
+    end
+  end
+
+  def new_projekt_milestone(user_id, projekt_milestone_id)
+    @user = User.find(user_id)
+    @projekt_milestone = Milestone.find(projekt_milestone_id)
+    @projekt = @projekt_milestone.projekt
+
+    subject = t("custom.notification_service_mailers.new_projekt_milestone.subject")
+
+    with_user(@user) do
+      mail(to: @user.email, subject: subject)
+    end
+  end
+
+  def new_projekt_livestream(user_id, projekt_livestream_id)
+    @user = User.find(user_id)
+    @projekt_livestream = ProjektLivestream.find(projekt_livestream_id)
+    @projekt = @projekt_livestream.projekt
+
+    subject = t("custom.notification_service_mailers.new_projekt_livestream.subject")
+
+    with_user(@user) do
+      mail(to: @user.email, subject: subject)
     end
   end
 

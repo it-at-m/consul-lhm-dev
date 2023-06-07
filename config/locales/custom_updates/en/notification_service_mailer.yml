@@ -33,3 +33,49 @@ en:
         hi: Hi %{username},
         p1: New deficiency report has just been added to Consul
         signature_html: Best regards</br>Consul
+      new_poll:
+        subject: New Poll added to Consul
+        hi: Hi %{username},
+        p1: New poll has just been added to Consul
+        signature_html: Best regards</br>Consul
+      projekt_questions:
+        subject: New short survey added to Consul
+        hi: Hi %{username},
+        link: Short survey
+        p1: New short survey has just been added to Consul
+        signature_html: Best regards</br>Consul
+      projekt_arguments:
+        subject: Arguments added to Consul
+        hi: Hi %{username},
+        link: Projekt arguments
+        p1: Projekt arguments were just added to Consul
+        signature_html: Best regards</br>Consul
+      new_budget_investment:
+        subject: New Investment proposal added to Consul
+        hi: Hi %{username},
+        p1: New Investment proposal has just been added to Consul.
+        signature_html: Best regards</br>Consul
+      new_projekt_notification:
+        subject: New projekt notification added to Consul
+        hi: Hi %{username},
+        link: Projekt notification
+        p1: New projekt notification has just been added to Consul
+        signature_html: Best regards</br>Consul
+      new_projekt_event:
+        subject: New projekt event added to Consul
+        hi: Hi %{username},
+        link: Projekt event
+        p1: New projekt event has just been added to Consul
+        signature_html: Best regards</br>Consul
+      new_projekt_milestone:
+        subject: New projekt milestone added to Consul
+        hi: Hi %{username},
+        link: Projekt milestone
+        p1: New projekt milestone has just been added to Consul
+        signature_html: Best regards</br>Consul
+      new_projekt_livestream:
+        subject: New projekt livestream added to Consul
+        hi: Hi %{username},
+        link: Projekt livestream
+        p1: New projekt livestream has just been added to Consul
+        signature_html: Best regards</br>Consul

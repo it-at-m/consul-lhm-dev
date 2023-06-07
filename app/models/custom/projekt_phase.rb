@@ -31,6 +31,9 @@ class ProjektPhase < ApplicationRecord
   has_many :registered_address_street_projekt_phase, dependent: :destroy
   has_many :registered_address_streets, through: :registered_address_street_projekt_phase
 
+  has_many :subscriptions, class_name: "ProjektPhaseSubscription", dependent: :destroy
+  has_many :subscribers, through: :subscriptions, source: :user
+
   default_scope { order(given_order: :asc) }
 
   scope :regular_phases, -> { where.not(type: REGULAR_PROJEKT_PHASES) }
@@ -42,6 +45,12 @@ class ProjektPhase < ApplicationRecord
       .where("start_date IS NULL OR start_date <= ?", timestamp)
       .where("end_date IS NULL OR end_date >= ?", timestamp)
   }
+
+  scope :sorted, -> do
+    regular_phases.sort_by(&:default_order).each do |x|
+      x.start_date = Time.zone.today if x.start_date.nil?
+    end.sort_by(&:start_date)
+  end
 
   def self.order_phases(ordered_array)
     ordered_array.each_with_index do |phase_id, order|
@@ -124,6 +133,28 @@ class ProjektPhase < ApplicationRecord
 
   def selectable_by_admins_only?
     false
+  end
+
+  def subscribed?(user)
+    return false unless user
+
+    subscriptions.where(user_id: user.id).exists?
+  end
+
+  def subscribe(user)
+    return false unless user
+
+    subscriptions.create(user_id: user.id)
+  end
+
+  def unsubscribe(user)
+    return false unless user
+
+    subscriptions.where(user_id: user.id).destroy_all
+  end
+
+  def title
+    phase_tab_name.presence || I18n.t("custom.projekts.page.tabs.#{resources_name}")
   end
 
   private

@@ -43,6 +43,8 @@
     <%= render partial: "custom/admin/projekts/edit/projekt_livestreams/form", locals: { url: admin_projekt_projekt_livestream_path(@projekt, livestream), projekt: @projekt, livestream: livestream } %>
   </div>
 
+  <%= link_to t("custom.admin.projekts.edit.projekt_livestreams_tab.send_notifications_button"), send_notifications_admin_projekt_projekt_livestream_path(@projekt.id, livestream.id, params: { projekt_argument: { namespace: @namespace }}), method: :post, class: "margin-right" %>
+
   <% if livestream.projekt_questions.any? %>
     <h3 class="admin-projekt-livestream-projekt-questions-title">
       <%= t("custom.admin.projekts.edit.projekt_livestreams_tab.livestream.questions") %>
