@@ -29,7 +29,7 @@ class Sidebar::ProjektsFilterComponent < ApplicationComponent
       @top_level_active_projekts.count > 1 ||
 
         (@top_level_active_projekts.count == 1 &&
-          (@top_level_active_projekts.first.all_children_ids & @scoped_projekt_ids).any?) ||
+          (@top_level_active_projekts.first.all_children_ids).any?) ||
 
         @top_level_archived_projekts.count > 1 ||
 

@@ -1,6 +1,23 @@
 module Takeable
   extend ActiveSupport::Concern
 
+  def take_by_projekt_phases(scoped_projekt_phases_ids)
+    @resources = @resources.joins(projekt_phase: :projekt).merge(Projekt.activated)
+
+    if controller_name.in?(["debates", "proposals", "polls"])
+      projekts_visible_in_sidebar_ids = Projekt.show_in_sidebar(controller_name).ids
+      @resources.joins(projekt_phase: :projekt).where(projekts: { id: projekts_visible_in_sidebar_ids })
+    end
+
+    @resources = @resources.where(projekt_phases: { id: scoped_projekt_phases_ids })
+
+    @all_resources = @resources
+
+    if params[:filter_projekt_ids].present?
+      @resources = @resources.where(projekts: { id: params[:filter_projekt_ids].split(",") })
+    end
+  end
+
   def take_by_projekts(scoped_projekts_ids)
     @resources = @resources.joins(projekt_phase: :projekt).merge(Projekt.activated)
 

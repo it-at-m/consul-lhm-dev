@@ -96,7 +96,7 @@ class PagesController < ApplicationController
     set_resources(Debate)
     set_top_level_projekts
 
-    @scoped_projekt_ids = Debate.scoped_projekt_ids_for_footer(@projekt)
+    @scoped_projekt_phase_ids = Debate.scoped_projekt_phase_ids_for_footer(@projekt_phase)
 
     unless params[:search].present?
       take_by_my_posts
@@ -104,7 +104,7 @@ class PagesController < ApplicationController
       # take_by_sdgs
       # take_by_geozone_affiliations
       # take_by_geozone_restrictions
-      take_by_projekts(@scoped_projekt_ids)
+      take_by_projekt_phases(@scoped_projekt_phase_ids)
       take_by_projekt_labels if params[:projekt_label_ids].any?
     end
 

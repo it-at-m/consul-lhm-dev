@@ -26,8 +26,7 @@ class ProjektPhase::DebatePhase < ProjektPhase
   end
 
   def resource_count
-    projekt_tree_ids = projekt.all_children_ids.unshift(projekt.id)
-    Debate.where(projekt_id: (Debate.scoped_projekt_ids_for_footer(projekt) & projekt_tree_ids)).count
+    Debate.where(projekt_phase_id: Debate.scoped_projekt_phase_ids_for_footer(self)).count
   end
 
   private

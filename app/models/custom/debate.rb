@@ -55,11 +55,17 @@ class Debate
       .pluck(:id)
   end
 
-  def self.scoped_projekt_ids_for_footer(projekt)
-    projekt.top_parent.all_children_projekts.unshift(projekt.top_parent).select do |projekt|
+  def self.scoped_projekt_phase_ids_for_footer(projekt_phase)
+    projekt = projekt_phase.projekt
+
+    scoped_projekts = projekt.top_parent.all_children_projekts.unshift(projekt.top_parent).select do |projekt|
       ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.main.activate').value.present? &&
         projekt.all_children_projekts.unshift(projekt).any? { |p| p.debate_phases.any?(&:current?) || p.debates.any? }
-    end.pluck(:id)
+    end
+
+    scoped_projekt_phases = scoped_projekts.map(&:debate_phases).flatten.select do |projekt_phase|
+      projekt_phase.projekt != projekt
+    end.push(projekt_phase).pluck(:id)
   end
 
   def register_vote(user, vote_value)
