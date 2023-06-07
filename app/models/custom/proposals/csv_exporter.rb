@@ -53,7 +53,7 @@ class Proposals::CsvExporter
         proposal.title,
         proposal.summary,
         strip_tags(proposal.description),
-        proposal.projekt&.name,
+        proposal.projekt_phase.projekt.name,
         proposal.projekt_labels&.map(&:name)&.join(" "),
         proposal.responsible_name,
         proposal.author.username,

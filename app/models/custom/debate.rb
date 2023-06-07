@@ -7,7 +7,6 @@ class Debate
 
   # belongs_to :projekt, optional: true, touch: true  # TODO: remove column after data migration con1538
   belongs_to :projekt_phase
-  # has_many :debate_phases, through: :projekt
   has_many :geozone_restrictions, through: :projekt_phase
   has_many :geozone_affiliations, through: :projekt_phase
 

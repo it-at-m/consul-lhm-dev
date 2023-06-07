@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_06_172808) do
+ActiveRecord::Schema.define(version: 2023_06_07_075627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1873,6 +1873,7 @@ ActiveRecord::Schema.define(version: 2023_06_06_172808) do
     t.boolean "selected", default: false
     t.bigint "projekt_id"
     t.string "on_behalf_of"
+    t.bigint "projekt_phase_id"
     t.index ["author_id", "hidden_at"], name: "index_proposals_on_author_id_and_hidden_at"
     t.index ["author_id"], name: "index_proposals_on_author_id"
     t.index ["cached_votes_up"], name: "index_proposals_on_cached_votes_up"
@@ -1882,6 +1883,7 @@ ActiveRecord::Schema.define(version: 2023_06_06_172808) do
     t.index ["hidden_at"], name: "index_proposals_on_hidden_at"
     t.index ["hot_score"], name: "index_proposals_on_hot_score"
     t.index ["projekt_id"], name: "index_proposals_on_projekt_id"
+    t.index ["projekt_phase_id"], name: "index_proposals_on_projekt_phase_id"
     t.index ["selected"], name: "index_proposals_on_selected"
     t.index ["tsv"], name: "index_proposals_on_tsv", using: :gin
   end
@@ -2501,6 +2503,7 @@ ActiveRecord::Schema.define(version: 2023_06_06_172808) do
   add_foreign_key "projekt_subscriptions", "users"
   add_foreign_key "projekts", "projekts", column: "parent_id"
   add_foreign_key "proposals", "communities"
+  add_foreign_key "proposals", "projekt_phases"
   add_foreign_key "proposals", "projekts"
   add_foreign_key "registered_address_street_projekt_phases", "projekt_phases"
   add_foreign_key "registered_address_street_projekt_phases", "registered_address_streets"
