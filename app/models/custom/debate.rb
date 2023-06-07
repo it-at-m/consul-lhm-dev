@@ -5,7 +5,7 @@ class Debate
   include Documentable
   include Labelable
 
-  # belongs_to :projekt, optional: true, touch: true  # TODO: remove column after data migration con1538
+  belongs_to :projekt, optional: true, touch: true  # TODO: remove column after data migration con1538
   belongs_to :projekt_phase
   has_many :geozone_restrictions, through: :projekt_phase
   has_many :geozone_affiliations, through: :projekt_phase

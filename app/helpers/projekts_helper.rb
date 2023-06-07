@@ -53,6 +53,8 @@ module ProjektsHelper
 
     module_links = []
 
+    # TODO: fix con1538
+
     # if projekt_phase_show_in_navigation?(projekt, 'debate_phase')
     #   module_links.push( debates_overview_link(t('custom.menu.debates'), projekt, 'projekt-module-link') )
     # end

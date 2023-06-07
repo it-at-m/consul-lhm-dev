@@ -2,13 +2,13 @@ require_dependency Rails.root.join("app", "models", "proposal").to_s
 class Proposal < ApplicationRecord
   include Labelable
 
-  # belongs_to :projekt, optional: true, touch: true # TODO: remove column after data migration con1538
+  belongs_to :projekt, optional: true, touch: true # TODO: remove column after data migration con1538
   belongs_to :projekt_phase
-  has_many :geozone_restrictions, through: :proposal_phase
-  has_many :geozone_affiliations, through: :projekt
+  has_many :geozone_restrictions, through: :projekt_phase
+  has_many :geozone_affiliations, through: :projekt_phase
 
-  delegate :votable_by?, to: :proposal_phase
-  delegate :comments_allowed?, to: :proposal_phase
+  delegate :votable_by?, to: :projekt_phase
+  delegate :comments_allowed?, to: :projekt_phase
 
   validates_translation :description, presence: true
   validates :projekt_id, presence: true

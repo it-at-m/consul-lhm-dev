@@ -117,7 +117,7 @@ class ProposalsController
       redirect_to page_path(
         @proposal.projekt_phase.projekt.page.slug,
         anchor: "filter-subnav",
-        selected_phase_id: @proposal.proposal_phase.id,
+        selected_phase_id: @proposal.projekt_phase.id,
         order: "created_at"), notice: t("proposals.notice.published")
     else
       redirect_to proposals_path(order: "created_at"), notice: t("proposals.notice.published")
