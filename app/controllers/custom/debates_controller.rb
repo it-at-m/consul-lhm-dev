@@ -59,7 +59,7 @@ class DebatesController < ApplicationController
   end
 
   def edit
-    @selected_projekt = @debate.projekt
+    @selected_projekt = @debate.projekt_phase.projekt
   end
 
   def create
@@ -86,9 +86,9 @@ class DebatesController < ApplicationController
           ), notice: t("flash.actions.create.debate")
         end
       else
-        if @debate.projekt.overview_page?
+        if @debate.projekt_phase.projekt.overview_page?
           redirect_to projekts_path(
-            anchor: 'filter-subnav',
+            anchor: "filter-subnav",
             selected_phase_id: @debate.projekt_phase.id,
             order: params[:order]
           ), notice: t("flash.actions.create.debate")
@@ -99,7 +99,7 @@ class DebatesController < ApplicationController
         end
       end
     else
-      @selected_projekt = @debate.projekt
+      @selected_projekt = @debate.projekt_phase.projekt
       render :new
     end
   end
