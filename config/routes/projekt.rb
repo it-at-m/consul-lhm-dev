@@ -12,7 +12,6 @@ resources :projekts, only: [:index, :show] do
   member do
     get :json_data
     get :map_html
-    get :selector_hint_html
   end
 end
 
@@ -27,3 +26,4 @@ resources :projekt_livestreams, only: [:show] do
 end
 
 get "/projekt_phases/:id/selector_hint_html", to: "projekt_phases#selector_hint_html"
+get "/projekt_phases/:id/form_heading_text",  to: "projekt_phases#form_heading_text"

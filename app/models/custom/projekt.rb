@@ -206,6 +206,13 @@ class Projekt < ApplicationRecord
     end
   end
 
+  def projekt_phases_for(resource)
+    return debate_phases if resource.is_a?(Debate)
+    return proposal_phases if resource.is_a?(Proposal)
+    return voting_phases if resource.is_a?(Poll)
+    return legislation_phases if resource.is_a?(Legislation::Process)
+  end
+
   def published?
     page&.status == "published"
   end
@@ -338,9 +345,9 @@ class Projekt < ApplicationRecord
   def has_active_phase?(controller_name)
     case controller_name
     when "proposals"
-      proposal_phase.current?
+      proposal_phases.any?(&:current?)
     when "debates"
-      debate_phase.current?
+      debate_phases.any?(&:current?)
     when "polls"
       false
     end

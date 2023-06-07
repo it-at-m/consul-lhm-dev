@@ -1,4 +1,5 @@
 <%= f.hidden_field :projekt_id %>
+<%= f.hidden_field :projekt_phase_id %>
 
 <% if model.errors.details[:projekt_id].any? %>
   <% model.errors.details[:projekt_id].each do |error| %>

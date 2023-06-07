@@ -69,9 +69,8 @@
       App.ProjektSelector.updateAvailableTagsSelection($selectedProjekt)
       App.ProjektSelector.updateAvailableSDGsSelection($selectedProjekt)
       App.ProjektSelector.toggleExternalFieldsHeader($selectedProjekt)
-      App.ProjektSelector.updateMainHeader($selectedProjekt)
       App.ProjektSelector.updateProjektLabelSelector($selectedProjekt)
-      App.ProjektSelector.updateProjektSelectorHint($selectedProjekt)
+      App.ProjektSelector.updatePhasesSelector($selectedProjekt)
 
     },
 
@@ -236,43 +235,60 @@
       }
     },
 
-    updateMainHeader: function($selectedProjekt) {
-      var $header = $('header h1').first();
-      var defaultText, customText;
+    updatePhasesSelector: function($selectedProjekt) {
+      var projektPhaseIds = $selectedProjekt.data('projektPhaseIds');
+      var projektPhasesElement = $('#projekt-phase-selector-fields');
 
-      if (!$header.data("defaultText")) {
-        defaultText = $header.text();
-        $header.data("defaultText", defaultText)
-      }
+      projektPhasesElement.empty();
 
-      if ($selectedProjekt.data('resourceFormTitle')) {
-        customText = $selectedProjekt.data('resourceFormTitle').replaceAll('_', ' ')
-        $header.text(customText);
-      } else if ($header.data('defaultText')) {
-        defaultText = $header.data('defaultText');
-        $header.text(defaultText);
-      }
-    },
+      projektPhaseIds.forEach(function(projektPhaseId) {
+        var phaseElement = $("<span>");
+        phaseElement.addClass('projekt-phase-selector');
+        phaseElement.attr('id', "projekt-phase-selector-" + projektPhaseId);
+        phaseElement.text(projektPhaseId);
+        projektPhasesElement.append(phaseElement);
 
-    updateProjektSelectorHint: function($selectedProjekt) {
-      var $hintElement = $('[id$="_creation_recommendations"]').first();
-      if (!$hintElement.length) {
-        return;
-      }
+        phaseElement.on('click', function() {
+          updateFormHeading(projektPhaseId);
+          updateProjektSelectorHint(projektPhaseId);
+          updateActivePhaseSelector(projektPhaseId);
+          $('[id$="projekt_phase_id"]').val(projektPhaseId)
+        })
+      })
 
-      var projektPhaseId = $selectedProjekt.data('projektPhaseId');
-      if ( !projektPhaseId ) {
-        return;
-      }
-
-      $.ajax("/projekt_phases/" + projektPhaseId + "/selector_hint_html", {
-        type: "GET",
-        dataType: "html",
-        success: function(data) {
-          $hintElement.html(data);
-          $(document).foundation()
+      function updateProjektSelectorHint(projektPhaseId) {
+        var $hintElement = $('[id$="_creation_recommendations"]').first();
+        if (!$hintElement.length) {
+          return;
         }
-      });
+ 
+        $.ajax("/projekt_phases/" + projektPhaseId + "/selector_hint_html", {
+          type: "GET",
+          dataType: "html",
+          success: function(data) {
+            $hintElement.html(data);
+            $(document).foundation()
+          }
+        });
+      }
+
+      function updateFormHeading(projektPhaseId) {
+        var $header = $('header h1').first();
+ 
+        $.ajax("/projekt_phases/" + projektPhaseId + "/form_heading_text", {
+          type: "GET",
+          dataType: "html",
+          success: function(data) {
+            $header.text(data);
+            $(document).foundation()
+          }
+        });
+      }
+
+      function updateActivePhaseSelector(projektPhaseId) {
+        $('.projekt-phase-selector').removeClass('active');
+        $('#projekt-phase-selector-' + projektPhaseId).addClass('active');
+      }
     },
 
     preselectProjekt: function() {

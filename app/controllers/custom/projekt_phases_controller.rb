@@ -17,4 +17,15 @@ class ProjektPhasesController < ApplicationController
       render html: default_text
     end
   end
+
+  def form_heading_text
+    projekt_phase = ProjektPhase.find(params[:id])
+    default_text = t("#{projekt_phase.resources_name}.new.start_new")
+
+    if projekt_phase.resource_form_title.present?
+      render html: projekt_phase.resource_form_title.html_safe
+    else
+      render html: default_text
+    end
+  end
 end

@@ -141,7 +141,7 @@ class DebatesController < ApplicationController
   private
 
   def debate_params
-    attributes = [:tag_list, :projekt_id, :related_sdg_list, :on_behalf_of,
+    attributes = [:tag_list, :projekt_id, :projekt_phase_id, :related_sdg_list, :on_behalf_of,
                   :terms_of_service, :terms_data_storage, :terms_data_protection, :terms_general,
                   projekt_label_ids: [],
                   image_attributes: image_attributes,
