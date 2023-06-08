@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_07_075627) do
+ActiveRecord::Schema.define(version: 2023_06_08_090909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1531,9 +1531,11 @@ ActiveRecord::Schema.define(version: 2023_06_07_075627) do
     t.boolean "show_on_index_page", default: true
     t.boolean "bam_street_restricted", default: false
     t.boolean "show_individual_stats_per_answer", default: false
+    t.bigint "projekt_phase_id"
     t.index ["budget_id"], name: "index_polls_on_budget_id", unique: true
     t.index ["geozone_restricted"], name: "index_polls_on_geozone_restricted"
     t.index ["projekt_id"], name: "index_polls_on_projekt_id"
+    t.index ["projekt_phase_id"], name: "index_polls_on_projekt_phase_id"
     t.index ["related_type", "related_id"], name: "index_polls_on_related_type_and_related_id"
     t.index ["starts_at", "ends_at"], name: "index_polls_on_starts_at_and_ends_at"
   end
@@ -2480,6 +2482,7 @@ ActiveRecord::Schema.define(version: 2023_06_07_075627) do
   add_foreign_key "poll_recounts", "poll_officer_assignments", column: "officer_assignment_id"
   add_foreign_key "poll_voters", "polls"
   add_foreign_key "polls", "budgets"
+  add_foreign_key "polls", "projekt_phases"
   add_foreign_key "polls", "projekts"
   add_foreign_key "projekt_arguments", "projekt_phases"
   add_foreign_key "projekt_events", "projekt_phases"
