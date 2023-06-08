@@ -9,19 +9,20 @@ class Shared::NewButtonComponent < ApplicationComponent
     @query_params = query_params
   end
 
-  private
+  def render?
+    return true if current_user.blank?
+    return true if @projekt_phase&.projekt&.overview_page? # projects overview page
+    return false if @projekt_phase&.selectable_by_admins_only? && !(current_user.administrator? || current_user.projekt_manager?) # if only admins can create resources
+    return Projekt.top_level.selectable_in_selector(@resources_name, current_user).any? if @resources_name.present? # resources index page
 
-    def show_new_button?
-      return true if current_user.blank?
-      return true if @projekt_phase&.projekt&.overview_page? # projects overview page
-      return Projekt.top_level.selectable_in_selector(@resources_name, current_user).any? if @resources_name.present? # resources index page
-
-      if @projekt_phase.is_a?(ProjektPhase::BudgetPhase) # projekt page footer tab for budgets
-        can? :create, Budget::Investment.new(budget: @projekt_phase.budget)
-      else
-        true # all other pages including footer tabs
-      end
+    if @projekt_phase.is_a?(ProjektPhase::BudgetPhase) # projekt page footer tab for budgets
+      can? :create, Budget::Investment.new(budget: @projekt_phase.projekt.budget)
+    else
+      true # all other pages including footer tabs
     end
+  end
+
+  private
 
     def permission_problem_key
       if current_user.blank?

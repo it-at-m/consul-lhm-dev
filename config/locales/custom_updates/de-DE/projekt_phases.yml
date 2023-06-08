@@ -15,6 +15,7 @@ de:
             phase_not_active: Diese Projektphase ist nicht aktiv
             phase_expired: Diese Projektphase ist bereits abgelaufen
             phase_not_current: Diese Projektphase wurde noch nicht gestartet
+            only_admins: Die Beteiligung ist auf Admin-Benutzer beschränkt.
         votes_component:
           shared:
             not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
@@ -28,6 +29,7 @@ de:
             phase_not_active: Diese Projektphase ist nicht aktiv
             phase_expired: Diese Projektphase ist bereits abgelaufen
             phase_not_current: Diese Projektphase wurde noch nicht gestartet
+            only_admins: Die Beteiligung ist auf Admin-Benutzer beschränkt.
         ballot_component:
           budget_phase:
             not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
@@ -46,6 +48,7 @@ de:
             different_heading_assigned: "Sie haben bereits für eine andere Rubrik gestimmt: %{heading_link}"
             casted_offline: Sie haben bereits offline abgestimmt
             not_enough_available_votes: Nicht genug verfügbare Stimmen
+            only_admins: Die Beteiligung ist auf Admin-Benutzer beschränkt.
         commenting:
           shared:
             not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
@@ -59,6 +62,7 @@ de:
             phase_not_active: Diese Projektphase ist nicht aktiv
             phase_expired: Diese Projektphase ist bereits abgelaufen
             phase_not_current: Diese Projektphase wurde noch nicht gestartet
+            only_admins: Die Beteiligung ist auf Admin-Benutzer beschränkt.
           budget_phase:
             phase_expired: Diese Projektphase ist abgelaufen
         poll_votes:
@@ -75,6 +79,7 @@ de:
           phase_not_current: Diese Projektphase wurde noch nicht gestartet
           poll_expired: Diese Abstimmung ist bereits abgelaufen
           poll_not_current: Diese Abstimmung wurde noch nicht gestartet
+          only_admins: Die Beteiligung ist auf Admin-Benutzer beschränkt.
         legislation_annotations:
           not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
           not_verified: "Um fortzufahren, bitte %{verify}."
@@ -87,6 +92,7 @@ de:
           phase_not_active: Diese Projektphase ist nicht aktiv
           phase_expired: Diese Projektphase ist bereits abgelaufen
           phase_not_current: Diese Projektphase wurde noch nicht gestartet
+          only_admins: Die Beteiligung ist auf Admin-Benutzer beschränkt.
         projekt_questions:
           not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
           not_verified: "Um fortzufahren, bitte %{verify}."
@@ -99,6 +105,7 @@ de:
           phase_not_active: Diese Projektphase ist nicht aktiv
           phase_expired: Diese Projektphase ist bereits abgelaufen
           phase_not_current: Diese Projektphase wurde noch nicht gestartet
+          only_admins: Die Beteiligung ist auf Admin-Benutzer beschränkt.
         projekt_livestreams:
           not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
           not_verified: "Um fortzufahren, bitte %{verify}."
@@ -111,6 +118,7 @@ de:
           phase_not_active: Diese Projektphase ist nicht aktiv
           phase_expired: Diese Projektphase ist bereits abgelaufen
           phase_not_current: Diese Projektphase wurde noch nicht gestartet
+          only_admins: Die Beteiligung ist auf Admin-Benutzer beschränkt.
       restrictions:
         hint: Um die Partizipation einschränken zu können, müssen Nutzer*innen verifiziert werden.
         verification:

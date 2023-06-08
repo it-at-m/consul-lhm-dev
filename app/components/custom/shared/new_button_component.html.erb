@@ -1,9 +1,7 @@
-<% if show_new_button? %>
-  <%= new_button_html %>
+<%= new_button_html %>
 
-  <% if permission_problem_key.present? %>
-    <div class="callout warning new-resource-not-allowed-message" style='display:none'>
-      <%= permission_problem_message(permission_problem_key) %>
-    </div>
-  <% end %>
+<% if permission_problem_key.present? %>
+  <div class="callout warning new-resource-not-allowed-message" style='display:none'>
+    <%= permission_problem_message(permission_problem_key) %>
+  </div>
 <% end %>

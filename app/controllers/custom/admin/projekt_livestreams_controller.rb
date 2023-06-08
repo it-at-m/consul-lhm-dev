@@ -38,6 +38,13 @@ class Admin::ProjektLivestreamsController < Admin::BaseController
     redirect_to redirect_path(@projekt)
   end
 
+  def send_notifications
+    @projekt_livestream = ProjektLivestream.find_by(id: params[:id])
+    NotificationServices::NewProjektLivestreamNotifier.call(@projekt_livestream.id)
+    redirect_to edit_admin_projekt_path(@projekt, anchor: "tab-projekt-livestreams"),
+      notice: t("custom.admin.projekts.edit.projekt_livestreams_tab.notifications_sent_notice")
+  end
+
   private
 
     def projekt_livestream_params

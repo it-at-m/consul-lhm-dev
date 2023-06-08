@@ -18,6 +18,7 @@ class PagesController < ApplicationController
       @projekt = @custom_page.projekt
       @default_projekt_phase = get_default_projekt_phase(params[:selected_phase_id])
       @projekt_phase = @default_projekt_phase
+      @projekt_subscription = ProjektSubscription.find_or_create_by!(projekt: @projekt, user: current_user)
 
       params[:projekt_phase_id] = @default_projekt_phase.id
       params[:projekt_id] ||= @projekt.id

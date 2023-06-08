@@ -1,3 +1,7 @@
+<div class="float-right">
+  <%= link_to t("custom.admin.projekts.edit.projekt_arguments_tab.send_notifications_button"), send_notifications_admin_projekt_projekt_arguments_path(@projekt.id, params: { projekt_argument: { namespace: @namespace } } ), method: :post, class: "button" %>
+</div>
+
 <h2><%= t("custom.admin.projekts.edit.projekt_arguments_tab.page_title") %></h2>
 
 <%= render partial: 'custom/admin/projekts/edit/projekt_arguments/form', locals: { url: admin_projekt_projekt_arguments_path(@projekt, @projekt_argument), projekt: @projekt, projekt_argument: @projekt_argument } %>

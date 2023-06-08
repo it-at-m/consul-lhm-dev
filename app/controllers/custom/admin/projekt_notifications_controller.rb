@@ -10,7 +10,10 @@ class Admin::ProjektNotificationsController < Admin::BaseController
       authorize! :create, @projekt_notification
     end
 
-    @projekt_notification.save!
+    if @projekt_notification.save
+      NotificationServices::NewProjektNotificationNotifier.call(@projekt_notification.id)
+    end
+
     redirect_to redirect_path(@projekt), notice: t("admin.settings.flash.updated")
   end
 

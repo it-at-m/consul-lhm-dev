@@ -13,6 +13,11 @@ class Admin::Poll::PollsController < Admin::Poll::BaseController
     end
   end
 
+  def send_notifications
+    NotificationServices::NewPollNotifier.call(@poll.id)
+    redirect_to admin_poll_path(@poll), notice: t("custom.admin.polls.poll.notifications_sent")
+  end
+
   private
 
     def poll_params

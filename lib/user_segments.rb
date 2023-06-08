@@ -8,6 +8,7 @@ class UserSegments
        feasible_and_undecided_investment_authors
        selected_investment_authors
        winner_investment_authors
+       newsletter_subscribers
        not_supported_on_current_budget] + geozones.keys
   end
 
@@ -71,6 +72,10 @@ class UserSegments
 
   def self.user_segment_emails(segment)
     recipients(segment).newsletter.order(:created_at).pluck(:email).compact
+  end
+
+  def self.newsletter_subscribers
+    all_users.where(newsletter: true)
   end
 
   private

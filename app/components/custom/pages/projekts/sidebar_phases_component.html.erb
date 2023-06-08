@@ -32,7 +32,7 @@
         </div>
         <div class='sidebar-projekt-phase-details'>
           <span class='sidebar-projekt-phase-name'>
-            <%= phase_title(phase) %>
+            <%= phase.title %>
 
             <% if projekt_feature?(@projekt, 'general.show_projekt_footer') %>
               <%= link_to "/#{params[:id]}/#{phase.name}_footer_tab", class: 'js-sidebar-phase-link', remote: true, data: { index: index - 1 } do %>

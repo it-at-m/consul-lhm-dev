@@ -65,6 +65,10 @@ class Projekt < ApplicationRecord
   has_many :projekt_manager_assignments, dependent: :destroy
   has_many :projekt_managers, through: :projekt_manager_assignments
 
+  has_many :subscriptions, -> { where(projekt_subscriptions: { active: true }) },
+    class_name: "ProjektSubscription", dependent: :destroy, inverse_of: :projekt
+  has_many :subscribers, through: :subscriptions, source: :user
+
   before_validation :set_default_color
   after_create :create_corresponding_page, :set_order, :ensure_projekt_phases, :create_default_settings,
     :create_map_location

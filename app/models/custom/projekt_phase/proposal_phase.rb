@@ -27,6 +27,13 @@ class ProjektPhase::ProposalPhase < ProjektPhase
     Proposal.base_selection.where(projekt_id: (Proposal.scoped_projekt_ids_for_footer(projekt) & projekt_tree_ids)).count
   end
 
+  def selectable_by_admins_only?
+    projekt_settings.
+        find_by(projekt_settings: { key: "projekt_feature.proposals.only_admins_create_proposals" }).
+        value.
+        present?
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)
