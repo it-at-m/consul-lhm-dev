@@ -28,6 +28,9 @@ class ProjektPhase < ApplicationRecord
 
   belongs_to :projekt, touch: true
   has_many :projekt_settings, through: :projekt
+  has_many :settings, class_name: "ProjektPhaseSetting", foreign_key: :projekt_phase_id,
+    dependent: :destroy, inverse_of: :projekt_phase
+
   belongs_to :age_restriction
   has_many :projekt_phase_geozones, dependent: :destroy
   has_many :geozone_affiliations, through: :projekt
@@ -44,10 +47,10 @@ class ProjektPhase < ApplicationRecord
   has_many :registered_address_street_projekt_phase, dependent: :destroy
   has_many :registered_address_streets, through: :registered_address_street_projekt_phase
 
-  validates :projekt, presence: true
-
   has_many :subscriptions, class_name: "ProjektPhaseSubscription", dependent: :destroy
   has_many :subscribers, through: :subscriptions, source: :user
+
+  validates :projekt, presence: true
 
   default_scope { order(given_order: :asc) }
 
@@ -170,6 +173,18 @@ class ProjektPhase < ApplicationRecord
 
   def title
     phase_tab_name.presence || I18n.t("custom.projekts.page.tabs.#{resources_name}")
+  end
+
+  def feature?(key)
+    settings.find_by!(key: "feature.#{key}").value.present?
+  rescue ActiveRecord::RecordNotFound
+    raise StandardError, "Feature \"#{key}\" not found for projekt phase #{id}"
+  end
+
+  def option(key)
+    settings.find_by!(key: "option.#{key}").value
+  rescue ActiveRecord::RecordNotFound
+    raise StandardError, "Option \"#{key}\" not found for projekt phase #{id}"
   end
 
   private

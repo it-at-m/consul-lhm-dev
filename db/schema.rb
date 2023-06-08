@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_08_090909) do
+ActiveRecord::Schema.define(version: 2023_06_08_114307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1669,6 +1669,14 @@ ActiveRecord::Schema.define(version: 2023_06_08_090909) do
     t.index ["projekt_phase_id"], name: "index_projekt_phase_geozones_on_projekt_phase_id"
   end
 
+  create_table "projekt_phase_settings", force: :cascade do |t|
+    t.bigint "projekt_phase_id"
+    t.string "key"
+    t.string "value"
+    t.index ["key", "projekt_phase_id"], name: "index_projekt_phase_settings_on_key_and_projekt_phase_id", unique: true
+    t.index ["projekt_phase_id"], name: "index_projekt_phase_settings_on_projekt_phase_id"
+  end
+
   create_table "projekt_phase_subscriptions", force: :cascade do |t|
     t.bigint "projekt_phase_id"
     t.bigint "user_id"
@@ -2496,6 +2504,7 @@ ActiveRecord::Schema.define(version: 2023_06_08_090909) do
   add_foreign_key "projekt_notifications", "projekts"
   add_foreign_key "projekt_phase_geozones", "geozones"
   add_foreign_key "projekt_phase_geozones", "projekt_phases"
+  add_foreign_key "projekt_phase_settings", "projekt_phases"
   add_foreign_key "projekt_phase_subscriptions", "projekt_phases"
   add_foreign_key "projekt_phase_subscriptions", "users"
   add_foreign_key "projekt_phases", "age_restrictions"
