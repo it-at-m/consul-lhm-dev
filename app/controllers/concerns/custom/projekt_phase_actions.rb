@@ -3,18 +3,13 @@ module ProjektPhaseActions
   include Translatable
 
   included do
-    before_action :set_projekt, only: [:edit, :update, :toggle_active_status]
-    before_action :set_projekt_phase, only: [:edit, :update, :toggle_active_status]
-
-    helper_method :namespace_projekt_phase_path, :edit_namespace_projekt_path
-  end
-
-  def edit
+    before_action :set_projekt_phase
+    helper_method :namespace_projekt_phase_path
   end
 
   def update
     if @projekt_phase.update(projekt_phase_params)
-      redirect_to edit_namespace_projekt_path(@projekt),
+      redirect_to namespace_projekt_phase_path(action: params[:action_name] || "duration"),
         notice: t("admin.settings.index.map.flash.update")
     end
   end
@@ -24,10 +19,23 @@ module ProjektPhaseActions
     @projekt_phase.update!(active: status_value)
   end
 
+  def duration; end
+
+  def naming; end
+
+  def restrictions
+    @registered_address_groupings = RegisteredAddress::Grouping.all
+    @individual_groups = IndividualGroup.visible
+  end
+
+  def settings
+    @projekt_phase_settings = @projekt_phase.settings
+  end
+
   private
 
     def projekt_phase_params
-      filter_empty_registered_address_grouping_restrictions
+      filter_empty_registered_address_grouping_restrictions if params[:projekt_phase][:registered_address_grouping_restrictions]
 
       params.require(:projekt_phase).permit(
         translation_params(ProjektPhase),
@@ -37,10 +45,6 @@ module ProjektPhaseActions
         geozone_restriction_ids: [], registered_address_street_ids: [],
         individual_group_value_ids: [],
         registered_address_grouping_restrictions: registered_address_grouping_restrictions_params_to_permit)
-    end
-
-    def set_projekt
-      @projekt = Projekt.find(params[:projekt_id])
     end
 
     def set_projekt_phase

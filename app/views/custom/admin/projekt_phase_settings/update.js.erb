@@ -1,0 +1,6 @@
+var form = $("<%= j render Admin::Settings::FeaturedSettingsFormComponent.new(
+  @projekt_phase_setting,
+  describedby: params[:projekt_phase_setting][:describedby]
+) %>");
+
+$("#" + form.attr("id")).html(form.html()).find("[type='submit']").focus();

@@ -152,5 +152,4 @@ class ProjektSetting < ApplicationRecord
         update(value: self.value)
     end
   end
-
 end

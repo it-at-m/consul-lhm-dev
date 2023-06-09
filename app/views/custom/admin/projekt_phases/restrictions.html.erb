@@ -1,0 +1,19 @@
+<%= render "nav_bar" %>
+
+<%= form_with model: @projekt_phase, url: namespace_projekt_phase_path, scope: :projekt_phase do |f| %>
+  <%= hidden_field_tag :action_name, action_name %>
+
+  <div class="phase-restrictions">
+    <%= render "custom/admin/projekt_phases/phase_restrictions/phase_verified_restriction", f: f %>
+    <%= render "custom/admin/projekt_phases/phase_restrictions/phase_geozone_restriction", f: f %>
+    <%= render "custom/admin/projekt_phases/phase_restrictions/phase_extended_geozone_restriction", f: f %>
+    <%= render "custom/admin/projekt_phases/phase_restrictions/phase_age_restriction", f: f %>
+    <%= render "custom/admin/projekt_phases/phase_restrictions/phase_individual_group_values_restriction", f: f %>
+  </div>
+
+  <div class='row'>
+    <div class='column large-8'>
+      <%= f.submit(t("custom.admin.projekts.edit.update"), class: "button success") %>
+    </div>
+  </div>
+<% end %>

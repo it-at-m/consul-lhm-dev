@@ -26,19 +26,7 @@ class Admin::ProjektPhasesController < Admin::BaseController
 
   private
 
-    def namespace_projekt_phase_path(projekt, projekt_phase)
-      admin_projekt_projekt_phase_path(projekt, projekt_phase)
-    end
-
-    def edit_namespace_projekt_path(projekt)
-      if projekt.special?
-        admin_projekts_path(anchor: "tab-projekts-overview-page")
-      else
-        edit_admin_projekt_path(projekt)
-      end
-    end
-
-    def projekt_phase_params
-      params.require(:projekt_phase).permit(:projekt_id, :type)
+    def namespace_projekt_phase_path(action: "update")
+      url_for(controller: "admin/projekt_phases", action: action, only_path: true)
     end
 end

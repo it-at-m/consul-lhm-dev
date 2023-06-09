@@ -3,12 +3,12 @@
     <span class='geo-restriction-icon'><%= t("custom.admin.projekts.edit.projekt_phases_tab.extended_geo_restriction_title") %></span>
     <span class='restriction-hint'><%= t("custom.projekt_phases.restrictions.hint") %></span>
   </strong>
-  <div class="margin-bottom <%= 'gray-labels' if skip_user_verification? %>">
+  <div class="margin-bottom <%= "gray-labels" if skip_user_verification? %>">
     <div class="projekt-phase-restriction-block">
-      <%= f.radio_button :registered_address_grouping_restriction, 'no_restriction',
-                         label: t('custom.geozones.sidebar_filter.restrictions.no_restriction' ),
+      <%= f.radio_button :registered_address_grouping_restriction, "no_restriction",
+                         label: t("custom.geozones.sidebar_filter.restrictions.no_restriction"),
                          class: "projekt-phase-restriction-option projekt-phase-geo-restriction",
-                         checked: ( projekt_phase.registered_address_grouping_restriction.blank? || projekt_phase.registered_address_grouping_restriction == 'no_restriction' ),
+                         checked: (@projekt_phase.registered_address_grouping_restriction.blank? || @projekt_phase.registered_address_grouping_restriction == "no_restriction"),
                          disabled: skip_user_verification? %>
     </div>
 

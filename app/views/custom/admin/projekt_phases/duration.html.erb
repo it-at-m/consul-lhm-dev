@@ -1,0 +1,34 @@
+<%= render "nav_bar" %>
+
+<%= form_with model: @projekt_phase, url: namespace_projekt_phase_path, scope: :projekt_phase do |f| %>
+  <%= hidden_field_tag :action_name, action_name %>
+
+  <div class='row'>
+    <div class='column large-8'>
+      <strong><%= t("custom.admin.projekt_phases.duration") %></strong>
+      <table>
+        <tr>
+          <td>
+            <strong style="margin-left:1rem;"><%= t("custom.admin.projekts.edit.projekt_phases_tab.beginning") %></strong>
+          </td>
+          <td>
+            <%= f.date_field :start_date, label: false, style: "margin-bottom:0 !important" %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong style="margin-left:1rem;"><%= t("custom.admin.projekts.edit.projekt_phases_tab.ending") %></strong>
+          </td>
+          <td>
+            <%= f.date_field :end_date, label: false, style: "margin-bottom:0 !important" %>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='column large-8'>
+      <%= f.submit(t("custom.admin.projekts.edit.update"), class: "button success") %>
+    </div>
+  </div>
+<% end %>

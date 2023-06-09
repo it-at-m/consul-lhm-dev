@@ -2,6 +2,19 @@ namespace :admin do
   root to: "dashboard#index"
 
   # custom projekt routes
+  resources :projekt_phases, only: [:update] do
+    member do
+      get :duration
+      get :naming
+      get :restrictions
+      get :settings
+      get :map
+      get :labels
+      get :sentiments
+    end
+  end
+  resources :projekt_phase_settings, only: [:update]
+
   resources :projekts, only: [:index, :edit, :create, :update, :destroy] do
     resources :projekt_phases, only: [:create, :edit, :update] do
       member do

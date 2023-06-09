@@ -1,4 +1,6 @@
 class ProjektPhaseSetting < ApplicationRecord
+  attr_accessor :form_field_disabled, :dependent_setting_ids, :dependent_setting_action
+
   belongs_to :projekt_phase, touch: true
 
   validates :projekt_phase_id, :key, presence: true
@@ -88,12 +90,16 @@ class ProjektPhaseSetting < ApplicationRecord
 
     def add_new_settings
       defaults.each do |phase_class, phase_settings|
-        phase_class.to_s.constantize.all.each do |phase|
+        phase_class.to_s.constantize.all.find_each do |phase|
           phase_settings.each do |key, value|
             phase.settings.find_or_create_by!(key: key, value: value)
           end
         end
       end
     end
+  end
+
+  def enabled?
+    value.present?
   end
 end
