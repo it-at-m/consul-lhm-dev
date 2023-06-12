@@ -4,6 +4,12 @@ module ProjektAdminActions
   include Translatable
   include ImageAttributes
 
+  included do
+    alias_method :namespace_mappable_path, :namespace_projekt_path
+
+    helper_method :namespace_projekt_path, :namespace_mappable_path
+  end
+
   def edit
     @projekt = Projekt.find(params[:id])
     @namespace = params[:controller].split("/").first
@@ -151,5 +157,11 @@ module ProjektAdminActions
 
     def should_authorize_projekt_manager?
       current_user&.projekt_manager? && !current_user&.administrator?
+    end
+
+    # path helpers
+
+    def namespace_projekt_path(action: "update", anchor: nil)
+      url_for(controller: params[:controller], action: action, anchor: anchor, only_path: true)
     end
 end

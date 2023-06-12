@@ -10,4 +10,12 @@ module Mappable
       allow_destroy: true,
       reject_if: proc { |attributes| attributes["latitude"].blank? && attributes["longitude"].blank? }
   end
+
+  def map_layers_for_render
+    unless map_layers.any?(&:base?)
+      return map_layers.or(MapLayer.where(projekt_id: nil, mappable_id: nil, base: true))
+    end
+
+    map_layers
+  end
 end

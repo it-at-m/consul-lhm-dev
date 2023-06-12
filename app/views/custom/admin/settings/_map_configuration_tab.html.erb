@@ -1,10 +1,10 @@
 <% if feature?(:map) %>
   <% MapLayer.general.each do |layer| %>
-    <%= render partial: 'custom/admin/settings/map_layer', locals: { layer: layer, origin: 'admin/settings', tab: '#tab-map-configuration' } %>
+    <%= render partial: "custom/admin/shared/map/map_layer", locals: { layer: layer, return_path: "/admin/settings#tab-map-configuration" } %>
   <% end %>
 
   <div id='new-map-layer'>
-    <%= link_to t("custom.map_layer.buttons.new_layer"), new_admin_map_layer_path(origin: 'admin/settings', tab: '#tab-map-configuration'), class: 'button success margin-bottom', remote: true %>
+    <%= link_to t("custom.map_layer.buttons.new_layer"), new_admin_map_layer_path(return_path: "/admin/settings#tab-map-configuration"), class: "button success margin-bottom", remote: true %>
   </div>
 
   <h2><%= t("admin.settings.index.map.title") %></h2>

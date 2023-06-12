@@ -9,6 +9,7 @@ class Admin::ProjektPhasesController < Admin::BaseController
   end
 
   def edit
+    debugger
     @registered_address_groupings = RegisteredAddress::Grouping.all
     @individual_groups = IndividualGroup.visible
     super
@@ -23,10 +24,4 @@ class Admin::ProjektPhasesController < Admin::BaseController
     @projekt.projekt_phases.order_phases(params[:ordered_list])
     head :ok
   end
-
-  private
-
-    def namespace_projekt_phase_path(action: "update")
-      url_for(controller: "admin/projekt_phases", action: action, only_path: true)
-    end
 end

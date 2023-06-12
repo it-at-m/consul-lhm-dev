@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_08_114307) do
+ActiveRecord::Schema.define(version: 2023_06_09_153511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1180,6 +1180,9 @@ ActiveRecord::Schema.define(version: 2023_06_08_114307) do
     t.boolean "transparent", default: false
     t.integer "protocol", default: 0
     t.string "layer_defs"
+    t.string "mappable_type"
+    t.bigint "mappable_id"
+    t.index ["mappable_type", "mappable_id"], name: "index_map_layers_on_mappable_type_and_mappable_id"
     t.index ["projekt_id"], name: "index_map_layers_on_projekt_id"
   end
 
@@ -1195,9 +1198,11 @@ ActiveRecord::Schema.define(version: 2023_06_08_114307) do
     t.jsonb "shape", default: {}, null: false
     t.boolean "show_admin_shape", default: false
     t.float "altitude"
+    t.bigint "projekt_phase_id"
     t.index ["deficiency_report_id"], name: "index_map_locations_on_deficiency_report_id"
     t.index ["investment_id"], name: "index_map_locations_on_investment_id"
     t.index ["projekt_id"], name: "index_map_locations_on_projekt_id"
+    t.index ["projekt_phase_id"], name: "index_map_locations_on_projekt_phase_id"
     t.index ["proposal_id"], name: "index_map_locations_on_proposal_id"
     t.index ["shape"], name: "index_map_locations_on_shape", using: :gin
   end
@@ -2470,6 +2475,7 @@ ActiveRecord::Schema.define(version: 2023_06_08_114307) do
   add_foreign_key "managers", "users"
   add_foreign_key "map_layers", "projekts"
   add_foreign_key "map_locations", "deficiency_reports"
+  add_foreign_key "map_locations", "projekt_phases"
   add_foreign_key "map_locations", "projekts"
   add_foreign_key "moderators", "users"
   add_foreign_key "notifications", "users"

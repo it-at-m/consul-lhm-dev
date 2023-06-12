@@ -5,8 +5,6 @@ class Admin::ProjektsController < Admin::BaseController
   before_action :load_geozones, only: [:new, :create, :edit, :update]
   before_action :process_tags, only: [:update]
 
-  helper_method :namespace_projekt_path
-
   def index
     @projekts = Projekt.top_level.regular
     @new_projekt = Projekt.new
@@ -118,10 +116,4 @@ class Admin::ProjektsController < Admin::BaseController
     @projekt.order_down
     redirect_to admin_projekts_path
   end
-
-  private
-
-    def namespace_projekt_path(projekt)
-      admin_projekt_path(projekt)
-    end
 end

@@ -58,7 +58,7 @@ class Projekt < ApplicationRecord
   has_many :comments, as: :commentable, inverse_of: :commentable, dependent: :destroy
   belongs_to :author, -> { with_hidden }, class_name: "User", inverse_of: :projekts
 
-  has_many :map_layers, dependent: :destroy
+  has_many :map_layers, as: :mappable, dependent: :destroy
 
   has_many :projekt_labels, dependent: :destroy
 
@@ -409,14 +409,6 @@ class Projekt < ApplicationRecord
 
   def title
     name
-  end
-
-  def map_layers_for_render
-    unless map_layers.any?(&:base?)
-      return map_layers.or(MapLayer.where(projekt: nil, base: true))
-    end
-
-    map_layers
   end
 
   def legislation_process

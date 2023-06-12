@@ -9,6 +9,7 @@ namespace :admin do
       get :restrictions
       get :settings
       get :map
+      patch :update_map
       get :labels
       get :sentiments
     end
@@ -16,7 +17,15 @@ namespace :admin do
   resources :projekt_phase_settings, only: [:update]
 
   resources :projekts, only: [:index, :edit, :create, :update, :destroy] do
-    resources :projekt_phases, only: [:create, :edit, :update] do
+    member do
+      get :order_up
+      get :order_down
+      patch :update_standard_phase
+      patch :quick_update
+      patch :update_map
+    end
+
+    resources :projekt_phases, only: [:create] do
       member do
         patch :toggle_active_status
       end
@@ -31,22 +40,13 @@ namespace :admin do
     end
     resources :projekt_notifications, only: [:create, :update, :destroy]
     resources :projekt_events, only: [:create, :update, :destroy]
-    resources :projekt_questions  do
+    resources :projekt_questions do
       post "/answers/order_answers", to: "questions/answers#order_answers"
     end
     resources :projekt_arguments, only: [:create, :update, :destroy]
     resources :projekt_livestreams, only: [:create, :update, :destroy]
     resources :milestones, controller: "projekt_milestones"
     resources :progress_bars, except: :show, controller: "projekt_progress_bars"
-    member do
-      get :order_up
-      get :order_down
-      patch :update_standard_phase
-      patch :quick_update
-    end
-    patch :update_map, to: "projekts#update_map"
-
-    resources :map_layers, only: [:update, :create, :edit, :new, :destroy], controller: 'projekts/map_layers'
     resources :projekt_labels, except: %i[index show]
   end
 
@@ -66,16 +66,16 @@ namespace :admin do
 
   # custom deficiency reports routes
   scope module: :deficiency_reports, path: :deficiency_reports, as: :deficiency_report do
-    resources :officers,    only: [:index, :create, :destroy] do
+    resources :officers, only: [:index, :create, :destroy] do
       get :search, on: :collection
     end
     resources :categories,  only: %i[index new create edit update destroy]
     resources :statuses,    only: %i[index new create edit update destroy] do
       collection do
-        post 'order_statuses'
+        post "order_statuses"
       end
     end
-    resources :settings,    only: :index
+    resources :settings, only: :index
   end
 
   resources :deficiency_reports, only: [:index, :show]
@@ -348,7 +348,7 @@ namespace :admin do
     end
     resources :images, only: [:index, :update, :destroy]
     resources :content_blocks, except: [:show]
-    delete "/heading_content_blocks/:id", to: "content_blocks#delete_heading_content_block", as: "delete_heading_content_block"
+    delete "/heading_content_blocks/:id", to: "content_blocks#delete_heading_content_block",as: "delete_heading_content_block"
     get "/edit_heading_content_blocks/:id", to: "content_blocks#edit_heading_content_block", as: "edit_heading_content_block"
     put "/update_heading_content_blocks/:id", to: "content_blocks#update_heading_content_block", as: "update_heading_content_block"
     resources :information_texts, only: [:index] do

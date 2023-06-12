@@ -1,4 +1,6 @@
 class ProjektPhase < ApplicationRecord
+  include Mappable
+
   REGULAR_PROJEKT_PHASES = [
     "ProjektPhase::MilestonePhase",
     "ProjektPhase::ProjektNotificationPhase",
@@ -49,6 +51,8 @@ class ProjektPhase < ApplicationRecord
 
   has_many :subscriptions, class_name: "ProjektPhaseSubscription", dependent: :destroy
   has_many :subscribers, through: :subscriptions, source: :user
+
+  has_many :map_layers, as: :mappable, dependent: :destroy
 
   validates :projekt, presence: true
 
@@ -185,6 +189,17 @@ class ProjektPhase < ApplicationRecord
     settings.find_by!(key: "option.#{key}").value
   rescue ActiveRecord::RecordNotFound
     raise StandardError, "Option \"#{key}\" not found for projekt phase #{id}"
+  end
+
+  def create_map_location
+    return if map_location.present?
+
+    MapLocation.create!(
+      latitude: Setting["map.latitude"],
+      longitude: Setting["map.longitude"],
+      zoom: Setting["map.zoom"],
+      projekt_phase_id: id
+    )
   end
 
   private
