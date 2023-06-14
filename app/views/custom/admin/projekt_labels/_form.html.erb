@@ -5,8 +5,10 @@
   <%= render "shared/globalize_locales", resource: @projekt_label %>
 
   <%= f.translatable_fields do |translations_form| %>
-    <div class="small-12 column">
-      <%= translations_form.text_field :name %>
+    <div class="row">
+      <div class="small-12 medium-6 large-4 column">
+        <%= translations_form.text_field :name %>
+      </div>
     </div>
   <% end %>
 

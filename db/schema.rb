@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_13_142638) do
+ActiveRecord::Schema.define(version: 2023_06_14_133525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1996,6 +1996,16 @@ ActiveRecord::Schema.define(version: 2023_06_13_142638) do
     t.index ["process_type", "process_id"], name: "index_reports_on_process_type_and_process_id"
   end
 
+  create_table "resource_sentiments", force: :cascade do |t|
+    t.bigint "sentiment_id"
+    t.string "sentimentable_type"
+    t.bigint "sentimentable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sentiment_id"], name: "index_resource_sentiments_on_sentiment"
+    t.index ["sentimentable_type", "sentimentable_id"], name: "index_resource_sentiments_on_sentimentable"
+  end
+
   create_table "sdg_goals", force: :cascade do |t|
     t.integer "code", null: false
     t.datetime "created_at", null: false
@@ -2066,6 +2076,24 @@ ActiveRecord::Schema.define(version: 2023_06_13_142638) do
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_sdg_targets_on_code", unique: true
     t.index ["goal_id"], name: "index_sdg_targets_on_goal_id"
+  end
+
+  create_table "sentiment_translations", force: :cascade do |t|
+    t.bigint "sentiment_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.index ["locale"], name: "index_sentiment_translations_on_locale"
+    t.index ["sentiment_id"], name: "index_sentiment_translations_on_sentiment_id"
+  end
+
+  create_table "sentiments", force: :cascade do |t|
+    t.string "color"
+    t.bigint "projekt_phase_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["projekt_phase_id"], name: "index_sentiments_on_projekt_phase_id"
   end
 
   create_table "settings", id: :serial, force: :cascade do |t|
@@ -2531,7 +2559,9 @@ ActiveRecord::Schema.define(version: 2023_06_13_142638) do
   add_foreign_key "registered_addresses", "registered_address_streets"
   add_foreign_key "related_content_scores", "related_contents"
   add_foreign_key "related_content_scores", "users"
+  add_foreign_key "resource_sentiments", "sentiments"
   add_foreign_key "sdg_managers", "users"
+  add_foreign_key "sentiments", "projekt_phases"
   add_foreign_key "site_customization_pages", "projekts"
   add_foreign_key "user_individual_group_values", "individual_group_values"
   add_foreign_key "user_individual_group_values", "users"

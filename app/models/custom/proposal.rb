@@ -1,6 +1,7 @@
 require_dependency Rails.root.join("app", "models", "proposal").to_s
 class Proposal < ApplicationRecord
   include Labelable
+  include Sentimentable
 
   belongs_to :projekt, optional: true, touch: true # TODO: remove column after data migration con1538
   belongs_to :projekt_phase

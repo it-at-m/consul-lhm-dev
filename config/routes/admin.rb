@@ -15,6 +15,7 @@ namespace :admin do
     end
 
     resources :projekt_labels, except: %i[index show]
+    resources :sentiments, except: %i[index show]
   end
   resources :projekt_phase_settings, only: [:update]
 

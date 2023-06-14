@@ -494,7 +494,18 @@ de:
             color: Farbe
             name: Name
           form:
+            color_placeholder: "HEX Code mit #"
+        sentiments:
+          page_title: Sentiments
+          create_button: Sentiment erstellen
+          no_sentiments: Für dieses Projekt sind noch keine Sentiments hinterlegt
+          table:
+            color: Farbe
+            name: Name
+          form:
             color_placeholder: "HEX Code mit #" 
+          notice:
+            destroy: Sentiment erfolgreich gelöscht
       modal_notifications:
         index:
           create: Erstellen

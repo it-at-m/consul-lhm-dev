@@ -4,6 +4,7 @@ class Debate
   include Imageable
   include Documentable
   include Labelable
+  include Sentimentable
 
   belongs_to :projekt, optional: true, touch: true  # TODO: remove column after data migration con1538
   belongs_to :projekt_phase

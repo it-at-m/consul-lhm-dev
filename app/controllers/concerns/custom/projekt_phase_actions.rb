@@ -57,6 +57,10 @@ module ProjektPhaseActions
     @projekt_labels = @projekt_phase.projekt_labels
   end
 
+  def sentiments
+    @sentiments = @projekt_phase.sentiments
+  end
+
   private
 
     def projekt_phase_params
