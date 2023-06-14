@@ -325,11 +325,6 @@ de:
             tags_enable: Bitte aktivieren Sie Tags in Projektfunktionen Tab
             tags_hint: Klicken Sie auf einen oder mehrere Tags, um Sie für dieses Projekt dem/der Nutzer:in anzubieten.
             refresh_page: Sollten Sie die Funktionen bereits aktiviert haben, sie werden aber hier nicht angezeigt, dann laden Sie diese Seite bitte neu.
-          projekt_labels_tab:
-            name: Labels
-            page_title: Labels
-            create_button: Label erstellen
-            no_labels: Für dieses Projekt sind noch keine Labels hinterlegt
           projekt_settings_tab:
             budget_settings: Budgets
             debates_settings: Diskussion
@@ -489,6 +484,17 @@ de:
         projekt_selector_hint: Hinweise zum Projekt
         edit:
           title: Einstellung für Phase
+        projekt_labels: 
+          name: Labels
+          page_title: Labels
+          create_button: Label erstellen
+          no_labels: Für dieses Projekt sind noch keine Labels hinterlegt
+          table:
+            icon: Icon
+            color: Farbe
+            name: Name
+          form:
+            color_placeholder: "HEX Code mit #" 
       modal_notifications:
         index:
           create: Erstellen

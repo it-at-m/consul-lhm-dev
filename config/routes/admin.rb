@@ -10,9 +10,11 @@ namespace :admin do
       get :settings
       get :map
       patch :update_map
-      get :labels
+      get :projekt_labels
       get :sentiments
     end
+
+    resources :projekt_labels, except: %i[index show]
   end
   resources :projekt_phase_settings, only: [:update]
 
@@ -47,7 +49,6 @@ namespace :admin do
     resources :projekt_livestreams, only: [:create, :update, :destroy]
     resources :milestones, controller: "projekt_milestones"
     resources :progress_bars, except: :show, controller: "projekt_progress_bars"
-    resources :projekt_labels, except: %i[index show]
   end
 
   resources :map_layers, only: [:update, :create, :edit, :new, :destroy]

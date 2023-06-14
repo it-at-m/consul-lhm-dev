@@ -25,7 +25,7 @@ module NotificationServices
       def projekt_subscriber_ids
         return [] unless @debate.projekt.present?
 
-        @debate.projekt.debate_phase.subscribers.ids
+        @debate.projekt_phase.subscribers.ids
       end
   end
 end

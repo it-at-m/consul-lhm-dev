@@ -25,6 +25,9 @@ de:
       individual_group_value:
         one: Gruppenwert
         other: Gruppenwerte
+      projekt_label:
+        one: Label
+        other: Labels
     errors:
       models:
         proposal:
@@ -134,4 +137,8 @@ de:
           hard: starke Gruppe
           soft: schwache Gruppe
       individual_group_value:
+        name: Name
+      projekt_label:
+        icon: Icon
+        color: Farbe
         name: Name

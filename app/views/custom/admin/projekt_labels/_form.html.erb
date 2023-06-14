@@ -1,4 +1,6 @@
-<%= translatable_form_for [:admin, @projekt, @projekt_label] do |f| %>
+<% form_path = @projekt_label.persisted? ? admin_projekt_phase_projekt_label_path(@projekt_phase, @projekt_label) : admin_projekt_phase_projekt_labels_path(@projekt_phase, @projekt_label) %>
+
+<%= translatable_form_for @projekt_label, url: form_path do |f| %>
   <%= render "shared/errors", resource: @projekt_label %>
   <%= render "shared/globalize_locales", resource: @projekt_label %>
 
@@ -10,14 +12,13 @@
 
   <div class="clear">
     <div class="small-12 medium-6 large-4 column">
-      <%= f.text_field :color, label: t("custom.admin.deficiency_reports.categories.category.color"),
-        placeholder: t('custom.admin.deficiency_reports.categories.form.color_placeholder') %>
+      <%= f.text_field :color, placeholder: t("custom.admin.projekt_phases.projekt_labels.form.color_placeholder") %>
     </div>
   </div>
 
   <div class="clear">
     <div class="small-12 column">
-      <%= f.label :icon, t("custom.admin.deficiency_reports.categories.category.icon")  %>
+      <%= f.label :icon %>
       <div class='admin-deficiency-report-category-icons-selector'>
         <%= f.collection_radio_buttons :icon, Iconable::AVAILABLE_ICONS_SHORT, :first, :first do |rb| %>
           <%= rb.label { rb.radio_button + "<i class=\"fas fa-#{rb.object.first}\"></i>".html_safe } %>
@@ -27,7 +28,6 @@
   </div>
 
   <div class="small-12 column">
-    <%= f.submit(value: t("custom.admin.deficiency_reports.categories.form.submit_button"),
-                class: "button success") %>
+    <%= f.submit class: "button success" %>
   </div>
 <% end %>

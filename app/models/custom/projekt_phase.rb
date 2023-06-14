@@ -32,6 +32,7 @@ class ProjektPhase < ApplicationRecord
   has_many :projekt_settings, through: :projekt
   has_many :settings, class_name: "ProjektPhaseSetting", foreign_key: :projekt_phase_id,
     dependent: :destroy, inverse_of: :projekt_phase
+  has_many :projekt_labels, dependent: :destroy
 
   belongs_to :age_restriction
   has_many :projekt_phase_geozones, dependent: :destroy

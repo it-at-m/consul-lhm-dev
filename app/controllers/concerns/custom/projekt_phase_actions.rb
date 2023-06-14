@@ -53,6 +53,10 @@ module ProjektPhaseActions
       notice: t("admin.settings.index.map.flash.update")
   end
 
+  def projekt_labels
+    @projekt_labels = @projekt_phase.projekt_labels
+  end
+
   private
 
     def projekt_phase_params

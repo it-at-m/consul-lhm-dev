@@ -13,6 +13,9 @@ en:
       modal_notification:
         one: Modal notification
         other: Modal notifications
+      projekt_label:
+        one: Label
+        other: Labels
     errors:
       models:
         proposal:
@@ -92,4 +95,8 @@ en:
           hard: hard
           soft: soft
       individual_group_value:
+        name: Name
+      projekt_label:
+        icon: Icon
+        color: Color
         name: Name

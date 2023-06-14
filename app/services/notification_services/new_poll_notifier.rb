@@ -19,7 +19,7 @@ module NotificationServices
       def projekt_subscriber_ids
         return [] unless @poll.projekt
 
-        @poll.projekt.voting_phase.subscribers.ids
+        @poll.projekt_phase.subscribers.ids
       end
   end
 end
