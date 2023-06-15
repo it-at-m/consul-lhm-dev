@@ -475,15 +475,53 @@ de:
           edit: Bearbeiten
           destroy: Löschen
       projekt_phases:
+        nav_bar:
+          duration: Laufzeit
+          naming: Benennungen
+          restrictions: Einschränkungen
+          settings: Funktionen
+          map: Karte
+          projekt_labels: Labels
+          sentiments: Sentimente
+        shared:
+          update_button: Speichern
         phase_tab_name: Name in Tab
         new_resource_button_name: Text in Button
         resource_form_title: Text bei Erstellung
-        duration: Laufzeit
-        start_date: Anfangsdatum
-        end_date: Enddatum
         projekt_selector_hint: Hinweise zum Projekt
         edit:
           title: Einstellung für Phase
+        duration:
+          page_title: Laufzeit
+          start_date: Anfangsdatum
+          end_date: Enddatum
+        naming:
+          page_title: Benennungen
+        restrictions:
+          page_title: Einschränkungen
+          age:
+            title: Alter
+            hint: Um die Partizipation einschränken zu können, müssen Nutzer*innen verifiziert werden.
+            no_restriction: Alle Nutzer*innen
+          extended_geo_restrictions:
+            title: Zusatzliche individuelle Gebietsbeschränkungen
+            hint: Um die Partizipation einschränken zu können, müssen Nutzer*innen verifiziert werden.
+            no_restriction: Alle Nutzer:innen der Plattform
+          geo_restrictions:
+            title: Gebietsbeschränkung
+            hint: Um die Partizipation einschränken zu können, müssen Nutzer*innen verifiziert werden.
+            no_restriction: Alle Nutzer:innen der Plattform
+            only_citizens: Nur Bürger:innen der Stadt
+            only_geozones: Nur Bürger:innen des Stadtteils
+            only_streets: Nur Bürger:innen aus Straße
+          individual_group_values:
+            title: Einschränkung auf Gruppen
+          verification:
+            title: Verifizierung
+            no_restriction: Alle Nutzer*innen
+            only_verified: Nur verifizierte Nutzer*innen
+        settings:
+          page_title: Funktionen
         projekt_labels: 
           name: Labels
           page_title: Labels

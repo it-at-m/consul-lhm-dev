@@ -60,4 +60,8 @@ module AdminHelper
   def admin_projekt_livestreams_path(projekt)
     edit_admin_projekt_path(projekt, anchor: "tab-projekt-livestreams")
   end
+
+  def static_subnav_link_current?(link)
+    action_name == link ? "current" : ""
+  end
 end

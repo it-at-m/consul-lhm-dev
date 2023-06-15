@@ -1,11 +1,13 @@
-<div class='row'>
-  <div class='column'>
-    <%= link_to "duration", namespace_projekt_phase_path(action: "duration") %>
-    <%= link_to "naming", namespace_projekt_phase_path(action: "naming") %>
-    <%= link_to "restrictions", namespace_projekt_phase_path(action: "restrictions") %>
-    <%= link_to "settings", namespace_projekt_phase_path(action: "settings") %>
-    <%= link_to "map", namespace_projekt_phase_path(action: "map") %>
-    <%= link_to "projekt_labels", namespace_projekt_phase_path(action: "projekt_labels") %>
-    <%= link_to "sentiments", namespace_projekt_phase_path(action: "sentiments") %>
+<div class="row">
+  <div class="column">
+    <div class="static-subnav">
+      <%= projekt_phase_navbar_link("duration") %>
+      <%= projekt_phase_navbar_link("naming") %>
+      <%= projekt_phase_navbar_link("restrictions") %>
+      <%= projekt_phase_navbar_link("settings") %>
+      <%= projekt_phase_navbar_link("projekt_labels") %>
+      <%= projekt_phase_navbar_link("sentiments") %>
+      <%= projekt_phase_navbar_link("map") %>
+    </div>
   </div>
 </div>

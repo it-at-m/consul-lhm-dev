@@ -99,6 +99,10 @@ class ProjektPhaseSetting < ApplicationRecord
     end
   end
 
+  def kind
+    key.split(".").first
+  end
+
   def enabled?
     value.present?
   end

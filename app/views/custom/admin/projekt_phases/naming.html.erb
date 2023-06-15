@@ -1,5 +1,11 @@
 <%= render "nav_bar" %>
 
+<div class="row">
+  <div class="column">
+    <h2><%= t("custom.admin.projekt_phases.naming.page_title") %></h2>
+  </div>
+</div>
+
 <%= translatable_form_for(@projekt_phase, url: namespace_projekt_phase_path, as: :projekt_phase) do |f| %>
   <%= hidden_field_tag :action_name, action_name %>
 
@@ -48,7 +54,7 @@
 
   <div class='row'>
     <div class='column large-8'>
-      <%= f.submit(t("custom.admin.projekts.edit.update"), class: "button success") %>
+      <%= f.submit(t("custom.admin.projekt_phases.shared.update_button"), class: "button success") %>
     </div>
   </div>
 <% end %>

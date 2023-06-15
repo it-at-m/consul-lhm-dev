@@ -32,7 +32,8 @@ module ProjektPhaseActions
   end
 
   def settings
-    @projekt_phase_settings = @projekt_phase.settings
+    @projekt_phase_features = @projekt_phase.settings.group_by(&:kind)["feature"] || []
+    @projekt_phase_options = @projekt_phase.settings.group_by(&:kind)["option"] || []
   end
 
   def map

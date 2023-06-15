@@ -1,12 +1,12 @@
 <div class="phase-geo-restriction">
   <strong class='geo-restriction-title'>
-    <span class='geo-restriction-icon'><%= t("custom.admin.projekts.edit.projekt_phases_tab.geo_restriction_title") %></span>
-    <span class='restriction-hint'><%= t("custom.projekt_phases.restrictions.hint") %></span>
+    <span class='geo-restriction-icon'><%= t("custom.admin.projekt_phases.restrictions.geo_restrictions.title") %></span>
+    <span class='restriction-hint'><%= t("custom.admin.projekt_phases.restrictions.geo_restrictions.hint") %></span>
   </strong>
   <div class="margin-bottom <%= "gray-labels" if skip_user_verification? %>">
     <div class="projekt-phase-restriction-block">
       <%= f.radio_button :geozone_restricted, "no_restriction",
-                         label: t("custom.geozones.sidebar_filter.restrictions.no_restriction"),
+                         label: t("custom.admin.projekt_phases.restrictions.geo_restrictions.no_restriction"),
                          class: "projekt-phase-restriction-option projekt-phase-geo-restriction",
                          checked: (@projekt_phase.geozone_restricted.blank? || @projekt_phase.geozone_restricted == "no_restriction"),
                          disabled: skip_user_verification? %>
@@ -14,14 +14,14 @@
 
     <div class="projekt-phase-restriction-block">
       <%= f.radio_button :geozone_restricted, "only_citizens",
-                         label: t("custom.geozones.sidebar_filter.restrictions.only_citizens"),
+                         label: t("custom.admin.projekt_phases.restrictions.geo_restrictions.only_citizens"),
                          class: "projekt-phase-restriction-option projekt-phase-geo-restriction",
                          disabled: skip_user_verification? %>
     </div>
 
     <div class="projekt-phase-restriction-block">
       <%= f.radio_button :geozone_restricted, "only_geozones",
-                         label: t("custom.geozones.sidebar_filter.restrictions.only_geozones"),
+                         label: t("custom.admin.projekt_phases.restrictions.geo_restrictions.only_geozones"),
                          class: "projekt-phase-restriction-option projekt-phase-geo-restriction",
                          disabled: skip_user_verification? %>
 
@@ -34,7 +34,7 @@
 
     <div class="projekt-phase-restriction-block">
       <%= f.radio_button :geozone_restricted, "only_streets",
-                         label: t("custom.geozones.sidebar_filter.restrictions.only_streets"),
+                         label: t("custom.admin.projekt_phases.restrictions.geo_restrictions.only_streets"),
                          class: "projekt-phase-restriction-option projekt-phase-geo-restriction",
                          disabled: skip_user_verification? %>
 
