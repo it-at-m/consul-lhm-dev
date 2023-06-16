@@ -142,3 +142,12 @@ de:
         icon: Icon
         color: Farbe
         name: Name
+      projekt_question:
+        show_answers_count: Anzahl der Stimmen im Frontend anzeigen    
+        comments_enabled: Offene Antwort aktiviert
+      projekt_event:
+        title: Veranstaltungstitel
+        location: Veranstaltungsort
+        datetime: Datum
+        end_datetime: Endtermin
+        weblink: Weblink

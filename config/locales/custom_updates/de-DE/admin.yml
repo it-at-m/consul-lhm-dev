@@ -483,6 +483,9 @@ de:
           map: Karte
           projekt_labels: Labels
           sentiments: Sentimente
+          projekt_questions: Kurzumfrage      
+          projekt_livestreams: Livestreams
+          projekt_events: Veranstaltungen
         shared:
           update_button: Speichern
         phase_tab_name: Name in Tab
@@ -544,6 +547,23 @@ de:
             color_placeholder: "HEX Code mit #" 
           notice:
             destroy: Sentiment erfolgreich gelöscht
+        projekt_questions:
+          page_title: Kurzumfrage      
+          create_button: Frage erstellen  
+          send_notifications_button: Benachrichtigungen senden
+          table:
+            title: Kurzumfrage
+            question_options: Antwortmöglichkeiten
+            answers_count: Anzahl der Antworten
+            comments_count: Anzahl der Kommentare
+          new:
+            title_livestream: Frage für Livestream erstellen    
+            title: Frage erstellen
+        projekt_livestreams:
+          page_title: Livestreams
+        projekt_events:
+          page_title: Veranstaltungen
+      modal_notifications:
       modal_notifications:
         index:
           create: Erstellen

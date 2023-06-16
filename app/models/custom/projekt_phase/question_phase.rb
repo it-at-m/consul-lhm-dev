@@ -29,6 +29,10 @@ class ProjektPhase::QuestionPhase < ProjektPhase
       .present?
   end
 
+  def admin_nav_bar_items
+    %w[duration naming restrictions settings].push(resources_name)
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)

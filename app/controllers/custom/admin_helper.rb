@@ -45,10 +45,6 @@ module AdminHelper
     end
   end
 
-  def redirect_to_projekt_questions_path(projekt)
-    edit_admin_projekt_path(projekt, anchor: "tab-projekt-questions")
-  end
-
   def edit_admin_projekt_path(projekt, **hash_arguments)
     if params[:controller].include?("projekt_management")
       edit_projekt_management_projekt_path(projekt, **hash_arguments)

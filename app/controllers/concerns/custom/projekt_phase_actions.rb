@@ -7,6 +7,8 @@ module ProjektPhaseActions
     alias_method :namespace_mappable_path, :namespace_projekt_phase_path
 
     before_action :set_projekt_phase
+    before_action :authorize_nav_bar_action
+
     helper_method :namespace_projekt_phase_path, :namespace_mappable_path
   end
 
@@ -62,6 +64,20 @@ module ProjektPhaseActions
     @sentiments = @projekt_phase.sentiments
   end
 
+  def projekt_questions
+    @projekt_questions = @projekt_phase.questions
+  end
+
+  def projekt_livestreams
+    @projekt_livestream = ProjektLivestream.new
+    @projekt_livestreams = @projekt_phase.projekt_livestreams
+  end
+
+  def projekt_events
+    @projekt_event = ProjektEvent.new
+    @projekt_events = @projekt_phase.projekt_events
+  end
+
   private
 
     def projekt_phase_params
@@ -109,6 +125,15 @@ module ProjektPhaseActions
         .each { |_, v| v.reject!(&:blank?) }
 
       params[:projekt_phase][:registered_address_grouping_restrictions] = filtered_grouping_restrictions
+    end
+
+    def authorize_nav_bar_action
+      possible_nab_bar_actions = @projekt_phase.projekt.projekt_phases.map(&:admin_nav_bar_items).flatten.uniq
+      return unless action_name.in?(possible_nab_bar_actions)
+
+      unless action_name.in?(@projekt_phase.admin_nav_bar_items)
+        redirect_to namespace_projekt_phase_path(action: @projekt_phase.admin_nav_bar_items.first)
+      end
     end
 
     # path helpers

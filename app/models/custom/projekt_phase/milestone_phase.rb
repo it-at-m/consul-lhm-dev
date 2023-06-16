@@ -19,6 +19,10 @@ class ProjektPhase::MilestonePhase < ProjektPhase
     projekt.milestones.count
   end
 
+  def admin_nav_bar_items
+    %w[naming].push(resources_name)
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)

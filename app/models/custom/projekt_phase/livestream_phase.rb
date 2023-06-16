@@ -31,6 +31,10 @@ class ProjektPhase::LivestreamPhase < ProjektPhase
       .present?
   end
 
+  def admin_nav_bar_items
+    %w[duration naming].push(resources_name)
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)

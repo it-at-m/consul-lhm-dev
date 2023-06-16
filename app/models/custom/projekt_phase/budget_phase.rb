@@ -19,6 +19,10 @@ class ProjektPhase::BudgetPhase < ProjektPhase
     5
   end
 
+  def admin_nav_bar_items
+    %w[duration naming restrictions settings]
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)

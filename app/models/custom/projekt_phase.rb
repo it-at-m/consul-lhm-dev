@@ -204,6 +204,10 @@ class ProjektPhase < ApplicationRecord
     )
   end
 
+  def admin_nav_bar_items
+    []
+  end
+
   private
 
     def phase_specific_permission_problems(user)

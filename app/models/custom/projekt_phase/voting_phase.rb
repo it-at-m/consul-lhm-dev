@@ -25,6 +25,10 @@ class ProjektPhase::VotingPhase < ProjektPhase
       .count
   end
 
+  def admin_nav_bar_items
+    %w[duration naming restrictions settings]
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)

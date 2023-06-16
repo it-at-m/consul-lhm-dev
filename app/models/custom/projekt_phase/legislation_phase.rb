@@ -15,6 +15,10 @@ class ProjektPhase::LegislationPhase < ProjektPhase
     3
   end
 
+  def admin_nav_bar_items
+    %w[duration naming restrictions]
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)

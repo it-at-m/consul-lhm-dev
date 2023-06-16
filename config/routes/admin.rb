@@ -12,10 +12,29 @@ namespace :admin do
       patch :update_map
       get :projekt_labels
       get :sentiments
+      get :projekt_questions
+      get :projekt_livestreams
+      get :projekt_events
     end
 
     resources :projekt_labels, except: %i[index show]
     resources :sentiments, except: %i[index show]
+    resources :projekt_questions, except: %i[index show] do
+      post "/answers/order_answers", to: "questions/answers#order_answers"
+      collection do
+        post :send_notifications
+      end
+    end
+    resources :projekt_livestreams, only: [:create, :update, :destroy] do
+      collection do
+        post :send_notifications
+      end
+    end
+    resources :projekt_events, only: [:create, :update, :destroy] do
+      member do
+        post :send_notifications
+      end
+    end
   end
   resources :projekt_phase_settings, only: [:update]
 
@@ -42,12 +61,7 @@ namespace :admin do
       end
     end
     resources :projekt_notifications, only: [:create, :update, :destroy]
-    resources :projekt_events, only: [:create, :update, :destroy]
-    resources :projekt_questions do
-      post "/answers/order_answers", to: "questions/answers#order_answers"
-    end
     resources :projekt_arguments, only: [:create, :update, :destroy]
-    resources :projekt_livestreams, only: [:create, :update, :destroy]
     resources :milestones, controller: "projekt_milestones"
     resources :progress_bars, except: :show, controller: "projekt_progress_bars"
   end
