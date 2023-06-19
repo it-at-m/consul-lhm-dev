@@ -6,8 +6,7 @@ module ProjektPhaseActions
   included do
     alias_method :namespace_mappable_path, :namespace_projekt_phase_path
 
-    before_action :set_projekt_phase
-    before_action :authorize_nav_bar_action
+    before_action :set_projekt_phase, :set_namespace, :authorize_nav_bar_action
 
     helper_method :namespace_projekt_phase_path, :namespace_mappable_path
   end
@@ -78,6 +77,9 @@ module ProjektPhaseActions
     @projekt_events = @projekt_phase.projekt_events
   end
 
+  def milestones
+  end
+
   private
 
     def projekt_phase_params
@@ -105,6 +107,10 @@ module ProjektPhaseActions
 
     def set_projekt_phase
       @projekt_phase = ProjektPhase.find(params[:id])
+    end
+
+    def set_namespace
+      @namespace = params[:controller].split('/').first
     end
 
     def registered_address_grouping_restrictions_params_to_permit

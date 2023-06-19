@@ -15,6 +15,7 @@ namespace :admin do
       get :projekt_questions
       get :projekt_livestreams
       get :projekt_events
+      get :milestones
     end
 
     resources :projekt_labels, except: %i[index show]
@@ -35,6 +36,8 @@ namespace :admin do
         post :send_notifications
       end
     end
+    resources :milestones, controller: "projekt_phase_milestones", except: [:index, :show]
+    resources :progress_bars, controller: "projekt_phase_progress_bars"
   end
   resources :projekt_phase_settings, only: [:update]
 
@@ -62,8 +65,6 @@ namespace :admin do
     end
     resources :projekt_notifications, only: [:create, :update, :destroy]
     resources :projekt_arguments, only: [:create, :update, :destroy]
-    resources :milestones, controller: "projekt_milestones"
-    resources :progress_bars, except: :show, controller: "projekt_progress_bars"
   end
 
   resources :map_layers, only: [:update, :create, :edit, :new, :destroy]

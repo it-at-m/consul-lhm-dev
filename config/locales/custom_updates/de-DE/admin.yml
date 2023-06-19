@@ -486,6 +486,7 @@ de:
           projekt_questions: Kurzumfrage      
           projekt_livestreams: Livestreams
           projekt_events: Veranstaltungen
+          milestones: Fortschritt & Meilensteine
         shared:
           update_button: Speichern
         phase_tab_name: Name in Tab
@@ -563,6 +564,8 @@ de:
           page_title: Livestreams
         projekt_events:
           page_title: Veranstaltungen
+        milestones:
+          page_title: Meilensteine
       modal_notifications:
       modal_notifications:
         index:

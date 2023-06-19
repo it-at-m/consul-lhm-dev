@@ -1,5 +1,6 @@
 class ProjektPhase < ApplicationRecord
   include Mappable
+  include Milestoneable
 
   REGULAR_PROJEKT_PHASES = [
     "ProjektPhase::MilestonePhase",
@@ -80,6 +81,10 @@ class ProjektPhase < ApplicationRecord
     ordered_array.each_with_index do |phase_id, order|
       find(phase_id).update_column(:given_order, (order + 1))
     end
+  end
+
+  def self.model_name
+    ActiveModel::Name.new(self, nil, "ProjektPhase")
   end
 
   def selectable_by?(user)
