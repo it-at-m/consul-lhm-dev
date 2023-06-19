@@ -80,6 +80,11 @@ module ProjektPhaseActions
   def milestones
   end
 
+  def projekt_notifications
+    @projekt_notification = ProjektNotification.new
+    @projekt_notifications = @projekt_phase.projekt_notifications
+  end
+
   private
 
     def projekt_phase_params
@@ -110,7 +115,7 @@ module ProjektPhaseActions
     end
 
     def set_namespace
-      @namespace = params[:controller].split('/').first
+      @namespace = params[:controller].split("/").first.to_sym
     end
 
     def registered_address_grouping_restrictions_params_to_permit

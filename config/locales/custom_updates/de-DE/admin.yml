@@ -487,6 +487,7 @@ de:
           projekt_livestreams: Livestreams
           projekt_events: Veranstaltungen
           milestones: Liste der Meilensteine
+          projekt_notifications: Benachrichtigungen
         shared:
           update_button: Speichern
         phase_tab_name: Name in Tab
@@ -564,6 +565,8 @@ de:
           page_title: Livestreams
         projekt_events:
           page_title: Veranstaltungen
+        projekt_notifications:
+          page_title: Nachricht senden
       modal_notifications:
       modal_notifications:
         index:

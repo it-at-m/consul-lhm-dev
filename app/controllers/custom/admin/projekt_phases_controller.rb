@@ -8,13 +8,6 @@ class Admin::ProjektPhasesController < Admin::BaseController
     redirect_to edit_admin_projekt_path(@projekt.id), notice: t("admin.projekt_phase.create.notice")
   end
 
-  def edit
-    debugger
-    @registered_address_groupings = RegisteredAddress::Grouping.all
-    @individual_groups = IndividualGroup.visible
-    super
-  end
-
   def update
     super
   end
