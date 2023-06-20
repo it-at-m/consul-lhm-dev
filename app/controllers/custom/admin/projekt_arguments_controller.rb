@@ -1,11 +1,11 @@
 class Admin::ProjektArgumentsController < Admin::BaseController
   include ImageAttributes
 
-  before_action :set_projekt
-  before_action :set_namespace, except: :destroy
+  before_action :set_projekt_phase, :set_namespace
 
   def create
     @projekt_argument = ProjektArgument.new(projekt_argument_params)
+    @projekt_argument.projekt_phase = @projekt_phase
 
     if should_authorize_projekt_manager?
       authorize! :create, @projekt_argument
@@ -47,23 +47,19 @@ class Admin::ProjektArgumentsController < Admin::BaseController
   private
 
     def projekt_argument_params
-      params.require(:projekt_argument).permit(:projekt_phase_id, :name, :party, :pro, :position,
+      params.require(:projekt_argument).permit(:name, :party, :pro, :position,
                                                :note, image_attributes: image_attributes)
     end
 
-    def set_projekt
-      @projekt = Projekt.find(params[:projekt_id])
+    def set_projekt_phase
+      @projekt_phase = ProjektPhase.find(params[:projekt_phase_id])
     end
 
     def set_namespace
-      @namespace = params[:projekt_argument][:namespace]
+      @namespace = params[:controller].split("/")[0].to_sym
     end
 
     def redirect_path(projekt)
-      if @namespace == "projekt_management"
-        edit_projekt_management_projekt_path(projekt) + "#tab-projekt-arguments"
-      else
-        edit_admin_projekt_path(projekt) + "#tab-projekt-arguments"
-      end
+      polymorphic_path([@namespace, @projekt_phase], action: "projekt_arguments")
     end
 end

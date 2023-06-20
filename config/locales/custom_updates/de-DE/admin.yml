@@ -488,6 +488,7 @@ de:
           projekt_events: Veranstaltungen
           milestones: Liste der Meilensteine
           projekt_notifications: Benachrichtigungen
+          projekt_arguments: Liste von Stimmen
         shared:
           update_button: Speichern
         phase_tab_name: Name in Tab
@@ -567,6 +568,9 @@ de:
           page_title: Veranstaltungen
         projekt_notifications:
           page_title: Nachricht senden
+        projekt_arguments:
+          page_title: Stimmen
+          send_notifications_button: Benachrichtigungen senden
       modal_notifications:
       modal_notifications:
         index:

@@ -17,6 +17,7 @@ namespace :admin do
       get :projekt_events
       get :milestones
       get :projekt_notifications
+      get :projekt_arguments
     end
 
     resources :projekt_labels, except: %i[index show]
@@ -40,6 +41,12 @@ namespace :admin do
     resources :milestones, controller: "projekt_phase_milestones", except: [:index, :show]
     resources :progress_bars, controller: "projekt_phase_progress_bars"
     resources :projekt_notifications, only: [:create, :update, :destroy]
+    resources :projekt_arguments, only: [:create, :update, :destroy] do
+      collection do
+        post :send_notifications
+      end
+    end
+
   end
   resources :projekt_phase_settings, only: [:update]
 

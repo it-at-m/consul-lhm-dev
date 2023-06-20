@@ -85,6 +85,12 @@ module ProjektPhaseActions
     @projekt_notifications = @projekt_phase.projekt_notifications
   end
 
+  def projekt_arguments
+    @projekt_argument = ProjektArgument.new
+    @projekt_arguments_pro = @projekt_phase.projekt_arguments.pro
+    @projekt_arguments_cons = @projekt_phase.projekt_arguments.cons
+  end
+
   private
 
     def projekt_phase_params
