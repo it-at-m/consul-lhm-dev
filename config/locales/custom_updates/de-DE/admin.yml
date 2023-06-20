@@ -483,9 +483,9 @@ de:
           map: Karte
           projekt_labels: Labels
           sentiments: Sentimente
-          projekt_questions: Kurzumfrage      
-          projekt_livestreams: Livestreams
-          projekt_events: Veranstaltungen
+          projekt_questions: Liste der Kurzumfragen
+          projekt_livestreams: Liste der Livestreams
+          projekt_events: Liste von Veranstaltungen
           milestones: Liste der Meilensteine
           projekt_notifications: Benachrichtigungen
           projekt_arguments: Liste von Stimmen
