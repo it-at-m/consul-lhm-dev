@@ -84,7 +84,10 @@ class ProjektPhase < ApplicationRecord
   end
 
   def self.model_name
-    ActiveModel::Name.new(self, nil, "ProjektPhase")
+    mname = super
+    mname.instance_variable_set(:@route_key, "projekt_phases")
+    mname.instance_variable_set(:@singular_route_key, "projekt_phase")
+    mname
   end
 
   def selectable_by?(user)

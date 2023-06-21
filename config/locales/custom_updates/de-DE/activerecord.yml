@@ -28,6 +28,19 @@ de:
       projekt_label:
         one: Label
         other: Labels
+      projekt_phase/comment_phase: Kommentare
+      projekt_phase/debate_phase: Diskussionen
+      projekt_phase/proposal_phase: Vorschläge
+      projekt_phase/voting_phase: Abstimmung
+      projekt_phase/budget_phase: Budget
+      projekt_phase/event_phase: Veranstaltungen
+      projekt_phase/argument_phase: Stimmen
+      projekt_phase/milestone_phase: Meilensteine
+      projekt_phase/question_phase: Kurzumfrage
+      projekt_phase/livestream_phase: Livestreams
+      projekt_phase/projekt_notification_phase: Benachrichtigungen
+      projekt_phase/legislation_phase: Textbearbeitung
+      projekt_phase/newsfeed_phase: News-Feed
     errors:
       models:
         proposal:
@@ -50,8 +63,11 @@ de:
               invalid: Bitte den Farbwert als HEX-code eingeben
     attributes:
       projekt:
+        total_duration_start: Anfangsdatum
+        total_duration_end: Enddatum
         show_start_date_in_frontend: Im Frontend angezeigt
         show_end_date_in_frontend: Im Frontend angezeigt
+        description: Projektbeschreibung
       poll/answer:
         open_answer_text: Offene Antwort
       poll/question/answer:
@@ -165,3 +181,6 @@ de:
         starts_at: Startet um
         platform: Portal
         description: Beschreibung
+      projekt_phase:
+        start_date: Anfangsdatum
+        end_date: Enddatum

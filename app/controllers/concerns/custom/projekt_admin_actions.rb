@@ -12,7 +12,7 @@ module ProjektAdminActions
 
   def edit
     @projekt = Projekt.find(params[:id])
-    @namespace = params[:controller].split("/").first
+    @namespace = params[:controller].split("/").first.to_sym
 
     if @projekt.map_location.nil?
       @projekt.send(:create_map_location)

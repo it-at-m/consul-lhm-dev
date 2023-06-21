@@ -183,36 +183,27 @@ de:
       projekts:
         destroy: Löschen
         edit:
-          description: Projektbeschreibung
-          design:
-            icon: Icon
-            submit_button: Submit
-          projekt_activated: Projekt aktiv
-          projekt_active:
-            "no": Nein
-            "yes": Ja
-          projekt_managers_tab:
-            name: Projektmanager*innen
-          projekt_map_tab:
-            name: Ind. Kartenkonfiguration
-          projekt_page: Projektseite
-          projekt_phase_limitation: Beschränkung
-          projekt_phases: Projektphasen
-          projekt_phases_tab:
-            actions: Aktionen
-            activate: Aktiviert
+          # design:
+          #   icon: Icon
+          #   submit_button: Submit
+          projekt_configuration_tab:
+            name: Projektkonfiguration
+            main_block_title: Projektstatus
+            page_block_title: Projektseite
+            information_block_title: Projektinformationen
             affiliation: Gebietszuordnung
             projekt_individual_group_values: Sichbarkeitseinschränkung auf Gruppen
-            beginning: Anfangsdatum
-            budget_phase: Budget
-            copy_phase_link: Link für Tab abrufen
-            comment_phase: Kommentare
-            debate_phase: Diskussionen
-            end_date: Enddatum
-            ending: Enddatum
-            event_phase: Veranstaltungen
-            hint: Einstellungen gelten nur für Tab-Info in der Fußzeile
-            information_block_title: Projektinformationen
+          projekt_phases_tab:
+            name: Projektphasen
+            phases_block_title: Projektphasen
+            table_headings:
+              phase_name: Phase
+              start_date: Anfangsdatum
+              end_date: Enddatum
+              limitations: Beschränkung
+              default_tab: Standard
+              activated: Aktiviert
+              edit_link: Bearbeiten
             link:
               question_phase: Zu den Kurzumfragen
               voting_phase: Zu den Abstimmungen
@@ -224,37 +215,20 @@ de:
               event_phase: Zu den Veranstaltungen
               livestream_phase: Zu den Livestreams
               newsfeed_phase: Zu den News-Feeds
-            main_block_title: Projektstatus
-            milestone_phase: Meilensteine
-            name: Projekteinstellungen
-            newsfeed_phase: News-Feed
-            page_block_title: Projektseite
-            phase_name: Phase
-            phases_block_title: Projektphasen
-            projekt_duration: Projektinformationen
-            projekt_notification_phase: Benachrichtigungen
-            proposal_phase: Vorschläge
-            question_phase: Kurzumfrage
-            geo_restriction_title: Gebietsbeschränkung
-            extended_geo_restriction_title: Zusatzliche individuelle Gebietsbeschränkungen
-            start_date: Anfangsdatum
-            standard_element: Standardelement
-            voting_manage: Abstimmungen verwalten
-            voting_phase: Abstimmung
-            livestream_phase: Livestreams
-            legislation_phase: Textbearbeitung
             restriction_names:
               age: Alter
               geo: Geo
               verification: Verifizierung
-            table_headings:
-              phase_name: Phase
-              start_date: Anfangsdatum
-              end_date: Enddatum
-              limitations: Beschränkung
-              default_tab: Standard
-              activated: Aktiviert
-              edit_link: Bearbeiten
+            copy_phase_link: Link für Tab abrufen
+          projekt_settings_tab:
+            name: Projektfunktionen
+            general_settings: Allgemein
+            select_an_element: auswählen
+            sidebar_settings: Seitenleiste
+          projekt_managers_tab:
+            name: Projektmanager*innen
+          projekt_map_tab:
+            name: Ind. Kartenkonfiguration
           projekt_sdg_tab:
             name: SDGs & Tags
             sdgs: SDGs
@@ -263,19 +237,6 @@ de:
             tags_enable: Bitte aktivieren Sie Tags in Projektfunktionen Tab
             tags_hint: Klicken Sie auf einen oder mehrere Tags, um Sie für dieses Projekt dem/der Nutzer:in anzubieten.
             refresh_page: Sollten Sie die Funktionen bereits aktiviert haben, sie werden aber hier nicht angezeigt, dann laden Sie diese Seite bitte neu.
-          projekt_settings_tab:
-            name: Projektfunktionen
-            general_settings: Allgemein
-            select_an_element: auswählen
-            sidebar_settings: Seitenleiste
-          projekt_status: Projektstatus
-          setting_indicator:
-            "no": Nein
-            "yes": Ja
-          show_footer: Projekt Fußzeile
-          show_in_navigation: null
-          show_in_navigation_checkbox: Projekt in Navigation anzeigen
-          update: Projekteinstellungen aktualisieren
         edit_projekt: Editieren
         index:
           add_cards: Kacheln erstellen/bearbeiten
