@@ -29,7 +29,7 @@ namespace :admin do
       end
     end
     resources :projekt_livestreams, only: [:create, :update, :destroy] do
-      collection do
+      member do
         post :send_notifications
       end
     end

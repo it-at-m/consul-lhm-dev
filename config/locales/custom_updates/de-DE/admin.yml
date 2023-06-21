@@ -195,22 +195,6 @@ de:
             name: Projektmanager*innen
           projekt_map_tab:
             name: Ind. Kartenkonfiguration
-          projekt_livestreams_tab:
-            phases_label: Phasen
-            submit_button: Livestream erstellen
-            name: Livestreams
-            page_title: Livestreams
-            all_livestreams: Alle Livestreams
-            livestream:
-              url: Livestream link
-              title: Titel
-              description: Bezeichnung
-              starts_at: Startet um
-              platform: Portal
-              add_question: Frage hinzufügen
-              questoins: Kurzumfragen
-            send_notifications_button: Benachrichtigungen senden
-            notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
           projekt_page: Projektseite
           projekt_phase_limitation: Beschränkung
           projekt_phases: Projektphasen
@@ -271,10 +255,6 @@ de:
               default_tab: Standard
               activated: Aktiviert
               edit_link: Bearbeiten
-          projekt_questions_tab:
-            phases_label: Phasen
-            name: Kurzumfragen
-            title: Fragen
           projekt_sdg_tab:
             name: SDGs & Tags
             sdgs: SDGs
@@ -284,21 +264,8 @@ de:
             tags_hint: Klicken Sie auf einen oder mehrere Tags, um Sie für dieses Projekt dem/der Nutzer:in anzubieten.
             refresh_page: Sollten Sie die Funktionen bereits aktiviert haben, sie werden aber hier nicht angezeigt, dann laden Sie diese Seite bitte neu.
           projekt_settings_tab:
-            budget_settings: Budgets
-            debates_settings: Diskussion
-            event_phase: Veranstaltungen
-            event_phase_description: Aktivieren Sie Veranstaltungen in der Fußzeile eines Projekts
-            general_settings: Allgemein
-            milestone_phase: Meilensteine
-            milestone_phase_description: Aktiviert die Meilensteinfunktion in der Fußzeile eines Projektes
-            milestone_settings: Einstellungen
             name: Projektfunktionen
-            newsfeed_phase: News-Feed
-            newsfeed_phase_description: Aktiviert den News-Feed in der Fußzeile eines Projekts
-            polls_settings: Abstimmungen
-            projekt_notification_phase: Benachrichtigungen
-            projekt_notification_phase_description: Aktiviert die Benachrichtigungsfunktion in der Fußzeile eines Projekts
-            proposals_settings: Vorschläge
+            general_settings: Allgemein
             select_an_element: auswählen
             sidebar_settings: Seitenleiste
           projekt_status: Projektstatus
@@ -520,8 +487,6 @@ de:
           new:
             title_livestream: Frage für Livestream erstellen    
             title: Frage erstellen
-        projekt_livestreams:
-          page_title: Livestreams
         projekt_events:
           page_title: Veranstaltungen
         projekt_notifications:
@@ -548,7 +513,13 @@ de:
           page_title: Veranstaltungen
           send_notifications_button: Benachrichtigungen senden
           notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
-      modal_notifications:
+        projekt_livestreams:
+          page_title: Livestreams
+          all_livestreams: Alle Livestreams
+          add_question: Frage hinzufügen
+          questions: Kurzumfragen
+          send_notifications_button: Benachrichtigungen senden
+          notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
       modal_notifications:
         index:
           create: Erstellen

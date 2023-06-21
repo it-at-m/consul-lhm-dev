@@ -11,29 +11,29 @@
     <% end %>
 
     <p>
-      <strong><%= t("custom.admin.projekts.edit.projekt_livestreams_tab.livestream.url") %>:</strong>
+      <strong><%= ProjektLivestream.human_attribute_name(:url) %>:</strong>
       <%= link_to(livestream.url, livestream.url) %>
     </p>
     <% if livestream.title.present? %>
       <p>
-        <strong><%= t("custom.admin.projekts.edit.projekt_livestreams_tab.livestream.title") %>:</strong>
+        <strong><%= ProjektLivestream.human_attribute_name(:title) %>:</strong>
         <%= livestream.title %>
       </p>
     <% end %>
     <p>
-      <strong><%= t("custom.admin.projekts.edit.projekt_livestreams_tab.livestream.platform") %>:</strong>
+      <strong><%= ProjektLivestream.human_attribute_name(:platform) %>:</strong>
       <%= livestream.platform_formated %>
     </p>
     <p>
     <% if livestream.starts_at.present? %>
       <p>
-        <strong><%= t("custom.admin.projekts.edit.projekt_livestreams_tab.livestream.starts_at") %>:</strong>
+        <strong><%= ProjektLivestream.human_attribute_name(:starts_at) %>:</strong>
         <%= livestream.starts_at&.strftime("%d.%m.%y %H:%m") %>
       </p>
     <% end %>
     <% if livestream.description.present? %>
       <p>
-        <strong><%= t("custom.admin.projekts.edit.projekt_livestreams_tab.livestream.description") %>:</strong>
+        <strong><%= ProjektLivestream.human_attribute_name(:description) %>:</strong>
         <%= truncate(livestream.description, length: 500) %>
       </p>
     <% end %>
@@ -43,11 +43,11 @@
     <%= render partial: "custom/admin/projekt_phases/projekt_livestreams/form", locals: { url: admin_projekt_phase_projekt_livestream_path(@projekt_phase, livestream), projekt_phase: @projekt_phase, livestream: livestream } %>
   </div>
 
-  <%#= link_to t("custom.admin.projekts.edit.projekt_livestreams_tab.send_notifications_button"), send_notifications_admin_projekt_projekt_livestream_path(@projekt.id, livestream.id, params: { projekt_argument: { namespace: @namespace }}), method: :post, class: "margin-right" %>
+  <%= link_to t("custom.admin.projekt_phases.projekt_livestreams.send_notifications_button"), send_notifications_admin_projekt_phase_projekt_livestream_path(@projekt_phase, livestream), method: :post, class: "margin-right" %>
 
   <% if livestream.projekt_questions.any? %>
     <h3 class="admin-projekt-livestream-projekt-questions-title">
-      <%= t("custom.admin.projekts.edit.projekt_livestreams_tab.livestream.questions") %>
+      <%= t("custom.admin.projekt_phases.projekt_livestreams.questions") %>
     </h3>
   <% end %>
 
@@ -71,6 +71,6 @@
     </div>
   <% end %>
 
-  <%= link_to t("custom.admin.projekts.edit.projekt_livestreams_tab.livestream.add_question"), new_admin_projekt_phase_projekt_question_path(@projekt_phase, projekt_livestream_id: livestream.id), class: "button" %>
+  <%= link_to t("custom.admin.projekt_phases.projekt_livestreams.add_question"), new_admin_projekt_phase_projekt_question_path(@projekt_phase, projekt_livestream_id: livestream.id), class: "button" %>
   <hr>
 </div>

@@ -159,3 +159,9 @@ de:
         party: Partei
         position: Position
         note:  Stimme
+      projekt_livestream:
+        url: Livestream link
+        title: Titel
+        starts_at: Startet um
+        platform: Portal
+        description: Beschreibung
