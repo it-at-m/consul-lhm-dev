@@ -3,16 +3,3 @@
 
 <h2 class='margin-top-25'><%= t('custom.admin.projekts.edit.projekt_settings_tab.sidebar_settings') %></h2>
 <%= render partial: "admin/projekts/edit/projekt_settings/features_table", locals: { features: @projekt_features_sidebar } %>
-
-<h2 class='margin-top-25'><%= t('custom.admin.projekts.edit.projekt_settings_tab.debates_settings') %></h2>
-<%= render partial: "admin/projekts/edit/projekt_settings/features_table", locals: { features: @projekt_features_debates } %>
-
-<h2 class='margin-top-25'><%= t('custom.admin.projekts.edit.projekt_settings_tab.proposals_settings') %></h2>
-<%= render partial: "admin/projekts/edit/projekt_settings/features_table", locals: { features: @projekt_features_proposals } %>
-<%= render partial: "admin/projekts/edit/projekt_settings/options_table", locals: { options: @projekt_options_proposals, tab: '#tab-projekt-settings' } %>
-
-<h2 class='margin-top-25'><%= t('custom.admin.projekts.edit.projekt_settings_tab.polls_settings') %></h2>
-<%= render partial: "admin/projekts/edit/projekt_settings/features_table", locals: { features: @projekt_features_polls } %>
-
-<h2 class='margin-top-25'><%= t('custom.admin.projekts.edit.projekt_settings_tab.budget_settings') %></h2>
-<%= render partial: "admin/projekts/edit/projekt_settings/features_table", locals: { features: @projekt_features_budgets } %>

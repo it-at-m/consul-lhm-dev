@@ -151,3 +151,11 @@ de:
         datetime: Datum
         end_datetime: Endtermin
         weblink: Weblink
+      projekt_notification:
+        title: Titel
+        body: Nachricht
+      projekt_argument:
+        name: Name
+        party: Partei
+        position: Position
+        note:  Stimme

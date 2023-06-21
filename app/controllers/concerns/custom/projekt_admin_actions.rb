@@ -26,35 +26,10 @@ module ProjektAdminActions
     all_settings = ProjektSetting.where(projekt: @projekt).group_by(&:type)
     all_projekt_features = all_settings["projekt_feature"].group_by(&:projekt_feature_type)
     @projekt_features_main = all_projekt_features["main"]
-
     @projekt_features_general = all_projekt_features["general"]
     @projekt_features_sidebar = all_projekt_features["sidebar"]
-    @projekt_features_footer = all_projekt_features["footer"]
-    @projekt_features_debates = all_projekt_features["debates"]
-    @projekt_features_proposals = all_projekt_features["proposals"]
-    @projekt_options_proposals = all_projekt_features["proposal_options"]
-    @projekt_features_polls = all_projekt_features["polls"]
-    @projekt_features_budgets = all_projekt_features["budgets"]
-    @projekt_features_milestones = all_projekt_features["milestones"]
-
-    @projekt_newsfeed_settings = all_settings["projekt_newsfeed"]
 
     @projekt_managers = ProjektManager.all
-
-    @projekt_notification = ProjektNotification.new
-    @projekt_notifications = @projekt.projekt_notifications.order(created_at: :desc)
-
-    @projekt_argument = ProjektArgument.new
-    @projekt_arguments_pro = @projekt.projekt_arguments.pro.order(created_at: :desc)
-    @projekt_arguments_cons = @projekt.projekt_arguments.cons.order(created_at: :desc)
-
-    @projekt_event = ProjektEvent.new
-    @projekt_events = @projekt.projekt_events.order(created_at: :desc)
-
-    @projekt_livestream = ProjektLivestream.new
-    @projekt_livestreams = @projekt.projekt_livestreams
-
-    @projekt_labels = @projekt.projekt_labels
 
     @default_footer_tab_setting = ProjektSetting.find_by(
       projekt: @projekt,

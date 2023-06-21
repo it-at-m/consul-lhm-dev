@@ -191,52 +191,10 @@ de:
           projekt_active:
             "no": Nein
             "yes": Ja
-          projekt_events_tab:
-            phases_label: Phasen
-            button: Event erstellen
-            event_created_at: Hergestellt in
-            event_datetime: Datum
-            event_end_datetime: Endtermin
-            event_location: Veranstaltungsort
-            event_title: Veranstaltungstitel
-            event_weblink: Weblink
-            name: Veranstaltungen
-            page_title: Veranstaltungen
-            send_notifications_button: Benachrichtigungen senden
-            notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
           projekt_managers_tab:
             name: Projektmanager*innen
           projekt_map_tab:
             name: Ind. Kartenkonfiguration
-          projekt_milestones_tab:
-            name: Fortschritt & Meilensteine
-          projekt_news_tab:
-            name: News-Feed
-          projekt_notifications_tab:
-            phases_label: Phasen
-            button: Nachricht senden
-            name: Benachrichtigungen
-            notification_body: Nachricht
-            notification_title: Titel
-            page_title: Nachricht senden
-            title: Nachricht senden
-          projekt_arguments_tab:
-            button: Stimme erlstellen
-            name: Stimmen
-            phases_label: Phasen
-            argument_type_label: Argument
-            argument_name: Name
-            argument_pro: Pro
-            argument_cons: Contra
-            argument_party: Partei
-            argument_position: Position
-            argument_note: Stimme
-            argument_image: Bild
-            argument_created_at: Created at
-            page_title: Stimmen
-            title: Stimmen
-            send_notifications_button: Benachrichtigungen senden
-            notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
           projekt_livestreams_tab:
             phases_label: Phasen
             submit_button: Livestream erstellen
@@ -568,9 +526,28 @@ de:
           page_title: Veranstaltungen
         projekt_notifications:
           page_title: Nachricht senden
+          button: Nachricht senden
         projekt_arguments:
           page_title: Stimmen
           send_notifications_button: Benachrichtigungen senden
+          notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
+          argument_pro: Pro
+          argument_cons: Contra
+          button: Stimme erlstellen
+          argument_image: Bild
+        projekt_events:
+          button: Event erstellen
+          event_created_at: Hergestellt in
+          event_datetime: Datum
+          event_end_datetime: Endtermin
+          event_location: Veranstaltungsort
+          event_title: Veranstaltungstitel
+          event_weblink: Weblink
+          event_description: Beschreibung
+          name: Veranstaltungen
+          page_title: Veranstaltungen
+          send_notifications_button: Benachrichtigungen senden
+          notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
       modal_notifications:
       modal_notifications:
         index:

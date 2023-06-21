@@ -26,9 +26,7 @@
     <%= f.text_area :description, rows: 10, id: "projekt-event-description-#{event.id}", class: "html-area #{ck_editor_class(current_user)}" %>
   </div>
 
-  <%= f.hidden_field :tab, value: "#tab-projekt-events" %>
-
   <div>
-    <%= f.submit(t("custom.admin.projekts.edit.projekt_events_tab.button"), class: "button") %>
+    <%= f.submit(t("custom.admin.projekt_phases.projekt_events.button"), class: "button") %>
   </div>
 <% end %>

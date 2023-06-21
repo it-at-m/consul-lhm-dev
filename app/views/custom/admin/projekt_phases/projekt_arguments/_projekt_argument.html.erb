@@ -11,19 +11,19 @@
 
     <div class="projekt-argument-text-column">
       <p class="projekt-argument-row">
-        <b><%= t("custom.admin.projekts.edit.projekt_arguments_tab.argument_name") %>:</b>
+        <b><%= ProjektArgument.human_attribute_name(:name) %>:</b>
         <%= projekt_argument.name %>
       </p>
       <p class="projekt-argument-row">
-        <b><%= t("custom.admin.projekts.edit.projekt_arguments_tab.argument_party") %>:</b>
+        <b><%= ProjektArgument.human_attribute_name(:party) %>:</b>
         <%= projekt_argument.party %>
       </p>
       <p class="projekt-argument-row">
-        <b><%= t("custom.admin.projekts.edit.projekt_arguments_tab.argument_position") %>:</b>
+        <b><%= ProjektArgument.human_attribute_name(:position) %>:</b>
         <%= projekt_argument.position %>
       </p>
       <p class="projekt-argument-row">
-        <b><%= t("custom.admin.projekts.edit.projekt_arguments_tab.argument_note") %>:</b>
+        <b><%= ProjektArgument.human_attribute_name(:note) %>:</b>
         <%= projekt_argument.note %>
       </p>
     </div>
