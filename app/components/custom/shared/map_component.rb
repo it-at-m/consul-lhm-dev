@@ -2,7 +2,7 @@ class Shared::MapComponent < ApplicationComponent
   attr_reader :mappable, :map_location, :parent_class, :editable,
               :process_coordinates, :projekt, :show_admin_shape
   delegate :map_location_latitude, :map_location_longitude, :map_location_zoom,
-           :map_location_input_id, :projekt_feature?, to: :helpers
+           :map_location_input_id, :projekt_feature?, :projekt_phase_feature?, to: :helpers
 
   def initialize(
     mappable: nil,
@@ -92,10 +92,10 @@ class Shared::MapComponent < ApplicationComponent
         Setting["deficiency_reports.enable_geoman_controls_in_maps"].present?
 
       elsif projekt.present? && parent_class == "proposal"
-        projekt_feature?(projekt, "proposals.enable_geoman_controls_in_maps")
+        projekt_phase_feature?(mappable.projekt_phase, "enable_geoman_controls_in_maps")
 
       elsif projekt.present? && parent_class == "budget_investment"
-        projekt_feature?(projekt, "budgets.enable_geoman_controls_in_maps")
+        projekt_phase_feature?(mappable.projekt_phase, "enable_geoman_controls_in_maps")
 
       else
         false
