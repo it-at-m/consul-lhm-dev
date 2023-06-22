@@ -6,9 +6,17 @@ module ProjektPhaseActions
   included do
     alias_method :namespace_mappable_path, :namespace_projekt_phase_path
 
-    before_action :set_projekt_phase, :set_namespace, :authorize_nav_bar_action
+    before_action :set_projekt_phase, :authorize_nav_bar_action, except: :create
+    before_action :set_namespace
 
     helper_method :namespace_projekt_phase_path, :namespace_mappable_path
+  end
+
+  def create
+    @projekt = Projekt.find(params[:projekt_id])
+    ProjektPhase.create!(projekt_phase_params)
+
+    redirect_to edit_admin_projekt_path(@projekt.id, anchor: "tab-projekt-phases"), notice: t("admin.projekt_phase.create.notice")
   end
 
   def update
@@ -100,6 +108,7 @@ module ProjektPhaseActions
 
       params.require(:projekt_phase).permit(
         translation_params(ProjektPhase),
+        :projekt_id, :type,
         :active, :start_date, :end_date,
         :verification_restricted, :age_restriction_id,
         :geozone_restricted, :registered_address_grouping_restriction,

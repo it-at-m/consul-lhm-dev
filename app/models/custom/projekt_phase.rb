@@ -59,7 +59,7 @@ class ProjektPhase < ApplicationRecord
 
   validates :projekt, presence: true
 
-  default_scope { order(given_order: :asc) }
+  default_scope { order(:given_order, :id) }
 
   scope :regular_phases, -> { where.not(type: REGULAR_PROJEKT_PHASES) }
   scope :special_phases, -> { where(type: REGULAR_PROJEKT_PHASES) }

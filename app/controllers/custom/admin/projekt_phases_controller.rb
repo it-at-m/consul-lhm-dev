@@ -2,10 +2,7 @@ class Admin::ProjektPhasesController < Admin::BaseController
   include ProjektPhaseActions
 
   def create
-    @projekt = Projekt.find(params[:projekt_id])
-    ProjektPhase.create!(projekt_phase_params)
-
-    redirect_to edit_admin_projekt_path(@projekt.id), notice: t("admin.projekt_phase.create.notice")
+    super
   end
 
   def update

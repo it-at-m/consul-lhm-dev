@@ -70,7 +70,7 @@ class Projekt < ApplicationRecord
   has_many :subscribers, through: :subscriptions, source: :user
 
   before_validation :set_default_color
-  after_create :create_corresponding_page, :set_order, :ensure_projekt_phases, :create_default_settings,
+  after_create :create_corresponding_page, :set_order, :create_default_settings,
     :create_map_location
   around_update :update_page
   after_save do
@@ -401,12 +401,6 @@ class Projekt < ApplicationRecord
     end
   end
 
-  def self.ensure_projekts_phases
-    all.find_each do |projekt|
-      projekt.send(:ensure_projekt_phases)
-    end
-  end
-
   def title
     name
   end
@@ -511,22 +505,6 @@ class Projekt < ApplicationRecord
       else
         update!(order_number: 1)
       end
-    end
-
-    def ensure_projekt_phases
-      projekt.debate_phases << ProjektPhase::DebatePhase.create if projekt.debate_phases.empty?
-      projekt.proposal_phases << ProjektPhase::ProposalPhase.create if projekt.proposal_phases.empty?
-      projekt.budget_phases << ProjektPhase::BudgetPhase.create if projekt.budget_phases.empty?
-      projekt.comment_phases << ProjektPhase::CommentPhase.create if projekt.comment_phases.empty?
-      projekt.question_phases << ProjektPhase::QuestionPhase.create if projekt.question_phases.empty?
-      projekt.voting_phases << ProjektPhase::VotingPhase.create if projekt.voting_phases.empty?
-      projekt.milestone_phases << ProjektPhase::MilestonePhase.create if projekt.milestone_phases.empty?
-      projekt.projekt_notification_phases << ProjektPhase::ProjektNotificationPhase.create if projekt.projekt_notification_phases.empty?
-      projekt.newsfeed_phases << ProjektPhase::NewsfeedPhase.create if projekt.newsfeed_phases.empty?
-      projekt.event_phases << ProjektPhase::EventPhase.create if projekt.event_phases.empty?
-      projekt.argument_phases << ProjektPhase::ArgumentPhase.create if projekt.argument_phases.empty?
-      projekt.livestream_phases << ProjektPhase::LivestreamPhase.create if projekt.livestream_phases.empty?
-      projekt.legislation_phases << ProjektPhase::LegislationPhase.create if projekt.legislation_phases.empty?
     end
 
     def swap_order_numbers_up

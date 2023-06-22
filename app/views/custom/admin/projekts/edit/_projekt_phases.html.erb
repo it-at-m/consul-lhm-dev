@@ -1,5 +1,13 @@
 <h2><%= t("custom.admin.projekts.edit.projekt_phases_tab.phases_block_title") %></h2>
 
+<div>
+  <%= form_for(ProjektPhase.new, url: admin_projekt_projekt_phases_path(@projekt)) do |f| %>
+    <%= f.hidden_field :projekt_id, value: @projekt.id %>
+    <%= f.select :type, ProjektPhase::PROJEKT_PHASES_TYPES.map { |type| [type.constantize.model_name.human, type] }, {}, { class: "form-control" } %>
+    <%= f.submit %>
+  <% end %>
+</div>
+
 <table class='edit-projekt margin-top'>
   <thead>
     <%= render partial: "custom/admin/projekts/edit/projekt_phases/projekt_phase_table_header" %>
@@ -13,11 +21,3 @@
     <% end %>
   </tbody>
 </table>
-
-<div>
-  <%= form_for(ProjektPhase.new, url: admin_projekt_projekt_phases_path(@projekt)) do |f| %>
-    <%= f.hidden_field :projekt_id, value: @projekt.id %>
-    <%= f.select :type, ProjektPhase::PROJEKT_PHASES_TYPES.map { |type| [type, type] }, {}, { class: "form-control" } %>
-    <%= f.submit %>
-  <% end %>
-</div>
