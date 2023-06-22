@@ -18,10 +18,10 @@ class ProjektPhaseSetting < ApplicationRecord
           "feature.allow_attached_image": "active",
           "feature.allow_attached_documents": "",
           "feature.only_admins_create_debates": "",
+          "feature.allow_downvoting": "active",
+          "feature.show_in_sidebar_filter": "active",
           "feature.allow_voting": "active",
-          "feature.allow_downvoting": "active" #,
-          # "feature.show_in_sidebar_filter": "active",
-          # "feature.hide_projekt_selector": 'active',
+          "feature.hide_projekt_selector": "active"
         },
 
         "ProjektPhase::ProposalPhase" => {
@@ -37,22 +37,22 @@ class ProjektPhaseSetting < ApplicationRecord
           "feature.allow_attached_image": "active",
           "feature.allow_attached_documents": "active",
           "feature.only_admins_create_proposals": "",
-          # "feature.show_in_sidebar_filter": "active",
+          "feature.show_in_sidebar_filter": "active",
           "feature.show_map": "active",
           "feature.enable_summary": "",
-          # "feature.allow_voting": "active",
+          "feature.allow_voting": "active",
           "feature.enable_external_video": "active",
           "feature.enable_geoman_controls_in_maps": "active",
-          # "feature.hide_projekt_selector": "active",
+          "feature.hide_projekt_selector": "active",
           "option.votes_for_proposal_success": 10000
         },
 
         "ProjektPhase::VotingPhase" => {
           "feature.intermediate_poll_results_for_admins": "active",
           "feature.show_comments": "active",
-          # "feature.additional_information": "active",
+          "feature.additional_information": "active",
           "feature.additional_info_for_each_answer": "active",
-          "feature.show_in_sidebar_filter": "active",
+          "feature.show_in_sidebar_filter": "active"
         },
 
         "ProjektPhase::BudgetPhase" => {
@@ -64,9 +64,9 @@ class ProjektPhaseSetting < ApplicationRecord
           "feature.show_implementation_option_fields": "active",
           "feature.show_user_cost_estimate": "active",
           "feature.show_comments": "active",
-          # "feature.enable_investment_milestones_tab": "active",
+          "feature.enable_investment_milestones_tab": "active",
           "feature.allow_attached_documents": "active",
-          # "feature.only_admins_create_investment_proposals": "",
+          "feature.only_admins_create_investment_proposals": "",
           "feature.show_map": "active",
           "feature.show_results_after_first_vote": "",
           "feature.enable_geoman_controls_in_maps": "active",
