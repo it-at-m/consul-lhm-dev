@@ -1,10 +1,11 @@
 module ProjektPhaseSettingsHelper
-  def projekt_feature?(projekt, feature)
-    setting = ProjektSetting.find_by(projekt: projekt, key: "projekt_feature.#{feature}")
-    (setting && (setting.value == 'active' || setting.value == 't'  )) ? true : false
+  def projekt_phase_feature?(projekt_phase, feature_key)
+    setting = projekt_phase.settings.find_by(key: "feature.#{feature_key}")
+
+    (setting.present? && (setting.value == "active" || setting.value == "t"))
   end
 
-  def projekt_option(projekt, option)
-    ProjektSetting.find_by(projekt: projekt, key: "projekt_feature.#{option}").value
+  def projekt_phase_option(projekt_phase, option_key)
+    projekt_phase.settings.find_by(key: "option.#{option_key}").value
   end
 end
