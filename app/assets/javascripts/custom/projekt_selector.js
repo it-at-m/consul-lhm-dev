@@ -41,7 +41,7 @@
       if ( $selectedProjekt.data('projektSelectable') ) {
         App.ProjektSelector.resetSelectedProjectStyles();
 
-        $('[id$="projekt_id"]').val(projektId)
+        // $('[id$="projekt_id"]').val(projektId)
 
         $selectedProjekt.css('background-color', '#004A83')
         $selectedProjekt.css('color', '#FFF')
@@ -55,23 +55,195 @@
         App.ProjektSelector.addNextProjektPlaceholder($nextProejektSelector, "(verpflichtend)")
       }
 
-      if ( $selectedProjekt.data('showMap') ) {
-        $('#map-container').show();
-        App.ProjektSelector.replaceProjektMapOnProposalCreation($selectedProjekt)
-      } else {
-        $('#map-container').hide();
+      App.ProjektSelector.updatePhasesSelector(projektId)
+
+      // reset form when projekt changes TODO
+      $('[id$="projekt_phase_id"]').val('')
+      $('#map-container').hide();
+    },
+
+    selectProjektPhase: function($projektPhase) {
+      var projektPhaseId = $projektPhase.data('projektPhaseId')
+
+      $('[id$="projekt_phase_id"]').val(projektPhaseId)
+
+      updateProjektSelectorHint(projektPhaseId);
+      updateFormHeading(projektPhaseId);
+      updateActivePhaseSelector(projektPhaseId);
+      replaceProjektMapOnProposalCreation($projektPhase);
+      toggleImageAttachment($projektPhase);
+      toggleDocumentAttachment($projektPhase);
+      toggleSummary($projektPhase);
+      toggleExternalVideoUrl($projektPhase);
+      updateAvailableTagsSelection($projektPhase);
+      updateAvailableSDGsSelection($projektPhase);
+      toggleExternalFieldsHeader($projektPhase);
+      updateProjektLabelSelector($projektPhase);
+
+      function updateProjektSelectorHint(projektPhaseId) {
+        var $hintElement = $('[id$="_creation_recommendations"]').first();
+        if (!$hintElement.length) {
+          return;
+        }
+
+        $.ajax("/projekt_phases/" + projektPhaseId + "/selector_hint_html", {
+          type: "GET",
+          dataType: "html",
+          success: function(data) {
+            $hintElement.html(data);
+            $(document).foundation()
+          }
+        });
       }
 
-      App.ProjektSelector.toggleImageAttachment($selectedProjekt)
-      App.ProjektSelector.toggleDocumentAttachment($selectedProjekt)
-      App.ProjektSelector.toggleSummary($selectedProjekt)
-      App.ProjektSelector.toggleExternalVideoUrl($selectedProjekt)
-      App.ProjektSelector.updateAvailableTagsSelection($selectedProjekt)
-      App.ProjektSelector.updateAvailableSDGsSelection($selectedProjekt)
-      App.ProjektSelector.toggleExternalFieldsHeader($selectedProjekt)
-      App.ProjektSelector.updateProjektLabelSelector($selectedProjekt)
-      App.ProjektSelector.updatePhasesSelector($selectedProjekt)
+      function updateFormHeading(projektPhaseId) {
+        var $header = $('header h1').first();
 
+        $.ajax("/projekt_phases/" + projektPhaseId + "/form_heading_text", {
+          type: "GET",
+          dataType: "html",
+          success: function(data) {
+            $header.text(data);
+            $(document).foundation()
+          }
+        });
+      }
+
+      function updateActivePhaseSelector(projektPhaseId) {
+        $('.projekt-phase-selector').removeClass('active');
+        $('#projekt-phase-selector-' + projektPhaseId).addClass('active');
+      }
+
+      function replaceProjektMapOnProposalCreation($projektPhase) {
+        App.Map.destroy();
+
+        if ( $projektPhase.data('showMap') ) {
+          $('#map-container').show();
+
+          $.ajax("/projekt_phases/" + $projektPhase.data('projektPhaseId') + "/map_html", {
+            type: "GET",
+            dataType: "html",
+            success: function(data) {
+              App.Map.destroy();
+              $('div.map_location.map').first().replaceWith(data)
+              App.Map.initialize();
+              App.Map.maps[0].setView([$projektPhase.data('latitude'), $projektPhase.data('longitude')], $projektPhase.data('zoom')).invalidateSize();
+            }
+          });
+        } else {
+          $('#map-container').hide();
+        }
+      }
+
+      function toggleImageAttachment($projektPhase) {
+        if ( $projektPhase.data('allowAttachedImage') ) {
+          $('#attach-image').show();
+        } else {
+          $('#attach-image #nested-image .direct-upload').remove();
+          $("#new_image_link").removeClass("hide");
+          $('#attach-image').hide();
+        }
+      }
+
+      function toggleDocumentAttachment($projektPhase) {
+        if ( $projektPhase.data('allowAttachedDocument') ) {
+          $('#attach-documents').show();
+        } else {
+          $('#attach-documents').hide();
+        }
+      }
+
+      function toggleSummary($projektPhase) {
+        if ( $projektPhase.data('showSummary') ) {
+          $('.summary-field').show();
+        } else {
+          $('.summary-field').hide();
+        }
+      }
+
+      function toggleExternalVideoUrl($projektPhase) {
+        if ( $projektPhase.data('allowVideo') ) {
+          $('#external-video-url-fields').show();
+        } else {
+          $('#external-video-url-fields').hide();
+        }
+      }
+
+      function updateAvailableTagsSelection($projektPhase) {
+        $('[id$=_tag_list_predefined]').val('')
+
+        if ( $projektPhase.data('allow-tags') ) {
+          $('#category_tags').show();
+          $('#category_tags a').show();
+
+          if ( $projektPhase.data("tag-ids") ) {
+            $('#category_tags a').each(function() {
+              if ( !$projektPhase.data("tag-ids").toString().split(',').includes($(this).data('categoryId').toString()) ) {
+                $(this).hide();
+              }
+            })
+          }
+        } else {
+          $('#category_tags').hide();
+        }
+      }
+
+      function updateAvailableSDGsSelection($projektPhase) {
+        // $('[id$=_tag_list_predefined]').val('')
+
+        if ( $projektPhase.data('allow-sdgs') ) {
+          $('#sdgs-selector').show();
+          $('#sdgs-selector label[for*=_sdg_goal_ids_]').show();
+
+          if ( $projektPhase.data("sdg-ids") ) {
+            $('#sdgs-selector label[for*=_sdg_goal_ids_]').each(function() {
+              if ( !$projektPhase.data("sdg-ids").toString().split(',').includes($(this).data('sdgGoalId').toString()) ) {
+                $(this).hide();
+              }
+            })
+          }
+
+        } else {
+          $('#sdgs-selector').hide();
+        }
+      }
+
+      function toggleExternalFieldsHeader($projektPhase) {
+        if (
+          $('#on-behalf-of-fields').length == 0 &&
+            $('#attach-documents').is(":hidden") &&
+            $('.summary-field').is(":hidden") &&
+            $('#external-video-url-fields').is(":hidden") &&
+            $('#category_tags').is(":hidden") &&
+            $('#sdgs-selector').is(":hidden")
+        ) {
+          $('#additional-fields-title').hide();
+        } else {
+          $('#additional-fields-title').show();
+        }
+      }
+
+      function updateProjektLabelSelector($projektPhase) {
+        if ($projektPhase.data("projekt-label-ids")) {
+          var labelIdsToShow = $projektPhase.data("projekt-label-ids").toString().split(",");
+        } else {
+          var labelIdsToShow = [];
+        }
+
+        if (labelIdsToShow.join().length == 0) {
+          $('#label-for-projekt-labels-selector').addClass('hide');
+        } else {
+          $('#label-for-projekt-labels-selector').removeClass('hide');
+        }
+
+        $("#projekt_labels_selector .projekt-label").each(function(index, label) {
+          if (labelIdsToShow.includes($(label).data("labelId").toString())) {
+            $(label).removeClass('hide');
+          } else {
+            $(label).addClass('hide');
+          }
+        });
+      }
     },
 
     addNextProjektPlaceholder: function( $nextProejektSelector, text ) {
@@ -99,196 +271,9 @@
       })
     },
 
-    replaceProjektMapOnProposalCreation: function($projekt) {
-
-      App.Map.destroy();
-
-      if ( $projekt.data('showMap') ) {
-        $('#map-container').show();
-
-        $.ajax("/projekts/" + $projekt.data('projektId') + "/map_html", {
-          type: "GET",
-          dataType: "html",
-          success: function(data) {
-            App.Map.destroy();
-            $('div.map_location.map').first().replaceWith(data)
-            App.Map.initialize();
-            App.Map.maps[0].setView([$projekt.data('latitude'), $projekt.data('longitude')], $projekt.data('zoom')).invalidateSize();
-          }
-        });
-
-      } else {
-        $('#map-container').hide();
-
-      }
-    },
-
-    updateAvailableTagsSelection: function($projekt) {
-      $('[id$=_tag_list_predefined]').val('')
-
-      if ( $projekt.data('allow-tags') ) {
-        $('#category_tags').show();
-        $('#category_tags a').show();
-
-        if ( $projekt.data("tag-ids") ) {
-          $('#category_tags a').each(function() {
-            if ( !$projekt.data("tag-ids").toString().split(',').includes($(this).data('categoryId').toString()) ) {
-              $(this).hide();
-            }
-          })
-        }
-
-      } else {
-        $('#category_tags').hide();
-      }
-
-    },
-
-    updateAvailableSDGsSelection: function($projekt) {
-      // $('[id$=_tag_list_predefined]').val('')
-
-      if ( $projekt.data('allow-sdgs') ) {
-        $('#sdgs-selector').show();
-        $('#sdgs-selector label[for*=_sdg_goal_ids_]').show();
-
-        if ( $projekt.data("sdg-ids") ) {
-          $('#sdgs-selector label[for*=_sdg_goal_ids_]').each(function() {
-            if ( !$projekt.data("sdg-ids").toString().split(',').includes($(this).data('sdgGoalId').toString()) ) {
-              $(this).hide();
-            }
-          })
-        }
-
-      } else {
-        $('#sdgs-selector').hide();
-      }
-    },
-
-    updateProjektLabelSelector: function ($projekt) {
-      if ($projekt.data("projekt-label-ids")) {
-        var labelIdsToShow = $projekt.data("projekt-label-ids").toString().split(",");
-      } else {
-        var labelIdsToShow = [];
-      }
-
-      if (labelIdsToShow.join().length == 0) {
-        $('#label-for-projekt-labels-selector').addClass('hide');
-      } else {
-        $('#label-for-projekt-labels-selector').removeClass('hide');
-      }
-
-      $("#projekt_labels_selector .projekt-label").each(function(index, label) {
-        if (labelIdsToShow.includes($(label).data("labelId").toString())) {
-          $(label).removeClass('hide');
-        } else {
-          $(label).addClass('hide');
-        }
-      });
-    },
-
-    toggleImageAttachment: function($projekt) {
-      if ( $projekt.data('allowAttachedImage') ) {
-        $('#attach-image').show();
-      } else {
-        $('#attach-image #nested-image .direct-upload').remove();
-        $("#new_image_link").removeClass("hide");
-        $('#attach-image').hide();
-      }
-    },
-
-    toggleDocumentAttachment: function($projekt) {
-      if ( $projekt.data('allowAttachedDocument') ) {
-        $('#attach-documents').show();
-      } else {
-        $('#attach-documents').hide();
-      }
-    },
-
-    toggleSummary: function($projekt) {
-      if ( $projekt.data('showSummary') ) {
-        $('.summary-field').show();
-      } else {
-        $('.summary-field').hide();
-      }
-    },
-
-    toggleExternalVideoUrl: function($projekt) {
-      if ( $projekt.data('allowVideo') ) {
-        $('#external-video-url-fields').show();
-      } else {
-        $('#external-video-url-fields').hide();
-      }
-    },
-
-    toggleExternalFieldsHeader: function($selectedProjekt) {
-      if (
-        $('#on-behalf-of-fields').length == 0 &&
-          $('#attach-documents').is(":hidden") &&
-          $('.summary-field').is(":hidden") &&
-          $('#external-video-url-fields').is(":hidden") &&
-          $('#category_tags').is(":hidden") &&
-          $('#sdgs-selector').is(":hidden")
-      ) {
-        $('#additional-fields-title').hide();
-      } else {
-        $('#additional-fields-title').show();
-      }
-    },
-
-    updatePhasesSelector: function($selectedProjekt) {
-      var projektPhaseIds = $selectedProjekt.data('projektPhaseIds');
-      var projektPhasesElement = $('#projekt-phase-selector-fields');
-
-      projektPhasesElement.empty();
-
-      projektPhaseIds.forEach(function(projektPhaseId) {
-        var phaseElement = $("<span>");
-        phaseElement.addClass('projekt-phase-selector');
-        phaseElement.attr('id', "projekt-phase-selector-" + projektPhaseId);
-        phaseElement.text(projektPhaseId);
-        projektPhasesElement.append(phaseElement);
-
-        phaseElement.on('click', function() {
-          updateFormHeading(projektPhaseId);
-          updateProjektSelectorHint(projektPhaseId);
-          updateActivePhaseSelector(projektPhaseId);
-          $('[id$="projekt_phase_id"]').val(projektPhaseId)
-        })
-      })
-
-      function updateProjektSelectorHint(projektPhaseId) {
-        var $hintElement = $('[id$="_creation_recommendations"]').first();
-        if (!$hintElement.length) {
-          return;
-        }
- 
-        $.ajax("/projekt_phases/" + projektPhaseId + "/selector_hint_html", {
-          type: "GET",
-          dataType: "html",
-          success: function(data) {
-            $hintElement.html(data);
-            $(document).foundation()
-          }
-        });
-      }
-
-      function updateFormHeading(projektPhaseId) {
-        var $header = $('header h1').first();
- 
-        $.ajax("/projekt_phases/" + projektPhaseId + "/form_heading_text", {
-          type: "GET",
-          dataType: "html",
-          success: function(data) {
-            $header.text(data);
-            $(document).foundation()
-          }
-        });
-      }
-
-      function updateActivePhaseSelector(projektPhaseId) {
-        $('.projekt-phase-selector').removeClass('active');
-        $('#projekt-phase-selector-' + projektPhaseId).addClass('active');
-      }
+    updatePhasesSelector: function(projektId) {
+      $('#projekt-phase-selector-fields').find(".projekt-phase-group").hide();
+      $('#projekt-phase-group-for-projekt-' + projektId).show();
     },
 
     preselectProjekt: function() {
@@ -403,9 +388,13 @@
         App.ProjektSelector.selectProjekt($(this), true);
       });
 
+      $("body").on("click", ".js-select-projekt-phase", function(event) {
+        App.ProjektSelector.selectProjektPhase($(this), true);
+      });
+
       $(".js-new-resource").on("click", function(event) {
         if ( $(event.target).closest('.js-toggle-projekt-group').length == 0 ) {
-          $('.projekt_group').hide();
+          $('.projekt-group').hide();
         }
       });
 

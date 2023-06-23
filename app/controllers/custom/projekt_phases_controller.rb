@@ -3,7 +3,7 @@ class ProjektPhasesController < ApplicationController
   # include ProposalsHelper
   # include ProjektControllerHelper
 
-  skip_authorization_check only: [:selector_hint_html]
+  skip_authorization_check only: [:selector_hint_html, :form_heading_text, :map_html]
 
   def selector_hint_html
     projekt_phase = ProjektPhase.find(params[:id])
@@ -40,5 +40,9 @@ class ProjektPhasesController < ApplicationController
     else
       @projekt_phase.subscribe(current_user)
     end
+  end
+
+  def map_html
+    @projekt_phase = ProjektPhase.find(params[:id])
   end
 end

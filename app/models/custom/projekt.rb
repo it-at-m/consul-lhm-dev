@@ -14,7 +14,7 @@ class Projekt < ApplicationRecord
   include Globalizable
 
   has_many :children, -> { order(order_number: :asc) }, class_name: "Projekt", foreign_key: "parent_id",
-    inverse_of: :parent
+    inverse_of: :parent, dependent: :nullify
   belongs_to :parent, class_name: "Projekt", optional: true
 
   has_one :page, class_name: "SiteCustomization::Page", dependent: :destroy
@@ -36,31 +36,28 @@ class Projekt < ApplicationRecord
   has_many :question_phases, class_name: "ProjektPhase::QuestionPhase", dependent: :destroy
   has_many :argument_phases, class_name: "ProjektPhase::ArgumentPhase", dependent: :destroy
   has_many :livestream_phases, class_name: "ProjektPhase::LivestreamPhase", dependent: :destroy
-  # has_many :geozone_restrictions, through: :projekt_phases
 
   has_and_belongs_to_many :geozone_affiliations, class_name: "Geozone",
     after_add: :touch_updated_at, after_remove: :touch_updated_at
   has_and_belongs_to_many :individual_group_values,
     after_add: :touch_updated_at, after_remove: :touch_updated_at
 
+  has_many :debates, through: :debate_phases
+  has_many :proposals, through: :proposal_phases
   has_many :budgets, through: :budget_phases
+  has_many :comments, as: :commentable, inverse_of: :commentable, dependent: :destroy # TODO
+  has_many :polls, through: :voting_phases
   has_many :projekt_arguments, through: :argument_phases
   has_many :projekt_livestreams, through: :livestream_phases
   has_many :projekt_notifications, through: :projekt_notification_phases
   has_many :projekt_events, through: :event_phases
+  has_many :legislation_processes, dependent: :nullify, class_name: "Legislation::Process" # TODO
 
-  has_many :debates, dependent: :nullify
-  has_many :proposals, dependent: :nullify
-  has_many :polls, dependent: :nullify
-  has_many :legislation_processes, dependent: :nullify, class_name: "Legislation::Process"
-
-
-  has_many :comments, as: :commentable, inverse_of: :commentable, dependent: :destroy
   belongs_to :author, -> { with_hidden }, class_name: "User", inverse_of: :projekts
 
   has_many :map_layers, as: :mappable, dependent: :destroy
 
-  has_many :projekt_labels, dependent: :destroy
+  # has_many :projekt_labels, dependent: :destroy #remove
 
   has_many :projekt_manager_assignments, dependent: :destroy
   has_many :projekt_managers, through: :projekt_manager_assignments
@@ -69,7 +66,7 @@ class Projekt < ApplicationRecord
     class_name: "ProjektSubscription", dependent: :destroy, inverse_of: :projekt
   has_many :subscribers, through: :subscriptions, source: :user
 
-  before_validation :set_default_color
+  # before_validation :set_default_color - should projekt still have a color?
   after_create :create_corresponding_page, :set_order, :create_default_settings,
     :create_map_location
   around_update :update_page
@@ -78,7 +75,7 @@ class Projekt < ApplicationRecord
   end
   after_destroy :ensure_projekt_order_integrity
 
-  validates :color, format: { with: /\A#[\da-f]{6}\z/i }
+  # validates :color, format: { with: /\A#[\da-f]{6}\z/i } - still color?
   validates :name, presence: true
 
   scope :regular, -> { where(special: false) }
@@ -231,16 +228,20 @@ class Projekt < ApplicationRecord
     return true if controller_name == "processes"
     return false if user.nil?
 
-    user_has_admin_rights = user.administrator? || user.projekt_manager?
-
     if controller_name == "proposals"
-      return false if proposals_selectable_by_admins_only? && !user_has_admin_rights
+      if proposals_selectable_by_admins_only? && !user.can_manage_projekt?(self)
+        false
+      else
+        proposal_phases.any? { |phase| phase.selectable_by?(user) }
+      end
 
-      proposal_phases.any? { |phase| phase.selectable_by?(user) }
     elsif controller_name == "debates"
-      return false if debates_selectable_by_admins_only? && !user_has_admin_rights
+      if debates_selectable_by_admins_only? && !user.can_manage_projekt?(self)
+        false
+      else
+        debate_phases.any? { |phase| phase.selectable_by?(user) }
+      end
 
-      debate_phases.any? { |phase| phase.selectable_by?(user) }
     elsif controller_name == "processes"
       # return false if proposals_selectable_by_admins_only? && user.administrator.blank?
       legislation_phases.any? { |phase| phase.selectable_by?(user) }

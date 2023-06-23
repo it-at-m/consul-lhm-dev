@@ -160,8 +160,16 @@ class User < ApplicationRecord
     deficiency_report_officer.present?
   end
 
-  def projekt_manager?
-    projekt_manager.present?
+  def projekt_manager?(projekt = nil)
+    if projekt.present?
+      projekt_manager.present? && projekt.projekt_managers.include?(projekt_manager)
+    else
+      projekt_manager.present?
+    end
+  end
+
+  def can_manage_projekt?(projekt)
+    projekt_manager?(projekt) || administrator?
   end
 
   def extended_registration?

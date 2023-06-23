@@ -20,6 +20,6 @@ class Pages::Projekts::FooterPhaseTabComponent < ApplicationComponent
   private
 
     def tab_title
-      @phase.phase_tab_name.presence || t("custom.projekts.page.tabs.#{@phase.resources_name}")
+      @phase.title
     end
 end

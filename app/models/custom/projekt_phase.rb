@@ -186,7 +186,7 @@ class ProjektPhase < ApplicationRecord
   end
 
   def title
-    phase_tab_name.presence || I18n.t("custom.projekts.page.tabs.#{resources_name}")
+    phase_tab_name.presence || model_name.human
   end
 
   def feature?(key)
