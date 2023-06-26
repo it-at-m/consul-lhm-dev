@@ -1,4 +1,6 @@
 class ProjektPhase::LegislationPhase < ProjektPhase
+  has_many :legislation_processes, foreign_key: :projekt_phase_id, dependent: :restrict_with_exception, inverse_of: :projekt_phase
+
   def phase_activated?
     active?
   end
