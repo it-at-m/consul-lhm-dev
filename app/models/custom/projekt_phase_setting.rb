@@ -92,7 +92,17 @@ class ProjektPhaseSetting < ApplicationRecord
       defaults.each do |phase_class, phase_settings|
         phase_class.to_s.constantize.all.find_each do |phase|
           phase_settings.each do |key, value|
-            phase.settings.find_or_create_by!(key: key, value: value)
+            phase.settings.create!(key: key, value: value) unless phase.settings.find_by(key: key)
+          end
+        end
+      end
+    end
+
+    def destroy_obsolete
+      defaults.each do |phase_class, phase_settings|
+        phase_class.to_s.constantize.all.find_each do |phase|
+          phase.settings.each do |setting|
+            setting.destroy! unless phase_settings.keys.include?(setting.key.to_sym)
           end
         end
       end

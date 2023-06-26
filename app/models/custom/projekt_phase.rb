@@ -2,6 +2,8 @@ class ProjektPhase < ApplicationRecord
   include Mappable
   include Milestoneable
 
+  after_create :add_default_settings
+
   REGULAR_PROJEKT_PHASES = [
     "ProjektPhase::MilestonePhase",
     "ProjektPhase::ProjektNotificationPhase",
@@ -284,5 +286,11 @@ class ProjektPhase < ApplicationRecord
 
     def touch_updated_at(geozone)
       touch if persisted?
+    end
+
+    def add_default_settings
+      ProjektPhaseSetting.defaults[self.class.name].each do |key, value|
+        settings.create!(key: key, value: value)
+      end
     end
 end
