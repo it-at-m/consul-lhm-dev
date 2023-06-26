@@ -41,9 +41,11 @@
             <% end %>
           </div>
 
-          <div class="projekt-sidebar small-12 medium-3 column margin-bottom">
-            <%= render partial: 'pages/sidebar', locals: { projekt: @custom_page.projekt } %>
-          </div>
+          <% if @custom_page.projekt.projekt_phases.select(&:phase_activated?).any? %>
+            <div class="projekt-sidebar small-12 medium-3 column margin-bottom">
+              <%= render partial: "pages/sidebar", locals: { projekt: @custom_page.projekt } %>
+            </div>
+          <% end %>
         </div>
 
       <% else %>
@@ -57,7 +59,7 @@
     </div>
   </div>
 
-  <% if @custom_page.projekt.present? && projekt_feature?(@custom_page.projekt, 'general.show_projekt_footer') %>
+  <% if @custom_page.projekt.present? && projekt_feature?(@custom_page.projekt, 'general.show_projekt_footer') && @custom_page.projekt.projekt_phases.select(&:phase_activated?).any? %>
     <%= render Pages::Projekts::FooterPhasesComponent.new(@custom_page.projekt, @default_phase_name) %>
 
     <div id='footer-content'>

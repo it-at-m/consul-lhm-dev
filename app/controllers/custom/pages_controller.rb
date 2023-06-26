@@ -14,7 +14,7 @@ class PagesController < ApplicationController
 
     set_resource_instance
 
-    if @custom_page.present? && @custom_page.projekt.present? && @custom_page.projekt.visible_for?(current_user)
+    if @custom_page.present? && @custom_page.projekt.present? && @custom_page.projekt.visible_for?(current_user) && @custom_page.projekt.projekt_phases.select(&:phase_activated?).any?
       @projekt = @custom_page.projekt
       @default_projekt_phase = get_default_projekt_phase(params[:selected_phase_id])
       @projekt_phase = @default_projekt_phase
@@ -27,6 +27,10 @@ class PagesController < ApplicationController
 
       @cards = @custom_page.cards
 
+      render action: :custom_page
+
+    elsif @custom_page.present? && @custom_page.projekt.present? && @custom_page.projekt.visible_for?(current_user)
+      @cards = @custom_page.cards
       render action: :custom_page
 
     elsif @custom_page.present? && @custom_page.projekt.present?
