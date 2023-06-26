@@ -1,55 +1,13 @@
 <%= translatable_form_for(@projekt, url: namespace_projekt_path) do |f| %>
 
-  <%= hidden_field_tag :tab, "#tab-projekt-phases" %>
-  <%= hidden_field_tag :namespace, params[:controller].include?("projekt_management") ? "projekt_management" : "" %>
+  <%= hidden_field_tag :tab, "#tab-projekt-configuration" %>
 
   <table class='edit-projekt margin-top'>
-    <thead>
-      <th scope="col" class="small-3"><%= Projekt.human_attribute_name(:total_duration_start) %></th>
-      <th scope="col" class="small-3"><%= Projekt.human_attribute_name(:total_duration_end) %></th>
-    </thead>
     <tbody>
-
-      <tr style="border-bottom:none;">
-        <td>
-          <%= f.date_field :total_duration_start, label: false %>
-          <div class="show-projekt-dates-in-frontend-checkbox">
-            <%= f.check_box :show_start_date_in_frontend %>
-          </div>
-        </td>
-        <td>
-          <%= f.date_field :total_duration_end, label: false %>
-          <div class="show-projekt-dates-in-frontend-checkbox">
-            <%= f.check_box :show_end_date_in_frontend %>
-          </div>
-        </td>
-      </tr>
-
-      <tr style="border-bottom:none;border-top:none;">
-        <td colspan="2">
-
-          <div class="option-group-title">
-            <i class="fas fa-map"></i>
-            <span><%= t("custom.admin.projekts.edit.projekt_configuration_tab.affiliation") %></span>
-          </div>
-          <%= render partial: "custom/admin/projekts/edit/projekt_configuration/phase_geozone_affiliation", locals: { f: f } %>
-        </td>
-      </tr>
-
-      <% if @individual_groups.any? %>
-        <tr style="border-bottom:none;border-top:none;">
-          <td colspan="2">
-            <div class="option-group-title">
-              <i class="fas fa-users-cog"></i>
-              <span><%= t("custom.admin.projekts.edit.projekt_configuration_tab.projekt_individual_group_values") %></span>
-            </div>
-            <%= render partial: "custom/admin/projekts/edit/projekt_configuration/projekt_individual_group_values", locals: { f: f } %>
-          </td>
-        </tr>
-      <% end %>
-
       <tr style='border-bottom:none;border-top:none;'>
         <td colspan="2">
+          <%= render "images/nested_image", imageable: @projekt, f: f %>
+
           <%= render "shared/globalize_locales", resource: @projekt %>
           <%= f.translatable_fields do |translations_form| %>
             <div>
@@ -58,14 +16,6 @@
                 label: Projekt.human_attribute_name(:description) %>
             </div>
           <% end %>
-        </td>
-      </tr>
-
-      <tr style='border-top:none;'>
-        <td colspan="2">
-          <div class="images">
-            <%= render "images/nested_image", imageable: @projekt, f: f %>
-          </div>
         </td>
       </tr>
 

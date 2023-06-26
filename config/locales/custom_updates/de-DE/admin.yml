@@ -187,12 +187,14 @@ de:
           #   icon: Icon
           #   submit_button: Submit
           projekt_configuration_tab:
-            name: Projektkonfiguration
-            main_block_title: Projektstatus
-            page_block_title: Projektseite
-            information_block_title: Projektinformationen
-            affiliation: Gebietszuordnung
-            projekt_individual_group_values: Sichbarkeitseinschränkung auf Gruppen
+            name: Projekteinstellungen
+            main_block_title: Status
+            information_block_title: Informationen
+            duration_block_title: Laufzeit
+            geo_affiliation_block_title: Gebietszuordnung
+            individual_groups_block_title: Sichbarkeitseinschränkung auf Gruppen
+          projekt_page_tab:
+            name: Projektseite
           projekt_phases_tab:
             name: Projektphasen
             phases_block_title: Projektphasen
