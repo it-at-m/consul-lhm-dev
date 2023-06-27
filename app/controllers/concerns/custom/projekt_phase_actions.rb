@@ -6,7 +6,7 @@ module ProjektPhaseActions
   included do
     alias_method :namespace_mappable_path, :namespace_projekt_phase_path
 
-    before_action :set_projekt_phase, :authorize_nav_bar_action, except: :create
+    before_action :set_projekt_phase, :authorize_nav_bar_action, except: [:create, :order_phases]
     before_action :set_namespace
 
     helper_method :namespace_projekt_phase_path, :namespace_mappable_path
@@ -39,6 +39,12 @@ module ProjektPhaseActions
         notice: t("custom.admin.projekt_phases.notice.not_destroyed")
 
     end
+  end
+
+  def order_phases
+    @projekt = Projekt.find(params[:projekt_id])
+    @projekt.projekt_phases.order_phases(params[:ordered_list])
+    head :ok
   end
 
   def toggle_active_status
