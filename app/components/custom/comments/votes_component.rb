@@ -14,7 +14,7 @@ class Comments::VotesComponent < ApplicationComponent
         projekt_feature?(comment.commentable, "general.allow_downvoting_comments")
 
       else
-        projekt_feature?(comment.commentable.projekt_phase.projekt, "general.allow_downvoting_comments")
+        projekt_feature?(comment.commentable.projekt, "general.allow_downvoting_comments")
 
       end
     end

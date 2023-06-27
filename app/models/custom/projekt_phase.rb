@@ -1,6 +1,8 @@
 class ProjektPhase < ApplicationRecord
   include Mappable
   include Milestoneable
+  acts_as_paranoid column: :hidden_at
+  include ActsAsParanoidAliases
 
   after_create :add_default_settings
 
@@ -23,7 +25,7 @@ class ProjektPhase < ApplicationRecord
     "ProjektPhase::ProposalPhase"
   ]
 
-  delegate :icon, to: :projekt
+  delegate :icon, :author, :author_id, to: :projekt
 
   translates :phase_tab_name, touch: true
   translates :new_resource_button_name, touch: true

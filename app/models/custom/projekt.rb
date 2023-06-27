@@ -45,7 +45,7 @@ class Projekt < ApplicationRecord
   has_many :debates, through: :debate_phases
   has_many :proposals, through: :proposal_phases
   has_many :budgets, through: :budget_phases
-  has_many :comments, as: :commentable, inverse_of: :commentable, dependent: :destroy # TODO
+  has_many :comments, through: :comment_phases
   has_many :polls, through: :voting_phases
   has_many :projekt_arguments, through: :argument_phases
   has_many :projekt_livestreams, through: :livestream_phases

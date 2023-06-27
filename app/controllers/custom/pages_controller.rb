@@ -76,7 +76,7 @@ class PagesController < ApplicationController
     @valid_orders = %w[most_voted newest oldest]
     @current_order = @valid_orders.include?(params[:order]) ? params[:order] : @valid_orders.first
 
-    @commentable = @projekt
+    @commentable = @projekt_phase
     @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
     set_comment_flags(@comment_tree.comments)
   end
