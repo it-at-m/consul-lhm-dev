@@ -192,7 +192,7 @@ de:
             information_block_title: Informationen
             duration_block_title: Laufzeit
             geo_affiliation_block_title: Gebietszuordnung
-            individual_groups_block_title: Sichbarkeitseinschränkung auf Gruppen
+            individual_groups_block_title: Sichtbarkeitsbeschränkung auf starke Gruppen
           projekt_page_tab:
             name: Projektseite
           projekt_phases_tab:

@@ -1,28 +1,21 @@
-<%= translatable_form_for(@projekt, url: namespace_projekt_path) do |f| %>
+<div class="config-block">
+  <%= translatable_form_for(@projekt, url: namespace_projekt_path) do |f| %>
 
-  <%= hidden_field_tag :tab, "#tab-projekt-configuration" %>
+    <%= hidden_field_tag :tab, "#tab-projekt-configuration" %>
 
-  <table class='edit-projekt margin-top'>
-    <tbody>
-      <tr style='border-bottom:none;border-top:none;'>
-        <td colspan="2">
-          <%= render "images/nested_image", imageable: @projekt, f: f %>
+    <%= render "images/nested_image", imageable: @projekt, f: f %>
 
-          <%= render "shared/globalize_locales", resource: @projekt %>
-          <%= f.translatable_fields do |translations_form| %>
-            <div>
-              <%= translations_form.text_area :description,
-                rows: 4, maxlength: 230,
-                label: Projekt.human_attribute_name(:description) %>
-            </div>
-          <% end %>
-        </td>
-      </tr>
+    <%= render "shared/globalize_locales", resource: @projekt %>
+    <%= f.translatable_fields do |translations_form| %>
+      <div>
+        <%= translations_form.text_area :description,
+          rows: 4, maxlength: 230,
+          label: Projekt.human_attribute_name(:description) %>
+      </div>
+    <% end %>
 
-    </tbody>
-  </table>
-
-  <div>
-    <%= f.submit(class: "button success") %>
-  </div>
-<% end %>
+    <div>
+      <%= f.submit(class: "button success") %>
+    </div>
+  <% end %>
+</div>
