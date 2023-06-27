@@ -59,7 +59,7 @@
     </div>
   </div>
 
-  <% if @custom_page.projekt.present? && projekt_feature?(@custom_page.projekt, 'general.show_projekt_footer') && @custom_page.projekt.projekt_phases.select(&:phase_activated?).any? %>
+  <% if @custom_page.projekt.present? && @custom_page.projekt.projekt_phases.select(&:phase_activated?).any? %>
     <%= render Pages::Projekts::FooterPhasesComponent.new(@custom_page.projekt, @default_phase_name) %>
 
     <div id='footer-content'>
