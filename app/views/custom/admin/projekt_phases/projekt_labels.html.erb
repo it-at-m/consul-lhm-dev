@@ -17,7 +17,6 @@
         <thead>
           <tr>
             <th><%= t("custom.admin.projekt_phases.projekt_labels.table.icon") %></th>
-            <th><%= t("custom.admin.projekt_phases.projekt_labels.table.color") %></th>
             <th><%= t("custom.admin.projekt_phases.projekt_labels.table.name") %></th>
             <th><%= t("admin.actions.actions") %></th>
           </tr>
@@ -27,7 +26,6 @@
           <% @projekt_labels.each do |label| %>
             <tr id="<%= dom_id(label) %>">
               <td><%= "<i class=\"fas fa-#{label.icon}\" style=\"color:#{label.color}\"></i>".html_safe if label.icon %></td>
-              <td><%= label.color %></td>
               <td><%= label.name %></td>
               <td>
                 <%= render Admin::TableActionsComponent.new(label,

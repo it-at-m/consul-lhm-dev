@@ -12,24 +12,16 @@
     </div>
   <% end %>
 
-  <div class="clear">
-    <div class="small-12 medium-6 large-4 column">
-      <%= f.text_field :color, placeholder: t("custom.admin.projekt_phases.projekt_labels.form.color_placeholder") %>
+  <div class="">
+    <%= f.label :icon %>
+    <div class='admin-deficiency-report-category-icons-selector'>
+      <%= f.collection_radio_buttons :icon, Iconable::AVAILABLE_ICONS_SHORT, :first, :first do |rb| %>
+        <%= rb.label { rb.radio_button + "<i class=\"fas fa-#{rb.object.first}\"></i>".html_safe } %>
+      <% end %>
     </div>
   </div>
 
-  <div class="clear">
-    <div class="small-12 column">
-      <%= f.label :icon %>
-      <div class='admin-deficiency-report-category-icons-selector'>
-        <%= f.collection_radio_buttons :icon, Iconable::AVAILABLE_ICONS_SHORT, :first, :first do |rb| %>
-          <%= rb.label { rb.radio_button + "<i class=\"fas fa-#{rb.object.first}\"></i>".html_safe } %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-
-  <div class="small-12 column">
+  <div class="">
     <%= f.submit class: "button success" %>
   </div>
 <% end %>
