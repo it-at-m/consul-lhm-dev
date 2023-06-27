@@ -2,6 +2,8 @@
   <%= t("admin.header.title") %> - <%= t("admin.menu.site_customization.pages") %> - <%= @projekt.page.title %>
 <% end %>
 
+<h2><%= t("custom.admin.projekts.edit.projekt_page_tab.main_block_title") %></h2>
+
 <%= render "shared/globalize_locales", resource: @projekt.page %>
 
 <%= translatable_form_for [:admin, @projekt.page], html: { class: "edit_page" } do |f| %>

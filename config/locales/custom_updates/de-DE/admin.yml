@@ -183,9 +183,6 @@ de:
       projekts:
         destroy: Löschen
         edit:
-          # design:
-          #   icon: Icon
-          #   submit_button: Submit
           projekt_configuration_tab:
             name: Projekteinstellungen
             main_block_title: Status
@@ -195,6 +192,7 @@ de:
             individual_groups_block_title: Sichtbarkeitsbeschränkung auf starke Gruppen
           projekt_page_tab:
             name: Projektseite
+            main_block_title: Projektseite
           projekt_phases_tab:
             type: Phase auswählen
             name: Projektphasen
@@ -230,6 +228,7 @@ de:
             sidebar_settings: Seitenleiste
           projekt_managers_tab:
             name: Projektmanager*innen
+            main_block_title: Projektmanager*innen
           projekt_map_tab:
             name: Ind. Kartenkonfiguration
           projekt_sdg_tab:

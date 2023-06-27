@@ -1,3 +1,5 @@
+<h2><%= t("admin.settings.index.map.title") %></h2>
+
 <% @projekt.map_layers.each do |layer| %>
   <%= render partial: "custom/admin/shared/map/map_layer", locals: { layer: layer, return_path: namespace_projekt_path(action: :edit, anchor: "tab-projekt-map") } %>
 <% end %>
@@ -5,8 +7,6 @@
 <div id='new-map-layer'>
   <%= link_to t("custom.map_layer.buttons.new_layer"), new_admin_map_layer_path(return_path: namespace_projekt_path(action: :edit, anchor: "tab-projekt-map"), mappable_id: @projekt.id, mappable_type: @projekt.class.name), class: "button success margin-bottom", remote: true %>
 </div>
-
-<h2><%= t("admin.settings.index.map.title") %></h2>
 
 <table>
   <thead>
@@ -22,11 +22,6 @@
       <%= render partial: "custom/admin/shared/map/map_settings_form", locals: { map_location_form: f, attribute: :longitude } %>
       <%= render partial: "custom/admin/shared/map/map_settings_form", locals: { map_location_form: f, attribute: :zoom } %>
     <% end %>
-
-    <%= form_for(@projekt, url: admin_projekt_path, as: :projekt) do |f| %>
-      <%= render partial: "custom/admin/shared/map/map_settings_form", locals: { map_location_form: f, attribute: :color } %>
-    <% end %>
-
   </tbody>
 </table>
 
@@ -49,7 +44,6 @@
   </div>
 
   <div class="small-12 column">
-    <%= f.submit(value: t("custom.admin.projekts.edit.design.submit_button"),
-                class: "button success") %>
+    <%= f.submit(class: "button success") %>
   </div>
 <% end %>
