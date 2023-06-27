@@ -387,6 +387,8 @@ de:
         phase_tab_name: Name in Tab
         new_resource_button_name: Text in Button
         resource_form_title: Text bei Erstellung
+        labels_name: Labels
+        sentiments_name: Sentiments
         projekt_selector_hint: Hinweise zum Projekt
         edit:
           title: Einstellung für Phase

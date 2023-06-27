@@ -43,6 +43,18 @@
       <% if @projekt_phase.is_a?(ProjektPhase::DebatePhase) || @projekt_phase.is_a?(ProjektPhase::ProposalPhase) %>
         <div class="row">
           <div class="column large-8">
+            <strong><%= t("custom.admin.projekt_phases.labels_name") %></strong>
+            <%= translations_form.text_field :labels_name, label: false %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column large-8">
+            <strong><%= t("custom.admin.projekt_phases.sentiments_name") %></strong>
+            <%= translations_form.text_field :sentiments_name, label: false %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column large-8">
             <strong><%= t("custom.admin.projekt_phases.projekt_selector_hint") %></strong>
             <%= translations_form.text_area :projekt_selector_hint,
               label: false,
