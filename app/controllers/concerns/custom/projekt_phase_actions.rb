@@ -148,6 +148,7 @@ module ProjektPhaseActions
 
     def set_projekt_phase
       @projekt_phase = ProjektPhase.find(params[:id])
+      @projekt = @projekt_phase.projekt
     end
 
     def set_namespace

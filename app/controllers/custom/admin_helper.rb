@@ -2,17 +2,16 @@ require_dependency Rails.root.join("app", "helpers", "admin_helper").to_s
 
 module AdminHelper
   def dashboard_index_back_path
-    if controller_name == 'projekts' &&
-        action_name == 'edit' &&
+    if params[:controller].in?(["admin/projekts", "admin/projekt_phases"]) &&
         @projekt.present? &&
         @projekt.page.present? &&
-        @projekt.page.status == 'published'
+        @projekt.page.status == "published"
       page_path(@projekt.page.slug)
 
-    elsif controller_name == 'pages' &&
-        action_name == 'edit' &&
+    elsif controller_name == "pages" &&
+        action_name == "edit" &&
         @page.present? &&
-        @page.status == 'published'
+        @page.status == "published"
       page_path(@page.slug)
 
     else
