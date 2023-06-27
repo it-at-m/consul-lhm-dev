@@ -28,7 +28,7 @@
       hint: sanitize(t("admin.site_customization.pages.new.slug_help")) %>
 
     <% if @projekt.page.slug.present? %>
-      <%= link_to "Projektseite anzeigen", page_path(@projekt.page.slug), target: "_blank" %>
+      <%= link_to "Projektseite anzeigen", page_path(@projekt.page.slug), target: "_blank", class: "button primary" %>
     <% end %>
   </div>
 
