@@ -196,6 +196,7 @@ de:
           projekt_page_tab:
             name: Projektseite
           projekt_phases_tab:
+            type: Phase auswählen
             name: Projektphasen
             phases_block_title: Projektphasen
             table_headings:
