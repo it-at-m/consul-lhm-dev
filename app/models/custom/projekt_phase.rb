@@ -7,23 +7,23 @@ class ProjektPhase < ApplicationRecord
   after_create :add_default_settings
 
   REGULAR_PROJEKT_PHASES = [
+    "ProjektPhase::LivestreamPhase",
     "ProjektPhase::MilestonePhase",
     "ProjektPhase::ProjektNotificationPhase",
-    "ProjektPhase::NewsfeedPhase",
     "ProjektPhase::EventPhase",
     "ProjektPhase::ArgumentPhase",
-    "ProjektPhase::LivestreamPhase"
+    "ProjektPhase::NewsfeedPhase"
   ].freeze
 
-  PROJEKT_PHASES_TYPES = REGULAR_PROJEKT_PHASES + [
-    "ProjektPhase::BudgetPhase",
+  PROJEKT_PHASES_TYPES = [
+    "ProjektPhase::CommentPhase",
+    "ProjektPhase::DebatePhase",
+    "ProjektPhase::ProposalPhase",
     "ProjektPhase::QuestionPhase",
     "ProjektPhase::VotingPhase",
-    "ProjektPhase::CommentPhase",
-    "ProjektPhase::LegislationPhase",
-    "ProjektPhase::DebatePhase",
-    "ProjektPhase::ProposalPhase"
-  ]
+    "ProjektPhase::BudgetPhase",
+    "ProjektPhase::LegislationPhase"
+  ] + REGULAR_PROJEKT_PHASES
 
   delegate :icon, :author, :author_id, to: :projekt
 

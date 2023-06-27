@@ -22,7 +22,7 @@
     <%= t('custom.projekts.page.sidebar.admin_controls.edit_projekt_settings') %>
   <% end %>
 
-  <%= link_to namespaced_polymorphic_path(namespace, @projekt.page, action: :edit, origin: 'public_page'), class: 'button hollow expanded' do %>
+  <%= link_to namespaced_polymorphic_path(namespace, @projekt, action: :edit, origin: 'public_page', anchor: "tab-projekt-page"), class: 'button hollow expanded' do %>
     <i class="fas fa-window-maximize"></i>
     <%= t('custom.projekts.page.sidebar.admin_controls.edit_projekt_page') %>
   <% end %>

@@ -1,6 +1,6 @@
 <h2><%= t("custom.admin.projekts.edit.projekt_phases_tab.phases_block_title") %></h2>
 
-<div>
+<div style="display:inline-block;width:40%">
   <%= form_for(ProjektPhase.new, url: admin_projekt_projekt_phases_path(@projekt)) do |f| %>
     <%= f.hidden_field :projekt_id, value: @projekt.id %>
     <%= f.label :type, t("custom.admin.projekts.edit.projekt_phases_tab.type") %>

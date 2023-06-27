@@ -28,6 +28,7 @@ de:
       projekt_label:
         one: Label
         other: Labels
+      projekt_phase: Projektphase
       projekt_phase/comment_phase: Kommentare
       projekt_phase/debate_phase: Diskussionen
       projekt_phase/proposal_phase: Vorschläge
