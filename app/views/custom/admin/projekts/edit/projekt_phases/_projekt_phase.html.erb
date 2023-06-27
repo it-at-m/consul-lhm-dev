@@ -67,5 +67,8 @@
     <%= link_to polymorphic_path([@namespace, projekt_phase], action: :duration) do %>
       <i class="fas fa-edit"></i>
     <% end %>
+    <%= link_to polymorphic_path([@namespace, projekt_phase]), method: :delete, data: { confirm: t("admin.actions.confirm") } do %>
+      <i class="fas fa-trash-alt"></i>
+    <% end %>
   </td>
 </tr>

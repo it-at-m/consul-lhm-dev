@@ -16,13 +16,28 @@ module ProjektPhaseActions
     @projekt = Projekt.find(params[:projekt_id])
     ProjektPhase.create!(projekt_phase_params)
 
-    redirect_to edit_admin_projekt_path(@projekt.id, anchor: "tab-projekt-phases"), notice: t("admin.projekt_phase.create.notice")
+    redirect_to edit_admin_projekt_path(@projekt.id, anchor: "tab-projekt-phases"),
+      notice: t("custom.admin.projekt_phases.notice.created")
   end
 
   def update
     if @projekt_phase.update(projekt_phase_params)
       redirect_to namespace_projekt_phase_path(action: params[:action_name] || "duration"),
-        notice: t("admin.settings.index.map.flash.update")
+        notice: t("custom.admin.projekt_phases.notice.updated")
+    end
+  end
+
+  def destroy
+    if @projekt_phase.safe_to_destroy?
+      @projekt_phase.destroy!
+
+      redirect_to edit_admin_projekt_path(@projekt_phase.projekt_id, anchor: "tab-projekt-phases"),
+        notice: t("custom.admin.projekt_phases.notice.destroyed")
+
+    else
+      redirect_to edit_admin_projekt_path(@projekt_phase.projekt_id, anchor: "tab-projekt-phases"),
+        notice: t("custom.admin.projekt_phases.notice.not_destroyed")
+
     end
   end
 

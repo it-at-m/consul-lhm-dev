@@ -26,6 +26,10 @@ class ProjektPhase::ArgumentPhase < ProjektPhase
     %w[naming].push(resources_name)
   end
 
+  def safe_to_destroy?
+    projekt_arguments.empty?
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)

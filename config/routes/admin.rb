@@ -2,7 +2,7 @@ namespace :admin do
   root to: "dashboard#index"
 
   # custom projekt routes
-  resources :projekt_phases, only: [:update] do
+  resources :projekt_phases, only: [:update, :destroy] do
     member do
       get :duration
       get :naming
@@ -46,7 +46,6 @@ namespace :admin do
         post :send_notifications
       end
     end
-
   end
   resources :projekt_phase_settings, only: [:update]
 

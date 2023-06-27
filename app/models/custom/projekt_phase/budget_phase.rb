@@ -23,6 +23,10 @@ class ProjektPhase::BudgetPhase < ProjektPhase
     %w[duration naming restrictions settings]
   end
 
+  def safe_to_destroy?
+    budget.nil?
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)

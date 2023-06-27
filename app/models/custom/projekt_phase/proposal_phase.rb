@@ -40,6 +40,10 @@ class ProjektPhase::ProposalPhase < ProjektPhase
     %w[duration naming restrictions settings projekt_labels sentiments map]
   end
 
+  def safe_to_destroy?
+    proposals.empty?
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)

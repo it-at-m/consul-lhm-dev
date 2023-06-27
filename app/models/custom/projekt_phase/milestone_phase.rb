@@ -23,6 +23,10 @@ class ProjektPhase::MilestonePhase < ProjektPhase
     %w[naming].push(resources_name)
   end
 
+  def safe_to_destroy?
+    milestones.empty? && progress_bars.empty?
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)

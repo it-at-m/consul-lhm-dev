@@ -40,6 +40,10 @@ class ProjektPhase::DebatePhase < ProjektPhase
     %w[duration naming restrictions settings projekt_labels sentiments]
   end
 
+  def safe_to_destroy?
+    debates.empty?
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)

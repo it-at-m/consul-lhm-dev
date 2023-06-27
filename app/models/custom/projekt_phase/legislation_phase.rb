@@ -21,6 +21,10 @@ class ProjektPhase::LegislationPhase < ProjektPhase
     %w[duration naming restrictions]
   end
 
+  def safe_to_destroy?
+    legislation_processes.empty?
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)

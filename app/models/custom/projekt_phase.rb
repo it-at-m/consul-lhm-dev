@@ -218,6 +218,10 @@ class ProjektPhase < ApplicationRecord
     []
   end
 
+  def safe_to_destroy?
+    false
+  end
+
   private
 
     def phase_specific_permission_problems(user)
@@ -289,7 +293,9 @@ class ProjektPhase < ApplicationRecord
     end
 
     def add_default_settings
-      ProjektPhaseSetting.defaults[self.class.name].each do |key, value|
+      phase_settings = ProjektPhaseSetting.defaults[self.class.name] || {}
+
+      phase_settings.each do |key, value|
         settings.create!(key: key, value: value)
       end
     end

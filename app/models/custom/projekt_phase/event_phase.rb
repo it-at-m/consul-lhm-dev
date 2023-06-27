@@ -22,6 +22,10 @@ class ProjektPhase::EventPhase < ProjektPhase
     %w[naming].push(resources_name)
   end
 
+  def safe_to_destroy?
+    projekt_events.empty?
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)

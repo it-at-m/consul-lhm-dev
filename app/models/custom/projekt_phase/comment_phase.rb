@@ -23,6 +23,10 @@ class ProjektPhase::CommentPhase < ProjektPhase
     %w[duration naming restrictions]
   end
 
+  def safe_to_destroy?
+    false
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)

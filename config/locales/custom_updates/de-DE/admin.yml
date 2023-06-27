@@ -378,6 +378,11 @@ de:
           milestones: Liste der Meilensteine
           projekt_notifications: Benachrichtigungen
           projekt_arguments: Liste von Stimmen
+        notice:
+          created: Phase wurde erstellt
+          updated: Phase wurde aktualisiert
+          destroyed: Phase wurde gelöscht
+          not_destroyed: Phase wurde nicht gelöscht
         shared:
           update_button: Speichern
         phase_tab_name: Name in Tab
