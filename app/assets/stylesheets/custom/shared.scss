@@ -475,3 +475,17 @@ span.toggle-arrow {
   }
 }
 
+
+// Buttons
+
+.button {
+  &.left-aligned {
+    text-align: start;
+    padding-left: 0.5em;
+
+    i {
+      width: 25px;
+      text-align: center;
+    }
+  }
+}
