@@ -20,7 +20,7 @@ class MapLocation < ApplicationRecord
   end
 
   def shape_json_data
-    return shape if shape == {}
+    return {} if shape == {} || shape == "{}"
 
     shape.merge({
       investment_id: investment_id,
