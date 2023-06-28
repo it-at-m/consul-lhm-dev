@@ -28,22 +28,3 @@
 <p><%= t("admin.settings.index.map.help") %></p>
 
 <%= render "custom/admin/shared/map/map_form", mappable: @projekt, map_location: @projekt.map_location %>
-
-<%= form_for(@projekt, url: namespace_mappable_path(action: :update_map)) do |f| %>
-  <%= render "shared/errors", resource: @projekt %>
-
-  <div class="clear">
-    <div class="small-12 column">
-      <%= f.label :icon, t("custom.admin.projekts.edit.design.icon") %>
-      <div class='icons-selector'>
-        <%= f.collection_radio_buttons :icon, Iconable::AVAILABLE_ICONS, :first, :first do |rb| %>
-          <%= rb.label { rb.radio_button + "<i class=\"fas fa-#{rb.object.first}\"></i>".html_safe } %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-
-  <div class="small-12 column">
-    <%= f.submit(class: "button success") %>
-  </div>
-<% end %>

@@ -15,7 +15,7 @@
   <div class="">
     <%= f.label :icon %>
     <div class='admin-deficiency-report-category-icons-selector'>
-      <%= f.collection_radio_buttons :icon, Iconable::AVAILABLE_ICONS_SHORT, :first, :first do |rb| %>
+      <%= f.collection_radio_buttons :icon, Iconable::AVAILABLE_ICONS, :first, :first do |rb| %>
         <%= rb.label { rb.radio_button + "<i class=\"fas fa-#{rb.object.first}\"></i>".html_safe } %>
       <% end %>
     </div>
