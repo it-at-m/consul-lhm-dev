@@ -381,7 +381,7 @@ de:
           created: Phase wurde erstellt
           updated: Phase wurde aktualisiert
           destroyed: Phase wurde gelöscht
-          not_destroyed: Phase wurde nicht gelöscht
+          not_destroyed: Phase konnte nicht gelöscht werden, da sie bereits assoziierte Inhalte hat
         shared:
           update_button: Speichern
         phase_tab_name: Name in Tab
