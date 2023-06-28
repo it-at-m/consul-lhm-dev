@@ -4,8 +4,12 @@ class Pages::Projekts::SidebarPhasesComponent < ApplicationComponent
 
   def initialize(projekt)
     @projekt = projekt
-    @phases = projekt.projekt_phases.sorted
+    @phases = projekt.projekt_phases.active.sorted
     @milestone_phase = projekt.milestone_phases.first
+  end
+
+  def render?
+    phases.any?
   end
 
   private
