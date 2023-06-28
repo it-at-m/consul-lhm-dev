@@ -5,7 +5,7 @@ module Sentimentable
     has_many :resource_sentiments, as: :sentimentable, dependent: :destroy
     has_many :sentiments, through: :resource_sentiments
 
-    validates :sentiments, presence: true, on: :create, if: :sentiments_available?
+    # validates :sentiments, presence: true, on: :create, if: :sentiments_available?
   end
 
   def sentiments_available?

@@ -12,7 +12,7 @@ class Proposal < ApplicationRecord
   delegate :comments_allowed?, to: :projekt_phase
 
   validates_translation :description, presence: true
-  validates :projekt_id, presence: true
+  validates :projekt_phase, presence: true
   validate :description_sanitized
 
   # validates :terms_of_service, acceptance: { allow_nil: false }, on: :create
