@@ -62,6 +62,7 @@ class ProjektPhase < ApplicationRecord
   has_many :subscribers, through: :subscriptions, source: :user
 
   has_many :map_layers, as: :mappable, dependent: :destroy
+  has_many :comments, as: :commentable, inverse_of: :commentable, dependent: :destroy
 
   validates :projekt, presence: true
 

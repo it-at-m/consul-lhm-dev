@@ -1,6 +1,4 @@
 class ProjektPhase::CommentPhase < ProjektPhase
-  has_many :comments, as: :commentable, inverse_of: :commentable, dependent: :destroy
-
   def phase_activated?
     active?
   end
