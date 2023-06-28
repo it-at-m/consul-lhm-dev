@@ -12,13 +12,15 @@
     </div>
   <% end %>
 
-  <div class="clear">
+  <div class="row">
     <div class="small-12 medium-6 large-4 column">
       <%= f.text_field :color, placeholder: t("custom.admin.projekt_phases.sentiments.form.color_placeholder") %>
     </div>
   </div>
 
-  <div class="small-12 column">
-    <%= f.submit class: "button success" %>
+  <div class="row">
+    <div class="small-12 column">
+      <%= f.submit class: "button success" %>
+    </div>
   </div>
 <% end %>

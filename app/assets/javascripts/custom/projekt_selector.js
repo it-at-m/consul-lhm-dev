@@ -79,6 +79,7 @@
       updateAvailableSDGsSelection($projektPhase);
       toggleExternalFieldsHeader($projektPhase);
       updateProjektLabelSelector($projektPhase);
+      // updateSentimentSelector($projektPhase);
 
       function updateProjektSelectorHint(projektPhaseId) {
         var $hintElement = $('[id$="_creation_recommendations"]').first();
@@ -243,6 +244,28 @@
             $(label).addClass('hide');
           }
         });
+      }
+
+      function updateSentimentSelector($projektPhase) {
+        if ($projektPhase.data("sentiment-ids")) {
+          var sentimentIdsToShow = $projektPhase.data("sentiment-ids").toString().split(",");
+        } else {
+          var sentimentIdsToShow = [];
+        }
+
+        if (sentimentIdsToShow.join().length == 0) {
+          $('#sentiment-selector').addClass('hide');
+        } else {
+          $('#sentiment-selector').removeClass('hide');
+        }
+
+        $("#sentiment-selector .sentiment").each(function(index, sentiment) {
+          if (sentimentIdsToShow.includes($(sentiment).data("sentimentId").toString())) {
+            $(sentiment).removeClass('hide');
+          } else {
+            $(sentiment).addClass('hide');
+          }
+        })
       }
     },
 
