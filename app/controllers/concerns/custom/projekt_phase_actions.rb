@@ -14,7 +14,7 @@ module ProjektPhaseActions
 
   def create
     @projekt = Projekt.find(params[:projekt_id])
-    ProjektPhase.create!(projekt_phase_params)
+    ProjektPhase.create!(projekt_phase_params.merge(active: true))
 
     redirect_to edit_admin_projekt_path(@projekt.id, anchor: "tab-projekt-phases"),
       notice: t("custom.admin.projekt_phases.notice.created")

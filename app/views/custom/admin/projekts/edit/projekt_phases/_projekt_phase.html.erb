@@ -64,11 +64,10 @@
   </td>
 
   <td>
-    <%= link_to polymorphic_path([@namespace, projekt_phase], action: :duration) do %>
-      <i class="fas fa-edit"></i>
-    <% end %>
-    <%= link_to polymorphic_path([@namespace, projekt_phase]), method: :delete, data: { confirm: t("admin.actions.confirm") } do %>
-      <i class="fas fa-trash-alt"></i>
-    <% end %>
+    <%= render Admin::TableActionsComponent.new(projekt_phase,
+                                                actions: [:edit, :destroy],
+                                                edit_path: polymorphic_path([@namespace, projekt_phase], action: :duration),
+                                                destroy_path: polymorphic_path([@namespace, projekt_phase])
+                                               ) %>
   </td>
 </tr>
