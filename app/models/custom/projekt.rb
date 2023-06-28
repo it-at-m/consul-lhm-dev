@@ -51,7 +51,7 @@ class Projekt < ApplicationRecord
   has_many :projekt_livestreams, through: :livestream_phases
   has_many :projekt_notifications, through: :projekt_notification_phases
   has_many :projekt_events, through: :event_phases
-  has_many :legislation_processes, dependent: :nullify, class_name: "Legislation::Process" # TODO
+  has_many :legislation_processes, through: :legislation_phases
 
   belongs_to :author, -> { with_hidden }, class_name: "User", inverse_of: :projekts
 

@@ -3,15 +3,15 @@ require_dependency Rails.root.join("app", "models", "poll").to_s
 class Poll < ApplicationRecord
   include Taggable
 
-  belongs_to :projekt, optional: true, touch: true # TODO: remove column after data migration con1538
+  belongs_to :old_projekt, class_name: "Projekt", foreign_key: "projekt_id" # TODO: remove column after data migration con1538
+
+  delegate :projekt, to: :projekt_phase
   belongs_to :projekt_phase
-  # has_many :voting_phases, through: :projekt
   has_many :geozone_restrictions, through: :projekt_phase
   has_many :geozone_affiliations, through: :projekt
 
   validates :projekt_phase, presence: true
 
-  scope :with_current_projekt,  -> { joins(:projekt).merge(Projekt.current) }
   scope :last_week, -> { where("polls.created_at >= ?", 7.days.ago) }
 
   def not_allow_user_geozone?(user)

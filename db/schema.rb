@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_27_155647) do
+ActiveRecord::Schema.define(version: 2023_06_28_145149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1020,6 +1020,7 @@ ActiveRecord::Schema.define(version: 2023_06_27_155647) do
     t.text "font_color"
     t.tsvector "tsv"
     t.bigint "projekt_id"
+    t.bigint "projekt_phase_id"
     t.index ["allegations_end_date"], name: "index_legislation_processes_on_allegations_end_date"
     t.index ["allegations_start_date"], name: "index_legislation_processes_on_allegations_start_date"
     t.index ["debate_end_date"], name: "index_legislation_processes_on_debate_end_date"
@@ -1030,6 +1031,7 @@ ActiveRecord::Schema.define(version: 2023_06_27_155647) do
     t.index ["end_date"], name: "index_legislation_processes_on_end_date"
     t.index ["hidden_at"], name: "index_legislation_processes_on_hidden_at"
     t.index ["projekt_id"], name: "index_legislation_processes_on_projekt_id"
+    t.index ["projekt_phase_id"], name: "index_legislation_processes_on_projekt_phase_id"
     t.index ["result_publication_date"], name: "index_legislation_processes_on_result_publication_date"
     t.index ["start_date"], name: "index_legislation_processes_on_start_date"
   end
@@ -2502,6 +2504,7 @@ ActiveRecord::Schema.define(version: 2023_06_27_155647) do
   add_foreign_key "images", "users"
   add_foreign_key "individual_group_values", "individual_groups"
   add_foreign_key "legislation_draft_versions", "legislation_processes"
+  add_foreign_key "legislation_processes", "projekt_phases"
   add_foreign_key "legislation_processes", "projekts"
   add_foreign_key "legislation_proposals", "legislation_processes"
   add_foreign_key "locks", "users"

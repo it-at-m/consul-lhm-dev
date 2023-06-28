@@ -1,11 +1,10 @@
 require_dependency Rails.root.join("app", "models", "budget").to_s
 
 class Budget < ApplicationRecord
-  belongs_to :projekt, optional: true           # TODO: remove column after data migration con1538
-  has_many :budget_phases, through: :projekt    # TODO: remove column after data migration con1538
+  belongs_to :old_projekt, foreign_key: :projekt_id, class_name: "Projekt", optional: true # TODO: remove column after data migration con1538
 
   belongs_to :projekt_phase, optional: true
-  # delegate :projekt, to: :projekt_phase, allow_nil: true # TODO: enable after data migration con1538
+  delegate :projekt, to: :projekt_phase, allow_nil: true
 
   def investments_filters
     [
