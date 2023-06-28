@@ -12,13 +12,8 @@ class Budgets::Investments::NewComponent < ApplicationComponent
   private
 
     def budgets_back_link_path
-      if params[:origin] == "projekt"
-        budget = Budget.find(params[:budget_id])
-        projekt = budget.projekt
-        page = projekt.page
-        budget_phase_id = projekt.budget_phase.id
-
-        link_to "/#{page.slug}?selected_phase_id=#{budget_phase_id}", class: "back" do
+      if params[:projekt_phase_id].present?
+        link_to url_to_footer_tab, class: "back" do
           tag.span(class: "icon-angle-left") + t("shared.back")
         end
 

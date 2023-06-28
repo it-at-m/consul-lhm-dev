@@ -1,0 +1,18 @@
+<% if @individual_groups.any? %>
+  <div>
+    <div class="option-group-title">
+      <i class="fas fa-users-cog"></i>
+      <span><%= t("custom.admin.projekt_phases.restrictions.individual_group_values.title") %></span>
+    </div>
+
+    <% @individual_groups.each do |individual_group| %>
+      <div class="options-group">
+        <label><%= individual_group.name %></label>
+
+        <%= f.collection_check_boxes :individual_group_value_ids, individual_group.individual_group_values, :id, :name do |cb| %>
+          <%= cb.label(class: "checkbox-label checkbox-label--inline") { cb.check_box + cb.text } %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

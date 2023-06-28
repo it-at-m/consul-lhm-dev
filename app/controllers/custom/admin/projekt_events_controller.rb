@@ -1,9 +1,10 @@
 class Admin::ProjektEventsController < Admin::BaseController
-  before_action :set_projekt
+  before_action :set_projekt_phase
+  before_action :set_projekt_event, only: [:update, :destroy, :send_notifications]
 
   def create
     @projekt_event = ProjektEvent.new(projekt_event_params)
-    @projekt_event.projekt = @projekt
+    @projekt_event.projekt_phase = @projekt_phase
 
     if should_authorize_projekt_manager?
       authorize! :create, @projekt_event
@@ -11,7 +12,7 @@ class Admin::ProjektEventsController < Admin::BaseController
 
     @projekt_event.save!
 
-    redirect_to redirect_path(@projekt), notice: t("admin.settings.flash.updated")
+    redirect_to redirect_path(@projekt_phase), notice: t("admin.settings.flash.updated")
   end
 
   def update
@@ -22,7 +23,7 @@ class Admin::ProjektEventsController < Admin::BaseController
       authorize! :update, @projekt_event
     end
 
-    redirect_to redirect_path(@projekt), notice: t("admin.settings.flash.updated")
+    redirect_to redirect_path(@projekt_phase), notice: t("admin.settings.flash.updated")
   end
 
   def destroy
@@ -33,11 +34,10 @@ class Admin::ProjektEventsController < Admin::BaseController
       authorize! :destroy, @projekt_event
     end
 
-    redirect_to redirect_path(@projekt)
+    redirect_to redirect_path(@projekt_phase)
   end
 
   def send_notifications
-    @projekt_event = ProjektEvent.find_by(id: params[:id])
     NotificationServices::NewProjektEventNotifier.call(@projekt_event.id)
     redirect_to edit_admin_projekt_path(@projekt, anchor: "tab-projekt-events"),
       notice: t("custom.admin.projekts.edit.projekt_events_tab.notifications_sent_notice")
@@ -48,18 +48,18 @@ class Admin::ProjektEventsController < Admin::BaseController
     def projekt_event_params
       params
         .require(:projekt_event)
-        .permit(:title, :description, :location, :datetime, :end_datetime, :weblink)
+        .permit(:projekt_phase_id, :title, :description, :location, :datetime, :end_datetime, :weblink)
     end
 
-    def set_projekt
-      @projekt = Projekt.find(params[:projekt_id])
+    def set_projekt_phase
+      @projekt_phase = ProjektPhase.find(params[:projekt_phase_id])
     end
 
-    def redirect_path(projekt)
-      if params[:namespace] == "projekt_management"
-        edit_projekt_management_projekt_path(projekt) + "#tab-projekt-events"
-      else
-        edit_admin_projekt_path(projekt) + "#tab-projekt-events"
-      end
+    def set_projekt_event
+      @projekt_event = ProjektEvent.find_by(id: params[:id])
+    end
+
+    def redirect_path(projekt_phase)
+      projekt_events_admin_projekt_phase_path(projekt_phase)
     end
 end

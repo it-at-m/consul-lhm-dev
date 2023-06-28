@@ -62,19 +62,19 @@ Rails.application.routes.draw do
   # Static pages
   resources :pages, path: "/", only: [:show] do
     member do
-      get :comment_phase_footer_tab
-      get :debate_phase_footer_tab
-      get :proposal_phase_footer_tab
-      get :voting_phase_footer_tab
-      get :budget_phase_footer_tab
-      get :milestone_phase_footer_tab
-      get :projekt_notification_phase_footer_tab
-      get :newsfeed_phase_footer_tab
-      get :event_phase_footer_tab
-      get :argument_phase_footer_tab
-      get :livestream_phase_footer_tab
-      get :legislation_phase_footer_tab
-      get :question_phase_footer_tab
+      # get :comment_phase_footer_tab
+      # get :debate_phase_footer_tab
+      # get :proposal_phase_footer_tab
+      # get :voting_phase_footer_tab
+      # get :budget_phase_footer_tab
+      # get :milestone_phase_footer_tab
+      # get :projekt_notification_phase_footer_tab
+      # get :newsfeed_phase_footer_tab
+      # get :event_phase_footer_tab
+      # get :argument_phase_footer_tab
+      # get :livestream_phase_footer_tab
+      # get :legislation_phase_footer_tab
+      # get :question_phase_footer_tab
       get :extended_sidebar_map
     end
   end
@@ -110,10 +110,10 @@ Rails.application.routes.draw do
   # csv details for poll results
   get    "/polls/:id/csv_answers_votes",                   to: "polls#csv_answers_votes",             as: :poll_csv_answers_votes
 
+  # projekt page footer tabs
+  get    "/:id/projekt_phase_footer_tab/:projekt_phase_id", to: "pages#projekt_phase_footer_tab",     as: :projekt_phase_footer_tab_page
+
   # projekt notifications
   put "/admin/polls/:id/send_notifications",               to: "admin/poll/polls#send_notifications", as: :send_notifications_admin_poll
-  post "/admin/projekt/:projekt_id/projekt_questions/send_notifications",   to: "admin/projekt_questions#send_notifications", as: :send_notifications_admin_projekt_projekt_questions
   post "/admin/projekt/:projekt_id/projekt_arguments/send_notifications",   to: "admin/projekt_arguments#send_notifications", as: :send_notifications_admin_projekt_projekt_arguments
-  post "/admin/projekt/:projekt_id/projekt_events/:id/send_notifications",   to: "admin/projekt_events#send_notifications", as: :send_notifications_admin_projekt_projekt_event
-  post "/admin/projekt/:projekt_id/projekt_livestreams/:id/send_notifications",   to: "admin/projekt_livestreams#send_notifications", as: :send_notifications_admin_projekt_projekt_livestream
 end

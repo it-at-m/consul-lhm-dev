@@ -10,7 +10,7 @@
     <% else %>
       <legend><%= t("custom.shared.form.projekt_assignment") %></legend>
       <div id="projekt-selector-block" class="margin-top">
-        <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: @debate, projekts: Projekt.top_level } %>
+        <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: @debate } %>
       </div>
     <% end %>
 

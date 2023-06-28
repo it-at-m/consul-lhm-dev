@@ -11,6 +11,9 @@
     <%= render Shared::ProjektLabelsComponent.new(css_class: "js-select-projekt-label hide") %>
   </div>
 
+  <div id='sentiments_selector' style="margin-top:2rem;margin-bottom:2rem;">
+  </div>
+
   <div id="projekt-labels-checkboxes">
     <%= f.collection_check_boxes :projekt_label_ids, ProjektLabel.all, :id, :name %>
   </div>

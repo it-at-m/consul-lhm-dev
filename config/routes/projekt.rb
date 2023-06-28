@@ -25,6 +25,13 @@ resources :projekt_livestreams, only: [:show] do
   end
 end
 
-get  "/projekt_phases/:id/selector_hint_html",    to: "projekt_phases#selector_hint_html"
-post "/projekt_phases/:id/toggle_subscription",   to: "projekt_phases#toggle_subscription", as: :toggle_subscription_projekt_phase
+resources :projekt_phases, only: [] do
+  member do
+    get :selector_hint_html
+    get :form_heading_text
+    get :map_html
+    post :toggle_subscription
+  end
+end
+
 patch "/projekt_subscriptions/:id/toggle_subscription", to: "projekt_subscriptions#toggle_subscription", as: :toggle_subscription_projekt_subscription

@@ -59,7 +59,7 @@ class DebatesController < ApplicationController
   end
 
   def edit
-    @selected_projekt = @debate.projekt
+    @selected_projekt = @debate.projekt_phase.projekt
   end
 
   def create
@@ -70,26 +70,26 @@ class DebatesController < ApplicationController
       track_event
       NotificationServices::NewDebateNotifier.new(@debate.id).call
 
-      if @debate.debate_phase.active?
-        if @debate.projekt.overview_page?
+      if @debate.projekt_phase.active?
+        if @debate.projekt_phase.projekt.overview_page?
           redirect_to projekts_path(
-            anchor: 'filter-subnav',
-            selected_phase_id: @debate.debate_phase.id,
+            anchor: "filter-subnav",
+            selected_phase_id: @debate.projekt_phase.id,
             order: params[:order]
           ), notice: t("flash.actions.create.debate")
         else
           redirect_to page_path(
-            @debate.projekt.page.slug,
-            anchor: 'filter-subnav',
-            selected_phase_id: @debate.debate_phase.id,
+            @debate.projekt_phase.projekt.page.slug,
+            anchor: "filter-subnav",
+            selected_phase_id: @debate.projekt_phase.id,
             order: params[:order]
           ), notice: t("flash.actions.create.debate")
         end
       else
-        if @debate.projekt.overview_page?
+        if @debate.projekt_phase.projekt.overview_page?
           redirect_to projekts_path(
-            anchor: 'filter-subnav',
-            selected_phase_id: @debate.debate_phase.id,
+            anchor: "filter-subnav",
+            selected_phase_id: @debate.projekt_phase.id,
             order: params[:order]
           ), notice: t("flash.actions.create.debate")
         else
@@ -99,7 +99,7 @@ class DebatesController < ApplicationController
         end
       end
     else
-      @selected_projekt = @debate.projekt
+      @selected_projekt = @debate.projekt_phase.projekt
       render :new
     end
   end
@@ -107,7 +107,7 @@ class DebatesController < ApplicationController
   def show
     super
 
-    @projekt = @debate.projekt
+    @projekt = @debate.projekt_phase.projekt
     @related_contents = Kaminari.paginate_array(@debate.relationed_contents).page(params[:page]).per(5)
 
     if request.path != debate_path(@debate)
@@ -141,7 +141,7 @@ class DebatesController < ApplicationController
   private
 
   def debate_params
-    attributes = [:tag_list, :projekt_id, :related_sdg_list, :on_behalf_of,
+    attributes = [:tag_list, :projekt_id, :projekt_phase_id, :related_sdg_list, :on_behalf_of,
                   :terms_of_service, :terms_data_storage, :terms_data_protection, :terms_general,
                   projekt_label_ids: [],
                   image_attributes: image_attributes,

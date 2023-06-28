@@ -42,7 +42,7 @@ module CustomHelper
   end
 
   def in_projekt_footer?
-    params[:current_tab_path].present? && !request.path.starts_with?('/projekts')
+    params[:projekt_phase_id].present? && !request.path.starts_with?('/projekts')
   end
 
   def set_comments_view_context_variables(commentable, comment_order: nil)

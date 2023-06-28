@@ -56,29 +56,24 @@ class Shared::ProjektLabelsComponent < ApplicationComponent
   def link_path(label)
     selected_projekt_labels = params[:projekt_label_ids].dup
 
-    url_for(action: params[:current_tab_path],
-            controller: "/pages",
-            page: params[:page] || 1,
-            order: params[:order],
-            filter_projekt_ids: params[:filter_projekt_ids],
-            projekt_label_ids: toggle_element_in_array(selected_projekt_labels, label.id.to_s),
-            filter: params[:filter])
+    if params[:projekt_phase_id].present?
+      projekt_phase_footer_tab_page_path(@projekt.page, params[:projekt_phase_id],
+                                      page: params[:page] || 1,
+                                      order: params[:order],
+                                      filter_projekt_ids: params[:filter_projekt_ids],
+                                      projekt_label_ids: toggle_element_in_array(selected_projekt_labels, label.id.to_s),
+                                      filter: params[:filter]
+                                    )
+    end
   end
 
   def footer_tab_back_button_url(label)
     selected_projekt_labels = params[:projekt_label_ids].dup
 
     if controller_name == "pages" &&
-        params[:current_tab_path].present? &&
         !helpers.request.path.starts_with?("/projekts")
 
-      url_for_footer_tab_back_button(page_id: params[:id],
-                                     pagination_page: params[:page],
-                                     current_tab_path: params[:current_tab_path],
-                                     filter: params[:filter],
-                                     order: params[:order],
-                                     filter_projekt_ids: params[:filter_projekt_ids],
-                                     projekt_label_ids: toggle_element_in_array(selected_projekt_labels, label.id.to_s))
+      url_to_footer_tab(projekt_label_ids: toggle_element_in_array(selected_projekt_labels, label.id.to_s))
     else
       "empty"
     end

@@ -6,8 +6,11 @@ class ProjektQuestion < ApplicationRecord
   translates :title, touch: true
   include Globalizable
 
+  belongs_to :old_projekt, class_name: "Projekt", foreign_key: "projekt_id", optional: true # TODO: remove column after data migration con1538
+  delegate :projekt, to: :projekt_phase
+
   belongs_to :author, -> { with_hidden }, class_name: "User", inverse_of: :projekt_questions
-  belongs_to :projekt
+  belongs_to :projekt_phase, optional: true
   belongs_to :projekt_livestream, optional: true
 
   has_many :question_options, -> { order(:id) },
@@ -24,7 +27,7 @@ class ProjektQuestion < ApplicationRecord
 
   accepts_nested_attributes_for :question_options, reject_if: proc { |attributes| attributes.all? { |k, v| v.blank? } }, allow_destroy: true
 
-  validates :projekt, presence: true
+  validates :projekt_phase, presence: true
   validates_translation :title, presence: true
 
   scope :sorted, -> { order("id ASC") }
@@ -49,13 +52,13 @@ class ProjektQuestion < ApplicationRecord
     projekt_livestream_id.present?
   end
 
-  def projekt_phase
-    if projekt_livestream_id.present?
-      projekt.livestream_phase
-    else
-      projekt.question_phase
-    end
-  end
+  # def projekt_phase
+  #   if projekt_livestream_id.present?
+  #     projekt.livestream_phases.first
+  #   else
+  #     projekt.question_phases.first
+  #   end
+  # end
 
   def permission_problem(user)
     @permission_problem = projekt_phase.permission_problem(user)
@@ -66,7 +69,7 @@ class ProjektQuestion < ApplicationRecord
   end
 
   def base_query_for_navigation
-    base_query = projekt.questions.sorted
+    base_query = projekt_phase.questions.sorted
 
     if root_question?
       base_query.root_questions
@@ -77,7 +80,7 @@ class ProjektQuestion < ApplicationRecord
 
   def sibling_questions
     if root_question?
-      projekt.questions.root_questions
+      projekt_phase.questions.root_questions
     elsif projekt_livestream.present?
       projekt_livestream.projekt_questions
     end

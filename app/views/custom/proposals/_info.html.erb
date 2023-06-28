@@ -1,7 +1,7 @@
 <% cache [locale_and_user_status(@proposal),
           @proposal,
           @proposal.author,
-          @proposal.projekt,
+          @proposal.projekt_phase,
           feature?(:map),
           Flag.flagged?(current_user, @proposal),
           "show_info"] do %>
@@ -10,10 +10,10 @@
     <div class="margin-bottom not-print">
       <%= render Shared::MapComponent.new(
         mappable: @proposal,
-        map_location: @proposal.map_location || @proposal.projekt&.map_location_with_admin_shape,
+        map_location: @proposal.map_location || @proposal.projekt_phase.projekt.map_location_with_admin_shape,
         parent_class: "proposal",
-        projekt: @proposal.projekt,
-        show_admin_shape: @proposal.projekt.map_location.show_admin_shape?
+        projekt: @proposal.projekt_phase.projekt,
+        show_admin_shape: @proposal.projekt_phase.projekt.map_location.show_admin_shape?
       ) %>
     </div>
   <% end %>
@@ -24,7 +24,7 @@
     </div>
   <% end %>
 
-  <% if projekt_feature?(@proposal.projekt, 'proposals.enable_summary') && @proposal.summary.present? %>
+  <% if projekt_phase_feature?(@proposal.projekt_phase, "enable_summary") && @proposal.summary.present? %>
     <blockquote><%= @proposal.summary %></blockquote>
   <% end %>
 
@@ -82,7 +82,7 @@
     </div>
   <% end %>
 
-  <% if projekt_feature?(@proposal.projekt, "proposals.allow_attached_documents") %>
+  <% if projekt_phase_feature?(@proposal.projekt_phase, "allow_attached_documents") %>
     <%= render "documents/documents",
                 documents: @proposal.documents,
                 max_documents_allowed: Proposal.max_documents_allowed %>

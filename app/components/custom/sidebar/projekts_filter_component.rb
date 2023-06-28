@@ -23,13 +23,13 @@ class Sidebar::ProjektsFilterComponent < ApplicationComponent
       return false if @current_projekt&.overview_page?
 
       if resources_name == "budget"
-        return @current_projekt.present? && @current_projekt.children.joins(:budget).any?
+        return @current_projekt.present? && @current_projekt.children.joins(budget_phases: :budget).any?
       end
 
       @top_level_active_projekts.count > 1 ||
 
         (@top_level_active_projekts.count == 1 &&
-          (@top_level_active_projekts.first.all_children_ids & @scoped_projekt_ids).any?) ||
+          (@top_level_active_projekts.first.all_children_ids).any?) ||
 
         @top_level_archived_projekts.count > 1 ||
 
@@ -65,12 +65,13 @@ class Sidebar::ProjektsFilterComponent < ApplicationComponent
     end
 
     def form_path
-      if params[:current_tab_path]
-        url_for(action: params[:current_tab_path],
-                controller: "/pages",
-                order: params[:order],
-                projekt_label_ids: params[:projekt_label_ids],
-                filter: params[:filter])
+      if @current_tab_phase.present? && @current_projekt.present?
+        projekt_phase_footer_tab_page_path(@current_projekt.page, @current_tab_phase,
+                                            page: params[:page] || 1,
+                                            order: params[:order],
+                                            projekt_label_ids: params[:projekt_label_ids],
+                                            filter: params[:filter]
+                                          )
       else
         url_for(action: "index", controller: controller_name)
       end
@@ -78,15 +79,10 @@ class Sidebar::ProjektsFilterComponent < ApplicationComponent
 
     def footer_tab_back_button_url
       if controller_name == "pages" &&
-          params[:current_tab_path].present? &&
+          params[:projekt_phase_id].present? &&
           !helpers.request.path.starts_with?("/projekts")
 
-        url_for_footer_tab_back_button(page_id: params[:id],
-                                       pagination_page: params[:page],
-                                       current_tab_path: params[:current_tab_path],
-                                       filter: params[:filter],
-                                       order: params[:order],
-                                       projekt_label_ids: params[:projekt_label_ids])
+        url_to_footer_tab
       else
         "empty"
       end

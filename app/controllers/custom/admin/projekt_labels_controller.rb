@@ -2,35 +2,33 @@ class Admin::ProjektLabelsController < Admin::BaseController
   include Translatable
   respond_to :js
 
-  before_action :set_projekt
+  before_action :set_projekt_phase
   load_and_authorize_resource only: %i[edit update destroy]
 
   def new
     @projekt_label = ProjektLabel.new
     authorize! :create, @projekt_label
-
-    render "custom/admin/projekts/edit/projekt_labels/new"
   end
 
   def create
     @projekt_label = ProjektLabel.new(projekt_label_params)
-    @projekt_label.projekt = @projekt
+    @projekt_label.projekt_phase = @projekt_phase
     authorize! :create, @projekt_label
 
     if @projekt_label.save
-      redirect_to edit_admin_projekt_path(@projekt, anchor: "tab-projekt-labels")
+      redirect_to projekt_labels_admin_projekt_phase_path(@projekt_phase)
     else
       render :new
     end
   end
 
   def edit
-    render "custom/admin/projekts/edit/projekt_labels/edit"
+    render "custom/admin/projekt_labels/edit"
   end
 
   def update
     if @projekt_label.update(projekt_label_params)
-      redirect_to edit_admin_projekt_path(@projekt, anchor: "tab-projekt-labels")
+      redirect_to projekt_labels_admin_projekt_phase_path(@projekt_phase)
     else
       render :edit
     end
@@ -38,14 +36,14 @@ class Admin::ProjektLabelsController < Admin::BaseController
 
   def destroy
     @projekt_label.destroy!
-    redirect_to edit_admin_projekt_path(@projekt, anchor: "tab-projekt-labels"),
+    redirect_to projekt_labels_admin_projekt_phase_path(@projekt_phase),
                 notice: t("custom.admin.projekt.label.destroy.success")
   end
 
   private
 
-    def set_projekt
-      @projekt = Projekt.find(params[:projekt_id])
+    def set_projekt_phase
+      @projekt_phase = ProjektPhase.find(params[:projekt_phase_id])
     end
 
     def projekt_label_params

@@ -451,3 +451,41 @@ span.toggle-arrow {
 .card {
   background-color: #f4f4f4 !important;
 }
+
+
+// Subnav without tabs
+.static-subnav {
+  border-bottom: 1px solid #dee0e3;
+  margin-bottom: 2.5rem;
+
+  .static-subnav-link {
+    display: inline-block;
+    line-height: 1;
+    color: #515151;
+    padding: 0.75rem 0;
+    margin-right: 1rem;
+    font-size: 1.0625rem;
+    text-decoration: none;
+
+    &.current {
+      color: #004a83;
+      font-weight: bold;
+      border-bottom: 2px solid;
+    }
+  }
+}
+
+
+// Buttons
+
+.button {
+  &.left-aligned {
+    text-align: start;
+    padding-left: 0.5em;
+
+    i {
+      width: 25px;
+      text-align: center;
+    }
+  }
+}

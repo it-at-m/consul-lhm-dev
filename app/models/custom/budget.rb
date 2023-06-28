@@ -1,8 +1,10 @@
 require_dependency Rails.root.join("app", "models", "budget").to_s
 
 class Budget < ApplicationRecord
-  belongs_to :projekt, optional: true
-  has_one :budget_phase, through: :projekt
+  belongs_to :old_projekt, foreign_key: :projekt_id, class_name: "Projekt", optional: true # TODO: remove column after data migration con1538
+
+  belongs_to :projekt_phase, optional: true
+  delegate :projekt, to: :projekt_phase, allow_nil: true
 
   def investments_filters
     [
@@ -21,13 +23,9 @@ class Budget < ApplicationRecord
   end
 
   def show_percentage_values_only?
-    budget_phase.projekt_settings
+    projekt_phase.projekt_settings
       .find_by(key: "projekt_feature.budgets.show_relative_ballotting_results")
       .value
       .present?
-  end
-
-  def projekt_phase
-    budget_phase
   end
 end

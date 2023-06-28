@@ -44,6 +44,7 @@ en:
           title: Events
         sidebar:
           admin_controls:
+            title: Admin
             copy_code: Copy source code
             edit_projekt: Edit projekt
             edit_projekt_settings: Project settings

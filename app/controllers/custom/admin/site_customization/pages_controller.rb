@@ -46,7 +46,7 @@ class Admin::SiteCustomization::PagesController < Admin::SiteCustomization::Base
       elsif @page.projekt.present?
         namespace = params[:controller].split('/').first
 
-        namespaced_polymorphic_path(namespace, @page.projekt, action: :edit)
+        namespaced_polymorphic_path(namespace, @page.projekt, action: :edit, anchor: "tab-projekt-page")
       else
         admin_site_customization_pages_path
       end

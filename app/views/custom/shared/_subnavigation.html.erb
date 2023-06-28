@@ -13,7 +13,7 @@
         !launch_page &&
         ( Projekt.top_level.selectable_in_selector('debates', current_user).any? ||
           Projekt.top_level.selectable_in_selector('proposals', current_user).any? ||
-          Projekt.joins(:budget).where( budgets: { phase: 'accepting'} ).any? ) %>
+          Projekt.joins(budget_phases: :budget).where( budgets: { phase: 'accepting'} ).any? ) %>
       <%= render partial: 'shared/subnavigation_new_entry', locals: { placement: placement } %>
     <% end %>
   </div>

@@ -1,4 +1,7 @@
+<% top_level_projekts = Projekt.top_level.regular %>
+
 <%= f.hidden_field :projekt_id %>
+<%= f.hidden_field :projekt_phase_id %>
 
 <% if model.errors.details[:projekt_id].any? %>
   <% model.errors.details[:projekt_id].each do |error| %>
@@ -17,7 +20,7 @@
       </div>
     </div>
 
-    <%= render partial: 'shared/projekt_selector/projekt_group', locals: { projekts: projekts.selectable_in_selector(controller_name, current_user), parent_id: 0 } %>
+    <%= render partial: 'shared/projekt_selector/projekt_group', locals: { projekts: top_level_projekts.selectable_in_selector(controller_name, current_user), parent_id: 0, resource: model } %>
   </div>
 
   <div class='spacer'>
@@ -31,8 +34,8 @@
       </div>
     </div>
 
-    <% projekts.each do |projekt|  %>
-      <%= render partial: 'shared/projekt_selector/projekt_group', locals: { projekts: projekt.children.selectable_in_selector(controller_name, current_user), parent_id: projekt.id } if projekt.children.selectable_in_selector(controller_name, current_user) %>
+    <% top_level_projekts.each do |projekt|  %>
+      <%= render partial: 'shared/projekt_selector/projekt_group', locals: { projekts: projekt.children.selectable_in_selector(controller_name, current_user), parent_id: projekt.id, resource: model } if projekt.children.selectable_in_selector(controller_name, current_user).any? %>
     <% end %>
   </div>
 
@@ -47,10 +50,16 @@
       </div>
     </div>
 
-    <% projekts.each do |projekt|  %>
+    <% top_level_projekts.each do |projekt|  %>
       <% projekt.children.each do |projekt| %>
-        <%= render partial: 'shared/projekt_selector/projekt_group', locals: { projekts: projekt.children.selectable_in_selector(controller_name, current_user), parent_id: projekt.id  } if projekt.children.selectable_in_selector(controller_name, current_user).any? %>
+        <%= render partial: 'shared/projekt_selector/projekt_group', locals: { projekts: projekt.children.selectable_in_selector(controller_name, current_user), parent_id: projekt.id, resource: model  } if projekt.children.selectable_in_selector(controller_name, current_user).any? %>
       <% end %>
     <% end %>
   </div>
+</div>
+
+<div id='projekt-phase-selector-fields' class=''>
+  <% Projekt.regular.selectable_in_selector(controller_name, current_user).each do |projekt| %>
+    <%= render partial: "shared/projekt_selector/projekt_phase_group", locals: { projekt: projekt, resource: model } %>
+  <% end %>
 </div>

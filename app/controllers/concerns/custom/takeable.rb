@@ -1,20 +1,37 @@
 module Takeable
   extend ActiveSupport::Concern
 
-  def take_by_projekts(scoped_projekts_ids)
-    @resources = @resources.joins(:projekt).merge(Projekt.activated)
+  def take_by_projekt_phases(scoped_projekt_phases_ids)
+    @resources = @resources.joins(projekt_phase: :projekt).merge(Projekt.activated)
 
-    if controller_name.in?(['debates', 'proposals', 'polls'])
-      projekts_visible_in_sidebar = Projekt.show_in_sidebar(controller_name)
-      @resources = @resources.where(projekt: projekts_visible_in_sidebar)
+    if controller_name.in?(["debates", "proposals", "polls"])
+      projekts_visible_in_sidebar_ids = Projekt.show_in_sidebar(controller_name).ids
+      @resources.joins(projekt_phase: :projekt).where(projekts: { id: projekts_visible_in_sidebar_ids })
     end
 
-    @resources = @resources.where(projekt_id: scoped_projekts_ids).distinct
+    @resources = @resources.where(projekt_phases: { id: scoped_projekt_phases_ids })
 
     @all_resources = @resources
 
     if params[:filter_projekt_ids].present?
-      @resources = @resources.where(projekt_id: params[:filter_projekt_ids].split(','))
+      @resources = @resources.where(projekts: { id: params[:filter_projekt_ids].split(",") })
+    end
+  end
+
+  def take_by_projekts(scoped_projekts_ids)
+    @resources = @resources.joins(projekt_phase: :projekt).merge(Projekt.activated)
+
+    if controller_name.in?(["debates", "proposals", "polls"])
+      projekts_visible_in_sidebar_ids = Projekt.show_in_sidebar(controller_name).ids
+      @resources.joins(projekt_phase: :projekt).where(projekts: { id: projekts_visible_in_sidebar_ids })
+    end
+
+    @resources = @resources.where(projekts: { id: scoped_projekts_ids }).distinct
+
+    @all_resources = @resources
+
+    if params[:filter_projekt_ids].present?
+      @resources = @resources.where(projekts: { id: params[:filter_projekt_ids].split(",") })
     end
   end
 
@@ -29,7 +46,7 @@ module Takeable
 
   def take_by_tag_names
     if params[:tags].present?
-      @resources = @resources.tagged_with(params[:tags].split(","), all: true, any: :true)
+      @resources = @resources.tagged_with(params[:tags].split(","), all: true, any: true)
       @all_resources = @resources
     end
   end
@@ -65,54 +82,35 @@ module Takeable
 
   def take_by_geozone_affiliations
     case @selected_geozone_affiliation
-    when 'all_resources'
+    when "all_resources"
       @resources
-    when 'no_affiliation'
-      @resources = @resources.joins(:projekt).where( projekts: { geozone_affiliated: 'no_affiliation' } ).distinct
-    when 'entire_city'
-      @resources = @resources.joins(:projekt).where(projekts: { geozone_affiliated: 'entire_city' } ).distinct
-    when 'only_geozones'
-      @resources = @resources.joins(:projekt).where(projekts: { geozone_affiliated: 'only_geozones' } ).distinct
+    when "no_affiliation"
+      @resources = @resources.joins(projekt_phase: :projekt).where(projekts: { geozone_affiliated: "no_affiliation" })
+    when "entire_city"
+      @resources = @resources.joins(projekt_phase: :projekt).where(projekts: { geozone_affiliated: "entire_city" })
+    when "only_geozones"
+      @resources = @resources.joins(projekt_phase: :projekt).where(projekts: { geozone_affiliated: "only_geozones" })
+
       if @affiliated_geozones.present?
-        @resources = @resources.joins(:geozone_affiliations).where(geozones: { id: @affiliated_geozones }).distinct
+        @resources = @resources.joins(:geozone_affiliations).where(geozones: { id: @affiliated_geozones })
       else
-        @resources = @resources.joins(:geozone_affiliations).where.not(geozones: { id: nil }).distinct
+        @resources = @resources.joins(:geozone_affiliations).where.not(geozones: { id: nil })
       end
     end
     @all_resources = @resources
   end
 
   def take_by_geozone_restrictions
-    case controller_name
-
-    when 'debates'
-      phase_name = :debate_phase
-      sql_query = "
-        INNER JOIN projekts AS projekts_debates_join_for_restrictions ON projekts_debates_join_for_restrictions.hidden_at IS NULL AND projekts_debates_join_for_restrictions.id = debates.projekt_id
-        INNER JOIN projekt_phases AS debate_phases_debates_join_for_restrictions ON debate_phases_debates_join_for_restrictions.projekt_id = projekts_debates_join_for_restrictions.id AND debate_phases_debates_join_for_restrictions.type IN ('ProjektPhase::DebatePhase')
-        INNER JOIN projekt_phase_geozones ON projekt_phase_geozones.projekt_phase_id = debate_phases_debates_join_for_restrictions.id
-        INNER JOIN geozones AS geozone_restrictions ON geozone_restrictions.id = projekt_phase_geozones.geozone_id
-      "
-    when 'proposals'
-      phase_name = :proposal_phase
-      sql_query = "
-        INNER JOIN projekts AS projekts_proposals_join_for_restrictions ON projekts_proposals_join_for_restrictions.hidden_at IS NULL AND projekts_proposals_join_for_restrictions.id = proposals.projekt_id
-        INNER JOIN projekt_phases AS proposal_phases_proposals_join_for_restrictions ON proposal_phases_proposals_join_for_restrictions.projekt_id = projekts_proposals_join_for_restrictions.id AND proposal_phases_proposals_join_for_restrictions.type IN ('ProjektPhase::ProposalPhase')
-        INNER JOIN projekt_phase_geozones ON projekt_phase_geozones.projekt_phase_id = proposal_phases_proposals_join_for_restrictions.id
-        INNER JOIN geozones AS geozone_restrictions ON geozone_restrictions.id = projekt_phase_geozones.geozone_id
-      "
-    end
-
     case @selected_geozone_restriction
-    when 'no_restriction'
-      @resources = @resources.joins(phase_name)
-    when 'only_citizens'
-      @resources = @resources.joins(phase_name).where(projekt_phases: { geozone_restricted: ['only_citizens', 'only_geozones'] })
-    when 'only_geozones'
-      @resources = @resources.joins(phase_name).where(projekt_phases: { geozone_restricted: 'only_geozones' })
+    when "no_restriction"
+      @resources = @resources.joins(:projekt_phase)
+    when "only_citizens"
+      @resources = @resources.joins(:projekt_phase).where(projekt_phases: { geozone_restricted: ["only_citizens", "only_geozones"] })
+    when "only_geozones"
+      @resources = @resources.joins(:projekt_phase).where(projekt_phases: { geozone_restricted: "only_geozones" })
 
       if @restricted_geozones.present?
-        @resources = @resources.joins(sql_query).where(geozone_restrictions: { id: @restricted_geozones })
+        @resources = @resources.joins(:geozone_restrictions).where(geozone_restrictions: { geozones: { id: @restricted_geozones }})
       end
     end
 

@@ -27,7 +27,7 @@
         <tr id="<%= dom_id(debate) %>" class="debates">
           <td class="text-center"><%= debate.id %></td>
           <td><%= link_to debate.title, admin_debate_path(debate) %></td>
-          <td><%= debate.projekt.name if debate.projekt %> <%=link_to t("admin.actions.edit"), admin_debate_path(debate)%>  </td>
+          <td><%= debate.projekt_phase.projekt.name %> <%=link_to t("admin.actions.edit"), admin_debate_path(debate)%>  </td>
           <td><%= debate.tag_list %> <%=link_to t("admin.actions.edit"), admin_debate_path(debate)%>  </td>
           <td><%= debate.author.username %></td>
         </tr>

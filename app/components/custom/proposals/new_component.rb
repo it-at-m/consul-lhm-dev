@@ -9,19 +9,16 @@ class Proposals::NewComponent < ApplicationComponent
 
   private
 
-  def proposals_back_link_path
-    if params[:origin] == 'projekt'
-      projekt = Projekt.find(params[:projekt_id])
-      page = projekt.page
-      proposal_phase_id = projekt.proposal_phase.id
+    def proposals_back_link_path
+      if params[:origin] == "projekt" && params[:projekt_phase_id].present?
 
-      link_to "/#{page.slug}?selected_phase_id=#{proposal_phase_id}", class: "back" do
-        tag.span(class: "icon-angle-left") + t("shared.back")
+        link_to url_to_footer_tab, class: "back" do
+          tag.span(class: "icon-angle-left") + t("shared.back")
+        end
+
+      else
+        back_link_to proposals_path
+
       end
-
-    else
-      back_link_to proposals_path
-
     end
-  end
 end

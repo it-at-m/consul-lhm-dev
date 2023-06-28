@@ -3,15 +3,16 @@ require_dependency Rails.root.join("app", "models", "poll").to_s
 class Poll < ApplicationRecord
   include Taggable
 
-  scope :last_week, -> { where("polls.created_at >= ?", 7.days.ago) }
+  belongs_to :old_projekt, class_name: "Projekt", foreign_key: "projekt_id" # TODO: remove column after data migration con1538
 
-  belongs_to :projekt, optional: true, touch: true
-  has_one :voting_phase, through: :projekt
+  delegate :projekt, to: :projekt_phase
+  belongs_to :projekt_phase
+  has_many :geozone_restrictions, through: :projekt_phase
   has_many :geozone_affiliations, through: :projekt
 
-  validates :projekt, presence: true
+  validates :projekt_phase, presence: true
 
-  scope :with_current_projekt,  -> { joins(:projekt).merge(Projekt.current) }
+  scope :last_week, -> { where("polls.created_at >= ?", 7.days.ago) }
 
   def not_allow_user_geozone?(user)
     geozone_restricted? && geozone_ids.any? && !geozone_ids.include?(user.geozone_id)
@@ -48,7 +49,7 @@ class Poll < ApplicationRecord
   end
 
   def answerable_by?(user)
-    @answerable ||= (voting_phase.permission_problem(user).blank? && current?)
+    @answerable ||= (projekt_phase.permission_problem(user).blank? && current?)
   end
 
   def reason_for_not_being_answerable_by(user)
@@ -56,7 +57,7 @@ class Poll < ApplicationRecord
 
     return :poll_not_current if !current?
 
-    voting_phase.permission_problem(user)
+    projekt_phase.permission_problem(user)
   end
 
   def comments_allowed?(user)
@@ -79,9 +80,5 @@ class Poll < ApplicationRecord
     if poll_answer_count_by_current_user == 0
       Poll::Voter.find_by!(user: user, poll: self, origin: "web", token: token).destroy
     end
-  end
-
-  def projekt_phase
-    voting_phase
   end
 end

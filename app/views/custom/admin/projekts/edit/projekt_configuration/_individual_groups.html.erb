@@ -1,0 +1,21 @@
+<% if @individual_groups.any? %>
+  <%= translatable_form_for(@projekt, url: namespace_projekt_path) do |f| %>
+
+    <%= hidden_field_tag :tab, "#tab-projekt-configuration" %>
+    <%= hidden_field_tag :namespace, params[:controller].include?("projekt_management") ? "projekt_management" : "" %>
+
+    <div class="config-block">
+      <% @individual_groups.each do |individual_group| %>
+        <div class="options-group">
+          <label><%= individual_group.name %></label>
+
+          <%= f.collection_check_boxes :individual_group_value_ids, individual_group.individual_group_values, :id, :name do |cb| %>
+            <%= cb.label(class: "checkbox-label checkbox-label--inline") { cb.check_box + cb.text } %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <%= f.submit(class: "button success") %>
+    </div>
+  <% end %>
+<% end %>

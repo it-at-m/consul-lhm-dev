@@ -13,11 +13,11 @@ class ProjektManagement::ProjektPhasesController < ProjektManagement::BaseContro
 
   private
 
-    def namespace_projekt_phase_path(projekt, projekt_phase)
-      projekt_management_projekt_projekt_phase_path(projekt, projekt_phase)
-    end
+    # def namespace_projekt_phase_path(projekt, projekt_phase)
+    #   projekt_management_projekt_projekt_phase_path(projekt, projekt_phase)
+    # end
 
-    def edit_namespace_projekt_path(projekt)
-      edit_projekt_management_projekt_path(projekt)
-    end
+    # def edit_namespace_projekt_path(projekt)
+    #   edit_projekt_management_projekt_path(projekt)
+    # end
 end

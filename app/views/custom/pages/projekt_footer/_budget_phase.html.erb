@@ -1,6 +1,6 @@
 <%= render 'shared/loader_spinner' %>
 
-<% if @current_projekt.budget.present? %>
+<% if @budget.present? %>
   <%= render Pages::Projekts::BudgetsTabComponent.new(@budget, @ballot, current_user) %>
 
   <div class='row'>

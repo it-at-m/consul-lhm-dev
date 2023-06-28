@@ -20,7 +20,7 @@ module NotificationServices
       def projekt_subscriber_ids
         return [] unless @investment.projekt.present?
 
-        @investment.projekt.budget_phase.subscribers.ids
+        @investment.projekt_phase.subscribers.ids
       end
   end
 end

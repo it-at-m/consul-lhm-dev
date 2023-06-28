@@ -1,7 +1,7 @@
 require_dependency Rails.root.join("app", "components", "budgets", "investments", "votes_component").to_s
 
 class Budgets::Investments::VotesComponent < ApplicationComponent
-  delegate :link_to_signin, :link_to_signup, :link_to_verify_account, :projekt_feature?, to: :helpers
+  delegate :link_to_signin, :link_to_signup, :link_to_verify_account, :projekt_feature?, :projekt_phase_feature?, to: :helpers
 
   private
 

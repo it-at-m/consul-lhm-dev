@@ -47,10 +47,15 @@ de:
           title: Kommende Veranstaltungen
         sidebar:
           admin_controls:
+            title: Admin
             copy_code: Quellcode kopieren
-            edit_projekt: Projekt bearbeiten
+            edit_projekt: Projekteinstellungen
+            edit_projekt_page: Projektseite
+            edit_projekt_phases: Projektphasen
             edit_projekt_settings: Projektfunktionen
-            edit_projekt_page: Projektseite bearbeiten
+            edit_projekt_managers: Projektmanager*innen
+            edit_projekt_map: Karteneinstellungen
+            edit_projekt_sdg: SDGs & Tags
             create_newsletter_draft: Newsletter Entwurf erstellen
           map:
             title: Gebiet

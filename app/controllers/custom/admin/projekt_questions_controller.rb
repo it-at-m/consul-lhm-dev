@@ -1,8 +1,8 @@
 class Admin::ProjektQuestionsController < Admin::BaseController
   include Translatable
 
-  before_action :set_projekt, only: [:new, :create, :send_notifications]
-  before_action :set_projekt_and_projekt_question, except: [:new, :create, :send_notifications]
+  before_action :set_projekt_phase
+  before_action :set_projekt_question, only: [:edit, :update, :destroy]
   before_action :set_projekt_livestream, only: [:new, :create, :update]
 
   skip_authorization_check
@@ -11,15 +11,13 @@ class Admin::ProjektQuestionsController < Admin::BaseController
   load_and_authorize_resource :question, class: "ProjektQuestion", through: :projekt
 
   def new
-    @projekt_question = ProjektQuestion.new(projekt_id: @projekt.id)
-
-    render "admin/projekts/edit/projekt_questions/new"
+    @projekt_question = ProjektQuestion.new
   end
 
   def create
     @projekt_question = ProjektQuestion.new(projekt_question_params)
-    @projekt_question.projekt_id = @projekt.id
     @projekt_question.author = current_user
+    @projekt_question.projekt_phase = @projekt_phase
 
     if @projekt_livestream.present?
       @projekt_question.projekt_livestream = @projekt_livestream
@@ -27,23 +25,15 @@ class Admin::ProjektQuestionsController < Admin::BaseController
 
     if @projekt_question.save
       notice = "Question created"
-
-      if @projekt_livestream.present?
-        redirect_to redirect_path(@projekt.id, "#tab-projekt-livestreams"), notice: notice
-      else
-        redirect_to redirect_path(@projekt.id, "#tab-projekt-questions"), notice: notice
-      end
+      redirect_to redirect_path(@projekt_phase), notice: notice
     else
       flash.now[:error] = t("admin.legislation.questions.create.error")
-      render "admin/projekts/edit/projekt_questions/new"
+      render :new
     end
   end
 
   def edit
-    @projekt_question = ProjektQuestion.find(params[:id])
     @projekt_livestream = @projekt_question.projekt_livestream
-
-    render "admin/projekts/edit/projekt_questions/edit"
   end
 
   def update
@@ -51,9 +41,9 @@ class Admin::ProjektQuestionsController < Admin::BaseController
       notice = "Question updated"
 
       if @projekt_livestream.present?
-        redirect_to redirect_path(@projekt.id, "#tab-projekt-livestreams"), notice: notice
+        redirect_to redirect_path(@projekt_phase), notice: notice
       else
-        redirect_to redirect_path(@projekt.id, "#tab-projekt-questions"), notice: notice
+        redirect_to redirect_path(@projekt_phase), notice: notice
       end
     else
       flash.now[:error] = t("admin.legislation.questions.update.error")
@@ -64,7 +54,7 @@ class Admin::ProjektQuestionsController < Admin::BaseController
   def destroy
     @projekt_question.destroy!
 
-    redirect_to redirect_path(@projekt.id, "#tab-projekt-questions"),
+    redirect_to redirect_path(@projekt_phase),
       notice: t("admin.legislation.questions.destroy.notice")
   end
 
@@ -83,6 +73,7 @@ class Admin::ProjektQuestionsController < Admin::BaseController
     def projekt_question_params
       params.require(:projekt_question).permit(
         translation_params(::ProjektQuestion),
+        :projekt_phase_id,
         :comments_enabled, :show_answers_count,
         question_options_attributes: [
           :id, :_destroy, translation_params(::ProjektQuestionOption)
@@ -90,24 +81,29 @@ class Admin::ProjektQuestionsController < Admin::BaseController
       )
     end
 
-    def set_projekt_and_projekt_question
-      @projekt = Projekt.find(params[:projekt_id])
-      @projekt_question = ProjektQuestion.find(params[:id])
+    def set_projekt_phase
+      @projekt_phase = ProjektPhase.find(params[:projekt_phase_id])
     end
 
-    def set_projekt
-      @projekt = Projekt.find(params[:projekt_id])
+    def set_projekt_question
+      @projekt_question = ProjektQuestion.find(params[:id])
     end
 
     def set_projekt_livestream
       @projekt_livestream = ProjektLivestream.find_by(id: params[:projekt_livestream_id])
     end
 
-    def redirect_path(projekt_id, tab)
-      if params[:namespace] == "projekt_management"
-        edit_projekt_management_projekt_path(projekt_id) + tab
+    def redirect_path(projekt_id)
+      if @projekt_livestream.present?
+        projekt_livestreams_admin_projekt_phase_path(@projekt_phase)
       else
-        edit_admin_projekt_path(projekt_id) + tab
+        projekt_questions_admin_projekt_phase_path(@projekt_phase)
       end
+
+      # if params[:namespace] == "projekt_management"
+      #   edit_projekt_management_projekt_path(projekt_id) + tab
+      # else
+      #   edit_admin_projekt_path(projekt_id) + tab
+      # end
     end
 end

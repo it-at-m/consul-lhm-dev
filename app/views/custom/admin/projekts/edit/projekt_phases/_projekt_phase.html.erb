@@ -1,9 +1,7 @@
-<% projekt = projekt_phase.projekt %>
-<% phase_name = projekt_phase.name %>
-<tr class="projekt_phase_settings" data-answer-id="<%= projekt_phase.id %>" style='vertical-align:top;' >
+<tr class="projekt_phase_settings" data-answer-id="<%= projekt_phase.id %>" style="vertical-align:top;">
   <td style="width:195px;">
     <strong>
-      <%= t("custom.admin.projekts.edit.projekt_phases_tab.#{phase_name}") %>
+      <%= projekt_phase.model_name.human %>
     </strong>
     <% if projekt_phase.phase_tab_name.present? %>
       <div>
@@ -11,55 +9,19 @@
       </div>
     <% end %>
     <div class='margin-bottom'>
-      <div id=<%= dom_id(projekt_phase, :copy_phase_link) %> class='hide'>
-        <% if projekt.overview_page? %>
-          <%= request.base_url + projekts_path(selected_phase_id: projekt_phase.id, anchor: 'filter-subnav') %>
+      <div id="<%= dom_id(projekt_phase, :copy_phase_link) %>" class="hide">
+        <% if @projekt.overview_page? %>
+          <%= request.base_url + projekts_path(selected_phase_id: projekt_phase.id, anchor: "filter-subnav") %>
         <% else %>
-          <%= request.base_url + "/#{projekt.page.slug}?selected_phase_id=#{projekt_phase.id}#filter-subnav"  %>
+          <%= request.base_url + "/#{@projekt.page.slug}?selected_phase_id=#{projekt_phase.id}#filter-subnav" %>
         <% end %>
       </div>
       <small>
         <div class="projekt-phase-edit--link-to-resources">
-          <%= link_to t('custom.admin.projekts.edit.projekt_phases_tab.copy_phase_link'), '#', class: 'js-copy-source-button phase-copy-link', data: { target: dom_id(projekt_phase, :copy_phase_link) } %>
-
-          <% if phase_name == 'question_phase'  %>
-            <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.question_phase"), edit_admin_projekt_path(projekt, anchor: 'tab-projekt-questions'), target: '_blank', class: 'resources-link'  %>
-
-          <% elsif phase_name == 'voting_phase'  %>
-            <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.voting_phase"), admin_polls_path, target: '_blank', class: 'resources-link' %>
-            <span class="additional-info"><%= t("custom.admin.projekts.edit.projekt_phases_tab.hint") %></a>
-
-          <% elsif phase_name == 'budget_phase'  %>
-            <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.budget_phase"), admin_budgets_path, target: '_blank', class: 'resources-link' %>
-            <span class="additional-info"><%= t("custom.admin.projekts.edit.projekt_phases_tab.hint") %></a>
-
-          <% elsif phase_name == 'legislation_phase'  %>
-            <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.legislation_phase"), admin_legislation_processes_path(anchor: 'tab-projekt-questions'), target: '_blank', class: 'resources-link'  %>
-            <span class="additional-info"><%= t("custom.admin.projekts.edit.projekt_phases_tab.hint") %></a>
-
-          <% elsif phase_name == 'argument_phase'  %>
-            <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.argument_phase"), edit_admin_projekt_path(projekt, anchor: 'tab-projekt-arguments'), target: '_blank', class: 'resources-link'  %>
-
-          <% elsif phase_name == 'projekt_notification_phase'  %>
-            <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.notification_phase"), edit_admin_projekt_path(projekt, anchor: 'tab-projekt-notifications'), target: '_blank', class: 'resources-link'  %>
-
-          <% elsif phase_name == 'milestone_phase'  %>
-            <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.milestone_phase"), edit_admin_projekt_path(projekt, anchor: 'tab-projekt-milestones'), target: '_blank', class: 'resources-link'  %>
-            <span class="additional-info"><%= t("custom.admin.projekts.edit.projekt_phases_tab.hint") %></a>
-
-          <% elsif phase_name == 'event_phase'  %>
-            <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.event_phase"), edit_admin_projekt_path(projekt, anchor: 'tab-projekt-events'), target: '_blank', class: 'resources-link'  %>
-
-          <% elsif phase_name == 'livestream_phase'  %>
-            <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.livestream_phase"), edit_admin_projekt_path(projekt, anchor: 'tab-projekt-livestreams'), target: '_blank', class: 'resources-link'  %>
-
-          <% elsif phase_name == 'newsfeed_phase'  %>
-            <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.link.newsfeed_phase"), edit_admin_projekt_path(projekt, anchor: 'tab-projekt-newsfeeds'), target: '_blank', class: 'resources-link'  %>
-
-          <% end %>
+          <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.copy_phase_link"), "#", class: "js-copy-source-button phase-copy-link", data: { target: dom_id(projekt_phase, :copy_phase_link) } %>
+          <%= admin_projekt_phase_resources_link(projekt_phase) %>
         </div>
-        </small>
-
+      </small>
     </div>
   </td>
 
@@ -82,7 +44,7 @@
       <span class='geo-restriction-icon'>
         <%= t("custom.admin.projekts.edit.projekt_phases_tab.restriction_names.geo") %>
       </span>
-    <% end  %>
+    <% end %>
 
     <% if projekt_phase.verification_restricted %>
       <span class='verification-restriction-icon'>
@@ -92,18 +54,20 @@
   </td>
 
   <td>
-    <div id=<%= dom_id(projekt_phase, :default_footer_tab) %> >
-      <%= render partial: 'admin/projekts/edit/projekt_phases/default_projekt_phase', locals: { projekt: projekt, projekt_phase: projekt_phase, phase_name: phase_name } %>
+    <div id="<%= dom_id(projekt_phase, :default_footer_tab) %>">
+      <%= render partial: "admin/projekts/edit/projekt_phases/default_projekt_phase", locals: { projekt: @projekt, projekt_phase: projekt_phase, phase_name: projekt_phase.name } %>
     </div>
   </td>
 
   <td>
-    <%= render Admin::LivesubmitCheckbox::Component.new(url: toggle_active_status_admin_projekt_projekt_phase_path(projekt, projekt_phase), resource_name: "projekt[phase_attributes]", attribute_name: 'active', id: projekt.send(phase_name.to_sym).id, current_value: projekt.send(phase_name.to_sym).active) %>
+    <%= render Admin::LivesubmitCheckbox::Component.new(url: toggle_active_status_admin_projekt_projekt_phase_path(@projekt, projekt_phase), resource_name: "projekt[phase_attributes]", attribute_name: "active", id: projekt_phase.id, current_value: projekt_phase.active) %>
   </td>
 
   <td>
-    <%= link_to "/#{@namespace || 'admin'}/projekts/#{projekt.id}/projekt_phases/#{projekt_phase.id}/edit" do %>
-      <i class="fas fa-edit"></i>
-    <% end %>
+    <%= render Admin::TableActionsComponent.new(projekt_phase,
+                                                actions: [:edit, :destroy],
+                                                edit_path: polymorphic_path([@namespace, projekt_phase], action: :duration),
+                                                destroy_path: polymorphic_path([@namespace, projekt_phase])
+                                               ) %>
   </td>
 </tr>

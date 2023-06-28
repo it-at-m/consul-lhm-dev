@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 class ProjektQuestions::ProjektQuestionComponent < ApplicationComponent
-  attr_reader :projekt_question, :projekt, :projekt_question_answer, :comment_tree
+  attr_reader :projekt_question, :projekt, :projekt_phase, :projekt_question_answer, :comment_tree
 
   def initialize(projekt_question, projekt_question_answer:)
     @projekt_question = projekt_question
     @projekt_question_answer = projekt_question_answer
-    @projekt = projekt_question.projekt
+    @projekt_phase = projekt_question.projekt_phase
+    @projekt = projekt_phase.projekt
     @current_comment_order = "newest"
   end
 

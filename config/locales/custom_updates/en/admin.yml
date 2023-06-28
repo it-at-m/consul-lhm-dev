@@ -136,6 +136,7 @@ en:
             "no": "No"
             "yes": "Yes"
           projekt_events_tab:
+            phases_label: Phases
             button: Save notification
             event_created_at: Created at
             event_datetime: Datetime
@@ -153,6 +154,7 @@ en:
           projekt_news_tab:
             name: News-Feed
           projekt_notifications_tab:
+            phases_label: Phases
             button: Send message
             name: Notifications
             notification_body: Message
@@ -162,6 +164,8 @@ en:
           projekt_arguments_tab:
             button: Save argument
             name: Arguments
+            phases_label: Phases
+            argument_type_label: Argument
             argument_name: Name
             argument_pro: Pro
             argument_cons: Cons
@@ -173,6 +177,7 @@ en:
             page_title: Arguments
             title: Arguments
           projekt_livestreams_tab:
+            phases_label: Phases
             submit_button: Save Livestream
             name: Livestreams
             page_title: Livestream
@@ -221,6 +226,7 @@ en:
             voting_phase: Voting phase
             legislation_phase: Text drafting phase
           projekt_questions_tab:
+            phases_label: Phases
             name: Short survey
             title: Questions
           projekt_sdg_tab:

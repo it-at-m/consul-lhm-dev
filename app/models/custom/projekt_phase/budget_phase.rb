@@ -1,4 +1,7 @@
 class ProjektPhase::BudgetPhase < ProjektPhase
+  has_one :budget, foreign_key: :projekt_phase_id,
+    dependent: :restrict_with_exception, inverse_of: :projekt_phase
+
   def phase_activated?
     # projekt.budget.present?
     active?
@@ -14,6 +17,14 @@ class ProjektPhase::BudgetPhase < ProjektPhase
 
   def default_order
     5
+  end
+
+  def admin_nav_bar_items
+    %w[duration naming restrictions settings]
+  end
+
+  def safe_to_destroy?
+    budget.nil?
   end
 
   private

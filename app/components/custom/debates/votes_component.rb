@@ -7,7 +7,7 @@ class Debates::VotesComponent < ApplicationComponent
   private
 
     def permission_problem_key
-      @permission_problem_key ||= @debate_phase.permission_problem(current_user)
+      @permission_problem_key ||= @projekt_phase.permission_problem(current_user)
     end
 
     def cannot_vote_text
@@ -21,19 +21,19 @@ class Debates::VotesComponent < ApplicationComponent
         t(path_to_key,
               verify: link_to_verify_account,
               city: Setting["org_name"],
-              geozones: @debate_phase&.geozone_restrictions_formatted,
-              age_restriction: @debate_phase&.age_restriction_formatted,
-              restricted_streets: @debate_phase&.street_restrictions_formatted,
-              individual_group_values: @debate_phase&.individual_group_value_restriction_formatted
+              geozones: @projekt_phase.geozone_restrictions_formatted,
+              age_restriction: @projekt_phase.age_restriction_formatted,
+              restricted_streets: @projekt_phase.street_restrictions_formatted,
+              individual_group_values: @projekt_phase.individual_group_value_restriction_formatted
         )
 
       end
     end
 
     def path_to_key
-      if @debate_phase &&
-        I18n.exists?("custom.projekt_phases.permission_problem.votes_component.#{@debate_phase.name}.#{permission_problem_key}")
-        "custom.projekt_phases.permission_problem.votes_component.#{@debate_phase.name}.#{permission_problem_key}"
+      if @projekt_phase &&
+        I18n.exists?("custom.projekt_phases.permission_problem.votes_component.#{@projekt_phase.name}.#{permission_problem_key}")
+        "custom.projekt_phases.permission_problem.votes_component.#{@projekt_phase.name}.#{permission_problem_key}"
       else
         "custom.projekt_phases.permission_problem.votes_component.shared.#{permission_problem_key}"
       end

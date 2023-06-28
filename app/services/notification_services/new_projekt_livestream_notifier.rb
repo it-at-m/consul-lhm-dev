@@ -17,7 +17,7 @@ module NotificationServices
       end
 
       def projekt_subscriber_ids
-        @projekt_livestream.projekt.livestream_phase.subscribers.ids
+        @projekt_livestream.projekt_phase.subscribers.ids
       end
   end
 end

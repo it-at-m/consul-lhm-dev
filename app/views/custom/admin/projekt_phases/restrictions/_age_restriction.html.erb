@@ -1,0 +1,23 @@
+<div class="phase-age-restriction">
+  <strong class='age-restriction-title'>
+    <span class='age-restriction-icon'><%= t("custom.admin.projekt_phases.restrictions.age.title") %></span>
+    <span class='restriction-hint'><%= t("custom.admin.projekt_phases.restrictions.age.hint") %></span>
+  </strong>
+  <div class="projekt-phase-restriction-selector margin-bottom <%= "gray-labels" if skip_user_verification? %>">
+
+    <div class="projekt-phase-restriction-block">
+      <%= f.radio_button :age_restriction_id, nil,
+                         label: t("custom.admin.projekt_phases.restrictions.age.no_restriction"),
+                         class: "projekt-phase-restriction-option",
+                         disabled: skip_user_verification? %>
+    </div>
+
+    <%= f.collection_radio_buttons(:age_restriction_id, AgeRestriction.all, :id, :name, {},
+                                   { class: "projekt-phase-restriction-option", disabled: skip_user_verification? }) do |b| %>
+      <div>
+        <%= b.radio_button %>
+        <%= b.label(style: "margin-left:4px;") %>
+      </div>
+    <% end %>
+  </div>
+</div>

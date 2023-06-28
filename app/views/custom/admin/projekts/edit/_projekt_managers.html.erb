@@ -1,7 +1,7 @@
-
+<h2><%= t("custom.admin.projekts.edit.projekt_managers_tab.main_block_title") %></h2>
 
 <%= form_for(@projekt, url: admin_projekt_path(@projekt)) do |f| %>
-  <%= hidden_field_tag :tab, '#tab-projekt-managers' %>
+  <%= hidden_field_tag :tab, "#tab-projekt-managers" %>
 
   <div>
     <%= f.collection_check_boxes :projekt_manager_ids, @projekt_managers, :id, :name do |cb| %>

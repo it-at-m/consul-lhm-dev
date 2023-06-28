@@ -8,23 +8,25 @@ class ApplicationComponent < ViewComponent::Base
 
   private
 
-    def url_for_footer_tab_back_button(page_id:,
-                                       current_tab_path:,
-                                       pagination_page: 1,
-                                       filter: "",
-                                       order: "",
-                                       filter_projekt_ids: nil,
-                                       projekt_label_ids: nil)
-      projekt = SiteCustomization::Page.find_by(slug: page_id).projekt
-      phase_name = params[:current_tab_path].split("_")[0..-3].join("_")
-      current_projekt_phase = projekt.send(phase_name)
+    def url_to_footer_tab(
+      pagination_page: nil,
+      filter: nil,
+      order: nil,
+      filter_projekt_ids: nil,
+      projekt_label_ids: nil
+    )
 
-      "/#{projekt.page.slug}?selected_phase_id=#{current_projekt_phase.id}" \
-        "&id=#{page_id}" \
-        "&page=#{pagination_page}" \
-        "&filter=#{filter}" \
-        "&order=#{order}" \
-        "&#{filter_projekt_ids.to_query(:filter_projekt_ids)}" \
-        "&#{projekt_label_ids&.to_query(:projekt_label_ids)}"
+      if params[:projekt_phase_id].present? # single projekt footer tab
+        projekt = ProjektPhase.find(params[:projekt_phase_id]).projekt
+        page = projekt.page
+
+        page_path(page.slug, selected_phase_id: params[:projekt_phase_id],
+          page: pagination_page || params[:page],
+          filter: filter || params[:filter],
+          order: order || params[:order],
+          filter_projekt_ids: filter_projekt_ids || params[:filter_projekt_ids],
+          projekt_label_ids: projekt_label_ids || params[:projekt_label_ids]
+        )
+      end
     end
 end

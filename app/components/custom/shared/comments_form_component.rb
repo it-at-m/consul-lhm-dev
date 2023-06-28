@@ -10,7 +10,7 @@ class Shared::CommentsFormComponent < ApplicationComponent
   private
 
     def projekt_phase
-      return record.comment_phase if record.is_a?(Projekt)
+      return record if record.is_a?(ProjektPhase)
       return record.projekt_phase if record.respond_to?(:projekt_phase)
 
       nil

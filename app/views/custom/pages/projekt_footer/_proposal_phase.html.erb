@@ -1,6 +1,6 @@
 <%= render 'shared/loader_spinner' %>
 
-<% if projekt_feature?(@current_projekt, 'proposals.show_map') %>
+<% if projekt_phase_feature?(@projekt_phase, "show_map") %>
   <div class='margin-bottom'>
     <%= render "proposals/map" %>
   </div>
@@ -9,36 +9,36 @@
 <div class='row'>
 
 
-  <div id="proposals-sidebar"  class="small-12 medium-3 column">
+  <div id="proposals-sidebar" class="small-12 medium-3 column">
     <aside class="margin-bottom">
-      <%= render Shared::NewButtonComponent.new(projekt_phase: @current_tab_phase) %>
+      <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
 
-      <% unless @current_projekt.overview_page? %>
+      <% unless @projekt.overview_page? %>
         <%= render Sidebar::ProjektsFilterComponent.new(
           top_level_active_projekts: @top_level_active_projekts,
           top_level_archived_projekts: @top_level_archived_projekts,
           scoped_projekt_ids: @scoped_projekt_ids,
           all_resources: @all_resources,
-          current_tab_phase: @current_tab_phase,
-          current_projekt: @current_projekt)
+          current_tab_phase: @projekt_phase,
+          current_projekt: @projekt)
         %>
       <% end %>
 
-      <%= render "shared/projekt_labels", projekt: @current_projekt %>
+      <%= render "shared/projekt_labels", projekt: @projekt %>
     </aside>
   </div>
 
   <div id="proposals" class='proposals-list spinner-placeholder small-12 medium-9 column'>
-    <%= render 'shared/loader_spinner' %>
+    <%= render "shared/loader_spinner" %>
 
-    <% unless @current_projekt.overview_page? %>
+    <% unless @projekt.overview_page? %>
       <%= render "shared/order_links", i18n_namespace: "proposals.index" %>
     <% end %>
 
     <div class='row'>
       <div class='small-6 column small'>
         <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
-          <%= link_to t('proposals.index.section_header.help'), '#section_help' %>
+          <%= link_to t("proposals.index.section_header.help"), "#section_help" %>
         <% end %>
       </div>
 
@@ -46,7 +46,7 @@
         <% if extended_feature?('modulewide.show_number_of_entries_in_modules') %>
           <div class='float-right'>
             <%= @resources.count %>
-            <%= t('activerecord.models.proposal', count: @resources.count) %>
+            <%= t("activerecord.models.proposal", count: @resources.count) %>
           </div>
         <% end %>
       </div>
@@ -58,10 +58,10 @@
       <%= empty_recommended_proposals_message_text(current_user) %>
     <% end %>
 
-    <% if @current_projekt.overview_page? %>
-      <%= paginate @proposals, remote: true, params: { controller: 'projekts', action: 'proposal_phase_footer_tab' } %>
+    <% if @projekt.overview_page? %>
+      <%= paginate @proposals, remote: true, params: { controller: "projekts", action: "proposal_phase_footer_tab" } %>
     <% else %>
-      <%= paginate @proposals, remote: true, params: { controller: 'pages', action: 'proposal_phase_footer_tab' } %>
+      <%= paginate @proposals, remote: true, params: { controller: "pages", action: "projekt_phase_footer_tab" } %>
     <% end %>
   </div>
 </div>

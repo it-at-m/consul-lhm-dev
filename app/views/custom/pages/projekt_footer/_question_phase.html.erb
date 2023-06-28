@@ -1,10 +1,10 @@
 <%= render 'shared/loader_spinner' %>
 
-<% if @current_projekt.question_phase.phase_activated? %>
+<% if @projekt_phase.phase_activated? %>
   <div class="projekt-questions-container js-projekt-questions-container">
-    <% if @current_projekt.question_list_enabled? %>
+    <% if @projekt_phase.question_list_enabled? %>
       <% if @projekt_questions.any? %>
-        <%= render "custom/projekts/partials/projekt_question_list", projekt: @current_projekt, projekt_questions: @projekt_questions %>
+        <%= render "custom/projekts/partials/projekt_question_list", projekt: @projekt, projekt_questions: @projekt_questions %>
        <% else %>
         <div class="callout primary">
           Aktuell ist ist keine Frage vorhanden
@@ -12,7 +12,7 @@
       <% end %>
     <% else %>
       <% if @projekt_question.present? %>
-        <%= render "custom/projekts/partials/projekt_question", projekt: @current_projekt, projekt_question: @projekt_question, projekt_question_answer: @projekt_question_answer %>
+        <%= render "custom/projekts/partials/projekt_question", projekt: @projekt, projekt_question: @projekt_question, projekt_question_answer: @projekt_question_answer %>
       <% else %>
         <div class="callout primary">
           Aktuell ist ist keine Frage vorhanden

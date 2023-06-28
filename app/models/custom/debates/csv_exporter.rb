@@ -53,7 +53,7 @@ class Debates::CsvExporter
         debate.id,
         debate.title,
         strip_tags(debate.description),
-        debate.projekt&.name,
+        debate.projekt_phase.projekt.name,
         debate.tag_list,
         debate.author.username,
         debate.created_at,

@@ -4,7 +4,7 @@ class Debates::VotesComponent < ApplicationComponent
 
   def initialize(debate)
     @debate = debate
-    @debate_phase = debate.debate_phase
+    @projekt_phase = debate.projekt_phase
   end
 
   private

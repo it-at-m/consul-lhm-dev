@@ -33,13 +33,13 @@ module ProposalsHelper
   end
 
   def default_active_proposal_footer_tab?(tab)
-    return true if tab == "comments" && projekt_feature?(@proposal&.projekt, 'proposals.show_comments')
+    return true if tab == "comments" && projekt_phase_feature?(@proposal.projekt_phase, "show_comments")
 
-    return true if tab == "notifications" && projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab') &&
-                     !projekt_feature?(@proposal&.projekt, 'proposals.show_comments')
+    return true if tab == "notifications" && projekt_phase_feature?(@proposal.projekt_phase, "enable_proposal_notifications_tab") &&
+      !projekt_phase_feature?(@proposal.projekt_phase, "show_comments")
 
-    tab == "milestones" && projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_milestones_tab') &&
-      !projekt_feature?(@proposal&.projekt, 'proposals.show_comments') &&
-      !projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab')
+    tab == "milestones" && projekt_phase_feature?(@proposal.projekt_phase, "enable_proposal_milestones_tab") &&
+      !projekt_phase_feature?(@proposal.projekt_phase, "show_comments") &&
+      !projekt_phase_feature?(@proposal.projekt_phase, "enable_proposal_notifications_tab")
   end
 end

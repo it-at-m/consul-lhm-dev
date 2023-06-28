@@ -36,7 +36,7 @@
       </li>
     <% end %>
 
-    <% projekts_with_accepting_budgets = Projekt.joins(:budget).where( budgets: { phase: 'accepting'} ).order(:level).order(:order_number) %>
+    <% projekts_with_accepting_budgets = Projekt.joins(budget_phases: :budget).where( budgets: { phase: 'accepting'} ).order(:level).order(:order_number) %>
 
     <% if projekts_with_accepting_budgets.any? %>
       <li class="nav-element flyout-item js-access-flyout-menu-item focusable"
@@ -61,7 +61,7 @@
                 aria-label="<%= t('custom.links.menu.projekt_name_label', projekt_name: projekt.name) %>" >
               <div class='projekt-name-group'>
                 <div class='flyout-item-name projekt-name'>
-                  <%= link_to projekt.page.title, new_budget_investment_path(projekt.budget, origin: url_for),
+                  <%= link_to projekt.page.title, new_budget_investment_path(projekt.budget_phases.first.budget, origin: url_for),
                       tabindex: (placement == 'desktop' ? "-1" : "0"),
                       aria: { hidden: placement == 'desktop' } %>
                 </div>

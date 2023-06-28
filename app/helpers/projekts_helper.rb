@@ -17,24 +17,18 @@ module ProjektsHelper
     content_tag(:div, safe_join(links, divider_tag).html_safe, class: 'custom-breadcrumbs')
   end
 
-  def projekt_bar_background_color(projekt)
-    if projekt.color.present?
-      projekt.color
-    else
-      '#FFFFFF'
-    end
+  def projekt_bar_background_color(projekt_phase)
+    projekt = projekt_phase.projekt.top_parent
+    projekt.color.presence || "#FFFFFF"
   end
 
-  def projekt_bar_text_color(projekt)
-    if projekt.color.present?
-      pick_text_color(projekt.color)
-    else
-      '#000000'
-    end
+  def projekt_bar_text_color(projekt_phase)
+    projekt = projekt_phase.projekt.top_parent
+    projekt.color.present? ? pick_text_color(projekt.color) : "#000000"
   end
 
   def projekt_filter_resources_name
-    @current_tab_phase&.resources_name || controller_name
+    @projekt_phase&.resources_name || controller_name
   end
 
   def show_archived_projekts_in_sidebar?
@@ -59,17 +53,19 @@ module ProjektsHelper
 
     module_links = []
 
-    if projekt_phase_show_in_navigation?(projekt, 'debate_phase')
-      module_links.push( debates_overview_link(t('custom.menu.debates'), projekt, 'projekt-module-link') )
-    end
+    # TODO: fix con1538
 
-    if projekt_phase_show_in_navigation?(projekt, 'proposal_phase')
-      module_links.push( proposals_overview_link(t('custom.menu.proposals'), projekt, 'projekt-module-link') )
-    end
+    # if projekt_phase_show_in_navigation?(projekt, 'debate_phase')
+    #   module_links.push( debates_overview_link(t('custom.menu.debates'), projekt, 'projekt-module-link') )
+    # end
 
-    if related_polls(projekt).any?
-      module_links.push( polls_overview_link(t('custom.menu.polls'), projekt, 'projekt-module-link') )
-    end
+    # if projekt_phase_show_in_navigation?(projekt, 'proposal_phase')
+    #   module_links.push( proposals_overview_link(t('custom.menu.proposals'), projekt, 'projekt-module-link') )
+    # end
+
+    # if related_polls(projekt).any?
+    #   module_links.push( polls_overview_link(t('custom.menu.polls'), projekt, 'projekt-module-link') )
+    # end
 
     module_links.join(' | ').html_safe
   end

@@ -1,7 +1,7 @@
 $("#filter-subnav li").removeClass("is-active")
-$("li#filter-subnav-<%= @current_tab_phase.name %>").addClass("is-active")
+$("li#filter-subnav-<%= @projekt_phase.id %>").addClass("is-active")
 $("#footer-content").removeClass("show-loader");
-$("#footer-content").html("<%= j render("pages/projekt_footer/#{@current_tab_phase.name}") %>");
+$("#footer-content").html("<%= j render("pages/projekt_footer/#{@projekt_phase.name}") %>");
 App.Projekts.toggleDefaultProjekts()
 App.Projekts.toggleProjektsInSidebarFilter();
 App.CollapseTextComponent.enableHoverButtons();

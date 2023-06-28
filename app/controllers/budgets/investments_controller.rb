@@ -50,7 +50,6 @@ module Budgets
         redirect_to root_path
       end
 
-
       @investments = investments.page(params[:page]).per(PER_PAGE).for_render
 
       @investment_ids = @investments.ids

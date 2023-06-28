@@ -1,1 +1,35 @@
-<%= render "admin/projekts/edit" %>
+<%= back_link_to params[:controller].include?("projekt_management") ? projekt_management_projekts_path : admin_projekts_path %>
+
+<h2><%= @projekt.name %>  </h2>
+
+<div class="tabs-content" data-tabs-content="edit-projekt-tabs">
+  <%= render "custom/admin/projekts/edit/edit_projekt_filter_subnav" %>
+
+  <div class="tabs-panel is-active" id="tab-projekt-configuration">
+    <%= render partial: "custom/admin/projekts/edit/projekt_configuration" %>
+  </div>
+
+  <div class="tabs-panel" id="tab-projekt-page">
+    <%= render partial: "custom/admin/projekts/edit/projekt_page" %>
+  </div>
+
+  <div class="tabs-panel" id="tab-projekt-phases">
+    <%= render partial: "custom/admin/projekts/edit/projekt_phases" %>
+  </div>
+
+  <div class="tabs-panel" id="tab-projekt-settings">
+    <%= render partial: "custom/admin/projekts/edit/projekt_settings" %>
+  </div>
+
+  <div class="tabs-panel" id="tab-projekt-managers">
+    <%= render partial: "admin/projekts/edit/projekt_managers" %>
+  </div>
+
+  <div class="tabs-panel" id="tab-projekt-map">
+    <%= render partial: "custom/admin/projekts/edit/projekt_map" %>
+  </div>
+
+  <div class="tabs-panel" id="tab-projekt-sdg">
+    <%= render partial: "custom/admin/projekts/edit/projekt_sdg" %>
+  </div>
+</div>

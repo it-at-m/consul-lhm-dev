@@ -1,5 +1,8 @@
 class ProjektEvent < ApplicationRecord
-  belongs_to :projekt
+  belongs_to :old_projekt, class_name: "Projekt", foreign_key: "projekt_id" # TODO: remove column after data migration con1538
+
+  delegate :projekt, to: :projekt_phase
+  belongs_to :projekt_phase
 
   validates :title, presence: true
   validates :datetime, presence: true

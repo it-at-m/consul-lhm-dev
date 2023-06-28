@@ -30,7 +30,8 @@ module CommentsHelper
   end
 
   def commentable_path(comment)
-    return "/#{comment.commentable.projekt.page.slug}?selected_phase_id=#{comment.commentable.projekt.question_phase.id}#filter-subnav" if comment.commentable.class.name == "ProjektQuestion"
+    return page_path(comment.commentable.projekt.page, selected_phase_id: comment.commentable.projekt_phase.id, anchor: "filter-subnav") if comment.commentable.is_a?(ProjektQuestion)
+    return page_path(comment.commentable.projekt.page, selected_phase_id: comment.commentable.id, anchor: "filter-subnav") if comment.commentable.is_a?(ProjektPhase)
     polymorphic_path(comment.commentable)
   end
 

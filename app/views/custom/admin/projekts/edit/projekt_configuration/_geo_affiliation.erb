@@ -1,0 +1,26 @@
+<%= translatable_form_for(@projekt, url: namespace_projekt_path) do |f| %>
+
+  <%= hidden_field_tag :tab, "#tab-projekt-configuration" %>
+  <%= hidden_field_tag :namespace, params[:controller].include?("projekt_management") ? "projekt_management" : "" %>
+
+  <div class='options-group config-block'>
+
+    <%= f.radio_button :geozone_affiliated, "no_affiliation",
+                       label: t("custom.geozones.sidebar_filter.affiliations.no_affiliation"),
+                       checked: (@projekt.geozone_affiliated.blank? || @projekt.geozone_affiliated == "no_affiliation") %>
+    <br>
+
+    <%= f.radio_button :geozone_affiliated, "entire_city", label: t("custom.geozones.sidebar_filter.affiliations.entire_city_short") %>
+    <br>
+
+    <%= f.radio_button :geozone_affiliated, "only_geozones", label: t("custom.geozones.sidebar_filter.affiliations.only_geozones"), class: "with-related-options" %>
+
+    <div class="options-group">
+      <%= f.collection_check_boxes(:geozone_affiliation_ids, Geozone.all, :id, :name) do |cb| %>
+        <%= cb.label(class: "checkbox-label checkbox-label--inline") { cb.check_box + cb.text } %>
+      <% end %>
+    </div>
+
+    <%= f.submit(class: "button success", style: "display:block;margin-top:20px") %>
+  </div>
+<% end %>

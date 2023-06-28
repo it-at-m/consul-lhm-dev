@@ -1,8 +1,8 @@
 class Shared::MapComponent < ApplicationComponent
   attr_reader :mappable, :map_location, :parent_class, :editable,
-              :process_coordinates, :projekt, :show_admin_shape
+              :process_coordinates, :projekt, :projekt_phase, :show_admin_shape
   delegate :map_location_latitude, :map_location_longitude, :map_location_zoom,
-           :map_location_input_id, :projekt_feature?, to: :helpers
+           :map_location_input_id, :projekt_feature?, :projekt_phase_feature?, to: :helpers
 
   def initialize(
     mappable: nil,
@@ -11,6 +11,7 @@ class Shared::MapComponent < ApplicationComponent
     editable: false,
     process_coordinates: nil,
     projekt: nil,
+    projekt_phase: nil,
     show_admin_shape: false
   )
     @mappable = mappable
@@ -19,6 +20,7 @@ class Shared::MapComponent < ApplicationComponent
     @editable = editable
     @process_coordinates = process_coordinates || get_process_coordinates
     @projekt = projekt
+    @projekt_phase = projekt_phase
     @show_admin_shape = show_admin_shape
   end
 
@@ -72,7 +74,9 @@ class Shared::MapComponent < ApplicationComponent
     end
 
     def map_layers
-      if projekt.present?
+      if projekt_phase.present?
+        projekt_phase.map_layers_for_render.to_json
+      elsif projekt.present?
         projekt.map_layers_for_render.to_json
       else
         MapLayer.general.to_json
@@ -80,9 +84,11 @@ class Shared::MapComponent < ApplicationComponent
     end
 
     def admin_shape
-      return unless projekt.present?
-
-      projekt.map_location.shape_json_data.presence || projekt.map_location.json_data.to_json
+      if projekt_phase.present?
+        projekt_phase.map_location.shape_json_data.presence || projekt_phase.map_location.json_data.to_json
+      elsif projekt.present?
+        projekt.map_location.shape_json_data.presence || projekt.map_location.json_data.to_json
+      end
     end
 
     def enable_geoman_controls?
@@ -91,11 +97,8 @@ class Shared::MapComponent < ApplicationComponent
       if mappable.is_a? DeficiencyReport
         Setting["deficiency_reports.enable_geoman_controls_in_maps"].present?
 
-      elsif projekt.present? && parent_class == "proposal"
-        projekt_feature?(projekt, "proposals.enable_geoman_controls_in_maps")
-
-      elsif projekt.present? && parent_class == "budget_investment"
-        projekt_feature?(projekt, "budgets.enable_geoman_controls_in_maps")
+      elsif projekt_phase.present?
+        projekt_phase_feature?(projekt_phase, "enable_geoman_controls_in_maps")
 
       else
         false

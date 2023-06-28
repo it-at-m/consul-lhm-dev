@@ -1,4 +1,7 @@
 class ProjektPhase::QuestionPhase < ProjektPhase
+  has_many :questions, -> { order(:id) }, foreign_key: :projekt_phase_id, class_name: "ProjektQuestion",
+    inverse_of: :projekt_phase, dependent: :destroy
+
   def phase_activated?
     active?
   end
@@ -16,7 +19,22 @@ class ProjektPhase::QuestionPhase < ProjektPhase
   end
 
   def resource_count
-    projekt.questions.count
+    questions.count
+  end
+
+  def question_list_enabled?
+    projekt_settings
+      .find_by(key: "projekt_feature.questions.show_questions_list")
+      .value
+      .present?
+  end
+
+  def admin_nav_bar_items
+    %w[duration naming restrictions settings].push(resources_name)
+  end
+
+  def safe_to_destroy?
+    questions.empty?
   end
 
   private

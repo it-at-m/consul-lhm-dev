@@ -1,9 +1,9 @@
 class MapLayer < ApplicationRecord
-  belongs_to :projekt, optional: true
+  belongs_to :mappable, polymorphic: true
 
   enum protocol: { regular: 0, wms: 1 }
 
-  scope :general, -> { where(projekt_id: nil) }
+  scope :general, -> { where(mappable: nil) }
 
   def self.protocol_attributes_for_select
     protocols.map do |protocol, _|

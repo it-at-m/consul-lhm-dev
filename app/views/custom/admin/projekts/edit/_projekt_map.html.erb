@@ -1,13 +1,12 @@
+<h2><%= t("admin.settings.index.map.title") %></h2>
+
 <% @projekt.map_layers.each do |layer| %>
-  <%= render partial: 'custom/admin/projekts/edit/projekt_map/map_layer', locals: { layer: layer } %>
+  <%= render partial: "custom/admin/shared/map/map_layer", locals: { layer: layer, return_path: namespace_projekt_path(action: :edit, anchor: "tab-projekt-map") } %>
 <% end %>
 
 <div id='new-map-layer'>
-  <%= link_to t("custom.map_layer.buttons.new_layer"), new_admin_projekt_map_layer_path(@projekt, namespace: @namespace), class: 'button success margin-bottom', remote: true %>
+  <%= link_to t("custom.map_layer.buttons.new_layer"), new_admin_map_layer_path(return_path: namespace_projekt_path(action: :edit, anchor: "tab-projekt-map"), mappable_id: @projekt.id, mappable_type: @projekt.class.name), class: "button success margin-bottom", remote: true %>
 </div>
-
-
-<h2><%= t("admin.settings.index.map.title") %></h2>
 
 <table>
   <thead>
@@ -18,49 +17,14 @@
   </thead>
   <tbody>
 
-    <%= form_for(@projekt.map_location, url: admin_projekt_update_map_path(@projekt)) do |f| %>
-      <%= hidden_field_tag :tab, '#tab-projekt-map' %>
-      <%= hidden_field_tag :namespace, params[:controller].include?('projekt_management') ? 'projekt_management' : '' %>
-
-      <%= render partial: 'custom/admin/projekts/edit/projekt_map/map_settings_form', locals: { map_location_form: f, attribute: :latitude } %>
-      <%= render partial: 'custom/admin/projekts/edit/projekt_map/map_settings_form', locals: { map_location_form: f, attribute: :longitude } %>
-      <%= render partial: 'custom/admin/projekts/edit/projekt_map/map_settings_form', locals: { map_location_form: f, attribute: :zoom } %>
+    <%= form_for(@projekt.map_location, url: namespace_mappable_path(action: :update_map)) do |f| %>
+      <%= render partial: "custom/admin/shared/map/map_settings_form", locals: { map_location_form: f, attribute: :latitude } %>
+      <%= render partial: "custom/admin/shared/map/map_settings_form", locals: { map_location_form: f, attribute: :longitude } %>
+      <%= render partial: "custom/admin/shared/map/map_settings_form", locals: { map_location_form: f, attribute: :zoom } %>
     <% end %>
-
-    <%= form_for(@projekt, url: admin_projekt_path, as: :projekt) do |f| %>
-      <%= hidden_field_tag :tab, '#tab-projekt-map' %>
-      <%= hidden_field_tag :namespace, params[:controller].include?('projekt_management') ? 'projekt_management' : '' %>
-
-      <%= render partial: 'custom/admin/projekts/edit/projekt_map/map_settings_form', locals: { map_location_form: f, attribute: :color }%>
-    <% end %>
-
   </tbody>
 </table>
 
-
 <p><%= t("admin.settings.index.map.help") %></p>
 
-<%= render 'custom/admin/projekts/edit/projekt_map/map_form', map_location: @projekt.map_location %>
-
-<%= form_for(@projekt, url: namespace_projekt_path(@projekt), as: :projekt) do |f| %>
-  <%= hidden_field_tag :tab, '#tab-projekt-map' %>
-  <%= hidden_field_tag :namespace, params[:controller].include?('projekt_management') ? 'projekt_management' : '' %>
-
-  <%= render "shared/errors", resource: @projekt %>
-
-  <div class="clear">
-    <div class="small-12 column">
-      <%= f.label :icon, t("custom.admin.projekts.edit.design.icon")  %>
-      <div class='icons-selector'>
-        <%= f.collection_radio_buttons :icon, Iconable::AVAILABLE_ICONS, :first, :first do |rb| %>
-          <%= rb.label { rb.radio_button + "<i class=\"fas fa-#{rb.object.first}\"></i>".html_safe } %>
-        <% end %>
-      </div>
-    </div>
-  </div>
-
-  <div class="small-12 column">
-    <%= f.submit(value: t("custom.admin.projekts.edit.design.submit_button"),
-                class: "button success") %>
-  </div>
-<% end %>
+<%= render "custom/admin/shared/map/map_form", mappable: @projekt, map_location: @projekt.map_location %>

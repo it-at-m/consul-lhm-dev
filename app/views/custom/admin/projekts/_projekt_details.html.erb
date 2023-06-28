@@ -2,6 +2,7 @@
   <td colspan="5">
 
     <div class='projekt-summary'>               
+      #TODO
 
       <div class='section-title'>
       <strong>
@@ -25,9 +26,6 @@
       <div>
         <%= t("custom.admin.projekts.edit.show_footer") %>
       </div> 
-      <div>
-        <%= t("custom.admin.projekts.edit.setting_indicator")[projekt_feature?(projekt, 'general.show_projekt_footer')] %>
-      </div>
 
       <div class='margin-top section-title'>
         <strong>
@@ -82,14 +80,14 @@
           <%= t("custom.admin.projekts.index.debate_phase") %>
         </div>
         <div>
-          <%=  get_projekt_phase_duration(projekt&.debate_phase) %>
+          <%#=  get_projekt_phase_duration(projekt&.debate_phase) %>
         </div>
 
         <div>
           <%= t("custom.admin.projekts.index.projekt_phase_limitation") %>
         </div>
         <div>
-          <%=  get_projekt_phase_restriction_name(projekt&.debate_phase) %>
+          <%#=  get_projekt_phase_restriction_name(projekt&.debate_phase) %>
         </div>
       </div>
 
@@ -98,13 +96,13 @@
           <%= t("custom.admin.projekts.index.proposal_phase") %>
         </div>
         <div>
-          <%=  get_projekt_phase_duration(projekt&.proposal_phase) %>
+          <%#=  get_projekt_phase_duration(projekt&.proposal_phase) %>
         </div>
         <div>
           <%= t("custom.admin.projekts.index.projekt_phase_limitation") %>
         </div>
         <div>
-          <%=  get_projekt_phase_restriction_name(projekt&.proposal_phase) %>
+          <%#=  get_projekt_phase_restriction_name(projekt&.proposal_phase) %>
         </div>
       </div>
 
@@ -113,7 +111,7 @@
           <%= t("custom.admin.projekts.index.voting_phase") %>
         </div>
         <div>
-          <%= link_to t("custom.admin.projekts.edit.projekt_phases_tab.voting_manage"), admin_polls_path  %>
+          <%#= link_to t("custom.admin.projekts.edit.projekt_phases_tab.voting_manage"), admin_polls_path  %>
         </div>
       </div>
 

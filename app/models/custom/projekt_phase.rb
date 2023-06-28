@@ -1,23 +1,50 @@
 class ProjektPhase < ApplicationRecord
+  include Mappable
+  include Milestoneable
+  acts_as_paranoid column: :hidden_at
+  include ActsAsParanoidAliases
+
+  after_create :add_default_settings
+
   REGULAR_PROJEKT_PHASES = [
+    "ProjektPhase::LivestreamPhase",
     "ProjektPhase::MilestonePhase",
     "ProjektPhase::ProjektNotificationPhase",
-    "ProjektPhase::NewsfeedPhase",
     "ProjektPhase::EventPhase",
     "ProjektPhase::ArgumentPhase",
-    "ProjektPhase::LivestreamPhase"
+    "ProjektPhase::NewsfeedPhase"
   ].freeze
+
+  PROJEKT_PHASES_TYPES = [
+    "ProjektPhase::CommentPhase",
+    "ProjektPhase::DebatePhase",
+    "ProjektPhase::ProposalPhase",
+    "ProjektPhase::QuestionPhase",
+    "ProjektPhase::VotingPhase",
+    "ProjektPhase::BudgetPhase",
+    "ProjektPhase::LegislationPhase"
+  ] + REGULAR_PROJEKT_PHASES
+
+  delegate :icon, :author, :author_id, to: :projekt
 
   translates :phase_tab_name, touch: true
   translates :new_resource_button_name, touch: true
   translates :resource_form_title, touch: true
   translates :projekt_selector_hint, touch: true
+  translates :labels_name, touch: true
+  translates :sentiments_name, touch: true
   include Globalizable
 
-  belongs_to :projekt, optional: true, touch: true
+  belongs_to :projekt, touch: true
   has_many :projekt_settings, through: :projekt
+  has_many :settings, class_name: "ProjektPhaseSetting", foreign_key: :projekt_phase_id,
+    dependent: :destroy, inverse_of: :projekt_phase
+  has_many :projekt_labels, dependent: :destroy
+  has_many :sentiments, dependent: :destroy
+
   belongs_to :age_restriction
   has_many :projekt_phase_geozones, dependent: :destroy
+  has_many :geozone_affiliations, through: :projekt
   has_many :geozone_restrictions, through: :projekt_phase_geozones, source: :geozone,
            after_add: :touch_updated_at, after_remove: :touch_updated_at
 
@@ -34,7 +61,12 @@ class ProjektPhase < ApplicationRecord
   has_many :subscriptions, class_name: "ProjektPhaseSubscription", dependent: :destroy
   has_many :subscribers, through: :subscriptions, source: :user
 
-  default_scope { order(given_order: :asc) }
+  has_many :map_layers, as: :mappable, dependent: :destroy
+  has_many :comments, as: :commentable, inverse_of: :commentable, dependent: :destroy
+
+  validates :projekt, presence: true
+
+  default_scope { order(:given_order, :id) }
 
   scope :regular_phases, -> { where.not(type: REGULAR_PROJEKT_PHASES) }
   scope :special_phases, -> { where(type: REGULAR_PROJEKT_PHASES) }
@@ -56,6 +88,13 @@ class ProjektPhase < ApplicationRecord
     ordered_array.each_with_index do |phase_id, order|
       find(phase_id).update_column(:given_order, (order + 1))
     end
+  end
+
+  def self.model_name
+    mname = super
+    mname.instance_variable_set(:@route_key, "projekt_phases")
+    mname.instance_variable_set(:@singular_route_key, "projekt_phase")
+    mname
   end
 
   def selectable_by?(user)
@@ -154,7 +193,38 @@ class ProjektPhase < ApplicationRecord
   end
 
   def title
-    phase_tab_name.presence || I18n.t("custom.projekts.page.tabs.#{resources_name}")
+    phase_tab_name.presence || model_name.human
+  end
+
+  def feature?(key)
+    settings.find_by!(key: "feature.#{key}").value.present?
+  rescue ActiveRecord::RecordNotFound
+    raise StandardError, "Feature \"#{key}\" not found for projekt phase #{id}"
+  end
+
+  def option(key)
+    settings.find_by!(key: "option.#{key}").value
+  rescue ActiveRecord::RecordNotFound
+    raise StandardError, "Option \"#{key}\" not found for projekt phase #{id}"
+  end
+
+  def create_map_location
+    return if map_location.present?
+
+    MapLocation.create!(
+      latitude: Setting["map.latitude"],
+      longitude: Setting["map.longitude"],
+      zoom: Setting["map.zoom"],
+      projekt_phase_id: id
+    )
+  end
+
+  def admin_nav_bar_items
+    []
+  end
+
+  def safe_to_destroy?
+    false
   end
 
   private
@@ -225,5 +295,13 @@ class ProjektPhase < ApplicationRecord
 
     def touch_updated_at(geozone)
       touch if persisted?
+    end
+
+    def add_default_settings
+      phase_settings = ProjektPhaseSetting.defaults[self.class.name] || {}
+
+      phase_settings.each do |key, value|
+        settings.create!(key: key, value: value)
+      end
     end
 end

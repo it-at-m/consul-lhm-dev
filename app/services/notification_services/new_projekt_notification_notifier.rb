@@ -17,7 +17,7 @@ module NotificationServices
       end
 
       def projekt_subscriber_ids
-        @projekt_notification.projekt.projekt_notification_phase.subscribers.ids
+        @projekt_notification.projekt_phase.subscribers.ids
       end
   end
 end
