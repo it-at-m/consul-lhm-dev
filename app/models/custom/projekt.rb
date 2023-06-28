@@ -289,10 +289,6 @@ class Projekt < ApplicationRecord
     children.activated
   end
 
-  def comments_allowed?(current_user)
-    comment_phase.selectable_by?(current_user)
-  end
-
   def calculate_level(counter = 1)
     return counter if parent.blank?
 

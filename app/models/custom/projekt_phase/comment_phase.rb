@@ -27,6 +27,10 @@ class ProjektPhase::CommentPhase < ProjektPhase
     false
   end
 
+  def comments_allowed?(current_user)
+    selectable_by?(current_user)
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)
