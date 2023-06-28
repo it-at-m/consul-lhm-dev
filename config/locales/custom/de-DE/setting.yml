@@ -161,7 +161,7 @@ de:
           show_in_individual_list: Projekt in individueller Liste anzeigen
           show_in_individual_list_description: Zeigt das Projekt in einer individuellen Liste an
         sidebar:
-          show_notification_subscription_toggler: Projektphasen
+          show_notification_subscription_toggler: Benachrichtigungen
           show_notification_subscription_toggler_description: Aktivieren Sie die Projektbenachrichtigungen in der rechten Seitenleiste
           show_phases_in_projekt_page_sidebar: Projektphasen
           show_phases_in_projekt_page_sidebar_description: Aktivieren Sie die Projektphasen in der rechten Seitenleiste der Projektseite
