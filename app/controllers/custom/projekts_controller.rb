@@ -307,14 +307,14 @@ class ProjektsController < ApplicationController
     @selected_geozone_restriction = params[:geozone_restriction] || 'no_restriction'
     @restricted_geozones = (params[:restricted_geozones] || '').split(',').map(&:to_i)
 
-    unless params[:search].present?
-      take_only_by_tag_names
-      take_by_projekts
-      take_by_sdgs
-      take_by_geozone_affiliations
-      take_by_geozone_restrictions
-      take_by_my_posts
-    end
+    # unless params[:search].present?
+    #   take_only_by_tag_names
+    #   take_by_projekts
+    #   take_by_sdgs
+    #   take_by_geozone_affiliations
+    #   take_by_geozone_restrictions
+    #   take_by_my_posts
+    # end
 
     @categories = @projekts.map { |p| p.tags.category }.flatten.uniq.compact.sort
     @tag_cloud = tag_cloud
