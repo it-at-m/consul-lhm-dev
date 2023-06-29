@@ -24,7 +24,7 @@ class ProjektPhase::CommentPhase < ProjektPhase
   end
 
   def safe_to_destroy?
-    false
+    comments.empty?
   end
 
   def comments_allowed?(current_user)
