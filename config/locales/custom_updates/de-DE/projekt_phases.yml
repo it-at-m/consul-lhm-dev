@@ -7,7 +7,7 @@ de:
             not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
             not_verified: "Um fortzufahren, bitte %{verify}."
             organization: Organisationen dürfen keine Inhalte erstellen.
-            only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
+            only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt beschränkt.
             only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
             only_specific_streets: "Die Beteiligung ist auf Anwohner*innen der folgenden Straßen beschränkt: %{restricted_streets}."
             only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
@@ -23,7 +23,7 @@ de:
             not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
             not_verified: "Um fortzufahren, bitte %{verify}."
             organization: Organisationen dürfen keine Inhalte erstellen.
-            only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
+            only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt beschränkt.
             only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
             only_specific_streets: "Die Beteiligung ist auf Anwohner*innen der folgenden Straßen beschränkt: %{restricted_streets}."
             only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
@@ -39,7 +39,7 @@ de:
             not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
             not_verified: "Um fortzufahren, bitte %{verify}."
             organization: Organisationen dürfen an dieser Abstimmung teilnehmen.
-            only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
+            only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt beschränkt.
             only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
             only_specific_streets: "Die Beteiligung ist auf Anwohner*innen der folgenden Straßen beschränkt: %{restricted_streets}."
             only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
@@ -60,7 +60,7 @@ de:
             not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
             not_verified: "Um fortzufahren, bitte %{verify}."
             organization: Organisationen dürfen keine Inhalte erstellen.
-            only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
+            only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt beschränkt.
             only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
             only_specific_streets: "Die Beteiligung ist auf Anwohner*innen der folgenden Straßen beschränkt: %{restricted_streets}."
             only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
@@ -77,7 +77,7 @@ de:
           not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
           not_verified: "Um fortzufahren, bitte %{verify}."
           organization: Organisationen dürfen nicht abstimmen.
-          only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
+          only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt beschränkt.
           only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
           only_specific_streets: "Die Beteiligung ist auf Anwohner*innen der folgenden Straßen beschränkt: %{restricted_streets}."
           only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
@@ -94,7 +94,7 @@ de:
           not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
           not_verified: "Um fortzufahren, bitte %{verify}."
           organization: Organisationen dürfen keine Inhalte erstellen.
-          only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
+          only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt beschränkt.
           only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
           only_specific_streets: "Die Beteiligung ist auf Anwohner*innen der folgenden Straßen beschränkt: %{restricted_streets}."
           only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
@@ -109,7 +109,7 @@ de:
           not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
           not_verified: "Um fortzufahren, bitte %{verify}."
           organization: Organisationen dürfen keine Inhalte erstellen.
-          only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
+          only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt beschränkt.
           only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
           only_specific_streets: "Die Beteiligung ist auf Anwohner*innen der folgenden Straßen beschränkt: %{restricted_streets}."
           only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
@@ -124,7 +124,7 @@ de:
           not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
           not_verified: "Um fortzufahren, bitte %{verify}."
           organization: Organisationen dürfen keine Inhalte erstellen.
-          only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
+          only_citizens: Die Beteiligung ist auf Bürger*innen der Stadt beschränkt.
           only_specific_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}."
           only_specific_streets: "Die Beteiligung ist auf Anwohner*innen der folgenden Straßen beschränkt: %{restricted_streets}."
           only_specific_ages: "Die Beteiligung ist auf Bürger*innen in folgenden Alterskategorien beschränkt: %{age_restriction}."
