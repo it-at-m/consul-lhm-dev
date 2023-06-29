@@ -79,17 +79,17 @@
 
   <%= paginate @projekts %>
 
-  <% if @show_footer %>
+  <% if @show_footer && false %>
     <nav class="margin-bottom projekt-footer <%= "legislation-process-list" if true %>">
     <div class="row">
       <div class="small-12 column">
         <h3><%= "Beteiligung" %></h3>
         <div class='footer-phases-filter-subnav'>
           <ul id='filter-subnav' class='key-dates'>
-            <%= render Pages::Projekts::FooterPhaseTabComponent.new(@overview_page_special_projekt.comment_phase, @current_phase.name, @comments_count) %>
-            <%= render Pages::Projekts::FooterPhaseTabComponent.new(@overview_page_special_projekt.debate_phase, @current_phase.name, @debates_count) %>
-            <%= render Pages::Projekts::FooterPhaseTabComponent.new(@overview_page_special_projekt.proposal_phase, @current_phase.name, @proposals_count) %>
-            <%= render Pages::Projekts::FooterPhaseTabComponent.new(@overview_page_special_projekt.voting_phase, @current_phase.name, @polls_count) %>
+            <%#= render Pages::Projekts::FooterPhaseTabComponent.new(@overview_page_special_projekt.comment_phase, @current_phase.name, @comments_count) %>
+            <%#= render Pages::Projekts::FooterPhaseTabComponent.new(@overview_page_special_projekt.debate_phase, @current_phase.name, @debates_count) %>
+            <%#= render Pages::Projekts::FooterPhaseTabComponent.new(@overview_page_special_projekt.proposal_phase, @current_phase.name, @proposals_count) %>
+            <%#= render Pages::Projekts::FooterPhaseTabComponent.new(@overview_page_special_projekt.voting_phase, @current_phase.name, @polls_count) %>
           </ul>
         </div>
       </div>
