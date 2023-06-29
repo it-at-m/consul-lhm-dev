@@ -27,12 +27,17 @@
     <%= f.text_field :slug, size: 80, maxlength: 80,
       hint: sanitize(t("admin.site_customization.pages.new.slug_help")) %>
 
-    <% if @projekt.page.slug.present? %>
+    <% if @projekt.page.slug.present? && @projekt.page.published? %>
       <%= link_to "Projektseite anzeigen", page_path(@projekt.page.slug), target: "_blank", class: "button primary" %>
     <% end %>
   </div>
 
   <hr>
+
+  <div class="images small-12 column">
+    <%= render "images/nested_image", f: f %>
+  </div>
+
   <%= f.translatable_fields do |translations_form| %>
     <div>
       <%= translations_form.text_field :title %>

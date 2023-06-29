@@ -19,7 +19,7 @@ class Admin::NewslettersController < Admin::BaseController
       body = ""
       body += "<h3>#{@projekt.title}</h3>" if @projekt.title
       body += "<p>#{@projekt.description}</p>" if @projekt.description
-      body += "<p><img src='#{url_for(@projekt.image.variant(:large))}'></p>" if @projekt.image
+      body += "<p><img src='#{url_for(@projekt.page.image.variant(:large))}'></p>" if @projekt.page.image
 
       body += "<p><strong>#{t("custom.newsletters.new_projekt.total_duration_start")}:</strong> #{l(@projekt.total_duration_start, format: "%d. %B %Y")}</p>"
       body += "<p><strong>#{t("custom.newsletters.new_projekt.total_duration_end")}:</strong> #{t("custom.newsletters.new_projekt.total_duration_end_till")} #{l(@projekt.total_duration_end, format: "%d. %B %Y")}</p>"

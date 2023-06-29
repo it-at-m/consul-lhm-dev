@@ -1,8 +1,8 @@
 <div id="<%= dom_id(projekt) %>"
      class="card-homepage small-12 medium-4 column margin-bottom end">
   <%= link_to projekt.page.url do %>
-    <% if projekt.image.present? %>
-      <%= image_tag(projekt.image.variant(:medium), alt: projekt.page.title) %>
+    <% if projekt.page.image.present? %>
+      <%= image_tag(projekt.page.image.variant(:medium), alt: projekt.page.title) %>
     <% else %>
       <%= image_tag('projekt_default.jpg', size: '300x300', alt: projekt.page.title) %>
     <% end %>
