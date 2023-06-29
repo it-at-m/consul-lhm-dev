@@ -299,17 +299,21 @@
       $('#projekt-phase-group-for-projekt-' + projektId).show();
     },
 
-    preselectProjekt: function() {
+    preselectProjektPhase: function() {
       // get preselcted projekt id
       var selectedProjektId;
+      var selectedProjektPhaseId;
       var url = new URL(window.location.href);
-      if (url.searchParams.get('projekt_id')) {
+
+      if (url.searchParams.get('projekt_phase_id')) {
         selectedProjektId = url.searchParams.get('projekt_id');
+        selectedProjektPhaseId = url.searchParams.get('projekt_phase_id');
       } else {
         selectedProjektId = $('[id$="projekt_id"]').val();
+        selectedProjektPhaseId = $('[id$="projekt_phase_id"]').val();
       }
 
-      if ( selectedProjektId === '' ) {
+      if ( selectedProjektPhaseId === '' ) {
         return false;
       }
 
@@ -425,7 +429,7 @@
         App.ProjektSelector.selectLabel($(this));
       });
 
-      App.ProjektSelector.preselectProjekt();
+      App.ProjektSelector.preselectProjektPhase();
 
       // Accessibility fixes
       $('body').on('keyup', '.js-toggle-projekt-group', function(event) {
