@@ -279,6 +279,7 @@ class ProjektPhase < ApplicationRecord
     end
 
     def age_permission_problem(user)
+      return nil if user.age.blank?
       return nil if age_restriction.blank?
       return :not_verified if !user.level_three_verified?
       return nil if age_restriction.min_age <= user.age && user.age <= age_restriction.max_age
