@@ -59,7 +59,7 @@ class ProjektsController < ApplicationController
     if @overview_page_special_projekt.projekt_phases.select { |phase| phase.phase_activated? }.any?
       @overview_page_special_projekt.projekt_phases.select { |phase| phase.phase_activated? }.first
     else
-      @overview_page_special_projekt.comment_phase
+      @overview_page_special_projekt.comment_phases.first
     end
   end
 
@@ -130,7 +130,7 @@ class ProjektsController < ApplicationController
     @valid_orders = %w[most_voted newest oldest]
     @current_order = @valid_orders.include?(params[:order]) ? params[:order] : @valid_orders.first
 
-    @current_tab_phase = @overview_page_special_projekt.comment_phase
+    @current_tab_phase = @overview_page_special_projekt.comment_phases.first
     params[:current_tab_path] = 'comment_phase_footer_tab'
 
     @commentable = @overview_page_special_projekt
