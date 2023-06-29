@@ -34,8 +34,15 @@
 
   <hr>
 
-  <div class="images small-12 column">
-    <%= render "images/nested_image", f: f %>
+  <div class="projekt-page-image margin-bottom">
+    <% if @projekt.page.image.present? %>
+      <div class="text-center">
+        <%= image_tag @projekt.page.image.variant(:thumb) %>
+      </div>
+    <% end %>
+    <div class="text-center">
+      <%= link_to "Banner verwalten", edit_admin_site_customization_page_path(@projekt.page), target: "_blank" %>
+    </div>
   </div>
 
   <%= f.translatable_fields do |translations_form| %>

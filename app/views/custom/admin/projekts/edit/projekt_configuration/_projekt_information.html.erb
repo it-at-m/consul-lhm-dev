@@ -3,6 +3,8 @@
 
     <%= hidden_field_tag :tab, "#tab-projekt-configuration" %>
 
+    <%= render "images/nested_image", imageable: @projekt, f: f %>
+
     <%= render "shared/globalize_locales", resource: @projekt %>
     <%= f.translatable_fields do |translations_form| %>
       <div>

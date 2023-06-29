@@ -1,13 +1,13 @@
 <div class="collapse projekt-listing">
   <div class="projekt-listing--inner-container">
     <div class='image'>
-      <% if projekt.page.image.present? %>
+      <% if projekt.image.present? %>
         <% if projekt.page&.published? %>
           <%= link_to projekt.page.url do %>
-            <%= image_tag projekt.page.image.variant(:medium) %>
+            <%= image_tag projekt.image.variant(:medium) %>
           <% end %>
         <% else %>
-          <%= image_tag projekt.page.image.variant(:medium) %>
+          <%= image_tag projekt.image.variant(:medium) %>
         <% end %>
       <% end %>
     </div>
