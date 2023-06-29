@@ -16,6 +16,8 @@ de:
             phase_expired: Diese Projektphase ist bereits abgelaufen
             phase_not_current: Diese Projektphase wurde noch nicht gestartet
             only_admins: Die Beteiligung ist auf Admin-Benutzer beschränkt.
+            no_registered_address: Ihrem Account konnte keine registrierte Adresse zugeordnet werden. Bitte aktualisieren Sie Ihr Konto.
+            only_specific_registered_address_groupings: Die Beteiligung ist auf ein anderes Gebiet beschränkt.
         votes_component:
           shared:
             not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
@@ -30,6 +32,8 @@ de:
             phase_expired: Diese Projektphase ist bereits abgelaufen
             phase_not_current: Diese Projektphase wurde noch nicht gestartet
             only_admins: Die Beteiligung ist auf Admin-Benutzer beschränkt.
+            no_registered_address: Ihrem Account konnte keine registrierte Adresse zugeordnet werden. Bitte aktualisieren Sie Ihr Konto.
+            only_specific_registered_address_groupings: Die Beteiligung ist auf ein anderes Gebiet beschränkt.
         ballot_component:
           budget_phase:
             not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
@@ -49,6 +53,8 @@ de:
             casted_offline: Sie haben bereits offline abgestimmt
             not_enough_available_votes: Nicht genug verfügbare Stimmen
             only_admins: Die Beteiligung ist auf Admin-Benutzer beschränkt.
+            no_registered_address: Ihrem Account konnte keine registrierte Adresse zugeordnet werden. Bitte aktualisieren Sie Ihr Konto.
+            only_specific_registered_address_groupings: Die Beteiligung ist auf ein anderes Gebiet beschränkt.
         commenting:
           shared:
             not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
@@ -63,6 +69,8 @@ de:
             phase_expired: Diese Projektphase ist bereits abgelaufen
             phase_not_current: Diese Projektphase wurde noch nicht gestartet
             only_admins: Die Beteiligung ist auf Admin-Benutzer beschränkt.
+            no_registered_address: Ihrem Account konnte keine registrierte Adresse zugeordnet werden. Bitte aktualisieren Sie Ihr Konto.
+            only_specific_registered_address_groupings: Die Beteiligung ist auf ein anderes Gebiet beschränkt.
           budget_phase:
             phase_expired: Diese Projektphase ist abgelaufen
         poll_votes:
@@ -80,6 +88,8 @@ de:
           poll_expired: Diese Abstimmung ist bereits abgelaufen
           poll_not_current: Diese Abstimmung wurde noch nicht gestartet
           only_admins: Die Beteiligung ist auf Admin-Benutzer beschränkt.
+          no_registered_address: Ihrem Account konnte keine registrierte Adresse zugeordnet werden. Bitte aktualisieren Sie Ihr Konto.
+          only_specific_registered_address_groupings: Die Beteiligung ist auf ein anderes Gebiet beschränkt.
         legislation_annotations:
           not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
           not_verified: "Um fortzufahren, bitte %{verify}."
@@ -93,6 +103,8 @@ de:
           phase_expired: Diese Projektphase ist bereits abgelaufen
           phase_not_current: Diese Projektphase wurde noch nicht gestartet
           only_admins: Die Beteiligung ist auf Admin-Benutzer beschränkt.
+          no_registered_address: Ihrem Account konnte keine registrierte Adresse zugeordnet werden. Bitte aktualisieren Sie Ihr Konto.
+          only_specific_registered_address_groupings: Die Beteiligung ist auf ein anderes Gebiet beschränkt.
         projekt_questions:
           not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
           not_verified: "Um fortzufahren, bitte %{verify}."
@@ -106,6 +118,8 @@ de:
           phase_expired: Diese Projektphase ist bereits abgelaufen
           phase_not_current: Diese Projektphase wurde noch nicht gestartet
           only_admins: Die Beteiligung ist auf Admin-Benutzer beschränkt.
+          no_registered_address: Ihrem Account konnte keine registrierte Adresse zugeordnet werden. Bitte aktualisieren Sie Ihr Konto.
+          only_specific_registered_address_groupings: Die Beteiligung ist auf ein anderes Gebiet beschränkt.
         projekt_livestreams:
           not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."
           not_verified: "Um fortzufahren, bitte %{verify}."
@@ -119,6 +133,8 @@ de:
           phase_expired: Diese Projektphase ist bereits abgelaufen
           phase_not_current: Diese Projektphase wurde noch nicht gestartet
           only_admins: Die Beteiligung ist auf Admin-Benutzer beschränkt.
+          no_registered_address: Ihrem Account konnte keine registrierte Adresse zugeordnet werden. Bitte aktualisieren Sie Ihr Konto.
+          only_specific_registered_address_groupings: Die Beteiligung ist auf ein anderes Gebiet beschränkt.
       restrictions:
         hint: Um die Partizipation einschränken zu können, müssen Nutzer*innen verifiziert werden.
         verification:

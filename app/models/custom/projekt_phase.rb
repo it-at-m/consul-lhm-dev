@@ -136,6 +136,7 @@ class ProjektPhase < ApplicationRecord
     unless Setting["feature.user.skip_verification"].present?
       return age_permission_problem(user) if age_permission_problem(user).present?
       return geozone_permission_problem(user) if geozone_permission_problem(user)
+      return advanced_geozone_restriction_permission_problem(user) if advanced_geozone_restriction_permission_problem(user).present?
       return individual_group_value_permission_problem(user) if individual_group_value_permission_problem(user).present?
     end
 
@@ -259,8 +260,8 @@ class ProjektPhase < ApplicationRecord
     end
 
     def advanced_geozone_restriction_permission_problem(user)
-      case registered_address_grouping_restriction
-      when "no_restriction" || nil
+      case registered_address_grouping_restrictions
+      when {}
         nil
       else
         if user.registered_address.blank?
@@ -274,8 +275,7 @@ class ProjektPhase < ApplicationRecord
     end
 
     def user_registered_address_permitted?(user)
-      registered_address_grouping_restrictions[registered_address_grouping_restriction]
-        .include?(user.registered_address.groupings[registered_address_grouping_restriction])
+      registered_address_grouping_restrictions[registered_address_grouping_restriction]&.include?(user.registered_address.groupings[registered_address_grouping_restriction])
     end
 
     def age_permission_problem(user)
