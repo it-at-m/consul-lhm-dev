@@ -68,10 +68,6 @@
       <div class='sidebar-projekt-phase-details'>
         <span class='sidebar-projekt-phase-name'>
           <%= t('custom.projekts.page.sidebar.projekt_end') %>
-
-          <%= link_to "/#{params[:id]}/#{milestone_phase.name}_footer_tab", remote: true, class: 'js-sidebar-phase-link' do %>
-            <i class="fas fa-long-arrow-alt-right"></i>
-          <% end %>
         </span>
         <span class='sidebar-projekt-phase-duration'><%= format_date(projekt.total_duration_end) %></span>
       </div>
