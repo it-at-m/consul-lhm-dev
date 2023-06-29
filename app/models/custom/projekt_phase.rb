@@ -260,17 +260,14 @@ class ProjektPhase < ApplicationRecord
     end
 
     def advanced_geozone_restriction_permission_problem(user)
-      case registered_address_grouping_restriction
-      when "no_restriction" || ""
-        nil
-      else
-        if user.registered_address.blank?
-          :no_registered_address
-        elsif !user.level_three_verified?
-          :not_verified
-        elsif !user_registered_address_permitted?(user)
-          :only_specific_registered_address_groupings
-        end
+      return nil if registered_address_grouping_restriction.blank? || registered_address_grouping_restriction == "no_restriction"
+
+      if user.registered_address.blank?
+        :no_registered_address
+      elsif !user.level_three_verified?
+        :not_verified
+      elsif !user_registered_address_permitted?(user)
+        :only_specific_registered_address_groupings
       end
     end
 
