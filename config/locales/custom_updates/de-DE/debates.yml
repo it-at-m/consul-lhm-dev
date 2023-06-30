@@ -2,6 +2,7 @@ de:
   custom:
     debates:
       form:
+        classification: Einordnung
         tags_custom: Nutzer-Tags
         required: Ihr Diskussionsbeitrag
       index:

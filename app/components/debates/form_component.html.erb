@@ -8,11 +8,17 @@
       <%= f.hidden_field :projekt_id, value: @selected_projekt.id %>
 
     <% else %>
-      <legend><%= t("custom.shared.form.projekt_assignment") %></legend>
-      <div id="projekt-selector-block" class="margin-top">
-        <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: @debate } %>
+      <div class="<%= params[:projekt_phase_id] ? "hide" : "" %>">
+        <legend><%= t("custom.shared.form.projekt_assignment") %></legend>
+        <div id="projekt-selector-block" class="margin-top">
+          <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: @debate } %>
+        </div>
       </div>
     <% end %>
+
+    <legend class="margin-top classification"><%= t("custom.debates.form.classification") %></legend>
+    <%= render partial: "shared/projekt_selector/projekt_labels", locals:	{ f: f, model: @debate } %>
+    <%= render partial: "shared/projekt_selector/sentiments", locals:	{ f: f, model: @debate } %>
 
     <legend class='margin-top'><%= t("custom.debates.form.required") %></legend>
     <%= render "shared/globalize_locales", resource: debate %>
@@ -33,6 +39,7 @@
       <div class="js-suggest" data-locale="<%= translations_form.locale %>"></div>
 
       <%= render partial: "shared/projekt_selector/projekt_labels", locals:	{ f: f, model: @debate } %>
+      <%= render partial: "shared/projekt_selector/sentiments", locals:	{ f: f, model: @debate } %>
 
       <div>
         <%= translations_form.text_area :description,

@@ -1,0 +1,19 @@
+<% if controller_name.in? %w[debates proposals] %>
+  <% if model.errors.details[:sentiments].any? %>
+    <% model.errors.details[:sentiments].each do |error| %>
+      <small class='form-error is-visible margin-top'>
+        <%= t("activerecord.errors.models.#{model.model_name.param_key}.attributes.sentiments.#{error[:error]}") %>
+      </small>
+    <% end %>
+  <% end %>
+
+  <div id="sentiment_selector" class="hide" style="margin-top:2rem;margin-bottom:2rem;">
+    <%= f.label :sentiment, t("custom.shared.form.sentiment_label"), class: "required" %>
+    <p class="small" style="margin-bottom:0.25rem;"><%= t("custom.shared.form.sentiment_hint") %></p>
+    <%= f.collection_radio_buttons :sentiment, Sentiment.all, :id, :name do |rb| %>
+      <%= rb.radio_button %>
+      <% button_styles = "border-color:#{rb.object.color};background-color:#{rb.object.color}" %>
+      <%= rb.label(id: dom_id(rb.object), class: "sentiment", data: { "sentiment-id" => rb.object.id }, style: button_styles) { rb.text } %>
+    <% end %>
+  </div>
+<% end %>

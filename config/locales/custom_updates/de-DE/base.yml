@@ -132,7 +132,10 @@ de:
       form:
         projekt_assignment: Projektzuordnung
         star_message: Alle mit (*) gekennzeichneten Felder sind Pflichtfelder
-        projekt_labels: Labels *
+        projekt_labels_label: Labels
+        projekt_labels_hint: Bitte wählen Sie mindestens eine Option aus
+        sentiment_label: Sentiment
+        sentiment_hint: Bitte wählen Sie eine Option aus
       index:
         resource:
           by: von

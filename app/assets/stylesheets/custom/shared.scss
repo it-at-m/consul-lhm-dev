@@ -489,3 +489,6 @@ span.toggle-arrow {
     }
   }
 }
+
+// Labels
+label.required:after{content: " *"}

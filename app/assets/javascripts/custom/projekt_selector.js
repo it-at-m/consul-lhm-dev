@@ -78,8 +78,7 @@
       updateAvailableTagsSelection($projektPhase);
       updateAvailableSDGsSelection($projektPhase);
       toggleExternalFieldsHeader($projektPhase);
-      updateProjektLabelSelector($projektPhase);
-      // updateSentimentSelector($projektPhase);
+      toggleClassification($projektPhase);
 
       function updateProjektSelectorHint(projektPhaseId) {
         var $hintElement = $('[id$="_creation_recommendations"]').first();
@@ -224,6 +223,17 @@
         }
       }
 
+      function toggleClassification($projektPhase) {
+        if ($projektPhase.data("projekt-label-ids") || $projektPhase.data("sentiment-ids") ) {
+          $('legend.classification').removeClass('hide');
+        } else {
+          $('legend.classification').addClass('hide');
+        }
+
+        updateProjektLabelSelector($projektPhase);
+        updateSentimentSelector($projektPhase);
+      }
+
       function updateProjektLabelSelector($projektPhase) {
         if ($projektPhase.data("projekt-label-ids")) {
           var labelIdsToShow = $projektPhase.data("projekt-label-ids").toString().split(",");
@@ -232,9 +242,11 @@
         }
 
         if (labelIdsToShow.join().length == 0) {
-          $('#label-for-projekt-labels-selector').addClass('hide');
+          $('#projekt_labels_selector').addClass('hide');
+          $('#projekt_labels_selector input[type=checkbox]').prop('checked', false);
+
         } else {
-          $('#label-for-projekt-labels-selector').removeClass('hide');
+          $('#projekt_labels_selector').removeClass('hide');
         }
 
         $("#projekt_labels_selector .projekt-label").each(function(index, label) {
@@ -254,12 +266,13 @@
         }
 
         if (sentimentIdsToShow.join().length == 0) {
-          $('#sentiment-selector').addClass('hide');
+          $('#sentiment_selector').addClass('hide');
+          $('#sentiment_selector input[type=radio]').prop('checked', false);
         } else {
-          $('#sentiment-selector').removeClass('hide');
+          $('#sentiment_selector').removeClass('hide');
         }
 
-        $("#sentiment-selector .sentiment").each(function(index, sentiment) {
+        $("#sentiment_selector .sentiment").each(function(index, sentiment) {
           if (sentimentIdsToShow.includes($(sentiment).data("sentimentId").toString())) {
             $(sentiment).removeClass('hide');
           } else {

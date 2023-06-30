@@ -2,6 +2,7 @@ en:
   custom:
     debates:
       form:
+        classification: Classification
         tags_custom: User tags
         required: Your debate
       index:

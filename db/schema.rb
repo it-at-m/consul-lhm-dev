@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_28_145149) do
+ActiveRecord::Schema.define(version: 2023_06_30_085842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -644,6 +644,7 @@ ActiveRecord::Schema.define(version: 2023_06_28_145149) do
     t.bigint "projekt_id"
     t.string "on_behalf_of"
     t.bigint "projekt_phase_id"
+    t.bigint "sentiment_id"
     t.index ["author_id", "hidden_at"], name: "index_debates_on_author_id_and_hidden_at"
     t.index ["author_id"], name: "index_debates_on_author_id"
     t.index ["cached_votes_down"], name: "index_debates_on_cached_votes_down"
@@ -656,6 +657,7 @@ ActiveRecord::Schema.define(version: 2023_06_28_145149) do
     t.index ["hot_score"], name: "index_debates_on_hot_score"
     t.index ["projekt_id"], name: "index_debates_on_projekt_id"
     t.index ["projekt_phase_id"], name: "index_debates_on_projekt_phase_id"
+    t.index ["sentiment_id"], name: "index_debates_on_sentiment_id"
     t.index ["tsv"], name: "index_debates_on_tsv", using: :gin
   end
 
@@ -1897,6 +1899,7 @@ ActiveRecord::Schema.define(version: 2023_06_28_145149) do
     t.bigint "projekt_id"
     t.string "on_behalf_of"
     t.bigint "projekt_phase_id"
+    t.bigint "sentiment_id"
     t.index ["author_id", "hidden_at"], name: "index_proposals_on_author_id_and_hidden_at"
     t.index ["author_id"], name: "index_proposals_on_author_id"
     t.index ["cached_votes_up"], name: "index_proposals_on_cached_votes_up"
@@ -1908,6 +1911,7 @@ ActiveRecord::Schema.define(version: 2023_06_28_145149) do
     t.index ["projekt_id"], name: "index_proposals_on_projekt_id"
     t.index ["projekt_phase_id"], name: "index_proposals_on_projekt_phase_id"
     t.index ["selected"], name: "index_proposals_on_selected"
+    t.index ["sentiment_id"], name: "index_proposals_on_sentiment_id"
     t.index ["tsv"], name: "index_proposals_on_tsv", using: :gin
   end
 
@@ -2489,6 +2493,7 @@ ActiveRecord::Schema.define(version: 2023_06_28_145149) do
   add_foreign_key "dashboard_executed_actions", "proposals"
   add_foreign_key "debates", "projekt_phases"
   add_foreign_key "debates", "projekts"
+  add_foreign_key "debates", "sentiments"
   add_foreign_key "deficiency_report_officers", "users"
   add_foreign_key "deficiency_reports", "deficiency_report_categories"
   add_foreign_key "deficiency_reports", "deficiency_report_officers"
@@ -2561,6 +2566,7 @@ ActiveRecord::Schema.define(version: 2023_06_28_145149) do
   add_foreign_key "proposals", "communities"
   add_foreign_key "proposals", "projekt_phases"
   add_foreign_key "proposals", "projekts"
+  add_foreign_key "proposals", "sentiments"
   add_foreign_key "registered_address_street_projekt_phases", "projekt_phases"
   add_foreign_key "registered_address_street_projekt_phases", "registered_address_streets"
   add_foreign_key "registered_addresses", "registered_address_streets"
