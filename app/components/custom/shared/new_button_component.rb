@@ -70,7 +70,11 @@ class Shared::NewButtonComponent < ApplicationComponent
       link_params = {}
       permitted_query_params = %i[order]
 
-      link_params[:projekt_phase_id] = @projekt_phase.id if @projekt_phase.present?
+      if @projekt_phase.present?
+        link_params[:projekt_phase_id] = @projekt_phase.id
+        link_params[:projekt_id] = @projekt_phase.projekt.id
+      end
+
       link_params[:origin] = "projekt" if controller_name == "pages"
 
       link_params.merge!(@query_params.permit(permitted_query_params).to_h) if @query_params.present?
@@ -93,7 +97,7 @@ class Shared::NewButtonComponent < ApplicationComponent
       if @projekt_phase.is_a?(ProjektPhase::BudgetPhase)
         button_text = @projekt_phase&.new_resource_button_name.presence || t("budgets.investments.index.sidebar.create")
         link_to button_text,
-                new_budget_investment_path(@projekt_phase.budget, projekt_phase_id: @projekt_phase),
+                new_budget_investment_path(@projekt_phase.budget, projekt_phase_id: @projekt_phase, projekt_id: @projekt),
                 class: new_button_classes
 
       elsif @projekt_phase.is_a?(ProjektPhase::DebatePhase) || @resources_name == "debates"

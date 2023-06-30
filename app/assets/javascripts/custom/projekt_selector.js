@@ -326,7 +326,7 @@
         $selectedProjekt = $('#projekt_' + $selectedProjekt.data('parentId'))
       }
 
-      // show projekts staring with top parent
+      // show projekts staring with top parent and select projekt
       $.each(projektIdsToShow, function(index, projektId) {
         var $selectedProjekt = $('#projekt_' + projektId)
         App.ProjektSelector.selectProjekt($selectedProjekt);
@@ -337,6 +337,10 @@
         $('#projekt-selector-block').prev('legend').hide();
         $('#projekt-selector-block').hide();
       }
+
+      // select projekt phase
+      var $selectedProjektPhase = $('#projekt-phase-selector-' + selectedProjektPhaseId)
+      App.ProjektSelector.selectProjektPhase($selectedProjektPhase);
     },
 
 
