@@ -40,8 +40,8 @@ class MapLocation < ApplicationRecord
     if @proposal.present? && @proposal.projekt_phase.projekt.overview_page?
       "#009900"
 
-    elsif @proposal.present? && @proposal.projekt_phase.projekt.present?
-      @proposal.projekt_phase.projekt.color
+    elsif @proposal.present? && @proposal.sentiment.present?
+      @proposal.sentiment.color
 
     elsif @investment.present?
       @investment.projekt.color

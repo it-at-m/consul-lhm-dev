@@ -10,7 +10,7 @@
   <div id="sentiment_selector" class="hide" style="margin-top:2rem;margin-bottom:2rem;">
     <%= f.label :sentiment, t("custom.shared.form.sentiment_label"), class: "required" %>
     <p class="small" style="margin-bottom:0.25rem;"><%= t("custom.shared.form.sentiment_hint") %></p>
-    <%= f.collection_radio_buttons :sentiment, Sentiment.all, :id, :name do |rb| %>
+    <%= f.collection_radio_buttons :sentiment_id, Sentiment.all, :id, :name, { include_hidden: false } do |rb| %>
       <%= rb.radio_button %>
       <% button_styles = "border-color:#{rb.object.color};background-color:#{rb.object.color}" %>
       <%= rb.label(id: dom_id(rb.object), class: "sentiment", data: { "sentiment-id" => rb.object.id }, style: button_styles) { rb.text } %>

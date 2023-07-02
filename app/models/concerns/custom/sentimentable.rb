@@ -3,7 +3,7 @@ module Sentimentable
 
   included do
     belongs_to :sentiment
-    validates :sentiment, presence: true, on: :create, if: :sentiments_available?
+    validates :sentiment_id, presence: true, on: :create, if: :sentiments_available?
   end
 
   def sentiments_available?
