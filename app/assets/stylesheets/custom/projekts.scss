@@ -1646,7 +1646,7 @@ span.projekt-backlink:before {
 @mixin resource-tags {
   display: inline-block;
   margin-bottom: 0.25rem;
-  color: #fff !important;
+  color: #fff;
   background-color: #767676;
   padding: 0.33333rem 0.5rem;
   margin-left: 0 !important;

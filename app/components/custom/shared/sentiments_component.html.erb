@@ -1,7 +1,7 @@
 <div class="sentiments">
   <% @sentiments.each do |sentiment| %>
     <div>
-      <% button_styles = "border-color:#{sentiment.color};background-color:#{sentiment.color}" %>
+      <% button_styles = "border-color:#{sentiment.color};background-color:#{sentiment.color};color:#{pick_text_color(sentiment.color)}" %>
       <span class="sentiment secondary <%= "selected" if sentiment_selected?(sentiment) %>" style="<%= button_styles %>">
         <%= link_to link_path(sentiment),
           remote: true,

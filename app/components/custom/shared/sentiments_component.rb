@@ -1,5 +1,5 @@
 class Shared::SentimentsComponent < ApplicationComponent
-  delegate :toggle_element_in_array, to: :helpers
+  delegate :toggle_element_in_array, :pick_text_color, to: :helpers
 
   def initialize(projekt_phase_id: nil, resource: nil)
     if projekt_phase_id
