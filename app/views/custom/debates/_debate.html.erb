@@ -43,7 +43,7 @@
                   "details"] do %>
  
           <div class='resource-projekt-labels'>
-            <%= render Shared::ProjektLabelsComponent.new(resource: debate) %>
+            <%= render Shared::ProjektLabelsFilterComponent.new(resource: debate) %>
           </div>
           <h4 class='resource-name'><%= link_to debate.title, debate %></h4>
           <div class="resource-summary margin-bottom">

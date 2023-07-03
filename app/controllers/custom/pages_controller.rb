@@ -96,7 +96,6 @@ class PagesController < ApplicationController
     @selected_parent_projekt = @projekt
 
     set_resources(Debate)
-    set_top_level_projekts
 
     @scoped_projekt_phase_ids = Debate.scoped_projekt_phase_ids_for_footer(@projekt_phase)
 
@@ -117,7 +116,6 @@ class PagesController < ApplicationController
     @valid_orders = Proposal.proposals_orders(current_user)
     @valid_orders.delete("archival_date")
     @valid_orders.delete("relevance")
-
     @current_order = if @valid_orders.include?(params[:order])
                        params[:order]
                      elsif helpers.projekt_feature?(@projekt, "general.set_default_sorting_to_newest") && @valid_orders.include?("created_at")
@@ -126,35 +124,10 @@ class PagesController < ApplicationController
                        Setting["selectable_setting.proposals.default_order"]
                      end
 
-    params[:filter_projekt_ids] ||= @projekt.all_children_ids.push(@projekt.id).map(&:to_s)
-    params[:projekt_label_ids] ||= []
-
-    @selected_parent_projekt = @projekt
-
-    set_resources(Proposal)
-    set_top_level_projekts
-
-    discard_draft
-    discard_archived
-    load_retired
-    load_selected
-    load_featured
-    remove_archived_from_order_links
-
-    @scoped_projekt_ids = Proposal.scoped_projekt_ids_for_footer(@projekt)
-
-    unless params[:search].present?
-      take_by_my_posts
-      # take_by_tag_names
-      # take_by_sdgs
-      # take_by_geozone_affiliations
-      # take_by_geozone_restrictions
-      take_by_projekts(@scoped_projekt_ids)
-      take_by_projekt_labels if params[:projekt_label_ids].any?
-    end
+    @resources = @projekt_phase.proposals.for_public_render
+    take_by_projekt_labels
 
     @proposals_coordinates = all_proposal_map_locations(@resources)
-
     @proposals = @resources.page(params[:page]).send("sort_by_#{@current_order}")
   end
 

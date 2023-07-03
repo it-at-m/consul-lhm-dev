@@ -1,4 +1,4 @@
-<%= render 'shared/loader_spinner' %>
+<%= render "shared/loader_spinner" %>
 
 <% if projekt_phase_feature?(@projekt_phase, "show_map") %>
   <div class='margin-bottom'>
@@ -12,19 +12,7 @@
   <div id="proposals-sidebar" class="small-12 medium-3 column">
     <aside class="margin-bottom">
       <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
-
-      <% unless @projekt.overview_page? %>
-        <%= render Sidebar::ProjektsFilterComponent.new(
-          top_level_active_projekts: @top_level_active_projekts,
-          top_level_archived_projekts: @top_level_archived_projekts,
-          scoped_projekt_ids: @scoped_projekt_ids,
-          all_resources: @all_resources,
-          current_tab_phase: @projekt_phase,
-          current_projekt: @projekt)
-        %>
-      <% end %>
-
-      <%= render "shared/projekt_labels", projekt: @projekt %>
+      <%= render "custom/pages/projekt_footer/partials/projekt_labels", projekt_phase: @projekt_phase, resources: @resources %>
     </aside>
   </div>
 

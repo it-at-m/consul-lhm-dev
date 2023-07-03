@@ -39,6 +39,12 @@ class Proposal < ApplicationRecord
   scope :seen,                     -> { where.not(ignored_flag_at: nil) }
   scope :unseen,                   -> { where(ignored_flag_at: nil) }
 
+  scope :for_public_render,        -> {
+    includes(:tags)
+      .published #discard_draft
+      .not_archived # discard_archived
+  }
+
   def self.proposals_orders(user = nil)
     orders = %w[hot_score created_at alphabet votes_up random]
     # orders << "recommendations" if Setting["feature.user.recommendations_on_proposals"] && user&.recommended_proposals

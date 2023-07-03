@@ -48,7 +48,7 @@
 
           <% if @debate.projekt_labels.any? %>
             <div class='resource-projekt-labels' style='margin-bottom:30px;'>
-              <%= render Shared::ProjektLabelsComponent.new(resource: @debate) %>
+              <%= render Shared::ProjektLabelsFilterComponent.new(resource: @debate) %>
             </div>
           <% end %>
 

@@ -28,8 +28,7 @@ class ProjektPhase::ProposalPhase < ProjektPhase
   end
 
   def resource_count
-    projekt_tree_ids = projekt.all_children_ids.unshift(projekt.id)
-    Proposal.base_selection.where(projekt_id: (Proposal.scoped_projekt_ids_for_footer(projekt) & projekt_tree_ids)).count
+    proposals.for_public_render.count
   end
 
   def selectable_by_admins_only?

@@ -20,7 +20,7 @@
 
   <% if @proposal.projekt_labels.any? %>
     <div class='resource-projekt-labels' style='margin-bottom:30px;'>
-      <%= render Shared::ProjektLabelsComponent.new(resource: @proposal) %>
+      <%= render Shared::ProjektLabelsFilterComponent.new(resource: @proposal) %>
     </div>
   <% end %>
 

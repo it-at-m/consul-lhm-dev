@@ -61,6 +61,8 @@ module CustomHelper
   end
 
   def toggle_element_in_array(array, element)
+    array ||= []
+
     if array.include?(element)
       array.delete(element)
     else

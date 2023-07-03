@@ -1,0 +1,9 @@
+<% if projekt_phase.projekt_labels.any? && resources.joins(:projekt_labels).any? %>
+  <div class="sidebar-divider"></div>
+  <h2 class="sidebar-title projekt-tag-chip-category projekt-tag-chip-icon"><%= t("shared.tags_cloud.labels") %></h2>
+  <br>
+
+  <div id="projekt-labels-sidebar">
+    <%= render Shared::ProjektLabelsFilterComponent.new(projekt_phase_id: projekt_phase.id) %>
+  </div>
+<% end %>
