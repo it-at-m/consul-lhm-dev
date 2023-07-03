@@ -40,10 +40,10 @@
                   params[:restricted_geozones],
                   params[:projekt_label_ids],
                   "details"] do %>
+          <h4 class='resource-name'><%= link_to proposal.title, namespaced_proposal_path(proposal) %></h4>
           <div class='resource-projekt-labels'>
             <%= render Shared::ProjektLabelsComponent.new(resource: proposal) %>
           </div>
-          <h4 class='resource-name'><%= link_to proposal.title, namespaced_proposal_path(proposal) %></h4>
           <div class="resource-summary margin-bottom">
             <%= link_to namespaced_proposal_path(proposal) do %>
               <%= auto_link_already_sanitized_html simple_format(projekt_phase_feature?(proposal.projekt_phase, "enable_summary") ? proposal.summary : strip_tags(proposal.description)[0..200]) %>
