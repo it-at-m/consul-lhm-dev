@@ -1,0 +1,9 @@
+<% if projekt_phase.sentiments.any? && resources.where.not(sentiment_id: nil).any? %>
+  <div class="sidebar-divider"></div>
+  <h2 class="sidebar-title projekt-tag-chip-category projekt-tag-chip-icon"><%= t("shared.tags_cloud.labels") %></h2>
+  <br>
+
+  <div id="sentiments-sidebar">
+    <%= render Shared::SentimentsComponent.new(projekt_phase_id: projekt_phase.id) %>
+  </div>
+<% end %>

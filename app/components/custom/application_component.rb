@@ -14,7 +14,7 @@ class ApplicationComponent < ViewComponent::Base
       filter: nil,
       order: nil,
       projekt_label_ids: nil,
-      sentiment_ids: nil
+      sentiment_id: nil
     )
       return "" unless params[:projekt_phase_id].present?
 
@@ -24,8 +24,10 @@ class ApplicationComponent < ViewComponent::Base
         filter: filter || params[:filter],
         order: order || params[:order],
         projekt_label_ids: projekt_label_ids || params[:projekt_label_ids],
-        sentiment_ids: sentiment_ids || params[:sentiment_ids]
+        sentiment_id: sentiment_id || params[:sentiment_id]
       }
+
+      url_options.reject! { |k, v| k == :sentiment_id && v == 0 }
 
       if remote
         projekt_phase_footer_tab_page_path(projekt_phase.projekt.page, projekt_phase.id, **url_options)

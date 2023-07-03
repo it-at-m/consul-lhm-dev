@@ -1641,7 +1641,7 @@ span.projekt-backlink:before {
   margin-left: 15px;
 }
 
-// Projekt labels
+// Projekt labels and sentiments
 
 .projekt-labels {
   .projekt-label {
@@ -1661,6 +1661,42 @@ span.projekt-backlink:before {
         color: inherit;
         text-decoration: none;
       }
+    }
+  }
+}
+
+.sentiments {
+  .sentiment {
+    display: inline-block;
+    line-height: 1.2;
+    font-weight: normal;
+    margin-right: 0.2rem;
+    margin-bottom: 0.3rem;
+    margin-left: 0;
+    padding: 0.3rem 1.5rem;
+    padding-left: 2.5rem;
+    border: 1px solid;
+    border-radius: 0.5rem;
+    position: relative;
+    color: #fff;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    &::before {
+      content: "\f111";
+      font-family: "Font Awesome 5 Free";
+      font-weight: normal;
+      position: absolute;
+      left: 14px;
+      top: 5px;
+      color: inherit;
+    }
+
+    &.selected::before {
+      content: "\f192";
     }
   }
 }

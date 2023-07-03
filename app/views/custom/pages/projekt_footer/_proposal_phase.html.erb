@@ -7,12 +7,11 @@
 <% end %>
 
 <div class='row'>
-
-
   <div id="proposals-sidebar" class="small-12 medium-3 column">
     <aside class="margin-bottom">
       <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
       <%= render "custom/pages/projekt_footer/partials/projekt_labels", projekt_phase: @projekt_phase, resources: @resources %>
+      <%= render "custom/pages/projekt_footer/partials/sentiments", projekt_phase: @projekt_phase, resources: @resources %>
     </aside>
   </div>
 
