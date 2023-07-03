@@ -41,7 +41,7 @@
                   params[:projekt_label_ids],
                   "details"] do %>
           <div class='resource-projekt-labels'>
-            <%= render Shared::ProjektLabelsFilterComponent.new(resource: proposal) %>
+            <%= render Shared::ProjektLabelsComponent.new(resource: proposal) %>
           </div>
           <h4 class='resource-name'><%= link_to proposal.title, namespaced_proposal_path(proposal) %></h4>
           <div class="resource-summary margin-bottom">

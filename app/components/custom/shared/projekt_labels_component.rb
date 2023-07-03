@@ -1,4 +1,4 @@
-class Shared::ProjektLabelsFilterComponent < ApplicationComponent
+class Shared::ProjektLabelsComponent < ApplicationComponent
   delegate :toggle_element_in_array, to: :helpers
 
   def initialize(projekt_phase_id: nil, resource: nil)
