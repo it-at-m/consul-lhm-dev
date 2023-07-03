@@ -7,7 +7,7 @@
     <% end %>
   <% end %>
 
-  <div id="projekt_labels_selector" class="hide" style="margin-top:2rem;margin-bottom:2rem;">
+  <div id="projekt_labels_selector" class="hide projekt-labels" style="margin-top:2rem;margin-bottom:2rem;">
     <%= f.label :projekt_label, t("custom.shared.form.projekt_labels_label"), class: "required" %>
     <p class="small" style="margin-bottom:0.25rem;"><%= t("custom.shared.form.projekt_labels_hint") %></p>
     <%= f.collection_check_boxes :projekt_label_ids, ProjektLabel.all, :id, :name do |cb| %>

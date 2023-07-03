@@ -7,7 +7,7 @@
     <% end %>
   <% end %>
 
-  <div id="sentiment_selector" class="hide" style="margin-top:2rem;margin-bottom:2rem;">
+  <div id="sentiment_selector" class="hide sentiments" style="margin-top:2rem;margin-bottom:2rem;">
     <%= f.label :sentiment, t("custom.shared.form.sentiment_label"), class: "required" %>
     <p class="small" style="margin-bottom:0.25rem;"><%= t("custom.shared.form.sentiment_hint") %></p>
     <%= f.collection_radio_buttons :sentiment_id, Sentiment.all, :id, :name, { include_hidden: false } do |rb| %>

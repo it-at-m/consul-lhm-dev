@@ -1641,67 +1641,69 @@ span.projekt-backlink:before {
   margin-left: 15px;
 }
 
-// Projekt labels and sentiments
+// Resource tags: projekt labels and sentiments
+
+@mixin resource-tags {
+  display: inline-block;
+  margin-bottom: 0.25rem;
+  color: #fff !important;
+  background-color: #767676;
+  padding: 0.33333rem 0.5rem;
+  margin-left: 0 !important;
+  margin-right: 0.2rem;
+  border-radius: 0.1875rem;
+  font-size: 0.8rem;
+  font-weight: normal;
+  line-height: 1;
+  white-space: nowrap;
+  position: relative;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+}
+
+@mixin resource-tags-with-icon {
+  @include resource-tags;
+  padding-left: 24px;
+
+  &::before {
+    content: "\f111";
+    font-family: "Font Awesome 5 Free";
+    font-weight: normal;
+    position: absolute;
+    left: 7px;
+    top: 6px;
+  }
+
+  &.selected::before {
+    content: "\f192";
+  }
+}
 
 .projekt-labels {
   .projekt-label {
-    margin-bottom: 0.25rem;
-    color: #fff;
-    background-color: #767676;
+    @include resource-tags;
 
     &.selected {
       background-color: $brand !important;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-
-      &:hover {
-        color: inherit;
-        text-decoration: none;
-      }
     }
   }
 }
 
 .sentiments {
   .sentiment {
-    display: inline-block;
-    line-height: 1.2;
-    font-weight: normal;
-    margin-right: 0.2rem;
-    margin-bottom: 0.3rem;
-    margin-left: 0;
-    padding: 0.3rem 1.5rem;
-    padding-left: 2.5rem;
-    border: 1px solid;
-    border-radius: 0.5rem;
-    position: relative;
-    color: #fff;
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    &::before {
-      content: "\f111";
-      font-family: "Font Awesome 5 Free";
-      font-weight: normal;
-      position: absolute;
-      left: 14px;
-      top: 5px;
-      color: inherit;
-    }
-
-    &.selected::before {
-      content: "\f192";
-    }
+    @include resource-tags-with-icon;
   }
 }
 
-// Projekt labels and sentiments in selector
+// tagging in selector
 
 #projekt_labels_selector {
   input {
@@ -1709,18 +1711,6 @@ span.projekt-backlink:before {
   }
 
   .projekt-label {
-    display: inline-block;
-    line-height: 1.2rem;
-    font-weight: normal;
-    margin-right: 0.2rem;
-    margin-bottom: 0.3rem;
-    margin-left: 0;
-    padding: 0.3rem 1.5rem;
-    border: 1px solid;
-    border-radius: 0.5rem;
-    color: #707070 !important;
-    background-color: inherit !important;
-
     i {
       margin-right: 7px;
     }
@@ -1735,31 +1725,6 @@ span.projekt-backlink:before {
 #sentiment_selector {
   input {
     display: none;
-  }
-
-  .sentiment {
-    display: inline-block;
-    line-height: 1.2;
-    font-weight: normal;
-    margin-right: 0.2rem;
-    margin-bottom: 0.3rem;
-    margin-left: 0;
-    padding: 0.3rem 1.5rem;
-    padding-left: 2.5rem;
-    border: 1px solid;
-    border-radius: 0.5rem;
-    position: relative;
-    color: #fff;
-
-    &::before {
-      content: "\f111";
-      font-family: "Font Awesome 5 Free";
-      font-weight: normal;
-      position: absolute;
-      left: 14px;
-      top: 5px;
-      color: inherit;
-    }
   }
 
   input:checked + .sentiment {

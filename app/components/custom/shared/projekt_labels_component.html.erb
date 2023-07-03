@@ -1,6 +1,6 @@
 <div class="projekt-labels">
   <% @projekt_labels.each do |label| %>
-    <span class="label projekt-label secondary <%= "selected" if label_selected?(label) %>">
+    <span class="projekt-label <%= "selected" if label_selected?(label) %>">
       <% if filter_link? %>
         <%= link_to link_path(label),
           remote: true,
