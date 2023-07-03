@@ -52,12 +52,16 @@ de:
               blank: Bitte wählen Sie ein Projekt
             projekt_labels:
               blank: Bitte wählen Sie mindestens ein Label
+            sentiment:
+              blank: Bitte wählen Sie ein Sentiment
         debate:
           attributes:
             projekt_id:
               blank: Bitte wählen Sie ein Projekt
             projekt_labels:
               blank: Bitte wählen Sie mindestens ein Label
+            sentiment:
+              blank: Bitte wählen Sie ein Sentiment
         projekt:
           attributes:
             color:

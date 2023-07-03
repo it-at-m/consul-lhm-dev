@@ -1,6 +1,10 @@
 <%= translatable_form_for(proposal, url: url, html: { class: "proposal-form" }) do |f| %>
   <%= render "shared/errors", resource: proposal %>
 
+  <% if params[:projekt_phase_id] %>
+    <%= hidden_field_tag :projekt_phase_id, params[:projekt_phase_id] %>
+  <% end %>
+
   <fieldset class="required-fields">
     <%= hidden_field_tag :order, params[:order] %>
 
