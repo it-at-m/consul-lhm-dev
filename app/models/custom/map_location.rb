@@ -60,8 +60,8 @@ class MapLocation < ApplicationRecord
     if @proposal.present? && @proposal.projekt_phase.projekt.overview_page?
       "user"
 
-    elsif @proposal.present? && @proposal.projekt_phase.projekt.present?
-      @proposal.projekt_phase.projekt.icon
+    elsif @proposal.present? && @proposal.projekt_labels.any?
+      @proposal.projekt_labels.first.icon
 
     elsif @investment.present? && @investment.projekt.present?
       @investment.projekt.icon
