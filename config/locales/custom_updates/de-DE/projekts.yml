@@ -34,6 +34,11 @@ de:
         index_order_individual_list_title: "Individuelle Liste"
       page:
         footer:
+          sidebar:
+            projekt_labels:
+              title: Labels
+            sentiments:
+              title: Sentiment
           budget:
             investments_subtab: Investitionen
         projekt_events_tab:
