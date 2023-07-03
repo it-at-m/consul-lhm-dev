@@ -18,9 +18,7 @@ class Proposal < ApplicationRecord
   validate :description_sanitized
 
   # validates :terms_of_service, acceptance: { allow_nil: false }, on: :create
-  validates :terms_data_storage, acceptance: { allow_nil: false }, on: :create #custom
-  validates :terms_data_protection, acceptance: { allow_nil: false }, on: :create #custom
-  validates :terms_general, acceptance: { allow_nil: false }, on: :create #custom
+  validates :resource_terms, acceptance: { allow_nil: false }, on: :create #custom
 
   scope :with_current_projekt, -> { joins(projekt_phase: :projekt).merge(Projekt.current) }
   scope :by_author, ->(user_id) {

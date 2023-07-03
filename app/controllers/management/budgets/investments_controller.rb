@@ -22,9 +22,7 @@ class Management::Budgets::InvestmentsController < Management::BaseController
 
   def create
     # @investment.terms_of_service = "1" #custom
-    @investment.terms_data_storage = "1" #custom
-    @investment.terms_data_protection = "1" #custom
-    @investment.terms_general = "1" #custom
+    @investment.resource_terms = "1" #custom
     @investment.author = managed_user
     @investment.heading = @budget.headings.first if @budget.single_heading?
 

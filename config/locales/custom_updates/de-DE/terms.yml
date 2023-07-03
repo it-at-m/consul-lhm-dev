@@ -16,3 +16,6 @@ de:
         text: Allgemeinen Nutzungsbedingungen
       revoke_consent:
         text: Sie können Ihre Einwilligung zur Datenspeicherung ohne eine Angabe von Gründen jederzeit widerrufen.
+      resource_terms:
+        title: Beitragvereinbarung
+        label: Mein Beitrag entspricht den %{terms_link} und den %{privacy_link}

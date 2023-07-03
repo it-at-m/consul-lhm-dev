@@ -23,9 +23,7 @@ class DeficiencyReport < ApplicationRecord
   validates :deficiency_report_category_id, :author, presence: true
 
   # validates :terms_of_service, acceptance: { allow_nil: false }, on: :create #custom
-  validates :terms_data_storage, acceptance: { allow_nil: false }, on: :create #custom
-  validates :terms_data_protection, acceptance: { allow_nil: false }, on: :create #custom
-  validates :terms_general, acceptance: { allow_nil: false }, on: :create #custom
+  validates :resource_terms, acceptance: { allow_nil: false }, on: :create #custom
 
   validates_translation :title, presence: true
 
