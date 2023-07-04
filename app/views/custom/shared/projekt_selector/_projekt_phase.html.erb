@@ -15,7 +15,9 @@
   <%= "data-tag-ids=#{projekt.tags.category.ids.any? ? projekt.tags.category.ids.join(",") : false}" if projekt_feature?(projekt, "general.enable_tags") %>
   <%= "data-allow-sdgs=true" if projekt_feature?(projekt, "general.enable_sdgs") %>
   <%= "data-sdg-ids=#{projekt.sdg_goals.ids.any? ? projekt.sdg_goals.ids.join(",") : false}" if projekt_feature?(projekt, "general.enable_sdgs") %>
+  <%= "data-projekt-labels-name=#{projekt_phase.labels_name.gsub(" ", "_")}" if projekt_phase.labels_name.present? %>
   <%= "data-projekt-label-ids=#{projekt_phase.projekt_labels.ids.join(",")}" if projekt_phase.projekt_labels.any? %>
+  <%= "data-sentiments-name=#{projekt_phase.sentiments_name.gsub(" ", "_")}" if projekt_phase.sentiments_name.present? %>
   <%= "data-sentiment-ids=#{projekt_phase.sentiments.ids.join(",")}" if projekt_phase.sentiments.any? %>>
   <%= projekt_phase.title %>
 </span>

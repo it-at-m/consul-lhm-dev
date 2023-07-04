@@ -2,7 +2,7 @@ en:
   custom:
     debates:
       form:
-        classification: Classification
+        tagging: Tagging
         tags_custom: User tags
         required: Your debate
       index:

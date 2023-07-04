@@ -78,7 +78,7 @@
       updateAvailableTagsSelection($projektPhase);
       updateAvailableSDGsSelection($projektPhase);
       toggleExternalFieldsHeader($projektPhase);
-      toggleClassification($projektPhase);
+      toggleTagging($projektPhase);
 
       function updateProjektSelectorHint(projektPhaseId) {
         var $hintElement = $('[id$="_creation_recommendations"]').first();
@@ -223,11 +223,11 @@
         }
       }
 
-      function toggleClassification($projektPhase) {
+      function toggleTagging($projektPhase) {
         if ($projektPhase.data("projekt-label-ids") || $projektPhase.data("sentiment-ids") ) {
-          $('legend.classification').removeClass('hide');
+          $('legend.tagging').removeClass('hide');
         } else {
-          $('legend.classification').addClass('hide');
+          $('legend.tagging').addClass('hide');
         }
 
         updateProjektLabelSelector($projektPhase);
@@ -235,6 +235,10 @@
       }
 
       function updateProjektLabelSelector($projektPhase) {
+        if ($projektPhase.data("projekt-labels-name")) {
+          $('#projekt_labels_selector label[for$=_projekt_labels]').text($projektPhase.data("projekt-labels-name").replaceAll("_", " "));
+        }
+
         if ($projektPhase.data("projekt-label-ids")) {
           var labelIdsToShow = $projektPhase.data("projekt-label-ids").toString().split(",");
         } else {
@@ -259,6 +263,10 @@
       }
 
       function updateSentimentSelector($projektPhase) {
+        if ($projektPhase.data("sentiments-name")) {
+          $('#sentiment_selector label[for$=_sentiment_id]').text($projektPhase.data("sentiments-name").replaceAll("_", " "));
+        }
+
         if ($projektPhase.data("sentiment-ids")) {
           var sentimentIdsToShow = $projektPhase.data("sentiment-ids").toString().split(",");
         } else {

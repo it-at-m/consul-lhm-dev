@@ -20,7 +20,7 @@
       </div>
     <% end %>
 
-    <legend class="margin-top classification"><%= t("custom.proposals.form.classification") %></legend>
+    <legend class="margin-top tagging"><%= t("custom.proposals.form.tagging") %></legend>
     <%= render partial: "shared/projekt_selector/projekt_labels", locals:	{ f: f, model: @proposal } %>
     <%= render partial: "shared/projekt_selector/sentiments", locals:	{ f: f, model: @proposal } %>
 

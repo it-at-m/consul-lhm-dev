@@ -1,6 +1,10 @@
 <%= translatable_form_for(debate, html: { class: "debate-form" }) do |f| %>
   <%= render "shared/errors", resource: debate %>
 
+  <% if params[:projekt_phase_id] %>
+    <%= hidden_field_tag :projekt_phase_id, params[:projekt_phase_id] %>
+  <% end %>
+
   <fieldset class="required-fields">
     <%= hidden_field_tag :order, params[:order] %>
 
@@ -16,7 +20,7 @@
       </div>
     <% end %>
 
-    <legend class="margin-top classification"><%= t("custom.debates.form.classification") %></legend>
+    <legend class="margin-top tagging"><%= t("custom.debates.form.tagging") %></legend>
     <%= render partial: "shared/projekt_selector/projekt_labels", locals:	{ f: f, model: @debate } %>
     <%= render partial: "shared/projekt_selector/sentiments", locals:	{ f: f, model: @debate } %>
 

@@ -228,6 +228,14 @@ class ProjektPhase < ApplicationRecord
     false
   end
 
+  def projekt_labels_label_text
+    labels_name.presence || I18n.t("custom.projekts.page.footer.sidebar.projekt_labels.title")
+  end
+
+  def sentiment_label_text
+    sentiments_name.presence || I18n.t("custom.projekts.page.footer.sidebar.sentiments.title")
+  end
+
   private
 
     def phase_specific_permission_problems(user)
