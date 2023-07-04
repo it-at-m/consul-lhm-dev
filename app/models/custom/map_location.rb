@@ -51,6 +51,9 @@ class MapLocation < ApplicationRecord
 
     elsif @projekt.present?
       "red"
+
+    else
+      "#004a83"
     end
   end
 
@@ -61,7 +64,7 @@ class MapLocation < ApplicationRecord
       "user"
 
     elsif @proposal.present? && @proposal.projekt_labels.any?
-      @proposal.projekt_labels.first.icon
+      @proposal.projekt_labels.count == 1 ? @proposal.projekt_labels.first.icon : "tags"
 
     elsif @investment.present? && @investment.projekt.present?
       @investment.projekt.icon
@@ -72,6 +75,8 @@ class MapLocation < ApplicationRecord
     elsif @projekt.present?
       @projekt.icon
 
+    else
+      "circle"
     end
   end
 
