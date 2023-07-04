@@ -39,9 +39,12 @@
   .resource-details {
     border-right: 1px solid $border;
 
+    .resource-taggings {
+      margin-bottom: 0.5rem;
+    }
+
     .resource-projekt-labels {
       margin-top: -0.5rem;
-      margin-bottom: 0.5rem;
 
       .projekt-label {
         margin-right: 0.1rem;

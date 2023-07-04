@@ -7,7 +7,7 @@ class Shared::SentimentsComponent < ApplicationComponent
       @sentiments = @projekt_phase.sentiments
     elsif resource
       @projekt_phase = resource.projekt_phase
-      @sentiments = resource.sentiment
+      @sentiments = [resource.sentiment].compact
     end
   end
 

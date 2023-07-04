@@ -1703,6 +1703,16 @@ span.projekt-backlink:before {
   }
 }
 
+.resource-taggings {
+  .sentiment {
+    padding-left: 0.5rem;
+
+    &::before {
+      content: "";
+    }
+  }
+}
+
 // tagging in selector
 
 #projekt_labels_selector {

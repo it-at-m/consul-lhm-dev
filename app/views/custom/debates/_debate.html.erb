@@ -43,9 +43,15 @@
                   "details"] do %>
  
           <h4 class='resource-name'><%= link_to debate.title, debate %></h4>
-          <div class='resource-projekt-labels'>
-            <%= render Shared::ProjektLabelsComponent.new(resource: debate) %>
+          <div class='resource-taggings'>
+            <div class='resource-projekt-labels'>
+              <%= render Shared::ProjektLabelsComponent.new(resource: debate) %>
+            </div>
+            <div class='resource-sentiment'>
+              <%= render Shared::SentimentsComponent.new(resource: debate) %>
+            </div>
           </div>
+
           <div class="resource-summary margin-bottom">
             <%= link_to debate do %></h4>
               <%= wysiwyg(debate.description) %>

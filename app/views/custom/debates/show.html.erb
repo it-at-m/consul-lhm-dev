@@ -34,7 +34,7 @@
                 @debate.author,
                 @debate.projekt_phase,
                 Flag.flagged?(current_user, @debate),
-                "show" ] do %>
+                "show"] do %>
         <div class="small-12 medium-9 column">
           <% if @debate.conflictive? %>
             <div data-alert class="callout alert margin-top">
@@ -46,11 +46,19 @@
             <%= render_image(@debate.image, :large, true) %>
           <% end %>
 
-          <% if @debate.projekt_labels.any? %>
-            <div class='resource-projekt-labels' style='margin-bottom:30px;'>
-              <%= render Shared::ProjektLabelsComponent.new(resource: @debate) %>
-            </div>
-          <% end %>
+          <div class="resource-taggings margin-bottom">
+            <% if @debate.projekt_labels.any? %>
+              <div class="resource-projekt-labels">
+                <%= render Shared::ProjektLabelsComponent.new(resource: @debate) %>
+              </div>
+            <% end %>
+
+            <% if @debate.sentiment %>
+              <div class="resource-sentiment">
+                <%= render Shared::SentimentsComponent.new(resource: @debate) %>
+              </div>
+            <% end %>
+          </div>
 
           <%= auto_link_already_sanitized_html wysiwyg(@debate.description) %>
 

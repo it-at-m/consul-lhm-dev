@@ -18,11 +18,18 @@
     </div>
   <% end %>
 
-  <% if @proposal.projekt_labels.any? %>
-    <div class='resource-projekt-labels' style='margin-bottom:30px;'>
-      <%= render Shared::ProjektLabelsComponent.new(resource: @proposal) %>
-    </div>
-  <% end %>
+  <div class="resource-taggings margin-bottom">
+    <% if @proposal.projekt_labels.any? %>
+      <div class="resource-projekt-labels">
+        <%= render Shared::ProjektLabelsComponent.new(resource: @proposal) %>
+      </div>
+    <% end %>
+    <% if @proposal.sentiment %>
+      <div class="resource-sentiment">
+        <%= render Shared::SentimentsComponent.new(resource: proposal) %>
+      </div>
+    <% end %>
+  </div>
 
   <% if projekt_phase_feature?(@proposal.projekt_phase, "enable_summary") && @proposal.summary.present? %>
     <blockquote><%= @proposal.summary %></blockquote>

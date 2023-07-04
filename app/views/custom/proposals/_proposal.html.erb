@@ -41,8 +41,13 @@
                   params[:projekt_label_ids],
                   "details"] do %>
           <h4 class='resource-name'><%= link_to proposal.title, namespaced_proposal_path(proposal) %></h4>
-          <div class='resource-projekt-labels'>
-            <%= render Shared::ProjektLabelsComponent.new(resource: proposal) %>
+          <div class='resource-taggings'>
+            <div class='resource-projekt-labels'>
+              <%= render Shared::ProjektLabelsComponent.new(resource: proposal) %>
+            </div>
+            <div class='resource-sentiment'>
+              <%= render Shared::SentimentsComponent.new(resource: proposal) %>
+            </div>
           </div>
           <div class="resource-summary margin-bottom">
             <%= link_to namespaced_proposal_path(proposal) do %>
