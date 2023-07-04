@@ -4,6 +4,7 @@ $brand-secondary:                                 #002d50 !default;
 $secondary:                                       lighten($brand, 70%);
 $accent:                                          lighten($brand, 50%);
 $dark:                                            darken($brand, 10%);
+$brand-lighter:                                   rgba($brand, 0.5);
 
 
 // Menu variables
