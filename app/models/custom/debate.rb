@@ -38,6 +38,8 @@ class Debate
   scope :seen, -> { where.not(ignored_flag_at: nil) }
   scope :unseen, -> { where(ignored_flag_at: nil) }
 
+  scope :for_public_render, -> { all }
+
   def self.debates_orders(user = nil)
     orders = %w[hot_score created_at alphabet votes_total random]
     # orders << "recommendations" if Setting["feature.user.recommendations_on_debates"] && user&.recommended_debates

@@ -26,7 +26,7 @@ class ProjektPhase::DebatePhase < ProjektPhase
   end
 
   def resource_count
-    Debate.where(projekt_phase_id: Debate.scoped_projekt_phase_ids_for_footer(self)).count
+    debates.for_public_render.count
   end
 
   def selectable_by_admins_only?
