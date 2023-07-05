@@ -162,7 +162,8 @@
           marker.on("dragend", updateFormfieldsWithMarker);
           marker.addTo(map);
         } else {
-          markersGroup.addLayer(marker);
+          marker.addTo(map);
+          // markersGroup.addLayer(marker);
         }
 
         return marker;
