@@ -184,6 +184,8 @@ class PagesController < ApplicationController
     @budget = @projekt_phase.budget
     return if @budget.blank?
 
+    @heading = @budget.headings.first
+
     @all_resources = []
 
     @valid_filters = @budget.investments_filters

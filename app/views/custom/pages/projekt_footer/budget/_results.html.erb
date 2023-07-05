@@ -18,13 +18,13 @@
     <% end %>
 
     <p>
-      <%= link_to url_for(controller: 'pages', action: 'budget_phase_footer_tab', section: 'overview'), remote: true do %>
+      <%= link_to url_to_footer_tab(section: 'overview', remote: true), remote: true, onclick: '$(".spinner-placeholder").addClass("show-loader")' do %>
         <small><%= t("budgets.results.investment_proyects") %></small>
       <% end %><br>
-      <%= link_to url_for(controller: 'pages', action: 'budget_phase_footer_tab', section: 'overview', filter: "unselected"), remote: true do %>
+      <%= link_to url_to_footer_tab(section: 'overview', filter: "unselected", remote: true), remote: true, onclick: '$(".spinner-placeholder").addClass("show-loader")' do %>
         <small><%= t("budgets.results.not_selected_investment_proyects") %></small>
       <% end %><br>
-      <%= link_to url_for(controller: 'pages', action: 'budget_phase_footer_tab', section: 'overview', filter: "unfeasible"), remote: true do %>
+      <%= link_to url_to_footer_tab(section: 'overview', filter: "unfeasible", remote: true), remote: true, onclick: '$(".spinner-placeholder").addClass("show-loader")' do %>
         <small><%= t("budgets.results.unfeasible_investment_proyects") %></small>
       <% end %>
     </p>
