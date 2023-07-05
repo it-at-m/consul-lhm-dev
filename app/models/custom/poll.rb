@@ -14,6 +14,12 @@ class Poll < ApplicationRecord
 
   scope :last_week, -> { where("polls.created_at >= ?", 7.days.ago) }
 
+  scope :for_public_render, -> {
+    created_by_admin
+      .not_budget
+      .includes(:geozones)
+  }
+
   def not_allow_user_geozone?(user)
     geozone_restricted? && geozone_ids.any? && !geozone_ids.include?(user.geozone_id)
   end

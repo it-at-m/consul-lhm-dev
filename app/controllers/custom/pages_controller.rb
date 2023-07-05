@@ -120,27 +120,7 @@ class PagesController < ApplicationController
     @valid_filters = %w[all current]
     @current_filter = @valid_filters.include?(params[:filter]) ? params[:filter] : @valid_filters.first
 
-    # params[:filter_projekt_ids] ||= @current_projekt.all_children_ids.push(@current_projekt.id).map(&:to_s)
-    @selected_parent_projekt = @projekt
-
-    @resources = Poll
-      .created_by_admin
-      .not_budget
-      .send(@current_filter)
-      .includes(:geozones)
-
-    set_top_level_projekts
-
-    @scoped_projekt_ids = Poll.scoped_projekt_ids_for_footer(@projekt)
-
-    unless params[:search].present?
-      # take_by_tag_names
-      # take_by_sdgs
-      # take_by_geozone_affiliations
-      # take_by_polls_geozone_restrictions
-      take_by_projekts(@scoped_projekt_ids)
-    end
-
+    @resources = @projekt_phase.polls.for_public_render.send(@current_filter)
     @polls = Kaminari.paginate_array(@resources.sort_for_list).page(params[:page])
   end
 
@@ -268,9 +248,6 @@ class PagesController < ApplicationController
   end
 
   def set_question_phase_footer_tab_variables
-    # scoped_projekt_ids = @current_projekt.all_children_projekts.unshift(@current_projekt).compact.pluck(:id)
-    # @projekt_questions = ProjektQuestion.base_selection(scoped_projekt_ids)
-
     projekt_questions = @projekt_phase.questions.root_questions
 
     if @projekt_phase.question_list_enabled?
@@ -322,10 +299,5 @@ class PagesController < ApplicationController
 
   def resource_name
     "page"
-  end
-
-  def set_top_level_projekts
-    @top_level_active_projekts = Projekt.where(id: @projekt.top_parent).current
-    @top_level_archived_projekts = Projekt.where(id: @projekt.top_parent).expired
   end
 end
