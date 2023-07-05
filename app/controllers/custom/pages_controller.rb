@@ -148,11 +148,7 @@ class PagesController < ApplicationController
     @legislation_phase = @projekt_phase
     @current_section = params[:section] || "text"
 
-    @selected_parent_projekt = @projekt
-
-    @scoped_projekt_ids = @projekt.top_parent.all_children_projekts.unshift(@projekt.top_parent).pluck(:id)
-
-    @process = @projekt.legislation_process
+    @process = @projekt_phase.legislation_process
     @draft_versions_list = @process&.draft_versions&.published
 
     if params[:text_draft_version_id]

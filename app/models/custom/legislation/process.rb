@@ -9,7 +9,6 @@ class Legislation::Process < ApplicationRecord
   delegate :projekt, to: :projekt_phase
   belongs_to :projekt_phase, touch: true
 
-  has_one :legislation_phase, through: :projekt
   has_many :geozone_restrictions, through: :legislation_phase
   has_many :geozone_affiliations, through: :projekt
 
