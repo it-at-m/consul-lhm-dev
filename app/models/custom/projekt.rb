@@ -224,7 +224,6 @@ class Projekt < ApplicationRecord
   end
 
   def selectable_in_selector?(controller_name, user)
-    return true if controller_name == "polls"
     return true if controller_name == "processes"
     return false if user.nil?
 
@@ -241,6 +240,9 @@ class Projekt < ApplicationRecord
       else
         debate_phases.any? { |phase| phase.selectable_by?(user) }
       end
+
+    elsif controller_name == "polls"
+      voting_phases.any? { |phase| phase.selectable_by?(user) }
 
     elsif controller_name == "processes"
       # return false if proposals_selectable_by_admins_only? && user.administrator.blank?
