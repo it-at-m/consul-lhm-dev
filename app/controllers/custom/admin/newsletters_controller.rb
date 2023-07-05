@@ -32,6 +32,8 @@ class Admin::NewslettersController < Admin::BaseController
       body += "<a href='#{@projekt.page.url}#filter-subnav' style='background:#004a83;padding:0.75rem 1.5rem;color:#fff;border-radius:4px;'>#{t("custom.newsletters.new_projekt.url_participate")}</a>"
       body += "</p>"
 
+      body += "<p></p>"
+
       body
     end
 
