@@ -52,11 +52,6 @@
       // biolerplate for marker
       var marker = null;
       var markersGroup = L.markerClusterGroup();
-      var markerIcon = L.divIcon({
-        className: "map-marker",
-        iconSize: [30, 30],
-        iconAnchor: [15, 40]
-      });
 
 
       /* Create leaflet map start */
@@ -97,12 +92,11 @@
         markerLayer: markersGroup,
         markerOptions: function(shape) {
           return {
-            icon: markerIcon,
+            icon: getMarkerIcon(shape.feature.color, shape.feature.fa_icon_class),
             id: getProcessId(shape)
           }
         }
       })
-
       deflateFeatures.addTo(map);
 
       function getProcessId(shape) {
@@ -125,7 +119,17 @@
 
       /* Function definitions start */
       // function to create a marker
-      var getMarkerIconHTML = function(color, iconClass) {
+
+      function getMarkerIcon(color, iconClass) {
+        return L.divIcon({
+          className: "map-marker",
+          iconSize: [30, 30],
+          iconAnchor: [15, 40],
+          html: getMarkerIconHTML(color, iconClass)
+        })
+      }
+
+      function getMarkerIconHTML(color, iconClass) {
         var markerIconHTML;
 
         if ( !iconClass ) {
@@ -148,13 +152,10 @@
       }
 
       var createMarker = function(latitude, longitude, color, iconClass) {
-
         var markerLatLng = new L.LatLng(latitude, longitude);
 
-        markerIcon.options.html = getMarkerIconHTML(color, iconClass);
-
         marker = L.marker(markerLatLng, {
-          icon: markerIcon,
+          icon: getMarkerIcon(color, iconClass),
           draggable: editable
         });
 
@@ -162,8 +163,7 @@
           marker.on("dragend", updateFormfieldsWithMarker);
           marker.addTo(map);
         } else {
-          marker.addTo(map);
-          // markersGroup.addLayer(marker);
+          markersGroup.addLayer(marker);
         }
 
         return marker;
@@ -325,10 +325,8 @@
 
           } else {
             var markerLatLng = new L.LatLng(adminShape.lat, adminShape.long);
-            markerIcon.options.html = getMarkerIconHTML(adminShapesColor, adminShape.fa_icon_class);
-
             adminMarker = L.marker(markerLatLng, {
-              icon: markerIcon
+              icon: getMarkerIcon(adminShapesColor, adminShape.fa_icon_class)
             });
             adminMarker.pm.setOptions({ adminShape: true })
 

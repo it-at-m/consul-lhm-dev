@@ -28,7 +28,8 @@ class MapLocation < ApplicationRecord
       proposal_id: proposal_id,
       projekt_id: projekt_id,
       deficiency_report_id: deficiency_report_id,
-      color: get_pin_color
+      color: get_pin_color,
+      fa_icon_class: get_fa_icon_class
     })
   end
 
