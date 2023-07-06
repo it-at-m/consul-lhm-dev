@@ -422,7 +422,10 @@ de:
             no_restriction: Alle Nutzer*innen
             only_verified: Nur verifizierte Nutzer*innen
         settings:
-          page_title: Funktionen
+          block_title:
+            general: Funktionen
+            form: Formularfelder
+            resource: Individueller Beitrag
         projekt_labels: 
           name: Labels
           page_title: Labels
