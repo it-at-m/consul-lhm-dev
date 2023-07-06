@@ -7,5 +7,10 @@
   </div>
 </div>
 
-<%= render "custom/admin/projekt_phases/settings/features_table", features: @projekt_phase_features %>
-<%= render "custom/admin/projekt_phases/settings/options_table", options: @projekt_phase_options %>
+<% @projekt_phase_features.each do |key, value| %>
+  <%= render "custom/admin/projekt_phases/settings/features_table", features: value %>
+<% end %>
+
+<% @projekt_phase_options.each do |key, value| %>
+  <%= render "custom/admin/projekt_phases/settings/options_table", options: value %>
+<% end %>

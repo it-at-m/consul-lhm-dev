@@ -1,4 +1,7 @@
 class ProjektPhaseSetting < ApplicationRecord
+  SETTING_KINDS = %w[feature option].freeze
+  SETTING_BANDS = %w[general form resource].freeze
+
   attr_accessor :form_field_disabled, :dependent_setting_ids, :dependent_setting_action
 
   belongs_to :projekt_phase, touch: true
@@ -8,82 +11,116 @@ class ProjektPhaseSetting < ApplicationRecord
 
   default_scope { order(id: :asc) }
 
+  def kind_prefix
+    key.split(".").first
+  end
+
+  def kind
+    if SETTING_KINDS.include?(kind_prefix)
+      kind_prefix
+    else
+      "feature"
+    end
+  end
+
+  def band_prefix
+    key.split(".").second
+  end
+
+  def band
+    if SETTING_BANDS.include?(band_prefix)
+      band_prefix
+    else
+      "configuration"
+    end
+  end
+
   class << self
     def defaults
       {
         "ProjektPhase::DebatePhase" => {
-          "feature.show_report_button_in_sidebar": "active",
-          "feature.show_related_content": "active",
-          "feature.show_comments": "active",
-          "feature.allow_attached_image": "active",
-          "feature.allow_attached_documents": "",
-          "feature.only_admins_create_debates": "",
-          "feature.allow_downvoting": "active",
-          "feature.show_in_sidebar_filter": "active",
-          "feature.allow_voting": "active",
-          "feature.hide_projekt_selector": "active"
+          "feature.general.only_admins_create_debates": "",
+          "feature.general.show_in_sidebar_filter": "active",
+
+          "feature.form.allow_attached_image": "active",
+          "feature.form.allow_attached_documents": "",
+
+          "feature.resource.allow_voting": "active",
+          "feature.resource.allow_downvoting": "active",
+          "feature.resource.show_report_button_in_sidebar": "active",
+          "feature.resource.show_related_content": "active",
+          "feature.resource.show_comments": "active"
+
+          # "feature.hide_projekt_selector": "active" #remove
         },
 
         "ProjektPhase::ProposalPhase" => {
-          "feature.quorum_for_proposals": "",
-          "feature.enable_proposal_support_withdrawal": "active",
-          "feature.enable_proposal_notifications_tab": "",
-          "feature.enable_proposal_milestones_tab": "",
-          "feature.show_report_button_in_proposal_sidebar": "active",
-          "feature.show_follow_button_in_proposal_sidebar": "active",
-          "feature.show_community_button_in_proposal_sidebar": "active",
-          "feature.show_related_content": "active",
-          "feature.show_comments": "active",
-          "feature.allow_attached_image": "active",
-          "feature.allow_attached_documents": "active",
-          "feature.only_admins_create_proposals": "",
-          "feature.show_in_sidebar_filter": "active",
-          "feature.show_map": "active",
-          "feature.enable_summary": "",
-          "feature.allow_voting": "active",
-          "feature.enable_external_video": "active",
-          "feature.enable_geoman_controls_in_maps": "active",
-          "feature.hide_projekt_selector": "active",
-          "option.votes_for_proposal_success": 10000
+          "feature.general.only_admins_create_proposals": "",
+          "feature.general.show_in_sidebar_filter": "active",
+
+          "feature.form.allow_attached_image": "active",
+          "feature.form.enable_summary": "",
+          "feature.form.show_map": "active",
+          "feature.form.enable_geoman_controls_in_maps": "active",
+          "feature.form.allow_attached_documents": "active",
+          "feature.form.enable_external_video": "active",
+
+          "feature.resource.allow_voting": "active",
+          "feature.resource.enable_proposal_support_withdrawal": "active",
+          "feature.resource.quorum_for_proposals": "",
+          "feature.resource.show_report_button_in_proposal_sidebar": "active",
+          "feature.resource.show_follow_button_in_proposal_sidebar": "active",
+          "feature.resource.show_community_button_in_proposal_sidebar": "active",
+          "feature.resource.show_related_content": "active",
+          "feature.resource.enable_proposal_notifications_tab": "",
+          "feature.resource.enable_proposal_milestones_tab": "",
+          "feature.resource.show_comments": "active",
+
+          "option.resource.votes_for_proposal_success": 10000
+
+          # "feature.hide_projekt_selector": "active", delete
         },
 
         "ProjektPhase::VotingPhase" => {
-          "feature.intermediate_poll_results_for_admins": "active",
-          "feature.show_comments": "active",
-          "feature.additional_information": "active",
-          "feature.additional_info_for_each_answer": "active",
-          "feature.show_in_sidebar_filter": "active"
+          "feature.general.show_in_sidebar_filter": "active",
+
+          "feature.resource.intermediate_poll_results_for_admins": "active",
+          "feature.resource.additional_information": "active",
+          "feature.resource.additional_info_for_each_answer": "active",
+          "feature.resource.show_comments": "active"
         },
 
         "ProjektPhase::BudgetPhase" => {
-          "feature.remove_investments_supports": "active",
-          "feature.show_report_button_in_sidebar": "active",
-          "feature.show_follow_button_in_sidebar": "active",
-          "feature.show_community_button_in_sidebar": "active",
-          "feature.show_related_content": "active",
-          "feature.show_implementation_option_fields": "active",
-          "feature.show_user_cost_estimate": "active",
-          "feature.show_comments": "active",
-          "feature.enable_investment_milestones_tab": "active",
-          "feature.allow_attached_documents": "active",
-          "feature.only_admins_create_investment_proposals": "",
-          "feature.show_map": "active",
-          "feature.show_results_after_first_vote": "",
-          "feature.enable_geoman_controls_in_maps": "active",
-          "feature.show_relative_ballotting_results": ""
+          "feature.general.only_admins_create_investment_proposals": "",
+
+          "feature.form.show_map": "active",
+          "feature.form.enable_geoman_controls_in_maps": "active",
+          "feature.form.allow_attached_documents": "active",
+          "feature.form.show_implementation_option_fields": "active",
+          "feature.form.show_user_cost_estimate": "active",
+
+          "feature.resource.remove_investments_supports": "active",
+          "feature.resource.show_report_button_in_sidebar": "active",
+          "feature.resource.show_follow_button_in_sidebar": "active",
+          "feature.resource.show_community_button_in_sidebar": "active",
+          "feature.resource.show_related_content": "active",
+          "feature.resource.enable_investment_milestones_tab": "active",
+          "feature.resource.show_comments": "active",
+          "feature.resource.show_results_after_first_vote": "",
+          "feature.resource.show_relative_ballotting_results": ""
         },
 
         "ProjektPhase::QuestionPhase" => {
-          "feature.show_questions_list": ""
+          "feature.general.show_questions_list": ""
         },
 
         "ProjektPhase::MilestonePhase" => {
-          "feature.newest_first": ""
+          "feature.general.newest_first": ""
         },
 
         "ProjektPhase::NewsfeedPhase" => {
-          "option.newsfeed_id": "",
-          "option.newsfeed_type": ""
+          "option.general.newsfeed_id": "",
+          "option.general.newsfeed_type": ""
         }
       }
     end
@@ -107,10 +144,6 @@ class ProjektPhaseSetting < ApplicationRecord
         end
       end
     end
-  end
-
-  def kind
-    key.split(".").first
   end
 
   def enabled?
