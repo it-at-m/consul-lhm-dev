@@ -17,7 +17,7 @@
     current_projekt: @projekt
   ) %>
 
-  <% unless @budget.phase == 'publishing_prices' && projekt_phase_feature?(@projekt_phase, 'show_results_after_first_vote')  # con-1036 %>
+  <% unless @budget.phase == 'publishing_prices' && projekt_phase_feature?(@projekt_phase, 'resource.show_results_after_first_vote')  # con-1036 %>
     <% if params[:section].blank? || params[:section] == 'overview' %>
       <%= render Budgets::Investments::FiltersComponent.new %>
     <% end %>

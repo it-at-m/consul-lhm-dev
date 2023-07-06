@@ -63,8 +63,8 @@ module ProjektPhaseActions
 
   def settings
     all_settings = @projekt_phase.settings.group_by(&:kind)
-    @projekt_phase_features = all_settings["feature"].group_by(&:band)
-    @projekt_phase_options = all_settings["option"].group_by(&:band)
+    @projekt_phase_features = all_settings["feature"]&.group_by(&:band) || []
+    @projekt_phase_options = all_settings["option"]&.group_by(&:band) || []
   end
 
   def map

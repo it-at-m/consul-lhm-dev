@@ -228,14 +228,14 @@ class Projekt < ApplicationRecord
     return false if user.nil?
 
     if controller_name == "proposals"
-      if proposals_selectable_by_admins_only? && !user.can_manage_projekt?(self)
+      if proposal_phases.any?(&:selectable_by_admins_only?) && !user.can_manage_projekt?(self)
         false
       else
         proposal_phases.any? { |phase| phase.selectable_by?(user) }
       end
 
     elsif controller_name == "debates"
-      if debates_selectable_by_admins_only? && !user.can_manage_projekt?(self)
+      if debate_phases.any?(&:selectable_by_admins_only?) && !user.can_manage_projekt?(self)
         false
       else
         debate_phases.any? { |phase| phase.selectable_by?(user) }
@@ -245,7 +245,6 @@ class Projekt < ApplicationRecord
       voting_phases.any? { |phase| phase.selectable_by?(user) }
 
     elsif controller_name == "processes"
-      # return false if proposals_selectable_by_admins_only? && user.administrator.blank?
       legislation_phases.any? { |phase| phase.selectable_by?(user) }
     end
   end
@@ -271,20 +270,6 @@ class Projekt < ApplicationRecord
     activated? &&
       total_duration_end.present? &&
       total_duration_end < timestamp
-  end
-
-  def debates_selectable_by_admins_only?
-    projekt_settings.
-      find_by(projekt_settings: { key: "projekt_feature.debates.only_admins_create_debates" }).
-      value.
-      present?
-  end
-
-  def proposals_selectable_by_admins_only?
-    projekt_settings.
-      find_by(projekt_settings: { key: "projekt_feature.proposals.only_admins_create_proposals" }).
-      value.
-      present?
   end
 
   def activated_children

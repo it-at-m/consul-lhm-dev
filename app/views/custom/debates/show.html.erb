@@ -62,7 +62,7 @@
 
           <%= auto_link_already_sanitized_html wysiwyg(@debate.description) %>
 
-          <% if projekt_phase_feature?(@debate.projekt_phase, "allow_attached_documents") %>
+          <% if projekt_phase_feature?(@debate.projekt_phase, "form.allow_attached_documents") %>
             <%= render "documents/documents",
                         documents: @debate.documents,
                         max_documents_allowed: Debate.max_documents_allowed %>
@@ -72,7 +72,7 @@
             <%= render "shared/tags", taggable: @debate, limit: 5 %>
           </div>
 
-          <% if projekt_phase_feature?(@debate.projekt_phase, 'show_related_content') %>
+          <% if projekt_phase_feature?(@debate.projekt_phase, 'resource.show_related_content') %>
             <%= render "relationable/related_content", relationable: @debate %>
           <% end %>
         </div>
@@ -96,7 +96,7 @@
           </div>
         <% end %>
 
-        <% if projekt_phase_feature?(@debate.projekt_phase, 'allow_voting') %>
+        <% if projekt_phase_feature?(@debate.projekt_phase, 'resource.allow_voting') %>
           <div class="sidebar-divider"></div>
           <h2><%= t("votes.supports") %></h2>
           <div id="<%= dom_id(@debate) %>_votes">
@@ -110,7 +110,7 @@
                   @debate,
                   @debate.projekt_phase,
                   "flag"] do %>
-          <% if projekt_phase_feature?(@debate.projekt_phase, 'show_report_button_in_sidebar') %>
+          <% if projekt_phase_feature?(@debate.projekt_phase, 'resource.show_report_button_in_sidebar') %>
             <%= render "shared/participation/flag", resource: @debate %>
           <% end %>
 
@@ -122,7 +122,7 @@
             mobile: @debate.title
           %>
 
-          <% if current_user && projekt_phase_feature?(@debate.projekt_phase, 'show_related_content') %>
+          <% if current_user && projekt_phase_feature?(@debate.projekt_phase, 'resource.show_related_content') %>
             <div class="sidebar-divider"></div>
             <h2><%= t("custom.shared.show.related_title") %></h2>
             <p><%= t("custom.shared.show.related_text") %></p>
@@ -138,7 +138,7 @@
     </div>
   </div>
 
-  <% if projekt_phase_feature?(@debate.projekt_phase, 'show_comments') %>
+  <% if projekt_phase_feature?(@debate.projekt_phase, 'resource.show_comments') %>
     <div class="additional-content margin-top">
       <div class="filter-subnav">
         <div class="row">

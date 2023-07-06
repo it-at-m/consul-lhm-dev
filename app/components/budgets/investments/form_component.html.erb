@@ -11,7 +11,7 @@
       </div>
     <% end %>
 
-    <% if projekt_phase_feature?(investment&.projekt_phase, "show_implementation_option_fields") %>
+    <% if projekt_phase_feature?(investment&.projekt_phase, "form.show_implementation_option_fields") %>
       <div>
         <%= f.select :implementation_performer, options_for_implementation_select, {}, { class: 'implementation-performer show-arrow', onChange: "$(this).val() === 'user' ? $('#implementation_contribution').css('display', 'block') : $('#implementation_contribution').css('display', 'none')" } %>
       </div>
@@ -21,11 +21,11 @@
       </div>
     <% end %>
 
-    <% if projekt_phase_feature?(investment.projekt_phase, "show_user_cost_estimate") %>
+    <% if projekt_phase_feature?(investment.projekt_phase, "form.show_user_cost_estimate") %>
       <%= f.text_field :user_cost_estimate %>
     <% end %>
 
-    <% if projekt_phase_feature?(budget&.projekt_phase, "show_map") %>
+    <% if projekt_phase_feature?(budget&.projekt_phase, "form.show_map") %>
       <div>
         <%= render "map_locations/form_fields",
                    form:           f,
@@ -69,7 +69,7 @@
       </div>
     <% end %>
 
-    <% if projekt_phase_feature?(budget.projekt_phase, "allow_attached_documents") %>
+    <% if projekt_phase_feature?(budget.projekt_phase, "form.allow_attached_documents") %>
       <div class="documents">
         <%= render "documents/nested_documents", f: f %>
       </div>

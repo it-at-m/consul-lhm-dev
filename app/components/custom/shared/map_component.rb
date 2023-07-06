@@ -98,7 +98,7 @@ class Shared::MapComponent < ApplicationComponent
         Setting["deficiency_reports.enable_geoman_controls_in_maps"].present?
 
       elsif projekt_phase.present?
-        projekt_phase_feature?(projekt_phase, "enable_geoman_controls_in_maps")
+        projekt_phase_feature?(projekt_phase, "form.enable_geoman_controls_in_maps")
 
       else
         false

@@ -64,7 +64,7 @@
 
       <div class='column small-12 medium-6 large-4 resource-participate table' data-equalizer-watch='details'>
         <div class='table-cell align-middle'>
-          <% if projekt_phase_feature?(debate.projekt_phase, "allow_voting") %>
+          <% if projekt_phase_feature?(debate.projekt_phase, "resource.allow_voting") %>
             <div id="<%= dom_id(debate) %>_votes">
               <%= render "debates/votes", debate: debate %>
             </div>

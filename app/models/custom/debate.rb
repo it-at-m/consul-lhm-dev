@@ -15,6 +15,7 @@ class Debate
 
   delegate :votable_by?, to: :projekt_phase
   delegate :comments_allowed?, to: :projekt_phase
+  delegate :downvoting_allowed?, to: :projekt_phase
 
   validates :projekt_phase, presence: true
 

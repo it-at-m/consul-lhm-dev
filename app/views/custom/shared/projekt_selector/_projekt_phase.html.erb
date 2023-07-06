@@ -6,11 +6,11 @@
   <%= "data-latitude=#{projekt_phase.map_location.latitude}" if projekt_phase.map_location.present? %>
   <%= "data-longitude=#{projekt_phase.map_location.longitude}" if projekt_phase.map_location.present? %>
   <%= "data-zoom=#{projekt_phase.map_location.zoom}" if projekt_phase.map_location.present? %>
-  <%= "data-show-map=true" if projekt_phase_feature?(projekt_phase, "show_map") %>
-  <%= "data-show-summary=true" if projekt_phase_feature?(projekt_phase, "enable_summary") %>
-  <%= "data-allow-video=true" if projekt_phase_feature?(projekt_phase, "enable_external_video") %>
-  <%= "data-allow-attached-image=true" if projekt_phase_feature?(projekt_phase, "allow_attached_image") %>
-  <%= "data-allow-attached-document=true" if projekt_phase_feature?(projekt_phase, "allow_attached_documents") %>
+  <%= "data-show-map=true" if projekt_phase_feature?(projekt_phase, "form.show_map") %>
+  <%= "data-show-summary=true" if projekt_phase_feature?(projekt_phase, "form.enable_summary") %>
+  <%= "data-allow-video=true" if projekt_phase_feature?(projekt_phase, "form.enable_external_video") %>
+  <%= "data-allow-attached-image=true" if projekt_phase_feature?(projekt_phase, "form.allow_attached_image") %>
+  <%= "data-allow-attached-document=true" if projekt_phase_feature?(projekt_phase, "form.allow_attached_documents") %>
   <%= "data-allow-tags=true" if projekt_feature?(projekt, "general.enable_tags") %>
   <%= "data-tag-ids=#{projekt.tags.category.ids.any? ? projekt.tags.category.ids.join(",") : false}" if projekt_feature?(projekt, "general.enable_tags") %>
   <%= "data-allow-sdgs=true" if projekt_feature?(projekt, "general.enable_sdgs") %>
