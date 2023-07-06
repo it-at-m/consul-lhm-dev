@@ -60,6 +60,7 @@ class DebatesController < ApplicationController
 
   def edit
     @selected_projekt = @debate.projekt_phase.projekt
+    params[:projekt_phase_id] = @debate.projekt_phase.id
   end
 
   def create

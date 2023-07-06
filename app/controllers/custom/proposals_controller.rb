@@ -70,6 +70,7 @@ class ProposalsController
 
   def edit
     @selected_projekt = @proposal.projekt_phase.projekt
+    params[:projekt_phase_id] = @proposal.projekt_phase.id
   end
 
   def create
