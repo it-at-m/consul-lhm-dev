@@ -1,5 +1,5 @@
 class Admin::ProjektPhasesController < Admin::BaseController
-  include ProjektPhaseActions
+  include ProjektPhaseAdminActions
 
   def create
     super

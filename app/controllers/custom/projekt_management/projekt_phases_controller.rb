@@ -1,9 +1,9 @@
 class ProjektManagement::ProjektPhasesController < ProjektManagement::BaseController
-  include ProjektPhaseActions
+  include ProjektPhaseAdminActions
 
-  def edit
-    authorize! :edit, @projekt_phase
-    render "custom/admin/projekt_phases/edit"
+  def create
+    authorize! :create, @projekt_phase
+    super
   end
 
   def update
@@ -11,13 +11,8 @@ class ProjektManagement::ProjektPhasesController < ProjektManagement::BaseContro
     super
   end
 
-  private
-
-    # def namespace_projekt_phase_path(projekt, projekt_phase)
-    #   projekt_management_projekt_projekt_phase_path(projekt, projekt_phase)
-    # end
-
-    # def edit_namespace_projekt_path(projekt)
-    #   edit_projekt_management_projekt_path(projekt)
-    # end
+  def destroy
+    authorize! :destroy, @projekt_phase
+    super
+  end
 end

@@ -1,4 +1,4 @@
-module ProjektPhaseActions
+module ProjektPhaseAdminActions
   extend ActiveSupport::Concern
   include Translatable
   include MapLocationAttributes
