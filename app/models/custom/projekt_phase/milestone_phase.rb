@@ -16,7 +16,7 @@ class ProjektPhase::MilestonePhase < ProjektPhase
   end
 
   def resource_count
-    projekt.milestones.count
+    milestones.count
   end
 
   def admin_nav_bar_items

@@ -1,26 +1,11 @@
-<%= render 'shared/loader_spinner' %>
+<%= render "shared/loader_spinner" %>
 
 <div class='row'>
-  <div id="polls-sidebar" class="small-12 medium-3 column">
-    <% unless @projekt.overview_page? %>
-      <aside class="margin-bottom">
-        <%= render Sidebar::ProjektsFilterComponent.new(
-          top_level_active_projekts: @top_level_active_projekts,
-          top_level_archived_projekts: @top_level_archived_projekts,
-          scoped_projekt_ids: @scoped_projekt_ids,
-          all_resources: @all_resources,
-          current_tab_phase: @projekt_phase,
-          current_projekt: @projekt
-        ) %>
-      </aside>
-    <% end %>
-  </div>
-
   <div id="polls" class="polls-list spinner-placeholder small-12 medium-9 column">
-    <%= render 'shared/loader_spinner' %>
+    <%= render "shared/loader_spinner" %>
 
     <% if extended_feature?('polls.intro_text_for_polls') %>
-      <%=render_custom_block 'polls_welcome' %>
+      <%= render_custom_block "polls_welcome" %>
     <% end %>
 
     <% if show_polls_description? %>
@@ -33,11 +18,11 @@
       <%= render "polls/poll_group", poll_group: @polls %>
     </div>
 
-    <%= paginate @polls, remote: true, params: { controller: 'pages', action: 'voting_phase_footer_tab' } %>
+    <%= paginate @polls, remote: true, params: { controller: "pages", action: "voting_phase_footer_tab" } %>
 
     <div id="section_help" class="margin" data-magellan-target="section_help">
-      <% if extended_feature?('modulewide.custom_help_text_in_modules')  %>
-        <%= render_custom_block 'polls_help' %>
+      <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
+        <%= render_custom_block "polls_help" %>
         <%= render_custom_partial "footer" %>
       <% end %>
     </div>
