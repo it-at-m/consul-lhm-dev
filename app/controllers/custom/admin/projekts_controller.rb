@@ -1,10 +1,6 @@
 class Admin::ProjektsController < Admin::BaseController
   include ProjektAdminActions
 
-  before_action :find_projekt, only: [:update, :liveupdate, :destroy, :quick_update]
-  before_action :load_geozones, only: [:new, :create, :edit, :update]
-  before_action :process_tags, only: [:update]
-
   def index
     @projekts = Projekt.top_level.regular
     @new_projekt = Projekt.new

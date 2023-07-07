@@ -71,7 +71,6 @@ namespace :admin do
         patch :update_default_projekt_footer_tab
       end
     end
-    resources :projekt_arguments, only: [:create, :update, :destroy]
   end
 
   resources :map_layers, only: [:update, :create, :edit, :new, :destroy]

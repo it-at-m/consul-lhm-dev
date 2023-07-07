@@ -239,6 +239,8 @@ de:
             tags_enable: Bitte aktivieren Sie Tags in Projektfunktionen Tab
             tags_hint: Klicken Sie auf einen oder mehrere Tags, um Sie für dieses Projekt dem/der Nutzer:in anzubieten.
             refresh_page: Sollten Sie die Funktionen bereits aktiviert haben, sie werden aber hier nicht angezeigt, dann laden Sie diese Seite bitte neu.
+          flash:
+            update_notice: Projekt wurde erfolgreich aktualisiert.
         edit_projekt: Editieren
         index:
           add_cards: Kacheln erstellen/bearbeiten

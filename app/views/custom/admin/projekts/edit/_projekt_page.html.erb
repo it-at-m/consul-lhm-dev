@@ -57,6 +57,9 @@
     </div>
   <% end %>
 
+  <%= hidden_field_tag :origin, params[:origin] %>
+  <%= hidden_field_tag :namespace, @namespace %>
+
   <div>
     <%= f.submit class: "button success" %>
   </div>

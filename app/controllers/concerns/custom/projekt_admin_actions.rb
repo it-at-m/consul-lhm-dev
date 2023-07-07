@@ -6,22 +6,20 @@ module ProjektAdminActions
 
   included do
     alias_method :namespace_mappable_path, :namespace_projekt_path
-
     helper_method :namespace_projekt_path, :namespace_mappable_path
+
+    before_action :find_projekt
+    before_action :process_tags, only: [:update]
   end
 
   def edit
-    @projekt = Projekt.find(params[:id])
     @namespace = params[:controller].split("/").first.to_sym
 
-    if @projekt.map_location.nil?
-      @projekt.send(:create_map_location)
-      @projekt.reload
+    if should_authorize_projekt_manager?
+      authorize!(:edit, @projekt)
     end
 
     @individual_groups = IndividualGroup.hard.visible
-
-    @projekt.build_map_location if @projekt.map_location.blank?
 
     all_settings = ProjektSetting.where(projekt: @projekt).group_by(&:type)
     all_projekt_features = all_settings["projekt_feature"].group_by(&:projekt_feature_type)
@@ -29,12 +27,19 @@ module ProjektAdminActions
     @projekt_features_general = all_projekt_features["general"]
     @projekt_features_sidebar = all_projekt_features["sidebar"]
 
-    @projekt_managers = ProjektManager.all
-
     @default_footer_tab_setting = ProjektSetting.find_by(
       projekt: @projekt,
       key: "projekt_custom_feature.default_footer_tab"
     )
+
+    @projekt_managers = ProjektManager.all
+
+    if @projekt.map_location.nil?
+      @projekt.send(:create_map_location)
+      @projekt.reload
+    end
+
+    render "custom/admin/projekts/edit"
   end
 
   def update
@@ -43,18 +48,16 @@ module ProjektAdminActions
     end
 
     if @projekt.update_attributes(projekt_params)
-      redirect_to redirect_path(params[:id], params[:tab].to_s),
-        notice: t("admin.settings.index.map.flash.update")
+      redirect_to namespace_projekt_path(action: "edit"),
+        notice: t("custom.admin.projekts.edit.flash.update_notice")
     else
-      redirect_to redirect_path(params[:id], params[:tab].to_s),
+      redirect_to namespace_projekt_path(action: "edit"),
         alert: @projekt.errors.messages.values.flatten.join("; ")
     end
   end
 
   def update_map
-    projekt = Projekt.find(params[:id])
-
-    map_location = MapLocation.find_by(projekt_id: projekt.id)
+    map_location = MapLocation.find_by(projekt_id: @projekt.id)
 
     if should_authorize_projekt_manager?
       authorize!(:update_map, map_location)
@@ -62,12 +65,12 @@ module ProjektAdminActions
 
     map_location.update!(map_location_params)
 
-    redirect_to redirect_path(projekt.id, "#tab-projekt-map"),
+    redirect_to namespace_projekt_path(action: "edit", anchor: "tab-projekt-map"),
       notice: t("admin.settings.index.map.flash.update")
   end
 
   def update_standard_phase
-    @projekt = Projekt.find(params[:id]).reload
+    @projekt.reload
     @default_footer_tab_setting = ProjektSetting.find_by(
       projekt: @projekt,
       key: "projekt_custom_feature.default_footer_tab"
@@ -104,7 +107,7 @@ module ProjektAdminActions
     end
 
     def process_tags
-      params[:projekt][:tag_list] = (params[:projekt][:tag_list_predefined] || @projekt.tag_list.join(','))
+      params[:projekt][:tag_list] = (params[:projekt][:tag_list_predefined] || @projekt.tag_list.join(","))
       params[:projekt].delete(:tag_list_predefined)
     end
 
@@ -118,18 +121,6 @@ module ProjektAdminActions
 
     def find_projekt
       @projekt = Projekt.find(params[:id])
-    end
-
-    def load_geozones
-      @geozones = Geozone.all.order(:name)
-    end
-
-    def redirect_path(projekt_id, tab)
-      if params[:namespace] == "projekt_management"
-        edit_projekt_management_projekt_path(projekt_id) + tab
-      else
-        edit_admin_projekt_path(projekt_id) + tab
-      end
     end
 
     def should_authorize_projekt_manager?
