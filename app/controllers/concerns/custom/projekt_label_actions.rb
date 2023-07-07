@@ -47,8 +47,7 @@ module ProjektLabelActions
     authorize! :destroy, @projekt_label
 
     @projekt_label.destroy!
-    redirect_to polymorphic_path([@namespace, @projekt_phase], action: :projekt_labels),
-                notice: t("custom.admin.projekt.label.destroy.success")
+    redirect_to polymorphic_path([@namespace, @projekt_phase], action: :projekt_labels)
   end
 
   private

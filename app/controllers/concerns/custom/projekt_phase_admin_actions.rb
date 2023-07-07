@@ -115,7 +115,13 @@ module ProjektPhaseAdminActions
   end
 
   def sentiments
+    if should_authorize_projekt_manager?
+      authorize!(:sentiments, @projekt_phase)
+    end
+
     @sentiments = @projekt_phase.sentiments
+
+    render "custom/admin/projekt_phases/sentiments"
   end
 
   def map

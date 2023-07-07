@@ -1,6 +1,4 @@
-<% form_path = @sentiment.persisted? ? admin_projekt_phase_sentiment_path(@projekt_phase, @sentiment) : admin_projekt_phase_sentiments_path(@projekt_phase, @sentiment) %>
-
-<%= translatable_form_for @sentiment, url: form_path do |f| %>
+<%= translatable_form_for @sentiment, url: polymorphic_path([@namespace, @projekt_phase, @sentiment]) do |f| %>
   <%= render "shared/errors", resource: @sentiment %>
   <%= render "shared/globalize_locales", resource: @sentiment %>
 
