@@ -3,7 +3,7 @@ module Abilities
     include CanCan::Ability
 
     def self.resources_to_manage
-      [MapLayer, ProjektQuestion, ProjektNotification, ProjektEvent, ProjektLivestream, Milestone, ProgressBar, ProjektArgument]
+      [ProjektQuestion, ProjektNotification, ProjektEvent, ProjektLivestream, Milestone, ProgressBar, ProjektArgument]
     end
 
     def initialize(user)
@@ -34,7 +34,15 @@ module Abilities
       end
 
       can(:update_map, MapLocation) do |p|
-        p.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+        if p.respond_to?(:projekt_phase)
+          p.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+        else
+          p.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+        end
+      end
+
+      can(:manage, MapLayer) do |ml|
+        ml.mappable&.projekt&.projekt_manager_ids&.include?(user.projekt_manager.id)
       end
 
       can(%i[read update], SiteCustomization::Page) do |p|

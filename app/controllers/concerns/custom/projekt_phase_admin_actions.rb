@@ -125,8 +125,14 @@ module ProjektPhaseAdminActions
   end
 
   def map
+    if should_authorize_projekt_manager?
+      authorize!(:sentiments, @projekt_phase)
+    end
+
     @projekt_phase.create_map_location unless @projekt_phase.map_location.present?
     @map_location = @projekt_phase.map_location
+
+    render "custom/admin/projekt_phases/map"
   end
 
   def update_map

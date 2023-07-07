@@ -64,6 +64,8 @@ namespace :projekt_management do
     end
   end
 
+  resources :map_layers, only: [:update, :create, :edit, :new, :destroy]
+
   resources :proposals, only: :index do
     put :hide, on: :member
     put :moderate, on: :collection

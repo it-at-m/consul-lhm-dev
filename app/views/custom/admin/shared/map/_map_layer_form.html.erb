@@ -1,5 +1,5 @@
 <div class='map-layer-form config-block'>
-  <%= form_for([:admin, @map_layer]) do |f| %>
+  <%= form_for([@namespace, @map_layer]) do |f| %>
     <%= hidden_field_tag :return_path, params[:return_path] %>
     <% if @mappable.present? %>
       <%= hidden_field_tag :mappable_id, @mappable.id %>
