@@ -33,6 +33,14 @@ module Abilities
         s.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
       end
 
+      can(:manage, ProjektQuestion) do |pq|
+        pq.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+      end
+
+      can(:manage, ProjektLivestream) do |pl|
+        pl.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+      end
+
       can(:update_map, MapLocation) do |p|
         if p.respond_to?(:projekt_phase)
           p.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)

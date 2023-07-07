@@ -16,9 +16,7 @@ module ProjektPhaseAdminActions
     @projekt = Projekt.find(params[:projekt_id])
     @projekt_phase = ProjektPhase.new(projekt_phase_params.merge(active: true))
 
-    if should_authorize_projekt_manager?
-      authorize!(:create, @projekt_phase)
-    end
+    authorize!(:create, @projekt_phase)
 
     @projekt_phase.save!
 
@@ -27,9 +25,7 @@ module ProjektPhaseAdminActions
   end
 
   def update
-    if should_authorize_projekt_manager?
-      authorize!(:create, @projekt_phase)
-    end
+    authorize!(:create, @projekt_phase)
 
     if @projekt_phase.update(projekt_phase_params)
       redirect_to namespace_projekt_phase_path(action: params[:action_name] || "duration"),
@@ -38,9 +34,7 @@ module ProjektPhaseAdminActions
   end
 
   def destroy
-    if should_authorize_projekt_manager?
-      authorize!(:destroy, @projekt_phase)
-    end
+    authorize!(:destroy, @projekt_phase)
 
     if @projekt_phase.safe_to_destroy?
       @projekt_phase.destroy!
@@ -66,25 +60,19 @@ module ProjektPhaseAdminActions
   end
 
   def duration
-    if should_authorize_projekt_manager?
-      authorize!(:duration, @projekt_phase)
-    end
+    authorize!(:duration, @projekt_phase)
 
     render "custom/admin/projekt_phases/duration"
   end
 
   def naming
-    if should_authorize_projekt_manager?
-      authorize!(:naming, @projekt_phase)
-    end
+    authorize!(:naming, @projekt_phase)
 
     render "custom/admin/projekt_phases/naming"
   end
 
   def restrictions
-    if should_authorize_projekt_manager?
-      authorize!(:restrictions, @projekt_phase)
-    end
+    authorize!(:restrictions, @projekt_phase)
 
     @registered_address_groupings = RegisteredAddress::Grouping.all
     @individual_groups = IndividualGroup.visible
@@ -93,9 +81,7 @@ module ProjektPhaseAdminActions
   end
 
   def settings
-    if should_authorize_projekt_manager?
-      authorize!(:settings, @projekt_phase)
-    end
+    authorize!(:settings, @projekt_phase)
 
     all_settings = @projekt_phase.settings.group_by(&:kind)
     @projekt_phase_features = all_settings["feature"]&.group_by(&:band) || []
@@ -105,9 +91,7 @@ module ProjektPhaseAdminActions
   end
 
   def projekt_labels
-    if should_authorize_projekt_manager?
-      authorize!(:projekt_labels, @projekt_phase)
-    end
+    authorize!(:projekt_labels, @projekt_phase)
 
     @projekt_labels = @projekt_phase.projekt_labels
 
@@ -115,19 +99,14 @@ module ProjektPhaseAdminActions
   end
 
   def sentiments
-    if should_authorize_projekt_manager?
-      authorize!(:sentiments, @projekt_phase)
-    end
-
+    authorize!(:sentiments, @projekt_phase)
     @sentiments = @projekt_phase.sentiments
 
     render "custom/admin/projekt_phases/sentiments"
   end
 
   def map
-    if should_authorize_projekt_manager?
-      authorize!(:sentiments, @projekt_phase)
-    end
+    authorize!(:sentiments, @projekt_phase)
 
     @projekt_phase.create_map_location unless @projekt_phase.map_location.present?
     @map_location = @projekt_phase.map_location
@@ -138,9 +117,7 @@ module ProjektPhaseAdminActions
   def update_map
     map_location = MapLocation.find_by(projekt_phase_id: params[:id])
 
-    if should_authorize_projekt_manager?
-      authorize!(:update_map, map_location)
-    end
+    authorize!(:update_map, map_location)
 
     map_location.update!(map_location_params)
 
@@ -149,12 +126,18 @@ module ProjektPhaseAdminActions
   end
 
   def projekt_questions
+    authorize!(:projekt_questions, @projekt_phase)
     @projekt_questions = @projekt_phase.questions
+
+    render "custom/admin/projekt_phases/projekt_questions"
   end
 
   def projekt_livestreams
+    authorize!(:projekt_livestreams, @projekt_phase)
     @projekt_livestream = ProjektLivestream.new
     @projekt_livestreams = @projekt_phase.projekt_livestreams
+
+    render "custom/admin/projekt_phases/projekt_livestreams"
   end
 
   def projekt_events

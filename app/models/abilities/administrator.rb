@@ -166,6 +166,9 @@ module Abilities
 
       can [:manage], ProjektLabel
       can [:manage], Sentiment
+      can [:manage], ProjektPhase
+      can [:manage], ProjektQuestion
+      can [:manage], ProjektLivestream
     end
   end
 end

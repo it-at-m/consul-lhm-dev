@@ -1,21 +1,21 @@
-<%= form_for(livestream, url: url) do |f| %>
-  <%= render "shared/errors", resource: f.object %>
+<%= form_for(polymorphic_path([@namespace, @projekt_phase, @projekt_livestream])) do |f| %>
+  <%= render "shared/errors", resource: @projekt_livestream %>
 
   <div class='small-12 medium-7'>
-    <%= f.text_field :url, { id: dom_id(livestream, :url), required: true } %>
+    <%= f.text_field :url, { id: dom_id(@projekt_livestream, :url), required: true } %>
   </div>
 
-  <% if livestream.persisted? %>
+  <% if @projekt_livestream.persisted? %>
     <div class='small-12 medium-7'>
-      <%= f.text_field :title, { id: dom_id(livestream, :title) } %>
+      <%= f.text_field :title, { id: dom_id(@projekt_livestream, :title) } %>
     </div>
 
     <div class='small-12 medium-7'>
-      <%= f.datetime_field :starts_at, { id: dom_id(livestream, :starts_at) } %>
+      <%= f.datetime_field :starts_at, { id: dom_id(@projekt_livestream, :starts_at) } %>
     </div>
 
     <div class='small-12 medium-12'>
-      <%= f.text_area :description, { id: dom_id(livestream, :description) } %>
+      <%= f.text_area :description, { id: dom_id(@projekt_livestream, :description) } %>
     </div>
   <% end %>
 

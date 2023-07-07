@@ -1,6 +1,6 @@
 <%= render "shared/globalize_locales", resource: @projekt_question %>
 
-<%= translatable_form_for @projekt_question, url: url do |f| %>
+<%= translatable_form_for [@namespace, @projekt_phase, @projekt_question] do |f| %>
   <%= render "shared/errors", resource: @projekt_question %>
 
   <% if @projekt_livestream.present? %>
@@ -30,13 +30,13 @@
 
     <div id="nested_question_options">
       <%= f.fields_for :question_options do |ff| %>
-        <%= render "projekt_question_option_fields", f: ff %>
+        <%= render "custom/admin/projekt_questions/projekt_question_option_fields", f: ff %>
       <% end %>
 
       <div class="js-add-fields-container">
         <div class="column">
           <%= link_to_add_association t("admin.legislation.questions.form.add_option"),
-                                    f, :question_options, class: "button hollow", partial: "projekt_question_option_fields" %>
+                                    f, :question_options, class: "button hollow", partial: "custom/admin/projekt_questions/projekt_question_option_fields" %>
         </div>
       </div>
     </div>

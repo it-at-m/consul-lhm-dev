@@ -9,11 +9,11 @@
 
 <div class="admin-projekt-questions-list">
   <div class="float-right">
-    <%= link_to t("custom.admin.projekt_phases.projekt_questions.create_button"), new_admin_projekt_phase_projekt_question_path(@projekt_phase), class: "button" %>
+    <%= link_to t("custom.admin.projekt_phases.projekt_questions.create_button"), polymorphic_path([@namespace, @projekt_phase, ProjektQuestion.new], action: :new), class: "button" %>
   </div>
 
   <div class="float-right">
-    <%= link_to t("custom.admin.projekt_phases.projekt_questions.send_notifications_button"), send_notifications_admin_projekt_phase_projekt_questions_path(@projekt_phase), method: :post, class: "button margin-right" %>
+    <%= link_to t("custom.admin.projekt_phases.projekt_questions.send_notifications_button"), polymorphic_path([@namespace, @projekt_phase, ProjektQuestion.new], action: :send_notifications), method: :post, class: "button margin-right" %>
   </div>
 
   <div class="small-12 column">
@@ -45,8 +45,8 @@
             <td class="text-center"><%= question.answers_count %></td>
             <td class="text-center"><%= question.comments.count %></td>
             <td><%= render Admin::TableActionsComponent.new(question,
-                                                            edit_path: edit_admin_projekt_phase_projekt_question_path(@projekt_phase, question),
-                                                            destroy_path: admin_projekt_phase_projekt_question_path(@projekt_phase, question)) %></td>
+                                                            edit_path: polymorphic_path([@namespace, @projekt_phase, question], action: :edit),
+                                                            destroy_path: polymorphic_path([@namespace, @projekt_phase, question])) %></td>
           </tr>
         <% end %>
         </tbody>
