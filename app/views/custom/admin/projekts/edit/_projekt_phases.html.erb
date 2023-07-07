@@ -1,7 +1,7 @@
 <h2><%= t("custom.admin.projekts.edit.projekt_phases_tab.phases_block_title") %></h2>
 
 <div style="display:inline-block;width:40%">
-  <%= form_for(ProjektPhase.new, url: admin_projekt_projekt_phases_path(@projekt)) do |f| %>
+  <%= form_for(ProjektPhase.new, url: polymorphic_path([@namespace, @projekt, ProjektPhase.new])) do |f| %>
     <%= f.hidden_field :projekt_id, value: @projekt.id %>
     <%= f.label :type, t("custom.admin.projekts.edit.projekt_phases_tab.type") %>
     <%= f.select :type, ProjektPhase::PROJEKT_PHASES_TYPES.map { |type| [type.constantize.model_name.human, type] }, { label: false }, { class: "form-control" } %>

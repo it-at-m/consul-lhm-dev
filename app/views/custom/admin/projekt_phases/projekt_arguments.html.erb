@@ -1,5 +1,5 @@
-<%= render "heading" %>
-<%= render "nav_bar" %>
+<%= render "custom/admin/projekt_phases/heading" %>
+<%= render "custom/admin/projekt_phases/nav_bar" %>
 
 <div class="float-right">
   <%= link_to t("custom.admin.projekt_phases.projekt_arguments.send_notifications_button"), polymorphic_path([@namespace, @projekt_phase, @projekt_argument], action: :send_notifications), method: :post, class: "button" %>

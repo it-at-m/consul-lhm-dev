@@ -1,6 +1,4 @@
-<% form_path = @projekt_label.persisted? ? admin_projekt_phase_projekt_label_path(@projekt_phase, @projekt_label) : admin_projekt_phase_projekt_labels_path(@projekt_phase, @projekt_label) %>
-
-<%= translatable_form_for @projekt_label, url: form_path do |f| %>
+<%= translatable_form_for @projekt_label, url: polymorphic_path([@namespace, @projekt_phase, @projekt_label]) do |f| %>
   <%= render "shared/errors", resource: @projekt_label %>
   <%= render "shared/globalize_locales", resource: @projekt_label %>
 

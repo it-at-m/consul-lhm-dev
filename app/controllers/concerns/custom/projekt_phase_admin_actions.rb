@@ -14,13 +14,23 @@ module ProjektPhaseAdminActions
 
   def create
     @projekt = Projekt.find(params[:projekt_id])
-    ProjektPhase.create!(projekt_phase_params.merge(active: true))
+    @projekt_phase = ProjektPhase.new(projekt_phase_params.merge(active: true))
 
-    redirect_to edit_admin_projekt_path(@projekt.id, anchor: "tab-projekt-phases"),
+    if should_authorize_projekt_manager?
+      authorize!(:create, @projekt_phase)
+    end
+
+    @projekt_phase.save!
+
+    redirect_to polymorphic_path([@namespace, @projekt], action: :edit, anchor: "tab-projekt-phases"),
       notice: t("custom.admin.projekt_phases.notice.created")
   end
 
   def update
+    if should_authorize_projekt_manager?
+      authorize!(:create, @projekt_phase)
+    end
+
     if @projekt_phase.update(projekt_phase_params)
       redirect_to namespace_projekt_phase_path(action: params[:action_name] || "duration"),
         notice: t("custom.admin.projekt_phases.notice.updated")
@@ -28,14 +38,17 @@ module ProjektPhaseAdminActions
   end
 
   def destroy
+    if should_authorize_projekt_manager?
+      authorize!(:destroy, @projekt_phase)
+    end
+
     if @projekt_phase.safe_to_destroy?
       @projekt_phase.destroy!
-
-      redirect_to edit_admin_projekt_path(@projekt_phase.projekt_id, anchor: "tab-projekt-phases"),
+      redirect_to polymorphic_path([@namespace, @projekt], action: :edit, anchor: "tab-projekt-phases"),
         notice: t("custom.admin.projekt_phases.notice.destroyed")
 
     else
-      redirect_to edit_admin_projekt_path(@projekt_phase.projekt_id, anchor: "tab-projekt-phases"),
+      redirect_to polymorphic_path([@namespace, @projekt], action: :edit, anchor: "tab-projekt-phases"),
         notice: t("custom.admin.projekt_phases.notice.not_destroyed")
 
     end
@@ -52,19 +65,57 @@ module ProjektPhaseAdminActions
     @projekt_phase.update!(active: status_value)
   end
 
-  def duration; end
+  def duration
+    if should_authorize_projekt_manager?
+      authorize!(:duration, @projekt_phase)
+    end
 
-  def naming; end
+    render "custom/admin/projekt_phases/duration"
+  end
+
+  def naming
+    if should_authorize_projekt_manager?
+      authorize!(:naming, @projekt_phase)
+    end
+
+    render "custom/admin/projekt_phases/naming"
+  end
 
   def restrictions
+    if should_authorize_projekt_manager?
+      authorize!(:restrictions, @projekt_phase)
+    end
+
     @registered_address_groupings = RegisteredAddress::Grouping.all
     @individual_groups = IndividualGroup.visible
+
+    render "custom/admin/projekt_phases/restrictions"
   end
 
   def settings
+    if should_authorize_projekt_manager?
+      authorize!(:settings, @projekt_phase)
+    end
+
     all_settings = @projekt_phase.settings.group_by(&:kind)
     @projekt_phase_features = all_settings["feature"]&.group_by(&:band) || []
     @projekt_phase_options = all_settings["option"]&.group_by(&:band) || []
+
+    render "custom/admin/projekt_phases/settings"
+  end
+
+  def projekt_labels
+    if should_authorize_projekt_manager?
+      authorize!(:projekt_labels, @projekt_phase)
+    end
+
+    @projekt_labels = @projekt_phase.projekt_labels
+
+    render "custom/admin/projekt_phases/projekt_labels"
+  end
+
+  def sentiments
+    @sentiments = @projekt_phase.sentiments
   end
 
   def map
@@ -83,14 +134,6 @@ module ProjektPhaseAdminActions
 
     redirect_to namespace_projekt_phase_path(action: "map"),
       notice: t("admin.settings.index.map.flash.update")
-  end
-
-  def projekt_labels
-    @projekt_labels = @projekt_phase.projekt_labels
-  end
-
-  def sentiments
-    @sentiments = @projekt_phase.sentiments
   end
 
   def projekt_questions
@@ -183,6 +226,10 @@ module ProjektPhaseAdminActions
       unless action_name.in?(@projekt_phase.admin_nav_bar_items)
         redirect_to namespace_projekt_phase_path(action: @projekt_phase.admin_nav_bar_items.first)
       end
+    end
+
+    def should_authorize_projekt_manager?
+      current_user&.projekt_manager? && !current_user&.administrator?
     end
 
     # path helpers

@@ -21,6 +21,18 @@ module Abilities
         pp.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
       end
 
+      can(:update, ProjektPhaseSetting) do |pps|
+        pps.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+      end
+
+      can(:manage, ProjektLabel) do |pl|
+        pl.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+      end
+
+      can(:manage, Sentiment) do |s|
+        s.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+      end
+
       can(:update_map, MapLocation) do |p|
         p.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
       end

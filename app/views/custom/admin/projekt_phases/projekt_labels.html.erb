@@ -1,5 +1,5 @@
-<%= render "heading" %>
-<%= render "nav_bar" %>
+<%= render "custom/admin/projekt_phases/heading" %>
+<%= render "custom/admin/projekt_phases/nav_bar" %>
 
 <div class="row">
   <div class="column">
@@ -30,8 +30,8 @@
               <td>
                 <%= render Admin::TableActionsComponent.new(label,
                                                             actions: [:edit, :destroy],
-                                                            edit_path: edit_admin_projekt_phase_projekt_label_path(@projekt_phase, label),
-                                                            destroy_path: admin_projekt_phase_projekt_label_path(@projekt_phase, label),
+                                                            edit_path: polymorphic_path([@namespace, @projekt_phase, label], action: :edit),
+                                                            destroy_path: polymorphic_path([@namespace, @projekt_phase, label]),
                                                             edit_options: { remote: true, data: { "turbolinks-scroll": "false" }},
                                                             destroy_options: { remote: true }
                                                            ) %>
@@ -48,7 +48,7 @@
   <div class="column">
     <div id="create-or-edit-projekt-label">
       <%= link_to t("custom.admin.projekt_phases.projekt_labels.create_button"),
-        new_admin_projekt_phase_projekt_label_path(@projekt_phase), class: "button", remote: true, data: { "turbolinks-scroll": "false" } %>
+        polymorphic_path([@namespace, @projekt_phase, ProjektLabel.new], action: :new), class: "button", remote: true, data: { "turbolinks-scroll": "false" } %>
     </div>
   </div>
 </div>

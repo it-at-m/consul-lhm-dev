@@ -15,6 +15,10 @@ class ProjektPhase::NewsfeedPhase < ProjektPhase
     %w[naming settings]
   end
 
+  def safe_to_destroy?
+    true
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)
