@@ -141,16 +141,22 @@ module ProjektPhaseAdminActions
   end
 
   def projekt_events
+    authorize!(:projekt_events, @projekt_phase)
     @projekt_event = ProjektEvent.new
     @projekt_events = @projekt_phase.projekt_events
+
+    render "custom/admin/projekt_phases/projekt_events"
   end
 
   def milestones
   end
 
   def projekt_notifications
+    authorize!(:projekt_notifications, @projekt_phase)
     @projekt_notification = ProjektNotification.new
     @projekt_notifications = @projekt_phase.projekt_notifications
+
+    render "custom/admin/projekt_phases/projekt_notifications"
   end
 
   def projekt_arguments

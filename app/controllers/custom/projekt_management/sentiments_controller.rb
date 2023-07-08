@@ -1,3 +1,3 @@
-class ProjektManagement::SentimentsController < Admin::BaseController
+class ProjektManagement::SentimentsController < ProjektManagement::BaseController
   include SentimentActions
 end

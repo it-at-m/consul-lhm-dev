@@ -1,4 +1,4 @@
-<%= form_for(event, url: url) do |f| %>
+<%= form_for(event, url: polymorphic_path([@namespace, @projekt_phase, event])) do |f| %>
   <%= render "shared/errors", resource: f.object %>
 
   <div class='small-12 medium-7'>

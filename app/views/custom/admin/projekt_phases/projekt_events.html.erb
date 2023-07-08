@@ -9,7 +9,7 @@
 
 <div class="row">
   <div class="column">
-    <%= render partial: "custom/admin/projekt_phases/projekt_events/form", locals: { url: admin_projekt_phase_projekt_events_path(@projekt_phase), projekt: @projekt, event: @projekt_event } %>
+    <%= render partial: "custom/admin/projekt_phases/projekt_events/form", locals: { event: @projekt_event } %>
   </div>
 </div>
 
@@ -58,14 +58,15 @@
               <strong><%= t("custom.admin.projekt_phases.projekt_events.event_created_at") %>:</strong>
               <%= event.created_at.to_date %>
             </p>
-            <%= link_to t("custom.admin.projekt_phases.projekt_events.send_notifications_button"), send_notifications_admin_projekt_phase_projekt_event_path(@projekt_phase, event), method: :post, class: "margin-right" %>
+
+            <%= link_to t("custom.admin.projekt_phases.projekt_events.send_notifications_button"), polymorphic_path([@namespace, @projekt_phase, event], action: :send_notifications), method: :post, class: "margin-right" %>
           </div>
 
           <div class='edit-projekt-event-form'>
-            <%= render partial: "custom/admin/projekt_phases/projekt_events/form", locals: { url: admin_projekt_phase_projekt_event_path(@projekt_phase, event), event: event, wide_textarea: true } %>
+            <%= render partial: "custom/admin/projekt_phases/projekt_events/form", locals: { event: event, wide_textarea: true } %>
           </div>
 
-          <%= link_to "", admin_projekt_phase_projekt_event_path(@projekt_phase, event), method: :delete, class: "delete-projekt-event" %>
+          <%= link_to "", polymorphic_path([@namespace, @projekt_phase, event]), method: :delete, class: "delete-projekt-event" %>
           <hr>
         </div>
       </div>
