@@ -40,8 +40,10 @@
         <%= image_tag @projekt.page.image.variant(:thumb) %>
       </div>
     <% end %>
-    <div class="text-center">
-      <%= link_to "Banner verwalten", edit_admin_site_customization_page_path(@projekt.page), target: "_blank" %>
+    <div class='small-12 medium-7 margin-bottom'>
+      <%= f.file_field "image_attributes[attachment]", { label: t("custom.admin.projekt_phases.projekt_arguments.argument_image") } %>
+      <%= f.hidden_field "image_attributes[title]", value: "photo" %>
+      <%= f.hidden_field "image_attributes[user_id]", value: current_user.id %>
     </div>
   </div>
 
