@@ -1,25 +1,25 @@
-<%= form_for(polymorphic_path([@namespace, @projekt_phase, @projekt_livestream])) do |f| %>
-  <%= render "shared/errors", resource: @projekt_livestream %>
+<%= form_with model: livestream, url: polymorphic_path([@namespace, @projekt_phase, livestream]) do |f| %>
+  <%= render "shared/errors", resource: livestream %>
 
   <div class='small-12 medium-7'>
-    <%= f.text_field :url, { id: dom_id(@projekt_livestream, :url), required: true } %>
+    <%= f.text_field :url, { id: dom_id(livestream, :url), required: true } %>
   </div>
 
-  <% if @projekt_livestream.persisted? %>
+  <% if livestream.persisted? %>
     <div class='small-12 medium-7'>
-      <%= f.text_field :title, { id: dom_id(@projekt_livestream, :title) } %>
+      <%= f.text_field :title, { id: dom_id(livestream, :title) } %>
     </div>
 
     <div class='small-12 medium-7'>
-      <%= f.datetime_field :starts_at, { id: dom_id(@projekt_livestream, :starts_at) } %>
+      <%= f.datetime_field :starts_at, { id: dom_id(livestream, :starts_at) } %>
     </div>
 
     <div class='small-12 medium-12'>
-      <%= f.text_area :description, { id: dom_id(@projekt_livestream, :description) } %>
+      <%= f.text_area :description, { id: dom_id(livestream, :description) } %>
     </div>
   <% end %>
 
   <div>
-    <%= f.submit(class: "button") %>
+    <%= f.submit "Livestream erstellen", class: "button" %>
   </div>
 <% end %>

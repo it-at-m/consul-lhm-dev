@@ -2,7 +2,7 @@ module ProjektLivestreamAdminActions
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_projekt_phase, :set_namespaces
+    before_action :set_projekt_phase, :set_namespace
     before_action :set_projekt_livestream, only: [:update, :destroy, :send_notifications]
   end
 
@@ -12,21 +12,21 @@ module ProjektLivestreamAdminActions
     authorize! :create, @projekt_livestream
 
     @projekt_livestream.save!
-    redirect_to redirect_path(@projekt_phase), notice: t("admin.settings.flash.updated")
+    redirect_to polymorphic_path([@namespace, @projekt_phase, ProjektLivestream]), notice: t("admin.settings.flash.updated")
   end
 
   def update
     authorize! :update, @projekt_livestream
 
     @projekt_livestream.update!(projekt_livestream_params)
-    redirect_to redirect_path(@projekt_phase), notice: t("admin.settings.flash.updated")
+    redirect_to polymorphic_path([@namespace, @projekt_phase, ProjektLivestream]), notice: t("admin.settings.flash.updated")
   end
 
   def destroy
     authorize! :destroy, @projekt_livestream
 
     @projekt_livestream.destroy!
-    redirect_to redirect_path(@projekt_phase)
+    redirect_to polymorphic_path([@namespace, @projekt_phase, ProjektLivestream])
   end
 
   def send_notifications
@@ -54,12 +54,5 @@ module ProjektLivestreamAdminActions
 
     def set_namespace
       @namespace = params[:controller].split("/").first.to_sym
-    end
-
-
-    def redirect_path(projekt)
-      debugger
-      projekt_livestreams_admin_projekt_phase_path(@projekt_phase)
-  #   render "custom/admin/projekt_questions/edit"
     end
 end

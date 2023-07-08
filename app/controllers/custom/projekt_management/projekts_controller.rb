@@ -1,6 +1,6 @@
 class ProjektManagement::ProjektsController < ProjektManagement::BaseController
   include ProjektAdminActions
-  # skip_authorization_check only: :index
+  skip_authorization_check only: :index
 
   def index
     if current_user.administrator?

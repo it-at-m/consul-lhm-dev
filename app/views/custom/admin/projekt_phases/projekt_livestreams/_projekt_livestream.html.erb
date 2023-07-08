@@ -1,7 +1,7 @@
 <div class='small-12 medium-7 projekt-livestream' id="<%= dom_id(livestream) %>">
   <%= check_box_tag "edit_projekt_event_#{dom_id(livestream)}" %>
   <%= label_tag nil, nil, for: "edit_projekt_event_#{dom_id(livestream)}", class: "admin-edit-icon-button admin-edit-icon-button-livestream" %>
-  <%= link_to "", admin_projekt_phase_projekt_livestream_path(@projekt_phase, livestream), method: :delete, class: "admin-delete-icon-button admin-delete-icon-button-livestream" %>
+  <%= link_to "", polymorphic_path([@namespace, @projekt_phase, livestream]), method: :delete, class: "admin-delete-icon-button admin-delete-icon-button-livestream" %>
 
   <div class='projekt-livestream-content'>
     <% if livestream.from_youtube? %>
@@ -40,10 +40,10 @@
   </div>
 
   <div class='edit-projekt-livestream-form'>
-    <%= render partial: "custom/admin/projekt_phases/projekt_livestreams/form", locals: { url: admin_projekt_phase_projekt_livestream_path(@projekt_phase, livestream), projekt_phase: @projekt_phase, livestream: livestream } %>
+    <%= render partial: "custom/admin/projekt_phases/projekt_livestreams/form", locals: { livestream: livestream } %>
   </div>
 
-  <%= link_to t("custom.admin.projekt_phases.projekt_livestreams.send_notifications_button"), send_notifications_admin_projekt_phase_projekt_livestream_path(@projekt_phase, livestream), method: :post, class: "margin-right" %>
+  <%= link_to t("custom.admin.projekt_phases.projekt_livestreams.send_notifications_button"), polymorphic_path([@namespace, @projekt_phase, livestream], action: :send_notifications), method: :post, class: "margin-right" %>
 
   <% if livestream.projekt_questions.any? %>
     <h3 class="admin-projekt-livestream-projekt-questions-title">
@@ -57,8 +57,8 @@
         <h4>
           <%= projekt_question.title %>
           <div class="admin-projekt-livestream-projekt-question--actions">
-            <%= link_to "", edit_admin_projekt_phase_projekt_question_path(@projekt_phase, projekt_question), class: "admin-edit-icon-button" %>
-            <%= link_to "", admin_projekt_phase_projekt_question_path(@projekt_phase, projekt_question), method: :delete, class: "admin-delete-icon-button" %>
+            <%= link_to "", polymorphic_path([@namespace, @projekt_phase, projekt_question], action: :edit), class: "admin-edit-icon-button" %>
+            <%= link_to "", polymorphic_path([@namespace, @projekt_phase, projekt_question]), method: :delete, class: "admin-delete-icon-button" %>
           </div>
         </h4>
         <% projekt_question.question_options.each do |question_option| %>
@@ -71,6 +71,6 @@
     </div>
   <% end %>
 
-  <%= link_to t("custom.admin.projekt_phases.projekt_livestreams.add_question"), new_admin_projekt_phase_projekt_question_path(@projekt_phase, projekt_livestream_id: livestream.id), class: "button" %>
+  <%= link_to t("custom.admin.projekt_phases.projekt_livestreams.add_question"), polymorphic_path([@namespace, @projekt_phase, ProjektQuestion.new], action: :new, projekt_livestream_id: livestream.id), class: "button" %>
   <hr>
 </div>
