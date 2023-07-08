@@ -13,7 +13,7 @@
 
 <div class="row">
   <div class="column">
-    <%= render partial: "custom/admin/projekt_phases/projekt_arguments/form", locals: { url: polymorphic_path([@namespace, @projekt_phase, @projekt_argument]), projekt_argument: @projekt_argument } %>
+    <%= render partial: "custom/admin/projekt_phases/projekt_arguments/form", locals: { projekt_argument: @projekt_argument } %>
   </div>
 </div>
 

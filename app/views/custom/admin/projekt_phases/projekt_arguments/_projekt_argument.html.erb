@@ -30,9 +30,9 @@
   </div>
 
   <div class='edit-projekt-argument-form'>
-    <%= render partial: "custom/admin/projekt_phases/projekt_arguments/form", locals: { url: polymorphic_path([@namespace, @projekt_phase, @projekt_argument]), projekt_argument: projekt_argument } %>
+    <%= render partial: "custom/admin/projekt_phases/projekt_arguments/form", locals: { projekt_argument: projekt_argument } %>
   </div>
 
-  <%= link_to "", polymorphic_path([@namespace, @projekt_phase, @projekt_argument]), method: :delete, class: "delete-projekt-argument" %>
+  <%= link_to "", polymorphic_path([@namespace, @projekt_phase, projekt_argument]), method: :delete, class: "delete-projekt-argument" %>
   <hr>
 </div>

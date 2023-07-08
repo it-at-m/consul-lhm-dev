@@ -169,6 +169,9 @@ module Abilities
       can [:manage], ProjektPhase
       can [:manage], ProjektQuestion
       can [:manage], ProjektLivestream
+      can [:manage], ProjektArgument
+      can [:manage], ProjektEvent
+
     end
   end
 end
