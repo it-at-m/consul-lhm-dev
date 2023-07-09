@@ -11,11 +11,23 @@ class ProjektsController < ApplicationController
   include ProjektControllerHelper
 
   def index
-    @resources = Projekt.regular.with_published_custom_page
-    take_only_by_tag_names
-    take_by_sdgs
+    @projekts = Projekt.regular.with_published_custom_page
+
+    @resource_name = "projekt"
+    @geozones = Geozone.all
+    @selected_geozone_affiliation = params[:geozone_affiliation] || "all_resources"
+    @affiliated_geozones = (params[:affiliated_geozones] || "").split(",").map(&:to_i)
     take_by_geozone_affiliations
-    @projekts = @resources
+
+    @categories = @projekts.map { |p| p.tags.category }.flatten.uniq.compact.sort
+    @tag_cloud = tag_cloud
+    take_only_by_tag_names
+
+    @sdgs = (@projekts.map(&:sdg_goals).flatten.uniq.compact + SDG::Goal.where(code: @filtered_goals).to_a).uniq
+    @sdg_targets = (@projekts.map(&:sdg_targets).flatten.uniq.compact + SDG::Target.where(code: @filtered_targets).to_a).uniq
+    @filtered_goals = params[:sdg_goals].present? ? params[:sdg_goals].split(',').map{ |code| code.to_i } : nil
+    @filtered_targets = params[:sdg_targets].present? ? params[:sdg_targets].split(',')[0] : nil
+    take_by_sdgs
 
     @active_projekts_orders = valid_orders.select { |order| @projekts.send(order).count > 0 }
     @current_projekts_order = valid_orders.include?(params[:order]) ? params[:order] : @active_projekts_orders.first
@@ -29,18 +41,6 @@ class ProjektsController < ApplicationController
     @commentable = @special_projekt
     @comment_tree = CommentTree.new(@commentable, params[:page], @current_comments_order)
     set_comment_flags(@comment_tree.comments)
-
-    @geozones = Geozone.all
-    @selected_geozone_affiliation = params[:geozone_affiliation] || "all_resources"
-    @affiliated_geozones = (params[:affiliated_geozones] || "").split(",").map(&:to_i)
-
-    @categories = @projekts.map { |p| p.tags.category }.flatten.uniq.compact.sort
-    @tag_cloud = tag_cloud
-
-    @sdgs = (@projekts.map(&:sdg_goals).flatten.uniq.compact + SDG::Goal.where(code: @filtered_goals).to_a).uniq
-    @sdg_targets = (@projekts.map(&:sdg_targets).flatten.uniq.compact + SDG::Target.where(code: @filtered_targets).to_a).uniq
-    @filtered_goals = params[:sdg_goals].present? ? params[:sdg_goals].split(',').map{ |code| code.to_i } : nil
-    @filtered_targets = params[:sdg_targets].present? ? params[:sdg_targets].split(',')[0] : nil
 
     if @projekts.is_a?(Array)
       @projekts = Kaminari.paginate_array(@projekts).page(params[:page]).per(25)
