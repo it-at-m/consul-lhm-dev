@@ -18,6 +18,7 @@ class Projekt < ApplicationRecord
   belongs_to :parent, class_name: "Projekt", optional: true
 
   has_one :page, class_name: "SiteCustomization::Page", dependent: :destroy
+  has_many :comments, as: :commentable, dependent: :destroy
 
   has_many :projekt_settings, dependent: :destroy
 
@@ -45,7 +46,6 @@ class Projekt < ApplicationRecord
   has_many :debates, through: :debate_phases
   has_many :proposals, through: :proposal_phases
   has_many :budgets, through: :budget_phases
-  has_many :comments, through: :comment_phases
   has_many :polls, through: :voting_phases
   has_many :projekt_arguments, through: :argument_phases
   has_many :projekt_livestreams, through: :livestream_phases
@@ -444,6 +444,10 @@ class Projekt < ApplicationRecord
 
   def hidden_for?(user = nil)
     !visible_for?(user)
+  end
+
+  def comments_allowed?(user = nil)
+    true
   end
 
   private

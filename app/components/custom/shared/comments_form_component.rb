@@ -10,6 +10,7 @@ class Shared::CommentsFormComponent < ApplicationComponent
   private
 
     def projekt_phase
+      return nil if record.is_a?(Projekt)
       return record if record.is_a?(ProjektPhase)
       return record.projekt_phase if record.respond_to?(:projekt_phase)
 
@@ -17,6 +18,8 @@ class Shared::CommentsFormComponent < ApplicationComponent
     end
 
     def permission_problem_key
+      return nil if projekt_phase.blank?
+
       @permission_problem_key ||= projekt_phase.permission_problem(current_user)
     end
 

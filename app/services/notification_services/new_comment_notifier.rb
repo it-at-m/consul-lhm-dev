@@ -23,9 +23,10 @@ module NotificationServices
       end
 
       def projekt_subscriber_ids
-        return [] unless @comment.commentable.is_a?(Projekt)
+        return [] if @comment.commentable.is_a?(Projekt)
+        return [] unless @comment.commentable.respond_to?(:projekt_phase)
 
-        @comment.projekt.comment_phase.subscribers.ids
+        @comment.commentable.projekt_phase.subscribers.ids
       end
   end
 end
