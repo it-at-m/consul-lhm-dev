@@ -171,7 +171,8 @@ module Abilities
       can [:manage], ProjektLivestream
       can [:manage], ProjektArgument
       can [:manage], ProjektEvent
-
+      can [:manage], MapLocation
+      can [:manage], MapLayer
     end
   end
 end
