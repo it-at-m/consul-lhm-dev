@@ -6,7 +6,8 @@ module ContentBlocksHelper
     block = SiteCustomization::ContentBlock.custom_block_for(key, I18n.locale)
     block_body = block&.body || ""
 
-    if current_user && current_user.administrator?
+    if current_user &&
+        (current_user.administrator? || current_user&.projekt_manager?(@custom_page&.projekt))
       edit_link = link_to('<i class="fas fa-edit"></i>'.html_safe, edit_admin_site_customization_content_block_path(block, return_to: request.path) )
     end
 
