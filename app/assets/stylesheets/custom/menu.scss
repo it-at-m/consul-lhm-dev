@@ -153,10 +153,6 @@ span.icon-account {
   display: none;
 }
 
-.projekt-modules-links {
-  display: none;
-}
-
 #responsive-menu {
   width: 100%;
 
@@ -415,27 +411,6 @@ span.icon-account {
       border-top: none;
     }
   }
-
-  // Styling projekts in navigation items
-
-  .main-menu {
-
-    .projekt-modules-links {
-      display: block;
-      font-size: 11px;
-      line-height: initial;
-      color: $flyout-item-projekt-modules-links-color;
-      margin-top: 0.25rem;
-
-      a.projekt-module-link {
-        display: inline;
-        line-height: initial;
-        color: $flyout-item-projekt-modules-links-color;
-      }
-    }
-
-  }
-
 
   // Styling notification 
 

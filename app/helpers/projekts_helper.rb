@@ -49,27 +49,6 @@ module ProjektsHelper
     end
   end
 
-  def prepare_projekt_modules_links(projekt)
-
-    module_links = []
-
-    # TODO: fix con1538
-
-    # if projekt_phase_show_in_navigation?(projekt, 'debate_phase')
-    #   module_links.push( debates_overview_link(t('custom.menu.debates'), projekt, 'projekt-module-link') )
-    # end
-
-    # if projekt_phase_show_in_navigation?(projekt, 'proposal_phase')
-    #   module_links.push( proposals_overview_link(t('custom.menu.proposals'), projekt, 'projekt-module-link') )
-    # end
-
-    # if related_polls(projekt).any?
-    #   module_links.push( polls_overview_link(t('custom.menu.polls'), projekt, 'projekt-module-link') )
-    # end
-
-    module_links.join(' | ').html_safe
-  end
-
   def debates_overview_link(anchor_text, projekt, class_name)
     link_to anchor_text, (debates_path + "?#{projekt.all_children_ids.unshift(projekt.id).to_query('filter_projekt_ids')}"), class: (class_name + ' js-reset-projekt-filter-toggle-status'), data: { projekts: projekt.all_parent_ids.push(projekt.id).join(','), resources: 'debates' }
   end
@@ -92,11 +71,6 @@ module ProjektsHelper
 
   def projekt_phase_expired?(projekt, phase_name)
     projekt.send(phase_name).end_date < Date.today if projekt.send(phase_name).end_date
-  end
-
-  def projekt_phase_show_in_navigation?(projekt, phase_name)
-    projekt.send(phase_name).phase_activated? &&
-      ((projekt.send(phase_name).start_date <= Date.today if projekt.send(phase_name).start_date) || projekt.send(phase_name).start_date.blank? )
   end
 
   def format_date(date)
@@ -168,10 +142,6 @@ module ProjektsHelper
     else
       t("custom.geozones.sidebar_filter.restrictions.#{restriction_name}" )
     end
-  end
-
-  def related_polls(projekt, timestamp = Date.current.beginning_of_day)
-    Poll.where(projekt_id: projekt.all_children_ids.push(projekt.id))
   end
 
   def options_for_projekt_select
