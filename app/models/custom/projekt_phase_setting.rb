@@ -92,12 +92,14 @@ class ProjektPhaseSetting < ApplicationRecord
 
         "ProjektPhase::BudgetPhase" => {
           "feature.general.only_admins_create_investment_proposals": "",
+          "feature.resource.show_results_after_first_vote": "",
 
+          "feature.form.allow_attached_image": "active",
+          "feature.form.show_implementation_option_fields": "active",
+          "feature.form.show_user_cost_estimate": "active",
           "feature.form.show_map": "active",
           "feature.form.enable_geoman_controls_in_maps": "active",
           "feature.form.allow_attached_documents": "active",
-          "feature.form.show_implementation_option_fields": "active",
-          "feature.form.show_user_cost_estimate": "active",
 
           "feature.resource.remove_investments_supports": "active",
           "feature.resource.show_report_button_in_sidebar": "active",
@@ -106,7 +108,6 @@ class ProjektPhaseSetting < ApplicationRecord
           "feature.resource.show_related_content": "active",
           "feature.resource.enable_investment_milestones_tab": "active",
           "feature.resource.show_comments": "active",
-          "feature.resource.show_results_after_first_vote": "",
           "feature.resource.show_relative_ballotting_results": ""
         },
 
