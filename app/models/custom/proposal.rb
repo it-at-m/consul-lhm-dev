@@ -95,10 +95,9 @@ class Proposal < ApplicationRecord
   end
 
   def custom_votes_needed_for_success
-    return Proposal.votes_needed_for_success unless projekt_phase.projekt.present?
+    return Proposal.votes_needed_for_success unless projekt_phase.present?
 
-    setting_value = ProjektSetting.find_by(projekt: projekt_phase.projekt, key: "projekt_feature.proposal_options.votes_for_proposal_success").value.to_i
-    setting_value == 0 ? Proposal.votes_needed_for_success : setting_value
+    projekt_phase.settings.find_by(key: "option.resource.votes_for_proposal_success").value.to_i
   end
 
   def publish
