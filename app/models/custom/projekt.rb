@@ -244,7 +244,10 @@ class Projekt < ApplicationRecord
       voting_phases.any? { |phase| phase.selectable_by?(user) }
 
     elsif controller_name == "processes"
-      legislation_phases.reject { |lp| lp.legislation_process.present? }.any?
+      legislation_phases
+        .reject { |lp| lp.legislation_process.present? }
+        .select(&:phase_activated?)
+        .any?
     end
   end
 
