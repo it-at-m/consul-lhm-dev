@@ -25,10 +25,7 @@ class ProjektPhase::LivestreamPhase < ProjektPhase
   end
 
   def question_list_enabled?
-    projekt_settings
-      .find_by(key: "projekt_feature.questions.show_questions_list")
-      .value
-      .present?
+    settings.find_by(key: "feature.general.show_questions_list").value.present?
   end
 
   def admin_nav_bar_items

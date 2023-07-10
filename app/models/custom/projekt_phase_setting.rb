@@ -114,6 +114,10 @@ class ProjektPhaseSetting < ApplicationRecord
           "feature.general.show_questions_list": ""
         },
 
+        "ProjektPhase::LivestreamPhase" => {
+          "feature.general.show_questions_list": ""
+        },
+
         "ProjektPhase::MilestonePhase" => {
           "feature.general.newest_first": ""
         },
