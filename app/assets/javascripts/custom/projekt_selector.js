@@ -97,6 +97,10 @@
       }
 
       function updateFormHeading(projektPhaseId) {
+        if ( $('.admin-content').length ) {
+          return
+        }
+
         var $header = $('header h1').first();
 
         $.ajax("/projekt_phases/" + projektPhaseId + "/form_heading_text", {
