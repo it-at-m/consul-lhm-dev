@@ -8,7 +8,7 @@ module ProjektAdminActions
     alias_method :namespace_mappable_path, :namespace_projekt_path
     helper_method :namespace_projekt_path, :namespace_mappable_path
 
-    before_action :find_projekt, except: [:index]
+    before_action :find_projekt, except: %i[index create]
     before_action :process_tags, only: [:update]
   end
 
