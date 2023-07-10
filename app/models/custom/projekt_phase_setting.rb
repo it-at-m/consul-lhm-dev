@@ -62,21 +62,21 @@ class ProjektPhaseSetting < ApplicationRecord
           "feature.form.enable_summary": "",
           "feature.form.show_map": "active",
           "feature.form.enable_geoman_controls_in_maps": "active",
-          "feature.form.allow_attached_documents": "active",
-          "feature.form.enable_external_video": "active",
+          "feature.form.allow_attached_documents": "",
+          "feature.form.enable_external_video": "",
 
           "feature.resource.allow_voting": "active",
           "feature.resource.enable_proposal_support_withdrawal": "active",
           "feature.resource.quorum_for_proposals": "",
           "feature.resource.show_report_button_in_sidebar": "active",
-          "feature.resource.show_follow_button_in_proposal_sidebar": "active",
-          "feature.resource.show_community_button_in_proposal_sidebar": "active",
-          "feature.resource.show_related_content": "active",
+          "feature.resource.show_follow_button_in_proposal_sidebar": "",
+          "feature.resource.show_community_button_in_proposal_sidebar": "",
+          "feature.resource.show_related_content": "",
           "feature.resource.enable_proposal_notifications_tab": "",
           "feature.resource.enable_proposal_milestones_tab": "",
           "feature.resource.show_comments": "active",
 
-          "option.resource.votes_for_proposal_success": 10000
+          "option.resource.votes_for_proposal_success": 100
 
           # "feature.hide_projekt_selector": "active", delete
         },
