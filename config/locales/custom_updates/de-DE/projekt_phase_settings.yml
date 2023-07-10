@@ -51,8 +51,8 @@ de:
             enable_proposal_support_withdrawal_description: Aktivieren Sie die Rücknahme der Vorschlagsunterstützung
             quorum_for_proposals: Quorum für Vorschläge
             quorum_for_proposals_description: Aktivieren Sie ein Quorum für Vorschläge
-            show_report_button_in_proposal_sidebar: Vorschlag melden
-            show_report_button_in_proposal_sidebar_description: Aktivieren Sie die Melden-Funktion für Vorschläge
+            show_report_button_in_sidebar: Vorschlag melden
+            show_report_button_in_sidebar_description: Aktivieren Sie die Melden-Funktion für Vorschläge
             show_follow_button_in_proposal_sidebar: Vorschlag folgen
             show_follow_button_in_proposal_sidebar_description: Aktivieren Sie die Funktion “Vorschlag folgen”
             show_community_button_in_proposal_sidebar: Community
