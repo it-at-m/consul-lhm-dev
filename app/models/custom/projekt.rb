@@ -454,7 +454,13 @@ class Projekt < ApplicationRecord
   private
 
     def create_corresponding_page
-      page = SiteCustomization::Page.new(title: name, slug: form_page_slug, projekt: self)
+      page = SiteCustomization::Page.new(
+        title: name,
+        slug: form_page_slug,
+        status: "published",
+        projekt: self,
+        content: ""
+      )
 
       if page.save
         self.page = page
