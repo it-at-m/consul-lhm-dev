@@ -37,7 +37,7 @@
   <div class="projekt-page-image margin-bottom">
     <% if @projekt.page.image.present? %>
       <div class="text-center">
-        <%= image_tag @projekt.page.image.variant(:thumb) %>
+        <%= image_tag @projekt.page.image.variant(:banner) %>
       </div>
     <% end %>
     <div class='small-12 medium-7 margin-bottom'>
