@@ -15,7 +15,7 @@ class Legislation::Process < ApplicationRecord
   delegate :votable_by?, to: :legislation_phase
   delegate :comments_allowed?, to: :legislation_phase
 
-  validates :projekt_id, presence: true
+  validates :projekt_phase_id, presence: true, on: :create
 
   scope :active, -> { all }
 
