@@ -8,7 +8,7 @@
   </div>
 
   <% if attachable.attachment.attached? && attachable.attachment.image? %>
-    <%= render_image(attachable, :thumb, false) %>
+    <%= render_image(attachable, :large, false) %>
   <% end %>
 
   <div class="small-12 column attachment-actions">
