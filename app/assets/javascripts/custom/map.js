@@ -230,9 +230,12 @@
         function proposalPopupContent(data) {
           var popupHtml = "";
           popupHtml += "<h6 style='max-width:120px;margin-top:20px;'><a href='/proposals/" + data.proposal_id + "'>" + data.proposal_title + "</a></h6>"; //title
-          popupHtml += "<img src='" + data.image_url + "' style='margin-bottom:10px;'>"; //image
 
-          if (data.labels.length || data.sentiment) {
+          if (data.image_url) {
+            popupHtml += "<img src='" + data.image_url + "' style='margin-bottom:10px;'>"; //image
+          }
+
+          if (data.labels.length || Object.keys(data.sentiment).length) {
             popupHtml += "<div class='resource-taggings'>";
 
             if (data.labels.length) {
@@ -247,7 +250,7 @@
               popupHtml += labels;
             }
 
-            if (data.sentiment) {
+            if (Object.keys(data.sentiment).length) {
               var sentiments = "<div class='sentiments'>";
               sentiments += "<span class='sentiment' style='background-color:#454B1B;color:#ffffff'>" + data.sentiment.name + "</span>";
               sentiments += "</div>";

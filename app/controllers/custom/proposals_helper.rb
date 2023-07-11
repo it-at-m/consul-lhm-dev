@@ -29,10 +29,12 @@ module ProposalsHelper
       sentiment["color"] = helpers.pick_text_color(proposal.sentiment.color)
     end
 
+    image_url = proposal.image.present? ? url_for(proposal.image.variant(:popup)) : nil
+
     data = {
       proposal_id: proposal.id,
       proposal_title: proposal.title,
-      image_url: url_for(proposal.image.variant(:popup)),
+      image_url: image_url,
       labels: labels,
       sentiment: sentiment
     }.to_json
