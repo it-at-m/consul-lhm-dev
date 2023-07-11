@@ -239,7 +239,7 @@
             popupHtml += "<div class='resource-taggings'>";
 
             if (data.labels.length) {
-              var labels = "<div class='projekt-labels'>";
+              var labels = "<div class='projekt-labels' style='max-width:120px;'>";
               data.labels.forEach(function(label) {
                 labels += "<span class='projekt-label selected'>"
                 labels += "<i class='fas fa-" + label.icon + "' style='margin-right:4px;'></i>"
@@ -251,7 +251,7 @@
             }
 
             if (Object.keys(data.sentiment).length) {
-              var sentiments = "<div class='sentiments'>";
+              var sentiments = "<div class='sentiments' style='max-width:120px;'>";
               sentiments += "<span class='sentiment' style='background-color:#454B1B;color:#ffffff'>" + data.sentiment.name + "</span>";
               sentiments += "</div>";
               popupHtml += sentiments;
