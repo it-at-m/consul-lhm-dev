@@ -8,7 +8,7 @@
 
   <%= render "pages/projekt_footer/budget/my_ballot" %>
 
-  <%= render Sidebar::ProjektsFilterComponent.new(
+  <%#= render Sidebar::ProjektsFilterComponent.new(
     top_level_active_projekts: @top_level_active_projekts,
     top_level_archived_projekts: @top_level_archived_projekts,
     scoped_projekt_ids: @scoped_projekt_ids,
@@ -17,7 +17,7 @@
     current_projekt: @projekt
   ) %>
 
-  <% unless @budget.phase == 'publishing_prices' && projekt_phase_feature?(@projekt_phase, 'resource.show_results_after_first_vote')  # con-1036 %>
+  <% unless @budget.phase == 'publishing_prices' && projekt_phase_feature?(@projekt_phase, 'general.show_results_after_first_vote')  # con-1036 %>
     <% if params[:section].blank? || params[:section] == 'overview' %>
       <%= render Budgets::Investments::FiltersComponent.new %>
     <% end %>

@@ -63,7 +63,7 @@
   <fieldset>
     <legend><%= t("shared.optional") %></legend>
 
-    <% if feature?(:allow_images) %>
+    <% if projekt_phase_feature?(budget.projekt_phase, "form.allow_attached_image") %>
       <div class="images">
         <%= render "images/nested_image", f: f %>
       </div>

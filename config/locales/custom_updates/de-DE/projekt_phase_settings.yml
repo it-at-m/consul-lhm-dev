@@ -88,17 +88,23 @@ de:
           general:
             only_admins_create_investment_proposals: Nur Admins können neue Investitionsvorschläge erstellen
             only_admins_create_investment_proposals_description: Die Erstellung von neuen Vorschlägen ist auf Admins beschränkt
+            show_results_after_first_vote: Ergebnisliste nach erster Beteiligungsphase anzeigen
+            show_results_after_first_vote_description: Zeigt in der Phase "Veröffentliching der Preise" nur ausgewählte Projekte als Ergebnisse an
+            show_relative_ballotting_results: Nur prozentuale Werte anzeigen
+            show_relative_ballotting_results_description: Blendet die absoluten Zahlen in den Statistiken aus. Nur prozentuale Werte werden angezeigt
           form:
+            allow_attached_image: Titelbild hinzufügen
+            allow_attached_image_description: Ermöglicht es den Bürger*innen ein Titelbild hinzuzufügen.
+            show_implementation_option_fields: Umsetzung
+            show_implementation_option_fields_description: Fügt beim Erstellen eines Investitionsvorschlags ein Auswahlfeld “Umsetzung” hinzu
+            show_user_cost_estimate: Preisliche Einschätzung
+            show_user_cost_estimate_description: Fügt beim Erstellen eines Investitionsvorschlags ein Auswahlfeld “Preisliche Einschätzung” hinzu
             show_map: Karte für Investitionsvorschläge anzeigen
             show_map_description: Zeigt die Karte für Investitionsvorschläge in diesem Projekt an
             enable_geoman_controls_in_maps: Nutzer*innen ermöglichen Figuren in die Karte einzuzeichnen.
             enable_geoman_controls_in_maps_description: Ermöglicht es den Nutzer*innen Rechtecke, Kreise etc. einzuzeichnen.
             allow_attached_documents: Zusätzliche Dokumente
             allow_attached_documents_description: Ermöglicht es den Nutzer:innen Dokumente den Vorschlägen anzuhängen
-            show_implementation_option_fields: Umsetzung
-            show_implementation_option_fields_description: Fügt beim Erstellen eines Investitionsvorschlags ein Auswahlfeld “Umsetzung” hinzu
-            show_user_cost_estimate: Preisliche Einschätzung
-            show_user_cost_estimate_description: Fügt beim Erstellen eines Investitionsvorschlags ein Auswahlfeld “Preisliche Einschätzung” hinzu
           resource:
             remove_investments_supports: Zurückziehen von Unterstützungen für Investitionsvorschläge zulassen
             remove_investments_supports_description: Ermöglicht es den Nutzern, in der Phase der Projektauswahl Unterstützungen für Investitionsvorschläge zurückzuziehen
@@ -114,10 +120,6 @@ de:
             enable_investment_milestones_tab_description: Aktivieren Sie "Meilensteine" in Investitionsvorschlägen, die von der Verwaltung angelegt werden müssen
             show_comments: Kommentare
             show_comments_description: Aktivieren Sie "Kommentare" für das Vorschlagsmodul
-            show_results_after_first_vote: Ergebnisliste nach erster Beteiligungsphase anzeigen
-            show_results_after_first_vote_description: Zeigt in der Phase "Veröffentliching der Preise" nur ausgewählte Projekte als Ergebnisse an
-            show_relative_ballotting_results: Nur prozentuale Werte anzeigen
-            show_relative_ballotting_results_description: Blendet die absoluten Zahlen in den Statistiken aus. Nur prozentuale Werte werden angezeigt
       projekt_questions:
         feature:
           general:
