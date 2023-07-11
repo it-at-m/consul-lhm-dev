@@ -38,16 +38,16 @@ class ProjektSetting < ApplicationRecord
       {
         "projekt_feature.main.activate": "",
 
-        "projekt_feature.general.show_in_navigation": "",
+        "projekt_feature.general.show_in_navigation": "active",
+        "projekt_feature.general.show_in_overview_page": "active",
         "projekt_feature.general.show_in_overview_page_navigation": "",
-        "projekt_feature.general.show_in_overview_page": "",
-        "projekt_feature.general.hide_additional_info_in_projekt_selector": "active",
-        "projekt_feature.general.show_not_active_phases_in_projekts_page_sidebar": "active",
+        "projekt_feature.general.show_in_homepage": "active",
+        "projekt_feature.general.show_in_individual_list": "",
         "projekt_feature.general.allow_downvoting_comments": "active",
+        "projekt_feature.general.set_default_sorting_to_newest": "",
+
         "projekt_feature.general.enable_tags": "",
         "projekt_feature.general.enable_sdgs": "",
-        "projekt_feature.general.set_default_sorting_to_newest": "",
-        "projekt_feature.general.show_in_individual_list": "",
 
         "projekt_feature.sidebar.show_notification_subscription_toggler": "active",
         "projekt_feature.sidebar.show_phases_in_projekt_page_sidebar": "active",
