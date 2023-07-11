@@ -55,16 +55,9 @@
 }
 
 // Marker Cluster
-.marker-cluster-small {
-  background-color: $brand-lighter;
-  color: $white;
-
-  div {
-    background-color: $brand-lighter;
-  }
-}
-
-.marker-cluster-medium {
+.marker-cluster-small,
+.marker-cluster-medium,
+.marker-cluster-large {
   background-color: $brand-lighter;
   color: $white;
 
