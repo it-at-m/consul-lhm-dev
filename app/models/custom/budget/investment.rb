@@ -48,7 +48,7 @@ class Budget
     end
 
     def permission_problem(user)
-      budget.budget_phase.permission_problem(user)
+      budget.projekt_phase.permission_problem(user)
     end
 
     def comments_allowed?(user)
