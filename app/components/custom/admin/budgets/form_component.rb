@@ -8,7 +8,7 @@ class Admin::Budgets::FormComponent < ApplicationComponent
 
   def projekt_phase_options_for_selector
     ProjektPhase::BudgetPhase.all
-      .reject { |pp| pp.budget.present? }
+      .reject { |pp| pp.budget.present? || pp.projekt.overview_page? }
       .map { |pp| ["#{pp.projekt.name} - #{pp.title}", pp.id] }
   end
 end
