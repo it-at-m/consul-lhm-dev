@@ -3,7 +3,7 @@
   App.HTMLEditor = {
     initialize: function() {
       $("textarea.html-area").each(function(index, element) {
-        var editorHeight = $(this).hasClass("tall-editor") ? 1000 : 500;
+        var editorHeight = $(this).hasClass("tall-editor") ? 334 : 334;
 
         if ($(this).hasClass("extended-u")) {
           CKEDITOR.replace(this.name, { language: $("html").attr("lang"), toolbar: "extended_user", height: editorHeight });
