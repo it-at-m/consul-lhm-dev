@@ -217,6 +217,7 @@ class User < ApplicationRecord
       r_addresses = RegisteredAddress.where(registered_address_street_id: ras.id, street_number: street_number)
 
       r_addresses.each do |ra|
+        puts "User ID: #{id}"
         puts "Old street Address: #{old_street_address}"
         puts "Registered Address: #{ra.formatted_name}"
         puts "Is it a match? (y/n)"
