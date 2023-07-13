@@ -2,6 +2,11 @@
   display: none;
   background-clip: content-box;
 
+  @media screen and (min-width: 1260px) {
+    max-width: 1260px;
+    margin-left: -38px !important;
+  }
+
   @media screen and (min-width: 40em) {
     display: block;
     margin-top: -24px;
