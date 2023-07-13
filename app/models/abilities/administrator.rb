@@ -150,7 +150,7 @@ module Abilities
 
       can [:csv_answers_votes], Poll
       can [:order_questions, :csv_answers_streets, :csv_answers_votes], Poll::Question
-      can [:show], Projekt
+      can [:manage], Projekt
       can [:verify, :unverify], User
 
       can :edit_physical_votes, Budget::Investment do |investment|
