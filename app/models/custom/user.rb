@@ -202,6 +202,39 @@ class User < ApplicationRecord
     "#{street_name} #{street_number}#{street_number_extension}"
   end
 
+  def link_to_registered_address  #TODO remove after data migration
+    if city_street.present?
+      old_street_address = "#{city_street.name} #{street_number}#{street_number_extension}"
+    elsif street_name.present?
+      old_street_address = "#{street_name} #{street_number}#{street_number_extension}"
+    else
+      return
+    end
+
+    ra_streets = RegisteredAddress::Street.where("lower(name) LIKE lower(?)", "#{old_street_address[0..5]}%")
+
+    ra_streets.each do |ras|
+      r_addresses = RegisteredAddress.where(registered_address_street_id: ras.id, street_number: street_number)
+
+      r_addresses.each do |ra|
+        puts "Old street Address: #{old_street_address}"
+        puts "Registered Address: #{ra.formatted_name}"
+        puts "Is it a match? (y/n)"
+
+        answer = gets.chomp
+
+        if answer == "y"
+          update_columns(
+            registered_address_id: ra.id,
+          )
+
+          puts "Updated!"
+          return
+        end
+      end
+    end
+  end
+
   private
 
     def geozone_with_plz
