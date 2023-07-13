@@ -21,8 +21,13 @@ class Admin::NewslettersController < Admin::BaseController
       body += "<p>#{@projekt.description}</p>" if @projekt.description
       body += "<p><img src='#{url_for(@projekt.image.variant(:large))}'></p>" if @projekt.image
 
-      body += "<p><strong>#{t("custom.newsletters.new_projekt.total_duration_start")}:</strong> #{l(@projekt.total_duration_start, format: "%d. %B %Y")}</p>"
-      body += "<p><strong>#{t("custom.newsletters.new_projekt.total_duration_end")}:</strong> #{t("custom.newsletters.new_projekt.total_duration_end_till")} #{l(@projekt.total_duration_end, format: "%d. %B %Y")}</p>"
+      if @projekt.total_duration_start.present?
+        body += "<p><strong>#{t("custom.newsletters.new_projekt.total_duration_start")}:</strong> #{l(@projekt.total_duration_start, format: "%d. %B %Y")}</p>"
+      end
+
+      if @projekt.total_duration_end.present?
+        body += "<p><strong>#{t("custom.newsletters.new_projekt.total_duration_end")}:</strong> #{t("custom.newsletters.new_projekt.total_duration_end_till")} #{l(@projekt.total_duration_end, format: "%d. %B %Y")}</p>"
+      end
 
       body += "<p><strong>#{t("custom.newsletters.new_projekt.open_phases")}:</strong></p>"
       body += "<ul style='margin-bottom:30px;'>#{open_phases_for_body}</ul>"
