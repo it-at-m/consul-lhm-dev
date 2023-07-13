@@ -186,6 +186,8 @@ class PagesController < ApplicationController
     end
     # con-1036
 
+    @investments = @budget.investments
+
     if params[:section] == "results"
       @investments = Budget::Result.new(@budget, @budget.headings.first).investments
     elsif params[:section] == "stats"
