@@ -5,6 +5,7 @@ $secondary:                                       lighten($brand, 70%);
 $accent:                                          lighten($brand, 50%);
 $dark:                                            darken($brand, 10%);
 $brand-lighter:                                   rgba($brand, 0.5);
+$text-over-brand:                                 $white;
 
 
 // Menu variables
