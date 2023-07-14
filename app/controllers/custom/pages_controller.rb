@@ -224,12 +224,12 @@ class PagesController < ApplicationController
   end
 
   def set_milestone_phase_footer_tab_variables
-    @current_milestone = @projekt.milestones
+    @current_milestone = @projekt_phase.milestones
                                  .where("publication_date < ?", Time.zone.today)
                                  .order(publication_date: :desc)
                                  .first
 
-    order_newest = ProjektSetting.find_by(projekt: @projekt, key: "projekt_feature.milestones.newest_first").value.present?
+    order_newest = @projekt_phase.settings.find_by(key: "feature.general.newest_first").value.present?
     @milestones_publication_date_order = order_newest ? :desc : :asc
   end
 
@@ -238,8 +238,8 @@ class PagesController < ApplicationController
   end
 
   def set_newsfeed_phase_footer_tab_variables
-    @rss_id = ProjektSetting.find_by(projekt: @projekt, key: "projekt_newsfeed.id").value
-    @rss_type = ProjektSetting.find_by(projekt: @projekt, key: "projekt_newsfeed.type").value
+    @rss_id = @projekt_phase.settings.find_by(key: "option.general.newsfeed_id").value
+    @rss_type = @projekt_phase.settings.find_by(key: "option.general.newsfeed_type").value
   end
 
   def set_event_phase_footer_tab_variables
