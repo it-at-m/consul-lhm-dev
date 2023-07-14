@@ -16,7 +16,7 @@ class Shared::NewButtonComponent < ApplicationComponent
     return Projekt.top_level.selectable_in_selector(@resources_name, current_user).any? if @resources_name.present? # resources index page
 
     if @projekt_phase.is_a?(ProjektPhase::BudgetPhase) # projekt page footer tab for budgets
-      can? :create, Budget::Investment.new(budget: @projekt_phase.projekt.budget)
+      can? :create, Budget::Investment.new(budget: @projekt_phase.budget)
     else
       true # all other pages including footer tabs
     end

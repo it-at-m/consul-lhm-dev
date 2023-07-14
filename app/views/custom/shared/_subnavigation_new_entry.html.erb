@@ -53,22 +53,24 @@
           </div>
         <% end %>
 
+        <!--
         <ul class="nav-flyout-block">
-          <% projekts_with_accepting_budgets.each do |projekt| %>
+          <%# projekts_with_accepting_budgets.each do |projekt| %>
 
             <li class='nav-element flyout-item js-access-flyout-menu-item focusable'
-              <%= "tabindex=0" if placement == "desktop" %> 
-                aria-label="<%= t('custom.links.menu.projekt_name_label', projekt_name: projekt.name) %>" >
+              <%#= "tabindex=0" if placement == "desktop" %> 
+                aria-label="<%#= t('custom.links.menu.projekt_name_label', projekt_name: projekt.name) %>" >
               <div class='projekt-name-group'>
                 <div class='flyout-item-name projekt-name'>
-                  <%= link_to projekt.page.title, new_budget_investment_path(projekt.budget_phases.first.budget, origin: url_for),
+                  <%#= link_to projekt.page.title, new_budget_investment_path(projekt.budget_phases.first.budget, origin: url_for),
                       tabindex: (placement == 'desktop' ? "-1" : "0"),
                       aria: { hidden: placement == 'desktop' } %>
                 </div>
               </div>
             </li>
-          <% end %>
+          <%# end %>
         </ul>
+        -->
 
       </li>
     <% end %>
