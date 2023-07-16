@@ -108,7 +108,7 @@ module ProjektPhaseAdminActions
   end
 
   def map
-    authorize!(:sentiments, @projekt_phase)
+    authorize!(:map, @projekt_phase)
 
     @projekt_phase.create_map_location unless @projekt_phase.map_location.present?
     @map_location = @projekt_phase.map_location

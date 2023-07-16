@@ -44,5 +44,6 @@ class ProjektPhasesController < ApplicationController
 
   def map_html
     @projekt_phase = ProjektPhase.find(params[:id])
+    @projekt = @projekt_phase.projekt
   end
 end

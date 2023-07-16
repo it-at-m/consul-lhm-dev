@@ -2,7 +2,11 @@
 
 <% if projekt_phase_feature?(@projekt_phase, "form.show_map") %>
   <div class='margin-bottom'>
-    <%= render "proposals/map" %>
+    <% if @projekt_phase.projekt.vc_map_enabled? %>
+      <%= render "proposals/vcmap" %>
+    <% else %>
+      <%= render "proposals/map" %>
+    <% end %>
   </div>
 <% end %>
 

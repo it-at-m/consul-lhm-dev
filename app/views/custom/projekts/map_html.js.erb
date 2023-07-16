@@ -1,7 +1,16 @@
-<%= render Shared::MapComponent.new(
-  map_location: @projekt.map_location,
-  parent_class: "proposal",
-  editable: true,
-  projekt: @projekt,
-  show_admin_shape: @projekt.map_location.show_admin_shape?
-) %>
+<% if @projekt.vc_map_enabled? %>
+  <%= render Shared::VCMapComponent.new(
+    map_location: @projekt.map_location,
+    parent_class: "proposal",
+    editable: true,
+    projekt: @projekt
+  ) %>
+<% else %>
+  <%= render Shared::MapComponent.new(
+    map_location: @projekt.map_location,
+    parent_class: "proposal",
+    editable: true,
+    projekt: @projekt,
+    show_admin_shape: @projekt.map_location.show_admin_shape?
+  ) %>
+<% end %>

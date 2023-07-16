@@ -128,10 +128,15 @@
             type: "GET",
             dataType: "html",
             success: function(data) {
-              App.Map.destroy();
-              $('div.map_location.map').first().replaceWith(data)
-              App.Map.initialize();
-              App.Map.maps[0].setView([$projektPhase.data('latitude'), $projektPhase.data('longitude')], $projektPhase.data('zoom')).invalidateSize();
+              if ( $projektPhase.data('vcMap') ) {
+                $('div.map_location.map').first().replaceWith(data)
+                App.VCMap.initialize();
+              } else {
+                App.Map.destroy();
+                $('div.map_location.map').first().replaceWith(data)
+                App.Map.initialize();
+                App.Map.maps[0].setView([$projektPhase.data('latitude'), $projektPhase.data('longitude')], $projektPhase.data('zoom')).invalidateSize();
+              }
             }
           });
         } else {

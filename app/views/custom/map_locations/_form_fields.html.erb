@@ -41,6 +41,9 @@
   <%= m_l_fields.hidden_field :longitude,
                               value: map_location.longitude,
                               id: map_location_input_id(parent_class, "longitude") %>
+  <%= m_l_fields.hidden_field :altitude,
+                              value: map_location.altitude,
+                              id: map_location_input_id(parent_class, "altitude") %>
   <%= m_l_fields.hidden_field :zoom,
                               value: map_location.zoom,
                               id: map_location_input_id(parent_class, "zoom") %>

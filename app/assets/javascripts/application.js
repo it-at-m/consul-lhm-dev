@@ -199,6 +199,7 @@ var initialize_modules = function() {
   App.ModalNotification.initialize();
   App.VerificationForm.initialize();
   App.SharedNewButtonComponent.initialize();
+  App.VCMap.initialize();
 
   if ($("#projekt-selector-fields").length) {
     App.ProjektSelector.initialize();

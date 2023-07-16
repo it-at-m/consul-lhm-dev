@@ -15,6 +15,7 @@ class MapLocation < ApplicationRecord
       deficiency_report_id: deficiency_report_id,
       lat: latitude,
       long: longitude,
+      alt: altitude,
       color: get_pin_color,
       fa_icon_class: get_fa_icon_class
     }

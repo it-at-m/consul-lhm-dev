@@ -7,15 +7,27 @@
           "show_info"] do %>
 
   <% if feature?(:map) && map_location_available?(@proposal) %>
-    <div class="margin-bottom not-print">
-      <%= render Shared::MapComponent.new(
-        mappable: @proposal,
-        map_location: @proposal.map_location || @proposal.projekt_phase.projekt.map_location_with_admin_shape,
-        parent_class: "proposal",
-        projekt: @proposal.projekt_phase.projekt,
-        show_admin_shape: @proposal.projekt_phase.projekt.map_location.show_admin_shape?
-      ) %>
-    </div>
+    <% if @proposal.projekt.vc_map_enabled? %>
+      <div class="margin-bottom not-print">
+        <%= render Shared::VCMapComponent.new(
+          mappable: @proposal,
+          map_location: @proposal.map_location || @proposal.projekt&.map_location_with_admin_shape,
+          parent_class: "proposal",
+          projekt: @proposal.projekt,
+          show_admin_shape: @proposal.projekt.map_location.show_admin_shape?
+        ) %>
+      </div>
+    <% else %>
+      <div class="margin-bottom not-print">
+        <%= render Shared::MapComponent.new(
+          mappable: @proposal,
+          map_location: @proposal.map_location || @proposal.projekt_phase.projekt.map_location_with_admin_shape,
+          parent_class: "proposal",
+          projekt: @proposal.projekt_phase.projekt,
+          show_admin_shape: @proposal.projekt_phase.projekt.map_location.show_admin_shape?
+        ) %>
+      </div>
+    <% end %>
   <% end %>
 
   <div class="resource-taggings margin-bottom">

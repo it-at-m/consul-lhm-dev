@@ -451,6 +451,10 @@ class Projekt < ApplicationRecord
     true
   end
 
+  def vc_map_enabled?
+    projekt_settings.find_by(key: "projekt_feature.general.vc_map_enabled")&.enabled?
+  end
+
   private
 
     def create_corresponding_page
