@@ -181,7 +181,7 @@ var initialize_modules = function() {
   App.SDGManagementRelationSearch.initialize();
   App.SDGCustom.initialize();
   App.Geozones.initialize();
-  App.ExpandProposalsMap.initialize();
+  App.ExpandOverviewMap.initialize();
   App.MapRefresh.initialize();
   App.PollsCustom.initialize();
   App.RadioButtonFilter.initialize();

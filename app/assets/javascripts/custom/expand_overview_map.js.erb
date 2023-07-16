@@ -1,6 +1,6 @@
 (function() {
   "use strict";
-  App.ExpandProposalsMap = {
+  App.ExpandOverviewMap = {
 
     toggleMap: function($mapDiv) {
       var $toggler = $(event.target)
@@ -24,7 +24,7 @@
 
       $("body").on("click", ".js-expand-overview-map", function() {
         var $mapDiv = $(this).closest('.expand-overview-map-wrapper').prev().find('.map_location')
-        App.ExpandProposalsMap.toggleMap($mapDiv);
+        App.ExpandOverviewMap.toggleMap($mapDiv);
       });
     }
   };
