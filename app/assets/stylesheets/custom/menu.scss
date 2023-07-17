@@ -448,3 +448,15 @@ span.icon-account {
   padding-top: 0;
   padding-bottom: 0;
 }
+
+
+// Draft projekts
+
+.draft-projekt {
+  &:before {
+    content: "\f15c";
+    font-family: "Font Awesome 5 Free";
+    font-weight: bold;
+    margin-right: 4px;
+  }
+}

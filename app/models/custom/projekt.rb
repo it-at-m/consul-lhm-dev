@@ -436,11 +436,15 @@ class Projekt < ApplicationRecord
   end
 
   def visible_for?(user = nil)
-    return true if individual_group_values.hard.empty?
-    return false unless user.present?
-    return true if user.administrator?
+    return true if user.present? && user.administrator?
+    return true if user.present? && user.projekt_manager?(self)
+    return false unless activated?
 
-    (individual_group_values.hard.ids & user.individual_group_values.hard.ids).any?
+    if individual_group_values.hard.empty?
+      true
+    else
+      user.present? && (individual_group_values.hard.ids & user.individual_group_values.hard.ids).any?
+    end
   end
 
   def hidden_for?(user = nil)

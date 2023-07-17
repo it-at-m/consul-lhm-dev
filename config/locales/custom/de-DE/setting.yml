@@ -25,8 +25,6 @@ de:
           extended_editor_for_users_description: Aktivieren Sie den erweiterten Editor für Inhalte, die im Frontend von Nutzern erstellt werden
           language_switcher_in_menu: Sprachumschalter in Navigation anbieten
           language_switcher_in_menu_description: Aktivieren Sie den Umschalter für weitere Sprachen in der Navigationsleiste
-          links_to_create_resources_in_menu: Button "+ Beitrag erstellen" in Navigation anzeigen
-          links_to_create_resources_in_menu_description: Zeigt den Button "+ Beitrag erstellen" in der Hauptnavigation an
           enable_projekt_events_page: Veranstaltungskalender anzeigen
           enable_projekt_events_page_description: Zeigt den Veranstaltungskalender in der Hauptnavigation an
           enable_google_translate: Google Translate aktivieren

@@ -35,8 +35,11 @@
 <body>
   <div class="error">
     <h1>403</h1>
-    <h2>Sie sind nicht berechtigt diese Seite aufzurufen.<br>
-    <%= "Die Sichtbarkeit ist beschränkt auf: #{@individual_group_value_names.join(", ")}" %></h2>
+    <h2 style="margin-bottom:0">Sie sind nicht berechtigt diese Seite aufzurufen.</h2>
+    <% if @individual_group_value_names.any? %>
+      <br>
+      <h2><%= "Die Sichtbarkeit ist beschränkt auf: #{@individual_group_value_names.join(", ")}" %></h2>
+    <% end %>
   </div>
 </body>
 </html>

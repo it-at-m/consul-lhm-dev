@@ -168,7 +168,6 @@ class Setting < ApplicationRecord
         "extended_feature.general.extended_editor_for_admins": true,
         "extended_feature.general.extended_editor_for_users": true,
         "extended_feature.general.language_switcher_in_menu": false,
-        "extended_feature.general.links_to_create_resources_in_menu": false,
         "extended_feature.general.enable_projekt_events_page": false,
         "extended_feature.general.enable_google_translate": false,
         "extended_option.general.title": 'Öffentlichkeitsbeteiligung',
