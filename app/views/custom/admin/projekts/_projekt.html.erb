@@ -5,14 +5,6 @@
         method: :patch,
         html: { id: "edit_projekt_#{projekt.id}" }) do |f| %>
 
-    <td class='projekt-info'>
-      <div>
-        <%= label_tag t('custom.admin.projekts.index.info') %>
-      </div>
-      <div class='info-arrow js-toggle-edit-projekt-info'>
-      </div>
-    </td>
-
     <td class='projekt-level'>
       <div class='projekt-level-title'>
         <%= label_tag t('custom.admin.projekts.index.level') %>
@@ -75,8 +67,6 @@
     </td>
   <% end %>
 </tr>
-
-<%= render partial: 'projekt_details', locals: { projekt: projekt } %>
 
 <% if projekt.children.any? %>
   <% projekt.children.order(order_number: :asc).each do |child_projekt| %>
