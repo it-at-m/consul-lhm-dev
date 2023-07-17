@@ -159,6 +159,11 @@ class Projekt < ApplicationRecord
       .where("siop.key": "projekt_feature.general.show_in_overview_page", "siop.value": "active")
   }
 
+  scope :show_in_homepage, -> {
+    joins("INNER JOIN projekt_settings sihp ON projekts.id = sihp.projekt_id")
+      .where("sihp.key": "projekt_feature.general.show_in_homepage", "sihp.value": "active")
+  }
+
   scope :visible_in_menu, ->(user = nil) {
     joins("INNER JOIN projekt_settings vim ON projekts.id = vim.projekt_id")
       .where("vim.key": "projekt_feature.general.show_in_navigation", "vim.value": "active")
