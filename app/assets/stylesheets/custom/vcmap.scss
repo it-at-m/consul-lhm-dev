@@ -34,4 +34,33 @@
     background-color: buttonface;
     padding: 1px 6px;
   }
+
+  #vc-popup {
+    background-color: #fff;
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 170px;
+    padding: 10px;
+    line-height: 1.4;
+    border-radius: 5px;
+
+    .popup-close-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 4px 4px 0 0;
+      text-align: center;
+      width: 18px;
+      height: 14px;
+      font: 16px/14px Tahoma, Verdana, sans-serif;
+      color: #c3c3c3;
+      text-decoration: none;
+      font-weight: bold;
+      background: transparent;
+    }
+  }
 }
