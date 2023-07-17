@@ -93,6 +93,11 @@ class Projekt < ApplicationRecord
       .where("act.key": "projekt_feature.main.activate", "act.value": "active")
   }
 
+  scope :not_activated, -> {
+    joins("INNER JOIN projekt_settings nact ON projekts.id = nact.projekt_id")
+      .where("nact.key": "projekt_feature.main.activate", "nact.value": [nil, ""])
+  }
+
   scope :current, ->(timestamp = Time.zone.today) {
     activated
       .where("total_duration_start IS NULL OR total_duration_start <= ?", timestamp)
@@ -147,6 +152,10 @@ class Projekt < ApplicationRecord
       .show_in_overview_page
       .joins("INNER JOIN projekt_settings siil ON projekts.id = siil.projekt_id")
       .where("siil.key": "projekt_feature.general.show_in_individual_list", "siil.value": "active")
+  }
+
+  scope :index_order_drafts, -> {
+    not_activated
   }
 
   scope :not_in_individual_list, -> {

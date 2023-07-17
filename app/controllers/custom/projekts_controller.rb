@@ -29,6 +29,7 @@ class ProjektsController < ApplicationController
     @filtered_targets = params[:sdg_targets].present? ? params[:sdg_targets].split(',')[0] : nil
     take_by_sdgs
 
+    valid_orders.push("index_order_drafts") if current_user&.administrator? || current_user&.projekt_manager?
     @active_projekts_orders = valid_orders.select { |order| @projekts.send(order).count > 0 }
     @current_projekts_order = valid_orders.include?(params[:order]) ? params[:order] : @active_projekts_orders.first
     @special_projekt = Projekt.unscoped.find_by(special: true, special_name: "projekt_overview_page")

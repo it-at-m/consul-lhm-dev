@@ -32,6 +32,8 @@ de:
         index_order_upcoming_title: 'Im Reiter "Zukünftige Projektvorhaben" sind Beteiligungsprojekte gelistet, die erst in der Zukunft stattfinden.'
         index_order_individual_list: "Individuelle Liste"
         index_order_individual_list_title: "Individuelle Liste"
+        index_order_drafts: "Entwürfe"
+        index_order_drafts_title: "Entwürfe"
       page:
         footer:
           sidebar:
