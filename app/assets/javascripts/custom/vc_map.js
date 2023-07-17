@@ -236,6 +236,11 @@
 
       // to draw only a single feature, stop the session, after creationFinished was fired
       var finishedDestroy = session.creationFinished.addEventListener(function(feature) {
+        feature = feature || layer.getFeaturesById(['_shape'])[0];
+
+        if ( !feature ) { return; }
+
+
         // convert Mercator coordinates to WGS84
         var geometry = feature.getGeometry();
         if (geometry instanceof ol.geom.Point) {
@@ -349,7 +354,7 @@
 
     clearFeatures: function(app) {
       var layer = app.layers.getByKey('_demoDrawingLayer') || App.VCMap.createSimpleEditorLayer(app);
-      layer.removeAllFeatures();
+      layer.removeFeaturesById(['_shape']);
     },
 
     showFeatureInfo: function(feature) {
