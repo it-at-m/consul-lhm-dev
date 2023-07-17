@@ -156,6 +156,8 @@ de:
           enable_tags_description: Aktivieren Sie Tags für dieses Projekt
           enable_sdgs: SDGs aktivieren
           enable_sdgs_description: Aktivieren Sie die UN-Nachhaltigkeitsziele für dieses Projekt
+          vc_map_enabled: Virtual City 3D Maps aktivieren
+          vc_map_enabled_description: Aktiviert die 3D Karten von [Virtual City Systems]
         sidebar:
           show_notification_subscription_toggler: Benachrichtigungen
           show_notification_subscription_toggler_description: Aktivieren Sie die Projektbenachrichtigungen in der rechten Seitenleiste
