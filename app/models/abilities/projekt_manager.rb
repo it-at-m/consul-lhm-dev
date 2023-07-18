@@ -78,17 +78,17 @@ module Abilities
       can :block, User
       cannot :block, User, id: user.id
 
-      can :moderate, Proposal, projekt: { projekt_managers: { id: user.projekt_manager.id }}
-      can :hide, Proposal, hidden_at: nil, projekt: { projekt_managers: { id: user.projekt_manager.id }}
+      can :moderate, Proposal, projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
+      can :hide, Proposal, hidden_at: nil, projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
       can :ignore_flag, Proposal, ignored_flag_at: nil,
                                   hidden_at: nil,
-                                  projekt: { projekt_managers: { id: user.projekt_manager.id }}
+                                  projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
 
-      can :moderate, Debate, projekt: { projekt_managers: { id: user.projekt_manager.id }}
-      can :hide, Debate, hidden_at: nil, projekt: { projekt_managers: { id: user.projekt_manager.id }}
+      can :moderate, Debate, projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
+      can :hide, Debate, hidden_at: nil, projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
       can :ignore_flag, Debate, ignored_flag_at: nil,
                                 hidden_at: nil,
-                                projekt: { projekt_managers: { id: user.projekt_manager.id }}
+                                projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
 
       can :moderate, Budget::Investment, budget: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
       can :hide, Budget::Investment, hidden_at: nil,
