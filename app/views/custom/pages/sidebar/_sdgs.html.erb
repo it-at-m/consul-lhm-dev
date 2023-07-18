@@ -1,6 +1,6 @@
-<div class="sidebar-divider"></div>
-<h2 class="sidebar-title"><%= t("custom.sdg.goals.filter.heading") %></h2>
-
 <% if projekt.sdg_goals.any? %>
+  <div class="sidebar-divider"></div>
+  <h2 class="sidebar-title"><%= t("custom.sdg.goals.filter.heading") %></h2>
+
   <%= render SDG::TagListComponent.new(projekt) %>
 <% end %>

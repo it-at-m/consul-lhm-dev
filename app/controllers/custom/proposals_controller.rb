@@ -6,7 +6,6 @@ class ProposalsController
   include Takeable
   include ProjektLabelAttributes
 
-  before_action :process_tags, only: [:create, :update]
   before_action :set_projekts_for_selector, only: [:new, :edit, :create, :update]
 
   def index_customization
@@ -20,6 +19,9 @@ class ProposalsController
       selected_parent_projekt_id = get_highest_unique_parent_projekt_id(@selected_projekts_ids)
       @selected_parent_projekt = Projekt.find_by(id: selected_parent_projekt_id)
     end
+
+    related_projekt_ids = @resources.joins(projekt_phase: :projekt).pluck("projekts.id").uniq
+    related_projekts = Projekt.where(id: related_projekt_ids)
 
     @geozones = Geozone.all
     @selected_geozone_affiliation = params[:geozone_affiliation] || 'all_resources'
@@ -39,10 +41,19 @@ class ProposalsController
     @top_level_active_projekts = Projekt.top_level.current.where(id: @scoped_projekt_ids)
     @top_level_archived_projekts = Projekt.top_level.expired.where(id: @scoped_projekt_ids)
 
+    @categories = Tag.category.joins(:taggings)
+      .where(taggings: { taggable_type: "Projekt", taggable_id: related_projekt_ids }).order(:name).uniq
+
+    if params[:sdg_goals].present?
+      sdg_goal_ids = SDG::Goal.where(code: params[:sdg_goals].split(",")).ids
+      @sdg_targets = SDG::Target.where(goal_id: sdg_goal_ids).joins(:relations)
+        .where(sdg_relations: { relatable_type: "Projekt", relatable_id: related_projekt_ids })
+    end
+
     unless params[:search].present?
       take_by_my_posts
-      take_by_tag_names
-      take_by_sdgs
+      take_by_tag_names(related_projekts)
+      take_by_sdgs(related_projekts)
       take_by_geozone_affiliations
       take_by_geozone_restrictions
       take_by_projekts(@scoped_projekt_ids)
@@ -175,21 +186,6 @@ class ProposalsController
   end
 
   private
-    def process_tags
-      if params[:proposal][:tags]
-        params[:tags] = params[:proposal][:tags].split(',')
-        params[:proposal].delete(:tags)
-      end
-
-      params[:proposal][:tag_list_custom]&.split(",")&.each do |t|
-        next if t.strip.blank?
-        Tag.find_or_create_by name: t.strip
-      end
-      params[:proposal][:tag_list] ||= ""
-      params[:proposal][:tag_list] += ((params[:proposal][:tag_list_predefined] || "").split(",") + (params[:proposal][:tag_list_custom] || "").split(",")).join(",")
-      params[:proposal].delete(:tag_list_predefined)
-      params[:proposal].delete(:tag_list_custom)
-    end
 
     def proposal_params
       attributes = [:video_url, :responsible_name, :tag_list, :on_behalf_of,

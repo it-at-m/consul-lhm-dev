@@ -62,30 +62,8 @@
       </div>
     <% end %>
 
-    <% if (extended_feature?("modulewide.enable_categories") && categories.any?) ||
-        SDG::ProcessEnabled.new(f.object).enabled?    %>
-    <% end %>
-
-    <div>
-      <%if categories.any? %>
-        <div id="category_tags" class="tags">
-          <%= f.label :category_tag_list, t("proposals.form.tag_category_label") %>
-          <% categories.each do |tag| %>
-            <a class="js-add-tag-link" data-category-id="<%= tag.id %>"><%= tag.name %></a>
-          <% end %>
-        </div>
-        <br>
-      <%=f.hidden_field :tag_list_predefined, value: debate.tags.reject{|t| !['category'].include?(t.kind)}.map(&:name).join(","), class: "js-tag-list list-tags predefined"%>
-      <%end%>
-    </div>
-
     <div class="documents" id="attach-documents">
       <%= render "documents/nested_documents", f: f %>
-    </div>
-
-    <div id="sdgs-selector" class='row margin-top'>
-      <br>
-      <%= render SDG::RelatedListSelectorComponent.new(f) %>
     </div>
   </fieldset>
 

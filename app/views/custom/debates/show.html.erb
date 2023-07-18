@@ -68,10 +68,6 @@
                         max_documents_allowed: Debate.max_documents_allowed %>
           <% end %>
 
-          <div class='margin-top margin-bottom'>
-            <%= render "shared/tags", taggable: @debate, limit: 5 %>
-          </div>
-
           <% if projekt_phase_feature?(@debate.projekt_phase, 'resource.show_related_content') %>
             <%= render "relationable/related_content", relationable: @debate %>
           <% end %>

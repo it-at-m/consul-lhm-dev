@@ -32,7 +32,6 @@
         <% cache [locale_and_user_status(proposal),
                   proposal,
                   proposal.projekt_phase,
-                  params[:tags],
                   params[:projekts],
                   params[:geozone_affiliation],
                   params[:affiliated_geozones],
@@ -55,7 +54,6 @@
               <div class="truncate"></div>
             <% end %>
           </div>
-          <%= render "shared/tags", taggable: proposal, limit: 5 %>
         <% end %>
       </div>
 

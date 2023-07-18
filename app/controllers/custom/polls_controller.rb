@@ -6,7 +6,6 @@ class PollsController < ApplicationController
   include ProjektControllerHelper
   include Takeable
 
-  before_action :load_categories, only: [:index]
   before_action :set_geo_limitations, only: [:show, :results, :stats]
 
   helper_method :resource_model, :resource_name
@@ -28,14 +27,26 @@ class PollsController < ApplicationController
       .send(@current_filter)
       .includes(:geozones)
 
+    related_projekt_ids = @resources.joins(projekt_phase: :projekt).pluck("projekts.id").uniq
+    related_projekts = Projekt.where(id: related_projekt_ids)
+
     @scoped_projekt_ids = Poll.scoped_projekt_ids_for_index(current_user)
 
     @top_level_active_projekts = Projekt.top_level.current.where(id: @scoped_projekt_ids)
     @top_level_archived_projekts = Projekt.top_level.expired.where(id: @scoped_projekt_ids)
 
+    @categories = Tag.category.joins(:taggings)
+      .where(taggings: { taggable_type: "Projekt", taggable_id: related_projekt_ids }).order(:name).uniq
+
+    if params[:sdg_goals].present?
+      sdg_goal_ids = SDG::Goal.where(code: params[:sdg_goals].split(",")).ids
+      @sdg_targets = SDG::Target.where(goal_id: sdg_goal_ids).joins(:relations)
+        .where(sdg_relations: { relatable_type: "Projekt", relatable_id: related_projekt_ids })
+    end
+
     unless params[:search].present?
-      take_by_tag_names
-      take_by_sdgs
+      take_by_tag_names(related_projekts)
+      take_by_sdgs(related_projekts)
       take_by_geozone_affiliations
       take_by_polls_geozone_restrictions
       take_by_projekts(@scoped_projekt_ids)

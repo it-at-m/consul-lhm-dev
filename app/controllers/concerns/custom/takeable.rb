@@ -52,38 +52,37 @@ module Takeable
       .distinct
   end
 
-  def take_by_tag_names
+  def take_by_tag_names(related_projekts)
     if params[:tags].present?
-      @resources = @resources.tagged_with(params[:tags].split(","), all: true, any: true)
+      tagged_related_projekt_ids = related_projekts
+        .tagged_with(params[:tags]
+        .split(","), all: true, any: true)
+        .ids
+
+      @resources = @resources
+        .joins(projekt_phase: :projekt)
+        .where(projekts: { id: tagged_related_projekt_ids })
+
       @all_resources = @resources
     end
   end
 
-  def take_by_sdgs
-
-    if params[:sdg_goals].present? && params[:sdg_targets].present?
-      @filtered_goals = params[:sdg_goals].split(',').map{ |code| code.to_i }
-      @filtered_target = params[:sdg_targets].split(',')[0]
-
-      @resources = @resources
-        .joins(:sdg_goals).where(sdg_goals: { code: @filtered_goals })
-        .joins(:sdg_global_targets).where(sdg_targets: { code: @filtered_target })
-        .distinct
-
-      @all_resources = @resources
-      return
-    end
-
-    if params[:sdg_goals].present?
-      @filtered_goals = params[:sdg_goals].split(',').map{ |code| code.to_i }
-      @resources = @resources.joins(:sdg_goals).where(sdg_goals: { code: @filtered_goals }).distinct
-      @all_resources = @resources
-      return
-    end
-
+  def take_by_sdgs(related_projekts)
     if params[:sdg_targets].present?
-      @filtered_target = params[:sdg_targets].split(',')[0]
-      @resources = @resources.joins(:sdg_global_targets).where(sdg_targets: { code: @filtered_target }).distinct
+      @filtered_goals = params[:sdg_goals].split(",").map(&:to_i)
+      selected_related_projekt_ids = related_projekts
+        .joins(:sdg_global_targets).where(sdg_targets: { code: params[:sdg_targets] }).ids.uniq
+    elsif params[:sdg_goals].present?
+      @filtered_goals = params[:sdg_goals].split(",").map(&:to_i)
+      selected_related_projekt_ids = related_projekts
+        .joins(:sdg_goals).where(sdg_goals: { code: @filtered_goals }).ids.uniq
+    end
+
+    if selected_related_projekt_ids.present?
+      @resources = @resources
+        .joins(projekt_phase: :projekt)
+        .where(projekts: { id: selected_related_projekt_ids })
+
       @all_resources = @resources
     end
   end

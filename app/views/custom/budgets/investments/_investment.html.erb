@@ -29,14 +29,11 @@
 
     <div class='resource-info' data-equalizer='details'>
       <div class='column small-12 medium-6 large-8 resource-details' data-equalizer-watch='details'>
-
         <h4 class='resource-name'><%= link_to investment.title, investment %></h4>
         <div class="resource-summary margin-bottom">
           <%= wysiwyg(investment.description) %>
           <div class="truncate"></div>
         </div>
-        <% # render "shared/tags", taggable: investment, limit: 5 %>
-
       </div>
       <div class='column small-12 medium-6 large-4 resource-participate table' data-equalizer-watch='details'>
         <div class='table-cell align-middle'>

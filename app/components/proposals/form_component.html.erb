@@ -85,25 +85,6 @@
     <div id="external-video-url-fields" style="clear:left;">
       <%= f.text_field :video_url, hint: t("proposals.form.proposal_video_url_note") %>
     </div>
-
-    <div>
-
-      <%if categories.any? %>
-        <div id="category_tags" class="tags">
-          <%= f.label :category_tag_list, t("proposals.form.tag_category_label") %>
-          <% categories.each do |tag| %>
-            <a class="js-add-tag-link" data-category-id="<%= tag.id %>"><%= tag.name %></a>
-          <% end %>
-        </div>
-        <br>
-      <%=f.hidden_field :tag_list_predefined, value: proposal.tags.reject{|t| !['category'].include?(t.kind)}.map(&:name).join(","), class: "js-tag-list list-tags predefined"%>
-      <%end%>
-    </div>
-
-    <div id="sdgs-selector" class='row margin-top'>
-      <br>
-      <%= render SDG::RelatedListSelectorComponent.new(f) %>
-    </div>
   </fieldset>
 
   <div class="actions">

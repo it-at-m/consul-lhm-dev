@@ -64,8 +64,9 @@
             <%= render "shared/sidebar_filter/geozone_restrictions" %>
           <% end %>
           <%= render "shared/categories", taggable: "debate" %>
+          <%= render SDG::Goals::TagCloudComponent.new("Debate", sdg_targets: @sdg_targets) %>
           <%#= render "shared/tag_cloud", taggable: "debate" %>
-          <%= render SDG::Goals::TagCloudComponent.new("Debate") %>
+
           <% if extended_feature?('debates.enable_my_posts_filter') %>
             <%= render "shared/sidebar_filter/my_posts" %>
           <% end %>
