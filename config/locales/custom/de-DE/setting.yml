@@ -150,10 +150,8 @@ de:
           allow_downvoting_comments_description: Aktivieren Sie den "Daumen nach unten"-Button in den Kommentaren
           set_default_sorting_to_newest: Standardsortierung auf 'Neueste' umstellen
           set_default_sorting_to_newest_description: Zeigt standardmäßig die neuesten Beiträge anstatt der aktivsten Beiträge an
-          enable_tags: Tags aktivieren
-          enable_tags_description: Aktivieren Sie Tags für dieses Projekt
-          enable_sdgs: SDGs aktivieren
-          enable_sdgs_description: Aktivieren Sie die UN-Nachhaltigkeitsziele für dieses Projekt
+          show_in_sidebar_filter: Projekt in der Projektseitenleiste anzeigen
+          show_in_sidebar_filter_description: Zeigt das Projekt in der Projektseitenleiste auf den übersichtsseiten an
           vc_map_enabled: Virtual City 3D Maps aktivieren
           vc_map_enabled_description: Aktiviert die 3D Karten von [Virtual City Systems]
         sidebar:

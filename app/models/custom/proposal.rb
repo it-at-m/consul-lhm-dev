@@ -51,14 +51,13 @@ class Proposal < ApplicationRecord
 
   def self.scoped_projekt_ids_for_index(current_user)
     Projekt.top_level
-      .map{ |p| p.all_children_projekts.unshift(p) }
+      .map { |p| p.all_children_projekts.unshift(p) }
       .flatten.select do |projekt|
-        ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.main.activate').value.present? &&
-        ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.proposals.show_in_sidebar_filter').value.present? &&
+        ProjektSetting.find_by(projekt: projekt, key: "projekt_feature.main.activate").value.present? &&
+        ProjektSetting.find_by(projekt: projekt, key: "projekt_feature.general.show_in_sidebar_filter").value.present? &&
         projekt.all_parent_projekts.unshift(projekt).none? { |p| p.hidden_for?(current_user) } &&
         projekt.all_children_projekts.unshift(projekt).any? { |p| p.proposal_phases.any?(&:current?) || p.proposals.base_selection.any? }
-      end
-      .pluck(:id)
+      end.pluck(:id)
   end
 
   def self.scoped_projekt_ids_for_footer(projekt)

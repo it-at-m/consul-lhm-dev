@@ -38,10 +38,10 @@ class Poll < ApplicationRecord
 
   def self.scoped_projekt_ids_for_index(current_user)
     Projekt.top_level
-      .map{ |p| p.all_children_projekts.unshift(p) }
+      .map { |p| p.all_children_projekts.unshift(p) }
       .flatten.select do |projekt|
-        ProjektSetting.find_by(projekt: projekt, key: 'projekt_feature.main.activate').value.present? &&
-        ProjektSetting.find_by(projekt: projekt, key: 'projekt_feature.polls.show_in_sidebar_filter').value.present? &&
+        ProjektSetting.find_by(projekt: projekt, key: "projekt_feature.main.activate").value.present? &&
+        ProjektSetting.find_by(projekt: projekt, key: "projekt_feature.general.show_in_sidebar_filter").value.present? &&
         projekt.all_parent_projekts.unshift(projekt).none? { |p| p.hidden_for?(current_user) } &&
         Poll.base_selection.where(projekt_id: projekt.all_children_ids.unshift(projekt.id)).any?
       end.pluck(:id)

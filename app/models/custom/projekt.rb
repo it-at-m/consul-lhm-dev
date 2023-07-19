@@ -180,10 +180,6 @@ class Projekt < ApplicationRecord
       .select { |p| p.visible_for?(user) }
   }
 
-  scope :show_in_sidebar, ->(resources_name) {
-    joins("INNER JOIN projekt_settings sis ON projekts.id = sis.projekt_id")
-      .where("sis.key": "projekt_feature.#{resources_name}.show_in_sidebar_filter", "sis.value": "active") }
-
   scope :with_active_feature, ->(projekt_feature_key) {
     joins("INNER JOIN projekt_settings waf ON projekts.id = waf.projekt_id")
       .where("waf.key": "projekt_feature.#{projekt_feature_key}", "waf.value": "active") }

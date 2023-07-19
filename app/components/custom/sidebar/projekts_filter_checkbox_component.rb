@@ -28,7 +28,7 @@ class Sidebar::ProjektsFilterCheckboxComponent < ApplicationComponent
 
     def selectable_children
       projekt.children.select do |projekt|
-        (projekt.all_children_ids.unshift(projekt.id)).any?
+        (projekt.all_children_ids.unshift(projekt.id)  & @scoped_projekt_ids).any?
       end
     end
 

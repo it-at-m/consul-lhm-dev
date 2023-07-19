@@ -40,7 +40,6 @@ class ProjektPhaseSetting < ApplicationRecord
       {
         "ProjektPhase::DebatePhase" => {
           "feature.general.only_admins_create_debates": "",
-          "feature.general.show_in_sidebar_filter": "active",
 
           "feature.form.allow_attached_image": "active",
           "feature.form.allow_attached_documents": "",
@@ -56,7 +55,6 @@ class ProjektPhaseSetting < ApplicationRecord
 
         "ProjektPhase::ProposalPhase" => {
           "feature.general.only_admins_create_proposals": "",
-          "feature.general.show_in_sidebar_filter": "active",
 
           "feature.form.allow_attached_image": "active",
           "feature.form.enable_summary": "",
@@ -82,8 +80,6 @@ class ProjektPhaseSetting < ApplicationRecord
         },
 
         "ProjektPhase::VotingPhase" => {
-          "feature.general.show_in_sidebar_filter": "active",
-
           "feature.resource.intermediate_poll_results_for_admins": "active",
           "feature.resource.additional_information": "active",
           "feature.resource.additional_info_for_each_answer": "active",
