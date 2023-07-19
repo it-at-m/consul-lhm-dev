@@ -8,14 +8,23 @@
   <% end %>
 
   <%= link_to extended_sidebar_map_page_path(projekt.page.slug), remote: true do %>
-    <div class='sidebar-projekt-map'>
-      <%= render Shared::MapComponent.new(
-         map_location: projekt.map_location,
-         parent_class: "proposals_sidebar",
-         projekt: projekt,
-         show_admin_shape: projekt.map_location.show_admin_shape?
-       ) %>
-    </div>
+		<div class='sidebar-projekt-map'>
+      <% if projekt.vc_map_enabled? %>
+        <%= render Shared::VCMapComponent.new(
+          map_location: projekt.map_location,
+          parent_class: "proposals_sidebar",
+          projekt: projekt,
+          show_admin_shape: projekt.map_location.show_admin_shape?
+        ) %>
+      <% else %>
+        <%= render Shared::MapComponent.new(
+          map_location: projekt.map_location,
+          parent_class: "proposals_sidebar",
+          projekt: projekt,
+          show_admin_shape: projekt.map_location.show_admin_shape?
+        ) %>
+      <% end %>
+		</div>
   <% end %>
 
   <div id="extended-sidebar-map">

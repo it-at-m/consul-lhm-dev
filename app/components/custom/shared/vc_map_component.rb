@@ -34,6 +34,10 @@ class Shared::VCMapComponent < ApplicationComponent
     end
   end
 
+  def show_controls?
+    parent_class != "proposals_sidebar"
+  end
+
   private
 
     def prepare_map_settings
