@@ -32,9 +32,9 @@
       <% cache [locale_and_user_status(@debate),
                 @debate,
                 @debate.author,
-                @debate.projekt,
+                @debate.projekt_phase,
                 Flag.flagged?(current_user, @debate),
-                "show" ] do %>
+                "show"] do %>
         <div class="small-12 medium-9 column">
           <% if @debate.conflictive? %>
             <div data-alert class="callout alert margin-top">
@@ -46,25 +46,29 @@
             <%= render_image(@debate.image, :large, true) %>
           <% end %>
 
-          <% if @debate.projekt_labels.any? %>
-            <div class='resource-projekt-labels' style='margin-bottom:30px;'>
-              <%= render Shared::ProjektLabelsComponent.new(resource: @debate) %>
-            </div>
-          <% end %>
+          <div class="resource-taggings margin-bottom">
+            <% if @debate.projekt_labels.any? %>
+              <div class="resource-projekt-labels">
+                <%= render Shared::ProjektLabelsComponent.new(resource: @debate) %>
+              </div>
+            <% end %>
+
+            <% if @debate.sentiment %>
+              <div class="resource-sentiment">
+                <%= render Shared::SentimentsComponent.new(resource: @debate) %>
+              </div>
+            <% end %>
+          </div>
 
           <%= auto_link_already_sanitized_html wysiwyg(@debate.description) %>
 
-          <% if projekt_feature?(@debate.projekt, "debates.allow_attached_documents") %>
+          <% if projekt_phase_feature?(@debate.projekt_phase, "form.allow_attached_documents") %>
             <%= render "documents/documents",
                         documents: @debate.documents,
                         max_documents_allowed: Debate.max_documents_allowed %>
           <% end %>
 
-          <div class='margin-top margin-bottom'>
-            <%= render "shared/tags", taggable: @debate, limit: 5 %>
-          </div>
-
-          <% if projekt_feature?(@debate.projekt, 'debates.show_related_content') %>
+          <% if projekt_phase_feature?(@debate.projekt_phase, 'resource.show_related_content') %>
             <%= render "relationable/related_content", relationable: @debate %>
           <% end %>
         </div>
@@ -88,7 +92,7 @@
           </div>
         <% end %>
 
-        <% if projekt_feature?(@debate&.projekt, 'debates.allow_voting') %>
+        <% if projekt_phase_feature?(@debate.projekt_phase, 'resource.allow_voting') %>
           <div class="sidebar-divider"></div>
           <h2><%= t("votes.supports") %></h2>
           <div id="<%= dom_id(@debate) %>_votes">
@@ -100,9 +104,9 @@
 
         <% cache [locale_and_user_status(@debate),
                   @debate,
-                  @debate.projekt,
+                  @debate.projekt_phase,
                   "flag"] do %>
-          <% if projekt_feature?(@debate.projekt, 'debates.show_report_button_in_sidebar') %>
+          <% if projekt_phase_feature?(@debate.projekt_phase, 'resource.show_report_button_in_sidebar') %>
             <%= render "shared/participation/flag", resource: @debate %>
           <% end %>
 
@@ -114,7 +118,7 @@
             mobile: @debate.title
           %>
 
-          <% if current_user && projekt_feature?(@debate.projekt, 'debates.show_related_content') %>
+          <% if current_user && projekt_phase_feature?(@debate.projekt_phase, 'resource.show_related_content') %>
             <div class="sidebar-divider"></div>
             <h2><%= t("custom.shared.show.related_title") %></h2>
             <p><%= t("custom.shared.show.related_text") %></p>
@@ -130,7 +134,7 @@
     </div>
   </div>
 
-  <% if projekt_feature?(@debate.projekt, 'debates.show_comments') %>
+  <% if projekt_phase_feature?(@debate.projekt_phase, 'resource.show_comments') %>
     <div class="additional-content margin-top">
       <div class="filter-subnav">
         <div class="row">

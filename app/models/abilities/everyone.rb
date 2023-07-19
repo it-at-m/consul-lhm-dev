@@ -34,6 +34,9 @@ module Abilities
       can :read, ::SDG::Phase
 
       can [:read, :json_data], DeficiencyReport
+
+      can :toggle_subscription, ProjektSubscription
+      can :toggle_subscription, ProjektPhase
     end
   end
 end

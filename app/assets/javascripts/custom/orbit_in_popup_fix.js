@@ -11,6 +11,13 @@
 
         new Foundation.Orbit(revealElement)
       })
+
+
+      $('[data-accordion]').on('down.zf.accordion', function(event, element){
+        element.find('.orbit-container').each(function(index, element){
+          $(element).css('height', '550px')
+        })
+      });
     }
   }
 }).call(this);

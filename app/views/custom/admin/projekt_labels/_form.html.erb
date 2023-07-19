@@ -1,0 +1,25 @@
+<%= translatable_form_for @projekt_label, url: polymorphic_path([@namespace, @projekt_phase, @projekt_label]) do |f| %>
+  <%= render "shared/errors", resource: @projekt_label %>
+  <%= render "shared/globalize_locales", resource: @projekt_label %>
+
+  <%= f.translatable_fields do |translations_form| %>
+    <div class="row">
+      <div class="small-12 medium-6 large-4 column">
+        <%= translations_form.text_field :name %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="">
+    <%= f.label :icon %>
+    <div class='admin-deficiency-report-category-icons-selector'>
+      <%= f.collection_radio_buttons :icon, Iconable::AVAILABLE_ICONS, :first, :first do |rb| %>
+        <%= rb.label { rb.radio_button + "<i class=\"fas fa-#{rb.object.first}\"></i>".html_safe } %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="">
+    <%= f.submit class: "button success" %>
+  </div>
+<% end %>

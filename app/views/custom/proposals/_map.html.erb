@@ -1,11 +1,11 @@
 <div class="map proposals-map not-print">
-  <% if @selected_parent_projekt %>
+  <% if @projekt_phase %>
     <%= render Shared::MapComponent.new(
-      map_location: @selected_parent_projekt.map_location,
+      map_location: @projekt_phase.map_location,
       parent_class: "proposals",
       process_coordinates: @proposals_coordinates,
-      projekt: @selected_parent_projekt,
-      show_admin_shape: @selected_parent_projekt.map_location.show_admin_shape?
+      projekt_phase: @projekt_phase,
+      show_admin_shape: @projekt_phase.map_location.show_admin_shape?
     ) %>
 
   <% else %>
@@ -18,7 +18,7 @@
 </div>
 <div class='expand-overview-map-wrapper'>
   <div class='expand-overview-map small js-expand-overview-map not-print wide'>
-    <%= t('custom.proposals.index.show_larger_map') %>
+    <%= t("custom.proposals.index.show_larger_map") %>
   </div>
 </div>
 <div class="clear"></div>

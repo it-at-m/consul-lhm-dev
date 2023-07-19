@@ -3,9 +3,9 @@ require_dependency Rails.root.join("app", "controllers", "legislation", "annotat
 class Legislation::AnnotationsController < Legislation::BaseController
   def comments
     @annotation = Legislation::Annotation.find(params[:annotation_id])
-    @draft_version = @annotation.draft_version
-    @current_projekt = @draft_version.process.projekt
     @comment = @annotation.comments.new
+
+    params[:projekt_phase_id] = @annotation.draft_version.projekt_phase.id
   end
 
   def new_comment
@@ -15,6 +15,7 @@ class Legislation::AnnotationsController < Legislation::BaseController
 
     @current_projekt = @draft_version.process.projekt #custom line
     if @comment.save
+      NotificationServices::NewCommentNotifier.call(@comment.id) # custom
       @comment = @annotation.comments.new
     end
 

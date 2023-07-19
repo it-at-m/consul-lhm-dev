@@ -1,0 +1,30 @@
+<%= render "custom/admin/projekt_phases/heading" %>
+<%= render "custom/admin/projekt_phases/nav_bar" %>
+
+<div class="row">
+  <div class="column">
+    <h2><%= t("custom.admin.projekt_phases.restrictions.page_title") %></h2>
+  </div>
+</div>
+
+<%= form_with model: @projekt_phase, url: namespace_projekt_phase_path, scope: :projekt_phase do |f| %>
+  <%= hidden_field_tag :action_name, action_name %>
+
+  <div class="row">
+    <div class="column">
+      <div class="phase-restrictions">
+        <%= render "custom/admin/projekt_phases/restrictions/verified_restriction", f: f %>
+        <%= render "custom/admin/projekt_phases/restrictions/geozone_restriction", f: f %>
+        <%= render "custom/admin/projekt_phases/restrictions/extended_geozone_restriction", f: f %>
+        <%= render "custom/admin/projekt_phases/restrictions/age_restriction", f: f %>
+        <%= render "custom/admin/projekt_phases/restrictions/individual_group_values_restriction", f: f %>
+      </div>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='column large-8'>
+      <%= f.submit(t("custom.admin.projekt_phases.shared.update_button"), class: "button success") %>
+    </div>
+  </div>
+<% end %>

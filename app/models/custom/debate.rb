@@ -4,23 +4,25 @@ class Debate
   include Imageable
   include Documentable
   include Labelable
+  include Sentimentable
 
-  belongs_to :projekt, optional: true, touch: true
-  has_one :debate_phase, through: :projekt
-  has_many :geozone_restrictions, through: :debate_phase
-  has_many :geozone_affiliations, through: :projekt
+  belongs_to :old_projekt, class_name: "Projekt", foreign_key: "projekt_id", optional: true # TODO: remove column after data migration con1538
 
-  delegate :votable_by?, to: :debate_phase
-  delegate :comments_allowed?, to: :debate_phase
+  delegate :projekt, to: :projekt_phase, allow_nil: true
+  belongs_to :projekt_phase, touch: true
+  has_many :geozone_restrictions, through: :projekt_phase
+  has_many :geozone_affiliations, through: :projekt_phase
 
-  validates :projekt_id, presence: true
+  delegate :votable_by?, to: :projekt_phase
+  delegate :comments_allowed?, to: :projekt_phase
+  delegate :downvoting_allowed?, to: :projekt_phase
+
+  validates :projekt_phase, presence: true
 
   # validates :terms_of_service, acceptance: { allow_nil: false }, on: :create
-  validates :terms_data_storage, acceptance: { allow_nil: false }, on: :create #custom
-  validates :terms_data_protection, acceptance: { allow_nil: false }, on: :create #custom
-  validates :terms_general, acceptance: { allow_nil: false }, on: :create #custom
+  validates :resource_terms, acceptance: { allow_nil: false }, on: :create #custom
 
-  scope :with_current_projekt, -> { joins(:projekt).merge(Projekt.current) }
+  scope :with_current_projekt, -> { joins(projekt_phase: :projekt).merge(Projekt.current) }
   scope :by_author, ->(user_id) {
     return if user_id.nil?
 
@@ -37,7 +39,7 @@ class Debate
   scope :seen, -> { where.not(ignored_flag_at: nil) }
   scope :unseen, -> { where(ignored_flag_at: nil) }
 
-  alias_attribute :projekt_phase, :debate_phase
+  scope :for_public_render, -> { all }
 
   def self.debates_orders(user = nil)
     orders = %w[hot_score created_at alphabet votes_total random]
@@ -47,21 +49,26 @@ class Debate
 
   def self.scoped_projekt_ids_for_index(current_user)
     Projekt.top_level
-      .map{ |p| p.all_children_projekts.unshift(p) }
+      .map { |p| p.all_children_projekts.unshift(p) }
       .flatten.select do |projekt|
-        ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.main.activate').value.present? &&
-        ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.debates.show_in_sidebar_filter').value.present? &&
+        ProjektSetting.find_by(projekt: projekt, key: "projekt_feature.main.activate").value.present? &&
+        ProjektSetting.find_by(projekt: projekt, key: "projekt_feature.general.show_in_sidebar_filter").value.present? &&
         projekt.all_parent_projekts.unshift(projekt).none? { |p| p.hidden_for?(current_user) } &&
-        projekt.all_children_projekts.unshift(projekt).any? { |p| p.debate_phase.current? || p.debates.any? }
-      end
-      .pluck(:id)
+        projekt.all_children_projekts.unshift(projekt).any? { |p| p.debate_phases.any?(&:current?) || p.debates.any? }
+      end.pluck(:id)
   end
 
-  def self.scoped_projekt_ids_for_footer(projekt)
-    projekt.top_parent.all_children_projekts.unshift(projekt.top_parent).select do |projekt|
+  def self.scoped_projekt_phase_ids_for_footer(projekt_phase)
+    projekt = projekt_phase.projekt
+
+    scoped_projekts = projekt.top_parent.all_children_projekts.unshift(projekt.top_parent).select do |projekt|
       ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.main.activate').value.present? &&
-      projekt.all_children_projekts.unshift(projekt).any? { |p| p.debate_phase.current? || p.debates.any? }
-    end.pluck(:id)
+        projekt.all_children_projekts.unshift(projekt).any? { |p| p.debate_phases.any?(&:current?) || p.debates.any? }
+    end
+
+    scoped_projekt_phases = scoped_projekts.map(&:debate_phases).flatten.select do |projekt_phase|
+      projekt_phase.projekt != projekt
+    end.push(projekt_phase).pluck(:id)
   end
 
   def register_vote(user, vote_value)

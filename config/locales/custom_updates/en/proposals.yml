@@ -5,6 +5,7 @@ en:
         dashboard: Save as draft and publish later
         publish: Publish proposal now
       form:
+        tagging: Tagging
         tags_custom: User tags
         tags_placeholder: Separate the tags with a comma (',')
         required: Your proposal

@@ -3,7 +3,7 @@ class ProjektPhasesController < ApplicationController
   # include ProposalsHelper
   # include ProjektControllerHelper
 
-  skip_authorization_check
+  skip_authorization_check only: [:selector_hint_html, :form_heading_text, :map_html]
 
   def selector_hint_html
     projekt_phase = ProjektPhase.find(params[:id])
@@ -16,5 +16,34 @@ class ProjektPhasesController < ApplicationController
     else
       render html: default_text
     end
+  end
+
+  def form_heading_text
+    projekt_phase = ProjektPhase.find(params[:id])
+    default_text = t("#{projekt_phase.resources_name}.new.start_new")
+
+    if projekt_phase.resource_form_title.present?
+      render html: projekt_phase.resource_form_title.html_safe
+    else
+      render html: default_text
+    end
+  end
+
+  def toggle_subscription
+    @projekt_phase = ProjektPhase.find(params[:id])
+    authorize! :toggle_subscription, @projekt_phase
+
+    redirect_to new_user_session_path and return unless current_user
+
+    if @projekt_phase.subscribed?(current_user)
+      @projekt_phase.unsubscribe(current_user)
+    else
+      @projekt_phase.subscribe(current_user)
+    end
+  end
+
+  def map_html
+    @projekt_phase = ProjektPhase.find(params[:id])
+    @projekt = @projekt_phase.projekt
   end
 end

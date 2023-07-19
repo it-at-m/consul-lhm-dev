@@ -1,0 +1,9 @@
+<% if projekt_phase.projekt_labels.any? %>
+  <div class="sidebar-divider"></div>
+  <h2 class="sidebar-title projekt-tag-chip-projekt-labels projekt-tag-chip-icon"><%= projekt_phase.projekt_labels_label_text %></h2>
+  <br>
+
+  <div id="projekt-labels-sidebar">
+    <%= render Shared::ProjektLabelsComponent.new(projekt_phase_id: projekt_phase.id) %>
+  </div>
+<% end %>

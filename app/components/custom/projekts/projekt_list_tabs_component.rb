@@ -23,7 +23,8 @@ class Projekts::ProjektListTabsComponent < ApplicationComponent
         "index_order_ongoing",
         "index_order_upcoming",
         "index_order_expired",
-        "index_order_individual_list"
+        "index_order_individual_list",
+        "index_order_drafts"
       ] & @current_active_orders
     end
 

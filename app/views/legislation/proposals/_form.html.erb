@@ -60,26 +60,14 @@
 
     <div class="small-12 column">
       <% if @proposal.new_record? %>
-
-        <%= f.check_box :terms_data_storage,
-          title: t("custom.terms.data_storage.title"),
-          label: t("custom.terms.data_storage.label"),
-          class: "checkbox-label--aligned" %>
-
-        <%= f.check_box :terms_data_protection,
-          title: t("custom.terms.data_protection.title"),
-          label: t("custom.terms.data_protection.label",
+        <%= f.check_box :resource_terms,
+          title: t("custom.terms.resource_terms.title"),
+          label: t("custom.terms.resource_terms.label",
                    privacy_link: link_to(t("custom.terms.privacy_link.text"), "/privacy",
-                                         title: t("shared.target_blank"), target: "_blank")),
-          class: "checkbox-label--aligned" %>
-
-        <%= f.check_box :terms_general,
-          title: t("custom.terms.general.title"),
-          label: t("custom.terms.general.label",
-                   terms_link: link_to(t("custom.terms.terms_link.text"), "/privacy",
+                                         title: t("shared.target_blank"), target: "_blank"),
+                   terms_link: link_to(t("custom.terms.terms_link.text"), "/conditions",
                                        title: t("shared.target_blank"), target: "_blank")),
           class: "checkbox-label--aligned" %>
-
         <p><%= t("custom.terms.revoke_consent.text") %></p>
 
       <% end %>

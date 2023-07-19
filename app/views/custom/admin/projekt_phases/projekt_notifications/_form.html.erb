@@ -1,0 +1,13 @@
+<%= form_for(notification, url: polymorphic_path([@namespace, @projekt_phase, notification])) do |f| %>
+  <div class='small-12 medium-7'>
+    <%= f.text_field :title, { id: dom_id(notification, :edit_title) } %>
+  </div>
+
+  <div class='small-12 medium-7'>
+    <%= f.text_field :body, { id: dom_id(notification, :edit_body) } %>
+  </div>
+
+  <div>
+    <%= f.submit(t("custom.admin.projekt_phases.projekt_notifications.button"), class: "button") %>
+  </div>
+<% end %>

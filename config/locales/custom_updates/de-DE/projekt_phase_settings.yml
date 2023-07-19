@@ -1,0 +1,132 @@
+de:
+  custom:
+    projekt_phase_settings:
+      debates:
+        feature:
+          general:
+            only_admins_create_debates: Nur Admins können neue Diskussionen erstellen
+            only_admins_create_debates_description: Die Erstellung von neuen Diskussionen ist auf Admins beschränkt
+          form:    
+            allow_attached_image: Titelbild hinzufügen
+            allow_attached_image_description: Ermöglicht es den Bürger*innen ein Titelbild hinzuzufügen.
+            allow_attached_documents: Zusätzliche Dokumente
+            allow_attached_documents_description: Ermöglicht es den Nutzer:innen Dokumente der Diskussion anzuhängen
+          resource:    
+            allow_voting: Unterstützung von Diskussionen
+            allow_voting_description: Aktivieren Sie die Unterstützung von Diskussionen mit Daumen hoch und runter
+            allow_downvoting: Downvotes aktivieren
+            allow_downvoting_description: Aktivieren Sie den "Daumen nach unten"-Button
+            show_report_button_in_sidebar: Diskussion melden
+            show_report_button_in_sidebar_description: Aktivieren Sie die Melden-Funktion für Diskussionen
+            show_related_content: Verwandte Inhalte
+            show_related_content_description: Aktivieren Sie die Funktion “Verwandte Inhalte” für Diskussionen
+            show_comments: Kommentare
+            show_comments_description: Aktivieren Sie "Kommentare" für das Diskussionsmodul
+      proposals:
+        feature:
+          general:
+            only_admins_create_proposals: Nur Admins können neue Vorschläge erstellen
+            only_admins_create_proposals_description: Die Erstellung von neuen Vorschlägen ist auf Admins beschränkt
+          form:
+            allow_attached_image: Titelbild hinzufügen
+            allow_attached_image_description: Ermöglicht es den Bürger*innen ein Titelbild hinzuzufügen.
+            enable_summary: "\"Zusammenfassung\" anzeigen"
+            enable_summary_description: "Zeigt das Feld \"Zusammenfassung\" in den Vorschlägen an"
+            show_map: Karte für Vorschläge anzeigen
+            show_map_description: Zeigt die Karte für Vorschläge in diesem Projekt an
+            enable_geoman_controls_in_maps: Nutzer*innen ermöglichen Figuren in die Karte einzuzeichnen.
+            enable_geoman_controls_in_maps_description: Ermöglicht es den Nutzer*innen Rechtecke, Kreise etc. einzuzeichnen.
+            allow_attached_documents: Zusätzliche Dokumente
+            allow_attached_documents_description: Ermöglicht es den Nutzer:innen Dokumente den Vorschlägen anzuhängen
+            enable_external_video: Externes Video einbinden
+            enable_external_video_description: Ermöglicht es den Nutzer:innen externe Videos über YouTube und Vimeo einzubinden
+          resource:
+            allow_voting: Unterstützung von Vorschlägen
+            allow_voting_description: Aktivieren Sie die Unterstützung für Vorschläge
+            enable_proposal_support_withdrawal: Vorschlagsunterstützung zurückziehen
+            enable_proposal_support_withdrawal_description: Aktivieren Sie die Rücknahme der Vorschlagsunterstützung
+            quorum_for_proposals: Quorum für Vorschläge
+            quorum_for_proposals_description: Aktivieren Sie ein Quorum für Vorschläge
+            show_report_button_in_sidebar: Vorschlag melden
+            show_report_button_in_sidebar_description: Aktivieren Sie die Melden-Funktion für Vorschläge
+            show_follow_button_in_proposal_sidebar: Vorschlag folgen
+            show_follow_button_in_proposal_sidebar_description: Aktivieren Sie die Funktion “Vorschlag folgen”
+            show_community_button_in_proposal_sidebar: Community
+            show_community_button_in_proposal_sidebar_description: Aktivieren Sie die Funktion “Community” für Vorschläge
+            show_related_content: Verwandte Inhalte
+            show_related_content_description: Aktivieren Sie die Funktion “Verwandte Inhalte” für Vorschläge
+            enable_proposal_notifications_tab: Benachrichtigungen des Autors zu Vorschlägen
+            enable_proposal_notifications_tab_description: Aktivieren Sie die Benachrichtigungen von Autoren zu eigenen Vorschlägen
+            enable_proposal_milestones_tab: Meilensteine in Vorschlägen
+            enable_proposal_milestones_tab_description: Aktivieren Sie "Meilensteine" in Vorschlägen, die von der Verwaltung angelegt werden müssen
+            show_comments: Kommentare
+            show_comments_description: Aktivieren Sie "Kommentare" für das Vorschlagsmodul
+        option:
+          resource:
+            votes_for_proposal_success: "Anzahl der notwendigen Stimmen zur Genehmigung eines Vorschlags"
+            votes_for_proposal_success_description: "Wenn ein Antrag diese Anzahl von Unterstützungen erreicht, kann er nicht mehr mehr unterstützt werden und gilt als erfolgreich"
+      polls:
+        feature:
+          resource:
+            intermediate_poll_results_for_admins: Zwischenergebnisse von Abstimmungen für Admins
+            intermediate_poll_results_for_admins_description: Aktivieren Sie die Einsicht in Zwischenergebnisse zu Abstimmungen für Administratoren
+            additional_information: Erweiterte Informationen
+            additional_information_description: Aktivieren Sie "Erweiterete Informationen" für das Abstimmungsmodul
+            additional_info_for_each_answer: Zusätzliche Informationen je Antwort
+            additional_info_for_each_answer_description: Zeigt die "Zusätzliche Informationen" je Antwort an
+            show_comments: Kommentare
+            show_comments_description: Aktivieren Sie "Kommentare" für das Abstimmungsmodul
+      budget:
+        feature:
+          general:
+            only_admins_create_investment_proposals: Nur Admins können neue Investitionsvorschläge erstellen
+            only_admins_create_investment_proposals_description: Die Erstellung von neuen Vorschlägen ist auf Admins beschränkt
+            show_results_after_first_vote: Ergebnisliste nach erster Beteiligungsphase anzeigen
+            show_results_after_first_vote_description: Zeigt in der Phase "Veröffentliching der Preise" nur ausgewählte Projekte als Ergebnisse an
+            show_relative_ballotting_results: Nur prozentuale Werte anzeigen
+            show_relative_ballotting_results_description: Blendet die absoluten Zahlen in den Statistiken aus. Nur prozentuale Werte werden angezeigt
+          form:
+            allow_attached_image: Titelbild hinzufügen
+            allow_attached_image_description: Ermöglicht es den Bürger*innen ein Titelbild hinzuzufügen.
+            show_implementation_option_fields: Umsetzung
+            show_implementation_option_fields_description: Fügt beim Erstellen eines Investitionsvorschlags ein Auswahlfeld “Umsetzung” hinzu
+            show_user_cost_estimate: Preisliche Einschätzung
+            show_user_cost_estimate_description: Fügt beim Erstellen eines Investitionsvorschlags ein Auswahlfeld “Preisliche Einschätzung” hinzu
+            show_map: Karte für Investitionsvorschläge anzeigen
+            show_map_description: Zeigt die Karte für Investitionsvorschläge in diesem Projekt an
+            enable_geoman_controls_in_maps: Nutzer*innen ermöglichen Figuren in die Karte einzuzeichnen.
+            enable_geoman_controls_in_maps_description: Ermöglicht es den Nutzer*innen Rechtecke, Kreise etc. einzuzeichnen.
+            allow_attached_documents: Zusätzliche Dokumente
+            allow_attached_documents_description: Ermöglicht es den Nutzer:innen Dokumente den Vorschlägen anzuhängen
+          resource:
+            remove_investments_supports: Zurückziehen von Unterstützungen für Investitionsvorschläge zulassen
+            remove_investments_supports_description: Ermöglicht es den Nutzern, in der Phase der Projektauswahl Unterstützungen für Investitionsvorschläge zurückzuziehen
+            show_report_button_in_sidebar: Investition melden
+            show_report_button_in_sidebar_description: Aktivieren Sie die Melden-Funktion für Investitionen
+            show_follow_button_in_sidebar: Investition folgen
+            show_follow_button_in_sidebar_description: Aktivieren Sie die Funktion “Investition folgen”
+            show_community_button_in_sidebar: Community
+            show_community_button_in_sidebar_description: Aktivieren Sie die Funktion “Community” für Investitionsvorschläge
+            show_related_content: Verwandte Inhalte
+            show_related_content_description: Aktivieren Sie die Funktion “Verwandte Inhalte” für Investitionen
+            enable_investment_milestones_tab: Meilensteine in Investitionsvorschlägen
+            enable_investment_milestones_tab_description: Aktivieren Sie "Meilensteine" in Investitionsvorschlägen, die von der Verwaltung angelegt werden müssen
+            show_comments: Kommentare
+            show_comments_description: Aktivieren Sie "Kommentare" für das Vorschlagsmodul
+      projekt_questions:
+        feature:
+          general:
+            show_questions_list: Aktivieren Sie eine bersicht aller Fragen
+            show_questions_list_desctiption: Aktivieren Sie eine bersicht aller Fragen
+      milestones:
+        feature:
+          general:
+            newest_first: Neueste Meilensteine zuerst anzeigen
+            newest_first_description: Sortiert die Meilensteine absteigend mit dem neuesten Datum zuerst
+      newsfeed:
+        option:
+          general:
+            newsfeed_id: Newsfeed ID
+            newsfeed_id_description:
+            newsfeed_type: Newsfeed Type
+            newsfeed_type_description:

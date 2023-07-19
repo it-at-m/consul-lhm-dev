@@ -2,8 +2,63 @@ namespace :admin do
   root to: "dashboard#index"
 
   # custom projekt routes
+  resources :projekt_phases, only: [:update, :destroy] do
+    member do
+      get :duration
+      get :naming
+      get :restrictions
+      get :settings
+      get :map
+      patch :update_map
+      get :projekt_labels
+      get :sentiments
+      get :projekt_questions
+      get :projekt_livestreams
+      get :projekt_events
+      get :milestones
+      get :projekt_notifications
+      get :projekt_arguments
+    end
+
+    resources :projekt_labels, except: %i[index show]
+    resources :sentiments, except: %i[index show]
+    resources :projekt_questions, except: %i[index show] do
+      post "/answers/order_answers", to: "questions/answers#order_answers"
+      collection do
+        post :send_notifications
+      end
+    end
+    resources :projekt_livestreams, only: [:create, :update, :destroy] do
+      member do
+        post :send_notifications
+      end
+    end
+    resources :projekt_events, only: [:create, :update, :destroy] do
+      member do
+        post :send_notifications
+      end
+    end
+    resources :milestones, controller: "projekt_phase_milestones", except: [:index, :show]
+    resources :progress_bars, controller: "projekt_phase_progress_bars"
+    resources :projekt_notifications, only: [:create, :update, :destroy]
+    resources :projekt_arguments, only: [:create, :update, :destroy] do
+      collection do
+        post :send_notifications
+      end
+    end
+  end
+  resources :projekt_phase_settings, only: [:update]
+
   resources :projekts, only: [:index, :edit, :create, :update, :destroy] do
-    resources :projekt_phases, only: [:edit, :update] do
+    member do
+      get :order_up
+      get :order_down
+      patch :update_standard_phase
+      patch :quick_update
+      patch :update_map
+    end
+
+    resources :projekt_phases, only: [:create] do
       member do
         patch :toggle_active_status
       end
@@ -16,25 +71,6 @@ namespace :admin do
         patch :update_default_projekt_footer_tab
       end
     end
-    resources :projekt_notifications, only: [:create, :update, :destroy]
-    resources :projekt_events, only: [:create, :update, :destroy]
-    resources :projekt_questions  do
-      post "/answers/order_answers", to: "questions/answers#order_answers"
-    end
-    resources :projekt_arguments, only: [:create, :update, :destroy]
-    resources :projekt_livestreams, only: [:create, :update, :destroy]
-    resources :milestones, controller: "projekt_milestones"
-    resources :progress_bars, except: :show, controller: "projekt_progress_bars"
-    member do
-      get :order_up
-      get :order_down
-      patch :update_standard_phase
-      patch :quick_update
-    end
-    patch :update_map, to: "projekts#update_map"
-
-    resources :map_layers, only: [:update, :create, :edit, :new, :destroy], controller: 'projekts/map_layers'
-    resources :projekt_labels, except: %i[index show]
   end
 
   resources :map_layers, only: [:update, :create, :edit, :new, :destroy]
@@ -53,16 +89,16 @@ namespace :admin do
 
   # custom deficiency reports routes
   scope module: :deficiency_reports, path: :deficiency_reports, as: :deficiency_report do
-    resources :officers,    only: [:index, :create, :destroy] do
+    resources :officers, only: [:index, :create, :destroy] do
       get :search, on: :collection
     end
     resources :categories,  only: %i[index new create edit update destroy]
     resources :statuses,    only: %i[index new create edit update destroy] do
       collection do
-        post 'order_statuses'
+        post "order_statuses"
       end
     end
-    resources :settings,    only: :index
+    resources :settings, only: :index
   end
 
   resources :deficiency_reports, only: [:index, :show]
@@ -335,7 +371,7 @@ namespace :admin do
     end
     resources :images, only: [:index, :update, :destroy]
     resources :content_blocks, except: [:show]
-    delete "/heading_content_blocks/:id", to: "content_blocks#delete_heading_content_block", as: "delete_heading_content_block"
+    delete "/heading_content_blocks/:id", to: "content_blocks#delete_heading_content_block",as: "delete_heading_content_block"
     get "/edit_heading_content_blocks/:id", to: "content_blocks#edit_heading_content_block", as: "edit_heading_content_block"
     put "/update_heading_content_blocks/:id", to: "content_blocks#update_heading_content_block", as: "update_heading_content_block"
     resources :information_texts, only: [:index] do

@@ -5,6 +5,7 @@ de:
         dashboard: Als Entwurf speichern und später veröffentlichen
         publish: Vorschlag jetzt veröffentlichen
       form:
+        tagging: Einordnung
         tags_custom: Nutzer-Tags
         tags_placeholder: Trennen Sie die Tags mit einem Komma (',')
         required: Ihr Vorschlag

@@ -8,7 +8,7 @@ class Legislation::ProposalsController < Legislation::BaseController
         :legislation_process_id, :title,
         :summary, :description, :video_url, :tag_list,
         :geozone_id,
-        :terms_of_service, :terms_data_storage, :terms_data_protection, :terms_general,
+        :terms_of_service, :terms_data_storage, :terms_data_protection, :terms_general, :resource_terms,
         image_attributes: image_attributes,
         documents_attributes: [:id, :title, :attachment, :cached_attachment, :user_id]
       ]

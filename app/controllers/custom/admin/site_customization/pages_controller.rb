@@ -1,8 +1,7 @@
-require_dependency Rails.root.join("app", "controllers", "admin", 'site_customization', "pages_controller").to_s
+require_dependency Rails.root.join("app", "controllers", "admin", "site_customization", "pages_controller").to_s
 
 class Admin::SiteCustomization::PagesController < Admin::SiteCustomization::BaseController
   include ImageAttributes
-
 
   def update
     if @page.update(page_params)
@@ -41,12 +40,11 @@ class Admin::SiteCustomization::PagesController < Admin::SiteCustomization::Base
     end
 
     def redirect_path
-      if @page.projekt.present? && @page.published? && params[:site_customization_page][:origin] == 'public_page'
+      if @page.projekt.present? && @page.published? && params[:origin] == "public_page"
         page_path(@page.slug)
       elsif @page.projekt.present?
-        namespace = params[:controller].split('/').first
-
-        namespaced_polymorphic_path(namespace, @page.projekt, action: :edit)
+        namespace = params[:namespace] || :admin
+        namespaced_polymorphic_path(namespace, @page.projekt, action: :edit, anchor: "tab-projekt-page")
       else
         admin_site_customization_pages_path
       end

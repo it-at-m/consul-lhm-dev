@@ -1,0 +1,16 @@
+<% if @projekt.vc_map_enabled? %>
+  <%= render Shared::VCMapComponent.new(
+    map_location: @projekt_phase.map_location,
+    parent_class: "proposal",
+    editable: true,
+    projekt_phase: @projekt_phase
+  ) %>
+<% else %>
+  <%= render Shared::MapComponent.new(
+    map_location: @projekt_phase.map_location,
+    parent_class: "proposal",
+    editable: true,
+    projekt_phase: @projekt_phase,
+    show_admin_shape: @projekt_phase.map_location.show_admin_shape?
+  ) %>
+<% end %>

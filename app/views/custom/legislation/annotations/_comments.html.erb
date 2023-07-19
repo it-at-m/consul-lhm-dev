@@ -8,13 +8,13 @@
       <div class="comment-more-info">
         <% if comment.body.length > 250 %>
           <div class="comment-expand">
-            <%= link_to projekt_legislation_process_footer_path(annotation.draft_version.process.projekt, annotation.draft_version, section: 'annotations', params: { annotation_id: annotation.id}) do %>
+            <%= link_to url_to_footer_tab(section: "annotations", remote: true, extras: { annotation_id: annotation.id }), remote: true do %>
               <%= t("legislation.annotations.comments.see_complete") %>
             <% end %>
           </div>
         <% end %>
         <div class="comment-replies" id="annotation-<%= annotation.id %>-comments">
-          <%= link_to projekt_legislation_process_footer_path(annotation.draft_version.process.projekt, annotation.draft_version, section: 'annotations', params: { annotation_id: annotation.id}) do %>
+          <%= link_to url_to_footer_tab(section: "annotations", remote: true, extras: { annotation_id: annotation.id }), remote: true do %>
             <%= t("legislation.annotations.comments.replies_count", count: comment.children.size) %>
           <% end %>
         </div>

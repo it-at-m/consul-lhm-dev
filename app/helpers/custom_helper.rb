@@ -30,10 +30,6 @@ module CustomHelper
     MapLocation.where(proposal_id: ids).map(&:json_data)
   end
 
-  def projekt_legislation_process_footer_path(current_projekt, draft_version, section: 'text', anchor: 'footer-content', params: {})
-    current_projekt.page.url + "?text_draft_version_id=#{draft_version.id}&selected_phase_id=#{current_projekt.legislation_phase.id}" + "&section=#{section}&#{params.to_query}" + "##{anchor}"
-  end
-
   def legislation_process_tabs(process)
     {
       "info"           => edit_admin_legislation_process_path(process),
@@ -42,7 +38,7 @@ module CustomHelper
   end
 
   def in_projekt_footer?
-    params[:current_tab_path].present? && !request.path.starts_with?('/projekts')
+    params[:projekt_phase_id].present? && !request.path.starts_with?('/projekts')
   end
 
   def set_comments_view_context_variables(commentable, comment_order: nil)
@@ -61,6 +57,8 @@ module CustomHelper
   end
 
   def toggle_element_in_array(array, element)
+    array ||= []
+
     if array.include?(element)
       array.delete(element)
     else

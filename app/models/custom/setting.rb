@@ -157,7 +157,6 @@ class Setting < ApplicationRecord
         "sdg.process.projekts": true,
 
         "projekts.show_archived.sidebar": true,
-        "projekts.show_module_links_in_flyout_menu": true,
         "projekts.second_level_projekts_in_active_filter": false,
         "projekts.second_level_projekts_in_archived_filter": false,
         "projekts.set_default_sorting_to_newest": false,
@@ -175,7 +174,6 @@ class Setting < ApplicationRecord
         "extended_feature.general.extended_editor_for_admins": true,
         "extended_feature.general.extended_editor_for_users": true,
         "extended_feature.general.language_switcher_in_menu": false,
-        "extended_feature.general.links_to_create_resources_in_menu": false,
         "extended_feature.general.enable_projekt_events_page": false,
         "extended_feature.general.enable_google_translate": false,
         "extended_option.general.title": 'Öffentlichkeitsbeteiligung',
@@ -223,6 +221,7 @@ class Setting < ApplicationRecord
         "extended_feature.projekts_overview_page_navigation.show_index_order_upcoming": true,
         "extended_feature.projekts_overview_page_navigation.show_index_order_expired": true,
         "extended_feature.projekts_overview_page_navigation.show_index_order_individual_list": true,
+        "extended_feature.projekts_overview_page_navigation.show_index_order_drafts": true,
 
         "extended_feature.projekts_overview_page_footer.show_in_index_order_all": true,
         "extended_feature.projekts_overview_page_footer.show_in_index_order_underway": true,

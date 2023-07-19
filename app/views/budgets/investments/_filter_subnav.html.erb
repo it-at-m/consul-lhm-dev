@@ -6,7 +6,7 @@
     data-deep-link-smudge-delay="500"
     data-tabs>
 
-  <% if projekt_feature?(@investment&.projekt, 'budgets.show_comments') %>
+  <% if projekt_phase_feature?(@investment&.projekt_phase, "resource.show_comments") %>
     <li class="tabs-title is-active">
       <%= link_to "#tab-comments" do %>
         <h3>
@@ -17,8 +17,8 @@
     </li>
   <% end %>
 
-  <% if projekt_feature?(@investment&.projekt, 'budgets.enable_investment_milestones_tab') %>
-    <li class="tabs-title <%= 'is-active' unless projekt_feature?(@investment&.projekt, 'budgets.show_comments') %>">
+  <% if projekt_phase_feature?(@investment&.projekt_phase, "resource.enable_investment_milestones_tab") %>
+    <li class="tabs-title <%= 'is-active' unless projekt_phase_feature?(@investment&.projekt_phase, "resource.show_comments") %>">
       <%= link_to "#tab-milestones" do %>
         <h3>
           <%= t("budgets.investments.show.milestones_tab") %>

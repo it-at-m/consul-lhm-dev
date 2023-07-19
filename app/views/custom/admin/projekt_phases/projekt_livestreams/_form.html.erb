@@ -1,0 +1,25 @@
+<%= form_with model: livestream, url: polymorphic_path([@namespace, @projekt_phase, livestream]) do |f| %>
+  <%= render "shared/errors", resource: livestream %>
+
+  <div class='small-12 medium-7'>
+    <%= f.text_field :url, { id: dom_id(livestream, :url), required: true } %>
+  </div>
+
+  <% if livestream.persisted? %>
+    <div class='small-12 medium-7'>
+      <%= f.text_field :title, { id: dom_id(livestream, :title) } %>
+    </div>
+
+    <div class='small-12 medium-7'>
+      <%= f.datetime_field :starts_at, { id: dom_id(livestream, :starts_at) } %>
+    </div>
+
+    <div class='small-12 medium-12'>
+      <%= f.text_area :description, { id: dom_id(livestream, :description) } %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.submit "Livestream erstellen", class: "button" %>
+  </div>
+<% end %>

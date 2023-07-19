@@ -1,0 +1,40 @@
+<%= render "custom/admin/projekt_phases/heading" %>
+<%= render "custom/admin/projekt_phases/nav_bar" %>
+
+<div class="row">
+  <div class="column">
+    <h2><%= t("custom.admin.projekt_phases.projekt_notifications.page_title") %></h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="column">
+    <%= render "custom/admin/projekt_phases/projekt_notifications/form", notification: @projekt_notification %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="column">
+    <div class='margin-top'>
+      <% @projekt_notifications.each do |notification| %>
+        <div class='small-12 medium-7 projekt-notification' id="<%= dom_id(notification) %>">
+          <%= check_box_tag "edit_projekt_notification_#{dom_id(notification)}" %>
+          <%= label_tag nil, nil, for: "edit_projekt_notification_#{dom_id(notification)}", class: "edit-projekt-notification" %>
+    
+          <div class='projekt-notification-content'>
+            <h3><%= notification.title %></h3>
+            <p class="more-info"><%= notification.created_at.to_date %></p>
+            <p><%= notification.body %></p>
+          </div>
+    
+          <div class='edit-projekt-notification-form'>
+            <%= render "custom/admin/projekt_phases/projekt_notifications/form", notification: notification %>
+          </div>
+    
+          <%= link_to "", polymorphic_path([@namespace, @projekt_phase, notification]), method: :delete, class: "delete-projekt-notification" %>
+          <hr>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

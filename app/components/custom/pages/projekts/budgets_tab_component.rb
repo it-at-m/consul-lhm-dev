@@ -1,5 +1,5 @@
 class Pages::Projekts::BudgetsTabComponent < ApplicationComponent
-  delegate :can?, :projekt_feature?, to: :helpers
+  delegate :can?, :projekt_feature?, :projekt_phase_feature?, to: :helpers
   attr_reader :budget, :ballot, :current_user, :heading
 
   def initialize(budget, ballot, current_user)
@@ -13,7 +13,7 @@ class Pages::Projekts::BudgetsTabComponent < ApplicationComponent
 
   def render_map?
     !budget.informing? &&
-      projekt_feature?(budget.projekt, 'budgets.show_map') &&
+      projekt_phase_feature?(budget.projekt_phase, "resource.show_map") &&
       controller_name != "offline_ballots"
   end
 

@@ -1,51 +1,19 @@
-<% resource = @proposal || @debate || @poll || @process %>
-<% projekt_phase = projekt.send("legislation_phase") if resource.is_a?(Legislation::Process) %>
-<% projekt_phase ||= resource.class.name == "Poll" ? nil : projekt.send("#{resource.class.name.downcase.gsub('::', '_')}_phase") %>
-<% vertical_align = !projekt.has_active_phase?(controller_name) || projekt_feature?(projekt, "general.hide_additional_info_in_projekt_selector") || controller_name == 'polls' %>
-
-<div class='projekt js-select-projekt js-prevent-key-scroll <%= 'vertical-align' if vertical_align %>'
-     id=<%= dom_id(projekt) %>
+<div class='projekt js-select-projekt js-prevent-key-scroll vertical-align'
+     id="<%= dom_id(projekt) %>"
      tabindex="0"
-     aria-labeled-by=<%= "#{dom_id(projekt)}_name" %>
+     aria-labeled-by="<%= "#{dom_id(projekt)}_name" %>"
      data-projekt-id="<%= projekt.id %>"
-     data-projekt-phase-id="<%= projekt_phase.id if projekt_phase.present? %>"
      <%= "data-parent-id=#{projekt.parent.id}" if projekt.parent.present? %>
      <%= "data-projekt-selectable=true" if projekt.selectable_in_selector?(controller_name, current_user) %>
-     <%= "data-projekt-selectable-children=true" if projekt.children.selectable_in_selector(controller_name, current_user).any? %>
-     <%= "data-latitude=#{projekt.map_location.latitude}" if projekt.map_location.latitude.present? %>
-     <%= "data-longitude=#{projekt.map_location.longitude}" if projekt.map_location.longitude.present? %>
-     <%= "data-zoom=#{projekt.map_location.zoom}" if projekt.map_location.zoom.present? %>
-     <%= "data-show-map=true" if projekt_feature?(projekt, "#{controller_name}.show_map") %>
-     <%= "data-show-summary=true" if projekt_feature?(projekt, "proposals.enable_summary")  %>
-     <%= "data-allow-video=true" if projekt_feature?(projekt, "proposals.enable_external_video") %>
-     <%= "data-allow-attached-image=true" if projekt_feature?(projekt, "#{controller_name}.allow_attached_image")  %>
-     <%= "data-allow-attached-document=true" if projekt_feature?(projekt, "#{controller_name}.allow_attached_documents")  %>
-     <%= "data-allow-tags=true" if projekt_feature?(projekt, "general.enable_tags")  %>
-     <%= "data-tag-ids=#{ projekt.tags.category.ids.any? ? projekt.tags.category.ids.join(',') : false }" if projekt_feature?(projekt, "general.enable_tags") %>
-     <%= "data-allow-sdgs=true" if projekt_feature?(projekt, "general.enable_sdgs") %>
-     <%= "data-sdg-ids=#{ projekt.sdg_goals.ids.any? ? projekt.sdg_goals.ids.join(',') : false}" if projekt_feature?(projekt, "general.enable_sdgs") %>
-     <%= "data-projekt-label-ids=#{ projekt.all_projekt_labels.ids.join(',') }" if projekt.all_projekt_labels.any? %>
-     <%= "data-resource-form-title=#{ projekt_phase.resource_form_title.gsub(' ', '_') }" if projekt_phase&.resource_form_title.present? %>
-     <%= "data-hide-projekt-selector=true" if projekt_feature?(projekt, "#{controller_name}.hide_projekt_selector") %>
-     >
-
+     <%= "data-projekt-selectable-children=true" if projekt.children.selectable_in_selector(controller_name, current_user).any? %>>
 
   <div class='projekt-icon'>
     <i class="fas fa-<%= projekt.icon || "circle" %>" style="color:<%= projekt.color %>"></i>
   </div>
 
   <div class='projekt-details'>
-    <div class='projekt-name' id=<%= "#{dom_id(projekt)}_name" %> >
+    <div class='projekt-name' id="<%= "#{dom_id(projekt)}_name" %>">
       <%= projekt.name_for_resource_creation(resource) %>
     </div>
-
-    <% if projekt_phase.present? && projekt.has_active_phase?(controller_name) && !projekt_feature?(projekt, "general.hide_additional_info_in_projekt_selector") %>
-      <div class='projekt-phase-duration'>
-        <%= get_projekt_phase_duration(projekt_phase) %>
-      </div>
-      <div class='projekt-phase-restriction'>
-        <%= get_projekt_phase_restriction_name(projekt_phase) %>
-      </div>
-    <% end %>
   </div>
 </div>

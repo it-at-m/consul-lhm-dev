@@ -3,6 +3,7 @@ require_dependency Rails.root.join("app", "models", "map_location").to_s
 class MapLocation < ApplicationRecord
   belongs_to :projekt, touch: true
   belongs_to :deficiency_report, touch: true
+  belongs_to :projekt_phase, touch: true
 
   before_save :ensure_shape_is_json
 
@@ -14,20 +15,22 @@ class MapLocation < ApplicationRecord
       deficiency_report_id: deficiency_report_id,
       lat: latitude,
       long: longitude,
+      alt: altitude,
       color: get_pin_color,
       fa_icon_class: get_fa_icon_class
     }
   end
 
   def shape_json_data
-    return shape if shape == {}
+    return {} if shape == {} || shape == "{}"
 
     shape.merge({
       investment_id: investment_id,
       proposal_id: proposal_id,
       projekt_id: projekt_id,
       deficiency_report_id: deficiency_report_id,
-      color: get_pin_color
+      color: get_pin_color,
+      fa_icon_class: get_fa_icon_class
     })
   end
 
@@ -36,11 +39,11 @@ class MapLocation < ApplicationRecord
   def get_pin_color
     set_object
 
-    if @proposal&.projekt&.overview_page?
+    if @proposal.present? && @proposal.projekt_phase.projekt.overview_page?
       "#009900"
 
-    elsif @proposal.present? && @proposal.projekt.present?
-      @proposal.projekt.color
+    elsif @proposal.present? && @proposal.sentiment.present?
+      @proposal.sentiment.color
 
     elsif @investment.present?
       @investment.projekt.color
@@ -50,17 +53,20 @@ class MapLocation < ApplicationRecord
 
     elsif @projekt.present?
       "red"
+
+    else
+      "#004a83"
     end
   end
 
   def get_fa_icon_class
     set_object
 
-    if @proposal&.projekt&.overview_page?
+    if @proposal.present? && @proposal.projekt_phase.projekt.overview_page?
       "user"
 
-    elsif @proposal.present? && @proposal.projekt.present?
-      @proposal.projekt.icon
+    elsif @proposal.present? && @proposal.projekt_labels.any?
+      @proposal.projekt_labels.count == 1 ? @proposal.projekt_labels.first.icon : "tags"
 
     elsif @investment.present? && @investment.projekt.present?
       @investment.projekt.icon
@@ -71,6 +77,8 @@ class MapLocation < ApplicationRecord
     elsif @projekt.present?
       @projekt.icon
 
+    else
+      "circle"
     end
   end
 

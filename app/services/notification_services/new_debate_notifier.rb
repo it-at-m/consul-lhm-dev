@@ -16,9 +16,16 @@ module NotificationServices
         administrator_ids = User.joins(:administrator).where(adm_email_on_new_debate: true).ids
         moderator_ids = User.joins(:moderator).where(adm_email_on_new_debate: true).ids
         projekt_manager_ids = User.joins(projekt_manager: :projekts).where(adm_email_on_new_debate: true)
-          .where(projekt_managers: { projekts: { id: @debate.projekt.id }}).ids
+          .where(projekt_managers: { projekts: { id: @debate.projekt_phase.projekt.id }}).ids
 
-        [administrator_ids, moderator_ids, projekt_manager_ids].flatten.uniq
+        [administrator_ids, moderator_ids, projekt_manager_ids, projekt_subscriber_ids].flatten.uniq
+          .reject { |id| id == @debate.author_id }
+      end
+
+      def projekt_subscriber_ids
+        return [] unless @debate.projekt.present?
+
+        @debate.projekt_phase.subscribers.ids
       end
   end
 end

@@ -1,0 +1,56 @@
+<%= render "custom/admin/projekt_phases/heading" %>
+<%= render "custom/admin/projekt_phases/nav_bar" %>
+
+<div class="row">
+  <div class="column">
+    <h2><%= t("custom.admin.projekt_phases.projekt_questions.page_title") %></h2>
+  </div>
+</div>
+
+<div class="admin-projekt-questions-list">
+  <div class="float-right">
+    <%= link_to t("custom.admin.projekt_phases.projekt_questions.create_button"), polymorphic_path([@namespace, @projekt_phase, ProjektQuestion.new], action: :new), class: "button" %>
+  </div>
+
+  <div class="float-right">
+    <%= link_to t("custom.admin.projekt_phases.projekt_questions.send_notifications_button"), polymorphic_path([@namespace, @projekt_phase, ProjektQuestion.new], action: :send_notifications), method: :post, class: "button margin-right" %>
+  </div>
+
+  <div class="small-12 column">
+
+    <% if @projekt_questions.any? %>
+      <table class="stack margin-bottom">
+       <thead>
+          <tr>
+            <th><%= t("custom.admin.projekt_phases.projekt_questions.table.title") %></th>
+            <th><%= t("custom.admin.projekt_phases.projekt_questions.table.question_options") %></th>
+            <th class="text-center"><%= t("custom.admin.projekt_phases.projekt_questions.table.answers_count") %></th>
+            <th class="text-center"><%= t("custom.admin.projekt_phases.projekt_questions.table.comments_count") %></th>
+            <th><%= t("admin.actions.actions") %></th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @projekt_questions.root_questions.each do |question| %>
+          <tr id="<%= dom_id(question) %>">
+            <td>
+              <%= question.title %>
+            </td>
+            <td>
+              <ul>
+                <% question.question_options.each do |question_option| %>
+                  <li><%= "#{question_option.value} (#{question_option.answers_count})" %></li>
+                <% end %>
+              </ul>
+            </td>
+            <td class="text-center"><%= question.answers_count %></td>
+            <td class="text-center"><%= question.comments.count %></td>
+            <td><%= render Admin::TableActionsComponent.new(question,
+                                                            edit_path: polymorphic_path([@namespace, @projekt_phase, question], action: :edit),
+                                                            destroy_path: polymorphic_path([@namespace, @projekt_phase, question])) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

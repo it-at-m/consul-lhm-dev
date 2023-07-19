@@ -1,0 +1,21 @@
+<div class="config-block">
+  <%= translatable_form_for(@projekt, url: namespace_projekt_path) do |f| %>
+
+    <%= hidden_field_tag :tab, "#tab-projekt-configuration" %>
+
+    <%= render "images/nested_image", imageable: @projekt, f: f %>
+
+    <%= render "shared/globalize_locales", resource: @projekt %>
+    <%= f.translatable_fields do |translations_form| %>
+      <div>
+        <%= translations_form.text_area :description,
+          rows: 4, maxlength: 230,
+          label: Projekt.human_attribute_name(:description) %>
+      </div>
+    <% end %>
+
+    <div>
+      <%= f.submit(class: "button success") %>
+    </div>
+  <% end %>
+</div>

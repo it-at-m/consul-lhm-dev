@@ -5,7 +5,7 @@ class Budget::Stats
 
   def total_votes
     if budget.distributed_voting?
-      investments.pluck(:qualified_total_ballot_line_weight).sum
+      budget.investments.pluck(:qualified_total_ballot_line_weight).sum
     else
       budget.ballots.pluck(:ballot_lines_count).sum
     end

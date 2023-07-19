@@ -17,24 +17,8 @@ module ProjektsHelper
     content_tag(:div, safe_join(links, divider_tag).html_safe, class: 'custom-breadcrumbs')
   end
 
-  def projekt_bar_background_color(projekt)
-    if projekt.color.present?
-      projekt.color
-    else
-      '#FFFFFF'
-    end
-  end
-
-  def projekt_bar_text_color(projekt)
-    if projekt.color.present?
-      pick_text_color(projekt.color)
-    else
-      '#000000'
-    end
-  end
-
   def projekt_filter_resources_name
-    @current_tab_phase&.resources_name || controller_name
+    @projekt_phase&.resources_name || controller_name
   end
 
   def show_archived_projekts_in_sidebar?
@@ -45,33 +29,17 @@ module ProjektsHelper
     Setting["extended_feature.modulewide.show_affiliation_filter_in_index_sidebar"].present? ? true : false
   end
 
-  def prepare_projekt_name(projekt, placement=nil)
-    if projekt.page.published? && placement == 'desktop'
-      link_to projekt.page.title, projekt.page.url, tabindex: '-1', aria: { hidden: true }
-    elsif  projekt.page.published? && placement == 'mobile'
-      link_to projekt.page.title, projekt.page.url
+  def prepare_projekt_name(projekt, placement = nil)
+    classes = []
+    classes.push("draft-projekt") unless projekt.activated?
+
+    if projekt.page.published? && placement == "desktop"
+      link_to projekt.page.title, projekt.page.url, tabindex: "-1", aria: { hidden: true }, class: classes.join(" ")
+    elsif projekt.page.published? && placement == "mobile"
+      link_to projekt.page.title, projekt.page.url, class: classes.join(" ")
     else
       projekt.page.title
     end
-  end
-
-  def prepare_projekt_modules_links(projekt)
-
-    module_links = []
-
-    if projekt_phase_show_in_navigation?(projekt, 'debate_phase')
-      module_links.push( debates_overview_link(t('custom.menu.debates'), projekt, 'projekt-module-link') )
-    end
-
-    if projekt_phase_show_in_navigation?(projekt, 'proposal_phase')
-      module_links.push( proposals_overview_link(t('custom.menu.proposals'), projekt, 'projekt-module-link') )
-    end
-
-    if related_polls(projekt).any?
-      module_links.push( polls_overview_link(t('custom.menu.polls'), projekt, 'projekt-module-link') )
-    end
-
-    module_links.join(' | ').html_safe
   end
 
   def debates_overview_link(anchor_text, projekt, class_name)
@@ -96,11 +64,6 @@ module ProjektsHelper
 
   def projekt_phase_expired?(projekt, phase_name)
     projekt.send(phase_name).end_date < Date.today if projekt.send(phase_name).end_date
-  end
-
-  def projekt_phase_show_in_navigation?(projekt, phase_name)
-    projekt.send(phase_name).phase_activated? &&
-      ((projekt.send(phase_name).start_date <= Date.today if projekt.send(phase_name).start_date) || projekt.send(phase_name).start_date.blank? )
   end
 
   def format_date(date)
@@ -172,10 +135,6 @@ module ProjektsHelper
     else
       t("custom.geozones.sidebar_filter.restrictions.#{restriction_name}" )
     end
-  end
-
-  def related_polls(projekt, timestamp = Date.current.beginning_of_day)
-    Poll.where(projekt_id: projekt.all_children_ids.push(projekt.id))
   end
 
   def options_for_projekt_select

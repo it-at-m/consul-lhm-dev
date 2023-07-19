@@ -1,3 +1,5 @@
+require_dependency Rails.root.join("app", "helpers", "legislation_helper").to_s
+
 module LegislationHelper
   def cannot_annotate_callout_text(permission_problem_key, legislation_phase)
     return nil if permission_problem_key.blank?

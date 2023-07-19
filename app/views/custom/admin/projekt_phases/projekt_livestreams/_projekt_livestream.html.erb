@@ -1,0 +1,76 @@
+<div class='small-12 medium-7 projekt-livestream' id="<%= dom_id(livestream) %>">
+  <%= check_box_tag "edit_projekt_event_#{dom_id(livestream)}" %>
+  <%= label_tag nil, nil, for: "edit_projekt_event_#{dom_id(livestream)}", class: "admin-edit-icon-button admin-edit-icon-button-livestream" %>
+  <%= link_to "", polymorphic_path([@namespace, @projekt_phase, livestream]), method: :delete, class: "admin-delete-icon-button admin-delete-icon-button-livestream" %>
+
+  <div class='projekt-livestream-content'>
+    <% if livestream.from_youtube? %>
+      <%= image_tag("https://img.youtube.com/vi/#{livestream.external_id}/hqdefault.jpg", referrerpolicy: "no-referrer") %>
+    <% elsif livestream.from_vimeo? && livestream.preview_image_url.present? %>
+      <%= image_tag(livestream.preview_image_url, referrerpolicy: "no-referrer") %>
+    <% end %>
+
+    <p>
+      <strong><%= ProjektLivestream.human_attribute_name(:url) %>:</strong>
+      <%= link_to(livestream.url, livestream.url) %>
+    </p>
+    <% if livestream.title.present? %>
+      <p>
+        <strong><%= ProjektLivestream.human_attribute_name(:title) %>:</strong>
+        <%= livestream.title %>
+      </p>
+    <% end %>
+    <p>
+      <strong><%= ProjektLivestream.human_attribute_name(:platform) %>:</strong>
+      <%= livestream.platform_formated %>
+    </p>
+    <p>
+    <% if livestream.starts_at.present? %>
+      <p>
+        <strong><%= ProjektLivestream.human_attribute_name(:starts_at) %>:</strong>
+        <%= livestream.starts_at&.strftime("%d.%m.%y %H:%m") %>
+      </p>
+    <% end %>
+    <% if livestream.description.present? %>
+      <p>
+        <strong><%= ProjektLivestream.human_attribute_name(:description) %>:</strong>
+        <%= truncate(livestream.description, length: 500) %>
+      </p>
+    <% end %>
+  </div>
+
+  <div class='edit-projekt-livestream-form'>
+    <%= render partial: "custom/admin/projekt_phases/projekt_livestreams/form", locals: { livestream: livestream } %>
+  </div>
+
+  <%= link_to t("custom.admin.projekt_phases.projekt_livestreams.send_notifications_button"), polymorphic_path([@namespace, @projekt_phase, livestream], action: :send_notifications), method: :post, class: "margin-right" %>
+
+  <% if livestream.projekt_questions.any? %>
+    <h3 class="admin-projekt-livestream-projekt-questions-title">
+      <%= t("custom.admin.projekt_phases.projekt_livestreams.questions") %>
+    </h3>
+  <% end %>
+
+  <% livestream.projekt_questions.each do |projekt_question| %>
+    <div class="admin-projekt-livestream-projekt-question margin-bottom">
+      <div class="admin-projekt-livestream-projekt-question--inner">
+        <h4>
+          <%= projekt_question.title %>
+          <div class="admin-projekt-livestream-projekt-question--actions">
+            <%= link_to "", polymorphic_path([@namespace, @projekt_phase, projekt_question], action: :edit), class: "admin-edit-icon-button" %>
+            <%= link_to "", polymorphic_path([@namespace, @projekt_phase, projekt_question]), method: :delete, class: "admin-delete-icon-button" %>
+          </div>
+        </h4>
+        <% projekt_question.question_options.each do |question_option| %>
+          <li class="admin-projekt-question-livestream-option">
+            <%= question_option.value %>:
+            <%= question_option.answers.count %>
+          </li>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= link_to t("custom.admin.projekt_phases.projekt_livestreams.add_question"), polymorphic_path([@namespace, @projekt_phase, ProjektQuestion.new], action: :new, projekt_livestream_id: livestream.id), class: "button" %>
+  <hr>
+</div>

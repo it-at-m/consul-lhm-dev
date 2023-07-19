@@ -16,7 +16,7 @@ class Shared::NewButtonComponent < ApplicationComponent
     return Projekt.top_level.selectable_in_selector(@resources_name, current_user).any? if @resources_name.present? # resources index page
 
     if @projekt_phase.is_a?(ProjektPhase::BudgetPhase) # projekt page footer tab for budgets
-      can? :create, Budget::Investment.new(budget: @projekt_phase.projekt.budget)
+      can? :create, Budget::Investment.new(budget: @projekt_phase.budget)
     else
       true # all other pages including footer tabs
     end
@@ -70,7 +70,11 @@ class Shared::NewButtonComponent < ApplicationComponent
       link_params = {}
       permitted_query_params = %i[order]
 
-      link_params[:projekt_id] = @projekt_phase.projekt.id if @projekt_phase.present?
+      if @projekt_phase.present?
+        link_params[:projekt_phase_id] = @projekt_phase.id
+        link_params[:projekt_id] = @projekt_phase.projekt.id
+      end
+
       link_params[:origin] = "projekt" if controller_name == "pages"
 
       link_params.merge!(@query_params.permit(permitted_query_params).to_h) if @query_params.present?
@@ -93,7 +97,7 @@ class Shared::NewButtonComponent < ApplicationComponent
       if @projekt_phase.is_a?(ProjektPhase::BudgetPhase)
         button_text = @projekt_phase&.new_resource_button_name.presence || t("budgets.investments.index.sidebar.create")
         link_to button_text,
-                new_budget_investment_path(@projekt_phase.projekt.budget, origin: "projekt"),
+                new_budget_investment_path(@projekt_phase.budget, projekt_phase_id: @projekt_phase, projekt_id: @projekt),
                 class: new_button_classes
 
       elsif @projekt_phase.is_a?(ProjektPhase::DebatePhase) || @resources_name == "debates"

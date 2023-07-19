@@ -52,11 +52,6 @@
       // biolerplate for marker
       var marker = null;
       var markersGroup = L.markerClusterGroup();
-      var markerIcon = L.divIcon({
-        className: "map-marker",
-        iconSize: [30, 30],
-        iconAnchor: [15, 40]
-      });
 
 
       /* Create leaflet map start */
@@ -97,12 +92,11 @@
         markerLayer: markersGroup,
         markerOptions: function(shape) {
           return {
-            icon: markerIcon,
+            icon: getMarkerIcon(shape.feature.color, shape.feature.fa_icon_class),
             id: getProcessId(shape)
           }
         }
       })
-
       deflateFeatures.addTo(map);
 
       function getProcessId(shape) {
@@ -125,7 +119,17 @@
 
       /* Function definitions start */
       // function to create a marker
-      var getMarkerIconHTML = function(color, iconClass) {
+
+      function getMarkerIcon(color, iconClass) {
+        return L.divIcon({
+          className: "map-marker",
+          iconSize: [30, 30],
+          iconAnchor: [15, 40],
+          html: getMarkerIconHTML(color, iconClass)
+        })
+      }
+
+      function getMarkerIconHTML(color, iconClass) {
         var markerIconHTML;
 
         if ( !iconClass ) {
@@ -148,13 +152,10 @@
       }
 
       var createMarker = function(latitude, longitude, color, iconClass) {
-
         var markerLatLng = new L.LatLng(latitude, longitude);
 
-        markerIcon.options.html = getMarkerIconHTML(color, iconClass);
-
         marker = L.marker(markerLatLng, {
-          icon: markerIcon,
+          icon: getMarkerIcon(color, iconClass),
           draggable: editable
         });
 
@@ -214,16 +215,52 @@
         });
       };
 
-      // function to generate marker popup content
+      // functions to generate markup for popup content
       var getPopupContent = function(data) {
         if (process == "proposals" || data.proposal_id) {
-          return "<a href='/proposals/" + data.proposal_id + "'>" + data.proposal_title + "</a>";
+          return proposalPopupContent(data);
         } else if ( process == "deficiency-reports" ) {
           return "<a href='/deficiency_reports/" + data.deficiency_report_id + "'>" + data.deficiency_report_title + "</a>";
         } else if ( process == "projekts" ) {
           return "<a href='/projekts/" + data.projekt_id + "'>" + data.projekt_title + "</a>";
         } else {
           return "<a href='/budgets/" + data.budget_id + "/investments/" + data.investment_id + "'>" + data.investment_title + "</a>";
+        }
+
+        function proposalPopupContent(data) {
+          var popupHtml = "";
+          popupHtml += "<h6 style='max-width:120px;margin-top:20px;'><a href='/proposals/" + data.proposal_id + "'>" + data.proposal_title + "</a></h6>"; //title
+
+          if (data.image_url) {
+            popupHtml += "<img src='" + data.image_url + "' style='margin-bottom:10px;'>"; //image
+          }
+
+          if (data.labels.length || Object.keys(data.sentiment).length) {
+            popupHtml += "<div class='resource-taggings'>";
+
+            if (data.labels.length) {
+              var labels = "<div class='projekt-labels' style='max-width:120px;'>";
+              data.labels.forEach(function(label) {
+                labels += "<span class='projekt-label selected'>"
+                labels += "<i class='fas fa-" + label.icon + "' style='margin-right:4px;'></i>"
+                labels += label.name
+                labels += "</span>";
+              });
+              labels += "</div>";
+              popupHtml += labels;
+            }
+
+            if (Object.keys(data.sentiment).length) {
+              var sentiments = "<div class='sentiments' style='max-width:120px;'>";
+              sentiments += "<span class='sentiment' style='background-color:#454B1B;color:#ffffff'>" + data.sentiment.name + "</span>";
+              sentiments += "</div>";
+              popupHtml += sentiments;
+            }
+
+            popupHtml += "</div>";
+          }
+
+          return popupHtml;
         }
       };
 
@@ -324,10 +361,8 @@
 
           } else {
             var markerLatLng = new L.LatLng(adminShape.lat, adminShape.long);
-            markerIcon.options.html = getMarkerIconHTML(adminShapesColor, adminShape.fa_icon_class);
-
             adminMarker = L.marker(markerLatLng, {
-              icon: markerIcon
+              icon: getMarkerIcon(adminShapesColor, adminShape.fa_icon_class)
             });
             adminMarker.pm.setOptions({ adminShape: true })
 

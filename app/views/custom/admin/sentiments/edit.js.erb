@@ -1,0 +1,5 @@
+$("#create-or-edit-sentiment").html("<%= j render("custom/admin/sentiments/form") %>")
+
+$('html, body').animate({
+  scrollTop: $("#create-or-edit-sentiment").offset().top
+}, 500);

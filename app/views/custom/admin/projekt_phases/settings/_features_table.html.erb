@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="column">
+    <table>
+      <thead>
+        <tr>
+          <th class="small-6"><%= t("admin.settings.setting") %></th>
+          <th class="small-6"><%= t("admin.settings.index.features.enabled") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% features.each do |feature| %>
+          <tr>
+            <td class='small-9'>
+              <strong id="<%= dom_id(feature, :title) %>"><%= t("custom.projekt_phase_settings.#{@projekt_phase.resources_name}.#{feature.key}") %></strong>
+              <br>
+              <span class="small">
+                <%= t("custom.projekt_phase_settings.#{@projekt_phase.resources_name}.#{feature.key}_description", default: t("admin.settings.no_description")) %>
+              </span>
+            </td>
+
+            <td>
+              <%= render Admin::Settings::FeaturedSettingsFormComponent.new(feature) %>
+            </td>
+          </tr>
+        <% end %>
+
+      </tbody>
+    </table>
+  </div>
+</div>

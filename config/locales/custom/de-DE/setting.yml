@@ -25,8 +25,6 @@ de:
           extended_editor_for_users_description: Aktivieren Sie den erweiterten Editor für Inhalte, die im Frontend von Nutzern erstellt werden
           language_switcher_in_menu: Sprachumschalter in Navigation anbieten
           language_switcher_in_menu_description: Aktivieren Sie den Umschalter für weitere Sprachen in der Navigationsleiste
-          links_to_create_resources_in_menu: Button "+ Beitrag erstellen" in Navigation anzeigen
-          links_to_create_resources_in_menu_description: Zeigt den Button "+ Beitrag erstellen" in der Hauptnavigation an
           enable_projekt_events_page: Veranstaltungskalender anzeigen
           enable_projekt_events_page_description: Zeigt den Veranstaltungskalender in der Hauptnavigation an
           enable_google_translate: Google Translate aktivieren
@@ -116,8 +114,6 @@ de:
         show_archived:
           sidebar: Archivierte Projekte in Projektseitenleiste  anzeigen
           sidebar_description: Zeigt archivierte Projekte in der Projektseitenleiste wenn aktiviert
-        show_module_links_in_flyout_menu: Modul-Links in den Dropdowns
-        show_module_links_in_flyout_menu_description: Zeigt die die Modul-Links unterhalb einzelner Dropdown-Einträge an
         second_level_projekts_in_active_filter: Zweite Ebene für aktive Projekte anzeigen
         second_level_projekts_in_active_filter_description: Zeigt eine zweite Ebene im Projektfilter für aktive Projekte standardmäßig an
         second_level_projekts_in_archived_filter: Zweite Ebene für archivierte Projekte anzeigen
@@ -142,27 +138,25 @@ de:
         general:
           show_in_navigation: Projekt in Navigation hervorheben
           show_in_navigation_description: Zeigt das Projekt in der Top-Navigation der Webseite an (nur für Top-Level-Projekte)
+          show_in_overview_page: Projekt in Übersichtsseite anzeigen
+          show_in_overview_page_description: Zeigt das Projekt in der Projektübersichtsseite an
           show_in_overview_page_navigation: Projekt in Dropdown-Navigation anzeigen
           show_in_overview_page_navigation_description: Zeigt das Projekt in einer Dropdownliste im Navigationsmenü
-          show_in_overview_page: Projekt in Übersichtsseite und auf Homepage anzeigen
-          show_in_overview_page_description: Zeigt das Projekt in der Projektübersichtsseite und auf der Homepage an
-          hide_additional_info_in_projekt_selector: Zusätzliche Projektinformationen im Projekt-Selektor ausblenden
-          hide_additional_info_in_projekt_selector_description: Verbirgt die zusätzlichen Projektinformationen wie Gebiet, Dauer und Partizipationsberechtigung im Projekt-Selektor
-          show_not_active_phases_in_projekts_page_sidebar: Nicht aktive Teilnahmephasen verbergen
-          show_not_active_phases_in_projekts_page_sidebar_description: Verbirgt die Teilnahmephasen in der rechten Seitenleiste der Projektseite und in der Projektauswahl
-          allow_downvoting_comments: Downvotes in Kommentaren aktivieren
-          allow_downvoting_comments_description: Aktivieren Sie den "Daumen nach unten"-Button in den Kommentaren
-          enable_tags: Tags aktivieren
-          enable_tags_description: Aktivieren Sie Tags für dieses Projekt
-          enable_sdgs: SDGs aktivieren
-          enable_sdgs_description: Aktivieren Sie die UN-Nachhaltigkeitsziele für dieses Projekt
-          set_default_sorting_to_newest: Standardsortierung auf 'Neueste' umstellen
-          set_default_sorting_to_newest_description: Zeigt standardmäßig die neuesten Beiträge anstatt der aktivsten Beiträge an
-          show_projekt_footer: Fußzeile aktivieren
-          show_projekt_footer_description: Aktiviert die Fußzeile am unteren Ende des Projektes
+          show_in_homepage: Projekt auf Homepage anzeigen
+          show_in_homepage_description: Zeigt das Projekt auf der Homepage an
           show_in_individual_list: Projekt in individueller Liste anzeigen
           show_in_individual_list_description: Zeigt das Projekt in einer individuellen Liste an
+          allow_downvoting_comments: Downvotes in Kommentaren aktivieren
+          allow_downvoting_comments_description: Aktivieren Sie den "Daumen nach unten"-Button in den Kommentaren
+          set_default_sorting_to_newest: Standardsortierung auf 'Neueste' umstellen
+          set_default_sorting_to_newest_description: Zeigt standardmäßig die neuesten Beiträge anstatt der aktivsten Beiträge an
+          show_in_sidebar_filter: Projekt in der Projektseitenleiste anzeigen
+          show_in_sidebar_filter_description: Zeigt das Projekt in der Projektseitenleiste auf den übersichtsseiten an
+          vc_map_enabled: Virtual City 3D Maps aktivieren
+          vc_map_enabled_description: Aktiviert die 3D Karten von [Virtual City Systems]
         sidebar:
+          show_notification_subscription_toggler: Benachrichtigungen
+          show_notification_subscription_toggler_description: Aktivieren Sie die Projektbenachrichtigungen in der rechten Seitenleiste
           show_phases_in_projekt_page_sidebar: Projektphasen
           show_phases_in_projekt_page_sidebar_description: Aktivieren Sie die Projektphasen in der rechten Seitenleiste der Projektseite
           show_map: Karte einblenden

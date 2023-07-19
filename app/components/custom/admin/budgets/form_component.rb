@@ -5,4 +5,10 @@ class Admin::Budgets::FormComponent < ApplicationComponent
     # Budget::Phase::PHASE_KINDS.map { |ph| [t("budgets.phase.#{ph}"), ph] }
     budget.phases.order(:id).map { |phase| [phase.name, phase.kind] }
   end
+
+  def projekt_phase_options_for_selector
+    ProjektPhase::BudgetPhase.all
+      .reject { |pp| pp.budget.present? || pp.projekt.overview_page? }
+      .map { |pp| ["#{pp.projekt.name} - #{pp.title}", pp.id] }
+  end
 end

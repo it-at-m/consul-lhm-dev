@@ -5,9 +5,9 @@ class Admin::BudgetsWizard::BudgetsController < Admin::BudgetsWizard::BaseContro
   def create
     @budget.published = false
 
-    if params[:mode] == 'single' && params[:budget][:projekt_id].blank?
+    if params[:mode] == 'single' && params[:budget][:projekt_phase_id].blank?
       @budget.valid?
-      @budget.errors.add(:projekt_id, :blank)
+      @budget.errors.add(:projekt_phase_id, :blank)
       render :new
     elsif @budget.save
       redirect_to groups_index, notice: t("admin.budgets.create.notice")
@@ -19,7 +19,7 @@ class Admin::BudgetsWizard::BudgetsController < Admin::BudgetsWizard::BaseContro
   private
 
     def allowed_params
-      valid_attributes = [:currency_symbol, :voting_style, :projekt_id, administrator_ids: [],
+      valid_attributes = [:currency_symbol, :voting_style, :projekt_phase_id, administrator_ids: [],
                           valuator_ids: [], image_attributes: image_attributes]
 
       valid_attributes + [translation_params(Budget)]

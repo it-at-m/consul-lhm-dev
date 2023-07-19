@@ -1,0 +1,38 @@
+<div class='small-12 medium-7 projekt-argument' id="<%= dom_id(projekt_argument) %>">
+  <%= check_box_tag "edit_projekt_argument_#{dom_id(projekt_argument)}", nil, false, class: "projekt-argument--edit-switch-checkbox" %>
+  <%= label_tag nil, nil, for: "edit_projekt_argument_#{dom_id(projekt_argument)}", class: "edit-projekt-argument" %>
+
+  <div class='projekt-argument-content'>
+    <div class="projekt-argument-image-column">
+      <% if projekt_argument.image.present? %>
+        <%= image_tag(projekt_argument.image.variant(:medium)) %>
+      <% end %>
+    </div>
+
+    <div class="projekt-argument-text-column">
+      <p class="projekt-argument-row">
+        <b><%= ProjektArgument.human_attribute_name(:name) %>:</b>
+        <%= projekt_argument.name %>
+      </p>
+      <p class="projekt-argument-row">
+        <b><%= ProjektArgument.human_attribute_name(:party) %>:</b>
+        <%= projekt_argument.party %>
+      </p>
+      <p class="projekt-argument-row">
+        <b><%= ProjektArgument.human_attribute_name(:position) %>:</b>
+        <%= projekt_argument.position %>
+      </p>
+      <p class="projekt-argument-row">
+        <b><%= ProjektArgument.human_attribute_name(:note) %>:</b>
+        <%= projekt_argument.note %>
+      </p>
+    </div>
+  </div>
+
+  <div class='edit-projekt-argument-form'>
+    <%= render partial: "custom/admin/projekt_phases/projekt_arguments/form", locals: { projekt_argument: projekt_argument } %>
+  </div>
+
+  <%= link_to "", polymorphic_path([@namespace, @projekt_phase, projekt_argument]), method: :delete, class: "delete-projekt-argument" %>
+  <hr>
+</div>

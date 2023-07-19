@@ -1,7 +1,7 @@
 require_dependency Rails.root.join("app", "components", "polls", "questions", "answers_component").to_s
 
 class Polls::Questions::AnswersComponent < ApplicationComponent
-  delegate :projekt_feature?, :answer_with_description?, to: :helpers
+  delegate :projekt_feature?, :projekt_phase_feature?, :answer_with_description?, to: :helpers
 
   def initialize(question, answer_updated: nil, open_answer_updated: nil)
     @question = question
@@ -53,14 +53,14 @@ class Polls::Questions::AnswersComponent < ApplicationComponent
   def show_additional_info_images?
     return if question.votation_type.rating_scale?
 
-    projekt_feature?(question.poll&.projekt, "polls.additional_info_for_each_answer") &&
+    projekt_phase_feature?(question.poll&.projekt_phase, "resource.additional_info_for_each_answer") &&
       question.show_images?
   end
 
   def show_additional_info_description?(question_answer)
     return if question.votation_type.rating_scale?
 
-    projekt_feature?(question.poll&.projekt, "polls.additional_info_for_each_answer") &&
+    projekt_phase_feature?(question.poll&.projekt_phase, "resource.additional_info_for_each_answer") &&
       answer_with_description?(question_answer)
   end
 

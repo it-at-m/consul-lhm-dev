@@ -1,30 +1,49 @@
 <% cache [locale_and_user_status(@proposal),
           @proposal,
           @proposal.author,
-          @proposal.projekt,
+          @proposal.projekt_phase,
           feature?(:map),
           Flag.flagged?(current_user, @proposal),
           "show_info"] do %>
 
   <% if feature?(:map) && map_location_available?(@proposal) %>
-    <div class="margin-bottom not-print">
-      <%= render Shared::MapComponent.new(
-        mappable: @proposal,
-        map_location: @proposal.map_location || @proposal.projekt&.map_location_with_admin_shape,
-        parent_class: "proposal",
-        projekt: @proposal.projekt,
-        show_admin_shape: @proposal.projekt.map_location.show_admin_shape?
-      ) %>
-    </div>
+    <% if @proposal.projekt.vc_map_enabled? %>
+      <div class="margin-bottom not-print">
+        <%= render Shared::VCMapComponent.new(
+          mappable: @proposal,
+          map_location: @proposal.map_location || @proposal.projekt&.map_location_with_admin_shape,
+          parent_class: "proposal",
+          projekt: @proposal.projekt,
+          show_admin_shape: @proposal.projekt.map_location.show_admin_shape?
+        ) %>
+      </div>
+    <% else %>
+      <div class="margin-bottom not-print">
+        <%= render Shared::MapComponent.new(
+          mappable: @proposal,
+          map_location: @proposal.map_location || @proposal.projekt_phase.projekt.map_location_with_admin_shape,
+          parent_class: "proposal",
+          projekt: @proposal.projekt_phase.projekt,
+          show_admin_shape: @proposal.projekt_phase.projekt.map_location.show_admin_shape?
+        ) %>
+      </div>
+    <% end %>
   <% end %>
 
-  <% if @proposal.projekt_labels.any? %>
-    <div class='resource-projekt-labels' style='margin-bottom:30px;'>
-      <%= render Shared::ProjektLabelsComponent.new(resource: @proposal) %>
-    </div>
-  <% end %>
+  <div class="resource-taggings margin-bottom">
+    <% if @proposal.projekt_labels.any? %>
+      <div class="resource-projekt-labels">
+        <%= render Shared::ProjektLabelsComponent.new(resource: @proposal) %>
+      </div>
+    <% end %>
+    <% if @proposal.sentiment %>
+      <div class="resource-sentiment">
+        <%= render Shared::SentimentsComponent.new(resource: proposal) %>
+      </div>
+    <% end %>
+  </div>
 
-  <% if projekt_feature?(@proposal.projekt, 'proposals.enable_summary') && @proposal.summary.present? %>
+  <% if projekt_phase_feature?(@proposal.projekt_phase, "form.enable_summary") && @proposal.summary.present? %>
     <blockquote><%= @proposal.summary %></blockquote>
   <% end %>
 
@@ -49,10 +68,6 @@
       <%= auto_link_already_sanitized_html wysiwyg(@proposal.description) %>
     </div>
   <% end %>
-
-  <div class='margin-top margin-bottom'>
-    <%= render "shared/tags", taggable: @proposal, limit: 5 %>
-  </div>
 
   <% if @proposal.video_url.present? %>
     <div class="video-link not-print">
@@ -82,7 +97,7 @@
     </div>
   <% end %>
 
-  <% if projekt_feature?(@proposal.projekt, "proposals.allow_attached_documents") %>
+  <% if projekt_phase_feature?(@proposal.projekt_phase, "form.allow_attached_documents") %>
     <%= render "documents/documents",
                 documents: @proposal.documents,
                 max_documents_allowed: Proposal.max_documents_allowed %>

@@ -12,9 +12,31 @@ module ProposalsHelper
 
   def json_data
     proposal = Proposal.find(params[:id])
+
+    labels = []
+    proposal.projekt_labels.each do |label|
+      label = {
+        name: label.name,
+        icon: label.icon
+      }
+      labels.push(label)
+    end
+
+    sentiment = {}
+    if proposal.sentiment.present?
+      sentiment["name"] = proposal.sentiment.name
+      sentiment["background-color"] = proposal.sentiment.color
+      sentiment["color"] = helpers.pick_text_color(proposal.sentiment.color)
+    end
+
+    image_url = proposal.image.present? ? url_for(proposal.image.variant(:popup)) : nil
+
     data = {
       proposal_id: proposal.id,
-      proposal_title: proposal.title
+      proposal_title: proposal.title,
+      image_url: image_url,
+      labels: labels,
+      sentiment: sentiment
     }.to_json
 
     respond_to do |format|
@@ -33,13 +55,13 @@ module ProposalsHelper
   end
 
   def default_active_proposal_footer_tab?(tab)
-    return true if tab == "comments" && projekt_feature?(@proposal&.projekt, 'proposals.show_comments')
+    return true if tab == "comments" && projekt_phase_feature?(@proposal.projekt_phase, "resource.show_comments")
 
-    return true if tab == "notifications" && projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab') &&
-                     !projekt_feature?(@proposal&.projekt, 'proposals.show_comments')
+    return true if tab == "notifications" && projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_notifications_tab") &&
+      !projekt_phase_feature?(@proposal.projekt_phase, "resource.show_comments")
 
-    tab == "milestones" && projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_milestones_tab') &&
-      !projekt_feature?(@proposal&.projekt, 'proposals.show_comments') &&
-      !projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab')
+    tab == "milestones" && projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_milestones_tab") &&
+      !projekt_phase_feature?(@proposal.projekt_phase, "resource.show_comments") &&
+      !projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_notifications_tab")
   end
 end

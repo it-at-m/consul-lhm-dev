@@ -1,43 +1,31 @@
-<%= render 'shared/loader_spinner' %>
+<%= render "shared/loader_spinner" %>
 
 <div class='row'>
-
   <div id="debates-sidebar" class="small-12 medium-3 column">
     <aside class="margin-bottom">
-      <%= render Shared::NewButtonComponent.new(projekt_phase: @current_tab_phase) %>
-
-      <% unless @current_projekt.overview_page? %>
-        <%= render Sidebar::ProjektsFilterComponent.new(
-            top_level_active_projekts: @top_level_active_projekts,
-            top_level_archived_projekts: @top_level_archived_projekts,
-            scoped_projekt_ids: @scoped_projekt_ids,
-            all_resources: @all_resources,
-            current_tab_phase: @current_tab_phase,
-            current_projekt: @current_projekt
-          ) %>
-      <% end %>
-
-      <%= render "shared/projekt_labels", projekt: @current_projekt %>
+      <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
+      <%= render "custom/pages/projekt_footer/partials/projekt_labels", projekt_phase: @projekt_phase, resources: @resources %>
+      <%= render "custom/pages/projekt_footer/partials/sentiments", projekt_phase: @projekt_phase, resources: @resources %>
     </aside>
   </div>
 
   <div id="debates" class="debates-list spinner-placeholder small-12 medium-9 column">
-    <%= render 'shared/loader_spinner' %>
-    <% unless @current_projekt.overview_page? %>
+    <%= render "shared/loader_spinner" %>
+    <% unless @projekt.overview_page? %>
       <%= render "shared/order_links", i18n_namespace: "debates.index" %>
     <% end %>
 
     <div class='row'>
       <div class='small-6 column small'>
         <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
-          <%= link_to t('debates.index.section_header.help'), '#section_help' %>
+          <%= link_to t("debates.index.section_header.help"), "#section_help" %>
         <% end %>
       </div>
       <div class='small-6 column small'>
         <% if extended_feature?('modulewide.show_number_of_entries_in_modules') %>
           <div class='float-right'>
             <%= @resources.count %>
-            <%= t('activerecord.models.debate', count: @resources.count) %>
+            <%= t("activerecord.models.debate", count: @resources.count) %>
           </div>
         <% end %>
       </div>
@@ -49,7 +37,7 @@
     <% else %>
       <%# = empty_recommended_debates_message_text(current_user) %>
     <% end %>
-    <%= paginate @debates, remote: true, params: { controller: 'pages', action: 'debate_phase_footer_tab' } %>
+    <%= paginate @debates, remote: true, params: { controller: "pages", action: "projekt_phase_footer_tab" } %>
 
   </div>
 </div>

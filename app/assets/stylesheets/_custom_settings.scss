@@ -3,6 +3,9 @@ $brand:                                           #005a9f;
 $brand-secondary:                                 #002d50 !default;
 $secondary:                                       #B6E1F6;
 $accent:                                          #FFE400;
+$dark:                                            darken($brand, 10%);
+$brand-lighter:                                   rgba($brand, 0.5);
+$text-over-brand:                                 $white;
 
 $yellow:                                          #FFE400;
 
@@ -19,7 +22,6 @@ $flyout-item-bg-color:                            $white;
 
 $flyout-block-border-color:                       $border;
 $flyout-item-divider-color:                       lighten($flyout-block-border-color, 5%);
-$flyout-item-projekt-modules-links-color:         $flyout-item-text-color;
 
 
 $flyout-item-line-height:                         1.5rem;

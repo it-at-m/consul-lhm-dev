@@ -5,7 +5,7 @@ class Admin::Legislation::ProcessesController < Admin::Legislation::BaseControll
 
   has_filters %w[active all], only: :index
 
-  load_and_authorize_resource :process, class: "Legislation::Process"
+  load_and_authorize_resource :process, class: "Legislation::Process", except: :create
 
   def index
     @processes = ::Legislation::Process.send(@current_filter).order(start_date: :desc)
@@ -13,12 +13,11 @@ class Admin::Legislation::ProcessesController < Admin::Legislation::BaseControll
   end
 
   def create
-    if @process.save(validate: false)
+    @process = ::Legislation::Process.new(process_params)
 
-      if @process.projekt.present? #custom
-        projekt_page_path = @process.projekt&.page&.url
-        legislation_phase_id = @process.projekt.legislation_phase.id
-        link = "#{projekt_page_path}?selected_phase_id=#{legislation_phase_id}#filter-subnav"
+    if @process.save
+      if @process.projekt_phase.present? #custom
+        link = "#{@process.projekt_phase&.projekt&.page&.url}?selected_phase_id=#{@process.projekt_phase.id}#filter-subnav"
       else
         link = legislation_process_path(@process)
       end
@@ -34,10 +33,8 @@ class Admin::Legislation::ProcessesController < Admin::Legislation::BaseControll
   def update
     if @process.update(process_params)
 
-      if @process.projekt.present? #custom
-        projekt_page_path = @process.projekt&.page&.url
-        legislation_phase_id = @process.projekt.legislation_phase.id
-        link = "#{projekt_page_path}?selected_phase_id=#{legislation_phase_id}#filter-subnav"
+      if @process.projekt_phase.present? #custom
+        link = "#{@process.projekt_phase&.projekt&.page&.url}?selected_phase_id=#{@process.projekt_phase.id}#filter-subnav"
       else
         link = legislation_process_path(@process)
       end
@@ -87,7 +84,7 @@ class Admin::Legislation::ProcessesController < Admin::Legislation::BaseControll
         :background_color,
         :font_color,
         :related_sdg_list,
-        :projekt_id,
+        :projekt_phase_id,
         translation_params(::Legislation::Process),
         documents_attributes: document_attributes,
         image_attributes: image_attributes

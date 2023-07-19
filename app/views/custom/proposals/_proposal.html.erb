@@ -5,7 +5,7 @@
     </div>
   </div>
 
-  <% cache [proposal, proposal.image, "image", proposal&.projekt] do %>
+  <% cache [proposal, proposal.image, "image", proposal.projekt_phase] do %>
     <div class='columns small-12 medium-3 large-2 show-for-small-only not-print'>
       <% if show_image_thumbnail?(proposal) %>
         <%= link_to namespaced_proposal_path(proposal) do %>
@@ -14,7 +14,7 @@
       <% end %>
     </div>
 
-    <div class="columns small-12 medium-3 large-2 show-for-medium not-print <%= "image-placeholder icon-#{proposal.projekt.icon.presence || "image"}" unless show_image_thumbnail?(proposal) %>" data-equalizer-watch='main'>
+    <div class="columns small-12 medium-3 large-2 show-for-medium not-print <%= "image-placeholder icon-#{proposal.projekt_phase.projekt.icon.presence || "image"}" unless show_image_thumbnail?(proposal) %>" data-equalizer-watch='main'>
       <% if show_image_thumbnail?(proposal) %>
         <%= link_to namespaced_proposal_path(proposal) do %>
           <%= image_tag proposal.image.variant(:thumb_wider), alt: proposal.image.title.unicode_normalize %>
@@ -31,8 +31,7 @@
       <div class='column small-12 medium-6 large-8 resource-details' data-equalizer-watch='details'>
         <% cache [locale_and_user_status(proposal),
                   proposal,
-                  proposal.projekt,
-                  params[:tags],
+                  proposal.projekt_phase,
                   params[:projekts],
                   params[:geozone_affiliation],
                   params[:affiliated_geozones],
@@ -40,17 +39,21 @@
                   params[:restricted_geozones],
                   params[:projekt_label_ids],
                   "details"] do %>
-          <div class='resource-projekt-labels'>
-            <%= render Shared::ProjektLabelsComponent.new(resource: proposal) %>
-          </div>
           <h4 class='resource-name'><%= link_to proposal.title, namespaced_proposal_path(proposal) %></h4>
+          <div class='resource-taggings'>
+            <div class='resource-projekt-labels'>
+              <%= render Shared::ProjektLabelsComponent.new(resource: proposal) %>
+            </div>
+            <div class='resource-sentiment'>
+              <%= render Shared::SentimentsComponent.new(resource: proposal) %>
+            </div>
+          </div>
           <div class="resource-summary margin-bottom">
             <%= link_to namespaced_proposal_path(proposal) do %>
-              <%= auto_link_already_sanitized_html simple_format(projekt_feature?(proposal.projekt, 'proposals.enable_summary') ? proposal.summary : strip_tags(proposal.description)[0..200]) %>
+              <%= auto_link_already_sanitized_html simple_format(projekt_phase_feature?(proposal.projekt_phase, "form.enable_summary") ? proposal.summary : strip_tags(proposal.description)[0..200]) %>
               <div class="truncate"></div>
             <% end %>
           </div>
-          <%= render "shared/tags", taggable: proposal, limit: 5 %>
         <% end %>
       </div>
 
@@ -70,7 +73,7 @@
                   <strong><%= t("proposals.proposal.supports", count: proposal.total_votes) %></strong>
                   <p><%= t("proposals.proposal.archived") %></p>
                 </div>
-              <% elsif projekt_feature?(proposal&.projekt, 'proposals.allow_voting') %>
+              <% elsif projekt_phase_feature?(proposal.projekt_phase, "resource.allow_voting") %>
                 <%= render "proposals/votes",
                           { proposal: proposal, vote_url: vote_proposal_path(proposal, value: "yes") } %>
               <% end %>

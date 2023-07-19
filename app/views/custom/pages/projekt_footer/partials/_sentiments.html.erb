@@ -1,0 +1,9 @@
+<% if projekt_phase.sentiments.any? %>
+  <div class="sidebar-divider"></div>
+  <h2 class="sidebar-title projekt-tag-chip-sentiment projekt-tag-chip-icon"><%= projekt_phase.sentiment_label_text %></h2>
+  <br>
+
+  <div id="sentiments-sidebar">
+    <%= render Shared::SentimentsComponent.new(projekt_phase_id: projekt_phase.id) %>
+  </div>
+<% end %>

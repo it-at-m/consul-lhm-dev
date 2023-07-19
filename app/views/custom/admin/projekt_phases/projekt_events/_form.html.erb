@@ -1,0 +1,32 @@
+<%= form_for(event, url: polymorphic_path([@namespace, @projekt_phase, event])) do |f| %>
+  <%= render "shared/errors", resource: f.object %>
+
+  <div class='small-12 medium-7'>
+    <%= f.text_field :title, { required: true } %>
+  </div>
+
+  <div class='small-12 medium-7'>
+    <%= f.text_field :location %>
+  </div>
+
+  <div class='small-12 medium-7'>
+    <%= f.datetime_field :datetime, { required: true } %>
+  </div>
+
+  <div class='small-12 medium-7'>
+    <%= f.datetime_field :end_datetime %>
+  </div>
+
+  <div class='small-12 medium-7'>
+    <%= f.text_field :weblink %>
+  </div>
+
+  <% textarea_wrap_class = local_assigns[:wide_textarea].present? ? "" : "small-12 medium-7" %>
+  <div class="<%= textarea_wrap_class %>">
+    <%= f.text_area :description, rows: 10, id: "projekt-event-description-#{event.id}", class: "html-area #{ck_editor_class(current_user)}" %>
+  </div>
+
+  <div>
+    <%= f.submit(t("custom.admin.projekt_phases.projekt_events.button"), class: "button") %>
+  </div>
+<% end %>

@@ -2,7 +2,11 @@
   <%= "#{t("admin.header.title")} - #{t("admin.progress_bars.index.title")}" %>
 <% end %>
 
-<%= back_link_to admin_polymorphic_path(@progressable) %>
+<% if @progressable.is_a?(ProjektPhase::MilestonePhase) %>
+  <%= back_link_to namespaced_polymorphic_path(@namespace || :admin, @progressable, action: :milestones) %>
+<% else %>
+  <%= back_link_to admin_polymorphic_path(@progressable) %>
+<% end %>
 
 <div class="clear"></div>
 

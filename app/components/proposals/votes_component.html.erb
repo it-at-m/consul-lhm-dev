@@ -5,7 +5,7 @@
   <div class="in-favor">
 
     <% if voted? %>
-      <% if projekt_feature?(proposal&.projekt, 'proposals.enable_proposal_support_withdrawal') %>
+      <% if projekt_phase_feature?(proposal.projekt_phase, "resource.enable_proposal_support_withdrawal") %>
         <%= button_to unvote_proposal_url(proposal),
             class: "button button-support small expanded unvote",
             title: t("proposals.proposal.support_title"), method: "post", remote: true do %>

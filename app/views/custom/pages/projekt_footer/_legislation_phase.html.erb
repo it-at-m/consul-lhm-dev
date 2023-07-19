@@ -7,15 +7,15 @@
             <h3><%= t("legislation.draft_versions.show.seeing_version") %></h3>
 
             <div class="select-box">
-              <%= form_tag @current_projekt.page.url + '#footer-content', method: :get, id: "draft_version_go_to_version" do %>
+              <%= form_tag @projekt.page.url + "#footer-content", method: :get, id: "draft_version_go_to_version" do %>
                 <%= select_tag "text_draft_version_id", options_from_collection_for_select(@draft_versions_list, "id", "display_title", @draft_version.id), "aria-label": t("legislation.draft_versions.show.select_draft_version") %>
-                <%= hidden_field_tag :selected_phase_id, @current_projekt.legislation_phase.id %>
+                <%= hidden_field_tag :selected_phase_id, @legislation_phase %>
                 <%= hidden_field_tag :section, 'all_drafts_annotations' %>
               <% end %>
               <% if @draft_version.changelog.present? %>
                 <span>
                   <%= link_to t("legislation.draft_versions.show.see_changes"),
-                              projekt_legislation_process_footer_path(@current_projekt, @draft_version, section: 'changelog'),
+                              projekt_phase_footer_tab_page_path(@projekt.page, @legislation_phase, @draft_version, section: 'changelog'),
                               class: "see-changes" %>
                 </span>
               <% end %>
@@ -25,7 +25,7 @@
           </div>
           <div class="small-12 column projekt-texts-button-section">
               <%= render "legislation/processes/help_gif" %>
-              <%= link_to projekt_legislation_process_footer_path(@current_projekt, @draft_version), title: t("legislation.annotations.version_chooser.see_text"), class: "button hollow" do %>
+              <%= link_to projekt_phase_footer_tab_page_path(@projekt.page, @legislation_phase, @draft_version), title: t("legislation.annotations.version_chooser.see_text"), class: "button hollow" do %>
                 <%= t("legislation.annotations.version_chooser.see_text") %>
             <% end %>
           </div>
@@ -38,7 +38,7 @@
         <div class="comment">
           <strong><%= t("legislation.annotations.index.comments_about") %></strong>
           <span class="float-right">
-            <%= link_to projekt_legislation_process_footer_path(@current_projekt, @draft_version, anchor: "annotation-id-#{annotation.id}") do %>
+            <%= link_to projekt_phase_footer_tab_page_path(@projekt.page, @legislation_phase, @draft_version, anchor: "annotation-id-#{annotation.id}") do %>
               <span><%= t("legislation.annotations.index.see_in_context") %></span>
               <span class="icon-expand" aria-hidden="true"></span>
             <% end %>
@@ -46,7 +46,7 @@
           <div class="comment-section">
             <%= sanitize(annotation.context).presence || annotation.quote %>
           </div>
-          <%= link_to projekt_legislation_process_footer_path(@current_projekt, @draft_version, section: 'annotations', params: { annotation_id: annotation.id}) do %>
+          <%= link_to projekt_phase_footer_tab_page_path(@projekt.page, @legislation_phase, @draft_version, section: 'annotations', params: { annotation_id: annotation.id}) do %>
             <span class="icon-comments" aria-hidden="true"></span>
             <span>
               <%= t("legislation.annotations.index.comments_count", count: annotation.comments_count) %>
@@ -65,14 +65,14 @@
           <div class="small-12 medium-5 column projekt-text-title-block">
             <h3><%= t("legislation.draft_versions.show.seeing_version") %></h3>
             <div class="select-box">
-              <%= form_tag @current_projekt.page.url + '#footer-content', method: :get, id: "draft_version_go_to_version" do %>
+              <%= form_tag @projekt.page.url + '#footer-content', method: :get, id: "draft_version_go_to_version" do %>
                 <%= select_tag "text_draft_version_id", options_from_collection_for_select(@draft_versions_list, "id", "display_title", @draft_version.id), "aria-label": t("legislation.draft_versions.show.select_draft_version") %>
-                <%= hidden_field_tag :selected_phase_id, @current_projekt.legislation_phase.id %>
+                <%= hidden_field_tag :selected_phase_id, @legislation_phase.id %>
               <% end %>
               <% if @draft_version.changelog.present? %>
                 <span>
                   <%= link_to t("legislation.draft_versions.show.see_changes"),
-                              projekt_legislation_process_footer_path(@current_projekt, @draft_version, section: 'changelog'),
+                              projekt_phase_footer_tab_page_path(@projekt.page, @legislation_phase, @draft_version, section: 'changelog'),
                               class: "see-changes" %>
                 </span>
               <% end %>
@@ -83,7 +83,7 @@
           <% unless @draft_version.final_version? %>
             <div class="small-12 column projekt-texts-button-section">
               <%= render "legislation/processes/help_gif" %>
-              <%= link_to projekt_legislation_process_footer_path(@current_projekt, @draft_version, section: 'all_drafts_annotations'),
+              <%= link_to projekt_phase_footer_tab_page_path(@projekt.page, @legislation_phase, @draft_version, section: 'all_drafts_annotations'),
                           title: t("legislation.draft_versions.show.see_comments"),
                           class: "button expanded hollow projekt-all-comments-button" do %>
                 <%= t("legislation.draft_versions.show.see_comments") %>
@@ -114,9 +114,9 @@
               <% else %>
               <section class="legislation-annotatable"
                        data-legislation-draft-version-id="<%= @draft_version.id %>"
-                       data-projekt-slug="<%= @current_projekt.page.url %>"
+                       data-projekt-slug="<%= @projekt.page.url %>"
                        data-text-draft-version-id="<%= @draft_version.id %>"
-                       data-selected-phase-id="<%= @current_projekt.legislation_phase.id %>"
+                       data-selected-phase-id="<%= @legislation_phase.id %>"
                        data-section-name="annotations"
                        data-legislation-annotatable-base-url="<%= legislation_process_draft_version_path(@process, @draft_version) %>"
                        data-legislation-open-phase="true"
@@ -145,9 +145,9 @@
         <div class="small-12 column projekt-text-title-block">
           <h3><%= t("legislation.draft_versions.changes.seeing_changelog_version") %></h3>
           <div class="select-box">
-            <%= form_tag @current_projekt.page.url + '#footer-content', method: :get, id: "draft_version_go_to_version" do %>
+            <%= form_tag @projekt.page.url + '#footer-content', method: :get, id: "draft_version_go_to_version" do %>
               <%= select_tag "text_draft_version_id", options_from_collection_for_select(@draft_versions_list, "id", "display_title", @draft_version.id), "aria-label": t("legislation.draft_versions.show.select_draft_version") %>
-              <%= hidden_field_tag :selected_phase_id, @current_projekt.legislation_phase.id %>
+              <%= hidden_field_tag :selected_phase_id, @legislation_phase.id %>
               <%= hidden_field_tag :section, 'changelog' %>
               <%= submit_tag t("legislation.draft_versions.show.select_version_submit"), class: "button" %>
             <% end %>
@@ -156,7 +156,7 @@
         </div>
         <div class="small-12 column projekt-texts-button-section">
           <%= render "legislation/processes/help_gif" %>
-          <%= link_to projekt_legislation_process_footer_path(@current_projekt, @draft_version),
+          <%= link_to projekt_phase_footer_tab_page_path(@projekt.page, @legislation_phase, @draft_version),
                       title: t("legislation.draft_versions.changes.see_text"), class: "button hollow projekt-all-comments-button" do %>
             <%= t("legislation.draft_versions.changes.see_text") %>
           <% end %>
@@ -177,9 +177,9 @@
       <div class="small-12 medium-5 column projekt-text-title-block">
         <h3><%= t("legislation.annotations.version_chooser.seeing_version") %></h3>
         <div class="select-box">
-          <%= form_tag @current_projekt.page.url + '#footer-content', method: :get, id: "draft_version_go_to_version" do %>
+          <%= form_tag @projekt.page.url + '#footer-content', method: :get, id: "draft_version_go_to_version" do %>
             <%= select_tag "draft_version_id", options_from_collection_for_select(@draft_versions_list, "id", "display_title", @draft_version.id), "aria-label": t("legislation.draft_versions.show.select_draft_version") %>
-              <%= hidden_field_tag :selected_phase_id, @current_projekt.legislation_phase.id %>
+              <%= hidden_field_tag :selected_phase_id, @legislation_phase.id %>
               <%= hidden_field_tag :section, 'annotations' %>
             <%= submit_tag t("legislation.draft_versions.show.select_version_submit"), class: "button" %>
           <% end %>
@@ -188,7 +188,7 @@
       </div>
       <div class="small-12 column projekt-texts-button-section">
         <%= render "legislation/processes/help_gif" %>
-        <%= link_to projekt_legislation_process_footer_path(@current_projekt, @draft_version),
+        <%= link_to projekt_phase_footer_tab_page_path(@projekt.page, @legislation_phase, @draft_version),
                     title: t("legislation.annotations.version_chooser.see_text"), class: "button hollow" do %>
           <%= t("legislation.annotations.version_chooser.see_text") %>
         <% end %>
@@ -209,7 +209,7 @@
                   </div>
                   <div class="small-12 medium-3 column legislation-comment">
                     <span class="float-right">
-                      <%= link_to projekt_legislation_process_footer_path(@current_projekt, @draft_version, anchor: "annotation-id-#{@annotation.id}") do %>
+                      <%= link_to projekt_phase_footer_tab_page_path(@projekt.page, @legislation_phase, @draft_version, anchor: "annotation-id-#{@annotation.id}") do %>
                         <span><%= t("legislation.annotations.index.see_in_context") %></span> <span class="icon-expand" aria-hidden="true"></span>
                       <% end %>
                     </span>

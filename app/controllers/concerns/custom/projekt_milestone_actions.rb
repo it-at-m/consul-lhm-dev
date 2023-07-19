@@ -29,6 +29,7 @@ module ProjektMilestoneActions
     authorize! :create, @milestone if params[:namespace] == "projekt_management"
 
     if @milestone.save
+      NotificationServices::NewProjektMilestoneNotifier.call(@milestone.id)
       redirect_to namespaced_polymorphic_path(params[:namespace], @milestoneable, action: :edit) +
         "#tab-projekt-milestones", notice: t("admin.milestones.create.notice")
     else

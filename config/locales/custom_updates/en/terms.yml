@@ -16,3 +16,6 @@ en:
         text: General Terms of Use
       revoke_consent:
         text: You can revoke your consent to data storage at any time without giving reasons.
+      resource_terms:
+        title: Terms of User
+        label: My contribution complies with the %{terms_link} and %{privacy_link}

@@ -6,7 +6,6 @@ class ProposalsController
   include Takeable
   include ProjektLabelAttributes
 
-  before_action :process_tags, only: [:create, :update]
   before_action :set_projekts_for_selector, only: [:new, :edit, :create, :update]
 
   def index_customization
@@ -20,6 +19,9 @@ class ProposalsController
       selected_parent_projekt_id = get_highest_unique_parent_projekt_id(@selected_projekts_ids)
       @selected_parent_projekt = Projekt.find_by(id: selected_parent_projekt_id)
     end
+
+    related_projekt_ids = @resources.joins(projekt_phase: :projekt).pluck("projekts.id").uniq
+    related_projekts = Projekt.where(id: related_projekt_ids)
 
     @geozones = Geozone.all
     @selected_geozone_affiliation = params[:geozone_affiliation] || 'all_resources'
@@ -39,10 +41,19 @@ class ProposalsController
     @top_level_active_projekts = Projekt.top_level.current.where(id: @scoped_projekt_ids)
     @top_level_archived_projekts = Projekt.top_level.expired.where(id: @scoped_projekt_ids)
 
+    @categories = Tag.category.joins(:taggings)
+      .where(taggings: { taggable_type: "Projekt", taggable_id: related_projekt_ids }).order(:name).uniq
+
+    if params[:sdg_goals].present?
+      sdg_goal_ids = SDG::Goal.where(code: params[:sdg_goals].split(",")).ids
+      @sdg_targets = SDG::Target.where(goal_id: sdg_goal_ids).joins(:relations)
+        .where(sdg_relations: { relatable_type: "Projekt", relatable_id: related_projekt_ids })
+    end
+
     unless params[:search].present?
       take_by_my_posts
-      take_by_tag_names
-      take_by_sdgs
+      take_by_tag_names(related_projekts)
+      take_by_sdgs(related_projekts)
       take_by_geozone_affiliations
       take_by_geozone_restrictions
       take_by_projekts(@scoped_projekt_ids)
@@ -55,7 +66,12 @@ class ProposalsController
 
   def new
     redirect_to proposals_path if proposal_limit_exceeded?(current_user)
-    redirect_to proposals_path if Projekt.top_level.selectable_in_selector('proposals', current_user).empty?
+    redirect_to proposals_path if Projekt.top_level.selectable_in_selector("proposals", current_user).empty?
+
+    if params[:projekt_phase_id].present?
+      @projekt_phase = ProjektPhase::ProposalPhase.find(params[:projekt_phase_id])
+      @projekt = @projekt_phase.projekt
+    end
 
     @resource = resource_model.new
     set_geozone
@@ -64,7 +80,8 @@ class ProposalsController
   end
 
   def edit
-    @selected_projekt = @proposal.projekt
+    @selected_projekt = @proposal.projekt_phase.projekt
+    params[:projekt_phase_id] = @proposal.projekt_phase.id
   end
 
   def create
@@ -76,26 +93,26 @@ class ProposalsController
     elsif @proposal.save
       @proposal.publish
 
-      if @proposal.proposal_phase.active?
-        if @proposal.projekt.overview_page?
+      if @proposal.projekt_phase.active?
+        if @proposal.projekt_phase.projekt.overview_page?
           redirect_to projekts_path(
-            anchor: 'filter-subnav',
-            selected_phase_id: @proposal.proposal_phase.id,
+            anchor: "filter-subnav",
+            selected_phase_id: @proposal.projekt_phase.id,
             order: params[:order]
           ), notice: t("proposals.notice.published")
         else
           redirect_to page_path(
-            @proposal.projekt.page.slug,
-            anchor: 'filter-subnav',
-            selected_phase_id: @proposal.proposal_phase.id,
+            @proposal.projekt_phase.projekt.page.slug,
+            anchor: "filter-subnav",
+            selected_phase_id: @proposal.projekt_phase.id,
             order: params[:order]
           ), notice: t("proposals.notice.published")
         end
       else
-        if @proposal.projekt.overview_page?
+        if @proposal.projekt_phase.projekt.overview_page?
           redirect_to projekts_path(
-            anchor: 'filter-subnav',
-            selected_phase_id: @proposal.proposal_phase.id,
+            anchor: "filter-subnav",
+            selected_phase_id: @proposal.projekt_phase.id,
             order: params[:order]
           ), notice: t("proposals.notice.published")
         else
@@ -105,7 +122,7 @@ class ProposalsController
         end
       end
     else
-      @selected_projekt = @proposal.projekt
+      @selected_projekt = @proposal.projekt_phase.projekt
       render :new
     end
   end
@@ -113,20 +130,20 @@ class ProposalsController
   def publish
     @proposal.publish
 
-    if @proposal.proposal_phase.active?
+    if @proposal.projekt_phase.active?
       redirect_to page_path(
-        @proposal.projekt.page.slug,
-        anchor: 'filter-subnav',
-        selected_phase_id: @proposal.proposal_phase.id,
-        order: 'created_at'), notice: t("proposals.notice.published")
+        @proposal.projekt_phase.projekt.page.slug,
+        anchor: "filter-subnav",
+        selected_phase_id: @proposal.projekt_phase.id,
+        order: "created_at"), notice: t("proposals.notice.published")
     else
-      redirect_to proposals_path(order: 'created_at'), notice: t("proposals.notice.published")
+      redirect_to proposals_path(order: "created_at"), notice: t("proposals.notice.published")
     end
   end
 
   def show
     super
-    @projekt = @proposal.projekt
+    @projekt = @proposal.projekt_phase.projekt
     @notifications = @proposal.notifications
     @notifications = @proposal.notifications.not_moderated
     @related_contents = Kaminari.paginate_array(@proposal.relationed_contents)
@@ -169,26 +186,12 @@ class ProposalsController
   end
 
   private
-    def process_tags
-      if params[:proposal][:tags]
-        params[:tags] = params[:proposal][:tags].split(',')
-        params[:proposal].delete(:tags)
-      end
-
-      params[:proposal][:tag_list_custom]&.split(",")&.each do |t|
-        next if t.strip.blank?
-        Tag.find_or_create_by name: t.strip
-      end
-      params[:proposal][:tag_list] ||= ""
-      params[:proposal][:tag_list] += ((params[:proposal][:tag_list_predefined] || "").split(",") + (params[:proposal][:tag_list_custom] || "").split(",")).join(",")
-      params[:proposal].delete(:tag_list_predefined)
-      params[:proposal].delete(:tag_list_custom)
-    end
 
     def proposal_params
       attributes = [:video_url, :responsible_name, :tag_list, :on_behalf_of,
-                    :geozone_id, :projekt_id, :related_sdg_list,
-                    :terms_of_service, :terms_data_storage, :terms_data_protection, :terms_general,
+                    :geozone_id, :projekt_id, :projekt_phase_id, :related_sdg_list,
+                    :terms_of_service, :terms_data_storage, :terms_data_protection, :terms_general, :resource_terms,
+                    :sentiment_id,
                     projekt_label_ids: [],
                     image_attributes: image_attributes,
                     documents_attributes: [:id, :title, :attachment, :cached_attachment,

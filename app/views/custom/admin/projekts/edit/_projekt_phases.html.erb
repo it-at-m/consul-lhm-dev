@@ -1,27 +1,26 @@
-<% namespace = params[:controller].split("/").first %>
+<h2><%= t("custom.admin.projekts.edit.projekt_phases_tab.phases_block_title") %></h2>
 
-<h2><%= t("custom.admin.projekts.edit.projekt_phases_tab.main_block_title") %></h2>
-<%= render partial: "admin/projekts/edit/projekt_phases/settings_table", locals: { features: @projekt_features_main } %>
+<div style="display:inline-block;width:40%">
+  <%= form_for(ProjektPhase.new, url: polymorphic_path([@namespace, @projekt, ProjektPhase.new])) do |f| %>
+    <%= f.hidden_field :projekt_id, value: @projekt.id %>
+    <%= f.label :type, t("custom.admin.projekts.edit.projekt_phases_tab.type") %>
+    <%= f.select :type, ProjektPhase::PROJEKT_PHASES_TYPES.map { |type| [type.constantize.model_name.human, type] }, { label: false }, { class: "form-control" } %>
+    <%= f.submit %>
+  <% end %>
+</div>
 
+<% if @projekt.projekt_phases.any? %>
+  <table class='edit-projekt margin-top'>
+    <thead>
+      <%= render partial: "custom/admin/projekts/edit/projekt_phases/projekt_phase_table_header" %>
+    </thead>
 
-<h2><%= t("custom.admin.projekts.edit.projekt_phases_tab.page_block_title") %></h2>
-<%= render partial: "admin/projekts/edit/projekt_phases/projekt_page" %>
-
-<h2><%= t("custom.admin.projekts.edit.projekt_phases_tab.information_block_title") %></h2>
-<%= render partial: "admin/projekts/edit/projekt_phases/projekt_information" %>
-
-<h2 class="margin-top-25"><%= t("custom.admin.projekts.edit.projekt_phases_tab.phases_block_title") %></h2>
-
-<table class='edit-projekt margin-top'>
-  <thead>
-    <%= render partial: "custom/admin/projekts/edit/projekt_phases/projekt_phase_table_header" %>
-  </thead>
-
-  <tbody class="sortable" data-js-url="<%= order_phases_admin_projekt_projekt_phases_path(@projekt) %>">
-    <% @projekt.projekt_phases.each do |projekt_phase| %>
-      <%= render partial: "custom/admin/projekts/edit/projekt_phases/projekt_phase", locals: {
-        projekt_phase: projekt_phase
-      } %>
-    <% end %>
-  </tbody>
-</table>
+    <tbody class="sortable" data-js-url="<%= order_phases_admin_projekt_projekt_phases_path(@projekt) %>">
+      <% @projekt.projekt_phases.each do |projekt_phase| %>
+        <%= render partial: "custom/admin/projekts/edit/projekt_phases/projekt_phase", locals: {
+          projekt_phase: projekt_phase
+        } %>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

@@ -3,12 +3,13 @@
 .projekt-bar {
   display: flex;
   justify-content: space-between;
-  color: white;
   padding-top: 7px;
   padding-bottom: 7px;
   font-size: 0.9rem;
   position: relative;
   overflow: visible !important;
+  background-color: $brand;
+  color: $text-over-brand;
 
   a {
     text-decoration: none;
@@ -39,8 +40,12 @@
   .resource-details {
     border-right: 1px solid $border;
 
+    .resource-taggings {
+      margin-bottom: 0.5rem;
+    }
+
     .resource-projekt-labels {
-      margin-top: 0.5rem;
+      margin-top: -0.5rem;
 
       .projekt-label {
         margin-right: 0.1rem;
@@ -288,7 +293,7 @@
     display: none;
   }
 
-  label:not([for$='_terms_data_storage']):not([for$='_terms_data_protection']):not([for$='_terms_general']):not(.is-invalid-label),
+  label:not([for$='_terms_data_storage']):not([for$='_terms_data_protection']):not([for$='_terms_general']):not([for$='_resource_terms']):not(.is-invalid-label),
   fieldset.nested-image > legend,
   fieldset.documents-list > legend,
   fieldset.sdg-related-list-selector > legend {

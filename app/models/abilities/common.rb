@@ -140,14 +140,12 @@ module Abilities
       can :create, Budget::Investment do |investment|
         investment.budget.phase == "accepting" &&
           (
-           (ProjektSetting.find_by(
-             projekt: investment.projekt,
-             key: "projekt_feature.budgets.only_admins_create_investment_proposals").value.present? &&
+            (investment.projekt_phase.settings.find_by(
+              key: "feature.general.only_admins_create_investment_proposals").value.present? &&
             (user.administrator? || user.projekt_manager?)) ||
 
-           ProjektSetting.find_by(
-             projekt: investment.projekt,
-             key: "projekt_feature.budgets.only_admins_create_investment_proposals").value.blank?
+            investment.projekt_phase.settings.find_by(
+              key: "feature.general.only_admins_create_investment_proposals").value.blank?
           )
       end
 
@@ -159,6 +157,14 @@ module Abilities
       # extending to regular users
       can :access, :ckeditor
       can :manage, Ckeditor::Picture
+
+      can :toggle_subscription, ProjektSubscription do |subscription|
+        subscription.user == user
+      end
+
+      can :toggle_subscription, ProjektPhaseSubscription do |subscription|
+        subscription.user == user
+      end
     end
   end
 end

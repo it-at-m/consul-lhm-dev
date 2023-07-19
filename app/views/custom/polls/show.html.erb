@@ -57,7 +57,7 @@
       </aside>
     </div>
 
-    <% if projekt_feature?(@poll&.projekt, "polls.additional_information") %>
+    <% if projekt_phase_feature?(@poll&.projekt_phase, "resource.additional_information") %>
       <div class="expanded poll-more-info">
         <div class="row margin">
           <div class="small-12 medium-9 column">
@@ -68,7 +68,7 @@
       </div>
     <% end %>
 
-    <% unless projekt_feature?(@poll&.projekt, "polls.additional_info_for_each_answer") %>
+    <% unless projekt_phase_feature?(@poll&.projekt_phase, "resource.additional_info_for_each_answer") %>
       <div id="poll_more_info_answers" class="expanded poll-more-info-answers">
         <div class="row padding">
           <% @poll_questions_answers.each do |answer| %>
@@ -88,7 +88,7 @@
       <% end %>
     <% end %>
 
-    <% if projekt_feature?(@poll.projekt, "polls.show_comments") %>
+    <% if projekt_phase_feature?(@poll.projekt_phase, "resource.show_comments") %>
 
       <div class="additional-content margin-top">
         <div class="filter-subnav">

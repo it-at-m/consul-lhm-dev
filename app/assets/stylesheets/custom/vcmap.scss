@@ -1,0 +1,66 @@
+.vcmap-container {
+  position: relative;
+
+  .mapElement {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden; /* Fix for iFrame content */
+  }
+
+  .cesium-widget,
+  .cesium-widget canvas {
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+
+  .map-overlay {
+    position: absolute;
+    z-index: 1;
+    left: 15px;
+    top: 20px;
+  }
+
+  .controls {
+    position: absolute;
+    bottom: 20px;
+    left: 15px;
+  }
+
+  button {
+    background-color: buttonface;
+    padding: 1px 6px;
+  }
+
+  #vc-popup {
+    background-color: #fff;
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 170px;
+    padding: 10px;
+    line-height: 1.4;
+    border-radius: 5px;
+
+    .popup-close-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 4px 4px 0 0;
+      text-align: center;
+      width: 18px;
+      height: 14px;
+      font: 16px/14px Tahoma, Verdana, sans-serif;
+      color: #c3c3c3;
+      text-decoration: none;
+      font-weight: bold;
+      background: transparent;
+    }
+  }
+}

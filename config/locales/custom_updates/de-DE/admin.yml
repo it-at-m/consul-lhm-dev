@@ -155,6 +155,10 @@ de:
           list: Registrierte Straßen    
         individual_groups: Individuelle Gruppen
       polls:
+        poll:
+          send_notifications: Benachrichtigungen senden
+          notifications_sent: Benachrichtigungen wurden erfolgreich gesendet
+          send_notifications_confirm: Sind Sie sicher?
         questions:
           show:
             description: Bezeichnung
@@ -179,83 +183,28 @@ de:
       projekts:
         destroy: Löschen
         edit:
-          description: Projektbeschreibung
-          design:
-            icon: Icon
-            submit_button: Submit
-          projekt_activated: Projekt aktiv
-          projekt_active:
-            "no": Nein
-            "yes": Ja
-          projekt_events_tab:
-            button: Event erstellen
-            event_created_at: Hergestellt in
-            event_datetime: Datum
-            event_end_datetime: Endtermin
-            event_location: Veranstaltungsort
-            event_title: Veranstaltungstitel
-            event_weblink: Weblink
-            name: Veranstaltungen
-            page_title: Veranstaltungen
-          projekt_managers_tab:
-            name: Projektmanager*innen
-          projekt_map_tab:
-            name: Ind. Kartenkonfiguration
-          projekt_milestones_tab:
-            name: Fortschritt & Meilensteine
-          projekt_news_tab:
-            name: News-Feed
-          projekt_notifications_tab:
-            button: Nachricht senden
-            name: Benachrichtigungen
-            notification_body: Nachricht
-            notification_title: Titel
-            page_title: Nachricht senden
-            title: Nachricht senden
-          projekt_arguments_tab:
-            button: Stimme erlstellen
-            name: Stimmen
-            argument_name: Name
-            argument_pro: Pro
-            argument_cons: Contra
-            argument_party: Partei
-            argument_position: Position
-            argument_note: Stimme
-            argument_image: Bild
-            argument_created_at: Created at
-            page_title: Stimmen
-            title: Stimmen
-          projekt_livestreams_tab:
-            submit_button: Livestream erstellen
-            name: Livestreams
-            page_title: Livestreams
-            all_livestreams: Alle Livestreams
-            livestream:
-              url: Livestream link
-              title: Titel
-              description: Bezeichnung
-              starts_at: Startet um
-              platform: Portal
-              add_question: Frage hinzufügen
-              questoins: Kurzumfragen
-          projekt_page: Projektseite
-          projekt_phase_limitation: Beschränkung
-          projekt_phases: Projektphasen
+          projekt_configuration_tab:
+            name: Projekteinstellungen
+            main_block_title: Status
+            information_block_title: Informationen
+            duration_block_title: Laufzeit
+            geo_affiliation_block_title: Gebietszuordnung
+            individual_groups_block_title: Sichtbarkeitsbeschränkung auf starke Gruppen
+          projekt_page_tab:
+            name: Projektseite
+            main_block_title: Projektseite
           projekt_phases_tab:
-            actions: Aktionen
-            activate: Aktiviert
-            affiliation: Gebietszuordnung
-            projekt_individual_group_values: Sichbarkeitseinschränkung auf Gruppen
-            beginning: Anfangsdatum
-            budget_phase: Budget
-            copy_phase_link: Link für Tab abrufen
-            comment_phase: Kommentare
-            debate_phase: Diskussionen
-            end_date: Enddatum
-            ending: Enddatum
-            event_phase: Veranstaltungen
-            hint: Einstellungen gelten nur für Tab-Info in der Fußzeile
-            information_block_title: Projektinformationen
+            type: Phase auswählen
+            name: Projektphasen
+            phases_block_title: Projektphasen
+            table_headings:
+              phase_name: Phase
+              start_date: Anfangsdatum
+              end_date: Enddatum
+              limitations: Beschränkung
+              default_tab: Standard
+              activated: Aktiviert
+              edit_link: Bearbeiten
             link:
               question_phase: Zu den Kurzumfragen
               voting_phase: Zu den Abstimmungen
@@ -267,79 +216,29 @@ de:
               event_phase: Zu den Veranstaltungen
               livestream_phase: Zu den Livestreams
               newsfeed_phase: Zu den News-Feeds
-            main_block_title: Projektstatus
-            milestone_phase: Meilensteine
-            name: Projekteinstellungen
-            newsfeed_phase: News-Feed
-            page_block_title: Projektseite
-            phase_name: Phase
-            phases_block_title: Projektphasen
-            projekt_duration: Projektinformationen
-            projekt_notification_phase: Benachrichtigungen
-            proposal_phase: Vorschläge
-            question_phase: Kurzumfrage
-            geo_restriction_title: Gebietsbeschränkung
-            extended_geo_restriction_title: Zusatzliche individuelle Gebietsbeschränkungen
-            start_date: Anfangsdatum
-            standard_element: Standardelement
-            voting_manage: Abstimmungen verwalten
-            voting_phase: Abstimmung
-            livestream_phase: Livestreams
-            legislation_phase: Textbearbeitung
             restriction_names:
               age: Alter
               geo: Geo
               verification: Verifizierung
-            table_headings:
-              phase_name: Phase
-              start_date: Anfangsdatum
-              end_date: Enddatum
-              limitations: Beschränkung
-              default_tab: Standard
-              activated: Aktiviert
-              edit_link: Bearbeiten
-          projekt_questions_tab:
-            name: Kurzumfragen
-            title: Fragen
+            copy_phase_link: Link für Tab abrufen
+          projekt_settings_tab:
+            name: Projektfunktionen
+            general_settings: Allgemein
+            select_an_element: auswählen
+            sidebar_settings: Seitenleiste
+          projekt_managers_tab:
+            name: Projektmanager*innen
+            main_block_title: Projektmanager*innen
+          projekt_map_tab:
+            name: Ind. Kartenkonfiguration
           projekt_sdg_tab:
             name: SDGs & Tags
             sdgs: SDGs
-            sdgs_enable: Bitte aktivieren Sie SDGs in Projektfunktionen Tab
             tags: Tags
-            tags_enable: Bitte aktivieren Sie Tags in Projektfunktionen Tab
             tags_hint: Klicken Sie auf einen oder mehrere Tags, um Sie für dieses Projekt dem/der Nutzer:in anzubieten.
             refresh_page: Sollten Sie die Funktionen bereits aktiviert haben, sie werden aber hier nicht angezeigt, dann laden Sie diese Seite bitte neu.
-          projekt_labels_tab:
-            name: Labels
-            page_title: Labels
-            create_button: Label erstellen
-            no_labels: Für dieses Projekt sind noch keine Labels hinterlegt
-          projekt_settings_tab:
-            budget_settings: Budgets
-            debates_settings: Diskussion
-            event_phase: Veranstaltungen
-            event_phase_description: Aktivieren Sie Veranstaltungen in der Fußzeile eines Projekts
-            general_settings: Allgemein
-            milestone_phase: Meilensteine
-            milestone_phase_description: Aktiviert die Meilensteinfunktion in der Fußzeile eines Projektes
-            milestone_settings: Einstellungen
-            name: Projektfunktionen
-            newsfeed_phase: News-Feed
-            newsfeed_phase_description: Aktiviert den News-Feed in der Fußzeile eines Projekts
-            polls_settings: Abstimmungen
-            projekt_notification_phase: Benachrichtigungen
-            projekt_notification_phase_description: Aktiviert die Benachrichtigungsfunktion in der Fußzeile eines Projekts
-            proposals_settings: Vorschläge
-            select_an_element: auswählen
-            sidebar_settings: Seitenleiste
-          projekt_status: Projektstatus
-          setting_indicator:
-            "no": Nein
-            "yes": Ja
-          show_footer: Projekt Fußzeile
-          show_in_navigation: null
-          show_in_navigation_checkbox: Projekt in Navigation anzeigen
-          update: Projekteinstellungen aktualisieren
+          flash:
+            update_notice: Projekt wurde erfolgreich aktualisiert.
         edit_projekt: Editieren
         index:
           add_cards: Kacheln erstellen/bearbeiten
@@ -379,6 +278,8 @@ de:
             answers_count: Anzahl der Antworten
             comments_count: Anzahl der Kommentare
             attached_to: Angehängt
+            send_notifications_button: Benachrichtigungen senden
+            notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
           new:
             create: Frage aktualisieren
             title: Frage erstellen
@@ -462,15 +363,136 @@ de:
           edit: Bearbeiten
           destroy: Löschen
       projekt_phases:
+        nav_bar:
+          duration: Laufzeit
+          naming: Benennungen
+          restrictions: Einschränkungen
+          settings: Funktionen
+          map: Karte
+          projekt_labels: Labels
+          sentiments: Sentimente
+          projekt_questions: Liste der Kurzumfragen
+          projekt_livestreams: Liste der Livestreams
+          projekt_events: Liste von Veranstaltungen
+          milestones: Liste der Meilensteine
+          projekt_notifications: Benachrichtigungen
+          projekt_arguments: Liste von Stimmen
+        notice:
+          created: Phase wurde erstellt
+          updated: Phase wurde aktualisiert
+          destroyed: Phase wurde gelöscht
+          not_destroyed: Phase konnte nicht gelöscht werden, da sie bereits assoziierte Inhalte hat
+        shared:
+          update_button: Speichern
         phase_tab_name: Name in Tab
         new_resource_button_name: Text in Button
         resource_form_title: Text bei Erstellung
-        duration: Laufzeit
-        start_date: Anfangsdatum
-        end_date: Enddatum
+        labels_name: Labels
+        sentiments_name: Sentiments
         projekt_selector_hint: Hinweise zum Projekt
         edit:
           title: Einstellung für Phase
+        duration:
+          page_title: Laufzeit
+          start_date: Anfangsdatum
+          end_date: Enddatum
+        naming:
+          page_title: Benennungen
+        restrictions:
+          page_title: Einschränkungen
+          age:
+            title: Alter
+            hint: Um die Partizipation einschränken zu können, müssen Nutzer*innen verifiziert werden.
+            no_restriction: Alle Nutzer*innen
+          extended_geo_restrictions:
+            title: Zusatzliche individuelle Gebietsbeschränkungen
+            hint: Um die Partizipation einschränken zu können, müssen Nutzer*innen verifiziert werden.
+            no_restriction: Alle Nutzer:innen der Plattform
+          geo_restrictions:
+            title: Gebietsbeschränkung
+            hint: Um die Partizipation einschränken zu können, müssen Nutzer*innen verifiziert werden.
+            no_restriction: Alle Nutzer:innen der Plattform
+            only_citizens: Nur Bürger:innen der Stadt
+            only_geozones: Nur Bürger:innen des Stadtteils
+            only_streets: Nur Bürger:innen aus Straße
+          individual_group_values:
+            title: Einschränkung auf Gruppen
+          verification:
+            title: Verifizierung
+            no_restriction: Alle Nutzer*innen
+            only_verified: Nur verifizierte Nutzer*innen
+        settings:
+          block_title:
+            general: Funktionen
+            form: Formularfelder
+            resource: Individueller Beitrag
+        projekt_labels: 
+          name: Labels
+          page_title: Labels
+          create_button: Label erstellen
+          no_labels: Für dieses Projekt sind noch keine Labels hinterlegt
+          table:
+            icon: Icon
+            color: Farbe
+            name: Name
+          form:
+            color_placeholder: "HEX Code mit #"
+        sentiments:
+          page_title: Sentiments
+          create_button: Sentiment erstellen
+          no_sentiments: Für dieses Projekt sind noch keine Sentiments hinterlegt
+          table:
+            color: Farbe
+            name: Name
+          form:
+            color_placeholder: "HEX Code mit #" 
+          notice:
+            destroy: Sentiment erfolgreich gelöscht
+        projekt_questions:
+          page_title: Kurzumfrage      
+          create_button: Frage erstellen  
+          send_notifications_button: Benachrichtigungen senden
+          table:
+            title: Kurzumfrage
+            question_options: Antwortmöglichkeiten
+            answers_count: Anzahl der Antworten
+            comments_count: Anzahl der Kommentare
+          new:
+            title_livestream: Frage für Livestream erstellen    
+            title: Frage erstellen
+        projekt_events:
+          page_title: Veranstaltungen
+        projekt_notifications:
+          page_title: Nachricht senden
+          button: Nachricht senden
+        projekt_arguments:
+          page_title: Stimmen
+          send_notifications_button: Benachrichtigungen senden
+          notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
+          argument_pro: Pro
+          argument_cons: Contra
+          button: Stimme erlstellen
+          argument_image: Bild
+        projekt_events:
+          button: Event erstellen
+          event_created_at: Hergestellt in
+          event_datetime: Datum
+          event_end_datetime: Endtermin
+          event_location: Veranstaltungsort
+          event_title: Veranstaltungstitel
+          event_weblink: Weblink
+          event_description: Beschreibung
+          name: Veranstaltungen
+          page_title: Veranstaltungen
+          send_notifications_button: Benachrichtigungen senden
+          notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
+        projekt_livestreams:
+          page_title: Livestreams
+          all_livestreams: Alle Livestreams
+          add_question: Frage hinzufügen
+          questions: Kurzumfragen
+          send_notifications_button: Benachrichtigungen senden
+          notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
       modal_notifications:
         index:
           create: Erstellen

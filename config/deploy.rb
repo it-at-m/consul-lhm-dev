@@ -2,7 +2,7 @@
 lock "~> 3.16.0"
 
 def deploysecret(key)
-  @deploy_secrets_yml ||= YAML.load_file("config/deploy-secrets.yml")[fetch(:stage).to_s]
+  @deploy_secrets_yml ||= YAML.load_file("config/deploy-secrets/deploy-secrets-cli_demo.yml")[fetch(:stage).to_s]
   @deploy_secrets_yml.fetch(key.to_s, "undefined")
 end
 
@@ -97,7 +97,8 @@ task :add_new_settings do
         execute :rake, "settings:destroy_obsolete"
         execute :rake, "projekt_settings:ensure_existence"
         execute :rake, "projekt_settings:destroy_obsolete"
-        execute :rake, "projekts:ensure_map_existence"
+        execute :rake, "projekt_phase_settings:add_new_settings"
+        execute :rake, "projekt_phase_settings:destroy_obsolete"
         execute :rake, "deficiency_report_statuses:add_default_statuses"
       end
     end

@@ -1,5 +1,6 @@
-<%= render partial: 'pages/sidebar/custom_text' %>
-<%= render partial: 'pages/sidebar/admin_controls' %>
+<%= render partial: "pages/sidebar/custom_text" %>
+<%= render partial: "pages/sidebar/admin_controls" %>
+<%= render partial: "pages/sidebar/projekt_phase_subscriptions", locals: { projekt_subscription: @projekt_subscription } %>
 
 <% if projekt_feature?(@custom_page.projekt, "sidebar.show_phases_in_projekt_page_sidebar") %>
   <div class="sidebar-divider"></div>
@@ -8,20 +9,16 @@
   </div>
 <% end %>
 
-<% if projekt_feature?(@custom_page.projekt, 'general.enable_sdgs') %>
-  <%= render partial: 'pages/sidebar/sdgs', locals: { projekt: projekt } %>
-<% end %>
+<%= render partial: "pages/sidebar/sdgs", locals: { projekt: projekt } %>
 
-<% if projekt_feature?(@custom_page.projekt, 'general.enable_tags') %>
-  <%= render partial: 'pages/sidebar/tags', locals: { projekt: projekt } %>
-<% end %>
+<%= render partial: "pages/sidebar/tags", locals: { projekt: projekt } %>
 
 <% if projekt_feature?(projekt, 'sidebar.show_map') %>
   <%= render Pages::Projekts::SidebarMapComponent.new(projekt, @default_phase_name) %>
 <% end %>
 
 <% if projekt_feature?(@custom_page.projekt, "sidebar.show_navigator_in_projekts_page_sidebar") %>
-  <%= render partial: 'pages/sidebar/projekts_navigator', locals: { projekt: projekt } %>
+  <%= render partial: "pages/sidebar/projekts_navigator", locals: { projekt: projekt } %>
 <% end %>
 
 <% if projekt_feature?(@custom_page.projekt, "sidebar.projekt_page_sharing") %>
@@ -29,7 +26,6 @@
       share_title: t("custom.pages.social_share.share"),
       title: projekt.page.title,
       url: url_for(only_path: false),
-      description: strip_tags(projekt.page.content || '')[0..200] + '...',
-      mobile: projekt.page.title
-  %>
+      description: strip_tags(projekt.page.content || "")[0..200] + "...",
+      mobile: projekt.page.title %>
 <% end %>

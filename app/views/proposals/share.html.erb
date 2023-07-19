@@ -3,7 +3,7 @@
 <%= render "shared/social_media_meta_tags",
             social_url: proposal_url(@proposal),
             social_title: @proposal.title,
-            social_description: projekt_feature?(@proposal.projekt, 'proposals.enable_summary') ? @proposal.summary : strip_tags(@proposal.description)[0..200] %>
+            social_description: projekt_phase_feature?(@proposal.projekt_phase, "form.enable_summary") ? @proposal.summary : strip_tags(@proposal.description)[0..200] %>
 <% end %>
 <% content_for :canonical do %>
   <%= render "shared/canonical", href: proposal_url(@proposal) %>
@@ -27,7 +27,7 @@
       <%= render "shared/social_share",
         title: @proposal.title,
         url: proposal_url(@proposal),
-        description: projekt_feature?(@proposal.projekt, 'proposals.enable_summary') ? @proposal.summary : strip_tags(@proposal.description)[0..200],
+        description: projekt_phase_feature?(@proposal.projekt_phase, "form.enable_summary") ? @proposal.summary : strip_tags(@proposal.description)[0..200],
         mobile: @proposal.title %>
 
       <% if can?(:dashboard, @proposal) %>

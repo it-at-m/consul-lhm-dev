@@ -16,7 +16,19 @@ class ProjektPhase::CommentPhase < ProjektPhase
   end
 
   def resource_count
-    projekt.comments.count
+    comments.count
+  end
+
+  def admin_nav_bar_items
+    %w[duration naming restrictions]
+  end
+
+  def safe_to_destroy?
+    comments.empty?
+  end
+
+  def comments_allowed?(current_user)
+    selectable_by?(current_user)
   end
 
   private

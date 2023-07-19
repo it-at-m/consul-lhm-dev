@@ -95,7 +95,7 @@
         </span>
 
         <% if user_signed_in? %>
-          <% if @commentable.comments_allowed?(current_user) %>
+          <% if @commentable&.comments_allowed?(current_user) %>
             <span class="divider">&nbsp;|&nbsp;</span>
             <%= button_tag(comment_link_text(comment),
                         class: "js-add-comment-link link_to_button", data: { "id": dom_id(comment) }) %>

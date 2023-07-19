@@ -1,0 +1,46 @@
+<%= render "custom/admin/projekt_phases/heading" %>
+<%= render "custom/admin/projekt_phases/nav_bar" %>
+
+<div class="row">
+  <div class="column">
+    <h2><%= t("custom.admin.projekt_phases.duration.page_title") %></h2>
+  </div>
+</div>
+
+<%= form_with model: @projekt_phase, url: namespace_projekt_phase_path, scope: :projekt_phase do |f| %>
+  <%= hidden_field_tag :action_name, action_name %>
+
+  <div class="row">
+    <div class="column">
+      <table>
+        <thead>
+          <tr>
+            <th>
+              <strong style="margin-left:1rem;"><%= t("custom.admin.projekt_phases.duration.start_date") %></strong>
+            </th>
+            <th>
+              <strong style="margin-left:1rem;"><%= t("custom.admin.projekt_phases.duration.end_date") %></strong>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <%= f.date_field :start_date, label: false, style: "margin-bottom:0 !important" %>
+            </td>
+            <td>
+              <%= f.date_field :end_date, label: false, style: "margin-bottom:0 !important" %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <%= f.submit(t("custom.admin.projekt_phases.shared.update_button"), class: "button success") %>
+    </div>
+  </div>
+
+<% end %>

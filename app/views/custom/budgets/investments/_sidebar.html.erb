@@ -1,23 +1,23 @@
 <aside class='margin-bottom' id='sidebar'>
 
   <% if @budget.phase == "accepting" %>
-    <%= render Shared::NewButtonComponent.new(projekt_phase: @budget.budget_phase) %>
+    <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
   <% end %>
 
   <%= render_custom_block "budget_#{@budget.id}_phase_#{@budget.current_phase.id}_info" %>
 
-  <%= render 'pages/projekt_footer/budget/my_ballot'  %>
+  <%= render "pages/projekt_footer/budget/my_ballot" %>
 
-  <%= render Sidebar::ProjektsFilterComponent.new(
+  <%#= render Sidebar::ProjektsFilterComponent.new(
     top_level_active_projekts: @top_level_active_projekts,
     top_level_archived_projekts: @top_level_archived_projekts,
     scoped_projekt_ids: @scoped_projekt_ids,
     all_resources: @all_resources,
-    current_tab_phase: @current_tab_phase,
-    current_projekt: @current_projekt
+    current_tab_phase: @projekt_phase,
+    current_projekt: @projekt
   ) %>
 
-  <% unless @budget.phase == 'publishing_prices' && projekt_feature?(@projekt, 'budgets.show_results_after_first_vote')  # con-1036 %>
+  <% unless @budget.phase == 'publishing_prices' && projekt_phase_feature?(@projekt_phase, 'general.show_results_after_first_vote')  # con-1036 %>
     <% if params[:section].blank? || params[:section] == 'overview' %>
       <%= render Budgets::Investments::FiltersComponent.new %>
     <% end %>

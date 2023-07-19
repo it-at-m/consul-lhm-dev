@@ -151,6 +151,7 @@ td.projekt-info {
 }
 
 td.projekt-level {
+  text-align: center;
 }
 
 td.projekt-order {
@@ -1641,28 +1642,107 @@ span.projekt-backlink:before {
   margin-left: 15px;
 }
 
-// Projekt labels
+// Resource tags: projekt labels and sentiments
 
-#projekt_labels_selector {
-  .projekt-label {
-    cursor: pointer;
-    font-size: 1.2rem;
-    margin-right: 0.2rem;
-    margin-bottom: 0.3rem;
-  }
-}
+@mixin resource-tags {
+  display: inline-block;
+  margin-bottom: 0.25rem;
+  color: #fff;
+  background-color: #767676;
+  padding: 0.33333rem 0.5rem;
+  margin-left: 0 !important;
+  margin-right: 0.2rem;
+  border-radius: 0.1875rem;
+  font-size: 0.8rem;
+  font-weight: normal;
+  line-height: 1;
+  white-space: nowrap;
+  position: relative;
 
-#projekt-labels-checkboxes {
-  display: none;
-}
-
-#projekt-labels-sidebar {
-  .projekt-label {
-    margin-bottom: 0.25rem;
-  }
-
-  .projekt-label a {
+  a {
     color: inherit;
     text-decoration: none;
+
+    &:hover {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+}
+
+@mixin resource-tags-with-icon {
+  @include resource-tags;
+  padding-left: 24px;
+
+  &::before {
+    content: "\f111";
+    font-family: "Font Awesome 5 Free";
+    font-weight: normal;
+    position: absolute;
+    left: 7px;
+    top: 6px;
+  }
+
+  &.selected::before {
+    content: "\f192";
+  }
+}
+
+.projekt-labels {
+  .projekt-label {
+    @include resource-tags;
+
+    &.selected {
+      background-color: $brand !important;
+    }
+  }
+}
+
+.sentiments {
+  .sentiment {
+    @include resource-tags-with-icon;
+  }
+}
+
+.resource-taggings {
+  .sentiment {
+    padding-left: 0.5rem;
+
+    &::before {
+      content: "";
+    }
+  }
+}
+
+// tagging in selector
+
+#projekt_labels_selector {
+  input {
+    display: none;
+  }
+
+  .projekt-label {
+    color: #fff !important;
+
+    i {
+      margin-right: 7px;
+    }
+  }
+
+  input:checked + .projekt-label {
+    color: #fff !important;
+    background-color: $brand !important;
+  }
+}
+
+#sentiment_selector {
+  input {
+    display: none;
+  }
+
+  input:checked + .sentiment {
+    &::before {
+      content: "\f192";
+    }
   }
 }

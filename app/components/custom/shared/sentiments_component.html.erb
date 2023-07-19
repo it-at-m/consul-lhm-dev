@@ -1,0 +1,16 @@
+<div class="sentiments">
+  <% @sentiments.each do |sentiment| %>
+    <div>
+      <% button_styles = "border-color:#{sentiment.color};background-color:#{sentiment.color};color:#{pick_text_color(sentiment.color)}" %>
+      <span class="sentiment secondary <%= "selected" if sentiment_selected?(sentiment) %>" style="<%= button_styles %>">
+        <%= link_to link_path(sentiment),
+          remote: true,
+          class: "js-remote-link-push-state",
+          "data-footer-tab-back-url": footer_tab_back_button_url(sentiment),
+          onclick: '$(".spinner-placeholder").addClass("show-loader")' do %>
+            <%= sentiment.name %>
+        <% end %>
+      </span>
+    </div>
+  <% end %>
+</div>

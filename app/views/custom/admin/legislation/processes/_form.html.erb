@@ -14,7 +14,6 @@
     </div>
   </div>
 
-
   <div class="row">
     <fieldset>
         <legend class="small-12 medium-4 column">
@@ -37,11 +36,13 @@
     </fieldet>
   </div>
 
-  <div class="row">
-    <div class="small-12 column margin-top margin-bottom">
-      <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: @process, projekts: Projekt.top_level }  %>
+  <% unless @process.projekt_phase.present? %>
+    <div class="row">
+      <div class="small-12 column margin-top margin-bottom">
+        <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: @process } %>
+      </div>
     </div>
-  </div>
+  <% end %>
 
   <div class="row">
     <div class="small-12 medium-3 column clear end">
@@ -49,4 +50,3 @@
     </div>
   </div>
 <% end %>
-

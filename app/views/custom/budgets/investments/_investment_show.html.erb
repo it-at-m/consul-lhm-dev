@@ -109,7 +109,7 @@
 
       <%= render "shared/participation/resource_info", resource: investment %>
 
-      <% if projekt_feature?(investment&.projekt, 'budgets.show_report_button_in_sidebar') %>
+      <% if projekt_phase_feature?(investment&.projekt_phase, 'resource.show_report_button_in_sidebar') %>
         <%= render "shared/participation/flag", resource: investment %>
       <% end %>
 
@@ -125,18 +125,18 @@
                    title: investment.title,
                    handle: setting["twitter_handle"]) %>
 
-      <% if current_user && projekt_feature?(investment&.projekt, 'budgets.show_follow_button_in_sidebar') %>
+      <% if current_user && projekt_phase_feature?(investment&.projekt_phase, "resource.show_follow_button_in_sidebar") %>
         <div class="sidebar-divider"></div>
         <p class="sidebar-title"><%= t("shared.follow") %></p>
 
         <%= render "follows/follow_button", follow: find_or_build_follow(current_user, investment) %>
       <% end %>
 
-      <% if current_user && projekt_feature?(investment&.projekt, 'budgets.show_community_button_in_sidebar') %>
+      <% if current_user && projekt_phase_feature?(investment&.projekt_phase, "resource.show_community_button_in_sidebar") %>
         <%= render "communities/access_button", community: investment.community %>
       <% end %>
 
-      <% if current_user && projekt_feature?(investment&.projekt, 'budgets.show_related_content') %>
+      <% if current_user && projekt_phase_feature?(investment&.projekt_phase, 'resource.show_related_content') %>
         <div class="sidebar-divider"></div>
         <h2><%= t("custom.shared.show.related_title") %></h2>
         <p><%= t("custom.shared.show.related_text") %></p>

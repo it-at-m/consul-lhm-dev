@@ -3,13 +3,13 @@ module Abilities
     include CanCan::Ability
 
     def self.resources_to_manage
-      [MapLayer, ProjektQuestion, ProjektNotification, ProjektEvent, ProjektLivestream, Milestone, ProgressBar, ProjektArgument]
+      [ProjektQuestion, ProjektNotification, ProjektEvent, ProjektLivestream, Milestone, ProgressBar, ProjektArgument]
     end
 
     def initialize(user)
       merge Abilities::Common.new(user)
 
-      can([:show, :update, :update_map], Projekt) do |p|
+      can([:show, :update, :update_map, :order_phases], Projekt) do |p|
         p.projekt_manager_ids.include?(user.projekt_manager.id)
       end
 
@@ -17,8 +17,46 @@ module Abilities
         ps.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
       end
 
+      can(:manage, ProjektPhase) do |pp|
+        pp.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+      end
+
+      can(:update, ProjektPhaseSetting) do |pps|
+        pps.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+      end
+
+      can(:manage, ProjektLabel) do |pl|
+        pl.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+      end
+
+      can(:manage, Sentiment) do |s|
+        s.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+      end
+
+      can(:manage, ProjektQuestion) do |pq|
+        pq.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+      end
+
+      can(:manage, ProjektLivestream) do |pl|
+        pl.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+      end
+
+      can(:manage, ProjektArgument) do |pa|
+        pa.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+      end
+
+      can([:edit, :update], SiteCustomization::ContentBlock)
+
       can(:update_map, MapLocation) do |p|
-        p.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+        if p.respond_to?(:projekt_phase)
+          p.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+        else
+          p.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+        end
+      end
+
+      can(:manage, MapLayer) do |ml|
+        ml.mappable&.projekt&.projekt_manager_ids&.include?(user.projekt_manager.id)
       end
 
       can(%i[read update], SiteCustomization::Page) do |p|
@@ -40,17 +78,17 @@ module Abilities
       can :block, User
       cannot :block, User, id: user.id
 
-      can :moderate, Proposal, projekt: { projekt_managers: { id: user.projekt_manager.id }}
-      can :hide, Proposal, hidden_at: nil, projekt: { projekt_managers: { id: user.projekt_manager.id }}
+      can :moderate, Proposal, projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
+      can :hide, Proposal, hidden_at: nil, projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
       can :ignore_flag, Proposal, ignored_flag_at: nil,
                                   hidden_at: nil,
-                                  projekt: { projekt_managers: { id: user.projekt_manager.id }}
+                                  projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
 
-      can :moderate, Debate, projekt: { projekt_managers: { id: user.projekt_manager.id }}
-      can :hide, Debate, hidden_at: nil, projekt: { projekt_managers: { id: user.projekt_manager.id }}
+      can :moderate, Debate, projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
+      can :hide, Debate, hidden_at: nil, projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
       can :ignore_flag, Debate, ignored_flag_at: nil,
                                 hidden_at: nil,
-                                projekt: { projekt_managers: { id: user.projekt_manager.id }}
+                                projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
 
       can :moderate, Budget::Investment, budget: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
       can :hide, Budget::Investment, hidden_at: nil,
@@ -74,7 +112,7 @@ module Abilities
           comment.hidden_at == nil
       end
 
-      can :comment_as_moderator, [Debate, Comment, Proposal, Budget::Investment, Poll, ProjektQuestion], projekt: { projekt_managers: { id: user.projekt_manager.id }}
+      can :comment_as_moderator, [Debate, Comment, Proposal, Budget::Investment, Poll, ProjektQuestion], projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
       can :comment_as_moderator, [Projekt], projekt_managers: { id: user.projekt_manager.id }
 
       can [:update, :toggle_active_status], ProjektPhase, projekt: { projekt_managers: { id: user.projekt_manager.id }}

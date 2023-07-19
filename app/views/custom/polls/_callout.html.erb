@@ -14,7 +14,7 @@
 
   <% if reason.present? %>
     <div class="callout <%= cannot_answer_callout_class(reason) %>">
-      <%= cannot_answer_callout_text(reason, @poll.voting_phase) %>
+      <%= cannot_answer_callout_text(reason, @poll.projekt_phase) %>
     </div>
   <% end %>
 <% end %>

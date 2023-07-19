@@ -11,6 +11,14 @@ class ProjektPhase::NewsfeedPhase < ProjektPhase
     "newsfeed"
   end
 
+  def admin_nav_bar_items
+    %w[naming settings]
+  end
+
+  def safe_to_destroy?
+    true
+  end
+
   private
 
     def phase_specific_permission_problems(user, location)

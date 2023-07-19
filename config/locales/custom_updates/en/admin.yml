@@ -101,6 +101,10 @@ en:
         age_restrictions: Age restrictions
         modal_notification: Modal notifications
       polls:
+        poll:
+          send_notifications: Send notifications
+          notifications_sent: Notifications sent successfully
+          send_notifications_confirm: Are you sure?
         questions:
           answers:
             notice:
@@ -132,6 +136,7 @@ en:
             "no": "No"
             "yes": "Yes"
           projekt_events_tab:
+            phases_label: Phases
             button: Save notification
             event_created_at: Created at
             event_datetime: Datetime
@@ -149,6 +154,7 @@ en:
           projekt_news_tab:
             name: News-Feed
           projekt_notifications_tab:
+            phases_label: Phases
             button: Send message
             name: Notifications
             notification_body: Message
@@ -158,6 +164,8 @@ en:
           projekt_arguments_tab:
             button: Save argument
             name: Arguments
+            phases_label: Phases
+            argument_type_label: Argument
             argument_name: Name
             argument_pro: Pro
             argument_cons: Cons
@@ -169,6 +177,7 @@ en:
             page_title: Arguments
             title: Arguments
           projekt_livestreams_tab:
+            phases_label: Phases
             submit_button: Save Livestream
             name: Livestreams
             page_title: Livestream
@@ -217,14 +226,13 @@ en:
             voting_phase: Voting phase
             legislation_phase: Text drafting phase
           projekt_questions_tab:
+            phases_label: Phases
             name: Short survey
             title: Questions
           projekt_sdg_tab:
             name: SDGs & Tags
             sdgs: SDGs
-            sdgs_enable: Please activate SDGs in the Projectsettings Tab
             tags: Tags
-            tags_enable: Please activate Tags in the Projectsettings Tab
             tags_hint: Please select one or multiple tags in order to suggest them to platform users.
             refresh_page: If you activated these features already but they are not visible here, please reload this page.
           projekt_labels_tab:

@@ -2,6 +2,7 @@ en:
   custom:
     debates:
       form:
+        tagging: Tagging
         tags_custom: User tags
         required: Your debate
       index:

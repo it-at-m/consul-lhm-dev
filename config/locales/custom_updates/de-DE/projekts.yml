@@ -32,8 +32,15 @@ de:
         index_order_upcoming_title: 'Im Reiter "Zukünftige Projektvorhaben" sind Beteiligungsprojekte gelistet, die erst in der Zukunft stattfinden.'
         index_order_individual_list: "Individuelle Liste"
         index_order_individual_list_title: "Individuelle Liste"
+        index_order_drafts: "Entwürfe"
+        index_order_drafts_title: "Entwürfe"
       page:
         footer:
+          sidebar:
+            projekt_labels:
+              title: Labels
+            sentiments:
+              title: Sentiment
           budget:
             investments_subtab: Investitionen
         projekt_events_tab:
@@ -47,10 +54,16 @@ de:
           title: Kommende Veranstaltungen
         sidebar:
           admin_controls:
+            title: Admin
             copy_code: Quellcode kopieren
-            edit_projekt: Projekt bearbeiten
+            edit_projekt: Projekteinstellungen
+            edit_projekt_page: Projektseite
+            edit_projekt_phases: Projektphasen
             edit_projekt_settings: Projektfunktionen
-            edit_projekt_page: Projektseite bearbeiten
+            edit_projekt_managers: Projektmanager*innen
+            edit_projekt_map: Karteneinstellungen
+            edit_projekt_sdg: SDGs & Tags
+            create_newsletter_draft: Newsletter-Entwurf
           map:
             title: Gebiet
           navigator:
@@ -62,6 +75,9 @@ de:
             title: Kategorien
           projekt_start: Projektstart
           projekt_end: Gepl. Fertigstellung
+          phases_subscription:
+            title: Benachrichtigungen
+            description: Möchten Sie zu diesem Projekt auf dem Laufenden bleiben?
         tabs:
           budget: Budgets
           comments: Kommentare

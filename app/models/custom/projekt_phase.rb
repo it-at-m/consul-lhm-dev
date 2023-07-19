@@ -1,23 +1,50 @@
 class ProjektPhase < ApplicationRecord
+  include Mappable
+  include Milestoneable
+  acts_as_paranoid column: :hidden_at
+  include ActsAsParanoidAliases
+
+  after_create :add_default_settings
+
   REGULAR_PROJEKT_PHASES = [
+    "ProjektPhase::LivestreamPhase",
     "ProjektPhase::MilestonePhase",
     "ProjektPhase::ProjektNotificationPhase",
-    "ProjektPhase::NewsfeedPhase",
     "ProjektPhase::EventPhase",
     "ProjektPhase::ArgumentPhase",
-    "ProjektPhase::LivestreamPhase"
+    "ProjektPhase::NewsfeedPhase"
   ].freeze
+
+  PROJEKT_PHASES_TYPES = [
+    "ProjektPhase::CommentPhase",
+    "ProjektPhase::DebatePhase",
+    "ProjektPhase::ProposalPhase",
+    "ProjektPhase::QuestionPhase",
+    "ProjektPhase::VotingPhase",
+    "ProjektPhase::BudgetPhase",
+    "ProjektPhase::LegislationPhase"
+  ] + REGULAR_PROJEKT_PHASES
+
+  delegate :icon, :author, :author_id, to: :projekt
 
   translates :phase_tab_name, touch: true
   translates :new_resource_button_name, touch: true
   translates :resource_form_title, touch: true
   translates :projekt_selector_hint, touch: true
+  translates :labels_name, touch: true
+  translates :sentiments_name, touch: true
   include Globalizable
 
-  belongs_to :projekt, optional: true, touch: true
+  belongs_to :projekt, touch: true
   has_many :projekt_settings, through: :projekt
+  has_many :settings, class_name: "ProjektPhaseSetting", foreign_key: :projekt_phase_id,
+    dependent: :destroy, inverse_of: :projekt_phase
+  has_many :projekt_labels, dependent: :destroy
+  has_many :sentiments, dependent: :destroy
+
   belongs_to :age_restriction
   has_many :projekt_phase_geozones, dependent: :destroy
+  has_many :geozone_affiliations, through: :projekt
   has_many :geozone_restrictions, through: :projekt_phase_geozones, source: :geozone,
            after_add: :touch_updated_at, after_remove: :touch_updated_at
 
@@ -31,7 +58,15 @@ class ProjektPhase < ApplicationRecord
   has_many :registered_address_street_projekt_phase, dependent: :destroy
   has_many :registered_address_streets, through: :registered_address_street_projekt_phase
 
-  default_scope { order(given_order: :asc) }
+  has_many :subscriptions, class_name: "ProjektPhaseSubscription", dependent: :destroy
+  has_many :subscribers, through: :subscriptions, source: :user
+
+  has_many :map_layers, as: :mappable, dependent: :destroy
+  has_many :comments, as: :commentable, inverse_of: :commentable, dependent: :destroy
+
+  validates :projekt, presence: true
+
+  default_scope { order(:given_order, :id) }
 
   scope :regular_phases, -> { where.not(type: REGULAR_PROJEKT_PHASES) }
   scope :special_phases, -> { where(type: REGULAR_PROJEKT_PHASES) }
@@ -43,10 +78,23 @@ class ProjektPhase < ApplicationRecord
       .where("end_date IS NULL OR end_date >= ?", timestamp)
   }
 
+  scope :sorted, -> do
+    regular_phases.sort_by(&:default_order).each do |x|
+      x.start_date = Time.zone.today if x.start_date.nil?
+    end.sort_by(&:start_date)
+  end
+
   def self.order_phases(ordered_array)
     ordered_array.each_with_index do |phase_id, order|
       find(phase_id).update_column(:given_order, (order + 1))
     end
+  end
+
+  def self.model_name
+    mname = super
+    mname.instance_variable_set(:@route_key, "projekt_phases")
+    mname.instance_variable_set(:@singular_route_key, "projekt_phase")
+    mname
   end
 
   def selectable_by?(user)
@@ -88,6 +136,7 @@ class ProjektPhase < ApplicationRecord
     unless Setting["feature.user.skip_verification"].present?
       return age_permission_problem(user) if age_permission_problem(user).present?
       return geozone_permission_problem(user) if geozone_permission_problem(user)
+      return advanced_geozone_restriction_permission_problem(user) if advanced_geozone_restriction_permission_problem(user).present?
       return individual_group_value_permission_problem(user) if individual_group_value_permission_problem(user).present?
     end
 
@@ -126,6 +175,67 @@ class ProjektPhase < ApplicationRecord
     false
   end
 
+  def subscribed?(user)
+    return false unless user
+
+    subscriptions.where(user_id: user.id).exists?
+  end
+
+  def subscribe(user)
+    return false unless user
+
+    subscriptions.create(user_id: user.id)
+  end
+
+  def unsubscribe(user)
+    return false unless user
+
+    subscriptions.where(user_id: user.id).destroy_all
+  end
+
+  def title
+    phase_tab_name.presence || model_name.human
+  end
+
+  def feature?(key)
+    settings.find_by!(key: "feature.#{key}").value.present?
+  rescue ActiveRecord::RecordNotFound
+    raise StandardError, "Feature \"#{key}\" not found for projekt phase #{id}"
+  end
+
+  def option(key)
+    settings.find_by!(key: "option.#{key}").value
+  rescue ActiveRecord::RecordNotFound
+    raise StandardError, "Option \"#{key}\" not found for projekt phase #{id}"
+  end
+
+  def create_map_location
+    return if map_location.present?
+
+    MapLocation.create!(
+      latitude: Setting["map.latitude"],
+      longitude: Setting["map.longitude"],
+      zoom: Setting["map.zoom"],
+      projekt_phase_id: id
+    )
+  end
+
+  def admin_nav_bar_items
+    []
+  end
+
+  def safe_to_destroy?
+    false
+  end
+
+  def projekt_labels_label_text
+    labels_name.presence || I18n.t("custom.projekts.page.footer.sidebar.projekt_labels.title")
+  end
+
+  def sentiment_label_text
+    sentiments_name.presence || I18n.t("custom.projekts.page.footer.sidebar.sentiments.title")
+  end
+
   private
 
     def phase_specific_permission_problems(user)
@@ -158,29 +268,26 @@ class ProjektPhase < ApplicationRecord
     end
 
     def advanced_geozone_restriction_permission_problem(user)
-      case registered_address_grouping_restriction
-      when "no_restriction" || nil
-        nil
-      else
-        if user.registered_address.blank?
-          :no_registered_address
-        elsif !user.level_three_verified?
-          :not_verified
-        elsif !user_registered_address_permitted?(user)
-          :only_specific_registered_address_groupings
-        end
+      return nil if registered_address_grouping_restriction.blank? || registered_address_grouping_restriction == "no_restriction"
+
+      if user.registered_address.blank?
+        :no_registered_address
+      elsif !user.level_three_verified?
+        :not_verified
+      elsif !user_registered_address_permitted?(user)
+        :only_specific_registered_address_groupings
       end
     end
 
     def user_registered_address_permitted?(user)
-      registered_address_grouping_restrictions[registered_address_grouping_restriction]
-        .include?(user.registered_address.groupings[registered_address_grouping_restriction])
+      registered_address_grouping_restrictions[registered_address_grouping_restriction]&.include?(user.registered_address.groupings[registered_address_grouping_restriction])
     end
 
     def age_permission_problem(user)
+      return nil if user.age.blank?
       return nil if age_restriction.blank?
       return :not_verified if !user.level_three_verified?
-      return nil if age_restriction.min_age <= user.age && user.age <= age_restriction.max_age
+      return nil if (age_restriction.min_age || 0) <= user.age && user.age <= (age_restriction.max_age || 200)
 
       :only_specific_ages
     end
@@ -194,5 +301,13 @@ class ProjektPhase < ApplicationRecord
 
     def touch_updated_at(geozone)
       touch if persisted?
+    end
+
+    def add_default_settings
+      phase_settings = ProjektPhaseSetting.defaults[self.class.name] || {}
+
+      phase_settings.each do |key, value|
+        settings.create!(key: key, value: value)
+      end
     end
 end

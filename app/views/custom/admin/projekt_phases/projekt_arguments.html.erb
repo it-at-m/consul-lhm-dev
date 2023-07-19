@@ -1,0 +1,44 @@
+<%= render "custom/admin/projekt_phases/heading" %>
+<%= render "custom/admin/projekt_phases/nav_bar" %>
+
+<div class="float-right">
+  <%= link_to t("custom.admin.projekt_phases.projekt_arguments.send_notifications_button"), polymorphic_path([@namespace, @projekt_phase, @projekt_argument], action: :send_notifications), method: :post, class: "button" %>
+</div>
+
+<div class="row">
+  <div class="column">
+    <h2><%= t("custom.admin.projekt_phases.projekt_arguments.page_title") %></h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="column">
+    <%= render partial: "custom/admin/projekt_phases/projekt_arguments/form", locals: { projekt_argument: @projekt_argument } %>
+  </div>
+</div>
+
+<% if @projekt_arguments_pro.any? %>
+  <div class="row">
+    <div class="column">
+      <h3>Pro:</h3>
+      <div class="edit-projekt-arguments-list">
+        <% @projekt_arguments_pro.each do |projekt_argument| %>
+          <%= render "admin/projekt_phases/projekt_arguments/projekt_argument", projekt_argument: projekt_argument %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<% if @projekt_arguments_cons.any? %>
+  <div class="row">
+    <div class="column">
+      <h3>Contra:</h3>
+      <div class="edit-projekt-arguments-list">
+        <% @projekt_arguments_cons.each do |projekt_argument| %>
+          <%= render "admin/projekt_phases/projekt_arguments/projekt_argument", projekt_argument: projekt_argument %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

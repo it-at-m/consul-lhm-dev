@@ -4,9 +4,9 @@
     <% projekt_children_to_show_in_menu = projekt.children.visible_in_menu(current_user) %>
 
     <li class='nav-element flyout-item flyout-item-projekt js-access-flyout-menu-item focusable'
-      <%= "tabindex=0" if placement == "desktop" %> 
-        aria-label="<%= t('custom.links.menu.projekt_name_label', projekt_name: projekt.name) %>"
-        <%= "aria-haspopup=true" if projekt_children_to_show_in_menu.any? %> >
+      <%= "tabindex=0" if placement == "desktop" %>
+        aria-label="<%= t("custom.links.menu.projekt_name_label", projekt_name: projekt.name) %>"
+        <%= "aria-haspopup=true" if projekt_children_to_show_in_menu.any? %>>
 
       <div class='projekt-name-group'>
         <div class='flyout-item-name projekt-name'>
@@ -16,19 +16,12 @@
         <% if projekt_children_to_show_in_menu.any? && local_assigns[:skip_subprojekts] != true && placement == 'mobile' %>
           <div class='nav-toggle-arrow js-toggle-mobile-flyout-item focusable'
                tabindex="0"
-               aria-expanded=false >
+               aria-expanded=false>
           </div>
         <% end %>
       </div>
 
-      <% if Setting["projekts.show_module_links_in_flyout_menu"].present? %>
-        <div class='projekt-modules-links'>
-          <%= prepare_projekt_modules_links(projekt) %>
-        </div>
-      <% end %>
-
-      
-      <%= render partial: 'shared/subnavigation_flyout_projekts', locals: { projekts: projekt_children_to_show_in_menu, placement: placement } if projekt_children_to_show_in_menu.any? && local_assigns[:skip_subprojekts] != true %>
+      <%= render partial: "shared/subnavigation_flyout_projekts", locals: { projekts: projekt_children_to_show_in_menu, placement: placement } if projekt_children_to_show_in_menu.any? && local_assigns[:skip_subprojekts] != true %>
     </li>
   <% end %>
 

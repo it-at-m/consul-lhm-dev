@@ -35,21 +35,21 @@
         <div class="row">
           <div class="small-12 medium-9 column margin-bottom">
             <% if @custom_page.content.include?('template_projekt_library') %>
-              <%= render 'projekt_library' %>
+              <%= render "projekt_library", projekt: @custom_page.projekt %>
             <% else %>
-              <%= render 'custom_page_content' %>
+              <%= render "custom_page_content" %>
             <% end %>
           </div>
 
           <div class="projekt-sidebar small-12 medium-3 column margin-bottom">
-            <%= render partial: 'pages/sidebar', locals: { projekt: @custom_page.projekt } %>
+            <%= render partial: "pages/sidebar", locals: { projekt: @custom_page.projekt } %>
           </div>
         </div>
 
       <% else %>
         <div class="row">
           <div class="small-12 medium-9 column">
-            <%= render 'custom_page_content' %>
+            <%= render "custom_page_content" %>
           </div>
         </div>
       <% end %>
@@ -57,12 +57,12 @@
     </div>
   </div>
 
-  <% if @custom_page.projekt.present? && projekt_feature?(@custom_page.projekt, 'general.show_projekt_footer') %>
+  <% if @custom_page.projekt.present? && @custom_page.projekt.projekt_phases.active.any? %>
     <%= render Pages::Projekts::FooterPhasesComponent.new(@custom_page.projekt, @default_phase_name) %>
 
     <div id='footer-content'>
       <%= render 'shared/loader_spinner' %>
-      <%= render "pages/projekt_footer/#{@default_phase_name}" %>
+      <%= render "pages/projekt_footer/#{@default_projekt_phase.name}" %>
     </div>
   <% end %>
 </main>

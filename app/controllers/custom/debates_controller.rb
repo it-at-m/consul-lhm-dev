@@ -7,8 +7,6 @@ class DebatesController < ApplicationController
   include Takeable
   include ProjektLabelAttributes
 
-  before_action :load_categories, only: [:index, :create, :edit, :map, :summary]
-  before_action :process_tags, only: [:create, :update]
   before_action :set_projekts_for_selector, only: [:new, :edit, :create, :update]
 
   def index_customization
@@ -24,6 +22,9 @@ class DebatesController < ApplicationController
       @selected_parent_projekt = Projekt.find_by(id: selected_parent_projekt_id)
     end
 
+    related_projekt_ids = @resources.joins(projekt_phase: :projekt).pluck("projekts.id").uniq
+    related_projekts = Projekt.where(id: related_projekt_ids)
+
     @geozones = Geozone.all
     @selected_geozone_affiliation = params[:geozone_affiliation] || "all_resources"
     @affiliated_geozones = (params[:affiliated_geozones] || "").split(",").map(&:to_i)
@@ -37,10 +38,19 @@ class DebatesController < ApplicationController
     @top_level_active_projekts = Projekt.top_level.current.where(id: @scoped_projekt_ids)
     @top_level_archived_projekts = Projekt.top_level.expired.where(id: @scoped_projekt_ids)
 
+    @categories = Tag.category.joins(:taggings)
+      .where(taggings: { taggable_type: "Projekt", taggable_id: related_projekt_ids }).order(:name).uniq
+
+    if params[:sdg_goals].present?
+      sdg_goal_ids = SDG::Goal.where(code: params[:sdg_goals].split(",")).ids
+      @sdg_targets = SDG::Target.where(goal_id: sdg_goal_ids).joins(:relations)
+        .where(sdg_relations: { relatable_type: "Projekt", relatable_id: related_projekt_ids })
+    end
+
     unless params[:search].present?
       take_by_my_posts
-      take_by_tag_names
-      take_by_sdgs
+      take_by_tag_names(related_projekts)
+      take_by_sdgs(related_projekts)
       take_by_geozone_affiliations
       take_by_geozone_restrictions
       take_by_projekts(@scoped_projekt_ids)
@@ -59,7 +69,8 @@ class DebatesController < ApplicationController
   end
 
   def edit
-    @selected_projekt = @debate.projekt
+    @selected_projekt = @debate.projekt_phase.projekt
+    params[:projekt_phase_id] = @debate.projekt_phase.id
   end
 
   def create
@@ -70,26 +81,26 @@ class DebatesController < ApplicationController
       track_event
       NotificationServices::NewDebateNotifier.new(@debate.id).call
 
-      if @debate.debate_phase.active?
-        if @debate.projekt.overview_page?
+      if @debate.projekt_phase.active?
+        if @debate.projekt_phase.projekt.overview_page?
           redirect_to projekts_path(
-            anchor: 'filter-subnav',
-            selected_phase_id: @debate.debate_phase.id,
+            anchor: "filter-subnav",
+            selected_phase_id: @debate.projekt_phase.id,
             order: params[:order]
           ), notice: t("flash.actions.create.debate")
         else
           redirect_to page_path(
-            @debate.projekt.page.slug,
-            anchor: 'filter-subnav',
-            selected_phase_id: @debate.debate_phase.id,
+            @debate.projekt_phase.projekt.page.slug,
+            anchor: "filter-subnav",
+            selected_phase_id: @debate.projekt_phase.id,
             order: params[:order]
           ), notice: t("flash.actions.create.debate")
         end
       else
-        if @debate.projekt.overview_page?
+        if @debate.projekt_phase.projekt.overview_page?
           redirect_to projekts_path(
-            anchor: 'filter-subnav',
-            selected_phase_id: @debate.debate_phase.id,
+            anchor: "filter-subnav",
+            selected_phase_id: @debate.projekt_phase.id,
             order: params[:order]
           ), notice: t("flash.actions.create.debate")
         else
@@ -99,7 +110,7 @@ class DebatesController < ApplicationController
         end
       end
     else
-      @selected_projekt = @debate.projekt
+      @selected_projekt = @debate.projekt_phase.projekt
       render :new
     end
   end
@@ -107,7 +118,7 @@ class DebatesController < ApplicationController
   def show
     super
 
-    @projekt = @debate.projekt
+    @projekt = @debate.projekt_phase.projekt
     @related_contents = Kaminari.paginate_array(@debate.relationed_contents).page(params[:page]).per(5)
 
     if request.path != debate_path(@debate)
@@ -140,27 +151,13 @@ class DebatesController < ApplicationController
 
   private
 
-  def debate_params
-    attributes = [:tag_list, :projekt_id, :related_sdg_list, :on_behalf_of,
-                  :terms_of_service, :terms_data_storage, :terms_data_protection, :terms_general,
-                  projekt_label_ids: [],
-                  image_attributes: image_attributes,
-                  documents_attributes: document_attributes]
-    params.require(:debate).permit(attributes, translation_params(Debate))
-  end
-
-  def process_tags
-    if params[:debate][:tags]
-      params[:tags] = params[:debate][:tags].split(',')
-      params[:debate].delete(:tags)
+    def debate_params
+      attributes = [:tag_list, :projekt_id, :projekt_phase_id, :related_sdg_list, :on_behalf_of,
+                    :terms_of_service, :terms_data_storage, :terms_data_protection, :terms_general, :resource_terms,
+                    :sentiment_id,
+                    projekt_label_ids: [],
+                    image_attributes: image_attributes,
+                    documents_attributes: document_attributes]
+      params.require(:debate).permit(attributes, translation_params(Debate))
     end
-    params[:debate][:tag_list_custom]&.split(",")&.each do |t|
-      next if t.strip.blank?
-      Tag.find_or_create_by name: t.strip
-    end
-    params[:debate][:tag_list] ||= ""
-    params[:debate][:tag_list] += ((params[:debate][:tag_list_predefined] || "").split(",") + (params[:debate][:tag_list_custom] || "").split(",")).join(",")
-    params[:debate].delete(:tag_list_predefined)
-    params[:debate].delete(:tag_list_custom)
-  end
 end

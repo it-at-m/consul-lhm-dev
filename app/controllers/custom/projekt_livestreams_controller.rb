@@ -8,7 +8,7 @@ class ProjektLivestreamsController < ApplicationController
 
   def show
     @current_projekt_livestream = ProjektLivestream.find(params[:id])
-    @other_livestreams = @current_projekt_livestream.projekt.projekt_livestreams.select(:id, :title)
+    @other_livestreams = @current_projekt_livestream.projekt_phase.projekt_livestreams.select(:id, :title)
 
     first_projekt_question = @current_projekt_livestream.projekt_questions.first
 

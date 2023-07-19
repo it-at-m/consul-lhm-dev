@@ -5,7 +5,7 @@
     data-deep-link-smudge="true"
     data-deep-link-smudge-delay="500"
     data-tabs>
-  <% if projekt_feature?(@proposal&.projekt, 'proposals.show_comments') %>
+  <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.show_comments") %>
     <li class="tabs-title <%= 'is-active' if default_active_proposal_footer_tab?('comments') %>">
       <%= link_to "#tab-comments" do %>
         <h3>
@@ -16,7 +16,7 @@
     </li>
   <% end %>
 
-  <% if projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab') %>
+  <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_notifications_tab") %>
     <li class="tabs-title <%= 'is-active' if default_active_proposal_footer_tab?('notifications') %>">
       <%= link_to "#tab-notifications" do %>
         <h3>
@@ -27,7 +27,7 @@
     </li>
   <% end %>
 
-  <% if projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_milestones_tab') %>
+  <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_milestones_tab") %>
     <li class="tabs-title <%= 'is-active' if default_active_proposal_footer_tab?('milestones') %>">
       <%= link_to "#tab-milestones" do %>
         <h3>

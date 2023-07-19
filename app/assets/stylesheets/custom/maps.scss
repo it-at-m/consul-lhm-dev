@@ -1,0 +1,67 @@
+// Map icon
+.map .map-marker .map-icon::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: bold;
+  color: $white;
+  background: none;
+  font-size: 14px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: initial;
+  height: initial;
+  margin: 0;
+}
+
+// Map layers
+.map-layer {
+  position: relative;
+
+  .edit-map-layer,
+  .delete-map-layer {
+    position: absolute;
+    top: 5px;
+    color: #004a83;
+
+    &:hover {
+      color: #00101d;
+    }
+  }
+
+  .edit-map-layer {
+    right: 30px;
+  }
+
+  .delete-map-layer {
+    right: 10px;
+    top: 8px;
+    cursor: pointer;
+  }
+}
+
+.map-layer-form {
+  border: 1px solid #dcdcdc;
+  padding-top: 25px;
+  border-radius: 5px;
+
+  .checkboxes {
+    margin-bottom: 20px;
+
+    .checkbox {
+      font-weight: normal;
+    }
+  }
+}
+
+// Marker Cluster
+.marker-cluster-small,
+.marker-cluster-medium,
+.marker-cluster-large {
+  background-color: $brand-lighter;
+  color: $white;
+
+  div {
+    background-color: $brand-lighter;
+  }
+}

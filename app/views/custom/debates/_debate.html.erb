@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <% cache [debate, debate.image, "image", debate.projekt] do %>
+  <% cache [debate, debate.image, "image", debate.projekt_phase] do %>
     <div class='columns small-12 medium-3 large-2 show-for-small-only'>
       <% if show_image_thumbnail?(debate) %>
         <%= link_to debate do %>
@@ -15,7 +15,7 @@
       <% end %>
     </div>
 
-    <div class="columns small-12 medium-3 large-2 show-for-medium <%= "image-placeholder icon-#{debate.projekt.icon.presence || 'image' }" unless show_image_thumbnail?(debate) %>" data-equalizer-watch='main'>
+    <div class="columns small-12 medium-3 large-2 show-for-medium <%= "image-placeholder icon-#{debate.projekt_phase.projekt.icon.presence || 'image' }" unless show_image_thumbnail?(debate) %>" data-equalizer-watch='main'>
       <% if show_image_thumbnail?(debate) %>
         <%= link_to debate do %>
           <%= image_tag debate.image.variant(:thumb_wider), alt: debate.image.title.unicode_normalize %>
@@ -33,7 +33,7 @@
       <div class='column small-12 medium-6 large-8 resource-details' data-equalizer-watch='details'>
         <% cache [locale_and_user_status,
                   debate,
-                  debate.projekt,
+                  debate.projekt_phase,
                   params[:tags],
                   params[:geozone_affiliation],
                   params[:affiliated_geozones],
@@ -42,23 +42,28 @@
                   params[:projekt_label_ids],
                   "details"] do %>
  
-          <div class='resource-projekt-labels'>
-            <%= render Shared::ProjektLabelsComponent.new(resource: debate) %>
-          </div>
           <h4 class='resource-name'><%= link_to debate.title, debate %></h4>
+          <div class='resource-taggings'>
+            <div class='resource-projekt-labels'>
+              <%= render Shared::ProjektLabelsComponent.new(resource: debate) %>
+            </div>
+            <div class='resource-sentiment'>
+              <%= render Shared::SentimentsComponent.new(resource: debate) %>
+            </div>
+          </div>
+
           <div class="resource-summary margin-bottom">
             <%= link_to debate do %></h4>
               <%= wysiwyg(debate.description) %>
               <div class="truncate"></div>
             <% end %>
           </div>
-          <%= render "shared/tags", taggable: debate, limit: 5 %>
         <% end %>
       </div>
 
       <div class='column small-12 medium-6 large-4 resource-participate table' data-equalizer-watch='details'>
         <div class='table-cell align-middle'>
-          <% if projekt_feature?(debate&.projekt, 'debates.allow_voting') %>
+          <% if projekt_phase_feature?(debate.projekt_phase, "resource.allow_voting") %>
             <div id="<%= dom_id(debate) %>_votes">
               <%= render "debates/votes", debate: debate %>
             </div>

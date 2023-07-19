@@ -1,6 +1,8 @@
 class ProjektPhase::ArgumentPhase < ProjektPhase
+  has_many :projekt_arguments, foreign_key: :projekt_phase_id,
+    dependent: :restrict_with_exception, inverse_of: :projekt_phase
+
   def phase_activated?
-    # projekt.questions.any?
     active?
   end
 
@@ -17,7 +19,15 @@ class ProjektPhase::ArgumentPhase < ProjektPhase
   end
 
   def resource_count
-    projekt.projekt_arguments.count
+    projekt_arguments.count
+  end
+
+  def admin_nav_bar_items
+    %w[naming].push(resources_name)
+  end
+
+  def safe_to_destroy?
+    projekt_arguments.empty?
   end
 
   private

@@ -41,9 +41,9 @@
             <% end %>
           <% end %>
         </div>
-        <% if projekt.question_list_enabled? %>
+        <% if projekt_phase.question_list_enabled? %>
           <div class='small-12 column projekt-question--go-to-question-list-button'>
-            <%= link_to t("custom.projekts.projekt_questions.back_to_question_list"), projekt_projekt_questions_path(projekt, current_projekt_question_id: @projekt_question.id, format: :js), remote: true, class: "js-projekt-question-next icon-angle-left" %>
+            <%= link_to t("custom.projekts.projekt_questions.back_to_question_list"), projekt_projekt_questions_path(projekt, current_projekt_question_id: @projekt_question.id, projekt_phase_id: projekt_phase.id, format: :js), remote: true, class: "js-projekt-question-next icon-angle-left" %>
           </div>
         <% end %>
       </div>

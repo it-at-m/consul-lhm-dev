@@ -51,27 +51,10 @@
     </div>
   </div>
 
-  <%if extended_feature?("modulewide.enable_categories") %>
-    <div class="row">
-      <hr>
-      <div class="small-12 column">
-        <h4><%= t("admin.tags.index.topic") %></h4>
-        <%Tag.category.order("name ASC").each_with_index do |t, i|%>
-          <%= f.check_box "tag", {class: "tag_checkbox", label: t.name, value: t.name, id: "tag_#{t.id}", checked: @poll.tag_list.include?(t.name) } %>
-        <%end%>
-      </div>
-    </div>
-    <%=f.hidden_field :tag_list%>
-  <%end%>
-
   <div class="row">
     <div class="small-12 column margin-top margin-bottom">
-      <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: @poll, projekts: Projekt.top_level }  %>
+      <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: @poll }  %>
     </div>
-  </div>
-
-  <div class="row">
-    <%= render SDG::RelatedListSelectorComponent.new(f) %>
   </div>
 
   <div class='row'>
@@ -101,22 +84,4 @@
       </div>
     </div>
   </div>
-
 <% end %>
-
-  <script>
-    function update_tags(){
-      var list = []
-      $(".tag_checkbox:checked").each(function(){
-        list.push($(this).closest("label")[0].innerText)
-      })
-      $("#poll_tag_list").val(list.join(","));
-
-    }
-    $(".tag_checkbox").on("change", function(){
-      update_tags();
-    })
-    $(function() {
-      update_tags();
-    })
-  </script>

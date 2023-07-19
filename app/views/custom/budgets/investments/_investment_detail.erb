@@ -27,13 +27,11 @@
   </p>
 <% end %>
 
-<% if projekt_feature?(investment.projekt, "budgets.allow_attached_documents") %>
+<% if projekt_phase_feature?(investment.projekt_phase, "form.allow_attached_documents") %>
   <%= render "documents/documents",
               documents: investment.documents,
               max_documents_allowed: Budget::Investment.max_documents_allowed %>
 <% end %>
-
-<%# = render "shared/tags", taggable: investment %>
 
 <% if investment.external_url.present? %>
   <div class="document-link">
@@ -42,12 +40,12 @@
 <% end %>
 
 
-<% if projekt_feature?(investment&.projekt, 'budgets.show_implementation_option_fields') %>
+<% if projekt_phase_feature?(investment&.projekt_phase, "form.show_implementation_option_fields") %>
   <h2><%= t("custom.budgets.investments.show.implementation") %></h2>
   <%= t("custom.budgets.investments.show.implementation_#{investment.implementation_performer}_text_html", author: investment.author.name, implementation_contribution: investment.implementation_contribution) %>
 <% end %>
 
-<% if projekt_feature?(investment.projekt, 'budgets.show_user_cost_estimate') && investment.user_cost_estimate.present? %>
+<% if projekt_phase_feature?(investment.projekt_phase, "form.show_user_cost_estimate") && investment.user_cost_estimate.present? %>
   <h2><%= t('custom.budgets.investments.show.user_cost_estimate') %></h2>
   <p><%= investment.user_cost_estimate %></p>
 <% end %>

@@ -1,4 +1,4 @@
-<h2><%= t('custom.admin.projekts.overview_page_tab.title') %></h2>
+<h2><%= t("custom.admin.projekts.overview_page_tab.title") %></h2>
 <table>
   <thead>
     <tr>
@@ -18,14 +18,14 @@
         </td>
 
         <td>
-          <%= render Admin::Settings::FeaturedSettingsFormComponent.new(feature, tab: '#tab-projekts-overview-page') %>
+          <%= render Admin::Settings::FeaturedSettingsFormComponent.new(feature, tab: "#tab-projekts-overview-page") %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<h2><%= t('custom.admin.projekts.overview_page_tab.title_footer') %></h2>
+<h2><%= t("custom.admin.projekts.overview_page_tab.title_footer") %></h2>
 <table>
   <thead>
     <tr>
@@ -45,34 +45,9 @@
         </td>
 
         <td>
-          <%= render Admin::Settings::FeaturedSettingsFormComponent.new(feature, tab: '#tab-projekts-overview-page') %>
+          <%= render Admin::Settings::FeaturedSettingsFormComponent.new(feature, tab: "#tab-projekts-overview-page") %>
         </td>
       </tr>
     <% end %>
-  </tbody>
-</table>
-
-<h2 class="margin-top-25"><%= t("custom.admin.projekts.edit.projekt_phases_tab.phases_block_title") %></h2>
-
-<table class='edit-projekt margin-top'>
-  <tbody>
-
-    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase_table_header' %>
-
-    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase', locals: {
-      projekt_phase: @overview_page_special_projekt.comment_phase,
-    } %>
-
-    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase', locals: {
-      projekt_phase: @overview_page_special_projekt.debate_phase,
-    } %>
-
-    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase', locals: {
-      projekt_phase: @overview_page_special_projekt.proposal_phase,
-    } %>
-
-    <%= render partial: 'custom/admin/projekts/edit/projekt_phases/projekt_phase', locals: {
-      projekt_phase: @overview_page_special_projekt.voting_phase,
-    } %>
   </tbody>
 </table>

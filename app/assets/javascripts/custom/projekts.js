@@ -332,11 +332,6 @@
         App.Projekts.toggleChildrenInSidebar($label);
       });
 
-      $("body").on("click", ".js-toggle-edit-projekt-info", function(event) {
-        var $row = $(this).closest('tr');
-        App.Projekts.toggleChildrenInSidebar($row);
-      });
-
       $("body").on("click", ".js-reset-projekt-filter-toggle-status", function(event) {
         var resourceName = $(this).data('resources') + 'ProjektFilterToggleIds';
         var projektIds = $(this).data('projekts')

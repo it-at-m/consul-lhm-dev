@@ -14,69 +14,60 @@ class Projekt < ApplicationRecord
   include Globalizable
 
   has_many :children, -> { order(order_number: :asc) }, class_name: "Projekt", foreign_key: "parent_id",
-    inverse_of: :parent
+    inverse_of: :parent, dependent: :nullify
   belongs_to :parent, class_name: "Projekt", optional: true
 
-  has_many :debates, dependent: :nullify
-  has_many :proposals, dependent: :nullify
-  has_many :polls, dependent: :nullify
-  has_many :legislation_processes, dependent: :nullify, class_name: "Legislation::Process"
-  has_one :budget, dependent: :nullify
-  has_many :projekt_events, dependent: :destroy
-  has_many :questions, -> { order(:id) },
-    class_name: "ProjektQuestion",
-    inverse_of:  :projekt,
-    dependent:   :destroy
-
   has_one :page, class_name: "SiteCustomization::Page", dependent: :destroy
+  has_many :comments, as: :commentable, dependent: :destroy
+
+  has_many :projekt_settings, dependent: :destroy
 
   has_many :projekt_phases, dependent: :destroy
-  has_one :debate_phase, class_name: "ProjektPhase::DebatePhase", dependent: :destroy
-  has_one :proposal_phase, class_name: "ProjektPhase::ProposalPhase", dependent: :destroy
-  has_one :budget_phase, class_name: "ProjektPhase::BudgetPhase", dependent: :destroy
-  has_one :comment_phase, class_name: "ProjektPhase::CommentPhase", dependent: :destroy
-  has_one :voting_phase, class_name: "ProjektPhase::VotingPhase", dependent: :destroy
-  has_one :milestone_phase, class_name: "ProjektPhase::MilestonePhase", dependent: :destroy
-  has_one :projekt_notification_phase, class_name: "ProjektPhase::ProjektNotificationPhase",
+  has_many :debate_phases, class_name: "ProjektPhase::DebatePhase", dependent: :destroy
+  has_many :proposal_phases, class_name: "ProjektPhase::ProposalPhase", dependent: :destroy
+  has_many :budget_phases, class_name: "ProjektPhase::BudgetPhase", dependent: :destroy
+  has_many :comment_phases, class_name: "ProjektPhase::CommentPhase", dependent: :destroy
+  has_many :voting_phases, class_name: "ProjektPhase::VotingPhase", dependent: :destroy
+  has_many :milestone_phases, class_name: "ProjektPhase::MilestonePhase", dependent: :destroy
+  has_many :projekt_notification_phases, class_name: "ProjektPhase::ProjektNotificationPhase",
     dependent: :destroy
-  has_one :newsfeed_phase, class_name: "ProjektPhase::NewsfeedPhase", dependent: :destroy
-  has_one :event_phase, class_name: "ProjektPhase::EventPhase", dependent: :destroy
-  has_one :legislation_phase, class_name: "ProjektPhase::LegislationPhase", dependent: :destroy
-  has_one :question_phase, class_name: "ProjektPhase::QuestionPhase", dependent: :destroy
-  has_one :argument_phase, class_name: "ProjektPhase::ArgumentPhase", dependent: :destroy
-  has_one :livestream_phase, class_name: "ProjektPhase::LivestreamPhase", dependent: :destroy
-  has_many :geozone_restrictions, through: :projekt_phases
+  has_many :newsfeed_phases, class_name: "ProjektPhase::NewsfeedPhase", dependent: :destroy
+  has_many :event_phases, class_name: "ProjektPhase::EventPhase", dependent: :destroy
+  has_many :legislation_phases, class_name: "ProjektPhase::LegislationPhase", dependent: :destroy
+  has_many :question_phases, class_name: "ProjektPhase::QuestionPhase", dependent: :destroy
+  has_many :argument_phases, class_name: "ProjektPhase::ArgumentPhase", dependent: :destroy
+  has_many :livestream_phases, class_name: "ProjektPhase::LivestreamPhase", dependent: :destroy
 
   has_and_belongs_to_many :geozone_affiliations, class_name: "Geozone",
     after_add: :touch_updated_at, after_remove: :touch_updated_at
   has_and_belongs_to_many :individual_group_values,
     after_add: :touch_updated_at, after_remove: :touch_updated_at
 
-  has_many :projekt_settings, dependent: :destroy
-  has_many :projekt_notifications, dependent: :destroy
-  has_many :projekt_arguments, dependent: :destroy
-  has_many :projekt_livestreams, dependent: :destroy
+  has_many :debates, through: :debate_phases
+  has_many :proposals, through: :proposal_phases
+  has_many :budgets, through: :budget_phases
+  has_many :polls, through: :voting_phases
+  has_many :projekt_arguments, through: :argument_phases
+  has_many :projekt_livestreams, through: :livestream_phases
+  has_many :projekt_notifications, through: :projekt_notification_phases
+  has_many :projekt_events, through: :event_phases
+  has_many :legislation_processes, through: :legislation_phases
 
-  has_many :comments, as: :commentable, inverse_of: :commentable, dependent: :destroy
   belongs_to :author, -> { with_hidden }, class_name: "User", inverse_of: :projekts
 
-  has_many :map_layers, dependent: :destroy
+  has_many :map_layers, as: :mappable, dependent: :destroy
 
-  has_many :projekt_labels, dependent: :destroy
+  # has_many :projekt_labels, dependent: :destroy #remove
 
   has_many :projekt_manager_assignments, dependent: :destroy
   has_many :projekt_managers, through: :projekt_manager_assignments
 
-  accepts_nested_attributes_for(
-    :debate_phase, :proposal_phase, :budget_phase,
-    :voting_phase, :comment_phase, :milestone_phase,
-    :event_phase, :question_phase, :legislation_phase,
-    :newsfeed_phase, :projekt_notification_phase, :argument_phase,
-    :livestream_phase, :projekt_events, :projekt_notifications, :projekt_arguments
-  )
+  has_many :subscriptions, -> { where(projekt_subscriptions: { active: true }) },
+    class_name: "ProjektSubscription", dependent: :destroy, inverse_of: :projekt
+  has_many :subscribers, through: :subscriptions, source: :user
 
-  before_validation :set_default_color
-  after_create :create_corresponding_page, :set_order, :create_projekt_phases, :create_default_settings,
+  # before_validation :set_default_color - should projekt still have a color?
+  after_create :create_corresponding_page, :set_order, :create_default_settings,
     :create_map_location
   around_update :update_page
   after_save do
@@ -84,7 +75,7 @@ class Projekt < ApplicationRecord
   end
   after_destroy :ensure_projekt_order_integrity
 
-  validates :color, format: { with: /\A#[\da-f]{6}\z/i }
+  # validates :color, format: { with: /\A#[\da-f]{6}\z/i } - still color?
   validates :name, presence: true
 
   scope :regular, -> { where(special: false) }
@@ -100,6 +91,11 @@ class Projekt < ApplicationRecord
   scope :activated, -> {
     joins("INNER JOIN projekt_settings act ON projekts.id = act.projekt_id")
       .where("act.key": "projekt_feature.main.activate", "act.value": "active")
+  }
+
+  scope :not_activated, -> {
+    joins("INNER JOIN projekt_settings nact ON projekts.id = nact.projekt_id")
+      .where("nact.key": "projekt_feature.main.activate", "nact.value": [nil, ""])
   }
 
   scope :current, ->(timestamp = Time.zone.today) {
@@ -158,6 +154,10 @@ class Projekt < ApplicationRecord
       .where("siil.key": "projekt_feature.general.show_in_individual_list", "siil.value": "active")
   }
 
+  scope :index_order_drafts, -> {
+    not_activated
+  }
+
   scope :not_in_individual_list, -> {
     joins("INNER JOIN projekt_settings siil ON projekts.id = siil.projekt_id")
       .where("siil.key": "projekt_feature.general.show_in_individual_list", "siil.value": [nil, ""])
@@ -168,16 +168,17 @@ class Projekt < ApplicationRecord
       .where("siop.key": "projekt_feature.general.show_in_overview_page", "siop.value": "active")
   }
 
+  scope :show_in_homepage, -> {
+    joins("INNER JOIN projekt_settings sihp ON projekts.id = sihp.projekt_id")
+      .where("sihp.key": "projekt_feature.general.show_in_homepage", "sihp.value": "active")
+  }
+
   scope :visible_in_menu, ->(user = nil) {
     joins("INNER JOIN projekt_settings vim ON projekts.id = vim.projekt_id")
       .where("vim.key": "projekt_feature.general.show_in_navigation", "vim.value": "active")
       .with_order_number
       .select { |p| p.visible_for?(user) }
   }
-
-  scope :show_in_sidebar, ->(resources_name) {
-    joins("INNER JOIN projekt_settings sis ON projekts.id = sis.projekt_id")
-      .where("sis.key": "projekt_feature.#{resources_name}.show_in_sidebar_filter", "sis.value": "active") }
 
   scope :with_active_feature, ->(projekt_feature_key) {
     joins("INNER JOIN projekt_settings waf ON projekts.id = waf.projekt_id")
@@ -216,6 +217,13 @@ class Projekt < ApplicationRecord
     end
   end
 
+  def projekt_phases_for(resource)
+    return debate_phases if resource.is_a?(Debate)
+    return proposal_phases if resource.is_a?(Proposal)
+    return voting_phases if resource.is_a?(Poll)
+    return legislation_phases if resource.is_a?(Legislation::Process)
+  end
+
   def published?
     page&.status == "published"
   end
@@ -226,22 +234,29 @@ class Projekt < ApplicationRecord
   end
 
   def selectable_in_selector?(controller_name, user)
-    return true if controller_name == "polls"
-    return true if controller_name == "processes"
     return false if user.nil?
 
-    user_has_admin_rights = user.administrator? || user.projekt_manager?
-
     if controller_name == "proposals"
-      return false if proposals_selectable_by_admins_only? && !user_has_admin_rights
+      if proposal_phases.any?(&:selectable_by_admins_only?) && !user.can_manage_projekt?(self)
+        false
+      else
+        proposal_phases.any? { |phase| phase.selectable_by?(user) }
+      end
 
-      proposal_phase.selectable_by?(user)
     elsif controller_name == "debates"
-      return false if debates_selectable_by_admins_only? && !user_has_admin_rights
+      if debate_phases.any?(&:selectable_by_admins_only?) && !user.can_manage_projekt?(self)
+        false
+      else
+        debate_phases.any? { |phase| phase.selectable_by?(user) }
+      end
 
-      debate_phase.selectable_by?(user)
+    elsif controller_name == "polls"
+      voting_phases.any? { |phase| phase.selectable_by?(user) }
+
     elsif controller_name == "processes"
-      legislation_phase.selectable_by?(user)
+      legislation_phases
+        .reject { |lp| lp.legislation_process.present? || !lp.selectable_by?(user) }
+        .any?
     end
   end
 
@@ -268,26 +283,8 @@ class Projekt < ApplicationRecord
       total_duration_end < timestamp
   end
 
-  def debates_selectable_by_admins_only?
-    projekt_settings.
-      find_by(projekt_settings: { key: "projekt_feature.debates.only_admins_create_debates" }).
-      value.
-      present?
-  end
-
-  def proposals_selectable_by_admins_only?
-    projekt_settings.
-      find_by(projekt_settings: { key: "projekt_feature.proposals.only_admins_create_proposals" }).
-      value.
-      present?
-  end
-
   def activated_children
     children.activated
-  end
-
-  def comments_allowed?(current_user)
-    comment_phase.selectable_by?(current_user)
   end
 
   def calculate_level(counter = 1)
@@ -347,9 +344,9 @@ class Projekt < ApplicationRecord
   def has_active_phase?(controller_name)
     case controller_name
     when "proposals"
-      proposal_phase.current?
+      proposal_phases.any?(&:current?)
     when "debates"
-      debate_phase.current?
+      debate_phases.any?(&:current?)
     when "polls"
       false
     end
@@ -399,52 +396,8 @@ class Projekt < ApplicationRecord
     end
   end
 
-  def self.ensure_projekt_phases
-    all.find_each do |projekt|
-      projekt.debate_phase = ProjektPhase::DebatePhase.create unless projekt.debate_phase
-      projekt.proposal_phase = ProjektPhase::ProposalPhase.create unless projekt.proposal_phase
-      projekt.budget_phase = ProjektPhase::BudgetPhase.create unless projekt.budget_phase
-      projekt.comment_phase = ProjektPhase::CommentPhase.create unless projekt.comment_phase
-      projekt.question_phase = ProjektPhase::QuestionPhase.create unless projekt.question_phase
-      projekt.voting_phase = ProjektPhase::VotingPhase.create unless projekt.voting_phase
-      projekt.milestone_phase = ProjektPhase::MilestonePhase.create unless projekt.milestone_phase
-      unless projekt.projekt_notification_phase
-        projekt.projekt_notification_phase = ProjektPhase::ProjektNotificationPhase.create
-      end
-      projekt.newsfeed_phase = ProjektPhase::NewsfeedPhase.create unless projekt.newsfeed_phase
-      projekt.event_phase = ProjektPhase::EventPhase.create unless projekt.event_phase
-      projekt.argument_phase = ProjektPhase::ArgumentPhase.create unless projekt.argument_phase
-      projekt.livestream_phase = ProjektPhase::LivestreamPhase.create unless projekt.livestream_phase
-      unless projekt.legislation_phase
-        projekt.legislation_phase = ProjektPhase::LegislationPhase.create
-      end
-    end
-  end
-
-  def self.ensure_map_existence
-    all.each do |projekt|
-      projekt.map_location = MapLocation.create(
-        latitude: Setting['map.latitude'],
-        longitude: Setting['map.longitude'],
-        zoom: Setting['map.zoom']
-      ) unless projekt.map_location.present?
-    end
-  end
-
   def title
     name
-  end
-
-  def question_list_enabled?
-    ProjektSetting.find_by(projekt: self, key: "projekt_feature.questions.show_questions_list")&.enabled?
-  end
-
-  def map_layers_for_render
-    unless map_layers.any?(&:base?)
-      return map_layers.or(MapLayer.where(projekt: nil, base: true))
-    end
-
-    map_layers
   end
 
   def legislation_process
@@ -493,21 +446,39 @@ class Projekt < ApplicationRecord
   end
 
   def visible_for?(user = nil)
-    return true if individual_group_values.hard.empty?
-    return false unless user.present?
-    return true if user.administrator?
+    return true if user.present? && user.administrator?
+    return true if user.present? && user.projekt_manager?(self)
+    return false unless activated?
 
-    (individual_group_values.hard.ids & user.individual_group_values.hard.ids).any?
+    if individual_group_values.hard.empty?
+      true
+    else
+      user.present? && (individual_group_values.hard.ids & user.individual_group_values.hard.ids).any?
+    end
   end
 
   def hidden_for?(user = nil)
     !visible_for?(user)
   end
 
+  def comments_allowed?(user = nil)
+    true
+  end
+
+  def vc_map_enabled?
+    projekt_settings.find_by(key: "projekt_feature.general.vc_map_enabled")&.enabled?
+  end
+
   private
 
     def create_corresponding_page
-      page = SiteCustomization::Page.new(title: name, slug: form_page_slug, projekt: self)
+      page = SiteCustomization::Page.new(
+        title: name,
+        slug: form_page_slug,
+        status: "published",
+        projekt: self,
+        content: ""
+      )
 
       if page.save
         self.page = page
@@ -547,22 +518,6 @@ class Projekt < ApplicationRecord
       else
         update!(order_number: 1)
       end
-    end
-
-    def create_projekt_phases
-      self.debate_phase = ProjektPhase::DebatePhase.create
-      self.proposal_phase = ProjektPhase::ProposalPhase.create
-      self.budget_phase = ProjektPhase::BudgetPhase.create
-      self.comment_phase = ProjektPhase::CommentPhase.create
-      self.question_phase = ProjektPhase::QuestionPhase.create
-      self.voting_phase = ProjektPhase::VotingPhase.create
-      self.milestone_phase = ProjektPhase::MilestonePhase.create
-      self.projekt_notification_phase = ProjektPhase::ProjektNotificationPhase.create
-      self.argument_phase = ProjektPhase::ArgumentPhase.create
-      self.livestream_phase = ProjektPhase::LivestreamPhase.create
-      self.newsfeed_phase = ProjektPhase::NewsfeedPhase.create
-      self.event_phase = ProjektPhase::EventPhase.create
-      self.legislation_phase = ProjektPhase::LegislationPhase.create
     end
 
     def swap_order_numbers_up

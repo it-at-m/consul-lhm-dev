@@ -1,0 +1,54 @@
+<%= render "custom/admin/projekt_phases/heading" %>
+<%= render "custom/admin/projekt_phases/nav_bar" %>
+
+<div class="row">
+  <div class="column">
+    <h2><%= t("custom.admin.projekt_phases.projekt_labels.page_title") %></h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="column">
+    <% if @projekt_labels.empty? %>
+      <p><%= t("custom.admin.projekt_phases.projekt_labels.no_labels") %></p>
+
+    <% else %>
+      <table>
+        <thead>
+          <tr>
+            <th><%= t("custom.admin.projekt_phases.projekt_labels.table.icon") %></th>
+            <th><%= t("custom.admin.projekt_phases.projekt_labels.table.name") %></th>
+            <th><%= t("admin.actions.actions") %></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @projekt_labels.each do |label| %>
+            <tr id="<%= dom_id(label) %>">
+              <td><%= "<i class='fas fa-#{label.icon}'></i>".html_safe if label.icon %></td>
+              <td><%= label.name %></td>
+              <td>
+                <%= render Admin::TableActionsComponent.new(label,
+                                                            actions: [:edit, :destroy],
+                                                            edit_path: polymorphic_path([@namespace, @projekt_phase, label], action: :edit),
+                                                            destroy_path: polymorphic_path([@namespace, @projekt_phase, label]),
+                                                            edit_options: { remote: true, data: { "turbolinks-scroll": "false" }},
+                                                            destroy_options: { remote: true }
+                                                           ) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="column">
+    <div id="create-or-edit-projekt-label">
+      <%= link_to t("custom.admin.projekt_phases.projekt_labels.create_button"),
+        polymorphic_path([@namespace, @projekt_phase, ProjektLabel.new], action: :new), class: "button", remote: true, data: { "turbolinks-scroll": "false" } %>
+    </div>
+  </div>
+</div>

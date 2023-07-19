@@ -1,6 +1,9 @@
 <% block_key = "projekt_sidebar_#{@custom_page.projekt.id}" %>
 
 <% if SiteCustomization::ContentBlock.custom_block_for(block_key, I18n.locale).body.present? ||
-        current_user&.administrator? %>
-  <%= render_custom_block block_key %>
+    current_user&.administrator? ||
+    current_user&.projekt_manager?(@custom_page.projekt) %>
+  <div class="margin-bottom">
+    <%= render_custom_block block_key %>
+  </div>
 <% end %>

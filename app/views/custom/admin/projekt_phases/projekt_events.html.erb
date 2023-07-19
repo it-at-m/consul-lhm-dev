@@ -1,0 +1,75 @@
+<%= render "custom/admin/projekt_phases/heading" %>
+<%= render "custom/admin/projekt_phases/nav_bar" %>
+
+<div class="row">
+  <div class="column">
+    <h2><%= t("custom.admin.projekt_phases.projekt_events.page_title") %></h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="column">
+    <%= render partial: "custom/admin/projekt_phases/projekt_events/form", locals: { event: @projekt_event } %>
+  </div>
+</div>
+
+<div class='margin-top'>
+  <% @projekt_events.each do |event| %>
+    <div class="row">
+      <div class="column">
+        <div class='small-12 medium-7 projekt-event' id="<%= dom_id(event) %>">
+          <%= check_box_tag "edit_projekt_event_#{dom_id(event)}" %>
+          <%= label_tag nil, nil, for: "edit_projekt_event_#{dom_id(event)}", class: "edit-projekt-event js-admin-edit-projekt-event" %>
+
+          <div class='projekt-event-content'>
+            <h3>
+              <%= event.title %>
+            </h3>
+
+            <% if event.location.present? %>
+              <p>
+              <strong><%= t("custom.admin.projekt_phases.projekt_events.event_location") %>:</strong>
+              <%= event.location %>
+              </p>
+            <% end %>
+            <p>
+              <strong><%= t("custom.admin.projekt_phases.projekt_events.event_datetime") %>:</strong>
+              <%= event.datetime.strftime("%d.%m.%y %H:%m") %>
+              <% if event.end_datetime.present? %>
+                —
+                <%= event.end_datetime.strftime("%d.%m.%y %H:%m") %>
+              <% end %>
+            </p>
+            <% if event.weblink.present? %>
+              <p>
+                <strong><%= t("custom.admin.projekt_phases.projekt_events.event_weblink") %>:</strong>
+                <%= link_to(event.weblink, event.weblink) %>
+              </p>
+            <% end %>
+            <% if event.description.present? %>
+              <p>
+                <strong><%= t("custom.admin.projekt_phases.projekt_events.event_description") %>:</strong>
+                <div>
+                  <%= auto_link_already_sanitized_html wysiwyg(event.description) %>
+                </div>
+              </p>
+            <% end %>
+            <p>
+              <strong><%= t("custom.admin.projekt_phases.projekt_events.event_created_at") %>:</strong>
+              <%= event.created_at.to_date %>
+            </p>
+
+            <%= link_to t("custom.admin.projekt_phases.projekt_events.send_notifications_button"), polymorphic_path([@namespace, @projekt_phase, event], action: :send_notifications), method: :post, class: "margin-right" %>
+          </div>
+
+          <div class='edit-projekt-event-form'>
+            <%= render partial: "custom/admin/projekt_phases/projekt_events/form", locals: { event: event, wide_textarea: true } %>
+          </div>
+
+          <%= link_to "", polymorphic_path([@namespace, @projekt_phase, event]), method: :delete, class: "delete-projekt-event" %>
+          <hr>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -24,7 +24,7 @@
   <% index = 0 %>
 
   <% phases.each do |phase | %>
-    <% next if phase.name == 'budget_phase' && @projekt.budget.blank?  %>
+    <% next if phase.name == 'budget_phase' && phase.budget.blank?  %>
 
     <% if phase.phase_activated? %>
       <div class="sidebar-projekt-phase <%= 'active' if phase.current? %>" <%= "aria-expanded=true" if phase.name == 'budget_phase' %>>
@@ -32,18 +32,16 @@
         </div>
         <div class='sidebar-projekt-phase-details'>
           <span class='sidebar-projekt-phase-name'>
-            <%= phase_title(phase) %>
+            <%= phase.title %>
 
-            <% if projekt_feature?(@projekt, 'general.show_projekt_footer') %>
-              <%= link_to "/#{params[:id]}/#{phase.name}_footer_tab", class: 'js-sidebar-phase-link', remote: true, data: { index: index - 1 } do %>
-                <i class="fas fa-long-arrow-alt-right"></i>
-              <% end %>
+            <%= link_to "/#{params[:id]}/#{phase.name}_footer_tab", class: 'js-sidebar-phase-link', remote: true, data: { index: index - 1 } do %>
+              <i class="fas fa-long-arrow-alt-right"></i>
             <% end %>
 
           </span>
           <span class='sidebar-projekt-phase-duration'><%= format_date_range(phase.start_date, phase.end_date) %></span>
 
-          <% if phase.name == 'budget_phase' && projekt.budget.present? %>
+          <% if phase.name == 'budget_phase' && phase.budget.present? %>
 
             <span class='js-icon-toggle-budget-phases toggle-arrow focusable js-prevent-key-scroll'
                   role="button"
@@ -53,7 +51,7 @@
             </span>
 
             <div class='sidebar-projekt-budget-phases'>
-              <%= render Pages::Projekts::SidebarBudgetPhasesComponent.new(projekt.budget) %>
+              <%= render Pages::Projekts::SidebarBudgetPhasesComponent.new(phase.budget) %>
             </div>
           <% end %>
         </div>
@@ -70,12 +68,6 @@
       <div class='sidebar-projekt-phase-details'>
         <span class='sidebar-projekt-phase-name'>
           <%= t('custom.projekts.page.sidebar.projekt_end') %>
-
-          <% if projekt_feature?(@projekt, 'general.show_projekt_footer') %>
-            <%= link_to "/#{params[:id]}/#{milestone_phase.name}_footer_tab", remote: true, class: 'js-sidebar-phase-link' do %>
-              <i class="fas fa-long-arrow-alt-right"></i>
-            <% end %>
-          <% end %>
         </span>
         <span class='sidebar-projekt-phase-duration'><%= format_date(projekt.total_duration_end) %></span>
       </div>

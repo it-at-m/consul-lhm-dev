@@ -1,0 +1,23 @@
+<span id="<%= "projekt-phase-selector-#{projekt_phase.id}" %>" class="projekt-phase-selector js-select-projekt-phase js-prevent-key-scroll"
+  id="<%= dom_id(projekt_phase) %>"
+  tabindex="0"
+  aria-labeled-by="<%= "#{dom_id(projekt_phase)}_name" %>"
+  data-projekt-phase-id="<%= projekt_phase.id %>"
+  <%= "data-vc-map=true" if projekt_phase.projekt.vc_map_enabled? %>
+  <%= "data-default-color=#00ff00" if projekt_phase.projekt.vc_map_enabled? %>
+  <%= "data-latitude=#{projekt_phase.map_location.latitude}" if projekt_phase.map_location.present? %>
+  <%= "data-longitude=#{projekt_phase.map_location.longitude}" if projekt_phase.map_location.present? %>
+  <%= "data-zoom=#{projekt_phase.map_location.zoom}" if projekt_phase.map_location.present? %>
+  <%= "data-show-map=true" if projekt_phase_feature?(projekt_phase, "form.show_map") %>
+  <%= "data-show-summary=true" if projekt_phase_feature?(projekt_phase, "form.enable_summary") %>
+  <%= "data-allow-video=true" if projekt_phase_feature?(projekt_phase, "form.enable_external_video") %>
+  <%= "data-allow-attached-image=true" if projekt_phase_feature?(projekt_phase, "form.allow_attached_image") %>
+  <%= "data-allow-attached-document=true" if projekt_phase_feature?(projekt_phase, "form.allow_attached_documents") %>
+  <%= "data-allow-tags=true" if projekt_feature?(projekt, "general.enable_tags") %>
+  <%= "data-tag-ids=#{projekt.tags.category.ids.any? ? projekt.tags.category.ids.join(",") : false}" if projekt_feature?(projekt, "general.enable_tags") %>
+  <%= "data-projekt-labels-name=#{projekt_phase.labels_name.gsub(" ", "_")}" if projekt_phase.labels_name.present? %>
+  <%= "data-projekt-label-ids=#{projekt_phase.projekt_labels.ids.join(",")}" if projekt_phase.projekt_labels.any? %>
+  <%= "data-sentiments-name=#{projekt_phase.sentiments_name.gsub(" ", "_")}" if projekt_phase.sentiments_name.present? %>
+  <%= "data-sentiment-ids=#{projekt_phase.sentiments.ids.join(",")}" if projekt_phase.sentiments.any? %>>
+  <%= projekt_phase.title %>
+</span>

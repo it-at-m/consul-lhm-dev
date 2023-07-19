@@ -1,0 +1,35 @@
+<%= translatable_form_for(@projekt, url: namespace_projekt_path) do |f| %>
+
+  <%= hidden_field_tag :tab, "#tab-projekt-configuration" %>
+  <%= hidden_field_tag :namespace, params[:controller].include?("projekt_management") ? "projekt_management" : "" %>
+
+  <div class="config-block">
+    <div>
+      <div class="" style="display:inline-block;width:49%">
+        <%= Projekt.human_attribute_name(:total_duration_start) %>
+      </div>
+      <div class="" style="display:inline-block;width:49%">
+        <%= Projekt.human_attribute_name(:total_duration_end) %>
+      </div>
+    </div>
+
+    <div>
+      <div class="" style="display:inline-block;width:49%">
+        <%= f.date_field :total_duration_start, label: false %>
+        <div class="show-projekt-dates-in-frontend-checkbox">
+          <%= f.check_box :show_start_date_in_frontend %>
+        </div>
+      </div>
+      <div class="" style="display:inline-block;width:49%">
+        <%= f.date_field :total_duration_end, label: false %>
+        <div class="show-projekt-dates-in-frontend-checkbox">
+          <%= f.check_box :show_end_date_in_frontend %>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <%= f.submit(class: "button success") %>
+    </div>
+  </div>
+<% end %>

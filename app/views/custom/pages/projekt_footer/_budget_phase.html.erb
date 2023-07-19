@@ -1,6 +1,4 @@
-<%= render 'shared/loader_spinner' %>
-
-<% if @current_projekt.budget.present? %>
+<% if @budget.present? %>
   <%= render Pages::Projekts::BudgetsTabComponent.new(@budget, @ballot, current_user) %>
 
   <div class='row'>
@@ -9,8 +7,10 @@
     </div>
 
     <div id='budgets' class='budgets-list spinner-placeholder small-12 medium-9 column'>
+      <%= render 'shared/loader_spinner' %>
+
       <% if @budget.phase == 'finished' %>
-        <%= render Pages::Projekts::BudgetsSubnavComponent.new(@budget) %>
+        <%= render Pages::Projekts::BudgetsSubnavComponent.new(@budget, @projekt_phase) %>
       <% else %>
         <%= render "shared/order_links", i18n_namespace: "budgets.investments.index" %>
       <% end %>

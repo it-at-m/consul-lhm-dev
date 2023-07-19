@@ -1,0 +1,56 @@
+<%= render "custom/admin/projekt_phases/heading" %>
+<%= render "custom/admin/projekt_phases/nav_bar" %>
+
+<div class="row">
+  <div class="column">
+    <% @projekt_phase.map_layers.each do |layer| %>
+      <%= render partial: "custom/admin/shared/map/map_layer", locals: { layer: layer, return_path: namespace_projekt_phase_path(action: :map) } %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="column">
+    <div id="new-map-layer">
+      <%= link_to t("custom.map_layer.buttons.new_layer"), polymorphic_path([@namespace, MapLayer.new], action: :new, return_path: namespace_projekt_phase_path(action: :map), mappable_id: @projekt_phase.id, mappable_type: @projekt_phase.class.name), class: "button success margin-bottom", remote: true %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="column">
+    <h2><%= t("admin.settings.index.map.title") %></h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="column">
+    <table>
+      <thead>
+        <tr>
+          <th><%= t("admin.settings.setting") %></th>
+          <th><%= t("admin.settings.setting_value") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= form_for(@projekt_phase.map_location, url: namespace_mappable_path(action: :update_map)) do |f| %>
+          <%= render partial: "custom/admin/shared/map/map_settings_form", locals: { map_location_form: f, attribute: :latitude } %>
+          <%= render partial: "custom/admin/shared/map/map_settings_form", locals: { map_location_form: f, attribute: :longitude } %>
+          <%= render partial: "custom/admin/shared/map/map_settings_form", locals: { map_location_form: f, attribute: :zoom } %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="column">
+    <p><%= t("admin.settings.index.map.help") %></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="column">
+    <%= render "custom/admin/shared/map/map_form", mappable: @projekt_phase, map_location: @projekt_phase.map_location %>
+  </div>
+</div>
