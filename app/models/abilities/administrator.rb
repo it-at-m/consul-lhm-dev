@@ -162,7 +162,7 @@ module Abilities
       can [:index, :update, :destroy], RegisteredAddress::Grouping
       can [:index], RegisteredAddress::Street
 
-      can [:results, :stats], Poll, projekt: { projekt_settings: { key: "projekt_feature.polls.intermediate_poll_results_for_admins", value: "active" }}
+      can [:results, :stats], Poll, projekt_phase: { settings: { key: "feature.resource.intermediate_poll_results_for_admins", value: "active" }}
 
       can [:manage], ProjektLabel
       can [:manage], Sentiment
