@@ -34,7 +34,7 @@ class ProjektsController < ApplicationController
     @current_projekts_order = valid_orders.include?(params[:order]) ? params[:order] : @active_projekts_orders.first
     @special_projekt = Projekt.unscoped.find_by(special: true, special_name: "projekt_overview_page")
     @projekts = @projekts.send(@current_projekts_order)
-    @map_coordinates = all_projekts_map_locations(@projekts)
+    @map_coordinates = all_projekts_map_locations(@projekts.pluck(:id))
 
     @show_comments = Setting["extended_feature.projekts_overview_page_footer.show_in_#{@current_order}"]
     @valid_comments_orders = %w[most_voted newest oldest]
