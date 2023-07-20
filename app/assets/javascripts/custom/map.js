@@ -219,12 +219,16 @@
       var getPopupContent = function(data) {
         if (process == "proposals" || data.proposal_id) {
           return proposalPopupContent(data);
+
         } else if ( process == "deficiency-reports" ) {
           return "<a href='/deficiency_reports/" + data.deficiency_report_id + "'>" + data.deficiency_report_title + "</a>";
+
         } else if ( process == "projekts" ) {
-          return "<a href='/projekts/" + data.projekt_id + "'>" + data.projekt_title + "</a>";
+          return projektPopupContent(data);
+
         } else {
           return "<a href='/budgets/" + data.budget_id + "/investments/" + data.investment_id + "'>" + data.investment_title + "</a>";
+
         }
 
         function proposalPopupContent(data) {
@@ -258,6 +262,45 @@
             }
 
             popupHtml += "</div>";
+          }
+
+          return popupHtml;
+        }
+
+        function projektPopupContent(data) {
+          // return "<a href='/projekts/" + data.projekt_id + "'>" + data.projekt_title + "</a>";
+          var popupHtml = "";
+          popupHtml += "<h6 style='max-width:120px;margin-top:20px;'><a href='/projekts/" + data.projekt_id + "'>" + data.projekt_title + "</a></h6>"; //title
+
+          if (data.image_url) {
+            popupHtml += "<img src='" + data.image_url + "' style='margin-bottom:10px;'>"; //image
+          }
+
+          if (data.sdg_goals.length || data.tags.length ) {
+             popupHtml += "<div style=''>";
+
+             if (data.sdg_goals.length) {
+               var sdg_goals = "<div class='projekt-sdg-goals' style='max-width:120px;margin-bottom:10px;'>";
+               data.sdg_goals.forEach(function(sdg_goal) {
+                 sdg_goals += "<span class='projekt-sdg-goal'>"
+                 sdg_goals += "<img src='" + sdg_goal.image + "' style='width:35px;margin-right:4px;margin-bottom:4px;'></i>"
+                 sdg_goals += "</span>";
+               });
+               sdg_goals += "</div>";
+               popupHtml += sdg_goals;
+             }
+
+             if (data.tags.length) {
+               var tags = "<div class='tags' style='max-width:120px;'>";
+               data.tags.forEach(function(tag) {
+                 tags += "<span class='tag' style='font-size:0.8rem;padding:0.33333rem 0.5rem;'>" + tag + "</span>";
+               });
+               tags += "</div>";
+
+               popupHtml += tags;
+             }
+
+             popupHtml += "</div>";
           }
 
           return popupHtml;

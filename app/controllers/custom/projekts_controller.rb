@@ -65,9 +65,23 @@ class ProjektsController < ApplicationController
 
   def json_data
     projekt = Projekt.find(params[:id])
+    image_url = projekt.image.present? ? url_for(projekt.image.variant(:popup)) : nil
+    tags = projekt.tags.pluck(:name)
+
+    sdg_goals = []
+    projekt.sdg_goals.each do |goal|
+      sdg_goals.push({
+        code: goal.code,
+        image: "sdg/goal_#{goal.code}.png"
+      })
+    end
+
     data = {
       projekt_id: projekt.id,
-      projekt_title: projekt.title
+      projekt_title: projekt.title,
+      image_url: image_url,
+      tags: tags,
+      sdg_goals: sdg_goals
     }.to_json
 
     respond_to do |format|
