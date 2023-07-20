@@ -6,6 +6,8 @@ class Shared::OrderLinksComponent < ApplicationComponent
     def link_path(order)
       if helpers.request.path.starts_with?("/projekts")
         current_path_with_query_params(order: order, page: 1, anchor: anchor)
+      elsif helpers.request.path.starts_with?("/communities")
+        current_path_with_query_params(order: order)
       elsif params[:projekt_phase_id].present?
         projekt_phase_footer_tab_page_path(params[:id], params[:projekt_phase_id],
                                             page: params[:page] || 1,
