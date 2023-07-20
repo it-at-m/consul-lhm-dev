@@ -16,7 +16,7 @@
       ) %>
     <% end %>
 
-    <button class="close-button" aria-label="Close modal" type="button" onclick="$('#extended-sidebar-map').html('');$('#extended-sidebar-map').css('position', 'relative');">
+    <button class="close-button" aria-label="Close modal" type="button" onclick="$('#extended-sidebar-map').html('');$('#extended-sidebar-map').css('position', 'relative');App.VCMap.initializeMap(document.querySelector('#footer-content *[data-vcmap]'));">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
