@@ -10,7 +10,7 @@ module ProjektQuestionAdminActions
 
   def new
     @projekt_question = @projekt_phase.questions.new
-    authorize! :new, @projekt_question
+    authorize!(:new, @projekt_question) unless current_user.administrator?
 
     render "custom/admin/projekt_questions/edit"
   end
@@ -20,7 +20,7 @@ module ProjektQuestionAdminActions
     @projekt_question.author = current_user
     @projekt_question.projekt_phase = @projekt_phase
 
-    authorize! :create, @projekt_question
+    authorize!(:create, @projekt_question) unless current_user.administrator?
 
     if @projekt_livestream.present?
       @projekt_question.projekt_livestream = @projekt_livestream
@@ -35,14 +35,14 @@ module ProjektQuestionAdminActions
   end
 
   def edit
-    authorize! :edit, @projekt_question
+    authorize!(:edit, @projekt_question) unless current_user.administrator?
     @projekt_livestream = @projekt_question.projekt_livestream
 
     render "custom/admin/projekt_questions/edit"
   end
 
   def update
-    authorize! :update, @projekt_question
+    authorize!(:update, @projekt_question) unless current_user.administrator?
 
     if @projekt_question.update(projekt_question_params)
       redirect_to redirect_path(@projekt_phase), notice: "Frage aktualisiert"
@@ -53,7 +53,7 @@ module ProjektQuestionAdminActions
   end
 
   def destroy
-    authorize! :destroy, @projekt_question
+    authorize!(:destroy, @projekt_question) unless current_user.administrator?
 
     @projekt_question.destroy!
 
@@ -62,7 +62,9 @@ module ProjektQuestionAdminActions
   end
 
   def send_notifications
-    NotificationServices::ProjektQuestionsNotifier.call(@projekt.id)
+    authorize!(:send_notifications, @projekt_phase) unless current_user.administrator?
+
+    NotificationServices::ProjektQuestionsNotifier.call(@projekt_phase.id)
     redirect_to polymorphic_path([@namespace, @projekt_phase], action: :projekt_questions),
       notice: t("custom.admin.projekts.projekt_questions.index.notifications.sent_notice")
   end

@@ -9,7 +9,7 @@ module Abilities
     def initialize(user)
       merge Abilities::Common.new(user)
 
-      can([:show, :update, :update_map, :order_phases], Projekt) do |p|
+      can([:index, :edit, :update, :update_map, :order_phases, :update_standard_phase], Projekt) do |p|
         p.projekt_manager_ids.include?(user.projekt_manager.id)
       end
 

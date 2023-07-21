@@ -6,12 +6,12 @@ module SentimentActions
     respond_to :js
 
     before_action :set_projekt_phase, :set_namespace
-    load_and_authorize_resource only: %i[edit update destroy]
+    before_action :set_sentiment, only: %i[edit update destroy]
   end
 
   def new
     @sentiment = @projekt_phase.sentiments.new
-    authorize! :new, @sentiment
+    authorize!(:new, @sentiment) unless current_user.administrator?
 
     render "custom/admin/sentiments/new"
   end
@@ -19,7 +19,7 @@ module SentimentActions
   def create
     @sentiment = Sentiment.new(sentiment_params)
     @sentiment.projekt_phase = @projekt_phase
-    authorize! :create, @sentiment
+    authorize!(:create, @sentiment) unless current_user.administrator?
 
     if @sentiment.save
       redirect_to polymorphic_path([@namespace, @projekt_phase], action: :sentiments)
@@ -29,12 +29,12 @@ module SentimentActions
   end
 
   def edit
-    authorize! :edit, @sentiment
+    authorize!(:edit, @sentiment) unless current_user.administrator?
     render "custom/admin/sentiments/edit"
   end
 
   def update
-    authorize! :update, @sentiment
+    authorize!(:update, @sentiment) unless current_user.administrator?
 
     if @sentiment.update(sentiment_params)
       redirect_to polymorphic_path([@namespace, @projekt_phase], action: :sentiments)
@@ -44,7 +44,7 @@ module SentimentActions
   end
 
   def destroy
-    authorize! :destroy, @sentiment
+    authorize!(:destroy, @sentiment) unless current_user.administrator?
 
     @sentiment.destroy!
     redirect_to polymorphic_path([@namespace, @projekt_phase], action: :sentiments)
@@ -58,6 +58,10 @@ module SentimentActions
 
     def set_namespace
       @namespace = params[:controller].split("/").first.to_sym
+    end
+
+    def set_sentiment
+      @sentiment = Sentiment.find(params[:id])
     end
 
     def sentiment_params

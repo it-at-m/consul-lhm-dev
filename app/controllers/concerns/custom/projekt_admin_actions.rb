@@ -12,12 +12,19 @@ module ProjektAdminActions
     before_action :process_tags, only: [:update]
   end
 
+  def index
+    if current_user.administrator?
+      @projekts = Projekt.top_level.regular
+    elsif current_user.projekt_manager?
+      authorize!(:index, Projekt) unless current_user.administrator?
+      @projekts = Projekt.where(projekt_manager: current_user)
+    end
+  end
+
   def edit
     @namespace = params[:controller].split("/").first.to_sym
 
-    if should_authorize_projekt_manager?
-      authorize!(:edit, @projekt)
-    end
+    authorize!(:edit, @projekt) unless current_user.administrator?
 
     @individual_groups = IndividualGroup.hard.visible
 
@@ -43,9 +50,7 @@ module ProjektAdminActions
   end
 
   def update
-    if should_authorize_projekt_manager?
-      authorize!(:update, @projekt)
-    end
+    authorize!(:update, @projekt) unless current_user.administrator?
 
     if @projekt.update_attributes(projekt_params)
       redirect_to namespace_projekt_path(action: "edit"),
@@ -59,9 +64,7 @@ module ProjektAdminActions
   def update_map
     map_location = MapLocation.find_by(projekt_id: @projekt.id)
 
-    if should_authorize_projekt_manager?
-      authorize!(:update_map, map_location)
-    end
+    authorize!(:update_map, map_location) unless current_user.administrator?
 
     map_location.update!(map_location_params)
 
@@ -76,9 +79,7 @@ module ProjektAdminActions
       key: "projekt_custom_feature.default_footer_tab"
     ).reload
 
-    if should_authorize_projekt_manager?
-      authorize!(:update_standard_phase, @default_footer_tab_setting)
-    end
+    authorize!(:update_standard_phase, @default_footer_tab_setting) unless current_user.administrator?
 
     if @default_footer_tab_setting.present?
       @default_footer_tab_setting.update!(value: params[:default_footer_tab][:id])
@@ -121,10 +122,6 @@ module ProjektAdminActions
 
     def find_projekt
       @projekt = Projekt.find(params[:id])
-    end
-
-    def should_authorize_projekt_manager?
-      current_user&.projekt_manager? && !current_user&.administrator?
     end
 
     # path helpers

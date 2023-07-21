@@ -6,12 +6,12 @@ module ProjektLabelActions
     respond_to :js
 
     before_action :set_projekt_phase, :set_namespace
-    load_and_authorize_resource only: %i[edit update destroy]
+    before_action :set_projekt_label, only: %i[edit update destroy]
   end
 
   def new
     @projekt_label = @projekt_phase.projekt_labels.new
-    authorize! :new, @projekt_label
+    authorize!(:new, @projekt_label) unless current_user.administrator?
 
     render "custom/admin/projekt_labels/new"
   end
@@ -19,7 +19,7 @@ module ProjektLabelActions
   def create
     @projekt_label = ProjektLabel.new(projekt_label_params)
     @projekt_label.projekt_phase = @projekt_phase
-    authorize! :create, @projekt_label
+    authorize!(:create, @projekt_label) unless current_user.administrator?
 
     if @projekt_label.save
       redirect_to polymorphic_path([@namespace, @projekt_phase], action: :projekt_labels)
@@ -29,12 +29,12 @@ module ProjektLabelActions
   end
 
   def edit
-    authorize! :edit, @projekt_label
+    authorize!(:edit, @projekt_label) unless current_user.administrator?
     render "custom/admin/projekt_labels/edit"
   end
 
   def update
-    authorize! :update, @projekt_label
+    authorize!(:update, @projekt_label) unless current_user.administrator?
 
     if @projekt_label.update(projekt_label_params)
       redirect_to polymorphic_path([@namespace, @projekt_phase], action: :projekt_labels)
@@ -44,7 +44,7 @@ module ProjektLabelActions
   end
 
   def destroy
-    authorize! :destroy, @projekt_label
+    authorize!(:destroy, @projekt_label) unless current_user.administrator?
 
     @projekt_label.destroy!
     redirect_to polymorphic_path([@namespace, @projekt_phase], action: :projekt_labels)
@@ -58,6 +58,10 @@ module ProjektLabelActions
 
     def set_namespace
       @namespace = params[:controller].split("/").first.to_sym
+    end
+
+    def set_projekt_label
+      @projekt_label = ProjektLabel.find(params[:id])
     end
 
     def projekt_label_params
