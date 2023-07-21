@@ -16,8 +16,8 @@ module NotificationServices
         [projekt_subscriber_ids].flatten.uniq
       end
 
-      def projekt_subscriber_ids
-        return [] unless @poll.projekt
+      def projekt_phase_subscriber_ids
+        return [] unless @poll.projekt_phase.present?
 
         @poll.projekt_phase.subscribers.ids
       end

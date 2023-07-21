@@ -88,9 +88,9 @@ class NotificationServiceMailer < ApplicationMailer
     end
   end
 
-  def projekt_questions(user_id, projekt_id)
+  def projekt_questions(user_id, projekt_phase_id)
     @user = User.find(user_id)
-    @projekt = Projekt.find(projekt_id)
+    @projekt_phase = ProjektPhase.find(projekt_phase_id)
 
     subject = t("custom.notification_service_mailers.projekt_questions.subject")
 
@@ -99,9 +99,9 @@ class NotificationServiceMailer < ApplicationMailer
     end
   end
 
-  def projekt_arguments(user_id, projekt_id)
+  def projekt_arguments(user_id, projekt_phase_id)
     @user = User.find(user_id)
-    @projekt = Projekt.find(projekt_id)
+    @projekt_phase = ProjektPhase.find(projekt_phase_id)
 
     subject = t("custom.notification_service_mailers.projekt_arguments.subject")
 
