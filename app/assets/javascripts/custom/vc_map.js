@@ -3,7 +3,7 @@
   App.VCMap = {
     initialize: function() {
       document.querySelectorAll("[data-vcmap]").forEach(function(element) {
-        App.VCMap.initializeMap(document.querySelector("[data-vcmap]"));
+        App.VCMap.initializeMap(element);
       });
     },
 

@@ -150,7 +150,6 @@ module Abilities
 
       can [:csv_answers_votes], Poll
       can [:order_questions, :csv_answers_streets, :csv_answers_votes], Poll::Question
-      can [:manage], Projekt
       can [:verify, :unverify], User
 
       can :edit_physical_votes, Budget::Investment do |investment|
@@ -162,17 +161,7 @@ module Abilities
       can [:index, :update, :destroy], RegisteredAddress::Grouping
       can [:index], RegisteredAddress::Street
 
-      can [:results, :stats], Poll, projekt: { projekt_settings: { key: "projekt_feature.polls.intermediate_poll_results_for_admins", value: "active" }}
-
-      can [:manage], ProjektLabel
-      can [:manage], Sentiment
-      can [:manage], ProjektPhase
-      can [:manage], ProjektQuestion
-      can [:manage], ProjektLivestream
-      can [:manage], ProjektArgument
-      can [:manage], ProjektEvent
-      can [:manage], MapLocation
-      can [:manage], MapLayer
+      can [:results, :stats], Poll, projekt_phase: { settings: { key: "feature.resource.intermediate_poll_results_for_admins", value: "active" }}
     end
   end
 end

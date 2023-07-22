@@ -34,7 +34,7 @@ class ProjektsController < ApplicationController
     @current_projekts_order = valid_orders.include?(params[:order]) ? params[:order] : @active_projekts_orders.first
     @special_projekt = Projekt.unscoped.find_by(special: true, special_name: "projekt_overview_page")
     @projekts = @projekts.send(@current_projekts_order)
-    @map_coordinates = all_projekts_map_locations(@projekts)
+    @map_coordinates = all_projekts_map_locations(@projekts.pluck(:id))
 
     @show_comments = Setting["extended_feature.projekts_overview_page_footer.show_in_#{@current_order}"]
     @valid_comments_orders = %w[most_voted newest oldest]
@@ -65,9 +65,23 @@ class ProjektsController < ApplicationController
 
   def json_data
     projekt = Projekt.find(params[:id])
+    image_url = projekt.image.present? ? url_for(projekt.image.variant(:popup)) : nil
+    tags = projekt.tags.pluck(:name)
+
+    sdg_goals = []
+    projekt.sdg_goals.each do |goal|
+      sdg_goals.push({
+        code: goal.code,
+        image: "sdg/goal_#{goal.code}.png"
+      })
+    end
+
     data = {
       projekt_id: projekt.id,
-      projekt_title: projekt.title
+      projekt_title: projekt.title,
+      image_url: image_url,
+      tags: tags,
+      sdg_goals: sdg_goals
     }.to_json
 
     respond_to do |format|

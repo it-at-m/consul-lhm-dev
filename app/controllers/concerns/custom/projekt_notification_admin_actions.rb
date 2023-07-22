@@ -8,7 +8,7 @@ module ProjektNotificationAdminActions
 
   def create
     @projekt_notification = @projekt_phase.projekt_notifications.new(projekt_notification_params)
-    authorize! :create, @projekt_notification
+    authorize!(:create, @projekt_notification) unless current_user.administrator?
 
     if @projekt_notification.save
       NotificationServices::NewProjektNotificationNotifier.call(@projekt_notification.id)
@@ -19,7 +19,7 @@ module ProjektNotificationAdminActions
   end
 
   def update
-    authorize! :update, @projekt_notification
+    authorize!(:update, @projekt_notification) unless current_user.administrator?
 
     @projekt_notification.update!(projekt_notification_params)
     redirect_to polymorphic_path([@namespace, @projekt_phase, ProjektNotification]),
@@ -27,7 +27,7 @@ module ProjektNotificationAdminActions
   end
 
   def destroy
-    authorize! :destroy, @projekt_notification
+    authorize!(:destroy, @projekt_notification) unless current_user.administrator?
 
     @projekt_notification.destroy!
     redirect_to polymorphic_path([@namespace, @projekt_phase, ProjektNotification])

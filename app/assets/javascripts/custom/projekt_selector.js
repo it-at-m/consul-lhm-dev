@@ -75,8 +75,6 @@
       toggleDocumentAttachment($projektPhase);
       toggleSummary($projektPhase);
       toggleExternalVideoUrl($projektPhase);
-      updateAvailableTagsSelection($projektPhase);
-      updateAvailableSDGsSelection($projektPhase);
       toggleExternalFieldsHeader($projektPhase);
       toggleTagging($projektPhase);
 

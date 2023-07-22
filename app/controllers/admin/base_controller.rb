@@ -14,8 +14,4 @@ class Admin::BaseController < ApplicationController
     def verify_administrator_or_projekt_manager
       raise CanCan::AccessDenied unless (current_user&.administrator? || current_user&.projekt_manager?)
     end
-
-    def should_authorize_projekt_manager?
-      current_user&.projekt_manager? && !current_user&.administrator?
-    end
 end

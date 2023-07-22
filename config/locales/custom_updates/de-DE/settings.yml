@@ -17,6 +17,8 @@ de:
           show_index_order_expired_description: Zeigt Tab "Archivierte Projektvorhaben" an
           show_index_order_individual_list: Individuelle Liste
           show_index_order_individual_list_description: Zeigt Tab "Individuelle Liste" an
+          show_index_order_drafts: Entwürfe
+          show_index_order_drafts_description: Zeigt Tab "Entwürfe" an
 
         projekts_overview_page_footer:
           show_in_index_order_all: Beteiligung für "Alle Projekte"

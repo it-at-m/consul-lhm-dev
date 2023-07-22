@@ -1,13 +1,22 @@
 <div class="extended-sidebar-map-wrapper">
   <div class="extended-sidebar-map">
-    <%= render Shared::MapComponent.new(
+    <% if @current_projekt.vc_map_enabled? %>
+      <%= render Shared::VCMapComponent.new(
         map_location: @current_projekt.map_location,
         parent_class: "proposals_sidebar_extended",
         projekt: @current_projekt,
         show_admin_shape: @current_projekt.map_location.show_admin_shape?
-    ) %>
+      ) %>
+    <% else %>
+      <%= render Shared::MapComponent.new(
+        map_location: @current_projekt.map_location,
+        parent_class: "proposals_sidebar_extended",
+        projekt: @current_projekt,
+        show_admin_shape: @current_projekt.map_location.show_admin_shape?
+      ) %>
+    <% end %>
 
-    <button class="close-button" aria-label="Close modal" type="button" onclick="$('#extended-sidebar-map').html('');$('#extended-sidebar-map').css('position', 'relative');">
+    <button class="close-button" aria-label="Close modal" type="button" onclick="$('#extended-sidebar-map').html('');$('#extended-sidebar-map').css('position', 'relative');App.VCMap.initializeMap(document.querySelector('#footer-content *[data-vcmap]'));">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>

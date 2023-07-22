@@ -8,7 +8,7 @@ class Image < ApplicationRecord
       thumb: { combine_options: { gravity: "center", resize: "140x245^", crop: "140x245+0+0" }},
       thumb_wider: { combine_options: { gravity: "center", resize: "185x280^", crop: "185x280+0+0" }},
       banner: { combine_options: { gravity: "center", resize: "1920x250^", crop: "1920x250+0+0" }},
-      popup: { combine_options: { gravity: "center", resize: "120x120^", crop: "120x120+0+0" }}
+      popup: { combine_options: { gravity: "center", resize: "140x140^", crop: "140x140+0+0" }}
     }
   end
 

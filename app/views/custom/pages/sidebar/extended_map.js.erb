@@ -3,5 +3,10 @@ $("#extended-sidebar-map").css('position', 'fixed');
 
 $('#extended-sidebar-map').foundation();
 
-var map = document.querySelector("#extended-sidebar-map *[data-map]")
-App.Map.initializeMap(map);
+<% if @current_projekt.vc_map_enabled? %>
+  var map = document.querySelector("#extended-sidebar-map *[data-vcmap]")
+  App.VCMap.initializeMap(map);
+<% else %>
+  var map = document.querySelector("#extended-sidebar-map *[data-map]")
+  App.Map.initializeMap(map);
+<% end %>

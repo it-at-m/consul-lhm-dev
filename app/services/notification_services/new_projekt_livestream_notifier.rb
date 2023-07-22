@@ -13,10 +13,10 @@ module NotificationServices
     private
 
       def users_to_notify_ids
-        [projekt_subscriber_ids].flatten.uniq
+        [projekt_phase_subscriber_ids].flatten.uniq
       end
 
-      def projekt_subscriber_ids
+      def projekt_phase_subscriber_ids
         @projekt_livestream.projekt_phase.subscribers.ids
       end
   end

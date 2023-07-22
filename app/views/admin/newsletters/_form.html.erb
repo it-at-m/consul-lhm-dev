@@ -5,7 +5,7 @@
                                                       @newsletter[:segment_recipient]) %>
   <%= f.text_field :subject %>
   <%= f.text_field :from %>
-  <%= f.text_area :body, class: "html-area" %>
+  <%= f.text_area :body, class: "html-area  tall-editor #{ck_editor_class(current_user)}" %>
 
   <div class="margin-top">
     <%= f.submit class: "button success" %>
