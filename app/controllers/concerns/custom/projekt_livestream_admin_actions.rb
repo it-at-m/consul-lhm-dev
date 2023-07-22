@@ -34,7 +34,7 @@ module ProjektLivestreamAdminActions
     authorize!(:send_notifications, @projekt_livestream) unless current_user.administrator?
 
     NotificationServices::NewProjektLivestreamNotifier.call(@projekt_livestream.id)
-    redirect_to edit_admin_projekt_path(@projekt, anchor: "tab-projekt-livestreams"),
+    redirect_to polymorphic_path([@namespace, @projekt_phase, ProjektLivestream]),
       notice: t("custom.admin.projekts.edit.projekt_livestreams_tab.notifications_sent_notice")
   end
 

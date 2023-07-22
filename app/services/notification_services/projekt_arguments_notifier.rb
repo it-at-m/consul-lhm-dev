@@ -1,7 +1,7 @@
 module NotificationServices
   class ProjektArgumentsNotifier < ApplicationService
     def initialize(projekt_phase_id)
-      @projekt_phase = Projekt.find(projekt_phase_id)
+      @projekt_phase = ProjektPhase.find(projekt_phase_id)
     end
 
     def call

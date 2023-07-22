@@ -6,6 +6,10 @@ class Admin::MilestonesController < Admin::BaseController
     @milestone = @milestoneable.milestones.new(milestone_params)
 
     if @milestone.save
+      if @milestoneable.is_a?(ProjektPhase::MilestonePhase)
+        NotificationServices::NewProjektMilestoneNotifier.call(@milestone.id)
+      end
+
       if @milestoneable.class.name == "Projekt"
         redirect_to edit_admin_projekt_path(@milestoneable) + "#tab-projekt-milestones", notice: t("admin.milestones.create.notice")
       else

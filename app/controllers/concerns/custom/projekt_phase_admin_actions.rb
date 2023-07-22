@@ -164,7 +164,7 @@ module ProjektPhaseAdminActions
   end
 
   def projekt_arguments
-    authorize!(:projekt_arguments, @projekt_phase)
+    authorize!(:projekt_arguments, @projekt_phase) unless current_user.administrator?
     @projekt_argument = ProjektArgument.new
     @projekt_arguments_pro = @projekt_phase.projekt_arguments.pro
     @projekt_arguments_cons = @projekt_phase.projekt_arguments.cons

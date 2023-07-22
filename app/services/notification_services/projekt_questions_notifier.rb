@@ -1,7 +1,7 @@
 module NotificationServices
   class ProjektQuestionsNotifier < ApplicationService
     def initialize(projekt_phase_id)
-      @projekt_phase = ProjektPhase.find(projekti_phase_id)
+      @projekt_phase = ProjektPhase.find(projekt_phase_id)
     end
 
     def call
