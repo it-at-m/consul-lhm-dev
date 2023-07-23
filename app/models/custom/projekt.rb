@@ -110,7 +110,8 @@ class Projekt < ApplicationRecord
   }
 
   scope :index_order_all, ->() {
-    with_published_custom_page
+    activated
+      .with_published_custom_page
       .show_in_overview_page
   }
 
