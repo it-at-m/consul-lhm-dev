@@ -4,7 +4,7 @@
     <i class="far fa-edit"></i>
   <% end %>
 
-  <%= button_to admin_map_layer_path(layer, origin: origin, tab: tab),
+  <%= button_to admin_map_layer_path(layer, return_path: return_path),
     class: 'delete-map-layer',
     method: :delete do %>
     <i class="fas fa-trash-alt"></i>
