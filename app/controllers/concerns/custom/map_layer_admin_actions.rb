@@ -8,7 +8,8 @@ module MapLayerAdminActions
   end
 
   def new
-    @map_layer = @mappable.map_layers.new
+    @map_layer = MapLayer.new
+    @map_layer.mappable = @mappable
     authorize!(:new, @map_layer) unless current_user.administrator?
 
     render "custom/admin/map_layers/new"
