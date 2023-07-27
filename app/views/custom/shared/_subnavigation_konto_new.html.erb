@@ -1,0 +1,43 @@
+<% if placement == 'desktop' %>
+  <li class="nav-element main-navigation-item-account--wrapper top-level-item js-access-top-level-menu js-prevent-key-scroll"
+      aria-label='<%= t('custom.links.menu.konto_icon') if placement == "desktop" %>'
+      aria-expanded="false"
+      <%= "aria-haspopup=true'" if placement == 'desktop' %>
+      <%= "tabindex=0" if placement == 'desktop' %>
+      >
+
+      <%= link_to account_path, class: 'account-items-icon main-navigation-item-user-account', tabindex: "-1", aria: { hidden: true } do %>
+        <div
+            class="main-navigation-item--account--image-wrapper"
+            aria-hidden="true"
+            title="<%= t("custom.layouts.header.account_link") %>"
+            aria-label="<%= t("custom.layouts.header.account_link") %>"
+            >
+            <%= current_user&.first_name&.chars&.first&.capitalize %>
+        </div>
+      <% end %>
+
+
+      <ul class="nav-flyout-block">
+        <%= render "devise/menu/login_items" %>
+      </ul>
+  </li>
+<% end %>
+
+<% if placement == 'mobile' %>
+  <li class="nav-element top-level-item js-access-top-level-menu js-prevent-key-scroll"
+    <%= link_to account_path do %>
+      <%# <%= t('custom.menu.account') %>
+      <i class="fas fa-language main-navigation--link-icon"> </i>
+      Sprache
+    <% end %>
+  </li>
+
+  <li class="nav-element top-level-item js-access-top-level-menu js-prevent-key-scroll"
+    <%= link_to account_path do %>
+      <i class="fas fa-sign-out-alt main-navigation--link-icon"> </i>
+      Abmelden
+    <% end %>
+  </li>
+<% end %>
+

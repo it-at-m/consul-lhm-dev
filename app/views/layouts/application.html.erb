@@ -12,7 +12,7 @@
 
     <%= raw setting["html.per_page_code_head"] %>
   </head>
-  <body class="<%= yield(:body_class) %> public">
+  <body class="<%= yield(:body_class) %> public <%= custom_new_design_body_class %>">
     <%= raw setting["html.per_page_code_body"] %>
 
     <div class="wrapper <%= yield(:wrapper_class) %>">

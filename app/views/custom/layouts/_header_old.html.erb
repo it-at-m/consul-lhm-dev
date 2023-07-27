@@ -1,0 +1,70 @@
+<% launch_page ||= false %>
+<header>
+  <div class="top-bar">
+
+    <h2 class='header-title show-for-medium'>
+      <%= Setting['extended_option.general.title'] %>
+      <br>
+      <%= content_tag :span, Setting['extended_option.general.subtitle'] %>
+    </h2>
+
+    <span data-responsive-toggle="responsive-menu"
+          data-hide-for="medium"
+          class="hamburger-menu focusable js-toggle-mobile-menu js-prevent-key-scroll"
+          role="button"
+          tabindex="0"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-label='<%= t('custom.links.menu.mobile.menu_label') %>' >
+      <span class="menu-icon dark" data-toggle></span>
+    </span>
+
+    <div class='header-right-group not-print'>
+      <% if !launch_page && current_user.nil? %>
+        <div class='account-buttons show-for-large'>
+          <%= link_to t('devise_views.menu.login_items.login'), new_user_session_path, class: 'sign-in-button', role: 'button' %>
+          <%= link_to t('devise_views.menu.login_items.signup') , new_user_registration_path, class: 'sign-up-button', role: 'button'  %>
+        </div>
+      <% end %>
+
+      <div class="top-bar-title">
+        <%= link_to root_path do %>
+          <%= image_tag(image_path_for("logo_header.png"), class: "", alt: t("layouts.header.logo")) %>
+        <% end %>
+      </div>
+    </div>
+
+    <div id="responsive-menu" class='not-print'>
+      <div class="top-bar-right">
+        <div class="show-for-small-only">
+          <div class="subnavigation">
+
+            <h2 class='city-name'>
+              <%= Setting['extended_option.general.title'] %>
+              <br>
+              <%= content_tag :span, Setting['extended_option.general.subtitle'] %>
+            </h2>
+
+            <% if !launch_page && current_user.nil? %>
+              <div class='account-buttons'>
+                <%= link_to t('devise_views.menu.login_items.login'), new_user_session_path, class: 'sign-in-button', role: 'button' %>
+                <%= link_to t('devise_views.menu.login_items.signup') , new_user_registration_path, class: 'sign-up-button', role: 'button'  %>
+              </div>
+            <% end %>
+
+            <%= render partial: "shared/subnavigation", locals: { placement: 'mobile', launch_page: launch_page } %>
+            <div class="small-12 column">
+              <%= render "shared/top_links" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="navigation_bar" class="subnavigation expanded not-print">
+    <div class="hide-for-small-only">
+      <%= render partial: "shared/subnavigation", locals: { placement: 'desktop', launch_page: launch_page } %>
+    </div>
+  </div>
+</header>
