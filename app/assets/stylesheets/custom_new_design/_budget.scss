@@ -1,0 +1,61 @@
+.new-custom-design {
+  .budget--current-phase-name {
+    font-size: 34px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .budget--price-value {
+    font-weight: bold;
+    font-size: 24px;
+    color: #292929;
+  }
+
+  .investments-filters ul a {
+    font-size: 16px;
+    padding: 2px 0;
+  }
+
+  .progress-votes .total-amount span {
+    color: black;
+  }
+
+  .progress-votes .amount-available span {
+    color: black;
+  }
+
+  .budget-investment-sidebar-ballot {
+    p {
+      font-size: 16px;
+    }
+  }
+
+  .budgets-page {
+    .tabs {
+      border: none;
+      background: transparent;
+    }
+
+    .tabs .tabs-title > a {
+      text-decoration: underline;
+      color: $brand;
+    }
+
+    .tabs .tabs-title {
+      margin-right: 35px;
+    }
+
+    .tabs .tabs-title > a.is-active::after {
+      content: none;
+    }
+  }
+
+  .budget-investment-status-icon {
+    font-size: 50px;
+
+    &.-winner {
+      font-size: 30px;
+      color: #fdce14;
+    }
+  }
+}

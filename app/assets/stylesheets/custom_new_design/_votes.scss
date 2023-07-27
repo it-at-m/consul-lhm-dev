@@ -1,0 +1,31 @@
+.new-custom-design {
+  .in-favor-against {
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .percentage {
+      text-align: center;
+      color: inherit;
+    }
+  }
+
+  .votes {
+    border-left: none !important;
+
+    .total-votes {
+      display: none;
+    }
+
+    .in-favor-against {
+      display: flex;
+
+      .in-favor, .against {
+        display: flex;
+        flex-direction: column-reverse;
+      }
+    }
+  }
+}

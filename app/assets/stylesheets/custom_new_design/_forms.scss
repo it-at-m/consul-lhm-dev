@@ -1,0 +1,54 @@
+.new-custom-design {
+  [type='text'], [type='password'], [type='date'],
+  [type='datetime'], [type='datetime-local'], [type='month'],
+  [type='week'], [type='email'], [type='number'], [type='search'],
+  [type='tel'], [type='time'], [type='url'], [type='color'], textarea,
+  form [type]:not([type="button"], [type=checkbox], [type=file], [type=radio], [type=submit]) {
+    border: 1px solid $border-color;
+    background: white;
+    border-radius: 5px;
+  }
+
+  input.light-input {
+    background: none;
+    border: none !important;
+    outline: none;
+    box-shadow: none;
+    border-bottom: 1px solid $border-color !important;
+    padding-left: 0;
+    padding-bottom: 0;
+    height: 2em;
+  }
+
+  .form-error {
+    font-size: 14px;
+  }
+
+  .sdg-related-list-selector {
+    .input-section {
+      margin-bottom: 0;
+    }
+
+    .help-section {
+      margin-top: 15px;
+    }
+  }
+
+  .cke_top {
+    border-bottom: none !important;
+  }
+
+  .cke {
+    border-radius: 10px !important;
+    overflow: auto !important;
+  }
+
+  form select {
+    background: transparent;
+    border-radius: 10px;
+  }
+
+  #select_language {
+    margin-bottom: 5px;
+  }
+}

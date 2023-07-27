@@ -1,0 +1,41 @@
+.proposal-dashboard-page--resources-links {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.proposal-dashboard-page--resource-link {
+  width: 300px;
+  height: 300px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: $main-text-color;
+  font-size: 20px;
+  transition: color 100ms ease;
+
+  &:hover {
+    text-decoration: none;
+    color: #5e6d7e;
+  }
+
+  i {
+    font-size: 100px;
+    margin-bottom: 30px;
+  }
+}
+
+.proposals-dashboard-progress-chart {
+  #proposal-graph {
+    background-color: white;
+    margin-bottom: 35px;
+    border-radius: 10px;
+  }
+
+  .proposals-dashboard-progress-chart--links {
+    .button {
+      margin-right: 10px;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+.new-custom-design {
+  .welcome-page--first-content-block {
+    .custom-content-block-body {
+      margin-top: 0 !important;
+    }
+  }
+
+  .welcome-page {
+    .custom-content-block-body {
+      margin-bottom: 40px;
+      margin-top: 40px;
+    }
+  }
+
+  .welcome-page--projekts-link {
+    display: flex;
+    justify-content: center;
+
+    a {
+      color: $main-text-color;
+    }
+  }
+}

@@ -24,7 +24,7 @@ class Setting < ApplicationRecord
   class << self
 
     def defaults
-      {
+      default_settings = {
         "feature.featured_proposals": nil,
         "feature.facebook_login": false,
         "feature.google_login": false,
@@ -228,6 +228,13 @@ class Setting < ApplicationRecord
         "extra_fields.registration.check_documents": false,
         "extra_fields.verification.check_documents": false,
       }
+
+      if Rails.application.secrets.new_design_enabled
+        default_settings["extended_feature.general.enable_old_design"] = false
+        default_settings["extended_feature.general.use_white_top_navigation_text"] = false
+      end
+
+      default_settings
     end
 
     def reset_defaults
@@ -236,6 +243,22 @@ class Setting < ApplicationRecord
 
     def destroy_obsolete
       Setting.all.each{ |setting| setting.destroy unless defaults.keys.include?(setting.key.to_sym) }
+    end
+
+    def old_design_enabled?
+      if Rails.env.production?
+        true
+      else
+        self["extended_feature.general.enable_old_design"] == "active"
+      end
+    end
+
+    def new_design_enabled?
+      !old_design_enabled?
+    end
+
+    def enabled?(key)
+      self[key] == "active"
     end
   end
 end

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>" data-current-user-id="<%= current_user&.id %>">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <%= render "layouts/meta_tags" %>
+    <title><%= content_for?(:title) ? yield(:title) : setting["org_name"] %></title>
+    <%= content_for :canonical %>
+    <%= stylesheet_link_tag "application" %>
+    <% if Setting.new_design_enabled? %>
+      <%= stylesheet_link_tag "custom_new_design" %>
+    <% end %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
+    <%= csrf_meta_tags %>
+    <%= favicon_link_tag "favicon.ico" %>
+    <%= favicon_link_tag image_path_for("apple-touch-icon-200.png"),
+                     rel: "icon apple-touch-icon",
+                     sizes: "200x200",
+                     type: "image/png" %>
+    <%= content_for :social_media_meta_tags %>
+
+    <%= raw setting["per_page_code_head"] %>
+  </head>
+  <body class="proposal-dashboard">
+    <%= raw setting["per_page_code_body"] %>
+
+    <h1 class="show-for-sr"><%= setting["org_name"] %></h1>
+
+    <%= render "layouts/header", with_subnavigation: false %>
+
+    <div class="menu-and-content">
+      <%= check_box_tag :show_menu, nil, false, role: "switch" %>
+
+      <nav id="side_menu" class="dashboard-sidebar">
+        <%= render "dashboard/menu" %>
+      </nav>
+
+      <div class="admin-content">
+        <%= label_tag :show_menu, t("admin.menu.admin"),
+                      "aria-hidden": true, class: "button hollow expanded" %>
+
+        <%= render "layouts/flash" %>
+        <%= render "layouts/dashboard/proposal_totals" %>
+        <%= render "layouts/dashboard/proposal_header" %>
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>

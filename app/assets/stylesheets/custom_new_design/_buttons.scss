@@ -1,0 +1,47 @@
+.new-custom-design {
+  .button {
+    height: 37px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    border-radius: 6px;
+    transition: background-color 0.1s ease;
+
+    .icon {
+      padding-right: 5px;
+    }
+
+    &.-grey {
+      background: #c0cedb;
+      color: black;
+    }
+
+    &.-orange {
+      background: #FFA42D;
+      color: black;
+    }
+
+    &.-purple {
+      background: #EAE4FB;
+      color: black;
+    }
+
+    &:hover {
+      color: white;
+      background: #04406e;
+    }
+  }
+
+  .icon {
+    margin-right: 5px;
+  }
+
+  .submit-button {
+    font-size: 18px;
+    height: 45px;
+  }
+}

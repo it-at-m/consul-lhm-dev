@@ -1,0 +1,39 @@
+.new-custom-design {
+  .user-resource-banner {
+    display: flex;
+    justify-content: space-between;
+    background: #D9F0EB;
+    padding: 45px 42px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+
+    &.-proposal {
+      background-color: #FFE9CC;
+    }
+  }
+
+  .user-resource-banner--text-section {
+    width: 48%;
+    color: $brand;
+  }
+
+  .user-resource-banner--image {
+    width: 48%;
+    min-height: 260px;
+    max-height: 260px;
+  }
+
+  .user-resource-banner--title {
+    font-size: 28px;
+    color: $brand;
+    margin-bottom: 30px;
+  }
+
+  .user-resource-banner--detail {
+    font-weight: 500;
+
+    i {
+      padding-right: 5px;
+    }
+  }
+}

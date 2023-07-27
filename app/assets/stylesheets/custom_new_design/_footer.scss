@@ -1,0 +1,12 @@
+.new-custom-design {
+  .footer {
+    margin-top: 50px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .footer::before {
+    left: 0;
+    right: 0;
+  }
+}
