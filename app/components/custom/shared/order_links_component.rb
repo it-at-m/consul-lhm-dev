@@ -9,14 +9,7 @@ class Shared::OrderLinksComponent < ApplicationComponent
       elsif helpers.request.path.starts_with?("/communities")
         current_path_with_query_params(order: order)
       elsif params[:projekt_phase_id].present?
-        projekt_phase_footer_tab_page_path(params[:id], params[:projekt_phase_id],
-                                            page: params[:page] || 1,
-                                            order: order,
-                                            filter_projekt_ids: params[:filter_projekt_ids],
-                                            anchor: anchor,
-                                            projekt_label_ids: params[:projekt_label_ids],
-                                            filter: params[:filter]
-                                          )
+        url_to_footer_tab(order: order, remote: true)
       else
         url_for(action: "index", controller: controller_name, order: order)
       end
