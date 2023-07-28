@@ -26,7 +26,7 @@
     <% end %>
 
     <% if projekt_phase_feature?(budget&.projekt_phase, "form.show_map") %>
-      <div>
+      <div class="margin-bottom">
         <%= render "map_locations/form_fields",
                    form:           f,
                    map_location:   investment.map_location || MapLocation.new,

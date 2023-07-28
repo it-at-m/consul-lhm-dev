@@ -18,24 +18,15 @@ class Budgets::Investments::FiltersComponent < ApplicationComponent
     end
 
     def link_path(filter)
-      if params[:current_tab_path].present? && !helpers.request.path.starts_with?("/projekts")
-        url_for(action: params[:current_tab_path],
-                controller: "/pages",
-                page: 1,
-                filter: filter,
-                filter_projekt_ids: params[:filter_projekt_ids],
-                section: params[:section],
-                id: params[:id],
-                order: params[:order])
+      if params[:projekt_phase_id].present?
+        url_to_footer_tab(filter: filter, remote: true)
       else
         current_path_with_query_params(filter: filter, page: 1)
       end
     end
 
     def footer_tab_back_button_url(filter)
-      if params[:projekt_phase_id].present? &&
-        !helpers.request.path.starts_with?("/projekts")
-
+      if params[:projekt_phase_id].present?
         url_to_footer_tab(filter: filter)
       else
         "empty"
