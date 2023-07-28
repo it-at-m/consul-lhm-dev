@@ -1,7 +1,9 @@
 <% body = capture do %>
   <% if @map_coordinates.present? %>
+    <% resources_name = resources.first&.class&.name&.downcase&.pluralize %>
+
     <div class="map resources-list--map not-print">
-      <%= helpers.render_map(MapLocation.new(latitude: Setting['map.latitude'], longitude: Setting['map.longitude'], zoom: Setting['map.zoom']), @resources_name, false, nil, @map_coordinates, MapLayer.general.to_json) %>
+      <%= helpers.render_map(MapLocation.new(latitude: Setting['map.latitude'], longitude: Setting['map.longitude'], zoom: Setting['map.zoom']), resources_name, false, nil, @map_coordinates, MapLayer.general.to_json) %>
     </div>
   <% end %>
 

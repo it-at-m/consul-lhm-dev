@@ -29,7 +29,6 @@ class Shared::ResourcesListComponent < ApplicationComponent
   )
     @resources = resources
     @resource_type = resource_type
-    @resources_name = resources.first.class.name.downcase.pluralize
     @title = title
     @title_link = title_link
     @wide = wide

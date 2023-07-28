@@ -29,6 +29,7 @@ class WelcomeController < ApplicationController
       else
         []
       end
+
     @latest_polls =
       if @active_feeds.include?("polls")
         @feeds.find { |feed| feed.kind == "polls" }.polls
