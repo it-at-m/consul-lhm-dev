@@ -173,7 +173,7 @@ class Setting < ApplicationRecord
         "extended_option.general.title": 'Öffentlichkeitsbeteiligung',
         "extended_option.general.subtitle": 'in der Stadt CONSUL',
         "extended_option.general.launch_date": '',
-        "extended_feature.general.enable_old_design": false,
+        "extended_feature.general.enable_old_design": true,
         "extended_feature.general.use_white_top_navigation_text": false,
 
         "extended_feature.gdpr.gdpr_conformity": false,
