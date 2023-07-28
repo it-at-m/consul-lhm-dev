@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Proposals::ListItem < ApplicationComponent
+class Proposals::ListItemComponent < ApplicationComponent
   attr_reader :proposal
 
   def initialize(proposal:, wide: false)
