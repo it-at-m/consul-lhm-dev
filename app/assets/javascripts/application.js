@@ -201,6 +201,8 @@ var initialize_modules = function() {
   App.SharedNewButtonComponent.initialize();
   App.VCMap.initialize();
 
+  App.CustomJS.initialize();
+
   if ($("#projekt-selector-fields").length) {
     App.ProjektSelector.initialize();
   }
