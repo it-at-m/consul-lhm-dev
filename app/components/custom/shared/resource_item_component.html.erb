@@ -1,0 +1,147 @@
+<% author_name_html = capture do %>
+  <% if @author.present? %>
+    <%= link_to user_path(@author), class: 'resource-item--author' do %>
+      <%# <%= image_tag('', class: 'resource-item--author-photo') %>
+      <div class="resource-item--author-photo">
+      </div>
+      <div class="resource-item--author-name">
+        <%= @author.name %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<div class="resource-item <%= component_class_name %>">
+  <div class="resource-item--head-title">
+    <% if @projekt.present? %>
+      <div class="resource-item--head-title-projekt">
+        <%= @projekt.page.title %>
+      </div>
+      <div class="resource-item--head-title-projekt-breadcrumbs">
+        <%= helpers.breadcrumbs_links(@projekt, ">", false) %>
+      </div>
+      <%# <% if resource.projekt.overview_page? %>
+        <%#   <%= t("custom.projekts.overview_page.projekt_name_for_proposal") %>
+      <% elsif @head_title.present? || additional_head_title_element.present? %>
+        <%= @head_title %>
+        <%= additional_head_title_element %>
+      <% else %>
+        <div class="resource-item--date">
+          <% if days_left.present? %>
+            <%= days_left %>
+          <% elsif date.present? %>
+            <%= date %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if @author.present? %>
+        <div class="resource-item--author-in-wide-head-title">
+          <%= author_name_html %>
+        </div>
+      <% end %>
+  </div>
+
+  <a href="<%= @url %>" class="resource-item--image-container">
+    <% if image_ontop_item.present? %>
+      <div class="resource-item--image-ontop-item-container">
+        <%= image_ontop_item %>
+      </div>
+    <% end %>
+
+    <%= render(
+      Shared::ResourceImageComponent.new(
+        image_url: @image_url,
+        image_placeholder_icon_class: @image_placeholder_icon_class,
+        resource_name: @resource_name)
+    )
+  %>
+  </a>
+
+  <div class="resource-item--content">
+    <div class="resource-item--body-wrapper">
+
+      <div class="resource-item--body-and-sdgs">
+        <div class="resource-item--body">
+          <div class="resource-item--body-heading">
+            <% if date.present? %>
+              <div class="resource-item--date"><%= date %></div>
+            <% end %>
+
+            <% if @subline.present? %>
+              <%= @subline %>
+            <% elsif @tags.present? %>
+              <div class="resource-item--tags">
+                <% if @tags.present? %>
+                  <% @tags.first(2).each do |tag| %>
+                    <%= link_to(path_for_resource_with_params(@resource, tags: tag.name), target: 'blank', class: 'resource-item--tag') do %>
+                      <%= tag.name %>
+                    <% end %>
+                  <% end %>
+
+                  <% if @tags[2].present? %>
+                    <%= link_to(path_for_resource_with_params(@resource, tags: @tags[2].name), target: '_blank', class: 'resource-item--tag resource-item--last-tag') do %>
+                      <%= @tags[2].name %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+          <%= link_to(@title, @url, class: "resource-item--title" ) %>
+
+          <div class="resource-item--description-wrapper">
+            <div class="resource-item--description">
+              <% if @wyshwig %>
+              <% else %>
+                <%= helpers.wysiwyg(@description) %>
+                <% if Rails.env.development? %>
+                  <p>
+                  <%= @resource.id %>
+                  </p>
+                <% end %>
+              <% end %>
+            </div>
+
+            <% if additional_body.present? %>
+              <div class="resource-item--additional-body">
+                <%= additional_body %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <%= author_name_html %>
+
+        <% if @sdgs.present? %>
+          <div class="resource-item--sdgs resource-item--sdgs-in-card">
+            <%= render SDG::FilterLinksComponent.new(@sdgs, Projekt) %>
+          </div>
+        <% end %>
+      </div>
+      <% if show_footer? %>
+        <div class="resource-item--footer">
+          <% if first_footer_item.present? %>
+            <div class="resource-item--footer-section">
+              <%= first_footer_item %>
+            </div>
+          <% end %>
+
+          <% if second_footer_item.present? %>
+            <div class="resource-item--footer-section">
+              <%= second_footer_item %>
+            </div>
+          <% end %>
+
+          <% if additional_body.present? %>
+            <div class="resource-item--footer-section resource-item--additional-body-in-footer">
+              <div class="resource-item--additional-body">
+                <%= additional_body %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

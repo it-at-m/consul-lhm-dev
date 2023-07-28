@@ -7,6 +7,7 @@ resources :projekts, only: [:index, :show] do
     get :debate_phase_footer_tab
     get :proposal_phase_footer_tab
     get :voting_phase_footer_tab
+    get :list
   end
 
   member do

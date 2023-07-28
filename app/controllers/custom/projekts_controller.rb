@@ -50,6 +50,10 @@ class ProjektsController < ApplicationController
     end
   end
 
+  def list
+    render
+  end
+
   def show
     projekt = Projekt.find(params[:id])
 

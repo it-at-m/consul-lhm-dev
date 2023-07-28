@@ -1,0 +1,70 @@
+<% body = capture do %>
+  <% if @map_coordinates.present? %>
+    <div class="map resources-list--map not-print">
+      <%= helpers.render_map(MapLocation.new(latitude: Setting['map.latitude'], longitude: Setting['map.longitude'], zoom: Setting['map.zoom']), @resources_name, false, nil, @map_coordinates, MapLayer.general.to_json) %>
+    </div>
+  <% end %>
+
+  <div class="resources-list--inner">
+    <% if @resources.present? %>
+      <% @resources.each do |resource| %>
+        <%= render resource_component(resource) %>
+      <% end %>
+    <% else %>
+      <h4 class="resources-list--not-items-message text-center">
+        <%= @no_items_text %>
+      </h4>
+    <% end %>
+  </div>
+<% end %>
+
+<% if @only_content %>
+  <%= body %>
+<% else %>
+  <div class="resources-list js-resources-list <%= class_names %>">
+    <% unless @hide_title %>
+      <h3 class="resources-list--title">
+        <% if @title_link.present? %>
+          <%= link_to(@title, @title_link) %>
+        <% elsif @title.present? %>
+          <%= @title %>
+        <% end %>
+      </h3>
+    <% end %>
+
+    <% unless @hide_actions %>
+      <div class="resources-list--navigation">
+        <% if @text_search_enabled %>
+          <%= render(
+            Shared::TextSearchFormComponent.new(
+              search_path: debates_path,
+              i18n_namespace: "#{i18n_namespace}.search_form",
+            )
+          ) %>
+        <% end %>
+
+        <div class="items-list-line-divider">
+        </div>
+        <% if filters.present? %>
+          <%= render(
+            Shared::FilterDropdownComponent.new(
+              title: @filter_title,
+              options: filters,
+              selected_option: selected_filter_otpion,
+              i18n_namespace: "#{i18n_namespace}.orders",
+              remote_url: remote_url
+            )
+          ) %>
+        <% end %>
+
+        <div class="resources-list--switch-view-button js-resource-list-switch-view-button">
+          <i class="fa <%= switch_view_mode_icon %>"></i>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="resources-list--body js-resources-list--body">
+      <%= body %>
+    </div>
+  </div>
+<% end %>
