@@ -1,4 +1,4 @@
-.new-custom-design {
+.custom-new-design {
   header {
     padding: 0;
     background: transparent !important;
@@ -84,8 +84,8 @@
   }
 }
 
-body.new-custom-design > header .locale.locale-custom,
-body.new-custom-design .wrapper > header .locale.locale-custom {
+body.custom-new-design > header .locale.locale-custom,
+body.custom-new-design .wrapper > header .locale.locale-custom {
   height: 2.5rem;
   margin-left: 0;
   margin-top: 0;
@@ -111,13 +111,13 @@ body.new-custom-design .wrapper > header .locale.locale-custom {
   }
 }
 
-body.new-custom-design > header, .new-custom-design .wrapper > header {
+body.custom-new-design > header, .custom-new-design .wrapper > header {
   height: 150px;
   max-width: auto;
 }
 
 
-.new-custom-design {
+.custom-new-design {
   .top-bar--title-logo-stikcy {
     display: none;
   }

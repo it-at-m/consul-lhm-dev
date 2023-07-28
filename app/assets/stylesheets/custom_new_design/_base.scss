@@ -10,7 +10,7 @@ html{
 }
 
 @media screen and (min-width: 75em) {
-  body.new-custom-design main, .new-custom-design .footer, .new-custom-design header .top-bar {
+  body.custom-new-design main, .custom-new-design .footer, .custom-new-design header .top-bar {
     // margin-left: calc(40vw - 37.5rem);
     // margin-right: calc(40vw - 37.5rem);
     // max-width: 1200px;
@@ -19,16 +19,16 @@ html{
     margin: auto;
   }
 
-  body.new-custom-design > header {
+  body.custom-new-design > header {
     margin-bottom: 50px;
   }
 
-  body.new-custom-design > .wrapper {
+  body.custom-new-design > .wrapper {
     // padding-top: 35px;
   }
 }
 
-body.new-custom-design {
+body.custom-new-design {
   font-family: "Asap", "sourcesanspro-regular-webfont", "sourcesanspro-bold-webfont", "PT_Serif_Web-Regular", sans-serif !important;
   color: $main-text-color;
   margin: 0;
@@ -53,13 +53,13 @@ body.new-custom-design {
   }
 }
 
-// body.new-custom-design > header, .new-custom-design .wrapper > header {
+// body.custom-new-design > header, .custom-new-design .wrapper > header {
 //   // height: 100px;
 //   height: 100px;
 //   max-width: auto;
 // }
 
-.new-custom-design {
+.custom-new-design {
   .notice-container {
     z-index: 1000;
   }
@@ -91,7 +91,7 @@ body.new-custom-design {
   }
 
   @media screen and (min-width: 75em) {
-    body.new-custom-design.public {
+    body.custom-new-design.public {
       margin-left: 0;
       margin-right: 0;
     }
