@@ -24,7 +24,7 @@ class Setting < ApplicationRecord
   class << self
 
     def defaults
-      default_settings = {
+      {
         "feature.featured_proposals": nil,
         "feature.facebook_login": false,
         "feature.google_login": false,
@@ -173,6 +173,8 @@ class Setting < ApplicationRecord
         "extended_option.general.title": 'Öffentlichkeitsbeteiligung',
         "extended_option.general.subtitle": 'in der Stadt CONSUL',
         "extended_option.general.launch_date": '',
+        "extended_feature.general.enable_old_design": false,
+        "extended_feature.general.use_white_top_navigation_text": false,
 
         "extended_feature.gdpr.gdpr_conformity": false,
         "extended_feature.gdpr.link_out_warning": true,
@@ -226,15 +228,8 @@ class Setting < ApplicationRecord
 
         "extra_fields.registration.extended": false,
         "extra_fields.registration.check_documents": false,
-        "extra_fields.verification.check_documents": false,
+        "extra_fields.verification.check_documents": false
       }
-
-      if Rails.application.secrets.new_design_enabled
-        default_settings["extended_feature.general.enable_old_design"] = false
-        default_settings["extended_feature.general.use_white_top_navigation_text"] = false
-      end
-
-      default_settings
     end
 
     def reset_defaults
