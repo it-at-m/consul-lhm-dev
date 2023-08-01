@@ -11,8 +11,7 @@
     <td><%= user.first_name %></td>
     <td><%= user.last_name %></td>
     <td><%= user.city_name %></td>
-    <td><%= "#{user.city_street&.name || user.street_name } #{user.street_number}" %></td>
-    <td><%= user.formatted_address %></td>
+    <td class="<%= "bold-on-hover" if user.registered_address.present? %>"><%= user.formatted_address %></td>
     <td><%= user.plz %></td>
     <td><%= user.geozone&.name %></td>
     <td><%= user.document_type %></td>

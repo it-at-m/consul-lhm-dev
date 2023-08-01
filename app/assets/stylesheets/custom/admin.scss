@@ -51,3 +51,13 @@
     display: none;
   }
 }
+
+// Table
+
+.bold-on-hover {
+  transition: font-weight 0.2s ease-in-out;
+
+  &:hover {
+    font-weight: bold;
+  }
+}
