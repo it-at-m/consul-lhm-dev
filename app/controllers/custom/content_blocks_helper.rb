@@ -9,7 +9,9 @@ module ContentBlocksHelper
       block_body = "#{custom_prefix} #{block_body}"
     end
 
-    if current_user_can_edit_content_block?
+    if current_user &&
+       (current_user.administrator? || current_user&.projekt_manager?(@custom_page&.projekt))
+
       edit_link = link_to('<i class="fas fa-edit"></i>'.html_safe, edit_admin_site_customization_content_block_path(block, return_to: request.path) )
     end
 
@@ -32,8 +34,12 @@ module ContentBlocksHelper
   def render_custom_content_block?(key)
     content_block = SiteCustomization::ContentBlock.custom_block_for(key, I18n.locale)
 
-    (current_user_can_edit_content_block? || content_block.present?)
+    (
+      (current_user.present? && current_user.administrator?) ||
+      content_block.present? && content_block.body.present?
+    )
   end
+
 
   def render_custom_projekt_content_block?(key, projekt)
     content_block = SiteCustomization::ContentBlock.custom_block_for(key, I18n.locale)
