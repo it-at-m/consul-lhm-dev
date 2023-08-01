@@ -1,6 +1,8 @@
 <div class="sidebar">
-  <%= render Shared::SidebarCardComponent.new(title: 'Neuigkeiten', icon_name: "bullhorn") do |c| %>
-    <%= render_custom_block 'home_page_sidebar' %>
+  <% if render_custom_content_block?('home_page_sidebar') %>
+    <%= render Shared::SidebarCardComponent.new(title: 'Neuigkeiten', icon_name: "bullhorn") do |c| %>
+      <%= render_custom_block 'home_page_sidebar' %>
+    <% end %>
   <% end %>
 
   <%= render Shared::SidebarCardComponent.new(title: 'Nutzer*innen', icon_name: "info-circle") do |c| %>

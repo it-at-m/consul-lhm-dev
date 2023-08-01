@@ -12,8 +12,8 @@
         <%= render Projekts::ListComponent.new(
           projekts: @projekts,
           map_coordinates: @map_coordinates,
-          current_filter: @current_order,
-          filters: @current_active_orders,
+          current_filter: @current_projekts_order,
+          filters: @active_projekts_orders,
           hide_title: true
           ) %>
       </div>
