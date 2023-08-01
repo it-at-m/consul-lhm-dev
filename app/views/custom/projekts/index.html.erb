@@ -1,91 +1,56 @@
-<main class="projekts-page">
-  <div class="help-header">
-    <div class='row'>
-      <div class='column'>
-        <h1 class='projekts-page-title'>
-          <i class="fas fa-code-branch"></i>
-          <%= t("custom.projekts.index.title") %>
+<main class="projekts-page projekts-overview-page">
+  <div class="layout-main-column">
+    <div class="layout-left-column">
+      <div class="layout-left-column projekts-overview-page--heading">
+        <h1>
+          <%= t('custom.projekts.index.title') %>
         </h1>
-      </div>
-    </div>
-  </div>
-
-  <div class="projekts-map-wrapper">
-    <div class="map projekts-map not-print">
-      <%= render Shared::MapComponent.new(
-         map_location: MapLocation.new(latitude: Setting["map.latitude"], longitude: Setting["map.longitude"], zoom: Setting["map.zoom"]),
-         parent_class: "projekts",
-         process_coordinates: @map_coordinates,
-       ) %>
-    </div>
-    <div class='expand-overview-map-wrapper'>
-      <div class='expand-overview-map small js-expand-overview-map not-print wide'>
-        <%= t("custom.proposals.index.show_larger_map") %>
-      </div>
-    </div>
-  </div>
-
-  <div class='projekt-list-page-container row'>
-    <div class='projekt-list column small-12 medium-9'>
-      <div class="projekt-list-tabs-container show-on-desktop">
-        <%= render_custom_block "projekts_list_before_tabs_#{@current_projekts_order}" %>
-        <%= render Projekts::ProjektListTabsComponent.new(current_order: @current_projekts_order, current_active_orders: @active_projekts_orders, overview_page: @special_projekt.overview_page?) %>
-        <%= render_custom_block "projekts_list_after_tabs_#{@current_projekts_order}" %>
+        <%= render_custom_block "projekts_overview_page" %>
       </div>
 
-      <% if @projekts.any? %>
-        <% Projekt.top_level.each do |top_level_projekt| %>
-          <% top_level_projekt.all_children_projekts.unshift(top_level_projekt).each do |projekt| %>
-            <%= render partial: "projekt", locals: { projekt: projekt } if projekt.in? @projekts %>
-          <% end %>
-        <% end %>
-      <% else %>
-        <h4 class="text-center">
-          <%= t("custom.projekts.index.no_projekts_for_current_filter") %>
-        </h3>
-      <% end %>
+      <div class="projekts-overview-page--projekts-list">
+        <%= render Projekts::ListComponent.new(
+          projekts: @projekts,
+          map_coordinates: @map_coordinates,
+          current_filter: @current_order,
+          filters: @current_active_orders,
+          hide_title: true
+          ) %>
+      </div>
     </div>
 
-    <div class='projekt-sidebar column small-12 medium-3'>
-      <div class="custom-content-block--margin-bottom">
-        <%= render_custom_block "projekt_index_sidebar" %>
-      </div>
-
-      <% if show_affiliation_filter_in_sidebar? %>
-        <%= render "shared/sidebar_filter/geozone_affiliations" %>
+    <div class="sidebar">
+      <%= render Shared::SidebarCardComponent.new(title: t('custom.common.information'), icon_name: "info-circle") do |c| %>
+        <%= render_custom_block 'projekt_overview_page_sidebar', default_content: t("custom.projekts.index.information_default_text")  %>
       <% end %>
 
-      <%= render "shared/categories", taggable: "projekt" %>
-      <%= render "shared/tag_cloud", taggable: "projekt" %>
-      <% if @sdgs.present? %>
-        <%= render SDG::Goals::TagCloudComponent.new("Projekt", sdg_targets: @sdg_targets) %>
-      <% end %>
-
-      <%= render "shared/social_share",
-          share_title: t("custom.pages.social_share.share"),
-          title: t("custom.projekts.index.social_share.title"),
-          url: url_for(only_path: false),
-          description: t("custom.projekts.index.social_share.description", domain: request.domain),
-          mobile: t("custom.projekts.index.social_share.description", domain: request.domain)
-      %>
+      <%= render Sidebar::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name) %>
+      <%= render Sidebar::CategoriesCardComponent.new(categories: @categories) %>
+      <%= render Sidebar::SdgsCardComponent.new(sdgs: @sdgs) %>
     </div>
   </div>
 
   <%= paginate @projekts %>
 
-  <% if @show_comments && current_user.present? %>
-    <div class="tabs-content margin-top" data-tabs-content="proposals_tabs">
-      <div class="tabs-panel is-active" id="tab-comments">
-        <%= render Shared::CommentsComponent.new(@commentable, @comment_tree) do %>
-          <h3>
-            <%= t("debates.show.comments_title") %>
-            <span class="js-comments-count">(<%= @commentable.comments_count %>)</span>
-          </h3>
-        <% end %>
-      </div>
+  <% if @show_footer %>
+    <nav class="margin-bottom projekt-footer <%= "legislation-process-list" if true %>">
+      <h3><%= "Beteiligung" %></h3>
+      <div class='footer-phases-filter-subnav'>
+        <ul id='filter-subnav' class='key-dates'>
+          <%= render Pages::Projekts::FooterPhaseTabComponent.new(@overview_page_special_projekt.comment_phase, @current_phase.resources_name, @comments_count) %>
+          <%= render Pages::Projekts::FooterPhaseTabComponent.new(@overview_page_special_projekt.debate_phase, @current_phase.resources_name, @debates_count) %>
+          <%= render Pages::Projekts::FooterPhaseTabComponent.new(@overview_page_special_projekt.proposal_phase, @current_phase.resources_name, @proposals_count) %>
+          <%= render Pages::Projekts::FooterPhaseTabComponent.new(@overview_page_special_projekt.voting_phase, @current_phase.resources_name, @polls_count) %>
+        </ul>
+    </nav>
+
+    <div id='footer-content'>
+      <% if (@current_phase.present? && @current_phase.phase_activated?) %>
+        <%= render 'shared/loader_spinner' %>
+        <%= render "pages/projekt_footer_new/#{@current_phase.name}" %>
+      <% end %>
     </div>
   <% end %>
-
   <div class="row">
     <div class="column show-on-mobile projekt-mobile-share-buttons">
       <%= render "shared/social_share",

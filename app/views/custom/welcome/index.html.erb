@@ -11,88 +11,49 @@
               social_url: root_url %>
 <% end %>
 
-<main>
+<main class="welcome-page">
   <%= render "header", header: @header %>
 
-  <div class="row">
-    <div class="column medium-9 small-centered">
-      <%= render_custom_block 'home_page_1' %>
-    </div>
-  </div>
-
-  <% if @cards.any? %>
-    <div class="row">
-      <div class="column medium-9 small-centered margin-bottom">
-        <div class="row">
-          <div class="small-12 column">
-            <%= render partial: "cards", locals: { cards: @cards, section_title: t("welcome.cards.title") } %>
-          </div>
-        </div>
+  <div class="d-flex layout-main-column">
+    <div class="layout-left-column">
+      <div class="welcome-page--first-content-block">
+        <%= render_custom_block 'home_page_1' %>
       </div>
-    </div>
-  <% end %>
 
-  <div class="row">
-    <div class="column medium-9 small-centered">
+      <% if @active_projekts.any? %>
+        <%= render Projekts::ListComponent.new(
+          projekts: @active_projekts,
+          title_link: projekts_path,
+          map_coordinates: @active_projekts_map_coordinates,
+          current_filter: @current_projekt_filter,
+          filters: @current_active_projekt_filters,
+          remote_url: projekts_path
+        ) %>
+      <% end %>
+
+      <% if @cards.any? %>
+        <%= render partial: "cards", locals: { cards: @cards, section_title: t("welcome.cards.title") } %>
+      <% end %>
+
       <%= render_custom_block 'home_page_2' %>
-    </div>
-  </div>
 
-  <% if @active_projekts.any? %>
-    <div class="row">
-      <div class="column medium-9 small-centered margin-bottom">
-        <%= render partial: "projekt_cards", locals: { projekts: @active_projekts, section_title: t("custom.welcome.active_projekt_cards.title")  } %>
-      </div>
-    </div>
-  <% end %>
+      <% if @latest_polls.any? %>
+        <%= render Shared::ResourcesListComponent.new(resources: @polls, resource_type: Poll, title: t('custom.welcome.current_polls') , wide: false) %>
+      <% end %>
 
-  <div class="row">
-    <div class="column medium-9 small-centered">
-      <%= render_custom_block 'home_page_3' %>
-    </div>
-  </div>
+      <%= render_custom_block 'home_page_4' %>
 
-  <% if @latest_polls.any? %>
-    <div class="row">
-      <div class="column medium-9 small-centered margin-bottom">
-        <h3 class='title card-title'><%= t('custom.welcome.current_polls') %></h3>
-        <%= render partial: "polls/poll_group", locals: { poll_group: @latest_polls } %>
-      </div>
-    </div>
-  <% end %>
+      <% if @latest_items.any? %>
+        <%= render Shared::ResourcesListComponent.new(resources: @latest_items, title: t('custom.welcome.user_entries'), wide: false) %>
+      <% end %>
 
-  <div class="row">
-    <div class="column medium-9 small-centered">
-      <%=render_custom_block 'home_page_4' %>
-    </div>
-  </div>
+      <%= render_custom_block 'home_page_5' %>
 
-  <% if @latest_items.any? %>
-    <div class="row">
-      <div class="column medium-9 small-centered margin-bottom">
-        <h3 class='title card-title'><%= t('custom.welcome.user_entries') %></h3>
-        <%= render "latest_items" %>
-      </div>
+      <% if @expired_projekts.any? %>
+        <%= render Projekts::ListComponent.new(projekts: @expired_projekts, title: t("custom.welcome.expired_projekt_cards.title")) %>
+      <% end %>
+      <%= render_custom_block 'home_page_6' %>
     </div>
-  <% end %>
-
-  <div class="row">
-    <div class="column medium-9 small-centered">
-      <%=render_custom_block 'home_page_5' %>
-    </div>
-  </div>
-
-  <% if @expired_projekts.any? %>
-    <div class="row">
-      <div class="column medium-9 small-centered margin-bottom">
-        <%= render partial: "projekt_cards", locals: { projekts: @expired_projekts, section_title: t("custom.welcome.expired_projekt_cards.title")  } %>
-      </div>
-    </div>
-  <% end %>
-
-  <div class="row">
-    <div class="column medium-9 small-centered">
-      <%=render_custom_block 'home_page_6' %>
-    </div>
+    <%= render 'sidebar' %>
   </div>
 </main>

@@ -1,0 +1,18 @@
+.custom-new-design {
+  .proposal-page--votes {
+    h2 {
+      display: none;
+    }
+
+    .fixed-mobile-content {
+      background-color: transparent !important;
+    }
+
+  }
+
+  .proposal-page--comments {
+    .new-comments-component--title {
+      display: none;
+    }
+  }
+}

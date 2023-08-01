@@ -14,20 +14,22 @@ class ProjektsController < ApplicationController
     @projekts = Projekt.regular.with_published_custom_page
 
     @resource_name = "projekt"
-    @geozones = Geozone.all
-    @selected_geozone_affiliation = params[:geozone_affiliation] || "all_resources"
-    @affiliated_geozones = (params[:affiliated_geozones] || "").split(",").map(&:to_i)
-    take_by_geozone_affiliations
+    unless javascript_request?
+      @geozones = Geozone.all
+      @selected_geozone_affiliation = params[:geozone_affiliation] || "all_resources"
+      @affiliated_geozones = (params[:affiliated_geozones] || "").split(",").map(&:to_i)
+      take_by_geozone_affiliations
 
-    @categories = @projekts.map { |p| p.tags.category }.flatten.uniq.compact.sort
-    @tag_cloud = tag_cloud
-    take_only_by_tag_names
+      @categories = @projekts.map { |p| p.tags.category }.flatten.uniq.compact.sort
+      @tag_cloud = tag_cloud
+      take_only_by_tag_names
 
-    @sdgs = (@projekts.map(&:sdg_goals).flatten.uniq.compact + SDG::Goal.where(code: @filtered_goals).to_a).uniq
-    @sdg_targets = (@projekts.map(&:sdg_targets).flatten.uniq.compact + SDG::Target.where(code: @filtered_targets).to_a).uniq
-    @filtered_goals = params[:sdg_goals].present? ? params[:sdg_goals].split(',').map{ |code| code.to_i } : nil
-    @filtered_targets = params[:sdg_targets].present? ? params[:sdg_targets].split(',')[0] : nil
-    take_by_sdgs
+      @sdgs = (@projekts.map(&:sdg_goals).flatten.uniq.compact + SDG::Goal.where(code: @filtered_goals).to_a).uniq
+      @sdg_targets = (@projekts.map(&:sdg_targets).flatten.uniq.compact + SDG::Target.where(code: @filtered_targets).to_a).uniq
+      @filtered_goals = params[:sdg_goals].present? ? params[:sdg_goals].split(',').map{ |code| code.to_i } : nil
+      @filtered_targets = params[:sdg_targets].present? ? params[:sdg_targets].split(',')[0] : nil
+      take_by_sdgs
+    end
 
     valid_orders.push("index_order_drafts") if current_user&.administrator? || current_user&.projekt_manager?
     @active_projekts_orders = valid_orders.select { |order| @projekts.send(order).count > 0 }.presence || ["index_order_all"]
@@ -36,17 +38,25 @@ class ProjektsController < ApplicationController
     @projekts = @projekts.send(@current_projekts_order)
     @map_coordinates = all_projekts_map_locations(@projekts.pluck(:id))
 
-    @show_comments = Setting["extended_feature.projekts_overview_page_footer.show_in_#{@current_order}"]
-    @valid_comments_orders = %w[most_voted newest oldest]
-    @current_comments_order = @valid_comments_orders.include?(params[:order]) ? params[:order] : @valid_comments_orders.first
-    @commentable = @special_projekt
-    @comment_tree = CommentTree.new(@commentable, params[:page], @current_comments_order)
-    set_comment_flags(@comment_tree.comments)
+    unless javascript_request?
+      @show_comments = Setting["extended_feature.projekts_overview_page_footer.show_in_#{@current_order}"]
+      @valid_comments_orders = %w[most_voted newest oldest]
+      @current_comments_order = @valid_comments_orders.include?(params[:order]) ? params[:order] : @valid_comments_orders.first
+      @commentable = @special_projekt
+      @comment_tree = CommentTree.new(@commentable, params[:page], @current_comments_order)
+      set_comment_flags(@comment_tree.comments)
+    end
 
     if @projekts.is_a?(Array)
       @projekts = Kaminari.paginate_array(@projekts).page(params[:page]).per(25)
     else
       @projekts = @projekts.page(params[:page]).per(25)
+    end
+
+    if Setting.new_design_enabled?
+      render :index
+    else
+      render :index_old
     end
   end
 

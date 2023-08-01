@@ -1,0 +1,17 @@
+<div class="locale locale-custom" id="js-locale" data-current-locale="<%= I18n.locale %>">
+  <form class="locale-form">
+    <% if placement == 'mobile' %>
+      <label class="inline-block" for="locale-switcher">
+        <%= t("layouts.header.locale") %>
+      </label>
+    <% end %>
+    <select class="js-location-changer locale-switcher inline-block" name="locale-switcher" id="locale-switcher">
+      <% I18n.available_locales.map do |loc| %>
+        <option <%= "selected" if loc == I18n.locale %>
+                value="<%= current_path_with_query_params(locale: loc) %>">
+          <%= loc.to_s.upcase %>
+        </option>
+      <% end %>
+    </select>
+  </form>
+</div>

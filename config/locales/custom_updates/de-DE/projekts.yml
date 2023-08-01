@@ -163,3 +163,5 @@ de:
         title: Projekte
         title_active: Aktive Projekte
         title_archived: Abgelaufene Projekte
+      list:
+        title: Projektübersicht

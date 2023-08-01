@@ -7,6 +7,8 @@ group :development do
   gem 'rack-mini-profiler'
   gem 'pry', '~> 0.13.0'
   gem 'pry-byebug', '~> 3.9'
+  gem 'solargraph'
+  gem 'pry-rails'
 end
 
 gem 'httparty'

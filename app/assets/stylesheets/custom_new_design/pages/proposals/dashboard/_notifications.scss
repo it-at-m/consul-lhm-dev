@@ -1,0 +1,31 @@
+.custom-new-design {
+  .proposal-dashboard-notifications {
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+
+  .proposal-dashboard-notification {
+    border-bottom: 1px solid $border-color;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    color: black;
+    font-size: 18px;
+  }
+
+  .proposal-dashboard-notification {
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .proposal-dashboard-notification--label {
+    width: 25%;
+    font-weight: bold;
+  }
+
+  .proposal-dashboard-notification--value {
+    p {
+      margin-bottom: 0;
+    }
+  }
+}

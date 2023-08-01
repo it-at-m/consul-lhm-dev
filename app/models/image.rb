@@ -44,7 +44,9 @@ class Image < ApplicationRecord
 
   def variant(style)
     if style
-      attachment.variant(self.class.styles[style])
+      if attachment.attached?
+        attachment&.variant(self.class.styles[style])
+      end
     else
       attachment
     end

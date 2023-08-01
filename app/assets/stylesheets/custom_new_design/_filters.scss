@@ -1,0 +1,44 @@
+.custom-new-design {
+  .tag-list-filter {
+    margin-bottom: 0;
+  }
+
+  .categories a:hover {
+    background: #e0e0e0;
+    color: black;
+  }
+
+  .categories {
+    margin-bottom: 0;
+  }
+
+  .sidebar-projekt-group-name {
+    margin-top: 0;
+  }
+
+  #filter-projekts-all {
+    margin-bottom: 0;
+  }
+
+  .sidebar-filter-group .sidebar-filter-button, .sidebar-filter-group .sidebar-filter-button {
+    transition: background-color 0.1s ease;
+  }
+
+  .sidebar-filter-group .sidebar-filter-button:hover, .sidebar-filter-group .sidebar-filter-button:focus {
+    background: #d5e4f3;
+    color: #004a83;
+  }
+
+  .projekt-question-section .quiz-header .quiz-next:hover, .projekt-question-section .quiz-header .quiz-next:active, .budget-phases .tabs-controls .budget-prev-phase, .budget-phases .tabs-controls .budget-next-phase, .budget-phases .tabs-controls .budget-prev-phase-disabled, .budget-phases .tabs-controls .budget-next-phase-disabled, .debate-questions .quiz-header .quiz-next:hover, .debate-questions .quiz-header .quiz-next:active, .jumbo-budget .button, .categories a:hover, .categories a.is-active, .geozone a:hover, .geozone a.is-active, .public > .wrapper > header .top-bar, .proposal-dashboard > header .top-bar, .pagination .current, .ui-datepicker-calendar .ui-state-hover, .ui-datepicker-calendar .ui-state-active, .ui-datepicker-header, .budgets-index > header, .budget-group-show > header, .budget-groups-index > header, .budget-ballot-show > header, .budget-header {
+    &.is-active:hover {
+      background: #023156;
+      color: white;
+    }
+  }
+
+  .sdg-related-list-selector {
+    h3{
+      font-size: 16px;
+    }
+  }
+}

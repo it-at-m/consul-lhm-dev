@@ -1,0 +1,25 @@
+.custom-new-design {
+  .resource-page--title-subline {
+    margin-bottom: 40px;
+  }
+
+  .resource-page--intro-text {
+    margin-bottom: 20px;
+  }
+
+  .votes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .total-votes {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+  }
+
+  .resource-page--description {
+    font-size: 18px;
+    margin-bottom: 35px;
+  }
+}

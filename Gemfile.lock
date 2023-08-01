@@ -74,7 +74,9 @@ GEM
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
+    backport (1.2.0)
     bcrypt (3.1.16)
+    benchmark (0.2.1)
     better_html (1.0.16)
       actionview (>= 4.0)
       activesupport (>= 4.0)
@@ -203,6 +205,7 @@ GEM
       dry-equalizer (~> 0.2)
       dry-inflector (~> 0.1, >= 0.1.2)
       dry-logic (~> 0.4, >= 0.4.2)
+    e2mmap (0.1.0)
     email_spec (2.2.0)
       htmlentities (~> 4.3.3)
       launchy (~> 2.1)
@@ -320,6 +323,7 @@ GEM
       railties (>= 3.1, < 7.0)
     invisible_captcha (2.0.0)
       rails (>= 5.0)
+    jaro_winkler (1.5.4)
     jquery-fileupload-rails (1.0.0)
       actionpack (>= 3.1)
       railties (>= 3.1)
@@ -463,6 +467,8 @@ GEM
     pry-byebug (3.9.0)
       byebug (~> 11.0)
       pry (~> 0.13.0)
+    pry-rails (0.3.9)
+      pry (>= 0.10.4)
     public_suffix (4.0.6)
     puma (4.3.12)
       nio4r (~> 2.0)
@@ -526,6 +532,8 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     retriable (3.1.2)
+    reverse_markdown (2.1.1)
+      nokogiri
     rexml (3.2.5)
     rinku (2.0.6)
     rspec-core (3.10.1)
@@ -625,6 +633,21 @@ GEM
     social-share-button (1.2.4)
       coffee-rails
     socksify (1.7.1)
+    solargraph (0.48.0)
+      backport (~> 1.2)
+      benchmark
+      bundler (>= 1.17.2)
+      diff-lcs (~> 1.4)
+      e2mmap
+      jaro_winkler (~> 1.5)
+      kramdown (~> 2.3)
+      kramdown-parser-gfm (~> 1.1)
+      parser (~> 3.0)
+      reverse_markdown (>= 1.0.5, < 3)
+      rubocop (>= 0.52)
+      thor (~> 1.0)
+      tilt (~> 2.0)
+      yard (~> 0.9, >= 0.9.24)
     spring (2.1.1)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
@@ -702,6 +725,8 @@ GEM
     wkhtmltopdf-binary (0.12.6.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
+    yard (0.9.28)
+      webrick (~> 1.7.0)
 
 PLATFORMS
   ruby
@@ -777,6 +802,7 @@ DEPENDENCIES
   pronto-scss (~> 0.11.0)
   pry (~> 0.13.0)
   pry-byebug (~> 3.9)
+  pry-rails
   puma (~> 4.3.12)
   rack-mini-profiler
   rails (= 5.2.7.1)
@@ -802,6 +828,7 @@ DEPENDENCIES
   sentry-ruby
   sitemap_generator (~> 6.1.2)
   social-share-button (~> 1.2.4)
+  solargraph
   spring (~> 2.1.1)
   spring-commands-rspec (~> 1.0.4)
   sprockets (~> 4.0.2)

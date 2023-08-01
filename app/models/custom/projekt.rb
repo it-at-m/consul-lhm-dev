@@ -1,5 +1,10 @@
 class Projekt < ApplicationRecord
   OVERVIEW_PAGE_NAME = "projekt_overview_page".freeze
+  INDEX_FILTERS = %w[
+    index_order_underway index_order_all
+    index_order_ongoing index_order_upcoming
+    index_order_expired index_order_individual_list
+  ].freeze
 
   include Milestoneable
   acts_as_paranoid column: :hidden_at
@@ -468,6 +473,21 @@ class Projekt < ApplicationRecord
 
   def vc_map_enabled?
     projekt_settings.find_by(key: "projekt_feature.general.vc_map_enabled")&.enabled?
+  end
+
+  def self.available_filters(all_projekts)
+    return [] if all_projekts.blank?
+
+    projekts_count_hash = {}
+    INDEX_FILTERS.each do |order|
+      projekts_count_hash[order] = all_projekts.send(order).count
+    end
+
+    projekts_count_hash.select { |_, value| value > 0 }.keys
+  end
+
+  def current_phases
+    projekt_phases.regular_phases.select(&:current?)
   end
 
   private

@@ -1,0 +1,39 @@
+<div class="supports text-center">
+  <div class="in-favor">
+
+    <% if proposal.proposal_phase&.expired? %>
+      <div class="supported callout warning">
+          <%= sanitize(t("custom.votes.proposal_phase_expired")) %>
+      </div>
+
+    <% elsif !proposal.proposal_phase&.current? %>
+      <div class="supported callout warning">
+          <%= sanitize(t("custom.votes.proposal_phase_not_current")) %>
+      </div>
+
+    <% elsif voted? %>
+      <% if projekt_feature?(proposal&.projekt, 'proposals.enable_proposal_support_withdrawal') %>
+        <%= link_to unvote_proposal_url(proposal),
+            class: "button button-support small expanded -orange",
+            title: t("proposals.proposal.support_title"), method: "post", remote: true do %>
+          <%= t("custom.proposals.proposal.unsupport") %>
+        <% end %>
+      <% else %>
+        <div class="supported callout success">
+          <%= t("proposals.proposal.already_supported") %>
+        </div>
+      <% end %>
+
+    <% else %>
+      <%= button_to vote_url,
+          class: "button button-support small expanded -orange",
+          title: t("proposals.proposal.support_title"),
+          method: "post",
+          remote: true,
+          "aria-label": support_aria_label do %>
+        <%= t("proposals.proposal.support") %>
+      <% end %>
+    <% end %>
+  </div>
+  <%= render Shared::ParticipationNotAllowedComponent.new(proposal, cannot_vote_text: cannot_vote_text) %>
+</div>

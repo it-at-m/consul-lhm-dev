@@ -1,13 +1,15 @@
 require_dependency Rails.root.join("app", "helpers", "content_blocks_helper").to_s
 
 module ContentBlocksHelper
-
-  def render_custom_block(key)
+  def render_custom_block(key, custom_prefix: nil, default_content: nil)
     block = SiteCustomization::ContentBlock.custom_block_for(key, I18n.locale)
-    block_body = block&.body || ""
+    block_body = block&.body.presence || default_content || ""
 
-    if current_user &&
-        (current_user.administrator? || current_user&.projekt_manager?(@custom_page&.projekt))
+    if custom_prefix
+      block_body = "#{custom_prefix} #{block_body}"
+    end
+
+    if current_user_can_edit_content_block?
       edit_link = link_to('<i class="fas fa-edit"></i>'.html_safe, edit_admin_site_customization_content_block_path(block, return_to: request.path) )
     end
 
@@ -25,5 +27,32 @@ module ContentBlocksHelper
     end
 
     AdminWYSIWYGSanitizer.new.sanitize(res)
+  end
+
+  def render_custom_content_block?(key)
+    content_block = SiteCustomization::ContentBlock.custom_block_for(key, I18n.locale)
+
+    (current_user_can_edit_content_block? || content_block.present?)
+  end
+
+  def render_custom_projekt_content_block?(key, projekt)
+    content_block = SiteCustomization::ContentBlock.custom_block_for(key, I18n.locale)
+
+    current_user.present? && (
+      (current_user.administrator? || (
+          current_user.projekt_manager? && can?(:edit, @projekt)
+        )
+      ) || content_block.present?
+    )
+  end
+
+  def current_user_can_edit_content_block?
+    (
+      current_user &&
+      (
+        current_user.administrator? ||
+        current_user&.projekt_manager?(@custom_page&.projekt)
+      )
+    )
   end
 end
