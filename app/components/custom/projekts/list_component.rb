@@ -12,7 +12,7 @@ class Projekts::ListComponent < ApplicationComponent
     render(Shared::ResourcesListComponent.new(
       resources: @projekts,
       resource_type: Projekt,
-      title: t("custom.projekts.projekt_list.title"),
+      title: t("custom.projekts.list.title"),
       css_class: "js-projekts-list",
       filter_title: t("custom.projekts.filter.title"),
       no_items_text: t("custom.projekts.index.no_projekts_for_current_filter"),

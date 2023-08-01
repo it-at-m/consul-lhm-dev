@@ -59,30 +59,28 @@ class WelcomeController < ApplicationController
         @active_projekts = @all_projekts
       end
 
-      @active_projekts_map_coordinates = all_projekts_map_locations(@active_projekts)
+      @active_projekts_map_coordinates = all_projekts_map_locations(@active_projekts.map(&:id))
 
       if @active_feeds.include?("debates") || @active_feeds.include?("proposals") || @active_feeds.include?("investment_proposals")
-        @latest_items = @feeds
-          .select{ |feed| feed.kind == 'proposals' || feed.kind == 'debates' || feed.kind == 'investment_proposals' }
-          .collect{ |feed| feed.items.to_a }.flatten
-          .sort_by(&:created_at).reverse
+        @latest_items =
+          @feeds
+            .select{ |feed| feed.kind == 'proposals' || feed.kind == 'debates' || feed.kind == 'investment_proposals' }
+            .collect{ |feed| feed.items.to_a }.flatten
+            .sort_by(&:created_at).reverse
       else
         @latest_items = []
       end
 
       render :index
     else
-      set_old_design_data
+      @remote_translations =
+        detect_remote_translations(
+          @feeds,
+          @recommended_debates,
+          @recommended_proposals
+        )
 
       render :index_old
     end
-  end
-
-  private
-
-  def set_old_design_data
-    @remote_translations = detect_remote_translations(@feeds,
-                                                      @recommended_debates,
-                                                      @recommended_proposals)
   end
 end

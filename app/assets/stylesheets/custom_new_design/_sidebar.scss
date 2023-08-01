@@ -156,6 +156,10 @@
     }
   }
 
+  .sidebar-title + br {
+    display: none;
+  }
+
   .sdg-tag-icon:before {
     top: 0;
     color: $brand;

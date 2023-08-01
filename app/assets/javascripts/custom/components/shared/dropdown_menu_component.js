@@ -15,7 +15,7 @@
       }.bind(this));
 
       $(document).on("click", ".js-dropdown-toggle", this.openDropdown.bind(this));
-      $(document).on("click", ".js-dropdown-item", this.selectOption.bind(this));
+      $(document).on("click", ".js-dropdown-item a", this.selectOption.bind(this));
 
       this.initialized = true;
     },
@@ -39,7 +39,6 @@
 
     selectOption: function(e) {
       this.closeDropdown();
-      console.log('TEST')
       e.currentTarget.closest(".js-dropdown").querySelector(".dropdown-toggle").innerHTML = e.currentTarget.textContent;
     }
   };
