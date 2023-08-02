@@ -13,6 +13,7 @@ class PagesController < ApplicationController
     @custom_page = SiteCustomization::Page.published.find_by(slug: params[:id])
 
     set_resource_instance
+    custom_page_name = Setting.new_design_enabled? ? :custom_page : :custom_page_old
 
     if @custom_page.present? && @custom_page.projekt.present? && @custom_page.projekt.visible_for?(current_user)
       @projekt = @custom_page.projekt
@@ -28,7 +29,7 @@ class PagesController < ApplicationController
 
       @cards = @custom_page.cards
 
-      render action: :custom_page
+      render action: custom_page_name
 
     elsif @custom_page.present? && @custom_page.projekt.present?
       @individual_group_value_names = @custom_page.projekt.individual_group_values.pluck(:name)
@@ -36,7 +37,7 @@ class PagesController < ApplicationController
 
     elsif @custom_page.present?
       @cards = @custom_page.cards
-      render action: :custom_page
+      render action: custom_page_name
 
     else
       render action: params[:id]

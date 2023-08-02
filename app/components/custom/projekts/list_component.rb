@@ -9,13 +9,15 @@ class Projekts::ListComponent < ApplicationComponent
   end
 
   def call
+    @attributes[:filter_param_name] = 'order'
+
     render(Shared::ResourcesListComponent.new(
       resources: @projekts,
       resource_type: Projekt,
       title: t("custom.projekts.list.title"),
       css_class: "js-projekts-list",
       filter_title: t("custom.projekts.filter.title"),
-      no_items_text: t("custom.projekts.index.no_projekts_for_current_filter"),
+      empty_list_text: t("custom.projekts.index.no_projekts_for_current_filter"),
       **@attributes
     ))
   end
