@@ -76,17 +76,15 @@
   <% if @show_comments %>
     <% if current_user.present? %>
       <div class="margin-top">
-        <div class="tabs-panel is-active" id="tab-comments">
-          <%= render Shared::CommentsComponent.new(@commentable, @comment_tree) do %>
-            <h3>
-              <%= t("debates.show.comments_title") %>
-              <span class="js-comments-count">(<%= @commentable.comments_count %>)</span>
-            </h3>
-          <% end %>
-        </div>
+        <%= render Shared::CommentsComponent.new(@commentable, @comment_tree) do %>
+          <h3>
+            <%= t("debates.show.comments_title") %>
+            <span class="js-comments-count">(<%= @commentable.comments_count %>)</span>
+          </h3>
+        <% end %>
       </div>
     <% else %>
-      <div class="margin-top">
+      <div id="comments" class="margin-top">
         <%= render "shared/login_to_comment" %>
       </div>
     <% end %>
