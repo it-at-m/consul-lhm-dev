@@ -71,7 +71,7 @@ class WelcomeController < ApplicationController
         @latest_items = []
       end
 
-      render :index
+      render :index_new
     else
       @remote_translations =
         detect_remote_translations(
@@ -80,7 +80,7 @@ class WelcomeController < ApplicationController
           @recommended_proposals
         )
 
-      render :index_old
+      render :index
     end
   end
 end

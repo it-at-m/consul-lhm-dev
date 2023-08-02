@@ -54,9 +54,9 @@ class ProjektsController < ApplicationController
     end
 
     if Setting.new_design_enabled?
-      render :index
+      render :index_new
     else
-      render :index_old
+      render :index
     end
   end
 

@@ -13,7 +13,7 @@ class PagesController < ApplicationController
     @custom_page = SiteCustomization::Page.published.find_by(slug: params[:id])
 
     set_resource_instance
-    custom_page_name = Setting.new_design_enabled? ? :custom_page : :custom_page_old
+    custom_page_name = Setting.new_design_enabled? ? :custom_page_new : :custom_page
 
     if @custom_page.present? && @custom_page.projekt.present? && @custom_page.projekt.visible_for?(current_user)
       @projekt = @custom_page.projekt
