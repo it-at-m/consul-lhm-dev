@@ -6,25 +6,24 @@ class Shared::ResourcesListComponent < ApplicationComponent
   attr_reader :filters, :remote_url, :resource_type
 
   def initialize(
-    title: nil,
-    title_link: nil,
     resources:,
     resource_type: nil,
+    title: nil,
+    title_link: nil,
     resources_name: nil,
-    filter_param: nil,
     filters: nil,
     current_filter: nil,
     remote_url: nil,
-    only_content: false,
     map_coordinates: nil,
-    wide: false,
     css_class: nil,
-    hide_title: false,
     filter_title: nil,
-    text_search_enabled: false,
-    no_items_text: nil,
-    no_filter: false,
+    empty_list_text: nil,
+    filter_param_name: nil,
+    wide: false,
     hide_actions: false,
+    hide_title: false,
+    only_content: false,
+    text_search_enabled: false,
     additional_data: {}
   )
     @resources = resources
@@ -32,7 +31,6 @@ class Shared::ResourcesListComponent < ApplicationComponent
     @title = title
     @title_link = title_link
     @wide = wide
-    @filter_param = filter_param.presence || "order"
     # @filters = filters.presence || default_filter_options
     @filters = filters
     @current_filter = current_filter
@@ -42,9 +40,9 @@ class Shared::ResourcesListComponent < ApplicationComponent
     @css_class = css_class
     @hide_title = hide_title
     @text_search_enabled = text_search_enabled
-    @no_items_text = no_items_text
+    @empty_list_text = empty_list_text
+    @filter_param_name = filter_param_name
     @filter_title = filter_title.presence || "Sortieren nach"
-    @no_filter = no_filter
     @hide_actions = hide_actions
     @additional_data = additional_data
   end
