@@ -2,9 +2,17 @@ require_dependency Rails.root.join("app", "controllers", "admin", "users_control
 
 class Admin::UsersController < Admin::BaseController
   def index
-    @users = @users.send(@current_filter).order(:created_at)
+    @users = @users.send(@current_filter).order_filter(params)
     @users = @users.by_username_email_or_document_number(params[:search]) if params[:search]
-    @users = @users.page(params[:page]) unless params[:format] == "csv"
+
+    unless params[:format] == "csv"
+      if @users.is_a?(Array)
+        @users = Kaminari.paginate_array(@users).page(params[:page])
+      else
+        @users = @users.page(params[:page])
+      end
+    end
+
     respond_to do |format|
       format.html
       format.js
