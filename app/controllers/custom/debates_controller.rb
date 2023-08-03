@@ -57,6 +57,12 @@ class DebatesController < ApplicationController
     end
 
     @debates = @resources.page(params[:page]).send("sort_by_#{@current_order}")
+
+    if Setting.new_design_enabled?
+      render :index_new
+    else
+      render :index
+    end
   end
 
   def new

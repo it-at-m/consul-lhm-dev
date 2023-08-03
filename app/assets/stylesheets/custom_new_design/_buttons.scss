@@ -18,6 +18,10 @@
     &.-grey {
       background: #c0cedb;
       color: black;
+
+      &:hover {
+        background-color: #d1deeb;
+      }
     }
 
     &.-orange {

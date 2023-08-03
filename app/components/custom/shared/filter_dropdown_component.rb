@@ -11,7 +11,7 @@ class Shared::FilterDropdownComponent < ApplicationComponent
     i18n_namespace:,
     title:,
     remote_url: nil,
-    filter_param_name: nil,
+    filter_param: nil,
     in_projekt_footer_tab: false
   )
     @options = options
@@ -20,7 +20,7 @@ class Shared::FilterDropdownComponent < ApplicationComponent
     @i18n_namespace = i18n_namespace
     @title = title
     @remote_url = remote_url
-    @filter_param_name = filter_param_name.presence || 'filter'
+    @filter_param = filter_param.presence || 'filter'
     @in_projekt_footer_tab = in_projekt_footer_tab
   end
 
@@ -52,7 +52,7 @@ class Shared::FilterDropdownComponent < ApplicationComponent
               filter: params[:filter])
     elsif remote_url.present?
       # URI::HTTP.build([nil, nil, nil, remote_url, { order: option }.to_query, anchor]).to_s
-      url = "#{remote_url}?#{@filter_param_name}=#{option}"
+      url = "#{remote_url}?#{@filter_param}=#{option}"
 
       if anchor.present?
         url = "#{url}#?#{anchor}"

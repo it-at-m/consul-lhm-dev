@@ -60,10 +60,9 @@
       <div class="projekt-footer layout-main-column">
         <div class="layout-full-width-column">
           <%= render Pages::Projekts::FooterPhasesComponent.new(@custom_page.projekt, @default_phase_name) %>
-          <div class="js-projekt-footer-content">
+          <div id="footer-content" class="js-projekt-footer-content">
             <%= render 'shared/loader_spinner' %>
-            <%# <%= render "pages/projekt_footer_new/#{@default_phase_name}" %>
-            <%= render "pages/projekt_footer/#{@default_projekt_phase.name}" %>
+            <%= render "pages/projekt_footer_new/#{@default_projekt_phase.name}" %>
           </div>
         </div>
       </div>

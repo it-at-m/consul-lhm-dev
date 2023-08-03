@@ -18,7 +18,7 @@ class Shared::ResourcesListComponent < ApplicationComponent
     css_class: nil,
     filter_title: nil,
     empty_list_text: nil,
-    filter_param_name: nil,
+    filter_param: nil,
     wide: false,
     hide_actions: false,
     hide_title: false,
@@ -41,7 +41,7 @@ class Shared::ResourcesListComponent < ApplicationComponent
     @hide_title = hide_title
     @text_search_enabled = text_search_enabled
     @empty_list_text = empty_list_text
-    @filter_param_name = filter_param_name
+    @filter_param = filter_param
     @filter_title = filter_title.presence || "Sortieren nach"
     @hide_actions = hide_actions
     @additional_data = additional_data

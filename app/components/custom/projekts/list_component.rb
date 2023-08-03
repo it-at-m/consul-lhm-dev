@@ -9,7 +9,7 @@ class Projekts::ListComponent < ApplicationComponent
   end
 
   def call
-    @attributes[:filter_param_name] = 'order'
+    @attributes[:filter_param] = 'order'
 
     render(Shared::ResourcesListComponent.new(
       resources: @projekts,

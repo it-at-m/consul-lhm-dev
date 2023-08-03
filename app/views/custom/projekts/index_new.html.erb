@@ -32,23 +32,16 @@
 
   <%= paginate @projekts %>
 
-  <% if @show_footer %>
-    <nav class="margin-bottom projekt-footer <%= "legislation-process-list" if true %>">
-      <h3><%= "Beteiligung" %></h3>
-      <div class='footer-phases-filter-subnav'>
-        <ul id='filter-subnav' class='key-dates'>
-          <%= render Pages::Projekts::FooterPhaseTabComponent.new(@overview_page_special_projekt.comment_phase, @current_phase.resources_name, @comments_count) %>
-          <%= render Pages::Projekts::FooterPhaseTabComponent.new(@overview_page_special_projekt.debate_phase, @current_phase.resources_name, @debates_count) %>
-          <%= render Pages::Projekts::FooterPhaseTabComponent.new(@overview_page_special_projekt.proposal_phase, @current_phase.resources_name, @proposals_count) %>
-          <%= render Pages::Projekts::FooterPhaseTabComponent.new(@overview_page_special_projekt.voting_phase, @current_phase.resources_name, @polls_count) %>
-        </ul>
-    </nav>
-
-    <div id='footer-content'>
-      <% if (@current_phase.present? && @current_phase.phase_activated?) %>
-        <%= render 'shared/loader_spinner' %>
-        <%= render "pages/projekt_footer_new/#{@current_phase.name}" %>
-      <% end %>
+  <% if @show_comments && current_user.present? %>
+    <div class="tabs-content margin-top" data-tabs-content="proposals_tabs">
+      <div class="tabs-panel is-active" id="tab-comments">
+        <%= render Shared::CommentsComponent.new(@commentable, @comment_tree) do %>
+          <h3>
+            <%= t("debates.show.comments_title") %>
+            <span class="js-comments-count">(<%= @commentable.comments_count %>)</span>
+          </h3>
+        <% end %>
+      </div>
     </div>
   <% end %>
   <div class="row">
