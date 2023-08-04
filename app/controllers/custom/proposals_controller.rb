@@ -82,6 +82,7 @@ class ProposalsController
   def edit
     @selected_projekt = @proposal.projekt_phase.projekt
     params[:projekt_phase_id] = @proposal.projekt_phase.id
+    params[:projekt_id] = @selected_projekt.id
   end
 
   def create
@@ -124,6 +125,15 @@ class ProposalsController
     else
       @selected_projekt = @proposal.projekt_phase.projekt
       render :new
+    end
+  end
+
+  def update
+		debugger
+    if resource.update(strong_params)
+      redirect_to resource, notice: t("flash.actions.update.#{resource_name.underscore}")
+    else
+      render :edit
     end
   end
 
@@ -188,7 +198,7 @@ class ProposalsController
   private
 
     def proposal_params
-      attributes = [:video_url, :responsible_name, :tag_list, :on_behalf_of,
+      attributes = [:id, :video_url, :responsible_name, :tag_list, :on_behalf_of,
                     :geozone_id, :projekt_id, :projekt_phase_id, :related_sdg_list,
                     :terms_of_service, :terms_data_storage, :terms_data_protection, :terms_general, :resource_terms,
                     :sentiment_id,
