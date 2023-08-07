@@ -5,15 +5,15 @@
       $(".js-image-attachment").each(function() {
         App.Imageable.initializeDirectUploadInput(this);
       });
-      $("#nested-image").on("cocoon:after-remove", function() {
-        $("#new_image_link").removeClass("hide");
+      $(".js-nested-image").on("cocoon:after-remove", function() {
+        $(this).next(".js-new-image-link").removeClass("hide");
       });
-      $("#nested-image").on("cocoon:before-insert", function() {
-        $(".js-image-attachment").closest(".image").remove();
+      $(".js-nested-image").on("cocoon:before-insert", function() {
+        $(this).find(".js-image-attachment").closest(".image").remove();
       });
-      $("#nested-image").on("cocoon:after-insert", function(e, nested_image) {
+      $(".js-nested-image").on("cocoon:after-insert", function(e, nested_image) {
         var input;
-        $("#new_image_link").addClass("hide");
+        $(this).next(".js-new-image-link").addClass("hide");
         input = $(nested_image).find(".js-image-attachment");
         App.Imageable.initializeDirectUploadInput(input);
       });
@@ -119,9 +119,9 @@
       }
     },
     initializeRemoveCachedImageLinks: function() {
-      $("#nested-image").on("click", "a.remove-cached-attachment", function(event) {
+      $(".js-nested-image").on("click", "a.remove-cached-attachment", function(event) {
         event.preventDefault();
-        $("#new_image_link").removeClass("hide");
+        $(this).closest(".js-nested-image").next(".js-new-image-link").removeClass("hide");
         $(this).closest(".direct-upload").remove();
       });
     },

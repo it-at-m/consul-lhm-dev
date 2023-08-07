@@ -13,7 +13,7 @@ en:
       title: New comment
     config:
       notifications_link: Notifications
-      unsubscribe_text: 'To unsubscribe from these emails, visit %{notifications} and uncheck "%{notification}".'
+      unsubscribe_text: 'To unsubscribe from these emails, visit %{notifications}.'
     email_verification:
       click_here_to_verify: this link
       instructions_2: This email will verify your account with <b>%{document_type} %{document_number}</b>. If these don't belong to you, please don't click on the previous link and ignore this email.
@@ -53,11 +53,11 @@ en:
       subject: "Thank you for creating an investment!"
       title: "Thank you for creating an investment!"
       intro: "Hi <strong>%{author}</strong>,"
-      text: "Thank you for creating your investment <strong>%{investment}</strong> for Participatory Budgets <strong>%{budget}</strong>."
+      text: "Thank you for creating your investment proposal!"
+      share: "Share your project"
       follow: "We will inform you about how the process progresses, which you can also follow on <strong>%{link}</strong>."
       follow_link: "Participatory Budgets"
       sincerely: "Sincerely,"
-      share: "Share your project"
     budget_investment_unfeasible:
       title: "Your investment project has been marked as unfeasible"
       hi: "Dear user,"
