@@ -89,7 +89,7 @@ class ProposalsController
     @proposal = Proposal.new(proposal_params.merge(author: current_user))
 
     if params[:save_draft].present? && @proposal.save
-      redirect_to user_path(@proposal.author, filter: 'proposals'), notice: I18n.t("flash.actions.create.proposal")
+      redirect_to user_path(@proposal.author, filter: "proposals"), notice: I18n.t("flash.actions.create.proposal")
 
     elsif @proposal.save
       @proposal.publish
@@ -124,6 +124,8 @@ class ProposalsController
       end
     else
       @selected_projekt = @proposal.projekt_phase.projekt
+      params[:projekt_phase_id] = @proposal.projekt_phase.id
+      params[:projekt_id] = @selected_projekt.id
       render :new
     end
   end
