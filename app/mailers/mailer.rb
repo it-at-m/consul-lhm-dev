@@ -80,6 +80,7 @@ class Mailer < ApplicationMailer
 
   def budget_investment_created(investment)
     @investment = investment
+    @projekt = investment.projekt
     @email_to = @investment.author.email
 
     with_user(@investment.author) do
