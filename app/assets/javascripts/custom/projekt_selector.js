@@ -64,6 +64,7 @@
 
     selectProjektPhase: function($projektPhase) {
       var projektPhaseId = $projektPhase.data('projektPhaseId')
+      $('[id$="projekt_phase_id"]').val(projektPhaseId)
 
       if ( $("span#persisted-resource-data").length ) {
         var persistedResourceData = $("span#persisted-resource-data").data();
@@ -73,7 +74,6 @@
         }
 
       } else {
-        $('[id$="projekt_phase_id"]').val(projektPhaseId)
         replaceProjektMapOnResourceCreation($projektPhase);
       }
 

@@ -26,10 +26,9 @@
   <%= render "proposals/info", proposal: @proposal %>
 </div>
 
-<div class="small-12 column">
-  <hr>
-  <%= render "form" %>
-  <hr>
-</div>
+<hr>
+<%= render "form" %>
+<hr>
+
 
 <%= render "admin/milestones/milestones", milestoneable: @proposal %>

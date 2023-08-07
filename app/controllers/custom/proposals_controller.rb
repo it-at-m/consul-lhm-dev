@@ -128,15 +128,6 @@ class ProposalsController
     end
   end
 
-  def update
-		debugger
-    if resource.update(strong_params)
-      redirect_to resource, notice: t("flash.actions.update.#{resource_name.underscore}")
-    else
-      render :edit
-    end
-  end
-
   def publish
     @proposal.publish
 
