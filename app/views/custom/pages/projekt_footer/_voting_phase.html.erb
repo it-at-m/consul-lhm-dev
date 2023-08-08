@@ -1,11 +1,8 @@
-<%= render "shared/loader_spinner" %>
-
-<div class='row'>
-  <div id="polls" class="polls-list spinner-placeholder small-12 medium-9 column">
-    <%= render "shared/loader_spinner" %>
-
+<div class="flex-column">
+  <div class="layout-left-column">
+    <%= render 'shared/loader_spinner' %>
     <% if extended_feature?('polls.intro_text_for_polls') %>
-      <%= render_custom_block "polls_welcome" %>
+      <%= render_custom_block 'polls_welcome' %>
     <% end %>
 
     <% if show_polls_description? %>
@@ -14,17 +11,33 @@
       </div>
     <% end %>
 
-    <div class='margin-top'>
-      <%= render "polls/poll_group", poll_group: @polls %>
-    </div>
-
-    <%= paginate @polls, remote: true, params: { controller: "pages", action: "projekt_phase_footer_tab" } %>
+    <%= render(
+          Shared::ResourcesListComponent.new(
+            resources: @polls,
+            resource_type: Poll,
+            title: 'Polls',
+            remote_url: projekt_footer_phase_filter_url(@projekt_phase),
+            map_coordinates: @polls_coordinates,
+            current_filter: @current_filter,
+            filter_param: "order",
+            filters: @valid_orders,
+            empty_list_text: "No polls"
+          ))
+    %>
+    <%= paginate @polls, remote: true, params: { controller: 'pages', action: 'voting_phase_footer_tab' } %>
 
     <div id="section_help" class="margin" data-magellan-target="section_help">
-      <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
-        <%= render_custom_block "polls_help" %>
+      <% if extended_feature?('modulewide.custom_help_text_in_modules')  %>
+        <%= render_custom_block 'polls_help' %>
         <%= render_custom_partial "footer" %>
       <% end %>
     </div>
+  </div>
+
+  <div class="sidebar">
+    <%= render Shared::NewButtonComponent.new(projekt_phase: @current_tab_phase) %>
+    <%= render Sidebar::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name) %>
+    <%= render Sidebar::CategoriesCardComponent.new(categories: @categories) %>
+    <%= render Sidebar::SdgsCardComponent.new(sdgs: @sdgs) %>
   </div>
 </div>
