@@ -53,6 +53,12 @@ class PollsController < ApplicationController
     end
 
     @polls = Kaminari.paginate_array(@resources.sort_for_list).page(params[:page])
+
+    if Setting.new_design_enabled?
+      render :index_new
+    else
+      render :index
+    end
   end
 
   def set_geo_limitations

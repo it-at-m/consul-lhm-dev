@@ -17,11 +17,7 @@ class Sidebar::ProjektsFilterComponent < ApplicationComponent
     @current_projekt = current_projekt
   end
 
-  private
-
     def show_filter?
-      return false if @current_projekt&.overview_page?
-
       if resources_name == "budget"
         return @current_projekt.present? && @current_projekt.children.joins(budget_phases: :budget).any?
       end
@@ -36,6 +32,8 @@ class Sidebar::ProjektsFilterComponent < ApplicationComponent
         (@top_level_archived_projekts.count == 1 &&
           (@top_level_archived_projekts.first.all_children_ids & @scoped_projekt_ids).any?)
     end
+
+  private
 
     def show_archived_projekts_in_sidebar?
       true
