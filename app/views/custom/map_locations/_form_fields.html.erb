@@ -14,11 +14,11 @@
 <% else %>
   <%= render Shared::MapComponent.new(
     mappable: mappable,
-    map_location: projekt_phase.map_location,
+    map_location: projekt_phase&.map_location || MapLocation.new,
     parent_class: parent_class,
     editable: true,
     projekt_phase: projekt_phase,
-    show_admin_shape: projekt_phase.map_location.show_admin_shape?
+    show_admin_shape: projekt_phase&.map_location&.show_admin_shape?
   ) %>
 <% end %>
 
