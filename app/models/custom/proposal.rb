@@ -106,6 +106,7 @@ class Proposal < ApplicationRecord
   end
 
   def editable_by?(user)
+    return false unless user
     return false unless editable?
 
     (author.official_level == user.official_level) ||

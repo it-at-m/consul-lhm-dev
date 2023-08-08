@@ -24,7 +24,6 @@
         <th><%= t("custom.proposals.index.projekts") %></th>
         <th><%= t("admin.proposals.index.author") %></th>
         <th><%= t("admin.proposals.index.milestones") %></th>
-        <th><%= t("admin.proposals.index.selected") %></th>
       </tr>
     </thead>
 
@@ -36,7 +35,6 @@
           <td><%= proposal.projekt_phase.projekt.name if proposal.projekt_phase.projekt %></td>
           <td><%= proposal.author.username %></td>
           <td><%= proposal.milestones.count %></td>
-          <td class="js-select"><%= render "select_proposal", proposal: proposal %></td>
         </tr>
       <% end %>
     </tbody>
