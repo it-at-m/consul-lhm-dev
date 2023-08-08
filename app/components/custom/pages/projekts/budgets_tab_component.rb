@@ -13,7 +13,7 @@ class Pages::Projekts::BudgetsTabComponent < ApplicationComponent
 
   def render_map?
     !budget.informing? &&
-      projekt_phase_feature?(budget.projekt_phase, "resource.show_map") &&
+      projekt_phase_feature?(budget.projekt_phase, "form.show_map") &&
       controller_name != "offline_ballots"
   end
 
@@ -34,6 +34,8 @@ class Pages::Projekts::BudgetsTabComponent < ApplicationComponent
       investments = budget.investments
     end
 
-    MapLocation.where(investment_id: investments, shape: {}).map(&:json_data)
+    MapLocation.where(investment_id: investments).map do |map_location|
+      map_location.shape_json_data.presence || map_location.json_data
+    end
   end
 end

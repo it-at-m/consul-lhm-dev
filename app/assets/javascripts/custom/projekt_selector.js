@@ -64,13 +64,22 @@
 
     selectProjektPhase: function($projektPhase) {
       var projektPhaseId = $projektPhase.data('projektPhaseId')
-
       $('[id$="projekt_phase_id"]').val(projektPhaseId)
+
+      if ( $("span#persisted-resource-data").length ) {
+        var persistedResourceData = $("span#persisted-resource-data").data();
+
+        if ( persistedResourceData['resourceMap'] ) {
+          $('#map-container').show();
+        }
+
+      } else {
+        replaceProjektMapOnResourceCreation($projektPhase);
+      }
 
       updateProjektSelectorHint(projektPhaseId);
       updateFormHeading(projektPhaseId);
       updateActivePhaseSelector(projektPhaseId);
-      replaceProjektMapOnProposalCreation($projektPhase);
       toggleImageAttachment($projektPhase);
       toggleDocumentAttachment($projektPhase);
       toggleSummary($projektPhase);
@@ -116,7 +125,7 @@
         $('#projekt-phase-selector-' + projektPhaseId).addClass('active');
       }
 
-      function replaceProjektMapOnProposalCreation($projektPhase) {
+      function replaceProjektMapOnResourceCreation($projektPhase) {
         App.Map.destroy();
 
         if ( $projektPhase.data('showMap') ) {
@@ -302,7 +311,7 @@
         selectedProjektPhaseId = $('[id$="projekt_phase_id"]').val();
       }
 
-      if ( selectedProjektPhaseId === '' ) {
+      if ( selectedProjektId === '' || selectedProjektPhaseId === '' ) {
         return false;
       }
 
@@ -322,10 +331,10 @@
         $selectedProjekt.closest('.projekt_group').hide();
       });
 
-      if ( $selectedProjekt.data('hideProjektSelector') ) {
-        $('#projekt-selector-block').prev('legend').hide();
-        $('#projekt-selector-block').hide();
-      }
+      // if ( $selectedProjekt.data('hideProjektSelector') ) {
+      //   $('#projekt-selector-block').prev('legend').hide();
+      //   $('#projekt-selector-block').hide();
+      // }
 
       // select projekt phase
       var $selectedProjektPhase = $('#projekt-phase-selector-' + selectedProjektPhaseId)

@@ -11,30 +11,28 @@
     <thead>
       <tr>
         <% if @current_filter == "erased" %>
-          <th scope="col"><%= t("admin.users.columns.id") %></th>
-          <th scope="col"><%= t("admin.users.columns.erase_reason") %></th>
-          <th scope="col"><%= t("admin.users.columns.unique_stamp") %></th>
+          <th scope="col"><%= link_to_users_sorted_by(:id) %></th>
+          <th scope="col"><%= t("custom.admin.users.columns.erase_reason") %></th>
+          <th scope="col"><%= t("custom.admin.users.columns.unique_stamp") %></th>
           <th scope="col"><%= t("custom.admin.users.columns.geozone") %></th>
-          <th scope="col"><%= t("admin.users.columns.verified_at") %></th>
+          <th scope="col"><%= link_to_users_sorted_by(:verified_at) %></th>
         <% else %>
-          <th scope="col"><%= t("admin.users.columns.name") %></th>
-          <th scope="col"><%= t("admin.users.columns.email") %></th>
-
+          <th scope="col"><%= link_to_users_sorted_by(:name) %></th>
+          <th scope="col"><%= link_to_users_sorted_by(:email) %></th>
           <th scope="col"><%= t("custom.admin.users.columns.first_name") %></th>
           <th scope="col"><%= t("custom.admin.users.columns.last_name") %></th>
-          <th scope="col"><%= t("custom.admin.users.columns.city_name") %></th>
+          <th scope="col"><%= link_to_users_sorted_by(:city_name) %></th>
           <th scope="col"><%= t("custom.admin.users.columns.street_address") %></th>
           <th scope="col"><%= t("custom.admin.users.columns.plz") %></th>
           <th scope="col"><%= t("custom.admin.users.columns.geozone") %></th>
           <th scope="col"><%= t("custom.admin.users.columns.document_type") %></th>
           <th scope="col"><%= t("custom.admin.users.columns.document_last_digits") %></th>
-
           <th scope="col"><%= t("custom.admin.users.columns.gender") %></th>
           <th scope="col"><%= t("custom.admin.users.columns.date_of_birth") %></th>
-          <th scope="col"><%= t("admin.users.columns.roles") %></th>
-          <th scope="col"><%= t("admin.users.columns.unique_stamp") %></th>
-          <th scope="col"><%= t("custom.admin.users.columns.verified_at") %></th>
-
+          <th scope="col"><%= link_to_users_sorted_by(:roles) %></th>
+          <th scope="col"><%= t("custom.admin.users.columns.unique_stamp") %></th>
+          <th scope="col"><%= link_to_users_sorted_by(:created_at) %></th>
+          <th scope="col"><%= link_to_users_sorted_by(:verified_at) %></th>
           <th scope="col"><%= t("custom.admin.users.columns.actions") %></th>
         <% end %>
       </tr>

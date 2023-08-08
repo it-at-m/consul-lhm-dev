@@ -105,6 +105,14 @@ class Proposal < ApplicationRecord
     send_new_actions_notification_on_published
   end
 
+  def editable_by?(user)
+    return false unless user
+    return false unless editable?
+
+    (author.official_level == user.official_level) ||
+      (author_id == user.id)
+  end
+
   protected
 
     def set_responsible_name

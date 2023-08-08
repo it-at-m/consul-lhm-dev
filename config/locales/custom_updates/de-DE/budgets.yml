@@ -36,7 +36,7 @@ de:
           sidebar:
             user_votes: "Abgegebene Stimmen: %{count}"
         form:
-          required: Ihr Investitionsvorschlag
+          required: Ihr Beitrag
         investment:
           supporters:
             zero: Keine Unterstützung

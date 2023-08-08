@@ -4,63 +4,54 @@
 
 <h2><%= t("custom.admin.projekts.edit.projekt_page_tab.main_block_title") %></h2>
 
-<%= render "shared/globalize_locales", resource: @projekt.page %>
+<div class="config-block">
 
-<%= translatable_form_for [:admin, @projekt.page], html: { class: "edit_page" } do |f| %>
-  <%= render "shared/errors", resource: @projekt.page %>
+  <%= render "shared/globalize_locales", resource: @projekt.page %>
 
-  <hr>
+  <%= translatable_form_for [:admin, @projekt.page], html: { class: "edit_page" } do |f| %>
+    <%= render "shared/errors", resource: @projekt.page %>
 
-  <div style="display:inline-block;width:55%">
-    <h3><%= t("admin.site_customization.pages.form.options") %></h3>
-    <%= f.label :status %>
-    <% ::SiteCustomization::Page::VALID_STATUSES.each do |status| %>
-      <%= f.radio_button :status, status %>
-      <br>
-    <% end %>
+    <hr>
 
-    <%= f.check_box :more_info_flag, class: "small" %>
-    <%= f.check_box :print_content_flag %>
-  </div>
+    <div style="display:inline-block;width:55%">
+      <h3><%= t("admin.site_customization.pages.form.options") %></h3>
+      <%= f.label :status %>
+      <% ::SiteCustomization::Page::VALID_STATUSES.each do |status| %>
+        <%= f.radio_button :status, status %>
+        <br>
+      <% end %>
 
-  <div style="display:inline-block;width:40%">
-    <%= f.text_field :slug, size: 80, maxlength: 80,
-      hint: sanitize(t("admin.site_customization.pages.new.slug_help")) %>
-
-    <% if @projekt.page.slug.present? && @projekt.page.published? %>
-      <%= link_to "Projektseite anzeigen", page_path(@projekt.page.slug), target: "_blank", class: "button primary" %>
-    <% end %>
-  </div>
-
-  <hr>
-
-  <div class="projekt-page-image margin-bottom">
-    <div class='small-12 medium-7 margin-bottom'>
-      <%= f.file_field "image_attributes[attachment]", { label: "Banner" } %>
-      <small>Der Projektbanner sollte 1260 x 250 Pixel groß sein.</small>
-      <%= f.hidden_field "image_attributes[title]", value: "photo" %>
-      <%= f.hidden_field "image_attributes[user_id]", value: current_user.id %>
+      <%= f.check_box :more_info_flag, class: "small" %>
+      <%= f.check_box :print_content_flag %>
     </div>
-    <% if @projekt.page.image.present? %>
-      <div class="text-center">
-        <%= image_tag @projekt.page.image.variant(:banner) %>
+
+    <div style="display:inline-block;width:40%">
+      <%= f.text_field :slug, size: 80, maxlength: 80,
+        hint: sanitize(t("admin.site_customization.pages.new.slug_help")) %>
+
+      <% if @projekt.page.slug.present? && @projekt.page.published? %>
+        <%= link_to "Projektseite anzeigen", page_path(@projekt.page.slug), target: "_blank", class: "button primary" %>
+      <% end %>
+    </div>
+
+    <hr>
+
+    <%= render Images::NestedComponent.new(f, block_id: "projekt_page_banner") %>
+
+    <%= f.translatable_fields do |translations_form| %>
+      <div>
+        <%= translations_form.text_field :title %>
+      </div>
+      <div>
+        <%= translations_form.text_area :content, class: "html-area tall-editor #{ck_editor_class(current_user)}" %>
       </div>
     <% end %>
-  </div>
 
-  <%= f.translatable_fields do |translations_form| %>
+    <%= hidden_field_tag :origin, params[:origin] %>
+    <%= hidden_field_tag :namespace, @namespace %>
+
     <div>
-      <%= translations_form.text_field :title %>
-    </div>
-    <div>
-      <%= translations_form.text_area :content, class: "html-area tall-editor #{ck_editor_class(current_user)}" %>
+      <%= f.submit class: "button success" %>
     </div>
   <% end %>
-
-  <%= hidden_field_tag :origin, params[:origin] %>
-  <%= hidden_field_tag :namespace, @namespace %>
-
-  <div>
-    <%= f.submit class: "button success" %>
-  </div>
-<% end %>
+</div>

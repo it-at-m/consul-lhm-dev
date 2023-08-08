@@ -98,4 +98,12 @@ class Debate
   def votes_score
     cached_votes_up + cached_votes_down
   end
+
+  def editable_by?(user)
+    return false unless user
+    return false unless editable?
+
+    (author.official_level == user.official_level) ||
+      (author_id == user.id)
+  end
 end

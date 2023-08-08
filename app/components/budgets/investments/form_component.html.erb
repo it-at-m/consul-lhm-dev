@@ -30,10 +30,12 @@
         <%= render "map_locations/form_fields",
                    form:           f,
                    map_location:   investment.map_location || MapLocation.new,
+                   mappable:       investment,
                    label:          t("budgets.investments.form.map_location"),
                    help:           t("budgets.investments.form.map_location_instructions"),
                    parent_class:   "budget_investment",
                    projekt:        budget&.projekt,
+                   projekt_phase:  budget&.projekt_phase,
                    i18n_namespace: "budgets.investments" %>
       </div>
     <% end %>

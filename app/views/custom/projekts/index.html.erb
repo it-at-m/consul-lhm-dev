@@ -74,20 +74,18 @@
   <%= paginate @projekts %>
 
   <% if @show_comments %>
-    <% if current_user.present? %>
-      <div class="margin-top">
-        <%= render Shared::CommentsComponent.new(@commentable, @comment_tree) do %>
-          <h3>
-            <%= t("debates.show.comments_title") %>
-            <span class="js-comments-count">(<%= @commentable.comments_count %>)</span>
-          </h3>
-        <% end %>
-      </div>
-    <% else %>
-      <div id="comments" class="margin-top">
+    <div id="comments" class="margin-top">
+      <h3>
+        <%= t("debates.show.comments_title") %>
+        <span class="js-comments-count">(<%= @commentable.comments_count %>)</span>
+      </h3>
+      <% if current_user.present? %>
+        <%= render Shared::CommentsFormComponent.new(@commentable) %>
+      <% else %>
         <%= render "shared/login_to_comment" %>
-      </div>
-    <% end %>
+      <% end %>
+        <%= render "comments/comment_list", comments: @comment_tree.root_comments %>
+    </div>
   <% end %>
 
   <div class="row">

@@ -24,6 +24,8 @@ class MapLocation < ApplicationRecord
   def shape_json_data
     return {} if shape == {} || shape == "{}"
 
+    self.shape = JSON.parse(shape) if shape.is_a?(String)
+
     shape.merge({
       investment_id: investment_id,
       proposal_id: proposal_id,

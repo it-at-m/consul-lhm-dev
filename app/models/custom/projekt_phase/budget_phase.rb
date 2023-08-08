@@ -20,7 +20,7 @@ class ProjektPhase::BudgetPhase < ProjektPhase
   end
 
   def admin_nav_bar_items
-    %w[duration naming restrictions settings]
+    %w[duration naming restrictions settings map]
   end
 
   def safe_to_destroy?

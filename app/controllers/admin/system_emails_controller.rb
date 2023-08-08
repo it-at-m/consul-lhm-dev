@@ -75,7 +75,12 @@ class Admin::SystemEmailsController < Admin::BaseController
     def load_sample_investment
       if Budget::Investment.any?
         @investment = Budget::Investment.last
-        @subject = t("mailers.#{@system_email}.subject", code: @investment.code)
+        @projekt = @investment.projekt
+        if @system_email == "budget_investment_unfeasible"
+          @subject = t("mailers.#{@system_email}.subject", title: @investment.title)
+        else
+          @subject = t("mailers.#{@system_email}.subject", code: @investment.code)
+        end
       else
         redirect_to admin_system_emails_path, alert: t("admin.system_emails.alert.no_investments")
       end

@@ -20,6 +20,7 @@
     <td><%= l(user.date_of_birth, format: "%d %b %Y") if user.date_of_birth %></td>
     <td><%= display_user_roles(user) %></td>
     <td><%= user.unique_stamp %></td>
+    <td><%= l(user.created_at, format: "%d %b %Y") %></td>
     <td><%= l(user.verified_at, format: "%d %b %Y") if user.verified_at %></td>
 
     <td>

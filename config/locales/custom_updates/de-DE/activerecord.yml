@@ -85,9 +85,9 @@ de:
         official_answer: Offizielle Antwort
         on_behalf_of: Meldung im Namen von jemanden erstellen
       debate:
-        on_behalf_of: Diskussion im Namen von jemanden erstellen
+        on_behalf_of: Erstellen im Namen von
       proposal:
-        on_behalf_of: Vorschlag im Namen von jemanden erstellen
+        on_behalf_of: Erstellen im Namen von
       budget:
         voting_style_distributed: "Mehrere Stimmen"
         hide_money: Geld ausblenden

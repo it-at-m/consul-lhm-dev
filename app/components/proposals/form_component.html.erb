@@ -1,14 +1,28 @@
 <%= translatable_form_for(proposal, url: url, html: { class: "proposal-form" }) do |f| %>
   <%= render "shared/errors", resource: proposal %>
 
-  <% if params[:projekt_phase_id] %>
+  <% if params[:projekt_id].present? %>
+    <%= hidden_field_tag :projekt_id, params[:projekt_id] %>
+  <% end %>
+
+  <% if params[:projekt_phase_id].present? %>
     <%= hidden_field_tag :projekt_phase_id, params[:projekt_phase_id] %>
+  <% end %>
+
+  <% if proposal.persisted? %>
+    <span
+        class="hide"
+        id="persisted-resource-data"
+        data-resource-class="Proposal"
+        data-resource-id="<%= proposal.id %>"
+        data-resource-map="<%= proposal.map_location.present? %>">
+      </span>
   <% end %>
 
   <fieldset class="required-fields">
     <%= hidden_field_tag :order, params[:order] %>
 
-    <% if @selected_projekt&.overview_page?  %>
+    <% if @selected_projekt&.overview_page? %>
       <%= f.hidden_field :projekt_id, value: @selected_projekt.id %>
 
     <% else %>
@@ -20,7 +34,7 @@
       </div>
     <% end %>
 
-    <legend class="margin-top tagging"><%= t("custom.proposals.form.tagging") %></legend>
+    <legend class="margin-top tagging hide"><%= t("custom.proposals.form.tagging") %></legend>
     <%= render partial: "shared/projekt_selector/projekt_labels", locals:	{ f: f, model: @proposal } %>
     <%= render partial: "shared/projekt_selector/sentiments", locals:	{ f: f, model: @proposal } %>
 
@@ -58,10 +72,12 @@
     <div id='map-container'>
       <%= render "map_locations/form_fields",
                  form:           f,
+                 mappable:       proposal,
                  map_location:   proposal.map_location || MapLocation.new,
                  label:          t("proposals.form.map_location"),
                  help:           t("proposals.form.map_location_instructions"),
                  projekt:        @selected_projekt,
+                 projekt_phase:  @proposal.projekt_phase,
                  parent_class:   "proposal",
                  i18n_namespace: "proposals" %>
     </div>
