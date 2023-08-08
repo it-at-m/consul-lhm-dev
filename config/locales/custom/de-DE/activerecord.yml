@@ -247,8 +247,8 @@ de:
         terms_of_service: "Nutzungsbedingungen"
         title: "Titel"
       debate/translation:
-        title: "Titel der Diskussion"
-        description: "Diskussionenbeitrag"
+        title: "Überschrift"
+        description: "Ausführliche Beschreibung"
       proposal:
         author: "Autor"
         title: "Titel"
@@ -260,9 +260,9 @@ de:
         terms_of_service: "Nutzungsbedingungen"
         video_url: "Externes Video URL"
       proposal/translation:
-        title: "Titel des Vorschlages"
-        description: "Vorschlagstext"
-        summary: "Zusammenfassung Vorschlag"
+        title: "Überschrift"
+        summary: "Zusammenfassung"
+        description: "Ausführliche Beschreibung"
         retired_explanation: "Erläuterung"
       user:
         login: "E-Mail oder Benutzer*innenname"

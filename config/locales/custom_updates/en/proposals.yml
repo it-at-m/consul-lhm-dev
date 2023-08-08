@@ -8,7 +8,7 @@ en:
         tagging: Tagging
         tags_custom: User tags
         tags_placeholder: Separate the tags with a comma (',')
-        required: Your proposal
+        required: Your input
         buttons:
           save_draft: Save draft
           publish: Publish proposal

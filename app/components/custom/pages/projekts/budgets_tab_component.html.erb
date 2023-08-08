@@ -1,11 +1,11 @@
 <% if render_map? %>
   <div class="map proposals-map">
     <%= render Shared::MapComponent.new(
-      map_location: budget.projekt.map_location,
+      map_location: budget.projekt_phase.map_location,
       parent_class: "budgets",
       process_coordinates: coordinates,
-      projekt: budget.projekt,
-      show_admin_shape: budget.projekt.map_location.show_admin_shape?
+      projekt_phase: budget.projekt_phase,
+      show_admin_shape: budget.projekt_phase.map_location.show_admin_shape?
     ) %>
 
   </div>

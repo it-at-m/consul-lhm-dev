@@ -3,15 +3,15 @@ de:
     proposals:
       created:
         dashboard: Als Entwurf speichern und später veröffentlichen
-        publish: Vorschlag jetzt veröffentlichen
+        publish: Jetzt veröffentlichen
       form:
         tagging: Einordnung
         tags_custom: Nutzer-Tags
         tags_placeholder: Trennen Sie die Tags mit einem Komma (',')
-        required: Ihr Vorschlag
+        required: Ihr Beitrag
         buttons:
           save_draft: Als Entwurf speichern
-          publish: Vorschlag jetzt veröffentlichen
+          publish: Jetzt veröffentlichen
       index:
         max_number_reached: Du hast die maximale Anzahl (%{max_number}) an Vorschlägen pro Nutzer erreicht. Bevor du einen weiteren Vorschlag erstellen kannst, musst du einen aktiven Vorschlag zurückziehen.
         no_active_projekt: Aktuell kein Beteiligungsverfahren
@@ -27,5 +27,3 @@ de:
         supports:
           one: "%{count} Unterstützer*in"
           other: "%{count} Unterstützer*innen"
-      show:
-        description: Vorschlagstext
