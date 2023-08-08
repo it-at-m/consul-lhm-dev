@@ -21,7 +21,7 @@
             current_filter: @current_filter,
             filter_param: "order",
             filters: @valid_orders,
-            no_items_text: "No polls"
+            empty_list_text: "No polls"
           ))
     %>
     <%= paginate @polls, remote: true, params: { controller: 'pages', action: 'voting_phase_footer_tab' } %>
@@ -36,16 +36,6 @@
 
   <div class="sidebar">
     <%= render Shared::NewButtonComponent.new(projekt_phase: @current_tab_phase) %>
-
-    <%= render Sidebar::ProjektsFilterComponent.new(
-      top_level_active_projekts: @top_level_active_projekts,
-      top_level_archived_projekts: @top_level_archived_projekts,
-      scoped_projekt_ids: @scoped_projekt_ids,
-      all_resources: @all_resources,
-      current_tab_phase: @current_tab_phase,
-      current_projekt: @current_projekt
-    ) %>
-
     <%= render Sidebar::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name) %>
     <%= render Sidebar::CategoriesCardComponent.new(categories: @categories) %>
     <%= render Sidebar::SdgsCardComponent.new(sdgs: @sdgs) %>
