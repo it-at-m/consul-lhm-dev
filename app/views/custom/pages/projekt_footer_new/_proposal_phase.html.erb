@@ -1,0 +1,27 @@
+<div class="flex-column">
+  <div class="layout-left-column">
+    <%= render 'shared/loader_spinner' %>
+    <% proposal_footer_url = projekt_phase_footer_tab_page_path(@projekt_phase.projekt.page, @projekt_phase.id) %>
+    <%= render(
+      Shared::ResourcesListComponent.new(
+        resources: @proposals,
+        resource_type: Proposal,
+        title: 'Proposals',
+        remote_url: projekt_footer_phase_filter_url(@projekt_phase),
+        map_coordinates: @proposals_coordinates,
+        current_filter: @current_order,
+        filter_param: "order",
+        filters: @valid_orders,
+        empty_list_text: "No proposals"
+      ))
+    %>
+  <%= paginate @proposals, remote: true, params: { controller: 'pages', action: 'proposal_phase_footer_tab' } %>
+  </div>
+
+  <div id="proposals-sidebar" class="sidebar">
+    <%= render Shared::NewButtonComponent.new(projekt_phase: @current_tab_phase) %>
+    <%= render Sidebar::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name) %>
+    <%= render Sidebar::CategoriesCardComponent.new(categories: @categories) %>
+    <%= render Sidebar::SdgsCardComponent.new(sdgs: @sdgs) %>
+  </div>
+</div>

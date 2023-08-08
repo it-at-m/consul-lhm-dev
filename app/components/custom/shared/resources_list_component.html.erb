@@ -53,8 +53,8 @@
               title: @filter_title,
               options: filters,
               selected_option: selected_filter_otpion,
-              i18n_namespace: "#{i18n_namespace}.#{@filter_param_name&.pluralize}",
-              filter_param_name: @filter_param_name,
+              i18n_namespace: "#{i18n_namespace}.#{@filter_param&.pluralize}",
+              filter_param: @filter_param,
               remote_url: remote_url
             )
           ) %>

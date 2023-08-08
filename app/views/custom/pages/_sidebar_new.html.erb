@@ -3,9 +3,7 @@
 
   <% if show_admin_controlls %>
     <%= render Shared::SidebarCardComponent.new(title: "Administration", icon_name: "cog") do |c| %>
-      <% c.body do %>
-        <%= render partial: 'pages/sidebar/admin_controls' %>
-      <% end %>
+      <%= render partial: 'pages/sidebar/admin_controls' %>
     <% end %>
   <% end %>
 
