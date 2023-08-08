@@ -3,7 +3,7 @@
 class Shared::ResourcesListComponent < ApplicationComponent
   renders_one :bottom_content
 
-  attr_reader :filters, :remote_url, :resource_type
+  attr_reader :filters, :remote_url, :resource_type, :resources
 
   def initialize(
     resources:,
