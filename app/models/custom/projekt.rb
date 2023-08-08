@@ -442,10 +442,6 @@ class Projekt < ApplicationRecord
     ProjektLabel.where(projekt_id: all_ids_in_tree)
   end
 
-  def map_location_with_admin_shape
-    map_location.show_admin_shape? ? map_location : nil
-  end
-
   def visible_for?(user = nil)
     return true if user.present? && user.administrator?
     return true if user.present? && user.projekt_manager?(self)

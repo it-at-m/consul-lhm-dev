@@ -1699,6 +1699,8 @@ span.projekt-backlink:before {
 }
 
 .sentiments {
+  clear: left;
+
   .sentiment {
     @include resource-tags-with-icon;
   }
