@@ -75,6 +75,7 @@ class Admin::SystemEmailsController < Admin::BaseController
     def load_sample_investment
       if Budget::Investment.any?
         @investment = Budget::Investment.last
+        @projekt = @investment.projekt
         if @system_email == "budget_investment_unfeasible"
           @subject = t("mailers.#{@system_email}.subject", title: @investment.title)
         else

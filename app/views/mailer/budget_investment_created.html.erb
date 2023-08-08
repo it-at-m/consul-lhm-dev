@@ -17,6 +17,16 @@
     ) %>
   </p>
 
+  <p style="<%= css_for_mailer_text %>">
+    <%= sanitize(
+      t("mailers.budget_investment_created.follow",
+        link: link_to(@projekt.page.title, page_url(@projekt.page.slug),
+        style: css_for_mailer_link)
+      ),
+      attributes: %w[href style]
+    ) %>
+  </p>
+
   <table style="width: 100%;">
     <tbody>
       <tr>
@@ -28,16 +38,6 @@
       </tr>
     </tbody>
   </table>
-
-  <p style="<%= css_for_mailer_text %>">
-    <%= sanitize(
-      t("mailers.budget_investment_created.follow",
-        link: link_to(@projekt.page.title, page_url(@projekt.page.slug),
-        style: css_for_mailer_link)
-      ),
-      attributes: %w[href style]
-    ) %>
-  </p>
 
   <p style="<%= css_for_mailer_text %>">
     <%= t("mailers.budget_investment_created.sincerely") %>
