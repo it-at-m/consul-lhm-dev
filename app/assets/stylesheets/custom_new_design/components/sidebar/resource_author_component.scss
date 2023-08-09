@@ -1,16 +1,16 @@
 .custom-new-design {
-  .resource-author {
+  .sidebar-resource-author {
     overflow: hidden;
     border-radius: 15px 15px 10px 10px;
   }
 
-  .resource-author--background-image {
+  .sidebar-resource-author--background-image {
     height: 75px;
     background-color: #8ab1de;
     width: 100%;
   }
 
-  .resource-author--avatar {
+  .sidebar-resource-author--avatar {
     background-color: black;
     border-radius: 100%;
     width: 90px;
@@ -20,24 +20,24 @@
     margin-bottom: 8px;
   }
 
-  .resource-author--info {
+  .sidebar-resource-author--info {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  .resource-author--registration-date {
+  .sidebar-resource-author--registration-date {
     font-weight: 500;
     font-size: 14px;
   }
 
-  .resource-author--name {
+  .sidebar-resource-author--name {
     font-weight: bold;
     font-size: 18px;
     color: black;
   }
 
-  .resource-author--resources {
+  .sidebar-resource-author--resources {
     border-top: 1px solid $border-color;
     width: 100%;
     margin-top: 12px;
@@ -47,7 +47,7 @@
     font-weight: bold;
   }
 
-  .resource-author--resources-item {
+  .sidebar-resource-author--resources-item {
     display: flex;
     justify-content: space-between;
   }

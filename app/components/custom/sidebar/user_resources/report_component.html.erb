@@ -1,0 +1,24 @@
+<% if helpers.show_flag_action?(resource) || helpers.show_unflag_action?(resource) %>
+  <% report_content = capture do %>
+    <% if helpers.show_flag_action?(resource) %>
+      <%= link_to polymorphic_path(resource, action: :flag), method: :put, class: ''  do %>
+      <i class="far fa-flag"></i>
+        <%= t("shared.flag")  %>
+      <% end %>
+    <% elsif helpers.show_unflag_action?(resource) %>
+      <%= link_to polymorphic_path(resource, action: :unflag), method: :put, class: '' do %>
+        <i class="fa fa-flag"></i>
+        <%= t("shared.unflag") %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <% if !@only_content %>
+    <%= render(Shared::SidebarCardComponent.new(title: t("debates.show.share"), icon_name: "share-alt")) do |c| %>
+      <%= report_content %>
+    <% end %>
+  <% else %>
+    <%= report_content %>
+  <% end %>
+<% end %>
+

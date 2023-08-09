@@ -1,11 +1,13 @@
 <%= render(Shared::ResourceItemComponent.new(component_attributes)) do |c| %>
   <% c.additional_body do %>
     <% number_of_phases_to_take = projekt.current_phases.size > 3 ? 2 : 3 %>
+
     <% projekt.current_phases.first(number_of_phases_to_take).each do |phase| %>
       <a href="<%= projekts_path(selected_phase_id: phase.id, anchor: 'filter-subnav') %>" class="projekt-phase-link">
         <i class="fa <%= phase_icon_class(phase) %>"></i><%= t("custom.projekts.link_to_phase_prefix") %> <%= t("custom.projekts.phase_name.#{phase.name}") %>
       </a>
     <% end %>
+
     <% if projekt.current_phases.size > 3 %>
       <a href="<%= projekts_path(anchor: 'filter-subnav') %>" class="projekt-phase-link">
         <i class="fa fa-plus"></i>

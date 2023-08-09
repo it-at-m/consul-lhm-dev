@@ -93,6 +93,7 @@ de:
           proposals: Vorschläge
           questions: Questions
           legislation: Textbearbeitung
+      link_to_phase_prefix: Direkt zu den
       phase_name:
         budget_phase: Budget
         comment_phase: Kommentare

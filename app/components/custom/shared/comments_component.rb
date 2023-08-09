@@ -53,4 +53,12 @@ class Shared::CommentsComponent < ApplicationComponent
         paginate comment_tree.root_comments, params: { anchor: "comments" }
       end
     end
+
+    def show_filter?
+      !(
+        record.is_a?(ProjektQuestion) ||
+        (record.is_a?(Projekt) && record.overview_page?) ||
+        comment_tree.root_comments.where(hidden_at: nil).count < 2
+       )
+    end
 end

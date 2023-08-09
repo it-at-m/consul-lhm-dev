@@ -183,6 +183,12 @@ de:
         show_less: "Zeige weniger"
   date:
     formats:
+      date_only: '%d.%m.%Y'
       long: '%d. %B %Y'
+  time:
+    formats:
+      date_only: '%d.%m.%Y'
+      date_with_time: '%d.%m.%Y %H:%M'
+      new_date_with_year: "%d. %B %Y"
   tag_names:
     general: General
