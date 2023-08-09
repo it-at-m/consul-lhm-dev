@@ -34,9 +34,16 @@
       color: black;
     }
 
-    &:hover {
+    &:hover, &:focus {
+      background-color: #005699;
       color: white;
-      background: #04406e;
+    }
+
+    &.hollow {
+      &:hover, &:focus {
+        background: #E1EDF7;
+        color: #004a83;
+      }
     }
   }
 

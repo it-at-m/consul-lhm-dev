@@ -1,0 +1,53 @@
+<div class="sidebar-resource-author sidebar-card">
+  <div class="sidebar-resource-author--background-image">
+
+  </div>
+  <div class="sidebar-resource-author--info">
+    <div class="sidebar-resource-author--avatar">
+
+    </div>
+    <div class="sidebar-resource-author--name">
+      <%= user.name %>
+    </div>
+
+    <div class="sidebar-resource-author--registration-date">
+      Beigetreten am: <%= l(user.created_at, format: :date_only) %>
+    </div>
+
+    <div class="sidebar-resource-author--resources">
+      <% if user.proposals.exists? %>
+        <div class="sidebar-resource-author--resources-item">
+          <div class="sidebar-resource-author--resources-name">
+            Vorschläge
+          </div>
+          <div class="sidebar-resource-author--resources-count">
+            <%= user.proposals.count %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if user.debates.exists? %>
+        <div class="sidebar-resource-author--resources-item">
+          <div class="sidebar-resource-author--resources-name">
+            Diskussionen
+          </div>
+          <div class="sidebar-resource-author--resources-count">
+            <%= user.debates.count %>
+          </div>
+        </div>
+      <% end %>
+
+
+      <% if user.comments.exists? %>
+        <div class="sidebar-resource-author--resources-item">
+          <div class="sidebar-resource-author--resources-name">
+            Kommentare
+          </div>
+          <div class="sidebar-resource-author--resoures-count">
+            <%= user.comments.count %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

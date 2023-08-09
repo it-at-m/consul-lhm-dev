@@ -1,5 +1,5 @@
 .custom-new-design {
-  .user-resource-banner {
+  .resource-page-banner {
     display: flex;
     justify-content: space-between;
     background: #D9F0EB;
@@ -12,24 +12,24 @@
     }
   }
 
-  .user-resource-banner--text-section {
+  .resource-page-banner--text-section {
     width: 48%;
     color: $brand;
   }
 
-  .user-resource-banner--image {
+  .resource-page-banner--image {
     width: 48%;
     min-height: 260px;
     max-height: 260px;
   }
 
-  .user-resource-banner--title {
+  .resource-page-banner--title {
     font-size: 28px;
     color: $brand;
     margin-bottom: 30px;
   }
 
-  .user-resource-banner--detail {
+  .resource-page-banner--detail {
     font-weight: 500;
 
     i {

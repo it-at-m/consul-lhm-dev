@@ -143,6 +143,12 @@ class DebatesController < ApplicationController
 
     @selected_geozone_restriction = params[:geozone_restriction] || 'no_restriction'
     @restricted_geozones = (params[:restricted_geozones] || '').split(',').map(&:to_i)
+
+    if Setting.new_design_enabled?
+      render :show_new
+    else
+      render :show
+    end
   end
 
   def flag

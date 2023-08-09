@@ -1,0 +1,36 @@
+<div class="resource-page-banner <%= resource_class %>">
+  <div class="resource-page-banner--text-section">
+    <h2 class="resource-page-banner--title">
+      <%= resource.title %>
+    </h2>
+
+    <div class="resource-page-banner--details">
+      <div class="resource-page-banner--detail">
+        <i class="fa fa-calendar"></i>
+        <%= l(resource.created_at, format: :new_date_with_year) %>
+      </div>
+      <div class="resource-page-banner--detail">
+        <i class="fa fa-comment"></i>
+        <%= resource.comments.count %> Kommentare
+      </div>
+      <div class="resource-page-banner--detail">
+        <%= link_to(projekt_path(resource.projekt)) do %>
+          <i class="fa fa-code-branch"></i>
+          Zugehöriges Projekt:
+          <%= resource.projekt.name %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="resource-page-banner--image">
+    <%= render(
+      Shared::ResourceImageComponent.new(
+        image_url: resource.image&.variant(:large),
+        image_placeholder_icon_class: "fa-comments",
+        resource_name: resource.class.name.downcase
+      )
+    )
+  %>
+  </div>
+</div>
