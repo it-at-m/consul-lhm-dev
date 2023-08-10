@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_16_190218) do
+ActiveRecord::Schema.define(version: 2023_08_09_165129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1649,6 +1649,7 @@ ActiveRecord::Schema.define(version: 2023_07_16_190218) do
     t.bigint "projekt_manager_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "permissions", default: [], array: true
     t.index ["projekt_id"], name: "index_projekt_manager_assignments_on_projekt_id"
     t.index ["projekt_manager_id"], name: "index_projekt_manager_assignments_on_projekt_manager_id"
   end

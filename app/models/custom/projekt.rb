@@ -61,6 +61,7 @@ class Projekt < ApplicationRecord
 
   has_many :projekt_manager_assignments, dependent: :destroy
   has_many :projekt_managers, through: :projekt_manager_assignments
+  accepts_nested_attributes_for :projekt_manager_assignments
 
   has_many :subscriptions, -> { where(projekt_subscriptions: { active: true }) },
     class_name: "ProjektSubscription", dependent: :destroy, inverse_of: :projekt
