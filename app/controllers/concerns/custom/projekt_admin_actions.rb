@@ -12,15 +12,6 @@ module ProjektAdminActions
     before_action :process_tags, only: [:update]
   end
 
-  def index
-    if current_user.administrator?
-      @projekts = Projekt.top_level.regular
-    elsif current_user.projekt_manager?
-      authorize!(:index, Projekt) unless current_user.administrator?
-      @projekts = Projekt.where(projekt_manager: current_user)
-    end
-  end
-
   def edit
     @namespace = params[:controller].split("/").first.to_sym
 

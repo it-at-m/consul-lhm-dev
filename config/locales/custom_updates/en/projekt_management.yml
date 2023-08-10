@@ -5,4 +5,4 @@ en:
     dashboard:
       index:
         title: Project management
-        description: "Welcome to Projekt Management Panel for %{org}."
+        info: "Welcome to Projekt Management Panel for %{org}."

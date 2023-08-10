@@ -10,7 +10,7 @@ module Abilities
       merge Abilities::Common.new(user)
 
       can([:index, :edit, :update, :update_map, :order_phases, :update_standard_phase], Projekt) do |p|
-        p.projekt_manager_ids.include?(user.projekt_manager.id)
+        user.projekt_manager.present? && user.projekt_manager.allowed_to?("manage", p)
       end
 
       can([:update, :update_standard_phase], ProjektSetting) do |ps|
