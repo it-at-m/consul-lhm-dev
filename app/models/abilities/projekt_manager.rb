@@ -3,7 +3,11 @@ module Abilities
     include CanCan::Ability
 
     def self.resources_to_manage
-      [ProjektQuestion, ProjektNotification, ProjektEvent, ProjektLivestream, Milestone, ProgressBar, ProjektArgument]
+      [
+        ProjektQuestion, ProjektNotification, ProjektEvent, ProjektLivestream, ProjektArgument,
+        ProjektLabel, Sentiment,
+        Milestone, ProgressBar
+      ]
     end
 
     def initialize(user)
@@ -13,66 +17,44 @@ module Abilities
         user.projekt_manager.present? && user.projekt_manager.allowed_to?("manage", p)
       end
 
+      can(:manage, Abilities::ProjektManager.resources_to_manage) do |resource|
+        resource.projekt_phase.present? &&
+          can?(:edit, resource.projekt_phase.projekt)
+      end
+
       can([:update, :update_standard_phase], ProjektSetting) do |ps|
-        ps.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+        can? :edit, ps.projekt
       end
 
       can(:manage, ProjektPhase) do |pp|
-        pp.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+        can? :edit, pp.projekt
       end
 
       can(:update, ProjektPhaseSetting) do |pps|
-        pps.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
-      end
-
-      can(:manage, ProjektLabel) do |pl|
-        pl.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
-      end
-
-      can(:manage, Sentiment) do |s|
-        s.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
-      end
-
-      can(:manage, ProjektQuestion) do |pq|
-        pq.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
-      end
-
-      can(:manage, ProjektLivestream) do |pl|
-        pl.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
-      end
-
-      can(:manage, ProjektArgument) do |pa|
-        pa.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+        can? :edit, pps.projekt_phase.projekt
       end
 
       can([:edit, :update], SiteCustomization::ContentBlock)
 
       can(:update_map, MapLocation) do |p|
-        if p.respond_to?(:projekt_phase)
-          p.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
-        else
-          p.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
-        end
+        related_projekt = p.respond_to?(:projekt_phase) ? p.projekt_phase.projekt : p.projekt
+        can? :edit, related_projekt
       end
 
       can(:manage, MapLayer) do |ml|
-        ml.mappable&.projekt&.projekt_manager_ids&.include?(user.projekt_manager.id)
+        related_projekt = ml.mappable.is_a?(:projekt_phase) ? ml.mappable.projekt : ml.mappable
+        can? :edit, related_projekt
       end
 
-      can(%i[read update], SiteCustomization::Page) do |p|
-        p.projekt.present? &&
-          p.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+      can(%i[read update], SiteCustomization::Page) do |page|
+        page.projekt.present? &&
+          can?(:edit, page.projekt)
       end
 
       can(:manage, ::Widget::Card) do |wc|
         wc.cardable.class == SiteCustomization::Page &&
-        wc.cardable.projekt.present? &&
-        wc.cardable.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
-      end
-
-      can(:manage, Abilities::ProjektManager.resources_to_manage) do |resource|
-        resource.projekt.present? &&
-          resource.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+          wc.cardable.projekt.present? &&
+          can?(:edit, wc.cardable.projekt)
       end
 
       can :block, User

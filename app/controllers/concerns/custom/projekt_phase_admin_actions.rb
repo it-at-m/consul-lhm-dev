@@ -153,6 +153,8 @@ module ProjektPhaseAdminActions
   end
 
   def milestones
+    authorize!(:milestones, @projekt_phase) unless current_user.administrator?
+    render "custom/admin/projekt_phases/milestones"
   end
 
   def projekt_notifications

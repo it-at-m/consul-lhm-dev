@@ -1,5 +1,3 @@
 <h2 class="title"><%= t("projekt_management.dashboard.index.title") %></h2>
 
-<% @projekts.each do |projekt| %>
-  <%= projekt.name %>
-<% end %>
+<%= render @projekts %>
