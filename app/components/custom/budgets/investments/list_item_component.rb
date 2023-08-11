@@ -20,7 +20,7 @@ class Budgets::Investments::ListItemComponent < ApplicationComponent
       wide: @wide,
       url: helpers.url_for(budget_investment),
       card_image_url: budget_investment.image&.variant(:medium),
-      horizontal_image_url: budget_investment.image&.variant(:medium),
+      horizontal_card_image_url: budget_investment.image&.variant(:medium),
       # date: budget_investment.created_at,
       author: budget_investment.author,
       image_placeholder_icon_class: "fa-euro-sign",

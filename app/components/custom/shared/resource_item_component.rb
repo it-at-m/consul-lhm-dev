@@ -14,7 +14,7 @@ class Shared::ResourceItemComponent < ApplicationComponent
     title:,
     description:,
     card_image_url: nil,
-    horizontal_image_url: nil,
+    horizontal_card_image_url: nil,
     author: nil,
     wide: false,
     id: nil,
@@ -28,7 +28,7 @@ class Shared::ResourceItemComponent < ApplicationComponent
     @projekt = projekt
     @description = description
     @card_image_url = card_image_url
-    @horizontal_image_url = horizontal_image_url
+    @horizontal_card_image_url = horizontal_card_image_url
     @author = author
     @wide = wide
     @url = url

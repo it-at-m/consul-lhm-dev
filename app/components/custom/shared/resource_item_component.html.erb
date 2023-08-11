@@ -14,59 +14,34 @@
 <div class="resource-item <%= component_class_name %>">
   <div class="resource-item--header">
     <%= header_content %>
-    <%# <% if @projekt.present? %>
-    <%#   <div class="resource-item--header-projekt">
-    <%#     <%= @projekt.page.title %>
-    <%#   </div>
-    <%#   <div class="resource-item--header-projekt-breadcrumbs">
-    <%#     <%= helpers.breadcrumbs_links(@projekt, ">", false) %>
-    <%#   </div>
-    <%#   <%# <% if resource.projekt.overview_page? %>
-    <%#     <%#   <%= t("custom.projekts.overview_page.projekt_name_for_proposal") %>
-    <%#   <% elsif @head_title.present? || additional_head_title_element.present? %>
-    <%#     <%= @head_title %>
-    <%#     <%= additional_head_title_element %>
-    <%#   <% else %>
-    <%#     <div class="resource-item--date">
-    <%#       <% if days_left.present? %>
-    <%#         <%= days_left %>
-    <%#       <% elsif date.present? %>
-    <%#         <%= date %>
-    <%#       <% end %>
-    <%#     </div>
-    <%#   <% end %>
-    <%#
-    <%#   <% if @author.present? %>
-    <%#     <div class="resource-item--author-in-wide-head-title">
-    <%#       <%= author_name_html %>
-    <%#     </div>
-    <%#   <% end %>
   </div>
 
-  <a href="<%= @url %>" class="resource-item--image-container">
+  <div class="resource-item--image-container">
     <% if image_overlay_item.present? %>
-      <div class="resource-item--image-overlay-item-container">
+      <div class="resource-item--image-overlay-item">
         <%= image_overlay_item %>
       </div>
     <% end %>
 
-    <div class="resource-item--card-image">
-      <%= render(
-        Shared::ResourceImageComponent.new(
-          image_url: @card_image_url,
-          image_placeholder_icon_class: @image_placeholder_icon_class,
-          resource_name: @resource_name)
-      ) %>
-    </div>
-    <div class="resource-item--horizontal-image">
-      <%= render(
-        Shared::ResourceImageComponent.new(
-          image_url: @horizontal_image_url,
-          image_placeholder_icon_class: @image_placeholder_icon_class,
-          resource_name: @resource_name)
-      ) %>
-    </div>
-  </a>
+    <%= link_to @url, class: 'resource-item--image-link' do %>
+      <div class="resource-item--card-image">
+        <%= render(
+          Shared::ResourceImageComponent.new(
+            image_url: @card_image_url,
+            image_placeholder_icon_class: @image_placeholder_icon_class,
+            resource_name: @resource_name)
+        ) %>
+      </div>
+      <div class="resource-item--horizontal-image">
+        <%= render(
+          Shared::ResourceImageComponent.new(
+            image_url: @horizontal_card_image_url,
+            image_placeholder_icon_class: @image_placeholder_icon_class,
+            resource_name: @resource_name)
+        ) %>
+      </div>
+    <% end %>
+  </div>
 
   <div class="resource-item--content">
     <div class="resource-item--body-wrapper">
@@ -133,14 +108,6 @@
               <%= footer_item %>
             </div>
           <% end %>
-
-          <%# <% if additional_body.present? %>
-          <%#   <div class="resource-item--footer-section resource-item--additional-body-section-in-footer">
-          <%#     <div class="resource-item--additional-body-section">
-          <%#       <%= additional_body %>
-          <%#     </div>
-          <%#   </div>
-          <%# <% end %>
         </div>
       <% end %>
     </div>

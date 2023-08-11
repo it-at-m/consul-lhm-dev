@@ -19,15 +19,15 @@ class Projekts::ListItemComponent < ApplicationComponent
       wide: @wide,
       url: projekt.page.url,
       card_image_url: card_image_url,
-      horizontal_image_url: horizontal_image_url,
+      horizontal_card_image_url: horizontal_card_image_url,
       # image_url: url_for(projekt.page&.image&.attachment&.variant(:medium)),
       id: projekt.id
     }
   end
 
   def card_image_url
-    if image_variant(:item_card).present?
-      image_variant(:item_card)
+    if image_variant(:card_thumb).present?
+      image_variant(:card_thumb)
     elsif image_variant(:thumb_wider).present?
       image_variant(:thumb_wider)
     else
@@ -36,9 +36,9 @@ class Projekts::ListItemComponent < ApplicationComponent
     end
   end
 
-  def horizontal_image_url
-    if image_variant(:item_card).present?
-      image_variant(:item_card)
+  def horizontal_card_image_url
+    if image_variant(:horizontal_card_thumb).present?
+      image_variant(:horizontal_card_thumb)
     elsif image_variant(:thumb_wider).present?
       image_variant(:thumb_wider)
     else

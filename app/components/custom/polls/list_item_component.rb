@@ -21,7 +21,7 @@ class Polls::ListItemComponent < ApplicationComponent
       wide: @wide,
       url: helpers.poll_path(poll),
       card_image_url: poll.image&.variant(:medium),
-      horizontal_image_url: poll.image&.variant(:medium),
+      horizontal_card_image_url: poll.image&.variant(:medium),
       # date: poll.created_at,
       image_placeholder_icon_class: "fa-vote-yea",
       id: poll.id

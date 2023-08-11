@@ -20,7 +20,7 @@ class Debates::ListItemComponent < ApplicationComponent
       wide: @wide,
       url: helpers.debate_path(debate),
       card_image_url: debate.image&.variant(:medium),
-      horizontal_image_url: debate.image&.variant(:medium),
+      horizontal_card_image_url: debate.image&.variant(:medium),
       # date: debate.created_at,
       image_placeholder_icon_class: "fa-comments",
       author: debate.author,

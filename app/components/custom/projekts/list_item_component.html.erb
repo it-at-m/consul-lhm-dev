@@ -8,11 +8,9 @@
   <% end %>
 
   <% if @projekt.related_sdgs.present? %>
-    <%# <% c.image_overlay_item do %>
-    <%#   <div class="resource-item--sdgs">
-    <%#     <%= render SDG::FilterLinksComponent.new(@projekt.related_sdgs, @projekt.class) %>
-    <%#   </div>
-    <%# <% end %>
+    <% c.image_overlay_item do %>
+      <%= render SDG::FilterLinksComponent.new(@projekt.related_sdgs, Projekt) %>
+    <% end %>
   <% end %>
 
   <% c.additional_body_section do %>
