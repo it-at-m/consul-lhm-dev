@@ -39,6 +39,6 @@
                               value: map_location.zoom,
                               id: map_location_input_id(parent_class, "zoom") %>
   <%= m_l_fields.hidden_field :shape,
-                              value: map_location.shape,
+                              value: map_location.shape.to_json,
                               id: map_location_input_id(parent_class, "shape") %>
 <% end %>
