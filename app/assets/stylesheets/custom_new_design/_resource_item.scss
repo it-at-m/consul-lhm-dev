@@ -52,6 +52,11 @@
     }
   }
 
+  .resource-item--additional-body-section {
+    padding: 12px 25px;
+    border-top: 1px solid #d9d9d9;
+  }
+
   .resource-item--image-container {
     height: 180px;
     width: 100%;
@@ -62,7 +67,7 @@
     overflow: hidden;
   }
 
-  .resource-item--image-ontop-item-container {
+  .resource-item--image-overlay-item-container {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -110,9 +115,9 @@
     }
   }
 
-  .resource-item--date {
-    font-size: 11px;
-  }
+  // .resource-item--date {
+    // font-size: 11px;
+  // }
 
   .resource-item--description {
     font-size: 15px;
@@ -173,13 +178,13 @@
     display: none;
   }
 
-  .resource-item--head-title {
+  .resource-item--header {
     .custom-breadcrumbs .breadcrumbs-item {
       font-size: 14px;
     }
   }
 
-  .resource-item--head-title-projekt-breadcrumbs {
+  .resource-item--header-projekt-breadcrumbs {
     display: none;
   }
 
@@ -191,7 +196,7 @@
     flex-direction: column;
     min-height: 143px;
 
-    .resource-item--additional-body {
+    .resource-item--additional-body-section {
       margin-top: 12px;
     }
   }
@@ -200,13 +205,6 @@
     display: flex;
     padding: 12px 25px;
     border-top: 1px solid $border-color;
-  }
-
-  .resource-item.projekt-list-item {
-    .resource-item--body {
-      // min-height: 168px;
-      min-height: 208px;
-    }
   }
 
   .resource-item--footer {
@@ -407,7 +405,7 @@
     background: #c5c5c5;
   }
 
-  .resource-item--additional-body {
+  .resource-item--additional-body-section {
     .projekt-phase-link {
       text-decoration: underline;
       display: block;
@@ -457,7 +455,15 @@
     position: relative;
     display: flex;
     justify-content: space-between;
-    flex-direction: row-reverse;
+  }
+
+  .resource-item--card-image {
+    width: 100%;
+  }
+
+  .resource-item--horizontal-image {
+    display: none;
+    width: 100%;
   }
 
   .resource-item--image-placeholder {
@@ -471,7 +477,6 @@
     flex-direction: column;
     color: $main-text-color;
   }
-
   .resource-item--image-placeholder-icon {
     font-size: 80px;
     margin-bottom: 10px;
@@ -481,7 +486,7 @@
     display: none;
   }
 
-  .resource-item--head-title  {
+  .resource-item--header  {
     height: 45px;
     // padding: 0 25px;
     padding-left: 25px;
@@ -507,7 +512,7 @@
     // }
   }
 
-  .resource-item--additional-body-in-footer {
+  .resource-item--additional-body-section-in-footer {
     display: none;
   }
 
@@ -515,6 +520,14 @@
     .resources-list.-wide {
       .resources-list--inner {
         flex-direction: column;
+      }
+
+      .resource-item--horizontal-image {
+        display: block;
+      }
+
+      .resource-item--card-image {
+        display: none;
       }
 
       .resource-item {
@@ -536,17 +549,17 @@
           }
         }
 
-        .resource-item--head-title {
+        .resource-item--header {
           grid-area: 1 / 2 / 2 / 4;
           padding-right: 25px;
         }
 
 
-        .resource-item--head-title-projekt {
+        .resource-item--header-projekt {
           display: none;
         }
 
-        .resource-item--head-title-projekt-breadcrumbs {
+        .resource-item--header-projekt-breadcrumbs {
           display: block;
         }
 
@@ -580,10 +593,9 @@
         }
 
         .resource-item--footer-section  {
-          .resource-item--additional-body {
+          .resource-item--additional-body-section {
             width: 100%;
             padding: 0px 18px;
-
           }
 
           .participation-not-allowed {
@@ -604,7 +616,7 @@
           max-height: none;
         }
 
-        .resource-item--additional-body-in-footer {
+        .resource-item--additional-body-section-in-footer {
           display: flex;
         }
 
@@ -627,12 +639,6 @@
 
         .resource-item--footer-section:last-child {
           border-left: 0;
-        }
-
-        .resource-item--body {
-          .resource-item--additional-body {
-            display: none;
-          }
         }
 
         .resource-item--last-tag {
@@ -726,9 +732,9 @@
           border-left: 1px solid $border-color;
         }
 
-        .resource-item--date {
-          font-size: 14px;
-        }
+        // .resource-item--date {
+        //   font-size: 14px;
+        // }
 
         .resource-item--footer-section {
           width: 100%;

@@ -14,14 +14,41 @@ class Projekts::ListItemComponent < ApplicationComponent
       title: projekt.page.title,
       description: projekt.description,
       tags: projekt.tags.first(3),
-      sdgs: projekt.related_sdgs.first(5),
-      start_date: projekt.total_duration_start,
-      end_date: projekt.total_duration_end,
+      # start_date: projekt.total_duration_start,
+      # end_date: projekt.total_duration_end,
       wide: @wide,
       url: projekt.page.url,
-      image_url: projekt.image&.variant(:medium),
+      card_image_url: card_image_url,
+      horizontal_image_url: horizontal_image_url,
+      # image_url: url_for(projekt.page&.image&.attachment&.variant(:medium)),
       id: projekt.id
     }
+  end
+
+  def card_image_url
+    if image_variant(:item_card).present?
+      image_variant(:item_card)
+    elsif image_variant(:thumb_wider).present?
+      image_variant(:thumb_wider)
+    else
+      # If new image not presenta fallback to old
+      image_variant(:medium)
+    end
+  end
+
+  def horizontal_image_url
+    if image_variant(:item_card).present?
+      image_variant(:item_card)
+    elsif image_variant(:thumb_wider).present?
+      image_variant(:thumb_wider)
+    else
+      # If new image not presenta fallback to old
+      image_variant(:medium)
+    end
+  end
+
+  def image_variant(variant)
+    projekt.image&.variant(variant)
   end
 
   def phase_icon_class(phase)

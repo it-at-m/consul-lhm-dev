@@ -20,7 +20,7 @@
 
   <div id="<%= dom_id(@proposal) %>" >
     <div class="flex-layout">
-      <div class="layout-main-column">
+      <div class="main-column">
         <h1 class="resource-page--title"><%= "#{@proposal.author.name} startet eine Diskussion"  %></h1>
         <div class="common-page-description">
           <%= render_custom_block('debate_show_welcome_text', custom_prefix: @proposal.author.name , default_content: t('custom.proposals.show.welcome_default_text')) %>
@@ -37,7 +37,7 @@
     </div>
 
     <div class="flex-layout">
-      <div class="layout-main-column">
+      <div class="main-column">
         <%= render ResourcePage::BannerComponent.new(resource: @proposal)  %>
 
         <div class="resource-page--description new-card">

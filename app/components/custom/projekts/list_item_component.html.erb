@@ -1,22 +1,30 @@
 <%= render(Shared::ResourceItemComponent.new(component_attributes)) do |c| %>
-  <% c.additional_body do %>
-    <% number_of_phases_to_take = projekt.current_phases.size > 3 ? 2 : 3 %>
-
-    <% projekt.current_phases.first(number_of_phases_to_take).each do |phase| %>
-      <a href="<%= projekts_path(selected_phase_id: phase.id, anchor: 'filter-subnav') %>" class="projekt-phase-link">
-        <i class="fa <%= phase_icon_class(phase) %>"></i><%= t("custom.projekts.link_to_phase_prefix") %> <%= t("custom.projekts.phase_name.#{phase.name}") %>
-      </a>
+  <% c.header_content do %>
+    <% if projekt.total_duration_start.present? || projekt.total_duration_end.present? %>
+      <%= helpers.format_date_range(projekt.total_duration_start, projekt.total_duration_end) %>
+    <% else %>
+      Fortlaufendes Projekt
     <% end %>
+  <% end %>
 
-    <% if projekt.current_phases.size > 3 %>
-      <a href="<%= projekts_path(anchor: 'filter-subnav') %>" class="projekt-phase-link">
-        <i class="fa fa-plus"></i>
-        <%= t("custom.projekts.more_phases") %>
+  <% if @projekt.related_sdgs.present? %>
+    <%# <% c.image_overlay_item do %>
+    <%#   <div class="resource-item--sdgs">
+    <%#     <%= render SDG::FilterLinksComponent.new(@projekt.related_sdgs, @projekt.class) %>
+    <%#   </div>
+    <%# <% end %>
+  <% end %>
+
+  <% c.additional_body_section do %>
+    <% projekt.current_phases.each do |phase| %>
+      <a href="<%= projekts_path(selected_phase_id: phase.id, anchor: 'filter-subnav') %>" class="projekt-phase-link">
+        <i class="fa <%= phase_icon_class(phase) %>"></i>
+        <%= t("custom.projekts.link_to_phase_prefix") %> <%= t("custom.projekts.phase_name.#{phase.name}") %>
       </a>
     <% end %>
   <% end %>
 
-  <% c.first_footer_item do  %>
+  <% c.footer_item do  %>
    <%= link_to('Zum Projekt', projekt.page.url, class: 'button -grey') %>
   <% end %>
 <% end %>

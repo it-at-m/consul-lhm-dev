@@ -1,55 +1,55 @@
 <%= render(Shared::ResourceItemComponent.new(component_attributes)) do |c| %>
-  <% c.first_footer_item do  %>
-    <%= render partial: 'budgets/investments/investment_status_callout', locals: { investment: budget_investment } %>
-
-    <% if budget_investment.feasible? %>
-      <% if budget_investment.should_show_votes? %>
-        <div id="<%= dom_id(budget_investment) %>_votes" class="budget-item--vote-button">
-          <%= render Budgets::Investments::VotesComponent.new(budget_investment) %>
-        </div>
-      <% elsif budget_investment.should_show_ballots? %>
-        <div id="<%= dom_id(budget_investment) %>_ballot" class="budget-investment-ballot">
-          <%= render Budgets::Investments::BallotComponent.new(
-            investment: budget_investment,
-            investment_ids: budget_investment.budget.investments.ids,
-            ballot: @ballot,
-            top_level_active_projekts: @top_level_active_projekts,
-            top_level_archived_projekts: @top_level_archived_projekts
-          ) %>
-        </div>
-      <% elsif budget_investment.final_winner? %>
-        <i class="fas budget-investment-status-icon -winner fa-trophy"></i>
-      <% end %>
-    <% end %>
-
-    <% if budget_investment.unfeasible? && budget_investment.budget.finished? %>
-      <i class="fas budget-investment-status-icon fa-minus-circle"></i>
-    <% end %>
-  <% end %>
-
-  <% if budget_investment.feasible? %>
-    <% if budget_investment.should_show_price? && !budget_investment.should_show_votes? && !budget_investment.should_show_ballots? %>
-      <% c.second_footer_item do  %>
-        <div id="<%= dom_id(budget_investment) %>_price" class="supports">
-          <div class="supports">
-            <span class="total-supports no-button price">
-              <%= budget_investment.formatted_price %>
-            </span>
-          </div>
-        </div>
-      <% end %>
-
-    <% elsif !budget_investment.should_show_votes? && !budget_investment.should_show_ballots? && budget_investment.should_show_vote_count? %>
-      <% c.second_footer_item do  %>
-        <div id="<%= dom_id(budget_investment) %>_votes" class="">
-          <div class="supports js-participation">
-            <span class="total-supports no-button">
-              <%= t("budgets.investments.investment.supports",
-                    count: budget_investment.total_votes) %>
-            </span>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-  <% end %>
+  <%# <% c.first_footer_item do  %>
+  <%#   <%= render partial: 'budgets/investments/investment_status_callout', locals: { investment: budget_investment } %>
+  <%#
+  <%#   <% if budget_investment.feasible? %>
+  <%#     <% if budget_investment.should_show_votes? %>
+  <%#       <div id="<%= dom_id(budget_investment) %>_votes" class="budget-item--vote-button">
+  <%#         <%= render Budgets::Investments::VotesComponent.new(budget_investment) %>
+  <%#       </div>
+  <%#     <% elsif budget_investment.should_show_ballots? %>
+  <%#       <div id="<%= dom_id(budget_investment) %>_ballot" class="budget-investment-ballot">
+  <%#         <%= render Budgets::Investments::BallotComponent.new(
+  <%#           investment: budget_investment,
+  <%#           investment_ids: budget_investment.budget.investments.ids,
+  <%#           ballot: @ballot,
+  <%#           top_level_active_projekts: @top_level_active_projekts,
+  <%#           top_level_archived_projekts: @top_level_archived_projekts
+  <%#         ) %>
+  <%#       </div>
+  <%#     <% elsif budget_investment.final_winner? %>
+  <%#       <i class="fas budget-investment-status-icon -winner fa-trophy"></i>
+  <%#     <% end %>
+  <%#   <% end %>
+  <%#
+  <%#   <% if budget_investment.unfeasible? && budget_investment.budget.finished? %>
+  <%#     <i class="fas budget-investment-status-icon fa-minus-circle"></i>
+  <%#   <% end %>
+  <%# <% end %>
+  <%#
+  <%# <% if budget_investment.feasible? %>
+  <%#   <% if budget_investment.should_show_price? && !budget_investment.should_show_votes? && !budget_investment.should_show_ballots? %>
+  <%#     <% c.second_footer_item do  %>
+  <%#       <div id="<%= dom_id(budget_investment) %>_price" class="supports">
+  <%#         <div class="supports">
+  <%#           <span class="total-supports no-button price">
+  <%#             <%= budget_investment.formatted_price %>
+  <%#           </span>
+  <%#         </div>
+  <%#       </div>
+  <%#     <% end %>
+  <%#
+  <%#   <% elsif !budget_investment.should_show_votes? && !budget_investment.should_show_ballots? && budget_investment.should_show_vote_count? %>
+  <%#     <% c.second_footer_item do  %>
+  <%#       <div id="<%= dom_id(budget_investment) %>_votes" class="">
+  <%#         <div class="supports js-participation">
+  <%#           <span class="total-supports no-button">
+  <%#             <%= t("budgets.investments.investment.supports",
+  <%#                   count: budget_investment.total_votes) %>
+  <%#           </span>
+  <%#         </div>
+  <%#       </div>
+  <%#     <% end %>
+  <%#   <% end %>
+  <%# <% end %>
 <% end %>

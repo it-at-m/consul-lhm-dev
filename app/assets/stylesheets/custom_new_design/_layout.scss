@@ -1,11 +1,11 @@
 .custom-new-design {
-  .layout-main-column {
+  .main-column {
     width: 100%;
     max-width: 925px;
     margin-right: 20px;
   }
 
-  .layout-full-width-column {
+  .full-width-column {
     width: 100%;
   }
 
@@ -26,13 +26,13 @@
   }
 
   @media screen and (max-width: $small-tablet-viewport-start) {
-    .layout-main-column {
+    .main-column {
       margin-right: auto;
     }
   }
 
   @media (max-width: $mobile-viewport-start) {
-    .layout-main-column {
+    .main-column {
     }
   }
 }

@@ -2,7 +2,7 @@
   <%= t("proposals.index.title") %>
 </h1>
 <div class="flex-column">
-  <div class="layout-main-column">
+  <div class="main-column">
     <% if controller_name == 'proposals' %>
       <% if extended_feature?("proposals.intro_text_for_proposals") %>
         <div class="resource-page--intro-text">
@@ -14,7 +14,7 @@
 </div>
 
 <div class="flex-layout">
-  <div class="layout-main-column">
+  <div class="main-column">
       <%= render(
         Shared::ResourcesListComponent.new(
           resources: @proposals,

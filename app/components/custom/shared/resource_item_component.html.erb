@@ -12,50 +12,60 @@
 <% end %>
 
 <div class="resource-item <%= component_class_name %>">
-  <div class="resource-item--head-title">
-    <% if @projekt.present? %>
-      <div class="resource-item--head-title-projekt">
-        <%= @projekt.page.title %>
-      </div>
-      <div class="resource-item--head-title-projekt-breadcrumbs">
-        <%= helpers.breadcrumbs_links(@projekt, ">", false) %>
-      </div>
-      <%# <% if resource.projekt.overview_page? %>
-        <%#   <%= t("custom.projekts.overview_page.projekt_name_for_proposal") %>
-      <% elsif @head_title.present? || additional_head_title_element.present? %>
-        <%= @head_title %>
-        <%= additional_head_title_element %>
-      <% else %>
-        <div class="resource-item--date">
-          <% if days_left.present? %>
-            <%= days_left %>
-          <% elsif date.present? %>
-            <%= date %>
-          <% end %>
-        </div>
-      <% end %>
-
-      <% if @author.present? %>
-        <div class="resource-item--author-in-wide-head-title">
-          <%= author_name_html %>
-        </div>
-      <% end %>
+  <div class="resource-item--header">
+    <%= header_content %>
+    <%# <% if @projekt.present? %>
+    <%#   <div class="resource-item--header-projekt">
+    <%#     <%= @projekt.page.title %>
+    <%#   </div>
+    <%#   <div class="resource-item--header-projekt-breadcrumbs">
+    <%#     <%= helpers.breadcrumbs_links(@projekt, ">", false) %>
+    <%#   </div>
+    <%#   <%# <% if resource.projekt.overview_page? %>
+    <%#     <%#   <%= t("custom.projekts.overview_page.projekt_name_for_proposal") %>
+    <%#   <% elsif @head_title.present? || additional_head_title_element.present? %>
+    <%#     <%= @head_title %>
+    <%#     <%= additional_head_title_element %>
+    <%#   <% else %>
+    <%#     <div class="resource-item--date">
+    <%#       <% if days_left.present? %>
+    <%#         <%= days_left %>
+    <%#       <% elsif date.present? %>
+    <%#         <%= date %>
+    <%#       <% end %>
+    <%#     </div>
+    <%#   <% end %>
+    <%#
+    <%#   <% if @author.present? %>
+    <%#     <div class="resource-item--author-in-wide-head-title">
+    <%#       <%= author_name_html %>
+    <%#     </div>
+    <%#   <% end %>
   </div>
 
   <a href="<%= @url %>" class="resource-item--image-container">
-    <% if image_ontop_item.present? %>
-      <div class="resource-item--image-ontop-item-container">
-        <%= image_ontop_item %>
+    <% if image_overlay_item.present? %>
+      <div class="resource-item--image-overlay-item-container">
+        <%= image_overlay_item %>
       </div>
     <% end %>
 
-    <%= render(
-      Shared::ResourceImageComponent.new(
-        image_url: @image_url,
-        image_placeholder_icon_class: @image_placeholder_icon_class,
-        resource_name: @resource_name)
-    )
-  %>
+    <div class="resource-item--card-image">
+      <%= render(
+        Shared::ResourceImageComponent.new(
+          image_url: @card_image_url,
+          image_placeholder_icon_class: @image_placeholder_icon_class,
+          resource_name: @resource_name)
+      ) %>
+    </div>
+    <div class="resource-item--horizontal-image">
+      <%= render(
+        Shared::ResourceImageComponent.new(
+          image_url: @horizontal_image_url,
+          image_placeholder_icon_class: @image_placeholder_icon_class,
+          resource_name: @resource_name)
+      ) %>
+    </div>
   </a>
 
   <div class="resource-item--content">
@@ -102,44 +112,35 @@
                 <% end %>
               <% end %>
             </div>
-
-            <% if additional_body.present? %>
-              <div class="resource-item--additional-body">
-                <%= additional_body %>
-              </div>
-            <% end %>
           </div>
         </div>
 
+        <% if additional_body_sections.any? %>
+          <% additional_body_sections.each do |additional_body_section| %>
+            <div class="resource-item--additional-body-section">
+              <%= additional_body_section %>
+            </div>
+          <% end %>
+        <% end %>
+
         <%= author_name_html %>
 
-        <% if @sdgs.present? %>
-          <div class="resource-item--sdgs resource-item--sdgs-in-card">
-            <%= render SDG::FilterLinksComponent.new(@sdgs, Projekt) %>
-          </div>
-        <% end %>
       </div>
-      <% if show_footer? %>
+      <% if footer_items.any? %>
         <div class="resource-item--footer">
-          <% if first_footer_item.present? %>
+          <% footer_items.each do |footer_item| %>
             <div class="resource-item--footer-section">
-              <%= first_footer_item %>
+              <%= footer_item %>
             </div>
           <% end %>
 
-          <% if second_footer_item.present? %>
-            <div class="resource-item--footer-section">
-              <%= second_footer_item %>
-            </div>
-          <% end %>
-
-          <% if additional_body.present? %>
-            <div class="resource-item--footer-section resource-item--additional-body-in-footer">
-              <div class="resource-item--additional-body">
-                <%= additional_body %>
-              </div>
-            </div>
-          <% end %>
+          <%# <% if additional_body.present? %>
+          <%#   <div class="resource-item--footer-section resource-item--additional-body-section-in-footer">
+          <%#     <div class="resource-item--additional-body-section">
+          <%#       <%= additional_body %>
+          <%#     </div>
+          <%#   </div>
+          <%# <% end %>
         </div>
       <% end %>
     </div>

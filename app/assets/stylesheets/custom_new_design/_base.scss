@@ -14,8 +14,11 @@ html{
   body.custom-new-design {
     .wrapper, .footer, .top-bar {
       width: 100%;
-      max-width: 1245px;
       margin: auto;
+    }
+
+    main, .footer, .top-bar {
+      max-width: 1245px;
     }
 
     .header {

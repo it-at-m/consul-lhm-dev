@@ -58,7 +58,7 @@
   <% if @custom_page.projekt.present? && @custom_page.projekt.projekt_phases.active.any? %>
     <% projekt_footer = capture do %>
       <div class="projekt-footer flex-layout">
-        <div class="layout-full-width-column">
+        <div class="full-width-column">
           <%= render Pages::Projekts::FooterPhasesComponent.new(@custom_page.projekt, @default_phase_name) %>
           <div id="footer-content" class="js-projekt-footer-content">
             <%= render 'shared/loader_spinner' %>
@@ -72,19 +72,19 @@
   <% if @custom_page.projekt.present? %>
     <div class="show-on-desktop">
       <div class="flex-layout">
-        <div class="layout-main-column">
+        <div class="main-column">
           <%= projekt_content %>
         </div>
         <% if @custom_page.projekt.present? %>
-          <div class="projekt-sidebar margin-bottom">
-            <%= render partial: 'pages/sidebar_new', locals: { projekt: @custom_page.projekt, id_prefix: "desktop" } %>
-          </div>
+          <!-- <div class="projekt-sidebar margin-bottom"> -->
+          <%= render partial: 'pages/sidebar_new', locals: { projekt: @custom_page.projekt, id_prefix: "desktop" } %>
+          <!-- </div> -->
         <% end %>
       </div>
     </div>
   <% else %>
     <div class="show-on-desktop">
-      <div class="layout-main-column">
+      <div class="main-column">
         <%= render 'custom_page_content' %>
       </div>
     </div>
@@ -106,7 +106,7 @@
         <div class="mobile-projekt-tabs-content tabs-content" data-tabs-content="example-tabs">
           <div class="tabs-panel is-active" id="projekt-mobile-description-tab">
             <div class="flex-layout">
-              <div class="layout-main-column">
+              <div class="main-column">
                 <%= projekt_content %>
               </div>
             </div>

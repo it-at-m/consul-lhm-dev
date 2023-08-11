@@ -8,7 +8,7 @@
   <%= t("polls.index.title") %>
 </h1>
 <div class="flex-column">
-  <div class="layout-main-column">
+  <div class="main-column">
     <% if extended_feature?("polls.intro_text_for_debates") %>
       <div class="resource-page--intro-text">
         <%= render_custom_block('debates_index_welcome', default_content: t("custom.polls.index.welcome_default_text")) %>
@@ -18,7 +18,7 @@
 </div>
 
 <div class="flex-layout">
-  <div class="layout-main-column">
+  <div class="main-column">
     <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
       <%= link_to t('polls.index.section_header.help'), '#section_help' %>
     <% end %>

@@ -17,7 +17,7 @@
 <main>
   <div id="<%= dom_id(@debate) %>">
     <div class="flex-layout">
-      <div class="layout-main-column">
+      <div class="main-column">
         <h1 class="resource-page--title"><%= "#{@debate.author.name} startet eine Diskussion"  %></h1>
         <div class="resource-page--title-subline">
           <%= render_custom_block('debate_show_welcome_text', custom_prefix: @debate.author.name , default_content: t('custom.debates.show.welcome_default_text')) %>
@@ -34,7 +34,7 @@
     </div>
 
     <div class="flex-layout">
-      <div class="layout-main-column">
+      <div class="main-column">
         <%= render ResourcePage::BannerComponent.new(resource: @debate) %>
 
         <div class="resource-page--description new-card">

@@ -1,12 +1,12 @@
 <%= render(Shared::ResourceItemComponent.new(component_attributes)) do |c| %>
-  <% c.first_footer_item do  %>
-    <div id="<%= dom_id(@debate) %>_votes">
-      <%= render Debates::VotesComponent.new(debate) %>
-    </div>
-  <% end %>
-  <% c.second_footer_item do  %>
-    <div id="<%= dom_id(@debate) %>_votes_count">
-      <%= t("debates.debate.votes", count: @debate.votes_score) %>
-    </div>
-  <% end %>
+  <%# <% c.first_footer_item do  %>
+  <%#   <div id="<%= dom_id(@debate) %>_votes">
+  <%#     <%= render Debates::VotesComponent.new(debate) %>
+  <%#   </div>
+  <%# <% end %>
+  <%# <% c.second_footer_item do  %>
+  <%#   <div id="<%= dom_id(@debate) %>_votes_count">
+  <%#     <%= t("debates.debate.votes", count: @debate.votes_score) %>
+  <%#   </div>
+  <%# <% end %>
 <% end %>

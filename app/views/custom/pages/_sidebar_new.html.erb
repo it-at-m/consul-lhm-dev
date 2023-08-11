@@ -1,4 +1,4 @@
-<div class="sidebar">
+<aside class="sidebar">
   <% show_admin_controlls = (current_user && current_user.email.in?(@partner_emails) || current_user.present? && current_user.administrator? ||  current_user.present? && current_user.projekt_manager? || current_user.present? && (current_user.administrator? || (current_user.projekt_manager? && can?(:edit, @projekt)))) %>
 
   <% if show_admin_controlls %>
@@ -63,4 +63,4 @@
       %>
     <% end %>
   <% end %>
-</div>
+</aside>
