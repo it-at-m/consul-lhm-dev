@@ -16,8 +16,8 @@
 
 <main>
   <div id="<%= dom_id(@debate) %>">
-    <div class="layout-main-column">
-      <div class="layout-left-column">
+    <div class="flex-layout">
+      <div class="layout-main-column">
         <h1 class="resource-page--title"><%= "#{@debate.author.name} startet eine Diskussion"  %></h1>
         <div class="resource-page--title-subline">
           <%= render_custom_block('debate_show_welcome_text', custom_prefix: @debate.author.name , default_content: t('custom.debates.show.welcome_default_text')) %>
@@ -33,8 +33,8 @@
       <div class="sidebar-placeholder"></div>
     </div>
 
-    <div class="layout-main-column">
-      <div class="layout-left-column">
+    <div class="flex-layout">
+      <div class="layout-main-column">
         <%= render ResourcePage::BannerComponent.new(resource: @debate) %>
 
         <div class="resource-page--description new-card">
@@ -46,7 +46,7 @@
         <% end %>
 
         <% if projekt_feature?(@debate.projekt, 'debates.show_comments') %>
-          <%= render Shared::CommentsComponent.new(@debate, @comment_tree) %>
+          <%= render Shared::NewCommentsComponent.new(@debate, @comment_tree) %>
         <% end %>
       </div>
     <aside class="sidebar">

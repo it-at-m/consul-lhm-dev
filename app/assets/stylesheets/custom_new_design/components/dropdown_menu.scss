@@ -67,7 +67,7 @@
       &:hover,
       &:active,
       &:focus {
-        background-color: #f2f2f2;
+        background-color: var(--dropdown-hover-color);
       }
 
       & > * {

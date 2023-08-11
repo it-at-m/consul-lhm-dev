@@ -1,7 +1,7 @@
 <%= render 'shared/loader_spinner' %>
 
-<div class="layout-main-column budgets-page">
-  <div class="layout-left-column">
+<div class="flex-layout budgets-page">
+  <div class="layout-main-column">
     <% if @current_projekt.budget.present? %>
       <%= render Pages::Projekts::BudgetsTabComponent.new(@budget, @ballot, current_user) %>
 

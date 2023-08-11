@@ -37,7 +37,7 @@ module PollsHelper
     remaining_days = (poll.ends_at.to_date - Date.today).to_i
 
     if remaining_days > 0
-      t("custom.polls.poll.days_left", count: (@poll.ends_at.to_date - Date.today).to_i )
+      t("custom.polls.poll.days_left", count: (poll.ends_at.to_date - Date.today).to_i )
     elsif remaining_days == 0
       t("custom.polls.poll.expires_today")
     else

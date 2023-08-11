@@ -1,5 +1,15 @@
 <%= content_for :body_class, "js-new-resource" %>
 
-<div class='row'>
-  <%= render Proposals::NewComponent.new(@proposal, @selected_projekt) %>
-</div>
+<% if Setting.new_design_enabled? %>
+  <%= render UserResources::FormComponent.new(
+    @proposal,
+    url: proposals_path,
+    selected_projekt: @selected_projekt,
+    title: t("new.start_new", scope: 'proposals'),
+    categories: @categories
+  ) %>
+<% else %>
+  <div class='row'>
+    <%= render Proposals::NewComponent.new(@proposal, @selected_projekt) %>
+  </div>
+<% end %>

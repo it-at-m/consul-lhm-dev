@@ -1,0 +1,160 @@
+<%= content_for :body_class, "proposals-show" %>
+<% preview = false unless local_assigns.has_key? :preview %>
+<% provide :title do %><%= @proposal.title %><% end %>
+<% content_for :meta_description do %>
+  <%= projekt_feature?(@proposal.projekt, 'proposals.enable_summary') ? @proposal.summary : strip_tags(@proposal.description)[0..200] %>
+<% end %>
+<% provide :social_media_meta_tags do %>
+  <%= render "shared/social_media_meta_tags",
+              social_url: proposal_url(@proposal),
+              social_title: @proposal.title,
+              social_description: projekt_feature?(@proposal.projekt, 'proposals.enable_summary') ? @proposal.summary : strip_tags(@proposal.description)[0..200],
+              twitter_image_url: (@proposal.image.present? ? polymorphic_path(@proposal.image) : nil),
+              og_image_url: (@proposal.image.present? ? polymorphic_path(@proposal.image) : nil) %>
+<% end %>
+<% content_for :canonical do %>
+  <%= render "shared/canonical", href: proposal_url(@proposal) %>
+<% end %>
+
+<main>
+
+  <div id="<%= dom_id(@proposal) %>" >
+    <div class="flex-layout">
+      <div class="layout-main-column">
+        <h1 class="resource-page--title"><%= "#{@proposal.author.name} startet eine Diskussion"  %></h1>
+        <div class="common-page-description">
+          <%= render_custom_block('debate_show_welcome_text', custom_prefix: @proposal.author.name , default_content: t('custom.proposals.show.welcome_default_text')) %>
+        </div>
+
+        <% if @proposal.conflictive? %>
+          <div data-alert class="callout alert margin-top">
+            <strong><%= t("proposals.show.flag") %></strong>
+          </div>
+        <% end %>
+
+      </div>
+      <div class="sidebar-placeholder"></div>
+    </div>
+
+    <div class="flex-layout">
+      <div class="layout-main-column">
+        <%= render ResourcePage::BannerComponent.new(resource: @proposal)  %>
+
+        <div class="resource-page--description new-card">
+          <%= auto_link_already_sanitized_html wysiwyg(@proposal.description) %>
+        </div>
+
+        <% if projekt_feature?(@proposal.projekt, 'proposals.show_related_content') %>
+          <%= render "relationable/related_content", relationable: @proposal %>
+        <% end %>
+
+        <% if ((projekt_feature?(@proposal&.projekt, 'proposals.show_comments') ||
+            projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab') ||
+            projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_milestones_tab')) && !preview) %>
+
+          <div class="tabs-content" data-tabs-content="proposals_tabs">
+            <% if projekt_feature?(@proposal&.projekt, 'proposals.show_comments') %>
+              <%= render Shared::NewCommentsComponent.new(@proposal, @comment_tree) %>
+            <% end %>
+
+            <% if projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab') %>
+              <div class="tabs-panel <%= 'is-active' if default_active_proposal_footer_tab?('notifications') %>" id="tab-notifications">
+                <%= render "proposals/notifications" %>
+              </div>
+            <% end %>
+
+            <% if projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_milestones_tab') %>
+              <div class="tabs-panel <%= 'is-active' if default_active_proposal_footer_tab?('milestones') %>" id="tab-milestones">
+                <%= render "milestones/milestones", milestoneable: @proposal %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <aside class="sidebar">
+        <%= render Sidebar::ResourceAuthorComponent.new(user: @proposal.author) %>
+        <% if current_user.present? && current_user.administrator? %>
+          <%= render(Shared::SidebarCardComponent.new(title: t("custom.shared.show.admin"), icon_name: "cog")) do |c| %>
+            <div class="js-moderator-proposal-actions">
+              <%= render "actions", proposal: @proposal %>
+            </div>
+          <% end %>
+        <% end %>
+
+        <% if @proposal.editable_by?(current_user) %>
+          <%= render(Shared::SidebarCardComponent.new(title: t("proposals.show.author"), icon_name: "tag")) do |c| %>
+            <% if can?(:dashboard, @proposal) %>
+              <%= link_to proposal_dashboard_path(@proposal),
+                class: "button hollow expanded",
+                id: "proposal-dashboard-#{@proposal.id}" do %>
+                <span class="icon icon-edit"></span>
+                <%= t("proposals.show.dashboard_proposal_link") %>
+              <% end %>
+            <% end %>
+
+            <% if current_editable?(@proposal) %>
+              <%= link_to t("dashboard.index.edit_proposal_link"),
+                edit_proposal_path(@proposal),
+                target: "_blank",
+                class: "button hollow expanded" %>
+            <% end %>
+
+            <% if can?(:publish, @proposal) %>
+              <%= link_to t("dashboard.index.publish"),
+                publish_proposal_path(@proposal),
+                class: "button hollow expanded",
+                method: :patch %>
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <% if projekt_feature?(@proposal&.projekt, 'proposals.show_community_button_in_proposal_sidebar') %>
+          <%= render(Shared::SidebarCardComponent.new(title: t("community.sidebar.title"), icon_name: "tag")) do |c| %>
+            <%= render "communities/access_button", community: @proposal.community %>
+          <% end %>
+        <% end %>
+
+        <% if current_user && projekt_feature?(@proposal&.projekt, 'proposals.show_follow_button_in_proposal_sidebar') %>
+          <%= render(Shared::SidebarCardComponent.new(title: t("shared.follow"), icon_name: "tag")) do |c| %>
+            <p><%= t("custom.shared.show.follow_text") %></p>
+            <%= render "follows/follow_button", follow: find_or_build_follow(current_user, @proposal) %>
+          <% end %>
+        <% end %>
+
+        <% if projekt_feature?(@proposal&.projekt, 'proposals.allow_voting') %>
+          <%= render(Shared::SidebarCardComponent.new(title: "Unterstützer*innen", icon_name: "tag")) do |c| %>
+            <div class="proposal-page--votes">
+              <%= render "proposals/support_status", proposal: @proposal %>
+            </div>
+          <% end %>
+        <% end %>
+
+        <% if @proposal.tags.present? %>
+          <%= render(Shared::SidebarCardComponent.new(title: "Tags", icon_name: "tag")) do |c| %>
+            <%= render "shared/tags", taggable: @proposal, limit: 5 %>
+          <% end %>
+        <% end %>
+
+        <%= render(Shared::SidebarCardComponent.new(title: t("proposals.show.share"), icon_name: "share-alt")) do |c| %>
+          <%= render "shared/social_share",
+            share_title: t("proposals.show.share"),
+            title: @proposal.title,
+            url: debate_url(@proposal),
+            description: @proposal.title,
+            mobile: @proposal.title
+          %>
+      <% end %>
+
+        <% if current_user && projekt_feature?(@proposal.projekt, 'proposals.show_related_content') %>
+          <%= render(Shared::SidebarCardComponent.new(title: t("custom.shared.show.related_title"), icon_name: "share-alt")) do |c| %>
+            <p><%= t("custom.shared.show.related_text") %></p>
+            <%= link_to '#related_content', data: {toggle: "related_content"}, id: "add-related-content", class: "button hollow expanded" do %>
+              <%= t("custom.shared.show.related_button") %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </aside>
+    </div>
+  </div>
+</main>

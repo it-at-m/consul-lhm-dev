@@ -1,8 +1,7 @@
 <main class="user-resources-form">
   <%= translatable_form_for(resource, html: { class: "debate-form" }) do |f| %>
-    <div class="layout-main-column">
-      <div class="layout-left-column">
-
+    <div class="flex-layout">
+      <div class="layout-main-column">
         <%= back_path %>
 
         <h1 class="user-resources-form--title">
@@ -50,37 +49,50 @@
           %>
       <% end %>
 
-        <% if render_map? %>
-          <div class="new-card" id='map-container'>
-            <%= render "map_locations/form_fields",
-              form:     f,
-              map_location: resource.map_location || MapLocation.new,
-              help: t("custom.#{i18n_scope}.form.map_location_instructions"),
-              remove_marker_label: t("proposals.form.map_remove_marker"),
-              parent_class: "proposal",
-              i18n_namespace: "proposals"
-            %>
+      <% if render_map? %>
+        <div class="new-card" id='map-container'>
+          <%= render "map_locations/form_fields",
+            form:     f,
+            map_location: resource.map_location || MapLocation.new,
+            label: t("#{i18n_scope}.form.map_location"),
+            help: t("custom.#{i18n_scope}.form.map_location_instructions"),
+            remove_marker_label: t("proposals.form.map_remove_marker"),
+            mappable: resource,
+            projekt:  @selected_projekt,
+            projekt_phase:  resource.projekt_phase,
+            parent_class: "proposal",
+            i18n_namespace: "proposals"
+          %>
+        </div>
+      <% end %>
+
+      <div class="user-resources-form--submit-section">
+        <% if resource.new_record? %>
+          <h3 class="user-resources-form--submit-section--privacy-policy">
+            Datenschutzbestimmungen & Allgemeine Nutzerbedingungen
+          </h3>
+
+          <div>
+            <%= f.check_box :resource_terms,
+              title: t("custom.terms.resource_terms.title"),
+              label: t("custom.terms.resource_terms.label",
+                       privacy_link: link_to(
+                         t("custom.terms.privacy_link.text"), "/privacy",
+                         title: t("shared.target_blank"),
+                         target: "_blank"
+                       ),
+                       terms_link: link_to(
+                         t("custom.terms.terms_link.text"),
+                         "/conditions",
+                         title: t("shared.target_blank"),
+                         target: "_blank"
+                       )
+                      ) %>
           </div>
         <% end %>
 
-        <div class="user-resources-form--submit-section">
-          <% if resource.new_record? %>
-            <h3 class="user-resources-form--submit-section--privacy-policy">
-              Datenschutzbestimmungen & Allgemeine Nutzerbedingungen
-            </h3>
-
-            <div>
-              <%= f.check_box :terms_of_service,
-                title: t("form.accept_terms_title"),
-                label: t("form.accept_terms",
-                         policy: link_to(t("form.policy"), "/privacy", target: "blank"),
-                         conditions: link_to(t("form.conditions"), "/conditions", target: "blank")
-                        ) %>
-            </div>
-          <% end %>
-
-          <%= f.submit(class: "button", value: t("#{i18n_scope}.#{action_name}.form.submit_button")) %>
-        </div>
+        <%= f.submit(class: "button", value: t("#{i18n_scope}.#{action_name}.form.submit_button")) %>
+      </div>
       </div>
 
       <aside class="sidebar">
@@ -93,7 +105,7 @@
             <div class="sidebar-card--section">
               <div class="sidebar-card--header">
                 <i class="fa fa-code-branch"></i>
-                 Projektzuordnung
+                Projektzuordnung
               </div>
               <% if @selected_projekt&.overview_page? %>
                 <%= f.hidden_field :projekt_id, value: @selected_projekt.id %>
@@ -109,7 +121,7 @@
             <div class="sidebar-card--section">
               <div class="sidebar-card--header">
                 <i class="fa fa-file"></i>
-                 Dokumente hinzufügen
+                Dokumente hinzufügen
               </div>
               <div class="documents" id="attach-documents">
                 <%= render "documents/nested_documents", f: f %>
@@ -118,14 +130,14 @@
           </div>
 
           <% if translations_interface_enabled? %>
-            <div class="sidebar-card">
+            <div class="sidebar-card" id="documents-attach-sidebar-card">
               <div class="sidebar-card--section">
                 <div class="sidebar-card--header">
                   <i class="fa fa-language"></i>
                   Sprachen
                 </div>
                 <p>
-                  Wählen Sie aus, in welcher Sprache/welchen Sprachen Ihre Diskussion stattfinden soll:
+                Wählen Sie aus, in welcher Sprache/welchen Sprachen Ihre Diskussion stattfinden soll:
                 </p>
                 <%= render "shared/globalize_locales", resource: resource %>
               </div>
@@ -136,11 +148,11 @@
             <div class="sidebar-card--section">
               <div class="sidebar-card--header">
                 <i class="fa fa-video"></i>
-                 Video hinzufügen
+                Video hinzufügen
               </div>
               <p>
-                Gibt es Videos, die Ihre Argumentation und Sichtweise stützen?
-                Dann fügen Sie diese über einen Link hinzu.
+              Gibt es Videos, die Ihre Argumentation und Sichtweise stützen?
+              Dann fügen Sie diese über einen Link hinzu.
               </p>
               <%= f.text_field :video_url, label: false, placeholder: 'YouTube oder Vimeo-Link eingeben', class: 'light-input' %>
             </div>
@@ -201,7 +213,7 @@
                   Veröffentlichen für
                 </div>
                 <p>
-                  Dieses Feld sehen nur Admin. Sie können hier eine Diskussion im Namen von jemandem erstellen.
+                Dieses Feld sehen nur Admin. Sie können hier eine Diskussion im Namen von jemandem erstellen.
                 </p>
                 <%= f.text_field :on_behalf_of, label: false, placeholder: "Namen eingeben...", class: "light-input" %>
               </div>

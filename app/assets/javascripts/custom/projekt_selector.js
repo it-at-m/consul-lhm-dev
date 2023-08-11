@@ -162,10 +162,14 @@
       }
 
       function toggleDocumentAttachment($projektPhase) {
+        var $sidebarCard = $('#documents-attach-sidebar-card');
+
         if ( $projektPhase.data('allowAttachedDocument') ) {
           $('#attach-documents').show();
+          $sidebarCard.show();
         } else {
           $('#attach-documents').hide();
+          $sidebarCard.hide();
         }
       }
 

@@ -42,6 +42,12 @@ class PollsController < ApplicationController
 
     @commentable = @poll
     @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
+
+    if Setting.new_design_enabled?
+      render :show_new
+    else
+      render :show
+    end
   end
 
   def stats

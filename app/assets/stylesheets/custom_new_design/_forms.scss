@@ -51,4 +51,14 @@
   #select_language {
     margin-bottom: 5px;
   }
+
+  form [type]:not([type="button"], [type=checkbox], [type=file], [type=radio], [type=submit]) {
+    height: 37px;
+  }
+
+  form select {
+    height: 37px;
+    max-height: 37px;
+    min-height: 0;
+  }
 }

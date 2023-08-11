@@ -2,7 +2,7 @@
   header {
     padding: 0;
     background: transparent !important;
-    z-index: 100;
+    z-index: 1000;
 
     .main-menu {
       display: flex;
@@ -129,6 +129,10 @@ body.custom-new-design > header, .custom-new-design .wrapper > header {
 
   .header--navigation ul.main-menu .nav-flyout-block .projekt-name {
     color: black !important;
+
+    &:hover {
+      color: #2a2a2a !important;
+    }
   }
 
   .header--navigation  ul.nav-flyout-block li.nav-element a {
@@ -451,11 +455,11 @@ body.custom-new-design > header, .custom-new-design .wrapper > header {
       cursor: pointer;
 
       &:hover {
-        background-color: #f2f2f2;
+        background-color: var(--dropdown-hover-color);
       }
 
       &:active {
-        background-color: #eaeaea;
+        background-color: var(--dropdown-active-color);
       }
 
       a {

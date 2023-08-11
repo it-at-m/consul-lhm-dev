@@ -1,5 +1,5 @@
 .custom-new-design {
-  .layout-left-column {
+  .layout-main-column {
     width: 100%;
     max-width: 925px;
     margin-right: 20px;
@@ -9,7 +9,7 @@
     width: 100%;
   }
 
-  .layout-main-column {
+  .flex-layout {
     display: flex;
     justify-content: space-between;
   }
@@ -19,20 +19,20 @@
   }
 
   @media screen and (max-width: $big-tablet-viewport-start) {
-    .layout-main-column {
+    .flex-layout {
       padding: 0 25px;
       flex-direction: column-reverse;
     }
   }
 
   @media screen and (max-width: $small-tablet-viewport-start) {
-    .layout-left-column {
+    .layout-main-column {
       margin-right: auto;
     }
   }
 
   @media (max-width: $mobile-viewport-start) {
-    .layout-left-column {
+    .layout-main-column {
     }
   }
 }

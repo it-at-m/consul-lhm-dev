@@ -1,3 +1,13 @@
 <%= content_for :body_class, "js-new-resource" %>
 
-<%= render Debates::NewComponent.new(@debate, @selected_projekt) %>
+<% if Setting.new_design_enabled? %>
+  <%= render UserResources::FormComponent.new(
+    @debate,
+    url: debates_path,
+    selected_projekt: @selected_projekt,
+    title: t("new.start_new", scope: 'debates'),
+    categories: @categories
+  ) %>
+<% else %>
+  <%= render Debates::NewComponent.new(@debate, @selected_projekt) %>
+<% end %>

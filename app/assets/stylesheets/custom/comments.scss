@@ -42,3 +42,14 @@
 .comment-votes .against button.voted_down {
   color: #ef8585;
 }
+
+.comment-form {
+  .checkbox-label {
+    margin-right: 15px;
+
+    .checkbox {
+      user-select: none;
+      cursor: pointer;
+    }
+  }
+}

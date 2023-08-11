@@ -1,0 +1,42 @@
+<%= provide :title, t("social_share.polls_show.title_#{@poll.id}", default: @poll.title) %>
+<%= provide :meta_description, t("social_share.polls_show.description_#{@poll.id}", default: @poll.title) %>
+<%= provide :social_media_meta_tags do %>
+  <%= render "shared/social_media_meta_tags",
+              social_url: poll_url,
+              social_title: t("social_share.polls_show.title_#{@poll.id}", default: @poll.title),
+              social_description: t("social_share.polls_show.facebook_#{@poll.id}", default: @poll.title),
+              twitter_image_url:  "social_media_polls_twitter.jpg",
+              og_image_url: "social_media_polls.jpg" %>
+<% end %>
+
+<main>
+  <div id="<%= dom_id(@poll) %>">
+    <div class="flex-layout">
+      <div class="layout-main-column">
+        <h1 class="resource-page--title"><%= "#{@poll.author.name} startet eine Diskussion"  %></h1>
+        <div class="resource-page--title-subline">
+          <%= render_custom_block('debate_show_welcome_text', custom_prefix: @poll.author.name , default_content: t('custom.debates.show.welcome_default_text')) %>
+        </div>
+
+      </div>
+      <div class="sidebar-placeholder"></div>
+    </div>
+
+    <div class="flex-layout">
+      <div class="layout-main-column">
+        <%= render ResourcePage::BannerComponent.new(resource: @poll) %>
+
+        <div class="resource-page--description new-card">
+          <%= auto_link_already_sanitized_html wysiwyg(@poll.description) %>
+        </div>
+
+        <% if projekt_feature?(@poll.projekt, 'debates.show_comments') %>
+          <%= render Shared::NewCommentsComponent.new(@poll, @comment_tree) %>
+        <% end %>
+      </div>
+    <aside class="sidebar">
+    </aside>
+    </div>
+  </div>
+</main>
+

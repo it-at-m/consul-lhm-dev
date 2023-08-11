@@ -1,17 +1,17 @@
 .custom-new-design {
-  .user-resource-form--title {
+  .user-resources-form--title {
     font-weight: 500;
     font-size: 35px;
   }
 
-  .user-resource-form--description {
+  .user-resources-form--description {
     margin-bottom: 30px;
   }
 
-  .user-resource-form {
+  .user-resources-form {
   }
 
-  .user-resource-form--banner-editor {
+  .user-resources-form--banner-editor {
     width: 100%;
     background-color: #D9F0EB;
     padding-top: 30px;
@@ -77,7 +77,7 @@
     }
   }
 
-  .user-resource-form--title-wrapper {
+  .user-resources-form--title-wrapper {
     width: 50%;
 
     .form-error {
@@ -85,7 +85,7 @@
     }
   }
 
-  textarea.user-resource-form--banner-editor-title {
+  textarea.user-resources-form--banner-editor-title {
     background: transparent !important;
     height: 3rem;
     border: none;
@@ -122,7 +122,7 @@
     padding-top: 45px;
   }
 
-  .user-resource-form--banner-editor {
+  .user-resources-form--banner-editor {
     .images {
       position: relative;
       background: #e2e2e2;
@@ -149,11 +149,11 @@
     }
   }
 
-  .user-resource-form--submit-section {
+  .user-resources-form--submit-section {
     margin-top: 45px;
   }
 
-  .user-resource-form--submit-section--privacy-policy {
+  .user-resources-form--submit-section--privacy-policy {
     font-size: 25px;
     color: black;
     border-bottom: 1px solid $border;
