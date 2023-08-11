@@ -1,15 +1,9 @@
-class Admin::ProjektPhaseMilestonesController < Admin::MilestonesController
+class Admin::ProjektPhaseMilestonesController < Admin::BaseController
+  include ProjektMilestoneActions
+
   private
 
-    def milestoneable
-      ProjektPhase.find(params[:projekt_phase_id])
-    end
-
-    def milestoneable_path
-      namespaced_polymorphic_path(namespace, @milestoneable, action: :milestones)
-    end
-
-    def namespace
-      :admin
+    def set_namespace
+      @namespace ||= :admin
     end
 end

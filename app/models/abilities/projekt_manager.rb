@@ -5,8 +5,7 @@ module Abilities
     def self.resources_to_manage
       [
         ProjektQuestion, ProjektNotification, ProjektEvent, ProjektLivestream, ProjektArgument,
-        ProjektLabel, Sentiment,
-        Milestone, ProgressBar
+        ProjektLabel, Sentiment
       ]
     end
 
@@ -18,12 +17,24 @@ module Abilities
       end
 
       can(:manage, Abilities::ProjektManager.resources_to_manage) do |resource|
+        debugger
         resource.projekt_phase.present? &&
           can?(:edit, resource.projekt_phase.projekt)
       end
 
       can([:update, :update_standard_phase], ProjektSetting) do |ps|
         can? :edit, ps.projekt
+      end
+
+      can(:manage, Milestone) do |milestone|
+        milestone.milestoneable.is_a?(ProjektPhase::MilestonePhase) &&
+          can?(:edit, milestone.milestoneable.projekt)
+      end
+
+      can(:manage, ProgressBar) do |progress_bar|
+        debugger
+        progress_bar.milestoneable.is_a?(ProjektPhase) &&
+          can?(:edit, milestone.milestoneable.projekt)
       end
 
       can(:manage, ProjektPhase) do |pp|
