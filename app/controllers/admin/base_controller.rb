@@ -3,7 +3,7 @@ class Admin::BaseController < ApplicationController
   before_action :authenticate_user!
 
   skip_authorization_check
-  before_action :verify_administrator
+  before_action :verify_administrator, :set_namespace
 
   private
 
@@ -21,5 +21,9 @@ class Admin::BaseController < ApplicationController
 
     def projekt_setting_update_action
       controller_name == "projekt_settings" && action_name == "update"
+    end
+
+    def set_namespace
+      @namespace ||= :admin
     end
 end

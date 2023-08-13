@@ -2,7 +2,7 @@ class ProjektManagement::BaseController < ApplicationController
   layout "projekt_management"
   before_action :authenticate_user!
 
-  before_action :verify_projekt_manager
+  before_action :verify_projekt_manager, :set_namespace
 
   helper_method :projekt_manager
 
@@ -14,5 +14,9 @@ class ProjektManagement::BaseController < ApplicationController
 
     def projekt_manager
       @projekt_manager ||= current_user.projekt_manager
+    end
+
+    def set_namespace
+      @namespace ||= :projekt_management
     end
 end

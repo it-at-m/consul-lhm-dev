@@ -17,7 +17,6 @@ module Abilities
       end
 
       can(:manage, Abilities::ProjektManager.resources_to_manage) do |resource|
-        debugger
         resource.projekt_phase.present? &&
           can?(:edit, resource.projekt_phase.projekt)
       end
@@ -32,9 +31,8 @@ module Abilities
       end
 
       can(:manage, ProgressBar) do |progress_bar|
-        debugger
-        progress_bar.milestoneable.is_a?(ProjektPhase) &&
-          can?(:edit, milestone.milestoneable.projekt)
+        progress_bar.progressable.is_a?(ProjektPhase) &&
+          can?(:edit, progress_bar.progressable.projekt)
       end
 
       can(:manage, ProjektPhase) do |pp|

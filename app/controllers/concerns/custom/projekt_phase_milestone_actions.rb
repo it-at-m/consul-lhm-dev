@@ -1,11 +1,10 @@
-module ProjektMilestoneActions
+module ProjektPhaseMilestoneActions
   extend ActiveSupport::Concern
   include Translatable
   include ImageAttributes
   include DocumentAttributes
 
   included do
-    before_action :set_namespace, only: [:new, :create, :edit, :update, :destroy]
     before_action :load_milestoneable, only: [:new, :create, :edit, :update, :destroy]
     before_action :load_milestone, only: [:edit, :update, :destroy]
     before_action :load_statuses, only: [:index, :new, :create, :edit, :update]
@@ -15,7 +14,7 @@ module ProjektMilestoneActions
   def new
     @milestone = @milestoneable.milestones.new
 
-    authorize! :new, @milestone if @namespace == "projekt_management"
+    authorize! :new, @milestone unless current_user.administrator?
     render "admin/milestones/new"
   end
 
@@ -49,8 +48,8 @@ module ProjektMilestoneActions
 
   def destroy
     authorize! :destroy, @milestone unless current_user.administrator?
-
     @milestone.destroy!
+
     redirect_to redirect_path, notice: t("admin.milestones.delete.notice")
   end
 
@@ -64,12 +63,12 @@ module ProjektMilestoneActions
       params.require(:milestone).permit(*attributes)
     end
 
-    def load_milestoneable
-      @milestoneable = milestoneable
-    end
-
     def milestoneable
       ProjektPhase.find(params[:projekt_phase_id])
+    end
+
+    def load_milestoneable
+      @milestoneable = milestoneable
     end
 
     def load_milestone
@@ -81,8 +80,10 @@ module ProjektMilestoneActions
     end
 
     def redirect_path
-      return milestoneable_path unless @milestoneable.is_a?(ProjektPhase::MilestonePhase)
+      polymorphic_path([@namespace, @milestoneable, Milestone.new])
+    end
 
-      polymorphic_path([@namespace.to_sym || :admin, @milestone.milestoneable, Milestone.new])
+    def milestoneable_path
+      redirect_path
     end
 end
