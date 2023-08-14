@@ -11,6 +11,11 @@ html{
 }
 
 @media screen and (min-width: 75em) {
+  main {
+    margin: auto;
+    padding-top: 30px;
+  }
+
   body.custom-new-design {
     .wrapper, .footer, .top-bar {
       width: 100%;

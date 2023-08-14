@@ -51,6 +51,12 @@ class Projekts::ListItemComponent < ApplicationComponent
     projekt.image&.variant(variant)
   end
 
+  def date_formated
+    base_formated_date = helpers.format_date_range(projekt.total_duration_start, projekt.total_duration_end)
+
+    base_formated_date.presence || "Fortlaufendes Projekt"
+  end
+
   def phase_icon_class(phase)
     case phase
     when ProjektPhase::CommentPhase

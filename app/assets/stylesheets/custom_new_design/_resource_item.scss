@@ -15,10 +15,11 @@
 
     a {
       color: $main-text-color;
+      transition: all 100ms ease;
+      text-decoration: none;
 
       &:hover {
-        text-decoration: none;
-        color: black;
+        color: $brand;
       }
     }
 
@@ -201,10 +202,6 @@
     display: flex;
     flex-direction: column;
     min-height: 143px;
-
-    .resource-item--additional-body-section {
-      margin-top: 12px;
-    }
   }
 
   .resource-item--sdgs {
@@ -413,11 +410,9 @@
 
   .resource-item--additional-body-section {
     .projekt-phase-link {
-      text-decoration: underline;
       display: block;
       color: inherit;
       text-align: left;
-      word-wrap: nowrap;
     }
 
     i {
@@ -530,12 +525,11 @@
     // }
   }
 
-  .resource-item--additional-body-section-in-footer {
-    display: none;
-  }
-
   @media (min-width: 970px) {
     .resources-list.-wide {
+      .resource-item--additional-body-section {
+        padding-left: 0;
+      }
       .resources-list--inner {
         flex-direction: column;
       }
