@@ -3,7 +3,7 @@
     <% if extended_feature?('modulewide.show_number_of_entries_in_modules') %>
       <div class='float-right'>
         <%= @investments.total_count %>
-        <%= t("activerecord.models.budget/investment", count: @investments.to_a.size) %>
+        <%= t("custom.shared.resource_count", count: @investments.total_count) %>
       </div>
     <% end %>
   </div>
