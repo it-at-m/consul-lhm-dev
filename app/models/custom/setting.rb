@@ -114,7 +114,7 @@ class Setting < ApplicationRecord
         # CONSUL installation's organization name
         "org_name": "CONSUL",
         "meta_title": nil,
-        "meta_description": "Die offizielle Beteiligungsplattform der Stadt Bochum. Die Plattform basiert auf CONSUL Open Source und wurde von demokratie.today modifiziert.",
+        "meta_description": "Die offizielle Beteiligungsplattform der Stadt CONSUL. Die Plattform basiert auf CONSUL Open Source und wurde von demokratie.today modifiziert.",
         "meta_keywords": "consul beteiligung, consul bürgerbeteiligung, consul Beteiligung, consul Bürgerbeteiligung, bürgerbeteiligung, digitale Bürgerbeteiligung, online Bürgerbeteiligung, smart city, smart cities, consul, consul open source, open source, consul project, consul project madrid",
         "proposal_notification_minimum_interval_in_days": 3,
         "direct_message_max_per_day": 3,
