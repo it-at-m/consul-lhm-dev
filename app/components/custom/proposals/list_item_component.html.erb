@@ -1,20 +1,26 @@
 <%= render(Shared::ResourceItemComponent.new(component_attributes)) do |c| %>
-  <%# <% unless proposal.successful? %>
-  <%#   <% c.first_footer_item do  %>
-  <%#     <% if proposal.archived? %>
-  <%#       <div class="padding text-center callout warning">
-  <%#         <%= t("proposals.proposal.archived") %>
-  <%#       </div>
-  <%#     <% else %>
-  <%#       <div id="proposal_<%= proposal.id %>_votes">
-  <%#         <%# <%= render Proposals::NewVotesComponent.new(proposal, vote_url: vote_proposal_path(proposal, value: "yes")) %>
+  <%# <% if helpers.show_proposal_votes? %>
+  <%#   <% c.footer_item do  %>
+  <%#     <div id="<%= dom_id(proposal) %>_votes" class="small-12 xlarge-10 small-centered column supports-container">
+  <%#       <% if proposal.successful? %>
+  <%#         <div class="padding">
+  <%#           <div class="supports text-center">
+  <%#             <%= render "proposals/supports", proposal: proposal %>
+  <%#           </div>
+  <%#         </div>
+  <%#       <% elsif proposal.archived? %>
+  <%#         <div class="padding text-center">
+  <%#           <strong><%= t("proposals.proposal.supports", count: proposal.total_votes) %></strong>
+  <%#           <p><%= t("proposals.proposal.archived") %></p>
+  <%#         </div>
+  <%#       <% elsif projekt_phase_feature?(proposal.projekt_phase, "resource.allow_voting") %>
   <%#         <%= render Proposals::VotesComponent.new(proposal, vote_url: vote_proposal_path(proposal, value: "yes")) %>
-  <%#       </div>
-  <%#     <% end %>
+  <%#       <% end %>
+  <%#     </div>
   <%#   <% end %>
   <%# <% end %>
   <%#
-  <%# <% c.second_footer_item do  %>
+  <%# <% c.footer_item do  %>
   <%#   <div id="proposal_<%= proposal.id %>_votes_count">
   <%#     <%= t("proposals.proposal.supports", count: proposal.total_votes) %>
   <%#   </div>

@@ -416,7 +416,7 @@
     }
 
     i {
-      width: 24px;
+      width: 16px;
     }
   }
 
@@ -529,6 +529,7 @@
     .resources-list.-wide {
       .resource-item--additional-body-section {
         padding-left: 0;
+        // border: none;
       }
       .resources-list--inner {
         flex-direction: column;
