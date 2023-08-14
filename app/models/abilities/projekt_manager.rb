@@ -66,47 +66,78 @@ module Abilities
           can?(:edit, wc.cardable.projekt)
       end
 
+      # Moderation: Users
       can :block, User
       cannot :block, User, id: user.id
 
-      can :moderate, Proposal, projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
-      can :hide, Proposal, hidden_at: nil, projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
-      can :ignore_flag, Proposal, ignored_flag_at: nil,
-                                  hidden_at: nil,
-                                  projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
+      # Moderation: Proposals
+      can :moderate, Proposal do |proposal|
+        user.projekt_manager.allowed_to?("moderate", proposal.projekt)
+      end
 
-      can :moderate, Debate, projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
-      can :hide, Debate, hidden_at: nil, projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
-      can :ignore_flag, Debate, ignored_flag_at: nil,
-                                hidden_at: nil,
-                                projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
+      can :hide, Proposal do |proposal|
+        proposal.hidden_at == nil &&
+          can?(:moderate, proposal)
+      end
 
-      can :moderate, Budget::Investment, budget: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
-      can :hide, Budget::Investment, hidden_at: nil,
-                                     budget: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
-      can :ignore_flag, Budget::Investment, ignored_flag_at: nil,
-                                           hidden_at: nil,
-                                           budget: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
+      can :ignore_flag, Proposal do |proposal|
+        proposal.ignored_flag_at == nil &&
+          proposal.hidden_at == nil &&
+          can?(:moderate, proposal)
+      end
 
-      can :moderate, Comment
+      # Moderation: Debates
+      can :moderate, Debate do |debate|
+        user.projekt_manager.allowed_to?("moderate", debate.projekt)
+      end
+
+      can :hide, Debate do |debate|
+        debate.hidden_at == nil &&
+          can?(:moderate, debate)
+      end
+
+      can :ignore_flag, Debate do |debate|
+        debate.ignored_flag_at == nil &&
+          debate.hidden_at == nil &&
+          can?(:moderate, debate)
+      end
+
+      # Moderation: Budget::Investments
+      can :moderate, Budget::Investment do |investment|
+        user.projekt_manager.allowed_to?("moderate", investment.budget&.projekt)
+      end
+
+      can :hide, Budget::Investment do |investment|
+        investment.hidden_at == nil &&
+          can?(:moderate, investment.budget&.projekt)
+      end
+
+      can :ignore_flag, Budget::Investment do |investment|
+        investment.ignored_flag_at == nil &&
+          investment.hidden_at == nil &&
+          can?(:moderate, investment.budget&.projekt)
+      end
+
+      # Moderation: Budget::Investments
+      can :moderate, Comment do |comment|
+        user.projekt_manager.allowed_to?("moderate", comment&.projekt)
+      end
 
       can :hide, Comment do |comment|
-        comment.projekt.present? &&
-          comment.projekt.projekt_manager_ids.include?(user.projekt_manager.id) &&
-          comment.hidden_at == nil
+        comment.hidden_at == nil &&
+          can?(:moderate, comment)
       end
 
       can :ignore_flag, Comment do |comment|
-        comment.projekt.present? &&
-          comment.projekt.projekt_manager_ids.include?(user.projekt_manager.id) &&
-          comment.ignored_flag_at == nil &&
-          comment.hidden_at == nil
+        comment.ignored_flag_at == nil &&
+          comment.hidden_at == nil &&
+          can?(:moderate, comment)
       end
 
-      can :comment_as_moderator, [Debate, Comment, Proposal, Budget::Investment, Poll, ProjektQuestion], projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
-      can :comment_as_moderator, [Projekt], projekt_managers: { id: user.projekt_manager.id }
-
-      can [:update, :toggle_active_status], ProjektPhase, projekt: { projekt_managers: { id: user.projekt_manager.id }}
+      # Comment as moderator
+      can :comment_as_moderator, [ProjektPhase, Debate, Proposal, Budget::Investment, Poll, ProjektQuestion] do |resource|
+        user.projekt_manager.allowed_to?("moderate", resource.projekt)
+      end
     end
   end
 end
