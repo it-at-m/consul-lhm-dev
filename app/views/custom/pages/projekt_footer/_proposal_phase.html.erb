@@ -36,8 +36,8 @@
       <div class='small-6 column small'>
         <% if extended_feature?('modulewide.show_number_of_entries_in_modules') %>
           <div class='float-right'>
-            <%= @resources.total_count %>
-            <%= t("custom.shared.resource_count", count: @resources.total_count) %>
+            <%= @resources.count %>
+            <%= t("custom.shared.resource_count", count: @resources.count) %>
           </div>
         <% end %>
       </div>
