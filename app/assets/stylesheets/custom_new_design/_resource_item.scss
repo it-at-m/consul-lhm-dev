@@ -425,19 +425,12 @@
     }
   }
 
-  .sdg-goal-tag-list, .sdg-target-tag-list {
-    display: flex;
-    list-style: none;
-    margin-left: 0;
-    margin-bottom: 0;
-
-    li {
-      margin-right: 5px;
-    }
-  }
-
   .resource-item {
     .sdg-goal-tag-list, .sdg-target-tag-list {
+      .js-sdg-custom-target-filter {
+        display: none;
+      }
+
       li {
         flex-grow: 1;
         max-width: 40px;

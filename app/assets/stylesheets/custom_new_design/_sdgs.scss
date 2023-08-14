@@ -1,0 +1,12 @@
+.custom-new-design {
+  .sdg-goal-tag-list, .sdg-target-tag-list {
+    display: flex;
+    list-style: none;
+    margin-left: 0;
+    margin-bottom: 0;
+
+    li {
+      margin-right: 5px;
+    }
+  }
+}
