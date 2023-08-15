@@ -27,6 +27,7 @@
   }
 
   .resource-image--missing-image-placeholder {
+    margin-top: -2%;
     height: 100%;
     width: 100%;
     display: flex;
@@ -40,6 +41,6 @@
 
   .resource-image--missing-image-placeholder-icon {
     font-size: 80px;
-    margin-bottom: 10px;
+    margin-top: 10px;
   }
 }
