@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-class Shared::ResourceItemComponent < ApplicationComponent
-  renders_one :header_content
+class Resources::ListItemComponent < ApplicationComponent
+  renders_one :header
   renders_one :image_overlay_item
   renders_many :additional_body_sections
-  renders_many :footer_items
+  renders_many :footer_sections
 
   DATE_FORMAT = "%d.%m.%Y".freeze
 
@@ -17,11 +17,11 @@ class Shared::ResourceItemComponent < ApplicationComponent
     horizontal_card_image_url: nil,
     author: nil,
     wide: false,
-    id: nil,
     subline: nil,
     url: nil,
     tags: [],
-    image_placeholder_icon_class: "fa-file"
+    image_placeholder_icon_class: "fa-file",
+    header_style: nil
   )
     @resource = resource
     @title = title
@@ -36,8 +36,7 @@ class Shared::ResourceItemComponent < ApplicationComponent
     @tags = tags
     @resource_name = @resource.class.name.downcase.gsub("::", "_")
     @image_placeholder_icon_class = image_placeholder_icon_class
-
-    @id = id
+    @header_style = header_style
   end
 
   def component_class_name

@@ -152,17 +152,21 @@
       }
 
       function toggleImageAttachment($projektPhase) {
+        var $directImageUploadInputs = $('.direct-image-upload--inputs')
+
         if ( $projektPhase.data('allowAttachedImage') ) {
           $('#attach-image').show();
+          $directImageUploadInputs.show();
         } else {
           $('#attach-image #nested-image .direct-upload').remove();
           $("#new_image_link").removeClass("hide");
           $('#attach-image').hide();
+          $directImageUploadInputs.hide();
         }
       }
 
       function toggleDocumentAttachment($projektPhase) {
-        var $sidebarCard = $('#documents-attach-sidebar-card');
+        var $sidebarCard = $('.js-sidebar-documment-attacher-section');
 
         if ( $projektPhase.data('allowAttachedDocument') ) {
           $('#attach-documents').show();
@@ -182,14 +186,20 @@
       }
 
       function toggleExternalVideoUrl($projektPhase) {
+        var $externalVideoCard = $('#external-video-url-fields')
+
         if ( $projektPhase.data('allowVideo') ) {
           $('#external-video-url-fields').show();
+          $externalVideoCard.show();
         } else {
           $('#external-video-url-fields').hide();
+          $externalVideoCard.hide();
         }
       }
 
       function toggleExternalFieldsHeader($projektPhase) {
+        var $behalfOfFields = $('.js-sidebar-behalf-of')
+
         if (
           $('#on-behalf-of-fields').length == 0 &&
             $('#attach-documents').is(":hidden") &&
@@ -199,8 +209,10 @@
             $('#sdgs-selector').is(":hidden")
         ) {
           $('#additional-fields-title').hide();
+          $behalfOfFields.hide();
         } else {
           $('#additional-fields-title').show();
+          $behalfOfFields.show();
         }
       }
 

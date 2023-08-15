@@ -1,5 +1,5 @@
-<%= render(Shared::ResourceItemComponent.new(component_attributes)) do |c| %>
-  <% c.header_content do %>
+<%= render(Resources::ListItemComponent.new(component_attributes)) do |c| %>
+  <% c.header do %>
     <%= date_formated %>
   <% end %>
 
@@ -20,7 +20,7 @@
     </div>
   <% end %>
 
-  <% c.footer_item do  %>
+  <% c.footer_section do  %>
    <%= link_to('Zum Projekt', projekt.page.url, class: 'button -grey') %>
   <% end %>
 <% end %>

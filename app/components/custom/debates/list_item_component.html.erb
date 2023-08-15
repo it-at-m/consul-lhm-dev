@@ -1,10 +1,28 @@
-<%= render(Shared::ResourceItemComponent.new(component_attributes)) do |c| %>
-  <%# <% c.first_footer_item do  %>
+<%= render(Resources::ListItemComponent.new(component_attributes)) do |c| %>
+  <% c.header do %>
+    <div>
+      <% if @sentiment.present? %>
+        <%= @sentiment.name %>
+      <% end %>
+    </div>
+
+    <div>
+      <%= date_formated %>
+    </div>
+  <% end %>
+
+  <% if debate.labels_available? %>
+    <% c.image_overlay_item do %>
+      <%= render Shared::ProjektLabelsComponent.new(resource: debate) %>
+    <% end %>
+  <% end %>
+
+  <%# <% c.first_footer_section do  %>
   <%#   <div id="<%= dom_id(@debate) %>_votes">
   <%#     <%= render Debates::VotesComponent.new(debate) %>
   <%#   </div>
   <%# <% end %>
-  <%# <% c.second_footer_item do  %>
+  <%# <% c.second_footer_section do  %>
   <%#   <div id="<%= dom_id(@debate) %>_votes_count">
   <%#     <%= t("debates.debate.votes", count: @debate.votes_score) %>
   <%#   </div>

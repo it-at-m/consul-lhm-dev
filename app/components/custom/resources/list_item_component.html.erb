@@ -12,8 +12,8 @@
 <% end %>
 
 <div class="resource-item <%= component_class_name %>">
-  <div class="resource-item--header">
-    <%= header_content %>
+  <div class="resource-item--header" style="<%= @header_style %>">
+    <%= header %>
   </div>
 
   <div class="resource-item--image-container">
@@ -75,18 +75,8 @@
           </div>
           <%= link_to(@title, @url, class: "resource-item--title" ) %>
 
-          <div class="resource-item--description-wrapper">
-            <div class="resource-item--description">
-              <% if @wyshwig %>
-              <% else %>
-                <%= helpers.wysiwyg(@description) %>
-                <% if Rails.env.development? %>
-                  <p>
-                  Resource ID: <%= @resource.id %>
-                  </p>
-                <% end %>
-              <% end %>
-            </div>
+          <div class="resource-item--description">
+            <%= truncate(strip_tags(@description), length: 160) %>
           </div>
         </div>
 
@@ -101,11 +91,11 @@
         <%= author_name_html %>
 
       </div>
-      <% if footer_items.any? %>
+      <% if footer_sections.any? %>
         <div class="resource-item--footer">
-          <% footer_items.each do |footer_item| %>
+          <% footer_sections.each do |footer_section| %>
             <div class="resource-item--footer-section">
-              <%= footer_item %>
+              <%= footer_section %>
             </div>
           <% end %>
         </div>

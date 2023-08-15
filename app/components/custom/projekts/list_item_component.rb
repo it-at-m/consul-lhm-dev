@@ -12,7 +12,7 @@ class Projekts::ListItemComponent < ApplicationComponent
     {
       resource: projekt,
       title: projekt.page.title,
-      description: projekt.description,
+      description: strip_tags(projekt.description),
       tags: projekt.tags.first(3),
       # start_date: projekt.total_duration_start,
       # end_date: projekt.total_duration_end,
@@ -21,7 +21,6 @@ class Projekts::ListItemComponent < ApplicationComponent
       card_image_url: card_image_url,
       horizontal_card_image_url: horizontal_card_image_url,
       # image_url: url_for(projekt.page&.image&.attachment&.variant(:medium)),
-      id: projekt.id
     }
   end
 

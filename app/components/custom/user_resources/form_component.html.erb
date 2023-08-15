@@ -107,13 +107,11 @@
                 <i class="fa fa-code-branch"></i>
                 Projektzuordnung
               </div>
-              <% if @selected_projekt&.overview_page? %>
-                <%= f.hidden_field :projekt_id, value: @selected_projekt.id %>
-              <% else %>
-                <!-- <legend><%= t("custom.shared.form.projekt_assignment") %></legend> -->
-                <p>Ihr Vorschlag wird diesem Projekt zugeordnet:</p>
-                <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: resource, projekts: Projekt.top_level }  %>
-              <% end %>
+              <!-- <legend><%= t("custom.shared.form.projekt_assignment") %></legend> -->
+              <p>Ihr Vorschlag wird diesem Projekt zugeordnet:</p>
+              <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: resource, projekts: Projekt.top_level }  %>
+              <%= render partial: "shared/projekt_selector/projekt_labels", locals:	{ f: f, model: resource } %>
+              <%= render partial: "shared/projekt_selector/sentiments", locals:	{ f: f, model: resource } %>
             </div>
           </div>
 
@@ -130,7 +128,7 @@
           </div>
 
           <% if translations_interface_enabled? %>
-            <div class="sidebar-card" id="documents-attach-sidebar-card">
+            <div class="sidebar-card">
               <div class="sidebar-card--section">
                 <div class="sidebar-card--header">
                   <i class="fa fa-language"></i>
@@ -144,7 +142,7 @@
             </div>
           <% end %>
 
-          <div class="sidebar-card sidebar-external-video-section">
+          <div class="sidebar-card js-sidebar-external-video-section">
             <div class="sidebar-card--section">
               <div class="sidebar-card--header">
                 <i class="fa fa-video"></i>
@@ -206,7 +204,7 @@
           <% end %>
 
           <% if current_user.administrator? || current_user.moderator? %>
-            <div class="sidebar-card">
+            <div class="sidebar-card js-sidebar-behalf-of">
               <div class="sidebar-card--section">
                 <div class="sidebar-card--header">
                   <i class="fa fa-user"></i>

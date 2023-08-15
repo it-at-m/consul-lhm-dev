@@ -6,6 +6,7 @@ class Proposals::ListItemComponent < ApplicationComponent
   def initialize(proposal:, wide: false)
     @proposal = proposal
     @wide = wide
+    @sentiment = proposal.sentiment
   end
 
   def component_attributes
@@ -13,19 +14,25 @@ class Proposals::ListItemComponent < ApplicationComponent
       resource: @proposal,
       projekt: proposal.projekt,
       title: proposal.title,
-      description: proposal.summary,
+      description: proposal.description,
+      header_style: header_style,
       tags: proposal.tags.first(3),
-      # sdgs: proposal.related_sdgs.first(5),
-      # start_date: proposal.total_duration_start,
-      # end_date: proposal.total_duration_end,
       wide: @wide,
       url: helpers.proposal_path(proposal),
       card_image_url: proposal.image&.variant(:medium),
       horizontal_card_image_url: proposal.image&.variant(:medium),
-      # date: proposal.created_at,
       image_placeholder_icon_class: "fa-lightbulb",
-      author: proposal.author,
-      id: proposal.id
+      author: proposal.author
     }
+  end
+
+  def date_formated
+    l(proposal.published_at, format: :date_only)
+  end
+
+  def header_style
+    return nil if @sentiment.nil?
+
+    "background-color:#{@sentiment.color};"
   end
 end

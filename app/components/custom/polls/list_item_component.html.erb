@@ -1,8 +1,8 @@
-<%= render(Shared::ResourceItemComponent.new(component_attributes)) do |c| %>
-  <%# <% c.first_footer_item do  %>
+<%= render(Resources::ListItemComponent.new(component_attributes)) do |c| %>
+  <%# <% c.first_footer_section do  %>
   <%#  <%= link_to('Teilnehmen', helpers.poll_path(poll), class: 'button -purple') %>
   <%# <% end %>
-  <%# <% c.second_footer_item do  %>
+  <%# <% c.second_footer_section do  %>
   <%#   <%= helpers.poll_remaining_activity_days(poll) %>
   <%# <% end %>
 <% end %>
