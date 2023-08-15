@@ -118,6 +118,9 @@ en:
         more_link_text: More info
         select: Select target
     shared:
+      resource_count:
+        one: Input
+        other: Inputs
       dates:
         days_left:
           one: 1 more day

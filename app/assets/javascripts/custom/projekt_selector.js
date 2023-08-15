@@ -84,6 +84,7 @@
       toggleDocumentAttachment($projektPhase);
       toggleSummary($projektPhase);
       toggleExternalVideoUrl($projektPhase);
+      toggleOnBehalfOf($projektPhase);
       toggleExternalFieldsHeader($projektPhase);
       toggleTagging($projektPhase);
 
@@ -197,16 +198,21 @@
         }
       }
 
+      function toggleOnBehalfOf($projektPhase) {
+        if ( $projektPhase.data('createOnBehalfOf') ) {
+          $('#create-on-behalf-of').removeClass('hide');
+        } else {
+          $('#create-on-behalf-of').addClass('hide');
+        }
+      }
+
       function toggleExternalFieldsHeader($projektPhase) {
         var $behalfOfFields = $('.js-sidebar-behalf-of')
 
         if (
-          $('#on-behalf-of-fields').length == 0 &&
+          $('#create-on-behalf-of').is(":hidden") &&
             $('#attach-documents').is(":hidden") &&
-            $('.summary-field').is(":hidden") &&
-            $('#external-video-url-fields').is(":hidden") &&
-            $('#category_tags').is(":hidden") &&
-            $('#sdgs-selector').is(":hidden")
+            (!$('#external-video-url-fields').length || $('#external-video-url-fields').is(":hidden"))
         ) {
           $('#additional-fields-title').hide();
           $behalfOfFields.hide();

@@ -39,3 +39,10 @@ input.with-related-options[type="radio"]:not(:checked) + label + .options-group 
   .radio-button-label {
   }
 }
+
+// additional fields
+fieldset.additional-fields {
+  & > * {
+    clear: both;
+  }
+}

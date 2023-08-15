@@ -1,5 +1,5 @@
 namespace :projekt_management do
-  root to: "projekts#index"
+  root to: "dashboard#index"
 
   resources :projekt_phases, only: [:update, :destroy] do
     member do

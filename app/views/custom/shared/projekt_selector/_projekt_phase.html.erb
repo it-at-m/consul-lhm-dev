@@ -14,6 +14,7 @@
   <%= "data-allow-attached-image=true" if projekt_phase_feature?(projekt_phase, "form.allow_attached_image") %>
   <%= "data-allow-attached-document=true" if projekt_phase_feature?(projekt_phase, "form.allow_attached_documents") %>
   <%= "data-allow-tags=true" if projekt_feature?(projekt, "general.enable_tags") %>
+  <%= "data-create-on-behalf-of=true" if allowed_to_post_on_behalf_of?(current_user, projekt_phase.projekt) %>
   <%= "data-tag-ids=#{projekt.tags.category.ids.any? ? projekt.tags.category.ids.join(",") : false}" if projekt_feature?(projekt, "general.enable_tags") %>
   <%= "data-projekt-labels-name=#{projekt_phase.labels_name.gsub(" ", "_")}" if projekt_phase.labels_name.present? %>
   <%= "data-projekt-label-ids=#{projekt_phase.projekt_labels.ids.join(",")}" if projekt_phase.projekt_labels.any? %>

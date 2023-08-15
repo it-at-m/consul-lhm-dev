@@ -12,15 +12,6 @@ module ProjektAdminActions
     before_action :process_tags, only: [:update]
   end
 
-  def index
-    if current_user.administrator?
-      @projekts = Projekt.top_level.regular
-    elsif current_user.projekt_manager?
-      authorize!(:index, Projekt) unless current_user.administrator?
-      @projekts = Projekt.where(projekt_manager: current_user)
-    end
-  end
-
   def edit
     @namespace = params[:controller].split("/").first.to_sym
 
@@ -39,7 +30,8 @@ module ProjektAdminActions
       key: "projekt_custom_feature.default_footer_tab"
     )
 
-    @projekt_managers = ProjektManager.all
+    ProjektManager.all.map { |pm| pm.projekt_manager_assignments.find_or_create_by!(projekt: @projekt) }
+    @projekt_manager_assignments = @projekt.projekt_manager_assignments
 
     if @projekt.map_location.nil?
       @projekt.send(:create_map_location)
@@ -53,7 +45,7 @@ module ProjektAdminActions
     authorize!(:update, @projekt) unless current_user.administrator?
 
     if @projekt.update_attributes(projekt_params)
-      redirect_to namespace_projekt_path(action: "edit"),
+      redirect_to namespace_projekt_path(action: "edit", anchor: params[:tab]),
         notice: t("custom.admin.projekts.edit.flash.update_notice")
     else
       redirect_to namespace_projekt_path(action: "edit"),
@@ -102,7 +94,7 @@ module ProjektAdminActions
         image_attributes: image_attributes,
         projekt_notifications: [:title, :body],
         project_events: [:id, :title, :location, :datetime, :weblink],
-        projekt_manager_ids: []
+        projekt_manager_assignments_attributes: [:id, :projekt_manager_id, :projekt_id, permissions: []]
       ]
       params.require(:projekt).permit(attributes, translation_params(Projekt))
     end

@@ -1,7 +1,7 @@
 <h2><%= t("custom.admin.progress_bars.index.progress_bar") %></h2>
 
 <%= link_to t("admin.progress_bars.manage"),
-            admin_polymorphic_path(milestoneable.progress_bars.new),
+            polymorphic_path([@namespace, milestoneable, milestoneable.progress_bars.new]),
             class: "button hollow" %>
 
 <h2><%= t("admin.milestones.index.milestone") %></h2>
@@ -57,7 +57,10 @@
               <% end %>
             <% end %>
           </td>
-          <td><%= render Admin::TableActionsComponent.new(milestone) %></td>
+          <td><%= render Admin::TableActionsComponent.new(milestone,
+                                                          edit_path: polymorphic_path([@namespace, milestoneable, milestone], action: :edit),
+                                                          destroy_path: polymorphic_path([@namespace, milestoneable, milestone])
+                                                         ) %></td>
         </tr>
       <% end %>
     </tbody>
@@ -68,6 +71,6 @@
 
 <p>
   <%= link_to t("admin.milestones.index.new_milestone"),
-              admin_polymorphic_path(milestoneable.milestones.new, action: :new),
+              polymorphic_path([@namespace, milestoneable, milestoneable.milestones.new], action: :new),
               class: "button hollow" %>
 </p>

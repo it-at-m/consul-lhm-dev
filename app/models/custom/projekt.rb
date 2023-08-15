@@ -66,6 +66,7 @@ class Projekt < ApplicationRecord
 
   has_many :projekt_manager_assignments, dependent: :destroy
   has_many :projekt_managers, through: :projekt_manager_assignments
+  accepts_nested_attributes_for :projekt_manager_assignments
 
   has_many :subscriptions, -> { where(projekt_subscriptions: { active: true }) },
     class_name: "ProjektSubscription", dependent: :destroy, inverse_of: :projekt
@@ -212,6 +213,11 @@ class Projekt < ApplicationRecord
       special_name: "projekt_overview_page",
       special: true
     )
+  end
+
+  def self.with_pm_permission_to(permission, projekt_manager)
+    joins(:projekt_manager_assignments)
+      .where("projekt_manager_assignments.projekt_manager_id = ? AND ? = ANY(projekt_manager_assignments.permissions)", projekt_manager.id, permission)
   end
 
   def self.selectable_in_selector(controller_name, current_user)

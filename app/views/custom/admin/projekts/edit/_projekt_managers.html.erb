@@ -1,11 +1,21 @@
 <h2><%= t("custom.admin.projekts.edit.projekt_managers_tab.main_block_title") %></h2>
 
 <%= form_for(@projekt, url: admin_projekt_path(@projekt)) do |f| %>
-  <%= hidden_field_tag :tab, "#tab-projekt-managers" %>
+  <%= hidden_field_tag :tab, "tab-projekt-managers" %>
 
-  <div>
-    <%= f.collection_check_boxes :projekt_manager_ids, @projekt_managers, :id, :name do |cb| %>
-      <%= cb.label(class: "projekt_manager_checkbox") { cb.check_box + cb.text } %>
+  <div class="projekt-manager-assignments">
+    <%= f.fields_for :projekt_manager_assignments do |af| %>
+      <div class="margin-bottom">
+        <div class="projekt-manager-name">
+          <%= af.object.projekt_manager.name %>
+        </div>
+        <%= af.collection_check_boxes :permissions, ProjektManagerAssignment::ACCEPTABLE_PERMISSIONS, :to_s, :to_s do |cb| %>
+          <%= cb.label(class: "projekt-manager-permission-checkbox") do %>
+            <%= cb.check_box(class: "projekt-manager-permission-checkbox") %>
+            <%= cb.text %>
+          <% end %>
+        <% end %>
+      </div>
     <% end %>
   </div>
 

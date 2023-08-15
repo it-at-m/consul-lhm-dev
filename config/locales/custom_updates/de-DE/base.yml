@@ -119,6 +119,9 @@ de:
         more_link_text: Mehr Info
         select: Unterziel auswählen
     shared:
+      resource_count:
+        one: Beitrag
+        other: Beiträge
       warnings:
         only_for_citizens: Die Beteiligung ist auf Bürger*innen der Stadt %{city} beschränkt.
         only_for_geozones: "Die Beteiligung ist auf Bürger*innen aus folgenden Gebieten beschränkt: %{geozones}"

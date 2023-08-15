@@ -85,17 +85,15 @@
 
   <%= f.invisible_captcha :subtitle %>
 
-  <fieldset>
+  <fieldset class="additional-fields">
     <legend id='additional-fields-title'><%= t("shared.optional") %></legend>
-
-    <% if current_user.administrator? || current_user.moderator? %>
-      <div id="on-behalf-of-fields">
-        <%= f.text_field :on_behalf_of %>
-      </div>
-    <% end %>
 
     <div class="documents" id="attach-documents">
       <%= render "documents/nested_documents", f: f %>
+    </div>
+
+    <div id="create-on-behalf-of" class="hide">
+      <%= f.text_field :on_behalf_of %>
     </div>
 
     <div id="external-video-url-fields" style="clear:left;">
