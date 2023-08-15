@@ -17,14 +17,9 @@
     <% end %>
   <% end %>
 
-  <%# <% c.first_footer_section do  %>
-  <%#   <div id="<%= dom_id(@debate) %>_votes">
-  <%#     <%= render Debates::VotesComponent.new(debate) %>
-  <%#   </div>
-  <%# <% end %>
-  <%# <% c.second_footer_section do  %>
-  <%#   <div id="<%= dom_id(@debate) %>_votes_count">
-  <%#     <%= t("debates.debate.votes", count: @debate.votes_score) %>
-  <%#   </div>
-  <%# <% end %>
+  <% c.footer_section do  %>
+    <div id="<%= dom_id(@debate) %>_votes">
+      <%= render Debates::VotesComponent.new(debate) %>
+    </div>
+  <% end %>
 <% end %>

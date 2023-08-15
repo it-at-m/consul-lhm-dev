@@ -204,12 +204,12 @@
   }
 
   .resource-item--footer {
-    display: flex;
-    justify-content: center;
-    height: 80px;
-    bottom: 0;
+    // display: flex;
+    // justify-content: center;
+    // height: 80px;
+    // bottom: 0;
     width: 100%;
-    border-top: 1px solid $border-color;
+    // border-top: 1px solid $border-color;
     // position: relative;
 
     .button {
@@ -256,7 +256,12 @@
     justify-content: center;
     position: relative;
     text-align: center;
+    // padding: 12px 10px;
+    padding: 12px 25px;
+    padding-bottom: 15px;
     position: relative;
+    border-top: 1px solid $border-color;
+    // min-height: 120px;
 
     .supports-container {
       border-left: none;
@@ -394,8 +399,8 @@
   }
 
   .resource-item--footer-section + .resource-item--footer-section {
-    min-width: 50%;
-    max-width: 50%;
+    // min-width: 50%;
+    // max-width: 50%;
   }
 
   .resource-item--author {

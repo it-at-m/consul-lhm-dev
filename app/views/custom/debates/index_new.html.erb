@@ -1,72 +1,74 @@
-<h1>
-  <%= t("debates.index.title") %>
-</h1>
-<div class="flex-column">
-  <div class="main-column">
-    <% if extended_feature?("debates.intro_text_for_debates") %>
-      <div class="resource-page--intro-text">
-        <%= render_custom_block('debates_index_welcome', default_content: t("custom.debates.index.welcome_default_text")) %>
-      </div>
-    <% end %>
-  </div>
-</div>
-
-<div class="flex-layout">
-  <div class="main-column">
-    <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
-      <%= link_to t('debates.index.section_header.help'), '#section_help' %>
-    <% end %>
-
-    <%= render 'shared/loader_spinner' %>
-    <%= render(
-      Shared::ResourcesListComponent.new(
-        resources: @debates,
-        resource_type: Debate,
-        current_filter: @current_order,
-        filter_param: "order",
-        text_search_enabled: true,
-        filters: @valid_orders,
-        empty_list_text: "Keine Ergebnisse"
-      ))
-    %>
-  <%= paginate @debates %>
+<main>
+  <h1>
+    <%= t("debates.index.title") %>
+  </h1>
+  <div class="flex-column">
+    <div class="main-column">
+      <% if extended_feature?("debates.intro_text_for_debates") %>
+        <div class="resource-page--intro-text">
+          <%= render_custom_block('debates_index_welcome', default_content: t("custom.debates.index.welcome_default_text")) %>
+        </div>
+      <% end %>
+    </div>
   </div>
 
-  <div id="debates-sidebar" class="sidebar">
-    <%= render Shared::SidebarCardComponent.new(title: t('custom.common.information'), icon_name: "info-circle") do |c| %>
-      <div class="margin-bottom-half">
-        <%= render_custom_block 'projekt_overview_page_sidebar', default_content: t("custom.debates.index.sidebar_information_default_text")  %>
-      </div>
-      <div class="margin-bottom-half">
-        <%= Debate.count %> <%= t("custom.common.debates") %>
-      </div>
+  <div class="flex-layout">
+    <div class="main-column">
+      <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
+        <%= link_to t('debates.index.section_header.help'), '#section_help' %>
+      <% end %>
 
-      <%= render Shared::NewButtonComponent.new(resources_name: "debates", query_params: params) %>
+      <%= render 'shared/loader_spinner' %>
+      <%= render(
+        Shared::ResourcesListComponent.new(
+          resources: @debates,
+          resource_type: Debate,
+          current_filter: @current_order,
+          filter_param: "order",
+          text_search_enabled: true,
+          filters: @valid_orders,
+          empty_list_text: "Keine Ergebnisse"
+        ))
+      %>
+    <%= paginate @debates %>
+    </div>
+
+    <div id="debates-sidebar" class="sidebar">
+      <%= render Shared::SidebarCardComponent.new(title: t('custom.common.information'), icon_name: "info-circle") do |c| %>
+        <div class="margin-bottom-half">
+          <%= render_custom_block 'projekt_overview_page_sidebar', default_content: t("custom.debates.index.sidebar_information_default_text")  %>
+        </div>
+        <div class="margin-bottom-half">
+          <%= Debate.count %> <%= t("custom.common.debates") %>
+        </div>
+
+        <%= render Shared::NewButtonComponent.new(resources_name: "debates", query_params: params) %>
+      <% end %>
+
+      <%= render Sidebar::ProjektsFilterComponent.new(
+        top_level_active_projekts: @top_level_active_projekts,
+        top_level_archived_projekts: @top_level_archived_projekts,
+        scoped_projekt_ids: @scoped_projekt_ids,
+        all_resources: @all_resources,
+        current_tab_phase: @current_tab_phase,
+        current_projekt: @current_projekt
+      ) %>
+
+    <%= render Sidebar::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name) %>
+    <%= render Sidebar::CategoriesCardComponent.new(categories: @categories) %>
+    <%= render Sidebar::SdgsCardComponent.new(sdgs: @sdgs) %>
+    <% if extended_feature?('debates.enable_my_posts_filter') %>
+      <%= render Sidebar::MyPostsCardComponent.new %>
     <% end %>
 
-    <%= render Sidebar::ProjektsFilterComponent.new(
-      top_level_active_projekts: @top_level_active_projekts,
-      top_level_archived_projekts: @top_level_archived_projekts,
-      scoped_projekt_ids: @scoped_projekt_ids,
-      all_resources: @all_resources,
-      current_tab_phase: @current_tab_phase,
-      current_projekt: @current_projekt
-    ) %>
-
-  <%= render Sidebar::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name) %>
-  <%= render Sidebar::CategoriesCardComponent.new(categories: @categories) %>
-  <%= render Sidebar::SdgsCardComponent.new(sdgs: @sdgs) %>
-  <% if extended_feature?('debates.enable_my_posts_filter') %>
-    <%= render Sidebar::MyPostsCardComponent.new %>
-  <% end %>
-
-  <%# <%= render Shared::SidebarCardComponent.new(title: 'Export', icon_name: "tag") do |c| %>
-  <%#   <%=
-  <%#     link_to t("custom.debates.index.download_current_selection"),
-  <%#       debates_path(**request.query_parameters, format: :csv),
-  <%#       format: :csv,
-  <%#       target: '_blank'
-  <%#     %>
-  <%# <% end %>
+    <%# <%= render Shared::SidebarCardComponent.new(title: 'Export', icon_name: "tag") do |c| %>
+      <%#   <%=
+      <%#     link_to t("custom.debates.index.download_current_selection"),
+      <%#       debates_path(**request.query_parameters, format: :csv),
+      <%#       format: :csv,
+      <%#       target: '_blank'
+      <%#     %>
+      <%# <% end %>
   </div>
-</div>
+  </div>
+</main>

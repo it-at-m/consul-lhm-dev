@@ -9,11 +9,12 @@
 
   .votes {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
 
     .total-votes {
-      margin-bottom: 10px;
+      margin-top: 5px;
+      margin-bottom: 0;
       font-size: 16px;
     }
   }
