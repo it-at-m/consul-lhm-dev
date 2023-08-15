@@ -3,9 +3,8 @@
 class Debates::ListItemComponent < ApplicationComponent
   attr_reader :debate
 
-  def initialize(debate:, wide: false)
+  def initialize(debate:)
     @debate = debate
-    @wide = wide
   end
 
   def component_attributes
@@ -15,7 +14,6 @@ class Debates::ListItemComponent < ApplicationComponent
       title: debate.title,
       description: debate.description,
       tags: debate.tags.first(3),
-      wide: @wide,
       url: helpers.debate_path(debate),
       card_image_url: debate.image&.variant(:medium),
       horizontal_card_image_url: debate.image&.variant(:medium),

@@ -18,9 +18,9 @@
       transition: color 100ms ease;
       text-decoration: none;
 
-      &:hover {
-        color: $brand;
-      }
+      // &:hover {
+      //   color: $brand;
+      // }
     }
 
     a.button {
@@ -195,7 +195,7 @@
     // min-height: 142px;
     display: flex;
     flex-direction: column;
-    min-height: 170px;
+    min-height: 174px;
   }
 
   .resource-item--sdgs {
@@ -215,7 +215,7 @@
 
     .button {
       margin-bottom: 0;
-      margin-top: 3px;
+      margin-top: 0;
       height: 32px;
       padding: 0 15px 0;
     }
@@ -261,7 +261,8 @@
     padding: 12px 25px;
     position: relative;
     border-top: 1px solid $border-color;
-    // min-height: 120px;
+    min-height: 93px;
+    flex-direction: column;
 
     .supports-container {
       border-left: none;

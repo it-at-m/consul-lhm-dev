@@ -3,9 +3,8 @@
 class Budgets::Investments::ListItemComponent < ApplicationComponent
   attr_reader :budget_investment
 
-  def initialize(budget_investment:, ballot:, top_level_active_projekts:, top_level_archived_projekts:, wide: false)
+  def initialize(budget_investment:, ballot:, top_level_active_projekts:, top_level_archived_projekts:)
     @budget_investment = budget_investment
-    @wide = wide
     @ballot = ballot
     @top_level_active_projekts = top_level_active_projekts
     @top_level_archived_projekts = top_level_archived_projekts
@@ -17,7 +16,6 @@ class Budgets::Investments::ListItemComponent < ApplicationComponent
       projekt: @budget_investment.budget.projekt,
       title: budget_investment.title,
       description: budget_investment.description,
-      wide: @wide,
       url: helpers.url_for(budget_investment),
       card_image_url: budget_investment.image&.variant(:medium),
       horizontal_card_image_url: budget_investment.image&.variant(:medium),

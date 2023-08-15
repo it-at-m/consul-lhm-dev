@@ -15,6 +15,11 @@
       padding-right: 5px;
     }
 
+    &:hover, &:focus {
+      background-color: #005699;
+      color: white;
+    }
+
     &.-grey {
       background: #c0cedb;
       color: black;
@@ -32,11 +37,9 @@
     &.-purple {
       background: #EAE4FB;
       color: black;
-    }
-
-    &:hover, &:focus {
-      background-color: #005699;
-      color: white;
+      &:hover, &:focus {
+        background-color: #dad2f0;
+      }
     }
 
     &.hollow {

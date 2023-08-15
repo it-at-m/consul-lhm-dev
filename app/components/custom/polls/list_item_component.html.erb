@@ -1,8 +1,8 @@
 <%= render(Resources::ListItemComponent.new(component_attributes)) do |c| %>
-  <%# <% c.first_footer_section do  %>
-  <%#  <%= link_to('Teilnehmen', helpers.poll_path(poll), class: 'button -purple') %>
-  <%# <% end %>
-  <%# <% c.second_footer_section do  %>
-  <%#   <%= helpers.poll_remaining_activity_days(poll) %>
-  <%# <% end %>
+  <% c.footer_section do  %>
+    <div class="mb-5">
+      <%= link_to('Teilnehmen', helpers.poll_path(poll), class: 'button -purple') %>
+    </div>
+    <%= helpers.poll_remaining_activity_days(poll) %>
+  <% end %>
 <% end %>

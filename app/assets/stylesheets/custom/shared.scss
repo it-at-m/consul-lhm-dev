@@ -195,6 +195,7 @@
     height: 2.5rem;
     line-height: 2.5rem;
     text-align: center;
+    border-radius: 6px !important;
   }
 
   .sidebar-filter-button:hover,
@@ -211,7 +212,7 @@
     height: 20px;
     background: #ececec;
     cursor: pointer;
-    border-radius: 3px;
+    border-radius: 6px;
     height: 2.5rem;
     width: 2.5rem;
     color: #9a9a9a;

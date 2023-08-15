@@ -3,9 +3,8 @@
 class Polls::ListItemComponent < ApplicationComponent
   attr_reader :poll
 
-  def initialize(poll:, wide: false)
+  def initialize(poll:)
     @poll = poll
-    @wide = wide
   end
 
   def component_attributes
@@ -18,7 +17,6 @@ class Polls::ListItemComponent < ApplicationComponent
       # sdgs: poll.related_sdgs.first(5),
       # start_date: poll.total_duration_start,
       # end_date: poll.total_duration_end,
-      wide: @wide,
       url: helpers.poll_path(poll),
       card_image_url: poll.image&.variant(:medium),
       horizontal_card_image_url: poll.image&.variant(:medium),

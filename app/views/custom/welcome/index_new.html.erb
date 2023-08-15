@@ -38,13 +38,13 @@
       <%= render_custom_block 'home_page_2' %>
 
       <% if @latest_polls.any? %>
-        <%= render Shared::ResourcesListComponent.new(resources: @polls, resource_type: Poll, title: t('custom.welcome.current_polls') , wide: false) %>
+        <%= render Shared::ResourcesListComponent.new(resources: @polls, resource_type: Poll, title: t('custom.welcome.current_polls')) %>
       <% end %>
 
       <%= render_custom_block 'home_page_4' %>
 
       <% if @latest_items.any? %>
-        <%= render Shared::ResourcesListComponent.new(resources: @latest_items, title: t('custom.welcome.user_entries'), wide: false) %>
+        <%= render Shared::ResourcesListComponent.new(resources: @latest_items, title: t('custom.welcome.user_entries')) %>
       <% end %>
 
       <%= render_custom_block 'home_page_5' %>

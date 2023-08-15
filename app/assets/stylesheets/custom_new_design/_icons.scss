@@ -3,16 +3,6 @@
     width: 20px;
     height: 20px;
     position: relative;
-
-    &:hover {
-      &:after {
-        background: darken($dark-gray, 20%);
-      }
-
-      &:before {
-        background: darken($dark-gray, 20%);
-      }
-    }
   }
 
   .icon-cross:after {

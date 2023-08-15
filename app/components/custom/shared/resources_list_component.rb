@@ -19,7 +19,6 @@ class Shared::ResourcesListComponent < ApplicationComponent
     filter_title: nil,
     empty_list_text: nil,
     filter_param: nil,
-    wide: false,
     hide_actions: false,
     hide_title: false,
     only_content: false,
@@ -30,7 +29,6 @@ class Shared::ResourcesListComponent < ApplicationComponent
     @resource_type = resource_type
     @title = title
     @title_link = title_link
-    @wide = wide
     # @filters = filters.presence || default_filter_options
     @filters = filters
     @current_filter = current_filter
@@ -47,10 +45,14 @@ class Shared::ResourcesListComponent < ApplicationComponent
     @additional_data = additional_data
   end
 
+  def wide?
+    helpers.cookies["wide_resources"] == "true"
+  end
+
   def class_names
     base = @css_class.to_s
 
-    if @wide
+    if wide?
       base += " -wide"
     end
 
@@ -82,25 +84,24 @@ class Shared::ResourcesListComponent < ApplicationComponent
   def resource_component(resource)
     case resource
     when Projekt
-      Projekts::ListItemComponent.new(projekt: resource, wide: @wide)
+      Projekts::ListItemComponent.new(projekt: resource)
     when Proposal
-      Proposals::ListItemComponent.new(proposal: resource, wide: @wide)
+      Proposals::ListItemComponent.new(proposal: resource)
     when Debate
-      Debates::ListItemComponent.new(debate: resource, wide: @wide)
+      Debates::ListItemComponent.new(debate: resource)
     when Poll
-      Polls::ListItemComponent.new(poll: resource, wide: @wide)
+      Polls::ListItemComponent.new(poll: resource)
     when DeficiencyReport
-      DeficiencyReports::ListItemComponent.new(deficiency_report: resource, wide: @wide)
+      DeficiencyReports::ListItemComponent.new(deficiency_report: resource)
     when Budget::Investment
       Budgets::Investments::ListItemComponent.new(
         budget_investment: resource,
         ballot: @additional_data[:ballot],
         top_level_active_projekts: @additional_data[:top_level_active_projekts],
-        top_level_archived_projekts: @additional_data[:top_level_archived_projekts],
-        wide: @wide
+        top_level_archived_projekts: @additional_data[:top_level_archived_projekts]
       )
     when ProjektEvent
-      ProjektEvents::ListItemComponent.new(projekt_event: resource, wide: @wide)
+      ProjektEvents::ListItemComponent.new(projekt_event: resource)
     end
   end
 

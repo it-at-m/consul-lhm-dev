@@ -3,9 +3,8 @@
 class Proposals::ListItemComponent < ApplicationComponent
   attr_reader :proposal
 
-  def initialize(proposal:, wide: false)
+  def initialize(proposal:)
     @proposal = proposal
-    @wide = wide
     @sentiment = proposal.sentiment
   end
 
@@ -17,7 +16,6 @@ class Proposals::ListItemComponent < ApplicationComponent
       description: proposal.description,
       header_style: header_style,
       tags: proposal.tags.first(3),
-      wide: @wide,
       url: helpers.proposal_path(proposal),
       card_image_url: proposal.image&.variant(:card_thumb),
       horizontal_card_image_url: proposal.image&.variant(:horizontal_card_thumb),

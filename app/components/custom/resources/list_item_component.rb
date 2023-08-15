@@ -16,7 +16,6 @@ class Resources::ListItemComponent < ApplicationComponent
     card_image_url: nil,
     horizontal_card_image_url: nil,
     author: nil,
-    wide: false,
     subline: nil,
     url: nil,
     tags: [],
@@ -30,7 +29,6 @@ class Resources::ListItemComponent < ApplicationComponent
     @card_image_url = card_image_url
     @horizontal_card_image_url = horizontal_card_image_url
     @author = author
-    @wide = wide
     @url = url
     @subline = subline
     @tags = tags
