@@ -46,7 +46,7 @@
   <div class="resource-item--content">
     <div class="resource-item--body-wrapper">
 
-      <div class="resource-item--body-and-sdgs">
+      <div class="resource-item--body-and-author">
         <div class="resource-item--body">
           <div class="resource-item--body-heading">
             <% if date.present? %>
@@ -55,6 +55,10 @@
 
             <% if @subline.present? %>
               <%= @subline %>
+            <% elsif @projekt.present? %>
+              <div class="resource-item--head-title-projekt-breadcrumbs">
+                <%= helpers.breadcrumbs_links(@projekt, ">", false) %>
+              </div>
             <% elsif @tags.present? %>
               <div class="resource-item--tags">
                 <% if @tags.present? %>

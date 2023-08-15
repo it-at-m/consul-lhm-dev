@@ -1,69 +1,71 @@
-<% provide :title do %><%= t("polls.index.title") %><% end %>
-<%= render_custom_partial "meta_description" %>
-<% content_for :canonical do %>
-  <%= render "shared/canonical", href: polls_url %>
-<% end %>
-
-<h1>
-  <%= t("polls.index.title") %>
-</h1>
-<div class="flex-column">
-  <div class="main-column">
-    <% if extended_feature?("polls.intro_text_for_debates") %>
-      <div class="resource-page--intro-text">
-        <%= render_custom_block('debates_index_welcome', default_content: t("custom.polls.index.welcome_default_text")) %>
-      </div>
-    <% end %>
-  </div>
-</div>
-
-<div class="flex-layout">
-  <div class="main-column">
-    <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
-      <%= link_to t('polls.index.section_header.help'), '#section_help' %>
-    <% end %>
-
-    <%= render 'shared/loader_spinner' %>
-    <%= render(
-      Shared::ResourcesListComponent.new(
-        resources: @polls,
-        resource_type: Debate,
-        current_filter: @current_order,
-        filter_param: "order",
-        text_search_enabled: true,
-        filters: @valid_orders,
-        empty_list_text: "Keine Ergebnisse"
-      ))
-    %>
-  <%= paginate @polls %>
-  </div>
-
-  <div id="polls-sidebar" class="sidebar">
-    <%= render Shared::SidebarCardComponent.new(title: t('custom.common.information'), icon_name: "info-circle") do |c| %>
-      <div class="margin-bottom-half">
-        <%= render_custom_block 'projekt_overview_page_sidebar', default_content: t("custom.polls.index.sidebar_information_default_text")  %>
-      </div>
-      <div class="margin-bottom-half">
-        <%= Debate.count %> <%= t("custom.common.polls") %>
-      </div>
-
-      <%= render Shared::NewButtonComponent.new(resources_name: "polls", query_params: params) %>
-    <% end %>
-
-    <%= render Sidebar::ProjektsFilterComponent.new(
-      top_level_active_projekts: @top_level_active_projekts,
-      top_level_archived_projekts: @top_level_archived_projekts,
-      scoped_projekt_ids: @scoped_projekt_ids,
-      all_resources: @all_resources,
-      current_tab_phase: @current_tab_phase,
-      current_projekt: @current_projekt
-    ) %>
-
-  <%= render Sidebar::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name) %>
-  <%= render Sidebar::CategoriesCardComponent.new(categories: @categories) %>
-  <%= render Sidebar::SdgsCardComponent.new(sdgs: @sdgs) %>
-  <% if extended_feature?('polls.enable_my_posts_filter') %>
-    <%= render Sidebar::MyPostsCardComponent.new %>
+<main>
+  <% provide :title do %><%= t("polls.index.title") %><% end %>
+  <%= render_custom_partial "meta_description" %>
+  <% content_for :canonical do %>
+    <%= render "shared/canonical", href: polls_url %>
   <% end %>
+
+  <h1>
+    <%= t("polls.index.title") %>
+  </h1>
+  <div class="flex-column">
+    <div class="main-column">
+      <% if extended_feature?("polls.intro_text_for_debates") %>
+        <div class="resource-page--intro-text">
+          <%= render_custom_block('debates_index_welcome', default_content: t("custom.polls.index.welcome_default_text")) %>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
+
+  <div class="flex-layout">
+    <div class="main-column">
+      <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
+        <%= link_to t('polls.index.section_header.help'), '#section_help' %>
+      <% end %>
+
+      <%= render 'shared/loader_spinner' %>
+      <%= render(
+        Shared::ResourcesListComponent.new(
+          resources: @polls,
+          resource_type: Debate,
+          current_filter: @current_order,
+          filter_param: "order",
+          text_search_enabled: true,
+          filters: @valid_orders,
+          empty_list_text: "Keine Ergebnisse"
+        ))
+      %>
+    <%= paginate @polls %>
+    </div>
+
+    <div id="polls-sidebar" class="sidebar">
+      <%= render Shared::SidebarCardComponent.new(title: t('custom.common.information'), icon_name: "info-circle") do |c| %>
+        <div class="margin-bottom-half">
+          <%= render_custom_block 'projekt_overview_page_sidebar', default_content: t("custom.polls.index.sidebar_information_default_text")  %>
+        </div>
+        <div class="margin-bottom-half">
+          <%= Debate.count %> <%= t("custom.common.polls") %>
+        </div>
+
+        <%= render Shared::NewButtonComponent.new(resources_name: "polls", query_params: params) %>
+      <% end %>
+
+      <%= render Sidebar::ProjektsFilterComponent.new(
+        top_level_active_projekts: @top_level_active_projekts,
+        top_level_archived_projekts: @top_level_archived_projekts,
+        scoped_projekt_ids: @scoped_projekt_ids,
+        all_resources: @all_resources,
+        current_tab_phase: @current_tab_phase,
+        current_projekt: @current_projekt
+      ) %>
+
+    <%= render Sidebar::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name) %>
+    <%= render Sidebar::CategoriesCardComponent.new(categories: @categories) %>
+    <%= render Sidebar::SdgsCardComponent.new(sdgs: @sdgs) %>
+    <% if extended_feature?('polls.enable_my_posts_filter') %>
+      <%= render Sidebar::MyPostsCardComponent.new %>
+    <% end %>
+    </div>
+  </div>
+</main>

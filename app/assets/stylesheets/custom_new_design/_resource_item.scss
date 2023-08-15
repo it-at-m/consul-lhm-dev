@@ -68,7 +68,8 @@
   .resource-item--image-container {
     height: 180px;
     width: 100%;
-    margin-bottom: 17px;
+    // margin-bottom: 17px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: center;
     position: relative;
@@ -405,8 +406,8 @@
   .resource-item--author {
     display: flex;
     align-items: center;
-    padding: 0 25px;
-    margin-bottom: 10px;
+    padding: 10px 25px;
+    border-top: 1px solid #d9d9d9;
   }
 
   img.resource-item--author-photo, .resource-item--author-photo {
@@ -465,11 +466,11 @@
     display: none;
   }
 
-
   .resource-item--body-heading {
     position: relative;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 8px;
   }
 
   .resource-item--card-image {

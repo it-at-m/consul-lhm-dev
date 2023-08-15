@@ -23,8 +23,7 @@ class Polls::ListItemComponent < ApplicationComponent
       card_image_url: poll.image&.variant(:medium),
       horizontal_card_image_url: poll.image&.variant(:medium),
       # date: poll.created_at,
-      image_placeholder_icon_class: "fa-vote-yea",
-      id: poll.id
+      image_placeholder_icon_class: "fa-vote-yea"
     }
   end
 end
