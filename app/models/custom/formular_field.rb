@@ -1,9 +1,15 @@
 class FormularField < ApplicationRecord
   belongs_to :formular
+  after_create :set_options
 
-  FIELD_TYPES = %w[string email text_field text_area check_box radio_button select].freeze
+  # KINDS = %w[string email text_field text_area check_box radio_button select].freeze
+  KINDS = %w[string].freeze
 
   private
+
+    def set_options
+      update!(options: send("#{kind}_field_options")) if kind.in? KINDS
+    end
 
     def string_field_options
       {

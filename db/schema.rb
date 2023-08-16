@@ -831,6 +831,7 @@ ActiveRecord::Schema.define(version: 2023_08_15_144814) do
   create_table "formular_fields", force: :cascade do |t|
     t.string "name"
     t.string "description"
+    t.string "kind"
     t.boolean "required", default: false, null: false
     t.jsonb "options", default: {}, null: false
     t.bigint "formular_id"
