@@ -22,7 +22,8 @@ class ProjektPhase < ApplicationRecord
     "ProjektPhase::QuestionPhase",
     "ProjektPhase::VotingPhase",
     "ProjektPhase::BudgetPhase",
-    "ProjektPhase::LegislationPhase"
+    "ProjektPhase::LegislationPhase",
+    "ProjektPhase::FormularPhase"
   ] + REGULAR_PROJEKT_PHASES
 
   delegate :icon, :author, :author_id, to: :projekt

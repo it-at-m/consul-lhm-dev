@@ -42,6 +42,7 @@ de:
       projekt_phase/projekt_notification_phase: Benachrichtigungen
       projekt_phase/legislation_phase: Textbearbeitung
       projekt_phase/newsfeed_phase: News-Feed
+      projekt_phase/formular_phase: Formular
     errors:
       models:
         proposal:

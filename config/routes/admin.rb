@@ -18,6 +18,7 @@ namespace :admin do
       get :milestones
       get :projekt_notifications
       get :projekt_arguments
+      get :formular
     end
 
     resources :projekt_labels, except: %i[index show]

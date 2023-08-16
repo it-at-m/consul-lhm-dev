@@ -386,6 +386,7 @@ de:
           milestones: Liste der Meilensteine
           projekt_notifications: Benachrichtigungen
           projekt_arguments: Liste von Stimmen
+          formular: Formular
         notice:
           created: Phase wurde erstellt
           updated: Phase wurde aktualisiert
@@ -502,6 +503,8 @@ de:
           questions: Kurzumfragen
           send_notifications_button: Benachrichtigungen senden
           notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
+        formular:
+          page_title: Formular
       modal_notifications:
         index:
           create: Erstellen

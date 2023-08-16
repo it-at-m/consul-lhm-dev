@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_09_165129) do
+ActiveRecord::Schema.define(version: 2023_08_15_144814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -826,6 +826,24 @@ ActiveRecord::Schema.define(version: 2023_08_09_165129) do
     t.index ["followable_type", "followable_id"], name: "index_follows_on_followable_type_and_followable_id"
     t.index ["user_id", "followable_type", "followable_id"], name: "access_follows"
     t.index ["user_id"], name: "index_follows_on_user_id"
+  end
+
+  create_table "formular_fields", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.boolean "required", default: false, null: false
+    t.jsonb "options", default: {}, null: false
+    t.bigint "formular_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["formular_id"], name: "index_formular_fields_on_formular_id"
+  end
+
+  create_table "formulars", force: :cascade do |t|
+    t.bigint "projekt_phase_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["projekt_phase_id"], name: "index_formulars_on_projekt_phase_id"
   end
 
   create_table "geozones", id: :serial, force: :cascade do |t|
@@ -2504,6 +2522,8 @@ ActiveRecord::Schema.define(version: 2023_08_09_165129) do
   add_foreign_key "failed_census_calls", "users"
   add_foreign_key "flags", "users"
   add_foreign_key "follows", "users"
+  add_foreign_key "formular_fields", "formulars"
+  add_foreign_key "formulars", "projekt_phases"
   add_foreign_key "geozones_polls", "geozones"
   add_foreign_key "geozones_polls", "polls"
   add_foreign_key "identities", "users"

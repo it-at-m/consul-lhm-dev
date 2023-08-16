@@ -174,6 +174,11 @@ module ProjektPhaseAdminActions
     render "custom/admin/projekt_phases/projekt_arguments"
   end
 
+  def formular
+    authorize!(:formular, @projekt_phase) unless current_user.administrator?
+    render "custom/admin/projekt_phases/formular"
+  end
+
   private
 
     def projekt_phase_params
