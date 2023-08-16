@@ -100,6 +100,7 @@ de:
         debate_phase: Diskussionen
         event_phase: Veranstaltungen
         legislation_process_phase: Textbearbeitungsphase
+        legislation_phase: Textbearbeitungsphase
         milestone_phase: Meilensteine
         newsfeed_phase: Newsfeed
         projekt_notification_phase: Benachrichtigungen

@@ -12,7 +12,7 @@
   <% c.additional_body_section do %>
     <div class="projekt-list-item--phases">
       <% projekt.current_phases.each do |phase| %>
-        <a href="<%= projekts_path(selected_phase_id: phase.id, anchor: 'filter-subnav') %>" class="projekt-phase-link">
+        <a href="<%= projekt_phase_url_for(phase) %>" class="projekt-phase-link">
           <i class="fa <%= phase_icon_class(phase) %>"></i>
           <%= t("custom.projekts.phase_name.#{phase.name}") %>
         </a>

@@ -11,7 +11,7 @@
   <% end %>
 </style>
 
-<main>
+<main class="projekt-page">
   <% if @custom_page.subtitle.blank? && @custom_page.image.blank? %>
     <h1 class="custom-page--title margin-bottom">
       <%= @custom_page.title %>
@@ -74,6 +74,8 @@
       <div class="flex-layout">
         <div class="main-column">
           <%= projekt_content %>
+          <div class="projekt-footer-anchor" id="projekt-footer">
+          </div>
         </div>
         <% if @custom_page.projekt.present? %>
           <!-- <div class="projekt-sidebar margin-bottom"> -->

@@ -24,22 +24,12 @@
     <% end %>
 
     <%= link_to @url, class: 'resource-item--image-link' do %>
-      <div class="resource-item--card-image">
-        <%= render(
-          Shared::ResourceImageComponent.new(
-            image_url: @card_image_url,
-            image_placeholder_icon_class: @image_placeholder_icon_class,
-            resource_name: @resource_name)
-        ) %>
-      </div>
-      <div class="resource-item--horizontal-image">
-        <%= render(
-          Shared::ResourceImageComponent.new(
-            image_url: @horizontal_card_image_url,
-            image_placeholder_icon_class: @image_placeholder_icon_class,
-            resource_name: @resource_name)
-        ) %>
-      </div>
+      <%= render(
+        Shared::ResourceImageComponent.new(
+          image_url: @image_url,
+          image_placeholder_icon_class: @image_placeholder_icon_class,
+          resource_name: @resource_name)
+      ) %>
     <% end %>
   </div>
 
@@ -63,13 +53,13 @@
               <div class="resource-item--tags">
                 <% if @tags.present? %>
                   <% @tags.first(2).each do |tag| %>
-                    <%= link_to(path_for_resource_with_params(@resource, tags: tag.name), target: 'blank', class: 'resource-item--tag') do %>
+                    <%= link_to(path_for_resource_with_params(@resource, tags: tag.name), class: 'resource-item--tag') do %>
                       <%= tag.name %>
                     <% end %>
                   <% end %>
 
                   <% if @tags[2].present? %>
-                    <%= link_to(path_for_resource_with_params(@resource, tags: @tags[2].name), target: '_blank', class: 'resource-item--tag resource-item--last-tag') do %>
+                    <%= link_to(path_for_resource_with_params(@resource, tags: @tags[2].name), class: 'resource-item--tag resource-item--last-tag') do %>
                       <%= @tags[2].name %>
                     <% end %>
                   <% end %>

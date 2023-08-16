@@ -22,6 +22,6 @@
     <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
     <%= render Sidebar::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name) %>
     <%= render Sidebar::CategoriesCardComponent.new(categories: @categories) %>
-    <%= render Sidebar::SdgsCardComponent.new(sdgs: @sdgs) %>
+    <%= render Sidebar::SdgsCardComponent.new(sdgs: @sdgs, sdg_targets: @sdg_targets) %>
   </div>
 </div>

@@ -163,12 +163,6 @@
   //   display: none;
   // }
 
-  .resource-item--tags {
-    display: flex;
-    min-width: 100px;
-    margin-bottom: 15px;;
-  }
-
   .resource-item--tag {
     font-size: 11px;
     text-transform: uppercase;
@@ -427,7 +421,7 @@
     }
 
     i {
-      width: 16px;
+      width: 22px;
     }
   }
 
@@ -473,22 +467,6 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
-  }
-
-  .resource-item--card-image {
-    width: 100%;
-    height: 100%;
-  }
-
-  .resource-item--horizontal-image {
-    display: none;
-    width: 100%;
-    height: 100%;
-
-    .resource-image--main {
-      position: absolute;
-      width: 100%;
-    }
   }
 
   .resource-item--image-placeholder {

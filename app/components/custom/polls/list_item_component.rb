@@ -13,14 +13,8 @@ class Polls::ListItemComponent < ApplicationComponent
       projekt: poll.projekt,
       title: poll.title,
       description: poll.summary,
-      # tags: poll.tags.first(3),
-      # sdgs: poll.related_sdgs.first(5),
-      # start_date: poll.total_duration_start,
-      # end_date: poll.total_duration_end,
       url: helpers.poll_path(poll),
-      card_image_url: poll.image&.variant(:medium),
-      horizontal_card_image_url: poll.image&.variant(:medium),
-      # date: poll.created_at,
+      image_url: poll.image&.variant(:medium),
       image_placeholder_icon_class: "fa-vote-yea"
     }
   end

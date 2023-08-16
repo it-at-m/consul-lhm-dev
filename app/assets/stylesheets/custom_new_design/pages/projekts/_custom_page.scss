@@ -11,7 +11,6 @@
     margin-right: 12px;
   }
 
-
   .sidebar-projekt-phase-details {
     color: #207868 !important;
   }
@@ -342,6 +341,18 @@
       @media (max-width: $mobile-viewport-start) {
         width: 100%;
       }
+    }
+  }
+
+  .projekt-page {
+    .main-column {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .projekt-footer-anchor {
+      padding-top: 70px;
     }
   }
 }

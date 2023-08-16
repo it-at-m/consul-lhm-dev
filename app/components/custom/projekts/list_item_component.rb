@@ -16,32 +16,13 @@ class Projekts::ListItemComponent < ApplicationComponent
       # start_date: projekt.total_duration_start,
       # end_date: projekt.total_duration_end,
       url: projekt.page.url,
-      card_image_url: card_image_url,
-      horizontal_card_image_url: horizontal_card_image_url,
+      image_url: image_variant(:card_thumb),
       # image_url: url_for(projekt.page&.image&.attachment&.variant(:medium)),
     }
   end
 
-  def card_image_url
-    if image_variant(:card_thumb).present?
-      image_variant(:card_thumb)
-    elsif image_variant(:thumb_wider).present?
-      image_variant(:thumb_wider)
-    else
-      # If new image not presenta fallback to old
-      image_variant(:medium)
-    end
-  end
-
-  def horizontal_card_image_url
-    if image_variant(:horizontal_card_thumb).present?
-      image_variant(:horizontal_card_thumb)
-    elsif image_variant(:thumb_wider).present?
-      image_variant(:thumb_wider)
-    else
-      # If new image not presenta fallback to old
-      image_variant(:medium)
-    end
+  def projekt_phase_url_for(phase)
+    "#{projekt.page.url}?selected_phase_id=#{phase.id}#projekt-footer"
   end
 
   def image_variant(variant)

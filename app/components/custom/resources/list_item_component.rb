@@ -13,8 +13,7 @@ class Resources::ListItemComponent < ApplicationComponent
     projekt: nil,
     title:,
     description:,
-    card_image_url: nil,
-    horizontal_card_image_url: nil,
+    image_url: nil,
     author: nil,
     subline: nil,
     url: nil,
@@ -26,8 +25,7 @@ class Resources::ListItemComponent < ApplicationComponent
     @title = title
     @projekt = projekt
     @description = description
-    @card_image_url = card_image_url
-    @horizontal_card_image_url = horizontal_card_image_url
+    @image_url = image_url
     @author = author
     @url = url
     @subline = subline
