@@ -175,6 +175,8 @@ module ProjektPhaseAdminActions
   end
 
   def formular
+    @formular = @projekt_phase.formular
+    @formular_fields = @formular.formular_fields
     authorize!(:formular, @projekt_phase) unless current_user.administrator?
     render "custom/admin/projekt_phases/formular"
   end

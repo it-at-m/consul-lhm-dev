@@ -21,6 +21,9 @@ namespace :admin do
       get :formular
     end
 
+    resources :formular, only: [] do
+      resources :formular_fields, only: [:new, :create, :update, :destroy]
+    end
     resources :projekt_labels, except: %i[index show]
     resources :sentiments, except: %i[index show]
     resources :projekt_questions, except: %i[index show] do

@@ -9,12 +9,12 @@
 
 <div class="row">
   <div class="column">
-    Questions
-  </div>
-</div>
+    <div id="formular-fields">
+      <%= render partial: "custom/admin/formular_fields/form", collection: @formular_fields, as: :formular_field %>
+    </div>
 
-<div class="row">
-  <div class="column">
-    add question
+    <div id="new_formular_field">
+      <%= render "custom/admin/formular_fields/new_formular_field_button" %>
+    </div>
   </div>
 </div>
