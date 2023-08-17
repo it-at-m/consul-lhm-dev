@@ -5,6 +5,7 @@ class FormularField < ApplicationRecord
   after_create :set_options
 
   validates :name, presence: true, uniqueness: { scope: :formular_id }
+  validates :key, presence: true, uniqueness: { scope: :formular_id }
   validates :kind, presence: true, inclusion: { in: KINDS }
 
   # KINDS = %w[string email text_field text_area check_box radio_button select].freeze

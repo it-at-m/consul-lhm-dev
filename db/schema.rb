@@ -839,6 +839,7 @@ ActiveRecord::Schema.define(version: 2023_08_16_135054) do
   create_table "formular_fields", force: :cascade do |t|
     t.string "name"
     t.string "description"
+    t.string "key"
     t.string "kind"
     t.boolean "required", default: false, null: false
     t.jsonb "options", default: {}, null: false
@@ -846,6 +847,8 @@ ActiveRecord::Schema.define(version: 2023_08_16_135054) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["formular_id"], name: "index_formular_fields_on_formular_id"
+    t.index ["key", "formular_id"], name: "index_formular_fields_on_key_and_formular_id", unique: true
+    t.index ["name", "formular_id"], name: "index_formular_fields_on_name_and_formular_id", unique: true
   end
 
   create_table "formulars", force: :cascade do |t|
