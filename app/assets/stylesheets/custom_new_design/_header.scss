@@ -10,12 +10,13 @@
       width: 100%;
       justify-content: space-between;
     }
+  }
 
-    .top-bar-background-wrapper {
-      height: 100px;
-      max-width: 1920px;
-      margin: auto;
-    }
+  .top-bar-background-wrapper {
+    height: 100px;
+    max-width: 1920px;
+    margin: auto;
+    background-color: white;
   }
 
   .hader--subnavigation-wrapper {
@@ -33,14 +34,14 @@
   }
 
   .homepage-image-header {
-    margin-top: -225px;
-    margin-left: -100px;
-    margin-right: -100px;
+    // margin-top: -225px;
+    // margin-left: -100px;
+    // margin-right: -100px;
     height: 700px;
-    margin-bottom: 50px;
     position: relative;
     max-width: 1920px;
     margin: auto;
+    margin-bottom: 20px;
     margin-top: -100px;
   }
 

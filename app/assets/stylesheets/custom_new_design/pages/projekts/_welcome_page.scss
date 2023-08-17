@@ -1,4 +1,12 @@
 .custom-new-design {
+  &.home-page {
+    header {
+      .top-bar-background-wrapper {
+        background-color: transparent;
+      }
+    }
+  }
+
   .welcome-page--first-content-block {
     .custom-content-block-body {
       margin-top: 0 !important;
