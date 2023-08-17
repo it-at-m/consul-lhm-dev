@@ -108,9 +108,9 @@ class Proposal < ApplicationRecord
   def editable_by?(user)
     return false unless user
     return false unless editable?
+    return true if author_id == user.id
 
-    (author.official_level == user.official_level) ||
-      (author_id == user.id)
+    author.official_level > 0 && (author.official_level == user.official_level)
   end
 
   protected
