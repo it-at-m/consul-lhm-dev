@@ -418,6 +418,10 @@
       display: block;
       color: inherit;
       text-align: left;
+
+      &:hover {
+        color: #28313b;
+      }
     }
 
     i {

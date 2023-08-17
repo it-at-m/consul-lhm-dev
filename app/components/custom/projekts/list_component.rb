@@ -21,30 +21,6 @@ class Projekts::ListComponent < ApplicationComponent
       **@attributes
     ))
   end
-  #
-  # def filters
-  #   return if @filters.blank?
-  #
-  #   @filters.map do |filter|
-  #     {
-  #       value: filter,
-  #       title: t("custom.projekts.orders.#{filter}")
-  #     }
-  #   end
-  # end
-
-  # def current_filter_option
-  #   return if filters.blank?
-  #
-  #   filters.find { |filter_option| filter_option[:value] == @current_filter }
-  # end
-
-  # def html_class(order)
-  #   "is-active" if order == current_order
-  # end
-  # def filter_link_path(order)
-  #   current_path_with_query_params(order: order, anchor: @anchor)
-  # end
 
   def tag_name(order)
     if order == current_order

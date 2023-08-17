@@ -1,19 +1,5 @@
 <% launch_page ||= false %>
 
-<% header_large = Widget::Card.header.find_by title: "header_large" %>
-
-<style>
-  <% if header_large %>
-    .top-bar-background-wrapper {
-      /* max-width: 1445px; */
-      background-image: url("<%= polymorphic_path(header_large.image.attachment) %>");
-      background-size: cover;
-      background-position: top;
-      margin: auto;
-    }
-  <%end%>
-</style>
-
 <header>
   <div class="js-stiky-header top-bar-wrapper">
     <div class="top-bar-background-wrapper">

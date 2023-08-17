@@ -489,7 +489,7 @@ class Projekt < ApplicationRecord
   end
 
   def current_phases
-    projekt_phases.regular_phases.select(&:current?)
+    projekt_phases.select(&:current?)
   end
 
   private

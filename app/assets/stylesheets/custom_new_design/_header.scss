@@ -1,13 +1,21 @@
 .custom-new-design {
   header {
     padding: 0;
-    background: transparent !important;
     z-index: 1000;
+    margin-bottom: 0;
+    max-width: auto;
+    background-color: white;
 
     .main-menu {
       display: flex;
       width: 100%;
       justify-content: space-between;
+    }
+
+    .top-bar-background-wrapper {
+      height: 100px;
+      width: 1920px;
+      margin: auto;
     }
   }
 
@@ -32,8 +40,8 @@
     height: 700px;
     margin-bottom: 50px;
     position: relative;
-    width: calc(100% + 200px);
-    // width: 1445px;
+    max-width: 1920px;
+    margin: auto;
   }
 
 
@@ -111,12 +119,6 @@ body.custom-new-design .wrapper > header .locale.locale-custom {
   }
 }
 
-body.custom-new-design > header, .custom-new-design .wrapper > header {
-  height: 150px;
-  max-width: auto;
-}
-
-
 .custom-new-design {
   .top-bar--title-logo-stikcy {
     display: none;
@@ -156,8 +158,7 @@ body.custom-new-design > header, .custom-new-design .wrapper > header {
   }
 
   .top-bar-background-wrapper {
-    height: 150px;
-
+    // height: 100px;
     // transition: all 200ms ease;
   }
 
@@ -195,11 +196,6 @@ body.custom-new-design > header, .custom-new-design .wrapper > header {
     top: 0;
     background: white;
     z-index: 1000;
-
-    .top-bar-background-wrapper {
-      background: transparent !important;
-      height: 100px;
-    }
 
     .top-bar {
       .top-bar--title-logo-top {
@@ -562,10 +558,6 @@ body.custom-new-design > header, .custom-new-design .wrapper > header {
 
     .main-menu {
       margin: 0 !important;
-    }
-
-    .top-bar-background-wrapper, .sticky-header .top-bar-background-wrapper {
-      height: 70px;
     }
 
     .hamburger-menu {
