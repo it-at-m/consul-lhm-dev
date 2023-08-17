@@ -108,6 +108,7 @@ de:
         question_phase: Kurzumfrage
         voting_phase: Abstimmungen
         argument_phase: Stimmen
+        livestream_phase: Livestream
       projekt_events:
         index:
           title: Veranstaltungskalender
