@@ -27,6 +27,19 @@
     }
   }
 
+  .resources-list--bottom-content {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .resources-list--more-link {
+    margin: auto;
+    display: block;
+    color: inherit;
+    font-size: 18px;
+  }
+
   .resources-list--title {
     // font-size: 30px;
     font-size: 28px;

@@ -73,5 +73,10 @@
     <div class="resources-list--body js-resources-list--body">
       <%= body %>
     </div>
+    <% if bottom_content.present? %>
+      <div class="resources-list--bottom-content">
+        <%= bottom_content %>
+      </div>
+    <% end %>
   </div>
 <% end %>

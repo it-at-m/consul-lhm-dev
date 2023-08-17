@@ -4,7 +4,6 @@
     z-index: 1000;
     margin-bottom: 0;
     max-width: auto;
-    background-color: white;
 
     .main-menu {
       display: flex;
@@ -14,8 +13,9 @@
 
     .top-bar-background-wrapper {
       height: 100px;
-      width: 1920px;
+      max-width: 1920px;
       margin: auto;
+      background-color: white;
     }
   }
 
@@ -405,7 +405,7 @@ body.custom-new-design .wrapper > header .locale.locale-custom {
     .header--account-buttons {
       display: flex;
       flex-direction: column;
-      margin-right: 15px;
+      // margin-right: 15px;
       margin-top: 2px;
     }
 

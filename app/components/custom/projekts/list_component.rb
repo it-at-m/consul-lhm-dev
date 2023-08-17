@@ -2,16 +2,18 @@
 
 class Projekts::ListComponent < ApplicationComponent
   def initialize(
-    projekts:, **attributes
+    projekts:, show_more_link: false,
+    **attributes
   )
     @projekts = projekts
     @attributes = attributes
+    @show_more_link = show_more_link
   end
 
   def call
     @attributes[:filter_param] = 'order'
 
-    render(Shared::ResourcesListComponent.new(
+    render Shared::ResourcesListComponent.new(
       resources: @projekts,
       resource_type: Projekt,
       title: t("custom.projekts.list.title"),
@@ -19,7 +21,13 @@ class Projekts::ListComponent < ApplicationComponent
       filter_title: t("custom.projekts.filter.title"),
       empty_list_text: t("custom.projekts.index.no_projekts_for_current_filter"),
       **@attributes
-    ))
+    ) do |c|
+      if @show_more_link
+        c.bottom_content do
+          link_to("Alle Projekte anzeigen", projekts_path, class: "resources-list--more-link")
+        end
+      end
+    end
   end
 
   def tag_name(order)

@@ -22,8 +22,12 @@ html{
       margin: auto;
     }
 
-    main, .footer, .top-bar {
+    main, .top-bar {
       max-width: 1245px;
+    }
+
+    .footer {
+      max-width: 1920px;
     }
 
     .header {
