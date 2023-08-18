@@ -829,7 +829,7 @@ ActiveRecord::Schema.define(version: 2023_08_16_135054) do
   end
 
   create_table "formular_answers", force: :cascade do |t|
-    t.jsonb "answers"
+    t.jsonb "answers", default: {}, null: false
     t.bigint "formular_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -1,0 +1,18 @@
+<%= form_with model: formular_answer, url: formular_answers_path(formular_answer), local: false do |f| %>
+  <%= f.hidden_field :formular_id, value: formular_answer.formular_id %>
+  <% formular_answer.formular_fields.each do |ff| %>
+    <% invalid_field_class = formular_answer.answer_errors.include?(ff.key) %>
+    <% if ff.kind == "string" %>
+      <%= label_tag "formular_answer[answers][#{ff.key}]", ff.name, class: ("is-invalid-label" if invalid_field_class) %>
+      <%= text_field_tag "formular_answer[answers][#{ff.key}]", formular_answer.answers[ff.key], autocomplete: "off", class: ("is-invalid-input" if invalid_field_class) %>
+
+      <% if formular_answer.answer_errors[ff.key] %>
+        <%= content_tag :small, class: "form-error is-visible" do %>
+          <%= formular_answer.answer_errors[ff.key] %>
+        <% end %>
+      <% end %>
+
+    <% end %>
+  <% end %>
+  <%= f.submit %>
+<% end %>

@@ -11,6 +11,7 @@
         <%= f.text_field :name %>
         <%= f.text_field :key %>
         <%= f.text_field :description %>
+        <%= f.check_box :required %>
         <%= f.select :kind, FormularField::KINDS %>
         <%= f.submit %>
       <% end %>

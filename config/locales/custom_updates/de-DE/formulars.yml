@@ -1,0 +1,9 @@
+de:
+  custom:
+    formular_answer:
+      errors:
+        blank: Darf nicht leer sein
+        length:
+          minimum: Mindestens %{minimum} Buchstaben
+          maximum: Nicht mehr als %{maximum} Buchstaben
+          

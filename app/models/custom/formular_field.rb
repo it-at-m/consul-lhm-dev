@@ -1,5 +1,6 @@
 class FormularField < ApplicationRecord
-  KINDS = %w[string].freeze
+  KINDS = %w[string email].freeze
+  # KINDS = %w[string email text_field text_area check_box radio_button select].freeze
 
   belongs_to :formular
   after_create :set_options
@@ -7,8 +8,6 @@ class FormularField < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :formular_id }
   validates :key, presence: true, uniqueness: { scope: :formular_id }
   validates :kind, presence: true, inclusion: { in: KINDS }
-
-  # KINDS = %w[string email text_field text_area check_box radio_button select].freeze
 
   private
 
@@ -19,7 +18,6 @@ class FormularField < ApplicationRecord
     def string_field_options
       {
         validates: {
-          presence: true,
           length: { minimum: 2, maximum: 255 }
         }
       }

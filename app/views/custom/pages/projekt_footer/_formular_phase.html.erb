@@ -7,15 +7,6 @@
   </div>
 
   <div id="formular" class='spinner-placeholder small-12 medium-9 column'>
-    <%= form_with model: @formular_answer, url: formular_answers_path(@formular_anwer) do |f| %>
-      <%= f.hidden_field :formular_id, value: @formular_answer.formular_id %>
-      <% @formular_fields.each do |ff| %>
-        <% if ff.kind == "string" %>
-          <%= label_tag "formular_answer[answers][#{ff.key}]", ff.name %>
-          <%= text_field_tag "formular_answer[answers][#{ff.key}]", nil, autocomplete: "off" %>
-        <% end %>
-      <% end %>
-      <%= f.submit %>
-    <% end %>
+    <%= render "custom/formular_answers/form", formular_answer: @formular_answer %>
   </div>
 </div>
