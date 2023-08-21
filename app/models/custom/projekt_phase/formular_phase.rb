@@ -22,7 +22,7 @@ class ProjektPhase::FormularPhase < ProjektPhase
   end
 
   def admin_nav_bar_items
-    %w[duration naming settings formular]
+    %w[duration naming settings formular formular_answers]
   end
 
   def safe_to_destroy?

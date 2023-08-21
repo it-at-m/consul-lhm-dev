@@ -181,6 +181,14 @@ module ProjektPhaseAdminActions
     render "custom/admin/projekt_phases/formular"
   end
 
+  def formular_answers
+    @formular = @projekt_phase.formular
+    @formular_fields = @formular.formular_fields
+    @formular_answers = @formular.formular_answers
+    authorize!(:formular, @projekt_phase) unless current_user.administrator?
+    render "custom/admin/projekt_phases/formular_answers"
+  end
+
   private
 
     def projekt_phase_params

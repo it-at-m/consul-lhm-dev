@@ -19,6 +19,7 @@ namespace :admin do
       get :projekt_notifications
       get :projekt_arguments
       get :formular
+      get :formular_answers
     end
 
     resources :formular, only: [] do
