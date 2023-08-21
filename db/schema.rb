@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_09_165129) do
+ActiveRecord::Schema.define(version: 2023_08_21_123129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -828,6 +828,38 @@ ActiveRecord::Schema.define(version: 2023_08_09_165129) do
     t.index ["user_id"], name: "index_follows_on_user_id"
   end
 
+  create_table "formular_answers", force: :cascade do |t|
+    t.jsonb "answers", default: {}, null: false
+    t.bigint "formular_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["formular_id"], name: "index_formular_answers_on_formular_id"
+  end
+
+  create_table "formular_fields", force: :cascade do |t|
+    t.integer "given_order", default: 1
+    t.boolean "required", default: false, null: false
+    t.string "name"
+    t.string "description"
+    t.string "key"
+    t.string "kind"
+    t.string "drop_down_options"
+    t.jsonb "options", default: {}, null: false
+    t.bigint "formular_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["formular_id"], name: "index_formular_fields_on_formular_id"
+    t.index ["key", "formular_id"], name: "index_formular_fields_on_key_and_formular_id", unique: true
+    t.index ["name", "formular_id"], name: "index_formular_fields_on_name_and_formular_id", unique: true
+  end
+
+  create_table "formulars", force: :cascade do |t|
+    t.bigint "projekt_phase_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["projekt_phase_id"], name: "index_formulars_on_projekt_phase_id"
+  end
+
   create_table "geozones", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "html_map_coordinates"
@@ -1186,6 +1218,7 @@ ActiveRecord::Schema.define(version: 2023_08_09_165129) do
     t.string "layer_defs"
     t.string "mappable_type"
     t.bigint "mappable_id"
+    t.decimal "opacity", precision: 2, scale: 1, default: "1.0"
     t.index ["mappable_type", "mappable_id"], name: "index_map_layers_on_mappable_type_and_mappable_id"
     t.index ["projekt_id"], name: "index_map_layers_on_projekt_id"
   end
@@ -2504,6 +2537,9 @@ ActiveRecord::Schema.define(version: 2023_08_09_165129) do
   add_foreign_key "failed_census_calls", "users"
   add_foreign_key "flags", "users"
   add_foreign_key "follows", "users"
+  add_foreign_key "formular_answers", "formulars"
+  add_foreign_key "formular_fields", "formulars"
+  add_foreign_key "formulars", "projekt_phases"
   add_foreign_key "geozones_polls", "geozones"
   add_foreign_key "geozones_polls", "polls"
   add_foreign_key "identities", "users"
