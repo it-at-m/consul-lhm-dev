@@ -26,6 +26,8 @@ class FormularAnswersController < ApplicationController
         next if formular_answer.answer_errors[formular_field.key].present?
 
         validations = formular_field.options["validates"]
+        next unless validations
+
         validations.keys.each do |validation|
           send("validate_for_#{validation}", formular_answer, formular_field)
         end
@@ -47,6 +49,16 @@ class FormularAnswersController < ApplicationController
         formular_answer.answer_errors[formular_field.key] = error_message
       elsif rule["maximum"] && formular_answer.answers[formular_field.key].length > rule["maximum"]
         error_message = t("custom.formular_answer.errors.length.maximum", maximum: rule["maximum"])
+        formular_answer.answer_errors[formular_field.key] = error_message
+      end
+    end
+
+    def validate_for_format(formular_answer, formular_field)
+      rule = formular_field.options["validates"]["format"]
+      regexp = Regexp.new(rule)
+
+      unless regexp.match?(formular_answer.answers[formular_field.key])
+        error_message = t("custom.formular_answer.errors.format")
         formular_answer.answer_errors[formular_field.key] = error_message
       end
     end

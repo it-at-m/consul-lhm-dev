@@ -59,6 +59,6 @@ module FormularFieldsActions
     end
 
     def formular_field_params
-      params.require(:formular_field).permit(:name, :description, :key, :required, :kind, options: {})
+      params.require(:formular_field).permit(:name, :description, :key, :required, :kind, :drop_down_options)
     end
 end

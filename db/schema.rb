@@ -837,11 +837,13 @@ ActiveRecord::Schema.define(version: 2023_08_16_135054) do
   end
 
   create_table "formular_fields", force: :cascade do |t|
+    t.integer "given_order", default: 1
+    t.boolean "required", default: false, null: false
     t.string "name"
     t.string "description"
     t.string "key"
     t.string "kind"
-    t.boolean "required", default: false, null: false
+    t.string "drop_down_options"
     t.jsonb "options", default: {}, null: false
     t.bigint "formular_id"
     t.datetime "created_at", null: false
