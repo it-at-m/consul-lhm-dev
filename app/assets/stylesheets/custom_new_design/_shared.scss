@@ -13,5 +13,9 @@
   .button {
     background-color: #FFA42D;
     color: black;
+
+    &:hover {
+      color: #ffbf6b;
+    }
   }
 }
