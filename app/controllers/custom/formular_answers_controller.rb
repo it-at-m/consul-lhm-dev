@@ -6,11 +6,10 @@ class FormularAnswersController < ApplicationController
     @formular_answer = FormularAnswer.new(formular_answer_params)
     validate_answer(@formular_answer)
 
-    if @formular_answer.answer_errors.any?
-      render :create
-    else
+    unless @formular_answer.answer_errors.any?
       @formular_answer.save!
-      redirect_to page_path(@formular_answer.formular.projekt_phase.projekt.page.slug)
+      @success_notification = t("custom.formular_answer.notifications.success")
+      render :create
     end
   end
 

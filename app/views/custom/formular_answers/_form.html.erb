@@ -9,7 +9,7 @@
     <% elsif ff.kind == "date" %>
       <%= date_field_tag "formular_answer[answers][#{ff.key}]", formular_answer.answers[ff.key], autocomplete: "off", class: ("is-invalid-input" if invalid_field_class) %>
     <% elsif ff.kind == "dropdown" %>
-      <%= select_tag "formular_answer[answers][#{ff.key}]", options_for_select(ff.drop_down_options.split(",").map(&:strip), formular_answer.answers["gender"]),
+      <%= select_tag "formular_answer[answers][#{ff.key}]", options_for_select(ff.drop_down_options.split(",").map(&:strip), formular_answer.answers[ff.key]),
         include_blank: true, class: "show-arrow #{"is-invalid-input" if invalid_field_class}" %>
     <% end %>
 
@@ -18,7 +18,13 @@
         <%= formular_answer.answer_errors[ff.key] %>
       <% end %>
     <% end %>
-
   <% end %>
+
+  <% if @success_notification %>
+    <%= content_tag :div, class: "callout success" do %>
+      <%= @success_notification %>
+    <% end %>
+  <% end %>
+
   <%= f.submit %>
 <% end %>
