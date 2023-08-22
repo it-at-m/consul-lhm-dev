@@ -81,6 +81,14 @@
 
 // Formular
 
-.formular-form-field {
-  position: relative;
+.admin-content .formular-fields {
+  .formular-field {
+    position: relative;
+
+    .controls {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
 }

@@ -1,0 +1,36 @@
+<div id="<%= dom_id(formular_field) %>" class="formular-field margin-bottom">
+  <div class="controls">
+    <%= link_to polymorphic_path([@namespace, @projekt_phase, @formular, formular_field], action: :edit), remote: true do %>
+      <i class="far fa-edit"></i>
+    <% end %>
+
+    <%= link_to polymorphic_path([@namespace, @projekt_phase, @formular, formular_field]),
+      remote: true,
+      method: :delete,
+      data: { confirm: "Sind Sie sicher?" } do %>
+      <i class="fas fa-trash-alt"></i>
+    <% end %>
+  </div>
+
+  <div>
+    <%= "#{t("activerecord.attributes.formular_field.name")}: #{formular_field.name}" %>
+  </div>
+
+  <div>
+    <%= "#{t("activerecord.attributes.formular_field.description")}: #{formular_field.description}" %>
+  </div>
+
+  <div>
+    <%= "#{t("activerecord.attributes.formular_field.required")}: #{formular_field.required ? t("custom.boolean.yes") : t("custom.boolean.no")}" %>
+  </div>
+
+  <div>
+    <%= "#{t("activerecord.attributes.formular_field.kind")}: #{formular_field.kind}" %>
+  </div>
+
+  <% if formular_field.kind == 'dropdown' %>
+    <div>
+      <%= "#{t("activerecord.attributes.formular_field.drop_down_options")}: #{formular_field.drop_down_options}" %>
+    </div>
+  <% end %>
+</div>

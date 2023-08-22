@@ -190,3 +190,10 @@ de:
       projekt_phase:
         start_date: Anfangsdatum
         end_date: Enddatum
+      formular_field:
+        name: Name
+        key: Schlüssel
+        description: Beschreibung
+        required: erforderlich
+        kind: Typ
+        drop_down_options: Dropdown-Optionen

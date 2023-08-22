@@ -5,7 +5,7 @@ module FormularFieldsActions
     respond_to :js
 
     before_action :set_projekt_phase, :set_formular
-    before_action :set_formular_field, only: %i[update destroy]
+    before_action :set_formular_field, only: %i[edit update destroy]
   end
 
   def new
@@ -25,6 +25,12 @@ module FormularFieldsActions
     else
       render :new
     end
+  end
+
+  def edit
+    authorize!(:new, @formular_field) unless current_user.administrator?
+
+    render "custom/admin/formular_fields/edit"
   end
 
   def update

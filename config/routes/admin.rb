@@ -23,7 +23,7 @@ namespace :admin do
     end
 
     resources :formular, only: [] do
-      resources :formular_fields, only: [:new, :create, :update, :destroy]
+      resources :formular_fields, only: [:new, :create, :edit, :update, :destroy]
     end
     resources :projekt_labels, except: %i[index show]
     resources :sentiments, except: %i[index show]
