@@ -2,10 +2,9 @@ class FormularField < ApplicationRecord
   KINDS = %w[string email date dropdown].freeze
 
   belongs_to :formular
-  after_create :set_options
+  after_create :set_key, :set_options
 
   validates :name, presence: true, uniqueness: { scope: :formular_id }
-  validates :key, presence: true, uniqueness: { scope: :formular_id }
   validates :kind, presence: true, inclusion: { in: KINDS }
 
   default_scope { order(:given_order, :id) }
@@ -17,6 +16,10 @@ class FormularField < ApplicationRecord
   end
 
   private
+
+    def set_key
+      update!(key: "#{name.parameterize.underscore}_#{id}")
+    end
 
     def set_options
       update!(options: send("#{kind}_field_options")) if kind.in?(["string", "email"])

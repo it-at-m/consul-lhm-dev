@@ -192,7 +192,6 @@ de:
         end_date: Enddatum
       formular_field:
         name: Name
-        key: Schlüssel
         description: Beschreibung
         required: erforderlich
         kind: Typ

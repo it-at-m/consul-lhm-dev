@@ -21,11 +21,7 @@
   </div>
 
   <div>
-    <%= "#{t("activerecord.attributes.formular_field.required")}: #{formular_field.required ? t("custom.boolean.yes") : t("custom.boolean.no")}" %>
-  </div>
-
-  <div>
-    <%= "#{t("activerecord.attributes.formular_field.kind")}: #{formular_field.kind}" %>
+    <%= "#{t("activerecord.attributes.formular_field.kind")}: #{t("custom.admin.projekt_phases.formular.kinds.#{formular_field.kind}")}" %>
   </div>
 
   <% if formular_field.kind == 'dropdown' %>
@@ -33,4 +29,10 @@
       <%= "#{t("activerecord.attributes.formular_field.drop_down_options")}: #{formular_field.drop_down_options}" %>
     </div>
   <% end %>
+
+  <div>
+    <%= "#{t("activerecord.attributes.formular_field.required")}: #{formular_field.required ? t("custom.boolean.yes") : t("custom.boolean.no")}" %>
+  </div>
+
+  <hr>
 </div>

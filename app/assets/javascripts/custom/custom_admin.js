@@ -94,6 +94,14 @@
         }
       })
 
+      $("body").on("change", ".js-toggle-formular-field-drop-down-options", function() {
+        if ( $(this).val() == "dropdown" ) {
+          $(".drop-down-options").removeClass("hide");
+        } else {
+          $(".drop-down-options").addClass("hide");
+        }
+      })
+
       $(document).on("click", ".js-admin-edit-projekt-event", function(e) {
         App.HTMLEditor.initialize();
       })
