@@ -28,7 +28,7 @@
         Shared::ResourceImageComponent.new(
           image_url: @image_url,
           image_placeholder_icon_class: @image_placeholder_icon_class,
-          resource_name: @resource_name)
+          resource_name: resource_name)
       ) %>
     <% end %>
   </div>
@@ -67,7 +67,7 @@
               </div>
             <% end %>
           </div>
-          <%= link_to(@title, @url, class: "resource-item--title" ) %>
+          <%= link_to(truncate(@title, length: 72), @url, class: "resource-item--title" ) %>
 
           <div class="resource-item--description">
             <%= truncate(strip_tags(@description), length: 160) %>

@@ -27,29 +27,25 @@
             switchButton
               .closest(".js-resources-list")
 
-      this.switchResourceListViewMode(resourcesList);
-
       var currentViewModeWide =
         this.isResourcesListInWideMode(resourcesList)
         resourcesList.dataset
 
       if (currentViewModeWide) {
-        document.cookie = 'wide_resources=true'
-      }
-      else {
         document.cookie = 'wide_resources=false'
       }
+      else {
+        document.cookie = 'wide_resources=true'
+      }
 
-      this.switchViewModeForRestResources(currentViewModeWide);
+      this.switchViewModeForRestResources();
     },
 
-    switchViewModeForRestResources: function(currentViewModeWide) {
+    switchViewModeForRestResources: function() {
       var resourcesListsOnPage = Array.from(document.querySelectorAll(".js-resources-list"));
 
       resourcesListsOnPage.forEach(function(resourcesList) {
-        if (!(currentViewModeWide === this.isResourcesListInWideMode(resourcesList))) {
-          this.switchResourceListViewMode(resourcesList);
-        }
+        this.switchResourceListViewMode(resourcesList);
       }.bind(this))
     },
 

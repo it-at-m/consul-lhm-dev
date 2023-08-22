@@ -67,10 +67,4 @@ module CustomHelper
 
     array
   end
-
-  DATE_RANGE_FORMAT = "%d. %B %Y".freeze
-
-  # def format_date_range(start_date, end_date)
-  #   "#{start_date.strftime(DATE_RANGE_FORMAT)} - #{end_date.strftime(DATE_RANGE_FORMAT)}"
-  # end
 end

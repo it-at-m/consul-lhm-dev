@@ -30,9 +30,35 @@ class Resources::ListItemComponent < ApplicationComponent
     @url = url
     @subline = subline
     @tags = tags
-    @resource_name = @resource.class.name.downcase.gsub("::", "_")
     @image_placeholder_icon_class = image_placeholder_icon_class
     @header_style = header_style
+  end
+
+  def resource_name
+      # @resource.class.name.downcase.gsub("::", "_")
+    if @resource.is_a?(Projekt)
+      return "Projekt"
+    end
+
+    if @resource.is_a?(DeficiencyReport)
+      return "Deficiency report"
+    end
+
+    phases =
+      case @resource
+      when Debate
+        @projekt.debate_phases
+      when Proposal
+        @projekt.proposal_phases
+      when Poll
+        @projekt.voting_phases
+      when Budget::Investment
+        @projekt.budget_phases
+      when ProjketEvent
+        @projekt.event_phases
+      end
+
+    phases.first.title.downcase
   end
 
   def component_class_name

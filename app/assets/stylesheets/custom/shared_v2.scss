@@ -1,3 +1,21 @@
 .fa-location-dot:before {
   content: "\f3c5";
 }
+
+.notice-text {
+  margin-right: 30px;
+}
+
+.callout {
+  border-radius: 8px;
+
+  .close-button {
+    top: 8px;
+    color: inherit;
+  }
+}
+
+.notice-container .notice {
+  display: flex;
+  min-height: 5px;
+}

@@ -38,7 +38,7 @@
       <%= render_custom_block 'home_page_2' %>
 
       <% if @latest_polls.any? %>
-        <%= render Shared::ResourcesListComponent.new(resources: @polls, resource_type: Poll, title: t('custom.welcome.current_polls')) %>
+        <%= render Shared::ResourcesListComponent.new(resources: @latest_polls, resource_type: Poll, title: t('custom.welcome.current_polls')) %>
       <% end %>
 
       <%= render_custom_block 'home_page_4' %>
