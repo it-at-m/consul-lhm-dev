@@ -39,6 +39,7 @@
       </div>
       <div class='column medium-6'>
         <%= f.text_field :layer_names, hint: t("custom.map_layer.hints.layer_names"), disabled: layer.protocol != "wms" %>
+        <%= f.text_field :opacity, disabled: layer.protocol != "wms", hint: t("custom.map_layer.hints.opacity") %>
       </div>
     </div>
 

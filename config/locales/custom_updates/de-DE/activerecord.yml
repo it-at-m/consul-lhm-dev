@@ -110,6 +110,7 @@ de:
         attribution: Attribution
         base: Basisschicht der Karte
         layer_names: Kartenebenennamen
+        opacity: Opazität
         show_by_default: standardmäßig anzeigen
         transparent: diese Kartenebene ist transparent
         protocol: Kartenprotokoll
