@@ -1,4 +1,4 @@
-<div id="<%= dom_id(formular_field) %>" class="formular-field margin-bottom">
+<div id="<%= dom_id(formular_field) %>" class="formular-field margin-bottom" data-answer-id="<%= formular_field.id %>">
   <div class="controls">
     <%= link_to polymorphic_path([@namespace, @projekt_phase, @formular, formular_field], action: :edit), remote: true do %>
       <i class="far fa-edit"></i>

@@ -8,6 +8,14 @@ class FormularField < ApplicationRecord
   validates :key, presence: true, uniqueness: { scope: :formular_id }
   validates :kind, presence: true, inclusion: { in: KINDS }
 
+  default_scope { order(:given_order, :id) }
+
+  def self.order_formular_fields(ordered_array)
+    ordered_array.each_with_index do |formular_field_id, order|
+      find(formular_field_id).update_column(:given_order, (order + 1))
+    end
+  end
+
   private
 
     def set_options

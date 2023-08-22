@@ -50,6 +50,12 @@ module FormularFieldsActions
     render "custom/admin/formular_fields/destroy"
   end
 
+  def order_formular_fields
+    authorize!(:order_formular_fields, @projekt_phase) unless current_user.administrator?
+    @formular.formular_fields.order_formular_fields(params[:ordered_list])
+    head :ok
+  end
+
   private
 
     def set_projekt_phase
