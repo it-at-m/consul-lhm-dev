@@ -7,10 +7,20 @@
 .progress {
   height: 1.3rem;
   border-radius: 0.3rem;
+  overflow: hidden;
+  position: relative;
 
   .meter {
     height: 100%;
-    color: #FFA42D;
+    background-color: #FFA42D;
+    display: block;
+  }
+
+  .percentage {
+    top: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
   }
 }
 
@@ -20,7 +30,14 @@
     color: black;
 
     &:hover {
-      color: #ffbf6b;
+      background: #ffbf6b;
+      color: black;
+    }
+  }
+
+  .in-favor {
+    .button {
+      margin-bottom: 5px;
     }
   }
 }

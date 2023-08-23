@@ -1,12 +1,14 @@
 class Proposals::NewVotesComponent < ApplicationComponent
+  delegate :user_signed_in?, :link_to_signin, :link_to_signup,
+           :link_to_verify_account, :projekt_feature?, :projekt_phase_feature?, to: :helpers
+
   attr_reader :proposal
   delegate :current_user, :link_to_verify_account, to: :helpers
-  delegate :user_signed_in?, :link_to_signin, :link_to_signup,
-           :link_to_verify_account_short, :projekt_feature?, to: :helpers
 
   def initialize(proposal, vote_url: nil)
     @proposal = proposal
     @vote_url = vote_url
+    @proposal_phase = @proposal.projekt_phase
   end
 
   def vote_url
@@ -27,26 +29,37 @@ class Proposals::NewVotesComponent < ApplicationComponent
       t("proposals.proposal.support_label", proposal: proposal.title)
     end
 
+    def permission_problem_key
+      @permission_problem_key ||= @proposal_phase.permission_problem(current_user, location: :votes_component)
+    end
+
     def cannot_vote_text
-      return if can_vote?
+      return nil if permission_problem_key.blank?
 
-      if !user_signed_in?
-        sanitize(t("custom.users.login_to_vote", signin: link_to_signin, signup: link_to_signup))
-
-      elsif current_user.organization?
-        t("votes.organizations")
-
-      elsif !current_user.level_two_or_three_verified?
-        sanitize(t("custom.votes.not_verified", verify_account: link_to_verify_account_short))
-
-      elsif proposal.proposal_phase &&
-        (proposal.proposal_phase.geozone_restrictions.any? &&
-          !proposal.proposal_phase.geozone_restrictions.include?(current_user.geozone))
-        t("custom.votes.geo_restricted")
+      if permission_problem_key == :not_logged_in
+        t(path_to_key,
+          sign_in: link_to_signin, sign_up: link_to_signup)
 
       else
-        t("custom.votes.not_votable")
+        t(path_to_key,
+              verify: link_to_verify_account,
+              city: Setting["org_name"],
+              geozones: @proposal_phase&.geozone_restrictions_formatted,
+              age_restriction: @proposal_phase&.age_restriction_formatted,
+              restricted_streets: @proposal_phase&.street_restrictions_formatted,
+              individual_group_values: @proposal_phase&.individual_group_value_restriction_formatted
+        )
 
       end
     end
+
+    def path_to_key
+      if @proposal_phase &&
+        I18n.exists?("custom.projekt_phases.permission_problem.votes_component.#{@proposal_phase.name}.#{permission_problem_key}")
+        "custom.projekt_phases.permission_problem.votes_component.#{@proposal_phase.name}.#{permission_problem_key}"
+      else
+        "custom.projekt_phases.permission_problem.votes_component.shared.#{permission_problem_key}"
+      end
+    end
 end
+
