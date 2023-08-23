@@ -100,3 +100,36 @@ en:
         icon: Icon
         color: Color
         name: Name
+      projekt_question:
+        show_answers_count: Show number of votes in front-end
+        comments_enabled: Activates open answers
+      projekt_event:
+        title: Event title
+        location: Event location
+        datetime: Date
+        end_datetime: Ending
+        weblink: Link
+      projekt_notification:
+        title: Title
+        body: Body
+      projekt_argument:
+        name: Name
+        party: Party
+        position: Position
+        note: Note
+      projekt_livestream:
+        url: Livestream link
+        title: Title
+        starts_at: Starts at
+        platform: Portal
+        description: Description
+      projekt_phase:
+        start_date: Starting date
+        end_date: Ending date
+      formular_field:
+        name: Name
+        description: Description
+        required: Mandatory field
+        kind: Type
+        email_for_confirmation: Send confirmation email
+        drop_down_options: Dropdown options

@@ -1,15 +1,14 @@
 <div id="<%= dom_id(formular_field) %>" class="formular-field margin-bottom" data-answer-id="<%= formular_field.id %>">
   <div class="controls">
-    <%= link_to polymorphic_path([@namespace, @projekt_phase, @formular, formular_field], action: :edit), remote: true do %>
-      <i class="far fa-edit"></i>
-    <% end %>
+    <%= link_to "", polymorphic_path([@namespace, @projekt_phase, @formular, formular_field], action: :edit),
+      class: "edit-link",
+      remote: true %>
 
-    <%= link_to polymorphic_path([@namespace, @projekt_phase, @formular, formular_field]),
+    <%= link_to "", polymorphic_path([@namespace, @projekt_phase, @formular, formular_field]),
+      class: "destroy-link",
       remote: true,
       method: :delete,
-      data: { confirm: "Sind Sie sicher?" } do %>
-      <i class="fas fa-trash-alt"></i>
-    <% end %>
+      data: { confirm: "Sind Sie sicher?" } %>
   </div>
 
   <div>

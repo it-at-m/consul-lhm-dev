@@ -10,4 +10,4 @@ de:
         length:
           minimum: Mindestens %{minimum} Buchstaben
           maximum: Nicht mehr als %{maximum} Buchstaben
-        format: Format is wrong
+        format: Das Format ist falsch

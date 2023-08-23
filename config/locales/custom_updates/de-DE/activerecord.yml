@@ -43,6 +43,7 @@ de:
       projekt_phase/legislation_phase: Textbearbeitung
       projekt_phase/newsfeed_phase: News-Feed
       projekt_phase/formular_phase: Formular
+      formular_field: Formularfeld
     errors:
       models:
         proposal:
@@ -193,6 +194,7 @@ de:
       formular_field:
         name: Name
         description: Beschreibung
-        required: erforderlich
-        kind: Typ
+        required: Pflichtfeld
+        kind: Art
+        email_for_confirmation: Bestätigungsmail an Nutzer*in versenden
         drop_down_options: Dropdown-Optionen
