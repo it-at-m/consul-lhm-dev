@@ -24,7 +24,7 @@ class Projekts::ListComponent < ApplicationComponent
     ) do |c|
       if @show_more_link
         c.bottom_content do
-          link_to("Alle Projekte anzeigen", projekts_path, class: "resources-list--more-link")
+          link_to("Alle Projekte anzeigen", projekts_path(order: 'index_order_all'), class: "resources-list--more-link")
         end
       end
     end

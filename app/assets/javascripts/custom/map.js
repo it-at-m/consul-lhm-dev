@@ -210,7 +210,7 @@
           type: "GET",
           dataType: "json",
           success: function(data) {
-            e.target.bindPopup(getPopupContent(data), { autoPanPadding: [50, 50], minWidth: 250, offset:  L.point(0, -30) }).openPopup();
+            e.target.bindPopup(getPopupContent(data), { autoPanPadding: [0, 80], minWidth: 200, offset:  L.point(0, -30) }).openPopup();
           }
         });
       };
@@ -236,7 +236,7 @@
           popupHtml += "<h6 style='margin-top:10px;'><a href='/proposals/" + data.proposal_id + "'>" + data.proposal_title + "</a></h6>"; //title
 
           if (data.image_url) {
-            popupHtml += "<img src='" + data.image_url + "' style='margin-bottom:10px;height:140px'>"; //image
+            popupHtml += "<img src='" + data.image_url + "' style='margin-bottom:10px;height:170px'>"; //image
           }
 
           if (data.labels.length || Object.keys(data.sentiment).length) {
@@ -273,7 +273,7 @@
           popupHtml += "<h5 style=';word-wrap:break-word;'><a href='/projekts/" + data.projekt_id + "'>" + data.projekt_title + "</a></h5>"; //title
 
           if (data.image_url) {
-            popupHtml += "<img src='" + data.image_url + "' style='margin-bottom:10px;height:140px;'>"; //image
+            popupHtml += "<img class='resource-map-popup-image' src='" + data.image_url + "' >"; //image
           }
 
           if (data.sdg_goals.length || data.tags.length ) {

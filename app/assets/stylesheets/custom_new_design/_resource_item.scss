@@ -271,14 +271,14 @@
       width: auto;
     }
 
-    .supports {
-      display: flex;
-      flex-direction: column-reverse;
-
-      .total-supports {
-        margin-top: 5px;
-      }
-    }
+    // .supports {
+    //   display: flex;
+    //   flex-direction: column-reverse;
+    //
+    //   .total-supports {
+    //     margin-top: 5px;
+    //   }
+    // }
 
     .budget-item--vote-button {
       height: 100%;
@@ -471,6 +471,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
+    text-transform: uppercase;
   }
 
   .resource-item--image-placeholder {
@@ -496,12 +497,19 @@
   .resource-item--header  {
     height: 45px;
     padding: 0 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     background: $brand;
     display: flex;
     align-items: center;
     justify-content: space-between;
     color: white;
     font-size: 15px;
+
+    &.-narrow {
+      padding-right: 10px;
+    }
 
     a {
       color: white;

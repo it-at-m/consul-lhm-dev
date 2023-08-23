@@ -13,11 +13,9 @@ class Projekts::ListItemComponent < ApplicationComponent
       title: projekt.page.title,
       description: strip_tags(projekt.description),
       tags: projekt.tags.first(3),
-      # start_date: projekt.total_duration_start,
-      # end_date: projekt.total_duration_end,
+      narrow_header: true,
       url: projekt.page.url,
       image_url: image_variant(:card_thumb),
-      # image_url: url_for(projekt.page&.image&.attachment&.variant(:medium)),
     }
   end
 

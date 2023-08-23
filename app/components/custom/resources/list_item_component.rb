@@ -19,7 +19,8 @@ class Resources::ListItemComponent < ApplicationComponent
     url: nil,
     tags: [],
     image_placeholder_icon_class: "fa-file",
-    header_style: nil
+    header_style: nil,
+    narrow_header: false
   )
     @resource = resource
     @title = title
@@ -32,6 +33,7 @@ class Resources::ListItemComponent < ApplicationComponent
     @tags = tags
     @image_placeholder_icon_class = image_placeholder_icon_class
     @header_style = header_style
+    @narrow_header = narrow_header
   end
 
   def resource_name
@@ -86,6 +88,12 @@ class Resources::ListItemComponent < ApplicationComponent
       150
     else
       120
+    end
+  end
+
+  def header_class
+    if @narrow_header
+      "-narrow"
     end
   end
 end
