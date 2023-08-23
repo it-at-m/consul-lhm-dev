@@ -3,10 +3,19 @@
 <div class='row'>
   <div id="formular-sidebar" class="small-12 medium-3 column">
     <aside class="margin-bottom">
+      <% if current_user&.administrator? %>
+        <%= link_to "Antworten", formular_answers_admin_projekt_phase_path(@projekt_phase), target: "_blank" %>
+      <% end %>
     </aside>
   </div>
 
   <div id="formular" class='spinner-placeholder small-12 medium-9 column'>
-    <%= render "custom/formular_answers/form", formular_answer: @formular_answer %>
+    <% if @projekt_phase.not_current? %>
+      <%= t("custom.projekt_phases.permission_problem.new_button_component.shared.phase_not_current") %>
+    <% elsif @projekt_phase.expired? %>
+      <%= t("custom.projekt_phases.permission_problem.new_button_component.shared.phase_expired") %>
+    <% else %>
+      <%= render "custom/formular_answers/form", formular_answer: @formular_answer %>
+    <% end %>
   </div>
 </div>

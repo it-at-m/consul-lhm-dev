@@ -243,6 +243,10 @@ class ProjektPhase < ApplicationRecord
     map_location.show_admin_shape? ? map_location : nil
   end
 
+  def subscribable?
+    true
+  end
+
   private
 
     def phase_specific_permission_problems(user)

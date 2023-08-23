@@ -42,7 +42,7 @@
       </div>
     <% end %>
 
-    <% if projekt_feature?(phase.projekt, "sidebar.show_notification_subscription_toggler") %>
+    <% if phase.subscribable? && projekt_feature?(phase.projekt, "sidebar.show_notification_subscription_toggler") %>
       <div class="phase-subscription">
         <%= render "custom/projekts/partials/phase_subscription", phase: phase %>
       </div>

@@ -1,6 +1,8 @@
 de:
   custom:
     formular_answer:
+      form:
+        submit: Abschicken
       notifications:
         success: Vielen Dank! Ihr Formular wurde erfolgreich eingereicht.
       errors:

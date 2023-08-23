@@ -3,6 +3,7 @@
   <% formular_answer.formular_fields.each do |ff| %>
     <% invalid_field_class = formular_answer.answer_errors.include?(ff.key) %>
     <%= label_tag "formular_answer[answers][#{ff.key}]", ff.name, class: ("is-invalid-label" if invalid_field_class) %>
+    <span class="help-text"><%= ff.description %></span>
 
     <% if ff.kind.in? ["string", "email"] %>
       <%= text_field_tag "formular_answer[answers][#{ff.key}]", formular_answer.answers[ff.key], autocomplete: "off", class: ("is-invalid-input" if invalid_field_class) %>
@@ -25,7 +26,7 @@
       <%= @success_notification %>
     <% end %>
   <% else %>
-    <%= f.submit %>
+    <%= f.submit t("custom.formular_answer.form.submit") %>
   <% end %>
 
 <% end %>
