@@ -186,7 +186,14 @@ module ProjektPhaseAdminActions
     @formular_fields = @formular.formular_fields
     @formular_answers = @formular.formular_answers.page(params[:page]).per(20)
     authorize!(:formular, @projekt_phase) unless current_user.administrator?
-    render "custom/admin/projekt_phases/formular_answers"
+
+    respond_to do |format|
+      format.html { render "custom/admin/projekt_phases/formular_answers" }
+      format.csv do
+        send_data CsvServices::FormularAnswersExporter.call(@formular),
+          filename: "formular_answers-#{@formular.id}-#{Time.zone.today}.csv"
+      end
+    end
   end
 
   private
