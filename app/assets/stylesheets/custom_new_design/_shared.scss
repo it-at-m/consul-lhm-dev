@@ -7,6 +7,11 @@
 .progress {
   height: 1.3rem;
   border-radius: 0.3rem;
+
+  .meter {
+    height: 100%;
+    color: #FFA42D;
+  }
 }
 
 .supports {
