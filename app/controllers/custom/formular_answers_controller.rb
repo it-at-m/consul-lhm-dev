@@ -2,6 +2,8 @@ class FormularAnswersController < ApplicationController
   skip_authorization_check
   respond_to :js
 
+  invisible_captcha only: [:create], honeypot: :subtitle
+
   def create
     @formular_answer = FormularAnswer.new(formular_answer_params)
     @formular_answer.formular.formular_fields.each(&:set_custom_attributes)

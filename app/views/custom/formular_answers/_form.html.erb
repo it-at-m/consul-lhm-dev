@@ -21,6 +21,8 @@
     <% end %>
   <% end %>
 
+  <%= f.invisible_captcha :subtitle %>
+
   <% if @success_notification %>
     <%= content_tag :div, class: "callout success" do %>
       <%= @success_notification %>
