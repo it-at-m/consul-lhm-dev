@@ -272,7 +272,7 @@ class PagesController < ApplicationController
 
   def set_formular_phase_footer_tab_variables
     @formular = @projekt_phase.formular
-    @formular_fields = @formular.formular_fields
+    @formular_fields = @formular.formular_fields.each(&:set_custom_attributes)
     @formular_answer = @formular.formular_answers.new
   end
 

@@ -1,4 +1,4 @@
-module FormularFieldsActions
+module FormularFieldsAdminActions
   extend ActiveSupport::Concern
 
   included do
@@ -29,6 +29,7 @@ module FormularFieldsActions
 
   def edit
     authorize!(:new, @formular_field) unless current_user.administrator?
+    @formular_field.set_custom_attributes
 
     render "custom/admin/formular_fields/edit"
   end
@@ -71,6 +72,9 @@ module FormularFieldsActions
     end
 
     def formular_field_params
-      params.require(:formular_field).permit(:name, :description, :key, :required, :kind, :drop_down_options)
+      params.require(:formular_field).permit(
+        :name, :description, :key, :required, :kind,
+        FormularField::CUSTOM_ATTRIBUTES
+      )
     end
 end

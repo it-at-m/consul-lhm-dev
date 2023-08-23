@@ -94,7 +94,13 @@
         }
       })
 
-      $("body").on("change", ".js-toggle-formular-field-drop-down-options", function() {
+      $("body").on("change", ".js-toggle-custom-formular-fields", function() {
+        if ( $(this).val() == "email" ) {
+          $(".email-for-confirmation").removeClass("hide");
+        } else {
+          $(".email-for-confirmation").addClass("hide");
+        }
+
         if ( $(this).val() == "dropdown" ) {
           $(".drop-down-options").removeClass("hide");
         } else {

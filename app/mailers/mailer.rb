@@ -163,6 +163,11 @@ class Mailer < ApplicationMailer
     end
   end
 
+  def formular_answer_confirmation(email)
+    @email_to = email
+    mail(to: email, subject: t("mailers.formular_answer_confirmation.subject"))
+  end
+
   private
 
     def with_user(user, &block)

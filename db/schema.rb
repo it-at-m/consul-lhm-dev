@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_16_135054) do
+ActiveRecord::Schema.define(version: 2023_08_23_085109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -843,7 +843,6 @@ ActiveRecord::Schema.define(version: 2023_08_16_135054) do
     t.string "description"
     t.string "key"
     t.string "kind"
-    t.string "drop_down_options"
     t.jsonb "options", default: {}, null: false
     t.bigint "formular_id"
     t.datetime "created_at", null: false
@@ -1218,6 +1217,7 @@ ActiveRecord::Schema.define(version: 2023_08_16_135054) do
     t.string "layer_defs"
     t.string "mappable_type"
     t.bigint "mappable_id"
+    t.decimal "opacity", precision: 2, scale: 1, default: "1.0"
     t.index ["mappable_type", "mappable_id"], name: "index_map_layers_on_mappable_type_and_mappable_id"
     t.index ["projekt_id"], name: "index_map_layers_on_projekt_id"
   end

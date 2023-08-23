@@ -1,7 +1,12 @@
 class FormularField < ApplicationRecord
   KINDS = %w[string email date dropdown].freeze
 
+  CUSTOM_ATTRIBUTES = %i[email_for_confirmation drop_down_options].freeze
+  CUSTOM_ATTRIBUTES.each { |attr| attr_accessor attr }
+
   belongs_to :formular
+
+  before_validation :merge_custom_attributes_to_options
   after_create :set_key, :set_options
 
   validates :name, presence: true, uniqueness: { scope: :formular_id }
@@ -15,7 +20,19 @@ class FormularField < ApplicationRecord
     end
   end
 
+  def set_custom_attributes
+    CUSTOM_ATTRIBUTES.each do |attr|
+      send("#{attr}=", options[attr.to_s])
+    end
+  end
+
   private
+
+    def merge_custom_attributes_to_options
+      CUSTOM_ATTRIBUTES.each do |attr|
+        options[attr] = send(attr) if send(attr).present?
+      end
+    end
 
     def set_key
       update!(key: "#{name.parameterize.underscore}_#{id}")

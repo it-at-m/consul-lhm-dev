@@ -1,3 +1,3 @@
 class Admin::FormularFieldsController < Admin::BaseController
-  include FormularFieldsActions
+  include FormularFieldsAdminActions
 end

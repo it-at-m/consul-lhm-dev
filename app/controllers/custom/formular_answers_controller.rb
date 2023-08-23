@@ -4,13 +4,18 @@ class FormularAnswersController < ApplicationController
 
   def create
     @formular_answer = FormularAnswer.new(formular_answer_params)
+    @formular_answer.formular.formular_fields.each(&:set_custom_attributes)
     validate_answer(@formular_answer)
 
-    unless @formular_answer.answer_errors.any?
-      @formular_answer.save!
+    if @formular_answer.answer_errors.none? && @formular_answer.save
+      email_key = @formular_answer.formular.formular_fields
+        .where(kind: "email").where("options ->> 'email_for_confirmation' = ?", "1").first.key
+      email = @formular_answer.answers[email_key]
+      Mailer.formular_answer_confirmation(email).deliver_later
       @success_notification = t("custom.formular_answer.notifications.success")
-      render :create
     end
+
+    render :create
   end
 
   private
@@ -23,6 +28,8 @@ class FormularAnswersController < ApplicationController
       formular_answer.formular_fields.each do |formular_field|
         validate_for_presence(formular_answer, formular_field) if formular_field.required?
         next if formular_answer.answer_errors[formular_field.key].present?
+
+        next if formular_answer.answers[formular_field.key].blank?
 
         validations = formular_field.options["validates"]
         next unless validations
