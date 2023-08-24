@@ -13,7 +13,7 @@ class FormularField < ApplicationRecord
   validates :name, presence: true, uniqueness: { scope: :formular_id }
   validates :kind, presence: true, inclusion: { in: KINDS }
 
-  default_scope { order(:given_order, :id) }
+  default_scope { order(:follow_up, :given_order) }
 
   scope :primary, -> { where(follow_up: false) }
   scope :follow_up, -> { where(follow_up: true) }
