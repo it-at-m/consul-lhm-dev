@@ -10,7 +10,7 @@
 <div class="row">
   <div class="column">
 
-    <%= link_to t("custom.shared.download"), formular_answers_admin_projekt_phase_path(@projekt_phase, format: :csv), class: "float-right small clear" %>
+    <%= link_to t("custom.shared.download"), polymorphic_path([@namespace, @projekt_phase], action: :formular_answers, format: :csv), class: "float-right small clear" %>
 
     <table>
       <thead>

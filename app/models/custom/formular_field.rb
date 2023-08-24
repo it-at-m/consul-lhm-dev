@@ -5,6 +5,7 @@ class FormularField < ApplicationRecord
   CUSTOM_ATTRIBUTES.each { |attr| attr_accessor attr }
 
   belongs_to :formular
+  delegate :projekt_phase, to: :formular
 
   before_validation :merge_custom_attributes_to_options
   after_create :set_key, :set_options

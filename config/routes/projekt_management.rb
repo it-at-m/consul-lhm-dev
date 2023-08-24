@@ -18,6 +18,15 @@ namespace :projekt_management do
       get :projekt_notifications
       get :projekt_arguments
       get :formular
+      get :formular_answers
+    end
+
+    resources :formular, only: [] do
+      resources :formular_fields, only: [:new, :create, :edit, :update, :destroy] do
+        collection do
+          post :order_formular_fields
+        end
+      end
     end
 
     resources :projekt_labels, except: %i[index show]

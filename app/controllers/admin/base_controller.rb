@@ -16,11 +16,16 @@ class Admin::BaseController < ApplicationController
     def allow_projekt_manager?
       return false unless current_user&.projekt_manager?
 
-      projekt_setting_update_action
+      projekt_setting_update_action ||
+        projekt_phase_setting_update_action
     end
 
     def projekt_setting_update_action
       controller_name == "projekt_settings" && action_name == "update"
+    end
+
+    def projekt_phase_setting_update_action
+      controller_name == "projekt_phase_settings" && action_name == "update"
     end
 
     def set_namespace

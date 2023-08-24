@@ -9,7 +9,7 @@
 
 <div class="row">
   <div class="column">
-    <div id="formular-fields" class="formular-fields sortable" data-js-url="<%= order_formular_fields_admin_projekt_phase_formular_formular_fields_path(@projekt_phase, @formular) %>">
+    <div id="formular-fields" class="formular-fields sortable" data-js-url="<%= polymorphic_path([@namespace, @projekt_phase, @formular, FormularField.new], action: :order_formular_fields) %>">
       <%= render partial: "custom/admin/formular_fields/formular_field", collection: @formular_fields, as: :formular_field %>
     </div>
 
