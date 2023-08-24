@@ -3,8 +3,8 @@
 <% if Setting.new_design_enabled? %>
   <%
     title =
-      if @projekt_phase&.title.present?
-        t('custom.user_resources.form.title', label: @projekt_phase.title)
+      if @projekt_phase&.resource_form_title.present?
+        t('custom.user_resources.form.title', label: @projekt_phase.resource_form_title)
       else
         t("new.start_new", scope: 'proposals')
       end

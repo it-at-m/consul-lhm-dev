@@ -7,7 +7,7 @@
     </h1>
 
     <div class="user-resources-form--description">
-      <%= helpers.render_custom_block "user_resource_form_#{resource.class.name.downcase}", default_content: t('user_resources.form.page_description') %>
+      <%= helpers.render_custom_block "user_resource_form_#{resource.class.name.downcase}", default_content: t('custom.user_resources.form.page_description') %>
     </div>
 
     <%= render "shared/errors", resource: resource %>

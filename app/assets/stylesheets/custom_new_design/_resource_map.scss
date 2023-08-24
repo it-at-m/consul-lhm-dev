@@ -10,4 +10,14 @@
       margin-bottom: 8px;
     }
   }
+
+  #map-container {
+    label {
+      display: none;
+    }
+
+    .help-text {
+      font-style: normal;
+    }
+  }
 }
