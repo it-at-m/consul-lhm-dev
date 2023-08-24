@@ -13,8 +13,7 @@ class ProjektPhase::FormularPhase < ProjektPhase
   end
 
   def resources_name
-    debugger
-  #   "proposals"
+    "formular"
   end
 
   def default_order
@@ -22,7 +21,7 @@ class ProjektPhase::FormularPhase < ProjektPhase
   end
 
   def admin_nav_bar_items
-    %w[duration naming formular formular_answers]
+    %w[duration naming settings formular formular_answers]
   end
 
   def safe_to_destroy?
