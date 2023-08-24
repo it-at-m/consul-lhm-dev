@@ -16,3 +16,16 @@
     background-color: $brand;
   }
 }
+
+.custom-new-design {
+  .projekt-labels-selector--checkboxes, .projekt-sentiments-selector--checkboxes {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+
+    .projekt-label {
+      margin-bottom: 0.3em;
+    }
+  }
+}

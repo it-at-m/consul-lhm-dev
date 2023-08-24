@@ -2,15 +2,41 @@
   <%= translatable_form_for(resource, html: { class: "debate-form" }) do |f| %>
     <%= back_path %>
 
-    <h1 class="user-resources-form--title">
-      <%= @title %>
-    </h1>
+    <div class="flex-layout">
+      <div class="main-column">
+        <h1 class="user-resources-form--title">
+          <%= @title %>
+        </h1>
 
-    <div class="user-resources-form--description">
-      <%= helpers.render_custom_block "user_resource_form_#{resource.class.name.downcase}", default_content: t('custom.user_resources.form.page_description') %>
+        <div class="user-resources-form--description">
+          <%= helpers.render_custom_block "user_resource_form_#{resource.class.name.downcase}", default_content: t('custom.user_resources.form.page_description') %>
+        </div>
+
+        <%= render "shared/errors", resource: resource %>
+
+        <% if params[:projekt_id].present? %>
+          <%= hidden_field_tag :projekt_id, params[:projekt_id] %>
+        <% end %>
+
+        <% if params[:projekt_phase_id].present? %>
+          <%= hidden_field_tag :projekt_phase_id, params[:projekt_phase_id] %>
+        <% end %>
+
+        <% if params[:origin].present? %>
+          <%= hidden_field_tag :origin, params[:origin] %>
+        <% end %>
+
+        <% if resource.persisted? %>
+          <span
+              class="hide"
+              id="persisted-resource-data"
+              data-resource-class="<%= resource.class.name.to_s %>"
+              data-resource-id="<%= resource.id %>"
+              data-resource-map="<%= resource.map_location.present? %>">
+          </span>
+        <% end %>
+      </div>
     </div>
-
-    <%= render "shared/errors", resource: resource %>
 
     <div class="flex-layout">
       <div class="main-column">
@@ -72,19 +98,9 @@
         <fieldset class="required-fields">
           <%= hidden_field_tag :order, params[:order] %>
 
-          <%# <% if params[:projekt_id].blank? %>
-            <div class="sidebar-card">
-              <div class="sidebar-card--section">
-                <div class="sidebar-card--header">
-                  <i class="fa fa-code-branch"></i>
-                  Projektzuordnung
-                </div>
-                <p>Ihr Vorschlag wird diesem Projekt zugeordnet:</p>
-
-                  <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: resource, projekts: Projekt.top_level }  %>
-              </div>
-            </div>
-          <%# <% end %>
+          <%= render Shared::SidebarCardComponent.new(title: "Projektzuordnung", description: 'Ihr Vorschlag wird diesem Projekt zugeordnet', icon_name: "code-branch", class_name: "js-sidebar-projekt-section #{projekt_selector_class}") do |c| %>
+            <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: resource, projekts: Projekt.top_level }  %>
+          <% end %>
 
           <%= render Shared::SidebarCardComponent.new(title: "Labels", icon_name: "tag", class_name: 'js-sidebar-label-section') do |c| %>
             <%= render partial: "shared/projekt_selector/projekt_labels", locals:	{ f: f, model: resource } %>

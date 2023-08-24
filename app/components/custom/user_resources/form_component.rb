@@ -88,4 +88,8 @@ class UserResources::FormComponent < ApplicationComponent
   def render_map?
     resource.is_a?(Proposal)
   end
+
+  def projekt_selector_class
+    (params[:origin] == 'projekt' && params[:projekt_id].present?) ? "hide" : ""
+  end
 end
