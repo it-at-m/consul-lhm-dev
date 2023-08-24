@@ -506,6 +506,8 @@ de:
           notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
         formular:
           page_title: Formular
+          primary_fields_title: Reguläre Formularfelder
+          follow_up_fields_title:  Follow-up Formularfelder
           dropdown_hint: Bitte geben Sie Ihre Antwortoptionen ein. Diese müssen durch ein Komma getrennt sein.
           kinds:
             string: Text

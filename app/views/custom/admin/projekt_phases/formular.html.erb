@@ -9,8 +9,18 @@
 
 <div class="row">
   <div class="column">
-    <div id="formular-fields" class="formular-fields sortable" data-js-url="<%= polymorphic_path([@namespace, @projekt_phase, @formular, FormularField.new], action: :order_formular_fields) %>">
-      <%= render partial: "custom/admin/formular_fields/formular_field", collection: @formular_fields, as: :formular_field %>
+    <% if @formular_fields_primary.any? %>
+      <h4><%= t("custom.admin.projekt_phases.formular.primary_fields_title") %></h4>
+    <% end %>
+    <div id="formular-fields-primary" class="formular-fields sortable margin-bottom" data-js-url="<%= polymorphic_path([@namespace, @projekt_phase, @formular, FormularField.new], action: :order_formular_fields) %>">
+      <%= render partial: "custom/admin/formular_fields/formular_field", collection: @formular_fields_primary, as: :formular_field %>
+    </div>
+
+    <% if @formular_fields_follow_up.any? %>
+      <h4><%= t("custom.admin.projekt_phases.formular.follow_up_fields_title") %></h4>
+    <% end %>
+    <div id="formular-fields-follow-up" class="formular-fields sortable margin-bottom" data-js-url="<%= polymorphic_path([@namespace, @projekt_phase, @formular, FormularField.new], action: :order_formular_fields) %>">
+      <%= render partial: "custom/admin/formular_fields/formular_field", collection: @formular_fields_follow_up, as: :formular_field %>
     </div>
 
     <div id="new_formular_field">

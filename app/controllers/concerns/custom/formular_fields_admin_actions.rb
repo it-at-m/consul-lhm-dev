@@ -73,7 +73,7 @@ module FormularFieldsAdminActions
 
     def formular_field_params
       params.require(:formular_field).permit(
-        :name, :description, :key, :required, :kind,
+        :name, :description, :key, :required, :kind, :follow_up,
         FormularField::CUSTOM_ATTRIBUTES
       )
     end

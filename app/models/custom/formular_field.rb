@@ -15,6 +15,9 @@ class FormularField < ApplicationRecord
 
   default_scope { order(:given_order, :id) }
 
+  scope :primary, -> { where(follow_up: false) }
+  scope :follow_up, -> { where(follow_up: true) }
+
   def self.order_formular_fields(ordered_array)
     ordered_array.each_with_index do |formular_field_id, order|
       find(formular_field_id).update_column(:given_order, (order + 1))

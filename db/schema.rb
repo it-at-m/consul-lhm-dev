@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_23_085109) do
+ActiveRecord::Schema.define(version: 2023_08_24_120449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -847,6 +847,7 @@ ActiveRecord::Schema.define(version: 2023_08_23_085109) do
     t.bigint "formular_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "follow_up", default: false
     t.index ["formular_id"], name: "index_formular_fields_on_formular_id"
     t.index ["key", "formular_id"], name: "index_formular_fields_on_key_and_formular_id", unique: true
     t.index ["name", "formular_id"], name: "index_formular_fields_on_name_and_formular_id", unique: true

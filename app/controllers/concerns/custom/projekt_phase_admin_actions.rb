@@ -176,7 +176,8 @@ module ProjektPhaseAdminActions
 
   def formular
     @formular = @projekt_phase.formular
-    @formular_fields = @formular.formular_fields.each(&:set_custom_attributes)
+    @formular_fields_primary = @formular.formular_fields.primary.each(&:set_custom_attributes)
+    @formular_fields_follow_up = @formular.formular_fields.follow_up.each(&:set_custom_attributes)
     authorize!(:formular, @projekt_phase) unless current_user.administrator?
     render "custom/admin/projekt_phases/formular"
   end
