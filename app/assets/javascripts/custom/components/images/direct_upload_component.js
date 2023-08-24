@@ -146,7 +146,7 @@
         $(image_preview).insertBefore($actionsArea);
         data.preview = $dataWrapper.find(".image-preview");
 
-        $dataWrapper.find(".js-direct-image-upload--preview-area").addClass("-active");
+        $dataWrapper.find(".js-direct-image-upload--preview-area").addClass("-preview-set");
       }
     },
 
@@ -157,7 +157,7 @@
         var $mainElement = $(this).closest(".js-direct-image-upload");
 
         $mainElement.find(".image-preview").remove();
-        $mainElement.find(".js-direct-image-upload--preview-area").removeClass("-active");
+        $mainElement.find(".js-direct-image-upload--preview-area").removeClass("-preview-set");
         $mainElement.find(".js-direct-image-upload--cached-attachment").val("");
       });
     },

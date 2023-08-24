@@ -54,10 +54,13 @@
   }
 
   .projekt-labels .projekt-label {
-    background-color: $brand;
     font-size: 14px;
     padding: 5px 8px;
     border-radius: 5px;
+
+    i {
+      font-size: 12px;
+    }
   }
 
   .resource-item--additional-body-section {

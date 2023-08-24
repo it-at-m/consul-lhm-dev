@@ -1,5 +1,5 @@
 <% if controller_name.in? %w[debates proposals] %>
-  <div id="sentiment_selector" class="hide sentiments" style="margin-top:2rem;margin-bottom:1rem;">
+  <div id="sentiment_selector" class="hide sentiments">
     <%= f.label :sentiment_id, t("custom.shared.form.sentiment_label"), class: "required" %>
     <p class="small" style="margin-bottom:0.25rem;"><%= t("custom.shared.form.sentiment_hint") %></p>
     <%= f.collection_radio_buttons :sentiment_id, Sentiment.all, :id, :name, { include_hidden: false } do |rb| %>

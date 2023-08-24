@@ -68,7 +68,7 @@ class UserResources::FormComponent < ApplicationComponent
     when Debate
       Debate.title_max_length
     else
-      100
+      Proposal.title_max_length
     end
   end
 

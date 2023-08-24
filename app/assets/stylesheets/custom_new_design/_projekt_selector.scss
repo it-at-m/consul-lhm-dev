@@ -11,13 +11,25 @@
     }
   }
 
+  .projekt-group {
+    .projekt {
+      &:hover {
+        background-color: var(--dropdown-hover-color);
+      }
+    }
+  }
+
   .projekt-selector-inner {
     position: relative;
   }
 
   #projekt-selector-fields  {
     flex-direction: column;
-    margin-bottom: 0;
+    // margin-bottom: 0;
+
+    .spacer {
+      display: none !important;
+    }
 
     .selected-projekt-placeholder {
       font-size: 15px;
@@ -43,6 +55,7 @@
       flex-basis: auto;
       flex-basis: auto;
       border-radius: 10px;
+      margin-bottom: 5px;
 
       > .selected-projekt, .projekt:first-child {
         // border-radius: 10px;
@@ -54,15 +67,23 @@
       }
     }
 
-    .spacer {
-      display: none !important;
-    }
+    // .spacer {
+    //   display: none !important;
+    // }
+
+    // .spacer + .projekt-selector {
+    //   // display: none;
+    // }
 
     .projekt {
       background: white;
       border: none;
       border-bottom: 1px solid $border-color;
       font-size: 15px;
+
+      &:hover {
+        background-color: var(--dropdown-hover-color);
+      }
     }
 
     .projekt_group {

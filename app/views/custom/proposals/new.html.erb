@@ -1,11 +1,20 @@
 <%= content_for :body_class, "js-new-resource" %>
 
 <% if Setting.new_design_enabled? %>
+  <%
+    title =
+      if @projekt_phase&.title.present?
+        t('custom.user_resources.form.title', label: @projekt_phase.title)
+      else
+        t("new.start_new", scope: 'proposals')
+      end
+  %>
+
   <%= render UserResources::FormComponent.new(
     @proposal,
     url: proposals_path,
     selected_projekt: @selected_projekt,
-    title: t("new.start_new", scope: 'proposals'),
+    title: title,
     categories: @categories
   ) %>
 <% else %>

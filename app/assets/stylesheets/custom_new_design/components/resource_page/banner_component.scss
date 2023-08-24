@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-between;
     background: #D9F0EB;
-    padding: 45px 42px;
+    padding: 42px 42px;
     border-radius: 10px;
     margin-bottom: 15px;
 
@@ -25,6 +25,10 @@
     width: 48%;
     min-height: 260px;
     max-height: 260px;
+
+    .resource-image {
+      border-radius: 5px;
+    }
   }
 
   .resource-page-banner--title {

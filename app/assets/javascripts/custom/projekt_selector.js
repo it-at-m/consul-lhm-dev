@@ -26,8 +26,10 @@
 
       // show next selector
       if ( $selectedProjekt.data('projektSelectableChildren') ) {
-        $nextSpacer.css('visibility', 'visible')
-        $nextProejektSelector.css('visibility', 'visible')
+        // $nextSpacer.css('visibility', '-visible')
+        $nextSpacer.addClass('-visible')
+        // $nextProejektSelector.css('visibility', '-visible')
+        $nextProejektSelector.addClass('-visible')
         $nextProejektSelector.attr('data-target', '#group-for-' + projektId)
         $nextProejektSelector.children('.projekt_group').hide()
       }
@@ -236,6 +238,7 @@
       function updateProjektLabelSelector($projektPhase) {
         if ($projektPhase.data("projekt-labels-name")) {
           $('#projekt_labels_selector label[for$=_projekt_labels]').text($projektPhase.data("projekt-labels-name").replaceAll("_", " "));
+          $('.js-sidebar-label-section .sidebar-card--header-text').text($projektPhase.data("projekt-labels-name").replaceAll("_", " "));
         }
 
         if ($projektPhase.data("projekt-label-ids")) {
@@ -244,12 +247,16 @@
           var labelIdsToShow = [];
         }
 
+        var $labelSection = $('.js-sidebar-label-section')
+
         if (labelIdsToShow.join().length == 0) {
+          $labelSection.addClass('hide');
           $('#projekt_labels_selector').addClass('hide');
           $('#projekt_labels_selector input[type=checkbox]').prop('checked', false);
 
         } else {
           $('#projekt_labels_selector').removeClass('hide');
+          $labelSection.removeClass('hide');
         }
 
         $("#projekt_labels_selector .projekt-label").each(function(index, label) {
@@ -264,6 +271,7 @@
       function updateSentimentSelector($projektPhase) {
         if ($projektPhase.data("sentiments-name")) {
           $('#sentiment_selector label[for$=_sentiment_id]').text($projektPhase.data("sentiments-name").replaceAll("_", " "));
+          $('.js-sidebar-sentiment-section .sidebar-card--header-text').text($projektPhase.data("sentiments-name").replaceAll("_", " "));
         }
 
         if ($projektPhase.data("sentiment-ids")) {
@@ -272,11 +280,15 @@
           var sentimentIdsToShow = [];
         }
 
+        var $sentimentSection = $('.js-sidebar-sentiment-section')
+
         if (sentimentIdsToShow.join().length == 0) {
+          $sentimentSection.addClass('hide');
           $('#sentiment_selector').addClass('hide');
           $('#sentiment_selector input[type=radio]').prop('checked', false);
         } else {
           $('#sentiment_selector').removeClass('hide');
+          $sentimentSection.removeClass('hide');
         }
 
         $("#sentiment_selector .sentiment").each(function(index, sentiment) {
@@ -308,7 +320,8 @@
 
     resetNextSelectors: function($selector) {
       $selector.nextAll().each( function() {
-        $(this).css('visibility', 'hidden');
+        // $(this).css('visibility', 'hidden');
+        this.classList.remove('-visible');
         $(this).find('.selected-projekt').show();
         $(this).children('.projekt').remove();
       })
@@ -368,30 +381,30 @@
 
     accessibilityProjektSelector: function(selector) {
       // if group hidden and enter or down arrow pressed - toggle(show) grooup
-      if ( !$(selector).children('.projekt_group:visible').length && (event.which == 13 || event.which == 40) ) {
+      if ( !$(selector).children('.projekt_group.-visible').length && (event.which == 13 || event.which == 40) ) {
         App.ProjektSelector.toggleProjektGroup(selector);
       }
 
-      // if group visible and down arrow pressed - jump to grooup
-      if ( $(selector).children('.projekt_group:visible').length && event.which == 40 ) {
-        $(selector).children('.projekt_group:visible').first().find('.js-select-projekt').first().focus();
+      // if group -visible and down arrow pressed - jump to grooup
+      if ( $(selector).children('.projekt_group.-visible').length && event.which == 40 ) {
+        $(selector).children('.projekt_group.-visible').first().find('.js-select-projekt').first().focus();
       }
 
-      // if group visible and enter or up arrow pressed - toggle(hide) group
-      if ( $(selector).children('.projekt_group:visible').length && (event.which == 13 || event.which == 38) ) {
+      // if group -visible and enter or up arrow pressed - toggle(hide) group
+      if ( $(selector).children('.projekt_group.-visible').length && (event.which == 13 || event.which == 38) ) {
         App.ProjektSelector.toggleProjektGroup(selector);
       }
 
       if ( event.which == 37 ) { // left arrow click
         $(selector).prevAll('.projekt-selector').first().focus();
         $(selector).prevAll('.projekt-selector').first().click();
-        $(selector).children('.projekt_group:visible').hide();
+        $(selector).children('.projekt_group.-visible').hide();
       }
 
       if ( event.which == 39 ) { // right arrow click
         $(selector).nextAll('.projekt-selector').first().focus()
         $(selector).nextAll('.projekt-selector').first().click()
-        $(selector).children('.projekt_group:visible').hide();
+        $(selector).children('.projekt_group.-visible').hide();
       }
     },
 

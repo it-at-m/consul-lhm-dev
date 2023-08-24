@@ -86,9 +86,10 @@ class ProposalsController
   end
 
   def edit
-    @selected_projekt = @proposal.projekt_phase.projekt
-    params[:projekt_phase_id] = @proposal.projekt_phase.id
-    params[:projekt_id] = @selected_projekt.id
+    @selected_projekt = @proposal&.projekt_phase&.projekt
+
+    params[:projekt_phase_id] = @proposal&.projekt_phase&.id
+    params[:projekt_id] = @selected_projekt&.id
   end
 
   def create
@@ -129,9 +130,9 @@ class ProposalsController
         end
       end
     else
-      @selected_projekt = @proposal.projekt_phase.projekt
-      params[:projekt_phase_id] = @proposal.projekt_phase.id
-      params[:projekt_id] = @selected_projekt.id
+      @selected_projekt = @proposal&.projekt_phase&.projekt
+      params[:projekt_phase_id] = @proposal&.projekt_phase&.id
+      params[:projekt_id] = @selected_projekt&.id
       render :new
     end
   end

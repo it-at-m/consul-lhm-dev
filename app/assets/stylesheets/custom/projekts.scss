@@ -1730,6 +1730,9 @@ span.projekt-backlink:before {
 // tagging in selector
 
 #projekt_labels_selector {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+
   input {
     display: none;
   }
@@ -1749,6 +1752,9 @@ span.projekt-backlink:before {
 }
 
 #sentiment_selector {
+  margin-top:2rem;
+  margin-bottom:1rem;
+
   input {
     display: none;
   }

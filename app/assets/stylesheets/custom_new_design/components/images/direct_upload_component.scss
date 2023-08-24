@@ -70,6 +70,7 @@
   cursor: pointer;
   background: #e2e2e2;
   transition: background 0.2s ease-in-out;
+  border-radius: 5px;
 
   &:hover {
     background: #dcdcdc;
@@ -184,8 +185,11 @@
   width: 100%;
   display: none;
 
-  &.-active {
+  &.-preview-set {
     display: block;
+    .image-preview {
+      background-color: white;
+    }
   }
 }
 
