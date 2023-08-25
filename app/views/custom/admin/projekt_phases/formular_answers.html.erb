@@ -3,34 +3,50 @@
 
 <div class="row">
   <div class="column">
-    <h2><%= t("custom.admin.projekt_phases.formular_answers.page_title") %></h2>
-  </div>
-</div>
+    <h3><%= t("custom.admin.projekt_phases.formular_answers.emails_title") %></h3>
 
-<div class="row">
-  <div class="column">
+    <div id="formular-follow-up-letters" class="formular-follow-up-letters margin-bottom">
+      <%= render partial: "custom/admin/formular_follow_up_letters/letter", collection: @formular_follow_up_letters, as: :letter %>
+    </div>
 
-    <%= link_to t("custom.shared.download"), polymorphic_path([@namespace, @projekt_phase], action: :formular_answers, format: :csv), class: "float-right small clear" %>
+    <h3><%= t("custom.admin.projekt_phases.formular_answers.new_email_title") %></h3>
 
-    <table>
-      <thead>
-        <tr>
-          <% @formular_fields.each do |ff| %>
-            <th><%= ff.name %></th>
-          <% end %>
-        </tr>
-      </thead>
-      <tbody>
-        <% @formular_answers.each do |fa| %>
+    <%= form_with url: polymorphic_path([@namespace, @projekt_phase, @formular, FormularFollowUpLetter.new]), local: false do |f| %>
+      <div>
+        <%= f.submit t("custom.admin.projekt_phases.formular_answers.buttons.create_email_draft"), class: "button hollow" %>
+      </div>
+
+      <p class="float-left js-check">
+        <%= t("shared.check") %>:
+        <%= link_to t("shared.check_all"), "#", data: { check_all: "formular_answer_ids[]" } %>
+        |
+        <%= link_to t("shared.check_none"), "#", data: { check_none: "formular_answer_ids[]" } %>
+      </p>
+
+      <%= link_to t("custom.shared.download"), polymorphic_path([@namespace, @projekt_phase], action: :formular_answers, format: :csv), class: "float-right small clear" %>
+
+      <table>
+        <thead>
           <tr>
+            <th>ID</th>
             <% @formular_fields.each do |ff| %>
-              <td><%= fa.answers[ff.key] %></td>
+              <th><%= ff.name %></th>
             <% end %>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-
-    <%= paginate @formular_answers %>
+        </thead>
+        <tbody>
+          <% @formular_answers.each do |fa| %>
+            <tr>
+              <td>
+                <%= check_box_tag "formular_answer_ids[]", fa.id, false %>
+              </td>
+              <% @formular_fields.each do |ff| %>
+                <td><%= fa.answers[ff.key] %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
   </div>
 </div>

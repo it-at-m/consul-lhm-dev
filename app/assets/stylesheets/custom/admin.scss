@@ -94,3 +94,24 @@
     }
   }
 }
+
+// Formular answers
+
+.admin-content .formular-follow-up-letters {
+  .formular-follow-up-letter {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid grey;
+
+    .letter-subject,
+    .letter-recipients,
+    .emails-sent,
+    .controls {
+      display: inline-block;
+      margin-right: 1rem;
+    }
+
+    .controls {
+      @include admin-action-icons;
+    }
+  }
+}

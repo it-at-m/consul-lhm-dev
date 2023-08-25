@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_24_120449) do
+ActiveRecord::Schema.define(version: 2023_08_24_144607) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -851,6 +851,27 @@ ActiveRecord::Schema.define(version: 2023_08_24_120449) do
     t.index ["formular_id"], name: "index_formular_fields_on_formular_id"
     t.index ["key", "formular_id"], name: "index_formular_fields_on_key_and_formular_id", unique: true
     t.index ["name", "formular_id"], name: "index_formular_fields_on_name_and_formular_id", unique: true
+  end
+
+  create_table "formular_follow_up_letter_recipients", force: :cascade do |t|
+    t.bigint "formular_follow_up_letter_id"
+    t.bigint "formular_answer_id"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["formular_answer_id"], name: "index_recipients_on_formular_answer_id"
+    t.index ["formular_follow_up_letter_id"], name: "index_recipients_on_formular_follow_up_letter_id"
+  end
+
+  create_table "formular_follow_up_letters", force: :cascade do |t|
+    t.bigint "formular_id"
+    t.string "subject"
+    t.string "from"
+    t.text "body"
+    t.date "sent_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["formular_id"], name: "index_formular_follow_up_letters_on_formular_id"
   end
 
   create_table "formulars", force: :cascade do |t|
@@ -2539,6 +2560,9 @@ ActiveRecord::Schema.define(version: 2023_08_24_120449) do
   add_foreign_key "follows", "users"
   add_foreign_key "formular_answers", "formulars"
   add_foreign_key "formular_fields", "formulars"
+  add_foreign_key "formular_follow_up_letter_recipients", "formular_answers"
+  add_foreign_key "formular_follow_up_letter_recipients", "formular_follow_up_letters"
+  add_foreign_key "formular_follow_up_letters", "formulars"
   add_foreign_key "formulars", "projekt_phases"
   add_foreign_key "geozones_polls", "geozones"
   add_foreign_key "geozones_polls", "polls"

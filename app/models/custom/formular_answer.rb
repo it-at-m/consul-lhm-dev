@@ -8,4 +8,10 @@ class FormularAnswer < ApplicationRecord
     super
     @answer_errors = {}
   end
+
+  def email_address
+    email_key = formular.formular_fields
+      .where(kind: "email").where("options ->> 'email_for_confirmation' = ?", "1").first.key
+    answers[email_key]
+  end
 end

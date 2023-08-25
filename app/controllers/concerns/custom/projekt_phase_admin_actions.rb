@@ -183,10 +183,12 @@ module ProjektPhaseAdminActions
   end
 
   def formular_answers
+    authorize!(:formular, @projekt_phase) unless current_user.administrator?
+
     @formular = @projekt_phase.formular
     @formular_fields = @formular.formular_fields
-    @formular_answers = @formular.formular_answers.page(params[:page]).per(20)
-    authorize!(:formular, @projekt_phase) unless current_user.administrator?
+    @formular_answers = @formular.formular_answers
+    @formular_follow_up_letters = @formular.formular_follow_up_letters
 
     respond_to do |format|
       format.html { render "custom/admin/projekt_phases/formular_answers" }

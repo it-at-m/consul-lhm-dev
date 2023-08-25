@@ -12,9 +12,7 @@ class FormularAnswersController < ApplicationController
     validate_answer(@formular_answer)
 
     if @formular_answer.answer_errors.none? && @formular_answer.save
-      email_key = @formular_answer.formular.formular_fields
-        .where(kind: "email").where("options ->> 'email_for_confirmation' = ?", "1").first.key
-      email = @formular_answer.answers[email_key]
+      email = @formular_answer.email_address
       Mailer.formular_answer_confirmation(email).deliver_later if email.present?
       @success_notification = t("custom.formular_answer.notifications.success")
     end
