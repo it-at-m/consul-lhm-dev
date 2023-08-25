@@ -6,6 +6,12 @@ class MapLocation < ApplicationRecord
   belongs_to :projekt_phase, touch: true
 
   before_save :ensure_shape_is_json
+  before_save :set_pin_styles
+
+  def set_pin_styles
+    self.pin_color = get_pin_color
+    self.fa_icon_class = get_fa_icon_class
+  end
 
   def json_data
     {
@@ -16,7 +22,7 @@ class MapLocation < ApplicationRecord
       lat: latitude,
       long: longitude,
       alt: altitude,
-      color: get_pin_color,
+      color: pin_color,
       fa_icon_class: get_fa_icon_class
     }
   end

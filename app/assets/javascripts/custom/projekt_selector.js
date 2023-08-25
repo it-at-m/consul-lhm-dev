@@ -10,12 +10,14 @@
     },
 
     selectProjekt: function($projekt) {
+      this.hideLabelsSection();
+      this.hideSentimentSection();
+
       var $selectedProjekt = $projekt.clone().removeClass('js-select-projekt')
       var projektId = $projekt.data('projektId')
       var $currentProjektSelector = $projekt.closest('.projekt-selector')
       var $nextProejektSelector = $currentProjektSelector.nextAll('.projekt-selector').first()
       var $nextSpacer = $currentProjektSelector.next()
-
 
       App.ProjektSelector.resetNextSelectors($currentProjektSelector)
 
@@ -299,6 +301,25 @@
           }
         })
       }
+    },
+
+    hideSentimentSection: function() {
+      var $sentimentSection = $('.js-sidebar-sentiment-section')
+
+      $sentimentSection.addClass('hide');
+      $('#sentiment_selector input[type=radio]').prop('checked', false);
+      $('#sentiment_selector').addClass('hide');
+      $("#sentiment_selector .sentiment").addClass('hide');
+    },
+
+    hideLabelsSection: function() {
+      var $labelSection = $('.js-sidebar-label-section')
+
+      $labelSection.addClass('hide');
+      $('#projekt_labels_selector').addClass('hide');
+      $('#projekt_labels_selector input[type=checkbox]').prop('checked', false);
+
+      $("#projekt_labels_selector .projekt-label").addClass('hide');
     },
 
     addNextProjektPlaceholder: function( $nextProejektSelector, text ) {

@@ -46,7 +46,7 @@ class Shared::ResourcesListComponent < ApplicationComponent
   end
 
   def wide?
-    helpers.cookies["wide_resources"] == "true"
+    helpers.cookies["wide_resources"] == "true" || @wide
   end
 
   def class_names
@@ -78,7 +78,7 @@ class Shared::ResourcesListComponent < ApplicationComponent
   end
 
   def switch_view_mode_icon
-    @wide ? "fa-grip-vertical" : "fa-bars"
+    wide? ? "fa-grip-vertical" : "fa-bars"
   end
 
   def resource_component(resource)

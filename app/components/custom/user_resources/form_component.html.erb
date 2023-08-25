@@ -102,17 +102,17 @@
             <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: resource, projekts: Projekt.top_level }  %>
           <% end %>
 
-          <%= render Shared::SidebarCardComponent.new(title: "Labels", icon_name: "tag", class_name: 'js-sidebar-label-section') do |c| %>
+          <%= render Shared::SidebarCardComponent.new(title: "Labels", icon_name: "tag", class_name: "js-sidebar-label-section hide") do |c| %>
             <%= render partial: "shared/projekt_selector/projekt_labels", locals:	{ f: f, model: resource } %>
           <% end %>
 
-          <%= render Shared::SidebarCardComponent.new(title: "Sentiments", icon_name: "heart", class_name: "js-sidebar-sentiment-section") do |c| %>
+          <%= render Shared::SidebarCardComponent.new(title: "Sentiments", icon_name: "heart", class_name: "js-sidebar-sentiment-section hide") do |c| %>
             <%= render partial: "shared/projekt_selector/sentiments", locals:	{ f: f, model: resource } %>
           <% end %>
 
           <div class="sidebar-card js-sidebar-documment-attacher-section">
             <div class="sidebar-card--section">
-              <div class="sidebar-card--header">
+              <div class="sidebar-card--title">
                 <i class="fa fa-file"></i>
                 Dokumente hinzufügen
               </div>
@@ -125,7 +125,7 @@
           <% if translations_interface_enabled? %>
             <div class="sidebar-card">
               <div class="sidebar-card--section">
-                <div class="sidebar-card--header">
+                <div class="sidebar-card--title">
                   <i class="fa fa-language"></i>
                   Sprachen
                 </div>
@@ -139,7 +139,7 @@
 
           <div class="sidebar-card js-sidebar-external-video-section">
             <div class="sidebar-card--section">
-              <div class="sidebar-card--header">
+              <div class="sidebar-card--title">
                 <i class="fa fa-video"></i>
                 Video hinzufügen
               </div>
@@ -156,7 +156,7 @@
           <%if @categories&.any? %>
             <div class="sidebar-card js-sidebar-category-tags-selector-section">
               <div class="sidebar-card--section">
-                <div class="sidebar-card--header">
+                <div class="sidebar-card--title">
                   <i class="fa fa-tag"></i>
                   Tags
                 </div>
@@ -181,7 +181,7 @@
           <% if extended_feature?("modulewide.enable_categories") && @categories&.any? && SDG::ProcessEnabled.new(f.object).enabled? %>
             <div class="sidebar-card js-sidebar-sdgs-selector-section">
               <div class="sidebar-card--section">
-                <div class="sidebar-card--header">
+                <div class="sidebar-card--title">
                   <i class="fa fa-video"></i>
                   UN-Nachhaltigkeitsziele
                 </div>
@@ -201,7 +201,7 @@
           <% if current_user.administrator? || current_user.moderator? %>
             <div class="sidebar-card js-sidebar-behalf-of">
               <div class="sidebar-card--section">
-                <div class="sidebar-card--header">
+                <div class="sidebar-card--title">
                   <i class="fa fa-user"></i>
                   Veröffentlichen für
                 </div>

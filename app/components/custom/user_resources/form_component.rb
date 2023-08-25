@@ -34,32 +34,20 @@ class UserResources::FormComponent < ApplicationComponent
   end
 
   def debates_back_link_path
-    if params[:origin] == 'projekt'
-      projekt = Projekt.find(params[:projekt_id])
-      page = projekt.page
-      debate_phase_id = projekt.debate_phases.active.first.id
-
-      link_to "/#{page.slug}?selected_phase_id=#{debate_phase_id}", class: "back" do
-        tag.span(class: "icon-angle-left") + t("shared.back")
-      end
-
-    else
-      back_link_to debates_path
-    end
+    resources_back_link(fallback_path: debates_path)
   end
 
   def proposals_back_link_path
-    if params[:origin] == 'projekt'
-      projekt = Projekt.find(params[:projekt_id])
-      page = projekt.page
-      proposal_phase_id = projekt.proposal_phases.active.first.id
+    resources_back_link(fallback_path: proposals_path)
+  end
 
-      link_to "/#{page.slug}?selected_phase_id=#{proposal_phase_id}", class: "back" do
+  def resources_back_link(fallback_path:)
+    if params[:origin] == "projekt" && params[:projekt_phase_id].present?
+      link_to(helpers.url_to_footer_tab, class: "back") do
         tag.span(class: "icon-angle-left") + t("shared.back")
       end
-
     else
-      back_link_to proposals_path
+      back_link_to fallback_path
     end
   end
 
