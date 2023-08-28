@@ -5,7 +5,7 @@ module FormularFollowUpLettersAdminActions
     respond_to :js
 
     before_action :set_projekt_phase, :set_formular
-    before_action :set_formular_follow_up_letter, only: %i[edit update destroy]
+    before_action :set_formular_follow_up_letter, only: %i[edit update destroy send_emails]
   end
 
   def create
@@ -38,6 +38,14 @@ module FormularFollowUpLettersAdminActions
 
     @formular_follow_up_letter.destroy!
     render "custom/admin/formular_follow_up_letters/destroy"
+  end
+
+  def send_emails
+    authorize!(:send_emails, @formular_follow_up_letter) unless current_user.administrator?
+    @formular_follow_up_letter.delay.deliver
+    @formular_follow_up_letter.update!(sent_at: Time.zone.now)
+
+    render "custom/admin/formular_follow_up_letters/send_emails"
   end
 
   private

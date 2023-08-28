@@ -1,0 +1,23 @@
+<td style="<%= css_for_mailer_content %>">
+  <p style="<%= css_for_mailer_text %>">
+    <%= sanitize(
+      @follow_up_letter.body
+    ) %>
+  </p>
+
+  <p style="<%= css_for_mailer_text %>">
+    <%= sanitize(
+      t("mailers.formular_follow_up_letter.instructions",
+        follow_up_link: link_to(
+          t("mailers.formular_follow_up_letter.link_text"),
+          page_url(@projekt_phase.projekt.page.slug, selected_phase_id: @projekt_phase.id, token: @recipient.subscription_token),
+          style: css_for_mailer_link)
+      ),
+      attributes: %w[href style]
+    ) %>
+  </p>
+
+  <p style="<%= css_for_mailer_text %>">
+    <%= t("mailers.formular_follow_up_letter.thanks") %>
+  </p>
+</td>

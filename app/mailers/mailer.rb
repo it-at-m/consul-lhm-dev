@@ -168,6 +168,15 @@ class Mailer < ApplicationMailer
     mail(to: email, subject: t("mailers.formular_answer_confirmation.subject"))
   end
 
+  def formular_follow_up_letter(follow_up_letter, recipient)
+    @follow_up_letter = follow_up_letter
+    @recipient = recipient
+    @projekt_phase = follow_up_letter.formular.projekt_phase
+
+    @email_to = @recipient.email
+    mail(to: @email_to, subject: @follow_up_letter.subject)
+  end
+
   private
 
     def with_user(user, &block)

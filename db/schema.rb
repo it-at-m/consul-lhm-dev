@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_24_144607) do
+ActiveRecord::Schema.define(version: 2023_08_28_082439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -791,6 +791,16 @@ ActiveRecord::Schema.define(version: 2023_08_24_144607) do
     t.index ["user_id"], name: "index_documents_on_user_id"
   end
 
+  create_table "email_activities", force: :cascade do |t|
+    t.string "email"
+    t.string "actionable_type"
+    t.bigint "actionable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["actionable_id", "actionable_type"], name: "index_email_activities_on_actionable_id_and_actionable_type"
+    t.index ["actionable_type", "actionable_id"], name: "index_email_activities_on_actionable_type_and_actionable_id"
+  end
+
   create_table "failed_census_calls", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.string "document_number"
@@ -857,6 +867,7 @@ ActiveRecord::Schema.define(version: 2023_08_24_144607) do
     t.bigint "formular_follow_up_letter_id"
     t.bigint "formular_answer_id"
     t.string "email"
+    t.string "subscription_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["formular_answer_id"], name: "index_recipients_on_formular_answer_id"

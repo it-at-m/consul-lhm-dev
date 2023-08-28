@@ -6,9 +6,10 @@ class FormularAnswersController < ApplicationController
 
   def create
     @formular_answer = FormularAnswer.new(formular_answer_params)
+    @formular_answer.answer_errors = {}
     authenticate_user! if @formular_answer.formular.requires_login?
 
-    @formular_answer.formular.formular_fields.each(&:set_custom_attributes)
+    @formular_fields = @formular_answer.formular.formular_fields.primary.each(&:set_custom_attributes)
     validate_answer(@formular_answer)
 
     if @formular_answer.answer_errors.none? && @formular_answer.save
@@ -20,6 +21,19 @@ class FormularAnswersController < ApplicationController
     render :create
   end
 
+  def update
+    @formular_answer = FormularAnswer.find(params[:id])
+    @formular_answer.answer_errors = {}
+    authenticate_user! if @formular_answer.formular.requires_login?
+
+    @formular_fields = @formular_answer.formular.formular_fields.follow_up.each(&:set_custom_attributes)
+    validate_answer(@formular_answer)
+
+    if @formular_answer.answer_errors.none? && @formular_answer.update(answers: formular_answer_params["answers"].merge(@formular_answer.answers).to_h)
+      @success_notification = t("custom.formular_answer.notifications.success")
+    end
+  end
+
   private
 
     def formular_answer_params
@@ -27,7 +41,9 @@ class FormularAnswersController < ApplicationController
     end
 
     def validate_answer(formular_answer)
-      formular_answer.formular_fields.each do |formular_field|
+      formular_fields = formular_answer.persisted? ? formular_answer.formular_fields.follow_up : formular_answer.formular_fields.primary
+
+      formular_fields.each do |formular_field|
         validate_for_presence(formular_answer, formular_field) if formular_field.required?
         next if formular_answer.answer_errors[formular_field.key].present?
 

@@ -272,8 +272,19 @@ class PagesController < ApplicationController
 
   def set_formular_phase_footer_tab_variables
     @formular = @projekt_phase.formular
-    @formular_fields = @formular.formular_fields.each(&:set_custom_attributes)
-    @formular_answer = @formular.formular_answers.new
+
+    if params[:token].present?
+      @recipient = FormularFollowUpLetterRecipient.find_by(subscription_token: params[:token])
+      return unless @recipient.present? && @recipient.formular.id == @formular.id
+
+      @formular_fields = @formular.formular_fields.follow_up.each(&:set_custom_attributes)
+      @formular_answer = @recipient.formular_answer
+    else
+      @formular_fields = @formular.formular_fields.primary.each(&:set_custom_attributes)
+      @formular_answer = @formular.formular_answers.new
+    end
+
+    @formular_answer.answer_errors ||= {}
   end
 
   def get_default_projekt_phase(default_phase_id = nil)

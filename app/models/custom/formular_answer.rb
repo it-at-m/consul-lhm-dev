@@ -4,11 +4,6 @@ class FormularAnswer < ApplicationRecord
 
   attr_accessor :answer_errors
 
-  def initialize(attributes = {})
-    super
-    @answer_errors = {}
-  end
-
   def email_address
     email_key = formular.formular_fields
       .where(kind: "email").where("options ->> 'email_for_confirmation' = ?", "1").first.key

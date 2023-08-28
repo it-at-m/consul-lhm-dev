@@ -14,3 +14,6 @@ de:
     formular_answer_confirmation:
       subject: Vielen Dank! Ihr Formular wurde erfolgreich eingereicht.
       p1: Herzlichen Dank für die Einreichung Ihres Formulars. Wir werden die Daten jetzt intern prüfen und ggf. wieder auf Sie zukommen.
+    formular_follow_up_letter:
+      instructions: Klicken Sie bitte %{follow_up_link} 
+      link_text: here

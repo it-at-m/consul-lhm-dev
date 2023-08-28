@@ -521,7 +521,7 @@ de:
           emails_title: Follow-up E-Mails
           subject_placeholder: E-Mail
           recipients: "%{number} Empfänger"
-          emails_sent: "%{number}E-Mails gesendet"
+          emails_sent: "%{number} E-Mails gesendet"
           new_email_title: Posteingang
           buttons:
             save_draft: Entwurf speichern

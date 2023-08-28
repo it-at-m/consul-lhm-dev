@@ -1,6 +1,6 @@
-<%= form_with model: formular_answer, url: formular_answers_path(formular_answer), local: false do |f| %>
+<%= form_with model: formular_answer, local: false do |f| %>
   <%= f.hidden_field :formular_id, value: formular_answer.formular_id %>
-  <% formular_answer.formular_fields.each do |ff| %>
+  <% formular_fields.each do |ff| %>
     <% invalid_field_class = formular_answer.answer_errors.include?(ff.key) %>
     <%= label_tag "formular_answer[answers][#{ff.key}]", ff.name, class: ("is-invalid-label" if invalid_field_class) %>
     <span class="help-text"><%= ff.description %></span>
