@@ -12,7 +12,11 @@
     <div class="emails-sent">
       <%= t("custom.admin.projekt_phases.formular_answers.emails_sent", number: letter.email_activities.count) %>
     </div>
-    <i class="fas fa-eye"></i>
+    <%= link_to polymorphic_path([@namespace, @projekt_phase, @formular, letter], action: :preview),
+      class: "edit-link",
+      remote: true do %>
+      <i class="fas fa-eye"></i>
+    <% end %>
   <% else %>
     <div class="controls">
       <%= link_to "", polymorphic_path([@namespace, @projekt_phase, @formular, letter], action: :edit),

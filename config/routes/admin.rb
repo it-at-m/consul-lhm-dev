@@ -31,6 +31,7 @@ namespace :admin do
       resources :formular_follow_up_letters, only: [:create, :edit, :update, :destroy] do
         member do
           post :send_emails
+          get :preview
         end
       end
     end
