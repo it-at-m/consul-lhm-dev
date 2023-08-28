@@ -32,6 +32,7 @@ namespace :admin do
         member do
           post :send_emails
           get :preview
+          get :restore_default_view
         end
       end
     end

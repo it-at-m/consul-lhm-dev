@@ -5,7 +5,7 @@ module FormularFollowUpLettersAdminActions
     respond_to :js
 
     before_action :set_projekt_phase, :set_formular
-    before_action :set_formular_follow_up_letter, only: %i[edit update destroy send_emails preview]
+    before_action :set_formular_follow_up_letter, except: %i[create]
   end
 
   def create
@@ -55,6 +55,10 @@ module FormularFollowUpLettersAdminActions
     authorize!(:preview, @formular_follow_up_letter) unless current_user.administrator?
 
     render "custom/admin/formular_follow_up_letters/preview"
+  end
+
+  def restore_default_view
+    render "custom/admin/formular_follow_up_letters/restore_default_view"
   end
 
   private
