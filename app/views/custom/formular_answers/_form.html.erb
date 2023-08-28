@@ -1,8 +1,12 @@
 <%= form_with model: formular_answer, local: false do |f| %>
   <%= f.hidden_field :formular_id, value: formular_answer.formular_id %>
   <% formular_fields.each do |ff| %>
+    <% label_class = [] %>
     <% invalid_field_class = formular_answer.answer_errors.include?(ff.key) %>
-    <%= label_tag "formular_answer[answers][#{ff.key}]", ff.name, class: ("is-invalid-label" if invalid_field_class) %>
+    <% label_class.push("is-invalid-label") if invalid_field_class %>
+    <% label_class.push("required") if ff.required? %>
+
+    <%= label_tag "formular_answer[answers][#{ff.key}]", ff.name, class: label_class.join(" ") %>
     <span class="help-text"><%= ff.description %></span>
 
     <% if ff.kind.in? ["string", "email"] %>
