@@ -64,7 +64,7 @@ module FormularFollowUpLettersAdminActions
 
     def formular_follow_up_letter_params
       params.require(:formular_follow_up_letter).permit(
-        :subject, :body
+        :subject, :body, :show_follow_up_button
       )
     end
 end

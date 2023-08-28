@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_08_28_082439) do
+ActiveRecord::Schema.define(version: 2023_08_28_130640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -882,6 +882,7 @@ ActiveRecord::Schema.define(version: 2023_08_28_082439) do
     t.date "sent_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "show_follow_up_button", default: false
     t.index ["formular_id"], name: "index_formular_follow_up_letters_on_formular_id"
   end
 

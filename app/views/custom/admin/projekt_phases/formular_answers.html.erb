@@ -5,7 +5,7 @@
   <div class="column">
     <h3><%= t("custom.admin.projekt_phases.formular_answers.emails_title") %></h3>
 
-    <div id="formular-follow-up-letters" class="formular-follow-up-letters margin-bottom">
+    <div id="formular-follow-up-letters" class="formular-follow-up-letters">
       <%= render partial: "custom/admin/formular_follow_up_letters/letter", collection: @formular_follow_up_letters, as: :letter %>
     </div>
 
@@ -16,14 +16,14 @@
         <%= f.submit t("custom.admin.projekt_phases.formular_answers.buttons.create_email_draft"), class: "button hollow" %>
       </div>
 
-      <p class="float-left js-check">
+      <div class="float-left js-check">
         <%= t("shared.check") %>:
         <%= link_to t("shared.check_all"), "#", data: { check_all: "formular_answer_ids[]" } %>
         |
         <%= link_to t("shared.check_none"), "#", data: { check_none: "formular_answer_ids[]" } %>
-      </p>
+      </div>
 
-      <%= link_to t("custom.shared.download"), polymorphic_path([@namespace, @projekt_phase], action: :formular_answers, format: :csv), class: "float-right small clear" %>
+      <%= link_to t("custom.shared.download"), polymorphic_path([@namespace, @projekt_phase], action: :formular_answers, format: :csv), class: "float-right small" %>
 
       <table>
         <thead>

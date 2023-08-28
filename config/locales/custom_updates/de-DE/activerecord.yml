@@ -198,3 +198,7 @@ de:
         kind: Art
         email_for_confirmation: Bestätigungsmail an Nutzer*in versenden
         drop_down_options: Dropdown-Optionen
+      formular_follow_up_letter:
+        subject: Betreff
+        body: Text
+        show_follow_up_button: Link zu Follow-up Formular integrieren

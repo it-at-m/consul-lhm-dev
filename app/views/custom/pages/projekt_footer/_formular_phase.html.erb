@@ -4,7 +4,7 @@
   <div id="formular-sidebar" class="small-12 medium-3 column">
     <aside class="margin-bottom">
       <% if current_user&.administrator? %>
-        <%= link_to "Antworten", formular_answers_admin_projekt_phase_path(@projekt_phase), target: "_blank" %>
+        <%= link_to "Zu den Antworten", formular_answers_admin_projekt_phase_path(@projekt_phase), target: "_blank", class: "button" %>
       <% end %>
     </aside>
   </div>

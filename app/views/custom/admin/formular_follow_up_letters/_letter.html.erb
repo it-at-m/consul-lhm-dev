@@ -26,7 +26,7 @@
         data: { confirm: "Sind Sie sicher?" } %>
     </div>
 
-    <div class="send">
+    <div class="send margin-top">
       <%= button_to t("custom.admin.projekt_phases.formular_answers.buttons.send_email"), polymorphic_path([@namespace, @projekt_phase, @formular, letter], action: :send_emails),
         class: "button",
         remote: true,
