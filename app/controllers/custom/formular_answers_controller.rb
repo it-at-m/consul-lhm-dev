@@ -26,10 +26,12 @@ class FormularAnswersController < ApplicationController
     @formular_answer.answer_errors = {}
     authenticate_user! if @formular_answer.formular.requires_login?
 
+    @formular_answer.answers = @formular_answer.answers.merge(formular_answer_params["answers"].to_h)
+
     @formular_fields = @formular_answer.formular.formular_fields.follow_up.each(&:set_custom_attributes)
     validate_answer(@formular_answer)
 
-    if @formular_answer.answer_errors.none? && @formular_answer.update(answers: formular_answer_params["answers"].merge(@formular_answer.answers).to_h)
+    if @formular_answer.answer_errors.none? && @formular_answer.save
       @success_notification = t("custom.formular_answer.notifications.success")
     end
   end

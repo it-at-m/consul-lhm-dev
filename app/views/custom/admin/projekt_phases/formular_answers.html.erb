@@ -38,7 +38,7 @@
           <% @formular_answers.each do |fa| %>
             <tr>
               <td>
-                <%= check_box_tag "formular_answer_ids[]", fa.id, false %>
+                <%= check_box_tag "formular_answer_ids[]", fa.id, true %>
               </td>
               <% @formular_fields.each do |ff| %>
                 <td><%= fa.answers[ff.key] %></td>
