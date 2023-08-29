@@ -130,7 +130,8 @@ html.is-reveal-open body {
   #debates.debates-list.column,
   #polls.polls-list.column,
   #budgets.budgets-list.column,
-  #deficiency-reports.deficiency-reports-list.column {
+  #deficiency-reports.deficiency-reports-list.column,
+  #formular.formular-fields-list.column {
     float: left;
   }
 
@@ -138,7 +139,8 @@ html.is-reveal-open body {
   #debates-sidebar.column,
   #polls-sidebar.column,
   #budgets-sidebar.column,
-  #deficiency-reports-sidebar.column {
+  #deficiency-reports-sidebar.column,
+  #formular-sidebar.column {
     float: right;
   }
 }

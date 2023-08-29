@@ -78,3 +78,43 @@
     }
   }
 }
+
+// Formular
+
+.admin-content .formular-fields {
+  .formular-field {
+    position: relative;
+    cursor: move;
+
+    .controls {
+      @include admin-action-icons;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+}
+
+// Formular answers
+
+.admin-content .formular-follow-up-letters {
+  margin-bottom: 3.5rem;
+
+  .formular-follow-up-letter {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid grey;
+    position: relative;
+
+    .letter-subject,
+    .letter-recipients,
+    .emails-sent,
+    .controls {
+      display: inline-block;
+      margin-right: 1rem;
+    }
+
+    .controls {
+      @include admin-action-icons;
+    }
+  }
+}

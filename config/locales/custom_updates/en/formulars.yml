@@ -1,0 +1,13 @@
+en:
+  custom:
+    formular_answer:
+      form:
+        submit: Submit answer
+      notifications:
+        success: Thank you! Your answer was successfully submitted.
+      errors:
+        blank: Cannot be blank
+        length:
+          minimum: Minimum %{minimum} letters
+          maximum: Maximum %{maximum} letters
+        format: Wrong format

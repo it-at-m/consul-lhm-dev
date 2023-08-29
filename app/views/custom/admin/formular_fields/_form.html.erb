@@ -1,0 +1,24 @@
+<div id="<%= dom_id(formular_field) %>" class="formular-form-field">
+  <div class="row">
+    <div class="column small-11">
+      <%= form_with model: formular_field, url: polymorphic_path([@namespace, @projekt_phase, @formular, formular_field]), local: false do |f| %>
+        <%= f.text_field :name %>
+        <%= f.text_field :description %>
+        <%= f.select :kind, FormularField::KINDS.map { |kind| [t("custom.admin.projekt_phases.formular.kinds.#{kind}"), kind] }, {}, { class: "js-toggle-custom-formular-fields", disabled: formular_field.persisted? } %>
+        <div class="drop-down-options <%= "hide" if formular_field.kind != "dropdown" %>">
+          <%= f.text_field :drop_down_options, hint: t("custom.admin.projekt_phases.formular.dropdown_hint") %>
+        </div>
+
+        <div class="email-for-confirmation <%= "hide" if formular_field.kind != "email" %>">
+          <%= f.check_box :email_for_confirmation %>
+        </div>
+
+        <%= f.check_box :required %>
+        <%= f.check_box :follow_up %>
+        <%= f.submit %>
+      <% end %>
+    </div>
+  </div>
+
+  <hr>
+</div>

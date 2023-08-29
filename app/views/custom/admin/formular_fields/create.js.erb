@@ -1,0 +1,3 @@
+<% field_block_id = @formular_field.follow_up? ? "formular-fields-follow-up" : "formular-fields-primary" %>
+$("#<%= field_block_id %>").append("<%= j render("custom/admin/formular_fields/formular_field", formular_field: @formular_field) %>");
+$("#new_formular_field").html("<%= j render("custom/admin/formular_fields/new_formular_field_button") %>");

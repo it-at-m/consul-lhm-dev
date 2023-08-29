@@ -1,0 +1,38 @@
+<%= form_with model: formular_answer, local: false do |f| %>
+  <%= f.hidden_field :formular_id, value: formular_answer.formular_id %>
+  <% formular_fields.each do |ff| %>
+    <% label_class = [] %>
+    <% invalid_field_class = formular_answer.answer_errors.include?(ff.key) %>
+    <% label_class.push("is-invalid-label") if invalid_field_class %>
+    <% label_class.push("required") if ff.required? %>
+
+    <%= label_tag "formular_answer[answers][#{ff.key}]", ff.name, class: label_class.join(" ") %>
+    <span class="help-text"><%= ff.description %></span>
+
+    <% if ff.kind.in? ["string", "email"] %>
+      <%= text_field_tag "formular_answer[answers][#{ff.key}]", formular_answer.answers[ff.key], autocomplete: "off", class: ("is-invalid-input" if invalid_field_class) %>
+    <% elsif ff.kind == "date" %>
+      <%= date_field_tag "formular_answer[answers][#{ff.key}]", formular_answer.answers[ff.key], autocomplete: "off", class: ("is-invalid-input" if invalid_field_class) %>
+    <% elsif ff.kind == "dropdown" %>
+      <%= select_tag "formular_answer[answers][#{ff.key}]", options_for_select((ff.drop_down_options&.split(",") || []).map(&:strip), formular_answer.answers[ff.key]),
+        include_blank: true, class: "show-arrow #{"is-invalid-input" if invalid_field_class}" %>
+    <% end %>
+
+    <% if formular_answer.answer_errors[ff.key] %>
+      <%= content_tag :small, class: "form-error is-visible" do %>
+        <%= formular_answer.answer_errors[ff.key] %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= f.invisible_captcha :subtitle %>
+
+  <% if @success_notification %>
+    <%= content_tag :div, class: "callout success" do %>
+      <%= @success_notification %>
+    <% end %>
+  <% else %>
+    <%= f.submit t("custom.formular_answer.form.submit") %>
+  <% end %>
+
+<% end %>

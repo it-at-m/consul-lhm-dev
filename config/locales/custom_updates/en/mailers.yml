@@ -11,3 +11,5 @@ en:
       p1: Your account has just been verified.
       p2: If you have already voted, you can now view your votes in the overview.
       p3: You can change your vote at any time up to the end of the process.
+    formular_follow_up_letter:
+      button_text: To the form
