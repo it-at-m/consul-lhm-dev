@@ -49,7 +49,7 @@ class FormularField < ApplicationRecord
     def string_field_options
       {
         validates: {
-          length: { minimum: 2, maximum: 255 }
+          length: { minimum: 1, maximum: 255 }
         }
       }
     end
