@@ -11,7 +11,7 @@ class Shared::OrderLinksComponent < ApplicationComponent
       elsif params[:projekt_phase_id].present?
         url_to_footer_tab(order: order, remote: true)
       else
-        url_for(action: "index", controller: controller_name, order: order)
+        url_for(action: action_name, controller: controller_name, order: order, anchor: "comments")
       end
     end
 
