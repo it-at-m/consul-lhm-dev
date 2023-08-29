@@ -1,5 +1,6 @@
 class FormularFollowUpLetter < ApplicationRecord
   belongs_to :formular
+  delegate :projekt_phase, to: :formular
   has_many :email_activities, as: :actionable, inverse_of: :actionable, dependent: :restrict_with_error
 
   has_many :recipients, dependent: :destroy,

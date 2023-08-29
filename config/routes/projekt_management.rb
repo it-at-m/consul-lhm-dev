@@ -27,6 +27,13 @@ namespace :projekt_management do
           post :order_formular_fields
         end
       end
+      resources :formular_follow_up_letters, only: [:create, :edit, :update, :destroy] do
+        member do
+          post :send_emails
+          get :preview
+          get :restore_default_view
+        end
+      end
     end
 
     resources :projekt_labels, except: %i[index show]

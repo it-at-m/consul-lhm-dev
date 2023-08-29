@@ -58,6 +58,8 @@ module FormularFollowUpLettersAdminActions
   end
 
   def restore_default_view
+    authorize!(:restore_default_view, @formular_follow_up_letter) unless current_user.administrator?
+
     render "custom/admin/formular_follow_up_letters/restore_default_view"
   end
 

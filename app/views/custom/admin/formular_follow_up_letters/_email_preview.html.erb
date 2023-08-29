@@ -1,6 +1,6 @@
 <div id="<%= dom_id(letter) %>" class="formular-follow-up-letter">
 
-  <%= link_to restore_default_view_admin_projekt_phase_formular_formular_follow_up_letter_path(@projekt_phase, @formular, @follow_up_letter), remote: true do %>
+  <%= link_to polymorphic_path([@namespace, @projekt_phase, @formular, @follow_up_letter], action: :restore_default_view), remote: true do %>
     <button class="close-button" data-close aria-label="Close modal" type="button">
       <span aria-hidden="true">&times;</span>
     </button>
