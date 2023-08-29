@@ -1,4 +1,4 @@
-<div class="resource-page-banner <%= resource_class %>">
+<div class="resource-page-banner <%= resource_class %>" style="<%= banner_inline_style %>">
   <div class="resource-page-banner--text-section">
     <h2 class="resource-page-banner--title">
       <%= resource.title %>
@@ -22,6 +22,18 @@
           <%= resource.projekt.name %>
         <% end %>
       </div>
+      <% if @resource.projekt_labels.any? %>
+        <div class="resource-page-banner--detail">
+          <i class="fa fa-tags"></i>
+          <%= render Shared::ProjektLabelsComponent.new(resource: @resource) %>
+        </div>
+      <% end %>
+      <% if @resource.sentiment.present? %>
+        <div class="resource-page-banner--detail">
+          <i class="fa fa-heart"></i>
+          <%= @resource.sentiment.name %>
+        </div>
+      <% end %>
     </div>
   </div>
 

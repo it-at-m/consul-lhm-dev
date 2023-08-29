@@ -3,6 +3,7 @@
     display: flex;
     justify-content: space-between;
     background: #D9F0EB;
+    color: $brand;
     padding: 42px 42px;
     border-radius: 10px;
     margin-bottom: 15px;
@@ -14,11 +15,14 @@
     &.-poll {
       background-color: #EAE4FB;
     }
+
+    a {
+      color: inherit;
+    }
   }
 
   .resource-page-banner--text-section {
     width: 48%;
-    color: $brand;
   }
 
   .resource-page-banner--image {
@@ -33,12 +37,13 @@
 
   .resource-page-banner--title {
     font-size: 28px;
-    color: $brand;
     margin-bottom: 30px;
   }
 
   .resource-page-banner--detail {
+    display: flex;
     font-weight: 500;
+    align-items: center;
 
     i {
       padding-right: 5px;
