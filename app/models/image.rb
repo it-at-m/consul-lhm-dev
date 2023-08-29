@@ -16,7 +16,7 @@ class Image < ApplicationRecord
   belongs_to :user
   belongs_to :imageable, polymorphic: true, touch: true
 
-  validates :title, presence: true
+  # validates :title, presence: true
   validate :validate_title_length
   validates :user_id, presence: true
   validates :imageable_id, presence: true,         if: -> { persisted? }

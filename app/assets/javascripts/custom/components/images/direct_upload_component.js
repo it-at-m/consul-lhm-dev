@@ -3,14 +3,14 @@
   App.DirectUploadComponent = {
     initialize: function() {
       $(".js-direct-image-upload").each(function(_, component) {
-        App.DirectUploadComponent.initOne(component);
+        App.DirectUploadComponent.initForOneComponent(component);
       });
 
       App.DirectUploadComponent.initEvents();
     },
 
     initEvents: function() {
-      $(".js-direct-image-upload--file-attach-area").each(function(index, fileAttachArea) {
+      $(".js-direct-image-upload--file-attach-area").each(function(_index, fileAttachArea) {
         fileAttachArea.addEventListener("click", App.DirectUploadComponent.fileAttachAreaClick);
       });
 
@@ -18,10 +18,13 @@
     },
 
     fileAttachAreaClick: function(e) {
-      e.currentTarget.closest(".js-direct-image-upload").querySelector(".js-direct-image-upload--input").click();
+      e.currentTarget
+        .closest(".js-direct-image-upload")
+        .querySelector(".js-direct-image-upload--input")
+        .click();
     },
 
-    initOne: function(component) {
+    initForOneComponent: function(component) {
       var input = component.querySelector(".js-direct-image-upload--input");
       var inputData = this.buildData([], input);
 
@@ -136,18 +139,18 @@
     setPreview: function(data) {
       var image_preview;
       image_preview = "<div class='image-preview'><figure><img src='" + data.result.attachment_url + '?' + Date.now() + "' class='cached-image'></figure></div>";
+      var $dataWrapper = $(data.wrapper);
 
       if ($(data.preview).length > 0) {
         $(data.preview).replaceWith(image_preview);
       } else {
-        var $dataWrapper = $(data.wrapper);
         var $actionsArea = $dataWrapper.find(".js-direct-image-upload--attachment-actions");
 
         $(image_preview).insertBefore($actionsArea);
         data.preview = $dataWrapper.find(".image-preview");
-
-        $dataWrapper.find(".js-direct-image-upload--preview-area").addClass("-preview-set");
       }
+
+      $dataWrapper.find(".js-direct-image-upload--preview-area").addClass("-preview-set");
     },
 
     initializeRemoveCachedImageLinks: function() {
@@ -156,7 +159,6 @@
         // $("#new_image_link").removeClass("hide");
         var $mainElement = $(this).closest(".js-direct-image-upload");
 
-        $mainElement.find(".image-preview").remove();
         $mainElement.find(".js-direct-image-upload--preview-area").removeClass("-preview-set");
         $mainElement.find(".js-direct-image-upload--cached-attachment").val("");
       });

@@ -15,7 +15,7 @@ class UserResources::FormComponent < ApplicationComponent
     @categories = categories
   end
 
-  def back_path
+  def back_link
     case @resource
     when Debate
       debates_back_link_path
@@ -34,21 +34,11 @@ class UserResources::FormComponent < ApplicationComponent
   end
 
   def debates_back_link_path
-    resources_back_link(fallback_path: debates_path)
+    helpers.resources_back_link(fallback_path: debates_path)
   end
 
   def proposals_back_link_path
-    resources_back_link(fallback_path: proposals_path)
-  end
-
-  def resources_back_link(fallback_path:)
-    if params[:origin] == "projekt" && params[:projekt_phase_id].present?
-      link_to(helpers.url_to_footer_tab, class: "back") do
-        tag.span(class: "icon-angle-left") + t("shared.back")
-      end
-    else
-      back_link_to fallback_path
-    end
+    helpers.resources_back_link(fallback_path: proposals_path)
   end
 
   def title_max_length

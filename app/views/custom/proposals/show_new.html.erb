@@ -16,12 +16,14 @@
   <%= render "shared/canonical", href: proposal_url(@proposal) %>
 <% end %>
 
-<main>
-
+<main class="resource-page">
   <div id="<%= dom_id(@proposal) %>" >
     <div class="flex-layout">
       <div class="main-column">
-        <h1 class="resource-page--title"><%= "#{@proposal.author.name} startet eine Diskussion"  %></h1>
+        <%= resources_back_link(fallback_path: proposals_path) %>
+
+        <!-- <h1 class="resource-page--title"><%= "#{@proposal.author.name} startet eine Diskussion"  %></h1> -->
+        <h1 class="resource-page--title"><%= "Beitrag von #{@proposal.author.name}" %></h1>
         <div class="common-page-description">
           <%= render_custom_block('debate_show_welcome_text', custom_prefix: @proposal.author.name , default_content: t('custom.proposals.show.welcome_default_text')) %>
         </div>
@@ -48,6 +50,8 @@
           <%= render "relationable/related_content", relationable: @proposal %>
         <% end %>
 
+        <div id="comments" class="footer-anchor">
+        </div>
         <% if ((projekt_feature?(@proposal&.projekt, 'proposals.show_comments') ||
             projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab') ||
             projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_milestones_tab')) && !preview) %>
@@ -109,6 +113,14 @@
           <% end %>
         <% end %>
 
+        <% if projekt_feature?(@proposal&.projekt, 'proposals.allow_voting') %>
+          <%= render(Shared::SidebarCardComponent.new(title: "Unterstützer*innen", icon_name: "tag")) do |c| %>
+            <div class="proposal-page--votes">
+              <%= render "proposals/support_status", proposal: @proposal %>
+            </div>
+          <% end %>
+        <% end %>
+
         <% if projekt_feature?(@proposal&.projekt, 'proposals.show_community_button_in_proposal_sidebar') %>
           <%= render(Shared::SidebarCardComponent.new(title: t("community.sidebar.title"), icon_name: "tag")) do |c| %>
             <%= render "communities/access_button", community: @proposal.community %>
@@ -119,14 +131,6 @@
           <%= render(Shared::SidebarCardComponent.new(title: t("shared.follow"), icon_name: "tag")) do |c| %>
             <p><%= t("custom.shared.show.follow_text") %></p>
             <%= render "follows/follow_button", follow: find_or_build_follow(current_user, @proposal) %>
-          <% end %>
-        <% end %>
-
-        <% if projekt_feature?(@proposal&.projekt, 'proposals.allow_voting') %>
-          <%= render(Shared::SidebarCardComponent.new(title: "Unterstützer*innen", icon_name: "tag")) do |c| %>
-            <div class="proposal-page--votes">
-              <%= render "proposals/support_status", proposal: @proposal %>
-            </div>
           <% end %>
         <% end %>
 

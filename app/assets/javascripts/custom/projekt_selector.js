@@ -61,11 +61,10 @@
       // reset form when projekt changes TODO
       $('[id$="projekt_phase_id"]').val('')
 
+      $('#map-container').hide();
+
       var $firstProjektPhase = $('#projekt-phase-group-for-projekt-' + projektId + " .js-select-projekt-phase:first")
       App.ProjektSelector.selectProjektPhase($firstProjektPhase);
-      // var $selectedProjektPhase = $('#projekt-phase-selector-' + selectedProjektPhaseId)
-
-      $('#map-container').hide();
     },
 
     selectProjektPhase: function($projektPhase) {

@@ -10,8 +10,10 @@
         <%= l(resource.created_at, format: :new_date_with_year) %>
       </div>
       <div class="resource-page-banner--detail">
-        <i class="fa fa-comment"></i>
-        <%= resource.comments.count %> Kommentare
+        <%= link_to('#comments') do %>
+          <i class="fa fa-comment"></i>
+          <%= resource.comments.count %> Kommentare
+        <% end %>
       </div>
       <div class="resource-page-banner--detail">
         <%= link_to(projekt_path(resource.projekt)) do %>

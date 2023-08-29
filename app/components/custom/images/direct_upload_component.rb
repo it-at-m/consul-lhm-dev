@@ -44,7 +44,7 @@ class Images::DirectUploadComponent < ApplicationComponent
       end
     end
 
-    def file_field
+    def presetuped_file_field
       # klass = attachable.persisted? || attachable.cached_attachment.present? ? " attached" : ""
 
       f.file_field(
@@ -77,7 +77,7 @@ class Images::DirectUploadComponent < ApplicationComponent
 
     def preview_area_class
       if attachable.attachment.attached?
-        "-active"
+        "-preview-set"
       end
     end
 end

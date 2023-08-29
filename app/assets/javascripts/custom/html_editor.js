@@ -10,7 +10,7 @@
     },
 
     enableCKeditorFor: function(element) {
-      if ($(document.body).hasClass('new-custom-design')) {
+      if ($(document.body).hasClass('custom-new-design')) {
         var hasNewDesign = true;
       }
 
@@ -42,8 +42,9 @@
     },
 
     enableCustomCkeditorStyles: function() {
-      if ($(document.body).hasClass('new-custom-design')) {
-        CKEDITOR.addCss(".cke_editable{font-size: 16px; line-height: 1.3; } ");
+      if ($(document.body).hasClass('custom-new-design')) {
+        CKEDITOR.addCss(".cke_editable{font-size: 16px; line-height: 1.3; }");
+        CKEDITOR.addCss("p[data-cke-placeholdertext] { font-size: 16px; line-height: 1.1; } ");
       }
     },
 

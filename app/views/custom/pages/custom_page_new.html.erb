@@ -74,8 +74,6 @@
       <div class="flex-layout">
         <div class="main-column">
           <%= projekt_content %>
-          <div class="projekt-footer-anchor" id="projekt-footer">
-          </div>
         </div>
         <% if @custom_page.projekt.present? %>
           <!-- <div class="projekt-sidebar margin-bottom"> -->
@@ -93,6 +91,7 @@
   <% end %>
 
   <div class="show-on-desktop">
+    <div class="projekt-footer-anchor" id="projekt-footer"> </div>
     <%= projekt_footer %>
   </div>
 

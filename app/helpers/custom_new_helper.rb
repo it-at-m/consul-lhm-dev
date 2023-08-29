@@ -16,6 +16,16 @@ module CustomNewHelper
     end
   end
 
+  def resources_back_link(fallback_path:)
+    if params[:origin] == "projekt" && params[:projekt_phase_id].present?
+      link_to(url_to_footer_tab, class: "back") do
+        tag.span(class: "icon-angle-left") + t("shared.back")
+      end
+    else
+      back_link_to fallback_path
+    end
+  end
+
   def custom_new_design_body_class
     Setting.new_design_enabled? ? 'custom-new-design' : ''
   end
