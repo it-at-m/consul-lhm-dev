@@ -118,7 +118,9 @@ namespace :admin do
     resources :settings, only: :index
   end
 
-  resources :deficiency_reports, only: [:index, :show]
+  resources :deficiency_reports, only: [:index, :show] do
+    resources :audits, only: :show, controller: "deficiency_report_audits"
+  end
 
   # custom projekt managers
   resources :projekt_managers, only: [:index, :create, :destroy] do

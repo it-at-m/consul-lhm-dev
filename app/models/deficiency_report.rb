@@ -14,6 +14,13 @@ class DeficiencyReport < ApplicationRecord
   acts_as_paranoid column: :hidden_at
   include ActsAsParanoidAliases
 
+  audited on: [:update, :destroy]
+  has_associated_audits
+  translation_class.class_eval do
+    audited associated_with: :globalized_model,
+            only: DeficiencyReport.translated_attribute_names
+  end
+
   belongs_to :category, class_name: "DeficiencyReport::Category", foreign_key: :deficiency_report_category_id
   belongs_to :status, class_name: "DeficiencyReport::Status", foreign_key: :deficiency_report_status_id
   belongs_to :officer, class_name: "DeficiencyReport::Officer", foreign_key: :deficiency_report_officer_id
