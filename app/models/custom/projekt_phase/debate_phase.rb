@@ -30,10 +30,7 @@ class ProjektPhase::DebatePhase < ProjektPhase
   end
 
   def selectable_by_admins_only?
-    projekt_settings.
-      find_by(projekt_settings: { key: "projekt_feature.debates.only_admins_create_debates" }).
-      value.
-      present?
+    feature?("general.only_admins_create_debates")
   end
 
   def admin_nav_bar_items
