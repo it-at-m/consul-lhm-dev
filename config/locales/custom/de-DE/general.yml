@@ -138,7 +138,7 @@ de:
         help_text_2: 'Um eine Diskussion zu eröffnen, müssen Sie sich auf %{org} registrieren. Benutzer*innen können auch offene Diskussionen kommentieren und sie über "Ich stimme zu" oder "Ich stimme nicht zu" Buttons bewerten.'
     new:
       form:
-        submit_button: Eine Diskussion starten
+        submit_button: Jetzt veröffentlichen
       more_info: Weitere Informationen
       recommendation_four: Genießen Sie diesen Ort und die Stimmen, die ihn füllen. Er gehört auch Ihnen.
       recommendation_one: Verwenden Sie bitte nicht ausschließlich Großbuchstaben für die Überschrift oder für komplette Sätze. Im Internet gilt das als schreien. Und niemand möchte gerne angeschrien werden.
@@ -466,7 +466,7 @@ de:
       retired_warning_link_to_explanation: Lesen Sie die Erläuterung, bevor Sie abstimmen.
       retired: Vorschlag vom Autor zurückgezogen
       share: Teilen
-      no_notifications: "Dieser Vorschlag enthält keine Benachrichtigungen."
+      no_notifications: "Es sind keine Benachrichtigungen vorhanden"
       embed_video_title: "Video über %{proposal}"
       title_video_url: "Externes Video"
       author: Autor
@@ -623,7 +623,7 @@ de:
     final_date: "Endgültige Nachzählungen/Ergebnisse"
     index:
       filters:
-        current: Nur aktive Abstimmungen
+        current: Nur aktive
         expired: "Abgelaufen"
       title: "Abstimmungen"
       participate_button: "An dieser Abstimmung teilnehmen"
@@ -726,7 +726,7 @@ de:
     back: Zurück
     check: Auswählen
     check_all: Alle
-    check_none: Keinen
+    check_none: Keine
     collective: Kollektiv
     flag: Melden
     follow: "Folgen"
@@ -863,7 +863,7 @@ de:
           one: 1 Investitionsvorschlag
           other: "%{count} Investitionsvorschläge"
         follows:
-          one: 1 folge ich 
+          one: 1 folge ich
           other: "%{count} folge ich"
       no_activity: Benutzer hat keine öffentliche Aktivität
       no_private_messages: "Der Benutzer akzeptiert keine privaten Nachrichten."
@@ -997,7 +997,7 @@ de:
           other: "%{count} weitere Tags"
   machine_learning:
     comments_summary: "Zusammenfassung Kommentare"
-    info_text: "Inhalt per AI / Machine Learning generiert"  
+    info_text: "Inhalt per AI / Machine Learning generiert"
   alerts:
     select_one_category: "Bitte wählen Sie nur eine Kategorie"
   search:

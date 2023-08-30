@@ -122,6 +122,10 @@ class ProjektPhaseSetting < ApplicationRecord
         "ProjektPhase::NewsfeedPhase" => {
           "option.general.newsfeed_id": "",
           "option.general.newsfeed_type": ""
+        },
+
+        "ProjektPhase::FormularPhase" => {
+          "feature.general.only_registered_users": ""
         }
       }
     end

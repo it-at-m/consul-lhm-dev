@@ -80,6 +80,7 @@ class Mailer < ApplicationMailer
 
   def budget_investment_created(investment)
     @investment = investment
+    @projekt = investment.projekt
     @email_to = @investment.author.email
 
     with_user(@investment.author) do
@@ -160,6 +161,20 @@ class Mailer < ApplicationMailer
     with_user(@user) do
       mail(to: @email_to, subject: t("mailers.manual_verification_confirmation.subject"))
     end
+  end
+
+  def formular_answer_confirmation(email)
+    @email_to = email
+    mail(to: email, subject: t("mailers.formular_answer_confirmation.subject"))
+  end
+
+  def formular_follow_up_letter(follow_up_letter, recipient)
+    @follow_up_letter = follow_up_letter
+    @recipient = recipient
+    @projekt_phase = follow_up_letter.formular.projekt_phase
+
+    @email_to = @recipient.email
+    mail(to: @email_to, subject: @follow_up_letter.subject)
   end
 
   private

@@ -1,3 +1,3 @@
-<h2 class="title inline-block"><%= t("projekt_management.dashboard.index.title") %></h2>
+<h2 class="title"><%= t("projekt_management.dashboard.index.title") %></h2>
 
-<p><%= t("projekt_management.dashboard.index.description", org: setting["org_name"]) %></p>
+<%= render @projekts %>

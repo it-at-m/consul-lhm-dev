@@ -1,16 +1,6 @@
-<% projekt_links = Projekt.all.order(:id).map do |projekt|
-    next unless can?( :edit, projekt)
-    [projekt.name, edit_projekt_management_projekt_path(projekt), projekt == @projekt] 
-  end %>
-
-<ul class='admin-menu' data-accordion-menu data-multi-open="false">
-  <li>
-    <a href="#" class="projekts-link"><%= t("custom.admin.menu.projekts") %></a>
-    <%= link_list(
-      *projekt_links,
-      id: "projekt_management_menu",
-      class: ('is-active' if true)
-    ) %>
+<ul class="admin-menu" data-accordion-menu data-multi-open="false">
+  <li class="<%= "is-active" if controller_name == "projekts" %>">
+    <%= link_to t("custom.admin.menu.projekts"), projekt_management_projekts_path, class: "projekts-link" %>
   </li>
 
   <li class="<%= "is-active" if controller_name == "proposals" %>">

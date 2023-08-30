@@ -1,0 +1,40 @@
+<div id="<%= dom_id(letter) %>" class="formular-follow-up-letter">
+  <div class="letter-subject">
+    <%= "#{letter.id}." %>
+    <%= letter.subject || t("custom.admin.projekt_phases.formular_answers.subject_placeholder") %>
+  </div>
+
+  <div class="letter-recipients">
+    <%= t("custom.admin.projekt_phases.formular_answers.recipients", number: letter.recipients.count) %>
+  </div>
+
+  <% if letter.sent_at.present? %>
+    <div class="emails-sent">
+      <%= t("custom.admin.projekt_phases.formular_answers.emails_sent", number: letter.email_activities.count) %>
+    </div>
+    <%= link_to polymorphic_path([@namespace, @projekt_phase, @formular, letter], action: :preview),
+      class: "edit-link",
+      remote: true do %>
+      <i class="fas fa-eye"></i>
+    <% end %>
+  <% else %>
+    <div class="controls">
+      <%= link_to "", polymorphic_path([@namespace, @projekt_phase, @formular, letter], action: :edit),
+        class: "edit-link",
+        remote: true %>
+
+      <%= link_to "", polymorphic_path([@namespace, @projekt_phase, @formular, letter]),
+        class: "destroy-link",
+        remote: true,
+        method: :delete,
+        data: { confirm: "Sind Sie sicher?" } %>
+    </div>
+
+    <div class="send margin-top">
+      <%= button_to t("custom.admin.projekt_phases.formular_answers.buttons.send_email"), polymorphic_path([@namespace, @projekt_phase, @formular, letter], action: :send_emails),
+        class: "button",
+        remote: true,
+        data: { confirm: "Sind Sie sicher?" } %>
+    </div>
+  <% end %>
+</div>

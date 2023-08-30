@@ -104,13 +104,15 @@
             <% end %>
 
             <% @account_individial_groups_hard.map do |individual_group| %>
+              <% next unless (individual_group.individual_group_values & @account.individual_group_values).any? %>
+
               <div class="options-group">
                 <label><%= individual_group.name %></label>
-
                 <%= f.collection_check_boxes :individual_group_value_ids, individual_group.individual_group_values, :id, :name do |cb| %>
-                  <%= cb.label(class: "checkbox-label checkbox-label--inline") { cb.check_box(disabled: true) + cb.text } %>
+                  <% if cb.object.in?(@account.individual_group_values) %>
+                    <%= cb.label(class: "checkbox-label checkbox-label--inline") { cb.check_box(disabled: true) + cb.text } %>
+                  <% end %>
                 <% end %>
-
               </div>
             <% end %>
 

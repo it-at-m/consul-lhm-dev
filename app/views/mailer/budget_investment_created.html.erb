@@ -13,15 +13,14 @@
   <p style="<%= css_for_mailer_text %>">
     <%= sanitize(
       t("mailers.budget_investment_created.text",
-        investment: @investment.title,
-        budget: @investment.budget.name)
+        investment_link: link_to(@investment.title, budget_investment_url(@investment.budget, @investment)))
     ) %>
   </p>
 
   <p style="<%= css_for_mailer_text %>">
     <%= sanitize(
       t("mailers.budget_investment_created.follow",
-        link: link_to(t("mailers.budget_investment_created.follow_link"), budgets_url,
+        link: link_to(@projekt.page.title, page_url(@projekt.page.slug),
         style: css_for_mailer_link)
       ),
       attributes: %w[href style]

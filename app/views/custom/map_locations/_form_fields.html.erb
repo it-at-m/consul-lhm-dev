@@ -3,7 +3,7 @@
 
 <% mappable = @proposal || @deficiency_report || @investment || nil %>
 
-<% if mappable.present?  && !mappable.respond_to?(:projekt) %>
+<% if mappable.present?  && !mappable.respond_to?(:projekt_phase) %>
   <%= render Shared::MapComponent.new(
     mappable: mappable,
     map_location: map_location,
@@ -11,23 +11,14 @@
     editable: true
   ) %>
 
-<% elsif mappable.present? && mappable.map_location.present? %>
-  <%= render Shared::MapComponent.new(
-    mappable: mappable,
-    map_location: map_location,
-    parent_class: parent_class,
-    editable:	true,
-    projekt: projekt,
-    show_admin_shape: projekt&.map_location&.show_admin_shape?
-  ) %>
 <% else %>
   <%= render Shared::MapComponent.new(
     mappable: mappable,
-    map_location: map_location,
+    map_location: projekt_phase&.map_location || MapLocation.new,
     parent_class: parent_class,
     editable: true,
-    projekt: projekt,
-    show_admin_shape: projekt&.map_location&.show_admin_shape?
+    projekt_phase: projekt_phase,
+    show_admin_shape: projekt_phase&.map_location&.show_admin_shape?
   ) %>
 <% end %>
 
@@ -48,6 +39,6 @@
                               value: map_location.zoom,
                               id: map_location_input_id(parent_class, "zoom") %>
   <%= m_l_fields.hidden_field :shape,
-                              value: map_location.shape,
+                              value: map_location.shape.to_json,
                               id: map_location_input_id(parent_class, "shape") %>
 <% end %>

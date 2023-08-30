@@ -35,7 +35,7 @@
     <%= image_tag(milestone.image.variant(:large), { id: "image_#{milestone.id}", alt: milestone.image.title, class: "margin" }) if milestone.image.present? %>
 
     <p>
-      <%= sanitize_and_auto_link milestone.description %>
+      <%= AdminWYSIWYGSanitizer.new.sanitize milestone.description %>
     </p>
 
     <% if milestone.documents.present? %>

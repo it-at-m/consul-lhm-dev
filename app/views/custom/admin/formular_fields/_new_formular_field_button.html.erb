@@ -1,0 +1,3 @@
+<div id="new_formular_field">
+  <%= link_to t("custom.admin.projekt_phases.formular.add_field_button"), polymorphic_path([@namespace, @projekt_phase, @formular, FormularField.new], action: :new), remote: true, class: "button" %>
+</div>

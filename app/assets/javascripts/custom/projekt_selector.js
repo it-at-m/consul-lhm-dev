@@ -64,17 +64,27 @@
 
     selectProjektPhase: function($projektPhase) {
       var projektPhaseId = $projektPhase.data('projektPhaseId')
-
       $('[id$="projekt_phase_id"]').val(projektPhaseId)
+
+      if ( $("span#persisted-resource-data").length ) {
+        var persistedResourceData = $("span#persisted-resource-data").data();
+
+        if ( persistedResourceData['resourceMap'] ) {
+          $('#map-container').show();
+        }
+
+      } else {
+        replaceProjektMapOnResourceCreation($projektPhase);
+      }
 
       updateProjektSelectorHint(projektPhaseId);
       updateFormHeading(projektPhaseId);
       updateActivePhaseSelector(projektPhaseId);
-      replaceProjektMapOnProposalCreation($projektPhase);
       toggleImageAttachment($projektPhase);
       toggleDocumentAttachment($projektPhase);
       toggleSummary($projektPhase);
       toggleExternalVideoUrl($projektPhase);
+      toggleOnBehalfOf($projektPhase);
       toggleExternalFieldsHeader($projektPhase);
       toggleTagging($projektPhase);
 
@@ -116,7 +126,7 @@
         $('#projekt-phase-selector-' + projektPhaseId).addClass('active');
       }
 
-      function replaceProjektMapOnProposalCreation($projektPhase) {
+      function replaceProjektMapOnResourceCreation($projektPhase) {
         App.Map.destroy();
 
         if ( $projektPhase.data('showMap') ) {
@@ -176,14 +186,19 @@
         }
       }
 
+      function toggleOnBehalfOf($projektPhase) {
+        if ( $projektPhase.data('createOnBehalfOf') ) {
+          $('#create-on-behalf-of').removeClass('hide');
+        } else {
+          $('#create-on-behalf-of').addClass('hide');
+        }
+      }
+
       function toggleExternalFieldsHeader($projektPhase) {
         if (
-          $('#on-behalf-of-fields').length == 0 &&
+          $('#create-on-behalf-of').is(":hidden") &&
             $('#attach-documents').is(":hidden") &&
-            $('.summary-field').is(":hidden") &&
-            $('#external-video-url-fields').is(":hidden") &&
-            $('#category_tags').is(":hidden") &&
-            $('#sdgs-selector').is(":hidden")
+            (!$('#external-video-url-fields').length || $('#external-video-url-fields').is(":hidden"))
         ) {
           $('#additional-fields-title').hide();
         } else {
@@ -302,7 +317,7 @@
         selectedProjektPhaseId = $('[id$="projekt_phase_id"]').val();
       }
 
-      if ( selectedProjektPhaseId === '' ) {
+      if ( selectedProjektId === '' || selectedProjektPhaseId === '' ) {
         return false;
       }
 
@@ -322,10 +337,10 @@
         $selectedProjekt.closest('.projekt_group').hide();
       });
 
-      if ( $selectedProjekt.data('hideProjektSelector') ) {
-        $('#projekt-selector-block').prev('legend').hide();
-        $('#projekt-selector-block').hide();
-      }
+      // if ( $selectedProjekt.data('hideProjektSelector') ) {
+      //   $('#projekt-selector-block').prev('legend').hide();
+      //   $('#projekt-selector-block').hide();
+      // }
 
       // select projekt phase
       var $selectedProjektPhase = $('#projekt-phase-selector-' + selectedProjektPhaseId)

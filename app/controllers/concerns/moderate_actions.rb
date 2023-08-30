@@ -25,12 +25,18 @@ module ModerateActions
     @resources = @resources.where(id: params[:resource_ids])
 
     if params[:hide_resources].present?
-      @resources.accessible_by(current_ability, :hide).each { |resource| hide_resource resource }
+      # @resources.accessible_by(current_ability, :hide).each { |resource| hide_resource resource }
+      ## resource_ids = @resources.select{ |r| can?(:hide, r) }.pluck(:id)
+      ## @resources.where(id: resource_ids).each { |resource| hide_resource resource }
+      @resources.select { |r| can?(:hide, r) }.each { |resource| hide_resource resource }
     elsif params[:ignore_flags].present?
-      @resources.accessible_by(current_ability, :ignore_flag).each(&:ignore_flag)
+      # @resources.accessible_by(current_ability, :ignore_flag).each(&:ignore_flag)
+      ## resource_ids = @resources.select{ |r| can?(:ignore_flag, r) }.pluck(:id)
+      ## @resources.where(id: resource_ids).each(&:ignore_flag)
+      @resources.select { |r| can?(:ignore_flag, r) }.each(&:ignore_flag)
     elsif params[:block_authors].present?
       author_ids = @resources.pluck(author_id)
-      User.where(id: author_ids).accessible_by(current_ability, :block).each { |user| block_user user }
+      User.where(id: author_ids).each { |user| block_user user }
     end
 
     redirect_with_query_params_to(action: :index)
@@ -39,7 +45,9 @@ module ModerateActions
   private
 
     def load_resources
-      @resources = resource_model.accessible_by(current_ability, :moderate)
+      # @resources = resource_model.accessible_by(current_ability, :moderate)
+      resource_ids = resource_model.select{ |r| can?(:moderate, r) }.pluck(:id)
+      @resources = resource_model.where(id: resource_ids)
     end
 
     def hide_resource(resource)

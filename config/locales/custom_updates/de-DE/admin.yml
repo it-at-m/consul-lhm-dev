@@ -330,6 +330,13 @@ de:
               title: Seitenbanner
       users:
         columns:
+          id: ID
+          erase_reason: Grund des Löschens
+          name: Name
+          email: E-Mail
+          document_number: Dokumentennummern
+          roles: Rollen
+          verification_level: Überprüfungsstatus
           first_name: Vorname
           last_name: Nachname
           street_address: Adresse
@@ -340,6 +347,8 @@ de:
           date_of_birth: Geburtsdatum
           document_type: Dokument
           document_last_digits: Dokument (4 letzten Ziffern)
+          unique_stamp: Unique Stamp
+          created_at: Nutzer angelegt am
           verified_at: Verifiziert am
           actions: Aktionen
           action:
@@ -377,6 +386,8 @@ de:
           milestones: Liste der Meilensteine
           projekt_notifications: Benachrichtigungen
           projekt_arguments: Liste von Stimmen
+          formular: Formular
+          formular_answers: Posteingang & Follow-up E-Mails
         notice:
           created: Phase wurde erstellt
           updated: Phase wurde aktualisiert
@@ -493,6 +504,29 @@ de:
           questions: Kurzumfragen
           send_notifications_button: Benachrichtigungen senden
           notifications_sent_notice: Benachrichtigungen erfolgreich gesendet
+        formular:
+          page_title: Formular
+          primary_fields_title: Reguläre Formularfelder
+          follow_up_fields_title:  Follow-up Formularfelder
+          dropdown_hint: Bitte geben Sie Ihre Antwortoptionen ein. Diese müssen durch ein Komma getrennt sein.
+          kinds:
+            string: Text
+            email: Email
+            date: Datum
+            dropdown: Dropdown
+          update_field_button: Formularfeld aktualisieren
+          add_field_button: Neues Formularfeld hinzufügen
+        formular_answers:
+          page_title: Posteingang & Follow-up E-Mails
+          emails_title: Follow-up E-Mails
+          subject_placeholder: E-Mail
+          recipients: "%{number} Empfänger"
+          emails_sent: "%{number} E-Mails gesendet"
+          new_email_title: Posteingang
+          buttons:
+            save_draft: Entwurf speichern
+            send_email: E-Mail versenden
+            create_email_draft: E-Mail-Entwurf an ausgewählte Empfänger*innen erstellen
       modal_notifications:
         index:
           create: Erstellen

@@ -1,17 +1,22 @@
 class ProjektManagement::BaseController < ApplicationController
-  layout "admin"
-
+  layout "projekt_management"
   before_action :authenticate_user!
-  before_action :redirect_administrator
-  before_action :verify_projekt_manager
+
+  before_action :verify_projekt_manager, :set_namespace
+
+  helper_method :projekt_manager
 
   private
 
-    def redirect_administrator
-      redirect_to admin_root_path if current_user&.administrator?
+    def verify_projekt_manager
+      raise ActionController::RoutingError, "Not Found" unless current_user&.projekt_manager?
     end
 
-    def verify_projekt_manager
-      raise CanCan::AccessDenied unless current_user&.projekt_manager?
+    def projekt_manager
+      @projekt_manager ||= current_user.projekt_manager
+    end
+
+    def set_namespace
+      @namespace ||= :projekt_management
     end
 end

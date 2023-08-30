@@ -1,0 +1,13 @@
+de:
+  custom:
+    formular_answer:
+      form:
+        submit: Abschicken
+      notifications:
+        success: Vielen Dank! Ihr Formular wurde erfolgreich eingereicht.
+      errors:
+        blank: Darf nicht leer sein
+        length:
+          minimum: Mindestens %{minimum} Buchstaben
+          maximum: Nicht mehr als %{maximum} Buchstaben
+        format: Das Format ist falsch

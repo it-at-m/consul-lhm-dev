@@ -82,15 +82,32 @@
         var $selectedRadioButton = $(this)
         var $transparentCheckbox = $selectedRadioButton.closest('.map-layer-form').find('#map_layer_transparent')
         var $layerNamesInput = $selectedRadioButton.closest('.map-layer-form').find('#map_layer_layer_names')
+        var $layerOpacityInput = $selectedRadioButton.closest('.map-layer-form').find('#map_layer_opacity')
 
         if ( $selectedRadioButton.val() == 'regular' ) {
           $transparentCheckbox.prop("checked", false);
           $transparentCheckbox.attr("disabled", true);
           $layerNamesInput.attr("disabled", true);
+          $layerOpacityInput.attr("disabled", true);
   
         } else if ( $selectedRadioButton.val() == 'wms' ) {
           $transparentCheckbox.removeAttr("disabled");
           $layerNamesInput.removeAttr("disabled");
+          $layerOpacityInput.removeAttr("disabled");
+        }
+      })
+
+      $("body").on("change", ".js-toggle-custom-formular-fields", function() {
+        if ( $(this).val() == "email" ) {
+          $(".email-for-confirmation").removeClass("hide");
+        } else {
+          $(".email-for-confirmation").addClass("hide");
+        }
+
+        if ( $(this).val() == "dropdown" ) {
+          $(".drop-down-options").removeClass("hide");
+        } else {
+          $(".drop-down-options").addClass("hide");
         }
       })
 

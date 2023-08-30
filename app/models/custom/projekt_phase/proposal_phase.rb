@@ -32,10 +32,7 @@ class ProjektPhase::ProposalPhase < ProjektPhase
   end
 
   def selectable_by_admins_only?
-    projekt_settings.
-        find_by(projekt_settings: { key: "projekt_feature.proposals.only_admins_create_proposals" }).
-        value.
-        present?
+    feature?("general.only_admins_create_proposals")
   end
 
   def admin_nav_bar_items

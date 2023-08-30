@@ -22,7 +22,8 @@ class ProjektPhase < ApplicationRecord
     "ProjektPhase::QuestionPhase",
     "ProjektPhase::VotingPhase",
     "ProjektPhase::BudgetPhase",
-    "ProjektPhase::LegislationPhase"
+    "ProjektPhase::LegislationPhase",
+    "ProjektPhase::FormularPhase"
   ] + REGULAR_PROJEKT_PHASES
 
   delegate :icon, :author, :author_id, to: :projekt
@@ -234,6 +235,16 @@ class ProjektPhase < ApplicationRecord
 
   def sentiment_label_text
     sentiments_name.presence || I18n.t("custom.projekts.page.footer.sidebar.sentiments.title")
+  end
+
+  def map_location_with_admin_shape
+    return nil unless map_location.present?
+
+    map_location.show_admin_shape? ? map_location : nil
+  end
+
+  def subscribable?
+    true
   end
 
   private

@@ -2,7 +2,7 @@ class Admin::ProjektsController < Admin::BaseController
   include ProjektAdminActions
 
   def index
-    super
+    @projekts = Projekt.top_level.regular
 
     @new_projekt = Projekt.new
     @projekt = Projekt.overview_page

@@ -1,9 +1,10 @@
 class Images::NestedComponent < ApplicationComponent
   attr_reader :f, :image_fields
 
-  def initialize(f, image_fields: :image)
+  def initialize(f, image_fields: :image, block_id: "nested-image")
     @f = f
     @image_fields = image_fields
+    @block_id = block_id # for uniqueness custom
   end
 
   private

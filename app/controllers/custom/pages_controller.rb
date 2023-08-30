@@ -210,17 +210,6 @@ class PagesController < ApplicationController
     end
 
     @investments = @investments.send("sort_by_#{@current_order}").page(params[:page]).per(20)
-
-    if @budget.present? && @projekt.current?
-      @top_level_active_projekts = Projekt.where(id: @projekt)
-      @top_level_archived_projekts = []
-    elsif @budget.present? && @projekt.expired?
-      @top_level_active_projekts = []
-      @top_level_archived_projekts = Projekt.where(id: @projekt)
-    else
-      @top_level_active_projekts = []
-      @top_level_archived_projekts = []
-    end
   end
 
   def set_milestone_phase_footer_tab_variables
@@ -279,6 +268,23 @@ class PagesController < ApplicationController
     @all_livestreams = @projekt_phase.projekt_livestreams.order(created_at: :desc)
     @current_projekt_livestream = @all_livestreams.first
     @other_livestreams = @all_livestreams.select(:id, :title)
+  end
+
+  def set_formular_phase_footer_tab_variables
+    @formular = @projekt_phase.formular
+
+    if params[:token].present?
+      @recipient = FormularFollowUpLetterRecipient.find_by(subscription_token: params[:token])
+      return unless @recipient.present? && @recipient.formular.id == @formular.id
+
+      @formular_fields = @formular.formular_fields.follow_up.each(&:set_custom_attributes)
+      @formular_answer = @recipient.formular_answer
+    else
+      @formular_fields = @formular.formular_fields.primary.each(&:set_custom_attributes)
+      @formular_answer = @formular.formular_answers.new
+    end
+
+    @formular_answer.answer_errors ||= {}
   end
 
   def get_default_projekt_phase(default_phase_id = nil)

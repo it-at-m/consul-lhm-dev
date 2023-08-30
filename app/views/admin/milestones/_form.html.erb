@@ -1,6 +1,6 @@
 <%= render "shared/globalize_locales", resource: @milestone %>
 
-<%= translatable_form_for @milestone, url: admin_polymorphic_path(@milestone) do |f| %>
+<%= translatable_form_for @milestone, url: polymorphic_path([@namespace, @milestoneable, @milestone]) do |f| %>
 
   <div class="row">
     <div class="small-12 medium-6 margin-bottom column">
@@ -18,7 +18,7 @@
       <div class="column">
         <%= translations_form.hidden_field :title, value: l(Time.current, format: :datetime),
                                                    maxlength: Milestone.title_max_length %>
-        <%= translations_form.text_area :description, rows: 5 %>
+        <%= translations_form.text_area :description, class: "html-area #{ck_editor_class(current_user)}" %>
 
         <%= f.date_field :publication_date %>
 

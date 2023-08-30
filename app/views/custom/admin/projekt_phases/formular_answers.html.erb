@@ -1,0 +1,52 @@
+<%= render "custom/admin/projekt_phases/heading" %>
+<%= render "custom/admin/projekt_phases/nav_bar" %>
+
+<div class="row">
+  <div class="column">
+    <h3><%= t("custom.admin.projekt_phases.formular_answers.emails_title") %></h3>
+
+    <div id="formular-follow-up-letters" class="formular-follow-up-letters">
+      <%= render partial: "custom/admin/formular_follow_up_letters/letter", collection: @formular_follow_up_letters, as: :letter %>
+    </div>
+
+    <h3><%= t("custom.admin.projekt_phases.formular_answers.new_email_title") %></h3>
+
+    <%= form_with url: polymorphic_path([@namespace, @projekt_phase, @formular, FormularFollowUpLetter.new]), local: false do |f| %>
+      <div>
+        <%= f.submit t("custom.admin.projekt_phases.formular_answers.buttons.create_email_draft"), class: "button hollow" %>
+      </div>
+
+      <div class="float-left js-check">
+        <%= t("shared.check") %>:
+        <%= link_to t("shared.check_all"), "#", data: { check_all: "formular_answer_ids[]" } %>
+        |
+        <%= link_to t("shared.check_none"), "#", data: { check_none: "formular_answer_ids[]" } %>
+      </div>
+
+      <%= link_to t("custom.shared.download"), polymorphic_path([@namespace, @projekt_phase], action: :formular_answers, format: :csv), class: "float-right small" %>
+
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <% @formular_fields.each do |ff| %>
+              <th><%= ff.name %></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% @formular_answers.each do |fa| %>
+            <tr>
+              <td>
+                <%= check_box_tag "formular_answer_ids[]", fa.id, true %>
+              </td>
+              <% @formular_fields.each do |ff| %>
+                <td><%= fa.answers[ff.key] %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

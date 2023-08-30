@@ -56,7 +56,7 @@ module MapLayerAdminActions
     def map_layer_params
       params.require(:map_layer).permit(
         :name, :layer_names, :base, :show_by_default, :provider,
-        :attribution, :protocol, :format, :transparent
+        :attribution, :protocol, :format, :transparent, :opacity
       )
     end
 

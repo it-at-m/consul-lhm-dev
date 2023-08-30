@@ -37,7 +37,7 @@
         <% if extended_feature?('modulewide.show_number_of_entries_in_modules') %>
           <div class='float-right'>
             <%= @resources.count %>
-            <%= t("activerecord.models.proposal", count: @resources.count) %>
+            <%= t("custom.shared.resource_count", count: @resources.count) %>
           </div>
         <% end %>
       </div>
@@ -49,10 +49,6 @@
       <%= empty_recommended_proposals_message_text(current_user) %>
     <% end %>
 
-    <% if @projekt.overview_page? %>
-      <%= paginate @proposals, remote: true, params: { controller: "projekts", action: "proposal_phase_footer_tab" } %>
-    <% else %>
-      <%= paginate @proposals, remote: true, params: { controller: "pages", action: "projekt_phase_footer_tab" } %>
-    <% end %>
+    <%= paginate @proposals, remote: true, params: { controller: "pages", action: "projekt_phase_footer_tab" } %>
   </div>
 </div>

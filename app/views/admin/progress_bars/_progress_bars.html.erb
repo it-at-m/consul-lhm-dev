@@ -1,10 +1,7 @@
 <h2 class="inline-block"><%= t("admin.progress_bars.index.title") %></h2>
 
 <%= link_to t("admin.progress_bars.index.new_progress_bar"),
-            admin_polymorphic_path(
-              ProgressBar.new(progressable: progressable),
-              action: :new
-            ),
+            polymorphic_path([@namespace, progressable, ProgressBar.new(progressable: progressable)], action: :new),
             class: "button float-right" %>
 
 <% if progressable.progress_bars.any? %>
@@ -36,7 +33,10 @@
             <%= number_to_percentage(progress_bar.percentage, strip_insignificant_zeros: true) %>
           </td>
           <td>
-            <%= render Admin::TableActionsComponent.new(progress_bar) %>
+            <%= render Admin::TableActionsComponent.new(progress_bar,
+                                                        edit_path: polymorphic_path([@namespace, progressable, progress_bar], action: :edit),
+                                                        destroy_path: polymorphic_path([@namespace, progressable, progress_bar])
+                                                       ) %>
           </td>
         </tr>
       <% end %>

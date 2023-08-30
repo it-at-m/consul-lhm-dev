@@ -6,25 +6,25 @@
           Flag.flagged?(current_user, @proposal),
           "show_info"] do %>
 
-  <% if feature?(:map) && map_location_available?(@proposal) %>
+  <% if projekt_phase_feature?(@proposal.projekt_phase, "form.show_map") && map_location_available?(@proposal) %>
     <% if @proposal.projekt.vc_map_enabled? %>
       <div class="margin-bottom not-print">
         <%= render Shared::VCMapComponent.new(
           mappable: @proposal,
-          map_location: @proposal.map_location || @proposal.projekt&.map_location_with_admin_shape,
+          map_location: @proposal.map_location || @proposal.projekt_phase.map_location_with_admin_shape,
           parent_class: "proposal",
-          projekt: @proposal.projekt,
-          show_admin_shape: @proposal.projekt.map_location.show_admin_shape?
+          projekt_phase: @proposal.projekt_phase,
+          show_admin_shape: @proposal.projekt_phase.map_location.show_admin_shape?
         ) %>
       </div>
     <% else %>
       <div class="margin-bottom not-print">
         <%= render Shared::MapComponent.new(
           mappable: @proposal,
-          map_location: @proposal.map_location || @proposal.projekt_phase.projekt.map_location_with_admin_shape,
+          map_location: @proposal.map_location || @proposal.projekt_phase.map_location_with_admin_shape,
           parent_class: "proposal",
-          projekt: @proposal.projekt_phase.projekt,
-          show_admin_shape: @proposal.projekt_phase.projekt.map_location.show_admin_shape?
+          projekt_phase: @proposal.projekt_phase,
+          show_admin_shape: @proposal.projekt_phase.map_location.show_admin_shape?
         ) %>
       </div>
     <% end %>
@@ -64,7 +64,6 @@
 
   <% if @proposal.description.present? %>
     <div class='margin-bottom'>
-      <h5><%= t('custom.proposals.show.description')  %></h5>
       <%= auto_link_already_sanitized_html wysiwyg(@proposal.description) %>
     </div>
   <% end %>

@@ -20,7 +20,7 @@
       </div>
     <% end %>
 
-    <legend class="margin-top tagging"><%= t("custom.debates.form.tagging") %></legend>
+    <legend class="margin-top tagging hide"><%= t("custom.debates.form.tagging") %></legend>
     <%= render partial: "shared/projekt_selector/projekt_labels", locals:	{ f: f, model: @debate } %>
     <%= render partial: "shared/projekt_selector/sentiments", locals:	{ f: f, model: @debate } %>
 
@@ -52,19 +52,18 @@
 
   <%= f.invisible_captcha :subtitle %>
 
-  <fieldset>
+  <fieldset class="additional-fields">
 
-    <legend><%= t("shared.optional") %></legend>
-
-    <% if current_user.administrator? || current_user.moderator? %>
-      <div>
-        <%= f.text_field :on_behalf_of %>
-      </div>
-    <% end %>
+    <legend id='additional-fields-title'><%= t("shared.optional") %></legend>
 
     <div class="documents" id="attach-documents">
       <%= render "documents/nested_documents", f: f %>
     </div>
+
+    <div id="create-on-behalf-of" class="hide">
+      <%= f.text_field :on_behalf_of %>
+    </div>
+
   </fieldset>
 
   <div class="actions">

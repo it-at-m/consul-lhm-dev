@@ -3,119 +3,141 @@ module Abilities
     include CanCan::Ability
 
     def self.resources_to_manage
-      [ProjektQuestion, ProjektNotification, ProjektEvent, ProjektLivestream, Milestone, ProgressBar, ProjektArgument]
+      [
+        ProjektQuestion, ProjektNotification, ProjektEvent, ProjektLivestream, ProjektArgument,
+        ProjektLabel, Sentiment, FormularField, FormularFollowUpLetter
+      ]
     end
 
     def initialize(user)
       merge Abilities::Common.new(user)
 
       can([:index, :edit, :update, :update_map, :order_phases, :update_standard_phase], Projekt) do |p|
-        p.projekt_manager_ids.include?(user.projekt_manager.id)
+        user.projekt_manager.present? && user.projekt_manager.allowed_to?("manage", p)
+      end
+
+      can(:manage, Abilities::ProjektManager.resources_to_manage) do |resource|
+        resource.projekt_phase.present? &&
+          can?(:edit, resource.projekt_phase.projekt)
       end
 
       can([:update, :update_standard_phase], ProjektSetting) do |ps|
-        ps.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+        can? :edit, ps.projekt
+      end
+
+      can(:manage, Milestone) do |milestone|
+        milestone.milestoneable.is_a?(ProjektPhase::MilestonePhase) &&
+          can?(:edit, milestone.milestoneable.projekt)
+      end
+
+      can(:manage, ProgressBar) do |progress_bar|
+        progress_bar.progressable.is_a?(ProjektPhase) &&
+          can?(:edit, progress_bar.progressable.projekt)
       end
 
       can(:manage, ProjektPhase) do |pp|
-        pp.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+        can? :edit, pp.projekt
       end
 
       can(:update, ProjektPhaseSetting) do |pps|
-        pps.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
-      end
-
-      can(:manage, ProjektLabel) do |pl|
-        pl.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
-      end
-
-      can(:manage, Sentiment) do |s|
-        s.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
-      end
-
-      can(:manage, ProjektQuestion) do |pq|
-        pq.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
-      end
-
-      can(:manage, ProjektLivestream) do |pl|
-        pl.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
-      end
-
-      can(:manage, ProjektArgument) do |pa|
-        pa.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+        can? :edit, pps.projekt_phase.projekt
       end
 
       can([:edit, :update], SiteCustomization::ContentBlock)
 
       can(:update_map, MapLocation) do |p|
-        if p.respond_to?(:projekt_phase)
-          p.projekt_phase.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
-        else
-          p.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
-        end
+        related_projekt = p.respond_to?(:projekt_phase) ? p.projekt_phase.projekt : p.projekt
+        can? :edit, related_projekt
       end
 
       can(:manage, MapLayer) do |ml|
-        ml.mappable&.projekt&.projekt_manager_ids&.include?(user.projekt_manager.id)
+        related_projekt = ml.mappable.is_a?(:projekt_phase) ? ml.mappable.projekt : ml.mappable
+        can? :edit, related_projekt
       end
 
-      can(%i[read update], SiteCustomization::Page) do |p|
-        p.projekt.present? &&
-          p.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+      can(%i[read update], SiteCustomization::Page) do |page|
+        page.projekt.present? &&
+          can?(:edit, page.projekt)
       end
 
       can(:manage, ::Widget::Card) do |wc|
         wc.cardable.class == SiteCustomization::Page &&
-        wc.cardable.projekt.present? &&
-        wc.cardable.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
+          wc.cardable.projekt.present? &&
+          can?(:edit, wc.cardable.projekt)
       end
 
-      can(:manage, Abilities::ProjektManager.resources_to_manage) do |resource|
-        resource.projekt.present? &&
-          resource.projekt.projekt_manager_ids.include?(user.projekt_manager.id)
-      end
-
+      # Moderation: Users
       can :block, User
       cannot :block, User, id: user.id
 
-      can :moderate, Proposal, projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
-      can :hide, Proposal, hidden_at: nil, projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
-      can :ignore_flag, Proposal, ignored_flag_at: nil,
-                                  hidden_at: nil,
-                                  projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
+      # Moderation: Proposals
+      can :moderate, Proposal do |proposal|
+        user.projekt_manager.allowed_to?("moderate", proposal.projekt)
+      end
 
-      can :moderate, Debate, projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
-      can :hide, Debate, hidden_at: nil, projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
-      can :ignore_flag, Debate, ignored_flag_at: nil,
-                                hidden_at: nil,
-                                projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
+      can :hide, Proposal do |proposal|
+        proposal.hidden_at == nil &&
+          can?(:moderate, proposal)
+      end
 
-      can :moderate, Budget::Investment, budget: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
-      can :hide, Budget::Investment, hidden_at: nil,
-                                     budget: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
-      can :ignore_flag, Budget::Investment, ignored_flag_at: nil,
-                                           hidden_at: nil,
-                                           budget: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
+      can :ignore_flag, Proposal do |proposal|
+        proposal.ignored_flag_at == nil &&
+          proposal.hidden_at == nil &&
+          can?(:moderate, proposal)
+      end
 
-      can :moderate, Comment
+      # Moderation: Debates
+      can :moderate, Debate do |debate|
+        user.projekt_manager.allowed_to?("moderate", debate.projekt)
+      end
+
+      can :hide, Debate do |debate|
+        debate.hidden_at == nil &&
+          can?(:moderate, debate)
+      end
+
+      can :ignore_flag, Debate do |debate|
+        debate.ignored_flag_at == nil &&
+          debate.hidden_at == nil &&
+          can?(:moderate, debate)
+      end
+
+      # Moderation: Budget::Investments
+      can :moderate, Budget::Investment do |investment|
+        user.projekt_manager.allowed_to?("moderate", investment.budget&.projekt)
+      end
+
+      can :hide, Budget::Investment do |investment|
+        investment.hidden_at == nil &&
+          can?(:moderate, investment.budget&.projekt)
+      end
+
+      can :ignore_flag, Budget::Investment do |investment|
+        investment.ignored_flag_at == nil &&
+          investment.hidden_at == nil &&
+          can?(:moderate, investment.budget&.projekt)
+      end
+
+      # Moderation: Budget::Investments
+      can :moderate, Comment do |comment|
+        user.projekt_manager.allowed_to?("moderate", comment&.projekt)
+      end
 
       can :hide, Comment do |comment|
-        comment.projekt.present? &&
-          comment.projekt.projekt_manager_ids.include?(user.projekt_manager.id) &&
-          comment.hidden_at == nil
+        comment.hidden_at == nil &&
+          can?(:moderate, comment)
       end
 
       can :ignore_flag, Comment do |comment|
-        comment.projekt.present? &&
-          comment.projekt.projekt_manager_ids.include?(user.projekt_manager.id) &&
-          comment.ignored_flag_at == nil &&
-          comment.hidden_at == nil
+        comment.ignored_flag_at == nil &&
+          comment.hidden_at == nil &&
+          can?(:moderate, comment)
       end
 
-      can :comment_as_moderator, [Debate, Comment, Proposal, Budget::Investment, Poll, ProjektQuestion], projekt_phase: { projekt: { projekt_managers: { id: user.projekt_manager.id }}}
-      can :comment_as_moderator, [Projekt], projekt_managers: { id: user.projekt_manager.id }
-
-      can [:update, :toggle_active_status], ProjektPhase, projekt: { projekt_managers: { id: user.projekt_manager.id }}
+      # Comment as moderator
+      can :comment_as_moderator, [ProjektPhase, Debate, Proposal, Budget::Investment, Poll, ProjektQuestion] do |resource|
+        user.projekt_manager.allowed_to?("moderate", resource.projekt)
+      end
     end
   end
 end
