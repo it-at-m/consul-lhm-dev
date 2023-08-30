@@ -18,6 +18,23 @@ namespace :admin do
       get :milestones
       get :projekt_notifications
       get :projekt_arguments
+      get :formular
+      get :formular_answers
+    end
+
+    resources :formular, only: [] do
+      resources :formular_fields, only: [:new, :create, :edit, :update, :destroy] do
+        collection do
+          post :order_formular_fields
+        end
+      end
+      resources :formular_follow_up_letters, only: [:create, :edit, :update, :destroy] do
+        member do
+          post :send_emails
+          get :preview
+          get :restore_default_view
+        end
+      end
     end
 
     resources :projekt_labels, except: %i[index show]
@@ -101,7 +118,9 @@ namespace :admin do
     resources :settings, only: :index
   end
 
-  resources :deficiency_reports, only: [:index, :show]
+  resources :deficiency_reports, only: [:index, :show] do
+    resources :audits, only: :show, controller: "deficiency_report_audits"
+  end
 
   # custom projekt managers
   resources :projekt_managers, only: [:index, :create, :destroy] do

@@ -97,6 +97,20 @@
         }
       })
 
+      $("body").on("change", ".js-toggle-custom-formular-fields", function() {
+        if ( $(this).val() == "email" ) {
+          $(".email-for-confirmation").removeClass("hide");
+        } else {
+          $(".email-for-confirmation").addClass("hide");
+        }
+
+        if ( $(this).val() == "dropdown" ) {
+          $(".drop-down-options").removeClass("hide");
+        } else {
+          $(".drop-down-options").addClass("hide");
+        }
+      })
+
       $(document).on("click", ".js-admin-edit-projekt-event", function(e) {
         App.HTMLEditor.initialize();
       })

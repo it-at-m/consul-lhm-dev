@@ -1,1 +1,1 @@
-<%= auto_link_already_sanitized_html simple_format(@poll.summary) %>
+<%= AdminWYSIWYGSanitizer.new.sanitize @poll.summary %>

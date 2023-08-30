@@ -1,0 +1,30 @@
+<%= render "custom/admin/projekt_phases/heading" %>
+<%= render "custom/admin/projekt_phases/nav_bar" %>
+
+<div class="row">
+  <div class="column">
+    <h2><%= t("custom.admin.projekt_phases.formular.page_title") %></h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="column">
+    <% if @formular_fields_primary.any? %>
+      <h4><%= t("custom.admin.projekt_phases.formular.primary_fields_title") %></h4>
+    <% end %>
+    <div id="formular-fields-primary" class="formular-fields sortable margin-bottom" data-js-url="<%= polymorphic_path([@namespace, @projekt_phase, @formular, FormularField.new], action: :order_formular_fields) %>">
+      <%= render partial: "custom/admin/formular_fields/formular_field", collection: @formular_fields_primary, as: :formular_field %>
+    </div>
+
+    <% if @formular_fields_follow_up.any? %>
+      <h4><%= t("custom.admin.projekt_phases.formular.follow_up_fields_title") %></h4>
+    <% end %>
+    <div id="formular-fields-follow-up" class="formular-fields sortable margin-bottom" data-js-url="<%= polymorphic_path([@namespace, @projekt_phase, @formular, FormularField.new], action: :order_formular_fields) %>">
+      <%= render partial: "custom/admin/formular_fields/formular_field", collection: @formular_fields_follow_up, as: :formular_field %>
+    </div>
+
+    <div id="new_formular_field">
+      <%= render "custom/admin/formular_fields/new_formular_field_button" %>
+    </div>
+  </div>
+</div>

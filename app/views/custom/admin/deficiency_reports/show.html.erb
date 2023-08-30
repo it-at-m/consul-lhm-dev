@@ -75,3 +75,5 @@
   <h5><%= t('custom.admin.deficiency_reports.show.officer_name') %></h5>
   <%= @deficiency_report.officer&.name %>
 </div>
+
+<%= render "admin/audits/audits", resource: @deficiency_report %>

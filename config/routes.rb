@@ -116,4 +116,6 @@ Rails.application.routes.draw do
   # projekt notifications
   put "/admin/polls/:id/send_notifications",               to: "admin/poll/polls#send_notifications", as: :send_notifications_admin_poll
   post "/admin/projekt/:projekt_id/projekt_arguments/send_notifications",   to: "admin/projekt_arguments#send_notifications", as: :send_notifications_admin_projekt_projekt_arguments
+
+  resources :formular_answers, only: %i[create update]
 end

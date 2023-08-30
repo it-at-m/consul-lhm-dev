@@ -1,0 +1,28 @@
+<div id="<%= dom_id(letter) %>" class="formular-follow-up-letter">
+
+  <%= link_to polymorphic_path([@namespace, @projekt_phase, @formular, @follow_up_letter], action: :restore_default_view), remote: true do %>
+    <button class="close-button" data-close aria-label="Close modal" type="button">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  <% end %>
+
+  <strong><%= t("admin.newsletters.show.body") %></strong>
+  <p class="help-text" id="phase-description-help-text">
+    <%= t("admin.newsletters.show.body_help_text") %>
+  </p>
+  <div class="newsletter-body-content">
+    <%= render "layouts/mailer_header" %>
+
+    <table cellpadding="0" cellspacing="0" border="0" style="background: #fff; margin: 0 auto; max-width: 700px; width:100%;">
+      <tbody>
+        <tr>
+          <% if @recipient.present? %>
+            <%= render template: "custom/mailer/formular_follow_up_letter" %>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+
+    <%= render "layouts/mailer_footer" %>
+  </div>
+</div>

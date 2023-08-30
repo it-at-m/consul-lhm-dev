@@ -1,0 +1,23 @@
+<%= render "shared/loader_spinner" %>
+
+<div class='row'>
+  <div id="formular-sidebar" class="small-12 medium-3 column">
+    <aside class="margin-bottom">
+      <% if current_user&.administrator? %>
+        <%= link_to "Zu den Antworten", formular_answers_admin_projekt_phase_path(@projekt_phase), target: "_blank", class: "button" %>
+      <% end %>
+    </aside>
+  </div>
+
+  <div id="formular" class='spinner-placeholder small-12 medium-9 column'>
+    <% if @projekt_phase.not_current? %>
+      <%= t("custom.projekt_phases.permission_problem.new_button_component.shared.phase_not_current") %>
+    <% elsif @projekt_phase.expired? %>
+      <%= t("custom.projekt_phases.permission_problem.new_button_component.shared.phase_expired") %>
+    <% elsif current_user.nil? && projekt_phase_feature?(@projekt_phase, "general.only_registered_users") %>
+      <%= sanitize t("custom.projekt_phases.permission_problem.new_button_component.shared.not_logged_in", sign_in: link_to_signin, sign_up: link_to_signup) %>
+    <% else %>
+      <%= render "custom/formular_answers/form", formular_answer: @formular_answer, formular_fields: @formular_fields %>
+    <% end %>
+  </div>
+</div>

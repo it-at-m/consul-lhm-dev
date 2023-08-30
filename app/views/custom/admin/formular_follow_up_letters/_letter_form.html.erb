@@ -1,0 +1,11 @@
+<div id="<%= dom_id(letter) %>" class="formular-follow-up-letter">
+  <div class="margin-top">
+    <%= form_with model: letter, url: polymorphic_path([@namespace, @projekt_phase, @formular, letter]), local: false do |f| %>
+      <%= f.text_field :subject %>
+      <%= f.text_area :body,
+            class: "html-area #{ck_editor_class(current_user)}" %>
+      <%= f.check_box :show_follow_up_button %>
+      <%= f.submit "Speichern" %>
+    <% end %>
+  </div>
+</div>

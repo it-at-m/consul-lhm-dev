@@ -130,3 +130,8 @@ de:
             newsfeed_id_description:
             newsfeed_type: Newsfeed Type
             newsfeed_type_description:
+      formular:
+        feature:
+          general:
+            only_registered_users: Nur registrierte Nutzer*innen können teilnehmen
+            only_registered_users_description: Das Formular steht nur registrierten Nutzer*innen zur Verfügung.

@@ -14,6 +14,13 @@ class DeficiencyReport < ApplicationRecord
   acts_as_paranoid column: :hidden_at
   include ActsAsParanoidAliases
 
+  audited on: [:update, :destroy]
+  has_associated_audits
+  translation_class.class_eval do
+    audited associated_with: :globalized_model,
+            only: DeficiencyReport.translated_attribute_names
+  end
+
   belongs_to :category, class_name: "DeficiencyReport::Category", foreign_key: :deficiency_report_category_id
   belongs_to :status, class_name: "DeficiencyReport::Status", foreign_key: :deficiency_report_status_id
   belongs_to :officer, class_name: "DeficiencyReport::Officer", foreign_key: :deficiency_report_officer_id
@@ -37,6 +44,21 @@ class DeficiencyReport < ApplicationRecord
 
     where(author_id: user_id)
   }
+
+  def audited_changes
+    if super.has_key?("deficiency_report_status_id")
+      old_status_title = DeficiencyReport::Status.find_by(id: deficiency_report_status_id_was)&.title
+      super.merge!("deficiency_report_status_id" => [old_status_title, status.title])
+    elsif super.has_key?("deficiency_report_officer_id")
+      old_officer_name = DeficiencyReport::Officer.find_by(id: deficiency_report_officer_id_was)&.name
+      super.merge!("deficiency_report_officer_id" => [old_officer_name, officer.name])
+    elsif super.has_key?("deficiency_report_category_id")
+      old_category_name = DeficiencyReport::Category.find_by(id: deficiency_report_category_id_was)&.name
+      super.merge!("deficiency_report_category_id" => [old_category_name, category.name])
+    else
+      super
+    end
+  end
 
   def self.search(terms)
     pg_search(terms)

@@ -174,6 +174,31 @@ module ProjektPhaseAdminActions
     render "custom/admin/projekt_phases/projekt_arguments"
   end
 
+  def formular
+    @formular = @projekt_phase.formular
+    @formular_fields_primary = @formular.formular_fields.primary.each(&:set_custom_attributes)
+    @formular_fields_follow_up = @formular.formular_fields.follow_up.each(&:set_custom_attributes)
+    authorize!(:formular, @projekt_phase) unless current_user.administrator?
+    render "custom/admin/projekt_phases/formular"
+  end
+
+  def formular_answers
+    authorize!(:formular, @projekt_phase) unless current_user.administrator?
+
+    @formular = @projekt_phase.formular
+    @formular_fields = @formular.formular_fields
+    @formular_answers = @formular.formular_answers
+    @formular_follow_up_letters = @formular.formular_follow_up_letters
+
+    respond_to do |format|
+      format.html { render "custom/admin/projekt_phases/formular_answers" }
+      format.csv do
+        send_data CsvServices::FormularAnswersExporter.call(@formular),
+          filename: "formular_answers-#{@formular.id}-#{Time.zone.today}.csv"
+      end
+    end
+  end
+
   private
 
     def projekt_phase_params

@@ -33,8 +33,8 @@
               (<%= t("poll_questions.show.question.multiple") %>)
             </small>
           <% end %>
-          <p><%= auto_link_already_sanitized_html wysiwyg(question.description) %></p>
         </h3>
+        <div style="margin-bottom:0.5rem;margin-top:-0.5rem;"><%= AdminWYSIWYGSanitizer.new.sanitize(question.description) %></div>
         <div class="results-table-wrapper">
           <table id="question_<%= question.id %>_results_table" class='results-table'>
             <tbody>

@@ -15,7 +15,7 @@
       <%= render partial: "custom/admin/projekts/edit/projekt_phases/projekt_phase_table_header" %>
     </thead>
 
-    <tbody class="sortable" data-js-url="<%= order_phases_admin_projekt_projekt_phases_path(@projekt) %>">
+    <tbody class="sortable" data-js-url="<%= polymorphic_path([@namespace, @projekt, ProjektPhase.new], action: :order_phases) %>">
       <% @projekt.projekt_phases.each do |projekt_phase| %>
         <%= render partial: "custom/admin/projekts/edit/projekt_phases/projekt_phase", locals: {
           projekt_phase: projekt_phase

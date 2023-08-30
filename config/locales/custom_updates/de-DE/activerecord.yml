@@ -42,6 +42,8 @@ de:
       projekt_phase/projekt_notification_phase: Benachrichtigungen
       projekt_phase/legislation_phase: Textbearbeitung
       projekt_phase/newsfeed_phase: News-Feed
+      projekt_phase/formular_phase: Formular
+      formular_field: Formularfeld
     errors:
       models:
         proposal:
@@ -190,3 +192,14 @@ de:
       projekt_phase:
         start_date: Anfangsdatum
         end_date: Enddatum
+      formular_field:
+        name: Name
+        description: Beschreibung
+        required: Pflichtfeld
+        kind: Art
+        email_for_confirmation: Bestätigungsmail an Nutzer*in versenden
+        drop_down_options: Dropdown-Optionen
+      formular_follow_up_letter:
+        subject: Betreff
+        body: Text
+        show_follow_up_button: Link zu Follow-up Formular integrieren
