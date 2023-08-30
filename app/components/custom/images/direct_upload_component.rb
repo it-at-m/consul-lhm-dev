@@ -33,6 +33,8 @@ class Images::DirectUploadComponent < ApplicationComponent
     def destroy_link
       if !attachable.persisted? && attachable.cached_attachment.present?
         link_to t("#{plural_name}.form.delete_button"), "#", class: "delete remove-cached-attachment"
+      else
+        link_to_remove_association remove_association_text, f, class: "delete remove-#{singular_name}"
       end
     end
 

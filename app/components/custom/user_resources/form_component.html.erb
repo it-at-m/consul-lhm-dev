@@ -62,7 +62,6 @@
               <% end %>
               <%= f.fields_for :image do |image_builder| %>
                 <%= render Images::DirectUploadComponent.new(image_builder, imageable: f.object) %>
-                <%# <%= render Images::FieldsComponent.new(image_builder, imageable: f.object) %>
               <% end %>
             </div>
           <% end %>

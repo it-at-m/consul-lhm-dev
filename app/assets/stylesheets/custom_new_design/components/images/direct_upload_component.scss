@@ -5,6 +5,7 @@
   flex-direction: column;
   align-items: center;
   overflow: hidden;
+  border-radius: 5px;
 
   .image-preview, figure, img {
     width: 100%;
@@ -35,6 +36,7 @@
   position: absolute;
   width: 100%;
   bottom: 0;
+  left: 0;
   z-index: 100;
 }
 
@@ -133,6 +135,7 @@
 .direct-image-upload--image-actions-area {
   position: absolute;
   bottom: 0;
+  left: 0;
   background: #0000008a;
   backdrop-filter: blur(15px);
   font-weight: 500;
@@ -159,6 +162,7 @@
 .direct-image-upload--attachment-errors {
   position: absolute;
   bottom: 0;
+  left: 0;
   width: 100%;
 
   .error {

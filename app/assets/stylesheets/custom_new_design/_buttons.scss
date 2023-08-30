@@ -43,9 +43,16 @@
     }
 
     &.hollow {
-      &:hover, &:focus {
+      &:hover, &:focus, &:active {
         background: #E1EDF7;
         color: #004a83;
+      }
+
+      &.alert {
+        &:hover, &:focus, &:active {
+          background: #ffe7e3;
+          color: #cc4b37;
+        }
       }
     }
   }

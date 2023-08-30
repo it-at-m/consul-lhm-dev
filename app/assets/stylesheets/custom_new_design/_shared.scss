@@ -32,6 +32,10 @@
     background-color: #FFA42D;
     color: black;
 
+    &:focus, &:active {
+      background-color: #FFA42D;
+    }
+
     &:hover {
       background: #ffbf6b;
       color: black;
