@@ -45,6 +45,21 @@ class DeficiencyReport < ApplicationRecord
     where(author_id: user_id)
   }
 
+  def audited_changes
+    if super.has_key?("deficiency_report_status_id")
+      old_status_title = DeficiencyReport::Status.find_by(id: deficiency_report_status_id_was)&.title
+      super.merge!("deficiency_report_status_id" => [old_status_title, status.title])
+    elsif super.has_key?("deficiency_report_officer_id")
+      old_officer_name = DeficiencyReport::Officer.find_by(id: deficiency_report_officer_id_was)&.name
+      super.merge!("deficiency_report_officer_id" => [old_officer_name, officer.name])
+    elsif super.has_key?("deficiency_report_category_id")
+      old_category_name = DeficiencyReport::Category.find_by(id: deficiency_report_category_id_was)&.name
+      super.merge!("deficiency_report_category_id" => [old_category_name, category.name])
+    else
+      super
+    end
+  end
+
   def self.search(terms)
     pg_search(terms)
   end
