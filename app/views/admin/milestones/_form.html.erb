@@ -1,6 +1,8 @@
 <%= render "shared/globalize_locales", resource: @milestone %>
 
-<%= translatable_form_for @milestone, url: polymorphic_path([@namespace, @milestoneable, @milestone]) do |f| %>
+<% milestoneable_for_url = @milestoneable.is_a?(Budget::Investment) ? [@milestoneable.budget, @milestoneable] : [@milestoneable] %>
+
+<%= translatable_form_for @milestone, url: polymorphic_path([@namespace, *milestoneable_for_url, @milestone]) do |f| %>
 
   <div class="row">
     <div class="small-12 medium-6 margin-bottom column">
