@@ -839,8 +839,6 @@ ActiveRecord::Schema.define(version: 2023_08_28_130640) do
     t.index ["user_id"], name: "index_follows_on_user_id"
   end
 
-<<<<<<< HEAD
-=======
   create_table "formular_answers", force: :cascade do |t|
     t.jsonb "answers", default: {}, null: false
     t.bigint "formular_id"

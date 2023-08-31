@@ -94,25 +94,21 @@
 
         <div id="comments" class="footer-anchor">
         </div>
-        <% if ((projekt_feature?(@proposal&.projekt, 'proposals.show_comments') ||
-            projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab') ||
-            projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_milestones_tab')) && !preview) %>
+        <% if ((projekt_phase_feature?(@proposal.projekt_phase, "resource.show_comments") ||
+            projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_notifications_tab") ||
+            projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_milestones_tab")) && !preview) %>
 
           <div class="tabs-content" data-tabs-content="proposals_tabs">
-            <% if projekt_feature?(@proposal&.projekt, 'proposals.show_comments') %>
+            <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_notifications_tab") %>
+              <%= render Proposals::NotificationsComponent.new(notifications: @notifications, author: @proposal.author) %>
+            <% end %>
+
+            <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_milestones_tab") %>
+              <%= render Proposals::MilestonesComponent.new(milestones: @milestones, milestoneable: @proposal) %>
+            <% end %>
+
+            <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.show_comments") %>
               <%= render Shared::NewCommentsComponent.new(@proposal, @comment_tree) %>
-            <% end %>
-
-            <% if projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_notifications_tab') %>
-              <div class="tabs-panel <%= 'is-active' if default_active_proposal_footer_tab?('notifications') %>" id="tab-notifications">
-                <%= render "proposals/notifications" %>
-              </div>
-            <% end %>
-
-            <% if projekt_feature?(@proposal&.projekt, 'proposals.enable_proposal_milestones_tab') %>
-              <div class="tabs-panel <%= 'is-active' if default_active_proposal_footer_tab?('milestones') %>" id="tab-milestones">
-                <%= render "milestones/milestones", milestoneable: @proposal %>
-              </div>
             <% end %>
           </div>
         <% end %>
