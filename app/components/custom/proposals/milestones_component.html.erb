@@ -2,6 +2,10 @@
   <div class="small-12 column">
     <%= render "milestones/progress_bars", milestoneable: @milestoneable %>
 
+    <h3>
+      Meilensteine - von der Verwaltung gesetzt (<%= @milestones.count %>)
+    </h3>
+
     <% if @milestones.blank? %>
       <div class="callout primary text-center margin-top">
         <%= t("milestones.index.no_milestones") %>

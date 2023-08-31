@@ -98,19 +98,17 @@
             projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_notifications_tab") ||
             projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_milestones_tab")) && !preview) %>
 
-          <div class="tabs-content" data-tabs-content="proposals_tabs">
-            <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_notifications_tab") %>
-              <%= render Proposals::NotificationsComponent.new(notifications: @notifications, author: @proposal.author) %>
-            <% end %>
+          <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_notifications_tab") %>
+            <%= render Proposals::NotificationsComponent.new(notifications: @notifications, author: @proposal.author) %>
+          <% end %>
 
-            <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_milestones_tab") %>
-              <%= render Proposals::MilestonesComponent.new(milestones: @milestones, milestoneable: @proposal) %>
-            <% end %>
+          <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_milestones_tab") %>
+            <%= render Proposals::MilestonesComponent.new(milestones: @milestones, milestoneable: @proposal) %>
+          <% end %>
 
-            <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.show_comments") %>
-              <%= render Shared::NewCommentsComponent.new(@proposal, @comment_tree) %>
-            <% end %>
-          </div>
+          <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.show_comments") %>
+            <%= render Shared::NewCommentsComponent.new(@proposal, @comment_tree) %>
+          <% end %>
         <% end %>
       </div>
 
