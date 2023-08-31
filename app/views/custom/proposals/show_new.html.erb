@@ -99,15 +99,21 @@
             projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_milestones_tab")) && !preview) %>
 
           <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_notifications_tab") %>
-            <%= render Proposals::NotificationsComponent.new(notifications: @notifications, author: @proposal.author) %>
+            <div class="mb-20">
+              <%= render Proposals::NotificationsComponent.new(notifications: @notifications, author: @proposal.author) %>
+            </div>
           <% end %>
 
           <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_milestones_tab") %>
-            <%= render Proposals::MilestonesComponent.new(milestones: @milestones, milestoneable: @proposal) %>
+            <div class="mb-20">
+              <%= render Proposals::MilestonesComponent.new(milestones: @milestones, milestoneable: @proposal) %>
+            </div>
           <% end %>
 
           <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.show_comments") %>
-            <%= render Shared::NewCommentsComponent.new(@proposal, @comment_tree) %>
+            <div class="mb-20">
+              <%= render Shared::NewCommentsComponent.new(@proposal, @comment_tree) %>
+            </div>
           <% end %>
         <% end %>
       </div>
