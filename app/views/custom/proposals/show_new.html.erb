@@ -2,7 +2,7 @@
 <% preview = false unless local_assigns.has_key? :preview %>
 <% provide :title do %><%= @proposal.title %><% end %>
 <% content_for :meta_description do %>
-  <%= projekt_feature?(@proposal.projekt, 'proposals.enable_summary') ? @proposal.summary : strip_tags(@proposal.description)[0..200] %>
+  <%= projekt_feature?(@proposal.projekt, "proposals.enable_summary") ? @proposal.summary : strip_tags(@proposal.description)[0..200] %>
 <% end %>
 <% provide :social_media_meta_tags do %>
   <%= render "shared/social_media_meta_tags",
@@ -17,15 +17,14 @@
 <% end %>
 
 <main class="resource-page">
-  <div id="<%= dom_id(@proposal) %>" >
+  <div id="<%= dom_id(@proposal) %>">
     <div class="flex-layout">
       <div class="main-column">
         <%= resources_back_link(fallback_path: proposals_path) %>
 
-        <!-- <h1 class="resource-page--title"><%= "#{@proposal.author.name} startet eine Diskussion"  %></h1> -->
         <h1 class="resource-page--title"><%= "Beitrag von #{@proposal.author.name}" %></h1>
         <div class="common-page-description">
-          <%= render_custom_block('debate_show_welcome_text', default_content: t('custom.proposals.show.welcome_default_text', author: @proposal.author.name)) %>
+          <%= render_custom_block('debate_show_welcome_text', default_content: t("custom.proposals.show.welcome_default_text", author: @proposal.author.name)) %>
         </div>
 
         <% if @proposal.conflictive? %>
@@ -40,7 +39,7 @@
 
     <div class="flex-layout">
       <div class="main-column">
-        <%= render ResourcePage::BannerComponent.new(resource: @proposal)  %>
+        <%= render ResourcePage::BannerComponent.new(resource: @proposal) %>
 
         <div class="resource-page--description new-card">
           <%= auto_link_already_sanitized_html wysiwyg(@proposal.description) %>
@@ -71,19 +70,16 @@
         <% end %>
 
         <% if @proposal.video_url.present? %>
-          <div class="video-link not-print mb-40">
-            <p>
-            <span class="icon-video"></span>&nbsp;
-            <strong><%= t("proposals.show.title_video_url") %></strong>
-            </p>
-            <br>
-            <div class="small-12 medium-10 large-7 small-centered">
-              <div class="flex-video">
-                <div id="js-embedded-video" data-video-code="<%= embedded_video_code(@proposal) %>"></div>
-              </div>
-              <div class='text-center'>
-                <%= sanitize_and_auto_link @proposal.video_url %>
-              </div>
+          <div class="new-card not-print mb-40">
+            <div class="new-card--heading">
+              <span class="new-card--heading-icon icon-video"></span>&nbsp;
+              <strong><%= t("proposals.show.title_video_url") %></strong>
+            </div>
+
+            <%= render(Shared::ExternalVideoPlayer.new(url: @proposal.video_url)) %>
+
+            <div class='text-center'>
+              <%= sanitize_and_auto_link @proposal.video_url %>
             </div>
           </div>
         <% end %>
@@ -155,14 +151,13 @@
             title: @proposal.title,
             url: debate_url(@proposal),
             description: @proposal.title,
-            mobile: @proposal.title
-          %>
+            mobile: @proposal.title %>
         <% end %>
 
         <% if current_user && projekt_feature?(@proposal.projekt, 'proposals.show_related_content') %>
           <%= render(Shared::SidebarCardComponent.new(title: t("custom.shared.show.related_title"), icon_name: "share-alt")) do |c| %>
             <p><%= t("custom.shared.show.related_text") %></p>
-            <%= link_to '#related_content', data: {toggle: "related_content"}, id: "add-related-content", class: "button hollow expanded" do %>
+            <%= link_to "#related_content", data: { toggle: "related_content" }, id: "add-related-content", class: "button hollow expanded" do %>
               <%= t("custom.shared.show.related_button") %>
             <% end %>
           <% end %>

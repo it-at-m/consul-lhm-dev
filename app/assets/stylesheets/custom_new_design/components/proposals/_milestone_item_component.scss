@@ -20,10 +20,16 @@
       position: absolute;
       content: '';
       width: 1px;
-      height: calc(100% - 30px);
+      height: calc(100% - 10px);
       background-color: #e2e2e2;
       top: 17px;
       right: 0;
+    }
+
+    &:last-child {
+      &::before {
+        height: calc(100% - 30px);
+      }
     }
 
     &::after {

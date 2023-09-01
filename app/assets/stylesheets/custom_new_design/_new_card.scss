@@ -34,4 +34,16 @@
       padding: 18px 22px;
     }
   }
+
+  .new-card--heading {
+    display: flex;
+    color: black;
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+
+  .new-card--heading-icon {
+    color: $brand;
+    margin-right: 5px;
+  }
 }

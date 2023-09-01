@@ -12,7 +12,7 @@ class ProjektLivestream < ApplicationRecord
   before_save :assign_external_id
   before_save :strip_description
 
-  after_create :fetch_video_details
+  after_save :fetch_video_details
 
   has_many :projekt_questions, dependent: :destroy
 
@@ -24,17 +24,9 @@ class ProjektLivestream < ApplicationRecord
     projekt.top_parent.all_children_projekts.unshift(projekt.top_parent).ids
   end
 
-  def extract_video_platform
-    if url.include?("youtube")
-      :youtube
-    elsif url.include?("vimeo")
-      :vimeo
-    end
-  end
-
   def assign_video_platform
     if url_changed?
-      self.video_platform = extract_video_platform
+      self.video_platform = VideoUtils.extract_video_platform_from_url(url)
     end
   end
 
@@ -56,18 +48,14 @@ class ProjektLivestream < ApplicationRecord
   end
 
   def assign_external_id
-    if url_changed?
-      self.external_id =
-        case extract_video_platform
-        when :youtube
-          url.match(/v\=(?<youtube_id>\w+)/)[:youtube_id]
-        when :vimeo
-          url.match(/vimeo\.com\/(?<vimeo_id>\w+)/)[:vimeo_id]
-        end
-    end
+    return unless url_changed?
+
+    self.external_id = VideoUtils.extract_video_id_from_url(url)
   end
 
   def fetch_video_details
+    return unless url_changed?
+
     if from_youtube?
       youtube_api = YoutubeApi.new(Rails.application.secrets.youtube_api_key)
 
