@@ -4,15 +4,14 @@ class ProjektLivestream < ApplicationRecord
   delegate :projekt, to: :projekt_phase
   belongs_to :projekt_phase
 
-  validates :url, presence: true
+  validates :url, presence: true, url: true
 
   default_scope { order(starts_at: :desc) }
 
-  before_save :assign_video_platform
-  before_save :assign_external_id
+  before_save :assign_video_type_info
   before_save :strip_description
 
-  after_save :fetch_video_details
+  before_save :fetch_video_details
 
   has_many :projekt_questions, dependent: :destroy
 
@@ -24,10 +23,11 @@ class ProjektLivestream < ApplicationRecord
     projekt.top_parent.all_children_projekts.unshift(projekt.top_parent).ids
   end
 
-  def assign_video_platform
-    if url_changed?
-      self.video_platform = VideoUtils.extract_video_platform_from_url(url)
-    end
+  def assign_video_type_info
+    video_info = VideoUtils.extract_info(url)
+
+    self.video_platform = video_info.platform
+    self.external_id = video_info.external_id
   end
 
   def from_youtube?
@@ -47,15 +47,7 @@ class ProjektLivestream < ApplicationRecord
     end
   end
 
-  def assign_external_id
-    return unless url_changed?
-
-    self.external_id = VideoUtils.extract_video_id_from_url(url)
-  end
-
   def fetch_video_details
-    return unless url_changed?
-
     if from_youtube?
       youtube_api = YoutubeApi.new(Rails.application.secrets.youtube_api_key)
 
@@ -96,8 +88,6 @@ class ProjektLivestream < ApplicationRecord
 
       self.preview_image_url = video_data["thumbnail_url"]
     end
-
-    save!
   rescue StandardError
   end
 
