@@ -1,5 +1,5 @@
 class Shared::ExternalVideoPlayer < ApplicationComponent
-  def initialize(external_video_id:, video_platform:, width: nil, height: nil)
+  def initialize(external_video_id:, video_platform:, width: nil, height: nil, url: nil)
     @external_video_id = external_video_id
     @video_platform = video_platform
     @width = width

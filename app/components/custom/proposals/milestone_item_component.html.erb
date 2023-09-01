@@ -7,46 +7,42 @@
     </span>
   <% end %>
 
-  <div class="new-card">
+  <div class="new-card -no-padding">
     <% if milestone.status.present? %>
-      <p>
-      <strong>
-        <%= t("milestones.show.status_changed") %>
-      </strong>
-      <br>
-      <span class="milestone-status">
+      <div class="milestone-item--status">
         <%= milestone.status.name %>
-      </span>
-      </p>
-    <% end %>
-
-    <%= image_tag(milestone.image.variant(:large), { id: "image_#{milestone.id}", alt: milestone.image.title, class: "margin" }) if milestone.image.present? %>
-
-    <p>
-    <%= helpers.sanitize_and_auto_link milestone.description %>
-    </p>
-
-    <% if milestone.documents.present? %>
-      <div class="documents">
-        <div class="document-link text-left small">
-          <p>
-          <strong><%= t("shared.documentation") %></strong>
-          </p>
-
-          <% milestone.documents.each do |document| %>
-            <%= link_to document.title,
-              document.attachment,
-              target: "_blank",
-              rel: "nofollow" %><br>
-              <small>
-                <%= document.humanized_content_type %>&nbsp;|&nbsp;
-                <%= helpers.number_to_human_size(document.attachment_file_size, precision: 2) %>
-              </small>
-              <br>
-            <% end %>
-        </div>
       </div>
     <% end %>
-  </div>
+
+    <div class="new-card-body">
+      <%= image_tag(milestone.image.variant(:large), { id: "image_#{milestone.id}", alt: milestone.image.title, class: "margin" }) if milestone.image.present? %>
+
+      <p>
+      <%= helpers.sanitize_and_auto_link milestone.description %>
+      </p>
+
+      <% if milestone.documents.present? %>
+        <div class="documents">
+          <div class="document-link text-left small">
+            <p>
+            <strong><%= t("shared.documentation") %></strong>
+            </p>
+
+            <% milestone.documents.each do |document| %>
+              <%= link_to document.title,
+                document.attachment,
+                target: "_blank",
+                rel: "nofollow" %><br>
+                <small>
+                  <%= document.humanized_content_type %>&nbsp;|&nbsp;
+                  <%= helpers.number_to_human_size(document.attachment_file_size, precision: 2) %>
+                </small>
+                <br>
+              <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    </div>
 </div>
 

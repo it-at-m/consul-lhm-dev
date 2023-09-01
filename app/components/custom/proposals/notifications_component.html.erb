@@ -6,7 +6,7 @@
   <% @notifications.each do |notification| %>
     <div class="new-card proposal-notification" id="<%= dom_id(notification) %>">
       <div class="proposal-notification--heading">
-        <h3><%= notification.title %></h3>
+        <div class="proposal-notification--title"><%= notification.title %></div>
         <p class="more-info proposal-notification-date">
         <%= l(notification.created_at, format: :date_only) %>
         </p>

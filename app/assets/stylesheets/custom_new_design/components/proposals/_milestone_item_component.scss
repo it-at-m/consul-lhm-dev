@@ -7,7 +7,6 @@
       border-radius: 5px;
     }
 
-
     .milestone-item--date {
       display: flex;
       justify-content: flex-end;
@@ -21,7 +20,7 @@
       position: absolute;
       content: '';
       width: 1px;
-      height: 100%;
+      height: calc(100% - 30px);
       background-color: #e2e2e2;
       top: 17px;
       right: 0;
@@ -65,5 +64,13 @@
         justify-content: flex-start;
       }
     }
+  }
+
+  .milestone-item--status {
+    width: 100%;
+    background-color: $brand;
+    color: white;
+    font-size: 18px;
+    padding: 10px 25px;
   }
 }
