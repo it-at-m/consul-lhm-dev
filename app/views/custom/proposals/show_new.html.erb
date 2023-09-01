@@ -71,7 +71,7 @@
         <% end %>
 
         <% if @proposal.video_url.present? %>
-          <div class="video-link not-print">
+          <div class="video-link not-print mb-40">
             <p>
             <span class="icon-video"></span>&nbsp;
             <strong><%= t("proposals.show.title_video_url") %></strong>
@@ -94,24 +94,25 @@
 
         <div id="comments" class="footer-anchor">
         </div>
+
         <% if ((projekt_phase_feature?(@proposal.projekt_phase, "resource.show_comments") ||
             projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_notifications_tab") ||
             projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_milestones_tab")) && !preview) %>
 
-          <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_notifications_tab") %>
-            <div class="mb-20">
+          <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_notifications_tab") && @notifications.present? %>
+            <div class="mb-40">
               <%= render Proposals::NotificationsComponent.new(notifications: @notifications, author: @proposal.author) %>
             </div>
           <% end %>
 
-          <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_milestones_tab") %>
-            <div class="mb-20">
+          <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_milestones_tab") && @milestones.present? %>
+            <div class="mb-40">
               <%= render Proposals::MilestonesComponent.new(milestones: @milestones, milestoneable: @proposal) %>
             </div>
           <% end %>
 
           <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.show_comments") %>
-            <div class="mb-20">
+            <div class="mb-40">
               <%= render Shared::NewCommentsComponent.new(@proposal, @comment_tree) %>
             </div>
           <% end %>

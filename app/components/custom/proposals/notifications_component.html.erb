@@ -3,12 +3,6 @@
     Benachrichtigungen von <%= @author.name %> (<%= @notifications.count %>)
   </h3>
 
-  <% if @notifications.blank? %>
-    <div class="callout primary text-center">
-      <%= t("proposals.show.no_notifications") %>
-    </div>
-  <% end %>
-
   <% @notifications.each do |notification| %>
     <div class="new-card proposal-notification" id="<%= dom_id(notification) %>">
       <div class="proposal-notification--heading">
