@@ -6,10 +6,8 @@
   </h3>
 
   <section class="milestones-list-timeline">
-    <ul class="no-bullet">
-      <% @milestones.each do |milestone| %>
-        <%= render Proposals::MilestoneItemComponent.new(milestone: milestone) %>
-      <% end %>
-    </ul>
+    <% @milestones.each do |milestone| %>
+      <%= render Proposals::MilestoneItemComponent.new(milestone: milestone) %>
+    <% end %>
   </section>
 </div>

@@ -4,6 +4,8 @@
   }
 
   .milestones-list-timeline {
+    display: flex;
+    flex-direction: column;
     border-top: 1px solid #e2e2e2;
     padding-top: 30px;
   }

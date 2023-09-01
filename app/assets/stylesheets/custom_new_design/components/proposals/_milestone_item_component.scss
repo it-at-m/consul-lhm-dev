@@ -1,5 +1,4 @@
 .custom-new-design {
-
   .milestone-item {
     position: relative;
     width: 50%;
@@ -8,8 +7,25 @@
       border-radius: 5px;
     }
 
-    border-right: 1px solid #e2e2e2;
-    padding-right: 25px;
+
+    .milestone-item--date {
+      display: flex;
+      justify-content: flex-end;
+      font-weight: bold;
+      color: black;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    &::before {
+      position: absolute;
+      content: '';
+      width: 1px;
+      height: 100%;
+      background-color: #e2e2e2;
+      top: 17px;
+      right: 0;
+    }
 
     &::after {
       position: absolute;
@@ -18,17 +34,36 @@
       height: 23px;
       background-color: #218fc8;
       top: 1px;
-      right: -12px;
       border-radius: 50%;
     }
-  }
 
-  .milestone-item--date {
-    display: flex;
-    justify-content: flex-end;
-    font-weight: bold;
-    color: black;
-    font-size: 18px;
-    margin-bottom: 10px;
+    &:nth-child(odd) {
+      padding-right: 25px;
+
+      &::before {
+        right: 0;
+      }
+
+      &::after {
+        right: -13px;
+      }
+    }
+
+    &:nth-child(even) {
+      align-self: self-end;
+      padding-left: 25px;
+
+      &::before {
+        left: 0;
+      }
+
+      &::after {
+        left: -13px;
+      }
+
+      .milestone-item--date {
+        justify-content: flex-start;
+      }
+    }
   }
 }
