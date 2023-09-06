@@ -9,6 +9,7 @@
   border-radius: 0.3rem;
   overflow: hidden;
   position: relative;
+  color: black;
 
   .meter {
     height: 100%;
@@ -25,6 +26,11 @@
 }
 
 .supports {
+  abbr {
+    margin-bottom: 5px;
+    display: block;
+  }
+
   .button {
     background-color: #FFA42D;
     color: black;

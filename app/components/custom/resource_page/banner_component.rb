@@ -10,8 +10,6 @@ class ResourcePage::BannerComponent < ApplicationComponent
   end
 
   def banner_inline_style
-    if @resource.sentiment.present?
-      "background-color:#{@resource.sentiment.color};color: #{helpers.pick_text_color(@resource.sentiment.color)}"
-    end
+    helpers.sentiment_color_style(@resource.sentiment)
   end
 end
