@@ -133,7 +133,8 @@ class Proposal < ApplicationRecord
 
   def self.search(terms)
     by_code = search_by_code(terms.strip)
-    by_code.presence || pg_search(terms)
+    by_code.presence || all
+    # by_code.presence #|| pg_search(terms)
   end
 
   def self.search_by_code(terms)

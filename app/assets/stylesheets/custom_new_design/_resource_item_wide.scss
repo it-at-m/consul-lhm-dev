@@ -130,6 +130,7 @@
         }
 
         .resource-item--body {
+          min-height: 145px;
         }
 
         .resource-item--wide-head-title {
@@ -154,6 +155,7 @@
         }
 
         .resource-item--tags {
+          display: flex;
           // margin-bottom: 12px;
           margin-bottom: 10px;
         }

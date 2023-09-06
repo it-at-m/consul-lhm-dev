@@ -61,14 +61,13 @@
       <%= render Sidebar::MyPostsCardComponent.new %>
     <% end %>
 
-    <%# <%= render Shared::SidebarCardComponent.new(title: 'Export', icon_name: "tag") do |c| %>
-      <%#   <%=
-      <%#     link_to t("custom.debates.index.download_current_selection"),
-      <%#       debates_path(**request.query_parameters, format: :csv),
-      <%#       format: :csv,
-      <%#       target: '_blank'
-      <%#     %>
-      <%# <% end %>
+    <%= render Shared::SidebarCardComponent.new(title: "Export", icon_name: "tag") do |c| %>
+        <%= link_to t("custom.debates.index.download_current_selection"),
+            admin_debates_path(**request.query_parameters, format: :csv),
+            format: :csv,
+            target: "_blank" %>
+      <% end %>
+    <% end %>
   </div>
   </div>
 </main>

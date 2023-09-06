@@ -1,13 +1,18 @@
 <div class="milestones-list">
-  <%= render "milestones/progress_bars", milestoneable: @milestoneable %>
-
-  <h3>
-    Meilensteine - von der Verwaltung gesetzt (<%= @milestones.count %>)
-  </h3>
-
-  <section class="milestones-list-timeline">
-    <% @milestones.each do |milestone| %>
-      <%= render Proposals::MilestoneItemComponent.new(milestone: milestone) %>
+  <%= render Shared::CollapseComponent.new do |c| %>
+    <% c.head do %>
+      <h3>
+        Meilensteine - von der Verwaltung gesetzt (<%= @milestones.count %>)
+      </h3>
     <% end %>
-  </section>
+
+    <% c.body do %>
+      <%= render "milestones/progress_bars", milestoneable: @milestoneable %>
+      <section class="milestones-list-timeline">
+        <% @milestones.each do |milestone| %>
+          <%= render Proposals::MilestoneItemComponent.new(milestone: milestone) %>
+        <% end %>
+      </section>
+    <% end %>
+  <% end %>
 </div>
