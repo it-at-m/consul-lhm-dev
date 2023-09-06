@@ -16,14 +16,14 @@ html{
     padding-top: 30px;
   }
 
-  .wrapper {
-    margin-bottom: 80px;
-  }
-
   body.custom-new-design {
     .wrapper, .footer, .top-bar {
       width: 100%;
       margin: auto;
+    }
+
+    .wrapper {
+      margin-bottom: 80px;
     }
 
     main, .top-bar {

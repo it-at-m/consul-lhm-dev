@@ -57,8 +57,6 @@
       ) %>
 
     <%= render Sidebar::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name) %>
-    <%= render Sidebar::CategoriesCardComponent.new(categories: @categories) %>
-    <%= render Sidebar::SdgsCardComponent.new(sdgs: @sdgs, sdg_targets: @sdg_targets) %>
     <% if current_user.present? && extended_feature?('proposals.enable_my_posts_filter') %>
       <%= render Sidebar::MyPostsCardComponent.new %>
     <% end %>

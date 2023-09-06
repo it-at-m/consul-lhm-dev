@@ -1,6 +1,10 @@
 .proposal-resources-section {
   margin-top: 30px;
   margin-bottom: 50px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .proposal-notifications-list {

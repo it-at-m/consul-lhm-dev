@@ -73,6 +73,7 @@ class ProjektPhaseSetting < ApplicationRecord
           "feature.resource.enable_proposal_notifications_tab": "",
           "feature.resource.enable_proposal_milestones_tab": "",
           "feature.resource.show_comments": "active",
+          "feature.resource.show_video_as_link": "",
 
           "option.resource.votes_for_proposal_success": 100
 
