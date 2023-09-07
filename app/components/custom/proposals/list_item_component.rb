@@ -28,8 +28,6 @@ class Proposals::ListItemComponent < ApplicationComponent
   end
 
   def header_style
-    return nil if @sentiment.nil?
-
-    "background-color:#{@sentiment.color};color: #{helpers.pick_text_color(@sentiment.color)}"
+    helpers.sentiment_color_style(@sentiment)
   end
 end

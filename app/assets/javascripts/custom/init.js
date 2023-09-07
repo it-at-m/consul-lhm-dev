@@ -8,6 +8,7 @@
       App.StikyHeader.initialize();
       App.DirectUploadComponent.initialize();
       App.TextSearchFormComponent.initialize();
+      App.CollapseComponent.initialize();
     }
   };
 }).call(this);

@@ -2,6 +2,7 @@ require_dependency Rails.root.join("app", "models", "proposal").to_s
 class Proposal < ApplicationRecord
   include Labelable
   include Sentimentable
+  include ResourceBelongsToProjekt
 
   belongs_to :old_projekt, class_name: 'Projekt', foreign_key: :projekt_id # TODO: remove column after data migration con1538
 
@@ -49,6 +50,7 @@ class Proposal < ApplicationRecord
     orders
   end
 
+  # TODO: REFACTOR FOR NEW DESIGN
   def self.scoped_projekt_ids_for_index(current_user)
     Projekt.top_level
       .map { |p| p.all_children_projekts.unshift(p) }
@@ -60,6 +62,7 @@ class Proposal < ApplicationRecord
       end.pluck(:id)
   end
 
+  # TODO: REFACTOR FOR NEW DESIGN
   def self.scoped_projekt_ids_for_footer(projekt)
     projekt.top_parent.all_children_projekts.unshift(projekt.top_parent).select do |projekt|
       ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.main.activate').value.present? &&
@@ -111,6 +114,11 @@ class Proposal < ApplicationRecord
     return true if author_id == user.id
 
     author.official_level > 0 && (author.official_level == user.official_level)
+  end
+
+  def self.search(terms)
+    by_code = search_by_code(terms.strip)
+    by_code.presence || pg_search(terms)
   end
 
   protected

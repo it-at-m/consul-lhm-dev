@@ -35,6 +35,8 @@ de:
           save_draft: Als Entwurf speichern
           publish: Jetzt veröffentlichen
       index:
+        title: "Übersicht aller Vorschläge"
+        count: Vorschläge
         max_number_reached: Du hast die maximale Anzahl (%{max_number}) an Vorschlägen pro Nutzer erreicht. Bevor du einen weiteren Vorschlag erstellen kannst, musst du einen aktiven Vorschlag zurückziehen.
         no_active_projekt: Aktuell kein Beteiligungsverfahren
         no_active_phase: Phase bereits geschlossen
@@ -43,6 +45,17 @@ de:
         show_smaller_map: Weniger anzeigen
         creation_only_for_citizens: Neue Vorschläge können in diesem Projekt nur von Bürgerinnen und Bürgern der Stadt %{city} eingereicht werden.
         creation_only_for_specific_geozones: Vorschläge können nur von Bürger*innen aus dem Postleitzahlbereich %{geozones} eingebracht werden.
+        welcome_default_text_html: In den einzelnen Beteiligungsprojekten
+          können BürgerInnen Vorschläge erstellen, die auf dieser Seite
+          gesammelt werden. Sie können die Vorschläge nachstehend nach dem Grad
+          der Beteiligung, ihrem Veröffentlichungsdatum oder ihrem Zuspruch
+          filtern. Zudem können Sie einzelne Vorschläge unterstützen und
+          kommentieren oder einen eigenen Vorschlag machen.
+          <br/>
+          Auf der rechten Seite können Sie gezielt nach Vorschlägen zu bestimmten Projekten
+          suchen oder Ihre Auswahl auf bestimmte Stadtgebiete eingrenzen bzw.
+          Vorschläge nach Schlagworten anzeigen lassen.
+
       show:
         welcome_default_text:
           "%{author} hat einen Beitrag zu diesem Projekt gemacht, der Ihre Aufmerksamkeit benötigt. Sie können den Beitrag an der rechten Seitenleiste unterstützen, indem Sie ihm Ihre Stimme geben. Außerdem können Sie dem Beitrag folgen, um auf dem Laufenden zu bleiben. Die Karte hilft Ihnen dabei, den Beitrag in der Stadt zu verorten, des Weiteren haben Sie die Möglichkeit, den Beitrag zu kommentieren."

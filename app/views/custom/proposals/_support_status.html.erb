@@ -4,15 +4,14 @@
   </div>
 <% else %>
   <div class="sidebar-divider"></div>
-  <div id="proposal_sticky" data-sticky-container>
-    <div class="sticky fixed-mobile-content"
-         data-sticky
+  <div id="proposal_sticky" >
+    <div class=""
          data-stick-to="bottom"
          data-sticky-on="small"
          data-top-anchor="0"
          data-btm-anchor="sticky_stop"
          data-check-every="0">
-      <div class="fixed-mobile-content">
+      <div class="fix-on-mobile">
         <h2><%= t("votes.supports") %></h2>
 
         <div id="<%= dom_id(proposal) %>_votes">

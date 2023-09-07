@@ -95,8 +95,7 @@
         <%= render(Shared::SidebarCardComponent.new(title: t("documents.title"), icon_name: "file")) do |c| %>
           <%= render "documents/documents",
             documents: @debate.documents,
-            max_documents_allowed: Debate.max_documents_allowed
-          %>
+            max_documents_allowed: Debate.max_documents_allowed %>
         <% end %>
       <% end %>
 
@@ -112,14 +111,13 @@
           title: @debate.title,
           url: debate_url(@debate),
           description: @debate.title,
-          mobile: @debate.title
-        %>
+          mobile: @debate.title %>
       <% end %>
 
       <% if current_user && projekt_feature?(@debate.projekt, 'debates.show_related_content') %>
         <%= render(Shared::SidebarCardComponent.new(title: t("custom.shared.show.related_title"), icon_name: "share-alt")) do |c| %>
           <p><%= t("custom.shared.show.related_text") %></p>
-          <%= link_to '#related_content', data: {toggle: "related_content"}, id: "add-related-content", class: "button hollow expanded" do %>
+          <%= link_to '#related_content', data: { toggle: "related_content" }, id: "add-related-content", class: "button hollow expanded" do %>
             <%= t("custom.shared.show.related_button") %>
           <% end %>
         <% end %>

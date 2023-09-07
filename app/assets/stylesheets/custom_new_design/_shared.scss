@@ -9,6 +9,7 @@
   border-radius: 0.3rem;
   overflow: hidden;
   position: relative;
+  color: black;
 
   .meter {
     height: 100%;
@@ -25,8 +26,12 @@
 }
 
 .supports {
-  // Experimental
-  min-height: 115px;
+  // position: relative;
+
+  abbr {
+    margin-bottom: 5px;
+    display: block;
+  }
 
   .button {
     background-color: #FFA42D;
@@ -55,4 +60,8 @@
 
 .common-page-description {
   margin-bottom: 35px;
+}
+
+.documents .document-link {
+  border-radius: 5px;
 }

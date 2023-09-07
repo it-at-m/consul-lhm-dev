@@ -3,7 +3,7 @@
     <div class="main-column">
       <div class="main-column projekts-overview-page--heading">
         <h1>
-          <%= t('custom.projekts.index.title') %>
+          <%= t("custom.projekts.index.title") %>
         </h1>
         <%= render_custom_block "projekts_overview_page" %>
       </div>
@@ -20,8 +20,8 @@
     </div>
 
     <div class="sidebar">
-      <%= render Shared::SidebarCardComponent.new(title: t('custom.common.information'), icon_name: "info-circle") do |c| %>
-        <%= render_custom_block 'projekt_overview_page_sidebar', default_content: t("custom.projekts.index.information_default_text")  %>
+      <%= render Shared::SidebarCardComponent.new(title: t("custom.common.information"), icon_name: "info-circle") do |c| %>
+        <%= render_custom_block "projekt_overview_page_sidebar", default_content: t("custom.projekts.index.information_default_text") %>
       <% end %>
 
       <%= render Sidebar::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name) %>

@@ -1,0 +1,9 @@
+<ul class="document-list">
+  <% @documents.each do |document| %>
+  <li class="document-list--document">
+  <%= link_to document.title,
+              document.attachment, target: "_blank",
+              rel: "nofollow" %>
+  </li>
+  <% end %>
+</ul>

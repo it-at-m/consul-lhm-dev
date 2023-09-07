@@ -50,6 +50,9 @@ class ProposalsController
         .where(sdg_relations: { relatable_type: "Projekt", relatable_id: related_projekt_ids })
     end
 
+    @resources = @resources.by_projekt_id(@scoped_projekt_ids)
+    @all_resources = @resources
+
     unless params[:search].present?
       take_by_my_posts
       take_by_tag_names(related_projekts)
@@ -152,8 +155,10 @@ class ProposalsController
   def show
     super
     @projekt = @proposal.projekt_phase.projekt
-    @notifications = @proposal.notifications
+    # @notifications = @proposal.notifications
     @notifications = @proposal.notifications.not_moderated
+    @milestones = @proposal.milestones
+
     @related_contents = Kaminari.paginate_array(@proposal.relationed_contents)
                                 .page(params[:page]).per(5)
 
@@ -163,7 +168,6 @@ class ProposalsController
     elsif !@projekt.visible_for?(current_user)
       @individual_group_value_names = @projekt.individual_group_values.pluck(:name)
       render "custom/pages/forbidden", layout: false
-
     end
 
     @affiliated_geozones = (params[:affiliated_geozones] || '').split(',').map(&:to_i)

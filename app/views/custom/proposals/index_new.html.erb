@@ -1,6 +1,6 @@
 <main>
   <h1>
-    <%= t("proposals.index.title") %>
+    <%= t("custom.proposals.index.title") %>
   </h1>
   <div class="flex-column">
     <div class="main-column">
@@ -25,9 +25,7 @@
           filter_param: "order",
           text_search_enabled: true,
           filters: @valid_orders,
-          empty_list_text: "Keine Ergebnisse"
-        ))
-      %>
+          empty_list_text: "Keine Ergebnisse")) %>
     <%= paginate @proposals %>
     </div>
 
@@ -37,8 +35,13 @@
         <div class="margin-bottom-half">
           <%= render_custom_block 'projekt_overview_page_sidebar', default_content: t("custom.proposals.index.sidebar_information_default_text")  %>
         </div>
-        <div class="margin-bottom-half">
-          <%= Debate.count %> <%= t("custom.common.proposals") %>
+        <div class="proposals--info-count margin-bottom-half">
+          <span>
+            <%= t('custom.proposals.index.count') %>
+          </span>
+          <span>
+            <%= @all_resources.count %>
+          </span>
         </div>
 
         <%= render Shared::NewButtonComponent.new(resources_name: "proposals", query_params: params) %>
@@ -54,10 +57,16 @@
       ) %>
 
     <%= render Sidebar::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name) %>
-    <%= render Sidebar::CategoriesCardComponent.new(categories: @categories) %>
-    <%= render Sidebar::SdgsCardComponent.new(sdgs: @sdgs, sdg_targets: @sdg_targets) %>
-    <% if extended_feature?('proposals.enable_my_posts_filter') %>
+    <% if current_user.present? && extended_feature?('proposals.enable_my_posts_filter') %>
       <%= render Sidebar::MyPostsCardComponent.new %>
+    <% end %>
+    <% if current_user&.administrator? %>
+      <%= render Shared::SidebarCardComponent.new(title: "Export", icon_name: "tag") do |c| %>
+        <%= link_to t("custom.proposals.index.download_current_selection"),
+          admin_proposals_path(**request.query_parameters, format: :csv),
+          format: :csv,
+          target: "_blank" %>
+      <% end %>
     <% end %>
     </div>
   </div>

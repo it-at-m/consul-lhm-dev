@@ -1,23 +1,7 @@
-<% if youtube_video? %>
-  <iframe
-    src="<%= youtube_video_src %>"
-    width="<%= video_width %>"
-    height="<%= video_height %>"
-    title="YouTube video player"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen
-  >
-  </iframe>
-<% elsif vimeo_video? %>
-  <iframe
-    src="<%= vimeo_video_src %>"
-    width="<%= video_width %>"
-    height="<%= video_height %>"
-    title="Vimeo video player"
-    frameborder="0"
-    allow="autoplay; fullscreen; picture-in-picture"
-    allowfullscreen
-  >
-  </iframe>
-<% end %>
+<iframe
+  src="<%= VideoUtils.embed_url(@url) %>"
+  frameborder="0"
+  allow="<%= allow_attribute %>"
+  class="external-video-player"
+  allowfullscreen>
+</iframe>

@@ -5,6 +5,7 @@ class Debate
   include Documentable
   include Labelable
   include Sentimentable
+  include ResourceBelongsToProjekt
 
   belongs_to :old_projekt, class_name: "Projekt", foreign_key: "projekt_id", optional: true # TODO: remove column after data migration con1538
 
@@ -47,6 +48,7 @@ class Debate
     orders
   end
 
+  # TODO: REFACTOR FOR NEW DESIGN
   def self.scoped_projekt_ids_for_index(current_user)
     Projekt.top_level
       .map { |p| p.all_children_projekts.unshift(p) }

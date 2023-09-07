@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   overflow: hidden;
-  border-radius: 5px;
+  border-radius: 8px;
 
   .image-preview, figure, img {
     width: 100%;
@@ -72,7 +72,7 @@
   cursor: pointer;
   background: #e2e2e2;
   transition: background 0.2s ease-in-out;
-  border-radius: 5px;
+  // border-radius: 10px;
 
   &:hover {
     background: #dcdcdc;

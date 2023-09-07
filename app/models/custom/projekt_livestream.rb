@@ -4,15 +4,14 @@ class ProjektLivestream < ApplicationRecord
   delegate :projekt, to: :projekt_phase
   belongs_to :projekt_phase
 
-  validates :url, presence: true
+  validates :url, presence: true, url: true
 
   default_scope { order(starts_at: :desc) }
 
-  before_save :assign_video_platform
-  before_save :assign_external_id
+  before_save :assign_video_type_info
   before_save :strip_description
 
-  after_create :fetch_video_details
+  before_save :fetch_video_details
 
   has_many :projekt_questions, dependent: :destroy
 
@@ -24,18 +23,11 @@ class ProjektLivestream < ApplicationRecord
     projekt.top_parent.all_children_projekts.unshift(projekt.top_parent).ids
   end
 
-  def extract_video_platform
-    if url.include?("youtube")
-      :youtube
-    elsif url.include?("vimeo")
-      :vimeo
-    end
-  end
+  def assign_video_type_info
+    video_info = VideoUtils.extract_info(url)
 
-  def assign_video_platform
-    if url_changed?
-      self.video_platform = extract_video_platform
-    end
+    self.video_platform = video_info.platform
+    self.external_id = video_info.external_id
   end
 
   def from_youtube?
@@ -52,18 +44,6 @@ class ProjektLivestream < ApplicationRecord
       "YouTube"
     when "vimeo"
       "Vimeo"
-    end
-  end
-
-  def assign_external_id
-    if url_changed?
-      self.external_id =
-        case extract_video_platform
-        when :youtube
-          url.match(/v\=(?<youtube_id>\w+)/)[:youtube_id]
-        when :vimeo
-          url.match(/vimeo\.com\/(?<vimeo_id>\w+)/)[:vimeo_id]
-        end
     end
   end
 
@@ -108,8 +88,6 @@ class ProjektLivestream < ApplicationRecord
 
       self.preview_image_url = video_data["thumbnail_url"]
     end
-
-    save!
   rescue StandardError
   end
 

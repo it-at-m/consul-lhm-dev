@@ -29,4 +29,10 @@ module CustomNewHelper
   def custom_new_design_body_class
     Setting.new_design_enabled? ? 'custom-new-design' : ''
   end
+
+  def sentiment_color_style(sentiment)
+    if sentiment.present?
+      "background-color:#{sentiment.color};color: #{pick_text_color(sentiment.color)}"
+    end
+  end
 end
