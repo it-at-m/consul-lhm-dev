@@ -13,7 +13,6 @@
   <div id="<%= dom_id(@poll) %>">
     <div class="flex-layout">
       <div class="main-column">
-        <h1 class="resource-page--title"><%= "#{@poll.author.name} startet eine Diskussion" %></h1>
         <div class="resource-page--title-subline">
           <%= render_custom_block("polls_show_welcome_text", custom_prefix: @poll.author.name, default_content: t("custom.polls.show.welcome_default_text")) %>
         </div>
@@ -30,7 +29,7 @@
         <% end %>
 
         <div class="resource-page--description new-card">
-          <%= auto_link_already_sanitized_html wysiwyg(@poll.description) %>
+          <%= render "poll_header" %>
         </div>
 
         <%= render "callout" %>
