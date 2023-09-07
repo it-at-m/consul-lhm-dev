@@ -116,6 +116,11 @@ class Proposal < ApplicationRecord
     author.official_level > 0 && (author.official_level == user.official_level)
   end
 
+  def self.search(terms)
+    by_code = search_by_code(terms.strip)
+    by_code.presence || pg_search(terms)
+  end
+
   protected
 
     def set_responsible_name
