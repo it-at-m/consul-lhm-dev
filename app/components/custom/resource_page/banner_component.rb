@@ -11,6 +11,8 @@ class ResourcePage::BannerComponent < ApplicationComponent
   end
 
   def banner_inline_style
+    return "" unless @resource.respond_to?(:sentiment)
+
     helpers.sentiment_color_style(@resource.sentiment)
   end
 end
