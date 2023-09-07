@@ -93,6 +93,7 @@
       toggleExternalFieldsHeader($projektPhase);
       toggleTagging($projektPhase);
 
+
       function updateProjektSelectorHint(projektPhaseId) {
         var $hintElement = $('[id$="_creation_recommendations"]').first();
         if (!$hintElement.length) {
@@ -158,16 +159,16 @@
       }
 
       function toggleImageAttachment($projektPhase) {
-        var $directImageUploadInputs = $('.direct-image-upload--inputs')
+        var $bannerEditor = $(".js-user-resources-form--banner-editor");
 
         if ( $projektPhase.data('allowAttachedImage') ) {
           $('#attach-image').show();
-          $directImageUploadInputs.show();
+          $bannerEditor.removeClass("-no-image");
         } else {
           $('#attach-image #nested-image .direct-upload').remove();
           $("#new_image_link").removeClass("hide");
-          $('#attach-image').hide();
-          $directImageUploadInputs.hide();
+          $("#attach-image").hide();
+          $bannerEditor.addClass("-no-image");
         }
       }
 
@@ -192,7 +193,7 @@
       }
 
       function toggleExternalVideoUrl($projektPhase) {
-        var $externalVideoCard = $('#external-video-url-fields')
+        var $externalVideoCard = $('.js-sidebar-external-video-section')
 
         if ( $projektPhase.data('allowVideo') ) {
           $('#external-video-url-fields').show();

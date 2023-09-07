@@ -15,6 +15,15 @@ class UserResources::FormComponent < ApplicationComponent
     @categories = categories
   end
 
+  def projekt_phase
+    @projekt_phase ||=
+      if params[:projekt_phase_id]
+        Projekt.top_level.find(params[:projekt_id]).projekt_phases.find(params[:projekt_phase_id])
+      else
+        @resource.projekt_phase
+      end
+  end
+
   def back_link
     case @resource
     when Debate
@@ -61,6 +70,24 @@ class UserResources::FormComponent < ApplicationComponent
 
   def banner_class_name
     "-#{resource.class.name.downcase}"
+  end
+
+  def base_class_name
+    class_name = ""
+
+    if phase_feature_enabled?("form.allow_attached_image") || !feature?(:allow_images)
+      class_name += " -no-image"
+    end
+    #
+    # if phase_feature_enabled?("form.enable_external_video")
+    #   class_name += " -no-image"
+    # end
+
+    class_name
+  end
+
+  def phase_feature_enabled?(feature_name)
+    (projekt_phase.present? && helpers.projekt_phase_feature?(projekt_phase, feature_name))
   end
 
   def render_map?

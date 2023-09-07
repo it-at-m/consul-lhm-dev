@@ -15,6 +15,20 @@
 
   .user-resources-form {
     margin-bottom: 100px;
+
+    &.-no-image {
+      .user-resources-form--banner-editor {
+        height: 280px;
+      }
+
+      .user-resources-form--title-wrapper {
+        width: 100%;
+      }
+
+      .banner-editor-image-attachment {
+        display: none;
+      }
+    }
   }
 
   .user-resources-form--banner-editor {
@@ -28,7 +42,7 @@
     margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
-    border-radius: 10px;
+    border-radius: 11px;
 
     &.-proposal {
       background-color: #FFE9CC;

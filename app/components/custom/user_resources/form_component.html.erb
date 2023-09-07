@@ -1,4 +1,4 @@
-<main class="user-resources-form">
+<main class="user-resources-form <%= base_class_name %>">
   <%= translatable_form_for(resource, html: { class: "debate-form" }) do |f| %>
     <%= back_link %>
 
@@ -44,7 +44,7 @@
           <div class="js-suggest" data-locale="<%= translations_form.locale %>"></div>
 
           <div
-            class="user-resources-form--banner-editor <%= banner_class_name %>"
+            class="user-resources-form--banner-editor js-user-resources-form--banner-editor <%= banner_class_name %>"
             style="<%= helpers.sentiment_color_style(@resource.sentiment) %>">
             <div class="user-resources-form--title-wrapper">
               <%= translations_form.text_area :title,
@@ -58,7 +58,7 @@
           </div>
 
           <% if extended_feature?("debates.head_image_for_debates") %>
-            <div class="banner-editor-image-attachment">
+            <div class="banner-editor-image-attachment js-banner-editor-image-attachment">
               <% if f.object.image.blank? %>
                 <% f.object.build_image %>
               <% end %>
