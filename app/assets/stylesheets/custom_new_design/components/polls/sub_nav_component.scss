@@ -1,6 +1,8 @@
 .custom-new-design {
   .sub-nav-items {
     display: flex;
+    flex-grow: 1;
+    align-items: flex-end;
 
     a {
       text-decoration: underline;
