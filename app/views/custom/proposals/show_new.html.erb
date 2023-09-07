@@ -75,7 +75,7 @@
           </div>
         <% end %>
 
-        <% if projekt_feature?(@proposal.projekt, 'proposals.show_related_content') %>
+        <% if !@proposal.selected? && projekt_feature?(@proposal.projekt, 'proposals.show_related_content') %>
           <%= render "relationable/related_content", relationable: @proposal %>
         <% end %>
 
