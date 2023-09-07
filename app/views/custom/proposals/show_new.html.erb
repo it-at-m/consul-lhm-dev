@@ -75,35 +75,33 @@
           </div>
         <% end %>
 
-        <% if !@proposal.selected? && projekt_feature?(@proposal.projekt, 'proposals.show_related_content') %>
-          <%= render "relationable/related_content", relationable: @proposal %>
-        <% end %>
-
         <div id="comments" class="footer-anchor">
         </div>
 
-        <% if ((projekt_phase_feature?(@proposal.projekt_phase, "resource.show_comments") ||
-            projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_notifications_tab") ||
-            projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_milestones_tab")) && !preview) %>
+        <div class="proposal-resources-sections">
+          <% if ((projekt_phase_feature?(@proposal.projekt_phase, "resource.show_comments") ||
+              projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_notifications_tab") ||
+              projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_milestones_tab")) && !preview) %>
 
-          <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_notifications_tab") && @notifications.present? %>
-            <div class="proposal-resources-section">
-              <%= render Proposals::NotificationsComponent.new(notifications: @notifications, author: @proposal.author) %>
-            </div>
-          <% end %>
+            <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_notifications_tab") && @notifications.present? %>
+              <div class="proposal-resources-section">
+                <%= render Proposals::NotificationsComponent.new(notifications: @notifications, author: @proposal.author) %>
+              </div>
+            <% end %>
 
-          <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_milestones_tab") && @milestones.present? %>
-            <div class="proposal-resources-section">
-              <%= render Proposals::MilestonesComponent.new(milestones: @milestones, milestoneable: @proposal) %>
-            </div>
-          <% end %>
+            <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_milestones_tab") && @milestones.present? %>
+              <div class="proposal-resources-section">
+                <%= render Proposals::MilestonesComponent.new(milestones: @milestones, milestoneable: @proposal) %>
+              </div>
+            <% end %>
 
-          <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.show_comments") %>
-            <div class="proposal-resources-section">
-              <%= render Shared::NewCommentsComponent.new(@proposal, @comment_tree) %>
-            </div>
+            <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.show_comments") %>
+              <div class="proposal-resources-section">
+                <%= render Shared::NewCommentsComponent.new(@proposal, @comment_tree) %>
+              </div>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
 
       <aside class="sidebar">
@@ -131,6 +129,15 @@
             <div class="video-link">
               <%= sanitize_and_auto_link @proposal.video_url %>
             </div>
+          <% end %>
+        <% end %>
+
+        <% if !@proposal.selected? && projekt_feature?(@proposal.projekt, 'proposals.show_related_content') %>
+          <%= render(Shared::SidebarCardComponent.new(title: t("related_content.title"), icon_name: "link")) do %>
+            <p>
+              <%= t("related_content.description") %>
+            </p>
+            <%= render "relationable/related_content", relationable: @proposal %>
           <% end %>
         <% end %>
 

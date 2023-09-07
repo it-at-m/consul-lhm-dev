@@ -5,7 +5,6 @@ module ResourceBelongsToProjekt
     scope :by_projekt_id, ->(projekt_ids) {
       joins(projekt_phase: :projekt)
         .where(projekts: { id: projekt_ids })
-        .distinct
     }
   end
 end

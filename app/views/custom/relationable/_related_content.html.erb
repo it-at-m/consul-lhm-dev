@@ -1,13 +1,12 @@
 <div class="related-content padding">
-
-  <h2 class="inline-block">
+  <h5 class="inline-block">
     <%= t("related_content.title") %>&nbsp;<span>(<%= relationable.relationed_contents.count %>)</span>
-  </h2>
+  </h5>
+  <% if @related_contents.present? %>
+    <%= render Relationable::RelatedListComponent.new(relationable) %>
+  <% end %>
 
   <% if current_user %>
     <%= render "relationable/form", relationable: relationable %>
   <% end %>
-
-  <%= render Relationable::RelatedListComponent.new(relationable) %>
 </div>
-

@@ -4,7 +4,7 @@
 
     <h2 class="sidebar-title projekt-tag-chip-projekt projekt-tag-chip-icon"><%= t("custom.projekts.sidebar_filter.title") %></h2>
 
-    <div id='filter-projekts-all' data-resources-name=<%= resource_name_js %> data-projekts-to-toggle=<%= projekts_to_toggle_js %>  >
+    <div id='filter-projekts-all' data-resources-name=<%= resource_name_js %> data-projekts-to-toggle=<%= projekts_to_toggle_js %>>
 
       <%= form_with url: form_path, method: :get, local: local_form? do |f| %>
 
@@ -21,23 +21,22 @@
                 <%= render Sidebar::ProjektsFilterRadioComponent.new(
                   f: f,
                   projekt: projekt,
-                  group: 'active',
+                  group: "active",
                   all_resources: @all_resources
                 ) %>
-            <% else %>
-              <%= render Sidebar::ProjektsFilterCheckboxComponent.new(
-                f: f,
-                projekt: projekt,
-                scoped_projekt_ids: @scoped_projekt_ids,
-                group: 'active',
-                all_resources: @all_resources,
-                current_projekt: @current_projekt
-              ) %>
-          <% end %>
-        <% end %>
+              <% else %>
+                <%= render Sidebar::ProjektsFilterCheckboxComponent.new(
+                  f: f,
+                  projekt: projekt,
+                  scoped_projekt_ids: @scoped_projekt_ids,
+                  group: "active",
+                  all_resources: @all_resources,
+                  current_projekt: @current_projekt
+                ) %>
+              <% end %>
+            <% end %>
           </div>
         <% end %>
-
 
         <% if show_archived_projekts_in_sidebar? && @top_level_archived_projekts.any? %>
           <div class='sidebar-projekt-group-name'>
@@ -50,20 +49,20 @@
                 <%= render Sidebar::ProjektsFilterRadioComponent.new(
                   f: f,
                   projekt: projekt,
-                  group: 'archived',
+                  group: "archived",
                   all_resources: @all_resources
                 ) %>
-            <% else %>
-              <%= render Sidebar::ProjektsFilterCheckboxComponent.new(
-                f: f,
-                projekt: projekt,
-                scoped_projekt_ids: @scoped_projekt_ids,
-                group: 'archived',
-                all_resources: @all_resources,
-                current_projekt: @current_projekt
-              ) %>
-          <% end %>
-        <% end %>
+              <% else %>
+                <%= render Sidebar::ProjektsFilterCheckboxComponent.new(
+                  f: f,
+                  projekt: projekt,
+                  scoped_projekt_ids: @scoped_projekt_ids,
+                  group: "archived",
+                  all_resources: @all_resources,
+                  current_projekt: @current_projekt
+                ) %>
+              <% end %>
+            <% end %>
           </div>
         <% end %>
 
@@ -73,7 +72,6 @@
             <%= button_tag '', class: 'js-reset-projekts-filter sidebar-reset-filter-button' %>
           </div>
         <% end %>
-
       <% end %>
     </div>
   <% end %>

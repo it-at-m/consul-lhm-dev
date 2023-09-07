@@ -943,7 +943,10 @@ de:
     timestamp_error_message: "Entschuldigung, das war zu schnell! Bitte erneut senden."
   related_content:
     title: "Verwandte Inhalte"
-    add: "Verwandte Inhalte hinzufügen"
+    add: "+ Inhalt hinzufügen"
+    description: Existieren bereits Inhalte, die zu diesem Vorschlag passen, etwa
+      eine Diskussion oder ein anderer Vorschlag? Dann können Sie hier
+      darauf verweisen.
     label: "Link zu verwandten Inhalten"
     placeholder: "%{url}"
     help: "Sie können Links von %{models} innerhalb des %{org} hinzufügen."
