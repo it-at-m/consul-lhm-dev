@@ -10,9 +10,9 @@
   </h1>
   <div class="flex-column">
     <div class="main-column">
-      <% if extended_feature?("polls.intro_text_for_debates") %>
+      <% if extended_feature?("polls.intro_text_for_polls") %>
         <div class="resource-page--intro-text">
-          <%= render_custom_block('debates_index_welcome', default_content: t("custom.polls.index.welcome_default_text")) %>
+          <%= render_custom_block("polls_index_welcome", default_content: t("custom.polls.index.welcome_default_text")) %>
         </div>
       <% end %>
     </div>
@@ -21,14 +21,14 @@
   <div class="flex-layout">
     <div class="main-column">
       <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
-        <%= link_to t('polls.index.section_header.help'), '#section_help' %>
+        <%= link_to t("polls.index.section_header.help"), "#section_help" %>
       <% end %>
 
-      <%= render 'shared/loader_spinner' %>
+      <%= render "shared/loader_spinner" %>
       <%= render(
         Shared::ResourcesListComponent.new(
           resources: @polls,
-          resource_type: Debate,
+          resource_type: Poll,
           current_filter: @current_order,
           filter_param: "order",
           text_search_enabled: true,
@@ -40,12 +40,12 @@
     </div>
 
     <div id="polls-sidebar" class="sidebar">
-      <%= render Shared::SidebarCardComponent.new(title: t('custom.common.information'), icon_name: "info-circle") do |c| %>
+      <%= render Shared::SidebarCardComponent.new(title: t("custom.common.information"), icon_name: "info-circle") do |c| %>
         <div class="margin-bottom-half">
-          <%= render_custom_block 'projekt_overview_page_sidebar', default_content: t("custom.polls.index.sidebar_information_default_text")  %>
+          <%= render_custom_block "projekt_overview_page_sidebar", default_content: t("custom.polls.index.sidebar_information_default_text") %>
         </div>
         <div class="margin-bottom-half">
-          <%= Debate.count %> <%= t("custom.common.polls") %>
+          <%= Poll.count %> <%= t("custom.common.polls") %>
         </div>
 
         <%= render Shared::NewButtonComponent.new(resources_name: "polls", query_params: params) %>

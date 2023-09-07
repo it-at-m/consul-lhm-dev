@@ -1,0 +1,114 @@
+.custom-new-design .poll-question-answers.regular {
+  .poll-answer-group {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+
+    &.column:last-child:not(:first-child), .columns:last-child:not(:first-child) {
+      float: left;
+    }
+
+    &.with-additional-info {
+    }
+
+    &.image-answers {
+      display: inline-block;
+
+      .poll-answer-thumbnail-group {
+        .poll-answer-thumbnail {
+          background: #dcdcdc;
+          border: 1px solid #dcdcdc;
+          border-radius: 4px;
+          overflow:	hidden;
+          position: relative;
+          cursor: pointer;
+          width: unset;
+          height: 17rem;
+          margin-right: 0;
+
+          .answer-thumbnail {
+
+
+            &--blur {
+              width: 100%;
+              height: 100%;
+              filter: blur(5px);
+              overflow: hidden;
+              transform: scale(1.2);
+            }
+          }
+
+
+          .poll-answer-more-info-link {
+            position: absolute;
+            top: 7px;
+            left: 7px;
+          }
+        }
+      }
+    }
+
+    .button_to {
+      width: unset;
+      margin-right: 0.8rem;
+    }
+
+    .button {
+      border: 1px solid #003A71;
+      padding: 0.5rem 1rem;
+      color: #003A71;
+      text-wrap: nowrap;
+      width: initial;
+      min-width: auto;
+      margin-top: 0;
+      margin-bottom: 0;
+
+      &.answered {
+        border-color: #207868;
+        background: #207868;
+        color: #fff;
+
+        &::after {
+          content: none;
+        }
+      }
+    }
+
+    .answer-weight-selector {
+      width: 50px;
+      margin-right: 5px;
+      margin-bottom: 0;
+      border-radius: 5px;
+      color: #003A71;
+      border-color: #003A71;
+
+      &--voted {
+        background: #207868 !important;
+        border-color: #207868 !important;
+        color: #fff;
+      }
+    }
+
+    .answer-weight-text {
+      color: #003A71;
+
+      &--voted {
+        font-weight: bold;
+        color: #207868;
+      }
+    }
+  }
+
+  .poll-answer-more-info-link {
+    color: #fff;
+    font-size: 12px;
+    background: $brand;
+    padding: 0.1rem 0.25rem;
+    border-radius: 5px;
+
+    i {
+      color: #fff !important;
+      margin-left: 4px;
+    }
+  }
+}

@@ -19,6 +19,10 @@ class Polls::Questions::AnswersComponent < ApplicationComponent
       count_of_rating_scale_cells += 1 if question.min_rating_scale_label.present?
       count_of_rating_scale_cells += 1 if question.max_rating_scale_label.present?
       classes.push("rating-scale-#{count_of_rating_scale_cells}-answers")
+    else
+      classes.push("regular")
+      classes.push("row")
+      classes.push("gutter-small")
     end
 
     classes.join(" ")
@@ -87,5 +91,15 @@ class Polls::Questions::AnswersComponent < ApplicationComponent
 
     (question.votation_type.multiple? && user_answers.count == question.max_votes) ||
       (question.votation_type.multiple_with_weight? && available_vote_weight(question_answer) == 0)
+  end
+
+  def has_additional_info?(question_answer)
+    question_answer.more_info_link.present? ||
+      show_additional_info_images? ||
+      show_additional_info_description?(question_answer)
+  end
+
+  def new_design?
+    Setting.new_design_enabled?
   end
 end

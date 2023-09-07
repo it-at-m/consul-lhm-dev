@@ -1,0 +1,14 @@
+.custom-new-design {
+  .sub-nav-items {
+    display: flex;
+
+    a {
+      text-decoration: underline;
+      margin-right: 1rem;
+
+      &.is-active {
+        font-weight: bold;
+      }
+    }
+  }
+}

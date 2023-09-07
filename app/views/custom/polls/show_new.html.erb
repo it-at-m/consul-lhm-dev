@@ -13,24 +13,41 @@
   <div id="<%= dom_id(@poll) %>">
     <div class="flex-layout">
       <div class="main-column">
-        <h1 class="resource-page--title"><%= "#{@poll.author.name} startet eine Diskussion"  %></h1>
+        <h1 class="resource-page--title"><%= "#{@poll.author.name} startet eine Diskussion" %></h1>
         <div class="resource-page--title-subline">
-          <%= render_custom_block('debate_show_welcome_text', custom_prefix: @poll.author.name , default_content: t('custom.debates.show.welcome_default_text')) %>
+          <%= render_custom_block("polls_show_welcome_text", custom_prefix: @poll.author.name, default_content: t("custom.polls.show.welcome_default_text")) %>
         </div>
-
       </div>
       <div class="sidebar-placeholder"></div>
     </div>
 
     <div class="flex-layout">
       <div class="main-column">
-        <%= render ResourcePage::BannerComponent.new(resource: @poll) %>
+        <%= render ResourcePage::BannerComponent.new(resource: @poll) do |c| %>
+          <% c.links_section do %>
+             <%= render Polls::SubNavComponent.new(poll: @poll) %>
+          <% end %>
+        <% end %>
 
         <div class="resource-page--description new-card">
           <%= auto_link_already_sanitized_html wysiwyg(@poll.description) %>
         </div>
 
-        <% if projekt_feature?(@poll.projekt, 'debates.show_comments') %>
+        <%= render "callout" %>
+
+        <div class="margin-bottom">
+          <%= render Polls::Questions::QuestionComponent.with_collection(@questions) %>
+        </div>
+
+        <% @questions.each do |question| %>
+          <% question.question_answers.each do |answer| %>
+            <% if answer_with_description?(answer) %>
+              <%= render partial: "polls/questions/answer_more_info_modal", locals: { answer: answer } %>
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <% if projekt_phase_feature?(@poll.projekt_phase, "resource.show_comments") %>
           <%= render Shared::NewCommentsComponent.new(@poll, @comment_tree) %>
         <% end %>
       </div>
@@ -39,4 +56,3 @@
     </div>
   </div>
 </main>
-

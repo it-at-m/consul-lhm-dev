@@ -1,9 +1,9 @@
 <div id="<%= dom_id(question) %>" class="poll-question">
-  <h3>
+  <h3 class="poll-question--title">
     <%= question.title %>
   </h3>
 
-  <p>
+  <p class="poll-question--description">
     <%= auto_link_already_sanitized_html wysiwyg(question.description) %>
   </p>
 

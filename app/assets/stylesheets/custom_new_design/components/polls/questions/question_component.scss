@@ -1,0 +1,25 @@
+.custom-new-design {
+  .poll-question {
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+
+    &--title {
+      color: #292929;
+    }
+
+    &--description {
+      color: #67788a;
+    }
+
+    .answer-counted {
+      color: #207868;
+    }
+
+    i {
+      @media (max-width: 640px) {
+        font-size: 12px;
+      }
+    }
+  }
+}

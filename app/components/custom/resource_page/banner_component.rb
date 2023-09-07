@@ -1,4 +1,5 @@
 class ResourcePage::BannerComponent < ApplicationComponent
+  renders_one :links_section
   attr_reader :resource
 
   def initialize(resource: )
@@ -10,7 +11,7 @@ class ResourcePage::BannerComponent < ApplicationComponent
   end
 
   def banner_inline_style
-    if @resource.sentiment.present?
+    if @resource.respond_to?(:sentiment) && @resource.sentiment.present?
       "background-color:#{@resource.sentiment.color};color: #{helpers.pick_text_color(@resource.sentiment.color)}"
     end
   end

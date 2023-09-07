@@ -25,7 +25,7 @@
         <!-- <h1 class="resource-page--title"><%= "#{@proposal.author.name} startet eine Diskussion"  %></h1> -->
         <h1 class="resource-page--title"><%= "Beitrag von #{@proposal.author.name}" %></h1>
         <div class="common-page-description">
-          <%= render_custom_block('debate_show_welcome_text', default_content: t('custom.proposals.show.welcome_default_text', author: @proposal.author.name)) %>
+          <%= render_custom_block("polls_show_welcome_text", default_content: t('custom.proposals.show.welcome_default_text', author: @proposal.author.name)) %>
         </div>
 
         <% if @proposal.conflictive? %>

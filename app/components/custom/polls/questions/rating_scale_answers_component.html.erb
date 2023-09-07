@@ -1,0 +1,23 @@
+<% if question.min_rating_scale_label.present? %>
+  <div class="rating-scale-label rating-scale-label--left">
+    <div class="label secondary">
+      <%= question.min_rating_scale_label %>
+    </div>
+  </div>
+<% end %>
+
+<div class="rating-scale-answer-container">
+  <% question_answers.each do |question_answer| %>
+    <div class="poll-answer-group">
+      <%= render Polls::Questions::AnswerFormComponent.new(question_answer: question_answer, user_answer: user_answer(question_answer)) %>
+    </div>
+  <% end %>
+</div>
+
+<% if question.max_rating_scale_label.present? %>
+  <div class="rating-scale-label rating-scale-label--right">
+    <div class="label secondary">
+      <%= question.max_rating_scale_label %>
+    </div>
+  </div>
+<% end %>

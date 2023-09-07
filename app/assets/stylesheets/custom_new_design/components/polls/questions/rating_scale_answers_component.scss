@@ -1,0 +1,152 @@
+@mixin horizontal-rating-scale-answers-new-design {
+  display: inline-block;
+
+  .rating-scale-answer-container {
+    flex-direction: row;
+  }
+
+  .poll-answer-group {
+    .rating-scale-button {
+      margin-right: 0.8rem;
+      margin-bottom: 0;
+    }
+
+    &:last-child {
+      .rating-scale-button {
+        margin-right: 0;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .rating-scale-label {
+    position: absolute;
+    width: unset;
+    top: unset;
+    transform: unset;
+
+
+    &--left {
+      left: 0;
+      bottom: -25px;
+    }
+
+    &--right {
+      right: 0;
+      bottom: -25px;
+    }
+  }
+}
+
+.custom-new-design .poll-question-answers.rating-scale {
+  position: relative;
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+
+  .rating-scale-answer-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .poll-answer-group {
+    flex-basis: content;
+    margin-top: 0;
+    padding: 0;
+    width: unset;
+
+    .button_to {
+      margin: 0;
+    }
+
+    &:last-child {
+      .rating-scale-button {
+        margin-right: 0;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .rating-scale-button {
+    margin: 0;
+    margin-bottom: 0.8rem;
+    line-height: 1;
+    padding: 0.5rem 1rem;
+    border: 1px solid #003A71;
+    border-radius: 0.1875rem;
+    color: #003A71;
+    text-wrap: nowrap;
+
+    &--answered {
+      background: #207868;
+      border-color: #207868;
+      color: #fff;
+    }
+
+    &::before {
+      content: none;
+    }
+  }
+
+  .rating-scale-label {
+    position: absolute;
+    width: unset;
+    margin: 0;
+
+    &--left {
+      top: -25px;
+      left: 0;
+      // left: 50%;
+      // transform: translateX(-50%);
+    }
+
+    &--right {
+      bottom: -25px;
+      left: 0;
+      // right: 50%;
+      // transform: translateX(50%);
+    }
+
+    .label.secondary {
+      padding: 0;
+      background: 0;
+      color: #003A71;
+    }
+  }
+
+  &.rating-scale-3-answers {
+    @media (min-width: 790px) {
+      @include horizontal-rating-scale-answers-new-design;
+    }
+  }
+
+  &.rating-scale-4-answers {
+    @media (min-width: 790px) {
+      @include horizontal-rating-scale-answers-new-design;
+    }
+  }
+
+  &.rating-scale-5-answers {
+    @media (min-width: 790px) {
+      @include horizontal-rating-scale-answers-new-design;
+    }
+  }
+
+  &.rating-scale-6-answers {
+    @media (min-width: 930px) {
+      @include horizontal-rating-scale-answers-new-design;
+    }
+  }
+
+  &.rating-scale-7-answers {
+    @media (min-width: 1100px) {
+      @include horizontal-rating-scale-answers-new-design;
+    }
+  }
+
+  &.rating-scale-8-answers {
+    @media (min-width: 1190px) {
+      @include horizontal-rating-scale-answers-new-design;
+    }
+  }
+}

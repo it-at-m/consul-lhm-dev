@@ -1,0 +1,55 @@
+<% if can?(:answer, question) && !question.poll.voted_in_booth?(current_user) %>
+  <% if already_answered? %>
+    <%= form_with url: question_answer_path(question, user_answer), local: false, method: :delete, class: "button_to" do |f| %>
+      <% if should_show_answer_weight? %>
+        <%= select_tag dom_id(user_answer, :answer_weight),
+                       options_for_select((0..available_vote_weight).to_a,
+                                          selected: user_answer.answer_weight),
+                       { label: false,
+                         onchange: "$(this).closest('form').submit()",
+                         class: "answer-weight-selector answer-weight-selector--voted"
+                       } %>
+        <span class="answer-weight-text answer-weight-text--voted"><%= question_answer.title %></span>
+      <% else %>
+        <%= f.button question_answer.title,
+                     title: t("poll_questions.show.voted", answer: question_answer.title),
+                     value: "remove_answer",
+                     class: button_answered_class,
+                     "aria-pressed": true %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= form_with url: answer_question_path(question, answer: question_answer.title), local: false, class: "button_to" do |f| %>
+
+      <% if should_show_answer_weight? %>
+        <%= f.select :answer_weight, (0..available_vote_weight).to_a, { selected: 0, label: false }, { onchange: "$(this).closest('form').submit()", class: "answer-weight-selector" } %>
+        <span class="answer-weight-text"><%= question_answer.title %></span>
+
+      <% else %>
+        <%= f.button question_answer.title,
+                     title: t("poll_questions.show.vote_answer", answer: question_answer.title),
+                     class: button_not_answered_class,
+                     disabled: disable_answer?,
+                     "aria-pressed": false %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+<% elsif !user_signed_in? %>
+  <%= button_to new_user_session_path,
+                method: :get,
+                title: t("poll_questions.show.vote_answer", answer: question_answer.title),
+                class: button_not_answered_class,
+                "aria-pressed": false,
+                disabled: disable_answer? do %>
+    <%= question_answer.title %>
+  <% end %>
+
+<% else %>
+  <% if question.votation_type.vote_type == "rating_scale" %>
+    <span class="rating-scale-button rating-scale-button--disabled"><%= question_answer.title %></span>
+  <% else %>
+    <span class="button secondary hollow disabled"><%= question_answer.title %></span>
+  <% end %>
+
+<% end %>

@@ -1,0 +1,15 @@
+<div class="sub-nav-items">
+  <%= link_to t("custom.polls.show.info_menu"), poll_path(id: poll.slug || poll.id),
+                class: ("is-active" if info_menu?) %>
+
+  <% if can?(:stats, poll) %>
+    <%= link_to t("custom.polls.show.stats_menu"), stats_poll_path(id: poll.slug || poll.id),
+                class: ("is-active" if stats_menu?) %>
+  <% end %>
+
+  <% if can?(:results, poll) %>
+    <%= link_to t("custom.polls.show.results_menu"), results_poll_path(id: poll.slug || poll.id),
+                class: ("is-active" if results_menu?),
+                data: { turbolinks: false } %>
+  <% end %>
+</div>
