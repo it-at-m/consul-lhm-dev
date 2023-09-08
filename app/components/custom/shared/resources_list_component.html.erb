@@ -46,7 +46,6 @@
         <% if @text_search_enabled %>
           <%= render(
             Shared::TextSearchFormComponent.new(
-              param_name: @test_search_param_name,
               remote_url: remote_url,
               i18n_namespace: "#{i18n_namespace}.search_form",
             )
