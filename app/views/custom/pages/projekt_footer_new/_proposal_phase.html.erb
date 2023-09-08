@@ -17,8 +17,24 @@
     <%= paginate @proposals, remote: true, params: { controller: "pages", action: "proposal_phase_footer_tab" } %>
   </div>
 
-  <div id="proposals-sidebar" class="sidebar">
+  <aside id="proposals-sidebar" class="sidebar">
     <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
-    <%= render Sidebar::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name) %>
-  </div>
+
+    <%= render Sidebar::Filters::GeozoneAffiliationsCardComponent.new(
+      geozones: @geozones,
+      resource_name: @resource_name
+    ) %>
+
+    <%# <%= render Sidebar::Filters::GeozoneRestrictionsCardComponent.new(
+    <%#   geozones: @geozones,
+    <%#   restricted_geozones: @restricted_geozones,
+    <%#   selected_geozone_restriction: @selected_geozone_restriction
+    <%# ) %>
+
+    <% if current_user.present? && extended_feature?('proposals.enable_my_posts_filter') %>
+      <%= render Sidebar::Filters::MyPostsCardComponent.new %>
+    <% end %>
+
+    <%= render Sidebar::ExportListComponent.new %>
+  </aside>
 </div>
