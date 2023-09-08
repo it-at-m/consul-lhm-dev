@@ -30,7 +30,7 @@ class Shared::FilterDropdownComponent < ApplicationComponent
     translate_option(@selected_option.presence || @options.first)
   end
 
-  def remote
+  def remote?
     remote_url.present?
   end
 
@@ -88,7 +88,7 @@ class Shared::FilterDropdownComponent < ApplicationComponent
   def link_data_attributes(option)
     data = {}
 
-    if remote
+    if remote?
       data["nonblock-remote"] = "true"
       data["remote"] = "true"
     end
