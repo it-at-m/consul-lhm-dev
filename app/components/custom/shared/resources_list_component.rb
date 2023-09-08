@@ -23,6 +23,7 @@ class Shared::ResourcesListComponent < ApplicationComponent
     hide_title: false,
     only_content: false,
     text_search_enabled: false,
+    text_search_params_name: nil,
     additional_data: {}
   )
     @resources = resources

@@ -1,6 +1,6 @@
 <div id="search_form" class="text-search-form search-form-header">
   <h1 class="show-for-sr"><%= t("shared.outline.searcher") %></h1>
-  <%= form_tag search_path, method: :get, enforce_utf8: false, class: "js-text-search-form" do %>
+  <%= form_tag '', method: :get, enforce_utf8: false, class: "js-text-search-form" do %>
     <% other_query_params_from_current_path.each do |param_name, param_value| %>
       <%= hidden_field_tag param_name, param_value %>
     <% end %>

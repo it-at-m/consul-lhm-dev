@@ -110,8 +110,13 @@ class PagesController < ApplicationController
                      end
 
     @resources = @projekt_phase.proposals.for_public_render
-    take_by_projekt_labels
-    take_by_sentiment
+
+    if params[:proposal_search].present?
+      @resources = @resources.search(params[:search])
+    else
+      take_by_projekt_labels
+      take_by_sentiment
+    end
 
     @proposals_coordinates = all_proposal_map_locations(@resources)
     @proposals = @resources.page(params[:page]).send("sort_by_#{@current_order}")

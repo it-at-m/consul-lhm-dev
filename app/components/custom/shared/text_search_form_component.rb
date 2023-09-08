@@ -1,8 +1,9 @@
 class Shared::TextSearchFormComponent < ApplicationComponent
-  attr_reader :search_path, :i18n_namespace
+  attr_reader :i18n_namespace
 
-  def initialize(search_path:, i18n_namespace:)
+  def initialize(i18n_namespace:, param_name: "search")
     @i18n_namespace = i18n_namespace
+    @param_name = param_name
   end
 
   def other_query_params_from_current_path
