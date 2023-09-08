@@ -1,0 +1,49 @@
+<% question_answers.each do |question_answer| %>
+
+  <div class="<%= poll_answer_group_class %> <%= "with-additional-info" if has_additional_info?(question_answer) %> <%= "column medium-4" if show_additional_info_images? %>">
+
+    <% if show_additional_info_images? %>
+
+      <div class='poll-answer-thumbnail-group'>
+        <div class='poll-answer-thumbnail'
+             <%= "data-open=model-question-#{question_answer.id}" if answer_with_description?(question_answer) %>>
+          <% if question_answer.images.any? %>
+            <%= image_tag(question_answer.images.first.variant(:large), class: "answer-thumbnail--blur") %>
+            <%= image_tag(question_answer.images.first.variant(:large), class: "answer-thumbnail--main") %>
+          <% end %>
+
+          <% if show_additional_info_description?(question_answer) %>
+            <div class='poll-answer-more-info-link'>
+              <%= t("custom.polls.questions.answers.more_info") %>
+              <i class="fas fa-external-link-alt" style="color:#004a83;"></i>
+            </div>
+          <% end %>
+        </div>
+
+        <%= render Polls::Questions::AnswerFormComponent.new(question_answer: question_answer, user_answer: user_answer(question_answer)) %>
+      </div>
+
+    <% else %>
+
+      <%= render Polls::Questions::AnswerFormComponent.new(question_answer: question_answer, user_answer: user_answer(question_answer)) %>
+
+      <% if question_answer.more_info_link.present? %>
+        <div class='poll-answer-more-info-link'>
+          <%= link_to question_answer.more_info_link, target: "_blank" do %>
+            <%= t("custom.polls.questions.answers.more_info") %>
+            <i class="fas fa-external-link-alt" style="color:#004a83;"></i>
+          <% end %>
+        </div>
+      <% elsif show_additional_info_description?(question_answer) %>
+        <div class='poll-answer-more-info-link' data-open='model-question-<%= question_answer.id %>'>
+          <%= t("custom.polls.questions.answers.more_info") %>
+          <i class="fas fa-external-link-alt" style="color:#004a83;"></i>
+        </div>
+      <% end %>
+
+    <% end %>
+
+  </div>
+<% end %>
+
+<%= render Polls::Questions::OpenAnswerComponent.new(question) %>

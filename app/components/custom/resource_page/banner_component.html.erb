@@ -22,19 +22,21 @@
           <%= resource.projekt.name %>
         <% end %>
       </div>
-      <% if @resource.projekt_labels.any? %>
+      <% if @resource.respond_to?(:projekt_labels) && @resource.projekt_labels.any? %>
         <div class="resource-page-banner--detail">
           <i class="fa fa-tags"></i>
           <%= render Shared::ProjektLabelsComponent.new(resource: @resource) %>
         </div>
       <% end %>
-      <% if @resource.sentiment.present? %>
+      <% if @resource.respond_to?(:sentiment) && @resource.sentiment.present? %>
         <div class="resource-page-banner--detail">
           <i class="fa fa-heart"></i>
           <%= @resource.sentiment.name %>
         </div>
       <% end %>
     </div>
+
+    <%= links_section %>
   </div>
 
   <div class="resource-page-banner--image">
@@ -44,7 +46,6 @@
         image_placeholder_icon_class: "fa-comments",
         resource_name: resource.class.name.downcase
       )
-    )
-  %>
+    ) %>
   </div>
 </div>

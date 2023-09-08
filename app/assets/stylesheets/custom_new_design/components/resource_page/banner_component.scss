@@ -23,6 +23,8 @@
 
   .resource-page-banner--text-section {
     width: 48%;
+    display: flex;
+    flex-direction: column;
   }
 
   .resource-page-banner--image {

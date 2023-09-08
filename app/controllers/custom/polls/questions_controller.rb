@@ -1,7 +1,6 @@
 require_dependency Rails.root.join("app", "controllers", "polls", "questions_controller").to_s
 
 class Polls::QuestionsController < ApplicationController
-
   def answer
     answer = @question.find_or_initialize_user_answer(current_user, params[:answer])
     answer.answer_weight = params[:answer_weight].presence || 1
@@ -15,7 +14,9 @@ class Polls::QuestionsController < ApplicationController
   end
 
   def update_open_answer
-    answer = @question.answers.find_or_initialize_by(author: current_user, answer: open_answer_params[:answer])
+    answer = @question.find_or_initialize_user_answer(current_user, open_answer_params[:answer])
+    answer.save_and_record_voter_participation if answer.new_record?
+
     if answer.update(open_answer_text: open_answer_params[:open_answer_text])
       @open_answer_updated = true
     end

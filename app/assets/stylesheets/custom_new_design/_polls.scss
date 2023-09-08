@@ -1,0 +1,17 @@
+.custom-new-design {
+  .polls-results-stats.participation-stats {
+    .section-title {
+      border-bottom: 0;
+    }
+
+    .stats-content {
+      @media print, screen and (min-width: 40em) {
+        border-left: 0;
+      }
+    }
+
+    span.number {
+      color: #222;
+    }
+  }
+}

@@ -61,6 +61,24 @@ class PollsController < ApplicationController
     end
   end
 
+  def stats
+    @stats = Poll::Stats.new(@poll)
+
+    if Setting.new_design_enabled?
+      render :stats_new
+    else
+      render :stats
+    end
+  end
+
+  def results
+    if Setting.new_design_enabled?
+      render :results_new
+    else
+      render :results
+    end
+  end
+
   def set_geo_limitations
     @selected_geozone_affiliation = params[:geozone_affiliation] || 'all_resources'
     @affiliated_geozones = (params[:affiliated_geozones] || '').split(',').map(&:to_i)
