@@ -91,8 +91,13 @@ class PagesController < ApplicationController
                      end
 
     @resources = @projekt_phase.debates.for_public_render
-    take_by_projekt_labels
-    take_by_sentiment
+
+    if params[:search].present?
+      @resources = @resources.search(params[:search])
+    else
+      take_by_projekt_labels
+      take_by_sentiment
+    end
 
     @debates = @resources.page(params[:page]).send("sort_by_#{@current_order}")
   end
@@ -111,7 +116,7 @@ class PagesController < ApplicationController
 
     @resources = @projekt_phase.proposals.for_public_render
 
-    if params[:proposal_search].present?
+    if params[:search].present?
       @resources = @resources.search(params[:search])
     else
       take_by_projekt_labels

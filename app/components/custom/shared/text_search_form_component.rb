@@ -1,9 +1,17 @@
 class Shared::TextSearchFormComponent < ApplicationComponent
   attr_reader :i18n_namespace
 
-  def initialize(i18n_namespace:, param_name: "search")
+  def initialize(i18n_namespace:, remote_url: nil)
     @i18n_namespace = i18n_namespace
-    @param_name = param_name
+    @remote_url = remote_url
+  end
+
+  def remote_attribute
+    @remote_url.present?
+  end
+
+  def form_url
+    @remote_url.presence || ""
   end
 
   def other_query_params_from_current_path
