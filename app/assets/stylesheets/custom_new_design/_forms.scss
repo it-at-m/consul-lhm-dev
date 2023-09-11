@@ -9,6 +9,25 @@
     border-radius: 5px;
   }
 
+  input::placeholder {
+    color: #67788A;
+    font-weight: 500;
+    visibility: visible;
+  }
+
+  .checkbox-label {
+    input[type="checkbox"] {
+    }
+
+    .checkbox {
+      margin-top: -1px;
+    }
+  }
+
+  form .checkbox, form .radio {
+    vertical-align: top;
+  }
+
   input.light-input {
     background: none;
     border: none !important;

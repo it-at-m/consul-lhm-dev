@@ -1,0 +1,5 @@
+.new_user, .new_organization {
+  input::placeholder {
+    visibility: hidden;
+  }
+}

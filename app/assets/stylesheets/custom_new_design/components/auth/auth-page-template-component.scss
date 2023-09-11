@@ -1,5 +1,5 @@
 .custom-new-design {
-  .auth-page-template-login-button {
+  .auth-page-button, .button, button, input[type="submit"] {
     max-width: 300px;
     height: 50px;
     font-size: 20px;
@@ -28,7 +28,7 @@
   .auth-page-template {
     display: flex;
     justify-content: space-between;
-    padding-top: 70px;
+    padding-top: 50px;
     width: 95%;
     margin: auto;
 
@@ -47,7 +47,7 @@
   }
 
   .auth-page-template--legend-logo {
-    width: 70px;
+    width: 80px;
     margin-right: 30px;
   }
 
@@ -64,6 +64,27 @@
   }
 
   .auth-page-template--form-section {
+    color: $main-text-color;
+    font-size: 16px;
     width: 48%;
+    padding-top: 30px;
+    padding-left: 35px;
+    padding-right: 35px;
+    padding-bottom: 40px;
+
+    h2 {
+      margin-bottom: 30px;
+    }
+    a:not(.button), label {
+      color: $main-text-color;
+    }
+
+    label:not(.checkbox-label) {
+      display: none;
+    }
+
+    .custom-content-block-body {
+      display: none;
+    }
   }
 }

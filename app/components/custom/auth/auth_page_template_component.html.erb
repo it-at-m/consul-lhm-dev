@@ -6,21 +6,22 @@
         <%= Setting["org_name"] %>
       </div>
     </div>
-    <% if @legend_text.present? %>
+    <%# <% if @legend_text.present? %>
       <div class="auth-page-template--legend-text">
-        <%= @legend_text %>
+        <%# <%= @legend_text %>
+        Gestalten Sie die Stadt nach Ihren Vorstellungen! Einmal registriert, haben Sie jederzeit Zugriff auf die Themen, die uns alle bewegen – und können sich aktiv an den Projekten beteiligen.
       </div>
-    <% end %>
+    <%# <% end %>
   </div>
   <div class="auth-page-template--form-section new-card">
     <div class="auth-page-template--form-wrapper">
-      <% if @title.present? %>
-        <h2 class="auth-page-template--title"><%= @title %></h2>
-      <% end %>
-
-      <% if @description.present? %>
-        <div class="auth-page-template--description"><%= @description %></div>
-      <% end %>
+      <%# <% if @title.present? %>
+      <%#   <h2 class="auth-page-template--title"><%= @title %></h2>
+      <%# <% end %>
+      <%#
+      <%# <% if @description.present? %>
+      <%#   <div class="auth-page-template--description"><%= @description %></div>
+      <%# <% end %>
 
       <div class="auth-page-template--body">
         <%= form %>

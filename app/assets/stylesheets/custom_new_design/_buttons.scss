@@ -16,7 +16,8 @@
     }
 
     &:hover, &:focus {
-      background-color: #005699;
+      // background-color: #005699;
+      background-color: #035799;
       color: white;
     }
 
@@ -32,6 +33,15 @@
     &.-orange {
       background: #FFA42D;
       color: black;
+    }
+
+    &.-green {
+      background: #00AA0B;
+      color: white;
+
+      &:hover {
+        background: #0eb819;
+      }
     }
 
     &.-purple {

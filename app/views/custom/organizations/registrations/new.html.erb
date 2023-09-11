@@ -1,0 +1,75 @@
+<% provide :title do %><%= t("devise_views.organizations.registrations.new.title") %><% end %>
+
+<% form_html = capture do %>
+  <%= form_for(resource, as: :user, url: organization_registration_path) do |f| %>
+    <%= render "shared/errors", resource: resource %>
+    <div class="row">
+      <div class="small-12 column">
+
+        <%= f.fields_for :organization do |fo| %>
+          <%= fo.text_field :name,
+            autofocus: true,
+            maxlength: Organization.name_max_length,
+            placeholder: t("activerecord.attributes.organization.name") %>
+          <%= fo.text_field :responsible_name,
+            maxlength: Organization.responsible_name_max_length,
+            hint: t("devise_views.organizations.registrations.new.responsible_name_note"),
+            placeholder: t("activerecord.attributes.organization.responsible_name") %>
+        <% end %>
+
+        <%= f.email_field :email,
+            placeholder: t("activerecord.attributes.organization.email") %>
+
+          <%= f.phone_field :phone_number,
+            placeholder: t("activerecord.attributes.organization.phone") %>
+
+        <%= f.invisible_captcha :address %>
+
+        <%= f.password_field :password, autocomplete: "off",
+            placeholder: t("activerecord.attributes.organization.password") %>
+
+        <%= f.password_field :password_confirmation, autocomplete: "off",
+          label: t("devise_views.organizations.registrations.new.password_confirmation_label"),
+          placeholder: t("activerecord.attributes.organization.password_confirmation") %>
+
+        <%= f.check_box :terms_data_storage,
+        title: t("custom.terms.data_storage.title"),
+        label: t("custom.terms.data_storage.label"),
+        class: "checkbox-label--aligned" %>
+
+      <%= f.check_box :terms_data_protection,
+        title: t("custom.terms.data_protection.title"),
+        label: t("custom.terms.data_protection.label",
+                 privacy_link: link_to(t("custom.terms.privacy_link.text"), "/privacy",
+                                       title: t("shared.target_blank"), target: "_blank")),
+      class: "checkbox-label--aligned" %>
+
+    <%= f.check_box :terms_general,
+      title: t("custom.terms.general.title"),
+      label: t("custom.terms.general.label",
+               terms_link: link_to(t("custom.terms.terms_link.text"), "/conditions",
+                                   title: t("shared.target_blank"), target: "_blank")),
+    class: "checkbox-label--aligned" %>
+
+  <p><%= t("custom.terms.revoke_consent.text") %></p>
+
+  <div class="small-12 medium-6 small-centered">
+    <%= f.submit t("devise_views.organizations.registrations.new.submit"), class: "button expanded" %>
+  </div>
+      </div>
+    </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+<% end %>
+
+<% if Setting.new_design_enabled? %>
+  <%= render Auth::AuthPageTemplateComponent.new(title: t("devise_views.users.registrations.new.title"))  do |c| %>
+    <% c.form do %>
+      <%= form_html %>
+    <% end %>
+  <% end %>
+<% else %>
+  <h2><%= t("devise_views.organizations.registrations.new.title") %></h2>
+  <%= form_html %>
+<% end %>

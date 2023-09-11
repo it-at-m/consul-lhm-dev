@@ -1,177 +1,191 @@
 <% provide :title do %><%= t("devise_views.users.registrations.new.title") %><% end %>
-<h2><%= t("devise_views.users.registrations.new.title") %></h2>
 
-<%= render "devise/omniauth_form", action: "sign_up" %>
+<% form_html = capture do %>
+  <%= render "devise/omniauth_form", action: "sign_up" %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "shared/errors", resource: resource %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "shared/errors", resource: resource %>
 
-  <p>
-    <%= sanitize(t("devise_views.users.registrations.new.organization_signup",
-        signup_link: link_to(t("devise_views.users.registrations.new.organization_signup_link"), new_organization_registration_path))) %>
-  </p>
+    <p>
+      <%= sanitize(t("devise_views.users.registrations.new.organization_signup",
+          signup_link: link_to(t("devise_views.users.registrations.new.organization_signup_link"), new_organization_registration_path))) %>
+    </p>
 
-  <%= render_custom_block "registration_form_hint" %>
+    <%= render_custom_block "registration_form_hint" %>
 
-  <div class="row">
-    <div class="small-12 column">
+    <div class="row">
+      <div class="small-12 column">
 
-      <%= f.hidden_field :use_redeemable_code %>
-      <%= f.hidden_field :locale, value: I18n.locale %>
+        <%= f.hidden_field :use_redeemable_code %>
+        <%= f.hidden_field :locale, value: I18n.locale %>
 
-      <%= f.text_field :username,  autofocus: true, maxlength: User.username_max_length,
-                                   placeholder: t("devise_views.users.registrations.new.username_label"),
-                                   hint: t("devise_views.users.registrations.new.username_note") %>
-      <%= f.email_field :email, placeholder: t("devise_views.users.registrations.new.email_label") %>
+        <%= f.text_field :username,  autofocus: true, maxlength: User.username_max_length,
+                                     placeholder: t("devise_views.users.registrations.new.username_label"),
+                                     hint: t("devise_views.users.registrations.new.username_note") %>
+        <%= f.email_field :email, placeholder: t("devise_views.users.registrations.new.email_label") %>
 
-      <%= f.invisible_captcha :address %>
+        <%= f.invisible_captcha :address %>
 
-      <% if resource.extended_registration? %>
-        <%= f.select :gender, options_for_gender_select,
-          { prompt: t("custom.helpers.select.prompt") },
-          { class: "show-arrow", style: "background-color:#f8f8f8;" } %>
-        <%= f.text_field :first_name, placeholder: t("custom.devise_views.users.registrations.new.first_name_label") %>
-        <%= f.text_field :last_name, placeholder: t("custom.devise_views.users.registrations.new.last_name_label") %>
+        <% if resource.extended_registration? %>
+          <%= f.select :gender, options_for_gender_select,
+            { prompt: t("custom.helpers.select.prompt") },
+            { class: "show-arrow", style: "background-color:#f8f8f8;" } %>
+          <%= f.text_field :first_name, placeholder: t("custom.devise_views.users.registrations.new.first_name_label") %>
+          <%= f.text_field :last_name, placeholder: t("custom.devise_views.users.registrations.new.last_name_label") %>
 
-        <% if RegisteredAddress::City.any? %>
+          <% if RegisteredAddress::City.any? %>
 
-          <% invalid_field_class = resource.form_registered_address_city_id.blank? && action_name == "create" %>
-          <%= label_tag :form_registered_address_city_id, t("custom.devise_views.users.registrations.new.form_registered_address_city_label"), class: "#{'is-invalid-label' if invalid_field_class}" %>
-          <%= select_tag :form_registered_address_city_id,
-            options_for_select(
-              RegisteredAddress::City.all.map { |city| [city.name, city.id] }.push([t("custom.helpers.select.not_in_list"), 0]),
-              resource.form_registered_address_city_id
-            ),
-            {
-              prompt: t("custom.helpers.select.prompt"),
-              class: "js-registration-city-selector show-arrow #{'is-invalid-input' if invalid_field_class}",
-              style: "background-color:#f8f8f8;"
-            } %>
+            <% invalid_field_class = resource.form_registered_address_city_id.blank? && action_name == "create" %>
+            <%= label_tag :form_registered_address_city_id, t("custom.devise_views.users.registrations.new.form_registered_address_city_label"), class: "#{'is-invalid-label' if invalid_field_class}" %>
+            <%= select_tag :form_registered_address_city_id,
+              options_for_select(
+                RegisteredAddress::City.all.map { |city| [city.name, city.id] }.push([t("custom.helpers.select.not_in_list"), 0]),
+                resource.form_registered_address_city_id
+              ),
+              {
+                prompt: t("custom.helpers.select.prompt"),
+                class: "js-registration-city-selector show-arrow #{'is-invalid-input' if invalid_field_class}",
+                style: "background-color:#f8f8f8;"
+              } %>
 
-          <div id="registered-address-street-field">
-            <% if @registered_address_city.present? %>
-              <% invalid_field_class = resource.form_registered_address_street_id.blank? && action_name == "create" %>
-              <%= render "custom/users/registrations/partials/street_selector",
-                selected_value: resource.form_registered_address_street_id,
-                registered_address_streets: @registered_address_city&.registered_address_streets,
-                invalid_field_class: invalid_field_class %>
-            <% end %>
+            <div id="registered-address-street-field">
+              <% if @registered_address_city.present? %>
+                <% invalid_field_class = resource.form_registered_address_street_id.blank? && action_name == "create" %>
+                <%= render "custom/users/registrations/partials/street_selector",
+                  selected_value: resource.form_registered_address_street_id,
+                  registered_address_streets: @registered_address_city&.registered_address_streets,
+                  invalid_field_class: invalid_field_class %>
+              <% end %>
+            </div>
+
+            <div id="registered-address-field">
+              <% if @registered_address_city.present? && @registered_address_street.present? %>
+                <% invalid_field_class = resource.form_registered_address_id.blank? && action_name == "create" %>
+                <%= render "custom/users/registrations/partials/address_selector",
+                  selected_value: resource.form_registered_address_id,
+                  registered_addresses: @registered_address_street&.registered_addresses,
+                  invalid_field_class: invalid_field_class %>
+              <% end %>
+            </div>
+          <% end %>
+
+          <div id="no-registered-address" style="display:<%= resource.show_no_registered_address_field? ? "block" : "none" %>">
+            <div class="row">
+              <div class="small-12 medium-8 column">
+                <%= f.text_field :city_name,
+                  placeholder: t("custom.devise_views.users.registrations.new.city_name_label") %>
+              </div>
+              <div class="small-12 medium-4 column">
+                <%= f.text_field :plz,
+                  placeholder: t("custom.devise_views.users.registrations.new.plz_label") %>
+              </div>
+            </div>
+            <%= f.text_field :street_name,
+              placeholder: t("custom.devise_views.users.registrations.new.street_name_label") %>
+            <div class="row">
+              <div class="small-12 medium-6 column">
+                <%= f.text_field :street_number,
+                  placeholder: t("custom.devise_views.users.registrations.new.street_number_label") %>
+              </div>
+              <div class="small-12 medium-6 column">
+                <%= f.text_field :street_number_extension,
+                  placeholder: t("custom.devise_views.users.registrations.new.street_number_extension_label") %>
+              </div>
+            </div>
           </div>
 
-          <div id="registered-address-field">
-            <% if @registered_address_city.present? && @registered_address_street.present? %>
-              <% invalid_field_class = resource.form_registered_address_id.blank? && action_name == "create" %>
-              <%= render "custom/users/registrations/partials/address_selector",
-                selected_value: resource.form_registered_address_id,
-                registered_addresses: @registered_address_street&.registered_addresses,
-                invalid_field_class: invalid_field_class %>
-            <% end %>
+          <div class="user-date-of-birth sign-up">
+            <%= f.date_select :date_of_birth,
+                              prompt: true,
+                              start_year: 1900, end_year: minimum_required_age.years.ago.year %>
+          </div>
+        <% end %>
+
+        <% if resource.document_required? %>
+          <%= f.select :document_type, user_document_types, prompt: "" %>
+          <%= f.text_field :document_last_digits, placeholder: t("custom.devise_views.users.registrations.new.document_last_digits_label") %>
+
+          <div>
+            <label><%= t('custom.users.document_help') %></label>
+
+            <div class='row margin-bottom'>
+              <div class='column small-12 medium-6'>
+                <label><%= t('custom.users.card_label') %></label>
+                <p><%= t('custom.users.card_help') %></p>
+                <%= image_tag 'card.jpg' %>
+              </div>
+
+              <div class='column small-12 medium-6'>
+                <label><%= t('custom.users.pass_label') %></label>
+                <p><%= t('custom.users.pass_help') %></p>
+                <%= image_tag 'pass_new.png' %>
+              </div>
+            </div>
           </div>
         <% end %>
 
-        <div id="no-registered-address" style="display:<%= resource.show_no_registered_address_field? ? "block" : "none" %>">
-          <div class="row">
-            <div class="small-12 medium-8 column">
-              <%= f.text_field :city_name,
-                placeholder: t("custom.devise_views.users.registrations.new.city_name_label") %>
+        <% if IndividualGroup.soft.visible.any? %>
+          <% IndividualGroup.soft.visible.each do |individual_group| %>
+            <div class="options-group">
+              <label><%= individual_group.name %></label>
+              <%= f.collection_check_boxes :individual_group_value_ids, individual_group.individual_group_values, :id, :name do |b| %>
+                <%= b.label(class: "checkbox-label checkbox-label--inline") { b.check_box + b.text } %>
+              <% end %>
             </div>
-            <div class="small-12 medium-4 column">
-              <%= f.text_field :plz,
-                placeholder: t("custom.devise_views.users.registrations.new.plz_label") %>
-            </div>
-          </div>
-          <%= f.text_field :street_name,
-            placeholder: t("custom.devise_views.users.registrations.new.street_name_label") %>
-          <div class="row">
-            <div class="small-12 medium-6 column">
-              <%= f.text_field :street_number,
-                placeholder: t("custom.devise_views.users.registrations.new.street_number_label") %>
-            </div>
-            <div class="small-12 medium-6 column">
-              <%= f.text_field :street_number_extension,
-                placeholder: t("custom.devise_views.users.registrations.new.street_number_extension_label") %>
-            </div>
-          </div>
-        </div>
-
-        <div class="user-date-of-birth sign-up">
-          <%= f.date_select :date_of_birth,
-                            prompt: true,
-                            start_year: 1900, end_year: minimum_required_age.years.ago.year %>
-        </div>
-      <% end %>
-
-      <% if resource.document_required? %>
-				<%= f.select :document_type, user_document_types, prompt: "" %>
-				<%= f.text_field :document_last_digits, placeholder: t("custom.devise_views.users.registrations.new.document_last_digits_label") %>
-
-        <div>
-          <label><%= t('custom.users.document_help') %></label>
-
-          <div class='row margin-bottom'>
-            <div class='column small-12 medium-6'>
-              <label><%= t('custom.users.card_label') %></label>
-              <p><%= t('custom.users.card_help') %></p>
-              <%= image_tag 'card.jpg' %>
-            </div>
-
-            <div class='column small-12 medium-6'>
-              <label><%= t('custom.users.pass_label') %></label>
-              <p><%= t('custom.users.pass_help') %></p>
-              <%= image_tag 'pass_new.png' %>
-            </div>
-          </div>
-        </div>
-      <% end %>
-
-      <% if IndividualGroup.soft.visible.any? %>
-        <% IndividualGroup.soft.visible.each do |individual_group| %>
-          <div class="options-group">
-            <label><%= individual_group.name %></label>
-            <%= f.collection_check_boxes :individual_group_value_ids, individual_group.individual_group_values, :id, :name do |b| %>
-              <%= b.label(class: "checkbox-label checkbox-label--inline") { b.check_box + b.text } %>
-            <% end %>
-          </div>
+          <% end %>
         <% end %>
-      <% end %>
 
-      <%= f.password_field :password, autocomplete: "off",
-                           placeholder: t("devise_views.users.registrations.new.password_label") %>
+        <%= f.password_field :password, autocomplete: "off",
+                             placeholder: t("devise_views.users.registrations.new.password_label") %>
 
-      <%= f.password_field :password_confirmation, autocomplete: "off",
-                           label: t("devise_views.users.registrations.new.password_confirmation_label"),
-                           placeholder: t("devise_views.users.registrations.new.password_confirmation_label") %>
+        <%= f.password_field :password_confirmation, autocomplete: "off",
+                             label: t("devise_views.users.registrations.new.password_confirmation_label"),
+                             placeholder: t("devise_views.users.registrations.new.password_confirmation_label") %>
 
-      <% if resource.use_redeemable_code %>
-        <%= f.text_field :redeemable_code, placeholder: t("devise_views.users.registrations.new.redeemable_code") %>
-      <% end %>
+        <% if resource.use_redeemable_code %>
+          <%= f.text_field :redeemable_code, placeholder: t("devise_views.users.registrations.new.redeemable_code") %>
+        <% end %>
 
-      <%= f.check_box :terms_data_storage,
-        title: t("custom.terms.data_storage.title"),
-        label: t("custom.terms.data_storage.label"),
-        class: "checkbox-label--aligned" %>
+        <%= f.check_box :terms_data_storage,
+          title: t("custom.terms.data_storage.title"),
+          label: t("custom.terms.data_storage.label"),
+          class: "checkbox-label--aligned" %>
 
-      <%= f.check_box :terms_data_protection,
-        title: t("custom.terms.data_protection.title"),
-        label: t("custom.terms.data_protection.label",
-                 privacy_link: link_to(t("custom.terms.privacy_link.text"), "/privacy",
+        <%= f.check_box :terms_data_protection,
+          title: t("custom.terms.data_protection.title"),
+          label: t("custom.terms.data_protection.label",
+                   privacy_link: link_to(t("custom.terms.privacy_link.text"), "/privacy",
+                                         title: t("shared.target_blank"), target: "_blank")),
+          class: "checkbox-label--aligned" %>
+
+        <%= f.check_box :terms_general,
+          title: t("custom.terms.general.title"),
+          label: t("custom.terms.general.label",
+                   terms_link: link_to(t("custom.terms.terms_link.text"), "/conditions",
                                        title: t("shared.target_blank"), target: "_blank")),
-        class: "checkbox-label--aligned" %>
+          class: "checkbox-label--aligned" %>
 
-      <%= f.check_box :terms_general,
-        title: t("custom.terms.general.title"),
-        label: t("custom.terms.general.label",
-                 terms_link: link_to(t("custom.terms.terms_link.text"), "/conditions",
-                                     title: t("shared.target_blank"), target: "_blank")),
-        class: "checkbox-label--aligned" %>
+        <p><%= t("custom.terms.revoke_consent.text") %></p>
 
-      <p><%= t("custom.terms.revoke_consent.text") %></p>
-
-      <div class="small-12 medium-6 small-centered margin-top">
-        <%= f.submit t("devise_views.users.registrations.new.submit"), class: "button expanded" %>
+        <div class="small-12 medium-6 small-centered margin-top">
+          <%= f.submit t("devise_views.users.registrations.new.submit"), class: "button expanded" %>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<% if Setting.new_design_enabled? %>
+  <%= render Auth::AuthPageTemplateComponent.new do |c| %>
+    <% c.form do %>
+      <h2><%= t("devise_views.users.registrations.new.title") %></h2>
+      <%= form_html %>
+    <% end %>
+  <% end %>
+<% else %>
+  <h2><%= t("devise_views.users.registrations.new.title") %></h2>
+
+  <%= form_html %>
+<% end %>
