@@ -128,10 +128,13 @@ class PagesController < ApplicationController
   end
 
   def set_voting_phase_footer_tab_variables
-    @valid_filters = %w[all current]
-    @current_filter = @valid_filters.include?(params[:filter]) ? params[:filter] : @valid_filters.first
+    # @valid_filters = %w[all current]
+    # @current_filter = @valid_filters.include?(params[:filter]) ? params[:filter] : @valid_filters.first
 
-    @resources = @projekt_phase.polls.for_public_render.send(@current_filter)
+    @valid_orders = nil
+
+    # @resources = @projekt_phase.polls.for_public_render.send(@current_filter)
+    @resources = @projekt_phase.polls.for_public_render.all
     @polls = Kaminari.paginate_array(@resources.sort_for_list).page(params[:page])
   end
 
