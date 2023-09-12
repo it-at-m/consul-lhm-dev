@@ -133,3 +133,6 @@ en:
         kind: Type
         email_for_confirmation: Send confirmation email
         drop_down_options: Dropdown options
+      formular_answer_image:
+        title: Title
+        attachment: Attachment

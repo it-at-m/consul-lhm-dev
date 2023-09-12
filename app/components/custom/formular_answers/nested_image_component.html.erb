@@ -1,0 +1,33 @@
+<fieldset class="nested-image">
+  <span class="help-text"><%= note %></span>
+
+  <div id="<%= @block_id %>" class="js-nested-image">
+    <%= f.fields_for :formular_answer_images do |image_builder| %>
+      <% next unless image_builder.object.formular_field_key == formular_field.key %>
+      <%= render FormularAnswers::ImageFieldsComponent.new(
+        f: image_builder,
+        formular_field: formular_field,
+        formular_answer: formular_answer
+      ) %>
+      <% break %>
+    <% end %>
+  </div>
+
+  <%= link_to_add_association t("formular_answer_images.form.add_new_image"), f, :formular_answer_images,
+                              force_non_association_create: true,
+                              partial: "custom/formular_answers/image_fields",
+                              id: "new_image_link",
+                              role: "button",
+                              class: "button upload-image js-new-image-link
+                                      #{"hide" if formular_answer.formular_answer_images.find_by(formular_field_key: formular_field.key)}",
+                              render_options: {
+                                locals: {
+                                  formular_field: formular_field,
+                                  formular_answer: formular_answer
+                                }
+                              },
+                              data: {
+                                association_insertion_node: "##{@block_id}",
+                                association_insertion_method: "append"
+                              } %>
+</fieldset>

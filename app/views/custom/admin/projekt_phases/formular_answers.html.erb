@@ -32,6 +32,9 @@
             <% @formular_fields.each do |ff| %>
               <th><%= ff.name %></th>
             <% end %>
+            <% if @image_flag %>
+              <th>Bilder</th>
+            <% end %>
           </tr>
         </thead>
         <tbody>
@@ -42,6 +45,13 @@
               </td>
               <% @formular_fields.each do |ff| %>
                 <td><%= fa.answers[ff.key] %></td>
+              <% end %>
+              <% if @image_flag %>
+                <td>
+                  <%= fa.formular_answer_images.map do |image| %>
+                    <% link_to image.formular_field_key, url_for(image.variant(:large)), target: "_blank" %>
+                  <% end.join(", ").html_safe %>
+                </td>
               <% end %>
             </tr>
           <% end %>

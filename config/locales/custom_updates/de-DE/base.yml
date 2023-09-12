@@ -195,3 +195,9 @@ de:
       new_date_with_year: "%d. %B %Y"
   tag_names:
     general: General
+  formular_answer_images:
+    form:
+      add_new_image: Bild hinzufügen
+    errors:
+      messages:
+        in_between: muss zwischen %{min} und %{max} sein

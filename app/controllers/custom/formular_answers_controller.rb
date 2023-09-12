@@ -1,4 +1,6 @@
 class FormularAnswersController < ApplicationController
+  include ImageAttributes
+
   skip_authorization_check
   respond_to :js
 
@@ -16,9 +18,10 @@ class FormularAnswersController < ApplicationController
       email = @formular_answer.email_address
       Mailer.formular_answer_confirmation(email).deliver_later if email.present?
       @success_notification = t("custom.formular_answer.notifications.success")
+      render :create_success
+    else
+      render :create
     end
-
-    render :create
   end
 
   def update
@@ -33,16 +36,24 @@ class FormularAnswersController < ApplicationController
 
     if @formular_answer.answer_errors.none? && @formular_answer.save
       @success_notification = t("custom.formular_answer.notifications.success")
+      render :update_success
+    else
+      remder :update
     end
   end
 
   private
 
     def formular_answer_params
-      params.require(:formular_answer).permit(:formular_id, answers: {})
+      params.require(:formular_answer).permit(
+        :formular_id, answers: {},
+        formular_answer_images_attributes: image_attributes.push(:formular_field_key)
+      )
     end
 
     def validate_answer(formular_answer)
+      formular_answer.valid?
+
       formular_fields = formular_answer.persisted? ? formular_answer.formular_fields.follow_up : formular_answer.formular_fields.primary
 
       formular_fields.each do |formular_field|
@@ -61,7 +72,11 @@ class FormularAnswersController < ApplicationController
     end
 
     def validate_for_presence(formular_answer, formular_field)
-      return unless formular_answer.answers[formular_field.key].blank?
+      if formular_field.kind == "image"
+        return if formular_answer.formular_answer_images.find { |im| im.formular_field_key == formular_field.key }.present?
+      else
+        return if formular_answer.answers[formular_field.key].present?
+      end
 
       error_message = t("custom.formular_answer.errors.blank")
       formular_answer.answer_errors[formular_field.key] = error_message

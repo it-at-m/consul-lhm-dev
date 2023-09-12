@@ -16,6 +16,8 @@
     <% elsif ff.kind == "dropdown" %>
       <%= select_tag "formular_answer[answers][#{ff.key}]", options_for_select((ff.drop_down_options&.split(",") || []).map(&:strip), formular_answer.answers[ff.key]),
         include_blank: true, class: "show-arrow #{"is-invalid-input" if invalid_field_class}" %>
+    <% elsif ff.kind == "image" %>
+      <%= render FormularAnswers::NestedImageComponent.new(f: f, formular_field: ff, block_id: "nested-image-#{ff.id}") %>
     <% end %>
 
     <% if formular_answer.answer_errors[ff.key] %>
