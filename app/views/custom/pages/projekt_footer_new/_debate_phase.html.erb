@@ -22,14 +22,16 @@
 
   <div id="debates-sidebar" class="sidebar">
     <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
-    <%= render Sidebar::Filters::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name) %>
-    <%= render Sidebar::CategoriesCardComponent.new(categories: @categories) %>
-    <%= render Sidebar::SdgsCardComponent.new(sdgs: @sdgs, sdg_targets: @sdg_targets) %>
+    <%# <%= render Sidebar::Filters::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name) %>
+    <%# <%= render Sidebar::CategoriesCardComponent.new(categories: @categories) %>
+    <%# <%= render Sidebar::SdgsCardComponent.new(sdgs: @sdgs, sdg_targets: @sdg_targets) %>
 
-    <%# <%= render Shared::SidebarCardComponent.new(title: t("custom.sidebar_filter.my_posts.title"), icon_name: "check-circle") do |c| %>
-      <%#   <% if extended_feature?('debates.enable_my_posts_filter') %>
-        <%#     <%= render "shared/sidebar_filter/my_posts" %>
-        <%#   <% end %>
-      <%# <% end %>
+    <% if current_user.present? && extended_feature?('debates.enable_my_posts_filter') %>
+      <%= render Sidebar::Filters::MyPostsCardComponent.new %>
+    <% end %>
+
+    <%= render Sidebar::ExportListComponent.new(
+      path: admin_proposals_path(**request.query_parameters, format: :csv),
+    ) %>
 </div>
 </div>

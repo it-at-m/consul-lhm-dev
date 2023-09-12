@@ -2,6 +2,7 @@ require_dependency Rails.root.join("app", "models", "poll").to_s
 
 class Poll < ApplicationRecord
   include Taggable
+  include ResourceBelongsToProjekt
 
   belongs_to :old_projekt, class_name: "Projekt", foreign_key: "projekt_id" # TODO: remove column after data migration con1538
 

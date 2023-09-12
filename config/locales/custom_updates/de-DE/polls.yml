@@ -3,6 +3,8 @@ de:
     polls:
       index:
         projekts: Projekte
+        search_form:
+          placeholder: "Umfragen durchsuchen"
       poll:
         date:
           from: von
