@@ -1,5 +1,8 @@
 de:
   custom:
+    common:
+      information: Information
+      share: Teilen
     account:
       settings:
         email_digest: Erhalten Sie eine Zusammenfassung der Benachrichtigungen zu Vorschlägen

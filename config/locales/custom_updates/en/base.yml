@@ -1,5 +1,8 @@
 en:
   custom:
+    common:
+      information: Information
+      share: Share
     account:
       settings:
         email_digest: Receive a summary of proposal notifications

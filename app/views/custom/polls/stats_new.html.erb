@@ -46,6 +46,11 @@
 
       </div>
     <aside class="sidebar">
+      <%= render Shared::SidebarCardComponent.new(title: t("custom.common.information"), icon_name: "info-circle") do |c| %>
+        <div class="margin-bottom-half">
+           <%= format_date_range(@poll.starts_at, @poll.ends_at, separator: t("custom.polls.poll.date.to")) %>
+        </div>
+      <% end %>
     </aside>
     </div>
   </div>
