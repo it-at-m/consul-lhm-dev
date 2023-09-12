@@ -24,6 +24,10 @@
   }
 }
 
+.sidebar-card--description {
+  margin-bottom: 10px;
+}
+
 .sidebar-card--section + .sidebar-card--section {
   border-top: 1px solid $border-color;
 }

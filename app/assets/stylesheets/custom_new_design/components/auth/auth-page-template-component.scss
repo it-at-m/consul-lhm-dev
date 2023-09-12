@@ -1,11 +1,4 @@
 .custom-new-design {
-  .auth-page-button, .button, button, input[type="submit"] {
-    max-width: 300px;
-    height: 50px;
-    font-size: 20px;
-    margin: auto !important;
-  }
-
   .auth-page-template--oauth {
     .row {
       display: flex;
@@ -34,6 +27,13 @@
 
     .margin-bottom {
       margin-bottom: 0;
+    }
+
+    .auth-page-button, .button, button, input[type="submit"] {
+      max-width: 300px;
+      height: 50px;
+      font-size: 20px;
+      margin: auto !important;
     }
   }
 
