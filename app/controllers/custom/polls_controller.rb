@@ -44,6 +44,9 @@ class PollsController < ApplicationController
         .where(sdg_relations: { relatable_type: "Projekt", relatable_id: related_projekt_ids })
     end
 
+    @resources = @resources.by_projekt_id(@scoped_projekt_ids)
+    @all_resources = @resources
+
     unless params[:search].present?
       take_by_tag_names(related_projekts)
       take_by_sdgs(related_projekts)

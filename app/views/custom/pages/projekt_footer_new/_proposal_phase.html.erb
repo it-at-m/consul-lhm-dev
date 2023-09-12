@@ -20,10 +20,10 @@
   <aside id="proposals-sidebar" class="sidebar">
     <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
 
-    <%= render Sidebar::Filters::GeozoneAffiliationsCardComponent.new(
-      geozones: @geozones,
-      resource_name: @resource_name
-    ) %>
+    <%# <%= render Sidebar::Filters::GeozoneAffiliationsCardComponent.new(
+    <%#   geozones: @geozones,
+    <%#   resource_name: @resource_name
+    <%# ) %>
 
     <%# <%= render Sidebar::Filters::GeozoneRestrictionsCardComponent.new(
     <%#   geozones: @geozones,
@@ -35,6 +35,8 @@
       <%= render Sidebar::Filters::MyPostsCardComponent.new %>
     <% end %>
 
-    <%= render Sidebar::ExportListComponent.new %>
+    <%= render Sidebar::ExportListComponent.new(
+      path: admin_proposals_path(**request.query_parameters, format: :csv),
+    ) %>
   </aside>
 </div>
