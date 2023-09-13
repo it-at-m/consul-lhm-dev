@@ -271,6 +271,12 @@ class Projekt < ApplicationRecord
     end
   end
 
+  def disabled?
+  end
+
+  def disabled_but_have_child_enabled?(controller_name, current_user)
+  end
+
   def top_level?
     order_number.present? && parent.blank?
   end

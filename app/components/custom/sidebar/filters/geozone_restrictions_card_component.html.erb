@@ -1,5 +1,5 @@
 <% if @geozones.present? && helpers.show_affiliation_filter_in_sidebar? %>
   <%= render Shared::SidebarCardComponent.new(title: t("custom.geozones.sidebar_filter.affiliations.title"), icon_name: "info-circle") do |c| %>
-    <%= render "shared/sidebar_filter/geozone_affiliations", resource_name: @resource_name, geozones: @geozones %>
+      <%= render "shared/sidebar_filter/geozone_restrictions" %>
   <% end %>
 <% end %>

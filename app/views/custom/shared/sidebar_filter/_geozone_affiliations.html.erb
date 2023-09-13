@@ -40,7 +40,7 @@
 
     <ul id='affiliated_geozones' class="geozones-list">
       <% @geozones.each do |geozone| %>
-        <%= render partial: "shared/sidebar_filter/geozones_sidebar_option", locals: { geozone: geozone, filter_block: 'affiliation', selected_geozones: @affiliated_geozones } %>
+        <%= render partial: "shared/sidebar_filter/geozones_sidebar_option", locals: { geozone: geozone, filter_block: 'affiliation', selected_geozones: selected_affiliated_geozones } %>
       <% end  %>
 
       <% if @affiliated_geozones.any? && @affiliated_geozones.size != @geozones.size %>
