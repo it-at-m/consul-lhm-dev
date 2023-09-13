@@ -1,5 +1,8 @@
 en:
   custom:
+    common:
+      information: Information
+      share: Share
     account:
       settings:
         email_digest: Receive a summary of proposal notifications
@@ -177,3 +180,9 @@ en:
         show_less: "Show less"
   tag_names:
     general: General
+  formular_answer_images:
+    form:
+      add_new_image: Add image
+    errors:
+      messages:
+        in_between: must be betwee %{min} and %{max}

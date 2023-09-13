@@ -1,5 +1,8 @@
 de:
   custom:
+    common:
+      information: Information
+      share: Teilen
     account:
       settings:
         email_digest: Erhalten Sie eine Zusammenfassung der Benachrichtigungen zu Vorschlägen
@@ -195,3 +198,9 @@ de:
       new_date_with_year: "%d. %B %Y"
   tag_names:
     general: General
+  formular_answer_images:
+    form:
+      add_new_image: Bild hinzufügen
+    errors:
+      messages:
+        in_between: muss zwischen %{min} und %{max} sein

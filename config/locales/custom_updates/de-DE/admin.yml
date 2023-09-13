@@ -514,6 +514,7 @@ de:
             email: Email
             date: Datum
             dropdown: Dropdown
+            image: Bild
           update_field_button: Formularfeld aktualisieren
           add_field_button: Neues Formularfeld hinzufügen
         formular_answers:

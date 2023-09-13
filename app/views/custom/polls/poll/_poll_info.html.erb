@@ -3,7 +3,8 @@
 
 <div class='resource-info'>
   <div class='resource-info-date'>
-    <%= poll_remaining_activity_days(@poll) %>
+    <%#= poll_remaining_activity_days(@poll) %>
+    <%= helpers.format_date_range(@poll.starts_at, @poll.ends_at, separator: t("custom.polls.poll.date.to")) %>
   </div>
 
   <div class='resource-info-comments'>

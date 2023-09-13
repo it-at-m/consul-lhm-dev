@@ -203,3 +203,6 @@ de:
         subject: Betreff
         body: Text
         show_follow_up_button: Link zu Follow-up Formular integrieren
+      formular_answer_image:
+        title: Titel
+        attachment: Anhang

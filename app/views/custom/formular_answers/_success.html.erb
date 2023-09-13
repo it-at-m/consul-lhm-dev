@@ -1,0 +1,26 @@
+<% formular_fields.each do |ff| %>
+  <div class="margin-bottom">
+    <strong style="display:block;"><%= ff.name %></strong>
+
+    <% if ff.kind.in? ["string", "email"] %>
+      <%= formular_answer.answers[ff.key].presence || "-" %>
+    <% elsif ff.kind == "date" %>
+      <%= formular_answer.answers[ff.key].presence || "-" %>
+    <% elsif ff.kind == "dropdown" %>
+      <%= formular_answer.answers[ff.key].presence || "-" %>
+    <% elsif ff.kind == "image" %>
+      <% image = formular_answer.formular_answer_images.find_by(formular_field_key: ff.key) %>
+      <% if image.present? %>
+        <%= render_image(image, :large, true) %>
+      <% else %>
+        -
+      <% end %>
+    <% end %>
+
+  </div>
+<% end %>
+<% if @success_notification %>
+  <%= content_tag :div, class: "callout success" do %>
+    <%= @success_notification %>
+  <% end %>
+<% end %>

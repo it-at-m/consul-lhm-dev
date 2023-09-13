@@ -51,6 +51,22 @@
         <% end %>
       </div>
     <aside class="sidebar">
+      <%= render Shared::SidebarCardComponent.new(title: t("custom.common.information"), icon_name: "info-circle") do |c| %>
+        <div class="margin-bottom-half">
+           <%= format_date_range(@poll.starts_at, @poll.ends_at, separator: t("custom.polls.poll.date.to")) %>
+        </div>
+      <% end %>
+      <%= render Shared::SidebarCardComponent.new(title: t("custom.common.share"), icon_name: "share-alt") do |c| %>
+        <div class="margin-bottom-half">
+          <%= render "shared/social_share",
+            share_title: t("shared.share"),
+            title: @poll.name,
+            url: poll_url(@poll),
+            description: @poll.name,
+            mobile: @poll.name
+          %>
+        </div>
+      <% end %>
     </aside>
     </div>
   </div>
