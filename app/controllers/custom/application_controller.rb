@@ -52,9 +52,7 @@ class ApplicationController < ActionController::Base
     def set_default_social_media_images
       return if params[:controller] == "ckeditor/pictures"
 
-      SiteCustomization::Image.all_images
-
-      social_media_icon = SiteCustomization::Image.all.find_by(name: "social_media_icon").image
+      social_media_icon = SiteCustomization::Image.find_by(name: "social_media_icon").image
 
       if social_media_icon.attached?
         @social_media_icon_path = polymorphic_path(social_media_icon, disposition: "attachment").split("?")[0].delete_prefix("/")
@@ -62,7 +60,7 @@ class ApplicationController < ActionController::Base
         @social_media_icon_path = nil
       end
 
-      twitter_icon = SiteCustomization::Image.all.find_by(name: "social_media_icon_twitter").image
+      twitter_icon = SiteCustomization::Image.find_by(name: "social_media_icon_twitter").image
 
       if twitter_icon.attached?
         @social_media_icon_twitter_url = polymorphic_path(twitter_icon.attachment, disposition: "attachment")

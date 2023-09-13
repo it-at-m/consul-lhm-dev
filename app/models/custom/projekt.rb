@@ -251,18 +251,18 @@ class Projekt < ApplicationRecord
       if proposal_phases.any?(&:selectable_by_admins_only?) && !user.can_manage_projekt?(self)
         false
       else
-        proposal_phases.any? { |phase| phase.selectable_by?(user) }
+        proposal_phases.any_selectable?(user)
       end
 
     elsif controller_name == "debates"
       if debate_phases.any?(&:selectable_by_admins_only?) && !user.can_manage_projekt?(self)
         false
       else
-        debate_phases.any? { |phase| phase.selectable_by?(user) }
+        debate_phases.any_selectable?(user)
       end
 
     elsif controller_name == "polls"
-      voting_phases.any? { |phase| phase.selectable_by?(user) }
+      voting_phases.any_selectable?(user)
 
     elsif controller_name == "processes"
       legislation_phases

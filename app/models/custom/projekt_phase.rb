@@ -97,6 +97,10 @@ class ProjektPhase < ApplicationRecord
     mname
   end
 
+  def self.any_selectable?(user)
+    any? { |phase| phase.selectable_by?(user) }
+  end
+
   def selectable_by?(user)
     permission_problem(user).blank?
   end
