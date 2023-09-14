@@ -39,13 +39,15 @@
     <%= links_section %>
   </div>
 
-  <div class="resource-page-banner--image">
-    <%= render(
-      Shared::ResourceImageComponent.new(
-        image_url: resource.image&.variant(:large),
-        image_placeholder_icon_class: "fa-comments",
-        resource_name: resource.class.name.downcase
-      )
-    ) %>
-  </div>
+  <% if resource.image.present? %>
+    <div class="resource-page-banner--image">
+      <%= render(
+        Shared::ResourceImageComponent.new(
+          image_url: resource.image&.variant(:large),
+          image_placeholder_icon_class: "fa-comments",
+          resource_name: resource.class.name.downcase
+        )
+      ) %>
+    </div>
+  <% end %>
 </div>
