@@ -1,0 +1,17 @@
+<%= render Shared::SidebarCardComponent.new(title: t("polls.index.filters.status"), icon_name: "check-circle") do |c| %>
+  <div id="poll-status-filter" class="sidebar-radio-filter">
+    <ul>
+      <% filters.each do |filter| %>
+        <li <%= "class=label-selected" if filter == current_filter %>>
+          <%= label_tag "polls_filter_#{filter}", class: "label_class" do %>
+            <%= radio_button_tag :polls_filter, filter, filter == current_filter %>
+            <%= link_to current_path_with_query_params(filter: filter) do %>
+              <span class="checkmark"></span>
+              <%= t("polls.index.filters.#{filter}") %>
+            <% end %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

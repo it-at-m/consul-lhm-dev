@@ -25,6 +25,7 @@
       <% end %>
 
       <%= render "shared/loader_spinner" %>
+
       <%= render(
         Shared::ResourcesListComponent.new(
           resources: @polls,
@@ -46,8 +47,6 @@
         <div class="margin-bottom-half">
           <%= Poll.count %> <%= t("custom.common.polls") %>
         </div>
-
-        <%= render Shared::NewButtonComponent.new(resources_name: "polls", query_params: params) %>
       <% end %>
 
       <%= render Sidebar::ProjektsFilterComponent.new(
@@ -59,17 +58,15 @@
         current_projekt: @current_projekt
       ) %>
 
-    <%= render Sidebar::Filters::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name) %>
-    <%= render Sidebar::Filters::GeozoneRestrictionsCardComponent.new(
-      geozones: @geozones,
-      restricted_geozones: @restricted_geozones,
-      selected_geozone_restriction: @selected_geozone_restriction
-    ) %>
-    <%= render Sidebar::CategoriesCardComponent.new(categories: @categories, taggable: "poll") %>
-    <%= render Sidebar::SdgsCardComponent.new(sdgs: @sdgs, sdg_targets: @sdg_targets) %>
-    <% if extended_feature?('polls.enable_my_posts_filter') %>
-      <%= render Sidebar::Filters::MyPostsCardComponent.new %>
-    <% end %>
+      <%= render Sidebar::Filters::PollsStatusCardComponent.new %>
+
+      <%= render Sidebar::Filters::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name) %>
+
+      <%= render Sidebar::Filters::GeozoneRestrictionsCardComponent.new(
+        geozones: @geozones,
+        restricted_geozones: @restricted_geozones,
+        selected_geozone_restriction: @selected_geozone_restriction
+      ) %>
     </div>
   </div>
 </main>

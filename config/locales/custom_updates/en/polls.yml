@@ -36,5 +36,7 @@ en:
   polls:
     index:
       filters:
-        all: All Polls
-        current: Only active Polls
+        title: Status
+        all: All polls
+        currrent: Active polls
+        expired: Expired polls

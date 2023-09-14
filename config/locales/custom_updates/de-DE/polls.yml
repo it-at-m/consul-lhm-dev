@@ -40,5 +40,7 @@ de:
   polls:
     index:
       filters:
-        all: Alle
-        currrent: Nur aktive
+        title: Status
+        all: Alle Abstimmungen
+        currrent: Aktiv Abstimmungen
+        expired: Abgeschlossen Abstimmungen
