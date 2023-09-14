@@ -9,12 +9,13 @@
       <% most_voted_answer_votes = @question.most_voted_answer_votes %>
       <h3 id="<%= @question.title.parameterize %>">
         <%= @question.title %>
-        <% if VotationType.allowing_multiple_answers.include?(@question.votation_type.vote_type) %>
-          <small>
-            (<%= t("poll_questions.show.question.multiple") %>)
-          </small>
-        <% end %>
       </h3>
+      <% if VotationType.allowing_multiple_answers.include?(@question.votation_type.vote_type) %>
+        <small>
+          (<%= t("poll_questions.show.question.multiple") %>)
+        </small>
+      <% end %>
+      <p><%= AdminWYSIWYGSanitizer.new.sanitize(@question.description) %></p>
       <table>
         <tbody>
           <tr>
@@ -74,13 +75,13 @@
         <% most_voted_answer_votes = question.most_voted_answer_votes %>
         <h3 id="<%= question.title.parameterize %>">
           <%= question.title %>
-          <% if VotationType.allowing_multiple_answers.include?(question.votation_type.vote_type) %>
-            <small>
-              (<%= t("poll_questions.show.question.multiple") %>)
-            </small>
-          <% end %>
-          <p><%= question.description %></p>
         </h3>
+        <% if VotationType.allowing_multiple_answers.include?(question.votation_type.vote_type) %>
+          <small>
+            (<%= t("poll_questions.show.question.multiple") %>)
+          </small>
+        <% end %>
+        <p><%= AdminWYSIWYGSanitizer.new.sanitize(question.description) %></p>
         <table id="question_<%= question.id %>_results_table" class='results-table'>
           <tbody>
             <%- question.question_answers.each do |answer| %>

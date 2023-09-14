@@ -10,6 +10,7 @@ App.Legislation.initialize();
 App.LivesteamLivequestion.initialize();
 
 if ($(".legislation-annotatable").length) {
+  App.LegislationAnnotatable.destroy();
   App.LegislationAnnotatable.initialize();
 }
 
