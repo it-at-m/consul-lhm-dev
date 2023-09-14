@@ -51,6 +51,11 @@ namespace :one_time_tasks do
   desc "Update data for new desgin"
   task new_design_data_update: :environment do
     Projekt.find_each do |projekt|
+      if projekt.parent&.parent_id.present?
+        projekt.top_level_projekt_id = projekt.parent.parent_id
+      end
+
+      projekt.save!
     end
   end
 end

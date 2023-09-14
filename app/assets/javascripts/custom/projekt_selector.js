@@ -25,6 +25,7 @@
 
       // show next selector
       if ($selectedProjekt.data("projektSelectableChildren")) {
+        console.log("projektSelectableChildren")
         // $nextSpacer.css('visibility', '-visible')
         $nextSpacer.addClass("-visible");
         // $nextProejektSelector.css('visibility', '-visible')

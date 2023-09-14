@@ -80,6 +80,8 @@ class Projekt < ApplicationRecord
   after_save do
     Projekt.all.find_each { |projekt| projekt.update_column("level", projekt.calculate_level) }
   end
+
+  before_save :assign_top_level_projekt_from_parent
   after_destroy :ensure_projekt_order_integrity
 
   # validates :color, format: { with: /\A#[\da-f]{6}\z/i } - still color?
@@ -248,7 +250,8 @@ class Projekt < ApplicationRecord
   def selectable_in_selector?(controller_name, user)
     return false unless activated?
 
-    can_assign_resources?(controller_name, user) || can_assign_resources_to_child_projekt?(controller_name, user)
+    # can_assign_resources?(controller_name, user) || can_assign_resources_to_child_projekt?(controller_name, user)
+    can_assign_resources?(controller_name, user) #|| can_assign_resources_to_child_projekt?(controller_name, user)
   end
 
   def can_assign_resources?(controller_name, user)
@@ -606,5 +609,13 @@ class Projekt < ApplicationRecord
 
     def touch_updated_at(geozone)
       touch if persisted?
+    end
+
+    def assign_top_level_projekt_from_parent
+      return unless parent_id_changed?
+
+      if parent&.parent_id.present?
+        self.top_level_projekt_id = parent.parent_id
+      end
     end
 end
