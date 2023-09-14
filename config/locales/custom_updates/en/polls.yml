@@ -3,8 +3,13 @@ en:
     polls:
       index:
         projekts: Projects
-        placeholder: Search...
-      count: Polls
+        search_form:
+          placeholder: Search...
+        count: Polls
+        welcome_default_text_html: Your city invites you to express your authoritative opinion on certain projects. On this page you will find all votes initiated by the city administration.
+          View the votes in their entirety or use the filter function to sort them - by topicality or by level of participation.<br><br>
+          You can also use the right sidebar to search for votes by project, area or keyword. Individual votes may be restricted to certain areas or age groups.
+        sidebar_information_default_text: Would you like to vote? Just choose the poll and click “Participate”
       poll:
         date:
           from: from
