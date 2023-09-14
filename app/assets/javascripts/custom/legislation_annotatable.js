@@ -214,6 +214,7 @@
         $("#comments-box").hide();
         App.LegislationAnnotatable.remove_highlight();
       });
+
       current_user_id = $("html").data("current-user-id");
       $(".legislation-annotatable").each(function() {
         var ann_id, base_url;

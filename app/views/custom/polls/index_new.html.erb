@@ -59,7 +59,7 @@
         current_projekt: @current_projekt
       ) %>
 
-    <%= render Sidebar::Filters::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name) %>
+    <%= render Sidebar::Filters::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name, selected_affiliated_geozones: @affiliated_geozones) %>
     <%= render Sidebar::Filters::GeozoneRestrictionsCardComponent.new(
       geozones: @geozones,
       restricted_geozones: @restricted_geozones,

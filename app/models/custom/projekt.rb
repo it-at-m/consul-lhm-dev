@@ -21,6 +21,7 @@ class Projekt < ApplicationRecord
   has_many :children, -> { order(order_number: :asc) }, class_name: "Projekt", foreign_key: "parent_id",
     inverse_of: :parent, dependent: :nullify
   belongs_to :parent, class_name: "Projekt", optional: true
+  belongs_to :top_level_projekt, class_name: "Projekt", optional: true
 
   has_one :page, class_name: "SiteCustomization::Page", dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
@@ -244,8 +245,13 @@ class Projekt < ApplicationRecord
     yield
   end
 
-  def selectable_in_selector?(controller_name, user)
+  def visible?(controller_name, user)
+    can_assign_resources?(controller_name, user) || can_assign_resources_to_any_child_projket?
+  end
+
+  def can_assign_resources?(controller_name, user)
     return false if user.nil?
+    return false unless active?
 
     if controller_name == "proposals"
       if proposal_phases.any?(&:selectable_by_admins_only?) && !user.can_manage_projekt?(self)
@@ -271,21 +277,18 @@ class Projekt < ApplicationRecord
     end
   end
 
-  def disabled?
+  def disabled_for?(controller_name, current_user)
+    return true unless current?
+
+    # !visible?(controller_name, current_user)
   end
 
   def disabled_but_have_child_enabled?(controller_name, current_user)
+    disabled_for?(controller_name, current_user)
   end
 
   def top_level?
     order_number.present? && parent.blank?
-  end
-
-  def activated?
-    projekt_settings.
-      find_by(projekt_settings: { key: "projekt_feature.main.activate" }).
-      value.
-      present?
   end
 
   def current?(timestamp = Time.zone.today)
@@ -298,6 +301,13 @@ class Projekt < ApplicationRecord
     activated? &&
       total_duration_end.present? &&
       total_duration_end < timestamp
+  end
+
+  def activated?
+    projekt_settings.
+      find_by(projekt_settings: { key: "projekt_feature.main.activate" }).
+      value.
+      present?
   end
 
   def activated_children

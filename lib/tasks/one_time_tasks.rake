@@ -47,4 +47,10 @@ namespace :one_time_tasks do
     # Migrate legislation processes
     Legislation::Process.all.each { |lp| lp.update(projekt_phase: lp.old_projekt.legislation_phases.first) if lp.old_projekt.present? }
   end
+
+  desc "Update data for new desgin"
+  task new_design_data_update: :environment do
+    Projekt.find_each do |projekt|
+    end
+  end
 end
