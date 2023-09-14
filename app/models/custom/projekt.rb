@@ -245,13 +245,15 @@ class Projekt < ApplicationRecord
     yield
   end
 
-  def visible?(controller_name, user)
-    can_assign_resources?(controller_name, user) || can_assign_resources_to_any_child_projket?
+  def selectable_in_selector?(controller_name, user)
+    return false unless activated?
+
+    can_assign_resources?(controller_name, user) || can_assign_resources_to_child_projekt?(controller_name, user)
   end
 
   def can_assign_resources?(controller_name, user)
     return false if user.nil?
-    return false unless active?
+    return false unless activated?
 
     if controller_name == "proposals"
       if proposal_phases.any?(&:selectable_by_admins_only?) && !user.can_manage_projekt?(self)
@@ -277,14 +279,10 @@ class Projekt < ApplicationRecord
     end
   end
 
-  def disabled_for?(controller_name, current_user)
-    return true unless current?
-
-    # !visible?(controller_name, current_user)
-  end
-
-  def disabled_but_have_child_enabled?(controller_name, current_user)
-    disabled_for?(controller_name, current_user)
+  def can_assign_resources_to_child_projekt?(controller_name, user)
+    all_children_projekts.any? do |child_projekt|
+      child_projekt.can_assign_resources?(controller_name, user)
+    end
   end
 
   def top_level?
