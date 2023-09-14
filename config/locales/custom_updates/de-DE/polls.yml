@@ -4,7 +4,8 @@ de:
       index:
         projekts: Projekte
         search_form:
-          placeholder: "Umfragen durchsuchen"
+          placeholder: "Suchen..."
+        count: Abstimmungen
       poll:
         date:
           from: von

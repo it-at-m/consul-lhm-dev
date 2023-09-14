@@ -44,8 +44,13 @@
         <div class="margin-bottom-half">
           <%= render_custom_block "projekt_overview_page_sidebar", default_content: t("custom.polls.index.sidebar_information_default_text") %>
         </div>
-        <div class="margin-bottom-half">
-          <%= Poll.count %> <%= t("custom.common.polls") %>
+
+          <span>
+            <%= t("custom.polls.index.count") %>
+          </span>
+          <span>
+            <%= @all_resources.count %>
+          </span>
         </div>
       <% end %>
 

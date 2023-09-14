@@ -3,6 +3,8 @@ en:
     polls:
       index:
         projekts: Projects
+        placeholder: Search...
+      count: Polls
       poll:
         date:
           from: from
