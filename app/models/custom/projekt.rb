@@ -20,6 +20,8 @@ class Projekt < ApplicationRecord
 
   has_many :children, -> { order(order_number: :asc) }, class_name: "Projekt", foreign_key: "parent_id",
     inverse_of: :parent, dependent: :nullify
+  has_many :third_level_children, -> { order(order_number: :asc) }, class_name: "Projekt", foreign_key: "top_level_projekt_id",
+    inverse_of: :top_level_projekt, dependent: :nullify
   belongs_to :parent, class_name: "Projekt", optional: true
   belongs_to :top_level_projekt, class_name: "Projekt", optional: true
 
@@ -186,12 +188,19 @@ class Projekt < ApplicationRecord
     joins("INNER JOIN projekt_settings vim ON projekts.id = vim.projekt_id")
       .where("vim.key": "projekt_feature.general.show_in_navigation", "vim.value": "active")
       .with_order_number
+      .includes(:individual_group_values)
       .select { |p| p.visible_for?(user) }
+  }
+
+  scope :show_in_sidebar_filter, ->(user = nil) {
+    joins("INNER JOIN projekt_settings show_in_sidebar_filter_settings ON projekts.id = show_in_sidebar_filter_settings.projekt_id")
+      .where("show_in_sidebar_filter_settings.key": "projekt_feature.general.show_in_sidebar_filter", "show_in_sidebar_filter_settings.value": "active")
   }
 
   scope :with_active_feature, ->(projekt_feature_key) {
     joins("INNER JOIN projekt_settings waf ON projekts.id = waf.projekt_id")
-      .where("waf.key": "projekt_feature.#{projekt_feature_key}", "waf.value": "active") }
+      .where("waf.key": "projekt_feature.#{projekt_feature_key}", "waf.value": "active")
+  }
 
   scope :by_my_posts, ->(my_posts_switch, current_user_id) {
     return unless my_posts_switch
@@ -210,6 +219,13 @@ class Projekt < ApplicationRecord
       .where(site_customization_pages: { status: "published" })
   }
 
+  scope :includes_children_projekts_with, ->(*sub_relations) {
+    includes(
+      children: sub_relations,
+      third_level_children: sub_relations
+    )
+  }
+
   def self.overview_page
     find_by(
       special_name: "projekt_overview_page",
@@ -223,12 +239,17 @@ class Projekt < ApplicationRecord
   end
 
   def self.selectable_in_selector(controller_name, current_user)
-    select do |projekt|
-      projekt.all_parent_projekts.unshift(projekt).none? { |p| p.hidden_for?(current_user) } &&
-      projekt.all_children_projekts.unshift(projekt).any? do |p|
-        p.can_assign_resources?(controller_name, current_user)
+    includes_children_projekts_with(:proposal_phases, :projekt_settings)
+      .select do |projekt|
+        ([projekt] + projekt.all_parent_projekts).none? { |p| p.hidden_for?(current_user) } &&
+        ([projekt] + projekt.all_children_projekts).any? do |p|
+          p.can_assign_resources?(controller_name, current_user)
+        end
       end
-    end
+  end
+
+  def can_filter_proposals?
+    proposal_phases.any?(&:current?) || proposals.base_selection.any?
   end
 
   def projekt_phases_for(resource)
@@ -275,7 +296,7 @@ class Projekt < ApplicationRecord
     end
   end
 
-  def can_assign_resources_to_child_projekt?(controller_name, user)
+  def can_assign_resources_to_any_child_projekt?(controller_name, user)
     all_children_projekts.any? do |child_projekt|
       child_projekt.can_assign_resources?(controller_name, user)
     end
@@ -331,35 +352,16 @@ class Projekt < ApplicationRecord
     all_parent_ids
   end
 
-  def all_parent_projekts(all_parent_projekts = [])
-    if parent.present?
-      all_parent_projekts.push(parent)
-      parent.all_parent_projekts(all_parent_projekts)
-    end
-
-    all_parent_projekts
+  def all_parent_projekts
+    [parent, top_level_projekt].compact
   end
 
-  def all_children_ids(all_children_ids = [])
-    if children.any?
-      children.each do |child|
-        all_children_ids.push(child.id)
-        child.all_children_ids(all_children_ids)
-      end
-    end
-
-    all_children_ids
+  def all_children_ids
+    all_children_projekts.map(&:id)
   end
 
-  def all_children_projekts(all_children_projekts = [])
-    if children.any?
-      children.each do |child|
-        all_children_projekts.push(child)
-        child.all_children_projekts(all_children_projekts)
-      end
-    end
-
-    all_children_projekts
+  def all_children_projekts
+    [*children, *third_level_children]
   end
 
   def has_active_phase?(controller_name)
