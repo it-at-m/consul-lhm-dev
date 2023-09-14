@@ -1,4 +1,4 @@
-<% if projekt.selectable_in_selector?(controller_name, current_user) %>
+<% if projekt.can_assign_resources?(controller_name, current_user) %>
   <div class='projekt-phase-group' id="projekt-phase-group-for-projekt-<%= projekt.id %>" style="display:none;">
     <% projekt.projekt_phases_for(resource).each do |projekt_phase| %>
       <% next unless projekt_phase.selectable_by?(current_user) %>

@@ -226,7 +226,7 @@ class Projekt < ApplicationRecord
     select do |projekt|
       projekt.all_parent_projekts.unshift(projekt).none? { |p| p.hidden_for?(current_user) } &&
       projekt.all_children_projekts.unshift(projekt).any? do |p|
-        p.selectable_in_selector?(controller_name, current_user)
+        p.can_assign_resources?(controller_name, current_user)
       end
     end
   end
@@ -245,13 +245,6 @@ class Projekt < ApplicationRecord
   def update_page
     update_corresponding_page if name_changed?
     yield
-  end
-
-  def selectable_in_selector?(controller_name, user)
-    return false unless activated?
-
-    # can_assign_resources?(controller_name, user) || can_assign_resources_to_child_projekt?(controller_name, user)
-    can_assign_resources?(controller_name, user) #|| can_assign_resources_to_child_projekt?(controller_name, user)
   end
 
   def can_assign_resources?(controller_name, user)

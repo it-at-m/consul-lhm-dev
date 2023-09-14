@@ -9,13 +9,6 @@
     <%= raw content_block("subnavigation_right_desktop", I18n.locale) if placement == 'desktop' && !launch_page %>
     <%= raw content_block("subnavigation_right_mobile", I18n.locale) if placement == 'mobile' && !launch_page %>
     <%= render partial: 'shared/subnavigation_projekt_events', locals: { placement: placement } if Setting['extended_feature.general.enable_projekt_events_page'].present? && !launch_page %>
-    <% if extended_feature?("general.links_to_create_resources_in_menu") &&
-        !launch_page &&
-        ( Projekt.top_level.selectable_in_selector('debates', current_user).any? ||
-          Projekt.top_level.selectable_in_selector('proposals', current_user).any? ||
-          Projekt.joins(:budget).where( budgets: { phase: 'accepting'} ).any? ) %>
-      <%= render partial: 'shared/subnavigation_new_entry', locals: { placement: placement } %>
-    <% end %>
   </div>
 
   <% unless launch_page %>
