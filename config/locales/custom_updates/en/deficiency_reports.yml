@@ -96,6 +96,10 @@ en:
           title: Report a deficiency
         start_new: Report a deficiency
       show:
+        welcome_text_default: This defeciency has already been reported to us by a user. Here you can view the current status and follow the progress of the deficiency report.
+           You can also express your opinion with your own comment. And after the deficiency has been closed, you can find the city's official statement here.
+        video:
+          title: Video
         approve_official_answer: Publish reply
         official_answer: Official reply
         sidebar:

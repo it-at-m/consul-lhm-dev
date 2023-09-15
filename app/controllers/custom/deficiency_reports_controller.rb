@@ -50,6 +50,12 @@ class DeficiencyReportsController < ApplicationController
     @comment_tree = CommentTree.new(@deficiency_report, params[:page], @current_order)
     set_comment_flags(@comment_tree.comments)
     set_deficiency_report_votes(@deficiency_reports)
+
+    if Setting.new_design_enabled?
+      render :show_new
+    else
+      render :show
+    end
   end
 
   def new
