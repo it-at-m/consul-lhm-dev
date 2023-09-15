@@ -5,8 +5,31 @@ en:
         page_description: Thank you for reporting a deficiency! You will help us to stop this as quickly as possible. Please describe in as much detail as possible what you noticed.
           Typical deficiencies include road damage or damaged park benches.
         title_placeholder: Give your report a catchy title, for example “Zebra crossing in front of the XY primary school” or “More diversity at the weekly markets”.
+        description_placeholder_html: "Describe the deficiency here. The following procedure has proven successful:<br><br>
+          Start with a general description of your suggestion and then show what would improve with the implementation of your suggestion.<br><br>
+          When writing, keep sentences as short as possible.<br><br>
+          Also use paragraphs to make your text more readable. (Many users read your text on mobile devices.)<br><br>
+          If possible, limit your content to a maximum of three paragraphs.<br><br>
+          If appropriate, use bullet points and bullet points for better clarity."
+        map:
+          hint: Place a pin on the map to precisely locate the deficiency.
         category:
+          title: Category
+          description: Please assign a category to your report
           placeholder: Please select
+        documents:
+          title: Add documents
+        languages:
+          title: Language
+          description: "Select which language(s) you would like your discussion to take place in:"
+        video:
+          title: Add video
+          description: Are there videos that support your argument and point of view? Then add a link here.
+          placeholder: Enter YouTube or Vimeo link
+        on_behalf_of:
+          title: On behalf of
+          description: Only admins can see this field. You can create a post on behalf of someone here.
+          placeholder: Enter name...
         create:
           submit_button: Submit deficiency
         labels:

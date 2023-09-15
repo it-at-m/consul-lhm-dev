@@ -5,8 +5,31 @@ de:
         page_description: Vielen Dank, dass Sie einen Mangel melden! Sie helfen uns damit, diesen so schnell es geht abzustellen.
           Bitte beschreiben Sie möglichst genau, was Ihnen aufgefallen ist. Typische Mängel sind zum Beispiel Straßenschäden oder beschädigte Parkbänke. 
         title_placeholder: Geben Sie Ihrem Beitrag einen plakativen Titel, zum Beispiel „Zebrastreifen vor der XY-Grundschule“ oder „Mehr Vielfalt auf den Wochenmärkten“.
+        description_placeholder_html: "Beschreiben Sie hier Ihren Beitrag. Folgendes Vorgehen hat sich bewährt:<br><br>
+          Beginnen Sie mit einer allgemeinen Beschreibung Ihrer Idee und stellen Sie im Anschluss dar, was sich mit der Umsetzung Ihres Vorschlags verbessern würde.<br><br>
+          Achten Sie beim Schreiben möglichst auf kurze Sätze.<br><br>
+          Nutzen Sie außerdem Absätze, um Ihren Text lesbarer zu machen. (Viele Nutzer lesen Ihren Text auf mobilen Geräten.)<br><br>
+          Beschränken Sie Ihren Inhalt – sofern möglich – auf maximal drei Absätze.<br><br>
+          Verwenden Sie überdies – wenn passend – Aufzählungen und Stichpunkte für eine bessere Übersichtlichkeit."
+        map:
+          hint: Setzen Sie einen Pin auf der Karte, um den Mangel genau zu verorten.
         category:
+          title: Kategorie
+          description: "Bitte ordnen Sie Ihr Meldung einer Kategorie zu:"
           placeholder: Bitte wählen
+        documents:
+          title: Dokumente hinzufügen
+        languages:
+          title: Sprachen
+          description: "Wählen Sie aus, in welcher Sprache/welchen Sprachen Ihre Diskussion stattfinden soll:"
+        video:
+          title: Video hinzufügen
+          description: Gibt es Videos, die Ihre Argumentation und Sichtweise stützen? Dann fügen Sie diese über einen Link hinzu.
+          placeholder: YouTube oder Vimeo-Link eingeben
+        on_behalf_of:
+          title: Veröffentlichen für
+          description: Dieses Feld sehen nur Admin. Sie können hier einen Beitrag im Namen von jemandem erstellen.
+          placeholder: Namen eingeben...
         create:
           submit_button: Mangel melden
         labels:
@@ -74,8 +97,8 @@ de:
         recommendation_two: Diskussionen oder Kommentare, die illegale Handlungen beinhalten, werden gelöscht sowie diejenigen, die die Diskussionen absichtlich sabotieren. Alles andere ist erlaubt.
         recommendations_title: Empfehlungen zum Erstellen eines Mangels
         seo:
-          title: Einen Mangel melden
-        start_new: Einen Mangel melden
+          title: Mangel melden
+        start_new: Mangel melden
       notifications:
         official_answer_updated: Antwort wurde erfolgreich gespeichert
       show:
