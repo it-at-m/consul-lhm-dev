@@ -2,6 +2,9 @@ en:
   custom:
     deficiency_reports:
       form:
+        page_description: Thank you for reporting a deficiency! You will help us to stop this as quickly as possible. Please describe in as much detail as possible what you noticed.
+          Typical deficiencies include road damage or damaged park benches.
+        title_placeholder: Give your report a catchy title, for example “Zebra crossing in front of the XY primary school” or “More diversity at the weekly markets”.
         category:
           placeholder: Please select
         create:

@@ -2,6 +2,9 @@ de:
   custom:
     deficiency_reports:
       form:
+        page_description: Vielen Dank, dass Sie einen Mangel melden! Sie helfen uns damit, diesen so schnell es geht abzustellen.
+          Bitte beschreiben Sie möglichst genau, was Ihnen aufgefallen ist. Typische Mängel sind zum Beispiel Straßenschäden oder beschädigte Parkbänke. 
+        title_placeholder: Geben Sie Ihrem Beitrag einen plakativen Titel, zum Beispiel „Zebrastreifen vor der XY-Grundschule“ oder „Mehr Vielfalt auf den Wochenmärkten“.
         category:
           placeholder: Bitte wählen
         create:
