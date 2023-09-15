@@ -1,7 +1,7 @@
 <ul class="nav-flyout-block">
 
   <% projekts.each do |projekt| %>
-    <% projekt_children_to_show_in_menu = projekt.children.visible_in_menu(current_user) %>
+    <% projekt_children_to_show_in_menu = projekt.children_projekts_show_in_navigation.visible_in_menu(current_user) %>
 
     <li class='nav-element flyout-item flyout-item-projekt js-access-flyout-menu-item focusable'
       <%= "tabindex=0" if placement == "desktop" %>

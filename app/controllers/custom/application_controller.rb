@@ -6,6 +6,17 @@ class ApplicationController < ActionController::Base
   before_action :show_launch_page, if: :show_launch_page?
   helper_method :set_comment_flags
 
+  unless Rails.env.production?
+    around_action :n_plus_one_detection
+
+    def n_plus_one_detection
+      Prosopite.scan
+      yield
+    ensure
+      Prosopite.finish
+    end
+  end
+
   private
 
     def show_launch_page?
@@ -45,8 +56,11 @@ class ApplicationController < ActionController::Base
     end
 
     def set_projekts_for_overview_page_navigation
-      @projekts_for_overview_page_navigation = Projekt.joins(:projekt_settings)
-        .where(projekt_settings: { key: "projekt_feature.general.show_in_overview_page_navigation", value: "active" })
+      @projekts_for_overview_page_navigation =
+        Projekt
+          .joins(:projekt_settings)
+          .where(projekt_settings: { key: "projekt_feature.general.show_in_overview_page_navigation", value: "active" })
+          .includes(:page, :children_projekts_show_in_navigation, :projekt_settings)
     end
 
     def set_default_social_media_images

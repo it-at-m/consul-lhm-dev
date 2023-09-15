@@ -22,6 +22,10 @@ class Setting < ApplicationRecord
   end
 
   class << self
+    def [](key)
+      Thread.current[:all_settings] ||= Setting.all.pluck(:key, :value).to_h
+      Thread.current[:all_settings][key]
+    end
 
     def defaults
       {
@@ -241,12 +245,11 @@ class Setting < ApplicationRecord
     end
 
     def old_design_enabled?
-      @enable_old_design_enabled ||=
-        if Rails.env.production?
-          true
-        else
-          self["extended_feature.general.enable_old_design"] == "active"
-        end
+      if Rails.env.production?
+        true
+      else
+        enabled?("extended_feature.general.enable_old_design")
+      end
     end
 
     def new_design_enabled?

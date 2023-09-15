@@ -27,9 +27,9 @@ class ProposalsController
     load_featured
     remove_archived_from_order_links
 
-    # @scoped_projekt_ids = Proposal.scoped_projekt_ids_for_index(current_user)
-    # @top_level_active_projekts = Projekt.top_level.current.where(id: @scoped_projekt_ids)
-    # @top_level_archived_projekts = Projekt.top_level.expired.where(id: @scoped_projekt_ids)
+    @scoped_projekt_ids = Proposal.scoped_projekt_ids_for_index(current_user)
+    @top_level_active_projekts = Projekt.top_level.current.where(id: @scoped_projekt_ids)
+    @top_level_archived_projekts = Projekt.top_level.expired.where(id: @scoped_projekt_ids)
 
     related_projekt_ids = @resources.joins(projekt_phase: :projekt).pluck("projekts.id").uniq
     related_projekts = Projekt.where(id: related_projekt_ids)
@@ -41,7 +41,11 @@ class ProposalsController
         .where(sdg_relations: { relatable_type: "Projekt", relatable_id: related_projekt_ids })
     end
 
-    @resources = @resources.by_projekt_id(@scoped_projekt_ids)
+    @resources =
+      @resources
+        .by_projekt_id(@scoped_projekt_ids)
+        .includes(:translations, :image, :projekt_labels, :votes_for)
+
     @all_resources = @resources
 
     unless params[:search].present?

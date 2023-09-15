@@ -24,6 +24,8 @@ class Proposals::ListItemComponent < ApplicationComponent
   end
 
   def date_formated
+    return if proposal.published_at.nil?
+
     l(proposal.published_at, format: :date_only)
   end
 

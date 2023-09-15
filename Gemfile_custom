@@ -9,6 +9,8 @@ group :development do
   gem 'pry-byebug', '~> 3.9'
   gem 'solargraph'
   gem 'pry-rails'
+  gem 'prosopite'
+  gem 'pg_query'
 end
 
 gem 'httparty'

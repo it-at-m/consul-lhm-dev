@@ -1,5 +1,5 @@
-<% accesskey = 0 %>
-<% Projekt.top_level.visible_in_menu(current_user).each do |active_projekt| %>
+<% accesskey = 1 %>
+<% Projekt.top_level.includes(children: [{children: :page}, :page]).show_in_navigation.visible_in_menu(current_user).each do |active_projekt| %>
   <% accesskey += 1 %>
   <% projekt_children_to_show_in_menu = active_projekt.children.visible_in_menu(current_user) %>
 

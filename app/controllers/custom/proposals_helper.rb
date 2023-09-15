@@ -5,7 +5,13 @@ module ProposalsHelper
   def all_proposal_map_locations(proposals_for_map)
     ids = proposals_for_map.except(:limit, :offset, :order).ids.uniq
 
-    map_locations = MapLocation.where(proposal_id: ids)
+    map_locations =
+      MapLocation
+        .includes(proposal: [:projekt_labels, :projekt_phase])
+        .includes(investment: [:projekt])
+        .includes(deficiency_report: [:category])
+        .includes(:projekt)
+        .where(proposal_id: ids)
 
     map_locations.map do |map_location|
       map_location.shape_json_data.presence || map_location.json_data
