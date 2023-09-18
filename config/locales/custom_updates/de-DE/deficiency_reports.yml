@@ -117,4 +117,15 @@ de:
           social_share: Teilen
           status: Status
           vote: Unterstützer*innen
+        status:
+          title: Status
+          description: "Sie können hier den aktuellen Status dieser Meldung nachvollziehen:"
+        category:
+          title: Kategorien
+        officer:
+          title: Sachbearbeiter*in
+        author_actions:
+          title: Autor
+          edit_button: Bearbeiten
+          delete_button: Zurückziehen
         submit_official_answer_button: Antwort speichern

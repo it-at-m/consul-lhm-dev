@@ -110,4 +110,15 @@ en:
           social_share: Share
           status: Status
           vote: Support
+        status:
+          title: Status
+          description: "You can see the current status of this message here:"
+        category:
+          title: Category
+        officer:
+          title: Officer
+        author_actions:
+          title: Author
+          edit_button: Edit
+          delete_button: Delete
         submit_official_answer_button: Save reply

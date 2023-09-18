@@ -59,10 +59,27 @@
         <% if deficiency_reports_feature?('enable_comments') %>
 					<%= render Shared::NewCommentsComponent.new(@deficiency_report, @comment_tree) %>
         <% end %>
+
+        <% if can? :update_official_answer, @deficiency_report %>
+          <%= render "custom/deficiency_reports/answer_form", deficiency_report: @deficiency_report %>
+        <% end %>
       </div>
 
       <aside class="sidebar">
         <%= render Sidebar::ResourceAuthorComponent.new(user: @deficiency_report.author) %>
+
+        <%= render(Shared::SidebarCardComponent.new(
+          title: t("custom.deficiency_reports.show.status.title"),
+          description: t("custom.deficiency_reports.show.status.description"),
+          icon_name: "check-circle")) do |c| %>
+          <%= render "deficiency_reports/status", deficiency_report: @deficiency_report %>
+        <% end %>
+
+        <%= render(Shared::SidebarCardComponent.new(
+          title: t("custom.deficiency_reports.show.category.title"),
+          icon_name: "check-circle")) do |c| %>
+          <%= render "deficiency_reports/category", deficiency_report: @deficiency_report %>
+        <% end %>
 
         <% if feature?(:allow_attached_documents) && @deficiency_report.documents.present? %>
           <%= render(Shared::SidebarCardComponent.new(title: t("documents.title"), icon_name: "file")) do |c| %>
@@ -87,6 +104,19 @@
             mobile: @deficiency_report.title %>
         <% end %>
 
+        <% if current_user && ( current_user.administrator? || current_user.deficiency_report_officer? ) %>
+          <%= render(Shared::SidebarCardComponent.new(
+            title: t("custom.deficiency_reports.show.officer.title"),
+            icon_name: "user-cog")) do |c| %>
+            <%= render "deficiency_reports/officer", deficiency_report: @deficiency_report %>
+          <% end %>
+        <% end %>
+
+        <%= render(Shared::SidebarCardComponent.new(
+          title: t("custom.deficiency_reports.show.author_actions.title"),
+          icon_name: "user-edit")) do |c| %>
+          <%= render "deficiency_reports/author_actions", deficiency_report: @deficiency_report %>
+        <% end %>
       </aside>
     </div>
   </div>
