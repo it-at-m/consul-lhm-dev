@@ -175,10 +175,17 @@ class ProposalsController
     end
   end
 
+  def vote
+    @follow = Follow.find_or_create_by!(user: current_user, followable: @proposal)
+    @voted =  @proposal.register_vote(current_user, "yes")
+  end
+
   def unvote
     @follow = Follow.find_by(user: current_user, followable: @proposal)
-    @follow.destroy if @follow
-    @proposal.unvote_by(current_user)
+
+    @follow.destroy! if @follow
+
+    @voted = !@proposal.unvote_by(current_user)
   end
 
   def created
@@ -190,11 +197,6 @@ class ProposalsController
 
   def flag
     Flag.flag(current_user, @proposal)
-    redirect_to @proposal
-  end
-
-  def unflag
-    Flag.unflag(current_user, @proposal)
     redirect_to @proposal
   end
 

@@ -195,9 +195,9 @@ class Projekt < ApplicationRecord
       .with_order_number
   }
 
-  def self.visible_in_menu(user)
+  scope :visible_in_menu, ->(user) {
     select { |p| p.visible_for?(user) }
-  end
+  }
 
   scope :show_in_sidebar_filter, ->(user = nil) {
     joins("INNER JOIN projekt_settings show_in_sidebar_filter_settings ON projekts.id = show_in_sidebar_filter_settings.projekt_id")
@@ -245,13 +245,14 @@ class Projekt < ApplicationRecord
   end
 
   def self.selectable_in_selector(controller_name, current_user)
-    includes(:individual_group_values, :projekt_settings, {proposal_phases: [:individual_group_values, :settings]})
+    includes(:individual_group_values, :projekt_settings, { proposal_phases: [:individual_group_values, :settings] })
       .includes_children_projekts_with(:individual_group_values, :proposal_phases, :individual_group_values, :projekt_settings, :hard_individual_group_values)
-      .includes({parent: :individual_group_values}, {top_level_projekt: :hard_individual_group_values})
+      .includes({ parent: :individual_group_values }, { top_level_projekt: :hard_individual_group_values })
       .select do |projekt|
-        ([projekt] + projekt.all_parent_projekts).none? { |p| p.hidden_for?(current_user) } &&
+        !projekt.hidden_for?(current_user) &&
+        projekt.all_parent_projekts.none? { |p| p.hidden_for?(current_user) } &&
         projekt.can_assign_resources?(controller_name, current_user) &&
-        (projekt.all_children_projekts).any? do |p|
+        projekt.all_children_projekts.any? do |p|
           p.can_assign_resources?(controller_name, current_user)
         end
       end

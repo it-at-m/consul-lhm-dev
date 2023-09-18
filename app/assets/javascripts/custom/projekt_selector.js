@@ -55,15 +55,17 @@
         App.ProjektSelector.addNextProjektPlaceholder($nextProejektSelector, "(verpflichtend)")
       }
 
-      App.ProjektSelector.updatePhasesSelector(projektId)
+      App.ProjektSelector.updatePhasesSelector(projektId);
 
       // reset form when projekt changes TODO
-      $('[id$="projekt_phase_id"]').val('');
+      $('[id$="projekt_phase_id"]').val("");
 
-      $('#map-container').hide();
+      $("#map-container").hide();
 
       var $firstProjektPhase = $("#projekt-phase-group-for-projekt-" + projektId + " .js-select-projekt-phase:first");
       App.ProjektSelector.selectProjektPhase($firstProjektPhase);
+
+      this.clearBannerColor();
     },
 
     selectProjektPhase: function($projektPhase) {
@@ -73,15 +75,15 @@
       if ( $("span#persisted-resource-data").length) {
         var persistedResourceData = $("span#persisted-resource-data").data();
 
-        if ( persistedResourceData["resourceMap"]) {
+        if (persistedResourceData["resourceMap"]) {
           $("#map-container").show();
         }
       } else {
         this.replaceProjektMapOnResourceCreation($projektPhase);
       }
 
-      this.updateProjektSelectorHint(projektPhaseId);
       this.updateFormHeading(projektPhaseId);
+      this.updateProjektSelectorHint(projektPhaseId);
       this.updateActivePhaseSelector(projektPhaseId);
       this.toggleImageAttachment($projektPhase);
       this.toggleDocumentAttachment($projektPhase);
@@ -90,6 +92,7 @@
       this.toggleOnBehalfOf($projektPhase);
       this.toggleExternalFieldsHeader($projektPhase);
       this.toggleTagging($projektPhase);
+      this.changeResourceFormTitle($projektPhase);
     },
 
     updateProjektSelectorHint: function(projektPhaseId) {
@@ -157,23 +160,24 @@
     },
 
     toggleImageAttachment: function($projektPhase) {
-      var $bannerEditor = $(".js-user-resources-form--banner-editor");
+      var $userResourcesForm = $(".js-user-resources-form");
 
-      if ($projektPhase.data("allowAttachedImage")) {
+      if (!!$projektPhase.data("allowAttachedImage")) {
         $("#attach-image").show();
-        $bannerEditor.removeClass("-no-image");
+        $userResourcesForm.removeClass("-no-image");
       } else {
         $("#attach-image #nested-image .direct-upload").remove();
         $("#new_image_link").removeClass("hide");
         $("#attach-image").hide();
-        $bannerEditor.addClass("-no-image");
+        $userResourcesForm.addClass("-no-image");
       }
     },
 
     toggleDocumentAttachment: function($projektPhase) {
-      var showSummary = $projektPhase.data("showSummary");
-      $("#attach-documents").toggle(showSummary);
-      $(".js-sidebar-documment-attacher-section").toggle(showSummary);
+      var showDocuments = !!$projektPhase.data("allowAttachedDocument");
+
+      $("#attach-documents").toggle(showDocuments);
+      $(".js-sidebar-documment-attacher-section").toggle(showDocuments);
     },
 
     toggleSummary: function($projektPhase) {
@@ -181,7 +185,7 @@
     },
 
     toggleExternalVideoUrl: function($projektPhase) {
-      var allowVideo = $projektPhase.data("allowVideo");
+      var allowVideo = !!$projektPhase.data("allowVideo");
 
       $("#external-video-url-fields").toggle(allowVideo);
       $(".js-sidebar-external-video-section").toggle(allowVideo);
@@ -208,7 +212,7 @@
     },
 
     toggleTagging: function($projektPhase) {
-      var showTagging = $projektPhase.data("projekt-label-ids") || $projektPhase.data("sentiment-ids");
+      var showTagging = !!$projektPhase.data("projekt-label-ids") || !!$projektPhase.data("sentiment-ids");
       $("legend.tagging").toggleClass('hide', !showTagging);
 
       this.updateProjektLabelSelector($projektPhase);
@@ -261,6 +265,20 @@
         var dontHaveSentiment = !sentimentIdsToShow.includes($(sentiment).data("sentimentId").toString());
         $(sentiment).toggleClass("hide", dontHaveSentiment);
       });
+    },
+
+    changeResourceFormTitle: function($projektPhase) {
+      var phaseFormTitle = $projektPhase.data("resourceFormTitle");
+
+      if (phaseFormTitle && phaseFormTitle.length > 0) {
+        $(".user-resources-form--title").text(phaseFormTitle);
+      } else {
+        $(".user-resources-form--title").text(this.defaultFormTitle);
+      }
+    },
+
+    storeDefaultFormTitle: function() {
+      this.defaultFormTitle = $(".user-resources-form--title").text();
     },
 
     addNextProjektPlaceholder: function($nextProejektSelector, text) {
@@ -411,6 +429,18 @@
       }
     },
 
+    selectProjektSentiment: function($projektSentiment) {
+      this.setBannerColor($projektSentiment.data('sentimentColor'));
+    },
+
+    setBannerColor: function(color) {
+      $(".js-user-resources-form--banner-editor").css("background-color", color);
+    },
+
+    clearBannerColor: function() {
+      $(".js-user-resources-form--banner-editor").css("background-color", "");
+    },
+
     initialize: function() {
       $("body").on("click", ".js-toggle-projekt-group", function(event) {
         App.ProjektSelector.toggleProjektGroup(event.currentTarget);
@@ -434,6 +464,10 @@
         App.ProjektSelector.selectLabel($(event.currentTarget));
       });
 
+      $("body").on("click", ".js-select-projekt-sentiment", function(event) {
+        App.ProjektSelector.selectProjektSentiment($(event.currentTarget));
+      });
+
       App.ProjektSelector.preselectProjektPhase();
 
       // Accessibility fixes
@@ -450,6 +484,8 @@
           App.ProjektSelector.accessibilityProjekt(event.currentTarget, event);
         }
       });
+
+      this.storeDefaultFormTitle();
     }
   };
 }).call(this);

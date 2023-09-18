@@ -22,11 +22,6 @@ class Setting < ApplicationRecord
   end
 
   class << self
-    def [](key)
-      Thread.current[:all_settings] ||= Setting.all.pluck(:key, :value).to_h
-      Thread.current[:all_settings][key]
-    end
-
     def defaults
       {
         "feature.featured_proposals": nil,

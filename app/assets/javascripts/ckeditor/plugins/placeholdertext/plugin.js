@@ -71,7 +71,6 @@
 			children = fragment.children;
 
 
-    console.log(children[ 0 ])
 		if ( children.length !== 1 ||
 			typeof children[ 0 ]['data-cke-placeholdertext' ] === 'undefined' ) {
 			return;

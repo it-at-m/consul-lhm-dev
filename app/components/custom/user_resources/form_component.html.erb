@@ -1,4 +1,4 @@
-<main class="user-resources-form <%= base_class_name %>">
+<main class="user-resources-form js-user-resources-form <%= base_class_name %>">
   <%= translatable_form_for(resource, html: { class: "debate-form" }) do |f| %>
     <%= back_link %>
 
@@ -112,13 +112,13 @@
             <%= render partial: "shared/projekt_selector/sentiments", locals:	{ f: f, model: resource } %>
           <% end %>
 
-          <div class="sidebar-card js-sidebar-documment-attacher-section">
+          <div class="sidebar-card d-none js-sidebar-documment-attacher-section">
             <div class="sidebar-card--section">
               <div class="sidebar-card--title">
                 <i class="fa fa-file"></i>
                 Dokumente hinzufügen
               </div>
-              <div class="documents" id="attach-documents">
+              <div class="documents d-none" id="attach-documents">
                 <%= render "documents/nested_documents", f: f %>
               </div>
             </div>
@@ -139,7 +139,7 @@
             </div>
           <% end %>
 
-          <div class="sidebar-card js-sidebar-external-video-section">
+          <div class="sidebar-card d-none js-sidebar-external-video-section">
             <div class="sidebar-card--section">
               <div class="sidebar-card--title">
                 <i class="fa fa-video"></i>

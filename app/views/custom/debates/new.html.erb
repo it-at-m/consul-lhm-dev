@@ -2,9 +2,9 @@
 
 <% if Setting.new_design_enabled? %>
   <%
-      title =
+    title =
       if @projekt_phase&.resource_form_title.present?
-        t('custom.user_resources.form.title', label: @projekt_phase.resource_form_title)
+        @projekt_phase.resource_form_title
       else
         t("new.start_new", scope: 'debates')
       end

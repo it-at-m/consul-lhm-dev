@@ -58,9 +58,37 @@ class ApplicationController < ActionController::Base
     def set_projekts_for_overview_page_navigation
       @projekts_for_overview_page_navigation =
         Projekt
+          .includes({page: [:translations]}, :projekt_settings, { children_projekts_show_in_navigation: :projekt_settings })
           .joins(:projekt_settings)
           .where(projekt_settings: { key: "projekt_feature.general.show_in_overview_page_navigation", value: "active" })
-          .includes(:page, :children_projekts_show_in_navigation, :projekt_settings)
+          .select { |p| p.visible_for?(current_user) }
+
+      @projekts_for_navigation =
+        Projekt
+          .top_level
+          .includes(
+            :individual_group_values,
+            { page: :translations }, :projekt_settings,
+
+            children_projekts_show_in_navigation: [
+            :individual_group_values,
+              :projekt_settings, { page: :translations },
+
+              {
+                children_projekts_show_in_navigation: [
+                  :projekt_settings,
+                  { page: :translations },
+
+                  {
+                    children_projekts_show_in_navigation: [
+                      :projekt_settings, { page: :translations }]
+                  }
+                ]
+              }
+            ]
+          )
+          .show_in_navigation
+          .select { |p| p.visible_for?(current_user) }
     end
 
     def set_default_social_media_images

@@ -3,9 +3,10 @@
 class Proposals::ListItemComponent < ApplicationComponent
   attr_reader :proposal
 
-  def initialize(proposal:)
+  def initialize(proposal:, voted:)
     @proposal = proposal
     @sentiment = proposal.sentiment
+    @voted = voted
   end
 
   def component_attributes

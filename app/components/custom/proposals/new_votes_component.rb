@@ -2,13 +2,14 @@ class Proposals::NewVotesComponent < ApplicationComponent
   delegate :user_signed_in?, :link_to_signin, :link_to_signup,
            :link_to_verify_account, :projekt_feature?, :projekt_phase_feature?, to: :helpers
 
-  attr_reader :proposal
+  attr_reader :proposal, :vote_url
   delegate :current_user, :link_to_verify_account, to: :helpers
 
-  def initialize(proposal, vote_url: nil)
+  def initialize(proposal, voted: nil, vote_url: nil)
     @proposal = proposal
-    @vote_url = vote_url
     @proposal_phase = @proposal.projekt_phase
+    @vote_url = vote_url
+    @voted = voted
   end
 
   def vote_url
@@ -18,7 +19,11 @@ class Proposals::NewVotesComponent < ApplicationComponent
   private
 
     def voted?
-      current_user&.voted_for?(proposal)
+      if @voted == true || @voted == false
+        @voted
+      else
+        current_user&.voted_for?(proposal)
+      end
     end
 
     def can_vote?
@@ -62,4 +67,3 @@ class Proposals::NewVotesComponent < ApplicationComponent
       end
     end
 end
-
