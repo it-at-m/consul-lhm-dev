@@ -69,7 +69,7 @@ Rails.application.configure do
       Bullet.rails_logger = true
       Bullet.add_footer = true
     end
-    Prosopite.rails_logger = true
+    # Prosopite.rails_logger = true
     # Prosopite.min_n_queries = 4
   end
   # Use an evented file watcher to asynchronously detect changes in source code,
