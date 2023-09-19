@@ -13,19 +13,17 @@
       </div>
     <%# <% end %>
   </div>
-  <div class="auth-page-template--form-section new-card">
-    <div class="auth-page-template--form-wrapper">
-      <%# <% if @title.present? %>
-      <%#   <h2 class="auth-page-template--title"><%= @title %></h2>
-      <%# <% end %>
-      <%#
-      <%# <% if @description.present? %>
-      <%#   <div class="auth-page-template--description"><%= @description %></div>
-      <%# <% end %>
+  <div class="auth-page-template--form-section">
+    <div class="auth-page-template--form-card new-card">
+      <div class="auth-page-template--form-wrapper">
 
-      <div class="auth-page-template--body">
-        <%= form %>
+        <div class="auth-page-template--body">
+          <%= form %>
+        </div>
       </div>
+    </div>
+    <div class="auth-page-template--after-card-container">
+      <%= after_card_container %>
     </div>
   </div>
 </div>

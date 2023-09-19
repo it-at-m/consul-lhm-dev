@@ -4,6 +4,7 @@ de:
       users:
         registrations:
           new:
+            message: Schnell. Einfach. Sicher
             first_name_label: Vorname
             last_name_label: Nachname
             street_name_label: Straße
@@ -16,3 +17,5 @@ de:
             form_registered_address_label: Adresse
             form_registered_address_city_label: Wohnort
             form_registered_address_street_label: Straße
+            submit: Neues Konto erstellen
+            organization_signup_link: Als Organisation oder Kollektiv registrieren
