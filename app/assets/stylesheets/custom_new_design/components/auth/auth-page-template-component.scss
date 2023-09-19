@@ -15,7 +15,55 @@
 
     .auth-divider {
       width: 100%;
+      margin-bottom: 0;
+      border-top: none;
+
+      span {
+        display: none;
+      }
     }
+
+    .button {
+      margin-bottom: 5px;
+      margin-top: 5px;
+      border-left: none;
+      border-radius: 7px;
+
+      &::before {
+        font-size: 1.5rem;
+        margin-right: 3px;
+        display: block;
+        min-width: 30px;
+      }
+
+      &:hover {
+        color: black;
+      }
+    }
+
+    .button-twitter:hover {
+      background: #d4e9f3;
+    }
+
+    .button-facebook:hover {
+      background: #d1d8e7;
+    }
+
+    .button-google:hover {
+      background: #efd4cf;
+    }
+
+    .button-wordpress:hover {
+      background: #c9ccda;
+    }
+
+    strong {
+      display: none;
+    }
+  }
+
+  .auth-inputs-title {
+    color: inherit;
   }
 
   .auth-page-template {
@@ -39,7 +87,6 @@
       margin-right: 0;
     }
 
-
     input::placeholder, select {
       font-weight: 500;
     }
@@ -48,7 +95,8 @@
       max-width: 300px;
       height: 50px;
       font-size: 20px;
-      margin: auto !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
     }
   }
 
