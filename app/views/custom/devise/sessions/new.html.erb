@@ -7,6 +7,7 @@
 
       <div class="auth-page-template--oauth">
         <%= render "devise/omniauth_form", action: "sign_in" %>
+        <div class="auth-page-template--divider"></div>
       </div>
 
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
