@@ -9,7 +9,8 @@
   <%= "data-longitude=#{projekt_phase.map_location.longitude}" if projekt_phase.map_location.present? %>
   <%= "data-zoom=#{projekt_phase.map_location.zoom}" if projekt_phase.map_location.present? %>
   <%= "data-show-map=true" if projekt_phase_feature?(projekt_phase, "form.show_map") %>
-  <%= "data-show-summary=true" if projekt_phase_feature?(projekt_phase, "form.enable_summary") %>
+  <%# <%= "data-show-summary=true" if projekt_phase_feature?(projekt_phase, "form.enable_summary") %>
+  <%= "data-resource-form-title=#{projekt_phase.resource_form_title}" if projekt_phase.resource_form_title.present? %>
   <%= "data-allow-video=true" if projekt_phase_feature?(projekt_phase, "form.enable_external_video") %>
   <%= "data-allow-attached-image=true" if projekt_phase_feature?(projekt_phase, "form.allow_attached_image") %>
   <%= "data-allow-attached-document=true" if projekt_phase_feature?(projekt_phase, "form.allow_attached_documents") %>

@@ -9,16 +9,18 @@
     border-radius: 5px;
   }
 
-  input::placeholder {
+  input::placeholder, select {
     color: #67788A;
-    font-weight: 500;
     visibility: visible;
   }
 
-  .checkbox-label {
-    input[type="checkbox"] {
+  select {
+    option {
+      color: black;
     }
+  }
 
+  .checkbox-label {
     .checkbox {
       margin-top: -1px;
     }
@@ -28,15 +30,22 @@
     vertical-align: top;
   }
 
-  input.light-input {
-    background: none;
-    border: none !important;
-    outline: none;
-    box-shadow: none;
-    border-bottom: 1px solid $border-color !important;
-    padding-left: 0;
-    padding-bottom: 0;
-    height: 2em;
+  form {
+    input.light-input {
+      background: none;
+      border: none !important;
+      outline: none;
+      box-shadow: none;
+      border-bottom: 1px solid $border-color !important;
+      padding-left: 0;
+      padding-bottom: 0;
+      // height: 2em;
+      border-radius: 0 !important;
+    }
+
+    input[type=file] {
+      display: none;
+    }
   }
 
   .form-error {
@@ -79,6 +88,12 @@
     height: 37px;
     max-height: 37px;
     min-height: 0;
+  }
+
+  #nested-documents {
+    .title {
+      display: none;
+    }
   }
 }
 

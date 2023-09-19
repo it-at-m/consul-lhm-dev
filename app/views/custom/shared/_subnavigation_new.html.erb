@@ -1,6 +1,5 @@
 <ul class="main-menu">
   <div class="content-items">
-    <%# <%= render partial: 'shared/subnavigation_home', locals: { placement: placement } %>
     <%= render partial: 'shared/subnavigation_projekts_overview', locals: { placement: placement } if Setting['extended_feature.projekts_overview_page_navigation.show_in_navigation'].present? && !launch_page %>
     <%= raw content_block("subnavigation_left_desktop", I18n.locale) if placement == 'desktop' && !launch_page %>
     <%= raw content_block("subnavigation_left_mobile", I18n.locale) if placement == 'mobile' && !launch_page %>

@@ -22,7 +22,6 @@ class Setting < ApplicationRecord
   end
 
   class << self
-
     def defaults
       {
         "feature.featured_proposals": nil,
@@ -241,12 +240,11 @@ class Setting < ApplicationRecord
     end
 
     def old_design_enabled?
-      @enable_old_design_enabled ||=
-        if Rails.env.production?
-          true
-        else
-          self["extended_feature.general.enable_old_design"] == "active"
-        end
+      if Rails.env.production?
+        true
+      else
+        enabled?("extended_feature.general.enable_old_design")
+      end
     end
 
     def new_design_enabled?

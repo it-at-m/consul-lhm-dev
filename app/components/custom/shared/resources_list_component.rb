@@ -84,12 +84,26 @@ class Shared::ResourcesListComponent < ApplicationComponent
     wide? ? "fa-grip-vertical" : "fa-bars"
   end
 
+  def proposal_resources_ids
+    @resources.select { |r| r.is_a?(Proposal)}.map(&:id)
+  end
+
+  def proposal_votes
+    return {} if current_user.nil?
+
+    @proposal_votes ||= current_user.votes.where(votable_type: "Proposal", votable_id: proposal_resources_ids)
+  end
+
+  def voted_for_proposal?(proposal)
+    proposal_votes.find { |vote| vote.votable_id == proposal.id }.present?
+  end
+
   def resource_component(resource)
     case resource
     when Projekt
       Projekts::ListItemComponent.new(projekt: resource)
     when Proposal
-      Proposals::ListItemComponent.new(proposal: resource)
+      Proposals::ListItemComponent.new(proposal: resource, voted: voted_for_proposal?(resource))
     when Debate
       Debates::ListItemComponent.new(debate: resource)
     when Poll

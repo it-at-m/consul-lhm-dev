@@ -82,7 +82,7 @@
             ) %>
           <% end %>
           <% if show_affiliation_filter_in_sidebar? %>
-            <%= render "shared/sidebar_filter/geozone_affiliations" %>
+            <%= render "shared/sidebar_filter/geozone_affiliations", selected_affiliated_geozones: @affiliated_geozones %>
           <% end %>
           <% unless skip_user_verification? %>
             <%= render "shared/sidebar_filter/geozone_restrictions" %>

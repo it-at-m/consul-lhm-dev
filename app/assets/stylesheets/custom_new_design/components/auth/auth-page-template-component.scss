@@ -24,9 +24,24 @@
     padding-top: 50px;
     width: 95%;
     margin: auto;
+    font-weight: 500;
+
+    form .checkbox, form .radio {
+      font-weight: 500;
+    }
 
     .margin-bottom {
       margin-bottom: 0;
+    }
+
+    .row {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+
+    input::placeholder, select {
+      font-weight: 500;
     }
 
     .auth-page-button, .button, button, input[type="submit"] {
@@ -85,6 +100,24 @@
 
     .custom-content-block-body {
       display: none;
+    }
+
+    input[type='text'], input[type='password'], input[type='date'],
+    input[type='datetime'], input[type='datetime-local'], input[type='month'],
+    input[type='week'], input[type='email'], input[type='number'], input[type='search'],
+    input[type='tel'], input[type='time'], input[type='url'], textarea, form [type]:not([type="button"], [type=checkbox], [type=file], [type=radio], [type=submit]),
+    select {
+      height: 45px;
+      max-height: 45px;
+      padding-left: 15px;
+      padding-right: 15px;
+      border-radius: 7px;
+    }
+
+    .options-group {
+      label {
+        display: block;
+      }
     }
   }
 }

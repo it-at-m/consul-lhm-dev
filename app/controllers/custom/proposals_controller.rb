@@ -14,12 +14,6 @@ class ProposalsController
     end
     @resource_name = "proposal"
 
-    if params[:filter_projekt_ids]
-      @selected_projekts_ids = params[:filter_projekt_ids].select { |id| Projekt.find_by(id: id).present? }
-      selected_parent_projekt_id = get_highest_unique_parent_projekt_id(@selected_projekts_ids)
-      @selected_parent_projekt = Projekt.find_by(id: selected_parent_projekt_id)
-    end
-
     @geozones = Geozone.all
     @selected_geozone_affiliation = params[:geozone_affiliation] || "all_resources"
     @affiliated_geozones = (params[:affiliated_geozones] || '').split(',').map(&:to_i)
@@ -34,7 +28,6 @@ class ProposalsController
     remove_archived_from_order_links
 
     @scoped_projekt_ids = Proposal.scoped_projekt_ids_for_index(current_user)
-
     @top_level_active_projekts = Projekt.top_level.current.where(id: @scoped_projekt_ids)
     @top_level_archived_projekts = Projekt.top_level.expired.where(id: @scoped_projekt_ids)
 
@@ -48,13 +41,17 @@ class ProposalsController
         .where(sdg_relations: { relatable_type: "Projekt", relatable_id: related_projekt_ids })
     end
 
-    @resources = @resources.by_projekt_id(@scoped_projekt_ids)
+    @resources =
+      @resources
+        .by_projekt_id(@scoped_projekt_ids)
+        .includes(:translations, :image, :projekt_labels, :votes_for)
+
     @all_resources = @resources
 
     unless params[:search].present?
       take_by_my_posts
-      # take_by_tag_names(related_projekts)
-      # take_by_sdgs(related_projekts)
+      take_by_tag_names(related_projekts)
+      take_by_sdgs(related_projekts)
       take_by_geozone_affiliations
       take_by_geozone_restrictions
       take_by_projekts(@scoped_projekt_ids)
@@ -178,10 +175,17 @@ class ProposalsController
     end
   end
 
+  def vote
+    @follow = Follow.find_or_create_by!(user: current_user, followable: @proposal)
+    @voted =  @proposal.register_vote(current_user, "yes")
+  end
+
   def unvote
     @follow = Follow.find_by(user: current_user, followable: @proposal)
-    @follow.destroy if @follow
-    @proposal.unvote_by(current_user)
+
+    @follow.destroy! if @follow
+
+    @voted = !@proposal.unvote_by(current_user)
   end
 
   def created
@@ -193,11 +197,6 @@ class ProposalsController
 
   def flag
     Flag.flag(current_user, @proposal)
-    redirect_to @proposal
-  end
-
-  def unflag
-    Flag.unflag(current_user, @proposal)
     redirect_to @proposal
   end
 

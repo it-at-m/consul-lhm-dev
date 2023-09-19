@@ -98,7 +98,7 @@ class ProjektPhase < ApplicationRecord
   end
 
   def self.any_selectable?(user)
-    any? { |phase| phase.selectable_by?(user) }
+    true
   end
 
   def selectable_by?(user)
@@ -201,16 +201,28 @@ class ProjektPhase < ApplicationRecord
     phase_tab_name.presence || model_name.human
   end
 
+  def all_settings
+    @settings ||= settings.pluck(:key, :value)
+  end
+
   def feature?(key)
-    settings.find_by!(key: "feature.#{key}").value.present?
-  rescue ActiveRecord::RecordNotFound
-    raise StandardError, "Feature \"#{key}\" not found for projekt phase #{id}"
+    setting = settings.find { |s| s.key == "feature.#{key}" }
+
+    if setting.present?
+      setting.value.present?
+    else
+      raise StandardError, "Feature \"#{key}\" not found for projekt phase #{id}"
+    end
   end
 
   def option(key)
-    settings.find_by!(key: "option.#{key}").value
-  rescue ActiveRecord::RecordNotFound
-    raise StandardError, "Option \"#{key}\" not found for projekt phase #{id}"
+    option = settings.find { |s| s.key == "option.#{key}" }
+
+    if option.present?
+      option.value.present?
+    else
+      raise StandardError, "Option \"#{key}\" not found for projekt phase #{id}"
+    end
   end
 
   def create_map_location

@@ -169,15 +169,6 @@
             mobile: @proposal.title %>
         <% end %>
 
-        <% if current_user && projekt_feature?(@proposal.projekt, 'proposals.show_related_content') %>
-          <%= render(Shared::SidebarCardComponent.new(title: t("custom.shared.show.related_title"), icon_name: "share-alt")) do |c| %>
-            <p><%= t("custom.shared.show.related_text") %></p>
-            <%= link_to "#related_content", data: { toggle: "related_content" }, id: "add-related-content", class: "button hollow expanded" do %>
-              <%= t("custom.shared.show.related_button") %>
-            <% end %>
-          <% end %>
-        <% end %>
-
         <% if current_user.present? && current_user.administrator? %>
           <%= render(Shared::SidebarCardComponent.new(title: t("custom.shared.show.admin"), icon_name: "user-cog")) do |c| %>
             <div class="js-moderator-proposal-actions">

@@ -68,33 +68,21 @@ class MapLocation < ApplicationRecord
   end
 
   def get_fa_icon_class
-    set_object
+    if proposal.present? && proposal.projekt_labels.any?
+      proposal.projekt_labels.size == 1 ? proposal.projekt_labels.first.icon : "tags"
 
-    if @proposal.present? && @proposal.projekt_phase.projekt.overview_page?
-      "user"
+    elsif investment.present? && investment.projekt.present?
+      investment.projekt.icon
 
-    elsif @proposal.present? && @proposal.projekt_labels.any?
-      @proposal.projekt_labels.count == 1 ? @proposal.projekt_labels.first.icon : "tags"
+    elsif deficiency_report.present?
+      deficiency_report.category.icon
 
-    elsif @investment.present? && @investment.projekt.present?
-      @investment.projekt.icon
-
-    elsif @deficiency_report.present?
-      @deficiency_report.category.icon
-
-    elsif @projekt.present?
-      @projekt.icon
+    elsif projekt.present?
+      projekt.icon
 
     else
       "circle"
     end
-  end
-
-  def set_object
-    @projekt = Projekt.find_by(id: projekt_id) if projekt_id.present?
-    @proposal = Proposal.find_by(id: proposal_id) if proposal_id.present?
-    @deficiency_report = DeficiencyReport.find_by(id: deficiency_report_id) if deficiency_report_id.present?
-    @investment = Budget::Investment.find_by(id: investment_id) if investment_id.present?
   end
 
   def ensure_shape_is_json

@@ -78,10 +78,6 @@ class UserResources::FormComponent < ApplicationComponent
     if phase_feature_enabled?("form.allow_attached_image") || !feature?(:allow_images)
       class_name += " -no-image"
     end
-    #
-    # if phase_feature_enabled?("form.enable_external_video")
-    #   class_name += " -no-image"
-    # end
 
     class_name
   end

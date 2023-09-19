@@ -16,12 +16,6 @@ class DebatesController < ApplicationController
 
     @resource_name = "debate"
 
-    if params[:filter_projekt_ids]
-      @selected_projekts_ids = params[:filter_projekt_ids].select { |id| Projekt.find_by(id: id).present? }
-      selected_parent_projekt_id = get_highest_unique_parent_projekt_id(@selected_projekts_ids)
-      @selected_parent_projekt = Projekt.find_by(id: selected_parent_projekt_id)
-    end
-
     # related_projekt_ids = @resources.joins(projekt_phase: :projekt).pluck("projekts.id").uniq
     # related_projekts = Projekt.where(id: related_projekt_ids)
 

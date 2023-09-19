@@ -3,9 +3,10 @@
 class Proposals::ListItemComponent < ApplicationComponent
   attr_reader :proposal
 
-  def initialize(proposal:)
+  def initialize(proposal:, voted:)
     @proposal = proposal
     @sentiment = proposal.sentiment
+    @voted = voted
   end
 
   def component_attributes
@@ -24,6 +25,8 @@ class Proposals::ListItemComponent < ApplicationComponent
   end
 
   def date_formated
+    return if proposal.published_at.nil?
+
     l(proposal.published_at, format: :date_only)
   end
 

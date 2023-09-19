@@ -233,7 +233,7 @@
 
         function proposalPopupContent(data) {
           var popupHtml = "";
-          popupHtml += "<h6 style='margin-top:10px;'><a href='/proposals/" + data.proposal_id + "'>" + data.proposal_title + "</a></h6>"; //title
+          popupHtml += "<h6><a href='/proposals/" + data.proposal_id + "'>" + data.proposal_title + "</a></h6>"; //title
 
           if (data.image_url) {
             popupHtml += "<img src='" + data.image_url + "' style='margin-bottom:10px;height:170px'>"; //image
