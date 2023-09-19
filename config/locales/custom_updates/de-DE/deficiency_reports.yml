@@ -39,6 +39,11 @@ de:
         new:
           submit_button: Mangel melden
       index:
+        title: Mängelmelder
+        welcome_default_text_html: In jeder Stadt kommt es dann und wann zu Mängeln – gut, wenn diese von aufmerksamen BürgerInnen gemeldet werden, um sie schnell zu beheben.
+          Sie sehen auf dieser Seite, welche Mängel bereits gemeldet wurden. Die Karte hilft Ihnen dabei, den jeweiligen Mangel zu verorten.<br></br>
+          Wenden auch Sie sich an uns, wenn Ihnen ein Mangel auffällt – und tragen Sie bei zu einem sauberen Stadtbild und einer funktionierenden Stadt.
+        count: Mangelmeldungen
         deficiency_report:
           by: von
         orders:
@@ -73,6 +78,8 @@ de:
           statuses:
             all_statuses: Alle Meldungen
             title: Status
+          my_posts:
+            title: Meine Beiträge
         start_deficiency_report: Mangel melden
       mailers:
         notify_administrators_about_answer_update:

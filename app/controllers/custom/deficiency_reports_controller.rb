@@ -43,6 +43,12 @@ class DeficiencyReportsController < ApplicationController
     filter_by_my_posts
 
     set_deficiency_report_votes(@deficiency_reports)
+
+    if Setting.new_design_enabled?
+      render :index_new
+    else
+      render :index
+    end
   end
 
   def show
