@@ -17,7 +17,8 @@ class Admin::BaseController < ApplicationController
       return false unless current_user&.projekt_manager?
 
       projekt_setting_update_action ||
-        projekt_phase_setting_update_action
+        projekt_phase_setting_update_action ||
+        page_update_action
     end
 
     def projekt_setting_update_action
@@ -26,6 +27,10 @@ class Admin::BaseController < ApplicationController
 
     def projekt_phase_setting_update_action
       controller_name == "projekt_phase_settings" && action_name == "update"
+    end
+
+    def page_update_action
+      controller_name == "pages" && action_name == "update"
     end
 
     def set_namespace

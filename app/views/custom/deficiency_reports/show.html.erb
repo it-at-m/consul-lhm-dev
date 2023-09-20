@@ -89,12 +89,6 @@
         <h2><%= t("custom.deficiency_reports.show.sidebar.status") %></h2>
         <%= render "deficiency_reports/status", deficiency_report: @deficiency_report %>
 
-        <% if can? :update_status, @deficiency_report %>
-          <%= form_for @deficiency_report, url: update_status_deficiency_report_path do |f| %>
-            <%= f.select :deficiency_report_status_id, DeficiencyReport::Status.all.collect{ |df| [df.title, df.id] }, { label: false  }, {onchange: "this.form.submit();" } %>
-          <% end %>
-        <% end %>
-
         <div class="sidebar-divider"></div>
         <h2><%= t("custom.deficiency_reports.show.sidebar.category") %></h2>
         <%= render "deficiency_reports/category", deficiency_report: @deficiency_report %>
@@ -106,19 +100,7 @@
         <% end %>
 
         <% if current_user && ( current_user.administrator? || current_user.deficiency_report_officer? ) %>
-          <div class="sidebar-divider"></div>
-          <h2><%= t("custom.deficiency_reports.show.sidebar.officer") %></h2>
-          <% if @deficiency_report.officer.present? %>
-            <div class="deficiency-report-officer">
-              <%= @deficiency_report.officer.name %>
-            </div>
-          <% end %>
-        <% end %>
-
-        <% if can? :update_officer, @deficiency_report  %>
-          <%= form_for @deficiency_report, url: update_officer_deficiency_report_path do |f| %>
-            <%= f.select :deficiency_report_officer_id, DeficiencyReport::Officer.all.collect{ |df| [df.name, df.id] }, { label: false, prompt: t('custom.deficiency_reports.show.sidebar.select_officer') }, { onchange: "this.form.submit();" } %>
-          <% end %>
+          <%= render "deficiency_reports/officer", deficiency_report: @deficiency_report %>
         <% end %>
 
         <%= render "shared/social_share",

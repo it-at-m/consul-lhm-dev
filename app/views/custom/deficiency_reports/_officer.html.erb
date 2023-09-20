@@ -1,0 +1,13 @@
+<div class="sidebar-divider"></div>
+<h2><%= t("custom.deficiency_reports.show.sidebar.officer") %></h2>
+<% if @deficiency_report.officer.present? %>
+  <div class="deficiency-report-officer">
+    <%= @deficiency_report.officer.name %>
+  </div>
+<% end %>
+
+<% if can? :update_officer, @deficiency_report  %>
+  <%= form_for @deficiency_report, url: update_officer_deficiency_report_path do |f| %>
+    <%= f.select :deficiency_report_officer_id, DeficiencyReport::Officer.all.collect{ |df| [df.name, df.id] }, { label: false, prompt: t('custom.deficiency_reports.show.sidebar.select_officer') }, { onchange: "this.form.submit();" } %>
+  <% end %>
+<% end %>
