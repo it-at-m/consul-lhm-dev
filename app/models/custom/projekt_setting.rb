@@ -79,7 +79,6 @@ class ProjektSetting < ApplicationRecord
         "projekt_feature.proposals.only_admins_create_proposals": '',
         "projekt_feature.proposals.show_in_sidebar_filter": 'active',
         "projekt_feature.proposals.show_map": 'active',
-        "projekt_feature.proposals.enable_summary": '',
         "projekt_feature.proposals.allow_voting": 'active',
         "projekt_feature.proposals.enable_external_video": 'active',
         "projekt_feature.proposals.enable_geoman_controls_in_maps": 'active',
