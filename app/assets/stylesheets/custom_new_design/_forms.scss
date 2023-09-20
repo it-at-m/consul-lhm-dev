@@ -26,6 +26,10 @@
     }
   }
 
+  form label {
+    font-size: inherit;
+  }
+
   form .checkbox, form .radio {
     vertical-align: top;
   }
