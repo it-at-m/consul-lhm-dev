@@ -179,6 +179,7 @@ module Takeable
   end
 
   def load_featured
+    return if Setting.new_design_enabled?
     return unless !@advanced_search_terms && @search_terms.blank? && params[:retired].blank? && @current_order != "recommendations"
     return unless controller_name == 'proposals'
 

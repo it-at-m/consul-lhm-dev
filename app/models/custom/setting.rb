@@ -22,6 +22,18 @@ class Setting < ApplicationRecord
   end
 
   class << self
+    def all_settings_hash
+      unless Current.settings.present?
+        Current.settings = Setting.all.pluck(:key, :value).to_h
+      end
+
+      Current.settings
+    end
+
+    def [](key)
+      all_settings_hash[key]
+    end
+
     def defaults
       {
         "feature.featured_proposals": nil,
