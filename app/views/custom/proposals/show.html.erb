@@ -2,13 +2,13 @@
 <% preview = false unless local_assigns.has_key? :preview %>
 <% provide :title do %><%= @proposal.title %><% end %>
 <% content_for :meta_description do %>
-  <%= projekt_phase_feature?(@proposal.projekt_phase, "form.enable_summary") ? @proposal.summary : strip_tags(@proposal.description)[0..200] %>
+  <%= strip_tags(@proposal.description)[0..200] %>
 <% end %>
 <% provide :social_media_meta_tags do %>
   <%= render "shared/social_media_meta_tags",
               social_url: proposal_url(@proposal),
               social_title: @proposal.title,
-              social_description: projekt_phase_feature?(@proposal.projekt_phase, "form.enable_summary") ? @proposal.summary : strip_tags(@proposal.description)[0..200],
+              social_description: strip_tags(@proposal.description)[0..200],
               twitter_image_url: (@proposal.image.present? ? polymorphic_path(@proposal.image) : nil),
               og_image_url: (@proposal.image.present? ? polymorphic_path(@proposal.image) : nil) %>
 <% end %>
