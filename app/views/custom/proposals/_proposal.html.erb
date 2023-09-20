@@ -50,7 +50,7 @@
           </div>
           <div class="resource-summary margin-bottom">
             <%= link_to namespaced_proposal_path(proposal) do %>
-              <%= auto_link_already_sanitized_html strip_tags(proposal.description)[0..200]) %>
+              <%= auto_link_already_sanitized_html(strip_tags(proposal.description)[0..200]) %>
               <div class="truncate"></div>
             <% end %>
           </div>
