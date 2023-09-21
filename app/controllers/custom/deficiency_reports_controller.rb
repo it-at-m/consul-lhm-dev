@@ -70,7 +70,12 @@ class DeficiencyReportsController < ApplicationController
 
   def create
     status = DeficiencyReport::Status.first
-    @deficiency_report = DeficiencyReport.new(deficiency_report_params.merge(author: current_user, status: status))
+
+    if deficiency_report_params["image_attributes"]["cached_attachment"].blank?
+      filtered_deficiency_report_params = deficiency_report_params.except("image_attributes")
+    end
+
+    @deficiency_report = DeficiencyReport.new(filtered_deficiency_report_params.merge(author: current_user, status: status))
 
     if @deficiency_report.save
       NotificationServices::NewDeficiencyReportNotifier.new(@deficiency_report.id).call
