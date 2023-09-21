@@ -1,10 +1,14 @@
 .custom-new-design {
-  .deficiency-report-category,
-  .deficiency-report-status {
+  .deficiency-report-category {
     padding: 0.05rem 0.3rem;
     border-radius: 4px;
     font-size: 0.8rem;
-    margin-right: 4px;
+
+  }
+
+  .deficiency-report-category,
+  .deficiency-report-status {
+    margin-left: 9px;
 
     i {
       font-size: 0.8rem;
