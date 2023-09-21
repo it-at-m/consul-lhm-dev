@@ -74,7 +74,7 @@ class Shared::ResourcesListComponent < ApplicationComponent
     elsif resource_type == Proposal
       "proposals.index"
     elsif resource_type == Budget::Investment
-      "budget.investment.index"
+      "budgets.investments.index"
     elsif resource_type == Poll
       "custom.polls.index"
     elsif resource_type == DeficiencyReport
@@ -115,9 +115,10 @@ class Shared::ResourcesListComponent < ApplicationComponent
     when Budget::Investment
       Budgets::Investments::ListItemComponent.new(
         budget_investment: resource,
-        ballot: @additional_data[:ballot],
-        top_level_active_projekts: @additional_data[:top_level_active_projekts],
-        top_level_archived_projekts: @additional_data[:top_level_archived_projekts]
+        budget_investment_ids: resources.ids,
+        ballot: @additional_data[:ballot]
+        # top_level_active_projekts: @additional_data[:top_level_active_projekts],
+        # top_level_archived_projekts: @additional_data[:top_level_archived_projekts]
       )
     when ProjektEvent
       ProjektEvents::ListItemComponent.new(projekt_event: resource)

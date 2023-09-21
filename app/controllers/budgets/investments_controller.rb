@@ -73,6 +73,12 @@ module Budgets
       set_comment_flags(@comment_tree.comments)
       @investment_ids = [@investment.id]
       @remote_translations = detect_remote_translations([@investment], @comment_tree.comments)
+
+      if Setting.new_design_enabled?
+        render :show_new
+      else
+        render :show
+      end
     end
 
     def create
