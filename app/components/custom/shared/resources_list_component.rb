@@ -77,6 +77,8 @@ class Shared::ResourcesListComponent < ApplicationComponent
       "budget.investment.index"
     elsif resource_type == Poll
       "custom.polls.index"
+    elsif resource_type == DeficiencyReport
+      "custom.deficiency_reports.index"
     end
   end
 

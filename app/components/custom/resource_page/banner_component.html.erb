@@ -15,13 +15,15 @@
           <%= resource.comments.count %> Kommentare
         <% end %>
       </div>
-      <div class="resource-page-banner--detail">
-        <%= link_to(projekt_path(resource.projekt)) do %>
-          <i class="fa fa-code-branch"></i>
-          Zugehöriges Projekt:
-          <%= resource.projekt.name %>
-        <% end %>
-      </div>
+      <% if @resource.respond_to?(:projekt) %>
+        <div class="resource-page-banner--detail">
+          <%= link_to(projekt_path(resource.projekt)) do %>
+            <i class="fa fa-code-branch"></i>
+            Zugehöriges Projekt:
+            <%= resource.projekt.name %>
+          <% end %>
+        </div>
+      <% end %>
       <% if @resource.respond_to?(:projekt_labels) && @resource.projekt_labels.any? %>
         <div class="resource-page-banner--detail">
           <i class="fa fa-tags"></i>
@@ -34,18 +36,29 @@
           <%= @resource.sentiment.name %>
         </div>
       <% end %>
+      <% if @resource.is_a?(DeficiencyReport) %>
+        <div class="resource-page-banner--detail">
+          <i class="fa fa-code-branch"></i>
+          <span class="deficiency-report-category" style="background-color:<%= @resource.category.color %>;color:#fff;">
+            <i class="fas fa-<%= @resource.category.icon %>"></i>
+            <%= @resource.category.name %>
+          </span>
+        </div>
+      <% end %>
     </div>
 
     <%= links_section %>
   </div>
 
-  <div class="resource-page-banner--image">
-    <%= render(
-      Shared::ResourceImageComponent.new(
-        image_url: resource.image&.variant(:large),
-        image_placeholder_icon_class: "fa-comments",
-        resource_name: resource.class.name.downcase
-      )
-    ) %>
-  </div>
+  <% if resource.image.present? %>
+    <div class="resource-page-banner--image">
+      <%= render(
+        Shared::ResourceImageComponent.new(
+          image_url: resource.image&.variant(:large),
+          image_placeholder_icon_class: "fa-comments",
+          resource_name: resource.class.name.downcase
+        )
+      ) %>
+    </div>
+  <% end %>
 </div>

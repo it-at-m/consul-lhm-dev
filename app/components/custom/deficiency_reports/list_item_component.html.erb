@@ -1,0 +1,19 @@
+<%= render(Resources::ListItemComponent.new(component_attributes)) do |c| %>
+  <% c.header do %>
+    <div>
+      <i class="fas fa-<%= deficiency_report.category.icon || "circle" %>"></i>
+      <%= link_to deficiency_report.category.name, deficiency_reports_path(dr_categories: deficiency_report.category.id) %>
+    </div>
+
+    <div>
+      <%= l(deficiency_report.created_at, format: :new_date_with_year) %>
+    </div>
+  <% end %>
+
+  <% c.footer_section do %>
+    <div class="deficiency-report-footer-status" style="background-color:<%= deficiency_report.status&.color %>;">
+      <i class="fas fa-<%= deficiency_report.status&.icon %>"></i>
+      <%= deficiency_report.status&.title %>
+    </div>
+  <% end %>
+<% end %>

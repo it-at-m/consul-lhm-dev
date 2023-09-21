@@ -12,7 +12,7 @@
     <div class="main-column">
       <% if extended_feature?("polls.intro_text_for_polls") %>
         <div class="resource-page--intro-text">
-          <%= render_custom_block("polls_index_welcome", default_content: t("custom.polls.index.welcome_default_text")) %>
+          <%= render_custom_block("polls_index_welcome", default_content: t("custom.polls.index.welcome_default_text_html")) %>
         </div>
       <% end %>
     </div>
@@ -25,6 +25,7 @@
       <% end %>
 
       <%= render "shared/loader_spinner" %>
+
       <%= render(
         Shared::ResourcesListComponent.new(
           resources: @polls,
@@ -41,13 +42,17 @@
     <div id="polls-sidebar" class="sidebar">
       <%= render Shared::SidebarCardComponent.new(title: t("custom.common.information"), icon_name: "info-circle") do |c| %>
         <div class="margin-bottom-half">
-          <%= render_custom_block "projekt_overview_page_sidebar", default_content: t("custom.polls.index.sidebar_information_default_text") %>
-        </div>
-        <div class="margin-bottom-half">
-          <%= Poll.count %> <%= t("custom.common.polls") %>
+          <%= render_custom_block "polls_index_sidebar_information", default_content: t("custom.polls.index.sidebar_information_default_text") %>
         </div>
 
-        <%= render Shared::NewButtonComponent.new(resources_name: "polls", query_params: params) %>
+        <div class="proposals--info-count margin-bottom-half">
+          <span>
+            <%= t("custom.polls.index.count") %>
+          </span>
+          <span>
+            <%= @all_resources.count %>
+          </span>
+        </div>
       <% end %>
 
       <%= render Sidebar::ProjektsFilterComponent.new(
@@ -59,6 +64,7 @@
         current_projekt: @current_projekt
       ) %>
 
+    <%= render Sidebar::Filters::PollsStatusCardComponent.new %>
     <%= render Sidebar::Filters::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name, selected_affiliated_geozones: @affiliated_geozones) %>
     <%= render Sidebar::Filters::GeozoneRestrictionsCardComponent.new(
       geozones: @geozones,
@@ -67,9 +73,6 @@
     ) %>
     <%= render Sidebar::CategoriesCardComponent.new(categories: @categories, taggable: "poll") %>
     <%= render Sidebar::SdgsCardComponent.new(sdgs: @sdgs, sdg_targets: @sdg_targets) %>
-    <% if extended_feature?('polls.enable_my_posts_filter') %>
-      <%= render Sidebar::Filters::MyPostsCardComponent.new %>
-    <% end %>
     </div>
   </div>
 </main>

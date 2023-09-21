@@ -43,6 +43,12 @@ class DeficiencyReportsController < ApplicationController
     filter_by_my_posts
 
     set_deficiency_report_votes(@deficiency_reports)
+
+    if Setting.new_design_enabled?
+      render :index_new
+    else
+      render :index
+    end
   end
 
   def show
@@ -50,6 +56,12 @@ class DeficiencyReportsController < ApplicationController
     @comment_tree = CommentTree.new(@deficiency_report, params[:page], @current_order)
     set_comment_flags(@comment_tree.comments)
     set_deficiency_report_votes(@deficiency_reports)
+
+    if Setting.new_design_enabled?
+      render :show_new
+    else
+      render :show
+    end
   end
 
   def new
