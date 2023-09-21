@@ -249,12 +249,12 @@ class Projekt < ApplicationRecord
       .includes_children_projekts_with(:individual_group_values, :proposal_phases, :individual_group_values, :projekt_settings, :hard_individual_group_values)
       .includes({ parent: :individual_group_values }, { top_level_projekt: :hard_individual_group_values })
       .select do |projekt|
-        !projekt.hidden_for?(current_user) &&
-        projekt.all_parent_projekts.none? { |p| p.hidden_for?(current_user) } &&
-        projekt.can_assign_resources?(controller_name, current_user) &&
-        projekt.all_children_projekts.any? do |p|
-          p.can_assign_resources?(controller_name, current_user)
-        end
+        (!projekt.hidden_for?(current_user) || projekt.all_parent_projekts.none? { |p| p.hidden_for?(current_user) }) &&
+        (projekt.can_assign_resources?(controller_name, current_user) ||
+          projekt.all_children_projekts.any? do |p|
+            p.can_assign_resources?(controller_name, current_user)
+          end
+        )
       end
   end
 
@@ -307,12 +307,6 @@ class Projekt < ApplicationRecord
       legislation_phases
         .reject { |lp| lp.legislation_process.present? || !lp.selectable_by?(user) }
         .any?
-    end
-  end
-
-  def can_assign_resources_to_any_child_projekt?(controller_name, user)
-    all_children_projekts.any? do |child_projekt|
-      child_projekt.can_assign_resources?(controller_name, user)
     end
   end
 
