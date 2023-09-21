@@ -38,10 +38,13 @@
       <% end %>
       <% if @resource.is_a?(DeficiencyReport) %>
         <div class="resource-page-banner--detail">
-          <i class="fa fa-code-branch"></i>
           <span class="deficiency-report-category" style="background-color:<%= @resource.category.color %>;color:#fff;">
             <i class="fas fa-<%= @resource.category.icon %>"></i>
             <%= @resource.category.name %>
+          </span>
+          <span class="deficiency-report-status" style="background-color:<%= @resource.status.color %>;color:#fff;">
+            <i class="fas fa-<%= @resource.status.icon %>"></i>
+            <%= @resource.status.title %>
           </span>
         </div>
       <% end %>

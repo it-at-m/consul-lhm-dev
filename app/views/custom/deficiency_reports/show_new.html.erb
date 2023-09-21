@@ -68,17 +68,20 @@
       <aside class="sidebar">
         <%= render Sidebar::ResourceAuthorComponent.new(user: @deficiency_report.author) %>
 
-        <%= render(Shared::SidebarCardComponent.new(
-          title: t("custom.deficiency_reports.show.status.title"),
-          description: t("custom.deficiency_reports.show.status.description"),
-          icon_name: "check-circle")) do |c| %>
-          <%= render "deficiency_reports/status", deficiency_report: @deficiency_report %>
+        <% if can? :update_status, @deficiency_report %>
+          <%= render(Shared::SidebarCardComponent.new(
+            title: t("custom.deficiency_reports.show.status.title"),
+            icon_name: "check-circle")) do |c| %>
+            <%= render "deficiency_reports/status", deficiency_report: @deficiency_report %>
+          <% end %>
         <% end %>
 
-        <%= render(Shared::SidebarCardComponent.new(
-          title: t("custom.deficiency_reports.show.category.title"),
-          icon_name: "check-circle")) do |c| %>
-          <%= render "deficiency_reports/category", deficiency_report: @deficiency_report %>
+        <% if can? :update_category, @deficiency_report %>
+          <%= render(Shared::SidebarCardComponent.new(
+            title: t("custom.deficiency_reports.show.category.title"),
+            icon_name: "check-circle")) do |c| %>
+            <%= render "deficiency_reports/category", deficiency_report: @deficiency_report %>
+          <% end %>
         <% end %>
 
         <% if feature?(:allow_attached_documents) && @deficiency_report.documents.present? %>
@@ -112,10 +115,12 @@
           <% end %>
         <% end %>
 
-        <%= render(Shared::SidebarCardComponent.new(
-          title: t("custom.deficiency_reports.show.author_actions.title"),
-          icon_name: "user-edit")) do |c| %>
-          <%= render "deficiency_reports/author_actions", deficiency_report: @deficiency_report %>
+        <% if current_user == @deficiency_report.author %>
+          <%= render(Shared::SidebarCardComponent.new(
+            title: t("custom.deficiency_reports.show.author_actions.title"),
+            icon_name: "user-edit")) do |c| %>
+            <%= render "deficiency_reports/author_actions", deficiency_report: @deficiency_report %>
+          <% end %>
         <% end %>
       </aside>
     </div>
