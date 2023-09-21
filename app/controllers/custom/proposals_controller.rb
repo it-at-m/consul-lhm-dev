@@ -16,9 +16,9 @@ class ProposalsController
 
     @geozones = Geozone.all
     @selected_geozone_affiliation = params[:geozone_affiliation] || "all_resources"
-    @affiliated_geozones = (params[:affiliated_geozones] || '').split(',').map(&:to_i)
+    @affiliated_geozones = (params[:affiliated_geozones] || "").split(",").map(&:to_i)
     @selected_geozone_restriction = params[:geozone_restriction] || "no_restriction"
-    @restricted_geozones = (params[:restricted_geozones] || '').split(",").map(&:to_i)
+    @restricted_geozones = (params[:restricted_geozones] || "").split(",").map(&:to_i)
 
     discard_draft
     discard_archived
@@ -90,11 +90,27 @@ class ProposalsController
     params[:projekt_id] = @selected_projekt&.id
   end
 
+  def update
+    custom_proposal_params = proposal_params
+
+    if proposal_params["image_attributes"]["cached_attachment"].blank?
+      custom_proposal_params = proposal_params.except("image_attributes")
+    end
+
+    if resource.update(custom_proposal_params)
+      redirect_to resource, notice: t("flash.actions.update.#{resource_name.underscore}")
+    else
+      load_geozones
+      set_resource_instance
+      render :edit
+    end
+  end
+
   def create
     custom_proposal_params = proposal_params
 
-    if proposal_params['image_attributes']['cached_attachment'].blank?
-      custom_proposal_params = proposal_params.except('image_attributes')
+    if proposal_params["image_attributes"]["cached_attachment"].blank?
+      custom_proposal_params = proposal_params.except("image_attributes")
     end
 
     @proposal = Proposal.new(custom_proposal_params.merge(author: current_user))
