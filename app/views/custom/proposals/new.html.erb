@@ -1,14 +1,12 @@
 <%= content_for :body_class, "js-new-resource" %>
 
 <% if Setting.new_design_enabled? %>
-  <%
-    title =
-      if @projekt_phase&.resource_form_title.present?
-        @projekt_phase.resource_form_title.presence || t("custom.user_resources.form.title")
-      else
-        t("new.start_new", scope: 'proposals')
-      end
-  %>
+  <% title =
+       if @projekt_phase&.resource_form_title.present?
+         @projekt_phase.resource_form_title.presence || t("custom.user_resources.form.title")
+       else
+         t("new.start_new", scope: "proposals")
+       end %>
 
   <%= render UserResources::FormComponent.new(
     @proposal,

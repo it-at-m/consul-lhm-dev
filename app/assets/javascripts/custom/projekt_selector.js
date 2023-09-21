@@ -2,6 +2,8 @@
   "use strict";
 
   App.ProjektSelector = {
+    initialized: false,
+
     toggleProjektGroup: function(selector) {
       if (selector.dataset.target) {
         var target_projekt_group_id = selector.dataset.target;
@@ -268,6 +270,10 @@
     },
 
     changeResourceFormTitle: function($projektPhase) {
+      if (!this.initialized) {
+        return;
+      }
+
       var phaseFormTitle = $projektPhase.data("resourceFormTitle");
 
       if (phaseFormTitle && phaseFormTitle.length > 0) {
@@ -486,6 +492,7 @@
       });
 
       this.storeDefaultFormTitle();
+      this.initialized = true;
     }
   };
 }).call(this);

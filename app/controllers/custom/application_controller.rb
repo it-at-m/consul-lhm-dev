@@ -3,7 +3,8 @@ require_dependency Rails.root.join("app", "controllers", "application_controller
 class ApplicationController < ActionController::Base
   before_action :set_projekts_for_overview_page_navigation,
                 :set_default_social_media_images, :set_partner_emails
-  before_action :show_launch_page, if: :show_launch_page?
+  before_action :set_partner_emails
+  after_action :set_back_path
   helper_method :set_comment_flags
 
   # unless Rails.env.production?
@@ -127,5 +128,9 @@ class ApplicationController < ActionController::Base
 
     def javascript_request?
       request.format == "text/javascript"
+    end
+
+    def set_back_path
+      session[:back_path] = request.fullpath
     end
 end

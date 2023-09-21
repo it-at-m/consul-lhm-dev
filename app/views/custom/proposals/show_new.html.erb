@@ -2,13 +2,13 @@
 <% preview = false unless local_assigns.has_key? :preview %>
 <% provide :title do %><%= @proposal.title %><% end %>
 <% content_for :meta_description do %>
-  <%= projekt_feature?(@proposal.projekt, "proposals.enable_summary") ? @proposal.summary : strip_tags(@proposal.description)[0..200] %>
+  <%= strip_tags(@proposal.description)[0..200] %>
 <% end %>
 <% provide :social_media_meta_tags do %>
   <%= render "shared/social_media_meta_tags",
     social_url: proposal_url(@proposal),
     social_title: @proposal.title,
-    social_description: projekt_feature?(@proposal.projekt, 'proposals.enable_summary') ? @proposal.summary : strip_tags(@proposal.description)[0..200],
+    social_description: strip_tags(@proposal.description)[0..200],
     twitter_image_url: (@proposal.image.present? ? polymorphic_path(@proposal.image) : nil),
     og_image_url: (@proposal.image.present? ? polymorphic_path(@proposal.image) : nil) %>
 <% end %>
@@ -107,7 +107,7 @@
       <aside class="sidebar">
         <%= render Sidebar::ResourceAuthorComponent.new(user: @proposal.author) %>
 
-        <% if projekt_feature?(@proposal&.projekt, 'proposals.allow_voting') %>
+        <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.allow_voting") %>
           <%= render(Shared::SidebarCardComponent.new(title: "Unterstützer*innen", icon_name: "vote-yea")) do |c| %>
             <div class="proposal-page--votes">
               <%= render "proposals/support_status", proposal: @proposal %>
@@ -132,7 +132,7 @@
           <% end %>
         <% end %>
 
-        <% if !@proposal.selected? && projekt_feature?(@proposal.projekt, 'proposals.show_related_content') %>
+        <% if !@proposal.selected? && projekt_phase_feature?(@proposal.projekt_phase, "resource.show_related_content") %>
           <%= render(Shared::SidebarCardComponent.new(title: t("related_content.title"), icon_name: "link")) do %>
             <p>
               <%= t("related_content.description") %>
@@ -148,7 +148,7 @@
         <% end %>
 
         <% if current_user && projekt_phase_feature?(@proposal.projekt_phase, "resource.show_follow_button_in_proposal_sidebar") %>
-          <%= render(Shared::SidebarCardComponent.new(title: t("shared.follow"), icon_name: "tag")) do |c| %>
+          <%= render(Shared::SidebarCardComponent.new(title: t("shared.follow"), icon_name: "star")) do |c| %>
             <p><%= t("custom.shared.show.follow_text") %></p>
             <%= render "follows/follow_button", follow: find_or_build_follow(current_user, @proposal) %>
           <% end %>
