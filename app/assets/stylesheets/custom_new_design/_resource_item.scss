@@ -220,20 +220,17 @@
     .callout.warning, .callout.success, .callout.error,
     .callout.alert, .participation-not-allowed,
     .participation-not-allowed p{
-      width: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
       font-size: 14px;
       height: 100%;
-      // display: flex;
       margin-bottom: 0;
       align-items: center;
       line-height: 1.3;
       text-align: left;
       border: none;
       margin: 0;
-      padding: 10px 25px;
+      padding: 8px 25px;
+      width: 299px;
+      margin-left: -25px;
     }
 
     p.investment-project-amount {
@@ -257,6 +254,8 @@
     position: relative;
     border-top: 1px solid $border-color;
     min-height: 93px;
+    padding: 10px 25px;
+    padding-bottom: 0;
     flex-direction: column;
 
     .supports-container {
@@ -272,14 +271,14 @@
       width: auto;
     }
 
-    // .supports {
-    //   display: flex;
-    //   flex-direction: column-reverse;
-    //
-    //   .total-supports {
-    //     margin-top: 5px;
-    //   }
-    // }
+    .supports {
+      padding-top: 5px;
+
+      .total-supports {
+        display: block;
+        margin-bottom: 10px;
+      }
+    }
 
     .budget-item--vote-button {
       height: 100%;
