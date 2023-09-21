@@ -172,7 +172,7 @@ de:
     direct_message: Private Nachricht
     error: Fehler
     errors: Fehler
-    not_saved: "verhinderte das Speichern dieser %{resource}. <br>Bitte überprüfen Sie die gekennzeichneten Felder, um herauszufinden wie diese korrigiert werden können:"
+    not_saved: "Fehler verhindern das Speichern. <br>Bitte überprüfen Sie die gekennzeichneten Felder."
     policy: Datenschutzbestimmungen
     banner: Banner
     proposal: Vorschlag

@@ -91,7 +91,21 @@
   }
 
   .sdg-goal-tag-cloud {
-    margin-top: 0;
+    margin-top: 20px;
+
+
+    .sdg-goal-tag-list {
+      gap: 7px;
+    }
+
+    .sdg-goal-tag-list > * {
+      margin: 0;
+    }
+
+    .sdg-goal-icon {
+      border-radius: 5px;
+      min-width: 58px;
+    }
   }
 
   .projekt-tag-chip-icon:before {

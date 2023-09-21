@@ -12,7 +12,7 @@
       <% if local_assigns[:message].present? %>
         <%= message %>
       <% else %>
-        <%= sanitize(t("form.not_saved", resource: t("form.#{resource.class.to_s.underscore}"))) %>
+        <%= sanitize(t("form.not_saved")) %>
       <% end %>
     </strong>
   </div>

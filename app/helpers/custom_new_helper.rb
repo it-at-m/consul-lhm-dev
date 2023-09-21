@@ -22,7 +22,14 @@ module CustomNewHelper
         tag.span(class: "icon-angle-left") + t("shared.back")
       end
     else
-      back_link_to fallback_path
+      back_path =
+        if session[:back_path].present? && session[:back_path] != request.fullpath
+          session[:back_path]
+        else
+          fallback_path
+        end
+
+      back_link_to(back_path)
     end
   end
 
@@ -34,5 +41,9 @@ module CustomNewHelper
     if sentiment.present?
       "background-color:#{sentiment.color};color: #{pick_text_color(sentiment.color)}"
     end
+  end
+
+  def setting
+    Setting.all_settings_hash
   end
 end
