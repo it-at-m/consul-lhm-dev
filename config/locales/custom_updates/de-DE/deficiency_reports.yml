@@ -43,6 +43,7 @@ de:
         welcome_default_text_html: In jeder Stadt kommt es dann und wann zu Mängeln – gut, wenn diese von aufmerksamen BürgerInnen gemeldet werden, um sie schnell zu beheben.
           Sie sehen auf dieser Seite, welche Mängel bereits gemeldet wurden. Die Karte hilft Ihnen dabei, den jeweiligen Mangel zu verorten.<br></br>
           Wenden auch Sie sich an uns, wenn Ihnen ein Mangel auffällt – und tragen Sie bei zu einem sauberen Stadtbild und einer funktionierenden Stadt.
+        sidebar_information_default_text: Ihnen ist ein Mangel in der Stadt aufgefallen? Dann freuen wir uns über Ihre Mitteilung, damit wir uns schnellstmöglich darum kümmern können.
         count: Mangelmeldungen
         deficiency_report:
           by: von

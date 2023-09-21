@@ -22,7 +22,7 @@ class MapLocation < ApplicationRecord
       lat: latitude,
       long: longitude,
       alt: altitude,
-      color: pin_color,
+      color: get_pin_color,
       fa_icon_class: get_fa_icon_class
     }
   end

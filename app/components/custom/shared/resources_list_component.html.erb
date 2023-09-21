@@ -1,9 +1,9 @@
 <% map = capture do %>
   <% if @map_coordinates.present? %>
-    <% resources_name = resources.first&.class&.name&.downcase&.pluralize %>
+    <% resources_name = resources.first&.class&.name&.underscore&.pluralize %>
+    <% resources_name = "deficiency-reports" if resources.first&.is_a?(DeficiencyReport) %>
     <div class="map resources-list--map not-print">
       <%= render Shared::MapComponent.new(
-        map_location: MapLocation.new(latitude: Setting["map.latitude"], longitude: Setting["map.longitude"], zoom: Setting["map.zoom"]),
         parent_class: resources_name,
         process_coordinates: @map_coordinates
       ) %>

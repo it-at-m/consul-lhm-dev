@@ -73,6 +73,8 @@ class DeficiencyReportsController < ApplicationController
 
     if deficiency_report_params["image_attributes"]["cached_attachment"].blank?
       filtered_deficiency_report_params = deficiency_report_params.except("image_attributes")
+    else
+      filtered_deficiency_report_params = deficiency_report_params
     end
 
     @deficiency_report = DeficiencyReport.new(filtered_deficiency_report_params.merge(author: current_user, status: status))
