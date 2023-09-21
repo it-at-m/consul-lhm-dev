@@ -74,10 +74,10 @@
       var projektPhaseId = $projektPhase.data("projektPhaseId");
       $("[id$=\"projekt_phase_id\"]").val(projektPhaseId);
 
-      if ( $("span#persisted-resource-data").length) {
+      if ($("span#persisted-resource-data").length) {
         var persistedResourceData = $("span#persisted-resource-data").data();
 
-        if (persistedResourceData["resourceMap"]) {
+        if (persistedResourceData.resourceMap) {
           $("#map-container").show();
         }
       } else {

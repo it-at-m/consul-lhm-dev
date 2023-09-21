@@ -27,15 +27,16 @@ module Takeable
     #       .where(id: scoped_projekts_ids)
     #     ).distinct
 
-    if params[:filter_projekt_ids].present?
-      projekt_ids_to_filter = params[:filter_projekt_ids].split(",")
-      filtered_projekt_ids = projekt_ids_to_filter & scoped_projekts_ids
+    return if params[:filter_projekt_ids].blank?
 
-        @resources =
-          @resources
-            .includes(:projekt)
-            .where(projekts: { id: filtered_projekt_ids })
-    end
+    projekt_ids_to_filter = params[:filter_projekt_ids].map(&:to_i)
+    filtered_projekt_ids = projekt_ids_to_filter & scoped_projekts_ids
+
+    @resources =
+      @resources
+        .includes(projekt_phase: :projekt)
+        .references(:projekt)
+        .where(projekts: { id: filtered_projekt_ids })
   end
 
   def take_by_projekt_labels
