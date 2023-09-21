@@ -1,8 +1,6 @@
 <%= render(Resources::ListItemComponent.new(component_attributes)) do |c| %>
   <% c.header do %>
     <div>
-      <i class="fas fa-<%= deficiency_report.category.icon || "circle" %>"></i>
-      <%= link_to deficiency_report.category.name, deficiency_reports_path(dr_categories: deficiency_report.category.id) %>
     </div>
 
     <div>
