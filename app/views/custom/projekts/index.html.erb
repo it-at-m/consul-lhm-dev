@@ -52,7 +52,7 @@
       </div>
 
       <% if show_affiliation_filter_in_sidebar? %>
-        <%= render "shared/sidebar_filter/geozone_affiliations" %>
+        <%= render "shared/sidebar_filter/geozone_affiliations", selected_affiliated_geozones: @affiliated_geozones %>
       <% end %>
 
       <%= render "shared/categories", taggable: "projekt" %>
