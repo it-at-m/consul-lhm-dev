@@ -50,8 +50,6 @@ class ProposalsController
 
     unless params[:search].present?
       take_by_my_posts
-      take_by_tag_names(related_projekts)
-      take_by_sdgs(related_projekts)
       take_by_geozone_affiliations
       take_by_geozone_restrictions
       take_by_projekts(@scoped_projekt_ids)

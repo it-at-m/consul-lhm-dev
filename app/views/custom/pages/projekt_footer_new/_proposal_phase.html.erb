@@ -18,18 +18,23 @@
   </div>
 
   <aside id="proposals-sidebar" class="sidebar">
-    <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
+    <%= render Shared::SidebarCardComponent.new(title: t('custom.common.information'), icon_name: "info-circle") do |c| %>
+      <div class="margin-bottom-half">
+        <%= render_custom_block 'projekt_overview_page_sidebar', default_content: t("custom.proposals.index.sidebar_information_default_text")  %>
+      </div>
+      <div class="proposals--info-count margin-bottom-half">
+        <% if @all_resources.present? %>
+          <span>
+            <%= t('custom.proposals.index.count') %>
+          </span>
+          <span>
+            <%= @all_resources.count %>
+          </span>
+        <% end %>
+      </div>
 
-    <%# <%= render Sidebar::Filters::GeozoneAffiliationsCardComponent.new(
-    <%#   geozones: @geozones,
-    <%#   resource_name: @resource_name
-    <%# ) %>
-
-    <%# <%= render Sidebar::Filters::GeozoneRestrictionsCardComponent.new(
-    <%#   geozones: @geozones,
-    <%#   restricted_geozones: @restricted_geozones,
-    <%#   selected_geozone_restriction: @selected_geozone_restriction
-    <%# ) %>
+      <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
+    <% end %>
 
     <% if current_user.present? && extended_feature?('proposals.enable_my_posts_filter') %>
       <%= render Sidebar::Filters::MyPostsCardComponent.new %>
