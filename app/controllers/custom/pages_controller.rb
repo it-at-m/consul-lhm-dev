@@ -121,6 +121,7 @@ class PagesController < ApplicationController
     else
       take_by_projekt_labels
       take_by_sentiment
+      take_by_my_posts
     end
 
     @proposals_coordinates = all_proposal_map_locations(@resources)

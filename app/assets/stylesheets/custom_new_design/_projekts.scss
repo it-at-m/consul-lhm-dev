@@ -1,3 +1,9 @@
 .filter-projekts-active {
   margin-bottom: 10px;
 }
+
+.projekt-footer-navigation::after {
+  width: 100;
+  left: 0;
+  right: 0;
+}

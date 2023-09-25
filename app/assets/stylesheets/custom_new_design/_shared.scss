@@ -39,6 +39,7 @@
 
     &:focus, &:active {
       background-color: #FFA42D;
+      color: black;
     }
 
     &:hover {
@@ -64,4 +65,9 @@
 
 .documents .document-link {
   border-radius: 5px;
+}
+
+ul.deficiency-reports-sidebar-filter input::checked ~ .checkmark::before {
+
+     content: "\f192";
 }

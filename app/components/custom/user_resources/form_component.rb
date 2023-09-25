@@ -18,7 +18,7 @@ class UserResources::FormComponent < ApplicationComponent
   def projekt_phase
     @projekt_phase ||=
       if params[:projekt_phase_id]
-        Projekt.top_level.find(params[:projekt_id]).projekt_phases.find(params[:projekt_phase_id])
+        Projekt.find(params[:projekt_id]).projekt_phases.find(params[:projekt_phase_id])
       else
         @resource.projekt_phase
       end

@@ -37,7 +37,7 @@
         language: language,
         toolbar: toolbar,
         height: height,
-        placeholdertext: element.placeholder
+        placeholdertext: element.dataset.placeholder
       });
     },
 
