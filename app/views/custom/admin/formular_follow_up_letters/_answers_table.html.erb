@@ -1,0 +1,39 @@
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Follow-up E-Mail(s)</th>
+      <% @formular_fields.each do |ff| %>
+        <th><%= ff.name %></th>
+      <% end %>
+      <% if @image_flag %>
+        <th>Bilder</th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @formular_answers.each do |fa| %>
+      <tr>
+        <td>
+          <%= check_box_tag "formular_answer_ids[]", fa.id, true %>
+        </td>
+        <td>
+          <% fa.formular_follow_up_letter_recipients.order(:id).map do |recipient| %>
+            <%= "#{recipient.formular_follow_up_letter.subject} (#{recipient.formular_follow_up_letter.sent_at || "Entwurf"})" %>
+            <br>
+          <% end %>
+        </td>
+        <% @formular_fields.each do |ff| %>
+          <td><%= fa.answers[ff.key] %></td>
+        <% end %>
+        <% if @image_flag %>
+          <td>
+            <%= fa.formular_answer_images.map do |image| %>
+              <% link_to image.formular_field_key, url_for(image.variant(:large)), target: "_blank" %>
+            <% end.join(", ").html_safe %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
