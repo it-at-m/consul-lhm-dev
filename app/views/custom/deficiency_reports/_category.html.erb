@@ -1,7 +1,7 @@
 <% cache [deficiency_report,
           deficiency_report.category] do %>
 
-  <% if deficiency_report.category.present? %>
+  <% if deficiency_report.category.present? && !Setting.new_design_enabled? %>
     <div class="deficiency-report-category margin-bottom">
       <i class="fas fa-<%= deficiency_report.category.icon %>"></i>
       <%= deficiency_report.category.name %>
