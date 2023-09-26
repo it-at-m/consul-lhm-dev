@@ -124,6 +124,8 @@ class ProjektPhase < ApplicationRecord
   end
 
   def permission_problem(user, location: nil)
+    return :only_admins if selectable_by_admins_only? && !(user&.administrator? || user&.projekt_manager?)
+
     return :not_logged_in unless user
     return :phase_not_active if not_active?
     return :phase_expired if expired?

@@ -10,9 +10,10 @@ class Shared::NewButtonComponent < ApplicationComponent
   end
 
   def render?
+    return false if @projekt_phase&.selectable_by_admins_only? && !(current_user&.administrator? || current_user&.projekt_manager?) # if only admins can create resources
+
     return true if current_user.blank?
     return true if @projekt_phase&.projekt&.overview_page? # projects overview page
-    return false if @projekt_phase&.selectable_by_admins_only? && !(current_user.administrator? || current_user.projekt_manager?) # if only admins can create resources
     return Projekt.top_level.selectable_in_selector(@resources_name, current_user).any? if @resources_name.present? # resources index page
 
     if @projekt_phase.is_a?(ProjektPhase::BudgetPhase) # projekt page footer tab for budgets
