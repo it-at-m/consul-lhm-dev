@@ -192,7 +192,7 @@
     // min-height: 142px;
     display: flex;
     flex-direction: column;
-    min-height: 174px;
+    min-height: 201px;
   }
 
   .resource-item--sdgs {
@@ -272,6 +272,9 @@
     }
 
     .supports {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       min-height: 146px;
 
       .total-supports {

@@ -9,10 +9,10 @@ class Resources::ListItemComponent < ApplicationComponent
   DATE_FORMAT = "%d.%m.%Y".freeze
 
   def initialize(
-    resource: nil,
-    projekt: nil,
     title:,
     description:,
+    resource: nil,
+    projekt: nil,
     image_url: nil,
     author: nil,
     subline: nil,
@@ -22,10 +22,10 @@ class Resources::ListItemComponent < ApplicationComponent
     header_style: nil,
     narrow_header: false
   )
-    @resource = resource
     @title = title
     @projekt = projekt
     @description = description
+    @resource = resource
     @image_url = image_url
     @author = author
     @url = url

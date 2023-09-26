@@ -13,17 +13,17 @@ class Shared::ResourcesListComponent < ApplicationComponent
     resources_name: nil,
     filters: nil,
     current_filter: nil,
+    filter_param: nil,
     remote_url: nil,
     map_coordinates: nil,
     css_class: nil,
     filter_title: nil,
     empty_list_text: nil,
-    filter_param: nil,
+    text_search_params_name: nil,
     hide_actions: false,
     hide_title: false,
     only_content: false,
     text_search_enabled: false,
-    text_search_params_name: nil,
     additional_data: {}
   )
     @resources = resources

@@ -1,0 +1,34 @@
+<div class="new-card -no-padding users-profile-banner">
+  <div class="users-profile-banner--background-image">
+  </div>
+  <div class="users-profile-banner--avatar">
+    <%= @user.name.chars.first.upcase %>
+  </div>
+  <div class="users-profile-banner--info">
+    <div class="users-profile-banner--name">
+      <%= @user.full_name %>
+    </div>
+    <div class="users-profile-banner--info-line">
+      Beigetreten am: <%= l(@user.created_at, format: :date_only) %>
+    </div>
+    <div class="users-profile-banner--info-line">
+      <% if @user == current_user %>
+        <% if @user.level_three_verified? %>
+          <span class="icon-check"></span>
+          <%= t("account.show.verified_account") %>
+        <% elsif @user.level_two_verified? %>
+          <%= link_to t("account.show.finish_verification"), verification_path, class: "button success" %>
+        <% else %>
+          <%= link_to t("account.show.verify_my_account"), verification_path, class: "button success" %>
+        <% end %>
+      <% else %>
+        <% if @user.level_three_verified? %>
+          <span class="icon-check"></span>
+          <%= t("account.show.verified_account") %>
+        <% else %>
+          Konto ist nicht verifiziert
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

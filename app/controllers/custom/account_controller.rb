@@ -5,6 +5,12 @@ class AccountController < ApplicationController
     @account_individial_groups_hard = IndividualGroup.hard
     @account_individial_groups_soft = IndividualGroup.soft
     @account_individual_group_values = @account.individual_group_values
+
+    if Setting.new_design_enabled?
+      render :show_new
+    else
+      render :show
+    end
   end
 
   private
