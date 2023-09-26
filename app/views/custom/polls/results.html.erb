@@ -105,14 +105,21 @@
             </tbody>
           </table>
           <% if can? :csv_answers_streets, question %>
-            <%= link_to t('custom.polls.results.question_street_details_csv_link'), polls_question_csv_answers_streets_path(question.id, format: :csv) %>
-            &nbsp;|&nbsp;
+            <%= link_to t("custom.polls.results.question_street_details_csv_link"), polls_question_csv_answers_streets_path(question.id, format: :csv) %>
           <% end %>
           <% if can? :csv_answers_votes, question %>
-            <%= link_to t('custom.polls.results.question_answer_details_csv_link'), polls_question_csv_answers_votes_path(question.id, format: :csv) %>
+            &nbsp;|&nbsp;
+            <%= link_to t("custom.polls.results.question_answer_details_csv_link"), polls_question_csv_answers_votes_path(question.id, format: :csv) %>
           <% end %>
-        </div>
+          <% if can? :csv_open_answers, question %>
+            <% question_answer_with_open_answers = question.question_answers.find_by(open_answer: true) %>
+            <% if question_answer_with_open_answers.present? %>
+              &nbsp;|&nbsp;
+              <%= link_to t("custom.polls.results.open_answers_csv_link"), polls_question_csv_open_answers_path(question.id, format: :csv) %>
+            <% end %>
+          <% end %>
 
+        </div>
       <% end %>
     </div>
   </div>

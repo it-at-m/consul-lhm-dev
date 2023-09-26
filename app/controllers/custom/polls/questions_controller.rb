@@ -44,6 +44,17 @@ class Polls::QuestionsController < ApplicationController
     end
   end
 
+  def csv_open_answers
+    question = Poll::Question.find(params[:id])
+
+    respond_to do |format|
+      format.csv do
+        send_data CsvServices::PollQuestionOpenAnswersExporter.new(question).call,
+          filename: "question_#{question.id}_open_answers_#{Time.zone.today.strftime("%d/%m/%Y")}.csv"
+      end
+    end
+  end
+
   private
 
     def open_answer_params

@@ -25,6 +25,7 @@ en:
         question_street_details_csv_link: Download details about streets
         question_answer_details_tooltip: Crosssecrional details
         question_answer_details_csv_link: Download details about crossectional voting
+        open_answers_csv_link: Download open answers
       show:
         confirm_participation_button: Confirm my vote
         confirm_participation_notice: You have successfully participated in the poll.

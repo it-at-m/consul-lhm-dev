@@ -109,6 +109,7 @@ Rails.application.routes.draw do
   # csv details for poll questions
   get    "/polls/questions/:id/csv_answers_streets",       to: "polls/questions#csv_answers_streets", as: :polls_question_csv_answers_streets
   get    "/polls/questions/:id/csv_answers_votes",         to: "polls/questions#csv_answers_votes",   as: :polls_question_csv_answers_votes
+  get    "/polls/questions/:id/csv_open_answers",          to: "polls/questions#csv_open_answers",    as: :polls_question_csv_open_answers
 
   # csv details for poll results
   get    "/polls/:id/csv_answers_votes",                   to: "polls#csv_answers_votes",             as: :poll_csv_answers_votes
