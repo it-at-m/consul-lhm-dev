@@ -3,36 +3,94 @@
   <%= render "shared/canonical", href: budget_investment_url %>
 <% end %>
 
-<%= render "/budgets/investments/investment_show",
-  investment: @investment,
-  investment_ids: @investment_ids,
-  ballot: @ballot %>
+<main class="resource-page">
+  <div id="<%= dom_id(@investment) %>">
+    <div class="flex-layout">
+      <div class="main-column">
+        <%= back_link_to(page_path(@investment.projekt.page.slug, selected_phase_id: @investment.projekt_phase.id)) %>
 
-<% if projekt_phase_feature?(@investment&.projekt_phase, "resource.show_comments") ||
-      projekt_phase_feature?(@investment&.projekt_phase, "resource.enable_investment_milestones_tab") %>
-  <div class='additional-content margin-top'>
-    <div class='filter-subnav'>
-      <div class="row">
-        <div class="small-12 column">
-          <%= render "budgets/investments/filter_subnav" %>
+        <h1 class="resource-page--title"><%= "Beitrag von #{@investment.author.name}" %></h1>
+        <div class="common-page-description">
+          <%= render_custom_block("budget_investment_show_welcome_text", default_content: t("custom.budgets.investments.show.welcome_default_text_html", author_name: @investment.author.name)) %>
+        </div>
+
+      </div>
+      <div class="sidebar-placeholder"></div>
+    </div>
+
+    <div class="flex-layout">
+      <div class="main-column">
+
+        <% if @investment.should_show_price? %>
+          <div class="resource-page--description new-card" style="background-color:#E3FCE7">
+            <h3><%= t("budgets.investments.show.price") %></h2>
+            <%= @investment.formatted_price %>
+          </div>
+
+          <% if @investment.should_show_price_explanation? %>
+            <div class="resource-page--description new-card" style="background-color:#E3FCE7">
+              <h3><%= t("budgets.investments.show.price") %></h2>
+              <%= @investment.price_explanation %>
+            </div>
+          <% end %>
+        <% end %>
+
+        <%= render ResourcePage::BannerComponent.new(resource: @investment) %>
+
+        <div class="resource-page--description new-card">
+          <%= auto_link_already_sanitized_html wysiwyg(@investment.description) %>
+        </div>
+
+        <% if projekt_phase_feature?(@investment.projekt_phase, "form.show_map") && map_location_available?(@investment) %>
+          <% if @investment.projekt.vc_map_enabled? %>
+            <div class="margin-bottom not-print">
+              <%= render Shared::VCMapComponent.new(
+                mappable: @investment,
+                map_location: @investment.map_location || @investment.projekt_phase.map_location_with_admin_shape,
+                parent_class: "investment",
+                projekt_phase: @investment.projekt_phase,
+                show_admin_shape: @investment.projekt_phase.map_location.show_admin_shape?
+              ) %>
+            </div>
+          <% else %>
+            <div class="margin-bottom not-print">
+              <%= render Shared::MapComponent.new(
+                mappable: @investment,
+                map_location: @investment.map_location || @investment.projekt_phase.map_location_with_admin_shape,
+                parent_class: "investment",
+                projekt_phase: @investment.projekt_phase,
+                show_admin_shape: @investment.projekt_phase.map_location.show_admin_shape?
+              ) %>
+            </div>
+          <% end %>
+        <% end %>
+
+        <div id="comments" class="footer-anchor">
+        </div>
+
+        <div class="proposal-resources-sections">
+          <% if projekt_phase_feature?(@investment&.projekt_phase, "resource.show_comments") ||
+                projekt_phase_feature?(@investment&.projekt_phase, "resource.enable_investment_milestones_tab") %>
+
+            <% if projekt_phase_feature?(@investment.projekt_phase, "resource.enable_investment_milestones_tab") && @milestones.present? %>
+              <div class="proposal-resources-section">
+                <%= render Proposals::MilestonesComponent.new(milestones: @milestones, milestoneable: @investment) %>
+              </div>
+            <% end %>
+
+            <% if projekt_phase_feature?(@investment&.projekt_phase, "resource.show_comments") %>
+              <div class="proposal-resources-section">
+                <%= render Shared::NewCommentsComponent.new(@investment, @comment_tree) %>
+              </div>
+            <% end %>
+
+          <% end %>
         </div>
       </div>
+
+      <aside class="sidebar">
+        <%= render Sidebar::ResourceAuthorComponent.new(user: @investment.author) %>
+      </aside>
     </div>
   </div>
-
-  <div class="tabs-content" data-tabs-content="investments_tabs">
-    <% if projekt_phase_feature?(@investment&.projekt_phase, "resource.show_comments") %>
-      <div class="tabs-panel <%= 'is-active' if default_active_investment_footer_tab?('comments') %>" id="tab-comments">
-        <%= render Shared::CommentsComponent.new(@investment, @comment_tree) do %>
-          <%= render MachineLearning::CommentsSummaryComponent.new(@investment) %>
-        <% end %>
-      </div>
-    <% end %>
-
-    <% if projekt_phase_feature?(@investment&.projekt_phase, "resource.enable_investment_milestones_tab") %>
-      <div class="tabs-panel <%= 'is-active' if default_active_investment_footer_tab?('milestones') %>" id="tab-milestones">
-        <%= render "milestones/milestones", milestoneable: @investment %>
-      </div>
-    <% end %>
-  </div>
-<% end %>
+</main>
