@@ -90,6 +90,81 @@
 
       <aside class="sidebar">
         <%= render Sidebar::ResourceAuthorComponent.new(user: @investment.author) %>
+
+        <% if @investment.should_show_aside? %>
+          <% if @investment.should_show_votes? %>
+            <%= render(Shared::SidebarCardComponent.new(title: t("budgets.investments.show.supports"), icon_name: "vote-yea")) do |c| %>
+              <div class="text-center">
+                <div id="<%= dom_id(@investment) %>_votes">
+                  <%= render Budgets::Investments::VotesComponent.new(@investment) %>
+                </div>
+              </div>
+            <% end %>
+
+          <% elsif @investment.should_show_vote_count? %>
+            <%= render(Shared::SidebarCardComponent.new(title: t("budgets.investments.show.supports"), icon_name: "vote-yea")) do |c| %>
+              <div class="text-center">
+                <span class="total-supports">
+                  <strong>
+                    <%= t("budgets.investments.investment.supports",
+                        count: @investment.total_votes) %>
+                  </strong>
+                </span>
+              </div>
+            <% end %>
+
+          <% elsif @investment.should_show_ballots? %>
+            <%= render(Shared::SidebarCardComponent.new(title: t("budgets.investments.show.votes"), icon_name: "vote-yea")) do |c| %>
+              <div class="text-center">
+                <div id="<%= dom_id(@investment) %>_ballot">
+                  <%= render "ballot",
+                    investment: @investment,
+                    investment_ids: @investment_ids,
+                    ballot: @ballot %>
+                </div>
+              </div>
+            <% end %>
+
+          <% end %>
+        <% end %>
+
+        <% if @investment.documents.present? %>
+          <%= render(Shared::SidebarCardComponent.new(title: t("documents.title"), icon_name: "file")) do |c| %>
+            <%= render(Sidebar::DocumentListComponent.new(documents: @investment.documents)) %>
+          <% end %>
+        <% end %>
+
+        <%= render(Shared::SidebarCardComponent.new(title: t("proposals.show.share"), icon_name: "share")) do |c| %>
+          <%= render "shared/social_share",
+            share_title: t("budgets.investments.show.share"),
+            title: @investment.title,
+            image_url: image_absolute_url(@investment.image, :thumb),
+            url: budget_investment_url(@investment.budget, @investment),
+            description: t("budgets.investments.share.message",
+                            title: @investment.title,
+                            handle: setting["org_name"]),
+            mobile: t("budgets.investments.share.message",
+                       title: @investment.title,
+                       handle: setting["twitter_handle"]) %>
+        <% end %>
+
+        <% if current_user&.administrator? %>
+          <%= render(Shared::SidebarCardComponent.new(title: t("custom.shared.show.admin"), icon_name: "user-cog")) do |c| %>
+            <%= render "budgets/investments/actions", investment: @investment %>
+          <% end %>
+        <% end %>
+
+        <% if can?(:edit, @investment) %>
+          <%= render(Shared::SidebarCardComponent.new(title: t("budgets.investments.show.author"), icon_name: "user-edit")) do |c| %>
+            <%= link_to t("shared.edit"),
+                        edit_budget_investment_path(investment.budget, investment),
+                        method: :get, class: "button hollow expanded" %>
+            -----
+              <%= render "/budgets/investments/author_actions", investment: @investment %>
+            -----
+          <% end %>
+        <% end %>
+
       </aside>
     </div>
   </div>
