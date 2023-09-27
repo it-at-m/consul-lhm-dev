@@ -1,10 +1,15 @@
 <main class="user-page">
   <div class="flex-layout">
     <div class="main-column">
-      <%= render(Users::ProfileBannerComponent.new(user: current_user)) %>
+      <%= render(Users::ProfileBannerComponent.new(user: @user)) %>
       <%= render Shared::ResourcesListComponent.new(
-        resources: current_user.proposals.order(created_at: :desc),
-        title: t('custom.users.activity')
+        resources: @user.proposals.order(created_at: :desc),
+        title: t("custom.users.activity"),
+        remote_url: user_resources_path(@user),
+        filters: ["proposals", "debates"],
+        filter_param: "resources_type",
+        filter_title: "Filtern nach",
+        filter_i18n_namespace: "custom.users.resources_filter"
       ) %>
     </div>
     <aside class="sidebar">

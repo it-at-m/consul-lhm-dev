@@ -3,3 +3,6 @@ de:
     users:
       activity: Aktivität
       contact: Kontakt
+      resources_filter:
+        proposals: Proposals
+        debates: Debates

@@ -19,6 +19,7 @@ class Shared::ResourcesListComponent < ApplicationComponent
     css_class: nil,
     filter_title: nil,
     empty_list_text: nil,
+    filter_i18n_namespace: nil,
     text_search_params_name: nil,
     hide_actions: false,
     hide_title: false,
@@ -39,6 +40,7 @@ class Shared::ResourcesListComponent < ApplicationComponent
     @css_class = css_class
     @hide_title = hide_title
     @text_search_enabled = text_search_enabled
+    @filter_i18n_namespace = filter_i18n_namespace
     @empty_list_text = empty_list_text
     @filter_param = filter_param
     @filter_title = filter_title.presence || "Sortieren nach"
@@ -67,6 +69,8 @@ class Shared::ResourcesListComponent < ApplicationComponent
   end
 
   def i18n_namespace
+    return @filter_i18n_namespace if @filter_i18n_namespace.present?
+
     if resource_type == Projekt
       "custom.projekts"
     elsif resource_type == Debate
