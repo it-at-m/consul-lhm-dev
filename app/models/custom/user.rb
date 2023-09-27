@@ -269,6 +269,10 @@ class User < ApplicationRecord
     end
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   private
 
     def geozone_with_plz
