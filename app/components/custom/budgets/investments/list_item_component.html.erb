@@ -11,26 +11,22 @@
     <% if budget_investment.should_show_vote_count? %>
       <% c.footer_section do %>
         <div id="<%= dom_id(budget_investment) %>_votes"
-             class="small-12 medium-3 column text-center">
-          <div class="supports">
-            <span class="total-supports no-button">
-              <%= t("budgets.investments.investment.supports",
-                  count: budget_investment.total_votes) %>
-            </span>
-          </div>
+             class="small-12 medium-3 column show-votes-count-section">
+          <span class="total-voters">
+            <%= t("budgets.investments.investment.supports",
+                count: budget_investment.total_votes) %>
+          </span>
         </div>
       <% end %>
     <% end %>
 
-    <% if budget_investment.should_show_price? && !budget_investment.should_show_ballots? %>
+    <% if budget_investment.should_show_price? %>
       <% c.footer_section do %>
         <div id="<%= dom_id(budget_investment) %>_price"
-             class="supports small-12 medium-3 column text-center">
-          <div class="supports">
-            <span class="total-supports no-button">
-              <%= budget_investment.formatted_price %>
-            </span>
-          </div>
+             class="small-12 medium-3 column price-section">
+          <span class="total-price">
+            <%= budget_investment.formatted_price %>
+          </span>
         </div>
       <% end %>
     <% end %>
@@ -38,7 +34,7 @@
     <% if budget_investment.should_show_votes? %>
       <% c.footer_section do %>
         <div id="<%= dom_id(budget_investment) %>_votes"
-             class="small-12 medium-3 column text-center">
+             class="small-12 medium-3 column votes-section">
              <%= render Budgets::Investments::VotesComponent.new(budget_investment) %>
         </div>
       <% end %>
@@ -46,7 +42,7 @@
     <% elsif budget_investment.should_show_ballots? && !management_controller? %>
       <% c.footer_section do %>
         <div id="<%= dom_id(budget_investment) %>_ballot"
-             class="small-12 medium-3 column text-center">
+             class="small-12 medium-3 column text-center ballot-section">
               <%= render "/budgets/investments/ballot",
                 investment: budget_investment,
                 investment_ids: budget_investment_ids,
@@ -58,7 +54,9 @@
 
     <% if investment_status_callout.present? %>
       <% c.footer_section do %>
-        <%= investment_status_callout %>
+        <div class="callot-section">
+          <%= investment_status_callout %>
+        </div>
       <% end %>
     <% end %>
 
