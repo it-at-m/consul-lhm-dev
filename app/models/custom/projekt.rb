@@ -483,7 +483,7 @@ class Projekt < ApplicationRecord
     if hard_individual_group_values.empty?
       true
     else
-      user.present? && (hard_individual_group_values.ids & user.hard_individual_group_values.ids).any?
+      user.present? && (hard_individual_group_values.ids & user.individual_group_values.ids).any?
     end
   end
 
