@@ -1,16 +1,25 @@
-<main class="budget-investment-new">
-  <%= budgets_back_link_path %>
-
-  <%= header %>
-
-  <aside class="margin-bottom">
-    <%= helpers.render_custom_block 'budget_investments_creation_recommendations' %>
-  </aside>
-
-
+<% if Setting.new_design_enabled? %>
   <% if investment.present? %>
     <%= render "/budgets/investments/form", form_url: budget_investment_path(budget, investment) %>
   <% else %>
     <%= render "/budgets/investments/form", form_url: budget_investments_path(budget) %>
   <% end %>
-</main>
+
+<% else %>
+  <main class="budget-investment-new">
+    <%= budgets_back_link_path %>
+
+    <%= header %>
+
+    <aside class="margin-bottom">
+      <%= helpers.render_custom_block 'budget_investments_creation_recommendations' %>
+    </aside>
+
+    <% if investment.present? %>
+      <%= render "/budgets/investments/form", form_url: budget_investment_path(budget, investment) %>
+    <% else %>
+      <%= render "/budgets/investments/form", form_url: budget_investments_path(budget) %>
+    <% end %>
+  </main>
+
+<% end %>
