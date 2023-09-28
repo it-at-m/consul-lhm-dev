@@ -11,7 +11,7 @@ class Shared::FilterDropdownComponent < ApplicationComponent
     i18n_namespace:,
     title:,
     remote_url: nil,
-    filter_param: nil,
+    url_param_name: nil,
     in_projekt_footer_tab: false
   )
     @options = options
@@ -20,7 +20,7 @@ class Shared::FilterDropdownComponent < ApplicationComponent
     @i18n_namespace = i18n_namespace
     @title = title
     @remote_url = remote_url
-    @filter_param = filter_param.presence || 'filter'
+    @url_param_name = url_param_name.presence || 'filter'
     @in_projekt_footer_tab = in_projekt_footer_tab
   end
 
@@ -42,17 +42,17 @@ class Shared::FilterDropdownComponent < ApplicationComponent
 
   def link_path(option)
     if params[:current_tab_path].present? && !helpers.request.path.starts_with?("/projekts")
+      params = {}
+      params[@url_param_name] = option
       url_for(action: params[:current_tab_path],
               controller: "/pages",
               page: params[:page] || 1,
-              order: option,
-              filter_projekt_ids: params[:filter_projekt_ids],
               anchor: anchor,
+              filter_projekt_ids: params[:filter_projekt_ids],
               projekt_label_ids: params[:projekt_label_ids],
-              filter: params[:filter])
+              **params)
     elsif remote_url.present?
-      # URI::HTTP.build([nil, nil, nil, remote_url, { order: option }.to_query, anchor]).to_s
-      url = "#{remote_url}?#{@filter_param}=#{option}"
+      url = "#{remote_url}?#{@url_param_name}=#{option}"
 
       if anchor.present?
         url = "#{url}#?#{anchor}"
@@ -60,7 +60,9 @@ class Shared::FilterDropdownComponent < ApplicationComponent
 
       url
     else
-      current_path_with_query_params(order: option, page: 1, anchor: anchor)
+      params = {}
+      params[@url_param_name] = option
+      current_path_with_query_params(anchor: anchor, **params)
     end
   end
 
