@@ -46,21 +46,7 @@ class Resources::ListItemComponent < ApplicationComponent
       return "Deficiency report"
     end
 
-    phases =
-      case @resource
-      when Debate
-        @projekt.debate_phases
-      when Proposal
-        @projekt.proposal_phases
-      when Poll
-        @projekt.voting_phases
-      when Budget::Investment
-        @projekt.budget_phases
-      when ProjketEvent
-        @projekt.event_phases
-      end
-
-    phases.first.title.downcase
+    @resource.projekt_phase&.title&.downcase
   end
 
   def component_class_name

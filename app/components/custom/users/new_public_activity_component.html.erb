@@ -1,0 +1,32 @@
+<% if valid_access? %>
+  <% if valid_filters.any? %>
+    <% if current_filter == "follows" %>
+      <%= render "users/following", user: user, follows: follows.group_by(&:followable_type) %>
+    <% else %>
+      <% if comments? %>
+        <%= render "users/comments", comments: resources %>
+      <% elsif current_filter == "follows" %>
+        <%= render "users/following", user: user, follows: follows.group_by(&:followable_type) %>
+      <% else %>
+        <%= render Shared::ResourcesListComponent.new(
+          resources: resources.order(created_at: :desc),
+          title: t("custom.users.activity"),
+          current_filter: current_filter,
+          filters: valid_filters,
+          filter_param: "filter",
+          filter_title: "Filtern nach",
+          filter_i18n_namespace: "custom.users.resources_filter"
+        ) %>
+        <%= paginate resources %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <div class="callout primary">
+      <%= t("users.show.no_activity") %>
+    </div>
+  <% end %>
+<% else %>
+  <div class="callout warning margin">
+    <%= t("users.show.private_activity") %>
+  </div>
+<% end %>

@@ -2,14 +2,11 @@
   <div class="flex-layout">
     <div class="main-column">
       <%= render(Users::ProfileBannerComponent.new(user: current_user)) %>
-      <%= render Shared::ResourcesListComponent.new(
-        resources: current_user.proposals.order(created_at: :desc),
-        title: t('custom.users.activity')
-      ) %>
+      <%= render Users::NewPublicActivityComponent.new(@user) %>
     </div>
     <aside class="sidebar">
-        <%= render Shared::SidebarCardComponent.new(title: t("custom.users.contact"), icon_name: "envelope-open") do |c| %>
-        <% end %>
+      <%= render Shared::SidebarCardComponent.new(title: t("custom.users.contact"), icon_name: "envelope-open") do |c| %>
+      <% end %>
     </aside>
   </div>
 </main>
