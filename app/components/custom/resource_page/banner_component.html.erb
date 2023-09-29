@@ -65,7 +65,7 @@
         Shared::ResourceImageComponent.new(
           image_url: resource.image&.variant(:large),
           image_placeholder_icon_class: "fa-comments",
-          resource_name: resource.class.name.downcase
+          resource: resource
         )
       ) %>
     </div>

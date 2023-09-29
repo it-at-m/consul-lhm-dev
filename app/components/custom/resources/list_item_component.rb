@@ -36,21 +36,9 @@ class Resources::ListItemComponent < ApplicationComponent
     @narrow_header = narrow_header
   end
 
-  def resource_name
-      # @resource.class.name.downcase.gsub("::", "_")
-    if @resource.is_a?(Projekt)
-      return "Projekt"
-    end
-
-    if @resource.is_a?(DeficiencyReport)
-      return "Deficiency report"
-    end
-
-    @resource.projekt_phase&.title&.downcase
-  end
-
   def component_class_name
-    class_name = "#{@resource_name&.underscore}-list-item"
+    # class_name = "#{@resource_name&.underscore}-list-item"
+    class_name = "-list-item"
 
     if @wide
       class_name += " -wide"
