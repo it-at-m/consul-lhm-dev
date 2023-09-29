@@ -262,6 +262,10 @@
       border-left: none;
     }
 
+    .votes {
+      padding-bottom: 20px;
+    }
+
     form {
       display: flex;
       justify-content: center;
@@ -274,7 +278,7 @@
     .supports {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      // justify-content: center;
       min-height: 146px;
 
       .total-supports {
