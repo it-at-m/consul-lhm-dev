@@ -38,7 +38,7 @@
       <% end %>
       <% if @resource.is_a?(DeficiencyReport) %>
         <div class="resource-page-banner--detail" style="align-items:baseline;">
-          <i class="fa fa-code-branch"></i>
+          <i class="fa fa-th-large"></i>
           <%= t("activerecord.attributes.deficiency_report.category") + ": " %>
           <span class="deficiency-report-category" style="background-color:<%= @resource.category.color %>;color:#fff;">
             <i class="fas fa-<%= @resource.category.icon %>"></i>

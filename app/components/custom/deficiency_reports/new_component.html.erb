@@ -65,7 +65,7 @@
           <%= render Shared::SidebarCardComponent.new(
                         title: t("custom.deficiency_reports.form.category.title"),
                         description: t("custom.deficiency_reports.form.category.description"),
-                        icon_name: "code-branch"
+                        icon_name: "th-large"
                      ) do |c| %>
             <%= f.select :deficiency_report_category_id, DeficiencyReport::Category.all.map { |category| [category.name, category.id] },
                          { prompt: t("custom.deficiency_reports.form.category.placeholder"), label: false } %>

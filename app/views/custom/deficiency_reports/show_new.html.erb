@@ -78,7 +78,7 @@
         <% if can? :update_category, @deficiency_report %>
           <%= render(Shared::SidebarCardComponent.new(
             title: t("custom.deficiency_reports.show.category.title"),
-            icon_name: "check-circle")) do |c| %>
+            icon_name: "th-large")) do |c| %>
             <%= render "deficiency_reports/category", deficiency_report: @deficiency_report %>
           <% end %>
         <% end %>
