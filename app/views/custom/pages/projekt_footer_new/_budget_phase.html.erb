@@ -1,20 +1,22 @@
-<%= render 'shared/loader_spinner' %>
+<% if @budget.present? %>
+  <%= render Pages::Projekts::BudgetsTabComponent.new(@budget, @ballot, current_user) %>
+<% end %>
 
-<div class="flex-layout budgets-page">
+<div class="flex-column">
   <div class="main-column">
-    <% if @current_projekt.budget.present? %>
-      <%= render Pages::Projekts::BudgetsTabComponent.new(@budget, @ballot, current_user) %>
+    <%= render "shared/loader_spinner" %>
+    <% if @budget.present? %>
 
       <% if @budget.phase == 'finished' %>
-        <%= render Pages::Projekts::BudgetsSubnavComponent.new(@budget) %>
+        <%#= render Pages::Projekts::BudgetsSubnavComponent.new(@budget) %>
       <% end %>
 
-      <% if params[:section] == 'results' %>
-        <%= render 'pages/projekt_footer_new/budget/results' %>
-      <% elsif params[:section] == 'stats' %>
-        <%= render 'pages/projekt_footer_new/budget/stats' %>
-      <% elsif params[:section] == 'executions' %>
-        <%= render 'pages/projekt_footer_new/budget/executions' %>
+      <% if params[:section] == "results" %>
+        <%= render "pages/projekt_footer_new/budget/results" %>
+      <% elsif params[:section] == "stats" %>
+        <%= render "pages/projekt_footer_new/budget/stats" %>
+      <%# elsif params[:section] == "executions" %>
+        <%#= render "pages/projekt_footer_new/budget/executions" %>
       <% else %>
         <% if @budget.phase == 'informing' %>
           <div class="new-card">
@@ -25,33 +27,28 @@
               Investitionsvorschläge können erst in der nächsten Phase
               eingereicht werden. Diese beginnt am
               <%= I18n.l(@budget.current_phase.next_enabled_phase.starts_at, format: :new_date_with_year) %>
-              <!-- 02. September 2022 -->
+              // 02. September 2022
             </div>
           </div>
         <% else %>
-          <% budget_investments_footer_url = url_for(action: params[:current_tab_path], controller: "/pages", format: :js) %>
-
+          <% budget_investments_footer_url = projekt_phase_footer_tab_page_path(@projekt_phase.projekt.page, @projekt_phase.id) %>
           <%= render(
-                Shared::ResourcesList.new(
+                Shared::ResourcesListComponent.new(
                   resources: @investments,
                   resource_type: Budget::Investment,
-                  map_coordinates: @budget.investment_map_locations,
+                  remote_url: budget_investments_footer_url,
+                  map_coordinates: @invetment_coordinates,
                   current_filter: @current_order,
                   filter_param: "order",
                   filters: @valid_orders,
-                  remote_url: budget_investments_footer_url,
                   additional_data: {
-                    ballot: @ballot,
-                    top_level_active_projekts: @top_level_active_projekts,
-                    top_level_archived_projekts: @top_level_archived_projekts
+                    ballot: @ballot
                   }
-                ))
-          %>
-          <%= paginate @investments, remote: true, params: { controller: "pages", action: "projekt_phase_footer_tab" } %>
+                )) %>
         <% end %>
       <% end %>
     <% else %>
-      <h3>Dieses Projekt hat kein zugehöriges Budget</h3>
+      <h3>Dieses Projekt Phase hat kein zugehöriges Budget</h3>
     <% end %>
   </div>
 

@@ -27,6 +27,11 @@ module FormularFollowUpLettersAdminActions
     authorize!(:update, @formular_follow_up_letter) unless current_user.administrator?
 
     if @formular_follow_up_letter.update(formular_follow_up_letter_params)
+      @formular = @formular_follow_up_letter.formular
+      @formular_fields = @formular.formular_fields
+      @formular_answers = @formular.formular_answers
+      @image_flag = @formular_answers.any? { |fa| fa.formular_answer_images.present? }
+
       render "custom/admin/formular_follow_up_letters/update"
     else
       render :edit
@@ -44,6 +49,11 @@ module FormularFollowUpLettersAdminActions
     authorize!(:send_emails, @formular_follow_up_letter) unless current_user.administrator?
     @formular_follow_up_letter.delay.deliver
     @formular_follow_up_letter.update!(sent_at: Time.zone.now)
+
+    @formular = @formular_follow_up_letter.formular
+    @formular_fields = @formular.formular_fields
+    @formular_answers = @formular.formular_answers
+    @image_flag = @formular_answers.any? { |fa| fa.formular_answer_images.present? }
 
     render "custom/admin/formular_follow_up_letters/send_emails"
   end
