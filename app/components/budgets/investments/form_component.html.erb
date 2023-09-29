@@ -45,7 +45,7 @@
 
             <%= translations_form.text_area :description,
               label: false,
-              placeholder: t("custom.budgets.investments.form.description_placeholder_html"),
+              data: {placeholder: t("custom.budgets.investments.form.description_placeholder_html")},
               class: "html-area #{ck_editor_class(current_user)}" %>
           <% end %>
 
@@ -65,12 +65,12 @@
 
           <% if projekt_phase_feature?(investment.projekt_phase, "form.show_implementation_option_fields") %>
             <%= render Shared::SidebarCardComponent.new(
-                          title: t("custom.deficiency_reports.form.category.title"),
-                          description: t("custom.deficiency_reports.form.category.description"),
-                          icon_name: "code-branch"
+                          title: t("custom.budgets.investments.form.implementation.title"),
+                          description: t("custom.budgets.investments.form.implementation.description"),
+                          icon_name: "hands-helping"
                        ) do |c| %>
               <div>
-                <%= f.select :implementation_performer, options_for_implementation_select, {}, { class: 'implementation-performer show-arrow', onChange: "$(this).val() === 'user' ? $('#implementation_contribution').css('display', 'block') : $('#implementation_contribution').css('display', 'none')" } %>
+                <%= f.select :implementation_performer, options_for_implementation_select, {label: false}, { class: 'implementation-performer show-arrow', style: "width:100%;", onChange: "$(this).val() === 'user' ? $('#implementation_contribution').css('display', 'block') : $('#implementation_contribution').css('display', 'none')" } %>
               </div>
 
               <div id='implementation_contribution' style="display:<%= investment.implementation_performer == 'user' ? 'block' : 'none' %>">
@@ -79,8 +79,21 @@
             <% end %>
           <% end %>
 
+
+
+          <% if projekt_phase_feature?(investment.projekt_phase, "form.show_user_cost_estimate") %>
+            <%= render Shared::SidebarCardComponent.new(
+                          title: t("custom.budgets.investments.form.user_cost_estimate.title"),
+                          description: t("custom.budgets.investments.form.user_cost_estimate.description"),
+                          icon_name: "euro-sign"
+                       ) do |c| %>
+              <%= f.text_field :user_cost_estimate, label: false, placeholder: t("custom.budgets.investments.form.user_cost_estimate.placeholder") %>
+
+            <% end %>
+          <% end %>
+
           <%= render Shared::SidebarCardComponent.new(
-                        title: t("custom.deficiency_reports.form.documents.title"),
+                        title: t("custom.budgets.investments.form.documents.title"),
                         icon_name: "file"
                      ) do |c| %>
              <%= render "documents/nested_documents", documentable: investment, f: f %>
@@ -96,12 +109,14 @@
             <% end %>
           <% end %>
 
-          <%= render Shared::SidebarCardComponent.new(
-                        title: t("custom.deficiency_reports.form.on_behalf_of.title"),
-                        description: t("custom.deficiency_reports.form.on_behalf_of.description"),
-                        icon_name: "user"
-                     ) do |c| %>
-              <%= f.text_field :on_behalf_of, label: false, placeholder: t("custom.deficiency_reports.form.on_behalf_of.placeholder"), class: "light-input" %>
+          <% if current_user.administrator? || current_user.moderator? %>
+            <%= render Shared::SidebarCardComponent.new(
+                          title: t("custom.budgets.investments.form.on_behalf_of.title"),
+                          description: t("custom.budgets.investments.form.on_behalf_of.description"),
+                          icon_name: "user"
+                       ) do |c| %>
+                <%= f.text_field :on_behalf_of, label: false, placeholder: t("custom.budgets.investments.form.on_behalf_of.placeholder"), class: "light-input" %>
+            <% end %>
           <% end %>
 
           <%= f.invisible_captcha :subtitle %>
