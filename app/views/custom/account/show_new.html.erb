@@ -42,19 +42,16 @@
         <%= link_to t("custom.account.show.change_credentials_link"), edit_user_registration_path, class: "button hollow" %>
         <%= link_to t("custom.account.show.erase_account_link"), users_registrations_delete_form_path, class: "button hollow delete alert" %>
       <% end %>
-      <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.verification_tittle"), description: t("custom.account.show.verification_description"),  icon_name: "cog") do |c| %>
-        <div class="verify-account">
-          <% if current_user.level_three_verified? %>
-            <div class="already-verified">
-            <span class="icon-check"></span>
-            <%= t("account.show.verified_account") %>
-            </div>
-          <% elsif current_user.level_two_verified? %>
-            <%= link_to t("account.show.finish_verification"), verification_path, class: "button success" %>
-          <% else %>
-            <%= link_to t("account.show.verify_my_account"), verification_path, class: "button success" %>
-          <% end %>
-        </div>
+      <% unless current_user.level_three_verified? %>
+        <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.verification_tittle"), description: t("custom.account.show.verification_description"),  icon_name: "check") do |c| %>
+          <div class="verify-account">
+            <% if current_user.level_two_verified? %>
+              <%= link_to t("account.show.finish_verification"), verification_path, class: "button success" %>
+            <% else %>
+              <%= link_to t("account.show.verify_my_account"), verification_path, class: "button success" %>
+            <% end %>
+          </div>
+        <% end %>
       <% end %>
       <%= form_for @account, as: :account, url: account_path do |f| %>
         <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.personal_settings"), icon_name: "cog") do |c| %>
