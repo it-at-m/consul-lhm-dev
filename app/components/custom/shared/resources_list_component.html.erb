@@ -11,18 +11,27 @@
   <% end %>
 <% end %>
 
-<% body = capture do %>
-  <div class="resources-list--inner">
-    <% if @resources.present? %>
-      <% @resources.each do |resource| %>
-        <%= render resource_component(resource) %>
+<% if custom_body.present? %>
+  <% body = capture do %>
+    <%= custom_body %>
+  <% end %>
+<% else %>
+  <% body = capture do %>
+    <div class="resources-list--inner">
+      <% if @resources.present? %>
+        <% @resources.each do |resource| %>
+          <%= render resource_component(resource) %>
+        <% end %>
+        <% if @paginate %>
+          <%= paginate @resources %>
+        <% end %>
+      <% else %>
+        <h4 class="resources-list--not-items-message text-center">
+          <%= @empty_list_text %>
+        </h4>
       <% end %>
-    <% else %>
-      <h4 class="resources-list--not-items-message text-center">
-        <%= @empty_list_text %>
-      </h4>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 <% end %>
 
 <% if @only_content %>
@@ -67,9 +76,11 @@
           ) %>
         <% end %>
 
-        <div class="resources-list--switch-view-button js-resource-list-switch-view-button">
-          <i class="fa <%= switch_view_mode_icon %>"></i>
-        </div>
+        <% unless @hide_view_mode_button %>
+          <div class="resources-list--switch-view-button js-resource-list-switch-view-button">
+            <i class="fa <%= switch_view_mode_icon %>"></i>
+          </div>
+        <% end %>
       </div>
     <% end %>
 

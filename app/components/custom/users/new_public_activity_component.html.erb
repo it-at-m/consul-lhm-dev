@@ -3,21 +3,12 @@
     <% if current_filter == "follows" %>
       <%= render "users/following", user: user, follows: follows.group_by(&:followable_type) %>
     <% else %>
-      <% if comments? %>
-        <%= render "users/comments", comments: resources %>
-      <% elsif current_filter == "follows" %>
-        <%= render "users/following", user: user, follows: follows.group_by(&:followable_type) %>
-      <% else %>
-        <%= render Shared::ResourcesListComponent.new(
-          resources: resources.order(created_at: :desc),
-          title: t("custom.users.activity"),
-          current_filter: current_filter,
-          filters: valid_filters,
-          filter_param: "filter",
-          filter_title: "Filtern nach",
-          filter_i18n_namespace: "custom.users.resources_filter"
-        ) %>
-        <%= paginate resources %>
+      <%= render Shared::ResourcesListComponent.new(list_params) do |c| %>
+        <% if comments? %>
+          <% c.custom_body do %>
+            <%= render Comments::UserCommentsComponent.new(comments: resources) %>
+          <% end %>
+        <% end %>
       <% end %>
     <% end %>
   <% else %>
