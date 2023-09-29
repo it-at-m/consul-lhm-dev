@@ -157,11 +157,8 @@
         <% if can?(:edit, @investment) %>
           <%= render(Shared::SidebarCardComponent.new(title: t("budgets.investments.show.author"), icon_name: "user-edit")) do |c| %>
             <%= link_to t("shared.edit"),
-                        edit_budget_investment_path(investment.budget, investment),
+                        edit_budget_investment_path(@investment.budget, @investment),
                         method: :get, class: "button hollow expanded" %>
-            -----
-              <%= render "/budgets/investments/author_actions", investment: @investment %>
-            -----
           <% end %>
         <% end %>
 
