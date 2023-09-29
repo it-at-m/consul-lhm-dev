@@ -2,11 +2,12 @@
 
 class Shared::ResourcesListComponent < ApplicationComponent
   renders_one :bottom_content
+  renders_one :custom_body
 
   attr_reader :filters, :remote_url, :resource_type, :resources
 
   def initialize(
-    resources:,
+    resources: nil,
     resource_type: nil,
     title: nil,
     title_link: nil,
@@ -25,6 +26,8 @@ class Shared::ResourcesListComponent < ApplicationComponent
     hide_title: false,
     only_content: false,
     text_search_enabled: false,
+    hide_view_mode_button: false,
+    paginate: true,
     additional_data: {}
   )
     @resources = resources
@@ -38,13 +41,15 @@ class Shared::ResourcesListComponent < ApplicationComponent
     @only_content = only_content
     @map_coordinates = map_coordinates
     @css_class = css_class
-    @hide_title = hide_title
     @text_search_enabled = text_search_enabled
     @filter_i18n_namespace = filter_i18n_namespace
     @empty_list_text = empty_list_text
     @filter_param = filter_param
     @filter_title = filter_title.presence || "Sortieren nach"
+    @hide_title = hide_title
     @hide_actions = hide_actions
+    @hide_view_mode_button = hide_view_mode_button
+    @paginate = paginate
     @additional_data = additional_data
   end
 

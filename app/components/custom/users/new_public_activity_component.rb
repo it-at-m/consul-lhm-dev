@@ -1,6 +1,6 @@
 class Users::NewPublicActivityComponent < ApplicationComponent
   attr_reader :user
-  delegate :current_user, :valid_interests_access?, :current_path_with_query_params, to: :helpers
+  delegate :current_user, :current_path_with_query_params, to: :helpers
 
   def initialize(user)
     @user = user
@@ -30,6 +30,10 @@ class Users::NewPublicActivityComponent < ApplicationComponent
 
   private
 
+    def valid_interests_access?(user)
+      user.public_interests || user == current_user
+    end
+
     def resources
       list =
         case current_filter
@@ -45,7 +49,7 @@ class Users::NewPublicActivityComponent < ApplicationComponent
           follows
         end
 
-      list.page(params[:page])
+      list.order(created_at: :desc).page(params[:page])
     end
 
     def comments?
@@ -103,5 +107,24 @@ class Users::NewPublicActivityComponent < ApplicationComponent
         (["Poll", "Poll::Question"] unless feature?(:polls)),
         ("Proposal" unless feature?(:proposals))
       ].flatten.compact
+    end
+
+    def list_params
+      params = {
+        title: t("custom.users.activity"),
+        current_filter: current_filter,
+        filters: valid_filters,
+        filter_param: "filter",
+        filter_title: "Filtern nach",
+        filter_i18n_namespace: "custom.users.resources_filter"
+      }
+
+      if current_filter == "comments"
+        params[:hide_view_mode_button] = true
+      else
+        params[:resources] = resources
+      end
+
+      params
     end
 end

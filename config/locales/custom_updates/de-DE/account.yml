@@ -1,0 +1,12 @@
+de:
+  custom:
+    account:
+      show:
+        change_credentials_link: Anmeldeinformationen ändern
+        erase_account_link: Konto löschen
+        settings: Kontoeinstellungen
+        verification_tittle: Kontoverifizierung
+        verification_description: Einige Beteiligungsprojekte setzen eine Nutzer*innen-Verifizierung voraus. Mit Klick auf den Button können Sie die Nutzer*innen-Verifizierung starten.
+        personal_settings: Persönliche Einstellungen
+        notifications: Benachrichtigungen
+        save_settings: Aktualisieren

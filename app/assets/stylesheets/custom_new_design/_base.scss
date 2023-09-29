@@ -193,3 +193,10 @@ body.custom-new-design {
   // margin-top: 9px;
   margin-top: 17px;
 }
+
+.social-share-button .ssb-icon {
+  border-radius: 5px;
+  &:hover, &:focus {
+    background: initial;
+  }
+}

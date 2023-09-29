@@ -1,6 +1,7 @@
 de:
   custom:
     users:
+      settings: Kontoeinstellungen
       activity: Aktivität
       contact: Kontakt
       resources_filter:
