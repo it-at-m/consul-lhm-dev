@@ -74,7 +74,7 @@
       <% end %>
 
       <% if extended_feature?('deficiency_reports.enable_my_posts_filter') %>
-        <%= render Shared::SidebarCardComponent.new(title: t("custom.deficiency_reports.index.sidebar.my_posts.title"), icon_name: "check-circle") do |c| %>
+        <%= render Shared::SidebarCardComponent.new(title: t("custom.deficiency_reports.index.sidebar.my_posts.title"), icon_name: "user-edit") do |c| %>
           <%= render "shared/sidebar_filter/my_posts" %>
         <% end %>
       <% end %>
