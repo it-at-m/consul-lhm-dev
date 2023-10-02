@@ -50,10 +50,10 @@ de:
         orders:
           hot_score: Aktivste
           most_commented: Am meisten kommentiert
-          newest: Neuste
+          newest: Neueste zuerst
         search_form:
           button: search
-          placeholder: Suche Mängelmeldungen...
+          placeholder: Suche...
           title: Suche Mängelmeldungen
         section_footer:
           description: Mängel können, abhängig vom eingestellten Verifizierungsverfahren, von jeder Benutzerin und jedem Benutzer eingebracht werden. Sie bieten eine einfache Möglichkeit auf Mängel in der Stadt hinzuweisen. Wir danken für Ihre Unterstützung!
