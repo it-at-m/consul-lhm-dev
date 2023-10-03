@@ -86,7 +86,7 @@
 
       </div>
       <% if footer_sections.any? %>
-        <div class="resource-item--footer">
+        <div class="resource-item--footer <%= @no_footer_bottom_padding ? "-no-bottom-padding" : "" %>">
           <% footer_sections.each do |footer_section| %>
             <div class="resource-item--footer-section">
               <%= footer_section %>

@@ -114,14 +114,14 @@
                 <%= f.check_box :adm_email_on_new_manual_verification,
                   {label: t('custom.account.settings.adm_email_on_new_manual_verification'), class: "checkbox-label--aligned"} %>
               </div>
+              <% if @account.official_level == 1 %>
+                <div>
+                  <%= f.check_box :official_position_badge %>
+                </div>
+              <% end %>
+
               <%= f.submit t("custom.account.show.save_settings"), class: "button margin-top" %>
             <% end %>
-          <% end %>
-
-          <% if @account.official_level == 1 %>
-            <div>
-              <%= f.check_box :official_position_badge %>
-            </div>
           <% end %>
 
           <% if @account_individial_groups_hard.any? || @account_individial_groups_soft.any? %>

@@ -5,12 +5,12 @@ de:
       share: Teilen
     account:
       settings:
-        email_digest: Erhalten Sie eine Zusammenfassung der Benachrichtigungen zu Vorschlägen
-        email_on_comment: E-Mail-Benachrichtigung erhalten, bei Kommentare zu meinen Aktivitäten
-        email_on_comment_reply: E-Mail-Benachrichtigung erhalten, bei Antworten auf meine Kommentare
+        email_digest: Erhalten Sie eine Zusammenfassung der Benachrichtigungen
+        email_on_comment: Kommentaren zu meinen Aktivitäten
+        email_on_comment_reply: Antworten auf meine Kommentare
         email_on_direct_message: Private Nachrichten per Mail zulassen
-        newsletter: E-Mail-Benachrichtigung erhalten, bei wichtigen System-Infos
-        public_activity: Meine Aktivität veröffentlichen
+        newsletter: Newsletter
+        public_activity: Übersicht meiner Aktivität veröffentlichen
         public_interests: Vorschläge, denen ich folge, veröffentlichen
         adm_email_on_new_comment: E-Mail-Benachrichtigung erhalten nach jedem neuen Kommentar
         adm_email_on_new_proposal: E-Mail-Benachrichtigung erhalten nach jedem neuen Vorschlag

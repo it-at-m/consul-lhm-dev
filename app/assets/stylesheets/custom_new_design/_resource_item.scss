@@ -236,6 +236,12 @@
     p.investment-project-amount {
       margin-bottom: 0;
     }
+
+    &.-no-bottom-padding {
+      .resource-item--footer-section {
+        padding-bottom: 0;
+      }
+    }
   }
 
   .resource-item--wide-head-title--date-range {
@@ -255,7 +261,6 @@
     border-top: 1px solid $border-color;
     min-height: 93px;
     padding: 10px 25px;
-    padding-bottom: 0;
     flex-direction: column;
 
     .supports-container {
