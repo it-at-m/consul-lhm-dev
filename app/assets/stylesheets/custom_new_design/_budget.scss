@@ -92,6 +92,16 @@
             }
           }
         }
+
+        &.-distributed {
+          .add.in-favor {
+            flex-direction: column;
+
+            form {
+              flex-wrap: wrap;
+            }
+          }
+        }
       }
     }
 

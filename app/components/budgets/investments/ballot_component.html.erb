@@ -1,4 +1,4 @@
-<div class="supports ballot">
+<div class="supports ballot <%= voting_kind_klass %>">
   <% if voted? %>
     <div class="remove supported">
       <span class="icon-check-circle"
@@ -39,9 +39,6 @@
 
         <% if investment.budget.distributed_voting? %>
           <br>
-          <strong>
-            <%= t("custom.budgets.investments.investment.qualified_supports", count: investment.total_ballot_votes) %>
-          </strong>
           <%= form_with url: budget_ballot_lines_path(investment_id: investment.id,
                                                       budget_id: investment.budget_id,
                                                       investments_ids: investment_ids,
