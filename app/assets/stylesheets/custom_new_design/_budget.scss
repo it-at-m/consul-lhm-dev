@@ -58,91 +58,101 @@
       color: #fdce14;
     }
   }
-}
 
-.resource-item--footer-section {
-  min-height: 50px !important;
-  height: unset !important;
+  .resource-item--footer-section {
+    min-height: 50px !important;
+    height: unset !important;
 
-  .ballot-section, .price-section, .votes-section, .show-votes-count-section {
-    width: 100%;
-    min-height: unset !important;
-    margin-bottom: 10px;
-  }
-
-  .ballot-section {
-    .supports {
+    .ballot-section, .price-section, .votes-section, .show-votes-count-section {
+      width: 100%;
       min-height: unset !important;
+      margin-bottom: 10px;
+    }
 
-      .supported {
-        flex-direction: column-reverse !important;
+    .ballot-section {
+      .supports {
+        min-height: unset !important;
 
-        strong {
-          font-weight: 400 !important;
-        }
+        .supported {
+          flex-direction: column-reverse !important;
 
-        form {
-          margin-bottom: 5px;
-        }
-
-        &.remove {
-          form button {
+          strong {
             font-weight: 400 !important;
-            background-color: #9EADBA;
-            color: #fff;
+          }
+
+          form {
+            margin-bottom: 5px;
+          }
+
+          &.remove {
+            form button {
+              font-weight: 400 !important;
+              background-color: #9EADBA;
+              color: #fff;
+            }
           }
         }
       }
     }
-  }
 
-  .price-section {
-    text-align: left;
+    .price-section {
+      text-align: left;
 
-    .total-price {
-      font-weight: 700;
+      .total-price {
+        font-weight: 700;
+        text-align: left;
+      }
+    }
+
+    .votes-section {
+      .supports {
+        display: flex;
+        flex-direction: column-reverse;
+        margin-top: 7px;
+        min-height: unset !important;
+
+        .button {
+          background-color: #7e328a;
+          color: #fff;
+        }
+
+        .button-remove-support {
+          font-weight: 400 !important;
+          background-color: #9eadba;
+          color: #fff;
+        }
+      }
+    }
+
+    .show-votes-count-section {
       text-align: left;
     }
-  }
 
-  .votes-section {
-    .supports {
-      display: flex;
-      flex-direction: column-reverse;
-      margin-top: 7px;
-      min-height: unset !important;
+    .callot-section {
+      min-height: 80px;
 
-      .button {
-        background-color: #7e328a;
-        color: #fff;
-      }
+      .callout {
+        position: absolute;
+        top: 0;
+        right: 0;
+        border-radius: 0;
 
-      .button-remove-support {
-        font-weight: 400 !important;
-        background-color: #9eadba;
-        color: #fff;
+        @media screen and (min-width: 640px) {
+          width: unset !important;
+          margin-left: 0 !important;
+        }
       }
     }
   }
 
-  .show-votes-count-section {
-    text-align: left;
-  }
+  .sidebar {
+    .custom-content-block-body + .my-ballot,
+    .custom-content-block-controls + .my-ballot {
+      margin-top: 1rem;
+    }
 
-  .callot-section {
-		min-height: 80px;
-
-    .callout {
-      position: absolute;
-      top: 0;
-      right: 0;
-      border-radius: 0;
-
-      @media screen and (min-width: 640px) {
-        width: unset !important;
-        margin-left: 0 !important;
-      }
-
+    .my-ballot, .investments-filters {
+      padding-top: 1rem;
     }
   }
 }

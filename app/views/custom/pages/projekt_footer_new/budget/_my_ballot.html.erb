@@ -9,7 +9,7 @@
         <em><%= sanitize(@ballot.voted_info(@heading)) %></em>
       </p>
     <% else %>
-      <p><strong><%= t("budgets.investments.index.sidebar.zero") %></strong></p>
+      <p><strong><i><%= t("budgets.investments.index.sidebar.zero") %></i></strong></p>
     <% end %>
 
     <ul class="ballot-list">
@@ -20,10 +20,6 @@
         ) %>
       <% end %>
     </ul>
-
-    <%= link_to t("budgets.investments.header.check_ballot"),
-                  budget_ballot_path(@budget),
-                  class: "button hollow expanded" %>
 
   </div>
 <% end %>
