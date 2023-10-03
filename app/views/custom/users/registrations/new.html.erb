@@ -189,9 +189,7 @@
 <% if Setting.new_design_enabled? %>
   <%= render Auth::AuthPageTemplateComponent.new do |c| %>
     <% c.form do %>
-      <div class="auth-page-template--title-section">
-        <h2><%= t("devise_views.users.registrations.new.title") %></h2>
-      </div>
+      <h2><%= t("devise_views.users.registrations.new.title") %></h2>
       <p>
         <%= t("custom.devise_views.users.registrations.new.message") %>
       </p>

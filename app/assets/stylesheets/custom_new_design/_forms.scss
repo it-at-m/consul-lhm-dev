@@ -103,7 +103,7 @@
   form .checkbox-label--inline {
     font-weight: normal !important;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
     input[type="checkbox"] {

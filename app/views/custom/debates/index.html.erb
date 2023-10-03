@@ -58,13 +58,13 @@
           <% end %>
 
           <% if show_affiliation_filter_in_sidebar? %>
-            <%= render "shared/sidebar_filter/geozone_affiliations" %>
+            <%= render "shared/sidebar_filter/geozone_affiliations", selected_affiliated_geozones: @affiliated_geozones %>
           <% end %>
           <% unless skip_user_verification? %>
-            <%= render "shared/sidebar_filter/geozone_restrictions" %>
+            <%= render "shared/sidebar_filter/geozone_restrictions", selected_geozone_restriction: @selected_geozone_restriction %>
           <% end %>
-          <%= render "shared/categories", taggable: "debate" %>
-          <%= render SDG::Goals::TagCloudComponent.new("Debate", sdg_targets: @sdg_targets) %>
+          <%# <%= render "shared/categories", taggable: "debate" %>
+          <%# <%= render SDG::Goals::TagCloudComponent.new("Debate", sdg_targets: @sdg_targets) %>
           <%#= render "shared/tag_cloud", taggable: "debate" %>
 
           <% if extended_feature?('debates.enable_my_posts_filter') %>

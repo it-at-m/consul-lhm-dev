@@ -5,5 +5,11 @@ de:
       activity: Aktivität
       contact: Kontakt
       resources_filter:
-        proposals: Proposals
-        debates: Debates
+    user_page:
+      filters:
+        proposals_title: Vorschläge
+        debates_title: Diskussionen
+        budget_investments_title: Budgetinvestitionen
+        comments_title: Kommentare
+        follow_title: Folge ich
+

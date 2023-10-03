@@ -45,9 +45,11 @@ class Users::NewPublicActivityComponent < ApplicationComponent
           budget_investments
         when "comments"
           comments
-        when "follows"
-          follows
         end
+
+      if current_filter == "follows"
+        return follows.map(&:followable)
+      end
 
       list.order(created_at: :desc).page(params[:page])
     end
@@ -114,9 +116,10 @@ class Users::NewPublicActivityComponent < ApplicationComponent
         title: t("custom.users.activity"),
         current_filter: current_filter,
         filters: valid_filters,
+        paginate: current_filter != 'follows',
         filter_param: "filter",
         filter_title: "Filtern nach",
-        filter_i18n_namespace: "custom.users.resources_filter"
+        filter_i18n_namespace: "custom.user_page"
       }
 
       if current_filter == "comments"

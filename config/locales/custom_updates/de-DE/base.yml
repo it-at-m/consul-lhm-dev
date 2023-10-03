@@ -21,6 +21,8 @@ de:
         user_permission_votes: An Abstimmungen teilnehmen
         admin_notifications: Admin Benachrichtigungen
         user_groups_title: Individuelle Gruppen
+        hard_user_groups_title: Starke Gruppen
+        soft_user_groups_title: Schwache Gruppen
     boolean:
       "yes": "ja"
       "no": "nein"
