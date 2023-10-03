@@ -70,7 +70,7 @@
   .auth-page-template {
     display: flex;
     justify-content: space-between;
-    padding-top: 50px;
+    padding-top: 20px;
     width: 95%;
     margin: auto;
     font-weight: 500;
@@ -104,6 +104,8 @@
   .auth-page-template--legend-title {
     font-size: 32px;
     color: black !important;
+    line-height: 1;
+    margin-top: -4px;
   }
 
   .auth-page-template--legend {
@@ -188,8 +190,10 @@
     margin-top: 25px;
   }
 
-  .auth-page-template--title-section {
-    margin-bottom: 15px;
+  .auth-page-template {
+    h1, h2 {
+      margin-bottom: 15px;
+    }
   }
 }
 

@@ -1,13 +1,9 @@
 <% if valid_access? %>
   <% if valid_filters.any? %>
-    <% if current_filter == "follows" %>
-      <%= render "users/following", user: user, follows: follows.group_by(&:followable_type) %>
-    <% else %>
-      <%= render Shared::ResourcesListComponent.new(list_params) do |c| %>
-        <% if comments? %>
-          <% c.custom_body do %>
-            <%= render Comments::UserCommentsComponent.new(comments: resources) %>
-          <% end %>
+    <%= render Shared::ResourcesListComponent.new(list_params) do |c| %>
+      <% if comments? %>
+        <% c.custom_body do %>
+          <%= render Comments::UserCommentsComponent.new(comments: resources) %>
         <% end %>
       <% end %>
     <% end %>

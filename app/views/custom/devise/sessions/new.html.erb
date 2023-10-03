@@ -3,9 +3,7 @@
 <% if Setting.new_design_enabled? %>
   <%= render Auth::AuthPageTemplateComponent.new do |c| %>
     <% c.form do %>
-      <div class="auth-page-template--title-section">
-        <h2><%= t("devise_views.sessions.new.title") %></h2>
-      </div>
+      <h2><%= t("devise_views.sessions.new.title") %></h2>
 
       <div class="auth-page-template--oauth">
         <%= render "devise/omniauth_form", action: "sign_in" %>
