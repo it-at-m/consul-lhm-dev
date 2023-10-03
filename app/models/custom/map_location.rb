@@ -92,7 +92,13 @@ class MapLocation < ApplicationRecord
   end
 
   def ensure_shape_is_json
-    self.shape = JSON.parse(shape) if shape.is_a?(String)
+    if shape == "{}" || shape == "\"{}\"" || shape == '"{}"' || shape == ""
+      self.shape = {}
+    elsif shape.is_a?(String)
+      self.shape = JSON.parse(shape)
+    else
+      self.shape = {}
+    end
   rescue JSON::ParserError
     self.shape = {}
   end

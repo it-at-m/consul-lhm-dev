@@ -628,7 +628,7 @@
             }
           })
 
-          $(shapeInputSelector).val({});
+          $(shapeInputSelector).val(JSON.stringify({}));
           $(showAdminShapeInputSelector).val(false);
         }
 
