@@ -7,9 +7,9 @@ de:
       resources_filter:
     user_page:
       filters:
-        proposals_title: Vorschläge
-        debates_title: Diskussionen
-        budget_investments_title: Budgetinvestitionen
-        comments_title: Kommentare
-        follow_title: Folge ich
+        proposals: Vorschläge
+        debates: Diskussionen
+        budget_investments: Budgetinvestitionen
+        comments: Kommentare
+        follow: Folge ich
 
