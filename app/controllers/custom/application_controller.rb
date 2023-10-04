@@ -131,6 +131,12 @@ class ApplicationController < ActionController::Base
     end
 
     def set_back_path
-      session[:back_path] = request.fullpath
+      if params[:projekt_phase_id].present?
+        back_path = helpers.url_to_footer_tab
+      else
+        back_path = request.fullpath
+      end
+
+      session[:back_path] = back_path
     end
 end

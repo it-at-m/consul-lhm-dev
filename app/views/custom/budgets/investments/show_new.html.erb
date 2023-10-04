@@ -7,7 +7,7 @@
   <div id="<%= dom_id(@investment) %>">
     <div class="flex-layout">
       <div class="main-column">
-        <%= back_link_to(page_path(@investment.projekt.page.slug, selected_phase_id: @investment.projekt_phase.id)) %>
+        <%= resources_back_link(fallback_path: url_to_footer_tab) %>
 
         <h1 class="resource-page--title"><%= "Beitrag von #{@investment.author.name}" %></h1>
         <div class="common-page-description">
