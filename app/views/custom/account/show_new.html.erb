@@ -116,7 +116,7 @@
               </div>
               <% if @account.official_level == 1 %>
                 <div>
-                  <%= f.check_box :official_position_badge %>
+                  <%= f.check_box :official_position_badge, { class: "checkbox-label--aligned" } %>
                 </div>
               <% end %>
 
@@ -133,6 +133,7 @@
                     <%= cb.label(class: "checkbox-label checkbox-label--inline") { cb.check_box + cb.text } %>
                   <% end %>
                 </div>
+                <%= f.submit t("custom.account.show.save_settings"), class: "button margin-top" %>
               <% end %>
             <% end %>
           <% end %>
@@ -151,6 +152,7 @@
                   <% end %>
                 </div>
               <% end %>
+              <%= f.submit t("custom.account.show.save_settings"), class: "button margin-top" %>
             <% end %>
           <% end %>
       <% end %>

@@ -7,7 +7,7 @@
       <% @options.each do |option| %>
           <% c.option do %>
             <%= link_to link_path(option),
-              title: title_for(option),
+              # title: title_for(option),
               data: link_data_attributes(option) do
             %>
               <%= translate_option(option) %>
