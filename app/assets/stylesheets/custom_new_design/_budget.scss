@@ -60,13 +60,9 @@
   }
 
   .resource-item--footer-section {
-    min-height: 50px !important;
-    height: unset !important;
-
     .ballot-section, .price-section, .votes-section, .show-votes-count-section {
       width: 100%;
       min-height: unset !important;
-      margin-bottom: 10px;
     }
 
     .ballot-section {
@@ -93,6 +89,10 @@
           }
         }
 
+        br, .icon-check-circle {
+          display: none;
+        }
+
         &.-distributed {
           .add.in-favor {
             flex-direction: column;
@@ -106,6 +106,7 @@
     }
 
     .price-section {
+      background-color: #D5F2D6;
       text-align: left;
 
       .total-price {

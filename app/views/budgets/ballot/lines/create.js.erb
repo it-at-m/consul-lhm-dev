@@ -1,5 +1,7 @@
+<% sidebar_partial = Setting.new_design_enabled? ? "budgets/investments/sidebar_new" : "budgets/investments/sidebar" %>
+
 $("#progress_bar").html("<%= j render("/budgets/ballot/progress_bar", ballot: @ballot, heading: @heading) %>");
-$("#sidebar").html("<%= j render("/budgets/investments/sidebar") %>");
+$("#sidebar").html("<%= j render(sidebar_partial) %>");
 
 <%= render "budgets/ballot/lines/refresh_ballots",
             investment_ids: @investment_ids,

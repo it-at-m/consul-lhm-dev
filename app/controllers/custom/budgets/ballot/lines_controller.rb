@@ -7,6 +7,7 @@ module Budgets
         load_investment
         load_heading
         load_map
+        set_filters
 
         if permission_problem.present?
           return
@@ -19,6 +20,7 @@ module Budgets
         @investment = @line.investment
         load_heading
         load_map
+        set_filters
 
         if permission_problem.present? &&
             !@investment.permission_problem_keys_allowing_ballot_line_deletion.include?(permission_problem)
@@ -38,6 +40,12 @@ module Budgets
 
         def permission_problem
           @permission_problem = @investment.reason_for_not_being_ballotable_by(current_user, @line.ballot)
+        end
+
+        def set_filters
+          @valid_filters = @budget.investments_filters
+          params[:filter] ||= "all" if @budget.phase.in?(["publishing_prices", "balloting", "reviewing_ballots"])
+          @current_filter = @valid_filters.include?(params[:filter]) ? params[:filter] : nil
         end
     end
   end

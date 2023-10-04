@@ -202,13 +202,9 @@
   }
 
   .resource-item--footer {
-    // display: flex;
-    // justify-content: center;
-    // height: 80px;
-    // bottom: 0;
-    width: 100%;
-    // border-top: 1px solid $border-color;
-    // position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 
     .button {
       margin-bottom: 0;
@@ -218,8 +214,7 @@
     }
 
     .callout.warning, .callout.success, .callout.error,
-    .callout.alert, .participation-not-allowed,
-    .participation-not-allowed p{
+    .callout.alert, .participation-not-allowed {
       font-size: 14px;
       height: 100%;
       margin-bottom: 0;
@@ -232,6 +227,7 @@
       width: 299px;
       margin-left: -25px;
     }
+    // .participation-not-allowed p{
 
     p.investment-project-amount {
       margin-bottom: 0;
@@ -244,19 +240,20 @@
   }
 
   .resource-item--footer-section {
-    height: 100%;
     align-items: center;
     display: flex;
-    flex-grow: 1;
     justify-content: center;
     position: relative;
     text-align: center;
     position: relative;
     border-top: 1px solid $border-color;
-    min-height: 93px;
-    padding: 10px 25px;
-    padding-bottom: 0;
+    // padding: 10px 25px;
+    // padding-bottom: 0;
     flex-direction: column;
+
+    & > * {
+      padding: 10px 25px !important;
+    }
 
     .supports-container {
       border-left: none;
@@ -320,54 +317,54 @@
       }
     }
 
-    .supports.ballot {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    // .supports.ballot {
+    //   height: 100%;
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: center;
 
-      > div {
-        display: flex;
-        flex-direction: row-reverse;
-        width: 100%;
+    //   > div {
+    //     display: flex;
+    //     flex-direction: row-reverse;
+    //     width: 100%;
 
-        &.remove {
-          justify-content: space-between;
-        }
+    //     &.remove {
+    //       justify-content: space-between;
+    //     }
 
-        &.add {
-          justify-content: center;
+    //     &.add {
+    //       justify-content: center;
 
-          .investment-project-amount {
-            margin-left: 55px;
-          }
-        }
-      }
+    //       .investment-project-amount {
+    //         margin-left: 55px;
+    //       }
+    //     }
+    //   }
 
-      br {
-        display: none;
-      }
+    //   br {
+    //     display: none;
+    //   }
 
-      .button {
-        padding: 0 10px 0;
-      }
+    //   .button {
+    //     padding: 0 10px 0;
+    //   }
 
-      p {
-        padding-top: 6px;
-      }
+    //   p {
+    //     padding-top: 6px;
+    //   }
 
-      .icon-check-circle {
-        display: none;
-      }
+    //   .icon-check-circle {
+    //     display: none;
+    //   }
 
-      .button-remove-support {
-        margin-top: 11px;
-      }
+    //   .button-remove-support {
+    //     margin-top: 11px;
+    //   }
 
-      .participation-not-allowed {
-        display: none;
-      }
-    }
+    //   .participation-not-allowed {
+    //     display: none;
+    //   }
+    // }
 
     .budget-investment-ballot {
       width: 100%;
