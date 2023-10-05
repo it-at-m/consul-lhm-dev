@@ -35,14 +35,19 @@
       cursor: pointer;
     }
 
-    .direct-image-upload--file-attach-area, .image-preview {
+    .direct-image-upload--file-attach-area, .image-preview, .users-profile-banner--avatar {
       border: 3px solid white;
       border-radius: 50%;
       overflow: hidden;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
-  .users-profile-banner--avatar {
+  .users-profile-banner--avatar-placeholder {
     width: 100%;
     height: 100%;
     color: white;

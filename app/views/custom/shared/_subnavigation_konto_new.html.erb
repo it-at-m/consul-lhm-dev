@@ -17,7 +17,7 @@
               <%= image_tag(current_user.image&.variant(:popup)) %>
             <% else %>
               <div class="main-navigation-item--account--image-placeholder">
-                <%= current_user&.first_name&.chars&.first&.capitalize %>
+                <%= current_user&.first_letter_of_name %>
               </div>
             <% end %>
         </div>

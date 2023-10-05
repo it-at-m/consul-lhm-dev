@@ -6,7 +6,7 @@
           <%= image_tag(@author.image&.variant(:popup)) %>
         <% else %>
           <div class="resource-item--author-photo--placeholder">
-            <%= @author&.first_name&.chars&.first&.capitalize %>
+            <%= @author.first_letter_of_name %>
           </div>
         <% end %>
       </div>

@@ -275,6 +275,10 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def first_letter_of_name
+    first_name.chars.first.upcase
+  end
+
   private
 
     def geozone_with_plz
