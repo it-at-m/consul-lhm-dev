@@ -13,6 +13,9 @@
       $(".js-direct-image-upload--file-attach-area").each(function(_index, fileAttachArea) {
         fileAttachArea.addEventListener("click", App.DirectUploadComponent.fileAttachAreaClick);
       });
+      $(".js-direct-image-upload-custom-edit-button").each(function(_index, fileAttachArea) {
+        fileAttachArea.addEventListener("click", App.DirectUploadComponent.fileAttachAreaClick);
+      });
 
       App.DirectUploadComponent.initializeRemoveCachedImageLinks();
     },

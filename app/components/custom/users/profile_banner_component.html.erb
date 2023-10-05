@@ -1,8 +1,20 @@
 <div class="new-card -no-padding users-profile-banner">
   <div class="users-profile-banner--background-image">
   </div>
-  <div class="users-profile-banner--avatar">
-    <%= @user.name.chars.first.upcase %>
+  <div class="users-profile-banner--avatar-wrapper">
+    <%= render Images::DirectUploadComponent.new(@image_builder, imageable: @imageable) do |c| %>
+      <% c.placeholder do %>
+        <div class="users-profile-banner--avatar">
+          <%= @user.name.chars.first.upcase %>
+        </div>
+      <% end %>
+
+      <% c.custom_edit_button do %>
+        <div class="users-profile-banner--edit-button users-profile-banner--avatar-edit-button">
+          <i class="fa fa-pencil-alt"></i>
+        </div>
+      <% end %>
+    <% end %>
   </div>
   <div class="users-profile-banner--info">
     <div class="users-profile-banner--name">
