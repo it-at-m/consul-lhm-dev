@@ -57,13 +57,13 @@
               %>
           </div>
 
-          <% if extended_feature?("debates.head_image_for_debates") %>
+          <% if true #show_image? %>
             <div class="banner-editor-image-attachment js-banner-editor-image-attachment">
               <% if f.object.image.blank? %>
                 <% f.object.build_image %>
               <% end %>
               <%= f.fields_for :image do |image_builder| %>
-                <%= render Images::DirectUploadComponent.new(image_builder, imageable: f.object) %>
+                <%= render UserResources::ImageUploadComponent.new(image_builder, imageable: f.object) %>
               <% end %>
             </div>
           <% end %>

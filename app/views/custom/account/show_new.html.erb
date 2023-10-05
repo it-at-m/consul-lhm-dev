@@ -1,44 +1,51 @@
-<%= form_for @account, as: :account, url: account_path do |f| %>
-  <main class="user-page">
-    <div class="flex-layout">
-      <div class="main-column">
-        <%= render(Users::ProfileBannerComponent.new(user: current_user, form: f)) %>
-        <div class="row margin-bottom">
-          <div class="small-12 column">
+<main class="user-page">
+  <div class="flex-layout">
+    <div class="main-column">
+      <%= form_for @account, as: :account, url: account_path do |f| %>
+        <% if f.object.image.blank? %>
+          <% f.object.build_image %>
+        <% end %>
+        <%= f.fields_for :image do |image_builder| %>
+          <%= render(Users::ProfileBannerComponent.new(user: current_user, imageable: f.object, image_builder: image_builder)) %>
+        <% end %>
+      <% end %>
+      <div class="row margin-bottom">
+        <div class="small-12 column">
 
-            <h1 class="inline-block margin-bottom">
-              <%= t("notifications.index.title") %>
-            </h1>
+          <h1 class="inline-block margin-bottom">
+            <%= t("notifications.index.title") %>
+          </h1>
 
-            <%= link_to t("notifications.index.mark_all_as_read"),
-              mark_all_as_read_notifications_path, method: :put,
-              class: "button hollow float-right-medium" %>
+          <%= link_to t("notifications.index.mark_all_as_read"),
+            mark_all_as_read_notifications_path, method: :put,
+            class: "button hollow float-right-medium" %>
 
-            <ul class="menu simple clear">
-              <li class="is-active">
-                <h2><%= link_to t("notifications.index.unread"), notifications_path %></h2>
-              </li>
-              <li>
-                <%= link_to t("notifications.index.read"), read_notifications_path %>
-              </li>
+          <ul class="menu simple clear">
+            <li class="is-active">
+              <h2><%= link_to t("notifications.index.unread"), notifications_path %></h2>
+            </li>
+            <li>
+              <%= link_to t("notifications.index.read"), read_notifications_path %>
+            </li>
+          </ul>
+
+          <% if @notifications.empty? %>
+            <div data-alert class="callout primary margin-top clear">
+              <%= t("notifications.index.empty_notifications") %>
+            </div>
+          <% else %>
+            <ul class="no-bullet clear notifications-list">
+              <% @notifications.each do |notification| %>
+                <%= render "/notifications/notification", notification: notification %>
+              <% end %>
             </ul>
-
-            <% if @notifications.empty? %>
-              <div data-alert class="callout primary margin-top clear">
-                <%= t("notifications.index.empty_notifications") %>
-              </div>
-            <% else %>
-              <ul class="no-bullet clear notifications-list">
-                <% @notifications.each do |notification| %>
-                  <%= render "/notifications/notification", notification: notification %>
-                <% end %>
-              </ul>
-            <% end %>
-          </div>
+          <% end %>
         </div>
-        <%= render Users::NewPublicActivityComponent.new(current_user) %>
       </div>
-      <aside class="sidebar">
+      <%= render Users::NewPublicActivityComponent.new(current_user) %>
+    </div>
+    <aside class="sidebar">
+      <%= form_for @account, as: :account, url: account_path do |f| %>
         <%= render Shared::SidebarCardComponent.new(title: t("custom.users.settings"), icon_name: "cog") do |c| %>
           <%= link_to t("custom.account.show.change_credentials_link"), edit_user_registration_path, class: "button hollow" %>
           <%= link_to t("custom.account.show.erase_account_link"), users_registrations_delete_form_path, class: "button hollow delete alert" %>
@@ -155,7 +162,7 @@
             <%= f.submit t("custom.account.show.save_settings"), class: "button margin-top" %>
           <% end %>
         <% end %>
+      <% end %>
       </aside>
   </div>
 </main>
-<% end %>

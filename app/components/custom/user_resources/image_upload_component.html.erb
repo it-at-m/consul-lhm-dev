@@ -1,0 +1,22 @@
+<%= render Images::DirectUploadComponent.new(@f, imageable: @imageable) do |c| %>
+  <% c.placeholder do %>
+    <div class="user-resource-image-upload--placeholder">
+      <div class="user-resource-image-upload--placeholder-inner">
+        <div class="user-resource-image-upload--text">
+          Beiträge mit aussagekräftigem Bild erhalten durchschnittlich 34% mehr Unterstützung
+        </div>
+        <div class="user-resource-image-upload--label">
+          <div class="user-resource-image-upload--plus">
+            +
+          </div>
+          <div class="user-resource-image-upload--label-title">
+            Bild hinzufügen
+          </div>
+          <div class="user-resource-image-upload--hint">
+            Am besten eignet sich ein Bild im Format 490 x 290 Pixel
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
