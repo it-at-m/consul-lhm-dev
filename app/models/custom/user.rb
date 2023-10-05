@@ -276,7 +276,7 @@ class User < ApplicationRecord
   end
 
   def first_letter_of_name
-    first_name.chars.first.upcase
+    (first_name || name)&.chars&.first&.upcase
   end
 
   private
