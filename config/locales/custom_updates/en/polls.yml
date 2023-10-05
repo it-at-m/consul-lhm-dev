@@ -10,6 +10,7 @@ en:
           View the votes in their entirety or use the filter function to sort them - by topicality or by level of participation.<br><br>
           You can also use the right sidebar to search for votes by project, area or keyword. Individual votes may be restricted to certain areas or age groups.
         sidebar_information_default_text: Would you like to vote? Just choose the poll and click “Participate”
+        empty_list_text: No connected polls
       poll:
         date:
           from: from

@@ -34,6 +34,7 @@ en:
         index:
           sidebar:
             user_votes: "My votes: %{count}"
+          empty_list_text: No results
         form:
           start_new: Investitionsvorschlag erstellen
           page_description:
