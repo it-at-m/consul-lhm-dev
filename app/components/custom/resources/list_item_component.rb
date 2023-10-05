@@ -39,7 +39,7 @@ class Resources::ListItemComponent < ApplicationComponent
   end
 
   def component_class_name
-    class_name = "#{@resource_name&.underscore}-list-item"
+    class_name = "#{@resource.class.name&.underscore}-list-item"
     # class_name = "-list-item"
 
     if @wide
