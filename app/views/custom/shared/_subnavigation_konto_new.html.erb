@@ -13,7 +13,13 @@
             title="<%= t("custom.layouts.header.account_link") %>"
             aria-label="<%= t("custom.layouts.header.account_link") %>"
             >
-            <%= current_user&.first_name&.chars&.first&.capitalize %>
+            <% if current_user.image&.variant(:popup).present? %>
+              <%= image_tag(current_user.image&.variant(:popup)) %>
+            <% else %>
+              <div class="main-navigation-item--account--image-placeholder">
+                <%= current_user&.first_name&.chars&.first&.capitalize %>
+              </div>
+            <% end %>
         </div>
       <% end %>
 

@@ -392,15 +392,18 @@ body.custom-new-design .wrapper > header .locale.locale-custom {
   .main-navigation-item--account--image-wrapper {
     width: 40px !important;
     height: 40px !important;
-    background: black;
     color: white;
     border-radius: 50%;
     display: flex;
     font-size: 30px;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
   }
 
+  .main-navigation-item--account--image-wrapper--placeholder {
+    background: black;
+  }
 
   header {
     .header--account-buttons {

@@ -5,9 +5,10 @@ class Images::DirectUploadComponent < ApplicationComponent
   attr_reader :f, :resource_type, :resource_id, :relation_name
   delegate :current_user, :render_image, to: :helpers
 
-  def initialize(f, imageable:)
+  def initialize(f, imageable:, submit_form: false)
     @f = f
     @imageable = imageable
+    @submit_form = submit_form
 
     @resource_type = @imageable.class.name
     @resource_id = @imageable.id

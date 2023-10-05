@@ -1,7 +1,7 @@
 <main class="user-page">
   <div class="flex-layout">
     <div class="main-column">
-      <%= form_for @account, as: :account, url: account_path do |f| %>
+      <%= form_for @account, as: :account, remote: true, url: account_path do |f| %>
         <% if f.object.image.blank? %>
           <% f.object.build_image %>
         <% end %>
