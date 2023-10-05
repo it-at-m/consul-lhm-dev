@@ -62,6 +62,16 @@
           $(data.addAttachmentLabel).addClass("error");
         },
         done: function(e, data) {
+          var $dataWrapper = data.wrapper;
+          var shouldSubmitForm = $dataWrapper.data("submit-form") === true;
+
+          if (shouldSubmitForm) {
+            var $idElemnt = $(".js-direct-image-upload--id");
+
+            $idElemnt.val("");
+            $(data.cachedAttachmentField).val("");
+          }
+
           $(data.cachedAttachmentField).val(data.result.cached_attachment);
 
           App.DirectUploadComponent.setTitleFromFile(data, data.result.filename);
@@ -72,11 +82,8 @@
           var destroyAttachmentLink = $(data.result.destroy_link);
           $(data.destroyAttachmentLinkContainer).html(destroyAttachmentLink);
 
-          var $dataWrapper = data.wrapper;
-
-          if ($dataWrapper.data("submit-form") === true) {
+          if (shouldSubmitForm) {
             var form = $dataWrapper.closest("form")[0];
-
             form.requestSubmit();
           }
         },

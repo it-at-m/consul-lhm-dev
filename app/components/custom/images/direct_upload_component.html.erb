@@ -6,7 +6,7 @@
   </div>
 
   <div class="direct-image-upload--inputs js-direct-image-upload--inputs nested-fields">
-    <%= f.hidden_field :id %>
+    <%= f.hidden_field :id, class: "js-direct-image-upload--id" %>
     <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.hidden_field :cached_attachment, class: "js-direct-image-upload--cached-attachment" %>
     <div class="direct-image-upload--file-field">

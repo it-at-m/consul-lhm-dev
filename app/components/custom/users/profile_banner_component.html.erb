@@ -2,18 +2,28 @@
   <div class="users-profile-banner--background-image">
   </div>
   <div class="users-profile-banner--avatar-wrapper">
-    <%= render Images::DirectUploadComponent.new(@image_builder, imageable: @imageable, submit_form: true) do |c| %>
-      <% c.placeholder do %>
-        <div class="users-profile-banner--avatar">
-          <%= @user.name.chars.first.upcase %>
-        </div>
-      <% end %>
+    <% if @edit_image && @user == current_user %>
+      <%= render Images::DirectUploadComponent.new(@image_builder, imageable: @imageable, submit_form: true) do |c| %>
+        <% c.placeholder do %>
+          <div class="users-profile-banner--avatar-placeholder">
+            <%= @user.first_letter_of_name %>
+          </div>
+        <% end %>
 
-      <% c.custom_edit_button do %>
-        <div class="users-profile-banner--edit-button users-profile-banner--avatar-edit-button">
-          <i class="fa fa-pencil-alt"></i>
-        </div>
+        <% c.custom_edit_button do %>
+          <div class="users-profile-banner--edit-button users-profile-banner--avatar-edit-button">
+            <i class="fa fa-pencil-alt"></i>
+          </div>
+        <% end %>
       <% end %>
+    <% elsif @user.image.present? %>
+      <div class="users-profile-banner--avatar">
+        <%= image_tag(@user.image&.variant(:medium)) %>
+      </div>
+    <% else %>
+      <div class="users-profile-banner--avatar-placeholder">
+        <%= @user.first_letter_of_name %>
+      </div>
     <% end %>
   </div>
   <div class="users-profile-banner--info">
