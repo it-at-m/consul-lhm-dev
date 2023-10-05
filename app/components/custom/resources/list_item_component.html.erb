@@ -1,8 +1,14 @@
 <% author_name_html = capture do %>
   <% if @author.present? %>
     <%= link_to user_path(@author), class: 'resource-item--author' do %>
-      <%# <%= image_tag('', class: 'resource-item--author-photo') %>
       <div class="resource-item--author-photo">
+        <% if @author.image&.variant(:popup).present? %>
+          <%= image_tag(@author.image&.variant(:popup)) %>
+        <% else %>
+          <div class="resource-item--author-photo--placeholder">
+            <%= @author&.first_letter_of_name %>
+          </div>
+        <% end %>
       </div>
       <div class="resource-item--author-name">
         <%= @author.full_name %>
@@ -86,7 +92,7 @@
 
       </div>
       <% if footer_sections.any? %>
-        <div class="resource-item--footer">
+        <div class="resource-item--footer <%= @no_footer_bottom_padding ? "-no-bottom-padding" : "" %>">
           <% footer_sections.each do |footer_section| %>
             <div class="resource-item--footer-section">
               <%= footer_section %>

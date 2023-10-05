@@ -60,9 +60,12 @@
   }
 
   .resource-item--footer-section {
+    min-height: 50px !important;
+  
     .ballot-section, .price-section, .votes-section, .show-votes-count-section {
       width: 100%;
       min-height: unset !important;
+      margin-bottom: 10px;
     }
 
     .ballot-section {

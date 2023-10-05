@@ -4,12 +4,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: hidden;
   border-radius: 8px;
 
   .image-preview, figure, img {
     width: 100%;
     height: 100%;
+  }
+
+  .image-preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0;
+    overflow: hidden;
   }
 
   img {
@@ -68,68 +76,13 @@
 }
 
 .direct-image-upload--file-attach-area {
+  width: 100%;
   height: 100%;
   cursor: pointer;
-  background: #e2e2e2;
-  transition: background 0.2s ease-in-out;
-  // border-radius: 10px;
-
-  &:hover {
-    background: #dcdcdc;
-  }
-}
-
-.direct-image-upload--placeholder {
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 80%;
-  padding-top: 40px;
-  margin: auto;
-  user-select: none;
-}
-
-.direct-image-upload--text {
-  color: $brand;
-  opacity: 0.5;
-  line-height: 1.25;
 }
 
 .direct-image-upload--file-field {
   bottom: 0;
-}
-
-.direct-image-upload--plus {
-  margin: auto;
-  color: $brand;
-  font-size: 130px;
-  line-height: 1;
-  text-align: center;
-  width: 135px;
-  height: 130px;
-  opacity: 0.5;
-}
-
-.direct-image-upload--label {
-  position: absolute;
-  bottom: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.direct-image-upload--label-title {
-  font-size: 33px;
-  color: $brand;
-  opacity: 0.7;
-}
-
-.direct-image-upload--hint {
-  color: $brand;
-  opacity: 0.5;
-  font-size: 14px;
 }
 
 .direct-image-upload--image-actions-area {

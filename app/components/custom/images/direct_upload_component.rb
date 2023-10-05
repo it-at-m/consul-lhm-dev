@@ -1,11 +1,14 @@
 class Images::DirectUploadComponent < ApplicationComponent
+  renders_one :placeholder
+  renders_one :custom_edit_button
+
   attr_reader :f, :resource_type, :resource_id, :relation_name
   delegate :current_user, :render_image, to: :helpers
 
-  # def initialize(f, resource_type:, resource_id:, relation_name:)
-  def initialize(f, imageable:)
+  def initialize(f, imageable:, submit_form: false)
     @f = f
     @imageable = imageable
+    @submit_form = submit_form
 
     @resource_type = @imageable.class.name
     @resource_id = @imageable.id
@@ -30,11 +33,19 @@ class Images::DirectUploadComponent < ApplicationComponent
       attachable.attachment_file_name
     end
 
+    def destroy_link_class
+      if !attachable.persisted? && attachable.cached_attachment.present?
+        "remove-cached-attachment"
+      else
+        "remove-#{singular_name}"
+      end
+    end
+
     def destroy_link
       if !attachable.persisted? && attachable.cached_attachment.present?
-        link_to t("#{plural_name}.form.delete_button"), "#", class: "delete remove-cached-attachment"
+        link_to t("#{plural_name}.form.delete_button"), "#", class: "delete #{destroy_link_class}"
       else
-        link_to_remove_association remove_association_text, f, class: "delete remove-#{singular_name}"
+        link_to_remove_association remove_association_text, f, class: "delete #{destroy_link_class}"
       end
     end
 

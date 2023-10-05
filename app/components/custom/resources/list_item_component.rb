@@ -20,7 +20,8 @@ class Resources::ListItemComponent < ApplicationComponent
     tags: [],
     image_placeholder_icon_class: "fa-file",
     header_style: nil,
-    narrow_header: false
+    narrow_header: false,
+    no_footer_bottom_padding: false
   )
     @title = title
     @projekt = projekt
@@ -34,11 +35,12 @@ class Resources::ListItemComponent < ApplicationComponent
     @image_placeholder_icon_class = image_placeholder_icon_class
     @header_style = header_style
     @narrow_header = narrow_header
+    @no_footer_bottom_padding = no_footer_bottom_padding
   end
 
   def component_class_name
-    # class_name = "#{@resource_name&.underscore}-list-item"
-    class_name = "-list-item"
+    class_name = "#{@resource.class.name&.underscore}-list-item"
+    # class_name = "-list-item"
 
     if @wide
       class_name += " -wide"

@@ -1,6 +1,8 @@
 require_dependency Rails.root.join("app", "controllers", "account_controller").to_s
 
 class AccountController < ApplicationController
+  include ImageAttributes
+
   def show
     @account_individial_groups_hard = IndividualGroup.hard
     @account_individial_groups_soft = IndividualGroup.soft
@@ -22,8 +24,10 @@ class AccountController < ApplicationController
     end
 
     def process_individual_group_values_param
-      @account.individual_group_values.where(individual_group_id: IndividualGroup.hard).ids.each do |id|
-        params["account"]["individual_group_value_ids"].push(id)
+      if params["account"]["individual_group_value_ids"].present?
+        @account.individual_group_values.where(individual_group_id: IndividualGroup.hard).ids.each do |id|
+          params["account"]["individual_group_value_ids"].push(id)
+        end
       end
     end
 
@@ -39,7 +43,8 @@ class AccountController < ApplicationController
          :adm_email_on_new_comment, :adm_email_on_new_proposal,
          :adm_email_on_new_debate, :adm_email_on_new_deficiency_report,
          :adm_email_on_new_manual_verification,
-         individual_group_value_ids: []
+         individual_group_value_ids: [],
+         image_attributes: image_attributes
         ]
       end
     end
