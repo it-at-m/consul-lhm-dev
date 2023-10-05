@@ -71,6 +71,14 @@
           App.DirectUploadComponent.setPreview(data);
           var destroyAttachmentLink = $(data.result.destroy_link);
           $(data.destroyAttachmentLinkContainer).html(destroyAttachmentLink);
+
+          var $dataWrapper = data.wrapper;
+
+          if ($dataWrapper.data("submit-form") === true) {
+            var form = $dataWrapper.closest("form")[0];
+
+            form.requestSubmit();
+          }
         },
 
         progress: function(e, data) {

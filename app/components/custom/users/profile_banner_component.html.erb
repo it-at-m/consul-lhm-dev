@@ -2,7 +2,7 @@
   <div class="users-profile-banner--background-image">
   </div>
   <div class="users-profile-banner--avatar-wrapper">
-    <%= render Images::DirectUploadComponent.new(@image_builder, imageable: @imageable) do |c| %>
+    <%= render Images::DirectUploadComponent.new(@image_builder, imageable: @imageable, submit_form: true) do |c| %>
       <% c.placeholder do %>
         <div class="users-profile-banner--avatar">
           <%= @user.name.chars.first.upcase %>

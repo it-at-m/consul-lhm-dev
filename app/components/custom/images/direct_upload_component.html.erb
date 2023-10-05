@@ -1,4 +1,4 @@
-<div class="direct-image-upload js-direct-image-upload">
+<div class="direct-image-upload js-direct-image-upload" data-submit-form="<%= @submit_form %>">
   <div class="js-direct-image-upload--file-attach-area direct-image-upload--file-attach-area">
     <% if placeholder.present? %>
       <%= placeholder %>
@@ -19,7 +19,7 @@
     <div class="direct-image-upload--progress-bar-wrapper"><div class="direct-image-upload--loading-bar"></div></div>
 
     <% if custom_edit_button.present? %>
-      <div class="delete direct-image-upload-custom-edit-button js-direct-image-upload-custom-edit-button <%= destroy_link_class %>">
+      <div class="direct-image-upload-custom-edit-button js-direct-image-upload-custom-edit-button <%= destroy_link_class %>">
         <%= custom_edit_button %>
       </div>
     <% end %>
