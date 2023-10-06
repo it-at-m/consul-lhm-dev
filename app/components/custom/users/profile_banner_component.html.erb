@@ -10,7 +10,7 @@
           <% end %>
           <% c.placeholder do %>
             <% if @user.background_image.attached? %>
-              <%= image_tag(@user.background_image) %>
+              <%= image_tag(@user.background_image.variant(resize: "1000X300")) %>
             <% end %>
           <% end %>
         <% end %>
