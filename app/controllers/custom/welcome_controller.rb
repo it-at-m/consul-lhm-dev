@@ -40,6 +40,8 @@ class WelcomeController < ApplicationController
     end
   end
 
+  def latest_activity; end
+
   private
 
     def filtered_items(feed)

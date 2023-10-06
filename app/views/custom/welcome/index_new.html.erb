@@ -32,6 +32,8 @@
         ) %>
       <% end %>
 
+      <%= render Users::LatestActivityComponent.new %>
+
       <% if @cards.any? %>
         <%= render partial: "cards", locals: { cards: @cards, section_title: t("welcome.cards.title") } %>
       <% end %>

@@ -9,5 +9,5 @@
       </div>
     </div>
   <% end %>
-  <%= paginate @comments %>
+  <%= paginate @comments if paginate? %>
 </div>

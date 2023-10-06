@@ -1,0 +1,9 @@
+<div id="latest-activity">
+  <%= render Shared::ResourcesListComponent.new(list_params) do |c| %>
+    <% if comments? %>
+      <% c.custom_body do %>
+        <%= render Comments::UserCommentsComponent.new(comments: resources) %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
