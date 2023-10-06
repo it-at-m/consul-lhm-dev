@@ -13,6 +13,7 @@ de:
           um sie zu sortieren – nach Aktualität oder nach dem Grad der Beteiligung.<br><br>
           Überdies können Sie über die rechte Seitenleiste gezielt nach Projekten, Gebieten oder Schlagworten nach Abstimmungen suchen. Einzelne Abstimmungen können auf bestimmte Gebiete oder auf Altersgruppen eingeschränkt sein.
         sidebar_information_default_text: Sie möchten über selbst abstimmen? Suchen Sie einfach nach der gewünschten Abstimmung und klicken auf "Teilnehmen"
+        empty_list_text: Derzeit keine verknüpften Abstimmungen
       poll:
         date:
           from: von

@@ -57,7 +57,7 @@ body.custom-new-design {
     line-height: 1.2;
   }
 
-  .column {
+  .column:not(div#page-content .column) {
     padding: 0;
   }
 }

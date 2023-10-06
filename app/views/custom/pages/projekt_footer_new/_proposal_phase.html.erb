@@ -12,7 +12,7 @@
         filter_param: "order",
         filters: @valid_orders,
         text_search_enabled: true,
-        empty_list_text: "No proposals"
+        empty_list_text: t("custom.proposals.index.empty_list_text")
       )) %>
     <%= paginate @proposals, remote: true, params: { controller: "pages", action: "projekt_phase_footer_tab" } %>
   </div>

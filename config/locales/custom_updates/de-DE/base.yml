@@ -182,6 +182,13 @@ de:
       start_entry: + Beitrag erstellen
       start_proposal: Eigenen Vorschlag erstellen
       user_entries: Neueste Beiträge
+      latest_activity:
+        title: Meine Aktivität
+        proposals: Vorschläge
+        debates: Diskussionen
+        budget_investments: Investitionsvorschläge
+        comments: Kommentare
+        follows: Follows
     welcome_launch:
       p1: Hier entsteht die neue Beteiligungsplattform der Stadt %{org_name}
       p2: Unser Go-Live ist am %{date}!

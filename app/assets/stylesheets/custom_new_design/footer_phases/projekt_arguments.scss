@@ -1,0 +1,54 @@
+.custom-new-design {
+  .projekt-arguments-containerr {
+    display: flex;
+    justify-content: left;
+
+    .projekt-arguments-separator {
+      border-left: 1px solid #e5e5e5;
+      margin: 0 30px;
+    }
+
+    .projekt-arguments-title {
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    .projekt-argument {
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      background-color: #fff;
+      overflow: hidden;
+      width: 437px;
+      margin-bottom: 24px;
+
+      > * {
+        padding: 0 20px;
+      }
+
+      .projekt-argument-header {
+        background-color: $brand;
+        color: #fff;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+        font-size: 22px;
+      }
+
+      .projekt-argument-photo {
+        margin-top: 48px;
+        margin-bottom: 24px;
+      }
+
+      .projekt-argument-position {
+        margin-bottom: 12px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #222;
+      }
+
+      .projekt-argument-note {
+        margin-bottom: 12px;
+      }
+    }
+  }
+}

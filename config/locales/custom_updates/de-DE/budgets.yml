@@ -35,6 +35,7 @@ de:
         index:
           sidebar:
             user_votes: "Abgegebene Stimmen: %{count}"
+          empty_list_text: Keine Ergebnisse
         form:
           start_new: Investitionsvorschlag erstellen
           page_description: Das Budget lebt von Ihren Beiträgen! Teilen Sie uns mit, was Sie gerne umgesetzt hätten - und tauschen Sie sich im Anschluss mit anderen zu Ihren Ideen aus. Sie können angeben, ob Sie bei der Umsetzung selbst unterstützen möchten oder ob die Stadtverwaltung die Verantwortung übernehmen soll.<br><br>

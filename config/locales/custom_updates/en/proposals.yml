@@ -21,6 +21,7 @@ en:
         show_smaller_map: Show less
         creation_only_for_citizens: Neue Vorschläge können in diesem Projekt nur von Bürgerinnen und Bürgern der Stadt %{city} eingereicht werden.
         creation_only_for_specific_geozones: Vorschläge können nur von Bürger*innen aus dem Postleitzahlbereich %{geozones} eingebracht werden.
+        empty_list_text: No connected proposals
         proposal:
           by: by
       proposal:

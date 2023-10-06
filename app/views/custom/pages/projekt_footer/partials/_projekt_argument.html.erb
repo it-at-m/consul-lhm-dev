@@ -1,0 +1,23 @@
+<div class="projekt-argument">
+  <div class="projekt-argument-header">
+    <%= argument.name %>
+  </div>
+
+  <% if argument.image.present? %>
+    <div class="projekt-argument-photo">
+      <%= image_tag(argument.image.variant(:large)) %>
+    </div>
+  <% end %>
+
+  <% if argument.position.present? %>
+    <div class="projekt-argument-position">
+      <%= argument.position %>
+    </div>
+  <% end %>
+
+  <% if argument.note.present? %>
+    <div class="projekt-argument-note">
+      <%= argument.note %>
+    </div>
+  <% end %>
+</div>
