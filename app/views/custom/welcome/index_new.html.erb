@@ -23,7 +23,7 @@
         <%= render Projekts::ListComponent.new(
           projekts: @active_projekts,
           title_link: projekts_path,
-          map_coordinates: @active_projekts_map_coordinates,
+          map_coordinates: @active_projekts_map_locations,
           current_filter: @current_projekt_filter,
           filters: @current_active_projekt_filters,
           remote_url: projekts_url(format: :js),
