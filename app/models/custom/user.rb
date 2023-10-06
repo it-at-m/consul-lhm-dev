@@ -2,6 +2,7 @@ require_dependency Rails.root.join("app", "models", "user").to_s
 
 class User < ApplicationRecord
   include Imageable
+  has_one_attached :background_image
 
   SORTING_OPTIONS = { id: "id", name: "username", email: "email", city_name: "city_name",
     created_at: "created_at", verified_at: "verified_at" }.freeze
