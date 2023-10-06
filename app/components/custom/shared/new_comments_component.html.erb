@@ -15,12 +15,12 @@
         <div class="items-list-line-divider"></div>
         <%= render(
           Shared::FilterDropdownComponent.new(
-            title: "Sortieren nach:",
-            anchor: 'comments',
+            title: "Sortieren nach",
+            anchor: "footer-content",
             options: helpers.valid_orders,
             selected_option: helpers.current_order,
             i18n_namespace: "comments.orders",
-            url_param_name: :order
+            url_param_name: 'order'
           )
         ) %>
       </div>
