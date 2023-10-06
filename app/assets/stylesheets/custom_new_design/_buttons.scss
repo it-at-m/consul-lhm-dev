@@ -1,5 +1,5 @@
 .custom-new-design {
-  .button {
+  .button:not(div#page-content .button) {
     height: 37px;
     margin-top: 10px;
     margin-bottom: 10px;
