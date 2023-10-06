@@ -1,14 +1,25 @@
 <div class="sidebar-resource-author sidebar-card">
   <div class="sidebar-resource-author--background-image">
-
+    <% if user.background_image.attached? %>
+      <%= image_tag(user.background_image.variant(resize: "300x300>")) %>
+    <% end %>
   </div>
   <div class="sidebar-resource-author--info">
-    <div class="sidebar-resource-author--avatar">
+    <%= link_to user_path(user) do %>
+      <div class="sidebar-resource-author--avatar">
+        <% if user.image&.variant(:popup).present? %>
+          <%= image_tag(user.image&.variant(:popup)) %>
+        <% else %>
+          <%= user&.first_letter_of_name %>
+        <% end %>
+      </div>
+    <% end %>
 
-    </div>
-    <div class="sidebar-resource-author--name">
-      <%= user.full_name %>
-    </div>
+    <%= link_to user_path(user) do %>
+      <div class="sidebar-resource-author--name">
+        <%= user.full_name %>
+      </div>
+    <% end %>
 
     <div class="sidebar-resource-author--registration-date">
       Beigetreten am: <%= l(user.created_at, format: :date_only) %>
@@ -16,37 +27,42 @@
 
     <div class="sidebar-resource-author--resources">
       <% if user.proposals.exists? %>
-        <div class="sidebar-resource-author--resources-item">
-          <div class="sidebar-resource-author--resources-name">
-            Vorschläge
+        <%= link_to user_path(user) do %>
+          <div class="sidebar-resource-author--resources-item">
+            <div class="sidebar-resource-author--resources-name">
+              Vorschläge
+            </div>
+            <div class="sidebar-resource-author--resources-count">
+              <%= user.proposals.count %>
+            </div>
           </div>
-          <div class="sidebar-resource-author--resources-count">
-            <%= user.proposals.count %>
-          </div>
-        </div>
+        <% end %>
       <% end %>
 
       <% if user.debates.exists? %>
-        <div class="sidebar-resource-author--resources-item">
-          <div class="sidebar-resource-author--resources-name">
-            Diskussionen
+        <%= link_to user_path(user) do %>
+          <div class="sidebar-resource-author--resources-item">
+            <div class="sidebar-resource-author--resources-name">
+              Diskussionen
+            </div>
+            <div class="sidebar-resource-author--resources-count">
+              <%= user.debates.count %>
+            </div>
           </div>
-          <div class="sidebar-resource-author--resources-count">
-            <%= user.debates.count %>
-          </div>
-        </div>
+        <% end %>
       <% end %>
 
-
       <% if user.comments.exists? %>
-        <div class="sidebar-resource-author--resources-item">
-          <div class="sidebar-resource-author--resources-name">
-            Kommentare
+        <%= link_to user_path(user) do %>
+          <div class="sidebar-resource-author--resources-item">
+            <div class="sidebar-resource-author--resources-name">
+              Kommentare
+            </div>
+            <div class="sidebar-resource-author--resoures-count">
+              <%= user.comments.count %>
+            </div>
           </div>
-          <div class="sidebar-resource-author--resoures-count">
-            <%= user.comments.count %>
-          </div>
-        </div>
+        <% end %>
       <% end %>
     </div>
   </div>

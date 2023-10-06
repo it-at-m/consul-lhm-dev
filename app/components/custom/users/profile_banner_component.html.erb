@@ -9,14 +9,16 @@
             </div>
           <% end %>
           <% c.placeholder do %>
-            <% if @user.background_image.present? %>
+            <% if @user.background_image.attached? %>
               <%= image_tag(@user.background_image) %>
             <% end %>
           <% end %>
         <% end %>
       <% end %>
-    <% elsif @user.background_image.present? %>
-      <%= image_tag(@user.background_image) %>
+    <% elsif @user.background_image.attached? %>
+      <div class="users-profile-banner--background-image-wrapper">
+        <%= image_tag(@user.background_image) %>
+      </div>
     <% end %>
   </div>
   <div class="users-profile-banner--avatar-wrapper">
