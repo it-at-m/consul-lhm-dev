@@ -1,14 +1,7 @@
 <main class="user-page">
   <div class="flex-layout">
     <div class="main-column">
-      <%= form_for @account, as: :account, remote: true, url: account_path do |f| %>
-        <% if f.object.image.blank? %>
-          <% f.object.build_image %>
-        <% end %>
-        <%= f.fields_for :image do |image_builder| %>
-          <%= render(Users::ProfileBannerComponent.new(user: current_user, imageable: f.object, image_builder: image_builder, edit_image: true)) %>
-        <% end %>
-      <% end %>
+      <%= render(Users::ProfileBannerComponent.new(user: current_user, edit_mode: true)) %>
       <div class="row margin-bottom">
         <div class="small-12 column">
 

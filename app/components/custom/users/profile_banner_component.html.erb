@@ -1,19 +1,44 @@
 <div class="new-card -no-padding users-profile-banner">
   <div class="users-profile-banner--background-image">
+    <% if @edit_mode && @user == current_user %>
+      <%= form_for @user, as: :account, remote: true, authenticity_token: true, url: account_path do |f| %>
+        <%= render Images::DropzoneComponent.new(f, attachment_name: "background_image", submit_form: true) do |c|%>
+          <% c.custom_edit_button do %>
+            <div class="users-profile-banner--edit-button users-profile-banner--avatar-edit-button">
+              <i class="fa fa-pencil-alt"></i>
+            </div>
+          <% end %>
+          <% c.placeholder do %>
+            <% if @user.background_image.present? %>
+              <%= image_tag(@user.background_image) %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% elsif @user.background_image.present? %>
+      <%= image_tag(@user.background_image) %>
+    <% end %>
   </div>
   <div class="users-profile-banner--avatar-wrapper">
-    <% if @edit_image && @user == current_user %>
-      <%= render Images::DirectUploadComponent.new(@image_builder, imageable: @imageable, submit_form: true) do |c| %>
-        <% c.placeholder do %>
-          <div class="users-profile-banner--avatar-placeholder">
-            <%= @user.first_letter_of_name %>
-          </div>
-        <% end %>
+    <% if @edit_mode && @user == current_user %>
+      <%= form_for @user, as: :account, remote: true, url: account_path do |f| %>
+          <% if f.object.image.blank? %>
+            <% f.object.build_image %>
+          <% end %>
+          <%= f.fields_for :image do |image_builder| %>
+            <%= render Images::DirectUploadComponent.new(image_builder, imageable: @user, submit_form: true) do |c| %>
+              <% c.placeholder do %>
+                <div class="users-profile-banner--avatar-placeholder">
+                  <%= @user.first_letter_of_name %>
+                </div>
+              <% end %>
 
-        <% c.custom_edit_button do %>
-          <div class="users-profile-banner--edit-button users-profile-banner--avatar-edit-button">
-            <i class="fa fa-pencil-alt"></i>
-          </div>
+              <% c.custom_edit_button do %>
+                <div class="users-profile-banner--edit-button users-profile-banner--avatar-edit-button">
+                  <i class="fa fa-pencil-alt"></i>
+                </div>
+              <% end %>
+            <% end %>
         <% end %>
       <% end %>
     <% elsif @user.image.present? %>
