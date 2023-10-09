@@ -55,6 +55,7 @@ de:
           Auf der rechten Seite können Sie gezielt nach Vorschlägen zu bestimmten Projekten
           suchen oder Ihre Auswahl auf bestimmte Stadtgebiete eingrenzen bzw.
           Vorschläge nach Schlagworten anzeigen lassen.
+        sidebar_information_default_text: Sie haben zu einem bestimmten Projekt einen eigenen Vorschlag? Mit einem Klick auf die Schaltfläche können Sie ihn einreichen.
         empty_list_text: Derzeit keine verknüpften Beiträge
 
       show:

@@ -19,6 +19,8 @@ de:
         social_share:
           title: Projektübersicht
           description:  Die Übersicht aller Projekte
+        information_default_text: Werden Sie aktiv und beteiligen sich in den vorliegenden Projekten. Ihr Beitrag ist wichtig und zählt!
+        count: Projekte
       orders:
         index_order_all: 'Alle Projekte'
         index_order_all_title: 'Alle Projekte'

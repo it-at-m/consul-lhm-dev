@@ -1,13 +1,13 @@
 <main class="projekts-page projekts-overview-page">
+  <div class="main-column projekts-overview-page--heading">
+    <h1>
+      <%= t("custom.projekts.index.title") %>
+    </h1>
+    <%= render_custom_block "projekts_overview_page" %>
+  </div>
+
   <div class="flex-layout">
     <div class="main-column">
-      <div class="main-column projekts-overview-page--heading">
-        <h1>
-          <%= t("custom.projekts.index.title") %>
-        </h1>
-        <%= render_custom_block "projekts_overview_page" %>
-      </div>
-
       <div class="projekts-overview-page--projekts-list">
         <%= render Projekts::ListComponent.new(
           projekts: @projekts,
@@ -22,6 +22,15 @@
     <div class="sidebar">
       <%= render Shared::SidebarCardComponent.new(title: t("custom.common.information"), icon_name: "info-circle") do |c| %>
         <%= render_custom_block "projekt_overview_page_sidebar", default_content: t("custom.projekts.index.information_default_text") %>
+
+        <div class="proposals--info-count margin-bottom-half">
+          <span>
+            <%= t("custom.projekts.index.count") %>
+          </span>
+          <span>
+            <%= @all_projekts.count %>
+          </span>
+        </div>
       <% end %>
 
       <%= render Sidebar::Filters::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name, selected_affiliated_geozones: @affiliated_geozones) %>
