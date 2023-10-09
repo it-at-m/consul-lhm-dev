@@ -120,7 +120,7 @@ de:
           error: "Ein Fehler ist aufgetreten. Bitte gehen Sie zur 'Ihr Benutzerkonto'-Seite um Diskussionen-Empfehlungen manuell abzuschalten"
       search_form:
         button: Suche
-        placeholder: Suche Diskussionen...
+        placeholder: Suchen...
         title: Suche
       search_results:
         one: " enthält den Begriff <strong>'%{search_term}'</strong>"
