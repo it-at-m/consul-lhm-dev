@@ -255,7 +255,7 @@
             }
 
             if (Object.keys(data.sentiment).length) {
-              var sentiments = "<div class='sentiments' ";
+              var sentiments = "<div class='sentiments'>";
               sentiments += "<span class='sentiment' style='background-color:#454B1B;color:#ffffff'>" + data.sentiment.name + "</span>";
               sentiments += "</div>";
               popupHtml += sentiments;
