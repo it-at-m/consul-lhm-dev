@@ -1,5 +1,5 @@
 <% if helpers.current_user&.administrator? %>
-  <%= render Shared::SidebarCardComponent.new(title: "Export", icon_name: "tag") do |c| %>
+  <%= render Shared::SidebarCardComponent.new(title: "Export", icon_name: "file-download") do |c| %>
     <%= link_to t("custom.admin.common.download_current_selection"),
       @path,
       target: "_blank" %>
