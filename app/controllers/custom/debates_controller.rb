@@ -124,15 +124,6 @@ class DebatesController < ApplicationController
     @projekt = @debate.projekt_phase.projekt
     @related_contents = Kaminari.paginate_array(@debate.relationed_contents).page(params[:page]).per(5)
 
-    if request.path != debate_path(@debate)
-      redirect_to debate_path(@debate), status: :moved_permanently
-
-    elsif !@projekt.visible_for?(current_user)
-      @individual_group_value_names = @projekt.individual_group_values.pluck(:name)
-      render "custom/pages/forbidden", layout: false
-
-    end
-
     @geozones = Geozone.all
 
     @selected_geozone_affiliation = params[:geozone_affiliation] || 'all_resources'
@@ -141,10 +132,20 @@ class DebatesController < ApplicationController
     @selected_geozone_restriction = params[:geozone_restriction] || 'no_restriction'
     @restricted_geozones = (params[:restricted_geozones] || '').split(',').map(&:to_i)
 
-    if Setting.new_design_enabled?
+
+    if request.path != debate_path(@debate)
+      redirect_to debate_path(@debate), status: :moved_permanently
+
+    elsif !@projekt.visible_for?(current_user)
+      @individual_group_value_names = @projekt.individual_group_values.pluck(:name)
+      render "custom/pages/forbidden", layout: false
+
+    elsif Setting.new_design_enabled?
       render :show_new
+
     else
       render :show
+
     end
   end
 
