@@ -38,7 +38,7 @@
     height: 100%;
   }
 
-  .users-profile-banner--avatar {
+  .users-profile-banner--avatar-wrapper {
     margin-top: 50px;
     width: 190px;
     height: 190px;
@@ -58,7 +58,7 @@
     }
 
     .direct-image-upload--file-attach-area, .image-preview,
-    .users-profile-banner--avatar, .users-profile-banner--avatar-placeholder {
+    .users-profile-banner--avatar {
       border: 3px solid white;
       border-radius: 50%;
       overflow: hidden;

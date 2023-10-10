@@ -21,7 +21,7 @@
       </div>
     <% end %>
   </div>
-  <div class="users-profile-banner--avatar">
+  <div class="users-profile-banner--avatar-wrapper">
     <% if @edit_mode && @user == current_user %>
       <%= form_for @user, as: :account, remote: true, url: account_path do |f| %>
           <% if f.object.image.blank? %>
@@ -48,7 +48,7 @@
         <%= image_tag(@user.image&.variant(:medium)) %>
       </div>
     <% else %>
-      <div class="users-profile-banner--avatar-placeholder">
+      <div class="users-profile-banner--avatar users-profile-banner--avatar-placeholder">
         <%= @user.first_letter_of_name %>
       </div>
     <% end %>
