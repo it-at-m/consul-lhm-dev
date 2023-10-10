@@ -1,5 +1,5 @@
 <div class="dropzone-image-upload js-dropzone-image-upload" data-submit-form="<%= @submit_form %>">
-  <div class="js-dropzone-image-upload--file-attach-area dropzone-image-upload--file-attach-area">
+  <div class="dropzone-image-upload--file-attach-area">
     <% if placeholder.present? %>
       <%= placeholder %>
     <% end %>
@@ -10,18 +10,9 @@
 
   <%= presetuped_file_field %>
 
-  <!-- <div class="action-add js-attachment-errors dropzone-image-upload--attachment-errors"> -->
-  <!-- </div> -->
-  <!--  -->
-  <!-- <div class="dropzone-image-upload--progress-bar-wrapper"><div class="dropzone-image-upload--loading-bar"></div></div> -->
-  <!--  -->
   <% if custom_edit_button.present? %>
     <div class="dropzone-image-upload-custom-edit-button js-dropzone-image-upload-custom-edit-button">
       <%= custom_edit_button %>
     </div>
   <% end %>
-
-  <%# <% if attachable.send(@attachment_name).attached? %>
-    <%# <%= render_image(attachable, :large, false) %>
-    <%# <% end %>
 </div>

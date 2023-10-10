@@ -1,0 +1,31 @@
+<main>
+  <h1>
+    <%= t('custom.projekts.projekt_events.index.title') %>
+  </h1>
+
+  <div class="flex-layout">
+    <div class="main-column">
+      <div class="resources-list--actions">
+        <div class="items-list-line-divider">
+        </div>
+        <% if valid_filters.present? %>
+          <%= render(
+            Shared::FilterDropdownComponent.new(
+              title: "Filtern nach:",
+              options: valid_filters,
+              selected_option: params[:filter],
+              i18n_namespace: "custom.projekts.projekt_events",
+              url_param_name: "filter"
+            )
+          ) %>
+        <% end %>
+      </div>
+      <%= render Projekts::ProjektEvents::List.new(projekt_events: @projekt_events, show_projekt_link: true) %>
+      <%= paginate @projekt_events %>
+    </div>
+  </div>
+
+  <aside id="proposals-sidebar" class="sidebar">
+    <%= render_custom_block "projekt_events_index_sidebar" %>
+  </aside>
+</main>

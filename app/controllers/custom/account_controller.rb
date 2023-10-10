@@ -7,7 +7,12 @@ class AccountController < ApplicationController
     @account_individial_groups_hard = IndividualGroup.hard
     @account_individial_groups_soft = IndividualGroup.soft
     @account_individual_group_values = @account.individual_group_values
-    @notifications = current_user.notifications.unread
+    @notifications =
+      if params[:notifications] == "read"
+        current_user.notifications.read
+      else
+        current_user.notifications.unread
+      end
 
     if Setting.new_design_enabled?
       render :show_new

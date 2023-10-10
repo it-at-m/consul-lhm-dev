@@ -14,11 +14,13 @@
             class: "button hollow float-right-medium" %>
 
           <ul class="menu simple clear">
-            <li class="is-active">
-              <h2><%= link_to t("notifications.index.unread"), notifications_path %></h2>
+            <li class="<%= params[:notifications] == "read" ? "" : "is-active" %>">
+              <h2><%= link_to t("notifications.index.unread"), account_path %></h2>
             </li>
-            <li>
-              <%= link_to t("notifications.index.read"), read_notifications_path %>
+            <li class="<%= params[:notifications] == "read" ? "is-active" : "" %>">
+              <h2>
+                <%= link_to t("notifications.index.read"), account_path(notifications: "read") %>
+              </h2>
             </li>
           </ul>
 
