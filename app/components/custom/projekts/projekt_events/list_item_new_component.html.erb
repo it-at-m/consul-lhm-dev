@@ -43,7 +43,13 @@
     <% end %>
     <div class="projekt-event-item-new-body--details">
       <div class="projekt-event-item-new-body--details-row">
-        <i class="fa fa-clock"></i><%= l(projekt_event.datetime, format: "%d. %B %Y %H:%M") %>
+        <i class="fa fa-code-branch"></i>
+        <%= link_to projekt_event.projekt.page.url do %>
+          <%= projekt_event.projekt.name %>
+        <% end %>
+      </div>
+      <div class="projekt-event-item-new-body--details-row">
+        <i class="fa fa-map"></i><%= l(projekt_event.datetime, format: "%d. %B %Y %H:%M") %>
         <% if projekt_event.end_datetime.present? %>
           -
           <%= l(projekt_event.end_datetime, format: "%d. %B %Y %H:%M") %>

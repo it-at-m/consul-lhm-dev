@@ -10,3 +10,8 @@ de:
           Veranstaltungen zu besuchen – entweder online oder vor Ort – und sich
           einzubringen. Denn eine lebendige Stadt lebt vom Engagement ihrer
           BürgerInnen."
+
+      filters:
+        all: Alle
+        incoming: Kommende
+        past: Vergangene

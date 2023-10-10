@@ -5,9 +5,9 @@
     <% end %>
 
     <% if projekt_events.blank? %>
-      <div class="callout primary text-center">
+      <h4 class="text-center">
         <%= t("custom.projekts.page.projekt_events_tab.no_events") %>
-      </div>
+      </h4>
     <% else %>
       <% projekt_events.each do |event| %>
         <%= render event_component_class.new(projekt_event: event, show_projekt_link: @show_projekt_link) %>

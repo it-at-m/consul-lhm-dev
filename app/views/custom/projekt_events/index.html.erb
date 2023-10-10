@@ -15,13 +15,15 @@
     <%= render_custom_block "projekt_events_index_sidebar" %>
   </div>
 
-  <%= render "shared/social_share",
-      share_title: t("custom.pages.social_share.share"),
-      title: t("custom.projekts.projekt_events.index.social_share.title"),
-      url: url_for(only_path: false),
-      description: t("custom.projekts.projekt_events.index.social_share.description", domain: request.domain),
-      mobile: t("custom.projekts.projekt_events.index.social_share.description", domain: request.domain)
-  %>
+    <%= render Shared::SidebarCardComponent.new(title: t("custom.common.information"), icon_name: "info-circle") do |c| %>
+      <%= render "shared/social_share",
+        share_title: t("custom.pages.social_share.share"),
+        title: t("custom.projekts.projekt_events.index.social_share.title"),
+        url: url_for(only_path: false),
+        description: t("custom.projekts.projekt_events.index.social_share.description", domain: request.domain),
+        mobile: t("custom.projekts.projekt_events.index.social_share.description", domain: request.domain)
+      %>
+  <% end %>
 
   <aside class="margin-bottom">
   </aside>
