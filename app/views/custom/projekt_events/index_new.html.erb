@@ -31,14 +31,16 @@
       <%= render Shared::SidebarCardComponent.new(title: t("custom.common.information"), icon_name: "info-circle") do |c| %>
         <%= render_custom_block "projekt_events_index_sidebar_new", default_content: t("custom.projekt_events.index.sidebar_info") %>
       <% end %>
+      <%= render(Shared::SidebarCardComponent.new(title: t("custom.common.share"), icon_name: "share")) do |c| %>
+        <%= render "shared/social_share",
+          share_title: t("custom.pages.social_share.share"),
+          title: t("custom.projekts.projekt_events.index.social_share.title"),
+          url: url_for(only_path: false),
+          description: t("custom.projekts.projekt_events.index.social_share.description", domain: request.domain),
+          mobile: t("custom.projekts.projekt_events.index.social_share.description", domain: request.domain)
+        %>
+      <% end %>
 
-      <%= render "shared/social_share",
-        share_title: t("custom.pages.social_share.share"),
-        title: t("custom.projekts.projekt_events.index.social_share.title"),
-        url: url_for(only_path: false),
-        description: t("custom.projekts.projekt_events.index.social_share.description", domain: request.domain),
-        mobile: t("custom.projekts.projekt_events.index.social_share.description", domain: request.domain)
-      %>
     </aside>
   </div>
 </main>
