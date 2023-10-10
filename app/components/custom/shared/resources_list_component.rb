@@ -27,7 +27,6 @@ class Shared::ResourcesListComponent < ApplicationComponent
     only_content: false,
     text_search_enabled: false,
     hide_view_mode_button: false,
-    paginate: true,
     additional_data: {}
   )
     @resources = resources
@@ -49,7 +48,6 @@ class Shared::ResourcesListComponent < ApplicationComponent
     @hide_title = hide_title
     @hide_actions = hide_actions
     @hide_view_mode_button = hide_view_mode_button
-    @paginate = paginate
     @additional_data = additional_data
   end
 

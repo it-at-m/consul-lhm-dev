@@ -21,7 +21,7 @@
       </div>
     <% end %>
   </div>
-  <div class="users-profile-banner--avatar-wrapper">
+  <div class="users-profile-banner--avatar">
     <% if @edit_mode && @user == current_user %>
       <%= form_for @user, as: :account, remote: true, url: account_path do |f| %>
           <% if f.object.image.blank? %>
@@ -68,5 +68,6 @@
         Konto ist nicht verifiziert
       <% end %>
     </div>
+    <%= render Shared::OfficialPositionBadgeComponent.new(user: @user) %>
   </div>
 </div>

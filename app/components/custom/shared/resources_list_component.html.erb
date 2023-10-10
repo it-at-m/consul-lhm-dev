@@ -23,9 +23,6 @@
         <% @resources.each do |resource| %>
           <%= render resource_component(resource) %>
         <% end %>
-        <% if @paginate %>
-          <%= paginate @resources %>
-        <% end %>
       <% else %>
         <h4 class="resources-list--not-items-message text-center">
           <%= @empty_list_text %>

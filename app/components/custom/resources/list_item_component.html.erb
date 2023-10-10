@@ -11,7 +11,10 @@
         <% end %>
       </div>
       <div class="resource-item--author-name">
-        <%= @author.full_name %>
+        <div class="resource-item--author-full-name">
+          <%= @author.full_name %>
+        </div>
+        <%= render Shared::OfficialPositionBadgeComponent.new(user: @author) %>
       </div>
     <% end %>
   <% end %>

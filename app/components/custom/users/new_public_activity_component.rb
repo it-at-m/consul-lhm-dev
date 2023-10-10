@@ -116,7 +116,6 @@ class Users::NewPublicActivityComponent < ApplicationComponent
         title: t("custom.users.activity"),
         current_filter: current_filter,
         filters: valid_filters,
-        paginate: current_filter != 'follows',
         filter_param: "filter",
         filter_title: "Filtern nach",
         filter_i18n_namespace: "custom.user_page"
