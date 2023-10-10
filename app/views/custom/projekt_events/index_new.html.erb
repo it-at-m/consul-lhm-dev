@@ -17,7 +17,7 @@
             Shared::FilterDropdownComponent.new(
               title: "Filtern nach:",
               options: valid_filters,
-              selected_option: params[:filter],
+              selected_option: @current_filter,
               i18n_namespace: "custom.projekt_events.filters",
               url_param_name: "filter"
             )
