@@ -211,7 +211,7 @@ class ProjektPhase < ApplicationRecord
     if setting.present?
       setting.value.present?
     else
-      raise StandardError, "Feature \"#{key}\" not found for projekt phase #{id}"
+      false
     end
   end
 
@@ -221,7 +221,7 @@ class ProjektPhase < ApplicationRecord
     if option.present?
       option.value.present?
     else
-      raise StandardError, "Option \"#{key}\" not found for projekt phase #{id}"
+      nil
     end
   end
 

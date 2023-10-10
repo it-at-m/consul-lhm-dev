@@ -74,20 +74,12 @@
           <div id="<%= dom_id(@debate) %>_votes" class="debate-page--votes">
             <%= render Debates::VotesComponent.new(@debate) %>
           </div>
+        <% end %>
+      <% end %>
 
-          <% c.additional_section do %>
-            <div id="debate_<%= @debate.id %>_votes_count">
-              <%= t("debates.debate.votes", count: @debate.votes_score) %>
-            </div>
-          <% end %>
-
-          <% if projekt_feature?(@debate.projekt, 'debates.show_report_button_in_sidebar') %>
-            <% if show_flag_action?(@debate) || show_unflag_action?(@debate) %>
-              <% c.additional_section do %>
-                <%= render Sidebar::UserResources::ReportComponent.new(@debate) %>
-              <% end %>
-            <% end %>
-          <% end %>
+      <% if projekt_phase_feature?(@debate.projekt_phase, "resource.show_report_button_in_sidebar") && (show_flag_action?(@debate) || show_unflag_action?(@debate)) %>
+        <%= render(Shared::SidebarCardComponent.new(title: t("custom.shared.show.report_title"), icon_name: "flag")) do %>
+          <%= render "shared/participation/flag", resource: @debate %>
         <% end %>
       <% end %>
 

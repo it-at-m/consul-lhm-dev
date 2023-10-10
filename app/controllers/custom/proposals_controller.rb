@@ -214,6 +214,11 @@ class ProposalsController
     redirect_to @proposal
   end
 
+  def unflag
+    Flag.unflag(current_user, @proposal)
+    redirect_to @proposal
+  end
+
   private
 
     def proposal_params
