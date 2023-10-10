@@ -114,4 +114,13 @@
 .leaflet-popup-content {
   margin: 0;
   padding: 15px 15px;
+  width: 220px;
+  padding-right: 35px;
+
+  .projekt-labels {
+    .projekt-label {
+      margin-right: 3px;
+      margin-bottom: 3px;
+    }
+  }
 }
