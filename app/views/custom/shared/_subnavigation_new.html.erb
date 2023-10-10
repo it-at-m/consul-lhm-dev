@@ -14,9 +14,7 @@
     <div class="account-admin-items">
       <% if current_user.present? %>
         <%= render partial: 'shared/subnavigation_locale_new', locals: { placement: placement } if extended_feature?("general.language_switcher_in_menu") && placement == 'desktop' %>
-        <%= render partial: "layouts/notification_item_new", locals: { placement: placement } %>
         <%= render partial: 'shared/subnavigation_konto_new', locals: { placement: placement } %>
-        <%= render partial: 'shared/subnavigation_admin', locals: { placement: placement } %>
       <% end %>
     </div>
   <% end %>

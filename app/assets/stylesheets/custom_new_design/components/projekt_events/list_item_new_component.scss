@@ -1,0 +1,100 @@
+.projekt-event-item-new {
+  display: flex;
+  border-bottom: 1px solid #dcdcdc;
+  padding-top: 20px;
+  padding-bottom: 25px;
+  font-size: 16px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.projekt-event-item-new--description-text {
+  // font-size: 15px;
+}
+
+h4.projekt-event-item-new-body--title {
+  font-size: 20px;
+  padding-bottom: 0;
+  font-weight: 500;
+
+  a {
+    color: inherit;
+
+    &:hover {
+      // text-decoration: underline;
+      text-decoration: none;
+    }
+  }
+}
+
+.projekt-event-item-new-titles {
+  padding-right: 58px;
+}
+
+.projekt-event-item-new-calendar {
+  color: black;
+  width: 80px;
+  padding-top: 5px;
+  text-align: center;
+  margin-right: 35px;
+  border-radius: 10px;
+  box-shadow: inset 0px 3px 6px #0000000F, 0px 3px 6px #00000024;
+  background: transparent linear-gradient(180deg, #FFFFFF 0%, #EDEDED 100%) 0% 0% no-repeat padding-box;
+}
+
+.projekt-event-item-new-calendar--separator {
+  line-height: 0.5;
+}
+
+.projekt-event-item-new-calendar--enddatetime {
+  margin-top: -11px
+}
+
+.projekt-event-item-new--description-text-wrapper {
+  margin-bottom: 20px;
+}
+
+.projekt-event-item-new-body--details {
+
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
+  }
+}
+
+.projekt-event-item-new-body--details-row {
+  padding-right: 12px;
+  margin-bottom: 5px;
+  // font-size: 14px;
+
+  a {
+    color: inherit;
+
+     &:hover {
+       text-decoration: none;
+     }
+  }
+
+  i {
+    width: 30px;
+    // padding-right: 12px;
+    font-size: 16px;
+  }
+}
+
+.projekt-event-item-new-calendar-dayname {
+  color: #FF4120;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.projekt-event-item-new-calendar-daynumber {
+  font-size: 42px;
+  font-weight: 500;
+  margin-top: -14px;
+}
+
+.projekt-event-tab-title {
+  margin-bottom: 20px;
+}

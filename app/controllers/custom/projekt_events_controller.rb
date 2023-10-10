@@ -10,6 +10,17 @@ class ProjektEventsController < ApplicationController
     @valid_filters = %w[all incoming past]
     @current_filter = @valid_filters.include?(params[:filter]) ? params[:filter] : "incoming"
 
-    @projekt_events = ProjektEvent.all.page(params[:page]).per(10).send("sort_by_#{@current_filter}")
+    @projekt_events =
+      ProjektEvent
+        .all
+        .includes(projekt_phase: :projekt)
+        .page(params[:page])
+        .per(10).send("sort_by_#{@current_filter}")
+
+    if Setting.new_design_enabled?
+      render :index_new
+    else
+      render :index
+    end
   end
 end

@@ -171,19 +171,19 @@ class ProposalsController
     @related_contents = Kaminari.paginate_array(@proposal.relationed_contents)
                                 .page(params[:page]).per(5)
 
+    @affiliated_geozones = (params[:affiliated_geozones] || '').split(',').map(&:to_i)
+    @restricted_geozones = (params[:restricted_geozones] || '').split(',').map(&:to_i)
+
     if request.path != proposal_path(@proposal)
       redirect_to proposal_path(@proposal), status: :moved_permanently
 
     elsif !@projekt.visible_for?(current_user)
       @individual_group_value_names = @projekt.individual_group_values.pluck(:name)
       render "custom/pages/forbidden", layout: false
-    end
 
-    @affiliated_geozones = (params[:affiliated_geozones] || '').split(',').map(&:to_i)
-    @restricted_geozones = (params[:restricted_geozones] || '').split(',').map(&:to_i)
-
-    if Setting.new_design_enabled?
+    elsif Setting.new_design_enabled?
       render :show_new
+
     else
       render :show
     end

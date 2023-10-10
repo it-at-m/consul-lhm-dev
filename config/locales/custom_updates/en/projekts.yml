@@ -16,6 +16,11 @@ en:
         no_projekts: No projects
         title: Projects
         to_projekt: To the project
+        social_share:
+          title: Projekt overview
+          description:  Overview of all projekts
+        information_default_text: Be active and participate in our projects. Your contribution is very important!
+        count: Projects
       orders:
         index_order_all: 'All Projects'
         index_order_all_title: 'All Projects'

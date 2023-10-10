@@ -22,7 +22,6 @@
       <% if @active_projekts.any? %>
         <%= render Projekts::ListComponent.new(
           projekts: @active_projekts,
-          title_link: projekts_path,
           map_coordinates: @active_projekts_map_locations,
           current_filter: @current_projekt_filter,
           filters: @current_active_projekt_filters,
@@ -31,6 +30,8 @@
           paginate: false
         ) %>
       <% end %>
+
+      <%= render_custom_block 'home_page_1a' %>
 
       <%= render Users::LatestActivityComponent.new %>
 

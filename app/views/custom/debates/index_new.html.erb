@@ -27,6 +27,7 @@
           filter_param: "order",
           text_search_enabled: true,
           filters: @valid_orders,
+          hide_title: true,
           empty_list_text: "Keine Ergebnisse"
         ))
       %>
@@ -36,22 +37,12 @@
     <div id="debates-sidebar" class="sidebar">
       <%= render Shared::SidebarCardComponent.new(title: t('custom.common.information'), icon_name: "info-circle") do |c| %>
         <div class="margin-bottom-half">
-          <%= render_custom_block 'projekt_overview_page_sidebar', default_content: t("custom.debates.index.sidebar_information_default_text")  %>
-        </div>
-        <div class="margin-bottom-half">
-          <%= Debate.count %> <%= t("custom.common.debates") %>
+          <%= render_custom_block "debates_index_sidebar", default_content: t("custom.debates.index.sidebar_information_default_text") %>
         </div>
 
-        <%= render Shared::NewButtonComponent.new(resources_name: "debates", query_params: params) %>
-      <% end %>
-
-      <%= render Shared::SidebarCardComponent.new(title: t('custom.common.information'), icon_name: "info-circle") do |c| %>
-        <div class="margin-bottom-half">
-          <%= render_custom_block 'projekt_overview_page_sidebar', default_content: t("custom.proposals.index.sidebar_information_default_text")  %>
-        </div>
         <div class="proposals--info-count margin-bottom-half">
           <span>
-            <%= t('custom.proposals.index.count') %>
+            <%= t('custom.debates.index.count') %>
           </span>
           <span>
             <%= @all_resources.count %>

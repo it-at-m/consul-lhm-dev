@@ -25,6 +25,7 @@
           filter_param: "order",
           text_search_enabled: true,
           filters: @valid_orders,
+          hide_title: true,
           empty_list_text: "Keine Ergebnisse")) %>
     <%= paginate @proposals %>
     </div>
@@ -32,7 +33,7 @@
     <div id="proposals-sidebar" class="sidebar">
       <%= render Shared::SidebarCardComponent.new(title: t('custom.common.information'), icon_name: "info-circle") do |c| %>
         <div class="margin-bottom-half">
-          <%= render_custom_block 'projekt_overview_page_sidebar', default_content: t("custom.proposals.index.sidebar_information_default_text")  %>
+          <%= render_custom_block 'proposals_index_sidebar', default_content: t("custom.proposals.index.sidebar_information_default_text")  %>
         </div>
         <div class="proposals--info-count margin-bottom-half">
           <span>
