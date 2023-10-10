@@ -74,12 +74,6 @@
           <div id="<%= dom_id(@debate) %>_votes" class="debate-page--votes">
             <%= render Debates::VotesComponent.new(@debate) %>
           </div>
-
-          <% c.additional_section do %>
-            <div id="debate_<%= @debate.id %>_votes_count">
-              <%= t("debates.debate.votes", count: @debate.votes_score) %>
-            </div>
-          <% end %>
         <% end %>
       <% end %>
 
