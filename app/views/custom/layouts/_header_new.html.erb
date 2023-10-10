@@ -29,7 +29,7 @@
 
           <% if !launch_page && current_user.nil? %>
             <div class='header--account-buttons show-on-desktop'>
-              <%= link_to t('devise_views.menu.login_items.login'), new_user_session_path, class: 'button sign-in-button', role: 'button' %>
+              <%= link_to t('devise_views.menu.login_items.login'), new_user_session_path, class: 'button sign-in-button -brand', role: 'button' %>
             </div>
           <% end %>
         </div>

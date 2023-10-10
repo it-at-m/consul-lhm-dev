@@ -15,9 +15,13 @@
       padding-right: 5px;
     }
 
+    &.-brand-color {
+      color: white;
+      background: $brand;
+    }
+
     &:hover, &:focus {
-      // background-color: #005699;
-      background-color: #035799;
+      background-color: lighten($brand, 5%);
       color: white;
     }
 

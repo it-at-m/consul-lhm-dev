@@ -419,22 +419,14 @@ body.custom-new-design .wrapper > header .locale.locale-custom {
       margin-top: 2px;
     }
 
-    .sign-in-button, .sign-up-button {
-      text-align: center;
-      margin-right: 0;
-      margin-bottom: 5px;
+    .button.sign-in-button, .button.sign-up-button {
       margin-top: auto !important;
-      padding: 0.25rem 2.2em;
-      background: #073E8E;
-      color: white;
-      font-size: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 500;
-      width: 135px;
+      padding: 0.25rem 2.2em !important;
+      font-size: 18px !important;
+      font-weight: 500 !important;
+      width: 135px !important;
       height: 50px !important;
-      border-radius: 38px;
+      border-radius: 38px !important;
     }
   }
 
