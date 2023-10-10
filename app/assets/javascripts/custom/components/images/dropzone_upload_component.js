@@ -1,24 +1,17 @@
 (function() {
   "use strict";
-  App.DropzoneUploadComponent = {
+  App.ImageUploadComponent = {
     initialize: function() {
-      // $(".js-dropzone").each(function(_, component) {
-      //   App.DropzoneUploadComponent.initForOneComponent(component);
-      // });
-
-      App.DropzoneUploadComponent.initEvents();
+      App.ImageUploadComponent.initEvents();
     },
 
     initEvents: function() {
-      $(".js-dropzone-image-upload--file-attach-area").each(function(_index, fileAttachArea) {
-        fileAttachArea.addEventListener("click", App.DropzoneUploadComponent.fileAttachAreaClick);
-      });
       $(".js-dropzone-image-upload-custom-edit-button").each(function(_index, fileAttachArea) {
-        fileAttachArea.addEventListener("click", App.DropzoneUploadComponent.fileAttachAreaClick);
+        fileAttachArea.addEventListener("click", App.ImageUploadComponent.fileAttachAreaClick);
       });
 
       $(".js-dropzone-image-upload--input").each(function(_index, fileAttachArea) {
-        fileAttachArea.addEventListener("change", App.DropzoneUploadComponent.handleFileChange);
+        fileAttachArea.addEventListener("change", App.ImageUploadComponent.handleFileChange);
       });
     },
 
