@@ -154,7 +154,7 @@
           <% end %>
         <% end %>
 
-        <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.show_report_button_in_sidebar") && show_flag_action?(@proposal)%>
+        <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.show_report_button_in_sidebar") && (show_flag_action?(@proposal) || show_unflag_action?(@proposal) )%>
           <%= render(Shared::SidebarCardComponent.new(title: t("custom.shared.show.report_title"), icon_name: "flag")) do  %>
             <%= render "shared/participation/flag", resource: @proposal %>
           <% end %>
