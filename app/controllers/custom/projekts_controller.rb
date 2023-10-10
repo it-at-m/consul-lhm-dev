@@ -3,7 +3,7 @@ class ProjektsController < ApplicationController
   include ProposalsHelper
 
   skip_authorization_check
-  has_orders %w[index_order_underway index_order_all index_order_ongoing index_order_upcoming
+  has_orders %w[index_order_all index_order_underway index_order_ongoing index_order_upcoming
                 index_order_expired index_order_individual_list], only: :index
 
   before_action :raise_flag_feature_disabled, except: [:map_html]
@@ -12,6 +12,7 @@ class ProjektsController < ApplicationController
 
   def index
     @projekts = Projekt.regular.with_published_custom_page
+    @all_projekts = @projekts
 
     @resource_name = "projekt"
     unless javascript_request?

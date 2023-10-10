@@ -12,3 +12,6 @@ en:
         creation_only_for_citizens: Neue Diskussionen können in diesem Projekt nur von Bürgerinnen und Bürgern der Stadt %{city} erstellt werden.
         creation_only_for_specific_geozones: Neue Diskussionen können nur von Bürger*innen aus dem Postleitzahlbereich %{geozones} erstellt werden
         empty_list_text: No connected debates
+        welcome_default_text: Debates are essential in order to obtain a differentiated opinion on the individual projects. View all discussions or filter for specific projects, areas or keywords on the right-hand side. By clicking on the respective topic you can follow the discussions and take part in them yourself.
+        sidebar_information_default_text: Do you want to stimulate and move things? Then start your own discussion.  
+        count: Debates
