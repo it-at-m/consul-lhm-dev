@@ -8,7 +8,7 @@
       <div class="callout primary text-center">
         <%= t("custom.projekts.page.projekt_events_tab.no_events") %>
       </div>
-    <% else  %>
+    <% else %>
       <% projekt_events.each do |event| %>
         <%= render event_component_class.new(projekt_event: event, show_projekt_link: @show_projekt_link) %>
       <% end %>
