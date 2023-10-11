@@ -17,8 +17,10 @@
 
         <div class="top-bar--title">
           <%= link_to root_path do %>
-            <%= image_tag(topbar_image_path, alt: Setting["org_name"], class: 'top-bar--title-logo-top') %>
-            <%= image_tag(image_path_for("logo_header_new.png"), alt: Setting["org_name"], class: 'top-bar--title-logo-stikcy') %>
+            <%= image_tag(image_path_for("logo_header.png"), alt: Setting["org_name"], class: 'top-bar--title-logo-top') %>
+            <%= image_tag(image_path_for("logo_header.png"), alt: Setting["org_name"], class: 'top-bar--title-logo-stikcy') %>
+            <%#= image_tag(topbar_image_path, alt: Setting["org_name"], class: 'top-bar--title-logo-top') %>
+            <%#= image_tag(image_path_for("logo_header_new.png"), alt: Setting["org_name"], class: 'top-bar--title-logo-stikcy') %>
           <% end %>
         </div>
 
