@@ -1,6 +1,7 @@
+<%= render "shared/loader_spinner" %>
+
 <div class="flex-column">
   <div class="main-column">
-    <%= render "shared/loader_spinner" %>
     <% proposal_footer_url = projekt_phase_footer_tab_page_path(@projekt_phase.projekt.page, @projekt_phase.id) %>
     <%= render(
       Shared::ResourcesListComponent.new(
