@@ -41,16 +41,12 @@ class Shared::FilterDropdownComponent < ApplicationComponent
   end
 
   def link_path(option)
-    if params[:current_tab_path].present? && !helpers.request.path.starts_with?("/projekts")
-      params = {}
-      params[@url_param_name] = option
-      url_for(action: params[:current_tab_path],
-              controller: "/pages",
-              page: params[:page] || 1,
-              anchor: anchor,
-              filter_projekt_ids: params[:filter_projekt_ids],
-              projekt_label_ids: params[:projekt_label_ids],
-              **params)
+    if params[:projekt_phase_id].present?
+      link_options = {}
+      link_options[@url_param_name.to_sym] = option
+      link_options[:remote] = true
+      url_to_footer_tab(link_options)
+
     elsif remote_url.present?
       url = "#{remote_url}?#{@url_param_name}=#{option}"
 
@@ -71,19 +67,8 @@ class Shared::FilterDropdownComponent < ApplicationComponent
   end
 
   def footer_tab_back_button_url(option)
-    if controller_name == "pages" &&
-        params[:current_tab_path].present? &&
-        !helpers.request.path.starts_with?("/projekts")
-
-      url_for_footer_tab_back_button(page_id: params[:id],
-                                     pagination_page: params[:page],
-                                     current_tab_path: params[:current_tab_path],
-                                     filter: params[:filter],
-                                     order: option,
-                                     filter_projekt_ids: params[:filter_projekt_ids],
-                                     projekt_label_ids: params[:projekt_label_ids])
-    else
-      "empty"
+    if params[:projekt_phase_id].present?
+      url_to_footer_tab([[@url_param_name, option]].to_h.symbolize_keys)
     end
   end
 
@@ -94,12 +79,19 @@ class Shared::FilterDropdownComponent < ApplicationComponent
       data["nonblock-remote"] = "true"
       data["remote"] = "true"
     end
-    # data['url'] = link_path(option)
 
     if @in_projekt_footer_tab
       data["footer-tab-back-url"] = footer_tab_back_button_url(option)
     end
 
     data
+  end
+
+  def link_class
+    "js-remote-link-push-state" if @in_projekt_footer_tab
+  end
+
+  def onclick
+    "$('#footer-content').addClass('show-loader');" if @in_projekt_footer_tab
   end
 end

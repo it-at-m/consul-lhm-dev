@@ -1,6 +1,7 @@
+<%= render "shared/loader_spinner" %>
+
 <div class="flex-column">
   <div class="main-column">
-    <%= render "shared/loader_spinner" %>
     <% if extended_feature?("polls.intro_text_for_polls") %>
       <%= render_custom_block "polls_welcome" %>
     <% end %>

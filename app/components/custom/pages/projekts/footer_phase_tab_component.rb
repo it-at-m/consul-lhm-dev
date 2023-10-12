@@ -9,14 +9,6 @@ class Pages::Projekts::FooterPhaseTabComponent < ApplicationComponent
     @projekt_tree_ids = @projekt.all_children_ids.unshift(@projekt.id)
   end
 
-  def link_url
-    if phase.projekt.overview_page?
-      url_for(controller: "projekts", action: "#{phase.name}_footer_tab", order: params[:order])
-    else
-      projekt_phase_footer_tab_page_path(@projekt.page, phase)
-    end
-  end
-
   private
 
     def tab_title
