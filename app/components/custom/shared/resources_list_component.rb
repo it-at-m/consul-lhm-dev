@@ -27,6 +27,7 @@ class Shared::ResourcesListComponent < ApplicationComponent
     only_content: false,
     text_search_enabled: false,
     hide_view_mode_button: false,
+    projekt_phase: nil,
     additional_data: {}
   )
     @resources = resources
@@ -48,6 +49,7 @@ class Shared::ResourcesListComponent < ApplicationComponent
     @hide_title = hide_title
     @hide_actions = hide_actions
     @hide_view_mode_button = hide_view_mode_button
+    @projekt_phase = projekt_phase
     @additional_data = additional_data
   end
 
