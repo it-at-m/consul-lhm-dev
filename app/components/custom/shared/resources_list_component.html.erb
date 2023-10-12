@@ -82,7 +82,8 @@
               selected_option: selected_filter_otpion,
               i18n_namespace: "#{i18n_namespace}.#{@filter_param&.pluralize}",
               url_param_name: @filter_param,
-              remote_url: remote_url
+              remote_url: remote_url,
+              in_projekt_footer_tab: @projekt_phase.present?
             )
           ) %>
         <% end %>

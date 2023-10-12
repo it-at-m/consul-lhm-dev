@@ -77,12 +77,4 @@ class Shared::NewCommentsComponent < ApplicationComponent
       paginate comment_tree.root_comments, params: { anchor: "comments" }
     end
   end
-
-  def remote_url
-    if record.is_a?(ProjektPhase::CommentPhase)
-      helpers.projekt_footer_phase_filter_url(record)
-    else
-      nil
-    end
-  end
 end
