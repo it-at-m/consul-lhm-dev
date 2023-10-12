@@ -452,9 +452,18 @@
       display: block;
       color: inherit;
       text-align: left;
+      position: relative;
+      padding-left: 22px;
 
       &:hover {
         color: #28313b;
+      }
+
+      &:before{
+        font-family: "Font Awesome 5 Free";
+        font-weight: bold;
+        position: absolute;
+        left: 0;
       }
     }
 
