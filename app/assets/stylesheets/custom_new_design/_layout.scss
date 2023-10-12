@@ -1,4 +1,9 @@
 .custom-new-design {
+  main {
+    margin: auto;
+    padding-top: 30px;
+  }
+
   .main-column {
     width: 100%;
     max-width: 925px;
@@ -12,27 +17,16 @@
   .flex-layout {
     display: flex;
     justify-content: space-between;
-  }
 
-  .flex-column {
-    display: flex;
-  }
-
-  @media screen and (max-width: $big-tablet-viewport-start) {
-    .flex-layout {
+    @media screen and (max-width: $big-tablet-viewport-start) {
+      flex-direction: column;
       padding: 0 25px;
-      flex-direction: column-reverse;
     }
   }
 
   @media screen and (max-width: $small-tablet-viewport-start) {
     .main-column {
       margin-right: auto;
-    }
-  }
-
-  @media (max-width: $mobile-viewport-start) {
-    .main-column {
     }
   }
 }

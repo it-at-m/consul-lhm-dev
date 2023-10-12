@@ -149,7 +149,12 @@
       border-radius: 10px 10px 0px 0px;
       margin-right: 10px;
 
-      @media (max-width: $mobile-viewport-start) {
+
+      @media screen and (max-width: $big-tablet-viewport-start) {
+        border-radius: 0;
+      }
+
+      @media(max-width: $small-tablet-viewport-start) {
         margin-right: 0;
         min-width: unset;
       }
@@ -216,7 +221,7 @@
       bottom: initial;
       height: auto;
       padding-bottom: 105px;
-      margin-bottom: 180px;
+      margin-bottom: 30px;
     }
 
     .custom-page--banner-wrapper {
@@ -258,66 +263,6 @@
     .page-subnav-tab {
       .tab-info-summary {
         display: none;
-      }
-    }
-
-    .mobile-projekt-tabs {
-      .footer-phases-filter-subnav ul > li  {
-        display: flex;
-        align-items: center;
-        height: 50px;
-        min-height: auto;
-      }
-
-      .footer-phases-filter-subnav ul > li a {
-        min-height: none;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        font-size: 20px;
-        padding-top: 0;
-        padding-bottom: 0;
-
-        h4 {
-          font-size: 20px;
-        }
-      }
-    }
-  }
-
-  .mobile-projekt-tabs {
-    .tabs-panel {
-      padding: 0;
-    }
-
-    .key-dates li::after {
-      display: none;
-    }
-  }
-
-  .mobile-projekt-tabs-navigation {
-    display: flex;
-  }
-
-  .mobile-projekt-tab {
-    width: calc(100% / 3);
-    color: black;
-    margin-right: 0 !important;
-    text-align: center;
-
-    a {
-      color: black !important;
-    }
-
-    &.is-active {
-      background: #BFCDDB;
-
-      a {
-        color: black !important;
-
-        &::after {
-          border-bottom: 0;
-        }
       }
     }
   }

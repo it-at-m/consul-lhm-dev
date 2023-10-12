@@ -320,6 +320,10 @@ body.custom-new-design .wrapper > header .locale.locale-custom {
         padding-bottom: 8px;
         display: flex;
         align-items: center;
+
+        a {
+          width: 100%;
+        }
       }
     }
   }
@@ -494,12 +498,6 @@ body.custom-new-design .wrapper > header .locale.locale-custom {
 
   .header--mobile-hamburger-menu {
     position: static;
-
-    .menu-icon::after {
-      // color: white;
-      background: #fff;
-      box-shadow: 0 7px 0 #fff, 0 14px 0 #fff;
-    }
   }
 
   .header--responsive-menu-title {
@@ -639,6 +637,10 @@ body.custom-new-design .wrapper > header .locale.locale-custom {
 
       .nav-flyout-block .nav-element {
         padding: 0;
+      }
+
+      .locale .locale-form label {
+        font-size: inherit;
       }
     }
 
