@@ -7,3 +7,11 @@
   left: 0;
   right: 0;
 }
+
+@media (max-width: $small-tablet-viewport-start) {
+  .projekt-footer-navigation {
+    .projekt-footer-title {
+      display: none;
+    }
+  }
+}

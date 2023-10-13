@@ -10,6 +10,7 @@
       App.ImageUploadComponent.initialize();
       App.TextSearchFormComponent.initialize();
       App.CollapseComponent.initialize();
+      App.CustomTabs.initialize();
     }
   };
 }).call(this);

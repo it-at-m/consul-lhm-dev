@@ -148,11 +148,6 @@
     .spacer {
       display: none;
       margin: 20px 20px;
-      // visibility: hidden;
-    }
-
-    .projekt-selector, .spacer {
-      // display: inline-block;
     }
 
     .projekt-selector {
@@ -161,7 +156,6 @@
       flex-basis: 0;
     }
   }
-
 }
 
 #projekt-phase-selector-fields {
@@ -180,26 +174,5 @@
     &.active {
       background: #1779ba;
     }
-  }
-}
-
-.projekt-footer-navigation {
-  position: relative;
-}
-
-.projekt-footer-navigation::after {
-  bottom: 0;
-  content: "";
-  display: block;
-  left: 0;
-  pointer-events: none;
-  position: absolute;
-  right: 0;
-  top: 0;
-  border-bottom: 1px solid #dee0e3;
-
-  @media screen and (min-width: 75em) {
-    left: calc(37.5rem - 50vw);
-    right: calc(37.5rem - 50vw);
   }
 }

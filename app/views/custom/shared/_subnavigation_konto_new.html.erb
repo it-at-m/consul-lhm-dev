@@ -35,19 +35,15 @@
 <% end %>
 
 <% if placement == 'mobile' %>
-  <li class="nav-element top-level-item js-access-top-level-menu js-prevent-key-scroll"
-    <%= link_to account_path do %>
-      <%# <%= t('custom.menu.account') %>
-      <i class="fas fa-language main-navigation--link-icon"> </i>
-      Sprache
-    <% end %>
-  </li>
+  <%= render partial: 'shared/subnavigation_locale_new', locals: { placement: placement } if extended_feature?("general.language_switcher_in_menu") %>
 
-  <li class="nav-element top-level-item js-access-top-level-menu js-prevent-key-scroll"
-    <%= link_to account_path do %>
+  <li class='nav-element flyout-item js-access-flyout-menu-item focusable'
+      tabindex="0"
+      aria-label='<%= t("devise_views.menu.login_items.logout") %>'
+      >
+    <%= link_to destroy_user_session_path, rel: "nofollow", method: :delete, tabindex: "-1", aria: { hidden: true } do %>
       <i class="fas fa-sign-out-alt main-navigation--link-icon"> </i>
-      Abmelden
+      <%= t("devise_views.menu.login_items.logout") %>
     <% end %>
   </li>
 <% end %>
-
