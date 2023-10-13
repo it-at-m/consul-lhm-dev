@@ -58,6 +58,15 @@
   .sidebar {
     min-width: 300px;
     max-width: 300px;
+
+    @media(max-width: $mobile-viewport-start) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      margin: auto;
+    }
   }
 
   // Overide old styles
