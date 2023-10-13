@@ -14,7 +14,7 @@ de:
         expired_projekts: Abgeschlossene Projekte
         no_projekts: Keine Projekte
         no_projekts_for_current_filter: Keine Projekte für aktuellen Filter
-        title: Projekte
+        title: Projektübersicht
         to_projekt: Zum Projekt
         social_share:
           title: Projektübersicht
@@ -22,7 +22,7 @@ de:
         information_default_text: Werden Sie aktiv und beteiligen sich in den vorliegenden Projekten. Ihr Beitrag ist wichtig und zählt!
         count: Projekte
         welcome_default_text_html: In der Projektübersicht listen wir alle Projekte auf, die derzeit diskutiert werden. Nutzen Sie den Filter, um sich alle Projekte anzuschauen oder sie nach Aktualität, nach Aktivität, nach Termin oder individuell nach Ihren Vorlieben anzeigen zu lassen. Zusätzlich hilft Ihnen die Karte dabei, die Projekte in der Stadt zu verorten.
-      orders:
+      filters:
         index_order_all: 'Alle Projekte'
         index_order_all_title: 'Alle Projekte'
         index_order_expired: Abgeschlossen

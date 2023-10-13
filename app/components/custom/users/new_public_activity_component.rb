@@ -113,7 +113,7 @@ class Users::NewPublicActivityComponent < ApplicationComponent
 
     def list_params
       params = {
-        title: t("custom.users.activity"),
+        title: current_user == user ? t("custom.users.my_activity") : t("custom.users.activity"),
         current_filter: current_filter,
         filters: valid_filters,
         filter_param: "filter",

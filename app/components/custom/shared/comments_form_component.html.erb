@@ -1,11 +1,14 @@
 <% if record.is_a?(ProjektQuestion) %>
-	<%= render ProjektQuestions::CommentsFormComponent.new(record) %>
+  <%= render ProjektQuestions::CommentsFormComponent.new(record) %>
 
 <% elsif record.is_a?(DeficiencyReport) %>
-	<%= render DeficiencyReports::CommentsFormComponent.new(record) %>
+  <%= render DeficiencyReports::CommentsFormComponent.new(record) %>
 
 <% elsif record.is_a?(Topic) %>
-	<%= render Topics::CommentsFormComponent.new(record) %>
+  <%= render Topics::CommentsFormComponent.new(record) %>
+
+<% elsif record.is_a?(Projekt)%>
+  <%= render Projekts::CommentsFormComponent.new(record) %>
 
 <% elsif permission_problem_key.present? %>
   <div class='callout alert'>

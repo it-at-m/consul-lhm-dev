@@ -3,6 +3,7 @@ de:
     users:
       settings: Kontoeinstellungen
       activity: Aktivität
+      my_activity: Meine Aktivität
       contact: Kontakt
       resources_filter:
     user_page:

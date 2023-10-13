@@ -3,10 +3,7 @@ resources :projekts, only: [:index, :show] do
   resources :projekt_question_answers, only: [:create, :update]
 
   collection do
-    get :comment_phase_footer_tab
-    get :debate_phase_footer_tab
-    get :proposal_phase_footer_tab
-    get :voting_phase_footer_tab
+    get :footer_comments
   end
 
   member do
