@@ -13,7 +13,7 @@
 
 <main class="projekt-page">
   <% if @custom_page.subtitle.blank? && @custom_page.image.blank? %>
-    <h1 class="custom-page--title margin-bottom">
+    <h1 class="page-main-title margin-bottom">
       <%= @custom_page.title %>
     </h1>
   <% else %>
@@ -47,17 +47,15 @@
   <% end %>
 
   <% if @custom_page.projekt.present? %>
-    <div class="show-on-small-tablet">
-      <div class="custom-tabs ">
-        <div class="custom-tab js-custom-tab" data-content-id="projekt-body">
-          Inhalt
-        </div>
-        <div class="custom-tab js-custom-tab" data-content-id="projekt-info">
-          Info
-        </div>
-        <div class="custom-tab js-custom-tab" data-content-id="projekt-particapation">
-          Beteiligung
-        </div>
+    <div class="custom-fixed-tabs">
+      <div class="js-scroll-link custom-tab" data-anchor-id="projekt-body">
+        Inhalt
+      </div>
+      <div class="js-scroll-link custom-tab" data-anchor-id="projekt-info">
+        Info
+      </div>
+      <div class="js-scroll-link custom-tab" data-anchor-id="projekt-particapation">
+        Beteiligung
       </div>
     </div>
   <% end %>
@@ -65,13 +63,15 @@
   <% if @custom_page.projekt.present? %>
     <div class="flex-layout">
       <div class="main-column">
-        <div class="js-custom-tab-content custom-tab-content-small-tablet -visible" id="projekt-body">
+        <div class="show-on-small-tablet mobile-achor" id="projekt-body">
+        </div>
+        <div class="js-anchor-navigation-content" id="projekt-body-2">
           <div class="main-content-card">
             <%= render 'custom_page_content' %>
           </div>
         </div>
       </div>
-      <div class="js-custom-tab-content custom-tab-content-small-tablet" id="projekt-info">
+      <div id="projekt-info">
         <%= render partial: 'pages/sidebar_new', locals: { projekt: @custom_page.projekt, id_prefix: "desktop" } %>
       </div>
     </div>
@@ -85,7 +85,7 @@
   <% end %>
 
   <% if @custom_page.projekt.present? && @custom_page.projekt.projekt_phases.active.any? %>
-    <div class="js-custom-tab-content custom-tab-content-small-tablet" id="projekt-particapation">
+    <div class="js-anchor-navigation-content" id="projekt-particapation">
       <div class="projekt-footer-anchor" id="projekt-footer"> </div>
       <div class="projekt-footer flex-layout">
         <div class="full-width-column">

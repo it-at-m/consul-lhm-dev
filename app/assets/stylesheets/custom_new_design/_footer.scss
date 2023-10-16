@@ -3,6 +3,10 @@
     margin-top: 50px;
     width: 100%;
     max-width: 100%;
+
+    @media(max-width: $big-tablet-viewport-start) {
+      padding: 20px;
+    }
   }
 
   .footer::before {

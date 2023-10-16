@@ -1,7 +1,7 @@
 <% launch_page ||= false %>
 
 <header>
-  <div class="js-stiky-header top-bar-wrapper">
+  <div class="js-stiky-header sticky-header top-bar-wrapper">
     <div class="top-bar-background-wrapper">
       <div class="top-bar" data-white-text="<%= Setting.enabled?('extended_feature.general.use_white_top_navigation_text') %>">
         <span data-responsive-toggle="responsive-menu"
@@ -44,10 +44,14 @@
             <% if current_user.present? %>
               <div class="header--responsive-menu--user">
                 <div class="header--responsive-menu--user-avatar">
-                  <%= current_user.name.chars.first.upcase %>
+                  <% if current_user.image.present? %>
+                    <%= image_tag(current_user.image.variant(:medium)) %>
+                  <% else %>
+                    <%= current_user.first_letter_of_name %>
+                  <% end %>
                 </div>
                 <div class="header--responsive-menu--user-name">
-                  <%= current_user.name %>
+                  <%= current_user.full_name %>
                 </div>
                 <%= link_to("Profil anzeigen", user_path(current_user), class: "header--responsive-menu--user-profile-link") %>
               </div>
