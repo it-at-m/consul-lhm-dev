@@ -63,18 +63,20 @@
     display: block;
   }
 
+  $button-orange: #FFA42D;
+
   .button {
-    background-color: #FFA42D;
+    background-color: $button-orange;
     color: black;
 
     &:focus, &:active {
-      background-color: #FFA42D;
-      color: black;
+      background-color: #FFA42D !important;
+      color: black !important;
     }
 
     &:hover {
-      background: #ffbf6b;
-      color: black;
+      background: lighten($button-orange, 10%) !important;
+      color: black !important;
     }
   }
 

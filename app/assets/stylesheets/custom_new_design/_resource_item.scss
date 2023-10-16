@@ -207,10 +207,9 @@
     flex-grow: 1;
 
     .button {
-      margin-bottom: 0;
-      margin-top: 0;
+      margin-top: 0 !important;
       height: 32px;
-      padding: 0 15px 0;
+      padding: 0 15px 0 !important;
     }
 
     .callout.warning, .callout.success, .callout.error,
@@ -256,10 +255,6 @@
     min-height: 93px;
     padding: 10px 25px;
     flex-direction: column;
-
-    & > * {
-      padding: 10px 25px !important;
-    }
 
     .supports-container {
       border-left: none;
