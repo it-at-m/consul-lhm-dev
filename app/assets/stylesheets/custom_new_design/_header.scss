@@ -46,6 +46,7 @@
     max-width: 1920px;
     margin: auto;
     margin-bottom: 20px;
+    margin-top: -100px;
   }
 
 
@@ -198,8 +199,8 @@ body.custom-new-design .wrapper > header .locale.locale-custom {
     left: 0;
     right: 0;
     top: 0;
-    background: white;
     z-index: 1000;
+    background-color: white;
 
     .top-bar {
       .top-bar--title-logo-top {
@@ -707,10 +708,6 @@ body.custom-new-design .wrapper > header .locale.locale-custom {
       font-size: 18px;
       margin-bottom: -7px;
     }
-  }
-  .sticky-header {
-    position: fixed;
-    top: 0;
   }
 }
 

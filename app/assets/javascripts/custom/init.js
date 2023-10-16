@@ -5,7 +5,7 @@
     initialize: function() {
       App.DropdownMenuComponent.initialize();
       App.ResourcesListComponent.initialize();
-      // App.MobileScrollNavigation.initialize();
+      App.StikyHeader.initialize();
       App.DirectUploadComponent.initialize();
       App.ImageUploadComponent.initialize();
       App.TextSearchFormComponent.initialize();

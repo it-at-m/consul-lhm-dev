@@ -30,5 +30,12 @@
       margin-right: auto;
     }
   }
+
+  .flex-column-reverse-on-mobile {
+    @media screen and (max-width: $small-tablet-viewport-start) {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+  }
 }
 
