@@ -19,7 +19,6 @@ class Budgets::Investments::ListItemComponent < ApplicationComponent
       url: helpers.url_for(budget_investment),
       image_url: budget_investment.image&.variant(:medium),
       author: budget_investment.author,
-      no_footer_bottom_padding: true,
       image_placeholder_icon_class: "fa-euro-sign"
     }
   end
