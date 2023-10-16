@@ -1,9 +1,11 @@
 <main class="projekts-page projekts-overview-page">
   <div class="main-column projekts-overview-page--heading">
-    <h1 class="page-main-title">
-      <%= t("custom.projekts.index.title") %>
-    </h1>
-    <%= render_custom_block "projekts_overview_page", default_content: t("custom.projekts.index.welcome_default_text_html") %>
+    <div class="padding-on-mobile">
+      <h1>
+        <%= t("custom.projekts.index.title") %>
+      </h1>
+      <%= render_custom_block "projekts_overview_page", default_content: t("custom.projekts.index.welcome_default_text_html") %>
+    </div>
   </div>
 
   <div class="flex-layout">
