@@ -3,8 +3,10 @@
   App.FooterPhasesComponentCustom = {
     initialize: function() {
       $('.js-sidebar-phase-link').on('click', function() {
+        var menuLocation = $("#filter-subnav").offset().top - 200;
+        console.log(menuLocation);
         $("html, body").animate({
-          scrollTop: $("#filter-subnav").offset().top
+          scrollTop: menuLocation
         });
 
         $("#footer-content").addClass("show-loader");
@@ -38,6 +40,7 @@
         if ( $('#filter-subnav').scrollLeft() <= 240 ) {
           $('#left-arrow-control').addClass('disabled')
         }
+        $("#footer-content").removeClass("show-loader");
       })
     }
   }
