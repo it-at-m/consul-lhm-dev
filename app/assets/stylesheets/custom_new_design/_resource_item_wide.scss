@@ -204,6 +204,7 @@
           width: 120px;
           width: 35%;
           flex-direction: column;
+          justify-content: center;
           font-size: 14px;
           align-items: center;
           border-top: none;
@@ -218,9 +219,11 @@
         .resource-item--footer-section {
           width: 100%;
           justify-content: center;
+          border-top: 0;
+          flex-grow: 1;
 
-          &:first-child {
-            border-bottom: 1px solid $border-color;
+          &:not(:first-child) {
+            border-top: 1px solid $border-color;
           }
 
           &:last-child {
