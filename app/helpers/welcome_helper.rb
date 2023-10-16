@@ -54,10 +54,6 @@ module WelcomeHelper
       end
     end
   end
-<<<<<<< Updated upstream
-=======
-
-  # custom
 
   def header_button_html
     button_text = Setting["extended_option.general.homepage_button_text"]
@@ -70,5 +66,4 @@ module WelcomeHelper
       link_to(button_text, "#", class: "button homepage-image-header--button")
     end
   end
->>>>>>> Stashed changes
 end

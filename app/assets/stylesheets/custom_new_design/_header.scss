@@ -194,12 +194,16 @@ body.custom-new-design .wrapper > header .locale.locale-custom {
   }
 
   .sticky-header {
-    position: fixed;
+    position: sticky;
     left: 0;
     right: 0;
     top: 0;
-    background: white;
+    background-color: transparent;
     z-index: 1000;
+
+    &.-sticked {
+      background-color: white;
+    }
 
     .top-bar {
       .top-bar--title-logo-top {
@@ -707,10 +711,6 @@ body.custom-new-design .wrapper > header .locale.locale-custom {
       font-size: 18px;
       margin-bottom: -7px;
     }
-  }
-  .sticky-header {
-    position: fixed;
-    top: 0;
   }
 }
 
