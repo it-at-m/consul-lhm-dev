@@ -44,7 +44,7 @@
             <% if current_user.present? %>
               <div class="header--responsive-menu--user">
                 <div class="header--responsive-menu--user-avatar">
-                  <% if current_user.image.present? %>
+                  <% if current_user&.image&.attached? %>
                     <%= image_tag(current_user.image.variant(:medium)) %>
                   <% else %>
                     <%= current_user.first_letter_of_name %>

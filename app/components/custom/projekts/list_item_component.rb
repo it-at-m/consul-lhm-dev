@@ -11,7 +11,7 @@ class Projekts::ListItemComponent < ApplicationComponent
     {
       resource: projekt,
       title: projekt.page.title,
-      description: strip_tags(projekt.description),
+      description: strip_tags(projekt.page.subtitle),
       tags: projekt.tags.first(3),
       narrow_header: true,
       url: projekt.page.url,

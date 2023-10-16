@@ -11,7 +11,7 @@
 
   <% if render_custom_projekt_content_block?(content_block_sidebar_name, projekt) %>
     <%= render Shared::SidebarCardComponent.new(title: "Information", icon_name: "info-circle") do |c| %>
-      <%= render_custom_block "projekt_page_sidebar_#{projekt.id}" %>
+      <%= render_custom_block "projekt_sidebar_#{projekt.id}" %>
     <% end %>
   <% end %>
 

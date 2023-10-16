@@ -13,7 +13,6 @@ class Projekt < ApplicationRecord
   include ActiveModel::Dirty
   include SDG::Relatable
   include Taggable
-  include Imageable
 
   translates :description
   include Globalizable
@@ -79,6 +78,8 @@ class Projekt < ApplicationRecord
   has_many :subscriptions, -> { where(projekt_subscriptions: { active: true }) },
     class_name: "ProjektSubscription", dependent: :destroy, inverse_of: :projekt
   has_many :subscribers, through: :subscriptions, source: :user
+
+  delegate :image, to: :page, allow_nil: true
 
   # before_validation :set_default_color - should projekt still have a color?
   after_create :create_corresponding_page, :set_order, :create_default_settings,
@@ -512,6 +513,25 @@ class Projekt < ApplicationRecord
 
   def current_phases
     projekt_phases.select(&:current?)
+  end
+
+  def self.transfer_description_to_page_subtitle
+    all.find_each do |p|
+      p.translations.each do |t|
+        next unless p.page.translations.find_by(locale: t.locale).present?
+
+        p.page.translations.find_by(locale: t.locale).update!(subtitle: t.description)
+      end
+    end
+  end
+
+  def self.transfer_image_to_page
+    all.find_each do |p|
+      projekt_image = p.image
+      next unless projekt_image.present?
+
+      p.page.image = projekt_image
+    end
   end
 
   private

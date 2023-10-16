@@ -18,7 +18,7 @@ class Admin::NewslettersController < Admin::BaseController
     def newsletter_body
       body = ""
       body += "<h3>#{@projekt.title}</h3>" if @projekt.title
-      body += "<p>#{@projekt.description}</p>" if @projekt.description
+      body += "<p>#{@projekt.description}</p>" if @projekt.page.subtitle
       body += "<p><img src='#{url_for(@projekt.image.variant(:large))}'></p>" if @projekt.image
 
       if @projekt.total_duration_start.present?

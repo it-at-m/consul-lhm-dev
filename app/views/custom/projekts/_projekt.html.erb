@@ -14,7 +14,7 @@
 
     <div class='content'>
       <h4 class="projekt-title"><%= projekt.page.title %></h4>
-      <p><%= sanitize projekt.description %></p>
+      <p><%= sanitize projekt.page.subtitle %></p>
       <%= render "shared/tags", taggable: projekt, limit: 5 %>
     </div>
   </div>
