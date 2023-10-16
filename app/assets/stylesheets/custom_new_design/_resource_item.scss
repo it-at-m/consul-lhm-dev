@@ -258,6 +258,10 @@
 
     .supports-container {
       border-left: none;
+      min-height: 146px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .votes {
@@ -277,7 +281,6 @@
       display: flex;
       flex-direction: column;
       // justify-content: center;
-      min-height: 146px;
 
       .total-supports {
         display: block;
