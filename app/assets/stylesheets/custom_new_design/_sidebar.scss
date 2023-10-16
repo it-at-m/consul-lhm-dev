@@ -59,7 +59,7 @@
     min-width: 300px;
     max-width: 300px;
 
-    @media(max-width: $mobile-viewport-start) {
+    @media(max-width: $small-tablet-viewport-start) {
       display: flex;
       justify-content: center;
       align-items: center;

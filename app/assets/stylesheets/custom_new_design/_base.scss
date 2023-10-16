@@ -203,3 +203,9 @@ body.custom-new-design {
 .notification {
   border-radius: 5px;
 }
+
+.page-main-title {
+  @media(max-width: $big-tablet-viewport-start) {
+    padding: 0 20px;
+  }
+}
