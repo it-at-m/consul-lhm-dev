@@ -20,8 +20,7 @@ class Resources::ListItemComponent < ApplicationComponent
     tags: [],
     image_placeholder_icon_class: "fa-file",
     header_style: nil,
-    narrow_header: false,
-    no_footer_bottom_padding: false
+    narrow_header: false
   )
     @title = title
     @projekt = projekt
@@ -35,7 +34,6 @@ class Resources::ListItemComponent < ApplicationComponent
     @image_placeholder_icon_class = image_placeholder_icon_class
     @header_style = header_style
     @narrow_header = narrow_header
-    @no_footer_bottom_padding = no_footer_bottom_padding
   end
 
   def component_class_name

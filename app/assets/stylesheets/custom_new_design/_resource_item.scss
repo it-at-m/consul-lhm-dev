@@ -224,8 +224,8 @@
       border: none;
       margin: 0;
       padding: 8px 25px;
-      width: 299px;
-      margin-left: -25px;
+      // width: 299px;
+      border-radius: 5px;
     }
     // .participation-not-allowed p{
 
@@ -281,6 +281,7 @@
     .supports {
       display: flex;
       flex-direction: column;
+      width: 100%;
       // justify-content: center;
 
       .total-supports {
