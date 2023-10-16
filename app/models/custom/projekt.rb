@@ -333,7 +333,7 @@ class Projekt < ApplicationRecord
   #     present?
   # end
   def projekt_settings_hash
-    @projekt_settings ||= projekt_settings.pluck(:key, :value).to_h
+    @projekt_settings ||= projekt_settings.reload.pluck(:key, :value).to_h
   end
 
   def activated?

@@ -1,10 +1,11 @@
+<%= render "shared/loader_spinner" %>
+
 <div class="flex-column">
   <div class="main-column">
     <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
       <%= link_to t('debates.index.section_header.help'), '#section_help' %>
     <% end %>
 
-    <%= render 'shared/loader_spinner' %>
     <%= render(
       Shared::ResourcesListComponent.new(
         resources: @debates,

@@ -20,7 +20,9 @@
             options: helpers.valid_orders,
             selected_option: helpers.current_order,
             i18n_namespace: "comments.orders",
-            url_param_name: 'order'
+            url_param_name: "order",
+            remote_url: @remote_url,
+            in_projekt_footer_tab: record.is_a?(ProjektPhase::CommentPhase)
           )
         ) %>
       </div>

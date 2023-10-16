@@ -24,7 +24,10 @@
 
         .resource-item--body-wrapper {
           .resource-item--author {
-            display: none;
+            // display: none;
+            flex-direction: row;
+            border-top: 0;
+            margin-top: 1rem;
           }
         }
 
@@ -129,6 +132,7 @@
 
         .resource-item--body {
           min-height: 145px;
+          margin-bottom: 12px;
         }
 
         .resource-item--wide-head-title {

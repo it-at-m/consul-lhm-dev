@@ -3,7 +3,7 @@
     <h1 class="page-main-title">
       <%= t("custom.projekts.index.title") %>
     </h1>
-    <%= render_custom_block "projekts_overview_page" %>
+    <%= render_custom_block "projekts_overview_page", default_content: t("custom.projekts.index.welcome_default_text_html") %>
   </div>
 
   <div class="flex-layout">
@@ -12,11 +12,19 @@
         <%= render Projekts::ListComponent.new(
           projekts: @projekts,
           map_coordinates: @map_coordinates,
-          current_filter: @current_projekts_order,
-          filters: @active_projekts_orders,
+          current_filter: @current_projekts_filter,
+          filters: @active_projekts_filters,
           hide_title: true
           ) %>
       </div>
+
+      <%= paginate @projekts %>
+
+      <% if @show_comments %>
+        <div id="projekt_comments">
+          <%= render Shared::NewCommentsComponent.new(@commentable, @comment_tree, remote_url: footer_comments_projekts_path) %>
+        </div>
+      <% end %>
     </div>
 
     <div class="sidebar">
@@ -39,20 +47,6 @@
     </div>
   </div>
 
-  <%= paginate @projekts %>
-
-  <% if @show_comments && current_user.present? %>
-    <div class="tabs-content margin-top" data-tabs-content="proposals_tabs">
-      <div class="tabs-panel is-active" id="tab-comments">
-        <%= render Shared::CommentsComponent.new(@commentable, @comment_tree) do %>
-          <h3>
-            <%= t("debates.show.comments_title") %>
-            <span class="js-comments-count">(<%= @commentable.comments_count %>)</span>
-          </h3>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
   <div class="row">
     <div class="column show-on-mobile projekt-mobile-share-buttons">
       <%= render "shared/social_share",

@@ -1,10 +1,11 @@
+<%= render "shared/loader_spinner" %>
+
 <% if @budget.present? %>
   <%= render Pages::Projekts::BudgetsTabComponent.new(@budget, @ballot, current_user) %>
 <% end %>
 
 <div class="flex-column">
   <div class="main-column">
-    <%= render "shared/loader_spinner" %>
     <% if @budget.present? %>
 
       <% if @budget.phase == 'finished' %>
@@ -42,6 +43,7 @@
                   filter_param: "order",
                   filters: @valid_orders,
                   hide_title: true,
+                  projekt_phase: @projekt_phase,
                   additional_data: {
                     ballot: @ballot
                   },

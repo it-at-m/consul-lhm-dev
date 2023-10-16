@@ -10,7 +10,9 @@
         <% if user.image&.variant(:popup).present? %>
           <%= image_tag(user.image&.variant(:popup)) %>
         <% else %>
-          <%= user&.first_letter_of_name %>
+          <div class="sidebar-resource-author--avatar-placeholder">
+            <%= user&.first_letter_of_name %>
+          </div>
         <% end %>
       </div>
     <% end %>

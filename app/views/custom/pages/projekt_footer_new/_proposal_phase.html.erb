@@ -1,6 +1,7 @@
+<%= render "shared/loader_spinner" %>
+
 <div class="flex-column">
   <div class="main-column">
-    <%= render "shared/loader_spinner" %>
     <% proposal_footer_url = projekt_phase_footer_tab_page_path(@projekt_phase.projekt.page, @projekt_phase.id) %>
     <%= render(
       Shared::ResourcesListComponent.new(
@@ -12,6 +13,7 @@
         filter_param: "order",
         filters: @valid_orders,
         text_search_enabled: true,
+        projekt_phase: @projekt_phase,
         empty_list_text: t("custom.proposals.index.empty_list_text")
       )) %>
     <%= paginate @proposals, remote: true, params: { controller: "pages", action: "projekt_phase_footer_tab" } %>
