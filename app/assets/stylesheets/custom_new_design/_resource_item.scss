@@ -224,10 +224,9 @@
       border: none;
       margin: 0;
       padding: 8px 25px;
-      // width: 299px;
+      width: 299px;
       border-radius: 5px;
     }
-    // .participation-not-allowed p{
 
     p.investment-project-amount {
       margin-bottom: 0;
@@ -266,7 +265,13 @@
     }
 
     .votes {
-      padding-bottom: 20px;
+      .in-favor-against {
+        padding-top: 10px;
+      }
+
+      .total-votes {
+        padding-bottom: 10px;
+      }
     }
 
     form {
@@ -282,7 +287,8 @@
       display: flex;
       flex-direction: column;
       width: 100%;
-      // justify-content: center;
+      justify-content: center;
+      align-items: center;
 
       .total-supports {
         display: block;

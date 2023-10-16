@@ -14,9 +14,15 @@
 
   .votes {
     border-left: none !important;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 
     .total-votes {
       margin-bottom: 5px;
+      margin-top: 5px;
+      margin-bottom: 0;
+      font-size: 16px;
     }
 
     .in-favor-against {
@@ -24,7 +30,8 @@
 
       .in-favor, .against {
         display: flex;
-        flex-direction: column-reverse;
+        // flex-direction: column-reverse;
+        flex-direction: column;
       }
     }
   }
