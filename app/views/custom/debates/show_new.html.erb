@@ -72,7 +72,7 @@
       <% if projekt_feature?(@debate&.projekt, 'debates.allow_voting') %>
         <%= render(Shared::SidebarCardComponent.new(title: t("votes.supports"), icon_name: "vote-yea")) do |c| %>
           <div id="<%= dom_id(@debate) %>_votes" class="debate-page--votes">
-            <%= render Debates::VotesComponent.new(@debate) %>
+            <%= render Debates::NewVotesComponent.new(@debate) %>
           </div>
         <% end %>
       <% end %>

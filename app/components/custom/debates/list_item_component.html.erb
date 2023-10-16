@@ -19,7 +19,7 @@
 
   <% c.footer_section do  %>
     <div id="<%= dom_id(@debate) %>_votes">
-      <%= render Debates::VotesComponent.new(debate) %>
+      <%= render Debates::NewVotesComponent.new(debate) %>
     </div>
   <% end %>
 <% end %>

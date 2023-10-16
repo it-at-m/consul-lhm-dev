@@ -60,7 +60,7 @@ module WelcomeHelper
   def header_button_html
     button_text = Setting["extended_option.general.homepage_button_text"]
     button_link = Setting["extended_option.general.homepage_button_link"]
-    target = button_link.include?("http") ? "_blank" : "_self"
+    target = button_link&.include?("http") ? "_blank" : "_self"
 
     if button_text.present? && button_link.present?
       link_to(button_text, button_link, class: "button homepage-image-header--button", target: target)
