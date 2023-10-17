@@ -52,7 +52,7 @@
   &.-mobile-filter {
     @media(max-width: $small-tablet-viewport-start) {
       .sidebar-card--content {
-        display: none;
+        // display: none;
       }
     }
   }

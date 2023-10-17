@@ -16,6 +16,7 @@
     toggleContent: function(e) {
       var sidebarCard = e.currentTarget.parent;
 
+      // sidebarCard.querySelector("")
     }
   };
 }).call(this);
