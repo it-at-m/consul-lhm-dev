@@ -43,9 +43,11 @@
         </div>
       <% end %>
 
-      <%= render Sidebar::Filters::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name, selected_affiliated_geozones: @affiliated_geozones) %>
-      <%= render Sidebar::CategoriesCardComponent.new(categories: @categories) %>
-      <%= render Sidebar::SdgsCardComponent.new(sdgs: @sdgs, sdg_targets: @sdg_targets) %>
+      <%= render Mobile::FiltersComponent.new do %>
+        <%= render Sidebar::Filters::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name, selected_affiliated_geozones: @affiliated_geozones) %>
+        <%= render Sidebar::CategoriesCardComponent.new(categories: @categories) %>
+        <%= render Sidebar::SdgsCardComponent.new(sdgs: @sdgs, sdg_targets: @sdg_targets) %>
+      <% end %>
     </div>
   </div>
 
