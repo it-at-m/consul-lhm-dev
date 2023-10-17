@@ -14,9 +14,11 @@
     },
 
     toggleContent: function(e) {
-      var sidebarCard = e.currentTarget.parent;
+      var $sidebarCard = $(e.currentTarget.closest(".sidebar-card"));
 
-      // sidebarCard.querySelector("")
+      var $content = $sidebarCard.find(".sidebar-card--content");
+      $content.toggle();
+      $sidebarCard.find(".icon-chevron-down").toggleClass("-rotated");
     }
   };
 }).call(this);

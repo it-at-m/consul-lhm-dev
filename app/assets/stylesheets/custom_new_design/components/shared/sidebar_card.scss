@@ -13,8 +13,9 @@
 .sidebar-card--title {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   font-size: 16px;
-  margin-bottom: 12px;
+  margin-bottom: 0;
   color: black;
   font-weight: 500;
 
@@ -49,10 +50,22 @@
   font-size: 14px;
   width: 100%;
 
+  .sidebar-collapse-icon {
+    display: none;
+  }
+
+  .sidebar-card--content {
+    margin-top: 12px;
+  }
+
   &.-mobile-filter {
     @media(max-width: $small-tablet-viewport-start) {
       .sidebar-card--content {
-        // display: none;
+        display: none;
+      }
+
+      .sidebar-collapse-icon {
+        display: block;
       }
     }
   }

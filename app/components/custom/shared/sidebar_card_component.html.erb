@@ -2,10 +2,13 @@
   <div class="sidebar-card--section">
     <% if @title.present? %>
       <h4 class="sidebar-card--title js-sidebar-card--title">
-        <i class="fas fa-<%= @icon_name %>"></i>
-        <div class="sidebar-card--title-text">
-          <%= @title %>
+        <div class="d-flex sidebar-card--title-inner">
+          <i class="fas fa-<%= @icon_name %>"></i>
+          <div class="sidebar-card--title-text">
+            <%= @title %>
+          </div>
         </div>
+        <div class="icon-chevron-down <%= @mobile_filter ? "" : "-mobile-filter" %>"></div>
       </h4>
     <% end %>
 
