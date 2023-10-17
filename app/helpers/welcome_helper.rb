@@ -55,6 +55,8 @@ module WelcomeHelper
     end
   end
 
+  # custom
+
   def header_button_html
     button_text = Setting["extended_option.general.homepage_button_text"]
     button_link = Setting["extended_option.general.homepage_button_link"]
