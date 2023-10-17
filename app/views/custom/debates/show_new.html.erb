@@ -16,7 +16,7 @@
 
 <main>
   <div id="<%= dom_id(@debate) %>">
-    <div class="flex-layout">
+    <div class="flex-layout padding-on-mobile">
       <div class="main-column">
         <h1 class="resource-page--title"><%= "#{@debate.author.name} startet eine Diskussion"  %></h1>
         <div class="resource-page--title-subline">
@@ -33,7 +33,7 @@
       <div class="sidebar-placeholder"></div>
     </div>
 
-    <div class="flex-layout">
+    <div class="flex-layout padding-on-mobile">
       <div class="main-column">
         <%= render ResourcePage::BannerComponent.new(resource: @debate) %>
 

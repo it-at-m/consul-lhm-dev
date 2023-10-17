@@ -223,7 +223,7 @@ body.custom-new-design {
 }
 
 .padding-on-mobile {
-  @media(max-width: $small-tablet-viewport-start) {
+  @media(max-width: $big-tablet-viewport-start) {
     padding: 0 20px;
   }
 }

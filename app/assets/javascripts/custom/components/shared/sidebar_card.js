@@ -16,9 +16,11 @@
     toggleContent: function(e) {
       var $sidebarCard = $(e.currentTarget.closest(".sidebar-card"));
 
-      var $content = $sidebarCard.find(".sidebar-card--content");
-      $content.toggle();
-      $sidebarCard.find(".icon-chevron-down").toggleClass("-rotated");
+      if (window.screen.width <= 970) {
+        var $content = $sidebarCard.find(".sidebar-card--content");
+        $content.toggle();
+        $sidebarCard.find(".icon-chevron-down").toggleClass("-rotated");
+      }
     }
   };
 }).call(this);

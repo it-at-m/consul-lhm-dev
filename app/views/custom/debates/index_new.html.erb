@@ -2,7 +2,7 @@
   <h1 class="padding-on-mobile">
     <%= t("custom.debates.index.title") %>
   </h1>
-  <div class="flex-layout">
+  <div class="flex-layout padding-on-mobile">
     <div class="main-column">
       <% if extended_feature?("debates.intro_text_for_debates") %>
         <div class="resource-page--intro-text">
@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  <div class="flex-layout">
+  <div class="flex-layout flex-layout-reverse-on-mobile padding-on-mobile">
     <div class="main-column">
       <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
         <%= link_to t('debates.index.section_header.help'), '#section_help' %>

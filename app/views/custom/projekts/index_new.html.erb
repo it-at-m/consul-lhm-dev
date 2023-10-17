@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <div class="flex-layout flex-layout-reverse-on-mobile">
+  <div class="flex-layout padding-on-mobile flex-layout-reverse-on-mobile">
     <div class="main-column">
       <div class="projekts-overview-page--projekts-list">
         <%= render Projekts::ListComponent.new(
@@ -43,11 +43,11 @@
         </div>
       <% end %>
 
-      <%= render Mobile::FiltersComponent.new do %>
+      <%# <%= render Mobile::FiltersComponent.new do %>
         <%= render Sidebar::Filters::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name, selected_affiliated_geozones: @affiliated_geozones) %>
         <%= render Sidebar::CategoriesCardComponent.new(categories: @categories) %>
         <%= render Sidebar::SdgsCardComponent.new(sdgs: @sdgs, sdg_targets: @sdg_targets) %>
-      <% end %>
+      <%# <% end %>
     </div>
   </div>
 

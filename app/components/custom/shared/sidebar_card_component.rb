@@ -3,16 +3,16 @@
 class Shared::SidebarCardComponent < ApplicationComponent
   renders_many :additional_sections
 
-  def initialize(title: nil, description: nil, icon_name: "info", class_name: nil, mobile_filter: false)
+  def initialize(title: nil, description: nil, icon_name: "info", class_name: nil, collapsed_on_mobile: true)
     @title = title
     @icon_name = icon_name
     @class_name = class_name
     @description = description
-    @mobile_filter = mobile_filter
+    @collapsed_on_mobile = collapsed_on_mobile
   end
 
   def class_name
-    if @mobile_filter
+    if @collapsed_on_mobile
       "#{@class_name} -mobile-filter"
     else
       @class_name

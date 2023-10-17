@@ -2,7 +2,7 @@
   <h1 class="padding-on-mobile">
     <%= t("custom.proposals.index.title") %>
   </h1>
-  <div class="flex-layout">
+  <div class="flex-layout padding-on-mobile">
     <div class="main-column">
       <% if controller_name == 'proposals' %>
         <% if extended_feature?("proposals.intro_text_for_proposals") %>
@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <div class="flex-layout">
+  <div class="flex-layout flex-layout-reverse-on-mobile padding-on-mobile">
     <div class="main-column">
       <%= render(
         Shared::ResourcesListComponent.new(
