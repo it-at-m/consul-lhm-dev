@@ -29,12 +29,20 @@
     width: 48%;
     display: flex;
     flex-direction: column;
+
+    @media(max-width: $small-tablet-viewport-start) {
+      width: 100%;
+    }
   }
 
   .resource-page-banner--image {
     width: 48%;
     min-height: 260px;
     max-height: 260px;
+
+    @media(max-width: $small-tablet-viewport-start) {
+      width: 100%;
+    }
 
     .resource-image {
       border-radius: 5px;
