@@ -85,7 +85,7 @@
 
             <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_notifications_tab") && @notifications.present? %>
               <div class="proposal-resources-section">
-                <%= render Proposals::NotificationsComponent.new(notifications: @notifications, author: @proposal.author) %>
+                <%= render Shared::NotificationsComponent.new(notifiable: @proposal, author: @proposal.author) %>
               </div>
             <% end %>
 

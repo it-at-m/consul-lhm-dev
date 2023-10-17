@@ -1,1 +1,3 @@
-../projekt_footer/_projekt_notification_phase.html.erb
+<%= render "shared/loader_spinner" %>
+
+<%= render Shared::NotificationsComponent.new(notifiable: @projekt_phase) %>
