@@ -367,7 +367,7 @@ de:
         locale: Sprache
       site_customization/page/translation:
         title: Titel
-        subtitle: Untertitel
+        subtitle: Untertitel und Projektbeschreibung
         content: Inhalt
       site_customization/image:
         name: Name
