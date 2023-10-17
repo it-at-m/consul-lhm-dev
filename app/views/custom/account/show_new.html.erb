@@ -1,5 +1,23 @@
+<% public_activity_component_content = capture do %>
+  <%= render Users::NewPublicActivityComponent.new(current_user) %>
+<% end %>
+
+<% notifications_content = capture do %>
+  <% if @notifications.empty? %>
+    <div data-alert class="callout primary margin-top clear">
+      <%= t("notifications.index.empty_notifications") %>
+    </div>
+  <% else %>
+    <ul class="no-bullet clear notifications-list">
+      <% @notifications.each do |notification| %>
+        <%= render "/notifications/notification", notification: notification %>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
+
 <main class="user-page">
-  <div class="flex-layout">
+  <div class="flex-layout padding-on-mobile">
     <div class="main-column">
       <%= render(Users::ProfileBannerComponent.new(user: current_user, edit_mode: true)) %>
       <div class="row margin-bottom">
@@ -24,20 +42,14 @@
             </li>
           </ul>
 
-          <% if @notifications.empty? %>
-            <div data-alert class="callout primary margin-top clear">
-              <%= t("notifications.index.empty_notifications") %>
-            </div>
-          <% else %>
-            <ul class="no-bullet clear notifications-list">
-              <% @notifications.each do |notification| %>
-                <%= render "/notifications/notification", notification: notification %>
-              <% end %>
-            </ul>
-          <% end %>
+          <div class="hide-on-small-tablet">
+            <%= notifications_content %>
+          </div>
         </div>
       </div>
-      <%= render Users::NewPublicActivityComponent.new(current_user) %>
+      <div class="hide-on-small-tablet">
+        <%= public_activity_component_content %>
+      </div>
     </div>
     <aside class="sidebar">
       <%= form_for @account, as: :account, url: account_path do |f| %>
@@ -159,5 +171,11 @@
         <% end %>
       <% end %>
       </aside>
+      <div class="show-on-small-tablet">
+        <%= notifications_content %>
+      </div>
+      <div class="show-on-small-tablet">
+        <%= public_activity_component_content %>
+      </div>
   </div>
 </main>
