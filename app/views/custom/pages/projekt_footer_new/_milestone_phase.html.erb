@@ -1,1 +1,3 @@
-../projekt_footer/_milestone_phase.html.erb
+<%= render "shared/loader_spinner" %>
+
+<%= render Shared::MilestonesComponent.new(milestones: @projekt_phase.milestones, milestoneable: @projekt_phase) %>
