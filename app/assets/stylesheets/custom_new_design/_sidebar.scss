@@ -14,17 +14,9 @@
     }
   }
 
-  .sidebar-placeholder {
-
-  }
-
   .card-section--header {
-    // font-size: 18px;
     font-size: 16px;
     margin-bottom: 8px;
-  }
-
-  .system-users-list {
   }
 
   .system-users-list--title {
@@ -141,7 +133,7 @@
     }
   }
 
-  @media screen and (max-width: $mobile-viewport-start) {
+  @media screen and (max-width: $small-tablet-viewport-start) {
     .header--responsive-menu-wrapper {
       display: block;
     }
