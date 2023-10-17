@@ -1,8 +1,8 @@
 <main>
-  <h1>
+  <h1 class="padding-on-mobile">
     <%= t("custom.proposals.index.title") %>
   </h1>
-  <div class="flex-column">
+  <div class="flex-layout">
     <div class="main-column">
       <% if controller_name == 'proposals' %>
         <% if extended_feature?("proposals.intro_text_for_proposals") %>

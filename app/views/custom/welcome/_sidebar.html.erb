@@ -1,9 +1,11 @@
 <div class="sidebar">
-  <% if render_custom_content_block?('home_page_sidebar') %>
-    <%= render Shared::SidebarCardComponent.new(title: 'Neuigkeiten', icon_name: "bullhorn") do |c| %>
-      <%= render_custom_block 'home_page_sidebar' %>
+  <div class="hide-on-small-tablet">
+    <% if render_custom_content_block?('home_page_sidebar') %>
+      <%= render Shared::SidebarCardComponent.new(title: 'Neuigkeiten', icon_name: "bullhorn") do |c| %>
+        <%= render_custom_block 'home_page_sidebar' %>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 
   <%= render Shared::SidebarCardComponent.new(title: 'Nutzer*innen', icon_name: "info-circle") do |c| %>
     <div class="system-users-list">

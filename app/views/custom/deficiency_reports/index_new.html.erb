@@ -4,7 +4,7 @@
   </h1>
 
   <% if Setting["deficiency_reports.intro_text"].present? %>
-    <div class="flex-column">
+    <div class="flex-layout">
       <div class="main-column">
         <div class="resource-page--intro-text">
           <%= render_custom_block("deficiency_reports_index_welcome", default_content: t("custom.deficiency_reports.index.welcome_default_text_html")) %>

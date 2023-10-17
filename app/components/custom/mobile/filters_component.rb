@@ -1,5 +1,4 @@
 class Mobile::FiltersComponent < ApplicationComponent
-  def initialize()
-
+  def initialize
   end
 end

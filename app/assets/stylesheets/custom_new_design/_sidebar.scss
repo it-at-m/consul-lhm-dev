@@ -1,4 +1,19 @@
 .custom-new-design {
+  .sidebar {
+    min-width: 300px;
+    max-width: 300px;
+
+    @media(max-width: $small-tablet-viewport-start) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      margin: auto;
+      margin-bottom: 20px;
+    }
+  }
+
   .sidebar-placeholder {
 
   }
@@ -54,20 +69,6 @@
     left: -60px;
   }
 
-
-  .sidebar {
-    min-width: 300px;
-    max-width: 300px;
-
-    @media(max-width: $small-tablet-viewport-start) {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      width: 100%;
-      margin: auto;
-    }
-  }
 
   // Overide old styles
   .sidebar-divider {
