@@ -1,7 +1,7 @@
-<div class="sidebar-card <%= @class_name %>">
+<div class="sidebar-card <%= class_name %>">
   <div class="sidebar-card--section">
     <% if @title.present? %>
-      <h4 class="sidebar-card--title">
+      <h4 class="sidebar-card--title js-sidebar-card--title">
         <i class="fas fa-<%= @icon_name %>"></i>
         <div class="sidebar-card--title-text">
           <%= @title %>
@@ -15,7 +15,9 @@
       </div>
     <% end %>
 
-    <%= content %>
+    <div class="sidebar-card--content">
+      <%= content %>
+    </div>
   </div>
 
   <% if additional_sections.present? %>

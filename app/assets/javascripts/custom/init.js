@@ -11,6 +11,7 @@
       App.TextSearchFormComponent.initialize();
       App.CollapseComponent.initialize();
       App.CustomTabs.initialize();
+      App.SidebarCardComponent.initialize();
     }
   };
 }).call(this);

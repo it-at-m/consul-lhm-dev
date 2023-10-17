@@ -49,6 +49,14 @@
   font-size: 14px;
   width: 100%;
 
+  &.-mobile-filter {
+    @media(max-width: $small-tablet-viewport-start) {
+      .sidebar-card--content {
+        display: none;
+      }
+    }
+  }
+
   // &:last-child {
   //   margin-bottom: 0;
   // }
