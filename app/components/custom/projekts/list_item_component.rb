@@ -12,7 +12,7 @@ class Projekts::ListItemComponent < ApplicationComponent
       resource: projekt,
       title: projekt.page.title,
       description: strip_tags(projekt.page.subtitle),
-      tags: projekt.tags.first(3),
+      tags: projekt.tags,
       narrow_header: true,
       url: projekt.page.url,
       image_url: image_variant(:card_thumb),
