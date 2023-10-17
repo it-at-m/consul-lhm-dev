@@ -17,6 +17,10 @@
     .custom-content-block-body {
       margin-bottom: 40px;
       margin-top: 40px;
+
+      @media(max-width: $small-tablet-viewport-start) {
+        margin-bottom: 30px;
+      }
     }
   }
 

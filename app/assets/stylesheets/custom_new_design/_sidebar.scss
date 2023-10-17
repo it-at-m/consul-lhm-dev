@@ -1,15 +1,21 @@
 .custom-new-design {
-  .sidebar-placeholder {
+  .sidebar {
+    min-width: 300px;
+    max-width: 300px;
 
+    @media(max-width: $small-tablet-viewport-start) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      margin: auto;
+    }
   }
 
   .card-section--header {
-    // font-size: 18px;
     font-size: 16px;
     margin-bottom: 8px;
-  }
-
-  .system-users-list {
   }
 
   .system-users-list--title {
@@ -54,20 +60,6 @@
     left: -60px;
   }
 
-
-  .sidebar {
-    min-width: 300px;
-    max-width: 300px;
-
-    @media(max-width: $small-tablet-viewport-start) {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      width: 100%;
-      margin: auto;
-    }
-  }
 
   // Overide old styles
   .sidebar-divider {
@@ -140,7 +132,7 @@
     }
   }
 
-  @media screen and (max-width: $mobile-viewport-start) {
+  @media screen and (max-width: $small-tablet-viewport-start) {
     .header--responsive-menu-wrapper {
       display: block;
     }

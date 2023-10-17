@@ -4,23 +4,21 @@
       <%= hidden_field_tag param_name, param_value %>
     <% end %>
 
-    <div class="input-group">
-      <label for="search_text">
-        <input type="text"
-          name="search"
-          placeholder="<%= t("#{i18n_namespace}.placeholder") %>"
-          class="input-group-field"
-          value="<%= params[:search] %>" id="search_text">
+    <label for="search_text">
+      <input type="text"
+      name="search"
+      placeholder="<%= t("#{i18n_namespace}.placeholder") %>"
+      class="input-group-field"
+      value="<%= params[:search] %>" id="search_text">
 
-      </label>
-      <div class="input-group-button">
-        <button type="submit" class="button" title="<%= t("#{i18n_namespace}.button") %>">
-          <span class="icon-search"></span>
-        </button>
-      </div>
-      <div class="text-search-form--reset-button js-text-search-form-reset-button">
-        <i class="icon-cross"></i>
-      </div>
+    </label>
+    <div class="input-group-button">
+      <button type="submit" class="button" title="<%= t("#{i18n_namespace}.button") %>">
+        <span class="icon-search"></span>
+      </button>
+    </div>
+    <div class="text-search-form--reset-button js-text-search-form-reset-button">
+      <i class="icon-cross"></i>
     </div>
   <% end %>
 </div>

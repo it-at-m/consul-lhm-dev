@@ -19,7 +19,6 @@ html{
 
     main {
       margin: auto;
-      padding-top: 70px;
     }
 
     .wrapper {
@@ -61,12 +60,6 @@ body.custom-new-design {
     padding: 0;
   }
 }
-
-// body.custom-new-design > header, .custom-new-design .wrapper > header {
-//   // height: 100px;
-//   height: 100px;
-//   max-width: auto;
-// }
 
 .custom-new-design {
   .notice-container {
@@ -189,11 +182,13 @@ body.custom-new-design {
 
 .items-list-line-divider {
   height: 1px;
-  // width: 100%;
   flex-grow: 1;
   background: #c7c7c7;
-  // margin-top: 9px;
   margin-top: 17px;
+
+  @media(max-width: $small-tablet-viewport-start) {
+    display: none;
+  }
 }
 
 .social-share-button .ssb-icon {
