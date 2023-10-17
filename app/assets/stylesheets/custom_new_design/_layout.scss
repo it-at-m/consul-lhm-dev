@@ -19,9 +19,11 @@
     justify-content: space-between;
 
     @media screen and (max-width: $big-tablet-viewport-start) {
-      flex-direction: column;
-      // padding: 0 25px;
       padding: 0 20px;
+    }
+
+    @media screen and (max-width: $small-tablet-viewport-start) {
+      flex-direction: column;
     }
   }
 

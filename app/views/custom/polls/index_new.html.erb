@@ -5,9 +5,11 @@
     <%= render "shared/canonical", href: polls_url %>
   <% end %>
 
-  <h1>
-    <%= t("polls.index.title") %>
-  </h1>
+  <div class="padding-on-mobile">
+    <h1>
+      <%= t("polls.index.title") %>
+    </h1>
+  </div>
   <div class="flex-layout">
     <div class="main-column">
       <% if extended_feature?("polls.intro_text_for_polls") %>
