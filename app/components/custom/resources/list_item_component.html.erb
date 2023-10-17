@@ -60,17 +60,16 @@
               </div>
             <% elsif @tags.present? %>
               <div class="resource-item--tags">
-                <% if @tags.present? %>
-                  <% @tags.first(2).each do |tag| %>
-                    <%= link_to(path_for_resource_with_params(@resource, tags: tag.name), class: 'resource-item--tag') do %>
-                      <%= tag.name %>
-                    <% end %>
+                <% @tags.first(2).each do |tag| %>
+                  <%= link_to(path_for_resource_with_params(@resource, tags: tag.name), class: 'resource-item--tag') do %>
+                    <%= tag.name %>
                   <% end %>
+                <% end %>
 
-                  <% if @tags[2].present? %>
-                    <%= link_to(path_for_resource_with_params(@resource, tags: @tags[2].name), class: 'resource-item--tag resource-item--last-tag') do %>
-                      <%= @tags[2].name %>
-                    <% end %>
+                <% if @tags[2].present? %>
+                  <%= link_to(path_for_resource_with_params(@resource, tags: @tags), class: 'resource-item--tag') do %>
+                    <% remaining_tags_count = @tags.count - 2 %>
+                    <%= t("custom.tags.remaining_count", count: remaining_tags_count) %>
                   <% end %>
                 <% end %>
               </div>

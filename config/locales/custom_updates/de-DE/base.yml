@@ -164,6 +164,10 @@ de:
       download: Herunterladen
     tag_names:
       projekt: Weitere %{resources} zu diesem Projekt
+    tags:
+      remaining_count:
+        one: "+%{count} Tag"
+        other: "+%{count} Tags"
     users:
       login_to_vote: Sie müssen sich %{signin} oder %{signup}, um teilnehmen zu können
       verify_account_link_short: verifizieren

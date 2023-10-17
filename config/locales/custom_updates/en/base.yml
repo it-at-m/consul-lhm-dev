@@ -158,6 +158,10 @@ en:
       download: Download
     tag_names:
       projekt: Additional %{resources} for this Project
+    tags:
+      remaining_count:
+        one: "+%{count} Tag"
+        other: "+%{count} Tags"
     users:
       login_to_vote: You must %{signin} or %{signup} to be able to participate
       verify_account_link_short: verify
