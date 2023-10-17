@@ -102,6 +102,8 @@ en:
       debates: Discussions
       polls: Polls
       proposals: Proposals
+    milestones:
+      collapse_title: Milestones - set by the administration (%{count})
     pages:
       impressum:
         title: Imprint

@@ -74,7 +74,7 @@
 
             <% if projekt_phase_feature?(@investment.projekt_phase, "resource.enable_investment_milestones_tab") && @milestones.present? %>
               <div class="proposal-resources-section">
-                <%= render Proposals::MilestonesComponent.new(milestones: @milestones, milestoneable: @investment) %>
+                <%= render Shared::MilestonesComponent.new(milestones: @milestones, milestoneable: @investment) %>
               </div>
             <% end %>
 

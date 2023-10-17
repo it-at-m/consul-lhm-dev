@@ -1,0 +1,27 @@
+<% milestones_html = capture do %>
+  <%= render "milestones/progress_bars", milestoneable: @milestoneable %>
+  <section class="milestones-list-timeline">
+    <% ordered_milestones.each do |milestone| %>
+      <%= render Shared::MilestoneItemComponent.new(milestone: milestone) %>
+    <% end %>
+  </section>
+<% end %>
+
+<div class="milestones-list">
+  <% if @milestoneable.is_a?(ProjektPhase::MilestonePhase) %>
+    <%= milestones_html %>
+
+  <% else %>
+    <%= render Shared::CollapseComponent.new do |c| %>
+      <% c.head do %>
+        <h3>
+          <%= t("custom.milestones.collapse_title", count: @milestones.count) %>
+        </h3>
+      <% end %>
+      <% c.body do %>
+        <%= milestones_html %>
+      <% end %>
+    <% end %>
+
+  <% end %>
+</div>

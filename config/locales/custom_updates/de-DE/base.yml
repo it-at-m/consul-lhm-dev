@@ -105,6 +105,8 @@ de:
       debates: Diskussionen
       polls: Abstimmungen
       proposals: Vorschläge
+    milestones:
+      collapse_title: Meilensteine - von der Verwaltung gesetzt (%{count})
     pages:
       impressum:
         title: Impressum

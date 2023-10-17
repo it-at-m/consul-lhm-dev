@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Proposals::MilestoneItemComponent < ApplicationComponent
+class Shared::MilestoneItemComponent < ApplicationComponent
   attr_reader :milestone
 
   def initialize(milestone:)

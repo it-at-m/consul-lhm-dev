@@ -1,7 +1,3 @@
 <%= render "shared/loader_spinner" %>
 
-<div class='row'>
-  <div class='column'>
-    <%= render "milestones/milestones", milestoneable: @projekt_phase %>
-  </div>
-</div>
+<%= render Shared::MilestonesComponent.new(milestones: @projekt_phase.milestones, milestoneable: @projekt_phase) %>
