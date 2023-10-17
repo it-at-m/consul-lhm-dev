@@ -1,6 +1,10 @@
 .sidebar-card--section {
   padding: 18px 25px;
 
+  @media(max-width: $small-tablet-viewport-start) {
+    padding: 18px 20px;
+  }
+
   h2 {
     display: none;
   }
@@ -60,6 +64,12 @@
 
   .sidebar-collapse-icon {
     display: none;
+  }
+
+  @media(max-width: $small-tablet-viewport-start) {
+    .sidebar-card--content {
+      margin-top: 20px;
+    }
   }
 
   &.-mobile-filter {
