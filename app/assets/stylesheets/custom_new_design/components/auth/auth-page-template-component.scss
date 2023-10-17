@@ -11,6 +11,11 @@
         width: 100%;
       }
       width: 150px;
+
+      @media(max-width: $small-tablet-viewport-start) {
+        width: auto;
+        // max-width: 100px;
+      }
     }
 
     .auth-divider {
@@ -25,8 +30,8 @@
     }
 
     .button {
-      margin-bottom: 5px;
-      margin-top: 5px;
+      margin-bottom: 5px !important;
+      margin-top: 5px !important;
       border-left: none;
       border-radius: 7px;
 
@@ -75,6 +80,11 @@
     margin: auto;
     font-weight: 500;
 
+    @media(max-width: $small-tablet-viewport-start) {
+      flex-direction: column;
+      width: 100%;
+    }
+
     form .checkbox, form .radio {
       font-weight: 500;
     }
@@ -98,6 +108,12 @@
       font-size: 20px;
       margin-left: auto !important;
       margin-right: auto !important;
+
+      @media(max-width: $small-tablet-viewport-start) {
+        font-size: 16px;
+        max-width: 115px;
+        width: 100%;
+      }
     }
   }
 
@@ -110,6 +126,11 @@
 
   .auth-page-template--legend {
     width: 48%;
+
+    @media(max-width: $small-tablet-viewport-start) {
+      width: 100%;
+      margin-bottom: 20px;
+    }
   }
 
   .auth-page-template--legend-logo {
@@ -121,12 +142,23 @@
     display: flex;
     align-items: flex-start;
     margin-bottom: 30px;
+    margin-top: 50px;
+
+    @media(max-width: $small-tablet-viewport-start) {
+      width: 100%;
+      margin-bottom: 20px;
+      margin-top: 0;
+    }
   }
 
   .auth-page-template--legend-text {
     color: black;
     font-size: 25px;
     line-height: 1.25;
+
+    @media(max-width: $small-tablet-viewport-start) {
+      font-size: 20px;
+    }
   }
 
   .auth-page-template--form-section {
@@ -137,6 +169,16 @@
     a:not(.button), label {
       color: $main-text-color;
     }
+
+    @media(max-width: $small-tablet-viewport-start) {
+      width: 100%;
+    }
+  }
+
+  .auth-page-template {
+    h1, h2 {
+      margin-bottom: 15px;
+    }
   }
 
   .auth-page-template--form-card {
@@ -145,8 +187,16 @@
     padding-right: 35px;
     padding-bottom: 35px;
 
+    @media(max-width: $small-tablet-viewport-start) {
+      padding-top: 20px;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
     h2 {
-      margin-bottom: 0;
+      @media(max-width: $small-tablet-viewport-start) {
+        margin-bottom: 0;
+      }
     }
 
     label:not(.checkbox-label) {
@@ -188,12 +238,6 @@
     background-color: #e5e5e5;
     margin-bottom: 25px;
     margin-top: 25px;
-  }
-
-  .auth-page-template {
-    h1, h2 {
-      margin-bottom: 15px;
-    }
   }
 }
 

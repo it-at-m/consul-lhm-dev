@@ -46,6 +46,7 @@ de:
         vote_uncounted: Ihre Stimme wurde entfernt
         results:
           download_csv_answers_votes: Abstimmungsergebnisse herunterladen
+        welcome_default_text: Ihre Meinung ist gefragt! Auf dieser Seite können Sie sich an der oder den Abstimmung/en zum Projekt beteiligen. Klicken Sie auf die jeweilige Schaltfläche – und schon wird Ihre Stimme gezählt. Außerdem finden Sie hier statistische Angaben sowie das Ergebnis der Abstimmung, sobald diese abgeschlossen ist.
   polls:
     index:
       filters:

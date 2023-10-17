@@ -90,6 +90,7 @@
     position: relative;
     width: 100%;
     height: 400px;
+    margin: auto;
     margin-bottom: 70px;
   }
 
@@ -182,32 +183,34 @@
   @media (max-width: 1365px) {
     .custom-page--banner {
       width: 100%;
-      position: static;
-      padding: 0px 30px;
+      margin: auto;
+      max-width: 1245px;
+      // position: static;
+      // padding: 0px 30px;
     }
 
-    .custom-page--banner-wrapper {
-      margin-bottom: 30px;
-    }
+    // .custom-page--banner-wrapper {
+    //   margin-bottom: 30px;
+    // }
+    //
+    // // .custom-page--banner-image {
+    // //   object-fit: contain;
+    // // }
+    //
+    // .custom-page--banner-description {
+    //   font-size: 16px;
+    // }
+    //
+    // .custom-page--banner-text-section-wrapper {
+    //   padding-top: 50px;
+    // }
 
-    .custom-page--banner-image {
-      object-fit: contain;
-    }
-
-    .custom-page--banner-description {
-      font-size: 16px;
-    }
-
-    .custom-page--banner-text-section-wrapper {
-      padding-top: 50px;
-    }
-
-    .custom-page--banner-image {
-      bottom: initial;
-      position: static;
-      top: 50px;
-      height: auto !important;
-    }
+    // .custom-page--banner-image {
+    //   bottom: initial;
+    //   position: static;
+    //   top: 50px;
+    //   height: auto !important;
+    // }
   }
 
   @media (max-width: $mobile-viewport-start) {

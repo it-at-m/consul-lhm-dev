@@ -306,10 +306,10 @@ body.custom-new-design .wrapper > header .locale.locale-custom {
     background: transparent;
     // margin-top: 8px;
 
-    @media(max-width: $small-tablet-viewport-start) {
-      display: none;
-    }
-
+    // @media(max-width: $small-tablet-viewport-start) {
+    //   display: none;
+    // }
+    //
     ul li {
       margin-right: 0;
     }

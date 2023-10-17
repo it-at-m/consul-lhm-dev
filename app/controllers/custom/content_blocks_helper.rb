@@ -40,15 +40,14 @@ module ContentBlocksHelper
     )
   end
 
-
   def render_custom_projekt_content_block?(key, projekt)
     content_block = SiteCustomization::ContentBlock.custom_block_for(key, I18n.locale)
 
-    current_user.present? && (
-      (current_user.administrator? || (
-          current_user.projekt_manager? && can?(:edit, @projekt)
+    (
+      (current_user&.administrator? || (
+          current_user&.projekt_manager? && can?(:edit, @projekt)
         )
-      ) || content_block.present?
+      ) || content_block&.body.present?
     )
   end
 
