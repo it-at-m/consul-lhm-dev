@@ -24,7 +24,18 @@
     <% end %>
 
     <div class="sidebar-resource-author--registration-date">
-      Beigetreten am: <%= l(user.created_at, format: :date_only) %>
+      <%= t("custom.users.banner.registered_at", date: l(user.created_at, format: :date_only)) %>
+    </div>
+
+    <div class="users-profile-banner--info-line">
+      <% unless skip_user_verification? %>
+        <% if user.level_three_verified? %>
+          <span class="icon-check"></span>
+          <%= t("account.show.verified_account") %>
+        <% else %>
+          <%= t("custom.account.show.not_verified_account") %>
+        <% end %>
+      <% end %>
     </div>
 
     <div class="sidebar-resource-author--resources">

@@ -5,7 +5,8 @@ de:
       activity: Aktivität
       my_activity: Meine Aktivität
       contact: Kontakt
-      resources_filter:
+      banner:
+        registered_at: "Beigetreten am: %{date}"
     user_page:
       filters:
         proposals: Vorschläge

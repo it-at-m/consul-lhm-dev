@@ -58,7 +58,7 @@
       <%= @user.full_name %>
     </div>
     <div class="users-profile-banner--info-line">
-      Beigetreten am: <%= l(@user.created_at, format: :date_only) %>
+      <%= t("custom.users.banner.registered_at", date: l(@user.created_at, format: :date_only)) %>
     </div>
     <div class="users-profile-banner--info-line">
       <% unless skip_user_verification? %>
