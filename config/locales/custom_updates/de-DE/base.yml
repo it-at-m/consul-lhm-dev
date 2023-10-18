@@ -6,7 +6,7 @@ de:
     account:
       settings:
         email_digest: Zusammenfassung von Vorschlägen
-        email_on_comment: Kommentaren zu meinen Aktivitäten
+        email_on_comment: Kommentare...
         email_on_comment_reply: Antworten auf meine Kommentare
         email_on_direct_message: Private Nachrichten per Mail zulassen
         newsletter: Newsletter

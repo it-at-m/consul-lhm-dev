@@ -13,12 +13,12 @@
 
         <div class="">
           <%= f.label :first_name, t("custom.verification.residence.new.first_name") %>
-          <%= f.text_field :first_name, label: false %>
+          <%= f.text_field :first_name, label: false, placeholder: t("custom.verification.residence.new.first_name") %>
         </div>
 
         <div class="">
           <%= f.label :last_name, t("custom.verification.residence.new.last_name") %>
-          <%= f.text_field :last_name, label: false %>
+          <%= f.text_field :last_name, label: false, placeholder: t("custom.verification.residence.new.last_name") %>
         </div>
 
         <% if RegisteredAddress::City.any? %>
@@ -62,28 +62,28 @@
           <div class="row">
             <div class="small-12 medium-8 column">
               <%= f.label :city_name, t("custom.verification.residence.new.city_name") %>
-              <%= f.text_field :city_name, label: false %>
+              <%= f.text_field :city_name, label: false, placeholder: t("custom.verification.residence.new.city_name") %>
             </div>
 
             <div class="small-12 medium-4 column">
               <%= f.label :plz, t("custom.verification.residence.new.plz") %>
-              <%= f.text_field :plz, label: false %>
+              <%= f.text_field :plz, label: false, placeholder: t("custom.verification.residence.new.plz") %>
             </div>
           </div>
 
           <div class="">
             <%= f.label :street_name, t("custom.verification.residence.new.street_name") %>
-            <%= f.text_field :street_name, label: false %>
+            <%= f.text_field :street_name, label: false, placeholder: t("custom.verification.residence.new.street_name") %>
           </div>
 
           <div class="row">
             <div class="small-12 medium-6 column">
               <%= f.label :street_number, t("custom.verification.residence.new.street_number") %>
-              <%= f.text_field :street_number, label: false %>
+              <%= f.text_field :street_number, label: false, placeholder: t("custom.verification.residence.new.street_number") %>
             </div>
             <div class="small-12 medium-6 column">
               <%= f.label :street_number, t("custom.verification.residence.new.street_number_extension") %>
-              <%= f.text_field :street_number_extension, label: false %>
+              <%= f.text_field :street_number_extension, label: false, placeholder: t("custom.verification.residence.new.street_number_extension") %>
             </div>
           </div>
         </div>
@@ -107,12 +107,13 @@
 
         <% if @residence.document_required? %>
           <div class='user-document'>
-            <div class='small-12 medium-5 clear'>
+            <div class='small-12 medium-5 column'>
+
               <%= f.select :document_type, user_document_types, prompt: "" %>
             </div>
-            <div class='small-12 medium-5 clear'>
+            <div class='small-12 medium-6 column'>
               <%= f.label :document_last_digits, t("custom.verification.residence.new.document_last_digits") %>
-              <%= f.text_field :document_last_digits, label: false %>
+              <%= f.text_field :document_last_digits, label: false, placeholder: t("custom.verification.residence.new.document_last_digits") %>
             </div>
           </div>
 
