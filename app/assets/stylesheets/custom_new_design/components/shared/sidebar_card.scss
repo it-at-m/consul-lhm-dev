@@ -104,6 +104,11 @@
   color: black;
   font-weight: 500;
   padding: 18px 25px;
+  user-select: none;
+
+  @media(max-width: $mobile-viewport-start) {
+    padding: 15px 25px;
+  }
 
   i {
     margin-right: 10px;
