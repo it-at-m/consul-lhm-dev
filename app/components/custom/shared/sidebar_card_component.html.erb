@@ -1,26 +1,24 @@
 <div class="sidebar-card <%= class_name %>">
-  <div class="sidebar-card--section">
-    <% if @title.present? %>
-      <h4 class="sidebar-card--title js-sidebar-card--title">
-        <div class="d-flex sidebar-card--title-inner">
-          <i class="fas fa-<%= @icon_name %>"></i>
-          <div class="sidebar-card--title-text">
-            <%= @title %>
-          </div>
+  <% if @title.present? %>
+    <h4 class="sidebar-card--title js-sidebar-card--title">
+      <div class="d-flex sidebar-card--title-inner">
+        <i class="fas fa-<%= @icon_name %>"></i>
+        <div class="sidebar-card--title-text">
+          <%= @title %>
         </div>
-        <div class="icon-chevron-down sidebar-collapse-icon <%= @collapsed_on_mobile ? "" : "-mobile-filter" %>"></div>
-      </h4>
-    <% end %>
-
-    <% if @description.present? %>
-      <div class="sidebar-card--description">
-        <%= @description %>
       </div>
-    <% end %>
+      <div class="icon-chevron-down sidebar-collapse-icon <%= @collapsed_on_mobile ? "" : "-mobile-filter" %>"></div>
+    </h4>
+  <% end %>
 
-    <div class="sidebar-card--content">
-      <%= content %>
+  <% if @description.present? %>
+    <div class="sidebar-card--description">
+      <%= @description %>
     </div>
+  <% end %>
+
+  <div class="sidebar-card--section sidebar-card--content">
+    <%= content %>
   </div>
 
   <% if additional_sections.present? %>

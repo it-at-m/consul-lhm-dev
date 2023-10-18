@@ -1,55 +1,3 @@
-.sidebar-card--section {
-  padding: 18px 25px;
-
-  @media(max-width: $small-tablet-viewport-start) {
-    padding: 15px 20px;
-  }
-
-  h2 {
-    display: none;
-  }
-
-  .resource-info-title {
-    display: none;
-  }
-}
-
-.sidebar-card--title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 16px;
-  margin-bottom: 0;
-  color: black;
-  font-weight: 500;
-
-  i {
-    margin-right: 10px;
-    color: $brand;
-  }
-}
-
-.sidebar-card--title-inner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.sidebar-card--description {
-  margin-bottom: 10px;
-}
-
-.sidebar-card--section + .sidebar-card--section {
-  border-top: 1px solid $border-color;
-}
-
-.sidebar-active-users-section {
-  i {
-    width: 15px;
-    margin-right: 5px;
-  }
-}
-
 .sidebar-card {
   position: relative;
   background: white;
@@ -64,8 +12,8 @@
     display: none;
   }
 
-  .sidebar-card--content {
-    margin-top: 12px;
+  .sidebar-card--content { // margin-top: 12px;
+    padding-top: 0;
   }
 
   .sidebar-collapse-icon {
@@ -75,9 +23,9 @@
   @media(max-width: $small-tablet-viewport-start) {
     margin-bottom: 10px;
 
-    .sidebar-card--content {
-      margin-top: 20px;
-    }
+    // .sidebar-card--content {
+    //   margin-top: 20px;
+    // }
     .sidebar-collapse-icon {
       display: block;
     }
@@ -128,6 +76,59 @@
 
   .options-group {
     margin-bottom: 5px;
+  }
+}
+
+.sidebar-card--section {
+  padding: 18px 25px;
+
+  @media(max-width: $small-tablet-viewport-start) {
+    padding: 15px 20px;
+  }
+
+  h2 {
+    display: none;
+  }
+
+  .resource-info-title {
+    display: none;
+  }
+}
+
+.sidebar-card--title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  margin-bottom: 0;
+  color: black;
+  font-weight: 500;
+  padding: 18px 25px;
+
+  i {
+    margin-right: 10px;
+    color: $brand;
+  }
+}
+
+.sidebar-card--title-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar-card--description {
+  margin-bottom: 10px;
+}
+
+.sidebar-card--section + .sidebar-card--section {
+  border-top: 1px solid $border-color;
+}
+
+.sidebar-active-users-section {
+  i {
+    width: 15px;
+    margin-right: 5px;
   }
 }
 
