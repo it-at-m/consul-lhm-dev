@@ -39,7 +39,19 @@
   }
 
   .user-page {
-    .notifications-list:before {
+    ul.menu.simple {
+      align-items: baseline;
+
+      li {
+        margin-bottom: unset;
+      }
+
+      li:not(.is-active) {
+        margin-bottom: 3px;
+      }
+    }
+
+    .notifications-list::before {
       left: 9px;
     }
 
