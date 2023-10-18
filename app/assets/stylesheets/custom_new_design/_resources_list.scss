@@ -42,6 +42,12 @@
     text-decoration: underline;
   }
 
+  .resources-list--inner {
+    @media (max-width: $small-tablet-viewport-start) {
+      justify-content: center;
+    }
+  }
+
   .resources-list--title {
     // font-size: 30px;
     font-size: 28px;
@@ -162,12 +168,6 @@
     .resources-list--map .map_location {
       height: 415px;
       margin: auto;
-    }
-  }
-
-  @media (max-width: $mobile-viewport-start) {
-    .resources-list--inner {
-      justify-content: center;
     }
   }
 }

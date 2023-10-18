@@ -29,6 +29,12 @@
   }
 }
 
+.sidebar-card--title-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .sidebar-card--description {
   margin-bottom: 10px;
 }

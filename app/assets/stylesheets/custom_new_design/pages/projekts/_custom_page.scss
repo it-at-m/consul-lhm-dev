@@ -185,33 +185,15 @@
       width: 100%;
       margin: auto;
       max-width: 1245px;
-      // position: static;
-      // padding: 0px 30px;
     }
-
-    // .custom-page--banner-wrapper {
-    //   margin-bottom: 30px;
-    // }
-    //
-    // // .custom-page--banner-image {
-    // //   object-fit: contain;
-    // // }
-    //
-    // .custom-page--banner-description {
-    //   font-size: 16px;
-    // }
-    //
-    // .custom-page--banner-text-section-wrapper {
-    //   padding-top: 50px;
-    // }
-
-    // .custom-page--banner-image {
-    //   bottom: initial;
-    //   position: static;
-    //   top: 50px;
-    //   height: auto !important;
-    // }
   }
+
+  // @media (max-width: $small-tablet-viewport-start) {
+  //   .custom-page--banner {
+  //     padding-left: 20px;
+  //     padding-right: 20px;
+  //   }
+  // }
 
   @media (max-width: $mobile-viewport-start) {
     .custom-page--banner {
@@ -224,6 +206,8 @@
       bottom: initial;
       height: auto;
       margin-bottom: 160px;
+      padding-left: 20px;
+      padding-right: 20px;
     }
 
     .custom-page--banner-wrapper {
@@ -256,11 +240,11 @@
       height: 250px !important;
       position: absolute;
       bottom: -130px;
-      left: 0;
+      left: 20px;
       right: 0;
       top: initial;
-      width: calc(100vw - 60px);
-      margin: auto;
+      width: calc(100% - 40px);
+      margin-right: 20px;
     }
 
     .page-subnav-tab {
