@@ -13,7 +13,7 @@ class Shared::SidebarCardComponent < ApplicationComponent
 
   def class_name
     if @collapsed_on_mobile
-      "#{@class_name} -mobile-filter"
+      "#{@class_name} -collapsed-on-mobile"
     else
       @class_name
     end

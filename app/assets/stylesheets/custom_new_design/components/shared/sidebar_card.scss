@@ -31,7 +31,7 @@
     }
   }
 
-  &.-mobile-filter {
+  &.-collapsed-on-mobile {
     @media(max-width: $small-tablet-viewport-start) {
       .sidebar-card--content {
         display: none;
