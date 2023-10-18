@@ -139,7 +139,7 @@
         <% end %>
 
         <% if @account_individial_groups_soft.any? %>
-          <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.soft_user_groups_title"), icon_name: "users") do |c| %>
+          <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.soft_user_groups_title"), icon_name: "user-friends") do |c| %>
             <% @account_individial_groups_soft.map do |individual_group| %>
               <div class="options-group">
                 <label><%= individual_group.name %></label>
