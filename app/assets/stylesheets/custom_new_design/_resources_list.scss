@@ -48,6 +48,10 @@
     // margin-bottom: 0;
     padding-bottom: 0;
 
+    @media(max-width: $small-tablet-viewport-start) {
+      margin-bottom: 0;
+    }
+
     a {
       color: black;
 

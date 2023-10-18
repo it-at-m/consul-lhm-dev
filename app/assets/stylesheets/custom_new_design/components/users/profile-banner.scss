@@ -8,6 +8,10 @@
     align-items: center;
     overflow: hidden;
     margin-bottom: 50px;
+
+    @media(max-width: $small-tablet-viewport-start) {
+      margin-bottom: 30px;
+    }
   }
 
   .users-profile-banner--background-image {
@@ -18,6 +22,15 @@
     position: absolute;
     top: 0;
     left: 0;
+
+    @media(max-width: $mobile-viewport-start) {
+      height: 150px;
+
+      img {
+        height: 100%;
+        object-fit: cover;
+      }
+    }
 
     form {
       width: 100%;
@@ -44,6 +57,11 @@
     height: 190px;
     z-index: 2;
     margin-bottom: 10px;
+
+    @media(max-width: $mobile-viewport-start) {
+      width: 150px;
+      height: 150px;
+    }
 
     form {
       width: 100%;
@@ -86,6 +104,10 @@
     color: black;
     font-size: 32px;
     margin-bottom: 5px;
+
+    @media(max-width: $small-tablet-viewport-start) {
+      font-size: 24px;
+    }
   }
 
   .users-profile-banner--info {

@@ -54,6 +54,10 @@ body.custom-new-design {
     font-weight: 500;
     margin-bottom: 30px;
     line-height: 1.2;
+
+    @media(max-width: $mobile-viewport-start) {
+      font-size: 25px;
+    }
   }
 
   // .column:not(div#page-content .column) {
@@ -127,6 +131,10 @@ body.custom-new-design {
     font-size: 35px;
     line-height: 1.2;
     margin-bottom: 1rem;
+
+    @media(max-width: $mobile-viewport-start) {
+      font-size: 25px;
+    }
   }
 
   h3 {
@@ -135,6 +143,10 @@ body.custom-new-design {
     font-weight: 500;
     line-height: 1.2;
     margin-bottom: 1rem;
+
+    @media(max-width: $mobile-viewport-start) {
+      font-size: 22px;
+    }
   }
 
   p {
@@ -142,11 +154,11 @@ body.custom-new-design {
   }
 
   .resources-list {
-    // width: 860px;
-    // display: flex;
-    // justify-content: space-between;
-    // flex-wrap: wrap;
     margin-bottom: 40px;
+
+    // @media(max-width: $small-tablet-viewport-start) {
+    //   margin-bottom: 30px;
+    // }
   }
 
   .u-flex-container {

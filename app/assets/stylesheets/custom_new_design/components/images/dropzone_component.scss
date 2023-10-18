@@ -12,6 +12,11 @@
 
   img {
     width: 100%;
+
+    @media(max-width: $mobile-viewport-start) {
+      height: 100%;
+      object-fit: cover;
+    }
   }
 }
 

@@ -12,10 +12,10 @@
 <% end %>
 
 <%= render "header", header: @header %>
-<main class="welcome-page padding-on-mobile">
+<main class="welcome-page">
   <div class="d-flex flex-layout">
     <div class="main-column">
-      <div class="show-on-small-tablet mobile-info margin-bottom">
+      <div class="show-on-small-tablet standalone-sidebar-section margin-bottom">
         <% if render_custom_content_block?('home_page_sidebar') %>
           <%= render Shared::SidebarCardComponent.new(title: 'Neuigkeiten', icon_name: "bullhorn") do |c| %>
             <%= render_custom_block 'home_page_sidebar' %>
