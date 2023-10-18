@@ -138,7 +138,7 @@
           <% end %>
         <% end %>
 
-        <% if @account_individial_groups_hard.any? || @account_individial_groups_soft.any? %>
+        <% if @account_individial_groups_soft.any? %>
           <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.soft_user_groups_title"), icon_name: "users") do |c| %>
             <% @account_individial_groups_soft.map do |individual_group| %>
               <div class="options-group">
@@ -166,7 +166,6 @@
                 <% end %>
               </div>
             <% end %>
-            <%= f.submit t("custom.account.show.save_settings"), class: "button margin-top" %>
           <% end %>
         <% end %>
       <% end %>
