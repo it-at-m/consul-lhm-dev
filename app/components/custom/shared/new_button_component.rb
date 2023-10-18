@@ -87,7 +87,7 @@ class Shared::NewButtonComponent < ApplicationComponent
     end
 
     def new_button_classes
-      classes = %w[button expanded new-resource-button]
+      classes = %w[button -orange new-resource-button]
 
       if @projekt_phase.class.name.in?(["ProjektPhase::ProposalPhase", "ProjektPhase::DebatePhase"]) ||
           @resources_name.in?(["proposals", "debates"])

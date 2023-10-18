@@ -1,9 +1,4 @@
 <aside class='margin-bottom' id='sidebar'>
-
-  <% if @budget.phase == "accepting" %>
-    <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
-  <% end %>
-
   <%= render_custom_block "budget_#{@budget.id}_phase_#{@budget.current_phase.id}_info" %>
 
   <%= render "pages/projekt_footer_new/budget/my_ballot" %>

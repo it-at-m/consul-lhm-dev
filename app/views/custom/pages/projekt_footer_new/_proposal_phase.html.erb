@@ -2,6 +2,11 @@
 
 <div class="flex-layout flex-layout-reverse-on-mobile">
   <div class="main-column">
+
+    <div class="new-resource-cta">
+      <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
+    </div>
+
     <% proposal_footer_url = projekt_phase_footer_tab_page_path(@projekt_phase.projekt.page, @projekt_phase.id) %>
     <%= render(
       Shared::ResourcesListComponent.new(
@@ -34,8 +39,6 @@
           </span>
         <% end %>
       </div>
-
-      <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
     <% end %>
 
     <% if current_user.present? && extended_feature?('proposals.enable_my_posts_filter') %>

@@ -32,6 +32,13 @@
             </div>
           </div>
         <% else %>
+
+          <% if @budget.phase == "accepting" %>
+            <div class="new-resource-cta">
+              <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
+            </div>
+          <% end %>
+
           <% budget_investments_footer_url = projekt_phase_footer_tab_page_path(@projekt_phase.projekt.page, @projekt_phase.id) %>
           <%= render(
                 Shared::ResourcesListComponent.new(
