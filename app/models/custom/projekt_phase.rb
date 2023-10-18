@@ -167,10 +167,6 @@ class ProjektPhase < ApplicationRecord
     individual_group_values.map(&:name).flatten.join(", ")
   end
 
-  def hide_projekt_selector?
-    false
-  end
-
   def resource_count
     nil
   end

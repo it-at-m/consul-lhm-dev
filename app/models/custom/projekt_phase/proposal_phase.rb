@@ -22,13 +22,6 @@ class ProjektPhase::ProposalPhase < ProjektPhase
     4
   end
 
-  def hide_projekt_selector?
-    projekt_settings
-      .find_by(key: "projekt_feature.proposals.hide_projekt_selector")
-      .value
-      .present?
-  end
-
   def resource_count
     proposals.for_public_render.count
   end
