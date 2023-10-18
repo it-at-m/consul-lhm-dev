@@ -68,6 +68,9 @@
             </div>
           <% end %>
         <% end %>
+      <% end %>
+
+      <%= form_for @account, as: :account, url: account_path do |f| %>
         <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.personal_settings"), icon_name: "cog") do |c| %>
           <div>
             <%= f.check_box :public_activity, {label: t('custom.account.settings.public_activity'), class: "checkbox-label--aligned"} %>
@@ -80,6 +83,9 @@
           </div>
           <%= f.submit t("custom.account.show.save_settings"), class: "button margin-top" %>
         <% end %>
+      <% end %>
+
+      <%= form_for @account, as: :account, url: account_path do |f| %>
         <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.notifications"), icon_name: "bell") do |c| %>
           <div>
             <%= f.check_box :email_on_comment, {label: t('custom.account.settings.email_on_comment'), class: "checkbox-label--aligned"} %>
@@ -96,12 +102,11 @@
           <div>
             <%= f.check_box :email_digest, {label: t('custom.account.settings.email_digest'), class: "checkbox-label--aligned"} %>
           </div>
-
-          <div>
-            <%= f.check_box :email_on_direct_message, {label: t('custom.account.settings.email_on_direct_message'), class: "checkbox-label--aligned"} %>
-          </div>
           <%= f.submit t("custom.account.show.save_settings"), class: "button margin-top" %>
         <% end %>
+      <% end %>
+
+      <%= form_for @account, as: :account, url: account_path do |f| %>
         <% if @account&.administrator? || @account&.moderator? || @account&.projekt_manager? %>
           <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.admin_notifications"), icon_name: "user-cog") do |c| %>
             <div>
@@ -137,7 +142,9 @@
             <%= f.submit t("custom.account.show.save_settings"), class: "button margin-top" %>
           <% end %>
         <% end %>
+      <% end %>
 
+      <%= form_for @account, as: :account, url: account_path do |f| %>
         <% if @account_individial_groups_soft.any? %>
           <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.soft_user_groups_title"), icon_name: "user-friends") do |c| %>
             <% @account_individial_groups_soft.map do |individual_group| %>
@@ -151,7 +158,9 @@
             <% end %>
           <% end %>
         <% end %>
+      <% end %>
 
+      <%= form_for @account, as: :account, url: account_path do |f| %>
         <% if @account_individial_groups_hard.any? %>
           <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.hard_user_groups_title"), icon_name: "users") do |c| %>
             <% @account_individial_groups_hard.map do |individual_group| %>
@@ -169,12 +178,12 @@
           <% end %>
         <% end %>
       <% end %>
-      </aside>
-      <div class="show-on-small-tablet">
-        <%= notifications_content %>
-      </div>
-      <div class="show-on-small-tablet">
-        <%= public_activity_component_content %>
-      </div>
+    </aside>
+    <div class="show-on-small-tablet">
+      <%= notifications_content %>
+    </div>
+    <div class="show-on-small-tablet">
+      <%= public_activity_component_content %>
+    </div>
   </div>
 </main>
