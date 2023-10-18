@@ -111,7 +111,7 @@
 
       @media(max-width: $small-tablet-viewport-start) {
         font-size: 16px;
-        max-width: 115px;
+        // max-width: 115px;
         width: 100%;
       }
     }
@@ -172,6 +172,8 @@
 
     @media(max-width: $small-tablet-viewport-start) {
       width: 100%;
+      max-width: 500px;
+      margin: auto;
     }
   }
 
@@ -187,7 +189,7 @@
     padding-right: 35px;
     padding-bottom: 35px;
 
-    @media(max-width: $small-tablet-viewport-start) {
+    @media(max-width: $mobile-viewport-start) {
       padding-top: 20px;
       padding-left: 15px;
       padding-right: 15px;
