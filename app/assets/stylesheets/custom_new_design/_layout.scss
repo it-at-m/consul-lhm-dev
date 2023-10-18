@@ -37,5 +37,20 @@
       flex-direction: column-reverse;
     }
   }
-}
 
+  .user-page {
+    .notifications-list:before {
+      left: 9px;
+    }
+
+    .notification::before {
+      content: "\43";
+      background: none;
+      color: #dee0e3;
+    }
+
+    .notification:hover::before {
+      color: $brand;
+    }
+  }
+}
