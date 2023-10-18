@@ -68,8 +68,8 @@
         <% end %>
       <% end %>
 
-      <%= form_for @account, as: :account, url: account_path do |f| %>
-        <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.personal_settings"), icon_name: "cog") do |c| %>
+      <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.personal_settings"), icon_name: "cog") do |c| %>
+        <%= form_for @account, as: :account, url: account_path do |f| %>
           <div>
             <%= f.check_box :public_activity, {label: t('custom.account.settings.public_activity'), class: "checkbox-label--aligned"} %>
           </div>
@@ -83,8 +83,8 @@
         <% end %>
       <% end %>
 
-      <%= form_for @account, as: :account, url: account_path do |f| %>
-        <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.notifications"), icon_name: "bell") do |c| %>
+      <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.notifications"), icon_name: "bell") do |c| %>
+        <%= form_for @account, as: :account, url: account_path do |f| %>
           <div>
             <%= f.check_box :email_on_comment, {label: t('custom.account.settings.email_on_comment'), class: "checkbox-label--aligned"} %>
           </div>
@@ -104,8 +104,8 @@
         <% end %>
       <% end %>
 
-      <%= form_for @account, as: :account, url: account_path do |f| %>
-        <% if @account&.administrator? || @account&.moderator? || @account&.projekt_manager? %>
+      <% if @account&.administrator? || @account&.moderator? || @account&.projekt_manager? %>
+        <%= form_for @account, as: :account, url: account_path do |f| %>
           <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.admin_notifications"), icon_name: "user-cog") do |c| %>
             <div>
               <%= f.check_box :adm_email_on_new_comment,
@@ -142,8 +142,8 @@
         <% end %>
       <% end %>
 
-      <%= form_for @account, as: :account, url: account_path do |f| %>
-        <% if @account_individial_groups_soft.any? %>
+      <% if @account_individial_groups_soft.any? %>
+        <%= form_for @account, as: :account, url: account_path do |f| %>
           <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.soft_user_groups_title"), icon_name: "user-friends") do |c| %>
             <% @account_individial_groups_soft.map do |individual_group| %>
               <div class="options-group">
@@ -158,8 +158,8 @@
         <% end %>
       <% end %>
 
-      <%= form_for @account, as: :account, url: account_path do |f| %>
-        <% if @account_individial_groups_hard.any? %>
+      <% if @account_individial_groups_hard.any? %>
+        <%= form_for @account, as: :account, url: account_path do |f| %>
           <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.hard_user_groups_title"), icon_name: "users") do |c| %>
             <% @account_individial_groups_hard.map do |individual_group| %>
               <% next unless (individual_group.individual_group_values & @account.individual_group_values).any? %>
