@@ -32,7 +32,7 @@
               id="persisted-resource-data"
               data-resource-class="<%= resource.class.name.to_s %>"
               data-resource-id="<%= resource.id %>"
-              data-resource-map="<%= resource.map_location.present? %>">
+              data-resource-map="<%= resource.is_a?(Proposal) && resource.map_location.present? %>">
           </span>
         <% end %>
       </div>

@@ -17,7 +17,7 @@ class UserResources::FormComponent < ApplicationComponent
 
   def projekt_phase
     @projekt_phase ||=
-      if params[:projekt_phase_id]
+      if params[:projekt_phase_id] && @resource.new_record?
         Projekt.find(params[:projekt_id]).projekt_phases.find(params[:projekt_phase_id])
       else
         @resource.projekt_phase
