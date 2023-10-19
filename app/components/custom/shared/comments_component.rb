@@ -48,7 +48,7 @@ class Shared::CommentsComponent < ApplicationComponent
 
     def pagination_links
       if params[:projekt_phase_id].present?
-        paginate comment_tree.root_comments, params: { action: projekt_phase_footer_tab }, remote: true
+        paginate comment_tree.root_comments, params: { action: "projekt_phase_footer_tab" }, remote: true
       else
         paginate comment_tree.root_comments, params: { anchor: "comments" }
       end
