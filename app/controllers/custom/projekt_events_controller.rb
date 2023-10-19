@@ -8,7 +8,7 @@ class ProjektEventsController < ApplicationController
 
   def index
     @valid_filters = %w[all incoming past]
-    @current_filter = @valid_filters.include?(params[:filter]) ? params[:filter] : "incoming"
+    @current_filter = @valid_filters.include?(params[:filter]) ? params[:filter] : "all"
 
     @projekt_events =
       ProjektEvent

@@ -177,6 +177,7 @@
 
     toggleDocumentAttachment: function($projektPhase) {
       var showDocuments = !!$projektPhase.data("allowAttachedDocument");
+      console.log("allowAttachedDocument", showDocuments)
 
       $("#attach-documents").toggle(showDocuments);
       $(".js-sidebar-documment-attacher-section").toggle(showDocuments);

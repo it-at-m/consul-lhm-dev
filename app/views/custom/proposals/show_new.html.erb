@@ -179,20 +179,22 @@
 
         <% if @proposal.editable_by?(current_user) %>
           <%= render(Shared::SidebarCardComponent.new(title: t("proposals.show.author"), icon_name: "user-edit")) do |c| %>
-            <% if can?(:dashboard, @proposal) %>
-              <%= link_to proposal_dashboard_path(@proposal),
-                class: "button hollow expanded",
-                id: "proposal-dashboard-#{@proposal.id}" do %>
-                <span class="icon icon-edit"></span>
-                <%= t("proposals.show.dashboard_proposal_link") %>
-              <% end %>
-            <% end %>
+            <%# <% if can?(:dashboard, @proposal) %>
+            <%#   <%= link_to proposal_dashboard_path(@proposal),
+            <%#     class: "button hollow expanded",
+            <%#     id: "proposal-dashboard-#{@proposal.id}" do %>
+            <%#     <span class="icon icon-edit"></span>
+            <%#     <%= t("proposals.show.dashboard_proposal_link") %>
+            <%#   <% end %>
+            <%# <% end %>
 
             <% if current_editable?(@proposal) %>
-              <%= link_to t("dashboard.index.edit_proposal_link"),
-                edit_proposal_path(@proposal),
+              <%= link_to edit_proposal_path(@proposal),
                 target: "_blank",
-                class: "button hollow expanded" %>
+                class: "button hollow expanded left-aligned" do %>
+                <i class="fas fa-edit"></i>
+                <%= t("dashboard.index.edit_proposal_link") %>
+              <% end %>
             <% end %>
 
             <% unless @proposal.retired? %>

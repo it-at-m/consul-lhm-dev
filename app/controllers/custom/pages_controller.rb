@@ -251,7 +251,7 @@ class PagesController < ApplicationController
 
   def set_event_phase_footer_tab_variables
     @valid_filters = %w[all incoming past]
-    @current_filter = @valid_filters.include?(params[:filter]) ? params[:filter] : @valid_filters.first
+    @current_filter = @valid_filters.include?(params[:filter]) ? params[:filter] : "all"
     @projekt_events = @projekt_phase.projekt_events.page(params[:page]).send("sort_by_#{@current_filter}")
   end
 

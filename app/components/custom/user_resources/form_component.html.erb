@@ -9,7 +9,7 @@
         </h1>
 
         <div class="user-resources-form--description">
-          <%= helpers.render_custom_block "user_resource_form_#{resource.class.name.downcase}", default_content: t('custom.user_resources.form.page_description') %>
+          <%= helpers.render_custom_block "user_resource_form_#{resource.class.name.downcase}", default_content: t("custom.user_resources.form.page_description") %>
         </div>
 
         <%= render "shared/errors", resource: resource %>
@@ -44,36 +44,34 @@
           <div class="js-suggest" data-locale="<%= translations_form.locale %>"></div>
 
           <div
-            class="user-resources-form--banner-editor js-user-resources-form--banner-editor <%= banner_class_name %>"
-            style="<%= helpers.sentiment_color_style(@resource.sentiment) %>">
-            <div class="user-resources-form--title-wrapper">
-              <%= translations_form.text_area :title,
-                maxlength: title_max_length,
-                data: suggest_data(resource),
-                label: false,
-                class: 'user-resources-form--banner-editor-title',
-                placeholder: t("custom.#{i18n_scope}.form.title_placeholder"),
-                autocomplete: "off"
-              %>
-          </div>
+              class="user-resources-form--banner-editor js-user-resources-form--banner-editor <%= banner_class_name %>"
+              style="<%= helpers.sentiment_color_style(@resource.sentiment) %>">
+              <div class="user-resources-form--title-wrapper">
+                <%= translations_form.text_area :title,
+                  maxlength: title_max_length,
+                  data: suggest_data(resource),
+                  label: false,
+                  class: "user-resources-form--banner-editor-title",
+                  placeholder: t("custom.#{i18n_scope}.form.title_placeholder"),
+                  autocomplete: "off" %>
+              </div>
 
-          <% if true #show_image? %>
-            <div class="banner-editor-image-attachment js-banner-editor-image-attachment">
-              <% if f.object.image.blank? %>
-                <% f.object.build_image %>
+              <% if true #show_image? %>
+                <div class="banner-editor-image-attachment js-banner-editor-image-attachment">
+                  <% if f.object.image.blank? %>
+                    <% f.object.build_image %>
+                  <% end %>
+                  <%= f.fields_for :image do |image_builder| %>
+                    <%= render UserResources::ImageUploadComponent.new(image_builder, imageable: f.object) %>
+                  <% end %>
+                </div>
               <% end %>
-              <%= f.fields_for :image do |image_builder| %>
-                <%= render UserResources::ImageUploadComponent.new(image_builder, imageable: f.object) %>
-              <% end %>
-            </div>
-          <% end %>
           </div>
           <%= translations_form.text_area :description,
             maxlength: max_description_lenght,
             label: false,
             data: { placeholder: t("custom.user_resources.form.description_placeholder_html") },
-            class: "html-area #{helpers.ck_editor_class(current_user)}"
-          %>
+            class: "html-area #{helpers.ck_editor_class(current_user)}" %>
         <% end %>
         <% if render_map? %>
           <div class="new-card" id='map-container'>
@@ -87,10 +85,36 @@
               projekt:  @selected_projekt,
               projekt_phase:  resource.projekt_phase,
               parent_class: "proposal",
-              i18n_namespace: "proposals"
-            %>
+              i18n_namespace: "proposals" %>
           </div>
         <% end %>
+        <div class="user-resources-form--submit-section">
+          <% if resource.new_record? %>
+            <h3 class="user-resources-form--submit-section--privacy-policy">
+              Datenschutzbestimmungen & Allgemeine Nutzerbedingungen
+            </h3>
+
+            <div>
+              <%= f.check_box :resource_terms,
+                title: t("custom.terms.resource_terms.title"),
+                label: t("custom.terms.resource_terms.label",
+                         privacy_link: link_to(
+                           t("custom.terms.privacy_link.text"), "/privacy",
+                           title: t("shared.target_blank"),
+                           target: "_blank"
+                         ),
+                         terms_link: link_to(
+                           t("custom.terms.terms_link.text"),
+                           "/conditions",
+                           title: t("shared.target_blank"),
+                           target: "_blank"
+                         )
+                        ) %>
+            </div>
+          <% end %>
+
+          <%= f.submit(class: "button", value: t("custom.user_resources.form.submit_button")) %>
+        </div>
       </div>
 
       <aside class="sidebar">
@@ -112,138 +136,91 @@
             <%= render partial: "shared/projekt_selector/sentiments", locals:	{ f: f, model: resource } %>
           <% end %>
 
-          <div class="sidebar-card d-none js-sidebar-documment-attacher-section">
-            <div class="sidebar-card--section">
-              <div class="sidebar-card--title">
-                <i class="fa fa-file"></i>
-                Dokumente hinzufügen
-              </div>
-              <div class="documents d-none" id="attach-documents">
-                <%= render "documents/nested_documents", f: f %>
-              </div>
-            </div>
-          </div>
-
-          <% if translations_interface_enabled? %>
-            <div class="sidebar-card">
-              <div class="sidebar-card--section">
-                <div class="sidebar-card--title">
-                  <i class="fa fa-language"></i>
-                  Sprachen
-                </div>
-                <p>
-                Wählen Sie aus, in welcher Sprache/welchen Sprachen Ihre Diskussion stattfinden soll:
-                </p>
-                <%= render "shared/globalize_locales", resource: resource %>
-              </div>
+          <%= render(Shared::SidebarCardComponent.new(
+            title: "Dokumente hinzufügen",
+            class_name: "d-none js-sidebar-documment-attacher-section",
+            icon_name: "file")) do %>
+            <div class="documents d-none" id="attach-documents">
+              <%= render "documents/nested_documents", f: f %>
             </div>
           <% end %>
 
-          <div class="sidebar-card d-none js-sidebar-external-video-section">
-            <div class="sidebar-card--section">
-              <div class="sidebar-card--title">
-                <i class="fa fa-video"></i>
-                Video hinzufügen
-              </div>
+          <% if translations_interface_enabled? %>
+            <%= render(Shared::SidebarCardComponent.new(
+              title: "Sprachen",
+              icon_name: "language")) do %>
               <p>
-              Gibt es Videos, die Ihre Argumentation und Sichtweise stützen?
-              Dann fügen Sie diese über einen Link hinzu.
+              Wählen Sie aus, in welcher Sprache/welchen Sprachen Ihre Diskussion stattfinden soll:
               </p>
-              <%= f.text_field :video_url, label: false, placeholder: 'YouTube oder Vimeo-Link eingeben', class: 'light-input' %>
-            </div>
-          </div>
+              <%= render "shared/globalize_locales", resource: resource %>
+            <% end %>
+          <% end %>
+
+          <%= render(Shared::SidebarCardComponent.new(
+            title: "Video hinzufügen",
+            class_name: "d-none js-sidebar-external-video-section",
+            icon_name: "video")) do %>
+            <p>
+            Gibt es Videos, die Ihre Argumentation und Sichtweise stützen?
+            Dann fügen Sie diese über einen Link hinzu.
+            </p>
+            <%= f.text_field :video_url, label: false, placeholder: "YouTube oder Vimeo-Link eingeben", class: "light-input" %>
+          <% end %>
 
           <%= f.invisible_captcha :subtitle %>
 
-          <%if @categories&.any? %>
-            <div class="sidebar-card js-sidebar-category-tags-selector-section">
-              <div class="sidebar-card--section">
-                <div class="sidebar-card--title">
-                  <i class="fa fa-tags"></i>
-                  Tags
-                </div>
-                <p>
-                Tags sind Markierungen, die uns dabei helfen, Diskussionen
-                bestimmten Themen zuzuordnen. So findet jeder schnell, was
-                ihn interessiert. Aktivieren Sie per Klick den oder die Tags,
-                die zu Ihrer Diskussion passen.
-                </p>
-                <div id="category_tags" class="tags">
-                  <% @categories.each do |tag| %>
-                    <a class="js-add-tag-link" data-category-id="<%= tag.id %>"><%= tag.name %></a>
-                  <% end %>
-                </div>
-                <br>
-
-                <%=f.hidden_field :tag_list_predefined, value: @resource.tags.reject{|t| !['category'].include?(t.kind)}.map(&:name).join(","), class: "js-tag-list list-tags predefined"%>
+          <% if @categories&.any? %>
+            <%= render(Shared::SidebarCardComponent.new(
+              title: "Tags",
+              class_name: "js-sidebar-category-tags-selector-section",
+              icon_name: "tags")) do %>
+              <p>
+              Tags sind Markierungen, die uns dabei helfen, Diskussionen
+              bestimmten Themen zuzuordnen. So findet jeder schnell, was
+              ihn interessiert. Aktivieren Sie per Klick den oder die Tags,
+              die zu Ihrer Diskussion passen.
+              </p>
+              <div id="category_tags" class="tags">
+                <% @categories.each do |tag| %>
+                  <a class="js-add-tag-link" data-category-id="<%= tag.id %>"><%= tag.name %></a>
+                <% end %>
               </div>
-            </div>
-          <%end%>
+              <br>
+
+              <%= f.hidden_field :tag_list_predefined, value: @resource.tags.reject{ |t| !['category'].include?(t.kind)}.map(&:name).join(","), class: "js-tag-list list-tags predefined" %>
+            <% end %>
+          <% end %>
 
           <% if extended_feature?("modulewide.enable_categories") && @categories&.any? && SDG::ProcessEnabled.new(f.object).enabled? %>
-            <div class="sidebar-card js-sidebar-sdgs-selector-section">
-              <div class="sidebar-card--section">
-                <div class="sidebar-card--title">
-                  <i class="fa fa-video"></i>
-                  UN-Nachhaltigkeitsziele
-                </div>
-                <p>
-                Die Vereinten Nationen haben 17 Nachhaltigkeitsziele
-                formuliert. Lässt sich Ihre Diskussion einem dieser Ziele
-                zuordnen? Dann aktivieren Sie das entsprechende Feld per Klick.
-                </p>
-                <div id="sdgs-selector" class='row margin-top'>
-                  <br>
-                  <%= render SDG::RelatedListSelectorComponent.new(f) %>
-                </div>
+            <%= render(Shared::SidebarCardComponent.new(
+              title: "UN-Nachhaltigkeitsziele",
+              class_name: "js-sidebar-sdgs-selector-section",
+              icon_name: "tags")) do %>
+              <p>
+              Die Vereinten Nationen haben 17 Nachhaltigkeitsziele
+              formuliert. Lässt sich Ihre Diskussion einem dieser Ziele
+              zuordnen? Dann aktivieren Sie das entsprechende Feld per Klick.
+              </p>
+              <div id="sdgs-selector" class='row margin-top'>
+                <br>
+                <%= render SDG::RelatedListSelectorComponent.new(f) %>
               </div>
-            </div>
+            <% end %>
           <% end %>
 
           <% if current_user.administrator? || current_user.moderator? %>
-            <div class="sidebar-card js-sidebar-behalf-of">
-              <div class="sidebar-card--section">
-                <div class="sidebar-card--title">
-                  <i class="fa fa-user"></i>
-                  Veröffentlichen für
-                </div>
-                <p>
-                Dieses Feld sehen nur Admin. Sie können hier eine Diskussion im Namen von jemandem erstellen.
-                </p>
-                <%= f.text_field :on_behalf_of, label: false, placeholder: "Namen eingeben...", class: "light-input" %>
-              </div>
-            </div>
+            <%= render(Shared::SidebarCardComponent.new(
+              title: "Veröffentlichen für",
+              class_name: "js-sidebar-behalf-of",
+              icon_name: "user")) do %>
+              <p>
+              Dieses Feld sehen nur Admin. Sie können hier eine Diskussion im Namen von jemandem erstellen.
+              </p>
+              <%= f.text_field :on_behalf_of, label: false, placeholder: "Namen eingeben...", class: "light-input" %>
+            <% end %>
           <% end %>
       </aside>
     </div>
 
-
-  <div class="user-resources-form--submit-section">
-    <% if resource.new_record? %>
-      <h3 class="user-resources-form--submit-section--privacy-policy">
-        Datenschutzbestimmungen & Allgemeine Nutzerbedingungen
-      </h3>
-
-      <div>
-        <%= f.check_box :resource_terms,
-          title: t("custom.terms.resource_terms.title"),
-          label: t("custom.terms.resource_terms.label",
-                   privacy_link: link_to(
-                     t("custom.terms.privacy_link.text"), "/privacy",
-                     title: t("shared.target_blank"),
-                     target: "_blank"
-                   ),
-                   terms_link: link_to(
-                     t("custom.terms.terms_link.text"),
-                     "/conditions",
-                     title: t("shared.target_blank"),
-                     target: "_blank"
-                   )
-                  ) %>
-    </div>
-  <% end %>
-
-  <%= f.submit(class: "button", value: t("custom.user_resources.form.submit_button")) %>
-  </div>
   <% end %>
 </main>
