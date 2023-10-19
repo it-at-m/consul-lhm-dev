@@ -5,18 +5,18 @@ de:
       share: Teilen
     account:
       settings:
-        email_digest: Zusammenfassung von Vorschlägen
-        email_on_comment: Kommentare...
+        email_digest: E-Mail-Erinnerung bei ungelesenen Benachrichtigungen
+        email_on_comment: Kommentare zu meinen Aktivitäten
         email_on_comment_reply: Antworten auf meine Kommentare
-        email_on_direct_message: Private Nachrichten per Mail zulassen
-        newsletter: Newsletter
-        public_activity: Übersicht meiner Aktivität veröffentlichen
-        public_interests: Vorschläge, denen ich folge, veröffentlichen
-        adm_email_on_new_comment: E-Mail-Benachrichtigung erhalten nach jedem neuen Kommentar
-        adm_email_on_new_proposal: E-Mail-Benachrichtigung erhalten nach jedem neuen Vorschlag
-        adm_email_on_new_debate: E-Mail-Benachrichtigung erhalten nach jedem neuen Diskussionsbeitrag
-        adm_email_on_new_deficiency_report: E-Mail-Benachrichtigung erhalten nach jeder neuen Mangelmeldung
-        adm_email_on_new_manual_verification: E-Mail-Benachrichtigung erhalten nach jeder neuen Nutzerverifizierung
+        email_on_direct_message: Private Nachrichten anderer Nutzer*innen
+        newsletter: Newsletter und System-E-Mails
+        public_activity: Meine Aktivität veröffentlichen
+        public_interests: Gefolgte Beiträge veröffentlichen
+        adm_email_on_new_comment: Neue Kommentare
+        adm_email_on_new_proposal: Neue Vorschläge
+        adm_email_on_new_debate: Neue Diskussionsbeiträge
+        adm_email_on_new_deficiency_report: Neue Mangelmeldungen
+        adm_email_on_new_manual_verification: Neue Nutzerverifizierungen
       show:
         user_permission_votes: An Abstimmungen teilnehmen
         admin_notifications: Admin Benachrichtigungen
