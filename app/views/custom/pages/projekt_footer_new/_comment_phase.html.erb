@@ -1,1 +1,3 @@
-../projekt_footer/_comment_phase.html.erb
+<%= render "shared/loader_spinner" %>
+
+<%= render Shared::NewCommentsComponent.new(@commentable, @comment_tree, show_title: false) %>

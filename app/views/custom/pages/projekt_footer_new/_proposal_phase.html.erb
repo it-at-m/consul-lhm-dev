@@ -25,20 +25,11 @@
   </div>
 
   <aside id="proposals-sidebar" class="sidebar">
-    <%= render Shared::SidebarCardComponent.new(title: t('custom.common.information'), icon_name: "info-circle") do |c| %>
-      <div class="margin-bottom-half">
-        <%= render_custom_block 'projekt_overview_page_sidebar', default_content: t("custom.proposals.index.sidebar_information_default_text")  %>
-      </div>
-      <div class="proposals--info-count margin-bottom-half">
-        <% if @all_resources.present? %>
-          <span>
-            <%= t('custom.proposals.index.count') %>
-          </span>
-          <span>
-            <%= @all_resources.count %>
-          </span>
-        <% end %>
-      </div>
+    <% content_block_sidebar_name = "projekt_phase_footer_sidebar_#{@projekt_phase.id}" %>
+    <% if render_custom_projekt_content_block?(content_block_sidebar_name, @projekt_phase.projekt) %>
+      <%= render Shared::SidebarCardComponent.new(title: "Beteiligunsinformation", icon_name: "info-circle") do |c| %>
+        <%= render_custom_block content_block_sidebar_name %>
+      <% end %>
     <% end %>
 
     <% if current_user.present? && extended_feature?('proposals.enable_my_posts_filter') %>
