@@ -394,7 +394,7 @@ de:
         other: Andere
       search_form:
         button: Suche
-        placeholder: Suche Vorschläge...
+        placeholder: Vorschläge durchsuchen...
         title: Suche
       search_results:
         one: " enthält den Begriff <strong>'%{search_term}'</strong>"
