@@ -46,7 +46,7 @@
         </div>
 
         <%= link_to t("custom.deficiency_reports.index.start_deficiency_report"), new_deficiency_report_path,
-          class: "button", style: "display:inline-flex;" %>
+          class: "button -orange", style: "display:inline-flex;" %>
       <% end %>
 
       <%= render Shared::SidebarCardComponent.new(title: t("custom.deficiency_reports.index.sidebar.categories.title"), icon_name: "th-large") do |c| %>

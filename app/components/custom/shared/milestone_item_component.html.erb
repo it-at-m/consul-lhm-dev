@@ -8,14 +8,12 @@
   <% end %>
 
   <div class="new-card -no-padding">
-    <% if milestone.status.present? %>
-      <div class="milestone-item--status">
-        <%= milestone.status.name %>
-      </div>
-    <% end %>
+    <div class="milestone-item--status margin-bottom">
+      <%= milestone.status&.name %>
+    </div>
 
     <div class="new-card-body">
-      <%= image_tag(milestone.image.variant(:large), { id: "image_#{milestone.id}", alt: milestone.image.title, class: "margin" }) if milestone.image.present? %>
+      <%= image_tag(milestone.image.variant(:large), { id: "image_#{milestone.id}", alt: milestone.image.title, class: "margin-bottom" }) if milestone.image.present? %>
 
       <p>
       <%= helpers.sanitize_and_auto_link milestone.description %>
