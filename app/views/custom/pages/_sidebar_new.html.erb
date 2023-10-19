@@ -7,23 +7,16 @@
     <% end %>
   <% end %>
 
-  <% content_block_sidebar_name = "projekt_page_sidebar_#{projekt.id}" %>
-
+  <% content_block_sidebar_name = "projekt_sidebar_#{projekt.id}" %>
   <% if render_custom_projekt_content_block?(content_block_sidebar_name, projekt) %>
     <%= render Shared::SidebarCardComponent.new(title: "Information", icon_name: "info-circle") do |c| %>
-      <%= render_custom_block "projekt_sidebar_#{projekt.id}" %>
+      <%= render_custom_block content_block_sidebar_name %>
     <% end %>
   <% end %>
 
   <div id="sidebar-cta">
     <%= render Pages::Projekts::SidebarCtaComponent.new(@default_projekt_phase) %>
   </div>
-
-  <% if @projekt_subscription.present? && projekt_feature?(@custom_page.projekt, "sidebar.show_notification_subscription_toggler") %>
-    <%= render Shared::SidebarCardComponent.new(title: t("custom.projekts.page.sidebar.phases_subscription.title"), icon_name: "bell") do |c| %>
-      <%= render partial: "pages/sidebar/projekt_phase_subscriptions", locals: { projekt_subscription: @projekt_subscription } %>
-    <% end %>
-  <% end %>
 
   <% if projekt.projekt_phases.active.any? %>
     <% if projekt_feature?(projekt, "sidebar.show_phases_in_projekt_page_sidebar") %>
@@ -54,6 +47,12 @@
   <% if projekt_feature?(projekt, "sidebar.show_navigator_in_projekts_page_sidebar") %>
     <%= render Shared::SidebarCardComponent.new(title: 'Aufbau', icon_name: "list-alt") do |c| %>
       <%= render partial: 'pages/sidebar/projekt_list', locals: { projekts: [projekt.top_parent], current_projekt: projekt } %>
+    <% end %>
+  <% end %>
+
+  <% if @projekt_subscription.present? && projekt_feature?(@custom_page.projekt, "sidebar.show_notification_subscription_toggler") %>
+    <%= render Shared::SidebarCardComponent.new(title: t("custom.projekts.page.sidebar.phases_subscription.title"), icon_name: "bell") do |c| %>
+      <%= render partial: "pages/sidebar/projekt_phase_subscriptions", locals: { projekt_subscription: @projekt_subscription } %>
     <% end %>
   <% end %>
 
