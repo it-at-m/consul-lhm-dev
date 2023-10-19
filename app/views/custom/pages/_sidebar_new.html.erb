@@ -15,7 +15,9 @@
     <% end %>
   <% end %>
 
-  <%= render Pages::Projekts::SidebarCtaComponent.new(@default_projekt_phase) %>
+  <div id="sidebar-cta">
+    <%= render Pages::Projekts::SidebarCtaComponent.new(@default_projekt_phase) %>
+  </div>
 
   <% if @projekt_subscription.present? && projekt_feature?(@custom_page.projekt, "sidebar.show_notification_subscription_toggler") %>
     <%= render Shared::SidebarCardComponent.new(title: t("custom.projekts.page.sidebar.phases_subscription.title"), icon_name: "bell") do |c| %>
