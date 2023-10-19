@@ -98,7 +98,7 @@ class ProjektPhase < ApplicationRecord
   end
 
   def self.any_selectable?(user)
-    true
+    any? { |phase| phase.selectable_by?(user) }
   end
 
   def selectable_by?(user)
