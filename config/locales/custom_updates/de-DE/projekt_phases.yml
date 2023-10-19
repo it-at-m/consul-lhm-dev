@@ -1,6 +1,10 @@
 de:
   custom:
     projekt_phases:
+      cta:
+        title: Beteiligung
+        voting_phase: An Abstimmung teilnehmen
+        question_phase: An Kurzumfrage teilnehmen
       permission_problem:
         new_button_component:
           shared:

@@ -15,14 +15,7 @@
     <% end %>
   <% end %>
 
-  <% if @default_projekt_phase.present? &&
-        ( @default_projekt_phase.is_a?(ProjektPhase::DebatePhase) ||
-          @default_projekt_phase.is_a?(ProjektPhase::ProposalPhase) ||
-          @default_projekt_phase.is_a?(ProjektPhase::BudgetPhase)) %>
-    <%= render Shared::SidebarCardComponent.new(title: "Information", icon_name: "info-circle") do |c| %>
-      <%= render Shared::NewButtonComponent.new(projekt_phase: @default_projekt_phase) %>
-    <% end %>
-  <% end %>
+  <%= render Pages::Projekts::SidebarCtaComponent.new(@default_projekt_phase) %>
 
   <% if @projekt_subscription.present? && projekt_feature?(@custom_page.projekt, "sidebar.show_notification_subscription_toggler") %>
     <%= render Shared::SidebarCardComponent.new(title: t("custom.projekts.page.sidebar.phases_subscription.title"), icon_name: "bell") do |c| %>
