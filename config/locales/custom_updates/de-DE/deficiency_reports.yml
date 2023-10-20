@@ -114,7 +114,8 @@ de:
           title: Video hinzufügen
         approve_official_answer: Antwort freigeben
         back_link: Zurück zu alle Meldungen
-        official_answer: Offizielle Antwort
+        official_answer:
+          title: Offizielle Antwort
         sidebar:
           category: Kategorien
           delete: Mangel löschen

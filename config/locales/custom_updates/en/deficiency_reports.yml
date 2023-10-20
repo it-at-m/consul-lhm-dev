@@ -108,7 +108,8 @@ en:
         video:
           title: Video
         approve_official_answer: Publish reply
-        official_answer: Official reply
+        official_answer:
+          title: Official reply
         sidebar:
           category: Categories
           delete: Delete report
