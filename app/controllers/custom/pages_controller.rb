@@ -57,6 +57,17 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       format.js { render "pages/projekt_footer/footer_tab" }
+      format.csv do
+        formated_time = Time.current.strftime("%d-%m-%Y-%H-%M-%S")
+
+        if @projekt_phase.name == "debate_phase"
+          send_data Debates::CsvExporter.new(@debates.limit(nil)).to_csv,
+            filename: "debates1-#{formated_time}.csv"
+        elsif @projekt_phase.name == "proposal_phase"
+          send_data Proposals::CsvExporter.new(@proposals.limit(nil)).to_csv,
+            filename: "proposals1-#{formated_time}.csv"
+        end
+      end
     end
   end
 

@@ -35,7 +35,7 @@
     <% end %>
 
     <%= render Sidebar::ExportListComponent.new(
-      path: admin_proposals_path(**request.query_parameters, format: :csv),
+      path: projekt_phase_footer_tab_page_path(@projekt_phase.projekt.page, @projekt_phase, **request.query_parameters, format: :csv)
     ) %>
   </div>
 </div>
