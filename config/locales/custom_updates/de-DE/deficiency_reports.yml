@@ -4,13 +4,11 @@ de:
       form:
         page_description: Vielen Dank, dass Sie einen Mangel melden! Sie helfen uns damit, diesen so schnell es geht abzustellen.
           Bitte beschreiben Sie möglichst genau, was Ihnen aufgefallen ist. Typische Mängel sind zum Beispiel Straßenschäden oder beschädigte Parkbänke. 
-        title_placeholder: Geben Sie Ihrem Beitrag einen plakativen Titel, zum Beispiel „Zebrastreifen vor der XY-Grundschule“ oder „Mehr Vielfalt auf den Wochenmärkten“.
-        description_placeholder_html: "Beschreiben Sie hier Ihren Beitrag. Folgendes Vorgehen hat sich bewährt:<br><br>
-          Beginnen Sie mit einer allgemeinen Beschreibung Ihrer Idee und stellen Sie im Anschluss dar, was sich mit der Umsetzung Ihres Vorschlags verbessern würde.<br><br>
-          Achten Sie beim Schreiben möglichst auf kurze Sätze.<br><br>
-          Nutzen Sie außerdem Absätze, um Ihren Text lesbarer zu machen. (Viele Nutzer lesen Ihren Text auf mobilen Geräten.)<br><br>
-          Beschränken Sie Ihren Inhalt – sofern möglich – auf maximal drei Absätze.<br><br>
-          Verwenden Sie überdies – wenn passend – Aufzählungen und Stichpunkte für eine bessere Übersichtlichkeit."
+        title_placeholder: Geben Sie dem Mangel, den Sie melden möchten, einen plakativen Titel, zum Beispiel „Kaputte Straßenlaterne mit der Nummer 12345“ oder „Glasscherben auf Fußweg“.
+        description_placeholder_html: "Beschreiben Sie hier den Mangel, den Sie melden möchten.<br><br>
+          Details helfen der Stadtverwaltung, den Mangel aufzufinden und schnell zu beseitigen.<br></br>
+          Wenn Sie zum Beispiel die Nummer der kaputten Straßenlaterne wissen, dann geben Sie diese gerne an.<br></br>
+          Bitte nennen Sie keine persönlichen Daten von Dritten wie zum Beispiel Adressen."
         map:
           hint: Setzen Sie einen Pin auf der Karte, um den Mangel genau zu verorten.
         category:
