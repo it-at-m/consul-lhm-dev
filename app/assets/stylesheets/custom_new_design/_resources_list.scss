@@ -161,9 +161,13 @@
   }
 
   .resources-list--inner {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    // display: grid;
+    // grid-template-columns: repeat(3, 1fr);
     grid-gap: 12px;
+    display: flex;
+    justify-items: center;
+    align-items: flex;
+    flex-wrap: wrap;
   }
 
   .resources-list--not-items-message {
