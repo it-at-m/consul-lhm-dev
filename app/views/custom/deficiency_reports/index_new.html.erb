@@ -79,6 +79,10 @@
           <%= render "shared/sidebar_filter/my_posts" %>
         <% end %>
       <% end %>
+
+      <%= render Sidebar::ExportListComponent.new(
+        path: deficiency_reports_path(**request.query_parameters, format: :csv),
+      ) %>
     </div>
   </div>
 </main>

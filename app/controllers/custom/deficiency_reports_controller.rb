@@ -44,10 +44,20 @@ class DeficiencyReportsController < ApplicationController
 
     set_deficiency_report_votes(@deficiency_reports)
 
-    if Setting.new_design_enabled?
-      render :index_new
-    else
-      render :index
+    respond_to do |format|
+      format.html do
+        if Setting.new_design_enabled?
+          render :index_new
+        else
+          render :index
+        end
+      end
+
+      format.csv do
+        formated_time = Time.current.strftime("%d-%m-%Y-%H-%M-%S")
+        send_data DeficiencyReport::CsvExporter.new(@deficiency_reports.limit(nil)).to_csv,
+          filename: "deficiency_reports-#{formated_time}.csv"
+      end
     end
   end
 

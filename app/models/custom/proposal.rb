@@ -48,6 +48,7 @@ class Proposal < ApplicationRecord
     includes(:tags)
       .published #discard_draft
       .not_archived # discard_archived
+      .not_retired
   }
 
   def self.proposals_orders(user = nil)

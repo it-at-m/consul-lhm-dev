@@ -80,7 +80,7 @@
       <% end %>
 
       <%= render Sidebar::ExportListComponent.new(
-        path: admin_proposals_path(**request.query_parameters, format: :csv),
+        path: debates_path(**request.query_parameters, format: :csv),
       ) %>
   </div>
   </div>

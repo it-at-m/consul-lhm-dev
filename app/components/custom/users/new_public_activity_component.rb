@@ -63,7 +63,11 @@ class Users::NewPublicActivityComponent < ApplicationComponent
     end
 
     def proposals
-      @proposals ||= Proposal.where(author_id: user.id)
+      if authorized_current_user?
+        @proposals ||= Proposal.where(author_id: user.id)
+      else
+        @proposals ||= Proposal.base_selection.where(author_id: user.id)
+      end
     end
 
     def debates
