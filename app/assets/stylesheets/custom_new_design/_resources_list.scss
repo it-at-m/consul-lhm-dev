@@ -160,6 +160,17 @@
     }
   }
 
+  .resources-list--inner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 12px;
+  }
+
+  .resources-list--not-items-message {
+    width: 100%;
+    margin-top: 20px;
+  }
+
   @media (max-width: $mobile-viewport-start) {
     .resources-list--title {
       font-size: 22px;

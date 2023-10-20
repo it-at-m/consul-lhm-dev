@@ -1,8 +1,3 @@
-$main-text-color: #67788A;
-$main-text-color-hover: #c7d5e2;
-$big-tablet-viewport-start: 1245px;
-$small-tablet-viewport-start: 970px;
-$mobile-viewport-start: 640px;
 
 html{
   -moz-text-size-adjust: none !important;
@@ -52,11 +47,14 @@ body.custom-new-design {
   h1 {
     font-size: 35px;
     font-weight: 500;
+    margin-top: 30px;
     margin-bottom: 30px;
     line-height: 1.2;
 
     @media(max-width: $mobile-viewport-start) {
       font-size: 25px;
+      margin-top: 20px;
+      margin-bottom: 20px;
     }
   }
 
@@ -236,6 +234,6 @@ body.custom-new-design {
 
 .padding-on-mobile {
   @media(max-width: $big-tablet-viewport-start) {
-    padding: 0 20px;
+    // padding: 0 20px;
   }
 }

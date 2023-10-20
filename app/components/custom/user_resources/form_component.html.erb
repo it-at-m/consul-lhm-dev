@@ -88,33 +88,36 @@
               i18n_namespace: "proposals" %>
           </div>
         <% end %>
-        <div class="user-resources-form--submit-section">
-          <% if resource.new_record? %>
-            <h3 class="user-resources-form--submit-section--privacy-policy">
-              Datenschutzbestimmungen & Allgemeine Nutzerbedingungen
-            </h3>
 
-            <div>
-              <%= f.check_box :resource_terms,
-                title: t("custom.terms.resource_terms.title"),
-                label: t("custom.terms.resource_terms.label",
-                         privacy_link: link_to(
-                           t("custom.terms.privacy_link.text"), "/privacy",
-                           title: t("shared.target_blank"),
-                           target: "_blank"
-                         ),
-                         terms_link: link_to(
-                           t("custom.terms.terms_link.text"),
-                           "/conditions",
-                           title: t("shared.target_blank"),
-                           target: "_blank"
-                         )
-                        ) %>
-            </div>
-          <% end %>
+        <%= render(Mobile::FixedBottomActionComponent.new) do %>
+          <div class="user-resources-form--submit-section">
+            <% if resource.new_record? %>
+              <h3 class="user-resources-form--submit-section--privacy-policy">
+                Datenschutzbestimmungen & Allgemeine Nutzerbedingungen
+              </h3>
 
-          <%= f.submit(class: "button", value: t("custom.user_resources.form.submit_button")) %>
-        </div>
+              <div>
+                <%= f.check_box :resource_terms,
+                  title: t("custom.terms.resource_terms.title"),
+                  label: t("custom.terms.resource_terms.label",
+                           privacy_link: link_to(
+                             t("custom.terms.privacy_link.text"), "/privacy",
+                             title: t("shared.target_blank"),
+                             target: "_blank"
+                           ),
+                           terms_link: link_to(
+                             t("custom.terms.terms_link.text"),
+                             "/conditions",
+                             title: t("shared.target_blank"),
+                             target: "_blank"
+                           )
+                          ) %>
+              </div>
+
+              <%= f.submit(class: "button", value: t("custom.user_resources.form.submit_button")) %>
+            <% end %>
+          </div>
+        <% end %>
       </div>
 
       <aside class="sidebar">

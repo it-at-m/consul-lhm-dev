@@ -36,6 +36,8 @@
 
     @media(max-width: $small-tablet-viewport-start) {
       display: flex;
+      width: 100vw;
+      margin-left: (-$mobile-side-padding);
     }
   }
 

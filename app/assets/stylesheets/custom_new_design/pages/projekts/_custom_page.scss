@@ -70,7 +70,8 @@
   .custom-page--banner {
     display: flex;
     justify-content: space-between;
-    width: 1365px;
+    // width: 1365px;
+    width: calc(100% + 120px);
     height: 400px;
     border-radius: 10px;
     background: #E1EDF7 0% 0% no-repeat padding-box;
@@ -184,7 +185,8 @@
     .custom-page--banner {
       width: 100%;
       margin: auto;
-      max-width: 1245px;
+      // max-width: 1245px;
+      left: 0;
     }
   }
 
@@ -205,9 +207,12 @@
       right: initial;
       bottom: initial;
       height: auto;
+      border-radius: 0;
       margin-bottom: 160px;
       padding-left: 20px;
       padding-right: 20px;
+      width: 100vw;
+      margin-left: (-$mobile-side-padding);
     }
 
     .custom-page--banner-wrapper {

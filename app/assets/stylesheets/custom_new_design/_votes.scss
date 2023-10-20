@@ -9,7 +9,13 @@
     .percentage {
       text-align: center;
       color: inherit;
+      padding-right: 0;
     }
+  }
+
+  .supports {
+    max-width: 300px;
+    margin: auto;
   }
 
   .votes {

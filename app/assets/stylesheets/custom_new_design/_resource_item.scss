@@ -4,7 +4,7 @@
     flex-direction: column;
     // max-height: 480px;
     // width: 330px;
-    width: 300px;
+    max-width: 320px;
     border-radius: 12px;
     background: white;
     // margin-bottom: 25px;
@@ -146,21 +146,6 @@
       font-size: 15px;
     }
   }
-
-  .resources-list--inner {
-    display: flex;
-    // grid-gap: 15px;
-    grid-gap: 12px;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    align-items: flex-start;
-  }
-
-  .resources-list--not-items-message {
-    width: 100%;
-    margin-top: 20px;
-  }
-
   // .resource-item--tags-in-body {
   //   display: none;
   // }

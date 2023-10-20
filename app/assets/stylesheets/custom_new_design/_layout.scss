@@ -2,6 +2,10 @@
   main {
     margin: auto;
     padding-top: 30px;
+
+    @media screen and (max-width: $big-tablet-viewport-start) {
+      padding: 0 $mobile-side-padding;
+    }
   }
 
   .main-column {
@@ -17,10 +21,6 @@
   .flex-layout {
     display: flex;
     justify-content: space-between;
-
-    @media screen and (max-width: $big-tablet-viewport-start) {
-      padding: 0 20px;
-    }
 
     @media screen and (max-width: $small-tablet-viewport-start) {
       flex-direction: column;

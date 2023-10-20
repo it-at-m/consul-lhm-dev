@@ -3,10 +3,9 @@
     .resources-list.-wide {
       .resource-item--additional-body-section {
         padding-left: 0;
-        // border: none;
       }
       .resources-list--inner {
-        flex-direction: column;
+        grid-template-columns: repeat(1, 1fr);
       }
 
       .resource-item {

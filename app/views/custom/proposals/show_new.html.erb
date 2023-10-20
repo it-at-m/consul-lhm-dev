@@ -108,10 +108,12 @@
         <%= render Sidebar::ResourceAuthorComponent.new(user: @proposal.author) %>
 
         <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.allow_voting") %>
-          <%= render(Shared::SidebarCardComponent.new(title: "Unterstützer*innen", icon_name: "vote-yea", collapsed_on_mobile: false)) do |c| %>
-            <div class="proposal-page--votes">
-              <%= render "proposals/support_status", proposal: @proposal %>
-            </div>
+          <%= render(Mobile::FixedBottomActionComponent.new) do %>
+            <%= render(Shared::SidebarCardComponent.new(title: "Unterstützer*innen", icon_name: "vote-yea", collapsed_on_mobile: false)) do |c| %>
+              <div class="proposal-page--votes">
+                <%= render "proposals/support_status", proposal: @proposal %>
+              </div>
+            <% end %>
           <% end %>
         <% end %>
 

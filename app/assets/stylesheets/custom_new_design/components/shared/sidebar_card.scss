@@ -23,9 +23,6 @@
   @media(max-width: $small-tablet-viewport-start) {
     margin-bottom: 10px;
 
-    // .sidebar-card--content {
-    //   margin-top: 20px;
-    // }
     .sidebar-collapse-icon {
       display: block;
     }
@@ -42,10 +39,6 @@
       }
     }
   }
-
-  // &:last-child {
-  //   margin-bottom: 0;
-  // }
 
   p {
     font-size: 14px;

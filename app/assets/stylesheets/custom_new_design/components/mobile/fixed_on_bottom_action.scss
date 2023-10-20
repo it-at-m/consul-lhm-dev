@@ -1,0 +1,53 @@
+.mobile-fixed-on-bottom-action {
+  width: 100%;
+
+  @media(max-width: $small-tablet-viewport-start) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    width: 100%;
+    background: white;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    justify-content: center;
+
+    .user-resources-form--submit-section {
+      margin-top: 5px !important;
+      margin-bottom: 5px !important;
+    }
+    .user-resources-form--submit-section--privacy-policy {
+      font-size: 16px !important;
+      padding-bottom: 5px !important;
+    }
+
+   .sidebar-card {
+      margin: 0;
+      border-radius: 0;
+    }
+    .sidebar-card--title {
+      padding: 10px 20px;
+    }
+
+    .progress {
+      margin-bottom: 5px;
+    }
+
+    .in-favor-against, .votes {
+      .button {
+        height: 32px;
+      }
+    }
+    .sidebar-card--section {
+      padding: 5px 20px;
+    }
+    .in-favor-against .percentage {
+      line-height: 2;
+    }
+    .votes .total-votes {
+      margin-top: 0;
+    }
+  }
+}
