@@ -23,7 +23,7 @@
         </div>
         <% if current_user.notifications.unread.count > 0 %>
           <span class="user-notification--count" >
-            <%= current_user.notifications_count %>
+            <%= current_user.unread_notifications_count %>
           </span>
         <% end %>
       <% end %>

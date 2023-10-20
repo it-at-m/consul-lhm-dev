@@ -284,6 +284,10 @@ class User < ApplicationRecord
     (first_name || name)&.chars&.first&.upcase
   end
 
+  def unread_notifications_count
+    notifications.where(read_at: nil).count
+  end
+
   private
 
     def geozone_with_plz
