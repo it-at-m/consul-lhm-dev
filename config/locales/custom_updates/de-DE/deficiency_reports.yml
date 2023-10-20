@@ -108,6 +108,7 @@ de:
       notifications:
         official_answer_updated: Antwort wurde erfolgreich gespeichert
       show:
+        title: "%{author} hat diesen Mangel gemeldet"
         welcome_text_default: Dieser Mangel wurde uns bereits von einer Nutzerin oder eine, Nutzer gemeldet. Hier können Sie den aktuellen Status einsehen sowie den Verlauf der Mangelmeldung verfolgen.
           Außerdem können Sie mit einem eigenen Kommentar Ihre Meinung äußern. Und nachdem der Mangel geschlossen wurde, finden Sie hier das offizielle Statement der Stadt.
         video:
