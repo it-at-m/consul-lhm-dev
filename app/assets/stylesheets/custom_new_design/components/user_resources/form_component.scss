@@ -5,270 +5,279 @@ $user-resources-form-banner-height: 350px;
     font-size: 16px;
     line-height: 1;
   }
+}
 
-  .user-resources-form--description {
-    margin-bottom: 30px;
-  }
+.user-resources-form--description {
+  margin-bottom: 30px;
+}
 
-  .user-resources-form {
-    margin-bottom: 100px;
+.user-resources-form {
+  margin-bottom: 100px;
 
-    &.-no-image {
-      .user-resources-form--banner-editor {
-        height: 280px;
-      }
-
-      .user-resources-form--title-wrapper {
-        width: 100%;
-      }
-
-      .banner-editor-image-attachment {
-        display: none;
-      }
-    }
-  }
-
-  .user-resources-form--banner-editor {
-    width: 100%;
-    background-color: #D9F0EB;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    padding-left: 30px;
-    padding-right: 20px;
-    height: $user-resources-form-banner-height;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    border-radius: 10px;
-
-    @media(max-width: $small-tablet-viewport-start) {
-      flex-direction: column;
-      height: auto;
-    }
-
-    &.-proposal {
-      background-color: #FFE9CC;
-    }
-
-    &.-deficiency-report {
-      background-color: #fff;
-    }
-
-    &.-budget-investment {
-      background-color: #fff;
-    }
-
-    .translatable-fields {
-      width: 50%;
-    }
-
-    input[type=file] {
-      display: none;
-    }
-
-    .small-12.column.title {
-      display: none;
-    }
-
-    .attachment-errors.image-attachment label.button {
-      border: none;
-      color: $brand;
-      font-size: 33px;
-      opacity: 0.7;
-      font-weight: 400;
-
-      &:hover {
-        background: none;
-      }
-    }
-
-    .image-preview {
-      border-radius: 5px;
-    }
-
-    .small-9 {
-      width: 100%;
-    }
-
-    #projekt-selector-fields {
-      display: block;
-    }
-
-    #projekt-selector-fields .projekt-selector {
-      width: 248px;
-    }
-  }
-
-  .user-resources-form--title-wrapper {
-    width: 50%;
-    margin-top: 20px;
-
-    @media(max-width: $small-tablet-viewport-start) {
-      width: 100%;
-    }
-
-    .form-error {
-      margin-bottom: 0;
-    }
-  }
-
-  textarea.user-resources-form--banner-editor-title {
-    background: transparent !important;
-    height: 3rem;
-    border: none;
-    outline: none;
-    box-shadow: none;
-    font-size: 27px;
-    overflow: hidden;
-    height: 200px;
-    padding: 0;
-
-    &::placeholder  {
-      color: $brand;
-      opacity: 0.3;
-    }
-
-    &:focus {
-      outline: none;
-      border: none;
-      box-shadow: none;
-    }
-  }
-
-
-  .banner-editor-image-attachment {
-    width: 48%;
-
-    @media(max-width: $small-tablet-viewport-start) {
-      width: 100%;
+  &.-no-image {
+    .user-resources-form--banner-editor {
       height: 280px;
     }
+
+    .user-resources-form--title-wrapper {
+      width: 100%;
+    }
+
+    .banner-editor-image-attachment {
+      display: none;
+    }
+  }
+}
+
+.user-resources-form--banner-editor {
+  width: 100%;
+  background-color: #D9F0EB;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 30px;
+  padding-right: 20px;
+  height: $user-resources-form-banner-height;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px;
+
+  @media(max-width: $small-tablet-viewport-start) {
+    flex-direction: column;
+    padding-top: 20px;
+    height: auto;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
-  .banner-editor-image-attachment--placeholder {
-    text-align: left;
+  &.-proposal {
+    background-color: #FFE9CC;
+  }
+
+  &.-deficiency-report {
+    background-color: #fff;
+  }
+
+  &.-budget-investment {
+    background-color: #fff;
+  }
+
+  .translatable-fields {
+    width: 50%;
+  }
+
+  input[type=file] {
+    display: none;
+  }
+
+  .small-12.column.title {
+    display: none;
+  }
+
+  .attachment-errors.image-attachment label.button {
+    border: none;
+    color: $brand;
+    font-size: 33px;
+    opacity: 0.7;
+    font-weight: 400;
+
+    &:hover {
+      background: none;
+    }
+  }
+
+  .image-preview {
+    border-radius: 5px;
+  }
+
+  .small-9 {
+    width: 100%;
+  }
+
+  #projekt-selector-fields {
+    display: block;
+  }
+
+  #projekt-selector-fields .projekt-selector {
+    width: 248px;
+  }
+}
+
+.user-resources-form--title-wrapper {
+  width: 50%;
+  margin-top: 20px;
+
+  @media(max-width: $small-tablet-viewport-start) {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .form-error {
+    margin-bottom: 0;
+  }
+}
+
+textarea.user-resources-form--banner-editor-title {
+  background: transparent !important;
+  height: 3rem;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  font-size: 27px;
+  overflow: hidden;
+  height: 200px;
+  padding: 0;
+
+  @media(max-width: $small-tablet-viewport-start) {
+    font-size: 16px;
+    height: 80px;
+  }
+
+  &::placeholder  {
+    color: $brand;
+    opacity: 0.3;
+  }
+
+  &:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+
+.banner-editor-image-attachment {
+  width: 48%;
+
+  @media(max-width: $small-tablet-viewport-start) {
+    width: 100%;
+    height: 280px;
+  }
+}
+
+.banner-editor-image-attachment--placeholder {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  padding-top: 45px;
+}
+
+.user-resources-form--banner-editor {
+  .images {
+    position: relative;
+    background: #e2e2e2;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80%;
-    padding-top: 45px;
+    width: 48%;
   }
 
-  .user-resources-form--banner-editor {
-    .images {
-      position: relative;
-      background: #e2e2e2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 48%;
-    }
-
-    .help-text {
-      color: $brand;
-      opacity: 0.5;
-      line-height: 1.25;
-      margin-bottom: 65px;
-      font-style: normal;
-      width: 70%;
-      margin: auto;
-    }
-
-    .sdg-related-list-selector {
-      .help-section.callout.primary h3 {
-        font-size: 18px;
-      }
-    }
+  .help-text {
+    color: $brand;
+    opacity: 0.5;
+    line-height: 1.25;
+    margin-bottom: 65px;
+    font-style: normal;
+    width: 70%;
+    margin: auto;
   }
 
-  .user-resources-form--submit-section {
-    margin-top: 35px;
-
-    @media(max-width: $small-tablet-viewport-start) {
-      margin-bottom: 20px;
+  .sdg-related-list-selector {
+    .help-section.callout.primary h3 {
+      font-size: 18px;
     }
   }
+}
 
-  .user-resources-form--submit-section--privacy-policy {
-    font-size: 25px;
-    color: black;
-    border-bottom: 1px solid $border;
-    padding-bottom: 10px;
+.user-resources-form--submit-section {
+  margin-top: 35px;
+
+  @media(max-width: $small-tablet-viewport-start) {
+    margin-bottom: 20px;
   }
+}
 
-  .sidebar-card {
+.user-resources-form--submit-section--privacy-policy {
+  font-size: 25px;
+  color: black;
+  border-bottom: 1px solid $border;
+  padding-bottom: 10px;
+}
 
-    .documents-list {
-      legend {
-        display: none;
-      }
-    }
+.sidebar-card {
 
-    .callout:last-child {
-      margin-bottom: 0;
-    }
-
-    p.help-text {
-      color: inherit;
-      font-size: inherit;
-      font-style: inherit;
-    }
-
-    .button.upload-document::before {
+  .documents-list {
+    legend {
       display: none;
     }
+  }
 
-    .column {
-      padding: 0;
-      float: none;
-    }
+  .callout:last-child {
+    margin-bottom: 0;
+  }
 
-    input[type=file] {
-      margin: 0 !important;
-    }
+  p.help-text {
+    color: inherit;
+    font-size: inherit;
+    font-style: inherit;
+  }
 
-    .action-remove {
-      margin-top: 15px;
-      margin-bottom: 15px;
-    }
+  .button.upload-document::before {
+    display: none;
+  }
 
-    .small-9 {
-      width: 100%;
-    }
+  .column {
+    padding: 0;
+    float: none;
+  }
 
-    .small-3 {
-      width: 100%;
-    }
+  input[type=file] {
+    margin: 0 !important;
+  }
 
-    input {
-      font-size: 15px;
-    }
+  .action-remove {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
 
-    .sdg-related-list-selector {
-      legend {
-        display: none;
-      }
-    }
+  .small-9 {
+    width: 100%;
+  }
 
-    #sdgs-selector {
-      margin-top: 0;
+  .small-3 {
+    width: 100%;
+  }
 
-      > br {
-        display: none;
-      }
-    }
+  input {
+    font-size: 15px;
+  }
 
-    #category_tags + br {
+  .sdg-related-list-selector {
+    legend {
       display: none;
     }
+  }
 
-    .button.upload-document {
-      margin-bottom: 0;
-    }
+  #sdgs-selector {
+    margin-top: 0;
 
-    //
-    // .attachment-actions {
-      //   display: flex;
-      // }
+    > br {
+      display: none;
     }
   }
+
+  #category_tags + br {
+    display: none;
+  }
+
+  .button.upload-document {
+    margin-bottom: 0;
+  }
+
+  //
+  // .attachment-actions {
+  //   display: flex;
+  // }
+}

@@ -28,6 +28,10 @@
   color: $brand;
   opacity: 0.5;
   line-height: 1.25;
+
+  @media(max-width: $mobile-viewport-start) {
+    font-size: 14px;
+  }
 }
 
 .user-resource-image-upload--plus {
