@@ -33,6 +33,9 @@ class User < ApplicationRecord
   belongs_to :city_street, optional: true              # TODO delete this line
   belongs_to :registered_address, optional: true
 
+  has_many :projekt_subscriptions, -> { where(active: true) }
+  has_many :projekt_phase_subscriptions
+
   scope :projekt_managers, -> { joins(:projekt_manager) }
 
   validate :email_should_not_be_used_by_hidden_user
