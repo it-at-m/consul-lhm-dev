@@ -45,9 +45,18 @@
           </span>
         </div>
 
-        <%= link_to t("custom.deficiency_reports.index.start_deficiency_report"), new_deficiency_report_path,
-          class: "button -orange", style: "display:inline-flex;" %>
+        <div class="hide-on-mobile">
+          <%= link_to t("custom.deficiency_reports.index.start_deficiency_report"), new_deficiency_report_path,
+            class: "button -orange", style: "display:inline-flex;" %>
+        </div>
       <% end %>
+
+      <div class="show-on-mobile">
+        <%= render(Mobile::FixedBottomActionComponent.new) do %>
+          <%= link_to t("custom.deficiency_reports.index.start_deficiency_report"), new_deficiency_report_path,
+            class: "button -orange", style: "display:inline-flex;" %>
+        <% end %>
+      </div>
 
       <%= render Shared::SidebarCardComponent.new(title: t("custom.deficiency_reports.index.sidebar.categories.title"), icon_name: "th-large") do |c| %>
         <%= render "deficiency_reports/sidebar/categories" %>

@@ -49,10 +49,16 @@
           </span>
         </div>
 
+        <div class="hide-on-mobile">
+          <%= render Shared::NewButtonComponent.new(resources_name: "debates", query_params: params) %>
+        </div>
+      <% end %>
+
+      <div class="show-on-mobile">
         <%= render(Mobile::FixedBottomActionComponent.new) do %>
           <%= render Shared::NewButtonComponent.new(resources_name: "debates", query_params: params) %>
         <% end %>
-      <% end %>
+      </div>
 
       <% if extended_feature?('debates.enable_projekt_filter') %>
         <%= render Sidebar::ProjektsFilterComponent.new(
