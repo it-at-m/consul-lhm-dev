@@ -4,7 +4,7 @@ de:
       form:
         page_description: Vielen Dank, dass Sie einen Mangel melden! Sie helfen uns damit, diesen so schnell es geht abzustellen.
           Bitte beschreiben Sie möglichst genau, was Ihnen aufgefallen ist. Typische Mängel sind zum Beispiel Straßenschäden oder beschädigte Parkbänke. 
-        title_placeholder: Geben Sie dem Mangel, den Sie melden möchten, einen plakativen Titel, zum Beispiel „Kaputte Straßenlaterne mit der Nummer 12345“ oder „Glasscherben auf Fußweg“.
+        title_placeholder: Geben Sie dem Mangel, den Sie melden möchten, einen plakativen Titel wie zum Beispiel “Kaputte Straßenlaterne mit der Nummer 12345”.
         description_placeholder_html: "Beschreiben Sie hier den Mangel, den Sie melden möchten.<br><br>
           Details helfen der Stadtverwaltung, den Mangel aufzufinden und schnell zu beseitigen.<br></br>
           Wenn Sie zum Beispiel die Nummer der kaputten Straßenlaterne wissen, dann geben Sie diese gerne an.<br></br>
