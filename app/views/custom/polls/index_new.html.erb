@@ -73,7 +73,6 @@
       restricted_geozones: @restricted_geozones,
       selected_geozone_restriction: @selected_geozone_restriction
     ) %>
-    <%= render Sidebar::CategoriesCardComponent.new(categories: @categories, taggable: "poll") %>
     <%= render Sidebar::SdgsCardComponent.new(sdgs: @sdgs, sdg_targets: @sdg_targets) %>
     </div>
   </div>
