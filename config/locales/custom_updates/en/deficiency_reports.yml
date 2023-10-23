@@ -41,7 +41,7 @@ en:
       index:
         title: Mängelmelder
         welcome_default_text_html: In every city there are deficiencies every now and then - it's good if they are reported by attentive citizens so that they can be rectified quickly.
-          On this page you can see which defects have already been reported. The map will help you locate the respective defect.<br><br>
+          On this page you can see which defects have already been reported. The map will help you locate the respective defect.
           Please contact us if you notice a deficiency - and contribute to a clean cityscape and a functioning city.
         count: Mangelmeldungen
         deficiency_report:
