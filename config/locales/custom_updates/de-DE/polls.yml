@@ -6,12 +6,9 @@ de:
         search_form:
           placeholder: "Suchen..."
         count: Abstimmungen
-        welcome_default_text_html: Ihre Stadt lädt Sie dazu ein, verbindlich
-          Ihre Meinung zu bestimmten Projekten zu äußern. Sie finden auf dieser
-          Seite alle Abstimmungen, die von der Stadtverwaltung initiiert wurden.
-          Lassen Sie sich die Abstimmungen in Gänze anzeigen oder nutzen Sie die Filterfunktion,
-          um sie zu sortieren – nach Aktualität oder nach dem Grad der Beteiligung.<br><br>
-          Überdies können Sie über die rechte Seitenleiste gezielt nach Projekten, Gebieten oder Schlagworten nach Abstimmungen suchen. Einzelne Abstimmungen können auf bestimmte Gebiete oder auf Altersgruppen eingeschränkt sein.
+        welcome_default_text_html: Sie finden auf dieser Seite alle Abstimmungen, die von der Stadtverwaltung initiiert wurden.
+          Die Abstimmungen lassen sich nach verschiedenen Kriterien sortieren und gezielt nach Projekten, Gebieten oder Schlagworten durchsuchen.
+          Manche Abstimmungen können auf bestimmte Gebiete oder Altersgruppen beschränkt sein.
         sidebar_information_default_text: Sie möchten über selbst abstimmen? Suchen Sie einfach nach der gewünschten Abstimmung und klicken auf "Teilnehmen"
         empty_list_text: Derzeit keine verknüpften Abstimmungen
       poll:
