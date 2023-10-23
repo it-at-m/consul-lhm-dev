@@ -96,6 +96,12 @@
       </div>
     <% end %>
 
+    <% if items_remark.present? %>
+      <div class="margin-bottom">
+        <%= items_remark %>
+      </div>
+    <% end %>
+
     <div class="resources-list--body js-resources-list--body">
       <%= body %>
     </div>

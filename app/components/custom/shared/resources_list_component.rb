@@ -3,6 +3,7 @@
 class Shared::ResourcesListComponent < ApplicationComponent
   renders_one :bottom_content
   renders_one :custom_body
+  renders_one :items_remark
 
   attr_reader :filters, :remote_url, :resource_type, :resources
 

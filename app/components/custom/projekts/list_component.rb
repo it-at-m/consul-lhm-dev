@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Projekts::ListComponent < ApplicationComponent
+  delegate :render_custom_block, to: :helpers
+
   def initialize(
     projekts:, show_more_link: false,
     **attributes
@@ -22,6 +24,10 @@ class Projekts::ListComponent < ApplicationComponent
       empty_list_text: t("custom.projekts.index.no_projekts_for_current_filter"),
       **@attributes
     ) do |c|
+      c.items_remark do
+        render_custom_block("projekts_index_filter_#{@attributes[:current_filter]}")
+      end
+
       if @show_more_link
         c.bottom_content do
           link_to("Alle Projekte anzeigen", projekts_path(order: 'index_order_all'), class: "resources-list--more-link")
