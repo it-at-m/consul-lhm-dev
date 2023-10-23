@@ -83,7 +83,7 @@
           <% end %>
         <% end %>
 
-        <% if projekt_feature?(@debate&.projekt, 'debates.allow_voting') %>
+        <% if projekt_phase_feature?(@debate.projekt_phase, 'resource.allow_voting') %>
           <%= render(Mobile::FixedBottomActionComponent.new) do %>
             <%= render(Shared::SidebarCardComponent.new(title: t("votes.supports"), icon_name: "vote-yea", collapsed_on_mobile: false)) do |c| %>
               <div id="<%= dom_id(@debate) %>_votes" class="debate-page--votes">
