@@ -31,7 +31,7 @@
     </div>
 
     <div id="proposals-sidebar" class="sidebar">
-      <%= render Shared::SidebarCardComponent.new(title: t('custom.common.information'), icon_name: "info-circle") do |c| %>
+      <%= render Shared::SidebarCardComponent.new(title: t('custom.common.information'), icon_name: "info-circle", opened_on_mobile: true) do |c| %>
         <div class="margin-bottom-half">
           <%= render_custom_block 'proposals_index_sidebar', default_content: t("custom.proposals.index.sidebar_information_default_text")  %>
         </div>
@@ -44,7 +44,9 @@
           </span>
         </div>
 
-        <%= render Shared::NewButtonComponent.new(resources_name: "proposals", query_params: params) %>
+        <%= render(Mobile::FixedBottomActionComponent.new) do %>
+          <%= render Shared::NewButtonComponent.new(resources_name: "proposals", query_params: params) %>
+        <% end %>
       <% end %>
 
       <% if extended_feature?('proposals.enable_projekt_filter') %>
