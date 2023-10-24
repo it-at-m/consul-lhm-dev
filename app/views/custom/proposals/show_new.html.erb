@@ -109,7 +109,7 @@
             <% end %>
 
             <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.show_comments") %>
-              <div class="proposal-resources-section">
+              <div id="proposal-comments" class="proposal-resources-section">
                 <%= render Shared::NewCommentsComponent.new(@proposal, @comment_tree) %>
               </div>
             <% end %>
