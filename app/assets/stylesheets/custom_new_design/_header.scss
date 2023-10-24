@@ -17,6 +17,10 @@ $header-mobile-height: 60px;
       height: $header-mobile-height;
     }
 
+    @media(max-width: $mobile-viewport-start) {
+      z-index: 1002;
+    }
+
     .main-menu {
       display: flex;
       width: 100%;
