@@ -5,8 +5,10 @@ class ProposalsController
   include ProjektControllerHelper
   include Takeable
   include ProjektLabelAttributes
+  include RandomSeed
 
   before_action :set_projekts_for_selector, only: [:new, :edit, :create, :update]
+  before_action :set_random_seed, only: :index
 
   def index_customization
     if params[:order].nil?
@@ -56,8 +58,7 @@ class ProposalsController
     end
 
     @proposals_coordinates = all_proposal_map_locations(@resources)
-    @proposals = @resources.page(params[:page]).send("sort_by_#{@current_order}")
-    # @selected_tags = all_selected_tags
+    @proposals = @resources.perform_sort_by(@current_order, session[:random_seed]).page(params[:page]).per(24)
 
     respond_to do |format|
       format.html do
@@ -133,7 +134,7 @@ class ProposalsController
         redirect_to page_path(
           @proposal.projekt_phase.projekt.page.slug,
           anchor: "filter-subnav",
-          selected_phase_id: @proposal.projekt_phase.id,
+          projekt_phase_id: @proposal.projekt_phase.id,
           order: params[:order]
         ), notice: t("proposals.notice.published")
       else
@@ -156,7 +157,7 @@ class ProposalsController
       redirect_to page_path(
         @proposal.projekt_phase.projekt.page.slug,
         anchor: "filter-subnav",
-        selected_phase_id: @proposal.projekt_phase.id,
+        projekt_phase_id: @proposal.projekt_phase.id,
         order: "created_at"), notice: t("proposals.notice.published")
     else
       redirect_to proposals_path(order: "created_at"), notice: t("proposals.notice.published")

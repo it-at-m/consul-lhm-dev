@@ -41,7 +41,7 @@ class Shared::FilterDropdownComponent < ApplicationComponent
   end
 
   def link_path(option)
-    if params[:projekt_phase_id].present?
+    if helpers.params[:projekt_phase_id].present?
       link_options = {}
       link_options[@url_param_name.to_sym] = option
       link_options[:remote] = true

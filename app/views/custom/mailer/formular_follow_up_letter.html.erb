@@ -12,7 +12,7 @@
           <td style="padding-bottom: 12px; text-align: center;">
             <%= link_to(
               t("mailers.formular_follow_up_letter.button_text"),
-              page_url(@projekt_phase.projekt.page.slug, selected_phase_id: @projekt_phase.id, token: @recipient.subscription_token, anchor: "filter-subnav"),
+              page_url(@projekt_phase.projekt.page.slug, projekt_phase_id: @projekt_phase.id, token: @recipient.subscription_token, anchor: "filter-subnav"),
               style: css_for_mailer_button
             ) %>
           </td>

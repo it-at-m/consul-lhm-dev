@@ -6,7 +6,7 @@ module Budgets
     def new
       if @budget.projekt_phase.permission_problem(current_user)
         redirect_to page_path(@budget.projekt.page.slug,
-                              selected_phase_id: @budget.projekt_phase.id,
+                              projekt_phase_id: @budget.projekt_phase.id,
                               anchor: "filter-subnav")
       end
     end

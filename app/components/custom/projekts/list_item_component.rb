@@ -20,7 +20,7 @@ class Projekts::ListItemComponent < ApplicationComponent
   end
 
   def projekt_phase_url_for(phase)
-    "#{projekt.page.url}?selected_phase_id=#{phase.id}#projekt-footer"
+    "#{projekt.page.url}?projekt_phase_id=#{phase.id}#projekt-footer"
   end
 
   def image_variant(variant)

@@ -66,7 +66,7 @@
         var sectionName  = $sectionElement.data("section-name")
         var annotationId = ($(this).data("annotation-id"));
 
-        window.location.href = window.location.origin + projektSlug + '?text_draft_version_id=' + textDraftVersionId +  '&selected_phase_id=' + selectedPhaseId + '&section=' + sectionName + '&annotation_id=' + annotationId  + '#footer-content'
+        window.location.href = window.location.origin + projektSlug + '?text_draft_version_id=' + textDraftVersionId +  '&projekt_phase_id=' + selectedPhaseId + '&section=' + sectionName + '&annotation_id=' + annotationId  + '#footer-content'
         return;
       }
       $("[data-annotation-id]").removeClass("current-annotation");
