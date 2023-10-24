@@ -6,6 +6,8 @@ class UsersController < ApplicationController
     raise CanCan::AccessDenied if params[:filter] == "follows" && !valid_interests_access?(@user)
   end
 
+  def refresh_activities; end
+
   private
 
     def valid_interests_access?(user)

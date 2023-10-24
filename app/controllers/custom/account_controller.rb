@@ -21,6 +21,8 @@ class AccountController < ApplicationController
     end
   end
 
+  def refresh_activities; end
+
   private
 
     def account_params
