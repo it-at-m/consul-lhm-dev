@@ -1,5 +1,5 @@
 <main class="user-resources-form js-user-resources-form <%= base_class_name %>">
-  <%= translatable_form_for(resource, html: { class: "debate-form" }) do |f| %>
+  <%= translatable_form_for(resource, html: { class: "js-rich-text-form user-resource-form" }) do |f| %>
     <%= back_link %>
 
     <div class="flex-layout">
@@ -14,12 +14,12 @@
 
         <%= render "shared/errors", resource: resource %>
 
-        <% if params[:projekt_id].present? %>
-          <%= hidden_field_tag :projekt_id, params[:projekt_id] %>
+        <% if selected_projekt_id.present? %>
+          <%= hidden_field_tag :projekt_id, selected_projekt_id %>
         <% end %>
 
-        <% if params[:projekt_phase_id].present? %>
-          <%= hidden_field_tag :projekt_phase_id, params[:projekt_phase_id] %>
+        <% if selected_projekt_phase_id.present? %>
+          <%= hidden_field_tag :projekt_phase_id, selected_projekt_phase_id %>
         <% end %>
 
         <% if params[:origin].present? %>

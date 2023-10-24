@@ -19,9 +19,22 @@ class UserResources::FormComponent < ApplicationComponent
     @projekt_phase ||=
       if params[:projekt_phase_id] && @resource.new_record?
         Projekt.find(params[:projekt_id]).projekt_phases.find(params[:projekt_phase_id])
-      else
+      elsif @resource.persisted?
         @resource.projekt_phase
       end
+  end
+
+  def selected_projekt_id
+    @selected_projekt_id ||=
+      if params[:projekt_id] && @resource.new_record?
+        params[:projekt_id]
+      elsif @resource.persisted?
+        @resource.projekt_phase&.projekt_id
+      end
+  end
+
+  def selected_projekt_phase_id
+    @selected_projekt_phase_id ||= projekt_phase&.id
   end
 
   def back_link
@@ -91,6 +104,10 @@ class UserResources::FormComponent < ApplicationComponent
   end
 
   def projekt_selector_class
-    (params[:origin] == 'projekt' && params[:projekt_id].present?) ? "hide" : ""
+    if (params[:origin] == "projekt" && params[:projekt_id].present?) || resource.persisted?
+      "hide"
+    else
+      ""
+    end
   end
 end

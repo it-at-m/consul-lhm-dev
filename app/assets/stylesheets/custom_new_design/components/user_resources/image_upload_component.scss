@@ -8,24 +8,31 @@
   background: #e2e2e2;
   transition: background 0.2s ease-in-out;
   border-radius: 10px;
+  padding-top: 40px;
+  padding-left: 40px;
+  padding-right: 40px;
 
   &:hover {
     background: #dcdcdc;
+  }
+
+  @media(max-width: $mobile-viewport-start) {
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
   }
 }
 
 
 .user-resource-image-upload--placeholder-inner {
-  padding-top: 40px;
-  width: 80%;
+  position: relative;
+  height: 100%;
   margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  @media(max-width: $mobile-viewport-start) {
-    padding-top: 10px;
-  }
 }
 
 .user-resource-image-upload--text {
@@ -35,7 +42,6 @@
 
   @media(max-width: $mobile-viewport-start) {
     font-size: 14px;
-    padding: 0 10px;
   }
 }
 
@@ -46,25 +52,30 @@
   line-height: 1;
   text-align: center;
   opacity: 0.5;
+
+  @media(max-width: $mobile-viewport-start) {
+    font-size: 100px;
+  }
 }
 
 .user-resource-image-upload--label {
-  position: absolute;
-  bottom: 30px;
+  margin-top: -30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  @media(max-width: $mobile-viewport-start) {
-    padding: 0 10px;
-  }
 }
 
 .user-resource-image-upload--label-title {
   font-size: 33px;
   color: $brand;
   opacity: 0.7;
+  margin-top: -15px;
+
+  @media(max-width: $mobile-viewport-start) {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
 }
 
 .user-resource-image-upload--hint {

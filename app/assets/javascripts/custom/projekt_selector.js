@@ -168,7 +168,6 @@
         $("#attach-image").show();
         $userResourcesForm.removeClass("-no-image");
       } else {
-        console.log("hide image, projekt_phase", $projektPhase)
         $("#attach-image #nested-image .direct-upload").remove();
         $("#new_image_link").removeClass("hide");
         $("#attach-image").hide();
@@ -271,9 +270,9 @@
     },
 
     changeResourceFormTitle: function($projektPhase) {
-      if (!this.initialized) {
-        return;
-      }
+      // if (!this.initialized) {
+      //   return;
+      // }
 
       var phaseFormTitle = $projektPhase.data("resourceFormTitle");
 
@@ -337,8 +336,8 @@
         selectedProjektId = url.searchParams.get("projekt_id");
         selectedProjektPhaseId = url.searchParams.get("projekt_phase_id");
       } else {
-        selectedProjektId = $("[id$=\"projekt_id\"]").val();
-        selectedProjektPhaseId = $("[id$=\"projekt_phase_id\"]").val();
+        selectedProjektId = $("[id$='projekt_id']").val();
+        selectedProjektPhaseId = $("[id$='projekt_phase_id']").val();
       }
 
       if ( selectedProjektId === "" || selectedProjektPhaseId === "" ) {
@@ -495,7 +494,7 @@
       this.storeDefaultFormTitle();
       this.initialized = true;
 
-      var form = document.getElementById("new_proposal");
+      var form = document.querySelector(".js-rich-text-form");
 
       // Add a submit event listener to the form
       form.addEventListener("submit", function(event) {
