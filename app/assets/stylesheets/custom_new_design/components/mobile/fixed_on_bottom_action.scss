@@ -46,7 +46,8 @@
 
     .in-favor-against, .votes {
       .button {
-        height: 32px;
+        padding-top: 7px !important;
+        padding-bottom: 7px !important;
       }
     }
     .sidebar-card--section {

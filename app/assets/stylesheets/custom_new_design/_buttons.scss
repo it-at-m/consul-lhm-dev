@@ -1,10 +1,10 @@
 .custom-new-design {
   // .button:not(div#page-content .button) {
   .button {
-    height: 37px;
     margin-top: 10px;
     margin-bottom: 10px;
-    padding: 0 20px 0;
+    // padding: 0 20px 0;
+    padding: 10px 20px !important;
     max-width: 300px;
     display: flex !important;
     justify-content: center;
