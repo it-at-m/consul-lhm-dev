@@ -1,6 +1,7 @@
 <main class="user-page">
   <div class="flex-layout">
     <div class="main-column">
+      <%= render "shared/loader_spinner" %>
       <%= render(Users::ProfileBannerComponent.new(user: @user)) %>
       <%= render Users::NewPublicActivityComponent.new(@user) %>
     </div>

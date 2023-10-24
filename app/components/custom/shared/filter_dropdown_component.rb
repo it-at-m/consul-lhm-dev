@@ -88,10 +88,18 @@ class Shared::FilterDropdownComponent < ApplicationComponent
   end
 
   def link_class
+    return unless remote?
+
     "js-remote-link-push-state" if @in_projekt_footer_tab
   end
 
   def onclick
-    "$('#footer-content').addClass('show-loader');" if @in_projekt_footer_tab
+    return unless remote?
+
+    if @in_projekt_footer_tab
+      "$('#footer-content').addClass('show-loader');"
+    else
+      "$('.main-column').addClass('show-loader');"
+    end
   end
 end

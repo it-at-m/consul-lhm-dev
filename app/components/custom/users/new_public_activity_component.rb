@@ -122,7 +122,8 @@ class Users::NewPublicActivityComponent < ApplicationComponent
         filters: valid_filters,
         filter_param: "filter",
         filter_title: "Filtern nach",
-        filter_i18n_namespace: "custom.user_page"
+        filter_i18n_namespace: "custom.user_page",
+        remote_url: remote_url
       }
 
       if current_filter == "comments"
@@ -132,5 +133,13 @@ class Users::NewPublicActivityComponent < ApplicationComponent
       end
 
       params
+    end
+
+    def remote_url
+      if controller_name == "account"
+        refresh_activities_account_path
+      elsif controller_name == "users"
+        refresh_activities_user_path(user)
+      end
     end
 end

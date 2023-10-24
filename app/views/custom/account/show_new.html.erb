@@ -19,6 +19,7 @@
 <main class="user-page">
   <div class="flex-layout padding-on-mobile">
     <div class="main-column">
+      <%= render "shared/loader_spinner" %>
       <%= render(Users::ProfileBannerComponent.new(user: current_user, edit_mode: true)) %>
       <div class="row margin-bottom">
         <div class="small-12 column">
