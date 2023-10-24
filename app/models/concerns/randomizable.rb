@@ -13,5 +13,13 @@ module Randomizable
         .select("#{table_name}.*", "ids.ordering") #custom line
         .order("ids.ordering")
     end
+
+    def perform_sort_by(order, seed)
+      if order == "random"
+        send("sort_by_#{order}", seed)
+      else
+        send("sort_by_#{order}")
+      end
+    end
   end
 end

@@ -6,8 +6,10 @@ class DebatesController < ApplicationController
   include DocumentAttributes
   include Takeable
   include ProjektLabelAttributes
+  include RandomSeed
 
   before_action :set_projekts_for_selector, only: [:new, :edit, :create, :update]
+  before_action :set_random_seed, only: :index
 
   def index_customization
     if params[:order].nil?
@@ -53,7 +55,7 @@ class DebatesController < ApplicationController
       take_by_projekts(@scoped_projekt_ids)
     end
 
-    @debates = @resources.page(params[:page]).send("sort_by_#{@current_order}")
+    @debates = @resources.perform_sort_by(@current_order, session[:random_seed]).page(params[:page]).per(24)
 
     respond_to do |format|
       format.html do

@@ -6,8 +6,11 @@ class PagesController < ApplicationController
   include CustomHelper
   include ProposalsHelper
   include Takeable
+  include RandomSeed
 
   has_orders %w[most_voted newest oldest], only: :show
+
+  before_action :set_random_seed
 
   def show
     @custom_page = SiteCustomization::Page.published.find_by(slug: params[:id])
@@ -110,7 +113,7 @@ class PagesController < ApplicationController
       take_by_sentiment
     end
 
-    @debates = @resources.page(params[:page]).send("sort_by_#{@current_order}")
+    @debates = @resources.perform_sort_by(@current_order, session[:random_seed]).page(params[:page]).per(24)
   end
 
   def set_proposal_phase_footer_tab_variables
@@ -136,7 +139,7 @@ class PagesController < ApplicationController
     end
 
     @proposals_coordinates = all_proposal_map_locations(@resources)
-    @proposals = @resources.page(params[:page]).send("sort_by_#{@current_order}")
+    @proposals = @resources.perform_sort_by(@current_order, session[:random_seed]).page(params[:page]).per(24)
   end
 
   def set_voting_phase_footer_tab_variables
@@ -235,7 +238,7 @@ class PagesController < ApplicationController
       end
     end
 
-    @investments = @investments.send("sort_by_#{@current_order}").page(params[:page]).per(20)
+    @investments = @investments.perform_sort_by(@current_order, session[:random_seed]).page(params[:page]).per(18)
   end
 
   def set_milestone_phase_footer_tab_variables

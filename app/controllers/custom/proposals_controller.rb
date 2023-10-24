@@ -5,8 +5,10 @@ class ProposalsController
   include ProjektControllerHelper
   include Takeable
   include ProjektLabelAttributes
+  include RandomSeed
 
   before_action :set_projekts_for_selector, only: [:new, :edit, :create, :update]
+  before_action :set_random_seed, only: :index
 
   def index_customization
     if params[:order].nil?
@@ -56,8 +58,7 @@ class ProposalsController
     end
 
     @proposals_coordinates = all_proposal_map_locations(@resources)
-    @proposals = @resources.page(params[:page]).send("sort_by_#{@current_order}")
-    # @selected_tags = all_selected_tags
+    @proposals = @resources.perform_sort_by(@current_order, session[:random_seed]).page(params[:page]).per(24)
 
     respond_to do |format|
       format.html do
