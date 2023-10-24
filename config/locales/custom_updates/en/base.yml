@@ -3,6 +3,10 @@ en:
     common:
       information: Information
       share: Share
+      fixed_tabs:
+        content: Content
+        comments: Comments
+        author: Author
     account:
       settings:
         email_digest: Receive a summary of proposal notifications

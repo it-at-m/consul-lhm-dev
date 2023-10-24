@@ -3,6 +3,10 @@ de:
     common:
       information: Information
       share: Teilen
+      fixed_tabs:
+        content: Inhalt
+        comments: Kommentare
+        author: Autor
     account:
       settings:
         email_digest: E-Mail-Erinnerung bei ungelesenen Benachrichtigungen
