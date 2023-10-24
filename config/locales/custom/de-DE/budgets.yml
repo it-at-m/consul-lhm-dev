@@ -104,7 +104,7 @@ de:
           voted_info:
             knapsack:
               one: "<strong>Sie haben für einen Vorschlag gestimmt mit einem Kostenaufwand von %{amount_spent}</strong>"
-              other: "<strong>Sie stimmten für %{count} Vorschläge gestimmt mit einem Kostenaufwand von %{amount_spent}</strong>"
+              other: "<strong>Sie haben für %{count} Vorschläge gestimmt mit einem Kostenaufwand von %{amount_spent}</strong>"
             approval:
               one: "<strong>Sie haben über einen Vorschlag abgestimmt</strong>"
               other: "<strong>Sie haben über %{count} Vorschläge abgestimmt.</strong>"
