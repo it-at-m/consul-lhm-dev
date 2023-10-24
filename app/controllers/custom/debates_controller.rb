@@ -82,12 +82,19 @@ class DebatesController < ApplicationController
   end
 
   def edit
-    @selected_projekt = @debate.projekt_phase.projekt
-    params[:projekt_phase_id] = @debate.projekt_phase.id
+    @selected_projekt = @debate&.projekt_phase&.projekt
+    params[:projekt_phase_id] = @debate&.projekt_phase&.id
   end
 
   def create
-    @debate = Debate.new(strong_params)
+    custom_debate_params =
+      if debate_params["image_attributes"]["cached_attachment"].blank?
+        debate_params.except("image_attributes")
+      else
+        debate_params
+      end
+
+    @debate = Debate.new(custom_debate_params)
     @debate.author = current_user
 
     if @debate.save
@@ -95,36 +102,37 @@ class DebatesController < ApplicationController
       NotificationServices::NewDebateNotifier.new(@debate.id).call
 
       if @debate.projekt_phase.active?
-        if @debate.projekt_phase.projekt.overview_page?
-          redirect_to projekts_path(
-            anchor: "filter-subnav",
-            selected_phase_id: @debate.projekt_phase.id,
-            order: params[:order]
-          ), notice: t("flash.actions.create.debate")
-        else
-          redirect_to page_path(
-            @debate.projekt_phase.projekt.page.slug,
-            anchor: "filter-subnav",
-            selected_phase_id: @debate.projekt_phase.id,
-            order: params[:order]
-          ), notice: t("flash.actions.create.debate")
-        end
+        redirect_to page_path(
+          @debate.projekt_phase.projekt.page.slug,
+          anchor: "filter-subnav",
+          selected_phase_id: @debate.projekt_phase.id,
+          order: params[:order]
+        ), notice: t("flash.actions.create.debate")
       else
-        if @debate.projekt_phase.projekt.overview_page?
-          redirect_to projekts_path(
-            anchor: "filter-subnav",
-            selected_phase_id: @debate.projekt_phase.id,
-            order: params[:order]
-          ), notice: t("flash.actions.create.debate")
-        else
-          redirect_to proposals_path(
-            resources_order: params[:order]
-          ), notice: t("flash.actions.create.debate")
-        end
+        redirect_to proposals_path(
+          resources_order: params[:order]
+        ), notice: t("flash.actions.create.debate")
       end
     else
-      @selected_projekt = @debate.projekt_phase.projekt
+      @selected_projekt = @debate&.projekt_phase&.projekt
       render :new
+    end
+  end
+
+  def update
+    custom_debate_params =
+      if debate_params["image_attributes"]["cached_attachment"].blank?
+        debate_params.except("image_attributes")
+      else
+        debate_params
+      end
+
+    if resource.update(custom_debate_params)
+      redirect_to resource, notice: t("flash.actions.update.#{resource_name.underscore}")
+    else
+      load_geozones
+      set_resource_instance
+      render :edit
     end
   end
 

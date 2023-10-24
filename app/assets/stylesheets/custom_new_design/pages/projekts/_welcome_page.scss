@@ -14,6 +14,10 @@
   }
 
   .welcome-page {
+    @media(max-width: $small-tablet-viewport-start) {
+      padding-top: 30px;
+    }
+
     .custom-content-block-body {
       margin-bottom: 40px;
       margin-top: 40px;

@@ -168,6 +168,7 @@
         $("#attach-image").show();
         $userResourcesForm.removeClass("-no-image");
       } else {
+        console.log("hide image, projekt_phase", $projektPhase)
         $("#attach-image #nested-image .direct-upload").remove();
         $("#new_image_link").removeClass("hide");
         $("#attach-image").hide();

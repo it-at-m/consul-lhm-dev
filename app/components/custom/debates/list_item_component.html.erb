@@ -17,9 +17,11 @@
     <% end %>
   <% end %>
 
-  <% c.footer_section do  %>
-    <div id="<%= dom_id(@debate) %>_votes">
-      <%= render Debates::NewVotesComponent.new(debate) %>
-    </div>
+  <% if helpers.projekt_phase_feature?(@debate.projekt_phase, 'resource.allow_voting') %>
+    <% c.footer_section do  %>
+      <div id="<%= dom_id(@debate) %>_votes">
+        <%= render Debates::NewVotesComponent.new(debate) %>
+      </div>
+    <% end %>
   <% end %>
 <% end %>

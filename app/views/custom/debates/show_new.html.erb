@@ -16,20 +16,22 @@
 
 <main>
   <div class="custom-fixed-tabs margin-bottom">
-    <div class="js-scroll-link custom-tab" data-anchor-id="proposal-content">
+    <div class="js-scroll-link custom-tab" data-anchor-id="debates-content">
       Inhalt
     </div>
-    <div class="js-scroll-link custom-tab" data-anchor-id="proposal-comments">
-      Kommentare
-    </div>
-    <div class="js-scroll-link custom-tab" data-anchor-id="proposal-author">
+    <% if projekt_phase_feature?(@debate.projekt_phase, 'resource.show_comments') %>
+      <div class="js-scroll-link custom-tab" data-anchor-id="debates-comments">
+        Kommentare
+      </div>
+    <% end %>
+    <div class="js-scroll-link custom-tab" data-anchor-id="debates-author">
       Author
     </div>
   </div>
   <div id="<%= dom_id(@debate) %>">
     <div class="flex-layout padding-on-mobile">
       <div class="main-column">
-        <div id="proposal-content"></div>
+        <div id="debates-content"></div>
         <h1 class="resource-page--title"><%= "#{@debate.author.name} startet eine Diskussion"  %></h1>
         <div class="resource-page--title-subline">
           <%= render_custom_block('debate_show_welcome_text', custom_prefix: @debate.author.name , default_content: t('custom.debates.show.welcome_default_text')) %>
@@ -57,13 +59,13 @@
           <%= render "relationable/related_content", relationable: @debate %>
         <% end %>
 
-        <% if projekt_feature?(@debate.projekt, 'debates.show_comments') %>
-          <div id="proposal-comments"></div>
+        <% if projekt_phase_feature?(@debate.projekt_phase, 'resource.show_comments') %>
+          <div id="debates-comments"></div>
           <%= render Shared::NewCommentsComponent.new(@debate, @comment_tree) %>
         <% end %>
       </div>
 
-      <aside id="proposal-author" class="sidebar">
+      <aside id="debates-author" class="sidebar">
         <%= render Sidebar::ResourceAuthorComponent.new(user: @debate.author) %>
 
         <% if current_user.present? && current_user.administrator? %>

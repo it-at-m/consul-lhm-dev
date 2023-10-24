@@ -1,6 +1,11 @@
 $header-mobile-height: 60px;
 
 .custom-new-design {
+  .top-bar-wrapper {
+    position: fixed;
+    width: 100%;
+  }
+
   header {
     padding: 0;
     z-index: 1000;

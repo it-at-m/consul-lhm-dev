@@ -130,20 +130,12 @@ class ProposalsController
       @proposal.publish
 
       if @proposal.projekt_phase.active?
-        if @proposal.projekt_phase.projekt.overview_page?
-          redirect_to projekts_path(
-            anchor: "filter-subnav",
-            selected_phase_id: @proposal.projekt_phase.id,
-            order: params[:order]
-          ), notice: t("proposals.notice.published")
-        else
-          redirect_to page_path(
-            @proposal.projekt_phase.projekt.page.slug,
-            anchor: "filter-subnav",
-            selected_phase_id: @proposal.projekt_phase.id,
-            order: params[:order]
-          ), notice: t("proposals.notice.published")
-        end
+        redirect_to page_path(
+          @proposal.projekt_phase.projekt.page.slug,
+          anchor: "filter-subnav",
+          selected_phase_id: @proposal.projekt_phase.id,
+          order: params[:order]
+        ), notice: t("proposals.notice.published")
       else
         redirect_to proposals_path(
           resources_order: params[:order]
