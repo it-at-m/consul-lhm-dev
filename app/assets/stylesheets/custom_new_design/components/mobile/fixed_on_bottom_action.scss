@@ -8,10 +8,13 @@
     right: 0;
     z-index: 1000;
     width: 100%;
-    background: white;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    .-with-background {
+      background: white;
+    }
 
     .user-resources-form--submit-section {
       margin-top: 5px !important;
