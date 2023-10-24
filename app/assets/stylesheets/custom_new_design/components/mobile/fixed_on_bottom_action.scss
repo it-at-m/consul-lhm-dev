@@ -9,12 +9,9 @@
     z-index: 1000;
     width: 100%;
     display: flex;
+    background: white;
     align-items: center;
     justify-content: center;
-
-    .-with-background {
-      background: white;
-    }
 
     .user-resources-form--submit-section {
       margin-top: 5px !important;
@@ -27,6 +24,12 @@
 
     .new-resource-cta {
       padding: 0 20px;
+    }
+
+    .button {
+      // margin: auto;
+      margin-left: auto;
+      margin-right: auto;
     }
 
    .sidebar-card {

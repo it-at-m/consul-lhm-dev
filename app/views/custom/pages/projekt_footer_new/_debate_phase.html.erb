@@ -3,11 +3,9 @@
 <div class="flex-layout flex-layout-reverse-on-mobile">
   <div class="main-column">
 
-    <%= render(Mobile::FixedBottomActionComponent.new) do %>
-      <div class="new-resource-cta">
-        <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
-      </div>
-    <% end %>
+    <div class="new-resource-cta">
+      <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
+    </div>
 
     <%= render(
       Shared::ResourcesListComponent.new(

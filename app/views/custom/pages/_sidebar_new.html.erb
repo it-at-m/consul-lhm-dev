@@ -14,11 +14,11 @@
     <% end %>
   <% end %>
 
-  <div class="hide-on-small-tablet width-100">
+  <%= render(Mobile::FixedBottomActionComponent.new) do %>
     <div id="sidebar-cta">
       <%= render Pages::Projekts::SidebarCtaComponent.new(@default_projekt_phase) %>
     </div>
-  </div>
+  <% end %>
 
   <div class="hide-on-small-tablet width-100">
     <% if projekt.projekt_phases.active.any? %>
