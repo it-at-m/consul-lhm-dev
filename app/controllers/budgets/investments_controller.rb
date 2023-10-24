@@ -44,7 +44,7 @@ module Budgets
       # custom redirect
       if @budget.projekt.present?
         redirect_to page_path(@budget.projekt.page.slug,
-                              selected_phase_id: @budget.projekt_phase,
+                              projekt_phase_id: @budget.projekt_phase,
                               anchor: "filter-subnav")
       else
         redirect_to root_path

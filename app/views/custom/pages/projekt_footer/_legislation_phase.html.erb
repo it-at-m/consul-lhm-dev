@@ -9,7 +9,7 @@
             <div class="select-box">
               <%= form_tag @projekt.page.url + "#footer-content", method: :get, id: "draft_version_go_to_version" do %>
                 <%= select_tag "text_draft_version_id", options_from_collection_for_select(@draft_versions_list, "id", "display_title", @draft_version.id), "aria-label": t("legislation.draft_versions.show.select_draft_version") %>
-                <%= hidden_field_tag :selected_phase_id, @legislation_phase %>
+                <%= hidden_field_tag :projekt_phase_id, @legislation_phase %>
                 <%= hidden_field_tag :section, 'all_drafts_annotations' %>
               <% end %>
               <% if @draft_version.changelog.present? %>
@@ -68,7 +68,7 @@
             <div class="select-box">
               <%= form_tag @projekt.page.url + '#footer-content', method: :get, id: "draft_version_go_to_version" do %>
                 <%= select_tag "text_draft_version_id", options_from_collection_for_select(@draft_versions_list, "id", "display_title", @draft_version.id), "aria-label": t("legislation.draft_versions.show.select_draft_version") %>
-                <%= hidden_field_tag :selected_phase_id, @legislation_phase.id %>
+                <%= hidden_field_tag :projekt_phase_id, @legislation_phase.id %>
               <% end %>
               <% if @draft_version.changelog.present? %>
                 <span>
@@ -150,7 +150,7 @@
           <div class="select-box">
             <%= form_tag @projekt.page.url + '#footer-content', method: :get, id: "draft_version_go_to_version" do %>
               <%= select_tag "text_draft_version_id", options_from_collection_for_select(@draft_versions_list, "id", "display_title", @draft_version.id), "aria-label": t("legislation.draft_versions.show.select_draft_version") %>
-              <%= hidden_field_tag :selected_phase_id, @legislation_phase.id %>
+              <%= hidden_field_tag :projekt_phase_id, @legislation_phase.id %>
               <%= hidden_field_tag :section, 'changelog' %>
               <%= submit_tag t("legislation.draft_versions.show.select_version_submit"), class: "button" %>
             <% end %>
@@ -182,7 +182,7 @@
         <div class="select-box">
           <%= form_tag @projekt.page.url + '#footer-content', method: :get, id: "draft_version_go_to_version" do %>
             <%= select_tag "draft_version_id", options_from_collection_for_select(@draft_versions_list, "id", "display_title", @draft_version.id), "aria-label": t("legislation.draft_versions.show.select_draft_version") %>
-              <%= hidden_field_tag :selected_phase_id, @legislation_phase.id %>
+              <%= hidden_field_tag :projekt_phase_id, @legislation_phase.id %>
               <%= hidden_field_tag :section, 'annotations' %>
             <%= submit_tag t("legislation.draft_versions.show.select_version_submit"), class: "button" %>
           <% end %>

@@ -100,14 +100,14 @@ class DebatesController < ApplicationController
         if @debate.projekt_phase.projekt.overview_page?
           redirect_to projekts_path(
             anchor: "filter-subnav",
-            selected_phase_id: @debate.projekt_phase.id,
+            projekt_phase_id: @debate.projekt_phase.id,
             order: params[:order]
           ), notice: t("flash.actions.create.debate")
         else
           redirect_to page_path(
             @debate.projekt_phase.projekt.page.slug,
             anchor: "filter-subnav",
-            selected_phase_id: @debate.projekt_phase.id,
+            projekt_phase_id: @debate.projekt_phase.id,
             order: params[:order]
           ), notice: t("flash.actions.create.debate")
         end
@@ -115,7 +115,7 @@ class DebatesController < ApplicationController
         if @debate.projekt_phase.projekt.overview_page?
           redirect_to projekts_path(
             anchor: "filter-subnav",
-            selected_phase_id: @debate.projekt_phase.id,
+            projekt_phase_id: @debate.projekt_phase.id,
             order: params[:order]
           ), notice: t("flash.actions.create.debate")
         else
