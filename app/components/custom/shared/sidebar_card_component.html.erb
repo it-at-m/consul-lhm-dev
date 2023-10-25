@@ -11,22 +11,23 @@
     </h4>
   <% end %>
 
-  <% if @description.present? %>
-    <div class="sidebar-card--description">
-      <%= @description %>
-    </div>
-  <% end %>
-
-  <div class="sidebar-card--section sidebar-card--content">
-    <%= content %>
-  </div>
-
-  <% if additional_sections.present? %>
-    <% additional_sections.each do |additional_section| %>
-      <div class="sidebar-card--separator"> </div>
-      <div class="sidebar-card--section">
-        <%= additional_section %>
+  <div class="sidebar-card--content">
+    <% if @description.present? %>
+      <div class="sidebar-card--description">
+        <%= @description %>
       </div>
     <% end %>
-  <% end %>
+
+    <div class="sidebar-card--section">
+      <%= content %>
+    </div>
+    <% if additional_sections.present? %>
+      <% additional_sections.each do |additional_section| %>
+        <div class="sidebar-card--separator"> </div>
+        <div class="sidebar-card--section">
+          <%= additional_section %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>
