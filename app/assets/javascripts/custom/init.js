@@ -12,6 +12,8 @@
       App.CollapseComponent.initialize();
       App.CustomTabs.initialize();
       App.SidebarCardComponent.initialize();
+      App.CkeEditorPlaceholder.initialize();
+      App.RemoveOnMobileSections.initialize();
     }
   };
 }).call(this);

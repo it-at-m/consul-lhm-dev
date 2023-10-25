@@ -1,4 +1,5 @@
 $user-resources-form-banner-height: 350px;
+$banner-mobile-layout-change-widthpoint: 720px;
 
 .custom-new-design {
   p[data-cke-placeholdertext] {
@@ -42,7 +43,7 @@ $user-resources-form-banner-height: 350px;
   justify-content: space-between;
   border-radius: 10px;
 
-  @media(max-width: $small-tablet-viewport-start) {
+  @media(max-width: $banner-mobile-layout-change-widthpoint) {
     flex-direction: column;
     padding-top: 20px;
     height: auto;
@@ -107,7 +108,7 @@ $user-resources-form-banner-height: 350px;
   width: 50%;
   margin-top: 20px;
 
-  @media(max-width: $small-tablet-viewport-start) {
+  @media(max-width: $banner-mobile-layout-change-widthpoint) {
     width: 100%;
     margin-top: 0;
   }
@@ -149,7 +150,7 @@ textarea.user-resources-form--banner-editor-title {
 .banner-editor-image-attachment {
   width: 48%;
 
-  @media(max-width: $small-tablet-viewport-start) {
+  @media(max-width: $banner-mobile-layout-change-widthpoint) {
     width: 100%;
   }
 }

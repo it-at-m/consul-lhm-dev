@@ -40,6 +40,12 @@
 
     <div class="flex-layout">
       <div class="main-column">
+        <div class="show-on-small-tablet">
+          <%= render Shared::SidebarCardComponent.new(title: "Projektzuordnung", description: "Ihr Vorschlag wird diesem Projekt zugeordnet", icon_name: "code-branch", class_name: "js-sidebar-projekt-section js-remove-on-desktop-section #{projekt_selector_class} projekt-selector-card") do |c| %>
+            <%= f.error_for(:projekt_phase) %>
+            <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: resource } %>
+          <% end %>
+        </div>
         <%= f.translatable_fields do |translations_form| %>
           <div class="js-suggest" data-locale="<%= translations_form.locale %>"></div>
 
@@ -124,10 +130,12 @@
         <fieldset class="required-fields">
           <%= hidden_field_tag :order, params[:order] %>
 
-          <%= render Shared::SidebarCardComponent.new(title: "Projektzuordnung", description: "Ihr Vorschlag wird diesem Projekt zugeordnet", icon_name: "code-branch", class_name: "js-sidebar-projekt-section #{projekt_selector_class} projekt-selector-card") do |c| %>
-            <%= f.error_for(:projekt_phase) %>
-            <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: resource } %>
-          <% end %>
+          <div class="hide-on-small-tablet">
+            <%= render Shared::SidebarCardComponent.new(title: "Projektzuordnung", description: "Ihr Vorschlag wird diesem Projekt zugeordnet", icon_name: "code-branch", class_name: "js-sidebar-projekt-section js-remove-on-mobile-section #{projekt_selector_class} projekt-selector-card") do |c| %>
+              <%= f.error_for(:projekt_phase) %>
+              <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: resource } %>
+            <% end %>
+          </div>
 
           <%= render Shared::SidebarCardComponent.new(title: "Labels", icon_name: "tag", class_name: "js-sidebar-label-section hide") do |c| %>
             <%= render partial: "shared/projekt_selector/projekt_labels", locals:	{ f: f, model: resource } %>
