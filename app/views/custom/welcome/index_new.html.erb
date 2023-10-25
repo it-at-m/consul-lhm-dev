@@ -15,6 +15,7 @@
 <main class="welcome-page">
   <div class="d-flex flex-layout">
     <div class="main-column">
+      <%= render "shared/loader_spinner" %>
       <div class="show-on-small-tablet standalone-sidebar-section margin-bottom">
         <% if render_custom_content_block?('home_page_sidebar') %>
           <%= render Shared::SidebarCardComponent.new(title: 'Information', icon_name: "info-circle") do |c| %>
