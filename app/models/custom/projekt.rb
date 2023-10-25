@@ -188,6 +188,7 @@ class Projekt < ApplicationRecord
   scope :show_in_homepage, -> {
     joins("INNER JOIN projekt_settings sihp ON projekts.id = sihp.projekt_id")
       .where("sihp.key": "projekt_feature.general.show_in_homepage", "sihp.value": "active")
+      .order(created_at: :desc)
   }
 
   scope :show_in_navigation, -> {

@@ -21,6 +21,24 @@
     <div class="flex-layout">
       <div class="main-column">
 
+        <% if @investment.unfeasible? && @investment.valuation_finished? %>
+          <div class="callout warning">
+            <%= sanitize(t("budgets.investments.show.project_unfeasible")) %>
+          </div>
+        <% elsif @investment.winner? && @budget.finished? %>
+          <div class="callout success">
+            <strong><%= t("budgets.investments.show.project_winner") %></strong>
+          </div>
+        <% elsif @investment.selected? %>
+          <div class="callout success">
+            <%= sanitize(t("budgets.investments.show.project_selected")) %>
+          </div>
+        <% elsif @budget.balloting_or_later? %>
+          <div class="callout warning">
+            <%= sanitize(t("budgets.investments.show.project_not_selected")) %>
+          </div>
+        <% end %>
+
         <% if @investment.should_show_price? %>
           <div class="resource-page--description new-card" style="background-color:#E3FCE7">
             <h3><%= t("budgets.investments.show.price") %></h2>

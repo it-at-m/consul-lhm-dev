@@ -5,7 +5,7 @@ class Comments::UserCommentsComponent < ApplicationComponent
     @comments = comments
   end
 
-  def paginate?
-    controller_name == "welcome" && action_name == "latest_activity"
-  end
+  # def paginate?
+  #   controller_name == "welcome" && action_name == "latest_activity"
+  # end
 end

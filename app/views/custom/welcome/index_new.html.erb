@@ -15,6 +15,7 @@
 <main class="welcome-page">
   <div class="d-flex flex-layout">
     <div class="main-column">
+      <%= render "shared/loader_spinner" %>
       <div class="show-on-small-tablet standalone-sidebar-section margin-bottom">
         <% if render_custom_content_block?('home_page_sidebar') %>
           <%= render Shared::SidebarCardComponent.new(title: 'Information', icon_name: "info-circle") do |c| %>
@@ -30,9 +31,9 @@
         <%= render Projekts::ListComponent.new(
           projekts: @active_projekts,
           map_coordinates: @active_projekts_map_locations,
-          current_filter: @current_projekt_filter,
-          filters: @current_active_projekt_filters,
-          remote_url: projekts_url(format: :js),
+          # current_filter: @current_projekt_filter,
+          # filters: @current_active_projekt_filters,
+          # remote_url: projekts_url(format: :js),
           show_more_link: true
         ) %>
       <% end %>

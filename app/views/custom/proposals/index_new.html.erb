@@ -5,11 +5,13 @@
   <div class="flex-layout padding-on-mobile">
     <div class="main-column">
       <% if controller_name == 'proposals' %>
-        <% if extended_feature?("proposals.intro_text_for_proposals") %>
-          <div class="resource-page--intro-text">
-            <%= render_custom_block('proposals_index_welcome', default_content: t("custom.proposals.index.welcome_default_text_html")) %>
-          </div>
-        <% end %>
+        <div class="hide-on-mobile">
+          <% if extended_feature?("proposals.intro_text_for_proposals") %>
+            <div class="resource-page--intro-text">
+              <%= render_custom_block('proposals_index_welcome', default_content: t("custom.proposals.index.welcome_default_text_html")) %>
+            </div>
+          <% end %>
+        </div>
       <% end %>
     </div>
   </div>
@@ -31,23 +33,23 @@
     </div>
 
     <div id="proposals-sidebar" class="sidebar">
-      <%= render Shared::SidebarCardComponent.new(title: t('custom.common.information'), icon_name: "info-circle", opened_on_mobile: true) do |c| %>
-        <div class="margin-bottom-half">
-          <%= render_custom_block 'proposals_index_sidebar', default_content: t("custom.proposals.index.sidebar_information_default_text")  %>
-        </div>
-        <div class="proposals--info-count margin-bottom-half">
-          <span>
-            <%= t('custom.proposals.index.count') %>
-          </span>
-          <span>
-            <%= @all_resources.count %>
-          </span>
-        </div>
+      <div class="hide-on-mobile">
+        <%= render Shared::SidebarCardComponent.new(title: t('custom.common.information'), icon_name: "info-circle", opened_on_mobile: true) do |c| %>
+          <div class="margin-bottom-half">
+            <%= render_custom_block 'proposals_index_sidebar', default_content: t("custom.proposals.index.sidebar_information_default_text")  %>
+          </div>
+          <div class="proposals--info-count margin-bottom-half">
+            <span>
+              <%= t('custom.proposals.index.count') %>
+            </span>
+            <span>
+              <%= @all_resources.count %>
+            </span>
+          </div>
 
-        <div class="hide-on-mobile">
           <%= render Shared::NewButtonComponent.new(resources_name: "proposals", query_params: params) %>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
 
       <div class="show-on-mobile">
         <%= render(Mobile::FixedBottomActionComponent.new) do %>
