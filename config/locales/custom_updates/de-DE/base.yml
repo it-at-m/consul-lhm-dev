@@ -49,6 +49,9 @@ de:
     helpers:
       select:
         prompt: Bitte wählen
+        gender_prompt: Geschlecht (bitte wählen)
+        address_prompt: Wohnort (bitte wählen)
+        document_prompt: Offizielles Dokument (bitte wählen)
         not_in_list: Nicht in der Liste enthalten
     gdpr_notice:
       accept: Akzeptieren

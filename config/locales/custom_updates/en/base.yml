@@ -46,6 +46,9 @@ en:
     helpers:
       select:
         prompt: Please select
+        gender_prompt: Gender (please select)
+        address_prompt: Address (please select)
+        document_prompt: Document type (please select)
         not_in_list: Not in the list
     gdpr_notice:
       accept: Accept
