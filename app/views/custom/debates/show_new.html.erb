@@ -16,16 +16,18 @@
 
 <main>
   <div class="custom-fixed-tabs margin-bottom">
-    <div class="js-scroll-link custom-tab" data-anchor-id="debates-content">
-      <%= t("custom.common.fixed_tabs.content") %>
-    </div>
-    <% if projekt_phase_feature?(@debate.projekt_phase, 'resource.show_comments') %>
-      <div class="js-scroll-link custom-tab" data-anchor-id="debates-comments">
-        <%= t("custom.common.fixed_tabs.comments") %>
+    <div class="custom-fixed-tabs--content">
+      <div class="js-scroll-link custom-tab" data-anchor-id="debates-content">
+        <%= t("custom.common.fixed_tabs.content") %>
       </div>
-    <% end %>
-    <div class="js-scroll-link custom-tab" data-anchor-id="debates-author">
-      <%= t("custom.common.fixed_tabs.author") %>
+      <% if projekt_phase_feature?(@debate.projekt_phase, 'resource.show_comments') %>
+        <div class="js-scroll-link custom-tab" data-anchor-id="debates-comments">
+          <%= t("custom.common.fixed_tabs.comments") %>
+        </div>
+      <% end %>
+      <div class="js-scroll-link custom-tab" data-anchor-id="debates-author">
+        <%= t("custom.common.fixed_tabs.author") %>
+      </div>
     </div>
   </div>
   <div id="<%= dom_id(@debate) %>">

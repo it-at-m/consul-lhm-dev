@@ -24,7 +24,12 @@
 
   .custom-fixed-tabs {
     width: 100%;
-    position: sticky;
+    height: 50px;
+  }
+
+  .custom-fixed-tabs--content {
+    width: 100%;
+    position: fixed;
     top: 60px;
     display: none;
     z-index: 1000;

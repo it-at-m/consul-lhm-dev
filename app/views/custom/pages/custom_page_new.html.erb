@@ -14,14 +14,16 @@
 <main class="projekt-page">
   <% if @custom_page.projekt.present? %>
     <div class="custom-fixed-tabs margin-bottom">
-      <div class="js-scroll-link custom-tab" data-anchor-id="projekt-body">
-        Inhalt
-      </div>
-      <div class="js-scroll-link custom-tab" data-anchor-id="projekt-info">
-        Info
-      </div>
-      <div class="js-scroll-link custom-tab" data-anchor-id="projekt-particapation">
-        Beteiligung
+      <div class="custom-fixed-tabs--content">
+        <div class="js-scroll-link custom-tab" data-anchor-id="projekt-body">
+          Inhalt
+        </div>
+        <div class="js-scroll-link custom-tab" data-anchor-id="projekt-info">
+          Info
+        </div>
+        <div class="js-scroll-link custom-tab" data-anchor-id="projekt-particapation">
+          Beteiligung
+        </div>
       </div>
     </div>
   <% end %>
