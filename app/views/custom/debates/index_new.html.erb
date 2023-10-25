@@ -4,21 +4,24 @@
   </h1>
   <div class="flex-layout padding-on-mobile">
     <div class="main-column">
-      <% if extended_feature?("debates.intro_text_for_debates") %>
-        <div class="resource-page--intro-text">
-          <%= render_custom_block('debates_index_welcome', default_content: t("custom.debates.index.welcome_default_text")) %>
-        </div>
-      <% end %>
+      <div class="hide-on-mobile">
+        <% if extended_feature?("debates.intro_text_for_debates") %>
+          <div class="resource-page--intro-text">
+            <%= render_custom_block('debates_index_welcome', default_content: t("custom.debates.index.welcome_default_text")) %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 
   <div class="flex-layout flex-layout-reverse-on-mobile padding-on-mobile">
     <div class="main-column">
+      <%= render 'shared/loader_spinner' %>
+
       <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
         <%= link_to t('debates.index.section_header.help'), '#section_help' %>
       <% end %>
 
-      <%= render 'shared/loader_spinner' %>
       <%= render(
         Shared::ResourcesListComponent.new(
           resources: @debates,
@@ -35,24 +38,24 @@
     </div>
 
     <div id="debates-sidebar" class="sidebar">
-      <%= render Shared::SidebarCardComponent.new(title: t('custom.common.information'), icon_name: "info-circle", opened_on_mobile: true) do |c| %>
-        <div class="margin-bottom-half">
-          <%= render_custom_block "debates_index_sidebar", default_content: t("custom.debates.index.sidebar_information_default_text") %>
-        </div>
+      <div class="hide-on-mobile">
+        <%= render Shared::SidebarCardComponent.new(title: t('custom.common.information'), icon_name: "info-circle", opened_on_mobile: true) do |c| %>
+          <div class="margin-bottom-half">
+            <%= render_custom_block "debates_index_sidebar", default_content: t("custom.debates.index.sidebar_information_default_text") %>
+          </div>
 
-        <div class="proposals--info-count margin-bottom-half">
-          <span>
-            <%= t('custom.debates.index.count') %>
-          </span>
-          <span>
-            <%= @all_resources.count %>
-          </span>
-        </div>
+          <div class="proposals--info-count margin-bottom-half">
+            <span>
+              <%= t('custom.debates.index.count') %>
+            </span>
+            <span>
+              <%= @all_resources.count %>
+            </span>
+          </div>
 
-        <div class="hide-on-mobile">
           <%= render Shared::NewButtonComponent.new(resources_name: "debates", query_params: params) %>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
 
       <div class="show-on-mobile">
         <%= render(Mobile::FixedBottomActionComponent.new) do %>

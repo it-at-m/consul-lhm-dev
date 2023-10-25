@@ -10,8 +10,10 @@
             <%= t("custom.deficiency_reports.new.start_new") %>
           </h1>
 
-          <div class="user-resources-form--description">
-            <%= render_custom_block "user_resource_form_deficiency_report", default_content: t("custom.deficiency_reports.form.page_description") %>
+          <div class="hide-on-mobile">
+            <div class="user-resources-form--description">
+              <%= render_custom_block "user_resource_form_deficiency_report", default_content: t("custom.deficiency_reports.form.page_description") %>
+            </div>
           </div>
 
           <%= render "shared/errors", resource: deficiency_report %>
