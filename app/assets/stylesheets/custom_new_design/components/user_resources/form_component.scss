@@ -196,6 +196,7 @@ textarea.user-resources-form--banner-editor-title {
 
   @media(max-width: $small-tablet-viewport-start) {
     margin-bottom: 20px;
+    margin-top: 20px !important;
   }
 }
 
@@ -204,6 +205,10 @@ textarea.user-resources-form--banner-editor-title {
   color: black;
   border-bottom: 1px solid $border;
   padding-bottom: 10px;
+
+  @media(max-width: $small-tablet-viewport-start) {
+    font-size: 18px !important;
+  }
 }
 
 .sidebar-card {

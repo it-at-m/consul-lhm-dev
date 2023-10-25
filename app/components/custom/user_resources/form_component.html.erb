@@ -3,10 +3,120 @@
     <%= back_link %>
 
     <% projekt_selector_html = capture do %>
-      <%= render Shared::SidebarCardComponent.new(title: "Projektzuordnung", description: "Ihr Vorschlag wird diesem Projekt zugeordnet", icon_name: "code-branch", class_name: "js-sidebar-projekt-section #{projekt_selector_class} projekt-selector-card") do |c| %>
+      <%= render Shared::SidebarCardComponent.new(title: "Projektzuordnung", opened_on_mobile: true, description: "Ihr Vorschlag wird diesem Projekt zugeordnet", icon_name: "code-branch", class_name: "js-sidebar-projekt-section #{projekt_selector_class} projekt-selector-card") do |c| %>
         <%= f.error_for(:projekt_phase) %>
         <%= render partial: "shared/projekt_selector/projekt_selector", locals: { f: f, model: resource } %>
       <% end %>
+    <% end %>
+
+    <% sidebar_html = capture do %>
+      <aside class="sidebar">
+        <%# <%= helpers.render_custom_block 'proposals_creation_recommendations' %>
+
+        <fieldset class="required-fields">
+          <%= hidden_field_tag :order, params[:order] %>
+
+          <div class="hide-on-small-tablet js-remove-on-mobile-section">
+            <%= projekt_selector_html %>
+          </div>
+
+          <%= render Shared::SidebarCardComponent.new(title: "Labels", opened_on_mobile: true, icon_name: "tag", class_name: "js-sidebar-label-section hide") do |c| %>
+            <%= render partial: "shared/projekt_selector/projekt_labels", locals:	{ f: f, model: resource } %>
+          <% end %>
+
+          <%= render Shared::SidebarCardComponent.new(title: "Sentiments", opened_on_mobile: true, icon_name: "heart", class_name: "js-sidebar-sentiment-section hide") do |c| %>
+            <%= render partial: "shared/projekt_selector/sentiments", locals:	{ f: f, model: resource } %>
+          <% end %>
+
+          <%= render(Shared::SidebarCardComponent.new(
+            title: "Dokumente hinzufügen",
+            class_name: "d-none js-sidebar-documment-attacher-section",
+            icon_name: "file")) do %>
+            <div class="documents d-none" id="attach-documents">
+              <%= render "documents/nested_documents", f: f %>
+            </div>
+          <% end %>
+
+          <% if translations_interface_enabled? %>
+            <%= render(Shared::SidebarCardComponent.new(
+              title: "Sprachen",
+              opened_on_mobile: true,
+              icon_name: "language")) do %>
+              <p>
+              Wählen Sie aus, in welcher Sprache/welchen Sprachen Ihre Diskussion stattfinden soll:
+              </p>
+              <%= render "shared/globalize_locales", resource: resource %>
+            <% end %>
+          <% end %>
+
+          <%= render(Shared::SidebarCardComponent.new(
+            title: "Video hinzufügen",
+            class_name: "d-none js-sidebar-external-video-section",
+              opened_on_mobile: true,
+            icon_name: "video")) do %>
+            <p>
+            Gibt es Videos, die Ihre Argumentation und Sichtweise stützen?
+            Dann fügen Sie diese über einen Link hinzu.
+            </p>
+            <%= f.text_field :video_url, label: false, placeholder: "YouTube oder Vimeo-Link eingeben", class: "light-input" %>
+          <% end %>
+
+          <%= f.invisible_captcha :subtitle %>
+
+          <% if @categories&.any? %>
+            <%= render(Shared::SidebarCardComponent.new(
+              title: "Tags",
+              class_name: "js-sidebar-category-tags-selector-section",
+              opened_on_mobile: true,
+              icon_name: "tags")) do %>
+              <p>
+              Tags sind Markierungen, die uns dabei helfen, Diskussionen
+              bestimmten Themen zuzuordnen. So findet jeder schnell, was
+              ihn interessiert. Aktivieren Sie per Klick den oder die Tags,
+              die zu Ihrer Diskussion passen.
+              </p>
+              <div id="category_tags" class="tags">
+                <% @categories.each do |tag| %>
+                  <a class="js-add-tag-link" data-category-id="<%= tag.id %>"><%= tag.name %></a>
+                <% end %>
+              </div>
+              <br>
+
+              <%= f.hidden_field :tag_list_predefined, value: @resource.tags.reject{ |t| !['category'].include?(t.kind)}.map(&:name).join(","), class: "js-tag-list list-tags predefined" %>
+            <% end %>
+          <% end %>
+
+          <% if extended_feature?("modulewide.enable_categories") && @categories&.any? && SDG::ProcessEnabled.new(f.object).enabled? %>
+            <%= render(Shared::SidebarCardComponent.new(
+              title: "UN-Nachhaltigkeitsziele",
+              class_name: "js-sidebar-sdgs-selector-section",
+              opened_on_mobile: true,
+              icon_name: "tags")) do %>
+              <p>
+              Die Vereinten Nationen haben 17 Nachhaltigkeitsziele
+              formuliert. Lässt sich Ihre Diskussion einem dieser Ziele
+              zuordnen? Dann aktivieren Sie das entsprechende Feld per Klick.
+              </p>
+              <div id="sdgs-selector" class='row margin-top'>
+                <br>
+                <%= render SDG::RelatedListSelectorComponent.new(f) %>
+              </div>
+            <% end %>
+          <% end %>
+
+          <% if current_user.administrator? || current_user.moderator? %>
+            <%= render(Shared::SidebarCardComponent.new(
+              title: "Veröffentlichen für",
+              class_name: "js-sidebar-behalf-of",
+              opened_on_mobile: true,
+              icon_name: "user")) do %>
+              <p>
+              Dieses Feld sehen nur Admin. Sie können hier eine Diskussion im Namen von jemandem erstellen.
+              </p>
+              <%= f.text_field :on_behalf_of, label: false, placeholder: "Namen eingeben...", class: "light-input" %>
+            <% end %>
+          <% end %>
+      </aside>
     <% end %>
 
     <div class="flex-layout">
@@ -99,6 +209,10 @@
           </div>
         <% end %>
 
+        <div class="js-remove-on-desktop-section">
+          <%= sidebar_html %>
+        </div>
+
         <div class="user-resources-form--submit-section">
           <% if resource.new_record? %>
             <h3 class="user-resources-form--submit-section--privacy-policy">
@@ -128,108 +242,9 @@
         </div>
       </div>
 
-      <aside class="sidebar">
-        <%# <%= helpers.render_custom_block 'proposals_creation_recommendations' %>
-
-        <fieldset class="required-fields">
-          <%= hidden_field_tag :order, params[:order] %>
-
-          <div class="hide-on-small-tablet js-remove-on-mobile-section">
-            <%= projekt_selector_html %>
-          </div>
-
-          <%= render Shared::SidebarCardComponent.new(title: "Labels", icon_name: "tag", class_name: "js-sidebar-label-section hide") do |c| %>
-            <%= render partial: "shared/projekt_selector/projekt_labels", locals:	{ f: f, model: resource } %>
-          <% end %>
-
-          <%= render Shared::SidebarCardComponent.new(title: "Sentiments", icon_name: "heart", class_name: "js-sidebar-sentiment-section hide") do |c| %>
-            <%= render partial: "shared/projekt_selector/sentiments", locals:	{ f: f, model: resource } %>
-          <% end %>
-
-          <%= render(Shared::SidebarCardComponent.new(
-            title: "Dokumente hinzufügen",
-            class_name: "d-none js-sidebar-documment-attacher-section",
-            icon_name: "file")) do %>
-            <div class="documents d-none" id="attach-documents">
-              <%= render "documents/nested_documents", f: f %>
-            </div>
-          <% end %>
-
-          <% if translations_interface_enabled? %>
-            <%= render(Shared::SidebarCardComponent.new(
-              title: "Sprachen",
-              icon_name: "language")) do %>
-              <p>
-              Wählen Sie aus, in welcher Sprache/welchen Sprachen Ihre Diskussion stattfinden soll:
-              </p>
-              <%= render "shared/globalize_locales", resource: resource %>
-            <% end %>
-          <% end %>
-
-          <%= render(Shared::SidebarCardComponent.new(
-            title: "Video hinzufügen",
-            class_name: "d-none js-sidebar-external-video-section",
-            icon_name: "video")) do %>
-            <p>
-            Gibt es Videos, die Ihre Argumentation und Sichtweise stützen?
-            Dann fügen Sie diese über einen Link hinzu.
-            </p>
-            <%= f.text_field :video_url, label: false, placeholder: "YouTube oder Vimeo-Link eingeben", class: "light-input" %>
-          <% end %>
-
-          <%= f.invisible_captcha :subtitle %>
-
-          <% if @categories&.any? %>
-            <%= render(Shared::SidebarCardComponent.new(
-              title: "Tags",
-              class_name: "js-sidebar-category-tags-selector-section",
-              icon_name: "tags")) do %>
-              <p>
-              Tags sind Markierungen, die uns dabei helfen, Diskussionen
-              bestimmten Themen zuzuordnen. So findet jeder schnell, was
-              ihn interessiert. Aktivieren Sie per Klick den oder die Tags,
-              die zu Ihrer Diskussion passen.
-              </p>
-              <div id="category_tags" class="tags">
-                <% @categories.each do |tag| %>
-                  <a class="js-add-tag-link" data-category-id="<%= tag.id %>"><%= tag.name %></a>
-                <% end %>
-              </div>
-              <br>
-
-              <%= f.hidden_field :tag_list_predefined, value: @resource.tags.reject{ |t| !['category'].include?(t.kind)}.map(&:name).join(","), class: "js-tag-list list-tags predefined" %>
-            <% end %>
-          <% end %>
-
-          <% if extended_feature?("modulewide.enable_categories") && @categories&.any? && SDG::ProcessEnabled.new(f.object).enabled? %>
-            <%= render(Shared::SidebarCardComponent.new(
-              title: "UN-Nachhaltigkeitsziele",
-              class_name: "js-sidebar-sdgs-selector-section",
-              icon_name: "tags")) do %>
-              <p>
-              Die Vereinten Nationen haben 17 Nachhaltigkeitsziele
-              formuliert. Lässt sich Ihre Diskussion einem dieser Ziele
-              zuordnen? Dann aktivieren Sie das entsprechende Feld per Klick.
-              </p>
-              <div id="sdgs-selector" class='row margin-top'>
-                <br>
-                <%= render SDG::RelatedListSelectorComponent.new(f) %>
-              </div>
-            <% end %>
-          <% end %>
-
-          <% if current_user.administrator? || current_user.moderator? %>
-            <%= render(Shared::SidebarCardComponent.new(
-              title: "Veröffentlichen für",
-              class_name: "js-sidebar-behalf-of",
-              icon_name: "user")) do %>
-              <p>
-              Dieses Feld sehen nur Admin. Sie können hier eine Diskussion im Namen von jemandem erstellen.
-              </p>
-              <%= f.text_field :on_behalf_of, label: false, placeholder: "Namen eingeben...", class: "light-input" %>
-            <% end %>
-          <% end %>
-      </aside>
+      <div class="js-remove-on-mobile-section">
+        <%= sidebar_html %>
+      </div>
     </div>
 
   <% end %>

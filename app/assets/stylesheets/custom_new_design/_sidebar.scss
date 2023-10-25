@@ -3,6 +3,10 @@
     min-width: 300px;
     max-width: 300px;
 
+    .required-fields {
+      width: 100%;
+    }
+
     @media(max-width: $small-tablet-viewport-start) {
       display: flex;
       justify-content: center;
@@ -132,6 +136,9 @@
     display: none;
   }
 
+  .globalize-languages.highlight .column {
+    padding: 0 !important;
+  }
 
   @media (max-width: $small-tablet-viewport-start) {
     .sidebar {
