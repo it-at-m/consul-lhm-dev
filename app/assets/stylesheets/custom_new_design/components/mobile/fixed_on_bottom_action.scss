@@ -37,7 +37,11 @@
       border-radius: 0;
     }
     .sidebar-card--title {
-      padding: 10px 20px;
+      display: none;
+    }
+
+    .sidebar-card--content {
+      display: block !important;
     }
 
     .progress {
