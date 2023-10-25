@@ -34,7 +34,7 @@
 
         <% if resource.extended_registration? %>
           <%= f.select :gender, options_for_gender_select,
-            { prompt: t("custom.helpers.select.prompt") },
+            { prompt: t("custom.helpers.select.gender_prompt") },
             { class: "show-arrow", style: "background-color:#f8f8f8;" } %>
           <%= f.text_field :first_name, placeholder: t("custom.devise_views.users.registrations.new.first_name_label") %>
           <%= f.text_field :last_name, placeholder: t("custom.devise_views.users.registrations.new.last_name_label") %>
@@ -49,7 +49,7 @@
                 resource.form_registered_address_city_id
               ),
               {
-                prompt: t("custom.helpers.select.prompt"),
+                prompt: t("custom.helpers.select.address_prompt"),
                 class: "js-registration-city-selector show-arrow #{'is-invalid-input' if invalid_field_class}",
                 style: "background-color:#f8f8f8;"
               } %>
@@ -108,7 +108,7 @@
         <% end %>
 
         <% if resource.document_required? %>
-          <%= f.select :document_type, user_document_types, prompt: "" %>
+          <%= f.select :document_type, user_document_types, prompt: t("custom.helpers.select.document_prompt") %>
           <%= f.text_field :document_last_digits, placeholder: t("custom.devise_views.users.registrations.new.document_last_digits_label") %>
 
           <div>
