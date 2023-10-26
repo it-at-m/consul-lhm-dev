@@ -191,6 +191,6 @@ class Mailer < ApplicationMailer
 
     def manage_subscriptions_token(user)
       user.add_subscriptions_token
-      @token = user.subscriptions_token
+      @subscriptions_token = user.subscriptions_token
     end
 end
