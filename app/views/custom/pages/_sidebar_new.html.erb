@@ -43,7 +43,7 @@
   <% end %>
 
   <% if projekt_feature?(projekt, 'sidebar.show_map') %>
-    <%= render Shared::SidebarCardComponent.new(title: 'Karte', icon_name: "map") do |c| %>
+    <%= render Shared::SidebarCardComponent.new(title: 'Karte', icon_name: "map", opened_on_mobile: true) do |c| %>
       <%= render Pages::Projekts::SidebarMapComponent.new(projekt, @default_phase_name) %>
     <% end %>
   <% end %>
