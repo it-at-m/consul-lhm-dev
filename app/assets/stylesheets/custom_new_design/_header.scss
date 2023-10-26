@@ -455,6 +455,25 @@ body.custom-new-design .wrapper > header .locale.locale-custom {
     }
   }
 
+  .header--responsive-menu-wrapper {
+    width: 100%;
+  }
+
+  #responsive-menu {
+    width: 100%;
+    z-index: 1005;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    .subnavigation {
+      // z-index: 1005;
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
   #responsive-menu {
     .header--account-buttons {
       margin-left: 1rem;
