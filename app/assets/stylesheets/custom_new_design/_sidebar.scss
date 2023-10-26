@@ -136,6 +136,12 @@
     display: none;
   }
 
+  #responsive-menu {
+    .subnavigation {
+      z-index: 1005;
+    }
+  }
+
   .globalize-languages.highlight .column {
     padding: 0 !important;
   }
