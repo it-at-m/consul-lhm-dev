@@ -20,7 +20,8 @@ module ApplicationHelper
       order: order || params[:order],
       projekt_label_ids: projekt_label_ids || params[:projekt_label_ids],
       sentiment_id: sentiment_id || params[:sentiment_id],
-      section: section || params[:section]
+      section: section || params[:section],
+      annotation_id: params[:annotation_id]
     }
 
     url_options.reject! { |k, v| k == :sentiment_id && v == 0 }
