@@ -25,6 +25,11 @@
   .custom-fixed-tabs {
     width: 100%;
     height: 50px;
+    display: none;
+
+    @media(max-width: $small-tablet-viewport-start) {
+      display: block;
+    }
   }
 
   .custom-fixed-tabs--content {

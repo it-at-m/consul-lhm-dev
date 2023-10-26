@@ -98,6 +98,7 @@
   .custom-page--banner-title {
     font-size: 32px;
     font-weight: 400;
+    margin-top: 10px;
   }
 
   .custom-page--banner-description {
@@ -283,6 +284,8 @@
   }
 
   .projekt-page {
+    padding-top: 50px;
+
     .main-column {
       display: flex;
       flex-direction: column;
