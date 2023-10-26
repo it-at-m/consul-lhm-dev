@@ -37,7 +37,7 @@
                     <% f.object.build_image %>
                   <% end %>
                   <%= f.fields_for :image do |image_builder| %>
-                    <%= render Images::DirectUploadComponent.new(image_builder, imageable: f.object) %>
+                    <%= render UserResources::ImageUploadComponent.new(image_builder, imageable: f.object) %>
                   <% end %>
                 </div>
               <% end %>
@@ -195,7 +195,7 @@
                      i18n_namespace: "budgets.investments" %>
         </div>
       <% end %>
-  
+
       <div>
         <%= render "shared/globalize_locales", resource: investment %>
       </div>

@@ -183,7 +183,7 @@
                   autocomplete: "off" %>
               </div>
 
-              <% if true #show_image? %>
+              <% if feature?(:allow_images) %>
                 <div class="banner-editor-image-attachment js-banner-editor-image-attachment">
                   <% if f.object.image.blank? %>
                     <% f.object.build_image %>
