@@ -1,0 +1,38 @@
+.custom-new-design {
+  .deficiency-report-category {
+    padding: 0.05rem 0.3rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+
+  }
+
+  .deficiency-report-category,
+  .deficiency-report-status {
+    margin-left: 9px;
+
+    i {
+      font-size: 0.8rem;
+      padding-right: unset !important;
+    }
+  }
+
+  .main-column {
+    .globalize-languages.highlight .column {
+      padding: 1rem;
+    }
+
+    .deficiency-report-footer-status {
+      width: 100%;
+      font-size: 1rem;
+      padding: 1rem;
+      border-radius: 4px;
+      padding: 22px 0px;
+      margin-bottom: 10px;
+
+      i {
+        display: block;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}

@@ -52,7 +52,6 @@ class ProjektPhase < ApplicationRecord
   has_and_belongs_to_many :individual_group_values,
     after_add: :touch_updated_at, after_remove: :touch_updated_at
 
-
   has_many :city_street_projekt_phases, dependent: :destroy     # TODO delete
   has_many :city_streets, through: :city_street_projekt_phases  # TODO delete
 
@@ -96,6 +95,10 @@ class ProjektPhase < ApplicationRecord
     mname.instance_variable_set(:@route_key, "projekt_phases")
     mname.instance_variable_set(:@singular_route_key, "projekt_phase")
     mname
+  end
+
+  def self.any_selectable?(user)
+    any? { |phase| phase.selectable_by?(user) }
   end
 
   def selectable_by?(user)
@@ -166,10 +169,6 @@ class ProjektPhase < ApplicationRecord
     individual_group_values.map(&:name).flatten.join(", ")
   end
 
-  def hide_projekt_selector?
-    false
-  end
-
   def resource_count
     nil
   end
@@ -200,16 +199,28 @@ class ProjektPhase < ApplicationRecord
     phase_tab_name.presence || model_name.human
   end
 
+  def all_settings
+    @settings ||= settings.pluck(:key, :value)
+  end
+
   def feature?(key)
-    settings.find_by!(key: "feature.#{key}").value.present?
-  rescue ActiveRecord::RecordNotFound
-    raise StandardError, "Feature \"#{key}\" not found for projekt phase #{id}"
+    setting = settings.find { |s| s.key == "feature.#{key}" }
+
+    if setting.present?
+      setting.value.present?
+    else
+      false
+    end
   end
 
   def option(key)
-    settings.find_by!(key: "option.#{key}").value
-  rescue ActiveRecord::RecordNotFound
-    raise StandardError, "Option \"#{key}\" not found for projekt phase #{id}"
+    option = settings.find { |s| s.key == "option.#{key}" }
+
+    if option.present?
+      option.value.present?
+    else
+      nil
+    end
   end
 
   def create_map_location

@@ -1,0 +1,107 @@
+<% author_name_html = capture do %>
+  <% if @author.present? %>
+    <%= link_to user_path(@author), class: 'resource-item--author' do %>
+      <div class="resource-item--author-photo">
+        <% if @author.image&.variant(:popup).present? %>
+          <%= image_tag(@author.image&.variant(:popup)) %>
+        <% else %>
+          <div class="resource-item--author-photo--placeholder">
+            <%= @author&.first_letter_of_name %>
+          </div>
+        <% end %>
+      </div>
+      <div class="resource-item--author-name">
+        <div class="resource-item--author-full-name">
+          <%= @author.full_name %>
+        </div>
+        <%= render Shared::OfficialPositionBadgeComponent.new(user: @author) %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<div class="resource-item <%= component_class_name %>">
+  <div class="resource-item--header <%= header_class %>" style="<%= @header_style %>">
+    <%= header %>
+  </div>
+
+  <div class="resource-item--image-container">
+    <% if image_overlay_item.present? %>
+      <div class="resource-item--image-overlay-item">
+        <%= image_overlay_item %>
+      </div>
+    <% end %>
+
+    <%= link_to @url, class: 'resource-item--image-link' do %>
+      <%= render(
+        Shared::ResourceImageComponent.new(
+          image_url: @image_url,
+          image_placeholder_icon_class: @image_placeholder_icon_class,
+          resource: @resource)
+      ) %>
+    <% end %>
+  </div>
+
+  <div class="resource-item--content">
+    <div class="resource-item--body-wrapper">
+
+      <div class="resource-item--body-and-author">
+        <div class="resource-item--body">
+          <div class="resource-item--body-heading">
+            <% if date.present? %>
+              <div class="resource-item--date"><%= date %></div>
+            <% end %>
+
+            <% if @subline.present? %>
+              <%= @subline %>
+            <% elsif @projekt.present? %>
+              <div class="resource-item--head-title-projekt-breadcrumbs">
+                <%= helpers.breadcrumbs_links(@projekt, ">", false) %>
+              </div>
+            <% elsif @tags.present? %>
+              <div class="resource-item--tags">
+                <% @tags.first(2).each do |tag| %>
+                  <%= link_to(path_for_resource_with_params(@resource, tags: tag.name), class: 'resource-item--tag') do %>
+                    <%= tag.name %>
+                  <% end %>
+                <% end %>
+
+                <% if @tags[2].present? %>
+                  <%= link_to(path_for_resource_with_params(@resource, tags: @tags), class: 'resource-item--tag') do %>
+                    <% remaining_tags_count = @tags.count - 2 %>
+                    <%= t("custom.tags.remaining_count", count: remaining_tags_count) %>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+          <%= link_to(truncate(@title, length: 72), @url, class: "resource-item--title" ) %>
+
+          <div class="resource-item--description">
+            <%= truncate(strip_tags(@description), length: 160) %>
+          </div>
+        </div>
+
+        <% if additional_body_sections.any? %>
+          <% additional_body_sections.each do |additional_body_section| %>
+            <div class="resource-item--additional-body-section">
+              <%= additional_body_section %>
+            </div>
+          <% end %>
+        <% end %>
+
+        <%= author_name_html %>
+
+      </div>
+      <% if footer_sections.any? %>
+        <div class="resource-item--footer <%= @no_footer_bottom_padding ? "-no-bottom-padding" : "" %>">
+          <% footer_sections.each do |footer_section| %>
+            <div class="resource-item--footer-section">
+              <%= footer_section %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

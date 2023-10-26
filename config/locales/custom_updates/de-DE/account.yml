@@ -1,0 +1,20 @@
+de:
+  custom:
+    account:
+      show:
+        change_credentials_link: Anmeldeinformationen ändern
+        erase_account_link: Konto löschen
+        settings: Kontoeinstellungen
+        verification_tittle: Kontoverifizierung
+        verification_description: Einige Beteiligungsprojekte setzen eine Nutzer*innen-Verifizierung voraus. Mit Klick auf den Button können Sie die Nutzer*innen-Verifizierung starten.
+        personal_settings: Persönliche Einstellungen
+        notifications: Benachrichtigungen
+        save_settings: Aktualisieren
+        not_verified_account: Konto ist nicht verifiziert
+      subscriptions:
+        projekts:
+          title: Projektbezogene Benachrichtungen
+          description1: "Sie haben bei folgenden Projekten die Projektbenachrichtigung aktiviert:"
+          description2: Mit Klick auf den nachfolgenden Button können Sie sich von allen Projektbenachrichtigungen abmelden. Sollten Sie sich nur von einzelnen Projektphasen abmelden wollen, dann nutzen Sie bitte den direkten Link zu den Projekten.
+          description2: Mit Klick auf den nachfolgenden Button können Sie sich von allen Projektbenachrichtigungen abmelden. Sollten Sie sich nur von einzelnen Projektphasen abmelden wollen, dann loggen Sie sich bitte ein und deaktivieren die Benachrichtigung in der Fußzeile des jeweiligen Projektes. Sie können hierfür einfach auf die oben aufgeführten Projekte klicken.
+          cancel_projekts_subscriptions_button: Bei allen Projektbenachrichtigungen abmelden

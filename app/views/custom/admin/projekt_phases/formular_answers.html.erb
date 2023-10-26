@@ -24,29 +24,10 @@
       </div>
 
       <%= link_to t("custom.shared.download"), polymorphic_path([@namespace, @projekt_phase], action: :formular_answers, format: :csv), class: "float-right small" %>
-
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <% @formular_fields.each do |ff| %>
-              <th><%= ff.name %></th>
-            <% end %>
-          </tr>
-        </thead>
-        <tbody>
-          <% @formular_answers.each do |fa| %>
-            <tr>
-              <td>
-                <%= check_box_tag "formular_answer_ids[]", fa.id, true %>
-              </td>
-              <% @formular_fields.each do |ff| %>
-                <td><%= fa.answers[ff.key] %></td>
-              <% end %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <div id="formular-answers" class="">
+        <%= render partial: "custom/admin/formular_follow_up_letters/answers_table",
+          formular_fields: @formular_fields, image_tag: @image_flag, formular_answers: @formular_answers %>
+      </div>
     <% end %>
   </div>
 </div>

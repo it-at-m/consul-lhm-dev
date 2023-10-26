@@ -1,0 +1,108 @@
+<%= content_for :body_class, "custom-page" %>
+  <% provide :title do %><%= @custom_page.title %><% end %>
+
+<style>
+  <% if @custom_page.image.present? %>
+    .custom-page-banner {
+      background-image: url("<%= url_for(@custom_page.image.attachment) %>");
+      background-size: cover;
+      background-position: center center;
+    }
+  <% end %>
+</style>
+
+<main class="projekt-page">
+  <% if @custom_page.projekt.present? %>
+    <div class="custom-fixed-tabs margin-bottom">
+      <div class="custom-fixed-tabs--content">
+        <div class="js-scroll-link custom-tab" data-anchor-id="projekt-body">
+          Inhalt
+        </div>
+        <div class="js-scroll-link custom-tab" data-anchor-id="projekt-info">
+          Info
+        </div>
+        <div class="js-scroll-link custom-tab" data-anchor-id="projekt-particapation">
+          Beteiligung
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <% if @custom_page.subtitle.blank? && @custom_page.image.blank? %>
+    <h1 class="page-main-title margin-bottom">
+      <%= @custom_page.title %>
+    </h1>
+  <% else %>
+    <div class="custom-page--banner-wrapper">
+      <div class="custom-page--banner">
+        <div class="custom-page--banner-text-section-wrapper">
+          <div class="custom-page--banner-text-section">
+            <h1 class="custom-page--banner-title">
+              <%= @custom_page.title %>
+            </h1>
+
+            <% if @custom_page.subtitle.present? %>
+              <div class="custom-page--banner-description">
+                <%= @custom_page.subtitle %>
+              </div>
+            <% end %>
+          </div>
+
+          <% if @custom_page.projekt.present? %>
+            <div class="custom-page--banner-breadcrumbs">
+              <%= breadcrumbs_links(@custom_page.projekt) %>
+            </div>
+          <% end %>
+        </div>
+
+        <% if @custom_page.image.present? %>
+          <%= image_tag(url_for(@custom_page.image.attachment), class: "custom-page--banner-image" )  %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @custom_page.projekt.present? %>
+    <div class="flex-layout">
+      <div class="main-column">
+        <div class="js-anchor-navigation-content" id="projekt-body">
+          <div class="main-content-card">
+            <% if @custom_page.content&.include?('template_projekt_library') %>
+              <%= render "projekt_library", projekt: @custom_page.projekt %>
+            <% else %>
+              <%= render "custom_page_content" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div id="projekt-info">
+        <%= render partial: 'pages/sidebar_new', locals: { projekt: @custom_page.projekt, id_prefix: "desktop" } %>
+      </div>
+    </div>
+
+  <% else %>
+    <div class="show-on-desktop">
+      <div class="main-column">
+        <%= render 'custom_page_content' %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @custom_page.projekt.present? && @custom_page.projekt.projekt_phases.active.any? %>
+    <div class="js-anchor-navigation-content" id="projekt-particapation">
+      <div class="projekt-footer-anchor" id="projekt-footer"> </div>
+      <div class="projekt-footer flex-layout">
+        <div class="full-width-column">
+          <%= render Pages::Projekts::FooterPhasesComponent.new(@custom_page.projekt, @default_phase_name) %>
+          <div id="footer-content" class="js-projekt-footer-content">
+            <%= render 'shared/loader_spinner' %>
+            <%= render "pages/projekt_footer_new/#{@default_projekt_phase.name}" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</main>
+
+<script>
+  App.Projekts.toggleDefaultProjekts();
+</script>

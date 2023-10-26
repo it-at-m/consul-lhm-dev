@@ -9,7 +9,7 @@ class PollsController < ApplicationController
   before_action :set_geo_limitations, only: [:show, :results, :stats]
 
   helper_method :resource_model, :resource_name
-  has_filters %w[all current]
+  has_filters %w[all current expired]
 
   def index
     @resource_name = 'poll'
@@ -44,6 +44,9 @@ class PollsController < ApplicationController
         .where(sdg_relations: { relatable_type: "Projekt", relatable_id: related_projekt_ids })
     end
 
+    @resources = @resources.by_projekt_id(@scoped_projekt_ids)
+    @all_resources = @resources
+
     unless params[:search].present?
       take_by_tag_names(related_projekts)
       take_by_sdgs(related_projekts)
@@ -53,6 +56,30 @@ class PollsController < ApplicationController
     end
 
     @polls = Kaminari.paginate_array(@resources.sort_for_list).page(params[:page])
+
+    if Setting.new_design_enabled?
+      render :index_new
+    else
+      render :index
+    end
+  end
+
+  def stats
+    @stats = Poll::Stats.new(@poll)
+
+    if Setting.new_design_enabled?
+      render :stats_new
+    else
+      render :stats
+    end
+  end
+
+  def results
+    if Setting.new_design_enabled?
+      render :results_new
+    else
+      render :results
+    end
   end
 
   def set_geo_limitations

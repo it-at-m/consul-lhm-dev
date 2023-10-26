@@ -1,0 +1,26 @@
+.custom-new-design {
+  .proposal-dashboard-campaign-page--materials {
+    display: flex;
+  }
+
+  .proposal-dashboard-campaign-page--material {
+    width: 277px;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .proposal-dashboard-campaign-page--material-preview {
+    display: block;
+    width: 70%;
+  }
+
+  .proposal-dashboard-campaign-page--material-title {
+    display: block;
+    color: $main-text-color;
+    font-size: 16px;
+    margin-top: 15px;
+  }
+}

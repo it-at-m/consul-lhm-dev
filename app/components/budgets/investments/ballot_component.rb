@@ -54,4 +54,14 @@ class Budgets::Investments::BallotComponent < ApplicationComponent
           heading_link: heading_link(assigned_heading, budget))
       end
     end
+
+    def voting_kind_klass
+      if investment.budget.knapsack_voting?
+        "-knapsack"
+      elsif investment.budget.approval_voting?
+        "-approval"
+      elsif investment.budget.distributed_voting?
+        "-distributed"
+      end
+    end
 end

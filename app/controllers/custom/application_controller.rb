@@ -3,8 +3,20 @@ require_dependency Rails.root.join("app", "controllers", "application_controller
 class ApplicationController < ActionController::Base
   before_action :set_projekts_for_overview_page_navigation,
                 :set_default_social_media_images, :set_partner_emails
-  before_action :show_launch_page, if: :show_launch_page?
+  before_action :set_partner_emails
+  after_action :set_back_path
   helper_method :set_comment_flags
+
+  # unless Rails.env.production?
+  #   around_action :n_plus_one_detection
+  #
+  #   def n_plus_one_detection
+  #     Prosopite.scan
+  #     yield
+  #   ensure
+  #     Prosopite.finish
+  #   end
+  # end
 
   private
 
@@ -45,16 +57,45 @@ class ApplicationController < ActionController::Base
     end
 
     def set_projekts_for_overview_page_navigation
-      @projekts_for_overview_page_navigation = Projekt.joins(:projekt_settings)
-        .where(projekt_settings: { key: "projekt_feature.general.show_in_overview_page_navigation", value: "active" })
+      @projekts_for_overview_page_navigation =
+        Projekt
+          .includes({page: [:translations]}, :projekt_settings, { children_projekts_show_in_navigation: :projekt_settings })
+          .joins(:projekt_settings)
+          .where(projekt_settings: { key: "projekt_feature.general.show_in_overview_page_navigation", value: "active" })
+          .select { |p| p.visible_for?(current_user) }
+
+      @projekts_for_navigation =
+        Projekt
+          .top_level
+          .includes(
+            :individual_group_values,
+            { page: :translations }, :projekt_settings,
+
+            children_projekts_show_in_navigation: [
+            :individual_group_values,
+              :projekt_settings, { page: :translations },
+
+              {
+                children_projekts_show_in_navigation: [
+                  :projekt_settings,
+                  { page: :translations },
+
+                  {
+                    children_projekts_show_in_navigation: [
+                      :projekt_settings, { page: :translations }]
+                  }
+                ]
+              }
+            ]
+          )
+          .show_in_navigation
+          .select { |p| p.visible_for?(current_user) }
     end
 
     def set_default_social_media_images
       return if params[:controller] == "ckeditor/pictures"
 
-      SiteCustomization::Image.all_images
-
-      social_media_icon = SiteCustomization::Image.all.find_by(name: "social_media_icon").image
+      social_media_icon = SiteCustomization::Image.find_by(name: "social_media_icon").image
 
       if social_media_icon.attached?
         @social_media_icon_path = polymorphic_path(social_media_icon, disposition: "attachment").split("?")[0].delete_prefix("/")
@@ -62,7 +103,7 @@ class ApplicationController < ActionController::Base
         @social_media_icon_path = nil
       end
 
-      twitter_icon = SiteCustomization::Image.all.find_by(name: "social_media_icon_twitter").image
+      twitter_icon = SiteCustomization::Image.find_by(name: "social_media_icon_twitter").image
 
       if twitter_icon.attached?
         @social_media_icon_twitter_url = polymorphic_path(twitter_icon.attachment, disposition: "attachment")
@@ -83,5 +124,19 @@ class ApplicationController < ActionController::Base
     def set_partner_emails
       filename = File.join(Rails.root, "config", "secret_emails.yml")
       @partner_emails = File.exist?(filename) ? File.readlines(filename).map { |l| l.chomp.downcase } : []
+    end
+
+    def javascript_request?
+      request.format == "text/javascript"
+    end
+
+    def set_back_path
+      if params[:projekt_phase_id].present?
+        back_path = helpers.url_to_footer_tab
+      else
+        back_path = request.fullpath
+      end
+
+      session[:back_path] = back_path
     end
 end

@@ -1,0 +1,75 @@
+<div class="new-card -no-padding users-profile-banner">
+  <div class="users-profile-banner--background-image">
+    <% if @edit_mode && @user == current_user %>
+      <%= form_for @user, as: :account, remote: true, authenticity_token: true, url: account_path do |f| %>
+        <%= render Images::DropzoneComponent.new(f, attachment_name: "background_image", submit_form: true) do |c|%>
+          <% c.custom_edit_button do %>
+            <div class="users-profile-banner--edit-button users-profile-banner--avatar-edit-button">
+              <i class="fa fa-pencil-alt"></i>
+            </div>
+          <% end %>
+          <% c.placeholder do %>
+            <% if @user.background_image.attached? %>
+              <%= image_tag(@user.background_image.variant(resize: "2000X500")) %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% elsif @user.background_image.attached? %>
+      <div class="users-profile-banner--background-image-wrapper">
+        <%= image_tag(@user.background_image) %>
+      </div>
+    <% end %>
+  </div>
+  <div class="users-profile-banner--avatar-wrapper">
+    <% if @edit_mode && @user == current_user %>
+      <%= form_for @user, as: :account, remote: true, url: account_path do |f| %>
+          <% if f.object.image.blank? %>
+            <% f.object.build_image %>
+          <% end %>
+          <%= f.fields_for :image do |image_builder| %>
+            <%= render Images::DirectUploadComponent.new(image_builder, imageable: @user, submit_form: true) do |c| %>
+              <% c.placeholder do %>
+                <div class="users-profile-banner--avatar-placeholder">
+                  <%= @user.first_letter_of_name %>
+                </div>
+              <% end %>
+
+              <% c.custom_edit_button do %>
+                <div class="users-profile-banner--edit-button users-profile-banner--avatar-edit-button">
+                  <i class="fa fa-pencil-alt"></i>
+                </div>
+              <% end %>
+            <% end %>
+        <% end %>
+      <% end %>
+    <% elsif @user.image.present? %>
+      <div class="users-profile-banner--avatar">
+        <%= image_tag(@user.image&.variant(:medium)) %>
+      </div>
+    <% else %>
+      <div class="users-profile-banner--avatar users-profile-banner--avatar-placeholder">
+        <%= @user.first_letter_of_name %>
+      </div>
+    <% end %>
+  </div>
+  <div class="users-profile-banner--info">
+    <div class="users-profile-banner--name">
+      <%= @user.full_name %>
+    </div>
+    <div class="users-profile-banner--info-line">
+      <%= t("custom.users.banner.registered_at", date: l(@user.created_at, format: :date_only)) %>
+    </div>
+    <div class="users-profile-banner--info-line">
+      <% unless skip_user_verification? %>
+        <% if @user.level_three_verified? %>
+          <span class="icon-check"></span>
+          <%= t("account.show.verified_account") %>
+        <% else %>
+          <%= t("custom.account.show.not_verified_account") %>
+        <% end %>
+      <% end %>
+    </div>
+    <%= render Shared::OfficialPositionBadgeComponent.new(user: @user) %>
+  </div>
+</div>

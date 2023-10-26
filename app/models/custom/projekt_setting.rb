@@ -54,68 +54,6 @@ class ProjektSetting < ApplicationRecord
         "projekt_feature.sidebar.show_navigator_in_projekts_page_sidebar": "active",
         "projekt_feature.sidebar.projekt_page_sharing": "active",
 
-        "projekt_feature.debates.show_report_button_in_sidebar": 'active',
-        "projekt_feature.debates.show_related_content": 'active',
-        "projekt_feature.debates.show_comments": 'active',
-        "projekt_feature.debates.allow_attached_image": 'active',
-        "projekt_feature.debates.allow_attached_documents": '',
-        "projekt_feature.debates.only_admins_create_debates": '',
-        "projekt_feature.debates.allow_downvoting": 'active',
-        "projekt_feature.debates.show_in_sidebar_filter": 'active',
-        "projekt_feature.debates.allow_voting": 'active',
-        "projekt_feature.debates.hide_projekt_selector": 'active',
-
-        "projekt_feature.proposals.quorum_for_proposals": '',
-        "projekt_feature.proposals.enable_proposal_support_withdrawal": 'active',
-        "projekt_feature.proposals.enable_proposal_notifications_tab": '',
-        "projekt_feature.proposals.enable_proposal_milestones_tab": '',
-        "projekt_feature.proposals.show_report_button_in_proposal_sidebar": 'active',
-        "projekt_feature.proposals.show_follow_button_in_proposal_sidebar": 'active',
-        "projekt_feature.proposals.show_community_button_in_proposal_sidebar": 'active',
-        "projekt_feature.proposals.show_related_content": 'active',
-        "projekt_feature.proposals.show_comments": 'active',
-        "projekt_feature.proposals.allow_attached_image": 'active',
-        "projekt_feature.proposals.allow_attached_documents": 'active',
-        "projekt_feature.proposals.only_admins_create_proposals": '',
-        "projekt_feature.proposals.show_in_sidebar_filter": 'active',
-        "projekt_feature.proposals.show_map": 'active',
-        "projekt_feature.proposals.enable_summary": '',
-        "projekt_feature.proposals.allow_voting": 'active',
-        "projekt_feature.proposals.enable_external_video": 'active',
-        "projekt_feature.proposals.enable_geoman_controls_in_maps": 'active',
-        "projekt_feature.proposals.hide_projekt_selector": 'active',
-
-        "projekt_feature.proposal_options.votes_for_proposal_success": 10000,
-
-        "projekt_feature.polls.intermediate_poll_results_for_admins": 'active',
-        "projekt_feature.polls.show_comments": 'active',
-        "projekt_feature.polls.additional_information": 'active',
-        "projekt_feature.polls.additional_info_for_each_answer": 'active',
-        "projekt_feature.polls.show_in_sidebar_filter": 'active',
-
-        "projekt_feature.budgets.remove_investments_supports": 'active',
-        "projekt_feature.budgets.show_report_button_in_sidebar": 'active',
-        "projekt_feature.budgets.show_follow_button_in_sidebar": 'active',
-        "projekt_feature.budgets.show_community_button_in_sidebar": 'active',
-        "projekt_feature.budgets.show_related_content": 'active',
-        "projekt_feature.budgets.show_implementation_option_fields": 'active',
-        "projekt_feature.budgets.show_user_cost_estimate": 'active',
-        "projekt_feature.budgets.show_comments": 'active',
-        "projekt_feature.budgets.enable_investment_milestones_tab": 'active',
-        "projekt_feature.budgets.allow_attached_documents": 'active',
-        "projekt_feature.budgets.only_admins_create_investment_proposals": '',
-        "projekt_feature.budgets.show_map": 'active',
-        "projekt_feature.budgets.show_results_after_first_vote": '',
-        "projekt_feature.budgets.enable_geoman_controls_in_maps": 'active',
-        "projekt_feature.budgets.show_relative_ballotting_results": '',
-
-        "projekt_feature.questions.show_questions_list": '',
-
-				"projekt_feature.milestones.newest_first": '',
-
-        "projekt_newsfeed.id": '',
-        "projekt_newsfeed.type": '',
-
         "projekt_custom_feature.default_footer_tab": nil
       }
     end

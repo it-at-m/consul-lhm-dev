@@ -1,0 +1,31 @@
+<% placement ||= nil %>
+<% if user_signed_in? %>
+  <li id="notifications"
+      class='nav-element user-notification-badge js-access-top-level-menu js-prevent-key-scroll'
+      <%= "aria-label='#{t('custom.links.menu.notification_icon')}'" if placement == 'desktop' %>
+      <%= "tabindex=0" if placement == 'desktop' %>
+  >
+    <%= link_to notifications_path, rel: "nofollow",
+                                    class: "notifications ",
+                                    tabindex: ( placement == 'desktop' ? "-1" : 0 ),
+                                    aria: { hidden: true }  do %>
+
+      <div class="main-navigation--link-icon">
+        <span class="icon-notification" aria-hidden="true"
+              title="<%= t("layouts.header.notification_item.new_notifications",
+                         count: current_user.notifications_count) %>">
+        </span>
+
+        <% if current_user.notifications.unread.count > 0 %>
+          <span class="user-notification--count" >
+            <%= current_user.notifications_count %>
+          </span>
+        <% else %>
+        <% end %>
+      </div>
+    <% end %>
+    <span class="show-for-small-only">
+      <%= t("layouts.header.notification_item.notifications") %>
+    </span>
+  </li>
+<% end %>

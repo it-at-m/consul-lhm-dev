@@ -47,10 +47,18 @@ class Shared::CommentsComponent < ApplicationComponent
     end
 
     def pagination_links
-      if params[:current_tab_path].present?
-        paginate comment_tree.root_comments, params: { action: params[:current_tab_path] }, remote: true
+      if params[:projekt_phase_id].present?
+        paginate comment_tree.root_comments, params: { action: "projekt_phase_footer_tab" }, remote: true
       else
         paginate comment_tree.root_comments, params: { anchor: "comments" }
       end
+    end
+
+    def show_filter?
+      !(
+        record.is_a?(ProjektQuestion) ||
+        (record.is_a?(Projekt) && record.overview_page?) ||
+        comment_tree.root_comments.where(hidden_at: nil).count < 2
+       )
     end
 end

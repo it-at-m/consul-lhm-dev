@@ -1,1 +1,2 @@
 $("#<%= dom_id(@formular_follow_up_letter) %>").replaceWith("<%= j render("custom/admin/formular_follow_up_letters/letter", letter: @formular_follow_up_letter) %>");
+$("#formular-answers").replaceWith("<%= j render("custom/admin/formular_follow_up_letters/answers_table", formular_fields: @formular_fields, image_tag: @image_flag, formular_answers: @formular_answers) %>");

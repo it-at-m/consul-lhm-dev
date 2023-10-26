@@ -1,0 +1,27 @@
+<%= render(Resources::ListItemComponent.new(component_attributes)) do |c| %>
+  <% c.header do %>
+    <%= date_formated %>
+  <% end %>
+
+  <% if @projekt.related_sdgs.present? %>
+    <% c.image_overlay_item do %>
+      <%= render SDG::FilterLinksComponent.new(@projekt.related_sdgs, Projekt) %>
+    <% end %>
+  <% end %>
+
+  <% if projekt.current_phases.any? %>
+    <% c.additional_body_section do %>
+      <div class="projekt-list-item--phases">
+        <% projekt.current_phases.each do |phase| %>
+          <a href="<%= projekt_phase_url_for(phase) %>" class="projekt-phase-link <%= phase_icon_class(phase) %>">
+            <%= phase.title %>
+          </a>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <% c.footer_section do  %>
+   <%= link_to('Zum Projekt', projekt.page.url, class: 'button -grey') %>
+  <% end %>
+<% end %>

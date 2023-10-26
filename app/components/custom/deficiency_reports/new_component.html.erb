@@ -1,16 +1,161 @@
-<main class="deficiency-report-new">
-  <%= back_link_to deficiency_reports_path %>
-  <%= header do %>
-    <% if feature?('help_page') %>
-      <%= link_to help_path(anchor: "deficiency_reports"), title: t("shared.target_blank"), target: "_blank" do %>
-        <%= t("custom.deficiency_reports.new.more_info") %>
+<% if Setting.new_design_enabled? %>
+
+  <main class="user-resources-form <%= " -no-image" unless feature?(:allow_images) %>">
+    <%= translatable_form_for(deficiency_report, html: { class: "deficiency-report-form" }) do |f| %>
+      <%= back_link_to(deficiency_reports_path) %>
+
+      <div class="flex-layout">
+        <div class="main-column">
+          <h1 class="user-resources-form--title">
+            <%= t("custom.deficiency_reports.new.start_new") %>
+          </h1>
+
+          <div class="hide-on-mobile">
+            <div class="user-resources-form--description">
+              <%= render_custom_block "user_resource_form_deficiency_report", default_content: t("custom.deficiency_reports.form.page_description") %>
+            </div>
+          </div>
+
+          <%= render "shared/errors", resource: deficiency_report %>
+        </div>
+      </div>
+
+      <div class="flex-layout">
+        <div class="main-column">
+          <%= f.translatable_fields do |translations_form| %>
+            <div class="js-suggest" data-locale="<%= translations_form.locale %>"></div>
+            <div class="user-resources-form--banner-editor js-user-resources-form--banner-editor -deficiency-report">
+              <div class="user-resources-form--title-wrapper">
+                <%= translations_form.text_area :title,
+                  label: false,
+                  class: "user-resources-form--banner-editor-title",
+                  placeholder: t("custom.deficiency_reports.form.title_placeholder"),
+                  autocomplete: "off" %>
+              </div>
+
+              <% if feature?(:allow_images) %>
+                <div class="banner-editor-image-attachment js-banner-editor-image-attachment">
+                  <% if f.object.image.blank? %>
+                    <% f.object.build_image %>
+                  <% end %>
+                  <%= f.fields_for :image do |image_builder| %>
+                    <%= render UserResources::ImageUploadComponent.new(image_builder, imageable: f.object) %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+
+            <%= translations_form.text_area :description,
+              label: false,
+              data: {placeholder: t("custom.deficiency_reports.form.description_placeholder_html")},
+              class: "html-area #{ck_editor_class(current_user)}" %>
+          <% end %>
+
+          <div class="new-card" id='map-container'>
+            <%= render "map_locations/form_fields",
+              form:     f,
+              map_location: deficiency_report.map_location || MapLocation.new,
+              label: t("proposals.form.map_location"),
+              help:     t("custom.deficiency_reports.form.map.hint"),
+              parent_class: "deficiency_report",
+              i18n_namespace: "deficiency_reports" %>
+          </div>
+        </div>
+
+        <aside class="sidebar">
+
+          <%= render Shared::SidebarCardComponent.new(
+                        title: t("custom.deficiency_reports.form.category.title"),
+                        description: t("custom.deficiency_reports.form.category.description"),
+                        icon_name: "th-large"
+                     ) do |c| %>
+            <%= f.select :deficiency_report_category_id, DeficiencyReport::Category.all.map { |category| [category.name, category.id] },
+                         { prompt: t("custom.deficiency_reports.form.category.placeholder"), label: false } %>
+          <% end %>
+
+          <%= render Shared::SidebarCardComponent.new(
+                        title: t("custom.deficiency_reports.form.documents.title"),
+                        icon_name: "file"
+                     ) do |c| %>
+             <%= render "documents/nested_documents", documentable: deficiency_report, f: f %>
+          <% end %>
+
+          <%= render Shared::SidebarCardComponent.new(
+                        title: t("custom.deficiency_reports.form.video.title"),
+                        description: t("custom.deficiency_reports.form.video.description"),
+                        icon_name: "video"
+                     ) do |c| %>
+              <%= f.text_field :video_url, label: false, placeholder: t("custom.deficiency_reports.form.video.placeholder"), class: "light-input" %>
+          <% end %>
+
+          <% if translations_interface_enabled? %>
+            <%= render Shared::SidebarCardComponent.new(
+                          title: t("custom.deficiency_reports.form.languages.title"),
+                          description: t("custom.deficiency_reports.form.languages.description"),
+                          icon_name: "language"
+                       ) do |c| %>
+                <%= render "shared/globalize_locales", resource: deficiency_report %>
+            <% end %>
+          <% end %>
+
+          <%= render Shared::SidebarCardComponent.new(
+                        title: t("custom.deficiency_reports.form.on_behalf_of.title"),
+                        description: t("custom.deficiency_reports.form.on_behalf_of.description"),
+                        icon_name: "user"
+                     ) do |c| %>
+              <%= f.text_field :on_behalf_of, label: false, placeholder: t("custom.deficiency_reports.form.on_behalf_of.placeholder"), class: "light-input" %>
+          <% end %>
+
+          <%= f.invisible_captcha :subtitle %>
+        </aside>
+      </div>
+  
+    <div class="user-resources-form--submit-section">
+      <% if deficiency_report.new_record? %>
+        <h3 class="user-resources-form--submit-section--privacy-policy">
+          Datenschutzbestimmungen & Allgemeine Nutzerbedingungen
+        </h3>
+  
+        <div>
+          <%= f.check_box :resource_terms,
+            title: t("custom.terms.resource_terms.title"),
+            label: t("custom.terms.resource_terms.label",
+                     privacy_link: link_to(
+                       t("custom.terms.privacy_link.text"), "/privacy",
+                       title: t("shared.target_blank"),
+                       target: "_blank"
+                     ),
+                     terms_link: link_to(
+                       t("custom.terms.terms_link.text"),
+                       "/conditions",
+                       title: t("shared.target_blank"),
+                       target: "_blank"
+                     )
+                    ) %>
+      </div>
+    <% end %>
+  
+    <%= f.submit(class: "button", value: t("custom.user_resources.form.submit_button")) %>
+    </div>
+    <% end %>
+  </main>
+
+
+<% else %>
+  <main class="deficiency-report-new">
+    <%= back_link_to deficiency_reports_path %>
+    <%= header do %>
+      <% if feature?('help_page') %>
+        <%= link_to help_path(anchor: "deficiency_reports"), title: t("shared.target_blank"), target: "_blank" do %>
+          <%= t("custom.deficiency_reports.new.more_info") %>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
 
-  <aside class="margin-bottom">
-    <%= helpers.render_custom_block 'deficiency_reports_creation_recommendations' %>
-  </aside>
+    <aside class="margin-bottom">
+      <%= helpers.render_custom_block "deficiency_reports_creation_recommendations" %>
+    </aside>
 
-  <%= render DeficiencyReports::FormComponent.new(deficiency_report) %>
-</main>
+    <%= render DeficiencyReports::FormComponent.new(deficiency_report) %>
+  </main>
+<% end %>

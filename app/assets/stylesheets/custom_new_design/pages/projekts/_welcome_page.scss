@@ -1,0 +1,39 @@
+.custom-new-design {
+  &.home-page {
+    header {
+      .top-bar-background-wrapper {
+        background-color: transparent;
+      }
+    }
+  }
+
+  .welcome-page--first-content-block {
+    .custom-content-block-body {
+      margin-top: 0 !important;
+    }
+  }
+
+  .welcome-page {
+    @media(max-width: $small-tablet-viewport-start) {
+      padding-top: 30px;
+    }
+
+    .main-column .custom-content-block-body {
+      margin-bottom: 40px;
+      margin-top: 40px;
+
+      @media(max-width: $small-tablet-viewport-start) {
+        margin-bottom: 30px;
+      }
+    }
+  }
+
+  .welcome-page--projekts-link {
+    display: flex;
+    justify-content: center;
+
+    a {
+      color: $main-text-color;
+    }
+  }
+}

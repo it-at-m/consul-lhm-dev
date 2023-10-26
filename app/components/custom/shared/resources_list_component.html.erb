@@ -1,0 +1,114 @@
+<% map = capture do %>
+  <% if @map_coordinates.present? %>
+    <% resources_name = resources.first&.class&.name&.underscore&.pluralize %>
+    <% resources_name = "deficiency-reports" if resources.first&.is_a?(DeficiencyReport) %>
+    <% resources_name = "budgets" if resources.first&.is_a?(Budget::Investment) %>
+    <div class="map resources-list--map not-print">
+      <% if @projekt_phase&.projekt&.vc_map_enabled? %>
+        <%= render Shared::VCMapComponent.new(
+          parent_class: resources_name,
+          process_coordinates: @map_coordinates,
+          map_location: @projekt_phase&.map_location,
+          projekt_phase: @projekt_phase,
+          show_admin_shape: @projekt_phase&.map_location&.show_admin_shape?
+        ) %>
+      <% else %>
+        <%= render Shared::MapComponent.new(
+          parent_class: resources_name,
+          process_coordinates: @map_coordinates,
+          map_location: @projekt_phase&.map_location,
+          projekt_phase: @projekt_phase,
+          show_admin_shape: @projekt_phase&.map_location&.show_admin_shape?
+        ) %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+
+<% if custom_body.present? %>
+  <% body = capture do %>
+    <%= custom_body %>
+  <% end %>
+<% else %>
+  <% body = capture do %>
+    <div class="resources-list--inner">
+      <% if @resources.present? %>
+        <% @resources.each do |resource| %>
+          <%= render resource_component(resource) %>
+        <% end %>
+      <% else %>
+        <h4 class="resources-list--not-items-message text-center">
+          <%= @empty_list_text %>
+        </h4>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+
+<% if @only_content %>
+  <%= body %>
+<% else %>
+  <div class="resources-list js-resources-list <%= class_names %>">
+    <% unless @hide_title %>
+      <h3 class="resources-list--title">
+        <% if @title_link.present? %>
+          <%= link_to(@title, @title_link) %>
+        <% elsif @title.present? %>
+          <%= @title %>
+        <% end %>
+      </h3>
+    <% end %>
+
+    <%= map %>
+
+    <% unless @hide_actions %>
+      <div class="resources-list--actions">
+        <% if @text_search_enabled %>
+          <%= render(
+            Shared::TextSearchFormComponent.new(
+              remote_url: remote_url,
+              i18n_namespace: "#{i18n_namespace}.search_form",
+            )
+          ) %>
+        <% end %>
+
+        <div class="items-list-line-divider">
+        </div>
+        <% if filters.present? %>
+          <%= render(
+            Shared::FilterDropdownComponent.new(
+              title: @filter_title,
+              options: filters,
+              selected_option: selected_filter_otpion,
+              i18n_namespace: "#{i18n_namespace}.#{@filter_param&.pluralize}",
+              url_param_name: @filter_param,
+              remote_url: remote_url,
+              in_projekt_footer_tab: @projekt_phase.present?
+            )
+          ) %>
+        <% end %>
+
+        <% unless @hide_view_mode_button %>
+          <div class="resources-list--switch-view-button js-resource-list-switch-view-button">
+            <i class="fa <%= switch_view_mode_icon %>"></i>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if items_remark.present? %>
+      <div class="margin-bottom">
+        <%= items_remark %>
+      </div>
+    <% end %>
+
+    <div class="resources-list--body js-resources-list--body">
+      <%= body %>
+    </div>
+    <% if bottom_content.present? %>
+      <div class="resources-list--bottom-content">
+        <%= bottom_content %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

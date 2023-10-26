@@ -1,0 +1,7 @@
+<%= render Shared::SidebarCardComponent.new(title: title_text, icon_name: "pen-fancy", opened_on_mobile: true) do |c| %>
+  <% if @projekt_phase.type.in?(phase_types_with_new_button) %>
+    <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
+  <% elsif @projekt_phase.type.in?(phase_types_with_link) %>
+    <a class="button -orange" href="#filter-subnav"><%= button_text %></a>
+  <% end %>
+<% end %>

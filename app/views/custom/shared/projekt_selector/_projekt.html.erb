@@ -4,7 +4,7 @@
      aria-labeled-by="<%= "#{dom_id(projekt)}_name" %>"
      data-projekt-id="<%= projekt.id %>"
      <%= "data-parent-id=#{projekt.parent.id}" if projekt.parent.present? %>
-     <%= "data-projekt-selectable=true" if projekt.selectable_in_selector?(controller_name, current_user) %>
+     <%= "data-projekt-selectable=true" if projekt.can_assign_resources?(controller_name, current_user) %>
      <%= "data-projekt-selectable-children=true" if projekt.children.selectable_in_selector(controller_name, current_user).any? %>>
 
   <div class='projekt-icon'>

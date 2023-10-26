@@ -1,0 +1,70 @@
+<% content_for :body_class, "home-page" %>
+
+<% content_for :canonical do %>
+  <%= render "shared/canonical", href: root_url %>
+<% end %>
+
+<%= render Shared::BannerComponent.new("homepage") %>
+
+<% provide :social_media_meta_tags do %>
+  <%= render "shared/social_media_meta_tags",
+              social_url: root_url %>
+<% end %>
+
+<%= render "header", header: @header %>
+<main class="welcome-page">
+  <div class="d-flex flex-layout">
+    <div class="main-column">
+      <%= render "shared/loader_spinner" %>
+      <div class="show-on-small-tablet standalone-sidebar-section margin-bottom">
+        <% if render_custom_content_block?('home_page_sidebar') %>
+          <%= render Shared::SidebarCardComponent.new(title: 'Information', icon_name: "info-circle") do |c| %>
+            <%= render_custom_block 'home_page_sidebar' %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="welcome-page--first-content-block">
+        <%= render_custom_block 'home_page_1' %>
+      </div>
+
+      <% if @active_projekts.any? %>
+        <%= render Projekts::ListComponent.new(
+          projekts: @active_projekts,
+          map_coordinates: @active_projekts_map_locations,
+          # current_filter: @current_projekt_filter,
+          # filters: @current_active_projekt_filters,
+          # remote_url: projekts_url(format: :js),
+          show_more_link: true
+        ) %>
+      <% end %>
+
+      <%= render_custom_block 'home_page_1a' %>
+
+      <%= render Users::LatestActivityComponent.new %>
+
+      <% if @cards.any? %>
+        <%= render partial: "cards", locals: { cards: @cards, section_title: t("welcome.cards.title") } %>
+      <% end %>
+
+      <%= render_custom_block 'home_page_2' %>
+
+      <% if @latest_polls.any? %>
+        <%= render Shared::ResourcesListComponent.new(resources: @latest_polls, resource_type: Poll, title: t('custom.welcome.current_polls')) %>
+      <% end %>
+
+      <%= render_custom_block 'home_page_4' %>
+
+      <% if @latest_items.any? %>
+        <%= render Shared::ResourcesListComponent.new(resources: @latest_items, title: t('custom.welcome.user_entries')) %>
+      <% end %>
+
+      <%= render_custom_block 'home_page_5' %>
+
+      <% if @expired_projekts.any? %>
+        <%= render Projekts::ListComponent.new(projekts: @expired_projekts, title: t("custom.welcome.expired_projekt_cards.title")) %>
+      <% end %>
+      <%= render_custom_block 'home_page_6' %>
+    </div>
+    <%= render 'sidebar' %>
+  </div>
+</main>

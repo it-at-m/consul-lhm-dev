@@ -1,12 +1,15 @@
 <% if controller_name.in? %w[debates proposals] %>
-  <div id="sentiment_selector" class="hide sentiments" style="margin-top:2rem;margin-bottom:1rem;">
+  <div id="sentiment_selector" class="hide sentiments">
     <%= f.label :sentiment_id, t("custom.shared.form.sentiment_label"), class: "required" %>
     <p class="small" style="margin-bottom:0.25rem;"><%= t("custom.shared.form.sentiment_hint") %></p>
-    <%= f.collection_radio_buttons :sentiment_id, Sentiment.all, :id, :name, { include_hidden: false } do |rb| %>
-      <%= rb.radio_button %>
-      <% button_styles = "border-color:#{rb.object.color};background-color:#{rb.object.color};color:#{pick_text_color(rb.object.color)}" %>
-      <%= rb.label(id: dom_id(rb.object), class: "sentiment", data: { "sentiment-id" => rb.object.id }, style: button_styles) { rb.text } %>
-    <% end %>
+
+    <div class="projekt-sentiments-selector--checkboxes">
+      <%= f.collection_radio_buttons :sentiment_id, Sentiment.all, :id, :name, { include_hidden: false } do |rb| %>
+        <%= rb.radio_button %>
+        <% button_styles = "border-color:#{rb.object.color};background-color:#{rb.object.color};color:#{pick_text_color(rb.object.color)}" %>
+        <%= rb.label(id: dom_id(rb.object), class: "sentiment js-select-projekt-sentiment", data: { "sentiment-id" => rb.object.id, "sentiment-color" =>  rb.object.color }, style: button_styles) { rb.text } %>
+      <% end %>
+    </div>
   </div>
 
   <% if model.errors.details[:sentiment_id].any? %>

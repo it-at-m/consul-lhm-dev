@@ -41,6 +41,8 @@ en:
         video_url: External video URL
         official_answer: Official answer
         on_behalf_of: Create report on behalf of someone
+        category: Category
+        status: Status
       debate:
         on_behalf_of: Create debate on behalf of someone
       proposal:
@@ -133,3 +135,6 @@ en:
         kind: Type
         email_for_confirmation: Send confirmation email
         drop_down_options: Dropdown options
+      formular_answer_image:
+        title: Title
+        attachment: Attachment

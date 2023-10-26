@@ -1,0 +1,99 @@
+<main>
+  <h1>
+    <%= t("custom.deficiency_reports.index.title") %>
+  </h1>
+
+  <% if Setting["deficiency_reports.intro_text"].present? %>
+    <div class="flex-layout">
+      <div class="main-column">
+        <div class="hide-on-mobile">
+          <div class="resource-page--intro-text">
+            <%= render_custom_block("deficiency_reports_index_welcome", default_content: t("custom.deficiency_reports.index.welcome_default_text_html")) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="flex-layout">
+    <div class="main-column">
+      <%= render(
+        Shared::ResourcesListComponent.new(
+          resources: @deficiency_reports,
+          resource_type: DeficiencyReport,
+          map_coordinates: @deficiency_reports_coordinates,
+          current_filter: @current_order,
+          filter_param: "order",
+          text_search_enabled: true,
+          filters: @valid_orders,
+          hide_title: true,
+          empty_list_text: "Keine Ergebnisse")) %>
+
+      <%= paginate @deficiency_reports %>
+    </div>
+
+    <div id="deficiency_reports-sidebar" class="sidebar">
+      <%= render Shared::SidebarCardComponent.new(title: t("custom.common.information"), icon_name: "info-circle") do |c| %>
+        <div class="margin-bottom-half">
+          <%= render_custom_block "deficiency_reports_index_sidebar", default_content: t("custom.deficiency_reports.index.sidebar_information_default_text") %>
+        </div>
+
+        <div class="proposals--info-count margin-bottom-half">
+          <span>
+            <%= t("custom.deficiency_reports.index.count") %>
+          </span>
+          <span>
+            <%= @deficiency_reports.count %>
+          </span>
+        </div>
+
+        <div class="hide-on-mobile">
+          <%= link_to t("custom.deficiency_reports.index.start_deficiency_report"), new_deficiency_report_path,
+            class: "button -orange", style: "display:inline-flex;" %>
+        </div>
+      <% end %>
+
+      <div class="show-on-mobile">
+        <%= render(Mobile::FixedBottomActionComponent.new) do %>
+          <%= link_to t("custom.deficiency_reports.index.start_deficiency_report"), new_deficiency_report_path,
+            class: "button -orange", style: "display:inline-flex;" %>
+        <% end %>
+      </div>
+
+      <%= render Shared::SidebarCardComponent.new(title: t("custom.deficiency_reports.index.sidebar.categories.title"), icon_name: "th-large") do |c| %>
+        <%= render "deficiency_reports/sidebar/categories" %>
+      <% end %>
+
+      <%= render Shared::SidebarCardComponent.new(title: t("custom.deficiency_reports.index.sidebar.statuses.title"), icon_name: "check-circle") do |c| %>
+        <%= render "deficiency_reports/sidebar/statuses" %>
+      <% end %>
+
+      <% if current_user &&
+          current_user.administrator? &&
+          Setting['deficiency_reports.admins_must_approve_officer_answer'].present? %>
+        <%= render Shared::SidebarCardComponent.new(title: t("custom.deficiency_reports.index.sidebar.approval_status_filter.title"), icon_name: "user-cog") do |c| %>
+          <%= render "deficiency_reports/sidebar/not_approved_filter" %>
+        <% end %>
+      <% end %>
+
+      <% if current_user &&
+          ( current_user.deficiency_report_officer? ||
+          current_user.administrator? ) %>
+        <%= render Shared::SidebarCardComponent.new(title: t("custom.deficiency_reports.index.sidebar.officer_filter.title"), icon_name: "highlighter") do |c| %>
+          <%= render "deficiency_reports/sidebar/officer_filter" %>
+        <% end %>
+      <% end %>
+
+      <% if current_user &&
+          extended_feature?('deficiency_reports.enable_my_posts_filter') %>
+        <%= render Shared::SidebarCardComponent.new(title: t("custom.deficiency_reports.index.sidebar.my_posts.title"), icon_name: "user-edit") do |c| %>
+          <%= render "shared/sidebar_filter/my_posts" %>
+        <% end %>
+      <% end %>
+
+      <%= render Sidebar::ExportListComponent.new(
+        path: deficiency_reports_path(**request.query_parameters, format: :csv),
+      ) %>
+    </div>
+  </div>
+</main>

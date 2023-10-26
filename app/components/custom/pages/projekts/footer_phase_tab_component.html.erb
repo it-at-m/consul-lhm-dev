@@ -1,6 +1,12 @@
 <% if phase.phase_activated? %>
   <li id="filter-subnav-<%= phase.id %>" class="page-subnav-tab <%= 'is-active' if phase.id == params[:projekt_phase_id] %>">
-    <%= link_to link_url, remote: true, onclick: '$("#footer-content").addClass("show-loader"); ' do %>
+    <%= link_to projekt_phase_footer_tab_page_path(@projekt.page, phase),
+      onclick: "$('#footer-content').addClass('show-loader');",
+      class: "js-remote-link-push-state",
+      data: {
+        remote: true,
+        "footer-tab-back-url": page_path(@projekt.page.slug, projekt_phase_id: phase.id, anchor: "projekt-footer"),
+      } do %>
       <h4>
         <%= tab_title %>
         <%= "(#{phase.resource_count})" if phase.resource_count.present? %>

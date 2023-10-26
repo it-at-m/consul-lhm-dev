@@ -1,0 +1,98 @@
+.custom-new-design {
+  // .button:not(div#page-content .button) {
+  .button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    // padding: 0 20px 0;
+    padding: 10px 20px !important;
+    max-width: 300px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    border-radius: 7px;
+    transition: background-color 0.1s ease;
+
+    .icon {
+      padding-right: 5px;
+    }
+
+    &.-brand-color {
+      color: white;
+      background: $brand;
+    }
+
+    &:hover, &:focus {
+      background-color: lighten($brand, 5%);
+      color: white;
+    }
+
+    &.-grey {
+      background: #c0cedb;
+      color: black;
+
+      &:hover {
+        background-color: #d1deeb;
+      }
+    }
+
+    &.-orange {
+      background: #FFA42D;
+      color: black;
+    }
+
+    &.-green {
+      background: #00AA0B;
+      color: white;
+
+      &:hover {
+        background: #0eb819;
+      }
+    }
+
+    &.-purple {
+      background: #EAE4FB;
+      color: black;
+      &:hover, &:focus {
+        background-color: #dad2f0;
+      }
+    }
+
+    &.hollow {
+      &:hover, &:focus, &:active {
+        background: #E1EDF7;
+        color: #004a83;
+      }
+
+      &.alert {
+        &:hover, &:focus, &:active {
+          background: #ffe7e3;
+          color: #cc4b37;
+        }
+      }
+    }
+  }
+
+  .icon {
+    margin-right: 5px;
+  }
+
+  .submit-button {
+    font-size: 18px;
+    height: 45px;
+  }
+
+  .input-group {
+    .button {
+      border-radius: 7px;
+    }
+  }
+
+  .new-resource-cta {
+    width: 420px;
+
+    .button {
+      font-size: 20px;
+    }
+  }
+}

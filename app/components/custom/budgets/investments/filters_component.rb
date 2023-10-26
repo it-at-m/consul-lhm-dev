@@ -34,6 +34,6 @@ class Budgets::Investments::FiltersComponent < ApplicationComponent
     end
 
     def remote?
-      controller_name == "pages"
+      controller_name.in?(["pages", "lines"])
     end
 end

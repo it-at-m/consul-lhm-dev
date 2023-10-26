@@ -1,0 +1,171 @@
+.direct-image-upload {
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 8px;
+
+  .image-preview, figure, img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .image-preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  img {
+    object-fit: cover;
+  }
+
+  .medium-9 {
+    width: 100%;
+  }
+
+  .form-error {
+    font-size: 14px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-bottom: 0;
+    padding: 5px 20px;
+  }
+}
+
+.direct-image-upload--progress-bar-wrapper {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.direct-image-upload--loading-bar {
+  height: 5px;
+  width: 0;
+  transition: width 500ms ease-out;
+
+  &.uploading {
+    background-color: green;
+  }
+
+  &.complete {
+    background-color: $success-color;
+  }
+
+  &.errors {
+    background-color: $alert-color;
+    margin-top: 5px;
+  }
+}
+
+.direct-image-upload--select-button {
+  color: $brand;
+  font-size: 33px;
+  opacity: 0.7;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.direct-image-upload--file-attach-area {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.direct-image-upload--file-field {
+  bottom: 0;
+}
+
+.direct-image-upload--image-actions-area {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #0000008a;
+  backdrop-filter: blur(15px);
+  font-weight: 500;
+  width: 100%;
+  height: 35px;
+  color: white;
+  display: flex;
+  padding: 0 20px;
+  align-items: center;
+  justify-content: space-between;
+
+  .file-name {
+    width: 60%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .remove-cached-attachment {
+    outline: none !important;
+  }
+}
+
+.direct-image-upload--attachment-errors {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  .error {
+    margin: 0;
+    display: block;
+    font-size: 14px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-bottom: 0;
+    padding: 12px 20px;
+  }
+}
+
+
+.direct-upload--remove-cached-image {
+  color: #cf2a0e;
+  cursor: pointer;
+}
+
+.direct-image-upload--preview-area {
+  width: 100%;
+  display: none;
+
+  &.-preview-set {
+    display: block;
+    .image-preview {
+      background-color: white;
+    }
+  }
+}
+
+.direct-image-upload--file-title {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  background: transparent !important;
+  border: none !important;
+  color: white !important;
+  // backdrop-filter: blur(15px) !important;
+  font-weight: 500;
+  padding: 0;
+  height: 100% !important;
+  width: 40%;
+
+  &:focus {
+    border: none !important;
+    box-shadow: none;
+  }
+}

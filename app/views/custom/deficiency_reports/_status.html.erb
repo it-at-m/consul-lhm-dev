@@ -1,9 +1,15 @@
 <% cache [deficiency_report,
           deficiency_report.status] do %>
-  <% if deficiency_report.status.present? %>
-    <div class="deficiency-report-status" style=<%= "color:#{deficiency_report.status.color}" %> >
-      <i class="fas fa-<%= "#{deficiency_report.status.icon}" %>"></i>
+  <% if deficiency_report.status.present? && !Setting.new_design_enabled? %>
+    <div class="deficiency-report-status margin-bottom" style="<%= "color:#{deficiency_report.status.color}" %>">
+      <i class="fas fa-<%= deficiency_report.status.icon %>"></i>
       <%= deficiency_report.status.title %>
     </div>
+  <% end %>
+<% end %>
+
+<% if can? :update_status, deficiency_report %>
+  <%= form_for deficiency_report, url: update_status_deficiency_report_path do |f| %>
+    <%= f.select :deficiency_report_status_id, DeficiencyReport::Status.all.map { |df| [df.title, df.id] }, { label: false }, { onchange: "this.form.submit();" } %>
   <% end %>
 <% end %>

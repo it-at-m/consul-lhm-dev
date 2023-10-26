@@ -1,6 +1,10 @@
 de:
   custom:
     projekt_phases:
+      cta:
+        title: Beteiligung
+        voting_phase: An Abstimmung teilnehmen
+        question_phase: An Kurzumfrage teilnehmen
       permission_problem:
         new_button_component:
           shared:
@@ -55,6 +59,7 @@ de:
             only_admins: Die Beteiligung ist auf Admin-Benutzer beschränkt.
             no_registered_address: Ihrem Account konnte keine registrierte Adresse zugeordnet werden. Bitte aktualisieren Sie Ihr Konto.
             only_specific_registered_address_groupings: Die Beteiligung ist auf ein anderes Gebiet beschränkt.
+            not_enough_money: "Sie haben bereits das gesamte verfügbare Budget zugewiesen."
         commenting:
           shared:
             not_logged_in: "Um fortzufahren, müssen Sie sich %{sign_in} oder %{sign_up}."

@@ -1,0 +1,57 @@
+
+<% provide :title do %><%= @poll.name %><% end %>
+
+<main>
+  <div id="<%= dom_id(@poll) %>">
+    <div class="flex-layout">
+      <div class="main-column">
+        <div class="resource-page--title-subline">
+          <%= render_custom_block("polls_show_welcome_text", custom_prefix: @poll.author.name, default_content: t("custom.polls.show.welcome_default_text")) %>
+        </div>
+      </div>
+      <div class="sidebar-placeholder"></div>
+    </div>
+
+    <div class="flex-layout">
+      <div class="main-column">
+        <%= render ResourcePage::BannerComponent.new(resource: @poll) do |c| %>
+          <% c.links_section do %>
+             <%= render Polls::SubNavComponent.new(poll: @poll) %>
+          <% end %>
+        <% end %>
+
+        <div class="resource-page--description new-card">
+          <%= render "poll_header" %>
+        </div>
+
+        <div class="participation-stats polls-results-stats">
+          <div class="row margin">
+            <div class="small-12 medium-2 column">
+              <%= render "shared/stats/links", stats: @stats %>
+              <%= render "advanced_stats_links" if @stats.advanced? %>
+            </div>
+
+            <div class="small-12 medium-9 column stats-content">
+              <%= render "shared/stats/participation", stats: @stats %>
+              <%= render "advanced_stats", stats: @stats if @stats.advanced? %>
+
+              <div id="total_no_demographic_data">
+                <p class="help-text">
+                  <%# = t("stats.no_demographic_data", count: @stats.total_no_demographic_data) %>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    <aside class="sidebar">
+      <%= render Shared::SidebarCardComponent.new(title: t("custom.common.information"), icon_name: "info-circle") do |c| %>
+        <div class="margin-bottom-half">
+           <%= format_date_range(@poll.starts_at, @poll.ends_at, separator: t("custom.polls.poll.date.to")) %>
+        </div>
+      <% end %>
+    </aside>
+    </div>
+  </div>
+</main>

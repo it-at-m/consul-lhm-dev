@@ -124,7 +124,7 @@ de:
         attributes:
           key: Spaltenname
           name: Name
-          options: Optionen  
+          options: Optionen
       registered_address_streets:
         index:
           title: Registrierte Adressen
@@ -152,7 +152,7 @@ de:
         registered_address_groupings:
           list: Registrierte Adressgruppen
         registered_address_streets:
-          list: Registrierte Straßen    
+          list: Registrierte Straßen
         individual_groups: Individuelle Gruppen
       polls:
         poll:
@@ -437,7 +437,7 @@ de:
             general: Funktionen
             form: Formularfelder
             resource: Individueller Beitrag
-        projekt_labels: 
+        projekt_labels:
           name: Labels
           page_title: Labels
           create_button: Label erstellen
@@ -456,12 +456,12 @@ de:
             color: Farbe
             name: Name
           form:
-            color_placeholder: "HEX Code mit #" 
+            color_placeholder: "HEX Code mit #"
           notice:
             destroy: Sentiment erfolgreich gelöscht
         projekt_questions:
-          page_title: Kurzumfrage      
-          create_button: Frage erstellen  
+          page_title: Kurzumfrage
+          create_button: Frage erstellen
           send_notifications_button: Benachrichtigungen senden
           table:
             title: Kurzumfrage
@@ -469,7 +469,7 @@ de:
             answers_count: Anzahl der Antworten
             comments_count: Anzahl der Kommentare
           new:
-            title_livestream: Frage für Livestream erstellen    
+            title_livestream: Frage für Livestream erstellen
             title: Frage erstellen
         projekt_events:
           page_title: Veranstaltungen
@@ -514,6 +514,7 @@ de:
             email: Email
             date: Datum
             dropdown: Dropdown
+            image: Bild
           update_field_button: Formularfeld aktualisieren
           add_field_button: Neues Formularfeld hinzufügen
         formular_answers:
@@ -564,3 +565,5 @@ de:
           title: Gruppenwert bearbeiten
         table:
           name: Name
+      common:
+        download_current_selection: Aktuelle Auswahl herunterladen

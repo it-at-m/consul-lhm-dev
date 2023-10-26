@@ -89,6 +89,10 @@ de:
           subtitle_description: Fügt einen Untertitel zur Applikation hinzu.
           launch_date: Erscheinungsdatum
           launch_date_description: "Bitte geben Sie das Erscheinungsdatum im folgenden Format an: \"dd.mm.yyyy\". So sollte beispielsweise der 3. Oktober 1990 als 03.10.1990 geschrieben werden."
+          homepage_button_text: Homepage-Button-Text
+          homepage_button_text_description: Text, der auf dem Homepage-Button zu sehen
+          homepage_button_link: Homepage-Button-Link
+          homepage_button_link_description: Link, der über den Button angesteuert werden soll
         gdpr:
           devise_timeout_min: Dauer von Nutzer-Sitzungen
           devise_timeout_min_description: Legen Sie fest, wie lange ein Nutzer pro Sitzung eingeloggt bleiben soll in Minuten

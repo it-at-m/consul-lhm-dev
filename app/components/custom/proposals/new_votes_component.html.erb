@@ -1,0 +1,58 @@
+<div class="supports text-center">
+  <% if projekt_phase_feature?(proposal.projekt_phase, "resource.quorum_for_proposals") %>
+    <div>
+      <abbr title="<%= t("proposals.proposal.reason_for_supports_necessary") %>">
+        <%= t("proposals.proposal.supports_necessary",
+              number: number_with_delimiter(proposal.custom_votes_needed_for_success)) %>
+              </span>
+    </div>
+  <% end %>
+
+  <% if projekt_phase_feature?(proposal.projekt_phase, "resource.quorum_for_proposals") %>
+    <div class="progress small-12 round">
+      <span class="meter" style="width: <%= helpers.progress_bar_percentage(proposal) %>%;"></span>
+      <span class="percentage">
+        <%= helpers.supports_percentage(proposal) %>&nbsp;/&nbsp;<%= t("proposals.proposal.total_percent") %>
+      </span>
+    </div>
+  <% end %>
+
+  <div class="in-favor">
+    <% if voted? %>
+      <% if helpers.projekt_phase_feature?(proposal.projekt_phase, "resource.enable_proposal_support_withdrawal") %>
+        <%= button_to unvote_proposal_url(proposal),
+            class: "button button-support small expanded unvote",
+            title: t("proposals.proposal.support_title"), method: "post", remote: true do %>
+          <%= t("custom.proposals.proposal.unsupport") %>
+        <% end %>
+      <% else %>
+        <div class="supported callout success">
+          <%= t("proposals.proposal.already_supported") %>
+        </div>
+      <% end %>
+
+    <% else %>
+      <%= button_to vote_url,
+          class: "button button-support small expanded",
+          title: t("proposals.proposal.support_title"),
+          method: "post",
+          remote: true,
+          "aria-label": support_aria_label do %>
+        <%= t("proposals.proposal.support") %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <span class="total-supports">
+    <%= t("custom.proposals.proposal.supports", count: proposal.total_votes) %>&nbsp;
+
+  </span>
+
+  <%= render Shared::ParticipationNotAllowedComponent.new(proposal, cannot_vote_text: cannot_vote_text) %>
+
+  <% if voted? && setting["twitter_handle"] %>
+    <div class="share-supported">
+      <%= render "proposals/social_share", proposal: proposal, share_title: false %>
+    </div>
+  <% end %>
+</div>

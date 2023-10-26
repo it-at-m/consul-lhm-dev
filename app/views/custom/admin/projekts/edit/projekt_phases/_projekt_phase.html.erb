@@ -11,9 +11,9 @@
     <div class='margin-bottom'>
       <div id="<%= dom_id(projekt_phase, :copy_phase_link) %>" class="hide">
         <% if @projekt.overview_page? %>
-          <%= request.base_url + projekts_path(selected_phase_id: projekt_phase.id, anchor: "filter-subnav") %>
+          <%= request.base_url + projekts_path(projekt_phase_id: projekt_phase.id, anchor: "filter-subnav") %>
         <% else %>
-          <%= request.base_url + "/#{@projekt.page.slug}?selected_phase_id=#{projekt_phase.id}#filter-subnav" %>
+          <%= request.base_url + "/#{@projekt.page.slug}?projekt_phase_id=#{projekt_phase.id}#filter-subnav" %>
         <% end %>
       </div>
       <small>

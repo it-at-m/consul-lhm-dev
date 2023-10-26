@@ -1,0 +1,84 @@
+<% launch_page ||= false %>
+
+<header>
+  <div class="js-stiky-header top-bar-wrapper">
+    <div class="top-bar-background-wrapper">
+      <div class="top-bar" data-white-text="<%= extended_feature?('general.use_white_top_navigation_text') %>">
+        <span data-responsive-toggle="responsive-menu"
+              class="hamburger-menu header--mobile-hamburger-menu focusable js-toggle-mobile-menu js-prevent-key-scroll"
+              role="button"
+              tabindex="0"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-label='<%= t('custom.links.menu.mobile.menu_label') %>' >
+              <span class="menu-icon dark" data-toggle></span>
+        </span>
+
+        <div class="top-bar--title">
+          <%= link_to root_path do %>
+            <%= image_tag(image_path_for("logo_header.png"), alt: Setting["org_name"], class: 'top-bar--title-logo-top') %>
+            <%= image_tag(image_path_for("logo_header.png"), alt: Setting["org_name"], class: 'top-bar--title-logo-stikcy') %>
+            <%#= image_tag(topbar_image_path, alt: Setting["org_name"], class: 'top-bar--title-logo-top') %>
+            <%#= image_tag(image_path_for("logo_header_new.png"), alt: Setting["org_name"], class: 'top-bar--title-logo-stikcy') %>
+          <% end %>
+        </div>
+
+        <div class="header--navigation expanded not-print">
+          <div class="hader--subnavigation-wrapper hide-for-small-only">
+            <%= render partial: "shared/subnavigation_new", locals: { placement: 'desktop', launch_page: launch_page } %>
+          </div>
+
+          <% if !launch_page && current_user.nil? %>
+            <div class='header--account-buttons show-on-desktop hide-on-mobile'>
+              <%= link_to t('devise_views.menu.login_items.login'), new_user_session_path, class: 'button sign-in-button -brand', role: 'button' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+  </header>
+  <div class="header--responsive-menu-wrapper">
+    <div id="responsive-menu" class='header--responsive-menu not-print'>
+      <div class="subnavigation">
+
+        <% if current_user.present? %>
+          <div class="header--responsive-menu--user">
+            <div class="header--responsive-menu--user-avatar">
+              <% if current_user&.image&.attached? %>
+                <%= image_tag(current_user.image.variant(:medium)) %>
+              <% else %>
+                <%= current_user.first_letter_of_name %>
+              <% end %>
+            </div>
+            <div class="header--responsive-menu--user-name">
+              <%= current_user.full_name %>
+            </div>
+            <%= link_to("Profil anzeigen", user_path(current_user), class: "header--responsive-menu--user-profile-link") %>
+          </div>
+        <% end %>
+
+        <div class="header--responsive-menu-title">
+          <div>
+            <%= Setting['extended_option.general.title'] %>
+          </div>
+          <div>
+            <b><%= Setting["extended_option.general.subtitle"] %></b>
+          </div>
+        </div>
+
+        <% if !launch_page && current_user.nil? %>
+          <div class='show-on-mobile header--responsive-menu-sign-in-section'>
+            <%= link_to t('devise_views.menu.login_items.login'), new_user_session_path, class: 'header--responsive-menu-sign-in-button', role: 'button' %>
+          </div>
+        <% end %>
+
+        <%= render partial: "shared/subnavigation_new", locals: { placement: 'mobile', launch_page: launch_page } %>
+        <div class="small-12 column">
+          <%= render "shared/top_links" %>
+        </div>
+      </div>
+    </div>
+  </div>

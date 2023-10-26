@@ -1,0 +1,39 @@
+<%= render(Resources::ListItemComponent.new(component_attributes)) do |c| %>
+  <% c.header do %>
+    <div>
+      <% if @sentiment.present? %>
+        <%= @sentiment.name %>
+      <% end %>
+    </div>
+
+    <div>
+      <%= date_formated %>
+    </div>
+  <% end %>
+
+  <% if proposal.labels_available? %>
+    <% c.image_overlay_item do %>
+      <%= render Shared::ProjektLabelsComponent.new(resource: proposal) %>
+    <% end %>
+  <% end %>
+
+  <% if helpers.show_proposal_votes? && (proposal.successful? || proposal.archived? ||  helpers.projekt_phase_feature?(proposal.projekt_phase, "resource.allow_voting")) %>
+    <% c.footer_section do  %>
+      <div id="<%= dom_id(proposal) %>_votes" class="small-12 xlarge-10 small-centered column supports-container">
+        <% if proposal.successful? %>
+          <div class="supports text-center">
+            <%= render "proposals/supports", proposal: proposal %>
+          </div>
+        <% elsif proposal.archived? %>
+          <div class="padding text-center">
+            <strong><%= t("proposals.proposal.supports", count: proposal.total_votes) %></strong>
+            <p><%= t("proposals.proposal.archived") %></p>
+          </div>
+        <% elsif helpers.projekt_phase_feature?(proposal.projekt_phase, "resource.allow_voting") %>
+          <%= render Proposals::NewVotesComponent.new(proposal, voted: @voted) %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+

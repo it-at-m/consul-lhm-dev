@@ -1,14 +1,16 @@
 <div class="row">
   <div id="proposal_notifications" class="small-12 column notification-body">
-    <%= render "custom/shared/filter_links", i18n_namespace: "custom.projekts.projekt_events" %>
+    <% if Setting.old_design_enabled? %>
+      <%= render "custom/shared/filter_links", i18n_namespace: "custom.projekts.projekt_events" %>
+    <% end %>
 
     <% if projekt_events.blank? %>
-      <div class="callout primary text-center">
+      <h4 class="text-center">
         <%= t("custom.projekts.page.projekt_events_tab.no_events") %>
-      </div>
-    <% else  %>
+      </h4>
+    <% else %>
       <% projekt_events.each do |event| %>
-        <%= render Projekts::ProjektEvents::ListItem.new(projekt_event: event, show_projekt_link: @show_projekt_link) %>
+        <%= render event_component_class.new(projekt_event: event, show_projekt_link: @show_projekt_link) %>
       <% end %>
     <% end %>
   </div>

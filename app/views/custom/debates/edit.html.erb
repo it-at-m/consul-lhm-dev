@@ -1,0 +1,20 @@
+<% if Setting.new_design_enabled? %>
+  <%= render UserResources::FormComponent.new(
+    @debate,
+    url: debates_path,
+    selected_projekt: @selected_projekt,
+    title: t("debates.edit.editing"),
+    categories: @categories
+  ) %>
+<% else %>
+  <div class="debate-edit">
+    <div class="small-12 column">
+      <%= back_link_to %>
+      <div class="float-right">
+        <%= link_to t("debates.edit.show_link"), @debate %>
+      </div>
+      <h1><%= t("debates.edit.editing") %></h1>
+      <%= render "form", selected_projekt: @selected_projekt %>
+    </div>
+  </div>
+<% end %>

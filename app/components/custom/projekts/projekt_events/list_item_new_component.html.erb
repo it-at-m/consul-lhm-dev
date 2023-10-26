@@ -1,0 +1,66 @@
+<div id="<%= dom_id(projekt_event) %>" class="new-card projekt-event-item-new">
+  <div class="projekt-event-item-new-calendar-column">
+    <div class="projekt-event-item-new-calendar">
+      <div class="projekt-event-item-new-calendar-dayname">
+        <%= l(projekt_event.datetime, format: "%b").upcase %>
+      </div>
+      <div class="projekt-event-item-new-calendar-daynumber">
+        <%= projekt_event.datetime.strftime('%d') %>
+      </div>
+      <% if projekt_event.end_datetime.present? && projekt_event.datetime.to_date != projekt_event.end_datetime.to_date %>
+        <div class="projekt-event-item-new-calendar--enddatetime">
+          <div class="projekt-event-item-new-calendar--separator">
+            -
+          </div>
+          <div class="projekt-event-item-new-calendar-dayname">
+            <%= l(projekt_event.end_datetime, format: "%b").upcase %>
+          </div>
+          <div class="projekt-event-item-new-calendar-daynumber">
+            <%= projekt_event.end_datetime.strftime('%d') %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="projekt-event-item-new-body">
+    <h4 class="projekt-event-item-new-body--title">
+      <% if @show_projekt_link && projekt_event.projekt.published? %>
+        <%= link_to(projekt_event.title, projekt_event.projekt.page.url) %>
+      <% else %>
+        <%= projekt_event.title %>
+      <% end %>
+    </h4>
+    <% if projekt_event.description.present? %>
+      <div class="projekt-event-item-new--description-text-wrapper">
+        <%= render Shared::CollapseTextComponent.new(size: :small) do |component| %>
+          <% component.inner_content do %>
+            <div class="projekt-event-item-new--description-text">
+              <%= helpers.auto_link_already_sanitized_html AdminWYSIWYGSanitizer.new.sanitize(projekt_event.description) %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="projekt-event-item-new-body--details">
+      <div class="projekt-event-item-new-body--details-row">
+        <i class="fa fa-code-branch"></i>
+        <%= link_to projekt_event.projekt.page.url do %>
+          <%= projekt_event.projekt.name %>
+        <% end %>
+      </div>
+      <div class="projekt-event-item-new-body--details-row">
+        <i class="fa fa-map"></i><%= l(projekt_event.datetime, format: "%d. %B %Y %H:%M") %>
+        <% if projekt_event.end_datetime.present? %>
+          -
+          <%= l(projekt_event.end_datetime, format: "%d. %B %Y %H:%M") %>
+        <% end %>
+      </div>
+      <% if projekt_event.location.present? %>
+        <div class="projekt-event-item-new-body--details-row"><i class="fa fa-map-marker-alt"></i><%= projekt_event.location %></div>
+      <% end %>
+      <% if projekt_event.weblink.present? %>
+        <div class="projekt-event-item-new-body--details-row"><i class="fa fa-globe"></i><a href="<%= projekt_event.weblink %>"><%= projekt_event.weblink %></a></div>
+      <% end %>
+    </div>
+  </div>
+</div>

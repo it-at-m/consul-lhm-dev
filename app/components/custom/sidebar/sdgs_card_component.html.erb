@@ -1,0 +1,8 @@
+<% if @sdgs.present? %>
+  <%= render Shared::SidebarCardComponent.new(title: t("custom.sdg.goals.filter.heading"), icon_name: "globe") do |c| %>
+    <%= render "shared/tag_cloud", taggable: "projekt" %>
+    <% if @sdgs.present? %>
+      <%= render SDG::Goals::TagCloudComponent.new("Projekt", sdg_targets: @sdg_targets) %>
+    <% end %>
+  <% end %>
+<% end %>

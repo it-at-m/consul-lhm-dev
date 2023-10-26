@@ -18,6 +18,10 @@ class Budget < ApplicationRecord
     ].compact
   end
 
+  def knapsack_voting?
+    voting_style == "knapsack"
+  end
+
   def distributed_voting?
     voting_style == "distributed"
   end

@@ -1,0 +1,30 @@
+.custom-new-design {
+  .text-search-form {
+    flex-grow: 1;
+    position: relative;
+  }
+
+  .text-search-form--reset-button {
+    font-size: 22px;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    // width: 25px;
+    // height: 25px;
+    padding: 5px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 100ms background-color ease;
+
+    i {
+      display: block;
+    }
+
+    &:hover {
+      background-color: #e6e6e6;
+    }
+  }
+}

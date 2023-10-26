@@ -1,0 +1,24 @@
+<main class="user-page">
+  <div class="flex-layout">
+    <div class="main-column">
+      <%= render "shared/loader_spinner" %>
+      <%= render(Users::ProfileBannerComponent.new(user: @user)) %>
+      <%= render Users::NewPublicActivityComponent.new(@user) %>
+    </div>
+    <aside class="sidebar">
+      <% if @user != current_user %>
+        <%= render Shared::SidebarCardComponent.new(title: t("custom.users.contact"), icon_name: "envelope-open") do |c| %>
+          <% if @user.email_on_direct_message? %>
+            <%= link_to t("users.show.send_private_message"),
+              new_user_direct_message_path(@user),
+              class: "button" %>
+          <% else %>
+            <div class="callout primary float-right">
+              <%= t("users.show.no_private_messages") %>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </aside>
+  </div>
+</main>

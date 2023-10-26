@@ -2,12 +2,23 @@
   margin-bottom: 1em;
 
   .projekt-selector {
+    max-width: 300px;
     margin-top: 1rem;
     position: relative;
     cursor: pointer;
+    user-select: none;
+
+    .projekt {
+      user-select: none;
+    }
 
     &:not(:first-child) {
-      visibility: hidden;
+      // visibility: hidden;
+      display: none;
+    }
+
+    &.-visible {
+      display: block;
     }
 
     &:after {
@@ -36,22 +47,34 @@
 
   .projekt-selector > .projekt {
      border-bottom: none;
+
+     &:first-child {
+       border-radius: 10px;
+     }
+  }
+
+  .projekt-selector > .selected-projekt {
+    border-radius: 10px;
   }
 
   .projekt-selector > .projekt,
   .projekt-selector > .selected-projekt {
      height: 100%;
   }
-  
+
   .spacer {
     display: none;
     align-self: center;
+
+    &.-visible {
+      display: block;
+    }
   }
 
   .projekt_group {
     position: absolute;
     top: 106%;
-    border: 1px solid $dark;    
+    border: 1px solid $dark;
     display: none;
     width: 100%;
     color: #0a0a0a;
@@ -82,7 +105,7 @@
     display: flex;
     border-bottom: 1px solid $dark;
     padding: 4px 0;
-    
+
     &:last-child {
       border-bottom: none;
     }
@@ -121,15 +144,10 @@
 
   @media screen and (min-width: 40em) {
     display: flex;
- 
-    .spacer {
-      display: block;
-      margin: 20px 20px;
-      visibility: hidden;
-    }
 
-    .projekt-selector, .spacer {
-      display: inline-block;
+    .spacer {
+      display: none;
+      margin: 20px 20px;
     }
 
     .projekt-selector {
@@ -138,7 +156,6 @@
       flex-basis: 0;
     }
   }
-
 }
 
 #projekt-phase-selector-fields {

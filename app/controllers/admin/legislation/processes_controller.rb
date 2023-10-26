@@ -17,7 +17,7 @@ class Admin::Legislation::ProcessesController < Admin::Legislation::BaseControll
 
     if @process.save
       if @process.projekt_phase.present? #custom
-        link = "#{@process.projekt_phase&.projekt&.page&.url}?selected_phase_id=#{@process.projekt_phase.id}#filter-subnav"
+        link = "#{@process.projekt_phase&.projekt&.page&.url}?projekt_phase_id=#{@process.projekt_phase.id}#filter-subnav"
       else
         link = legislation_process_path(@process)
       end
@@ -34,7 +34,7 @@ class Admin::Legislation::ProcessesController < Admin::Legislation::BaseControll
     if @process.update(process_params)
 
       if @process.projekt_phase.present? #custom
-        link = "#{@process.projekt_phase&.projekt&.page&.url}?selected_phase_id=#{@process.projekt_phase.id}#filter-subnav"
+        link = "#{@process.projekt_phase&.projekt&.page&.url}?projekt_phase_id=#{@process.projekt_phase.id}#filter-subnav"
       else
         link = legislation_process_path(@process)
       end

@@ -1,28 +1,33 @@
-<ul class="nav-flyout-block">
+<% projekt_nesting_level ||= 1 %>
 
-  <% projekts.each do |projekt| %>
-    <% projekt_children_to_show_in_menu = projekt.children.visible_in_menu(current_user) %>
+<% if projekt_nesting_level <= 3 %>
+  <ul class="nav-flyout-block">
+    <% projekts.each do |projekt| %>
+      <% projekt_nesting_level = 2 %>
+      <% projekt_children_to_show_in_menu = projekt.children_projekts_show_in_navigation.select { |p| p.visible_for?(current_user) } %>
 
-    <li class='nav-element flyout-item flyout-item-projekt js-access-flyout-menu-item focusable'
-      <%= "tabindex=0" if placement == "desktop" %>
-        aria-label="<%= t("custom.links.menu.projekt_name_label", projekt_name: projekt.name) %>"
-        <%= "aria-haspopup=true" if projekt_children_to_show_in_menu.any? %>>
+      <li class='nav-element flyout-item flyout-item-projekt js-access-flyout-menu-item focusable'
+        <%= "tabindex=0" if placement == "desktop" %>
+          aria-label="<%= t("custom.links.menu.projekt_name_label", projekt_name: projekt.name) %>"
+          <%= "aria-haspopup=true" if projekt_children_to_show_in_menu.any? %>>
 
-      <div class='projekt-name-group'>
-        <div class='flyout-item-name projekt-name'>
-          <%= prepare_projekt_name(projekt, placement) %>
-        </div>
+          <div class='projekt-name-group'>
+            <div class='flyout-item-name projekt-name'>
+              <%= prepare_projekt_name(projekt, placement) %>
+            </div>
 
-        <% if projekt_children_to_show_in_menu.any? && local_assigns[:skip_subprojekts] != true && placement == 'mobile' %>
-          <div class='nav-toggle-arrow js-toggle-mobile-flyout-item focusable'
-               tabindex="0"
-               aria-expanded=false>
+            <% if projekt_children_to_show_in_menu.any? && local_assigns[:skip_subprojekts] != true && placement == 'mobile' %>
+              <div class='nav-toggle-arrow js-toggle-mobile-flyout-item focusable'
+                   tabindex="0"
+                   aria-expanded=false>
+              </div>
+            <% end %>
           </div>
-        <% end %>
-      </div>
 
-      <%= render partial: "shared/subnavigation_flyout_projekts", locals: { projekts: projekt_children_to_show_in_menu, placement: placement } if projekt_children_to_show_in_menu.any? && local_assigns[:skip_subprojekts] != true %>
-    </li>
-  <% end %>
-
-</ul>
+          <% if projekt_children_to_show_in_menu.any? && local_assigns[:skip_subprojekts] != true %>
+            <%= render partial: "shared/subnavigation_flyout_projekts", locals: { projekts: projekt_children_to_show_in_menu, placement: placement, projekt_nesting_level: (projekt_nesting_level + 1) }  %>
+          <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

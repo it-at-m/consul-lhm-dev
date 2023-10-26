@@ -384,6 +384,7 @@ li.projekt-navigator[aria-expanded="false"] {
   .footer-phases-filter-subnav #filter-subnav {
     display: flex;
     overflow-x: scroll;
+    overflow-y: hidden;
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
     scrollbar-width: none; /* for Firefox */
 
@@ -402,6 +403,10 @@ li.projekt-navigator[aria-expanded="false"] {
 
 .footer-phases-filter-subnav {
   .page-subnav-tab {
+    h4 {
+      margin-right: 30px;
+    }
+
     .phase-subscription {
       color: #004a83;
       position: absolute;
@@ -439,7 +444,7 @@ li.projekt-navigator[aria-expanded="false"] {
     display: block;
     position: fixed;
     margin: auto;
-    top: 20px;
+    top: 140px;
     left: 0;
     right: 0;
     width: 100px;

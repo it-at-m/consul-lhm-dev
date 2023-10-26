@@ -1,0 +1,33 @@
+<div class="sidebar-card <%= class_name %>">
+  <% if @title.present? %>
+    <h4 class="sidebar-card--title js-sidebar-card--title">
+      <div class="d-flex sidebar-card--title-inner">
+        <i class="fas fa-<%= @icon_name %>"></i>
+        <div class="sidebar-card--title-text">
+          <%= @title %>
+        </div>
+      </div>
+      <div class="icon-chevron-down sidebar-collapse-icon"></div>
+    </h4>
+  <% end %>
+
+  <div class="sidebar-card--content">
+    <% if @description.present? %>
+      <div class="sidebar-card--description">
+        <%= @description %>
+      </div>
+    <% end %>
+
+    <div class="sidebar-card--section">
+      <%= content %>
+    </div>
+    <% if additional_sections.present? %>
+      <% additional_sections.each do |additional_section| %>
+        <div class="sidebar-card--separator"> </div>
+        <div class="sidebar-card--section">
+          <%= additional_section %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

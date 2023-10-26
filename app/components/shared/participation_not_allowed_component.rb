@@ -18,9 +18,9 @@ class Shared::ParticipationNotAllowedComponent < ApplicationComponent
         if !current_user
           sanitize(t("users.login_to_continue", signin: link_to_signin, signup: link_to_signup))
         elsif organization?
-          tag.p t("votes.organizations")
+          t("votes.organizations")
         elsif cannot_vote_text.present?
-          tag.p sanitize(cannot_vote_text)
+          sanitize(cannot_vote_text)
         end
     end
 

@@ -1,0 +1,26 @@
+<%= render "shared/loader_spinner" %>
+
+<div class="main-column">
+  <div class="projekt-arguments-containerr">
+    <div class="projekt-arguments --pro">
+      <% if @projekt_arguments_pro.any? %>
+        <h3 class="projekt-arguments-title text-right"><%= t("custom.projekts.projekt_arguments.pro") %></h3>
+        <% @projekt_arguments_pro.each do |argument| %>
+          <%= render "custom/pages/projekt_footer/partials/projekt_argument", argument: argument %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <span class="projekt-arguments-separator">
+    </span>
+
+    <div class="projekt-arguments --contra">
+      <% if @projekt_arguments_cons.any? %>
+        <h3 class="projekt-arguments-title text-left"><%= t("custom.projekts.projekt_arguments.cons") %></h3>
+        <% @projekt_arguments_cons.each do |argument| %>
+          <%= render "custom/pages/projekt_footer/partials/projekt_argument", argument: argument %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

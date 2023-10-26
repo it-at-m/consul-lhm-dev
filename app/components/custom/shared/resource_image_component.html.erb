@@ -1,0 +1,13 @@
+<div class="resource-image">
+  <% if @image_url.present? %>
+    <%= image_tag(@image_url, class: 'resource-image--main') %>
+    <%= image_tag(@image_url, class: 'resource-image--blur') %>
+  <% else %>
+      <div class="resource-image--missing-image-placeholder">
+        <div class="resource-image--missing-image-placeholder-text">
+          <%= resource_name %>
+        </div>
+        <i class="resource-image--missing-image-placeholder-icon fa <%= @image_placeholder_icon_class %>"></i>
+      </div>
+  <% end %>
+</div>

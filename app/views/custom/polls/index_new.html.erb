@@ -1,0 +1,79 @@
+<main>
+  <% provide :title do %><%= t("polls.index.title") %><% end %>
+  <%= render_custom_partial "meta_description" %>
+  <% content_for :canonical do %>
+    <%= render "shared/canonical", href: polls_url %>
+  <% end %>
+
+  <div class="padding-on-mobile">
+    <h1>
+      <%= t("polls.index.title") %>
+    </h1>
+  </div>
+  <div class="flex-layout">
+    <div class="main-column">
+      <% if extended_feature?("polls.intro_text_for_polls") %>
+        <div class="resource-page--intro-text">
+          <%= render_custom_block("polls_index_welcome", default_content: t("custom.polls.index.welcome_default_text_html")) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="flex-layout">
+    <div class="main-column">
+      <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
+        <%= link_to t("polls.index.section_header.help"), "#section_help" %>
+      <% end %>
+
+      <%= render "shared/loader_spinner" %>
+
+      <%= render(
+        Shared::ResourcesListComponent.new(
+          resources: @polls,
+          resource_type: Poll,
+          current_filter: @current_order,
+          filter_param: "order",
+          text_search_enabled: true,
+          filters: @valid_orders,
+          empty_list_text: "Keine Ergebnisse"
+        )) %>
+    <%= paginate @polls %>
+    </div>
+
+    <div id="polls-sidebar" class="sidebar">
+      <%= render Shared::SidebarCardComponent.new(title: t("custom.common.information"), icon_name: "info-circle") do |c| %>
+        <div class="margin-bottom-half">
+          <%= render_custom_block "polls_index_sidebar_information", default_content: t("custom.polls.index.sidebar_information_default_text") %>
+        </div>
+
+        <div class="proposals--info-count margin-bottom-half">
+          <span>
+            <%= t("custom.polls.index.count") %>
+          </span>
+          <span>
+            <%= @all_resources.count %>
+          </span>
+        </div>
+      <% end %>
+
+      <%= render Sidebar::ProjektsFilterComponent.new(
+        top_level_active_projekts: @top_level_active_projekts,
+        top_level_archived_projekts: @top_level_archived_projekts,
+        scoped_projekt_ids: @scoped_projekt_ids,
+        all_resources: @all_resources,
+        current_tab_phase: @current_tab_phase,
+        current_projekt: @current_projekt
+      ) %>
+
+    <%= render Sidebar::Filters::PollsStatusCardComponent.new %>
+    <%= render Sidebar::Filters::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name, selected_affiliated_geozones: @affiliated_geozones) %>
+    <%= render Sidebar::Filters::GeozoneRestrictionsCardComponent.new(
+      geozones: @geozones,
+      restricted_geozones: @restricted_geozones,
+      selected_geozone_restriction: @selected_geozone_restriction
+    ) %>
+    <%= render Sidebar::SdgsCardComponent.new(sdgs: @sdgs, sdg_targets: @sdg_targets) %>
+    </div>
+  </div>
+</main>

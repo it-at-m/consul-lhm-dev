@@ -63,24 +63,24 @@ de:
         title: Mein Passwort ändern
       new:
         email_label: E-Mail
-        send_submit: Anweisungen zusenden
+        send_submit: Anweisung zusenden lassen
         title: Passwort vergessen?
     sessions:
       new:
         login_label: E-Mail oder Benutzer*innenname
         password_label: Passwort
         remember_me: Passwort speichern
-        submit: Eingabe
+        submit: Anmelden
         title: Anmelden
     shared:
       links:
         login: Anmelden
-        new_confirmation: Haben Sie keine Anweisungen zur Aktivierung Ihres Kontos erhalten?
-        new_password: Haben Sie Ihr Passwort vergessen?
+        new_confirmation: Aktivierungscode noch einmal zuschicken lassen
+        new_password: Passwort vergessen?
         new_unlock: Haben Sie keine Anweisung zur Entsperrung erhalten?
         signin_with_provider: Anmelden mit %{provider}
         signup: Sie haben noch kein Konto? %{signup_link}
-        signup_link: Registrierung
+        signup_link: Neues Konto erstellen
     unlocks:
       new:
         email_label: E-Mail

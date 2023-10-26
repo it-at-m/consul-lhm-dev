@@ -1,0 +1,67 @@
+<div class="sidebar">
+  <div class="hide-on-small-tablet">
+    <% if render_custom_content_block?('home_page_sidebar') %>
+      <%= render Shared::SidebarCardComponent.new(title: "Information", icon_name: "info-circle") do |c| %>
+        <%= render_custom_block 'home_page_sidebar' %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= render Shared::SidebarCardComponent.new(title: "Nutzer*innen", icon_name: "users") do |c| %>
+    <div class="system-users-list">
+      <div class="system-users-list--title">
+        <%= number_with_delimiter(User.count,  delimiter: ".") %> Nutzer*innen
+      </div>
+      <div class="system-users-list--images">
+        <% User.last(5).each do |user| %>
+          <% if user.image.present? %>
+            <div class="system-users-list--image">
+              <%= image_tag(user.image&.variant(:thumb)) %>
+            </div>
+          <% else %>
+            <div class="system-users-list--image">
+              <%= user&.first_letter_of_name %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <%# <%= render Shared::SidebarCardComponent.new(title: 'Aktivität | letzte 7 Tage', icon_name: "info-circle") do |c| %>
+  <%#   <% c.body do %>
+  <%#     <div>
+  <%#       17 neue Benutzer*innen
+  <%#     </div>
+  <%#     <div>
+  <%#       20 neue Kommentare
+  <%#     </div>
+  <%#     <div>
+  <%#       4 neue Vorschläge
+  <%#     </div>
+  <%#     <div>
+  <%#       7 neue Diskussionen
+  <%#     </div>
+  <%#   <% end %>
+  <%#
+  <%#   <% c.additional_body_section do %>
+  <%#     <div class="sidebar-active-users-section">
+  <%#       <div>
+  <%#         <i class="far fa-lightbulb">
+  <%#         </i>
+  <%#         Zur Übersicht aller Vorschläge
+  <%#       </div>
+  <%#       <div>
+  <%#         <i class="far fa-comments">
+  <%#         </i>
+  <%#         Zur Übersicht aller Diskussionen
+  <%#       </div>
+  <%#       <div>
+  <%#         <i class="fas fa-vote-yea">
+  <%#         </i>
+  <%#         Zur Übersicht aller Abstimmungen
+  <%#       </div>
+  <%#     </div>
+  <%#   <% end %>
+  <%# <% end %>
+</div>

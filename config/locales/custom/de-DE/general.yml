@@ -120,7 +120,7 @@ de:
           error: "Ein Fehler ist aufgetreten. Bitte gehen Sie zur 'Ihr Benutzerkonto'-Seite um Diskussionen-Empfehlungen manuell abzuschalten"
       search_form:
         button: Suche
-        placeholder: Suche Diskussionen...
+        placeholder: Suchen...
         title: Suche
       search_results:
         one: " enthält den Begriff <strong>'%{search_term}'</strong>"
@@ -172,7 +172,7 @@ de:
     direct_message: Private Nachricht
     error: Fehler
     errors: Fehler
-    not_saved: "verhinderte das Speichern dieser %{resource}. <br>Bitte überprüfen Sie die gekennzeichneten Felder, um herauszufinden wie diese korrigiert werden können:"
+    not_saved: "Fehler verhindern das Speichern. <br>Bitte überprüfen Sie die gekennzeichneten Felder."
     policy: Datenschutzbestimmungen
     banner: Banner
     proposal: Vorschlag
@@ -394,7 +394,7 @@ de:
         other: Andere
       search_form:
         button: Suche
-        placeholder: Suche Vorschläge...
+        placeholder: Vorschläge durchsuchen...
         title: Suche
       search_results:
         one: " enthält den Begriff <strong>'%{search_term}'</strong>"
@@ -943,7 +943,10 @@ de:
     timestamp_error_message: "Entschuldigung, das war zu schnell! Bitte erneut senden."
   related_content:
     title: "Verwandte Inhalte"
-    add: "Verwandte Inhalte hinzufügen"
+    add: "+ Inhalt hinzufügen"
+    description: Existieren bereits Inhalte, die zu diesem Vorschlag passen, etwa
+      eine Diskussion oder ein anderer Vorschlag? Dann können Sie hier
+      darauf verweisen.
     label: "Link zu verwandten Inhalten"
     placeholder: "%{url}"
     help: "Sie können Links von %{models} innerhalb des %{org} hinzufügen."

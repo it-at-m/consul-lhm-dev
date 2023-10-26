@@ -1,0 +1,44 @@
+.custom-new-design {
+  .in-favor-against {
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .percentage {
+      text-align: center;
+      color: inherit;
+      padding-right: 0;
+    }
+  }
+
+  .supports {
+    max-width: 300px;
+    margin: auto;
+  }
+
+  .votes {
+    border-left: none !important;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .total-votes {
+      margin-bottom: 5px;
+      margin-top: 5px;
+      margin-bottom: 0;
+      font-size: 16px;
+    }
+
+    .in-favor-against {
+      display: flex;
+
+      .in-favor, .against {
+        display: flex;
+        // flex-direction: column-reverse;
+        flex-direction: column;
+      }
+    }
+  }
+}

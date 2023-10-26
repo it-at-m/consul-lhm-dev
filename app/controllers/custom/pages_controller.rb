@@ -6,20 +6,24 @@ class PagesController < ApplicationController
   include CustomHelper
   include ProposalsHelper
   include Takeable
+  include RandomSeed
 
   has_orders %w[most_voted newest oldest], only: :show
+
+  before_action :set_random_seed
 
   def show
     @custom_page = SiteCustomization::Page.published.find_by(slug: params[:id])
 
     set_resource_instance
+    custom_page_name = Setting.new_design_enabled? ? :custom_page_new : :custom_page
 
     if @custom_page.present? && @custom_page.projekt.present? && @custom_page.projekt.visible_for?(current_user)
       @projekt = @custom_page.projekt
       @projekt_subscription = ProjektSubscription.find_or_create_by!(projekt: @projekt, user: current_user)
 
       if @projekt.projekt_phases.active.any?
-        @default_projekt_phase = get_default_projekt_phase(params[:selected_phase_id])
+        @default_projekt_phase = get_default_projekt_phase(params[:projekt_phase_id])
         @projekt_phase = @default_projekt_phase
         params[:projekt_phase_id] = @default_projekt_phase.id
         params[:projekt_id] ||= @projekt.id
@@ -28,7 +32,7 @@ class PagesController < ApplicationController
 
       @cards = @custom_page.cards
 
-      render action: :custom_page
+      render action: custom_page_name
 
     elsif @custom_page.present? && @custom_page.projekt.present?
       @individual_group_value_names = @custom_page.projekt.individual_group_values.pluck(:name)
@@ -36,7 +40,7 @@ class PagesController < ApplicationController
 
     elsif @custom_page.present?
       @cards = @custom_page.cards
-      render action: :custom_page
+      render action: custom_page_name
 
     else
       render action: params[:id]
@@ -56,6 +60,17 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       format.js { render "pages/projekt_footer/footer_tab" }
+      format.csv do
+        formated_time = Time.current.strftime("%d-%m-%Y-%H-%M-%S")
+
+        if @projekt_phase.name == "debate_phase"
+          send_data Debates::CsvExporter.new(@debates.limit(nil)).to_csv,
+            filename: "debates1-#{formated_time}.csv"
+        elsif @projekt_phase.name == "proposal_phase"
+          send_data Proposals::CsvExporter.new(@proposals.limit(nil)).to_csv,
+            filename: "proposals1-#{formated_time}.csv"
+        end
+      end
     end
   end
 
@@ -90,10 +105,15 @@ class PagesController < ApplicationController
                      end
 
     @resources = @projekt_phase.debates.for_public_render
-    take_by_projekt_labels
-    take_by_sentiment
 
-    @debates = @resources.page(params[:page]).send("sort_by_#{@current_order}")
+    if params[:search].present?
+      @resources = @resources.search(params[:search])
+    else
+      take_by_projekt_labels
+      take_by_sentiment
+    end
+
+    @debates = @resources.perform_sort_by(@current_order, session[:random_seed]).page(params[:page]).per(24)
   end
 
   def set_proposal_phase_footer_tab_variables
@@ -109,18 +129,27 @@ class PagesController < ApplicationController
                      end
 
     @resources = @projekt_phase.proposals.for_public_render
-    take_by_projekt_labels
-    take_by_sentiment
+
+    if params[:search].present?
+      @resources = @resources.search(params[:search])
+    else
+      take_by_projekt_labels
+      take_by_sentiment
+      take_by_my_posts
+    end
 
     @proposals_coordinates = all_proposal_map_locations(@resources)
-    @proposals = @resources.page(params[:page]).send("sort_by_#{@current_order}")
+    @proposals = @resources.perform_sort_by(@current_order, session[:random_seed]).page(params[:page]).per(24)
   end
 
   def set_voting_phase_footer_tab_variables
-    @valid_filters = %w[all current]
-    @current_filter = @valid_filters.include?(params[:filter]) ? params[:filter] : @valid_filters.first
+    # @valid_filters = %w[all current]
+    # @current_filter = @valid_filters.include?(params[:filter]) ? params[:filter] : @valid_filters.first
 
-    @resources = @projekt_phase.polls.for_public_render.send(@current_filter)
+    @valid_orders = nil
+
+    # @resources = @projekt_phase.polls.for_public_render.send(@current_filter)
+    @resources = @projekt_phase.polls.for_public_render.all
     @polls = Kaminari.paginate_array(@resources.sort_for_list).page(params[:page])
   end
 
@@ -209,7 +238,7 @@ class PagesController < ApplicationController
       end
     end
 
-    @investments = @investments.send("sort_by_#{@current_order}").page(params[:page]).per(20)
+    @investments = @investments.perform_sort_by(@current_order, session[:random_seed]).page(params[:page]).per(18)
   end
 
   def set_milestone_phase_footer_tab_variables
@@ -233,7 +262,7 @@ class PagesController < ApplicationController
 
   def set_event_phase_footer_tab_variables
     @valid_filters = %w[all incoming past]
-    @current_filter = @valid_filters.include?(params[:filter]) ? params[:filter] : @valid_filters.first
+    @current_filter = @valid_filters.include?(params[:filter]) ? params[:filter] : "all"
     @projekt_events = @projekt_phase.projekt_events.page(params[:page]).send("sort_by_#{@current_filter}")
   end
 

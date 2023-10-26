@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="column">
+    <%= link_to t("budgets.results.show_all_link"), "#",
+                class: "js-toggle-link button hollow margin-bottom float-right-medium",
+                data: { "toggle-selector" => ".js-discarded",
+                        "toggle-text" => t("budgets.results.hide_discarded_link") } %>
+
+    <%= render "budgets/results/results_table", results_type: :compatible,
+                                title: @heading.name,
+                                heading_price: @heading.price,
+                                investments: @investments.compatible %>
+
+    <% if @investments.incompatible.present? %>
+      <%= render "budgets/results/results_table", results_type: :incompatible,
+                                  title: t("budgets.results.incompatibles"),
+                                  heading_price: @heading.price,
+                                  investments: @investments.incompatible %>
+    <% end %>
+
+    <p>
+      <%= link_to url_to_footer_tab(section: 'overview', remote: true), remote: true, onclick: '$(".spinner-placeholder").addClass("show-loader")' do %>
+        <small><%= t("budgets.results.investment_proyects") %></small>
+      <% end %><br>
+      <%= link_to url_to_footer_tab(section: 'overview', filter: "unselected", remote: true), remote: true, onclick: '$(".spinner-placeholder").addClass("show-loader")' do %>
+        <small><%= t("budgets.results.not_selected_investment_proyects") %></small>
+      <% end %><br>
+      <%= link_to url_to_footer_tab(section: 'overview', filter: "unfeasible", remote: true), remote: true, onclick: '$(".spinner-placeholder").addClass("show-loader")' do %>
+        <small><%= t("budgets.results.unfeasible_investment_proyects") %></small>
+      <% end %>
+    </p>
+  </div>
+</div>

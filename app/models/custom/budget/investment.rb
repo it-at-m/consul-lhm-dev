@@ -11,7 +11,6 @@ class Budget
 
     enum implementation_performer: { city: 0, user: 1 }
 
-    scope :sort_by_random, -> { reorder('RANDOM()') }
     scope :sort_by_newest, -> { reorder(created_at: :desc) }
 
     # validates :terms_of_service, acceptance: { allow_nil: false }, on: :create
@@ -57,6 +56,10 @@ class Budget
 
     def permission_problem_keys_allowing_ballot_line_deletion
       [:not_enough_available_votes, :not_enough_money]
+    end
+
+    def final_winner?
+      selected? && !incompatible? && winner?
     end
   end
 end

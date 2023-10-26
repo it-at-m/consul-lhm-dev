@@ -2,8 +2,34 @@ en:
   custom:
     deficiency_reports:
       form:
+        page_description: Thank you for reporting a deficiency! You will help us to stop this as quickly as possible. Please describe in as much detail as possible what you noticed.
+          Typical deficiencies include road damage or damaged park benches.
+        title_placeholder: Give your report a catchy title, for example “Zebra crossing in front of the XY primary school” or “More diversity at the weekly markets”.
+        description_placeholder_html: "Describe the deficiency here. The following procedure has proven successful:<br><br>
+          Start with a general description of your suggestion and then show what would improve with the implementation of your suggestion.<br><br>
+          When writing, keep sentences as short as possible.<br><br>
+          Also use paragraphs to make your text more readable. (Many users read your text on mobile devices.)<br><br>
+          If possible, limit your content to a maximum of three paragraphs.<br><br>
+          If appropriate, use bullet points and bullet points for better clarity."
+        map:
+          hint: Place a pin on the map to precisely locate the deficiency.
         category:
+          title: Category
+          description: Please assign a category to your report
           placeholder: Please select
+        documents:
+          title: Add documents
+        languages:
+          title: Language
+          description: "Select which language(s) you would like your discussion to take place in:"
+        video:
+          title: Add video
+          description: Are there videos that support your argument and point of view? Then add a link here.
+          placeholder: Enter YouTube or Vimeo link
+        on_behalf_of:
+          title: On behalf of
+          description: Only admins can see this field. You can create a post on behalf of someone here.
+          placeholder: Enter name...
         create:
           submit_button: Submit deficiency
         labels:
@@ -13,6 +39,11 @@ en:
         new:
           submit_button: Submit deficiency
       index:
+        title: Mängelmelder
+        welcome_default_text_html: In every city there are deficiencies every now and then - it's good if they are reported by attentive citizens so that they can be rectified quickly.
+          On this page you can see which defects have already been reported. The map will help you locate the respective defect.
+          Please contact us if you notice a deficiency - and contribute to a clean cityscape and a functioning city.
+        count: Mangelmeldungen
         deficiency_report:
           by: by
         orders:
@@ -43,6 +74,8 @@ en:
           statuses:
             all_statuses: All Reports
             title: Status
+          my_posts:
+            title: My contributions
         start_deficiency_report: Report a deficiency
       mailers:
         notify_administrators_about_answer_update:
@@ -70,8 +103,14 @@ en:
           title: Report a deficiency
         start_new: Report a deficiency
       show:
+        title: "%{author} reported this issue"
+        welcome_text_default: This defeciency has already been reported to us by a user. Here you can view the current status and follow the progress of the deficiency report.
+           You can also express your opinion with your own comment. And after the deficiency has been closed, you can find the city's official statement here.
+        video:
+          title: Video
         approve_official_answer: Publish reply
-        official_answer: Official reply
+        official_answer:
+          title: Official reply
         sidebar:
           category: Categories
           delete: Delete report
@@ -80,4 +119,15 @@ en:
           social_share: Share
           status: Status
           vote: Support
+        status:
+          title: Status
+          description: "You can see the current status of this message here:"
+        category:
+          title: Category
+        officer:
+          title: Officer
+        author_actions:
+          title: Author
+          edit_button: Edit
+          delete_button: Delete
         submit_official_answer_button: Save reply

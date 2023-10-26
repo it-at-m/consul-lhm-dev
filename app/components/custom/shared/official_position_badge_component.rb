@@ -4,4 +4,8 @@ class Shared::OfficialPositionBadgeComponent < ApplicationComponent
   def initialize(user:)
     @user = user
   end
+
+  def render?
+    user.official_position.present?
+  end
 end

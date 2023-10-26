@@ -6,8 +6,10 @@ class DebatesController < ApplicationController
   include DocumentAttributes
   include Takeable
   include ProjektLabelAttributes
+  include RandomSeed
 
   before_action :set_projekts_for_selector, only: [:new, :edit, :create, :update]
+  before_action :set_random_seed, only: :index
 
   def index_customization
     if params[:order].nil?
@@ -16,14 +18,8 @@ class DebatesController < ApplicationController
 
     @resource_name = "debate"
 
-    if params[:filter_projekt_ids]
-      @selected_projekts_ids = params[:filter_projekt_ids].select { |id| Projekt.find_by(id: id).present? }
-      selected_parent_projekt_id = get_highest_unique_parent_projekt_id(@selected_projekts_ids)
-      @selected_parent_projekt = Projekt.find_by(id: selected_parent_projekt_id)
-    end
-
-    related_projekt_ids = @resources.joins(projekt_phase: :projekt).pluck("projekts.id").uniq
-    related_projekts = Projekt.where(id: related_projekt_ids)
+    # related_projekt_ids = @resources.joins(projekt_phase: :projekt).pluck("projekts.id").uniq
+    # related_projekts = Projekt.where(id: related_projekt_ids)
 
     @geozones = Geozone.all
     @selected_geozone_affiliation = params[:geozone_affiliation] || "all_resources"
@@ -38,25 +34,44 @@ class DebatesController < ApplicationController
     @top_level_active_projekts = Projekt.top_level.current.where(id: @scoped_projekt_ids)
     @top_level_archived_projekts = Projekt.top_level.expired.where(id: @scoped_projekt_ids)
 
-    @categories = Tag.category.joins(:taggings)
-      .where(taggings: { taggable_type: "Projekt", taggable_id: related_projekt_ids }).order(:name).uniq
+    # @categories = Tag.category.joins(:taggings)
+    #   .where(taggings: { taggable_type: "Projekt", taggable_id: related_projekt_ids }).order(:name).uniq
+    #
+    # if params[:sdg_goals].present?
+    #   sdg_goal_ids = SDG::Goal.where(code: params[:sdg_goals].split(",")).ids
+    #   @sdg_targets = SDG::Target.where(goal_id: sdg_goal_ids).joins(:relations)
+    #     .where(sdg_relations: { relatable_type: "Projekt", relatable_id: related_projekt_ids })
+    # end
 
-    if params[:sdg_goals].present?
-      sdg_goal_ids = SDG::Goal.where(code: params[:sdg_goals].split(",")).ids
-      @sdg_targets = SDG::Target.where(goal_id: sdg_goal_ids).joins(:relations)
-        .where(sdg_relations: { relatable_type: "Projekt", relatable_id: related_projekt_ids })
-    end
+    @resources = @resources.by_projekt_id(@scoped_projekt_ids)
+    @all_resources = @resources
 
     unless params[:search].present?
       take_by_my_posts
-      take_by_tag_names(related_projekts)
-      take_by_sdgs(related_projekts)
+      # take_by_tag_names(related_projekts)
+      # take_by_sdgs(related_projekts)
       take_by_geozone_affiliations
       take_by_geozone_restrictions
       take_by_projekts(@scoped_projekt_ids)
     end
 
-    @debates = @resources.page(params[:page]).send("sort_by_#{@current_order}")
+    @debates = @resources.perform_sort_by(@current_order, session[:random_seed]).page(params[:page]).per(24)
+
+    respond_to do |format|
+      format.html do
+        if Setting.new_design_enabled?
+          render :index_new
+        else
+          render :index
+        end
+      end
+
+      format.csv do
+        formated_time = Time.current.strftime("%d-%m-%Y-%H-%M-%S")
+        send_data Debates::CsvExporter.new(@debates.limit(nil)).to_csv,
+          filename: "debates-#{formated_time}.csv"
+      end
+    end
   end
 
   def new
@@ -69,12 +84,19 @@ class DebatesController < ApplicationController
   end
 
   def edit
-    @selected_projekt = @debate.projekt_phase.projekt
-    params[:projekt_phase_id] = @debate.projekt_phase.id
+    @selected_projekt = @debate&.projekt_phase&.projekt
+    params[:projekt_phase_id] = @debate&.projekt_phase&.id
   end
 
   def create
-    @debate = Debate.new(strong_params)
+    custom_debate_params =
+      if debate_params["image_attributes"]["cached_attachment"].blank?
+        debate_params.except("image_attributes")
+      else
+        debate_params
+      end
+
+    @debate = Debate.new(custom_debate_params)
     @debate.author = current_user
 
     if @debate.save
@@ -82,36 +104,37 @@ class DebatesController < ApplicationController
       NotificationServices::NewDebateNotifier.new(@debate.id).call
 
       if @debate.projekt_phase.active?
-        if @debate.projekt_phase.projekt.overview_page?
-          redirect_to projekts_path(
-            anchor: "filter-subnav",
-            selected_phase_id: @debate.projekt_phase.id,
-            order: params[:order]
-          ), notice: t("flash.actions.create.debate")
-        else
-          redirect_to page_path(
-            @debate.projekt_phase.projekt.page.slug,
-            anchor: "filter-subnav",
-            selected_phase_id: @debate.projekt_phase.id,
-            order: params[:order]
-          ), notice: t("flash.actions.create.debate")
-        end
+        redirect_to page_path(
+          @debate.projekt_phase.projekt.page.slug,
+          anchor: "filter-subnav",
+          projekt_phase_id: @debate.projekt_phase.id,
+          order: params[:order]
+        ), notice: t("flash.actions.create.debate")
       else
-        if @debate.projekt_phase.projekt.overview_page?
-          redirect_to projekts_path(
-            anchor: "filter-subnav",
-            selected_phase_id: @debate.projekt_phase.id,
-            order: params[:order]
-          ), notice: t("flash.actions.create.debate")
-        else
-          redirect_to proposals_path(
-            resources_order: params[:order]
-          ), notice: t("flash.actions.create.debate")
-        end
+        redirect_to proposals_path(
+          resources_order: params[:order]
+        ), notice: t("flash.actions.create.debate")
       end
     else
-      @selected_projekt = @debate.projekt_phase.projekt
+      @selected_projekt = @debate&.projekt_phase&.projekt
       render :new
+    end
+  end
+
+  def update
+    custom_debate_params =
+      if debate_params["image_attributes"]["cached_attachment"].blank?
+        debate_params.except("image_attributes")
+      else
+        debate_params
+      end
+
+    if resource.update(custom_debate_params)
+      redirect_to resource, notice: t("flash.actions.update.#{resource_name.underscore}")
+    else
+      load_geozones
+      set_resource_instance
+      render :edit
     end
   end
 
@@ -121,15 +144,6 @@ class DebatesController < ApplicationController
     @projekt = @debate.projekt_phase.projekt
     @related_contents = Kaminari.paginate_array(@debate.relationed_contents).page(params[:page]).per(5)
 
-    if request.path != debate_path(@debate)
-      redirect_to debate_path(@debate), status: :moved_permanently
-
-    elsif !@projekt.visible_for?(current_user)
-      @individual_group_value_names = @projekt.individual_group_values.pluck(:name)
-      render "custom/pages/forbidden", layout: false
-
-    end
-
     @geozones = Geozone.all
 
     @selected_geozone_affiliation = params[:geozone_affiliation] || 'all_resources'
@@ -137,6 +151,22 @@ class DebatesController < ApplicationController
 
     @selected_geozone_restriction = params[:geozone_restriction] || 'no_restriction'
     @restricted_geozones = (params[:restricted_geozones] || '').split(',').map(&:to_i)
+
+
+    if request.path != debate_path(@debate)
+      redirect_to debate_path(@debate), status: :moved_permanently
+
+    elsif !@projekt.visible_for?(current_user)
+      @individual_group_value_names = @projekt.individual_group_values.pluck(:name)
+      render "custom/pages/forbidden", layout: false
+
+    elsif Setting.new_design_enabled?
+      render :show_new
+
+    else
+      render :show
+
+    end
   end
 
   def flag

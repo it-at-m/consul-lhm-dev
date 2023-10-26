@@ -30,9 +30,9 @@
   <div class='projekt-list-page-container row'>
     <div class='projekt-list column small-12 medium-9'>
       <div class="projekt-list-tabs-container">
-        <%= render_custom_block "projekts_list_before_tabs_#{@current_projekts_order}" %>
-        <%= render Projekts::ProjektListTabsComponent.new(current_order: @current_projekts_order, current_active_orders: @active_projekts_orders, overview_page: @special_projekt.overview_page?) %>
-        <%= render_custom_block "projekts_list_after_tabs_#{@current_projekts_order}" %>
+        <%= render_custom_block "projekts_list_before_tabs_#{@current_projekts_filter}" %>
+        <%= render Projekts::ProjektListTabsComponent.new(current_order: @current_projekts_filter, current_active_orders: @active_projekts_filters, overview_page: @special_projekt.overview_page?) %>
+        <%= render_custom_block "projekts_list_after_tabs_#{@current_projekts_filter}" %>
       </div>
 
       <% if @projekts.any? %>
@@ -54,7 +54,7 @@
       </div>
 
       <% if show_affiliation_filter_in_sidebar? %>
-        <%= render "shared/sidebar_filter/geozone_affiliations" %>
+        <%= render "shared/sidebar_filter/geozone_affiliations", selected_affiliated_geozones: @affiliated_geozones %>
       <% end %>
 
       <%= render "shared/categories", taggable: "projekt" %>

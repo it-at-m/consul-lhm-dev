@@ -1,0 +1,69 @@
+<%= render "shared/loader_spinner" %>
+
+<% if @budget.present? %>
+  <%= render Pages::Projekts::BudgetsTabComponent.new(@budget, @ballot, current_user) %>
+<% end %>
+
+<div class="flex-layout">
+  <div class="main-column">
+    <% if @budget.present? %>
+
+      <% if @budget.phase == 'finished' %>
+        <%#= render Pages::Projekts::BudgetsSubnavComponent.new(@budget) %>
+      <% end %>
+
+      <% if params[:section] == "results" %>
+        <%= render "pages/projekt_footer_new/budget/results" %>
+      <% elsif params[:section] == "stats" %>
+        <%= render "pages/projekt_footer_new/budget/stats" %>
+      <%# elsif params[:section] == "executions" %>
+        <%#= render "pages/projekt_footer_new/budget/executions" %>
+      <% else %>
+        <% if @budget.phase == 'informing' %>
+          <div class="new-card">
+            <h4>
+              Noch keine Investitionsvorschläge vorhanden
+            </h3>
+            <div>
+              Investitionsvorschläge können erst in der nächsten Phase
+              eingereicht werden. Diese beginnt am
+              <%= I18n.l(@budget.current_phase.next_enabled_phase.starts_at, format: :new_date_with_year) %>
+              // 02. September 2022
+            </div>
+          </div>
+        <% else %>
+
+          <% if @budget.phase == "accepting" %>
+            <div class="new-resource-cta">
+              <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
+            </div>
+          <% end %>
+
+          <% budget_investments_footer_url = projekt_phase_footer_tab_page_path(@projekt_phase.projekt.page, @projekt_phase.id) %>
+          <%= render(
+                Shared::ResourcesListComponent.new(
+                  resources: @investments,
+                  resource_type: Budget::Investment,
+                  remote_url: budget_investments_footer_url,
+                  current_filter: @current_order,
+                  filter_param: "order",
+                  filters: @valid_orders,
+                  hide_title: true,
+                  projekt_phase: @projekt_phase,
+                  additional_data: {
+                    ballot: @ballot
+                  },
+                  empty_list_text: t("custom.budgets.investments.index.empty_list_text"),
+                )) %>
+          <%= paginate @investments, remote: true, params: { controller: "pages", action: "projekt_phase_footer_tab" } %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <h3>Dieses Projekt Phase hat kein zugehöriges Budget</h3>
+    <% end %>
+  </div>
+
+  <div class="sidebar" id="sidebar">
+    <%= render "budgets/investments/sidebar_new" %>
+  </div>
+</div>

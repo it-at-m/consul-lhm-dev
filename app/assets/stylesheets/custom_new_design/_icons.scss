@@ -1,0 +1,31 @@
+.custom-new-design {
+  .icon-cross {
+    width: 20px;
+    height: 20px;
+    position: relative;
+  }
+
+  .icon-cross:after {
+    background: $dark-gray;
+    content: '';
+    height: 100%;
+    width: 2px;
+    // border-left: 2px solid $dark-gray;
+    position: absolute;
+    transform: rotate(45deg);
+    left: 9px;
+    transition: background 200ms ease;
+  }
+
+  .icon-cross:before {
+    background: $dark-gray;
+    content: '';
+    height: 100%;
+    // border-left: 2px solid $dark-gray;
+    width: 2px;
+    position: absolute;
+    transform: rotate(-45deg);
+    left: 9px;
+    transition: background 200ms ease;
+  }
+}

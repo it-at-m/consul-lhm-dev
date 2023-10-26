@@ -1,10 +1,16 @@
 <% cache [deficiency_report,
           deficiency_report.category] do %>
 
-  <% if deficiency_report.category.present? %>
-    <div class="deficiency-report-category" >
-      <i class="fas fa-<%= "#{deficiency_report.category.icon}" %>"></i>
-      <%= deficiency_report.category.name%>
+  <% if deficiency_report.category.present? && !Setting.new_design_enabled? %>
+    <div class="deficiency-report-category margin-bottom">
+      <i class="fas fa-<%= deficiency_report.category.icon %>"></i>
+      <%= deficiency_report.category.name %>
     </div>
+  <% end %>
+<% end %>
+
+<% if can? :update_category, deficiency_report %>
+  <%= form_for deficiency_report, url: update_category_deficiency_report_path do |f| %>
+    <%= f.select :deficiency_report_category_id, DeficiencyReport::Category.all.map { |df| [df.name, df.id] }, { label: false }, { onchange: "this.form.submit();" } %>
   <% end %>
 <% end %>

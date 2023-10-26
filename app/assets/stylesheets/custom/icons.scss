@@ -3065,3 +3065,11 @@
 .icon-circle::before {
   content: "\f111";
 }
+
+.icon-chevron-down::before {
+  content: "\f078";
+}
+
+.icon-chevron-down.-rotated {
+  transform: rotate(180deg);
+}

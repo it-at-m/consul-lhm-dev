@@ -1,0 +1,45 @@
+<%= render "shared/loader_spinner" %>
+
+<div class="flex-layout flex-layout-reverse-on-mobile">
+  <div class="main-column">
+
+    <div class="hide-on-small-tablet">
+      <div class="new-resource-cta">
+        <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
+      </div>
+    </div>
+
+    <% proposal_footer_url = projekt_phase_footer_tab_page_path(@projekt_phase.projekt.page, @projekt_phase.id) %>
+    <%= render(
+      Shared::ResourcesListComponent.new(
+        resources: @proposals,
+        resource_type: Proposal,
+        remote_url: projekt_footer_phase_filter_url(@projekt_phase),
+        map_coordinates: @proposals_coordinates,
+        current_filter: @current_order,
+        filter_param: "order",
+        filters: @valid_orders,
+        text_search_enabled: true,
+        projekt_phase: @projekt_phase,
+        empty_list_text: t("custom.proposals.index.empty_list_text")
+      )) %>
+    <%= paginate @proposals, remote: true, params: { controller: "pages", action: "projekt_phase_footer_tab" } %>
+  </div>
+
+  <aside id="proposals-sidebar" class="sidebar">
+    <% content_block_sidebar_name = "projekt_phase_footer_sidebar_#{@projekt_phase.id}" %>
+    <% if render_custom_projekt_content_block?(content_block_sidebar_name, @projekt_phase.projekt) %>
+      <%= render Shared::SidebarCardComponent.new(title: "Beteiligunsinformation", icon_name: "info-circle") do |c| %>
+        <%= render_custom_block content_block_sidebar_name %>
+      <% end %>
+    <% end %>
+
+    <% if current_user.present? && extended_feature?('proposals.enable_my_posts_filter') %>
+      <%= render Sidebar::Filters::MyPostsCardComponent.new %>
+    <% end %>
+
+    <%= render Sidebar::ExportListComponent.new(
+      path: projekt_phase_footer_tab_page_path(@projekt_phase.projekt.page, @projekt_phase, **request.query_parameters, format: :csv)
+    ) %>
+  </aside>
+</div>

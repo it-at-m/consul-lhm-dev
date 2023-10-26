@@ -177,6 +177,8 @@ td.projekt-order {
   margin-top: 23px;
   display: flex;
   justify-content: flex-end;
+  font-size: 22px;
+  margin-top: 30px;
 
   a,
   input {
@@ -689,6 +691,7 @@ span.projekt-backlink:before {
 }
 
 .projekt-event-item-calendar {
+  color: black;
   width: 70px;
   padding-top: 5px;
   text-align: center;
@@ -1729,6 +1732,9 @@ span.projekt-backlink:before {
 // tagging in selector
 
 #projekt_labels_selector {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+
   input {
     display: none;
   }
@@ -1748,6 +1754,9 @@ span.projekt-backlink:before {
 }
 
 #sentiment_selector {
+  margin-top:2rem;
+  margin-bottom:1rem;
+
   input {
     display: none;
   }
@@ -1756,5 +1765,27 @@ span.projekt-backlink:before {
     &::before {
       content: "\f192";
     }
+  }
+}
+
+
+.projekt-footer-navigation {
+  position: relative;
+}
+
+.projekt-footer-navigation::after {
+  bottom: 0;
+  content: "";
+  display: block;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-bottom: 1px solid #dee0e3;
+
+  @media screen and (min-width: 75em) {
+    left: calc(37.5rem - 50vw);
+    right: calc(37.5rem - 50vw);
   }
 }

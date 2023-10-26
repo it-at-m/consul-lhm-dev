@@ -1,13 +1,36 @@
 <main class="subscriptions-edit">
-  <%= form_for user, url: subscriptions_path(token: user.subscriptions_token) do |f| %>
-    <h2><%= t("account.show.notifications") %></h2>
+  <div style="margin-bottom:5rem;">
+    <%= form_for user, url: subscriptions_path(token: user.subscriptions_token) do |f| %>
+      <h2><%= t("account.show.notifications") %></h2>
 
-    <div><%= f.check_box :email_on_comment %></div>
-    <div><%= f.check_box :email_on_comment_reply %></div>
-    <div><%= f.check_box :newsletter %></div>
-    <div><%= f.check_box :email_digest %></div>
-    <div><%= f.check_box :email_on_direct_message %></div>
+      <div><%= f.check_box :email_on_comment %></div>
+      <div><%= f.check_box :email_on_comment_reply %></div>
+      <div><%= f.check_box :newsletter %></div>
+      <div><%= f.check_box :email_digest %></div>
+      <div><%= f.check_box :email_on_direct_message %></div>
 
-    <%= f.submit t("account.show.save_changes_submit"), class: "button margin-top" %>
+      <%= f.submit t("account.show.save_changes_submit"), class: "button margin-top" %>
+    <% end %>
+  </div>
+
+  <% if projekts_with_subscriptions.any? %>
+    <div class="projekts-subscriptions">
+      <h2><%= t("custom.account.subscriptions.projekts.title") %></h2>
+      <p><%= t("custom.account.subscriptions.projekts.description1") %></p>
+
+      <div style="display:inline-block;">
+        <% projekts_with_subscriptions.each do |projekt| %>
+          <%= link_to page_path(projekt.page.slug), target: "_blank" do %>
+            <h3><%= projekt.page.title %></h3>
+          <% end %>
+        <% end %>
+      </div>
+
+      <p><%= t("custom.account.subscriptions.projekts.description2") %></p>
+
+      <%= button_to cancel_projekts_subscriptions_path(token: user.subscriptions_token), method: :delete, class: "button margin-top" do %>
+        <%= t("custom.account.subscriptions.projekts.cancel_projekts_subscriptions_button") %>
+      <% end %>
+    </div>
   <% end %>
 </main>

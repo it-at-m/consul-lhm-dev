@@ -3,6 +3,13 @@ en:
     polls:
       index:
         projekts: Projects
+        search_form:
+          placeholder: Search...
+        count: Polls
+        welcome_default_text_html: On this page you will find all polls initiated by the city administration.
+          The polls can be sorted according to various criteria and searched specifically for projects, areas or keywords. Some polls may be limited to certain areas or age groups.
+        sidebar_information_default_text: Would you like to vote? Just choose the poll and click “Participate”
+        empty_list_text: No connected polls
       poll:
         date:
           from: from
@@ -30,11 +37,14 @@ en:
         confirm_participation_button: Confirm my vote
         confirm_participation_notice: You have successfully participated in the poll.
         info_menu: Poll
-        results_menu: Intermediate results for admins
+        stats_menu: Stats
+        results_menu: Results
         vote_counted: Your vote was counted!
         vote_uncounted: Your vote was withdrawn
   polls:
     index:
       filters:
-        all: All Polls
-        current: Only active Polls
+        title: Status
+        all: All polls
+        currrent: Active polls
+        expired: Expired polls

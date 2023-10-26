@@ -6,8 +6,7 @@
     <%=
       render(
         Shared::ExternalVideoPlayer.new(
-          external_video_id: @current_projekt_livestream.external_id,
-          video_platform: @current_projekt_livestream.video_platform,
+          url: @current_projekt_livestream.url,
           width: 800,
           height: 480
         )

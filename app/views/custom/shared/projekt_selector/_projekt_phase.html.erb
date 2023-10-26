@@ -3,13 +3,13 @@
   tabindex="0"
   aria-labeled-by="<%= "#{dom_id(projekt_phase)}_name" %>"
   data-projekt-phase-id="<%= projekt_phase.id %>"
+  data-resource-form-title="<%= projekt_phase.resource_form_title %>"
   <%= "data-vc-map=true" if projekt_phase.projekt.vc_map_enabled? %>
   <%= "data-default-color=#00ff00" if projekt_phase.projekt.vc_map_enabled? %>
   <%= "data-latitude=#{projekt_phase.map_location.latitude}" if projekt_phase.map_location.present? %>
   <%= "data-longitude=#{projekt_phase.map_location.longitude}" if projekt_phase.map_location.present? %>
   <%= "data-zoom=#{projekt_phase.map_location.zoom}" if projekt_phase.map_location.present? %>
   <%= "data-show-map=true" if projekt_phase_feature?(projekt_phase, "form.show_map") %>
-  <%= "data-show-summary=true" if projekt_phase_feature?(projekt_phase, "form.enable_summary") %>
   <%= "data-allow-video=true" if projekt_phase_feature?(projekt_phase, "form.enable_external_video") %>
   <%= "data-allow-attached-image=true" if projekt_phase_feature?(projekt_phase, "form.allow_attached_image") %>
   <%= "data-allow-attached-document=true" if projekt_phase_feature?(projekt_phase, "form.allow_attached_documents") %>

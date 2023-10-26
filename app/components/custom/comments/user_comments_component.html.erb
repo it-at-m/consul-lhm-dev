@@ -1,0 +1,13 @@
+<div class="user-comments">
+  <% @comments.each do |comment| %>
+    <div class="user-comment">
+      <div class="comment-title">
+        <%= helpers.comment_commentable_title(comment) %>
+      </div>
+      <div class="comment-body">
+        <%= comment.body %>
+      </div>
+    </div>
+  <% end %>
+  <%# = paginate @comments if paginate? %>
+</div>

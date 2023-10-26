@@ -1,0 +1,19 @@
+en:
+  custom:
+    account:
+      show:
+        change_credentials_link: Change login information
+        erase_account_link: Delete account
+        settings: Account settings
+        verification_tittle: Account verification
+        verification_description: Some participation projects require user verification. By clicking on the button you can start the user verification.
+        personal_settings: Personal settings
+        notifications: Notifications
+        save_settings: Update
+        not_verified_account: Account is not verified
+      subscriptions:
+        projekts:
+          title: Project related notifications
+          description1: "You have activated project notification for the following projects:"
+          description2: By clicking on the button below you can unsubscribe from all project notifications. If you only want to unsubscribe from individual project phases, please use the direct link to the projects.
+          cancel_projekts_subscriptions_button: Unsubscribe from all project notifications

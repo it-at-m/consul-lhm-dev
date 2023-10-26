@@ -1,0 +1,51 @@
+.custom-new-design {
+  .resource-image {
+    height: 100%;
+    width: 100%;
+    background: #dcdcdc;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .resource-image--main {
+    max-width: 100%;
+    max-height: 258px;
+    width: auto;
+    object-fit: cover;
+    margin: auto;
+    z-index: 10;
+  }
+
+  .resource-image--blur {
+    width: 100%;
+    height: 100% !important;
+    position: absolute;
+    filter: blur(5px);
+    transform: scale(1.2);
+    z-index: 5;
+  }
+
+  .resource-image--missing-image-placeholder {
+    margin-top: -2%;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 23px;
+    flex-direction: column;
+    color: $main-text-color;
+  }
+
+  .resource-image--missing-image-placeholder-icon {
+    font-size: 80px;
+    margin-top: 10px;
+  }
+
+  .resource-image--missing-image-placeholder-text {
+    text-align: center;
+  }
+}

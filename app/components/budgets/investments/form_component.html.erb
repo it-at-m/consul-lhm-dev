@@ -1,115 +1,273 @@
-<%= translatable_form_for(investment, url: url, html: { class: "budget-investment-form" }) do |f| %>
+<% if Setting.new_design_enabled? %>
 
-  <%= render "shared/errors", resource: investment %>
+  <main class="user-resources-form <%= " -no-image" unless feature?(:allow_images) %>">
+    <%= translatable_form_for(investment, url: url, html: { class: "budget-investment-form" }) do |f| %>
+      <%= budgets_back_link_path %>
 
-  <fieldset class="required-fields">
-    <legend><%= t("custom.budgets.investments.form.required") %></legend>
+      <div class="flex-layout">
+        <div class="main-column">
+          <h1 class="user-resources-form--title">
+            <%= t("custom.budgets.investments.form.start_new") %>
+          </h1>
 
-    <% unless budget.single_heading? %>
+          <div class="user-resources-form--description">
+            <%= render_custom_block "user_resource_form_budget_investment", default_content: t("custom.budgets.investments.form.page_description") %>
+          </div>
+
+          <%= render "shared/errors", resource: investment %>
+        </div>
+      </div>
+
+      <div class="flex-layout">
+        <div class="main-column">
+          <%= f.translatable_fields do |translations_form| %>
+            <div class="js-suggest" data-locale="<%= translations_form.locale %>"></div>
+            <div class="user-resources-form--banner-editor js-user-resources-form--banner-editor -budget-investment">
+              <div class="user-resources-form--title-wrapper">
+                <%= translations_form.text_area :title,
+                  label: false,
+                  class: "user-resources-form--banner-editor-title",
+                  placeholder: t("custom.budgets.investments.form.title_placeholder"),
+                  autocomplete: "off" %>
+              </div>
+
+              <% if feature?(:allow_images) %>
+                <div class="banner-editor-image-attachment js-banner-editor-image-attachment">
+                  <% if f.object.image.blank? %>
+                    <% f.object.build_image %>
+                  <% end %>
+                  <%= f.fields_for :image do |image_builder| %>
+                    <%= render UserResources::ImageUploadComponent.new(image_builder, imageable: f.object) %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+
+            <%= translations_form.text_area :description,
+              label: false,
+              data: {placeholder: t("custom.budgets.investments.form.description_placeholder_html")},
+              class: "html-area #{ck_editor_class(current_user)}" %>
+          <% end %>
+
+          <div class="new-card" id='map-container'>
+            <%= render "map_locations/form_fields",
+              form:     f,
+              map_location: investment.map_location || MapLocation.new,
+              label: t("proposals.form.map_location"),
+              help:     t("custom.budgets.investments.form.map.hint"),
+              parent_class: "budget_investments",
+              projekt_phase: investment.projekt_phase,
+              i18n_namespace: "budgets.investments" %>
+          </div>
+        </div>
+
+        <aside class="sidebar">
+
+          <% if projekt_phase_feature?(investment.projekt_phase, "form.show_implementation_option_fields") %>
+            <%= render Shared::SidebarCardComponent.new(
+                          title: t("custom.budgets.investments.form.implementation.title"),
+                          description: t("custom.budgets.investments.form.implementation.description"),
+                          icon_name: "hands-helping"
+                       ) do |c| %>
+              <div>
+                <%= f.select :implementation_performer, options_for_implementation_select, {label: false}, { class: 'implementation-performer show-arrow', style: "width:100%;", onChange: "$(this).val() === 'user' ? $('#implementation_contribution').css('display', 'block') : $('#implementation_contribution').css('display', 'none')" } %>
+              </div>
+
+              <div id='implementation_contribution' style="display:<%= investment.implementation_performer == 'user' ? 'block' : 'none' %>">
+                <%= f.text_field :implementation_contribution %>
+              </div>
+            <% end %>
+          <% end %>
+
+
+
+          <% if projekt_phase_feature?(investment.projekt_phase, "form.show_user_cost_estimate") %>
+            <%= render Shared::SidebarCardComponent.new(
+                          title: t("custom.budgets.investments.form.user_cost_estimate.title"),
+                          description: t("custom.budgets.investments.form.user_cost_estimate.description"),
+                          icon_name: "euro-sign"
+                       ) do |c| %>
+              <%= f.text_field :user_cost_estimate, label: false, placeholder: t("custom.budgets.investments.form.user_cost_estimate.placeholder") %>
+
+            <% end %>
+          <% end %>
+
+          <%= render Shared::SidebarCardComponent.new(
+                        title: t("custom.budgets.investments.form.documents.title"),
+                        icon_name: "file"
+                     ) do |c| %>
+             <%= render "documents/nested_documents", documentable: investment, f: f %>
+          <% end %>
+
+          <% if translations_interface_enabled? %>
+            <%= render Shared::SidebarCardComponent.new(
+                          title: t("custom.deficiency_reports.form.languages.title"),
+                          description: t("custom.deficiency_reports.form.languages.description"),
+                          icon_name: "language"
+                       ) do |c| %>
+                <%= render "shared/globalize_locales", resource: investment %>
+            <% end %>
+          <% end %>
+
+          <% if current_user.administrator? || current_user.moderator? %>
+            <%= render Shared::SidebarCardComponent.new(
+                          title: t("custom.budgets.investments.form.on_behalf_of.title"),
+                          description: t("custom.budgets.investments.form.on_behalf_of.description"),
+                          icon_name: "user"
+                       ) do |c| %>
+                <%= f.text_field :on_behalf_of, label: false, placeholder: t("custom.budgets.investments.form.on_behalf_of.placeholder"), class: "light-input" %>
+            <% end %>
+          <% end %>
+
+          <%= f.invisible_captcha :subtitle %>
+        </aside>
+      </div>
+
+      <div class="user-resources-form--submit-section">
+        <% if investment.new_record? %>
+          <h3 class="user-resources-form--submit-section--privacy-policy">
+            Datenschutzbestimmungen & Allgemeine Nutzerbedingungen
+          </h3>
+
+          <div>
+            <%= f.check_box :resource_terms,
+              title: t("custom.terms.resource_terms.title"),
+              label: t("custom.terms.resource_terms.label",
+                       privacy_link: link_to(
+                         t("custom.terms.privacy_link.text"), "/privacy",
+                         title: t("shared.target_blank"),
+                         target: "_blank"
+                       ),
+                       terms_link: link_to(
+                         t("custom.terms.terms_link.text"),
+                         "/conditions",
+                         title: t("shared.target_blank"),
+                         target: "_blank"
+                       )
+                      ) %>
+        </div>
+      <% end %>
+
+        <%= f.submit(class: "button", value: t("custom.user_resources.form.submit_button")) %>
+      </div>
+    <% end %>
+  </main>
+
+<% else %>
+  <%= translatable_form_for(investment, url: url, html: { class: "budget-investment-form" }) do |f| %>
+
+    <%= render "shared/errors", resource: investment %>
+
+    <fieldset class="required-fields">
+      <legend><%= t("custom.budgets.investments.form.required") %></legend>
+
+      <% unless budget.single_heading? %>
+        <div>
+          <%= f.select :heading_id, budget_heading_select_options(budget), { include_blank: true } %>
+        </div>
+      <% end %>
+
+      <% if projekt_phase_feature?(investment&.projekt_phase, "form.show_implementation_option_fields") %>
+        <div>
+          <%= f.select :implementation_performer, options_for_implementation_select, {}, { class: 'implementation-performer show-arrow', onChange: "$(this).val() === 'user' ? $('#implementation_contribution').css('display', 'block') : $('#implementation_contribution').css('display', 'none')" } %>
+        </div>
+
+        <div id='implementation_contribution' style="display:<%= investment.implementation_performer == 'user' ? 'block' : 'none' %>">
+          <%= f.text_field :implementation_contribution %>
+        </div>
+      <% end %>
+
+      <% if projekt_phase_feature?(investment.projekt_phase, "form.show_user_cost_estimate") %>
+        <%= f.text_field :user_cost_estimate %>
+      <% end %>
+
+      <% if projekt_phase_feature?(budget&.projekt_phase, "form.show_map") %>
+        <div class="margin-bottom">
+          <%= render "map_locations/form_fields",
+                     form:           f,
+                     map_location:   investment.map_location || MapLocation.new,
+                     mappable:       investment,
+                     label:          t("budgets.investments.form.map_location"),
+                     help:           t("budgets.investments.form.map_location_instructions"),
+                     parent_class:   "budget_investment",
+                     projekt:        budget&.projekt,
+                     projekt_phase:  budget&.projekt_phase,
+                     i18n_namespace: "budgets.investments" %>
+        </div>
+      <% end %>
+
       <div>
-        <%= f.select :heading_id, budget_heading_select_options(budget), { include_blank: true } %>
-      </div>
-    <% end %>
-
-    <% if projekt_phase_feature?(investment&.projekt_phase, "form.show_implementation_option_fields") %>
-      <div>
-        <%= f.select :implementation_performer, options_for_implementation_select, {}, { class: 'implementation-performer show-arrow', onChange: "$(this).val() === 'user' ? $('#implementation_contribution').css('display', 'block') : $('#implementation_contribution').css('display', 'none')" } %>
+        <%= render "shared/globalize_locales", resource: investment %>
       </div>
 
-      <div id='implementation_contribution' style="display:<%= investment.implementation_performer == 'user' ? 'block' : 'none' %>">
-        <%= f.text_field :implementation_contribution %>
-      </div>
-    <% end %>
+      <%= f.translatable_fields do |translations_form| %>
+        <div>
+          <%= translations_form.text_field :title,
+                maxlength: Budget::Investment.title_max_length,
+                data: suggest_data(investment) %>
+        </div>
+        <div class="js-suggest" data-locale="<%= translations_form.locale %>"></div>
 
-    <% if projekt_phase_feature?(investment.projekt_phase, "form.show_user_cost_estimate") %>
-      <%= f.text_field :user_cost_estimate %>
-    <% end %>
+        <div>
+          <%= translations_form.text_area :description,
+                maxlength: Budget::Investment.description_max_length,
+                class: "html-area #{helpers.ck_editor_class(current_user)}" %>
+        </div>
+      <% end %>
+    </fieldset>
 
-    <% if projekt_phase_feature?(budget&.projekt_phase, "form.show_map") %>
-      <div class="margin-bottom">
-        <%= render "map_locations/form_fields",
-                   form:           f,
-                   map_location:   investment.map_location || MapLocation.new,
-                   mappable:       investment,
-                   label:          t("budgets.investments.form.map_location"),
-                   help:           t("budgets.investments.form.map_location_instructions"),
-                   parent_class:   "budget_investment",
-                   projekt:        budget&.projekt,
-                   projekt_phase:  budget&.projekt_phase,
-                   i18n_namespace: "budgets.investments" %>
-      </div>
-    <% end %>
+    <%= f.invisible_captcha :subtitle %>
 
-    <div>
-      <%= render "shared/globalize_locales", resource: investment %>
+    <fieldset>
+      <legend><%= t("shared.optional") %></legend>
+
+      <% if projekt_phase_feature?(budget.projekt_phase, "form.allow_attached_image") %>
+        <div class="images">
+          <%= render "images/nested_image", f: f %>
+        </div>
+      <% end %>
+
+      <% if projekt_phase_feature?(budget.projekt_phase, "form.allow_attached_documents") %>
+        <div class="documents">
+          <%= render "documents/nested_documents", f: f %>
+        </div>
+      <% end %>
+
+      <% if current_user.administrator? || current_user.moderator? %>
+        <div>
+          <%= f.text_field :on_behalf_of %>
+        </div>
+      <% end %>
+
+      <%# if current_user.administrator? %>
+        <!--
+        <div>
+          <%#= f.text_field :organization_name %>
+        </div>
+        -->
+      <%# end %>
+    </fieldset>
+
+    <div class="actions">
+      <% unless current_user.manager? || investment.persisted? %>
+        <div>
+
+          <%= f.check_box :resource_terms,
+            title: t("custom.terms.resource_terms.title"),
+            label: t("custom.terms.resource_terms.label",
+                     privacy_link: link_to(t("custom.terms.privacy_link.text"), "/privacy",
+                                           title: t("shared.target_blank"), target: "_blank"),
+                     terms_link: link_to(t("custom.terms.terms_link.text"), "/conditions",
+                                         title: t("shared.target_blank"), target: "_blank")),
+            class: "checkbox-label--aligned" %>
+
+          <p style="text-align:left;"><%= t("custom.terms.revoke_consent.text") %></p>
+
+        </div>
+      <% end %>
+
+      <%= f.submit %>
     </div>
+  <% end %>
 
-    <%= f.translatable_fields do |translations_form| %>
-      <div>
-        <%= translations_form.text_field :title,
-              maxlength: Budget::Investment.title_max_length,
-              data: suggest_data(investment) %>
-      </div>
-      <div class="js-suggest" data-locale="<%= translations_form.locale %>"></div>
-
-      <div>
-        <%= translations_form.text_area :description,
-              maxlength: Budget::Investment.description_max_length,
-              class: "html-area #{helpers.ck_editor_class(current_user)}" %>
-      </div>
-    <% end %>
-  </fieldset>
-
-  <%= f.invisible_captcha :subtitle %>
-
-  <fieldset>
-    <legend><%= t("shared.optional") %></legend>
-
-    <% if projekt_phase_feature?(budget.projekt_phase, "form.allow_attached_image") %>
-      <div class="images">
-        <%= render "images/nested_image", f: f %>
-      </div>
-    <% end %>
-
-    <% if projekt_phase_feature?(budget.projekt_phase, "form.allow_attached_documents") %>
-      <div class="documents">
-        <%= render "documents/nested_documents", f: f %>
-      </div>
-    <% end %>
-
-    <% if current_user.administrator? || current_user.moderator? %>
-      <div>
-        <%= f.text_field :on_behalf_of %>
-      </div>
-    <% end %>
-
-    <%# if current_user.administrator? %>
-      <!--
-      <div>
-        <%#= f.text_field :organization_name %>
-      </div>
-      -->
-    <%# end %>
-  </fieldset>
-
-  <div class="actions">
-    <% unless current_user.manager? || investment.persisted? %>
-      <div>
-
-        <%= f.check_box :resource_terms,
-          title: t("custom.terms.resource_terms.title"),
-          label: t("custom.terms.resource_terms.label",
-                   privacy_link: link_to(t("custom.terms.privacy_link.text"), "/privacy",
-                                         title: t("shared.target_blank"), target: "_blank"),
-                   terms_link: link_to(t("custom.terms.terms_link.text"), "/conditions",
-                                       title: t("shared.target_blank"), target: "_blank")),
-          class: "checkbox-label--aligned" %>
-
-        <p style="text-align:left;"><%= t("custom.terms.revoke_consent.text") %></p>
-
-      </div>
-    <% end %>
-
-    <%= f.submit %>
-  </div>
 <% end %>

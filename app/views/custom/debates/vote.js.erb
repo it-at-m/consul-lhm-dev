@@ -1,0 +1,5 @@
+<% if Setting.new_design_enabled? %>
+    $("#<%= dom_id(@debate) %>_votes").html("<%= j render(Debates::NewVotesComponent.new(@debate)) %>");
+<% else %>
+    $("#<%= dom_id(@debate) %>_votes").html("<%= j render("debates/votes", debate: @debate) %>");
+<% end %>

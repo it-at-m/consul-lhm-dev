@@ -1,8 +1,8 @@
-<nav class="margin-bottom <%= "legislation-process-list" if true %>">
+<nav class="margin-bottom projekt-footer-navigation">
   <div class="row">
     <div class="small-12 column">
       <div style='display:flex;justify-content:space-between;align-items:end;'>
-        <h3><%= "Beteiligung" %></h3>
+        <h3 class="projekt-footer-title"><%= "Beteiligung" %></h3>
         <% if show_arrows? %>
           <div class='arrow-controls'>
             <div id='left-arrow-control' class='js-left-arrow-control disabled'>
@@ -17,7 +17,6 @@
 
 
       <div class='footer-phases-filter-subnav'>
-
         <ul id='filter-subnav' class='key-dates'>
           <% @projekt.projekt_phases.each do |projekt_phase| %>
             <%= render Pages::Projekts::FooterPhaseTabComponent.new(projekt_phase, default_phase_name) %>

@@ -35,7 +35,33 @@ de:
         index:
           sidebar:
             user_votes: "Abgegebene Stimmen: %{count}"
+          empty_list_text: Keine Ergebnisse
         form:
+          start_new: Investitionsvorschlag erstellen
+          page_description: Das Budget lebt von Ihren Beiträgen! Teilen Sie uns mit, was Sie gerne umgesetzt hätten - und tauschen Sie sich im Anschluss mit anderen zu Ihren Ideen aus. Sie können angeben, ob Sie bei der Umsetzung selbst unterstützen möchten oder ob die Stadtverwaltung die Verantwortung übernehmen soll.<br><br>
+            Außerdem können Sie eine erste preisliche Einschätzung zu Ihrem Beitrag vornehmen. Die Stadtverwaltung wird Ihren Beitrag auf seine Durchführbarkeit prüfen und ebenfalls eine preisliche Einschätzung abgeben. Danke, dass Sie sich die Zeit nehmen und sich beteiligen!
+          title_placeholder: Geben Sie Ihrem Beitrag einen plakativen Titel, zum Beispiel „Bahnhofsplatz sanieren“ oder „Neuen Kinderspielplatz bauen“.
+          description_placeholder_html: "Beschreiben Sie hier Ihren Beitrag. Folgendes Vorgehen hat sich bewährt:<br><br>
+            Beginnen Sie mit einer allgemeinen Beschreibung Ihrer Idee und stellen Sie im Anschluss dar, was sich mit der Umsetzung Ihres Vorschlags verbessern würde.<br><br>
+            Achten Sie beim Schreiben möglichst auf kurze Sätze.<br><br>
+            Nutzen Sie außerdem Absätze, um Ihren Text lesbarer zu machen. (Viele Nutzer lesen Ihren Text auf mobilen Geräten.)<br><br>
+            Beschränken Sie Ihren Inhalt – sofern möglich – auf maximal drei Absätze.<br><br>
+            Verwenden Sie überdies – wenn passend – Aufzählungen und Stichpunkte für eine bessere Übersichtlichkeit."
+          map:
+            hint: Wo soll Ihr Beitrag umgesetzt werden? Platzieren Sie einen „Pin“, um andere ins Bild zu setzen.
+          implementation:
+            title: Umsetzung
+            description: Geben Sie hier an von wem der Investitionsvorschlag umgesetzt werden soll
+          user_cost_estimate:
+            title: Preisliche Einschätzung
+            description: Bitte geben Sie hier eine preisliche Einschätzung ihres Investitionsvorschlags an.
+            placeholder: Preis in Euro angeben
+          documents:
+            title: Dokumente hinzufügen
+          on_behalf_of:
+            title: Veröffentlichen für
+            description: Dieses Feld sehen nur Admin. Sie können hier einen Beitrag im Namen von jemandem erstellen.
+            placeholder: Namen eingeben...
           required: Ihr Beitrag
         investment:
           supporters:
@@ -63,6 +89,9 @@ de:
           implementation_city_text_html: <p>Soll von Stadtverwaltung umgesetzt werden</p>
           implementation_user_text_html: <p>%{author} unterstützt bei der Durchführung<p><p>%{implementation_contribution}</p>
           user_cost_estimate: Preisliche Einschätzung
+          welcome_default_text_html: "%{author_name} hat einen Beitrag zu diesem Projekt gemacht, der Ihre Aufmerksamkeit benötigt.
+            Sie können den Beitrag an der rechten Seitenleiste unterstützen, indem Sie ihm Ihre Stimme geben. Außerdem können Sie dem Beitrag folgen, um auf dem Laufenden zu bleiben.
+            Die Karte hilft Ihnen dabei, den Beitrag in der Stadt zu verorten, des Weiteren haben Sie die Möglichkeit, den Beitrag zu kommentieren."
         statuses:
           phases:
             accepting: Der Investitionsvorschlag wurde erfolgreich eingereicht.

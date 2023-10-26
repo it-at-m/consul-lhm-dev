@@ -30,8 +30,8 @@ module CommentsHelper
   end
 
   def commentable_path(comment)
-    return page_path(comment.commentable.projekt.page.slug, selected_phase_id: comment.commentable.projekt_phase.id, anchor: "filter-subnav") if comment.commentable.is_a?(ProjektQuestion)
-    return page_path(comment.commentable.projekt.page.slug, selected_phase_id: comment.commentable.id, anchor: "filter-subnav") if comment.commentable.is_a?(ProjektPhase)
+    return page_path(comment.commentable.projekt.page.slug, projekt_phase_id: comment.commentable.projekt_phase.id, anchor: "filter-subnav") if comment.commentable.is_a?(ProjektQuestion)
+    return page_path(comment.commentable.projekt.page.slug, projekt_phase_id: comment.commentable.id, anchor: "filter-subnav") if comment.commentable.is_a?(ProjektPhase)
 
     polymorphic_path(comment.commentable)
   end
@@ -39,7 +39,7 @@ module CommentsHelper
   # TODO provide correct return
   def commentable_url(comment)
     if comment.commentable.class.name == "ProjektQuestion"
-      return root_url + "/#{comment.commentable.projekt.page.slug}?selected_phase_id=#{comment.commentable.projekt.question_phase.id}#filter-subnav"
+      return root_url + "/#{comment.commentable.projekt.page.slug}?projekt_phase_id=#{comment.commentable.projekt.question_phase.id}#filter-subnav"
     end
 
     polymorphic_url(comment.commentable)

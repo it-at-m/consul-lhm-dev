@@ -34,7 +34,7 @@
       <% if @custom_page.projekt.present? %>
         <div class="row">
           <div class="small-12 medium-9 column margin-bottom">
-            <% if @custom_page.content.include?('template_projekt_library') %>
+            <% if @custom_page.content&.include?('template_projekt_library') %>
               <%= render "projekt_library", projekt: @custom_page.projekt %>
             <% else %>
               <%= render "custom_page_content" %>

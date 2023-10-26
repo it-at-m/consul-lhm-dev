@@ -33,17 +33,17 @@ module PollsHelper
     end
   end
 
-  def poll_remaining_activity_days(poll)
-    remaining_days = (poll.ends_at.to_date - Date.today).to_i
+  # def poll_remaining_activity_days(poll)
+  #   remaining_days = (poll.ends_at.to_date - Date.today).to_i
 
-    if remaining_days > 0
-      t("custom.polls.poll.days_left", count: (@poll.ends_at.to_date - Date.today).to_i )
-    elsif remaining_days == 0
-      t("custom.polls.poll.expires_today")
-    else
-      t("custom.polls.poll.expired")
-    end
-  end
+  #   if remaining_days > 0
+  #     t("custom.polls.poll.days_left", count: (poll.ends_at.to_date - Date.today).to_i )
+  #   elsif remaining_days == 0
+  #     t("custom.polls.poll.expires_today")
+  #   else
+  #     t("custom.polls.poll.expired")
+  #   end
+  # end
 
   def cannot_answer_callout_text(permission_problem_key, voting_phase)
     return nil if permission_problem_key.blank?

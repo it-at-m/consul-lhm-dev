@@ -1,0 +1,188 @@
+<% public_activity_component_content = capture do %>
+  <%= render Users::NewPublicActivityComponent.new(current_user) %>
+<% end %>
+
+<% notifications_content = capture do %>
+  <% if @notifications.empty? %>
+    <div data-alert class="callout primary margin-top clear">
+      <%= t("notifications.index.empty_notifications") %>
+    </div>
+  <% else %>
+    <ul class="no-bullet clear notifications-list">
+      <% @notifications.each do |notification| %>
+        <%= render "/notifications/notification", notification: notification %>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
+
+<main class="user-page">
+  <div class="flex-layout padding-on-mobile">
+    <div class="main-column">
+      <%= render "shared/loader_spinner" %>
+      <%= render(Users::ProfileBannerComponent.new(user: current_user, edit_mode: true)) %>
+      <div class="row margin-bottom">
+        <div class="small-12 column">
+
+          <h1 class="inline-block margin-bottom accout-page-notifications-title">
+            <%= t("notifications.index.title") %>
+          </h1>
+
+          <%= link_to t("notifications.index.mark_all_as_read"),
+            mark_all_as_read_notifications_path, method: :put,
+            class: "button hollow float-right-medium" %>
+
+          <ul class="menu simple clear">
+            <li class="<%= params[:notifications] == "read" ? "" : "is-active" %>">
+              <h2><%= link_to t("notifications.index.unread"), account_path %></h2>
+            </li>
+            <li class="<%= params[:notifications] == "read" ? "is-active" : "" %>">
+              <h2>
+                <%= link_to t("notifications.index.read"), account_path(notifications: "read") %>
+              </h2>
+            </li>
+          </ul>
+
+          <div class="hide-on-small-tablet">
+            <%= notifications_content %>
+          </div>
+        </div>
+      </div>
+      <div class="hide-on-small-tablet">
+        <%= public_activity_component_content %>
+      </div>
+    </div>
+    <aside class="sidebar">
+      <%= render Shared::SidebarCardComponent.new(title: t("custom.users.settings"), icon_name: "cog") do |c| %>
+        <%= link_to t("custom.account.show.change_credentials_link"), edit_user_registration_path, class: "button hollow" %>
+        <%= link_to t("custom.account.show.erase_account_link"), users_registrations_delete_form_path, class: "button hollow delete alert" %>
+      <% end %>
+      <% unless current_user.level_three_verified? %>
+        <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.verification_tittle"), description: t("custom.account.show.verification_description"),  icon_name: "check") do |c| %>
+          <div class="verify-account">
+            <% if current_user.level_two_verified? %>
+              <%= link_to t("account.show.finish_verification"), verification_path, class: "button success" %>
+            <% else %>
+              <%= link_to t("account.show.verify_my_account"), verification_path, class: "button success" %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.personal_settings"), icon_name: "cog") do |c| %>
+        <%= form_for @account, as: :account, url: account_path do |f| %>
+          <div>
+            <%= f.check_box :public_activity, {label: t('custom.account.settings.public_activity'), class: "checkbox-label--aligned"} %>
+          </div>
+          <div>
+            <%= f.check_box :public_interests, {label: t('custom.account.settings.public_interests'), class: "checkbox-label--aligned"} %>
+          </div>
+          <div>
+            <%= f.check_box :email_on_direct_message, {label: t('custom.account.settings.email_on_direct_message'), class: "checkbox-label--aligned"} %>
+          </div>
+          <%= f.submit t("custom.account.show.save_settings"), class: "button margin-top" %>
+        <% end %>
+      <% end %>
+
+      <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.notifications"), icon_name: "bell") do |c| %>
+        <%= form_for @account, as: :account, url: account_path do |f| %>
+          <div>
+            <%= f.check_box :email_on_comment, {label: t('custom.account.settings.email_on_comment'), class: "checkbox-label--aligned"} %>
+          </div>
+
+          <div>
+            <%= f.check_box :email_on_comment_reply, {label: t('custom.account.settings.email_on_comment_reply'), class: "checkbox-label--aligned"} %>
+          </div>
+
+          <div>
+            <%= f.check_box :newsletter, {label: t('custom.account.settings.newsletter'), class: "checkbox-label--aligned"} %>
+          </div>
+
+          <div>
+            <%= f.check_box :email_digest, {label: t('custom.account.settings.email_digest'), class: "checkbox-label--aligned"} %>
+          </div>
+          <%= f.submit t("custom.account.show.save_settings"), class: "button margin-top" %>
+        <% end %>
+      <% end %>
+
+      <% if @account&.administrator? || @account&.moderator? || @account&.projekt_manager? %>
+        <%= form_for @account, as: :account, url: account_path do |f| %>
+          <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.admin_notifications"), icon_name: "user-cog") do |c| %>
+            <div>
+              <%= f.check_box :adm_email_on_new_comment,
+                {label: t('custom.account.settings.adm_email_on_new_comment'), class: "checkbox-label--aligned"} %>
+            </div>
+
+            <div>
+              <%= f.check_box :adm_email_on_new_proposal,
+                {label: t('custom.account.settings.adm_email_on_new_proposal'), class: "checkbox-label--aligned"} %>
+            </div>
+
+            <div>
+              <%= f.check_box :adm_email_on_new_debate,
+                {label: t('custom.account.settings.adm_email_on_new_debate'), class: "checkbox-label--aligned"} %>
+            </div>
+
+            <div>
+              <%= f.check_box :adm_email_on_new_deficiency_report,
+                {label: t('custom.account.settings.adm_email_on_new_deficiency_report'), class: "checkbox-label--aligned"} %>
+            </div>
+
+            <div>
+              <%= f.check_box :adm_email_on_new_manual_verification,
+                {label: t('custom.account.settings.adm_email_on_new_manual_verification'), class: "checkbox-label--aligned"} %>
+            </div>
+            <% if @account.official_level == 1 %>
+              <div>
+                <%= f.check_box :official_position_badge, { class: "checkbox-label--aligned" } %>
+              </div>
+            <% end %>
+
+            <%= f.submit t("custom.account.show.save_settings"), class: "button margin-top" %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <% if @account_individial_groups_soft.any? %>
+        <%= form_for @account, as: :account, url: account_path do |f| %>
+          <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.soft_user_groups_title"), icon_name: "user-friends") do |c| %>
+            <% @account_individial_groups_soft.map do |individual_group| %>
+              <div class="options-group">
+                <label><%= individual_group.name %></label>
+                <%= f.collection_check_boxes :individual_group_value_ids, individual_group.individual_group_values, :id, :name do |cb| %>
+                  <%= cb.label(class: "checkbox-label checkbox-label--inline") { cb.check_box + cb.text } %>
+                <% end %>
+              </div>
+              <%= f.submit t("custom.account.show.save_settings"), class: "button margin-top" %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <% if @account_individial_groups_hard.any? %>
+        <%= form_for @account, as: :account, url: account_path do |f| %>
+          <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.hard_user_groups_title"), icon_name: "users") do |c| %>
+            <% @account_individial_groups_hard.map do |individual_group| %>
+              <% next unless (individual_group.individual_group_values & @account.individual_group_values).any? %>
+
+              <div class="options-group">
+                <label><%= individual_group.name %></label>
+                <%= f.collection_check_boxes :individual_group_value_ids, individual_group.individual_group_values, :id, :name do |cb| %>
+                  <% if cb.object.in?(@account.individual_group_values) %>
+                    <%= cb.label(class: "checkbox-label checkbox-label--inline") { cb.check_box(disabled: true) + cb.text } %>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </aside>
+    <div class="show-on-small-tablet">
+      <%= notifications_content %>
+    </div>
+    <div class="show-on-small-tablet">
+      <%= public_activity_component_content %>
+    </div>
+  </div>
+</main>

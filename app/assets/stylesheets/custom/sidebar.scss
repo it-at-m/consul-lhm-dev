@@ -91,3 +91,22 @@
   }
 
 }
+
+
+// Universal styles for filter - refactor
+
+.sidebar-radio-filter {
+  @extend .geozone-filter;
+
+  li.label-selected .checkmark::before {
+    content: "\f192";
+    font-family: "Font Awesome 5 Free";
+    font-weight: normal;
+    color: #004a83;
+  }
+
+  li:not(.label-selected) label a {
+    color: #878787;
+    text-decoration: none;
+  }
+}

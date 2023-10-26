@@ -5,8 +5,10 @@ class ProposalsController
   include ProjektControllerHelper
   include Takeable
   include ProjektLabelAttributes
+  include RandomSeed
 
   before_action :set_projekts_for_selector, only: [:new, :edit, :create, :update]
+  before_action :set_random_seed, only: :index
 
   def index_customization
     if params[:order].nil?
@@ -14,20 +16,11 @@ class ProposalsController
     end
     @resource_name = "proposal"
 
-    if params[:filter_projekt_ids]
-      @selected_projekts_ids = params[:filter_projekt_ids].select { |id| Projekt.find_by(id: id).present? }
-      selected_parent_projekt_id = get_highest_unique_parent_projekt_id(@selected_projekts_ids)
-      @selected_parent_projekt = Projekt.find_by(id: selected_parent_projekt_id)
-    end
-
-    related_projekt_ids = @resources.joins(projekt_phase: :projekt).pluck("projekts.id").uniq
-    related_projekts = Projekt.where(id: related_projekt_ids)
-
     @geozones = Geozone.all
-    @selected_geozone_affiliation = params[:geozone_affiliation] || 'all_resources'
-    @affiliated_geozones = (params[:affiliated_geozones] || '').split(',').map(&:to_i)
-    @selected_geozone_restriction = params[:geozone_restriction] || 'no_restriction'
-    @restricted_geozones = (params[:restricted_geozones] || '').split(',').map(&:to_i)
+    @selected_geozone_affiliation = params[:geozone_affiliation] || "all_resources"
+    @affiliated_geozones = (params[:affiliated_geozones] || "").split(",").map(&:to_i)
+    @selected_geozone_restriction = params[:geozone_restriction] || "no_restriction"
+    @restricted_geozones = (params[:restricted_geozones] || "").split(",").map(&:to_i)
 
     discard_draft
     discard_archived
@@ -37,31 +30,51 @@ class ProposalsController
     remove_archived_from_order_links
 
     @scoped_projekt_ids = Proposal.scoped_projekt_ids_for_index(current_user)
-
     @top_level_active_projekts = Projekt.top_level.current.where(id: @scoped_projekt_ids)
     @top_level_archived_projekts = Projekt.top_level.expired.where(id: @scoped_projekt_ids)
 
+    related_projekt_ids = @resources.joins(projekt_phase: :projekt).pluck("projekts.id").uniq
+    related_projekts = Projekt.where(id: related_projekt_ids)
     @categories = Tag.category.joins(:taggings)
       .where(taggings: { taggable_type: "Projekt", taggable_id: related_projekt_ids }).order(:name).uniq
-
     if params[:sdg_goals].present?
       sdg_goal_ids = SDG::Goal.where(code: params[:sdg_goals].split(",")).ids
       @sdg_targets = SDG::Target.where(goal_id: sdg_goal_ids).joins(:relations)
         .where(sdg_relations: { relatable_type: "Projekt", relatable_id: related_projekt_ids })
     end
 
+    @resources =
+      @resources
+        .by_projekt_id(@scoped_projekt_ids)
+        .includes(:translations, :image, :projekt_labels, :votes_for)
+
+    @all_resources = @resources
+
     unless params[:search].present?
       take_by_my_posts
-      take_by_tag_names(related_projekts)
-      take_by_sdgs(related_projekts)
       take_by_geozone_affiliations
       take_by_geozone_restrictions
       take_by_projekts(@scoped_projekt_ids)
     end
 
     @proposals_coordinates = all_proposal_map_locations(@resources)
-    @proposals = @resources.page(params[:page]).send("sort_by_#{@current_order}")
-    # @selected_tags = all_selected_tags
+    @proposals = @resources.perform_sort_by(@current_order, session[:random_seed]).page(params[:page]).per(24)
+
+    respond_to do |format|
+      format.html do
+        if Setting.new_design_enabled?
+          render :index_new
+        else
+          render :index
+        end
+      end
+
+      format.csv do
+        formated_time = Time.current.strftime("%d-%m-%Y-%H-%M-%S")
+        send_data Proposals::CsvExporter.new(@proposals.limit(nil)).to_csv,
+          filename: "proposals-#{formated_time}.csv"
+      end
+    end
   end
 
   def new
@@ -80,13 +93,36 @@ class ProposalsController
   end
 
   def edit
-    @selected_projekt = @proposal.projekt_phase.projekt
-    params[:projekt_phase_id] = @proposal.projekt_phase.id
-    params[:projekt_id] = @selected_projekt.id
+    @selected_projekt = @proposal&.projekt_phase&.projekt
+
+    params[:projekt_phase_id] = @proposal&.projekt_phase&.id
+    params[:projekt_id] = @selected_projekt&.id
+  end
+
+  def update
+    custom_proposal_params = proposal_params
+
+    if proposal_params["image_attributes"]["cached_attachment"].blank?
+      custom_proposal_params = proposal_params.except("image_attributes")
+    end
+
+    if resource.update(custom_proposal_params)
+      redirect_to resource, notice: t("flash.actions.update.#{resource_name.underscore}")
+    else
+      load_geozones
+      set_resource_instance
+      render :edit
+    end
   end
 
   def create
-    @proposal = Proposal.new(proposal_params.merge(author: current_user))
+    custom_proposal_params = proposal_params
+
+    if proposal_params["image_attributes"]["cached_attachment"].blank?
+      custom_proposal_params = proposal_params.except("image_attributes")
+    end
+
+    @proposal = Proposal.new(custom_proposal_params.merge(author: current_user))
 
     if params[:save_draft].present? && @proposal.save
       redirect_to user_path(@proposal.author, filter: "proposals"), notice: I18n.t("flash.actions.create.proposal")
@@ -95,37 +131,21 @@ class ProposalsController
       @proposal.publish
 
       if @proposal.projekt_phase.active?
-        if @proposal.projekt_phase.projekt.overview_page?
-          redirect_to projekts_path(
-            anchor: "filter-subnav",
-            selected_phase_id: @proposal.projekt_phase.id,
-            order: params[:order]
-          ), notice: t("proposals.notice.published")
-        else
-          redirect_to page_path(
-            @proposal.projekt_phase.projekt.page.slug,
-            anchor: "filter-subnav",
-            selected_phase_id: @proposal.projekt_phase.id,
-            order: params[:order]
-          ), notice: t("proposals.notice.published")
-        end
+        redirect_to page_path(
+          @proposal.projekt_phase.projekt.page.slug,
+          anchor: "filter-subnav",
+          projekt_phase_id: @proposal.projekt_phase.id,
+          order: params[:order]
+        ), notice: t("proposals.notice.published")
       else
-        if @proposal.projekt_phase.projekt.overview_page?
-          redirect_to projekts_path(
-            anchor: "filter-subnav",
-            selected_phase_id: @proposal.projekt_phase.id,
-            order: params[:order]
-          ), notice: t("proposals.notice.published")
-        else
-          redirect_to proposals_path(
-            resources_order: params[:order]
-          ), notice: t("proposals.notice.published")
-        end
+        redirect_to proposals_path(
+          resources_order: params[:order]
+        ), notice: t("proposals.notice.published")
       end
     else
-      @selected_projekt = @proposal.projekt_phase.projekt
-      params[:projekt_phase_id] = @proposal.projekt_phase.id
-      params[:projekt_id] = @selected_projekt.id
+      @selected_projekt = @proposal&.projekt_phase&.projekt
+      params[:projekt_phase_id] = @proposal&.projekt_phase&.id
+      params[:projekt_id] = @selected_projekt&.id
       render :new
     end
   end
@@ -137,7 +157,7 @@ class ProposalsController
       redirect_to page_path(
         @proposal.projekt_phase.projekt.page.slug,
         anchor: "filter-subnav",
-        selected_phase_id: @proposal.projekt_phase.id,
+        projekt_phase_id: @proposal.projekt_phase.id,
         order: "created_at"), notice: t("proposals.notice.published")
     else
       redirect_to proposals_path(order: "created_at"), notice: t("proposals.notice.published")
@@ -147,10 +167,15 @@ class ProposalsController
   def show
     super
     @projekt = @proposal.projekt_phase.projekt
-    @notifications = @proposal.notifications
+    # @notifications = @proposal.notifications
     @notifications = @proposal.notifications.not_moderated
+    @milestones = @proposal.milestones
+
     @related_contents = Kaminari.paginate_array(@proposal.relationed_contents)
                                 .page(params[:page]).per(5)
+
+    @affiliated_geozones = (params[:affiliated_geozones] || '').split(',').map(&:to_i)
+    @restricted_geozones = (params[:restricted_geozones] || '').split(',').map(&:to_i)
 
     if request.path != proposal_path(@proposal)
       redirect_to proposal_path(@proposal), status: :moved_permanently
@@ -159,16 +184,25 @@ class ProposalsController
       @individual_group_value_names = @projekt.individual_group_values.pluck(:name)
       render "custom/pages/forbidden", layout: false
 
-    end
+    elsif Setting.new_design_enabled?
+      render :show_new
 
-    @affiliated_geozones = (params[:affiliated_geozones] || '').split(',').map(&:to_i)
-    @restricted_geozones = (params[:restricted_geozones] || '').split(',').map(&:to_i)
+    else
+      render :show
+    end
+  end
+
+  def vote
+    @follow = Follow.find_or_create_by!(user: current_user, followable: @proposal)
+    @voted =  @proposal.register_vote(current_user, "yes")
   end
 
   def unvote
     @follow = Follow.find_by(user: current_user, followable: @proposal)
-    @follow.destroy if @follow
-    @proposal.unvote_by(current_user)
+
+    @follow.destroy! if @follow
+
+    @voted = !@proposal.unvote_by(current_user)
   end
 
   def created

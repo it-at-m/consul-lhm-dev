@@ -1,0 +1,127 @@
+<%= content_for :body_class, "deficiency-reports-show" %>
+<% provide :title do %><%= @deficiency_report.title %><% end %>
+<% content_for :meta_description do %><%= @deficiency_report.summary %><% end %>
+<% provide :social_media_meta_tags do %>
+  <%= render "shared/social_media_meta_tags",
+              social_url: deficiency_report_url(@deficiency_report),
+              social_title: @deficiency_report.title,
+              social_description: @deficiency_report.summary,
+              twitter_image_url: (@deficiency_report.image.present? ? polymorphic_path(@deficiency_report.image) : nil),
+              og_image_url: (@deficiency_report.image.present? ? polymorphic_path(@deficiency_report.image) : nil) %>
+<% end %>
+<% content_for :canonical do %>
+  <%= render "shared/canonical", href: deficiency_report_url(@deficiency_report) %>
+<% end %>
+
+<main>
+  <div class="resource-page">
+    <div class="flex-layout">
+      <div class='main-column'>
+        <%= back_link_to(deficiency_reports_path) %>
+
+        <h1 class="resource-page--title"><%= t("custom.deficiency_reports.show.title", author: @deficiency_report.author_name) %></h1>
+        <div class="common-page-description">
+          <%= render_custom_block("deficiency_report_show_welcome_text", default_content: t("custom.deficiency_reports.show.welcome_text_default")) %>
+        </div>
+      </div>
+      <div class="sidebar-placeholder"></div>
+    </div>
+
+    <div class="flex-layout">
+      <div class="main-column">
+        <% if @deficiency_report.can_be_published? %>
+          <div class="resource-page--description new-card" style="background-color:#E3FCE7">
+            <h3><%= t("custom.deficiency_reports.show.official_answer.title") %></h3>
+            <%= AdminWYSIWYGSanitizer.new.sanitize(@deficiency_report.official_answer) %>
+          </div>
+        <% end %>
+
+        <%= render ResourcePage::BannerComponent.new(resource: @deficiency_report) %>
+
+        <div class="resource-page--description new-card">
+          <%= auto_link_already_sanitized_html wysiwyg(@deficiency_report.description) %>
+        </div>
+
+        <% if map_location_available?(@deficiency_report) %>
+          <div class="margin-bottom not-print">
+            <%= render Shared::MapComponent.new(
+              mappable: @deficiency_report,
+              map_location: @deficiency_report.map_location || @deficiency_report.projekt_phase.map_location_with_admin_shape,
+              parent_class: "deficiency_report"
+            ) %>
+          </div>
+        <% end %>
+
+        <div id="comments" class="footer-anchor">
+        </div>
+
+        <% if deficiency_reports_feature?('enable_comments') %>
+          <%= render Shared::NewCommentsComponent.new(@deficiency_report, @comment_tree) %>
+        <% end %>
+
+        <% if can? :update_official_answer, @deficiency_report %>
+          <%= render "custom/deficiency_reports/answer_form", deficiency_report: @deficiency_report %>
+        <% end %>
+      </div>
+
+      <aside class="sidebar">
+        <%= render Sidebar::ResourceAuthorComponent.new(user: @deficiency_report.author) %>
+
+        <% if can? :update_status, @deficiency_report %>
+          <%= render(Shared::SidebarCardComponent.new(
+            title: t("custom.deficiency_reports.show.status.title"),
+            icon_name: "check-circle")) do |c| %>
+            <%= render "deficiency_reports/status", deficiency_report: @deficiency_report %>
+          <% end %>
+        <% end %>
+
+        <% if can? :update_category, @deficiency_report %>
+          <%= render(Shared::SidebarCardComponent.new(
+            title: t("custom.deficiency_reports.show.category.title"),
+            icon_name: "th-large")) do |c| %>
+            <%= render "deficiency_reports/category", deficiency_report: @deficiency_report %>
+          <% end %>
+        <% end %>
+
+        <% if feature?(:allow_attached_documents) && @deficiency_report.documents.present? %>
+          <%= render(Shared::SidebarCardComponent.new(title: t("documents.title"), icon_name: "file")) do |c| %>
+            <%= render(Sidebar::DocumentListComponent.new(documents: @deficiency_report.documents)) %>
+          <% end %>
+        <% end %>
+
+        <% if @deficiency_report.video_url.present? %>
+          <%= render(Shared::SidebarCardComponent.new(title: t("custom.deficiency_reports.show.video.title"), icon_name: "video")) do %>
+            <div class="video-link">
+              <%= sanitize_and_auto_link @deficiency_report.video_url %>
+            </div>
+          <% end %>
+        <% end %>
+
+        <%= render(Shared::SidebarCardComponent.new(title: t("proposals.show.share"), icon_name: "share")) do |c| %>
+          <%= render "shared/social_share",
+            share_title: t("proposals.show.share"),
+            title: @deficiency_report.title,
+            url: deficiency_report_url(@deficiency_report),
+            description: @deficiency_report.title,
+            mobile: @deficiency_report.title %>
+        <% end %>
+
+        <% if current_user && ( current_user.administrator? || current_user.deficiency_report_officer? ) %>
+          <%= render(Shared::SidebarCardComponent.new(
+            title: t("custom.deficiency_reports.show.officer.title"),
+            icon_name: "user-cog")) do |c| %>
+            <%= render "deficiency_reports/officer", deficiency_report: @deficiency_report %>
+          <% end %>
+        <% end %>
+
+        <% if current_user == @deficiency_report.author %>
+          <%= render(Shared::SidebarCardComponent.new(
+            title: t("custom.deficiency_reports.show.author_actions.title"),
+            icon_name: "user-edit")) do |c| %>
+            <%= render "deficiency_reports/author_actions", deficiency_report: @deficiency_report %>
+          <% end %>
+        <% end %>
+      </aside>
+    </div>
+  </div>
+</main>

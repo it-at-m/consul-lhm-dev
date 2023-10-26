@@ -1,6 +1,8 @@
 (function() {
   "use strict";
   App.LegislationAnnotatable = {
+    initialized: false,
+
     makeEditableAndHighlight: function(colour) {
       var range, sel;
       sel = window.getSelection();
@@ -64,7 +66,7 @@
         var sectionName  = $sectionElement.data("section-name")
         var annotationId = ($(this).data("annotation-id"));
 
-        window.location.href = window.location.origin + projektSlug + '?text_draft_version_id=' + textDraftVersionId +  '&selected_phase_id=' + selectedPhaseId + '&section=' + sectionName + '&annotation_id=' + annotationId  + '#footer-content'
+        window.location.href = window.location.origin + projektSlug + '?text_draft_version_id=' + textDraftVersionId +  '&projekt_phase_id=' + selectedPhaseId + '&section=' + sectionName + '&annotation_id=' + annotationId  + '#footer-content'
         return;
       }
       $("[data-annotation-id]").removeClass("current-annotation");
@@ -205,16 +207,17 @@
       });
     },
     initialize: function() {
-      var current_user_id;
-      $("body").on("renderLegislationAnnotation", App.LegislationAnnotatable.renderAnnotationComments);
-      $("body").on("click", "[data-annotation-id]", App.LegislationAnnotatable.onClick);
-      $("body").on("click", "[data-cancel-annotation]", function(e) {
-        e.preventDefault();
-        $("#comments-box").html("");
-        $("#comments-box").hide();
-        App.LegislationAnnotatable.remove_highlight();
-      });
-      current_user_id = $("html").data("current-user-id");
+      if (!this.initialized) {
+        $("body").on("renderLegislationAnnotation", App.LegislationAnnotatable.renderAnnotationComments);
+        $("body").on("click", "[data-annotation-id]", App.LegislationAnnotatable.onClick);
+        $("body").on("click", "[data-cancel-annotation]", function(e) {
+          e.preventDefault();
+          $("#comments-box").html("");
+          $("#comments-box").hide();
+          App.LegislationAnnotatable.remove_highlight();
+        });
+      }
+      var current_user_id = $("html").data("current-user-id");
       $(".legislation-annotatable").each(function() {
         var ann_id, base_url;
         ann_id = $(this).data("legislation-draft-version-id");
@@ -245,7 +248,10 @@
         });
       });
 
-      App.LegislationAnnotatable.initCommentFormToggler();
+      if (!this.initialized) {
+        App.LegislationAnnotatable.initCommentFormToggler();
+      }
+      this.initialized = true;
     },
     destroy: function() {
       if ($(".legislation-annotatable").length > 0) {

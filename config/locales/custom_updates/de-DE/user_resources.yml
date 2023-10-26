@@ -1,0 +1,31 @@
+de:
+  custom:
+    user_resources:
+      form:
+        title: "Neuen %{label} erstellen"
+        page_description: "Die Plattform lebt von Ihren Beiträgen! Teilen Sie uns mit, was Sie bewegt – und tauschen Sie sich im Anschluss mit anderen zu Ihren Ideen aus. Es gibt kein Richtig und kein Falsch, jeder Beitrag zählt. Danke, dass Sie sich die Zeit nehmen und sich beteiligen!"
+        submit_button: 'Jetzt veröffentlichen'
+        description_placeholder_html: "
+          Beschreiben Sie hier Ihren Beitrag. Folgendes Vorgehen hat sich bewährt:
+          <br />
+          <br />
+
+          Beginnen Sie mit einer allgemeinen Beschreibung Ihrer Idee und stellen Sie im Anschluss dar, was sich mit der Umsetzung Ihres Vorschlags verbessern würde.
+          <br />
+          <br />
+          Achten Sie beim Schreiben möglichst auf kurze Sätze.
+          <br />
+          <br />
+
+          Nutzen Sie außerdem Absätze, um Ihren Text lesbarer zu machen. (Viele Nutzer lesen Ihren Text auf mobilen Geräten.)
+          <br />
+          <br />
+
+          Beschränken Sie Ihren Inhalt – sofern möglich – auf maximal drei Absätze.
+          <br />
+          <br />
+
+          Verwenden Sie überdies – wenn passend – Aufzählungen und Stichpunkte für eine bessere Übersichtlichkeit.
+          "
+        map_location_instructions: "
+          Wo soll Ihr Beitrag umgesetzt werden? Platzieren Sie einen „Pin“, um andere ins Bild zu setzen."

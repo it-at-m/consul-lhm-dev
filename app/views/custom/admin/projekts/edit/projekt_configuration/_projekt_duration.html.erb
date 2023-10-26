@@ -1,6 +1,6 @@
 <%= translatable_form_for(@projekt, url: namespace_projekt_path) do |f| %>
 
-  <%= hidden_field_tag :tab, "#tab-projekt-configuration" %>
+  <%= hidden_field_tag :tab, "tab-projekt-configuration" %>
   <%= hidden_field_tag :namespace, params[:controller].include?("projekt_management") ? "projekt_management" : "" %>
 
   <div class="config-block">

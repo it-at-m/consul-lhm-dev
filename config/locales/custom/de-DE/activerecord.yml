@@ -290,7 +290,11 @@ de:
         body: "Nachricht"
       organization:
         name: "Name der Organisation"
-        responsible_name: "Der/die* Gruppenverantwortliche"
+        responsible_name: "Kontaktperson"
+        email: "E-Mail-Adresse"
+        phone: "Telefonnummer"
+        password: "Passwort"
+        password_confirmation: "Passwort bestätigen"
       poll:
         name: "Name"
         title: "Name"
@@ -363,7 +367,7 @@ de:
         locale: Sprache
       site_customization/page/translation:
         title: Titel
-        subtitle: Untertitel
+        subtitle: Untertitel und Projektbeschreibung
         content: Inhalt
       site_customization/image:
         name: Name

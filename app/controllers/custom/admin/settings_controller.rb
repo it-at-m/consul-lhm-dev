@@ -44,6 +44,17 @@ class Admin::SettingsController < Admin::BaseController
     @remote_census_response_settings = all_settings["remote_census.response"]
     @uploads_settings = all_settings["uploads"]
     @sdg_settings = all_settings["sdg"]
+
+    if !Rails.application.secrets.new_design_enabled
+      @extended_feature_general =
+        @extended_feature_general
+          .filter { |e|
+            [
+              "extended_feature.general.enable_projekt_events_page",
+              "extended_feature.general.enable_google_translate"
+            ].exclude?(e.key)
+          }
+    end
   end
 
   def update

@@ -1,6 +1,7 @@
 (function() {
   "use strict";
   App.LivesteamLivequestion = {
+    initialized: false,
     initialize: function() {
       this.startLivequtionLoad();
 

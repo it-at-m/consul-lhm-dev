@@ -57,7 +57,7 @@
         <% end %>
 
         <%= link_to '#', class: "configure-link update-projekt-link js-quick-projekt-update", title: t("admin.actions.update") do %>
-          <%= icon('fas', 'sync') %>
+          <%= icon('fas', 'save') %>
         <% end %>
 
         <%= link_to admin_projekt_path(projekt), method: :delete, class: "destroy-link", title: t("custom.admin.projekts.destroy"), data: { confirm: 'Sind Sie sicher?' } do %>

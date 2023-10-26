@@ -1,0 +1,49 @@
+<% if placement == 'desktop' %>
+  <li class="nav-element main-navigation-item-account--wrapper top-level-item js-access-top-level-menu js-prevent-key-scroll"
+      aria-label='<%= t('custom.links.menu.konto_icon') if placement == "desktop" %>'
+      aria-expanded="false"
+      <%= "aria-haspopup=true'" if placement == 'desktop' %>
+      <%= "tabindex=0" if placement == 'desktop' %>
+      >
+
+      <%= link_to account_path, class: 'account-items-icon main-navigation-item-user-account', tabindex: "-1", aria: { hidden: true } do %>
+        <div
+            class="main-navigation-item--account--image-wrapper"
+            aria-hidden="true"
+            title="<%= t("custom.layouts.header.account_link") %>"
+            aria-label="<%= t("custom.layouts.header.account_link") %>"
+            >
+            <% if current_user.image&.variant(:popup).present? %>
+              <%= image_tag(current_user.image&.variant(:popup)) %>
+            <% else %>
+              <div class="main-navigation-item--account--image-placeholder">
+                <%= current_user&.first_letter_of_name %>
+              </div>
+            <% end %>
+        </div>
+        <% if current_user.notifications.unread.count > 0 %>
+          <span class="user-notification--count" >
+            <%= current_user.unread_notifications_count %>
+          </span>
+        <% end %>
+      <% end %>
+
+      <ul class="nav-flyout-block">
+        <%= render "devise/menu/login_items_new" %>
+      </ul>
+  </li>
+<% end %>
+
+<% if placement == 'mobile' %>
+  <%= render partial: 'shared/subnavigation_locale_new', locals: { placement: placement } if extended_feature?("general.language_switcher_in_menu") %>
+
+  <li class='nav-element flyout-item js-access-flyout-menu-item focusable'
+      tabindex="0"
+      aria-label='<%= t("devise_views.menu.login_items.logout") %>'
+      >
+    <%= link_to destroy_user_session_path, rel: "nofollow", method: :delete, tabindex: "-1", aria: { hidden: true } do %>
+      <i class="fas fa-sign-out-alt main-navigation--link-icon"> </i>
+      <%= t("devise_views.menu.login_items.logout") %>
+    <% end %>
+  </li>
+<% end %>

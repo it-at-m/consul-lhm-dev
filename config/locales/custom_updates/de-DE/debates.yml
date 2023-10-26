@@ -5,9 +5,24 @@ de:
         tagging: Einordnung
         tags_custom: Nutzer-Tags
         required: Ihr Beitrag
+        title_placeholder: "Geben Sie Ihrem Beitrag einen plakativen Titel, zum Beispiel „Die Projektlaufzeit ist zu lang“ oder „Bitte die geplanten Maßnahmen erweitern“."
+        description_placeholder_html: "Beschreiben Sie hier, worum es Ihnen in Ihrer Diskussion geht.
+          Folgendes Vorgehen hat sich bewährt:<br><br>
+          Beginnen Sie mit einer allgemeinen Beschreibung Ihres Anliegens und stellen Sie im Anschluss Ihre Position zum Thema dar.<br><br>
+          Achten Sie beim Schreiben möglichst auf kurze Sätze.<br><br>
+          Nutzen Sie außerdem Absätze, um Ihren Text lesbarer zu machen. (Viele Nutzer lesen Ihren Text auf mobilen Geräten.)<br><br>
+          Beschränken Sie Ihren Inhalt – sofern möglich – auf maximal drei Absätze.<br><br>
+          Verwenden Sie überdies – wenn passend – Aufzählungen und Stichpunkte für eine bessere Übersichtlichkeit."
       index:
+        title: "Übersicht aller Diskussionen"
         no_active_projekt: Aktuell kein Beteiligungsverfahren
         no_active_phase: Phase bereits geschlossen
         projekts: Projekte
         creation_only_for_citizens: Neue Diskussionen können in diesem Projekt nur von Bürgerinnen und Bürgern der Stadt %{city} erstellt werden.
         creation_only_for_specific_geozones: Neue Diskussionen können nur von Bürger*innen aus dem Postleitzahlbereich %{geozones} erstellt werden
+        empty_list_text: Derzeit keine verknüpften Beiträge
+        welcome_default_text: Diskussionen sind essenziell, um ein differenziertes Meinungsbild zu den einzelnen Projekten zu erhalten. Lassen Sie sich alle Diskussionen anzeigen oder filtern Sie am rechten Rand nach bestimmten Projekten, Gebieten oder Stichworten. Mit einem Klick auf das jeweilige Thema können Sie die Diskussionen nachverfolgen und sich selbst daran beteiligen.
+        sidebar_information_default_text: Sie möchten Dinge anregen und bewegen? Dann starten Sie Ihre eigene Diskussion.
+        count: Diskussionen
+      show:
+        welcome_default_text: "hat eine Diskussion zu einem Projekt gestartet. Sie können die Diskussion an der rechten Seitenleiste unterstützen, indem Sie ihn mit Daumen hoch bewerten. Sie können aber auch Ihre Ablehnung zum Ausdruck bringen, indem Sie auf Daumen nach unten klicken. Des Weiteren haben Sie die mit der Kommentarfunktion am unteren Ende die Möglichkeit selbst in die Diskussion einzusteigen."

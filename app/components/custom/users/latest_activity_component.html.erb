@@ -1,0 +1,15 @@
+<div id="latest-activity">
+  <%= render Shared::ResourcesListComponent.new(list_params) do |c| %>
+    <% if comments? %>
+      <% c.custom_body do %>
+        <%= render Comments::UserCommentsComponent.new(comments: resources) %>
+      <% end %>
+    <% end %>
+
+    <% c.bottom_content do %>
+      <div class="resources-list--bottom-content">
+        <%= link_to t("custom.welcome.latest_activity.all_activity_link"), account_path, class: "resources-list--more-link" %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

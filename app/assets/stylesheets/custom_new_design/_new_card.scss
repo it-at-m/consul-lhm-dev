@@ -1,0 +1,49 @@
+.custom-new-design {
+  .new-card, .main-content-card {
+    background: white;
+    border-radius: 10px;
+    border: 1px solid $border-color;
+    margin-bottom: 15px;
+    color: $main-text-color;
+    font-size: 14px;
+    padding: 20px 25px;
+    overflow: hidden;
+
+    &.-no-padding {
+      padding: 0;
+
+      .new-card-body {
+        padding: 0 25px;
+        padding-bottom: 20px;
+      }
+    }
+  }
+
+  .main-content-card {
+    padding: 35px 50px;
+  }
+
+  @media (max-width: 1365px) {
+    .main-content-card {
+      padding: 25px 35px;
+    }
+  }
+
+  @media (max-width: $mobile-viewport-start) {
+    .main-content-card {
+      padding: 18px 22px;
+    }
+  }
+
+  .new-card--heading {
+    display: flex;
+    color: black;
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+
+  .new-card--heading-icon {
+    color: $brand;
+    margin-right: 5px;
+  }
+}

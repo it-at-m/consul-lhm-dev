@@ -1,0 +1,65 @@
+<main class="projekts-page projekts-overview-page">
+  <div class="main-column projekts-overview-page--heading">
+    <div class="padding-on-mobile">
+      <h1>
+        <%= t("custom.projekts.index.title") %>
+      </h1>
+      <%= render_custom_block "projekts_overview_page", default_content: t("custom.projekts.index.welcome_default_text_html") %>
+    </div>
+  </div>
+
+  <div class="flex-layout padding-on-mobile flex-layout-reverse-on-mobile">
+    <div class="main-column">
+      <div class="projekts-overview-page--projekts-list">
+        <%= render Projekts::ListComponent.new(
+          projekts: @projekts,
+          map_coordinates: @map_coordinates,
+          current_filter: @current_projekts_filter,
+          filters: @active_projekts_filters,
+          hide_title: true
+          ) %>
+      </div>
+
+      <%= paginate @projekts %>
+
+      <% if @show_comments %>
+        <div id="projekt_comments">
+          <%= render Shared::NewCommentsComponent.new(@commentable, @comment_tree, remote_url: footer_comments_projekts_path) %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="sidebar">
+      <%= render Shared::SidebarCardComponent.new(title: t("custom.common.information"), icon_name: "info-circle") do |c| %>
+        <%= render_custom_block "projekt_overview_page_sidebar", default_content: t("custom.projekts.index.information_default_text") %>
+
+        <div class="proposals--info-count margin-bottom-half">
+          <span>
+            <%= t("custom.projekts.index.count") %>
+          </span>
+          <span>
+            <%= @all_projekts.count %>
+          </span>
+        </div>
+      <% end %>
+
+      <%# <%= render Mobile::FiltersComponent.new do %>
+        <%= render Sidebar::Filters::GeozoneAffiliationsCardComponent.new(geozones: @geozones, resource_name: @resource_name, selected_affiliated_geozones: @affiliated_geozones) %>
+        <%= render Sidebar::CategoriesCardComponent.new(categories: @categories) %>
+        <%= render Sidebar::SdgsCardComponent.new(sdgs: @sdgs, sdg_targets: @sdg_targets) %>
+      <%# <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column show-on-mobile projekt-mobile-share-buttons">
+      <%= render "shared/social_share",
+          share_title: t("custom.pages.social_share.share"),
+          title: t("custom.projekts.index.social_share.title"),
+          url: url_for(only_path: false),
+          description: t("custom.projekts.index.social_share.description", domain: request.domain),
+          mobile: t("custom.projekts.index.social_share.description", domain: request.domain)
+      %>
+    </div>
+  </div>
+</main>

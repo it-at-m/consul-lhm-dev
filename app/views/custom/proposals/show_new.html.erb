@@ -1,0 +1,235 @@
+<%= content_for :body_class, "proposals-show" %>
+<% preview = false unless local_assigns.has_key? :preview %>
+<% provide :title do %><%= @proposal.title %><% end %>
+<% content_for :meta_description do %>
+  <%= strip_tags(@proposal.description)[0..200] %>
+<% end %>
+<% provide :social_media_meta_tags do %>
+  <%= render "shared/social_media_meta_tags",
+    social_url: proposal_url(@proposal),
+    social_title: @proposal.title,
+    social_description: strip_tags(@proposal.description)[0..200],
+    twitter_image_url: (@proposal.image.present? ? polymorphic_path(@proposal.image) : nil),
+    og_image_url: (@proposal.image.present? ? polymorphic_path(@proposal.image) : nil) %>
+<% end %>
+<% content_for :canonical do %>
+  <%= render "shared/canonical", href: proposal_url(@proposal) %>
+<% end %>
+
+<main class="resource-page">
+  <div class="custom-fixed-tabs margin-bottom">
+    <div class="custom-fixed-tabs--content">
+      <div class="js-scroll-link custom-tab" data-anchor-id="proposal-content">
+        <%= t("custom.common.fixed_tabs.content") %>
+      </div>
+      <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.show_comments") %>
+        <div class="js-scroll-link custom-tab" data-anchor-id="proposal-comments">
+          <%= t("custom.common.fixed_tabs.comments") %>
+        </div>
+      <% end %>
+      <div class="js-scroll-link custom-tab" data-anchor-id="proposal-author">
+        <%= t("custom.common.fixed_tabs.author") %>
+      </div>
+    </div>
+  </div>
+  <div id="<%= dom_id(@proposal) %>">
+    <div class="flex-layout">
+      <div class="main-column" id="proposal-content">
+        <%= resources_back_link(fallback_path: proposals_path) %>
+
+        <h1 class="resource-page--title"><%= "Beitrag von #{@proposal.author.name}" %></h1>
+        <div class="common-page-description">
+          <%= render_custom_block('debate_show_welcome_text', default_content: t("custom.proposals.show.welcome_default_text", author: @proposal.author.name)) %>
+        </div>
+
+        <% if @proposal.conflictive? %>
+          <div data-alert class="callout alert margin-top">
+            <strong><%= t("proposals.show.flag") %></strong>
+          </div>
+        <% end %>
+
+      </div>
+      <div class="sidebar-placeholder"></div>
+    </div>
+
+    <div class="flex-layout">
+      <div class="main-column">
+        <%= render ResourcePage::BannerComponent.new(resource: @proposal) %>
+
+        <div class="resource-page--description new-card">
+          <%= auto_link_already_sanitized_html wysiwyg(@proposal.description) %>
+        </div>
+
+        <% if projekt_phase_feature?(@proposal.projekt_phase, "form.show_map") && map_location_available?(@proposal) %>
+          <% if @proposal.projekt.vc_map_enabled? %>
+            <div class="margin-bottom not-print">
+              <%= render Shared::VCMapComponent.new(
+                mappable: @proposal,
+                map_location: @proposal.map_location || @proposal.projekt_phase.map_location_with_admin_shape,
+                parent_class: "proposal",
+                projekt_phase: @proposal.projekt_phase,
+                show_admin_shape: @proposal.projekt_phase.map_location.show_admin_shape?
+              ) %>
+            </div>
+          <% else %>
+            <div class="margin-bottom not-print">
+              <%= render Shared::MapComponent.new(
+                mappable: @proposal,
+                map_location: @proposal.map_location || @proposal.projekt_phase.map_location_with_admin_shape,
+                parent_class: "proposal",
+                projekt_phase: @proposal.projekt_phase,
+                show_admin_shape: @proposal.projekt_phase.map_location.show_admin_shape?
+              ) %>
+            </div>
+          <% end %>
+        <% end %>
+
+        <% if @proposal.video_url.present? && !projekt_phase_feature?(@proposal.projekt_phase, "resource.show_video_as_link") %>
+          <div class="proposal-resources-section">
+            <%= render(Shared::ExternalVideoPlayer.new(url: @proposal.video_url)) %>
+          </div>
+        <% end %>
+
+        <div id="comments" class="footer-anchor">
+        </div>
+
+        <div class="proposal-resources-sections">
+          <% if ((projekt_phase_feature?(@proposal.projekt_phase, "resource.show_comments") ||
+              projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_notifications_tab") ||
+              projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_milestones_tab")) && !preview) %>
+
+            <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_notifications_tab") && @notifications.present? %>
+              <div class="proposal-resources-section">
+                <%= render Shared::NotificationsComponent.new(notifiable: @proposal, author: @proposal.author) %>
+              </div>
+            <% end %>
+
+            <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.enable_proposal_milestones_tab") && @milestones.present? %>
+              <div class="proposal-resources-section">
+                <%= render Shared::MilestonesComponent.new(milestones: @milestones, milestoneable: @proposal) %>
+              </div>
+            <% end %>
+
+            <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.show_comments") %>
+              <div id="proposal-comments" class="proposal-resources-section">
+                <%= render Shared::NewCommentsComponent.new(@proposal, @comment_tree) %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <aside class="sidebar" id="proposal-author">
+        <%= render Sidebar::ResourceAuthorComponent.new(user: @proposal.author) %>
+
+        <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.allow_voting") %>
+          <%= render(Mobile::FixedBottomActionComponent.new) do %>
+            <%= render(Shared::SidebarCardComponent.new(title: "Unterstützer*innen", icon_name: "vote-yea", opened_on_mobile: true)) do |c| %>
+              <div class="proposal-page--votes">
+                <%= render "proposals/support_status", proposal: @proposal %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.show_community_button_in_proposal_sidebar") %>
+          <%= render(Shared::SidebarCardComponent.new(title: "Beteiligen Sie sich", icon_name: "users")) do |c| %>
+            <div class="proposal-page--working-group">
+              Für diesen Vorschlag gibt es bereits einen Arbeitskreis, der sich mit der Umsetzung des Vorschlags beschäftigt.
+            </div>
+            <%= link_to t("community.sidebar.button_to_access"), community_path(@proposal.community), class: "button hollow expanded" %>
+          <% end %>
+        <% end %>
+
+        <% if @proposal.video_url.present? && projekt_phase_feature?(@proposal.projekt_phase, "resource.show_video_as_link") %>
+          <%= render(Shared::SidebarCardComponent.new(title: t("proposals.show.title_video_url"), icon_name: "video")) do %>
+            <div class="video-link">
+              <%= sanitize_and_auto_link @proposal.video_url %>
+            </div>
+          <% end %>
+        <% end %>
+
+        <% if !@proposal.selected? && projekt_phase_feature?(@proposal.projekt_phase, "resource.show_related_content") %>
+          <%= render(Shared::SidebarCardComponent.new(title: t("related_content.title"), icon_name: "link")) do %>
+            <p>
+              <%= t("related_content.description") %>
+            </p>
+            <%= render "relationable/related_content", relationable: @proposal %>
+          <% end %>
+        <% end %>
+
+        <% if feature?(:allow_attached_documents) && @proposal.documents.present? %>
+          <%= render(Shared::SidebarCardComponent.new(title: t("documents.title"), icon_name: "file")) do |c| %>
+            <%= render(Sidebar::DocumentListComponent.new(documents: @proposal.documents)) %>
+          <% end %>
+        <% end %>
+
+        <% if current_user && projekt_phase_feature?(@proposal.projekt_phase, "resource.show_follow_button_in_proposal_sidebar") %>
+          <%= render(Shared::SidebarCardComponent.new(title: t("shared.follow"), icon_name: "star")) do |c| %>
+            <p><%= t("custom.shared.show.follow_text") %></p>
+            <%= render "follows/follow_button", follow: find_or_build_follow(current_user, @proposal) %>
+          <% end %>
+        <% end %>
+
+        <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.show_report_button_in_sidebar") && (show_flag_action?(@proposal) || show_unflag_action?(@proposal) )%>
+          <%= render(Shared::SidebarCardComponent.new(title: t("custom.shared.show.report_title"), icon_name: "flag")) do  %>
+            <%= render "shared/participation/flag", resource: @proposal %>
+          <% end %>
+        <% end %>
+
+        <%= render(Shared::SidebarCardComponent.new(title: t("proposals.show.share"), icon_name: "share")) do |c| %>
+          <%= render "shared/social_share",
+            share_title: t("proposals.show.share"),
+            title: @proposal.title,
+            url: debate_url(@proposal),
+            description: @proposal.title,
+            mobile: @proposal.title %>
+        <% end %>
+
+        <% if current_user.present? && current_user.administrator? %>
+          <%= render(Shared::SidebarCardComponent.new(title: t("custom.shared.show.admin"), icon_name: "user-cog")) do |c| %>
+            <div class="js-moderator-proposal-actions">
+              <%= render "actions", proposal: @proposal %>
+            </div>
+          <% end %>
+        <% end %>
+
+        <% if @proposal.editable_by?(current_user) %>
+          <%= render(Shared::SidebarCardComponent.new(title: t("proposals.show.author"), icon_name: "user-edit")) do |c| %>
+            <%# <% if can?(:dashboard, @proposal) %>
+            <%#   <%= link_to proposal_dashboard_path(@proposal),
+            <%#     class: "button hollow expanded",
+            <%#     id: "proposal-dashboard-#{@proposal.id}" do %>
+            <%#     <span class="icon icon-edit"></span>
+            <%#     <%= t("proposals.show.dashboard_proposal_link") %>
+            <%#   <% end %>
+            <%# <% end %>
+
+            <% if current_editable?(@proposal) %>
+              <%= link_to edit_proposal_path(@proposal),
+                target: "_blank",
+                class: "button hollow expanded left-aligned" do %>
+                <i class="fas fa-edit"></i>
+                <%= t("dashboard.index.edit_proposal_link") %>
+              <% end %>
+            <% end %>
+
+            <% unless @proposal.retired? %>
+              <%= link_to t("dashboard.index.retire"),
+                retire_form_proposal_path(@proposal),
+                class: "button hollow alert",
+                target: "_blank" %>
+            <% end %>
+
+            <% if can?(:publish, @proposal) %>
+              <%= link_to t("dashboard.index.publish"),
+                publish_proposal_path(@proposal),
+                class: "button hollow expanded",
+                method: :patch %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </aside>
+    </div>
+  </div>
+</main>

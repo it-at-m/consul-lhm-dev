@@ -1,5 +1,5 @@
 <button type="button" data-toggle="related_content" class="add-related-content">
-  <% t("related_content.add") %>
+  <%= t("related_content.add") %>
 </button>
 
 <%= form_tag related_contents_path, method: :post, id: "related_content", "data-toggler": "unused-toggle-class" do %>

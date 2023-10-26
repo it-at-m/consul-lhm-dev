@@ -210,7 +210,7 @@
           type: "GET",
           dataType: "json",
           success: function(data) {
-            e.target.bindPopup(getPopupContent(data), { autoPanPadding: [50, 50] }).openPopup();
+            e.target.bindPopup(getPopupContent(data), { autoPanPadding: [0, 80], minWidth: 200, offset:  L.point(0, -30) }).openPopup();
           }
         });
       };
@@ -233,17 +233,17 @@
 
         function proposalPopupContent(data) {
           var popupHtml = "";
-          popupHtml += "<h6 style='max-width:140px;margin-top:20px;'><a href='/proposals/" + data.proposal_id + "'>" + data.proposal_title + "</a></h6>"; //title
+          popupHtml += "<h6><a href='/proposals/" + data.proposal_id + "'>" + data.proposal_title + "</a></h6>"; //title
 
           if (data.image_url) {
-            popupHtml += "<img src='" + data.image_url + "' style='margin-bottom:10px;height:140px'>"; //image
+            popupHtml += "<img src='" + data.image_url + "' style='margin-bottom:10px;height:170px'>"; //image
           }
 
           if (data.labels.length || Object.keys(data.sentiment).length) {
             popupHtml += "<div class='resource-taggings'>";
 
             if (data.labels.length) {
-              var labels = "<div class='projekt-labels' style='max-width:140px;'>";
+              var labels = "<div class='projekt-labels'>";
               data.labels.forEach(function(label) {
                 labels += "<span class='projekt-label selected'>"
                 labels += "<i class='fas fa-" + label.icon + "' style='margin-right:4px;'></i>"
@@ -255,7 +255,7 @@
             }
 
             if (Object.keys(data.sentiment).length) {
-              var sentiments = "<div class='sentiments' style='max-width:140px;'>";
+              var sentiments = "<div class='sentiments'>";
               sentiments += "<span class='sentiment' style='background-color:#454B1B;color:#ffffff'>" + data.sentiment.name + "</span>";
               sentiments += "</div>";
               popupHtml += sentiments;
@@ -270,17 +270,17 @@
         function projektPopupContent(data) {
           // return "<a href='/projekts/" + data.projekt_id + "'>" + data.projekt_title + "</a>";
           var popupHtml = "";
-          popupHtml += "<h5 style='max-width:140px;margin-top:20px;word-wrap:break-word;'><a href='/projekts/" + data.projekt_id + "'>" + data.projekt_title + "</a></h5>"; //title
+          popupHtml += "<h5 style=';word-wrap:break-word;'><a href='/projekts/" + data.projekt_id + "'>" + data.projekt_title + "</a></h5>"; //title
 
           if (data.image_url) {
-            popupHtml += "<img src='" + data.image_url + "' style='margin-bottom:10px;height:140px;'>"; //image
+            popupHtml += "<img class='resource-map-popup-image' src='" + data.image_url + "' >"; //image
           }
 
           if (data.sdg_goals.length || data.tags.length ) {
              popupHtml += "<div style=''>";
 
              if (data.sdg_goals.length) {
-               var sdg_goals = "<div class='projekt-sdg-goals' style='max-width:140px;margin-bottom:6px;'>";
+               var sdg_goals = "<div class='projekt-sdg-goals'>";
                data.sdg_goals.forEach(function(sdg_goal) {
                  sdg_goals += "<span class='projekt-sdg-goal'>"
                  sdg_goals += "<img src='" + sdg_goal.image + "' style='width:35px;margin-right:4px;margin-bottom:4px;'></i>"
@@ -291,7 +291,7 @@
              }
 
              if (data.tags.length) {
-               var tags = "<div class='tags' style='max-width:140px;'>";
+               var tags = "<div class='tags'>";
                data.tags.forEach(function(tag) {
                  tags += "<span class='tag' style='font-size:0.75rem;padding:0.33333rem 0.5rem;margin-bottom:4px;'>" + tag + "</span>";
                });
@@ -509,7 +509,7 @@
 
         // sets default language to German
         map.pm.setLang('de');
- 
+
         // set positions for geoman controls
         map.pm.Toolbar.setBlockPosition('draw', 'topright');
         map.pm.Toolbar.setBlockPosition('edit', 'topright');
@@ -580,7 +580,7 @@
               $(latitudeInputSelector).val('');
               $(longitudeInputSelector).val('');
             }
-          } 
+          }
         });
 
         // toggle consul marker button by default for regular users

@@ -1,0 +1,46 @@
+<main>
+  <h1>
+    <%= t('custom.projekts.projekt_events.index.title') %>
+  </h1>
+
+  <div class="flex-layout">
+    <div class="main-column">
+      <div class="margin-bottom">
+        <%= render_custom_block('projekt_events_index_welcome', default_content: t("custom.projekt_events.index.welcome_default_text_html")) %>
+      </div>
+
+      <div class="resources-list--actions">
+        <div class="items-list-line-divider">
+        </div>
+        <% if valid_filters.present? %>
+          <%= render(
+            Shared::FilterDropdownComponent.new(
+              title: "Filtern nach:",
+              options: valid_filters,
+              selected_option: @current_filter,
+              i18n_namespace: "custom.projekt_events.filters",
+              url_param_name: "filter"
+            )
+          ) %>
+        <% end %>
+      </div>
+      <%= render Projekts::ProjektEvents::List.new(projekt_events: @projekt_events, show_projekt_link: true) %>
+      <%= paginate @projekt_events %>
+    </div>
+    <aside id="proposals-sidebar" class="sidebar">
+      <%= render Shared::SidebarCardComponent.new(title: t("custom.common.information"), icon_name: "info-circle") do |c| %>
+        <%= render_custom_block "projekt_events_index_sidebar_new", default_content: t("custom.projekt_events.index.sidebar_info") %>
+      <% end %>
+      <%= render(Shared::SidebarCardComponent.new(title: t("custom.common.share"), icon_name: "share")) do |c| %>
+        <%= render "shared/social_share",
+          share_title: t("custom.pages.social_share.share"),
+          title: t("custom.projekts.projekt_events.index.social_share.title"),
+          url: url_for(only_path: false),
+          description: t("custom.projekts.projekt_events.index.social_share.description", domain: request.domain),
+          mobile: t("custom.projekts.projekt_events.index.social_share.description", domain: request.domain)
+        %>
+      <% end %>
+
+    </aside>
+  </div>
+</main>

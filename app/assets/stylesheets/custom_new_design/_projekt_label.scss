@@ -1,0 +1,31 @@
+#projekt_labels_selector {
+  margin-top: 0;
+  margin-bottom: 0;
+
+  p.small {
+    margin-bottom: 0.5em !important;
+  }
+
+  label:not(.projekt-label) {
+    display: none;
+  }
+}
+
+.projekt-labels {
+  .projekt-label:not(label) {
+    background-color: $brand;
+  }
+}
+
+.custom-new-design {
+  .projekt-labels-selector--checkboxes, .projekt-sentiments-selector--checkboxes {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+
+    .projekt-label {
+      margin-bottom: 0.3em;
+    }
+  }
+}

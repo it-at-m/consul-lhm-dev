@@ -345,7 +345,17 @@ class Budget
     end
 
     def formatted_price
-      budget.formatted_amount(price)
+      if Setting.new_design_enabled?
+        ActionController::Base.helpers.number_to_currency(price,
+                                                          precision: 0,
+                                                          locale: I18n.locale,
+                                                          unit: "Euro",
+                                                          delimiter: ".",
+                                                          format: "%n %u"
+                                                         )
+      else
+        budget.formatted_amount(price)
+      end
     end
 
     def self.apply_filters_and_search(_budget, params, current_filter = nil)

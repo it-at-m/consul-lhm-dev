@@ -1,0 +1,98 @@
+<main>
+  <h1 class="padding-on-mobile">
+    <%= t("custom.debates.index.title") %>
+  </h1>
+  <div class="flex-layout padding-on-mobile">
+    <div class="main-column">
+      <div class="hide-on-mobile">
+        <% if extended_feature?("debates.intro_text_for_debates") %>
+          <div class="resource-page--intro-text">
+            <%= render_custom_block('debates_index_welcome', default_content: t("custom.debates.index.welcome_default_text")) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex-layout flex-layout-reverse-on-mobile padding-on-mobile">
+    <div class="main-column">
+      <%= render 'shared/loader_spinner' %>
+
+      <% if extended_feature?('modulewide.custom_help_text_in_modules') %>
+        <%= link_to t('debates.index.section_header.help'), '#section_help' %>
+      <% end %>
+
+      <%= render(
+        Shared::ResourcesListComponent.new(
+          resources: @debates,
+          resource_type: Debate,
+          current_filter: @current_order,
+          filter_param: "order",
+          text_search_enabled: true,
+          filters: @valid_orders,
+          hide_title: true,
+          empty_list_text: "Keine Ergebnisse"
+        ))
+      %>
+    <%= paginate @debates %>
+    </div>
+
+    <div id="debates-sidebar" class="sidebar">
+      <div class="hide-on-mobile">
+        <%= render Shared::SidebarCardComponent.new(title: t('custom.common.information'), icon_name: "info-circle", opened_on_mobile: true) do |c| %>
+          <div class="margin-bottom-half">
+            <%= render_custom_block "debates_index_sidebar", default_content: t("custom.debates.index.sidebar_information_default_text") %>
+          </div>
+
+          <div class="proposals--info-count margin-bottom-half">
+            <span>
+              <%= t('custom.debates.index.count') %>
+            </span>
+            <span>
+              <%= @all_resources.count %>
+            </span>
+          </div>
+
+          <%= render Shared::NewButtonComponent.new(resources_name: "debates", query_params: params) %>
+        <% end %>
+      </div>
+
+      <div class="show-on-mobile">
+        <%= render(Mobile::FixedBottomActionComponent.new) do %>
+          <%= render Shared::NewButtonComponent.new(resources_name: "debates", query_params: params) %>
+        <% end %>
+      </div>
+
+      <% if extended_feature?('debates.enable_projekt_filter') %>
+        <%= render Sidebar::ProjektsFilterComponent.new(
+          top_level_active_projekts: @top_level_active_projekts,
+          top_level_archived_projekts: @top_level_archived_projekts,
+          scoped_projekt_ids: @scoped_projekt_ids,
+          all_resources: @all_resources,
+          current_tab_phase: @current_tab_phase,
+          current_projekt: @current_projekt
+        ) %>
+      <% end %>
+
+      <%= render Sidebar::Filters::GeozoneAffiliationsCardComponent.new(
+        geozones: @geozones,
+        resource_name: @resource_name,
+        selected_affiliated_geozones: @affiliated_geozones
+      ) %>
+
+      <%= render Sidebar::Filters::GeozoneRestrictionsCardComponent.new(
+        geozones: @geozones,
+        restricted_geozones: @restricted_geozones,
+        selected_geozone_restriction: @selected_geozone_restriction
+      ) %>
+
+      <% if current_user.present? && extended_feature?('debates.enable_my_posts_filter') %>
+        <%= render Sidebar::Filters::MyPostsCardComponent.new %>
+      <% end %>
+
+      <%= render Sidebar::ExportListComponent.new(
+        path: debates_path(**request.query_parameters, format: :csv),
+      ) %>
+  </div>
+  </div>
+</main>

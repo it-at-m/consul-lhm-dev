@@ -1,0 +1,46 @@
+<div class="milestone-item milestone-content">
+  <% if milestone.publication_date.present? %>
+    <span class="milestone-item--date">
+      <strong>
+        <%= l(milestone.publication_date, format: :new_date_with_year) %>
+      </strong>
+    </span>
+  <% end %>
+
+  <div class="new-card -no-padding">
+    <div class="milestone-item--status margin-bottom">
+      <%= milestone.status&.name %>
+    </div>
+
+    <div class="new-card-body">
+      <%= image_tag(milestone.image.variant(:large), { id: "image_#{milestone.id}", alt: milestone.image.title, class: "margin-bottom" }) if milestone.image.present? %>
+
+      <p>
+      <%= helpers.sanitize_and_auto_link milestone.description %>
+      </p>
+
+      <% if milestone.documents.present? %>
+        <div class="documents">
+          <div class="document-link text-left small">
+            <p>
+            <strong><%= t("shared.documentation") %></strong>
+            </p>
+
+            <% milestone.documents.each do |document| %>
+              <%= link_to document.title,
+                document.attachment,
+                target: "_blank",
+                rel: "nofollow" %><br>
+                <small>
+                  <%= document.humanized_content_type %>&nbsp;|&nbsp;
+                  <%= helpers.number_to_human_size(document.attachment_file_size, precision: 2) %>
+                </small>
+                <br>
+              <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    </div>
+</div>
+

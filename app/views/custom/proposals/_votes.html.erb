@@ -1,0 +1,5 @@
+<% if Setting.new_design_enabled? %>
+  <%= render Proposals::NewVotesComponent.new(proposal, vote_url: local_assigns[:vote_url]) %>
+<% else %>
+  <%= render Proposals::VotesComponent.new(proposal, vote_url: local_assigns[:vote_url]) %>
+<% end %>

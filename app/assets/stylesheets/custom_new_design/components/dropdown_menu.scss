@@ -1,0 +1,119 @@
+.dropdown-container {
+  margin: 0 auto;
+  color: #292929;
+}
+
+.dropdown-menu {
+  z-index: 1000;
+  position: relative;
+  width: 107%;
+
+  a {
+    width: 100%;
+    display: block;
+  }
+}
+
+.dropdown-container {
+  position: relative;
+
+  .dropdown-toggle {
+    // font-size: 16px;
+    padding-right: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    transition: all ease-in-out 0.3s;
+    user-select: none;
+  }
+
+  .dropdown-menu {
+    width: max-content;
+    border-radius: 10px;
+    box-shadow: 0px 0px 4px -2px rgba(58, 58, 58, 0), 3px 2px 7px 0px rgba(0, 0, 0, 0.09);
+    margin-top: 5px;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    display: none;
+    background-color: #ffffff;
+    z-index: 100;
+
+    ul {
+      list-style: none;
+      margin: 0;
+      overflow: hidden;
+      border-radius: 10px;
+      z-index: 10;
+      user-select: none;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      overflow: hidden;
+      border-radius: 10px;
+      z-index: 10;
+      user-select: none;
+    }
+
+    li {
+      text-decoration: none;
+      display: block;
+      font-size: 15px;
+      transition: all ease-in-out 0.1s;
+      cursor: pointer;
+
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: var(--dropdown-hover-color);
+      }
+
+      & > * {
+        padding: 5px 12px;
+      }
+    }
+
+    a {
+      color: inherit;
+
+      &:hover {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.dropdown-toggle {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    border: 5px solid;
+    border-top-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    margin-top: -2.5px;
+    background-color: rgba(0, 0, 0, 0);
+    transition: all ease-in-out 0.2s;
+  }
+}
+
+.dropdown-open {
+  .dropdown-menu {
+    display: block;
+  }
+}
+
+.dropdown-container.dropdown-open {
+  .dropdown-toggle {
+    &:before {
+      transform: rotate(-135deg);
+    }
+  }
+}

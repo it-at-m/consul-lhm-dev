@@ -2,7 +2,11 @@ class Admin::DeficiencyReportsController < Admin::BaseController
   include Translatable
 
   def index
-    @deficiency_reports = DeficiencyReport.all.order(id: :asc).page((params[:page].presence || 0)).per(params[:limit].presence || 20)
+    @deficiency_reports = DeficiencyReport.all.order(id: :asc)
+
+    unless params[:format] == "csv"
+      @deficiency_reports = @deficiency_reports.page(params[:page].presence || 0).per(params[:limit].presence || 20)
+    end
 
     respond_to do |format|
       format.html

@@ -61,7 +61,8 @@ class Legislation::AnnotationsController < Legislation::BaseController
   end
 
   def search
-    @annotations = @draft_version.annotations.order(Arel.sql("LENGTH(quote) DESC"))
+    annotations_with_comments_ids = @draft_version.annotations.joins(:comments).ids.uniq
+    @annotations = Legislation::Annotation.where(id: annotations_with_comments_ids).order(Arel.sql("LENGTH(quote) DESC"))
     annotations_hash = { total: @annotations.size, rows: @annotations }
     render json: annotations_hash.to_json(methods: :weight)
   end

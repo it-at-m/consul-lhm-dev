@@ -1,12 +1,14 @@
 <% if controller_name.in? %w[debates proposals] %>
-  <div id="projekt_labels_selector" class="hide projekt-labels" style="margin-top:2rem;margin-bottom:1rem;">
+  <div id="projekt_labels_selector" class="hide projekt-labels">
     <%= f.label :projekt_labels, t("custom.shared.form.projekt_labels_label"), class: "required" %>
     <p class="small" style="margin-bottom:0.25rem;"><%= t("custom.shared.form.projekt_labels_hint") %></p>
-    <%= f.collection_check_boxes :projekt_label_ids, ProjektLabel.all, :id, :name do |cb| %>
-      <%= cb.check_box %>
-      <% iconn = content_tag(:i, nil, class: "fas fa-#{cb.object.icon}") %>
-      <%= cb.label(id: dom_id(cb.object), class: "projekt-label", data: { "label-id" => cb.object.id }) { iconn + cb.text } %>
-    <% end %>
+    <div class="projekt-labels-selector--checkboxes">
+      <%= f.collection_check_boxes :projekt_label_ids, ProjektLabel.all, :id, :name do |cb| %>
+        <%= cb.check_box %>
+        <% iconn = content_tag(:i, nil, class: "fas fa-#{cb.object.icon}") %>
+        <%= cb.label(id: dom_id(cb.object), class: "projekt-label", data: { "label-id" => cb.object.id }) { iconn + cb.text } %>
+      <% end %>
+    </div>
   </div>
 
   <% if model.errors.details[:projekt_labels].any? %>

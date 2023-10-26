@@ -1,0 +1,45 @@
+<div class="direct-image-upload js-direct-image-upload" data-submit-form="<%= @submit_form %>">
+  <div class="js-direct-image-upload--file-attach-area direct-image-upload--file-attach-area">
+    <% if placeholder.present? %>
+      <%= placeholder %>
+    <% end %>
+  </div>
+
+  <div class="direct-image-upload--inputs js-direct-image-upload--inputs nested-fields">
+    <%= f.hidden_field :id, class: "js-direct-image-upload--id" %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :cached_attachment, class: "js-direct-image-upload--cached-attachment" %>
+    <div class="direct-image-upload--file-field">
+      <%= presetuped_file_field %>
+    </div>
+
+    <div class="action-add js-attachment-errors direct-image-upload--attachment-errors <%= singular_name %>-attachment">
+    </div>
+
+    <div class="direct-image-upload--progress-bar-wrapper"><div class="direct-image-upload--loading-bar"></div></div>
+
+    <% if custom_edit_button.present? %>
+      <div class="direct-image-upload-custom-edit-button js-direct-image-upload-custom-edit-button <%= destroy_link_class %>">
+        <%= custom_edit_button %>
+      </div>
+    <% end %>
+    <div class="<%= preview_area_class %> direct-image-upload--preview-area js-direct-image-upload--preview-area">
+
+      <% if attachable.attachment.attached? && attachable.attachment.image? %>
+        <%= render_image(attachable, :large, false) %>
+      <% end %>
+
+      <div class="js-direct-image-upload--attachment-actions">
+        <div class="<%= custom_edit_button.present? ? 'd-none' : '' %>">
+          <div class="direct-image-upload--image-actions-area">
+            <%= f.text_field :title, placeholder: t("#{plural_name}.form.title_placeholder"), class: "direct-image-upload--file-title" %>
+
+            <div class="action-remove text-right">
+              <%= destroy_link %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

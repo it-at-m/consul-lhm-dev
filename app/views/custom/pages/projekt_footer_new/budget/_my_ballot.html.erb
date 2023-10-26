@@ -1,0 +1,25 @@
+<% if @heading && can?(:show, @ballot) %>
+  <div class="my-ballot">
+    <h2 class="sidebar-title">
+      <%= t("budgets.investments.index.sidebar.my_ballot") %>
+    </h2>
+
+    <% if @ballot.investments.by_heading(@heading.id).count > 0 %>
+      <p>
+        <em><%= sanitize(@ballot.voted_info(@heading)) %></em>
+      </p>
+    <% else %>
+      <p><strong><i><%= t("budgets.investments.index.sidebar.zero") %></i></strong></p>
+    <% end %>
+
+    <ul class="ballot-list">
+      <% if @heading %>
+        <%= render Budgets::Ballot::InvestmentForSidebarComponent.with_collection(
+          @ballot.investments.by_heading(@heading.id),
+          investment_ids: @investment_ids
+        ) %>
+      <% end %>
+    </ul>
+
+  </div>
+<% end %>

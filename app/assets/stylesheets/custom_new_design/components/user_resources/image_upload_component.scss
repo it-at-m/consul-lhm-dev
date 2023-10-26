@@ -1,0 +1,97 @@
+// Extract to resource image uploader
+.user-resource-image-upload--placeholder {
+  position: relative;
+  text-align: left;
+  height: 100%;
+  margin: auto;
+  user-select: none;
+  background: #e2e2e2;
+  transition: background 0.2s ease-in-out;
+  border-radius: 10px;
+  padding-top: 40px;
+  padding-left: 40px;
+  padding-right: 40px;
+
+  &:hover {
+    background: #dcdcdc;
+  }
+
+  @media(max-width: $big-tablet-viewport-start) {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  @media(max-width: $small-tablet-viewport-start) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+
+.user-resource-image-upload--placeholder-inner {
+  position: relative;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.user-resource-image-upload--text {
+  color: $brand;
+  opacity: 0.5;
+  line-height: 1.25;
+
+  @media(max-width: $mobile-viewport-start) {
+    font-size: 14px;
+  }
+}
+
+.user-resource-image-upload--plus {
+  margin: auto;
+  color: $brand;
+  font-size: 130px;
+  line-height: 1;
+  text-align: center;
+  opacity: 0.5;
+
+  @media(max-width: $mobile-viewport-start) {
+    font-size: 100px;
+  }
+}
+
+.user-resource-image-upload--label {
+  margin-top: -30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-resource-image-upload--label-title {
+  font-size: 33px;
+  color: $brand;
+  opacity: 0.7;
+  margin-top: -15px;
+
+  @media(max-width: $big-tablet-viewport-start) {
+    font-size: 30px;
+  }
+
+  @media(max-width: $mobile-viewport-start) {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+}
+
+.user-resource-image-upload--hint {
+  color: $brand;
+  opacity: 0.5;
+  font-size: 14px;
+
+  @media(max-width: $small-tablet-viewport-start) {
+  }
+}

@@ -10,7 +10,7 @@ module Abilities
       can :results, Poll, id: Poll.expired.results_enabled.not_budget.ids
       can :stats, Poll, id: Poll.expired.stats_enabled.not_budget.ids
       can :read, Poll::Question
-      can :read, User
+      can [:read, :refresh_activities], User
       can [:read, :welcome], Budget
       can [:read], Budget
       can [:read], Budget::Group

@@ -1,0 +1,70 @@
+.custom-new-design {
+  main {
+    margin: auto;
+    padding-top: 30px;
+
+    @media screen and (max-width: $big-tablet-viewport-start) {
+      padding: 0 $mobile-side-padding;
+    }
+  }
+
+  .main-column {
+    width: 100%;
+    max-width: 925px;
+    margin-right: 20px;
+  }
+
+  .full-width-column {
+    width: 100%;
+  }
+
+  .flex-layout {
+    display: flex;
+    justify-content: space-between;
+
+    @media screen and (max-width: $small-tablet-viewport-start) {
+      flex-direction: column;
+    }
+  }
+
+  @media screen and (max-width: $small-tablet-viewport-start) {
+    .main-column {
+      margin-right: auto;
+    }
+  }
+
+  .flex-layout-reverse-on-mobile {
+    @media screen and (max-width: $small-tablet-viewport-start) {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+  }
+
+  .user-page {
+    ul.menu.simple {
+      align-items: baseline;
+
+      li {
+        margin-bottom: unset;
+      }
+
+      li:not(.is-active) {
+        margin-bottom: 3px;
+      }
+    }
+
+    .notifications-list::before {
+      left: 9px;
+    }
+
+    .notification::before {
+      content: "\43";
+      background: none;
+      color: #dee0e3;
+    }
+
+    .notification:hover::before {
+      color: $brand;
+    }
+  }
+}

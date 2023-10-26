@@ -1,0 +1,69 @@
+<% provide :title do %><%= t("devise_views.sessions.new.title") %><% end %>
+
+<% if Setting.new_design_enabled? %>
+  <%= render Auth::AuthPageTemplateComponent.new do |c| %>
+    <% c.form do %>
+      <h2><%= t("devise_views.sessions.new.title") %></h2>
+
+      <div class="auth-page-template--oauth">
+        <%= render "devise/omniauth_form", action: "sign_in" %>
+        <div class="auth-page-template--divider"></div>
+      </div>
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= f.text_field :login, autofocus: true, label: false, placeholder: t("devise_views.sessions.new.login_label") %>
+
+        <%= f.password_field :password, autocomplete: "off", label: false, placeholder: t("devise_views.sessions.new.password_label") %>
+
+        <%= f.submit(t("devise_views.sessions.new.submit"), class: "button expanded") %>
+
+        <% if devise_mapping.rememberable? -%>
+          <div class="sign-in--rember-me u-flex u-justify-center">
+            <%= f.check_box :remember_me, label: t("devise_views.sessions.new.remember_me") %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <div class="sign-in--links">
+        <%= link_to t("devise_views.shared.links.new_password"), new_password_path(resource_name), class: "float-right" %>
+        <%= render "devise/shared/links" %>
+      </div>
+
+      <%= link_to(t("devise_views.shared.links.signup_link"), new_user_registration_path, class: 'button n -green') %>
+    <% end %>
+  <% end %>
+<% else %>
+  <h2><%= t("devise_views.sessions.new.title") %></h2>
+
+  <%= render "devise/omniauth_form", action: "sign_in" %>
+
+  <p>
+  <%= sanitize(t("devise_views.shared.links.signup",
+                 signup_link: link_to(t("devise_views.shared.links.signup_link"), new_user_registration_path))) %>
+  </p>
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="row">
+      <div class="small-12 column">
+        <%= f.text_field :login, autofocus: true %>
+      </div>
+
+      <div class="small-12 column">
+        <%= f.password_field :password, autocomplete: "off" %>
+        <%= link_to t("devise_views.shared.links.new_password"), new_password_path(resource_name), class: "float-right" %>
+      </div>
+
+      <% if devise_mapping.rememberable? -%>
+        <div class="small-12 column">
+          <%= f.check_box :remember_me, label: t("devise_views.sessions.new.remember_me") %>
+        </div>
+      <% end -%>
+
+      <div class="small-12 medium-6 small-centered">
+        <%= f.submit(t("devise_views.sessions.new.submit"), class: "button expanded") %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+<% end %>

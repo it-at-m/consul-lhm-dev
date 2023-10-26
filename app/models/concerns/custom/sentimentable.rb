@@ -9,6 +9,6 @@ module Sentimentable
   def sentiments_available?
     return false if projekt_phase&.nil?
 
-    projekt_phase.sentiments.exists?
+    projekt_phase&.sentiments&.exists?
   end
 end

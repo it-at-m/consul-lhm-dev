@@ -1,0 +1,27 @@
+<% if Setting.new_design_enabled? %>
+  <%= render UserResources::FormComponent.new(
+    @proposal,
+    url: proposals_path,
+    selected_projekt: @selected_projekt,
+    title: t("proposals.edit.editing"),
+    categories: @categories
+  ) %>
+<% else %>
+  <div class="proposal-edit">
+    <div class="small-12 column">
+      <%= back_link_to %>
+
+      <div class="float-right">
+        <%= link_to t("proposals.edit.show_link"), @proposal %>
+      </div>
+
+      <h1><%= t("proposals.edit.editing") %></h1>
+
+      <aside class="margin-bottom">
+        <%= render_custom_block 'proposals_creation_recommendations' %>
+      </aside>
+
+      <%= render "form", form_url: proposal_path(@proposal), selected_projekt: @selected_projekt %>
+    </div>
+  </div>
+<% end %>

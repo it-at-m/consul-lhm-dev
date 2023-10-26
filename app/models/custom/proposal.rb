@@ -2,6 +2,7 @@ require_dependency Rails.root.join("app", "models", "proposal").to_s
 class Proposal < ApplicationRecord
   include Labelable
   include Sentimentable
+  include ResourceBelongsToProjekt
 
   belongs_to :old_projekt, class_name: 'Projekt', foreign_key: :projekt_id # TODO: remove column after data migration con1538
 
@@ -19,6 +20,12 @@ class Proposal < ApplicationRecord
 
   # validates :terms_of_service, acceptance: { allow_nil: false }, on: :create
   validates :resource_terms, acceptance: { allow_nil: false }, on: :create #custom
+
+  scope :base_selection, -> {
+    published
+      .not_archived
+      .not_retired
+  }
 
   scope :with_current_projekt, -> { joins(projekt_phase: :projekt).merge(Projekt.current) }
   scope :by_author, ->(user_id) {
@@ -41,6 +48,7 @@ class Proposal < ApplicationRecord
     includes(:tags)
       .published #discard_draft
       .not_archived # discard_archived
+      .not_retired
   }
 
   def self.proposals_orders(user = nil)
@@ -49,28 +57,30 @@ class Proposal < ApplicationRecord
     orders
   end
 
+  # TODO: REFACTOR FOR NEW DESIGN
   def self.scoped_projekt_ids_for_index(current_user)
-    Projekt.top_level
-      .map { |p| p.all_children_projekts.unshift(p) }
-      .flatten.select do |projekt|
-        ProjektSetting.find_by(projekt: projekt, key: "projekt_feature.main.activate").value.present? &&
-        ProjektSetting.find_by(projekt: projekt, key: "projekt_feature.general.show_in_sidebar_filter").value.present? &&
-        projekt.all_parent_projekts.unshift(projekt).none? { |p| p.hidden_for?(current_user) } &&
-        projekt.all_children_projekts.unshift(projekt).any? { |p| p.proposal_phases.any?(&:current?) || p.proposals.base_selection.any? }
-      end.pluck(:id)
+    Projekt
+      .activated
+      .show_in_sidebar_filter
+      .includes(top_level_projekt: [:projekt_settings, :hard_individual_group_values])
+      .includes(parent: [:projekt_settings, :hard_individual_group_values])
+      .includes(:hard_individual_group_values, :base_selection_proposals, :proposal_phases, :projekt_settings)
+      .includes_children_projekts_with(:proposal_phases)
+      .select do |projekt|
+        (
+          ([projekt] + projekt.all_parent_projekts).none? { |p| p.hidden_for?(current_user) } &&
+          ([projekt] + projekt.all_children_projekts).any?(&:can_filter_proposals?)
+        )
+      end
+      .pluck(:id)
   end
 
+  # TODO: REFACTOR FOR NEW DESIGN
   def self.scoped_projekt_ids_for_footer(projekt)
     projekt.top_parent.all_children_projekts.unshift(projekt.top_parent).select do |projekt|
       ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.main.activate').value.present? &&
         projekt.all_children_projekts.unshift(projekt).any? { |p| p.proposal_phases.any?(&:current?) || p.proposals.base_selection.any? }
     end.pluck(:id)
-  end
-
-  def self.base_selection
-    published.
-      not_archived.
-      not_retired
   end
 
   def successful?

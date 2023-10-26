@@ -1,0 +1,26 @@
+.proposal-resources-section {
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.proposal-resources-sections {
+  margin-top: 50px;
+}
+
+.proposal-notifications-list {
+  border-top: 1px solid $medium-gray-2;
+  padding-top: 30px;
+}
+
+.proposals--info-count {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  display: flex;
+  width: 100%;
+  font-weight: bold;
+  justify-content: space-between;
+}

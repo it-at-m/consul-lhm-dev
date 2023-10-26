@@ -1,0 +1,105 @@
+.hide-on-mobile {
+  @media screen and (max-width: $mobile-viewport-start) {
+    display: none !important;
+  }
+}
+
+.show-on-mobile {
+  @media screen and (max-width: $mobile-viewport-start) {
+    display: block !important;
+  }
+}
+
+.hide-on-small-tablet {
+  @media screen and (max-width: $small-tablet-viewport-start) {
+    display: none !important;
+  }
+}
+
+.show-on-small-tablet {
+  @media screen and (max-width: $small-tablet-viewport-start) {
+    display: block !important;
+  }
+}
+
+.hide-on-big-tablet {
+  @media screen and (max-width: $big-tablet-viewport-start) {
+    display: none !important;
+  }
+}
+
+.show-on-big-tablet {
+  @media screen and (max-width: $big-tablet-viewport-start) {
+    display: block !important;
+  }
+}
+
+.progress {
+  height: 1.3rem;
+  border-radius: 0.3rem;
+  overflow: hidden;
+  position: relative;
+  color: black;
+
+  .meter {
+    height: 100%;
+    background-color: #FFA42D;
+    display: block;
+  }
+
+  .percentage {
+    top: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+}
+
+.supports {
+  // position: relative;
+
+  abbr {
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  $button-orange: #FFA42D;
+
+  .button {
+    background-color: $button-orange;
+    color: black;
+
+    &:focus, &:active {
+      background-color: #FFA42D !important;
+      color: black !important;
+    }
+
+    &:hover {
+      background: lighten($button-orange, 10%) !important;
+      color: black !important;
+    }
+  }
+
+  .in-favor {
+    .button {
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.cke_editable {
+  line-height: 1.4;
+}
+
+.common-page-description {
+  margin-bottom: 35px;
+}
+
+.documents .document-link {
+  border-radius: 5px;
+}
+
+ul.deficiency-reports-sidebar-filter input::checked ~ .checkmark::before {
+
+     content: "\f192";
+}

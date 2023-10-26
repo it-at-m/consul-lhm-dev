@@ -83,3 +83,44 @@
     display: none;
   }
 }
+
+.leaflet-popup-content-wrapper {
+  border-radius: 8px;
+
+  .tag {
+    margin-right: 5px;
+  }
+
+  .projekt-sdg-goals {
+    margin-bottom: 5px;
+  }
+
+  h4, h5, h6 {
+    word-wrap: break-word;
+    margin-right: 5px;
+    margin-top: -5px;
+  }
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  width: 30px;
+  height: 30px;
+  font: 30px Tahoma, Verdana, sans-serif;
+  right: 5px;
+  top: 5px;
+  padding: 0;
+}
+
+.leaflet-popup-content {
+  margin: 0;
+  padding: 15px 15px;
+  width: 220px;
+  padding-right: 35px;
+
+  .projekt-labels {
+    .projekt-label {
+      margin-right: 3px;
+      margin-bottom: 3px;
+    }
+  }
+}

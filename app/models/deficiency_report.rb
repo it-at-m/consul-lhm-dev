@@ -132,4 +132,8 @@ class DeficiencyReport < ApplicationRecord
   def comments_allowed?(user)
     true
   end
+
+  def author_name
+    on_behalf_of.presence || author.name
+  end
 end

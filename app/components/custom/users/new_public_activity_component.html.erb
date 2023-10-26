@@ -1,0 +1,21 @@
+<div class="new-public-activity">
+  <% if valid_access? %>
+    <% if valid_filters.any? %>
+      <%= render Shared::ResourcesListComponent.new(list_params) do |c| %>
+        <% if comments? %>
+          <% c.custom_body do %>
+            <%= render Comments::UserCommentsComponent.new(comments: resources) %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <div class="callout primary">
+        <%= t("users.show.no_activity") %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="callout warning margin">
+      <%= t("users.show.private_activity") %>
+    </div>
+  <% end %>
+</div>

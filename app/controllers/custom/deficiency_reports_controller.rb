@@ -43,6 +43,22 @@ class DeficiencyReportsController < ApplicationController
     filter_by_my_posts
 
     set_deficiency_report_votes(@deficiency_reports)
+
+    respond_to do |format|
+      format.html do
+        if Setting.new_design_enabled?
+          render :index_new
+        else
+          render :index
+        end
+      end
+
+      format.csv do
+        formated_time = Time.current.strftime("%d-%m-%Y-%H-%M-%S")
+        send_data DeficiencyReport::CsvExporter.new(@deficiency_reports.limit(nil)).to_csv,
+          filename: "deficiency_reports-#{formated_time}.csv"
+      end
+    end
   end
 
   def show
@@ -50,6 +66,12 @@ class DeficiencyReportsController < ApplicationController
     @comment_tree = CommentTree.new(@deficiency_report, params[:page], @current_order)
     set_comment_flags(@comment_tree.comments)
     set_deficiency_report_votes(@deficiency_reports)
+
+    if Setting.new_design_enabled?
+      render :show_new
+    else
+      render :show
+    end
   end
 
   def new
@@ -58,7 +80,14 @@ class DeficiencyReportsController < ApplicationController
 
   def create
     status = DeficiencyReport::Status.first
-    @deficiency_report = DeficiencyReport.new(deficiency_report_params.merge(author: current_user, status: status))
+
+    if deficiency_report_params["image_attributes"]["cached_attachment"].blank?
+      filtered_deficiency_report_params = deficiency_report_params.except("image_attributes")
+    else
+      filtered_deficiency_report_params = deficiency_report_params
+    end
+
+    @deficiency_report = DeficiencyReport.new(filtered_deficiency_report_params.merge(author: current_user, status: status))
 
     if @deficiency_report.save
       NotificationServices::NewDeficiencyReportNotifier.new(@deficiency_report.id).call

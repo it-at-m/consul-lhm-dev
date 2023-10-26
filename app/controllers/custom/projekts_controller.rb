@@ -3,17 +3,25 @@ class ProjektsController < ApplicationController
   include ProposalsHelper
 
   skip_authorization_check
-  has_orders %w[index_order_underway index_order_all index_order_ongoing index_order_upcoming
-                index_order_expired index_order_individual_list], only: :index
-
   before_action :raise_flag_feature_disabled, except: [:map_html]
 
   include ProjektControllerHelper
 
   def index
     @projekts = Projekt.regular.with_published_custom_page
+    @all_projekts = @projekts
+    @special_projekt = Projekt.unscoped.find_by(special: true, special_name: "projekt_overview_page")
 
     @resource_name = "projekt"
+
+    valid_filters = %w[index_order_all index_order_underway index_order_ongoing index_order_upcoming index_order_expired index_order_individual_list]
+    valid_filters.push("index_order_drafts") if current_user&.administrator? || current_user&.projekt_manager?
+    @active_projekts_filters = valid_filters.select { |filter| @projekts.send(filter).count > 0 }.presence || ["index_order_all"]
+    @current_projekts_filter = valid_filters.include?(params[:filter]) ? params[:filter] : @active_projekts_filters.first
+    @projekts = @projekts.send(@current_projekts_filter)
+    @map_coordinates = all_projekts_map_locations(@projekts.pluck(:id))
+
+
     @geozones = Geozone.all
     @selected_geozone_affiliation = params[:geozone_affiliation] || "all_resources"
     @affiliated_geozones = (params[:affiliated_geozones] || "").split(",").map(&:to_i)
@@ -29,25 +37,24 @@ class ProjektsController < ApplicationController
     @filtered_targets = params[:sdg_targets].present? ? params[:sdg_targets].split(',')[0] : nil
     take_by_sdgs
 
-    valid_orders.push("index_order_drafts") if current_user&.administrator? || current_user&.projekt_manager?
-    @active_projekts_orders = valid_orders.select { |order| @projekts.send(order).count > 0 }.presence || ["index_order_all"]
-    @current_projekts_order = valid_orders.include?(params[:order]) ? params[:order] : @active_projekts_orders.first
-    @special_projekt = Projekt.unscoped.find_by(special: true, special_name: "projekt_overview_page")
-    @projekts = @projekts.send(@current_projekts_order)
-    @map_coordinates = all_projekts_map_locations(@projekts.pluck(:id))
+    @show_comments = Setting["extended_feature.projekts_overview_page_footer.show_in_#{@current_projekts_filter}"].present?
 
-    @show_comments = Setting["extended_feature.projekts_overview_page_footer.show_in_#{@current_order}"]
-    @valid_comments_orders = %w[most_voted newest oldest]
-    @current_comments_order = @valid_comments_orders.include?(params[:order]) ? params[:order] : @valid_comments_orders.first
-    @commentable = @special_projekt
-    @comment_tree = CommentTree.new(@commentable, params[:page], @current_comments_order)
-    set_comment_flags(@comment_tree.comments)
-
-    if @projekts.is_a?(Array)
-      @projekts = Kaminari.paginate_array(@projekts).page(params[:page]).per(25)
-    else
-      @projekts = @projekts.page(params[:page]).per(25)
+    if @show_comments
+      set_variables_for_footer_comments
     end
+
+    @projekts = @projekts.select { |p| p.visible_for?(current_user) }
+    @projekts = Kaminari.paginate_array(@projekts).page(params[:page]).per(25)
+
+    if Setting.new_design_enabled?
+      render :index_new
+    else
+      render :index
+    end
+  end
+
+  def footer_comments
+    set_variables_for_footer_comments
   end
 
   def show
@@ -139,5 +146,14 @@ class ProjektsController < ApplicationController
 
   def raise_flag_feature_disabled
     raise FeatureFlags::FeatureDisabled, :projekts_overview unless Setting["extended_feature.projekts_overview_page_navigation.show_in_navigation"]
+  end
+
+  def set_variables_for_footer_comments
+    @valid_orders = %w[most_voted newest oldest]
+    @current_order = @valid_orders.include?(params[:order]) ? params[:order] : @valid_orders.first
+
+    @commentable = Projekt.unscoped.find_by(special: true, special_name: "projekt_overview_page")
+    @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
+    set_comment_flags(@comment_tree.comments)
   end
 end

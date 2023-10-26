@@ -1,0 +1,70 @@
+<%= render(Resources::ListItemComponent.new(component_attributes)) do |c| %>
+  <% c.header do %>
+    <div></div>
+    <div>
+      <%= l(budget_investment.created_at, format: :date_only) %>
+    </div>
+  <% end %>
+
+  <% if budget_investment.feasible? %>
+
+    <% if budget_investment.should_show_vote_count? %>
+      <% c.footer_section do %>
+        <div id="<%= dom_id(budget_investment) %>_votes"
+             class="small-12 medium-3 column show-votes-count-section">
+          <span class="total-voters">
+            <%= t("budgets.investments.investment.supports",
+                count: budget_investment.total_votes) %>
+          </span>
+        </div>
+      <% end %>
+    <% end %>
+
+    <% if budget_investment.should_show_price? %>
+      <% c.footer_section do %>
+        <div id="<%= dom_id(budget_investment) %>_price"
+             class="small-12 medium-3 column price-section">
+          <span class="total-price">
+            <%= budget_investment.formatted_price %>
+          </span>
+        </div>
+      <% end %>
+    <% end %>
+
+    <% if budget_investment.should_show_votes? %>
+      <% c.footer_section do %>
+        <div id="<%= dom_id(budget_investment) %>_votes"
+             class="small-12 medium-3 column votes-section">
+             <%= render Budgets::Investments::VotesComponent.new(budget_investment) %>
+        </div>
+      <% end %>
+
+    <% elsif budget_investment.should_show_ballots? && location_allows_ballots? %>
+      <% c.footer_section do %>
+        <div id="<%= dom_id(budget_investment) %>_ballot"
+             class="small-12 medium-3 column text-center ballot-section">
+              <%= render "/budgets/investments/ballot",
+                investment: budget_investment,
+                investment_ids: budget_investment_ids,
+                ballot: ballot %>
+        </div>
+      <% end %>
+
+    <% end %>
+
+    <% if investment_status_callout.present? %>
+      <% c.footer_section do %>
+        <div class="callot-section">
+          <%= investment_status_callout %>
+        </div>
+      <% end %>
+    <% end %>
+
+  <% elsif budget_investment.unfeasible? %>
+      <% c.footer_section do %>
+        <div class='callout-section'>
+          <%= t("custom.budgets.investments.investment.unfeasible_html") %>
+        </div>
+      <% end %>
+  <% end %>
+<% end %>

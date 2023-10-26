@@ -1,10 +1,10 @@
-<div class="supports ballot">
+<div class="supports ballot <%= voting_kind_klass %>">
   <% if voted? %>
     <div class="remove supported">
       <span class="icon-check-circle"
             title="<%= t("budgets.investments.investment.already_added") %>">
       </span>
-      <% if investment.should_show_price? %>
+      <% if investment.should_show_price? && !Setting.new_design_enabled? %>
         <p class="investment-project-amount">
           <%= investment.formatted_price %>
         </p>
@@ -18,6 +18,8 @@
                                               budget_id: investment.budget_id,
                                               investments_ids: investment_ids,
                                               user_id: params[:user_id],
+                                              filter: params[:filter],
+                                              projekt_phase_id: params[:projekt_phase_id],
                                               top_level_active_projekt_ids: (@top_level_active_projekts || []).pluck(:id),
                                               top_level_archived_projekt_ids: (@top_level_archived_projekts || []).pluck(:id)),
                       class: "button button-remove-support expanded",
@@ -30,7 +32,7 @@
     </div>
   <% else %>
     <div class="add in-favor">
-      <% if investment.should_show_price? %>
+      <% if investment.should_show_price? && !Setting.new_design_enabled? %>
         <p class="investment-project-amount">
           <%= investment.formatted_price %>
         </p>
@@ -39,12 +41,11 @@
 
         <% if investment.budget.distributed_voting? %>
           <br>
-          <strong>
-            <%= t("custom.budgets.investments.investment.qualified_supports", count: investment.total_ballot_votes) %>
-          </strong>
           <%= form_with url: budget_ballot_lines_path(investment_id: investment.id,
                                                       budget_id: investment.budget_id,
                                                       investments_ids: investment_ids,
+                                                      filter: params[:filter],
+                                                      projekt_phase_id: params[:projekt_phase_id],
                                                       top_level_active_projekt_ids: (@top_level_active_projekts || []).pluck(:id),
                                                       top_level_archived_projekt_ids: (@top_level_archived_projekts || []).pluck(:id)),
                         local: false do |f| %>
@@ -63,6 +64,8 @@
                                                  budget_id: investment.budget_id,
                                                  investments_ids: investment_ids,
                                                  user_id: params[:user_id],
+                                                 filter: params[:filter],
+                                                 projekt_phase_id: params[:projekt_phase_id],
                                                  top_level_active_projekt_ids: (@top_level_active_projekts || []).pluck(:id),
                                                  top_level_archived_projekt_ids: (@top_level_archived_projekts || []).pluck(:id)),
                         class: "button button-support expanded",

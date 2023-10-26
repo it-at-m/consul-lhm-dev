@@ -1,0 +1,25 @@
+.custom-new-design {
+  .footer {
+    margin-top: 50px;
+    width: 100%;
+    max-width: 100%;
+
+    @media(max-width: $big-tablet-viewport-start) {
+      padding: 20px;
+    }
+
+    .row .column {
+      padding-right: 15px !important;
+      margin-bottom: 25px;
+    }
+  }
+
+  .footer::before {
+    left: 0;
+    right: 0;
+  }
+
+  footer .logo a {
+    font-family: inherit !important;
+  }
+}

@@ -6,12 +6,12 @@ de:
           general:
             only_admins_create_debates: Nur Admins können neue Diskussionen erstellen
             only_admins_create_debates_description: Die Erstellung von neuen Diskussionen ist auf Admins beschränkt
-          form:    
+          form:
             allow_attached_image: Titelbild hinzufügen
             allow_attached_image_description: Ermöglicht es den Bürger*innen ein Titelbild hinzuzufügen.
             allow_attached_documents: Zusätzliche Dokumente
             allow_attached_documents_description: Ermöglicht es den Nutzer:innen Dokumente der Diskussion anzuhängen
-          resource:    
+          resource:
             allow_voting: Unterstützung von Diskussionen
             allow_voting_description: Aktivieren Sie die Unterstützung von Diskussionen mit Daumen hoch und runter
             allow_downvoting: Downvotes aktivieren
@@ -61,6 +61,8 @@ de:
             enable_proposal_milestones_tab_description: Aktivieren Sie "Meilensteine" in Vorschlägen, die von der Verwaltung angelegt werden müssen
             show_comments: Kommentare
             show_comments_description: Aktivieren Sie "Kommentare" für das Vorschlagsmodul
+            show_video_as_link: Videos als Link anzeigen
+            show_video_as_link_description: Zeigt die hinzugefügten Videos als Link an, anstatt als echtes Video
         option:
           resource:
             votes_for_proposal_success: "Anzahl der notwendigen Stimmen zur Genehmigung eines Vorschlags"

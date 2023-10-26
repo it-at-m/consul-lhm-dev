@@ -1,0 +1,18 @@
+.custom-new-design {
+  .map_location {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  #extended-sidebar-map {
+    top: 150px;
+    border-radius: 10px;
+    // overflow: hidden;
+
+    .extended-sidebar-map-wrapper {
+      border: none;
+      border-radius: 10px;
+      box-shadow: 2px 1px 20px 1px #939393;
+    }
+  }
+}

@@ -1,0 +1,73 @@
+<div class="resource-page-banner <%= resource_class %>" style="<%= banner_inline_style %>">
+  <div class="resource-page-banner--text-section">
+    <h2 class="resource-page-banner--title">
+      <%= resource.title %>
+    </h2>
+
+    <div class="resource-page-banner--details">
+      <div class="resource-page-banner--detail">
+        <i class="fa fa-calendar"></i>
+        <%= l(resource.created_at, format: :new_date_with_year) %>
+      </div>
+      <div class="resource-page-banner--detail">
+        <%= link_to('#comments') do %>
+          <i class="fa fa-comment"></i>
+          <%= resource.comments.count %> Kommentare
+        <% end %>
+      </div>
+      <% if @resource.respond_to?(:projekt) %>
+        <div class="resource-page-banner--detail">
+          <%= link_to(projekt_path(resource.projekt)) do %>
+            <i class="fa fa-code-branch"></i>
+            Zugehöriges Projekt:
+            <%= resource.projekt.name %>
+          <% end %>
+        </div>
+      <% end %>
+      <% if @resource.respond_to?(:projekt_labels) && @resource.projekt_labels.any? %>
+        <div class="resource-page-banner--detail">
+          <i class="fa fa-tags"></i>
+          <%= render Shared::ProjektLabelsComponent.new(resource: @resource) %>
+        </div>
+      <% end %>
+      <% if @resource.respond_to?(:sentiment) && @resource.sentiment.present? %>
+        <div class="resource-page-banner--detail">
+          <i class="fa fa-heart"></i>
+          <%= @resource.sentiment.name %>
+        </div>
+      <% end %>
+      <% if @resource.is_a?(DeficiencyReport) %>
+        <div class="resource-page-banner--detail" style="align-items:baseline;">
+          <i class="fa fa-th-large"></i>
+          <%= t("activerecord.attributes.deficiency_report.category") + ": " %>
+          <span class="deficiency-report-category" style="background-color:<%= @resource.category.color %>;color:#fff;">
+            <i class="fas fa-<%= @resource.category.icon %>"></i>
+            <%= @resource.category.name %>
+          </span>
+        </div>
+        <div class="resource-page-banner--detail">
+          <i class="fa fa-check-circle"></i>
+          <%= t("activerecord.attributes.deficiency_reports.status") + ": " %>
+          <span class="deficiency-report-status" style="color:<%= @resource.status.color %>;">
+            <i class="fas fa-<%= @resource.status.icon %>"></i>
+            <%= @resource.status.title %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+
+    <%= links_section %>
+  </div>
+
+  <% if resource.image.present? %>
+    <div class="resource-page-banner--image">
+      <%= render(
+        Shared::ResourceImageComponent.new(
+          image_url: resource.image&.variant(:large),
+          image_placeholder_icon_class: "fa-comments",
+          resource: resource
+        )
+      ) %>
+    </div>
+  <% end %>
+</div>

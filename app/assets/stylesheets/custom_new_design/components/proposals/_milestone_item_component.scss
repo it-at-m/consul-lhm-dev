@@ -1,0 +1,83 @@
+.custom-new-design {
+  .milestone-item {
+    position: relative;
+    width: 50%;
+
+    img {
+      border-radius: 5px;
+    }
+
+    .milestone-item--date {
+      display: flex;
+      justify-content: flex-end;
+      font-weight: bold;
+      color: black;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    &::before {
+      position: absolute;
+      content: '';
+      width: 1px;
+      height: calc(100% - 10px);
+      background-color: #e2e2e2;
+      top: 17px;
+      right: 0;
+    }
+
+    &:last-child {
+      &::before {
+        height: calc(100% - 30px);
+      }
+    }
+
+    &::after {
+      position: absolute;
+      content: '';
+      width: 23px;
+      height: 23px;
+      background-color: #218fc8;
+      top: 1px;
+      border-radius: 50%;
+    }
+
+    &:nth-child(odd) {
+      padding-right: 25px;
+
+      &::before {
+        right: 0;
+      }
+
+      &::after {
+        right: -11px;
+      }
+    }
+
+    &:nth-child(even) {
+      align-self: self-end;
+      padding-left: 25px;
+
+      &::before {
+        left: 0;
+      }
+
+      &::after {
+        left: -11px;
+      }
+
+      .milestone-item--date {
+        justify-content: flex-start;
+      }
+    }
+  }
+
+  .milestone-item--status {
+    width: 100%;
+    background-color: $brand;
+    color: white;
+    font-size: 18px;
+    padding: 10px 25px;
+    min-height: 47px;
+  }
+}

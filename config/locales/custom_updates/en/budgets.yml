@@ -34,7 +34,34 @@ en:
         index:
           sidebar:
             user_votes: "My votes: %{count}"
+          empty_list_text: No results
         form:
+          start_new: Investitionsvorschlag erstellen
+          page_description:
+            The budget lives from your contributions! Tell us what you would like to have implemented - and then share your ideas with others. You can indicate whether you would like to support the implementation yourself or whether the city administration should take responsibility.<br></br>
+            You can also make an initial price assessment for your contribution. The city administration will check your contribution for its feasibility and also provide a price estimate. Thank you for taking the time and getting involved!
+          title_placeholder: Give your contribution a catchy title, for example “Renovate the train station square” or “Build a new children's playground”.
+          description_placeholder_html: "Describe your contribution here. The following procedure has proven successful:<br><br>
+             Start with a general description of your idea and then show what would improve with the implementation of your suggestion.<br><br>
+             When writing, keep sentences as short as possible.<br><br>
+             Also use paragraphs to make your text more readable. (Many users read your text on mobile devices.)<br><br>
+             If possible, limit your content to a maximum of three paragraphs.<br><br>
+             If appropriate, use bullet points and bullet points for better clarity."
+          map:
+            hint: Where should your contribution be implemented? Place a “pin” to bring others into the picture.
+          implementation:
+            title: Implementation
+            description: Indicate here who should implement the investment proposal
+          user_cost_estimate:
+            title: Price assessment
+            description: Please provide a price estimate for your investment proposal here.
+            placeholder: Enter price in EUR
+          documents:
+            title: Add documents
+          on_behalf_of:
+            title: On behalf of
+            description: Only admins can see this field. You can create a post on behalf of someone here.
+            placeholder: Enter name...
           required: Your input
         investment:
           supporters:

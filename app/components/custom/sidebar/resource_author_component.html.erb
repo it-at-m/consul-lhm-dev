@@ -1,0 +1,82 @@
+<div class="sidebar-resource-author sidebar-card">
+  <div class="sidebar-resource-author--background-image">
+    <% if user.background_image.attached? %>
+      <%= image_tag(user.background_image.variant(resize: "300x300>")) %>
+    <% end %>
+  </div>
+  <div class="sidebar-resource-author--info">
+    <%= link_to user_path(user) do %>
+      <div class="sidebar-resource-author--avatar">
+        <% if user.image&.variant(:popup).present? %>
+          <%= image_tag(user.image&.variant(:popup)) %>
+        <% else %>
+          <div class="sidebar-resource-author--avatar-placeholder">
+            <%= user&.first_letter_of_name %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= link_to user_path(user) do %>
+      <div class="sidebar-resource-author--name">
+        <%= user.full_name %>
+      </div>
+    <% end %>
+
+    <div class="sidebar-resource-author--registration-date">
+      <%= t("custom.users.banner.registered_at", date: l(user.created_at, format: :date_only)) %>
+    </div>
+
+    <div class="users-profile-banner--info-line">
+      <% unless skip_user_verification? %>
+        <% if user.level_three_verified? %>
+          <span class="icon-check"></span>
+          <%= t("account.show.verified_account") %>
+        <% else %>
+          <%= t("custom.account.show.not_verified_account") %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="sidebar-resource-author--resources">
+      <% if user.proposals.exists? %>
+        <%= link_to user_path(user) do %>
+          <div class="sidebar-resource-author--resources-item">
+            <div class="sidebar-resource-author--resources-name">
+              Vorschläge
+            </div>
+            <div class="sidebar-resource-author--resources-count">
+              <%= user.proposals.count %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+
+      <% if user.debates.exists? %>
+        <%= link_to user_path(user) do %>
+          <div class="sidebar-resource-author--resources-item">
+            <div class="sidebar-resource-author--resources-name">
+              Diskussionen
+            </div>
+            <div class="sidebar-resource-author--resources-count">
+              <%= user.debates.count %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+
+      <% if user.comments.exists? %>
+        <%= link_to user_path(user) do %>
+          <div class="sidebar-resource-author--resources-item">
+            <div class="sidebar-resource-author--resources-name">
+              Kommentare
+            </div>
+            <div class="sidebar-resource-author--resoures-count">
+              <%= user.comments.count %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<div class="show-actions-menu">
+  <%= link_to deficiency_report_path(deficiency_report),
+              class: "button hollow alert",
+              style: "display: inline-flex;",
+              method: :delete do %>
+    <%= t("custom.deficiency_reports.show.author_actions.delete_button") %>
+  <% end %>
+</div>

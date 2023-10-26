@@ -1,0 +1,16 @@
+en:
+  custom:
+    users:
+      settings: Account settings
+      activity: Activity
+      my_activity: My activity
+      contact: Contact
+      banner:
+        registered_at: "Entered at: %{date}"
+    user_page:
+      filters:
+        proposals: Proposals
+        debates: Debates
+        budget_investments: Budget investments
+        comments: Comments
+        follows: Follows

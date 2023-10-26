@@ -1,31 +1,31 @@
-<div class="verification account row">
-  <div class="small-12 column">
+<% base_form = capture do %>
+  <%= back_link_to account_path, t("verification.back") %>
 
-    <%= back_link_to account_path, t("verification.back") %>
+  <h1><%= t("verification.residence.new.title") %></h1>
 
-    <h1><%= t("verification.residence.new.title") %></h1>
+  <%= form_for @residence, as: "residence", url: residence_path do |f| %>
+    <%= render "errors" %>
 
-    <%= form_for @residence, as: "residence", url: residence_path do |f| %>
-      <%= render "errors" %>
+    <% column_classes = Setting.new_design_enabled? ? "" : "small-12 medium-10 large-5 column" %>
 
-      <div class="row">
-        <div class="small-12 medium-10 large-5 column">
+    <div class="row">
+      <div class="<%= column_classes %>">
 
+        <div class="">
+          <%= f.label :first_name, t("custom.verification.residence.new.first_name") %>
+          <%= f.text_field :first_name, label: false, placeholder: t("custom.verification.residence.new.first_name") %>
+        </div>
+
+        <div class="">
+          <%= f.label :last_name, t("custom.verification.residence.new.last_name") %>
+          <%= f.text_field :last_name, label: false, placeholder: t("custom.verification.residence.new.last_name") %>
+        </div>
+
+        <% if RegisteredAddress::City.any? %>
           <div class="">
-            <%= f.label :first_name, t("custom.verification.residence.new.first_name") %>
-            <%= f.text_field :first_name, label: false %>
-          </div>
-
-          <div class="">
-            <%= f.label :last_name, t("custom.verification.residence.new.last_name") %>
-            <%= f.text_field :last_name, label: false %>
-          </div>
-
-          <% if RegisteredAddress::City.any? %>
-            <div class="">
-              <% invalid_field_class = @residence.form_registered_address_city_id.blank? && action_name == 'create' %>
-              <%= label_tag :form_registered_address_city_id, t('custom.devise_views.users.registrations.new.form_registered_address_city_label'), class: "#{'is-invalid-label' if invalid_field_class}" %>
-              <%= select_tag :form_registered_address_city_id,
+            <% invalid_field_class = @residence.form_registered_address_city_id.blank? && action_name == 'create' %>
+            <%= label_tag :form_registered_address_city_id, t('custom.devise_views.users.registrations.new.form_registered_address_city_label'), class: "#{'is-invalid-label' if invalid_field_class}" %>
+            <%= select_tag :form_registered_address_city_id,
                 options_for_select(
                   RegisteredAddress::City.all.collect { |city| [city.name, city.id] }.push([t('custom.helpers.select.not_in_list'), 0]),
                   @residence.form_registered_address_city_id
@@ -35,138 +35,152 @@
                   class: "js-verification-city-selector show-arrow #{'is-invalid-input' if invalid_field_class}",
                   style: "background-color:#f8f8f8;"
                 } %>
-            </div>  
-
-            <div id="registered-address-street-field" class="">
-              <% if @registered_address_city.present? %>
-                <% invalid_field_class = @residence.form_registered_address_street_id.blank? && action_name == 'create' %>
-                <%= render 'custom/verification/residence/partials/street_selector',
-                  selected_value: @residence.form_registered_address_street_id,
-                  registered_address_streets: @registered_address_city&.registered_address_streets,
-                  invalid_field_class: invalid_field_class %>
-              <% end %>
-            </div>
-
-            <div id="registered-address-field" class="">
-              <% if @registered_address_city.present? && @registered_address_street.present? %>
-                <% invalid_field_class = @residence.form_registered_address_id.blank? && action_name == 'create' %>
-                <%= render 'custom/verification/residence/partials/address_selector',
-                  selected_value: @residence.form_registered_address_id,
-                  registered_addresses: @registered_address_street&.registered_addresses,
-                  invalid_field_class: invalid_field_class %>
-              <% end %>
-            </div>
-          <% end %>
-
-          <div id="no-registered-address" style="display:<%= @residence.show_no_registered_address_field? ? 'block' : 'none' %>">
-            <div class="row">
-              <div class="small-12 medium-8 column">
-                <%= f.label :city_name, t("custom.verification.residence.new.city_name") %>
-                <%= f.text_field :city_name, label: false %>
-              </div>
-    
-              <div class="small-12 medium-4 column">
-                <%= f.label :plz, t("custom.verification.residence.new.plz") %>
-                <%= f.text_field :plz, label: false %>
-              </div>
-            </div>
-    
-            <div class="">
-              <%= f.label :street_name, t("custom.verification.residence.new.street_name") %>
-              <%= f.text_field :street_name, label: false %>
-            </div>
-
-            <div class="row">
-              <div class="small-12 medium-6 column">
-                <%= f.label :street_number, t("custom.verification.residence.new.street_number") %>
-                <%= f.text_field :street_number, label: false %>
-              </div>
-              <div class="small-12 medium-6 column">
-                <%= f.label :street_number, t("custom.verification.residence.new.street_number_extension") %>
-                <%= f.text_field :street_number_extension, label: false %>
-              </div>
-            </div>
           </div>
 
-          <div class="user-date-of-birth sign-up">
-            <%= f.date_select :date_of_birth,
-                              prompt: true,
-                              start_year: 1900, end_year: minimum_required_age.years.ago.year %>
+          <div id="registered-address-street-field" class="">
+            <% if @registered_address_city.present? %>
+              <% invalid_field_class = @residence.form_registered_address_street_id.blank? && action_name == 'create' %>
+              <%= render 'custom/verification/residence/partials/street_selector',
+                selected_value: @residence.form_registered_address_street_id,
+                registered_address_streets: @registered_address_city&.registered_address_streets,
+                invalid_field_class: invalid_field_class %>
+            <% end %>
+          </div>
+
+          <div id="registered-address-field" class="">
+            <% if @registered_address_city.present? && @registered_address_street.present? %>
+              <% invalid_field_class = @residence.form_registered_address_id.blank? && action_name == 'create' %>
+              <%= render 'custom/verification/residence/partials/address_selector',
+                selected_value: @residence.form_registered_address_id,
+                registered_addresses: @registered_address_street&.registered_addresses,
+                invalid_field_class: invalid_field_class %>
+            <% end %>
+          </div>
+        <% end %>
+
+        <div id="no-registered-address" style="display:<%= @residence.show_no_registered_address_field? ? 'block' : 'none' %>">
+          <div class="row">
+            <div class="small-12 medium-8 column">
+              <%= f.label :city_name, t("custom.verification.residence.new.city_name") %>
+              <%= f.text_field :city_name, label: false, placeholder: t("custom.verification.residence.new.city_name") %>
+            </div>
+
+            <div class="small-12 medium-4 column">
+              <%= f.label :plz, t("custom.verification.residence.new.plz") %>
+              <%= f.text_field :plz, label: false, placeholder: t("custom.verification.residence.new.plz") %>
+            </div>
           </div>
 
           <div class="">
-            <%= f.label :gender, t("custom.verification.residence.new.gender") %>
-            <%= f.select :gender, options_for_gender_select,
-              {
-                prompt: t('custom.helpers.select.prompt'),
-                label: false,
-                class: "show-arrow",
-                style: "background-color:#f8f8f8;"
-              } %>
+            <%= f.label :street_name, t("custom.verification.residence.new.street_name") %>
+            <%= f.text_field :street_name, label: false, placeholder: t("custom.verification.residence.new.street_name") %>
           </div>
 
-          <% if @residence.document_required? %>
-            <div class='user-document'>
-              <div class='small-12 medium-5 clear'>
-                <%= f.select :document_type, user_document_types, prompt: "" %>
-              </div>
-              <div class='small-12 medium-5 clear'>
-                <%= f.label :document_last_digits, t("custom.verification.residence.new.document_last_digits") %>
-                <%= f.text_field :document_last_digits, label: false %>
-              </div>
+          <div class="row">
+            <div class="small-12 medium-6 column">
+              <%= f.label :street_number, t("custom.verification.residence.new.street_number") %>
+              <%= f.text_field :street_number, label: false, placeholder: t("custom.verification.residence.new.street_number") %>
             </div>
-
-            <div>
-              <label><%= t('custom.users.document_help') %></label>
-
-              <div class='row margin-bottom'>
-                <div class='column small-12 medium-6'>
-                  <label><%= t('custom.users.card_label') %></label>
-                  <p><%= t('custom.users.card_help') %></p>
-                  <%= image_tag 'card.jpg' %>
-                </div>
-
-                <div class='column small-12 medium-6'>
-                  <label><%= t('custom.users.pass_label') %></label>
-                  <p><%= t('custom.users.pass_help') %></p>
-                  <%= image_tag 'pass_new.png' %>
-                </div>
-              </div>
+            <div class="small-12 medium-6 column">
+              <%= f.label :street_number, t("custom.verification.residence.new.street_number_extension") %>
+              <%= f.text_field :street_number_extension, label: false, placeholder: t("custom.verification.residence.new.street_number_extension") %>
             </div>
-          <% end %>
-
-          <div class="small-12 clear">
-
-            <%= f.check_box :terms_data_storage,
-              title: t("custom.terms.data_storage.title"),
-              label: t("custom.terms.data_storage.label"),
-              class: "checkbox-label--aligned" %>
-
-            <%= f.check_box :terms_data_protection,
-              title: t("custom.terms.data_protection.title"),
-              label: t("custom.terms.data_protection.label",
-                       privacy_link: link_to(t("custom.terms.privacy_link.text"), "/privacy",
-                                             title: t("shared.target_blank"), target: "_blank")),
-              class: "checkbox-label--aligned" %>
-
-            <%= f.check_box :terms_general,
-              title: t("custom.terms.general.title"),
-              label: t("custom.terms.general.label",
-                       terms_link: link_to(t("custom.terms.terms_link.text"), "/conditions",
-                                           title: t("shared.target_blank"), target: "_blank")),
-              class: "checkbox-label--aligned" %>
-
-            <p><%= t("custom.terms.revoke_consent.text") %></p>
-
-          </div>
-
-          <div class="small-12 medium-6 clear">
-            <%= f.submit t("verification.residence.new.verify_residence"),
-                         id: "new_residence_submit",
-                         class: "button success expanded" %>
           </div>
         </div>
+
+        <div class="user-date-of-birth sign-up">
+          <%= f.date_select :date_of_birth,
+            prompt: true,
+            start_year: 1900, end_year: minimum_required_age.years.ago.year %>
+        </div>
+
+        <div class="">
+          <%= f.label :gender, t("custom.verification.residence.new.gender") %>
+          <%= f.select :gender, options_for_gender_select,
+            {
+              prompt: t('custom.helpers.select.prompt'),
+              label: false,
+              class: "show-arrow",
+              style: "background-color:#f8f8f8;"
+            } %>
+        </div>
+
+        <% if @residence.document_required? %>
+          <div class='user-document'>
+            <div class='small-12 medium-5 column'>
+
+              <%= f.select :document_type, user_document_types, prompt: "" %>
+            </div>
+            <div class='small-12 medium-6 column'>
+              <%= f.label :document_last_digits, t("custom.verification.residence.new.document_last_digits") %>
+              <%= f.text_field :document_last_digits, label: false, placeholder: t("custom.verification.residence.new.document_last_digits") %>
+            </div>
+          </div>
+
+          <div>
+            <label><%= t('custom.users.document_help') %></label>
+
+            <div class='row margin-bottom'>
+              <div class='column small-12 medium-6'>
+                <label><%= t('custom.users.card_label') %></label>
+                <p><%= t('custom.users.card_help') %></p>
+                <%= image_tag 'card.jpg' %>
+              </div>
+
+              <div class='column small-12 medium-6'>
+                <label><%= t('custom.users.pass_label') %></label>
+                <p><%= t('custom.users.pass_help') %></p>
+                <%= image_tag 'pass_new.png' %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="small-12 clear">
+
+          <%= f.check_box :terms_data_storage,
+            title: t("custom.terms.data_storage.title"),
+            label: t("custom.terms.data_storage.label"),
+            class: "checkbox-label--aligned" %>
+
+          <%= f.check_box :terms_data_protection,
+            title: t("custom.terms.data_protection.title"),
+            label: t("custom.terms.data_protection.label",
+                     privacy_link: link_to(t("custom.terms.privacy_link.text"), "/privacy",
+                                           title: t("shared.target_blank"), target: "_blank")),
+          class: "checkbox-label--aligned" %>
+
+        <%= f.check_box :terms_general,
+          title: t("custom.terms.general.title"),
+          label: t("custom.terms.general.label",
+                   terms_link: link_to(t("custom.terms.terms_link.text"), "/conditions",
+                                       title: t("shared.target_blank"), target: "_blank")),
+        class: "checkbox-label--aligned" %>
+
+      <p><%= t("custom.terms.revoke_consent.text") %></p>
+
+        </div>
+
+        <div class="small-12 medium-6 clear">
+          <%= f.submit t("verification.residence.new.verify_residence"),
+            id: "new_residence_submit",
+            class: "button success expanded" %>
+        </div>
       </div>
+    </div>
+  <% end %>
+<% end %>
+
+<% if Setting.new_design_enabled? %>
+  <%= render Auth::AuthPageTemplateComponent.new do |c| %>
+    <% c.form do %>
+      <%= base_form %>
     <% end %>
+  <% end %>
+<% else %>
+  <div class="verification account row">
+    <div class="small-12 column">
+      <%= base_form %>
+    </div>
   </div>
-</div>
+<% end %>

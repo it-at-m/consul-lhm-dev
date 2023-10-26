@@ -1,0 +1,73 @@
+<%= provide :title, t("social_share.polls_show.title_#{@poll.id}", default: @poll.title) %>
+<%= provide :meta_description, t("social_share.polls_show.description_#{@poll.id}", default: @poll.title) %>
+<%= provide :social_media_meta_tags do %>
+  <%= render "shared/social_media_meta_tags",
+              social_url: poll_url,
+              social_title: t("social_share.polls_show.title_#{@poll.id}", default: @poll.title),
+              social_description: t("social_share.polls_show.facebook_#{@poll.id}", default: @poll.title),
+              twitter_image_url:  "social_media_polls_twitter.jpg",
+              og_image_url: "social_media_polls.jpg" %>
+<% end %>
+
+<main>
+  <div id="<%= dom_id(@poll) %>">
+    <div class="flex-layout">
+      <div class="main-column">
+        <div class="resource-page--title-subline">
+          <%= render_custom_block("polls_show_welcome_text", custom_prefix: @poll.author.name, default_content: t("custom.polls.show.welcome_default_text")) %>
+        </div>
+      </div>
+      <div class="sidebar-placeholder"></div>
+    </div>
+
+    <div class="flex-layout">
+      <div class="main-column">
+        <%= render ResourcePage::BannerComponent.new(resource: @poll) do |c| %>
+          <% c.links_section do %>
+             <%= render Polls::SubNavComponent.new(poll: @poll) %>
+          <% end %>
+        <% end %>
+
+        <div class="resource-page--description new-card">
+          <%= render "poll_header" %>
+        </div>
+
+        <%= render "callout" %>
+
+        <div class="margin-bottom">
+          <%= render Polls::Questions::QuestionComponent.with_collection(@questions) %>
+        </div>
+
+        <% @questions.each do |question| %>
+          <% question.question_answers.each do |answer| %>
+            <% if answer_with_description?(answer) %>
+              <%= render partial: "polls/questions/answer_more_info_modal", locals: { answer: answer } %>
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <% if projekt_phase_feature?(@poll.projekt_phase, "resource.show_comments") %>
+          <%= render Shared::NewCommentsComponent.new(@poll, @comment_tree) %>
+        <% end %>
+      </div>
+    <aside class="sidebar">
+      <%= render Shared::SidebarCardComponent.new(title: t("custom.common.information"), icon_name: "info-circle") do |c| %>
+        <div class="margin-bottom-half">
+           <%= format_date_range(@poll.starts_at, @poll.ends_at, separator: t("custom.polls.poll.date.to")) %>
+        </div>
+      <% end %>
+      <%= render Shared::SidebarCardComponent.new(title: t("custom.common.share"), icon_name: "share-alt") do |c| %>
+        <div class="margin-bottom-half">
+          <%= render "shared/social_share",
+            share_title: t("shared.share"),
+            title: @poll.name,
+            url: poll_url(@poll),
+            description: @poll.name,
+            mobile: @poll.name
+          %>
+        </div>
+      <% end %>
+    </aside>
+    </div>
+  </div>
+</main>

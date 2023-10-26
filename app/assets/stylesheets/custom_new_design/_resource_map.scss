@@ -1,0 +1,23 @@
+.custom-new-design {
+  .resource-map-popup-image {
+    margin-bottom:10px;
+    height:170px !important;
+    border-radius: 5px;
+  }
+
+  .leaflet-popup-content {
+    h4, h5 {
+      margin-bottom: 8px;
+    }
+  }
+
+  #map-container {
+    > label {
+      display: none;
+    }
+
+    .help-text {
+      font-style: normal;
+    }
+  }
+}

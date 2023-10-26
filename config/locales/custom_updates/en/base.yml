@@ -1,5 +1,12 @@
 en:
   custom:
+    common:
+      information: Information
+      share: Share
+      fixed_tabs:
+        content: Content
+        comments: Comments
+        author: Author
     account:
       settings:
         email_digest: Receive a summary of proposal notifications
@@ -39,6 +46,9 @@ en:
     helpers:
       select:
         prompt: Please select
+        gender_prompt: Gender (please select)
+        address_prompt: Address (please select)
+        document_prompt: Document type (please select)
         not_in_list: Not in the list
     gdpr_notice:
       accept: Accept
@@ -100,6 +110,8 @@ en:
       debates: Discussions
       polls: Polls
       proposals: Proposals
+    milestones:
+      collapse_title: Milestones - set by the administration (%{count})
     pages:
       impressum:
         title: Imprint
@@ -154,6 +166,10 @@ en:
       download: Download
     tag_names:
       projekt: Additional %{resources} for this Project
+    tags:
+      remaining_count:
+        one: "+%{count} Tag"
+        other: "+%{count} Tags"
     users:
       login_to_vote: You must %{signin} or %{signup} to be able to participate
       verify_account_link_short: verify
@@ -169,6 +185,14 @@ en:
       start_entry: + Create a post
       start_proposal: Create a proposal
       user_entries: Latest submissions
+      latest_activity:
+        title: My activity
+        proposals: Proposals
+        debates: Debates
+        budget_investments: Investment proposals
+        comments: Comments
+        follows: Follows
+        all_activity_link: Show all my activity
     welcome_launch:
       p1: We're building a new citizen participation platform for the city of %{org_name}
       p2: We'll go live on %{date}!
@@ -178,3 +202,9 @@ en:
         show_less: "Show less"
   tag_names:
     general: General
+  formular_answer_images:
+    form:
+      add_new_image: Add image
+    errors:
+      messages:
+        in_between: must be betwee %{min} and %{max}

@@ -1,0 +1,16 @@
+de:
+  custom:
+    users:
+      settings: Kontoeinstellungen
+      activity: Aktivität
+      my_activity: Meine Aktivität
+      contact: Kontakt
+      banner:
+        registered_at: "Beigetreten am: %{date}"
+    user_page:
+      filters:
+        proposals: Vorschläge
+        debates: Diskussionen
+        budget_investments: Budgetinvestitionen
+        comments: Kommentare
+        follows: Folge ich

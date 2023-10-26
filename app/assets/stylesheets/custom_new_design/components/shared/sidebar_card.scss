@@ -1,0 +1,142 @@
+.sidebar-card {
+  position: relative;
+  background: white;
+  border-radius: 10px;
+  border: 1px solid $border-color;
+  margin-bottom: 15px;
+  color: $main-text-color;
+  font-size: 14px;
+  width: 100%;
+
+  .sidebar-collapse-icon {
+    display: none;
+  }
+
+  .sidebar-card--content { // margin-top: 12px;
+    padding-top: 0;
+  }
+
+  .sidebar-collapse-icon {
+    display: none;
+  }
+
+  @media(max-width: $small-tablet-viewport-start) {
+    // margin-bottom: 10px;
+    margin-bottom: 5px;
+
+    .sidebar-collapse-icon {
+      display: block;
+    }
+  }
+
+  &.-collapsed-on-mobile {
+    @media(max-width: $small-tablet-viewport-start) {
+      .sidebar-card--content {
+        display: none;
+      }
+
+      .sidebar-collapse-icon {
+        display: block;
+      }
+    }
+  }
+
+  p {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  input {
+    margin-bottom: 10px;
+  }
+
+  .sidebar-divider {
+    display: none;
+  }
+
+  .small-6, .large-3, .column {
+    width: 100%;
+    float: none;
+    margin: 0;
+  }
+
+  .globalize-languages.highlight {
+    background: transparent;
+  }
+
+  .sidebar-card--body {
+    position: relative;
+  }
+
+  .options-group {
+    margin-bottom: 5px;
+  }
+}
+
+.sidebar-card--section {
+  padding: 18px 25px;
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  @media(max-width: $small-tablet-viewport-start) {
+    padding: 15px 20px;
+  }
+
+  h2 {
+    display: none;
+  }
+
+  .resource-info-title {
+    display: none;
+  }
+}
+
+.sidebar-card--title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  margin-bottom: 0;
+  color: black;
+  font-weight: 500;
+  padding: 18px 25px;
+  user-select: none;
+
+  @media(max-width: $mobile-viewport-start) {
+    padding: 15px 25px;
+  }
+
+  i {
+    margin-right: 10px;
+    color: $brand;
+  }
+}
+
+.sidebar-card--title-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar-card--description {
+  // margin-bottom: 10px;
+  padding: 0 25px;
+}
+
+.sidebar-card--section + .sidebar-card--section {
+  border-top: 1px solid $border-color;
+}
+
+.sidebar-active-users-section {
+  i {
+    width: 15px;
+    margin-right: 5px;
+  }
+}
+
+.sidebar-card--separator {
+  position: relative;
+  border-top: 1px solid $border-color;
+}

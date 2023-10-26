@@ -2,6 +2,7 @@ require_dependency Rails.root.join("app", "controllers", "welcome_controller").t
 
 class WelcomeController < ApplicationController
   include Takeable
+  include ProjektControllerHelper
 
   def welcome
     redirect_to root_path
@@ -23,6 +24,8 @@ class WelcomeController < ApplicationController
     @expired_projekts = @active_feeds.include?("expired_projekts") ? @feeds.find{ |feed| feed.kind == 'expired_projekts' }.expired_projekts : []
     @latest_polls = @active_feeds.include?("polls") ? filtered_items(@feeds.find { |feed| feed.kind == 'polls' }) : []
 
+    @active_projekts_map_locations = all_projekts_map_locations(@active_projekts.pluck(:id))
+
     if @active_feeds.include?("debates") || @active_feeds.include?("proposals") || @active_feeds.include?("investment_proposals")
       @latest_items = @feeds
         .select { |feed| feed.kind == 'proposals' || feed.kind == 'debates' }
@@ -32,7 +35,15 @@ class WelcomeController < ApplicationController
     else
       @latest_items = []
     end
+
+    if Setting.new_design_enabled?
+      render :index_new
+    else
+      render :index
+    end
   end
+
+  def latest_activity; end
 
   private
 

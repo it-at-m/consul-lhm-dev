@@ -102,4 +102,8 @@ namespace :projekt_management do
     put :hide, on: :member
     put :moderate, on: :collection
   end
+
+  namespace :site_customization do
+    resources :content_blocks, only: [:edit, :update]
+  end
 end

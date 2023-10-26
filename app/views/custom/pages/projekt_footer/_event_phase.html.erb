@@ -1,3 +1,9 @@
 <%= render 'shared/loader_spinner' %>
 
-<%= render Projekts::ProjektEvents::List.new(projekt_events: @projekt_events) %>
+<div class="flex-layout">
+<div class="main-column">
+  <%= render Projekts::ProjektEvents::List.new(projekt_events: @projekt_events) %>
+</div>
+<div class="sidebar-placeholder"></div>
+</div>
+

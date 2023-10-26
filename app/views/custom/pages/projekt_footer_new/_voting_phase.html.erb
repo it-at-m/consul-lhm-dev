@@ -1,0 +1,34 @@
+<%= render "shared/loader_spinner" %>
+
+<div class="flex-layout flex-layout-reverse-on-mobile">
+  <div class="main-column">
+    <% if extended_feature?("polls.intro_text_for_polls") %>
+      <%= render_custom_block "polls_welcome" %>
+    <% end %>
+
+    <%= render(
+          Shared::ResourcesListComponent.new(
+            resources: @polls,
+            resource_type: Poll,
+            remote_url: projekt_footer_phase_filter_url(@projekt_phase),
+            map_coordinates: @polls_coordinates,
+            current_filter: @current_filter,
+            filter_param: "order",
+            filters: @valid_orders,
+            projekt_phase: @projekt_phase,
+            empty_list_text: t("custom.polls.index.empty_list_text"),
+          ))
+    %>
+    <%= paginate @polls, remote: true, params: { controller: "pages", action: "projekt_phase_footer_tab" } %>
+
+    <div id="section_help" class="margin" data-magellan-target="section_help">
+      <% if extended_feature?('modulewide.custom_help_text_in_modules')  %>
+        <%= render_custom_block 'polls_help' %>
+        <%= render_custom_partial "footer" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="sidebar">
+  </div>
+</div>

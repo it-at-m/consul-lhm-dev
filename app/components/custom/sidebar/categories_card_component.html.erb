@@ -1,0 +1,5 @@
+<% if @categories.present? %>
+  <%= render Shared::SidebarCardComponent.new(title: t("shared.tags_cloud.categories"), icon_name: "tag") do |c| %>
+    <%= render "shared/categories", taggable: (@options[:taggable] || "projekt"), categories: @categories %>
+  <% end %>
+<% end %>

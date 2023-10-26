@@ -1,0 +1,73 @@
+<aside class="sidebar">
+  <% show_admin_controlls = (current_user && current_user.email.in?(@partner_emails) || current_user.present? && current_user.administrator? ||  current_user.present? && current_user.projekt_manager? || current_user.present? && (current_user.administrator? || (current_user.projekt_manager? && can?(:edit, @projekt)))) %>
+
+  <% if show_admin_controlls %>
+    <%= render Shared::SidebarCardComponent.new(title: "Administration", icon_name: "cog") do |c| %>
+      <%= render partial: 'pages/sidebar/admin_controls' %>
+    <% end %>
+  <% end %>
+
+  <% content_block_sidebar_name = "projekt_sidebar_#{projekt.id}" %>
+  <% if render_custom_projekt_content_block?(content_block_sidebar_name, projekt) %>
+    <%= render Shared::SidebarCardComponent.new(title: "Projektinformation", icon_name: "info-circle") do |c| %>
+      <%= render_custom_block content_block_sidebar_name %>
+    <% end %>
+  <% end %>
+
+  <%= render(Mobile::FixedBottomActionComponent.new) do %>
+    <div id="sidebar-cta">
+      <%= render Pages::Projekts::SidebarCtaComponent.new(@default_projekt_phase) %>
+    </div>
+  <% end %>
+
+  <div class="hide-on-small-tablet width-100">
+    <% if projekt.projekt_phases.active.any? %>
+      <% if projekt_feature?(projekt, "sidebar.show_phases_in_projekt_page_sidebar") %>
+        <%= render Shared::SidebarCardComponent.new(title: "Phasen", icon_name: "pager") do |c| %>
+          <%= render Pages::Projekts::SidebarPhasesComponent.new(projekt) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <% if projekt_feature?(projekt, 'general.enable_sdgs') && projekt.sdg_goals.any? %>
+    <%= render Shared::SidebarCardComponent.new(title: 'SDGS', icon_name: "tag") do |c| %>
+      <%= render partial: 'pages/sidebar/sdgs', locals: { projekt: projekt } %>
+    <% end %>
+  <% end %>
+
+  <% if projekt_feature?(projekt, 'general.enable_tags') %>
+    <%= render Shared::SidebarCardComponent.new(title: 'Tags', icon_name: "tag") do |c| %>
+      <%= render partial: 'pages/sidebar/tags', locals: { projekt: projekt } %>
+    <% end %>
+  <% end %>
+
+  <% if projekt_feature?(projekt, 'sidebar.show_map') %>
+    <%= render Shared::SidebarCardComponent.new(title: 'Karte', icon_name: "map") do |c| %>
+      <%= render Pages::Projekts::SidebarMapComponent.new(projekt, @default_phase_name) %>
+    <% end %>
+  <% end %>
+
+  <% if projekt_feature?(projekt, "sidebar.show_navigator_in_projekts_page_sidebar") %>
+    <%= render Shared::SidebarCardComponent.new(title: 'Aufbau', icon_name: "list-alt") do |c| %>
+      <%= render partial: 'pages/sidebar/projekt_list', locals: { projekts: [projekt.top_parent], current_projekt: projekt } %>
+    <% end %>
+  <% end %>
+
+  <% if @projekt_subscription.present? && projekt_feature?(@custom_page.projekt, "sidebar.show_notification_subscription_toggler") %>
+    <%= render Shared::SidebarCardComponent.new(title: t("custom.projekts.page.sidebar.phases_subscription.title"), icon_name: "bell") do |c| %>
+      <%= render partial: "pages/sidebar/projekt_phase_subscriptions", locals: { projekt_subscription: @projekt_subscription } %>
+    <% end %>
+  <% end %>
+
+  <% if projekt_feature?(projekt, "sidebar.projekt_page_sharing") %>
+    <%= render Shared::SidebarCardComponent.new(title: 'Teilen', icon_name: "share-alt") do |c| %>
+      <%= render "shared/social_share",
+        title: projekt.page.title,
+        url: url_for(only_path: false),
+        description: strip_tags(projekt.page.content || '')[0..200] + '...',
+        mobile: projekt.page.title
+      %>
+    <% end %>
+  <% end %>
+</aside>

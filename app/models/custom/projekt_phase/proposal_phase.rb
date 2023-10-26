@@ -2,6 +2,8 @@ class ProjektPhase::ProposalPhase < ProjektPhase
   has_many :proposals, foreign_key: :projekt_phase_id, dependent: :restrict_with_exception,
     inverse_of: :projekt_phase
 
+  has_many :base_selection_proposals, -> { base_selection }, foreign_key: :projekt_phase_id, class_name: "Proposal"
+
   after_create :create_map_location
 
   def phase_activated?
@@ -18,13 +20,6 @@ class ProjektPhase::ProposalPhase < ProjektPhase
 
   def default_order
     4
-  end
-
-  def hide_projekt_selector?
-    projekt_settings
-      .find_by(key: "projekt_feature.proposals.hide_projekt_selector")
-      .value
-      .present?
   end
 
   def resource_count

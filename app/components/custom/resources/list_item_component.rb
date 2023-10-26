@@ -1,0 +1,75 @@
+# frozen_string_literal: true
+
+class Resources::ListItemComponent < ApplicationComponent
+  renders_one :header
+  renders_one :image_overlay_item
+  renders_many :additional_body_sections
+  renders_many :footer_sections
+
+  DATE_FORMAT = "%d.%m.%Y".freeze
+
+  def initialize(
+    title:,
+    description:,
+    resource: nil,
+    projekt: nil,
+    image_url: nil,
+    author: nil,
+    subline: nil,
+    url: nil,
+    tags: [],
+    image_placeholder_icon_class: "fa-file",
+    header_style: nil,
+    narrow_header: false,
+    no_footer_bottom_padding: false
+  )
+    @title = title
+    @projekt = projekt
+    @description = description
+    @resource = resource
+    @image_url = image_url
+    @author = author
+    @url = url
+    @subline = subline
+    @tags = tags
+    @image_placeholder_icon_class = image_placeholder_icon_class
+    @header_style = header_style
+    @narrow_header = narrow_header
+    @no_footer_bottom_padding = no_footer_bottom_padding
+  end
+
+  def component_class_name
+    class_name = "#{@resource.class.name&.underscore}-list-item"
+    # class_name = "-list-item"
+
+    if @wide
+      class_name += " -wide"
+    end
+
+    class_name
+  end
+
+  def days_left
+    if @end_date.present?
+      "Noch #{(@end_date - Date.today).to_i} Tage"
+    end
+  end
+
+  def date
+    @date&.strftime(DATE_FORMAT)
+  end
+
+  def truncate_length
+    if @wide
+      150
+    else
+      120
+    end
+  end
+
+  def header_class
+    if @narrow_header
+      "-narrow"
+    end
+  end
+end

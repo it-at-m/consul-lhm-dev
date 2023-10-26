@@ -1,0 +1,18 @@
+#sentiment_selector {
+  margin-top: 0;
+  margin-bottom: 0;
+
+  p.small {
+    margin-bottom: 0.5em !important;
+  }
+
+  label:not(.sentiment) {
+    display: none;
+  }
+
+  .sentiment {
+    margin-bottom: 0.3em;
+    font-size: 0.9em;
+    border-radius: 5px;
+  }
+}

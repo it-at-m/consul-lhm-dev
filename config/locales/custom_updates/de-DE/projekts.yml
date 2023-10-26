@@ -14,12 +14,15 @@ de:
         expired_projekts: Abgeschlossene Projekte
         no_projekts: Keine Projekte
         no_projekts_for_current_filter: Keine Projekte für aktuellen Filter
-        title: Projekte
+        title: Projektübersicht
         to_projekt: Zum Projekt
         social_share:
           title: Projektübersicht
           description:  Die Übersicht aller Projekte
-      orders:
+        information_default_text: Werden Sie aktiv und beteiligen sich in den vorliegenden Projekten. Ihr Beitrag ist wichtig und zählt!
+        count: Projekte
+        welcome_default_text_html: In der Projektübersicht listen wir alle Projekte auf, die derzeit diskutiert werden. Nutzen Sie den Filter, um sich alle Projekte anzuschauen oder sie nach Aktualität, nach Aktivität, nach Termin oder individuell nach Ihren Vorlieben anzeigen zu lassen. Zusätzlich hilft Ihnen die Karte dabei, die Projekte in der Stadt zu verorten.
+      filters:
         index_order_all: 'Alle Projekte'
         index_order_all_title: 'Alle Projekte'
         index_order_expired: Abgeschlossen
@@ -93,12 +96,14 @@ de:
           proposals: Vorschläge
           questions: Questions
           legislation: Textbearbeitung
+      link_to_phase_prefix: Direkt zu den
       phase_name:
         budget_phase: Budget
         comment_phase: Kommentare
         debate_phase: Diskussionen
         event_phase: Veranstaltungen
         legislation_process_phase: Textbearbeitungsphase
+        legislation_phase: Textbearbeitung
         milestone_phase: Meilensteine
         newsfeed_phase: Newsfeed
         projekt_notification_phase: Benachrichtigungen
@@ -106,6 +111,7 @@ de:
         question_phase: Kurzumfrage
         voting_phase: Abstimmungen
         argument_phase: Stimmen
+        livestream_phase: Livestream
       projekt_events:
         index:
           title: Veranstaltungskalender
@@ -163,3 +169,7 @@ de:
         title: Projekte
         title_active: Aktive Projekte
         title_archived: Abgelaufene Projekte
+      list:
+        title: Projektübersicht
+      filter:
+        title: Filtern nach

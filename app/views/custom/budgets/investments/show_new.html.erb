@@ -1,0 +1,186 @@
+<% provide :title do %><%= @investment.title %><% end %>
+<% content_for :canonical do %>
+  <%= render "shared/canonical", href: budget_investment_url %>
+<% end %>
+
+<main class="resource-page">
+  <div id="<%= dom_id(@investment) %>">
+    <div class="flex-layout">
+      <div class="main-column">
+        <%= resources_back_link(fallback_path: url_to_footer_tab) %>
+
+        <h1 class="resource-page--title"><%= "Beitrag von #{@investment.author.name}" %></h1>
+        <div class="common-page-description">
+          <%= render_custom_block("budget_investment_show_welcome_text", default_content: t("custom.budgets.investments.show.welcome_default_text_html", author_name: @investment.author.name)) %>
+        </div>
+
+      </div>
+      <div class="sidebar-placeholder"></div>
+    </div>
+
+    <div class="flex-layout">
+      <div class="main-column">
+
+        <% if @investment.unfeasible? && @investment.valuation_finished? %>
+          <div class="callout warning">
+            <%= sanitize(t("budgets.investments.show.project_unfeasible")) %>
+          </div>
+        <% elsif @investment.winner? && @budget.finished? %>
+          <div class="callout success">
+            <strong><%= t("budgets.investments.show.project_winner") %></strong>
+          </div>
+        <% elsif @investment.selected? %>
+          <div class="callout success">
+            <%= sanitize(t("budgets.investments.show.project_selected")) %>
+          </div>
+        <% elsif @budget.balloting_or_later? %>
+          <div class="callout warning">
+            <%= sanitize(t("budgets.investments.show.project_not_selected")) %>
+          </div>
+        <% end %>
+
+        <% if @investment.should_show_price? %>
+          <div class="resource-page--description new-card" style="background-color:#E3FCE7">
+            <h3><%= t("budgets.investments.show.price") %></h2>
+            <%= @investment.formatted_price %>
+          </div>
+
+          <% if @investment.should_show_price_explanation? %>
+            <div class="resource-page--description new-card" style="background-color:#E3FCE7">
+              <h3><%= t("budgets.investments.show.price") %></h2>
+              <%= @investment.price_explanation %>
+            </div>
+          <% end %>
+        <% end %>
+
+        <%= render ResourcePage::BannerComponent.new(resource: @investment) %>
+
+        <div class="resource-page--description new-card">
+          <%= auto_link_already_sanitized_html wysiwyg(@investment.description) %>
+        </div>
+
+        <% if projekt_phase_feature?(@investment.projekt_phase, "form.show_map") && map_location_available?(@investment) %>
+          <% if @investment.projekt.vc_map_enabled? %>
+            <div class="margin-bottom not-print">
+              <%= render Shared::VCMapComponent.new(
+                mappable: @investment,
+                map_location: @investment.map_location || @investment.projekt_phase.map_location_with_admin_shape,
+                parent_class: "investment",
+                projekt_phase: @investment.projekt_phase,
+                show_admin_shape: @investment.projekt_phase.map_location.show_admin_shape?
+              ) %>
+            </div>
+          <% else %>
+            <div class="margin-bottom not-print">
+              <%= render Shared::MapComponent.new(
+                mappable: @investment,
+                map_location: @investment.map_location || @investment.projekt_phase.map_location_with_admin_shape,
+                parent_class: "investment",
+                projekt_phase: @investment.projekt_phase,
+                show_admin_shape: @investment.projekt_phase.map_location.show_admin_shape?
+              ) %>
+            </div>
+          <% end %>
+        <% end %>
+
+        <div id="comments" class="footer-anchor">
+        </div>
+
+        <div class="proposal-resources-sections">
+          <% if projekt_phase_feature?(@investment&.projekt_phase, "resource.show_comments") ||
+                projekt_phase_feature?(@investment&.projekt_phase, "resource.enable_investment_milestones_tab") %>
+
+            <% if projekt_phase_feature?(@investment.projekt_phase, "resource.enable_investment_milestones_tab") && @milestones.present? %>
+              <div class="proposal-resources-section">
+                <%= render Shared::MilestonesComponent.new(milestones: @milestones, milestoneable: @investment) %>
+              </div>
+            <% end %>
+
+            <% if projekt_phase_feature?(@investment&.projekt_phase, "resource.show_comments") %>
+              <div class="proposal-resources-section">
+                <%= render Shared::NewCommentsComponent.new(@investment, @comment_tree) %>
+              </div>
+            <% end %>
+
+          <% end %>
+        </div>
+      </div>
+
+      <aside class="sidebar">
+        <%= render Sidebar::ResourceAuthorComponent.new(user: @investment.author) %>
+
+        <% if @investment.should_show_aside? %>
+          <% if @investment.should_show_votes? %>
+            <%= render(Shared::SidebarCardComponent.new(title: t("budgets.investments.show.supports"), icon_name: "vote-yea")) do |c| %>
+              <div class="text-center">
+                <div id="<%= dom_id(@investment) %>_votes">
+                  <%= render Budgets::Investments::VotesComponent.new(@investment) %>
+                </div>
+              </div>
+            <% end %>
+
+          <% elsif @investment.should_show_vote_count? %>
+            <%= render(Shared::SidebarCardComponent.new(title: t("budgets.investments.show.supports"), icon_name: "vote-yea")) do |c| %>
+              <div class="text-center">
+                <span class="total-supports">
+                  <strong>
+                    <%= t("budgets.investments.investment.supports",
+                        count: @investment.total_votes) %>
+                  </strong>
+                </span>
+              </div>
+            <% end %>
+
+          <% elsif @investment.should_show_ballots? %>
+            <%= render(Shared::SidebarCardComponent.new(title: t("budgets.investments.show.votes"), icon_name: "vote-yea")) do |c| %>
+              <div class="text-center">
+                <div id="<%= dom_id(@investment) %>_ballot">
+                  <%= render "ballot",
+                    investment: @investment,
+                    investment_ids: @investment_ids,
+                    ballot: @ballot %>
+                </div>
+              </div>
+            <% end %>
+
+          <% end %>
+        <% end %>
+
+        <% if @investment.documents.present? %>
+          <%= render(Shared::SidebarCardComponent.new(title: t("documents.title"), icon_name: "file")) do |c| %>
+            <%= render(Sidebar::DocumentListComponent.new(documents: @investment.documents)) %>
+          <% end %>
+        <% end %>
+
+        <%= render(Shared::SidebarCardComponent.new(title: t("proposals.show.share"), icon_name: "share")) do |c| %>
+          <%= render "shared/social_share",
+            share_title: t("budgets.investments.show.share"),
+            title: @investment.title,
+            image_url: image_absolute_url(@investment.image, :thumb),
+            url: budget_investment_url(@investment.budget, @investment),
+            description: t("budgets.investments.share.message",
+                            title: @investment.title,
+                            handle: setting["org_name"]),
+            mobile: t("budgets.investments.share.message",
+                       title: @investment.title,
+                       handle: setting["twitter_handle"]) %>
+        <% end %>
+
+        <% if current_user&.administrator? %>
+          <%= render(Shared::SidebarCardComponent.new(title: t("custom.shared.show.admin"), icon_name: "user-cog")) do |c| %>
+            <%= render "budgets/investments/actions", investment: @investment %>
+          <% end %>
+        <% end %>
+
+        <% if can?(:edit, @investment) %>
+          <%= render(Shared::SidebarCardComponent.new(title: t("budgets.investments.show.author"), icon_name: "user-edit")) do |c| %>
+            <%= link_to t("shared.edit"),
+                        edit_budget_investment_path(@investment.budget, @investment),
+                        method: :get, class: "button hollow expanded" %>
+          <% end %>
+        <% end %>
+
+      </aside>
+    </div>
+  </div>
+</main>

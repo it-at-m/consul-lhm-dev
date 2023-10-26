@@ -1,0 +1,132 @@
+.custom-new-design {
+  [type='text'], [type='password'], [type='date'],
+  [type='datetime'], [type='datetime-local'], [type='month'],
+  [type='week'], [type='email'], [type='number'], [type='search'],
+  [type='tel'], [type='time'], [type='url'], [type='color'], textarea,
+  form [type]:not([type="button"], [type=checkbox], [type=file], [type=radio], [type=submit]) {
+    border: 1px solid $border-color;
+    background: white;
+    border-radius: 5px;
+  }
+
+  input::placeholder, select {
+    color: #67788A;
+    visibility: visible;
+  }
+
+  select {
+    option {
+      color: black;
+    }
+  }
+
+  .checkbox-label {
+    .checkbox {
+      margin-top: -1px;
+    }
+  }
+
+  form label {
+    font-size: inherit;
+  }
+
+  form .checkbox, form .radio {
+    vertical-align: top;
+  }
+
+  form {
+    input.light-input {
+      background: none;
+      border: none !important;
+      outline: none;
+      box-shadow: none;
+      border-bottom: 1px solid $border-color !important;
+      padding-left: 0;
+      padding-bottom: 0;
+      // height: 2em;
+      border-radius: 0 !important;
+    }
+
+    input[type=file] {
+      display: none;
+    }
+  }
+
+  .form-error {
+    font-size: 14px;
+  }
+
+  .sdg-related-list-selector {
+    .input-section {
+      margin-bottom: 0;
+    }
+
+    .help-section {
+      margin-top: 15px;
+    }
+  }
+
+  .cke_top {
+    border-bottom: none !important;
+  }
+
+  .cke {
+    border-radius: 10px !important;
+    overflow: auto !important;
+  }
+
+  form select {
+    background: transparent;
+    border-radius: 10px;
+  }
+
+  #select_language {
+    margin-bottom: 5px;
+  }
+
+  form [type]:not([type="button"], [type=checkbox], [type=file], [type=radio], [type=submit]) {
+    height: 37px;
+  }
+
+  form select {
+    height: 37px;
+    max-height: 37px;
+    min-height: 0;
+  }
+
+  #nested-documents {
+    .title {
+      display: none;
+    }
+  }
+
+  form .checkbox-label--inline {
+    font-weight: normal !important;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    input[type="checkbox"] {
+      margin-right: 0.5rem;
+      margin-bottom: 0;
+      margin-top: -2px;
+    }
+
+    &.-inline {
+      display: inline-block;
+      margin-right: 0.5rem;
+
+      input {
+        margin-right: 0.25rem;
+        margin-top: 0;
+        margin-bottom: 3px;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+.proposal-form .required-fields, .debate-form .required-fields, .budget-investment-form .required-fields {
+  padding-top: 0;
+  background: none;
+}

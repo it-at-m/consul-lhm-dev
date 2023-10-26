@@ -5,9 +5,24 @@ en:
         tagging: Tagging
         tags_custom: User tags
         required: Your input
+        title_placeholder: "Give your contribution a catchy title, for example “The project duration is too long” or “Please expand the planned measures”."
+        description_placeholder_html: "Describe here what your discussion is about.
+           The following procedure has proven to be effective:<br><br>
+           Start with a general description of your concern and then present your position on the topic.<br><br>
+           When writing, keep sentences as short as possible.<br><br>
+           Also use paragraphs to make your text more readable. (Many users read your text on mobile devices.)<br><br>
+           If possible, limit your content to a maximum of three paragraphs.<br><br>
+           If appropriate, use bullet points and bullet points for better clarity."
       index:
+        title: "Overview of all discussions"
         no_active_projekt: Currently no participation procedure
         no_active_phase: Phase expired
         projekts: Projects
         creation_only_for_citizens: Neue Diskussionen können in diesem Projekt nur von Bürgerinnen und Bürgern der Stadt %{city} erstellt werden.
         creation_only_for_specific_geozones: Neue Diskussionen können nur von Bürger*innen aus dem Postleitzahlbereich %{geozones} erstellt werden
+        empty_list_text: No connected debates
+        welcome_default_text: Debates are essential in order to obtain a differentiated opinion on the individual projects. View all discussions or filter for specific projects, areas or keywords on the right-hand side. By clicking on the respective topic you can follow the discussions and take part in them yourself.
+        sidebar_information_default_text: Do you want to stimulate and move things? Then start your own discussion.  
+        count: Debates
+      show:
+        welcome_default_text: "started a discussion about a project. You can support the discussion on the right sidebar by giving it a thumbs up. But you can also express your disapproval by clicking thumbs down. You also have the opportunity to join the discussion yourself using the comment function at the bottom."

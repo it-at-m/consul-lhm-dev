@@ -1,0 +1,17 @@
+<%= render(Resources::ListItemComponent.new(component_attributes)) do |c| %>
+  <% c.header do %>
+    <div>
+    </div>
+
+    <div>
+      <%= l(deficiency_report.created_at, format: :new_date_with_year) %>
+    </div>
+  <% end %>
+
+  <% c.footer_section do %>
+    <div class="deficiency-report-footer-status" style="color:<%= deficiency_report.status&.color %>;">
+      <i class="fas fa-<%= deficiency_report.status&.icon %>"></i>
+      <%= deficiency_report.status&.title %>
+    </div>
+  <% end %>
+<% end %>

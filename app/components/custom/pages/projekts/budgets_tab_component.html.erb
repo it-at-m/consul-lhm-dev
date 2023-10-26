@@ -34,7 +34,7 @@
 
         <% if can? :show, ballot %>
           <% if ballot.valid_heading?(heading) %>
-            <div class="progress-bar-nav" data-fixed-bar>
+            <div class="progress-bar-nav">
               <div id="progress_bar">
                 <%= render "budgets/ballot/progress_bar", ballot: ballot, heading: heading %>
               </div>

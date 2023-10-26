@@ -1,0 +1,5 @@
+<% if @geozones.present? && helpers.show_affiliation_filter_in_sidebar? %>
+  <%= render Shared::SidebarCardComponent.new(title: t("custom.geozones.sidebar_filter.affiliations.title"), icon_name: "map") do |c| %>
+      <%= render "shared/sidebar_filter/geozone_restrictions" %>
+  <% end %>
+<% end %>

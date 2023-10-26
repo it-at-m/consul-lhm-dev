@@ -1,0 +1,171 @@
+.custom-new-design {
+  .budget--current-phase-name {
+    font-size: 34px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .budget--price-value {
+    font-weight: bold;
+    font-size: 24px;
+    color: #292929;
+  }
+
+  .investments-filters ul a {
+    font-size: 16px;
+    padding: 2px 0;
+  }
+
+  .progress-votes .total-amount span {
+    color: black;
+  }
+
+  .progress-votes .amount-available span {
+    color: black;
+  }
+
+  .budget-investment-sidebar-ballot {
+    p {
+      font-size: 16px;
+    }
+  }
+
+  .budgets-page {
+    .tabs {
+      border: none;
+      background: transparent;
+    }
+
+    .tabs .tabs-title > a {
+      text-decoration: underline;
+      color: $brand;
+    }
+
+    .tabs .tabs-title {
+      margin-right: 35px;
+    }
+
+    .tabs .tabs-title > a.is-active::after {
+      content: none;
+    }
+  }
+
+  .budget-investment-status-icon {
+    font-size: 50px;
+
+    &.-winner {
+      font-size: 30px;
+      color: #fdce14;
+    }
+  }
+
+  .resource-item--footer-section {
+    min-height: 50px !important;
+  
+    .ballot-section, .price-section, .votes-section, .show-votes-count-section {
+      width: 100%;
+      min-height: unset !important;
+      margin-bottom: 10px;
+    }
+
+    .ballot-section {
+      .supports {
+        min-height: unset !important;
+
+        .supported {
+          flex-direction: column-reverse !important;
+
+          strong {
+            font-weight: 400 !important;
+          }
+
+          form {
+            margin-bottom: 5px;
+          }
+
+          &.remove {
+            form button {
+              font-weight: 400 !important;
+              background-color: #9EADBA;
+              color: #fff;
+            }
+          }
+        }
+
+        br, .icon-check-circle {
+          display: none;
+        }
+
+        &.-distributed {
+          .add.in-favor {
+            flex-direction: column;
+
+            form {
+              flex-wrap: wrap;
+            }
+          }
+        }
+      }
+    }
+
+    .price-section {
+      text-align: left;
+
+      .total-price {
+        font-weight: 700;
+        text-align: left;
+      }
+    }
+
+    .votes-section {
+      .supports {
+        display: flex;
+        flex-direction: column-reverse;
+        margin-top: 7px;
+        min-height: unset !important;
+
+        .button {
+          background-color: #7e328a;
+          color: #fff;
+        }
+
+        .button-remove-support {
+          font-weight: 400 !important;
+          background-color: #9eadba;
+          color: #fff;
+        }
+      }
+    }
+
+    .show-votes-count-section {
+      text-align: left;
+    }
+
+    .callot-section {
+      min-height: 80px;
+
+      .callout {
+        position: absolute;
+        top: 0;
+        right: 0;
+        border-radius: 0;
+
+        @media screen and (min-width: 640px) {
+          width: unset !important;
+          margin-left: 0 !important;
+        }
+      }
+    }
+  }
+
+  .sidebar {
+    .custom-content-block-body + .my-ballot,
+    .custom-content-block-controls + .my-ballot {
+      margin-top: 1rem;
+    }
+
+    .my-ballot, .investments-filters {
+      padding-top: 1rem;
+    }
+  }
+}

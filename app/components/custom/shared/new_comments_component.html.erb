@@ -1,0 +1,33 @@
+<div class="comments">
+  <div class="new-comments-component">
+    <% if @show_title %>
+      <h3 class="new-comments-component--title">
+        Kommentare <span class="js-comments-count">(<%= record.comments_count %>)</span>
+      </h3>
+    <% end %>
+
+    <%= content %>
+
+    <%= render Shared::CommentsFormComponent.new(record) %>
+
+    <% if show_filter? %>
+      <div class="d-flex">
+        <div class="items-list-line-divider"></div>
+        <%= render(
+          Shared::FilterDropdownComponent.new(
+            title: "Sortieren nach",
+            anchor: "footer-content",
+            options: helpers.valid_orders,
+            selected_option: helpers.current_order,
+            i18n_namespace: "comments.orders",
+            url_param_name: "order",
+            remote_url: @remote_url,
+            in_projekt_footer_tab: record.is_a?(ProjektPhase::CommentPhase)
+          )
+        ) %>
+      </div>
+    <% end %>
+    <%= render "comments/comment_list", comments: comment_tree.root_comments %>
+    <%= pagination_links %>
+  </div>
+</div>

@@ -1,0 +1,168 @@
+.custom-new-design {
+  .sidebar {
+    min-width: 300px;
+    max-width: 300px;
+
+    .required-fields {
+      width: 100%;
+    }
+
+    @media(max-width: $small-tablet-viewport-start) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      margin: auto;
+      margin-bottom: 20px;
+    }
+  }
+
+  .standalone-sidebar-section {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .card-section--header {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .system-users-list--title {
+    margin-bottom: 10px;
+  }
+
+  .system-users-list--images {
+    display: flex;
+  }
+
+  .system-users-list--image {
+    width: 40px;
+    height: 40px;
+    background: black;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 2px solid white;
+    overflow: hidden;
+  }
+
+  .system-users-list--image:first-child {
+    position: static;
+  }
+
+  .system-users-list--image:nth-child(2) {
+    left: -15px;
+  }
+
+  .system-users-list--image:nth-child(3) {
+    left: -30px;
+  }
+
+  .system-users-list--image:nth-child(4) {
+    left: -45px;
+  }
+
+  .system-users-list--image:nth-child(5) {
+    left: -60px;
+  }
+
+
+  // Overide old styles
+  .sidebar-divider {
+    display: none;
+  }
+
+  .sidebar-title {
+    border-top: none;
+    display: none;
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: black;
+    text-transform: none;
+    font-weight: bold;
+    padding-top: 0;
+
+    i {
+      color: $brand;
+      margin-right: 8px;
+    }
+  }
+
+  .sidebar-title + br {
+    display: none;
+  }
+
+  .sdg-tag-icon:before {
+    top: 0;
+    color: $brand;
+    margin-right: 8px;
+  }
+
+  .sdg-goal-tag-cloud {
+    margin-top: 20px;
+
+
+    .sdg-goal-tag-list {
+      gap: 7px;
+    }
+
+    .sdg-goal-tag-list > * {
+      margin: 0;
+    }
+
+    .sdg-goal-icon {
+      border-radius: 0;
+      min-width: 58px;
+    }
+  }
+
+  .projekt-tag-chip-icon:before {
+    margin-right: 8px;
+    color: $brand;
+  }
+
+  .geozone-affiliation-filter {
+    li {
+      list-style: none;
+    }
+  }
+
+  .header--responsive-menu-wrapper {
+    display: none;
+  }
+
+  #responsive-menu {
+    .subnavigation {
+      z-index: 1005;
+    }
+  }
+
+  .globalize-languages.highlight .column {
+    padding: 0 !important;
+  }
+
+  @media (max-width: $small-tablet-viewport-start) {
+    .sidebar {
+      // display: none;
+    }
+  }
+
+  @media screen and (max-width: $small-tablet-viewport-start) {
+    .header--responsive-menu-wrapper {
+      display: block;
+    }
+
+    .header--responsive-menu {
+      display: none;
+    }
+  }
+}
+
+#sidebar-cta {
+  width: 100%;
+}

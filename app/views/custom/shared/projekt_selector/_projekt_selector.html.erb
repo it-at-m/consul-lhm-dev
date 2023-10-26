@@ -1,4 +1,4 @@
-<% top_level_projekts = Projekt.top_level.regular %>
+<% top_level_projekts = Projekt.top_level %>
 
 <%= f.hidden_field :projekt_id %>
 <%= f.hidden_field :projekt_phase_id %>
@@ -21,6 +21,7 @@
     </div>
 
     <%= render partial: 'shared/projekt_selector/projekt_group', locals: { projekts: top_level_projekts.selectable_in_selector(controller_name, current_user), parent_id: 0, resource: model } %>
+
   </div>
 
   <div class='spacer'>
@@ -57,6 +58,9 @@
     <% end %>
   </div>
 </div>
+<p>
+Bitte ordnen Sie Ihren Beitrag einer Projektphase zu:
+</p>
 
 <div id='projekt-phase-selector-fields' class=''>
   <% Projekt.regular.selectable_in_selector(controller_name, current_user).each do |projekt| %>

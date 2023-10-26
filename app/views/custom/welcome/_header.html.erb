@@ -1,19 +1,52 @@
-<% if header.present? %>
-  <%header_large = Widget::Card.header.find_by title: "header_large" %>
-  <style>
-    <%if header_large%>
-      .home-page .jumbo{
-        background-image: url("<%= polymorphic_path(header_large.image.attachment) %>");
-        background-size: cover;
-        background-position: center 25%;
-      }
-    <%end%>
-  </style>
+<% if Setting.old_design_enabled? %>
+  <% if header.present? %>
+    <%header_large = Widget::Card.header.find_by title: "header_large" %>
+    <style>
+<%if header_large%>
+  .home-page .jumbo{
+    background-image: url("<%= polymorphic_path(header_large.image.attachment) %>");
+    background-size: cover;
+    background-position: center 25%;
+  }
+<%end%>
+    </style>
 
-  <div class="jumbo not-print">
-    <div class='jumbo-message'>
+    <div class="jumbo not-print">
+      <div class='jumbo-message'>
+      </div>
     </div>
-  </div>
 
-  <div class="background-header"></div>
+    <div class="background-header"></div>
+  <% end %>
+<% else %>
+  <% if header.present? %>
+    <% header_large = Widget::Card.header.find_by(title: "header_large") %>
+    <style>
+<%if header_large %>
+  .home-page .homepage-image-header{
+    background-image: url("<%= polymorphic_path(header_large.image.attachment) %>");
+    background-size: cover;
+    background-position: top;
+  }
+
+  .top-bar-background-wrapper {
+    background: transparent;
+  }
+<%end%>
+    </style>
+
+    <div class="homepage-image-header not-print">
+      <div class="homepage-image-header--title-wrapper">
+        <div class="homepage-image-header--title">
+          <div>
+            <%= Setting["extended_option.general.title"] %>
+          </div>
+          <div>
+            <b><%= Setting["extended_option.general.subtitle"] %></b>
+          </div>
+        </div>
+        <%= header_button_html %>
+      </div>
+    </div>
+  <% end %>
 <% end %>

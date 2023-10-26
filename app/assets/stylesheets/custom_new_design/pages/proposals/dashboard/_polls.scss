@@ -1,0 +1,44 @@
+.custom-new-design {
+  .poll-form {
+    padding: 30px;
+    font-size: 16px;
+  }
+
+  .poll-form-add-question {
+    text-decoration: none;
+    color: inherit;
+    font-size: 16px;
+
+    i {
+      padding-left: 10px;
+    }
+  }
+
+  .poll-form-dates--row {
+    max-width: 450px;
+    display: flex;
+    position: relative;
+
+    input {
+      width: 60%;
+    }
+
+    .icon-calendar {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      font-size: 22px;
+    }
+  }
+
+  .poll-form-dates--row-title {
+    width: 40%;
+    font-weight: 500;
+    color: black;
+  }
+
+  .poll-add-answer {
+
+    max-width: 200px;
+  }
+}

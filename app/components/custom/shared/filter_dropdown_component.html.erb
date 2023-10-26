@@ -1,0 +1,20 @@
+<div class="resources-list--sort">
+  <div class="resources-list--sort-title">
+    <%= @title %>:
+  </div>
+  <ul class="no-bullet filter-dropdown-component--item">
+    <%= render Shared::DropdownMenuComponent.new(selected_option: selected_option) do |c| %>
+      <% @options.each do |option| %>
+          <% c.option do %>
+            <%= link_to link_path(option),
+              class: link_class,
+              onclick: onclick,
+              data: link_data_attributes(option) do
+            %>
+              <%= translate_option(option) %>
+            <% end %>
+          <% end %>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

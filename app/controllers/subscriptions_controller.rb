@@ -12,6 +12,14 @@ class SubscriptionsController < ApplicationController
                 notice: t("flash.actions.save_changes.notice")
   end
 
+  def cancel_projekts
+    @user.projekt_subscriptions.update_all(active: false)
+    @user.projekt_phase_subscriptions.each(&:destroy!)
+
+    redirect_to edit_subscriptions_path(token: @user.subscriptions_token),
+                notice: t("flash.actions.save_changes.notice")
+  end
+
   private
 
     def set_user

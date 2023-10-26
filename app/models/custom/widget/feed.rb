@@ -26,4 +26,8 @@ class Widget::Feed < ApplicationRecord
   def investment_proposals
     Budget::Investment.joins(:budget).where.not(budgets: { projekt_id: nil }).sort_by_created_at.limit(limit)
   end
+
+  def self.by_kind(kind)
+    find{ |feed| feed.kind == 'expired_projekts' }
+  end
 end
