@@ -2,7 +2,7 @@ require_dependency Rails.root.join("app", "helpers", "settings_helper").to_s
 
 module SettingsHelper
   def extended_feature?(name)
-    setting["extended_feature.#{name}"].presence
+    setting["extended_feature.#{name}"].present?
   end
 
   def deficiency_reports_feature?(name)

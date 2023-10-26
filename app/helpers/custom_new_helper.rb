@@ -1,7 +1,7 @@
 module CustomNewHelper
   def topbar_image_path
     image_name =
-      if Setting.enabled?("extended_feature.general.use_white_top_navigation_text")
+      if extended_feature?('general.use_white_top_navigation_text')
         "logo_header_white_new.png"
       else
         "logo_header_new.png"

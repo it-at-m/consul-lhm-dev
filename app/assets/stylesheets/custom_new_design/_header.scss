@@ -187,7 +187,7 @@ body.custom-new-design .wrapper > header .locale.locale-custom {
     background: transparent !important;
   }
 
-  .home-page {
+  &.home-page {
     .top-bar[data-white-text="true"], .sticky-header .top-bar  {
       .header--navigation ul.main-menu li.nav-element a,
       .header--navigation ul.main-menu .projekt-name {
