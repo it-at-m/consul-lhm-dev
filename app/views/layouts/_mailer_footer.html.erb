@@ -8,9 +8,11 @@
         <p style="font-family: 'Open Sans','Helvetica Neue',arial,sans-serif; margin: 0;padding: 0;line-height: 1.5em;color: #222; font-size: 10px; margin-top: 12px;">
         <%= t("mailers.no_reply") %></p>
 
-        <p style="font-family: 'Open Sans','Helvetica Neue',arial,sans-serif; margin: 0;padding: 0;line-height: 1.5em;color: #222; font-size: 10px; margin-top: 12px;">
-          <%= sanitize t("mailers.config.unsubscribe_text", notifications: link_to(t("mailers.config.notifications_link"), edit_subscriptions_url(token: @token))), attributes: %w[href style] %>
-      </p>
+        <% if @subscriptions_token.present? %>
+          <p style="font-family: 'Open Sans','Helvetica Neue',arial,sans-serif; margin: 0;padding: 0;line-height: 1.5em;color: #222; font-size: 10px; margin-top: 12px;">
+            <%= sanitize t("mailers.config.unsubscribe_text", notifications: link_to(t("mailers.config.notifications_link"), edit_subscriptions_url(token: @subscriptions_token))), attributes: %w[href style] %>
+          </p>
+        <% end %>
       </td>
     </tr>
   </tbody>
