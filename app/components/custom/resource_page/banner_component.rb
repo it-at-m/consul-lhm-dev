@@ -7,7 +7,7 @@ class ResourcePage::BannerComponent < ApplicationComponent
   end
 
   def resource_class
-    "-#{@resource.class.name.downcase} #{@resource.image.present? ? "-with-image" : ""}"
+    "-#{@resource.class.name.split("::").last.downcase} #{@resource.image.present? ? "-with-image" : ""}"
   end
 
   def banner_inline_style
