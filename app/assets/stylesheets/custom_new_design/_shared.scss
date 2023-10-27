@@ -4,7 +4,15 @@
   }
 }
 
+.hide-on-desktop {
+  @media screen and (min-width: $big-tablet-viewport-start) {
+    display: none !important;
+  }
+}
+
 .show-on-mobile {
+  display: none;
+
   @media screen and (max-width: $mobile-viewport-start) {
     display: block !important;
   }

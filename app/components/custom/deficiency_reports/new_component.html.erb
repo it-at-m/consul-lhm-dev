@@ -4,6 +4,19 @@
     <%= translatable_form_for(deficiency_report, html: { class: "deficiency-report-form" }) do |f| %>
       <%= back_link_to(deficiency_reports_path) %>
 
+      <% category_select_html = capture do %>
+        <div class="margin-bottom">
+          <%= render Shared::SidebarCardComponent.new(
+            title: t("custom.deficiency_reports.form.category.title"),
+            description: t("custom.deficiency_reports.form.category.description"),
+            icon_name: "th-large"
+          ) do |c| %>
+          <%= f.select :deficiency_report_category_id, DeficiencyReport::Category.all.map { |category| [category.name, category.id] },
+            { prompt: t("custom.deficiency_reports.form.category.placeholder"), label: false } %>
+        <% end %>
+        </div>
+      <% end %>
+
       <div class="flex-layout">
         <div class="main-column">
           <h1 class="user-resources-form--title">
@@ -22,6 +35,9 @@
 
       <div class="flex-layout">
         <div class="main-column">
+        <div class="show-on-small-tablet js-remove-on-desktop-section">
+          <%= category_select_html %>
+        </div>
           <%= f.translatable_fields do |translations_form| %>
             <div class="js-suggest" data-locale="<%= translations_form.locale %>"></div>
             <div class="user-resources-form--banner-editor js-user-resources-form--banner-editor -deficiency-report">
@@ -63,15 +79,9 @@
         </div>
 
         <aside class="sidebar">
-
-          <%= render Shared::SidebarCardComponent.new(
-                        title: t("custom.deficiency_reports.form.category.title"),
-                        description: t("custom.deficiency_reports.form.category.description"),
-                        icon_name: "th-large"
-                     ) do |c| %>
-            <%= f.select :deficiency_report_category_id, DeficiencyReport::Category.all.map { |category| [category.name, category.id] },
-                         { prompt: t("custom.deficiency_reports.form.category.placeholder"), label: false } %>
-          <% end %>
+          <div class="show-on-mobile js-remove-on-mobile-section">
+            <%= category_select_html %>
+          </div>
 
           <%= render Shared::SidebarCardComponent.new(
                         title: t("custom.deficiency_reports.form.documents.title"),
@@ -109,13 +119,13 @@
           <%= f.invisible_captcha :subtitle %>
         </aside>
       </div>
-  
+
     <div class="user-resources-form--submit-section">
       <% if deficiency_report.new_record? %>
         <h3 class="user-resources-form--submit-section--privacy-policy">
           Datenschutzbestimmungen & Allgemeine Nutzerbedingungen
         </h3>
-  
+
         <div>
           <%= f.check_box :resource_terms,
             title: t("custom.terms.resource_terms.title"),
@@ -134,7 +144,7 @@
                     ) %>
       </div>
     <% end %>
-  
+
     <%= f.submit(class: "button", value: t("custom.user_resources.form.submit_button")) %>
     </div>
     <% end %>
