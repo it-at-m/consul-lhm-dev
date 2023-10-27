@@ -64,22 +64,6 @@ body.custom-new-design {
   }
 }
 
-
-// Unset column customization for custum html
-body.custom-new-design {
-  #page-content {
-    .column, .columns {
-      padding-right: 0.625rem;
-      padding-left: 0.625rem;
-
-      @media print, screen and (min-width: 40em) {
-        padding-right: 0.9375rem;
-        padding-left: 0.9375rem;
-      }
-    }
-  }
-}
-
 .custom-new-design {
   .notice-container {
     z-index: 1000;
