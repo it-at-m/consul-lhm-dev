@@ -65,7 +65,7 @@
       </div>
 
       <aside class="sidebar">
-        <%= render Sidebar::ResourceAuthorComponent.new(user: @deficiency_report.author) %>
+        <%= render Sidebar::ResourceAuthorComponent.new(resource: @deficiency_report) %>
 
         <% if can? :update_status, @deficiency_report %>
           <%= render(Shared::SidebarCardComponent.new(
