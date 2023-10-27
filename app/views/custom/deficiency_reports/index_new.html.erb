@@ -43,7 +43,7 @@
             <%= t("custom.deficiency_reports.index.count") %>
           </span>
           <span>
-            <%= @deficiency_reports.count %>
+            <%= @deficiency_reports.except(:limit, :offset).count %>
           </span>
         </div>
 
