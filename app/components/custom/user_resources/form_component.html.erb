@@ -197,7 +197,7 @@
           <%= translations_form.text_area :description,
             maxlength: max_description_lenght,
             label: false,
-            data: { placeholder: t("custom.user_resources.form.description_placeholder_html") },
+            data: { placeholder: t("custom.#{i18n_scope}.form.description_placeholder_html") },
             class: "html-area #{helpers.ck_editor_class(current_user)}" %>
         <% end %>
         <% if render_map? %>

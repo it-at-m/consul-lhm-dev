@@ -9,6 +9,18 @@ en:
         tags_custom: User tags
         tags_placeholder: Separate the tags with a comma (',')
         required: Your input
+        title_placeholder: "Give your post a catchy title, for example
+          “Zebra crossing in front of the XY primary school” or “More diversity on the
+          Weekly markets”.
+         "
+        description_placeholder_html: "
+          Describe your contribution here. The following procedure has proven successful:<br />
+          Start with a general description of your idea and then show what would improve with the implementation of your suggestion.<br /><br />
+          When writing, keep sentences as short as possible.<br /><br />
+          Also use paragraphs to make your text more readable. (Many users read your text on mobile devices.)<br /><br />
+          If possible, limit your content to a maximum of three paragraphs.<br /><br />
+          If appropriate, use lists and bullet points for better clarity.
+          "
         buttons:
           save_draft: Save draft
           publish: Publish proposal
