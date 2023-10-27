@@ -1699,6 +1699,7 @@ span.projekt-backlink:before {
   .projekt-label {
     @include resource-tagging;
     margin-left: 0;
+    background-color: #767676 !important;
 
     &.selected {
       background-color: $brand !important;
