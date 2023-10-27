@@ -4,6 +4,7 @@ class DeficiencyReport < ApplicationRecord
   include Imageable
   include Documentable
   include Searchable
+  include OnBehalfOfSubmittable
   translates :title, touch: true
   translates :description, touch: true
   translates :summary, touch: true
@@ -131,9 +132,5 @@ class DeficiencyReport < ApplicationRecord
 
   def comments_allowed?(user)
     true
-  end
-
-  def author_name
-    on_behalf_of.presence || author.name
   end
 end

@@ -3,6 +3,7 @@ class Proposal < ApplicationRecord
   include Labelable
   include Sentimentable
   include ResourceBelongsToProjekt
+  include OnBehalfOfSubmittable
 
   belongs_to :old_projekt, class_name: 'Projekt', foreign_key: :projekt_id # TODO: remove column after data migration con1538
 
