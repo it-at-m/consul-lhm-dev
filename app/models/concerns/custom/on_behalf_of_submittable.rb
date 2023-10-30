@@ -2,7 +2,7 @@ module OnBehalfOfSubmittable
   extend ActiveSupport::Concern
 
   def author_name
-    on_behalf_of.presence || author.full_name
+    on_behalf_of.presence || author.name
   end
 
   def author_initial

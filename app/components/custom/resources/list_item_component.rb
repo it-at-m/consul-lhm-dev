@@ -14,7 +14,6 @@ class Resources::ListItemComponent < ApplicationComponent
     resource: nil,
     projekt: nil,
     image_url: nil,
-    author: nil,
     subline: nil,
     url: nil,
     tags: [],
@@ -28,7 +27,6 @@ class Resources::ListItemComponent < ApplicationComponent
     @description = description
     @resource = resource
     @image_url = image_url
-    @author = author
     @url = url
     @subline = subline
     @tags = tags
@@ -71,5 +69,18 @@ class Resources::ListItemComponent < ApplicationComponent
     if @narrow_header
       "-narrow"
     end
+  end
+
+  def show_author_name?
+    @resource.is_a?(Debate) ||
+      @resource.is_a?(Proposal) ||
+      @resource.is_a?(Budget::Investment) ||
+      @resource.is_a?(DeficiencyReport)
+  end
+
+  def on_behalf_of?
+    return unless show_author_name?
+
+    @resource.on_behalf_of.present?
   end
 end
