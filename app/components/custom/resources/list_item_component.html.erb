@@ -13,7 +13,7 @@
       <div class="resource-item--author-full-name">
         <%= @resource.author_name %>
       </div>
-      <%= render Shared::OfficialPositionBadgeComponent.new(user: @resource.author) %>
+      <%= render Shared::OfficialPositionBadgeComponent.new(user: @resource.author) unless on_behalf_of? %>
     </div>
   <% end %>
 <% end %>
