@@ -120,6 +120,12 @@
             icon_name: "user-edit")) do |c| %>
             <%= render "deficiency_reports/author_actions", deficiency_report: @deficiency_report %>
           <% end %>
+        <% elsif current_user&.administrator? %>
+          <%= render(Shared::SidebarCardComponent.new(
+            title: t("custom.deficiency_reports.show.admin_actions.title"),
+            icon_name: "user-edit")) do |c| %>
+            <%= render "deficiency_reports/author_actions", deficiency_report: @deficiency_report %>
+          <% end %>
         <% end %>
       </aside>
     </div>
