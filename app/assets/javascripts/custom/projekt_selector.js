@@ -225,6 +225,11 @@
       if ($projektPhase.data("projekt-labels-name")) {
         $("#projekt_labels_selector label[for$=_projekt_labels]").text($projektPhase.data("projekt-labels-name").replaceAll("_", " "));
         $(".js-sidebar-label-section .sidebar-card--header-text").text($projektPhase.data("projekt-labels-name").replaceAll("_", " "));
+        $(".js-projekt-labels-selector .sidebar-card--title-text").text($projektPhase.data("projekt-labels-name").replaceAll("_", " "));
+      } else {
+        $("#projekt_labels_selector label[for$=_projekt_labels]").text("Labels");
+        $(".js-sidebar-label-section .sidebar-card--header-text").text("Labels");
+        $(".js-projekt-labels-selector .sidebar-card--title-text").text("Labels");
       }
 
       var labelIdsToShow = [];
@@ -250,6 +255,12 @@
         var sentimentName = $projektPhase.data("sentiments-name").replaceAll("_", " ");
         $("#sentiment_selector label[for$=_sentiment_id]").text(sentimentName);
         $(".js-sidebar-sentiment-section .sidebar-card--header-text").text(sentimentName);
+        $(".js-sentiments-selector .sidebar-card--title-text").text(sentimentName);
+      } else {
+        var sentimentName = "Sentiments";
+        $("#sentiment_selector label[for$=_sentiment_id]").text(sentimentName);
+        $(".js-sidebar-sentiment-section .sidebar-card--header-text").text(sentimentName);
+        $(".js-sentiments-selector .sidebar-card--title-text").text(sentimentName);
       }
 
       var sentimentIdsToShow = [];

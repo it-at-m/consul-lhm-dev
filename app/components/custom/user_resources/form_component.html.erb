@@ -10,11 +10,11 @@
     <% end %>
 
     <% labels_and_sentiments_html = capture do %>
-      <%= render Shared::SidebarCardComponent.new(title: "Labels", opened_on_mobile: true, icon_name: "tag", class_name: "js-sidebar-label-section hide") do |c| %>
+      <%= render Shared::SidebarCardComponent.new(title: "Labels", opened_on_mobile: true, icon_name: "tag", class_name: "js-sidebar-label-section hide js-projekt-labels-selector") do |c| %>
         <%= render partial: "shared/projekt_selector/projekt_labels", locals:	{ f: f, model: resource } %>
       <% end %>
 
-      <%= render Shared::SidebarCardComponent.new(title: "Sentiments", opened_on_mobile: true, icon_name: "heart", class_name: "js-sidebar-sentiment-section hide") do |c| %>
+      <%= render Shared::SidebarCardComponent.new(title: "Sentiments", opened_on_mobile: true, icon_name: "heart", class_name: "js-sidebar-sentiment-section hide js-sentiments-selector") do |c| %>
         <%= render partial: "shared/projekt_selector/sentiments", locals:	{ f: f, model: resource } %>
       <% end %>
     <% end %>
