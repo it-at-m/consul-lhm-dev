@@ -22,12 +22,11 @@ class DeficiencyReportsController < ApplicationController
       @current_order = "created_at"
     end
 
-    @deficiency_reports = DeficiencyReport.all.page(params[:page]).send("sort_by_#{@current_order}")
+    @all_deficiency_reports = DeficiencyReport.all
+    @deficiency_reports = @all_deficiency_reports.send("sort_by_#{@current_order}").page(params[:page])
 
     @categories = DeficiencyReport::Category.all.order(created_at: :asc)
     @statuses = DeficiencyReport::Status.all.order(given_order: :asc)
-
-    @deficiency_reports_coordinates = all_deficiency_report_map_locations(@deficiency_reports)
 
     @selected_categories_ids = (params[:dr_categories] || '').split(',')
     @selected_status_id = (params[:dr_status] || '').split(',').first
@@ -35,12 +34,13 @@ class DeficiencyReportsController < ApplicationController
 
     @deficiency_reports = @deficiency_reports.search(@search_terms) if @search_terms.present?
 
-
     filter_by_categories if @selected_categories_ids.present?
     filter_by_selected_status if @selected_status_id.present?
     filter_by_selected_officer if @selected_officer.present?
     filter_by_approval_status if params[:approval_status].present?
     filter_by_my_posts
+
+    @deficiency_reports_coordinates = all_deficiency_report_map_locations(@deficiency_reports)
 
     set_deficiency_report_votes(@deficiency_reports)
 
