@@ -17,7 +17,10 @@
       <% username_hint = t("devise_views.users.registrations.new.username_note") %>
     <% end %>
 
-    <%= render_custom_block "registration_form_hint" %>
+    <% if SiteCustomization::ContentBlock.custom_block_for("registration_form_hint", I18n.locale)&.body&.present? %>
+      <%= render_custom_block "registration_form_hint" %>
+      <div class="auth-page-template--divider"></div>
+     <% end %>
 
     <div class="row">
       <div class="small-12 column">
