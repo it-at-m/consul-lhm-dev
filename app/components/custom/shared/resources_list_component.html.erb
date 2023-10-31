@@ -63,7 +63,7 @@
 
     <% unless @hide_actions %>
       <div class="resources-list--actions">
-        <% if @text_search_enabled %>
+        <% if @text_search_enabled && i18n_namespace.present? %>
           <%= render(
             Shared::TextSearchFormComponent.new(
               remote_url: remote_url,

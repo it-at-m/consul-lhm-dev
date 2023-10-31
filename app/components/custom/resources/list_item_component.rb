@@ -6,8 +6,6 @@ class Resources::ListItemComponent < ApplicationComponent
   renders_many :additional_body_sections
   renders_many :footer_sections
 
-  DATE_FORMAT = "%d.%m.%Y".freeze
-
   def initialize(
     title:,
     description:,
@@ -20,6 +18,7 @@ class Resources::ListItemComponent < ApplicationComponent
     image_placeholder_icon_class: "fa-file",
     header_style: nil,
     narrow_header: false,
+    date: nil,
     no_footer_bottom_padding: false
   )
     @title = title
@@ -33,6 +32,7 @@ class Resources::ListItemComponent < ApplicationComponent
     @image_placeholder_icon_class = image_placeholder_icon_class
     @header_style = header_style
     @narrow_header = narrow_header
+    @date = date
     @no_footer_bottom_padding = no_footer_bottom_padding
   end
 
@@ -54,7 +54,9 @@ class Resources::ListItemComponent < ApplicationComponent
   end
 
   def date
-    @date&.strftime(DATE_FORMAT)
+    return if @date.blank?
+
+    l(@date, format: :date_only)
   end
 
   def truncate_length

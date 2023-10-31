@@ -1,0 +1,6 @@
+<%= render(Resources::ListItemComponent.new(component_attributes)) do |c| %>
+  <% c.footer_section do  %>
+    <%= link_to topic.title, community_topic_path(topic.community, topic) %></h3>
+  <% end %>
+<% end %>
+

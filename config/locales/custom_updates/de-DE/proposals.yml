@@ -42,6 +42,13 @@ de:
         empty_list_text: Derzeit keine verknüpften Beiträge
 
       show:
+        community_section:
+          title: Beteiligen Sie sich
+          description: Für diesen Vorschlag gibt es bereits einen Arbeitskreis, der sich mit der Umsetzung des Vorschlags beschäftigt.
+          description_create_first:  Erstellen Sie einen Arbeitskreis, der sich mit der Umsetzung des Vorschlags beschäftigt.
+          comments_count: Kommentare
+          topics_count: Themen
+          particapated_users_count: Teilnehmende
         welcome_default_text:
           "%{author} hat einen Beitrag zu diesem Projekt gemacht, der Ihre Aufmerksamkeit benötigt. Sie können den Beitrag an der rechten Seitenleiste unterstützen, indem Sie ihm Ihre Stimme geben. Außerdem können Sie dem Beitrag folgen, um auf dem Laufenden zu bleiben. Die Karte hilft Ihnen dabei, den Beitrag in der Stadt zu verorten, des Weiteren haben Sie die Möglichkeit, den Beitrag zu kommentieren."
       proposal:

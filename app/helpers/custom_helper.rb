@@ -67,4 +67,13 @@ module CustomHelper
 
     array
   end
+
+  def resource_show_url(resource)
+    case resource
+    when Proposal
+      proposal_path(resource)
+    when Debate
+      debate_path(resource)
+    end
+  end
 end

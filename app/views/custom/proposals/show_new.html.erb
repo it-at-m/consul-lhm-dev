@@ -133,10 +133,41 @@
         <% end %>
 
         <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.show_community_button_in_proposal_sidebar") %>
-          <%= render(Shared::SidebarCardComponent.new(title: "Beteiligen Sie sich", icon_name: "users")) do |c| %>
-            <div class="proposal-page--working-group">
-              Für diesen Vorschlag gibt es bereits einen Arbeitskreis, der sich mit der Umsetzung des Vorschlags beschäftigt.
-            </div>
+          <%= render(Shared::SidebarCardComponent.new(
+              title: t("custom.proposals.show.community_section.title"),
+              icon_name: "users")
+            ) do |c| %>
+            <% if @proposal.community.topics.count > 0 %>
+              <div class="margin-bottom">
+                <%= t("custom.proposals.show.community_section.description") %>
+              </div>
+              <div class="sidebar-card--count-line">
+                <div>
+                  <%= t("custom.proposals.show.community_section.particapated_users_count") %>
+                </div>
+                <div>
+                  <%= @proposal.community.participants_count %>
+                </div>
+              </div>
+              <div class="sidebar-card--count-line">
+                <div>
+                  <%= t("custom.proposals.show.community_section.topics_count") %>
+                </div>
+                <div>
+                  <%= @proposal.community.comments_count %>
+                </div>
+              </div>
+              <div class="sidebar-card--count-line">
+                <div>
+                  <%= t("custom.proposals.show.community_section.comments_count") %>
+                </div>
+                <div>
+                  <%= @proposal.community.topics.count %>
+                </div>
+              </div>
+            <% else %>
+                <%= t("custom.proposals.show.community_section.description_create_first") %>
+            <% end %>
             <%= link_to t("community.sidebar.button_to_access"), community_path(@proposal.community), class: "button hollow expanded" %>
           <% end %>
         <% end %>

@@ -56,11 +56,12 @@
     padding: 18px 25px;
     padding-right: 28px;
     padding-bottom: 30px;
-    font-weight: bold;
   }
 
-  .sidebar-resource-author--resources-item {
+  .sidebar-card--count-line {
     display: flex;
+    font-weight: bold;
     justify-content: space-between;
+    color: inherit;
   }
 }

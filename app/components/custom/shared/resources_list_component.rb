@@ -129,6 +129,8 @@ class Shared::ResourcesListComponent < ApplicationComponent
       )
     when ProjektEvent
       ProjektEvents::ListItemComponent.new(projekt_event: resource)
+    when Topic
+      Topics::ListItemComponent.new(topic: resource)
     end
   end
 

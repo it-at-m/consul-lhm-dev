@@ -41,21 +41,19 @@
 
       <div class="sidebar-resource-author--resources">
         <% if user.proposals.exists? %>
-          <%= link_to user_path(user) do %>
-            <div class="sidebar-resource-author--resources-item">
-              <div class="sidebar-resource-author--resources-name">
-                Vorschläge
-              </div>
-              <div class="sidebar-resource-author--resources-count">
-                <%= user.proposals.count %>
-              </div>
+          <%= link_to user_path(user), class: "sidebar-card--count-line" do %>
+            <div>
+              Vorschläge
+            </div>
+            <div>
+              <%= user.proposals.count %>
             </div>
           <% end %>
         <% end %>
 
         <% if user.debates.exists? %>
           <%= link_to user_path(user) do %>
-            <div class="sidebar-resource-author--resources-item">
+            <div class="sidebar-card--count-line">
               <div class="sidebar-resource-author--resources-name">
                 Diskussionen
               </div>
@@ -68,7 +66,7 @@
 
         <% if user.comments.exists? %>
           <%= link_to user_path(user) do %>
-            <div class="sidebar-resource-author--resources-item">
+            <div class="sidebar-card--count-line">
               <div class="sidebar-resource-author--resources-name">
                 Kommentare
               </div>
