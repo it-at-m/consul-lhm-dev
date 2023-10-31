@@ -21,6 +21,10 @@ class ProjektPhase::BudgetPhase < ProjektPhase
     5
   end
 
+  def resource_count
+    budget.investments.count
+  end
+
   def admin_nav_bar_items
     %w[duration naming restrictions settings map]
   end
