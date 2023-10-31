@@ -200,11 +200,11 @@ class User < ApplicationRecord
   end
 
   def extended_registration?
-    !organization? && !erased? && Setting["extra_fields.registration.extended"]
+    !organization? && !erased? && Setting["extra_fields.registration.extended"].present?
   end
 
   def document_required?
-    !organization? && !erased? && Setting["extra_fields.registration.check_documents"]
+    !organization? && !erased? && Setting["extra_fields.registration.check_documents"].present?
   end
 
   def current_city_citizen?

@@ -3,6 +3,7 @@
     flex-direction: row;
     align-items: center;
     margin-bottom: 10px;
+    flex-wrap: nowrap;
 
     &.column:last-child:not(:first-child), .columns:last-child:not(:first-child) {
       float: left;
@@ -62,6 +63,9 @@
       min-width: auto;
       margin-top: 0;
       margin-bottom: 0;
+      max-width: unset;
+      text-wrap: wrap;
+      text-align: left;
 
       &.answered {
         border-color: #207868;
@@ -72,6 +76,10 @@
           content: none;
         }
       }
+    }
+
+    span.button {
+      margin-right: 0.8rem;
     }
 
     .answer-weight-selector {
@@ -105,6 +113,7 @@
     background: $brand;
     padding: 0.1rem 0.25rem;
     border-radius: 5px;
+    min-width: 85px;
 
     i {
       color: #fff !important;

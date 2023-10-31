@@ -14,7 +14,8 @@ class Pages::Projekts::BudgetsTabComponent < ApplicationComponent
   def render_map?
     !budget.informing? &&
       projekt_phase_feature?(budget.projekt_phase, "form.show_map") &&
-      controller_name != "offline_ballots"
+      controller_name != "offline_ballots" &&
+      Setting.old_design_enabled?
   end
 
   def phases

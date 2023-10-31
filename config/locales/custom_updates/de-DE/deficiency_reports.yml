@@ -136,4 +136,6 @@ de:
           title: Autor
           edit_button: Bearbeiten
           delete_button: Zurückziehen
+        admin_actions:
+          title: Admin
         submit_official_answer_button: Antwort speichern

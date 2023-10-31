@@ -1,0 +1,40 @@
+// Unset customization for custum html
+
+.custom-new-design {
+  .welcome-page .main-column, .projekt-page .main-column {
+    .custom-content-block-body, #page-content {
+
+
+      // rows and columns
+      .row {
+        margin-right: -0.625rem;
+        margin-left: -0.625rem;
+      }
+
+      .column, .columns {
+        padding-right: 0.625rem;
+        padding-left: 0.625rem;
+      }
+
+      @media print, screen and (min-width: 40em) {
+        .row {
+          margin-right: -0.9375rem;
+          margin-left: -0.9375rem;
+        }
+
+        .column, .columns {
+          padding-right: 0.9375rem;
+          padding-left: 0.9375rem;
+        }
+      }
+
+
+      // Image height
+      img {
+        height: auto !important;
+      }
+
+
+    }
+  }
+}

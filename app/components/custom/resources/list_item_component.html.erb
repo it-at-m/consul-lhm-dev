@@ -1,29 +1,43 @@
-<% author_name_html = capture do %>
-  <% if @author.present? %>
-    <%= link_to user_path(@author), class: 'resource-item--author' do %>
-      <div class="resource-item--author-photo">
-        <% if @author.image&.variant(:popup).present? %>
-          <%= image_tag(@author.image&.variant(:popup)) %>
-        <% else %>
-          <div class="resource-item--author-photo--placeholder">
-            <%= @author&.first_letter_of_name %>
-          </div>
-        <% end %>
-      </div>
-      <div class="resource-item--author-name">
-        <div class="resource-item--author-full-name">
-          <%= @author.full_name %>
+<% auther_name_and_avatar = capture do %>
+  <% if show_author_name? %>
+    <div class="resource-item--author-photo">
+      <% if on_behalf_of? || @resource.author.image&.variant(:popup).blank? %>
+        <div class="resource-item--author-photo--placeholder">
+          <%= @resource.author_initial %>
         </div>
-        <%= render Shared::OfficialPositionBadgeComponent.new(user: @author) %>
+      <% else %>
+        <%= image_tag(@resource.author.image&.variant(:popup)) %>
+      <% end %>
+    </div>
+    <div class="resource-item--author-name">
+      <div class="resource-item--author-full-name">
+        <%= @resource.author_name %>
       </div>
+      <%= render Shared::OfficialPositionBadgeComponent.new(user: @resource.author) unless on_behalf_of? %>
+    </div>
+  <% end %>
+<% end %>
+
+<% author_html = capture do %>
+  <% if show_author_name? %>
+    <% if on_behalf_of? %>
+      <div class="resource-item--author">
+        <%= auther_name_and_avatar %>
+      </div>
+    <% else %>
+      <%= link_to user_path(@resource.author), class: "resource-item--author" do %>
+        <%= auther_name_and_avatar %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
 
 <div class="resource-item <%= component_class_name %>">
-  <div class="resource-item--header <%= header_class %>" style="<%= @header_style %>">
-    <%= header %>
-  </div>
+  <% if header.present? %>
+    <div class="resource-item--header <%= header_class %>" style="<%= @header_style %>">
+      <%= header %>
+    </div>
+  <% end %>
 
   <div class="resource-item--image-container">
     <% if image_overlay_item.present? %>
@@ -48,10 +62,6 @@
       <div class="resource-item--body-and-author">
         <div class="resource-item--body">
           <div class="resource-item--body-heading">
-            <% if date.present? %>
-              <div class="resource-item--date"><%= date %></div>
-            <% end %>
-
             <% if @subline.present? %>
               <%= @subline %>
             <% elsif @projekt.present? %>
@@ -74,6 +84,10 @@
                 <% end %>
               </div>
             <% end %>
+
+            <% if date.present? %>
+              <div class="resource-item--date"><%= date %></div>
+            <% end %>
           </div>
           <%= link_to(truncate(@title, length: 72), @url, class: "resource-item--title" ) %>
 
@@ -90,7 +104,7 @@
           <% end %>
         <% end %>
 
-        <%= author_name_html %>
+        <%= author_html %>
 
       </div>
       <% if footer_sections.any? %>

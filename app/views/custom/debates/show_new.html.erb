@@ -34,9 +34,9 @@
     <div class="flex-layout padding-on-mobile">
       <div class="main-column">
         <div id="debates-content"></div>
-        <h1 class="resource-page--title"><%= "#{@debate.author.name} startet eine Diskussion"  %></h1>
+        <h1 class="resource-page--title"><%= "#{@debate.author_name} startet eine Diskussion"  %></h1>
         <div class="resource-page--title-subline">
-          <%= render_custom_block('debate_show_welcome_text', custom_prefix: @debate.author.name , default_content: t('custom.debates.show.welcome_default_text')) %>
+          <%= render_custom_block('debate_show_welcome_text', custom_prefix: @debate.author_name , default_content: t('custom.debates.show.welcome_default_text')) %>
         </div>
 
         <% if @debate.conflictive? %>
@@ -68,7 +68,7 @@
       </div>
 
       <aside id="debates-author" class="sidebar">
-        <%= render Sidebar::ResourceAuthorComponent.new(user: @debate.author) %>
+        <%= render Sidebar::ResourceAuthorComponent.new(resource: @debate) %>
 
         <% if current_user.present? && current_user.administrator? %>
           <%= render(Shared::SidebarCardComponent.new(title: t("custom.shared.show.admin"), icon_name: "cog")) do |c| %>

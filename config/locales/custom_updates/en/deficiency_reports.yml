@@ -130,4 +130,6 @@ en:
           title: Author
           edit_button: Edit
           delete_button: Delete
+        admin_actions:
+          title: Admin
         submit_official_answer_button: Save reply

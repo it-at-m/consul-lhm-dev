@@ -34,6 +34,18 @@
       <% end %>
     <% end %>
 
+    <% if @projekt_phase.projekt_labels.any? %>
+      <%= render Shared::SidebarCardComponent.new(title: @projekt_phase.projekt_labels_label_text, icon_name: "tags") do |c| %>
+        <%= render Shared::ProjektLabelsComponent.new(projekt_phase_id: @projekt_phase.id) %>
+      <% end %>
+    <% end %>
+
+    <% if @projekt_phase.sentiments.any? %>
+      <%= render Shared::SidebarCardComponent.new(title: @projekt_phase.sentiment_label_text, icon_name: "heart") do |c| %>
+        <%= render Shared::SentimentsComponent.new(projekt_phase_id: @projekt_phase.id) %>
+      <% end %>
+    <% end %>
+
     <% if current_user.present? && extended_feature?('proposals.enable_my_posts_filter') %>
       <%= render Sidebar::Filters::MyPostsCardComponent.new %>
     <% end %>

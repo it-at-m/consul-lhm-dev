@@ -65,7 +65,7 @@
       </div>
 
       <aside class="sidebar">
-        <%= render Sidebar::ResourceAuthorComponent.new(user: @deficiency_report.author) %>
+        <%= render Sidebar::ResourceAuthorComponent.new(resource: @deficiency_report) %>
 
         <% if can? :update_status, @deficiency_report %>
           <%= render(Shared::SidebarCardComponent.new(
@@ -117,6 +117,12 @@
         <% if current_user == @deficiency_report.author %>
           <%= render(Shared::SidebarCardComponent.new(
             title: t("custom.deficiency_reports.show.author_actions.title"),
+            icon_name: "user-edit")) do |c| %>
+            <%= render "deficiency_reports/author_actions", deficiency_report: @deficiency_report %>
+          <% end %>
+        <% elsif current_user&.administrator? %>
+          <%= render(Shared::SidebarCardComponent.new(
+            title: t("custom.deficiency_reports.show.admin_actions.title"),
             icon_name: "user-edit")) do |c| %>
             <%= render "deficiency_reports/author_actions", deficiency_report: @deficiency_report %>
           <% end %>

@@ -23,7 +23,7 @@ module CsvServices
         [
           "Id", "Username", "Email", "Vorname", "Nachname",
           "Stadt", "Adresse", "Postleitzahl", "Gebiet",
-          "Dokument", "Dokument (4 letzten Ziffern)",
+          "Dokument", "Dokument (4 letzten Ziffern)", "Nutzer angelegt am",
           "Geschlecht", "Geburtsdatum", "Rollen", "Unique Stamp", "Verifiziert am"
         ]
       end
@@ -32,7 +32,7 @@ module CsvServices
         user_row = [
           user.id, user.name, user.email, user.first_name, user.last_name,
           user.city_name, user.formatted_address, user.plz, user.geozone&.name,
-          user.document_type, user.document_last_digits
+          user.document_type, user.document_last_digits, I18n.l(user.created_at, format: "%d %b %Y")
         ]
 
         user_row.push(user.gender.present? ? I18n.t("custom.devise_views.users.gender.#{user.gender}") : "")

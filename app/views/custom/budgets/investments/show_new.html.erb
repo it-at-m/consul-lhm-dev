@@ -9,9 +9,9 @@
       <div class="main-column">
         <%= resources_back_link(fallback_path: url_to_footer_tab) %>
 
-        <h1 class="resource-page--title"><%= "Beitrag von #{@investment.author.name}" %></h1>
+        <h1 class="resource-page--title"><%= "Beitrag von #{@investment.author_name}" %></h1>
         <div class="common-page-description">
-          <%= render_custom_block("budget_investment_show_welcome_text", default_content: t("custom.budgets.investments.show.welcome_default_text_html", author_name: @investment.author.name)) %>
+          <%= render_custom_block("budget_investment_show_welcome_text", default_content: t("custom.budgets.investments.show.welcome_default_text_html", author_name: @investment.author_name)) %>
         </div>
 
       </div>
@@ -107,7 +107,7 @@
       </div>
 
       <aside class="sidebar">
-        <%= render Sidebar::ResourceAuthorComponent.new(user: @investment.author) %>
+        <%= render Sidebar::ResourceAuthorComponent.new(resource: @investment) %>
 
         <% if @investment.should_show_aside? %>
           <% if @investment.should_show_votes? %>

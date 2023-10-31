@@ -1,0 +1,5 @@
+<%= render(Resources::ListItemComponent.new(component_attributes)) do |c| %>
+  <% c.footer_section do %>
+    <%= link_to "Mitmachen", community_topic_path(topic.community, topic), class: "button -grey" %></h3>
+  <% end %>
+<% end %>

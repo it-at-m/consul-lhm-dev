@@ -13,24 +13,14 @@ de:
           „Zebrastreifen vor der XY-Grundschule“ oder „Mehr Vielfalt auf den
           Wochenmärkten“.
         "
-        # description_placeholder_html: "
-        #   Beschreiben Sie hier Ihren Vorschlag. Folgendes Vorgehen hat sich
-        #   bewährt: <br /><br />
-        #
-        #   Beginnen Sie mit einer allgemeinen Beschreibung Ihrer Idee und
-        #   stellen Sie im Anschluss dar, was sich mit der Umsetzung Ihres Vorschlags
-        #   verbessern würde. <br /><br />
-        #
-        #   Achten Sie beim Schreiben möglichst auf kurze Sätze.<br /> <br />
-        #
-        #   Nutzen Sie außerdem Absätze, um Ihren Text lesbarer zu machen. (Viele
-        #   Nutzer lesen Ihren Text auf mobilen Geräten.) <br /> <br />
-        #
-        #   Beschränken Sie Ihren Inhalt – sofern möglich – auf maximal drei Absätze. <br /> <br />
-        #
-        #   Verwenden Sie überdies – wenn passend – Aufzählungen und Stichpunkte für eine bessere
-        #   Übersichtlichkeit.
-        # "
+        description_placeholder_html: "
+          Beschreiben Sie hier Ihren Beitrag. Folgendes Vorgehen hat sich bewährt:<br /><br />
+          Beginnen Sie mit einer allgemeinen Beschreibung Ihrer Idee und stellen Sie im Anschluss dar, was sich mit der Umsetzung Ihres Vorschlags verbessern würde.<br /><br />
+          Achten Sie beim Schreiben möglichst auf kurze Sätze.<br /><br />
+          Nutzen Sie außerdem Absätze, um Ihren Text lesbarer zu machen. (Viele Nutzer lesen Ihren Text auf mobilen Geräten.)<br /><br />
+          Beschränken Sie Ihren Inhalt – sofern möglich – auf maximal drei Absätze.<br /><br />
+          Verwenden Sie überdies – wenn passend – Aufzählungen und Stichpunkte für eine bessere Übersichtlichkeit.
+        "
         buttons:
           save_draft: Als Entwurf speichern
           publish: Jetzt veröffentlichen
@@ -52,6 +42,13 @@ de:
         empty_list_text: Derzeit keine verknüpften Beiträge
 
       show:
+        community_section:
+          title: Beteiligen Sie sich
+          description: Für diesen Vorschlag gibt es bereits einen Arbeitskreis, der sich mit der Umsetzung des Vorschlags beschäftigt.
+          description_create_first:  Erstellen Sie einen Arbeitskreis, der sich mit der Umsetzung des Vorschlags beschäftigt.
+          comments_count: Kommentare
+          topics_count: Themen
+          particapated_users_count: Teilnehmende
         welcome_default_text:
           "%{author} hat einen Beitrag zu diesem Projekt gemacht, der Ihre Aufmerksamkeit benötigt. Sie können den Beitrag an der rechten Seitenleiste unterstützen, indem Sie ihm Ihre Stimme geben. Außerdem können Sie dem Beitrag folgen, um auf dem Laufenden zu bleiben. Die Karte hilft Ihnen dabei, den Beitrag in der Stadt zu verorten, des Weiteren haben Sie die Möglichkeit, den Beitrag zu kommentieren."
       proposal:

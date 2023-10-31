@@ -3,17 +3,20 @@
     <div class="user-resource-image-upload--placeholder">
       <div class="user-resource-image-upload--placeholder-inner">
         <div class="user-resource-image-upload--text">
-          Beiträge mit aussagekräftigem Bild erhalten durchschnittlich 34% mehr Unterstützung
+          <%= t("custom.#{i18n_scope}.form.image_upload.top_line",
+                default: t("custom.user_resources.image_upload.top_line_default")) %>
         </div>
         <div class="user-resource-image-upload--label">
           <div class="user-resource-image-upload--plus">
             +
           </div>
           <div class="user-resource-image-upload--label-title">
-            Bild hinzufügen
+            <%= t("custom.#{i18n_scope}.form.image_upload.title",
+                  default: t("custom.user_resources.image_upload.title_default")) %>
           </div>
           <div class="user-resource-image-upload--hint">
-            Am besten eignet sich ein Bild im Format 490 x 290 Pixel
+            <%= t("custom.#{i18n_scope}.form.image_upload.bottom_line",
+                  default: t("custom.user_resources.image_upload.bottom_line_default")) %>
           </div>
         </div>
       </div>

@@ -10,11 +10,11 @@
     <% end %>
 
     <% labels_and_sentiments_html = capture do %>
-      <%= render Shared::SidebarCardComponent.new(title: "Labels", opened_on_mobile: true, icon_name: "tag", class_name: "js-sidebar-label-section hide") do |c| %>
+      <%= render Shared::SidebarCardComponent.new(title: "Labels", opened_on_mobile: true, icon_name: "tag", class_name: "js-sidebar-label-section hide js-projekt-labels-selector") do |c| %>
         <%= render partial: "shared/projekt_selector/projekt_labels", locals:	{ f: f, model: resource } %>
       <% end %>
 
-      <%= render Shared::SidebarCardComponent.new(title: "Sentiments", opened_on_mobile: true, icon_name: "heart", class_name: "js-sidebar-sentiment-section hide") do |c| %>
+      <%= render Shared::SidebarCardComponent.new(title: "Sentiments", opened_on_mobile: true, icon_name: "heart", class_name: "js-sidebar-sentiment-section hide js-sentiments-selector") do |c| %>
         <%= render partial: "shared/projekt_selector/sentiments", locals:	{ f: f, model: resource } %>
       <% end %>
     <% end %>
@@ -197,7 +197,7 @@
           <%= translations_form.text_area :description,
             maxlength: max_description_lenght,
             label: false,
-            data: { placeholder: t("custom.user_resources.form.description_placeholder_html") },
+            data: { placeholder: t("custom.#{i18n_scope}.form.description_placeholder_html") },
             class: "html-area #{helpers.ck_editor_class(current_user)}" %>
         <% end %>
         <% if render_map? %>
@@ -216,7 +216,7 @@
           </div>
         <% end %>
 
-        <div class="js-remove-on-desktop-section">
+        <div class="js-remove-on-desktop-section hide-on-desktop">
           <%= sidebar_html %>
         </div>
 
@@ -249,7 +249,7 @@
         </div>
       </div>
 
-      <div class="js-remove-on-mobile-section">
+      <div class="js-remove-on-mobile-section hide-on-mobile">
         <%= sidebar_html %>
       </div>
     </div>

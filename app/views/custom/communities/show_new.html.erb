@@ -1,0 +1,22 @@
+<main class="communities-show">
+
+  <div class="flex-layout">
+    <div class="main-column">
+      <%= render ResourcePage::BannerComponent.new(resource: @resource) %>
+
+      <%= render(
+        Shared::ResourcesListComponent.new(
+          resources: @topics,
+          resource_type: Topic,
+          current_filter: @current_order,
+          filter_param: "order",
+          text_search_enabled: true,
+          filters: @valid_orders,
+          hide_title: true,
+          empty_list_text: "No topics")) %>
+      <%= paginate @topics %>
+    </div>
+  </div>
+</main>
+
+<%= render "subnav" %>

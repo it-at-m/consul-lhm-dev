@@ -59,25 +59,9 @@ body.custom-new-design {
   }
 
   // .column:not(div#page-content .column) {
-  .column {
-    padding: 0;
-  }
-}
-
-
-// Unset column customization for custum html
-body.custom-new-design {
-  #page-content {
-    .column, .columns {
-      padding-right: 0.625rem;
-      padding-left: 0.625rem;
-
-      @media print, screen and (min-width: 40em) {
-        padding-right: 0.9375rem;
-        padding-left: 0.9375rem;
-      }
-    }
-  }
+  // .column {
+  //   padding: 0;
+  // }
 }
 
 .custom-new-design {

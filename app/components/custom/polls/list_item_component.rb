@@ -14,7 +14,7 @@ class Polls::ListItemComponent < ApplicationComponent
       title: poll.title,
       description: poll.summary,
       url: helpers.poll_path(poll),
-      image_url: poll.image&.variant(:medium),
+      image_url: poll.image&.variant(:card_thumb),
       image_placeholder_icon_class: "fa-vote-yea"
     }
   end

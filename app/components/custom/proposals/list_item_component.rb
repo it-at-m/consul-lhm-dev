@@ -20,8 +20,7 @@ class Proposals::ListItemComponent < ApplicationComponent
       url: helpers.proposal_path(proposal),
       image_url: proposal.image&.variant(:card_thumb),
       image_placeholder_icon_class: "fa-lightbulb",
-      no_footer_bottom_padding: true,
-      author: proposal.author
+      no_footer_bottom_padding: true
     }
   end
 

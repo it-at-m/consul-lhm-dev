@@ -6,21 +6,19 @@ class Resources::ListItemComponent < ApplicationComponent
   renders_many :additional_body_sections
   renders_many :footer_sections
 
-  DATE_FORMAT = "%d.%m.%Y".freeze
-
   def initialize(
     title:,
     description:,
     resource: nil,
     projekt: nil,
     image_url: nil,
-    author: nil,
     subline: nil,
     url: nil,
     tags: [],
     image_placeholder_icon_class: "fa-file",
     header_style: nil,
     narrow_header: false,
+    date: nil,
     no_footer_bottom_padding: false
   )
     @title = title
@@ -28,13 +26,13 @@ class Resources::ListItemComponent < ApplicationComponent
     @description = description
     @resource = resource
     @image_url = image_url
-    @author = author
     @url = url
     @subline = subline
     @tags = tags
     @image_placeholder_icon_class = image_placeholder_icon_class
     @header_style = header_style
     @narrow_header = narrow_header
+    @date = date
     @no_footer_bottom_padding = no_footer_bottom_padding
   end
 
@@ -44,6 +42,10 @@ class Resources::ListItemComponent < ApplicationComponent
 
     if @wide
       class_name += " -wide"
+    end
+
+    if header.blank?
+      class_name += " -no-header"
     end
 
     class_name
@@ -56,7 +58,9 @@ class Resources::ListItemComponent < ApplicationComponent
   end
 
   def date
-    @date&.strftime(DATE_FORMAT)
+    return if @date.blank?
+
+    l(@date, format: :date_only)
   end
 
   def truncate_length
@@ -71,5 +75,18 @@ class Resources::ListItemComponent < ApplicationComponent
     if @narrow_header
       "-narrow"
     end
+  end
+
+  def show_author_name?
+    @resource.is_a?(Debate) ||
+      @resource.is_a?(Proposal) ||
+      @resource.is_a?(Budget::Investment) ||
+      @resource.is_a?(DeficiencyReport)
+  end
+
+  def on_behalf_of?
+    return unless show_author_name?
+
+    @resource.on_behalf_of.present?
   end
 end

@@ -15,10 +15,9 @@ class Debates::ListItemComponent < ApplicationComponent
       description: debate.description,
       tags: debate.tags.first(3),
       url: helpers.debate_path(debate),
-      image_url: debate.image&.variant(:medium),
+      image_url: debate.image&.variant(:card_thumb),
       image_placeholder_icon_class: "fa-comments",
-      no_footer_bottom_padding: true,
-      author: debate.author
+      no_footer_bottom_padding: true
     }
   end
 
