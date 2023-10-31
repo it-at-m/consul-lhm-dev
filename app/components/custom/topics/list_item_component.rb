@@ -16,7 +16,6 @@ class Topics::ListItemComponent < ApplicationComponent
       date: topic.created_at,
       subline: "#{topic.comments_count} kommentare",
       image_placeholder_icon_class: "fa-users",
-      no_footer_bottom_padding: true
     }
   end
 end

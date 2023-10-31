@@ -44,6 +44,10 @@ class Resources::ListItemComponent < ApplicationComponent
       class_name += " -wide"
     end
 
+    if header.blank?
+      class_name += " -no-header"
+    end
+
     class_name
   end
 

@@ -16,20 +16,6 @@
           empty_list_text: "No topics")) %>
       <%= paginate @topics %>
     </div>
-    <aside class="sidebar">
-
-      <%= render(Shared::SidebarCardComponent.new(title: t("community.show.sidebar.participate"), icon_name: "user", opened_on_mobile: true)) do |c| %>
-        <%= link_to t("community.show.sidebar.new_topic"), create_topic_link(@community), class: "button expanded" %>
-      <% end %>
-
-      <% if @community.proposal&.polls&.current&.any? %>
-        <h2><%= t("communities.show.surveys") %></h2>
-        <%= link_to t("communities.show.complete_survey"),
-                    proposal_poll_path(@community.proposal,
-                                       @community.proposal.polls.current.first),
-                    class: "button expanded hollow" %>
-      <% end %>
-    </aside>
   </div>
 </main>
 
