@@ -16,7 +16,7 @@
         <%= render(
           Shared::FilterDropdownComponent.new(
             title: "Sortieren nach",
-            anchor: "footer-content",
+            anchor: @anchor,
             options: helpers.valid_orders,
             selected_option: helpers.current_order,
             i18n_namespace: "comments.orders",

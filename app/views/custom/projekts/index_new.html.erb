@@ -22,6 +22,8 @@
 
       <%= paginate @projekts %>
 
+      <div id="comments" class="margin-bottom"></div>
+
       <% if @show_comments %>
         <div id="projekt_comments">
           <%= render Shared::NewCommentsComponent.new(@commentable, @comment_tree, remote_url: footer_comments_projekts_path) %>

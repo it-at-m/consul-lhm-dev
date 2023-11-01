@@ -1,0 +1,44 @@
+<main class="topic-show">
+  <div class="flex-layout">
+    <div class="main-column">
+      <div class="back margin-bottom">
+        <%= back_link_to community_path(@community), t("community.show.back",
+                                                       community: community_text(@community),
+                                                       proposal: community_title(@community)) %>
+      </div>
+
+      <%= render ResourcePage::BannerComponent.new(resource: @community.proposal) %>
+      <div class="main-content-card margin-bottom">
+        <h1><%= @topic.title %></h1>
+        <div class="topic-info">
+          <%= render "/shared/author_info", resource: @topic %>
+
+          <span class="bullet">&nbsp;&bull;&nbsp;</span>
+          <%= l(@topic.created_at.to_date) %>
+          <span class="bullet">&nbsp;&bull;&nbsp;</span>
+          <span class="icon-comments"></span>&nbsp;
+          <%= link_to t("community.show.topic.comments", count: @topic.comments_count),
+            community_topic_path(@community, @topic, anchor: "comments") %>
+        </div>
+        <br>
+        <p><%= @topic.description %></p>
+      </div>
+      <%= render Shared::NewCommentsComponent.new(@topic, @comment_tree) %>
+    </div>
+
+    <% if @topic.author == current_user %>
+      <aside class="sidebar">
+        <%= render(Shared::SidebarCardComponent.new(title: t("community.show.author"), icon_name: "user", opened_on_mobile: true)) do |c| %>
+          <%= link_to t("community.show.topic.edit"),
+            edit_community_topic_path(@community.id, @topic),
+            class: "button hollow expanded" %>
+
+          <%= link_to t("community.show.topic.destroy"),
+                    community_topic_path(@community.id, @topic), method: :delete,
+                    class: "button hollow expanded alert" %>
+        <% end %>
+      </aside>
+    <% end %>
+  </div>
+
+</main>

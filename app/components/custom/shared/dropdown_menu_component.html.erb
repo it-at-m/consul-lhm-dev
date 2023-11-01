@@ -3,12 +3,12 @@
     <%= selected_option.presence || options.first %>
   </div>
   <div class="dropdown-menu">
-    <ul>
+    <div>
       <% options.each do |option| %>
-        <li class="js-dropdown-item <%= @item_css_class %>" >
+        <div class="js-dropdown-item dropdown-item <%= @item_css_class %>" >
           <%= option %>
-        </li>
+        </div>
       <% end %>
-    </ul>
+    </div>
   </div>
 </div>

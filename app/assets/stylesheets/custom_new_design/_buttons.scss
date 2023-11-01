@@ -27,12 +27,14 @@
       color: white;
     }
 
+    $grey-button-color: #c0cedb;
+
     &.-grey {
-      background: #c0cedb;
+      background: $grey-button-color;
       color: black;
 
       &:hover {
-        background-color: #d1deeb;
+        background-color: lighten($grey-button-color, 15%)
       }
     }
 

@@ -13,7 +13,10 @@
   .projekt-group {
     .projekt {
       &:hover {
-        background-color: var(--dropdown-hover-color);
+        background-color: $dropdown-hover-color;
+      }
+      &:active, &:focus {
+        background-color: $dropdown-active-color;
       }
     }
   }
@@ -88,7 +91,10 @@
       font-size: 15px;
 
       &:hover {
-        background-color: var(--dropdown-hover-color);
+        background-color: $dropdown-hover-color;
+      }
+      &:active, &:focus {
+        background-color: $dropdown-active-color;
       }
     }
 

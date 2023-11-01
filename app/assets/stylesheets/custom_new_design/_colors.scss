@@ -14,9 +14,5 @@ $success-color: #3adb76;
 $warning-color: #ffae00;
 
 $main-text-color: #67788A;
-
-
-:root {
-  --dropdown-hover-color: #f2f2f2;
-  --dropdown-active-color: #eaeaea;
- }
+$dropdown-hover-color: #f2f2f2;
+$dropdown-active-color: darken(#f2f2f2, 2%);

@@ -59,7 +59,7 @@ de:
       most_voted: Am besten bewertet
       newest: Neueste zuerst
       oldest: Älteste zuerst
-      most_commented: meist kommentiert
+      most_commented: Meist kommentiert
     select_order: Sortieren nach
     show:
       return_to_commentable: "Zurück zu"

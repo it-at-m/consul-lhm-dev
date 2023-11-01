@@ -8,24 +8,7 @@
   </div>
 
   <%= render Shared::SidebarCardComponent.new(title: "Nutzer*innen", icon_name: "users") do |c| %>
-    <div class="system-users-list">
-      <div class="system-users-list--title">
-        <%= number_with_delimiter(User.count,  delimiter: ".") %> Nutzer*innen
-      </div>
-      <div class="system-users-list--images">
-        <% User.last(5).each do |user| %>
-          <% if user.image.present? %>
-            <div class="system-users-list--image">
-              <%= image_tag(user.image&.variant(:thumb)) %>
-            </div>
-          <% else %>
-            <div class="system-users-list--image">
-              <%= user&.first_letter_of_name %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
+    <%= render(Sidebar::UsersListComponent.new(users: User.all)) %>
   <% end %>
 
   <%# <%= render Shared::SidebarCardComponent.new(title: 'Aktivität | letzte 7 Tage', icon_name: "info-circle") do |c| %>
