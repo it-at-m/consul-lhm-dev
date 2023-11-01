@@ -1,0 +1,28 @@
+<%= link_to t("custom.admin.deficiency_reports.areas.index.create"),
+              new_admin_deficiency_report_area_path, class: "button float-right" %>
+
+<h2 class="inline-block"><%= t("custom.admin.deficiency_reports.areas.index.title") %></h2>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= t("custom.admin.deficiency_reports.areas.area.name") %></th>
+      <th><%= t("admin.actions.actions") %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @areas.each do |area| %>
+      <tr>
+        <td><%= area.name %></td>
+        <td>
+          <%= render Admin::TableActionsComponent.new(area,
+                                                      actions: [:edit, :destroy],
+                                                      edit_path: edit_admin_deficiency_report_area_path(area),
+                                                      destroy_path: admin_deficiency_report_area_path(area)
+                                                     ) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

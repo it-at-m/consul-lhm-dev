@@ -62,6 +62,14 @@ class Admin::MenuComponent < ApplicationComponent
       ]
     end
 
+    def deficiency_report_areas
+      [
+        t("custom.admin.menu.deficiency_reports.areas"),
+        admin_deficiency_report_areas_path,
+        controller_name == "areas" && controller.class.parent == Admin::DeficiencyReports
+      ]
+    end
+
     def projekt_managers_link
       [
         t("custom.admin.menu.projekt_managers"),

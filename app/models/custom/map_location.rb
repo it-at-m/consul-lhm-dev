@@ -4,6 +4,8 @@ class MapLocation < ApplicationRecord
   belongs_to :projekt, touch: true
   belongs_to :deficiency_report, touch: true
   belongs_to :projekt_phase, touch: true
+  belongs_to :deficiency_report_area, class_name: "DeficiencyReport::Area",
+    foreign_key: :deficiency_report_area_id, touch: true, inverse_of: :map_location
 
   before_save :ensure_shape_is_json
   # before_save :set_pin_styles

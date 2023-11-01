@@ -116,6 +116,7 @@ namespace :admin do
       end
     end
     resources :settings, only: :index
+    resources :areas, except: :show
   end
 
   resources :deficiency_reports, only: [:index, :show] do
