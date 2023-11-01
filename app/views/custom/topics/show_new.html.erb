@@ -7,6 +7,12 @@
                                                        proposal: community_title(@community)) %>
       </div>
 
+      <h1>
+        Thema kommentieren
+      </h1>
+      <div class="resource-page--intro-text">
+        Jeder Kommentar ist wertvoll, fördert die Diskussion und damit den Erkenntnisgewinn. Schauen Sie kurz in den bisherigen Kommentaren, ob es Ihr Feedback in ähnlicher Form bereits gibt, um Wiederholungen zu vermeiden.
+      </div>
       <%= render ResourcePage::BannerComponent.new(resource: @community.proposal) %>
       <div class="main-content-card margin-bottom">
         <h1><%= @topic.title %></h1>
