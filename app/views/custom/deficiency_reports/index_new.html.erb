@@ -62,7 +62,7 @@
       </div>
 
       <% if @areas.any? %>
-        <%= render Shared::SidebarCardComponent.new(title: t("custom.deficiency_reports.index.sidebar.area.title"), icon_name: "earth-europe") do |c| %>
+        <%= render Shared::SidebarCardComponent.new(title: t("custom.deficiency_reports.index.sidebar.areas.title"), icon_name: "map-pin") do |c| %>
 
           <ul class='deficiency-reports-sidebar-filter '>
             <li <%= "class=label-selected" if @selected_area.nil? %>>

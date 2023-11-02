@@ -5,14 +5,15 @@ en:
         page_description: Thank you for reporting a deficiency! You will help us to stop this as quickly as possible. Please describe in as much detail as possible what you noticed.
           Typical deficiencies include road damage or damaged park benches.
         title_placeholder: Give your report a catchy title, for example “Zebra crossing in front of the XY primary school” or “More diversity at the weekly markets”.
-        description_placeholder_html: "Describe the deficiency here. The following procedure has proven successful:<br><br>
-          Start with a general description of your suggestion and then show what would improve with the implementation of your suggestion.<br><br>
-          When writing, keep sentences as short as possible.<br><br>
-          Also use paragraphs to make your text more readable. (Many users read your text on mobile devices.)<br><br>
-          If possible, limit your content to a maximum of three paragraphs.<br><br>
-          If appropriate, use bullet points and bullet points for better clarity."
+        description_placeholder_html: "Describe the deficiency you would like to report here.<br><br>
+          Details help the city administration to find the deficiency and eliminate it quickly.<br></br>
+          For example, if you know the number of the broken street lamp, then feel free to provide it.<br></br>
+          Please do not provide any personal information from third parties such as addresses."
         map:
           hint: Place a pin on the map to precisely locate the deficiency.
+        area:
+          title: Location
+          description: "Please assign your report to a location:"
         category:
           title: Category
           description: Please assign a category to your report
@@ -64,6 +65,13 @@ en:
         seo:
           title: Deficiency Reports
         sidebar:
+          approval_status_filter:
+            all_reports: Alle Reports
+            reports_to_approve: Released Reports
+            title: Admin
+          areas:
+            title: Areas
+            all_areas: Alle Meldungen
           categories:
             filter_button: Filter categories
             title: Categories

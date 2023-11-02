@@ -11,6 +11,9 @@ de:
           Bitte nennen Sie keine persönlichen Daten von Dritten wie zum Beispiel Adressen."
         map:
           hint: Setzen Sie einen Pin auf der Karte, um den Mangel genau zu verorten.
+        area:
+          title: Städte & Gemeinden
+          description: "Bitte ordnen Sie Ihre Meldung einem Ort zu:"
         category:
           title: Kategorie
           description: "Bitte ordnen Sie Ihr Meldung einer Kategorie zu:"
@@ -67,6 +70,9 @@ de:
             all_reports: Alle Meldungen
             reports_to_approve: Freizugebende Meldungen
             title: Admin
+          areas:
+            title: Städte & Gemeinden
+            all_areas: Alle Meldungen
           categories:
             filter_button: Kategorien filtern
             title: Kategorien
