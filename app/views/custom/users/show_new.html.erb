@@ -13,8 +13,14 @@
               new_user_direct_message_path(@user),
               class: "button" %>
           <% else %>
-            <div class="callout primary float-right">
+            <div class="callout primary">
               <%= t("users.show.no_private_messages") %>
+            </div>
+          <% end %>
+
+          <% if current_user&.administrator? %>
+            <div>
+              <%= @user.email %>
             </div>
           <% end %>
         <% end %>
