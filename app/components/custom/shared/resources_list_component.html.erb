@@ -49,13 +49,9 @@
   <%= body %>
 <% else %>
   <div class="resources-list js-resources-list <%= class_names %>">
-    <% unless @hide_title %>
+    <% if @title.present? %>
       <h3 class="resources-list--title">
-        <% if @title_link.present? %>
-          <%= link_to(@title, @title_link) %>
-        <% elsif @title.present? %>
-          <%= @title %>
-        <% end %>
+        <%= @title %>
       </h3>
     <% end %>
 

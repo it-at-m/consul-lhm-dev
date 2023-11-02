@@ -11,7 +11,6 @@ class Shared::ResourcesListComponent < ApplicationComponent
     resources: nil,
     resource_type: nil,
     title: nil,
-    title_link: nil,
     filters: nil,
     current_filter: nil,
     filter_param: nil,
@@ -31,7 +30,6 @@ class Shared::ResourcesListComponent < ApplicationComponent
     @resources = resources
     @resource_type = resource_type
     @title = title
-    @title_link = title_link
     @filters = filters
     @current_filter = current_filter
     @remote_url = remote_url
