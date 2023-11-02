@@ -43,7 +43,7 @@ class ProjektsController < ApplicationController
       set_variables_for_footer_comments
     end
 
-    @projekts = @projekts.select { |p| p.visible_for?(current_user) }
+    @projekts = @projekts.select { |p| p.visible_for?(current_user) }.sort_by(&:created_at).reverse
     @projekts = Kaminari.paginate_array(@projekts).page(params[:page]).per(25)
 
     if Setting.new_design_enabled?

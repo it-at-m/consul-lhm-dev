@@ -21,7 +21,11 @@ class WelcomeController < ApplicationController
     @restricted_geozones = []
 
     @active_projekts = @active_feeds.include?("active_projekts") ? @feeds.find{ |feed| feed.kind == 'active_projekts' }.active_projekts : []
+    @active_projekts = @active_projekts.sort_by(&:created_at).reverse
+
     @expired_projekts = @active_feeds.include?("expired_projekts") ? @feeds.find{ |feed| feed.kind == 'expired_projekts' }.expired_projekts : []
+    @expired_projekts = @expired_projekts.sort_by(&:created_at).reverse
+
     @latest_polls = @active_feeds.include?("polls") ? filtered_items(@feeds.find { |feed| feed.kind == 'polls' }) : []
 
     @active_projekts_map_locations = all_projekts_map_locations(@active_projekts.pluck(:id))

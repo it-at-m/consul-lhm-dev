@@ -19,7 +19,8 @@ class Admin::MenuComponent < ApplicationComponent
     end
 
     def deficiency_reports?
-      ( %w[officers categories statuses settings].include?(controller_name) && controller.class.parent == Admin::DeficiencyReports )
+      %w[officers categories statuses settings areas].include?(controller_name) &&
+        controller.class.parent == Admin::DeficiencyReports
     end
 
     def deficiency_reports_list

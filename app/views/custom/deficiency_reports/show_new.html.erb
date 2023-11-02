@@ -97,15 +97,6 @@
           <% end %>
         <% end %>
 
-        <%= render(Shared::SidebarCardComponent.new(title: t("proposals.show.share"), icon_name: "share")) do |c| %>
-          <%= render "shared/social_share",
-            share_title: t("proposals.show.share"),
-            title: @deficiency_report.title,
-            url: deficiency_report_url(@deficiency_report),
-            description: @deficiency_report.title,
-            mobile: @deficiency_report.title %>
-        <% end %>
-
         <% if current_user && ( current_user.administrator? || current_user.deficiency_report_officer? ) %>
           <%= render(Shared::SidebarCardComponent.new(
             title: t("custom.deficiency_reports.show.officer.title"),
@@ -126,6 +117,15 @@
             icon_name: "user-edit")) do |c| %>
             <%= render "deficiency_reports/author_actions", deficiency_report: @deficiency_report %>
           <% end %>
+        <% end %>
+
+        <%= render(Shared::SidebarCardComponent.new(title: t("proposals.show.share"), icon_name: "share")) do |c| %>
+          <%= render "shared/social_share",
+            share_title: t("proposals.show.share"),
+            title: @deficiency_report.title,
+            url: deficiency_report_url(@deficiency_report),
+            description: @deficiency_report.title,
+            mobile: @deficiency_report.title %>
         <% end %>
       </aside>
     </div>
