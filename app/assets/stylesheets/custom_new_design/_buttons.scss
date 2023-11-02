@@ -58,15 +58,15 @@ $green-button-color: #00AA0B;
     }
 
     &.-green {
-      background: $grey-button-color;
+      background: $green-button-color;
       color: white;
 
       &:hover, &:focus {
-        background-color: lighten($grey-button-color, 5%)
+        background-color: lighten($green-button-color, 5%)
       }
 
       &:active {
-        background-color: lighten($grey-button-color, 7%)
+        background-color: lighten($green-button-color, 7%)
       }
     }
 

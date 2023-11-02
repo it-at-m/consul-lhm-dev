@@ -22,7 +22,6 @@ class Shared::ResourcesListComponent < ApplicationComponent
     empty_list_text: nil,
     filter_i18n_namespace: nil,
     hide_actions: false,
-    hide_title: false,
     only_content: false,
     text_search_enabled: false,
     hide_view_mode_button: false,
@@ -44,7 +43,6 @@ class Shared::ResourcesListComponent < ApplicationComponent
     @empty_list_text = empty_list_text
     @filter_param = filter_param
     @filter_title = filter_title.presence || "Sortieren nach"
-    @hide_title = hide_title
     @hide_actions = hide_actions
     @hide_view_mode_button = hide_view_mode_button
     @projekt_phase = projekt_phase
