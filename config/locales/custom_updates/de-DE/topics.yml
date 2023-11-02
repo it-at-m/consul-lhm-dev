@@ -2,7 +2,7 @@ de:
   custom:
     topics:
       list:
-        no_topics: Keine Beiträge
+        empty_list_text: Keine Beiträge
         orders:
           most_voted: Am besten bewertet
           newest: Neueste zuerst

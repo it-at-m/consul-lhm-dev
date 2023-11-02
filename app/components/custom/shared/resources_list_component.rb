@@ -18,7 +18,6 @@ class Shared::ResourcesListComponent < ApplicationComponent
     map_location: nil,
     map_coordinates: nil,
     filter_title: nil,
-    empty_list_text: nil,
     filter_i18n_namespace: nil,
     hide_actions: false,
     only_content: false,
@@ -38,7 +37,6 @@ class Shared::ResourcesListComponent < ApplicationComponent
     @map_coordinates = map_coordinates
     @text_search_enabled = text_search_enabled
     @filter_i18n_namespace = filter_i18n_namespace
-    @empty_list_text = empty_list_text
     @filter_param = filter_param
     @filter_title = filter_title.presence || "Sortieren nach"
     @hide_actions = hide_actions
@@ -73,11 +71,11 @@ class Shared::ResourcesListComponent < ApplicationComponent
     if resource_type == Projekt
       "custom.projekts"
     elsif resource_type == Debate
-      "debates.index"
+      "custom.debates.index"
     elsif resource_type == Proposal
-      "proposals.index"
+      "custom.proposals.index"
     elsif resource_type == Budget::Investment
-      "budgets.investments.index"
+      "custom.budgets.investments.index"
     elsif resource_type == Poll
       "custom.polls.index"
     elsif resource_type == DeficiencyReport
@@ -85,6 +83,10 @@ class Shared::ResourcesListComponent < ApplicationComponent
     elsif resource_type == Topic
       "custom.topics.list"
     end
+  end
+
+  def empty_list_text
+    t("empty_list_text", scope: i18n_namespace)
   end
 
   def switch_view_mode_icon

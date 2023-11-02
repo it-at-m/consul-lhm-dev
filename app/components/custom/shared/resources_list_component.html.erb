@@ -38,7 +38,7 @@
         <% end %>
       <% else %>
         <h4 class="resources-list--not-items-message text-center">
-          <%= @empty_list_text %>
+          <%= empty_list_text %>
         </h4>
       <% end %>
     </div>
@@ -76,7 +76,7 @@
               title: @filter_title,
               options: filters,
               selected_option: selected_filter_otpion,
-              i18n_namespace: "#{i18n_namespace}.#{@filter_param&.pluralize}",
+              i18n_namespace: "#{i18n_namespace}.#{@filter_param&.pluralize || "filters"}",
               url_param_name: @filter_param,
               remote_url: remote_url,
               in_projekt_footer_tab: @projekt_phase.present?

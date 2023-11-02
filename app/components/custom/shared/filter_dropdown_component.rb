@@ -62,10 +62,6 @@ class Shared::FilterDropdownComponent < ApplicationComponent
     end
   end
 
-  def title_for(option)
-    t("#{option}_title", scope: i18n_namespace)
-  end
-
   def footer_tab_back_button_url(option)
     if params[:projekt_phase_id].present?
       url_to_footer_tab([[@url_param_name, option]].to_h.symbolize_keys)

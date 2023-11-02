@@ -3,7 +3,7 @@ de:
     deficiency_reports:
       form:
         page_description: Vielen Dank, dass Sie einen Mangel melden! Sie helfen uns damit, diesen so schnell es geht abzustellen.
-          Bitte beschreiben Sie möglichst genau, was Ihnen aufgefallen ist. Typische Mängel sind zum Beispiel Straßenschäden oder beschädigte Parkbänke. 
+          Bitte beschreiben Sie möglichst genau, was Ihnen aufgefallen ist. Typische Mängel sind zum Beispiel Straßenschäden oder beschädigte Parkbänke.
         title_placeholder: Geben Sie dem Mangel, den Sie melden möchten, einen plakativen Titel wie zum Beispiel “Kaputte Straßenlaterne mit der Nummer 12345”.
         description_placeholder_html: "Beschreiben Sie hier den Mangel, den Sie melden möchten.<br><br>
           Details helfen der Stadtverwaltung, den Mangel aufzufinden und schnell zu beseitigen.<br></br>
@@ -40,6 +40,7 @@ de:
         new:
           submit_button: Mangel melden
       index:
+        empty_list_text: "Keine Ergebnisse"
         title: Mängelmelder
         welcome_default_text_html: In jeder Stadt kommt es dann und wann zu Mängeln – gut, wenn diese von aufmerksamen BürgerInnen gemeldet werden, um sie schnell zu beheben.
           Sie sehen auf dieser Seite, welche Mängel bereits gemeldet wurden. Die Karte hilft Ihnen dabei, den jeweiligen Mangel zu verorten.

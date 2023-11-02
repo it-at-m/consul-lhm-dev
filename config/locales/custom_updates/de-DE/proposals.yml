@@ -40,6 +40,31 @@ de:
           In der rechten Seitenleiste ermöglicht die Plattform eine gezielte Filterung nach Vorschlägen zu Projekten, in bestimmten Stadtgebieten oder nach Schlagworten.
         sidebar_information_default_text: Sie haben zu einem bestimmten Projekt einen eigenen Vorschlag? Mit einem Klick auf die Schaltfläche können Sie ihn einreichen.
         empty_list_text: Derzeit keine verknüpften Beiträge
+        search_form:
+          button: Suche
+          placeholder: Vorschläge durchsuchen...
+          title: Suche
+        orders:
+          confidence_score: Am besten bewertet
+          confidence_score_title: Am besten bewertet
+          created_at: Neueste zuerst
+          created_at_title: Neueste zuerst
+          hot_score: Aktivste
+          hot_score_title: Aktivste
+          most_commented: Am meisten kommentiert
+          most_commented_title: Am meisten kommentiert
+          relevance: Relevanz
+          relevance_title: Relevanz
+          archival_date: Archiviert
+          archival_date_title: Archiviert
+          recommendations: Empfehlungen
+          recommendations_title: Empfehlungen
+          alphabet: Alphabetisch
+          alphabet_title: Alphabetisch
+          random: Zufällig
+          random_title: Zufällig
+          votes_up: Am meisten gewählt
+          votes_up_title: Am meisten gewählt
 
       show:
         community_section:
