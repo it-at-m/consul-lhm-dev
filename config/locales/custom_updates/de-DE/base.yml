@@ -3,6 +3,7 @@ de:
     common:
       information: Information
       share: Teilen
+      back_to: "Zurück zu %{to}"
       fixed_tabs:
         content: Inhalt
         comments: Kommentare

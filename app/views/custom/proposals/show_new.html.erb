@@ -56,7 +56,7 @@
       <div class="main-column">
         <%= render ResourcePage::BannerComponent.new(resource: @proposal) %>
 
-        <div class="resource-page--description new-card">
+        <div class="resource-page--description new-card main-content-card">
           <%= auto_link_already_sanitized_html wysiwyg(@proposal.description) %>
         </div>
 

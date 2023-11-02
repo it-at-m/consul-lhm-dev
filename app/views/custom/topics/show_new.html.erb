@@ -1,32 +1,23 @@
 <main class="topic-show">
   <div class="flex-layout">
     <div class="main-column">
-      <div class="back margin-bottom">
-        <%= back_link_to community_path(@community), t("community.show.back",
-                                                       community: community_text(@community),
-                                                       proposal: community_title(@community)) %>
-      </div>
-
+      <%= back_link_to community_path(@community), t("community.show.back",
+                                                     community: community_text(@community),
+                                                     proposal: community_title(@community)) %>
       <h1>
         Thema kommentieren
       </h1>
       <div class="resource-page--intro-text">
         Jeder Kommentar ist wertvoll, fördert die Diskussion und damit den Erkenntnisgewinn. Schauen Sie kurz in den bisherigen Kommentaren, ob es Ihr Feedback in ähnlicher Form bereits gibt, um Wiederholungen zu vermeiden.
       </div>
-      <%= render ResourcePage::BannerComponent.new(resource: @community.proposal) %>
-      <div class="main-content-card margin-bottom">
-        <h1><%= @topic.title %></h1>
-        <div class="topic-info">
-          <%= render "/shared/author_info", resource: @topic %>
+    </div>
+  </div>
+  <div class="flex-layout">
+    <div class="main-column">
 
-          <span class="bullet">&nbsp;&bull;&nbsp;</span>
-          <%= l(@topic.created_at.to_date) %>
-          <span class="bullet">&nbsp;&bull;&nbsp;</span>
-          <span class="icon-comments"></span>&nbsp;
-          <%= link_to t("community.show.topic.comments", count: @topic.comments_count),
-            community_topic_path(@community, @topic, anchor: "comments") %>
-        </div>
-        <br>
+      <%= render ResourcePage::BannerComponent.new(resource: @community.proposal, compact: true) %>
+      <div class="new-card main-content-card margin-bottom">
+        <h3><%= @topic.title %></h1>
         <p><%= @topic.description %></p>
       </div>
       <%= render Shared::NewCommentsComponent.new(@topic, @comment_tree) %>
@@ -34,6 +25,7 @@
 
     <% if @topic.author == current_user %>
       <aside class="sidebar">
+        <%= render Sidebar::ResourceAuthorComponent.new(resource: @topic) %>
         <%= render(Shared::SidebarCardComponent.new(title: t("community.show.author"), icon_name: "user", opened_on_mobile: true)) do |c| %>
           <%= link_to t("community.show.topic.edit"),
             edit_community_topic_path(@community.id, @topic),

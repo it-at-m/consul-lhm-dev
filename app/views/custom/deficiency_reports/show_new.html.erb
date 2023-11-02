@@ -30,7 +30,7 @@
     <div class="flex-layout">
       <div class="main-column">
         <% if @deficiency_report.can_be_published? %>
-          <div class="resource-page--description new-card" style="background-color:#E3FCE7">
+          <div class="resource-page--description new-card main-content-card" style="background-color:#E3FCE7">
             <h3><%= t("custom.deficiency_reports.show.official_answer.title") %></h3>
             <%= AdminWYSIWYGSanitizer.new.sanitize(@deficiency_report.official_answer) %>
           </div>
@@ -38,7 +38,7 @@
 
         <%= render ResourcePage::BannerComponent.new(resource: @deficiency_report) %>
 
-        <div class="resource-page--description new-card">
+        <div class="resource-page--description new-card main-content-card">
           <%= auto_link_already_sanitized_html wysiwyg(@deficiency_report.description) %>
         </div>
 

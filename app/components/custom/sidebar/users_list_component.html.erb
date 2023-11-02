@@ -4,14 +4,12 @@
   </div>
   <div class="sidebar-users-list--images">
     <% @users.last(5).each do |user| %>
-      <% if user.image.present? %>
-        <div class="sidebar-users-list--image">
+      <%= link_to user, class: "sidebar-users-list--image" do %>
+        <% if user.image.present? %>
           <%= image_tag(user.image&.variant(:thumb)) %>
-        </div>
-      <% else %>
-        <div class="sidebar-users-list--image">
+        <% else %>
           <%= user&.first_letter_of_name %>
-        </div>
+        <% end %>
       <% end %>
     <% end %>
   </div>

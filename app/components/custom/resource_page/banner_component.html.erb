@@ -1,7 +1,9 @@
 <div class="resource-page-banner <%= resource_class %>" style="<%= banner_inline_style %>">
   <div class="resource-page-banner--text-section">
     <h2 class="resource-page-banner--title">
-      <%= resource.title %>
+      <%= link_to resource do %>
+        <%= resource.title %>
+      <% end %>
     </h2>
 
     <div class="resource-page-banner--details">
@@ -60,7 +62,7 @@
   </div>
 
   <% if resource.image.present? %>
-    <div class="resource-page-banner--image">
+    <%= link_to resource, class: "resource-page-banner--image" do %>
       <%= render(
         Shared::ResourceImageComponent.new(
           image_url: resource.image&.variant(:large),
@@ -68,6 +70,6 @@
           resource: resource
         )
       ) %>
-    </div>
+  <% end %>
   <% end %>
 </div>

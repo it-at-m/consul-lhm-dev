@@ -1,5 +1,7 @@
 <main class="topic-new">
-  <%= back_link_to community_path(@community) %>
+      <%= back_link_to community_path(@community), t("community.show.back",
+                                                     community: community_text(@community),
+                                                     proposal: community_title(@community)) %>
 
   <div class="flex-layout">
     <div class="main-column">
@@ -8,22 +10,13 @@
         Ein Arbeitskreis lebt von der Beteiligung seiner Teilnehmer. Sie möchten der Runde für das nachstehende Projekt ein neues Thema zur Diskussion bereitstellen? Dann beschreiben Sie anhand einer Überschrift und der Erläuterung Ihres Themas, worum es Ihnen geht. Jeder Beitrag ist wertvoll und hilft dabei, Klarheit über den Vorschlag zu gewinnen.
       </div>
       <div class="margin-bottom">
-        <%= render ResourcePage::BannerComponent.new(resource: @community.proposal) %>
+        <%= render ResourcePage::BannerComponent.new(resource: @community.proposal, compact: true) %>
       </div>
-      <div class="new-card">
-        <h3><%= t("community.topic.sidebar.recommendations_title") %></h2>
-        <ul class="recommendations">
-          <li><%= t("community.topic.sidebar.recommendation_one") %></li>
-          <li><%= t("community.topic.sidebar.recommendation_two") %></li>
-          <li><%= t("community.topic.sidebar.recommendation_three") %></li>
-        </ul>
+      <div class="new-card main-content-card">
         <%= render "form_new" %>
       </div>
     </div>
-
     <aside>
-
     </aside>
   </div>
-
 </main>
