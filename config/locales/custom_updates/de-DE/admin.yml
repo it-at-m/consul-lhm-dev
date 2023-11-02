@@ -98,6 +98,21 @@ de:
             color: Farbe
             icon: Icon
             title: Name
+        areas:
+          destroy:
+            cannot_be_destroyed: Sie können dieses Gebiet nicht löschen, da er mindestens einem Mangel zugewiesen ist.
+            destroyed_successfully: Der Gebiet wurde erfolgreich gelöscht.
+          edit:
+            editing: Gebiet bearbeiten
+          form:
+            submit_button: Speichern
+          index:
+            create: Gebiet erstellen
+            title: Gebiet
+          new:
+            creating: Neues Gebiet erstellen
+          area:
+            name: Name
       geozones:
         geozone:
           postal_codes: Postleitzahlen
@@ -140,6 +155,7 @@ de:
           reports: Mängel zuweisen
           settings: Funktionen
           statuses: Status definieren
+          areas: Areas
         deficiency_reports_title: Mängelmelder
         projekts: Projekte
         projekt_managers: Projektmanager*innen

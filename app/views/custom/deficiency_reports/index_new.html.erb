@@ -21,6 +21,7 @@
         Shared::ResourcesListComponent.new(
           resources: @deficiency_reports,
           resource_type: DeficiencyReport,
+          map_location: @map_location,
           map_coordinates: @deficiency_reports_coordinates,
           current_filter: @current_order,
           filter_param: "order",
@@ -59,6 +60,32 @@
             class: "button -orange", style: "display:inline-flex;" %>
         <% end %>
       </div>
+
+      <% if @areas.any? %>
+        <%= render Shared::SidebarCardComponent.new(title: t("custom.deficiency_reports.index.sidebar.areas.title"), icon_name: "map-pin") do |c| %>
+
+          <ul class='deficiency-reports-sidebar-filter '>
+            <li <%= "class=label-selected" if @selected_area.nil? %>>
+              <%= label_tag "area_0", class: "" do %>
+								<%= radio_button_tag(:area, 0, @selected_area.nil?, { class: "js-filter-by-deficiency-report-area" }) %>
+                <%= t("custom.deficiency_reports.index.sidebar.areas.all_areas") %>
+                <span class="checkmark"></span>
+              <% end %>
+            </li>
+
+            <%= collection_radio_buttons(nil, :area, @areas, :id, :name, { checked: @selected_area&.id }) do |rb| %>
+              <li <%= "class=label-selected" if @selected_area&.id == rb.object.id %>>
+                <%= rb.label class: "" do %>
+                  <%= rb.radio_button class: "js-filter-by-deficiency-report-area" %>
+                  <%= rb.text %>
+                  <span class="checkmark"></span>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+
+        <% end %>
+      <% end %>
 
       <%= render Shared::SidebarCardComponent.new(title: t("custom.deficiency_reports.index.sidebar.categories.title"), icon_name: "th-large") do |c| %>
         <%= render "deficiency_reports/sidebar/categories" %>

@@ -22,7 +22,16 @@ class DeficiencyReportsController < ApplicationController
       @current_order = "created_at"
     end
 
-    @all_deficiency_reports = DeficiencyReport.all
+    @areas = DeficiencyReport::Area.all.order(created_at: :asc)
+
+    if params[:dr_area].present?
+      @selected_area = DeficiencyReport::Area.find_by(id: params[:dr_area])
+      @map_location = @selected_area.map_location
+      @all_deficiency_reports = @selected_area.deficiency_reports
+    else
+      @all_deficiency_reports = DeficiencyReport.all
+    end
+
     @deficiency_reports = @all_deficiency_reports.send("sort_by_#{@current_order}").page(params[:page])
 
     @categories = DeficiencyReport::Category.all.order(created_at: :asc)
@@ -162,6 +171,7 @@ class DeficiencyReportsController < ApplicationController
                   :deficiency_report_status_id,
                   :deficiency_report_category_id,
                   :deficiency_report_officer_id,
+                  :deficiency_report_area_id,
                   map_location_attributes: map_location_attributes,
                   documents_attributes: document_attributes,
                   image_attributes: image_attributes]
@@ -203,5 +213,4 @@ class DeficiencyReportsController < ApplicationController
   def set_view
     @view = (params[:view] == "minimal") ? "minimal" : "default"
   end
-
 end
