@@ -23,16 +23,16 @@
           filter_param: "order",
           filters: @valid_orders,
           hide_title: true,
-          empty_list_text: "No topics")) %>
+          empty_list_text: t("custom.topics.list.no_topics"))) %>
       <%= paginate @topics %>
     </div>
     <aside class="sidebar">
 
-      <%= render(Shared::SidebarCardComponent.new(title: t("community.show.sidebar.participate"), icon_name: "user", opened_on_mobile: true)) do |c| %>
+      <%= render(Shared::SidebarCardComponent.new(title: t("custom.community.show.participate"), icon_name: "user", opened_on_mobile: true)) do |c| %>
         <%= link_to t("community.show.sidebar.new_topic"), create_topic_link(@community), class: "button expanded" %>
       <% end %>
 
-      <%= render(Shared::SidebarCardComponent.new(title: t("community.show.sidebar.participants"), icon_name: "user", opened_on_mobile: true)) do |c| %>
+      <%= render(Shared::SidebarCardComponent.new(title: t("custom.community.show.participants"), icon_name: "users", opened_on_mobile: true)) do |c| %>
         <%= render(Sidebar::UsersListComponent.new(users: @community.participants)) %>
       <% end %>
 

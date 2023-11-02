@@ -138,37 +138,28 @@
               icon_name: "users")
             ) do |c| %>
             <% if @proposal.community.topics.count > 0 %>
-              <div class="margin-bottom">
+              <div class="margin-bottom-10">
                 <%= t("custom.proposals.show.community_section.description") %>
               </div>
-              <div class="sidebar-card--count-line">
-                <div>
-                  <%= t("custom.proposals.show.community_section.particapated_users_count") %>
-                </div>
-                <div>
-                  <%= @proposal.community.participants_count %>
-                </div>
+              <div>
+                <%= @proposal.community.participants_count %>
+                <%= t("custom.proposals.show.community_section.particapated_users_count") %>
               </div>
-              <div class="sidebar-card--count-line">
-                <div>
-                  <%= t("custom.proposals.show.community_section.topics_count") %>
-                </div>
-                <div>
-                  <%= @proposal.community.comments_count %>
-                </div>
+              <div>
+                <%= @proposal.community.comments_count %>
+                <%= t("custom.proposals.show.community_section.topics_count") %>
               </div>
-              <div class="sidebar-card--count-line">
-                <div>
-                  <%= t("custom.proposals.show.community_section.comments_count") %>
-                </div>
-                <div>
-                  <%= @proposal.community.topics.count %>
-                </div>
+              <div>
+                <%= @proposal.community.topics.count %>
+                <%= t("custom.proposals.show.community_section.comments_count") %>
               </div>
+              <%= render(Sidebar::UsersListComponent.new(users: @proposal.community.participants, hide_count: true)) %>
+              <% participate_button_text = t("custom.community.sidebar.particapate") %>
             <% else %>
                 <%= t("custom.proposals.show.community_section.description_create_first") %>
+                <% participate_button_text = t("custom.community.sidebar.be_first") %>
             <% end %>
-            <%= link_to t("community.sidebar.button_to_access"), community_path(@proposal.community), class: "button hollow expanded" %>
+            <%= link_to participate_button_text, community_path(@proposal.community), class: "button" %>
           <% end %>
         <% end %>
 

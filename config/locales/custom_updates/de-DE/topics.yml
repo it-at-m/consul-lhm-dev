@@ -1,0 +1,10 @@
+de:
+  custom:
+    topics:
+      list:
+        no_topics: Keine Beiträge
+        orders:
+          most_voted: Am besten bewertet
+          newest: Neueste zuerst
+          oldest: Älteste zuerst
+          most_commented: Meist kommentiert
