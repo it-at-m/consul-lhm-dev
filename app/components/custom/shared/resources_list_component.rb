@@ -18,7 +18,6 @@ class Shared::ResourcesListComponent < ApplicationComponent
     remote_url: nil,
     map_location: nil,
     map_coordinates: nil,
-    css_class: nil,
     filter_title: nil,
     empty_list_text: nil,
     filter_i18n_namespace: nil,
@@ -40,7 +39,6 @@ class Shared::ResourcesListComponent < ApplicationComponent
     @only_content = only_content
     @map_location = map_location
     @map_coordinates = map_coordinates
-    @css_class = css_class
     @text_search_enabled = text_search_enabled
     @filter_i18n_namespace = filter_i18n_namespace
     @empty_list_text = empty_list_text
@@ -98,7 +96,7 @@ class Shared::ResourcesListComponent < ApplicationComponent
   end
 
   def proposal_resources_ids
-    @resources.select { |r| r.is_a?(Proposal)}.map(&:id)
+    @resources.select { |r| r.is_a?(Proposal) }.map(&:id)
   end
 
   def proposal_votes
