@@ -2,7 +2,8 @@ require_dependency Rails.root.join("app", "helpers", "content_blocks_helper").to
 
 module ContentBlocksHelper
   def render_custom_block(key, custom_prefix: nil, default_content: nil)
-    block = SiteCustomization::ContentBlock.custom_block_for(key, I18n.locale)
+    locale = current_user&.locale || I18n.default_locale
+    block = SiteCustomization::ContentBlock.custom_block_for(key, locale)
     block_body = block&.body.presence || default_content || ""
 
     if custom_prefix
@@ -32,23 +33,21 @@ module ContentBlocksHelper
   end
 
   def render_custom_content_block?(key)
-    content_block = SiteCustomization::ContentBlock.custom_block_for(key, I18n.locale)
+    locale = current_user&.locale || I18n.default_locale
+    content_block = SiteCustomization::ContentBlock.find_by(name: "custom", locale: locale, key: key)
 
-    (
-      (current_user.present? && current_user.administrator?) ||
-      content_block.present? && content_block.body.present?
-    )
+    return true if content_block&.body.present?
+
+    current_user&.administrator?
   end
 
   def render_custom_projekt_content_block?(key, projekt)
-    content_block = SiteCustomization::ContentBlock.custom_block_for(key, I18n.locale)
+    locale = current_user&.locale || I18n.default_locale
+    content_block = SiteCustomization::ContentBlock.find_by(name: "custom", locale: locale, key: key)
 
-    (
-      (current_user&.administrator? || (
-          current_user&.projekt_manager? && can?(:edit, @projekt)
-        )
-      ) || content_block&.body.present?
-    )
+    return true if content_block&.body.present?
+
+    current_user&.administrator? || current_user&.projekt_manager?(projekt)
   end
 
   def current_user_can_edit_content_block?
