@@ -95,7 +95,7 @@ class Users::LatestActivityComponent < ApplicationComponent
         current_filter: current_filter,
         filters: valid_filters,
         remote_url: "latest_activity",
-        filter_title: "Filtern nach",
+        filter_param: "filter",
         filter_i18n_namespace: "custom.welcome.latest_activity"
       }
 

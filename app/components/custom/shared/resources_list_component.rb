@@ -13,18 +13,15 @@ class Shared::ResourcesListComponent < ApplicationComponent
     title: nil,
     filters: nil,
     current_filter: nil,
-    filter_param: nil,
+    filter_param: "order",
     remote_url: nil,
     map_location: nil,
     map_coordinates: nil,
-    filter_title: nil,
     filter_i18n_namespace: nil,
-    hide_actions: false,
     only_content: false,
     text_search_enabled: false,
     hide_view_mode_button: false,
-    projekt_phase: nil,
-    additional_data: {}
+    projekt_phase: nil
   )
     @resources = resources
     @resource_type = resource_type
@@ -38,11 +35,16 @@ class Shared::ResourcesListComponent < ApplicationComponent
     @text_search_enabled = text_search_enabled
     @filter_i18n_namespace = filter_i18n_namespace
     @filter_param = filter_param
-    @filter_title = filter_title.presence || "Sortieren nach"
-    @hide_actions = hide_actions
     @hide_view_mode_button = hide_view_mode_button
     @projekt_phase = projekt_phase
-    @additional_data = additional_data
+  end
+
+  def filter_title
+    if @filter_param == "order"
+      "Sortieren nach"
+    elsif @filter_param == "filter"
+      "Filtern nach"
+    end
   end
 
   def wide?
@@ -123,7 +125,6 @@ class Shared::ResourcesListComponent < ApplicationComponent
       Budgets::Investments::ListItemComponent.new(
         budget_investment: resource,
         budget_investment_ids: resources.ids,
-        ballot: @additional_data[:ballot]
         # top_level_active_projekts: @additional_data[:top_level_active_projekts],
         # top_level_archived_projekts: @additional_data[:top_level_archived_projekts]
       )
