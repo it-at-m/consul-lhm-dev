@@ -20,7 +20,13 @@
   }
 
   .main-content-card {
-    padding: 35px 50px;
+    padding: 30px 50px;
+    // margin-bottom: 50px;
+    // margin-bottom: 30px;
+
+    h1 {
+      margin-top: 0;
+    }
   }
 
   @media (max-width: 1365px) {

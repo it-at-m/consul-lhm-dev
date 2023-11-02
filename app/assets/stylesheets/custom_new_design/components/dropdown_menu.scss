@@ -7,6 +7,7 @@
   z-index: 1000;
   position: relative;
   width: 107%;
+  border: 1px solid #d9d9d9b3;
 
   a {
     width: 100%;
@@ -38,40 +39,24 @@
     display: none;
     background-color: #ffffff;
     z-index: 100;
+    user-select: none;
 
-    ul {
-      list-style: none;
-      margin: 0;
-      overflow: hidden;
-      border-radius: 10px;
-      z-index: 10;
-      user-select: none;
-    }
-
-    ul {
-      list-style: none;
-      margin: 0;
-      overflow: hidden;
-      border-radius: 10px;
-      z-index: 10;
-      user-select: none;
-    }
-
-    li {
+    .dropdown-item {
       text-decoration: none;
       display: block;
-      font-size: 15px;
       transition: all ease-in-out 0.1s;
       cursor: pointer;
 
-      &:hover,
-      &:active,
-      &:focus {
-        background-color: var(--dropdown-hover-color);
+      &:hover {
+        background-color: $dropdown-hover-color;
+      }
+
+      &:active, &:focus {
+        background-color: $dropdown-active-color;
       }
 
       & > * {
-        padding: 5px 12px;
+        padding: 8px 12px;
       }
     }
 

@@ -2,7 +2,18 @@
 
   <div class="flex-layout">
     <div class="main-column">
-      <%= render ResourcePage::BannerComponent.new(resource: @resource) %>
+      <%= back_link_to @resource, t("custom.common.back_to", to: @resource.title) %>
+      <h1>
+        Arbeitskreis zum nachfolgendem Vorschlag
+      </h1>
+      <div class="resource-page--intro-text">
+        Für den nachfolgenden Vorschlag hat sich ein Arbeitskreis gebildet, um anhand unterschiedlicher Themen über Detailfragen zu beraten. Sie können einzelne Themen kommentieren oder selbst ein neues Thema einbringen, über das beraten wird.
+      </div>
+    </div>
+  </div>
+  <div class="flex-layout">
+    <div class="main-column">
+      <%= render ResourcePage::BannerComponent.new(resource: @resource, compact: true) %>
 
       <%= render(
         Shared::ResourcesListComponent.new(
@@ -10,13 +21,28 @@
           resource_type: Topic,
           current_filter: @current_order,
           filter_param: "order",
-          text_search_enabled: true,
           filters: @valid_orders,
           hide_title: true,
           empty_list_text: "No topics")) %>
       <%= paginate @topics %>
     </div>
+    <aside class="sidebar">
+
+      <%= render(Shared::SidebarCardComponent.new(title: t("community.show.sidebar.participate"), icon_name: "user", opened_on_mobile: true)) do |c| %>
+        <%= link_to t("community.show.sidebar.new_topic"), create_topic_link(@community), class: "button expanded" %>
+      <% end %>
+
+      <%= render(Shared::SidebarCardComponent.new(title: t("community.show.sidebar.participants"), icon_name: "user", opened_on_mobile: true)) do |c| %>
+        <%= render(Sidebar::UsersListComponent.new(users: @community.participants)) %>
+      <% end %>
+
+      <% if @community.proposal&.polls&.current&.any? %>
+        <h2><%= t("communities.show.surveys") %></h2>
+        <%= link_to t("communities.show.complete_survey"),
+                    proposal_poll_path(@community.proposal,
+                                       @community.proposal.polls.current.first),
+                    class: "button expanded hollow" %>
+      <% end %>
+    </aside>
   </div>
 </main>
-
-<%= render "subnav" %>

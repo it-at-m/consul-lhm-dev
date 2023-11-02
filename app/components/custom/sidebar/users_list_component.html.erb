@@ -1,0 +1,16 @@
+<div class="sidebar-users-list">
+  <div class="sidebar-users-list--title">
+    <%= number_with_delimiter(@users.size,  delimiter: ".") %> Nutzer*innen
+  </div>
+  <div class="sidebar-users-list--images">
+    <% @users.last(5).each do |user| %>
+      <%= link_to user, class: "sidebar-users-list--image" do %>
+        <% if user.image.present? %>
+          <%= image_tag(user.image&.variant(:thumb)) %>
+        <% else %>
+          <%= user&.first_letter_of_name %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

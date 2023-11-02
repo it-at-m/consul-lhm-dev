@@ -498,11 +498,11 @@ body.custom-new-design .wrapper > header .locale.locale-custom {
       cursor: pointer;
 
       &:hover {
-        background-color: var(--dropdown-hover-color);
+        background-color: $dropdown-hover-color;
       }
 
-      &:active {
-        background-color: var(--dropdown-active-color);
+      &:active, &:focus {
+        background-color: $dropdown-active-color;
       }
 
       a {

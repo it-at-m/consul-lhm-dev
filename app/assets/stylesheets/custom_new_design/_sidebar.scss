@@ -29,15 +29,15 @@
     margin-bottom: 8px;
   }
 
-  .system-users-list--title {
+  .sidebar-users-list--title {
     margin-bottom: 10px;
   }
 
-  .system-users-list--images {
+  .sidebar-users-list--images {
     display: flex;
   }
 
-  .system-users-list--image {
+  .sidebar-users-list--image {
     width: 40px;
     height: 40px;
     background: black;
@@ -51,23 +51,23 @@
     overflow: hidden;
   }
 
-  .system-users-list--image:first-child {
+  .sidebar-users-list--image:first-child {
     position: static;
   }
 
-  .system-users-list--image:nth-child(2) {
+  .sidebar-users-list--image:nth-child(2) {
     left: -15px;
   }
 
-  .system-users-list--image:nth-child(3) {
+  .sidebar-users-list--image:nth-child(3) {
     left: -30px;
   }
 
-  .system-users-list--image:nth-child(4) {
+  .sidebar-users-list--image:nth-child(4) {
     left: -45px;
   }
 
-  .system-users-list--image:nth-child(5) {
+  .sidebar-users-list--image:nth-child(5) {
     left: -60px;
   }
 
@@ -116,7 +116,7 @@
     }
 
     .sdg-goal-icon {
-      border-radius: 0;
+      // border-radius: 0;
       min-width: 58px;
     }
   }

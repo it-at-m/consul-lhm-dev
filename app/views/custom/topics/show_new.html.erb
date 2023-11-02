@@ -1,0 +1,42 @@
+<main class="topic-show">
+  <div class="flex-layout">
+    <div class="main-column">
+      <%= back_link_to community_path(@community), t("community.show.back",
+                                                     community: community_text(@community),
+                                                     proposal: community_title(@community)) %>
+      <h1>
+        Thema kommentieren
+      </h1>
+      <div class="resource-page--intro-text">
+        Jeder Kommentar ist wertvoll, fördert die Diskussion und damit den Erkenntnisgewinn. Schauen Sie kurz in den bisherigen Kommentaren, ob es Ihr Feedback in ähnlicher Form bereits gibt, um Wiederholungen zu vermeiden.
+      </div>
+    </div>
+  </div>
+  <div class="flex-layout">
+    <div class="main-column">
+
+      <%= render ResourcePage::BannerComponent.new(resource: @community.proposal, compact: true) %>
+      <div class="new-card main-content-card margin-bottom">
+        <h3><%= @topic.title %></h1>
+        <p><%= @topic.description %></p>
+      </div>
+      <%= render Shared::NewCommentsComponent.new(@topic, @comment_tree) %>
+    </div>
+
+    <% if @topic.author == current_user %>
+      <aside class="sidebar">
+        <%= render Sidebar::ResourceAuthorComponent.new(resource: @topic) %>
+        <%= render(Shared::SidebarCardComponent.new(title: t("community.show.author"), icon_name: "user", opened_on_mobile: true)) do |c| %>
+          <%= link_to t("community.show.topic.edit"),
+            edit_community_topic_path(@community.id, @topic),
+            class: "button hollow expanded" %>
+
+          <%= link_to t("community.show.topic.destroy"),
+                    community_topic_path(@community.id, @topic), method: :delete,
+                    class: "button hollow expanded alert" %>
+        <% end %>
+      </aside>
+    <% end %>
+  </div>
+
+</main>

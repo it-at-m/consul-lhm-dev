@@ -5,16 +5,14 @@
     <% end %>
   </div>
   <div class="sidebar-resource-author--info">
-    <%= link_to author_path do %>
-      <div class="sidebar-resource-author--avatar">
-        <% if show_user_avatar? %>
-          <%= image_tag(user.image&.variant(:popup)) %>
-        <% else %>
-          <div class="sidebar-resource-author--avatar-placeholder">
-            <%= resource.author_initial %>
-          </div>
-        <% end %>
-      </div>
+    <%= link_to author_path, class: "sidebar-resource-author--avatar" do %>
+      <% if show_user_avatar? %>
+        <%= image_tag(user.image&.variant(:popup)) %>
+      <% else %>
+        <div class="sidebar-resource-author--avatar-placeholder">
+          <%= resource.author_initial %>
+        </div>
+      <% end %>
     <% end %>
 
     <%= link_to author_path do %>
@@ -52,27 +50,23 @@
         <% end %>
 
         <% if user.debates.exists? %>
-          <%= link_to user_path(user) do %>
-            <div class="sidebar-card--count-line">
-              <div class="sidebar-resource-author--resources-name">
-                Diskussionen
-              </div>
-              <div class="sidebar-resource-author--resources-count">
-                <%= user.debates.count %>
-              </div>
+          <%= link_to user_path(user), class: "sidebar-card--count-line" do %>
+            <div class="sidebar-resource-author--resources-name">
+              Diskussionen
+            </div>
+            <div class="sidebar-resource-author--resources-count">
+              <%= user.debates.count %>
             </div>
           <% end %>
         <% end %>
 
         <% if user.comments.exists? %>
-          <%= link_to user_path(user) do %>
-            <div class="sidebar-card--count-line">
-              <div class="sidebar-resource-author--resources-name">
-                Kommentare
-              </div>
-              <div class="sidebar-resource-author--resoures-count">
-                <%= user.comments.count %>
-              </div>
+          <%= link_to user_path(user), class: "sidebar-card--count-line" do %>
+            <div class="sidebar-resource-author--resources-name">
+              Kommentare
+            </div>
+            <div class="sidebar-resource-author--resoures-count">
+              <%= user.comments.count %>
             </div>
           <% end %>
         <% end %>
