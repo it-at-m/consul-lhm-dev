@@ -54,9 +54,11 @@
 
       <div class="flex-layout">
         <div class="main-column">
-          <div class="show-on-small-tablet js-remove-on-desktop-section">
-            <%= area_select_html %>
-          </div>
+          <% if areas.any? %>
+            <div class="show-on-small-tablet js-remove-on-desktop-section">
+              <%= area_select_html %>
+            </div>
+          <% end %>
           <div class="show-on-small-tablet js-remove-on-desktop-section">
             <%= category_select_html %>
           </div>
@@ -102,9 +104,11 @@
 
         <aside class="sidebar">
 
-          <div class="hide-on-mobile js-remove-on-mobile-section">
-            <%= area_select_html %>
-          </div>
+          <% if areas.any? %>
+            <div class="hide-on-mobile js-remove-on-mobile-section">
+              <%= area_select_html %>
+            </div>
+          <% end %>
 
           <div class="hide-on-mobile js-remove-on-mobile-section">
             <%= category_select_html %>
