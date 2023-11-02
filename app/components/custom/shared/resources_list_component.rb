@@ -13,7 +13,7 @@ class Shared::ResourcesListComponent < ApplicationComponent
     title: nil,
     filters: nil,
     current_filter: nil,
-    filter_param: "order",
+    filter_param: "filter",
     remote_url: nil,
     map_location: nil,
     map_coordinates: nil,

@@ -20,7 +20,7 @@ class Shared::FilterDropdownComponent < ApplicationComponent
     @i18n_namespace = i18n_namespace
     @title = title
     @remote_url = remote_url
-    @url_param_name = url_param_name.presence || 'filter'
+    @url_param_name = url_param_name.presence || "filter"
     @in_projekt_footer_tab = in_projekt_footer_tab
   end
 
