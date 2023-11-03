@@ -186,12 +186,13 @@ en:
       user_entries: Latest submissions
       latest_activity:
         title: My activity
-        proposals: Proposals
-        debates: Debates
-        budget_investments: Investment proposals
-        comments: Comments
-        follows: Follows
         all_activity_link: Show all my activity
+        filters:
+          proposals: Proposals
+          debates: Debates
+          budget_investments: Investment proposals
+          comments: Comments
+          follows: Follows
     welcome_launch:
       p1: We're building a new citizen participation platform for the city of %{org_name}
       p2: We'll go live on %{date}!
