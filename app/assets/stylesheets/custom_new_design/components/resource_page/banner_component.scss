@@ -41,6 +41,10 @@
       .resource-page-banner--image {
         min-height: 170px;
         width: 40%;
+
+        .resource-image {
+          max-height: 260px;
+        }
       }
     }
   }
