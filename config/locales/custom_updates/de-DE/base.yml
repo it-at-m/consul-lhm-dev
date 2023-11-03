@@ -198,12 +198,13 @@ de:
       user_entries: Neueste Beiträge
       latest_activity:
         title: Meine Aktivität
-        proposals: Vorschläge
-        debates: Diskussionen
-        budget_investments: Investitionsvorschläge
-        comments: Kommentare
-        follows: Folge ich
         all_activity_link: Meine gesamte Aktivität anzeigen
+        filters:
+          proposals: Vorschläge
+          debates: Diskussionen
+          budget_investments: Investitionsvorschläge
+          comments: Kommentare
+          follows: Folge ich
     welcome_launch:
       p1: Hier entsteht die neue Beteiligungsplattform der Stadt %{org_name}
       p2: Unser Go-Live ist am %{date}!
