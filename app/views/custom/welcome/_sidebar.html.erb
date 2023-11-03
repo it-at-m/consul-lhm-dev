@@ -8,7 +8,7 @@
   </div>
 
   <%= render Shared::SidebarCardComponent.new(title: "Nutzer*innen", icon_name: "users") do |c| %>
-    <%= render(Sidebar::UsersListComponent.new(users: User.all)) %>
+    <%= render(Sidebar::UsersListComponent.new(users: User.active)) %>
   <% end %>
 
   <%# <%= render Shared::SidebarCardComponent.new(title: 'Aktivität | letzte 7 Tage', icon_name: "info-circle") do |c| %>
