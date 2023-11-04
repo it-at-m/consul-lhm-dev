@@ -21,7 +21,8 @@ class Shared::ResourcesListComponent < ApplicationComponent
     only_content: false,
     text_search_enabled: false,
     hide_view_mode_button: false,
-    projekt_phase: nil
+    projekt_phase: nil,
+    additional_data: {}
   )
     @resources = resources
     @resource_type = resource_type
