@@ -37,6 +37,7 @@ class Shared::ResourcesListComponent < ApplicationComponent
     @filter_param = filter_param
     @hide_view_mode_button = hide_view_mode_button
     @projekt_phase = projekt_phase
+    @additional_data = additional_data
   end
 
   def filter_title
@@ -125,6 +126,7 @@ class Shared::ResourcesListComponent < ApplicationComponent
       Budgets::Investments::ListItemComponent.new(
         budget_investment: resource,
         budget_investment_ids: resources.ids,
+        ballot: @additional_data[:ballot]
         # top_level_active_projekts: @additional_data[:top_level_active_projekts],
         # top_level_archived_projekts: @additional_data[:top_level_archived_projekts]
       )

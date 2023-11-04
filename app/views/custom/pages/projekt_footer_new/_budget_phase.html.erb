@@ -49,6 +49,9 @@
                   current_filter: @current_order,
                   filter_param: "order",
                   filters: @valid_orders,
+                  additional_data: {
+                    ballot: @ballot
+                  },
                   projekt_phase: @projekt_phase
                 )) %>
           <%= paginate @investments, remote: true, params: { controller: "pages", action: "projekt_phase_footer_tab" } %>
