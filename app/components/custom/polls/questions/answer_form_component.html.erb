@@ -46,7 +46,7 @@
   <% end %>
 
 <% else %>
-  <% if question.votation_type.vote_type == "rating_scale" %>
+  <% if question&.votation_type&.vote_type == "rating_scale" %>
     <span class="rating-scale-button rating-scale-button--disabled"><%= question_answer.title %></span>
   <% else %>
     <span class="button secondary hollow disabled"><%= question_answer.title %></span>

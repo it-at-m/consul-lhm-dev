@@ -121,6 +121,29 @@
 
       <aside class="sidebar" id="proposal-author">
         <%= render Sidebar::ResourceAuthorComponent.new(resource: @proposal) %>
+        <% if can?(:dashboard, @proposal) || current_editable?(@proposal) %>
+          <%= render(Shared::SidebarCardComponent.new(title: t("proposals.show.author"), icon_name: "vote-yea", opened_on_mobile: true)) do |c| %>
+            <div class="show-actions-menu">
+              <% if can?(:dashboard, @proposal) %>
+                <%= link_to proposal_dashboard_path(@proposal),
+                  class: "button hollow expanded",
+                  id: "proposal-dashboard-#{@proposal.id}" do %>
+                  <span class="icon-edit"></span>
+                  <%= t("proposals.show.dashboard_proposal_link") %>
+                <% end %>
+              <% end %>
+
+              <% if current_editable?(@proposal) %>
+                <%= link_to edit_proposal_path(@proposal),
+                  target: "_blank",
+                  class: "button hollow expanded" do %>
+                  <span class="icon-edit"></span>
+                  <%= t("dashboard.index.edit_proposal_link") %>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
 
         <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.allow_voting") %>
           <%= render(Mobile::FixedBottomActionComponent.new) do %>

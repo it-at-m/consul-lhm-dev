@@ -26,7 +26,6 @@
       <%= paginate @topics %>
     </div>
     <aside class="sidebar">
-
       <%= render(Shared::SidebarCardComponent.new(title: t("custom.community.show.participate"), icon_name: "user", opened_on_mobile: true)) do |c| %>
         <%= link_to t("community.show.sidebar.new_topic"), create_topic_link(@community), class: "button expanded" %>
       <% end %>

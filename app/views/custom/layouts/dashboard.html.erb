@@ -11,6 +11,7 @@
     <% if Setting.new_design_enabled? %>
       <%= stylesheet_link_tag "custom_new_design" %>
     <% end %>
+
     <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
     <%= csrf_meta_tags %>
     <%= favicon_link_tag "favicon.ico" %>
@@ -19,32 +20,46 @@
                      sizes: "200x200",
                      type: "image/png" %>
     <%= content_for :social_media_meta_tags %>
-
     <%= raw setting["per_page_code_head"] %>
   </head>
-  <body class="proposal-dashboard">
-    <%= raw setting["per_page_code_body"] %>
 
-    <h1 class="show-for-sr"><%= setting["org_name"] %></h1>
-
-    <%= render "layouts/header", with_subnavigation: false %>
-
-    <div class="menu-and-content">
-      <%= check_box_tag :show_menu, nil, false, role: "switch" %>
-
-      <nav id="side_menu" class="dashboard-sidebar">
-        <%= render "dashboard/menu" %>
-      </nav>
-
-      <div class="admin-content">
-        <%= label_tag :show_menu, t("admin.menu.admin"),
-                      "aria-hidden": true, class: "button hollow expanded" %>
-
-        <%= render "layouts/flash" %>
-        <%= render "layouts/dashboard/proposal_totals" %>
-        <%= render "layouts/dashboard/proposal_header" %>
+  <% if Setting.new_design_enabled? %>
+    <body class="<%= yield(:body_class) %> <%= custom_new_design_body_class %>">
+      <%= raw setting["html.per_page_code_body"] %>
+      <%= render "layouts/header", with_subnavigation: true %>
+      <%= render "layouts/flash" %>
+      <div class="wrapper">
         <%= yield %>
       </div>
-    </div>
-  </body>
+      <div class="footer">
+        <%= render "layouts/footer" %>
+      </div>
+    </body>
+  <% else %>
+    <body class="proposal-dashboard">
+      <%= raw setting["per_page_code_body"] %>
+
+      <h1 class="show-for-sr"><%= setting["org_name"] %></h1>
+
+      <%= render "layouts/header", with_subnavigation: false %>
+
+      <div class="menu-and-content">
+        <%= check_box_tag :show_menu, nil, false, role: "switch" %>
+
+        <nav id="side_menu" class="dashboard-sidebar">
+          <%= render "dashboard/menu" %>
+        </nav>
+
+        <div class="admin-content">
+          <%# <%= label_tag :show_menu, t("admin.menu.admin"),
+          <%#               "aria-hidden": true, class: "button hollow expanded" %>
+
+          <%= render "layouts/flash" %>
+          <%= render "layouts/dashboard/proposal_totals" %>
+          <%= render "layouts/dashboard/proposal_header" %>
+          <%= yield %>
+        </div>
+      </div>
+    </body>
+  <% end %>
 </html>

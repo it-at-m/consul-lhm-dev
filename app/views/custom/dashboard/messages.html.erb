@@ -1,0 +1,50 @@
+<% if Setting.new_design_enabled? %>
+  <main>
+    <div class="flex-layout">
+      <div class="main-column">
+        <div class="margin-bottom">
+          <%= back_link_to(proposal_dashboard_path(@proposal)) %>
+        </div>
+
+        <h1>
+          Benachrichtigung erstellen
+        </h1>
+      </div>
+    </div>
+    <div class="flex-layout">
+      <div class="main-column">
+        <div class="margin-bottom-50">
+          <%= render ResourcePage::BannerComponent.new(resource: @proposal, compact: true) %>
+        </div>
+        <% if @notifications.present? %>
+          <h3> Benachrichtigungen (<%= @notifications&.count || 0 %>) </h3>
+          <div id="proposal_notifications">
+            <% if @notifications.blank? %>
+              <div class="callout primary text-center">
+                <%= t("proposals.show.no_notifications") %>
+              </div>
+            <% end %>
+
+            <% @notifications.each do |notification| %>
+              <%= render CommonNotifications::ListItemComponent.new(notification: notification, show_admin_actions: true, enable_moderation_actions: !@notifiable.is_a?(ProjektPhase::ProjektNotificationPhase)) %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <aside class="sidebar">
+        <%= render Shared::SidebarCardComponent.new(title: 'Autor', icon_name: "user") do |c| %>
+          <%= link_to "Neue Benachrichtigung",
+            new_proposal_notification_path(proposal_id: proposal.id), class: "button" %>
+        <% end %>
+      </aside>
+    </div>
+  </main>
+<% else %>
+  <% content_for :action_title, t("dashboard.menu.messages") %>
+
+  <%= link_to t("dashboard.messages.send_notification"),
+    new_proposal_notification_path(proposal_id: proposal.id), class: "button" %>
+
+  <%= link_to t("dashboard.messages.previous_notifications"),
+            proposal_path(proposal, anchor: "tab-notifications"), class: "button hollow" %>
+<% end %>

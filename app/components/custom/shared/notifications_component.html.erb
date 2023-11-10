@@ -1,19 +1,7 @@
 <% notifications_html = capture do %>
   <div class="proposal-notifications-list">
     <% notifications.each do |notification| %>
-      <div class="new-card proposal-notification" id="<%= dom_id(notification) %>">
-        <div class="proposal-notification--heading">
-          <div class="proposal-notification--title"><%= notification.title %></div>
-          <p class="more-info proposal-notification-date">
-          <%= l(notification.created_at, format: :date_only) %>
-          </p>
-        </div>
-        <%= helpers.simple_format helpers.sanitize_and_auto_link(notification.body), {}, sanitize: false %>
-
-        <div class="reply">
-          <%= render Shared::ModerationActionsComponent.new(notification) unless @notifiable.is_a?(ProjektPhase::ProjektNotificationPhase) %>
-        </div>
-      </div>
+      <%= render CommonNotifications::ListItemComponent.new(notification: notification, enable_moderation_actions: !@notifiable.is_a?(ProjektPhase::ProjektNotificationPhase)) %>
     <% end %>
   </div>
 <% end %>

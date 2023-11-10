@@ -1,0 +1,50 @@
+class ProposalNotificationsController < ApplicationController
+  load_and_authorize_resource except: [:new]
+
+  def new
+    @proposal = Proposal.find(params[:proposal_id])
+    @notification = ProposalNotification.new(proposal_id: @proposal.id)
+    authorize! :new, @notification
+  end
+
+  def create
+    @proposal_notification = ProposalNotification.new(proposal_notification_params)
+    @proposal = Proposal.find(proposal_notification_params[:proposal_id])
+    if @proposal_notification.save
+      @proposal.users_to_notify.each do |user|
+        proposal_notification.add(user, @proposal_notification)
+      end
+      redirect_to @proposal_notification, notice: I18n.t("flash.actions.create.proposal_notification")
+    else
+      render :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
+  end
+
+  def destroy
+    if @proposal_notification.destroy
+      redirect_back notice: "Proposal notification destroyed"
+    else
+      redirect_back alert: "Proposal notification not destroyed"
+    end
+  end
+
+  def show
+    @notification = ProposalNotification.find(params[:id])
+  end
+
+  private
+
+    def proposal_notification_params
+      params.require(:proposal_notification).permit(allowed_params)
+    end
+
+    def allowed_params
+      [:title, :body, :proposal_id]
+    end
+end

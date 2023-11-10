@@ -82,3 +82,8 @@ de:
         supports:
           one: "%{count} Unterstützer*in"
           other: "%{count} Unterstützer*innen"
+      dashboard:
+        default_welcome_text_html: Wollen Sie als Autor eines Vorschlages ein konkretes Meinungsbild zu einer Sachfrage einholen? Dann nutzen Sie hierfür die Abstimmungsfunktion. Sie können eine oder mehrere Abstimmungen initiieren.
+        polls:
+          new:
+            title: Abstimmungen erstellen

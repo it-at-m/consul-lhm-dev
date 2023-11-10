@@ -4,6 +4,10 @@ $green-button-color: #00AA0B;
 
 .custom-new-design {
   // .button:not(div#page-content .button) {
+  button {
+    cursor: pointer;
+  }
+
   .button {
     margin-top: 10px;
     margin-bottom: 10px;

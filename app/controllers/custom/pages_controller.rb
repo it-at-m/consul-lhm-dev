@@ -1,5 +1,3 @@
-require_dependency Rails.root.join("app", "controllers", "pages_controller").to_s
-
 class PagesController < ApplicationController
   include CommentableActions
   include HasOrders
