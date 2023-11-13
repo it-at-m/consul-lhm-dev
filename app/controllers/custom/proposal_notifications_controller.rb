@@ -14,7 +14,7 @@ class ProposalNotificationsController < ApplicationController
       @proposal.users_to_notify.each do |user|
         proposal_notification.add(user, @proposal_notification)
       end
-      redirect_to @proposal_notification, notice: I18n.t("flash.actions.create.proposal_notification")
+      redirect_to messages_proposal_dashboard_path(@proposal_notification.proposal), notice: I18n.t("flash.actions.create.proposal_notification")
     else
       render :new
     end
@@ -27,10 +27,12 @@ class ProposalNotificationsController < ApplicationController
   end
 
   def destroy
+    fallback_path = messages_proposal_dashboard_path(@proposal_notification.proposal)
+
     if @proposal_notification.destroy
-      redirect_back notice: "Proposal notification destroyed"
+      redirect_back fallback_location: fallback_path, notice: "Proposal notification destroyed"
     else
-      redirect_back alert: "Proposal notification not destroyed"
+      redirect_back fallback_location: fallback_path, alert: "Proposal notification not destroyed"
     end
   end
 

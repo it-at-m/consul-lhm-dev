@@ -7,14 +7,14 @@
 
         <h1>Benachrichtigung erstellen</h1>
 
-        <%= render ResourcePage::BannerComponent.new(resource: @proposal_notification.proposal, compact: true)  %>
+        <%= render ResourcePage::BannerComponent.new(resource: @proposal, compact: true)  %>
 
-        <%= form_for @proposal_notification do |f| %>
-          <%= render "shared/errors", resource: @proposal_notification %>
+        <%= form_for @notification do |f| %>
+          <%= render "shared/errors", resource: @notification %>
 
-          <%= f.text_field :title, label: false, placeholder: @proposal_notification.class.human_attribute_name(:title) %>
-          <%= f.text_area :body, rows: "3", label: false, placeholder: @proposal_notification.class.human_attribute_name(:body) %>
-          <% unless @proposal_notification.persisted? %>
+          <%= f.text_field :title, label: false, placeholder: @notification.class.human_attribute_name(:title) %>
+          <%= f.text_area :body, rows: "3", label: false, placeholder: @notification.class.human_attribute_name(:body) %>
+          <% unless @notification.persisted? %>
             <%= f.hidden_field :proposal_id, value: @proposal.id %>
           <% end %>
 
@@ -46,8 +46,8 @@
 
   <div class="row">
     <div class="small-12 medium-9 column">
-      <%= form_for @proposal_notification do |f| %>
-        <%= render "shared/errors", resource: @proposal_notification %>
+      <%= form_for @notification do |f| %>
+        <%= render "shared/errors", resource: @notification %>
 
         <%= f.text_field :title %>
         <%= f.text_area :body, rows: "3" %>
