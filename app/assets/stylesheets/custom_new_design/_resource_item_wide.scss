@@ -21,6 +21,12 @@
           "image body";
         max-width: 930px;
 
+         .resource-image--main {
+           position: absolute;
+           top: 0;
+           bottom: 0;
+         }
+
         .resource-item--body-wrapper {
           .resource-item--author {
             // display: none;

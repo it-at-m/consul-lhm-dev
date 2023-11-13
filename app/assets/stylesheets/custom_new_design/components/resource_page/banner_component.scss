@@ -59,6 +59,8 @@
     width: 48%;
     min-height: 260px;
     max-height: 260px;
+    border-radius: 8px;
+    overflow: hidden;
 
     @media(max-width: $small-tablet-viewport-start) {
       width: 100%;
@@ -68,7 +70,6 @@
     }
 
     .resource-image {
-      border-radius: 5px;
       max-height: 260px;
     }
   }
