@@ -24,8 +24,7 @@
         <%= render Shared::ResourcesListComponent.new(
           resources: @polls,
           resource_type: Poll,
-          title: "#{t("polls.index.title")} (#{@polls.size})",
-          hide_view_mode_button: true) %>
+          title: "#{t("polls.index.title")} (#{@polls.size})") %>
       </div>
 
       <aside class="sidebar">
