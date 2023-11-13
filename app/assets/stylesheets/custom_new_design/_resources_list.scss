@@ -141,11 +141,19 @@
     align-items: center;
     justify-content: center;
     color: #707070;
-    transition: 200ms background ease;
+    transition: 200ms border-color ease;
 
-    // &:hover {
-    //   background-color: #fcfcfc;
-    // }
+    i {
+      transition: 200ms color ease;
+    }
+
+    &:hover {
+      border-color: #bfbfbf;
+
+      i::before {
+        color: black;
+      }
+    }
   }
 
   .resources-list--map {
