@@ -9,6 +9,10 @@ class Polls::Questions::OpenAnswerComponent < ApplicationComponent
   end
 
   def render?
+    question.open_question_answer.present?
+  end
+
+  def can_answer?
     # question.open_question_answer.present? && already_answered?(question.open_question_answer)
     can?(:answer, question) &&
       question.open_question_answer.present?
