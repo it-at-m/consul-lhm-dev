@@ -39,7 +39,7 @@ class Polls::Questions::AnswersComponent < ApplicationComponent
   end
 
   def button_not_answered_class
-    if question.votation_type.rating_scale?
+    if question.votation_type&.rating_scale?
       "rating-scale-button"
     else
       "button secondary hollow expanded"
@@ -89,8 +89,8 @@ class Polls::Questions::AnswersComponent < ApplicationComponent
   def disable_answer?(question_answer)
     return false unless current_user.present?
 
-    (question.votation_type.multiple? && user_answers.count == question.max_votes) ||
-      (question.votation_type.multiple_with_weight? && available_vote_weight(question_answer) == 0)
+    (question.votation_type&.multiple? && user_answers.count == question.max_votes) ||
+      (question.votation_type&.multiple_with_weight? && available_vote_weight(question_answer) == 0)
   end
 
   def has_additional_info?(question_answer)

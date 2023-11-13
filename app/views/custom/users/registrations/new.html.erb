@@ -1,7 +1,7 @@
 <% provide :title do %><%= t("devise_views.users.registrations.new.title") %><% end %>
 
 <% form_html = capture do %>
-  <div class="auth-page-template--oauth">
+  <div class="auth-page-template--oauth no-column-padding">
     <%= render "devise/omniauth_form", action: "sign_up" %>
     <div class="auth-page-template--divider"></div>
   </div>

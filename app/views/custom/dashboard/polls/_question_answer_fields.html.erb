@@ -1,0 +1,20 @@
+<div class="nested-fields nested-answers small-12 medium-6 column">
+  <div class="answer-fields">
+    <%= f.hidden_field :given_order %>
+    <div class="row expanded">
+      <div class="small-12 medium-9 column">
+        <% if Setting.new_design_enabled? %>
+          <%= f.text_field :title, label: false, placeholder: f.object.class.human_attribute_name(:title) %>
+        <% else %>
+          <%= f.text_field :title %>
+        <% end %>
+      </div>
+      <% margin_top_class = Setting.new_design_enabled? ? "" : "margin-top" %>
+      <div class="small-12 medium-3 column <%= margin_top_class %>">
+        <%= link_to_remove_association f, class: "delete" do %>
+          <%= t("dashboard.polls.question_answer_fields.remove_answer") %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -12,7 +12,7 @@ class Polls::ListItemComponent < ApplicationComponent
       resource: @poll,
       projekt: poll.projekt,
       title: poll.title,
-      description: poll.summary,
+      description: (poll.summary.presence || poll.description),
       url: helpers.poll_path(poll),
       image_url: poll.image&.variant(:card_thumb),
       image_placeholder_icon_class: "fa-vote-yea"

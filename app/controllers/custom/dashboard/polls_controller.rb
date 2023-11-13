@@ -3,6 +3,8 @@ require_dependency Rails.root.join("app", "controllers", "dashboard", "polls_con
 class Dashboard::PollsController < Dashboard::BaseController
   def create
     @poll = Poll.new(poll_params.merge(author: current_user, related: proposal))
+    @poll.projekt_phase_id = proposal.projekt_phase_id
+
     if @poll.save
       redirect_to proposal_dashboard_polls_path(proposal), notice: t("flash.actions.create.poll")
     else

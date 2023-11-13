@@ -5,7 +5,7 @@
     <% c.form do %>
       <h2><%= t("devise_views.sessions.new.title") %></h2>
 
-      <div class="auth-page-template--oauth">
+      <div class="auth-page-template--oauth no-column-padding">
         <%= render "devise/omniauth_form", action: "sign_in" %>
         <div class="auth-page-template--divider"></div>
       </div>

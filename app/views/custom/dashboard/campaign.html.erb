@@ -14,14 +14,14 @@
 
       <div class="proposal-dashboard-campaign-page--materials">
         <div class="proposal-dashboard-campaign-page--material new-card">
-          <%= image_tag("custom/proposal_poster_preview", class: "proposal-dashboard-campaign-page--material-preview") %>
+          <%= image_tag("custom/proposal_poster_preview.png", class: "proposal-dashboard-campaign-page--material-preview") %>
           <%= link_to "Poster herunterladen",
           proposal_dashboard_poster_index_path(proposal, format: :pdf),
           target: "_blank",
           class: "proposal-dashboard-campaign-page--material-title" %>
         </div>
         <div class="proposal-dashboard-campaign-page--material new-card">
-          <%= image_tag("custom/proposal_poster_preview", class: "proposal-dashboard-campaign-page--material-preview") %>
+          <%= image_tag("custom/proposal_poster_preview.png", class: "proposal-dashboard-campaign-page--material-preview") %>
           <%= link_to t("dashboard.mailing.mailing_options.send", address: current_user.email),
           proposal_dashboard_mailing_index_path(proposal),
           method: :post,

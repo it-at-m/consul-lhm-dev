@@ -19,8 +19,6 @@
         </div>
       </div>
 
-      <%= f.hidden_field :projekt_phase_id, value: proposal.projekt_phase_id %>
-
       <div class="poll-form-dates--row">
         <div class="poll-form-dates--row-title">
           Enddatum
@@ -37,8 +35,13 @@
       </div>
     </div>
 
-    <%= f.text_field :name, label: t("dashboard.polls.form.name") %>
-    <%= f.text_area :description, rows: 8 %>
+    <% if Setting.new_design_enabled? %>
+      <%= f.text_field :name, label: false, placeholder: t("dashboard.polls.form.name") %>
+      <%= f.text_area :description, rows: 8, label: false, placeholder: f.object.class.human_attribute_name(:description) %>
+    <% else %>
+      <%= f.text_field :name, label: t("dashboard.polls.form.name") %>
+      <%= f.text_area :description, rows: 8 %>
+    <% end %>
 
     <div class="js-questions">
       <%= f.fields_for :questions do |question| %>
