@@ -24,15 +24,20 @@ class ProposalNotificationsController < ApplicationController
   end
 
   def update
+    if @proposal_notification.update(proposal_notification_params)
+      redirect_to messages_proposal_dashboard_path(@proposal_notification.proposal), notice: "Benachrichtigung aktualisiert"
+    else
+      render :new
+    end
   end
 
   def destroy
     fallback_path = messages_proposal_dashboard_path(@proposal_notification.proposal)
 
     if @proposal_notification.destroy
-      redirect_back fallback_location: fallback_path, notice: "Proposal notification destroyed"
+      redirect_back fallback_location: fallback_path, notice: "Benachrichtigung gelöscht"
     else
-      redirect_back fallback_location: fallback_path, alert: "Proposal notification not destroyed"
+      redirect_back fallback_location: fallback_path, alert: "Benachrichtigung nicht gelöscht"
     end
   end
 
