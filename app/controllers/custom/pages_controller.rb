@@ -1,3 +1,5 @@
+require_dependency Rails.root.join("app", "controllers", "pages_controller").to_s
+
 class PagesController < ApplicationController
   include CommentableActions
   include HasOrders
@@ -234,10 +236,6 @@ class PagesController < ApplicationController
       elsif @budget.voting_style == "approval" || @budget.voting_style == "knapsack"
         @current_order = "ballots"
       end
-    end
-
-    @invetment_coordinates = MapLocation.where(investment_id: @investments).map do |map_location|
-      map_location.shape_json_data.presence || map_location.json_data
     end
 
     @investments = @investments.perform_sort_by(@current_order, session[:random_seed]).page(params[:page]).per(18)
