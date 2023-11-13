@@ -49,9 +49,23 @@
       }
     }
 
+    .poll-answer-form--wide {
+      width: 75%;
+
+      .button_to button, span.button {
+        flex-grow: 1;
+      }
+
+      @media (min-width: 768px) {
+        width: auto;
+      }
+    }
+
     .button_to {
       width: unset;
       margin-right: 0.8rem;
+      word-break: break-all;
+      line-height: 1.2;
     }
 
     .button {
@@ -80,6 +94,8 @@
 
     span.button {
       margin-right: 0.8rem;
+      word-break: break-all;
+      line-height: 1.2;
     }
 
     .answer-weight-selector {
