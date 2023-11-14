@@ -86,9 +86,10 @@ de:
               undecided: Dieser Investitionsvorschlag befindet sich gerade noch in der Bewertung.
               unfeasible: Dieser Investitionsvorschlag wurde als nicht durchführbar klassifiziert.
           implementation: Umsetzung
-          implementation_city_text_html: <p>Soll von Stadtverwaltung umgesetzt werden</p>
-          implementation_user_text_html: <p>%{author} unterstützt bei der Durchführung<p><p>%{implementation_contribution}</p>
-          user_cost_estimate: Preisliche Einschätzung
+          implementation_city_text_html: Soll von Stadtverwaltung umgesetzt werden
+          implementation_user_text_html: "%{author} unterstützt bei der Durchführung<br><br>%{implementation_contribution}"
+          price: Preisliche Einschätzung der Verwaltung
+          user_cost_estimate: Preisliche Einschätzung des Nutzers
           welcome_default_text_html: "%{author_name} hat einen Beitrag zu diesem Projekt gemacht, der Ihre Aufmerksamkeit benötigt.
             Sie können den Beitrag an der rechten Seitenleiste unterstützen, indem Sie ihm Ihre Stimme geben. Außerdem können Sie dem Beitrag folgen, um auf dem Laufenden zu bleiben.
             Die Karte hilft Ihnen dabei, den Beitrag in der Stadt zu verorten, des Weiteren haben Sie die Möglichkeit, den Beitrag zu kommentieren."

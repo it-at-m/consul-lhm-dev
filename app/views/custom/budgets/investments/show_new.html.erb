@@ -49,13 +49,35 @@
 
         <% if @investment.should_show_price? %>
           <div class="resource-page--description new-card" style="background-color:#E3FCE7">
-            <h3><%= t("budgets.investments.show.price") %></h2>
-            <%= @investment.formatted_price %>
+            <h3><%= t("custom.budgets.investments.show.price") %></h2>
+            <b><%= @investment.formatted_price %></b>
 
             <% if @investment.should_show_price_explanation? %>
               <br>
               <%= @investment.price_explanation %>
             <% end %>
+          </div>
+        <% end %>
+
+        <% if projekt_phase_feature?(@investment.projekt_phase, "form.show_user_cost_estimate") && @investment.user_cost_estimate.present? %>
+          <div class="resource-page--description new-card" style="background-color:#fff;">
+            <h3><%= t("custom.budgets.investments.show.user_cost_estimate") %></h3>
+            <%= ActionController::Base.helpers.number_to_currency(@investment.user_cost_estimate,
+                                                                  precision: 0,
+                                                                  locale: I18n.locale,
+                                                                  unit: "Euro",
+                                                                  delimiter: ".",
+                                                                  format: "%n %u"
+                                                                  ) %>
+          </div>
+        <% end %>
+
+        <% if projekt_phase_feature?(@investment&.projekt_phase, "form.show_implementation_option_fields") %>
+          <div class="resource-page--description new-card" style="background-color:#fff;">
+            <h3><%= t("custom.budgets.investments.show.implementation") %></h3>
+            <%= t("custom.budgets.investments.show.implementation_#{@investment.implementation_performer}_text_html",
+                   author: @investment.author.name,
+                   implementation_contribution: @investment.implementation_contribution) %>
           </div>
         <% end %>
 

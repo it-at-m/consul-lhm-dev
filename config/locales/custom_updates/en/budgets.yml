@@ -86,9 +86,10 @@ en:
               undecided: This investment proposal was not eveluated yet.
               unfeasible: This investment proposal was marked as unfeasible.
           implementation: Implementation
-          implementation_city_text_html: <p>Needs to be implemented by the city</p>
-          implementation_text_html: <p>%{author} supports with implementation<p><p>%{implementation_contribution}</p>
-          user_cost_estimate: Cost estimate
+          implementation_city_text_html: Needs to be implemented by the city
+          implementation_text_html: "%{author} supports with implementation<br><br>%{implementation_contribution}"
+          price: Cost estimation by the administration
+          user_cost_estimate: Cost estimation by the user
         statuses:
           phases:
             accepting: The investment proposal was successfully submitted.
