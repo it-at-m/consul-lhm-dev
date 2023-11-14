@@ -4,6 +4,10 @@ $green-button-color: #00AA0B;
 
 .custom-new-design {
   // .button:not(div#page-content .button) {
+  button {
+    cursor: pointer;
+  }
+
   .button {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -27,7 +31,7 @@ $green-button-color: #00AA0B;
     }
 
     &:hover, &:focus {
-      background-color: lighten($brand, 5%);
+      background-color: lighten($brand, 6%);
       color: white;
     }
 
@@ -58,15 +62,15 @@ $green-button-color: #00AA0B;
     }
 
     &.-green {
-      background: $grey-button-color;
+      background: $green-button-color;
       color: white;
 
       &:hover, &:focus {
-        background-color: lighten($grey-button-color, 5%)
+        background-color: lighten($green-button-color, 5%)
       }
 
       &:active {
-        background-color: lighten($grey-button-color, 7%)
+        background-color: lighten($green-button-color, 7%)
       }
     }
 

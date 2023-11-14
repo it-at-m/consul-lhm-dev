@@ -67,7 +67,7 @@
       var $firstProjektPhase = $("#projekt-phase-group-for-projekt-" + projektId + " .js-select-projekt-phase:first");
       App.ProjektSelector.selectProjektPhase($firstProjektPhase);
 
-      this.clearBannerColor();
+      // this.clearBannerColor();
     },
 
     selectProjektPhase: function($projektPhase) {

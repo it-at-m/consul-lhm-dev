@@ -65,8 +65,10 @@ body.custom-new-design {
 }
 
 .custom-new-design {
-  .column {
-    padding: 0;
+  .no-column-padding {
+    .column {
+      padding: 0;
+    }
   }
 
   .notice-container {

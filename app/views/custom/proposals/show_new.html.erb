@@ -121,6 +121,64 @@
 
       <aside class="sidebar" id="proposal-author">
         <%= render Sidebar::ResourceAuthorComponent.new(resource: @proposal) %>
+        <% if can?(:dashboard, @proposal) || @proposal.editable_by?(current_user) %>
+          <%= render(Shared::SidebarCardComponent.new(title: t("proposals.show.author"), icon_name: "user-edit")) do |c| %>
+            <% if can?(:dashboard, @proposal) %>
+              <%= link_to proposal_dashboard_path(@proposal),
+                class: "button hollow expanded",
+                id: "proposal-dashboard-#{@proposal.id}" do %>
+                <span class="icon icon-edit"></span>
+                <%= t("proposals.show.dashboard_proposal_link") %>
+              <% end %>
+            <% end %>
+
+            <% if current_editable?(@proposal) %>
+              <%= link_to edit_proposal_path(@proposal),
+                target: "_blank",
+                class: "button hollow expanded left-aligned" do %>
+                <i class="fas fa-edit"></i>
+                <%= t("dashboard.index.edit_proposal_link") %>
+              <% end %>
+            <% end %>
+
+            <% unless @proposal.retired? %>
+              <%= link_to t("dashboard.index.retire"),
+                retire_form_proposal_path(@proposal),
+                class: "button hollow alert",
+                target: "_blank" %>
+            <% end %>
+
+            <% if can?(:publish, @proposal) %>
+              <%= link_to t("dashboard.index.publish"),
+                publish_proposal_path(@proposal),
+                class: "button hollow expanded",
+                method: :patch %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <%# <% if can?(:dashboard, @proposal) || current_editable?(@proposal) %>
+        <%#   <%= render(Shared::SidebarCardComponent.new(title: t("proposals.show.author"), icon_name: "vote-yea", opened_on_mobile: true)) do |c| %>
+        <%#     <div class="show-actions-menu">
+        <%#       <% if can?(:dashboard, @proposal) %>
+        <%#         <%= link_to proposal_dashboard_path(@proposal),
+        <%#           class: "button hollow expanded",
+        <%#           id: "proposal-dashboard-#{@proposal.id}" do %>
+        <%#           <span class="icon-edit"></span>
+        <%#           <%= t("proposals.show.dashboard_proposal_link") %>
+        <%#         <% end %>
+        <%#       <% end %>
+        <%#
+        <%#       <% if current_editable?(@proposal) %>
+        <%#         <%= link_to edit_proposal_path(@proposal),
+        <%#           target: "_blank",
+        <%#           class: "button hollow expanded" do %>
+        <%#           <span class="icon-edit"></span>
+        <%#           <%= t("dashboard.index.edit_proposal_link") %>
+        <%#         <% end %>
+        <%#       <% end %>
+        <%#     </div>
+        <%#   <% end %>
+        <%# <% end %>
 
         <% if projekt_phase_feature?(@proposal.projekt_phase, "resource.allow_voting") %>
           <%= render(Mobile::FixedBottomActionComponent.new) do %>
@@ -138,37 +196,28 @@
               icon_name: "users")
             ) do |c| %>
             <% if @proposal.community.topics.count > 0 %>
-              <div class="margin-bottom">
+              <div class="margin-bottom-10">
                 <%= t("custom.proposals.show.community_section.description") %>
               </div>
-              <div class="sidebar-card--count-line">
-                <div>
-                  <%= t("custom.proposals.show.community_section.particapated_users_count") %>
-                </div>
-                <div>
-                  <%= @proposal.community.participants_count %>
-                </div>
+              <div>
+                <%= @proposal.community.participants_count %>
+                <%= t("custom.proposals.show.community_section.particapated_users_count") %>
               </div>
-              <div class="sidebar-card--count-line">
-                <div>
-                  <%= t("custom.proposals.show.community_section.topics_count") %>
-                </div>
-                <div>
-                  <%= @proposal.community.comments_count %>
-                </div>
+              <div>
+                <%= @proposal.community.comments_count %>
+                <%= t("custom.proposals.show.community_section.topics_count") %>
               </div>
-              <div class="sidebar-card--count-line">
-                <div>
-                  <%= t("custom.proposals.show.community_section.comments_count") %>
-                </div>
-                <div>
-                  <%= @proposal.community.topics.count %>
-                </div>
+              <div>
+                <%= @proposal.community.topics.count %>
+                <%= t("custom.proposals.show.community_section.comments_count") %>
               </div>
+              <%= render(Sidebar::UsersListComponent.new(users: @proposal.community.participants, hide_count: true)) %>
+              <% participate_button_text = t("custom.community.sidebar.particapate") %>
             <% else %>
                 <%= t("custom.proposals.show.community_section.description_create_first") %>
+                <% participate_button_text = t("custom.community.sidebar.be_first") %>
             <% end %>
-            <%= link_to t("community.sidebar.button_to_access"), community_path(@proposal.community), class: "button hollow expanded" %>
+            <%= link_to participate_button_text, community_path(@proposal.community), class: "button" %>
           <% end %>
         <% end %>
 
@@ -222,42 +271,6 @@
             <div class="js-moderator-proposal-actions">
               <%= render "actions", proposal: @proposal %>
             </div>
-          <% end %>
-        <% end %>
-
-        <% if @proposal.editable_by?(current_user) %>
-          <%= render(Shared::SidebarCardComponent.new(title: t("proposals.show.author"), icon_name: "user-edit")) do |c| %>
-            <%# <% if can?(:dashboard, @proposal) %>
-            <%#   <%= link_to proposal_dashboard_path(@proposal),
-            <%#     class: "button hollow expanded",
-            <%#     id: "proposal-dashboard-#{@proposal.id}" do %>
-            <%#     <span class="icon icon-edit"></span>
-            <%#     <%= t("proposals.show.dashboard_proposal_link") %>
-            <%#   <% end %>
-            <%# <% end %>
-
-            <% if current_editable?(@proposal) %>
-              <%= link_to edit_proposal_path(@proposal),
-                target: "_blank",
-                class: "button hollow expanded left-aligned" do %>
-                <i class="fas fa-edit"></i>
-                <%= t("dashboard.index.edit_proposal_link") %>
-              <% end %>
-            <% end %>
-
-            <% unless @proposal.retired? %>
-              <%= link_to t("dashboard.index.retire"),
-                retire_form_proposal_path(@proposal),
-                class: "button hollow alert",
-                target: "_blank" %>
-            <% end %>
-
-            <% if can?(:publish, @proposal) %>
-              <%= link_to t("dashboard.index.publish"),
-                publish_proposal_path(@proposal),
-                class: "button hollow expanded",
-                method: :patch %>
-            <% end %>
           <% end %>
         <% end %>
       </aside>

@@ -3,7 +3,7 @@ de:
     deficiency_reports:
       form:
         page_description: Vielen Dank, dass Sie einen Mangel melden! Sie helfen uns damit, diesen so schnell es geht abzustellen.
-          Bitte beschreiben Sie möglichst genau, was Ihnen aufgefallen ist. Typische Mängel sind zum Beispiel Straßenschäden oder beschädigte Parkbänke. 
+          Bitte beschreiben Sie möglichst genau, was Ihnen aufgefallen ist. Typische Mängel sind zum Beispiel Straßenschäden oder beschädigte Parkbänke.
         title_placeholder: Geben Sie dem Mangel, den Sie melden möchten, einen plakativen Titel wie zum Beispiel “Kaputte Straßenlaterne mit der Nummer 12345”.
         description_placeholder_html: "Beschreiben Sie hier den Mangel, den Sie melden möchten.<br><br>
           Details helfen der Stadtverwaltung, den Mangel aufzufinden und schnell zu beseitigen.<br></br>
@@ -11,6 +11,9 @@ de:
           Bitte nennen Sie keine persönlichen Daten von Dritten wie zum Beispiel Adressen."
         map:
           hint: Setzen Sie einen Pin auf der Karte, um den Mangel genau zu verorten.
+        area:
+          title: Städte & Gemeinden
+          description: "Bitte ordnen Sie Ihre Meldung einem Ort zu:"
         category:
           title: Kategorie
           description: "Bitte ordnen Sie Ihr Meldung einer Kategorie zu:"
@@ -37,6 +40,7 @@ de:
         new:
           submit_button: Mangel melden
       index:
+        empty_list_text: "Keine Ergebnisse"
         title: Mängelmelder
         welcome_default_text_html: In jeder Stadt kommt es dann und wann zu Mängeln – gut, wenn diese von aufmerksamen BürgerInnen gemeldet werden, um sie schnell zu beheben.
           Sie sehen auf dieser Seite, welche Mängel bereits gemeldet wurden. Die Karte hilft Ihnen dabei, den jeweiligen Mangel zu verorten.
@@ -67,6 +71,9 @@ de:
             all_reports: Alle Meldungen
             reports_to_approve: Freizugebende Meldungen
             title: Admin
+          areas:
+            title: Städte & Gemeinden
+            all_areas: Alle Meldungen
           categories:
             filter_button: Kategorien filtern
             title: Kategorien

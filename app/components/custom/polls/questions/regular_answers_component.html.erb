@@ -25,7 +25,9 @@
 
     <% else %>
 
-      <%= render Polls::Questions::AnswerFormComponent.new(question_answer: question_answer, user_answer: user_answer(question_answer)) %>
+      <div class="<%= answer_form_class(question_answer) %>">
+        <%= render Polls::Questions::AnswerFormComponent.new(question_answer: question_answer, user_answer: user_answer(question_answer)) %>
+      </div>
 
       <% if question_answer.more_info_link.present? %>
         <div class='poll-answer-more-info-link'>

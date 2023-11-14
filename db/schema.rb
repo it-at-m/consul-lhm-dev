@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_14_065539) do
+ActiveRecord::Schema.define(version: 2023_11_01_094206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -662,6 +662,12 @@ ActiveRecord::Schema.define(version: 2023_09_14_065539) do
     t.index ["tsv"], name: "index_debates_on_tsv", using: :gin
   end
 
+  create_table "deficiency_report_areas", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "deficiency_report_categories", force: :cascade do |t|
     t.string "color"
     t.string "icon"
@@ -738,11 +744,13 @@ ActiveRecord::Schema.define(version: 2023_09_14_065539) do
     t.bigint "hot_score", default: 0
     t.string "on_behalf_of"
     t.datetime "assigned_at"
+    t.bigint "deficiency_report_area_id"
     t.index ["cached_anonymous_votes_total"], name: "index_deficiency_reports_on_cached_anonymous_votes_total"
     t.index ["cached_votes_down"], name: "index_deficiency_reports_on_cached_votes_down"
     t.index ["cached_votes_score"], name: "index_deficiency_reports_on_cached_votes_score"
     t.index ["cached_votes_total"], name: "index_deficiency_reports_on_cached_votes_total"
     t.index ["cached_votes_up"], name: "index_deficiency_reports_on_cached_votes_up"
+    t.index ["deficiency_report_area_id"], name: "index_deficiency_reports_on_deficiency_report_area_id"
     t.index ["deficiency_report_category_id"], name: "index_deficiency_reports_on_deficiency_report_category_id"
     t.index ["deficiency_report_officer_id"], name: "index_deficiency_reports_on_deficiency_report_officer_id"
     t.index ["deficiency_report_status_id"], name: "index_deficiency_reports_on_deficiency_report_status_id"
@@ -841,6 +849,7 @@ ActiveRecord::Schema.define(version: 2023_09_14_065539) do
 
   create_table "formular_answer_images", force: :cascade do |t|
     t.bigint "formular_answer_id"
+    t.string "formular_field_key"
     t.string "title", limit: 80
     t.string "attachment_file_name"
     t.string "attachment_content_type"
@@ -848,7 +857,6 @@ ActiveRecord::Schema.define(version: 2023_09_14_065539) do
     t.datetime "attachment_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "formular_field_key"
     t.index ["formular_answer_id"], name: "index_formular_answer_images_on_formular_answer_id"
   end
 
@@ -1283,6 +1291,8 @@ ActiveRecord::Schema.define(version: 2023_09_14_065539) do
     t.boolean "show_admin_shape", default: false
     t.float "altitude"
     t.bigint "projekt_phase_id"
+    t.bigint "deficiency_report_area_id"
+    t.index ["deficiency_report_area_id"], name: "index_map_locations_on_deficiency_report_area_id"
     t.index ["deficiency_report_id"], name: "index_map_locations_on_deficiency_report_id"
     t.index ["investment_id"], name: "index_map_locations_on_investment_id"
     t.index ["projekt_id"], name: "index_map_locations_on_projekt_id"
@@ -2577,6 +2587,7 @@ ActiveRecord::Schema.define(version: 2023_09_14_065539) do
   add_foreign_key "debates", "projekts"
   add_foreign_key "debates", "sentiments"
   add_foreign_key "deficiency_report_officers", "users"
+  add_foreign_key "deficiency_reports", "deficiency_report_areas"
   add_foreign_key "deficiency_reports", "deficiency_report_categories"
   add_foreign_key "deficiency_reports", "deficiency_report_officers"
   add_foreign_key "deficiency_reports", "deficiency_report_statuses"
@@ -2605,6 +2616,7 @@ ActiveRecord::Schema.define(version: 2023_09_14_065539) do
   add_foreign_key "machine_learning_jobs", "users"
   add_foreign_key "managers", "users"
   add_foreign_key "map_layers", "projekts"
+  add_foreign_key "map_locations", "deficiency_report_areas"
   add_foreign_key "map_locations", "deficiency_reports"
   add_foreign_key "map_locations", "projekt_phases"
   add_foreign_key "map_locations", "projekts"

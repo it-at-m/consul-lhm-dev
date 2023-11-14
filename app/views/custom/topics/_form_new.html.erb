@@ -2,7 +2,7 @@
 
   <%= render "shared/errors", resource: @topic %>
 
-  <%= f.text_field :title %>
+  <%= f.text_field :title, label: false, placeholder: "Titel" %>
   <%= f.text_area :description, rows: "5" %>
 
   <%= f.submit(class: "button", value: t("community.topic.form.#{action_name}.submit_button")) %>

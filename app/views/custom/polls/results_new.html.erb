@@ -27,7 +27,7 @@
           <%= link_to t("custom.polls.show.results.download_csv_answers_votes"), poll_csv_answers_votes_path(@poll, format: :csv), class: "button small float-right" %>
         <% end %>
 
-        <div class="row margin clear" data-equalizer data-equalize-on="medium">
+        <div class="margin clear" data-equalizer data-equalize-on="medium">
           <div class="small-12 medium-2 column" data-equalizer-watch>
             <p><strong><%= t("polls.show.results.title") %></strong></p>
             <ul class="menu vertical">
@@ -42,7 +42,7 @@
               <% most_voted_answer_votes = question.most_voted_answer_votes %>
               <h3 id="<%= question.title.parameterize %>">
                 <%= question.title %>
-                <% if VotationType.allowing_multiple_answers.include?(question.votation_type.vote_type) %>
+                <% if question.votation_type.present? && VotationType.allowing_multiple_answers.include?(question.votation_type.vote_type) %>
                   <small>
                     (<%= t("poll_questions.show.question.multiple") %>)
                   </small>
@@ -72,15 +72,14 @@
                                 <% open_answers.page(params[page_name]).per(20).each do |open_answer| %>
                                   <div class='poll-results-open-answer'>
                                     <div class='open-answer-info'>
+                                      <% if question.poll.show_open_answer_author_name %>
                                         <%= avatar_image(open_answer.author, size: 32, class: "float-left user-avatar") %>
-                                        <span class='user-name'>
-                                          <% if question.poll.show_open_answer_author_name %>
-                                            <%= open_answer.author.username %></span>
-                                          <% else %>
-                                            <%= 'anonymisiert' %></span>
-                                          <% end %>
-                                        &nbsp;&bull;&nbsp;
-                                      <span><%= open_answer.created_at.localtime.strftime '%Y-%m-%d %H:%M:%S'%></span>
+                                        <span class='user-name'><%= open_answer.author.username %></span>
+                                      <% else %>
+                                        <%= avatar_image("A", size: 32, class: "float-left user-avatar") %>
+                                        <span class='user-name'><%= "anonymisiert" %></span>
+                                      <% end %>
+                                      <span><%= open_answer.created_at.localtime.strftime "%Y-%m-%d %H:%M:%S" %></span>
                                     </div>
                                     <div class='open-answer-text'>
                                       <%= open_answer.open_answer_text %>

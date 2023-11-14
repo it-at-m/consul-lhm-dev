@@ -1,0 +1,13 @@
+<% if Setting.new_design_enabled? %>
+  <% content_for :action_title, t("admin.polls.edit.title") %>
+  <div class="margin-bottom">
+    <%= back_link_to %>
+  </div>
+
+  <%= render "form_new" %>
+<% else %>
+  <% content_for :action_title, t("admin.polls.edit.title") %>
+  <%= back_link_to %>
+
+  <%= render "form" %>
+<% end %>

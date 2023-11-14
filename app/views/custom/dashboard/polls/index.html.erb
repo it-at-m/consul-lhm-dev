@@ -1,0 +1,66 @@
+<% if Setting.new_design_enabled? %>
+  <main>
+    <div class="flex-layout">
+      <div class="main-column">
+        <div class="margin-bottom">
+          <%= back_link_to(proposal_dashboard_path(@proposal)) %>
+        </div>
+
+        <h1>
+          <%= t("polls.index.title") %>
+        </h1>
+
+        <p class="margin-bottom">
+        <%= render_custom_block("proposals_dashboard_polls_welcome_text", default_content: t("custom.proposals.dashboard.default_welcome_text_html")) %>
+        </p>
+      </div>
+    </div>
+    <div class="flex-layout">
+      <div class="main-column">
+        <div class="margin-bottom-50">
+          <%= render ResourcePage::BannerComponent.new(resource: @proposal) %>
+        </div>
+
+        <%= render Shared::ResourcesListComponent.new(
+          resources: @polls,
+          resource_type: Poll,
+          title: "#{t("polls.index.title")} (#{@polls.size})") %>
+      </div>
+
+      <aside class="sidebar">
+        <%= render Shared::SidebarCardComponent.new(title: "Autor", icon_name: "user") do |c| %>
+          <%= link_to t("dashboard.polls.index.create"),
+            new_proposal_dashboard_poll_path(proposal),
+            class: "button expanded"
+          %>
+      <% end %>
+      </aside>
+    </div>
+  </main>
+<% else %>
+  <% content_for :action_title, t("dashboard.polls.index.title") %>
+  <div class="row expanded">
+    <div class="small-12 medium-9 column">
+      <%= Setting["proposals.poll_description"] %>
+
+      <% if @polls.any? %>
+        <div class="row expanded margin-top" data-equalizer="poll-cards" data-equalize-on="medium">
+          <%= render @polls %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="small-12 medium-3 column">
+      <% if Setting["proposals.poll_link"].present? %>
+        <h4><%= t("dashboard.polls.index.links") %></h4>
+        <%= link_to t("dashboard.polls.index.additiontal_information"),
+          Setting["proposals.poll_link"], target: "_blank" %>
+      <% end %>
+
+      <p><strong><%= t("dashboard.polls.index.count", count: @polls.count) %></strong></p>
+      <%= link_to t("dashboard.polls.index.create"),
+        new_proposal_dashboard_poll_path(proposal),
+        class: "button expanded" %>
+    </div>
+  </div>
+<% end %>

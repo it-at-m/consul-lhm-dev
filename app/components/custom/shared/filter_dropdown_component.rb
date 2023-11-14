@@ -20,7 +20,7 @@ class Shared::FilterDropdownComponent < ApplicationComponent
     @i18n_namespace = i18n_namespace
     @title = title
     @remote_url = remote_url
-    @url_param_name = url_param_name.presence || 'filter'
+    @url_param_name = url_param_name.presence || "filter"
     @in_projekt_footer_tab = in_projekt_footer_tab
   end
 
@@ -37,7 +37,7 @@ class Shared::FilterDropdownComponent < ApplicationComponent
   def translate_option(option)
     return if option.blank?
 
-    t(option, scope: i18n_namespace)
+    t("#{i18n_namespace}.#{option}")
   end
 
   def link_path(option)
@@ -60,10 +60,6 @@ class Shared::FilterDropdownComponent < ApplicationComponent
       params[@url_param_name] = option
       current_path_with_query_params(anchor: anchor, **params)
     end
-  end
-
-  def title_for(option)
-    t("#{option}_title", scope: i18n_namespace)
   end
 
   def footer_tab_back_button_url(option)

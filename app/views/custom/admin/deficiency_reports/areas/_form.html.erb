@@ -1,0 +1,52 @@
+<%= form_for [:admin, area] do |f| %>
+
+  <%= render "shared/errors", resource: @area %>
+
+  <div class="small-12 medium-4 column">
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="small-12 column">
+    <p><%= t("admin.settings.index.map.help") %></p>
+
+    <div id="admin-map" class="map"
+                        data-map
+                        data-map-center-latitude="<%= area.map_location.latitude %>"
+                        data-map-center-longitude="<%= area.map_location.longitude %>"
+                        data-map-zoom="<%= area.map_location.zoom %>"
+
+                        data-admin-editor="true"
+                        data-enable-geoman-controls="true"
+
+                        data-show-admin-shape="<%= area.map_location.show_admin_shape? %>"
+                        data-admin-shape="<%= area.map_location.shape.presence&.to_json || area.map_location.json_data.to_json %>"
+
+                        data-editable="true"
+                        data-latitude-input-selector="#deficiency_report_area_map_location_attributes_latitude"
+                        data-longitude-input-selector="#deficiency_report_area_map_location_attributes_longitude"
+                        data-zoom-input-selector="#deficiency_report_area_map_location_attributes_zoom"
+                        data-shape-input-selector="#deficiency_report_area_map_location_attributes_shape"
+                        data-show-admin-shape-input-selector="#deficiency_report_area_map_location_attributes_show_admin_shape"
+
+                        data-map-tiles-provider="<%= Rails.application.secrets.map_tiles_provider %>"
+                        data-map-tiles-provider-attribution="<%= Rails.application.secrets.map_tiles_provider_attribution %>"
+                        data-marker-latitude="<%= area.map_location.latitude %>"
+                        data-marker-longitude="<%= area.map_location.longitude %>"
+                        >
+    </div>
+
+    <%= f.fields_for :map_location do |mlf| %>
+      <%= mlf.hidden_field :latitude, value: area.map_location.latitude %>
+      <%= mlf.hidden_field :longitude, value: area.map_location.longitude %>
+      <%= mlf.hidden_field :zoom, value: area.map_location.zoom %>
+      <%= mlf.hidden_field :shape, value: JSON.generate(area.map_location.shape) %>
+      <%= mlf.hidden_field :show_admin_shape, value: area.map_location.show_admin_shape %>
+      <%= mlf.hidden_field :deficiency_report_area_id, value: area.id %>
+    <% end %>
+	</div>
+
+  <div class="small-12 column margin-top">
+    <%= f.submit(value: t("custom.admin.deficiency_reports.areas.form.submit_button"),
+                class: "button success") %>
+  </div>
+<% end %>

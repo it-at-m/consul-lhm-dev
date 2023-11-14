@@ -11,18 +11,13 @@ class Shared::ResourcesListComponent < ApplicationComponent
     resources: nil,
     resource_type: nil,
     title: nil,
-    title_link: nil,
     filters: nil,
     current_filter: nil,
-    filter_param: nil,
+    filter_param: "filter",
     remote_url: nil,
+    map_location: nil,
     map_coordinates: nil,
-    css_class: nil,
-    filter_title: nil,
-    empty_list_text: nil,
     filter_i18n_namespace: nil,
-    hide_actions: false,
-    hide_title: false,
     only_content: false,
     text_search_enabled: false,
     hide_view_mode_button: false,
@@ -32,23 +27,26 @@ class Shared::ResourcesListComponent < ApplicationComponent
     @resources = resources
     @resource_type = resource_type
     @title = title
-    @title_link = title_link
     @filters = filters
     @current_filter = current_filter
     @remote_url = remote_url
     @only_content = only_content
+    @map_location = map_location
     @map_coordinates = map_coordinates
-    @css_class = css_class
     @text_search_enabled = text_search_enabled
     @filter_i18n_namespace = filter_i18n_namespace
-    @empty_list_text = empty_list_text
     @filter_param = filter_param
-    @filter_title = filter_title.presence || "Sortieren nach"
-    @hide_title = hide_title
-    @hide_actions = hide_actions
     @hide_view_mode_button = hide_view_mode_button
     @projekt_phase = projekt_phase
     @additional_data = additional_data
+  end
+
+  def filter_title
+    if @filter_param == "order"
+      "Sortieren nach"
+    elsif @filter_param == "filter"
+      "Filtern nach"
+    end
   end
 
   def wide?
@@ -77,18 +75,22 @@ class Shared::ResourcesListComponent < ApplicationComponent
     if resource_type == Projekt
       "custom.projekts"
     elsif resource_type == Debate
-      "debates.index"
+      "custom.debates.index"
     elsif resource_type == Proposal
-      "proposals.index"
+      "custom.proposals.index"
     elsif resource_type == Budget::Investment
-      "budgets.investments.index"
+      "custom.budgets.investments.index"
     elsif resource_type == Poll
       "custom.polls.index"
     elsif resource_type == DeficiencyReport
       "custom.deficiency_reports.index"
     elsif resource_type == Topic
-      "comments"
+      "custom.topics.list"
     end
+  end
+
+  def empty_list_text
+    t("empty_list_text", scope: i18n_namespace)
   end
 
   def switch_view_mode_icon
@@ -96,7 +98,7 @@ class Shared::ResourcesListComponent < ApplicationComponent
   end
 
   def proposal_resources_ids
-    @resources.select { |r| r.is_a?(Proposal)}.map(&:id)
+    @resources.select { |r| r.is_a?(Proposal) }.map(&:id)
   end
 
   def proposal_votes

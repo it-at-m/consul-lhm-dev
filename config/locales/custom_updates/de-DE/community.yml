@@ -2,4 +2,8 @@ de:
   custom:
     community:
       show:
-        participants: Mitwirkende
+        participate: Beteiligen
+        participants: Teilnehmer*innen
+      sidebar:
+        particapate: Mitmachen
+        be_first: Arbeitskreis erstellen

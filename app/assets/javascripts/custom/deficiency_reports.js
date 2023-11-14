@@ -99,6 +99,22 @@
       window.location.href = url;
     },
 
+    updateSelectedDeficiencyAreaParam: function($label) {
+      var url = new URL(window.location.href);
+      var selection = $('input[name="area"]:checked').val();
+
+      if ( selection == 0 ) {
+        url.searchParams.delete('dr_area')
+      } else {
+        url.searchParams.set('dr_area', selection)
+      }
+
+      url.searchParams.delete('search')
+      url.searchParams.delete('page')
+      window.history.pushState('', '', url)
+      window.location.href = url;
+    },
+
     updateSelectedFilter: function($label, filter_name, default_value) {
       var url = new URL(window.location.href);
       var selection = $('input[name=' + filter_name + ']:checked').val();
@@ -113,6 +129,20 @@
       url.searchParams.delete('page')
       window.history.pushState('', '', url)
       window.location.href = url;
+    },
+
+    updateMapInForm: function() {
+      var coordinates;
+
+      if (event.target.value == 0) {
+        coordinates = JSON.parse(event.target.dataset.defaultMapCoordinates)
+      } else {
+        coordinates = JSON.parse(event.target.dataset.allAreaMapCoordinates)[event.target.value];
+      }
+
+      App.Map.maps.forEach(function(map) {
+        map.panTo(coordinates);
+      });
     },
 
     initialize: function() {
@@ -133,6 +163,12 @@
         App.DeficiencyReports.updateSelectedDeficiencyStatusParam($label);
       });
 
+      $("body").on("click", ".js-filter-by-deficiency-report-area", function() {
+        var $label = $(this).closest('label');
+        App.DeficiencyReports.updateLabelStyle($label.closest('li'));
+        App.DeficiencyReports.updateSelectedDeficiencyAreaParam($label);
+      });
+
       $("body").on("click", ".js-filter-by-deficiency-report-officer", function() {
         var $label = $(this).closest('label');
         App.DeficiencyReports.updateLabelStyle($label.closest('li'));
@@ -148,7 +184,10 @@
       $("body").on("click", ".js-update-dr-categories", function() {
         App.DeficiencyReports.updateSelectedDeficiencyCategoriesParamFromTag();
       });
-    }
 
+      $("body").on("change", ".js-dr-form-update-map", function() {
+        App.DeficiencyReports.updateMapInForm();
+      });
+    }
   };
 }).call(this);

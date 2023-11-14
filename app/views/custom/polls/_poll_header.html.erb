@@ -1,1 +1,1 @@
-<%= AdminWYSIWYGSanitizer.new.sanitize @poll.summary %>
+<%= AdminWYSIWYGSanitizer.new.sanitize (@poll.summary.presence || @poll.description) %>

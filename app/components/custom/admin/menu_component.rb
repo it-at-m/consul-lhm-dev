@@ -19,7 +19,8 @@ class Admin::MenuComponent < ApplicationComponent
     end
 
     def deficiency_reports?
-      ( %w[officers categories statuses settings].include?(controller_name) && controller.class.parent == Admin::DeficiencyReports )
+      %w[officers categories statuses settings areas].include?(controller_name) &&
+        controller.class.parent == Admin::DeficiencyReports
     end
 
     def deficiency_reports_list
@@ -59,6 +60,14 @@ class Admin::MenuComponent < ApplicationComponent
         t("custom.admin.menu.deficiency_reports.settings"),
         admin_deficiency_report_settings_path,
         controller_name == "settings" && controller.class.parent == Admin::DeficiencyReports
+      ]
+    end
+
+    def deficiency_report_areas
+      [
+        t("custom.admin.menu.deficiency_reports.areas"),
+        admin_deficiency_report_areas_path,
+        controller_name == "areas" && controller.class.parent == Admin::DeficiencyReports
       ]
     end
 

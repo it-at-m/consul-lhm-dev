@@ -35,8 +35,7 @@
           current_filter: @current_order,
           filter_param: "order",
           text_search_enabled: true,
-          filters: @valid_orders,
-          empty_list_text: "Keine Ergebnisse"
+          filters: @valid_orders
         )) %>
     <%= paginate @polls %>
     </div>

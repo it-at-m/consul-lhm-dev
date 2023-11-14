@@ -8,7 +8,7 @@
         <%= render Shared::VCMapComponent.new(
           parent_class: resources_name,
           process_coordinates: @map_coordinates,
-          map_location: @projekt_phase&.map_location,
+          map_location: @map_location || @projekt_phase&.map_location,
           projekt_phase: @projekt_phase,
           show_admin_shape: @projekt_phase&.map_location&.show_admin_shape?
         ) %>
@@ -16,7 +16,7 @@
         <%= render Shared::MapComponent.new(
           parent_class: resources_name,
           process_coordinates: @map_coordinates,
-          map_location: @projekt_phase&.map_location,
+          map_location: @map_location || @projekt_phase&.map_location,
           projekt_phase: @projekt_phase,
           show_admin_shape: @projekt_phase&.map_location&.show_admin_shape?
         ) %>
@@ -38,7 +38,7 @@
         <% end %>
       <% else %>
         <h4 class="resources-list--not-items-message text-center">
-          <%= @empty_list_text %>
+          <%= empty_list_text %>
         </h4>
       <% end %>
     </div>
@@ -49,52 +49,46 @@
   <%= body %>
 <% else %>
   <div class="resources-list js-resources-list <%= class_names %>">
-    <% unless @hide_title %>
+    <% if @title.present? %>
       <h3 class="resources-list--title">
-        <% if @title_link.present? %>
-          <%= link_to(@title, @title_link) %>
-        <% elsif @title.present? %>
-          <%= @title %>
-        <% end %>
+        <%= @title %>
       </h3>
     <% end %>
 
     <%= map %>
 
-    <% unless @hide_actions %>
-      <div class="resources-list--actions">
-        <% if @text_search_enabled && i18n_namespace.present? %>
-          <%= render(
-            Shared::TextSearchFormComponent.new(
-              remote_url: remote_url,
-              i18n_namespace: "#{i18n_namespace}.search_form",
-            )
-          ) %>
-        <% end %>
+    <div class="resources-list--actions">
+      <% if @text_search_enabled && i18n_namespace.present? %>
+        <%= render(
+          Shared::TextSearchFormComponent.new(
+            remote_url: remote_url,
+            i18n_namespace: "#{i18n_namespace}.search_form",
+          )
+        ) %>
+      <% end %>
 
-        <div class="items-list-line-divider">
-        </div>
-        <% if filters.present? %>
-          <%= render(
-            Shared::FilterDropdownComponent.new(
-              title: @filter_title,
-              options: filters,
-              selected_option: selected_filter_otpion,
-              i18n_namespace: "#{i18n_namespace}.#{@filter_param&.pluralize}",
-              url_param_name: @filter_param,
-              remote_url: remote_url,
-              in_projekt_footer_tab: @projekt_phase.present?
-            )
-          ) %>
-        <% end %>
-
-        <% unless @hide_view_mode_button %>
-          <div class="resources-list--switch-view-button js-resource-list-switch-view-button">
-            <i class="fa <%= switch_view_mode_icon %>"></i>
-          </div>
-        <% end %>
+      <div class="items-list-line-divider">
       </div>
-    <% end %>
+      <% if filters.present? %>
+        <%= render(
+          Shared::FilterDropdownComponent.new(
+            title: filter_title,
+            options: filters,
+            selected_option: selected_filter_otpion,
+            i18n_namespace: "#{i18n_namespace}.#{@filter_param&.pluralize || "filters"}",
+            url_param_name: @filter_param,
+            remote_url: remote_url,
+            in_projekt_footer_tab: @projekt_phase.present?
+          )
+        ) %>
+      <% end %>
+
+      <% unless @hide_view_mode_button %>
+        <div class="resources-list--switch-view-button js-resource-list-switch-view-button">
+          <i class="fa <%= switch_view_mode_icon %>"></i>
+        </div>
+      <% end %>
+    </div>
 
     <% if items_remark.present? %>
       <div class="margin-bottom">

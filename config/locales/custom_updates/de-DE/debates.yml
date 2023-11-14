@@ -25,5 +25,28 @@ de:
         welcome_default_text: Diskussionen sind essenziell, um ein differenziertes Meinungsbild zu den einzelnen Projekten zu erhalten. Lassen Sie sich alle Diskussionen anzeigen oder filtern Sie am rechten Rand nach bestimmten Projekten, Gebieten oder Stichworten. Mit einem Klick auf das jeweilige Thema können Sie die Diskussionen nachverfolgen und sich selbst daran beteiligen.
         sidebar_information_default_text: Sie möchten Dinge anregen und bewegen? Dann starten Sie Ihre eigene Diskussion.
         count: Diskussionen
+        search_form:
+          button: Suche
+          placeholder: Suchen...
+          title: Suche
+        orders:
+          confidence_score: Am meisten bewertet
+          confidence_score_title: Am meisten bewertet
+          created_at: Neuste
+          created_at_title: Neuste
+          hot_score: Aktivste
+          hot_score_title: Aktivste
+          most_commented: Am meisten kommentiert
+          most_commented_title: Am meisten kommentiert
+          relevance: Relevanz
+          relevance_title: Relevanz
+          recommendations: Empfehlungen
+          recommendations_title: Empfehlungen
+          alphabet: Alphabetisch
+          alphabet_title: Alphabetisch
+          random: Zufällig
+          random_title: Zufällig
+          votes_total: Am meisten gewählt
+          votes_total_title: Am meisten gewählt
       show:
         welcome_default_text: "hat eine Diskussion zu einem Projekt gestartet. Sie können die Diskussion an der rechten Seitenleiste unterstützen, indem Sie ihn mit Daumen hoch bewerten. Sie können aber auch Ihre Ablehnung zum Ausdruck bringen, indem Sie auf Daumen nach unten klicken. Des Weiteren haben Sie die mit der Kommentarfunktion am unteren Ende die Möglichkeit selbst in die Diskussion einzusteigen."

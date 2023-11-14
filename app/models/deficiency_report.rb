@@ -25,10 +25,13 @@ class DeficiencyReport < ApplicationRecord
   belongs_to :category, class_name: "DeficiencyReport::Category", foreign_key: :deficiency_report_category_id
   belongs_to :status, class_name: "DeficiencyReport::Status", foreign_key: :deficiency_report_status_id
   belongs_to :officer, class_name: "DeficiencyReport::Officer", foreign_key: :deficiency_report_officer_id
+  belongs_to :area, class_name: "DeficiencyReport::Area",
+    foreign_key: :deficiency_report_area_id, inverse_of: :deficiency_reports
   belongs_to :author, -> { with_hidden }, class_name: "User", inverse_of: :deficiency_reports
   has_many :comments, as: :commentable, inverse_of: :commentable, dependent: :destroy
 
   validates :deficiency_report_category_id, :author, presence: true
+  validates :deficiency_report_area_id, presence: true, if: -> { validate_area_presence? }
 
   # validates :terms_of_service, acceptance: { allow_nil: false }, on: :create #custom
   validates :resource_terms, acceptance: { allow_nil: false }, on: :create #custom
@@ -133,4 +136,10 @@ class DeficiencyReport < ApplicationRecord
   def comments_allowed?(user)
     true
   end
+
+  private
+
+    def validate_area_presence?
+      DeficiencyReport::Area.exists?
+    end
 end

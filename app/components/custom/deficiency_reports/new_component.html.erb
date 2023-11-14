@@ -4,6 +4,25 @@
     <%= translatable_form_for(deficiency_report, html: { class: "deficiency-report-form" }) do |f| %>
       <%= back_link_to(deficiency_reports_path) %>
 
+      <% area_select_html = capture do %>
+        <div class="margin-bottom">
+          <%= render Shared::SidebarCardComponent.new(
+                        title: t("custom.deficiency_reports.form.area.title"),
+                        description: t("custom.deficiency_reports.form.area.description"),
+                        icon_name: "map-pin"
+                     ) do |c| %>
+            <%= f.select :deficiency_report_area_id, areas.all.map { |area| [area.name, area.id] },
+              { prompt: t("custom.deficiency_reports.form.category.placeholder"), label: false },
+              { class: "js-dr-form-update-map",
+                data: {
+                  all_area_map_coordinates: map_coordinates_for_areas,
+                  default_map_coordinates: [Setting["map.latitude"], Setting["map.longitude"]]
+                }
+              } %>
+          <% end %>
+        </div>
+      <% end %>
+
       <% category_select_html = capture do %>
         <div class="margin-bottom">
           <%= render Shared::SidebarCardComponent.new(
@@ -35,9 +54,14 @@
 
       <div class="flex-layout">
         <div class="main-column">
-        <div class="show-on-small-tablet js-remove-on-desktop-section">
-          <%= category_select_html %>
-        </div>
+          <% if areas.any? %>
+            <div class="show-on-small-tablet js-remove-on-desktop-section">
+              <%= area_select_html %>
+            </div>
+          <% end %>
+          <div class="show-on-small-tablet js-remove-on-desktop-section">
+            <%= category_select_html %>
+          </div>
           <%= f.translatable_fields do |translations_form| %>
             <div class="js-suggest" data-locale="<%= translations_form.locale %>"></div>
             <div class="user-resources-form--banner-editor js-user-resources-form--banner-editor -deficiency-report">
@@ -79,6 +103,13 @@
         </div>
 
         <aside class="sidebar">
+
+          <% if areas.any? %>
+            <div class="hide-on-mobile js-remove-on-mobile-section">
+              <%= area_select_html %>
+            </div>
+          <% end %>
+
           <div class="hide-on-mobile js-remove-on-mobile-section">
             <%= category_select_html %>
           </div>

@@ -1,0 +1,29 @@
+<div class="new-card proposal-notification" id="<%= dom_id(@notification) %>">
+  <div class="proposal-notification--heading">
+    <div class="proposal-notification--title"><%= @notification.title %></div>
+    <p class="more-info proposal-notification-date">
+    <%= l(@notification.created_at, format: :date_only) %>
+    </p>
+  </div>
+  <%= helpers.simple_format helpers.sanitize_and_auto_link(@notification.body), {}, sanitize: false %>
+
+  <div class="reply">
+    <% if @enable_moderation_actions %>
+      <%= render Shared::ModerationActionsComponent.new(@notification) %>
+    <% end %>
+  </div>
+
+  <% if @show_admin_actions %>
+    <div class="common-notification-actions">
+      <%= link_to edit_path do %>
+        <i class="fa fa-edit edit-icon-button">
+        </i>
+      <% end %>
+
+      <%= button_to delete_path, method: :delete, data: { confirm: "Möchten Sie die Benachrichtigung wirklich löschen?" } do %>
+        <i class="fa fa-trash delete-icon-button">
+        </i>
+      <% end %>
+    </div>
+  <% end %>
+</div>

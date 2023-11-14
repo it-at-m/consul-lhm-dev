@@ -28,14 +28,17 @@
       </div>
 
       <% if @active_projekts.any? %>
-        <%= render Projekts::ListComponent.new(
-          projekts: @active_projekts,
-          map_coordinates: @active_projekts_map_locations,
-          # current_filter: @current_projekt_filter,
-          # filters: @current_active_projekt_filters,
-          # remote_url: projekts_url(format: :js),
-          show_more_link: true
-        ) %>
+        <%= render Shared::ResourcesListComponent.new(
+          resources: @active_projekts,
+          map_coordinates: @map_coordinates,
+          current_filter: @current_projekts_filter,
+          filters: @active_projekts_filters,
+          resource_type: Projekt,
+          title: t("custom.projekts.list.title")) do |c| %>
+          <% c.bottom_content do %>
+            <%= link_to("Alle Projekte anzeigen", projekts_path(order: 'index_order_all'), class: "resources-list--more-link") %>
+          <% end %>
+        <% end %>
       <% end %>
 
       <%= render_custom_block 'home_page_1a' %>
@@ -61,7 +64,11 @@
       <%= render_custom_block 'home_page_5' %>
 
       <% if @expired_projekts.any? %>
-        <%= render Projekts::ListComponent.new(projekts: @expired_projekts, title: t("custom.welcome.expired_projekt_cards.title")) %>
+        <%= render Shared::ResourcesListComponent.new(
+          resources: @expired_projekts,
+          resource_type: Projekt,
+          title: t("custom.welcome.expired_projekt_cards.title"),
+          ) %>
       <% end %>
       <%= render_custom_block 'home_page_6' %>
     </div>

@@ -49,12 +49,10 @@
                   current_filter: @current_order,
                   filter_param: "order",
                   filters: @valid_orders,
-                  hide_title: true,
-                  projekt_phase: @projekt_phase,
                   additional_data: {
                     ballot: @ballot
                   },
-                  empty_list_text: t("custom.budgets.investments.index.empty_list_text"),
+                  projekt_phase: @projekt_phase
                 )) %>
           <%= paginate @investments, remote: true, params: { controller: "pages", action: "projekt_phase_footer_tab" } %>
         <% end %>

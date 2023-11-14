@@ -27,8 +27,7 @@
           filter_param: "order",
           text_search_enabled: true,
           filters: @valid_orders,
-          hide_title: true,
-          empty_list_text: "Keine Ergebnisse")) %>
+          )) %>
       <%= paginate @proposals %>
     </div>
 

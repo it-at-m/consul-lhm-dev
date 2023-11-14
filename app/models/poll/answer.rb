@@ -37,7 +37,7 @@ class Poll::Answer < ApplicationRecord
 
     def max_votes
       return if !question || question&.unique? || persisted?
-      return if question.votation_type.rating_scale? #custom line
+      return if question.votation_type&.rating_scale? #custom line
 
       author.lock!
 

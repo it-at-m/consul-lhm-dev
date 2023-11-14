@@ -1,0 +1,28 @@
+<% if Setting.new_design_enabled? %>
+  <main>
+    <div class="flex-layout">
+      <div class="main-column">
+        <div class="margin-bottom">
+          <%= back_link_to(proposal_dashboard_polls_path(@proposal)) %>
+        </div>
+
+        <h1><%= t("custom.proposals.dashboard.polls.new.title") %></h1>
+        <p class="margin-bottom">
+          <%= render_custom_block("proposals_dashboard_polls_welcome_text", default_content: t("custom.proposals.dashboard.default_welcome_text_html")) %>
+        </p>
+        <div class="margin-bottom-twice">
+          <%= render ResourcePage::BannerComponent.new(resource: @proposal) %>
+        </div>
+        <%= render "form_new" %>
+      </div>
+      <aside class="sidebar">
+      </aside>
+    </div>
+  </main>
+
+<% else %>
+  <% content_for :action_title, t("dashboard.polls.new.title") %>
+  <%= back_link_to %>
+
+  <%= render "form" %>
+<% end %>

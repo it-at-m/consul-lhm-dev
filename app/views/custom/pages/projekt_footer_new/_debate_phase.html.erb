@@ -18,8 +18,7 @@
         current_filter: @current_order,
         filter_param: "order",
         filters: @valid_orders,
-        projekt_phase: @projekt_phase,
-        empty_list_text: t("custom.debates.index.empty_list_text")
+        projekt_phase: @projekt_phase
       )) %>
   <%= paginate @debates, remote: true, params: { controller: "pages", action: "projekt_phase_footer_tab" } %>
   </div>

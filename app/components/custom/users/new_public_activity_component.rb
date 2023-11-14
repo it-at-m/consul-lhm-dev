@@ -121,7 +121,6 @@ class Users::NewPublicActivityComponent < ApplicationComponent
         current_filter: current_filter,
         filters: valid_filters,
         filter_param: "filter",
-        filter_title: "Filtern nach",
         filter_i18n_namespace: "custom.user_page",
         remote_url: remote_url
       }

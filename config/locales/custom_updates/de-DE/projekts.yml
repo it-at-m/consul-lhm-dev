@@ -1,6 +1,7 @@
 de:
   custom:
     projekts:
+      empty_list_text: Keine Projekte für aktuellen Filter
       overview_page:
         projekt_name: Projektübersichtsseite
         projekt_name_for_proposal: Neuer Projektvorschlag
@@ -13,7 +14,6 @@ de:
         current_projekts: Projekte mit aktiver Beteiligungsphase
         expired_projekts: Abgeschlossene Projekte
         no_projekts: Keine Projekte
-        no_projekts_for_current_filter: Keine Projekte für aktuellen Filter
         title: Projektübersicht
         to_projekt: Zum Projekt
         social_share:

@@ -8,7 +8,9 @@ class Shared::ResourceImageComponent < ApplicationComponent
   end
 
   def resource_name
-    if @resource.respond_to?(:projekt_phase)
+    if @resource.is_a?(Poll) && @resource.author.present?
+      @resource.model_name.human
+    elsif @resource.respond_to?(:projekt_phase)
       @resource.projekt_phase.title
     else
       @resource.model_name.human
