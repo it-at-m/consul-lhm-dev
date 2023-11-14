@@ -18,7 +18,7 @@
           <%= resources_back_link(fallback_path: fallback_path) %>
         </div>
         <div class="resource-page--title-subline">
-          <%= render_custom_block("polls_show_welcome_text", custom_prefix: @poll.author.name, default_content: t("custom.polls.show.welcome_default_text")) %>
+          <%= render_custom_block("polls_show_welcome_text", custom_prefix: current_user&.username.present? ? "#{current_user&.username}," : nil, default_content: t("custom.polls.show.welcome_default_text")) %>
         </div>
       </div>
       <div class="sidebar-placeholder"></div>
