@@ -77,6 +77,7 @@ de:
           unverified_note: "Ihre Daten werden manuell überprüft. Dies kann 1-2 Werktage in Anspruch nehmen. Danach werden Ihre Stimmen freigegeben."
           unverified_note_no_data_html: "Bitte %{verify_account}."
           unfeasible_html: "Dieser Investitionsvorschlag <strong>wurde als nicht durchführbar markiert</strong> und wird nicht in die Abstimmungsphase übergehen."
+          feasible_html: "Dieser Vorschlag wurde als durchführbar klassifiziert."
         show:
           callouts:
             publishing_prices:

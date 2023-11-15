@@ -49,22 +49,14 @@
                 ballot: ballot %>
         </div>
       <% end %>
-
     <% end %>
+  <% end %>
 
-    <% if investment_status_callout.present? %>
-      <% c.footer_section do %>
-        <div class="callot-section">
-          <%= investment_status_callout %>
-        </div>
-      <% end %>
+  <% if investment_status_callout.present? %>
+    <% c.footer_section do %>
+      <div class="callot-section">
+        <%= investment_status_callout %>
+      </div>
     <% end %>
-
-  <% elsif budget_investment.unfeasible? %>
-      <% c.footer_section do %>
-        <div class='callout-section'>
-          <%= t("custom.budgets.investments.investment.unfeasible_html") %>
-        </div>
-      <% end %>
   <% end %>
 <% end %>

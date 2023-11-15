@@ -13,3 +13,9 @@ en:
       p3: You can change your vote at any time up to the end of the process.
     formular_follow_up_letter:
       button_text: To the form
+    budget_investment_feasible:
+      subject: "Your investment proposal '%{title}' has been marked as feasible"
+      hi: "Dear User,"
+      accepted: "Thank you for submitting your proposal \"%{title}\". It was classified as feasible."
+      thank_you: Thank you for participation!
+      sincerely: Best regards

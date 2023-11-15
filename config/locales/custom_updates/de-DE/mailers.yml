@@ -16,3 +16,9 @@ de:
       p1: Herzlichen Dank für die Einreichung Ihres Formulars. Wir werden die Daten jetzt intern prüfen und ggf. wieder auf Sie zukommen.
     formular_follow_up_letter:
       button_text: Zum Formular
+    budget_investment_feasible:
+      subject: "Ihr Ausgabenvorschlag '%{title}' wurde als durchführbar markiert"
+      hi: "Liebe*r Benutzer*in,"
+      accepted: "vielen Dank für die Einreichung Ihres Vorschlags \"%{title}\". Ihr Vorschlag wurde als durchführbar klassifiziert."
+      thank_you: Vielen Dank für Ihre Beteiligung!
+      sincerely: Mit freundlichen Grüßen
