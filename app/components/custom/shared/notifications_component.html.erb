@@ -12,7 +12,7 @@
   <% if @notifiable.is_a?(ProjektPhase::ProjektNotificationPhase) %>
     <%= notifications_html %>
   <% else %>
-    <%= render Shared::CollapseComponent.new do |c| %>
+    <%= render Shared::CollapseComponent.new(opened_by_default: opened_by_default?) do |c| %>
       <% c.head do %>
         <h3>
           Benachrichtigungen von <%= @author.name %> (<%= @notifications.count %>)

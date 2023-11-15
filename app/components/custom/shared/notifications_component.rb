@@ -17,4 +17,8 @@ class Shared::NotificationsComponent < ApplicationComponent
       @notifications ||= []
     end
   end
+
+  def opened_by_default?
+    @notifiable.is_a?(Proposal)
+  end
 end
