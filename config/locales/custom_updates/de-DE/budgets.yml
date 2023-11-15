@@ -33,6 +33,10 @@ de:
     budgets:
       investments:
         index:
+          orders:
+            random: Zufällig
+            ballot_line_weight: Aktuelle Stimmenverteilung
+            newest: Neueste zuerst
           sidebar:
             user_votes: "Abgegebene Stimmen: %{count}"
           empty_list_text: Keine Ergebnisse
