@@ -7,7 +7,8 @@ class FormularAnswersController < ApplicationController
   invisible_captcha only: [:create], honeypot: :subtitle
 
   def create
-    @formular_answer = FormularAnswer.new(formular_answer_params)
+    submitter_hash = { submitter_id: current_user&.id, original_submitter_email: current_user&.email }
+    @formular_answer = FormularAnswer.new(formular_answer_params.merge(submitter_hash))
     @formular_answer.answer_errors = {}
     authenticate_user! if @formular_answer.formular.requires_login?
 
