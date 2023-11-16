@@ -35,12 +35,12 @@ html{
 }
 
 body.custom-new-design {
-  font-family: "Asap", "sourcesanspro-regular-webfont", "sourcesanspro-bold-webfont", "PT_Serif_Web-Regular", sans-serif !important;
+  font-family: $new-body-font-family;
   color: $main-text-color;
   margin: 0;
 
   h1, h2, h3, h4, h5 {
-  font-family: "Asap", "sourcesanspro-regular-webfont", "sourcesanspro-bold-webfont", "PT_Serif_Web-Regular", sans-serif !important;
+    font-family: $new-header-font-family;
     color: #292929;
   }
 
