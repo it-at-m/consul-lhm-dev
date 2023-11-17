@@ -170,8 +170,7 @@
         <%= f.translatable_fields do |translations_form| %>
           <div class="js-suggest" data-locale="<%= translations_form.locale %>"></div>
 
-          <div
-              class="user-resources-form--banner-editor js-user-resources-form--banner-editor <%= banner_class_name %>"
+          <div class="user-resources-form--banner-editor js-user-resources-form--banner-editor <%= banner_class_name %>"
               style="<%= helpers.sentiment_color_style(@resource.sentiment) %>">
               <div class="user-resources-form--title-wrapper">
                 <%= translations_form.text_area :title,

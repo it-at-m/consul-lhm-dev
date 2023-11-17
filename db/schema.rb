@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_11_15_154654) do
+ActiveRecord::Schema.define(version: 2023_11_17_075045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1501,6 +1501,7 @@ ActiveRecord::Schema.define(version: 2023_11_15_154654) do
     t.boolean "most_voted", default: false
     t.boolean "open_answer", default: false
     t.string "more_info_link"
+    t.integer "next_question_id"
     t.index ["question_id"], name: "index_poll_question_answers_on_question_id"
   end
 
@@ -1633,6 +1634,7 @@ ActiveRecord::Schema.define(version: 2023_11_15_154654) do
     t.boolean "bam_street_restricted", default: false
     t.boolean "show_individual_stats_per_answer", default: false
     t.bigint "projekt_phase_id"
+    t.boolean "wizard_mode", default: false
     t.index ["budget_id"], name: "index_polls_on_budget_id", unique: true
     t.index ["geozone_restricted"], name: "index_polls_on_geozone_restricted"
     t.index ["projekt_id"], name: "index_polls_on_projekt_id"
@@ -2434,6 +2436,7 @@ ActiveRecord::Schema.define(version: 2023_11_15_154654) do
     t.string "street_number_extension"
     t.boolean "reverify", default: true
     t.string "auth_image_link"
+    t.boolean "prefer_wide_resources_list_view_mode"
     t.index ["bam_street_id"], name: "index_users_on_bam_street_id"
     t.index ["city_street_id"], name: "index_users_on_city_street_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

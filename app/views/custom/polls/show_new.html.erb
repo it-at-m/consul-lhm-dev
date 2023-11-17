@@ -18,7 +18,10 @@
           <%= resources_back_link(fallback_path: fallback_path) %>
         </div>
         <div class="resource-page--title-subline">
-          <%= render_custom_block("polls_show_welcome_text", custom_prefix: current_user&.username.present? ? "#{current_user&.username}," : nil, default_content: t("custom.polls.show.welcome_default_text")) %>
+          <%= render_custom_block(
+            "polls_show_welcome_text",
+            custom_prefix: current_user&.username.present? ? "#{current_user&.username}," : nil,
+            default_content: t("custom.polls.show.welcome_default_text")) %>
         </div>
       </div>
       <div class="sidebar-placeholder"></div>
@@ -39,8 +42,34 @@
         <%= render "callout" %>
 
         <div class="margin-bottom">
-          <%= render Polls::Questions::QuestionComponent.with_collection(@questions) %>
+          <% if @poll.wizard_mode? %>
+            <div class="question-wizard js-question-wizard">
+              <div class="question-wizard--questions">
+                <% all_questions_answered = @questions.all? { |question| question.answers.present? } %>
+                <% @questions.each.with_index do |question, index| %>
+                  <% additional_class = (question.answers.empty? || (all_questions_answered  && index == 0)) ? "-visible" : "" %>
+                  <div
+                      class="question-wizard-item js-question-wizard-item <%= additional_class %>"
+                      data-question-id="<%= question.id %>">
+                      <%= render Polls::Questions::QuestionComponent.new(question: question) %>
+                  </div>
+                <% end %>
+              </div>
+
+              <div class="questions-navigation margin-bottom">
+                <button type="button" class="<%= (@questions.first.answers.empty? || all_questions_answered) ? "-hidden" : "" %> button hollow question-wizard-prev js-question-wizard-prev">
+                  <%= t("custom.polls.questions.prev_question") %>
+                </button>
+                <button type="button" class="button hollow js-question-wizard-next">
+                  <%= t("custom.polls.questions.next_question") %>
+                </button>
+              </div>
+            </div>
+          <% else %>
+            <%= render Polls::Questions::QuestionComponent.with_collection(@questions) %>
+          <% end %>
         </div>
+
 
         <% @questions.each do |question| %>
           <% question.question_answers.each do |answer| %>

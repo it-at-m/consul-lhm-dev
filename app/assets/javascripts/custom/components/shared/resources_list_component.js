@@ -10,7 +10,7 @@
       }
 
       $(document).on("click", ".js-resource-list-switch-view-button",
-        this.handleSwitchResourceViewMode.bind(this)
+        this.switchResourcesViewMode.bind(this)
       );
 
       this.initialized = true;
@@ -20,42 +20,37 @@
       return $(".js-resource-list-switch-view-button");
     },
 
-    handleSwitchResourceViewMode: function(e) {
+    switchResourcesViewMode: function(e) {
       var switchButton = e.currentTarget;
 
-      var resourcesList =
-            switchButton
-              .closest(".js-resources-list")
+      var resourcesList = switchButton.closest(".js-resources-list");
 
-      var currentViewModeWide =
-        this.isResourcesListInWideMode(resourcesList)
-        resourcesList.dataset
+      var currentViewModeWide = this.isResourcesListInWideMode(resourcesList);
 
       if (currentViewModeWide) {
-        document.cookie = 'wide_resources=false'
-      }
-      else {
-        document.cookie = 'wide_resources=true'
+        document.cookie = "wide_resources=false";
+      } else {
+        document.cookie = "wide_resources=true";
       }
 
-      this.switchViewModeForRestResources();
+      this.switchViewModeForAllResourcesLists();
     },
 
-    switchViewModeForRestResources: function() {
+    switchViewModeForAllResourcesLists: function() {
       var resourcesListsOnPage = Array.from(document.querySelectorAll(".js-resources-list"));
 
       resourcesListsOnPage.forEach(function(resourcesList) {
         this.switchResourceListViewMode(resourcesList);
-      }.bind(this))
+      }.bind(this));
     },
 
     isResourcesListInWideMode: function(resourcesList) {
-      return resourcesList.classList.contains(this.WIDE_MODE_CLASS)
+      return resourcesList.classList.contains(this.WIDE_MODE_CLASS);
     },
 
     switchResourceListViewMode: function(resourcesList) {
       resourcesList.classList.toggle(this.WIDE_MODE_CLASS);
-      var switchButton = resourcesList.querySelector(".js-resource-list-switch-view-button")
+      var switchButton = resourcesList.querySelector(".js-resource-list-switch-view-button");
 
       var switchButtonIcon = switchButton.querySelector("i");
 

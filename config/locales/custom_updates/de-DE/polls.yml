@@ -22,6 +22,8 @@ de:
         expires_today: Läuft nur noch heute
         participate_button: Teilnehmen
       questions:
+        prev_question: "Vorherige Frage"
+        next_question: "Nächste Frage"
         answers:
           more_info: Mehr Infos
           save_open_answer: Antwort speichern
