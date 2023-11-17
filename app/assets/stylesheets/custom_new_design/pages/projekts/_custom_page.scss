@@ -121,12 +121,13 @@
 
   .custom-page--banner-image {
     width: 54%;
-    // object-fit: contain;
-    object-fit: cover;
     position: relative;
     bottom: -50px;
     height: 390px !important;
-    border-radius: 10px;
+
+    & > .resource-image {
+      border-radius: 10px;
+    }
   }
 
   .custom-page--banner-breadcrumbs {
@@ -242,16 +243,10 @@
     }
 
     .custom-page--banner-image {
-      object-fit: cover;
-      width: 100%;
       height: 250px !important;
       position: absolute;
       bottom: -130px;
-      left: 20px;
-      right: 0;
-      top: initial;
-      width: calc(100% - 40px);
-      margin-right: 20px;
+      width: calc(100% - 55px);
     }
 
     .page-subnav-tab {

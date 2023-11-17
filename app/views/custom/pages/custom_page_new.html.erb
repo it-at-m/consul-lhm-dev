@@ -55,7 +55,16 @@
         </div>
 
         <% if @custom_page.image.present? %>
-          <%= image_tag(url_for(@custom_page.image.attachment), class: "custom-page--banner-image" )  %>
+          <%#= image_tag(url_for(@custom_page.image.attachment), class: "custom-page--banner-image" )  %>
+          <div class="custom-page--banner-image">
+            <%= render(
+              Shared::ResourceImageComponent.new(
+                image_url: @custom_page.image&.variant(:large),
+                image_placeholder_icon_class: "fa-comments",
+                resource: @custom_page
+              )
+            ) %>
+          </div>
         <% end %>
       </div>
     </div>
