@@ -11,9 +11,16 @@
       return document.querySelector(".js-question-wizard .js-question-wizard-item.-visible");
     },
 
+    getQuestionById: function(id) {
+      return document.querySelector(
+        ".js-question-wizard [data-question-id='" + id + "']"
+      );
+    },
+
     goToPrevQuestion: function() {
-      var currentQuestion = this.currentQuestion();
-      var prevQuestion = currentQuestion.previousElementSibling;
+      var prevButton = document.querySelector(".js-question-wizard-prev");
+      var prevQuestion = this.getQuestionById(prevButton.dataset.prevQuestionId);
+      console.log(prevQuestion)
 
       this.navigateToQuestion(prevQuestion);
     },
@@ -24,9 +31,7 @@
       var nextQuestion;
 
       if (alreadyAnsweredOption && alreadyAnsweredOption.dataset.nextQuestionId) {
-        nextQuestion = document.querySelector(
-          ".js-question-wizard [data-question-id='" + alreadyAnsweredOption.dataset.nextQuestionId  + "']"
-        );
+        nextQuestion = this.getQuestionById(alreadyAnsweredOption.dataset.nextQuestionId);
       } else {
         nextQuestion = currentQuestion.nextElementSibling;
       }
@@ -45,24 +50,27 @@
     },
 
     navigateToQuestion: function(nextQuestion) {
-      this.currentQuestion().classList.remove("-visible");
-      nextQuestion.classList.add("-visible");
-      $(".js-question-wizard--progress-current-page").text(nextQuestion.dataset.questionNumber);
+      if (nextQuestion) {
+        var $previousButton = $(".js-question-wizard-prev");
+        $previousButton.get(0).dataset.prevQuestionId = this.currentQuestion().dataset.questionId;
 
-      var $nextButton = $(".js-question-wizard-next");
+        this.currentQuestion().classList.remove("-visible");
+        nextQuestion.classList.add("-visible");
+        $(".js-question-wizard--progress-current-page").text(nextQuestion.dataset.questionNumber);
 
-      if (nextQuestion.nextElementSibling) {
-        $nextButton.show();
-      } else {
-        $nextButton.hide();
-      }
+        var $nextButton = $(".js-question-wizard-next");
 
-      var $previousButton = $(".js-question-wizard-prev");
+        if (nextQuestion.nextElementSibling) {
+          $nextButton.show();
+        } else {
+          $nextButton.hide();
+        }
 
-      if (nextQuestion.previousElementSibling) {
-        $previousButton.show();
-      } else {
-        $previousButton.hide();
+        if (nextQuestion.previousElementSibling) {
+          $previousButton.show();
+        } else {
+          $previousButton.hide();
+        }
       }
 
       if (this.firstQuestion() === nextQuestion) {
