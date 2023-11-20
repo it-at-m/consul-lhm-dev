@@ -1,6 +1,6 @@
 $("#poll-participation-confirmed-callout").remove();
 $("#<%= dom_id(@question) %>_answers").html("<%= j render Polls::Questions::AnswersComponent.new(@question, answer_updated: @answer_updated, open_answer_updated: @open_answer_updated) %>");
 
-<% if @question_answer.next_question_id.present? %>
+<% if @question_answer&.next_question_id.present? %>
   App.QuestionWizard.navigateToQuestionById("<%= @question_answer.next_question_id %>")
 <% end %>
