@@ -45,29 +45,33 @@
           <% if @poll.wizard_mode? %>
             <div class="question-wizard js-question-wizard">
               <div class="question-wizard--questions">
-                <% all_questions_answered = @questions.all? { |question| question.answers.present? } %>
+                <%# <% all_questions_answered = @questions.all? { |question| question.answers.present? } %>
                 <% first_question_shown = false %>
                 <% @questions.each.with_index do |question, index| %>
-                  <% show_question = false %>
-                  <% show_question = (question.answers.empty? || (all_questions_answered  && index == 0)) %>
-                  <% additional_class = (show_question && !first_question_shown) ? "-visible" : "" %>
+                  <% show_question = (index == 0) %>
+                  <% additional_class = show_question ? "-visible" : "" %>
                   <div
                       class="question-wizard-item js-question-wizard-item <%= additional_class %>"
                       data-question-id="<%= question.id %>">
                       <%= render Polls::Questions::QuestionComponent.new(question: question) %>
                   </div>
                   <% if show_question %>
-                    <% first_question_shown = true %>
+                    <% first_question_shown = show_question %>
                   <% end %>
                 <% end %>
               </div>
 
               <div class="questions-navigation margin-bottom">
-                <button type="button" class="<%= (@questions.first.answers.empty? || all_questions_answered) ? "-hidden" : "" %> button hollow question-wizard-prev js-question-wizard-prev">
-                  <%= t("custom.polls.questions.prev_question") %>
-                </button>
-                <button type="button" class="button hollow js-question-wizard-next">
-                  <%= t("custom.polls.questions.next_question") %>
+                <div class="d-flex">
+                  <button type="button" class="-hidden button hollow question-wizard-prev js-question-wizard-prev">
+                    <%= t("custom.polls.questions.prev_question") %>
+                  </button>
+                  <button type="button" class="button margin-left hollow js-question-wizard-next">
+                    <%= t("custom.polls.questions.next_question") %>
+                  </button>
+                </div>
+                <button type="button" class="button hollow js-question-wizard-go-to-start">
+                  <%= t("custom.polls.questions.go_to_start") %>
                 </button>
               </div>
             </div>
