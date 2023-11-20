@@ -52,7 +52,8 @@
                   <% additional_class = show_question ? "-visible" : "" %>
                   <div
                       class="question-wizard-item js-question-wizard-item <%= additional_class %>"
-                      data-question-id="<%= question.id %>">
+                      data-question-id="<%= question.id %>"
+                      data-question-number="<%= index + 1 %>">
                       <%= render Polls::Questions::QuestionComponent.new(question: question) %>
                   </div>
                   <% if show_question %>
@@ -62,15 +63,20 @@
               </div>
 
               <div class="questions-navigation margin-bottom">
+                <div class="question-wizard--progress">
+                  <span class="js-question-wizard--progress-current-page">
+                    1
+                  </span>/<%= @questions.size %>
+                </div>
                 <div class="d-flex">
-                  <button type="button" class="-hidden button hollow question-wizard-prev js-question-wizard-prev">
+                  <button type="button" class="d-none button hollow question-wizard-prev js-question-wizard-prev">
                     <%= t("custom.polls.questions.prev_question") %>
                   </button>
                   <button type="button" class="button margin-left hollow js-question-wizard-next">
                     <%= t("custom.polls.questions.next_question") %>
                   </button>
                 </div>
-                <button type="button" class="button hollow js-question-wizard-go-to-start">
+                <button type="button" class="d-none button hollow js-question-wizard-go-to-start">
                   <%= t("custom.polls.questions.go_to_start") %>
                 </button>
               </div>

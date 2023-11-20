@@ -20,10 +20,11 @@
 
     goToNextQuestion: function() {
       var currentQuestion = this.currentQuestion();
-      var nextQuestionId = document.querySelector(".js-question-answered").dataset.nextQuestionId;
+      var answeredQuestion = document.querySelector(".js-question-answered");
       var nextQuestion;
 
-      if (nextQuestionId) {
+      if (answeredQuestion) {
+        var nextQuestionId = answeredQuestion.dataset.nextQuestionId;
         nextQuestion = document.querySelector(
           ".js-question-wizard [data-question-id='" + nextQuestionId + "']"
         );
@@ -49,6 +50,8 @@
         this.currentQuestion().classList.remove("-visible");
         nextQuestion.classList.add("-visible");
       }
+
+      $(".js-question-wizard--progress-current-page").text(nextQuestion.dataset.questionNumber);
 
       var $nextButton = $(".js-question-wizard-next");
 

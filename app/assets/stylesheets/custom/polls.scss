@@ -445,6 +445,7 @@ td.answers-column  {
 }
 
 .questions-navigation {
+  position: relative;
   display: flex;
   justify-content: space-between;
   flex-direction: row-reverse;
@@ -463,4 +464,21 @@ td.answers-column  {
   &.-visible {
     display: block;
   }
+}
+
+.question-wizard--progress {
+  display: inline-flex;
+  justify-content: center;
+  padding-top: 7px;
+  align-items: center;
+  margin-bottom: 5px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  font-size: 28px;
+  width: 80px;
+}
+
+.question-wizard--progress-inner {
 }
