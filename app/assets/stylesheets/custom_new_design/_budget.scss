@@ -167,5 +167,10 @@
     .my-ballot, .investments-filters {
       padding-top: 1rem;
     }
+
+    .sidebar-card--section .investments-filters {
+      padding-top: 0;
+      border-top: none;
+    }
   }
 }

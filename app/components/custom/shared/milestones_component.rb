@@ -12,4 +12,8 @@ class Shared::MilestonesComponent < ApplicationComponent
     order = @milestoneable.settings.find_by(key: "feature.general.newest_first").value.present? ? :desc : :asc
     @milestones.order_by_publication_date(order)
   end
+
+  def opened_by_default?
+    @milestoneable.is_a?(Proposal)
+  end
 end

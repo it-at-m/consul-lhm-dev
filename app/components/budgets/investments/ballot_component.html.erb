@@ -10,10 +10,11 @@
         </p>
       <% end %>
       <% if investment.should_show_ballots? %>
-        <br>
-        <strong>
-          <%= t("custom.budgets.investments.investment.qualified_supports", count: investment.total_ballot_votes) %>
-        </strong>
+        <div class="margin-bottom-10">
+          <strong>
+            <%= t("custom.budgets.investments.investment.qualified_supports", count: investment.total_ballot_votes) %>
+          </strong>
+        </div>
         <%= button_to budget_ballot_line_path(id: investment.id,
                                               budget_id: investment.budget_id,
                                               investments_ids: investment_ids,
@@ -38,6 +39,11 @@
         </p>
       <% end %>
       <% if investment.should_show_ballots? %>
+        <div class="margin-bottom-10">
+          <strong>
+            <%= t("custom.budgets.investments.investment.qualified_supports", count: investment.total_ballot_votes) %>
+          </strong>
+        </div>
 
         <% if investment.budget.distributed_voting? %>
           <br>

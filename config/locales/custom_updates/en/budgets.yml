@@ -77,6 +77,7 @@ en:
           unverified_note: "Your data will be checked manually. This can take 1-2 working days. After that, your votes will be released."
           unverified_note_no_data_html: "Plaese %{verify_account}, to make sure your votes are counted."
           unfeasible_html: "This investment proposal <strong>was marked as not feasible</strong> and will not take part in voting."
+          feasible_html: "This proposal was classified as feasible."
         show:
           callouts:
             publishing_prices:
@@ -86,9 +87,10 @@ en:
               undecided: This investment proposal was not eveluated yet.
               unfeasible: This investment proposal was marked as unfeasible.
           implementation: Implementation
-          implementation_city_text_html: <p>Needs to be implemented by the city</p>
-          implementation_text_html: <p>%{author} supports with implementation<p><p>%{implementation_contribution}</p>
-          user_cost_estimate: Cost estimate
+          implementation_city_text_html: Needs to be implemented by the city
+          implementation_text_html: "%{author} supports with implementation<br><br>%{implementation_contribution}"
+          price: Cost estimation by the administration
+          user_cost_estimate: Cost estimation by the user
         statuses:
           phases:
             accepting: The investment proposal was successfully submitted.

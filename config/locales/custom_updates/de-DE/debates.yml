@@ -25,6 +25,7 @@ de:
         welcome_default_text: Diskussionen sind essenziell, um ein differenziertes Meinungsbild zu den einzelnen Projekten zu erhalten. Lassen Sie sich alle Diskussionen anzeigen oder filtern Sie am rechten Rand nach bestimmten Projekten, Gebieten oder Stichworten. Mit einem Klick auf das jeweilige Thema können Sie die Diskussionen nachverfolgen und sich selbst daran beteiligen.
         sidebar_information_default_text: Sie möchten Dinge anregen und bewegen? Dann starten Sie Ihre eigene Diskussion.
         count: Diskussionen
+        participation_information: Beteiligungsinformation
         search_form:
           button: Suche
           placeholder: Suchen...

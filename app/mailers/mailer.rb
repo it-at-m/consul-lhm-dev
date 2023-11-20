@@ -98,6 +98,16 @@ class Mailer < ApplicationMailer
     end
   end
 
+  def budget_investment_feasible(investment)
+    @investment = investment
+    @author = investment.author
+    @email_to = @author.email
+
+    with_user(@author) do
+      mail(to: @email_to, subject: t("mailers.budget_investment_feasible.subject", title: @investment.title))
+    end
+  end
+
   def budget_investment_selected(investment)
     @investment = investment
     @author = investment.author

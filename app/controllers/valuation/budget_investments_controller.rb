@@ -29,6 +29,8 @@ class Valuation::BudgetInvestmentsController < Valuation::BaseController
     if valid_price_params? && @investment.update(valuation_params)
       if @investment.unfeasible_email_pending?
         @investment.send_unfeasible_email
+      elsif @investment.feasible? && @investment.valuation_finished?
+        Mailer.budget_investment_feasible(@investment).deliver_later
       end
 
       Activity.log(current_user, :valuate, @investment)

@@ -40,6 +40,7 @@ de:
           In der rechten Seitenleiste ermöglicht die Plattform eine gezielte Filterung nach Vorschlägen zu Projekten, in bestimmten Stadtgebieten oder nach Schlagworten.
         sidebar_information_default_text: Sie haben zu einem bestimmten Projekt einen eigenen Vorschlag? Mit einem Klick auf die Schaltfläche können Sie ihn einreichen.
         empty_list_text: Derzeit keine verknüpften Beiträge
+        participation_information: Beteiligungsinformation
         search_form:
           button: Suche
           placeholder: Vorschläge durchsuchen...

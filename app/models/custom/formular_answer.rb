@@ -5,6 +5,7 @@ class FormularAnswer < ApplicationRecord
   accepts_nested_attributes_for :formular_answer_images, allow_destroy: true, update_only: true
 
   belongs_to :formular
+  belongs_to :submitter, class_name: "User", foreign_key: "submitter_id", optional: true
   delegate :formular_fields, to: :formular
 
   attr_accessor :answer_errors

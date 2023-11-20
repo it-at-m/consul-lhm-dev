@@ -1,6 +1,6 @@
 class WYSIWYGSanitizer
   def allowed_tags
-    %w[ div p ul ol li blockquote br hr a h2 h3 h4 h5 h6 strong em u s sub sup span img
+    %w[ div p ul ol li blockquote br hr a h2 h3 h4 h5 h6 b strong em u s sub sup span img
     table caption thead tr th tbody td abbr
     iframe i
   ]

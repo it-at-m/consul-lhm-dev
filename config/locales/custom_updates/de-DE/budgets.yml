@@ -33,6 +33,10 @@ de:
     budgets:
       investments:
         index:
+          orders:
+            random: Zufällig
+            ballot_line_weight: Aktuelle Stimmenverteilung
+            newest: Neueste zuerst
           sidebar:
             user_votes: "Abgegebene Stimmen: %{count}"
           empty_list_text: Keine Ergebnisse
@@ -77,6 +81,7 @@ de:
           unverified_note: "Ihre Daten werden manuell überprüft. Dies kann 1-2 Werktage in Anspruch nehmen. Danach werden Ihre Stimmen freigegeben."
           unverified_note_no_data_html: "Bitte %{verify_account}."
           unfeasible_html: "Dieser Investitionsvorschlag <strong>wurde als nicht durchführbar markiert</strong> und wird nicht in die Abstimmungsphase übergehen."
+          feasible_html: "Dieser Vorschlag wurde als durchführbar klassifiziert."
         show:
           callouts:
             publishing_prices:
@@ -86,9 +91,10 @@ de:
               undecided: Dieser Investitionsvorschlag befindet sich gerade noch in der Bewertung.
               unfeasible: Dieser Investitionsvorschlag wurde als nicht durchführbar klassifiziert.
           implementation: Umsetzung
-          implementation_city_text_html: <p>Soll von Stadtverwaltung umgesetzt werden</p>
-          implementation_user_text_html: <p>%{author} unterstützt bei der Durchführung<p><p>%{implementation_contribution}</p>
-          user_cost_estimate: Preisliche Einschätzung
+          implementation_city_text_html: Soll von Stadtverwaltung umgesetzt werden
+          implementation_user_text_html: "%{author} unterstützt bei der Durchführung<br><br>%{implementation_contribution}"
+          price: Preisliche Einschätzung der Verwaltung
+          user_cost_estimate: Preisliche Einschätzung des Nutzers
           welcome_default_text_html: "%{author_name} hat einen Beitrag zu diesem Projekt gemacht, der Ihre Aufmerksamkeit benötigt.
             Sie können den Beitrag an der rechten Seitenleiste unterstützen, indem Sie ihm Ihre Stimme geben. Außerdem können Sie dem Beitrag folgen, um auf dem Laufenden zu bleiben.
             Die Karte hilft Ihnen dabei, den Beitrag in der Stadt zu verorten, des Weiteren haben Sie die Möglichkeit, den Beitrag zu kommentieren."

@@ -12,7 +12,7 @@
     <%= milestones_html %>
 
   <% else %>
-    <%= render Shared::CollapseComponent.new do |c| %>
+    <%= render Shared::CollapseComponent.new(opened_by_default: opened_by_default?) do |c| %>
       <% c.head do %>
         <h3>
           <%= t("custom.milestones.collapse_title", count: @milestones.count) %>

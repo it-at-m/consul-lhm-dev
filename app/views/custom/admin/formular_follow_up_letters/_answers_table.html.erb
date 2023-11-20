@@ -9,6 +9,8 @@
       <% if @image_flag %>
         <th>Bilder</th>
       <% end %>
+      <th>SubmitterID</th>
+      <th>SubmitterEmail</th>
     </tr>
   </thead>
   <tbody>
@@ -33,6 +35,8 @@
             <% end.join(", ").html_safe %>
           </td>
         <% end %>
+        <td><%= fa.submitter_id %></td>
+        <td><%= fa.original_submitter_email %></td>
       </tr>
     <% end %>
   </tbody>

@@ -5,7 +5,11 @@
 
   <% unless @budget.phase == 'publishing_prices' && projekt_phase_feature?(@projekt_phase, 'general.show_results_after_first_vote')  # con-1036 %>
     <% if params[:section].blank? || params[:section] == 'overview' %>
-      <%= render Budgets::Investments::FiltersComponent.new %>
+      <% if valid_filters&.any? %>
+        <%= render Shared::SidebarCardComponent.new(title: "Filter", icon_name: "filter") do |c| %>
+          <%= render Budgets::Investments::FiltersComponent.new %>
+        <% end %>
+      <% end %>
     <% end %>
   <% end %>
 </aside>
