@@ -46,13 +46,19 @@
             <div class="question-wizard js-question-wizard">
               <div class="question-wizard--questions">
                 <% all_questions_answered = @questions.all? { |question| question.answers.present? } %>
+                <% first_question_shown = false %>
                 <% @questions.each.with_index do |question, index| %>
-                  <% additional_class = (question.answers.empty? || (all_questions_answered  && index == 0)) ? "-visible" : "" %>
+                  <% show_question = false %>
+                  <% show_question = (question.answers.empty? || (all_questions_answered  && index == 0)) %>
+                  <% additional_class = (show_question && !first_question_shown) ? "-visible" : "" %>
                   <div
                       class="question-wizard-item js-question-wizard-item <%= additional_class %>"
                       data-question-id="<%= question.id %>">
                       <%= render Polls::Questions::QuestionComponent.new(question: question) %>
                   </div>
+                  <% if show_question %>
+                    <% first_question_shown = true %>
+                  <% end %>
                 <% end %>
               </div>
 
