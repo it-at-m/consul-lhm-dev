@@ -28,7 +28,7 @@
   <aside id="proposals-sidebar" class="sidebar">
     <% content_block_sidebar_name = "projekt_phase_footer_sidebar_#{@projekt_phase.id}" %>
     <% if render_custom_projekt_content_block?(content_block_sidebar_name, @projekt_phase.projekt) %>
-      <%= render Shared::SidebarCardComponent.new(title: "Beteiligunsinformation", icon_name: "info-circle") do |c| %>
+      <%= render Shared::SidebarCardComponent.new(title: t("custom.proposals.index.participation_information"), icon_name: "info-circle") do |c| %>
         <%= render_custom_block content_block_sidebar_name %>
       <% end %>
     <% end %>
