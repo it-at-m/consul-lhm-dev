@@ -49,9 +49,8 @@
       if (nextQuestion) {
         this.currentQuestion().classList.remove("-visible");
         nextQuestion.classList.add("-visible");
+        $(".js-question-wizard--progress-current-page").text(nextQuestion.dataset.questionNumber);
       }
-
-      $(".js-question-wizard--progress-current-page").text(nextQuestion.dataset.questionNumber);
 
       var $nextButton = $(".js-question-wizard-next");
 
