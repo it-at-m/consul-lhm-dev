@@ -20,13 +20,12 @@
 
     goToNextQuestion: function() {
       var currentQuestion = this.currentQuestion();
-      var answeredQuestion = document.querySelector(".js-question-answered");
+      var alreadyAnsweredOption = document.querySelector(".js-question-answered");
       var nextQuestion;
 
-      if (answeredQuestion) {
-        var nextQuestionId = answeredQuestion.dataset.nextQuestionId;
+      if (alreadyAnsweredOption && alreadyAnsweredOption.dataset.nextQuestionId) {
         nextQuestion = document.querySelector(
-          ".js-question-wizard [data-question-id='" + nextQuestionId + "']"
+          ".js-question-wizard [data-question-id='" + alreadyAnsweredOption.dataset.nextQuestionId  + "']"
         );
       } else {
         nextQuestion = currentQuestion.nextElementSibling;
@@ -46,11 +45,9 @@
     },
 
     navigateToQuestion: function(nextQuestion) {
-      if (nextQuestion) {
-        this.currentQuestion().classList.remove("-visible");
-        nextQuestion.classList.add("-visible");
-        $(".js-question-wizard--progress-current-page").text(nextQuestion.dataset.questionNumber);
-      }
+      this.currentQuestion().classList.remove("-visible");
+      nextQuestion.classList.add("-visible");
+      $(".js-question-wizard--progress-current-page").text(nextQuestion.dataset.questionNumber);
 
       var $nextButton = $(".js-question-wizard-next");
 
