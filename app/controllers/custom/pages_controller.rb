@@ -198,7 +198,7 @@ class PagesController < ApplicationController
     params[:filter] ||= "selected" if @budget.phase.in?(["balloting"])
     params[:filter] ||= "all" if @budget.phase.in?(["publishing_prices", "reviewing_ballots"])
     params[:filter] ||= "winners" if @budget.phase == "finished"
-    @current_filter = @valid_filters.include?(params[:filter]) ? params[:filter] : @valid_filters.first
+    @current_filter = @valid_filters.include?(params[:filter]) ? params[:filter] : "all"
 
     @valid_orders = %w[random supports ballots ballot_line_weight newest]
     @valid_orders.delete("supports")
