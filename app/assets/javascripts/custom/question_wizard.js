@@ -36,6 +36,9 @@
         nextQuestion = currentQuestion.nextElementSibling;
       }
 
+      var previousButton = document.querySelector(".js-question-wizard-prev");
+      previousButton.dataset.prevQuestionId = this.currentQuestion().dataset.questionId;
+
       this.navigateToQuestion(nextQuestion);
     },
 
@@ -51,11 +54,9 @@
 
     navigateToQuestion: function(nextQuestion) {
       if (nextQuestion) {
-        var $previousButton = $(".js-question-wizard-prev");
-        $previousButton.get(0).dataset.prevQuestionId = this.currentQuestion().dataset.questionId;
-
         this.currentQuestion().classList.remove("-visible");
         nextQuestion.classList.add("-visible");
+
         $(".js-question-wizard--progress-current-page").text(nextQuestion.dataset.questionNumber);
 
         var $nextButton = $(".js-question-wizard-next");
@@ -66,6 +67,7 @@
           $nextButton.hide();
         }
 
+        var $previousButton = $(".js-question-wizard-prev");
         if (nextQuestion.previousElementSibling) {
           $previousButton.show();
         } else {
