@@ -32,7 +32,7 @@ class Pages::Projekts::SidebarCtaComponent < ApplicationComponent
     end
 
     def button_text
-      I18n.t("custom.projekt_phases.cta.#{@projekt_phase.name}")
+      @projekt_phase.cta_button_name.presence || I18n.t("custom.projekt_phases.cta.#{@projekt_phase.name}")
     end
 
     def budget_not_accepting?
