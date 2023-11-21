@@ -5,6 +5,7 @@ de:
         title: Beteiligung
         voting_phase: An Abstimmung teilnehmen
         question_phase: An Kurzumfrage teilnehmen
+        budget_phase: Jetzt mitmachen
       permission_problem:
         new_button_component:
           shared:
