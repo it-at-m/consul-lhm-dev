@@ -20,7 +20,6 @@
     goToPrevQuestion: function() {
       var prevButton = document.querySelector(".js-question-wizard-prev");
       var prevQuestion = this.getQuestionById(prevButton.dataset.prevQuestionId);
-      console.log(prevQuestion)
 
       this.navigateToQuestion(prevQuestion);
     },
