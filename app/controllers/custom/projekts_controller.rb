@@ -8,8 +8,8 @@ class ProjektsController < ApplicationController
   include ProjektControllerHelper
 
   def index
-    @projekts = Projekt.regular.with_published_custom_page
-    @all_projekts = @projekts
+    @projekts = Projekt.regular
+    @all_projekts = @projekts.index_order_all
     @special_projekt = Projekt.unscoped.find_by(special: true, special_name: "projekt_overview_page")
 
     @resource_name = "projekt"
@@ -17,7 +17,7 @@ class ProjektsController < ApplicationController
     valid_filters = %w[index_order_all index_order_underway index_order_ongoing index_order_upcoming index_order_expired index_order_individual_list]
     valid_filters.push("index_order_drafts") if current_user&.administrator? || current_user&.projekt_manager?
     @active_projekts_filters = valid_filters.select { |filter| @projekts.send(filter).count > 0 }.presence || ["index_order_all"]
-    @current_projekts_filter = valid_filters.include?(params[:filter]) ? params[:filter] : @active_projekts_filters.first
+    @current_projekts_filter = valid_filters.include?(params[:filter]) ? params[:filter] : "index_order_all"
     @projekts = @projekts.send(@current_projekts_filter)
     @map_coordinates = all_projekts_map_locations(@projekts.pluck(:id))
 
