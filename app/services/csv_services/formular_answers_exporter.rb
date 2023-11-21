@@ -20,13 +20,13 @@ module CsvServices
     private
 
       def headers
-        @formular.formular_fields.map(&:name) + ["Submitter ID", "Submitter Email"]
+        @formular.formular_fields.map(&:name) + ["Submitter ID", "Submitter Email", "Submitted At"]
       end
 
       def row(formular_answer)
         @formular.formular_fields.map do |formular_field|
           formular_answer.answers[formular_field.key]
-        end + [formular_answer.submitter_id, formular_answer.original_submitter_email]
+        end + [formular_answer.submitter_id, formular_answer.original_submitter_email, formular_answer.created_at]
       end
   end
 end
