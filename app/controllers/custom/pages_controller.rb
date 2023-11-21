@@ -227,7 +227,7 @@ class PagesController < ApplicationController
       query = Budget::Ballot.where(user: current_user, budget: @budget)
       @ballot = @budget.balloting? ? query.first_or_create! : query.first_or_initialize
 
-      @investments = @budget.investments.send(params[:filter]) if params[:filter]
+      @investments = @budget.investments.send(params[:filter]) if params[:filter].present? && @valid_filters.include?(params[:filter])
       @investment_ids = @budget.investments.ids
     end
 

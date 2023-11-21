@@ -205,6 +205,10 @@ de:
           budget_investments: Investitionsvorschläge
           comments: Kommentare
           follows: Folge ich
+      resource_count:   
+        projekts: Projekte
+        proposals: Vorschläge
+        comments: Kommentare
     welcome_launch:
       p1: Hier entsteht die neue Beteiligungsplattform der Stadt %{org_name}
       p2: Unser Go-Live ist am %{date}!

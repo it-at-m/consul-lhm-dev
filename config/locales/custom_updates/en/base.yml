@@ -193,6 +193,10 @@ en:
           budget_investments: Investment proposals
           comments: Comments
           follows: Follows
+      resource_count:
+        projekts: Projekts
+        proposals: Proposals
+        comments: Comments
     welcome_launch:
       p1: We're building a new citizen participation platform for the city of %{org_name}
       p2: We'll go live on %{date}!
