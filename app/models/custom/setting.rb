@@ -4,7 +4,7 @@ class Setting < ApplicationRecord
   attr_accessor :form_field_disabled, :dependent_setting_ids, :dependent_setting_action
 
   def type
-    if %w[feature process proposals map html homepage uploads projekts sdg].include? prefix
+    if %w[feature process proposals map html homepage uploads projekts sdg welcomepage].include? prefix
       prefix
     elsif %w[remote_census].include? prefix
       key.rpartition(".").first
@@ -160,6 +160,8 @@ class Setting < ApplicationRecord
         "sdg.process.budgets": false,
         "sdg.process.legislation": false,
         "sdg.process.projekts": true,
+
+        "welcomepage.usage_stats": true,
 
         "projekts.show_archived.sidebar": true,
         "projekts.second_level_projekts_in_active_filter": false,

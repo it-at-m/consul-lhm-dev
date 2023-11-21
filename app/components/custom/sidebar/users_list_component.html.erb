@@ -1,10 +1,10 @@
 <div class="sidebar-users-list">
   <% unless @hide_count %>
     <div class="sidebar-users-list--title">
-      <%= number_with_delimiter(@users.size,  delimiter: ".") %> Nutzer*innen
+      <%= number_with_delimiter(@users.size, delimiter: ".") %> Nutzer*innen
     </div>
   <% end %>
-  <div class="sidebar-users-list--images">
+  <div class="sidebar-users-list--images margin-bottom">
     <% @users.last(5).each do |user| %>
       <%= link_to user, class: "sidebar-users-list--image" do %>
         <% if user.image.present? %>
@@ -15,4 +15,33 @@
       <% end %>
     <% end %>
   </div>
+
+  <% if @show_resources_count %>
+    <div class="proposals--info-count margin-bottom-half">
+      <span>
+        <%= t("custom.welcome.resource_count.projekts") %>
+      </span>
+      <span>
+        <%= projekts_count %>
+      </span>
+    </div>
+
+    <div class="proposals--info-count margin-bottom-half">
+      <span>
+        <%= t("custom.welcome.resource_count.proposals") %>
+      </span>
+      <span>
+        <%= proposals_count %>
+      </span>
+    </div>
+
+    <div class="proposals--info-count margin-bottom-half">
+      <span>
+        <%= t("custom.welcome.resource_count.comments") %>
+      </span>
+      <span>
+        <%= comments_count %>
+      </span>
+    </div>
+    <% end %>
 </div>

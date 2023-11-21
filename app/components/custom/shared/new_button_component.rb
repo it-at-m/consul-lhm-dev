@@ -91,18 +91,18 @@ class Shared::NewButtonComponent < ApplicationComponent
 
     def new_button_html
       if @projekt_phase.is_a?(ProjektPhase::BudgetPhase)
-        button_text = @projekt_phase&.new_resource_button_name.presence || t("budgets.investments.index.sidebar.create")
+        button_text = @projekt_phase&.cta_button_name.presence || t("budgets.investments.index.sidebar.create")
         link_to button_text,
                 new_budget_investment_path(@projekt_phase.budget, projekt_phase_id: @projekt_phase, projekt_id: @projekt),
                 class: new_button_classes
 
       elsif @projekt_phase.is_a?(ProjektPhase::DebatePhase) || @resources_name == "debates"
-        button_text = @projekt_phase&.new_resource_button_name.presence || t("debates.index.start_debate")
+        button_text = @projekt_phase&.cta_button_name.presence || t("debates.index.start_debate")
         link_to button_text, new_debate_path(link_params_hash),
           class: new_button_classes
 
       elsif @projekt_phase.is_a?(ProjektPhase::ProposalPhase) || @resources_name == "proposals"
-        button_text = @projekt_phase&.new_resource_button_name.presence || t("proposals.index.start_proposal")
+        button_text = @projekt_phase&.cta_button_name.presence || t("proposals.index.start_proposal")
         link_to button_text, new_proposal_path(link_params_hash),
           class: new_button_classes,
           data: { turbolinks: false }

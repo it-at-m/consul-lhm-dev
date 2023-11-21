@@ -25,43 +25,45 @@
       </div>
     </div>
 
-    <% if @projekt_phase.name.in?(["debate_phase", "proposal_phase", "budget_phase"]) %>
+    <% if @projekt_phase.name.in?(["debate_phase", "proposal_phase", "budget_phase", "voting_phase", "question_phase"]) %>
       <div class="row">
         <div class="column large-8">
-          <strong><%= t("custom.admin.projekt_phases.new_resource_button_name") %></strong>
-          <%= translations_form.text_field :new_resource_button_name, label: false %>
+          <strong><%= t("custom.admin.projekt_phases.cta_button_name") %></strong>
+          <%= translations_form.text_field :cta_button_name, label: false %>
         </div>
       </div>
+    <% end %>
 
+    <% if @projekt_phase.name.in?(["debate_phase", "proposal_phase", "budget_phase"]) %>
       <div class="row">
         <div class="column large-8">
           <strong><%= t("custom.admin.projekt_phases.resource_form_title") %></strong>
           <%= translations_form.text_field :resource_form_title, label: false %>
         </div>
       </div>
+    <% end %>
 
-      <% if @projekt_phase.is_a?(ProjektPhase::DebatePhase) || @projekt_phase.is_a?(ProjektPhase::ProposalPhase) %>
-        <div class="row">
-          <div class="column large-8">
-            <strong><%= t("custom.admin.projekt_phases.labels_name") %></strong>
-            <%= translations_form.text_field :labels_name, label: false %>
-          </div>
+    <% if @projekt_phase.name.in?(["debate_phase", "proposal_phase"]) %>
+      <div class="row">
+        <div class="column large-8">
+          <strong><%= t("custom.admin.projekt_phases.labels_name") %></strong>
+          <%= translations_form.text_field :labels_name, label: false %>
         </div>
-        <div class="row">
-          <div class="column large-8">
-            <strong><%= t("custom.admin.projekt_phases.sentiments_name") %></strong>
-            <%= translations_form.text_field :sentiments_name, label: false %>
-          </div>
+      </div>
+      <div class="row">
+        <div class="column large-8">
+          <strong><%= t("custom.admin.projekt_phases.sentiments_name") %></strong>
+          <%= translations_form.text_field :sentiments_name, label: false %>
         </div>
-        <div class="row">
-          <div class="column large-8">
-            <strong><%= t("custom.admin.projekt_phases.projekt_selector_hint") %></strong>
-            <%= translations_form.text_area :projekt_selector_hint,
-              label: false,
-              class: "html-area #{ck_editor_class(current_user)}" %>
-          </div>
+      </div>
+      <div class="row">
+        <div class="column large-8">
+          <strong><%= t("custom.admin.projekt_phases.projekt_selector_hint") %></strong>
+          <%= translations_form.text_area :projekt_selector_hint,
+            label: false,
+            class: "html-area #{ck_editor_class(current_user)}" %>
         </div>
-      <% end %>
+      </div>
     <% end %>
   <% end %>
 

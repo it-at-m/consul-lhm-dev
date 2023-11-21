@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_11_17_075045) do
+ActiveRecord::Schema.define(version: 2023_11_21_095154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1798,7 +1798,7 @@ ActiveRecord::Schema.define(version: 2023_11_17_075045) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "phase_tab_name"
-    t.text "new_resource_button_name"
+    t.text "cta_button_name"
     t.text "resource_form_title"
     t.text "projekt_selector_hint"
     t.string "labels_name"

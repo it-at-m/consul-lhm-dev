@@ -7,8 +7,10 @@
     <% end %>
   </div>
 
-  <%= render Shared::SidebarCardComponent.new(title: "Nutzer*innen", icon_name: "users") do |c| %>
-    <%= render(Sidebar::UsersListComponent.new(users: User.active)) %>
+  <% if setting["welcomepage.usage_stats"].present? %>
+    <%= render Shared::SidebarCardComponent.new(title: "Nutzer*innen", icon_name: "users") do |c| %>
+      <%= render(Sidebar::UsersListComponent.new(users: User.active, show_resources_count: true)) %>
+    <% end %>
   <% end %>
 
   <%# <%= render Shared::SidebarCardComponent.new(title: 'Aktivität | letzte 7 Tage', icon_name: "info-circle") do |c| %>
