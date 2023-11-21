@@ -14,6 +14,7 @@
       App.SidebarCardComponent.initialize();
       App.CkeEditorPlaceholder.initialize();
       App.RemoveOnMobileSections.initialize();
+      App.QuestionWizard.initialize();
     }
   };
 }).call(this);

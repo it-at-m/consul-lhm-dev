@@ -355,7 +355,7 @@ td.answers-column  {
       font-weight: bold;
       font-size: 0.875em;
     }
-  
+
   }
 
   .poll-answer-more-info-link {
@@ -389,7 +389,7 @@ td.answers-column  {
 
 
 
-.reveal.poll-answer-modal { 
+.reveal.poll-answer-modal {
 
   button.zoom-link {
     display: none;
@@ -432,4 +432,51 @@ td.answers-column  {
 #confirm-poll-participation {
   width: 250px;
   margin: 0 auto;
+}
+
+.question-wizard {
+  .poll-question {
+    display: none;
+
+    &:first-child {
+      display: block;
+    }
+  }
+}
+
+.questions-navigation {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+
+  button {
+    &.-hidden {
+      // visibility: hidden;
+      display: none;
+    }
+  }
+}
+
+.question-wizard-item {
+  display: none;
+
+  &.-visible {
+    display: block;
+  }
+}
+
+.question-wizard--progress {
+  display: inline-flex;
+  justify-content: center;
+  padding-top: 5px;
+  align-items: center;
+  margin-bottom: 5px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  font-size: 28px;
+  width: 80px;
+  color: #292929;
 }
