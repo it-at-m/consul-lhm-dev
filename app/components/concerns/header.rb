@@ -20,10 +20,4 @@ module Header
       safe_join([before, content_tag(heading_tag, title), (capture(&block) if block)].compact)
     end
   end
-
-  private
-
-    def namespace
-      controller_path.split("/").first
-    end
 end

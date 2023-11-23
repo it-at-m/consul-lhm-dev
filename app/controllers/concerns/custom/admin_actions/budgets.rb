@@ -1,4 +1,4 @@
-module Admin::BudgetActions
+module AdminActions::Budgets
   extend ActiveSupport::Concern
 
   include Translatable

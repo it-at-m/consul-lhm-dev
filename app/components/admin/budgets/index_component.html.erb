@@ -1,8 +1,10 @@
 <%= header do %>
-  <button data-open="heading_mode"><%= t("admin.budgets.index.new_link") %></button>
+  <%= link_to polymorphic_path([namespace, :budgets_wizard, Budget.new], action: :new), style: "margin-left:auto;" do %>
+    <%= t("admin.budgets.index.new_link") %>
+  <% end %>
 <% end %>
 
-<%= render Admin::Budgets::HeadingModeComponent.new %>
+<%#= render Admin::Budgets::HeadingModeComponent.new %>
 <%= render Admin::Budgets::HelpComponent.new("budgets") %>
 <%= render "shared/filter_subnav", i18n_namespace: "admin.budgets.index" %>
 

@@ -109,6 +109,18 @@ namespace :projekt_management do
     # end
   end
 
+  namespace :budgets_wizard do
+    resources :budgets, only: [:create, :new, :edit, :update] do
+      # resources :groups, only: [:index, :create, :edit, :update, :destroy] do
+      #   resources :headings, only: [:index, :create, :edit, :update, :destroy]
+      # end
+
+      resources :phases, as: "budget_phases", only: [:index, :edit, :update] do
+        member { patch :toggle_enabled }
+      end
+    end
+  end
+
   resources :map_layers, only: [:update, :create, :edit, :new, :destroy]
 
   resources :proposals, only: :index do

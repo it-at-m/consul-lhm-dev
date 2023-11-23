@@ -138,6 +138,26 @@ module Abilities
       can :comment_as_moderator, [ProjektPhase, Debate, Proposal, Budget::Investment, Poll, ProjektQuestion] do |resource|
         user.projekt_manager.allowed_to?("moderate", resource.projekt)
       end
+
+
+
+
+      can :new, Budget
+      can [:read, :create, :update, :destroy], Budget do |budget|
+        user.projekt_manager.allowed_to?("manage", budget&.projekt)
+      end
+      can :publish, Budget, id: Budget.drafting.ids
+      can :calculate_winners, Budget, &:reviewing_ballots?
+      can :read_results, Budget do |budget|
+        budget.balloting_or_later?
+        # budget.balloting_finished? && budget.has_winning_investments?
+      end
+      can :recalculate_winners, Budget, &:balloting_or_later?
+
+
+
+
+
     end
   end
 end

@@ -1,3 +1,3 @@
 class Admin::BudgetsController < Admin::BaseController
-  include Admin::BudgetActions
+  include AdminActions::Budgets
 end
