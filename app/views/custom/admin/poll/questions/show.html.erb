@@ -64,10 +64,10 @@
     <%= link_to t("admin.questions.show.add_answer"), new_admin_question_answer_path(@question),
                 class: "button float-right" %>
 
-    <% if @question.parent_question.blank? %>
-      <%= link_to t("admin.questions.show.add_nested_question"), new_admin_question_path(poll_id: @question.poll.id, parent_question_id: @question.id),
-        class: "button float-right" %>
-    <% end %>
+    <%# <% if @question.parent_question.blank? %>
+    <%#   <%= link_to t("admin.questions.show.add_nested_question"), new_admin_question_path(poll_id: @question.poll.id, parent_question_id: @question.id),
+    <%#     class: "button float-right" %>
+    <%# <% end %>
   <% else %>
     <div class="callout warning">
       <strong><%= t("admin.questions.no_edit") %></strong>
@@ -83,6 +83,7 @@
       <% if @question.votation_type.unique? || @question.votation_type.multiple? %>
         <th scope="col" class="medium-7"><%= t("admin.questions.show.answers.description") %></th>
       <% end %>
+      <th scope="col" class="text-center"><%= t("custom.admin.questions.show.answers.next_question") %></th>
       <th scope="col" class="text-center"><%= t("admin.questions.show.answers.images") %></th>
       <th scope="col" class="text-center"><%= t("admin.questions.show.answers.documents") %></th>
       <th scope="col" class="text-center"><%= t("admin.questions.show.answers.videos") %></th>
@@ -97,6 +98,9 @@
         <% if @question.votation_type.unique? || @question.votation_type.multiple? %>
           <td class="align-top break"><%= wysiwyg(answer.description) %></td>
         <% end %>
+        <td class="align-top text-center">
+          <%= answer.next_question_id %>
+        </td>
         <td class="align-top text-center">
           (<%= answer.images.count %>)
           <br>
