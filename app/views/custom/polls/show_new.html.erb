@@ -44,6 +44,10 @@
         <div class="margin-bottom">
           <% if @poll.wizard_mode? %>
             <div class="question-wizard js-question-wizard">
+              <div class="progress question-wizard--progress js-question-wizard--progress">
+                <span class="meter js-question-wizard--progress-bar"></span>
+              </div>
+
               <div class="question-wizard--questions">
                 <%# <% all_questions_answered = @questions.all? { |question| question.answers.present? } %>
                 <% first_question_shown = false %>
@@ -63,11 +67,6 @@
               </div>
 
               <div class="questions-navigation margin-bottom">
-                <div class="progress question-wizard--progress js-question-wizard--progress">
-                  <% progress_width = 200 * (1.to_f / @questions.size) %>
-                  <span class="meter js-question-wizard--progress-bar" style="width: <%= progress_width %>px"></span>
-                </div>
-
                 <div class="d-flex">
                   <button type="button" class="d-none button hollow question-wizard-prev js-question-wizard-prev">
                     <%= t("custom.polls.questions.prev_question") %>

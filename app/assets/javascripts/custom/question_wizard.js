@@ -2,9 +2,15 @@
   "use strict";
   App.QuestionWizard = {
     initialize: function() {
-      $(".js-question-wizard").on("click", ".js-question-wizard-prev", this.goToPrevQuestion.bind(this));
-      $(".js-question-wizard").on("click", ".js-question-wizard-next", this.goToNextQuestion.bind(this));
-      $(".js-question-wizard").on("click", ".js-question-wizard-go-to-start", this.goToStart.bind(this));
+      var $questionWizard = $(".js-question-wizard");
+
+      $questionWizard.on("click", ".js-question-wizard-prev", this.navigateToPrevQuestion.bind(this));
+      $questionWizard.on("click", ".js-question-wizard-next", this.navigateToNextQuestion.bind(this));
+      $questionWizard.on("click", ".js-question-wizard-go-to-start", this.goToStart.bind(this));
+
+      if ($questionWizard.length > 0) {
+        this.updateProgress($questionWizard.find(".js-question-wizard-item").get(0));
+      }
     },
 
     currentQuestion: function() {
@@ -22,14 +28,14 @@
       this.navigateToQuestion(question);
     },
 
-    goToPrevQuestion: function() {
+    navigateToPrevQuestion: function() {
       var prevButton = document.querySelector(".js-question-wizard-prev");
       var prevQuestion = this.getQuestionById(prevButton.dataset.prevQuestionId);
 
       this.navigateToQuestion(prevQuestion);
     },
 
-    goToNextQuestion: function() {
+    navigateToNextQuestion: function() {
       var currentQuestion = this.currentQuestion();
       var alreadyAnsweredOption = document.querySelector(
         ".js-question-wizard-item .-visible .js-question-answered"
@@ -64,11 +70,7 @@
         nextQuestion.classList.add("-visible");
 
         // $(".js-question-wizard--progress-current-page").text(nextQuestion.dataset.questionNumber);
-        var totalQuestionsCount = $(".js-question-wizard-item").length;
-        var progressbarWidth = $(".js-question-wizard--progress").width();
-        var width = progressbarWidth * (nextQuestion.dataset.questionNumber / totalQuestionsCount);
-
-        $(".js-question-wizard .js-question-wizard--progress-bar").css("width", width);
+        this.updateProgress(nextQuestion);
 
         var $nextButton = $(".js-question-wizard-next");
 
@@ -91,6 +93,13 @@
       } else {
         $(".js-question-wizard-go-to-start").show();
       }
+    },
+
+    updateProgress: function(nextQuestion) {
+      var totalQuestionsCount = $(".js-question-wizard-item").length;
+      var progressbarWidth = $(".js-question-wizard--progress").width();
+      var width = progressbarWidth * (nextQuestion.dataset.questionNumber / totalQuestionsCount);
+      $(".js-question-wizard .js-question-wizard--progress-bar").css("width", width);
     }
   };
 }).call(this);

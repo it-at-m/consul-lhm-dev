@@ -467,19 +467,24 @@ td.answers-column  {
 }
 
 .question-wizard--progress {
-  display: inline-flex;
+  display: flex;
   justify-content: flex-start;
   // padding-top: 5px;
   align-items: center;
-  margin-bottom: 5px;
-  position: absolute !important;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  height: 15px !important;
+  margin-bottom: 10px;
+  // position: absolute !important;
+  // left: 0;
+  // right: 0;
+  // top: 0;
+  // bottom: 0;
+  margin-right: auto;
+  margin-left: auto;
+  height: 12px !important;
   font-size: 28px;
-  width: 200px;
+  width: 100%;
   color: #292929;
+
+  .meter {
+    background-color: #207868 !important;
+  }
 }

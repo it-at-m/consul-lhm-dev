@@ -2,7 +2,13 @@ $("#poll-participation-confirmed-callout").remove();
 $("#<%= dom_id(@question) %>_answers").html("<%= j render Polls::Questions::AnswersComponent.new(@question, answer_updated: @answer_updated, open_answer_updated: @open_answer_updated) %>");
 
 <% if @question_answer.next_question_id.present? %>
-    setTimeout(function() {
-      App.QuestionWizard.navigateToQuestionById("<%= @question_answer.next_question_id %>")
-    }, 1000);
+  var nextAnserTimeoutFunction = function() {
+    App.QuestionWizard.navigateToQuestionById("<%= @question_answer.next_question_id %>");
+  }
+<% else %>
+  var nextAnserTimeoutFunction = function() {
+    App.QuestionWizard.navigateToNextQuestion();
+  }
 <% end %>
+
+setTimeout(nextAnserTimeoutFunction, 1000);
