@@ -43,16 +43,17 @@
 
       if (alreadyAnsweredOption && alreadyAnsweredOption.dataset.nextQuestionId) {
         nextQuestion = this.getQuestionById(alreadyAnsweredOption.dataset.nextQuestionId);
+
+        var $questionsToMarkAsDisabled =
+          $(currentQuestion)
+            .nextUntil(
+              ".js-question-wizard [data-question-id='" + alreadyAnsweredOption.dataset.nextQuestionId + "']"
+            );
+
+        $questionsToMarkAsDisabled.addClass("-disabled");
       } else {
         nextQuestion = currentQuestion.nextElementSibling;
       }
-
-      var $questionsToMarkAsDisabled =
-        $(currentQuestion)
-          .nextUntil(
-            ".js-question-wizard [data-question-id='" + alreadyAnsweredOption.dataset.nextQuestionId + "']"
-          );
-      $questionsToMarkAsDisabled.addClass("-disabled");
 
       this.navigateToQuestion(nextQuestion);
     },
