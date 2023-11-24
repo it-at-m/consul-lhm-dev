@@ -17,6 +17,11 @@
       );
     },
 
+    navigateToQuestionById: function(id) {
+      var question = this.getQuestionById(id);
+      this.navigateToQuestion(question);
+    },
+
     goToPrevQuestion: function() {
       var prevButton = document.querySelector(".js-question-wizard-prev");
       var prevQuestion = this.getQuestionById(prevButton.dataset.prevQuestionId);
@@ -26,7 +31,9 @@
 
     goToNextQuestion: function() {
       var currentQuestion = this.currentQuestion();
-      var alreadyAnsweredOption = document.querySelector(".js-question-answered");
+      var alreadyAnsweredOption = document.querySelector(
+        ".js-question-wizard-item .-visible .js-question-answered"
+      );
       var nextQuestion;
 
       if (alreadyAnsweredOption && alreadyAnsweredOption.dataset.nextQuestionId) {
@@ -56,7 +63,12 @@
         this.currentQuestion().classList.remove("-visible");
         nextQuestion.classList.add("-visible");
 
-        $(".js-question-wizard--progress-current-page").text(nextQuestion.dataset.questionNumber);
+        // $(".js-question-wizard--progress-current-page").text(nextQuestion.dataset.questionNumber);
+        var totalQuestionsCount = $(".js-question-wizard-item").length;
+        var progressbarWidth = $(".js-question-wizard--progress").width();
+        var width = progressbarWidth * (nextQuestion.dataset.questionNumber / totalQuestionsCount);
+
+        $(".js-question-wizard .js-question-wizard--progress-bar").css("width", width);
 
         var $nextButton = $(".js-question-wizard-next");
 

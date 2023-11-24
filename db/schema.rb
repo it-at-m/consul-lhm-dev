@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_11_21_095154) do
+ActiveRecord::Schema.define(version: 2023_11_22_200306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1535,6 +1535,7 @@ ActiveRecord::Schema.define(version: 2023_11_21_095154) do
     t.boolean "multiple", default: false
     t.integer "given_order"
     t.boolean "show_hint_callout", default: true
+    t.integer "parent_question_id"
     t.index ["author_id"], name: "index_poll_questions_on_author_id"
     t.index ["poll_id"], name: "index_poll_questions_on_poll_id"
     t.index ["proposal_id"], name: "index_poll_questions_on_proposal_id"

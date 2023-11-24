@@ -1,4 +1,9 @@
-<%= back_link_to admin_poll_path(@question.poll) %>
+<% if @question.parent_question.present? %>
+  <%= back_link_to(admin_question_path(id: @question.parent_question)) %>
+<% else %>
+  <%= back_link_to admin_poll_path(@question.poll) %>
+<% end %>
+
 
 <% if can?(:update, @question) %>
   <%= link_to t("admin.questions.show.edit_question"), edit_admin_question_path(@question),
@@ -6,6 +11,10 @@
 <% end %>
 
 <div class="clear"></div>
+
+<% if @question.parent_question.present? %>
+  <h3>Nested question for "<%= @question.parent_question.title %>"</h3>
+<% end %>
 
 <div class="small-12 medium-6">
   <div class="callout highlight">
@@ -54,8 +63,11 @@
   <% if can?(:create, Poll::Question::Answer.new(question: @question)) %>
     <%= link_to t("admin.questions.show.add_answer"), new_admin_question_answer_path(@question),
                 class: "button float-right" %>
-    <%= link_to t("admin.questions.show.add_nested_question"), new_admin_question_path(poll_id: @question.poll.id, parent_question_id: @question.id),
-                class: "button float-right" %>
+
+    <% if @question.parent_question.blank? %>
+      <%= link_to t("admin.questions.show.add_nested_question"), new_admin_question_path(poll_id: @question.poll.id, parent_question_id: @question.id),
+        class: "button float-right" %>
+    <% end %>
   <% else %>
     <div class="callout warning">
       <strong><%= t("admin.questions.no_edit") %></strong>
@@ -115,6 +127,30 @@
     <% end %>
   </tbody>
 </table>
+
+<% if @question.nested_questions.present? %>
+  <table class="">
+    <caption><%= t("admin.questions.show.nested_questions") %></caption>
+    <thead>
+      <tr>
+        <th><%= t("admin.questions.show.nested_questions.title") %></th>
+        <th><%= t("admin.actions.actions") %></th>
+      </tr>
+    </thead>
+    <!-- <tbody class="sortable" data-js-url="<%= admin_question_answers_order_answers_path(@question.id) %>"> -->
+    <tbody class="sortable">
+      <% @question.nested_questions.each do |question| %>
+        <tr id="<%= dom_id(question) %>" class="poll_question_answer" data-question-id="<%= question.id %>">
+          <td class="align-top"><%= question.title %></td>
+          <td>
+            <%= render Admin::TableActionsComponent.new(question) do |actions| %>
+              <%= actions.link_to t("admin.polls.show.edit_answers"), admin_question_path(question), class: "answers-link" %>
+            <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 
 <% if @question.video_url.present? %>
   <p>

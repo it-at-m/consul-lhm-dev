@@ -5,6 +5,7 @@ class Polls::QuestionsController < ApplicationController
     @answer = @question.find_or_initialize_user_answer(current_user, params[:answer])
     @answer.answer_weight = params[:answer_weight].presence || 1
     @answer.save_and_record_voter_participation
+    @question_answer = @question.question_answers.find(params[:question_answer_id])
 
     unless providing_an_open_answer?(@answer)
       @answer_updated = "answered"

@@ -1,4 +1,10 @@
-<%= back_link_to %>
+<% parent_question_id = (params[:parent_question_id].presence || @question&.parent_question_id) %>
+
+<% if parent_question_id.present? %>
+  <%= back_link_to(admin_question_path(id: parent_question_id)) %>
+<% else %>
+  <%= back_link_to %>
+<% end %>
 
 <h2 class="margin-top">
   <% if @poll.present? %>

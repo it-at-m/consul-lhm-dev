@@ -63,11 +63,11 @@
               </div>
 
               <div class="questions-navigation margin-bottom">
-                <div class="question-wizard--progress">
-                  <span class="js-question-wizard--progress-current-page">
-                    1
-                  </span>/<%= @questions.size %>
+                <div class="progress question-wizard--progress js-question-wizard--progress">
+                  <% progress_width = 200 * (1.to_f / @questions.size) %>
+                  <span class="meter js-question-wizard--progress-bar" style="width: <%= progress_width %>px"></span>
                 </div>
+
                 <div class="d-flex">
                   <button type="button" class="d-none button hollow question-wizard-prev js-question-wizard-prev">
                     <%= t("custom.polls.questions.prev_question") %>
