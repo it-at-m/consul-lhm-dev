@@ -29,7 +29,6 @@
     },
 
     navigateToPrevQuestion: function() {
-      var prevButton = document.querySelector(".js-question-wizard-prev");
       var prevQuestion = $(this.currentQuestion()).prevAll(".js-question-wizard-item:not(.-disabled)").get(0);
 
       this.navigateToQuestion(prevQuestion);
@@ -48,8 +47,11 @@
         nextQuestion = currentQuestion.nextElementSibling;
       }
 
-      var $questionsToMarkAsDisabled = $(currentQuestion).nextUntil(".js-question-wizard [data-question-id='" + alreadyAnsweredOption.dataset.nextQuestionId + "']");
-      console.log("questionsToMarkAsDisabled", $questionsToMarkAsDisabled);
+      var $questionsToMarkAsDisabled =
+        $(currentQuestion)
+          .nextUntil(
+            ".js-question-wizard [data-question-id='" + alreadyAnsweredOption.dataset.nextQuestionId + "']"
+          );
       $questionsToMarkAsDisabled.addClass("-disabled");
 
       this.navigateToQuestion(nextQuestion);
@@ -69,6 +71,7 @@
       if (nextQuestion) {
         this.currentQuestion().classList.remove("-visible");
         nextQuestion.classList.add("-visible");
+        nextQuestion.classList.remove("-disabled");
 
         // $(".js-question-wizard--progress-current-page").text(nextQuestion.dataset.questionNumber);
         this.updateProgress(nextQuestion);
