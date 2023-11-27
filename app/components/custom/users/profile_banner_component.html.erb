@@ -55,7 +55,7 @@
   </div>
   <div class="users-profile-banner--info">
     <div class="users-profile-banner--name">
-      <%= @user.name %>
+      <%= render Users::Account::UsernameComponent.new(user: @user, edit_mode: @edit_mode) %>
     </div>
     <div class="users-profile-banner--info-line">
       <%= t("custom.users.banner.registered_at", date: l(@user.created_at, format: :date_only)) %>
