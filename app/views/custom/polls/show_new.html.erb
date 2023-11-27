@@ -85,7 +85,6 @@
           <% end %>
         </div>
 
-
         <% @questions.each do |question| %>
           <% question.question_answers.each do |answer| %>
             <% if answer_with_description?(answer) %>
@@ -111,8 +110,7 @@
             title: @poll.name,
             url: poll_url(@poll),
             description: @poll.name,
-            mobile: @poll.name
-          %>
+            mobile: @poll.name %>
         </div>
       <% end %>
     </aside>

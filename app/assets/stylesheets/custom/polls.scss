@@ -488,3 +488,22 @@ td.answers-column  {
     background-color: #207868 !important;
   }
 }
+
+.poll-question--nested-question {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .poll-question-answers {
+    margin: 0 !important;
+  }
+}
+
+.poll-question--nested-question-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #292929;
+  margin-right: 15px;
+  margin-bottom: 25px;
+}

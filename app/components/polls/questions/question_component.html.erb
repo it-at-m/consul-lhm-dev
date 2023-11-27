@@ -4,7 +4,7 @@
   </h3>
 
   <p class="poll-question--description">
-    <%= auto_link_already_sanitized_html wysiwyg(question.description) %>
+  <%= auto_link_already_sanitized_html wysiwyg(question.description) %>
   </p>
 
   <% if question.show_hint_callout? && question.votation_type.present? %>
@@ -13,7 +13,20 @@
     </div>
   <% end %>
 
-  <div id="<%= dom_id(question) %>_answers" class="padding">
-    <%= render Polls::Questions::AnswersComponent.new(question) %>
+  <div class="padding">
+    <div id="<%= dom_id(question) %>_answers" class="">
+      <%= render Polls::Questions::AnswersComponent.new(question) %>
+    </div>
+
+    <% question.nested_questions.each do |nested_question| %>
+      <div class="poll-question--nested-question">
+        <div class="poll-question--nested-question-title">
+          <%= nested_question.title %>
+        </div>
+        <div id="<%= dom_id(nested_question) %>_answers" class="">
+          <%= render Polls::Questions::AnswersComponent.new(nested_question) %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>

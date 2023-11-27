@@ -64,6 +64,35 @@ class PollsController < ApplicationController
     end
   end
 
+  def show
+    @questions = @poll.questions.for_render.root_questions.sort_for_list
+    @token = poll_voter_token(@poll, current_user)
+    @poll_questions_answers = Poll::Question::Answer.where(question: @poll.questions)
+
+    @answers_by_question_id = {}
+
+    @questions.each do |question|
+      @answers_by_question_id[question.id] = []
+    end
+
+    poll_answers = ::Poll::Answer.by_question(@poll.question_ids).by_author(current_user&.id)
+    poll_answers.each do |answer|
+      @answers_by_question_id[answer.question_id] = @answers_by_question_id.has_key?(answer.question_id) ? @answers_by_question_id[answer.question_id].push(answer.answer) : [answer.answer]
+    end
+
+    @commentable = @poll
+    @comment_tree = CommentTree.new(@commentable, params[:page], @current_order)
+
+    if !@poll.projekt.visible_for?(current_user)
+      @individual_group_value_names = @poll.projekt.individual_group_values.pluck(:name)
+      render "custom/pages/forbidden", layout: false
+    elsif Setting.new_design_enabled?
+      render :show_new
+    else
+      render :show
+    end
+  end
+
   def stats
     @stats = Poll::Stats.new(@poll)
 
