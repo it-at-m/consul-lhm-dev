@@ -1,0 +1,31 @@
+<div id="username">
+  <% if @show_form %>
+    <%= form_for @user, url: update_username_account_path, remote: true, authenticity_token: true do |f| %>
+      <div>
+        <%= f.text_field :username, label: false, style: "display:inline-block;" %>
+      </div>
+      <%= f.hidden_field :cancel_changes, value: false %>
+      <%= f.submit "Save", class: "d-none" %>
+
+      <div class="account-username-form-control" onclick="$('#user_cancel_changes').val('true');$(this.closest('form')).trigger('submit.rails')">
+        <i class="fas fa-times"></i>
+      </div>
+
+      <div class="account-username-form-control" onclick="$(this.closest('form')).trigger('submit.rails')">
+        <i class="fas fa-check"></i>
+      </div>
+
+    <% end %>
+  <% else %>
+    <%= @user.name %>
+    <% if @edit_mode && @user == current_user %>
+      <div style="display:inline-block;">
+        <div class="users-profile-banner--edit-button">
+          <%= link_to edit_username_account_path, remote: true do %>
+            <i class="fa fa-pencil-alt"></i>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
