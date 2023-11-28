@@ -1,10 +1,22 @@
-<h2><%= t("devise.password_expired.expire_password") %></h2>
+<% form_html = capture do %>
+  <h2><%= t("devise.password_expired.expire_password") %></h2>
 
-<%= form_for(resource, as: resource_name, url: [resource_name, :password_expired], html: { method: :put }) do |f| %>
+  <%= form_for(resource, as: resource_name, url: [resource_name, :password_expired], html: { method: :put }) do |f| %>
 
-  <%= f.password_field :current_password %></p>
-  <%= f.password_field :password, label: t("devise.password_expired.new_password") %></p>
-  <%= f.password_field :password_confirmation %></p>
+    <%= f.password_field :current_password, placeholder: t("activerecord.attributes.user.current_password") %></p>
+    <%= f.password_field :password, label: t("devise.password_expired.new_password"), placeholder: t("devise_views.passwords.edit.password_label") %></p>
+    <%= f.password_field :password_confirmation, placeholder: t("devise_views.passwords.edit.password_confirmation_label") %></p>
 
-  <p><%= f.submit t("devise.password_expired.change_password") %></p>
+    <p><%= f.submit t("devise.password_expired.change_password") %></p>
+  <% end %>
+<% end %>
+
+<% if Setting.new_design_enabled? %>
+  <%= render Auth::AuthPageTemplateComponent.new do |c| %>
+    <% c.form do %>
+      <%= form_html %>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= form_html %>
 <% end %>
