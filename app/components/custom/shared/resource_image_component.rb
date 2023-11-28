@@ -16,4 +16,10 @@ class Shared::ResourceImageComponent < ApplicationComponent
       @resource.model_name.human
     end
   end
+
+  def alt_text
+    return "" unless @resource.respond_to?(:title)
+
+    @resource.class.model_name.human + ": " + @resource.title
+  end
 end
