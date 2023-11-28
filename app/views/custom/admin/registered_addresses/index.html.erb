@@ -5,6 +5,8 @@
 
 <h2 class="inline-block"><%= t("custom.admin.registered_addresses.index.title") %></h2>
 
+<%= link_to t("custom.shared.download"), admin_registered_addresses_path(format: :csv), class: "float-right small clear" %>
+
 <table>
   <thead>
     <tr>
