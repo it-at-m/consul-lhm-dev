@@ -195,7 +195,13 @@ de:
           show_open_answer_without_username: Offene Antworten anonym anzeigen
           show_summary_instead_of_questions: Zusammenfassung statt Liste aller Fragen in der Abstimmungsübersicht anzeigen
       questions:
+        index:
+          create_normal: Normale Frage stellen
+          create_bundle: Fragenbündel erstellen
+        new:
+          bundle_question_title: Fragenbündel erstellen für %{poll}
         show:
+          add_nested_question: Verschachtelte Frage
           answers:
             next_question: Nächste Frage
       progress_bars:

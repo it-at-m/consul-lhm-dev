@@ -13,6 +13,10 @@ class Admin::Poll::Questions::FormComponent < ApplicationComponent
 
   private
 
+    def bundle_question?
+      params[:bundle_question] == "true"
+    end
+
     def select_options
       Poll.all.select { |poll| can?(:create, Poll::Question.new(poll: poll)) }.map do |poll|
         [poll.name, poll.id]

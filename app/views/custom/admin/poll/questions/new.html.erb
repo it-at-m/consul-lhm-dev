@@ -1,0 +1,15 @@
+<h2 class="margin-top">
+  <% if @poll.present? %>
+    <% if params[:bundle_question] %>
+      <%= t("custom.admin.questions.new.bundle_question_title", poll: @poll.name) %>
+    <% else %>
+      <%= t("admin.questions.new.title", poll: @poll.name) %>
+    <% end %>
+  <% else %>
+    <%= t("admin.questions.new.title_proposal") %>
+  <% end %>
+</h2>
+
+<div class="poll-question-form">
+  <%= render "form", form_url: admin_questions_path %>
+</div>
