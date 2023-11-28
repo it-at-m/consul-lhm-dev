@@ -10,11 +10,12 @@ class BudgetsController < ApplicationController
   respond_to :html, :js
 
   def show
-    raise ActionController::RoutingError, "Not Found" unless budget_published?(@budget)
+    raise ActionController::RoutingError, "Not Found" # unless budget_published?(@budget)
   end
 
   def index
-    @finished_budgets = @budgets.finished.order(created_at: :desc)
+    raise ActionController::RoutingError, "Not Found"
+    # @finished_budgets = @budgets.finished.order(created_at: :desc)
   end
 
   private

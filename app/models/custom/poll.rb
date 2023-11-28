@@ -10,7 +10,6 @@ class Poll < ApplicationRecord
   belongs_to :projekt_phase
   has_many :geozone_restrictions, through: :projekt_phase
   has_many :geozone_affiliations, through: :projekt
-
   validates :projekt_phase, presence: true
 
   scope :last_week, -> { where("polls.created_at >= ?", 7.days.ago) }
@@ -72,9 +71,13 @@ class Poll < ApplicationRecord
   end
 
   def find_or_create_stats_version
-    if !expired? && stats_version && stats_version.created_at.to_date != Date.today.to_date
+    if ends_at.present? &&
+        ((Time.zone.today - ends_at.to_date).to_i <= 3) &&
+        stats_version.present? &&
+        stats_version.created_at.to_date != Time.zone.today.to_date
       stats_version.destroy
     end
+
     super
   end
 

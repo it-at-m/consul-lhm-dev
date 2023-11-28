@@ -1,6 +1,6 @@
 <% if can?(:answer, question) && !question.poll.voted_in_booth?(current_user) %>
   <% if already_answered? %>
-    <%= form_with url: question_answer_path(question, user_answer), local: false, method: :delete, class: "button_to" do |f| %>
+    <%= form_with url: question_answer_path(question, user_answer, question_answer_id: question_answer.id), local: false, method: :delete, class: "button_to js-question-answered", data: { next_question_id: question_answer.next_question_id} do |f| %>
       <% if should_show_answer_weight? %>
         <%= select_tag dom_id(user_answer, :answer_weight),
                        options_for_select((0..available_vote_weight).to_a,
@@ -19,7 +19,7 @@
       <% end %>
     <% end %>
   <% else %>
-    <%= form_with url: answer_question_path(question, answer: question_answer.title), local: false, class: "button_to" do |f| %>
+    <%= form_with url: answer_question_path(question, answer: question_answer.title, question_answer_id: question_answer.id), local: false, class: "button_to", data: { next_question_id: question_answer.next_question_id} do |f| %>
 
       <% if should_show_answer_weight? %>
         <%= f.select :answer_weight, (0..available_vote_weight).to_a, { selected: 0, label: false }, { onchange: "$(this).closest('form').submit()", class: "answer-weight-selector" } %>

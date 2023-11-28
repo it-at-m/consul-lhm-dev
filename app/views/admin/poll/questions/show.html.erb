@@ -54,6 +54,8 @@
   <% if can?(:create, Poll::Question::Answer.new(question: @question)) %>
     <%= link_to t("admin.questions.show.add_answer"), new_admin_question_answer_path(@question),
                 class: "button float-right" %>
+    <%# <%= link_to t("admin.questions.show.add_nested_question"), new_admin_question_path(poll_id: @question.poll.id, parent_question_id: @question.id),
+    <%#             class: "button float-right" %>
   <% else %>
     <div class="callout warning">
       <strong><%= t("admin.questions.no_edit") %></strong>

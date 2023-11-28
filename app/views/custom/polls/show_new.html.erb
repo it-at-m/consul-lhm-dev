@@ -18,7 +18,10 @@
           <%= resources_back_link(fallback_path: fallback_path) %>
         </div>
         <div class="resource-page--title-subline">
-          <%= render_custom_block("polls_show_welcome_text", custom_prefix: current_user&.username.present? ? "#{current_user&.username}," : nil, default_content: t("custom.polls.show.welcome_default_text")) %>
+          <%= render_custom_block(
+            "polls_show_welcome_text",
+            custom_prefix: current_user&.username.present? ? "#{current_user&.username}," : nil,
+            default_content: t("custom.polls.show.welcome_default_text")) %>
         </div>
       </div>
       <div class="sidebar-placeholder"></div>
@@ -39,7 +42,47 @@
         <%= render "callout" %>
 
         <div class="margin-bottom">
-          <%= render Polls::Questions::QuestionComponent.with_collection(@questions) %>
+          <% if @poll.wizard_mode? %>
+            <div class="question-wizard js-question-wizard">
+              <div class="progress question-wizard--progress js-question-wizard--progress">
+                <span class="meter js-question-wizard--progress-bar"></span>
+              </div>
+
+              <div class="question-wizard--questions">
+                <%# <% all_questions_answered = @questions.all? { |question| question.answers.present? } %>
+                <% first_question_shown = false %>
+                <% @questions.each.with_index do |question, index| %>
+                  <% show_question = (index == 0) %>
+                  <% additional_class = show_question ? "-visible" : "" %>
+                  <div
+                      class="question-wizard-item js-question-wizard-item <%= additional_class %>"
+                      data-question-id="<%= question.id %>"
+                      data-question-number="<%= index + 1 %>">
+                      <%= render Polls::Questions::QuestionComponent.new(question: question) %>
+                  </div>
+                  <% if show_question %>
+                    <% first_question_shown = show_question %>
+                  <% end %>
+                <% end %>
+              </div>
+
+              <div class="questions-navigation margin-bottom">
+                <div class="d-flex">
+                  <button type="button" class="d-none button hollow question-wizard-prev js-question-wizard-prev">
+                    <%= t("custom.polls.questions.prev_question") %>
+                  </button>
+                  <button type="button" class="button margin-left hollow js-question-wizard-next">
+                    <%= t("custom.polls.questions.next_question") %>
+                  </button>
+                </div>
+                <button type="button" class="d-none button hollow js-question-wizard-go-to-start">
+                  <%= t("custom.polls.questions.go_to_start") %>
+                </button>
+              </div>
+            </div>
+          <% else %>
+            <%= render Polls::Questions::QuestionComponent.with_collection(@questions) %>
+          <% end %>
         </div>
 
         <% @questions.each do |question| %>
@@ -67,8 +110,7 @@
             title: @poll.name,
             url: poll_url(@poll),
             description: @poll.name,
-            mobile: @poll.name
-          %>
+            mobile: @poll.name %>
         </div>
       <% end %>
     </aside>

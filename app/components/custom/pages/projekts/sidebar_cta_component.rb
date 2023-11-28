@@ -5,7 +5,7 @@ class Pages::Projekts::SidebarCtaComponent < ApplicationComponent
 
   def render?
     return false if @projekt_phase.nil?
-    return false if budget_not_accepting?
+    return true if @projekt_phase.is_a?(ProjektPhase::BudgetPhase)
 
     @projekt_phase.type.in?(phase_types_with_new_button + phase_types_with_link)
   end
@@ -16,7 +16,6 @@ class Pages::Projekts::SidebarCtaComponent < ApplicationComponent
       %w[
         ProjektPhase::DebatePhase
         ProjektPhase::ProposalPhase
-        ProjektPhase::BudgetPhase
       ]
     end
 
@@ -32,7 +31,7 @@ class Pages::Projekts::SidebarCtaComponent < ApplicationComponent
     end
 
     def button_text
-      I18n.t("custom.projekt_phases.cta.#{@projekt_phase.name}")
+      @projekt_phase.cta_button_name.presence || I18n.t("custom.projekt_phases.cta.#{@projekt_phase.name}")
     end
 
     def budget_not_accepting?

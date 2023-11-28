@@ -35,6 +35,10 @@
     </div>
   </div>
 
+  <% if params[:parent_question_id].present? || f.object.parent_question_id.present? %>
+    <%= f.hidden_field :parent_question_id, value: (params[:parent_question_id].presence || f.object.parent_question_id) %>
+  <% end %>
+
   <%= f.translatable_fields do |translations_form| %>
     <div class="row">
       <div class="column">
@@ -42,12 +46,14 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="column">
-        <%= translations_form.text_area :description,
-          class: "html-area #{ck_editor_class(current_user)}" %>
+    <% unless params[:parent_question_id].present? %>
+      <div class="row">
+        <div class="column">
+          <%= translations_form.text_area :description,
+            class: "html-area #{ck_editor_class(current_user)}" %>
+        </div>
       </div>
-    </div>
+    <% end %>
 
     <div class="row rating-scale-labels <%= hide_rating_scale_labels_class(question.votation_type.vote_type) %>">
       <div class="column medium-6">

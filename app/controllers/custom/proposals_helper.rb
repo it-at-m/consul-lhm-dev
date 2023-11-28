@@ -33,7 +33,7 @@ module ProposalsHelper
     sentiment = {}
     if proposal.sentiment.present?
       sentiment["name"] = proposal.sentiment.name
-      sentiment["background-color"] = proposal.sentiment.color
+      sentiment["backgroundColor"] = proposal.sentiment.color
       sentiment["color"] = helpers.pick_text_color(proposal.sentiment.color)
     end
 

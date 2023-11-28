@@ -198,7 +198,7 @@ class PagesController < ApplicationController
     params[:filter] ||= "selected" if @budget.phase.in?(["balloting"])
     params[:filter] ||= "all" if @budget.phase.in?(["publishing_prices", "reviewing_ballots"])
     params[:filter] ||= "winners" if @budget.phase == "finished"
-    @current_filter = @valid_filters.include?(params[:filter]) ? params[:filter] : nil
+    @current_filter = @valid_filters.include?(params[:filter]) ? params[:filter] : "all"
 
     @valid_orders = %w[random supports ballots ballot_line_weight newest]
     @valid_orders.delete("supports")
@@ -211,8 +211,7 @@ class PagesController < ApplicationController
     # con-1036
     if @budget.phase == "publishing_prices" &&
         @projekt_phase.settings.find_by(key: "feature.general.show_results_after_first_vote").value.present?
-      params[:filter] = "selected"
-      @current_filter = nil
+      @current_filter = "selected"
     end
     # con-1036
 
@@ -227,7 +226,7 @@ class PagesController < ApplicationController
       query = Budget::Ballot.where(user: current_user, budget: @budget)
       @ballot = @budget.balloting? ? query.first_or_create! : query.first_or_initialize
 
-      @investments = @budget.investments.send(params[:filter]) if params[:filter]
+      @investments = @budget.investments.send(@current_filter)
       @investment_ids = @budget.investments.ids
     end
 

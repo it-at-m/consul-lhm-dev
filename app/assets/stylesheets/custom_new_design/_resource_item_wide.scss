@@ -16,9 +16,6 @@
         display: grid;
         grid-template-columns: 265px 1fr;
         grid-template-rows: 45px 1fr;
-        grid-template-areas:
-          "image header-title"
-          "image body";
         max-width: 930px;
 
          .resource-image--main {

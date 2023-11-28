@@ -9,8 +9,9 @@
       <% if @image_flag %>
         <th>Bilder</th>
       <% end %>
-      <th>SubmitterID</th>
-      <th>SubmitterEmail</th>
+      <th>Einsender-ID</th>
+      <th>E-Mail des Absenders</th>
+      <th>Eingereicht am</th>
     </tr>
   </thead>
   <tbody>
@@ -37,6 +38,7 @@
         <% end %>
         <td><%= fa.submitter_id %></td>
         <td><%= fa.original_submitter_email %></td>
+        <td><%= l(fa.created_at.to_date, format: :long) %></td>
       </tr>
     <% end %>
   </tbody>

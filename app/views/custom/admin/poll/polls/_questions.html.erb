@@ -6,7 +6,7 @@
 <%= link_to t("custom.admin.polls.poll.send_notifications"), send_notifications_admin_poll_path(@poll.id),
             class: "button float-right", method: :put, data: { confirm: t("custom.admin.polls.poll.send_notifications_confirm") } %>
 
-<% if @poll.questions.empty? %>
+<% if @poll.questions.root_questions.empty? %>
   <div class="callout primary margin-top">
     <%= t("admin.polls.show.no_questions") %>
   </div>
@@ -19,7 +19,7 @@
       </tr>
     </thead>
     <tbody class="sortable" data-js-url="<%= admin_poll_questions_order_questions_path(@poll.id) %>" >
-      <% @poll.questions.each do |question| %>
+      <% @poll.questions.root_questions.each do |question| %>
         <tr id="<%= dom_id(question) %>" data-answer-id="<%= question.id %>">
           <td>
             <strong><%= question.title %></strong>
