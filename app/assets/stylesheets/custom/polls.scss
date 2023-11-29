@@ -490,13 +490,15 @@ td.answers-column  {
 }
 
 .poll-question--nested-question {
-  display: flex;
-  justify-content: flex-start;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 
   .poll-question-answers {
     margin: 0 !important;
+  }
+  &.-rating-scale {
+    display: flex;
+    justify-content: flex-start;
   }
 }
 
@@ -506,4 +508,6 @@ td.answers-column  {
   color: #292929;
   margin-right: 15px;
   margin-bottom: 25px;
+  min-width: 150px;
+  max-width: 150px;
 }

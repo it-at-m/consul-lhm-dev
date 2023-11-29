@@ -30,13 +30,15 @@
       </div>
     </div>
 
-    <div class="row" style='margin-bottom:2rem;'>
-      <div class="column small-12">
-        <%= f.check_box :show_hint_callout %>
+    <% unless nested_question? %>
+      <div class="row" style='margin-bottom:2rem;'>
+        <div class="column small-12">
+          <%= f.check_box :show_hint_callout %>
+        </div>
       </div>
-    </div>
+    <% end %>
 
-    <% if params[:parent_question_id].present? || f.object.parent_question_id.present? %>
+    <% if nested_question? %>
       <%= f.hidden_field :parent_question_id, value: (params[:parent_question_id].presence || f.object.parent_question_id) %>
     <% end %>
   <% end %>

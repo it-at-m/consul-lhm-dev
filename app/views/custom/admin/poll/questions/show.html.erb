@@ -4,7 +4,6 @@
   <%= back_link_to admin_poll_path(@question.poll) %>
 <% end %>
 
-
 <% if can?(:update, @question) %>
   <%= link_to t("admin.questions.show.edit_question"), edit_admin_question_path(@question),
               class: "button hollow float-right" %>
@@ -140,17 +139,19 @@
     <thead>
       <tr>
         <th><%= t("admin.questions.show.nested_questions.title") %></th>
+        <th><%= t("custom.admin.questions.show.vote_type") %></th>
         <th><%= t("admin.actions.actions") %></th>
       </tr>
     </thead>
     <!-- <tbody class="sortable" data-js-url="<%= admin_question_answers_order_answers_path(@question.id) %>"> -->
     <tbody class="sortable">
-      <% @question.nested_questions.each do |question| %>
-        <tr id="<%= dom_id(question) %>" class="poll_question_answer" data-question-id="<%= question.id %>">
-          <td class="align-top"><%= question.title %></td>
+      <% @question.nested_questions.each do |nested_question| %>
+        <tr id="<%= dom_id(nested_question) %>" class="poll_question_answer" data-nested_question-id="<%= nested_question.id %>">
+          <td class="align-top"><%= nested_question.title %></td>
+          <td class="align-top"><%= VotationType.human_enum_name(:vote_type, nested_question.votation_type.vote_type) %></td>
           <td>
-            <%= render Admin::TableActionsComponent.new(question) do |actions| %>
-              <%= actions.link_to t("admin.polls.show.edit_answers"), admin_question_path(question), class: "answers-link" %>
+            <%= render Admin::TableActionsComponent.new(nested_question) do |actions| %>
+              <%= actions.link_to t("admin.polls.show.edit_answers"), admin_question_path(nested_question), class: "answers-link" %>
             <% end %>
         </tr>
       <% end %>

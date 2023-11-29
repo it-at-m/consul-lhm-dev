@@ -18,7 +18,7 @@ class Admin::Poll::QuestionsController < Admin::Poll::BaseController
     @question.author = @question.proposal&.author || current_user
 
     if @question.votation_type.nil?
-      @question.votation_type = VotationType.new
+      @question.votation_type = VotationType.new(vote_type: :unique)
     end
 
     if @question.save
@@ -30,6 +30,19 @@ class Admin::Poll::QuestionsController < Admin::Poll::BaseController
     else
       render :new
     end
+  end
+
+  def destroy
+    @question.destroy!
+
+    destroy_path =
+      if @question.parent_question.present?
+        admin_question_path(@question.parent_question)
+      else
+        admin_poll_path(@question.poll)
+      end
+
+    redirect_to destroy_path, notice: t("admin.questions.destroy.notice")
   end
 
   private
