@@ -1,0 +1,22 @@
+#username {
+  form {
+    display: flex;
+
+    input#user_username {
+      margin-bottom: 10px;
+    }
+
+    input#user_username.is-invalid-input {
+      border-color: red;
+    }
+  }
+}
+
+.account-username-form-control {
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 12px;
+  margin-top: 15px;
+  font-size: 20px;
+  color: #003A71;
+}
