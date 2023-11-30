@@ -111,9 +111,9 @@ namespace :projekt_management do
 
   namespace :budgets_wizard do
     resources :budgets, only: [:create, :new, :edit, :update] do
-      # resources :groups, only: [:index, :create, :edit, :update, :destroy] do
+      resources :groups, only: [:index, :create, :edit, :update, :destroy] do
       #   resources :headings, only: [:index, :create, :edit, :update, :destroy]
-      # end
+      end
 
       resources :phases, as: "budget_phases", only: [:index, :edit, :update] do
         member { patch :toggle_enabled }

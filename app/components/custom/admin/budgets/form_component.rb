@@ -7,10 +7,10 @@ class Admin::Budgets::FormComponent < ApplicationComponent
   end
 
   def projekt_phase_options_for_selector
-    if namespace == :admin && current_user.administrator?
+    if namespace == :admin_budgets_wizard && current_user.administrator?
       projekt_phases = ProjektPhase::BudgetPhase.all
 
-    elsif namespace == :projekt_management && current_user.projekt_manager?
+    elsif namespace == :projekt_management_budgets_wizard && current_user.projekt_manager?
       projekt_phases = ProjektPhase::BudgetPhase.where(
         projekt_id: projekts_with_authorization_to("manage").ids
       )

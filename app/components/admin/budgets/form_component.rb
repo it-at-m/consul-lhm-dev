@@ -1,7 +1,7 @@
 class Admin::Budgets::FormComponent < ApplicationComponent
   include TranslatableFormHelper
   include GlobalizeHelper
-  # include Admin::Namespace
+  include Admin::Namespace
 
   attr_reader :budget, :wizard
   alias_method :wizard?, :wizard

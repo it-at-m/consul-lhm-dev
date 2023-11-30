@@ -20,16 +20,16 @@ module AdminActions::BudgetWizard::Budgets
 
   def create
     @budget.published = false
-    params[:mode] == 'single'
+    params[:mode] = "single"
 
     if params[:budget][:projekt_phase_id].blank?
       @budget.valid?
       @budget.errors.add(:projekt_phase_id, :blank)
-      render :new
+      render "admin/budgets_wizard/budgets/new"
     elsif @budget.save
       redirect_to groups_index, notice: t("admin.budgets.create.notice")
     else
-      render :new
+      render "admin/budgets_wizard/budgets/new"
     end
   end
 
@@ -55,6 +55,6 @@ module AdminActions::BudgetWizard::Budgets
     end
 
     def groups_index
-      admin_budgets_wizard_budget_groups_path(@budget, url_params)
+      polymorphic_path([@namespace, :budgets_wizard, @budget, :groups])
     end
 end
