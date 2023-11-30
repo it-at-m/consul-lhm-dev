@@ -37,14 +37,16 @@
 
     <div class="homepage-image-header not-print">
       <div class="homepage-image-header--title-wrapper">
-        <div class="homepage-image-header--title">
-          <div>
-            <%= Setting["extended_option.general.title"] %>
+        <% if Setting["extended_option.general.title"].present? %>
+          <div class="homepage-image-header--title">
+            <div>
+              <%= Setting["extended_option.general.title"] %>
+            </div>
+            <div>
+              <b><%= Setting["extended_option.general.subtitle"] %></b>
+            </div>
           </div>
-          <div>
-            <b><%= Setting["extended_option.general.subtitle"] %></b>
-          </div>
-        </div>
+        <% end %>
         <%= header_button_html %>
       </div>
     </div>
