@@ -1,3 +1,3 @@
-class Admin::BudgetsWizard::BudgetsController < Admin::BudgetsWizard::BaseController
+class Admin::BudgetsWizard::BudgetsController < Admin::BaseController
   include AdminActions::BudgetWizard::Budgets
 end

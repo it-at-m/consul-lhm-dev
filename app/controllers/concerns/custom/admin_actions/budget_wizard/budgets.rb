@@ -37,7 +37,7 @@ module AdminActions::BudgetWizard::Budgets
     if @budget.update(budget_params)
       redirect_to groups_index, notice: t("admin.budgets.update.notice")
     else
-      render :edit
+      render "admin/budgets_wizard/budgets/edit"
     end
   end
 
