@@ -21,22 +21,26 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="small-12">
-      <%= f.fields_for :votation_type do |votation_f| %>
-        <%= render Admin::VotationTypes::FieldsComponent.new(form: votation_f) %>
-      <% end %>
+  <% unless bundle_question? %>
+    <div class="row">
+      <div class="small-12">
+        <%= f.fields_for :votation_type do |votation_f| %>
+          <%= render Admin::VotationTypes::FieldsComponent.new(form: votation_f) %>
+        <% end %>
+      </div>
     </div>
-  </div>
 
-  <div class="row" style='margin-bottom:2rem;'>
-    <div class="column small-12">
-      <%= f.check_box :show_hint_callout %>
-    </div>
-  </div>
+    <% unless nested_question? %>
+      <div class="row" style='margin-bottom:2rem;'>
+        <div class="column small-12">
+          <%= f.check_box :show_hint_callout %>
+        </div>
+      </div>
+    <% end %>
 
-  <% if params[:parent_question_id].present? || f.object.parent_question_id.present? %>
-    <%= f.hidden_field :parent_question_id, value: (params[:parent_question_id].presence || f.object.parent_question_id) %>
+    <% if nested_question? %>
+      <%= f.hidden_field :parent_question_id, value: (params[:parent_question_id].presence || f.object.parent_question_id) %>
+    <% end %>
   <% end %>
 
   <%= f.translatable_fields do |translations_form| %>
@@ -67,11 +71,17 @@
     </div>
   <% end %>
 
-  <div class="row">
-    <div class="small-12 column">
-      <%= f.check_box :show_images, label: t('custom.admin.polls.questions.show_images') %>
+  <% if bundle_question? %>
+    <%= f.hidden_field :bundle_question, value: true %>
+  <% end %>
+
+  <% unless bundle_question? %>
+    <div class="row">
+      <div class="small-12 column">
+        <%= f.check_box :show_images, label: t('custom.admin.polls.questions.show_images') %>
+      </div>
     </div>
-  </div>
+  <% end %>
 
   <div class="row">
     <div class="small-12 medium-4 large-2 margin-top column">

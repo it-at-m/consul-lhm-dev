@@ -7,7 +7,7 @@
   <%= auto_link_already_sanitized_html wysiwyg(question.description) %>
   </p>
 
-  <% if question.show_hint_callout? && question.votation_type.present? %>
+  <% if question.show_hint_callout? && question.votation_type.present? && !question.bundle_question? %>
     <div class="callout primary">
       <%= t("poll_questions.description.#{question.vote_type}", maximum: question.max_votes) %>
     </div>
@@ -19,7 +19,7 @@
     </div>
 
     <% question.nested_questions.each do |nested_question| %>
-      <div class="poll-question--nested-question">
+      <div class="poll-question--nested-question <%= nested_question.votation_type.rating_scale? ? "-rating-scale" : "" %>">
         <div class="poll-question--nested-question-title">
           <%= nested_question.title %>
         </div>

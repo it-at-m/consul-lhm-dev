@@ -1,6 +1,9 @@
 <h3 class="inline-block"><%= t("admin.polls.show.questions_title") %></h3>
 
-<%= link_to t("admin.questions.index.create"), new_admin_question_path(poll_id: @poll.id),
+<%= link_to t("custom.admin.questions.index.create_bundle"), new_admin_question_path(poll_id: @poll.id, bundle_question: true),
+            class: "button float-right" %>
+
+<%= link_to t("custom.admin.questions.index.create_normal"), new_admin_question_path(poll_id: @poll.id),
             class: "button float-right" %>
 
 <%= link_to t("custom.admin.polls.poll.send_notifications"), send_notifications_admin_poll_path(@poll.id),
@@ -15,6 +18,7 @@
     <thead>
       <tr>
         <th><%= t("admin.polls.show.table_title") %></th>
+        <th><%= t("custom.admin.polls.show.type") %></th>
         <th><%= t("admin.actions.actions") %></th>
       </tr>
     </thead>
@@ -37,8 +41,21 @@
             <% end %>
           </td>
           <td>
+            <% if question.bundle_question? %>
+              Fragenbündel
+            <% else %>
+              Normale Frage
+            <% end %>
+          </td>
+          <td>
             <%= render Admin::TableActionsComponent.new(question) do |actions| %>
-              <%= actions.link_to t("admin.polls.show.edit_answers"), admin_question_path(question),
+              <% translation_for_action =
+                if question.bundle_question?
+                  t("custom.admin.polls.show.edit_nested_questions")
+                else
+                  t("admin.polls.show.edit_answers")
+                end %>
+              <%= actions.link_to translation_for_action, admin_question_path(question),
                                                                       class: "answers-link" %>
             <% end %>
           </td>

@@ -171,6 +171,9 @@ de:
           list: Registrierte Straßen
         individual_groups: Individuelle Gruppen
       polls:
+        show:
+          edit_nested_questions: Verschachtelte Fragen
+          title: Fragetyp
         poll:
           send_notifications: Benachrichtigungen senden
           notifications_sent: Benachrichtigungen wurden erfolgreich gesendet
@@ -195,9 +198,17 @@ de:
           show_open_answer_without_username: Offene Antworten anonym anzeigen
           show_summary_instead_of_questions: Zusammenfassung statt Liste aller Fragen in der Abstimmungsübersicht anzeigen
       questions:
+        index:
+          create_normal: Normale Frage stellen
+          create_bundle: Fragenbündel erstellen
+        new:
+          bundle_question_title: Fragenbündel erstellen für %{poll}
         show:
+          add_nested_question: Verschachtelte Frage hinzufügen
+          vote_type: Art der Abstimmung
           answers:
             next_question: Nächste Frage
+
       progress_bars:
         index:
           progress_bar: Fortschrittsbalken
