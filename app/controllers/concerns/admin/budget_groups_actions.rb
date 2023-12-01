@@ -11,6 +11,7 @@ module Admin::BudgetGroupsActions
   end
 
   def edit
+    render "admin/budgets_wizard/groups/edit"
   end
 
   def create
@@ -30,7 +31,7 @@ module Admin::BudgetGroupsActions
     if @group.update(budget_group_params)
       redirect_to groups_index, notice: t("admin.budget_groups.update.notice")
     else
-      render :edit
+      render "admin/budgets_wizard/groups/edit"
     end
   end
 

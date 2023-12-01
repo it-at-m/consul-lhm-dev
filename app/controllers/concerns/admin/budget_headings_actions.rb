@@ -12,10 +12,13 @@ module Admin::BudgetHeadingsActions
   end
 
   def edit
+    render "admin/budgets_wizard/headings/edit"
   end
 
   def create
     @heading = @group.headings.new(budget_heading_params)
+    authorize!(:create, @heading) if @namespace == :projekt_management
+
     if @heading.save
       redirect_to headings_index, notice: t("admin.budget_headings.create.notice")
     else
@@ -24,10 +27,12 @@ module Admin::BudgetHeadingsActions
   end
 
   def update
+    authorize!(:update, @heading) if @namespace == :projekt_management
+
     if @heading.update(budget_heading_params)
       redirect_to headings_index, notice: t("admin.budget_headings.update.notice")
     else
-      render :edit
+      render "admin/budgets_wizard/headings/edit"
     end
   end
 

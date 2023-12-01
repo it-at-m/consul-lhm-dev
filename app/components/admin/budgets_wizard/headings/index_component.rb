@@ -20,10 +20,6 @@ class Admin::BudgetsWizard::Headings::IndexComponent < Admin::BudgetsWizard::Bas
   end
 
   def back_link_text
-    if single_heading?
-      t("admin.budgets_wizard.headings.single.back")
-    else
-      t("admin.budget_headings.index.back")
-    end
+    t("admin.budgets_wizard.headings.single.back")
   end
 end

@@ -157,6 +157,9 @@ module Abilities
       can [:read, :create, :update, :destroy], Budget::Group do |group|
         user.projekt_manager.allowed_to?("manage", group.budget&.projekt)
       end
+      can [:read, :create, :update, :destroy], Budget::Heading do |heading|
+        user.projekt_manager.allowed_to?("manage", heading.group.budget&.projekt)
+      end
 
     end
   end

@@ -47,6 +47,13 @@ class Budget
       end
     end
 
+    def self.model_name # custom
+      mname = super
+      mname.instance_variable_set(:@route_key, "headings")
+      mname.instance_variable_set(:@singular_route_key, "heading")
+      mname
+    end
+
     def name_scoped_by_group
       budget.single_group? ? name : "#{group.name}: #{name}"
     end

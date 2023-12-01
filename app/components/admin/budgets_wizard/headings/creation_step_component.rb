@@ -13,9 +13,11 @@ class Admin::BudgetsWizard::Headings::CreationStepComponent < ApplicationCompone
 
     def form_path
       if heading.persisted?
-        admin_budgets_wizard_budget_group_heading_path(heading.group.budget, heading.group, heading)
+        # admin_budgets_wizard_budget_group_heading_path(heading.group.budget, heading.group, heading)
+        polymorphic_path([namespace, :budgets_wizard, heading.group.budget, heading.group, heading])
       else
-        admin_budgets_wizard_budget_group_headings_path(heading.group.budget, heading.group)
+        # admin_budgets_wizard_budget_group_headings_path(heading.group.budget, heading.group)
+        polymorphic_path([namespace, :budgets_wizard, heading.group.budget, heading.group, :headings])
       end
     end
 
