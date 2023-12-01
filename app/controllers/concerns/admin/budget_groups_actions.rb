@@ -15,6 +15,8 @@ module Admin::BudgetGroupsActions
 
   def create
     @group = @budget.groups.new(budget_group_params)
+    authorize!(:create, @group) if @namespace == :projekt_management
+
     if @group.save
       redirect_to groups_index, notice: t("admin.budget_groups.create.notice")
     else
@@ -23,6 +25,8 @@ module Admin::BudgetGroupsActions
   end
 
   def update
+    authorize!(:update, @group) if @namespace == :projekt_management
+
     if @group.update(budget_group_params)
       redirect_to groups_index, notice: t("admin.budget_groups.update.notice")
     else

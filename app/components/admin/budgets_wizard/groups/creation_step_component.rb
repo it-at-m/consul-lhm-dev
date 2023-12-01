@@ -1,4 +1,5 @@
 class Admin::BudgetsWizard::Groups::CreationStepComponent < ApplicationComponent
+  include Admin::Namespace
   attr_reader :group, :next_step_group
 
   def initialize(group, next_step_group)
@@ -14,9 +15,11 @@ class Admin::BudgetsWizard::Groups::CreationStepComponent < ApplicationComponent
 
     def form_path
       if group.persisted?
-        admin_budgets_wizard_budget_group_path(budget, group)
+        # admin_budgets_wizard_budget_group_path(budget, group)
+        polymorphic_path([namespace, budget, group])
       else
-        admin_budgets_wizard_budget_groups_path(budget)
+        # admin_budgets_wizard_budget_groups_path(budget)
+        polymorphic_path([namespace, budget, :groups])
       end
     end
 
