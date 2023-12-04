@@ -26,42 +26,42 @@ module AdminActions::Budgets
   end
 
   def edit
+    render "admin/budgets/edit"
   end
 
   def publish
     @budget.publish!
-    redirect_to admin_budget_path(@budget), notice: t("admin.budgets.publish.notice")
+    redirect_to polymorphic_path([@namespace, @budget]), notice: t("admin.budgets.publish.notice")
   end
 
   def calculate_winners
     @budget.headings.each { |heading| Budget::Result.new(@budget, heading).delay.calculate_winners }
-    redirect_to admin_budget_budget_investments_path(
-                  budget_id: @budget.id,
-                  advanced_filters: ["winners"]),
-                notice: I18n.t("admin.budgets.winners.calculated")
+    redirect_to polymorphic_path([@namespace, @budget, :budget_investments], advanced_filters: ["winners"]),
+      notice: I18n.t("admin.budgets.winners.calculated")
   end
 
   def recalculate_winners
     @budget.headings.each { |heading| Budget::Result.new(@budget, heading).calculate_winners }
-    redirect_to budget_results_path(@budget, @heading), notice: "Ergebnisse erfolgreich berechnet."
+    redirect_to polymorphic_path([@namespace, @budget, :budget_investments], advanced_filters: ["winners"]),
+      notice: "Ergebnisse erfolgreich berechnet."
   end
 
   def update
     if @budget.update(budget_params)
-      redirect_to admin_budget_path(@budget), notice: t("admin.budgets.update.notice")
+      redirect_to polymorphic_path([@namespace, @budget]), notice: t("admin.budgets.update.notice")
     else
-      render :edit
+      render "admin/budgets/edit"
     end
   end
 
   def destroy
     if @budget.investments.any?
-      redirect_to admin_budget_path(@budget), alert: t("admin.budgets.destroy.unable_notice")
+      redirect_to polymorphic_path([@namespace, @budget]), alert: t("admin.budgets.destroy.unable_notice")
     elsif @budget.poll.present?
-      redirect_to admin_budget_path(@budget), alert: t("admin.budgets.destroy.unable_notice_polls")
+      redirect_to polymorphic_path([@namespace, @budget]), alert: t("admin.budgets.destroy.unable_notice_polls")
     else
       @budget.destroy!
-      redirect_to admin_budgets_path, notice: t("admin.budgets.destroy.success_notice")
+      redirect_to polymorphic_path([@namespace, @budget]), notice: t("admin.budgets.destroy.success_notice")
     end
   end
 
