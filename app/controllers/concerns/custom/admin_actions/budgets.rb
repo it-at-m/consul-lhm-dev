@@ -22,6 +22,7 @@ module AdminActions::Budgets
   end
 
   def show
+    render "admin/budgets/show"
   end
 
   def edit

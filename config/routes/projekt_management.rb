@@ -82,31 +82,31 @@ namespace :projekt_management do
   end
 
   resources :budgets, except: [:create, :new] do
-    # member do
-    #   patch :publish
-    #   put :calculate_winners
-    #   put :recalculate_winners # custom
-    # end
+    member do
+      patch :publish
+      put :calculate_winners
+      put :recalculate_winners # custom
+    end
 
     # resources :groups, except: [:index, :show], controller: "budget_groups" do
     #   resources :headings, except: [:index, :show], controller: "budget_headings"
     # end
 
-    # resources :budget_investments, only: [:index, :show, :edit, :update] do
-    #   # member { patch :toggle_selection }
-    #   member do #custom
-    #     patch :toggle_selection
-    #     patch :edit_physical_votes
-    #   end
+    resources :budget_investments, only: [:index, :show, :edit, :update] do
+      # member { patch :toggle_selection }
+      member do #custom
+        patch :toggle_selection
+        patch :edit_physical_votes
+      end
 
-    #   resources :audits, only: :show, controller: "budget_investment_audits"
-    #   resources :milestones, controller: "budget_investment_milestones"
-    #   resources :progress_bars, except: :show, controller: "budget_investment_progress_bars"
-    # end
+      resources :audits, only: :show, controller: "budget_investment_audits"
+      resources :milestones, controller: "budget_investment_milestones"
+      resources :progress_bars, except: :show, controller: "budget_investment_progress_bars"
+    end
 
-    # resources :budget_phases, only: [:edit, :update] do
-    #   member { patch :toggle_enabled }
-    # end
+    resources :budget_phases, only: [:edit, :update] do
+      member { patch :toggle_enabled }
+    end
   end
 
   namespace :budgets_wizard do
