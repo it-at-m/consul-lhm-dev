@@ -9,6 +9,7 @@ module Admin::BudgetHeadingsActions
     before_action :load_budget
     before_action :load_group
     before_action :load_heading, only: [:edit, :update, :destroy]
+    before_action :correct_namespace #custom
   end
 
   def edit
@@ -17,7 +18,7 @@ module Admin::BudgetHeadingsActions
 
   def create
     @heading = @group.headings.new(budget_heading_params)
-    authorize!(:create, @heading) if @namespace == :projekt_management
+    authorize!(:create, @budget) if @namespace.to_s.start_with?("projekt_management")
 
     if @heading.save
       redirect_to headings_index, notice: t("admin.budget_headings.create.notice")
@@ -27,7 +28,7 @@ module Admin::BudgetHeadingsActions
   end
 
   def update
-    authorize!(:update, @heading) if @namespace == :projekt_management
+    authorize!(:create, @budget) if @namespace.to_s.start_with?("projekt_management")
 
     if @heading.update(budget_heading_params)
       redirect_to headings_index, notice: t("admin.budget_headings.update.notice")
@@ -37,6 +38,8 @@ module Admin::BudgetHeadingsActions
   end
 
   def destroy
+    authorize!(:create, @budget) if @namespace.to_s.start_with?("projekt_management")
+
     if @heading.can_be_deleted?
       @heading.destroy!
       redirect_to headings_index, notice: t("admin.budget_headings.destroy.success_notice")
@@ -67,5 +70,11 @@ module Admin::BudgetHeadingsActions
       valid_attributes = [:price, :population, :allow_custom_content, :latitude, :longitude, :max_ballot_lines]
 
       [*valid_attributes, translation_params(Budget::Heading)]
+    end
+
+    def correct_namespace
+      if params[:controller].include?("budgets_wizard")
+        @namespace = (@namespace.to_s + "_" + "budgets_wizard").to_sym
+      end
     end
 end

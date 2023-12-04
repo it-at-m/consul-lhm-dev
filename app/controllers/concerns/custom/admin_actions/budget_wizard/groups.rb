@@ -9,7 +9,7 @@ module AdminActions::BudgetWizard::Groups
 
   def index
     @group = @budget.groups.first_or_initialize("name_#{I18n.locale}" => @budget.name)
-    authorize!(:read, @group) if @namespace == :projekt_management
+    authorize!(:create, @budget) if @namespace.to_s.start_with?("projekt_management")
 
     render "admin/budgets_wizard/groups/index"
   end
@@ -18,7 +18,7 @@ module AdminActions::BudgetWizard::Groups
 
     def groups_index
       # admin_budgets_wizard_budget_group_headings_path(@budget, @group)
-      polymorphic_path([@namespace, :budgets_wizard, @budget, @group, :headings])
+      polymorphic_path([@namespace, @budget, @group, :headings])
     end
 
     def new_action

@@ -8,10 +8,12 @@ module AdminActions::BudgetWizard::Budgets
   included do
     feature_flag :budgets
 
-    load_and_authorize_resource
+    load_and_authorize_resource except: [:new, :create]
+    skip_authorization_check only: :new
   end
 
   def new
+    @budget = Budget.new
     render "admin/budgets_wizard/budgets/new"
   end
 
@@ -19,6 +21,10 @@ module AdminActions::BudgetWizard::Budgets
   end
 
   def create
+    @budget = Budget.new(budget_params)
+    authorize! :create, @budget
+
+
     @budget.published = false
     params[:mode] = "single"
 

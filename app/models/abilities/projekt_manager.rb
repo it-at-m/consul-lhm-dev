@@ -140,9 +140,6 @@ module Abilities
       end
 
 
-
-
-      can :new, Budget
       can [:read, :create, :update, :destroy], Budget do |budget|
         user.projekt_manager.allowed_to?("manage", budget&.projekt)
       end
@@ -154,12 +151,12 @@ module Abilities
       end
       can :recalculate_winners, Budget, &:balloting_or_later?
 
-      can [:read, :create, :update, :destroy], Budget::Group do |group|
-        user.projekt_manager.allowed_to?("manage", group.budget&.projekt)
-      end
-      can [:read, :create, :update, :destroy], Budget::Heading do |heading|
-        user.projekt_manager.allowed_to?("manage", heading.group.budget&.projekt)
-      end
+      # can [:read, :create, :update, :destroy], Budget::Group do |group|
+      #   user.projekt_manager.allowed_to?("manage", group.budget&.projekt)
+      # end
+      # can [:read, :create, :update, :destroy], Budget::Heading do |heading|
+      #   user.projekt_manager.allowed_to?("manage", heading.group.budget&.projekt)
+      # end
 
     end
   end

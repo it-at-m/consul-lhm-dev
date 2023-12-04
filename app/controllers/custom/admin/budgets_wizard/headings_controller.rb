@@ -1,3 +1,3 @@
-class Admin::BudgetsWizard::HeadingsController < Admin::BudgetsWizard::BaseController
+class Admin::BudgetsWizard::HeadingsController < Admin::BaseController
   include AdminActions::BudgetWizard::Headings
 end

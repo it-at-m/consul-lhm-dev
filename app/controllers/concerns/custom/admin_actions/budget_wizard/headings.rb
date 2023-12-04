@@ -9,7 +9,7 @@ module AdminActions::BudgetWizard::Headings
 
   def index
     @heading = @group.headings.first_or_initialize
-    authorize!(:read, @heading) if @namespace == :projekt_management
+    authorize!(:create, @budget) if @namespace.to_s.start_with?("projekt_management")
 
     render "admin/budgets_wizard/headings/index"
   end
@@ -18,7 +18,7 @@ module AdminActions::BudgetWizard::Headings
 
     def headings_index
       # admin_budgets_wizard_budget_budget_phases_path(@budget, url_params)
-      polymorphic_path([@namespace, :budgets_wizard, @heading.group.budget, :budget_phases])
+      polymorphic_path([@namespace, @heading.group.budget, :budget_phases])
     end
 
     def load_headings
