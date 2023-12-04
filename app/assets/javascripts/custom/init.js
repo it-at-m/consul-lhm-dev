@@ -15,7 +15,7 @@
       App.CkeEditorPlaceholder.initialize();
       App.RemoveOnMobileSections.initialize();
       App.QuestionWizard.initialize();
-      App.AutosaveFormElement.initialize();
+      App.AutosubmitFormElement.initialize();
     }
   };
 }).call(this);

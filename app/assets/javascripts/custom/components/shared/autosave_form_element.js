@@ -1,8 +1,8 @@
 (function() {
   "use strict";
-  App.AutosaveFormElement = {
+  App.AutosubmitFormElement = {
     initialize: function() {
-      $(".js-autosave-form input").on("change", this.saveForm);
+      $(".js-autosubmit-form input").on("change", this.saveForm);
     },
 
     saveForm: function(e) {
