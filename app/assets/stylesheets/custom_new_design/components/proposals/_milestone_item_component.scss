@@ -70,6 +70,29 @@
         justify-content: flex-start;
       }
     }
+      @media(max-width: $mobile-viewport-start) {
+        width: 100%;
+
+        .milestone-item--date {
+          justify-content: center !important;
+          font-size: 20px;
+        }
+
+        &::before {
+          display: none;
+        }
+        &:after {
+          display: none;
+        }
+        &:nth-child(odd) {
+          padding: 0;
+        }
+        &:nth-child(even) {
+          padding: 0;
+        }
+        &::before {
+        }
+      }
   }
 
   .milestone-item--status {
@@ -79,5 +102,11 @@
     font-size: 18px;
     padding: 10px 25px;
     min-height: 47px;
+    margin-bottom: 22px;
+
+    @media (max-width: $mobile-viewport-start) {
+      padding: 10px 20px;
+    margin-bottom: 15px;
+    }
   }
 }

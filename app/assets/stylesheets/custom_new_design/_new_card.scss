@@ -8,12 +8,20 @@
     padding: 20px 25px;
     overflow: hidden;
 
+    @media (max-width: $mobile-viewport-start) {
+      padding: 20px 20px;
+    }
+
     &.-no-padding {
       padding: 0;
 
       .new-card-body {
         padding: 0 25px;
         padding-bottom: 20px;
+
+        @media (max-width: $mobile-viewport-start) {
+          padding: 0 20px;
+        }
       }
     }
   }
