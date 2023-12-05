@@ -145,6 +145,10 @@ body.custom-new-design .wrapper > header .locale.locale-custom {
     display: none;
   }
 
+  .top-bar, .top-bar ul {
+    background-color: transparent;
+  }
+
   .header--navigation ul.main-menu .nav-flyout-block .projekt-name {
     color: black !important;
 

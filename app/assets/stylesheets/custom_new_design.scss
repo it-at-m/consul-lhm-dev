@@ -1,3 +1,13 @@
+@import "foundation_and_overrides";
+@import "font-awesome/variables";
+@import "font-awesome/mixins";
+@import "font-awesome/core";
+@import "font-awesome/icons";
+
+@import "settings";
 @import "_custom_fonts";
-@import "custom_new_design/colors";
+@import "consul_settings";
+@import "custom_settings";
+
 @import "custom_new_design/**/*";
+
