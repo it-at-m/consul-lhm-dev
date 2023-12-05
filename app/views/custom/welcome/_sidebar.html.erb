@@ -13,7 +13,7 @@
     <% end %>
   <% end %>
 
-  <%= render Shared::SidebarCardComponent.new(title: "Benachrichtigungen", icon_name: "bell") do |c| %>
+  <%= render Shared::SidebarCardComponent.new(title: "Newsletter empfangen", icon_name: "envelope") do |c| %>
     <% if current_user.present? %>
       <%= form_for current_user, as: :account, url: account_path, format: :js, remote: true, html: { class: "js-autosubmit-form" } do |f| %>
         <div>
@@ -25,7 +25,7 @@
       <div id="newsletter-subscribtion-form">
         <%= form_for UnregisteredNewsletterSubscriber.new, format: :js, remote: true do |f| %>
           <%= f.text_field :email, label: false, placeholder: User.human_attribute_name(:email) %>
-          <%= f.submit "Subscribe", class: "button" %>
+          <%= f.submit "Anmelden", class: "button" %>
         <% end %>
       </div>
     <% end %>

@@ -10,6 +10,6 @@
   </h1>
 
   <p style="<%= css_for_mailer_text %>">
-    Mit Klick auf diesen <%= link_to("link", path) %> bestätigen Sie die Anmeldung zum Newsletter.
+    <%= t("custom.newsletters.subscription.confirm_subscription_html", link: link_to("LINK", path)) %>
   </p>
 </td>

@@ -19,7 +19,7 @@ class UnregisteredNewsletterSubscribersController < ApplicationController
 
     subscriber.update!(confirmed: true, confirmation_token: nil)
 
-    redirect_to root_path, notice: "Successfully subscribed to newsletter"
+    redirect_to root_path, notice: t("custom.newsletters.subscription.successfully_subscribed")
   end
 
   def unsubscribe
