@@ -6,9 +6,10 @@ module Budgets
     authorize_resource :budget
 
     def show
-      authorize! :read_results, @budget
-      @investments = Budget::Result.new(@budget, @heading).investments
-      @headings = @budget.headings.sort_by_name
+      head :not_found, content_type: "text/html"
+      # authorize! :read_results, @budget
+      # @investments = Budget::Result.new(@budget, @heading).investments
+      # @headings = @budget.headings.sort_by_name
     end
 
     private

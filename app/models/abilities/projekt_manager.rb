@@ -151,13 +151,9 @@ module Abilities
       end
       can :recalculate_winners, Budget, &:balloting_or_later?
 
-      # can [:read, :create, :update, :destroy], Budget::Group do |group|
-      #   user.projekt_manager.allowed_to?("manage", group.budget&.projekt)
-      # end
-      # can [:read, :create, :update, :destroy], Budget::Heading do |heading|
-      #   user.projekt_manager.allowed_to?("manage", heading.group.budget&.projekt)
-      # end
-
+      can [:admin_update, :toggle_selection], Budget::Investment do |investment|
+        can?(:create, investment.budget)
+      end
     end
   end
 end
