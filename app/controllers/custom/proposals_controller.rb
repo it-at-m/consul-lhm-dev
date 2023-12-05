@@ -239,6 +239,9 @@ class ProposalsController
     end
 
     def proposal_limit_exceeded?(user)
-      user.proposals.where(retired_at: nil).count >= Setting['extended_option.proposals.max_active_proposals_per_user'].to_i
+      projekt = Projekt.find_by(id: params[:projekt_id])
+      return false if user.administrator? || user.projekt_manager?(projekt)
+
+      user.proposals.where(retired_at: nil).count >= Setting["extended_option.proposals.max_active_proposals_per_user"].to_i
     end
 end
