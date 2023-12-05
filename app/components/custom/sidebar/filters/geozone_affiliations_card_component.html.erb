@@ -1,5 +1,5 @@
 <% unless helpers.skip_user_verification? %>
-    <%= render Shared::SidebarCardComponent.new(title: t("custom.geozones.sidebar_filter.restrictions.title"), icon_name: "user-check") do |c| %>
+    <%= render Shared::SidebarCardComponent.new(title: t("custom.geozones.sidebar_filter.restrictions.title"), icon_name: "map") do |c| %>
     <%= render "shared/sidebar_filter/geozone_affiliations", resource_name: @resource_name, geozones: @geozones, selected_affiliated_geozones: @selected_affiliated_geozones %>
     <% end %>
 <% end %>
