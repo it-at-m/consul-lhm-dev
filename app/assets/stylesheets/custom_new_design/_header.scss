@@ -550,12 +550,12 @@ body.custom-new-design .wrapper > header .locale.locale-custom {
   }
 
   .header--responsive-menu-title {
-    color: #005A9F;
+    color: $brand;
   }
 
   .header--responsive-menu-sign-in-button {
     width: auto;
-    background: #073E8E !important;
+    background: $brand !important;
     color: white !important;
     border-radius: 5px !important;
     padding: 10px 20px;

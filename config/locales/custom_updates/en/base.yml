@@ -82,7 +82,7 @@ en:
           only_geozones: Only citizens of the district
           only_streets: Only citizens of a street
           show_more: Show more
-          title: Participation
+          title: Area
     images:
       form:
         image_name: Title image name

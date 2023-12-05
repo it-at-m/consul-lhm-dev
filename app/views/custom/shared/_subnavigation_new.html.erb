@@ -9,6 +9,9 @@
     <%= raw content_block("subnavigation_right_mobile", I18n.locale) if placement == 'mobile' && !launch_page %>
     <%= render partial: 'shared/subnavigation_projekt_events', locals: { placement: placement } if Setting['extended_feature.general.enable_projekt_events_page'].present? && !launch_page %>
   </div>
+  <% if extended_feature?("general.enable_google_translate") && placement == 'desktop' %>
+    <div id="google_translate_element"></div>
+  <% end %>
 
   <% unless launch_page %>
     <div class="account-admin-items">
