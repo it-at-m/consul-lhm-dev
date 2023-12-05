@@ -1,6 +1,6 @@
-<div class="column small-12 margin-top">
+<% open_asnwer_form = capture do %>
   <%= form_for open_answer, url: update_open_answer_path(question), method: :post, remote: true do |f| %>
-    <%= f.text_area :open_answer_text, disabled: !can_answer? %>
+    <%= f.text_area :open_answer_text, disabled: !can_answer?, label: open_answer.answer %>
     <%= f.hidden_field :answer %>
     <% if open_answer.open_answer_text.present? %>
       <%= f.submit t("custom.polls.questions.answers.update_open_answer"), disabled: !can_answer?, class: "button open-answer" %>
@@ -13,4 +13,12 @@
       <%= f.submit t("custom.polls.questions.answers.save_open_answer"), disabled: !can_answer?, class: "button open-answer" %>
     <% end %>
   <% end %>
-</div>
+<% end %>
+
+<% if Setting.new_design_enabled? %>
+  <%= open_asnwer_form %>
+<% else %>
+  <div class="column small-12 margin-top">
+    <%= open_asnwer_form %>
+  </div>
+<% end %>
