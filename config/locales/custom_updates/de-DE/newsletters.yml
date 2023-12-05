@@ -17,3 +17,4 @@ de:
         please_confirm: "Bitte bestätigen Sie die Newsletter-Anmeldung, die wir Ihnen per Mail an folgende Adresse zugeschickt haben: %{email}"
         confirm_subscription_html: "Mit Klick auf diesen %{link} bestätigen Sie die Anmeldung zum Newsletter."
         successfully_subscribed: "Erfolgreich zum Newsletter angemeldet"
+        successfully_unsubscribed: "Erfolgreich vom Newsletter abgemeldet"

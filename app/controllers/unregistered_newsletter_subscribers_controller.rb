@@ -27,7 +27,7 @@ class UnregisteredNewsletterSubscribersController < ApplicationController
 
     subscriber.destroy!
 
-    redirect_to root_path, notice: "Successfully unsubscribed from newsletter"
+    redirect_to root_path, notice: t("custom.newsletters.subscription.successfully_unsubscribed")
   end
 
   private
