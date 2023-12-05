@@ -1,4 +1,16 @@
-#google_translate_element {
-  align-self: center;
-  margin: 0 1.5rem;
+.custom-new-design {
+  #google_translate_element {
+    align-self: center;
+    margin: 0 1.5rem;
+  }
+
+  .skiptranslate + header {
+    .top-bar-wrapper {
+      top: 38px !important;
+    }
+  }
+
+  .skiptranslate ~ .wrapper {
+    margin-top: 38px !important;
+  }
 }
