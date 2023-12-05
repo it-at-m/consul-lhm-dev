@@ -86,6 +86,8 @@ $green-button-color: #00AA0B;
     }
 
     &.hollow {
+      background-color: transparent;
+
       &:hover, &:focus, &:active {
         background: #E1EDF7;
         color: #004a83;

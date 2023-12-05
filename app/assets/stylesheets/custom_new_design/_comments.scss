@@ -3,10 +3,6 @@
     padding-bottom: 20px;
     background: transparent !important;
 
-    .new-comments-component--title {
-      font-size: 28px;
-    }
-
     .comment-form, .comment {
       background: white;
       border-radius: 10px;
@@ -17,6 +13,10 @@
       font-size: 14px;
       // padding: 15px 25px;
       padding: 12px 25px;
+
+      @media (max-width: $mobile-viewport-start) {
+        padding: 12px 20px;
+      }
     }
 
     .comment-form {
