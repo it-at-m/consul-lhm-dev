@@ -35,9 +35,11 @@
           <% end %>
         <% end %>
 
-        <div class="resource-page--description new-card main-content-card">
-          <%= render "poll_header" %>
-        </div>
+        <% if @poll.summary.present? || @poll.description.present? %>
+          <div class="resource-page--description new-card main-content-card">
+            <%= render "poll_header" %>
+          </div>
+        <% end %>
 
         <%= render "callout" %>
 
