@@ -44,6 +44,8 @@ module AdminActions::BudgetInvestments
     load_staff
     load_valuator_groups
     load_tags
+
+    render "admin/budget_investments/edit"
   end
 
   def update
@@ -52,15 +54,13 @@ module AdminActions::BudgetInvestments
     respond_to do |format|
       format.html do
         if @investment.update(budget_investment_params)
-          redirect_to admin_budget_budget_investment_path(@budget,
-                                                          @investment,
-                                                          Budget::Investment.filter_params(params).to_h),
+          redirect_to polymorphic_path([@namespace, @budget, @investment], Budget::Investment.filter_params(params).to_h),
                       notice: t("flash.actions.update.budget_investment")
         else
           load_staff
           load_valuator_groups
           load_tags
-          render :edit
+          render "admin/budget_investments/edit"
         end
       end
 
@@ -75,6 +75,19 @@ module AdminActions::BudgetInvestments
     @investment.toggle :selected
     @investment.save!
     load_investments
+
+    respond_to do |format|
+      format.js { render "admin/budget_investments/toggle_selection" }
+    end
+  end
+
+  def edit_physical_votes #custom
+    @investment = Budget::Investment.find(params[:id])
+    if @investment.update(physical_votes: params[:budget_investment][:physical_votes])
+      @answer_updated = "answered"
+    end
+
+    render "admin/budget_investments/edit_physical_votes"
   end
 
   private
@@ -145,13 +158,6 @@ module AdminActions::BudgetInvestments
         else
           params[:valuator_id] = id
         end
-      end
-    end
-
-    def edit_physical_votes #custom
-      @investment = Budget::Investment.find(params[:id])
-      if @investment.update(physical_votes: params[:budget_investment][:physical_votes])
-        @answer_updated = "answered"
       end
     end
 end
