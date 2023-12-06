@@ -146,7 +146,7 @@ de:
       votation_type:
         max_votes: Maximale Stimmanzahl
         vote_type: Art der Abstimmung
-        vote_types:
+        vote_type:
             unique: Einzelne Stimme
             multiple: Mehrere Stimmen
             multiple_with_weight: Mehrere gewichtete Stimmen

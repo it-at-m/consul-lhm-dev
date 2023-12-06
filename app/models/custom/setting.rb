@@ -162,6 +162,7 @@ class Setting < ApplicationRecord
         "sdg.process.projekts": true,
 
         "welcomepage.usage_stats": true,
+        "welcomepage.newsletter_subscription": false,
 
         "projekts.show_archived.sidebar": true,
         "projekts.second_level_projekts_in_active_filter": false,

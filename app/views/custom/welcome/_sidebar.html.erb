@@ -13,22 +13,24 @@
     <% end %>
   <% end %>
 
-  <%= render Shared::SidebarCardComponent.new(title: "Newsletter empfangen", icon_name: "envelope") do |c| %>
-    <% if current_user.present? %>
-      <%= form_for current_user, as: :account, url: account_path, format: :js, remote: true do |f| %>
-        <div>
-          <%= f.check_box :newsletter, { label: t("custom.account.settings.newsletter_on_home_page"), class: "checkbox-label--aligned" } %>
-        </div>
-        <%= f.submit t("custom.account.show.save_settings"), class: "button margin-top" %>
-      <% end %>
-    <% else %>
-      <p>Nicht registriert? Newsletter abonnieren</p>
-      <div id="newsletter-subscribtion-form">
-        <%= form_for UnregisteredNewsletterSubscriber.new, format: :js, remote: true do |f| %>
-          <%= f.text_field :email, label: false, placeholder: User.human_attribute_name(:email) %>
-          <%= f.submit "Anmelden", class: "button" %>
+  <% if setting["welcomepage.newsletter_subscription"].present? %>
+    <%= render Shared::SidebarCardComponent.new(title: "Newsletter", icon_name: "envelope") do |c| %>
+      <% if current_user.present? %>
+        <%= form_for current_user, as: :account, url: account_path, format: :js, remote: true do |f| %>
+          <div>
+            <%= f.check_box :newsletter, { label: t("custom.account.settings.newsletter_on_home_page"), class: "checkbox-label--aligned" } %>
+          </div>
+          <%= f.submit t("custom.account.show.save_settings"), class: "button margin-top" %>
         <% end %>
-      </div>
+      <% else %>
+        <p>Nicht registriert? Newsletter abonnieren</p>
+        <div id="newsletter-subscribtion-form">
+          <%= form_for UnregisteredNewsletterSubscriber.new, format: :js, remote: true do |f| %>
+            <%= f.text_field :email, label: false, placeholder: User.human_attribute_name(:email) %>
+            <%= f.submit "Anmelden", class: "button" %>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
 </div>
