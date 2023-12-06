@@ -2,4 +2,8 @@
   .custom-breadcrumbs .breadcrumbs-item, .custom-breadcrumbs .breadcrumbs-divider {
     font-size: 0.85em;
   }
+
+  .custom-breadcrumbs div.breadcrumbs-item {
+    color: $brand;
+  }
 }
