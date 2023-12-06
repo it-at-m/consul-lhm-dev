@@ -9,8 +9,14 @@
         <%= t("mailers.no_reply") %></p>
 
         <% if @subscriptions_token.present? %>
+          <% unsubscribe_path = edit_subscriptions_url(token: @subscriptions_token) %>
+        <% elsif @unregistered_newletter_unsubscribe_token.present? %>
+          <% unsubscribe_path = unregistered_newsletter_subscribers_unsubscribe_url(unsubscribe_token: @unregistered_newletter_unsubscribe_token) %>
+        <% end %>
+
+        <% if unsubscribe_path.present? %>
           <p style="font-family: 'Open Sans','Helvetica Neue',arial,sans-serif; margin: 0;padding: 0;line-height: 1.5em;color: #222; font-size: 10px; margin-top: 12px;">
-            <%= sanitize t("mailers.config.unsubscribe_text", notifications: link_to(t("mailers.config.notifications_link"), edit_subscriptions_url(token: @subscriptions_token))), attributes: %w[href style] %>
+            <%= sanitize t("mailers.config.unsubscribe_text", notifications: link_to(t("mailers.config.notifications_link"), unsubscribe_path)), attributes: %w[href style] %>
           </p>
         <% end %>
       </td>
