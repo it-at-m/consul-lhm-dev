@@ -151,7 +151,7 @@ module Abilities
       end
       can :recalculate_winners, Budget, &:balloting_or_later?
 
-      can [:admin_update, :toggle_selection], Budget::Investment do |investment|
+      can [:admin_update, :toggle_selection, :edit_physical_votes], Budget::Investment do |investment|
         can?(:create, investment.budget)
       end
     end

@@ -4,9 +4,7 @@
 
 <td data-field="title">
   <%= link_to investment.title,
-              admin_budget_budget_investment_path(budget_id: @budget.id,
-                                                  id: investment.id,
-                                                  params: Budget::Investment.filter_params(params).to_h),
+              polymorphic_path([@namespace, @budget, investment], params: Budget::Investment.filter_params(params).to_h),
               target: "_blank" %>
 </td>
 

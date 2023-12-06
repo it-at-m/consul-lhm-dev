@@ -33,7 +33,10 @@ module AdminActions::BudgetInvestments
   end
 
   def show
+    authorize!(:create, @budget) if @namespace == :projekt_management
     load_comments
+
+    render "admin/budget_investments/show"
   end
 
   def edit
