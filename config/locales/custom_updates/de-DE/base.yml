@@ -15,6 +15,7 @@ de:
         email_on_comment_reply: Antworten auf meine Kommentare
         email_on_direct_message: Private Nachrichten anderer Nutzer*innen
         newsletter: Newsletter und System-E-Mails
+        newsletter_on_home_page: Newsletter empfangen
         public_activity: Meine Aktivität veröffentlichen
         public_interests: Gefolgte Beiträge veröffentlichen
         adm_email_on_new_comment: Neue Kommentare
@@ -205,7 +206,7 @@ de:
           budget_investments: Investitionsvorschläge
           comments: Kommentare
           follows: Folge ich
-      resource_count:   
+      resource_count:
         projekts: Projekte
         proposals: Vorschläge
         comments: Kommentare
