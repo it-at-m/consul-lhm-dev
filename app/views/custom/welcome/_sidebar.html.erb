@@ -2,7 +2,7 @@
   <div class="hide-on-small-tablet">
     <% if render_custom_content_block?('home_page_sidebar') %>
       <%= render Shared::SidebarCardComponent.new(title: "Information", icon_name: "info-circle") do |c| %>
-        <%= render_custom_block 'home_page_sidebar' %>
+        <%= render_custom_block "home_page_sidebar" %>
       <% end %>
     <% end %>
   </div>
@@ -13,38 +13,22 @@
     <% end %>
   <% end %>
 
-  <%# <%= render Shared::SidebarCardComponent.new(title: 'Aktivität | letzte 7 Tage', icon_name: "info-circle") do |c| %>
-  <%#     <div>
-  <%#       17 neue Benutzer*innen
-  <%#     </div>
-  <%#     <div>
-  <%#       20 neue Kommentare
-  <%#     </div>
-  <%#     <div>
-  <%#       4 neue Vorschläge
-  <%#     </div>
-  <%#     <div>
-  <%#       7 neue Diskussionen
-  <%#     </div>
-  <%#
-  <%#   <% c.additional_body_section do %>
-  <%#     <div class="sidebar-active-users-section">
-  <%#       <div>
-  <%#         <i class="far fa-lightbulb">
-  <%#         </i>
-  <%#         Zur Übersicht aller Vorschläge
-  <%#       </div>
-  <%#       <div>
-  <%#         <i class="far fa-comments">
-  <%#         </i>
-  <%#         Zur Übersicht aller Diskussionen
-  <%#       </div>
-  <%#       <div>
-  <%#         <i class="fas fa-vote-yea">
-  <%#         </i>
-  <%#         Zur Übersicht aller Abstimmungen
-  <%#       </div>
-  <%#     </div>
-  <%#   <% end %>
-  <%# <% end %>
+  <%= render Shared::SidebarCardComponent.new(title: "Newsletter empfangen", icon_name: "envelope") do |c| %>
+    <% if current_user.present? %>
+      <%= form_for current_user, as: :account, url: account_path, format: :js, remote: true do |f| %>
+        <div>
+          <%= f.check_box :newsletter, { label: t("custom.account.settings.newsletter_on_home_page"), class: "checkbox-label--aligned" } %>
+        </div>
+        <%= f.submit t("custom.account.show.save_settings"), class: "button margin-top" %>
+      <% end %>
+    <% else %>
+      <p>Nicht registriert? Newsletter abonnieren</p>
+      <div id="newsletter-subscribtion-form">
+        <%= form_for UnregisteredNewsletterSubscriber.new, format: :js, remote: true do |f| %>
+          <%= f.text_field :email, label: false, placeholder: User.human_attribute_name(:email) %>
+          <%= f.submit "Anmelden", class: "button" %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
 </div>

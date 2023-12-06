@@ -49,19 +49,19 @@
         <%= render partial: "cards", locals: { cards: @cards, section_title: t("welcome.cards.title") } %>
       <% end %>
 
-      <%= render_custom_block 'home_page_2' %>
+      <%= render_custom_block "home_page_2" %>
 
       <% if @latest_polls.any? %>
         <%= render Shared::ResourcesListComponent.new(resources: @latest_polls, resource_type: Poll, title: t('custom.welcome.current_polls')) %>
       <% end %>
 
-      <%= render_custom_block 'home_page_4' %>
+      <%= render_custom_block "home_page_4" %>
 
       <% if @latest_items.any? %>
         <%= render Shared::ResourcesListComponent.new(resources: @latest_items, title: t('custom.welcome.user_entries')) %>
       <% end %>
 
-      <%= render_custom_block 'home_page_5' %>
+      <%= render_custom_block "home_page_5" %>
 
       <% if @expired_projekts.any? %>
         <%= render Shared::ResourcesListComponent.new(
@@ -70,8 +70,8 @@
           title: t("custom.welcome.expired_projekt_cards.title"),
           ) %>
       <% end %>
-      <%= render_custom_block 'home_page_6' %>
+      <%= render_custom_block "home_page_6" %>
     </div>
-    <%= render 'sidebar' %>
+    <%= render "sidebar" %>
   </div>
 </main>

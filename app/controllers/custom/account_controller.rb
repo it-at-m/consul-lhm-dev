@@ -33,6 +33,22 @@ class AccountController < ApplicationController
     end
   end
 
+  def update
+    if @account.update(account_params)
+      respond_to do |format|
+        format.html do
+          redirect_to account_path, notice: t("flash.actions.save_changes.notice")
+        end
+        format.js do
+          render
+        end
+      end
+    else
+      @account.errors.messages.delete(:organization)
+      render :show
+    end
+  end
+
   private
 
     def account_params

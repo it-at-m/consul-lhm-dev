@@ -1,0 +1,15 @@
+<% if @unregistered_newsletter_subscriber.present? %>
+  <% path = unregistered_newsletter_subscribers_confirm_subscription_url(@unregistered_newsletter_subscriber.confirmation_token) %>
+<% elsif @user.present? %>
+  <% path = edit_subscriptions_url(token: @subscriptions_token) %>
+<% end %>
+
+<td style="<%= css_for_mailer_content %>">
+  <h1 style="<%= css_for_mailer_heading %>">
+    Anmeldung zum Newsletter
+  </h1>
+
+  <p style="<%= css_for_mailer_text %>">
+    <%= t("custom.newsletters.subscription.confirm_subscription_html", link: link_to("LINK", path)) %>
+  </p>
+</td>

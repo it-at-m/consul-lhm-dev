@@ -12,3 +12,9 @@ de:
         open_phases: Beteiligungsphasen
         url: Zum Projekt
         url_participate: Ich möchte MITmachen!
+      subscription:
+        already_subscribed: "%{email} ist bereits zum Newsletter angemeldet"
+        please_confirm: "Bitte bestätigen Sie die Newsletter-Anmeldung, die wir Ihnen per Mail an folgende Adresse zugeschickt haben: %{email}"
+        confirm_subscription_html: "Mit Klick auf diesen %{link} bestätigen Sie die Anmeldung zum Newsletter."
+        successfully_subscribed: "Erfolgreich zum Newsletter angemeldet"
+        successfully_unsubscribed: "Erfolgreich vom Newsletter abgemeldet"
