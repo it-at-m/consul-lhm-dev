@@ -285,6 +285,7 @@ namespace :admin do
     resources :polls do
       get :booth_assignments, on: :collection
       patch :add_question, on: :member
+      post :send_notifications, on: :member
 
       resources :booth_assignments, only: [:index, :show, :create, :destroy] do
         get :search_booths, on: :collection
@@ -298,6 +299,10 @@ namespace :admin do
 
       resources :recounts, only: :index
       resources :results, only: :index
+
+      resources :questions, only: [] do
+        post :order_questions, on: :collection
+      end
     end
 
     resources :officers, only: [:index, :new, :create, :destroy] do

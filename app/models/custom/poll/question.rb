@@ -16,4 +16,11 @@ class Poll::Question < ApplicationRecord
   def allows_multiple_answers?
     VotationType.allowing_multiple_answers.include?(votation_type.vote_type)
   end
+
+  def self.model_name
+    mname = super
+    mname.instance_variable_set(:@route_key, "questions")
+    mname.instance_variable_set(:@singular_route_key, "question")
+    mname
+  end
 end
