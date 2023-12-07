@@ -1,8 +1,10 @@
+<% provide :title do %><%= t("custom.users.index.title") %><% end %>
+
 <main class="projekts-page projekts-overview-page">
   <div class="main-column projekts-overview-page--heading">
     <div class="padding-on-mobile">
       <h1>
-        Users
+        <%= t("custom.users.index.title") %>
       </h1>
       <%= render_custom_block "users_overview_page" %>
       <%# <%= render_custom_block "users_overview_page", default_content: t("custom.users.index.welcome_default_text_html") %>
@@ -95,7 +97,7 @@
 
         <div class="resources--info-count margin-bottom-half">
           <span>
-            Users
+            <%= t("custom.users.index.users_count") %>
           </span>
           <span>
             <%= @users.total_count %>

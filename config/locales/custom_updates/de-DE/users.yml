@@ -7,6 +7,9 @@ de:
       contact: Kontakt
       banner:
         registered_at: "Beigetreten am: %{date}"
+      index:
+        title: Übersicht aller Nutzer*innen
+        users_count: Nutzer*innen
     user_page:
       filters:
         proposals: Vorschläge

@@ -4,6 +4,10 @@ class UsersController < ApplicationController
   skip_authorization_check
 
   def index
+    unless Setting["extended_feature.general.users_overview_page"].present?
+      redirect_to root_path, alert: "Diese Funktion ist deaktiviert"
+    end
+
     @users = User.all.order(created_at: :desc).page(params[:page])
   end
 
