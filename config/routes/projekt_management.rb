@@ -88,10 +88,6 @@ namespace :projekt_management do
       put :recalculate_winners # custom
     end
 
-    # resources :groups, except: [:index, :show], controller: "budget_groups" do
-    #   resources :headings, except: [:index, :show], controller: "budget_headings"
-    # end
-
     resources :budget_investments, only: [:index, :show, :edit, :update] do
       # member { patch :toggle_selection }
       member do #custom
