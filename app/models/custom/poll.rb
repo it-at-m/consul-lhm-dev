@@ -6,7 +6,7 @@ class Poll < ApplicationRecord
 
   belongs_to :old_projekt, class_name: "Projekt", foreign_key: "projekt_id" # TODO: remove column after data migration con1538
 
-  delegate :projekt, to: :projekt_phase
+  delegate :projekt, to: :projekt_phase, allow_nil: true
   belongs_to :projekt_phase
   has_many :geozone_restrictions, through: :projekt_phase
   has_many :geozone_affiliations, through: :projekt

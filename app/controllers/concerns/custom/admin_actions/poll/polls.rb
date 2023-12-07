@@ -6,7 +6,8 @@ module AdminActions::Poll::Polls
   include ReportAttributes
 
   included do
-    load_and_authorize_resource
+    load_and_authorize_resource except: [:new, :create]
+    skip_authorization_check only: :new
 
     before_action :load_search, only: [:search_booths, :search_officers]
     before_action :load_geozones, only: [:new, :create, :edit, :update]
@@ -15,6 +16,11 @@ module AdminActions::Poll::Polls
 
   def index
     @polls = Poll.not_budget.created_by_admin.order(starts_at: :desc)
+
+    if @namespace == :projekt_management
+      @projekts = Projekt.with_pm_permission_to("manage", current_user.projekt_manager)
+      @polls = @polls.joins(:projekt_phase).where(projekt_phases: { projekt_id: @projekts.pluck(:id) })
+    end
 
     respond_to do |format|
       format.html { render "admin/poll/polls/index" }
@@ -31,31 +37,35 @@ module AdminActions::Poll::Polls
   end
 
   def new
+    @poll = Poll.new
     render "admin/poll/polls/new"
   end
 
   def create
     @poll = Poll.new(poll_params.merge(author: current_user))
+    authorize! :create, @poll
+
     if @poll.save
       notice = t("flash.actions.create.poll")
       if @poll.budget.present?
-        redirect_to admin_poll_booth_assignments_path(@poll), notice: notice
+        redirect_to polymorphic_path([@namespace, @poll, :booth_assignments]), notice: notice
       else
-        redirect_to [:admin, @poll], notice: notice
+        redirect_to polymorphic_path([@namespace, @poll]), notice: notice
       end
     else
-      render :new
+      render "admin/poll/polls/new"
     end
   end
 
   def edit
+    render "admin/poll/polls/edit"
   end
 
   def update
     if @poll.update(poll_params)
-      redirect_to [:admin, @poll], notice: t("flash.actions.update.poll")
+      redirect_to polymorphic_path([@namespace, @poll]), notice: t("flash.actions.update.poll")
     else
-      render :edit
+      render "admin/poll/polls/edit"
     end
   end
 
@@ -68,7 +78,7 @@ module AdminActions::Poll::Polls
     else
       notice = t("admin.polls.flash.error_on_question_added")
     end
-    redirect_to admin_poll_path(@poll), notice: notice
+    redirect_to polymorphic_path([@namespace, @poll]), notice: notice
   end
 
   def booth_assignments
@@ -77,17 +87,17 @@ module AdminActions::Poll::Polls
 
   def destroy
     if ::Poll::Voter.where(poll: @poll).any?
-      redirect_to admin_poll_path(@poll), alert: t("admin.polls.destroy.unable_notice")
+      redirect_to polymorphic_path([@namespace, @poll]), alert: t("admin.polls.destroy.unable_notice")
     else
       @poll.destroy!
 
-      redirect_to admin_polls_path, notice: t("admin.polls.destroy.success_notice")
+      redirect_to polymorphic_path([@namespace, :polls]), notice: t("admin.polls.destroy.success_notice")
     end
   end
 
   def send_notifications
     NotificationServices::NewPollNotifier.call(@poll.id)
-    redirect_to admin_poll_path(@poll), notice: t("custom.admin.polls.poll.notifications_sent")
+    redirect_to polymorphic_path([@namespace, @poll]), notice: t("custom.admin.polls.poll.notifications_sent")
   end
 
   private

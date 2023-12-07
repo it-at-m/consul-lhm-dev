@@ -18,6 +18,11 @@ module AdminActions::Budgets
   def index
     @budgets = Budget.send(@current_filter).order(created_at: :desc).page(params[:page])
 
+    if @namespace == :projekt_management
+      @projekts = Projekt.with_pm_permission_to("manage", current_user.projekt_manager)
+      @budgets = @budgets.joins(:projekt_phase).where(projekt_phases: { projekt_id: @projekts.pluck(:id) })
+    end
+
     render "admin/budgets/index"
   end
 

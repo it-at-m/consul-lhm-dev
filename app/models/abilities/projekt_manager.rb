@@ -154,6 +154,10 @@ module Abilities
       can [:admin_update, :toggle_selection, :edit_physical_votes], Budget::Investment do |investment|
         can?(:create, investment.budget)
       end
+
+      can [:manage], Poll do |poll|
+        user.projekt_manager.allowed_to?("manage", poll&.projekt)
+      end
     end
   end
 end
