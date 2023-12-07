@@ -3,6 +3,10 @@ require_dependency Rails.root.join("app", "controllers", "users_controller").to_
 class UsersController < ApplicationController
   skip_authorization_check
 
+  def index
+    @users = User.all.order(created_at: :desc).page(params[:page])
+  end
+
   def show
     raise CanCan::AccessDenied if params[:filter] == "follows" && !valid_interests_access?(@user)
 

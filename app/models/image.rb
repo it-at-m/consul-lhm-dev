@@ -9,6 +9,7 @@ class Image < ApplicationRecord
       thumb_wider: { combine_options: { gravity: "center", resize: "185x280^", crop: "185x280+0+0" }},
       banner: { combine_options: { gravity: "center", resize: "1920x250^", crop: "1920x250+0+0" }},
       popup: { combine_options: { gravity: "center", resize: "140x140^", crop: "140x140+0+0" }},
+      thumb2: { combine_options: { gravity: "center", resize: "100x100^", crop: "100x100+0+0" }},
       card_thumb: { combine_options: { gravity: "center", resize: "300x300^"}}
     }
   end

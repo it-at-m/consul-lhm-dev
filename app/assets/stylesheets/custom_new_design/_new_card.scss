@@ -8,6 +8,10 @@
     padding: 20px 25px;
     overflow: hidden;
 
+    &.-no-padding {
+      padding: 0;
+    }
+
     @media (max-width: $mobile-viewport-start) {
       padding: 20px 20px;
     }
