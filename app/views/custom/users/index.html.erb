@@ -42,7 +42,42 @@
               <div class="margin-bottom-10">
                 <%= render Shared::OfficialPositionBadgeComponent.new(user: user) %>
               </div>
+
             </div>
+<div class="user-list-item--resources">
+                <% if user.proposals.exists? %>
+                  <%= link_to user_path(user), class: "sidebar-card--count-line" do %>
+                    <div>
+                      Vorschläge
+                    </div>
+                    <div>
+                      <%= user.proposals.count %>
+                    </div>
+                  <% end %>
+                <% end %>
+
+                <% if user.debates.exists? %>
+                  <%= link_to user_path(user), class: "sidebar-card--count-line" do %>
+                    <div class="sidebar-resource-author--resources-name">
+                      Diskussionen
+                    </div>
+                    <div class="sidebar-resource-author--resources-count">
+                      <%= user.debates.count %>
+                    </div>
+                  <% end %>
+                <% end %>
+
+                <% if user.comments.exists? %>
+                  <%= link_to user_path(user), class: "sidebar-card--count-line" do %>
+                    <div class="sidebar-resource-author--resources-name">
+                      Kommentare
+                    </div>
+                    <div class="sidebar-resource-author--resoures-count">
+                      <%= user.comments.count %>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
           </div>
         <% end %>
       </div>
