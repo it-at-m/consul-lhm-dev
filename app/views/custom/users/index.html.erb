@@ -44,7 +44,8 @@
               </div>
 
             </div>
-<div class="user-list-item--resources">
+            <% if  user.proposals.exists? || user.debates.exists? || user.comments.exists? %>
+              <div class="user-list-item--resources">
                 <% if user.proposals.exists? %>
                   <%= link_to user_path(user), class: "sidebar-card--count-line" do %>
                     <div>
@@ -78,6 +79,8 @@
                   <% end %>
                 <% end %>
               </div>
+            <% end %>
+
           </div>
         <% end %>
       </div>
