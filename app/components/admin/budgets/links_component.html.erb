@@ -5,7 +5,7 @@
                path: polymorphic_path([namespace, budget, :budget_investments])) %>
   <% end %>
 
-  <% if budget.poll.present? && namespace == :admin %>
+  <% if budget.poll.present? %>
     <%= action(:ballots,
                text: t("admin.budgets.index.admin_ballots"),
                path: admin_poll_booth_assignments_path(budget.poll)) %>

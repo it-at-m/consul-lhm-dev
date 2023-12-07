@@ -142,4 +142,48 @@ namespace :projekt_management do
   namespace :site_customization do
     resources :content_blocks, only: [:edit, :update]
   end
+
+  scope module: :poll do
+    resources :polls do
+      get :booth_assignments, on: :collection
+      patch :add_question, on: :member
+
+      resources :booth_assignments, only: [:index, :show, :create, :destroy] do
+        get :search_booths, on: :collection
+        get :manage, on: :collection
+      end
+
+      resources :officer_assignments, only: [:index, :create, :destroy] do
+        get :search_officers, on: :collection
+        get :by_officer, on: :collection
+      end
+
+      resources :recounts, only: :index
+      resources :results, only: :index
+    end
+
+    # resources :officers, only: [:index, :new, :create, :destroy] do
+    #   get :search, on: :collection
+    # end
+
+    # resources :booths do
+    #   get :available, on: :collection
+
+    #   resources :shifts do
+    #     get :search_officers, on: :collection
+    #   end
+    # end
+
+    # resources :questions, shallow: true do
+    #   resources :answers, except: [:index, :show], controller: "questions/answers", shallow: false
+    #   resources :answers, only: [], controller: "questions/answers" do
+    #     resources :images, controller: "questions/answers/images"
+    #     resources :videos, controller: "questions/answers/videos", shallow: false
+    #     resources :documents, only: [:index, :create], controller: "questions/answers/documents"
+    #   end
+    #   post "/answers/order_answers", to: "questions/answers#order_answers"
+    # end
+
+    # resource :active_polls, only: [:create, :edit, :update]
+	end
 end
