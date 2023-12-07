@@ -21,7 +21,7 @@
       <th><%= t("admin.actions.actions") %></th>
     </thead>
     <tbody>
-      <%= render @polls %>
+      <%= render "admin/poll/polls/poll", collection: @polls %>
     </tbody>
   </table>
 <% else %>

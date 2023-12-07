@@ -10,9 +10,9 @@
     <%= render Admin::TableActionsComponent.new(poll,
       destroy_confirmation: t("admin.polls.destroy.alert")
     ) do |actions| %>
-			<%= link_to t("admin.actions.configure"),
-									admin_poll_path(poll),
-									class: "configure-link" %>
+      <%= link_to t("admin.actions.configure"),
+                  polymorphic_path([@namespace, poll]),
+                  class: "configure-link" %>
     <% end %>
-	</td>
+  </td>
 </tr>
