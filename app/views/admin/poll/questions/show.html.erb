@@ -87,26 +87,26 @@
           (<%= answer.images.count %>)
           <br>
           <%= link_to t("admin.questions.show.answers.images_list"),
-                      admin_answer_images_path(answer) %>
+                      polymorphic_path([@namespace, answer, :images]) %>
         </td>
         <td class="align-top text-center">
           (<%= answer.documents.count rescue 0 %>)
           <br>
           <%= link_to t("admin.questions.show.answers.documents_list"),
-                      admin_answer_documents_path(answer) %>
+                      polymorphic_path([@namespace, answer, :documents]) %>
         </td>
         <td class="align-top text-center">
           (<%= answer.videos.count %>)
           <br>
           <%= link_to t("admin.questions.show.answers.video_list"),
-                      admin_answer_videos_path(answer) %>
+                      polymorphic_path([@namespace, answer, :videos]) %>
         </td>
         <td>
           <%= render Admin::TableActionsComponent.new(answer,
             actions: [:edit, :destroy],
-            edit_path: edit_admin_answer_path(answer),
+            edit_path: polymorphic_path([@namespace, answer], action: :edit),
             destroy_confirmation: t("custom.admin.polls.questions.answers.notice.delete.confirmation"),
-            destroy_path: admin_answer_path(answer)
+            destroy_path: polymorphic_path([@namespace, answer])
           ) %>
         </td>
       </tr>
