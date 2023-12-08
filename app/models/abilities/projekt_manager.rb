@@ -166,6 +166,10 @@ module Abilities
       can [:manage], Poll::Question::Answer do |answer|
         can?(:manage, answer.question)
       end
+
+      can [:manage], Poll::Question::Answer::Video do |video|
+        can?(:manage, video.answer)
+      end
     end
   end
 end

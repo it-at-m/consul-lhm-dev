@@ -7,6 +7,13 @@ class Poll::Question::Answer::Video < ApplicationRecord
   validates :title, presence: true
   validate :valid_url?
 
+  def self.model_name
+    mname = super
+    mname.instance_variable_set(:@route_key, "videos")
+    mname.instance_variable_set(:@singular_route_key, "video")
+    mname
+  end
+
   def valid_url?
     return if url.blank?
     return if url.match(VIMEO_REGEX)
