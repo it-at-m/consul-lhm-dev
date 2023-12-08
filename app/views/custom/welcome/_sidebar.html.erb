@@ -16,7 +16,7 @@
         <% end %>
       </div>
       <% if current_user.nil? %>
-        <div class="margin-top-10">
+        <div class="margin-top-20">
           <%= link_to("Jetzt anmelden", new_user_session_path, class: "button sign-in-button") %>
         </div>
       <% end %>
@@ -95,7 +95,7 @@
           <%= f.submit t("custom.account.show.save_settings"), class: "button margin-top" %>
         <% end %>
       <% else %>
-        <p>Nicht registriert? Newsletter abonnieren</p>
+        <p>Nicht registriert? Jetzt abonnieren</p>
         <div id="newsletter-subscribtion-form">
           <%= form_for UnregisteredNewsletterSubscriber.new, format: :js, remote: true do |f| %>
             <%= f.text_field :email, label: false, placeholder: User.human_attribute_name(:email) %>
