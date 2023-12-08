@@ -16,7 +16,9 @@
         <% end %>
       </div>
       <% if current_user.nil? %>
-        <%= link_to("Jetzt anmelden", new_user_session_path) %>
+        <div class="margin-top-10">
+          <%= link_to("Jetzt anmelden", new_user_session_path, class: "button") %>
+        </div>
       <% end %>
     <% end %>
   <% end %>

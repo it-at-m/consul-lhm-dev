@@ -18,6 +18,18 @@
   display: none;
 }
 
+.margin-top-half {
+  margin-top: $line-height / 2;
+}
+
+.margin-top-10 {
+  margin-top: 10px;
+}
+
+.margin-top-20 {
+  margin-top: 20px;
+}
+
 .margin-bottom-half {
   margin-bottom: $line-height / 2;
 }
