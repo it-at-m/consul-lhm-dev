@@ -155,8 +155,16 @@ module Abilities
         can?(:create, investment.budget)
       end
 
-      can [:manage], Poll do |poll|
+      can :manage, Poll do |poll|
         user.projekt_manager.allowed_to?("manage", poll&.projekt)
+      end
+
+      can :manage, Poll::Question do |question|
+        can?(:manage, question.poll)
+      end
+
+      can [:manage], Poll::Question::Answer do |answer|
+        can?(:manage, answer.question)
       end
     end
   end

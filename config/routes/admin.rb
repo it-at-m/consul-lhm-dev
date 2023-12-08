@@ -323,8 +323,8 @@ namespace :admin do
         resources :images, controller: "questions/answers/images"
         resources :videos, controller: "questions/answers/videos", shallow: false
         resources :documents, only: [:index, :create], controller: "questions/answers/documents"
+        post :order_answers, on: :collection
       end
-      post "/answers/order_answers", to: "questions/answers#order_answers"
     end
 
     resource :active_polls, only: [:create, :edit, :update]

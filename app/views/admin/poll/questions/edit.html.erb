@@ -3,5 +3,5 @@
 <h2 class="margin-top"><%= t("admin.questions.edit.title") %></h2>
 
 <div class="poll-question-form">
-  <%= render "form", form_url: admin_question_path(@question) %>
+  <%= render "admin/poll/questions/form", form_url: polymorphic_path([:projekt_management, @question]) %>
 </div>
