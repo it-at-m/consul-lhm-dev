@@ -1,6 +1,6 @@
 <div class="poll-question-form">
   <%= form_for(@answer,
-               url: admin_answer_images_path(@answer),
+               url: polymorphic_path([@namespace, @answer, :images]),
                method: :post) do |f| %>
     <%= render "shared/errors", resource: @answer %>
 
