@@ -4,6 +4,8 @@ class Poll::Question::Answer < ApplicationRecord
   belongs_to :next_question, class_name: "Poll::Question", optional: true,
     foreign_key: "next_question_id", inverse_of: "previous_question"
 
+  delegate :author_id, to: :question
+
   def self.model_name
     mname = super
     mname.instance_variable_set(:@route_key, "answers")
