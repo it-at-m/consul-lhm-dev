@@ -2,6 +2,10 @@ de:
   mailers:
     title: "Open Government"
     no_reply: "Diese Nachricht wurde von einer E-Mail-Adresse gesendet, die keine Antworten akzeptiert."
+    already_confirmed:
+      info: "Wir haben eine Anfrage erhalten, Ihnen Anweisungen zur Bestätigung Ihres Kontos zu senden. Ihr Konto ist jedoch bereits bestätigt, sodass Sie dies nicht erneut tun müssen."
+      new_password: "Wenn Sie Ihr Passwort vergessen haben, können Sie es unter dem folgenden Link zurücksetzen:"
+      subject: Ihr Konto ist bereits bestätigt.
     comment:
       hi: Hallo
       new_comment_by: Es gibt einen neuen Kommentar von <strong>%{commenter}</strong>
