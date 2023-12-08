@@ -11,8 +11,11 @@
     <%= render Shared::SidebarCardComponent.new(title: "Nutzer*innen", icon_name: "users") do |c| %>
       <div class="homepage-users-list">
         <%= render(Sidebar::UsersListComponent.new(users: User.active)) %>
-        <%= link_to users_path, class: "sidebar-users-list--count" do %>
-          +<%= number_with_delimiter(User.active.size, delimiter: ".") %>
+
+        <% if setting["extended_feature.general.users_overview_page"].present? %>
+          <%= link_to users_path, class: "sidebar-users-list--count" do %>
+            +<%= number_with_delimiter(User.active.size, delimiter: ".") %>
+          <% end %>
         <% end %>
       </div>
       <% if current_user.nil? %>
