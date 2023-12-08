@@ -23,6 +23,10 @@ $green-button-color: #00AA0B;
     border-radius: 7px;
     transition: background-color 0.1s ease;
 
+    &.-round {
+      border-radius: 38px !important;
+    }
+
     .icon {
       padding-right: 5px;
     }

@@ -447,16 +447,16 @@ body.custom-new-design .wrapper > header .locale.locale-custom {
       // margin-right: 15px;
       margin-top: 2px;
     }
+  }
 
-    .button.sign-in-button, .button.sign-up-button {
-      margin-top: auto !important;
-      padding: 0.25rem 2.2em !important;
-      font-size: 18px !important;
-      font-weight: 500 !important;
-      width: 135px !important;
-      height: 50px !important;
-      border-radius: 38px !important;
-    }
+  .button.sign-in-button, .button.sign-up-button {
+    display: inline-flex;
+    margin-top: auto !important;
+    padding: 20px 2em !important;
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    height: 50px !important;
+    border-radius: 38px !important;
   }
 
   .header--responsive-menu-wrapper {
