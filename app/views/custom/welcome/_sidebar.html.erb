@@ -51,6 +51,7 @@
           </span>
         <% end %>
       <% end %>
+
       <% debates_count = Debate.for_public_render.count %>
       <% if debates_count > 0 %>
         <%= link_to debates_path, class: "resources--info-count -no-default-style" do %>
@@ -62,6 +63,7 @@
           </span>
         <% end %>
       <% end %>
+
       <% polls_count = Poll.for_public_render.count %>
       <% if polls_count > 0 %>
         <%= link_to polls_path, class: "resources--info-count -no-default-style" do %>

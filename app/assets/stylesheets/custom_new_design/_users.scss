@@ -6,7 +6,6 @@
 
 .user-list-item {
   width: 220px;
-  height: 300px;
   overflow: hidden;
   border-radius: 12px;
   margin-bottom: 0 !important;
@@ -74,7 +73,7 @@
 
 .sidebar-card--count-line {
   display: flex;
-  font-weight: bold;
+  font-weight: 500;
   justify-content: space-between;
   color: inherit;
 }
