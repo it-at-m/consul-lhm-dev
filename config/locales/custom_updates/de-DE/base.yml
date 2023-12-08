@@ -210,6 +210,9 @@ de:
         projekts: Projekte
         proposals: Vorschläge
         comments: Kommentare
+        debates: Diskussionen
+        polls: Abstimmungen
+
     welcome_launch:
       p1: Hier entsteht die neue Beteiligungsplattform der Stadt %{org_name}
       p2: Unser Go-Live ist am %{date}!

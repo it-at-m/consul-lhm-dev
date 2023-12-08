@@ -1,0 +1,9 @@
+de:
+  custom:
+    general:
+      resource_names:
+        projekts: Projekte
+        proposals: Vorschläge
+        comments: Kommentare
+        debates: Diskussionen
+        polls: Abstimmungen

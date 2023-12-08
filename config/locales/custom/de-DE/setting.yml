@@ -14,6 +14,8 @@ de:
         usage_stats_description: Zeigt erweiterte Nutzerstatistiken auf der Homepage an
         newsletter_subscription: Newsletter-Funktion
         newsletter_subscription_description: Fügt eine Box hinzu, die zur Newsletter-Anmeldung auffordert.
+        platform_activity: Plattform-Aktivität
+        platform_activity_description: Zeigt die Plattform-Aktivtät in einer Box an
       feature:
         map: Karten anzeigen
         map_description: Zeigt die Standardkarte oder die individuellen Karten in der Projektfußzeile und der Vorschlagsübersicht

@@ -9,7 +9,77 @@
 
   <% if setting["welcomepage.usage_stats"].present? %>
     <%= render Shared::SidebarCardComponent.new(title: "Nutzer*innen", icon_name: "users") do |c| %>
-      <%= render(Sidebar::UsersListComponent.new(users: User.active, show_resources_count: true)) %>
+      <div class="homepage-users-list">
+        <%= render(Sidebar::UsersListComponent.new(users: User.active)) %>
+        <%= link_to users_path, class: "sidebar-users-list--count" do %>
+          +<%= number_with_delimiter(User.active.size, delimiter: ".") %>
+        <% end %>
+      </div>
+      <% if current_user.nil? %>
+        <%= link_to("Jetzt anmelden", new_user_session_path) %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <% if setting["welcomepage.platform_activity"].present? %>
+    <%= render Shared::SidebarCardComponent.new(title: "Aktivität", icon_name: "tachometer-alt") do |c| %>
+      <% projekts_count = Projekt.regular.index_order_all.count %>
+      <% if projekts_count > 0 %>
+        <%= link_to projekts_path, class: "resources--info-count -no-default-style" do %>
+          <span>
+            <%= t("custom.general.resource_names.projekts") %>
+          </span>
+          <span>
+            <%= projekts_count %>
+          </span>
+        <% end %>
+      <% end %>
+
+      <% proposals_count = Proposal.for_public_render.count %>
+      <% if proposals_count > 0 %>
+        <%= link_to proposals_path, class: "resources--info-count -no-default-style" do %>
+          <span>
+            <%= t("custom.general.resource_names.proposals") %>
+          </span>
+          <span>
+            <%= proposals_count %>
+          </span>
+        <% end %>
+      <% end %>
+      <% debates_count = Debate.for_public_render.count %>
+      <% if debates_count > 0 %>
+        <%= link_to debates_path, class: "resources--info-count -no-default-style" do %>
+          <span>
+            <%= t("custom.general.resource_names.debates") %>
+          </span>
+          <span>
+            <%= debates_count %>
+          </span>
+        <% end %>
+      <% end %>
+      <% polls_count = Poll.for_public_render.count %>
+      <% if polls_count > 0 %>
+        <%= link_to polls_path, class: "resources--info-count -no-default-style" do %>
+          <span>
+            <%= t("custom.general.resource_names.polls") %>
+          </span>
+          <span>
+            <%= polls_count %>
+          </span>
+        <% end %>
+      <% end %>
+
+      <% comments_count = Comment.count %>
+      <% if comments_count > 0 %>
+        <div class="resources--info-count">
+          <span>
+            <%= t("custom.general.resource_names.comments") %>
+          </span>
+          <span>
+            <%= comments_count %>
+          </span>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
 

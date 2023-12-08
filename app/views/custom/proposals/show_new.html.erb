@@ -211,7 +211,7 @@
                 <%= @proposal.community.topics.count %>
                 <%= t("custom.proposals.show.community_section.comments_count") %>
               </div>
-              <%= render(Sidebar::UsersListComponent.new(users: @proposal.community.participants, hide_count: true)) %>
+              <%= render(Sidebar::UsersListComponent.new(users: @proposal.community.participants)) %>
               <% participate_button_text = t("custom.community.sidebar.particapate") %>
             <% else %>
                 <%= t("custom.proposals.show.community_section.description_create_first") %>
