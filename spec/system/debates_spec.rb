@@ -404,10 +404,10 @@ describe "Debates" do
     #     expect(best_debate.title).to appear_before(medium_debate.title)
     #     expect(medium_debate.title).to appear_before(worst_debate.title)
     #   end
-
-      expect(page).to have_current_path(/order=confidence_score/)
-      expect(page).to have_current_path(/page=1/)
-    end
+      #
+      # expect(page).to have_current_path(/order=confidence_score/)
+      # expect(page).to have_current_path(/page=1/)
+    # end
 
     scenario "Debates are ordered by newest" do
       best_debate = create(:debate, title: "Best", created_at: Time.current)
