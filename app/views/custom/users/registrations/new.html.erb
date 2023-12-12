@@ -78,7 +78,7 @@
             </div>
           <% end %>
 
-          <div id="no-registered-address" style="display:<%= resource.show_no_registered_address_field? ? "block" : "none" %>">
+          <div id="no-registered-address" style="display:<%= resource.regular_address_fields_visible? ? "block" : "none" %>">
             <div class="row">
               <div class="small-12 medium-8 column">
                 <%= f.text_field :city_name,

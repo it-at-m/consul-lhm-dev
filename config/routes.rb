@@ -120,4 +120,6 @@ Rails.application.routes.draw do
   post "/admin/projekt/:projekt_id/projekt_arguments/send_notifications",   to: "admin/projekt_arguments#send_notifications", as: :send_notifications_admin_projekt_projekt_arguments
 
   resources :formular_answers, only: %i[create update]
+
+  get "/registered_addresses/find", to: "registered_addresses#find"
 end
