@@ -19,9 +19,11 @@
           <% end %>
         <% end %>
 
-        <div class="resource-page--description new-card main-content-card">
-          <%= render "poll_header" %>
-        </div>
+        <% if @poll.summary.present? || @poll.description.present? %>
+          <div class="resource-page--description new-card main-content-card">
+            <%= render "poll_header" %>
+          </div>
+        <% end %>
 
         <% if can? :csv_answers_votes, @poll %>
           <%= link_to t("custom.polls.show.results.download_csv_answers_votes"), poll_csv_answers_votes_path(@poll, format: :csv), class: "button small float-right" %>

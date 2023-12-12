@@ -6,6 +6,8 @@ $accent:                                          #FFE400;
 $dark:                                            darken($brand, 10%);
 $brand-lighter:                                   rgba($brand, 0.5);
 $text-over-brand:                                 $white;
+$dt-base:                                         #004a83;
+$dt-base-secondary:                               lighten($dt-base, 70%);
 
 $yellow:                                          #FFE400;
 

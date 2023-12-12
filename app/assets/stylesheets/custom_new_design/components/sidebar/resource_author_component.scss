@@ -6,7 +6,7 @@
 
   .sidebar-resource-author--background-image {
     height: 85px;
-    background-color: #8ab1de;
+    background-color: $brand;
     width: 100%;
     overflow: hidden;
   }
@@ -55,7 +55,7 @@
     margin-top: 12px;
     padding: 18px 25px;
     padding-right: 28px;
-    padding-bottom: 30px;
+    padding-bottom: 25px;
   }
 
   .sidebar-card--count-line {

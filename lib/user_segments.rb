@@ -71,7 +71,13 @@ class UserSegments
   end
 
   def self.user_segment_emails(segment)
-    recipients(segment).newsletter.order(:created_at).pluck(:email).compact
+    emails = recipients(segment).newsletter.order(:created_at).pluck(:email).compact.first(3)
+
+    if segment == "newsletter_subscribers"
+      emails += UnregisteredNewsletterSubscriber.confirmed.pluck(:email)
+    end
+
+    emails
   end
 
   def self.newsletter_subscribers

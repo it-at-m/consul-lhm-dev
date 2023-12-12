@@ -1,10 +1,14 @@
 $("#poll-participation-confirmed-callout").remove();
 $("#<%= dom_id(@question) %>_answers").html("<%= j render Polls::Questions::AnswersComponent.new(@question, answer_updated: @answer_updated, open_answer_updated: @open_answer_updated) %>");
 
-<% if @question.poll.wizard_mode? && (@question.votation_type.unique? || @question.votation_type.rating_scale?)   %>
+<% if @question_answer.present? &&
+  @question.poll.wizard_mode? &&
+  (@question.votation_type.unique? || @question.votation_type.rating_scale?) &&
+  @question.parent_question_id.nil? %>
+
   var nextAnserTimeoutFunction = function() {
     App.QuestionWizard.navigateToNextQuestion();
   }
 
-  setTimeout(nextAnserTimeoutFunction, 800);
+  setTimeout(nextAnserTimeoutFunction, 550);
 <% end %>

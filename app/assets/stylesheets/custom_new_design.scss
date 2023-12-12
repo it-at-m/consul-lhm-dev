@@ -1,3 +1,7 @@
-@import "_custom_fonts";
-@import "custom_new_design/colors";
+@import "foundation";
+@include foundation-global-styles;
+@import "consul_settings";
+@import "custom_settings";
+@import "mixins/colors";
+@import "mixins/buttons";
 @import "custom_new_design/**/*";

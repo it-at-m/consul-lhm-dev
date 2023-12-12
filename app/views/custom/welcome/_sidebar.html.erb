@@ -2,49 +2,112 @@
   <div class="hide-on-small-tablet">
     <% if render_custom_content_block?('home_page_sidebar') %>
       <%= render Shared::SidebarCardComponent.new(title: "Information", icon_name: "info-circle") do |c| %>
-        <%= render_custom_block 'home_page_sidebar' %>
+        <%= render_custom_block "home_page_sidebar" %>
       <% end %>
     <% end %>
   </div>
 
   <% if setting["welcomepage.usage_stats"].present? %>
     <%= render Shared::SidebarCardComponent.new(title: "Nutzer*innen", icon_name: "users") do |c| %>
-      <%= render(Sidebar::UsersListComponent.new(users: User.active, show_resources_count: true)) %>
+      <div class="homepage-users-list">
+        <%= render(Sidebar::UsersListComponent.new(users: User.active)) %>
+
+        <% if setting["extended_feature.general.users_overview_page"].present? %>
+          <%= link_to users_path, class: "sidebar-users-list--count" do %>
+            +<%= number_with_delimiter(User.active.size, delimiter: ".") %>
+          <% end %>
+        <% end %>
+      </div>
+      <% if current_user.nil? %>
+        <div class="margin-top-20">
+          <%= link_to("Jetzt anmelden", new_user_session_path, class: "button sign-in-button") %>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
 
-  <%# <%= render Shared::SidebarCardComponent.new(title: 'Aktivität | letzte 7 Tage', icon_name: "info-circle") do |c| %>
-  <%#     <div>
-  <%#       17 neue Benutzer*innen
-  <%#     </div>
-  <%#     <div>
-  <%#       20 neue Kommentare
-  <%#     </div>
-  <%#     <div>
-  <%#       4 neue Vorschläge
-  <%#     </div>
-  <%#     <div>
-  <%#       7 neue Diskussionen
-  <%#     </div>
-  <%#
-  <%#   <% c.additional_body_section do %>
-  <%#     <div class="sidebar-active-users-section">
-  <%#       <div>
-  <%#         <i class="far fa-lightbulb">
-  <%#         </i>
-  <%#         Zur Übersicht aller Vorschläge
-  <%#       </div>
-  <%#       <div>
-  <%#         <i class="far fa-comments">
-  <%#         </i>
-  <%#         Zur Übersicht aller Diskussionen
-  <%#       </div>
-  <%#       <div>
-  <%#         <i class="fas fa-vote-yea">
-  <%#         </i>
-  <%#         Zur Übersicht aller Abstimmungen
-  <%#       </div>
-  <%#     </div>
-  <%#   <% end %>
-  <%# <% end %>
+  <% if setting["welcomepage.platform_activity"].present? %>
+    <%= render Shared::SidebarCardComponent.new(title: "Aktivität", icon_name: "tachometer-alt") do |c| %>
+      <% projekts_count = Projekt.regular.index_order_all.count %>
+      <% if projekts_count > 0 %>
+        <%= link_to projekts_path, class: "resources--info-count -no-default-style" do %>
+          <span>
+            <%= t("custom.general.resource_names.projekts") %>
+          </span>
+          <span>
+            <%= projekts_count %>
+          </span>
+        <% end %>
+      <% end %>
+
+      <% proposals_count = Proposal.for_public_render.count %>
+      <% if proposals_count > 0 %>
+        <%= link_to proposals_path, class: "resources--info-count -no-default-style" do %>
+          <span>
+            <%= t("custom.general.resource_names.proposals") %>
+          </span>
+          <span>
+            <%= proposals_count %>
+          </span>
+        <% end %>
+      <% end %>
+
+      <% debates_count = Debate.for_public_render.count %>
+      <% if debates_count > 0 %>
+        <%= link_to debates_path, class: "resources--info-count -no-default-style" do %>
+          <span>
+            <%= t("custom.general.resource_names.debates") %>
+          </span>
+          <span>
+            <%= debates_count %>
+          </span>
+        <% end %>
+      <% end %>
+
+      <% polls_count = Poll.for_public_render.count %>
+      <% if polls_count > 0 %>
+        <%= link_to polls_path, class: "resources--info-count -no-default-style" do %>
+          <span>
+            <%= t("custom.general.resource_names.polls") %>
+          </span>
+          <span>
+            <%= polls_count %>
+          </span>
+        <% end %>
+      <% end %>
+
+      <% comments_count = Comment.count %>
+      <% if comments_count > 0 %>
+        <div class="resources--info-count">
+          <span>
+            <%= t("custom.general.resource_names.comments") %>
+          </span>
+          <span>
+            <%= comments_count %>
+          </span>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <% if setting["welcomepage.newsletter_subscription"].present? %>
+    <%= render Shared::SidebarCardComponent.new(title: "Newsletter", icon_name: "envelope") do |c| %>
+      <% if current_user.present? %>
+        <%= form_for current_user, as: :account, url: account_path, format: :js, remote: true do |f| %>
+          <div>
+            <%= f.check_box :newsletter, { label: t("custom.account.settings.newsletter_on_home_page"), class: "checkbox-label--aligned" } %>
+          </div>
+          <%= f.submit t("custom.account.show.save_settings"), class: "button margin-top" %>
+        <% end %>
+      <% else %>
+        <p>Nicht registriert? Jetzt abonnieren</p>
+        <div id="newsletter-subscribtion-form">
+          <%= form_for UnregisteredNewsletterSubscriber.new, format: :js, remote: true do |f| %>
+            <%= f.text_field :email, label: false, placeholder: User.human_attribute_name(:email) %>
+            <%= f.submit "Anmelden", class: "button" %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
 </div>

@@ -151,6 +151,7 @@ de:
         multiple: Mehrere Stimmen
         multiple_with_weight: Mehrere gewichtete Stimmen
         rating_scale: Bewertungsskala
+
       poll/question:
         min_rating_scale_label: Linkes Label
         max_rating_scale_label: Rechtes Label

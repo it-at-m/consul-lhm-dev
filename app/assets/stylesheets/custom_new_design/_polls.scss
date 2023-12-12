@@ -14,5 +14,41 @@
       color: #222;
     }
   }
-}
 
+  .results-table {
+    td.win {
+      font-weight: bold;
+      background: #ccedf8;
+    }
+  }
+
+  label[for="poll_answer_open_answer_text"] {
+    display: none;
+  }
+
+  .poll-open-answer-form {
+    display: flex;
+    max-width: 750px;
+
+    input[type="submit"] {
+      margin-left: 20px;
+    }
+
+    @media(max-width: $mobile-viewport-start) {
+      flex-direction: column;
+
+      input[type="submit"] {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .poll-question--nested-question {
+    &.-rating-scale {
+      .poll-question--nested-question-title {
+        min-width: 250px;
+        max-width: 250px;
+      }
+    }
+  }
+}

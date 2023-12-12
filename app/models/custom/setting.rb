@@ -168,6 +168,8 @@ class Setting < ApplicationRecord
         "sdg.process.projekts": true,
 
         "welcomepage.usage_stats": true,
+        "welcomepage.platform_activity": true,
+        "welcomepage.newsletter_subscription": false,
 
         "projekts.show_archived.sidebar": true,
         "projekts.second_level_projekts_in_active_filter": false,
@@ -191,6 +193,7 @@ class Setting < ApplicationRecord
         "extended_feature.general.enable_google_translate": false,
         "extended_feature.general.enable_old_design": true,
         "extended_feature.general.use_white_top_navigation_text": false,
+        "extended_feature.general.users_overview_page": true,
         "extended_option.general.title": "Öffentlichkeitsbeteiligung",
         "extended_option.general.subtitle": "in der Stadt CONSUL",
         "extended_option.general.launch_date": "",

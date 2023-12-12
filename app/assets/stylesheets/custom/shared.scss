@@ -188,8 +188,8 @@
 
   .sidebar-filter-button {
     flex-grow: 1;
-    background: $secondary;
-    color: $brand;
+    background: $dt-base;
+    color: $white;
     border-radius: 3px;
     margin-right: 0.5rem;
     height: 2.5rem;
@@ -201,7 +201,7 @@
   .sidebar-filter-button:hover,
   .sidebar-filter-button:focus {
     color: $white;
-    background: $brand;
+    background: $dt-base;
     text-decoration:none;
     cursor:pointer;
   }
@@ -392,6 +392,11 @@ span.toggle-arrow {
 
 .d-flex {
   display: flex;
+}
+
+.d-flex-justify-right {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .d-flex-start {

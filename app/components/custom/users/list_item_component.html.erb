@@ -1,0 +1,68 @@
+<div class="user-list-item new-card -no-padding">
+  <div class="user-list-item--background-image">
+    <% if user.background_image.attached? %>
+      <%= image_tag(user.background_image.variant(resize: "300x300>")) %>
+    <% end %>
+  </div>
+  <div class="user-list-item--info">
+    <%= link_to user_path(user), class: "user-list-item--avatar" do %>
+      <% if user.image&.variant(:thumb2).present? %>
+        <%= image_tag(user.image&.variant(:thumb2)) %>
+      <% else %>
+        <div class="user-list-item--avatar-placeholder">
+          <%= user.first_letter_of_name %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <%= link_to user_path(user), class: "-no-default-style" do %>
+      <div class="user-list-item--name margin-bottom-10">
+        <%= user.name %>
+      </div>
+    <% end %>
+
+    <div class="user-list-item--registration-date margin-bottom-10">
+      <%= t("custom.users.banner.registered_at", date: l(user.created_at, format: :date_only)) %>
+    </div>
+    <div class="margin-bottom-10">
+      <%= render Shared::OfficialPositionBadgeComponent.new(user: user) %>
+    </div>
+
+  </div>
+  <% if  user.proposals.exists? || user.debates.exists? || user.comments.exists? %>
+    <div class="user-list-item--resources">
+      <% if user.proposals.exists? %>
+        <%= link_to user_path(user), class: "sidebar-card--count-line -no-default-style" do %>
+          <div>
+            <%= t("custom.general.resource_names.proposals") %>
+          </div>
+          <div>
+            <%= user.proposals.count %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <% if user.debates.exists? %>
+        <%= link_to user_path(user), class: "sidebar-card--count-line -no-default-style" do %>
+          <div class="sidebar-resource-author--resources-name">
+            <%= t("custom.general.resource_names.debates") %>
+          </div>
+          <div class="sidebar-resource-author--resources-count">
+            <%= user.debates.count %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <% if user.comments.exists? %>
+        <%= link_to user_path(user), class: "sidebar-card--count-line -no-default-style" do %>
+          <div class="sidebar-resource-author--resources-name">
+            Kommentare
+          </div>
+          <div class="sidebar-resource-author--resoures-count">
+            <%= user.comments.count %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

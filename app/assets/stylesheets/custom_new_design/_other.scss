@@ -1,0 +1,20 @@
+.custom-new-design {
+  #google_translate_element {
+    align-self: center;
+    margin-right: 30px;
+
+    select.goog-te-combo {
+      width: 55px;
+    }
+  }
+
+  .skiptranslate + header {
+    .top-bar-wrapper {
+      top: 38px !important;
+    }
+  }
+
+  .skiptranslate ~ .wrapper {
+    margin-top: 38px !important;
+  }
+}

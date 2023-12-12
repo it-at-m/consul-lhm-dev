@@ -13,6 +13,14 @@ class Admin::Poll::Questions::FormComponent < ApplicationComponent
 
   private
 
+    def bundle_question?
+      params[:bundle_question] == "true"
+    end
+
+    def nested_question?
+      params[:parent_question_id].present? || @question.parent_question_id.present?
+    end
+
     def select_options
       Poll.all.select { |poll| can?(:create, Poll::Question.new(poll: poll)) }.map do |poll|
         [poll.name, poll.id]

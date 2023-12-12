@@ -29,49 +29,6 @@
     margin-bottom: 8px;
   }
 
-  .sidebar-users-list--title {
-    margin-bottom: 10px;
-  }
-
-  .sidebar-users-list--images {
-    display: flex;
-  }
-
-  .sidebar-users-list--image {
-    width: 40px;
-    height: 40px;
-    background: black;
-    border-radius: 50%;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    border: 2px solid white;
-    overflow: hidden;
-  }
-
-  .sidebar-users-list--image:first-child {
-    position: static;
-  }
-
-  .sidebar-users-list--image:nth-child(2) {
-    left: -15px;
-  }
-
-  .sidebar-users-list--image:nth-child(3) {
-    left: -30px;
-  }
-
-  .sidebar-users-list--image:nth-child(4) {
-    left: -45px;
-  }
-
-  .sidebar-users-list--image:nth-child(5) {
-    left: -60px;
-  }
-
-
   // Overide old styles
   .sidebar-divider {
     display: none;

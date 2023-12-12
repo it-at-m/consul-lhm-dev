@@ -15,6 +15,7 @@ de:
         email_on_comment_reply: Antworten auf meine Kommentare
         email_on_direct_message: Private Nachrichten anderer Nutzer*innen
         newsletter: Newsletter und System-E-Mails
+        newsletter_on_home_page: Jetzt abonnieren
         public_activity: Meine Aktivität veröffentlichen
         public_interests: Gefolgte Beiträge veröffentlichen
         adm_email_on_new_comment: Neue Kommentare
@@ -86,7 +87,7 @@ de:
           only_geozones: Nur Bürger:innen des Stadtteils
           only_streets: Nur Bürger:innen aus Straße
           show_more: Mehr anzeigen
-          title: Partizipation
+          title: Gebiet
     images:
       form:
         image_name: Name des Titelbildes
@@ -206,10 +207,13 @@ de:
           budget_investments: Investitionsvorschläge
           comments: Kommentare
           follows: Folge ich
-      resource_count:   
+      resource_count:
         projekts: Projekte
         proposals: Vorschläge
         comments: Kommentare
+        debates: Diskussionen
+        polls: Abstimmungen
+
     welcome_launch:
       p1: Hier entsteht die neue Beteiligungsplattform der Stadt %{org_name}
       p2: Unser Go-Live ist am %{date}!

@@ -1,0 +1,41 @@
+<% provide :title do %><%= t("custom.users.index.title") %><% end %>
+
+<main class="projekts-page projekts-overview-page">
+  <div class="main-column projekts-overview-page--heading">
+    <div class="padding-on-mobile">
+      <h1>
+        <%= t("custom.users.index.title") %>
+      </h1>
+      <%= render_custom_block "users_overview_page" %>
+      <%# <%= render_custom_block "users_overview_page", default_content: t("custom.users.index.welcome_default_text_html") %>
+    </div>
+  </div>
+
+  <div class="flex-layout padding-on-mobile flex-layout-reverse-on-mobile">
+    <div class="main-column">
+      <div class="users-list d-flex-list">
+        <% @users.each do |user| %>
+          <%= render Users::ListItemComponent.new(user: user) %>
+        <% end %>
+      </div>
+
+      <%= paginate @users %>
+    </div>
+
+    <div class="sidebar">
+      <%= render Shared::SidebarCardComponent.new(title: t("custom.common.information"), icon_name: "info-circle") do |c| %>
+        <%= render_custom_block "users_overview_sidebar" %>
+        <%# <%= render_custom_block "users_overview_sidebar", default_content: t("custom.projekts.index.information_default_text") %>
+
+        <div class="resources--info-count margin-bottom-half">
+              <span>
+                <%= t("custom.users.index.users_count") %>
+              </span>
+              <span>
+                <%= @users.total_count %>
+              </span>
+            </div>
+      <% end %>
+    </div>
+  </div>
+</main>
