@@ -134,6 +134,19 @@ class DeficiencyReportsController < ApplicationController
     redirect_to deficiency_report_path(@deficiency_report)
   end
 
+  def notify_officer_about_new_comments
+    datetime = deficiency_report_params[:notify_officer_about_new_comments].present? ? Time.now : nil
+
+    if @deficiency_report.update(
+      notify_officer_about_new_comments: deficiency_report_params[:notify_officer_about_new_comments],
+      notified_officer_about_new_comments_datetime: datetime
+    )
+      # DeficiencyReportMailer.notify_officer(@deficiency_report).deliver_later
+    end
+
+    head :ok
+  end
+
   def update_official_answer
     @deficiency_report.update(deficiency_report_params)
     Administrator.all.each do |admin|
@@ -151,7 +164,6 @@ class DeficiencyReportsController < ApplicationController
     @deficiency_report.register_vote(current_user, params[:value])
     set_deficiency_report_votes(@deficiency_report)
   end
-
 
   private
 
@@ -172,6 +184,7 @@ class DeficiencyReportsController < ApplicationController
                   :deficiency_report_category_id,
                   :deficiency_report_officer_id,
                   :deficiency_report_area_id,
+                  :notify_officer_about_new_comments,
                   map_location_attributes: map_location_attributes,
                   documents_attributes: document_attributes,
                   image_attributes: image_attributes]

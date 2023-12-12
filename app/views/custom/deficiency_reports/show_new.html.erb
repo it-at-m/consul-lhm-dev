@@ -105,6 +105,19 @@
           <% end %>
         <% end %>
 
+        <% if current_user&.administrator? %>
+          <%= render(Shared::SidebarCardComponent.new(
+            title: "New comments notificatons",
+            icon_name: "envelope")) do |c| %>
+            <%= form_for @deficiency_report, url: notify_officer_about_new_comments_deficiency_report_path, remote: true do |f| %>
+              <div>
+                <%= f.check_box :notify_officer_about_new_comments, { label: t("custom.deficiency_reports.show.notify_officer_about_new_comments"), class: "checkbox-label--aligned" } %>
+              </div>
+              <%= f.submit t("custom.account.show.save_settings"), class: "button margin-top" %>
+            <% end %>
+          <% end %>
+        <% end %>
+
         <% if current_user == @deficiency_report.author %>
           <%= render(Shared::SidebarCardComponent.new(
             title: t("custom.deficiency_reports.show.author_actions.title"),

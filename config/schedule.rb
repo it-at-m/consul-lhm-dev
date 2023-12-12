@@ -60,3 +60,7 @@ every 1.day, at: "6:00 am", roles: [:cron] do
   rake "reminders:overdue_deficiency_reports"
   rake "reminders:not_assigned_deficiency_reports"
 end
+
+every 1.day, at: "2:00 pm", roles: [:cron] do
+  runner "NotificationServices::NewCommentsDeficiencyReportsNotification.call"
+end
