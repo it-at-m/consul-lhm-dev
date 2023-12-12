@@ -118,7 +118,7 @@
     <% if question.open_question_answer.present? && already_answered?(question.open_question_answer) %>
       <% open_answer = question.answers.find_or_initialize_by(author: current_user, answer: question.open_question_answer.title) %>
       <%= form_for open_answer, url: update_open_answer_path(question), method: :post, remote: true do |f| %>
-        <%= f.text_area :open_answer_text %>
+        <%= f.text_area :open_answer_text, label: false, placeholder: open_answer.answer %>
         <%= f.hidden_field :answer %>
         <% if open_answer.open_answer_text.present? %>
           <%= f.submit t("custom.polls.questions.answers.update_open_answer"), class: "button open-answer" %>

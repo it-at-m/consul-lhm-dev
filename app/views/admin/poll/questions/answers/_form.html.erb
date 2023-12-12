@@ -18,7 +18,7 @@
     <% if @question.votation_type.unique? || @question.votation_type.multiple? || @question.votation_type.multiple_with_weight? %>
       <div class="row">
         <div class="column">
-          <%= translations_form.text_area :description, maxlength: Poll::Question.description_max_length, class: "html-area" %>
+          <%= translations_form.text_area :description, maxlength: Poll::Question.description_max_length, class: "html-area #{ck_editor_class(current_user)}" %>
         </div>
         <div class="column">
           <%= f.text_field :more_info_link %>
@@ -50,5 +50,4 @@
       <%= f.submit(class: "button success expanded", value: t("shared.save")) %>
     </div>
   </div>
-
 <% end %>

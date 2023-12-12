@@ -20,10 +20,10 @@
     <% if SiteCustomization::ContentBlock.custom_block_for("registration_form_hint", I18n.locale)&.body&.present? %>
       <%= render_custom_block "registration_form_hint" %>
       <div class="auth-page-template--divider"></div>
-     <% end %>
+    <% end %>
 
     <div class="row">
-      <div class="small-12 column">
+      <div class="small-12">
 
         <%= f.hidden_field :use_redeemable_code %>
         <%= f.hidden_field :locale, value: I18n.locale %>

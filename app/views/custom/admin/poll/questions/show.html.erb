@@ -63,7 +63,7 @@
         <p>
           <strong><%= t("admin.polls.votation_type.title") %></strong>
           <br>
-          <%= VotationType.human_attribute_name("vote_type.#{@question.vote_type}") %>
+          <%= VotationType.human_attribute_name("vote_type/#{@question.vote_type}") %>
         </p>
         <% if @question.max_votes.present? %>
           <p>
@@ -170,7 +170,7 @@
       <% @question.nested_questions.each do |nested_question| %>
         <tr id="<%= dom_id(nested_question) %>" class="poll_question_answer" data-nested_question-id="<%= nested_question.id %>">
           <td class="align-top"><%= nested_question.title %></td>
-          <td class="align-top"><%= VotationType.human_enum_name(:vote_type, nested_question.votation_type.vote_type) %></td>
+          <td class="align-top"><%=  I18n.t("activerecord.attributes.votation_type/vote_type.#{nested_question.votation_type.vote_type}") %></td>
           <td>
             <%= render Admin::TableActionsComponent.new(nested_question) do |actions| %>
               <%= actions.link_to t("admin.polls.show.edit_answers"), admin_question_path(nested_question), class: "answers-link" %>

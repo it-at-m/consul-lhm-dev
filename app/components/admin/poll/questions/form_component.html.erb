@@ -46,7 +46,11 @@
   <%= f.translatable_fields do |translations_form| %>
     <div class="row">
       <div class="column">
-        <%= translations_form.text_field :title %>
+        <% if bundle_question? %>
+          <%= translations_form.text_field :title, label: "Themenkomplex" %>
+        <% else %>
+          <%= translations_form.text_field :title %>
+        <% end %>
       </div>
     </div>
 

@@ -367,6 +367,11 @@ span.toggle-arrow {
   display: flex;
 }
 
+.d-flex-justify-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .d-flex-start {
   justify-content: flex-start;
 }
