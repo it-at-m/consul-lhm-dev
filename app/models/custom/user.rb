@@ -129,6 +129,8 @@ class User < ApplicationRecord
     return false if form_registered_address_city_id.present? && form_registered_address_street_id.blank?
     return false if form_registered_address_street_id.present? && form_registered_address_id.blank?
 
+    return false if !persisted?
+
     registered_address_id.blank?
   end
 

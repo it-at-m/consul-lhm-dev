@@ -40,9 +40,7 @@ class Admin::UsersController < Admin::BaseController
       redirect_to admin_users_path, notice: "Benutzer aktualisiert"
 
     else
-      @registered_address_city = RegisteredAddress::City.find_by(id: params[:form_registered_address_city_id]) if params[:form_registered_address_city_id].present?
-      @registered_address_street = RegisteredAddress::Street.find_by(id: params[:form_registered_address_street_id]) if params[:form_registered_address_street_id].present?
-      @registered_address = RegisteredAddress.find_by(id: params[:form_registered_address_id]) if params[:form_registered_address_id].present?
+      set_address_objects_from_temp_attributes
       render :edit
     end
   end
@@ -74,18 +72,5 @@ class Admin::UsersController < Admin::BaseController
                                    # :gender, :date_of_birth,
                                    # :document_type, :document_last_digits,
                                    # :password, :password_confirmation)
-    end
-
-    def set_address_attributes
-      if params[:form_registered_address_id].present? && params[:form_registered_address_id] != "0"
-        registered_address = RegisteredAddress.find(params[:form_registered_address_id])
-        params[:user][:registered_address_id] = registered_address.id
-
-        params[:user][:city_name] = registered_address.registered_address_city.name
-        params[:user][:plz] = registered_address.registered_address_street.plz
-        params[:user][:street_name] = registered_address.registered_address_street.name
-        params[:user][:street_number] = registered_address.street_number
-        params[:user][:street_number_extension] = registered_address.street_number_extension
-      end
     end
 end

@@ -57,4 +57,23 @@ module HasRegisteredAddress
 
       resource.errors.add(:form_registered_address_id, :blank) if params[:form_registered_address_id].blank?
     end
+
+    def set_address_attributes
+      if params[:form_registered_address_id].present? && params[:form_registered_address_id] != "0"
+        registered_address = RegisteredAddress.find(params[:form_registered_address_id])
+        params[:user][:registered_address_id] = registered_address.id
+
+        params[:user][:city_name] = registered_address.registered_address_city.name
+        params[:user][:plz] = registered_address.registered_address_street.plz
+        params[:user][:street_name] = registered_address.registered_address_street.name
+        params[:user][:street_number] = registered_address.street_number
+        params[:user][:street_number_extension] = registered_address.street_number_extension
+      end
+    end
+
+    def set_address_objects_from_temp_attributes
+      @registered_address_city = RegisteredAddress::City.find_by(id: params[:form_registered_address_city_id]) if params[:form_registered_address_city_id].present?
+      @registered_address_street = RegisteredAddress::Street.find_by(id: params[:form_registered_address_street_id]) if params[:form_registered_address_street_id].present?
+      @registered_address = RegisteredAddress.find_by(id: params[:form_registered_address_id]) if params[:form_registered_address_id].present?
+    end
 end
