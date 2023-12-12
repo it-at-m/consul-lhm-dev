@@ -12,7 +12,7 @@ class Poll::Question < ApplicationRecord
   }
 
   def self.order_questions(ordered_array)
-    ordered_array.each_with_index do |question_id, order|
+    ordered_array.reject(&:blank?).each_with_index do |question_id, order|
       find(question_id).update_column(:given_order, (order + 1))
     end
   end

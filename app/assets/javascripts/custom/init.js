@@ -16,6 +16,7 @@
       App.RemoveOnMobileSections.initialize();
       App.QuestionWizard.initialize();
       App.AutosubmitFormElement.initialize();
+      App.NewSortable.initialize();
     }
   };
 }).call(this);

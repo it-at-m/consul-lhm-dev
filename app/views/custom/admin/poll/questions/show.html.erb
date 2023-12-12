@@ -165,10 +165,9 @@
         <th><%= t("admin.actions.actions") %></th>
       </tr>
     </thead>
-    <!-- <tbody class="sortable" data-js-url="<%= admin_question_answers_order_answers_path(@question.id) %>"> -->
-    <tbody class="sortable">
+    <tbody class="js-new-sortable" data-sort-url="<%= admin_poll_questions_order_questions_path(@question.poll.id) %>">
       <% @question.nested_questions.each do |nested_question| %>
-        <tr id="<%= dom_id(nested_question) %>" class="poll_question_answer" data-nested_question-id="<%= nested_question.id %>">
+        <tr id="<%= dom_id(nested_question) %>" class="poll_question_answer" data-record-id="<%= nested_question.id %>">
           <td class="align-top"><%= nested_question.title %></td>
           <td class="align-top"><%=  I18n.t("activerecord.attributes.votation_type/vote_type.#{nested_question.votation_type.vote_type}") %></td>
           <td>
