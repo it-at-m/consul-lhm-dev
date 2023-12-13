@@ -63,18 +63,10 @@ class Verification::Residence
     Setting["extra_fields.verification.check_documents"].present?
   end
 
-  # def regular_address_fields_visible?
-  #   return true if RegisteredAddress::Street.none?
-
-  #   form_registered_address_city_id == "0" ||
-  #     form_registered_address_street_id == "0" ||
-  #     form_registered_address_id == "0"
-  # end
-
   def regular_address_fields_visible?
-    eeturn true if RegisteredAddress.none?
-
+    return true if RegisteredAddress.none?
     return true if form_registered_address_city_id == "0"
+    return false if form_registered_address_city_id.blank?
     return false if form_registered_address_city_id.present? && form_registered_address_street_id.blank?
     return false if form_registered_address_street_id.present? && form_registered_address_id.blank?
 

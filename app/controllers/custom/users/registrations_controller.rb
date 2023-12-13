@@ -11,7 +11,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if @user.errors.none? && resource.valid?
       super
     else
-      set_address_objects_from_temp_attributes
+      set_address_objects_from_temp_attributes_for(resource)
       render :new
     end
   end

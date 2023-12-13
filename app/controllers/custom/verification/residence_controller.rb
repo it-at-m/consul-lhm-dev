@@ -9,7 +9,10 @@ class Verification::ResidenceController < ApplicationController
     @registered_address_city = current_user.registered_address_city
     @registered_address_street = current_user.registered_address_street
     @registered_address = current_user.registered_address
-
+    if @registered_address_city.blank?
+      @selected_city_id = "0" if @registered_address_city.blank?
+      @residence.form_registered_address_city_id = "0"
+    end
   end
 
   def create
@@ -20,7 +23,7 @@ class Verification::ResidenceController < ApplicationController
       NotificationServices::NewManualVerificationRequestNotifier.call(current_user.id) # remove unless manual
       redirect_to account_path, notice: t("custom.verification.residence.create.flash.success_manual")
     else
-      set_address_objects_from_temp_attributes
+      set_address_objects_from_temp_attributes_for(@residence)
       render :new #, alert: t("custom.verification.residence.create.flash.error")
     end
   end

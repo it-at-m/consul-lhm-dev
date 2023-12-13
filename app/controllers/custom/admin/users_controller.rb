@@ -29,6 +29,10 @@ class Admin::UsersController < Admin::BaseController
     @registered_address_city = @user.registered_address_city
     @registered_address_street = @user.registered_address_street
     @registered_address = @user.registered_address
+    if @registered_address_city.blank?
+      @selected_city_id = "0"
+      @user.form_registered_address_city_id = "0"
+    end
   end
 
   def update
@@ -40,7 +44,7 @@ class Admin::UsersController < Admin::BaseController
       redirect_to admin_users_path, notice: "Benutzer aktualisiert"
 
     else
-      set_address_objects_from_temp_attributes
+      set_address_objects_from_temp_attributes_for(@user)
       render :edit
     end
   end
