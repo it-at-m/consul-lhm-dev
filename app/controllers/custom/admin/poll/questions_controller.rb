@@ -32,6 +32,18 @@ class Admin::Poll::QuestionsController < Admin::Poll::BaseController
     end
   end
 
+  def update
+    if @question.update(question_params)
+      if @question.parent_question.present?
+        redirect_to admin_question_path(@question.parent_question)
+      else
+        redirect_to admin_poll_path(@question.poll)
+      end
+    else
+      render :edit
+    end
+  end
+
   def destroy
     @question.destroy!
 
