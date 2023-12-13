@@ -135,13 +135,23 @@ class DeficiencyReportsController < ApplicationController
   end
 
   def notify_officer_about_new_comments
-    datetime = deficiency_report_params[:notify_officer_about_new_comments].present? ? Time.now : nil
+    enable = deficiency_report_params[:notify_officer_about_new_comments] == "1"
+    datetime = enable ? Time.current : nil
 
-    if @deficiency_report.update(
+    if @deficiency_report.update!(
       notify_officer_about_new_comments: deficiency_report_params[:notify_officer_about_new_comments],
       notified_officer_about_new_comments_datetime: datetime
-    )
-      # DeficiencyReportMailer.notify_officer(@deficiency_report).deliver_later
+    ) && enable
+      last_comment_date = @deficiency_report.comments.last.created_at
+      last_comment_date_expanded = last_comment_date - 5.minutes
+      new_comments = @deficiency_report.comments.created_after_date(last_comment_date_expanded)
+
+      if new_comments.any?
+        NotificationServiceMailer.new_comments_for_deficiency_report(
+          @deficiency_report,
+          last_comment_date_expanded
+        ).deliver_now
+      end
     end
 
     head :ok
