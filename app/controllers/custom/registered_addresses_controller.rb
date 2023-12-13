@@ -2,6 +2,8 @@ class RegisteredAddressesController < ApplicationController
   skip_authorization_check
 
   def find
+    @selected_city_id = params[:selected_city_id]
+
     if params[:selected_city_id].present?
       @registered_address_city = RegisteredAddress::City.find_by(id: params[:selected_city_id])
     end

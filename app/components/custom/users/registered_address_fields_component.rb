@@ -1,9 +1,10 @@
 class Users::RegisteredAddressFieldsComponent < ApplicationComponent
-  def initialize(user: nil, registered_address_city: nil, registered_address_street: nil, registered_address: nil)
+  def initialize(user: nil, registered_address_city: nil, registered_address_street: nil, registered_address: nil, selected_city_id: nil)
     @user = user
     @registered_address_city = registered_address_city
     @registered_address_street = registered_address_street
     @registered_address = registered_address
+    @selected_city_id = selected_city_id
   end
 
   def render?
@@ -17,7 +18,7 @@ class Users::RegisteredAddressFieldsComponent < ApplicationComponent
     end
 
     def selected_city
-      @registered_address_city&.id
+      @registered_address_city&.id || @selected_city_id
     end
 
     def options_for_street_select
