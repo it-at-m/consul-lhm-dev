@@ -19,7 +19,7 @@
       <tr>
         <td>
           <strong>
-            <%= link_to user.name, by_officer_admin_poll_officer_assignments_path(@poll, officer_id: user.id) %>
+            <%= link_to user.name, polymorphic_path([@namespace, @poll, :officer_assignments], action: :by_officer, officer_id: user.id) %>
           </strong>
         </td>
         <td>

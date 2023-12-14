@@ -1,4 +1,4 @@
-<%= link_to admin_poll_officer_assignments_path(@poll) do %>
+<%= link_to polymorphic_path([@namespace, @poll, :officer_assignments]) do %>
   <span class="icon-angle-left"></span>
   <%= @poll.name %>
 <% end %>
