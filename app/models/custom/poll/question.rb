@@ -9,18 +9,18 @@ class Poll::Question < ApplicationRecord
     end
   end
 
+  def self.model_name
+    mname = super
+    mname.instance_variable_set(:@route_key, "questions")
+    mname.instance_variable_set(:@singular_route_key, "question")
+    mname
+  end
+
   def open_question_answer
     question_answers.where(open_answer: true).last
   end
 
   def allows_multiple_answers?
     VotationType.allowing_multiple_answers.include?(votation_type.vote_type)
-  end
-
-  def self.model_name
-    mname = super
-    mname.instance_variable_set(:@route_key, "questions")
-    mname.instance_variable_set(:@singular_route_key, "question")
-    mname
   end
 end
