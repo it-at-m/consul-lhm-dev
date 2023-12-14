@@ -41,6 +41,7 @@
       );
       var nextQuestion;
 
+      console.log(alreadyAnsweredOption)
       if (alreadyAnsweredOption && alreadyAnsweredOption.dataset.nextQuestionId) {
         nextQuestion = this.getQuestionById(alreadyAnsweredOption.dataset.nextQuestionId);
 
