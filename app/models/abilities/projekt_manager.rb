@@ -170,6 +170,10 @@ module Abilities
       can [:manage], Poll::Question::Answer::Video do |video|
         can?(:manage, video.answer)
       end
+
+      can [:manage], ::Poll::BoothAssignment do |assignment|
+        can?(:manage, assignment.poll)
+      end
     end
   end
 end
