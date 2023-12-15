@@ -13,6 +13,7 @@ class User < ApplicationRecord
          authentication_keys: [:login]
 
   delegate :registered_address_street, to: :registered_address, allow_nil: true
+  delegate :registered_address_city, to: :registered_address, allow_nil: true
 
   attr_accessor :form_registered_address_city_id,
                 :form_registered_address_street_id,
@@ -45,10 +46,10 @@ class User < ApplicationRecord
   validates :gender, presence: true, on: :create, if: :extended_registration?
   validates :date_of_birth, presence: true, on: :create, if: :extended_registration?
 
-  validates :city_name, presence: true, on: :create, if: :show_no_registered_address_field?
-  validates :plz, presence: true, on: :create, if: :show_no_registered_address_field?
-  validates :street_name, presence: true, on: :create, if: :show_no_registered_address_field?
-  validates :street_number, presence: true, on: :create, if: :show_no_registered_address_field?
+  validates :city_name, presence: true, on: :create, if: :regular_address_fields_visible?
+  validates :plz, presence: true, on: :create, if: :regular_address_fields_visible?
+  validates :street_name, presence: true, on: :create, if: :regular_address_fields_visible?
+  validates :street_number, presence: true, on: :create, if: :regular_address_fields_visible?
 
   validates :document_type, presence: true, on: :create, if: :document_required?
   validates :document_last_digits, presence: true, on: :create, if: :document_required?
@@ -120,13 +121,13 @@ class User < ApplicationRecord
     end
   end
 
-  def show_no_registered_address_field?
+  def regular_address_fields_visible?
     return false unless extended_registration?
-    return true if RegisteredAddress::Street.none?
+    return true if RegisteredAddress.none?
+    return true if form_registered_address_city_id == "0"
+    return false if persisted? && registered_address_id.present?
 
-    form_registered_address_city_id == "0" ||
-      form_registered_address_street_id == "0" ||
-      form_registered_address_id == "0"
+    false
   end
 
   def verify!
@@ -137,6 +138,14 @@ class User < ApplicationRecord
       verified_at: Time.current,
       unique_stamp: prepare_unique_stamp,
       geozone_id: geozone_with_plz&.id
+    )
+  end
+
+  def unverify!
+    update_columns(
+      verified_at: nil,
+      unique_stamp: nil,
+      geozone_id: nil
     )
   end
 

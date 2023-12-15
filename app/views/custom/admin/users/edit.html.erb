@@ -1,0 +1,28 @@
+<%= back_link_to admin_users_path %>
+
+<%= form_with model: @user, url: admin_user_path do |f| %>
+  <%= render "shared/errors", resource: @user %>
+
+  <div class="row">
+    <div class="column">
+      <%= f.text_field :first_name %>
+      <%= f.text_field :last_name %>
+    </div>
+  </div>
+
+  <%= render Users::RegisteredAddressFieldsComponent.new(
+    user: @user,
+    registered_address_city: @registered_address_city,
+    registered_address_street: @registered_address_street,
+    registered_address: @registered_address,
+    selected_city_id: @selected_city_id
+  ) %>
+
+  <%= render Users::RegularAddressFieldsComponent.new(f: f, user: @user) %>
+
+  <div class="row">
+    <div class="column">
+      <%= f.submit %>
+    </div>
+  </div>
+<% end %>

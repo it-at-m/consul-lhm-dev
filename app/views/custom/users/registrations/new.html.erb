@@ -42,66 +42,15 @@
           <%= f.text_field :first_name, placeholder: t("custom.devise_views.users.registrations.new.first_name_label") %>
           <%= f.text_field :last_name, placeholder: t("custom.devise_views.users.registrations.new.last_name_label") %>
 
-          <% if RegisteredAddress::City.any? %>
+          <%= render Users::RegisteredAddressFieldsComponent.new(
+            user: resource,
+            registered_address_city: @registered_address_city,
+            registered_address_street: @registered_address_street,
+            registered_address: @registered_address,
+            selected_city_id: @selected_city_id
+          ) %>
 
-            <% invalid_field_class = resource.form_registered_address_city_id.blank? && action_name == "create" %>
-            <%= label_tag :form_registered_address_city_id, t("custom.devise_views.users.registrations.new.form_registered_address_city_label"), class: "#{'is-invalid-label' if invalid_field_class}" %>
-            <%= select_tag :form_registered_address_city_id,
-              options_for_select(
-                RegisteredAddress::City.all.map { |city| [city.name, city.id] }.push([t("custom.helpers.select.not_in_list"), 0]),
-                resource.form_registered_address_city_id
-              ),
-              {
-                prompt: t("custom.helpers.select.address_prompt"),
-                class: "js-registration-city-selector show-arrow #{'is-invalid-input' if invalid_field_class}",
-                style: "background-color:#f8f8f8;"
-              } %>
-
-            <div id="registered-address-street-field">
-              <% if @registered_address_city.present? %>
-                <% invalid_field_class = resource.form_registered_address_street_id.blank? && action_name == "create" %>
-                <%= render "custom/users/registrations/partials/street_selector",
-                  selected_value: resource.form_registered_address_street_id,
-                  registered_address_streets: @registered_address_city&.registered_address_streets,
-                  invalid_field_class: invalid_field_class %>
-              <% end %>
-            </div>
-
-            <div id="registered-address-field">
-              <% if @registered_address_city.present? && @registered_address_street.present? %>
-                <% invalid_field_class = resource.form_registered_address_id.blank? && action_name == "create" %>
-                <%= render "custom/users/registrations/partials/address_selector",
-                  selected_value: resource.form_registered_address_id,
-                  registered_addresses: @registered_address_street&.registered_addresses,
-                  invalid_field_class: invalid_field_class %>
-              <% end %>
-            </div>
-          <% end %>
-
-          <div id="no-registered-address" style="display:<%= resource.show_no_registered_address_field? ? "block" : "none" %>">
-            <div class="row">
-              <div class="small-12 medium-8 column">
-                <%= f.text_field :city_name,
-                  placeholder: t("custom.devise_views.users.registrations.new.city_name_label") %>
-              </div>
-              <div class="small-12 medium-4 column">
-                <%= f.text_field :plz,
-                  placeholder: t("custom.devise_views.users.registrations.new.plz_label") %>
-              </div>
-            </div>
-            <%= f.text_field :street_name,
-              placeholder: t("custom.devise_views.users.registrations.new.street_name_label") %>
-            <div class="row">
-              <div class="small-12 medium-6 column">
-                <%= f.text_field :street_number,
-                  placeholder: t("custom.devise_views.users.registrations.new.street_number_label") %>
-              </div>
-              <div class="small-12 medium-6 column">
-                <%= f.text_field :street_number_extension,
-                  placeholder: t("custom.devise_views.users.registrations.new.street_number_extension_label") %>
-              </div>
-            </div>
-          </div>
+          <%= render Users::RegularAddressFieldsComponent.new(f: f, user: resource) %>
 
           <div class="user-date-of-birth sign-up">
             <%= f.date_select :date_of_birth,

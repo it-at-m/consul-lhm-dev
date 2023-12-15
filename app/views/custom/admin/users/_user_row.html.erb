@@ -24,16 +24,20 @@
     <td><%= l(user.verified_at, format: "%d %b %Y") if user.verified_at %></td>
 
     <td>
-      <% unless skip_user_verification? || user.organization? %>
-        <% if user.verified_at.blank? %>
-          <%= link_to(t("custom.admin.users.columns.action.verify"), verify_admin_user_path(user), class: 'button', remote: true, method: :put, data: {confirm: 'Sind Sie sicher?'}) %>
-        <% else %>
-          <%= link_to(t("custom.admin.users.columns.action.unverify"), unverify_admin_user_path(user), class: 'button', remote: true, method: :put, data: {confirm: 'Sind Sie sicher?'}) %>
+      <div style="display:flex; gap:10px;">
+        <% unless skip_user_verification? || user.organization? %>
+          <% if user.verified_at.blank? %>
+            <%= link_to(t("custom.admin.users.columns.action.verify"), verify_admin_user_path(user), class: 'button', remote: true, method: :put, data: {confirm: 'Sind Sie sicher?'}) %>
+          <% else %>
+            <%= link_to(t("custom.admin.users.columns.action.unverify"), unverify_admin_user_path(user), class: 'button', remote: true, method: :put, data: {confirm: 'Sind Sie sicher?'}) %>
+          <% end %>
+          <% if @verification_result_notice.present? %>
+            <small><%= @verification_result_notice %></small>
+          <% end %>
         <% end %>
-        <% if @verification_result_notice.present? %>
-          <small><%= @verification_result_notice %></small>
-        <% end %>
-      <% end %>
+
+        <%= link_to(t("custom.admin.users.columns.action.edit_user"), edit_admin_user_path(user), class: "button") %>
+      </div>
     </td>
   <% end %>
 </tr>

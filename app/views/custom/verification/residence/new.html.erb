@@ -21,72 +21,15 @@
           <%= f.text_field :last_name, label: false, placeholder: t("custom.verification.residence.new.last_name") %>
         </div>
 
-        <% if RegisteredAddress::City.any? %>
-          <div class="">
-            <% invalid_field_class = @residence.form_registered_address_city_id.blank? && action_name == 'create' %>
-            <%= label_tag :form_registered_address_city_id, t('custom.devise_views.users.registrations.new.form_registered_address_city_label'), class: "#{'is-invalid-label' if invalid_field_class}" %>
-            <%= select_tag :form_registered_address_city_id,
-                options_for_select(
-                  RegisteredAddress::City.all.collect { |city| [city.name, city.id] }.push([t('custom.helpers.select.not_in_list'), 0]),
-                  @residence.form_registered_address_city_id
-                ),
-                {
-                  prompt: t('custom.helpers.select.prompt'),
-                  class: "js-verification-city-selector show-arrow #{'is-invalid-input' if invalid_field_class}",
-                  style: "background-color:#f8f8f8;"
-                } %>
-          </div>
+        <%= render Users::RegisteredAddressFieldsComponent.new(
+          user: @residence,
+          registered_address_city: @registered_address_city,
+          registered_address_street: @registered_address_street,
+          registered_address: @registered_address,
+          selected_city_id: @selected_city_id
+        ) %>
 
-          <div id="registered-address-street-field" class="">
-            <% if @registered_address_city.present? %>
-              <% invalid_field_class = @residence.form_registered_address_street_id.blank? && action_name == 'create' %>
-              <%= render 'custom/verification/residence/partials/street_selector',
-                selected_value: @residence.form_registered_address_street_id,
-                registered_address_streets: @registered_address_city&.registered_address_streets,
-                invalid_field_class: invalid_field_class %>
-            <% end %>
-          </div>
-
-          <div id="registered-address-field" class="">
-            <% if @registered_address_city.present? && @registered_address_street.present? %>
-              <% invalid_field_class = @residence.form_registered_address_id.blank? && action_name == 'create' %>
-              <%= render 'custom/verification/residence/partials/address_selector',
-                selected_value: @residence.form_registered_address_id,
-                registered_addresses: @registered_address_street&.registered_addresses,
-                invalid_field_class: invalid_field_class %>
-            <% end %>
-          </div>
-        <% end %>
-
-        <div id="no-registered-address" style="display:<%= @residence.show_no_registered_address_field? ? 'block' : 'none' %>">
-          <div class="row">
-            <div class="small-12 medium-8 column">
-              <%= f.label :city_name, t("custom.verification.residence.new.city_name") %>
-              <%= f.text_field :city_name, label: false, placeholder: t("custom.verification.residence.new.city_name") %>
-            </div>
-
-            <div class="small-12 medium-4 column">
-              <%= f.label :plz, t("custom.verification.residence.new.plz") %>
-              <%= f.text_field :plz, label: false, placeholder: t("custom.verification.residence.new.plz") %>
-            </div>
-          </div>
-
-          <div class="">
-            <%= f.label :street_name, t("custom.verification.residence.new.street_name") %>
-            <%= f.text_field :street_name, label: false, placeholder: t("custom.verification.residence.new.street_name") %>
-          </div>
-
-          <div class="row">
-            <div class="small-12 medium-6 column">
-              <%= f.label :street_number, t("custom.verification.residence.new.street_number") %>
-              <%= f.text_field :street_number, label: false, placeholder: t("custom.verification.residence.new.street_number") %>
-            </div>
-            <div class="small-12 medium-6 column">
-              <%= f.label :street_number, t("custom.verification.residence.new.street_number_extension") %>
-              <%= f.text_field :street_number_extension, label: false, placeholder: t("custom.verification.residence.new.street_number_extension") %>
-            </div>
-          </div>
-        </div>
+        <%= render Users::RegularAddressFieldsComponent.new(f: f, user: @residence ) %>
 
         <div class="user-date-of-birth sign-up">
           <%= f.date_select :date_of_birth,
