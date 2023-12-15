@@ -17,7 +17,7 @@
           } %>
       </div>
 
-      <div id="registered-address-field" style="display: <%= @registered_address_street.present? ? "block" : "none" %>">
+      <div id="registered-address-field" style="display: <%= (@registered_address_city.present? && @registered_address_street.present?) ? "block" : "none" %>">
         <%= label_tag :form_registered_address_id, t("custom.devise_views.users.registrations.new.form_registered_address_label") %>
         <%= select_tag :form_registered_address_id, options_for_select(options_for_address_select, selected_address), {
             prompt: t("custom.helpers.select.address_prompt"),

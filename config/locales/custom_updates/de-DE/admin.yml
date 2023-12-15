@@ -386,6 +386,7 @@ de:
           action:
             verify: Verifizieren
             unverify: Verifizierung zurückziehen
+            edit_user: Bearbeiten
       widget:
         card:
           category_options:

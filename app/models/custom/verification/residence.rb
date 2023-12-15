@@ -70,6 +70,6 @@ class Verification::Residence
     return false if form_registered_address_city_id.present? && form_registered_address_street_id.blank?
     return false if form_registered_address_street_id.present? && form_registered_address_id.blank?
 
-    registered_address_id.blank?
+    user.registered_address_id.blank?
   end
 end
