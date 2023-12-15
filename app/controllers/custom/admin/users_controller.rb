@@ -24,6 +24,10 @@ class Admin::UsersController < Admin::BaseController
     end
   end
 
+  def show
+    @user = User.find(params[:id])
+  end
+
   def edit
     @user = User.find(params[:id])
     @registered_address_city = @user.registered_address_city
@@ -61,7 +65,7 @@ class Admin::UsersController < Admin::BaseController
 
   def unverify
     @user = User.find(params[:id])
-    @user.update!(verified_at: nil, geozone: nil, unique_stamp: nil)
+    @user.unverify!
   end
 
   private

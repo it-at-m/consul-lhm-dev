@@ -36,7 +36,12 @@
           <% end %>
         <% end %>
 
-        <%= link_to(t("custom.admin.users.columns.action.edit_user"), edit_admin_user_path(user), class: "button") %>
+        <div>
+          <%= link_to(t("custom.admin.users.columns.action.edit_user"), edit_admin_user_path(user), class: "button") %>
+          <% if user.audits.any? %>
+            <small><%= link_to "Änderung Log", admin_user_path(user), target: "_blank" %></small>
+          <% end %>
+        </div>
       </div>
     </td>
   <% end %>

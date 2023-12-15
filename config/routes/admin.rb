@@ -279,7 +279,9 @@ namespace :admin do
     get :search, on: :collection
   end
 
-  resources :users, only: [:index, :show, :edit, :update]
+  resources :users, only: [:index, :show, :edit, :update] do
+    resources :audits, only: :show, controller: "user_audits"
+  end
 
   scope module: :poll do
     resources :polls do
