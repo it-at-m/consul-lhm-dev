@@ -135,7 +135,7 @@ class DeficiencyReportsController < ApplicationController
   end
 
   def notify_officer_about_new_comments
-    enable = deficiency_report_params[:notify_officer_about_new_comments] == "1"
+    enable = ["1", "true"].include?(deficiency_report_params[:notify_officer_about_new_comments])
     datetime = enable ? Time.current : nil
 
     if @deficiency_report.update!(

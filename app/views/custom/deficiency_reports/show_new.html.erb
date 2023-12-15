@@ -106,16 +106,19 @@
         <% end %>
 
         <% if current_user&.administrator? %>
-          <%= render(Shared::SidebarCardComponent.new(
-            title: "Benachrichtigung für Sachbearbeiter*in",
-            icon_name: "envelope")) do |c| %>
-            <%= form_for @deficiency_report, url: notify_officer_about_new_comments_deficiency_report_path, remote: true do |f| %>
-              <div>
-                <%= f.check_box :notify_officer_about_new_comments, { label: t("custom.deficiency_reports.show.notify_officer_about_new_comments"), class: "checkbox-label--aligned" } %>
-              </div>
-              <%= f.submit t("custom.account.show.save_settings"), class: "button margin-top" %>
+          <div class="admin">
+            <%= render(Shared::SidebarCardComponent.new(
+              title: "Benachrichtigung für Sachbearbeiter*in",
+              icon_name: "envelope")) do |c| %>
+              <%= render Admin::LivesubmitCheckbox::Component.new(
+                url: notify_officer_about_new_comments_deficiency_report_path(@deficiency_report),
+                resource_name: "deficiency_report",
+                attribute_name: "notify_officer_about_new_comments",
+                record_id: @deficiency_report.id,
+                current_value: @deficiency_report.notify_officer_about_new_comments
+              ) %>
             <% end %>
-          <% end %>
+          </div>
         <% end %>
 
         <% if current_user == @deficiency_report.author %>
