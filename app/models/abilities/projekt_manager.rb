@@ -175,8 +175,12 @@ module Abilities
         can?(:manage, assignment.poll)
       end
 
-      can [:create, :update, :destroy], Legislation::Process do |process|
+      can [:manage], Legislation::Process do |process|
         user.projekt_manager.allowed_to?("manage", process&.projekt_phase&.projekt)
+      end
+
+      can [:manage], ::Legislation::DraftVersion do |draft_version|
+        can?(:manage, draft_version&.process)
       end
     end
   end
