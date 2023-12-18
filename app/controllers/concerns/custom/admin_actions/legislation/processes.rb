@@ -14,6 +14,12 @@ module AdminActions::Legislation::Processes
   def index
     @processes = ::Legislation::Process.send(@current_filter).order(start_date: :desc)
                  .page(params[:page])
+
+    if @namespace == :projekt_management
+      @projekts = Projekt.with_pm_permission_to("manage", current_user.projekt_manager)
+      @processes = @processes.joins(:projekt_phase).where(projekt_phases: { projekt_id: @projekts.pluck(:id) })
+    end
+
     render "admin/legislation/processes/index"
   end
 
