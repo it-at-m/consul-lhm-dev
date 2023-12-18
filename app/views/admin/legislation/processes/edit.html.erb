@@ -3,11 +3,11 @@
 <% end %>
 
 <div class="legislation-process-edit">
-  <%= back_link_to admin_legislation_processes_path, t("admin.legislation.processes.edit.back") %>
+  <%= back_link_to polymorphic_path([@namespace, :legislation_processes]), t("admin.legislation.processes.edit.back") %>
 
   <h2><%= @process.title %></h2>
 
-  <%= render "subnav", process: @process, active: "info" %>
+  <%= render "admin/legislation/processes/subnav", process: @process, active: "info" %>
 
-  <%= render "form" %>
+  <%= render "admin/legislation/processes/form" %>
 </div>

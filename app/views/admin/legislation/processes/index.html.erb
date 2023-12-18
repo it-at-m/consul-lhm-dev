@@ -2,21 +2,19 @@
   <%= t("admin.header.title") %> - <%= t("admin.menu.legislation") %> - <%= t("admin.legislation.processes.index.filters.#{@current_filter}") %>
 <% end %>
 
-<h2 class="inline-block"><%= t("admin.legislation.processes.index.title") %></h2>
+<h2 class="inline-block"><%= t("custom.admin.legislation.processes.index.title") %></h2>
 
-<%= link_to t("admin.legislation.processes.index.create"), new_admin_legislation_process_path,
+<%= link_to t("admin.legislation.processes.index.create"), polymorphic_path([@namespace, :legislation_process], action: :new),
             class: "button float-right" %>
 
-<%= render "shared/filter_subnav", i18n_namespace: "admin.legislation.processes.index" %>
-
 <% if @processes.any? %>
-  <h3><%= page_entries_info @processes %></h3>
+  <!-- <h3><%= page_entries_info @processes %></h3> -->
 
   <table class="stack">
     <thead>
       <tr>
-        <th><%= t("admin.legislation.processes.process.title") %></th>
-        <th><%= t("admin.legislation.processes.process.status") %></th>
+        <th><%= t("custom.admin.legislation.processes.process.title") %></th>
+        <th><%= t("custom.admin.legislation.processes.process.status") %></th>
         <th class="text-center"><%= t("admin.legislation.processes.process.comments") %></th>
         <% if feature?(:sdg) %>
           <th class="text-center"><%= SDG::Goal.model_name.human(count: :other).upcase_first %></th>

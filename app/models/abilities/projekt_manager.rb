@@ -174,6 +174,10 @@ module Abilities
       can [:manage], ::Poll::BoothAssignment do |assignment|
         can?(:manage, assignment.poll)
       end
+
+      can [:create, :update, :destroy], Legislation::Process do |process|
+        user.projekt_manager.allowed_to?("manage", process&.projekt_phase&.projekt)
+      end
     end
   end
 end
