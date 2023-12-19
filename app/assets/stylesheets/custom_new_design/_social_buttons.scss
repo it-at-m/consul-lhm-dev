@@ -12,11 +12,18 @@
 }
 
 .button.button-twitter {
-  background: #ecf7fc;
-  border-left: 3px solid #45b0e3;
+  //background: #ecf7fc;
+  background-color: black;
+  color: white;
 
   &::before {
-    color: #45b0e3;
+    mask-image: image-url("x_icon.svg");
+    color: white;
+  }
+
+  &:hover {
+    color: white !important;
+    background-color: #323232 !important;
   }
 }
 

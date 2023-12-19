@@ -9,9 +9,8 @@ de:
         signature_html: Viele Grüße</br>Consul
       new_comments_for_deficiency_report:
         subject: "Kommentar zur Mangelmeldung (%{deficiency_report_title}) wurde noch nicht bearbeitet"
-        p1: Liebe/r SachbearbeiterIn, Ihnen wurde kürzlich ein Kommentar zu
-          einer Mangelmeldung zugewiesen, welcher noch nicht bearbeitet wurde.
-        p2: Bitte senden Sie Ihren Antworttext an die KollegInnen des
+        p1: Ihnen wurde kürzlich ein Kommentar zu einer Mangelmeldung zugewiesen, welcher noch nicht bearbeitet wurde.
+        p2: Vielen Dank und viele Grüße
           Sachgebiets Bürgerbeteiligung über das Funktionspostfach
           buergerbeteiligung@ush.bayern.de zum Einstellen auf Consul. Vielen
           Dank und viele Grüße
