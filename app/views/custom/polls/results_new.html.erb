@@ -5,7 +5,7 @@
     <div class="flex-layout">
       <div class="main-column">
         <div class="resource-page--title-subline">
-          <%= render_custom_block("polls_show_welcome_text", custom_prefix: @poll.author.name, default_content: t("custom.polls.show.welcome_default_text")) %>
+          <%= render_custom_block("polls_show_welcome_text", custom_prefix: @poll.author&.name, default_content: t("custom.polls.show.welcome_default_text")) %>
         </div>
       </div>
       <div class="sidebar-placeholder"></div>
