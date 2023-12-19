@@ -483,7 +483,7 @@ class Projekt < ApplicationRecord
 
   def visible_for?(user = nil)
     return true if user.present? && user.administrator?
-    return true if user.present? && user.projekt_manager?(self)
+    return true if user.present? && user.projekt_manager&.allowed_to?("manage", self)
     return false unless activated?
 
     if hard_individual_group_values.empty?
