@@ -7,11 +7,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
     resource.registering_from_web = true
     process_temp_attributes_for(resource)
+    set_address_objects_from_temp_attributes_for(resource)
 
-    if @user.errors.none? && resource.valid?
+    if resource.extended_registration? && resource.errors.any?
+      render :new
+    elsif resource.valid?
       super
     else
-      set_address_objects_from_temp_attributes_for(resource)
       render :new
     end
   end

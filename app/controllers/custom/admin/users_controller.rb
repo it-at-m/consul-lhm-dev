@@ -42,13 +42,16 @@ class Admin::UsersController < Admin::BaseController
   def update
     @user = User.find_by(id: params[:id])
     process_temp_attributes_for(@user)
+    set_address_objects_from_temp_attributes_for(@user)
 
-    if @user.errors.none? && @user.update(user_params)
+    if @user.extended_registration? && @user.errors.any?
+      render :edit
+
+    elsif @user.update(user_params)
       @user.unverify!
       redirect_to admin_users_path, notice: "Benutzer aktualisiert"
 
     else
-      set_address_objects_from_temp_attributes_for(@user)
       render :edit
     end
   end
