@@ -137,3 +137,9 @@ $green-button-color: #00AA0B;
     background-color: #207868;
   }
 }
+
+.custom-new-design {
+  .admin .featured-settings-form [aria-pressed][aria-pressed=true] {
+    background-color: $brand;
+  }
+}

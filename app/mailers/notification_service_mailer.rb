@@ -10,6 +10,21 @@ class NotificationServiceMailer < ApplicationMailer
     end
   end
 
+  def new_comments_for_deficiency_report(deficiency_report, last_notified_time)
+    @deficiency_report = deficiency_report
+    @officer = @deficiency_report.officer
+    @new_comments = @deficiency_report.comments.where("created_at > ?", last_notified_time)
+
+    subject = t(
+      "custom.notification_service_mailers.new_comments_for_deficiency_report.subject",
+      deficiency_report_title: @deficiency_report.title.truncate(30)
+    )
+
+    with_user(@officer.user) do
+      mail(to: @officer.email, subject: subject)
+    end
+  end
+
   def not_assigned_deficiency_reports(admin_id, not_assigned_reports_ids)
     @admin = Administrator.find(admin_id)
     @not_assigned_reports = DeficiencyReport.where(id: not_assigned_reports_ids)
