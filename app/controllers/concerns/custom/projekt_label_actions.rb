@@ -11,7 +11,7 @@ module ProjektLabelActions
 
   def new
     @projekt_label = @projekt_phase.projekt_labels.new
-    authorize!(:new, @projekt_label) unless current_user.administrator?
+    authorize!(:new, @projekt_label)
 
     render "custom/admin/projekt_labels/new"
   end
@@ -19,7 +19,7 @@ module ProjektLabelActions
   def create
     @projekt_label = ProjektLabel.new(projekt_label_params)
     @projekt_label.projekt_phase = @projekt_phase
-    authorize!(:create, @projekt_label) unless current_user.administrator?
+    authorize!(:create, @projekt_label)
 
     if @projekt_label.save
       redirect_to polymorphic_path([@namespace, @projekt_phase], action: :projekt_labels)
@@ -29,12 +29,12 @@ module ProjektLabelActions
   end
 
   def edit
-    authorize!(:edit, @projekt_label) unless current_user.administrator?
+    authorize!(:edit, @projekt_label)
     render "custom/admin/projekt_labels/edit"
   end
 
   def update
-    authorize!(:update, @projekt_label) unless current_user.administrator?
+    authorize!(:update, @projekt_label)
 
     if @projekt_label.update(projekt_label_params)
       redirect_to polymorphic_path([@namespace, @projekt_phase], action: :projekt_labels)
@@ -44,7 +44,7 @@ module ProjektLabelActions
   end
 
   def destroy
-    authorize!(:destroy, @projekt_label) unless current_user.administrator?
+    authorize!(:destroy, @projekt_label)
 
     @projekt_label.destroy!
     redirect_to polymorphic_path([@namespace, @projekt_phase], action: :projekt_labels)

@@ -16,7 +16,7 @@ module ProjektPhaseAdminActions
     @projekt = Projekt.find(params[:projekt_id])
     @projekt_phase = ProjektPhase.new(projekt_phase_params.merge(active: true))
 
-    authorize!(:create, @projekt_phase) unless current_user.administrator?
+    authorize!(:create, @projekt_phase)
 
     @projekt_phase.save!
 
@@ -25,7 +25,7 @@ module ProjektPhaseAdminActions
   end
 
   def update
-    authorize!(:create, @projekt_phase) unless current_user.administrator?
+    authorize!(:create, @projekt_phase)
 
     if @projekt_phase.update(projekt_phase_params)
       redirect_to namespace_projekt_phase_path(action: params[:action_name] || "duration"),
@@ -34,7 +34,7 @@ module ProjektPhaseAdminActions
   end
 
   def destroy
-    authorize!(:destroy, @projekt_phase) unless current_user.administrator?
+    authorize!(:destroy, @projekt_phase)
 
     if @projekt_phase.safe_to_destroy?
       @projekt_phase.destroy!
@@ -50,33 +50,33 @@ module ProjektPhaseAdminActions
 
   def order_phases
     @projekt = Projekt.find(params[:projekt_id])
-    authorize!(:order_phases, @projekt) unless current_user.administrator?
+    authorize!(:order_phases, @projekt)
 
     @projekt.projekt_phases.order_phases(params[:ordered_list])
     head :ok
   end
 
   def toggle_active_status
-    authorize!(:toggle_active_status, @projekt_phase) unless current_user.administrator?
+    authorize!(:toggle_active_status, @projekt_phase)
 
     status_value = params[:projekt][:phase_attributes][:active]
     @projekt_phase.update!(active: status_value)
   end
 
   def duration
-    authorize!(:duration, @projekt_phase) unless current_user.administrator?
+    authorize!(:duration, @projekt_phase)
 
     render "custom/admin/projekt_phases/duration"
   end
 
   def naming
-    authorize!(:naming, @projekt_phase) unless current_user.administrator?
+    authorize!(:naming, @projekt_phase)
 
     render "custom/admin/projekt_phases/naming"
   end
 
   def restrictions
-    authorize!(:restrictions, @projekt_phase) unless current_user.administrator?
+    authorize!(:restrictions, @projekt_phase)
 
     @registered_address_groupings = RegisteredAddress::Grouping.all
     @individual_groups = IndividualGroup.visible
@@ -85,7 +85,7 @@ module ProjektPhaseAdminActions
   end
 
   def settings
-    authorize!(:settings, @projekt_phase) unless current_user.administrator?
+    authorize!(:settings, @projekt_phase)
 
     all_settings = @projekt_phase.settings.group_by(&:kind)
     @projekt_phase_features = all_settings["feature"]&.group_by(&:band) || []
@@ -95,7 +95,7 @@ module ProjektPhaseAdminActions
   end
 
   def projekt_labels
-    authorize!(:projekt_labels, @projekt_phase) unless current_user.administrator?
+    authorize!(:projekt_labels, @projekt_phase)
 
     @projekt_labels = @projekt_phase.projekt_labels
 
@@ -103,14 +103,14 @@ module ProjektPhaseAdminActions
   end
 
   def sentiments
-    authorize!(:sentiments, @projekt_phase) unless current_user.administrator?
+    authorize!(:sentiments, @projekt_phase)
     @sentiments = @projekt_phase.sentiments
 
     render "custom/admin/projekt_phases/sentiments"
   end
 
   def map
-    authorize!(:map, @projekt_phase) unless current_user.administrator?
+    authorize!(:map, @projekt_phase)
 
     @projekt_phase.create_map_location unless @projekt_phase.map_location.present?
     @map_location = @projekt_phase.map_location
@@ -121,7 +121,7 @@ module ProjektPhaseAdminActions
   def update_map
     map_location = MapLocation.find_by(projekt_phase_id: params[:id])
 
-    authorize!(:update_map, map_location) unless current_user.administrator?
+    authorize!(:update_map, map_location)
 
     map_location.update!(map_location_params)
 
@@ -130,14 +130,14 @@ module ProjektPhaseAdminActions
   end
 
   def projekt_questions
-    authorize!(:projekt_questions, @projekt_phase) unless current_user.administrator?
+    authorize!(:projekt_questions, @projekt_phase)
     @projekt_questions = @projekt_phase.questions
 
     render "custom/admin/projekt_phases/projekt_questions"
   end
 
   def projekt_livestreams
-    authorize!(:projekt_livestreams, @projekt_phase) unless current_user.administrator?
+    authorize!(:projekt_livestreams, @projekt_phase)
     @projekt_livestream = ProjektLivestream.new
     @projekt_livestreams = @projekt_phase.projekt_livestreams
 
@@ -145,7 +145,7 @@ module ProjektPhaseAdminActions
   end
 
   def projekt_events
-    authorize!(:projekt_events, @projekt_phase) unless current_user.administrator?
+    authorize!(:projekt_events, @projekt_phase)
     @projekt_event = ProjektEvent.new
     @projekt_events = @projekt_phase.projekt_events
 
@@ -153,12 +153,12 @@ module ProjektPhaseAdminActions
   end
 
   def milestones
-    authorize!(:milestones, @projekt_phase) unless current_user.administrator?
+    authorize!(:milestones, @projekt_phase)
     render "custom/admin/projekt_phases/milestones"
   end
 
   def projekt_notifications
-    authorize!(:projekt_notifications, @projekt_phase) unless current_user.administrator?
+    authorize!(:projekt_notifications, @projekt_phase)
     @projekt_notification = ProjektNotification.new
     @projekt_notifications = @projekt_phase.projekt_notifications
 
@@ -166,7 +166,7 @@ module ProjektPhaseAdminActions
   end
 
   def projekt_arguments
-    authorize!(:projekt_arguments, @projekt_phase) unless current_user.administrator?
+    authorize!(:projekt_arguments, @projekt_phase)
     @projekt_argument = ProjektArgument.new
     @projekt_arguments_pro = @projekt_phase.projekt_arguments.pro
     @projekt_arguments_cons = @projekt_phase.projekt_arguments.cons
@@ -178,12 +178,12 @@ module ProjektPhaseAdminActions
     @formular = @projekt_phase.formular
     @formular_fields_primary = @formular.formular_fields.primary.each(&:set_custom_attributes)
     @formular_fields_follow_up = @formular.formular_fields.follow_up.each(&:set_custom_attributes)
-    authorize!(:formular, @projekt_phase) unless current_user.administrator?
+    authorize!(:formular, @projekt_phase)
     render "custom/admin/projekt_phases/formular"
   end
 
   def formular_answers
-    authorize!(:formular, @projekt_phase) unless current_user.administrator?
+    authorize!(:formular, @projekt_phase)
 
     @formular = @projekt_phase.formular
     @formular_fields = @formular.formular_fields

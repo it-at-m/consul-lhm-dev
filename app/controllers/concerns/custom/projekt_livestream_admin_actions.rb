@@ -9,21 +9,21 @@ module ProjektLivestreamAdminActions
   def create
     @projekt_livestream = ProjektLivestream.new(projekt_livestream_params)
     @projekt_livestream.projekt_phase = @projekt_phase
-    authorize!(:create, @projekt_livestream) unless current_user.administrator?
+    authorize!(:create, @projekt_livestream)
 
     @projekt_livestream.save!
     redirect_to polymorphic_path([@namespace, @projekt_phase, ProjektLivestream]), notice: t("admin.settings.flash.updated")
   end
 
   def update
-    authorize!(:update, @projekt_livestream) unless current_user.administrator?
+    authorize!(:update, @projekt_livestream)
 
     @projekt_livestream.update!(projekt_livestream_params)
     redirect_to polymorphic_path([@namespace, @projekt_phase, ProjektLivestream]), notice: t("admin.settings.flash.updated")
   end
 
   def destroy
-    authorize!(:destroy, @projekt_livestream) unless current_user.administrator?
+    authorize!(:destroy, @projekt_livestream)
 
     @projekt_livestream.destroy!
     redirect_to polymorphic_path([@namespace, @projekt_phase, ProjektLivestream])
@@ -31,7 +31,7 @@ module ProjektLivestreamAdminActions
 
   def send_notifications
     @projekt_livestream = ProjektLivestream.find_by(id: params[:id])
-    authorize!(:send_notifications, @projekt_livestream) unless current_user.administrator?
+    authorize!(:send_notifications, @projekt_livestream)
 
     NotificationServices::NewProjektLivestreamNotifier.call(@projekt_livestream.id)
     redirect_to polymorphic_path([@namespace, @projekt_phase, ProjektLivestream]),

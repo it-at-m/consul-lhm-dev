@@ -15,7 +15,7 @@ module ProjektAdminActions
   def edit
     @namespace = params[:controller].split("/").first.to_sym
 
-    authorize!(:edit, @projekt) unless current_user.administrator?
+    authorize!(:edit, @projekt)
 
     @individual_groups = IndividualGroup.hard.visible
 
@@ -42,7 +42,7 @@ module ProjektAdminActions
   end
 
   def update
-    authorize!(:update, @projekt) unless current_user.administrator?
+    authorize!(:update, @projekt)
 
     if @projekt.update_attributes(projekt_params)
       redirect_to namespace_projekt_path(action: "edit", anchor: params[:tab]),
@@ -56,7 +56,7 @@ module ProjektAdminActions
   def update_map
     map_location = MapLocation.find_by(projekt_id: @projekt.id)
 
-    authorize!(:update_map, map_location) unless current_user.administrator?
+    authorize!(:update_map, map_location)
 
     map_location.update!(map_location_params)
 
@@ -71,7 +71,7 @@ module ProjektAdminActions
       key: "projekt_custom_feature.default_footer_tab"
     ).reload
 
-    authorize!(:update_standard_phase, @default_footer_tab_setting) unless current_user.administrator?
+    authorize!(:update_standard_phase, @default_footer_tab_setting)
 
     if @default_footer_tab_setting.present?
       @default_footer_tab_setting.update!(value: params[:default_footer_tab][:id])

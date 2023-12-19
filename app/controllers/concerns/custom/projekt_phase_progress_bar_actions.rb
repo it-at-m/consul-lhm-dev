@@ -9,20 +9,20 @@ module ProjektPhaseProgressBarActions
   end
 
   def index
-    authorize! :new, ProgressBar unless current_user.administrator?
+    authorize! :new, ProgressBar
     render "admin/progress_bars/index"
   end
 
   def new
     @progress_bar = @progressable.progress_bars.new
-    authorize! :new, @progress_bar unless current_user.administrator?
+    authorize! :new, @progress_bar
 
     render "admin/progress_bars/new"
   end
 
   def create
     @progress_bar = @progressable.progress_bars.new(progress_bar_params)
-    authorize! :create, @progress_bar unless current_user.administrator?
+    authorize! :create, @progress_bar
 
     if @progress_bar.save
       redirect_to redirect_path, notice: t("admin.progress_bars.create.notice")
@@ -32,12 +32,12 @@ module ProjektPhaseProgressBarActions
   end
 
   def edit
-    authorize! :edit, @progress_bar unless current_user.administrator?
+    authorize! :edit, @progress_bar
     render "admin/progress_bars/edit"
   end
 
   def update
-    authorize! :update, @progress_bar unless current_user.administrator?
+    authorize! :update, @progress_bar
 
     if @progress_bar.update(progress_bar_params)
       redirect_to redirect_path, notice: t("admin.progress_bars.update.notice")
@@ -47,7 +47,7 @@ module ProjektPhaseProgressBarActions
   end
 
   def destroy
-    authorize! :destroy, @progress_bar unless current_user.administrator?
+    authorize! :destroy, @progress_bar
     @progress_bar.destroy!
 
     redirect_to redirect_path, notice: t("admin.progress_bars.delete.notice")

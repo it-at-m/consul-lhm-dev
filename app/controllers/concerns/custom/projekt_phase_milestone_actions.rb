@@ -14,14 +14,14 @@ module ProjektPhaseMilestoneActions
   def new
     @milestone = @milestoneable.milestones.new
 
-    authorize! :new, @milestone unless current_user.administrator?
+    authorize! :new, @milestone
     render "admin/milestones/new"
   end
 
   def create
     @milestone = @milestoneable.milestones.new(milestone_params)
 
-    authorize! :create, @milestone unless current_user.administrator?
+    authorize! :create, @milestone
 
     if @milestone.save
       NotificationServices::NewProjektMilestoneNotifier.call(@milestone.id)
@@ -32,12 +32,12 @@ module ProjektPhaseMilestoneActions
   end
 
   def edit
-    authorize! :edit, @milestone unless current_user.administrator?
+    authorize! :edit, @milestone
     render "admin/milestones/edit"
   end
 
   def update
-    authorize! :update, @milestone unless current_user.administrator?
+    authorize! :update, @milestone
 
     if @milestone.update(milestone_params)
       redirect_to redirect_path, notice: t("admin.milestones.update.notice")
@@ -47,7 +47,7 @@ module ProjektPhaseMilestoneActions
   end
 
   def destroy
-    authorize! :destroy, @milestone unless current_user.administrator?
+    authorize! :destroy, @milestone
     @milestone.destroy!
 
     redirect_to redirect_path, notice: t("admin.milestones.delete.notice")

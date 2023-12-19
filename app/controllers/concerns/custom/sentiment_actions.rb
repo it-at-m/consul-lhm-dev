@@ -11,7 +11,7 @@ module SentimentActions
 
   def new
     @sentiment = @projekt_phase.sentiments.new
-    authorize!(:new, @sentiment) unless current_user.administrator?
+    authorize!(:new, @sentiment)
 
     render "custom/admin/sentiments/new"
   end
@@ -19,7 +19,7 @@ module SentimentActions
   def create
     @sentiment = Sentiment.new(sentiment_params)
     @sentiment.projekt_phase = @projekt_phase
-    authorize!(:create, @sentiment) unless current_user.administrator?
+    authorize!(:create, @sentiment)
 
     if @sentiment.save
       redirect_to polymorphic_path([@namespace, @projekt_phase], action: :sentiments)
@@ -29,12 +29,12 @@ module SentimentActions
   end
 
   def edit
-    authorize!(:edit, @sentiment) unless current_user.administrator?
+    authorize!(:edit, @sentiment)
     render "custom/admin/sentiments/edit"
   end
 
   def update
-    authorize!(:update, @sentiment) unless current_user.administrator?
+    authorize!(:update, @sentiment)
 
     if @sentiment.update(sentiment_params)
       redirect_to polymorphic_path([@namespace, @projekt_phase], action: :sentiments)
@@ -44,7 +44,7 @@ module SentimentActions
   end
 
   def destroy
-    authorize!(:destroy, @sentiment) unless current_user.administrator?
+    authorize!(:destroy, @sentiment)
 
     @sentiment.destroy!
     redirect_to polymorphic_path([@namespace, @projekt_phase], action: :sentiments)
