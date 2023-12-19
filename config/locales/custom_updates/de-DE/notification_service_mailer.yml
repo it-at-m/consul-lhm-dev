@@ -7,6 +7,15 @@ de:
         p1_s: Ihnen wurde vor zwei Woche ein Mangel zur Bearbeitung zugewiesen, welcher noch nicht bearbeitet wurde.
         p1_p: Ihnen wurde vor zwei Wochen mehrere Mängel zur Bearbeitung zugewiesen, die noch nicht bearbeitet wurden.
         signature_html: Viele Grüße</br>Consul
+      new_comments_for_deficiency_report:
+        subject: "Kommentar zur Mangelmeldung (%{deficiency_report_title}) wurde noch nicht bearbeitet"
+        p1: Liebe/r SachbearbeiterIn, Ihnen wurde kürzlich ein Kommentar zu
+          einer Mangelmeldung zugewiesen, welcher noch nicht bearbeitet wurde.
+        p2: Bitte senden Sie Ihren Antworttext an die KollegInnen des
+          Sachgebiets Bürgerbeteiligung über das Funktionspostfach
+          buergerbeteiligung@ush.bayern.de zum Einstellen auf Consul. Vielen
+          Dank und viele Grüße
+
       not_assigned_deficiency_reports:
         subject: Mangelzuweisen noch ausstehend
         hi: Lieber Admin,

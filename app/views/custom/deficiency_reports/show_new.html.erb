@@ -105,6 +105,22 @@
           <% end %>
         <% end %>
 
+        <% if current_user&.administrator? %>
+          <div class="admin">
+            <%= render(Shared::SidebarCardComponent.new(
+              title: "Benachrichtigung für Sachbearbeiter*in",
+              icon_name: "envelope")) do |c| %>
+              <%= render Admin::LivesubmitCheckbox::Component.new(
+                url: notify_officer_about_new_comments_deficiency_report_path(@deficiency_report),
+                resource_name: "deficiency_report",
+                attribute_name: "notify_officer_about_new_comments",
+                record_id: @deficiency_report.id,
+                current_value: @deficiency_report.notify_officer_about_new_comments
+              ) %>
+            <% end %>
+          </div>
+        <% end %>
+
         <% if current_user == @deficiency_report.author %>
           <%= render(Shared::SidebarCardComponent.new(
             title: t("custom.deficiency_reports.show.author_actions.title"),

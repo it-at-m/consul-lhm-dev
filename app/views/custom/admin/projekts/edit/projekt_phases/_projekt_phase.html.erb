@@ -60,7 +60,13 @@
   </td>
 
   <td>
-    <%= render Admin::LivesubmitCheckbox::Component.new(url: toggle_active_status_admin_projekt_projekt_phase_path(@projekt, projekt_phase), resource_name: "projekt[phase_attributes]", attribute_name: "active", id: projekt_phase.id, current_value: projekt_phase.active) %>
+    <%= render Admin::LivesubmitCheckbox::Component.new(
+      url: toggle_active_status_admin_projekt_projekt_phase_path(@projekt, projekt_phase),
+      resource_name: "projekt[phase_attributes]",
+      attribute_name: "active",
+      record_id: projekt_phase.id,
+      current_value: projekt_phase.active
+    ) %>
   </td>
 
   <td>
