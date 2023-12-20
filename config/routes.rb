@@ -92,9 +92,6 @@ Rails.application.routes.draw do
   patch  "admin/proposals/:id/toggle_image",               to: "admin/proposals#toggle_image",       as: :admin_proposal_toggle_image
   patch  "admin/debates/:id/toggle_image",                 to: "admin/debates#toggle_image",         as: :admin_debate_toggle_image
 
-  # Setting of poll questions order
-  post "/admin/polls/:poll_id/questions/order_questions",  to: "admin/poll/questions#order_questions", as: "admin_poll_questions_order_questions"
-
   # Manuall verify user
   put "/admin/users/:id/verify",                           to: "admin/users#verify",                 as: :verify_admin_user
   put "/admin/users/:id/unverify",                         to: "admin/users#unverify",               as: :unverify_admin_user
@@ -117,7 +114,6 @@ Rails.application.routes.draw do
   get    "/:id/projekt_phase_footer_tab/:projekt_phase_id", to: "pages#projekt_phase_footer_tab",     as: :projekt_phase_footer_tab_page
 
   # projekt notifications
-  put "/admin/polls/:id/send_notifications",               to: "admin/poll/polls#send_notifications", as: :send_notifications_admin_poll
   post "/admin/projekt/:projekt_id/projekt_arguments/send_notifications",   to: "admin/projekt_arguments#send_notifications", as: :send_notifications_admin_projekt_projekt_arguments
 
   resources :formular_answers, only: %i[create update]

@@ -4,7 +4,7 @@
 
 <div class="legislation-draft-versions-index">
 
-  <%= back_link_to admin_legislation_processes_path, t("admin.legislation.processes.edit.back") %>
+  <%= back_link_to polymorphic_path([@namespace, :legislation_processes]), t("admin.legislation.processes.edit.back") %>
 
   <h2><%= @process.title %></h2>
 
@@ -14,7 +14,7 @@
     <h4 class="inline-block"><%= t("admin.legislation.draft_versions.index.title") %></h4>
 
     <div class="float-right">
-      <%= link_to t("admin.legislation.draft_versions.index.create"), new_admin_legislation_process_draft_version_path, class: "button" %>
+      <%= link_to t("admin.legislation.draft_versions.index.create"), polymorphic_path([@namespace, @process, :draft_version], action: :new), class: "button" %>
     </div>
 
     <% if @process.draft_versions.any? %>
@@ -32,7 +32,7 @@
         <% @process.draft_versions.each do |draft_version| %>
           <tr id="<%= dom_id(draft_version) %>">
             <td>
-              <%= link_to draft_version.title, edit_admin_legislation_process_draft_version_path(@process, draft_version) %>
+              <%= link_to draft_version.title, polymorphic_path([@namespace, @process, draft_version], action: :edit) %>
             </td>
             <td><%= draft_version.created_at.to_date %></td>
             <td>

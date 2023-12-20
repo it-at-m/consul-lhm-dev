@@ -12,19 +12,19 @@ module FormularFollowUpLettersAdminActions
     @formular_follow_up_letter = @formular.formular_follow_up_letters.new
     @formular_follow_up_letter.formular_answer_ids = params[:formular_answer_ids]
 
-    authorize!(:create, @formular_follow_up_letter) unless current_user.administrator?
+    authorize!(:create, @formular_follow_up_letter)
 
     @formular_follow_up_letter.save!
     render "custom/admin/formular_follow_up_letters/create"
   end
 
   def edit
-    authorize!(:edit, @formular_follow_up_letter) unless current_user.administrator?
+    authorize!(:edit, @formular_follow_up_letter)
     render "custom/admin/formular_follow_up_letters/edit"
   end
 
   def update
-    authorize!(:update, @formular_follow_up_letter) unless current_user.administrator?
+    authorize!(:update, @formular_follow_up_letter)
 
     if @formular_follow_up_letter.update(formular_follow_up_letter_params)
       @formular = @formular_follow_up_letter.formular
@@ -39,14 +39,14 @@ module FormularFollowUpLettersAdminActions
   end
 
   def destroy
-    authorize!(:destroy, @formular_follow_up_letter) unless current_user.administrator?
+    authorize!(:destroy, @formular_follow_up_letter)
 
     @formular_follow_up_letter.destroy!
     render "custom/admin/formular_follow_up_letters/destroy"
   end
 
   def send_emails
-    authorize!(:send_emails, @formular_follow_up_letter) unless current_user.administrator?
+    authorize!(:send_emails, @formular_follow_up_letter)
     @formular_follow_up_letter.delay.deliver
     @formular_follow_up_letter.update!(sent_at: Time.zone.now)
 
@@ -62,13 +62,13 @@ module FormularFollowUpLettersAdminActions
     @follow_up_letter = @formular_follow_up_letter
     @projekt_phase = @formular_follow_up_letter.formular.projekt_phase
     @recipient = @formular_follow_up_letter.recipients.last
-    authorize!(:preview, @formular_follow_up_letter) unless current_user.administrator?
+    authorize!(:preview, @formular_follow_up_letter)
 
     render "custom/admin/formular_follow_up_letters/preview"
   end
 
   def restore_default_view
-    authorize!(:restore_default_view, @formular_follow_up_letter) unless current_user.administrator?
+    authorize!(:restore_default_view, @formular_follow_up_letter)
 
     render "custom/admin/formular_follow_up_letters/restore_default_view"
   end

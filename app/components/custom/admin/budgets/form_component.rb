@@ -7,7 +7,20 @@ class Admin::Budgets::FormComponent < ApplicationComponent
   end
 
   def projekt_phase_options_for_selector
-    ProjektPhase::BudgetPhase.all
+    if namespace == :admin_budgets_wizard && current_user.administrator?
+      projekt_phases = ProjektPhase::BudgetPhase.all
+
+    elsif namespace == :projekt_management_budgets_wizard && current_user.projekt_manager?
+      projekt_phases = ProjektPhase::BudgetPhase.where(
+        projekt_id: projekts_with_authorization_to("manage").ids
+      )
+
+    else
+      projekt_phases = ProjektPhase::BudgetPhase.none
+
+    end
+
+    projekt_phases
       .reject { |pp| pp.budget.present? || pp.projekt.overview_page? }
       .map { |pp| ["#{pp.projekt.name} - #{pp.title}", pp.id] }
   end

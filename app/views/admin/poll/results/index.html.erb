@@ -12,12 +12,10 @@
   <% end %>
 
   <% if @partial_results.present? %>
-    <%= render "recount", resource: @poll %>
-    <%= render "result" %>
-    <%= render "results_by_booth" %>
+    <%= render "admin/poll/results/recount", resource: @poll %>
+    <%= render "admin/poll/results/result" %>
+    <%= render "admin/poll/results/results_by_booth" %>
   <% end %>
 
-  <% if @poll.voters.any? %>
-    <%= render "show_results", resource: @poll %>
-  <% end %>
+  <%= render "admin/poll/results/show_results", resource: @poll %>
 </div>

@@ -138,6 +138,50 @@ module Abilities
       can :comment_as_moderator, [ProjektPhase, Debate, Proposal, Budget::Investment, Poll, ProjektQuestion] do |resource|
         user.projekt_manager.allowed_to?("moderate", resource.projekt)
       end
+
+
+      can [:read, :create, :update, :destroy], Budget do |budget|
+        user.projekt_manager.allowed_to?("manage", budget&.projekt)
+      end
+      can :publish, Budget, id: Budget.drafting.ids
+      can :calculate_winners, Budget, &:reviewing_ballots?
+      can :read_results, Budget do |budget|
+        budget.balloting_or_later?
+        # budget.balloting_finished? && budget.has_winning_investments?
+      end
+      can :recalculate_winners, Budget, &:balloting_or_later?
+
+      can [:admin_update, :toggle_selection, :edit_physical_votes], Budget::Investment do |investment|
+        can?(:create, investment.budget)
+      end
+
+      can :manage, Poll do |poll|
+        user.projekt_manager.allowed_to?("manage", poll&.projekt)
+      end
+
+      can :manage, Poll::Question do |question|
+        can?(:manage, question.poll)
+      end
+
+      can [:manage], Poll::Question::Answer do |answer|
+        can?(:manage, answer.question)
+      end
+
+      can [:manage], Poll::Question::Answer::Video do |video|
+        can?(:manage, video.answer)
+      end
+
+      can [:manage], ::Poll::BoothAssignment do |assignment|
+        can?(:manage, assignment.poll)
+      end
+
+      can [:manage], Legislation::Process do |process|
+        user.projekt_manager.allowed_to?("manage", process&.projekt_phase&.projekt)
+      end
+
+      can [:manage], ::Legislation::DraftVersion do |draft_version|
+        can?(:manage, draft_version&.process)
+      end
     end
   end
 end

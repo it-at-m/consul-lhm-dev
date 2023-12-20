@@ -14,19 +14,22 @@
                                             hint: t("admin.budgets.edit.name_description") %>
         </div>
       </div>
+
+      <!--
       <div class="row expanded">
         <div class="small-12 medium-9 large-6 column end">
-          <p class="form-label"><%= t("admin.budgets.edit.main_call_to_action") %></p>
-          <p class="help-text"> <%= t("admin.budgets.edit.main_call_to_action_description") %></p>
-          <%= translations_form.text_field :main_link_text %>
+          <p class="form-label"><%#= t("admin.budgets.edit.main_call_to_action") %></p>
+          <p class="help-text"> <%#= t("admin.budgets.edit.main_call_to_action_description") %></p>
+          <%#= translations_form.text_field :main_link_text %>
         </div>
       </div>
 
       <div class="row expanded">
         <div class="small-12 medium-9 large-6 column end">
-          <%= translations_form.text_field :main_link_url, hint: t("admin.shared.example_url") %>
+          <%#= translations_form.text_field :main_link_url, hint: t("admin.shared.example_url") %>
         </div>
       </div>
+      -->
     <% end %>
 
     <div class="row expanded">
@@ -50,12 +53,12 @@
     </div>
 
     <% unless wizard? %>
-      <div class="small-12 medium-6 column">
+      <div class="small-12 medium-6 column end">
         <%= f.select :phase, phases_select_options %>
       </div>
     <% end %>
 
-    <% if feature?(:allow_images) %>
+    <% if feature?(:allow_images) && false %>
       <div class="images small-12 column">
         <%= render "/images/nested_image", f: f %>
         <p class="help-text"><%= t("admin.budgets.edit.image_description") %></p>
@@ -63,16 +66,14 @@
     <% end %>
   </fieldset>
 
-  <% if params[:mode] == 'single' %>
-    <fieldset>
-      <legend><%= t('custom.admin.budgets.edit.info.projekt_association') %></legend>
+  <fieldset>
+    <legend><%= t('custom.admin.budgets.edit.info.projekt_association') %></legend>
 
-      <div class="small-12 medium-6 large-6 column end">
-        <%= f.select :projekt_phase_id, projekt_phase_options_for_selector, prompt: "Select projekt" %>
+    <div class="small-12 medium-6 large-6 column end">
+      <%= f.select :projekt_phase_id, projekt_phase_options_for_selector, prompt: "Select projekt" %>
 
-      </div>
-    </fieldset>
-  <% end %>
+    </div>
+  </fieldset>
 
   <fieldset>
     <legend><%= t("admin.budgets.edit.info.staff_settings") %></legend>

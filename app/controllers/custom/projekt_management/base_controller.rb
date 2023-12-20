@@ -19,4 +19,8 @@ class ProjektManagement::BaseController < ApplicationController
     def set_namespace
       @namespace ||= :projekt_management
     end
+
+    def projekts_with_authorization_to(action)
+      Projekt.with_pm_permission_to(action, projekt_manager)
+    end
 end

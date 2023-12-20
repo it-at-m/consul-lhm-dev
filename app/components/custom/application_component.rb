@@ -28,4 +28,14 @@ class ApplicationComponent < ViewComponent::Base
         "#"
       end
     end
+
+    def namespace
+      @namespace ||= controller_path.split("/").first.to_sym
+    end
+
+    def projekts_with_authorization_to(action)
+      return false unless current_user.projekt_manager?
+
+      Projekt.with_pm_permission_to(action, current_user.projekt_manager)
+    end
 end

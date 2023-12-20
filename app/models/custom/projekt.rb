@@ -246,6 +246,8 @@ class Projekt < ApplicationRecord
   end
 
   def self.with_pm_permission_to(permission, projekt_manager)
+    return Projekt.none unless projekt_manager.present?
+
     joins(:projekt_manager_assignments)
       .where("projekt_manager_assignments.projekt_manager_id = ? AND ? = ANY(projekt_manager_assignments.permissions)", projekt_manager.id, permission)
   end

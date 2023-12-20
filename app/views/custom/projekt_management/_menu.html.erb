@@ -3,6 +3,18 @@
     <%= link_to t("custom.admin.menu.projekts"), projekt_management_projekts_path, class: "projekts-link" %>
   </li>
 
+  <li class="<%= "is-active" if controller_name == "budgets" %>">
+    <%= link_to t("custom.admin.menu.budgets"), projekt_management_budgets_path, class: "budgets-link" %>
+  </li>
+
+  <li class="<%= "is-active" if controller_name == "polls" %>">
+    <%= link_to t("custom.admin.menu.polls"), projekt_management_polls_path, class: "polls-link" %>
+  </li>
+
+  <li class="<%= "is-active" if controller.class.parent == Admin::Legislation %>">
+    <%= link_to t("custom.admin.menu.legislation"), projekt_management_legislation_processes_path, class: "legislation-link" %>
+  </li>
+
   <li class="<%= "is-active" if controller_name == "proposals" %>">
     <%= link_to t("admin.menu.proposals"), projekt_management_proposals_path, class: "proposals-link" %>
   </li>

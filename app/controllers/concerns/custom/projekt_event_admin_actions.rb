@@ -9,28 +9,28 @@ module ProjektEventAdminActions
   def create
     @projekt_event = ProjektEvent.new(projekt_event_params)
     @projekt_event.projekt_phase = @projekt_phase
-    authorize!(:create, @projekt_event) unless current_user.administrator?
+    authorize!(:create, @projekt_event)
 
     @projekt_event.save!
     redirect_to polymorphic_path([@namespace, @projekt_phase, ProjektEvent]), notice: t("admin.settings.flash.updated")
   end
 
   def update
-    authorize!(:update, @projekt_event) unless current_user.administrator?
+    authorize!(:update, @projekt_event)
 
     @projekt_event.update!(projekt_event_params)
     redirect_to polymorphic_path([@namespace, @projekt_phase, ProjektEvent]), notice: t("admin.settings.flash.updated")
   end
 
   def destroy
-    authorize!(:destroy, @projekt_event) unless current_user.administrator?
+    authorize!(:destroy, @projekt_event)
     @projekt_event.destroy!
 
     redirect_to polymorphic_path([@namespace, @projekt_phase, ProjektEvent])
   end
 
   def send_notifications
-    authorize!(:send_notifications, @projekt_event) unless current_user.administrator?
+    authorize!(:send_notifications, @projekt_event)
     NotificationServices::NewProjektEventNotifier.call(@projekt_event.id)
     redirect_to polymorphic_path([@namespace, @projekt_phase, ProjektEvent]),
       notice: t("custom.admin.projekts.edit.projekt_events_tab.notifications_sent_notice")

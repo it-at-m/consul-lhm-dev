@@ -4,7 +4,7 @@
 
 <div class="legislation-draft-versions-new legislation-draft-versions-form">
   <div class="small-12 column">
-    <%= back_link_to admin_legislation_process_draft_versions_path(@process),
+    <%= back_link_to polymorphic_path([@namespace, @process, :draft_versions]),
                      t("admin.legislation.draft_versions.new.back") %>
 
     <h2><%= @process.title %></h2>
@@ -13,6 +13,6 @@
 
     <h3><%= t("admin.legislation.draft_versions.new.title") %></h3>
 
-    <%= render "form", url: admin_legislation_process_draft_versions_path(@process) %>
+    <%= render "admin/legislation/draft_versions/form", url: polymorphic_path([@namespace, @process, :draft_versions]) %>
   </div>
 </div>

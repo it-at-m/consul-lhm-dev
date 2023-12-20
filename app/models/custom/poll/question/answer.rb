@@ -4,6 +4,15 @@ class Poll::Question::Answer < ApplicationRecord
   belongs_to :next_question, class_name: "Poll::Question", optional: true,
     foreign_key: "next_question_id", inverse_of: "previous_question"
 
+  delegate :author_id, to: :question
+
+  def self.model_name
+    mname = super
+    mname.instance_variable_set(:@route_key, "answers")
+    mname.instance_variable_set(:@singular_route_key, "answer")
+    mname
+  end
+
   def all_open_answers
     return nil unless self.open_answer
     Poll::Answer.where(question_id: question, answer: title).where.not(open_answer_text: nil)

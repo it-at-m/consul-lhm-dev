@@ -2,7 +2,7 @@
 <div id="poll-resources">
   <%= render "/admin/poll/polls/subnav" %>
 
-  <%= render "search_officers" %>
+  <%= render "admin/poll/officer_assignments/search_officers" %>
 
   <h3><%= t("admin.poll_officer_assignments.index.officers_title") %></h3>
 
@@ -21,7 +21,7 @@
           <tr id="officer_<%= officer.id %>" class="officer">
             <td>
               <strong>
-                <%= link_to officer.name, by_officer_admin_poll_officer_assignments_path(@poll, officer_id: officer.id) %>
+                <%= link_to officer.name, polymorphic_path([@namespace, @poll, :officer_assignments], action: :by_officer, officer_id: officer.id) %>
               </strong>
             </td>
             <td>

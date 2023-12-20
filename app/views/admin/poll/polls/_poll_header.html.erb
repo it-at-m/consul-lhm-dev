@@ -1,5 +1,5 @@
 <%= link_to t("admin.polls.edit.title"),
-            edit_admin_poll_path(@poll),
+            polymorphic_path([@namespace, @poll], action: :edit),
             class: "button hollow float-right" %>
 
 <h2 class="inline-block">

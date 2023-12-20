@@ -8,10 +8,10 @@ class Admin::BudgetsWizard::Budgets::NewComponent < ApplicationComponent
   end
 
   def title
-    if single_heading?
+    # if single_heading?
       t("admin.budgets.new.title_single")
-    else
-      t("admin.budgets.new.title_multiple")
-    end
+    # else
+      # t("admin.budgets.new.title_multiple")
+    # end
   end
 end

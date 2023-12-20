@@ -1,4 +1,4 @@
-<%= back_link_to booth_assignments_admin_polls_path %>
+<%= back_link_to polymorphic_path([@namespace, :polls], action: :booth_assignments) %>
 
 <h2><%= t("admin.booth_assignments.manage.assignments_list", poll: @poll.name) %></h2>
 
@@ -17,7 +17,7 @@
     <tbody>
     <% @booths.each do |booth| %>
       <tr id="<%= dom_id(booth) %>" class="booth">
-        <%= render "booth_assignment", booth: booth, booth_assignment: booth.assignment_on_poll(@poll) %>
+        <%= render "admin/poll/booth_assignments/booth_assignment", booth: booth, booth_assignment: booth.assignment_on_poll(@poll) %>
       </tr>
     <% end %>
     </tbody>

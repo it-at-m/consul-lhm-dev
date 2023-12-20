@@ -287,6 +287,7 @@ namespace :admin do
     resources :polls do
       get :booth_assignments, on: :collection
       patch :add_question, on: :member
+      post :send_notifications, on: :member
 
       resources :booth_assignments, only: [:index, :show, :create, :destroy] do
         get :search_booths, on: :collection
@@ -300,6 +301,10 @@ namespace :admin do
 
       resources :recounts, only: :index
       resources :results, only: :index
+
+      resources :questions, only: [] do
+        post :order_questions, on: :collection
+      end
     end
 
     resources :officers, only: [:index, :new, :create, :destroy] do
@@ -320,8 +325,8 @@ namespace :admin do
         resources :images, controller: "questions/answers/images"
         resources :videos, controller: "questions/answers/videos", shallow: false
         resources :documents, only: [:index, :create], controller: "questions/answers/documents"
+        post :order_answers, on: :collection
       end
-      post "/answers/order_answers", to: "questions/answers#order_answers"
     end
 
     resource :active_polls, only: [:create, :edit, :update]

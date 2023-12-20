@@ -10,7 +10,7 @@ class Admin::Budgets::TableActionsComponent < ApplicationComponent
     def actions_component
       Admin::TableActionsComponent.new(
         budget,
-        edit_path: admin_budget_path(budget),
+        edit_path: polymorphic_path([namespace, budget]),
         actions: [:edit]
       )
     end

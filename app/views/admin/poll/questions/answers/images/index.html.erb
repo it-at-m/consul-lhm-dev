@@ -1,7 +1,7 @@
-<%= back_link_to admin_question_path(@answer.question) %>
+<%= back_link_to polymorphic_path([@namespace, @answer.question]) %>
 
 <%= link_to t("admin.questions.answers.images.add_image"),
-            new_admin_answer_image_path(@answer),
+            polymorphic_path([@namespace, @answer, :image], action: :new),
             class: "button hollow float-right" %>
 
 <ul class="breadcrumbs margin-top">
@@ -14,7 +14,7 @@
     <%= render_image(image, :large, true) if image.present? %>
 
     <%= link_to t("images.remove_image"),
-                admin_image_path(image),
+                polymorphic_path([@namespace, image]),
                 class: "delete float-right",
                 method: :delete,
                 remote: true,

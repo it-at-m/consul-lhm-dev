@@ -1,4 +1,4 @@
-<%= link_to admin_poll_booth_assignments_path(@poll) do %>
+<%= link_to polymorphic_path([@namespace, @poll, :booth_assignments]) do %>
   <span class="icon-angle-left"></span>
   <%= @poll.name %>
 <% end %>
@@ -100,6 +100,6 @@
     <% end %>
   </div>
   <div class="tabs-panel is-active" id="tab-results">
-    <%= render "results" %>
+    <%= render "admin/poll/booth_assignments/results" %>
   </div>
 </div>

@@ -10,7 +10,7 @@ module FormularFieldsAdminActions
 
   def new
     @formular_field = @formular.formular_fields.new
-    authorize!(:new, @formular_field) unless current_user.administrator?
+    authorize!(:new, @formular_field)
 
     render "custom/admin/formular_fields/new"
   end
@@ -18,7 +18,7 @@ module FormularFieldsAdminActions
   def create
     @formular_field = FormularField.new(formular_field_params)
     @formular_field.formular = @formular
-    authorize!(:create, @formular_field) unless current_user.administrator?
+    authorize!(:create, @formular_field)
 
     if @formular_field.save
       render "custom/admin/formular_fields/create"
@@ -28,14 +28,14 @@ module FormularFieldsAdminActions
   end
 
   def edit
-    authorize!(:new, @formular_field) unless current_user.administrator?
+    authorize!(:new, @formular_field)
     @formular_field.set_custom_attributes
 
     render "custom/admin/formular_fields/edit"
   end
 
   def update
-    authorize!(:update, @formular_field) unless current_user.administrator?
+    authorize!(:update, @formular_field)
 
     if @formular_field.update(formular_field_params)
       render "custom/admin/formular_fields/update"
@@ -45,14 +45,14 @@ module FormularFieldsAdminActions
   end
 
   def destroy
-    authorize!(:destroy, @formular_field) unless current_user.administrator?
+    authorize!(:destroy, @formular_field)
 
     @formular_field.destroy!
     render "custom/admin/formular_fields/destroy"
   end
 
   def order_formular_fields
-    authorize!(:order_formular_fields, @projekt_phase) unless current_user.administrator?
+    authorize!(:order_formular_fields, @projekt_phase)
     @formular.formular_fields.order_formular_fields(params[:ordered_list])
     head :ok
   end

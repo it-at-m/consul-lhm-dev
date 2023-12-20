@@ -19,6 +19,13 @@ class Poll::Question < ApplicationRecord
     end
   end
 
+  def self.model_name
+    mname = super
+    mname.instance_variable_set(:@route_key, "questions")
+    mname.instance_variable_set(:@singular_route_key, "question")
+    mname
+  end
+
   def open_question_answer
     question_answers.where(open_answer: true).last
   end

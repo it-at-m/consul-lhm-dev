@@ -9,7 +9,7 @@
       </li>
     <% else %>
       <li>
-        <%= link_to admin_poll_path(@poll) do %>
+        <%= link_to polymorphic_path([@namespace, @poll]) do %>
           <%= t("admin.polls.show.questions_tab") %>
           (<%= @poll.questions.count %>)
         <% end %>
@@ -26,7 +26,7 @@
     </li>
   <% else %>
     <li>
-      <%= link_to admin_poll_booth_assignments_path(@poll) do %>
+      <%= link_to polymorphic_path([@namespace, @poll, :booth_assignments]) do %>
         <%= t("admin.polls.show.booths_tab") %>
         (<%= @poll.booth_assignments.select(:booth_id).distinct.count %>)
       <% end %>
@@ -42,7 +42,7 @@
     </li>
   <% else %>
     <li>
-      <%= link_to admin_poll_officer_assignments_path(@poll) do %>
+      <%= link_to polymorphic_path([@namespace, @poll, :officer_assignments]) do %>
         <%= t("admin.polls.show.officers_tab") %>
         (<%= @poll.officer_assignments.select(:officer_id).distinct.count %>)
       <% end %>
@@ -57,7 +57,7 @@
     </li>
   <% else %>
     <li>
-      <%= link_to t("admin.polls.show.recounts_tab"), admin_poll_recounts_path(@poll) %>
+      <%= link_to t("admin.polls.show.recounts_tab"), polymorphic_path([@namespace, @poll, :recounts]) %>
     </li>
   <% end %>
 
@@ -69,7 +69,7 @@
     </li>
   <% else %>
     <li>
-      <%= link_to t("admin.polls.show.results_tab"), admin_poll_results_path(@poll) %>
+      <%= link_to t("admin.polls.show.results_tab"), polymorphic_path([@namespace, @poll, :results]) %>
     </li>
   <% end %>
 </ul>

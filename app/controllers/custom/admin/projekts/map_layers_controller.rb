@@ -6,19 +6,19 @@ class Admin::Projekts::MapLayersController < Admin::BaseController
     @map_layer = @projekt.map_layers.build
     @namespace = params[:namespace]
 
-    authorize!(:new, @map_layer) unless current_user.administrator?
+    authorize!(:new, @map_layer)
   end
 
   def edit
     @namespace = params[:namespace]
 
-    authorize!(:edit, @map_layer) unless current_user.administrator?
+    authorize!(:edit, @map_layer)
   end
 
   def create
     @map_layer = @projekt.map_layers.new(map_layer_params)
 
-    authorize!(:create, @map_layer) unless current_user.administrator?
+    authorize!(:create, @map_layer)
 
     if @map_layer.save
       redirect_to redirect_path(params[:projekt_id], params[:tab].to_s),
@@ -30,7 +30,7 @@ class Admin::Projekts::MapLayersController < Admin::BaseController
   end
 
   def update
-    authorize!(:update, @map_layer) unless current_user.administrator?
+    authorize!(:update, @map_layer)
 
     if @map_layer.update(map_layer_params)
       redirect_to redirect_path(params[:projekt_id], params[:tab].to_s),
@@ -42,7 +42,7 @@ class Admin::Projekts::MapLayersController < Admin::BaseController
   end
 
   def destroy
-    authorize!(:destroy, @map_layer) unless current_user.administrator?
+    authorize!(:destroy, @map_layer)
 
     @map_layer.destroy!
     redirect_to redirect_path(params[:projekt_id], params[:tab].to_s)

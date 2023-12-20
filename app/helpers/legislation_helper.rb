@@ -17,8 +17,8 @@ module LegislationHelper
     #   "milestones"     => admin_legislation_process_milestones_path(process)
     # }
     {
-      "info"           => edit_admin_legislation_process_path(process),
-      "draft_versions" => admin_legislation_process_draft_versions_path(process),
+      "info"           => polymorphic_path([@namespace, process], action: :edit),
+      "draft_versions" => polymorphic_path([@namespace, process, :draft_versions])
     }
   end
 

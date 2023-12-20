@@ -20,10 +20,10 @@
   <% end %>
 
   <div class="clear">
-    <% if respond_to?(:single_heading?) && single_heading? %>
+    <%# if respond_to?(:single_heading?) && single_heading? %>
       <%= f.submit t("admin.budgets_wizard.groups.continue"), class: "button success" %>
-    <% else %>
-      <%= f.submit t("admin.budget_groups.form.#{action}"), class: "button hollow" %>
-    <% end %>
+    <%# else %>
+      <%#= f.submit t("admin.budget_groups.form.#{action}"), class: "button hollow" %>
+    <%# end %>
   </div>
 <% end %>
