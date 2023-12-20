@@ -16,6 +16,12 @@
     </li>
   <% end %>
 
+  <% if current_user.projekt_manager? %>
+    <li class='nav-element flyout-item js-access-flyout-menu-item focusable'>
+      <%= link_to t("custom.layouts.header.projekt_management"), projekt_management_root_path %>
+    </li>
+  <% end %>
+
   <% if current_user.administrator? || current_user.moderator? %>
     <li class="nav-element flyout-item js-access-flyout-menu-item focusable">
       <%= link_to t("layouts.header.moderation"), moderation_root_path %>
