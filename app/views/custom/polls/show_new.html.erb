@@ -59,6 +59,7 @@
                   <div
                       class="question-wizard-item js-question-wizard-item <%= additional_class %>"
                       data-question-id="<%= question.id %>"
+                      data-next-question-id="<%= question.next_question_id %>"
                       data-question-number="<%= index + 1 %>">
                       <%= render Polls::Questions::QuestionComponent.new(question: question) %>
                   </div>

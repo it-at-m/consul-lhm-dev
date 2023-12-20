@@ -43,4 +43,8 @@ class Poll::Question < ApplicationRecord
       end
     end
   end
+
+  def sibling_questions
+    (poll.questions.where(parent_question_id: nil).to_a - [self]).map { |question| [question.title, question.id] }
+  end
 end

@@ -41,22 +41,22 @@
       );
       var nextQuestion;
 
-      console.log(alreadyAnsweredOption)
+      console.log(currentQuestion)
       if (alreadyAnsweredOption && alreadyAnsweredOption.dataset.nextQuestionId) {
         nextQuestion = this.getQuestionById(alreadyAnsweredOption.dataset.nextQuestionId);
-
-        var $questionsToMarkAsDisabled =
-          $(currentQuestion)
-            .nextUntil(
-              ".js-question-wizard [data-question-id='" + alreadyAnsweredOption.dataset.nextQuestionId + "']"
-            );
-
-        $questionsToMarkAsDisabled.addClass("-disabled");
+      }
+      else if (currentQuestion.dataset.nextQuestionId) {
+        nextQuestion = this.getQuestionById(currentQuestion.dataset.nextQuestionId);
       } else {
         nextQuestion = currentQuestion.nextElementSibling;
       }
 
+      this.markQuestionsAsDisabledBetween(currentQuestion, nextQuestion);
       this.navigateToQuestion(nextQuestion);
+    },
+
+    markQuestionsAsDisabledBetween: function(currentQuestion, nextQuestion) {
+      $(currentQuestion).nextUntil(nextQuestion).addClass("-disabled");
     },
 
     firstQuestion: function() {
