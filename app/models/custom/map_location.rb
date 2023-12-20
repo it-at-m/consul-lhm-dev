@@ -57,7 +57,7 @@ class MapLocation < ApplicationRecord
       proposal.sentiment.color
 
     elsif investment.present?
-      investment.projekt.color
+      investment.projekt&.color || "#004a83"
 
     elsif deficiency_report.present?
       deficiency_report.category.color
