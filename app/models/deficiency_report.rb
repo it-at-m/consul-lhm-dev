@@ -15,7 +15,7 @@ class DeficiencyReport < ApplicationRecord
   acts_as_paranoid column: :hidden_at
   include ActsAsParanoidAliases
 
-  audited on: [:update, :destroy]
+  audited
   has_associated_audits
   translation_class.class_eval do
     audited associated_with: :globalized_model,
