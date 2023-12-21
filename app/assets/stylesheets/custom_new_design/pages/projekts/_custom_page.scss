@@ -85,6 +85,18 @@
     h1 {
       color: $dt-base;
     }
+
+    @media(max-width: $big-tablet-viewport-start) {
+      padding: 0 40px;
+    }
+
+    @media(max-width: $small-tablet-viewport-start) {
+      padding: 0 30px;
+    }
+
+    @media(max-width: $mobile-viewport-start) {
+      padding: 0 20px;
+    }
   }
 
   .custom-page--banner-wrapper {
@@ -93,6 +105,10 @@
     height: 400px;
     margin: auto;
     margin-bottom: 70px;
+
+    @media(max-width: $small-tablet-viewport-start) {
+      margin-bottom: 20px;
+    }
   }
 
   .custom-page--banner-title {
@@ -113,6 +129,16 @@
     padding-bottom: 40px;
     max-width: 50%;
     flex-grow: 1;
+
+    @media(max-width: $small-tablet-viewport-start) {
+      padding-top: 50px;
+    }
+
+    @media(max-width: $mobile-viewport-start) {
+      padding-top: 40px;
+      padding-bottom: 130px;
+      max-width: 100%;
+    }
   }
 
   .custom-page--banner-text-section {
@@ -120,13 +146,32 @@
   }
 
   .custom-page--banner-image {
-    width: 54%;
+    // width: 54%;
+    min-width: 620px;
     position: relative;
     bottom: -50px;
     height: 390px !important;
 
     & > .resource-image {
       border-radius: 10px;
+    }
+
+    @media(max-width: 1150px) {
+      min-width: 434px;
+      height: 273px !important;
+    }
+
+    @media(max-width: 780px) {
+      min-width: 310px;
+      height: 195px !important;
+    }
+
+    @media(max-width: $mobile-viewport-start) {
+      min-width: 250px;
+      height: 250px !important;
+      position: absolute;
+      bottom: -130px;
+      width: calc(100vw - 40px);
     }
   }
 
@@ -221,12 +266,6 @@
       height: auto;
     }
 
-    .custom-page--banner-text-section-wrapper {
-      padding-top: 40px;
-      padding-bottom: 130px;
-      max-width: 100%;
-    }
-
     .custom-page--banner-text-section {
       max-width: 100%;
     }
@@ -238,15 +277,8 @@
 
     .custom-page--banner-title {
       font-size: 24px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       margin-top: 0px;
-    }
-
-    .custom-page--banner-image {
-      height: 250px !important;
-      position: absolute;
-      bottom: -130px;
-      width: calc(100% - 55px);
     }
 
     .page-subnav-tab {
