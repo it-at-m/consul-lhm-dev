@@ -5,5 +5,5 @@
 </h2>
 
 <div class="poll-question-answer-video-form">
-  <%= render "form", form_url: admin_video_path(@video) %>
+  <%= render "admin/poll/questions/answers/videos/form", form_url: polymorphic_path([@namespace, @video]) %>
 </div>

@@ -8,13 +8,17 @@ module Admin::BudgetGroupsActions
 
     before_action :load_budget
     before_action :load_group, only: [:edit, :update, :destroy]
+    before_action :correct_namespace #custom
   end
 
   def edit
+    render "admin/budgets_wizard/groups/edit"
   end
 
   def create
     @group = @budget.groups.new(budget_group_params)
+    authorize!(:create, @budget) if @namespace.to_s.start_with?("projekt_management")
+
     if @group.save
       redirect_to groups_index, notice: t("admin.budget_groups.create.notice")
     else
@@ -23,14 +27,18 @@ module Admin::BudgetGroupsActions
   end
 
   def update
+    authorize!(:create, @budget) if @namespace.to_s.start_with?("projekt_management")
+
     if @group.update(budget_group_params)
       redirect_to groups_index, notice: t("admin.budget_groups.update.notice")
     else
-      render :edit
+      render "admin/budgets_wizard/groups/edit"
     end
   end
 
   def destroy
+    authorize!(:create, @budget) if @namespace.to_s.start_with?("projekt_management")
+
     if @group.headings.any?
       redirect_to groups_index, alert: t("admin.budget_groups.destroy.unable_notice")
     else
@@ -61,5 +69,11 @@ module Admin::BudgetGroupsActions
       valid_attributes = [:max_votable_headings]
 
       [*valid_attributes, translation_params(Budget::Group)]
+    end
+
+    def correct_namespace
+      if params[:controller].include?("budgets_wizard")
+        @namespace = (@namespace.to_s + "_" + "budgets_wizard").to_sym
+      end
     end
 end

@@ -5,7 +5,7 @@
     <div class="flex-layout">
       <div class="main-column">
         <div class="resource-page--title-subline">
-          <%= render_custom_block("polls_show_welcome_text", custom_prefix: @poll.author.name, default_content: t("custom.polls.show.welcome_default_text")) %>
+          <%= render_custom_block("polls_show_welcome_text", custom_prefix: @poll.author&.name, default_content: t("custom.polls.show.welcome_default_text")) %>
         </div>
       </div>
       <div class="sidebar-placeholder"></div>
@@ -31,103 +31,17 @@
 
         <div class="margin clear" data-equalizer data-equalize-on="medium">
           <div class="small-12 medium-2 column" data-equalizer-watch>
-            <p><strong><%= t("polls.show.results.title") %></strong></p>
-            <ul class="menu vertical">
-              <%- @poll.questions.each do |question| %>
+            <h4><strong><%= t("polls.show.results.title") %></strong></h4>
+            <ul class="menu vertical poll-results-menu">
+              <%- @poll.questions.root_questions.each do |question| %>
                 <li><%= link_to question.title, "##{question.title.parameterize}" %></li>
               <% end %>
             </ul>
           </div>
 
           <div class="small-12 medium-9 column" data-equalizer-watch>
-            <%- @poll.questions.each do |question| %>
-              <% most_voted_answer_votes = question.most_voted_answer_votes %>
-              <h3 id="<%= question.title.parameterize %>">
-                <%= question.title %>
-                <% if question.votation_type.present? && VotationType.allowing_multiple_answers.include?(question.votation_type.vote_type) %>
-                  <small>
-                    (<%= t("poll_questions.show.question.multiple") %>)
-                  </small>
-                <% end %>
-              </h3>
-              <div style="margin-bottom:0.5rem;margin-top:-0.5rem;"><%= AdminWYSIWYGSanitizer.new.sanitize(question.description) %></div>
-              <div class="results-table-wrapper">
-                <table id="question_<%= question.id %>_results_table" class='results-table'>
-                  <tbody>
-                    <%- question.question_answers.each do |answer| %>
-                      <tr>
-                        <td id="answer_<%= answer.id %>_result" class='results-column <%= answer.total_votes == most_voted_answer_votes ? "win" : "" %>' >
-                          <%= answer.total_votes %>
-                          (<%= answer.total_votes_percentage.round(2) %>%)
-                        </td>
-                        <td class='answers-column <%= answer.total_votes == most_voted_answer_votes ? "win" : "" %>' >
-                          <% if question.open_question_answer == answer %>
-                            <% open_answers = answer.all_open_answers %>
-                            <div class='poll-results-open-answers' id='<%= dom_id(answer, :open_answers)  %>'>
-                              <div class='open-answers-title js-show-open-answers <%= "no-open-answers" if open_answers.count == 0 %>'>
-                                <%= answer.title %>
-                              </div>
-
-                              <% if open_answers.count > 0 %>
-                              <div class='poll-results-open-answers-list'>
-                                <% page_name = ("page_a" + answer.id.to_s).to_sym %>
-                                <% open_answers.page(params[page_name]).per(20).each do |open_answer| %>
-                                  <div class='poll-results-open-answer'>
-                                    <div class='open-answer-info'>
-                                      <% if question.poll.show_open_answer_author_name %>
-                                        <%= avatar_image(open_answer.author, size: 32, class: "float-left user-avatar") %>
-                                        <span class='user-name'><%= open_answer.author.username %></span>
-                                      <% else %>
-                                        <%= avatar_image("A", size: 32, class: "float-left user-avatar") %>
-                                        <span class='user-name'><%= "anonymisiert" %></span>
-                                      <% end %>
-                                      <span><%= open_answer.created_at.localtime.strftime "%Y-%m-%d %H:%M:%S" %></span>
-                                    </div>
-                                    <div class='open-answer-text'>
-                                      <%= open_answer.open_answer_text %>
-                                    </div>
-                                  </div>
-                                <% end %>
-                                <%= paginate open_answers.page(params[page_name]).per(20), param_name: page_name %>
-                              </div>
-                              <% end %>
-
-                            </div>
-                          <% else %>
-                            <%= answer.title %>
-                          <% end %>
-                        </td>
-                        <td style='width:65px' class='<%= answer.total_votes == most_voted_answer_votes ? "win" : "" %>'>
-                          <% if answer.total_votes > 0 %>
-                            <% if can? :stats, answer.question.poll %>
-                              <%= link_to stats_poll_question_answer_path(answer.question.poll, answer), remote: true, style: "margin-right:7px;text-decoration:none;", title: t("custom.polls.results.question_street_details_tooltip") do %>
-                                <i class="fas fa-chart-pie"></i>
-                              <% end %>
-                            <% end %>
-
-                            <div class="reveal" id="<%= dom_id(answer, :answer_stats) %>" data-reveal></div>
-
-                            <% if can? :results, answer.question.poll %>
-                              <%= link_to results_poll_question_answer_path(answer.question.poll, answer), remote: true, title: t("custom.polls.results.question_answer_details_tooltip") do %>
-                                <i class="fas fa-clipboard-list"></i>
-                              <% end %>
-                            <% end %>
-                            <div class="reveal" id="<%= dom_id(answer, :answer_results) %>" data-reveal></div>
-                          <% end %>
-                        </td>
-                      </tr>
-                    <% end %>
-                  </tbody>
-                </table>
-                <% if can? :csv_answers_streets, question %>
-                  <%= link_to t('custom.polls.results.question_street_details_csv_link'), polls_question_csv_answers_streets_path(question.id, format: :csv) %>
-                  &nbsp;|&nbsp;
-                <% end %>
-                <% if can? :csv_answers_votes, question %>
-                  <%= link_to t('custom.polls.results.question_answer_details_csv_link'), polls_question_csv_answers_votes_path(question.id, format: :csv) %>
-                <% end %>
-              </div>
-
+            <%- @poll.questions.root_questions.each do |question| %>
+              <%= render Polls::Questions::QuestionResultComponent.new(question: question) %>
             <% end %>
           </div>
         </div>

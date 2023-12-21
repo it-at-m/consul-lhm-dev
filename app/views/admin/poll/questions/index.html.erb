@@ -3,16 +3,16 @@
 <%= link_to t("admin.questions.index.create"), new_admin_question_path,
             class: "button float-right" %>
 
-<%= render "search" %>
+<%= render "admin/poll/questions/search" %>
 
 <div class="tabs-content" data-tabs-content="questions-tabs">
-  <%= render "filter_subnav" %>
+  <%= render "admin/poll/questions/filter_subnav" %>
 
   <div class="tabs-panel is-active" id="tab-questions">
-    <%= render "questions" %>
+    <%= render "admin/poll/questions/questions" %>
   </div>
 
   <div class="tabs-panel" id="tab-successful-proposals">
-    <%= render "successful_proposals" %>
+    <%= render "admin/poll/questions/successful_proposals" %>
   </div>
 </div>

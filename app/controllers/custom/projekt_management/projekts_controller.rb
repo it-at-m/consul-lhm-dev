@@ -3,6 +3,6 @@ class ProjektManagement::ProjektsController < ProjektManagement::BaseController
 
   def index
     authorize!(:index, Projekt)
-    @projekts = Projekt.with_pm_permission_to("manage", projekt_manager)
+    @projekts = projekts_with_authorization_to("manage")
   end
 end

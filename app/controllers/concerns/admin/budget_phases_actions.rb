@@ -7,25 +7,33 @@ module Admin::BudgetPhasesActions
 
     before_action :load_budget
     before_action :load_phase, only: [:edit, :update, :toggle_enabled]
+    before_action :correct_namespace #custom
   end
 
   def edit
+    authorize!(:create, @budget) if @namespace.to_s.start_with?("projekt_management")
+
+    render "admin/budgets_wizard/phases/edit"
   end
 
   def update
+    authorize!(:create, @budget) if @namespace.to_s.start_with?("projekt_management")
+
     if @phase.update(budget_phase_params)
       redirect_to phases_index, notice: t("flash.actions.save_changes.notice")
     else
-      render :edit
+      render "admin/budgets_wizard/phases/edit"
     end
   end
 
   def toggle_enabled
+    authorize!(:create, @budget) if @namespace.to_s.start_with?("projekt_management")
+
     @phase.update!(enabled: !@phase.enabled)
 
     respond_to do |format|
       format.html { redirect_to phases_index, notice: t("flash.actions.save_changes.notice") }
-      format.js
+      format.js { render "admin/budgets_wizard/phases/toggle_enabled" }
     end
   end
 
@@ -48,5 +56,11 @@ module Admin::BudgetPhasesActions
                           image_attributes: image_attributes]
 
       [*valid_attributes, translation_params(Budget::Phase)]
+    end
+
+    def correct_namespace
+      if params[:controller].include?("budgets_wizard")
+        @namespace = (@namespace.to_s + "_" + "budgets_wizard").to_sym
+      end
     end
 end

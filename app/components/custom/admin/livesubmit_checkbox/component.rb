@@ -1,9 +1,9 @@
 class Admin::LivesubmitCheckbox::Component < ApplicationComponent
-  def initialize(url:, resource_name: , attribute_name:, id:, current_value:)
+  def initialize(url:, resource_name: , attribute_name:, record_id: nil, current_value:)
     @url = url
     @resource_name = resource_name
     @attribute_name = attribute_name
-    @id = id
+    @record_id = record_id
     @current_value = current_value
   end
 

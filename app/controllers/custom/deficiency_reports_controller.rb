@@ -134,6 +134,29 @@ class DeficiencyReportsController < ApplicationController
     redirect_to deficiency_report_path(@deficiency_report)
   end
 
+  def notify_officer_about_new_comments
+    enable = ["1", "true"].include?(deficiency_report_params[:notify_officer_about_new_comments])
+    datetime = enable ? Time.current : nil
+
+    if @deficiency_report.update!(
+      notify_officer_about_new_comments: deficiency_report_params[:notify_officer_about_new_comments],
+      notified_officer_about_new_comments_datetime: datetime
+    ) && enable
+      last_comment_date = @deficiency_report.comments.last.created_at
+      last_comment_date_expanded = last_comment_date - 5.minutes
+      new_comments = @deficiency_report.comments.created_after_date(last_comment_date_expanded)
+
+      if new_comments.any?
+        NotificationServiceMailer.new_comments_for_deficiency_report(
+          @deficiency_report,
+          last_comment_date_expanded
+        ).deliver_now
+      end
+    end
+
+    head :ok
+  end
+
   def update_official_answer
     @deficiency_report.update(deficiency_report_params)
     Administrator.all.each do |admin|
@@ -151,7 +174,6 @@ class DeficiencyReportsController < ApplicationController
     @deficiency_report.register_vote(current_user, params[:value])
     set_deficiency_report_votes(@deficiency_report)
   end
-
 
   private
 
@@ -172,6 +194,7 @@ class DeficiencyReportsController < ApplicationController
                   :deficiency_report_category_id,
                   :deficiency_report_officer_id,
                   :deficiency_report_area_id,
+                  :notify_officer_about_new_comments,
                   map_location_attributes: map_location_attributes,
                   documents_attributes: document_attributes,
                   image_attributes: image_attributes]

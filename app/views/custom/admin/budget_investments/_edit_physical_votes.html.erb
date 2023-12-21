@@ -1,7 +1,7 @@
 <div id=<%= dom_id(investment, :edit_physical_votes) %>>
   <hr>
 
-  <%= form_with(url: edit_physical_votes_admin_budget_budget_investment_path, model: investment, method: :patch, local: false) do |f| %>
+  <%= form_with(url: polymorphic_path([@namespace, @budget, @investment], action: :edit_physical_votes), model: investment, method: :patch, local: false) do |f| %>
     <%= f.text_field :physical_votes %>
     <%= f.submit %>
 		<% if @answer_updated.present? %>

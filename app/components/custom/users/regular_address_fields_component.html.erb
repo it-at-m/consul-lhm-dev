@@ -1,0 +1,28 @@
+<div id="user-regular-address-fields" style="display:<%= @user.regular_address_fields_visible? ? "block" : "none" %>">
+  <div class="row">
+    <div class="small-12 medium-8 column">
+      <%= @f.text_field :city_name,
+        placeholder: t("custom.devise_views.users.registrations.new.city_name_label") %>
+    </div>
+    <div class="small-12 medium-4 column">
+      <%= @f.text_field :plz,
+        placeholder: t("custom.devise_views.users.registrations.new.plz_label") %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-12 column">
+      <%= @f.text_field :street_name,
+        placeholder: t("custom.devise_views.users.registrations.new.street_name_label") %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-12 medium-6 column">
+      <%= @f.text_field :street_number,
+        placeholder: t("custom.devise_views.users.registrations.new.street_number_label") %>
+    </div>
+    <div class="small-12 medium-6 column">
+      <%= @f.text_field :street_number_extension,
+        placeholder: t("custom.devise_views.users.registrations.new.street_number_extension_label") %>
+    </div>
+  </div>
+</div>

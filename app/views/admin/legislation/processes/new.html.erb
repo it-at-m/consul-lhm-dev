@@ -3,9 +3,9 @@
 <% end %>
 
 <div class="legislation-process-new">
-  <%= back_link_to admin_legislation_processes_path, t("admin.legislation.processes.new.back") %>
+  <%= back_link_to polymorphic_path([@namespace, :legislation_processes]), t("admin.legislation.processes.new.back") %>
 
   <h2><%= t("admin.legislation.processes.new.title") %></h2>
 
-  <%= render "form" %>
+  <%= render "admin/legislation/processes/form" %>
 </div>

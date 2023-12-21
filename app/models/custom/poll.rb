@@ -6,7 +6,7 @@ class Poll < ApplicationRecord
 
   belongs_to :old_projekt, class_name: "Projekt", foreign_key: "projekt_id" # TODO: remove column after data migration con1538
 
-  delegate :projekt, to: :projekt_phase
+  delegate :projekt, to: :projekt_phase, allow_nil: true
   belongs_to :projekt_phase
   has_many :geozone_restrictions, through: :projekt_phase
   has_many :geozone_affiliations, through: :projekt
@@ -43,14 +43,14 @@ class Poll < ApplicationRecord
         ProjektSetting.find_by(projekt: projekt, key: "projekt_feature.main.activate").value.present? &&
         ProjektSetting.find_by(projekt: projekt, key: "projekt_feature.general.show_in_sidebar_filter").value.present? &&
         projekt.all_parent_projekts.unshift(projekt).none? { |p| p.hidden_for?(current_user) } &&
-        Poll.base_selection.where(projekt_id: projekt.all_children_ids.unshift(projekt.id)).any?
+        Poll.base_selection.joins(projekt_phase: :projekt).where(projekt_phases: { projekts: { id: projekt.all_children_ids.unshift(projekt.id) }}).any?
       end.pluck(:id)
   end
 
   def self.scoped_projekt_ids_for_footer(projekt)
     projekt.top_parent.all_children_projekts.unshift(projekt.top_parent).select do |projekt|
       ProjektSetting.find_by( projekt: projekt, key: 'projekt_feature.main.activate').value.present? &&
-      Poll.base_selection.where(projekt_id: projekt.all_children_ids.unshift(projekt.id)).any?
+      Poll.base_selection.joins(projekt_phase: :projekt).where(projekt_phases: { projekts: { id: projekt.all_children_ids.unshift(projekt.id) }}).any?
     end.pluck(:id)
   end
 

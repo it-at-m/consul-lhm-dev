@@ -9,7 +9,7 @@ module ProjektArgumentAdminActions
 
   def create
     @projekt_argument = @projekt_phase.projekt_arguments.new(projekt_argument_params)
-    authorize!(:create, @projekt_argument) unless current_user.administrator?
+    authorize!(:create, @projekt_argument)
 
     @projekt_argument.save!
     redirect_to polymorphic_path([@namespace, @projekt_phase], action: "projekt_arguments"),
@@ -17,7 +17,7 @@ module ProjektArgumentAdminActions
   end
 
   def update
-    authorize!(:update, @projekt_argument) unless current_user.administrator?
+    authorize!(:update, @projekt_argument)
 
     @projekt_argument.update!(projekt_argument_params)
     redirect_to polymorphic_path([@namespace, @projekt_phase], action: "projekt_arguments"),
@@ -25,14 +25,14 @@ module ProjektArgumentAdminActions
   end
 
   def destroy
-    authorize!(:destroy, @projekt_argument) unless current_user.administrator?
+    authorize!(:destroy, @projekt_argument)
 
     @projekt_argument.destroy!
     redirect_to polymorphic_path([@namespace, @projekt_phase], action: "projekt_arguments")
   end
 
   def send_notifications
-    authorize!(:send_notifications, @projekt_phase) unless current_user.administrator?
+    authorize!(:send_notifications, @projekt_phase)
 
     NotificationServices::ProjektArgumentsNotifier.call(@projekt_phase.id)
     redirect_to polymorphic_path([@namespace, @projekt_phase], action: "projekt_arguments"),

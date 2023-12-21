@@ -39,7 +39,7 @@
         </div>
       <% end %>
 
-    <% elsif budget_investment.should_show_ballots? && location_allows_ballots? %>
+    <% elsif budget_investment.should_show_ballots? && location_allows_ballots? && ballot.present? %>
       <% c.footer_section do %>
         <div id="<%= dom_id(budget_investment) %>_ballot"
              class="small-12 medium-3 column text-center ballot-section">

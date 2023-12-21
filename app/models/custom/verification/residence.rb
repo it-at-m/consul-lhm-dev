@@ -14,10 +14,10 @@ class Verification::Residence
   validates :gender, presence: true
   validates :date_of_birth, presence: true
 
-  validates :city_name, presence: true, if: :show_no_registered_address_field?
-  validates :plz, presence: true, if: :show_no_registered_address_field?
-  validates :street_name, presence: true, if: :show_no_registered_address_field?
-  validates :street_number, presence: true, if: :show_no_registered_address_field?
+  validates :city_name, presence: true, if: :regular_address_fields_visible?
+  validates :plz, presence: true, if: :regular_address_fields_visible?
+  validates :street_name, presence: true, if: :regular_address_fields_visible?
+  validates :street_number, presence: true, if: :regular_address_fields_visible?
 
   validates :document_type, presence: true, if: :document_required?
   validates :document_last_digits, presence: true, if: :document_required?
@@ -63,11 +63,13 @@ class Verification::Residence
     Setting["extra_fields.verification.check_documents"].present?
   end
 
-  def show_no_registered_address_field?
-    return true if RegisteredAddress::Street.none?
+  def regular_address_fields_visible?
+    return true if RegisteredAddress.none?
+    return true if form_registered_address_city_id == "0"
+    return false if form_registered_address_city_id.blank?
+    return false if form_registered_address_city_id.present? && form_registered_address_street_id.blank?
+    return false if form_registered_address_street_id.present? && form_registered_address_id.blank?
 
-    form_registered_address_city_id == "0" ||
-      form_registered_address_street_id == "0" ||
-      form_registered_address_id == "0"
+    user.registered_address_id.blank?
   end
 end

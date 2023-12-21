@@ -1,23 +1,25 @@
 <div class="budget-creation-step">
-  <% if single_heading? %>
+  <%# if single_heading? %>
     <%= content %>
-  <% else %>
-    <button type="button" class="add" aria-expanded="<%= show_form? %>">
-      <%= t("admin.#{i18n_namespace_with_budget}.index.new_button") %>
+  <%# else %>
+    <!--
+    <button type="button" class="add" aria-expanded="<%#= show_form? %>">
+      <%#= t("admin.#{i18n_namespace_with_budget}.index.new_button") %>
     </button>
 
-    <%= content %>
+    <%#= content %>
 
-    <button type="button" class="cancel delete"><%= t("links.form.cancel_button") %></button>
+    <button type="button" class="cancel delete"><%#= t("links.form.cancel_button") %></button>
 
-    <% if next_step_path %>
-      <%= link_to t("admin.budgets_wizard.#{i18n_namespace}.continue"),
+    <%# if next_step_path %>
+      <%#= link_to t("admin.budgets_wizard.#{i18n_namespace}.continue"),
                   next_step_path,
                   class: "next-step" %>
-    <% else %>
+    <%# else %>
       <p class="next-step">
-        <%= t("admin.budgets_wizard.#{i18n_namespace}.continue") %>
+        <%#= t("admin.budgets_wizard.#{i18n_namespace}.continue") %>
       </p>
-    <% end %>
-  <% end %>
+    <%# end %>
+    -->
+  <%# end %>
 </div>

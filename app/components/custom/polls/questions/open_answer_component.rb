@@ -21,4 +21,10 @@ class Polls::Questions::OpenAnswerComponent < ApplicationComponent
   def open_answer
     @open_answer ||= question.answers.find_or_initialize_by(author: current_user, answer: question.open_question_answer.title)
   end
+
+  def additional_form_class
+    if open_answer.open_answer_text.present?
+      "js-question-answered"
+    end
+  end
 end

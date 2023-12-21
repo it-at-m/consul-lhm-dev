@@ -10,13 +10,13 @@ module MapLayerAdminActions
   def new
     @map_layer = MapLayer.new
     @map_layer.mappable = @mappable
-    authorize!(:new, @map_layer) unless current_user.administrator?
+    authorize!(:new, @map_layer)
 
     render "custom/admin/map_layers/new"
   end
 
   def edit
-    authorize!(:edit, @map_layer) unless current_user.administrator?
+    authorize!(:edit, @map_layer)
 
     render "custom/admin/map_layers/edit"
   end
@@ -25,7 +25,7 @@ module MapLayerAdminActions
     @map_layer = MapLayer.new(map_layer_params)
     @map_layer.mappable = @mappable
 
-    authorize!(:create, @map_layer) unless current_user.administrator?
+    authorize!(:create, @map_layer)
 
     if @map_layer.save
       redirect_to params[:return_path], notice: t("admin.settings.index.map.flash.update")
@@ -35,7 +35,7 @@ module MapLayerAdminActions
   end
 
   def update
-    authorize!(:update, @map_layer) unless current_user.administrator?
+    authorize!(:update, @map_layer)
 
     if @map_layer.update(map_layer_params)
       redirect_to params[:return_path], notice: t("admin.settings.index.map.flash.update")
@@ -45,7 +45,7 @@ module MapLayerAdminActions
   end
 
   def destroy
-    authorize!(:destroy, @map_layer) unless current_user.administrator?
+    authorize!(:destroy, @map_layer)
 
     @map_layer.destroy!
     redirect_to params[:return_path]

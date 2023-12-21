@@ -1,16 +1,16 @@
 <% open_asnwer_form = capture do %>
-  <%= form_for open_answer, url: update_open_answer_path(question), method: :post, remote: true, html: { class: "poll-open-answer-form" } do |f| %>
+  <%= form_for open_answer, url: update_open_answer_path(question), method: :post, remote: true, html: { class: "poll-open-answer-form #{additional_form_class}", data: { next_question_id: question.open_question_answer.next_question_id } } do |f| %>
     <%= f.text_area :open_answer_text, disabled: !can_answer?, label: open_answer.answer, placeholder: open_answer.answer %>
     <%= f.hidden_field :answer %>
     <% if open_answer.open_answer_text.present? %>
-      <%= f.submit t("custom.polls.questions.answers.update_open_answer"), disabled: !can_answer?, class: "button open-answer" %>
+      <%= f.submit t("custom.polls.questions.answers.update_open_answer"), disabled: !can_answer?, class: "button hollow open-answer" %>
       <% if @open_answer_updated %>
         <div class='open-answer-saved-notice'>
           <%= t("custom.admin.polls.questions.answers.notice.open_answer_saved") %>
         </div>
       <% end %>
     <% else %>
-      <%= f.submit t("custom.polls.questions.answers.save_open_answer"), disabled: !can_answer?, class: "button open-answer" %>
+      <%= f.submit t("custom.polls.questions.answers.save_open_answer"), disabled: !can_answer?, class: "button hollow open-answer" %>
     <% end %>
   <% end %>
 <% end %>

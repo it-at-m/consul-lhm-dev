@@ -93,12 +93,14 @@
   <% if setting["welcomepage.newsletter_subscription"].present? %>
     <%= render Shared::SidebarCardComponent.new(title: "Newsletter", icon_name: "envelope") do |c| %>
       <% if current_user.present? %>
-        <%= form_for current_user, as: :account, url: account_path, format: :js, remote: true do |f| %>
-          <div>
-            <%= f.check_box :newsletter, { label: t("custom.account.settings.newsletter_on_home_page"), class: "checkbox-label--aligned" } %>
-          </div>
-          <%= f.submit t("custom.account.show.save_settings"), class: "button margin-top" %>
-        <% end %>
+        <div class="admin">
+        <%= render Admin::LivesubmitCheckbox::Component.new(
+          url: account_path,
+          resource_name: "account",
+          attribute_name: "newsletter",
+          current_value: current_user.newsletter
+        ) %>
+        </div>
       <% else %>
         <p>Nicht registriert? Jetzt abonnieren</p>
         <div id="newsletter-subscribtion-form">

@@ -1,6 +1,10 @@
 require_dependency Rails.root.join("app", "models", "user").to_s
 
 class User < ApplicationRecord
+  audited only: [:username, :first_name, :last_name, :registered_address_id,
+                 :city_name, :plz, :street_name, :street_number, :street_number_extension,
+                 :unique_stamp, :verified_at]
+
   include Imageable
   has_one_attached :background_image
 
@@ -13,6 +17,7 @@ class User < ApplicationRecord
          authentication_keys: [:login]
 
   delegate :registered_address_street, to: :registered_address, allow_nil: true
+  delegate :registered_address_city, to: :registered_address, allow_nil: true
 
   attr_accessor :form_registered_address_city_id,
                 :form_registered_address_street_id,
@@ -45,10 +50,10 @@ class User < ApplicationRecord
   validates :gender, presence: true, on: :create, if: :extended_registration?
   validates :date_of_birth, presence: true, on: :create, if: :extended_registration?
 
-  validates :city_name, presence: true, on: :create, if: :show_no_registered_address_field?
-  validates :plz, presence: true, on: :create, if: :show_no_registered_address_field?
-  validates :street_name, presence: true, on: :create, if: :show_no_registered_address_field?
-  validates :street_number, presence: true, on: :create, if: :show_no_registered_address_field?
+  validates :city_name, presence: true, on: :create, if: :regular_address_fields_visible?
+  validates :plz, presence: true, on: :create, if: :regular_address_fields_visible?
+  validates :street_name, presence: true, on: :create, if: :regular_address_fields_visible?
+  validates :street_number, presence: true, on: :create, if: :regular_address_fields_visible?
 
   validates :document_type, presence: true, on: :create, if: :document_required?
   validates :document_last_digits, presence: true, on: :create, if: :document_required?
@@ -120,23 +125,31 @@ class User < ApplicationRecord
     end
   end
 
-  def show_no_registered_address_field?
+  def regular_address_fields_visible?
     return false unless extended_registration?
-    return true if RegisteredAddress::Street.none?
+    return true if RegisteredAddress.none?
+    return true if form_registered_address_city_id == "0"
+    return false if persisted? && registered_address_id.present?
 
-    form_registered_address_city_id == "0" ||
-      form_registered_address_street_id == "0" ||
-      form_registered_address_id == "0"
+    false
   end
 
   def verify!
     return false unless stamp_unique?
 
     take_votes_from_erased_user
-    update_columns(
+    update!(
       verified_at: Time.current,
       unique_stamp: prepare_unique_stamp,
       geozone_id: geozone_with_plz&.id
+    )
+  end
+
+  def unverify!
+    update!(
+      verified_at: nil,
+      unique_stamp: nil,
+      geozone_id: nil
     )
   end
 
@@ -311,5 +324,9 @@ class User < ApplicationRecord
       if User.only_hidden.find_by(email: email).present?
         errors.add(:email, "Diese E-Mail-Adresse wurde bereits verwendet. Ggf. wurde das Konto geblockt. Bitte kontaktieren Sie uns per E-Mail.")
       end
+    end
+
+    def remove_audits
+      audits.destroy_all
     end
 end

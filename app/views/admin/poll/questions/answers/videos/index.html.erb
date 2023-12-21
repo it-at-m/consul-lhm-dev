@@ -1,4 +1,4 @@
-<%= back_link_to admin_question_path(@answer.question_id) %>
+<%= back_link_to polymorphic_path([@namespace, @answer.question]) %>
 
 <div class="clear"></div>
 
@@ -7,7 +7,7 @@
 </h2>
 
 <%= link_to t("admin.answers.videos.index.add_video"),
-            new_admin_answer_video_path,
+            polymorphic_path([@namespace, @answer, :video], action: :new),
             class: "button success float-right" %>
 
 <div>

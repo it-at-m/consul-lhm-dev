@@ -21,6 +21,13 @@ class Poll
       (partial_results.count + recounts.count).positive?
     end
 
+    def self.model_name # custom
+      mname = super
+      mname.instance_variable_set(:@route_key, "booth_assignments")
+      mname.instance_variable_set(:@singular_route_key, "booth_assignment")
+      mname
+    end
+
     private
 
       def shifts

@@ -1,12 +1,12 @@
 <h3 class="inline-block"><%= t("admin.polls.show.questions_title") %></h3>
 
-<%= link_to t("custom.admin.questions.index.create_bundle"), new_admin_question_path(poll_id: @poll.id, bundle_question: true),
+<%= link_to t("custom.admin.questions.index.create_bundle"), polymorphic_path([@namespace, :question], action: :new, poll_id: @poll.id, bundle_question: true),
             class: "button float-right" %>
 
-<%= link_to t("custom.admin.questions.index.create_normal"), new_admin_question_path(poll_id: @poll.id),
+<%= link_to t("custom.admin.questions.index.create_normal"), polymorphic_path([@namespace, :question], action: :new, poll_id: @poll.id),
             class: "button float-right" %>
 
-<%= link_to t("custom.admin.polls.poll.send_notifications"), send_notifications_admin_poll_path(@poll.id),
+<%= link_to t("custom.admin.polls.poll.send_notifications"), polymorphic_path([@namespace, @poll], action: :send_notifications),
             class: "button float-right", method: :put, data: { confirm: t("custom.admin.polls.poll.send_notifications_confirm") } %>
 
 <% if @poll.questions.root_questions.empty? %>
@@ -22,9 +22,9 @@
         <th><%= t("admin.actions.actions") %></th>
       </tr>
     </thead>
-    <tbody class="sortable" data-js-url="<%= admin_poll_questions_order_questions_path(@poll.id) %>" >
+    <tbody class="js-new-sortable" data-sort-url="<%= polymorphic_path([@namespace, @poll, :questions], action: :order_questions) %>">
       <% @poll.questions.root_questions.each do |question| %>
-        <tr id="<%= dom_id(question) %>" data-answer-id="<%= question.id %>">
+        <tr id="<%= dom_id(question) %>" data-record-id="<%= question.id %>">
           <td>
             <strong><%= question.title %></strong>
             <% if question.allows_multiple_answers? %>
@@ -55,7 +55,7 @@
                 else
                   t("admin.polls.show.edit_answers")
                 end %>
-              <%= actions.link_to translation_for_action, admin_question_path(question),
+              <%= actions.link_to translation_for_action, polymorphic_path([@namespace, question]),
                                                                       class: "answers-link" %>
             <% end %>
           </td>

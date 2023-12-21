@@ -16,8 +16,11 @@ class Polls::Questions::AnswersComponent < ApplicationComponent
       classes.push("rating-scale")
 
       count_of_rating_scale_cells = question.question_answers.count
-      count_of_rating_scale_cells += 1 if question.min_rating_scale_label.present?
-      count_of_rating_scale_cells += 1 if question.max_rating_scale_label.present?
+
+      if Setting.new_design_enabled?
+        count_of_rating_scale_cells += 1 if question.min_rating_scale_label.present?
+        count_of_rating_scale_cells += 1 if question.max_rating_scale_label.present?
+      end
 
       if count_of_rating_scale_cells >= 8
         classes.push("vertical-rating-scale-answers")

@@ -1,0 +1,6 @@
+$("#user-registered-address-fields").replaceWith("<%= j render Users::RegisteredAddressFieldsComponent.new(
+    registered_address_city: @registered_address_city,
+    registered_address_street: @registered_address_street,
+    selected_city_id: @selected_city_id
+  ) %>"
+);

@@ -266,6 +266,7 @@ class User < ApplicationRecord
     )
     identities.destroy_all
     remove_roles
+    remove_audits #custom
   end
 
   def erased?

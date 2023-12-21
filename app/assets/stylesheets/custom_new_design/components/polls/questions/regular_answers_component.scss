@@ -9,9 +9,6 @@
       float: left;
     }
 
-    &.with-additional-info {
-    }
-
     &.image-answers {
       display: inline-block;
 
@@ -99,7 +96,9 @@
     }
 
     .answer-weight-selector {
-      width: 50px;
+      width: 58px;
+      padding: 0;
+      text-align: center;
       margin-right: 5px;
       margin-bottom: 0;
       border-radius: 5px;

@@ -29,7 +29,7 @@
       <%= render Admin::TableActionsComponent.new(booth, actions: []) do |actions| %>
         <%= actions.action(:assign_booth,
                            text: t("admin.booth_assignments.manage.actions.assign"),
-                           path: admin_poll_booth_assignments_path(@poll, booth_id: booth.id),
+                           path: polymorphic_path([@namespace, @poll, :booth_assignments], booth_id: booth.id),
                            method: :post,
                            remote: true) %>
       <% end %>

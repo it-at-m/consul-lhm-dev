@@ -1,5 +1,5 @@
 <%= link_to t("admin.budget_investments.index.download_current_selection"),
-            admin_budget_budget_investments_path(csv_params),
+            polymorphic_path([@namespace, @budget, :budget_investments], format: :csv),
             class: "float-right small clear" %>
 
 <% if params[:advanced_filters].include?("winners") %>
@@ -12,7 +12,7 @@
         cookie: "investments-columns", default: %w[id title supports admin valuator geozone feasibility price valuation_finished visible_to_valuators selected incompatible] %>
   <br>
 
-  <%= render "filters_description", i18n_namespace: "admin.budget_investments.index" %>
+  <%= render "admin/budget_investments/filters_description", i18n_namespace: "admin.budget_investments.index" %>
 
   <table class="table-for-mobile column-selectable">
     <thead>

@@ -44,18 +44,20 @@
                                        hint: t("admin.budget_phases.edit.description_help_text") %>
     </div>
 
+    <!--
     <div class="small-12 column">
-      <p class="form-label"><%= t("admin.budget_phases.edit.main_call_to_action") %></p>
-      <p class="help-text"> <%= t("admin.budget_phases.edit.main_call_to_action_description") %></p>
-      <%= translations_form.text_field :main_link_text %>
+      <p class="form-label"><%#= t("admin.budget_phases.edit.main_call_to_action") %></p>
+      <p class="help-text"> <%#= t("admin.budget_phases.edit.main_call_to_action_description") %></p>
+      <%#= translations_form.text_field :main_link_text %>
     </div>
 
     <div class="small-12 column">
-      <%= translations_form.text_field :main_link_url, hint: t("admin.shared.example_url") %>
+      <%#= translations_form.text_field :main_link_url, hint: t("admin.shared.example_url") %>
     </div>
+    -->
   <% end %>
 
-  <% if feature?(:allow_images) %>
+  <% if feature?(:allow_images) && false %>
     <div class="images small-12 column">
       <%= render "images/nested_image", f: f %>
       <p class="help-text"><%= t("admin.budget_phases.edit.image_description") %></p>

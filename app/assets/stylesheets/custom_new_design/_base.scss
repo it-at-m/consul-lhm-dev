@@ -238,4 +238,8 @@ body.custom-new-design {
   width: 100%;
   font-weight: 500;
   justify-content: space-between;
+
+  &:hover {
+    color: #4c5967;
+  }
 }

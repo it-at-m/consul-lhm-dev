@@ -4,6 +4,7 @@ class Image < ApplicationRecord
   def self.styles
     {
       large: { resize: "x#{Setting["uploads.images.min_height"]}" },
+      projekt_image: { combine_options: { gravity: "center", resize: "620x390^", crop: "620x390+0+0" }},
       medium: { combine_options: { gravity: "center", resize: "300x300^", crop: "300x300+0+0" }},
       thumb: { combine_options: { gravity: "center", resize: "140x245^", crop: "140x245+0+0" }},
       thumb_wider: { combine_options: { gravity: "center", resize: "185x280^", crop: "185x280+0+0" }},
