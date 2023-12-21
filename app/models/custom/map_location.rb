@@ -15,6 +15,9 @@ class MapLocation < ApplicationRecord
   #   self.fa_icon_class = get_fa_icon_class
   # end
 
+  audited associated_with: :deficiency_report,
+          only: %i[shape latitude longitude]
+
   def json_data
     {
       investment_id: investment_id,

@@ -15,7 +15,8 @@ class DeficiencyReport < ApplicationRecord
   acts_as_paranoid column: :hidden_at
   include ActsAsParanoidAliases
 
-  audited
+  audited only: %i[video_url on_behalf_of cached_votes_up cached_votes_down official_answer_approved
+                   deficiency_report_area_id deficiency_report_status_id deficiency_report_officer_id deficiency_report_category_id]
   has_associated_audits
   translation_class.class_eval do
     audited associated_with: :globalized_model,
