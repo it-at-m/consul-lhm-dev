@@ -1,0 +1,10 @@
+.livesubmit-checkbox {
+  [aria-pressed] {
+    @include switch;
+    margin-bottom: 0;
+  }
+
+  [aria-pressed][aria-pressed=true] {
+    background-color: green;
+  }
+}

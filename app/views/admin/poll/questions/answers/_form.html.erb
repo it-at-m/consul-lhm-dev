@@ -39,8 +39,7 @@
   <% if @question.poll.wizard_mode? && @question.votation_type.vote_type == "unique" && @question.parent_question.blank? %>
     <div class="row">
       <div class="small-12 medium-4 large-2 margin-top column">
-        <% question_options =  (@question.poll.questions.to_a - [@question]).map { |question| [question.title, question.id]} %>
-        <%= f.select :next_question_id, question_options, { include_blank: t("custom.shared.select"), label: t("custom.polls.questions.next_question") } %>
+        <%= f.select :next_question_id, @question.sibling_questions, { include_blank: t("custom.shared.select"), label: t("custom.polls.questions.next_question") } %>
       </div>
     </div>
   <% end %>

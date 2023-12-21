@@ -3,7 +3,7 @@
   method: :patch,
   local: false,
   html: {
-    class: "js-livesubmit-checkbox featured-settings-form",
+    class: "js-livesubmit-checkbox livesubmit-checkbox",
     data: { enabled_text: enabled_text, disabled_text: disabled_text } }
 ) do |f| %>
   <%= f.hidden_field field_name, value: (enabled? ? "false" : "true"), class: 'js-livesubmit-checkbox-value' %>

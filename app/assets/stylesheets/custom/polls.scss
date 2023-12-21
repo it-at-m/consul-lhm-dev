@@ -373,6 +373,10 @@ td.answers-column  {
     display: flex;
     justify-content: flex-start;
 
+    @media(max-width: $small-tablet-viewport-start) {
+      flex-direction: column;
+    }
+
     .poll-question--nested-question-title {
       min-width: 150px;
       max-width: 150px;
@@ -414,7 +418,7 @@ td.answers-column  {
 
   .rating-scale-button {
     color: #3b3b3b;
-    margin: 0 auto;
+    margin: 0;
     position: relative;
     cursor: pointer;
 
@@ -448,10 +452,3 @@ td.answers-column  {
     flex-direction: column;
   }
 }
-
-.poll-question-answers form.button_to {
-  .rating-scale-button {
-    margin-right: 0.8rem;
-  }
-}
-

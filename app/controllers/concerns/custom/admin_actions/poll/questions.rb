@@ -97,6 +97,7 @@ module AdminActions::Poll::Questions
         :show_images,
         :parent_question_id,
         :bundle_question,
+        :next_question_id,
         translation_params(Poll::Question),
         votation_type_attributes: [:vote_type, :max_votes]
       )
