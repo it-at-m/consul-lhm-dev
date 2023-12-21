@@ -10,6 +10,12 @@ class UnregisteredNewsletterSubscribersController < ApplicationController
         UnregisteredNewsletterSubscriber.find_or_create_by!(
           email: unregistered_newsletter_reciever_params[:email]
         )
+
+      NewsletterSubscriptionMailer.confirm(
+        @unregistered_newsletter_subscriber.email,
+        unregistered_newsletter_subscriber: @unregistered_newsletter_subscriber
+      ).deliver_later
+
       @subscriber_email = @unregistered_newsletter_subscriber.email
     end
   end
