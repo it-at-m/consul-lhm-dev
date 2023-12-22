@@ -37,7 +37,7 @@ class MapLocation < ApplicationRecord
 
     if shape.is_a?(String)
       Sentry.capture_message("MapJSONBug. Shape: #{shape}")
-      self.shape = {}
+      return {}
     end
 
     shape.merge({
