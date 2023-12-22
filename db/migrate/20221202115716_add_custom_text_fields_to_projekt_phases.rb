@@ -2,7 +2,7 @@ class AddCustomTextFieldsToProjektPhases < ActiveRecord::Migration[5.2]
   def change
     reversible do |dir|
       dir.up do
-        ProjektPhase.create_translation_table! phase_tab_name: :string, new_resource_button_name: :text, resource_form_title: :text
+        ProjektPhase.create_translation_table! phase_tab_name: :string, resource_form_title: :text
       end
 
       dir.down do
