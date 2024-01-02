@@ -23,7 +23,7 @@ class UnregisteredNewsletterSubscribersController < ApplicationController
   def confirm_subscription
     subscriber = UnregisteredNewsletterSubscriber.find_by(confirmation_token: params[:confirmation_token])
 
-    subscriber.update!(confirmed: true, confirmation_token: nil)
+    subscriber.update!(confirmed: true)
 
     redirect_to root_path, notice: t("custom.newsletters.subscription.successfully_subscribed")
   end
