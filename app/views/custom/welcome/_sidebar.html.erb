@@ -102,13 +102,7 @@
         ) %>
         </div>
       <% else %>
-        <p>Nicht registriert? Jetzt abonnieren</p>
-        <div id="newsletter-subscribtion-form">
-          <%= form_for UnregisteredNewsletterSubscriber.new, format: :js, remote: true do |f| %>
-            <%= f.text_field :email, label: false, placeholder: User.human_attribute_name(:email) %>
-            <%= f.submit "Anmelden", class: "button" %>
-          <% end %>
-        </div>
+        <%= render "custom/unregistered_newsletter_subscribers/form", unregistered_email_subscriber: UnregisteredNewsletterSubscriber.new %>
       <% end %>
     <% end %>
   <% end %>

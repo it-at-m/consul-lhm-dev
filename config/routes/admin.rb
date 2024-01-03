@@ -283,6 +283,8 @@ namespace :admin do
     resources :audits, only: :show, controller: "user_audits"
   end
 
+  resources :unregistered_newsletter_subscribers, only: [:index, :destroy]
+
   scope module: :poll do
     resources :polls do
       get :booth_assignments, on: :collection

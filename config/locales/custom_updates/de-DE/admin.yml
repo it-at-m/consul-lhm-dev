@@ -170,6 +170,8 @@ de:
         registered_address_streets:
           list: Registrierte Straßen
         individual_groups: Individuelle Gruppen
+        unregistered_newsletter_subscribers:
+          list: Nicht registrierte Newsletter-Abonnenten
       polls:
         show:
           edit_nested_questions: Verschachtelte Fragen
@@ -598,5 +600,8 @@ de:
           title: Gruppenwert bearbeiten
         table:
           name: Name
+      unregistered_newsletter_subscribers:
+        index:
+          title: Nicht registrierte Newsletter-Abonnenten
       common:
         download_current_selection: Aktuelle Auswahl herunterladen

@@ -80,7 +80,8 @@ class Admin::MenuComponent < ApplicationComponent
     end
 
     def profiles?
-      %w[administrators projekt_managers organizations officials moderators valuators managers users].include?(controller_name)
+      %w[administrators projekt_managers organizations officials moderators valuators managers
+         users unregistered_newsletter_subscribers].include?(controller_name)
     end
 
     def settings?
@@ -154,6 +155,14 @@ class Admin::MenuComponent < ApplicationComponent
         t("custom.admin.menu.individual_groups"),
         admin_individual_groups_path,
         ["individual_groups", "individual_group_values"].include?(controller_name)
+      ]
+    end
+
+    def unregistered_newsletter_subscribers_link
+      [
+        t("custom.admin.menu.unregistered_newsletter_subscribers.list"),
+        admin_unregistered_newsletter_subscribers_path,
+        ["unregistered_newsletter_subscribers"].include?(controller_name)
       ]
     end
 end

@@ -68,6 +68,10 @@ de:
           attributes:
             color:
               invalid: Bitte den Farbwert als HEX-code eingeben
+        unregistered_newsletter_subscriber:
+          attributes:
+            email:
+              invalid: Bitte geben Sie ein gültiges E-Mail-Format ein
     attributes:
       projekt:
         total_duration_start: Anfangsdatum

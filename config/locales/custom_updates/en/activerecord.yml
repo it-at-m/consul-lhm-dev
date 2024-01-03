@@ -26,6 +26,10 @@ en:
           attributes:
             color:
               invalid: Please provide color in HEX format
+        unregistered_newsletter_subscriber:
+          attributes:
+            email:
+              invalid: Please enter a valid email format
     attributes:
       projekt:
         show_start_date_in_frontend: Visible in front end
