@@ -7,10 +7,9 @@ module Budgets
     authorize_resource :budget
 
     def show
-      head :not_found
-      # authorize! :read_stats, @budget
-      # @stats = Budget::Stats.new(@budget)
-      # @headings = @budget.headings.sort_by_name
+      authorize! :read_stats, @budget
+      @stats = Budget::Stats.new(@budget)
+      @heading = @budget.headings.first
     end
 
     private
