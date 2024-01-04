@@ -1,6 +1,6 @@
 class Admin::UnregisteredNewsletterSubscribersController < Admin::BaseController
   def index
-    @unregistered_newsletter_subscribers = UnregisteredNewsletterSubscriber.all.page(params[:page]).per(2)
+    @unregistered_newsletter_subscribers = UnregisteredNewsletterSubscriber.all.page(params[:page]).per(25)
 
     respond_to do |format|
       format.html

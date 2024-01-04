@@ -171,7 +171,7 @@ de:
           list: Registrierte Straßen
         individual_groups: Individuelle Gruppen
         unregistered_newsletter_subscribers:
-          list: Nicht registrierte Newsletter-Abonnenten
+          list: Newsletter-Abonnenten
       polls:
         show:
           edit_nested_questions: Verschachtelte Fragen
@@ -602,6 +602,6 @@ de:
           name: Name
       unregistered_newsletter_subscribers:
         index:
-          title: Nicht registrierte Newsletter-Abonnenten
+          title: Newsletter-Abonnenten
       common:
         download_current_selection: Aktuelle Auswahl herunterladen
