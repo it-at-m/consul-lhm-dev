@@ -192,6 +192,15 @@ class Mailer < ApplicationMailer
     mail(to: @email_to, subject: @follow_up_letter.subject)
   end
 
+  def newsletter_subscription_for_existing_user(user)
+    @email_to = user.email
+    @user = user
+
+    with_user(@user) do
+      mail(to: @email_to, subject: t("mailers.newsletter_subscription_for_existing_user.subject"))
+    end
+  end
+
   private
 
     def with_user(user, &block)

@@ -21,3 +21,6 @@ de:
       accepted: "vielen Dank für die Einreichung Ihres Vorschlags \"%{title}\". Ihr Vorschlag wurde als durchführbar klassifiziert."
       thank_you: Vielen Dank für Ihre Beteiligung!
       sincerely: Mit freundlichen Grüßen
+    newsletter_subscription_for_existing_user:
+      subject: Anmeldung zum Newsletter
+      p1_html: Es gab einen Versuch, sich mit Ihrer E-Mail-Adresse für unseren Newsletter anzumelden. Da Sie bereits über ein Consul-Konto verfügen, möchten wir Sie bitten, sich einzuloggen und die Option zum Empfang des Newsletters in Ihren <a href=%{link}>Konto-Einstellungen</a> zu aktivieren.

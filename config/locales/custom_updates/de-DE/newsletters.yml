@@ -1,7 +1,7 @@
 de:
   admin:
     segment_recipient:
-      newsletter_subscribers: Newsletter-Abonnenten
+      newsletter_subscribers: Newsletter-Abonnenten (alle Benutzer*innen + Newsletter Abonnenten)
   custom:
     newsletters:
       new_projekt:

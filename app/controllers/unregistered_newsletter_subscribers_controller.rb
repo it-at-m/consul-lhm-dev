@@ -2,28 +2,55 @@ class UnregisteredNewsletterSubscribersController < ApplicationController
   skip_authorization_check
 
   def create
-    @existing_user = User.find_by(email: unregistered_newsletter_reciever_params[:email])
-    @subscriber_email = @existing_user&.email
+    @email_input = unregistered_newsletter_reciever_params[:email].presence
 
-    if @existing_user.blank?
+    if @email_input
+      @existing_user = User.find_by(email: @email_input)
+      @existing_unregistered_newsletter_subscriber = UnregisteredNewsletterSubscriber.find_by(
+        email: @email_input
+      )
+    end
+
+    if @existing_user.present?
+      Mailer.newsletter_subscription_for_existing_user(@existing_user).deliver_later
+      @subscriber_email = @existing_user.email
+
+    elsif @existing_unregistered_newsletter_subscriber.present?
+      @subscriber_email = @existing_unregistered_newsletter_subscriber.email
+
+      if @existing_unregistered_newsletter_subscriber.not_confirmed?
+        NewsletterSubscriptionMailer.confirm(
+          @existing_unregistered_newsletter_subscriber.email,
+          unregistered_newsletter_subscriber: @existing_unregistered_newsletter_subscriber
+        ).deliver_later
+      end
+
+    else
       @unregistered_newsletter_subscriber =
-        UnregisteredNewsletterSubscriber.find_or_create_by!(
-          email: unregistered_newsletter_reciever_params[:email]
+        UnregisteredNewsletterSubscriber.new(
+          email: @email_input
         )
 
-      NewsletterSubscriptionMailer.confirm(
-        @unregistered_newsletter_subscriber.email,
-        unregistered_newsletter_subscriber: @unregistered_newsletter_subscriber
-      ).deliver_later
+      if @unregistered_newsletter_subscriber.save
+        NewsletterSubscriptionMailer.confirm(
+          @unregistered_newsletter_subscriber.email,
+          unregistered_newsletter_subscriber: @unregistered_newsletter_subscriber
+        ).deliver_later
 
-      @subscriber_email = @unregistered_newsletter_subscriber.email
+        @subscriber_email = @unregistered_newsletter_subscriber.email
+      else
+        respond_to do |format|
+          format.js { render "errors.js.erb" }
+        end
+      end
+
     end
   end
 
   def confirm_subscription
     subscriber = UnregisteredNewsletterSubscriber.find_by(confirmation_token: params[:confirmation_token])
 
-    subscriber.update!(confirmed: true, confirmation_token: nil)
+    subscriber.update!(confirmed: true)
 
     redirect_to root_path, notice: t("custom.newsletters.subscription.successfully_subscribed")
   end

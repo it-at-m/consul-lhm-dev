@@ -19,3 +19,6 @@ en:
       accepted: "Thank you for submitting your proposal \"%{title}\". It was classified as feasible."
       thank_you: Thank you for participation!
       sincerely: Best regards
+    newsletter_subscription_for_existing_user:
+      subject: Subscribe to the newsletter
+      p1_html: There was an attempt to sign up for our newsletter using your email address. Since you already have a Consul account, we would like to ask you to log in and activate the option to receive the newsletter in your <a href=%{link}>Account Settings</a>.

@@ -1,0 +1,36 @@
+<h2><%= t("custom.admin.unregistered_newsletter_subscribers.index.title") %></h2>
+
+<div id="users">
+  <% if @unregistered_newsletter_subscribers.any? %>
+    <%= link_to t("custom.shared.download"), admin_unregistered_newsletter_subscribers_path(format: :csv), class: "float-right small clear" %>
+
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Email</th>
+          <th scope="col">Bestätigt?</th>
+          <th scope="col">Angelegt am</th>
+          <th scope="col">Aktionen</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @unregistered_newsletter_subscribers.each do |subscriber| %>
+          <tr id="<%= dom_id(subscriber, :admin) %>">
+            <td><%= subscriber.id %></td>
+            <td><%= subscriber.email %></td>
+            <td><%= subscriber.confirmed? ? "Ja" : "Nein" %></td>
+            <td><%= subscriber.created_at %></td>
+            <td><%= link_to "löschen", admin_unregistered_newsletter_subscriber_path(subscriber), data: { confirm: "Sind Sie sicher?" }, method: :delete %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= paginate @unregistered_newsletter_subscribers %>
+  <% else %>
+    <div class="callout primary">
+      <%= t("admin.users.index.no_users") %>
+    </div>
+  <% end %>
+</div>

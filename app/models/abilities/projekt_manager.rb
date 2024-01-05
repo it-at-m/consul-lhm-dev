@@ -146,13 +146,24 @@ module Abilities
       can :publish, Budget, id: Budget.drafting.ids
       can :calculate_winners, Budget, &:reviewing_ballots?
       can :read_results, Budget do |budget|
-        budget.balloting_or_later?
+        user.projekt_manager.allowed_to?("manage", budget&.projekt) &&
+          budget.balloting_or_later?
         # budget.balloting_finished? && budget.has_winning_investments?
       end
+      can :read_stats, Budget do |budget|
+        user.projekt_manager.allowed_to?("manage", budget&.projekt) &&
+          Budget.valuating_or_later.stats_enabled.ids.include?(budget.id)
+      end
+
       can :recalculate_winners, Budget, &:balloting_or_later?
 
-      can [:admin_update, :toggle_selection, :edit_physical_votes], Budget::Investment do |investment|
+      can [:admin_update, :toggle_selection], Budget::Investment do |investment|
         can?(:create, investment.budget)
+      end
+
+      can :edit_physical_votes, Budget::Investment do |investment|
+        can?(:create, investment.budget) &&
+          investment.budget.phase == "selecting"
       end
 
       can :manage, Poll do |poll|

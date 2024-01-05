@@ -91,25 +91,21 @@
   <% end %>
 
   <% if setting["welcomepage.newsletter_subscription"].present? %>
-    <%= render Shared::SidebarCardComponent.new(title: "Newsletter", icon_name: "envelope") do |c| %>
-      <% if current_user.present? %>
-        <div class="admin">
-        <%= render Admin::LivesubmitCheckbox::Component.new(
-          url: account_path,
-          resource_name: "account",
-          attribute_name: "newsletter",
-          current_value: current_user.newsletter
-        ) %>
-        </div>
-      <% else %>
-        <p>Nicht registriert? Jetzt abonnieren</p>
-        <div id="newsletter-subscribtion-form">
-          <%= form_for UnregisteredNewsletterSubscriber.new, format: :js, remote: true do |f| %>
-            <%= f.text_field :email, label: false, placeholder: User.human_attribute_name(:email) %>
-            <%= f.submit "Anmelden", class: "button" %>
-          <% end %>
-        </div>
+    <div id="newsletter-subscribtion">
+      <%= render Shared::SidebarCardComponent.new(title: "Newsletter", icon_name: "envelope") do |c| %>
+        <% if current_user.present? %>
+          <div class="admin">
+          <%= render Admin::LivesubmitCheckbox::Component.new(
+            url: account_path,
+            resource_name: "account",
+            attribute_name: "newsletter",
+            current_value: current_user.newsletter
+          ) %>
+          </div>
+        <% else %>
+          <%= render "custom/unregistered_newsletter_subscribers/form", unregistered_email_subscriber: UnregisteredNewsletterSubscriber.new %>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   <% end %>
 </div>
