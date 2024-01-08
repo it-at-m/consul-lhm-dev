@@ -1,10 +1,10 @@
-<%= form_for(@projekt, url: admin_projekt_path, as: :projekt) do |f| %>
+<%= form_for(@projekt, url: polymorphic_path([@namespace, @projekt]), as: :projekt) do |f| %>
 
   <%= hidden_field_tag :namespace, @namespace %>
 
   <div class="margin-bottom">
     <h2><%= t("custom.admin.projekts.edit.projekt_sdg_tab.sdgs") %></h2>
-    <%= hidden_field_tag :tab, "#tab-projekt-sdg" %>
+    <%= hidden_field_tag :tab, "tab-projekt-sdg" %>
     <%= render SDG::RelatedListSelectorComponent.new(f) %>
   </div>
 

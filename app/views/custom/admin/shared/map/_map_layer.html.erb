@@ -1,10 +1,10 @@
 <div class='map-layer margin-bottom' id="<%= dom_id(layer) %>">
 
-  <%= link_to edit_admin_map_layer_path(layer, return_path: return_path), class: "edit-map-layer", remote: true do %>
+  <%= link_to polymorphic_path([@namespace, layer], action: :edit, return_path: return_path), class: "edit-map-layer", remote: true do %>
     <i class="far fa-edit"></i>
   <% end %>
 
-  <%= link_to admin_map_layer_path(layer, return_path: return_path),
+  <%= link_to polymorphic_path([@namespace, layer], return_path: return_path),
     class: "delete-map-layer",
     remote: true,
     method: :delete do %>

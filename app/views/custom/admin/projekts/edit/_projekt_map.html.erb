@@ -5,7 +5,7 @@
 <% end %>
 
 <div id='new-map-layer'>
-  <%= link_to t("custom.map_layer.buttons.new_layer"), new_admin_map_layer_path(return_path: namespace_projekt_path(action: :edit, anchor: "tab-projekt-map"), mappable_id: @projekt.id, mappable_type: @projekt.class.name), class: "button success margin-bottom", remote: true %>
+  <%= link_to t("custom.map_layer.buttons.new_layer"), polymorphic_path([@namespace, :map_layer], action: :new, return_path: namespace_projekt_path(action: :edit, anchor: "tab-projekt-map"), mappable_id: @projekt.id, mappable_type: @projekt.class.name), class: "button success margin-bottom", remote: true %>
 </div>
 
 <table>

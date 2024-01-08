@@ -44,6 +44,10 @@ module Abilities
       end
 
       can([:edit, :update], SiteCustomization::ContentBlock)
+      can([:edit, :update], SiteCustomization::Page) do |page|
+        page.projekt.present? &&
+          can?(:edit, page.projekt)
+      end
 
       can(:update_map, MapLocation) do |p|
         related_projekt = p.respond_to?(:projekt_phase) ? p.projekt_phase.projekt : p.projekt
@@ -51,7 +55,7 @@ module Abilities
       end
 
       can(:manage, MapLayer) do |ml|
-        related_projekt = ml.mappable.is_a?(:projekt_phase) ? ml.mappable.projekt : ml.mappable
+        related_projekt = ml.mappable.is_a?(ProjektPhase) ? ml.mappable.projekt : ml.mappable
         can? :edit, related_projekt
       end
 
