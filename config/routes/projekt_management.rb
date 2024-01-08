@@ -140,6 +140,7 @@ namespace :projekt_management do
   end
 
   namespace :site_customization do
+    resources :pages, only: [:update]
     resources :content_blocks, only: [:edit, :update]
   end
 
