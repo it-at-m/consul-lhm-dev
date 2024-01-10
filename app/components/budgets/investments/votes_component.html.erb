@@ -17,12 +17,13 @@
     <% if investment.should_show_votes? %>
       <% if user_voted_for? %>
         <div class="supported">
-          <div class="callout success">
+          <div class="callout success" style="margin-bottom:15px;width:230px;">
             <%= t("budgets.investments.votes.already_supported") %>
           </div>
           <% if projekt_phase_feature?(investment.projekt_phase, "resource.remove_investments_supports") %>
             <%= button_to remove_support_path,
                 class: "button button-remove-support expanded",
+                style: "margin-top:15px;",
                 method: "delete",
                 remote: true,
                 "aria-label": remove_support_aria_label do %>
@@ -32,7 +33,7 @@
         </div>
       <% else %>
         <% if investment.budget.distributed_voting? %>
-          <%= form_with url: support_path, local: display_support_alert? do |f| %>
+          <%= form_with(url: support_path, local: display_support_alert?, html: { style: "display:block;" }) do |f| %>
             <%= f.label :vote_weight, t("custom.budgets.investments.investment.line_weight_label"), style: "font-weight:normal;margin-top:15px;"  %>
             <%= f.select :vote_weight, [[1, 1], [2, 2], [3, 3]], label: false %>
             <%= f.submit t("budgets.investments.votes.support"),
