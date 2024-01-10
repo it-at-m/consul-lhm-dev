@@ -29,7 +29,7 @@
     </div>
 
   </div>
-  <% if  user.proposals.exists? || user.debates.exists? || user.comments.exists? %>
+  <% if  user.proposals.exists? || user.debates.exists? || user.comments.exists? || user.budget_investments.any? %>
     <div class="user-list-item--resources">
       <% if user.proposals.exists? %>
         <%= link_to user_path(user), class: "sidebar-card--count-line -no-default-style" do %>
@@ -37,7 +37,7 @@
             <%= t("custom.general.resource_names.proposals") %>
           </div>
           <div>
-            <%= user.proposals.count %>
+            <%= Proposal.base_selection.where(author_id: user.id).count %>
           </div>
         <% end %>
       <% end %>
@@ -60,6 +60,17 @@
           </div>
           <div class="sidebar-resource-author--resoures-count">
             <%= user.comments.count %>
+          </div>
+        <% end %>
+      <% end %>
+
+      <% if user.budget_investments.exists? %>
+        <%= link_to user_path(user), class: "sidebar-card--count-line -no-default-style" do %>
+          <div>
+            <%= t("custom.general.resource_names.investments") %>
+          </div>
+          <div>
+            <%= user.budget_investments.count %>
           </div>
         <% end %>
       <% end %>
