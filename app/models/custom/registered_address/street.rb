@@ -5,6 +5,8 @@ class RegisteredAddress::Street < ApplicationRecord
     class_name: "RegisteredAddressStreetProjektPhase", foreign_key: :registered_address_street_id
   has_many :projekt_phases, through: :registered_address_street_projekt_phases
 
+  default_scope { order(:name) }
+
   validates :name, presence: true
   validates :plz, presence: true
   validates :name, uniqueness: { scope: :plz }
