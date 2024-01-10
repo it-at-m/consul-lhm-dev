@@ -61,9 +61,9 @@
         <%= render Shared::SidebarCardComponent.new(title: t("custom.account.show.verification_tittle"), description: t("custom.account.show.verification_description"),  icon_name: "check") do |c| %>
           <div class="verify-account">
             <% if current_user.level_two_verified? %>
-              <%= link_to t("account.show.finish_verification"), verification_path, class: "button success" %>
+              <%= link_to t("account.show.finish_verification"), verification_path, class: "button" %>
             <% else %>
-              <%= link_to t("account.show.verify_my_account"), verification_path, class: "button success" %>
+              <%= link_to t("account.show.verify_my_account"), verification_path, class: "button" %>
             <% end %>
           </div>
         <% end %>
