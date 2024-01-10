@@ -238,7 +238,9 @@ class PagesController < ApplicationController
       end
     end
 
-    @investments = @investments.perform_sort_by(@current_order, session[:random_seed]).page(params[:page]).per(18)
+    unless params[:section] == "results"
+      @investments = @investments.perform_sort_by(@current_order, session[:random_seed]).page(params[:page]).per(18)
+    end
   end
 
   def set_milestone_phase_footer_tab_variables
