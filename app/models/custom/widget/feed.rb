@@ -3,12 +3,14 @@ require_dependency Rails.root.join("app", "models", "widget", "feed").to_s
 class Widget::Feed < ApplicationRecord
   KINDS = %w[active_projekts polls proposals debates expired_projekts investment_proposals].freeze
 
-  def active_projekts
-    Projekt.show_in_homepage.index_order_underway.first(limit)
+  def active_projekts(current_user)
+    Projekt.show_in_homepage.index_order_underway
+      .select { |p| p.visible_for?(current_user) }.first(limit)
   end
 
-  def expired_projekts
-    Projekt.show_in_homepage.index_order_expired.first(limit)
+  def expired_projekts(current_user)
+    Projekt.show_in_homepage.index_order_expired
+      .select { |p| p.visible_for?(current_user) }.first(limit)
   end
 
   def polls
