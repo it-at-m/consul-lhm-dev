@@ -149,6 +149,7 @@ de:
         html_content: Inhalt
       votation_type:
         max_votes: Maximale Stimmanzahl
+        max_votes_per_answer: Maximale Stimmanzahl pro Antwort
         vote_type: Art der Abstimmung
       votation_type/vote_type:
         unique: Einzelne Stimme

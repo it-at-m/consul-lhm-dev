@@ -655,7 +655,7 @@ en:
     description:
       unique: You can cast one vote for this question.
       multiple: You may cast %{maximum} votes evenly among the available answers.
-      multiple_with_weight: You may cast %{maximum} votes weighted across multiple answers.
+      multiple_with_weight: You may cast %{maximum} votes weighted across multiple answers. Maximum %{cap} per answer.
       rating_scale: You are allowed one vote per rating scale.
   proposal_notifications:
     new:

@@ -99,7 +99,7 @@ module AdminActions::Poll::Questions
         :bundle_question,
         :next_question_id,
         translation_params(Poll::Question),
-        votation_type_attributes: [:vote_type, :max_votes]
+        votation_type_attributes: [:vote_type, :max_votes, :max_votes_per_answer]
       )
     end
 

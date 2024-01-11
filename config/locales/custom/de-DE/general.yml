@@ -684,7 +684,7 @@ de:
     description:
       unique: Sie dürfen bei dieser Frage eine Stimme vergeben.
       multiple: Sie dürfen %{maximum} Stimmen gleichmäßig auf die gegebenen Antworten verteilen.
-      multiple_with_weight: Sie dürfen %{maximum} Stimmen gewichtet auf mehrere Antworten verteilen.
+      multiple_with_weight: Sie dürfen %{maximum} Stimmen gewichtet auf mehrere Antworten verteilen. Maximum %{cap} pro Antwort.
       rating_scale: Sie dürfen eine Stimme pro Bewertungsskala abgeben.
   proposal_notifications:
     new:

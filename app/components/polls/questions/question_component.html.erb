@@ -9,7 +9,7 @@
 
   <% if question.show_hint_callout? && question.votation_type.present? && !question.bundle_question? %>
     <div class="callout primary">
-      <%= t("poll_questions.description.#{question.vote_type}", maximum: question.max_votes) %>
+      <%= t("poll_questions.description.#{question.vote_type}", maximum: question.max_votes, cap: (question.votation_type.max_votes_per_answer || question.max_votes)) %>
     </div>
   <% end %>
 

@@ -72,7 +72,7 @@
             <% if @question.votation_type.unique? &&  @question.votation_type.rating_scale? %>
               <%= 1 %>
             <% else %>
-              <%= @question.max_votes %>
+              <%= [@question.votation_type.max_votes_per_answer, @question.max_votes].compact.join(" / ") %>
             <% end %>
           </p>
         <% end %>
