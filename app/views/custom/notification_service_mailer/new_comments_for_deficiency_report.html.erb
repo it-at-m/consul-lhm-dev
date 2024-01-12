@@ -3,6 +3,9 @@
     <%= t("custom.notification_service_mailers.new_comments_for_deficiency_report.p1") %>
   </p>
 
+  <% if @initial %>
+  <% end %>
+
   <ul>
     <% @new_comments.each do |comment| %>
       <li>

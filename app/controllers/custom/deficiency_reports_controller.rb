@@ -149,7 +149,8 @@ class DeficiencyReportsController < ApplicationController
       if new_comments.any?
         NotificationServiceMailer.new_comments_for_deficiency_report(
           @deficiency_report,
-          last_comment_date_expanded
+          last_comment_date_expanded,
+          initial: true
         ).deliver_now
       end
     end

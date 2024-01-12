@@ -10,10 +10,11 @@ class NotificationServiceMailer < ApplicationMailer
     end
   end
 
-  def new_comments_for_deficiency_report(deficiency_report, last_notified_time)
+  def new_comments_for_deficiency_report(deficiency_report, last_notified_time, initial: false)
     @deficiency_report = deficiency_report
     @officer = @deficiency_report.officer
     @new_comments = @deficiency_report.comments.where("created_at > ?", last_notified_time)
+    @initial = initial
 
     subject = t(
       "custom.notification_service_mailers.new_comments_for_deficiency_report.subject",
