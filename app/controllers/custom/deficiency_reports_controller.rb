@@ -135,13 +135,15 @@ class DeficiencyReportsController < ApplicationController
   end
 
   def notify_officer_about_new_comments
+    return unless @deficiency_report.officer.present?
+
     enable = ["1", "true"].include?(deficiency_report_params[:notify_officer_about_new_comments])
     datetime = enable ? Time.current : nil
 
     if @deficiency_report.update!(
       notify_officer_about_new_comments: deficiency_report_params[:notify_officer_about_new_comments],
       notified_officer_about_new_comments_datetime: datetime
-    ) && enable
+    ) && enable && @deficiency_report.comments.any?
       last_comment_date = @deficiency_report.comments.last.created_at
       last_comment_date_expanded = last_comment_date - 5.minutes
       new_comments = @deficiency_report.comments.created_after_date(last_comment_date_expanded)
