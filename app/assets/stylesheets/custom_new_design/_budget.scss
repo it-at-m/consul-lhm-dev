@@ -173,4 +173,10 @@
       border-top: none;
     }
   }
+
+  table#budget-investments-compatible {
+    tr:nth-child(even) {
+      background: #f8f9fb;
+    }
+  }
 }
