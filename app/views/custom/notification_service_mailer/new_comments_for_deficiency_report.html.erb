@@ -1,10 +1,15 @@
 <td style="padding-bottom: 20px; padding-left: 10px;">
   <p style="font-family: 'Open Sans','Helvetica Neue',arial,sans-serif;font-size: 14px;font-weight: normal;line-height: 24px;">
-    <%= t("custom.notification_service_mailers.new_comments_for_deficiency_report.p1") %>
+    <%= t("custom.notification_service_mailers.new_comments_for_deficiency_report.hi") %>
   </p>
 
-  <% if @initial %>
-  <% end %>
+  <p style="font-family: 'Open Sans','Helvetica Neue',arial,sans-serif;font-size: 14px;font-weight: normal;line-height: 24px;">
+    <% if @initial %>
+      <%= t("custom.notification_service_mailers.new_comments_for_deficiency_report.p1_initial") %>
+    <% else %>
+      <%= t("custom.notification_service_mailers.new_comments_for_deficiency_report.p1_reminder") %>
+    <% end %>
+  </p>
 
   <ul>
     <% @new_comments.each do |comment| %>
@@ -16,8 +21,6 @@
   </ul>
 
   <p style="font-family: 'Open Sans','Helvetica Neue',arial,sans-serif;font-size: 14px;font-weight: normal;line-height: 24px;">
-    <%= t("custom.notification_service_mailers.new_comments_for_deficiency_report.p2") %>
-
-    Consul
+    <%= t("custom.notification_service_mailers.new_comments_for_deficiency_report.signature") %>
   </p>
 </td>
