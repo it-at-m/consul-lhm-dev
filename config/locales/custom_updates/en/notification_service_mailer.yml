@@ -12,8 +12,7 @@ en:
         hi: Dear Officer.
         p1_initial: You have just been assigned the following comment on a deficiency report for processing.
         p1_reminder: You were recently assigned a comment on a deficiency report that has not yet been processed.
-        signature: Thank you and best regards
-          Consul
+        signature_html: Thank you and best regards</br>Consul
       not_assigned_deficiency_reports:
         subject: Deficiency report not assigned yet
         hi: Dear Admin,

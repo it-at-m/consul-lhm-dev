@@ -12,8 +12,7 @@ de:
         hi: Liebe/r SachbearbeiterIn,
         p1_initial: "Ihnen wurde gerade folgender Kommentar zu einer Mangelmeldung zur Bearbeitung zugewiesen:"
         p1_reminder: Ihnen wurde kürzlich ein Kommentar zu einer Mangelmeldung zugewiesen, welcher noch nicht bearbeitet wurde.
-        signature: Vielen Dank und viele Grüße
-          Consul
+        signature_html: Vielen Dank und viele Grüße</br>Consul
       not_assigned_deficiency_reports:
         subject: Mangelzuweisen noch ausstehend
         hi: Lieber Admin,
