@@ -8,13 +8,13 @@
   <div class="main-column">
     <% if @budget.present? %>
 
-      <% if @budget.phase == 'finished' %>
+      <% if can?(:read_results, @budget) || can?(:read_stats, @budget) %>
         <%= render Pages::Projekts::BudgetsSubnavComponent.new(@budget, @projekt_phase) %>
       <% end %>
 
-      <% if params[:section] == "results" %>
+      <% if params[:section] == "results" && can?(:read_results, @budget) %>
         <%= render "pages/projekt_footer_new/budget/results" %>
-      <% elsif params[:section] == "stats" %>
+      <% elsif params[:section] == "stats" && can?(:read_stats, @budget) %>
         <%= render "pages/projekt_footer_new/budget/stats" %>
       <%# elsif params[:section] == "executions" %>
         <%#= render "pages/projekt_footer_new/budget/executions" %>

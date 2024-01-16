@@ -17,9 +17,9 @@
     <%#= action(:preview, text: preview_text, path: budget_path(budget)) %>
   <%# end %>
 
-  <% if can?(:read_stats, budget) %>
-    <%= action(:results, text: 'Statistiken', path: budget_stats_path(budget)) %>
-  <% end %>
+  <%# if can?(:read_stats, budget) %>
+    <%#= action(:results, text: 'Statistiken', path: budget_stats_path(budget)) %>
+  <%# end %>
 
   <%= action(:edit, text: t("admin.budgets.actions.edit")) %>
 </div>

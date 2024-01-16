@@ -217,9 +217,9 @@ class PagesController < ApplicationController
 
     @investments = @budget.investments
 
-    if params[:section] == "results"
+    if params[:section] == "results" && can?(:read_results, @budget)
       @investments = Budget::Result.new(@budget, @budget.headings.first).investments
-    elsif params[:section] == "stats"
+    elsif params[:section] == "stats" && can?(:read_stats, @budget)
       @stats = Budget::Stats.new(@budget)
       @investments = @budget.investments
     else

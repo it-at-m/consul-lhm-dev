@@ -150,13 +150,11 @@ module Abilities
       can :publish, Budget, id: Budget.drafting.ids
       can :calculate_winners, Budget, &:reviewing_ballots?
       can :read_results, Budget do |budget|
-        user.projekt_manager.allowed_to?("manage", budget&.projekt) &&
-          budget.balloting_or_later?
+        budget.balloting_or_later?
         # budget.balloting_finished? && budget.has_winning_investments?
       end
       can :read_stats, Budget do |budget|
-        user.projekt_manager.allowed_to?("manage", budget&.projekt) &&
-          Budget.valuating_or_later.stats_enabled.ids.include?(budget.id)
+        Budget.valuating_or_later.stats_enabled.ids.include?(budget.id)
       end
 
       can :recalculate_winners, Budget, &:balloting_or_later?
