@@ -9,7 +9,7 @@
     <% if @budget.present? %>
 
       <% if @budget.phase == 'finished' %>
-        <%#= render Pages::Projekts::BudgetsSubnavComponent.new(@budget) %>
+        <%= render Pages::Projekts::BudgetsSubnavComponent.new(@budget, @projekt_phase) %>
       <% end %>
 
       <% if params[:section] == "results" %>

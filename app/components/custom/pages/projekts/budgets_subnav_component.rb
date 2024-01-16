@@ -19,6 +19,14 @@ class Pages::Projekts::BudgetsSubnavComponent < ApplicationComponent
           url:  url_to_footer_tab(section: section, remote: true),
           active: params[:section] == section.to_s
         }
-      end
+      end.push(overview_item)
+    end
+
+    def overview_item
+      {
+        text: t("custom.projekts.page.footer.budget.investments_subtab"),
+        url: url_to_footer_tab(section: "overview", remote: true),
+        active: params[:section].blank? || params[:section] == "overview"
+      }
     end
 end
