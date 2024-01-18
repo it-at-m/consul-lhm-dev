@@ -79,8 +79,8 @@ class Admin::UsersController < Admin::BaseController
       params.require(:user).permit(:email,
                                    :first_name, :last_name,
                                    :city_name, :plz, :street_name, :street_number, :street_number_extension,
-                                   :registered_address_id)
-                                   # :gender, :date_of_birth,
+                                   :registered_address_id,
+                                   :gender, :date_of_birth)
                                    # :document_type, :document_last_digits,
                                    # :password, :password_confirmation)
     end
