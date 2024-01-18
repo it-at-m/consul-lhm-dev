@@ -71,6 +71,7 @@ class AccountController < ApplicationController
     if @account.extended_registration? && @account.errors.any?
       render :edit_details
     elsif @account.valid? && @account.update(user_params)
+      @account.unverify!
       redirect_to account_path, notice: t("flash.actions.save_changes.notice")
     else
       render :edit_details
