@@ -55,6 +55,9 @@
     <aside class="sidebar">
       <%= render Shared::SidebarCardComponent.new(title: t("custom.users.settings"), icon_name: "cog") do |c| %>
         <%= link_to t("custom.account.show.change_credentials_link"), edit_user_registration_path, class: "button hollow" %>
+        <% if @account.extended_registration? %>
+          <%= link_to t("custom.account.show.edit_details_link"), edit_details_account_path, class: "button hollow" %>
+        <% end %>
         <%= link_to t("custom.account.show.erase_account_link"), users_registrations_delete_form_path, class: "button hollow delete alert" %>
       <% end %>
       <% unless current_user.level_three_verified? %>

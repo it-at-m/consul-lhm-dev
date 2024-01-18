@@ -3,6 +3,7 @@ en:
     account:
       show:
         change_credentials_link: Change login information
+        edit_details_link: Update personal information
         erase_account_link: Delete account
         settings: Account settings
         verification_tittle: Account verification
@@ -17,3 +18,7 @@ en:
           description1: "You have activated project notification for the following projects:"
           description2: By clicking on the button below you can unsubscribe from all project notifications. If you only want to unsubscribe from individual project phases, please use the direct link to the projects.
           cancel_projekts_subscriptions_button: Unsubscribe from all project notifications
+      edit_details:
+        title: Update personal information
+        documents_label: Document check
+        submit: Update
