@@ -7,6 +7,7 @@ class PagesController < ApplicationController
   include ProposalsHelper
   include Takeable
   include RandomSeed
+  include HasEmbeddableShortcodes
 
   has_orders %w[most_voted newest oldest], only: :show
 
@@ -31,6 +32,12 @@ class PagesController < ApplicationController
       end
 
       @cards = @custom_page.cards
+
+      @custom_page.content = process_shortcodes_for(
+        obj: @custom_page,
+        attr: :content,
+        projekt: @projekt,
+      )
 
       render action: custom_page_name
 
