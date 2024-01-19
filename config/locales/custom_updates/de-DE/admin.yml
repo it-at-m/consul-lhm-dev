@@ -545,7 +545,8 @@ de:
           follow_up_fields_title:  Follow-up Formularfelder
           dropdown_hint: Bitte geben Sie Ihre Antwortoptionen ein. Diese müssen durch ein Komma getrennt sein.
           kinds:
-            string: Text
+            string: kurzer Text
+            textarea: langer Text
             email: Email
             date: Datum
             dropdown: Dropdown

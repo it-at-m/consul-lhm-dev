@@ -2,7 +2,7 @@
   <div class="margin-bottom">
     <strong style="display:block;"><%= ff.name %></strong>
 
-    <% if ff.kind.in? ["string", "email"] %>
+    <% if ff.kind.in? ["string", "email", "textarea"] %>
       <%= formular_answer.answers[ff.key].presence || "-" %>
     <% elsif ff.kind == "date" %>
       <%= formular_answer.answers[ff.key].presence || "-" %>

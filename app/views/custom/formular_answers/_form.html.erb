@@ -11,6 +11,8 @@
 
     <% if ff.kind.in? ["string", "email"] %>
       <%= text_field_tag "formular_answer[answers][#{ff.key}]", formular_answer.answers[ff.key], autocomplete: "off", class: ("is-invalid-input" if invalid_field_class) %>
+    <% elsif ff.kind.in? ["textarea"] %>
+      <%= text_area_tag "formular_answer[answers][#{ff.key}]", formular_answer.answers[ff.key], autocomplete: "off", class: ("is-invalid-input" if invalid_field_class), rows: 10 %>
     <% elsif ff.kind == "date" %>
       <%= date_field_tag "formular_answer[answers][#{ff.key}]", formular_answer.answers[ff.key], autocomplete: "off", class: ("is-invalid-input" if invalid_field_class) %>
     <% elsif ff.kind == "dropdown" %>
