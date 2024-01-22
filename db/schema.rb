@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_01_11_111557) do
+ActiveRecord::Schema.define(version: 2024_01_22_132434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -847,6 +847,19 @@ ActiveRecord::Schema.define(version: 2024_01_11_111557) do
     t.index ["followable_type", "followable_id"], name: "index_follows_on_followable_type_and_followable_id"
     t.index ["user_id", "followable_type", "followable_id"], name: "access_follows"
     t.index ["user_id"], name: "index_follows_on_user_id"
+  end
+
+  create_table "formular_answer_documents", force: :cascade do |t|
+    t.bigint "formular_answer_id"
+    t.string "formular_field_key"
+    t.string "title", limit: 80
+    t.string "attachment_file_name"
+    t.string "attachment_content_type"
+    t.bigint "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["formular_answer_id"], name: "index_formular_answer_documents_on_formular_answer_id"
   end
 
   create_table "formular_answer_images", force: :cascade do |t|
@@ -2618,6 +2631,7 @@ ActiveRecord::Schema.define(version: 2024_01_11_111557) do
   add_foreign_key "failed_census_calls", "users"
   add_foreign_key "flags", "users"
   add_foreign_key "follows", "users"
+  add_foreign_key "formular_answer_documents", "formular_answers"
   add_foreign_key "formular_answer_images", "formular_answers"
   add_foreign_key "formular_answers", "formulars"
   add_foreign_key "formular_fields", "formulars"

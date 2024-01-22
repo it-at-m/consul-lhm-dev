@@ -31,6 +31,7 @@ module FormularFollowUpLettersAdminActions
       @formular_fields = @formular.formular_fields
       @formular_answers = @formular.formular_answers
       @image_flag = @formular_answers.any? { |fa| fa.formular_answer_images.present? }
+      @document_flag = @formular_answers.any? { |fa| fa.formular_answer_documents.present? }
 
       render "custom/admin/formular_follow_up_letters/update"
     else
@@ -54,6 +55,7 @@ module FormularFollowUpLettersAdminActions
     @formular_fields = @formular.formular_fields
     @formular_answers = @formular.formular_answers
     @image_flag = @formular_answers.any? { |fa| fa.formular_answer_images.present? }
+    @document_flag = @formular_answers.any? { |fa| fa.formular_answer_documents.present? }
 
     render "custom/admin/formular_follow_up_letters/send_emails"
   end

@@ -1,4 +1,4 @@
-class FormularAnswerImageDirectUpload
+class FormularAnswerAttachmentDirectUpload
   include ActiveModel::Validations
   include ActiveModel::Conversion
   extend ActiveModel::Naming
@@ -20,7 +20,11 @@ class FormularAnswerImageDirectUpload
       @formular_answer = FormularAnswer.find_or_initialize_by(id: attributes[:formular_answer_id])
 
       if (@attachment.present? || @cached_attachment.present?)
-        @relation = @formular_answer.formular_answer_images.send("build", relation_attributtes)
+        if attributes[:attachment].content_type == "application/pdf"
+          @relation = @formular_answer.formular_answer_documents.send("build", relation_attributtes)
+        else
+          @relation = @formular_answer.formular_answer_images.send("build", relation_attributtes)
+        end
       end
     end
   end

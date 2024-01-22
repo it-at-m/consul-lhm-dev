@@ -190,6 +190,7 @@ module ProjektPhaseAdminActions
     @formular_answers = @formular.formular_answers
     @formular_follow_up_letters = @formular.formular_follow_up_letters
     @image_flag = @formular_answers.any? { |fa| fa.formular_answer_images.present? }
+    @document_flag = @formular_answers.any? { |fa| fa.formular_answer_documents.present? }
 
     respond_to do |format|
       format.html { render "custom/admin/projekt_phases/formular_answers" }

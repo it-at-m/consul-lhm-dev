@@ -4,10 +4,14 @@
       <th></th>
       <th>Follow-up E-Mail(s)</th>
       <% @formular_fields.each do |ff| %>
+        <% next if ff.kind.in?(["image", "document"]) %>
         <th><%= ff.name %></th>
       <% end %>
       <% if @image_flag %>
         <th>Bilder</th>
+      <% end %>
+      <% if @document_flag %>
+        <th>Documente</th>
       <% end %>
       <th>Einsender-ID</th>
       <th>E-Mail des Absenders</th>
@@ -27,6 +31,7 @@
           <% end %>
         </td>
         <% @formular_fields.each do |ff| %>
+          <% next if ff.kind.in?(["image", "document"]) %>
           <td><%= fa.answers[ff.key] %></td>
         <% end %>
         <% if @image_flag %>
@@ -34,6 +39,19 @@
             <%= fa.formular_answer_images.map do |image| %>
               <% link_to image.formular_field_key, url_for(image.variant(:large)), target: "_blank" %>
             <% end.join(", ").html_safe %>
+          </td>
+        <% end %>
+        <% if @document_flag %>
+          <td>
+            <ul class="document-list">
+              <% fa.formular_answer_documents.each do |document| %>
+              <li class="document-list--document">
+              <%= link_to document.title,
+                          document.attachment, target: "_blank",
+                          rel: "nofollow" %>
+              </li>
+              <% end %>
+            </ul>
           </td>
         <% end %>
         <td><%= fa.submitter_id %></td>
