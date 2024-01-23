@@ -4,8 +4,10 @@ class Pages::Projekts::SidebarCtaComponent < ApplicationComponent
   end
 
   def render?
+    return false unless extended_feature?("modulewide.new_resource_button_in_sidebar")
+
     return false if @projekt_phase.nil?
-    return true if @projekt_phase.is_a?(ProjektPhase::BudgetPhase)
+    return true if @projekt_phase.is_a?(ProjektPhase::BudgetPhase) && @projekt_phase.budget.phase.in?(%w[accepting selecting balloting])
 
     @projekt_phase.type.in?(phase_types_with_new_button + phase_types_with_link)
   end
