@@ -1,28 +1,26 @@
 <% map = capture do %>
-  <% if @map_coordinates.present? %>
-    <% resources_name = resources.first&.class&.name&.underscore&.pluralize %>
-    <% resources_name = "deficiency-reports" if resources.first&.is_a?(DeficiencyReport) %>
-    <% resources_name = "budgets" if resources.first&.is_a?(Budget::Investment) %>
-    <div class="map resources-list--map not-print">
-      <% if @projekt_phase&.projekt&.vc_map_enabled? %>
-        <%= render Shared::VCMapComponent.new(
-          parent_class: resources_name,
-          process_coordinates: @map_coordinates,
-          map_location: @map_location || @projekt_phase&.map_location,
-          projekt_phase: @projekt_phase,
-          show_admin_shape: @projekt_phase&.map_location&.show_admin_shape?
-        ) %>
-      <% else %>
-        <%= render Shared::MapComponent.new(
-          parent_class: resources_name,
-          process_coordinates: @map_coordinates,
-          map_location: @map_location || @projekt_phase&.map_location,
-          projekt_phase: @projekt_phase,
-          show_admin_shape: @projekt_phase&.map_location&.show_admin_shape?
-        ) %>
-      <% end %>
-    </div>
-  <% end %>
+  <% resources_name = resources.first&.class&.name&.underscore&.pluralize %>
+  <% resources_name = "deficiency-reports" if resources.first&.is_a?(DeficiencyReport) %>
+  <% resources_name = "budgets" if resources.first&.is_a?(Budget::Investment) %>
+  <div class="map resources-list--map not-print">
+    <% if @projekt_phase&.projekt&.vc_map_enabled? %>
+      <%= render Shared::VCMapComponent.new(
+        parent_class: resources_name,
+        process_coordinates: @map_coordinates,
+        map_location: @map_location || @projekt_phase&.map_location,
+        projekt_phase: @projekt_phase,
+        show_admin_shape: @projekt_phase&.map_location&.show_admin_shape?
+      ) %>
+    <% else %>
+      <%= render Shared::MapComponent.new(
+        parent_class: resources_name,
+        process_coordinates: @map_coordinates,
+        map_location: @map_location || @projekt_phase&.map_location,
+        projekt_phase: @projekt_phase,
+        show_admin_shape: @projekt_phase&.map_location&.show_admin_shape?
+      ) %>
+    <% end %>
+  </div>
 <% end %>
 
 <% if custom_body.present? %>
