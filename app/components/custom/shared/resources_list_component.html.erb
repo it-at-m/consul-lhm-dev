@@ -1,5 +1,5 @@
 <% map = capture do %>
-  <% if @map_location.present? || @projekt_phase&.map_location.present? %>
+  <% if @map_coordinates.present? || @map_location.present? || @projekt_phase&.map_location.present? %>
     <% resources_name = resources.first&.class&.name&.underscore&.pluralize %>
     <% resources_name = "deficiency-reports" if resources.first&.is_a?(DeficiencyReport) %>
     <% resources_name = "budgets" if resources.first&.is_a?(Budget::Investment) %>
