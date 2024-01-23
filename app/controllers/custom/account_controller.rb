@@ -58,7 +58,7 @@ class AccountController < ApplicationController
     @registered_address = @account.registered_address
     if @registered_address_city.blank?
       @selected_city_id = "0" if @registered_address_city.blank?
-      @residence.form_registered_address_city_id = "0"
+      @account.form_registered_address_city_id = "0"
     end
   end
 
