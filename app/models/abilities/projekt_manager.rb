@@ -153,9 +153,7 @@ module Abilities
         budget.balloting_or_later?
         # budget.balloting_finished? && budget.has_winning_investments?
       end
-      can :read_stats, Budget do |budget|
-        Budget.valuating_or_later.stats_enabled.ids.include?(budget.id)
-      end
+      can :read_stats, Budget, id: Budget.valuating_or_later.ids
 
       can :recalculate_winners, Budget, &:balloting_or_later?
 
