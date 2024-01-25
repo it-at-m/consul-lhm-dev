@@ -24,7 +24,7 @@
       vcsApp.customMapOptions.defaultColor = $(element).data("default-color");
       vcsApp.customMapOptions.mapCenterLatitude = $(element).data("map-center-latitude");
       vcsApp.customMapOptions.mapCenterLongitude = $(element).data("map-center-longitude");
-      vcsApp.customMapOptions.mapCenterZoom = $(element).data("map-center-zoom");
+      vcsApp.customMapOptions.mapCenterZoom = $(element).data("map-zoom");
 
       // create new feature info session to allow feature click interaction
       App.VCMap.createFeatureInfoSession(vcsApp);
@@ -195,11 +195,22 @@
       var mapCenterLat = app.customMapOptions.mapCenterLatitude;
       var mapCenterLong = app.customMapOptions.mapCenterLongitude;
 
+      var zoomMatrix = {
+        18: 200,
+        17: 400,
+        16: 800,
+        15: 1400,
+        14: 2400,
+        13: 4800,
+        12: 9600
+      };
+
       var viewpoint = new vcs.Viewpoint({
         "groundPosition": [
           mapCenterLong,
           mapCenterLat,
         ],
+        "distance": zoomMatrix[app.customMapOptions.mapCenterZoom] || 9600,
         "pitch": -35,
         "animate": true
       });
