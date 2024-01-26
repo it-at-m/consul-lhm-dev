@@ -58,8 +58,6 @@ de:
           custom_help_text_in_modules_description: Am unteren Ende der Modulübersicht können individuelle Hilfstexte platziert werden
           show_affiliation_filter_in_index_sidebar: Gebietsfilter anzeigen
           show_affiliation_filter_in_index_sidebar_description: Zeigt den Gebietsfilter in der rechten Seitenleiste der einzelnen Module
-          new_resource_button_in_sidebar: Beteiligungsbutton in der rechten Seitenleiste anzeigen
-          new_resource_button_in_sidebar_description: Zeigt eine Schaltfläche zur direkten Beteiligung in der rechten Seitenleiste an.
         debates:
           intro_text_for_debates: Einleitungstext für Diskussionen
           intro_text_for_debates_description: Aktivieren Sie einen individuellen Einleitungstext oberhalb der Diskussionsübersicht
@@ -178,6 +176,8 @@ de:
           show_navigator_in_projekts_page_sidebar_description: Zeigt die Projektverzeichnis in der rechten Seitenleiste der Projektseiten an
           projekt_page_sharing: Teilen-Funktion
           projekt_page_sharing_description: Aktivieren Sie die Teilen-Funktion in der rechten Seitenleiste der Projektseite
+          new_resource_button_in_sidebar: Beteiligungsbutton in der rechten Seitenleiste anzeigen
+          new_resource_button_in_sidebar_description: Zeigt eine Schaltfläche zur direkten Beteiligung in der rechten Seitenleiste an.
         debates:
           show_report_button_in_sidebar: Diskussion melden
           show_report_button_in_sidebar_description: Aktivieren Sie die Melden-Funktion für Diskussionen

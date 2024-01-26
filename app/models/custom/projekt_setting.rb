@@ -53,6 +53,7 @@ class ProjektSetting < ApplicationRecord
         "projekt_feature.sidebar.show_map": "active",
         "projekt_feature.sidebar.show_navigator_in_projekts_page_sidebar": "active",
         "projekt_feature.sidebar.projekt_page_sharing": "active",
+        "projekt_feature.sidebar.new_resource_button_in_sidebar": "active",
 
         "projekt_custom_feature.default_footer_tab": nil
       }
