@@ -6,7 +6,7 @@ class Pages::Projekts::SidebarCtaComponent < ApplicationComponent
   end
 
   def render?
-    return false unless projekt_feature?(@projekt_phase.projekt, "sidebar.new_resource_button_in_sidebar")
+    return false unless projekt_feature?(@projekt_phase&.projekt, "sidebar.new_resource_button_in_sidebar")
 
     return false if @projekt_phase.nil?
     return true if @projekt_phase.is_a?(ProjektPhase::BudgetPhase) && @projekt_phase.budget.phase.in?(%w[accepting selecting balloting])
