@@ -23,6 +23,9 @@
         <div class="column">
           <%= f.text_field :more_info_link %>
         </div>
+        <div class="column">
+          <%= f.text_field :more_info_iframe %>
+        </div>
       </div>
     <% end %>
     <% if @question.votation_type.unique? || @question.votation_type.multiple? %>

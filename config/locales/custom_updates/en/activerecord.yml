@@ -38,6 +38,7 @@ en:
         open_answer_text: Open Answer
       poll/question/answer:
         more_info_link: Explanation link
+        more_info_iframe: iFrame link
       widget/card:
         card_category: Category
       deficiency_report:

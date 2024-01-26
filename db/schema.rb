@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_01_22_132434) do
+ActiveRecord::Schema.define(version: 2024_01_26_093549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -1517,6 +1517,7 @@ ActiveRecord::Schema.define(version: 2024_01_22_132434) do
     t.boolean "open_answer", default: false
     t.string "more_info_link"
     t.integer "next_question_id"
+    t.string "more_info_iframe"
     t.index ["question_id"], name: "index_poll_question_answers_on_question_id"
   end
 

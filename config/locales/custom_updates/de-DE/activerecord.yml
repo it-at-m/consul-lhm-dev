@@ -83,6 +83,7 @@ de:
         open_answer_text: Offene Antwort
       poll/question/answer:
         more_info_link: Erklärungslink
+        more_info_iframe: Iframe-Link
       widget/card:
         card_category: Kategorie
       deficiency_report:
