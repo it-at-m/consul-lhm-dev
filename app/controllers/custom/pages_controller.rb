@@ -245,7 +245,7 @@ class PagesController < ApplicationController
       end
     end
 
-    unless params[:section] == "results"
+    unless params[:section] == "results" && can?(:read_results, @budget)
       @investments = @investments.perform_sort_by(@current_order, session[:random_seed]).page(params[:page]).per(18)
     end
   end

@@ -383,6 +383,7 @@ de:
           document_last_digits: Dokument (4 letzten Ziffern)
           unique_stamp: Unique Stamp
           created_at: Nutzer angelegt am
+          last_sign_in_date: letzter Login am
           verified_at: Verifiziert am
           actions: Aktionen
           action:
