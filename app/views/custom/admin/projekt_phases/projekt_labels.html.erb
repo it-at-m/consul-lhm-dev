@@ -25,7 +25,7 @@
         <tbody>
           <% @projekt_labels.each do |label| %>
             <tr id="<%= dom_id(label) %>">
-              <td><%= "<i class='fas fa-" + label.icon + "'></i>" if label.icon %></td>
+              <td><%= ("<i class='fas fa-" + label.icon + "'></i>").html_safe if label.icon %></td>
               <td><%= label.name %></td>
               <td>
                 <%= render Admin::TableActionsComponent.new(label,
