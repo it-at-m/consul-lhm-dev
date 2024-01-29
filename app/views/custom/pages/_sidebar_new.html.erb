@@ -15,7 +15,7 @@
   <% end %>
 
   <%= render(Mobile::FixedBottomActionComponent.new) do %>
-    <div id="sidebar-cta">
+    <div id="sidebar-cta" class="<%= 'hide-on-desktop' unless projekt_feature?(projekt, 'sidebar.new_resource_button_in_sidebar') %>">
       <%= render Pages::Projekts::SidebarCtaComponent.new(@default_projekt_phase) %>
     </div>
   <% end %>

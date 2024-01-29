@@ -34,8 +34,10 @@
         <% else %>
 
           <% if @budget.phase == "accepting" %>
-            <div class="new-resource-cta">
-              <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
+            <div class="hide-on-small-tablet">
+              <div class="new-resource-cta">
+                <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
+              </div>
             </div>
           <% end %>
 

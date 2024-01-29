@@ -1,13 +1,9 @@
 class Pages::Projekts::SidebarCtaComponent < ApplicationComponent
-  delegate :projekt_feature?, to: :helpers
-
   def initialize(projekt_phase = nil)
     @projekt_phase = projekt_phase
   end
 
   def render?
-    return false unless projekt_feature?(@projekt_phase&.projekt, "sidebar.new_resource_button_in_sidebar")
-
     return false if @projekt_phase.nil?
     return true if @projekt_phase.is_a?(ProjektPhase::BudgetPhase) && @projekt_phase.budget.phase.in?(%w[accepting selecting balloting])
 
