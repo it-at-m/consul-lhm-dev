@@ -30,13 +30,13 @@
     <% end %>
   </div>
 
-  <% if projekt_feature?(projekt, 'general.enable_sdgs') && projekt.sdg_goals.any? %>
+  <% if projekt.sdg_goals.any? %>
     <%= render Shared::SidebarCardComponent.new(title: 'SDGS', icon_name: "tag") do |c| %>
       <%= render partial: 'pages/sidebar/sdgs', locals: { projekt: projekt } %>
     <% end %>
   <% end %>
 
-  <% if projekt_feature?(projekt, 'general.enable_tags') %>
+  <% if projekt.tags.category.any? %>
     <%= render Shared::SidebarCardComponent.new(title: 'Tags', icon_name: "tag") do |c| %>
       <%= render partial: 'pages/sidebar/tags', locals: { projekt: projekt } %>
     <% end %>
