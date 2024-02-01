@@ -8,7 +8,7 @@ module TranslatableFormHelper
   end
 
   def backend_translations_enabled?
-    (controller.class.parents & [Admin, Management, Valuation, SDGManagement, ProjektManagement]).any?
+    controller.class.module_parents.intersect?([Admin, Management, Valuation, SDGManagement, ProjektManagement])
   end
 
   def highlight_translation_html_class

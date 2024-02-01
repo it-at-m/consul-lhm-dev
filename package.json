@@ -1,0 +1,11 @@
+{
+  "name": "consuldemocracy",
+  "dependencies": {
+    "jquery": "^3.7.1",
+    "jquery-ui": "^1.13.2",
+    "jquery-ujs": "^1.2.3",
+    "leaflet": "^1.9.4",
+    "leaflet.locatecontrol": "^0.79.0",
+    "leaflet.markercluster": "^1.5.3"
+  }
+}
