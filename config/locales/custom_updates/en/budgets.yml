@@ -91,6 +91,7 @@ en:
           implementation_text_html: "%{author} supports with implementation<br><br>%{implementation_contribution}"
           price: Cost estimation by the administration
           user_cost_estimate: Cost estimation by the user
+          feasibility_explanation: Assessment of the administration
         statuses:
           phases:
             accepting: The investment proposal was successfully submitted.
