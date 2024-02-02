@@ -59,6 +59,11 @@
         </div>
       </div>
     <% else %>
+      <div class="row">
+        <div class="small-12 column">
+          <%= f.text_area :price_explanation, rows: 3, label: "Erläuterung der Bewertung" %>
+        </div>
+      </div>
       <%= f.hidden_field :price, value: 0 %>
     <% end %>
 

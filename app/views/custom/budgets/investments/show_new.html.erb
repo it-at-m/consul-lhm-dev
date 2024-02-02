@@ -57,6 +57,11 @@
               <%= @investment.price_explanation %>
             <% end %>
           </div>
+        <% elsif @investment.should_show_feasibility_explanation? %>
+            <div class="resource-page--description new-card" style="background-color:#dff0d8;border-color:#d6e9c6;">
+              <h3><%= t("budgets.investments.show.unfeasibility_explanation") %></h3>
+              <p><%= auto_link_already_sanitized_html wysiwyg(@investment.price_explanation) %></p>
+            </div>
         <% end %>
 
         <% if projekt_phase_feature?(@investment.projekt_phase, "form.show_user_cost_estimate") && @investment.user_cost_estimate.present? %>
