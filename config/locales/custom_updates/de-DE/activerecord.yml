@@ -215,3 +215,6 @@ de:
       formular_answer_image:
         title: Titel
         attachment: Anhang
+      formular_answer_document:
+        title: Titel
+        attachment: Anhang

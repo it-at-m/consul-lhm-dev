@@ -143,3 +143,6 @@ en:
       formular_answer_image:
         title: Title
         attachment: Attachment
+      formular_answer_document:
+        title: Title
+        attachment: Attachment
