@@ -1,6 +1,4 @@
 class SiteCustomization::Image < ApplicationRecord
-  include HasAttachment
-
   VALID_IMAGES = {
     "logo_header" => [80, 80],
     "social_media_icon" => [470, 246],
@@ -11,7 +9,7 @@ class SiteCustomization::Image < ApplicationRecord
     "logo_email" => [400, 80]
   }.freeze
 
-  has_attachment :image
+  has_one_attached :image
 
   validates :name, presence: true, uniqueness: true, inclusion: { in: ->(*) { VALID_IMAGES.keys }}
   validates :image, file_content_type: { allow: ["image/png", "image/jpeg"], if: -> { image.attached? }}
@@ -50,7 +48,11 @@ class SiteCustomization::Image < ApplicationRecord
     def check_image
       return unless image.attached?
 
-      image.analyze unless image.analyzed?
+      unless image.analyzed?
+        attachment_changes["image"].upload
+        image.analyze
+      end
+
       width = image.metadata[:width]
       height = image.metadata[:height]
 
