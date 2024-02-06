@@ -2,7 +2,15 @@
   <h3><%= answer.title %></h3>
 <% end %>
 
-<% if answer.images.any? %>
+<% if answer.more_info_iframe.present? %>
+  <div class="margin-top">
+    <div class="more-info">
+      <iframe frameborder="0" height="650" scrolling="no" src="<%= answer.more_info_iframe %>" width="1860"></iframe>
+    </div>
+  </div>
+<% end %>
+
+<% if answer.images.any? && answer.more_info_iframe.blank? %>
   <%= render "polls/gallery", answer: answer %>
 <% end %>
 

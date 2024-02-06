@@ -30,6 +30,7 @@ tmp/
 /public/sitemap.xml
 /public/assets/
 /public/machine_learning/data/
+/node_modules/
 
 # Bundler config, cache and gemsets
 .bundle/

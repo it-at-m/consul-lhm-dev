@@ -5,6 +5,8 @@ class Shared::ResourcesListComponent < ApplicationComponent
   renders_one :custom_body
   renders_one :items_remark
 
+  delegate :projekt_phase_feature?, to: :helpers
+
   attr_reader :filters, :remote_url, :resource_type, :resources
 
   def initialize(
@@ -143,5 +145,11 @@ class Shared::ResourcesListComponent < ApplicationComponent
       "newest",
       "oldest"
     ]
+  end
+
+  def render_map?
+    return false if @projekt_phase.present? && !projekt_phase_feature?(@projekt_phase, "form.show_map")
+
+    @map_coordinates.present? || @map_location.present? || @projekt_phase&.map_location.present?
   end
 end

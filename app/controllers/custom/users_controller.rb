@@ -8,13 +8,15 @@ class UsersController < ApplicationController
       redirect_to root_path, alert: "Diese Funktion ist deaktiviert"
     end
 
-    @users = User.all.order(created_at: :desc).page(params[:page])
+    @users = User.active.order(created_at: :desc).page(params[:page])
   end
 
   def show
     raise CanCan::AccessDenied if params[:filter] == "follows" && !valid_interests_access?(@user)
 
-    if @user == current_user
+    if @user.erased?
+      head :not_found
+    elsif @user == current_user
       redirect_to account_path
     elsif Setting.new_design_enabled?
       render :show_new

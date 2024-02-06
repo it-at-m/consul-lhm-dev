@@ -47,7 +47,6 @@ class FormularAnswerImage < ApplicationRecord
     self.class
   end
 
-
   private
 
     def association_name

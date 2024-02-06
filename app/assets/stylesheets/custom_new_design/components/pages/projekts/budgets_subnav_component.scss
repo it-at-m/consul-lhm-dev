@@ -1,0 +1,15 @@
+.custom-new-design {
+  .budget-subnav {
+    margin-top: 20px;
+    margin-bottom: 40px;
+
+    .budget-subnav-item {
+      margin-right: 10px;
+
+      &.is-active {
+        font-weight: bold;
+        text-decoration: underline;
+      }
+    }
+  }
+}

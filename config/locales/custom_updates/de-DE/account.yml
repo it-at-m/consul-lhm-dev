@@ -3,6 +3,7 @@ de:
     account:
       show:
         change_credentials_link: Anmeldeinformationen ändern
+        edit_details_link: Daten aktualisieren
         erase_account_link: Konto löschen
         settings: Kontoeinstellungen
         verification_tittle: Kontoverifizierung
@@ -18,3 +19,7 @@ de:
           description2: Mit Klick auf den nachfolgenden Button können Sie sich von allen Projektbenachrichtigungen abmelden. Sollten Sie sich nur von einzelnen Projektphasen abmelden wollen, dann nutzen Sie bitte den direkten Link zu den Projekten.
           description2: Mit Klick auf den nachfolgenden Button können Sie sich von allen Projektbenachrichtigungen abmelden. Sollten Sie sich nur von einzelnen Projektphasen abmelden wollen, dann loggen Sie sich bitte ein und deaktivieren die Benachrichtigung in der Fußzeile des jeweiligen Projektes. Sie können hierfür einfach auf die oben aufgeführten Projekte klicken.
           cancel_projekts_subscriptions_button: Bei allen Projektbenachrichtigungen abmelden
+      edit_details:
+        title: Daten aktualisieren
+        documents_label: Dokumentenprüfung
+        submit: Daten aktualisieren

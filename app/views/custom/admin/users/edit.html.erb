@@ -22,6 +22,26 @@
 
   <div class="row">
     <div class="column">
+      <div class="user-date-of-birth sign-up">
+        <%= f.date_select :date_of_birth,
+                          prompt: true,
+                          start_year: 1900, end_year: minimum_required_age.years.ago.year %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <div>
+        <%= f.select :gender, options_for_gender_select,
+          { prompt: t("custom.helpers.select.gender_prompt") },
+          { class: "show-arrow", style: "background-color:#f8f8f8;" } %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
       <%= f.submit %>
     </div>
   </div>

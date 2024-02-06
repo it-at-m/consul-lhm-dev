@@ -383,6 +383,7 @@ de:
           document_last_digits: Dokument (4 letzten Ziffern)
           unique_stamp: Unique Stamp
           created_at: Nutzer angelegt am
+          last_sign_in_date: letzter Login am
           verified_at: Verifiziert am
           actions: Aktionen
           action:
@@ -545,11 +546,13 @@ de:
           follow_up_fields_title:  Follow-up Formularfelder
           dropdown_hint: Bitte geben Sie Ihre Antwortoptionen ein. Diese müssen durch ein Komma getrennt sein.
           kinds:
-            string: Text
+            string: kurzer Text
+            textarea: langer Text
             email: Email
             date: Datum
             dropdown: Dropdown
             image: Bild
+            document: Dokument
           update_field_button: Formularfeld aktualisieren
           add_field_button: Neues Formularfeld hinzufügen
         formular_answers:

@@ -13,14 +13,13 @@
   }
 
   h1 {
-    color: white;
     font-size: 160px;
     line-height: 160px;
-    margin: 0;
   }
 
-  h2 {
+  h1, h2, h3, h4 {
     color: white;
+    margin: 0;
   }
 
   div.error {
@@ -29,17 +28,26 @@
     top: 50%;
     width: 100%;
   }
+
+  a {
+    color: #fff;
+  }
   </style>
 </head>
 
 <body>
   <div class="error">
     <h1>403</h1>
-    <h2 style="margin-bottom:0">Sie sind nicht berechtigt diese Seite aufzurufen.</h2>
+    <h2 style="margin-top:20px;">Sie sind nicht berechtigt diese Seite aufzurufen.</h2>
     <% if @individual_group_value_names.any? %>
-      <br>
-      <h2><%= "Die Sichtbarkeit ist beschränkt auf: #{@individual_group_value_names.join(", ")}" %></h2>
+      <h4 style="margin-top:5px"><%= "Die Sichtbarkeit ist beschränkt auf: #{@individual_group_value_names.join(", ")}" %></h4>
     <% end %>
+    <h3 style="margin-top:30px">
+      <a href="/users/sign_in">Anmelden</a> oder <a href="/users/sign_up">Registrieren</a> um Zugriff zu erhalten.
+    </h3>
+    <h3 style="margin-top:100px">
+      <a href="/">Zurück zur Startseite</a>
+    </h3>
   </div>
 </body>
 </html>

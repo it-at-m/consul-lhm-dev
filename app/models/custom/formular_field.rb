@@ -1,5 +1,5 @@
 class FormularField < ApplicationRecord
-  KINDS = %w[string email date dropdown image].freeze
+  KINDS = %w[string textarea email date dropdown image document].freeze
 
   CUSTOM_ATTRIBUTES = %i[email_for_confirmation drop_down_options].freeze
   CUSTOM_ATTRIBUTES.each { |attr| attr_accessor attr }

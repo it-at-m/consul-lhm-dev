@@ -1,5 +1,5 @@
-<% map = capture do %>
-  <% if @map_coordinates.present? %>
+<% if render_map? %>
+  <% map = capture do %>
     <% resources_name = resources.first&.class&.name&.underscore&.pluralize %>
     <% resources_name = "deficiency-reports" if resources.first&.is_a?(DeficiencyReport) %>
     <% resources_name = "budgets" if resources.first&.is_a?(Budget::Investment) %>
@@ -55,7 +55,7 @@
       </h3>
     <% end %>
 
-    <%= map %>
+    <%= map if render_map? %>
 
     <div class="resources-list--actions">
       <% if @text_search_enabled && i18n_namespace.present? %>

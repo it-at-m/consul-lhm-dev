@@ -72,7 +72,7 @@ module AdminActions::Poll::Questions::Answers
 
     def answer_params
       attributes = [
-        :title, :description, :given_order, :question_id, :open_answer, :more_info_link,
+        :title, :description, :given_order, :question_id, :open_answer, :more_info_link, :more_info_iframe,
         :next_question_id, documents_attributes: document_attributes]
 
       params.require(:poll_question_answer).permit(

@@ -7,6 +7,12 @@ en:
         p1_s: Two weeks ago you were assigned a deficiency report, which was not processed yet.
         p1_p: Two weeks ago you were assigned multiple deficiency reports, which were not processed yet.
         signature_html: Best regards</br>Consul
+      new_comments_for_deficiency_report:
+        subject: "Kommentar zur Mangelmeldung (%{deficiency_report_title}) wurde noch nicht bearbeitet"
+        hi: Dear Officer.
+        p1_initial: You have just been assigned the following comment on a deficiency report for processing.
+        p1_reminder: You were recently assigned a comment on a deficiency report that has not yet been processed.
+        signature_html: Thank you and best regards</br>Consul
       not_assigned_deficiency_reports:
         subject: Deficiency report not assigned yet
         hi: Dear Admin,

@@ -182,7 +182,7 @@ module Abilities
       can :manage, FormularFollowUpLetter
       can :manage, ProjektArgument
 
-      can :read_stats, Budget, id: Budget.valuating_or_later.stats_enabled.ids
+      can :read_stats, Budget, id: Budget.valuating_or_later.ids
     end
   end
 end

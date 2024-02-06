@@ -21,15 +21,14 @@ class Polls::Questions::AnswerFormComponent < ApplicationComponent
 
   def available_vote_weight
     return 0 unless current_user.present?
-
-    if user_answer.present?
-      question.max_votes -
-        question.answers.where(author_id: current_user.id).sum(:answer_weight) +
-        user_answer.answer_weight
-    else
-      question.max_votes -
-        question.answers.where(author_id: current_user.id).sum(:answer_weight)
+    unless question.votation_type&.multiple_with_weight?
+      raise "available_vote_weight called for a non multiple_with_weight question"
     end
+
+    available_weight = question.max_votes - question.answers.where(author_id: current_user.id).sum(:answer_weight)
+    available_weight += user_answer.answer_weight if user_answer.present?
+
+    [available_weight, question.votation_type.max_votes_per_answer].compact.min
   end
 
   def disable_answer?

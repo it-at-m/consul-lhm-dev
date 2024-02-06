@@ -20,10 +20,10 @@ class WelcomeController < ApplicationController
     @affiliated_geozones = []
     @restricted_geozones = []
 
-    @active_projekts = @active_feeds.include?("active_projekts") ? @feeds.find{ |feed| feed.kind == 'active_projekts' }.active_projekts : []
+    @active_projekts = @active_feeds.include?("active_projekts") ? @feeds.find{ |feed| feed.kind == 'active_projekts' }.active_projekts(current_user) : []
     @active_projekts = @active_projekts.sort_by(&:created_at).reverse
 
-    @expired_projekts = @active_feeds.include?("expired_projekts") ? @feeds.find{ |feed| feed.kind == 'expired_projekts' }.expired_projekts : []
+    @expired_projekts = @active_feeds.include?("expired_projekts") ? @feeds.find{ |feed| feed.kind == 'expired_projekts' }.expired_projekts(current_user) : []
     @expired_projekts = @expired_projekts.sort_by(&:created_at).reverse
 
     @latest_polls = @active_feeds.include?("polls") ? filtered_items(@feeds.find { |feed| feed.kind == 'polls' }) : []

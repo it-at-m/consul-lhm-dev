@@ -63,5 +63,13 @@ class Budget
     def final_winner?
       selected? && !incompatible? && winner?
     end
+
+    def should_show_feasibility_explanation?
+      return if should_show_price?
+
+      feasible? &&
+        selected? && budget.published_prices? &&
+        price_explanation.present?
+    end
   end
 end

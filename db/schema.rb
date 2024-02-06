@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_12_20_121306) do
+ActiveRecord::Schema.define(version: 2024_01_26_093549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -849,7 +849,7 @@ ActiveRecord::Schema.define(version: 2023_12_20_121306) do
     t.index ["user_id"], name: "index_follows_on_user_id"
   end
 
-  create_table "formular_answer_images", force: :cascade do |t|
+  create_table "formular_answer_documents", force: :cascade do |t|
     t.bigint "formular_answer_id"
     t.string "formular_field_key"
     t.string "title", limit: 80
@@ -859,6 +859,19 @@ ActiveRecord::Schema.define(version: 2023_12_20_121306) do
     t.datetime "attachment_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["formular_answer_id"], name: "index_formular_answer_documents_on_formular_answer_id"
+  end
+
+  create_table "formular_answer_images", force: :cascade do |t|
+    t.bigint "formular_answer_id"
+    t.string "title", limit: 80
+    t.string "attachment_file_name"
+    t.string "attachment_content_type"
+    t.bigint "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "formular_field_key"
     t.index ["formular_answer_id"], name: "index_formular_answer_images_on_formular_answer_id"
   end
 
@@ -1504,6 +1517,7 @@ ActiveRecord::Schema.define(version: 2023_12_20_121306) do
     t.boolean "open_answer", default: false
     t.string "more_info_link"
     t.integer "next_question_id"
+    t.string "more_info_iframe"
     t.index ["question_id"], name: "index_poll_question_answers_on_question_id"
   end
 
@@ -2450,6 +2464,7 @@ ActiveRecord::Schema.define(version: 2023_12_20_121306) do
     t.bigint "registered_address_id"
     t.string "street_number_extension"
     t.boolean "reverify", default: true
+    t.string "auth_image_link"
     t.boolean "prefer_wide_resources_list_view_mode"
     t.index ["bam_street_id"], name: "index_users_on_bam_street_id"
     t.index ["city_street_id"], name: "index_users_on_city_street_id"
@@ -2529,6 +2544,7 @@ ActiveRecord::Schema.define(version: 2023_12_20_121306) do
     t.integer "max_votes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "max_votes_per_answer"
   end
 
   create_table "votes", id: :serial, force: :cascade do |t|
@@ -2616,6 +2632,7 @@ ActiveRecord::Schema.define(version: 2023_12_20_121306) do
   add_foreign_key "failed_census_calls", "users"
   add_foreign_key "flags", "users"
   add_foreign_key "follows", "users"
+  add_foreign_key "formular_answer_documents", "formular_answers"
   add_foreign_key "formular_answer_images", "formular_answers"
   add_foreign_key "formular_answers", "formulars"
   add_foreign_key "formular_fields", "formulars"

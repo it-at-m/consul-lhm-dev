@@ -50,5 +50,10 @@
     <%= render Sidebar::ExportListComponent.new(
       path: projekt_phase_footer_tab_page_path(@projekt_phase.projekt.page, @projekt_phase, **request.query_parameters, format: :csv)
     ) %>
+
+    <div class="new-resource-cta <%= projekt_feature?(@projekt_phase.projekt, 'sidebar.new_resource_button_in_sidebar') ? 'hide' : 'hide-on-desktop' %>" style="width:100%;margin:2rem 0;">
+      <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
+    </div>
+
   </div>
 </div>

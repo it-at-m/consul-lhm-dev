@@ -6,7 +6,7 @@ module PollsHelper
   end
 
   def answer_with_description?(answer)
-    answer.description.present? || answer.images.any? || answer.documents.present? || answer.videos.present?
+    answer.description.present? || answer.more_info_iframe.present? || answer.images.any? || answer.documents.present? || answer.videos.present?
   end
 
   def can_answer_be_open?(question)

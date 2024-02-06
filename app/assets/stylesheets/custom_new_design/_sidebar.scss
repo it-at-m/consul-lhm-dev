@@ -96,6 +96,9 @@
   #responsive-menu {
     .subnavigation {
       z-index: 1005;
+      overflow-y: scroll;
+      max-height: calc(100vh - 60px);
+      overflow-x: hidden;
     }
   }
 

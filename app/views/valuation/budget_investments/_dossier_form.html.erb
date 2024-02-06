@@ -59,6 +59,11 @@
         </div>
       </div>
     <% else %>
+      <div class="row">
+        <div class="small-12 column">
+          <%= f.text_area :price_explanation, rows: 3, label: t("custom.budgets.investments.show.feasibility_explanation") %>
+        </div>
+      </div>
       <%= f.hidden_field :price, value: 0 %>
     <% end %>
 

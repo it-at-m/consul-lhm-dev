@@ -2,7 +2,7 @@
   <div class="margin-bottom">
     <strong style="display:block;"><%= ff.name %></strong>
 
-    <% if ff.kind.in? ["string", "email"] %>
+    <% if ff.kind.in? ["string", "email", "textarea"] %>
       <%= formular_answer.answers[ff.key].presence || "-" %>
     <% elsif ff.kind == "date" %>
       <%= formular_answer.answers[ff.key].presence || "-" %>
@@ -12,6 +12,21 @@
       <% image = formular_answer.formular_answer_images.find_by(formular_field_key: ff.key) %>
       <% if image.present? %>
         <%= render_image(image, :large, true) %>
+      <% else %>
+        -
+      <% end %>
+    <% elsif ff.kind == "document" %>
+      <% documents = formular_answer.formular_answer_documents.where(formular_field_key: ff.key) %>
+      <% if documents.present? %>
+        <ul class="document-list">
+          <% documents.each do |document| %>
+          <li class="document-list--document">
+          <%= link_to document.title,
+                      document.attachment, target: "_blank",
+                      rel: "nofollow" %>
+          </li>
+          <% end %>
+        </ul>
       <% else %>
         -
       <% end %>

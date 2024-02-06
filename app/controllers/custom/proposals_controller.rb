@@ -84,6 +84,8 @@ class ProposalsController
     if params[:projekt_phase_id].present?
       @projekt_phase = ProjektPhase::ProposalPhase.find(params[:projekt_phase_id])
       @projekt = @projekt_phase.projekt
+
+      redirect_to proposals_path unless @projekt.in?(Projekt.selectable_in_selector("proposals", current_user))
     end
 
     @resource = resource_model.new

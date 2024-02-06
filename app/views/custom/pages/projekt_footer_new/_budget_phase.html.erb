@@ -8,13 +8,13 @@
   <div class="main-column">
     <% if @budget.present? %>
 
-      <% if @budget.phase == 'finished' %>
-        <%#= render Pages::Projekts::BudgetsSubnavComponent.new(@budget) %>
+      <% if can?(:read_results, @budget) || can?(:read_stats, @budget) %>
+        <%= render Pages::Projekts::BudgetsSubnavComponent.new(@budget, @projekt_phase) %>
       <% end %>
 
-      <% if params[:section] == "results" %>
+      <% if params[:section] == "results" && can?(:read_results, @budget) %>
         <%= render "pages/projekt_footer_new/budget/results" %>
-      <% elsif params[:section] == "stats" %>
+      <% elsif params[:section] == "stats" && can?(:read_stats, @budget) %>
         <%= render "pages/projekt_footer_new/budget/stats" %>
       <%# elsif params[:section] == "executions" %>
         <%#= render "pages/projekt_footer_new/budget/executions" %>
@@ -27,14 +27,13 @@
             <div>
               Investitionsvorschläge können erst in der nächsten Phase
               eingereicht werden. Diese beginnt am
-              <%= I18n.l(@budget.current_phase.next_enabled_phase.starts_at, format: :new_date_with_year) %>
-              // 02. September 2022
+              <%= I18n.l(@budget.current_phase.next_enabled_phase.starts_at, format: :new_date_with_year) %>.
             </div>
           </div>
         <% else %>
 
           <% if @budget.phase == "accepting" %>
-            <div class="new-resource-cta">
+            <div class="new-resource-cta <%= 'hide-on-small-tablet' if projekt_feature?(@projekt_phase.projekt, 'sidebar.new_resource_button_in_sidebar') %>" style="width:100%;margin:2rem 0;">
               <%= render Shared::NewButtonComponent.new(projekt_phase: @projekt_phase) %>
             </div>
           <% end %>

@@ -7,6 +7,7 @@ class PagesController < ApplicationController
   include ProposalsHelper
   include Takeable
   include RandomSeed
+  include HasEmbeddableShortcodes
 
   has_orders %w[most_voted newest oldest], only: :show
 
@@ -31,6 +32,12 @@ class PagesController < ApplicationController
       end
 
       @cards = @custom_page.cards
+
+      @custom_page.content = process_shortcodes_for(
+        obj: @custom_page,
+        attr: :content,
+        projekt: @projekt,
+      )
 
       render action: custom_page_name
 
@@ -217,9 +224,9 @@ class PagesController < ApplicationController
 
     @investments = @budget.investments
 
-    if params[:section] == "results"
+    if params[:section] == "results" && can?(:read_results, @budget)
       @investments = Budget::Result.new(@budget, @budget.headings.first).investments
-    elsif params[:section] == "stats"
+    elsif params[:section] == "stats" && can?(:read_stats, @budget)
       @stats = Budget::Stats.new(@budget)
       @investments = @budget.investments
     else
@@ -238,7 +245,9 @@ class PagesController < ApplicationController
       end
     end
 
-    @investments = @investments.perform_sort_by(@current_order, session[:random_seed]).page(params[:page]).per(18)
+    unless params[:section] == "results" && can?(:read_results, @budget)
+      @investments = @investments.perform_sort_by(@current_order, session[:random_seed]).page(params[:page]).per(18)
+    end
   end
 
   def set_milestone_phase_footer_tab_variables

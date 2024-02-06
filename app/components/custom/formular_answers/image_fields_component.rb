@@ -32,7 +32,7 @@ class FormularAnswers::ImageFieldsComponent < ApplicationComponent
     end
 
     def direct_upload_path
-      formular_answer_image_direct_uploads_path(
+      formular_answer_attachment_direct_uploads_path(
         "direct_upload[formular_answer_id]": formular_answer.id,
         "direct_upload[formular_field_key]": formular_field.key
       )

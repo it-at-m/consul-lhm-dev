@@ -1,5 +1,6 @@
 class FormularAnswersController < ApplicationController
   include ImageAttributes
+  include DocumentAttributes
 
   skip_authorization_check
   respond_to :js
@@ -48,7 +49,8 @@ class FormularAnswersController < ApplicationController
     def formular_answer_params
       params.require(:formular_answer).permit(
         :formular_id, answers: {},
-        formular_answer_images_attributes: image_attributes.push(:formular_field_key)
+        formular_answer_images_attributes: image_attributes.push(:formular_field_key),
+        formular_answer_documents_attributes: document_attributes.push(:formular_field_key)
       )
     end
 

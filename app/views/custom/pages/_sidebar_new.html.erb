@@ -15,7 +15,7 @@
   <% end %>
 
   <%= render(Mobile::FixedBottomActionComponent.new) do %>
-    <div id="sidebar-cta">
+    <div id="sidebar-cta" class="<%= 'hide' unless projekt_feature?(projekt, 'sidebar.new_resource_button_in_sidebar') %>">
       <%= render Pages::Projekts::SidebarCtaComponent.new(@default_projekt_phase) %>
     </div>
   <% end %>
@@ -30,13 +30,13 @@
     <% end %>
   </div>
 
-  <% if projekt_feature?(projekt, 'general.enable_sdgs') && projekt.sdg_goals.any? %>
+  <% if projekt.sdg_goals.any? %>
     <%= render Shared::SidebarCardComponent.new(title: 'SDGS', icon_name: "tag") do |c| %>
       <%= render partial: 'pages/sidebar/sdgs', locals: { projekt: projekt } %>
     <% end %>
   <% end %>
 
-  <% if projekt_feature?(projekt, 'general.enable_tags') %>
+  <% if projekt.tags.category.any? %>
     <%= render Shared::SidebarCardComponent.new(title: 'Tags', icon_name: "tag") do |c| %>
       <%= render partial: 'pages/sidebar/tags', locals: { projekt: projekt } %>
     <% end %>

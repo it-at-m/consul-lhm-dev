@@ -51,7 +51,7 @@ class Users::NewPublicActivityComponent < ApplicationComponent
         return follows.map(&:followable)
       end
 
-      list.order(created_at: :desc).page(params[:page])
+      list.order(created_at: :desc).page(params[:page]).per(9)
     end
 
     def comments?

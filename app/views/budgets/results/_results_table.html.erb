@@ -3,7 +3,7 @@
      id="<%= results_type %>-container">
 
   <table id="budget-investments-<%= results_type %>" class="table-for-mobile">
-    <thead>
+    <thead class="show-for-medium">
       <tr>
         <th scope="col">
           <%= t("budgets.results.investment_title") %>
@@ -48,6 +48,7 @@
               <%= link_to investment.title, budget_investment_path(@budget, investment) %>
             </td>
             <td class="text-center">
+              <span class="show-for-small-only"><%= t("budgets.results.ballot_lines_count")  + ":" %></span>
               <% if @budget.show_percentage_values_only? %>
                 <%= number_to_percentage(investment.total_ballot_votes_percentage, { strip_insignificant_zeros: true, precision: 2 }) %>
               <% else %>
@@ -56,11 +57,15 @@
             </td>
             <% if @budget.show_money? %>
               <td class="text-center">
+                <span class="show-for-small-only">
+                  <%= t("budgets.results.price") + ":" %>
+                </span>
                 <%= @budget.formatted_amount(investment.price) %>
               </td>
               <% if results_type == :compatible %>
                 <td class="small text-right"
                     title="<%= @budget.formatted_amount(amount_available) %> - <%= @budget.formatted_amount(investment.price) %>">
+                    <span class="show-for-small-only"><%= t("budgets.results.amount_available") + ":" %></span>
                     <%= @budget.formatted_amount(amount_available - investment.price) %>
                     <% amount_available -= investment.price if investment.winner? %>
                 </td>

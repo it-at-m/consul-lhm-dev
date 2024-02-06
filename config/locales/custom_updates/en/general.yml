@@ -1,0 +1,10 @@
+en:
+  custom:
+    general:
+      resource_names:
+        projekts: Projects
+        proposals: Proposals
+        comments: Comments
+        debates: Debates
+        polls: Polls
+        investments: Investment proposals

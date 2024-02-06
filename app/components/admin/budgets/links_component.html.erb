@@ -17,8 +17,20 @@
     <%#= action(:preview, text: preview_text, path: budget_path(budget)) %>
   <%# end %>
 
+  <%# if can?(:read_stats, budget) %>
+    <%#= action(:results, text: 'Statistiken', path: budget_stats_path(budget)) %>
+  <%# end %>
+
+  <% if can?(:read_results, budget) %>
+    <% params[:projekt_phase_id] ||= budget.projekt_phase_id %>
+    <% path = url_to_footer_tab(section: :results) %>
+    <%= action(:results, text: 'Ergebnisse', path: path) %>
+  <% end %>
+
   <% if can?(:read_stats, budget) %>
-    <%= action(:results, text: 'Statistiken', path: budget_stats_path(budget)) %>
+    <% params[:projekt_phase_id] ||= budget.projekt_phase_id %>
+    <% path = url_to_footer_tab(section: :stats) %>
+    <%= action(:results, text: 'Statistiken', path: path) %>
   <% end %>
 
   <%= action(:edit, text: t("admin.budgets.actions.edit")) %>

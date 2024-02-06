@@ -5,7 +5,8 @@ module Abilities
     def initialize(user)
       merge Abilities::Everyone.new(user)
 
-      can [:read, :update, :refresh_activities, :edit_username, :update_username], User, id: user.id
+      can [:read, :update, :refresh_activities,
+           :edit_username, :update_username, :edit_details, :update_details], User, id: user.id
 
       can :read, Debate
       can :update, Debate do |debate|

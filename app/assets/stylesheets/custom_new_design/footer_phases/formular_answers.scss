@@ -4,4 +4,13 @@
       display: inline-flex !important;
     }
   }
+
+  .formular-field-block {
+    margin-bottom: 1rem;
+
+    fieldset.nested-image,
+    fieldset.documents-list {
+      padding: 0;
+    }
+  }
 }

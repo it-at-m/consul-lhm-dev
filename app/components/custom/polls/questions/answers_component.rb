@@ -101,6 +101,7 @@ class Polls::Questions::AnswersComponent < ApplicationComponent
 
   def has_additional_info?(question_answer)
     question_answer.more_info_link.present? ||
+      question_answer.more_info_iframe.present? ||
       show_additional_info_images? ||
       show_additional_info_description?(question_answer)
   end

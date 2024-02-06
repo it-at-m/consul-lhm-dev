@@ -38,6 +38,7 @@ en:
         open_answer_text: Open Answer
       poll/question/answer:
         more_info_link: Explanation link
+        more_info_iframe: iFrame link
       widget/card:
         card_category: Category
       deficiency_report:
@@ -140,5 +141,8 @@ en:
         email_for_confirmation: Send confirmation email
         drop_down_options: Dropdown options
       formular_answer_image:
+        title: Title
+        attachment: Attachment
+      formular_answer_document:
         title: Title
         attachment: Attachment
