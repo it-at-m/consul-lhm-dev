@@ -128,6 +128,10 @@
 //= require custom
 //= require_tree ./custom
 //= require leaflet.locatecontrol
+//= require leaflet-geosearch/dist/geosearch.umd
+//= require leaflet-gesture-handling/dist/leaflet-gesture-handling.min
+//= require Leaflet.Deflate/dist/L.Deflate
+//= require @geoman-io/leaflet-geoman-free/dist/leaflet-geoman.min
 
 var initialize_modules = function() {
   "use strict";
