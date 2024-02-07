@@ -9,20 +9,17 @@ Rails.application.config.assets.version = "1.0"
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
-Rails.application.config.assets.precompile += %w[ckeditor/config.js]
 
 Rails.application.config.assets.precompile += Dir.glob("#{Rails.root}/app/assets/javascripts/cli/**/*.js")
 Rails.application.config.assets.precompile += Dir.glob("#{Rails.root}/app/assets/javascripts/klaro/*.js")
 
+Rails.application.config.assets.precompile += Dir.glob("#{Rails.root}/app/assets/javascripts/ckeditor/skins/**/*.js")
+Rails.application.config.assets.precompile += Dir.glob("#{Rails.root}/app/assets/javascripts/ckeditor/skins/**/*.png")
+Rails.application.config.assets.precompile += Dir.glob("#{Rails.root}/app/assets/javascripts/ckeditor/skins/**/*.css")
 Rails.application.config.assets.precompile += Dir.glob("#{Rails.root}/app/assets/javascripts/ckeditor/plugins/**/*.js")
 Rails.application.config.assets.precompile += Dir.glob("#{Rails.root}/app/assets/javascripts/ckeditor/plugins/**/*.png")
 Rails.application.config.assets.precompile += Dir.glob("#{Rails.root}/app/assets/javascripts/ckeditor/plugins/**/*.css")
 
-Rails.application.config.assets.precompile += %w[stat_graphs.js]
-Rails.application.config.assets.precompile += %w[dashboard_graphs.js]
-Rails.application.config.assets.precompile += %w[application-rtl.css]
-Rails.application.config.assets.precompile += %w[print.css]
-Rails.application.config.assets.precompile += %w[pdf_fonts.css]
 Rails.application.config.assets.precompile += %w[sdg/*.png]
 Rails.application.config.assets.precompile += %w[sdg/**/*.png]
 Rails.application.config.assets.precompile += %w[sdg/**/*.svg]

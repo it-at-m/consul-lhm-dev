@@ -1,5 +1,5 @@
-<%= render(Resources::ListItemComponent.new(component_attributes)) do |c| %>
-  <% c.header do %>
+<%= render(Resources::ListItemComponent.new(**component_attributes)) do |c| %>
+  <% c.with_header do %>
     <div>
       <% if @sentiment.present? %>
         <%= @sentiment.name %>
@@ -8,13 +8,13 @@
   <% end %>
 
   <% if proposal.labels_available? %>
-    <% c.image_overlay_item do %>
+    <% c.with_image_overlay_item do %>
       <%= render Shared::ProjektLabelsComponent.new(resource: proposal) %>
     <% end %>
   <% end %>
 
   <% if helpers.show_proposal_votes? && (proposal.successful? || proposal.archived? ||  helpers.projekt_phase_feature?(proposal.projekt_phase, "resource.allow_voting")) %>
-    <% c.footer_section do  %>
+    <% c.with_footer_section do  %>
       <div id="<%= dom_id(proposal) %>_votes" class="small-12 xlarge-10 small-centered column supports-container">
         <% if proposal.successful? %>
           <div class="supports text-center">

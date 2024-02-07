@@ -4,14 +4,14 @@ class Image < ApplicationRecord
   def self.styles
     {
       large: { resize: "x#{Setting["uploads.images.min_height"]}" },
-      projekt_image: { combine_options: { gravity: "center", resize: "620x390^", crop: "620x390+0+0" }},
-      medium: { combine_options: { gravity: "center", resize: "300x300^", crop: "300x300+0+0" }},
-      thumb: { combine_options: { gravity: "center", resize: "140x245^", crop: "140x245+0+0" }},
-      thumb_wider: { combine_options: { gravity: "center", resize: "185x280^", crop: "185x280+0+0" }},
-      banner: { combine_options: { gravity: "center", resize: "1920x250^", crop: "1920x250+0+0" }},
-      popup: { combine_options: { gravity: "center", resize: "140x140^", crop: "140x140+0+0" }},
-      thumb2: { combine_options: { gravity: "center", resize: "100x100^", crop: "100x100+0+0" }},
-      card_thumb: { combine_options: { gravity: "center", resize: "300x300^"}}
+      projekt_image: { gravity: "center", resize: "620x390^", crop: "620x390+0+0" },
+      medium: { gravity: "center", resize: "300x300^", crop: "300x300+0+0" },
+      thumb: { gravity: "center", resize: "140x245^", crop: "140x245+0+0" },
+      thumb_wider: { gravity: "center", resize: "185x280^", crop: "185x280+0+0" },
+      banner: { gravity: "center", resize: "1920x250^", crop: "1920x250+0+0" },
+      popup: { gravity: "center", resize: "140x140^", crop: "140x140+0+0" },
+      thumb2: { gravity: "center", resize: "100x100^", crop: "100x100+0+0" },
+      card_thumb: { gravity: "center", resize: "300x300^" }
     }
   end
 
@@ -74,7 +74,10 @@ class Image < ApplicationRecord
         return true if imageable_class == Widget::Card
         return true if imageable_class == SiteCustomization::Page
 
-        attachment.analyze unless attachment.analyzed?
+        unless attachment.analyzed?
+          attachment_changes["attachment"].upload
+          attachment.analyze
+        end
 
         width = attachment.metadata[:width]
         height = attachment.metadata[:height]

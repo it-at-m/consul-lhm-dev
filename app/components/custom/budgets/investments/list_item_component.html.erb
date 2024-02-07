@@ -1,5 +1,5 @@
-<%= render(Resources::ListItemComponent.new(component_attributes)) do |c| %>
-  <% c.header do %>
+<%= render(Resources::ListItemComponent.new(**component_attributes)) do |c| %>
+  <% c.with_header do %>
     <div></div>
     <div>
       <%= l(budget_investment.created_at, format: :date_only) %>
@@ -9,7 +9,7 @@
   <% if budget_investment.feasible? %>
 
     <% if budget_investment.should_show_vote_count? %>
-      <% c.footer_section do %>
+      <% c.with_footer_section do %>
         <div id="<%= dom_id(budget_investment) %>_votes"
              class="small-12 medium-3 column show-votes-count-section">
           <span class="total-voters">
@@ -21,7 +21,7 @@
     <% end %>
 
     <% if budget_investment.should_show_price? %>
-      <% c.footer_section do %>
+      <% c.with_footer_section do %>
         <div id="<%= dom_id(budget_investment) %>_price"
              class="small-12 medium-3 column price-section">
           <span class="total-price">
@@ -32,7 +32,7 @@
     <% end %>
 
     <% if budget_investment.should_show_votes? %>
-      <% c.footer_section do %>
+      <% c.with_footer_section do %>
         <div id="<%= dom_id(budget_investment) %>_votes"
              class="small-12 medium-3 column votes-section">
              <%= render Budgets::Investments::VotesComponent.new(budget_investment) %>
@@ -40,7 +40,7 @@
       <% end %>
 
     <% elsif budget_investment.should_show_ballots? && location_allows_ballots? && ballot.present? %>
-      <% c.footer_section do %>
+      <% c.with_footer_section do %>
         <div id="<%= dom_id(budget_investment) %>_ballot"
              class="small-12 medium-3 column text-center ballot-section">
               <%= render "/budgets/investments/ballot",
@@ -53,7 +53,7 @@
   <% end %>
 
   <% if investment_status_callout.present? %>
-    <% c.footer_section do %>
+    <% c.with_footer_section do %>
       <div class="callot-section">
         <%= investment_status_callout %>
       </div>

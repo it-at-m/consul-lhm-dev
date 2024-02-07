@@ -8,18 +8,29 @@ Bundler.require(*Rails.groups)
 
 module Consul
   class Application < Rails::Application
-    config.load_defaults 5.2
+    config.load_defaults 6.1
 
     # Keep belongs_to fields optional by default, because that's the way
     # Rails 4 models worked
     config.active_record.belongs_to_required_by_default = false
 
-    # Use local forms with `form_with`, so it works like `form_for`
-    config.action_view.form_with_generates_remote_forms = false
+    #    # Use local forms with `form_with`, so it works like `form_for`
+    #    config.action_view.form_with_generates_remote_forms = false
 
     # Keep using AES-256-CBC for message encryption in case it's used
     # in any CONSUL installations
     config.active_support.use_authenticated_message_encryption = false
+
+    # Keep using the classic autoloader until we decide how custom classes
+    # should work with zeitwerk
+    config.autoloader = :classic
+
+    # Don't enable has_many_inversing because it doesn't seem to currently
+    # work with the _count database columns we use for caching purposes
+    config.active_record.has_many_inversing = false
+
+    # Keep reading existing data in the legislation_annotations ranges column
+    config.active_record.yaml_column_permitted_classes = [ActiveSupport::HashWithIndifferentAccess, Symbol]
 
     # Handle custom exceptions
     config.action_dispatch.rescue_responses["FeatureFlags::FeatureDisabled"] = :forbidden
@@ -95,10 +106,13 @@ module Consul
 
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
     config.assets.paths << Rails.root.join("vendor", "assets", "fonts")
+    config.assets.paths << Rails.root.join("node_modules", "jquery-ui", "themes", "base")
+    config.assets.paths << Rails.root.join("node_modules", "leaflet", "dist")
+    config.assets.paths << Rails.root.join("node_modules")
 
     # Add lib to the autoload path
     config.autoload_paths << Rails.root.join("lib")
-    config.time_zone = "Madrid"
+    config.time_zone = "Berlin"
     config.active_job.queue_adapter = :delayed_job
 
     # CONSUL specific custom overrides

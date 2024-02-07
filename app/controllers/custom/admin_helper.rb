@@ -20,42 +20,6 @@ module AdminHelper
     end
   end
 
-  # path helpers for projekt questions
-
-  def new_projekt_question_path(projekt_id, projekt_livestream_id: nil)
-    if params[:controller].include?('projekt_management')
-      new_projekt_management_projekt_projekt_question_path(
-        projekt_id: projekt_id,
-        projekt_livestream_id: projekt_livestream_id
-      )
-    else
-      new_admin_projekt_projekt_question_path(
-        projekt_id: projekt_id,
-        projekt_livestream_id: projekt_livestream_id
-      )
-    end
-  end
-
-  def edit_projekt_question_path(projekt, question, **hash_arguments)
-    if params[:controller].include?("projekt_management")
-      edit_projekt_management_projekt_projekt_question_path(projekt, question, **hash_arguments)
-    else
-      edit_admin_projekt_projekt_question_path(projekt, question, **hash_arguments)
-    end
-  end
-
-  def edit_admin_projekt_path(projekt, **hash_arguments)
-    if params[:controller].include?("projekt_management")
-      edit_projekt_management_projekt_path(projekt, **hash_arguments)
-    else
-      super(projekt, **hash_arguments)
-    end
-  end
-
-  def admin_projekt_livestreams_path(projekt)
-    edit_admin_projekt_path(projekt, anchor: "tab-projekt-livestreams")
-  end
-
   def static_subnav_link_current?(link)
     action_name == link ? "current" : ""
   end
