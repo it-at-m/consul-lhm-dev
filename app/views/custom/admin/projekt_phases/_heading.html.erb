@@ -1,6 +1,6 @@
 <div class="row">
   <div class="column">
-    <%= back_link_to edit_admin_projekt_path(@projekt_phase.projekt, anchor: "tab-projekt-phases") %>
+    <%= back_link_to polymorphic_path([@namespace, @projekt_phase.projekt], action: :edit, anchor: "tab-projekt-phases") %>
   </div>
 </div>
 

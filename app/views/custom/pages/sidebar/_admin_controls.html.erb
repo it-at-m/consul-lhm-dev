@@ -2,9 +2,9 @@
   <h2 class="sidebar-title"><%= t("custom.projekts.page.sidebar.admin_controls.title") %></h2>
 
   <% if current_user.administrator? %>
-    <% namespace = "admin" %>
+    <% namespace = :admin %>
   <% elsif current_user.present? && current_user.projekt_manager? %>
-    <% namespace = "projekt_management" %>
+    <% namespace = :projekt_management %>
   <% end %>
 
   <div class="admin-actions margin-bottom">
@@ -23,37 +23,37 @@
     <% end %>
 
     <% if current_user.administrator? || (current_user.projekt_manager? && can?(:edit, @projekt)) %>
-      <%= link_to namespaced_polymorphic_path(namespace, @projekt, action: :edit), class: "button hollow expanded left-aligned" do %>
+      <%= link_to polymorphic_path([namespace, @projekt], action: :edit), class: "button hollow expanded left-aligned" do %>
         <i class="fas fa-cog"></i>
         <%= t("custom.projekts.page.sidebar.admin_controls.edit_projekt") %>
       <% end %>
 
-      <%= link_to namespaced_polymorphic_path(namespace, @projekt, action: :edit, origin: "public_page", anchor: "tab-projekt-page"), class: "button hollow expanded left-aligned" do %>
+      <%= link_to polymorphic_path([namespace, @projekt], action: :edit, origin: "public_page", anchor: "tab-projekt-page"), class: "button hollow expanded left-aligned" do %>
         <i class="fas fa-window-maximize"></i>
         <%= t("custom.projekts.page.sidebar.admin_controls.edit_projekt_page") %>
       <% end %>
 
-      <%= link_to namespaced_polymorphic_path(namespace, @projekt, action: :edit, anchor: "tab-projekt-phases"), class: "button hollow expanded left-aligned" do %>
+      <%= link_to polymorphic_path([namespace, @projekt], action: :edit, anchor: "tab-projekt-phases"), class: "button hollow expanded left-aligned" do %>
         <i class="fas fa-stream"></i>
         <%= t("custom.projekts.page.sidebar.admin_controls.edit_projekt_phases") %>
       <% end %>
 
-      <%= link_to namespaced_polymorphic_path(namespace, @projekt, action: :edit, anchor: "tab-projekt-settings"), class: "button hollow expanded left-aligned" do %>
+      <%= link_to polymorphic_path([namespace, @projekt], action: :edit, anchor: "tab-projekt-settings"), class: "button hollow expanded left-aligned" do %>
         <i class="fas fa-edit"></i>
         <%= t("custom.projekts.page.sidebar.admin_controls.edit_projekt_settings") %>
       <% end %>
 
-      <%= link_to namespaced_polymorphic_path(namespace, @projekt, action: :edit, anchor: "tab-projekt-managers"), class: "button hollow expanded left-aligned" do %>
+      <%= link_to polymorphic_path([namespace, @projekt], action: :edit, anchor: "tab-projekt-managers"), class: "button hollow expanded left-aligned" do %>
         <i class="fas fa-user-cog"></i>
         <%= t("custom.projekts.page.sidebar.admin_controls.edit_projekt_managers") %>
       <% end %>
 
-      <%= link_to namespaced_polymorphic_path(namespace, @projekt, action: :edit, anchor: "tab-projekt-map"), class: "button hollow expanded left-aligned" do %>
+      <%= link_to polymorphic_path([namespace, @projekt], action: :edit, anchor: "tab-projekt-map"), class: "button hollow expanded left-aligned" do %>
         <i class="fas fa-map"></i>
         <%= t("custom.projekts.page.sidebar.admin_controls.edit_projekt_map") %>
       <% end %>
 
-      <%= link_to namespaced_polymorphic_path(namespace, @projekt, action: :edit, anchor: "tab-projekt-sdg"), class: "button hollow expanded left-aligned" do %>
+      <%= link_to polymorphic_path([namespace, @projekt], action: :edit, anchor: "tab-projekt-sdg"), class: "button hollow expanded left-aligned" do %>
         <i class="fas fa-tag"></i>
         <%= t("custom.projekts.page.sidebar.admin_controls.edit_projekt_sdg") %>
       <% end %>
