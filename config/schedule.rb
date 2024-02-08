@@ -47,7 +47,6 @@ every 1.day, at: "3:00 am", roles: [:cron] do
 end
 
 every :reboot do
-  command "cd #{@path} && bundle exec puma -C config/puma/#{@environment}.rb"
   # Number of workers must be kept in sync with capistrano's delayed_job_workers
   # command "cd #{@path} && RAILS_ENV=#{@environment} bin/delayed_job -n 2 restart"
 end
