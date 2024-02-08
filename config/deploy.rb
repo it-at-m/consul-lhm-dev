@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock "~> 3.16.0"
+lock "~> 3.17.3"
 
 def deploysecret(key)
   @deploy_secrets_yml ||= YAML.load_file("config/deploy-secrets/deploy-secrets-cli_demo.yml")[fetch(:stage).to_s]
@@ -44,6 +44,7 @@ set :puma_systemctl_user, :user
 
 set :delayed_job_workers, 2
 set :delayed_job_roles, :background
+set :delayed_job_monitor, true
 
 set :whenever_roles, -> { :app }
 
@@ -56,7 +57,6 @@ namespace :deploy do
   after "deploy:migrate", "add_new_settings"
 
   after :publishing, "setup_puma"
-
   before "puma:smart_restart", "stop_puma_daemon"
   after :finished, "refresh_sitemap"
 
@@ -67,7 +67,7 @@ namespace :deploy do
   end
 
   before "deploy:restart", "puma:smart_restart"
-  before "deploy:restart", "restart_delayed_jobs"
+  before "deploy:restart", "delayed_job:restart"
 end
 
 task :install_ruby do
@@ -155,16 +155,6 @@ task :execute_release_tasks do
     within release_path do
       with rails_env: fetch(:rails_env) do
         execute :rake, "consul:execute_release_tasks"
-      end
-    end
-  end
-end
-
-task :restart_delayed_jobs do
-  on roles(:app) do
-    within release_path do
-      with rails_env: fetch(:rails_env) do
-        execute "sudo systemctl restart delayed_job2"
       end
     end
   end
