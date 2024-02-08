@@ -44,7 +44,6 @@ set :puma_systemctl_user, :user
 
 set :delayed_job_workers, 2
 set :delayed_job_roles, :background
-set :delayed_job_monitor, true
 
 set :whenever_roles, -> { :app }
 
@@ -67,7 +66,7 @@ namespace :deploy do
   end
 
   before "deploy:restart", "puma:smart_restart"
-  before "deploy:restart", "delayed_job:restart"
+  before "deploy:restart", "restart_delayed_jobs"
 end
 
 task :install_ruby do
@@ -155,6 +154,16 @@ task :execute_release_tasks do
     within release_path do
       with rails_env: fetch(:rails_env) do
         execute :rake, "consul:execute_release_tasks"
+      end
+    end
+  end
+end
+
+task :restart_delayed_jobs do
+  on roles(:app) do
+    within release_path do
+      with rails_env: fetch(:rails_env) do
+        execute "sudo systemctl restart delayed_job2"
       end
     end
   end
