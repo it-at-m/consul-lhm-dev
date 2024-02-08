@@ -57,6 +57,7 @@ namespace :deploy do
 
   after :publishing, "setup_puma"
   before "puma:smart_restart", "stop_puma_daemon"
+  after :finished, "restart_delayed_jobs"
   after :finished, "refresh_sitemap"
 
   desc "Deploys and runs the tasks needed to upgrade to a new release"
@@ -66,7 +67,6 @@ namespace :deploy do
   end
 
   before "deploy:restart", "puma:smart_restart"
-  before "deploy:restart", "restart_delayed_jobs"
 end
 
 task :install_ruby do
