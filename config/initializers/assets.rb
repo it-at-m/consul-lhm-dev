@@ -19,6 +19,7 @@ Rails.application.config.assets.precompile += Dir.glob("#{Rails.root}/app/assets
 Rails.application.config.assets.precompile += Dir.glob("#{Rails.root}/app/assets/javascripts/ckeditor/plugins/**/*.js")
 Rails.application.config.assets.precompile += Dir.glob("#{Rails.root}/app/assets/javascripts/ckeditor/plugins/**/*.png")
 Rails.application.config.assets.precompile += Dir.glob("#{Rails.root}/app/assets/javascripts/ckeditor/plugins/**/*.css")
+Rails.application.config.assets.precompile += %w[ckeditor/config.js]
 
 Rails.application.config.assets.precompile += %w[sdg/*.png]
 Rails.application.config.assets.precompile += %w[sdg/**/*.png]
