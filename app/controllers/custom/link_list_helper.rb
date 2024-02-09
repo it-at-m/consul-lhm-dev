@@ -4,8 +4,13 @@ module LinkListHelper
   def link_list_sdg_goals(*links, **options)
     return "" if links.select(&:present?).empty?
 
-    tag.ul(options) do
-      safe_join(links.select(&:present?).map do |text, url, current = false, **link_options|
+    tag.ul(**options) do
+      safe_join(links.select(&:present?).map do |text, url, current_or_options = false, **link_options|
+        if current_or_options.is_a?(Hash)
+          link_options = current_or_options
+        else
+          link_options ||= {}
+        end
 
         goal_code = link_options[:data].present? ? link_options[:data][:code] : nil
 

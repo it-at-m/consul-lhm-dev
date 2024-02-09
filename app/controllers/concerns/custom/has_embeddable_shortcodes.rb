@@ -24,19 +24,19 @@ module HasEmbeddableShortcodes
 
       replacement = helpers.content_tag(:div, style: "margin-top:1rem;margin-bottom:1rem;") do
         if projekt.vc_map_enabled?
-          render_to_string Shared::VCMapComponent.new(
+          Shared::VCMapComponent.new(
             map_location: projekt.map_location,
             parent_class: "shortcode",
             projekt: projekt,
             show_admin_shape: projekt.map_location.show_admin_shape?
-          )
+          ).render_in(view_context)
         else
-          render_to_string Shared::MapComponent.new(
+          Shared::MapComponent.new(
             map_location: projekt.map_location,
             parent_class: "shortcode",
             projekt: projekt,
             show_admin_shape: projekt.map_location.show_admin_shape?
-          )
+          ).render_in(view_context)
         end
       end
 
