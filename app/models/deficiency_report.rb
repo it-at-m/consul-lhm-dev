@@ -50,7 +50,7 @@ class DeficiencyReport < ApplicationRecord
     where(author_id: user_id)
   }
 
-  def audited_changes
+  def audited_changes(**options)
     if super.has_key?("deficiency_report_status_id")
       old_status_title = DeficiencyReport::Status.find_by(id: deficiency_report_status_id_was)&.title
       super.merge!("deficiency_report_status_id" => [old_status_title, status.title])

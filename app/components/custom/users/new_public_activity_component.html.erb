@@ -1,7 +1,7 @@
 <div class="new-public-activity">
   <% if valid_access? %>
     <% if valid_filters.any? %>
-      <%= render Shared::ResourcesListComponent.new(list_params) do |c| %>
+      <%= render Shared::ResourcesListComponent.new(**list_params) do |c| %>
         <% if comments? %>
           <% c.with_custom_body do %>
             <%= render Comments::UserCommentsComponent.new(comments: resources) %>
