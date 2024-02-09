@@ -140,14 +140,14 @@
 
 <% if Setting.new_design_enabled? %>
   <%= render Auth::AuthPageTemplateComponent.new do |c| %>
-    <% c.form do %>
+    <% c.with_form do %>
       <h2><%= t("devise_views.users.registrations.new.title") %></h2>
       <p>
         <%= t("custom.devise_views.users.registrations.new.message") %>
       </p>
       <%= form_html %>
     <% end %>
-    <% c.after_card_container do %>
+    <% c.with_after_card_container do %>
       <p>
       <%= link_to(t("custom.devise_views.users.registrations.new.organization_signup_link"), new_organization_registration_path) %>
       </p>

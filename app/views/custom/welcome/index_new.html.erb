@@ -35,7 +35,7 @@
           filters: @active_projekts_filters,
           resource_type: Projekt,
           title: t("custom.projekts.list.title")) do |c| %>
-          <% c.bottom_content do %>
+          <% c.with_bottom_content do %>
             <%= link_to("Alle Projekte anzeigen", projekts_path(order: 'index_order_all'), class: "resources-list--more-link") %>
           <% end %>
         <% end %>

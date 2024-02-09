@@ -3,12 +3,12 @@
     <% if @edit_mode && @user == current_user %>
       <%= form_for @user, as: :account, remote: true, authenticity_token: true, url: account_path do |f| %>
         <%= render Images::DropzoneComponent.new(f, attachment_name: "background_image", submit_form: true) do |c|%>
-          <% c.custom_edit_button do %>
+          <% c.with_custom_edit_button do %>
             <div class="users-profile-banner--edit-button users-profile-banner--avatar-edit-button">
               <i class="fa fa-pencil-alt"></i>
             </div>
           <% end %>
-          <% c.placeholder do %>
+          <% c.with_placeholder do %>
             <% if @user.background_image.attached? %>
               <%= image_tag(@user.background_image.variant(resize: "2000X500")) %>
             <% end %>
@@ -29,13 +29,13 @@
           <% end %>
           <%= f.fields_for :image do |image_builder| %>
             <%= render Images::DirectUploadComponent.new(image_builder, imageable: @user, submit_form: true) do |c| %>
-              <% c.placeholder do %>
+              <% c.with_placeholder do %>
                 <div class="users-profile-banner--avatar-placeholder">
                   <%= @user.first_letter_of_name %>
                 </div>
               <% end %>
 
-              <% c.custom_edit_button do %>
+              <% c.with_custom_edit_button do %>
                 <div class="users-profile-banner--edit-button users-profile-banner--avatar-edit-button">
                   <i class="fa fa-pencil-alt"></i>
                 </div>
