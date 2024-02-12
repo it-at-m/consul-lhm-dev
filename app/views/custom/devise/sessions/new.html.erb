@@ -2,7 +2,7 @@
 
 <% if Setting.new_design_enabled? %>
   <%= render Auth::AuthPageTemplateComponent.new do |c| %>
-    <% c.form do %>
+    <% c.with_form do %>
       <h2><%= t("devise_views.sessions.new.title") %></h2>
 
       <div class="auth-page-template--oauth no-column-padding">

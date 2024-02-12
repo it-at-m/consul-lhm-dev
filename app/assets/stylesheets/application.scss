@@ -8,10 +8,16 @@
 @import "font-awesome/mixins";
 @import "font-awesome/core";
 @import "font-awesome/icons";
-@import "jquery-ui/autocomplete";
-@import "jquery-ui/datepicker";
-@import "jquery-ui/sortable";
-@import "leaflet";
+@import "jquery-ui/themes/base/theme";
+@import "jquery-ui/themes/base/autocomplete";
+@import "jquery-ui/themes/base/datepicker";
+@import "jquery-ui/themes/base/sortable";
+@import "leaflet/dist/leaflet";
+@import "leaflet.markercluster/dist/MarkerCluster";
+@import "leaflet.markercluster/dist/MarkerCluster.Default";
+@import "leaflet-geosearch/dist/geosearch";
+@import "leaflet-gesture-handling/dist/leaflet-gesture-handling.min";
+@import "@geoman-io/leaflet-geoman-free/dist/leaflet-geoman";
 
 @import "foundation_and_overrides";
 @import "fonts";
@@ -53,7 +59,6 @@
 @import "sdg_management/**/*";
 @import "subscriptions";
 @import "widgets/**/*";
-@import "leaflet.markercluster";
 
 @import "custom";
 @import "custom/**/*";

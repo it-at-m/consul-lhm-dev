@@ -45,7 +45,7 @@ class Shared::FilterDropdownComponent < ApplicationComponent
       link_options = {}
       link_options[@url_param_name.to_sym] = option
       link_options[:remote] = true
-      url_to_footer_tab(link_options)
+      url_to_footer_tab(**link_options)
 
     elsif remote_url.present?
       url = "#{remote_url}?#{@url_param_name}=#{option}"
@@ -64,7 +64,7 @@ class Shared::FilterDropdownComponent < ApplicationComponent
 
   def footer_tab_back_button_url(option)
     if params[:projekt_phase_id].present?
-      url_to_footer_tab([[@url_param_name, option]].to_h.symbolize_keys)
+      url_to_footer_tab(**[[@url_param_name, option]].to_h.symbolize_keys)
     end
   end
 

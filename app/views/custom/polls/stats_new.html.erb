@@ -15,7 +15,7 @@
     <div class="flex-layout">
       <div class="main-column">
         <%= render ResourcePage::BannerComponent.new(resource: @poll) do |c| %>
-          <% c.links_section do %>
+          <% c.with_links_section do %>
              <%= render Polls::SubNavComponent.new(poll: @poll) %>
           <% end %>
         <% end %>

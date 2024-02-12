@@ -28,7 +28,7 @@
 
           <% if @current_projekt_livestream.description.present? %>
             <%= render Shared::CollapseTextComponent.new(color: :white) do |component| %>
-              <% component.inner_content do %>
+              <% component.with_inner_content do %>
                 <span class="projekt-livestream--description-text">
                   <%= WYSIWYGSanitizer.new.sanitize(@current_projekt_livestream.description) %>
                 </span>

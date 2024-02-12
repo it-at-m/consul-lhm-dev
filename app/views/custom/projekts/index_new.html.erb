@@ -17,7 +17,7 @@
           current_filter: @current_projekts_filter,
           filters: @active_projekts_filters,
           resource_type: Projekt) do |c| %>
-          <% c.items_remark do %>
+          <% c.with_items_remark do %>
             <%= render_custom_block("projekts_index_filter_#{@active_projekts_filters}") %>
           <% end %>
         <% end %>

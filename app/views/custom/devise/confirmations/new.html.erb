@@ -2,7 +2,7 @@
 
 <% if Setting.new_design_enabled? %>
   <%= render Auth::AuthPageTemplateComponent.new() do |c| %>
-    <% c.form do %>
+    <% c.with_form do %>
       <h2><%= t("devise_views.confirmations.new.title") %></h2>
       <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
         <%= render "shared/errors", resource: resource %>

@@ -1,8 +1,8 @@
-<%= render(Resources::ListItemComponent.new(component_attributes)) do |c| %>
-  <% c.header do %>
+<%= render(Resources::ListItemComponent.new(**component_attributes)) do |c| %>
+  <% c.with_header do %>
     <%= helpers.format_date_range(@poll.starts_at, @poll.ends_at, separator: t("custom.polls.poll.date.to")) %>
   <% end %>
-  <% c.footer_section do  %>
+  <% c.with_footer_section do  %>
     <div class="mb-5">
       <%= link_to('Teilnehmen', helpers.poll_path(poll), class: 'button -purple') %>
     </div>

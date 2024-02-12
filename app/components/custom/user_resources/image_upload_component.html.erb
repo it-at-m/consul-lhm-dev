@@ -1,5 +1,5 @@
 <%= render Images::DirectUploadComponent.new(@f, imageable: @imageable) do |c| %>
-  <% c.placeholder do %>
+  <% c.with_placeholder do %>
     <div class="user-resource-image-upload--placeholder">
       <div class="user-resource-image-upload--placeholder-inner">
         <div class="user-resource-image-upload--text">

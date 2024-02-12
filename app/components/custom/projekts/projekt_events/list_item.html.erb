@@ -47,7 +47,7 @@
     </div>
     <% if projekt_event.description.present? %>
       <%= render Shared::CollapseTextComponent.new(size: :small) do |component| %>
-        <% component.inner_content do %>
+        <% component.with_inner_content do %>
           <div class="projekt-event-item--description-text">
             <%= helpers.auto_link_already_sanitized_html AdminWYSIWYGSanitizer.new.sanitize(projekt_event.description) %>
           </div>

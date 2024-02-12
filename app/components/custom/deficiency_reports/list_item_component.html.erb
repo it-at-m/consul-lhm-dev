@@ -1,5 +1,5 @@
-<%= render(Resources::ListItemComponent.new(component_attributes)) do |c| %>
-  <% c.header do %>
+<%= render(Resources::ListItemComponent.new(**component_attributes)) do |c| %>
+  <% c.with_header do %>
     <div>
     </div>
 
@@ -8,7 +8,7 @@
     </div>
   <% end %>
 
-  <% c.footer_section do %>
+  <% c.with_footer_section do %>
     <div class="deficiency-report-footer-status" style="color:<%= deficiency_report.status&.color %>;">
       <i class="fas fa-<%= deficiency_report.status&.icon %>"></i>
       <%= deficiency_report.status&.title %>

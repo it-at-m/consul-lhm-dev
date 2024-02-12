@@ -76,7 +76,7 @@
 
 <% if Setting.new_design_enabled? %>
   <%= render Auth::AuthPageTemplateComponent.new do |c| %>
-    <% c.form do %>
+    <% c.with_form do %>
       <h2><%= t("custom.account.edit_details.title") %></h2>
       <%= form_html %>
     <% end %>

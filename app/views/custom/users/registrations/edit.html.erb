@@ -51,7 +51,7 @@
 
 <% if Setting.new_design_enabled? %>
   <%= render Auth::AuthPageTemplateComponent.new do |c| %>
-    <% c.form do %>
+    <% c.with_form do %>
       <%= base_form %>
     <% end %>
   <% end %>

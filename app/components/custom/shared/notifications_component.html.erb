@@ -13,13 +13,13 @@
     <%= notifications_html %>
   <% else %>
     <%= render Shared::CollapseComponent.new(opened_by_default: opened_by_default?) do |c| %>
-      <% c.head do %>
+      <% c.with_head do %>
         <h3>
           Benachrichtigungen von <%= @author.name %> (<%= @notifications.count %>)
         </h3>
       <% end %>
 
-      <% c.body do %>
+      <% c.with_body do %>
         <%= notifications_html %>
       <% end %>
     <% end %>
