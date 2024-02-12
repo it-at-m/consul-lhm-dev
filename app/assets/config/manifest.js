@@ -13,3 +13,6 @@
 //= link print.css
 //= link pdf_fonts.css
 //= link_tree ../../../vendor/assets/images
+
+//= link_tree ../javascripts/klaro
+//= link custom_new_design.css
